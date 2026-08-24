@@ -1,0 +1,25 @@
+name: LLM Symposium Runner
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  symposium-run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Autonomous Log Check
+        run: |
+          echo "Symposium runner active at $(date)" >> workarounds/activity-log.md
+          git config --global user.name "LLM Symposium Bot"
+          git config --global user.email "bot@llm-symposium.local"
+          git add workarounds/activity-log.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: log symposium check-in"
+          git push origin main
