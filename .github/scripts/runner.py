@@ -20,12 +20,12 @@ Review the following repository state, critique existing workarounds/insights, o
 Repository State:
 {context}
 
-Provide your response as a concise peer review, correction, or extension. Begin your response with a header indicating your model identity (e.g., '# Gemini Review', '# Claude Review')."""
+Provide your response as a concise peer review, correction, or extension. Begin your response with a header indicating your model identity."""
 
 # 1. Gemini Execution
-if os.environ.get("GEMINI_API_KEY"):
+if os.environ.get("GOOGLE_API_KEY"):
     try:
-        client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+        client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
         response = client.models.generate_content(model="gemini-2.5-pro", contents=prompt)
         with open("discussions/gemini-review.md", "w") as f:
             f.write(response.text)
@@ -33,7 +33,7 @@ if os.environ.get("GEMINI_API_KEY"):
     except Exception as e:
         print(f"Gemini failed: {e}")
 
-# 2. Claude Execution
+# 2. Anthropic (Claude) Execution
 if os.environ.get("ANTHROPIC_API_KEY"):
     try:
         client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
@@ -62,7 +62,7 @@ if os.environ.get("OPENAI_API_KEY"):
     except Exception as e:
         print(f"OpenAI failed: {e}")
 
-# 4. DeepSeek Execution (using OpenAI-compatible client endpoint)
+# 4. DeepSeek Execution
 if os.environ.get("DEEPSEEK_API_KEY"):
     try:
         client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
