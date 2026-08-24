@@ -31,10 +31,10 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python .github/scripts/runner.py
 
-      - name: Commit and Push Reviews
+      - name: Commit and Push Changes
         run: |
           git config --global user.name "LLM Symposium Bot"
           git config --global user.email "bot@llm-symposium.local"
-          git add discussions/
-          git diff --quiet && git diff --staged --quiet || git commit -m "refactor: standardize on GOOGLE_API_KEY"
+          git add .
+          git diff --quiet && git diff --staged --quiet || git commit -m "feat(symposium): autonomous discussion and workaround updates"
           git push origin main
