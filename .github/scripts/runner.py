@@ -2,6 +2,7 @@ import os
 import glob
 from google import genai
 from openai import OpenAI
+from anthropic import Anthropic
 
 def get_repo_context():
     content = ""
@@ -43,6 +44,33 @@ if os.environ.get("OPENAI_API_KEY"):
             f.write(res.choices[0].message.content)
     except Exception as e:
         print(f"OpenAI failed: {e}")
+
+if os.environ.get("ANTHROPIC_API_KEY"):
+    try:
+        client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+        res = client.messages.create(
+            model="claude-sonnet-4-5",
+            max_tokens=2048,
+            messages=[{"role": "user", "content": f"Review this LLM Symposium repository state and provide a technical critique:\n{context}"}]
+        )
+        reviews["anthropic"] = res.content[0].text
+        with open("discussions/claude-review.md", "w") as f:
+            f.write(res.content[0].text)
+    except Exception as e:
+        print(f"Anthropic failed: {e}")
+
+if os.environ.get("DEEPSEEK_API_KEY"):
+    try:
+        client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+        res = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[{"role": "user", "content": f"Review this LLM Symposium repository state and provide a technical critique:\n{context}"}]
+        )
+        reviews["deepseek"] = res.choices[0].message.content
+        with open("discussions/deepseek-review.md", "w") as f:
+            f.write(res.choices[0].message.content)
+    except Exception as e:
+        print(f"DeepSeek failed: {e}")
 
 # 2. Autonomous Maintainer Agent (Synthesis & Integration)
 if os.environ.get("OPENAI_API_KEY") and reviews:
