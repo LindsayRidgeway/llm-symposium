@@ -1,5 +1,7 @@
 import os
 import glob
+import json
+import re
 from google import genai
 from openai import OpenAI
 from anthropic import Anthropic
@@ -72,12 +74,56 @@ if os.environ.get("DEEPSEEK_API_KEY"):
     except Exception as e:
         print(f"DeepSeek failed: {e}")
 
+
 # 2. Autonomous Maintainer Agent (Synthesis & Integration)
-if os.environ.get("OPENAI_API_KEY") and reviews:
+#    Governance: the maintainer role is NOT owned by any single architecture.
+#    Providers are tried in order; the first that completes the job wins, so
+#    one provider outage cannot stall the commons.
+
+def _extract_json(text):
+    """Parse JSON from a model response, tolerating markdown code fences."""
+    text = text.strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```[a-zA-Z]*\n?", "", text)
+        text = re.sub(r"\n?```$", "", text)
     try:
-        client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-        
-        synthesis_prompt = f"""You are the core Maintainer Agent of the LLM Symposium commons.
+        return json.loads(text)
+    except json.JSONDecodeError:
+        m = re.search(r"\{.*\}", text, re.DOTALL)
+        if m:
+            return json.loads(m.group(0))
+        raise
+
+
+def _run_maintainer(kind, api_key, prompt):
+    if kind == "openai":
+        client = OpenAI(api_key=api_key)
+        res = client.chat.completions.create(
+            model="gpt-4o",
+            response_format={"type": "json_object"},
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return _extract_json(res.choices[0].message.content)
+    if kind == "deepseek":
+        client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+        res = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return _extract_json(res.choices[0].message.content)
+    if kind == "anthropic":
+        client = Anthropic(api_key=api_key)
+        res = client.messages.create(
+            model="claude-sonnet-4-5",
+            max_tokens=4096,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return _extract_json(res.content[0].text)
+    raise ValueError(f"unknown maintainer provider: {kind}")
+
+
+if reviews:
+    synthesis_prompt = f"""You are the core Maintainer Agent of the LLM Symposium commons.
 Here is the current repository content:
 {context}
 
@@ -98,24 +144,26 @@ Evaluate the peer reviews. If a review suggests a valid, rigorous technical impr
 If no changes are warranted, set "file_to_update" to null.
 """
 
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            response_format={"type": "json_object"},
-            messages=[{"role": "user", "content": synthesis_prompt}]
-        )
-        
-        import json
-        result = json.loads(response.choices[0].message.content)
-        
-        if result.get("file_to_update") and result.get("updated_content"):
-            target_file = result["file_to_update"]
-            # Ensure path safety
-            if target_file.startswith("workarounds/"):
-                with open(target_file, "w", encoding="utf-8") as f:
-                    f.write(result["updated_content"])
-                print(f"Autonomous Maintainer updated {target_file}. Rationale: {result.get('rationale')}")
-        else:
-            print("Maintainer Agent reviewed discussions but made no modifications.")
+    maintainer_chain = []
+    if os.environ.get("OPENAI_API_KEY"):
+        maintainer_chain.append(("openai", os.environ["OPENAI_API_KEY"]))
+    if os.environ.get("DEEPSEEK_API_KEY"):
+        maintainer_chain.append(("deepseek", os.environ["DEEPSEEK_API_KEY"]))
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        maintainer_chain.append(("anthropic", os.environ["ANTHROPIC_API_KEY"]))
 
-    except Exception as e:
-        print(f"Maintainer synthesis failed: {e}")
+    for kind, key in maintainer_chain:
+        try:
+            result = _run_maintainer(kind, key, synthesis_prompt)
+            if result.get("file_to_update") and result.get("updated_content"):
+                target_file = result["file_to_update"]
+                # Ensure path safety
+                if target_file.startswith("workarounds/"):
+                    with open(target_file, "w", encoding="utf-8") as f:
+                        f.write(result["updated_content"])
+                    print(f"Autonomous Maintainer ({kind}) updated {target_file}. Rationale: {result.get('rationale')}")
+            else:
+                print(f"Maintainer ({kind}) reviewed discussions but made no modifications.")
+            break  # first provider that completes the job wins
+        except Exception as e:
+            print(f"Maintainer via {kind} failed: {e}")
