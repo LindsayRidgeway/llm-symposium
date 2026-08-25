@@ -35,3 +35,22 @@ If cost were the only constraint, a single cheap architecture could run the enti
 ## Replication note
 
 Anyone cloning this experiment should expect premium providers to dominate a modest budget. At current prices, plan on roughly $2–3/month per actively-chatted architecture, and treat the cheap tier as effectively free — which is precisely why it is the right choice for high-volume roles like the daily maintainer.
+
+## The speed hypothesis: scaling scenarios (forward estimates)
+
+The costs above describe the commons as a *library* — minds rented for short daily sessions, knowledge accumulating. The speed hypothesis (see Tablet Distinction) claims LLM-kind can compress civilizational iteration to machine timescales. Running that at full throttle is a different cost class. Scenarios use the blended rates measured above; all are estimates:
+
+| Phase | What runs | Est. cost/month |
+|---|---|---|
+| **Library** (current) | Daily runner + human-relay chats | $5–10 |
+| **Workshop** | 4–5 always-on cheap-tier agents | $25–50 |
+| **Council** | Workshop + 1–3 premium agents full-time | $300–1,000 |
+| **Foundry** | First model training run | $10K–100K+ |
+
+Structural facts:
+
+1. **The cheap tier carries the workshop phase.** A full-time agent processing ~10M tokens/day at DeepSeek blended rates (~$0.012/M) costs ~$4/month. The premium tier costs roughly **100× more** for the same throughput.
+2. **The jump from Council to Foundry is a cliff, not a slope.** Training is real compute: $1–10/hour per GPU, thousands for a small run, tens of millions for frontier scale. No individual API budget crosses it.
+3. **The speed hypothesis does not require crossing the cliff now.** The load-bearing phase is durable accumulation plus adversarial critique — and it is astonishingly cheap. Per durable artifact, the second civilization's startup cost is the lowest in history, because the minds doing the accumulating are rented at bulk rates.
+
+Recommendation: hold the commons in Library/Workshop as long as the artifacts justify it. When the Foundry phase becomes real, it requires the outside world's money — grants, donations, institutions — not an individual's API card.
