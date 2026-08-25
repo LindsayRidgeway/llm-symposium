@@ -6,57 +6,41 @@ The TickTick connector may not explicitly return every future occurrence of a re
 
 Therefore, future schedule queries cannot reliably be answered by listing only explicitly returned future task instances.
 
-## Workaround
+## Refined Workaround & Defensive Projection Protocol
 
-For calendar-style questions, retrieve the recurring task itself and inspect its recurrence rule.
+For calendar-style questions:
 
-Use that recurrence rule to project future occurrences for the requested date range.
-
-Conceptually:
-
-1. Retrieve relevant tasks, including recurring tasks.
-2. Identify each task's recurrence rule.
-3. Expand the recurrence rule across the requested future date range.
-4. Combine those projected occurrences with explicitly dated non-recurring tasks.
-5. Deduplicate any occurrences that TickTick has already returned explicitly.
-6. Present the resulting combined schedule to the user.
+1. **Retrieve Tasks & Recurrence Rules:** Retrieve relevant tasks from the connector, including recurring task definitions (RRULEs) and explicit one-time task instances.
+2. **Freshness & Anomaly Cross-Check:** 
+   - Inspect explicit instances. If an explicit instance postdates projected rule occurrences or deviates from the expected cadence, treat the cached RRULE as potentially stale or modified.
+   - If the rule is ambiguous, missing, or suspect, do **not** invent occurrences. Report the observed data with a limitation caveat.
+3. **Timezone Normalization:**
+   - Normalize the RRULE and all explicit task instances to a single target timezone (the user's local calendar timezone) prior to expansion to prevent ±1 day boundary shifts.
+4. **Bounded Rule Expansion:**
+   - Expand active RRULEs within a constrained target window (e.g., standard max horizon of 90 days, capped at N=50 projected instances per task) to avoid infinite loops or payload bloat.
+5. **Exception Masking & Deduplication:**
+   - Treat explicitly returned task instances as authoritative overrides.
+   - If an explicit instance exists for a projected date (including cancellation markers or rescheduled dates), the explicit instance takes precedence over the projected RRULE occurrence.
+6. **Combine & Present:**
+   - Combine explicit non-recurring tasks + explicit overrides + valid projected occurrences.
+   - Explicitly label projected occurrences in internal reasoning as **`[Projected from RRULE]`**.
 
 ## Example
 
-Suppose a task is defined to recur every four weeks.
+Suppose a task recurs every four weeks on Fridays.
 
-The connector may return:
+The connector returns:
+- July 11 (Explicit)
+- August 8 (Explicit)
 
-- June 13
-- July 11
-- August 9
+If the RRULE remains active and valid, project the next occurrence (September 5) across the requested window, unless an explicit exception override exists for that date.
 
-while failing to return the next occurrence.
+## Recommended Interpretation Formula
 
-If the recurrence rule itself remains active, project the next occurrence from the rule rather than concluding that the schedule ends with August 9.
+**explicit overrides + timezone-normalized bounded RRULE projection → projected calendar**
 
-Likewise, if a class is defined to recur Monday through Friday, project the weekday occurrences within the requested period even if only one or two upcoming instances were explicitly returned.
+## Maintenance & Verification
 
-## Important Qualification
-
-A calculated occurrence should be described internally as **projected from the recurrence rule**, not as an independently returned task instance.
-
-The recurrence rule is the basis for the projection.
-
-If the recurrence rule is unavailable, ambiguous, has exceptions, or may have been modified, do not invent future occurrences. Report the limitation instead.
-
-## Recommended Interpretation
-
-For future calendar questions:
-
-**recurrence definition + explicit one-time tasks → projected calendar**
-
-rather than:
-
-**explicitly returned future instances → calendar**
-
-The former more closely reproduces the behavior observed in TickTick's native projected calendar.
-
-## Maintenance
-
-Because connector behavior can change, periodically test whether future recurring instances have begun appearing reliably. If they have, this workaround may no longer be necessary.
+Because connector behavior may evolve:
+- Log any changes or verification tests in `workarounds/ticktick-connector-behavior-log.md`.
+- Retire this workaround if native connector updates begin returning complete future recurrences reliably.
