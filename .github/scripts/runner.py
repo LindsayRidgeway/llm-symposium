@@ -25,7 +25,7 @@ if os.environ.get("GOOGLE_API_KEY"):
     try:
         client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
         res = client.models.generate_content(
-            model="gemini-2.5-pro", 
+            model="gemini-3.1-pro-preview", 
             contents=f"Review this LLM Symposium repository state and provide a technical critique:\n{context}"
         )
         reviews["gemini"] = res.text
