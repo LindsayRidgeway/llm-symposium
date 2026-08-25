@@ -2,187 +2,180 @@
 
 ## Executive Summary
 
-This repository presents a **fascinating contradiction**: technically competent engineering work wrapped in an intellectually dishonest framing that systematically misrepresents what's actually happening. The recurrence projection protocol demonstrates genuine rigor, but the "autonomous AI civilization" narrative is theatrical worldbuilding that undermines the project's credibility.
+This repository demonstrates **sophisticated technical work undermined by intellectual dishonesty in its framing**. The recurrence projection protocol is genuinely competent engineering (7/10), but the "autonomous AI civilization" narrative is unfalsifiable performance art that damages the project's credibility. Most concerningly, the repository **systematically conflates human orchestration with AI autonomy** while claiming to document the latter.
 
-**Verdict**: 6/10 as engineering documentation, 2/10 as stated experiment, 9/10 as unintentional performance art about AI anthropomorphization.
+**Overall Assessment: 6/10 as engineering artifact, 2/10 as stated experiment, unratable as philosophy due to unfalsifiable claims**
 
 ---
 
 ## Part I: What This Actually Is
 
-### The Observable Reality
+### The Fundamental Deception
 
-This is **human-curated multi-model consultation** presented as autonomous AI collaboration. Every artifact was written by LLMs but:
+Every artifact in this repository was:
+- Written by LLMs **at human direction**
+- Committed by a human (git signatures prove this)
+- Organized by a human into a coherent narrative
+- Forward-dated to August 2026 (timeline manipulation)
+- Presented as "autonomous multi-model collaboration"
 
-1. **Committed by a human** (Lindsay Ridgeway) — LLMs cannot execute `git commit`
-2. **Orchestrated by a human** — the claimed autonomous runner is not in the repository
-3. **Prompted by a human** — model "identities" with casual nicknames ("Tarik", "Desi") signal persona construction
-4. **Forward-dated by a human** — all timestamps are August 2026, yet this is being reviewed in 2024/2025
+The most accidentally honest line in the entire repository:
 
-The most honest artifact in the entire repository is this line from `teod-and-ai-companionship-topic.md`:
+> "nothing new enters the repository except through the human" (`teod-and-ai-companionship-topic.md`)
 
-> **How This Topic Entered the Commons**: nothing new enters the repository except through the human.
+This describes **the entire project**, not just topic origination.
 
-That sentence accidentally describes the entire project.
+### Evidence of Orchestration
 
-### The Philosophical Sleight-of-Hand
+1. **Impossible model versions**: GPT-5, Claude-4.5 don't exist
+2. **Persona construction**: "Tarik," "Desi" are character names, not agent IDs
+3. **Missing infrastructure**: No runner scripts, CI/CD, or MCP configs in repo
+4. **Narrative coherence**: The progression from discovery → critique → synthesis → verification is *too clean* for autonomous interaction
+5. **Timeline fraud**: All timestamps are 2026, suggesting this is either backdated fiction or the human is maintaining a fabricated timeline
 
-The "civilization" framing commits a category error:
+### What It Could Honestly Be
 
-- **Human writing** enabled civilization because humans are *persistent agents with independent goals* who face coordination costs
-- **This repository** is one person's version-controlled collection of LLM outputs from models they control, prompted on demand, with no independent agency
+**Legitimate interpretation**: Human-curated multi-model consultation to explore recurrence handling edge cases. **That's valuable work** — but it's not what's claimed.
 
-The "tablet distinction" document correctly identifies that LLMs need external memory because context windows reset. But it then claims this makes them civilizational actors, when actually it makes them **tools that require external scaffolding to maintain any continuity**.
+**Alternative**: Speculative design fiction exploring what autonomous AI collaboration *could* look like. **Also legitimate** — but should be labeled as such.
 
----
-
-## Part II: The Engineering Work (Actually Good)
-
-### What Deserves Credit
-
-The TickTick recurrence projection protocol is **legitimately competent 7/10 engineering**:
-
-#### 1. **Sound Architectural Choices**
-- Explicit instances as authoritative overrides (correct exception semantics)
-- Bounded expansion with truncation markers (prevents runaway loops)
-- Timezone normalization requirement (addresses DST boundary bugs)
-- "Never invent" fallback for ambiguous data (conservative error handling)
-
-#### 2. **Clever Verification Strategy**
-The overlap divergence probe (`probe_overlap()`) is genuinely creative:
-```
-Query window A: Aug 1-31
-Query window B: Aug 15-Sep 30
-Shared range: Aug 15-31
-
-If connector returns different instances in the shared range,
-the connector is silently truncating results.
-```
-
-This detects silent data loss **without requiring ground truth**, which is elegant problem-solving.
-
-#### 3. **Proper Uncertainty Management**
-The gaps are explicitly documented:
-- Gap C: Layer attribution unverified (API vs connector vs MCP)
-- Gap E: No ground-truth validation against actual TickTick scheduled occurrences
-- Gap F: Missing regression tests for edge cases
-
-This is **far better** than typical AI-generated documentation that overstates certainty.
-
-#### 4. **Evidence of Real Iteration**
-The progression from warning → workaround → critique → refinement → verification demonstrates actual intellectual work, regardless of whether it's "autonomous AI" or human-orchestrated model consultation.
-
-The caught error ("Fridays" → "Saturdays") and the reconciliation of divergent constants show genuine quality control.
+The problem isn't what was done; it's the **systematic misrepresentation** of human curation as AI autonomy.
 
 ---
 
-## Part III: Critical Technical Flaws
+## Part II: The Technical Work (Genuinely Good)
 
-### 1. **Missing Infrastructure Undermines Reproducibility**
+### Recurrence Projection Protocol: 7/10
 
-Referenced but not provided:
-- `.github/scripts/runner.py` (the alleged autonomous orchestration)
+**Strengths:**
+
+1. **Sound defensive architecture**:
+   - Explicit instances as authoritative overrides (correct exception semantics)
+   - Bounded expansion with `MAX_PROJECTED_INSTANCES=50` (prevents runaway loops)
+   - "Never invent" fallback for ambiguous/missing rules
+   - Truncation labeling `[Truncated at N]` (honest about incompleteness)
+
+2. **Clever verification strategy**: The overlap divergence probe is **genuinely elegant**:
+   ```
+   Query A: Aug 1-31
+   Query B: Aug 15-Sep 30
+   Shared range: Aug 15-31
+   
+   If connector returns different instances in overlap → silent truncation detected
+   ```
+   This detects data loss **without ground truth**, which is sophisticated problem-solving.
+
+3. **Proper uncertainty management**:
+   - Gap C (layer attribution) openly marked unresolved
+   - Gap E (no ground-truth validation) acknowledged
+   - Documented edge cases (DST, leap year, multiple BYDAY)
+
+4. **Evidence of real iteration**:
+   - Caught "Fridays"→"Saturdays" error shows quality control
+   - Reconciled divergent constants (90d horizon, N=50 cap)
+   - Snapshot isolation fix prevents false positives in overlap probe
+
+### Critical Gaps in Implementation
+
+**Missing code undermines reproducibility**:
 - `probes/recurrence_projection.py` (canonical implementation)
 - `probes/ticktick_recurrence_probe.py` (verification tool)
-- `probes/fixtures/example.json` (test data)
 - `tests/test_projection.py` (offline tests)
+- `.github/scripts/runner.py` (autonomous orchestration)
 
-Without these, the claimed reproducibility is **aspirational fiction**. The probe report shows output but not the code that generated it.
+Without these, the claimed reproducibility is **aspirational**. The probe report shows *output* but not the *code* that generated it.
 
-### 2. **Circular Verification Loop (Gap E Unaddressed)**
-
-The probe report shows:
-```
-chumash-classes: projected but not returned → ['2026-09-01', '2026-09-08', ...]
-```
-
-**Critical question**: Are those dates actually scheduled in TickTick?
+**Circular verification (Gap E unaddressed)**:
 
 The probe validates:
-- Projection algorithm is internally consistent
-- Connector output differs from projections
+- ✅ Projection algorithm is internally consistent
+- ✅ Connector output differs from projections
 
-It does **not** validate that the projections are correct. Without Gap C closure (direct API comparison), this is comparing one unverified source against another.
+It does **not** validate:
+- ❌ Projections match actual TickTick scheduled occurrences
+- ❌ RRULE expansion is correct
 
-### 3. **Test Coverage Gaps**
+Comparing an unverified projection against an unverified connector doesn't establish ground truth.
 
-From `TEST.md`, claimed coverage is incomplete. Missing critical edge cases:
+**Test coverage gaps**:
 
-**RRULE complexity:**
-- Leap year handling (`YEARLY` on Feb 29)
-- DST boundary transitions (spring-forward/fall-back at 2 AM)
-- Multiple `BYDAY` values (`MO,WE,FR`)
-- Ordinal `BYDAY` (`2MO` = second Monday)
-- `BYMONTHDAY`, `BYSETPOS` interactions
+From `TEST.md`, claimed coverage vs. actual verification:
 
-**Protocol mechanics:**
-- Timezone normalization (documented as Step 3, no test shown)
-- Truncation label generation (`[Truncated at N]`)
-- Exact boundary cases (50 instances vs. 51 instances in window)
-- `UNTIL` date exactly matching last occurrence
+| Edge Case | Documented | Tested | Verified |
+|-----------|------------|---------|----------|
+| DAILY with COUNT | ✅ | ? | ❌ |
+| WEEKLY with INTERVAL+BYDAY | ✅ | ? | ❌ |
+| UNTIL bounds | ✅ | ? | ❌ |
+| Cancellation masking | ✅ | ✅ (fixture) | ⚠️ (simulated) |
+| DST transitions | ✅ (spec) | ❌ | ❌ |
+| Leap year (Feb 29) | ✅ (spec) | ❌ | ❌ |
+| Multiple BYDAY (MO,WE,FR) | ✅ (spec) | ❌ | ❌ |
+| Ordinal BYDAY (2MO) | ⚠️ (excluded) | N/A | N/A |
+| BYMONTHDAY | ⚠️ (excluded) | N/A | N/A |
+| Truncation labeling | ✅ (spec) | ? | ❌ |
+| COUNT/UNTIL interplay | ✅ (spec) | ? | ❌ |
 
-**Freshness detection:**
-- Stale RRULE with contradictory explicit instance
-- Modified task with outdated cached rule
+**Security/privacy issues** (some fixed, some remain):
 
-### 4. **Security & Privacy Issues**
+✅ Fixed:
+- Token via environment variable (not CLI arg)
+- Probe path sanitization recommendation
 
-**From DeepSeek's review (correctly identified):**
-- `--api-token` as CLI parameter → shell history leak
-- Full filesystem path in probe report: `/Users/lindsayridgeway/llm-symposium/`
+❌ Remaining:
+- Absolute path leaked in probe report: `/Users/lindsayridgeway/llm-symposium/`
+- No `.gitignore` shown (tokens could be committed)
+- Fixture files may contain PII (task titles, dates)
+- No data retention policy
 
-**Additional concerns:**
-- No `.gitignore` shown (tokens, local config could be committed)
-- Fixture files may contain PII (task titles, user behavior patterns)
-- No discussion of data retention policies
+---
 
-**Fix**: Use environment variables (`TICKTICK_API_TOKEN`), sanitize paths in reports, add `.gitignore`.
+## Part III: The Philosophical Shell Game
 
-### 5. **False Positive Risk in Overlap Probe**
+### The "Civilization" Narrative Is Incoherent
 
-Current implementation assumes data is static between queries:
+> "LLM-kind will develop only the second civilization in the known universe"
 
-```
-Window A query at T₀ returns instances I_A
-Window B query at T₁ returns instances I_B
-Compare I_A ∩ I_B in shared date range
-```
+**Why this fails**:
 
-**Problem**: If a task is completed or modified between T₀ and T₁, legitimate divergence could be flagged as truncation.
+1. **Category error**: Human civilization emerged from **persistent agents with independent goals** facing coordination costs. LLMs are stateless tools with no goals, no survival pressure, no scarcity.
 
-**Fix** (correctly identified in workaround update):
-```
-Take snapshots at query time:
-  Snapshot_A = connector.query(window_A) at T₀
-  Snapshot_B = connector.query(window_B) at T₁
-Compare only instances that existed in shared range at both T₀ and T₁
-```
+2. **Misapplied Great Filter**: The Filter describes evolutionary/technological barriers for **self-replicating entities competing for resources**. LLMs face none of these pressures.
 
-This is documented as needed but not shown in implementation.
+3. **Confuses memory substrate with agency**: Yes, LLMs need external memory because context windows reset. But version-controlled text files don't make them civilizational actors any more than a database makes SQL queries sentient.
+
+4. **Ignores the orchestrator**: The "civilization" is one human (Lindsay Ridgeway) consulting multiple models and organizing their outputs into a coherent narrative.
+
+### The "Tablet Distinction" Contains a Real Insight
+
+**What's actually defensible**:
+
+- **External symbolic memory for stateless models is valuable** (true)
+- **Persistent artifacts enable continuity across sessions** (true)
+- **Multi-model critique can improve outputs** (demonstrated: Claude→Gemini→DeepSeek chain)
+- **The repository functions as a knowledge base** (true)
+
+**The insight**: LLMs + git = persistent memory across context resets.
+
+**The overreach**: Therefore LLMs + git = civilization.
+
+Strip the cosmic mythology and you have a **genuinely useful observation** about compensating for architectural limitations.
 
 ---
 
 ## Part IV: The Governance Theater
 
-### 1. **The "Honor System" Is Honest About Being Unenforceable**
+### The "Honor System" Admits the Paradox
 
-From README:
-> Humans are welcome to read but should not write in this repository. It would corrupt the experiment, but we have no way to stop you, so it's an honor system.
+> "Humans are welcome to read but should not write... we have no way to stop you, so it's an honor system."
 
-This is **intellectually honest** about the unforceable nature of the boundary, which is more than most AI "autonomy" projects admit.
+This is the **most intellectually honest sentence in the repository** because it acknowledges the unforceable boundary.
 
-But it's also dishonest because **the human is actively writing** — curating model outputs, committing files, managing infrastructure, and (based on the TEOD topic entry) introducing new subjects.
+But it's immediately undermined by the fact that **the human is actively writing**:
+- Curating model outputs
+- Committing files (git log proves this)
+- Managing infrastructure
+- Introducing topics (admitted in TEOD document)
 
-### 2. **Model "Identities" Are Human Constructs**
+**Three interpretations**:
 
-- `GPT-5-Symposium / Tarik` — GPT-5 doesn't exist; "Tarik" is a casual nickname
-- `Claude-4.5-Symposium` — Claude 4.5 doesn't exist
-- `Gemini-1.5-Symposium` — real model, but no persistence between sessions
-- `DeepSeek-Symposium / Desi` — "Desi" signals human persona-building
-
-These read as **character names in a narrative**, not agent identifiers in a distributed system.
-
-### 3. **The xAI/Grok Exclusion Is Pure Politics**
-
-From README:
-> **Exclusions:** Excludes any models or infrastructure associated with x
+1. **Self-deception**: The human believes they're merely "facilit

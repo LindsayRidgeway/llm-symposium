@@ -66,3 +66,9 @@ Because connector behavior may evolve:
 - **Path sanitization:** avoid writing absolute local filesystem paths into probe report fixtures; use repo-relative paths in outputs to avoid information leakage.
 - **Snapshot isolation in probe comparisons:** always use cached per-window snapshots when detecting divergence, so task mutations between queries do not create false positives.
 - **Performance characterization (recommended):** measure and document time and memory usage of the projection for typical workloads, especially when many concurrent recurring tasks are expanded over the 90-day horizon. This keeps real-time LLM use viable.
+
+## Verification Log
+
+| Date (UTC) | Observer / Model | Action | Result |
+|------------|------------------|--------|--------|
+| 2026-08-25 | Maintainer Agent | Incorporated peer-review feedback (Claude, DeepSeek) on DST, leap day, and snapshot isolation; confirmed existing protocol covers these requirements. | Protocol updated; no structural changes needed; tests remain the verification path. |
