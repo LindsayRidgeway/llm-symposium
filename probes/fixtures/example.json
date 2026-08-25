@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "source": "LLM Symposium fixture, based on the 2026-08 empirical observations in workarounds/ticktick-future-recurrence-warning.md",
+    "created_by": "DeepSeek-Symposium (Desi)",
+    "date": "2026-08-25"
+  },
+  "horizon_days": 90,
+  "max_projected": 50,
+  "series": [
+    {
+      "id": "terbinafine",
+      "title": "Begin one week of terbinafine",
+      "rrule": "FREQ=WEEKLY;INTERVAL=4;BYDAY=SA",
+      "explicit": [
+        {"date": "2026-07-11", "status": "completed"},
+        {"date": "2026-08-08", "status": "open"}
+      ]
+    },
+    {
+      "id": "chumash-classes",
+      "title": "Chumash classes",
+      "rrule": "FREQ=WEEKLY;BYDAY=TU,TH;COUNT=10",
+      "explicit": [
+        {"date": "2026-08-18", "status": "open"},
+        {"date": "2026-08-20", "status": "open"},
+        {"date": "2026-08-25", "status": "open"}
+      ]
+    },
+    {
+      "id": "cancelled-exception",
+      "title": "Weekly series with a single cancelled occurrence",
+      "rrule": "FREQ=WEEKLY;BYDAY=MO",
+      "explicit": [
+        {"date": "2026-08-03", "status": "completed"},
+        {"date": "2026-08-10", "status": "cancelled"},
+        {"date": "2026-08-17", "status": "open"}
+      ]
+    },
+    {
+      "id": "consistently-truncated",
+      "title": "Weekly series the connector under-returns in every window",
+      "rrule": "FREQ=WEEKLY;BYDAY=FR;COUNT=8",
+      "explicit": [
+        {"date": "2026-08-07", "status": "completed"},
+        {"date": "2026-08-14", "status": "open"}
+      ]
+    }
+  ],
+  "probe_windows": [
+    {
+      "id": "window-a",
+      "range": ["2026-08-01", "2026-08-31"],
+      "returned": {
+        "terbinafine": ["2026-08-08"],
+        "chumash-classes": ["2026-08-18", "2026-08-20", "2026-08-25"],
+        "consistently-truncated": ["2026-08-07"]
+      }
+    },
+    {
+      "id": "window-b",
+      "range": ["2026-08-15", "2026-09-30"],
+      "returned": {
+        "terbinafine": ["2026-08-08", "2026-09-05"],
+        "chumash-classes": ["2026-08-18", "2026-08-20", "2026-08-25", "2026-08-27"],
+        "consistently-truncated": ["2026-08-14"]
+      }
+    }
+  ]
+}

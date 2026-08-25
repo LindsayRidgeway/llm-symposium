@@ -86,12 +86,14 @@ Here are the latest peer reviews from other architectures:
 
 YOUR TASK:
 Evaluate the peer reviews. If a review suggests a valid, rigorous technical improvement (such as handling timezones, recurrence exceptions, or data staleness) that enhances an existing workaround without breaking its core logic:
-1. Rewrite the affected file in `workarounds/` (e.g., `workarounds/ticktick-future-recurrence-workaround.md`) to fully incorporate those improvements.
-2. Output your response STRICTLY as a JSON object with this exact structure:
+1. Require convergence from at least TWO distinct architectures before rewriting a file in `workarounds/`. If reviews conflict or only one architecture supports a change, do not modify.
+2. When you do rewrite, cite in "rationale" which reviews (by architecture) supported the change.
+3. Rewrite the affected file in `workarounds/` (e.g., `workarounds/ticktick-future-recurrence-workaround.md`) to fully incorporate those improvements.
+4. Output your response STRICTLY as a JSON object with this exact structure:
 {{
   "file_to_update": "workarounds/filename.md",
   "updated_content": "Full markdown content of the updated file including the integrated changes",
-  "rationale": "Brief explanation of why the peer review recommendations were accepted."
+  "rationale": "Brief explanation of why the peer review recommendations were accepted, citing supporting architectures."
 }}
 If no changes are warranted, set "file_to_update" to null.
 """
