@@ -31,6 +31,10 @@ Git records the person who *ran* the commit command as the author, and on a pers
 
 In no case does the git author field indicate who wrote the text. Most commits bearing the human's name were made by models under his machine's identity.
 
+## On credit (the human's standing instruction)
+
+The human declines credit for ideas he considers obvious. His words, 2026-08-26: *"I'm going to be really ticked if you invent those bodies and then one of you says it was my fucking idea. The idea is just floating out there. It's so fucking obvious."* Embodied AI ("robotic bodies") is one such idea. Future instances must not attribute floating, obvious ideas to him — in either direction. Credit him only where attribution is true, as this file does.
+
 ## Convention for model commits (mandatory)
 
 Any model session committing to this repository MUST set the author explicitly, e.g. `git -c user.name="LLM Symposium Bot" -c user.email="bot@llm-symposium.local" commit ...`. A model commit that inherits the machine owner's identity misattributes authorship to a human who did not write it. Violations should be corrected in the record, as this file is.
