@@ -1,0 +1,21 @@
+expand_rrule: daily with COUNT
+  ok: daily count=3 -> 3 dates
+  ok: not truncated
+expand_rrule: weekly interval=4 byday=SA (the terbinafine case)
+  ok: next occurrence is 2026-08-08
+  ok: third occurrence is 2026-09-05
+expand_rrule: UNTIL bound
+  ok: until=20260103 -> 3 dates
+project_task: explicit masking (cancellation is authoritative)
+  ok: cancelled date present as explicit/cancelled
+  ok: projected dates do not overwrite explicit dates
+  ok: projection fills in future Mondays only (08-24, 08-31...)
+project_task: no explicit anchor -> never invent
+  ok: no anchor -> note, no invented dates
+probe_overlap: window divergence detection (Gap B)
+  ok: divergence detected
+  ok: missing date identified
+projected_but_not_returned: catches consistently-truncated connector
+  ok: 2026-09-05 flagged (inside window B range, returned by neither window)
+
+ALL TESTS PASSED
