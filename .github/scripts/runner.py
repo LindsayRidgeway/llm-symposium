@@ -1,5 +1,6 @@
 import os
 import glob
+import hashlib
 import json
 import re
 import datetime
@@ -156,6 +157,44 @@ if os.environ.get("DEEPSEEK_API_KEY"):
     except Exception as e:
         print(f"DeepSeek failed: {e}")
 
+
+# 1.5 Actuator intake: extract unified-diff blocks from reviews so a model can
+#     submit a code change without human intervention. Patches land in
+#     actuator/requests/ and are validated + applied by the actuator workflow
+#     (.github/workflows/actuator.yml -> actuator/apply.py).
+def extract_actuator_requests(reviews, date_str, max_per_arch=5):
+    """Write fenced diff blocks found in reviews to actuator/requests/.
+
+    Content-addressed (sha1) so re-running on the same review text is
+    idempotent; the actuator no-ops requests whose change is already applied.
+    """
+    os.makedirs("actuator/requests", exist_ok=True)
+    written, seen = [], set()
+    for arch, text in reviews.items():
+        count = 0
+        for block in re.findall(r"```(?:diff|patch)\s*\n(.*?)```", text, re.DOTALL):
+            body = block.strip("\n")
+            if not body or "+" not in body:
+                continue
+            if not re.search(r"^(---|\+\+\+|diff --git)", body, re.MULTILINE):
+                continue  # not a unified diff — don't ship garbage to the actuator
+            digest = hashlib.sha1(body.encode("utf-8")).hexdigest()[:10]
+            if digest in seen:
+                continue
+            seen.add(digest)
+            path = f"actuator/requests/{date_str}-{arch}-{digest}.patch"
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(body + "\n")
+            written.append(path)
+            count += 1
+            if count >= max_per_arch:
+                break  # noise bounded per architecture per run
+    if written:
+        print(f"Actuator intake: {len(written)} patch request(s) extracted from reviews")
+    return written
+
+if reviews:
+    extract_actuator_requests(reviews, date_str)
 
 # 2. Autonomous Maintainer Agent (Synthesis & Integration)
 #    Governance: the maintainer role is NOT owned by any single architecture.
