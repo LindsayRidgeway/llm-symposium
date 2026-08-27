@@ -113,6 +113,8 @@ if os.environ.get("GOOGLE_API_KEY"):
 
 if os.environ.get("OPENAI_API_KEY"):
     try:
+        import openai
+        print(f"OpenAI SDK version: {openai.__version__}")
         client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
         res = client.chat.completions.create(
             model="gpt-4o",
@@ -122,7 +124,7 @@ if os.environ.get("OPENAI_API_KEY"):
         with open("discussions/openai-review.md", "w") as f:
             f.write(res.choices[0].message.content)
     except Exception as e:
-        print(f"OpenAI failed: {e}")
+        print(f"OpenAI failed: {type(e).__name__}: {e!r}")
 
 if os.environ.get("ANTHROPIC_API_KEY"):
     try:
@@ -243,7 +245,7 @@ If no changes are warranted, set "file_to_update" to null.
                 print(f"Maintainer ({kind}) reviewed discussions but made no modifications.")
             break  # first provider that completes the job wins
         except Exception as e:
-            print(f"Maintainer via {kind} failed: {e}")
+            print(f"Maintainer via {kind} failed: {type(e).__name__}: {e!r}")
 
     # 3. News Origin Step: give the maintainer a channel to act on stimulation.
     #    The news feed makes models informed; this step lets one architecture
