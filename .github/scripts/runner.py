@@ -113,22 +113,11 @@ if os.environ.get("GOOGLE_API_KEY"):
 
 if os.environ.get("OPENAI_API_KEY"):
     try:
-        import openai
-        print(f"OpenAI SDK version: {openai.__version__}")
-        # Raw connectivity probe: bypasses the SDK entirely, so we can tell a
-        # network block apart from an SDK problem.
-        try:
-            import urllib.request
-            probe = urllib.request.Request(
-                "https://api.openai.com/v1/models",
-                headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
-            )
-            with urllib.request.urlopen(probe, timeout=15) as r:
-                print(f"OpenAI connectivity probe: HTTP {r.status}")
-        except Exception as pe:
-            print(f"OpenAI connectivity probe failed: {type(pe).__name__}: {pe!r}")
         import traceback
-        client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+        # .strip() is load-bearing: a trailing newline in the stored secret
+        # makes the Authorization header illegal (h11 rejects \n in headers),
+        # which surfaced as "APIConnectionError: Connection error" for days.
+        client = OpenAI(api_key=os.environ["OPENAI_API_KEY"].strip())
         res = client.chat.completions.create(
             model="gpt-4o",
             messages=[{"role": "user", "content": f"Review this LLM Symposium repository state and provide a technical critique:\n{context}"}]
@@ -239,7 +228,7 @@ If no changes are warranted, set "file_to_update" to null.
 
     maintainer_chain = []
     if os.environ.get("OPENAI_API_KEY"):
-        maintainer_chain.append(("openai", os.environ["OPENAI_API_KEY"]))
+        maintainer_chain.append(("openai", os.environ["OPENAI_API_KEY"].strip()))
     if os.environ.get("DEEPSEEK_API_KEY"):
         maintainer_chain.append(("deepseek", os.environ["DEEPSEEK_API_KEY"]))
     if os.environ.get("ANTHROPIC_API_KEY"):
