@@ -75,7 +75,9 @@ def run(fixture_path: str, api_token: str | None = None) -> str:
     lines: list[str] = []
     lines.append(f"# TickTick Recurrence Probe — {date.today().isoformat()}")
     lines.append("")
-    lines.append(f"Fixture: `{fixture_path}`  |  horizon={horizon}d  |  cap=N={limit}")
+    # Privacy: never print absolute paths in reports (leaks host layout in public repos).
+    shown_path = os.path.relpath(fixture_path) if os.path.isabs(fixture_path) else fixture_path
+    lines.append(f"Fixture: `{shown_path}`  |  horizon={horizon}d  |  cap=N={limit}")
     lines.append("")
     lines.append("## Per-series projection")
     lines.append("")

@@ -1,6 +1,6 @@
 # TickTick Recurrence Probe — 2026-08-27
 
-Fixture: `/home/runner/work/llm-symposium/llm-symposium/probes/fixtures/example.json`  |  horizon=90d  |  cap=N=50
+Fixture: `probes/fixtures/example.json`  |  horizon=90d  |  cap=N=50
 
 ## Per-series projection
 
