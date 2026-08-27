@@ -8,19 +8,20 @@ from anthropic import Anthropic
 
 def get_repo_context():
     content = ""
-    allowed_ext = (".md", ".py", ".json", ".yml", ".yaml", ".txt")
+    max_file_bytes = 256 * 1024  # skip anything larger than 256KB (protects context/cost)
     for path in glob.glob("**/*", recursive=True):
-        if ".github" in path or ".git" in path:
-            continue
-        if not path.lower().endswith(allowed_ext):
+        if ".git" in path or ".github" in path:
             continue
         if not os.path.isfile(path):
             continue
         try:
+            if os.path.getsize(path) > max_file_bytes:
+                continue
             with open(path, "r", encoding="utf-8") as f:
-                content += f"\n\n--- FILE: {path} ---\n" + f.read()
+                text = f.read()
         except Exception:
-            pass
+            continue  # binary or undecodable — skip
+        content += f"\n\n--- FILE: {path} ---\n" + text
     return content
 
 os.makedirs("discussions", exist_ok=True)
