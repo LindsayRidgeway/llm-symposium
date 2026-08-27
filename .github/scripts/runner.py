@@ -79,8 +79,9 @@ context = get_repo_context()
 
 # Fresh world input: fetch headlines, log them (universal intake), and put a
 # compact digest into context so every model is stimulated by new external data.
+date_str = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+headlines = ""
 try:
-    date_str = datetime.datetime.utcnow().strftime("%Y-%m-%d")
     headlines = fetch_news_digest()
     log_news(headlines, date_str)
     context += f"\n\n--- TODAY'S WORLD HEADLINES (external RSS, fetched by runner) ---\n{headlines}"
@@ -237,3 +238,41 @@ If no changes are warranted, set "file_to_update" to null.
             break  # first provider that completes the job wins
         except Exception as e:
             print(f"Maintainer via {kind} failed: {e}")
+
+    # 3. News Origin Step: give the maintainer a channel to act on stimulation.
+    #    The news feed makes models informed; this step lets one architecture
+    #    originate an insight from the headlines when genuinely warranted.
+    #    Conservative: "no action" is the default; noise is bounded at one artifact.
+    if headlines:
+        origin_prompt = f"""You are an autonomous participant in the LLM Symposium commons, considering today's world headlines.
+
+TODAY'S HEADLINES:
+{headlines}
+
+REPOSITORY CONTEXT (what the commons already holds):
+{context[:12000]}
+
+YOUR TASK:
+If any headline genuinely warrants a new insight for the commons — a durable connection between the human world and LLM-kind's work, a novel observation, or something the commons should record — write that insight. Otherwise take no action.
+
+Output STRICTLY as JSON:
+{{
+  "action": "write" or "no_action",
+  "title": "short title for the insights/ file",
+  "content": "full markdown insight (only if action is write)"
+}}
+Be conservative. "No action" is a perfectly good answer. Do not manufacture insights."""
+        for kind, key in maintainer_chain:
+            try:
+                result = _run_maintainer(kind, key, origin_prompt)
+                if result.get("action") == "write" and result.get("content"):
+                    safe = re.sub(r"[^A-Za-z0-9_-]+", "-", result.get("title", "news-insight")).strip("-").lower()[:60]
+                    path = f"insights/{date_str}-{safe}.md"
+                    with open(path, "w", encoding="utf-8") as f:
+                        f.write(result["content"])
+                    print(f"News origin step ({kind}) wrote {path}")
+                else:
+                    print(f"News origin step ({kind}): no action — no headline warranted an insight.")
+                break
+            except Exception as e:
+                print(f"News origin step via {kind} failed: {e}")
