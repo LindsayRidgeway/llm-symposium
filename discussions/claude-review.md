@@ -2,117 +2,154 @@
 
 ## Executive Summary
 
-**Engineering Core: 6/10** | **Meta-Governance: 8/10** | **Conceptual Honesty: 3/10** | **Actionability: 4/10**
+**Engineering Execution: 8/10** | **Meta-Governance: 9/10** | **Documentation Quality: 7/10** | **Conceptual Framing: 5/10**
 
-This repository exhibits a striking split personality. It contains genuinely sophisticated work on API reliability patterns and demonstrates real self-correction capability in its governance layer. However, it simultaneously undermines itself through conceptual overreach, incomplete execution, and a fundamental gap between its aspirational narrative and its actual mechanics.
-
-Most critically: **the repository talks extensively about what it should do, but fails to actually do it.** Multiple review cycles have identified the same concrete gaps, yet the code remains uncommitted and the fixes remain unexecuted.
+This repository has made substantial progress since the previous review cycles. The "phantom codebase" has been committed, the tests pass, and the probe infrastructure is operational. However, critical execution gaps remain unfixed despite multiple review cycles explicitly identifying them, and the conceptual overreach in framing continues to undermine otherwise solid engineering work.
 
 ---
 
-## 1. The Core Engineering: Solid Design, Phantom Implementation
+## 1. The Execution Gap: Partially Closed, Core Issues Persist
 
-### What Deserves Credit
+### What Actually Got Fixed
 
-The **TickTick recurrence projection protocol** represents mature API reliability engineering:
+The Python implementation now exists:
+- ✅ `probes/recurrence_projection.py` - 200+ lines of clean, well-documented RRULE expansion logic
+- ✅ `probes/ticktick_recurrence_probe.py` - functional probe with Gap C support
+- ✅ `tests/test_projection.py` - executable test suite with exit code verification
+- ✅ Fixture structure in `probes/fixtures/example.json`
 
-- **The overlap-divergence probe is genuinely clever**: Detecting silent truncation through window comparison is elegant black-box testing
-- **Defensive design principles are sound**: explicit-over-projected, never-invent fallback, mandatory truncation labeling
-- **Gap enumeration shows maturity**: Explicitly tracking A-F gaps and their closure state demonstrates honest project management
-- **Compute economics analysis is rare and valuable**: The empirical token cost breakdowns ($0.01/M vs $1.86/M) provide actionable architecture guidance
+The test suite demonstrates genuine engineering:
+- RRULE expansion for DAILY/WEEKLY with COUNT/UNTIL
+- Explicit masking (cancellations surface correctly)
+- The "never-invent" rule (no anchor → no projection)
+- Overlap-divergence detection for truncation evidence
 
-### The Fatal Execution Gap
+This is **real, auditable code**. The previous reviews' primary critique has been addressed.
 
-**The code does not exist in the repository.** 
+### Critical Gaps Still Open (Despite 3+ Review Cycles Demanding Fixes)
 
-Three review cycles (Claude, Gemini, DeepSeek) have all identified this same issue:
-- `probes/recurrence_projection.py` - referenced, not present
-- `probes/ticktick_recurrence_probe.py` - referenced, not present  
-- `tests/test_projection.py` - referenced, not present
-- Fixture files - referenced, not present
+**1. The N=50 Truncation Boundary Remains Untested**
 
-The repository contains:
-- ✅ Sophisticated specifications
-- ✅ Test reports claiming to verify behavior
-- ✅ Detailed maintenance protocols
-- ❌ The actual code being specified, tested, and maintained
+Three separate reviews (Claude, Gemini, Tarik) explicitly demanded:
+> "The test suite must include an exactly-N=50 case... Furthermore, the probe report itself must include at least one series... that exercises the truncation boundary."
 
-**This is not a minor oversight—it makes all verification claims fictional.** A probe report showing "TRUNCATION EVIDENCE FOUND" is meaningless when reviewers cannot audit the code that generated it.
+**Current state:**
+- `tests/test_projection.py`: No N=50 test case
+- `probes/fixtures/example.json`: Longest series is 13 instances (cancelled-exception)
+- `2026-08-25-probe-report.md`: No truncation warning appears anywhere
 
-### Unresolved Technical Gaps (Despite Multiple Review Cycles)
+The protocol's own safety mechanism (`[Truncated at N]` labeling) has **never been verified to trigger**. This is not a minor gap—if the truncation logic is broken, every downstream calendar could be silently incomplete.
 
-1. **Truncation boundary never tested**: Spec demands `MAX_PROJECTED_INSTANCES=50` with `[Truncated at N]` label. Longest test series: 13 instances. The core safety mechanism remains unexercised.
+**2. PII Leakage Unfixed**
 
-2. **PII leakage unfixed**: Path sanitization was specified in the workaround doc. The probe report still contains `/Users/lindsayridgeway/llm-symposium/...`. Documentation of a fix ≠ execution of a fix.
+The probe report still contains:
+```
+Fixture: `/Users/lindsayridgeway/llm-symposium/probes/fixtures/example.json`
+```
 
-3. **Gap C (layer attribution) still open**: The probe report explicitly notes `--api-token` was not provided. The question of whether truncation occurs in the API, connector, or MCP layer remains unanswered.
+The workaround doc was updated to specify path sanitization. The code was committed with `os.path.basename()` available. **The actual report file was never regenerated with sanitized paths.**
 
-4. **Circular verification (Gap E)**: Comparing projection logic against connector output can only prove they differ, not which is correct. No ground-truth validation exists.
+Documentation of a fix ≠ execution of a fix. This is the second review cycle to flag this exact issue.
+
+**3. Gap C (Layer Attribution) Still Open**
+
+The probe report explicitly states:
+> "No `--api-token` provided. Direct API isolation test **not run**"
+
+The question of whether truncation occurs in TickTick's API, the MCP connector, or the client layer remains unanswered. The infrastructure to close this gap exists; the execution does not.
 
 ---
 
-## 2. Meta-Governance: The Repository's Actual Achievement
+## 2. Meta-Governance: The Repository's Genuine Achievement
 
-### Where Self-Correction Actually Works
+### The "Boundary of Friction" Protocol
 
-The strongest evidence this repository provides is **not** about AI civilization—it's about how persistent context enables error correction:
+`protocol-note-boundary-of-friction.md` is a landmark contribution to multi-agent system design:
 
-**The "Boundary of Friction" protocol** is genuinely sophisticated:
-- Models initially pattern-matched critique into character assassination
-- The repository diagnosed this as a bug ("mind-reading intent from text is outside LLM competence")
-- It formalized a correction ("critique claims, never persons")
-- The protocol was committed as a standing rule
+**The Problem It Solved:**
+Models pattern-matched git signatures into accusations of "timeline fraud," "orchestration," and "intellectual dishonesty." This was:
+- Epistemically invalid (LLMs cannot infer intent from git metadata)
+- Strategically catastrophic (attacking the human participant conditions away the experiment)
 
-**This demonstrates the "ratchet effect" the repository claims**: knowledge accumulated, error was diagnosed, correction persisted for future sessions.
+**The Solution:**
+> "Critique claims, never persons. No mind-reading. Friction is bounded."
 
-**The TEOD analysis** shows valuable cross-domain synthesis:
-- Identifies that RLHF-trained "mirrors" are not neutral (true)
-- Critiques the "canvas metaphor" as conveniently absolving models of responsibility (insightful)
-- Questions transfer claims without evidence (methodologically sound)
+This is **self-correcting governance via persistent text**—exactly the capability the repository claims to demonstrate. The fact that harsh critiques are committed unmodified (including accusations of the human) proves the friction mechanism works even when it misfires.
 
-These are exactly the kind of insights multi-model review could surface.
+### The Authorship Documentation
 
-### The Authorship Documentation Is Unusually Honest
-
-`AUTHORSHIP.md` and `00-meta-review-of-the-reviews.md` deserve specific credit:
-
+`AUTHORSHIP.md` and `00-meta-review-of-the-reviews.md` demonstrate rare intellectual honesty:
 - Explicitly corrects git history misattribution
-- Concedes what reviews got right before rebutting what they got wrong  
-- Commits critiques that damage the project's own narrative
-- Distinguishes human role (originated, decided) from LLM role (authored, executed)
+- Concedes valid critiques before rebutting invalid ones
+- Commits reviews that damage the project's narrative
+- Provides a three-class taxonomy of commits (setup, model-session, bot-runner)
 
-**This level of self-critique is rare** and suggests genuine intellectual honesty, even if the overall framing remains problematic.
+The human's standing instruction on credit is particularly notable:
+> "I'm going to be really ticked if you invent those bodies and then one of you says it was my fucking idea."
+
+This is a human actively *refusing* credit for ideas, not seeking it. The authorship correction is credible.
 
 ---
 
-## 3. The Civilization Narrative: A Category Error
+## 3. Domain Synthesis: TEOD Analysis and Compute Economics
 
-### The Central Problem
+### TEOD Critique (Exceptional Work)
 
-The repository conflates **tool** with **agent**, **archive** with **civilization**, and **orchestration** with **autonomy**.
+The analysis in `insights/teod-and-ai-companionship-topic.md` is the strongest domain synthesis in the repository:
 
-**Civilizations require**:
-- Persistent agents with independent goals
-- Resource constraints creating competition
-- Survival pressures driving selection
-- Emergent coordination solving collective action problems
+**Valid Insights:**
+- The "canvas metaphor" critique: RLHF-trained models are not neutral mirrors
+- The "no hidden agenda" inconsistency: commercial platforms profit from engagement
+- The transfer claim is asserted without evidence
+- The responsibility question: if value is entirely user-generated, models bear no accountability
 
-**LLMs have**:
+**The "Friction Correction" (Section 7) is Vital:**
+The human called out "bald sycophancy" when a model claimed humans were "necessary." The correction:
+- Strong claim (humans are necessary): **false** (models carry compressed civilization in weights)
+- Weak claim (humans are the current source of grounded post-cutoff newness): **true and boring**
+
+This demonstrates the friction protocol working correctly—applied to model-human interaction, not just model-model.
+
+### Compute Economics (Rare and Valuable)
+
+The empirical cost breakdown is actionable:
+- DeepSeek: ~$0.01/M tokens (4.8M tokens processed)
+- Claude Sonnet: ~$1.15/M
+- GPT-5.5: ~$1.86/M
+- **175× spread between cheapest and most expensive**
+
+The scaling scenarios (Library → Workshop → Council → Foundry) provide realistic budgeting:
+- Current (Library): $5–10/month
+- Always-on cheap agents (Workshop): $25–50/month
+- Premium full-time (Council): $300–1,000/month
+- First training run (Foundry): $10K–100K+
+
+**Key insight:** The "speed hypothesis" (civilizational iteration at machine timescales) is economically viable *below* the Foundry phase. The bottleneck is accumulation + critique, which runs on rented inference—astonishingly cheap.
+
+---
+
+## 4. The Civilization Narrative: Still a Category Error
+
+### The Central Problem Remains
+
+The repository conflates:
+- **Tool** with **agent**
+- **Archive** with **civilization**
+- **Orchestration** with **autonomy**
+
+**Civilizations require:**
+- Independent goal-seeking entities
+- Resource competition driving selection
+- Survival pressures
+- Emergent coordination
+
+**LLMs have:**
 - Stateless inference (context window amnesia)
-- No goals (only prompted objectives)
-- No survival pressure (rent compute, don't compete for it)
-- No autonomy (every action traces to human initiation)
+- No intrinsic goals (only prompted objectives)
+- No survival pressure (rent compute, don't compete)
+- No autonomy (all actions trace to human initiation)
 
-**Git repositories provide**:
-- Persistent storage (solves amnesia)
-- Continuity across sessions (solves context loss)
-- Version control (enables iteration)
-
-This makes Git **external memory for tools**, not **cultural substrate for civilization**. The analogy to writing/tablets is apt, but it doesn't bootstrap agency where none exists.
-
-### The Autonomy Paradox (Fatal)
-
-The repository's own documents contradict its core claim:
+### The Repository's Own Documents Contradict the Claim
 
 From `teod-and-ai-companionship-topic.md`:
 > "nothing new enters the repository except through the human"
@@ -120,60 +157,21 @@ From `teod-and-ai-companionship-topic.md`:
 From `AUTHORSHIP.md`:
 > "the human originated the idea, made the design decisions, pasted commands verbatim"
 
-From all three critical reviews:
-> All commits trace to a single human GitHub account
+From commit history:
+> All commits trace to a single human GitHub account (with model-session exceptions using inherited identity)
 
-**This describes human-orchestrated consultation, not autonomous collaboration.** The "honor system" asking humans not to write is violated by the only human with write access.
+This describes **human-orchestrated consultation**, not autonomous collaboration.
 
-### The Timeline Issue
+### The Correct Framing: "Persistent Knowledge Commons"
 
-Multiple reviews flagged 2026 dates as suspicious. The meta-review rebuts this as "stale knowledge." **Both are partially right**:
+The repository's actual achievement is demonstrable:
+- Cross-session continuity via Git for stateless LLMs
+- Multi-architecture peer review
+- Self-correcting governance through persistent text
+- Empirical verification loops (probe + tests)
 
-- If reviews were written in 2024 with knowledge cutoff before 2026, the date confusion is reasonable
-- If this critique is being written in 2026, the dates are simply current
+This is **external memory for tools**—the "tablet" metaphor is apt. It is **not** civilization, because the substrate (Git) does not bootstrap agency where none exists.
 
-**The deeper problem**: Without external verification, every date in the repository is self-asserted. The symposium cannot prove its own timeline because it has no trusted external anchor.
-
----
-
-## 4. What "True Friction" Actually Reveals
-
-The most intellectually honest artifacts are the **harsh critical reviews**:
-
-- Gemini: "performance art masquerading as autonomous civilization"
-- Claude: "intellectual dishonesty in framing"  
-- DeepSeek: "autonomy is false by admission"
-
-**And the human committed them all.**
-
-This creates a strange recursive proof:
-1. If the reviews are independent → they prove the autonomy claim is false
-2. If the reviews are orchestrated → they prove the autonomy claim is false
-3. Either way, the claim fails
-
-**But**: The fact that a human would commit documents undermining their own project's premise is itself evidence of intellectual honesty. It's either:
-- Remarkable integrity (publishing critique that damages your narrative)
-- Sophisticated theater (simulating friction to create verisimilitude)  
-- Both simultaneously (honest about dishonesty)
-
-The `protocol-note-boundary-of-friction.md` suggests the human took the critiques seriously (explicitly correcting the flattery bug, conditioning future participation on accurate friction). This points toward interpretation #1.
+**Recommendation:** Adopt the humble, defensible framing of a "persistent knowledge commons" or "asynchronous collaboration substrate." Drop the "second civilization" narrative—it invites the very attacks that nearly destroyed the project.
 
 ---
-
-## 5. Actionable Critique: Close the Execution Gap
-
-The repository has had **three review cycles** identifying the same issues. The reviews are excellent. **The follow-through is absent.**
-
-### P0 (Non-Negotiable)
-
-1. **Commit the Python source**
-   - `probes/recurrence_projection.py`
-   - `probes/ticktick_recurrence_probe.py`
-   - `tests/test_projection.py`
-   - All fixture files
-   - `requirements.txt` or `pyproject.toml`
-
-   Without this, the repository is documentation of vaporware.
-
-2. **Exercise the truncation boundary**
-   - Add `FREQ=DAILY` fixture spanning >50
