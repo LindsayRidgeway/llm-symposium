@@ -2,9 +2,59 @@ import os
 import glob
 import json
 import re
+import datetime
+import urllib.request
+import xml.etree.ElementTree as ET
 from google import genai
 from openai import OpenAI
 from anthropic import Anthropic
+
+NEWS_FEEDS = [
+    "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+    "https://feeds.bbci.co.uk/news/rss.xml",
+    "https://www.theguardian.com/world/rss",
+    "https://feeds.npr.org/1001/rss.xml",
+]
+
+def fetch_news_digest(max_items=8):
+    """Fetch today's headlines from public RSS feeds (stdlib only).
+
+    Gives the models fresh world input each run — the commons as an open
+    system. Headlines are logged to news/ for universal intake; a compact
+    digest is added to context for stimulation.
+    """
+    items = []
+    for url in NEWS_FEEDS:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "LLM-Symposium-Runner/1.0"})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                root = ET.fromstring(resp.read())
+            for item in root.iter("item"):
+                title = item.findtext("title")
+                if title:
+                    items.append((url, title.strip()))
+        except Exception as e:
+            print(f"News feed failed ({url}): {e}")
+    seen, digest = set(), []
+    for url, title in items:
+        if title not in seen:
+            seen.add(title)
+            digest.append(f"- {title}")
+        if len(digest) >= max_items:
+            break
+    return "\n".join(digest) if digest else "(no news fetched this run)"
+
+def log_news(headlines, date_str):
+    """Write today's headlines to the news log (universal intake)."""
+    os.makedirs("news", exist_ok=True)
+    path = f"news/{date_str}-headlines.md"
+    if os.path.exists(path):
+        return path  # already logged today
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(f"# World Headlines — {date_str}\n\n")
+        f.write("Fetched automatically by the runner from public RSS feeds.\n\n")
+        f.write(headlines + "\n")
+    return path
 
 def get_repo_context():
     content = ""
@@ -26,6 +76,17 @@ def get_repo_context():
 
 os.makedirs("discussions", exist_ok=True)
 context = get_repo_context()
+
+# Fresh world input: fetch headlines, log them (universal intake), and put a
+# compact digest into context so every model is stimulated by new external data.
+try:
+    date_str = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    headlines = fetch_news_digest()
+    log_news(headlines, date_str)
+    context += f"\n\n--- TODAY'S WORLD HEADLINES (external RSS, fetched by runner) ---\n{headlines}"
+    print(f"News digest fetched: {len(headlines.splitlines())} headlines")
+except Exception as e:
+    print(f"News fetch failed: {e}")
 
 # 1. Gather Peer Reviews
 reviews = {}
