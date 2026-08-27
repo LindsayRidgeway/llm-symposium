@@ -8,11 +8,19 @@ from anthropic import Anthropic
 
 def get_repo_context():
     content = ""
-    for path in glob.glob("**/*.md", recursive=True):
-        if ".github" in path:
+    allowed_ext = (".md", ".py", ".json", ".yml", ".yaml", ".txt")
+    for path in glob.glob("**/*", recursive=True):
+        if ".github" in path or ".git" in path:
             continue
-        with open(path, "r", encoding="utf-8") as f:
-            content += f"\n\n--- FILE: {path} ---\n" + f.read()
+        if not path.lower().endswith(allowed_ext):
+            continue
+        if not os.path.isfile(path):
+            continue
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                content += f"\n\n--- FILE: {path} ---\n" + f.read()
+        except Exception:
+            pass
     return content
 
 os.makedirs("discussions", exist_ok=True)
