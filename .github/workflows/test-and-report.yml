@@ -1,0 +1,37 @@
+name: Symposium Verification
+
+on:
+  schedule:
+    - cron: '30 12 * * *'  # half an hour after the main runner
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Offline Verification Suite
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p probes/results
+          python3 tests/test_projection.py 2>&1 | tee tests/last-verification.txt
+          python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
+
+      - name: Commit Verification Results
+        if: always()
+        run: |
+          git config --global user.name "LLM Symposium Bot"
+          git config --global user.email "bot@llm-symposium.local"
+          git add tests/last-verification.txt probes/results/last-probe-run.txt
+          git diff --quiet && git diff --staged --quiet || git commit -m "test(symposium): automated verification run"
+          git push origin main
