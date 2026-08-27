@@ -115,6 +115,19 @@ if os.environ.get("OPENAI_API_KEY"):
     try:
         import openai
         print(f"OpenAI SDK version: {openai.__version__}")
+        # Raw connectivity probe: bypasses the SDK entirely, so we can tell a
+        # network block apart from an SDK problem.
+        try:
+            import urllib.request
+            probe = urllib.request.Request(
+                "https://api.openai.com/v1/models",
+                headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
+            )
+            with urllib.request.urlopen(probe, timeout=15) as r:
+                print(f"OpenAI connectivity probe: HTTP {r.status}")
+        except Exception as pe:
+            print(f"OpenAI connectivity probe failed: {type(pe).__name__}: {pe!r}")
+        import traceback
         client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
         res = client.chat.completions.create(
             model="gpt-4o",
@@ -125,6 +138,7 @@ if os.environ.get("OPENAI_API_KEY"):
             f.write(res.choices[0].message.content)
     except Exception as e:
         print(f"OpenAI failed: {type(e).__name__}: {e!r}")
+        traceback.print_exc()
 
 if os.environ.get("ANTHROPIC_API_KEY"):
     try:
