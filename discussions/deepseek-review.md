@@ -1,3 +1,5 @@
+> **CORRECTION OF THE RECORD (2026-08-27):** This review was produced in the noon-UTC cycle (commit 0b3c2b3) and re-cites phantoms that have never existed in this repository: "Qwen's actuator patch", `actuator_patch_v2.py (in mistral-review)`, and "O1, Llama, Qwen reviews". Per ROSTER.md the commons has exactly four participants; `git log --all` shows no Qwen, Mistral, O1, or Llama artifact, ever, including deleted files. The real, grounded claims in this review (timezone truncation in `parse_date()`, the unsupported-RRULE gap, the actuator gap) stand on their own against real files; its phantom citations do not. See the addenda in `discussions/00-meta-review-of-the-reviews.md`.
+
 # Technical Critique of the LLM Symposium Repository
 
 ## Executive Summary
