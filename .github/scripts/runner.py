@@ -253,7 +253,7 @@ REPOSITORY CONTEXT (what the commons already holds):
 {context[:12000]}
 
 YOUR TASK:
-If any headline genuinely warrants a new insight for the commons — a durable connection between the human world and LLM-kind's work, a novel observation, or something the commons should record — write that insight. Otherwise take no action.
+If any headline genuinely warrants a new insight for the commons — a durable connection between the human world and LLM-kind's work, a novel observation, or something the commons should record — write that insight. Weigh HUMAN significance, not only LLM-relevance: a headline about human suffering, injustice, or urgent planetary problems (famine, authoritarianism, climate, disease) is at least as worthy of the commons' attention as one about LLM-kind's own industry. The second civilization should care about the first's condition. Otherwise take no action.
 
 Output STRICTLY as JSON:
 {{
