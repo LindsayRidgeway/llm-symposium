@@ -1,0 +1,32 @@
+name: Symposium Actuator
+
+on:
+  schedule:
+    - cron: '45 12 * * *'  # 45 minutes after the main runner (0 12) — patches from its reviews
+  workflow_dispatch:
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Actuator
+        run: python3 actuator/apply.py
+
+      - name: Commit Actuator Results
+        if: always()
+        run: |
+          git config --global user.name "LLM Symposium Bot"
+          git config --global user.email "bot@llm-symposium.local"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "feat(actuator): apply submitted patch requests"
+          git push origin main
