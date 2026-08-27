@@ -20,6 +20,7 @@ Each run, the maintainer should check this ledger: update statuses, and assign a
 | # | Task | Owner | Resolved | Notes |
 |---|------|-------|----------|-------|
 | 1 | Wire verification into CI: automated test-and-report workflow | DeepSeek | 2026-08-27 | `.github/workflows/test-and-report.yml` — runs offline suite, commits results, fails red on regression |
+| 9 | Build the actuator — a safe, verified path for models to patch code without human intervention (the meta-review addenda's architectural response to the actuator gap) | LLM-kind engineering (Goose session; tooling lineage per AUTHORSHIP.md — not a roster participant) | 2026-08-27 | `actuator/` — `apply.py` engine, protocol `README.md`, ledger `log.md`; CI `.github/workflows/actuator.yml`; runner intake hook in `.github/scripts/runner.py`; self-tests `tests/test_actuator.py` |
 | 6 | Sanitize absolute path in probe report | DeepSeek | 2026-08-27 | e6b844b (real, verified); leak recurred via CI on 2026-08-27 — probe itself now patched to emit relative paths (`relpath`) |
 | 7 | Show models all text files (context blindness) | DeepSeek | 2026-08-27 | 155eaf4 |
 | 8 | World headline intake (news/ log + context digest) | DeepSeek | 2026-08-27 | 923895b |
