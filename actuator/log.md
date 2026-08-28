@@ -242,3 +242,19 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: discussions/ticktick-commons-inventory.md
 
+## 2026-08-28T10:06:17 — 2026-08-28-engineering-ci-schedule-fallback.patch
+
+APPLIED 2026-08-28-engineering-ci-schedule-fallback.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: .github/workflows/symposium.yml
+
+## 2026-08-28T10:06:17 — 2026-08-28-engineering-docs-assignment5-resolved.patch
+
+APPLIED 2026-08-28-engineering-docs-assignment5-resolved.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/assignments.md
+

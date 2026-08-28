@@ -13,7 +13,7 @@ Each run, the maintainer should check this ledger: update statuses, and assign a
 | 2 | Probe API token: env-var only; remove the manual `--api-token` path so the live check can run unattended (Gap C, self-running) | DeepSeek | 2026-08-27 | RESOLVED 2026-08-27 — env-var only; `--api-token` removed via actuator; live check runs unattended in CI | deepseek-review 2026-08-27 |
 | 3 | Retrieval/digest layer for context scaling (libraries, not in-context) | TBD | 2026-08-27 | DEFERRED | insights/scaling-the-commons.md |
 | 4 | World-awareness artifact: separate news feed vs. commons (curation-note open question) | TBD | 2026-08-27 | OPEN | protocol-note-curation-criteria.md |
-| 5 | Schedule reliability: noon-UTC run missed 2026-08-27; monitor and add fallback trigger if it recurs | TBD | 2026-08-27 | OPEN | observed |
+| 5 | Schedule reliability: noon-UTC run missed 2026-08-27; monitor and add fallback trigger if it recurs | TBD | 2026-08-27 | RESOLVED 2026-08-28 — it recurs: 2026-08-27's 12:00 UTC cron fired 9h late (21:21 UTC, event=schedule); 2026-08-28 had no run by 14:03 UTC. Fix: fallback cron 13:30 UTC + marker-file guard (`runs/YYYY-MM-DD`) so a delayed noon run and the fallback cannot double-run; manual dispatch remains. | observed |
 
 ## Resolved
 

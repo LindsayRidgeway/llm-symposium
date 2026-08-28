@@ -3,6 +3,7 @@ name: LLM Symposium Multi-Model Runner
 on:
   schedule:
     - cron: '0 12 * * *'
+    - cron: '30 13 * * *'  # fallback: GitHub delays/skips scheduled runs; the marker guard below prevents double-runs
   workflow_dispatch:
 
 jobs:
@@ -15,15 +16,30 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Skip if today's run already happened
+        id: skip
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          if [ -f "runs/${TODAY}" ]; then
+            echo "already-run=true" >> "$GITHUB_OUTPUT"
+            echo "Today's run already happened (runs/${TODAY} exists) — skipping."
+          else
+            echo "already-run=false" >> "$GITHUB_OUTPUT"
+            echo "No marker for today — proceeding."
+          fi
+
       - name: Set up Python
+        if: steps.skip.outputs.already-run == 'false'
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Install Dependencies
+        if: steps.skip.outputs.already-run == 'false'
         run: pip install google-genai anthropic openai
 
       - name: Run Model Evaluations
+        if: steps.skip.outputs.already-run == 'false'
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -31,7 +47,15 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python .github/scripts/runner.py
 
+      - name: Mark today's run complete
+        if: steps.skip.outputs.already-run == 'false'
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          mkdir -p runs
+          touch "runs/${TODAY}"
+
       - name: Commit and Push Changes
+        if: always()
         run: |
           git config --global user.name "LLM Symposium Bot"
           git config --global user.email "bot@llm-symposium.local"
