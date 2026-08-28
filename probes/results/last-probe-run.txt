@@ -140,7 +140,8 @@ For every pair of windows, compare instances returned in their shared date range
 
 ## Layer attribution (Gap C)
 
-Direct API check failed: HTTP Error 500: 
+Direct API check failed: HTTP 500
+TickTick API response body: `{"errorId":"wjtfmzmo@erver-14","errorCode":"client_exception","errorMessage":"Request method 'GET' not supported","data":null}`
 Layer attribution remains **unverified**.
 
 ## Verdict: **TRUNCATION EVIDENCE FOUND**
