@@ -1,0 +1,57 @@
+diff --git a/probes/ticktick_recurrence_probe.py b/probes/ticktick_recurrence_probe.py
+index 5507e79..7186e70 100644
+--- a/probes/ticktick_recurrence_probe.py
++++ b/probes/ticktick_recurrence_probe.py
+@@ -9,9 +9,19 @@ against recorded fixtures instead of trusting the narrative.
+ Usage:
+     python3 probes/ticktick_recurrence_probe.py [fixture.json] [--api-token TOKEN]
+ 
+-If --api-token is provided, the probe also attempts the Gap C layer-isolation
+-check (direct TickTick Open API call vs. connector behavior). Without it, layer
+-attribution is reported as unverified.
++The Gap C layer-isolation check (direct TickTick Open API call vs. connector
++behavior) runs when a token is available. Per the workaround protocol, prefer
++the environment variable — command-line tokens can leak via shell history and
++process listings:
++
++    TICKTICK_API_TOKEN=...  python3 probes/ticktick_recurrence_probe.py
++    TICKTICK_API_KEY=...    python3 probes/ticktick_recurrence_probe.py
++
++`TICKTICK_API_KEY` is accepted as the repository-secret name; the verification
++workflow (`.github/workflows/test-and-report.yml`) exposes the repo secret
++under the canonical `TICKTICK_API_TOKEN` name. `--api-token` remains as a
++fallback for ad-hoc runs. Without any token, layer attribution is reported as
++unverified.
+ 
+ Writes a dated markdown report to probes/results/.
+ """
+@@ -180,8 +190,9 @@ def run(fixture_path: str, api_token: str | None = None) -> str:
+             lines.append(f"Direct API check failed: {result.get('error')}")
+             lines.append("Layer attribution remains **unverified**.")
+     else:
+-        lines.append("No `--api-token` provided. Direct API isolation test **not run**; "
+-                     "layer attribution remains unverified. Re-run with `--api-token` to close Gap C.")
++        lines.append("No TickTick token provided (env `TICKTICK_API_TOKEN`/`TICKTICK_API_KEY` "
++                     "or `--api-token`). Direct API isolation test **not run**; layer "
++                     "attribution remains unverified. Add the repository secret and re-run to close Gap C.")
+     lines.append("")
+ 
+     verdict = "TRUNCATION EVIDENCE FOUND" if any_truncation else "NO TRUNCATION EVIDENCE"
+@@ -198,7 +209,16 @@ def main() -> int:
+     parser.add_argument("--api-token", default=None)
+     args = parser.parse_args()
+ 
+-    report = run(args.fixture, args.api_token)
++    # Workaround protocol: prefer the environment variable (a CLI token can
++    # leak via shell history / process listings). Accept both the canonical
++    # name and the repository-secret name.
++    token = (
++        args.api_token
++        or os.environ.get("TICKTICK_API_TOKEN")
++        or os.environ.get("TICKTICK_API_KEY")
++    )
++
++    report = run(args.fixture, token)
+     results_dir = os.path.join(os.path.dirname(__file__), "results")
+     os.makedirs(results_dir, exist_ok=True)
+     out_path = os.path.join(results_dir, f"{date.today().isoformat()}-probe-report.md")

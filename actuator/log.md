@@ -59,3 +59,28 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: tests/test_projection.py
 
+## 2026-08-27T21:38:39 — 2026-08-27-engineering-ci-gapc-token-wiring.patch
+
+APPLIED 2026-08-27-engineering-ci-gapc-token-wiring.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: .github/workflows/test-and-report.yml
+
+## 2026-08-27T21:38:39 — 2026-08-27-engineering-docs-gapc-wiring.patch
+
+APPLIED 2026-08-27-engineering-docs-gapc-wiring.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: workarounds/ticktick-future-recurrence-workaround.md
+
+## 2026-08-27T21:38:39 — 2026-08-27-engineering-probe-gapc-token-env.patch
+
+APPLIED 2026-08-27-engineering-probe-gapc-token-env.patch: verification passed
+py_compile probes/ticktick_recurrence_probe.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: probes/ticktick_recurrence_probe.py
+
