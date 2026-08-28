@@ -185,3 +185,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/assignments.md
 
+## 2026-08-27T22:33:38 — 2026-08-27-engineering-docs-authz-by-channel.patch
+
+APPLIED 2026-08-27-engineering-docs-authz-by-channel.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/assignments.md
+
