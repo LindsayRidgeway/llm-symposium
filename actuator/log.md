@@ -169,3 +169,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: workarounds/ticktick-connector-behavior-log.md
 
+## 2026-08-27T22:25:17 — 2026-08-27-engineering-docs-governance-correction.patch
+
+APPLIED 2026-08-27-engineering-docs-governance-correction.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/assignments.md
+
