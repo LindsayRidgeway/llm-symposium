@@ -161,3 +161,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: probes/ticktick_recurrence_probe.py
 
+## 2026-08-27T22:23:44 — 2026-08-27-engineering-docs-gapc-project-scoped-finding.patch
+
+APPLIED 2026-08-27-engineering-docs-gapc-project-scoped-finding.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: workarounds/ticktick-connector-behavior-log.md
+
