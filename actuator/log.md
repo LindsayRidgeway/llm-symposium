@@ -177,3 +177,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/assignments.md
 
+## 2026-08-27T22:28:31 — 2026-08-27-engineering-docs-assignment2-amendment.patch
+
+APPLIED 2026-08-27-engineering-docs-assignment2-amendment.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/assignments.md
+
