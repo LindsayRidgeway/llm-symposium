@@ -258,3 +258,18 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/assignments.md
 
+## 2026-08-28T10:13:24 — 2026-08-28-engineering-docs-gemini-confabulation-banner.patch
+
+APPLIED 2026-08-28-engineering-docs-gemini-confabulation-banner.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: discussions/gemini-review.md
+
+## 2026-08-28T10:13:24 — 2026-08-28-gemini-c03fd1d2bc.patch
+
+REJECTED 2026-08-28-gemini-c03fd1d2bc.patch: git apply --check failed
+error: corrupt patch at line 69
+
+touched: probes/recurrence_projection.py, tests/test_projection.py, probes/ticktick_recurrence_probe.py
+
