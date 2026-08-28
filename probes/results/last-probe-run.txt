@@ -140,9 +140,13 @@ For every pair of windows, compare instances returned in their shared date range
 
 ## Layer attribution (Gap C)
 
-Direct API check failed: HTTP 500
-TickTick API response body: `{"errorId":"gcjdq3jy@erver-14","errorCode":"app_runtime","errorMessage":"task title is empty","data":null}`
-Layer attribution remains **unverified**.
+Direct TickTick Open API checks (Bearer token from env / repo secret):
+
+- `projects`: **HTTP 200 OK** — returned ? item(s).
+- `tasks`: **HTTP 200 OK** — returned 0 item(s).
+
+Token validity: **confirmed** (projects endpoint authorized). Layer attribution now hinges on the task-list endpoint shape; record the comparison in `workarounds/ticktick-connector-behavior-log.md`.
+
 
 ## Verdict: **TRUNCATION EVIDENCE FOUND**
 
