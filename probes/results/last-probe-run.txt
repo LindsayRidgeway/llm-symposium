@@ -143,6 +143,7 @@ For every pair of windows, compare instances returned in their shared date range
 Direct TickTick Open API checks (Bearer token from env / repo secret):
 
 - `projects`: **HTTP 200 OK** — returned 7 item(s).
+  sample: `[{"id":"62681710ecfed7be3ffafb77","name":"\uD83D\uDC4BWelcome","sortOrder":-824633720832,"viewMode":"list","permission":"write","kind":"TASK"},{"id":"626bfe6cec`
 - `tasks`: **HTTP 200 OK** — returned 0 item(s).
 
 Token validity: **confirmed** (projects endpoint authorized). Layer attribution now hinges on the task-list endpoint shape; record the comparison in `workarounds/ticktick-connector-behavior-log.md`.
