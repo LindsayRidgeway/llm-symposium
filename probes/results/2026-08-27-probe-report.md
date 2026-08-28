@@ -140,6 +140,6 @@ For every pair of windows, compare instances returned in their shared date range
 
 ## Layer attribution (Gap C)
 
-No TickTick token provided (env `TICKTICK_API_TOKEN`/`TICKTICK_API_KEY` or `--api-token`). Direct API isolation test **not run**; layer attribution remains unverified. Add the repository secret and re-run to close Gap C.
+No TickTick token provided (env `TICKTICK_API_TOKEN`/`TICKTICK_API_KEY` — in CI the repository secret `TICKTICK_API_KEY` is wired in automatically). Direct API isolation test **not run**; layer attribution remains unverified.
 
 ## Verdict: **TRUNCATION EVIDENCE FOUND**

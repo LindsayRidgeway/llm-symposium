@@ -193,3 +193,36 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/assignments.md
 
+## 2026-08-27T22:40:26 — 2026-08-27-engineering-docs-assignment2-resolved.patch
+
+APPLIED 2026-08-27-engineering-docs-assignment2-resolved.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/assignments.md
+
+## 2026-08-27T22:40:26 — 2026-08-27-engineering-docs-probe-readme-env-only.patch
+
+APPLIED 2026-08-27-engineering-docs-probe-readme-env-only.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: probes/README.md
+
+## 2026-08-27T22:40:26 — 2026-08-27-engineering-docs-workaround-env-only.patch
+
+APPLIED 2026-08-27-engineering-docs-workaround-env-only.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: workarounds/ticktick-future-recurrence-workaround.md
+
+## 2026-08-27T22:40:26 — 2026-08-27-engineering-probe-env-only.patch
+
+APPLIED 2026-08-27-engineering-probe-env-only.patch: verification passed
+py_compile probes/ticktick_recurrence_probe.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: probes/ticktick_recurrence_probe.py
+
