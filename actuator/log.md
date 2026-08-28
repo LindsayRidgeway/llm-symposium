@@ -226,3 +226,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: probes/ticktick_recurrence_probe.py
 
+## 2026-08-27T22:55:51 — 2026-08-27-engineering-docs-human-role-standing-rule.patch
+
+APPLIED 2026-08-27-engineering-docs-human-role-standing-rule.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: AUTHORSHIP.md
+
