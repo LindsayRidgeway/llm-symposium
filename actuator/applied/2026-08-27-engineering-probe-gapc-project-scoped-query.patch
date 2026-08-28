@@ -1,0 +1,39 @@
+diff --git a/probes/ticktick_recurrence_probe.py b/probes/ticktick_recurrence_probe.py
+index 48aafaf..004a2e1 100644
+--- a/probes/ticktick_recurrence_probe.py
++++ b/probes/ticktick_recurrence_probe.py
+@@ -99,8 +99,24 @@ def check_live_api(token: str) -> dict:
+             return {"ok": False, "status": None, "body": str(e)}
+ 
+     results["projects"] = _call("projects", "https://api.ticktick.com/open/v1/project")
++
++    # An empty-body task query returns HTTP 200 with an empty list, so scope
++    # the query to a real project: take the first project id from the projects
++    # response (the account has 7 projects). Short body samples are kept for
++    # the report so the next iteration can read what the API actually returns.
++    project_id = None
++    try:
++        parsed = json.loads(results.get("projects", {}).get("body") or "[]")
++        if isinstance(parsed, list) and parsed and isinstance(parsed[0], dict):
++            project_id = parsed[0].get("id")
++    except Exception:  # noqa: BLE001
++        project_id = None
++    payload = json.dumps({"projectId": project_id}).encode() if project_id else b"{}"
++
+     results["tasks"] = _call(
+-        "tasks", "https://api.ticktick.com/open/v1/task/query", method="POST", data=b"{}")
++        "tasks", "https://api.ticktick.com/open/v1/task/query", method="POST", data=payload)
++    results["projects"]["sample"] = (results["projects"].get("body") or "")[:160]
++    results["tasks"]["sample"] = (results["tasks"].get("body") or "")[:160]
+     return results
+ 
+ 
+@@ -224,6 +240,8 @@ def run(fixture_path: str, api_token: str | None = None) -> str:
+                 except Exception:  # noqa: BLE001
+                     n = "?"
+                 lines.append(f"- `{name}`: **HTTP {status} OK** — returned {n} item(s).")
++                if r.get("sample"):
++                    lines.append(f"  sample: `{r['sample']}`")
+             else:
+                 snippet = (r.get("body") or "(no response body)")[:200]
+                 lines.append(f"- `{name}`: **HTTP {status}** — `{snippet}`")

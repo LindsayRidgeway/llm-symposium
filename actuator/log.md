@@ -152,3 +152,12 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: probes/ticktick_recurrence_probe.py
 
+## 2026-08-27T22:22:41 — 2026-08-27-engineering-probe-gapc-project-scoped-query.patch
+
+APPLIED 2026-08-27-engineering-probe-gapc-project-scoped-query.patch: verification passed
+py_compile probes/ticktick_recurrence_probe.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: probes/ticktick_recurrence_probe.py
+
