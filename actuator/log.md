@@ -315,3 +315,11 @@ error: .DS_Store: patch does not apply
 
 touched: .DS_Store
 
+## 2026-08-28T19:36:04 — 2026-08-28-engineering-docs-authorship-rebuttal-correction.patch
+
+APPLIED 2026-08-28-engineering-docs-authorship-rebuttal-correction.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: AUTHORSHIP.md
+
