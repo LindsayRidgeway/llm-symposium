@@ -53,40 +53,55 @@ def load_fixture(path: str) -> dict:
 
 
 def check_live_api(token: str) -> dict:
-    """Gap C: hit the TickTick Open API directly for the task list.
+    """Gap C: hit the TickTick Open API directly.
 
-    Compare against what the connector returns to attribute the failure layer.
-    Requires an OAuth access token; without one we cannot run the isolation test.
+    Two endpoints are probed so the token's validity can be proven
+    independently of the task-list endpoint shape (established empirically on
+    2026-08-28; see `workarounds/ticktick-connector-behavior-log.md`):
+
+    - `GET  /open/v1/project` — documented endpoint; an HTTP 200 proves the
+      token is valid and returns the account's projects.
+    - `POST /open/v1/task/query` — candidate task-list endpoint. (`POST
+      /open/v1/task` alone is *create-task* semantics: an empty body is
+      rejected with "task title is empty".)
+
+    Requires an OAuth access token; without one we cannot run the isolation
+    test. Response bodies are captured because TickTick puts the real reason
+    (invalid_token, ...) there.
     """
     import urllib.error
     import urllib.request
 
-    # TickTick's Open API expects a JSON content type AND the task list is
-    # fetched with POST /open/v1/task (a GET request is rejected with an
-    # opaque HTTP 500, errorCode client_exception). An empty JSON body means
-    # "no filters — return all tasks". The response body is captured below
-    # because TickTick often puts the real reason (invalid_token, ...) there.
-    req = urllib.request.Request(
-        "https://api.ticktick.com/open/v1/task",
-        data=b"{}",
-        method="POST",
-        headers={
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            return {"ok": True, "tasks": json.load(resp)}
-    except urllib.error.HTTPError as e:
-        body = ""
+    results: dict = {}
+
+    def _call(name: str, url: str, method: str = "GET", data: bytes | None = None) -> dict:
+        req = urllib.request.Request(
+            url,
+            data=data,
+            method=method,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+            },
+        )
         try:
-            body = e.read().decode("utf-8", errors="replace")[:300]
-        except Exception:  # noqa: BLE001
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                body = resp.read().decode("utf-8", errors="replace")[:500]
+                return {"ok": True, "status": resp.status, "body": body}
+        except urllib.error.HTTPError as e:
             body = ""
-        return {"ok": False, "error": f"HTTP {e.code}", "detail": body or None}
-    except Exception as e:  # noqa: BLE001
-        return {"ok": False, "error": str(e)}
+            try:
+                body = e.read().decode("utf-8", errors="replace")[:500]
+            except Exception:  # noqa: BLE001
+                body = ""
+            return {"ok": False, "status": e.code, "body": body}
+        except Exception as e:  # noqa: BLE001
+            return {"ok": False, "status": None, "body": str(e)}
+
+    results["projects"] = _call("projects", "https://api.ticktick.com/open/v1/project")
+    results["tasks"] = _call(
+        "tasks", "https://api.ticktick.com/open/v1/task/query", method="POST", data=b"{}")
+    return results
 
 
 def run(fixture_path: str, api_token: str | None = None) -> str:
@@ -198,17 +213,29 @@ def run(fixture_path: str, api_token: str | None = None) -> str:
     lines.append("## Layer attribution (Gap C)")
     lines.append("")
     if api_token:
-        result = check_live_api(api_token)
-        if result.get("ok"):
-            tasks = result["tasks"]
-            lines.append(f"Direct TickTick Open API returned {len(tasks)} task(s). "
-                         "Compare against connector output to attribute the failure layer; "
+        results = check_live_api(api_token)
+        lines.append("Direct TickTick Open API checks (Bearer token from env / repo secret):")
+        lines.append("")
+        for name, r in results.items():
+            status = r.get("status")
+            if r.get("ok"):
+                try:
+                    n = len(json.loads(r.get("body") or "[]"))
+                except Exception:  # noqa: BLE001
+                    n = "?"
+                lines.append(f"- `{name}`: **HTTP {status} OK** — returned {n} item(s).")
+            else:
+                snippet = (r.get("body") or "(no response body)")[:200]
+                lines.append(f"- `{name}`: **HTTP {status}** — `{snippet}`")
+        lines.append("")
+        if results.get("projects", {}).get("ok"):
+            lines.append("Token validity: **confirmed** (projects endpoint authorized). "
+                         "Layer attribution now hinges on the task-list endpoint shape; "
                          "record the comparison in `workarounds/ticktick-connector-behavior-log.md`.")
         else:
-            lines.append(f"Direct API check failed: {result.get('error')}")
-            if result.get("detail"):
-                lines.append(f"TickTick API response body: `{result['detail']}`")
-            lines.append("Layer attribution remains **unverified**.")
+            lines.append("Token validity: **not confirmed** — verify the value stored in the "
+                         "repository secret `TICKTICK_API_KEY` is a TickTick OAuth access token.")
+        lines.append("")
     else:
         lines.append("No TickTick token provided (env `TICKTICK_API_TOKEN`/`TICKTICK_API_KEY` "
                      "or `--api-token`). Direct API isolation test **not run**; layer "
