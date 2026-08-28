@@ -282,3 +282,12 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: .github/scripts/runner.py
 
+## 2026-08-28T17:43:26 — 2026-08-28-engineering-runner-political-feeds.patch
+
+APPLIED 2026-08-28-engineering-runner-political-feeds.patch: verification passed
+py_compile .github/scripts/runner.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: .github/scripts/runner.py
+
