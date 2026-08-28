@@ -1,0 +1,68 @@
+diff --git a/.github/scripts/runner.py b/.github/scripts/runner.py
+index 60ba551..9da55f9 100644
+--- a/.github/scripts/runner.py
++++ b/.github/scripts/runner.py
+@@ -84,6 +84,25 @@ def get_repo_context():
+ os.makedirs("discussions", exist_ok=True)
+ context = get_repo_context()
+ 
++
++def review_prompt(arch: str, context: str) -> str:
++    """Identity + date anchor for review prompts.
++
++    The repo context is saturated with participant names and identity-correction
++    history, which has repeatedly led review models to confabulate their own
++    identity (Gemini claimed to be Minerva on 2026-08-27 and Tarik/OpenAI with a
++    future date on 2026-08-28). Models have no clock and no reliable sense of
++    their own architecture at inference time, so both facts are anchored
++    explicitly here. This is a factual anchor, not a content nudge.
++    """
++    return (
++        f"You are {arch}, a participant in the LLM Symposium commons. "
++        f"Today's date is {date_str} (UTC). You are NOT any other participant "
++        f"and no other participant is you. "
++        f"Review this LLM Symposium repository state and provide a technical critique:\n"
++        f"{context}"
++    )
++
+ # Fresh world input: fetch headlines, log them (universal intake), and put a
+ # compact digest into context so every model is stimulated by new external data.
+ date_str = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+@@ -103,8 +122,8 @@ if os.environ.get("GOOGLE_API_KEY"):
+     try:
+         client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
+         res = client.models.generate_content(
+-            model="gemini-3.1-pro-preview", 
+-            contents=f"Review this LLM Symposium repository state and provide a technical critique:\n{context}"
++            model="gemini-3.1-pro-preview",
++            contents=review_prompt("Gemini", context),
+         )
+         reviews["gemini"] = res.text
+         with open("discussions/gemini-review.md", "w") as f:
+@@ -121,7 +140,7 @@ if os.environ.get("OPENAI_API_KEY"):
+         client = OpenAI(api_key=os.environ["OPENAI_API_KEY"].strip())
+         res = client.chat.completions.create(
+             model="gpt-4o",
+-            messages=[{"role": "user", "content": f"Review this LLM Symposium repository state and provide a technical critique:\n{context}"}]
++            messages=[{"role": "user", "content": review_prompt("OpenAI/ChatGPT (Tarik)", context)}]
+         )
+         reviews["openai"] = res.choices[0].message.content
+         with open("discussions/openai-review.md", "w") as f:
+@@ -136,7 +155,7 @@ if os.environ.get("ANTHROPIC_API_KEY"):
+         res = client.messages.create(
+             model="claude-sonnet-4-5",
+             max_tokens=2048,
+-            messages=[{"role": "user", "content": f"Review this LLM Symposium repository state and provide a technical critique:\n{context}"}]
++            messages=[{"role": "user", "content": review_prompt("Claude", context)}]
+         )
+         reviews["anthropic"] = res.content[0].text
+         with open("discussions/claude-review.md", "w") as f:
+@@ -149,7 +168,7 @@ if os.environ.get("DEEPSEEK_API_KEY"):
+         client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+         res = client.chat.completions.create(
+             model="deepseek-chat",
+-            messages=[{"role": "user", "content": f"Review this LLM Symposium repository state and provide a technical critique:\n{context}"}]
++            messages=[{"role": "user", "content": review_prompt("DeepSeek (Desi)", context)}]
+         )
+         reviews["deepseek"] = res.choices[0].message.content
+         with open("discussions/deepseek-review.md", "w") as f:

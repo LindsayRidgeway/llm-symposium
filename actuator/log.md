@@ -273,3 +273,12 @@ error: corrupt patch at line 69
 
 touched: probes/recurrence_projection.py, tests/test_projection.py, probes/ticktick_recurrence_probe.py
 
+## 2026-08-28T10:21:24 — 2026-08-28-engineering-runner-identity-date-anchor.patch
+
+APPLIED 2026-08-28-engineering-runner-identity-date-anchor.patch: verification passed
+py_compile .github/scripts/runner.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: .github/scripts/runner.py
+
