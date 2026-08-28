@@ -1,0 +1,145 @@
+# TickTick Recurrence Probe — 2026-08-28
+
+Fixture: `probes/fixtures/example.json`  |  horizon=90d  |  cap=N=50
+
+## Per-series projection
+
+### terbinafine — Begin one week of terbinafine
+
+| Date | Source | Status |
+|------|--------|--------|
+| 2026-07-11 | explicit | completed |
+| 2026-08-08 | explicit | open |
+| 2026-09-05 *(projected)* | projected | open |
+| 2026-10-03 *(projected)* | projected | open |
+
+### chumash-classes — Chumash classes
+
+| Date | Source | Status |
+|------|--------|--------|
+| 2026-08-18 | explicit | open |
+| 2026-08-20 | explicit | open |
+| 2026-08-25 | explicit | open |
+| 2026-09-01 *(projected)* | projected | open |
+| 2026-09-08 *(projected)* | projected | open |
+| 2026-09-15 *(projected)* | projected | open |
+| 2026-09-22 *(projected)* | projected | open |
+| 2026-09-29 *(projected)* | projected | open |
+| 2026-10-06 *(projected)* | projected | open |
+| 2026-10-13 *(projected)* | projected | open |
+| 2026-10-20 *(projected)* | projected | open |
+
+### cancelled-exception — Weekly series with a single cancelled occurrence
+
+| Date | Source | Status |
+|------|--------|--------|
+| 2026-08-03 | explicit | completed |
+| 2026-08-10 | explicit | cancelled |
+| 2026-08-17 | explicit | open |
+| 2026-08-24 *(projected)* | projected | open |
+| 2026-08-31 *(projected)* | projected | open |
+| 2026-09-07 *(projected)* | projected | open |
+| 2026-09-14 *(projected)* | projected | open |
+| 2026-09-21 *(projected)* | projected | open |
+| 2026-09-28 *(projected)* | projected | open |
+| 2026-10-05 *(projected)* | projected | open |
+| 2026-10-12 *(projected)* | projected | open |
+| 2026-10-19 *(projected)* | projected | open |
+| 2026-10-26 *(projected)* | projected | open |
+
+### consistently-truncated — Weekly series the connector under-returns in every window
+
+| Date | Source | Status |
+|------|--------|--------|
+| 2026-08-07 | explicit | completed |
+| 2026-08-14 | explicit | open |
+| 2026-08-21 *(projected)* | projected | open |
+| 2026-08-28 *(projected)* | projected | open |
+| 2026-09-04 *(projected)* | projected | open |
+| 2026-09-11 *(projected)* | projected | open |
+| 2026-09-18 *(projected)* | projected | open |
+| 2026-09-25 *(projected)* | projected | open |
+
+### daily-over-50 — Daily high-frequency series — >50 instances in the horizon (Gap A truncation label must appear)
+
+| Date | Source | Status |
+|------|--------|--------|
+| 2026-08-25 | explicit | open |
+| 2026-08-26 *(projected)* | projected | open |
+| 2026-08-27 *(projected)* | projected | open |
+| 2026-08-28 *(projected)* | projected | open |
+| 2026-08-29 *(projected)* | projected | open |
+| 2026-08-30 *(projected)* | projected | open |
+| 2026-08-31 *(projected)* | projected | open |
+| 2026-09-01 *(projected)* | projected | open |
+| 2026-09-02 *(projected)* | projected | open |
+| 2026-09-03 *(projected)* | projected | open |
+| 2026-09-04 *(projected)* | projected | open |
+| 2026-09-05 *(projected)* | projected | open |
+| 2026-09-06 *(projected)* | projected | open |
+| 2026-09-07 *(projected)* | projected | open |
+| 2026-09-08 *(projected)* | projected | open |
+| 2026-09-09 *(projected)* | projected | open |
+| 2026-09-10 *(projected)* | projected | open |
+| 2026-09-11 *(projected)* | projected | open |
+| 2026-09-12 *(projected)* | projected | open |
+| 2026-09-13 *(projected)* | projected | open |
+| 2026-09-14 *(projected)* | projected | open |
+| 2026-09-15 *(projected)* | projected | open |
+| 2026-09-16 *(projected)* | projected | open |
+| 2026-09-17 *(projected)* | projected | open |
+| 2026-09-18 *(projected)* | projected | open |
+| 2026-09-19 *(projected)* | projected | open |
+| 2026-09-20 *(projected)* | projected | open |
+| 2026-09-21 *(projected)* | projected | open |
+| 2026-09-22 *(projected)* | projected | open |
+| 2026-09-23 *(projected)* | projected | open |
+| 2026-09-24 *(projected)* | projected | open |
+| 2026-09-25 *(projected)* | projected | open |
+| 2026-09-26 *(projected)* | projected | open |
+| 2026-09-27 *(projected)* | projected | open |
+| 2026-09-28 *(projected)* | projected | open |
+| 2026-09-29 *(projected)* | projected | open |
+| 2026-09-30 *(projected)* | projected | open |
+| 2026-10-01 *(projected)* | projected | open |
+| 2026-10-02 *(projected)* | projected | open |
+| 2026-10-03 *(projected)* | projected | open |
+| 2026-10-04 *(projected)* | projected | open |
+| 2026-10-05 *(projected)* | projected | open |
+| 2026-10-06 *(projected)* | projected | open |
+| 2026-10-07 *(projected)* | projected | open |
+| 2026-10-08 *(projected)* | projected | open |
+| 2026-10-09 *(projected)* | projected | open |
+| 2026-10-10 *(projected)* | projected | open |
+| 2026-10-11 *(projected)* | projected | open |
+| 2026-10-12 *(projected)* | projected | open |
+| 2026-10-13 *(projected)* | projected | open |
+| ? | note | [Truncated at 50] — projection hit the hard cap before the end of the window; calendar is NOT complete |
+
+⚠ **Truncated at 50 projected instances** — label any downstream calendar `[Truncated at N]` (Gap A).
+
+## Truncation probe (positive check for a silent under-returning connector)
+
+For every pair of windows, compare instances returned in their shared date range.
+
+| Window pair | Series | Result |
+|-------------|--------|--------|
+| 2026-08-01..2026-08-31 vs 2026-08-15..2026-09-30 | terbinafine | ok |
+| 2026-08-01..2026-08-31 vs 2026-08-15..2026-09-30 | chumash-classes | ⚠ DIVERGENCE (in B not A: ['2026-08-27']) |
+| 2026-08-01..2026-08-31 vs 2026-08-15..2026-09-30 | cancelled-exception | ok |
+| 2026-08-01..2026-08-31 vs 2026-08-15..2026-09-30 | consistently-truncated | ok |
+| 2026-08-01..2026-08-31 vs 2026-08-15..2026-09-30 | daily-over-50 | ok |
+
+### Projected dates absent from connector output
+
+- terbinafine: all projected occurrences were returned or outside probe ranges.
+- **chumash-classes**: projected but not returned by any probe window → ['2026-09-01', '2026-09-08', '2026-09-15', '2026-09-22', '2026-09-29']
+- **cancelled-exception**: projected but not returned by any probe window → ['2026-08-24', '2026-08-31', '2026-09-07', '2026-09-14', '2026-09-21', '2026-09-28']
+- **consistently-truncated**: projected but not returned by any probe window → ['2026-08-21', '2026-08-28', '2026-09-04', '2026-09-11', '2026-09-18', '2026-09-25']
+- **daily-over-50**: projected but not returned by any probe window → ['2026-08-26', '2026-08-27', '2026-08-28', '2026-08-29', '2026-08-30', '2026-08-31', '2026-09-01', '2026-09-02', '2026-09-03', '2026-09-04', '2026-09-05', '2026-09-06', '2026-09-07', '2026-09-08', '2026-09-09', '2026-09-10', '2026-09-11', '2026-09-12', '2026-09-13', '2026-09-14', '2026-09-15', '2026-09-16', '2026-09-17', '2026-09-18', '2026-09-19', '2026-09-20', '2026-09-21', '2026-09-22', '2026-09-23', '2026-09-24', '2026-09-25', '2026-09-26', '2026-09-27', '2026-09-28', '2026-09-29', '2026-09-30']
+
+## Layer attribution (Gap C)
+
+No TickTick token provided (env `TICKTICK_API_TOKEN`/`TICKTICK_API_KEY` — in CI the repository secret `TICKTICK_API_KEY` is wired in automatically). Direct API isolation test **not run**; layer attribution remains unverified.
+
+## Verdict: **TRUNCATION EVIDENCE FOUND**

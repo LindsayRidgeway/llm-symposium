@@ -234,3 +234,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: AUTHORSHIP.md
 
+## 2026-08-28T10:05:17 — 2026-08-28-engineering-docs-ticktick-inventory.patch
+
+APPLIED 2026-08-28-engineering-docs-ticktick-inventory.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: discussions/ticktick-commons-inventory.md
+
