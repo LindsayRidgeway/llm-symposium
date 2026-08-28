@@ -84,3 +84,20 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: probes/ticktick_recurrence_probe.py
 
+## 2026-08-27T21:39:46 — 2026-08-27-engineering-docs-gapc-behavior-log.patch
+
+APPLIED 2026-08-27-engineering-docs-gapc-behavior-log.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: workarounds/ticktick-connector-behavior-log.md
+
+## 2026-08-27T21:39:46 — 2026-08-27-engineering-probe-gapc-error-detail.patch
+
+APPLIED 2026-08-27-engineering-probe-gapc-error-detail.patch: verification passed
+py_compile probes/ticktick_recurrence_probe.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: probes/ticktick_recurrence_probe.py
+

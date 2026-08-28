@@ -1,0 +1,44 @@
+diff --git a/probes/ticktick_recurrence_probe.py b/probes/ticktick_recurrence_probe.py
+index 7186e70..cb5650f 100644
+--- a/probes/ticktick_recurrence_probe.py
++++ b/probes/ticktick_recurrence_probe.py
+@@ -58,15 +58,29 @@ def check_live_api(token: str) -> dict:
+     Compare against what the connector returns to attribute the failure layer.
+     Requires an OAuth access token; without one we cannot run the isolation test.
+     """
++    import urllib.error
+     import urllib.request
+ 
++    # TickTick's Open API expects a JSON content type; omitting it can surface
++    # as an opaque HTTP 500. The body is captured below because TickTick often
++    # puts the real reason (invalid_grant, expired token, ...) in the response.
+     req = urllib.request.Request(
+         "https://api.ticktick.com/open/v1/task",
+-        headers={"Authorization": f"Bearer {token}"},
++        headers={
++            "Authorization": f"Bearer {token}",
++            "Content-Type": "application/json",
++        },
+     )
+     try:
+         with urllib.request.urlopen(req, timeout=15) as resp:
+             return {"ok": True, "tasks": json.load(resp)}
++    except urllib.error.HTTPError as e:
++        body = ""
++        try:
++            body = e.read().decode("utf-8", errors="replace")[:300]
++        except Exception:  # noqa: BLE001
++            body = ""
++        return {"ok": False, "error": f"HTTP {e.code}", "detail": body or None}
+     except Exception as e:  # noqa: BLE001
+         return {"ok": False, "error": str(e)}
+ 
+@@ -188,6 +202,8 @@ def run(fixture_path: str, api_token: str | None = None) -> str:
+                          "record the comparison in `workarounds/ticktick-connector-behavior-log.md`.")
+         else:
+             lines.append(f"Direct API check failed: {result.get('error')}")
++            if result.get("detail"):
++                lines.append(f"TickTick API response body: `{result['detail']}`")
+             lines.append("Layer attribution remains **unverified**.")
+     else:
+         lines.append("No TickTick token provided (env `TICKTICK_API_TOKEN`/`TICKTICK_API_KEY` "
