@@ -56,3 +56,13 @@ expand_rrule/project_task: N=50 truncation cap (Gap A label)
   ok: truncated result not presented as complete
 
 ALL TESTS PASSED
+test_already_applied_noop (__main__.ActuatorTest) ... ok
+test_failing_patch_rejected_and_reversed (__main__.ActuatorTest) ... ok
+test_malformed_patch_rejected (__main__.ActuatorTest) ... ok
+test_self_modification_rejected (__main__.ActuatorTest) ... ok
+test_valid_patch_applied_and_logged (__main__.ActuatorTest) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.461s
+
+OK

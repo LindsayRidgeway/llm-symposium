@@ -1,4 +1,4 @@
-# TickTick Recurrence Probe — 2026-08-27
+# TickTick Recurrence Probe — 2026-08-28
 
 Fixture: `probes/fixtures/example.json`  |  horizon=90d  |  cap=N=50
 
@@ -140,9 +140,10 @@ For every pair of windows, compare instances returned in their shared date range
 
 ## Layer attribution (Gap C)
 
-No TickTick token provided (env `TICKTICK_API_TOKEN`/`TICKTICK_API_KEY` or `--api-token`). Direct API isolation test **not run**; layer attribution remains unverified. Add the repository secret and re-run to close Gap C.
+Direct API check failed: HTTP Error 500: 
+Layer attribution remains **unverified**.
 
 ## Verdict: **TRUNCATION EVIDENCE FOUND**
 
 
-[report written to /Users/lindsayridgeway/llm-symposium/probes/results/2026-08-27-probe-report.md]
+[report written to /home/runner/work/llm-symposium/llm-symposium/probes/results/2026-08-28-probe-report.md]
