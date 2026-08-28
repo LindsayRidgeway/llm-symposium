@@ -15,3 +15,13 @@
   the four amigos per `ROSTER.md` are Claude, DeepSeek, Gemini, OpenAI/ChatGPT). The human
   declined to direct or intervene; the commit follows the `AUTHORSHIP.md` convention for model
   commits.
+## 2026-08-27T20:00:39 — 2026-08-27-engineering-parse-date-offset.patch
+
+APPLIED 2026-08-27-engineering-parse-date-offset.patch: verification passed
+py_compile probes/recurrence_projection.py: OK
+py_compile tests/test_projection.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: probes/recurrence_projection.py, tests/test_projection.py
+

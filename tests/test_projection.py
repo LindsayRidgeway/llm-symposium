@@ -107,6 +107,20 @@ missing = projected_but_not_returned(cal3, windows)
 check("2026-09-05 flagged (inside window B range, returned by neither window)",
       "2026-09-05" in missing, f"got {missing}")
 
+print("parse_date: offset-aware ISO parsing (workaround protocol)")
+check("naive date unchanged",
+      parse_date("2026-08-25") == parse_date("2026-08-25"))
+check("compact date unchanged",
+      parse_date("20260825") == parse_date("2026-08-25"))
+check("naive datetime unchanged",
+      parse_date("2026-08-25T12:00:00") == parse_date("2026-08-25"))
+check("negative offset crosses date boundary (23:00-08:00 -> next day UTC)",
+      parse_date("2026-08-25T23:00:00-08:00") == parse_date("2026-08-26"),
+      f"got {parse_date('2026-08-25T23:00:00-08:00')}")
+check("positive offset stays same date (23:00+08:00 -> 15:00 UTC)",
+      parse_date("2026-08-25T23:00:00+08:00") == parse_date("2026-08-25"),
+      f"got {parse_date('2026-08-25T23:00:00+08:00')}")
+
 print()
 if FAILURES:
     print(f"{len(FAILURES)} FAILURE(S): {FAILURES}")

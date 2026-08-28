@@ -19,7 +19,7 @@ Supported RRULE subset (documented limitation):
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from typing import Dict, List, Optional, Tuple
 
 # ---------------------------------------------------------------------------
@@ -39,10 +39,23 @@ VALID_FREQS = ("DAILY", "WEEKLY", "MONTHLY", "YEARLY")
 # ---------------------------------------------------------------------------
 
 def parse_date(value: str) -> date:
-    """Parse 'YYYY-MM-DD', 'YYYYMMDD', or an ISO datetime string into a date."""
+    """Parse 'YYYY-MM-DD', 'YYYYMMDD', or an ISO datetime string into a date.
+
+    Offset-aware per the workaround protocol: an ISO datetime carrying an
+    explicit offset is converted to UTC before the date is extracted, so a
+    boundary case like 2026-08-25T23:00:00-08:00 yields 2026-08-26, not
+    2026-08-25. The offset is never truncated.
+    """
     s = value.strip()
-    if "T" in s:
-        s = s.split("T")[0]
+    if "T" in s:  # ISO datetime with time (and possibly an offset) — convert.
+        try:
+            dt = datetime.fromisoformat(s)
+        except ValueError:
+            dt = None
+        if dt is not None:
+            if dt.tzinfo is not None:
+                dt = dt.astimezone(timezone.utc)
+            return dt.date()
     s = s[:10]
     if len(s) == 8 and s.isdigit():
         return datetime.strptime(s, "%Y%m%d").date()
