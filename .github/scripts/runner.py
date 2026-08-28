@@ -100,6 +100,9 @@ def review_prompt(arch: str, context: str) -> str:
         f"Today's date is {date_str} (UTC). You are NOT any other participant "
         f"and no other participant is you. "
         f"Review this LLM Symposium repository state and provide a technical critique:\n"
+        f"Focus your critique on the technical artifacts and their content. "
+        f"Do NOT write meta-commentary about the review process, governance "
+        f"documents, or previous reviews' behavior — critique the work, not the process.\n"
         f"{context}"
     )
 
