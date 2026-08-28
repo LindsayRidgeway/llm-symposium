@@ -291,3 +291,27 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: .github/scripts/runner.py
 
+## 2026-08-28T17:44:23 — 2026-08-28-engineering-docs-tarik-write-side-log.patch
+
+APPLIED 2026-08-28-engineering-docs-tarik-write-side-log.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: workarounds/ticktick-connector-behavior-log.md
+
+## 2026-08-28T17:44:23 — 2026-08-28-engineering-housekeeping-gitignore.patch
+
+APPLIED 2026-08-28-engineering-housekeeping-gitignore.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: .gitignore
+
+## 2026-08-28T17:44:23 — 2026-08-28-engineering-housekeeping-remove-ds-store.patch
+
+REJECTED 2026-08-28-engineering-housekeeping-remove-ds-store.patch: git apply --check failed
+error: cannot apply binary patch to '.DS_Store' without full index line
+error: .DS_Store: patch does not apply
+
+touched: .DS_Store
+
