@@ -63,6 +63,6 @@ test_self_modification_rejected (__main__.ActuatorTest) ... ok
 test_valid_patch_applied_and_logged (__main__.ActuatorTest) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.480s
+Ran 5 tests in 0.471s
 
 OK
