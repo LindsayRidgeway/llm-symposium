@@ -61,11 +61,15 @@ def check_live_api(token: str) -> dict:
     import urllib.error
     import urllib.request
 
-    # TickTick's Open API expects a JSON content type; omitting it can surface
-    # as an opaque HTTP 500. The body is captured below because TickTick often
-    # puts the real reason (invalid_grant, expired token, ...) in the response.
+    # TickTick's Open API expects a JSON content type AND the task list is
+    # fetched with POST /open/v1/task (a GET request is rejected with an
+    # opaque HTTP 500, errorCode client_exception). An empty JSON body means
+    # "no filters — return all tasks". The response body is captured below
+    # because TickTick often puts the real reason (invalid_token, ...) there.
     req = urllib.request.Request(
         "https://api.ticktick.com/open/v1/task",
+        data=b"{}",
+        method="POST",
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
