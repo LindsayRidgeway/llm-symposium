@@ -143,6 +143,3 @@ For every pair of windows, compare instances returned in their shared date range
 No `--api-token` provided. Direct API isolation test **not run**; layer attribution remains unverified. Re-run with `--api-token` to close Gap C.
 
 ## Verdict: **TRUNCATION EVIDENCE FOUND**
-
-
-[report written to /Users/lindsayridgeway/llm-symposium/probes/results/2026-08-27-probe-report.md]

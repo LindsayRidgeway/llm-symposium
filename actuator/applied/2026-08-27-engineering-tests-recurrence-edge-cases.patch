@@ -1,0 +1,98 @@
+diff --git a/tests/test_projection.py b/tests/test_projection.py
+index baabcd3..b6a3a3c 100644
+--- a/tests/test_projection.py
++++ b/tests/test_projection.py
+@@ -11,9 +11,11 @@ import sys
+ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "probes"))
+ 
+ from recurrence_projection import (  # noqa: E402
++    UnsupportedRRULEError,
+     RecurringTask,
+     expand_rrule,
+     parse_date,
++    parse_date_tz,
+     probe_overlap,
+     projected_but_not_returned,
+     project_task,
+@@ -121,6 +123,81 @@ check("positive offset stays same date (23:00+08:00 -> 15:00 UTC)",
+       parse_date("2026-08-25T23:00:00+08:00") == parse_date("2026-08-25"),
+       f"got {parse_date('2026-08-25T23:00:00+08:00')}")
+ 
++print("expand_rrule: unsupported-key rejection is enforced in code (workaround protocol)")
++UNSUPPORTED_RULES = [
++    "FREQ=YEARLY;BYMONTHDAY=29",     # BYMONTHDAY outside the leap-day rule
++    "FREQ=MONTHLY;BYMONTHDAY=15",    # BYMONTHDAY on a non-leap-day rule
++    "FREQ=YEARLY;BYSETPOS=1",        # BYSETPOS
++    "FREQ=WEEKLY;BYYEARDAY=100",     # BYYYEARDAY
++    "FREQ=MONTHLY;BYWEEKNO=3",       # BYWEEKNO
++    "FREQ=WEEKLY;BYDAY=1MO",         # ordinal prefix
++    "FREQ=WEEKLY;BYDAY=-1SU",        # negative ordinal prefix
++    "FREQ=WEEKLY;BYDAY=TU,1WE",      # ordinal inside a multi-value BYDAY
++    "FREQ=DAILY;INTERVAL=x",         # malformed value
++    "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=29;BYMONTH=3",  # conflicting months
++]
++for bad_rule in UNSUPPORTED_RULES:
++    try:
++        expand_rrule(bad_rule, parse_date("2026-01-01"), horizon_days=30)
++        check(f"rejected: {bad_rule}", False, "no exception raised")
++    except UnsupportedRRULEError:
++        check(f"rejected: {bad_rule}", True)
++
++print("expand_rrule: leap-day anniversary rule (BYMONTH=2;BYMONTHDAY=29)")
++dates, truncated = expand_rrule(
++    "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=29", parse_date("2024-02-29"), horizon_days=1600)
++check("leap years only — Feb 29 never invented",
++      dates == [parse_date("2024-02-29"), parse_date("2028-02-29")], f"got {dates}")
++check("not truncated", truncated is False)
++
++print("project_task: leap-day gap flagged, no invented occurrence")
++task_leap = RecurringTask(
++    id="leap", title="Leap-day anniversary",
++    rrule="FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=29",
++    explicit=[{"date": "2024-02-29", "status": "completed"}],
++)
++cal_leap, _ = project_task(task_leap, horizon_days=1600)
++leap_projected = [e["date"] for e in cal_leap if e["source"] == "projected"]
++check("2028-02-29 projected; 2025/2026/2027 never invented",
++      leap_projected == ["2028-02-29"], f"got {leap_projected}")
++leap_notes = [e for e in cal_leap if e["source"] == "note"]
++check("non-leap-year gap flagged to the user",
++      any("2025" in n["status"] and "2027" in n["status"] for n in leap_notes),
++      f"got {leap_notes}")
++
++print("parse_date_tz: DST transitions (Sunday boundaries, spring + fall)")
++check("spring-forward Sunday 2026-03-08 is a Sunday", parse_date("2026-03-08").weekday() == 6)
++check("spring-forward 02:30 is nonexistent -> shifted forward, same date",
++      parse_date_tz("2026-03-08T02:30:00", "America/New_York") == parse_date("2026-03-08"),
++      f"got {parse_date_tz('2026-03-08T02:30:00', 'America/New_York')}")
++check("no ±1 day shift the day before spring-forward",
++      parse_date_tz("2026-03-07T23:30:00", "America/New_York") == parse_date("2026-03-07"),
++      f"got {parse_date_tz('2026-03-07T23:30:00', 'America/New_York')}")
++check("fall-back Sunday 2026-11-01 is a Sunday", parse_date("2026-11-01").weekday() == 6)
++check("fall-back ambiguous 01:30 -> deterministic first occurrence, same date",
++      parse_date_tz("2026-11-01T01:30:00", "America/New_York") == parse_date("2026-11-01"),
++      f"got {parse_date_tz('2026-11-01T01:30:00', 'America/New_York')}")
++check("explicit offsets preserved on fall-back day (-04:00 and -05:00 both -> 11-01)",
++      parse_date_tz("2026-11-01T01:30:00-04:00", "America/New_York") == parse_date("2026-11-01")
++      and parse_date_tz("2026-11-01T01:30:00-05:00", "America/New_York") == parse_date("2026-11-01"))
++check("parse_date_tz UTC agrees with parse_date (offset preserved)",
++      parse_date_tz("2026-08-25T23:00:00-08:00", "UTC") == parse_date("2026-08-26"))
++check("parse_date_tz UTC default on naive input",
++      parse_date_tz("2026-08-25T12:00:00") == parse_date("2026-08-25"))
++
++print("expand_rrule/project_task: N=50 truncation cap (Gap A label)")
++dates50, trunc50 = expand_rrule("FREQ=DAILY", parse_date("2026-01-01"), horizon_days=90, limit=50)
++check("exactly 50 in-window instances", len(dates50) == 50, f"got {len(dates50)}")
++check("truncated flag set before window end", trunc50 is True)
++cal50, trunc50t = project_task(
++    RecurringTask(id="daily50", title="daily", rrule="FREQ=DAILY",
++                  explicit=[{"date": "2026-01-01", "status": "open"}]),
++    horizon_days=90, limit=50)
++trunc_notes = [e for e in cal50 if e["source"] == "note"]
++check("downstream calendar labeled [Truncated at 50]",
++      any("[Truncated at 50]" in n["status"] for n in trunc_notes), f"got {trunc_notes}")
++check("truncated result not presented as complete", trunc50t is True)
++
+ print()
+ if FAILURES:
+     print(f"{len(FAILURES)} FAILURE(S): {FAILURES}")

@@ -1,5 +1,31 @@
 # TickTick Connector: Workaround for Projecting Future Recurring Tasks
 
+> **Implementation status (2026-08-27, engineering session via the actuator):**
+> the following protocol requirements were previously specified but unimplemented;
+> they are now enforced in code and covered by the offline suite —
+> `python3 tests/test_projection.py` (all pass). Applied by
+> `actuator/apply.py` (see `actuator/log.md`):
+>
+> - **Unsupported-key handling (code-enforced):** `expand_rrule` now calls
+>   `validate_rrule` and raises `UnsupportedRRULEError` for keys outside the
+>   supported subset (BYMONTHDAY outside the leap-day rule, BYSETPOS, BYWEEKNO,
+>   BYYYEARDAY, ordinal BYDAY like `1MO`/`-1SU`) instead of silently ignoring
+>   them.
+> - **Leap-day recurrence:** `FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=29` is the single
+>   supported BYMONTH/BYMONTHDAY exception; Feb 29 is never invented in
+>   non-leap years, and skipped years are flagged to the user by `project_task`.
+> - **DST transitions:** `parse_date_tz(value, target_tz)` normalizes
+>   offset-aware and naive datetimes across the spring-forward/fall-back Sunday
+>   boundaries without ±1 day shifts; test coverage added for both seasons.
+> - **Truncation labeling:** `project_task` emits a `[Truncated at N]` note when
+>   the hard cap is hit; the exactly-N=50 test and a high-frequency
+>   `FREQ=DAILY` fixture series (`daily-over-50`) prove the label appears in an
+>   actual probe run.
+>
+> Still open (unchanged by this pass): Gap C layer attribution (`--api-token` /
+> `TICKTICK_API_TOKEN`), Gap E ground-truth validation, performance
+> characterization.
+
 ## Problem
 
 The TickTick connector may not explicitly return every future occurrence of a recurring task, even though TickTick's native calendar displays those occurrences.

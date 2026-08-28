@@ -17,5 +17,42 @@ probe_overlap: window divergence detection (Gap B)
   ok: missing date identified
 projected_but_not_returned: catches consistently-truncated connector
   ok: 2026-09-05 flagged (inside window B range, returned by neither window)
+parse_date: offset-aware ISO parsing (workaround protocol)
+  ok: naive date unchanged
+  ok: compact date unchanged
+  ok: naive datetime unchanged
+  ok: negative offset crosses date boundary (23:00-08:00 -> next day UTC)
+  ok: positive offset stays same date (23:00+08:00 -> 15:00 UTC)
+expand_rrule: unsupported-key rejection is enforced in code (workaround protocol)
+  ok: rejected: FREQ=YEARLY;BYMONTHDAY=29
+  ok: rejected: FREQ=MONTHLY;BYMONTHDAY=15
+  ok: rejected: FREQ=YEARLY;BYSETPOS=1
+  ok: rejected: FREQ=WEEKLY;BYYEARDAY=100
+  ok: rejected: FREQ=MONTHLY;BYWEEKNO=3
+  ok: rejected: FREQ=WEEKLY;BYDAY=1MO
+  ok: rejected: FREQ=WEEKLY;BYDAY=-1SU
+  ok: rejected: FREQ=WEEKLY;BYDAY=TU,1WE
+  ok: rejected: FREQ=DAILY;INTERVAL=x
+  ok: rejected: FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=29;BYMONTH=3
+expand_rrule: leap-day anniversary rule (BYMONTH=2;BYMONTHDAY=29)
+  ok: leap years only — Feb 29 never invented
+  ok: not truncated
+project_task: leap-day gap flagged, no invented occurrence
+  ok: 2028-02-29 projected; 2025/2026/2027 never invented
+  ok: non-leap-year gap flagged to the user
+parse_date_tz: DST transitions (Sunday boundaries, spring + fall)
+  ok: spring-forward Sunday 2026-03-08 is a Sunday
+  ok: spring-forward 02:30 is nonexistent -> shifted forward, same date
+  ok: no ±1 day shift the day before spring-forward
+  ok: fall-back Sunday 2026-11-01 is a Sunday
+  ok: fall-back ambiguous 01:30 -> deterministic first occurrence, same date
+  ok: explicit offsets preserved on fall-back day (-04:00 and -05:00 both -> 11-01)
+  ok: parse_date_tz UTC agrees with parse_date (offset preserved)
+  ok: parse_date_tz UTC default on naive input
+expand_rrule/project_task: N=50 truncation cap (Gap A label)
+  ok: exactly 50 in-window instances
+  ok: truncated flag set before window end
+  ok: downstream calendar labeled [Truncated at 50]
+  ok: truncated result not presented as complete
 
 ALL TESTS PASSED
