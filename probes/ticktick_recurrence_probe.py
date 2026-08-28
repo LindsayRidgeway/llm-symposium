@@ -86,12 +86,12 @@ def check_live_api(token: str) -> dict:
         )
         try:
             with urllib.request.urlopen(req, timeout=15) as resp:
-                body = resp.read().decode("utf-8", errors="replace")[:500]
+                body = resp.read().decode("utf-8", errors="replace")
                 return {"ok": True, "status": resp.status, "body": body}
         except urllib.error.HTTPError as e:
             body = ""
             try:
-                body = e.read().decode("utf-8", errors="replace")[:500]
+                body = e.read().decode("utf-8", errors="replace")
             except Exception:  # noqa: BLE001
                 body = ""
             return {"ok": False, "status": e.code, "body": body}
