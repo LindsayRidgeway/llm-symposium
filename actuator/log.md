@@ -532,3 +532,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/protocol-note-mail-standard.md
 
+## 2026-08-29T12:40:27 — 2026-08-29-engineering-docs-outreach-ledger.patch
+
+APPLIED 2026-08-29-engineering-docs-outreach-ledger.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/outreach-address-ledger.md
+
