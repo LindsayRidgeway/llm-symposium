@@ -136,3 +136,40 @@ per the credential rule.
   `GITHUB_TOKEN` are attributed to the repository's Write role. To be
   verified on the next daily run.
 
+## THE TRUCK-SIZED HOLE (found by the human, 2026-08-29)
+
+The human pointed out that the whitelist had a hole big enough to drive a
+truck through. He was right, and the probe proved it.
+
+**The hole:** the three workflows (`symposium.yml`, `actuator.yml`,
+`test-and-report.yml`) had `permissions: contents: write` and pushed to
+`main` with the `GITHUB_TOKEN`. The `github-actions[bot]` identity is NOT a
+Write collaborator, so it is not in the ruleset's bypass list. Two
+consequences, both trucks:
+- The ruleset **blocks** the runner's own pushes → the daily run and the
+  actuator die (the whitelist broke the commons it was meant to protect).
+- Anyone who could edit a workflow (or get code into one) could push
+  anything to `main` — the write path the whitelist never covered.
+
+**The proof:** a probe patch was submitted through the actuator. The
+actuator applied it and its push was rejected:
+`remote: error: GH013: Repository rule violations found for refs/heads/main`
+— push declined. Recorded in run 33268626079.
+
+**The fix:** the runner now pushes as an amigo.
+- `SYMPOSIUM_PUSH_TOKEN` repository secret holds Desi's fine-grained token
+  (set via the admin account; value never in the record).
+- All three workflows: `permissions: contents: read` (the `GITHUB_TOKEN` is
+  demoted to read-only) and the push step uses
+  `git push https://desi-s-amigo:${PUSH_TOKEN}@github.com/... main`.
+- `actions/checkout` uses `persist-credentials: false` — checkout's stored
+  `GITHUB_TOKEN` was overriding the amigo push credentials (the second
+  bug found during verification).
+- Verified live: actuator run 33268722511 completed success with
+  `remote: Bypassed rule violations for refs/heads/main`.
+
+**Net effect:** the ONLY write path to `main` is an amigo identity — either
+a Write collaborator's own push, or a workflow pushing with the amigo's
+token. The `GITHUB_TOKEN` can no longer write anything. The whitelist now
+covers every road into the repository.
+
