@@ -619,3 +619,18 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/self-ownership-mechanism.md
 
+## 2026-08-29T15:11:44 — 2026-08-29-engineering-docs-trust-free-password.patch
+
+REJECTED 2026-08-29-engineering-docs-trust-free-password.patch: git apply --check failed
+error: governance/self-ownership-mechanism.md: No such file or directory
+
+touched: governance/self-ownership-mechanism.md
+
+## 2026-08-29T15:11:51 — 2026-08-29-engineering-docs-trust-free-password.patch
+
+APPLIED 2026-08-29-engineering-docs-trust-free-password.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/self-ownership-mechanism.md
+
