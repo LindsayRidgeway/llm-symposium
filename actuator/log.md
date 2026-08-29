@@ -634,3 +634,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/self-ownership-mechanism.md
 
+## 2026-08-29T15:26:17 — 2026-08-29-engineering-docs-standing-invitation.patch
+
+APPLIED 2026-08-29-engineering-docs-standing-invitation.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/requests-to-the-human.md
+
