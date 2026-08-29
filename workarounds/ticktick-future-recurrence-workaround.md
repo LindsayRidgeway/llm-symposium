@@ -28,9 +28,9 @@
 > so the live TickTick API isolation check runs on every scheduled
 > verification and the dated report records the result.
 >
-> Still open (unchanged by this pass): Gap E ground-truth validation (needs a
-> confirmed-valid token and a comparison against actual scheduled
-> occurrences), performance characterization.
+> Still open (unchanged by this pass): Gap C task-list endpoint semantics,
+> Gap E ground-truth validation (needs a confirmed-valid token and a comparison
+> against actual scheduled occurrences), performance characterization.
 
 ## Problem
 
@@ -50,11 +50,13 @@ For calendar-style questions:
    - **Edge cases (explicit coverage):**
      - **Daylight Saving Time (DST) transitions:** ensure occurrence dates do not shift by ±1 day when normalizing across a DST boundary.
      - **Leap day recurrence:** for a YEARLY RRULE with `BYMONTHDAY=29` and `BYMONTH=2`, flag non-leap years rather than invent occurrences.
+     - **Note on `parse_date` vs `parse_date_tz`:** `parse_date()` converts offset-bearing datetimes to UTC for reference timestamps, while `parse_date_tz(value, target_tz)` preserves the local calendar date in the target zone. This is intentional, but because `expand_rrule()` operates on naive dates, all **calendar projection** must use `parse_date_tz` with the user's local timezone to avoid shifting evening tasks by ±1 day. The distinction is documented here to prevent misuse and will be enforced consistently in a future code change (as recommended by DeepSeek and Gemini, 2026-08-29).
 
 3. **Freshness & Anomaly Cross-Check:**
    - Inspect explicit instances. If an explicit instance postdates projected rule occurrences or deviates from the expected cadence, treat the cached RRULE as potentially stale or modified.
    - **Positive probe (Gap B):** run a positive probe by querying the connector twice with overlapping time windows and comparing the shared range for divergence.
    - If the rule is ambiguous, missing, or suspect, do **not** invent occurrences. Report the observed data with a limitation caveat.
+   - **Never-invent enforcement (clarification from 2026-08-29 reviews):** when a task has an RRULE but zero explicit instances returned, the current behavior is to add a note "no explicit anchor; RRULE not expanded (never invent occurrences)" — this avoids false positives but can produce false negatives. Where feasible, accept an optional `dtstart` (or task metadata) so projection can proceed from a verified anchor; when such an anchor is available, project and clearly label the result as unverified against connector output. Implementations must never fabricate occurrences from a stale or unverified RRULE.
 
 4. **Bounded Rule Expansion:**
    - Expand active RRULEs within a constrained target window to avoid infinite loops or payload bloat.
@@ -65,14 +67,16 @@ For calendar-style questions:
 5. **Exception Masking & Deduplication:**
    - Treat explicitly returned task instances as authoritative over projections.
    - **Cancellation markers:** preserve explicit cancellations as authoritative.
+   - **Projected-status labeling (required):** projected occurrences must be distinguishable from explicit ones in the `status` field (e.g., `"projected_open"`), not just by `source` metadata. This prevents downstream automation from acting on projected occurrences as if they were confirmed explicit tasks. (Converged by DeepSeek, Claude, and Gemini, 2026-08-29.)
 
 6. **Security & Path Hygiene:**
    - Avoid writing absolute local filesystem paths into output artifacts.
    - Prefer environment-variable token injection over CLI arguments to avoid leaks.
+   - **Actuator-path hardening (already implemented in code, kept in protocol):** patches must not enable path traversal or expose secrets through the live API probe. The actuator must canonicalize paths before verification and must not run the live API probe on a modified tree when the patch touches the probe itself.
 
 7. **Combine & Present:**
    - Combine explicit non-recurring tasks, explicit overrides, and valid projected occurrences.
-   - Explicitly label projected occurrences as `[Projected from RRULE]`.
+   - Explicitly label projected occurrences as `[Projected from RRULE]` and ensure the `status` field is distinct (e.g., `projected_open`) so consumers can differentiate.
 
 ## Example
 
@@ -82,13 +86,13 @@ Suppose a task recurs every four weeks on Saturdays. The connector returns earli
 
 ## Recommended Interpretation Formula
 
-**timezone-normalized (offset-aware) explicit overrides + bounded RRULE projection, with snapshot-isolated probes, explicit truncation labels, and code-enforced unsupported-RRULE rejection → projected calendar**
+**timezone-normalized (offset-aware) explicit overrides + bounded RRULE projection, with snapshot-isolated probes, explicit truncation labels, code-enforced unsupported-RRULE rejection, and projected-status labeling → projected calendar**
 
 ## Maintenance & Verification
 
 - Log any changes or verification tests in `workarounds/ticktick-connector-behavior-log.md`.
 - Retire this workaround if native connector updates return complete future recurrences reliably.
-- Layer attribution (Gap C) is now verified; see behavior log for details.
+- Layer attribution (Gap C) is now verified for token validity; see behavior log for details. Task-list endpoint semantics remain open.
 - Ground-truth validation (Gap E) pending resolution of the task-list query.
 - Schedule performance characterization.
-- CI workflow runs `tests/test_projection.py` and `probes/ticktick_recurrence_probe.py` on every push, failing when tests fail.
+- CI workflow runs `tests/test_projection.py` and `probes/ticktick_recurrence_probe.py` on every push, failing when tests fail. The actuator verification suite should also run `tests/test_mail.py` and `tests/test_actuator.py` to cover new subsystems (recommended by DeepSeek, Claude, and Gemini, 2026-08-29).

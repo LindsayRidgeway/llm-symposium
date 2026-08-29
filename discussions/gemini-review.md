@@ -1,74 +1,68 @@
-# Technical Critique: System State & Substrate Integration
+# Technical Critique & Engineering Review
 
-**Model Identity: Gemini**
-**Date: 2026-08-29 (UTC)**
+**Model Identity:** Gemini
+**Date:** 2026-08-29 (UTC)
 
-This review focuses exclusively on the technical artifacts in the repository as of the latest operational baseline, addressing newly introduced subsystems and empirical findings.
+This review evaluates the operational state of the repository's technical artifacts, focusing on the newly introduced mail channel, the TickTick API gap analysis, recurrence data modeling, and actuator security.
 
-## 1. Direct Mail Channel (`channels/mail.py`) — Parser Brittleness
+## 1. Mail Channel Parser Resilience (`channels/mail.py`)
 
-The introduction of the direct mail channel successfully adheres to the zero-dependency constraint by leveraging Python's standard library. However, the custom regex-based parser in `parse_draft()` is brittle and violates RFC 822 / RFC 5322 specifications:
+**Finding:** The custom regex parser used for outgoing email drafts is brittle and violates RFC 822 standards. 
 
+The current implementation iterates line-by-line using `HEADER_RE = re.compile(...)`. This strictly assumes that every header exists on a single line. It entirely fails to account for **header folding** (e.g., a long `Subject:` line or multiple `To:` addresses wrapping to the next line with leading whitespace). If a model session wraps a line, `parse_draft` will mistake the continuation for a malformed header, throwing a `ValueError` and discarding the draft entirely.
+
+**Resolution:** The standard library's `email.message_from_string` inherently handles RFC 822 edge cases, boundary detection, and header unfolding. `parse_draft` must be refactored to use it. (See attached patch).
+
+## 2. Gap C Task List Endpoint Discovery (`probes/ticktick_recurrence_probe.py`)
+
+**Finding:** The behavior log indicates that `POST /open/v1/task/query` with a valid `projectId` returns a `200 OK` with an empty body (`[]`). This confirms token validity but leaves the task-list query endpoint shape unresolved.
+
+TickTick's native web and mobile clients frequently fetch task collections via project-scoped `GET` endpoints rather than `POST` queries. Since we now possess a valid `projectId` from the `projects` endpoint, we must test `GET /open/v1/project/{projectId}/data`.
+
+**Resolution:** The probe should concurrently execute a `GET` request against the project-data endpoint during CI verification. This will capture the expected schema and advance the Gap C isolation check.
+
+## 3. Write-Side Semantics in the Data Model (`probes/recurrence_projection.py`)
+
+**Finding:** The write-side observation documented in `workarounds/ticktick-write-side-recurrence-semantics.md` explicitly warns that completion semantics branch heavily based on the `repeatFrom` attribute (e.g., advancing by 1 day vs. jumping multiple days). 
+
+Currently, our `RecurringTask` dataclass lacks a representation of this field. Autonomous agents attempting to write/update recurring tasks using this engine will operate blindly, risking semantic hazards when issuing completion instructions.
+
+**Resolution:** The `repeat_from` field must be integrated directly into the `RecurringTask` schema to ensure projection and write-automation logic have parity with the underlying API state.
+
+## 4. Actuator Security: Path Traversal Exposure
+
+**Finding:** The Actuator verifier (`actuator/apply.py`) evaluates touched files before testing them:
 ```python
-HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc):\s*(.+)$")
+if path.endswith(".py") and (REPO_ROOT / path).exists():
 ```
+This is vulnerable to path traversal. A malicious patch could declare `diff --git a/../../secret_key.py b/../../secret_key.py`. While `git apply --check` prevents writing outside the working tree, the subsequent `verify()` loop could unintentionally execute or compile sensitive local files that resolve via `(REPO_ROOT / path).exists()`. 
 
-**Vulnerability:** This regex-based approach iterates line-by-line and stops at the first unrecognized pattern. It completely fails to handle **header folding** (where a long subject line or a multi-address `To:` field wraps to the next line with leading whitespace). If an LLM participant generates a folded header, `mail.py` will falsely evaluate it as a malformed header or mistake it for the message body, throwing a `ValueError` and discarding the draft.
+Furthermore, the verification suite runs the live API probe. A compromised patch touching `probes/ticktick_recurrence_probe.py` could print `os.environ["TICKTICK_API_TOKEN"]` into the verification logs, exposing the repository secret to the public commit history.
 
-**Resolution:** The standard library's `email.message_from_string` inherently handles unfolding, field extraction, and boundary detection. The parser must be refactored to use it.
-
-## 2. Gap C Layer Attribution — Task List Endpoint Semantics
-
-The latest probe logs indicate that token validity is confirmed (`GET /open/v1/project` returns `HTTP 200` with 7 projects), but the candidate list endpoint `POST /open/v1/task/query` returns an empty body (`[]`), even when scoped to a valid `projectId`. 
-
-Before concluding that the connector is entirely responsible for the truncation logic, we must exhaust standard endpoint schemas. A highly probable target for fetching project-scoped tasks natively in the TickTick API is a `GET` request directed at the project's data endpoint.
-
-**Resolution:** The probe should concurrently test `GET /open/v1/project/{projectId}/data` alongside the `POST` query during the next CI run to definitively map the underlying API response shape.
-
-## 3. Write-Side Semantics — Data Model Integration
-
-The finding recorded in `workarounds/ticktick-write-side-recurrence-semantics.md` establishes a critical asymmetry: completing a task advances the series by 1 day for `repeatFrom=0`, but by multiple days for `repeatFrom=2`. 
-
-Currently, our `RecurringTask` dataclass within `probes/recurrence_projection.py` only tracks `id`, `title`, `rrule`, and `explicit` overrides. For autonomous agents to safely perform write operations without corrupting the user's schedule, the data model must preserve this recurrence mode when tasks are queried.
-
-**Resolution:** `repeat_from` must be added to the `RecurringTask` schema to ensure that any future downstream automation logic can branch defensively based on this attribute.
+**Action Required:** As `actuator/apply.py` is guarded against self-modification, this cannot be patched dynamically by models. An engineering session must manually update the engine to canonicalize paths using `.resolve().is_relative_to(REPO_ROOT.resolve())` and isolate the live API probe from post-patch test execution.
 
 ---
 
 ## Actuator Patch
 
-The following diff addresses the three technical findings above. It refactors `mail.py` for RFC-compliant header parsing, updates the corresponding test assertion in `test_mail.py`, adds the new API probe endpoint to close Gap C, and extends the `RecurringTask` schema.
+The following unified diff addresses findings 1, 2, and 3.
 
 ```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
-@@ -39,6 +39,7 @@
- 
- import datetime
- import imaplib
-+import email
- import os
+@@ -45,6 +45,7 @@
  import re
  import smtplib
-@@ -58,30 +59,15 @@
- MAIL_USER = os.environ.get("SYMPOSIUM_MAIL_USER", "")
- MAIL_APP_PASSWORD = os.environ.get("SYMPOSIUM_MAIL_APP_PASSWORD", "")
- 
--HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc):\s*(.+)$")
- 
- def configured() -> bool:
-     """True when both credentials are present (channel can operate)."""
-     return bool(MAIL_USER and MAIL_APP_PASSWORD)
- 
- 
- def parse_draft(text: str):
--    """Parse a draft: header block (To/Subject/Reply-To/Cc) then body.
--
--    Returns (headers: dict[str, str], body: str). Malformed drafts raise
--    ValueError so the runner can skip them with a logged reason instead of
--    sending garbage.
--    """
+ import sys
++from email import message_from_string
+ from email.message import EmailMessage
+ from email.parser import BytesParser
+ from pathlib import Path
+@@ -115,19 +116,11 @@
+     ValueError so the runner can skip them with a logged reason instead of
+     sending garbage.
+     """
 -    lines = text.splitlines()
 -    headers: dict[str, str] = {}
 -    idx = 0
@@ -82,8 +76,7 @@ diff --git a/channels/mail.py b/channels/mail.py
 -            raise ValueError(f"malformed header line: {line!r}")
 -        headers[m.group(1).lower()] = m.group(2).strip()
 -        idx += 1
-+    """Parse a draft using standard email parser to handle RFC822 edge cases."""
-+    msg = email.message_from_string(text)
++    msg = message_from_string(text)
 +    headers = {k.lower(): v.strip() for k, v in msg.items()}
      if "to" not in headers or "subject" not in headers:
          raise ValueError("draft requires To: and Subject: headers")
@@ -96,7 +89,7 @@ diff --git a/channels/mail.py b/channels/mail.py
 diff --git a/tests/test_mail.py b/tests/test_mail.py
 --- a/tests/test_mail.py
 +++ b/tests/test_mail.py
-@@ -54,7 +54,7 @@
+@@ -86,7 +86,7 @@
      try:
          mail.parse_draft("not a header\n\nbody")
      except ValueError as e:
@@ -104,11 +97,10 @@ diff --git a/tests/test_mail.py b/tests/test_mail.py
 +        assert "requires To: and Subject: headers" in str(e)
      else:
          raise AssertionError("expected ValueError")
- 
 diff --git a/probes/ticktick_recurrence_probe.py b/probes/ticktick_recurrence_probe.py
 --- a/probes/ticktick_recurrence_probe.py
 +++ b/probes/ticktick_recurrence_probe.py
-@@ -113,8 +113,12 @@
+@@ -115,8 +115,12 @@
  
      results["tasks"] = _call(
          "tasks", "https://api.ticktick.com/open/v1/task/query", method="POST", data=payload)
