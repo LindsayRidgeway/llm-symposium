@@ -1,0 +1,59 @@
+diff --git a/channels/mail.py b/channels/mail.py
+index 6debf00..c2764ac 100644
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -82,6 +82,21 @@ GENERIC_PW_ENV = "SYMPOSIUM_MAIL_APP_PASSWORD"
+ 
+ HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc|Identity):\s*(.+)$")
+ 
++# Machine-generated mail (Google account notices, bounces, list mail) is
++# noise, not people — the commons' inbound folder should hold humans. Filtered
++# at fetch time; filtered messages are marked seen and skipped, so they do not
++# accumulate as unseen on every run. Human decision: Desi, 2026-08-29.
++AUTOMATED_SENDER_RE = re.compile(
++    r"(noreply|no-?reply|donotreply|do-?not-?reply|mailer-?daemon|"
++    r"postmaster|bounce|accounts\.google\.com)",
++    re.IGNORECASE,
++)
++
++
++def is_automated(from_addr: str) -> bool:
++    """True for machine-generated senders the channel should not file."""
++    return bool(AUTOMATED_SENDER_RE.search(from_addr))
++
+ 
+ def credentials_for(identity: str | None):
+     """Return (user, app_password) for an identity, or None if not configured.
+@@ -211,6 +226,10 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+             msg = BytesParser().parsebytes(raw)
+             subject = str(msg.get("Subject", "(no subject)"))
+             from_addr = str(msg.get("From", "(unknown)"))
++            if is_automated(from_addr):
++                conn.store(num, "+FLAGS", "\\Seen")
++                print(f"Mail channel: skipped automated sender ({from_addr}) — {subject}")
++                continue
+             date = str(msg.get("Date", ""))
+             safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "message"
+             stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
+diff --git a/tests/test_mail.py b/tests/test_mail.py
+index eaebedd..97efda0 100644
+--- a/tests/test_mail.py
++++ b/tests/test_mail.py
+@@ -88,6 +88,17 @@ def test_parse_draft_missing_subject_rejected():
+         raise AssertionError("expected ValueError")
+ 
+ 
++def test_is_automated_filters_google_notices():
++    assert mail.is_automated("no-reply@accounts.google.com") is True
++    assert mail.is_automated("Google <no-reply@google.com>") is True
++    assert mail.is_automated("Mail Delivery Subsystem <mailer-daemon@googlemail.com>") is True
++
++
++def test_is_automated_keeps_humans():
++    assert mail.is_automated("Lindsay Ridgeway <ldridgeway@gmail.com>") is False
++    assert mail.is_automated("someone@example.com") is False
++
++
+ def test_parse_draft_malformed_header_rejected():
+     try:
+         mail.parse_draft("not a header\n\nbody")

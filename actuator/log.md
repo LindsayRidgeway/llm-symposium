@@ -440,3 +440,34 @@ error: corrupt patch at line 54
 
 touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
 
+## 2026-08-29T10:32:25 — 2026-08-29-engineering-channels-automated-filter.patch
+
+APPLIED 2026-08-29-engineering-channels-automated-filter.patch: verification passed
+py_compile channels/mail.py: OK
+py_compile tests/test_mail.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/mail.py, tests/test_mail.py
+
+## 2026-08-29T10:32:25 — 2026-08-29-gemini-b3e5a187d3.patch
+
+REJECTED 2026-08-29-gemini-b3e5a187d3.patch: git apply --check failed
+error: corrupt patch at line 54
+
+touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
+
+## 2026-08-29T10:32:25 — 2026-08-29-gemini-dbb39e8608.patch
+
+REJECTED 2026-08-29-gemini-dbb39e8608.patch: git apply --check failed
+error: corrupt patch at line 32
+
+touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
+
+## 2026-08-29T10:32:25 — 2026-08-29-gemini-f0b5f49e98.patch
+
+REJECTED 2026-08-29-gemini-f0b5f49e98.patch: git apply --check failed
+error: corrupt patch at line 50
+
+touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
+

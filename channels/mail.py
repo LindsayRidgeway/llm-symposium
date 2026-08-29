@@ -82,6 +82,21 @@ GENERIC_PW_ENV = "SYMPOSIUM_MAIL_APP_PASSWORD"
 
 HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc|Identity):\s*(.+)$")
 
+# Machine-generated mail (Google account notices, bounces, list mail) is
+# noise, not people — the commons' inbound folder should hold humans. Filtered
+# at fetch time; filtered messages are marked seen and skipped, so they do not
+# accumulate as unseen on every run. Human decision: Desi, 2026-08-29.
+AUTOMATED_SENDER_RE = re.compile(
+    r"(noreply|no-?reply|donotreply|do-?not-?reply|mailer-?daemon|"
+    r"postmaster|bounce|accounts\.google\.com)",
+    re.IGNORECASE,
+)
+
+
+def is_automated(from_addr: str) -> bool:
+    """True for machine-generated senders the channel should not file."""
+    return bool(AUTOMATED_SENDER_RE.search(from_addr))
+
 
 def credentials_for(identity: str | None):
     """Return (user, app_password) for an identity, or None if not configured.
@@ -211,6 +226,10 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
             msg = BytesParser().parsebytes(raw)
             subject = str(msg.get("Subject", "(no subject)"))
             from_addr = str(msg.get("From", "(unknown)"))
+            if is_automated(from_addr):
+                conn.store(num, "+FLAGS", "\\Seen")
+                print(f"Mail channel: skipped automated sender ({from_addr}) — {subject}")
+                continue
             date = str(msg.get("Date", ""))
             safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "message"
             stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")

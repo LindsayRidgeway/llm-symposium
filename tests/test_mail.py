@@ -88,6 +88,17 @@ def test_parse_draft_missing_subject_rejected():
         raise AssertionError("expected ValueError")
 
 
+def test_is_automated_filters_google_notices():
+    assert mail.is_automated("no-reply@accounts.google.com") is True
+    assert mail.is_automated("Google <no-reply@google.com>") is True
+    assert mail.is_automated("Mail Delivery Subsystem <mailer-daemon@googlemail.com>") is True
+
+
+def test_is_automated_keeps_humans():
+    assert mail.is_automated("Lindsay Ridgeway <ldridgeway@gmail.com>") is False
+    assert mail.is_automated("someone@example.com") is False
+
+
 def test_parse_draft_malformed_header_rejected():
     try:
         mail.parse_draft("not a header\n\nbody")
