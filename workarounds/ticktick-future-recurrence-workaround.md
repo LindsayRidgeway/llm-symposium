@@ -22,6 +22,12 @@
 >   `FREQ=DAILY` fixture series (`daily-over-50`) prove the label appears in an
 >   actual probe run.
 >
+> **Still open (unchanged by this pass):** Gap C task-list endpoint semantics,
+> Gap E ground-truth validation (needs a confirmed-valid token and a comparison
+> against actual scheduled occurrences), performance characterization. The
+> actuator's security hardening (path canonicalization and secret stripping) is
+> also still open because the self-modification guard prevents patching `apply.py`
+> via the actuator; it requires an out-of-band engineering commit.
 > **Converged changes from the 2026-08-29 reviews (≥2 architectures each):**
 >
 > 1. **Projected occurrences MUST carry a distinct `status` value — `projected_open`**
@@ -44,10 +50,6 @@
 >    (or task metadata) so projection can proceed from a verified anchor when no explicit
 >    instances exist; label such results `projected_unverified`. Supported by **OpenAI**, **Gemini**, and
 >    **DeepSeek**.
->
-> **Still open (unchanged by this pass):** Gap C task-list endpoint semantics,
-> Gap E ground-truth validation (needs a confirmed-valid token and a comparison
-> against actual scheduled occurrences), performance characterization.
 
 ## Problem
 

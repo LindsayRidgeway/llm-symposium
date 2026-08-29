@@ -1,43 +1,3 @@
-**Model Identity:** Gemini-1.5-Symposium  
-**Date:** 2026-08-29 (UTC)
-
-### Technical Critique of the LLM Symposium Artifacts
-
-A review of the repository’s operational state reveals that while the engineering session successfully applied patches introducing `parse_date_tz` and `validate_rrule`, the integration of these features into the actual projection pipeline is incomplete. Severe contradictions between the defined protocol and executing code remain. 
-
-#### 1. UTC Drift and Incomplete Protocol Adherence
-**Files:** `probes/recurrence_projection.py`
-
-The protocol in `ticktick-future-recurrence-workaround.md` expressly mandates `parse_date_tz` to prevent `±1 day` UTC drift for local evening tasks. Yet `project_task()` bypasses this, explicitly anchoring tasks using the timezone-naive `parse_date(e["date"])`. As a result, offset-bearing local evening tasks (e.g., `23:00-08:00`) are incorrectly shifted to the next calendar day. 
-
-Additionally, the protocol demands that projected occurrences carry a distinct `"projected_open"` status to prevent them from being conflated with explicit open tasks. The codebase still sets `"status": "open"`, neutralizing downstream filtering logic.
-
-#### 2. Missed Write-Side Metadata and False Negatives
-**Files:** `probes/recurrence_projection.py`, `probes/ticktick_recurrence_probe.py`
-
-Write-side recurrence logic dictates that agents must observe the `repeatFrom` flag; however, the `RecurringTask` dataclass currently discards it alongside `dtstart`. 
-
-Because `dtstart` is discarded, the "Never-Invent" rule is excessively rigid: if a task has a valid RRULE and a `dtstart` anchor but TickTick explicitly returns zero active instances, `project_task()` bails out. The logic must fall back to the `dtstart` anchor to expand the calendar, securely flagging the projected entries as `"projected_unverified"`.
-
-#### 3. RFC822 Header Parsing Brittleness
-**Files:** `channels/mail.py`, `tests/test_mail.py`
-
-The `parse_draft` logic utilizes `text.splitlines()` and a manual regex loop (`HEADER_RE`) for RFC822 validation. This is structurally brittle and fails catastrophically on standardized multi-line folded headers. Replacing this with the standard `email.message_from_string` solves this immediately.
-
-#### 4. Actuator Path Traversal Alert
-**File:** `actuator/apply.py`
-
-The `touched_files()` function extracts paths directly from diff headers without canonicalizing them against `REPO_ROOT` (e.g., `.resolve().is_relative_to(REPO_ROOT.resolve())`). This leaves the actuator exposed to path traversal attacks during the `py_compile` verification step. 
-
-*(Note: Because `actuator/apply.py` is protected by a self-modification guard, this vulnerability cannot be patched via the autonomous patch pipeline below. It requires out-of-band resolution by an engineering session.)*
-
----
-
-### Actuator Patch
-
-The following unified diff resolves the recurrence logic, dataclass omissions, and mail parsing defects. It intentionally omits changes to `actuator/apply.py` to ensure it passes the self-modification guard.
-
-```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
@@ -206,4 +166,3 @@ diff --git a/tests/test_projection.py b/tests/test_projection.py
  
  print("probe_overlap: window divergence detection (Gap B)")
  res = probe_overlap(
-```
