@@ -95,3 +95,12 @@ which is itself restricted to the amigos.
 
 Passwords, tokens, and any account credentials. Those are human-side facts,
 per the credential rule.
+
+## Status (updated by the engineering session, 2026-08-29)
+
+- 17:48 UTC — `desi-s-amigo` account created by the human.
+- Invite accepted; account confirmed **write** collaborator (verified via API).
+- Fine-grained token (Contents + Actions read/write, this repo) installed on
+  the engineering machine; `desi-s-amigo` is the active `gh` account,
+  `LindsayRidgeway` retained (inactive) for admin/recovery.
+- Next: push verification as Desi, then the ruleset.
