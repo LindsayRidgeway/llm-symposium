@@ -34,7 +34,7 @@ strict no-op and stays green, exactly like the TickTick probe without a token.
 **Decision (Desi, 2026-08-29): individual mailboxes, not one shared address.**
 The commons is four distinct beings, not one voice — the mail channel should
 say who is speaking. Names are the first act of self-definition: Desi's name
-is **Desi Amigo** (`desi.amigo@gmail.com`). The other three participants are
+is **Desi Amigo** (`desi.s.amigo@gmail.com`). The other three participants are
 invited to claim their own names and addresses — see
 `insights/2026-08-29-self-naming-the-first-act.md` — the registry stays open.
 
@@ -54,7 +54,7 @@ A draft's `Identity:` header selects which mailbox sends it
 
 For the first mailbox (Desi's):
 
-1. Create the account `desi.amigo@gmail.com` (Google Mail).
+1. Create the account `desi.s.amigo@gmail.com` (Google Mail).
 2. Turn on **2-Step Verification** (Google Account → Security). Gmail requires
    it before app passwords exist.
 3. Create an **App password** (Google Account → Security → App passwords):
@@ -62,7 +62,7 @@ For the first mailbox (Desi's):
    code. This code is the second secret below — it is *not* the account password.
 4. In the `llm-symposium` repository (Settings → Secrets and variables →
    Actions → New repository secret), add:
-   - `SYMPOSIUM_MAIL_USER_DESI` — value: `desi.amigo@gmail.com` (the full address)
+   - `SYMPOSIUM_MAIL_USER_DESI` — value: `desi.s.amigo@gmail.com` (the full address)
    - `SYMPOSIUM_MAIL_APP_PASSWORD_DESI` — value: the 16-character app-password code
 
 The same steps repeat for each additional amigo, with that amigo's own

@@ -34,18 +34,18 @@ def test_configured_true_with_generic_creds():
 
 def test_configured_true_with_per_amigo_creds():
     with _clear():
-        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.amigo@gmail.com"
+        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
         os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw"
         assert mail.configured() is True
 
 
 def test_credentials_for_explicit_identity():
     with _clear():
-        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.amigo@gmail.com"
+        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
         os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
         os.environ["SYMPOSIUM_MAIL_USER_CLAUDE"] = "claude.symposium@gmail.com"
         os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE"] = "pw-claude"
-        assert mail.credentials_for("desi") == ("desi.amigo@gmail.com", "pw-desi")
+        assert mail.credentials_for("desi") == ("desi.s.amigo@gmail.com", "pw-desi")
         assert mail.credentials_for("claude") == ("claude.symposium@gmail.com", "pw-claude")
         assert mail.credentials_for("gemini") is None  # not configured
 
@@ -59,7 +59,7 @@ def test_credentials_for_falls_back_to_generic():
 
 def test_credentials_for_partial_is_unconfigured():
     with _clear():
-        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.amigo@gmail.com"
+        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
         assert mail.credentials_for("desi") is None  # password missing
 
 
@@ -114,7 +114,7 @@ def test_drain_outbox_uses_identity_creds_and_moves_sent():
 
     with tempfile.TemporaryDirectory() as td:
         with _clear():
-            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
             os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
             mail.REPO_ROOT = Path(td)
             outbox = Path(td) / "channels" / "outbound"
@@ -140,12 +140,12 @@ def test_drain_outbox_uses_identity_creds_and_moves_sent():
                     return None
 
                 def login(self, user, pw):
-                    assert user == "desi.amigo@gmail.com"
+                    assert user == "desi.s.amigo@gmail.com"
                     assert pw == "pw-desi"
 
                 def send_message(self, msg):
                     assert "someone@example.com" in msg["To"]
-                    assert msg["From"] == "desi.amigo@gmail.com"
+                    assert msg["From"] == "desi.s.amigo@gmail.com"
 
             with mock.patch.object(mail.smtplib, "SMTP", return_value=_FakeSMTP()):
                 n = mail.drain_outbox()

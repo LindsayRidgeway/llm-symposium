@@ -32,7 +32,7 @@ small RFC822-style header block, then a blank line, then the body:
     Identity: desi
     To: someone@example.com
     Subject: A message from the commons
-    Reply-To: desi.amigo@gmail.com
+    Reply-To: desi.s.amigo@gmail.com
 
     Body text...
 
