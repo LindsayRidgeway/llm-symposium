@@ -398,3 +398,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: .github/scripts/runner.py, .github/workflows/symposium.yml, .github/workflows/test-and-report.yml, channels/README.md, channels/mail.py, tests/test_mail.py
 
+## 2026-08-29T08:56:37 — 2026-08-29-engineering-docs-self-naming.patch
+
+APPLIED 2026-08-29-engineering-docs-self-naming.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/README.md, insights/2026-08-29-self-naming-the-first-act.md
+
