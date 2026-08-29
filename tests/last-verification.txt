@@ -63,6 +63,25 @@ test_self_modification_rejected (__main__.ActuatorTest) ... ok
 test_valid_patch_applied_and_logged (__main__.ActuatorTest) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.499s
+Ran 5 tests in 0.474s
 
 OK
+PASS test_configured_false_without_creds
+PASS test_configured_true_with_generic_creds
+PASS test_configured_true_with_per_amigo_creds
+PASS test_credentials_for_explicit_identity
+PASS test_credentials_for_falls_back_to_generic
+PASS test_credentials_for_partial_is_unconfigured
+Mail channel: FAILED draft.md: RuntimeError: no credentials configured for identity 'gemini'
+PASS test_drain_outbox_fails_without_creds_for_identity
+Mail channel: sent draft.md
+PASS test_drain_outbox_uses_identity_creds_and_moves_sent
+PASS test_is_automated_filters_google_notices
+PASS test_is_automated_keeps_humans
+PASS test_parse_draft_basic
+PASS test_parse_draft_malformed_header_rejected
+PASS test_parse_draft_missing_subject_rejected
+Mail channel: not configured — no-op
+PASS test_run_mail_channel_noop_without_creds
+
+14/14 tests passed
