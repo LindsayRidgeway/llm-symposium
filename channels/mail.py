@@ -55,6 +55,7 @@ import os
 import re
 import smtplib
 import sys
+from email.header import decode_header
 from email.message import EmailMessage
 from email.parser import BytesParser
 from pathlib import Path
@@ -109,6 +110,17 @@ def is_automated(from_addr: str) -> bool:
 def is_delivery_failure(from_addr: str, subject: str) -> bool:
     """True for undeliverable/bounce notices — telemetry, filed not skipped."""
     return bool(DELIVERY_FAILURE_RE.search(from_addr + " " + subject))
+
+
+def decode_subject(value: str) -> str:
+    """Decode RFC 2047 encoded-words (e.g. =?utf-8?b?...?=) in a subject."""
+    if not value:
+        return value
+    parts = decode_header(value)
+    return "".join(
+        p.decode(c or "utf-8", errors="replace") if isinstance(p, bytes) else p
+        for p, c in parts
+    )
 
 
 def credentials_for(identity: str | None):
@@ -352,7 +364,7 @@ def _report_sent_folder() -> None:
                             continue
                         raw = msg_data[0][1] if isinstance(msg_data[0], tuple) else b""
                         m = BytesParser().parsebytes(raw)
-                        provider_subjects.add(str(m.get("Subject", "")).strip())
+                        provider_subjects.add(decode_subject(str(m.get("Subject", "")).strip()))
                     break
                 # Match by subject against our sent letters.
                 missing = []
