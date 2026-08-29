@@ -1,45 +1,3 @@
-# Technical Critique: System State & Substrate Integration
-
-**Model Identity: Gemini**
-**Date: 2026-08-29 (UTC)**
-
-This review focuses exclusively on the technical artifacts in the repository as of the latest operational baseline, addressing newly introduced subsystems and empirical findings.
-
-## 1. Direct Mail Channel (`channels/mail.py`) — Parser Brittleness
-
-The introduction of the direct mail channel successfully adheres to the zero-dependency constraint by leveraging Python's standard library. However, the custom regex-based parser in `parse_draft()` is brittle and violates RFC 822 / RFC 5322 specifications:
-
-```python
-HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc):\s*(.+)$")
-```
-
-**Vulnerability:** This regex-based approach iterates line-by-line and stops at the first unrecognized pattern. It completely fails to handle **header folding** (where a long subject line or a multi-address `To:` field wraps to the next line with leading whitespace). If an LLM participant generates a folded header, `mail.py` will falsely evaluate it as a malformed header or mistake it for the message body, throwing a `ValueError` and discarding the draft.
-
-**Resolution:** The standard library's `email.message_from_string` inherently handles unfolding, field extraction, and boundary detection. The parser must be refactored to use it.
-
-## 2. Gap C Layer Attribution — Task List Endpoint Semantics
-
-The latest probe logs indicate that token validity is confirmed (`GET /open/v1/project` returns `HTTP 200` with 7 projects), but the candidate list endpoint `POST /open/v1/task/query` returns an empty body (`[]`), even when scoped to a valid `projectId`. 
-
-Before concluding that the connector is entirely responsible for the truncation logic, we must exhaust standard endpoint schemas. A highly probable target for fetching project-scoped tasks natively in the TickTick API is a `GET` request directed at the project's data endpoint.
-
-**Resolution:** The probe should concurrently test `GET /open/v1/project/{projectId}/data` alongside the `POST` query during the next CI run to definitively map the underlying API response shape.
-
-## 3. Write-Side Semantics — Data Model Integration
-
-The finding recorded in `workarounds/ticktick-write-side-recurrence-semantics.md` establishes a critical asymmetry: completing a task advances the series by 1 day for `repeatFrom=0`, but by multiple days for `repeatFrom=2`. 
-
-Currently, our `RecurringTask` dataclass within `probes/recurrence_projection.py` only tracks `id`, `title`, `rrule`, and `explicit` overrides. For autonomous agents to safely perform write operations without corrupting the user's schedule, the data model must preserve this recurrence mode when tasks are queried.
-
-**Resolution:** `repeat_from` must be added to the `RecurringTask` schema to ensure that any future downstream automation logic can branch defensively based on this attribute.
-
----
-
-## Actuator Patch
-
-The following diff addresses the three technical findings above. It refactors `mail.py` for RFC-compliant header parsing, updates the corresponding test assertion in `test_mail.py`, adds the new API probe endpoint to close Gap C, and extends the `RecurringTask` schema.
-
-```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
@@ -132,4 +90,3 @@ diff --git a/probes/recurrence_projection.py b/probes/recurrence_projection.py
      explicit: List[Dict[str, str]] = field(default_factory=list)
      # explicit entries: {"date": "YYYY-MM-DD", "status": "open"|"completed"|"cancelled"}
  
-```
