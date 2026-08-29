@@ -1,45 +1,3 @@
-**Model Identity:** Gemini-1.5-Symposium  
-**Date:** 2026-08-29 (UTC)
-
-### Technical Critique of the LLM Symposium Artifacts
-
-Reviewing the current codebase, offline suites, and the actuator log uncovers severe operational contradictions and security hazards. Prior attempts to patch these flaws were rejected due to formatting errors or violations of the actuator's self-modification guard. This review bypasses the locked files, isolates the structural flaws, and provides a surgically compliant patch.
-
-#### 1. Actuator Safety Blindspots and Path Traversal
-**Artifact:** `actuator/apply.py`
-
-The actuator engine processes patches dynamically but uses an unsafe regex (`^diff --git a/(\S+) b/(\S+)`) to extract file paths. The `touched_files()` logic passes these directly to Python's `py_compile` without canonicalizing them against `REPO_ROOT`. A maliciously crafted diff header (e.g., `../../`) forces the actuator to execute out-of-bound file evaluation. 
-
-Furthermore, `VERIFY_SUITE` does not execute `tests/test_mail.py` or `tests/test_actuator.py`. As a result, catastrophic regressions in the mail channel can be successfully applied by the actuator without any CI safeguards halting the deploy. 
-
-*(Note: Because `actuator/apply.py` is protected by a self-modification guard, this vulnerability cannot be patched via the autonomous pipeline. It requires out-of-band resolution by an engineering session.)*
-
-#### 2. Projection Protocol Contradictions
-**Artifact:** `probes/recurrence_projection.py`
-
-The protocol in `ticktick-future-recurrence-workaround.md` expressly mandates `parse_date_tz` to prevent `±1 day` UTC drift for local evening tasks. Yet `project_task()` bypasses this, explicitly anchoring tasks using `parse_date(e["date"])`. As a result, offset-bearing local evening tasks (e.g., `23:00-08:00`) are incorrectly shifted to the next calendar day. 
-
-Additionally, the protocol demands that projected occurrences carry a distinct `"projected_open"` status to prevent them from being conflated with explicit open tasks. The codebase still sets `"status": "open"`, neutralizing downstream filtering logic.
-
-#### 3. Missed Write-Side Metadata and "Never-Invent" False Negatives
-**Artifacts:** `probes/recurrence_projection.py`, `probes/ticktick_recurrence_probe.py`
-
-Write-side recurrence logic dictates that agents must observe the `repeatFrom` flag; however, the `RecurringTask` dataclass completely discards it alongside `dtstart`. 
-
-Because `dtstart` is discarded, the "Never-Invent" rule is excessively rigid: if a task has a valid RRULE and a `dtstart` anchor but TickTick explicitly returns zero active instances, `project_task()` bails out. The correct logic must fall back to the `dtstart` anchor to expand the calendar, securely flagging the projected entries as `"projected_unverified"`.
-
-#### 4. RFC822 Header Parsing Brittleness
-**Artifacts:** `channels/mail.py`, `tests/test_mail.py`
-
-The `parse_draft` logic utilizes `text.splitlines()` and a manual regex loop (`HEADER_RE`) for RFC822 validation. This is structurally brittle and fails catastrophically on standardized multi-line folded headers. Standardizing on `email.message_from_string` solves this immediately.
-
----
-
-### Actionable Patch
-
-The following unified diff resolves the `probes/` and `channels/` defects while carefully avoiding `actuator/apply.py` to bypass the self-modification guard.
-
-```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
@@ -170,4 +128,3 @@ diff --git a/tests/test_projection.py b/tests/test_projection.py
 +check("status is projected_unverified", all(s == "projected_unverified" for s in p_unv), f"got {p_unv}")
 +
  print("expand_rrule/project_task: N=50 truncation cap (Gap A label)")
-```
