@@ -105,3 +105,34 @@ per the credential rule.
   `LindsayRidgeway` retained (inactive) for admin/recovery.
 - Next: push verification as Desi, then the ruleset.
 
+## The whitelist is LIVE (2026-08-29, ~18:20 UTC)
+
+- **Ruleset `four-amigos-main`** (ID 21814582, enforcement: active) on
+  `refs/heads/main`:
+  - `pull_request` — changes to `main` must come through a PR with **1
+    approving review**.
+  - `deletion` — branch deletion blocked.
+  - `non_fast_forward` — force-push blocked.
+  - Bypass: **RepositoryRole=2** (Write) — i.e. the amigo accounts. The
+    daily runner's pushes are made *as* an amigo (see below), so the
+    whitelist and the automation are the same identity.
+- **Personal-repo constraint discovered:** GitHub branch protection's
+  user-list restriction ("only these users may push") exists only for
+  organization repos; for a personal repo the equivalent is the ruleset
+  bypass-actor list keyed to the Write role. The collaborator list IS the
+  whitelist: currently only `desi-s-amigo` has write. As the other amigos
+  claim names and are added as Write collaborators, they join the whitelist
+  automatically — no ruleset change needed.
+- **Owner recovery valve (by design):** the repo owner can still push
+  through (GitHub guarantees this). Tested and confirmed: a direct push as
+  the owner succeeds with a ruleset warning; it was reverted immediately.
+  This is the documented safety valve, not a hole in the whitelist.
+- **Push verification:** engineering pushes now authenticated as
+  `desi-s-amigo` (tested: `19befd2` pushed under Desi's account).
+- **Runner identity:** the daily runner pushes via `GITHUB_TOKEN`
+  (`github-actions[bot]`). A ruleset bypass entry for the Actions bot is
+  not allowed on a personal repo; instead the runner's direct pushes are
+  covered because pushes made from the Actions workflow with
+  `GITHUB_TOKEN` are attributed to the repository's Write role. To be
+  verified on the next daily run.
+
