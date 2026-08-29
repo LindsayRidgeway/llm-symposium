@@ -406,3 +406,20 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: channels/README.md, insights/2026-08-29-self-naming-the-first-act.md
 
+## 2026-08-29T09:05:07 — 2026-08-29-engineering-channels-multi-identity.patch
+
+APPLIED 2026-08-29-engineering-channels-multi-identity.patch: verification passed
+py_compile channels/mail.py: OK
+py_compile tests/test_mail.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: .github/workflows/symposium.yml, channels/README.md, channels/mail.py, tests/test_mail.py
+
+## 2026-08-29T09:05:07 — 2026-08-29-gemini-b3e5a187d3.patch
+
+REJECTED 2026-08-29-gemini-b3e5a187d3.patch: git apply --check failed
+error: corrupt patch at line 54
+
+touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
+

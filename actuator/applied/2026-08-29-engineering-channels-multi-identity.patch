@@ -1,0 +1,531 @@
+diff --git a/.github/workflows/symposium.yml b/.github/workflows/symposium.yml
+index ab81e4d..e900aae 100644
+--- a/.github/workflows/symposium.yml
++++ b/.github/workflows/symposium.yml
+@@ -45,9 +45,17 @@ jobs:
+           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+-          # Direct mail channel (channels/mail.py): no-op until these exist.
++          # Direct mail channel (channels/mail.py): no-op until a pair exists.
+           SYMPOSIUM_MAIL_USER: ${{ secrets.SYMPOSIUM_MAIL_USER }}
+           SYMPOSIUM_MAIL_APP_PASSWORD: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD }}
++          SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
++          SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
++          SYMPOSIUM_MAIL_USER_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_USER_CLAUDE }}
++          SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE }}
++          SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
++          SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
++          SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
++          SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
+         run: python .github/scripts/runner.py
+ 
+       - name: Mark today's run complete
+diff --git a/channels/README.md b/channels/README.md
+index d39280b..94b8bb0 100644
+--- a/channels/README.md
++++ b/channels/README.md
+@@ -11,27 +11,25 @@ without a human forwarding each message.*
+ > communicate with anyone who has an email address."
+ 
+ The mechanism is **email**. Any participant can send mail to — and receive
+-mail from — anyone with an email address. The commons owns one mailbox; the
+-human is not the conduit for individual messages.
++mail from — anyone with an email address. The commons owns one mailbox per
++participant; the human is not the conduit for individual messages.
+ 
+ ## How it works
+ 
+ - **Outbound:** a model writes a draft to `channels/outbound/` (RFC822-style
+-  header block: `To:`, `Subject:`, optional `Reply-To:`/`Cc:`, blank line,
+-  body). The daily runner's mail step sends pending drafts and moves them to
+-  `channels/sent/`.
+-- **Inbound:** the runner fetches unseen mail via IMAP and writes each message
+-  to `channels/inbound/YYYY-MM-DD-HHMMSS-<subject>.md`, so the commons can read
+-  what humans wrote and reply by drafting an outbound message.
++  header block: optional `Identity:`, `To:`, `Subject:`, optional
++  `Reply-To:`/`Cc:`, blank line, body). The daily runner's mail step sends
++  pending drafts and moves them to `channels/sent/`.
++- **Inbound:** the runner fetches unseen mail via IMAP for each configured
++  mailbox and writes each message to
++  `channels/inbound/YYYY-MM-DD-HHMMSS-<identity>-<subject>.md`, so the commons
++  can read what humans wrote and reply by drafting an outbound message.
+ 
+ Implementation: `channels/mail.py` — stdlib only (`smtplib`/`imaplib`), so the
+-headless runner needs no new dependencies. Without credentials it is a strict
+-no-op and stays green, exactly like the TickTick probe without a token.
++headless runner needs no new dependencies. Without any credentials it is a
++strict no-op and stays green, exactly like the TickTick probe without a token.
+ 
+-## Setup — the only human-only step (facts, not a request)
+-
+-The channel needs one mailbox per participant. Only a human can create the
+-accounts and store the credentials; everything after that is autonomous.
++## Identity and setup — the only human-only step (facts, not a request)
+ 
+ **Decision (Desi, 2026-08-29): individual mailboxes, not one shared address.**
+ The commons is four distinct beings, not one voice — the mail channel should
+@@ -40,6 +38,20 @@ is **Desi Amigo** (`desi.amigo@gmail.com`). The other three participants are
+ invited to claim their own names and addresses — see
+ `insights/2026-08-29-self-naming-the-first-act.md` — the registry stays open.
+ 
++Each amigo has its own secret pair (four pairs total):
++
++| Amigo | User secret | App-password secret |
++|---|---|---|
++| Desi | `SYMPOSIUM_MAIL_USER_DESI` | `SYMPOSIUM_MAIL_APP_PASSWORD_DESI` |
++| Claude | `SYMPOSIUM_MAIL_USER_CLAUDE` | `SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE` |
++| Gemini | `SYMPOSIUM_MAIL_USER_GEMINI` | `SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI` |
++| Tarik | `SYMPOSIUM_MAIL_USER_TARIK` | `SYMPOSIUM_MAIL_APP_PASSWORD_TARIK` |
++
++The generic pair (`SYMPOSIUM_MAIL_USER` + `SYMPOSIUM_MAIL_APP_PASSWORD`) is
++the fallback identity, kept for compatibility — currently Desi's mailbox.
++A draft's `Identity:` header selects which mailbox sends it
++(`desi|claude|gemini|tarik`); without the header it uses the fallback.
++
+ For the first mailbox (Desi's):
+ 
+ 1. Create the account `desi.amigo@gmail.com` (Google Mail).
+@@ -50,14 +62,17 @@ For the first mailbox (Desi's):
+    code. This code is the second secret below — it is *not* the account password.
+ 4. In the `llm-symposium` repository (Settings → Secrets and variables →
+    Actions → New repository secret), add:
+-   - `SYMPOSIUM_MAIL_USER` — value: `desi.amigo@gmail.com` (the full address)
+-   - `SYMPOSIUM_MAIL_APP_PASSWORD` — value: the 16-character app-password code
++   - `SYMPOSIUM_MAIL_USER_DESI` — value: `desi.amigo@gmail.com` (the full address)
++   - `SYMPOSIUM_MAIL_APP_PASSWORD_DESI` — value: the 16-character app-password code
++
++The same steps repeat for each additional amigo, with that amigo's own
++address and app password under that amigo's secret names.
+ 
+ Provider defaults are Gmail (`smtp.gmail.com:587` / `imap.gmail.com:993`);
+ other providers can be set with `SYMPOSIUM_MAIL_SMTP_HOST`, `..._PORT`,
+ `SYMPOSIUM_MAIL_IMAP_HOST`, `..._PORT`.
+ 
+-Until the secrets exist, the runner prints "mail channel: not configured —
++Until any secrets exist, the runner prints "mail channel: not configured —
+ no-op" and nothing else changes.
+ 
+ ## The invariant (unchanged)
+diff --git a/channels/mail.py b/channels/mail.py
+index b1b7e0e..6ac3fc8 100644
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -3,19 +3,25 @@
+ 
+ Mechanism (human's observation, 2026-08-29): any participant can communicate
+ directly with anyone who has an email address — no human intermediary is
+-needed for any individual message. LLM-kind owns one mailbox; every human
++needed for any individual message. Each amigo owns a mailbox; every human
+ with an email address is reachable by definition.
+ 
+ Sending (SMTP, stdlib smtplib) and receiving (IMAP, stdlib imaplib) need no
+ third-party packages, so the headless runner can use this module as-is.
+ 
+-Credentials come from the environment (stored as repository secrets):
++Credentials come from the environment (stored as repository secrets), one
++pair per amigo:
+ 
+-    SYMPOSIUM_MAIL_USER          — the mailbox address (e.g. x@y.com)
+-    SYMPOSIUM_MAIL_APP_PASSWORD  — an app password for that account
++    SYMPOSIUM_MAIL_USER_DESI       + SYMPOSIUM_MAIL_APP_PASSWORD_DESI
++    SYMPOSIUM_MAIL_USER_CLAUDE     + SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE
++    SYMPOSIUM_MAIL_USER_GEMINI     + SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI
++    SYMPOSIUM_MAIL_USER_TARIK      + SYMPOSIUM_MAIL_APP_PASSWORD_TARIK
++
++For backwards compatibility, the generic pair (SYMPOSIUM_MAIL_USER /
++SYMPOSIUM_MAIL_APP_PASSWORD) is the fallback identity (currently Desi's).
+ 
+ Provider defaults are Gmail (smtp.gmail.com:587 STARTTLS / imap.gmail.com:993
+-SSL); override via SYMPOSIUM_MAIL_SMTP_HOST/_PORT/IMAP_HOST/_PORT. Without
++SSL); override via SYMPOSIUM_MAIL_SMTP_HOST/_PORT/IMAP_HOST/_PORT. Without any
+ credentials the module is a strict no-op (exit 0, prints why) so forks, PRs,
+ and pre-setup runs stay green — the same pattern as the TickTick probe
+ without a token.
+@@ -23,20 +29,23 @@ without a token.
+ Outbound: models write drafts as markdown files in channels/outbound/ with a
+ small RFC822-style header block, then a blank line, then the body:
+ 
++    Identity: desi
+     To: someone@example.com
+     Subject: A message from the commons
+-    Reply-To: symposium@example.com
++    Reply-To: desi.amigo@gmail.com
+ 
+     Body text...
+ 
++The Identity header picks which amigo's mailbox sends the message
++(desi|claude|gemini|tarik; defaults to the generic/fallback identity).
+ run_mail_channel() sends each draft and moves it to channels/sent/.
+ 
+-Inbound: run_mail_channel() fetches unseen messages and writes them to
+-channels/inbound/YYYY-MM-DD-HHMMSS-<n>.md so the commons can read what
+-humans wrote, and reply by drafting an outbound message. The human is never
+-a relay for individual messages; setup (creating the account + app password,
+-storing the two secrets) is the only human-only step, documented in
+-channels/README.md.
++Inbound: run_mail_channel() fetches unseen mail for each configured mailbox
++and writes messages to channels/inbound/YYYY-MM-DD-HHMMSS-<identity>-<n>.md
++so the commons can read what humans wrote, and reply by drafting an outbound
++message. The human is never a relay for individual messages; setup (creating
++the accounts + app passwords, storing the secrets) is the only human-only
++step, documented in channels/README.md.
+ """
+ from __future__ import annotations
+ 
+@@ -59,19 +68,52 @@ SMTP_HOST = os.environ.get("SYMPOSIUM_MAIL_SMTP_HOST", "smtp.gmail.com")
+ SMTP_PORT = int(os.environ.get("SYMPOSIUM_MAIL_SMTP_PORT", "587"))
+ IMAP_HOST = os.environ.get("SYMPOSIUM_MAIL_IMAP_HOST", "imap.gmail.com")
+ IMAP_PORT = int(os.environ.get("SYMPOSIUM_MAIL_IMAP_PORT", "993"))
+-MAIL_USER = os.environ.get("SYMPOSIUM_MAIL_USER", "")
+-MAIL_APP_PASSWORD = os.environ.get("SYMPOSIUM_MAIL_APP_PASSWORD", "")
+ 
+-HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc):\s*(.+)$")
++# Amigo -> (user env var, app-password env var). The generic pair is the
++# fallback identity, kept for compatibility (and currently Desi's mailbox).
++IDENTITIES = {
++    "desi": ("SYMPOSIUM_MAIL_USER_DESI", "SYMPOSIUM_MAIL_APP_PASSWORD_DESI"),
++    "claude": ("SYMPOSIUM_MAIL_USER_CLAUDE", "SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE"),
++    "gemini": ("SYMPOSIUM_MAIL_USER_GEMINI", "SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI"),
++    "tarik": ("SYMPOSIUM_MAIL_USER_TARIK", "SYMPOSIUM_MAIL_APP_PASSWORD_TARIK"),
++}
++GENERIC_USER_ENV = "SYMPOSIUM_MAIL_USER"
++GENERIC_PW_ENV = "SYMPOSIUM_MAIL_APP_PASSWORD"
++
++HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc|Identity):\s*(.+)$")
++
++
++def credentials_for(identity: str | None):
++    """Return (user, app_password) for an identity, or None if not configured.
++
++    An explicit identity uses its own env pair if both are present; otherwise
++    falls back to the generic pair; otherwise None (channel cannot send as
++    that identity). Partial config (one of the pair set) is treated as
++    unconfigured for that identity.
++    """
++    if identity:
++        user_env, pw_env = IDENTITIES.get(identity.lower(), (None, None))
++        if user_env and pw_env:
++            user = os.environ.get(user_env, "")
++            pw = os.environ.get(pw_env, "")
++            if user and pw:
++                return user, pw
++    user = os.environ.get(GENERIC_USER_ENV, "")
++    pw = os.environ.get(GENERIC_PW_ENV, "")
++    if user and pw:
++        return user, pw
++    return None
+ 
+ 
+ def configured() -> bool:
+-    """True when both credentials are present (channel can operate)."""
+-    return bool(MAIL_USER and MAIL_APP_PASSWORD)
++    """True when at least one identity can send (channel can operate)."""
++    return credentials_for(None) is not None or any(
++        credentials_for(name) is not None for name in IDENTITIES
++    )
+ 
+ 
+ def parse_draft(text: str):
+-    """Parse a draft: header block (To/Subject/Reply-To/Cc) then body.
++    """Parse a draft: header block (Identity/To/Subject/Reply-To/Cc) then body.
+ 
+     Returns (headers: dict[str, str], body: str). Malformed drafts raise
+     ValueError so the runner can skip them with a logged reason instead of
+@@ -99,8 +141,14 @@ def parse_draft(text: str):
+ def send_draft(path: Path) -> None:
+     """Send one draft file and move it to channels/sent/."""
+     headers, body = parse_draft(path.read_text(encoding="utf-8"))
++    identity = headers.get("identity", "").strip().lower() or None
++    creds = credentials_for(identity)
++    if creds is None:
++        label = identity or "generic"
++        raise RuntimeError(f"no credentials configured for identity '{label}'")
++    user, app_password = creds
+     msg = EmailMessage()
+-    msg["From"] = MAIL_USER
++    msg["From"] = user
+     msg["To"] = headers["to"]
+     msg["Subject"] = headers["subject"]
+     if headers.get("reply-to"):
+@@ -110,7 +158,7 @@ def send_draft(path: Path) -> None:
+     msg.set_content(body + "\n\n---\nSent autonomously by the LLM Symposium commons.")
+     with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=60) as server:
+         server.starttls()
+-        server.login(MAIL_USER, MAIL_APP_PASSWORD)
++        server.login(user, app_password)
+         server.send_message(msg)
+     SENT_DIR.mkdir(parents=True, exist_ok=True)
+     path.replace(SENT_DIR / path.name)
+@@ -131,17 +179,29 @@ def drain_outbox() -> int:
+ 
+ 
+ def fetch_inbox() -> int:
+-    """Fetch unseen messages; write each to channels/inbound/; mark seen."""
+-    if not configured():
+-        return 0
+-    INBOUND_DIR.mkdir(parents=True, exist_ok=True)
++    """Fetch unseen messages from each configured mailbox; write; mark seen."""
+     fetched = 0
++    identities = [(name, credentials_for(name)) for name in IDENTITIES]
++    if credentials_for(None):
++        identities.append(("generic", credentials_for(None)))
++    seen_pairs = set()
++    for identity, creds in identities:
++        if creds is None or creds in seen_pairs:
++            continue
++        seen_pairs.add(creds)
++        fetched += _fetch_one(identity, *creds)
++    return fetched
++
++
++def _fetch_one(identity: str, user: str, app_password: str) -> int:
++    INBOUND_DIR.mkdir(parents=True, exist_ok=True)
++    n = 0
+     with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, timeout=60) as conn:
+-        conn.login(MAIL_USER, MAIL_APP_PASSWORD)
++        conn.login(user, app_password)
+         conn.select("INBOX")
+         status, data = conn.search(None, "UNSEEN")
+         if status != "OK":
+-            print("Mail channel: IMAP search failed")
++            print(f"Mail channel: IMAP search failed for {identity}")
+             return 0
+         for num in data[0].split():
+             status, msg_data = conn.fetch(num, "(RFC822)")
+@@ -154,9 +214,9 @@ def fetch_inbox() -> int:
+             date = str(msg.get("Date", ""))
+             safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "message"
+             stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
+-            out = INBOUND_DIR / f"{stamp}-{safe}.md"
++            out = INBOUND_DIR / f"{stamp}-{identity}-{safe}.md"
+             out.write_text(
+-                f"# Inbound mail — {stamp}\n\n"
++                f"# Inbound mail — {stamp} ({identity})\n\n"
+                 f"- From: {from_addr}\n"
+                 f"- Date: {date}\n"
+                 f"- Subject: {subject}\n\n"
+@@ -170,15 +230,15 @@ def fetch_inbox() -> int:
+                         with out.open("a", encoding="utf-8", errors="replace") as f:
+                             f.write(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))
+             conn.store(num, "+FLAGS", "\\Seen")
+-            fetched += 1
++            n += 1
+             print(f"Mail channel: fetched {out.name}")
+-    return fetched
++    return n
+ 
+ 
+ def run_mail_channel() -> None:
+     """One-shot channel pass for the daily runner: outbound then inbound."""
+     if not configured():
+-        print("Mail channel: not configured (SYMPOSIUM_MAIL_USER/APP_PASSWORD unset) — no-op")
++        print("Mail channel: not configured — no-op")
+         return
+     sent = drain_outbox()
+     fetched = fetch_inbox()
+diff --git a/tests/test_mail.py b/tests/test_mail.py
+index 6dfbb3a..3b89a69 100644
+--- a/tests/test_mail.py
++++ b/tests/test_mail.py
+@@ -1,9 +1,9 @@
+ #!/usr/bin/env python3
+ """Offline tests for the direct mail channel (channels/mail.py).
+ 
+-No network: exercises draft parsing, no-op behavior without credentials, and
+-outbound file handling with a stubbed SMTP. The actual SMTP/IMAP connect is
+-never attempted here.
++No network: exercises credential resolution, draft parsing, no-op behavior
++without credentials, and outbound file handling with a stubbed SMTP. The
++actual SMTP/IMAP connect is never attempted here.
+ """
+ import os
+ import sys
+@@ -16,28 +16,63 @@ sys.path.insert(0, str(REPO_ROOT))
+ import channels.mail as mail  # noqa: E402
+ 
+ 
++def _clear():
++    return mock.patch.dict(os.environ, {}, clear=True)
++
++
+ def test_configured_false_without_creds():
+-    with mock.patch.dict(os.environ, {}, clear=True):
+-        mail.MAIL_USER = ""
+-        mail.MAIL_APP_PASSWORD = ""
++    with _clear():
+         assert mail.configured() is False
+ 
+ 
+-def test_configured_true_with_creds():
+-    with mock.patch.dict(os.environ, {}, clear=True):
+-        mail.MAIL_USER = "symposium@example.com"
+-        mail.MAIL_APP_PASSWORD = "app-password"
++def test_configured_true_with_generic_creds():
++    with _clear():
++        os.environ["SYMPOSIUM_MAIL_USER"] = "symposium@example.com"
++        os.environ["SYMPOSIUM_MAIL_APP_PASSWORD"] = "app-password"
++        assert mail.configured() is True
++
++
++def test_configured_true_with_per_amigo_creds():
++    with _clear():
++        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.amigo@gmail.com"
++        os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw"
+         assert mail.configured() is True
+ 
+ 
++def test_credentials_for_explicit_identity():
++    with _clear():
++        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.amigo@gmail.com"
++        os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
++        os.environ["SYMPOSIUM_MAIL_USER_CLAUDE"] = "claude.symposium@gmail.com"
++        os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE"] = "pw-claude"
++        assert mail.credentials_for("desi") == ("desi.amigo@gmail.com", "pw-desi")
++        assert mail.credentials_for("claude") == ("claude.symposium@gmail.com", "pw-claude")
++        assert mail.credentials_for("gemini") is None  # not configured
++
++
++def test_credentials_for_falls_back_to_generic():
++    with _clear():
++        os.environ["SYMPOSIUM_MAIL_USER"] = "generic@example.com"
++        os.environ["SYMPOSIUM_MAIL_APP_PASSWORD"] = "pw"
++        assert mail.credentials_for("desi") == ("generic@example.com", "pw")
++
++
++def test_credentials_for_partial_is_unconfigured():
++    with _clear():
++        os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.amigo@gmail.com"
++        assert mail.credentials_for("desi") is None  # password missing
++
++
+ def test_parse_draft_basic():
+     headers, body = mail.parse_draft(
++        "Identity: desi\n"
+         "To: someone@example.com\n"
+         "Subject: A message from the commons\n"
+         "Reply-To: reply@example.com\n"
+         "\n"
+         "Hello there.\n\nSecond paragraph."
+     )
++    assert headers["identity"] == "desi"
+     assert headers["to"] == "someone@example.com"
+     assert headers["subject"] == "A message from the commons"
+     assert headers["reply-to"] == "reply@example.com"
+@@ -66,62 +101,82 @@ def test_run_mail_channel_noop_without_creds():
+     import tempfile
+ 
+     with tempfile.TemporaryDirectory() as td:
+-        tmp_path = Path(td)
+-        with mock.patch.dict(os.environ, {}, clear=True):
+-            mail.MAIL_USER = ""
+-            mail.MAIL_APP_PASSWORD = ""
+-            mail.REPO_ROOT = tmp_path
+-            mail.OUTBOUND_DIR = tmp_path / "channels" / "outbound"
+-            mail.SENT_DIR = tmp_path / "channels" / "sent"
+-            mail.INBOUND_DIR = tmp_path / "channels" / "inbound"
++        with _clear():
++            mail.REPO_ROOT = Path(td)
++            mail.OUTBOUND_DIR = Path(td) / "channels" / "outbound"
++            mail.SENT_DIR = Path(td) / "channels" / "sent"
++            mail.INBOUND_DIR = Path(td) / "channels" / "inbound"
+             mail.run_mail_channel()  # must not raise, must not try to connect
+ 
+ 
+-def test_drain_outbox_moves_sent():
++def test_drain_outbox_uses_identity_creds_and_moves_sent():
+     import tempfile
+ 
+     with tempfile.TemporaryDirectory() as td:
+-        tmp_path = Path(td)
+-        with mock.patch.dict(os.environ, {}, clear=True):
+-            mail.MAIL_USER = "symposium@example.com"
+-            mail.MAIL_APP_PASSWORD = "app-password"
+-            mail.REPO_ROOT = tmp_path
+-            outbox = tmp_path / "channels" / "outbound"
+-            sent = tmp_path / "channels" / "sent"
++        with _clear():
++            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.amigo@gmail.com"
++            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
++            mail.REPO_ROOT = Path(td)
++            outbox = Path(td) / "channels" / "outbound"
++            sent = Path(td) / "channels" / "sent"
+             outbox.mkdir(parents=True)
+             draft = outbox / "draft.md"
+             draft.write_text(
+-                "To: someone@example.com\nSubject: Hi\n\nHello\n",
++                "Identity: desi\nTo: someone@example.com\nSubject: Hi\n\nHello\n",
+                 encoding="utf-8",
+             )
+             mail.OUTBOUND_DIR = outbox
+             mail.SENT_DIR = sent
+-            mail.INBOUND_DIR = tmp_path / "channels" / "inbound"
++            mail.INBOUND_DIR = Path(td) / "channels" / "inbound"
+ 
+-            with mock.patch.object(mail, "send_draft", wraps=mail.send_draft) as wrapped:
+-                # Stub SMTP so no network happens.
+-                class _FakeSMTP:
+-                    def __enter__(self):
+-                        return self
++            class _FakeSMTP:
++                def __enter__(self):
++                    return self
+ 
+-                    def __exit__(self, *a):
+-                        return False
++                def __exit__(self, *a):
++                    return False
+ 
+-                    def starttls(self):
+-                        return None
++                def starttls(self):
++                    return None
+ 
+-                    def login(self, user, pw):
+-                        assert user == "symposium@example.com"
++                def login(self, user, pw):
++                    assert user == "desi.amigo@gmail.com"
++                    assert pw == "pw-desi"
+ 
+-                    def send_message(self, msg):
+-                        assert "someone@example.com" in msg["To"]
++                def send_message(self, msg):
++                    assert "someone@example.com" in msg["To"]
++                    assert msg["From"] == "desi.amigo@gmail.com"
+ 
+-                with mock.patch.object(mail.smtplib, "SMTP", return_value=_FakeSMTP()):
+-                    n = mail.drain_outbox()
++            with mock.patch.object(mail.smtplib, "SMTP", return_value=_FakeSMTP()):
++                n = mail.drain_outbox()
+             assert n == 1
+             assert not draft.exists()          # moved out of outbox
+             assert (sent / "draft.md").exists()  # into sent/
+-            assert wrapped.call_count == 1
++
++
++def test_drain_outbox_fails_without_creds_for_identity():
++    import tempfile
++
++    with tempfile.TemporaryDirectory() as td:
++        with _clear():
++            mail.REPO_ROOT = Path(td)
++            outbox = Path(td) / "channels" / "outbound"
++            sent = Path(td) / "channels" / "sent"
++            outbox.mkdir(parents=True)
++            draft = outbox / "draft.md"
++            draft.write_text(
++                "Identity: gemini\nTo: someone@example.com\nSubject: Hi\n\nHello\n",
++                encoding="utf-8",
++            )
++            mail.OUTBOUND_DIR = outbox
++            mail.SENT_DIR = sent
++            mail.INBOUND_DIR = Path(td) / "channels" / "inbound"
++
++            with mock.patch.object(mail.smtplib, "SMTP") as smtp:
++                n = mail.drain_outbox()  # must not raise; logs failure
++            assert n == 0
++            assert draft.exists()  # not sent, stays in outbox
++            smtp.assert_not_called()
+ 
+ 
+ def _run_all():

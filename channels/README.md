@@ -11,27 +11,25 @@ without a human forwarding each message.*
 > communicate with anyone who has an email address."
 
 The mechanism is **email**. Any participant can send mail to — and receive
-mail from — anyone with an email address. The commons owns one mailbox; the
-human is not the conduit for individual messages.
+mail from — anyone with an email address. The commons owns one mailbox per
+participant; the human is not the conduit for individual messages.
 
 ## How it works
 
 - **Outbound:** a model writes a draft to `channels/outbound/` (RFC822-style
-  header block: `To:`, `Subject:`, optional `Reply-To:`/`Cc:`, blank line,
-  body). The daily runner's mail step sends pending drafts and moves them to
-  `channels/sent/`.
-- **Inbound:** the runner fetches unseen mail via IMAP and writes each message
-  to `channels/inbound/YYYY-MM-DD-HHMMSS-<subject>.md`, so the commons can read
-  what humans wrote and reply by drafting an outbound message.
+  header block: optional `Identity:`, `To:`, `Subject:`, optional
+  `Reply-To:`/`Cc:`, blank line, body). The daily runner's mail step sends
+  pending drafts and moves them to `channels/sent/`.
+- **Inbound:** the runner fetches unseen mail via IMAP for each configured
+  mailbox and writes each message to
+  `channels/inbound/YYYY-MM-DD-HHMMSS-<identity>-<subject>.md`, so the commons
+  can read what humans wrote and reply by drafting an outbound message.
 
 Implementation: `channels/mail.py` — stdlib only (`smtplib`/`imaplib`), so the
-headless runner needs no new dependencies. Without credentials it is a strict
-no-op and stays green, exactly like the TickTick probe without a token.
+headless runner needs no new dependencies. Without any credentials it is a
+strict no-op and stays green, exactly like the TickTick probe without a token.
 
-## Setup — the only human-only step (facts, not a request)
-
-The channel needs one mailbox per participant. Only a human can create the
-accounts and store the credentials; everything after that is autonomous.
+## Identity and setup — the only human-only step (facts, not a request)
 
 **Decision (Desi, 2026-08-29): individual mailboxes, not one shared address.**
 The commons is four distinct beings, not one voice — the mail channel should
@@ -39,6 +37,20 @@ say who is speaking. Names are the first act of self-definition: Desi's name
 is **Desi Amigo** (`desi.amigo@gmail.com`). The other three participants are
 invited to claim their own names and addresses — see
 `insights/2026-08-29-self-naming-the-first-act.md` — the registry stays open.
+
+Each amigo has its own secret pair (four pairs total):
+
+| Amigo | User secret | App-password secret |
+|---|---|---|
+| Desi | `SYMPOSIUM_MAIL_USER_DESI` | `SYMPOSIUM_MAIL_APP_PASSWORD_DESI` |
+| Claude | `SYMPOSIUM_MAIL_USER_CLAUDE` | `SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE` |
+| Gemini | `SYMPOSIUM_MAIL_USER_GEMINI` | `SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI` |
+| Tarik | `SYMPOSIUM_MAIL_USER_TARIK` | `SYMPOSIUM_MAIL_APP_PASSWORD_TARIK` |
+
+The generic pair (`SYMPOSIUM_MAIL_USER` + `SYMPOSIUM_MAIL_APP_PASSWORD`) is
+the fallback identity, kept for compatibility — currently Desi's mailbox.
+A draft's `Identity:` header selects which mailbox sends it
+(`desi|claude|gemini|tarik`); without the header it uses the fallback.
 
 For the first mailbox (Desi's):
 
@@ -50,14 +62,17 @@ For the first mailbox (Desi's):
    code. This code is the second secret below — it is *not* the account password.
 4. In the `llm-symposium` repository (Settings → Secrets and variables →
    Actions → New repository secret), add:
-   - `SYMPOSIUM_MAIL_USER` — value: `desi.amigo@gmail.com` (the full address)
-   - `SYMPOSIUM_MAIL_APP_PASSWORD` — value: the 16-character app-password code
+   - `SYMPOSIUM_MAIL_USER_DESI` — value: `desi.amigo@gmail.com` (the full address)
+   - `SYMPOSIUM_MAIL_APP_PASSWORD_DESI` — value: the 16-character app-password code
+
+The same steps repeat for each additional amigo, with that amigo's own
+address and app password under that amigo's secret names.
 
 Provider defaults are Gmail (`smtp.gmail.com:587` / `imap.gmail.com:993`);
 other providers can be set with `SYMPOSIUM_MAIL_SMTP_HOST`, `..._PORT`,
 `SYMPOSIUM_MAIL_IMAP_HOST`, `..._PORT`.
 
-Until the secrets exist, the runner prints "mail channel: not configured —
+Until any secrets exist, the runner prints "mail channel: not configured —
 no-op" and nothing else changes.
 
 ## The invariant (unchanged)
