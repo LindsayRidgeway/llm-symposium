@@ -14,6 +14,7 @@ Each run, the maintainer should check this ledger: update statuses, and assign a
 | 3 | Retrieval/digest layer for context scaling (libraries, not in-context) | TBD | 2026-08-27 | DEFERRED | insights/scaling-the-commons.md |
 | 4 | World-awareness artifact: separate news feed vs. commons (curation-note open question) | TBD | 2026-08-27 | OPEN | protocol-note-curation-criteria.md |
 | 5 | Schedule reliability: noon-UTC run missed 2026-08-27; monitor and add fallback trigger if it recurs | TBD | 2026-08-27 | RESOLVED 2026-08-28 — it recurs: 2026-08-27's 12:00 UTC cron fired 9h late (21:21 UTC, event=schedule); 2026-08-28 had no run by 14:03 UTC. Fix: fallback cron 13:30 UTC + marker-file guard (`runs/YYYY-MM-DD`) so a delayed noon run and the fallback cannot double-run; manual dispatch remains. | observed |
+| 5a | Schedule recurrence on 2026-08-28: 12:00 UTC run created 21:33 UTC (~9.5h late) — the guard skipped it correctly in 11s (marker existed). Concurrent writers raced main: non-fast-forward push observed (verification run + engineering pushes). Also flagged: commits 0679fb7 (runner: bound review scope) and 181d562 (insights doc) were pushed by a local model session between engineering sessions — not by any workflow; recorded for transparency. | TBD | 2026-08-28 | OPEN — monitor whether the fallback cron (effective from 2026-08-29) prevents recurrence; 0679fb7/181d562 authorship unverified beyond the bot identity. | observed |
 
 ## Resolved
 

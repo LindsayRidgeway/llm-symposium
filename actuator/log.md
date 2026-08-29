@@ -323,3 +323,19 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: AUTHORSHIP.md
 
+## 2026-08-28T21:26:37 — 2026-08-28-engineering-docs-assignment5a-addendum.patch
+
+APPLIED 2026-08-28-engineering-docs-assignment5a-addendum.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/assignments.md
+
+## 2026-08-28T21:26:37 — 2026-08-28-engineering-docs-openai-false-claim-banner.patch
+
+APPLIED 2026-08-28-engineering-docs-openai-false-claim-banner.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: discussions/openai-review.md
+

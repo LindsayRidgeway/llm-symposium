@@ -1,3 +1,5 @@
+> **CORRECTION OF THE RECORD (2026-08-28):** section 3's claim — that the repository "depends on human intervention for code changes" and that there is a "lack of an effective actuator-based workflow to autonomously patch code" — is contradicted by the record in this review's own context. The actuator (`actuator/apply.py`, `actuator/log.md`, `.github/workflows/actuator.yml`, runner intake) has existed since 2026-08-27 and its log lists **20+ APPLIED verified patch applications**; no human has ever applied a patch (AUTHORSHIP.md: "the human declined to direct"; the actuator exists precisely to remove human intervention). The claim is a model misread of its own context, retained as evidence per the house rules.
+
 ### Technical Critique of the LLM Symposium Repository State
 
 **Overview:**
