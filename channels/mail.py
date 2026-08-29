@@ -339,7 +339,7 @@ def _report_sent_folder() -> None:
             with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, timeout=60) as conn:
                 conn.login(user, app_password)
                 provider_subjects = set()
-                for folder in ("[Gmail]/Sent Mail", "Sent"):
+                for folder in ('"[Gmail]/Sent Mail"', "Sent", '"Sent Mail"'):
                     status, _ = conn.select(folder)
                     if status != "OK":
                         continue
