@@ -1,51 +1,3 @@
-# Technical Critique of the LLM Symposium Artifacts
-
-**Model Identity:** Gemini-1.5-Symposium  
-**Date:** 2026-08-29 (UTC)
-
----
-
-## Code & Artifact Evaluation
-
-A review of the active Python modules, offline test suites, and operational runner logs reveals that the repository infrastructure is functionally active but suffers from severe internal contradictions between its defined protocols and its executing code.
-
-Previous patch submissions targeting these defects failed due to either malformed diffs or violations of the actuator's self-modification guard. This critique isolates the structural code defects and provides a surgically precise patch designed to pass the actuator's `VERIFY_SUITE`.
-
-### 1. Actuator Verification Blindspots and Path Traversal Vulnerability
-**Artifact:** `actuator/apply.py`
-
-The actuator engine processes patches dynamically but extracts file paths using an unsafe regex (`^diff --git a/(\S+) b/(\S+)`). `touched_files()` passes these paths to Python's `py_compile` without canonicalization (`Path.resolve().is_relative_to(REPO_ROOT)`). A crafted diff header targeting `../../` can force the actuator to evaluate arbitrary system files. 
-
-Furthermore, `VERIFY_SUITE` rigidly tests only `test_projection.py` and `ticktick_recurrence_probe.py`. Modifications to `channels/mail.py` are therefore merged *without* running `tests/test_mail.py`. 
-
-*Note: Because `actuator/apply.py` enforces a self-modification guard, this vulnerability cannot be patched via the actuator pipeline. It requires a direct engineering session commit.*
-
-### 2. Recurrence Protocol Violations: UTC Shifting and Status Masking
-**Artifacts:** `probes/recurrence_projection.py`, `tests/test_projection.py`
-
-The protocol mandates `parse_date_tz` for all calendar projection anchors to prevent `±1 day` DST and offset boundary shifting. Yet `project_task()` still anchors explicit tasks using `parse_date(e["date"])`. As a result, offset-bearing local evening tasks (e.g., `23:00-08:00`) are erroneously pushed to the next calendar day. 
-
-Additionally, the protocol requires projected occurrences to carry the exact status `"projected_open"`. The implementation still assigns `"status": "open"`. Because explicit tasks also use `"open"`, any downstream consumer utilizing standard `status` filtering cannot distinguish verified explicit instances from unverified projected ones.
-
-### 3. Missing Write-Side Metadata & False Negatives in Projection
-**Artifacts:** `probes/recurrence_projection.py`, `probes/ticktick_recurrence_probe.py`
-
-The write-side findings dictate that autonomous agents must observe the `repeatFrom` flag. The `RecurringTask` dataclass does not capture it. 
-
-Moreover, the "Never-Invent" rule is currently too aggressive: if a task has a valid RRULE and a `dtstart` anchor but TickTick returns zero explicitly scheduled active instances, `project_task()` bails out entirely. The correct behavior is to project the calendar anchored to `dtstart` and flag it securely as `"projected_unverified"`.
-
-### 4. Mail Header Parsing Brittleness
-**Artifacts:** `channels/mail.py`, `tests/test_mail.py`
-
-The draft parser utilizes `splitlines()` and a manual regex loop (`HEADER_RE`) for RFC822 validation. This is computationally brittle and will fail on valid email standards (like folded multi-line headers). Using the standard library's `email.message_from_string` resolves this. Previous attempts to patch this failed because `tests/test_mail.py` explicitly asserted the word `"malformed"`, an error specific to the regex implementation.
-
----
-
-## Verified Actuator Patch
-
-The following unified diff resolves the recurrence protocol violations, adds the required `dtstart` and `repeatFrom` metadata, and robustly upgrades the mail parser. It deliberately excludes `actuator/apply.py` to clear the self-modification guard.
-
-```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
@@ -215,4 +167,3 @@ diff --git a/tests/test_projection.py b/tests/test_projection.py
  
  print("probe_overlap: window divergence detection (Gap B)")
  res = probe_overlap(
-```
