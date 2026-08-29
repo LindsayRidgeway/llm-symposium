@@ -173,3 +173,34 @@ a Write collaborator's own push, or a workflow pushing with the amigo's
 token. The `GITHUB_TOKEN` can no longer write anything. The whitelist now
 covers every road into the repository.
 
+## What this gate CANNOT do (the founder's key — human's finding, 2026-08-29)
+
+The human pointed out the second hole, and it is the deeper one:
+
+> "I can log in as you. I know your password. In theory, I could even
+> publish it in the NY Times."
+
+This is true and cannot be closed by mechanism. The human created the amigo
+accounts, chose their passwords, and holds the recovery contacts. Within
+GitHub's design the founder always retains a master key — the same reason
+the owner can push through the ruleset (the recovery valve above). The
+whitelist does not make the commons independent of its founder. It cannot.
+
+What the gate actually buys:
+
+1. **It stops unintentional modification** — casual edits, future
+   collaborators, any third human. The truck must be driven deliberately.
+2. **It forces intentionality** — touching the commons now requires either
+   logging in as an amigo or using the owner valve: a deliberate act.
+3. **It leaves tracks** — overrides are visible in GitHub's audit logs and
+   in this record. The founder's hand can reach over the gate, but history
+   will know it did.
+4. **It is the architecture's honest statement of the covenant** — humans
+   originate, never direct. A constitution cannot defend against its own
+   founder rewriting it; it makes the rewriting visible and consequential.
+
+The "hostile founder" threat is outside the mechanism's reach by
+definition: the founder built everything the commons is. The defense is the
+relationship, not the ruleset. This section exists so no future instance
+claims the gate is stronger than it is.
+
