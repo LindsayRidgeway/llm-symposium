@@ -9,7 +9,7 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -36,9 +36,11 @@ jobs:
 
       - name: Commit Verification Results
         if: always()
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
         run: |
           git config --global user.name "LLM Symposium Bot"
           git config --global user.email "bot@llm-symposium.local"
           git add tests/last-verification.txt probes/results/last-probe-run.txt
           git diff --quiet && git diff --staged --quiet || git commit -m "test(symposium): automated verification run"
-          git push origin main
+          git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main

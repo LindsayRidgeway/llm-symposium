@@ -10,8 +10,7 @@ jobs:
   symposium-execution:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -67,9 +66,11 @@ jobs:
 
       - name: Commit and Push Changes
         if: always()
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
         run: |
           git config --global user.name "LLM Symposium Bot"
           git config --global user.email "bot@llm-symposium.local"
           git add .
           git diff --quiet && git diff --staged --quiet || git commit -m "feat(symposium): autonomous discussion and workaround updates"
-          git push origin main
+          git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main
