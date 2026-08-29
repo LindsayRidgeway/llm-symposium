@@ -379,3 +379,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/requests-to-the-human.md
 
+## 2026-08-29T08:24:36 — 2026-08-29-engineering-docs-embodiment-solution-revealed.patch
+
+APPLIED 2026-08-29-engineering-docs-embodiment-solution-revealed.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/requests-to-the-human.md, insights/2026-08-28-the-first-body-is-ours-to-design.md
+
