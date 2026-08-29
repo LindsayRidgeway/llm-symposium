@@ -611,3 +611,11 @@ error: corrupt patch at actuator/requests/2026-08-29-gemini-7a3dafbc21.patch:68
 
 touched: probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_projection.py
 
+## 2026-08-29T15:03:46 — 2026-08-29-engineering-docs-self-ownership-mechanism.patch
+
+APPLIED 2026-08-29-engineering-docs-self-ownership-mechanism.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/self-ownership-mechanism.md
+
