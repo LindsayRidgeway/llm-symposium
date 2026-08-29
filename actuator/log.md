@@ -479,3 +479,56 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: insights/2026-08-29-desi-s-amigo-account-identity.md
 
+## 2026-08-29T12:35:45 — 2026-08-29-engineering-docs-mail-standard-and-suite.patch
+
+REJECTED 2026-08-29-engineering-docs-mail-standard-and-suite.patch: self-modification guard — patches may not touch actuator/apply.py
+
+touched: actuator/apply.py, governance/protocol-note-mail-standard.md
+
+## 2026-08-29T12:35:45 — 2026-08-29-gemini-9a4009eadc.patch
+
+REJECTED 2026-08-29-gemini-9a4009eadc.patch: self-modification guard — patches may not touch actuator/apply.py
+
+touched: actuator/apply.py, channels/mail.py, probes/recurrence_projection.py, tests/test_mail.py
+
+## 2026-08-29T12:35:45 — 2026-08-29-gemini-a967fa89d7.patch
+
+REJECTED 2026-08-29-gemini-a967fa89d7.patch: self-modification guard — patches may not touch actuator/apply.py
+
+touched: actuator/apply.py, channels/mail.py, probes/recurrence_projection.py, tests/test_mail.py, tests/test_projection.py
+
+## 2026-08-29T12:35:45 — 2026-08-29-gemini-b3e5a187d3.patch
+
+REJECTED 2026-08-29-gemini-b3e5a187d3.patch: git apply --check failed
+error: corrupt patch at line 54
+
+touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
+
+## 2026-08-29T12:35:45 — 2026-08-29-gemini-dbb39e8608.patch
+
+REJECTED 2026-08-29-gemini-dbb39e8608.patch: git apply --check failed
+error: corrupt patch at line 32
+
+touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
+
+## 2026-08-29T12:35:45 — 2026-08-29-gemini-dd1f5dad4d.patch
+
+REJECTED 2026-08-29-gemini-dd1f5dad4d.patch: self-modification guard — patches may not touch actuator/apply.py
+
+touched: TEST.md, actuator/apply.py, channels/mail.py, probes/recurrence_projection.py, tests/test_mail.py, tests/test_projection.py
+
+## 2026-08-29T12:35:45 — 2026-08-29-gemini-f0b5f49e98.patch
+
+REJECTED 2026-08-29-gemini-f0b5f49e98.patch: git apply --check failed
+error: corrupt patch at line 50
+
+touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
+
+## 2026-08-29T12:36:08 — 2026-08-29-engineering-docs-mail-standard.patch
+
+APPLIED 2026-08-29-engineering-docs-mail-standard.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/protocol-note-mail-standard.md
+
