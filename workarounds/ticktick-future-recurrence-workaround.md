@@ -80,7 +80,6 @@ For calendar-style questions:
 4. **Bounded Rule Expansion:**
    - Expand active RRULEs within a constrained target window to avoid infinite loops or payload bloat.
    - **Canonical constants (Gap A):** authorize values `DEFAULT_HORIZON_DAYS = 90` and `MAX_PROJECTED_INSTANCES = 50`. Do not introduce divergent constants without amending the canonical source.
-   - **Unsupported-key handling (must be explicit and enforced):** use `validate_rrule` to reject unsupported keys and values explicitly.
    - **Truncation labeling:** label results as truncated if the hard cap is hit before the window ends.
 
 5. **Exception Masking & Deduplication:**
