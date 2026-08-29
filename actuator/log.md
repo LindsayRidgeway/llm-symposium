@@ -471,3 +471,11 @@ error: corrupt patch at line 50
 
 touched: channels/mail.py, tests/test_mail.py, probes/ticktick_recurrence_probe.py, probes/recurrence_projection.py
 
+## 2026-08-29T10:49:49 — 2026-08-29-engineering-docs-account-identity.patch
+
+APPLIED 2026-08-29-engineering-docs-account-identity.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: insights/2026-08-29-desi-s-amigo-account-identity.md
+
