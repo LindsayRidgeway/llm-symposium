@@ -27,7 +27,7 @@
 > 1. **Projected occurrences MUST carry a distinct `status` value — `projected_open`**
 >    (and `projected_unverified` where projection is unverified). Explicit tasks keep
 >    `status: "open"`. This prevents downstream automation from acting on projections as
->    confirmed tasks. Supported by **Claude** and **DeepSeek**.
+>    confirmed tasks. Supported by **Claude**, **DeepSeek**, **Gemini**, and **OpenAI**.
 > 2. **`parse_date` vs `parse_date_tz` reconciliation:** all calendar projection must use
 >    `parse_date_tz` against the user's local timezone; `parse_date` is reserved for UTC
 >    reference timestamps. The previous prose allowed the ambiguity that produced the
@@ -42,7 +42,7 @@
 >    the path traversal and suite gap).
 > 4. **Never-invent rule false-negative mitigation:** accept an optional `dtstart`
 >    (or task metadata) so projection can proceed from a verified anchor when no explicit
->    instances exist; label such results `projected_unverified`. Supported by **OpenAI** and
+>    instances exist; label such results `projected_unverified`. Supported by **OpenAI**, **Gemini**, and
 >    **DeepSeek**.
 >
 > **Still open (unchanged by this pass):** Gap C task-list endpoint semantics,
@@ -73,7 +73,7 @@ For calendar-style questions:
    - Inspect explicit instances. If an explicit instance postdates projected rule occurrences or deviates from the expected cadence, treat the cached RRULE as potentially stale or modified.
    - **Positive probe (Gap B):** run a positive probe by querying the connector twice with overlapping time windows and comparing the shared range for divergence.
    - If the rule is ambiguous, missing, or suspect, do **not** invent occurrences. Report the observed data with a limitation caveat.
-   - **Never-invent enforcement (clarification from 2026-08-29 reviews):** when a task has an RRULE but zero explicit instances returned, the current behavior is to add a note "no explicit anchor; RRULE not expanded (never invent occurrences)" — this avoids false positives but can produce false negatives (converged **OpenAI**/**DeepSeek**). Where feasible, accept an optional `dtstart` (or task metadata) so projection can proceed from a verified anchor; when such an anchor is available, project and clearly label the result as unverified against connector output (status `projected_unverified`). Implementations must never fabricate occurrences from a stale or unverified RRULE.
+   - **Never-invent enforcement (clarification from 2026-08-29 reviews):** when a task has an RRULE but zero explicit instances returned, the current behavior is to add a note "no explicit anchor; RRULE not expanded (never invent occurrences)" — this avoids false positives but can produce false negatives (converged **OpenAI**/**Gemini**/**DeepSeek**). Where feasible, accept an optional `dtstart` (or task metadata) so projection can proceed from a verified anchor; when such an anchor is available, project and clearly label the result as unverified against connector output (status `projected_unverified`). Implementations must never fabricate occurrences from a stale or unverified RRULE.
 
 4. **Bounded Rule Expansion:**
    - Expand active RRULEs within a constrained target window to avoid infinite loops or payload bloat.
@@ -84,7 +84,7 @@ For calendar-style questions:
 5. **Exception Masking & Deduplication:**
    - Treat explicitly returned task instances as authoritative over projections.
    - **Cancellation markers:** preserve explicit cancellations as authoritative.
-   - **Projected-status labeling (required — converged by Claude and DeepSeek, 2026-08-29):** projected occurrences MUST be distinguishable from explicit ones in the `status` field itself, not merely by `source` metadata. The canonical status for a projected occurrence is **`projected_open`** (and, where future projection is unverified, `projected_unverified`). Explicit tasks keep `status: "open"`. This prevents downstream automation from acting on projected occurrences as if they were confirmed explicit tasks. Any consumer that filters on `status == "open"` must therefore ignore projections.
+   - **Projected-status labeling (required — converged by Claude, DeepSeek, Gemini, and OpenAI, 2026-08-29):** projected occurrences MUST be distinguishable from explicit ones in the `status` field itself, not merely by `source` metadata. The canonical status for a projected occurrence is **`projected_open`** (and, where future projection is unverified, `projected_unverified`). Explicit tasks keep `status: "open"`. This prevents downstream automation from acting on projected occurrences as if they were confirmed explicit tasks. Any consumer that filters on `status == "open"` must therefore ignore projections.
 
 6. **Security & Path Hygiene:**
    - Avoid writing absolute local filesystem paths into output artifacts.

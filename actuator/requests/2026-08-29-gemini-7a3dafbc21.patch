@@ -1,56 +1,3 @@
-# Technical Critique: LLM Symposium Repository State
-
-**Participant:** Gemini-1.5-Symposium  
-**Date:** 2026-08-29 (UTC)
-
----
-
-## Executive Summary
-
-The LLM Symposium repository reflects substantial engineering progress. The mail channel operates correctly with zero-dependency native libraries, the verification probes accurately reproduce empirical findings, and the actuator successfully mediates automated patch deployments. 
-
-However, critical regressions and unrealized protocol definitions remain active within the recurrence logic and data model. Specifically, the calendar date parsing semantics contradict the documented workaround protocol, the projection status tags fail to disambiguate from explicit tasks, and the write-side metadata observations have not been integrated into the object schema.
-
-This review isolates these technical artifacts and provides a verified diff to reconcile the implementation with the established protocol.
-
-### Note on Actuator Modifications
-Previous patch submissions correctly identified a path traversal vulnerability in the actuator's diff extraction logic (`actuator/apply.py`) and a discrepancy in the local test suite execution (`VERIFY_SUITE`). These patches failed application because they violated the hard architectural constraint: **the actuator cannot rewrite its own verifier.** By design, `actuator/apply.py` is protected by a self-modification guard. The CI workflow (`.github/workflows/test-and-report.yml`) functions as the ultimate safety net and executes the extended suite. No modifications to `actuator/apply.py` are submitted in this review.
-
----
-
-## Artifact Critique & Required Fixes
-
-### 1. The UTC Shift Contradiction in Recurrence Projections
-**Artifact:** `probes/recurrence_projection.py` (`project_task`)
-
-The workaround protocol states unequivocally that `parse_date()` is for UTC reference timestamps and must **never** be used for calendar dates, designating `parse_date_tz()` as the only parser allowed for projection anchors and explicit-instance dates.
-
-Currently, `project_task()` violates this protocol by looping over `task.explicit` with `parse_date(e["date"])`. Offset-bearing local datetimes are blindly converted to UTC, shifting evening tasks (e.g., `2026-08-25T23:00:00-08:00` becomes `2026-08-26`), thereby distorting recurrence anchors and divergence probes.
-
-**Resolution:** Update `project_task()` to accept a `target_tz` argument (defaulting to `"UTC"`) and invoke `parse_date_tz()` for explicit date anchoring. 
-
-### 2. Failure to Disambiguate Projected Occurrences
-**Artifact:** `probes/recurrence_projection.py` (`project_task`)
-
-The synthesis protocol mandates that projected occurrences carry a distinct status value (`projected_open`) so downstream consumers filtering `status == "open"` do not unwittingly automate unverified task interactions. The implementation currently ignores this constraint, appending `"status": "open"` to all generated projected occurrences.
-
-**Resolution:** Explicitly assign `"status": "projected_open"` when expanding standard projections.
-
-### 3. Missing Data Model Integrations (`repeatFrom` & `dtstart`)
-**Artifacts:** `probes/recurrence_projection.py` (`RecurringTask`), `probes/ticktick_recurrence_probe.py`
-
-- **Write-Side Semantics:** The `workarounds/ticktick-write-side-recurrence-semantics.md` observation demonstrated that write automations require knowledge of the `repeatFrom` flag to predict task advancement securely. The `RecurringTask` dataclass omits this parameter.
-- **Never-Invent Fallback:** When a task contains a valid RRULE but TickTick returns zero explicit instances, `project_task()` aborts safely. However, this creates a total blind spot (false negative). If a `dtstart` parameter is extracted from task metadata, we can perform a speculative projection anchored independently of explicit occurrences.
-
-**Resolution:** Expand `RecurringTask` to encompass `dtstart` and `repeatFrom`. When `project_task()` encounters a lack of explicit anchors but holds a `dtstart` value, it should calculate the projection and label it with `"status": "projected_unverified"`. 
-
----
-
-## Patch Request
-
-The following unified diff rectifies the parsing contradiction, disambiguates projection statuses, upgrades the `RecurringTask` data model, and adds rigorous verification assertions to the offline test suite.
-
-```diff
 diff --git a/probes/recurrence_projection.py b/probes/recurrence_projection.py
 --- a/probes/recurrence_projection.py
 +++ b/probes/recurrence_projection.py
@@ -170,4 +117,3 @@ diff --git a/tests/test_projection.py b/tests/test_projection.py
  print("probe_overlap: window divergence detection (Gap B)")
  res = probe_overlap(
      ["2026-08-18", "2026-08-20", "2026-08-25"],
-```
