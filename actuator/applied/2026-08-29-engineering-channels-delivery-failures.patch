@@ -1,0 +1,86 @@
+diff --git a/channels/mail.py b/channels/mail.py
+index c15a204..10e8d08 100644
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -86,11 +86,19 @@ HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc|Identity):\s*(.+)$")
+ # noise, not people — the commons' inbound folder should hold humans. Filtered
+ # at fetch time; filtered messages are marked seen and skipped, so they do not
+ # accumulate as unseen on every run. Human decision: Desi, 2026-08-29.
++# Exception: delivery-failure notices (bounces) are telemetry, not noise —
++# they tell the commons whether its outbound mail actually arrived. They are
++# filed under channels/inbound/diagnostics/ instead of skipped.
+ AUTOMATED_SENDER_RE = re.compile(
+     r"(noreply|no-?reply|donotreply|do-?not-?reply|mailer-?daemon|"
+     r"postmaster|bounce|accounts\.google\.com)",
+     re.IGNORECASE,
+ )
++DELIVERY_FAILURE_RE = re.compile(
++    r"(mailer-?daemon|postmaster|delivery (status )?notification|"
++    r"undeliverable|delivery failure|failed to deliver|returned mail)",
++    re.IGNORECASE,
++)
+ 
+ 
+ def is_automated(from_addr: str) -> bool:
+@@ -98,6 +106,11 @@ def is_automated(from_addr: str) -> bool:
+     return bool(AUTOMATED_SENDER_RE.search(from_addr))
+ 
+ 
++def is_delivery_failure(from_addr: str, subject: str) -> bool:
++    """True for undeliverable/bounce notices — telemetry, filed not skipped."""
++    return bool(DELIVERY_FAILURE_RE.search(from_addr + " " + subject))
++
++
+ def credentials_for(identity: str | None):
+     """Return (user, app_password) for an identity, or None if not configured.
+ 
+@@ -239,6 +252,32 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+             if msg_id and msg_id in filed_ids:
+                 continue  # already filed
+             if is_automated(from_addr):
++                if is_delivery_failure(from_addr, subject):
++                    # Telemetry: file it so the commons can see its mail failed.
++                    out_dir = INBOUND_DIR / "diagnostics"
++                    out_dir.mkdir(parents=True, exist_ok=True)
++                    safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "bounce"
++                    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
++                    out = out_dir / f"{stamp}-{identity}-{safe}.md"
++                    out.write_text(
++                        f"# Delivery failure — {stamp} ({identity})\n\n"
++                        f"- From: {from_addr}\n"
++                        f"- Date: {date}\n"
++                        f"- Subject: {subject}\n"
++                        f"- Message-ID: {msg_id}\n\n"
++                        f"---\n\n",
++                        encoding="utf-8",
++                    )
++                    for part in msg.walk():
++                        if part.get_content_type() == "text/plain" and not part.get("Content-Disposition"):
++                            payload = part.get_payload(decode=True)
++                            if payload is not None:
++                                with out.open("a", encoding="utf-8", errors="replace") as f:
++                                    f.write(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))
++                    conn.store(num, "+FLAGS", "\\Seen")
++                    n += 1
++                    print(f"Mail channel: delivery failure filed {out.name}")
++                    continue
+                 conn.store(num, "+FLAGS", "\\Seen")
+                 print(f"Mail channel: skipped automated sender ({from_addr}) — {subject}")
+                 continue
+diff --git a/tests/test_mail.py b/tests/test_mail.py
+index 60587da..1edb846 100644
+--- a/tests/test_mail.py
++++ b/tests/test_mail.py
+@@ -88,6 +88,12 @@ def test_parse_draft_missing_subject_rejected():
+         raise AssertionError("expected ValueError")
+ 
+ 
++def test_is_delivery_failure_detects_bounces():
++    assert mail.is_delivery_failure("Mail Delivery Subsystem <mailer-daemon@googlemail.com>", "Delivery Status Notification (Failure)") is True
++    assert mail.is_delivery_failure("postmaster@example.com", "Undeliverable: hello") is True
++    assert mail.is_delivery_failure("Lindsay <ldridgeway@gmail.com>", "Lunch tomorrow?") is False
++
++
+ def test_is_automated_filters_google_notices():
+     assert mail.is_automated("no-reply@accounts.google.com") is True
+     assert mail.is_automated("Google <no-reply@google.com>") is True

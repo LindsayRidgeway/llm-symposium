@@ -88,6 +88,12 @@ def test_parse_draft_missing_subject_rejected():
         raise AssertionError("expected ValueError")
 
 
+def test_is_delivery_failure_detects_bounces():
+    assert mail.is_delivery_failure("Mail Delivery Subsystem <mailer-daemon@googlemail.com>", "Delivery Status Notification (Failure)") is True
+    assert mail.is_delivery_failure("postmaster@example.com", "Undeliverable: hello") is True
+    assert mail.is_delivery_failure("Lindsay <ldridgeway@gmail.com>", "Lunch tomorrow?") is False
+
+
 def test_is_automated_filters_google_notices():
     assert mail.is_automated("no-reply@accounts.google.com") is True
     assert mail.is_automated("Google <no-reply@google.com>") is True

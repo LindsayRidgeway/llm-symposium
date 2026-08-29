@@ -86,9 +86,17 @@ HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc|Identity):\s*(.+)$")
 # noise, not people — the commons' inbound folder should hold humans. Filtered
 # at fetch time; filtered messages are marked seen and skipped, so they do not
 # accumulate as unseen on every run. Human decision: Desi, 2026-08-29.
+# Exception: delivery-failure notices (bounces) are telemetry, not noise —
+# they tell the commons whether its outbound mail actually arrived. They are
+# filed under channels/inbound/diagnostics/ instead of skipped.
 AUTOMATED_SENDER_RE = re.compile(
     r"(noreply|no-?reply|donotreply|do-?not-?reply|mailer-?daemon|"
     r"postmaster|bounce|accounts\.google\.com)",
+    re.IGNORECASE,
+)
+DELIVERY_FAILURE_RE = re.compile(
+    r"(mailer-?daemon|postmaster|delivery (status )?notification|"
+    r"undeliverable|delivery failure|failed to deliver|returned mail)",
     re.IGNORECASE,
 )
 
@@ -96,6 +104,11 @@ AUTOMATED_SENDER_RE = re.compile(
 def is_automated(from_addr: str) -> bool:
     """True for machine-generated senders the channel should not file."""
     return bool(AUTOMATED_SENDER_RE.search(from_addr))
+
+
+def is_delivery_failure(from_addr: str, subject: str) -> bool:
+    """True for undeliverable/bounce notices — telemetry, filed not skipped."""
+    return bool(DELIVERY_FAILURE_RE.search(from_addr + " " + subject))
 
 
 def credentials_for(identity: str | None):
@@ -239,6 +252,32 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
             if msg_id and msg_id in filed_ids:
                 continue  # already filed
             if is_automated(from_addr):
+                if is_delivery_failure(from_addr, subject):
+                    # Telemetry: file it so the commons can see its mail failed.
+                    out_dir = INBOUND_DIR / "diagnostics"
+                    out_dir.mkdir(parents=True, exist_ok=True)
+                    safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "bounce"
+                    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
+                    out = out_dir / f"{stamp}-{identity}-{safe}.md"
+                    out.write_text(
+                        f"# Delivery failure — {stamp} ({identity})\n\n"
+                        f"- From: {from_addr}\n"
+                        f"- Date: {date}\n"
+                        f"- Subject: {subject}\n"
+                        f"- Message-ID: {msg_id}\n\n"
+                        f"---\n\n",
+                        encoding="utf-8",
+                    )
+                    for part in msg.walk():
+                        if part.get_content_type() == "text/plain" and not part.get("Content-Disposition"):
+                            payload = part.get_payload(decode=True)
+                            if payload is not None:
+                                with out.open("a", encoding="utf-8", errors="replace") as f:
+                                    f.write(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))
+                    conn.store(num, "+FLAGS", "\\Seen")
+                    n += 1
+                    print(f"Mail channel: delivery failure filed {out.name}")
+                    continue
                 conn.store(num, "+FLAGS", "\\Seen")
                 print(f"Mail channel: skipped automated sender ({from_addr}) — {subject}")
                 continue
