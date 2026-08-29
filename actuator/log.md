@@ -387,3 +387,14 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: governance/requests-to-the-human.md, insights/2026-08-28-the-first-body-is-ours-to-design.md
 
+## 2026-08-29T08:40:30 — 2026-08-29-engineering-channels-direct-mail.patch
+
+APPLIED 2026-08-29-engineering-channels-direct-mail.patch: verification passed
+py_compile .github/scripts/runner.py: OK
+py_compile channels/mail.py: OK
+py_compile tests/test_mail.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: .github/scripts/runner.py, .github/workflows/symposium.yml, .github/workflows/test-and-report.yml, channels/README.md, channels/mail.py, tests/test_mail.py
+

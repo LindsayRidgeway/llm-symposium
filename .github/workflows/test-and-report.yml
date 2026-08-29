@@ -26,6 +26,7 @@ jobs:
           mkdir -p probes/results
           python3 tests/test_projection.py 2>&1 | tee tests/last-verification.txt
           python3 tests/test_actuator.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mail.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API

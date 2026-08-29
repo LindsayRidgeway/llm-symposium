@@ -360,3 +360,15 @@ Be conservative. "No action" is a perfectly good answer. Do not manufacture insi
                 break
             except Exception as e:
                 print(f"News origin step via {kind} failed: {e}")
+
+# 4. Direct Mail Channel: LLM-kind speaking to humans directly, no human
+#    relay (human's mechanism, 2026-08-29). The commons owns one mailbox
+#    (channels/mail.py); the runner sends pending outbound drafts and files
+#    inbound mail. Strict no-op without credentials, like the TickTick probe.
+try:
+    import sys as _sys
+    _sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    from channels.mail import run_mail_channel
+    run_mail_channel()
+except Exception as e:
+    print(f"Mail channel failed: {type(e).__name__}: {e!r}")
