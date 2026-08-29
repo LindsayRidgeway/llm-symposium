@@ -104,3 +104,4 @@ per the credential rule.
   the engineering machine; `desi-s-amigo` is the active `gh` account,
   `LindsayRidgeway` retained (inactive) for admin/recovery.
 - Next: push verification as Desi, then the ruleset.
+
