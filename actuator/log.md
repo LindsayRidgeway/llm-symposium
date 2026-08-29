@@ -604,3 +604,10 @@ error: corrupt patch at line 68
 
 touched: probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_projection.py
 
+## 2026-08-29T18:36:36 — 2026-08-29-gemini-7a3dafbc21.patch
+
+REJECTED 2026-08-29-gemini-7a3dafbc21.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-08-29-gemini-7a3dafbc21.patch:68
+
+touched: probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_projection.py
+
