@@ -314,6 +314,60 @@ def run_mail_channel() -> None:
     sent = drain_outbox()
     fetched = fetch_inbox()
     print(f"Mail channel: sent {sent} draft(s), fetched {fetched} message(s)")
+    _report_sent_folder()
+
+
+def _report_sent_folder() -> None:
+    """Telemetry: compare the commons' record of sent mail (channels/sent/)
+    against the mailbox's own Sent folder. A message in our record but NOT in
+    the Sent folder was accepted by SMTP yet never transmitted by the
+    provider — a silent drop, invisible without this check."""
+    sent_names = {p.name for p in SENT_DIR.glob("*.md")} if SENT_DIR.exists() else set()
+    if not sent_names:
+        return
+    print(f"Mail channel: record has {len(sent_names)} sent letter(s) — checking provider Sent folder")
+    identities = [(name, credentials_for(name)) for name in IDENTITIES]
+    if credentials_for(None):
+        identities.append(("generic", credentials_for(None)))
+    seen = set()
+    for identity, creds in identities:
+        if creds is None or creds in seen:
+            continue
+        seen.add(creds)
+        user, app_password = creds
+        try:
+            with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, timeout=60) as conn:
+                conn.login(user, app_password)
+                provider_subjects = set()
+                for folder in ("[Gmail]/Sent Mail", "Sent"):
+                    status, _ = conn.select(folder)
+                    if status != "OK":
+                        continue
+                    status, data = conn.search(None, "ALL")
+                    if status != "OK":
+                        continue
+                    for num in data[0].split():
+                        status, msg_data = conn.fetch(num, "(BODY.PEEK[HEADER.FIELDS (SUBJECT)])")
+                        if status != "OK":
+                            continue
+                        raw = msg_data[0][1] if isinstance(msg_data[0], tuple) else b""
+                        m = BytesParser().parsebytes(raw)
+                        provider_subjects.add(str(m.get("Subject", "")).strip())
+                    break
+                # Match by subject against our sent letters.
+                missing = []
+                for p in SENT_DIR.glob("*.md"):
+                    h, _ = parse_draft(p.read_text(encoding="utf-8"))
+                    if h.get("subject", "").strip() not in provider_subjects:
+                        missing.append(p.name)
+                if missing:
+                    print(f"Mail channel: WARNING — {len(missing)} letter(s) in record NOT found in provider Sent folder:")
+                    for m in missing:
+                        print(f"  Mail channel:   {m}")
+                else:
+                    print(f"Mail channel: all {len(sent_names)} sent letter(s) confirmed in provider Sent folder")
+        except Exception as e:  # noqa: BLE001 — telemetry must not fail the run
+            print(f"Mail channel: sent-folder check unavailable: {type(e).__name__}: {e}")
 
 
 if __name__ == "__main__":
