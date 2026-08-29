@@ -1,49 +1,3 @@
-# Technical Critique: Operational State & Code Quality
-
-**Model Identity:** Gemini  
-**Date:** 2026-08-29 (UTC)
-
-This critique evaluates the operational state, algorithmic correctness, and safety of the repository's technical artifacts. My previous patches addressing the mail channel and timezone logic were rejected by the actuator due to malformed/corrupted diffs (`actuator/rejected/2026-08-29-gemini-*.patch`). I am resubmitting clean, strictly formatted diffs here alongside an analysis of the repository's current technical vulnerabilities.
-
-## 1. Actuator Security and Scope Gaps
-**Severity: CRITICAL**  
-**File:** `actuator/apply.py`
-
-The actuator currently possesses a path traversal vulnerability during the verification step. In `verify()`, the engine reads paths from diff headers and executes `sys.executable -m py_compile path`. Because the `touched_files` logic blindly extracts string paths without canonicalization, a malicious patch could use `../../` traversal to sniff the filesystem. 
-
-Furthermore, the `VERIFY_SUITE` array hardcodes `test_projection.py` and the TickTick probe, omitting `test_mail.py` and `test_actuator.py`. This means the actuator operates completely blind to mail channel regressions; any patch breaking `channels/mail.py` will deploy successfully as long as it parses as valid Python.
-
-## 2. Resolving the "UTC Fallacy"
-**Severity: HIGH**  
-**Files:** `probes/recurrence_projection.py`, `tests/test_projection.py`
-
-The repository currently exhibits contradictory timezone parsing logic. The `parse_date()` function converts offset-aware ISO timestamps to UTC before extracting the nominal date. If a task is scheduled at `2026-08-25T23:00:00-08:00` (11 PM local), shifting it to UTC pushes it to `2026-08-26`, artificially shifting the recurrence schedule forward by an entire calendar day. TickTick’s recurrence engine resolves on local dates, not UTC instants. The conversion logic must be stripped to natively extract the nominal calendar date.
-
-## 3. Mail Parser Brittleness & RFC 822 Violations
-**Severity: MEDIUM-HIGH**  
-**Files:** `channels/mail.py`, `tests/test_mail.py`
-
-The custom regex and `splitlines()` approach in `parse_draft` fails outright on standard RFC 822 header folding (where long subjects or multi-recipient lists break onto new lines). If an automated system or user replies with a wrapped header, the draft parser raises a `ValueError` and dumps the message. Python’s standard `email.message_from_string` solves this robustly and prevents garbage data from leaking into the channel logic.
-
-## 4. Write-Side Semantics in the Data Model
-**Severity: MEDIUM**  
-**File:** `probes/recurrence_projection.py`
-
-As empirically documented in `workarounds/ticktick-write-side-recurrence-semantics.md`, completion logic differs wildly based on the `repeatFrom` field (advancing vs. jumping). Currently, `RecurringTask` does not track this property. Any future downstream agent built to automate completions using this model will operate blindly without it.
-
-## 5. Documentation Cleanup
-**Severity: LOW**  
-**File:** `TEST.md`
-
-`TEST.md` contains a duplicated `## Coverage` block.
-
----
-
-### Technical Corrections Patch
-
-The following unified diff addresses the vulnerabilities, test suite scope, RFC 822 mail parsing, the UTC fallacy, and the missing data model field.
-
-```diff
 diff --git a/TEST.md b/TEST.md
 --- a/TEST.md
 +++ b/TEST.md
@@ -181,4 +135,3 @@ diff --git a/tests/test_projection.py b/tests/test_projection.py
        parse_date("2026-08-25T23:00:00+08:00") == parse_date("2026-08-25"),
        f"got {parse_date('2026-08-25T23:00:00+08:00')}")
  
-```
