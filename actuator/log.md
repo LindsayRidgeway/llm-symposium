@@ -589,3 +589,18 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: channels/mail.py, tests/test_mail.py
 
+## 2026-08-29T13:21:46 — 2026-08-29-engineering-docs-whitelist-design.patch
+
+APPLIED 2026-08-29-engineering-docs-whitelist-design.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/repository-whitelist-design.md
+
+## 2026-08-29T13:21:46 — 2026-08-29-gemini-7a3dafbc21.patch
+
+REJECTED 2026-08-29-gemini-7a3dafbc21.patch: git apply --check failed
+error: corrupt patch at line 68
+
+touched: probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_projection.py
+

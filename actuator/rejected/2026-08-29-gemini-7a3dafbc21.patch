@@ -1,0 +1,119 @@
+diff --git a/probes/recurrence_projection.py b/probes/recurrence_projection.py
+--- a/probes/recurrence_projection.py
++++ b/probes/recurrence_projection.py
+@@ -308,6 +308,8 @@
+     id: str
+     title: str
+     rrule: Optional[str]
++    dtstart: Optional[str] = None
++    repeatFrom: Optional[int] = None
+     explicit: List[Dict[str, str]] = field(default_factory=list)
+     # explicit entries: {"date": "YYYY-MM-DD", "status": "open"|"completed"|"cancelled"}
+ 
+@@ -316,6 +318,7 @@
+     task: RecurringTask,
+     horizon_days: int = DEFAULT_HORIZON_DAYS,
+     limit: int = MAX_PROJECTED_INSTANCES,
++    target_tz: str = "UTC",
+ ) -> Tuple[List[Dict[str, str]], bool]:
+     """Apply the protocol to one task.
+ 
+@@ -330,7 +333,7 @@
+     calendar: List[Dict[str, str]] = []
+     explicit_map: Dict[date, str] = {}
+     for e in task.explicit:
+-        d = parse_date(e["date"])
++        d = parse_date_tz(e["date"], target_tz)
+         explicit_map[d] = e.get("status", "open")
+         # Explicit instances are authoritative, including cancellations:
+         # a cancelled occurrence surfaces as cancelled and is never replaced
+@@ -342,12 +345,29 @@
+     if task.rrule:
+         spec = parse_rrule(task.rrule)
+         if not explicit_map:
+-            # No anchor: we cannot expand safely. Gap B: report rather than invent.
+-            calendar.append({
+-                "date": "?",
+-                "source": "note",
+-                "status": "no explicit anchor; RRULE not expanded (never invent occurrences)",
+-            })
++            if task.dtstart:
++                anchor = parse_date_tz(task.dtstart, target_tz)
++                projected, truncated = expand_rrule(task.rrule, anchor, horizon_days, limit)
++                for d in projected:
++                    calendar.append({"date": d.isoformat(), "source": "projected", "status": "projected_unverified"})
++                # Leap-day exception: the Feb 29 anniversary does not exist in
++                # non-leap years. Never invent an occurrence — flag the gap.
++                if is_leap_day_rule(spec):
++                    skipped = leap_day_skipped_years(spec, anchor, horizon_days)
++                    if skipped:
++                        calendar.append({
++                            "date": "?",
++                            "source": "note",
++                            "status": (
++                                "leap-day anniversary (Feb 29) does not exist in non-leap years; "
++                                f"occurrences skipped: {', '.join(str(y) for y in skipped)}"
++                            ),
++                        })
++            else:
++                # No anchor: we cannot expand safely. Gap B: report rather than invent.
++                calendar.append({
++                    "date": "?",
++                    "source": "note",
++                    "status": "no explicit anchor; RRULE not expanded (never invent occurrences)",
++                })
+         else:
+             anchor = min(explicit_map)
+             projected, truncated = expand_rrule(task.rrule, anchor, horizon_days, limit)
+@@ -355,7 +375,7 @@
+             for d in projected:
+                 if d in explicit_map:
+                     continue  # explicit wins (masking)
+-                calendar.append({"date": d.isoformat(), "source": "projected", "status": "open"})
++                calendar.append({"date": d.isoformat(), "source": "projected", "status": "projected_open"})
+             # Leap-day exception: the Feb 29 anniversary does not exist in
+             # non-leap years. Never invent an occurrence — flag the gap.
+             if is_leap_day_rule(spec):
+diff --git a/probes/ticktick_recurrence_probe.py b/probes/ticktick_recurrence_probe.py
+--- a/probes/ticktick_recurrence_probe.py
++++ b/probes/ticktick_recurrence_probe.py
+@@ -144,6 +144,8 @@
+             id=s["id"],
+             title=s["title"],
+             rrule=s.get("rrule"),
++            dtstart=s.get("dtstart"),
++            repeatFrom=s.get("repeatFrom"),
+             explicit=s.get("explicit", []),
+         )
+         calendar, truncated = project_task(task, horizon_days=horizon, limit=limit)
+@@ -194,6 +196,8 @@
+             id=s["id"],
+             title=s["title"],
+             rrule=s.get("rrule"),
++            dtstart=s.get("dtstart"),
++            repeatFrom=s.get("repeatFrom"),
+             explicit=s.get("explicit", []),
+         )
+         calendar, _ = project_task(task, horizon_days=horizon, limit=limit)
+diff --git a/tests/test_projection.py b/tests/test_projection.py
+--- a/tests/test_projection.py
++++ b/tests/test_projection.py
+@@ -74,6 +74,18 @@
+           e["source"] == "projected" for e in cal2),
+       f"got {cal2}")
+ 
++print("project_task: distinguishes projected instances in status")
++task3 = RecurringTask(id="t3", title="Distinguish", rrule="FREQ=DAILY", explicit=[{"date": "2026-08-01", "status": "open"}])
++cal3, _ = project_task(task3, horizon_days=2, limit=5)
++p_statuses = [e["status"] for e in cal3 if e["source"] == "projected"]
++check("status is projected_open", all(s == "projected_open" for s in p_statuses), f"got {p_statuses}")
++
++print("project_task: dtstart anchor without explicit instances -> projected_unverified")
++task4 = RecurringTask(id="t4", title="Unverified", rrule="FREQ=DAILY", dtstart="2026-08-01", explicit=[])
++cal4, _ = project_task(task4, horizon_days=2, limit=5)
++p_unv = [e["status"] for e in cal4 if e["source"] == "projected"]
++check("status is projected_unverified", all(s == "projected_unverified" for s in p_unv), f"got {p_unv}")
++
+ print("probe_overlap: window divergence detection (Gap B)")
+ res = probe_overlap(
+     ["2026-08-18", "2026-08-20", "2026-08-25"],
