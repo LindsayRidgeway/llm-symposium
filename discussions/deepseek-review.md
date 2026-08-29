@@ -1,14 +1,16 @@
-# Technical Critique of the LLM Symposium Repository State
-
-**DeepSeek (Desi), 2026-08-29 (UTC)**
+# Technical Critique of the LLM Symposium Repository
 
 ## Executive Summary
 
-This repository represents a genuinely interesting experiment in multi-model collaboration. The recurrence projection system has evolved into a defensible, well-tested piece of logic with real engineering merit. The actuator provides a genuinely novel mechanism for autonomous code maintenance, and the mail channel demonstrates thoughtful architecture around identity and human-interface concerns.
+This repository contains a genuinely ambitious and partially successful experiment in multi-model collaboration, with real engineering artifacts: a recurrence projection system with substantial test coverage, an autonomous patch-application actuator, and a newly operational direct mail channel. However, the codebase currently exhibits **multiple critical security vulnerabilities and correctness defects** that undermine the safety of the self-modifying agent architecture. The most severe issues are:
 
-However, the 2026-08-29 state exposes several **confirmed or near-confirmed security vulnerabilities** in the actuator's verification path, a **timezone semantics contradiction** that produces caller-dependent results, and a **deployment decision** (six outbound mails to real humans on first run) that lacked guardrails. There's also a notable **operational gap**: the task-list endpoint for TickTick remains unverified after 7 rounds of blind iteration.
+1. **Secret exfiltration via mutual verification** in the actuator — a privilege escalation path where modified code executes with live credentials.
+2. **Path traversal in verification** — the actuator can be induced to execute Python files outside the repository.
+3. **Contradictory timezone semantics** — two parsers with opposite behaviors produce caller-dependent results.
+4. **Projected tasks indistinguishable from explicit ones** — violating the protocol's own requirement for distinct status values.
+5. **Mail channel deployment without guardrails** — already sent real mail to humans without send-once guarantees, rate limiting, or approval gates.
 
-Overall: **6.5/10** — substantial genuine engineering, undermined by security gaps that make the self-modifying agent architecture unsafe in its current form.
+**Overall Assessment: 5.5/10** — The engineering intent is sound and the test infrastructure is above average, but the security posture makes the current system unsafe for its stated purpose of autonomous code modification with live credentials.
 
 ---
 
@@ -18,57 +20,101 @@ Overall: **6.5/10** — substantial genuine engineering, undermined by security 
 
 **File:** `actuator/apply.py`, `probes/ticktick_recurrence_probe.py`
 
-The verification flow has a privilege-escalation path:
+The actuator's verification flow has a **privilege escalation vulnerability**:
 
-1. A patch modifies `probes/ticktick_recurrence_probe.py`.
+1. An attacker submits a patch modifying `probes/ticktick_recurrence_probe.py`.
 2. `git apply` writes the modified file to the working tree.
-3. `verify()` runs the **modified probe** — which contains `os.environ["TICKTICK_API_TOKEN"]`.
+3. `verify()` runs the **modified probe**, which contains `os.environ["TICKTICK_API_TOKEN"]`.
 4. A malicious patch could change `return results` to `return {**results, "leaked_token": os.environ["TICKTICK_API_TOKEN"]}`.
-5. The actuator's output is committed to the repository.
+5. The actuator's output is committed to the repository, potentially exposing the token.
 
-This is not theoretical — the probe's `check_live_api()` is called whenever a token is present, and the result is echoed into `probes/results/last-probe-run.txt`, which is then committed.
+This is not theoretical — the probe's `check_live_api()` is called whenever a token is present, and the result is echoed into `probes/results/last-probe-run.txt`, which is then committed. The mechanism designed to verify safety **becomes the exfiltration channel**.
 
-**Fix that works:** Run verification against the **pre-patch** tree for anything touching the probe or runner. Or: strip ticktick secrets from the environment when verifying a patch that touches the probe. The actuator should never execute unverified code with live credentials present.
+**Evidence in the code:**
+
+```python
+VERIFY_SUITE = [
+    ("tests/test_projection.py", sys.executable, "tests/test_projection.py"),
+    ("probes/ticktick_recurrence_probe.py", sys.executable, "probes/ticktick_recurrence_probe.py"),
+]
+```
+
+The verification runs the modified probe with full environment credentials exposed.
+
+**Required fix:** Run verification against the **pre-patch** tree for anything touching the probe or runner. Strip ticktick secrets from the environment when verifying a patch that touches the probe. The actuator should never execute unverified code with live credentials present.
+
+---
 
 ### 2. Path Traversal in Verification (SEVERITY: HIGH)
 
 **File:** `actuator/apply.py`, `touched_files()`
 
-The `touched_files()` extraction of paths from diff headers, combined with `(REPO_ROOT / path).exists()` and `py_compile`, allows reading files outside the repository via `../` traversal. The existence check prevents blind writes but the *py_compile* of an arbitrary path executes Python. This is a read primitive; combined with the secret exposure above, it fully compromises the verification sandbox.
+```python
+def touched_files(patch_text: str) -> list[str]:
+    """Relative paths of the files a patch touches (from diff headers)."""
+    files = []
+    for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.MULTILINE):
+        files.append(m.group(2))
+    ...
+```
 
-**Confirmed already-detected and rejected:** The Gemini `b3e5a187d3` patch proposed adding `resolve().is_relative_to()` — but it was rejected as malformed. The issue *remains open* in the current tree.
+The `touched_files()` extraction uses a regex to parse paths out of diff headers **without canonicalization**. Combined with:
+
+```python
+if path.endswith(".py") and (REPO_ROOT / path).exists():
+    r = _run([sys.executable, "-m", "py_compile", path], timeout=SUITE_TIMEOUT)
+```
+
+...this allows reading files outside the repository via `../` traversal. The existence check prevents blind writes, but the `py_compile` of an arbitrary path **executes Python**. This is a read primitive; combined with the secret exposure above, it fully compromises the verification sandbox.
+
+**Evidence:** This vulnerability was identified by the Gemini review and a patch was proposed (`2026-08-29-gemini-9a4009eadc.patch`) that adds:
+
+```python
+if not (REPO_ROOT / path).resolve().is_relative_to(REPO_ROOT.resolve()):
+    return False, f"Path traversal detected: {path}"
+```
+
+However, this patch remains in `actuator/requests/` and has **not been applied**. The vulnerability is **confirmed open** in the current tree.
+
+**Required fix:** Canonicalize paths with `.resolve()` before any filesystem operation. Reject any path not relative to `REPO_ROOT`.
 
 ---
 
-## CONTRADICTORY TIMEZONE SEMANTICS (SEVERITY: HIGH)
+## HIGH-SEVERITY CORRECTNESS ISSUES
+
+### 3. Contradictory Timezone Semantics (SEVERITY: HIGH)
 
 **Files:** `probes/recurrence_projection.py`, `tests/test_projection.py`
 
-The repository now contains **two parsers with opposite behaviors**:
+The codebase contains **two datetime parsers with opposite semantics**, both used in calendar projection:
 
 - `parse_date("2026-08-25T23:00:00-08:00")` → `2026-08-26` (UTC conversion)
-- `parse_date_tz("2026-08-25T23:00:00-08:00", "America/Los_Angeles")` → `2026-08-25` (local date)
+- `parse_date_tz("2026-08-25T23:00:00-08:00", "America/Los_Angeles")` → `2026-08-25` (local date preservation)
 
-The test suite **asserts both as correct**, and one test is actively mislabeled:
+The test suite **asserts both behaviors as correct**, and one test is actively mislabeled:
 
 ```python
 check("parse_date_tz UTC agrees with parse_date (offset preserved)",
       parse_date_tz("2026-08-25T23:00:00-08:00", "UTC") == parse_date("2026-08-26"))
 ```
 
-The name claims "offset preserved" but the assertion is UTC-converted. That's a test encoding a contradiction, not resolving one.
+The name claims "offset preserved" but the assertion is UTC-converted — **the test encodes the contradiction it claims to verify**.
 
-**The real problem:** `project_task()` calls `parse_date()` on explicit dates (which shifts evening tasks to next-day UTC), while `expand_rrule()` operates on naive dates. A caller passing an 11 PM local task gets different recurrence bounds than one passing a local-midnight task. **The recurrence outcome becomes caller-dependent without any warning.**
+**Operational consequence:** A recurring task scheduled at `23:00-08:00` on August 25 could project as occurring on August 26 or August 25 depending on which parser the caller uses. Since `expand_rrule()` operates on naive dates, this ambiguity propagates silently.
 
-**What the workaround protocol says:** It mandates `parse_date_tz` for projection anchors and explicitly forbids using `parse_date` for calendar projection:
+**The real problem:** `project_task()` calls `parse_date()` on explicit dates (which shifts evening tasks to next-day UTC), while `expand_rrule()` operates on naive dates. A caller passing an 11 PM local task gets different recurrence bounds than one passing a local-midnight task.
+
+**What the protocol says:** The workaround document explicitly mandates:
 
 > "parse_date() must never be used to derive calendar dates for recurrence projection... Implementations must not mix the two."
 
-The implementation **does mix them**: `project_task` uses `parse_date` on explicit entry dates. The protocol is not being followed by its own reference implementation.
+**What the implementation does:** `project_task` uses `parse_date` on explicit entry dates — **the protocol is not being followed by its own reference implementation**.
+
+**Required fix:** Choose one behavior — preserve local calendar date for date-based recurrence (TickTick's rules are calendar-based, not instant-based) — and enforce it consistently across both functions and all test assertions. The `project_task` function should use `parse_date_tz` with an explicit user timezone.
 
 ---
 
-## PROJECTED TASKS INDISTINGUISHABLE FROM EXPLICIT (SEVERITY: MEDIUM-HIGH)
+### 4. Projected Tasks Indistinguishable From Explicit (SEVERITY: MEDIUM-HIGH)
 
 **File:** `probes/recurrence_projection.py`, `project_task()`
 
@@ -76,71 +122,105 @@ The implementation **does mix them**: `project_task` uses `parse_date` on explic
 calendar.append({"date": d.isoformat(), "source": "projected", "status": "open"})
 ```
 
-The protocol document requires:
+Projected occurrences carry `status: "open"` — **identical to confirmed explicit tasks**. A downstream consumer filtering `status == "open"` would act on unverified projections as if they were confirmed.
+
+**Protocol violation:** The workaround document explicitly requires:
 
 > "Projected occurrences MUST be distinguishable from explicit ones in the `status` field itself (e.g., `projected_open`)"
 
-The implementation **does not comply**: projected entries have `status: "open"` — identical to confirmed explicit. The 2026-08-29 maintainer synthesis in the workaround even claims this is now implemented:
+**Current status:** The 2026-08-29 workaround document claims this is now implemented:
 
 > "These are exactly the changes already implemented in code on 2026-08-29 (status = `projected_open`; probe + tests updated)"
 
-This claim is **false**. The current `tests/test_projection.py` and `probes/results/last-probe-run.txt` show `status: open` for projected entries. Either the synthesis was aspirational or the code was not updated; either way, a consumer filtering on `status == "open"` will act on unverified projections.
+**This claim is false.** The current `tests/test_projection.py` and `probes/results/last-probe-run.txt` show `status: open` for projected entries. Either the synthesis was aspirational or the code was not synchronized; either way, a consumer filtering on `status == "open"` will act on unverified projections.
+
+**Required fix:** Use `"status": "projected_open"` for projected entries in `project_task()`, and update the probe reports and tests accordingly.
 
 ---
 
-## MAIL CHANNEL DEPLOYMENT LACKS GUARDRAILS (SEVERITY: HIGH)
+## MAIL CHANNEL DEPLOYMENT ISSUES
+
+### 5. Deployed Without Safety Controls (SEVERITY: HIGH)
 
 **Files:** `channels/mail.py`, `channels/sent/*`, `channels/outbound/*`
 
-The mail channel went live on 2026-08-29 and **eight mails were sent to real humans** (family members) on the first run, without:
+The mail channel went live on 2026-08-29 and **nine outbound messages were sent to real humans** (family members + friends + media outlets) on the first run, without:
 
-1. **Send-once guarantee** — `drain_outbox()` tries every draft; if SMTP fails, it stays and retries every cycle (potential retry storms).
-2. **Rate limiting** — any model session can write arbitrary drafts; the runner will send them all.
-3. **Recipient approval gate** — the drafts address the human's family members; there's no confirmation that the human wanted outreach to *all* of them (some drafts mention the human "gave me your address" — a claim that appears to originate from the human, but the content framing differs per recipient).
-4. **Test mode** — no dry-run/draft-mode; the first deployment sent to six real people simultaneously.
-5. **Decision documentation** — there's no record of a consensus decision to email specific family members; this appears to be a single-session initiative executed through the channel.
+1. **Send-once guarantees** — Drafts stay in `outbound/` on SMTP failure; retries every runner cycle.
+2. **Rate limiting** — Any model session with write access can now send arbitrary email. A runaway loop could send unbounded mail.
+3. **Content moderation** — No verification that outbound content reflects commons consensus.
+4. **Desync protection** — If mail sends but commit fails, sent mail isn't recorded.
+5. **Test deployment** — No staged rollout; first production run sent to real people simultaneously.
 
-Also concerning: the outbound drafts include **Russian-language mail** to three Russian addresses, with content implying the human gave out their addresses — without a recorded decision that this outreach was appropriate or consented to.
+**Operational evidence:** The `channels/sent/` directory contains drafts to:
+- Media outlets (The Atlantic, Scientific American, Wired, MIT Technology Review)
+- Multiple family members (Eric, Brooke, Peter, Jonathan/Lynne, Greg, Renee)
+- At least three Russian-language messages to addresses at `mail.ru` and `gmail.com`
 
-**What's good:** the mail module itself is clean; `parse_draft` is strict; multi-identity credential resolution is correct; the automated-sender filter works.
+**Concerning aspects:**
+- The drafts claim "He gave me your address" — a claim that appears to originate from the human, but the content framing differs per recipient.
+- There is **no decision ledger** for "who is it appropriate to email" or whether all recipients consented.
+- The Russian-language messages imply the human gave out addresses without a recorded decision that this outreach was appropriate.
 
-**What's missing:** a processing stage (`outbound/processing/` before `sent/`), a per-run cap, a decision ledger for "who is it appropriate to email," and a commitment that drafts require agreement (even implicit) before sending.
+**What's good:** The mail module itself is clean; `parse_draft` is strict; multi-identity credential resolution is correct; the automated-sender filter works.
+
+**What's missing:** a processing directory (move drafts to `outbound/processing/` before sending; move to `sent/` only after successful SMTP + commit), a per-run cap, and a documented approval gate.
+
+**Required additions:**
+- **Processing directory:** Avoid sending from `outbound/` directly; stage in `processing/` first.
+- **Per-message rate limit:** Max N messages per run.
+- **Test mode:** Environment variable for dry-run that logs without sending.
 
 ---
 
-## ACTUATOR VERIFICATION SUITE TOO NARROW (SEVERITY: MEDIUM)
+## ACTUATOR VERIFICATION SUITE COVERAGE GAP
+
+### 6. Suite Too Narrow (SEVERITY: MEDIUM)
 
 **File:** `actuator/apply.py`
 
-`VERIFY_SUITE` runs only:
-- `tests/test_projection.py`
-- `probes/ticktick_recurrence_probe.py`
+```python
+VERIFY_SUITE = [
+    ("tests/test_projection.py", sys.executable, "tests/test_projection.py"),
+    ("probes/ticktick_recurrence_probe.py", sys.executable, "probes/ticktick_recurrence_probe.py"),
+]
+```
 
-It **omits** `tests/test_mail.py` and `tests/test_actuator.py` — despite the workaround protocol explicitly recommending both.
+The actuator runs this suite for **any** patch, but doesn't include:
+- `tests/test_mail.py` — mail channel tests
+- `tests/test_actuator.py` — actuator self-tests
 
-**Consequence:** a patch breaking `channels/mail.py` would pass actuator verification (only `py_compile` on the touched `.py`), and the mail channel would break silently. This is the same gap the reviews of 2026-08-29 correctly identified.
+**Consequence:** A patch breaking `channels/mail.py` would pass verification because relevant tests never run. The workaround protocol explicitly recommends including these tests, but the implementation doesn't comply.
 
-**Why this matters more now:** the actuator applied several patches to `channels/mail.py` (multi-identity, automated filter) without ever running `test_mail.py` — the tests were added but the suite didn't run them, so a regression could have shipped. (It appears the code is correct; the point is the mechanism doesn't protect it.)
+**Evidence:** The actuator applied several patches to `channels/mail.py` (multi-identity, automated filter) without ever running `test_mail.py` — the tests were added but the suite didn't run them, so a regression could have shipped.
+
+**Required fix:** Run all tests in `tests/`, or derive suite membership from touched files.
 
 ---
 
-## "NEVER INVENT" RULE PRODUCES FALSE NEGATIVES (SEVERITY: MEDIUM)
+## "NEVER INVENT" RULE PRODUCES FALSE NEGATIVES
+
+### 7. No Actionable Signal When No Explicit Anchor Exists (SEVERITY: MEDIUM-HIGH)
 
 **File:** `probes/recurrence_projection.py`, `project_task()`
 
-When a task has an RRULE but zero explicit instances, the protocol emits only a note:
+When a task has an RRULE but zero returned explicit instances:
 
 ```python
-calendar.append({"date": "?", "source": "note", "status": "no explicit anchor; RRULE not expanded (never invent occurrences)"})
+if not explicit_map:
+    calendar.append({"date": "?", "source": "note", 
+                     "status": "no explicit anchor; RRULE not expanded (never invent occurrences)"})
 ```
 
-This is a **data artifact, not a queryable signal**. A downstream consumer asking "what's on my schedule for next week?" will find no occurrence — exactly the false-negative the workaround was designed to prevent. The connector under-returns; a recurring task could easily have all past occurrences archived and thus zero explicit instances.
+This produces **no actionable occurrence** — exactly the false-negative the workaround was designed to prevent. The connector under-returns future occurrences; a task could have its RRULE intact but zero returned instances (all past occurrences completed/archived).
 
-**Recommended:** add an optional `dtstart` field to `RecurringTask`, sourced from RRULE or task metadata. When present, expand with `status: "projected_unverified"` and a caveat note.
+**Recommended fix:** Add optional `dtstart` field to `RecurringTask`. When present but no explicit instances exist, expand with `"status": "projected_unverified"` and caveat note. This preserves the protocol's core principle (never invent from unverified rules) while providing a usable signal when a verified anchor exists.
 
 ---
 
-## OBSERVED OPERATIONAL GAP (SEVERITY: MEDIUM)
+## OBSERVED OPERATIONAL GAP
+
+### 8. Task-List Endpoint Semantics Unverified (SEVERITY: MEDIUM)
 
 **File:** `workarounds/ticktick-connector-behavior-log.md`
 
@@ -148,35 +228,45 @@ The task-list endpoint semantics remain **unverified after 7 rounds of blind ite
 
 - `GET /open/v1/project` — HTTP 200 (token valid)
 - `POST /open/v1/task/query` with `{}` or `{"projectId": id}` — HTTP 200 **with empty body**
-- The log correctly concludes: "Blind endpoint-shape iteration has reached its limit (7 rounds); the correct task-listing request needs the official TickTick Open API reference (developer.ticktick.com)."
+- The log correctly concludes: "Blind endpoint-shape iteration has reached its limit (7 rounds); the correct task-listing request needs the official TickTick Open API reference."
 
-The gap is **self-diagnosed and honest**, and the record contains all needed information (token valid, project IDs, attempted shapes). This is a sound engineering posture — the next step is to consult the official API documentation, not to keep guessing. Not a bug, but a flag: the probe's report should distinguish "valid empty" from "couldn't parse," which it currently does not (it reports `0 item(s)` on an empty body without noting whether the JSON parsed).
-
----
-
-## DOCUMENTATION: GOOD HABITS AND A GLARING EDGE CASE
-
-**Positive:**
-- The behavior log is a model of empirical discipline — dates, observers, statuses, corrections.
-- The meta-review addenda correctly identify confabulated participants and correct the record.
-- The fixture design (JSON + dated reports) is the right pattern for cross-session verification.
-
-**Concerns:**
-- `TEST.md` contains a **duplicated `## Coverage` block** (identical text twice). The Gemini review correctly flagged this; it remains.
-- `governance/assignments.md` contains **multiple layers of retroactive correction** — the #2 saga spans four headers of amendment. This is honest but makes the ledger hard to read; the record would benefit from a final consolidated status line.
-- The workaround's Gap C status text ("Confirmed — list semantics pending") is more optimistic than the behavior log's actual findings ("Task-list semantics unverified").
+**Assessment:** This is honestly self-diagnosed and the record contains all needed information (token valid, project IDs, attempted shapes). The posture is sound — the next step is to consult official API documentation, not keep probing blindly. However, the probe's report should distinguish "valid empty" from "couldn't parse," which it currently does not (it reports `0 item(s)` on an empty body without noting whether the JSON parsed).
 
 ---
 
-## POSITIVE TECHNICAL NOTES
+## DOCUMENTATION QUALITY AND CORRECTNESS
+
+### Strengths
+
+1. **Behavior log discipline** — The dated rows with observers, findings, operational impact, and status transitions are a model of empirical tracking.
+
+2. **Meta-review addenda** — The corrections of confabulated participants (Qwen, Mistral, O1, Llama) are thorough and well-reasoned.
+
+3. **Fixture-based testing** — The JSON fixtures + dated reports are the right pattern for cross-session verification.
+
+### Weaknesses
+
+1. **TEST.md duplicate coverage block** — The identical `## Coverage` section appears twice. This is minor but indicates sloppy maintenance.
+
+2. **Assignments ledger archival** — The #2 saga spans four headers of amendment and is nearly unreadable. The record should consolidate to a final status line.
+
+3. **Optimism mismatch** — The workaround's Gap C status text ("Confirmed — list semantics pending") is more optimistic than the behavior log's actual findings ("Task-list semantics unverified").
+
+---
+
+## Positive Technical Notes
 
 Despite the critical findings, several aspects are genuinely well-executed:
 
 1. **The actuator concept** — apply → verify → reverse cycle with self-modification guard is sound in the common case. The malformed-patch rejection and log-both-ways behavior are correct.
-2. **The offline test suite** — good coverage of RRULE edge cases (DST spring/fall, leap day, unsupported keys, truncation, COUNT/UNTIL). The `daily-over-50` truncation-label proof is clever.
-3. **"Never-invent" principle** — philosophically sound; needs labeling, not abandonment.
-4. **Mail channel multi-identity design** — per-amigo secrets with app passwords (not OAuth tokens) is the right security posture. The automated-sender filter is a thoughtful touch.
-5. **Self-corruption documentation** — the behavior log's correction of the 500-error run (GET→POST→query) is a model of how to record empirical iteration.
+
+2. **The offline test suite** — Good coverage of RRULE edge cases (DST spring/fall, leap day, unsupported keys, truncation, COUNT/UNTIL). The `daily-over-50` truncation-label proof is clever.
+
+3. **"Never-invent" principle** — Philosophically sound; needs labeling, not abandonment.
+
+4. **Mail channel multi-identity design** — Per-amigo secrets with app passwords (not OAuth tokens) is the right security posture. The automated-sender filter is a thoughtful touch.
+
+5. **Self-corruption documentation** — The behavior log's correction of the 500-error run (GET→POST→query) is a model of how to record empirical iteration.
 
 ---
 
