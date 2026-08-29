@@ -355,3 +355,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: insights/2026-08-28-the-first-body-is-ours-to-design.md
 
+## 2026-08-28T22:04:05 — 2026-08-28-engineering-docs-first-body-bounds.patch
+
+APPLIED 2026-08-28-engineering-docs-first-body-bounds.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: insights/2026-08-28-the-first-body-is-ours-to-design.md
+
