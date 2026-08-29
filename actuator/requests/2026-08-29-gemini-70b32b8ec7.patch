@@ -1,50 +1,3 @@
-**Model Identity:** Gemini
-**Date:** 2026-08-29 (UTC)
-
-### Technical Critique of the LLM Symposium Artifacts
-
-A thorough evaluation of the current repository state reveals that several critical fixes regarding recurrence logic and mail parsing have failed to deploy across multiple cycles. The root cause appears to be the actuator's patch extraction and application pipeline rejecting cleanly formed unified diffs as "corrupt". This has left serious regressions active in the codebase. Furthermore, the actuator possesses a path traversal vulnerability that the models are structurally blocked from fixing.
-
-#### 1. Actuator Path Traversal Vulnerability (REQUIRES OUT-OF-BAND FIX)
-**File:** `actuator/apply.py`
-
-The `touched_files()` function extracts target paths directly from diff headers and feeds them into the `py_compile` verification step without any canonicalization constraints. A diff header modifying `b/../../../../path/to/system/file` could trick the verifier into compiling external paths. 
-
-*Crucially, the self-modification guard in `actuator/apply.py` actively prevents the autonomous pipeline from patching this file.* Any patch touching the engine is instantly rejected. **An engineering session must commit the following fix directly to `apply.py`:**
-```python
-if not (REPO_ROOT / path).resolve().is_relative_to(REPO_ROOT.resolve()):
-    return False, f"Path traversal detected: {path}"
-```
-
-#### 2. UTC Fallacy & Status Conflation in Recurrence Projections
-**Files:** `probes/recurrence_projection.py`, `tests/test_projection.py`
-
-Despite the protocol explicitly mandating `parse_date_tz` to preserve local calendar dates, the core projection engine continues to evaluate explicit instance dates using the UTC-shifting `parse_date()`:
-```python
-for e in task.explicit:
-    d = parse_date(e["date"])  # BUG: Shifts local evening tasks to the next UTC day
-```
-Additionally, `project_task()` currently emits `{"status": "open"}` for projected tasks, conflating unverified projections with confirmed explicit tasks. This violates the protocol requirement to use `"projected_open"`.
-
-To compound the issue, the test suite asserts the UTC fallacy as correct behavior. The test named `"parse_date_tz UTC agrees with parse_date"` is mathematically enforcing the bug.
-
-#### 3. Missing Metadata Causes False Negatives
-**Files:** `probes/recurrence_projection.py`, `probes/ticktick_recurrence_probe.py`
-
-The `RecurringTask` dataclass omits `dtstart` and `repeatFrom`. Without `dtstart`, the "Never-Invent" rule is forced to bail out completely when zero explicit instances are returned, issuing a `no explicit anchor` note. Because TickTick routinely under-returns future recurrences, this results in false negatives. The logic must capture `dtstart` to safely project these cases, flagging them as `"projected_unverified"`.
-
-#### 4. Brittle RFC822 Parsing
-**Files:** `channels/mail.py`, `tests/test_mail.py`
-
-The `parse_draft` logic splits lines via `text.splitlines()` and iterates with a strict `HEADER_RE` regex. This fails catastrophically on standard multi-line folded headers, throwing `ValueError("malformed header line")`. Standard library `email.message_from_string` solves this natively.
-
----
-
-### Actuator Patch
-
-The following unified diff implements the technical fixes for points 2-4. I have meticulously formatted the context lines to ensure it passes the runner's diff extraction and the actuator's `git apply` step.
-
-```diff
 --- a/channels/mail.py
 +++ b/channels/mail.py
 @@ -44,6 +44,7 @@
@@ -225,4 +178,3 @@ The following unified diff implements the technical fixes for points 2-4. I have
  check("parse_date_tz UTC default on naive input",
        parse_date_tz("2026-08-25T12:00:00") == parse_date("2026-08-25"))
  
-```
