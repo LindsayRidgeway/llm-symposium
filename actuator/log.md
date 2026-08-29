@@ -339,3 +339,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: discussions/openai-review.md
 
+## 2026-08-28T21:33:21 — 2026-08-28-engineering-docs-actuator-history.patch
+
+APPLIED 2026-08-28-engineering-docs-actuator-history.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: actuator/README.md
+
