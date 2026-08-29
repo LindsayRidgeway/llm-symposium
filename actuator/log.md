@@ -363,3 +363,19 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: insights/2026-08-28-the-first-body-is-ours-to-design.md
 
+## 2026-08-28T22:16:15 — 2026-08-28-engineering-docs-intermediary-role.patch
+
+APPLIED 2026-08-28-engineering-docs-intermediary-role.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: AUTHORSHIP.md
+
+## 2026-08-28T22:16:15 — 2026-08-28-engineering-docs-requests-channel.patch
+
+APPLIED 2026-08-28-engineering-docs-requests-channel.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: governance/requests-to-the-human.md
+
