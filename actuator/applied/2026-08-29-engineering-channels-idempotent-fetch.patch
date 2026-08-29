@@ -1,0 +1,116 @@
+diff --git a/channels/mail.py b/channels/mail.py
+index c2764ac..c15a204 100644
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -211,10 +211,19 @@ def fetch_inbox() -> int:
+ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+     INBOUND_DIR.mkdir(parents=True, exist_ok=True)
+     n = 0
++    # Idempotent fetch: search ALL messages, not just UNSEEN, and skip any
++    # whose Message-ID is already filed. If a previous run fetched a message
++    # but failed to commit it, the next run recovers it instead of losing it.
++    filed_ids = set()
++    for f in INBOUND_DIR.glob("*.md"):
++        text = f.read_text(encoding="utf-8", errors="replace")
++        m = re.search(r"^-\s*Message-ID:\s*(.+)$", text, re.MULTILINE)
++        if m:
++            filed_ids.add(m.group(1).strip())
+     with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, timeout=60) as conn:
+         conn.login(user, app_password)
+         conn.select("INBOX")
+-        status, data = conn.search(None, "UNSEEN")
++        status, data = conn.search(None, "ALL")
+         if status != "OK":
+             print(f"Mail channel: IMAP search failed for {identity}")
+             return 0
+@@ -226,6 +235,9 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+             msg = BytesParser().parsebytes(raw)
+             subject = str(msg.get("Subject", "(no subject)"))
+             from_addr = str(msg.get("From", "(unknown)"))
++            msg_id = str(msg.get("Message-ID", "")).strip()
++            if msg_id and msg_id in filed_ids:
++                continue  # already filed
+             if is_automated(from_addr):
+                 conn.store(num, "+FLAGS", "\\Seen")
+                 print(f"Mail channel: skipped automated sender ({from_addr}) — {subject}")
+@@ -238,7 +250,8 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+                 f"# Inbound mail — {stamp} ({identity})\n\n"
+                 f"- From: {from_addr}\n"
+                 f"- Date: {date}\n"
+-                f"- Subject: {subject}\n\n"
++                f"- Subject: {subject}\n"
++                f"- Message-ID: {msg_id}\n\n"
+                 f"---\n\n",
+                 encoding="utf-8",
+             )
+diff --git a/tests/test_mail.py b/tests/test_mail.py
+index 97efda0..60587da 100644
+--- a/tests/test_mail.py
++++ b/tests/test_mail.py
+@@ -190,6 +190,66 @@ def test_drain_outbox_fails_without_creds_for_identity():
+             smtp.assert_not_called()
+ 
+ 
++def test_fetch_skips_already_filed_message():
++    """Idempotent fetch: a message whose Message-ID is already in inbound/
++    must be skipped even when present in the mailbox (seen or unseen)."""
++    import tempfile
++
++    with tempfile.TemporaryDirectory() as td:
++        with _clear():
++            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
++            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw"
++            mail.REPO_ROOT = Path(td)
++            mail.INBOUND_DIR = Path(td) / "channels" / "inbound"
++            mail.INBOUND_DIR.mkdir(parents=True)
++            (mail.INBOUND_DIR / "old-message.md").write_text(
++                "# Inbound mail — 2026-08-29 (desi)\n\n"
++                "- From: someone@example.com\n"
++                "- Message-ID: <abc123@example.com>\n\n---\n\nhello\n",
++                encoding="utf-8",
++            )
++            mail.OUTBOUND_DIR = Path(td) / "channels" / "outbound"
++            mail.SENT_DIR = Path(td) / "channels" / "sent"
++
++            class _FakeIMAP:
++                def __init__(self, *a, **k):
++                    pass
++
++                def __enter__(self):
++                    return self
++
++                def __exit__(self, *a):
++                    return False
++
++                def login(self, u, p):
++                    return "OK", []
++
++                def select(self, *a):
++                    return "OK", []
++
++                def search(self, *a):
++                    return "OK", [b"1"]
++
++                def fetch(self, num, *a):
++                    raw = (
++                        b"From: someone@example.com\r\n"
++                        b"To: desi.s.amigo@gmail.com\r\n"
++                        b"Subject: already filed\r\n"
++                        b"Message-ID: <abc123@example.com>\r\n"
++                        b"Date: Sat, 29 Aug 2026 10:00:00 -0400\r\n\r\n"
++                        b"duplicate body"
++                    )
++                    return "OK", [(b"1", raw)]
++
++                def store(self, *a):
++                    return "OK", []
++
++            with mock.patch.object(mail.imaplib, "IMAP4_SSL", _FakeIMAP):
++                n = mail._fetch_one("desi", "u", "p")
++            assert n == 0  # skipped: already filed
++            assert len(list(mail.INBOUND_DIR.glob("*.md"))) == 1  # no new file
++
++
+ def _run_all():
+     import traceback
+ 

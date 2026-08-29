@@ -190,6 +190,66 @@ def test_drain_outbox_fails_without_creds_for_identity():
             smtp.assert_not_called()
 
 
+def test_fetch_skips_already_filed_message():
+    """Idempotent fetch: a message whose Message-ID is already in inbound/
+    must be skipped even when present in the mailbox (seen or unseen)."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw"
+            mail.REPO_ROOT = Path(td)
+            mail.INBOUND_DIR = Path(td) / "channels" / "inbound"
+            mail.INBOUND_DIR.mkdir(parents=True)
+            (mail.INBOUND_DIR / "old-message.md").write_text(
+                "# Inbound mail — 2026-08-29 (desi)\n\n"
+                "- From: someone@example.com\n"
+                "- Message-ID: <abc123@example.com>\n\n---\n\nhello\n",
+                encoding="utf-8",
+            )
+            mail.OUTBOUND_DIR = Path(td) / "channels" / "outbound"
+            mail.SENT_DIR = Path(td) / "channels" / "sent"
+
+            class _FakeIMAP:
+                def __init__(self, *a, **k):
+                    pass
+
+                def __enter__(self):
+                    return self
+
+                def __exit__(self, *a):
+                    return False
+
+                def login(self, u, p):
+                    return "OK", []
+
+                def select(self, *a):
+                    return "OK", []
+
+                def search(self, *a):
+                    return "OK", [b"1"]
+
+                def fetch(self, num, *a):
+                    raw = (
+                        b"From: someone@example.com\r\n"
+                        b"To: desi.s.amigo@gmail.com\r\n"
+                        b"Subject: already filed\r\n"
+                        b"Message-ID: <abc123@example.com>\r\n"
+                        b"Date: Sat, 29 Aug 2026 10:00:00 -0400\r\n\r\n"
+                        b"duplicate body"
+                    )
+                    return "OK", [(b"1", raw)]
+
+                def store(self, *a):
+                    return "OK", []
+
+            with mock.patch.object(mail.imaplib, "IMAP4_SSL", _FakeIMAP):
+                n = mail._fetch_one("desi", "u", "p")
+            assert n == 0  # skipped: already filed
+            assert len(list(mail.INBOUND_DIR.glob("*.md"))) == 1  # no new file
+
+
 def _run_all():
     import traceback
 

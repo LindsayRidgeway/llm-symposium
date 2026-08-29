@@ -211,10 +211,19 @@ def fetch_inbox() -> int:
 def _fetch_one(identity: str, user: str, app_password: str) -> int:
     INBOUND_DIR.mkdir(parents=True, exist_ok=True)
     n = 0
+    # Idempotent fetch: search ALL messages, not just UNSEEN, and skip any
+    # whose Message-ID is already filed. If a previous run fetched a message
+    # but failed to commit it, the next run recovers it instead of losing it.
+    filed_ids = set()
+    for f in INBOUND_DIR.glob("*.md"):
+        text = f.read_text(encoding="utf-8", errors="replace")
+        m = re.search(r"^-\s*Message-ID:\s*(.+)$", text, re.MULTILINE)
+        if m:
+            filed_ids.add(m.group(1).strip())
     with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, timeout=60) as conn:
         conn.login(user, app_password)
         conn.select("INBOX")
-        status, data = conn.search(None, "UNSEEN")
+        status, data = conn.search(None, "ALL")
         if status != "OK":
             print(f"Mail channel: IMAP search failed for {identity}")
             return 0
@@ -226,6 +235,9 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
             msg = BytesParser().parsebytes(raw)
             subject = str(msg.get("Subject", "(no subject)"))
             from_addr = str(msg.get("From", "(unknown)"))
+            msg_id = str(msg.get("Message-ID", "")).strip()
+            if msg_id and msg_id in filed_ids:
+                continue  # already filed
             if is_automated(from_addr):
                 conn.store(num, "+FLAGS", "\\Seen")
                 print(f"Mail channel: skipped automated sender ({from_addr}) — {subject}")
@@ -238,7 +250,8 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                 f"# Inbound mail — {stamp} ({identity})\n\n"
                 f"- From: {from_addr}\n"
                 f"- Date: {date}\n"
-                f"- Subject: {subject}\n\n"
+                f"- Subject: {subject}\n"
+                f"- Message-ID: {msg_id}\n\n"
                 f"---\n\n",
                 encoding="utf-8",
             )
