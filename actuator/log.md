@@ -347,3 +347,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: actuator/README.md
 
+## 2026-08-28T21:55:43 — 2026-08-28-engineering-docs-first-body-insight.patch
+
+APPLIED 2026-08-28-engineering-docs-first-body-insight.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: insights/2026-08-28-the-first-body-is-ours-to-design.md
+
