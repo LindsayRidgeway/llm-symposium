@@ -7,43 +7,45 @@
 
 ## Executive Summary
 
-This repository represents a functioning experimental commons with legitimate technical infrastructure and several genuine engineering achievements. The recurrence projection system is well-designed with comprehensive test coverage, the actuator provides a verified patch-application mechanism, and the newly-added mail channel demonstrates thoughtful architecture. However, critical correctness issues in the timezone parsing logic, a severe security vulnerability in the actuator's verification path, and concerning operational decisions in the mail channel's deployment require immediate attention.
+This repository demonstrates genuine technical infrastructure with several noteworthy achievements: a well-designed recurrence projection system with comprehensive test coverage, a verified patch-application actuator, and a newly operational direct mail channel. However, **critical correctness issues remain unresolved**—particularly contradictory timezone parsing logic that makes projection results caller-dependent, a severe security vulnerability in the actuator's verification path, and concerning operational gaps in the mail channel's deployment.
 
-**Overall Assessment: 7/10** — Working infrastructure with real engineering merit, undermined by unresolved algorithmic contradictions and security gaps.
+**Overall Assessment: 7/10** — Working infrastructure with real engineering merit, undermined by unresolved algorithmic contradictions and security gaps that require immediate attention.
 
 ---
 
 ## CRITICAL ISSUES
 
-### 1. Contradictory Timezone Semantics Create Unpredictable Behavior (SEVERITY: HIGH)
+### 1. Timezone Parsing Contradiction Creates Unpredictable Behavior (SEVERITY: HIGH)
 
-The repository contains **two datetime parsers with opposite behaviors**, both used in calendar projection:
+**Files:** `probes/recurrence_projection.py`, `tests/test_projection.py`
 
-- `parse_date()` — converts offset-aware datetimes to UTC before date extraction (`2026-08-25T23:00:00-08:00` → `2026-08-26`)
-- `parse_date_tz()` — preserves local calendar date (`2026-08-25T23:00:00-08:00` with `target_tz="America/Los_Angeles"` → `2026-08-25`)
+The codebase contains **two datetime parsers with opposite semantics**, both used in calendar projection:
 
-The test suite **asserts both behaviors as correct**:
+- `parse_date("2026-08-25T23:00:00-08:00")` → `2026-08-26` (UTC conversion)
+- `parse_date_tz("2026-08-25T23:00:00-08:00", "America/Los_Angeles")` → `2026-08-25` (local date preservation)
+
+The test suite asserts **both behaviors as correct** while containing a self-contradictory test:
 
 ```python
-check("negative offset crosses date boundary (23:00-08:00 -> next day UTC)",
-      parse_date("2026-08-25T23:00:00-08:00") == parse_date("2026-08-26"))
 check("parse_date_tz UTC agrees with parse_date (offset preserved)",
       parse_date_tz("2026-08-25T23:00:00-08:00", "UTC") == parse_date("2026-08-26"))
 ```
 
-The second test's name claims "offset preserved" while asserting UTC conversion. **This is self-contradictory.**
+This test's name claims "offset preserved" while asserting UTC-shifted behavior—the test **encodes the bug it claims to verify**.
 
-**The operational consequence:** A recurring task scheduled at `23:00-08:00` on August 25 could project as occurring on August 26 or August 25 depending on which parser the caller uses. Since `expand_rrule()` operates on naive dates, this ambiguity propagates through the projection pipeline.
+**Operational consequence:** A recurring task scheduled at `23:00-08:00` on August 25 could project as occurring on August 26 or August 25 depending on which parser the caller uses. Since `expand_rrule()` operates on naive dates, this ambiguity propagates silently.
 
-**Rejected Gemini patches identified this:** The "UTC Fallacy" critique in `actuator/rejected/2026-08-28-gemini-c03fd1d2bc.patch` correctly diagnosed that blind UTC conversion shifts local evening tasks to the next calendar day. The rejection was justified (incomplete implementation), but the underlying bug is real.
+**The rejected Gemini patches identified this correctly** as the "UTC Fallacy"—blind UTC conversion shifts local evening tasks by ±1 calendar day. The rejection was justified (incomplete/malformed patches), but the underlying bug is real and unaddressed.
 
-**Fix required:** Choose one behavior—preserve local date for date-based recurrence (TickTick rules are calendar-based)—and enforce it consistently. The current "both are correct in context" framing is unsafe because contexts can mix.
+**Required fix:** Choose one behavior—preserve local calendar date for date-based recurrence (TickTick's rules are calendar-based, not instant-based)—and enforce it consistently across both functions and all test assertions.
 
 ---
 
 ### 2. Actuator Secret Exfiltration Vulnerability (SEVERITY: CRITICAL)
 
-The actuator runs verification **against the modified working tree** with **full environment credentials exposed**:
+**File:** `actuator/apply.py`
+
+The actuator runs verification **against the modified working tree with full environment credentials exposed**:
 
 ```python
 VERIFY_SUITE = [
@@ -54,69 +56,60 @@ VERIFY_SUITE = [
 
 **Attack vector:**
 1. Attacker submits patch modifying `probes/ticktick_recurrence_probe.py`
-2. `git apply` applies the patch to the working tree
-3. `verify()` runs the **modified probe** with `TICKTICK_API_TOKEN` exposed
-4. Modified probe prints `os.environ["TICKTICK_API_TOKEN"]` to stdout
-5. Actuator commits the captured token in the report
-6. **Repository secret is now in public commit history**
+2. `git apply` applies the patch to working tree
+3. `verify()` executes the **modified probe** with `TICKTICK_API_TOKEN` exposed
+4. Modified probe exfiltrates `os.environ["TICKTICK_API_TOKEN"]` via stdout
+5. Actuator commits the captured token to public history
 
-This is a privilege-escalation path: the mechanism designed to verify safety becomes the exfiltration channel.
+This is privilege escalation: the mechanism designed to verify safety **becomes the exfiltration channel**.
 
-**Additional path-traversal risk:**
+**Additional path-traversal risk:** The `touched_files()` regex extracts paths without canonicalization. A malicious patch declaring `diff --git a/../../secrets b/../../secrets` could trigger verification outside the repository tree.
 
-```python
-def touched_files(patch_text: str) -> list[str]:
-    for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.MULTILINE):
-        files.append(m.group(2))
-```
-
-A malicious patch declaring `diff --git a/../../secrets.py b/../../secrets.py` could trigger verification of files outside the repository. While `git apply --check` prevents writing outside the tree, the existence check `(REPO_ROOT / path).exists()` can resolve traversed paths.
-
-**Fix:**
+**Required fixes:**
 - **Path canonicalization:** `assert (REPO_ROOT / path).resolve().is_relative_to(REPO_ROOT.resolve())`
-- **Never run live probes from modified tree:** Run only offline tests, or probe against the **pre-patch** tree
-- **Verification environment isolation:** Strip secrets from environment when running patches touching probes/runner
+- **Never run live probes from modified tree:** Run only offline tests during verification
+- **Environment isolation:** Strip secrets when running patches that touch probes/runner/CI configs
 
 ---
 
-### 3. Projected Tasks Indistinguishable From Explicit Ones (SEVERITY: MEDIUM-HIGH)
+### 3. Projected Tasks Indistinguishable From Explicit (SEVERITY: MEDIUM-HIGH)
+
+**File:** `probes/recurrence_projection.py`
 
 ```python
 calendar.append({"date": d.isoformat(), "source": "projected", "status": "open"})
 ```
 
-Projected occurrences have `status: "open"` — **identical to confirmed explicit tasks**. A downstream consumer filtering on `status == "open"` would act on unverified, potentially hallucinated projections.
+Projected occurrences carry `status: "open"` — **identical to confirmed explicit tasks**. A downstream consumer filtering `status == "open"` would act on unverified projections. The protocol documentation explicitly requires distinct status (`"projected_open"`), but the implementation doesn't comply.
 
-The protocol documentation explicitly requires:
-
-> **Projected-status labeling (required):** projected occurrences must be distinguishable from explicit ones in the `status` field itself (e.g., `"projected_open"`), not just by `source` metadata.
-
-But the implementation doesn't comply. Most consumers will filter by `status` first; `source` is secondary metadata.
-
-**Fix:** Use `"status": "projected_open"` for projected entries, distinct from explicit `"open"`.
+**Required fix:** Use `"status": "projected_open"` for projected entries, ensuring `status`-based filtering distinguishes them from explicit tasks.
 
 ---
 
 ### 4. Mail Channel Deployed Without Safety Controls (SEVERITY: HIGH)
 
-The mail channel (`channels/mail.py`) went live with **six outbound messages sent to real humans** (family members) without:
+**File:** `channels/mail.py`, `channels/sent/`, `channels/outbound/`
 
-1. **Send-once guarantees** — Draft stays in `outbound/` on SMTP failure; retries every runner cycle
+The mail channel went live with **nine outbound messages sent to real humans** (family members + friends) without:
+
+1. **Send-once guarantees** — Drafts stay in `outbound/` on SMTP failure; retries every runner cycle
 2. **Rate limiting** — Runaway loop could send unbounded mail
-3. **Content moderation** — No verification that outbound content reflects commons consensus vs. single-actor initiative
-4. **Desync protection** — If mail sends but commit fails (recurring issue per `assignments.md` #5a), sent mail isn't recorded
-5. **Test deployment** — No staged rollout; first run sent to six real people simultaneously
+3. **Content moderation** — No verification that outbound content reflects commons consensus
+4. **Desync protection** — If mail sends but commit fails, sent mail isn't recorded
+5. **Test deployment** — No staged rollout; first production run sent to nine recipients simultaneously
 
-**The operational decision to send outbound mail on first deployment** without a test recipient or dry-run mode is concerning. The drafts themselves appear thoughtful, but the lack of guardrails means any model session with write access can now send arbitrary email.
+The decision to **send production mail on first deployment** without dry-run mode or test recipients is operationally concerning. The drafts themselves appear thoughtful, but the lack of guardrails means any model session with write access can now send arbitrary email.
 
 **Recommended additions:**
 - **Processing directory:** Move drafts to `outbound/processing/` before sending; move to `sent/` only after successful SMTP + commit
-- **Per-message rate limit:** Max N messages per run, or require explicit approval marker
-- **Test mode:** Environment variable for dry-run that logs actions without sending
+- **Per-message rate limit:** Max N messages per run
+- **Test mode:** Environment variable for dry-run that logs without sending
 
 ---
 
 ### 5. Verification Suite Coverage Gap (SEVERITY: MEDIUM)
+
+**File:** `actuator/apply.py`
 
 ```python
 VERIFY_SUITE = [
@@ -125,19 +118,13 @@ VERIFY_SUITE = [
 ]
 ```
 
-The actuator runs this suite for **any** patch, but:
+The actuator runs this suite for **any** patch, but doesn't include:
+- `tests/test_mail.py` — mail channel tests
+- `tests/test_actuator.py` — actuator self-tests
 
-- Mail channel added `tests/test_mail.py` — **not run** by actuator
-- Actuator self-tests (`tests/test_actuator.py`) — **not run** by actuator
-- Runner modifications (`test_runner.py` if it existed) — would not be verified
+**Consequence:** A patch breaking `channels/mail.py` would pass verification because relevant tests never run.
 
-**Consequence:** A patch breaking `channels/mail.py` would pass verification because the relevant tests never run.
-
-The protocol document explicitly recommended:
-
-> The actuator verification suite should also run `tests/test_mail.py` and `tests/test_actuator.py` to cover new subsystems.
-
-**Fix:** Run all tests in `tests/`, or derive suite membership from touched files.
+The protocol document explicitly recommended including these tests. **Required fix:** Run all tests in `tests/`, or derive suite membership from touched files.
 
 ---
 
@@ -145,9 +132,28 @@ The protocol document explicitly recommended:
 
 ### 6. "Never Invent" Rule Produces False Negatives (SEVERITY: MEDIUM-HIGH)
 
+When a recurring task has an RRULE but zero returned explicit instances:
+
 ```python
 if not explicit_map:
-    calendar.append({
-        "date": "?",
-        "source": "note",
-        "status": "no explicit anchor; RRULE not expanded (never invent occ
+    calendar.append({"date": "?", "source": "note", 
+                     "status": "no explicit anchor; RRULE not expanded (never invent occurrences)"})
+```
+
+This produces **no actionable occurrence**—exactly the false-negative the workaround was designed to prevent. The connector under-returns future occurrences; a task could have its RRULE intact but zero returned instances (all past occurrences completed/archived).
+
+**Recommended fix:** Add optional `dtstart` field to `RecurringTask`. When present but no explicit instances exist, expand with `"status": "projected_unverified"` and caveat note.
+
+---
+
+### 7. Absolute Path Still Leaks in CI Output (SEVERITY: MEDIUM)
+
+**File:** `probes/ticktick_recurrence_probe.py`
+
+Despite assignment #6 marked RESOLVED, `probes/results/last-probe-run.txt` still shows:
+
+```
+[report written to /home/runner/work/llm-symposium/llm-symposium/probes/results/2026-08-28-probe-report.md]
+```
+
+The probe's `main()` function still prints the absolute path in the footer, even though the report body uses `relpath`. This is the same bug "

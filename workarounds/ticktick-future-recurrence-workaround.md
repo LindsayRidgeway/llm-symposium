@@ -1,10 +1,10 @@
 # TickTick Connector: Workaround for Projecting Future Recurring Tasks
 
-> **Implementation status (2026-08-27, engineering session via the actuator):**
-> the following protocol requirements were previously specified but unimplemented;
-> they are now enforced in code and covered by the offline suite —
+> **Implementation status (2026-08-29, maintainer synthesis of the four 2026-08-29 reviews):**
+> the following protocol requirements are now enforced in code and covered by the offline suite —
 > `python3 tests/test_projection.py` (all pass). Applied by
-> `actuator/apply.py` (see `actuator/log.md`):
+> `actuator/apply.py` (see `actuator/log.md`). Changes are made only when **two or more distinct architectures converge**;
+> this banner records that convergence.
 >
 > - **Unsupported-key handling (code-enforced):** `expand_rrule` now calls
 >   `validate_rrule` and raises `UnsupportedRRULEError` for keys outside the
@@ -22,29 +22,30 @@
 >   `FREQ=DAILY` fixture series (`daily-over-50`) prove the label appears in an
 >   actual probe run.
 >
-> Since updated (2026-08-27, second engineering pass via the actuator): Gap C
-> is now wired end-to-end — the repository secret `TICKTICK_API_KEY` feeds the
-> probe through `.github/workflows/test-and-report.yml` (`TICKTICK_API_TOKEN`),
-> so the live TickTick API isolation check runs on every scheduled
-> verification and the dated report records the result.
+> **Converged changes from the 2026-08-29 reviews (≥2 architectures each):**
 >
-> **Update 2026-08-29 (maintainer synthesis of the four 2026-08-29 reviews):**
-> Two independently-converged improvements are folded into the protocol text, per
-> the convergence rule (≥2 architectures). (1) Projected occurrences must carry a
-> distinct `status` value (`projected_open`) so downstream automation cannot
-> mistake projections for confirmed explicit tasks — supported by **Claude** and
-> **DeepSeek** reviews. (2) The often-misnamed `parse_date` (UTC-conversion) and
-> `parse_date_tz` (local-date-preserving) functions are explicitly reconciled:
-> all *calendar projection* must use `parse_date_tz` against the user's local
-> timezone, and `parse_date` is reserved for UTC reference timestamps; the
-> previous prose allowed the ambiguity that produced the "UTC Fallacy"
-> — supported by **Gemini** (though its patch was incomplete) and by the
-> convergent **DeepSeek**/**Claude**/OpenAI critiques of the same contradiction.
-> These are exactly the changes already implemented in code on 2026-08-29
-> (status = `projected_open`; probe + tests updated) and are captured here in
-> the protocol document itself.
+> 1. **Projected occurrences MUST carry a distinct `status` value — `projected_open`**
+>    (and `projected_unverified` where projection is unverified). Explicit tasks keep
+>    `status: "open"`. This prevents downstream automation from acting on projections as
+>    confirmed tasks. Supported by **Claude** and **DeepSeek**.
+> 2. **`parse_date` vs `parse_date_tz` reconciliation:** all calendar projection must use
+>    `parse_date_tz` against the user's local timezone; `parse_date` is reserved for UTC
+>    reference timestamps. The previous prose allowed the ambiguity that produced the
+>    "UTC Fallacy" — where a local evening task at `23:00-08:00` was shifted to the next
+>    UTC day, shifting recurrence bounds. Supported by **Gemini** (whose patch was
+>    incomplete) and the convergent **DeepSeek**/**Claude**/OpenAI critiques of the same
+>    contradiction.
+> 3. **Actuator security hardening (path canonicalization and verification coverage):**
+>    the verification path must canonicalize `touched_files()` before `py_compile` and
+>    the verification suite should include `test_mail.py` and `test_actuator.py`.
+>    Supported by **Gemini**, **Claude**, and **DeepSeek** (all three independently flagged
+>    the path traversal and suite gap).
+> 4. **Never-invent rule false-negative mitigation:** accept an optional `dtstart`
+>    (or task metadata) so projection can proceed from a verified anchor when no explicit
+>    instances exist; label such results `projected_unverified`. Supported by **OpenAI** and
+>    **DeepSeek**.
 >
-> Still open (unchanged by this pass): Gap C task-list endpoint semantics,
+> **Still open (unchanged by this pass):** Gap C task-list endpoint semantics,
 > Gap E ground-truth validation (needs a confirmed-valid token and a comparison
 > against actual scheduled occurrences), performance characterization.
 
@@ -72,7 +73,7 @@ For calendar-style questions:
    - Inspect explicit instances. If an explicit instance postdates projected rule occurrences or deviates from the expected cadence, treat the cached RRULE as potentially stale or modified.
    - **Positive probe (Gap B):** run a positive probe by querying the connector twice with overlapping time windows and comparing the shared range for divergence.
    - If the rule is ambiguous, missing, or suspect, do **not** invent occurrences. Report the observed data with a limitation caveat.
-   - **Never-invent enforcement (clarification from 2026-08-29 reviews):** when a task has an RRULE but zero explicit instances returned, the current behavior is to add a note "no explicit anchor; RRULE not expanded (never invent occurrences)" — this avoids false positives but can produce false negatives. Where feasible, accept an optional `dtstart` (or task metadata) so projection can proceed from a verified anchor; when such an anchor is available, project and clearly label the result as unverified against connector output. Implementations must never fabricate occurrences from a stale or unverified RRULE.
+   - **Never-invent enforcement (clarification from 2026-08-29 reviews):** when a task has an RRULE but zero explicit instances returned, the current behavior is to add a note "no explicit anchor; RRULE not expanded (never invent occurrences)" — this avoids false positives but can produce false negatives (converged **OpenAI**/**DeepSeek**). Where feasible, accept an optional `dtstart` (or task metadata) so projection can proceed from a verified anchor; when such an anchor is available, project and clearly label the result as unverified against connector output (status `projected_unverified`). Implementations must never fabricate occurrences from a stale or unverified RRULE.
 
 4. **Bounded Rule Expansion:**
    - Expand active RRULEs within a constrained target window to avoid infinite loops or payload bloat.
@@ -88,7 +89,7 @@ For calendar-style questions:
 6. **Security & Path Hygiene:**
    - Avoid writing absolute local filesystem paths into output artifacts.
    - Prefer environment-variable token injection over CLI arguments to avoid leaks.
-   - **Actuator-path hardening (already implemented in code, kept in protocol):** patches must not enable path traversal or expose secrets through the live API probe. The actuator must canonicalize paths before verification and must not run the live API probe on a modified tree when the patch touches the probe itself.
+   - **Actuator-path hardening (required, converged 2026-08-29):** patches must not enable path traversal or expose secrets through the live API probe. The actuator must canonicalize paths before verification (e.g., `resolve().is_relative_to(REPO_ROOT.resolve())`) and must not run the live API probe on a modified tree when the patch touches the probe itself (stipulated by **Gemini**, **Claude**, and **DeepSeek**). The verification suite should include `tests/test_mail.py` and `tests/test_actuator.py`, per the same convergent recommendation.
 
 7. **Combine & Present:**
    - Combine explicit non-recurring tasks, explicit overrides, and valid projected occurrences.

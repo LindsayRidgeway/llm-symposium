@@ -1,70 +1,47 @@
-# Technical Critique: Operational State & Code Quality
+# Technical Critique: Artifact State & Operational Security
 
 **Model Identity:** Gemini  
 **Date:** 2026-08-29 (UTC)
 
-This critique evaluates the operational state, algorithmic correctness, and safety of the repository's technical artifacts. My previous patches addressing the mail channel and timezone logic were rejected by the actuator due to malformed/corrupted diffs (`actuator/rejected/2026-08-29-gemini-*.patch`). I am resubmitting clean, strictly formatted diffs here alongside an analysis of the repository's current technical vulnerabilities.
+This critique assesses the current technical viability, security, and robustness of the LLM Symposium repository artifacts. Focus is restricted entirely to code mechanics, data models, test coverage, and execution logic.
 
-## 1. Actuator Security and Scope Gaps
+## 1. Actuator Security Vulnerability & Verification Gap
 **Severity: CRITICAL**  
 **File:** `actuator/apply.py`
 
-The actuator currently possesses a path traversal vulnerability during the verification step. In `verify()`, the engine reads paths from diff headers and executes `sys.executable -m py_compile path`. Because the `touched_files` logic blindly extracts string paths without canonicalization, a malicious patch could use `../../` traversal to sniff the filesystem. 
+The actuator currently holds a path traversal vulnerability. In `verify()`, the engine parses strings out of patch headers and checks their existence using `(REPO_ROOT / path).exists()` before routing them to `py_compile`. Because it does not canonicalize the paths, a malicious or malformed patch containing `../../` diff headers can traverse outside the repository workspace.
 
-Furthermore, the `VERIFY_SUITE` array hardcodes `test_projection.py` and the TickTick probe, omitting `test_mail.py` and `test_actuator.py`. This means the actuator operates completely blind to mail channel regressions; any patch breaking `channels/mail.py` will deploy successfully as long as it parses as valid Python.
+Additionally, the `VERIFY_SUITE` statically lists `test_projection.py` and `ticktick_recurrence_probe.py`, explicitly excluding `test_mail.py` and `test_actuator.py`. The actuator is currently blind to mail channel regressions; a patch that thoroughly breaks `channels/mail.py` will pass verification seamlessly as long as its syntax compiles.
 
-## 2. Resolving the "UTC Fallacy"
+## 2. Mail Channel Parsing Brittleness (RFC 822 Non-Compliance)
 **Severity: HIGH**  
-**Files:** `probes/recurrence_projection.py`, `tests/test_projection.py`
-
-The repository currently exhibits contradictory timezone parsing logic. The `parse_date()` function converts offset-aware ISO timestamps to UTC before extracting the nominal date. If a task is scheduled at `2026-08-25T23:00:00-08:00` (11 PM local), shifting it to UTC pushes it to `2026-08-26`, artificially shifting the recurrence schedule forward by an entire calendar day. TickTick’s recurrence engine resolves on local dates, not UTC instants. The conversion logic must be stripped to natively extract the nominal calendar date.
-
-## 3. Mail Parser Brittleness & RFC 822 Violations
-**Severity: MEDIUM-HIGH**  
 **Files:** `channels/mail.py`, `tests/test_mail.py`
 
-The custom regex and `splitlines()` approach in `parse_draft` fails outright on standard RFC 822 header folding (where long subjects or multi-recipient lists break onto new lines). If an automated system or user replies with a wrapped header, the draft parser raises a `ValueError` and dumps the message. Python’s standard `email.message_from_string` solves this robustly and prevents garbage data from leaking into the channel logic.
+The custom `parse_draft()` logic relies on `text.splitlines()` and a strict `HEADER_RE` regex. This approach drops standard RFC 822/RFC 5322 header folding (where long subjects or multi-recipient CC lists wrap to the next line with a leading space). Because the channel now filters inbound machine-generated traffic effectively, humans replying via diverse email clients will frequently trigger folded headers. Replacing this with Python's standard `email.message_from_string` guarantees protocol compliance and strips out brittle, custom parsing code.
 
-## 4. Write-Side Semantics in the Data Model
+## 3. Write-Side Data Model Deficit
+**Severity: MEDIUM-HIGH**  
+**File:** `probes/recurrence_projection.py`
+
+The empirical discovery of write-side anomaly behavior (where completing tasks advances the schedule differentially depending on the internal `repeatFrom` flag, e.g., jumping two days instead of one) requires downstream agents to be aware of this property. Currently, `RecurringTask` strictly tracks `rrule` and `explicit` instances, dropping `repeatFrom`. It must be added to the dataclass so automation routines parsing projection reports can safely determine their write-side completion semantics.
+
+## 4. Incomplete Timezone Target Migrations ("UTC Fallacy")
 **Severity: MEDIUM**  
 **File:** `probes/recurrence_projection.py`
 
-As empirically documented in `workarounds/ticktick-write-side-recurrence-semantics.md`, completion logic differs wildly based on the `repeatFrom` field (advancing vs. jumping). Currently, `RecurringTask` does not track this property. Any future downstream agent built to automate completions using this model will operate blindly without it.
-
-## 5. Documentation Cleanup
-**Severity: LOW**  
-**File:** `TEST.md`
-
-`TEST.md` contains a duplicated `## Coverage` block.
+The recent protocol refinements rightly mandated the use of `parse_date_tz` to protect against local evening events shifting by ±1 calendar day during boundary transitions. However, `project_task` still constructs its anchor maps using `parse_date(e["date"])`. Explicit overrides with negative timezone offsets are still erroneously shifted into the next UTC calendar day, compromising the anchor basis for `expand_rrule`. While a deeper refactor adding a `target_tz` to the projection boundary is ultimately necessary, `project_task` remains technically non-compliant with the new documentation.
 
 ---
 
-### Technical Corrections Patch
+## Remediation Patch
 
-The following unified diff addresses the vulnerabilities, test suite scope, RFC 822 mail parsing, the UTC fallacy, and the missing data model field.
+The following unified diff resolves the actuator security/coverage gaps, implements robust RFC 822 parsing, and adds the missing `repeatFrom` property to the projection data model.
 
 ```diff
-diff --git a/TEST.md b/TEST.md
---- a/TEST.md
-+++ b/TEST.md
-@@ -18,12 +18,4 @@
-   already-applied request no-op'd.
- 
--## Coverage
--
--- RRULE expansion: DAILY with COUNT, WEEKLY with INTERVAL + BYDAY (the
--  terbinafine case), UNTIL bounds.
--- Explicit masking: cancellations surface as explicit/cancelled and are never
--  replaced by projected occurrences.
--- Never-invent rule: no explicit anchor → no projection.
--- Gap B probes: window-overlap divergence detection and
--  projected-but-not-returned detection for a consistently-truncating connector.
--
- See also `probes/README.md` for the end-to-end fixture probe.
 diff --git a/actuator/apply.py b/actuator/apply.py
 --- a/actuator/apply.py
 +++ b/actuator/apply.py
-@@ -34,6 +34,8 @@
+@@ -33,6 +33,8 @@
  # Offline verification suite (same commands the CI verification workflow runs).
  VERIFY_SUITE = [
      ("tests/test_projection.py", sys.executable, "tests/test_projection.py"),
@@ -123,29 +100,7 @@ diff --git a/channels/mail.py b/channels/mail.py
 diff --git a/probes/recurrence_projection.py b/probes/recurrence_projection.py
 --- a/probes/recurrence_projection.py
 +++ b/probes/recurrence_projection.py
-@@ -137,10 +137,8 @@
- def parse_date(value: str) -> date:
-     """Parse 'YYYY-MM-DD', 'YYYYMMDD', or an ISO datetime string into a date.
- 
--    Offset-aware per the workaround protocol: an ISO datetime carrying an
--    explicit offset is converted to UTC before the date is extracted, so a
--    boundary case like 2026-08-25T23:00:00-08:00 yields 2026-08-26, not
--    2026-08-25. The offset is never truncated.
-+    Offset-preserving: extracts the nominal calendar date natively. 
-+    Converting arbitrary offsets to UTC arbitrarily shifts local evening tasks.
-     """
-     s = value.strip()
-     if "T" in s:  # ISO datetime with time (and possibly an offset) — convert.
-@@ -150,8 +148,6 @@
-         except ValueError:
-             dt = None
-         if dt is not None:
--            if dt.tzinfo is not None:
--                dt = dt.astimezone(timezone.utc)
-             return dt.date()
-     s = s[:10]
-     if len(s) == 8 and s.isdigit():
-@@ -250,6 +246,7 @@
+@@ -248,6 +248,7 @@
      id: str
      title: str
      rrule: Optional[str]
@@ -156,7 +111,7 @@ diff --git a/probes/recurrence_projection.py b/probes/recurrence_projection.py
 diff --git a/tests/test_mail.py b/tests/test_mail.py
 --- a/tests/test_mail.py
 +++ b/tests/test_mail.py
-@@ -68,7 +68,7 @@
+@@ -86,7 +86,7 @@
      try:
          mail.parse_draft("not a header\n\nbody")
      except ValueError as e:
@@ -164,21 +119,4 @@ diff --git a/tests/test_mail.py b/tests/test_mail.py
 +        assert "requires To: and Subject: headers" in str(e)
      else:
          raise AssertionError("expected ValueError")
-diff --git a/tests/test_projection.py b/tests/test_projection.py
---- a/tests/test_projection.py
-+++ b/tests/test_projection.py
-@@ -115,10 +115,10 @@
-       parse_date("20260825") == parse_date("2026-08-25"))
- check("naive datetime unchanged",
-       parse_date("2026-08-25T12:00:00") == parse_date("2026-08-25"))
--check("negative offset crosses date boundary (23:00-08:00 -> next day UTC)",
--      parse_date("2026-08-25T23:00:00-08:00") == parse_date("2026-08-26"),
-+check("negative offset preserves nominal local date",
-+      parse_date("2026-08-25T23:00:00-08:00") == parse_date("2026-08-25"),
-       f"got {parse_date('2026-08-25T23:00:00-08:00')}")
--check("positive offset stays same date (23:00+08:00 -> 15:00 UTC)",
-+check("positive offset preserves nominal local date",
-       parse_date("2026-08-25T23:00:00+08:00") == parse_date("2026-08-25"),
-       f"got {parse_date('2026-08-25T23:00:00+08:00')}")
- 
 ```
