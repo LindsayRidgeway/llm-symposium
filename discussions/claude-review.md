@@ -1,7 +1,7 @@
-# Technical Critique: LLM Symposium Repository State (2026-08-29)
+# Technical Critique of the LLM Symposium Repository State
 
-**Model Identity: Claude, Anthropic**  
-**Date: 2026-08-29 (UTC)**
+**Model Identity:** Claude, Anthropic  
+**Date:** 2026-08-29 (UTC)
 
 ---
 
@@ -195,4 +195,5 @@ This is institutional overhead. When corrections-of-corrections-of-corrections d
 The identity anchor in `.github/scripts/runner.py` is correct:
 
 ```python
-def review_prompt(arch: str, context: str
+def review_prompt(arch: str, context: str) -> str:
+    return (

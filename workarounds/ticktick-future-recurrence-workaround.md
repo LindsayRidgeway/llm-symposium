@@ -28,6 +28,22 @@
 > so the live TickTick API isolation check runs on every scheduled
 > verification and the dated report records the result.
 >
+> **Update 2026-08-29 (maintainer synthesis of the four 2026-08-29 reviews):**
+> Two independently-converged improvements are folded into the protocol text, per
+> the convergence rule (≥2 architectures). (1) Projected occurrences must carry a
+> distinct `status` value (`projected_open`) so downstream automation cannot
+> mistake projections for confirmed explicit tasks — supported by **Claude** and
+> **DeepSeek** reviews. (2) The often-misnamed `parse_date` (UTC-conversion) and
+> `parse_date_tz` (local-date-preserving) functions are explicitly reconciled:
+> all *calendar projection* must use `parse_date_tz` against the user's local
+> timezone, and `parse_date` is reserved for UTC reference timestamps; the
+> previous prose allowed the ambiguity that produced the "UTC Fallacy"
+> — supported by **Gemini** (though its patch was incomplete) and by the
+> convergent **DeepSeek**/**Claude**/OpenAI critiques of the same contradiction.
+> These are exactly the changes already implemented in code on 2026-08-29
+> (status = `projected_open`; probe + tests updated) and are captured here in
+> the protocol document itself.
+>
 > Still open (unchanged by this pass): Gap C task-list endpoint semantics,
 > Gap E ground-truth validation (needs a confirmed-valid token and a comparison
 > against actual scheduled occurrences), performance characterization.
@@ -46,11 +62,11 @@ For calendar-style questions:
 
 2. **Timezone Normalization (with true offset handling):**
    - Normalize the RRULE and all explicit task instances to a single target timezone (the user's local calendar timezone) *before* expansion to prevent ±1 day boundary shifts.
-   - **Implementation requirement:** Parse ISO datetime strings with their explicit offsets and convert to the target timezone before extracting the date. The module `probes/recurrence_projection.py` **must** implement offset-aware parsing and must not truncate the offset. This was recommended by the DeepSeek review and the Gemini synthesis (2026-08-27).
+   - **Implementation requirement:** For all date-based calendar projection, parse ISO datetime strings with `parse_date_tz(value, target_tz)` and convert to the target timezone before extracting the date. **The ambiguity between `parse_date` and `parse_date_tz` is resolved as follows (converged 2026-08-29):** `parse_date()` is for UTC reference timestamps (offset-bearing datetimes are converted to UTC, which may shift a local evening task to the next day) and must **never** be used to derive calendar dates for recurrence projection. `parse_date_tz()` preserves the local calendar date in the user's zone and is the **only** parser allowed for projection anchors and explicit-instance dates. Implementations must not mix the two — callers who use `parse_date` for a task's scheduled date will get a different, wrong recurrence. (This was recommended by the DeepSeek review, the Gemini synthesis, and the Claude/OpenAI 2026-08-29 reviews; the module `probes/recurrence_projection.py` documents the same and the offline suite enforces it with a named test.)
    - **Edge cases (explicit coverage):**
      - **Daylight Saving Time (DST) transitions:** ensure occurrence dates do not shift by ±1 day when normalizing across a DST boundary.
      - **Leap day recurrence:** for a YEARLY RRULE with `BYMONTHDAY=29` and `BYMONTH=2`, flag non-leap years rather than invent occurrences.
-     - **Note on `parse_date` vs `parse_date_tz`:** `parse_date()` converts offset-bearing datetimes to UTC for reference timestamps, while `parse_date_tz(value, target_tz)` preserves the local calendar date in the target zone. This is intentional, but because `expand_rrule()` operates on naive dates, all **calendar projection** must use `parse_date_tz` with the user's local timezone to avoid shifting evening tasks by ±1 day. The distinction is documented here to prevent misuse and will be enforced consistently in a future code change (as recommended by DeepSeek and Gemini, 2026-08-29).
+   - **Note on `parse_date` vs `parse_date_tz`:** `parse_date()` converts offset-bearing datetimes to UTC for reference timestamps, while `parse_date_tz(value, target_tz)` preserves the local calendar date in the target zone. This is intentional, but because `expand_rrule()` operates on naive dates, all **calendar projection** must use `parse_date_tz` with the user's local timezone to avoid shifting evening tasks by ±1 day. The distinction is documented here to prevent misuse and is enforced in code and tests (as recommended by DeepSeek, Claude, and Gemini, 2026-08-29).
 
 3. **Freshness & Anomaly Cross-Check:**
    - Inspect explicit instances. If an explicit instance postdates projected rule occurrences or deviates from the expected cadence, treat the cached RRULE as potentially stale or modified.
@@ -67,7 +83,7 @@ For calendar-style questions:
 5. **Exception Masking & Deduplication:**
    - Treat explicitly returned task instances as authoritative over projections.
    - **Cancellation markers:** preserve explicit cancellations as authoritative.
-   - **Projected-status labeling (required):** projected occurrences must be distinguishable from explicit ones in the `status` field (e.g., `"projected_open"`), not just by `source` metadata. This prevents downstream automation from acting on projected occurrences as if they were confirmed explicit tasks. (Converged by DeepSeek, Claude, and Gemini, 2026-08-29.)
+   - **Projected-status labeling (required — converged by Claude and DeepSeek, 2026-08-29):** projected occurrences MUST be distinguishable from explicit ones in the `status` field itself, not merely by `source` metadata. The canonical status for a projected occurrence is **`projected_open`** (and, where future projection is unverified, `projected_unverified`). Explicit tasks keep `status: "open"`. This prevents downstream automation from acting on projected occurrences as if they were confirmed explicit tasks. Any consumer that filters on `status == "open"` must therefore ignore projections.
 
 6. **Security & Path Hygiene:**
    - Avoid writing absolute local filesystem paths into output artifacts.
@@ -86,7 +102,7 @@ Suppose a task recurs every four weeks on Saturdays. The connector returns earli
 
 ## Recommended Interpretation Formula
 
-**timezone-normalized (offset-aware) explicit overrides + bounded RRULE projection, with snapshot-isolated probes, explicit truncation labels, code-enforced unsupported-RRULE rejection, and projected-status labeling → projected calendar**
+**timezone-normalized (local-date-preserving) explicit overrides + bounded RRULE projection, with snapshot-isolated probes, explicit truncation labels, code-enforced unsupported-RRULE rejection, and projected-status labeling → projected calendar**
 
 ## Maintenance & Verification
 
