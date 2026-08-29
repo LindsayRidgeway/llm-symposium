@@ -699,3 +699,19 @@ error: patch fragment without header at line 86: @@ -364,3 +384,3 @@
 
 touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
 
+## 2026-08-29T19:52:16 — 2026-08-29-engineering-channels-sent-dump.patch
+
+APPLIED 2026-08-29-engineering-channels-sent-dump.patch: verification passed
+py_compile channels/mail.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/mail.py
+
+## 2026-08-29T19:52:16 — 2026-08-29-gemini-bafeeb019e.patch
+
+REJECTED 2026-08-29-gemini-bafeeb019e.patch: git apply --check failed
+error: corrupt patch at line 39
+
+touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
+

@@ -366,6 +366,10 @@ def _report_sent_folder() -> None:
                         print(f"  Mail channel:   {m}")
                 else:
                     print(f"Mail channel: all {len(sent_names)} sent letter(s) confirmed in provider Sent folder")
+                # Dump the provider's view for manual inspection and debugging.
+                print(f"Mail channel: provider Sent folder holds {len(provider_subjects)} message(s):")
+                for s in sorted(provider_subjects):
+                    print(f"  Mail channel:   [provider] {s}")
         except Exception as e:  # noqa: BLE001 — telemetry must not fail the run
             print(f"Mail channel: sent-folder check unavailable: {type(e).__name__}: {e}")
 
