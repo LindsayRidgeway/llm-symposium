@@ -1,0 +1,28 @@
+diff --git a/channels/telegram.py b/channels/telegram.py
+index 584388d..a26a85f 100644
+--- a/channels/telegram.py
++++ b/channels/telegram.py
+@@ -73,6 +73,11 @@ def get_me(token: str) -> dict:
+     return _api(token, "getMe")
+ 
+ 
++
++def get_webhook_info(token: str) -> dict:
++    """Check whether a webhook is set (which would divert updates from poll)."""
++    return _api(token, "getWebhookInfo")
++
+ def get_updates(token: str, offset: int | None = None, timeout: int = 30) -> list:
+     """Poll for new messages. Long-poll up to `timeout` seconds."""
+     params = {"timeout": timeout}
+@@ -124,6 +129,11 @@ def run_telegram_channel() -> None:
+             me = get_me(token)
+             bot_name = me.get("result", {}).get("username", name)
+             print(f"Telegram channel: bot @{bot_name} ({name}) connected")
++            try:
++                wh = get_webhook_info(token)
++                print(f"Telegram channel: {name} webhook info: {json.dumps(wh.get('result', {}))[:200]}")
++            except Exception as wh_e:
++                print(f"Telegram channel: {name} webhook check failed: {type(wh_e).__name__}")
+         except Exception as e:  # noqa: BLE001 — surface, keep going
+             print(f"Telegram channel: {name} failed to connect: {type(e).__name__}: {e}")
+             continue

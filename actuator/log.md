@@ -815,3 +815,12 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: channels/telegram.py
 
+## 2026-08-29T21:55:27 — 2026-08-29-engineering-channels-telegram-webhook-debug.patch
+
+APPLIED 2026-08-29-engineering-channels-telegram-webhook-debug.patch: verification passed
+py_compile channels/telegram.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/telegram.py
+
