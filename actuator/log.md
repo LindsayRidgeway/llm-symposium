@@ -874,3 +874,9 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: channels/telegram.py
 
+## 2026-08-29T22:38:00 — 2026-08-30-engineering-runner-context-budget.patch
+
+APPLIED 2026-08-30-engineering-runner-context-budget.patch: already in effect (no-op)
+
+touched: .github/scripts/runner.py
+
