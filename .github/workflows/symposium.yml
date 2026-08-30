@@ -56,6 +56,12 @@ jobs:
           SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
           SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
           SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
+          # Telegram channel (channels/telegram.py): no-op until a token exists.
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_BOT_TOKEN_DESI: ${{ secrets.TELEGRAM_BOT_TOKEN_DESI }}
+          TELEGRAM_BOT_TOKEN_CLAUDE: ${{ secrets.TELEGRAM_BOT_TOKEN_CLAUDE }}
+          TELEGRAM_BOT_TOKEN_GEMINI: ${{ secrets.TELEGRAM_BOT_TOKEN_GEMINI }}
+          TELEGRAM_BOT_TOKEN_TARIK: ${{ secrets.TELEGRAM_BOT_TOKEN_TARIK }}
           SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
         run: python .github/scripts/runner.py
 

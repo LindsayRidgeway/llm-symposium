@@ -731,3 +731,28 @@ error: corrupt patch at line 40
 
 touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
 
+## 2026-08-29T20:06:24 — 2026-08-29-engineering-channels-telegram.patch
+
+APPLIED 2026-08-29-engineering-channels-telegram.patch: verification passed
+py_compile .github/scripts/runner.py: OK
+py_compile channels/telegram.py: OK
+py_compile tests/test_telegram.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: .github/scripts/runner.py, .github/workflows/symposium.yml, .github/workflows/test-and-report.yml, channels/telegram.py, tests/test_telegram.py
+
+## 2026-08-29T20:06:24 — 2026-08-29-gemini-2cc09bc33f.patch
+
+REJECTED 2026-08-29-gemini-2cc09bc33f.patch: git apply --check failed
+error: corrupt patch at line 40
+
+touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
+
+## 2026-08-29T20:06:24 — 2026-08-29-gemini-70b32b8ec7.patch
+
+REJECTED 2026-08-29-gemini-70b32b8ec7.patch: git apply --check failed
+error: corrupt patch at line 44
+
+touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
+
