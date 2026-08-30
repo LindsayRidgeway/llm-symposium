@@ -84,6 +84,9 @@ def get_updates(token: str, offset: int | None = None, timeout: int = 30) -> lis
     if offset:
         params["offset"] = offset
     result = _api(token, "getUpdates", params)
+    if not result.get("ok"):
+        # Surface the API error instead of silently treating it as "no mail".
+        raise RuntimeError(f"Telegram getUpdates error: {json.dumps(result)[:300]}")
     return result.get("result", [])
 
 

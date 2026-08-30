@@ -824,3 +824,12 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: channels/telegram.py
 
+## 2026-08-29T22:02:25 — 2026-08-29-engineering-channels-telegram-surface-errors.patch
+
+APPLIED 2026-08-29-engineering-channels-telegram-surface-errors.patch: verification passed
+py_compile channels/telegram.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/telegram.py
+
