@@ -31,8 +31,9 @@ def _get_json(url: str, token: str):
 
 
 def probe_deepseek(key: str):
-    """DeepSeek is prepaid — the real silent-death risk. Its balance endpoint
-    returns the wallet contents directly."""
+    """DeepSeek direct is prepaid — the real silent-death risk. Its balance
+    endpoint returns the wallet contents directly. (When OpenRouter is
+    configured, probe_openrouter is used instead and this is skipped.)"""
     try:
         b = _get_json("https://api.deepseek.com/user/balance", key)
         infos = b.get("balance_infos", [])
@@ -43,6 +44,24 @@ def probe_deepseek(key: str):
         )
         ok = b.get("is_available", False)
         return {"ok": bool(ok), "detail": detail or str(b)[:200]}
+    except urllib.error.HTTPError as e:
+        return {"ok": False, "detail": f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:200]}"}
+    except Exception as e:
+        return {"ok": False, "detail": f"{type(e).__name__}: {e}"}
+
+
+def probe_openrouter(key: str):
+    """OpenRouter wallet: credits + auto-reload status in one call."""
+    try:
+        b = _get_json("https://openrouter.ai/api/v1/credits", key)
+        data = b.get("data", b)
+        detail = json.dumps(data)[:300]
+        # Depleted credits is the actionable signal; auto-reload off + low
+        # balance is the silent-death profile.
+        ok = not data.get("is_depleted", False)
+        if data.get("total_credits", 1) < 1.0:
+            ok = False
+        return {"ok": bool(ok), "detail": detail}
     except urllib.error.HTTPError as e:
         return {"ok": False, "detail": f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:200]}"}
     except Exception as e:
@@ -112,7 +131,12 @@ PROVIDERS = (
 
 def run_probes() -> dict:
     results = {}
+    or_key = os.environ.get("OPENROUTER_API_KEY")
     for name, env, fn in PROVIDERS:
+        if name == "deepseek" and or_key:
+            # DeepSeek now runs through the OpenRouter wallet (auto-top-up).
+            results[name] = probe_openrouter(or_key.strip())
+            continue
         key = os.environ.get(env)
         if not key:
             results[name] = {"ok": None, "detail": "no key configured"}

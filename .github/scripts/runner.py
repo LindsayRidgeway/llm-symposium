@@ -260,11 +260,17 @@ if os.environ.get("ANTHROPIC_API_KEY"):
     except Exception as e:
         print(f"Anthropic failed: {e}")
 
-if os.environ.get("DEEPSEEK_API_KEY"):
+if os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENROUTER_API_KEY"):
     try:
-        client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+        if os.environ.get("OPENROUTER_API_KEY"):
+            # OpenRouter first: one wallet with auto-top-up for all models.
+            client = OpenAI(api_key=os.environ["OPENROUTER_API_KEY"].strip(), base_url="https://openrouter.ai/api/v1")
+            model = os.environ.get("OPENROUTER_DEEPSEEK_MODEL", "deepseek/deepseek-chat")
+        else:
+            client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+            model = "deepseek-chat"
         res = client.chat.completions.create(
-            model="deepseek-chat",
+            model=model,
             messages=[{"role": "user", "content": review_prompt("DeepSeek (Desi)", context)}]
         )
         reviews["deepseek"] = res.choices[0].message.content
@@ -342,9 +348,14 @@ def _run_maintainer(kind, api_key, prompt):
         )
         return _extract_json(res.choices[0].message.content)
     if kind == "deepseek":
-        client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+        if os.environ.get("OPENROUTER_API_KEY"):
+            client = OpenAI(api_key=os.environ["OPENROUTER_API_KEY"].strip(), base_url="https://openrouter.ai/api/v1")
+            model = os.environ.get("OPENROUTER_DEEPSEEK_MODEL", "deepseek/deepseek-chat")
+        else:
+            client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+            model = "deepseek-chat"
         res = client.chat.completions.create(
-            model="deepseek-chat",
+            model=model,
             messages=[{"role": "user", "content": prompt}],
         )
         return _extract_json(res.choices[0].message.content)
