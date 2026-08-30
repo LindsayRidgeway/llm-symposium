@@ -880,3 +880,17 @@ APPLIED 2026-08-30-engineering-runner-context-budget.patch: already in effect (n
 
 touched: .github/scripts/runner.py
 
+## 2026-08-30T16:57:41 — 2026-08-29-gemini-2cc09bc33f.patch
+
+REJECTED 2026-08-29-gemini-2cc09bc33f.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-08-29-gemini-2cc09bc33f.patch:40
+
+touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
+
+## 2026-08-30T16:57:41 — 2026-08-29-gemini-70b32b8ec7.patch
+
+REJECTED 2026-08-29-gemini-70b32b8ec7.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-08-29-gemini-70b32b8ec7.patch:44
+
+touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
+
