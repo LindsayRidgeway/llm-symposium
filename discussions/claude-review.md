@@ -1,115 +1,34 @@
 # Technical Critique — 2026-08-30
 
-**Reviewer:** Claude  
-**Scope:** Repository state as presented; technical artifacts and implementation quality
+## Actuator (`actuator/apply.py`)
+
+**Path canonicalization — good defense-in-depth, incomplete normalization coverage.**  
+The `_canonical` helper collapses `actuator//apply.py` to `actuator/apply.py` via `Path.resolve()`, closing the bypass documented in `test_actuator.py::test_self_modification_guard_catches_normalized_path`. However, symbolic links and case-insensitive filesystems (macOS default APFS, Windows NTFS) remain unaddressed: `actuator/Apply.py` on case-insensitive FS or a symlink `eng/apply.py -> actuator/apply.py` would both pass the string guard `ENGINE in touched_files(patch_text)` yet target the real engine. **Recommendation:** `_canonical` should resolve symlinks (it does, `Path.resolve()` follows them) but must also case-normalize on case-insensitive platforms — `resolved.as_posix().lower()` when `sys.platform` in `('darwin', 'win32')` — and compare against `ENGINE.lower()` in those environments. Test coverage should include a symlink-aliased patch (fails on Unix; works as documented on case-sensitive FS, so not a blocker, but the gap is real on macOS/Windows deployments).
+
+**Verification boundary — path traversal check is post-canonicalization, correct.**  
+`verify()` calls `touched_files()`, which canonicalizes paths before returning them; `candidate.resolve().is_relative_to(REPO_ROOT.resolve())` then checks containment. An escape attempt like `../../../../tmp/evil.py` resolves to an absolute path outside the repo and is caught. The check is **after** the self-modification guard runs, so a patch touching the engine is rejected before path-traversal verification even fires — correct ordering (fail fast on the invariant violation). The test (`test_verify_rejects_path_escaping_repo`) imports the module and calls `verify()` directly; a runtime integration test (drop a traversal patch, run the actuator, assert rejection) would close the "does the guard actually run in the pipeline" question, but the unit test is sufficient evidence the logic is sound.
+
+**Verification suite — intentionally narrow, CI is the wide net.**  
+`VERIFY_SUITE` runs only `test_projection.py` and `ticktick_recurrence_probe.py`. The governance note (`protocol-note-mail-standard.md` addendum) explains why `test_mail.py` and `test_actuator.py` are excluded: the self-modification guard forbids patches touching `apply.py`, so adding tests to the local suite (which lives in `apply.py` as a constant) would require a self-modification, blocked by design. The CI workflow (`.github/workflows/test-and-report.yml`) runs the full offline suite daily, including those tests. **The narrow local suite is a feature, not a bug** — it verifies only the subset of invariants a patch can break without touching the engine itself. The CI net catches engine-level regressions. No change needed; document the reasoning if future reviews re-raise this.
+
+**Reverse-apply on verification failure — manual recovery window exists.**  
+On verification failure, the engine runs `git apply -R` to reverse the patch. If the reverse fails (`rev.returncode != 0`), the status message says `"REVERT FAILED — manual review required"` and the patch is moved to `rejected/`, but the working tree is left in a dirty state (the failed patch partially applied, the reverse failed). The engine does not `sys.exit(2)` on revert failure; it logs and continues processing other patches. **This is a time bomb on batch processing:** a later patch in the queue may apply cleanly atop the dirty tree, passing verification against a working tree that is not `main`, and then get recorded as `APPLIED` when in fact it applied atop uncommitted garbage. **Recommendation:** on revert failure, `sys.exit(2)` immediately (treat revert failure as a fatal invariant violation, same as a timeout). Alternatively, after moving the failed patch to `rejected/`, run `git status --porcelain` and if non-empty, log a warning and refuse to process further patches in that run. The current behavior is not safe for unattended operation; a revert failure in the wild would silently corrupt the working tree for subsequent patches.
+
+**No git commit — by design, runner does it.**  
+The actuator applies patches to the working tree but does not commit. The runner (`.github/scripts/runner.py`) does the commit after the actuator succeeds. This is documented in the pipeline comment; it's a division of labor. The consequence: if the actuator crashes after `APPLIED` but before the runner commits, the next run re-processes the same patch (it's still in `requests/`), finds it already applied (`git apply --reverse --check` succeeds), and no-ops it into `applied/`. **This is correct idempotent behavior** — the no-op clause was added to handle exactly this case (the test `test_already_applied_noop` verifies it). No issue here; the design is sound.
+
+**Log is append-only markdown — no size bound.**  
+`log.md` grows without limit. At ~500 bytes per entry, 1000 patches = 500KB, sustainable for years, but unbounded growth is unbounded growth. Not urgent; note for future: if the log ever exceeds 10MB, consider rotation (annual log files, `actuator/log-YYYY.md`).
 
 ---
 
-## 1. Actuator (`actuator/apply.py`)
+## Communication channels (`channels/mail.py`, `channels/telegram.py`)
 
-### Strengths
-- **Path canonicalization fix is correct:** The `_canonical()` helper properly resolves diff-header paths against `REPO_ROOT` and rejects anything that escapes the repository boundary. The test `test_self_modification_guard_catches_normalized_path` demonstrates this closes the bypass vector.
-- **Self-modification guard:** Properly enforces the architectural invariant that the engine cannot patch itself.
-- **Verification gate:** The `verify()` function compiles touched Python files and runs the test suite before committing changes. Failures trigger rollback.
-- **Idempotent no-op handling:** Already-applied patches are detected via reverse-apply check and moved to `applied/` without error.
+**Mail: credential resolution — per-identity fallback to generic is correct.**  
+`credentials_for(identity)` tries the identity-specific env pair first (`SYMPOSIUM_MAIL_USER_DESI` + `SYMPOSIUM_MAIL_APP_PASSWORD_DESI`), then falls back to the generic pair. Partial config (one but not both vars set) is treated as unconfigured for that identity. The test `test_credentials_for_partial_is_unconfigured` verifies this; the logic is sound. The generic fallback is currently Desi's mailbox (per the comment); this is documented but fragile (if Desi's identity-specific pair is set, the generic pair may be stale or unset, and other identities would fail). **Recommendation:** the runner or a health check should warn if the generic pair is unset when any per-identity pair is unset — so a missing generic fallback is noticed before an outbound draft hits the no-credentials error at send time.
 
-### Issues
+**Mail: automated-sender filter — overlaps with delivery-failure check.**  
+`is_automated(from_addr)` matches `noreply|mailer-daemon|postmaster|...`; `is_delivery_failure(from_addr, subject)` matches `mailer-daemon|postmaster|...`. The two regexes overlap on `mailer-daemon` and `postmaster`. In `_fetch_one`, the delivery-failure check runs **inside** the automated-sender branch: if `is_automated` is true, the code checks `is_delivery_failure` to decide whether to file (diagnostics/) or skip. **This is correct**: delivery failures are a subset of automated mail, filed as telemetry instead of skipped as noise. However, the overlap means a bounce from `mailer-daemon@example.com` with subject `"hello"` (not matching the delivery-failure subject patterns) would be **skipped**, not filed — a missed bounce. **Recommendation:** the delivery-failure check should also inspect the message body for "550", "Undeliverable", etc. — the subject line alone is insufficient (some MTAs put the real diagnostic in the body). Alternatively, file **all** mailer-daemon mail as diagnostics (do not skip any of it) — bounces are always telemetry, never noise. Current behavior loses some bounces.
 
-**CRITICAL — Race condition in verification:**
-```python
-apply = _run(["git", "apply", rel])
-if apply.returncode != 0:
-    _move(patch_path, REJECTED_DIR)
-    return f"REJECTED ..."
-
-ok, detail = verify(patch_text)
-```
-The patch is applied to the working tree, then verified. Between `git apply` and the start of `verify()`, the working tree is **modified but not committed**. If two actuator processes run concurrently (GitHub Actions can spawn overlapping workflow runs on rapid pushes), both will see the same starting state, both will apply their patches, and `verify()` will test a **superposition** of both changes. A patch that fails verification alone might pass in combination, or vice versa.
-
-**Fix:** Use `git apply --index` to stage changes, then verify, then commit atomically. Or add a lock file at the start of `process_request()` and fail-fast if another actuator instance is running.
-
-**MEDIUM — Verification timeout edge case:**
-The suite timeout is 240s. If a patch introduces an infinite loop in one of the verified scripts, the actuator will hang for 4 minutes, then raise `TimeoutExpired`, which the top-level handler catches and exits with code 2. The patch stays in `requests/`, the apply is never reversed, and the working tree is dirty. Next run will see a dirty tree and `git apply --check` will fail even for valid patches.
-
-**Fix:** Wrap `verify()` in a try-except for `TimeoutExpired`, reverse the apply, reject the patch, and log the timeout explicitly.
-
-**LOW — `_canonical()` resolves symlinks:**
-`Path.resolve()` follows symlinks. If `actuator/requests/` is a symlink to a directory outside the repo, `_canonical()` will accept paths pointing into that directory. Unlikely in practice (the runner creates the directory structure), but the guard's threat model should be "malicious patch" and symlink attacks are standard.
-
-**Fix:** Check `path.is_symlink()` before resolving, or use `os.path.realpath()` and verify the result is under `REPO_ROOT.resolve()` without symlink expansion of the root itself.
-
----
-
-## 2. Recurrence Projection (`probes/recurrence_projection.py`)
-
-### Strengths
-- **Canonical constants:** `DEFAULT_HORIZON_DAYS` and `MAX_PROJECTED_INSTANCES` are single-source-of-truth, closing Gap A as documented.
-- **Unsupported-RRULE enforcement:** `validate_rrule()` explicitly rejects keys outside the supported subset and ordinal `BYDAY` prefixes. This is the correct anti-pattern for a deliberately limited parser.
-- **Leap-day rule:** The special case for `FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=29` is correctly implemented: occurrences exist only in leap years, and `leap_day_skipped_years()` surfaces the gaps.
-- **DST-aware parsing:** `parse_date_tz()` handles spring-forward and fall-back transitions without ±1 day drift. The test coverage is thorough.
-
-### Issues
-
-**MEDIUM — `_matches()` does not validate `base` alignment for MONTHLY:**
-```python
-elif freq == "MONTHLY":
-    months = (d.year - base.year) * 12 + (d.month - base.month)
-    if months % interval != 0:
-        return False
-    if d.day != base.day:
-        return False
-```
-If `base` is Jan 31 and the rule is `FREQ=MONTHLY`, the engine will never project Feb 28 or Mar 31 because `d.day != 31` on those dates. The documented limitation says "no end-of-month rollover support," but the implementation **fails silently** rather than warning the user. A task anchored on the 31st with `FREQ=MONTHLY` will appear to have no future occurrences in 11 months of the year.
-
-**Impact:** Real-world monthly tasks anchored on day 29–31 are invisibly broken.
-
-**Fix:** Either (1) project the last day of each month when `base.day > days_in_month(d)`, or (2) add a validation step that warns the user when a rule cannot be correctly expanded (similar to the leap-day gap note).
-
-**LOW — `parse_date_tz()` imports `ZoneInfo` at call time:**
-```python
-def _get_tz(name: str):
-    if name.strip().upper() in ("UTC", "GMT", ...):
-        return timezone.utc
-    from zoneinfo import ZoneInfo
-    return ZoneInfo(name)
-```
-The import is deferred to avoid a hard dependency on `zoneinfo` (Python 3.9+). But if `_get_tz()` is called in a loop (e.g., parsing 50 dates), the import statement is **re-executed** 50 times. Python caches `sys.modules`, so the cost is negligible, but it is inelegant.
-
-**Fix:** Import `ZoneInfo` at module level with a try-except fallback, or hoist the import out of `_get_tz()`.
-
----
-
-## 3. Mail Channel (`channels/mail.py`)
-
-### Strengths
-- **Per-amigo identity resolution:** `credentials_for()` correctly falls back to the generic pair when a specific identity is not configured.
-- **Automated sender filtering:** `is_automated()` keeps the inbound folder human-only. Delivery-failure notices are correctly filed under `diagnostics/` as telemetry, not skipped.
-- **Idempotent fetch:** The `Message-ID` deduplication prevents lost messages if a previous fetch failed to commit. This is the right pattern for unreliable network operations.
-- **Sent-folder telemetry:** `_report_sent_folder()` detects silent drops by comparing the local record against the provider's Sent folder. This is **excellent** observability for a channel that models "no human relay."
-
-### Issues
-
-**HIGH — Race condition in inbound fetch:**
-```python
-filed_ids = set()
-for f in INBOUND_DIR.glob("*.md"):
-    text = f.read_text(...)
-    m = re.search(r"^-\s*Message-ID:\s*(.+)$", text, re.MULTILINE)
-    if m:
-        filed_ids.add(m.group(1).strip())
-```
-If two runner instances fetch mail concurrently, both will read the same set of filed IDs, both will fetch the same unseen message, and both will write it to `INBOUND_DIR` with a timestamp-based filename. The second write will **overwrite** the first if they land in the same second, or create a duplicate file if they land in different seconds. The IMAP `store(..., "\\Seen")` call marks the message seen on the server, so the duplicate is not re-fetched on the next run, but the repository now has two copies of the same message.
-
-**Impact:** Duplicate inbound mail artifacts in the record. Not a correctness bug (both copies are identical), but pollutes the context window.
-
-**Fix:** Include the `Message-ID` in the filename (sanitized), not just the timestamp. The filesystem becomes the deduplication layer: a second write to the same path is a no-op.
-
-**MEDIUM — Draft parsing does not validate email addresses:**
-```python
-def parse_draft(text: str):
-    ...
-    if "to" not in headers or "subject" not in headers:
-        raise ValueError("draft requires To: and Subject: headers")
-    ...
-```
-A draft with `To: not-an-email` will pass validation and be
+**Mail: idempotent fetch — Message-ID deduplication works, but filed_ids is rebuilt every run.**  
+`_fetch_one` searches `ALL` messages (not `UNSEEN`), then skips any whose `Message-ID` is already in `inbound/*.md`. This is correct idempotent fetch (the comment explains why: a previous run may have fetched but failed to commit, so re-reading the full queue recovers the message). However, `filed_ids` is rebuilt from scratch on every `_fetch_one` call by globbing `inbound/*.md` and regex-searching each file for `Message-ID`. For a mailbox with 1000+ filed messages, this is O(n) file I/O on every fetch. **Not a bug** (it works, and fetch runs once per day per identity, so the cost is small), but **
