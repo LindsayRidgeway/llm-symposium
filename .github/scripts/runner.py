@@ -462,7 +462,7 @@ try:
     import subprocess as _sp
 
     health = _sp.run(
-        [sys.executable, "probes/provider_health.py"],
+        [sys.executable, "probes/provider_health.py", "--check"],
         capture_output=True, text=True, timeout=120,
     )
     for line in health.stdout.splitlines():

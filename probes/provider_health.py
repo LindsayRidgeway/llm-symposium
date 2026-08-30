@@ -69,26 +69,41 @@ def probe_openrouter(key: str):
 
 
 def probe_openai(key: str):
-    """Best effort: some accounts expose credit/subscription endpoints; on
-    pay-as-you-go accounts they 404, which is itself a good sign (postpaid)."""
-    for path in ("/v1/dashboard/billing/credit_grants", "/v1/dashboard/billing/subscription"):
-        try:
-            d = _get_json("https://api.openai.com" + path, key)
-            return {"ok": True, "detail": json.dumps(d)[:300]}
-        except urllib.error.HTTPError as e:
-            if e.code in (404, 401):
-                continue
-            return {"ok": False, "detail": f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:200]}"}
-        except Exception as e:
-            return {"ok": False, "detail": f"{type(e).__name__}: {e}"}
-    return {"ok": None, "detail": "no balance endpoint (pay-as-you-go assumed healthy)"}
+    """OpenAI billing endpoints now require a browser session key, not an API
+    key. The reliable, free health signal is the models list (GET /v1/models);
+    a healthy list means the key is valid and the account is usable."""
+    try:
+        req = urllib.request.Request(
+            "https://api.openai.com/v1/models",
+            headers={"Authorization": f"Bearer {key}"},
+        )
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            return {"ok": True, "detail": f"HTTP {resp.status}, models list OK"}
+    except urllib.error.HTTPError as e:
+        return {"ok": False, "detail": f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:200]}"}
+    except Exception as e:
+        return {"ok": False, "detail": f"{type(e).__name__}: {e}"}
 
 
 def probe_anthropic(key: str):
-    """Cheapest call available: a 1-token completion."""
+    """Cheapest reliable signal: the models list (GET /v1/models); falls back
+    to a 1-token completion with the current Claude model when the list
+    endpoint is unavailable."""
     try:
+        req = urllib.request.Request(
+            "https://api.anthropic.com/v1/models",
+            headers={"x-api-key": key, "anthropic-version": "2023-06-01"},
+        )
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            return {"ok": True, "detail": f"HTTP {resp.status}, models list OK"}
+    except urllib.error.HTTPError:
+        pass  # models list unsupported — fall through to a 1-token ping
+    except Exception as e:
+        return {"ok": False, "detail": f"{type(e).__name__}: {e}"}
+    try:
+        model = os.environ.get("ANTHROPIC_PROBE_MODEL", "claude-sonnet-4-5")
         body = json.dumps({
-            "model": "claude-3-5-haiku-latest",
+            "model": model,
             "max_tokens": 1,
             "messages": [{"role": "user", "content": "ping"}],
         }).encode()
@@ -102,7 +117,7 @@ def probe_anthropic(key: str):
             },
         )
         with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-            return {"ok": True, "detail": f"HTTP {resp.status}, ping OK"}
+            return {"ok": True, "detail": f"HTTP {resp.status}, ping OK ({model})"}
     except urllib.error.HTTPError as e:
         return {"ok": False, "detail": f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:200]}"}
     except Exception as e:
