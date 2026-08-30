@@ -1,0 +1,41 @@
+name: Channel Poll
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Poll Channels
+        env:
+          SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
+          TELEGRAM_BOT_TOKEN_DESI: ${{ secrets.TELEGRAM_BOT_TOKEN_DESI }}
+        run: |
+          python .github/scripts/poll_channels.py
+
+      - name: Commit and Push Changes
+        if: always()
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          git config --global user.name "LLM Symposium Bot"
+          git config --global user.email "bot@llm-symposium.local"
+          git add channels/
+          git diff --quiet && git diff --staged --quiet || git commit -m "feat(channels): frequent poll — mail + telegram"
+          git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main

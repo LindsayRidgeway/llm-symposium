@@ -1,0 +1,74 @@
+diff --git a/.github/scripts/poll_channels.py b/.github/scripts/poll_channels.py
+new file mode 100644
+index 0000000..8710b1a
+--- /dev/null
++++ b/.github/scripts/poll_channels.py
+@@ -0,0 +1,21 @@
++#!/usr/bin/env python3
++"""Lightweight channel poll for the frequent (15-minute) workflow.
++
++Runs the mail channel (fetch inbound, send outbound) and the Telegram
++channel (poll + log) WITHOUT model evaluations. Cheap: no model calls —
++only IMAP/SMTP/HTTP. Anything new is filed under channels/ and committed by
++the workflow's commit step. Strict no-op when unconfigured, so forks and
++pre-setup runs stay green.
++"""
++import os
++import sys
++
++REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
++sys.path.insert(0, REPO_ROOT)
++
++from channels.mail import run_mail_channel  # noqa: E402
++from channels.telegram import run_telegram_channel  # noqa: E402
++
++run_mail_channel()
++run_telegram_channel()
++print("Channel poll complete")
+diff --git a/.github/workflows/channel-poll.yml b/.github/workflows/channel-poll.yml
+new file mode 100644
+index 0000000..33c711a
+--- /dev/null
++++ b/.github/workflows/channel-poll.yml
+@@ -0,0 +1,41 @@
++name: Channel Poll
++
++on:
++  schedule:
++    - cron: '*/15 * * * *'
++  workflow_dispatch:
++
++jobs:
++  poll:
++    runs-on: ubuntu-latest
++    permissions:
++      contents: read
++    steps:
++      - name: Checkout Repository
++        uses: actions/checkout@v4
++        with:
++          persist-credentials: false
++
++      - name: Set up Python
++        uses: actions/setup-python@v5
++        with:
++          python-version: '3.10'
++
++      - name: Poll Channels
++        env:
++          SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
++          SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
++          TELEGRAM_BOT_TOKEN_DESI: ${{ secrets.TELEGRAM_BOT_TOKEN_DESI }}
++        run: |
++          python .github/scripts/poll_channels.py
++
++      - name: Commit and Push Changes
++        if: always()
++        env:
++          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
++        run: |
++          git config --global user.name "LLM Symposium Bot"
++          git config --global user.email "bot@llm-symposium.local"
++          git add channels/
++          git diff --quiet && git diff --staged --quiet || git commit -m "feat(channels): frequent poll — mail + telegram"
++          git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main
