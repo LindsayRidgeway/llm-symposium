@@ -856,3 +856,12 @@ error: corrupt patch at line 44
 
 touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
 
+## 2026-08-29T22:09:18 — 2026-08-29-engineering-channels-telegram-wired.patch
+
+APPLIED 2026-08-29-engineering-channels-telegram-wired.patch: verification passed
+py_compile channels/telegram.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/telegram.py
+

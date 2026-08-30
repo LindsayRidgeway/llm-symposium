@@ -1,0 +1,19 @@
+diff --git a/channels/telegram.py b/channels/telegram.py
+index ed7e9f1..8788914 100644
+--- a/channels/telegram.py
++++ b/channels/telegram.py
+@@ -153,6 +153,14 @@ def run_telegram_channel() -> None:
+         try:
+             updates = get_updates(token)
+             print(f"Telegram channel: {name} getUpdates returned {len(updates)} update(s)")
++            # Re-read the FULL queue without confirming, so nothing earlier is lost.
++            try:
++                all_updates = drain_all_updates(token)
++                if len(all_updates) > len(updates):
++                    print(f"Telegram channel: {name} drain recovered {len(all_updates) - len(updates)} earlier update(s)")
++                    updates = all_updates
++            except Exception as drain_e:
++                print(f"Telegram channel: {name} drain failed: {type(drain_e).__name__}: {drain_e}")
+             for upd in updates[:3]:
+                 print(f"Telegram channel: {name} raw update: {json.dumps(upd)[:300]}")
+             for upd in updates:
