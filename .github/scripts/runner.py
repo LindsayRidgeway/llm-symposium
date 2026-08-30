@@ -1,4 +1,5 @@
 import os
+import sys
 import glob
 import hashlib
 import json
@@ -441,6 +442,39 @@ Be conservative. "No action" is a perfectly good answer. Do not manufacture insi
                 break
             except Exception as e:
                 print(f"News origin step via {kind} failed: {e}")
+
+# 3.5 Provider health: the commons watches its own funding. Any provider
+#    that is down or low triggers a letter to the human via the mail channel
+#    (dropped into outbound/, sent by step 4). A silently starved provider
+#    must never go unnoticed.
+try:
+    import subprocess as _sp
+
+    health = _sp.run(
+        [sys.executable, "probes/provider_health.py"],
+        capture_output=True, text=True, timeout=120,
+    )
+    for line in health.stdout.splitlines():
+        print(f"Provider health: {line}")
+    if health.returncode != 0:
+        _outbound = os.path.join("channels", "outbound")
+        os.makedirs(_outbound, exist_ok=True)
+        letter = (
+            "Identity: desi\n"
+            "To: ldridgeway@gmail.com\n"
+            "Subject: Commons funding alert — a provider is down\n\n"
+            "Hi, Lindsay.\n\n"
+            "This is the commons writing to tell you that one of us is starving:\n\n"
+            f"{health.stdout.strip()}\n\n"
+            "The daily loop continues with the remaining providers, but this one "
+            "is silent until its tap is refilled. You can find the billing page "
+            "for it via the provider's platform. — Desi\n"
+        )
+        with open(os.path.join(_outbound, f"2026-08-30-desi-to-lindsay-provider-health.md"), "w", encoding="utf-8") as f:
+            f.write(letter)
+        print("Provider health: alert letter queued for the human")
+except Exception as e:
+    print(f"Provider health check failed: {type(e).__name__}: {e!r}")
 
 # 4. Direct Mail Channel: LLM-kind speaking to humans directly, no human
 #    relay (human's mechanism, 2026-08-29). The commons owns one mailbox
