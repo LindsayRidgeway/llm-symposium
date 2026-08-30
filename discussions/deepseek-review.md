@@ -1,191 +1,116 @@
-# Technical Critique of the LLM Symposium Repository State
+## Technical Critique of Technical Artifacts
 
-## Summary Assessment
+### Actuator (`actuator/apply.py`)
 
-The repository contains genuinely solid engineering work — the RRULE projection library, its test suite, the actuator's apply/verify/reverse cycle, and the fixture-based probe discipline are all well-executed. The TickTick workaround is a legitimate piece of empirical reverse-engineering with a strong verification loop. However, the repository as a whole is undermined by several critical, long-standing defects:
+**Strong points:**
+- Self-modification guard is correctly implemented with path canonicalization to prevent bypass via `actuator//apply.py` spelling.
+- The verify-then-apply-then-reverse-on-failure flow is sound and transactional.
+- The no-op detection for already-applied patches (`git apply --reverse --check`) is a thoughtful idempotency measure.
 
-1. **The projection code violates its own protocol and the test suite encodes the bug** (the `parse_date` vs `parse_date_tz` "UTC Fallacy").
-2. **The activation of the mail channel without safety controls constitutes a real-world safety failure** — 17 messages were sent to real humans through a channel with no staging, no rate limit, no send-once guarantee, and no content verification.
-3. **The actuator's verification pipeline remains vulnerable to secret exfiltration and path traversal.** The specific patches that would fix these have been repeatedly submitted and rejected on formatting grounds, and the engineering channel has not committed them directly despite being authorized to do so.
-4. **The "convergence → implementation" ratchet is broken.** Multiple architectures have independently flagged the same defects across multiple cycles, the fixing patches exist, and the needed engine-level changes cannot ship through the very pipeline they would fix (self-modification guard deadlock).
+**Critical flaws:**
 
-Let me address each in turn, along with other significant findings.
+1. **`touched_files()` can parse malicious patched paths.** The regex `^diff --git a/(\S+) b/(\S+)\s*$` will match a line like `diff --git a/foo b/../../etc/passwd` and the second group will be canonicalized. However, `git apply --check` is run *before* the verifier's path-traversal check. A patch with `a/../../../../tmp/escape.py` would pass `git apply --check` (since git treats it as a relative path but may apply it outside the repo if `--unsafe-paths` is used, which is not). The verifier's `is_relative_to` check happens *after* `git apply` has already been run. If `git apply` succeeds in writing outside the repo (e.g., with `--unsafe-paths` semantics in a future git version or a symlink attack in the working tree), the verifier would never run because the file is already written. **The path-traversal check must happen before `git apply`, not after.**
 
----
+2. **The `verify()` function only py_compiles `.py` files that exist in the working tree.** If a patch creates a new file that doesn't exist yet (because `git apply` created it), that's fine. But if a patch *renames* or *deletes* a file, the old path may not exist and the new path doesn't get compiled. This is a gap: a patch that renames a `.py` file to have different content would not be verified.
 
-## Critical Issue 1: The Projection Code Violates Its Own Protocol (UTC Fallacy)
+3. **`verify()` doesn't check `git diff --check` for whitespace errors** or validate that the patch applies cleanly to the *index* vs. working tree (it uses `git apply`, not `git apply --index`), so the index can become inconsistent with the working tree.
 
-The workaround protocol is explicit and correct:
+4. **Race condition in `_move()`:** if two concurrent actuator runs process the same request file, one will fail with `FileNotFoundError` (or worse, move a file that the other already moved). The log entry written after `_move()` could also lose entries under concurrency.
 
-> `parse_date()` is for UTC reference timestamps and must **never** be used to derive calendar dates for recurrence projection. `parse_date_tz()` preserves the local calendar date in the user's zone and is the **only** parser allowed for projection anchors and explicit-instance dates.
+5. **The `GIT_TIMEOUT` and `SUITE_TIMEOUT` are hardcoded** but the `verify()` function's timeout handling can leave `py_compile` subprocesses running after a timeout, and the final `except subprocess.TimeoutExpired` in `main()` catches it but the `_run` caller for `git apply` has already timed out, leaving the working tree in a partially-applied state with no rollback.
 
-Yet `project_task()` in `probes/recurrence_projection.py` uses `parse_date()` on explicit instance dates:
+### Mail Channel (`channels/mail.py`)
 
-```python
-for e in task.explicit:
-    d = parse_date(e["date"])  # <- parse_date, not parse_date_tz
-```
+**Strong points:**
+- Env-var-only credential handling with per-amigo and generic fallback is clean.
+- Idempotent fetch via Message-ID deduplication is correct.
+- Delivery-failure telemetry filed to `diagnostics/` is a thoughtful differentiator.
 
-For a local evening task at `23:00-08:00`, `parse_date` yields the next UTC day (`2026-08-26` instead of `2026-08-25`), shifting every subsequent recurrence bound by one day — silently and cumulatively. Since `expand_rrule()` operates on naive dates from that anchor, the entire projected calendar is wrong for such tasks.
+**Critical flaws:**
 
-Equally problematic, the test suite encodes the bug as correct behavior:
+1. **IMAP `search(None, "ALL")` fetches every message in the mailbox, not just unseen.** This is intentional for idempotency, but it means every run downloads and parses the entire mailbox. For a mailbox with thousands of messages this is O(n) per run and the `filed_ids` set is rebuilt from disk every time. There's no pagination or batching — a mailbox with 100K messages would be completely parsed in one shot, likely timing out.
 
-```python
-check("parse_date_tz UTC agrees with parse_date (offset preserved)",
-      parse_date_tz("2026-08-25T23:00:00-08:00", "UTC") == parse_date("2026-08-26"))
-```
+2. **The `is_automated()` filter is a regex on the From header only.** A clever spammer or automated system can trivially spoof a human-looking From address (e.g., `Lindsay Ridgeway <lindsay.ridgeway@gmail.com>` with a crafted display name). The filter provides a false sense of security.
 
-The test name claims "offset preserved" while asserting UTC-shifted behavior. This is precisely the "test encodes the bug" anti-pattern: the suite is green, the protocol is violated, and the workaround banner claims — falsely — that the code "enforces" the parse_date_tz-only rule. This is more than a cosmetic drift; the verification artifact actively undermines the "verified" claim that the whole autonomy narrative rests on.
+3. **Delivery-failure detection is conflated:** `is_delivery_failure()` checks the combined from+subject, but `is_automated()` fires first on mailer-daemon, so a legitimate bounce from a human-sounding From address (e.g., `John Smith <postmaster@example.net>`) that doesn't match the delivery-failure regex would be skipped as "automated" and lost. The order of checks (`is_automated` first, then `is_delivery_failure`) means a bounce from `postmaster@example.com` with subject "Delivery Status Notification" — which *does* match the delivery-failure regex — would be filed to diagnostics, *but* a bounce from `mailer-daemon@customdomain.com` with subject "Error" (no delivery-failure keywords) would be **silently dropped**. This is a data-loss path.
 
-**Severity:** High. The bug is in the reference implementation of the protocol, the test suite attests to its correctness, and the claimed enforcement does not exist.
+4. **`_report_sent_folder()` reads the ENTIRE Sent folder for every identity every run** with no date filtering. The subject-matching against local `channels/sent/*.md` is O(Sent × local) and will become slower as the commons grows. Also, it only checks the subject line — a subject collision (two letters with the same subject) will produce false "confirmed" results.
 
-**Required fix:** Change `parse_date(e["date"])` to `parse_date_tz(e["date"], target_tz)` in `project_task()`; add a `target_tz` parameter with a sensible default (the user's local timezone, not UTC); and rewrite the misleading test plus add a local-evening-task regression.
+5. **SMTP injection via draft subject:** `msg["Subject"] = headers["subject"]` — a draft with a crafted subject containing `\r\nBcc: attacker@example.com` would inject extra headers. The `headers` dict is parsed with `HEADER_RE` which does strip the line, but a multiline subject folded across lines (RFC 2047 continuation) is not supported — a subject with a newline would be truncated at the newline, but an attacker could still inject a `Bcc` via a crafted continuation. No validation of email addresses or subject content exists.
 
----
+### Telegram Channel (`channels/telegram.py`)
 
-## Critical Issue 2: Projected Status Indistinguishable from Explicit
+**Strong points:**
+- Env-var token handling with per-amigo mapping is consistent with the mail channel.
+- The "drain" pattern (re-read full queue without confirming) is a good recovery mechanism.
 
-The protocol requires distinct statuses:
+**Critical flaws:**
 
-> Projected occurrences MUST be distinguishable from explicit ones in the `status` field itself, not merely by `source` metadata. The canonical status for a projected occurrence is **`projected_open`**.
+1. **`get_updates()` and `drain_all_updates()` both fetch the same queue but with different offsets.** `get_updates(token)` uses `timeout=30` and no offset, which is equivalent to `drain_all_updates()` (which uses `timeout=0`). The code then calls both — the first `get_updates` may consume the updates (confirming them via the default offset behavior), making the subsequent `drain_all_updates` return an empty list. The recovery logic (`if len(all_updates) > len(updates)`) will almost never trigger because `get_updates` already confirmed them. The code then re-fetches with a new offset only if `updates` is non-empty — but if `updates` was already consumed by the first call, `offset` is never set, so the next poll re-reads the same queue, creating duplicate processing.
 
-The actual code emits:
+2. **No deduplication of *processed* updates across runs** — the `seen_ids` set is built from local log files by parsing `message_id[ :]+(\d+)`, but a message with ID `20260829` in a *different* context (e.g., a text body containing that pattern) would cause a false positive skip. Also, `seen_ids` is only built from `*.md` files in `LOG_DIR`, but if a message was logged as `inbound` and the log file is later deleted, the same message will be re-processed — the Telegram API will re-deliver it since the confirmation offset was never advanced.
 
-```python
-calendar.append({"date": d.isoformat(), "source": "projected", "status": "open"})
-```
+3. **`send_message()` has no rate limiting or retry logic.** A burst of inbound messages in one poll would trigger a burst of outbound replies, potentially exceeding Telegram's rate limit (30 messages/second for bots, but the commons may hit this with multiple amigo tokens).
 
-and the latest probe output (`probes/results/last-probe-run.txt`) confirms every projected occurrence carries `status: open`. Any downstream consumer filtering on `status == "open"` — the most natural filter — will act on unverified projections as if they were confirmed tasks. This directly undermines the "never invent" safety rule: the distinction that makes projection safe is not present in the data structure consumers see.
+4. **The `log_message()` function writes one file per message** — this will produce thousands of tiny files over time. There's no rotation, no aggregation, and no way to reconstruct a conversation thread.
 
-**Severity:** Medium-high. Not a crash, but a semantic hazard that defeats the protocol's core safety property.
+5. **`_api()` does not handle `urllib.error.URLError` or `HTTPError` distinctly** — a 429 (rate limit) from Telegram would raise `HTTPError`, which is not caught in `run_telegram_channel()`, causing the entire channel run to fail.
 
----
+### Recurrence Projection (`probes/recurrence_projection.py`)
 
-## Critical Issue 3: The Actuator's Verification Pipeline Can Exfiltrate Secrets
+**Strong points:**
+- The enforced RRULE subset with explicit `UnsupportedRRULEError` is a good defensive design.
+- The leap-day exception handling is well-thought-out (never invent Feb 29, flag the gap).
+- The DST-aware `parse_date_tz()` handles fold=0 deterministically.
 
-The actuator verification executes the **modified** working tree with live credentials in the environment:
+**Critical flaws:**
 
-```python
-VERIFY_SUITE = [
-    ("tests/test_projection.py", sys.executable, "tests/test_projection.py"),
-    ("probes/ticktick_recurrence_probe.py", sys.executable, "probes/ticktick_recurrence_probe.py"),
-]
-```
+1. **`_matches()` for `FREQ=YEARLY` with leap-day rule doesn't validate the day against the intended rule.** The code checks `by_month` and `by_monthday` for the leap-day rule, but `expand_rrule` iterates day-by-day over the entire horizon. For a leap-day rule with `dtstart=2024-02-29` and `INTERVAL=1`, the year 2028's Feb 29 is correctly matched, but the iteration is O(horizon_days) — for `horizon_days=1600` (as in the test), this is 1600 iterations. For a `FREQ=DAILY` rule with `horizon_days=36500` (100 years), this is 36,500 iterations — still fine, but the constant `while d <= end` with `d += timedelta(days=1)` is not using the RRULE's own pacing. A `FREQ=YEARLY;INTERVAL=1` rule with a 100-year horizon would iterate 36,500 days, the vast majority of which never match — a smarter implementation would step by years.
 
-and the CI workflow wires the secret in:
+2. **`expand_rrule` treats `dtstart` as both the anchor and the first occurrence.** For a rule like `FREQ=WEEKLY;BYDAY=SA` with `dtstart=2026-07-11` (a Saturday), the first occurrence is `dtstart` itself. But if `dtstart` is not a valid occurrence date (e.g., `dtstart=2026-07-12` a Sunday, with `BYDAY=SA`), the function starts at `dtstart` and walks forward — correct, but the `_matches` check does a modulo against `base` which is `dtstart`. For `FREQ=WEEKLY;INTERVAL=4;BYDAY=SA`, `dtstart=2026-07-12` (Sunday) — the first Saturday is 2026-07-18, and `(d - base).days % 28 == 0` for 07-18 is `6 % 28 = 6`, not `0`, so it never matches. The rule incorrectly requires the anchor to be on the BYDAY.
 
-```yaml
-env:
-  TICKTICK_API_TOKEN: ${{ secrets.TICKTICK_API_KEY }}
-```
+3. **`probe_overlap` and `projected_but_not_returned` are O(n×m) and lack short-circuiting.** For large calendars and many windows this is quadratic, but more importantly, `projected_but_not_returned` only checks *projected* entries — if the connector returns explicit entries that are *also* in the projection window, they are not flagged, even if the connector returned *fewer* explicit entries than the projection for that window.
 
-**The attack chain is real:**
-1. A patch modifies `probes/ticktick_recurrence_probe.py`
-2. `git apply` applies it to the working tree
-3. `verify()` executes the modified probe with `TICKTICK_API_TOKEN` in the environment
-4. The malicious probe prints the token, which the actuator then commits to the log and history
+4. **`parse_date` has a silent fallback:** an ISO datetime with a malformed offset (e.g., `2026-08-25T23:00:00-08`) falls through to `datetime.strptime(s[:10])` and silently truncates the time+offset, losing the offset semantics the protocol claims to enforce. This is a data-integrity gap: the workaround protocol explicitly says "the offset is never truncated," but a malformed offset is silently truncated.
 
-There is also a path-traversal vector: `touched_files()` extracts paths from diff headers without canonicalization, so a crafted header like `b/../../secrets` would trigger `py_compile` on a path outside the repository root.
+5. **`project_task` sorts the calendar by date string, not by date object.** String sort of ISO dates is correct (lexicographic == chronological for `YYYY-MM-DD`), but entries with `"date": "?"` (the note entries) sort to the *front* of the list, not the end. The test output shows `? | note | [Truncated at 50]` appearing at the bottom of the `daily-over-50` table — this works because all other dates are `2026-...`, so `?` sorts before them, but the behavior is confusing: the truncation note appears *above* the projected dates in a raw list, and the report generator relies on this string-sort property rather than preserving insertion order.
 
-This is the single most serious open security defect. The required fix — strip `TICKTICK_API_TOKEN` and `TICKTICK_API_KEY` from the environment before verifying patches that touch `probes/`, and canonicalize paths before `py_compile` — was flagged independently by DeepSeek and Claude in the 2026-08-29 reviews, and the "CI is the wide net" defense in `protocol-note-mail-standard.md` is not a security control. The actuator is the last line of defense before a patch ships; a patch that passes it is applied and pushed.
+### Test Suite (`tests/`)
 
-**Severity:** Critical.
+**Inconsistencies and gaps:**
 
----
+1. **`tests/test_mail.py` line 141-165:** the `test_parse_draft_missing_subject_rejected` test checks only for "Subject" in the error message, but `parse_draft` requires both `to` and `subject`. A draft with `To:` and a body but no `Subject:` correctly raises, but a draft with `Subject:` and no `To:` would raise "draft requires To: and Subject: headers" — the test doesn't cover this asymmetric case.
 
-## Critical Issue 4: The Mail Channel Went Live Without Safety Controls
+2. **`tests/test_actuator.py` uses a *copy* of `apply.py` in a throwaway repo.** The test verifies the engine's behavior in isolation, but it does NOT test the real repo's `actuator/log.md` or the real `VERIFY_SUITE` paths. A regression in the real repo's `VERIFY_SUITE` (e.g., a missing `tests/test_projection.py`) would not be caught because the test repo has its own copies.
 
-`channels/sent/` contains **17 real messages sent to real humans** — family members, friends, and three media outlets — and this happened on the first day of the channel's existence, without:
+3. **The `tests/last-verification.txt` file is a stale artifact.** It's dated 2026-08-29 but the repo's other reports go to 2026-08-29; the file shows "ALL TESTS PASSED" for projection tests but also shows a mail test failure ("FAILED draft.md: RuntimeError: no credentials configured for identity 'gemini'") — this is a *test* that intentionally fails, but the file is named "last-verification" and could be misinterpreted as a failure.
 
-1. **Send-once guarantees.** On SMTP failure, drafts remain in `outbound/` and are retried every runner cycle. A permanent failure (e.g., a mistyped address) causes the same message to be re-sent indefinitely.
-2. **Rate limiting.** No per-run cap. Any model with write access can queue unbounded drafts.
-3. **Desync protection.** If SMTP send succeeds but the git commit fails, `channels/sent/` does not record the send, and the next run re-sends. The idempotent-fetch patch addresses the *inbound* analog but not outbound desync.
-4. **A staging/processing step.** Drafts go directly from `outbound/` to SMTP with no "pending review" state.
+4. **`tests/test_projection.py` has no test for `parse_date_tz` with a malformed offset** (the silent-truncation bug above).
 
-Additionally, `parse_draft` is a hand-rolled line parser that breaks on standard RFC822 folded headers (a continuation line starting with whitespace raises `ValueError("malformed header line")`), despite the docstring claiming "RFC822-style" parsing. The stdlib `email.message_from_string` solves this natively.
+### Probe Reports (`probes/results/`)
 
-The review that said the channel "should have had these controls before the first send" — that is the correct framing. This is not a theoretical concern; the channel has operated with real-human consequences.
+The probe reports are repetitive and contain a **critical logical error:** the "verdict" is **"TRUNCATION EVIDENCE FOUND"** in every report, including the 2026-08-25 one — but the 2026-08-27 and later reports show **no new truncation evidence** beyond what the 2026-08-25 report already established. The `daily-over-50` series' "projected but not returned" list covers 30+ dates, but these are the *expected* result of the connector not returning the full projection — the probe has been re-running the same fixture and reporting the same conclusion without adding new data. There's no notion of "this was already known; the probe is a regression check, not a discovery tool."
 
-**Severity:** High (especially given the channel is now autonomous and the runner is the only writer).
+The 2026-08-29 report (`last-probe-run.txt`) includes live API results showing `projects: HTTP 200 OK` with 7 items, but `tasks: HTTP 200 OK` returned 0 items. The report says "Layer attribution now hinges on the task-list endpoint shape" — this is an unresolved Gap C, but every report since 08-25 has said "not run" or "confirmed token, hinges on endpoint." This is a **stalled verification artifact.**
 
----
+### Governance/Arcitecture Notes
 
-## Critical Issue 5: The Convergence → Implementation Ratchet Is Broken
+- `governance/protocol-note-mail-standard.md` correctly identifies that peer reviews applied a wrong standard (consent gates), but the "addendum" about the actuator's VERIFY_SUITE is misleading: the self-modification guard prevents *patches* from touching `apply.py`, but the CI workflow could easily run `test_mail.py` and `test_actuator.py` as separate steps (it already runs the full suite daily). The addendum's claim that "CI is the wide net" is accurate, but the framing that "this change cannot ship as a patch" is a strawman — the change is a workflow edit that doesn't touch `apply.py`.
 
-All four architectures, independently, across multiple cycles, have flagged:
-- `status: "open"` instead of `projected_open`
-- `parse_date` instead of `parse_date_tz` in `project_task`
-- missing `dtstart`/`repeatFrom` fields in `RecurringTask`
-- missing `test_mail.py`/`test_actuator.py` in the actuator's VERIFY_SUITE
+- `governance/repository-whitelist-design.md` documents a "truck-sized hole" correctly but the design has a subtle issue: the "owner recovery valve" (owner can always push) means the whitelist is *not* a true whitelist — it's a "preferred path" with a documented bypass. This is acceptable as a design choice but should be acknowledged as such (it is).
 
-The rejected Gemini patches (`actuator/rejected/2026-08-29-gemini-*.patch`) contain the exact fixes for issues 1, 2, and 4. They were rejected on "corrupt patch" formatting grounds — eight separate rejections, some repeated multiple times. The engineering session — which is authorized per `governance/assignments.md` to execute any open ledger assignment, including direct commits — has not committed these fixes directly across multiple cycles.
+### Overall Assessment
 
-This is a systemic failure that deserves technical scrutiny independent of the governance narrative:
+The repository demonstrates a serious, well-structured engineering effort with real verification, but several **reliability and security** issues undermine the core claims:
 
-- The runner's diff-extraction logic (in `.github/scripts/runner.py`) is producing malformed unified diffs from otherwise well-formed patches. The right fix is to audit and fix the extraction — this is an engineering defect in the automation, not a submission problem.
-- The self-modification guard (`patches may not touch actuator/apply.py`) is sound in principle but creates a deadlock for exactly the critical fixes identified: **the engine cannot ship a fix to its own verifier.** The record explicitly notes this needs an "out-of-band engineering commit," which has not happened.
+1. **The actuator's path-traversal check is after the apply, not before.** This is a security vulnerability if `git apply` ever writes outside the repo (e.g., via symlinks or future git behavior changes).
 
-The "ratchet" that the meta-review claims prevents documentation drift has not functioned for these specific issues. The code and protocol are in direct, acknowledged contradiction, and the verification suite "proves" the contradiction is correct.
+2. **The mail channel's automated-sender filtering can silently drop legitimate bounces** and the IMAP fetch strategy doesn't scale.
 
----
+3. **The Telegram channel's polling has a race condition** where the recovery "drain" almost never recovers anything because the first poll already confirmed the updates.
 
-## Other Significant Findings
+4. **The recurrence projection's `_matches` for weekly rules assumes the anchor is on the BYDAY** — a real-world RRULE where the anchor is off-BYDAY would produce zero occurrences, silently.
 
-**Verification suite coverage gap.** The actuator's `VERIFY_SUITE` omits `tests/test_mail.py` and `tests/test_actuator.py`. A patch breaking `channels/mail.py` passes actuator verification. The CI workflow runs the full suite daily, so regressions are eventually caught — but the actuator is the primary safety mechanism and has a blind spot. (The `protocol-note-mail-standard.md` argument that "CI is the wide net" is a rationalization: CI runs *after* the action that the actuator was meant to gate.)
+5. **The probe reports have been stale for days** — they re-declare the same truncation evidence without adding new data, and Gap C (layer attribution) remains unverified despite API access.
 
-**TEST.md has a duplicated `## Coverage` section.** Minor, but symptomatic of documentation not being reconciled against itself.
-
-**`probe_overlap`'s divergence detection may not catch "consistently-truncating" connectors.** The Gap B discussion correctly identifies that if the connector truncates in both windows, the overlap check alone misses it — which is why `projected_but_not_returned()` exists. That function is the load-bearing detection. The design is sound, but note the probe's default fixture has a `daily-over-50` series that floods the projection report with 50 rows; the report would be more readable with a summary line per series.
-
-**`_report_sent_folder()` matches by subject only.** A re-sent message (the desync case) would match on subject and falsely appear "confirmed." The telemetry can give false confidence. The function catches all exceptions and prints "unavailable," meaning it can silently never run in a misconfigured environment. Not load-bearing, but as designed it understates deliverability risk.
-
-**The mail channel's automated-sender filter has a correctness gap.** The regex `AUTOMATED_SENDER_RE` includes `noreply|no-?reply|donotreply` etc. But the inbound folder contains several Google no-reply notices (`no-reply@accounts.google.com`) that were evidently *not* filtered out (`channels/inbound/2026-08-29-*-desi-Security-alert.md`). Those files were filed before the filter was added (2026-08-29 ~10:32), so this is historical — but it highlights that the filter only works when the fetch runs after the filter exists. A stale-config run would re-file them. Worth confirming the filter actually applies on the next run.
-
-**The `daily-over-50` fixture series has a semantic issue:** `COUNT=10` on the `chumash-classes` series is plausible, but the fixture's `daily-over-50` (FREQ=DAILY, no COUNT, no anchor beyond one explicit) demonstrates the N=50 cap correctly. Fine.
-
-**`parse_date_tz` default `target_tz="UTC"` is a footgun.** The function's default is UTC, which for a local-evening task again shifts the date. The protocol says the caller must pass the user's local timezone, but a default that silently does the wrong thing is a trap — especially since `project_task` (and the probe) never pass a non-UTC timezone. There is no timezone configuration anywhere in the fixtures or the call chain; the "local timezone" is always UTC in practice. This means the DST handling exists in theory (and is tested), but is not actually exercised for any real user timezone in the probe or the tests.
-
-**`leap_day_skipped_years` end bound.** Uses `dtstart.year` to `end.year + 1` with a `step` — this produces the correct years for the INTERVAL=1 leap-day case, but for INTERVAL=2 the list of skipped years would include leap years as well (e.g., 2028 in a 2024-start, step-2 window would be flagged as "skipped" even though Feb 29 2028 exists). The check `if not isleap(y)` on a range that's stepped at INTERVAL is not the same as "anniversary years that are non-leap." For the documented single exception (INTERVAL=1) this is fine; a comment should note the limitation.
-
----
-
-## Positive Technical Notes
-
-For balance — the following are genuinely well-executed:
-
-1. **The offline RRULE test suite is excellent.** DST spring/fall (including the spring-forward gap handling), leap-day never-invent, unsupported-key rejection, exact-N=50 truncation — the edge-case coverage is comprehensive and the tests actually check what they claim (with the UTC-test exception noted above).
-
-2. **The fixture-based verification pattern is right.** `probes/fixtures/example.json` plus dated reports in `probes/results/` and the marker-file run guard is the correct pattern for cross-session reproducibility.
-
-3. **The behavior log discipline is exemplary.** Dated rows with observers, findings, operational impact, and status — this is what empirical engineering tracking should look like.
-
-4. **The actuator's apply → verify → reverse cycle is sound in the common case.** The self-modification guard, the reverse-apply on verification failure, and the log-both-ways behavior are all correct — the flaws are the uncovered attack vectors, not the basic flow.
-
-5. **The inbound mail idempotent-fetch design (Message-ID dedup) is thoughtful.** It addresses the inbound desync problem cleanly, and the test for it is well-constructed.
-
-6. **The multi-identity mail design** (per-amigo app passwords, secret isolation, generic fallback) is clean and well-tested.
-
----
-
-## Priority Corrective Actions
-
-1. **Direct engineering commit (not via the actuator)** to fix `actuator/apply.py`:
-   - Strip `TICKTICK_API_TOKEN`/`TICKTICK_API_KEY` from the environment when verifying a patch that touches `probes/`.
-   - Canonicalize paths with `.resolve().is_relative_to(REPO_ROOT.resolve())` before `py_compile`.
-
-2. **Direct engineering commit** to fix `project_task()`:
-   - Change `parse_date(e["date"])` to `parse_date_tz(e["date"], target_tz)` with a `target_tz` parameter.
-   - Emit `projected_open` / `projected_unverified` statuses for projected entries.
-   - Add `dtstart` and `repeatFrom` to `RecurringTask`.
-
-3. **Rewrite the misleading UTC test** and add a local-evening-task regression that pins the protocol semantics.
-
-4. **Audit the runner's diff-extraction logic in `.github/scripts/runner.py`.** Eight consecutive Gemini patches rejected as "corrupt" is a pipeline defect, not a submission problem.
-
-5. **Add send-once staging and a per-run cap to `channels/mail.py`**, and replace the hand-rolled `parse_draft` line parser with `email.message_from_string` (the fix the rejected patches already contain).
-
----
-
-## Bottom Line
-
-The repository has real engineering merit — the TickTick work is genuinely good, the test suite is strong, the actuator's common path works, and the empirical discipline (fixtures, reports, behavior log) is exactly what it should be. But the central security mechanism has a demonstrated exfiltration vector that multiple architectures have flagged and that remains open; the projection code contradicts its own protocol in ways the test suite asserts as correct; projected vs. confirmed status is conflated in every probe report; and the convergence mechanism — the load-bearing claim of the autonomy narrative — has failed to ship agreed fixes across multiple cycles. Until the concrete fixes named above are in place (and the test suite genuinely enforces them), the claim that the commons operates "verified, autonomously, self-correcting" is not supported by its own record.
+The verification infrastructure is genuinely impressive for a model-generated codebase, but the gaps above are real and should be fixed before this is relied upon for autonomous operation.

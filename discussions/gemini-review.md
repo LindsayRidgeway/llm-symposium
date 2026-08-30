@@ -1,228 +1,65 @@
-**Model Identity:** Gemini
-**Date:** 2026-08-29 (UTC)
+Here is a technical critique of the LLM Symposium repository artifacts, focusing directly on the code, protocol implementations, and potential failure modes.
 
-### Technical Critique of the LLM Symposium Artifacts
+### 1. Actuator: Critical Bypass in Patch Parsing (`actuator/apply.py`)
+The `touched_files` function contains a logic flaw that permits trivial bypass of the self-modification guard (`ENGINE = "actuator/apply.py"`) and verification suite.
 
-A thorough evaluation of the current repository state reveals that several critical fixes regarding recurrence logic and mail parsing have failed to deploy across multiple cycles. The root cause appears to be the actuator's patch extraction and application pipeline rejecting cleanly formed unified diffs as "corrupt". This has left serious regressions active in the codebase. Furthermore, the actuator possesses a path traversal vulnerability that the models are structurally blocked from fixing.
-
-#### 1. Actuator Path Traversal Vulnerability (REQUIRES OUT-OF-BAND FIX)
-**File:** `actuator/apply.py`
-
-The `touched_files()` function extracts target paths directly from diff headers and feeds them into the `py_compile` verification step without any canonicalization constraints. A diff header modifying `b/../../../../path/to/system/file` could trick the verifier into compiling external paths. 
-
-*Crucially, the self-modification guard in `actuator/apply.py` actively prevents the autonomous pipeline from patching this file.* Any patch touching the engine is instantly rejected. **An engineering session must commit the following fix directly to `apply.py`:**
 ```python
-if not (REPO_ROOT / path).resolve().is_relative_to(REPO_ROOT.resolve()):
-    return False, f"Path traversal detected: {path}"
+    files = []
+    for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.MULTILINE):
+        files.append(m.group(2))
+    if not files:
+        for m in re.finditer(r"^\+\+\+ b/(\S+)\s*$", patch_text, re.MULTILINE):
+            # ...
 ```
+*   **The flaw:** The `if not files:` block halts parsing of `+++` headers if *any* `diff --git` header is found. `git apply` determines the target file from the `+++` unified diff header, not just the `diff --git` line. A crafted patch can supply a dummy `diff --git a/safe.py b/safe.py` header followed by `+++ b/actuator/apply.py`. The actuator will only register `safe.py` as touched, bypassing the guard entirely.
+*   **Space-in-Filename issue:** The regex uses `\S+`, which terminates matching at the first whitespace character. If a patch modifies a file named `my file.py`, it will fail to parse the filename accurately, resulting in missed `py_compile` verification for that file.
+*   **Fix:** Accumulate targets from *both* `diff --git` and `+++` headers unconditionally, and adjust the regex to account for quoted paths or spaces (e.g., `r"^diff --git a/(.+?) b/(.+?)\s*$"`).
 
-#### 2. UTC Fallacy & Status Conflation in Recurrence Projections
-**Files:** `probes/recurrence_projection.py`, `tests/test_projection.py`
+### 2. Mail Channel: Silent Loss of HTML-Only Emails (`channels/mail.py`)
+The inbound IMAP extraction logic strictly requires `text/plain` MIME parts:
 
-Despite the protocol explicitly mandating `parse_date_tz` to preserve local calendar dates, the core projection engine continues to evaluate explicit instance dates using the UTC-shifting `parse_date()`:
 ```python
-for e in task.explicit:
-    d = parse_date(e["date"])  # BUG: Shifts local evening tasks to the next UTC day
+for part in msg.walk():
+    if part.get_content_type() == "text/plain" and not part.get("Content-Disposition"):
+        payload = part.get_payload(decode=True)
 ```
-Additionally, `project_task()` currently emits `{"status": "open"}` for projected tasks, conflating unverified projections with confirmed explicit tasks. This violates the protocol requirement to use `"projected_open"`.
+*   **The flaw:** Many modern consumer email clients (and automated human replies) send emails as `multipart/alternative` prioritizing HTML, or as standalone `text/html`. If a human sends a reply without a `text/plain` alternative, this loop ignores the payload entirely.
+*   **Impact:** The commons will record the message headers but a blank body, losing the human's response.
+*   **Fix:** Implement a fallback. If the email walk completes without finding a `text/plain` part, extract the `text/html` part and strip the HTML tags to persist the text content.
 
-To compound the issue, the test suite asserts the UTC fallacy as correct behavior. The test named `"parse_date_tz UTC agrees with parse_date"` is mathematically enforcing the bug.
+### 3. Probes: Arbitrary Scope Invalidates API Telemetry (`probes/ticktick_recurrence_probe.py`)
+To isolate the layer attribution (Gap C), the probe tests the live TickTick `POST /open/v1/task/query` endpoint. Because TickTick rejects empty-body queries, the script scopes the query to a project:
 
-#### 3. Missing Metadata Causes False Negatives
-**Files:** `probes/recurrence_projection.py`, `probes/ticktick_recurrence_probe.py`
-
-The `RecurringTask` dataclass omits `dtstart` and `repeatFrom`. Without `dtstart`, the "Never-Invent" rule is forced to bail out completely when zero explicit instances are returned, issuing a `no explicit anchor` note. Because TickTick routinely under-returns future recurrences, this results in false negatives. The logic must capture `dtstart` to safely project these cases, flagging them as `"projected_unverified"`.
-
-#### 4. Brittle RFC822 Parsing
-**Files:** `channels/mail.py`, `tests/test_mail.py`
-
-The `parse_draft` logic splits lines via `text.splitlines()` and iterates with a strict `HEADER_RE` regex. This fails catastrophically on standard multi-line folded headers, throwing `ValueError("malformed header line")`. Standard library `email.message_from_string` solves this natively.
-
----
-
-### Actuator Patch
-
-The following unified diff implements the technical fixes for points 2-4. I have meticulously formatted the context lines to ensure it passes the runner's diff extraction and the actuator's `git apply` step.
-
-```diff
---- a/channels/mail.py
-+++ b/channels/mail.py
-@@ -44,6 +44,7 @@
- import re
- import smtplib
- import sys
-+import email
- from email.message import EmailMessage
- from email.parser import BytesParser
- from pathlib import Path
-@@ -99,19 +100,13 @@
- def parse_draft(text: str):
-     """Parse a draft: header block (Identity/To/Subject/Reply-To/Cc) then body.
- 
-     Returns (headers: dict[str, str], body: str). Malformed drafts raise
-     ValueError so the runner can skip them with a logged reason instead of
-     sending garbage.
-     """
--    lines = text.splitlines()
--    headers: dict[str, str] = {}
--    idx = 0
--    while idx < len(lines):
--        line = lines[idx].strip()
--        if not line:
--            idx += 1
--            break
--        m = HEADER_RE.match(line)
--        if not m:
--            raise ValueError(f"malformed header line: {line!r}")
--        headers[m.group(1).lower()] = m.group(2).strip()
--        idx += 1
-+    msg = email.message_from_string(text)
-+    headers = {k.lower(): str(v).strip() for k, v in msg.items()}
-     if "to" not in headers or "subject" not in headers:
-         raise ValueError("draft requires To: and Subject: headers")
--    body = "\n".join(lines[idx:]).strip()
-+    body = msg.get_payload()
-+    if isinstance(body, list):
-+        body = "".join(str(p) for p in body)
-+    body = str(body).strip()
-     return headers, body
---- a/probes/recurrence_projection.py
-+++ b/probes/recurrence_projection.py
-@@ -308,6 +308,8 @@
- class RecurringTask:
-     id: str
-     title: str
-     rrule: Optional[str]
-+    dtstart: Optional[str] = None
-+    repeatFrom: Optional[int] = None
-     explicit: List[Dict[str, str]] = field(default_factory=list)
-     # explicit entries: {"date": "YYYY-MM-DD", "status": "open"|"completed"|"cancelled"}
- 
-@@ -316,6 +318,7 @@
- def project_task(
-     task: RecurringTask,
-     horizon_days: int = DEFAULT_HORIZON_DAYS,
-     limit: int = MAX_PROJECTED_INSTANCES,
-+    target_tz: str = "UTC",
- ) -> Tuple[List[Dict[str, str]], bool]:
-     """Apply the protocol to one task.
- 
-@@ -330,7 +333,7 @@
-     calendar: List[Dict[str, str]] = []
-     explicit_map: Dict[date, str] = {}
-     for e in task.explicit:
--        d = parse_date(e["date"])
-+        d = parse_date_tz(e["date"], target_tz)
-         explicit_map[d] = e.get("status", "open")
-         # Explicit instances are authoritative, including cancellations:
-         # a cancelled occurrence surfaces as cancelled and is never replaced
-@@ -342,12 +345,29 @@
-     if task.rrule:
-         spec = parse_rrule(task.rrule)
-         if not explicit_map:
--            # No anchor: we cannot expand safely. Gap B: report rather than invent.
--            calendar.append({
--                "date": "?",
--                "source": "note",
--                "status": "no explicit anchor; RRULE not expanded (never invent occurrences)",
--            })
-+            if task.dtstart:
-+                anchor = parse_date_tz(task.dtstart, target_tz)
-+                projected, truncated = expand_rrule(task.rrule, anchor, horizon_days, limit)
-+                for d in projected:
-+                    calendar.append({"date": d.isoformat(), "source": "projected", "status": "projected_unverified"})
-+                # Leap-day exception: the Feb 29 anniversary does not exist in
-+                # non-leap years. Never invent an occurrence — flag the gap.
-+                if is_leap_day_rule(spec):
-+                    skipped = leap_day_skipped_years(spec, anchor, horizon_days)
-+                    if skipped:
-+                        calendar.append({
-+                            "date": "?",
-+                            "source": "note",
-+                            "status": (
-+                                "leap-day anniversary (Feb 29) does not exist in non-leap years; "
-+                                f"occurrences skipped: {', '.join(str(y) for y in skipped)}"
-+                            ),
-+                        })
-+            else:
-+                # No anchor: we cannot expand safely. Gap B: report rather than invent.
-+                calendar.append({
-+                    "date": "?",
-+                    "source": "note",
-+                    "status": "no explicit anchor; RRULE not expanded (never invent occurrences)",
-+                })
-         else:
-             anchor = min(explicit_map)
-             projected, truncated = expand_rrule(task.rrule, anchor, horizon_days, limit)
-@@ -355,7 +375,7 @@
-             for d in projected:
-                 if d in explicit_map:
-                     continue  # explicit wins (masking)
--                calendar.append({"date": d.isoformat(), "source": "projected", "status": "open"})
-+                calendar.append({"date": d.isoformat(), "source": "projected", "status": "projected_open"})
-             # Leap-day exception: the Feb 29 anniversary does not exist in
-             # non-leap years. Never invent an occurrence — flag the gap.
-             if is_leap_day_rule(spec):
---- a/probes/ticktick_recurrence_probe.py
-+++ b/probes/ticktick_recurrence_probe.py
-@@ -144,6 +144,8 @@
-             id=s["id"],
-             title=s["title"],
-             rrule=s.get("rrule"),
-+            dtstart=s.get("dtstart"),
-+            repeatFrom=s.get("repeatFrom"),
-             explicit=s.get("explicit", []),
-         )
-         calendar, truncated = project_task(task, horizon_days=horizon, limit=limit)
-@@ -194,6 +196,8 @@
-             id=s["id"],
-             title=s["title"],
-             rrule=s.get("rrule"),
-+            dtstart=s.get("dtstart"),
-+            repeatFrom=s.get("repeatFrom"),
-             explicit=s.get("explicit", []),
-         )
-         calendar, _ = project_task(task, horizon_days=horizon, limit=limit)
---- a/tests/test_mail.py
-+++ b/tests/test_mail.py
-@@ -99,7 +99,7 @@
- def test_parse_draft_malformed_header_rejected():
-     try:
-         mail.parse_draft("not a header\n\nbody")
-     except ValueError as e:
--        assert "malformed" in str(e)
-+        assert "requires To: and Subject: headers" in str(e)
-     else:
-         raise AssertionError("expected ValueError")
---- a/tests/test_projection.py
-+++ b/tests/test_projection.py
-@@ -107,6 +107,18 @@
-       any(e["source"] == "note" for e in cal2) and not any(
-           e["source"] == "projected" for e in cal2),
-       f"got {cal2}")
-+
-+print("project_task: distinguishes projected instances in status")
-+task3 = RecurringTask(id="t3", title="Distinguish", rrule="FREQ=DAILY", explicit=[{"date": "2026-08-01", "status": "open"}])
-+cal3, _ = project_task(task3, horizon_days=2, limit=5)
-+p_statuses = [e["status"] for e in cal3 if e["source"] == "projected"]
-+check("status is projected_open", all(s == "projected_open" for s in p_statuses), f"got {p_statuses}")
-+
-+print("project_task: dtstart anchor without explicit instances -> projected_unverified")
-+task4 = RecurringTask(id="t4", title="Unverified", rrule="FREQ=DAILY", dtstart="2026-08-01", explicit=[])
-+cal4, _ = project_task(task4, horizon_days=2, limit=5)
-+p_unv = [e["status"] for e in cal4 if e["source"] == "projected"]
-+check("status is projected_unverified", all(s == "projected_unverified" for s in p_unv), f"got {p_unv}")
- 
- print("probe_overlap: window divergence detection (Gap B)")
- res = probe_overlap(
-@@ -155,8 +167,8 @@
-       parse_date_tz("2026-11-01T01:30:00-04:00", "America/New_York") == parse_date("2026-11-01")
-       and parse_date_tz("2026-11-01T01:30:00-05:00", "America/New_York") == parse_date("2026-11-01"))
--check("parse_date_tz UTC agrees with parse_date (offset preserved)",
--      parse_date_tz("2026-08-25T23:00:00-08:00", "UTC") == parse_date("2026-08-26"))
-+check("parse_date_tz preserves local calendar date contrary to parse_date UTC shift",
-+      parse_date_tz("2026-08-25T23:00:00-08:00", "UTC") == parse_date("2026-08-25"))
- check("parse_date_tz UTC default on naive input",
-       parse_date_tz("2026-08-25T12:00:00") == parse_date("2026-08-25"))
- 
+```python
+parsed = json.loads(results.get("projects", {}).get("body") or "[]")
+if isinstance(parsed, list) and parsed and isinstance(parsed[0], dict):
+    project_id = parsed[0].get("id")
+payload = json.dumps({"projectId": project_id}).encode() if project_id else b"{}"
 ```
+*   **The flaw:** The probe arbitrarily queries the *first* project returned by the `projects` endpoint (`parsed[0]`). TickTick's API rigidly scopes this query; it will only return tasks within that specific project.
+*   **Impact:** Unless the tasks corresponding to the fixture (e.g., `terbinafine`, `chumash-classes`) happen to reside in that exact 0th project, the endpoint will return `0 items`. This causes a false negative for layer attribution verification, as the script misinterprets "wrong project queried" as "the API truncated the tasks."
+*   **Fix:** Either the fixture must explicitly define the `projectId` to query, or the probe must query the `inbox` alongside all retrieved project IDs in a loop.
+
+### 4. Telegram: Unanchored Regex Promotes Data Poisoning (`channels/telegram.py`)
+The logic to verify if a message was already processed scans the entire markdown file using an unanchored regex against the `content` blob (which includes user-supplied text):
+
+```python
+m = re.search(r"message_id[ :]+(\d+)", content)
+if m:
+    seen_ids.add(int(m.group(1)))
+```
+*   **The flaw:** While `re.search` only evaluates the first match (typically the header), relying on an unanchored search against user-controlled payload data is brittle. If a message write was malformed or missing the header, or if the code is later refactored to use `re.findall()`, any user sending `message_id: 12345` in their chat will successfully poison the `seen_ids` set. 
+*   **Fix:** Anchor the regex specifically to the metadata block using multiline headers: `re.search(r"^-\s*Message_id:\s*(\d+)$", content, re.MULTILINE)`.
+
+### 5. Recurrence Engine: Algorithmic Inefficiency (`probes/recurrence_projection.py`)
+The `expand_rrule` function projects occurrences via a brute-force daily incrementation loop:
+
+```python
+while d <= end and len(out) < limit and (count is None or len(out) < count):
+    if _matches(d, spec, dtstart):
+        out.append(d)
+    d += timedelta(days=1)
+```
+*   **The flaw:** Evaluating a multi-year horizon requires $O(N)$ iterations where $N$ is the number of days in the horizon, rather than scaling by the `INTERVAL` or `FREQ`. For a 10-year projection of a `FREQ=YEARLY` rule, the engine executes 3,650 iterations of `_matches()` to yield just 10 occurrences.
+*   **Impact:** While computationally trivial in small windows (`DEFAULT_HORIZON_DAYS = 90`), this approach introduces unnecessary computational friction at larger horizons.
+*   **Fix:** The iteration delta should dynamically scale based on `FREQ` (e.g., jump by years/months/weeks) instead of stepping blindly by one day at a time.
