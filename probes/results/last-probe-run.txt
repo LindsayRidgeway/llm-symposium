@@ -1,4 +1,4 @@
-# TickTick Recurrence Probe — 2026-08-29
+# TickTick Recurrence Probe — 2026-08-30
 
 Fixture: `probes/fixtures/example.json`  |  horizon=90d  |  cap=N=50
 
@@ -152,4 +152,4 @@ Token validity: **confirmed** (projects endpoint authorized). Layer attribution 
 ## Verdict: **TRUNCATION EVIDENCE FOUND**
 
 
-[report written to /home/runner/work/llm-symposium/llm-symposium/probes/results/2026-08-29-probe-report.md]
+[report written to /home/runner/work/llm-symposium/llm-symposium/probes/results/2026-08-30-probe-report.md]
