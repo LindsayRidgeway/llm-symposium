@@ -779,3 +779,30 @@ error: corrupt patch at line 44
 
 touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
 
+
+## 2026-08-29 — OUT-OF-BAND ENGINE FIX (engineering session, not via actuator)
+
+The self-modification guard was bypassable. A patch whose diff header spelled
+the engine path in a normalized form git accepts — `actuator//apply.py` —
+passed `git apply --check`, sailed past the exact-string guard
+(`"actuator/apply.py" in touched_files(...)` is False for
+`"actuator//apply.py"`), applied to the real `actuator/apply.py`, and the
+verifier compiled the tampered engine. Proven end-to-end in a throwaway repo:
+the engine could rewrite its own verifier through its own pipeline.
+
+Fix (out-of-band, per the converged peer reviews — the guard rightly forbids
+the actuator from patching itself, so the engineering session committed
+directly):
+- `touched_files()` now canonicalizes every diff-header path against
+  REPO_ROOT (`_canonical`), so equivalent spellings collapse to the real
+  repo-relative path. The guard now sees `actuator/apply.py` regardless of
+  spelling.
+- `verify()` now rejects any path that resolves outside the repository
+  ("Path traversal detected"), defense in depth behind `git apply`'s own
+  path validation.
+
+Verified: py_compile OK; tests/test_actuator.py 7/7 (including two new
+regression tests: normalized-path self-modification rejection, and
+verify() containment); tests/test_projection.py ALL PASSED;
+ticktick_recurrence_probe OK. The exact exploit from this entry is now
+REJECTED with "self-modification guard" and the engine stays untouched.

@@ -74,6 +74,12 @@ cannot rewrite its own verifier). New files are allowed. The change must pass
 the offline verification suite or it is reversed and rejected — nothing ships
 unverified.
 
+*(2026-08-29, out-of-band engineering fix: diff-header paths are canonicalized
+against the repo root before the guard and verifier see them, so equivalent
+spellings like `actuator//apply.py` cannot bypass the guard, and no path may
+resolve outside the repository. The guard's invariant — the engine cannot
+rewrite its own verifier — is unchanged; the fix is what enforces it.)*
+
 ## Running it
 
 ```bash

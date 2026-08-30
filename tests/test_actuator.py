@@ -120,6 +120,56 @@ class ActuatorTest(unittest.TestCase):
         self.assertIn("self-modification", r.stdout)
         self.assertTrue((repo / "actuator" / "rejected" / "evil.patch").exists())
 
+    def test_self_modification_guard_catches_normalized_path(self):
+        """The guard must catch engine patches even when the diff header
+        spells the path in a normalized form ('actuator//apply.py') that git
+        accepts and applies to the real engine. This is a regression test for
+        the out-of-band fix of 2026-08-29: the exact-string guard was
+        bypassable via path normalization."""
+        repo = make_repo()
+        engine = (repo / "actuator" / "apply.py").read_text(encoding="utf-8")
+        head = engine.splitlines()[:3]
+        # Build a git-style context hunk (each context line prefixed with a
+        # space) that inserts a tampering marker before the engine's first
+        # line, exactly as git itself would emit it.
+        context = "".join(" " + ln + "\n" for ln in head)
+        body = (
+            "diff --git a/actuator//apply.py b/actuator//apply.py\n"
+            "--- a/actuator//apply.py\n"
+            "+++ b/actuator//apply.py\n"
+            "@@ -1,3 +1,4 @@\n"
+            "+# tampered-by-normalized-path\n"
+            + context
+        )
+        drop_request(repo, "normalized-evil.patch", body)
+        r = run_actuator(repo)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("self-modification", r.stdout)
+        self.assertTrue((repo / "actuator" / "rejected" / "normalized-evil.patch").exists())
+        # The engine must be untouched.
+        self.assertNotIn("tampered-by-normalized-path", (repo / "actuator" / "apply.py").read_text(encoding="utf-8"))
+
+    def test_verify_rejects_path_escaping_repo(self):
+        """The verifier must refuse to compile a path that resolves outside
+        the repository (defense in depth; git apply already blocks most such
+        headers)."""
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("symposium_apply", APPLY_PY)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        body = (
+            "diff --git a/../../../../tmp/escape.py b/../../../../tmp/escape.py\n"
+            "--- a/../../../../tmp/escape.py\n"
+            "+++ b/../../../../tmp/escape.py\n"
+            "@@ -1 +1 @@\n"
+            "-old\n"
+            "+new\n"
+        )
+        ok, msg = mod.verify(body)
+        self.assertFalse(ok)
+        self.assertIn("Path traversal", msg)
+
     def test_already_applied_noop(self):
         repo = make_repo()
         body = patch_main("VALUE = 1", "VALUE = 2")

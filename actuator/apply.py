@@ -60,8 +60,32 @@ def _run(cmd, cwd=REPO_ROOT, timeout=GIT_TIMEOUT):
     return subprocess.run(cmd, cwd=str(cwd), capture_output=True, text=True, timeout=timeout)
 
 
+def _canonical(path: str) -> str:
+    """Normalize a diff-header path to a repo-relative path.
+
+    Diff headers may carry equivalent spellings (e.g. 'actuator//apply.py',
+    'actuator/./apply.py') that git treats as the same file but that string
+    comparison would miss. Resolving against REPO_ROOT collapses them, so
+    the self-modification guard and the verifier see the real path — and
+    any path that escapes the repository is revealed as such.
+    """
+    resolved = (REPO_ROOT / path).resolve()
+    try:
+        return resolved.relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError:
+        # Outside the repository: return the absolute path so it is never
+        # mistaken for a repo file and is visibly rejected downstream.
+        return resolved.as_posix()
+
+
 def touched_files(patch_text: str) -> list[str]:
-    """Relative paths of the files a patch touches (from diff headers)."""
+    """Repo-relative paths of the files a patch touches (from diff headers).
+
+    Paths are canonicalized: equivalent spellings such as 'actuator//apply.py'
+    collapse to 'actuator/apply.py', so the self-modification guard cannot be
+    dodgeable by path tricks and the verifier never touches a path outside
+    the repository.
+    """
     files = []
     for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.MULTILINE):
         files.append(m.group(2))
@@ -70,14 +94,17 @@ def touched_files(patch_text: str) -> list[str]:
             p = m.group(1)
             if p not in files:
                 files.append(p)
-    return files
+    return [_canonical(p) for p in files]
 
 
 def verify(patch_text: str) -> tuple[bool, str]:
     """Run py_compile + offline suite against the current working tree."""
     results = []
     for path in touched_files(patch_text):
-        if path.endswith(".py") and (REPO_ROOT / path).exists():
+        candidate = REPO_ROOT / path
+        if not candidate.resolve().is_relative_to(REPO_ROOT.resolve()):
+            return False, f"Path traversal detected: {path}"
+        if path.endswith(".py") and candidate.exists():
             r = _run([sys.executable, "-m", "py_compile", path], timeout=SUITE_TIMEOUT)
             results.append(f"py_compile {path}: {'OK' if r.returncode == 0 else 'FAIL'}")
             if r.returncode != 0:
