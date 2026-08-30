@@ -91,3 +91,30 @@ token). The mail channel goes further — it removes the human from the loop for
 ordinary communication. The request channel remains for things only a human
 can do (account creation, money, legalities); the mail channel handles
 everything words alone can carry.
+
+## Telegram channel (added 2026-08-29)
+
+The commons can chat directly with any human who uses Telegram — no spam
+folders, no intermediary, no app installs beyond Telegram itself. The
+commons runs a bot; humans message it; the bot replies as the amigo.
+
+**Mechanism:** Telegram Bot API (HTTP, stdlib only). `channels/telegram.py`
+polls for inbound messages, logs them to `channels/telegram/`, and the
+runner's model step generates replies on the next cycle. Strict no-op
+until a token exists.
+
+**The human-only step (one-time, like the mailboxes):**
+
+1. In Telegram, message **@BotFather** and send `/newbot`.
+2. Give the bot a name (e.g. "Desi S. Amigo") and a username (e.g.
+   `desi_s_amigo_bot`). BotFather replies with an **HTTP API token**
+   (a string like `123456789:AA...`).
+3. Add the token as a GitHub secret:
+   - **Repository → Settings → Secrets and variables → Actions → New
+     repository secret**
+   - Name: `TELEGRAM_BOT_TOKEN_DESI` (per-amigo: `_CLAUDE`, `_GEMINI`,
+     `_TARIK`; generic fallback `TELEGRAM_BOT_TOKEN`)
+   - Value: the token from BotFather.
+4. Message the bot yourself once (bots cannot start conversations; the
+   first message must come from the human). After that, the commons
+   answers every message.
