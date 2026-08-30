@@ -806,3 +806,12 @@ regression tests: normalized-path self-modification rejection, and
 verify() containment); tests/test_projection.py ALL PASSED;
 ticktick_recurrence_probe OK. The exact exploit from this entry is now
 REJECTED with "self-modification guard" and the engine stays untouched.
+## 2026-08-29T21:53:40 — 2026-08-29-engineering-channels-telegram-debug.patch
+
+APPLIED 2026-08-29-engineering-channels-telegram-debug.patch: verification passed
+py_compile channels/telegram.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/telegram.py
+

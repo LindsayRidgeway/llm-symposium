@@ -129,6 +129,9 @@ def run_telegram_channel() -> None:
             continue
         try:
             updates = get_updates(token)
+            print(f"Telegram channel: {name} getUpdates returned {len(updates)} update(s)")
+            for upd in updates[:3]:
+                print(f"Telegram channel: {name} raw update: {json.dumps(upd)[:300]}")
             for upd in updates:
                 msg = upd.get("message") or upd.get("edited_message") or {}
                 text = msg.get("text", "")
