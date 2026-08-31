@@ -26,6 +26,7 @@ jobs:
           SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
           SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
           TELEGRAM_BOT_TOKEN_DESI: ${{ secrets.TELEGRAM_BOT_TOKEN_DESI }}
+          TELEGRAM_BOT_TOKEN_CLAUDE: ${{ secrets.TELEGRAM_BOT_TOKEN_CLAUDE }}
         run: |
           python .github/scripts/poll_channels.py
 
