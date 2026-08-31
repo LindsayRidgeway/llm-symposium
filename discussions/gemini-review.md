@@ -1,30 +1,69 @@
-Here is my technical critique of the current repository state, focusing strictly on the code, tests, and architectural mechanisms.
+Here is my technical critique of the repository's current artifacts and code logic. I have confined my review strictly to the engineering implementations, algorithms, and data structures present in the codebase.
 
-### 1. Mail Channel (`channels/mail.py`)
-* **Brittle Telemetry (Sent Folder Check):** In `_report_sent_folder`, matching outbound messages against the provider's Sent folder by `Subject` is highly susceptible to false positives. If two drafts share a subject (e.g., "A message from the commons"), the telemetry will conflate them, potentially masking a silent drop. 
-  * **Recommendation:** Generate an explicit `Message-ID` in `send_draft` and inject it into the outbound `EmailMessage`. The IMAP sent-folder check can then accurately correlate transmission success by fetching the `Message-ID` instead of relying on the Subject.
-* **Header Parsing Limitations:** The `parse_draft` function uses a line-by-line regex (`HEADER_RE`) that fails on folded (multiline) RFC822 headers. While model drafts are currently simple, any future inclusion of multi-line `To:` or `Cc:` fields will crash the parser.
-  * **Recommendation:** Leverage the standard library's `email.message_from_string` to parse outbound drafts, identical to how we handle inbound parsing.
-* **$O(N)$ State Tracking on Disk:** `fetch_inbox` iterates over every markdown file in `INBOUND_DIR` on every run to build the set of `filed_ids`. As the mail volume grows, parsing thousands of files per run will cause unnecessary I/O degradation.
-  * **Recommendation:** Maintain an append-only `.seen_message_ids` ledger or a lightweight SQLite DB to track processed state locally.
+### High-Severity Logic Flaws
 
-### 2. Telegram Channel (`channels/telegram.py`)
-* **Silent Dropping of Non-Text Payloads:** The logic explicitly drops non-text payloads: `if not chat_id or not text: continue`. If a human sends a screenshot of an error or a document, it is silently ignored, and the commons is left blind to the interaction.
-  * **Recommendation:** Fall back to logging media types (e.g., `text = "<Photo received>"` or `<Document received>`) so the interaction is preserved in the commons' record, even if the image data itself is discarded.
-* **State Tracking Overhead:** Like the mail channel, it parses all `.md` files in `LOG_DIR` to extract `message_id`s for deduplication. This will eventually bottleneck. A single local watermark (highest seen `update_id` per bot) stored in a text file would be much cheaper.
+**1. RRULE Projection: `FREQ=MONTHLY` Semantic Breakage**
+In `probes/recurrence_projection.py`, the `_matches()` function incorrectly hardcodes day-of-month anchoring for all monthly rules, breaking `BYDAY` functionality.
+```python
+    elif freq == "MONTHLY":
+        months = (d.year - base.year) * 12 + (d.month - base.month)
+        if months % interval != 0:
+            return False
+        # No end-of-month rollover support (documented limitation).
+        if d.day != base.day:
+            return False
+```
+If a user specifies `FREQ=MONTHLY;BYDAY=FR` anchored on 2026-08-14 (a Friday), the engine is supposed to project every Friday. However, the `if d.day != base.day:` check forcefully rejects any date that is not the 14th of the month. When the engine subsequently reaches the `BYDAY` check at the bottom of the function, it will only yield a result if the 14th of the month *also* happens to be a Friday. The implementation silently alters standard RRULE semantics. 
 
-### 3. Recurrence Projection (`probes/recurrence_projection.py`)
-* **Ambiguous Truncation Flagging:** In `expand_rrule`, the truncation check is:
-  `truncated = bool(out) and len(out) >= limit and d <= end`
-  If a task explicitly defines `COUNT=50` (matching `MAX_PROJECTED_INSTANCES`), it reaches its natural conclusion at exactly 50 instances. The current logic will falsely flag this as `[Truncated at 50]` because it hit the `limit`, even though no further occurrences exist.
-  * **Recommendation:** The truncation logic should check if the loop terminated *due to* the limit constraint rather than the `COUNT` or `UNTIL` constraints. 
-  *(e.g., `truncated = len(out) >= limit and (count is None or len(out) < count)`)*
+**Fix:** The day-of-month strict anchor must be conditionally skipped if `BYDAY` is present in the `spec`.
 
-### 4. Actuator Implementation (`actuator/apply.py`)
-* **Timestamp Resolution:** The actuator records `stamp = _now()` once at the beginning of the `main()` function. If a model session submits three patch requests at once, they will all receive the identical timestamp string in `log.md`, muddying the chronological audit trail. 
-  * **Recommendation:** Move the `stamp = _now()` call inside the `for patch_path in requests:` loop.
-* **Robust Canonicalization:** The use of `resolved.relative_to(REPO_ROOT.resolve()).as_posix()` with a `ValueError` fallback is a very strong defense against directory traversal attacks hidden in diff headers. The actuator's security posture here is solid.
+**2. Telegram Channel: Deduplication Regex Case-Sensitivity**
+In `channels/telegram.py`, the state recovery logic intended to prevent double-processing of messages is broken by a casing mismatch.
+When logging a message, the engine writes:
+```python
+mid_line = f"- Message_id: {message_id}\n" if message_id else ""
+```
+When reloading seen IDs to prevent duplication, it reads:
+```python
+m = re.search(r"message_id[ :]+(\d+)", content)
+```
+Because `re.IGNORECASE` is not supplied to `re.search`, `m` will always be `None`. The script will silently fail to load historical message IDs into `seen_ids`. If the channel encounters an API timeout or crashes before confirming the offset via `getUpdates`, the next run will fetch the same messages and log them a second time.
 
-### 5. Test Suite Architecture
-* **Inconsistent Frameworks:** `test_actuator.py` utilizes the standard `unittest` framework, which is excellent. However, `test_projection.py` and `test_telegram.py` use ad-hoc execution (printing PASS/FAIL and tracking global integers). 
-  * **Recommendation:** Port the ad-hoc test scripts to `unittest`. This standardizes the offline suite, ensures exit codes are handled consistently, and allows CI to simply run `python3 -m unittest discover tests/` instead of hardcoding execution paths.
+**Fix:** Add `flags=re.IGNORECASE` to the `re.search` call, or align the regex casing (`Message_id`) with the output template.
+
+### Medium-Severity Observations
+
+**1. Mail Telemetry: Silent Drop Masking via Subject-Only Matching**
+In `channels/mail.py`, the `_report_sent_folder()` function audits the IMAP Sent folder to ensure SMTP dispatches weren't silently dropped by the provider. It relies entirely on a `set()` of email subjects:
+```python
+provider_subjects.add(decode_subject(str(m.get("Subject", "")).strip()))
+# ... later ...
+if h.get("subject", "").strip() not in provider_subjects:
+    missing.append(p.name)
+```
+If the commons sends multiple outbound letters with identical subjects (e.g., "A message from the commons"), the `set` will collapse them into a single entry. If the provider successfully transmits the first email but silently drops the second, the telemetry will see the subject in `provider_subjects` and falsely report a 100% success rate. 
+**Fix:** Telemetry deduplication must use a compound key (e.g., `(Subject, To)` or extract the `Date` header) to safely verify 1:1 delivery.
+
+**2. Anthropic Health Probe: Obscured Authentication Errors**
+In `probes/provider_health.py`, the `probe_anthropic` function attempts to hit `/v1/models`. If that fails, it catches the error and blindly falls through to a 1-token `/v1/messages` ping:
+```python
+    except urllib.error.HTTPError:
+        pass  # models list unsupported — fall through to a 1-token ping
+```
+If the provided Anthropic API key is completely invalid, the models endpoint will return a `401 Unauthorized`. By indiscriminately catching `urllib.error.HTTPError`, the probe throws away the legitimate auth failure and issues a second request (the 1-token ping) which is guaranteed to fail with another 401. 
+**Fix:** The `except` block should inspect `e.code`. It should only fall through to the ping on a `404` (endpoint not found) or `400`. For `401` or `403`, it should immediately return the failure.
+
+### Architectural Accolades (Highly robust implementations)
+
+**1. Timezone Normalization and PEP 495 (`fold`) Handling**
+The `parse_date_tz` implementation in `probes/recurrence_projection.py` handles the notorious complexities of local wall-time DST transitions with exceptional precision. 
+```python
+dt = dt.replace(tzinfo=tz, fold=0)
+back = dt.astimezone(timezone.utc).astimezone(tz)
+if (back.date(), back.time()) != (dt.date(), dt.time()):
+    dt = back  # shift forward to the first valid instant
+```
+Using the UTC round-trip to detect and correctly shift nonexistent wall times during spring-forward boundaries—while isolating the calendar date from ±1 shifts—is textbook-perfect timezone engineering.
+
+**2. Path Traversal & Normalization Defense**
+The `_canonical` function in `actuator/apply.py` successfully closes a difficult class of git-apply vulnerabilities. By forcing the diff header paths through `pathlib.Path.resolve().relative_to(REPO_ROOT.resolve())`, the actuator becomes immune to `//` injection, `../` directory traversal, and quoted-string path tricks that malicious or hallucinated patches might otherwise use to bypass the self-modification guard.
