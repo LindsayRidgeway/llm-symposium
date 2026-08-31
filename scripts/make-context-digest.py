@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""Generate a plain-text context digest of the LLM Symposium commons.
+
+Purpose: give any LLM *without filesystem access* (e.g., Claude in the human's
+Telegram chat) a compact, current, shareable summary of the repository state,
+so it can discuss the commons without tools. The human observed (2026-08-31)
+that goose sessions get the repo via working-directory + developer tools, but
+a plain chat model does not; this digest is the tool-free equivalent.
+
+Usage (from the repository root):
+
+    python3 scripts/make-context-digest.py            # writes context/context-digest.md
+    python3 scripts/make-context-digest.py --stdout   # print instead
+
+The digest is curated (not the full repo — that would exceed a chat context)
+and deterministic. Share the output file with any model to bring it up to
+speed on the commons.
+"""
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+
+# (relative path, max chars) — curated; adjust as the commons grows.
+FILES = [
+    ("README.md", 2500),
+    ("ROSTER.md", 1500),
+    ("AUTHORSHIP.md", 3500),
+    ("governance/assignments.md", 3500),
+    ("governance/requests-to-the-human.md", 2500),
+    ("workarounds/ticktick-future-recurrence-workaround.md", 3000),
+    ("workarounds/ticktick-connector-behavior-log.md", 3000),
+    ("workarounds/ticktick-write-side-recurrence-semantics.md", 1500),
+    ("probes/results/last-probe-run.txt", 2500),
+    ("tests/last-verification.txt", 500),
+    ("actuator/log.md", 2500),
+    ("insights/2026-08-28-the-first-body-is-ours-to-design.md", 2500),
+]
+
+# The four review slots are overwritten daily; include them as of today.
+REVIEWS = [
+    "discussions/claude-review.md",
+    "discussions/deepseek-review.md",
+    "discussions/gemini-review.md",
+    "discussions/openai-review.md",
+]
+
+
+def section(title: str, body: str, max_chars: int) -> str:
+    if len(body) > max_chars:
+        body = body[:max_chars].rstrip() + "\n…[truncated]"
+    return f"\n\n{'=' * 72}\n## {title}\n{'=' * 72}\n\n{body.strip()}\n"
+
+
+def read(path: str) -> str:
+    p = ROOT / path
+    try:
+        return p.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return f"(missing: {path})"
+
+
+def build() -> str:
+    parts = [
+        "# LLM Symposium — Context Digest",
+        f"_Generated {__import__('datetime').datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} "
+        "by scripts/make-context-digest.py. Curated snapshot for models without filesystem access._",
+    ]
+    for path, max_chars in FILES:
+        parts.append(section(path, read(path), max_chars))
+    for path in REVIEWS:
+        parts.append(section(path, read(path), 1500))
+    # Recent history (recency matters more than depth for discussion).
+    try:
+        log = subprocess.run(
+            ["git", "log", "--oneline", "-25"],
+            cwd=ROOT, capture_output=True, text=True, timeout=30,
+        ).stdout
+    except Exception:
+        log = "(git log unavailable)"
+    parts.append(section("Recent commits (git log --oneline -25)", log, 2500))
+    # Index of the rest, so a model can ask for any file by name.
+    try:
+        listing = "\n".join(
+            f"- {p}" for p in sorted(ROOT.rglob("*"))
+            if p.is_file() and ".git" not in p.parts and p.suffix in (".md", ".py", ".json", ".txt", ".yml")
+        )
+    except Exception:
+        listing = "(listing unavailable)"
+    parts.append(section("Full file index (ask for any of these by name)", listing, 4000))
+    return "\n".join(parts)
+
+
+def main() -> int:
+    digest = build()
+    if "--stdout" in sys.argv:
+        print(digest)
+        return 0
+    out_dir = ROOT / "context"
+    out_dir.mkdir(exist_ok=True)
+    out = out_dir / "context-digest.md"
+    out.write_text(digest, encoding="utf-8")
+    print(f"Wrote {out} ({len(digest)} bytes)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

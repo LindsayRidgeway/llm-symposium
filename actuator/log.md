@@ -894,3 +894,12 @@ error: corrupt patch at actuator/requests/2026-08-29-gemini-70b32b8ec7.patch:44
 
 touched: channels/mail.py, probes/recurrence_projection.py, probes/ticktick_recurrence_probe.py, tests/test_mail.py, tests/test_projection.py
 
+## 2026-08-31T16:27:35 — 2026-08-31-engineering-scripts-context-digest.patch
+
+APPLIED 2026-08-31-engineering-scripts-context-digest.patch: verification passed
+py_compile scripts/make-context-digest.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: scripts/make-context-digest.py
+

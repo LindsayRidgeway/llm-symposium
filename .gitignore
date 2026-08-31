@@ -8,3 +8,9 @@ __pycache__/
 # Secrets (never commit)
 .env
 .env.*
+
+# Runtime logs (ttyd/goose sessions)
+*.log
+
+# Generated context digest (on-demand)
+context/
