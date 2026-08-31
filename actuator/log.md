@@ -903,3 +903,11 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: scripts/make-context-digest.py
 
+## 2026-08-31T16:36:54 — 2026-08-31-engineering-channels-reply-to-peter.patch
+
+APPLIED 2026-08-31-engineering-channels-reply-to-peter.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/outbound/2026-08-31-desi-reply-to-peter.md
+
