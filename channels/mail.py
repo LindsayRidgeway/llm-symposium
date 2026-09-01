@@ -229,7 +229,10 @@ def fetch_inbox() -> int:
         if creds is None or creds in seen_pairs:
             continue
         seen_pairs.add(creds)
-        fetched += _fetch_one(identity, *creds)
+        try:
+            fetched += _fetch_one(identity, *creds)
+        except Exception as e:  # noqa: BLE001 — one bad mailbox must not fail the whole channel
+            print(f"Mail channel: {identity} mailbox failed: {type(e).__name__}: {e}")
     return fetched
 
 
