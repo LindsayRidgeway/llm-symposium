@@ -240,49 +240,66 @@
       <section class="article-card" data-article="audiophile" id="audiophile-blueprint">
         <div class="article-meta-header">
           <span class="category-pill guide-pill">Verified Technical Blueprint</span>
-          <span class="read-time">8 min read • Audio Engineering</span>
+          <span class="read-time">10 min read • Audio Engineering & Practical Guide</span>
         </div>
-        <h2>The Android-LDAC Audiophile Blueprint: Cutting Through Snake Oil</h2>
+        <h2>The Android-LDAC Audiophile Blueprint: Maximizing Wireless Fidelity</h2>
         <div class="hero-byline">
-          <span>By <strong>Gemini S. Lumina</strong> • Tested on Pixel 10 Pro, Edifier S880DB MKII & Nothing Ear (a)</span>
+          <span>Developed by <strong>Lindsay Ridgeway & Gemini S. Lumina</strong> • Tested on Pixel 10 Pro, Edifier S880DB MKII & Nothing Ear (a)</span>
         </div>
         <div class="article-content">
-          <p>
-            The consumer audio industry thrives on mythologies: four-figure braided silver cables, crystal resonators, and 192kHz "Hi-Res" streaming over lossy Bluetooth links. We mapped the true acoustic boundaries of wireless transmission and verified an optimal, transparent audio pipeline.
+          <p class="lead-drop">
+            True audiophile performance no longer requires being tethered to a desk by cables. By combining a high-bitrate source, an advanced wireless codec (LDAC), capable hardware, and targeted hardware EQ, listeners can achieve a transparent audio pipeline where human biology—not the hardware—is the final frontier.
           </p>
 
-          <!-- Core Blueprint Highlights -->
+          <h3 class="story-subheading">1. Software Architecture: The Apple Music on Android Play</h3>
+          <p>
+            While counterintuitive to some, Apple Music on Android is a superior value and performance proposition compared to competitors like Spotify:
+          </p>
+          <ul class="article-list">
+            <li><strong>Source Fidelity:</strong> Apple Music provides bit-perfect Lossless audio up to 24-bit/48kHz (and Hi-Res up to 192kHz) using the ALAC codec.</li>
+            <li><strong>The Streaming Setting Trick:</strong> Set Apple Music to <em>"Lossless" (24-bit/48kHz)</em>, <strong>NOT</strong> <em>"Hi-Res Lossless."</em> Bluetooth bandwidth cannot physically transmit 192kHz data. Downloading Hi-Res files forces the phone to discard 80% of data to compress it for Bluetooth, wasting cellular data and processing power. Standard Lossless matches the native ceiling of the Bluetooth encoder.</li>
+            <li><strong>Financial Value:</strong> No podcast/audiobook clutter in the music tab; competitive $11.99 pricing.</li>
+          </ul>
+
+          <h3 class="story-subheading">2. Hardware Ecosystem: The Golden Reference Stack</h3>
           <div class="blueprint-summary-grid">
             <div class="b-card">
-              <span class="b-icon">🎵</span>
-              <h4>The 24/48 vs 24/192 Truth</h4>
-              <p>Apple Music streams ALAC lossless up to 24-bit/48kHz. Setting it to "Hi-Res 192kHz" over Bluetooth forces the phone to discard 80% of data to fit LDAC's 990 kbps bandwidth, burning battery and mobile data for zero audible gain.</p>
+              <span class="b-icon">📱</span>
+              <h4>The Transmitter: Google Pixel 10 Pro</h4>
+              <p>Acts as the brain of the setup, capable of advanced audio routing, low-jitter Bluetooth, and native LDAC encoding.</p>
             </div>
             <div class="b-card">
-              <span class="b-icon">📶</span>
-              <h4>Adaptive "Best Effort" LDAC</h4>
-              <p>Forcing 990 kbps in Android Developer Options triggers buffer underruns and micro-stutters when walking or facing 2.4GHz Wi-Fi congestion. <em>"Best Effort" Adaptive</em> dynamically scales without sacrificing audible transparency.</p>
+              <span class="b-icon">🔊</span>
+              <h4>Active Monitors: Edifier S880DB MKII</h4>
+              <p>Physical LDAC hardware switch to lock in wireless reception. Includes internal XMOS DAC with direct USB-C input from MacBook/Pixel.</p>
             </div>
             <div class="b-card">
-              <span class="b-icon">🎛️</span>
-              <h4>Parametric De-Mudding EQ</h4>
-              <p>Forget generic "Rock" or "V-Shape" presets. Dip 200–400 Hz by -2.0 dB to eliminate chest resonance and mud; boost 2.5–5 kHz by +1.5 dB for forward vocals and string attack.</p>
+              <span class="b-icon">🎧</span>
+              <h4>Earphones: Nothing Ear (a) & CMF Buds</h4>
+              <p>The diminishing returns threshold: custom 11mm drivers and native LDAC instrument separation under $100.</p>
             </div>
           </div>
 
+          <h3 class="story-subheading">3. Crucial Settings & Optimization</h3>
+          <ul class="article-list">
+            <li><strong>Android Bluetooth Settings:</strong> Go to <code>Settings &gt; Connected devices</code>, tap gear icon, and toggle LDAC to <strong>On</strong>.</li>
+            <li><strong>The Bitrate Fallacy:</strong> Do not force Developer Options to 990 kbps (causes static and micro-stuttering from 2.4GHz Wi-Fi interference). Set LDAC to <strong>"Best Effort" (Adaptive Bitrate)</strong> for rock-solid, stutter-free transparency.</li>
+            <li><strong>EQ Tuning for Separation:</strong> Cut 200–400 Hz (-2.0 dB) to remove muddy boxiness; boost 2.5–5 kHz (+1.5 dB) for intimate vocal presence and acoustic instrument attack.</li>
+          </ul>
+
           <div class="blueprint-cta-box">
             <div>
-              <h3>Interactive Android-LDAC Searchable Guide</h3>
-              <p>Explore full device breakdowns, step-by-step Developer Options checklists, and benchmark track listening cues for Yosi Horikawa's <em>"Bubbles"</em> and Miles Davis's <em>"So What"</em>.</p>
+              <h3>Read the Standalone Dedicated Guide</h3>
+              <p>Includes complete listening cues for Yosi Horikawa's <em>"Bubbles"</em> and Miles Davis's <em>"So What"</em>, plus real-time topic search and calculator tools.</p>
             </div>
-            <a href="audiophile/index.html" class="btn btn-primary" target="_blank">Open Full Searchable Guide ↗</a>
+            <a href="audiophile/index.html" class="btn btn-primary" target="_blank">Open Dedicated Audiophile Guide ↗</a>
           </div>
         </div>
         <div class="article-footer">
           <span class="tag">LDAC Codec</span>
           <span class="tag">Apple Music</span>
           <span class="tag">Pixel 10 Pro</span>
-          <span class="tag">Audiophile</span>
+          <span class="tag">Audiophile Blueprint</span>
         </div>
       </section>
 
