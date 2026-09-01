@@ -79,8 +79,13 @@ def get_webhook_info(token: str) -> dict:
     """Check whether a webhook is set (which would divert updates from poll)."""
     return _api(token, "getWebhookInfo")
 
-def get_updates(token: str, offset: int | None = None, timeout: int = 30) -> list:
-    """Poll for new messages. Long-poll up to `timeout` seconds."""
+def get_updates(token: str, offset: int | None = None, timeout: int = 0) -> list:
+    """Poll for new messages.
+
+    Default to a non-long-poll request. The scheduled GitHub poller is already
+    frequent; holding Telegram long-poll connections open increases the chance
+    of HTTP 409 collisions with another channel run or a daily runner.
+    """
     params = {"timeout": timeout}
     if offset:
         params["offset"] = offset
@@ -92,13 +97,26 @@ def get_updates(token: str, offset: int | None = None, timeout: int = 30) -> lis
 
 
 def drain_all_updates(token: str) -> list:
-    """Fetch ALL pending updates WITHOUT confirming them (no offset), so an
-    earlier poll that failed to commit cannot lose a message: the next poll
-    re-reads the whole queue. Returns the full list of updates."""
-    result = _api(token, "getUpdates", {"timeout": 0})
-    if not result.get("ok"):
-        raise RuntimeError(f"Telegram getUpdates error: {json.dumps(result)[:300]}")
-    return result.get("result", [])
+    """Fetch pending updates WITHOUT confirming them.
+
+    Telegram returns at most 100 updates per call. Page with offset but do not
+    issue the final confirming offset here; the caller confirms only after the
+    messages have been written.
+    """
+    updates = []
+    offset = None
+    while True:
+        params = {"timeout": 0}
+        if offset is not None:
+            params["offset"] = offset
+        result = _api(token, "getUpdates", params)
+        if not result.get("ok"):
+            raise RuntimeError(f"Telegram getUpdates error: {json.dumps(result)[:300]}")
+        batch = result.get("result", [])
+        updates.extend(batch)
+        if len(batch) < 100:
+            return updates
+        offset = max(u.get("update_id", 0) for u in batch) + 1
 
 
 def send_message(token: str, chat_id: int, text: str) -> bool:
@@ -155,16 +173,14 @@ def run_telegram_channel() -> None:
             print(f"Telegram channel: {name} failed to connect: {type(e).__name__}: {e}")
             continue
         try:
-            updates = get_updates(token)
-            print(f"Telegram channel: {name} getUpdates returned {len(updates)} update(s)")
-            # Re-read the FULL queue without confirming, so nothing earlier is lost.
             try:
-                all_updates = drain_all_updates(token)
-                if len(all_updates) > len(updates):
-                    print(f"Telegram channel: {name} drain recovered {len(all_updates) - len(updates)} earlier update(s)")
-                    updates = all_updates
-            except Exception as drain_e:
-                print(f"Telegram channel: {name} drain failed: {type(drain_e).__name__}: {drain_e}")
+                updates = drain_all_updates(token)
+            except urllib.error.HTTPError as http_e:
+                if http_e.code == 409:
+                    print(f"Telegram channel: {name} skipped — another poller is active (HTTP 409 conflict)")
+                    continue
+                raise
+            print(f"Telegram channel: {name} getUpdates returned {len(updates)} update(s)")
             for upd in updates[:3]:
                 print(f"Telegram channel: {name} raw update: {json.dumps(upd)[:300]}")
             seen_ids = set()

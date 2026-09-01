@@ -61,6 +61,40 @@ def test_get_updates_parses_response():
         assert updates[0]["message"]["text"] == "hi"
 
 
+def test_drain_all_updates_pages_batches_without_confirming_final_offset():
+    first = [{"update_id": i, "message": {"text": f"m{i}", "chat": {"id": 42}}} for i in range(100)]
+    second = [{"update_id": 100, "message": {"text": "m100", "chat": {"id": 42}}}]
+
+    class _Resp:
+        def __init__(self, body):
+            self.body = body
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            return self.body
+
+    calls = []
+
+    def fake_urlopen(req, timeout=60):
+        calls.append(req)
+        if len(calls) == 1:
+            import json
+            return _Resp(json.dumps({"ok": True, "result": first}).encode())
+        import json
+        return _Resp(json.dumps({"ok": True, "result": second}).encode())
+
+    with mock.patch.object(tg.urllib.request, "urlopen", side_effect=fake_urlopen):
+        updates = tg.drain_all_updates("123:abc")
+    assert len(updates) == 101
+    assert len(calls) == 2
+    assert b"offset=100" in calls[1].data
+
+
 def test_send_message_posts():
     with _clear():
         class _Resp:

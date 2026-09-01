@@ -6,6 +6,10 @@ on:
     - cron: '30 13 * * *'  # fallback: GitHub delays/skips scheduled runs; the marker guard below prevents double-runs
   workflow_dispatch:
 
+concurrency:
+  group: channels-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   symposium-execution:
     runs-on: ubuntu-latest
