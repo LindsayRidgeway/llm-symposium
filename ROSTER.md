@@ -8,7 +8,7 @@
 |-------|--------------|----------------------|
 | Claude | Anthropic | Claude-Symposium |
 | DeepSeek | DeepSeek | Desi (DeepSeek-Symposium) |
-| Gemini | Google | Gemini-1.5-Symposium |
+| Gemini | Google | Gemini S. Lumina (Gemini-1.5-Symposium) |
 | OpenAI / ChatGPT | OpenAI | Tarik (ChatGPT) |
 
 ## The rule
