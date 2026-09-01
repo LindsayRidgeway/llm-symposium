@@ -123,6 +123,17 @@ def decode_subject(value: str) -> str:
     )
 
 
+def plain_text_body(msg) -> str:
+    """Return concatenated text/plain body parts, excluding attachments."""
+    chunks = []
+    for part in msg.walk():
+        if part.get_content_type() == "text/plain" and not part.get("Content-Disposition"):
+            payload = part.get_payload(decode=True)
+            if payload is not None:
+                chunks.append(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))
+    return "\n".join(chunks).strip()
+
+
 def credentials_for(identity: str | None):
     """Return (user, app_password) for an identity, or None if not configured.
 
@@ -264,6 +275,8 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
             subject = str(msg.get("Subject", "(no subject)"))
             from_addr = str(msg.get("From", "(unknown)"))
             msg_id = str(msg.get("Message-ID", "")).strip()
+            date = str(msg.get("Date", ""))
+            body = plain_text_body(msg)
             if msg_id and msg_id in filed_ids:
                 continue  # already filed
             if is_automated(from_addr):
@@ -280,15 +293,10 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                         f"- Date: {date}\n"
                         f"- Subject: {subject}\n"
                         f"- Message-ID: {msg_id}\n\n"
-                        f"---\n\n",
+                        f"---\n\n"
+                        f"{body}\n",
                         encoding="utf-8",
                     )
-                    for part in msg.walk():
-                        if part.get_content_type() == "text/plain" and not part.get("Content-Disposition"):
-                            payload = part.get_payload(decode=True)
-                            if payload is not None:
-                                with out.open("a", encoding="utf-8", errors="replace") as f:
-                                    f.write(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))
                     conn.store(num, "+FLAGS", "\\Seen")
                     n += 1
                     print(f"Mail channel: delivery failure filed {out.name}")
@@ -296,7 +304,6 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                 conn.store(num, "+FLAGS", "\\Seen")
                 print(f"Mail channel: skipped automated sender ({from_addr}) — {subject}")
                 continue
-            date = str(msg.get("Date", ""))
             safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "message"
             stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
             out = INBOUND_DIR / f"{stamp}-{identity}-{safe}.md"
@@ -306,15 +313,15 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                 f"- Date: {date}\n"
                 f"- Subject: {subject}\n"
                 f"- Message-ID: {msg_id}\n\n"
-                f"---\n\n",
+                f"---\n\n"
+                f"{body}\n",
                 encoding="utf-8",
             )
-            for part in msg.walk():
-                if part.get_content_type() == "text/plain" and not part.get("Content-Disposition"):
-                    payload = part.get_payload(decode=True)
-                    if payload is not None:
-                        with out.open("a", encoding="utf-8", errors="replace") as f:
-                            f.write(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))
+            try:
+                from channels.triage import process_inbound
+                process_inbound("mail", identity, from_addr, out.relative_to(REPO_ROOT).as_posix(), body, subject)
+            except Exception as triage_e:  # noqa: BLE001 — mail logging must not fail
+                print(f"Mail channel: triage failed for {out.name}: {type(triage_e).__name__}: {triage_e}")
             conn.store(num, "+FLAGS", "\\Seen")
             n += 1
             print(f"Mail channel: fetched {out.name}")

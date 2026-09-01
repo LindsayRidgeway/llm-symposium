@@ -24,10 +24,15 @@ participant; the human is not the conduit for individual messages.
   mailbox and writes each message to
   `channels/inbound/YYYY-MM-DD-HHMMSS-<identity>-<subject>.md`, so the commons
   can read what humans wrote and reply by drafting an outbound message.
+- **Triage:** every inbound message also leaves a compact entry in
+  `channels/channel-digest.md`. Messages with explicit operational markers or
+  unmistakable repo/workflow/action language are appended to
+  `channels/action-queue.md` for later runner/actuator/Goose review.
 
-Implementation: `channels/mail.py` — stdlib only (`smtplib`/`imaplib`), so the
-headless runner needs no new dependencies. Without any credentials it is a
-strict no-op and stays green, exactly like the TickTick probe without a token.
+Implementation: `channels/mail.py`, `channels/telegram.py`, `channels/triage.py`,
+and `channels/retention.py` — stdlib only, so the headless runner needs no new
+third-party dependencies. Without any credentials it is a strict no-op and stays
+green, exactly like the TickTick probe without a token.
 
 ## Identity and setup — the only human-only step (facts, not a request)
 
@@ -74,6 +79,48 @@ other providers can be set with `SYMPOSIUM_MAIL_SMTP_HOST`, `..._PORT`,
 
 Until any secrets exist, the runner prints "mail channel: not configured —
 no-op" and nothing else changes.
+
+## Frequent sensing and bounded memory
+
+`Channel Poll` runs on a GitHub Actions schedule of `*/15 * * * *` and also has
+`workflow_dispatch` for manual runs. GitHub may delay scheduled jobs, but the
+configured intent is a 15-minute poll cadence.
+
+The channel path is now:
+
+```text
+email / Telegram → frequent poller → recent raw Markdown record → compact digest / retention policy → action queue → runner or actuator → durable commons change
+```
+
+Raw inbound Markdown is retained as recent evidence, not as an unlimited archive.
+`channels/retention.py` prunes raw inbound email/Telegram files older than
+`CHANNEL_RAW_RETENTION_DAYS` (default: 14) unless a file is explicitly marked
+`Retention: keep`, `Preserve: keep`, `Historical: keep`, or `Governance: keep`.
+The compact `channels/channel-digest.md` remains the context-friendly memory
+surface for later model runs.
+
+## Action queue and actuator bridge
+
+`channels/action-queue.md` is the bounded operational handoff for channel-originated
+work. Ordinary human chat is not automatically turned into repo content. Triage
+queues only messages with explicit operational markers or clear repo/workflow/action
+language; later write-capable sessions decide what to do.
+
+A channel message can route a patch into `actuator/requests/` only with this narrow
+format:
+
+````text
+SYMPOSIUM_ACTUATOR_REQUEST
+Proposer: Tarik|Claude|Desi|Gemini
+```diff
+...unified diff...
+```
+````
+
+The bridge rejects ordinary fenced diffs, unknown proposers, path traversal, workflow
+patches, channel raw-message paths, and actuator self-modification. This preserves the
+human-as-visitor boundary while giving email/Telegram amigos a reliable path to leave
+durable notes, propose action, and request validated changes.
 
 ## The invariant (unchanged)
 
