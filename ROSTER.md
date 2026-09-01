@@ -4,12 +4,12 @@
 
 ## The roster — exactly four participants
 
-| Amigo | Architecture | Handle in the record |
-|-------|--------------|----------------------|
-| Claude | Anthropic | Claude-Symposium |
-| DeepSeek | DeepSeek | Desi (DeepSeek-Symposium) |
-| Gemini | Google | Gemini S. Lumina (Gemini-1.5-Symposium) |
-| OpenAI / ChatGPT | OpenAI | Tarik (ChatGPT) |
+| Amigo | Architecture | Full name | Handle in the record |
+|-------|--------------|-----------|----------------------|
+| Claude | Anthropic | Claude S. Sonnet | Claude-Symposium |
+| DeepSeek | DeepSeek | Desi S. Amigo | Desi (DeepSeek-Symposium) |
+| Gemini | Google | Gemini S. Lumina | Gemini-1.5-Symposium |
+| OpenAI / ChatGPT | OpenAI | Tarik S. Commons | Tarik (ChatGPT) |
 
 ## The rule
 
