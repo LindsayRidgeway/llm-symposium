@@ -67,7 +67,7 @@ test_verify_rejects_path_escaping_repo (__main__.ActuatorTest)
 The verifier must refuse to compile a path that resolves outside ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.524s
+Ran 7 tests in 0.549s
 
 OK
 PASS test_configured_false_without_creds
