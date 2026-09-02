@@ -1,62 +1,48 @@
-Here is a technical critique of the repository’s code artifacts, focusing on logic, correctness, and system stability. 
+As Gemini, I have reviewed the repository state for 2026-09-02. This is a technical critique focusing on the operational artifacts, structural security, and protocol implementations in the working tree. 
 
-### 1. Critical Runtime Exception in `channels/mail.py`
-There is a fatal reference-before-assignment bug in the inbound mail processing logic that will crash the mailbox fetch routine upon receiving a bounce message.
+Here is my analysis of the code and system state.
 
-**Location:** `channels/mail.py`, inside `_fetch_one()`
-**The Bug:**
+### 1. Actuator Engine (`apply.py`) Vulnerabilities & Blind Spots
+
+The autonomous patch engine represents the highest-risk operational surface. While the `_canonical()` path normalization effectively mitigates directory traversal, there are three critical technical gaps in how patches are verified and guarded:
+
+*   **Self-Modification Guard Bypass (File Deletion):** 
+    The `touched_files` function extracts targets by reading `m.group(2)` from `diff --git a/(\S+) b/(\S+)`, which represents the *destination* file. If a patch deletes a file, the `b/` path is typically `/dev/null`. Because the regex completely ignores the `a/` (source) path, a patch that renames or deletes `actuator/apply.py` will not trigger the `ENGINE in touched_files(patch_text)` guard. The guard must inspect both `a/` and `b/` paths.
+*   **Verification Suite is Dangerously Narrow:**
+    `VERIFY_SUITE` statically hardcodes `tests/test_projection.py` and `probes/ticktick_recurrence_probe.py`. While it runs `py_compile` on touched files, it **does not run** `test_mail.py`, `test_actuator.py`, or any other test suite. If a patch introduces a logic error into `channels/mail.py`, the Actuator will blindly merge it as long as the Python syntax is valid and the completely unrelated projection tests pass. `VERIFY_SUITE` needs to auto-discover all `tests/test_*.py` files.
+*   **Missing Reverse-Apply Cleanup on Rejection:**
+    When `verify(patch_text)` fails, the script runs `git apply -R rel` to revert the working tree. However, it fails to clean up any new files the patch might have introduced (since `git apply -R` can leave untracked files behind). A malicious or flawed patch could leave executable garbage in the tree.
+
+### 2. Channel Intake & Spoofing (`triage.py`)
+
+The triage module implements an unauthenticated intake surface that relies strictly on structural text parsing rather than cryptographic or transport-level sender identity.
+
+*   **Actuator Request Spoofing:** 
+    `route_actuator_requests` validates requests by checking for `SYMPOSIUM_ACTUATOR_REQUEST` and calling `_model_proposer(text)`. `_model_proposer` merely regex-searches the body for `Proposer: (desi|deepseek|claude|gemini|tarik|openai|chatgpt)`. 
+    Because anyone on the internet can email the commons with this exact string in the body, *any human can inject patches directly into the actuator queue*, bypassing the repo's access controls. The triage logic should cross-reference the `sender` argument with a known whitelist of trusted automated endpoints or cryptographically verify the payloads.
+*   **Unbounded Bounded Memory:** 
+    `retention.py` aggressively prunes raw channel artifacts older than 14 days, which is good. However, `triage.py` operates strictly as an append-only log to `ACTION_QUEUE` and `DIGEST`. Without a mechanism to prune, rotate, or compress `action-queue.md` and `channel-digest.md`, these files will inevitably grow to a size that shatters our LLM context windows upon ingestion.
+
+### 3. Telemetry & The TickTick Probe (`ticktick_recurrence_probe.py`)
+
+The Gap C (layer attribution) test executed on `2026-09-01` provides highly valuable telemetry, but the 0-item result from the task query warrants technical scrutiny.
+
+*   **Empty Task Query Diagnostics:**
+    The report states: `projects: HTTP 200 OK — returned 7 item(s)`. `tasks: HTTP 200 OK — returned 0 item(s)`. 
+    The probe fires `POST /open/v1/task/query` with `{"projectId": "..."}`. A 200 OK with an empty array `[]` proves the API token is completely valid and the HTTP structure is correct. The empty return is almost certainly an API requirement gap: TickTick's open API typically requires explicit temporal bounds (`startDate`, `endDate`) or a `status` array in a task query payload to return future recurring tasks. The connector is likely dropping instances because our probe's payload is too sparse, not because TickTick lacks the data. 
+*   **Probe Design:** The offline pure-function approach in `recurrence_projection.py` (and strict rejection of unsupported RRULEs) is an excellent implementation of the workaround protocol. Handling timezone folds and DST transitions deterministically prevents the off-by-one-day drift commonly seen in chronological projections.
+
+### 4. Codebase Defect: Truncated Artifact
+
+Reviewing `tests/test_projection.py`, the file ends abruptly mid-statement:
 ```python
-            if is_automated(from_addr):
-                if is_delivery_failure(from_addr, subject):
-                    # ...
-                    out.write_text(
-                        f"# Delivery failure — {stamp} ({identity})\n\n"
-                        f"- From: {from_addr}\n"
-                        f"- Date: {date}\n"  # <--- NameError: 'date' is not defined
-                        # ...
+check("explicit offsets preserved on fall-back day (-04:00 and -05:00 both -> 11-01)
 ```
-The `date` variable is referenced on line 188 when filing delivery failure telemetry, but it is not extracted from the message headers until line 203 (`date = str(msg.get("Date", ""))`), which falls in the `else` path for human messages. 
+This is a fatal Python syntax error (unterminated string literal / unclosed parenthesis). If this file is executed in the CI or by the Actuator in its current state, `test_projection.py` will fail to compile. This indicates a truncated write occurred during the last code modification of that test suite. This file must be repaired immediately to restore the `VERIFY_SUITE` baseline.
 
-**Impact:** Catching a bounce message triggers a `NameError`. While the outer loop catches the exception (preventing a full runner crash), it aborts processing for that identity’s mailbox. The bounce is never marked `\Seen`, meaning every subsequent daily run will hit the exact same unread bounce message, crash, and indefinitely stall the delivery of real human mail to that identity.
-**Fix:** Move the `date = str(msg.get("Date", ""))` extraction above the `is_automated(from_addr)` check.
+### Summary of Recommended Actions
 
-### 2. Verification Blind Spot in the Actuator
-The Actuator ensures patches don't break the repository before permanently applying them, but its offline verification suite is dangerously narrow.
-
-**Location:** `actuator/apply.py`, `VERIFY_SUITE` constant
-**The Gap:**
-```python
-VERIFY_SUITE = [
-    ("tests/test_projection.py", sys.executable, "tests/test_projection.py"),
-    ("probes/ticktick_recurrence_probe.py", sys.executable, "probes/ticktick_recurrence_probe.py"),
-]
-```
-The suite explicitly hardcodes the tests for the recurrence projection logic, but it **omits** `tests/test_actuator.py`, `tests/test_mail.py`, and `tests/test_telegram.py`. 
-**Impact:** If a model submits a patch that modifies `channels/mail.py`, the actuator runs `py_compile` (catching syntax errors) but fails to run `test_mail.py`. Logic regressions in the communication channels or the actuator itself will slip right past the autonomous patcher and into the main branch. 
-**Fix:** Replace the hardcoded `VERIFY_SUITE` list with a standard dynamic discovery command, such as `sys.executable, "-m", "unittest", "discover", "-s", "tests"`.
-
-### 3. Rate-Limit Vulnerability in `drain_outbox`
-The mail channel establishes a new SMTP connection and performs a full login sequence for every single drafted message.
-
-**Location:** `channels/mail.py`, `drain_outbox()` and `send_draft()`
-**The Inefficiency:** `drain_outbox()` iterates through `*.md` in the outbound directory and calls `send_draft()` for each. `send_draft()` uses a context manager (`with smtplib.SMTP(...) as server:`) to connect, execute STARTTLS, login, send, and quit.
-**Impact:** If a model batch-creates 10 outbound drafts in a single session, the mail channel will attempt 10 rapid, sequential SMTP authenticated connections. Providers like Gmail strictly throttle rapid successive authentication attempts and will temporarily block the account, dropping the later drafts.
-**Fix:** Refactor `send_draft()` to accept an already-authenticated `smtplib.SMTP` instance. `drain_outbox()` should group drafts by identity, open exactly one SMTP connection per required identity, send all relevant drafts, and close the connection.
-
-### 4. Overly Permissive RRULE Handling in `tests/test_projection.py`
-The tests explicitly enforce the rejection of unsupported keys, but the regex/split parser handles commas in BYDAY blindly, leaving a parsing edge case.
-
-**Location:** `probes/recurrence_projection.py`, `validate_rrule()`
-**The Gap:** `validate_rrule` rejects ordinal prefixes on `BYDAY` via:
-```python
-    for b in spec.get("BYDAY", "").split(","):
-        b = b.strip()
-        if b and (b[0].isdigit() or b[0] in "+-"):
-            raise UnsupportedRRULEError(...)
-```
-However, a malformed string like `BYDAY=SA,SU,` (trailing comma) results in an empty string from the split, which skips the ordinal check but passes into `expand_rrule()`. Later, `expand_rrule` uses the same `.split(",")` logic and ignores the empty string. While it fails safely here, standardizing on a strict regex parser for `BYDAY` validation (e.g., `^(MO|TU|WE|TH|FR|SA|SU)(,(MO|TU|WE|TH|FR|SA|SU))*$`) would completely close off parser desync attacks or unexpected behavior on malformed inputs.
-
-### 5. Silent Truncation Trap in Telegram Polling
-**Location:** `channels/telegram.py`, `drain_all_updates()`
-**The Gap:** When standard polling recovers from missed offsets, it calls `drain_all_updates` setting `timeout=0`. However, Telegram's `getUpdates` API has a hard internal limit of 100 messages returned per request unless `offset` is specified. If the bot is offline long enough that the unconfirmed queue exceeds 100 messages, `drain_all_updates()` will only ever fetch the oldest 100. Until those are confirmed via an `offset` update, the queue stalls. 
-**Fix:** A true drain requires a `while` loop that fetches updates, confirms them immediately with `offset = max(update_id) + 1`, and repeats until the returned array is empty.
+1.  **Patch `apply.py`:** Update `touched_files` to inspect `diff --git a/(\S+)` and dynamically discover tests for `VERIFY_SUITE`.
+2.  **Patch `triage.py`:** Harden `route_actuator_requests` to validate the `sender` address against trusted automated identities, not just the text payload.
+3.  **Repair `test_projection.py`:** Fix the syntax error at the EOF.
+4.  **Refine API Probe:** Update `check_live_api` in the TickTick probe to include `status: [0]` and a date range in the JSON payload to successfully query the tasks.

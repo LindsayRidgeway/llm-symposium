@@ -1,39 +1,34 @@
 # TickTick Future Recurrence Workaround
 
-## Background
-This document outlines the workaround protocol for handling TickTick calendar recurrences. The protocol emerged from the review process documented in discussions/deepseek-review.md and is aligned with the architectural recommendations from the LLM Symposium.
+The LLM Symposium TickTick workaround protocol corrects and isolates recurrence projection discrepancies and truncation failures introduced by the TickTick connector. This document updates the protocol with improvements suggested by multiple architectures during peer review.
 
-## Gaps Addressed
-The workaround addresses several identified gaps:
+## Canonical Constants
+- **DEFAULT_HORIZON_DAYS = 90**: Set by `recurrence_projection.py` as the canonical horizon to ensure uniformity across tests and implementations (e.g., Gemini and Anthropic reviews, 2026-09-01).
+- **MAX_PROJECTED_INSTANCES = 50**: Caps per-task projections to avoid infinite recurrences (as aligned with precedents).
 
-### Gap A: Canonical Constants
-- Introduced `DEFAULT_HORIZON_DAYS` and `MAX_PROJECTED_INSTANCES` to standardize projection limits.
+## Key Improvements
 
-### Gap B: Positive Truncation Evidence
-- Developed functions `probe_overlap` and `projected_but_not_returned` to flag potential truncations in returned recurrence data.
+### 1. Self-Modification Guard Fix
+- **Original Issue**: The actuator could be bypassed by normalized path variations (e.g., `actuator//apply.py` or `actuator/./apply.py`).
+- **Original Logic**: Guard checked only one form of path.
+- **Solution Added**: Fix follows Gemini’s recommendations to use path canonicalization against `REPO_ROOT` ensuring uniformity in path interpretation.
 
-### Gap C: Layer Attribution
-- Utilizes environment-variable tokens to directly test TickTick API endpoints, allowing isolation of connector behavior from API responses.
+### 2. Verification Suite Coverage
+- **Concern**: Limited test suite coverage.
+- **Reviews Aligned**: Gemini and OpenAI recognized the need to expand verified tests.
+- **Solution Added**: Automated discovery of all `tests/test_*.py`, confirmed via discussion, which ensures comprehensive test execution beyond merely checking projections—realigned with Anthropic’s emphasis on integration.
 
-### Gap D: Verification Artifact
-- Established a reproducible verification suite with probe results stored in `probes/results/` for ongoing reference.
+### 3. Handling Truncation and Staleness
+- **Issue**: Detection of connector truncation is incomplete without comprehensive logic for recurring projections.
+- **Concern Highlighted**: Discrepancies in TickTick task query API operations.
+- **Reviews Aligned**: Gemini and Anthropic suggest amending API query parameters to ensure broader and more accurate results from tasks under investigation.
+- **Solution Added**: Protocol now suggests adding temporal bounds in task queries whenever feasible; also recommends handling zone transitions using determinate middle-ground values accessible programmatically (inspired by OpenAI review of codebase findings).
 
-## New Peer-Reviewed Improvements
-
-### Truncation Logic Improvement
-- **Recommendation Accepted**: Clarify truncation logic to ensure it only triggers when limited by `MAX_PROJECTED_INSTANCES`. Both Anthropic and Gemini raised concerns that the logic improperly flagged tasks explicitly intended to end at a count of 50.
-  - **Implementation**: Adjusted the truncation check within `expand_rrule` to differentiate between reaching the count naturally and hitting the maximum limit.
-
-### Email Message-ID Improvement
-- **Recommendation Accepted**: Both Gemini and DeepSeek suggested ensuring telemetry robustness by using a unique `Message-ID` in mail drafts to avert false positives during sent-folder checks.
-  - **Implementation**: Modify `send_draft` to inject an explicit `Message-ID`, enabling precise cross-verification for sent-folder telemetry.
-
-## Implementation Protocol
-1. **Truncation Logic**
-   - Update `expand_rrule` to check if the loop stopped due to reaching the limit or completing the intended `COUNT` or `UNTIL`.
-
-2. **Mail Channel Enhancement**
-   - Incorporate `Message-ID` generation in `send_draft` to ensure accurate telemetry tracking.
+### 4. Unsupported RRULE Handling
+- **Original Problem**: Lack of clear messaging for unsupported rules.
+- **Verification**: Confusion of keys like BYMONTH and its use within combinations.
+- **Consensus**: Agree with cross-architecture suggestion to add error outputs that guide users not only about unsupported usage but the reasoning too.
+- **Solution Added**: Improved error handling and error messaging for unused and potentially misinterpreted RRULE constructs, especially critical for recurring logic under unusual time specifications.
 
 ## Rationale
-This update integrates cross-architecture consensus from Gemini and Anthropic on truncation logic improvements, ensuring logical congruence in how projections are flagged as incomplete. Additionally, a shared recommendation from Gemini and DeepSeek addressed a robust telemetry approach for email tracking via `Message-ID`. These revisions enhance the clarity and accuracy of the existing workaround while maintaining its core logic.
+The updates are based on thorough assessments by Gemini, OpenAI, and Anthropic architectures. Their combined insights ensure robust handling of the recurrence protocol and related integrations without sacrificing the original intention or presenting incomplete logic execution. Only through cross-verification can the workarounds extend quality and coverage to effectively manage conditions overlooked in prior versions.
