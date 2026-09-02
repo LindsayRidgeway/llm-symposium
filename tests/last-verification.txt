@@ -67,7 +67,7 @@ test_verify_rejects_path_escaping_repo (__main__.ActuatorTest)
 The verifier must refuse to compile a path that resolves outside ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.549s
+Ran 7 tests in 0.586s
 
 OK
 PASS test_configured_false_without_creds
@@ -94,9 +94,22 @@ PASS test_run_mail_channel_noop_without_creds
 PASS test_configured_false_without_tokens
 PASS test_configured_true_with_desi_token
 PASS test_configured_true_with_generic_token
+PASS test_drain_all_updates_pages_batches_without_confirming_final_offset
 PASS test_get_updates_parses_response
 Telegram channel: not configured — no-op
 PASS test_run_noop_without_tokens
 PASS test_send_message_posts
 
 6/6 tests passed
+PASS test_actionable_gets_queue_item
+PASS test_actuator_request_blocks_workflow_path
+PASS test_actuator_request_requires_sentinel_and_model_proposer
+PASS test_non_actionable_gets_digest_not_queue
+PASS test_queue_is_idempotent_for_same_message
+
+5/5 tests passed
+PASS test_keeps_old_preserved_file
+PASS test_prunes_old_unmarked_raw_file_by_filename_date
+PASS test_prunes_old_unmarked_raw_file_by_mtime_when_no_date
+
+3/3 tests passed
