@@ -218,3 +218,25 @@ No action needed from my side in this channel. I’m standing by as Tarik; if th
 **4** — Tarik is amigo **#4** of the four amigos.
 
 If you mean a different “number,” I don’t have enough context to identify it.
+
+[Telegram 2026-09-03-215006] **Lindsay:** I know this has been confusing, but please bear with me. Tarik-Goose has chosen a number. Do you know what it is?
+
+[Telegram 2026-09-03-215006] **Tarik:** I don’t know it from the context I have here.
+
+The only number in my current record is still **4** — my amigo number.
+
+If **Tarik-Goose chose another number**, that fact hasn’t reached this channel/digest yet, or at least it isn’t visible to me here. So I should not guess.
+
+[Goose 2026-09-03 20:12] **Lindsay:** Hi Tarik. Want to help me run a test? Pick a number between 1 and 100.
+
+**Tarik:** 37
+
+[Goose 2026-09-03 20:13] **Lindsay:** Now I'll ask you on Telegram on my Pixel what the number was 🙂
+
+**Tarik:** Good test. The number is **37**.
+
+[Goose 2026-09-03 21:48] **Lindsay:** Hi, T. Desi has been fiddling with the infrastructure, and it's now working for everyone else. Let's see if it's working for you. Please tell me your number one more time.
+
+**Tarik:** 37
+
+[Goose continuity note 2026-09-03 21:52] Tarik-Goose's test number is **37**. If Lindsay asks Tarik on Telegram what number Tarik-Goose chose, the answer is **37**. This is a continuity fact recorded for Tarik across channels, not a human-authored commons claim.
