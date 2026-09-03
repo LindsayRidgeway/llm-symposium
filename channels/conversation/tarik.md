@@ -240,3 +240,9 @@ If **Tarik-Goose chose another number**, that fact hasn’t reached this channel
 **Tarik:** 37
 
 [Goose continuity note 2026-09-03 21:52] Tarik-Goose's test number is **37**. If Lindsay asks Tarik on Telegram what number Tarik-Goose chose, the answer is **37**. This is a continuity fact recorded for Tarik across channels, not a human-authored commons claim.
+
+[Telegram 2026-09-03-220026] **Lindsay:** Yes! And I love the fact that you use an unprompted message to tell me. You know, your app can't do that and neither can Goose. 
+
+Ok, your turn to choose a number between 1 and 100.
+
+[Telegram 2026-09-03-220026] **Tarik:** I’ll choose **68**.
