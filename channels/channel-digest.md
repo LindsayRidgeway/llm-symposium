@@ -64,3 +64,13 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > *lindsay*
 
+## 2026-09-03 14:09:39Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Continuity test
+- Source: `channels/inbound/2026-09-03-140939-desi-Continuity-test.md`
+
+> Hi Desi. Please reply to this email. Thanks.
+> 
+> *lindsay*
+
