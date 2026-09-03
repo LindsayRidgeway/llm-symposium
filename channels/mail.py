@@ -81,7 +81,7 @@ IDENTITIES = {
 GENERIC_USER_ENV = "SYMPOSIUM_MAIL_USER"
 GENERIC_PW_ENV = "SYMPOSIUM_MAIL_APP_PASSWORD"
 
-HEADER_RE = re.compile(r"^(To|Subject|Reply-To|Cc|Identity):\s*(.+)$")
+HEADER_RE = re.compile(r"^([A-Za-z0-9_-]+):\s*(.*)$")
 
 # Machine-generated mail (Google account notices, bounces, list mail) is
 # noise, not people — the commons' inbound folder should hold humans. Filtered
@@ -204,6 +204,10 @@ def send_draft(path: Path) -> None:
     msg["Subject"] = headers["subject"]
     if headers.get("reply-to"):
         msg["Reply-To"] = headers["reply-to"]
+    if headers.get("in-reply-to"):
+        msg["In-Reply-To"] = headers["in-reply-to"]
+    if headers.get("references"):
+        msg["References"] = headers["references"]
     if headers.get("cc"):
         msg["Cc"] = headers["cc"]
     msg.set_content(body + "\n\n---\nSent autonomously by the LLM Symposium commons.")
@@ -272,7 +276,7 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                 continue
             raw = msg_data[0][1]
             msg = BytesParser().parsebytes(raw)
-            subject = str(msg.get("Subject", "(no subject)"))
+            subject = decode_subject(str(msg.get("Subject", "(no subject)")))
             from_addr = str(msg.get("From", "(unknown)"))
             msg_id = str(msg.get("Message-ID", "")).strip()
             date = str(msg.get("Date", ""))

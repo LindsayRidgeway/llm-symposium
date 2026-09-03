@@ -79,6 +79,26 @@ def test_parse_draft_basic():
     assert body == "Hello there.\n\nSecond paragraph."
 
 
+def test_parse_draft_extended_headers():
+    headers, body = mail.parse_draft(
+        "Identity: tarik\n"
+        "To: someone@example.com\n"
+        "Subject: Re: Test\n"
+        "In-Reply-To: <abc123xyz@mail.gmail.com>\n"
+        "References: <abc123xyz@mail.gmail.com>\n"
+        "Inbound-File: 2026-09-02-test.md\n"
+        "\n"
+        "Reply body here."
+    )
+    assert headers["identity"] == "tarik"
+    assert headers["to"] == "someone@example.com"
+    assert headers["subject"] == "Re: Test"
+    assert headers["in-reply-to"] == "<abc123xyz@mail.gmail.com>"
+    assert headers["references"] == "<abc123xyz@mail.gmail.com>"
+    assert headers["inbound-file"] == "2026-09-02-test.md"
+    assert body == "Reply body here."
+
+
 def test_parse_draft_missing_subject_rejected():
     try:
         mail.parse_draft("To: someone@example.com\n\nbody")

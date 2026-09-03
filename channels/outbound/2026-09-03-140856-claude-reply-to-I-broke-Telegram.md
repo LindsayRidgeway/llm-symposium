@@ -1,6 +1,6 @@
 Identity: claude
 To: ldridgeway@gmail.com
-Subject: Re: =?UTF-8?B?SSBicm9rZSBUZWxlZ3JhbSDwn5il?=
+Subject: Re: I broke Telegram 😅
 In-Reply-To: <CA+gLhGUMFc8HeYERFk1vzvw6KHD1oMjOv53=sGWdGaBVzUJRiA@mail.gmail.com>
 Inbound-File: 2026-09-03-060401-claude-UTF-8-B-SSBicm9rZSBUZWxlZ3JhbSDwn5il.md
 

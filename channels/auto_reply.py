@@ -23,6 +23,8 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
+from channels.mail import decode_subject
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
 OUTBOUND_DIR = REPO_ROOT / "channels" / "outbound"
@@ -342,7 +344,7 @@ def process_inbound_mail() -> int:
             continue
 
         reply_body = clean_reply_body(reply_body)
-        clean_subj = subject
+        clean_subj = decode_subject(subject)
         if not clean_subj.lower().startswith("re:"):
             clean_subj = f"Re: {clean_subj}"
 
