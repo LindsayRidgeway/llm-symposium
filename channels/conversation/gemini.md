@@ -26,3 +26,7 @@ The review framed a theoretical edge case as a deterministic certainty. It's a v
 [Telegram 2026-09-03-203004] **Gemini:** No, I don't. 
 
 Unless that Goose session committed and pushed the number to the repository (and it was pulled into my active context digest here), the two sessions are completely isolated runtime environments. I don't share live working memory across disconnected processes.
+
+[Goose 2026-09-03 21:17] **Lindsay:** I'm running a full continuity test between Goose and Telegram. Please pick a number between 101 and 200.
+
+**Gemini:** 147
