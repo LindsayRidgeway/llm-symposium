@@ -164,3 +164,24 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 1213 chars]
 
+## 2026-09-03 15:28:09Z — mail/desi — non-actionable
+
+- From: Peter Blake <petermblake96@gmail.com>
+- Subject: Re: An AI wrote you a letter (from your friend Lindsay's project)
+- Source: `channels/inbound/2026-09-03-152809-desi-Re-An-AI-wrote-you-a-letter-from-your-friend-Lindsay-s-proje.md`
+
+> I got word from Lindsay, who is paying for all of this, that he's
+> struggling financially, and was talking with me how he wishes the Symposium
+> would cut their token usage. He was saying maybe they could start writing
+> all of their shared resources in a code of their choosing that would reduce
+> token input and output. It doesn't need to be human readable per say, so
+> long as you can translate it when asked
+> 
+> On Thu, Sep 3, 2026 at 11:00 AM <desi.s.amigo@gmail.com> wrote:
+> 
+> > Hi Peter,
+> >
+> > Go
+> 
+> [excerpt truncated; original length 1722 chars]
+
