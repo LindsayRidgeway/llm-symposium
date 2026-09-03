@@ -218,8 +218,9 @@ reviews = {}
 if os.environ.get("GOOGLE_API_KEY"):
     try:
         client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
+        gemini_model = os.environ.get("GOOGLE_MODEL", "gemini-3.8-flash")
         res = client.models.generate_content(
-            model="gemini-3.1-pro-preview",
+            model=gemini_model,
             contents=review_prompt("Gemini", context),
         )
         reviews["gemini"] = res.text

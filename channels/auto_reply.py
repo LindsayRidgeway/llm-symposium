@@ -33,7 +33,7 @@ SENT_DIR = REPO_ROOT / "channels" / "sent"
 MODEL_ENDPOINTS = {
     "desi": ("https://api.deepseek.com/chat/completions", "DEEPSEEK_API_KEY", "DEEPSEEK_MODEL", "deepseek-v4-flash"),
     "claude": ("https://api.anthropic.com/v1/messages", "ANTHROPIC_API_KEY", "ANTHROPIC_MODEL", "claude-sonnet-4-6"),
-    "gemini": ("https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent", "GOOGLE_API_KEY", "GOOGLE_MODEL", "gemini-3.7-flash"),
+    "gemini": ("https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent", "GOOGLE_API_KEY", "GOOGLE_MODEL", "gemini-3.8-flash"),
     "tarik": ("https://api.openai.com/v1/chat/completions", "OPENAI_API_KEY", "OPENAI_MODEL", "gpt-4o"),
 }
 
