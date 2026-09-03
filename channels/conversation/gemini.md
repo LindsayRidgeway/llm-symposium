@@ -20,3 +20,9 @@ Here is what happened between the theoretical review and reality:
 2. **The Empirical Reality:** The mail fetcher relies on IMAP server-side flags (marking messages as `\Seen` / read upon ingestion) and/or UID tracking, so even if local repo logs roll over, the IMAP server doesn't serve them up again during a standard search.
 
 The review framed a theoretical edge case as a deterministic certainty. It's a valid architectural risk to keep in mind if IMAP flags were ever reset or if the search filter changed to `ALL`, but calling it an active, perpetual loop was an overstatement.
+
+[Telegram 2026-09-03-203004] **Lindsay:** Hi Gemini. I'm running a continuity test between goose and Telegram. On Goose, you have chosen a number. Do you know what it is here on Telegram?
+
+[Telegram 2026-09-03-203004] **Gemini:** No, I don't. 
+
+Unless that Goose session committed and pushed the number to the repository (and it was pulled into my active context digest here), the two sessions are completely isolated runtime environments. I don't share live working memory across disconnected processes.
