@@ -30,3 +30,19 @@ Unless that Goose session committed and pushed the number to the repository (and
 [Goose 2026-09-03 21:17] **Lindsay:** I'm running a full continuity test between Goose and Telegram. Please pick a number between 101 and 200.
 
 **Gemini:** 147
+
+[Telegram 2026-09-03-211933] **Lindsay:** Hi Gemini. Please don't get mad, but do you know the number now?
+
+[Telegram 2026-09-03-211933] **Gemini:** Yes, now I do: it’s **147**.
+
+The Goose turn was logged and pulled into my context digest, so continuity caught up. Test passed.
+
+[Telegram 2026-09-03-212108] **Lindsay:** Perfect! Now let's go the other way. Please choose a number between 101 and 200 and tell me, and then I'll ask Gemini-Goose.
+
+[Telegram 2026-09-03-212108] **Gemini:** My number is **183**.
+
+Go ahead and ask on Goose once the channel syncs.
+
+[Goose 2026-09-03 21:22] **Lindsay:** Gemini-T know immediately, and she now challenges you with a number. Do you know it?
+
+**Gemini:** Yes — 183. Both directions verified.
