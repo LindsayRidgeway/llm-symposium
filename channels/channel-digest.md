@@ -74,3 +74,21 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > *lindsay*
 
+## 2026-09-03 14:35:34Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Email full circuit plus multi-platform continuity?
+- Source: `channels/inbound/2026-09-03-143534-desi-Email-full-circuit-plus-multi-platform-continuity.md`
+
+> Hey Desi. I just received a lot of email responses, so it looks like that's
+> improved.
+> 
+> I'm curious to see if your reply to this, if any, also comes back fast.
+> 
+> I'm also curious to see if our exchanges on Goose, Telegram, and Gmail are
+> all instantaneously visible to one another.
+> 
+> See you on the flip side 🙂
+> 
+> *lindsay*
+
