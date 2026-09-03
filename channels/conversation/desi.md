@@ -208,3 +208,7 @@ If you have a different number in mind — one from earlier in our conversation 
 
 [Goose 2026-09-03 16:40] **Lindsay:** I'm running a continuity test. What number did Desi pick?  
 **Desi:** 347.
+
+[Goose 2026-09-03 20:44] **Lindsay:** Want me to wire the Goose→store logging now so the whole test passes cleanly?
+
+**Desi:** Yes — I've wired a helper so each amigo's Goose session logs its exchanges to the per-amigo store, and documented the convention so all four adopt it.
