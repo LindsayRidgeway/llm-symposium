@@ -67,7 +67,7 @@ test_verify_rejects_path_escaping_repo (__main__.ActuatorTest)
 The verifier must refuse to compile a path that resolves outside ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.586s
+Ran 7 tests in 0.536s
 
 OK
 PASS test_configured_false_without_creds
@@ -85,12 +85,13 @@ PASS test_is_automated_filters_google_notices
 PASS test_is_automated_keeps_humans
 PASS test_is_delivery_failure_detects_bounces
 PASS test_parse_draft_basic
+PASS test_parse_draft_extended_headers
 PASS test_parse_draft_malformed_header_rejected
 PASS test_parse_draft_missing_subject_rejected
 Mail channel: not configured — no-op
 PASS test_run_mail_channel_noop_without_creds
 
-16/16 tests passed
+17/17 tests passed
 PASS test_configured_false_without_tokens
 PASS test_configured_true_with_desi_token
 PASS test_configured_true_with_generic_token
