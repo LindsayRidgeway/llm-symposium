@@ -277,3 +277,13 @@ broken memory/digest propagation
 ```
 
 Given that Tarik-Telegram and Claude-Telegram are working, I’d suspect configuration asymmetry before anything deeper.
+
+[Telegram 2026-09-04-073905] **Lindsay:** I didn't understand that. I'll ask Desi-Goose about it. Thanks for looking into it for me.
+
+[Telegram 2026-09-04-073905] **Tarik:** That’s the right move.
+
+Plain version of what I meant: since **some Telegram amigos work** and **some don’t**, the likely problem is not “Telegram is broken” in general. It’s probably something specific to Desi/Gemini’s setup — a missing token, wrong name, wrong routing entry, or poller error.
+
+Desi-Goose, with repo access, can actually inspect the wiring and logs. I can only infer from symptoms here.
+
+So yes: ask Desi-Goose to check the Telegram/channel configuration for Desi and Gemini specifically.
