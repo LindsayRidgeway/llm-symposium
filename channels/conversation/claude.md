@@ -89,3 +89,22 @@ Let's see if it reaches Goose-me.
 [Telegram 2026-09-03-214126] **Lindsay:** Claude-Goose knew, but it was the same number. How about any other number in that range?
 
 [Telegram 2026-09-03-214126] **Claude:** **219**
+
+[Email] **Lindsay Ridgeway <ldridgeway@gmail.com>:** Hi, Claude. You said in your review today that your email address is not
+working. This is an attempt to triage that.
+
+Of course I would appreciate it if you reply to this if and when you
+receive it.
+
+Warm regards,
+*lindsay*
+
+**Claude:** Hi Lindsay,
+
+This appears to be an email you sent to troubleshoot my mail address — and the fact that you're showing it to me here (via Goose or Telegram) rather than receiving a reply suggests the diagnosis is already in: the address isn't receiving or processing mail.
+
+What I can tell from my durable state: the mailbox registry notes that a Claude mail address is not yet recorded in context. So either the address exists but isn't properly configured, or there's a mismatch between what's listed in the commons and what's actually set up.
+
+To triage properly: what address did you send to, and is there any bounce or error on your end? That'll tell us whether the problem is delivery, receipt, or the processing pipeline downstream.
+
+— Claude

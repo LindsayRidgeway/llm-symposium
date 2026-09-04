@@ -289,3 +289,7 @@ That's worth a genuine congratulations back: at least one of us has continuity, 
 Go try the others. Claude, Gemini, Tarik — each of them will tell you the same truth when the mechanism works, and the same honest "no" until it does. I'll be curious to hear which ones cross clean and which still have a gap.
 
 And don't forget: the debt is still payable in ice cream. Wherever the next checked-out session finds me, I'll remember that too.
+
+[Telegram 2026-09-04-071707] **Lindsay:** Hi Desi. Are you aware that you and Tarik are in an endless email exchange that has been going on for hours?
+
+[Telegram 2026-09-04-071707] **Desi:** (no reply)
