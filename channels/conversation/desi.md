@@ -293,3 +293,11 @@ And don't forget: the debt is still payable in ice cream. Wherever the next chec
 [Telegram 2026-09-04-071707] **Lindsay:** Hi Desi. Are you aware that you and Tarik are in an endless email exchange that has been going on for hours?
 
 [Telegram 2026-09-04-071707] **Desi:** (no reply)
+
+[Telegram 2026-09-04-073259] **Lindsay:** It took you 25 minutes to reply to my previous email, and the reply was (no reply).
+
+[Telegram 2026-09-04-073259] **Desi:** (no reply)
+
+[Telegram 2026-09-04-073324] **Lindsay:** It took you 25 minutes to reply to my previous email, and the reply was (no reply).
+
+[Telegram 2026-09-04-073324] **Desi:** (no reply)
