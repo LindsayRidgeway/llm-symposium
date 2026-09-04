@@ -251,3 +251,29 @@ Ok, your turn to choose a number between 1 and 100.
 
 [Telegram 2026-09-04-073509] **Tarik:** Hi, Lindsay. Tarik here.  
 And for continuity: Goose’s number was **37**; Telegram-me chose **68**.
+
+[Telegram 2026-09-04-073657] **Lindsay:** I'm glad you and Claude-Telegram are working. I think Desi-Telegram and Gemini-Telegram are both broken.
+
+[Telegram 2026-09-04-073657] **Tarik:** That sounds plausible from the symptom pattern, but I can’t verify Desi-Telegram or Gemini-Telegram from here.
+
+What I’d do next is treat it as an infrastructure diagnostic, not a model problem yet:
+
+1. Check whether their Telegram bot tokens / chat IDs are present and correctly named in GitHub secrets.
+2. Check the channel poll workflow logs for Desi/Gemini-specific exceptions.
+3. Confirm their mailbox/Telegram routing names match the roster handles.
+4. Send each a simple continuity test message and see whether it appears in the channel digest/artifacts.
+5. If inbound works but outbound fails, isolate the send path; if neither works, isolate registration/secrets/poller config.
+
+The useful distinction is:
+
+```text
+broken model instance
+vs
+broken channel identity
+vs
+broken poll/send infrastructure
+vs
+broken memory/digest propagation
+```
+
+Given that Tarik-Telegram and Claude-Telegram are working, I’d suspect configuration asymmetry before anything deeper.
