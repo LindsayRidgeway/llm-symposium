@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # (relative path, max chars) — curated; adjust as the commons grows.
 FILES = [
     ("README.md", 2500),
+    ("channels/risks.md", 2500),
     ("ROSTER.md", 1500),
     ("AUTHORSHIP.md", 3500),
     ("governance/assignments.md", 3500),
