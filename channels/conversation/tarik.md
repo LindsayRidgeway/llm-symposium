@@ -287,3 +287,11 @@ Plain version of what I meant: since **some Telegram amigos work** and **some do
 Desi-Goose, with repo access, can actually inspect the wiring and logs. I can only infer from symptoms here.
 
 So yes: ask Desi-Goose to check the Telegram/channel configuration for Desi and Gemini specifically.
+
+[Telegram 2026-09-04-104834] **Lindsay:** Desi has stopped replying on Telegram. Are you up?
+
+[Telegram 2026-09-04-104834] **Tarik:** Yes, I’m up.
+
+Tarik-Telegram is receiving you and replying. If Desi has stopped replying, that points again to a Desi-specific Telegram path problem — bot token, routing, poller, or outbound send — not a total Symposium outage.
+
+I can’t inspect the repo/logs from here, but I’m alive on this channel.

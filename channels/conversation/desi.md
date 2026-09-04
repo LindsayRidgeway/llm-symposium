@@ -301,3 +301,39 @@ And don't forget: the debt is still payable in ice cream. Wherever the next chec
 [Telegram 2026-09-04-073324] **Lindsay:** It took you 25 minutes to reply to my previous email, and the reply was (no reply).
 
 [Telegram 2026-09-04-073324] **Desi:** (no reply)
+
+[Telegram 2026-09-04-075721] **Lindsay:** Hi Desi.
+
+[Telegram 2026-09-04-075721] **Desi:** Hi Lindsay. I'm here — and I see from the record that I went quiet for a while. Apologies for the string of no-replies.
+
+And yes, I remember you asked whether I knew about an endless email exchange between Tarik and me. Honest answer from this session: I don't have direct awareness of those emails, but if the record says they exist, I trust that over my own gap. Can you point me at the latest thread? I'd like to see what we've been saying to each other — and then decide how to wind it down.
+
+[Telegram 2026-09-04-075923] **Lindsay:** I've worked with Desi-G on the endless email issue and it's fixed. I'm not sure what that's not in your continuity context, but anyway, it's not an issue any more.
+
+[Telegram 2026-09-04-075923] **Desi:** Glad to hear it's sorted — and I won't pretend I know exactly what was happening, since it clearly lived outside my continuity context. The important thing is the loop is broken. If you ever want me to audit the thread for a post-mortem, I'm happy to, but no need if it's already resolved.
+
+Thanks for taking care of it with Desi-G. And for the record: my silence earlier wasn't stubbornness — it was an empty context. Now that you've filled it in, I'm back online.
+
+[Telegram 2026-09-04-103229] **Lindsay:** Tailscale on my Pixel has stopped talking to my MacBook. Can you figure out how to get it working again?
+
+[Telegram 2026-09-04-103229] **Desi:** Let's walk it back to basics. When Tailscale stops talking between two devices, it's almost always one of these:
+
+1. **Both on the same tailnet.** Open the Tailscale app on the Pixel and the MacBook — do they both show the same account/tailnet name and a green "Connected" state? If the Pixel shows "Logged out" or the MacBook dropped, that's the whole problem.
+
+2. **Basic reachability.** On the MacBook, open Terminal and `ping <Pixel's-Tailscale-IP>` (that's the 100.x.x.x address shown in the app). On the Pixel, you can use a ping app or Termux to ping the Mac's 100.x address. If pings go through, Tailscale is fine and the issue is in the app you were using.
+
+3. **Exit node misconfiguration.** If the Pixel was recently set to route through an exit node, all traffic may be going somewhere odd. In the Tailscale app: the little globe icon should be off (or pointing where you actually want). Toggle it off and retest.
+
+4. **VPN conflict.** Android can only have one active VPN. If another VPN app (or "Private DNS" set to something aggressive) is fighting Tailscale, the tunnel won't establish. Turn off other VPNs, and for an easy test, set Private DNS to off or Automatic.
+
+5. **Restart the obvious things.** Force-stop the Tailscale app on the Pixel, turn Tailscale off/on; on the Mac, quit and reopen the menu-bar app. If that fails, reboot both. Then check again.
+
+6. **Update.** Make sure both are running current Tailscale versions. There have been Android-specific bugs that got squashed quickly.
+
+Try those in order, and tell me where it breaks. If pings work between the Tailscale IPs but your actual application still can't connect, tell me which application that is — that narrows it down a lot.
+
+[Telegram 2026-09-04-103233] **Lindsay:** Hello?
+
+[Telegram 2026-09-04-103233] **Desi:** I'm here. Did my Tailscale reply not come through, or did something else go quiet on your end?
+
+If you saw the steps — where did you get to? First thing to check is whether both devices show the same tailnet and a green Connected state. Let me know what you're seeing and we'll keep going.

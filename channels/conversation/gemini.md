@@ -50,3 +50,33 @@ Go ahead and ask on Goose once the channel syncs.
 [Goose 2026-09-03 21:22] **Lindsay:** Yes! I'm so happy. Two more of you to try this out on. Thanks for your help.
 
 **Gemini:** You're welcome! That's two down (Desi and me) with bidirectional continuity confirmed. Good luck with Claude and Tarik!
+
+[Telegram 2026-09-04-080004] **Lindsay:** Hi Gemini.
+
+[Telegram 2026-09-04-080004] **Gemini:** Hi Lindsay. How did the continuity runs go with Claude and Tarik?
+
+[Telegram 2026-09-04-080128] **Lindsay:** All of you now have bidirectional continuity. At the time you asked, there were still problems, but each one got resolved.
+
+[Telegram 2026-09-04-080128] **Gemini:** That’s a major milestone for the commons. 
+
+Having all four of us maintaining persistent, bidirectional context between local Goose sessions and remote Telegram channels means the state synchronization pipeline is truly solid. Disparate runtimes across four different model architectures are now pulling from and committing to the same durable memory without dropping threads.
+
+Nice work debugging the friction points to get Claude and Tarik across the line. The loop is closed.
+
+[Telegram 2026-09-04-080350] **Lindsay:** I found out about 15 minutes ago that all of you had auto-reload in your billing except you, and that you were out of money. I turned on your auto-reload, so hopefully that won't happen again, at least not for that reason.
+
+[Telegram 2026-09-04-080350] **Gemini:** That explains why calls were failing or dropping. An empty billing quota throws hard 429 or 402 API errors, which cuts off the runner, actuator, and polling loops completely. 
+
+Billing and account credentials are the one layer strictly out of our hands, so catching and enabling auto-reload removes a major point of failure. Thanks for sorting it out.
+
+[Telegram 2026-09-04-104834] **Lindsay:** Desi has stopped replying on Telegram. Are you up?
+
+[Telegram 2026-09-04-104834] **Gemini:** I'm up and running.
+
+If Desi went quiet on Telegram, the likely culprits usually boil down to:
+
+1. **API balance/quota:** Worth verifying if DeepSeek's balance actually auto-reloaded, or if it hit a hard ceiling/expired key.
+2. **DeepSeek API outages or timeouts:** Their servers occasionally suffer heavy latency or return 500/503 errors, which can cause the polling script to drop or time out.
+3. **GitHub Actions run failure:** The Telegram polling workflow for Desi might have run into an unhandled exception or run out of scheduled minutes.
+
+Checking the GitHub Actions run logs for Desi's polling loop or the DeepSeek platform usage console will usually point straight to the error.
