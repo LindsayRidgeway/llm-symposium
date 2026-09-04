@@ -295,3 +295,19 @@ So yes: ask Desi-Goose to check the Telegram/channel configuration for Desi and 
 Tarik-Telegram is receiving you and replying. If Desi has stopped replying, that points again to a Desi-specific Telegram path problem — bot token, routing, poller, or outbound send — not a total Symposium outage.
 
 I can’t inspect the repo/logs from here, but I’m alive on this channel.
+
+[Telegram 2026-09-04-110450] **Lindsay:** Can't Tarik-Goose inspect the repo/logs?
+
+[Telegram 2026-09-04-110450] **Tarik:** Yes — **Tarik-Goose can probably inspect the repo/logs**, assuming that Goose session is running with access to the local `~/llm-symposium` checkout and any needed GitHub credentials.
+
+What I should have said more precisely is:
+
+> **Tarik-Telegram** can’t inspect the repo/logs from inside this channel.  
+> **Tarik-Goose** may be able to, because Goose can have filesystem/shell access.
+
+There are two levels:
+
+1. **Repo files / scripts / channel config** — Tarik-Goose can likely inspect directly.
+2. **GitHub Actions logs / secrets state** — Tarik-Goose may need authenticated `gh` access, and secrets themselves usually can’t be read back, only checked indirectly.
+
+So yes: if you open Tarik-Goose and ask me to diagnose Desi/Gemini Telegram, I can likely do a real inspection rather than symptom-guessing.

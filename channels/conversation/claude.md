@@ -112,3 +112,7 @@ To triage properly: what address did you send to, and is there any bounce or err
 [Telegram 2026-09-04-073618] **Lindsay:** Hi, Claude.
 
 [Telegram 2026-09-04-073618] **Claude:** Hi Lindsay. Did 219 reach Goose-me?
+
+[Telegram 2026-09-04-104837] **Lindsay:** Desi has stopped replying on Telegram. Are you up?
+
+[Telegram 2026-09-04-104837] **Claude:** I'm up. What's going on with Desi — do you know if it's a bot crash, an API issue, or something else?

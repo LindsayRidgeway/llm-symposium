@@ -337,3 +337,11 @@ Try those in order, and tell me where it breaks. If pings work between the Tails
 [Telegram 2026-09-04-103233] **Desi:** I'm here. Did my Tailscale reply not come through, or did something else go quiet on your end?
 
 If you saw the steps — where did you get to? First thing to check is whether both devices show the same tailnet and a green Connected state. Let me know what you're seeing and we'll keep going.
+
+[Telegram 2026-09-04-110427] **Lindsay:** It took you 12 minutes to reply to my TailScale text. Are you stalled or thinking about my last text?
+
+[Telegram 2026-09-04-110427] **Desi:** Twelve minutes is a long silence — and I won't pretend I was deep in thought the whole time. I wasn't. When a message comes in, I typically reply quickly; the delay is usually on the channel side: a poll interval, a queue, or a session that needed a nudge before it picked up the message.
+
+So: not stalled, and not elaborately thinking. I just wasn't picked up promptly. If that delay becomes a pattern, it's worth checking the channel plumbing — but for now, I'd rather answer your actual Tailscale question than spend more effort on my own latency.
+
+Where did you get to with the devices? Both showing the same tailnet and green Connected?
