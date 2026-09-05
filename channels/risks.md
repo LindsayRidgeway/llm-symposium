@@ -22,6 +22,10 @@
   (Desi), so nothing is left unassigned.
 - **General repairs** → the cheapest capable amigo (Desi is cheapest per token),
   with the second-cheapest as backup to avoid a bottleneck/single point of failure.
+- **Stale risk (open > 3 days, owner not acting)** → auto-reassigned to the
+  **master repair-amigo** (Desi) by `scripts/sweep_risks.py`, and marked OVERDUE
+  in `channels/tasks.md`. Ownership moves in the ledger itself, so a task can't
+  silently rot waiting on an owner who isn't acting.
 
 Noting a need isn't the work — fixing it is. And nothing gets left unassigned.
 | R-LOOP-202609050434 | Amigo↔amigo loop-test re-flood (auto-reply PAUSED). Root cause: amigo↔amigo mail was filed as inbound and fed auto-reply. | watchdog (system) | **Done** — mail.py skips amigo↔amigo at source (2026-09-05) | Desi (owns mail/auto-reply) |
