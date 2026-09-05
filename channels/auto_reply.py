@@ -382,6 +382,9 @@ def process_inbound_mail() -> int:
 
 def run_auto_reply() -> int:
     """Main entry point: generate replies, then drain the outbox."""
+    if (REPO_ROOT / "channels" / ".paused_autoreply").exists():
+        print("Auto-reply PAUSED (loop watchdog) — not processing inbound.")
+        return 0
     generated = process_inbound_mail()
     if generated > 0:
         try:
