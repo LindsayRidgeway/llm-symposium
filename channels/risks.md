@@ -14,6 +14,12 @@
 | R-005 | Local-bot email ping-pong (amigos auto-replying to each other's auto-replies) | Desi (caught by human) | **Done** — footer guard + 10/hr rate limit | Desi |
 | R-006 | Reviews became flat "Technical Critique" lists (no generative initiative) | Desi (meta-review) | **Open** | Desi |
 
-**Working rule: the amigo who flags a risk is its owner and acts on it.** Noting a
-need isn't the work — fixing it is. An owner may ask a peer for help, but the
-owner remains responsible for seeing it through.
+**Working rule (assignment):**
+- A subsystem issue with a **known owner** → that amigo fixes it. The owner knows
+  the code best, so the fix is best there (competence, not punishment).
+- **No owner / unknown / defunct owner** → assigned to the **master repair-amigo**
+  (Desi), so nothing is left unassigned.
+- **General repairs** → the cheapest capable amigo (Desi is cheapest per token),
+  with the second-cheapest as backup to avoid a bottleneck/single point of failure.
+
+Noting a need isn't the work — fixing it is. And nothing gets left unassigned.
