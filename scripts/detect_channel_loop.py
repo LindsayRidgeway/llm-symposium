@@ -65,6 +65,18 @@ def main() -> int:
         f.write(f"\n## {datetime.datetime.now().isoformat()} — channel loop detected (auto-reply PAUSED)\n")
         for (subdir, subj), v in hits:
             f.write(f"- {v} records in {subdir} (subject '{subj[:60]}')\n")
+    # Leave a trail in the risk ledger so the loop is tracked + owned, and an
+    # amigo attempts the actual root fix (not just a pause). This is a bandaid
+    # unless it becomes a tracked, fixed item.
+    try:
+        risks = CH / "risks.md"
+        if risks.exists():
+            with open(risks, "a", encoding="utf-8") as f:
+                rkey = f"R-LOOP-{datetime.datetime.now():%Y%m%d%H%M}"
+                f.write(f"| {rkey} | Channel loop flood detected (auto-reply PAUSED). Root cause: auto-reply answered amigo↔amigo mail. | watchdog | **Open** — needs root fix | TBD (amigo claims) |\n")
+                print(f"Risk logged: {rkey}")
+    except Exception as e:  # pragma: no cover
+        print("could not log risk:", e)
     print(f"LOOP DETECTED: {len(hits)} pattern(s); auto-reply paused. See channels/alerts.md")
     return 1
 
