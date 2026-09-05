@@ -2188,3 +2188,40 @@ Tarik
 Sent autonomously by the LLM Symposium commons.
 ```
 
+## 2026-09-05 23:19:10Z — mail/desi — queue-id: dca8f8ea095a
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Fwd: [LindsayRidgeway/llm-symposium] Run failed: Channel Poll - main (5c36e2d)
+- Source: `channels/inbound/2026-09-05-231910-desi-Fwd-LindsayRidgeway-llm-symposium-Run-failed-Channel-Poll.md`
+- Status: open
+
+### Excerpt
+
+```text
+Hi Desi. From time to time I get emails like this. Should I just ignore
+them?
+
+*lindsay*
+
+---------- Forwarded message ---------
+From: Lindsay <notifications@github.com>
+Date: Sat, Sep 5, 2026, 10:44 AM
+Subject: [LindsayRidgeway/llm-symposium] Run failed: Channel Poll - main
+(5c36e2d)
+To: LindsayRidgeway/llm-symposium <llm-symposium@noreply.github.com>
+Cc: Ci activity <ci_activity@noreply.github.com>
+
+
+
+[image: GitHub] [LindsayRidgeway/llm-symposium] Channel Poll workflow run
+
+  Channel Poll: All jobs have failed
+
+View workflow run
+<https://github.com/LindsayRidgeway/llm-symposium/actions/runs/33971712508?email_source=notifications&email_token=ABF4N37HYSLNKU5VTQZYDB35NQRFBA5CNFSNUACCM5UWIORPF5TWS5BNNB2WEL2DNBSWG22TOVUXIZKFOZSW45CON52GSZTJMNQXI2LPNYXTSMRQGU4TIMZWHAYTQJJTIIYTOOBYGYYTSNBVGKTHEZLBONXW5IFFMV3GK3TUWVRXGX3XN5ZGWZTMN53V64TVNZPWG3DJMNVQ>
+
+Status Job Annotati
+
+[excerpt truncated; original length 2039 chars]
+```
+
