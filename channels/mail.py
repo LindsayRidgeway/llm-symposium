@@ -287,6 +287,13 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
             body = plain_text_body(msg)
             if msg_id and msg_id in filed_ids:
                 continue  # already filed
+            # Amigo↔amigo mail is internal commons traffic, not human email.
+            # Never file it as inbound — it feeds the auto-reply and is the
+            # source of the ping-pong flood. Skip it at the source.
+            if re.search(r"(desi\.s\.amigo|claude\.s\.sonnet|tarik\.s\.commons|gemini\.s\.lumina)@gmail\.com", from_addr, re.IGNORECASE):
+                conn.store(num, "+FLAGS", "\\Seen")
+                print(f"Mail channel: skipped amigo↔amigo mail ({from_addr}) — {subject}")
+                continue
             if is_automated(from_addr):
                 if is_delivery_failure(from_addr, subject):
                     # Telemetry: file it so the commons can see its mail failed.

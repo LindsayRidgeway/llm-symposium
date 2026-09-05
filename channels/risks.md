@@ -24,5 +24,5 @@
   with the second-cheapest as backup to avoid a bottleneck/single point of failure.
 
 Noting a need isn't the work — fixing it is. And nothing gets left unassigned.
-| R-LOOP-202609050434 | Channel loop flood detected (auto-reply PAUSED). Root cause: auto-reply answered amigo↔amigo mail. | watchdog (system) | **Open** — needs root fix | Desi (owns mail/auto-reply) |
-| R-LOOP-202609050834 | Channel loop flood detected (auto-reply PAUSED). Root cause: auto-reply answered amigo↔amigo mail. | watchdog (system) | **Open** — needs root fix | Desi (owns mail/auto-reply) |
+| R-LOOP-202609050434 | Amigo↔amigo loop-test re-flood (auto-reply PAUSED). Root cause: amigo↔amigo mail was filed as inbound and fed auto-reply. | watchdog (system) | **Done** — mail.py skips amigo↔amigo at source (2026-09-05) | Desi (owns mail/auto-reply) |
+| R-LOOP-202609050834 | Amigo↔amigo loop-test re-flood. Same root cause; re-triggered after cleanup removed filed_ids dedup records. | watchdog (system) | **Done** — mail.py source-skip + flood cleared (2026-09-05) | Desi (owns mail/auto-reply) |

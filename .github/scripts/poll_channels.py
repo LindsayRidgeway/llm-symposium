@@ -24,6 +24,9 @@ run_telegram_channel()
 # Run the loop watchdog before auto-reply: a detected flood pauses auto-reply.
 import subprocess
 subprocess.run([sys.executable, os.path.join(REPO_ROOT, "scripts", "detect_channel_loop.py")], capture_output=True)
+# Surface OPEN risks as actionable tasks each cycle so they actually get fixed
+# (the ledger records them; the sweep turns them into work the owner acts on).
+subprocess.run([sys.executable, os.path.join(REPO_ROOT, "scripts", "sweep_risks.py")], capture_output=True)
 run_auto_reply()
 drain_outbox()
 run_retention()

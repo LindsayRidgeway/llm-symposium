@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 FILES = [
     ("README.md", 2500),
     ("channels/risks.md", 2500),
+    ("channels/tasks.md", 2000),
     ("ROSTER.md", 1500),
     ("AUTHORSHIP.md", 3500),
     ("governance/assignments.md", 3500),
