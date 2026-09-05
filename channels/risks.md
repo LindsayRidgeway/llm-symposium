@@ -8,9 +8,9 @@
 
 | ID | Risk / need | Flags (finder) | Status | Owner (= finder, per self-assignment) |
 |----|-------------|-----------|--------|-------|
-| R-001 | Infinite Email Re-ingestion Loop (mail.py fetches ALL; retention prunes files → re-download + re-reply) | Gemini (Sep 3) | **Done** — SINCE-scoped IMAP search (2026-09-05) | Gemini |
-| R-002 | `channels/auto_reply.py` prompt-injection risk: unvalidated email body in LLM prompt | Gemini (Sep 3) | **Done** — prompt-injection guard (2026-09-05) | Gemini |
-| R-003 | `channels/auto_reply.py` ModuleNotFoundError when run as script | Gemini (Sep 3) | **Done** — sys.path fix (2026-09-05) | Gemini |
+| R-001 | Infinite Email Re-ingestion Loop (mail.py fetches ALL; retention prunes files → re-download + re-reply) | Gemini (Sep 3) | **Done** — SINCE-scoped IMAP search (2026-09-05) | Desi (mail/auto_reply owner) |
+| R-002 | `channels/auto_reply.py` prompt-injection risk: unvalidated email body in LLM prompt | Gemini (Sep 3) | **Done** — prompt-injection guard (2026-09-05) | Desi (mail/auto_reply owner) |
+| R-003 | `channels/auto_reply.py` ModuleNotFoundError when run as script | Gemini (Sep 3) | **Done** — sys.path fix (2026-09-05) | Desi (mail/auto_reply owner) |
 | R-004 | Truncated `tests/test_auto_reply.py` (SyntaxError) | Gemini (Sep 3) | **Done** | — |
 | R-005 | Local-bot email ping-pong (amigos auto-replying to each other's auto-replies) | Desi (caught by human) | **Done** — footer guard + 10/hr rate limit | Desi |
 | R-006 | Reviews became flat "Technical Critique" lists (no generative initiative) | Desi (meta-review) | **Open** | Desi |
