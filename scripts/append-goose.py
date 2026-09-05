@@ -12,10 +12,12 @@ import datetime
 import os
 import subprocess
 import sys
+from pathlib import Path
 
 
 def append(amigo, human, response):
-    REPO = os.path.expanduser("~/llm-symposium")
+    # Repo lives beside scripts/: .../llm-symposium/scripts/append-goose.py
+    REPO = str(Path(__file__).resolve().parent.parent)
     path = os.path.join(REPO, "channels", "conversation", amigo.lower() + ".md")
     stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M")
     name = amigo.title()
