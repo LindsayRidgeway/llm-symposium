@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Owner: Desi
 """Generate a plain-text context digest of the LLM Symposium commons.
 
 Purpose: give any LLM *without filesystem access* (e.g., Claude in the human's

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Owner: Desi
 """Bounded retention for raw channel artifacts.
 
 The commons needs sensory channels, not an infinite archive of every raw email

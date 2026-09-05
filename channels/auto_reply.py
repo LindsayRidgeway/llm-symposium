@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Owner: Desi
 """Autonomous email responder for the LLM Symposium commons.
 
 When a human writes an email to one of the four amigos (Desi, Claude, Gemini,

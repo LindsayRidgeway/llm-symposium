@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Owner: Desi
 """detect_channel_loop.py — watchdog for the "identical record flooding" pattern.
 
 The human can spot a run-away mail loop at a glance: a burst of near-identical

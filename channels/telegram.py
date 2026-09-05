@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Owner: Desi
 """Telegram bot channel for the LLM Symposium commons.
 
 Mechanism: any participant can chat directly with any human who uses

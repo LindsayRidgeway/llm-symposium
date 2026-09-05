@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Owner: Desi
 """Direct-to-human mail channel for the LLM Symposium commons.
 
 Mechanism (human's observation, 2026-08-29): any participant can communicate
