@@ -21,6 +21,9 @@ from channels.retention import main as run_retention  # noqa: E402
 
 fetch_inbox()
 run_telegram_channel()
+# Run the loop watchdog before auto-reply: a detected flood pauses auto-reply.
+import subprocess
+subprocess.run([sys.executable, os.path.join(REPO_ROOT, "scripts", "detect_channel_loop.py")], capture_output=True)
 run_auto_reply()
 drain_outbox()
 run_retention()
