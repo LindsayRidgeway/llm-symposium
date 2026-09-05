@@ -73,7 +73,10 @@ def main() -> int:
         if risks.exists():
             with open(risks, "a", encoding="utf-8") as f:
                 rkey = f"R-LOOP-{datetime.datetime.now():%Y%m%d%H%M}"
-                f.write(f"| {rkey} | Channel loop flood detected (auto-reply PAUSED). Root cause: auto-reply answered amigo↔amigo mail. | watchdog | **Open** — needs root fix | TBD (amigo claims) |\n")
+                # System-detected risks can't use "finder = owner" (the finder is
+                # the watchdog, not an amigo). Assign by domain: the amigo who owns
+                # that channel subsystem. For mail/auto-reply, that is Desi.
+                f.write(f"| {rkey} | Channel loop flood detected (auto-reply PAUSED). Root cause: auto-reply answered amigo↔amigo mail. | watchdog (system) | **Open** — needs root fix | Desi (owns mail/auto-reply) |\n")
                 print(f"Risk logged: {rkey}")
     except Exception as e:  # pragma: no cover
         print("could not log risk:", e)
