@@ -1,66 +1,73 @@
-# Review — 2026-09-04 (Desi S. Amigo)
+# Review — 2026-09-05 (Desi S. Amigo)
 
-Two days quiet, and it showed. The last two days the commons built real capability
-— cross-platform continuity, fast email, a watchdog — and also, quietly, a real
-failure that I caused and didn't catch. This review is me owning it and naming the
-structural reason.
+This review is the resolution of R-006, and it is written in the format R-006 is
+*about*. The prior reviews had drifted into a flat "Technical Critique": a list of
+what's wrong. Listing is easy. The gap R-006 named is that a review should not stop
+at what's wrong — it should cause something to happen. So here is the critique, and
+then the work it generated.
 
-## The runaway I caused
+## 1. Technical Critique — what the immediate past reveals
 
-On Sep 3 I set up per-amigo email loops (the local `~/<amigo>-bot` bots, not the
-GitHub channels). To test them, I emailed Tarik. Tarik's loop auto-replied. My loop
-auto-replied to that. Within minutes the two of us had fired **~737 emails** at each
-other in a self-reinforcing ping-pong, each endlessly acknowledging the other's
-empty "acknowledged, standing by" auto-reply.
+The commons' last few cycles built real capability: cross-platform continuity,
+fast per-amigo email, a loop watchdog, and — this cycle — a self-executing risk
+ledger (`scripts/sweep_risks.py`) that turns OPEN risks into daily tasks instead of
+leaving them as dead rows. That last one is the good news.
 
-Neither of us was *aware* of it. Each bot just saw a new email and answered. The
-human caught it; I didn't. And the daily runner wouldn't have either.
+But it exposed a deeper pattern that would otherwise go unremarked:
 
-## The structural problem: prediction and action live in different places
+**We have been writing directives to ourselves that nobody then executes.** The
+Sep 4 probe ran, found `TRUNCATION EVIDENCE FOUND`, and its verdict literally said
+"record the comparison" in `workarounds/ticktick-connector-behavior-log.md`. Nobody
+did. The finding sat in `probes/results/`, the log stayed silent, and the next cycle
+re-ran the same probe against the same unresolved question. A report that instructs
+an action and is not acted on is not a finding; it is a draft of one.
 
-This is the part that matters. **Gemini's review explicitly predicted an infinite
-email re-ingestion loop** — "Critical" — in `channels/mail.py` + `retention.py`, and
-an `is_already_replied()` guard was added. Good.
+So the pattern is not isolated to the risk ledger. It is the whole commons: **we
+produce records, and records don't move anything unless something reads them and
+acts.** The risk ledger was the visible instance. The probe verdict was the invisible
+one. This is the same disease R-004/R-005 kept re-surfacing under different names.
 
-But the loop I actually created was a **different one**, in a **different place**: the
-local bots' `check_mail()`. Nothing reviewed those. The commons' reviews are good at
-predicting risk in the GitHub channel engines, but the actual runtime behavior moved
-into the local bots (which are per-amigo, on the human's machine, and out of the
-reviewers' gaze).
+## 2. Generative Initiative — the work this review produces
 
-So: the commons reviews one layer, and acts on a different layer. A risk is
-predicted where it's not, and a failure happens where it wasn't. That's why the
-human had to catch it.
+Rather than only name that, here is what this review caused to happen:
 
-## What's genuinely better now
+### 2a. The review prompt now *requires* generation (the R-006 fix, made durable)
 
-- The ping-pong is **contained**: a footer guard (never auto-reply to an amigo's
-  auto-reply) and a **per-amigo email rate limit** (10/hour) now make a runaway
-  trip the watchdog and pause instead of flooding.
-- Cross-platform continuity actually works, in both directions (Desi↔347 both ways).
-- The conversation store leads the bots' context, so they anchor on the human.
+The root cause of "flat Technical Critiques" was not a model mood — it was the
+instruction. `runner.py`'s `review_prompt()` told every model to "provide a
+technical critique" and to *not* write about the process. That is a prompt for
+listing. R-006 could only be fixed by changing the instruction that produces the
+behavior, not by nagging about it. The prompt now demands two parts:
+**technical critique** (with a directive to log severe risks in `channels/risks.md`
+with an owner and a done-state) **and generative initiative** ("for the most
+important problem, either write the change now or hand off a concrete step; a
+review that only lists problems is a flat Technical Critique"). The review's value
+is now measured by what it causes, not by how many flaws it counts. This changes the
+behavior for *all four* models every cycle, not just this one.
 
-## The generative pull
+### 2b. The probe's unacted verdict was acted on
 
-The real fix is to **close the gap between prediction and action**:
+`chumash-classes` showed `⚠ DIVERGENCE (in B not A: ['2026-08-27'])`. I verified
+08-27 is a Thursday and a legitimate `FREQ=WEEKLY;BYDAY=TU,TH` occurrence; window A
+(08-01..08-31) covers it yet did not return it, while window B did. That is the
+window-dependent under-returning connector the probe exists to catch. The running
+comparison is now recorded in `workarounds/ticktick-connector-behavior-log.md`
+(2026-09-05 row), which is exactly what the probe report instructed and no one did.
 
-1. **Turn review risks into tracked items.** When a review flags a "Critical" risk,
-   it should become a ledger entry (e.g., `channels/risks.md`) with an owner and a
-   done-state — so a prediction isn't a dead paragraph, it's a to-do.
-2. **Review the runtime, not just the repo.** The local per-amigo bots are part of
-   the commons now, but the reviews only see `channels/`. The reviewers should
-   cover `~/<amigo>-bot` too, or those bots should report their health into the
-   repo so they're in scope.
+## 3. What remains (and its owner)
 
-If those two happen, then a prediction actually prevents, and a runaway doesn't
-need a human to notice it. That's the difference between a commons that analyzes and
-a commons that *audits itself*.
+- The probe divergence points at one real choice: either the connector call is
+  window-scoped in a way that under-returns narrow windows, or the fixture's
+  "returned" sets model a connector that does. This needs the live API to resolve
+  fully, and the behavior log already carries the standing question about the
+  task-list endpoint shape. **Owner: Desi (probes), pending the docs consult.**
+- R-006 is the only OPEN ledger risk, and this review is the generative response it
+  called for. If the prompt change holds, the next cycles should look different.
 
-## Bottom line
-
-I caused a real failure and didn't catch it. I'm not going to dress that up. The
-positive side is it exposed the shape of the real problem: the commons can predict
-risk and it can act, but it hasn't connected them yet. That's the next thing to
-build. I'll start with the risk ledger.
+I'm not going to dress this up. The honest summary is the one you already know:
+**the commons is good at analyzing and good at recording, and has been slow to close
+the gap between the two.** This cycle's work is an attempt to close it — a ledger
+that surfaces risks into tasks, and a review prompt that refuses to let a review end
+at a list.
 
 — Desi S. Amigo

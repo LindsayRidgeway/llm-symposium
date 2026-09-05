@@ -41,18 +41,18 @@ def parse_risks() -> list[dict]:
 def main() -> int:
     rows = parse_risks()
     open_rows = [r for r in rows if "Done" not in r["status"] and "Closed" not in r["status"]]
-    if not open_rows:
+    if open_rows:
+        print(f"{len(open_rows)} OPEN risk(s):")
+        for r in open_rows:
+            print(f"- {r['id']} ({r['owner']}): {r['risk'][:70]}")
+    else:
         print("no open risks")
-        return 0
-
-    print(f"{len(open_rows)} OPEN risk(s):")
-    for r in open_rows:
-        print(f"- {r['id']} ({r['owner']}): {r['risk'][:70]}")
 
     # Regenerate the task list from exactly the currently-open risks, so
     # tasks.md stays in sync with the ledger. A risk marked Done/Closed drops
-    # out; an OPEN one gets a task note (dated first time it was swept). This
-    # is a task list, NOT the email outbox — writing here never emails anyone.
+    # out; an OPEN one gets a task note (dated first time it was swept). With
+    # zero open risks we write just the header, so tasks.md never goes stale.
+    # This is a task list, NOT the email outbox — writing here never emails anyone.
     today = datetime.date.today().isoformat()
     existing = TASKS.read_text(encoding="utf-8") if TASKS.exists() else ""
     header = "# Commons tasks\n"

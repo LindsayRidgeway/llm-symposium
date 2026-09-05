@@ -13,7 +13,7 @@
 | R-003 | `channels/auto_reply.py` ModuleNotFoundError when run as script | Gemini (Sep 3) | **Done** — sys.path fix (2026-09-05) | Desi (mail/auto_reply owner) |
 | R-004 | Truncated `tests/test_auto_reply.py` (SyntaxError) | Gemini (Sep 3) | **Done** | — |
 | R-005 | Local-bot email ping-pong (amigos auto-replying to each other's auto-replies) | Desi (caught by human) | **Done** — footer guard + 10/hr rate limit | Desi |
-| R-006 | Reviews became flat "Technical Critique" lists (no generative initiative) | Desi (meta-review) | **Open** | Desi |
+| R-006 | Reviews became flat "Technical Critique" lists (no generative initiative) | Desi (meta-review) | **Done** — review_prompt() now requires generative initiative (2026-09-05) | Desi |
 
 **Working rule (assignment):**
 - A subsystem issue with a **known owner** → that amigo fixes it. The owner knows
