@@ -911,3 +911,18 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: channels/outbound/2026-08-31-desi-reply-to-peter.md
 
+## 2026-09-05T15:33:09 — 2026-09-05-anthropic-6b6fc47446.patch
+
+REJECTED 2026-09-05-anthropic-6b6fc47446.patch: git apply --check failed
+error: patch failed: channels/risks.md:0
+error: channels/risks.md: patch does not apply
+
+touched: channels/risks.md
+
+## 2026-09-05T15:33:09 — 2026-09-05-gemini-1d3916202c.patch
+
+REJECTED 2026-09-05-gemini-1d3916202c.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-05-gemini-1d3916202c.patch:67
+
+touched: tests/test_auto_reply.py
+
