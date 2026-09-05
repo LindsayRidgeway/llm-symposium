@@ -267,7 +267,10 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
     with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, timeout=60) as conn:
         conn.login(user, app_password)
         conn.select("INBOX")
-        status, data = conn.search(None, "ALL")
+        # R-001: scope the search to the last ~14 days so retention-pruned emails
+        # aren't silently re-downloaded + re-replied (the re-ingestion loop).
+        since = (datetime.date.today() - datetime.timedelta(days=14)).strftime("%d-%b-%Y")
+        status, data = conn.search(None, "SINCE", since)
         if status != "OK":
             print(f"Mail channel: IMAP search failed for {identity}")
             return 0
