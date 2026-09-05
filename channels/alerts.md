@@ -14,3 +14,11 @@
 - 443 records in outbound (subject 'desi-reply-to-Re-loop-test-from-Desi.md')
 - 243 records in sent (subject 'desi-reply-to-Re-loop-test-from-Desi.md')
 - 300 records in sent (subject 'tarik-reply-to-Re-loop-test-from-Desi.md')
+
+## 2026-09-05T08:34:53.265695 — channel loop detected (auto-reply PAUSED)
+- 898 records in inbound (subject 'tarik-Re-loop-test-from-Desi.md')
+- 940 records in inbound (subject 'desi-Re-loop-test-from-Desi.md')
+- 396 records in outbound (subject 'tarik-reply-to-Re-loop-test-from-Desi.md')
+- 443 records in outbound (subject 'desi-reply-to-Re-loop-test-from-Desi.md')
+- 243 records in sent (subject 'desi-reply-to-Re-loop-test-from-Desi.md')
+- 300 records in sent (subject 'tarik-reply-to-Re-loop-test-from-Desi.md')
