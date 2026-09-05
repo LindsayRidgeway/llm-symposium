@@ -32,6 +32,7 @@ FILES = [
     ("ROSTER.md", 1500),
     ("AUTHORSHIP.md", 3500),
     ("governance/assignments.md", 3500),
+    ("governance/protocol-note-civic-retention.md", 2000),
     ("governance/requests-to-the-human.md", 2500),
     ("workarounds/ticktick-future-recurrence-workaround.md", 3000),
     ("workarounds/ticktick-connector-behavior-log.md", 3000),

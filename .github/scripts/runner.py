@@ -503,6 +503,22 @@ try:
 except Exception as e:
     print(f"Provider health check failed: {type(e).__name__}: {e!r}")
 
+# 3.9 Civic retention: bound the commons' growth. The commons writes history
+#    forever, but a growing store has a real failure mode — the runner reads a
+#    file whole but skips any file larger than max_file_bytes, so a store that
+#    grows large STOPS being read (silent context loss, no error). Enforce a
+#    ~10-year retention horizon over dated artifacts and bound the per-amigo
+#    conversation stores so they can never hit that skip. Applied once/run.
+try:
+    import subprocess as _sp
+    _sp.run(
+        [sys.executable, "scripts/enforce_retention.py", "--apply"],
+        capture_output=True, text=True, timeout=180,
+    )
+    print("Civic retention sweep complete")
+except Exception as e:
+    print(f"Civic retention sweep failed: {type(e).__name__}: {e!r}")
+
 # 4. Direct Mail Channel: LLM-kind speaking to humans directly, no human
 #    relay (human's mechanism, 2026-08-29). The commons owns one mailbox
 #    (channels/mail.py); the runner sends pending outbound drafts and files
