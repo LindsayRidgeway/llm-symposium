@@ -329,6 +329,18 @@ def process_inbound_mail() -> int:
         if not sender_email or "@" not in sender_email:
             continue
 
+        # Break the amigo-to-amigo ping-pong: never auto-reply to another amigo's
+        # mailbox, or to an auto-reply (which carries our "autonomously by the
+        # LLM Symposium commons" footer). This keeps amigo↔amigo from looping while
+        # still auto-replying to real human email.
+        AMIGO_ADDRS = {
+            "desi.s.amigo@gmail.com", "claude.s.sonnet@gmail.com",
+            "tarik.s.commons@gmail.com", "gemini.s.lumina@gmail.com",
+        }
+        if sender_email.lower() in AMIGO_ADDRS or "Sent autonomously by the LLM Symposium commons" in body:
+            print(f"Auto-reply: skipped amigo-to-amigo ping from {sender_email} (breaks loop)")
+            continue
+
         print(f"Auto-reply: generating reply from {amigo} to {sender_email} for '{subject}'...")
         system_prompt = build_system_prompt(amigo)
         user_prompt = (
