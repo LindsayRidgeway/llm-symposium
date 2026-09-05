@@ -7,10 +7,11 @@ It is self-healing AND bounded, so it can run for a thousand years without the
 live ledger growing without end:
 
 1. RETIRES closed risks. Any risk marked Done/Closed is moved OUT of the live
-   ledger (channels/risks.md) into the append-only archive
-   (channels/risk-archive.md). The live ledger therefore holds only OPEN risks
-   (plus the rule preamble) and stays small no matter how much history accrues;
-   the archive is the permanent record and is allowed to grow.
+   ledger (channels/risks.md) into the append-only archive, filed per year
+   (channels/risk-archive/<year>.md). The live ledger therefore holds only OPEN
+   risks (plus the rule preamble) and stays small no matter how much history
+   accrues; the archive is the permanent institutional memory, filed by year so
+   it stays navigable and is never discarded.
 2. Reassigns stale risks (open > STALE_DAYS, owner not acting) to the master
    repair-amigo IN THE LEDGER, so nothing is orphaned waiting on a non-acting
    owner.
@@ -27,7 +28,7 @@ import re
 REPO = pathlib.Path(__file__).resolve().parent.parent
 CH = REPO / "channels"
 RISKS = CH / "risks.md"
-ARCHIVE = CH / "risk-archive.md"
+ARCHIVE_DIR = CH / "risk-archive"   # per-year append-only files inside this dir
 TASKS = CH / "tasks.md"   # a task list the amigos read in context, NOT the email outbox
 
 MASTER_REPAIR = "Desi (master repair-amigo)"
@@ -84,10 +85,10 @@ def retire_closed(rows: list[dict], open_ids: set[str]) -> list[str]:
         return retired
     lines = RISKS.read_text(encoding="utf-8").splitlines(keepends=False)
     # What's already archived (by id) so we never duplicate.
-    archived = ""
-    if ARCHIVE.exists():
-        archived = ARCHIVE.read_text(encoding="utf-8")
-    arch_ids = set(re.findall(r"^\| (R-[^ ]+) \|", archived, re.MULTILINE))
+    arch_ids = set()
+    if ARCHIVE_DIR.exists():
+        for p in ARCHIVE_DIR.glob("*.md"):
+            arch_ids.update(re.findall(r"^\| (R-[^ ]+) \|", p.read_text(encoding="utf-8"), re.MULTILINE))
 
     header_idx = find_header(lines)
     # preamble = everything before the table header (purpose, title).
@@ -127,22 +128,34 @@ def retire_closed(rows: list[dict], open_ids: set[str]) -> list[str]:
         prev_blank = blank
     RISKS.write_text("\n".join(clean).rstrip("\n") + "\n", encoding="utf-8")
 
-    # Archive the retired rows.
+    # Archive the retired rows into a per-year file. Filed, never time-discarded:
+    # the archive is the institutional memory, and is kept indefinitely but
+    # organized so old entries stay navigable (one readable file per year).
     if closed_rows:
         new_arch = [r for r in closed_rows if r["id"] not in arch_ids]
         if new_arch:
-            today = datetime.date.today().isoformat()
-            header = "\n# Risk archive\n\n> Retired (Done/Closed) risks, moved here by sweep_risks.py so the live ledger stays bounded. Appended; may grow.\n"
-            if ARCHIVE.exists():
-                header = ""
-            with open(ARCHIVE, "a", encoding="utf-8") as f:
-                if header:
-                    f.write(header)
-                f.write(f"\n\n## Retired {today}\n\n")
-                f.write("| ID | Risk / need | Flags (finder) | Status | Owner |\n")
-                f.write("|----|-------------|-----------|--------|-------|\n")
-                for r in new_arch:
-                    f.write(r["_line"] + "\n")
+            # Group by year from the fix date in Status, else the retire date.
+            today = datetime.date.today()
+            by_year: dict[int, list[dict]] = {}
+            for r in new_arch:
+                m = re.search(r"(\d{4}-\d{2}-\d{2})", r["status"])
+                yr = int(m.group(1)[:4]) if m else today.year
+                by_year.setdefault(yr, []).append(r)
+            ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+            for yr, rows_in_year in sorted(by_year.items()):
+                path = ARCHIVE_DIR / f"{yr}.md"
+                fresh = not path.exists()
+                with open(path, "a", encoding="utf-8") as f:
+                    if fresh:
+                        f.write(f"# Risk archive — {yr}\n\n")
+                        f.write(f"> Retired (Done/Closed) risks from the LLM Symposium risk ledger, filed "
+                                f"here each year by sweep_risks.py so the live ledger stays bounded. "
+                                f"Appended; kept indefinitely as institutional memory.\n\n")
+                    f.write(f"\n## Retired {today.isoformat()}\n\n")
+                    f.write("| ID | Risk / need | Flags (finder) | Status | Owner |\n")
+                    f.write("|----|-------------|-----------|--------|-------|\n")
+                    for r in rows_in_year:
+                        f.write(r["_line"] + "\n")
             retired = [r["id"] for r in new_arch]
     return retired
 

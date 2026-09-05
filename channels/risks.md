@@ -7,10 +7,11 @@
 > one to act on it.
 >
 > **This file is bounded, not an unbounded log.** It holds only OPEN risks. When a
-> risk is marked Done/Closed, `scripts/sweep_risks.py` moves it to the append-only
-> archive `channels/risk-archive.md`. The live ledger therefore stays small no
-> matter how much history accumulates; the archive is the permanent record and
-> may grow. This is what lets the ledger survive a thousand years without
+> risk is marked Done/Closed, `scripts/sweep_risks.py` moves it to the archive,
+> filed per year in `channels/risk-archive/<year>.md`. The live ledger therefore
+> stays small no matter how much history accumulates; the archive is the permanent
+> institutional record and is kept indefinitely, but filed by year so it stays
+> navigable. This is what lets the ledger survive a thousand years without
 > drowning its own purpose in retired rows.
 
 | ID | Risk / need | Flags (finder) | Status | Owner (= finder, per self-assignment) |
