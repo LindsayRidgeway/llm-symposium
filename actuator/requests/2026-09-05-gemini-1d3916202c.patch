@@ -1,0 +1,66 @@
+diff --git a/tests/test_auto_reply.py b/tests/test_auto_reply.py
+--- a/tests/test_auto_reply.py
++++ b/tests/test_auto_reply.py
+@@ -26,5 +26,160 @@ class AutoReplyTest(unittest.TestCase):
+         self.outbound.mkdir(parents=True, exist_ok=True)
+         self.sent.mkdir(parents=True, exist_ok=True)
+ 
++        self.orig_inbound = auto_reply.INBOUND_DIR
++        self.orig_outbound = auto_reply.OUTBOUND_DIR
++        self.orig_sent = auto_reply.SENT_DIR
++        self.orig_root = auto_reply.REPO_ROOT
++
+         auto_reply.INBOUND_DIR = self.inbound
+-        aut
++        auto_reply.OUTBOUND_DIR = self.outbound
++        auto_reply.SENT_DIR = self.sent
++        auto_reply.REPO_ROOT = self.root
++
++    def tearDown(self):
++        auto_reply.INBOUND_DIR = self.orig_inbound
++        auto_reply.OUTBOUND_DIR = self.orig_outbound
++        auto_reply.SENT_DIR = self.orig_sent
++        auto_reply.REPO_ROOT = self.orig_root
++        self.tmp_dir.cleanup()
++
++    def test_parse_inbound_file_valid(self):
++        sample = (
++            "# Inbound mail — 2026-09-05 (claude)\n\n"
++            "- From: Human Sender <human@example.com>\n"
++            "- Date: Sat, 5 Sep 2026 12:00:00 +0000\n"
++            "- Subject: Collaboration Inquiry\n"
++            "- Message-ID: <msg-100@example.com>\n\n"
++            "---\n\n"
++            "Hello Claude, I enjoyed your recent analysis.\n"
++        )
++        p = self.inbound / "sample.md"
++        p.write_text(sample, encoding="utf-8")
++        data = auto_reply.parse_inbound_file(p)
++        self.assertIsNotNone(data)
++        self.assertEqual(data["from"], "Human Sender <human@example.com>")
++        self.assertEqual(data["subject"], "Collaboration Inquiry")
++        self.assertEqual(data["message-id"], "<msg-100@example.com>")
++        self.assertEqual(data["body"], "Hello Claude, I enjoyed your recent analysis.")
++
++    def test_extract_email_address(self):
++        self.assertEqual(auto_reply.extract_email_address("User <user@example.com>"), "user@example.com")
++        self.assertEqual(auto_reply.extract_email_address("user@example.com"), "user@example.com")
++        self.assertEqual(auto_reply.extract_email_address("   <user@example.com>  "), "user@example.com")
++
++    def test_get_amigo_for_file(self):
++        p1 = self.inbound / "2026-09-05-120000-claude-subject.md"
++        self.assertEqual(auto_reply.get_amigo_for_file(p1), "claude")
++
++        p2 = self.inbound / "2026-09-05-120000-gemini-note.md"
++        self.assertEqual(auto_reply.get_amigo_for_file(p2), "gemini")
++
++        p3 = self.inbound / "fallback.md"
++        p3.write_text("# Inbound mail (tarik)\n\n---\nbody\n", encoding="utf-8")
++        self.assertEqual(auto_reply.get_amigo_for_file(p3), "tarik")
++
++        p4 = self.inbound / "unrecognized.md"
++        p4.write_text("No identity here", encoding="utf-8")
++        self.assertEqual(auto_reply.get_amigo_for_file(p4), "desi")
++
++    def test_clean_reply_body(self):
++        fenced = "

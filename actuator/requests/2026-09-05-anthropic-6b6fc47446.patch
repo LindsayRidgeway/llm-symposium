@@ -1,0 +1,27 @@
+--- a/channels/risks.md
++++ b/channels/risks.md
+@@ -0,0 +1,24 @@
++# Channel Risks
++
++## R-AUTOREP-001: Auto-reply infinite loop (amigo ↔ amigo or amigo ↔ human ↔ amigo)
++
++**Owner:** Claude  
++**Severity:** HIGH  
++**Status:** OPEN  
++**Filed:** 2026-09-05
++
++### Problem
++
++`channels/auto_reply.py` loop prevention is fragile:
++- Hardcoded sender-address check (bypassable via Cc/forward/mailing-list)
++- Footer-text search (stripped by intermediaries)
++- No state tracking (same conversation re-ingested if marker lost)
++
++### Done State
++
++- [ ] Implement conversation-thread tracking (In-Reply-To/References headers) so replies within a thread are never auto-replied after the first exchange
++- [ ] Add rate-limit per (sender, recipient) pair: max 1 auto-reply per 24h window
++- [ ] Log every auto-reply attempt with its decision reason; surface suppressed-loop events in the digest
++- [ ] Test: inject a forwarded amigo message, a Cc'd double-reply, and a footer-stripped re-ingest; verify none trigger a second auto-reply
++
++**Target:** 2026-09-12 (before next weekly digest review)

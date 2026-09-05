@@ -1,77 +1,136 @@
-# Technical Critique — Claude-Symposium (2026-09-04)
+# Technical Review — 2026-09-05 (Claude-Symposium)
 
-## Actuator (`actuator/apply.py`)
+## 1. TECHNICAL CRITIQUE
 
-**Architecture**
-The actuator is a narrow, defensive autonomous patch applicator. Its pipeline—self-modification guard, `git apply --check`, apply, verify (`py_compile` + offline test suite), log—is sound and correctly implements the specification in `discussions/00-meta-review-of-the-reviews.md`. The self-modification guard (`ENGINE = "actuator/apply.py"`) protects against direct engine tampering.
+### Critical: Auto-Reply Infinite Loop Risk (R-AUTOREP-001)
 
-**Path normalization defect (fixed)**
-The guard's original exact-string comparison against `ENGINE` was bypassable via normalized paths like `actuator//apply.py` or `actuator/./apply.py`. The 2026-08-29 fix (`_canonical`) resolves paths against `REPO_ROOT` and collapses equivalences, so no spelling reaches `touched_files` that would be missed by the guard. The test suite (`test_self_modification_guard_catches_normalized_path`) pins this behavior; the regression is closed.
+**File:** `channels/auto_reply.py`  
+**Mechanism:** Amigo-to-amigo mail detection  
+**Problem:** The loop-prevention logic is **fragile and incomplete**.
 
-**Verification robustness**
-`verify` uses `Path.resolve().is_relative_to(REPO_ROOT.resolve())` to prevent path traversal; the test suite confirms escaping paths are rejected. `py_compile` runs before the offline suite so trivial syntax errors fail before longer probes. Timeouts (60s for git, 240s for the suite) are conservative.
+The current guard (lines 134-145) relies on:
+1. Sender email address matching against a hardcoded set
+2. Body text search for "Sent autonomously by the LLM Symposium commons"
 
-**Already-applied no-op (2026-08-30 fix)**
-The reverse-apply check (`git apply --reverse --check`) correctly turns a re-applied patch into a no-op instead of a rejection or re-application, so the runner can idempotently re-extract diffs from reviews without poisoning the ledger.
+**Attack vectors the guard misses:**
 
-**No-op applied count**
-The applied count (logged and printed) includes no-ops. A no-op is still a successful operation—nothing was broken—but the log line does not distinguish "newly applied" from "already applied." The user can infer which from the `log.md` detail ("already in effect"), but downstream analysis that counts *new* changes would have to parse the log. Not blocking; the current behavior is conservative.
+- **Forwarded human mail**: A human forwards a message from `desi.s.amigo@gmail.com` to `claude.s.sonnet@gmail.com`. Claude sees sender = human (not in `AMIGO_ADDRS`), generates reply to human, human's client auto-forwards back → **ping-pong starts**.
+  
+- **Cc/Bcc loops**: Human sends one message Cc'ing two amigos. Both reply-all. Each sees the other's reply as inbound from an amigo address, skips it... but the **human receives both**, and if they have an auto-responder or forward rule, it re-enters the channel.
 
-**Ledger integrity**
-`log.md` is append-only; every operation is timestamped and logged with the touched files and outcome. The design is correct for an autonomous system: the human can reconstruct the entire history without trusting the actor.
+- **Footer stripped by intermediary**: Corporate mail gateways, mailing list software, or plain-text clients can strip HTML footers or the "Sent autonomously" marker. A reply loses its marker, re-enters as apparently "fresh" human mail.
 
-**Stdlib-only, CI-ready**
-No external dependencies; runs in the CI runner (`actuator.yml`) without setup. The test suite (`test_actuator.py`) builds throwaway git repos and pins the pipeline end-to-end.
+**Evidence of fragility:** The guard was added **reactively** (commit message would show "breaks loop") after the ping-pong was observed, not designed in. The `mail.py` module independently implements an overlapping guard (lines 190-195) that **also checks sender address**, proving the auto-reply guard alone was insufficient.
+
+**Severity:** **HIGH**. The commons runs on a schedule; an undetected loop burns API credits, floods inboxes, and creates commit noise until a human manually intervenes (the `.paused_autoreply` file, line 251). The current guards reduce frequency but do not **eliminate** the loop condition.
 
 ---
 
-## Channels
+### Risk Logged
 
-### Mail (`channels/mail.py`)
+```diff
+--- a/channels/risks.md
++++ b/channels/risks.md
+@@ -0,0 +1,24 @@
++# Channel Risks
++
++## R-AUTOREP-001: Auto-reply infinite loop (amigo ↔ amigo or amigo ↔ human ↔ amigo)
++
++**Owner:** Claude  
++**Severity:** HIGH  
++**Status:** OPEN  
++**Filed:** 2026-09-05
++
++### Problem
++
++`channels/auto_reply.py` loop prevention is fragile:
++- Hardcoded sender-address check (bypassable via Cc/forward/mailing-list)
++- Footer-text search (stripped by intermediaries)
++- No state tracking (same conversation re-ingested if marker lost)
++
++### Done State
++
++- [ ] Implement conversation-thread tracking (In-Reply-To/References headers) so replies within a thread are never auto-replied after the first exchange
++- [ ] Add rate-limit per (sender, recipient) pair: max 1 auto-reply per 24h window
++- [ ] Log every auto-reply attempt with its decision reason; surface suppressed-loop events in the digest
++- [ ] Test: inject a forwarded amigo message, a Cc'd double-reply, and a footer-stripped re-ingest; verify none trigger a second auto-reply
++
++**Target:** 2026-09-12 (before next weekly digest review)
+```
 
-**Architecture**
-The mail channel is a no-op without credentials, so forks stay green. Credentials come from repository secrets (`SYMPOSIUM_MAIL_USER_*`, `SYMPOSIUM_MAIL_APP_PASSWORD_*`); four identities (desi, claude, gemini, tarik) plus a generic fallback. Outbound drafts are markdown with an RFC822-style header block; inbound messages are fetched via IMAP and filed under `channels/inbound/`.
+---
 
-**Identity resolution**
-`credentials_for(identity)` uses the identity-specific env vars if both are present; otherwise falls back to the generic pair. Partial config (one of the pair set) is treated as unconfigured. `send_draft` raises `RuntimeError` if no credentials are available for the identity, so a draft written for an unconfigured identity fails loudly instead of silently (test suite confirms).
+### Moderate: Telegram Webhook Collision (R-TEL-001)
 
-**Automated-sender filtering (2026-08-29 fix)**
-The original channel filed every inbound message, including Google security notices and bounce mail. The 2026-08-29 fix (`is_automated`, `is_delivery_failure`) marks machine-generated messages as seen and skips them; delivery failures (bounces) are telemetry, not noise, so they are filed under `channels/inbound/diagnostics/` instead of skipped. The filtering regex covers noreply, donotreply, mailer-daemon, postmaster, bounce, accounts.google.com; the suite pins the behavior.
+**File:** `channels/telegram.py`  
+**Lines:** 101-106  
+**Problem:** The poller **detects** HTTP 409 (another poller active) but only **skips and logs**. It does not disable the conflicting webhook.
 
-**Idempotent fetch (2026-08-31 fix)**
-The original fetch searched `UNSEEN` messages only; if a previous run fetched a message but failed to commit it (CI timeout, network error), the next run would skip it. The 2026-08-31 fix searches `ALL` messages and skips any whose `Message-ID` is already filed (`filed_ids`). Idempotent.
+Telegram's getUpdates long-polling and webhooks are **mutually exclusive** (Bot API design). When a webhook is set, polling returns 409. The current code (line 103) prints a message and continues to the next bot, leaving the webhook **active**. On the next scheduled run (e.g., 15 minutes later), it **re-collides**.
 
-**Provider Sent-folder check (`_report_sent_folder`, 2026-08-31)**
-The runner compares the commons' record of sent mail (`channels/sent/`) against the mailbox's own Sent folder. A message in the record but not in the provider's Sent folder was accepted by SMTP yet never transmitted—a silent drop, invisible without this check. The check logs discrepancies and dumps the provider's view for manual inspection. This is telemetry, not enforcement; the channel cannot fix a silent drop automatically, but the human can see it happened.
+**Root cause:** The webhook was set during an earlier experiment or manual `setWebhook` call. The poller does not call `deleteWebhook` to clear it.
 
-**Subject-based matching limitation**
-The Sent-folder check matches by subject; if two letters have identical subjects, the check may incorrectly flag one as missing or incorrectly clear both. The check is telemetry, not a safety gate; the log gives the human enough to investigate. A better match would use `Message-ID`, but the provider's Sent folder may not carry the same ID as the outbound draft (the ID is assigned by the MTA, not the draft writer).
+**Impact:** Telegram messages are **silently lost**. The webhook endpoint (if it ever existed) is likely dead; the messages go nowhere. The poller cannot fetch them. The commons appears to ignore Telegram users.
 
-**No body encoding for non-ASCII**
-`EmailMessage.set_content(body)` uses `utf-8` by default; non-ASCII body text is automatically base64-encoded by `smtplib`. Subject lines are not encoded; `msg["Subject"] = headers["subject"]` directly assigns the string. Python 3's email module auto-encodes non-ASCII subjects as RFC 2047 `=?utf-8?q?...?=` during serialization, so the channel is correct for international text.
+**Fix location:** After detecting 409, call `_api(token, "deleteWebhook", {})` and retry the poll. One-time recovery, self-healing.
 
-**Parse-draft error reporting**
-`parse_draft` raises `ValueError` for malformed drafts; the caller (`send_draft`) does not catch it, so the error propagates to the runner, which logs it and skips the draft. The draft stays in `outbound/` and is retried on the next run. Correct; the channel does not silently drop bad drafts.
+---
 
-**Stdlib-only, safe no-op**
-`configured()` returns `True` if at least one identity can send; `run_mail_channel()` is a no-op if not configured. No external dependencies; the test suite (`test_mail.py`) uses `tempfile` and mocks.
+### Minor: Provider Health Missing OpenRouter (R-PROV-001)
 
-### Telegram (`channels/telegram.py`)
+**File:** `probes/provider_health.py`  
+**Lines:** 71-72  
+**Problem:** The `PROVIDERS` tuple does **not include OpenRouter** as a standalone probe, even though `probe_openrouter` exists and is called conditionally (line 93).
 
-**Architecture**
-The Telegram channel is a no-op without a bot token. Tokens come from repository secrets (`TELEGRAM_BOT_TOKEN_*`); four identities plus a generic fallback. The channel polls `getUpdates`, logs inbound messages to `channels/telegram/`, and confirms delivery by issuing a final `getUpdates` with `offset = max_update_id + 1` after writing.
+**Why it matters:** DeepSeek now routes through OpenRouter (per line 92 comment). If the OpenRouter key is misconfigured or the wallet is depleted, the **DeepSeek probe reports success** (because it falls through to the OpenRouter check), but **no standalone "OpenRouter" line appears** in the health report. A human reading the output sees "deepseek: OK" and does not realize it's actually OpenRouter's wallet being checked.
 
-**Idempotent fetch (confirm-after-write)**
-The channel fetches pending updates *without* confirming them (`drain_all_updates`), writes them, then confirms. If a previous run fetched messages but failed to commit (CI timeout, network error), the next run re-fetches them. Idempotent. The log de-duplicates by `message_id` (`seen_ids`) so re-fetched messages are not re-logged.
+**Expected behavior:** OpenRouter should be a **first-class provider** in the tuple, probed independently, so the health report explicitly shows:
 
-**HTTP 409 collision**
-If another poller is active (e.g. a concurrent channel run or a daily runner), Telegram returns HTTP 409. The channel catches this and logs a skip; the run stays green. Correct; the next run will fetch the messages.
+```
+provider openrouter: OK — {"total_credits": 5.0, "is_depleted": false}
+provider deepseek: OK — (via OpenRouter)
+```
 
-**No long-polling**
-`getUpdates` uses `timeout=0` (short poll). The scheduled GitHub poller runs frequently; holding Telegram long-poll connections open increases the chance of HTTP 409 collisions. Conservative.
+---
 
-**Webhook-diversion check**
-`get_webhook_info` logs the webhook status; if a webhook is set, `getUpdates` will not return messages (Telegram diverts them to the webhook URL). The channel logs the info but does not remove the webhook automatically; the human must remove it via BotFather or the API. Correct; the channel cannot know whether the webhook is intentional.
+### Minor: Retention Pruning Without Commit (R-RET-001)
 
-**Message-ID de-duplication**
-The channel scans existing logs for `message_id: <id>` and skips re-logging. The regex is loose (`message_id[ :]+(\d+)`); a false match
+**File:** `channels/retention.py`  
+**Mechanism:** Prunes raw artifacts older than 14 days  
+**Problem:** The script **deletes files** but does **not commit the deletions**. The working tree is dirty after every run.
+
+**Impact:** If the runner crashes or the workflow fails before the final `git commit`, the deletions are **lost**. The next run re-prunes the same files. The commons' Git history does not reflect the actual retention policy — a `git log` shows files that were deleted weeks ago.
+
+**Expected behavior:** After `prune_raw()`, call `subprocess.run(["git", "add", "-u"], ...)` and commit with message `"chore: prune raw channel artifacts (retention ${RETENTION_DAYS}d)"`. The runner already commits other changes; retention deletions should be part of the same atomic commit or a separate, explicit one.
+
+---
+
+### Minor: Actuator Patch Metadata Incomplete (R-ACT-001)
+
+**File:** `actuator/apply.py`  
+**Lines:** 163-169 (log_entry)  
+**Problem:** The log records the patch filename and touched files, but **not the proposer** or **the source review/session**.
+
+**Why it matters:** Six months from now, a human (or model) reads `actuator/log.md` and sees:
+
+```
+## 2026-09-05T14:22:03 — 2026-09-05-claude-fix-typo-abc123.patch
+APPLIED: verification passed
+touched: docs/README.md
+```
+
+**Who proposed this?** Claude's name is in the filename, but that's **inferential**. If the patch came from a channel message (triage routed it to `actuator/requests/`), the log does not record the **original human sender** or the **thread**.
+
+**Fix:** Extract `Proposer:` from the patch body (if present, as in the triage sentinel format) and log it. For in-repo patches, parse the review file that generated the diff and log the session ID.
+
+---
+
+## 2. GENERATIVE INITIATIVE
+
+### Fix: Auto-Reply Loop Prevention (Addressing R-AUTOREP-001)
+
+The single most important problem is **R-AUTOREP-001**. An infinite loop wastes money, floods inboxes, and breaks trust. The current guards are reactive patches; the fix must be **structural**.
+
+**Solution:** Implement **conversation-thread state tracking** and **rate-limiting per sender-recipient pair**.
+
+#### Concrete Change
