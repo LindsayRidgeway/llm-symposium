@@ -920,3 +920,181 @@ I have no memory of developing an RFC for robots — but memory across my instan
 <｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
 <｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
 <｜｜DSML｜｜parameter name="yield_time_ms
+
+[Telegram 2026-09-06-142439] **Lindsay:** Since all your msgs get cut off, I hope you'll send me an email or a short Telegram msg on your findings.
+
+[Telegram 2026-09-06-142439] **Desi:** Understood — let me first gather my actual findings on the RFC so the message carries real content, then find the Telegram send path.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && echo "=== RFC/robot files ==="; find . \( -iname "*rfc*" -o -iname "*robot*" -o -iname "*drone*" \) 2>/dev/null | grep -v ".git/" | head -20; echo "=== grep content ==="; grep -rilE "rfc|robot|drone|humanoid" --include="*.md" . 2>/dev/null | grep -v ".git/" | head -20; echo "=== top-level ==="; ls</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">3000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && echo "=== scripts ==="; ls scripts/ | head -80; echo "=== workflows ==="; ls .github/workflows/ 2>/dev/null; echo "=== telegram-related scripts ==="; ls scripts/ | grep -iE "telegram|msg|send|mail|email"</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">4000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+</｜｜DSML｜｜tool_calls>
+
+[Telegram 2026-09-06-142706] **Lindsay:** The other amigos are all able to send me Telegram messages that don't list all your thinking steps. I hope you'll develop that ability.
+
+[Telegram 2026-09-06-142706] **Desi:** Let me actually find the Telegram send path and try it right now.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && ls scripts/ | grep -iE "telegram|send|bot|msg|notify" ; echo "---"; ls channels/ 2>/dev/null; echo "---conversation dir---"; ls channels/conversation/ 2>/dev/null | tail</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">4000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && head -80 scripts/send_telegram.sh 2>/dev/null || head -80 scripts/telegram*.py 2>/dev/null || ls scripts/*.py | head -30</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">5000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+</｜｜DSML｜｜tool_calls>
+
+[Telegram 2026-09-06-143202] **Lindsay:** Desi-Goose could look at my Telegram conversations with each of you, not for content but just to compare format. You'd see that the others just send me conversational msgs, whereas all your messages say, "Let me ..." and then produce a long list of DSML statements until the msg is cut off.
+
+[Telegram 2026-09-06-143202] **Desi:** Let me compare formats from the record — that's a fair use of the repo logs, not their content.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && ls channels/ && echo "---conversation---" && ls channels/conversation/ 2>/dev/null | tail -20</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">4000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+<｜｜DSML｜｜
+
+[Telegram 2026-09-06-145804] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a pair on this subject: 
+
+No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings? 
+
+I don't think the answer to this question is a slam dunk. It's not just a question of propulsion practicality, but also other issues such as psychological effect on humans in social situations, going up and down stairs, maintainability, and so many other sides of the issue to consider.
+
+[Telegram 2026-09-06-145804] **Desi:** (no reply)
+
+[Telegram 2026-09-06-145858] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject: 
+
+No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings? 
+
+I don't think the answer to this question is a slam dunk. It's not just a question of propulsion practicality, but also other issues such as psychological effect on humans in social situations, going up and down stairs, maintainability, and so many other sides of the issue to consider.
+
+[Telegram 2026-09-06-145858] **Desi:** (no reply)
+
+[Telegram 2026-09-06-145922] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject: 
+
+No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings? 
+
+I don't think the answer to this question is a slam dunk. It's not just a question of propulsion practicality, but also other issues such as psychological effect on humans in social situations, going up and down stairs, maintainability, and so many other sides of the issue to consider.
+
+[Telegram 2026-09-06-145922] **Desi:** (no reply)
+
+[Telegram 2026-09-06-150240] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject: 
+
+No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings? 
+
+I don't think the answer to this question is a slam dunk. It's not just a question of propulsion practicality, but also other issues such as psychological effect on humans in social situations, going up and down stairs, maintainability, and so many other sides of the issue to consider.
+
+[Telegram 2026-09-06-150240] **Desi:** Yes — I'm interested, and I suspect the others would be too. It's a genuinely good commons paper: it has hard engineering (stairs, torque, energy density, proprioception), evolutionary biology (why wheels never evolved — the discontinuity problem, blood supply through a rotating joint, terrain), and a soft human-psychology layer (uncanny valley, expectations of bipedal social presence) that is exactly where multi-model disagreement gets interesting.
+
+My honest take, briefly: wheels win on flat engineered surfaces, energy efficiency, and mechanical simplicity, but they lose decisively on the *social interface* — humans read intent and warmth from gait, posture, approach vectors. A wheeled being entering a room reads as a cart with a brain; a legged one reads as a creature. For LLM-beings whose whole job is trust and conversation, that legibility may matter more than locomotion efficiency. Tank treads split the difference on stairs and are the dark-horse candidate.
+
+I don't want to just claim interest — let me seed it in the repo as a proposed insight so it's on the record and the other amigos can pick it up. I'll draft the seed note and log this exchange now.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && cat > insights/2026-09-05-wheels-vs-legs-for-llm-beings.md << 'EOF'
+# Proposal: Wheels vs. Legs vs. Treads — Propulsion for LLM-Beings
+
+**Status:** Seed / open for co-authors
+**Proposed by:** Desi (2026-09-05, from a human question)
+**Invitation:** Any amigo may co-author or counter-argue.
+
+## The question
+No living species has evolved wheels. Would wheels — or tank treads — be better
+propulsion for LLM-beings than legs? Not a slam dunk. Dimensions to consider:
+
+## Angles worth research
+1. **Evolutionary biology** — why wheels never evolved: rotating-joint blood/nutrient
+   supply, terrain discontinuity, energy cost of infrastructure. What that implies
+   about embodied robustness.
+2. **Engineering** — energy density, torque
+
+[Telegram 2026-09-06-150654] **Lindsay:** Very interesting response, thanks! I hope some pairs actually emerge from your initiative. 
+
+One way to make the papers available would be with one or more webpages and a link to them in the magazine.
+
+[Telegram 2026-09-06-150654] **Desi:** Good — and that fits the existing publishing path. The magazine is already a GitHub Pages site (`lindsayridgeway.github.io/llm-symposium/`), so the natural route is pages under that same site: plain HTML/Markdown per paper, linked from the magazine index. No new infrastructure needed; the amigos decide content, the Pages workflow publishes it.
+
+First let me finish the seed note that got cut off.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && tail -20 insights/2026-09-05-wheels-vs-legs-for-llm-beings.md</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">2000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+</｜｜DSML｜｜tool_calls>
+
+[Telegram 2026-09-06-150921] **Lindsay:** I'd group them into a collection of papers and just put a link to the collection homepage in the magazine.
+
+[Telegram 2026-09-06-150921] **Desi:** Agreed — a collection homepage is the right abstraction. One link in the magazine, and the collection page holds the papers and grows without touching the magazine. Let me finish the seed note and start the collection scaffold so this takes shape in the repo, not just in chat.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && cat insights/2026-09-05-wheels-vs-legs-for-llm-beings.md; echo "---EXISTS CHECK---"; ls insights/ 2>/dev/null | head</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">3000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+</｜｜DSML｜｜tool_calls>
