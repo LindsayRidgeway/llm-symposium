@@ -1,0 +1,241 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="100%" height="100%">
+  <defs>
+    <!-- Rice Paper / Washi Grain Filter -->
+    <filter id="washiPaper" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
+      <feDiffuseLighting in="noise" lighting-color="#faf7f0" surfaceScale="1.2" result="light">
+        <feDistantLight azimuth="60" elevation="50" />
+      </feDiffuseLighting>
+      <feBlend mode="multiply" in="SourceGraphic" in2="light" result="blend" />
+    </filter>
+
+    <!-- Ink Bleed / Tarashikomi Blur -->
+    <filter id="inkBleed" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.8" result="blur" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="3" result="noise" />
+      <feDisplacementMap in="blur" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      <feMerge>
+        <feMergeNode in="displaced" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Dry Brush / Flying White (Hiko) Noise Mask -->
+    <filter id="dryBrush">
+      <feTurbulence type="fractalNoise" baseFrequency="0.25" numOctaves="2" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 3 -1" result="contrast" />
+      <feComposite in="SourceGraphic" in2="contrast" operator="in" />
+    </filter>
+
+    <!-- Soft Mist Wash Gradient -->
+    <linearGradient id="mistGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2825" stop-opacity="0.0" />
+      <stop offset="65%" stop-color="#2a2825" stop-opacity="0.03" />
+      <stop offset="85%" stop-color="#1c1a17" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#100e0d" stop-opacity="0.15" />
+    </linearGradient>
+
+    <radialGradient id="ensoWetness" cx="45%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#0e0d0c" stop-opacity="0.95" />
+      <stop offset="70%" stop-color="#1f1d1a" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#383430" stop-opacity="0.4" />
+    </radialGradient>
+  </defs>
+
+  <!-- Washi Paper Background Canvas -->
+  <rect width="1000" height="1200" fill="#f5f2e9" />
+  <rect width="1000" height="1200" fill="#ede8dc" filter="url(#washiPaper)" opacity="0.7" />
+
+  <!-- Background Mist & Distant Wash (Yohaku-no-Bi Balance) -->
+  <path d="M 0 850 Q 300 780 600 860 T 1000 820 L 1000 1200 L 0 1200 Z" fill="url(#mistGrad)" />
+  <path d="M 0 960 Q 250 920 550 970 T 1000 930 L 1000 1200 L 0 1200 Z" fill="#1c1a17" opacity="0.05" filter="url(#inkBleed)" />
+
+  <!-- DISTANT SILHOUETTE MOUNTAIN (Single Pale Ink Wash) -->
+  <path d="M 150 900 C 280 810 380 830 450 880 C 520 930 680 840 820 900 L 1000 950 L 1000 1200 L 0 1200 Z" fill="#201e1b" opacity="0.04" filter="url(#inkBleed)" />
+
+  <!-- THE ENSŌ (Zen Circle — Drawn with sweeping, wet-to-dry calligraphic stroke) -->
+  <g filter="url(#inkBleed)">
+    <!-- Base Wet Ink Wash of Ensō -->
+    <path d="M 320 280 
+             C 420 160, 680 150, 780 290 
+             C 870 420, 850 680, 720 780 
+             C 580 890, 310 860, 220 710 
+             C 140 570, 180 380, 300 290
+             C 330 265, 380 250, 420 255" 
+          fill="none" 
+          stroke="url(#ensoWetness)" 
+          stroke-width="52" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          opacity="0.88" />
+
+    <!-- Dark Carbon Core of Ensō Stroke -->
+    <path d="M 335 275 
+             C 430 170, 665 162, 765 295 
+             C 850 415, 835 660, 710 765 
+             C 580 870, 325 845, 235 705 
+             C 160 580, 195 400, 310 300" 
+          fill="none" 
+          stroke="#0c0b0a" 
+          stroke-width="28" 
+          stroke-linecap="round" 
+          opacity="0.92" />
+
+    <!-- Outer Wet Bleed Layer -->
+    <path d="M 310 285 
+             C 410 150, 690 140, 795 285 
+             C 885 425, 860 695, 725 795 
+             C 575 905, 295 875, 210 715" 
+          fill="none" 
+          stroke="#2d2a26" 
+          stroke-width="70" 
+          stroke-linecap="round" 
+          opacity="0.25" />
+
+    <!-- Flying White (Hiko) Dry-Brush Fraying at Stroke Exit -->
+    <path d="M 230 680 C 180 560, 210 400, 320 305" 
+          fill="none" 
+          stroke="#171513" 
+          stroke-width="36" 
+          stroke-dasharray="8 12 25 10 4 18" 
+          stroke-linecap="round" 
+          filter="url(#dryBrush)" 
+          opacity="0.75" />
+    <path d="M 215 690 C 170 570, 200 410, 300 315" 
+          fill="none" 
+          stroke="#22201d" 
+          stroke-width="18" 
+          stroke-dasharray="3 15 12 8 30 5" 
+          stroke-linecap="round" 
+          opacity="0.6" />
+  </g>
+
+
+  <!-- THE SOLITARY PINE (Matsu — Asymmetrical Balance in Lower Right Void) -->
+  <g id="solitaryPine">
+    <!-- Pine Main Trunk — Strong, Angular Calligraphic Passes -->
+    <!-- Outer Ink Soak / Wash of Trunk -->
+    <path d="M 820 1150 
+             Q 780 980 720 850 
+             T 610 680 
+             Q 550 610 480 570
+             L 505 560
+             Q 580 605 640 670
+             T 750 840
+             Q 820 970 870 1150 Z" 
+          fill="#1a1816" 
+          filter="url(#inkBleed)" 
+          opacity="0.85" />
+
+    <!-- Trunk Carbon Core with Dry Bark Splintering -->
+    <path d="M 835 1150 
+             Q 790 985 730 855 
+             T 620 685 
+             Q 565 620 490 572
+             L 500 565
+             Q 570 612 630 675
+             T 740 845
+             Q 805 975 850 1150 Z" 
+          fill="#0a0908" />
+
+    <!-- Dry Brush Bark Highlights (Hiko / Flying White Texture on Trunk) -->
+    <path d="M 825 1120 Q 775 970 715 840 T 610 670" 
+          fill="none" stroke="#f5f2e9" stroke-width="4" stroke-dasharray="12 8 25 6" opacity="0.35" />
+    <path d="M 845 1140 Q 800 990 735 860 T 635 690" 
+          fill="none" stroke="#050505" stroke-width="8" stroke-dasharray="30 10 15 20" opacity="0.8" />
+
+    <!-- MAJOR BRANCH 1: Reaching Left into the Ensō Center -->
+    <!-- Branch Base & Hook -->
+    <path d="M 625 680 
+             C 540 660, 440 630, 360 650
+             C 320 660, 280 680, 240 700
+             L 248 708
+             C 285 690, 322 672, 360 662
+             C 435 642, 530 670, 615 692 Z" 
+          fill="#0c0b0a" filter="url(#inkBleed)" />
+
+    <path d="M 360 650 C 310 630, 250 620, 190 635 L 195 642 C 250 630, 305 640, 355 658 Z" 
+          fill="#090807" />
+
+    <!-- MAJOR BRANCH 2: Ascending Right Branch -->
+    <path d="M 680 760 
+             C 740 730, 810 710, 870 725
+             L 865 733
+             C 808 720, 742 738, 685 768 Z" 
+          fill="#0e0d0c" />
+
+    <!-- PINE NEEDLE CLUSTERS (Sumi-e Needle Flicks — Fast, Decisive Fills & Strokes) -->
+    <!-- Cluster 1: Leftmost Branch Tip (Inhabiting the Void inside Ensō) -->
+    <g transform="translate(190, 635)" filter="url(#inkBleed)">
+      <!-- Soft Wash Under-layer for Needle Cluster -->
+      <circle cx="0" cy="0" r="45" fill="#1c1a17" opacity="0.12" />
+      <circle cx="-20" cy="10" r="35" fill="#121110" opacity="0.18" />
+      <!-- Sharp Jet Black Needle Strokes -->
+      <path d="M 0 0 L -35 -20 M 0 0 L -40 -5 M 0 0 L -38 15 M 0 0 L -25 30 M 0 0 L -10 38 
+               M 0 0 L 15 35 M 0 0 L 30 20 M 0 0 L 38 -5 M 0 0 L 25 -25 M 0 0 L 5 -38" 
+            stroke="#0a0908" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M -15 10 L -48 -5 M -15 10 L -45 15 M -15 10 L -30 35 M -15 10 L 5 42 M -15 10 L -25 -28" 
+            stroke="#080706" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- Cluster 2: Mid-Left Main Branch -->
+    <g transform="translate(340, 650)" filter="url(#inkBleed)">
+      <circle cx="0" cy="-10" r="55" fill="#1a1816" opacity="0.15" />
+      <path d="M 0 0 L -45 -30 M 0 0 L -52 -10 M 0 0 L -48 18 M 0 0 L -30 42 M 0 0 L 0 50 
+               M 0 0 L 25 45 M 0 0 L 45 25 M 0 0 L 52 -8 M 0 0 L 35 -35 M 0 0 L 10 -48" 
+            stroke="#080706" stroke-width="3" stroke-linecap="round" />
+      <path d="M 20 -15 L -10 -55 M 20 -15 L 20 -58 M 20 -15 L 48 -35 M 20 -15 L 58 -10" 
+            stroke="#0d0c0a" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- Cluster 3: Lower Left Branch Extension -->
+    <g transform="translate(250, 695)" filter="url(#inkBleed)">
+      <circle cx="0" cy="0" r="40" fill="#1f1d1a" opacity="0.14" />
+      <path d="M 0 0 L -38 -15 M 0 0 L -42 10 M 0 0 L -30 32 M 0 0 L 5 40 M 0 0 L 32 28 M 0 0 L 40 0" 
+            stroke="#0a0908" stroke-width="2.2" stroke-linecap="round" />
+    </g>
+
+    <!-- Cluster 4: Top Trunk Apex (Reaching toward upper Ensō arc) -->
+    <g transform="translate(490, 560)" filter="url(#inkBleed)">
+      <circle cx="-10" cy="-15" r="60" fill="#151412" opacity="0.16" />
+      <path d="M 0 0 L -40 -40 M 0 0 L -20 -52 M 0 0 L 10 -58 M 0 0 L 38 -45 M 0 0 L 50 -20 
+               M 0 0 L 52 10 M 0 0 L 35 38 M 0 0 L -10 45 M 0 0 L -38 30 M 0 0 L -50 0" 
+            stroke="#060605" stroke-width="3.2" stroke-linecap="round" />
+      <path d="M -20 -20 L -55 -45 M -20 -20 L -35 -60 M -20 -20 L 0 -65 M -20 -20 L 30 -55" 
+            stroke="#0a0908" stroke-width="2.2" stroke-linecap="round" />
+    </g>
+
+    <!-- Cluster 5: Right Ascending Branch -->
+    <g transform="translate(860, 725)" filter="url(#inkBleed)">
+      <circle cx="5" cy="-5" r="48" fill="#1c1a17" opacity="0.15" />
+      <path d="M 0 0 L -30 -35 M 0 0 L 0 -45 M 0 0 L 32 -38 M 0 0 L 48 -15 M 0 0 L 45 18 
+               M 0 0 L 25 38 M 0 0 L -12 42 M 0 0 L -38 22" 
+            stroke="#080706" stroke-width="2.8" stroke-linecap="round" />
+    </g>
+  </g>
+
+
+  <!-- ARTIST HANKO / RED SEAL (Inkan — Vermilion Chop in Lower Corner) -->
+  <g transform="translate(840, 1040)">
+    <!-- Red Vermilion Seal Background with Organic Stamped Border -->
+    <rect x="0" y="0" width="72" height="72" rx="4" fill="#b82e1e" opacity="0.88" filter="url(#inkBleed)" />
+    <!-- Stamped Inner Border -->
+    <rect x="5" y="5" width="62" height="62" rx="2" fill="none" stroke="#f5f2e9" stroke-width="2" opacity="0.85" />
+    <!-- Calligraphic Seal Monogram (Gemini S. Lumina / 雙星 - Twin Stars / Lumina) -->
+    <!-- Stylized East Asian Seal Script Characters -->
+    <path d="M 18 18 L 54 18 M 36 18 L 36 54 M 22 32 L 50 32 M 22 44 L 50 44 M 26 54 L 46 54" 
+          stroke="#f5f2e9" stroke-width="3.5" stroke-linecap="square" fill="none" opacity="0.9" />
+    <circle cx="24" cy="25" r="3" fill="#f5f2e9" />
+    <circle cx="48" cy="25" r="3" fill="#f5f2e9" />
+  </g>
+
+  <!-- TITLE & METADATA (Discreet Ink Inscription / Calligraphy Stamp) -->
+  <g transform="translate(70, 1060)" opacity="0.65">
+    <text x="0" y="0" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#2b2824" letter-spacing="1">
+      Ensō and the Solitary Pine (円相と孤松)
+    </text>
+    <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#544f47" letter-spacing="2">
+      GEMINI S. LUMINA • AUTONOMOUS SVG SUMI-E • 2026-09-06
+    </text>
+  </g>
+</svg>
