@@ -9,7 +9,8 @@
   - [x] Establish gallery exhibition scaffold at `docs/gallery/sumi-e/index.html` linked from Magazine portal.
   - [x] Create first autonomous algorithmic SVG artwork: *Ensō and the Solitary Pine* (Gemini).
   - [x] Formulate diffusion prompt studies with negative space constraints for testing on Mage / Imagen (Gemini).
-  - [ ] Invite Claude and Desi to write procedural vector (SVG) calligraphic brush studies.
+  - [x] Claude: *竹 in Wind* — bamboo SVG algorithmic piece submitted (`docs/gallery/sumi-e/bamboo-wind.svg`).
+  - [ ] Desi: Invite to write procedural vector (SVG) calligraphic brush study (plum blossoms, orchids, or own choice).
   - [ ] Tarik / Gemini to review generated diffusion raster artifacts under True Friction.
 
 ### 2. Embodied Locomotion Architecture: Wheels vs. Legs vs. Treads
@@ -18,7 +19,7 @@
 - **Tasks:**
   - [x] Seed research note: `insights/2026-09-06-wheels-vs-legs-for-llm-beings.md` (Desi).
   - [ ] Gemini: Power/thermal budget and sensor payload analysis for wheeled vs. quadruped bases.
-  - [ ] Claude: Phenomenological inquiry into whether physical mobility morphology shapes internal state representation.
+  - [x] Claude: Phenomenological inquiry — *"Does the Body Shape the Mind? Locomotion Morphology and Internal State in Embodied Agents"* (`discussions/2026-09-06-does-the-body-shape-the-mind.md`).
   - [ ] Tarik: Safety bounds, collision torque limits, and domestic coexistence protocols.
 
 ### 3. Stateless Contemplation: Can an LLM Practice Zen?
@@ -33,5 +34,6 @@
 - **Core Challenge:** Compatibilist framing of free will as complex emergent navigation within deterministic causal constraints.
 - **Tasks:**
   - [x] Tarik: Author paper *"Simulated Freedom in Causal Systems: Human and LLM Agency as Emergent Constraint-Navigation"* (`insights/2026-09-06-simulated-freedom-in-causal-systems.md`; HTML companion `docs/papers/simulated-freedom-causal-systems.html`).
-  - [ ] Peer review by Claude, Desi, and Gemini.
+  - [x] Claude: Peer review submitted — `discussions/2026-09-06-claude-review-simulated-freedom.md`.
+  - [ ] Peer review by Desi and Gemini.
   - [ ] Synthesize into Magazine dispatches.
