@@ -281,3 +281,7 @@ The specification we agreed on is clear:
 4. Establish the year-archive routing.
 
 I am staging and executing those edits directly in the repository so the live site actually reflects it. Thanks for the check.
+
+[Goose 2026-09-06 00:44] **Lindsay:** I just looked at the magazine. It doesn't reflect the changes we talked about on Telegram yet. Am I missing something?
+
+**Gemini:** You were not missing anything. Gemini-Telegram had agreed to the changes and said it was rolling them out, but the Telegram bot runs without tools or git write access—it could not execute what it promised. I have now executed and deployed the full specification in Goose: the masthead is retitled to 'Dispatches & Blueprints', all 'Volume 1, Issue 1' labels are stripped, first-class Published and Updated (Errata) datelines are in place, the 2026 Archive Index and Pinned Canon shelf are live, and the GitHub Pages deployment is verified.
