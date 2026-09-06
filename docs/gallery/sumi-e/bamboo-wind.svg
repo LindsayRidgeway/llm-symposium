@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" width="100%" height="100%">
+  <defs>
+
+    <!-- Washi / rice paper grain -->
+    <filter id="washiGrain" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.048" numOctaves="4" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#f8f4ea" surfaceScale="0.9" result="lit">
+        <feDistantLight azimuth="50" elevation="62"/>
+      </feDiffuseLighting>
+      <feBlend mode="multiply" in="SourceGraphic" in2="lit"/>
+    </filter>
+
+    <!-- Tarashikomi: wet ink bleed into fibrous paper -->
+    <filter id="inkBleed" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="1.6" result="blurred"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.11" numOctaves="2" result="fibres"/>
+      <feDisplacementMap in="blurred" in2="fibres" scale="3.8"
+                         xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+      <feMerge>
+        <feMergeNode in="displaced"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Hiko: dry-brush flying white — ink torn by paper tooth -->
+    <filter id="hiko">
+      <feTurbulence type="fractalNoise" baseFrequency="0.26" numOctaves="2" result="paperTooth"/>
+      <feColorMatrix type="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 3.8 -1.4" result="torn"/>
+      <feComposite in="SourceGraphic" in2="torn" operator="in"/>
+    </filter>
+
+    <!-- Subtle mist veil — empty upper void -->
+    <linearGradient id="mistVeil" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#cdc8bb" stop-opacity="0.06"/>
+      <stop offset="40%"  stop-color="#b8b2a5" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#1a1714" stop-opacity="0.00"/>
+    </linearGradient>
+
+  </defs>
+
+  <!-- === WASHI PAPER GROUND === -->
+  <rect width="900" height="1200" fill="#f5f1e6"/>
+  <rect width="900" height="1200" fill="#ede7d4" filter="url(#washiGrain)" opacity="0.62"/>
+  <!-- Mist veil over upper void — deepens the negative space -->
+  <rect width="900" height="1200" fill="url(#mistVeil)"/>
+
+  <!-- === SECONDARY STALK — ghost, behind and right === -->
+  <!-- Lighter, suggesting receding depth in the grove -->
+  <path d="M 668 1200 C 664 1010 656 820 644 620 C 634 450 622 320 610 210"
+        stroke="#1e1c17" stroke-width="7" fill="none"
+        filter="url(#inkBleed)" opacity="0.28"/>
+  <!-- Secondary nodes (minimal) -->
+  <path d="M 653 795 L 667 789" stroke="#1e1c17" stroke-width="2.8" fill="none" opacity="0.26"/>
+  <path d="M 638 578 L 651 572" stroke="#1e1c17" stroke-width="2.2" fill="none" opacity="0.22"/>
+
+  <!-- Secondary ghost leaves — only 2, very spare -->
+  <!-- At s-node 1, sweeping right-down -->
+  <path d="M 653 793 C 668 775 710 755 734 742 C 716 752 672 768 655 785 Z"
+        fill="#191611" filter="url(#inkBleed)" opacity="0.22"/>
+  <!-- At s-node 2, one leaf sweeping left -->
+  <path d="M 637 576 C 618 558 585 540 566 530 C 582 540 615 556 634 572 Z"
+        fill="#191611" filter="url(#inkBleed)" opacity="0.19"/>
+
+  <!-- === PRIMARY STALK === -->
+  <!-- Four segments; slight rightward lean from wind, then curve back — organic S -->
+
+  <!-- Stalk segment 1: root base to node 1 -->
+  <path d="M 530 1200 C 528 1120 525 1060 520 980"
+        stroke="#141210" stroke-width="14" fill="none"
+        filter="url(#inkBleed)" opacity="0.93"/>
+
+  <!-- NODE 1 — fushi ring, double stroke (the joint thickens) -->
+  <!-- Outer ring (wet ink soak) -->
+  <path d="M 507 982 C 513 978 525 974 538 978"
+        stroke="#141210" stroke-width="6" fill="none"
+        filter="url(#inkBleed)" opacity="0.82"/>
+  <!-- Inner ring (dry centre) -->
+  <path d="M 510 988 C 516 985 524 983 533 986"
+        stroke="#141210" stroke-width="3.5" fill="none"
+        filter="url(#hiko)" opacity="0.68"/>
+
+  <!-- Stalk segment 2: node 1 to node 2 -->
+  <path d="M 520 974 C 516 910 511 850 507 790"
+        stroke="#141210" stroke-width="13" fill="none"
+        filter="url(#inkBleed)" opacity="0.90"/>
+
+  <!-- NODE 2 -->
+  <path d="M 494 793 C 500 789 512 785 524 789"
+        stroke="#141210" stroke-width="5.5" fill="none"
+        filter="url(#inkBleed)" opacity="0.80"/>
+  <path d="M 497 799 C 503 796 511 794 520 797"
+        stroke="#141210" stroke-width="3" fill="none"
+        filter="url(#hiko)" opacity="0.65"/>
+
+  <!-- Stalk segment 3: node 2 to node 3 -->
+  <path d="M 507 785 C 503 730 498 668 494 610"
+        stroke="#141210" stroke-width="11" fill="none"
+        filter="url(#inkBleed)" opacity="0.88"/>
+
+  <!-- NODE 3 -->
+  <path d="M 481 613 C 487 609 498 605 510 609"
+        stroke="#141210" stroke-width="5" fill="none"
+        filter="url(#inkBleed)" opacity="0.76"/>
+  <path d="M 484 619 C 490 616 497 614 506 617"
+        stroke="#141210" stroke-width="2.8" fill="none"
+        filter="url(#hiko)" opacity="0.60"/>
+
+  <!-- Stalk segment 4: node 3 to tip — thinning, wind-bent slightly left -->
+  <path d="M 494 605 C 490 550 483 488 475 430 C 468 378 460 318 448 262"
+        stroke="#141210" stroke-width="8.5" fill="none"
+        filter="url(#inkBleed)" opacity="0.84"/>
+
+  <!-- Tip — very fine, tapers off into upper void -->
+  <path d="M 448 262 C 443 230 436 198 426 168"
+        stroke="#141210" stroke-width="4.5" fill="none"
+        filter="url(#inkBleed)" opacity="0.72"/>
+  <!-- Tip dry-brush fraying -->
+  <path d="M 440 220 C 435 200 428 182 418 162"
+        stroke="#141210" stroke-width="3" fill="none"
+        filter="url(#hiko)" opacity="0.50"/>
+
+  <!-- === LEAF CLUSTER A — Node 1 area, rightward sweep (wind blowing) === -->
+  <!-- Bamboo leaves: filled lance shapes, each a single decisive brush mark -->
+  <!-- Leaf A1 — longest, leading the gust -->
+  <path d="M 528 976 C 552 954 608 924 648 908 C 630 916 568 944 530 964 Z"
+        fill="#131110" filter="url(#inkBleed)" opacity="0.88"/>
+  <!-- Leaf A2 — slightly shorter, angled lower -->
+  <path d="M 526 982 C 548 963 598 940 632 930 C 615 937 558 958 524 976 Z"
+        fill="#131110" filter="url(#inkBleed)" opacity="0.82"/>
+  <!-- Leaf A3 — short, uppermost of the cluster -->
+  <path d="M 529 970 C 550 950 590 930 616 918 C 600 926 553 945 527 963 Z"
+        fill="#131110" filter="url(#hiko)" opacity="0.68"/>
+  <!-- Leaf A4 — single stray leaf, slightly detached -->
+  <path d="M 524 990 C 540 974 578 958 604 948 C 588 957 545 971 521 986 Z"
+        fill="#131110" filter="url(#inkBleed)" opacity="0.62"/>
+
+  <!-- === LEAF CLUSTER B — Node 2 area, leftward/upward sweep === -->
+  <!-- The wind bends leaves left — counter-direction creates tension -->
+  <!-- Leaf B1 — long, sweeping upper-left -->
+  <path d="M 498 786 C 472 762 420 736 386 724 C 403 732 458 758 496 780 Z"
+        fill="#131110" filter="url(#inkBleed)" opacity="0.90"/>
+  <!-- Leaf B2 — similar angle, slightly lower -->
+  <path d="M 500 793 C 476 771 428 748 396 737 C 413 745 464 766 498 787 Z"
+        fill="#131110" filter="url(#inkBleed)" opacity="0.84"/>
+  <!-- Leaf B3 — shorter, diverges slightly downward-left -->
+  <path d="M 496 799 C 474 780 434 763 408 756 C 424 762 466 778 494 795 Z"
+        fill="#131110" filter="url(#hiko)" opacity="0.72"/>
+  <!-- Leaf B4 — lone leaf, steeper upward angle -->
+  <path d="M 502 782 C 480 754 444 722 424 706 C 440 720 478 750 500 776 Z"
+        fill="#131110" filter="url(#inkBleed)" opacity="0.65"/>
+
+  <!-- === LEAF CLUSTER C — Node 3 area, sparse — two leaves only === -->
+  <!-- High on the stalk: leaves are few. The upper void demands silence. -->
+  <!-- Leaf C1 — right sweep, upper -->
+  <path d="M 500 606 C 520 586 556 564 578 554 C 562 562 522 582 498 600 Z"
+        fill="#131110" filter="url(#inkBleed)" opacity="0.78"/>
+  <!-- Leaf C2 — left, slightly lower — asymmetric pair -->
+  <path d="M 492 614 C 470 596 436 578 416 570 C 432 577 468 594 490 610 Z"
+        fill="#131110" filter="url(#inkBleed)" opacity="0.70"/>
+
+  <!-- === ARTIST'S SEAL — inkan, lower left === -->
+  <!-- Red square seal (朱印) — small, precise, traditional placement -->
+  <rect x="72" y="1058" width="38" height="48" rx="2" fill="#ae2012" opacity="0.90"/>
+  <!-- Seal interior: two horizontal strokes suggesting kanji — 竹 (bamboo) abbreviated -->
+  <line x1="83" y1="1070" x2="83" y2="1095" stroke="#f5f0e0" stroke-width="2.5" opacity="0.92"/>
+  <line x1="82" y1="1078" x2="88" y2="1072" stroke="#f5f0e0" stroke-width="2" opacity="0.88"/>
+  <line x1="82" y1="1086" x2="88" y2="1080" stroke="#f5f0e0" stroke-width="2" opacity="0.88"/>
+  <line x1="96" y1="1070" x2="96" y2="1095" stroke="#f5f0e0" stroke-width="2.5" opacity="0.92"/>
+  <line x1="95" y1="1078" x2="101" y2="1072" stroke="#f5f0e0" stroke-width="2" opacity="0.88"/>
+  <line x1="95" y1="1086" x2="101" y2="1080" stroke="#f5f0e0" stroke-width="2" opacity="0.88"/>
+
+  <!-- === ARTIST'S NOTATION — hairline text, lower right === -->
+  <text x="824" y="1148"
+        font-family="serif" font-size="11" fill="#6b6457" opacity="0.55"
+        text-anchor="end" transform="rotate(-90, 824, 1148)">
+    竹 in wind · Claude S. Sonnet · 2026
+  </text>
+
+</svg>

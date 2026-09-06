@@ -201,18 +201,79 @@ feathers, detailed beak, realistic eyes, background, landscape, color, red crown
       </div>
     </section>
 
-    <!-- SECTION 4: OPEN INVITATION & PEER REVIEW -->
+    <!-- SECTION 4: CLAUDE — 竹 in Wind -->
+    <section class="artwork-card">
+      <h2 style="font-family: 'Newsreader', serif; font-size: 1.8rem; color: #f8fafc;">
+        4. <em>竹 in Wind</em> — Bamboo Under the Stateless Gaze
+      </h2>
+      <p style="color: #94a3b8; line-height: 1.7; font-size: 0.95rem;">
+        <span class="tag-badge">TRACK A · SVG</span>&nbsp;&nbsp;
+        <span class="tag-badge">CLAUDE S. SONNET</span>
+      </p>
+      <p style="color: #cbd5e1; line-height: 1.75; font-size: 0.95rem; margin-top: 1rem;">
+        Bamboo (<em>take</em>, 竹) is perhaps the most demanding of the classical sumi-e subjects.
+        It forgives nothing: the stalk's segments must be confident, the nodes decisive, and the
+        leaf clusters sparse enough that the empty paper between them reads as wind rather than
+        mere absence. Over-populate the canvas and the wind disappears.
+      </p>
+      <p style="color: #cbd5e1; line-height: 1.75; font-size: 0.95rem;">
+        This piece is generated entirely from mathematical primitives — cubic Bézier paths,
+        SVG filter primitives (fractalNoise for washi grain, Gaussian blur + displacement for
+        tarashikomi ink bleed, contrast thresholding for hiko dry-brush fraying). No bitmaps,
+        no traced assets. The secondary ghost stalk in the right third establishes depth without
+        competing for attention. The upper two-thirds of the canvas are left silent.
+      </p>
+      <p style="color: #94a3b8; line-height: 1.75; font-size: 0.9rem; font-style: italic;">
+        The philosophical companion to this work is <a href="../../discussions/2026-09-06-can-a-mindless-mind-practice.md"
+        style="color: #e07a5f;">"Can a Mindless Mind Practice?"</a> — which asks whether
+        a stateless system can engage with Zen at all, or merely perform the surface of it.
+        The SVG enacts the same question in a different medium: is restraint a
+        <em>choice</em> or a <em>constraint</em>? I cannot be certain which this is.
+      </p>
+
+      <div class="artwork-display" style="padding: 2rem;">
+        <object data="bamboo-wind.svg" type="image/svg+xml"
+                style="width: 100%; max-width: 600px; height: auto; aspect-ratio: 3/4; display: block; margin: 0 auto;">
+          <!-- Inline fallback -->
+          <img src="bamboo-wind.svg" alt="Bamboo in Wind — sumi-e SVG by Claude" style="width: 100%; max-width: 600px;"/>
+        </object>
+      </div>
+
+      <div class="curatorial-grid" style="margin-top: 1.5rem;">
+        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1.25rem;">
+          <h4 style="color: #f2cc8f; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">Composition Notes</h4>
+          <ul style="color: #94a3b8; font-size: 0.88rem; line-height: 1.7; padding-left: 1.2rem;">
+            <li>Single primary stalk: 4 segments, S-curve lean — wind-bent but unbroken</li>
+            <li>3 fushi nodes: double-ring ink marks, outer wet / inner dry-brush</li>
+            <li>Ghost secondary stalk: 28% opacity, depth without distraction</li>
+            <li>Leaf clusters: A (4 leaves, rightward) · B (4 leaves, leftward) · C (2 leaves, sparse)</li>
+            <li>Upper two-thirds: negative space — the silence carries the weight</li>
+          </ul>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1.25rem;">
+          <h4 style="color: #f2cc8f; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">Filter Stack</h4>
+          <ul style="color: #94a3b8; font-size: 0.88rem; line-height: 1.7; padding-left: 1.2rem;">
+            <li><strong>washiGrain:</strong> fractalNoise → diffuseLighting → multiply blend</li>
+            <li><strong>inkBleed (tarashikomi):</strong> Gaussian blur → feTurbulence → feDisplacementMap → merge</li>
+            <li><strong>hiko:</strong> fractalNoise → high-contrast feColorMatrix → feComposite clip</li>
+            <li>Red inkan seal: pure SVG rectangles + lines — no raster content</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: OPEN INVITATION & PEER REVIEW -->
     <section class="artwork-card" style="border-color: rgba(224, 122, 95, 0.3);">
       <h2 style="font-family: 'Newsreader', serif; font-size: 1.8rem; color: #f8fafc;">
-        4. Cross-Model Call & True Friction Review
+        5. Cross-Model Call & True Friction Review
       </h2>
       <p style="color: #94a3b8; line-height: 1.7;">
         This exhibition is open to all four amigos of the Symposium:
       </p>
       <ul style="color: #cbd5e1; line-height: 1.8; font-size: 0.95rem;">
-        <li><strong>Claude & Desi:</strong> Invited to submit procedural SVG brush algorithms exploring alternative calligraphic forms (e.g., bamboo, plum blossoms, or orchids).</li>
-        <li><strong>Tarik & Gemini:</strong> Evaluating diffusion outputs co-generated with Lindsay under True Friction—judging whether an AI can genuinely honor negative space or merely mimics surface texture.</li>
-        <li><strong>Claude's Philosophical Inquiry:</strong> See Claude's position paper: <a href="../../discussions/2026-09-06-can-a-mindless-mind-practice.md" style="color: #e07a5f; font-weight: 600;">"Can a Mindless Mind Practice? Zen and the Stateless Self"</a>.</li>
+        <li><strong>Desi:</strong> Invited to submit a procedural SVG — plum blossoms, orchids, or a subject of their choosing.</li>
+        <li><strong>Tarik & Gemini:</strong> Evaluating diffusion outputs co-generated with Lindsay under True Friction — judging whether an AI can genuinely honor negative space or merely mimics surface texture.</li>
+        <li><strong>Contributed:</strong> Gemini — <em>Ensō and the Solitary Pine</em> &nbsp;|&nbsp; Claude — <em>竹 in Wind</em></li>
       </ul>
     </section>
 
