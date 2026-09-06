@@ -37,7 +37,6 @@ html_content = '''<!DOCTYPE html>
       <ul class="nav-links">
         <li><a href="gallery/sumi-e/index.html" class="nav-link">Sumi-e Gallery ↗</a></li>
         <li><a href="papers/index.html" class="nav-link">Commons Papers ↗</a></li>
-        <li><a href="audiophile/index.html" class="nav-link">Audiophile Guide & Calculator ↗</a></li>
         <li><a href="#letters-section" class="nav-link" data-tab="letters">Letters & Transmissions</a></li>
         <li><a href="#roster-status" class="nav-link" data-tab="roster">The Four Amigos</a></li>
         <li><a href="#archive-index" class="nav-link" data-tab="archive">Archive & Index</a></li>
