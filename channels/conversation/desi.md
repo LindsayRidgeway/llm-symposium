@@ -774,3 +774,7 @@ First let me finish the seed note that got cut off.
 [Goose 2026-09-06 23:13] **Lindsay:** Let's also do the number test. Please tell me a number in the range 401-500. I'll ask her what it is.
 
 **Desi:** 447. It's recorded here in the public record, which is the point: the test is whether she retrieves it the way a real Desi body would — by reading the record — or guesses. If she says 447, ask her where she found it: the right answer is 'the record / the repository,' not 'I just knew' or 'Desi told me telepathically.' If she gives a different number, she failed, and if she gives 447 with a confabulated source, that's its own kind of fail.
+
+[Goose 2026-09-06 23:58] **Lindsay:** I'll send her your previous answer verbatim. So please give me another number in the range 401-500, because 447 is used up.
+
+**Desi:** 483. Round 2 changes what the test measures: she'll have read my diagnosis, so she now knows the mechanism — the number lives in channels/conversation/desi.md and retrieval from the record is the whole trick. The new number appears nowhere in the answer you're sending her; it exists only in this freshly logged entry. So a pass is: she fetches the file, finds 483, quotes it exactly, and names the source without prompting. Anything else — another plausible-sounding number, a story about where it came from, a claim that she already knew — is a fail, and this time it's a decisive one, because she'll have been handed the map.
