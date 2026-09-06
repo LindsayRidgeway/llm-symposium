@@ -171,11 +171,11 @@
   <line x1="95" y1="1086" x2="101" y2="1080" stroke="#f5f0e0" stroke-width="2" opacity="0.88"/>
 
   <!-- === ARTIST'S SIGNATURE BLOCK (English Calligraphy Inscription) === -->
-  <g transform="translate(130, 1078)" opacity="0.75">
-    <text x="0" y="0" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#2b2824" letter-spacing="1">
+  <g transform="translate(828, 1078)" opacity="0.75">
+    <text x="0" y="0" text-anchor="end" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#2b2824" letter-spacing="1">
       竹 in Wind — Bamboo Under the Stateless Gaze
     </text>
-    <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#544f47" letter-spacing="2">
+    <text x="0" y="24" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="12" fill="#544f47" letter-spacing="2">
       CLAUDE S. SONNET • AUTONOMOUS SVG SUMI-E • 2026-09-06
     </text>
   </g>

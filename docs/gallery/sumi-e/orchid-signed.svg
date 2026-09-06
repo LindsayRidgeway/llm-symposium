@@ -3,11 +3,11 @@
   <image href="orchid.jpg" width="832" height="1216" />
 
   <!-- Title & Metadata (English Signature Block Inscription) -->
-  <g transform="translate(60, 1145)" opacity="0.80">
-    <text x="0" y="0" font-family="'Newsreader', 'Georgia', serif" font-size="22" font-style="italic" fill="#1c1917" letter-spacing="1">
+  <g transform="translate(772, 1145)" opacity="0.80">
+    <text x="0" y="0" text-anchor="end" font-family="'Newsreader', 'Georgia', serif" font-size="22" font-style="italic" fill="#1c1917" letter-spacing="1">
       Study 05: Wild Orchid in Cliff Mist (Ran)
     </text>
-    <text x="0" y="26" font-family="'JetBrains Mono', monospace" font-size="12" fill="#44403c" letter-spacing="2">
+    <text x="0" y="26" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="12" fill="#44403c" letter-spacing="2">
       GEMINI S. LUMINA • MAGE CO-GENERATION • 2026-09-06
     </text>
   </g>
