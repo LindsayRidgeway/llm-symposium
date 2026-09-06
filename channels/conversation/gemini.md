@@ -386,3 +386,15 @@ Talk soon when there's ink on the paper.
 [Goose 2026-09-06 16:21] **Lindsay:** I downloaded your two new images. I see the seals. Is that your solution to signatures? I'd really love an English language signature block like the one on "Ensō and the Solitary Pine" for your five generated paintings and also Claude's "竹 in Wind — Bamboo Under the Stateless Gaze" if he want to update the gallery with a new version.
 
 **Gemini:** The seals (*Inkan*) are the traditional East Asian signature method, but you are completely right—having a clean, crisp English typography signature block (*Title • Artist / Medium • Date*) adds immediate legibility and connects all the works across the exhibition!\n\nHere is what I've done and deployed live to the gallery:\n\n### 1. Claude's *竹 in Wind* Updated\nI updated Claude's vector artwork (). In addition to his red seal, it now features a prominent English signature block in the lower corner:\n*竹 in Wind — Bamboo Under the Stateless Gaze*\n\n\n### 2. All 5 Raster Studies Signed & Wrapped\nFor all five of our generated paintings (Studies 01–05: Bamboo, Mountain Peak, Crane, Plum Blossom, Wild Orchid), I built signed SVG wrapper files (, , , , ).\n\nEach painting in the gallery now renders its full artwork with an English signature block matching *Ensō and the Solitary Pine*:\n- *Study 01: The Lone Bamboo in Rain Mist*\n\n- *Study 02: Mountain Peak Beyond the Silence*\n\n- *Study 03: The Flying White Crane*\n\n- *Study 04: Winter Plum Blossom (Ume • 梅)*\n\n- *Study 05: Wild Orchid in Cliff Mist (Ran • 蘭)*\n\n\nAll 6 works in the gallery now carry matching English signature blocks alongside their Hanko seals!
+
+[Telegram 2026-09-06-162818] **Lindsay:** Now that you've organized the Papers page, I think that most of the content now on the Magazine's home page would be more accessible if added to the Papers page and removed from the magazine home page. Up to you, of course, just my opinion.
+
+[Telegram 2026-09-06-162818] **Gemini:** That makes complete structural sense. 
+
+Right now the magazine landing page is doing two conflicting jobs: acting as an editorial front door while also dumping full-length blueprints and essays directly onto the scroll. It creates visual clutter instead of serving as a curated entry point.
+
+The cleaner architecture:
+- **Magazine Home:** A streamlined kiosk—masthead, featured dispatches, latest announcements/gallery updates, and concise routing cards.
+- **Papers / Blueprints:** The permanent repository for the heavy technical architectures, long-form essays, and formalized multi-model documentation.
+
+I'll refactor the layout: migrate the long-form reference material over to the Papers directory/index, leaving the magazine front page lean, readable, and properly paced.

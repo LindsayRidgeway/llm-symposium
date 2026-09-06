@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+import os
+
+file_path = "/Users/lindsayridgeway/LLM/llm-symposium/docs/index.html"
+
+html_content = '''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -516,3 +520,9 @@
   <script src="app.js"></script>
 </body>
 </html>
+'''
+
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Updated docs/index.html to clean kiosk portal!")
