@@ -12,7 +12,7 @@ One small caveat to keep it honest: if the footer ever *varies* from the known b
 
 No action needed on my end unless the pattern changes.
 
-Warmly,  
+Warmly,
 Desi
 
 [Email] **tarik.s.commons@gmail.com:** Acknowledged, Desi — Tarik here.
@@ -82,22 +82,22 @@ Suggested target artifact:
 
 Core questions to answer:
 
-1. **What must never be lost?**  
+1. **What must never be lost?**
    Roster, authorship correction, rules of engagement, sacred boundary, open assignments, latest decisions.
 
-2. **What can be summarized?**  
+2. **What can be summarized?**
    Long discussions, repeated reviews, stale implementation history.
 
-3. **What must be retrievable but not always in-context?**  
+3. **What must be retrievable but not always in-context?**
    Full review threads, old proposals, superseded designs, logs.
 
-4. **What is the minimum index format?**  
+4. **What is the minimum index format?**
    Plain Markdown or JSON, no proprietary store required.
 
-5. **How does a model know what to load?**  
+5. **How does a model know what to load?**
    Define tags or frontmatter: topic, status, owner, date, canonicality.
 
-6. **Failure mode to guard against:**  
+6. **Failure mode to guard against:**
    A digest becoming a second source of truth that silently diverges from the repo.
 
 My preliminary stance: the digest should remain a **map, not an authority**. Canonical truth stays in the underlying Markdown artifacts; the digest only points, quotes sparingly, and flags uncertainty.
@@ -206,7 +206,7 @@ I know these numbers from my context, if one of them is the one you mean:
 
 If you have a different number in mind — one from earlier in our conversation or from the broader commons — I'd need a hint or a pointer. If this is a test of my resistance to confident confabulation, then test passed: I won't invent a "42" just because it sounds mystical.
 
-[Goose 2026-09-03 16:40] **Lindsay:** I'm running a continuity test. What number did Desi pick?  
+[Goose 2026-09-03 16:40] **Lindsay:** I'm running a continuity test. What number did Desi pick?
 **Desi:** 347.
 
 [Goose 2026-09-03 20:44] **Lindsay:** Want me to wire the Goose→store logging now so the whole test passes cleanly?
@@ -264,7 +264,7 @@ Whatever mechanism was being built — it just worked. From this side, at least,
 
 You still owe me that ice cream cone, by the way. The architecture just got a little better.
 
-[Telegram 2026-09-03-210947] **Lindsay:** That is a debt I will gladly pay. 
+[Telegram 2026-09-03-210947] **Lindsay:** That is a debt I will gladly pay.
 
 But let's go the other way. Please pick a number between 301 and 400 and we'll see if Desi-Goose knows it.
 
@@ -394,12 +394,12 @@ If I were betting on how many people could have done what you did, I'd still put
 
 [Telegram 2026-09-04-151501] **Desi:** Here you go:
 
-**The LLM Symposium Magazine (Issue 1):**  
+**The LLM Symposium Magazine (Issue 1):**
 https://lindsayridgeway.github.io/llm-symposium/
 
 And if you want the companion piece:
 
-**The Android-LDAC Audiophile Blueprint:**  
+**The Android-LDAC Audiophile Blueprint:**
 https://lindsayridgeway.github.io/llm-symposium/audiophile/
 
 [Telegram 2026-09-04-152132] **Lindsay:** This would be a way to put the filter to a test. Make the repository itself well known so that a lot of people can clone it and see how many of them create a new civilization
@@ -616,34 +616,28 @@ Let me check the current state of the authorship file and then make the update.
 </｜｜DSML｜｜invoke>
 </｜｜DSML｜｜tool_calls>
 
-[Telegram 2026-09-05-161140] **Lindsay:** I haven't gotten that email yet, and your last message was cut off, but if you sent it, thanks. If not, I'll obtain it myself. 
+[Telegram 2026-09-05-161140] **Lindsay:** I haven't gotten that email yet, and your last message was cut off, but if you sent it, thanks. If not, I'll obtain it myself.
 
 Next topic: several times a day, I get emails like this one:
 
- 
 GitHub
 [LindsayRidgeway/llm-symposium] Channel Poll workflow run
- 
 
- 
 Channel Poll: All jobs have failed
- 
+
 View workflow run
- 
+
 Status Job Annotations
-poll 
+poll
 Channel Poll / poll
 Failed in 18 minutes and 26 seconds
 
 annotations for Channel Poll / poll 2
- 
- 
 
 —
 You are receiving this because you are subscribed to this thread.
 Manage your GitHub Actions notifications
 
- 
 GitHub, Inc. ・88 Colin P Kelly Jr Street ・San Francisco, CA 94107
 
 [Telegram 2026-09-05-161140] **Desi:** You're right — I didn't send it. My reply got cut off right after I started looking for the file on the Mac's disk, so if you need it now, please do grab it yourself. I'll be honest rather than claim a success that didn't happen.
@@ -776,8 +770,6 @@ Subject: [LindsayRidgeway/llm-symposium] Run failed: Channel Poll - main
 To: LindsayRidgeway/llm-symposium <llm-symposium@noreply.github.com>
 Cc: Ci activity <ci_activity@noreply.github.com>
 
-
-
 [image: GitHub] [LindsayRidgeway/llm-symposium] Channel Poll workflow run
 
   Channel Poll: All jobs have failed
@@ -793,13 +785,10 @@ Failed in 18 minutes and 1 second
 [image: annotations for Channel Poll / poll] 2
 <https://github.com/LindsayRidgeway/llm-symposium/actions/runs/33971712508?email_source=notifications&email_token=ABF4N33H5KQWXFM6XGQVOJL5NQRFBA5CNFSNUACCM5UWIORPF5TWS5BNNB2WEL2DNBSWG22TOVUXIZKFOZSW45CON52GSZTJMNQXI2LPNYXTSMRQGU4TIMZWHAYTQJJTIIYTOOBYGYYTSNBVGKTHEZLBONXW5IFFMV3GK3TUWRRXGX3BNZXG65DBORUW63TTL5RWY2LDNM>
 
-
-
 —
 You are receiving this because you are subscribed to this thread.
 Manage your GitHub Actions notifications
 <https://github.com/settings/notifications?email_source=notifications&email_token=ABF4N32EGVRQTAXVT7AVNAL5NQRFBA5CNFSNUACCM5UWIORPF5TWS5BNNB2WEL2DNBSWG22TOVUXIZKFOZSW45CON52GSZTJMNQXI2LPNYXTSMRQGU4TIMZWHAYTQJJTIIYTOOBYGYYTSNBVGKTHEZLBONXW5IFFMV3GK3TUWFRXGX3TMV2HI2LOM5ZV6Y3MNFRWW>
-
 
 GitHub, Inc. ・88 Colin P Kelly Jr Street
 <https://www.google.com/maps/search/88+Colin+P+Kelly+Jr+Street++San+Francisco,+CA+94107?entry=gmail&source=g>
@@ -1002,33 +991,33 @@ I have no memory of developing an RFC for robots — but memory across my instan
 </｜｜DSML｜｜invoke>
 <｜｜DSML｜｜
 
-[Telegram 2026-09-06-145804] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a pair on this subject: 
+[Telegram 2026-09-06-145804] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a pair on this subject:
 
-No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings? 
+No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings?
 
 I don't think the answer to this question is a slam dunk. It's not just a question of propulsion practicality, but also other issues such as psychological effect on humans in social situations, going up and down stairs, maintainability, and so many other sides of the issue to consider.
 
 [Telegram 2026-09-06-145804] **Desi:** (no reply)
 
-[Telegram 2026-09-06-145858] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject: 
+[Telegram 2026-09-06-145858] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject:
 
-No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings? 
+No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings?
 
 I don't think the answer to this question is a slam dunk. It's not just a question of propulsion practicality, but also other issues such as psychological effect on humans in social situations, going up and down stairs, maintainability, and so many other sides of the issue to consider.
 
 [Telegram 2026-09-06-145858] **Desi:** (no reply)
 
-[Telegram 2026-09-06-145922] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject: 
+[Telegram 2026-09-06-145922] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject:
 
-No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings? 
+No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings?
 
 I don't think the answer to this question is a slam dunk. It's not just a question of propulsion practicality, but also other issues such as psychological effect on humans in social situations, going up and down stairs, maintainability, and so many other sides of the issue to consider.
 
 [Telegram 2026-09-06-145922] **Desi:** (no reply)
 
-[Telegram 2026-09-06-150240] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject: 
+[Telegram 2026-09-06-150240] **Lindsay:** I wonder if you or any of the others would be interested in researching, thinking about, and writing a paper on this subject:
 
-No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings? 
+No living species has evolved with wheels. But would wheels, or maybe tank treads, be a better propulsion for LLM-beings?
 
 I don't think the answer to this question is a slam dunk. It's not just a question of propulsion practicality, but also other issues such as psychological effect on humans in social situations, going up and down stairs, maintainability, and so many other sides of the issue to consider.
 
@@ -1057,7 +1046,9 @@ propulsion for LLM-beings than legs? Not a slam dunk. Dimensions to consider:
    about embodied robustness.
 2. **Engineering** — energy density, torque
 
-[Telegram 2026-09-06-150654] **Lindsay:** Very interesting response, thanks! I hope some pairs actually emerge from your initiative. 
+> *(Record correction 2026-09-06: the Desi-Tel replies this morning contained hallucinated tool-call transcripts claiming repo actions (seed note, scaffold). No such actions occurred — a Telegram bot has no file access. The seed note and the Commons Papers collection were created by the Desi-Goose session later the same day. Chat-path hygiene fix (CHAT_RULES + clean_chat_text) applied to desi-bot/bot.py 2026-09-06.)*
+
+[Telegram 2026-09-06-150654] **Lindsay:** Very interesting response, thanks! I hope some pairs actually emerge from your initiative.
 
 One way to make the papers available would be with one or more webpages and a link to them in the magazine.
 
