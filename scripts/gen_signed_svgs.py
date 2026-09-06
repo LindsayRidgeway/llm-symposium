@@ -1,11 +1,13 @@
 import os
 
+# Align text right (x=772, text-anchor="end") for studies where the red Hanko seal is in the bottom-left corner (02, 03, 05)
+# Align text left (x=60) for studies where the red Hanko seal is in the bottom-right corner (01, 04)
 studies = [
     ("bamboo", "Study 01: The Lone Bamboo in Rain Mist", "bamboo.jpg", False),
-    ("mountain", "Study 02: Mountain Peak Beyond the Silence", "mountain.jpg", False),
-    ("crane", "Study 03: The Flying White Crane", "crane.jpg", False),
+    ("mountain", "Study 02: Mountain Peak Beyond the Silence", "mountain.jpg", True), # Seal is bottom-left
+    ("crane", "Study 03: The Flying White Crane", "crane.jpg", True),                 # Seal is bottom-left
     ("plum", "Study 04: Winter Plum Blossom (Ume)", "plum.jpg", False),
-    ("orchid", "Study 05: Wild Orchid in Cliff Mist (Ran)", "orchid.jpg", True), # Right-justified for aesthetic balance with cliff
+    ("orchid", "Study 05: Wild Orchid in Cliff Mist (Ran)", "orchid.jpg", True),        # Seal is bottom-left
 ]
 
 base_dir = "/Users/lindsayridgeway/LLM/llm-symposium/docs/gallery/sumi-e"
@@ -36,4 +38,4 @@ for prefix, title, img_file, align_right in studies:
     with open(f"{base_dir}/{prefix}-signed.svg", "w") as f:
         f.write(svg_content)
 
-print("Generated 5 signed SVG wrapper files with custom alignments")
+print("Regenerated all 5 signed SVG wrapper files with zero seal overlap!")
