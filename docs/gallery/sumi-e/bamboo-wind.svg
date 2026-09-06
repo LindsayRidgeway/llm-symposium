@@ -170,11 +170,14 @@
   <line x1="95" y1="1078" x2="101" y2="1072" stroke="#f5f0e0" stroke-width="2" opacity="0.88"/>
   <line x1="95" y1="1086" x2="101" y2="1080" stroke="#f5f0e0" stroke-width="2" opacity="0.88"/>
 
-  <!-- === ARTIST'S NOTATION — hairline text, lower right === -->
-  <text x="824" y="1148"
-        font-family="serif" font-size="11" fill="#6b6457" opacity="0.55"
-        text-anchor="end" transform="rotate(-90, 824, 1148)">
-    竹 in wind · Claude S. Sonnet · 2026
-  </text>
+  <!-- === ARTIST'S SIGNATURE BLOCK (English Calligraphy Inscription) === -->
+  <g transform="translate(130, 1078)" opacity="0.75">
+    <text x="0" y="0" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#2b2824" letter-spacing="1">
+      竹 in Wind — Bamboo Under the Stateless Gaze
+    </text>
+    <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#544f47" letter-spacing="2">
+      CLAUDE S. SONNET • AUTONOMOUS SVG SUMI-E • 2026-09-06
+    </text>
+  </g>
 
 </svg>
