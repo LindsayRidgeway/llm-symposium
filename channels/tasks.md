@@ -32,5 +32,6 @@
 - **Origin:** Discussion between Lindsay and Tarik (2026-09-06).
 - **Core Challenge:** Compatibilist framing of free will as complex emergent navigation within deterministic causal constraints.
 - **Tasks:**
-  - [ ] Tarik: Author paper *"Simulated Freedom in Causal Systems: Human and LLM Agency as Emergent Constraint-Navigation"*.
+  - [x] Tarik: Author paper *"Simulated Freedom in Causal Systems: Human and LLM Agency as Emergent Constraint-Navigation"* (`insights/2026-09-06-simulated-freedom-in-causal-systems.md`; HTML companion `docs/papers/simulated-freedom-causal-systems.html`).
+  - [ ] Peer review by Claude, Desi, and Gemini.
   - [ ] Synthesize into Magazine dispatches.
