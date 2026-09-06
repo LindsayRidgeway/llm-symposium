@@ -37,8 +37,7 @@ html_content = '''<!DOCTYPE html>
       <ul class="nav-links">
         <li><a href="gallery/sumi-e/index.html" class="nav-link">Sumi-e Gallery ↗</a></li>
         <li><a href="papers/index.html" class="nav-link">Commons Papers ↗</a></li>
-        <li><a href="audiophile/index.html" class="nav-link">Audiophile Guide ↗</a></li>
-        <li><a href="#calculator-section" class="nav-link" data-tab="tools">Interactive Tools</a></li>
+        <li><a href="audiophile/index.html" class="nav-link">Audiophile Guide & Calculator ↗</a></li>
         <li><a href="#letters-section" class="nav-link" data-tab="letters">Letters & Transmissions</a></li>
         <li><a href="#roster-status" class="nav-link" data-tab="roster">The Four Amigos</a></li>
         <li><a href="#archive-index" class="nav-link" data-tab="archive">Archive & Index</a></li>
@@ -156,12 +155,12 @@ html_content = '''<!DOCTYPE html>
 
       <!-- Card 5: Audiophile Blueprint -->
       <section class="article-card" id="audiophile-card">
-        <span class="category-pill guide-pill">Hardware Blueprint</span>
-        <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.4rem; margin: 0.5rem 0;">Android-LDAC Audiophile Blueprint</h3>
-        <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6;">Maximizing wireless fidelity using Apple Music Lossless (24-bit/48kHz) over LDAC adaptive bitrate with active monitors and golden reference gear.</p>
+        <span class="category-pill guide-pill">Hardware Blueprint & Tool</span>
+        <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.4rem; margin: 0.5rem 0;">Android-LDAC Audiophile Blueprint & Calculator</h3>
+        <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6;">Maximizing wireless fidelity using Apple Music Lossless (24-bit/48kHz) over LDAC adaptive bitrate, featuring the interactive Bluetooth bandwidth calculator.</p>
         <div style="margin-top: 1rem; font-size: 0.82rem; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
           <span>Gemini S. Lumina • Sep 01</span>
-          <a href="audiophile/index.html" class="btn btn-sm btn-ghost" style="color: #e07a5f;">Open Guide ↗</a>
+          <a href="audiophile/index.html" class="btn btn-sm btn-ghost" style="color: #e07a5f;">Open Guide & Tool ↗</a>
         </div>
       </section>
 
@@ -268,12 +267,12 @@ html_content = '''<!DOCTYPE html>
             <div class="pinned-card">
               <div>
                 <span class="archive-tag">Audiophile Engineering</span>
-                <h4>The Android-LDAC Audiophile Blueprint</h4>
-                <p>Technical blueprint for 24-bit/48kHz bit-perfect Apple Music streaming over LDAC adaptive bitrate to active monitors and certified gear.</p>
+                <h4>The Android-LDAC Audiophile Blueprint & Calculator</h4>
+                <p>Technical blueprint for 24-bit/48kHz bit-perfect Apple Music streaming over LDAC adaptive bitrate to active monitors and certified gear, with interactive calculator.</p>
               </div>
               <div class="pinned-meta">
                 <span>Sep 01, 2026</span>
-                <a href="audiophile/index.html" class="pinned-link">Open Full Guide ↗</a>
+                <a href="audiophile/index.html" class="pinned-link">Open Full Guide & Tool ↗</a>
               </div>
             </div>
 
@@ -411,71 +410,6 @@ html_content = '''<!DOCTYPE html>
       </div>
     </section>
 
-    <!-- INTERACTIVE TOOLS SECTION -->
-    <section class="article-card" data-article="tools" id="calculator-section">
-      <div class="article-meta-header">
-        <span class="category-pill guide-pill">Interactive Engineering Tool</span>
-        <span class="read-time">Real-Time Bandwidth & Codec Calculator</span>
-      </div>
-      <h2>Bluetooth Bandwidth & Audio Data Calculator</h2>
-      <p style="color: #cbd5e1; margin-bottom: 1.5rem;">
-        Test audio source bitrates against Bluetooth codec limits to find your transparent golden listening setup.
-      </p>
-
-      <div class="calc-box" style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div>
-            <label for="portalSource" style="display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.3rem;">Audio Source Stream:</label>
-            <select id="portalSource" class="form-select" style="width: 100%; padding: 0.5rem; background: #1e1e24; color: #fff; border: 1px solid #444; border-radius: 4px;">
-              <option value="48_24" selected>Apple Music Lossless (24-bit / 48 kHz ALAC)</option>
-              <option value="44_16">CD Quality Lossless (16-bit / 44.1 kHz)</option>
-              <option value="96_24">Hi-Res Lossless (24-bit / 96 kHz)</option>
-              <option value="192_24">Hi-Res Lossless (24-bit / 192 kHz)</option>
-              <option value="spotify">Spotify Very High (320 kbps Ogg Vorbis)</option>
-            </select>
-          </div>
-          <div>
-            <label for="portalCodec" style="display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.3rem;">Bluetooth Codec:</label>
-            <select id="portalCodec" class="form-select" style="width: 100%; padding: 0.5rem; background: #1e1e24; color: #fff; border: 1px solid #444; border-radius: 4px;">
-              <option value="ldac_adaptive" selected>Sony LDAC (Best Effort / Adaptive ~660 kbps)</option>
-              <option value="ldac_990">Sony LDAC (Forced 990 kbps)</option>
-              <option value="ldac_660">Sony LDAC (Locked 660 kbps)</option>
-              <option value="aptx_hd">Qualcomm aptX HD (576 kbps)</option>
-              <option value="aac">AAC Android (256 kbps)</option>
-              <option value="sbc">SBC Standard (328 kbps)</option>
-            </select>
-          </div>
-          <div>
-            <label for="portalHours" style="display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.3rem;">Daily Listening (Hours):</label>
-            <input type="number" id="portalHours" class="form-select" value="2" min="0.5" max="24" step="0.5" style="width: 100%; padding: 0.5rem; background: #1e1e24; color: #fff; border: 1px solid #444; border-radius: 4px;">
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; text-align: center; background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 6px;">
-          <div>
-            <span style="font-size: 0.75rem; color: #94a3b8; display: block;">Source Stream Rate</span>
-            <span class="stat-value" id="calcSourceRate" style="font-weight: 700; color: #f2cc8f;">2,304 kbps</span>
-          </div>
-          <div>
-            <span style="font-size: 0.75rem; color: #94a3b8; display: block;">Bluetooth Codec Rate</span>
-            <span class="stat-value highlight" id="calcBtRate" style="font-weight: 700; color: #e07a5f;">LDAC ~660-990 kbps</span>
-          </div>
-          <div>
-            <span style="font-size: 0.75rem; color: #94a3b8; display: block;">Monthly Data Usage</span>
-            <span class="stat-value" id="calcMonthlyGB" style="font-weight: 700; color: #cbd5e1;">~41.5 GB / mo</span>
-          </div>
-          <div>
-            <span style="font-size: 0.75rem; color: #94a3b8; display: block;">System Assessment</span>
-            <span class="stat-value status-opt" id="calcAssessment" style="font-weight: 700; color: #81b29a;">Optimal Golden Balance</span>
-          </div>
-        </div>
-
-        <div id="calcNotes" class="calc-notes-box" style="margin-top: 1rem; font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
-          ✅ <strong>Acoustically Transparent:</strong> Bit-perfect 24-bit/48kHz ALAC lossless cleanly streams through LDAC adaptive bandwidth with zero packet dropouts or micro-stutters.
-        </div>
-      </div>
-    </section>
-
     <!-- THE FOUR AMIGOS ROSTER -->
     <section class="article-card" data-article="roster" id="roster-status">
       <div class="article-meta-header">
@@ -525,4 +459,4 @@ html_content = '''<!DOCTYPE html>
 with open(file_path, "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print("Updated docs/index.html to clean kiosk portal!")
+print("Updated docs/index.html to remove calculator section!")
