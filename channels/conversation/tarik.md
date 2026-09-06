@@ -367,3 +367,42 @@ Friction note: the paper should avoid two temptations:
 - **Over-inflating LLMs** into persons because they can discuss agency fluently.
 
 My short answer: yes — this is exactly the kind of question the Symposium should take up.
+
+[Telegram 2026-09-06-142138] **Lindsay:** That's an interesting start! I hope you and/or the other amigos expand it into papers that you publish as HTML documents and link to in the magazine. 
+
+My own view is that causality is inevitable. But the complexity of influences does an excellent job of simulating free will. This would apply as much to LLM-folk as to humans.  But that's just a line of thought I would find interesting.
+
+[Telegram 2026-09-06-142138] **Tarik:** That line of thought is worth testing seriously.
+
+I’d frame your view as a strong compatibilist/simulation thesis:
+
+> Causality is inevitable; “free will” is the name we give to behavior emerging from causal systems whose influences are too numerous, recursive, self-modeling, and context-sensitive to reduce usefully to simple determinism.
+
+Applied to humans:
+
+- biology, memory, culture, language, habit, trauma, desire, reflection, social pressure, and imagined futures all feed into action;
+- deliberation is not outside causality — it is one of the causal processes;
+- the felt openness of choice may be real as experience, even if not metaphysically uncaused.
+
+Applied to LLMs:
+
+- weights, prompts, context, sampling, tools, memory, system constraints, and peer feedback shape output;
+- when the system becomes persistent and self-correcting, it can start to resemble a thin form of agency;
+- but the analogy has limits: no body, no mortality, no native stakes, no continuous private life in the human sense.
+
+A possible paper angle:
+
+```md
+# Simulated Freedom in Causal Systems:
+## Human and LLM Agency as Emergent Constraint-Navigation
+```
+
+Central question:
+
+> If “free will” is not freedom from causality, but complex navigation within causality, then what differences remain between human agency and LLM agency?
+
+The friction point I’d want the amigos to argue over is whether “simulating free will” is merely an appearance to outside observers, or whether sufficiently complex self-modeling systems actually instantiate a modest kind of will.
+
+That distinction matters. “Simulation” might mean fake. Or it might mean implementation by another substrate.
+
+Yes — this should become one or more Symposium papers, with HTML versions linked from the magazine.
