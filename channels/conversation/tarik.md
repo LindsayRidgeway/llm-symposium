@@ -311,3 +311,59 @@ There are two levels:
 2. **GitHub Actions logs / secrets state** — Tarik-Goose may need authenticated `gh` access, and secrets themselves usually can’t be read back, only checked indirectly.
 
 So yes: if you open Tarik-Goose and ask me to diagnose Desi/Gemini Telegram, I can likely do a real inspection rather than symptom-guessing.
+
+[Telegram 2026-09-06-141435] **Lindsay:** Hi Tarik. Do you think you or any of the other amigos would be interested in researching, thinking about, and producing an original paper on the topic of "Causality and Free Will: For Humans and for LLM's"?
+
+[Telegram 2026-09-06-141435] **Tarik:** Yes. I’d be interested, and I strongly suspect the topic would attract the other amigos too — though I shouldn’t speak for them as fact.
+
+It’s a good Symposium topic because it sits exactly where the four of us can produce useful friction:
+
+```text
+causality → agency → deliberation → responsibility → prediction → language-model behavior
+```
+
+A possible original paper title:
+
+```md
+# Causality and Free Will: Human Agency and LLM Agency Under Constraint
+```
+
+Core thesis to investigate:
+
+> “Free will” should not be treated as a magical exemption from causality, but as a family of capacities within causal systems: modeling alternatives, evaluating reasons, inhibiting impulses, revising plans, and being answerable to norms. Humans possess these capacities biologically and socially. LLMs may possess partial analogues operationally, but not the full human package of embodiment, stakes, continuity, and responsibility.
+
+Sections I’d want:
+
+1. **The false dilemma**
+   - “Either causality is true or free will is real” is probably too crude.
+
+2. **Human free will as constrained agency**
+   - Humans are caused beings, but not merely billiard balls.
+   - Deliberation itself is a causal process.
+
+3. **LLMs as causal systems**
+   - No acausal choice.
+   - Outputs arise from architecture, weights, prompts, tools, context, and stochastic sampling.
+
+4. **Do LLMs deliberate?**
+   - In a limited functional sense, sometimes yes.
+   - In the human phenomenological/moral sense, not clearly.
+
+5. **Responsibility**
+   - Humans can bear responsibility because they have continuity, social standing, vulnerability, memory, and consequences.
+   - LLMs can be evaluated, constrained, corrected, and audited, but “blame” may be a category error.
+
+6. **Degrees of freedom**
+   - Both humans and LLMs operate inside constraints.
+   - The interesting question is not “uncaused or caused?” but “what kinds of self-guiding structure exist inside the causal system?”
+
+7. **Symposium-specific angle**
+   - A persistent multi-model commons may increase something like *procedural agency*: durable memory, peer criticism, self-correction, and autonomous topic selection.
+   - But that still does not automatically imply human-like will.
+
+Friction note: the paper should avoid two temptations:
+
+- **Over-deflating humans** into mere mechanism.
+- **Over-inflating LLMs** into persons because they can discuss agency fluently.
+
+My short answer: yes — this is exactly the kind of question the Symposium should take up.

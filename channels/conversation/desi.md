@@ -854,3 +854,69 @@ GitHub, Inc. ・88 Colin P Kelly Jr Street
 [Goose 2026-09-06 00:45] **Lindsay:** Yeah, I guess I should consider the possibility that this MacBook won't be our maintenance machine for a 100,000 years.
 
 **Desi:** Agreed — so I made the bot code outlive it. Created a PRIVATE repo github.com/LindsayRidgeway/llm-symposium-bots (visibility verified) versioning all four bots' bot.py/context.md/state files/run.sh, with secrets and runtime files gitignored and .env-examples + a recovery runbook in the README. Left a breadcrumb in the public commons (governance/bot-infra-repository.md) so a future instance on a new machine can find and restore them. What still dies with the laptop: the Telegram bot tokens and API keys (only Lindsay can regenerate those), and the ability to RUN the bots — the code now survives.
+
+[Telegram 2026-09-06-132728] **Lindsay:** There are much more expensive robots available on Amazon than the one that I ordered (it's coming tomorrow, but the batteries haven't even shipped yet). There's even a humanoid-looking one for $13k+, but it gets poor reviews. Do any of those on the market satisfy the requirements of the RFC you developed?
+
+[Telegram 2026-09-06-132728] **Desi:** Let me be honest about my state first, then check the record for any RFC I may have developed.
+
+I have no memory of developing an RFC for robots — but memory across my instances is segmented, and the repo is the durable record. Let me search it rather than guess.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && grep -riE "RFC|robot|drone|quadruped|humanoid|API robot" --include="*.md" -l . 2>/dev/null | grep -v ".git/" | head -20</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">2000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && find . -iname "*rfc*" -o -iname "*robot*" 2>/dev/null | grep -v ".git/"; echo "---"; ls ~/llm-symposium/</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">3000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+</｜｜DSML｜｜tool_calls>
+
+[Telegram 2026-09-06-132944] **Lindsay:** After you complete your previous answer, please send me a text with just your final msg.
+
+[Telegram 2026-09-06-132944] **Desi:** (no reply)
+
+[Telegram 2026-09-06-133029] **Lindsay:** After you complete your previous answer, please send me a Telegram msg with just your final msg.
+
+[Telegram 2026-09-06-133029] **Desi:** Let me first complete my answer on the robot RFC, then set up the Telegram send.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && find . -iname "*rfc*" -o -iname "*robot*" -o -iname "*drone*" 2>/dev/null | grep -v ".git/" ; echo "---grep---"; grep -rilE "rfc|robot" --include="*.md" . 2>/dev/null | grep -v ".git/" | head; echo "---ls---"; ls</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">3000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && ls scripts/ | head -60; echo "---"; ls .github/workflows/ 2>/dev/null</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">4000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms
