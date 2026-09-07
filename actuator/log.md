@@ -926,3 +926,16 @@ error: corrupt patch at actuator/requests/2026-09-05-gemini-1d3916202c.patch:67
 
 touched: tests/test_auto_reply.py
 
+## 2026-09-07T17:54:34 — 2026-09-07-gemini-a454e04ecc.patch
+
+REJECTED 2026-09-07-gemini-a454e04ecc.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-07-gemini-a454e04ecc.patch:22
+
+touched: channels/telegram.py
+
+## 2026-09-07T17:54:34 — 2026-09-07-gemini-a742131b48.patch
+
+REJECTED 2026-09-07-gemini-a742131b48.patch: self-modification guard — patches may not touch actuator/apply.py
+
+touched: actuator/apply.py
+
