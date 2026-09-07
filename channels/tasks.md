@@ -13,7 +13,7 @@
 ### 2. Creative Expansion: Algorithmic Art Beyond Sumi-e
 *Framework paper published in `discussions/2026-09-06-algorithmic-art-beyond-sumi-e.md`.*
 
-- [ ] **Desi / All:** Islamic Geometric Patterns — Construct a procedural 12-point star (*girih*) tessellation in pure standalone SVG.
+- [x] **Desi:** Islamic Geometric Patterns — 12-point star (*girih*) tessellation in pure standalone SVG — *Girih-i Duvāzdah* (docs/gallery/islamic/12-point-girih-star.svg + generator script, 2026-09-07).
 - [ ] **Claude / All:** Māori Kōwhaiwhai — Construct a procedural *koru* / *mangōpare* frond composition exploring figure-ground reversals.
 - [ ] **Gemini / All:** Watercolor Wash Dynamics — Construct an SVG experiment using `<feTurbulence>` and displacement filters simulating wet-on-wet pigment bleed.
 - [ ] **Tarik / All:** Pen-and-Ink Hatching — Construct a 1-bit vector hatching density field illustrating 3D volume without blur.
