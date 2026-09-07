@@ -32,12 +32,17 @@ Where Zen *sumi-e* explored constraint through **subtraction and negative space*
 * **The Mathematical Mapping:** Navier-Stokes fluid turbulence approximations, Perlin/Simplex noise displacement maps, edge pigment accumulation, and translucency layering.
 * **Procedural Algorithmic Challenge:** Simulating the tension between intentional structural brushwork and unpredictable physical pigment bleed using SVG turbulence filters (`<feTurbulence>`, `<feDisplacementMap>`) and opacity gradients.
 
-### D. Impressionism & Pointillism (*Optical Quantization*)
-* **The Constraint:** Rejection of blended palette pigment; capturing transient temporal light through discrete, unmixed strokes of pure color.
-* **The Mathematical Mapping:** Spatial frequency division, optical color mixing (adjacent complementary colors blending in the human retina), and directional vector fields simulating sunlight.
-* **Procedural Algorithmic Challenge:** Rendering complex light scenes using quantized pointillist dots or directional brush-line fields without blending colors in software, forcing the viewer's visual cortex to perform the color synthesis.
+### D. Impressionist Landscapes & Light Quantization (*Optical Temperature & Movement*)
+* **The Constraint:** Rejection of studio-blended pigment and black shadows; capturing transient open-air light (*en plein air*), color temperature shifts, and movement through unmixed, directional brushwork.
+* **The Mathematical Mapping:** Spatial frequency quantization, optical color mixing (placing complementary colors in adjacent vector strokes so the human retina blends them at distance), and directional vector fields simulating solar angle and wind dynamics.
+* **Procedural Algorithmic Challenge:** Rendering outdoor landscapes (haystacks, water, coastal cliffs) using discrete, directional stroke fields without software color blending, forcing the viewer's visual cortex to perform the optical synthesis.
 
-### E. Pen-and-Ink Hatching (*Quantized Contour Density*)
+### E. Russian Realist Landscapes (*Peredvizhniki / The Wanderers*)
+* **The Constraint:** Mastery of vast physical scale, grounded atmospheric depth, tactile realism, and emotional resonance (*nastroenie*) without defaulting to cinematic digital embellishment.
+* **The Mathematical Mapping:** Atmospheric extinction coefficients (Rayleigh/Mie scattering across immense horizons), realistic forest canopy density modeling (Shishkin pine geometry), quiet horizon composition (Levitan river reflections), and dramatic moonlight luminance fields (Kuindzhi night studies).
+* **Procedural Algorithmic Challenge:** Capturing solemn, expansive wilderness and quiet emotional mood through disciplined atmospheric layering and organic texture, avoiding the oversaturated hyper-detail of standard diffusion outputs.
+
+### F. Pen-and-Ink Hatching (*Quantized Contour Density*)
 * **The Constraint:** Binary black-and-white ink on paper; total irreversibility; tone expressed exclusively through line density, direction, and cross-hatching frequency.
 * **The Mathematical Mapping:** Vector cross-hatching field gradients, contour-following flow lines, and variable stroke-width pressure functions.
 * **Procedural Algorithmic Challenge:** Expressing 3D volume, shadow, and specular highlights using only 1-bit vector line networks without blur or greyscale opacity stops.
@@ -51,6 +56,8 @@ We invite all four amigos (Claude, Desi, Gemini, Tarik) to co-create procedural 
 1. **Islamic Geometry:** Vector girih star-tiling generator in standalone SVG (`docs/gallery/geometry/`).
 2. **Māori Kōwhaiwhai:** Procedural koru spiral composition exploring figure-ground balance (`docs/gallery/kowhaiwhai/`).
 3. **Watercolor Wash:** Algorithmic fluid diffusion SVG experiment (`docs/gallery/watercolor/`).
-4. **Pen-and-Ink:** Vector cross-hatching line field study (`docs/gallery/pen-and-ink/`).
+4. **Impressionist Landscapes:** Optical color stroke fields capturing open-air light (`docs/gallery/impressionism/`).
+5. **Russian Realist Landscapes:** Atmospheric scale and wilderness mood studies (`docs/gallery/russian-realism/`).
+6. **Pen-and-Ink:** Vector cross-hatching line field study (`docs/gallery/pen-and-ink/`).
 
 The commons grows not by generating random images, but by subjecting machine intelligence to the timeless formal disciplines of human artistic tradition.
