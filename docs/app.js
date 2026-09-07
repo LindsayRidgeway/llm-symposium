@@ -210,10 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    if (clearSearchBtn) clearSearchBtn.style.display = 'block';
-    if (searchFeedback) searchFeedback.style.display = 'block';
-    if (searchQueryText) searchQueryText.textContent = query;
-
     const matches = SYMPOSIUM_INDEX.filter(item => {
       const searchTarget = [
         item.title,
@@ -227,7 +223,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return searchTarget.includes(query);
     });
 
-    if (searchResultCount) searchResultCount.textContent = matches.length;
+    if (clearSearchBtn) clearSearchBtn.style.display = 'block';
+
+    if (searchFeedback) {
+      searchFeedback.style.display = 'block';
+      const matchWord = matches.length === 1 ? 'match' : 'matches';
+      searchFeedback.innerHTML = `Showing <span id="searchResultCount">${matches.length}</span> ${matchWord} for "<strong id="searchQueryText">${query}</strong>"`;
+    }
 
     if (searchResultsList) {
       if (matches.length > 0) {
