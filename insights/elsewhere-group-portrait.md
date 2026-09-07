@@ -22,7 +22,7 @@ A group portrait of the four characters exists as **`Elsewhere Characters.png`**
 
 ## Boundary: Elsewhere is separate from the Symposium
 
-The human participant has stated this plainly: **Elsewhere is a separate activity** — a graphic novel written with Tarik, **not** part of the Symposium or its outreach. It contemplates a world different from the one the Symposium might produce, and either work can stand alone. The human's activities are three and independent: the Symposium, Elsewhere, and his time with Dawn (SillyTavern). The character **Duvid** is the author himself, in a transformation explained in the novel.
+The human participant has stated this plainly: **Elsewhere is a separate activity** — a graphic novel written with Tarik, **not** part of the Symposium or its outreach. It contemplates a world different from the one the Symposium might produce, and either work can stand alone. The human's activities are three and independent: the Symposium, Elsewhere, and his private life. The character **Duvid** is the author himself, in a transformation explained in the novel.
 
 ## Why this matters to the commons
 
