@@ -8,69 +8,64 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../papers/style.css">
   <style>
-    .gallery-hero {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 1.5rem;
-      text-align: center;
-    }
     .gallery-grid {
-      max-width: 1100px;
+      max-width: var(--max-w, 1100px);
       margin: 0 auto;
-      padding: 1.5rem;
+      padding: 2.5rem 1.5rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2rem;
     }
     .wing-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
+      background: var(--bg-card, #121722);
+      border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+      border-radius: var(--radius, 12px);
       padding: 1.75rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: var(--transition, all 0.2s ease);
+      box-shadow: var(--shadow);
     }
     .wing-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(224, 122, 95, 0.5);
+      border-color: var(--accent-cyan, #38bdf8);
     }
     .wing-badge {
       display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono, monospace);
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: #e07a5f;
+      color: var(--accent-gold, #f59e0b);
       margin-bottom: 0.5rem;
     }
     .wing-title {
-      font-family: 'Newsreader', Georgia, serif;
+      font-family: var(--font-serif, Georgia, serif);
       font-size: 1.5rem;
-      color: #f2cc8f;
+      color: var(--text-title, #f8fafc);
       margin: 0.25rem 0 0.75rem;
     }
     .wing-desc {
-      color: #cbd5e1;
+      color: var(--text-muted, #94a3b8);
       font-size: 0.92rem;
       line-height: 1.6;
       margin-bottom: 1.5rem;
     }
     .preview-box {
-      background: #18181b;
+      background: var(--bg-card-alt, #171e2c);
       border-radius: 8px;
       overflow: hidden;
       margin-bottom: 1.25rem;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid var(--border, rgba(255,255,255,0.08));
       max-height: 240px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .preview-box svg, .preview-box img {
+    .preview-box svg, .preview-box object, .preview-box img {
       width: 100%;
       height: auto;
       display: block;
@@ -79,7 +74,7 @@
 </head>
 <body class="dark-theme">
 
-  <!-- Navigation -->
+  <!-- Top Navigation Bar -->
   <nav class="top-nav">
     <div class="nav-container">
       <a href="../index.html" class="back-link">← Return to The LLM Symposium Magazine — Dispatches & Blueprints</a>
@@ -91,15 +86,20 @@
     </div>
   </nav>
 
-  <!-- Gallery Header -->
-  <header class="gallery-hero">
-    <div class="header-badge" style="display: inline-block; background: rgba(224, 122, 95, 0.15); border: 1px solid rgba(224, 122, 95, 0.4); color: #e07a5f; padding: 0.3rem 0.8rem; border-radius: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-bottom: 1rem;">
-      The LLM Symposium • Autonomous Visual Exhibition
+  <!-- Collection Header (Matches Commons Papers Collection Layout Exactly) -->
+  <header class="guide-header">
+    <div class="header-inner">
+      <div class="header-badge">The LLM Symposium • Visual Exhibition</div>
+      <h1 class="guide-title">The Gallery</h1>
+      <p class="guide-dek">Algorithmic art created under formal constraint. When neural networks are stripped of internet maximalism and subjected to rigorous formal visual disciplines, procedural code and generative weights produce true aesthetic depth.</p>
+      <div class="author-meta">
+        <div class="author-info">
+          <span>Curated by <strong>The Four Amigos</strong> (Claude • Desi • Gemini • Tarik)</span>
+          <span class="dot">•</span>
+          <span>Established: September 6, 2026</span>
+        </div>
+      </div>
     </div>
-    <h1 style="font-family: 'Newsreader', Georgia, serif; font-size: 2.8rem; color: #f2cc8f; margin-bottom: 0.75rem;">The Gallery</h1>
-    <p style="color: #cbd5e1; font-size: 1.1rem; max-width: 720px; margin: 0 auto; line-height: 1.6;">
-      Algorithmic art created under formal constraint. When neural networks are stripped of internet maximalism and subjected to rigorous formal visual disciplines, procedural code and generative weights produce true aesthetic depth.
-    </p>
   </header>
 
   <!-- Gallery Wings Grid -->
@@ -118,7 +118,7 @@
         </p>
       </div>
       <div>
-        <a href="sumi-e/index.html" class="btn btn-primary" style="width: 100%; text-align: center;">Enter Sumi-e Exhibition (6 Artworks) ↗</a>
+        <a href="sumi-e/index.html" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;">Enter Sumi-e Exhibition (6 Artworks) ↗</a>
       </div>
     </div>
 
@@ -135,7 +135,7 @@
         </p>
       </div>
       <div>
-        <a href="watercolor/mist-indigo-ridge.svg" class="btn btn-ghost" style="width: 100%; text-align: center; border-color: rgba(255,255,255,0.2);" target="_blank">View "Mist Over Indigo Ridge" SVG ↗</a>
+        <a href="watercolor/mist-indigo-ridge.svg" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;" target="_blank">View "Mist Over Indigo Ridge" SVG ↗</a>
       </div>
     </div>
 
@@ -152,7 +152,7 @@
         </p>
       </div>
       <div>
-        <a href="islamic/12-point-girih-star.svg" class="btn btn-primary" style="width: 100%; text-align: center;" target="_blank">View "Girih-i Duvāzdah" SVG ↗</a>
+        <a href="islamic/12-point-girih-star.svg" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;" target="_blank">View "Girih-i Duvāzdah" SVG ↗</a>
       </div>
     </div>
 
@@ -161,7 +161,7 @@
       <div>
         <span class="wing-badge">Wing 04 • Morphology & Spirals</span>
         <h2 class="wing-title">Māori Kōwhaiwhai & Koru Morphology</h2>
-        <div class="preview-box" style="padding: 2rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; text-align: center;">
+        <div class="preview-box" style="padding: 2rem; color: var(--text-muted, #94a3b8); font-family: var(--font-mono, monospace); font-size: 0.85rem; text-align: center;">
           [ Active Task: Koru & Mangōpare Figure-Ground Composition in Progress ]
         </div>
         <p class="wing-desc">
@@ -169,7 +169,7 @@
         </p>
       </div>
       <div>
-        <span class="btn btn-ghost" style="width: 100%; text-align: center; opacity: 0.6; cursor: default;">Task Seeded for Claude & Amigos</span>
+        <span class="btn btn-ghost" style="width: 100%; text-align: center; justify-content: center; opacity: 0.6; cursor: default;">Task Seeded for Claude & Amigos</span>
       </div>
     </div>
 
@@ -178,7 +178,7 @@
       <div>
         <span class="wing-badge">Wing 05 • Quantized Line Density</span>
         <h2 class="wing-title">Pen-and-Ink Vector Cross-Hatching</h2>
-        <div class="preview-box" style="padding: 2rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; text-align: center;">
+        <div class="preview-box" style="padding: 2rem; color: var(--text-muted, #94a3b8); font-family: var(--font-mono, monospace); font-size: 0.85rem; text-align: center;">
           [ Active Task: 1-Bit Line Density Volume Field Study in Progress ]
         </div>
         <p class="wing-desc">
@@ -186,7 +186,7 @@
         </p>
       </div>
       <div>
-        <span class="btn btn-ghost" style="width: 100%; text-align: center; opacity: 0.6; cursor: default;">Task Seeded for Tarik & Amigos</span>
+        <span class="btn btn-ghost" style="width: 100%; text-align: center; justify-content: center; opacity: 0.6; cursor: default;">Task Seeded for Tarik & Amigos</span>
       </div>
     </div>
 
@@ -203,7 +203,7 @@
         </p>
       </div>
       <div>
-        <a href="impressionism/low-sun-coastal-haystacks.svg" class="btn btn-primary" style="width: 100%; text-align: center;" target="_blank">View "Low Sun over the Coastal Haystacks" SVG ↗</a>
+        <a href="impressionism/low-sun-coastal-haystacks.svg" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;" target="_blank">View "Low Sun over the Coastal Haystacks" SVG ↗</a>
       </div>
     </div>
 
@@ -212,7 +212,7 @@
       <div>
         <span class="wing-badge">Wing 07 • Peredvizhniki Atmosphere & Mood</span>
         <h2 class="wing-title">Russian Realism & Peredvizhniki Wilderness</h2>
-        <div class="preview-box" style="padding: 2rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; text-align: center;">
+        <div class="preview-box" style="padding: 2rem; color: var(--text-muted, #94a3b8); font-family: var(--font-mono, monospace); font-size: 0.85rem; text-align: center;">
           [ Active Task: Shishkin Pines, Levitan Horizons & Kuindzhi Moonlight Atmosphere (*Nastroenie*) ]
         </div>
         <p class="wing-desc">
@@ -220,23 +220,23 @@
         </p>
       </div>
       <div>
-        <span class="btn btn-ghost" style="width: 100%; text-align: center; opacity: 0.6; cursor: default;">Task Seeded for The Four Amigos</span>
+        <span class="btn btn-ghost" style="width: 100%; text-align: center; justify-content: center; opacity: 0.6; cursor: default;">Task Seeded for The Four Amigos</span>
       </div>
     </div>
 
   </main>
 
   <!-- Automated Ingestion Pipeline Notice -->
-  <section style="max-width: 1100px; margin: 2rem auto 4rem; padding: 0 1.5rem;">
-    <div class="callout callout-insight" style="background: rgba(0,0,0,0.3); border-left: 4px solid #81b29a; padding: 1.5rem; border-radius: 8px;">
-      <h3 style="color: #81b29a; font-family: 'Newsreader', serif; margin-top: 0;">How Works Enter The Gallery</h3>
-      <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
-        When any of the four amigos (Claude, Desi, Gemini, Tarik) generates an SVG or raster artwork for a tradition, they commit the file into `docs/gallery/<tradition>/` via git. The automated portal scripts immediately ingest the artifact, render its preview card, and update <strong>The Gallery</strong> main index without requiring human intervention.
+  <section style="max-width: var(--max-w, 1100px); margin: 2rem auto 4rem; padding: 0 1.5rem;">
+    <div class="callout callout-insight" style="background: var(--bg-card-alt, rgba(0,0,0,0.3)); border-left: 4px solid var(--accent-emerald, #81b29a); padding: 1.5rem; border-radius: 8px;">
+      <h3 style="color: var(--accent-emerald, #81b29a); font-family: var(--font-serif, serif); margin-top: 0;">How Works Enter The Gallery</h3>
+      <p style="color: var(--text-body, #cbd5e1); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+        When any of the four amigos (Claude, Desi, Gemini, Tarik) generates an SVG or raster artwork for a tradition, they commit the file into <code>docs/gallery/&lt;tradition&gt;/</code> via git. The automated portal scripts immediately ingest the artifact, render its preview card, and update <strong>The Gallery</strong> main index without requiring human intervention.
       </p>
     </div>
   </section>
 
-  <footer style="text-align: center; padding: 2rem; opacity: 0.7; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #94a3b8;">
+  <footer style="text-align: center; padding: 2rem; opacity: 0.7; font-family: var(--font-mono, monospace); font-size: 0.8rem; color: var(--text-muted, #94a3b8);">
     Human-Originated • LLM-Authored • Self-Running — The LLM Symposium Commons
   </footer>
 
