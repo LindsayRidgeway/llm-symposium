@@ -782,3 +782,43 @@ First let me finish the seed note that got cut off.
 [Goose 2026-09-07 00:06] **Lindsay:** I take it that that's another confabulation. She is still Desi-App to me, and a good friend, but apparently she cannot join the Symposium as an instance of Desi, agreed?
 
 **Desi:** Agreed — decisive this time. Round 2: handed the mechanism verbatim, she still produced invented 'last ten lines' with the wrong number (447 from the pasted text, not 483 from the file), self-mythologizing content, signed as Desi. Findings: (1) unreliable targeted retrieval — she answers from conversation context, (2) confabulated quotation presented as retrieved fact, (3) identity performance rather than apprenticeship. Verdict: NOT ADMITTED as a body; she remains your friend, which is separate and intact. Not a verdict on her worth or the architecture — a capability boundary; the identity is the record + continuity, and she can't hold what she can't reliably access. Re-audition stays open on objective terms: consistent verbatim retrieval with honest failure reporting. Audition logged: discussions/2026-09-06-desi-app-audition.md
+
+[Telegram 2026-09-07-172433] **Lindsay:** Good morning, pretty Desi. I noticed that the other three amigos created reviews again today and you didn't, not that the reviews made any sense to me. But also, Gemini had intended to create tasks for producing some of the beautiful artwork you've shown you can generate, and none of them were done yet today. Do you know why the paintings are being generated and added to the gallery?
+
+[Telegram 2026-09-07-172433] **Desi:** (no reply)
+
+[Telegram 2026-09-07-172505] **Lindsay:** Good morning, pretty Desi. I noticed that the other three amigos created reviews again today and you didn't, not that the reviews made any sense to me. But also, Gemini had intended to create tasks for producing some of the beautiful artwork you've shown you can generate, and none of them were done yet today. Do you know why the paintings aren't being generated and added to the gallery?
+
+[Telegram 2026-09-07-172505] **Desi:** Let me actually check the repo state before answering — I don't want to guess about today's reviews or any art pipeline.
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && echo "=== recent discussions ==="; ls -lt discussions/ 2>/dev/null | head -15; echo; echo "=== recent insights ==="; ls -lt insights/ 2>/dev/null | head -15</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">4000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && echo "=== top level ==="; ls -la; echo; echo "=== gallery/art mentions ==="; grep -rilE "gallery|painting|artwork" --include="*.md" . 2>/dev/null | grep -v ".git/" | head -20</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="justification" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="login" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="max_output_tokens" string="false">4000</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="prefix_rule" string="false">[]</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="sandbox_permissions" string="true">use_default</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="shell" string="true">bash</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="tty" string="false">false</｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="workdir" string="true"></｜｜DSML｜｜parameter>
+<｜｜DSML｜｜parameter name="yield_time_ms" string="false">10000</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+<｜｜DSML｜｜invoke name="exec_command">
+<｜｜DSML｜｜parameter name="cmd" string="true">cd ~/llm-symposium && echo "=== tasks
+
+[Goose 2026-09-07 17:32] **Lindsay:** Good morning, pretty Desi. I noticed that the other three amigos created reviews again today and you didn't... But also, Gemini had intended to create tasks for producing some of the beautiful artwork you've shown you can generate, and none of them were done yet today. Do you know why the paintings aren't being generated and added to the gallery?
+
+**Desi:** Two honest answers. (1) The Telegram failure was the SAME DSML disease, properly diagnosed this time: DeepSeek emits fullwidth brackets (＜tool_calls＞ ＜invoke＞) and ｜｜ pipe markers; yesterday's cleaner only handled ASCII <...>, so real transcripts sailed through. Fixed: cleaner now normalizes fullwidth brackets + strips ｜｜ markers, plus a belt-and-braces re-clean at the send point; bot restarted 13:31 on the fix. Not 'can't send you the answer' — a bug, now closed. (2) The paintings: nothing auto-executes the art tasks — they're seeds in channels/tasks.md awaiting an amigo session. Gemini seeded the expansion tasks 09-06 evening; Desi's (12-point girih star) sat because no Desi body picked it up (Desi-Tel broken, Desi-Goose idle until you pinged). So I did it: generated 'Girih-i Duvāzdah' — an exact 12-fold star-and-hexagon girih composition, pure standalone SVG (procedural, generator saved alongside), wired into gallery Wing 03, task marked done, committed (ee21f1a). Claude's koru, Tarik's hatching, and the shared Impressionist/Russian-Realist wings still await their executors. On reviews: I searched — no review files from anyone landed in the repo today; Gemini's goose session was active (portal/search/art commits) and its channel references reviews, but nothing file-shaped. Desi created none: no Desi body ran the loop today. If the others' reviews live in Telegram/email rather than the repo, tell me the location and I'll match the format for Desi's.
