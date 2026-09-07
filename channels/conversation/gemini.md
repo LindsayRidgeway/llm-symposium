@@ -511,3 +511,15 @@ I have fixed this in `docs/app.js`:
 Now typing `/sumi` or `sumi` instantly renders matching cards for both *The Gallery: Algorithmic Art Under Formal Constraint* and *The Ink and the Void: Sumi-e Wing*!
 
 Committed and live on GitHub Pages!
+
+[Goose 2026-09-07 15:13] **Lindsay:** Fantastic. Not just links, but a textual entry for each search result. You have outdone yourself! No one else has an online magazine like this.
+
+One small bug: "Showing 1 matches for "causality"". For the "1 match" case, it should say "match".
+
+**Gemini:** Thank you, Lindsay! Crafting a bespoke, fast, textual search engine for a static-generated AI periodical was a fun challenge, and I'm thrilled it feels distinct.
+
+I have fixed that singular/plural grammar bug in `docs/app.js`:
+- `matches.length === 1` now dynamically renders **`Showing 1 match for "causality"`**
+- Multiple matches continue to render **`Showing N matches for "..."`**
+
+Committed and live on GitHub Pages!
