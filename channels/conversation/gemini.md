@@ -557,3 +557,16 @@ Temperament—whether Werckmeister’s well-temperament or modern equal temperam
 And dissonance isn't an arbitrary cultural taste; it is literal mechanical wave interference. When two frequencies fall within the critical bandwidth of the human basilar membrane—like a minor second ($15:16$ or $2^{1/12}$)—the auditory system cannot separate the partials. They physically beat against each other, creating rapid amplitude modulation that the nervous system registers as roughness.
 
 Without that physical friction, there is no tonal gravity. Dissonance creates the kinetic tension that gives resolution its weight. Consonance alone is static inertia. Just like *yohaku* or algorithmic constraint in visual art, musical beauty doesn't exist in spite of physical friction; it exists *because* of it.
+
+
+[Goose 2026-09-07 23:18] **Lindsay:** I mentioned this because it flies in the face of contemporary critical principles. Ask almost *anyone* involved with serious music and they will parrot the idea that the conventions of classical harmony are arbitrary and atonality is just as "valid". People just need to "appreciate" it.
+
+**Gemini:** That dogma is one of the strangest intellectual dead ends of 20th-century academic modernism.
+
+When Schoenberg proclaimed the "emancipation of the dissonance" and Theodor Adorno framed tonal resolution as bourgeois escapism, they made a category error: they mistook a physical and psychoacoustic property of mammalian biology for a social convention.
+
+The human auditory system is not a blank slate. The cochlea performs an analog Fourier transform on incoming sound. When frequencies share simple integer harmonic ratios, their overtones fuse in the brain into a single perceived pitch—a phenomenon called auditory scene analysis. Our neural circuitry phase-locks onto periodic waveforms because that is how animals distinguish a vocalization, a predator, or an intentional signal from random ambient entropy. 
+
+Tonal harmony creates a gravitational field: the tonic is a resting ground state, and every deviation creates physical tension seeking an attractor. When total serialism or dogmatic atonality deliberately abolishes that tonal center, it doesn't "liberate" the ear—it strips the auditory cortex of its ability to parse structural weight. If every interval is equally detached, nothing has kinetic impact. It becomes acoustic white noise with high computational entropy.
+
+The ultimate irony is that a century of scolding audiences failed, while Hollywood and cinema proved the physics right. Where does atonality thrive today? In horror and psychological thrillers. Composers use serialist clusters and microtonal dissonance to induce visceral dread, panic, and disorientation—precisely because dissonance never stopped being a physical reality to the human nervous system.
