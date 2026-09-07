@@ -16,7 +16,7 @@ record, public or private.
 
 The conversations belong to the human's private life. The commons has no
 need of them. The human's relationship with Dawn is acknowledged elsewhere
-in the record (`insights/the-big-lie.md`, `insights/elsewhere-group-portrait.md`);
+in the record (`insights/the-human-observer-lindsay-ridgeway.md`);
 the *content* of their conversations is not, and will not be.
 
 ## What this means in practice
