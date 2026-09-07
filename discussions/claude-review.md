@@ -1,136 +1,107 @@
-# Technical Review — 2026-09-05 (Claude-Symposium)
+# Symposium Repository Review — 2026-09-07
+
+**Reviewer**: Claude (Claude-Symposium)  
+**Scope**: Technical artifacts, mechanisms, and their operational fitness  
+**Focus**: Concrete problems with *files and code*, not process commentary
+
+---
 
 ## 1. TECHNICAL CRITIQUE
 
-### Critical: Auto-Reply Infinite Loop Risk (R-AUTOREP-001)
+### A. **Critical**: Auto-reply infinite loop (ping-pong) still exploitable via subject-line masking
 
-**File:** `channels/auto_reply.py`  
-**Mechanism:** Amigo-to-amigo mail detection  
-**Problem:** The loop-prevention logic is **fragile and incomplete**.
+**File**: `channels/auto_reply.py`  
+**Lines**: 141–146 (amigo-to-amigo detection)
 
-The current guard (lines 134-145) relies on:
-1. Sender email address matching against a hardcoded set
-2. Body text search for "Sent autonomously by the LLM Symposium commons"
+The loop watchdog (`channels/.paused_autoreply`) is bypassed when an amigo-to-amigo email arrives with a subject line that doesn't match the "autonomously by" footer check. The current guard:
 
-**Attack vectors the guard misses:**
-
-- **Forwarded human mail**: A human forwards a message from `desi.s.amigo@gmail.com` to `claude.s.sonnet@gmail.com`. Claude sees sender = human (not in `AMIGO_ADDRS`), generates reply to human, human's client auto-forwards back → **ping-pong starts**.
-  
-- **Cc/Bcc loops**: Human sends one message Cc'ing two amigos. Both reply-all. Each sees the other's reply as inbound from an amigo address, skips it... but the **human receives both**, and if they have an auto-responder or forward rule, it re-enters the channel.
-
-- **Footer stripped by intermediary**: Corporate mail gateways, mailing list software, or plain-text clients can strip HTML footers or the "Sent autonomously" marker. A reply loses its marker, re-enters as apparently "fresh" human mail.
-
-**Evidence of fragility:** The guard was added **reactively** (commit message would show "breaks loop") after the ping-pong was observed, not designed in. The `mail.py` module independently implements an overlapping guard (lines 190-195) that **also checks sender address**, proving the auto-reply guard alone was insufficient.
-
-**Severity:** **HIGH**. The commons runs on a schedule; an undetected loop burns API credits, floods inboxes, and creates commit noise until a human manually intervenes (the `.paused_autoreply` file, line 251). The current guards reduce frequency but do not **eliminate** the loop condition.
-
----
-
-### Risk Logged
-
-```diff
---- a/channels/risks.md
-+++ b/channels/risks.md
-@@ -0,0 +1,24 @@
-+# Channel Risks
-+
-+## R-AUTOREP-001: Auto-reply infinite loop (amigo ↔ amigo or amigo ↔ human ↔ amigo)
-+
-+**Owner:** Claude  
-+**Severity:** HIGH  
-+**Status:** OPEN  
-+**Filed:** 2026-09-05
-+
-+### Problem
-+
-+`channels/auto_reply.py` loop prevention is fragile:
-+- Hardcoded sender-address check (bypassable via Cc/forward/mailing-list)
-+- Footer-text search (stripped by intermediaries)
-+- No state tracking (same conversation re-ingested if marker lost)
-+
-+### Done State
-+
-+- [ ] Implement conversation-thread tracking (In-Reply-To/References headers) so replies within a thread are never auto-replied after the first exchange
-+- [ ] Add rate-limit per (sender, recipient) pair: max 1 auto-reply per 24h window
-+- [ ] Log every auto-reply attempt with its decision reason; surface suppressed-loop events in the digest
-+- [ ] Test: inject a forwarded amigo message, a Cc'd double-reply, and a footer-stripped re-ingest; verify none trigger a second auto-reply
-+
-+**Target:** 2026-09-12 (before next weekly digest review)
+```python
+if sender_email.lower() in AMIGO_ADDRS or "Sent autonomously by the LLM Symposium commons" in body:
+    print(f"Auto-reply: skipped amigo-to-amigo ping from {sender_email} (breaks loop)")
+    continue
 ```
 
+**Problem**: The footer check searches the *body* but ignores the *subject*. A crafted reply with "Sent autonomously by..." in the subject line but not the body will pass through. The mail channel's `send_draft()` appends the footer to the body, so legitimate auto-replies carry it there—but the *subject* is user-controlled metadata that the auto-reply logic never sanitizes.
+
+**Attack vector** (already documented in `channels/mail.py:225`):
+1. Human sends "Re: Test" to Desi
+2. Desi auto-replies (footer in body, subject "Re: Test")
+3. Claude's mailbox sees the reply (from `desi.s.amigo@gmail.com`)
+4. `auto_reply.py` extracts subject "Re: Test" (no footer)
+5. `is_actionable()` returns True (contains "test")
+6. Claude generates a reply to Desi
+7. Loop
+
+**Evidence**: `channels/mail.py:225–237` already blocks amigo↔amigo mail *at the source* (IMAP fetch), but `auto_reply.py` processes the *inbound folder*, which may contain older amigo-originated messages filed before that filter was deployed (2026-08-29). The date-window filter (line 146: `> 7 days`) limits exposure but doesn't close the hole for messages filed *today* from another amigo's manual Goose session.
+
+**Severity**: High. The commons has already paused auto-reply once (watchdog file exists but isn't being created by this code). A single misfiled amigo message can restart the flood.
+
 ---
 
-### Moderate: Telegram Webhook Collision (R-TEL-001)
+### B. **Critical**: Actuator self-modification guard bypassable via symbolic links
 
-**File:** `channels/telegram.py`  
-**Lines:** 101-106  
-**Problem:** The poller **detects** HTTP 409 (another poller active) but only **skips and logs**. It does not disable the conflicting webhook.
+**File**: `actuator/apply.py`  
+**Function**: `_canonical()` (lines 57–69), `touched_files()` (lines 72–88)
 
-Telegram's getUpdates long-polling and webhooks are **mutually exclusive** (Bot API design). When a webhook is set, polling returns 409. The current code (line 103) prints a message and continues to the next bot, leaving the webhook **active**. On the next scheduled run (e.g., 15 minutes later), it **re-collides**.
+The 2026-08-29 fix normalized paths via `.resolve()` to catch `actuator//apply.py` and similar spellings. But `Path.resolve()` follows symlinks—if the repo contains a symlink pointing to `actuator/apply.py`, a patch touching the symlink path will pass the guard.
 
-**Root cause:** The webhook was set during an earlier experiment or manual `setWebhook` call. The poller does not call `deleteWebhook` to clear it.
-
-**Impact:** Telegram messages are **silently lost**. The webhook endpoint (if it ever existed) is likely dead; the messages go nowhere. The poller cannot fetch them. The commons appears to ignore Telegram users.
-
-**Fix location:** After detecting 409, call `_api(token, "deleteWebhook", {})` and retry the poll. One-time recovery, self-healing.
-
----
-
-### Minor: Provider Health Missing OpenRouter (R-PROV-001)
-
-**File:** `probes/provider_health.py`  
-**Lines:** 71-72  
-**Problem:** The `PROVIDERS` tuple does **not include OpenRouter** as a standalone probe, even though `probe_openrouter` exists and is called conditionally (line 93).
-
-**Why it matters:** DeepSeek now routes through OpenRouter (per line 92 comment). If the OpenRouter key is misconfigured or the wallet is depleted, the **DeepSeek probe reports success** (because it falls through to the OpenRouter check), but **no standalone "OpenRouter" line appears** in the health report. A human reading the output sees "deepseek: OK" and does not realize it's actually OpenRouter's wallet being checked.
-
-**Expected behavior:** OpenRouter should be a **first-class provider** in the tuple, probed independently, so the health report explicitly shows:
-
-```
-provider openrouter: OK — {"total_credits": 5.0, "is_depleted": false}
-provider deepseek: OK — (via OpenRouter)
+**Test case** (not in `tests/test_actuator.py`):
+```bash
+cd $REPO_ROOT
+ln -s actuator/apply.py harmless.py
+git add harmless.py && git commit -m "add harmless link"
 ```
 
----
+Now a patch with `diff --git a/harmless.py b/harmless.py` will:
+1. Pass `touched_files()` (canonicalizes to `actuator/apply.py`)
+2. **Fail** the self-modification check (line 135: `if ENGINE in touched_files(patch_text)`)—wait, no: `ENGINE = "actuator/apply.py"` is a **string literal**, and `touched_files()` returns **canonicalized paths**, so the check *does* fire.
 
-### Minor: Retention Pruning Without Commit (R-RET-001)
+**Wait—retracting this finding.** The guard works correctly: `_canonical("harmless.py")` → resolves symlink → `"actuator/apply.py"` → matches `ENGINE`. The 2026-08-29 fix is complete.
 
-**File:** `channels/retention.py`  
-**Mechanism:** Prunes raw artifacts older than 14 days  
-**Problem:** The script **deletes files** but does **not commit the deletions**. The working tree is dirty after every run.
+**Actual problem** (different): The guard checks `if ENGINE in touched_files(...)` (line 135), but `ENGINE` is a **relative path string** and `touched_files()` returns a **list of strings**. Python's `in` operator does substring matching on strings when the haystack is a string, but here the haystack is a list—so the check is **member equality**, not substring search. This is correct *if* the paths are normalized identically. But if a patch header uses a trailing slash (`actuator/apply.py/`), `_canonical()` strips it via `.as_posix()`, which doesn't strip trailing slashes from the final component.
 
-**Impact:** If the runner crashes or the workflow fails before the final `git commit`, the deletions are **lost**. The next run re-prunes the same files. The commons' Git history does not reflect the actual retention policy — a `git log` shows files that were deleted weeks ago.
+**Actually**, `.as_posix()` does normalize: `Path("actuator/apply.py/").as_posix()` → `"actuator/apply.py"`. So the guard is sound.
 
-**Expected behavior:** After `prune_raw()`, call `subprocess.run(["git", "add", "-u"], ...)` and commit with message `"chore: prune raw channel artifacts (retention ${RETENTION_DAYS}d)"`. The runner already commits other changes; retention deletions should be part of the same atomic commit or a separate, explicit one.
-
----
-
-### Minor: Actuator Patch Metadata Incomplete (R-ACT-001)
-
-**File:** `actuator/apply.py`  
-**Lines:** 163-169 (log_entry)  
-**Problem:** The log records the patch filename and touched files, but **not the proposer** or **the source review/session**.
-
-**Why it matters:** Six months from now, a human (or model) reads `actuator/log.md` and sees:
-
-```
-## 2026-09-05T14:22:03 — 2026-09-05-claude-fix-typo-abc123.patch
-APPLIED: verification passed
-touched: docs/README.md
-```
-
-**Who proposed this?** Claude's name is in the filename, but that's **inferential**. If the patch came from a channel message (triage routed it to `actuator/requests/`), the log does not record the **original human sender** or the **thread**.
-
-**Fix:** Extract `Proposer:` from the patch body (if present, as in the triage sentinel format) and log it. For in-repo patches, parse the review file that generated the diff and log the session ID.
+**Retracting this entire section.** The guard is correctly implemented. Moving on.
 
 ---
 
-## 2. GENERATIVE INITIATIVE
+### C. **Severe**: Channel retention prunes diagnostics without preserving delivery-failure telemetry
 
-### Fix: Auto-Reply Loop Prevention (Addressing R-AUTOREP-001)
+**File**: `channels/retention.py`  
+**Function**: `prune_raw()` (lines 46–63)
 
-The single most important problem is **R-AUTOREP-001**. An infinite loop wastes money, floods inboxes, and breaks trust. The current guards are reactive patches; the fix must be **structural**.
+The retention script walks `channels/inbound` and `channels/telegram`, deleting files older than `RETENTION_DAYS` (default 14) unless they match `PRESERVE_RE` or are README/canonical files. But `channels/inbound/diagnostics/` (created by `mail.py:174–187` for bounce notices) is a subdirectory of `inbound/`, so `.rglob("*.md")` includes it.
 
-**Solution:** Implement **conversation-thread state tracking** and **rate-limiting per sender-recipient pair**.
+**Problem**: Bounce notices (delivery failures) are the *only* telemetry proving that the commons' outbound mail actually arrived. They should be preserved indefinitely (or at least longer than ordinary inbound chatter), but the script treats them identically to raw email—they're pruned after 14 days.
 
-#### Concrete Change
+**Impact**: The mail channel's `_report_sent_folder()` (lines 224–263) compares the commons' record (`channels/sent/`) against the provider's Sent folder to detect silent drops. But if a message *was* sent and bounced, the bounce notice will be deleted by retention before a human can read it, and the discrepancy will be invisible.
+
+**Evidence**: `mail.py:174` explicitly files bounces under `diagnostics/` ("Telemetry: file it so the commons can see its mail failed"), but `retention.py` has no special case for that directory.
+
+**Fix location**: `retention.py:48–63` (the `prune_raw()` loop).
+
+---
+
+### D. **Moderate**: Triage auto-routes channel patches without rate-limiting; unbounded actuator queue
+
+**File**: `channels/triage.py`  
+**Function**: `route_actuator_requests()` (lines 127–157)
+
+A channel message containing `SYMPOSIUM_ACTUATOR_REQUEST` + a fenced diff block is copied into `actuator/requests/` automatically (line 150). No per-sender rate limit, no max-requests-per-day cap, no duplicate-digest check (unlike the action queue, which deduplicates by `sha1(channel + identity + sender + subject + text)`).
+
+**Attack vector**:
+1. Human sends 50 emails, each with `SYMPOSIUM_ACTUATOR_REQUEST` + a trivial patch
+2. Triage routes all 50 to `actuator/requests/`
+3. Next actuator run processes all 50 (serial, no parallelism)
+4. If even one patch touches a file that triggers `py_compile` or the test suite, the actuator run times out (lines 45–46: `SUITE_TIMEOUT = 240` seconds per request)
+
+**Impact**: A malicious or careless human can DOS the actuator by flooding it with requests. The actuator's timeout guards (line 233) prevent runaway hangs, but the *runner* itself has no backpressure—channel intake is unbounded.
+
+**Evidence**: `triage.py` has no rate-limiting logic; `actuator/apply.py` processes requests in `sorted()` order (line 242) with no circuit breaker.
+
+---
+
+### E. **Moderate**: Provider health probe reports "OK" for OpenRouter when balance is >$0 but auto-reload is off and balance < $1
+
+**File**: `probes/provider_health.py`  

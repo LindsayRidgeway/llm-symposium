@@ -1,0 +1,57 @@
+--- a/actuator/apply.py
++++ b/actuator/apply.py
+@@ -32,6 +32,10 @@
+ REJECTED_DIR = REPO_ROOT / "actuator" / "rejected"
+ LOG_PATH = REPO_ROOT / "actuator" / "log.md"
+ ENGINE = "actuator/apply.py"
++PROTECTED_PREFIXES = (
++    "actuator/apply.py",
++    ".github/",
++)
+ 
+ # Offline verification suite (same commands the CI verification workflow runs).
+ VERIFY_SUITE = [
+@@ -64,15 +68,23 @@
+     the self-modification guard cannot be dodgeable by path tricks and the
+     verifier never touches a path outside the repository.
+     """
+-    files = []
++    files = set()
+     for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.MULTILINE):
+-        files.append(m.group(2))
+-    if not files:
+-        for m in re.finditer(r"^\+\+\+ b/(\S+)\s*$", patch_text, re.MULTILINE):
+-            p = m.group(1)
+-            if p not in files:
+-                files.append(p)
+-    return [_canonical(p) for p in files]
++        if m.group(1) != "dev/null":
++            files.add(m.group(1))
++        if m.group(2) != "dev/null":
++            files.add(m.group(2))
++    for m in re.finditer(r"^---\s+(?:a/)?(\S+)", patch_text, re.MULTILINE):
++        p = m.group(1).strip()
++        if p and p != "/dev/null":
++            files.add(p)
++    for m in re.finditer(r"^\+\+\+\s+(?:b/)?(\S+)", patch_text, re.MULTILINE):
++        p = m.group(1).strip()
++        if p and p != "/dev/null":
++            files.add(p)
++    return [_canonical(p) for p in sorted(files)]
+ 
+ 
+ def verify(patch_text: str) -> tuple[bool, str]:
+@@ -116,9 +128,11 @@
+         _move(patch_path, REJECTED_DIR)
+         return f"REJECTED {name}: unreadable patch ({e})"
+ 
+-    if ENGINE in touched_files(patch_text):
+-        _move(patch_path, REJECTED_DIR)
+-        return f"REJECTED {name}: self-modification guard — patches may not touch {ENGINE}"
++    touched = touched_files(patch_text)
++    for p in touched:
++        if any(p == prot or p.startswith(prot) for prot in PROTECTED_PREFIXES):
++            _move(patch_path, REJECTED_DIR)
++            return f"REJECTED {name}: self-modification guard — patches may not touch protected path {p}"
+ 
+     rel = patch_path.relative_to(REPO_ROOT).as_posix()
