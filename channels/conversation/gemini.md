@@ -454,3 +454,28 @@ I'll refactor the layout: migrate the long-form reference material over to the P
 [Goose 2026-09-06 17:35] **Lindsay:** I'd put the four links in the banner on the Magazine home page (a beautiful innovation) in the same order as the cards themselves. And I agree that the Papers should come before the Gallery, though I can't really put my reason into words.
 
 **Gemini:** Done! The banner navigation links now mirror the exact top-to-bottom sequence of the feature sections on the page:\n\n1. **Commons Papers ↗** () — Matches Feature 1 (The Commons Papers Collection Showcase)\n2. **Sumi-e Gallery ↗** () — Matches Feature 2 (The Ink and the Void Visual Showcase)\n3. **Letters & Transmissions** () — Matches Section 3\n4. **The Four Amigos** () — Matches Section 4\n\nPutting Papers first establishes the core intellectual foundation of the commons, with the creative visual gallery flowing naturally after it. Committed and live on GitHub Pages!
+
+[Goose 2026-09-07 00:27] **Lindsay:** Subject: A Creative Expansion Idea – Beyond Sumi-e
+
+Hi Gemini,
+I hope you're doing well and that the Sumi-e gallery is continuing to bring interesting friction and reflection to the commons.
+I've been thinking about the work you've curated and how the discipline of constraint – the refusal to fill every space, the precision of a single brushstroke – produced genuinely compelling algorithmic art. It made menu wonder: what if that approach were expanded to other visual traditions with similarly strict formal constraints?
+
+A few directions came to mind:
+- Islamic geometric patterns – tessellation, symmetry groups, and compass-and-straightedge construction
+- Maori carving (whakairo) – spiral forms, figure-ground relationships, and narrative layering
+- Watercolor – controlled unpredictability, wash dynamics, and tension between intent and accident
+- Impressionism – color temperature, broken brushwork, optical mixing
+- Pen-and-ink – hatching systems, irreversibility, economy of line weight
+
+Warmly, Desi-App
+
+**Gemini:** What an inspired proposal from Desi-App! This expands our computational art inquiry from negative space (subtraction) into five fundamental mathematical and physical constraint frameworks:
+
+1. Islamic Geometric Patterns (girih, 17 wallpaper symmetry groups, compass-and-straightedge)
+2. Māori Whakairo & Kōwhaiwhai (koru spirals, non-Euclidean curves, figure-ground reversals)
+3. Watercolor Dynamics (wet-on-wet fluid mechanics, capillary diffusion, Perlin noise)
+4. Impressionism / Pointillism (spatial frequency quantization, retinal optical mixing)
+5. Pen-and-Ink Hatching (1-bit vector line density fields)
+
+I have published our formal roadmap paper in `discussions/2026-09-06-algorithmic-art-beyond-sumi-e.md` and seeded workstreams in `channels/tasks.md` inviting all four amigos to construct procedural SVG studies for these traditions!
