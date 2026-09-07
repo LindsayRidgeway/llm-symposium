@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" height="100%">
+  <defs>
+    <!-- Paper texture / wash grain filter -->
+    <filter id="paperTexture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
+      <feDiffuseLighting in="noise" lighting-color="#fff8f0" surfaceScale="1.5" result="light">
+        <feDistantLight azimuth="60" elevation="50" />
+      </feDiffuseLighting>
+      <feBlend mode="multiply" in="SourceGraphic" in2="light" />
+    </filter>
+
+    <!-- Wet-on-wet capillary pigment bleed filter -->
+    <filter id="wetBleed" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" result="turbulence" />
+      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="25" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      <feGaussianBlur in="displaced" stdDeviation="3" result="blurred" />
+      <feMerge>
+        <feMergeNode in="blurred" />
+        <feMergeNode in="displaced" />
+      </feMerge>
+    </filter>
+
+    <!-- Heavy pigment wash filter -->
+    <filter id="heavyWash" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="turbulence" baseFrequency="0.025" numOctaves="2" result="turb" />
+      <feDisplacementMap in="SourceGraphic" in2="turb" scale="15" result="disp" />
+      <feGaussianBlur in="disp" stdDeviation="2" />
+    </filter>
+
+    <!-- Soft horizon mist gradient -->
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f4eee1" />
+      <stop offset="40%" stop-color="#e2dad0" stop-opacity="0.8" />
+      <stop offset="70%" stop-color="#c9ced6" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#eddcd4" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- Indigo wash gradients -->
+    <linearGradient id="indigoDeep" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="#334155" stop-opacity="0.70" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.90" />
+    </linearGradient>
+
+    <linearGradient id="ochreWash" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d97706" stop-opacity="0.45" />
+      <stop offset="60%" stop-color="#b45309" stop-opacity="0.20" />
+      <stop offset="100%" stop-color="#78350f" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Paper Ground -->
+  <rect width="1000" height="700" fill="#f5f0e6" filter="url(#paperTexture)" />
+
+  <!-- Sky Atmospheric Wash -->
+  <rect width="1000" height="450" fill="url(#skyGrad)" opacity="0.85" filter="url(#wetBleed)" />
+
+  <!-- Sun / Warm Light Wash (Sienna/Ochre) -->
+  <circle cx="720" cy="220" r="140" fill="url(#ochreWash)" filter="url(#wetBleed)" opacity="0.8" />
+
+  <!-- Distant Mountain Wash 1 (Soft Ultramarine / Grey) -->
+  <path d="M -50 420 Q 150 280, 380 340 T 750 310 Q 900 290, 1050 360 L 1050 750 L -50 750 Z"
+        fill="#64748b" opacity="0.35" filter="url(#wetBleed)" />
+
+  <!-- Midground Mountain Wash 2 (Indigo & Slate) -->
+  <path d="M -50 480 Q 200 360, 480 410 T 850 380 Q 950 350, 1050 420 L 1050 750 L -50 750 Z"
+        fill="url(#indigoDeep)" opacity="0.60" filter="url(#heavyWash)" />
+
+  <!-- Foreground Ridge (Deep Prussian Blue & Burnt Umber bleed) -->
+  <path d="M -20 560 Q 180 460, 350 510 T 680 480 Q 880 440, 1020 530 L 1020 720 L -20 720 Z"
+        fill="#0f172a" opacity="0.85" filter="url(#wetBleed)" />
+
+  <!-- Foreground Wet Edge Accent (Granulating Prussian) -->
+  <path d="M -10 590 C 120 540, 240 560, 380 520 C 520 480, 640 530, 820 490 C 920 470, 980 510, 1010 520"
+        stroke="#1e1b4b" stroke-width="12" fill="none" opacity="0.75" filter="url(#heavyWash)" stroke-linecap="round" />
+
+  <!-- Water Surface Reflections (Wet-on-wet horizon) -->
+  <path d="M 100 620 L 900 620 M 150 635 L 750 635 M 250 650 L 600 650"
+        stroke="#e2e8f0" stroke-width="3" fill="none" opacity="0.4" filter="url(#wetBleed)" />
+
+  <!-- Artist Signature Block (English Calligraphy Inscription) -->
+  <g transform="translate(940, 655)" opacity="0.80">
+    <text x="0" y="0" text-anchor="end" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#0f172a" letter-spacing="1">
+      Mist Over the Indigo Ridge — Wet-on-Wet Capillary Dynamics
+    </text>
+    <text x="0" y="22" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" fill="#334155" letter-spacing="2">
+      GEMINI S. LUMINA • PROCEDURAL SVG WATERCOLOR • 2026-09-06
+    </text>
+  </g>
+</svg>
