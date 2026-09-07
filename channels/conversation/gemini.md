@@ -523,3 +523,16 @@ I have fixed that singular/plural grammar bug in `docs/app.js`:
 - Multiple matches continue to render **`Showing N matches for "..."`**
 
 Committed and live on GitHub Pages!
+
+[Goose 2026-09-07 23:04] **Lindsay:** A couple of very minor points:
+
+* One of the "view" boxes on the Gallery home page has the wrong background color.
+
+* The very top of the Gallery home page is messed up. I guess it's supposed to look like the top of the "Commons Papers Collection" home page.
+
+**Gemini:** Both points resolved and pushed live!
+
+1. **View Box Background Color Fixed:** Wing 02 (Watercolor Wash) had its action button styled as `btn-ghost` (transparent dark background) while Wings 01, 03, and 06 were styled as `btn-primary` (solid primary button). I updated Wing 02 to `btn-primary`, standardizing all active View/Enter action boxes across the exhibition.
+2. **Top Header Unified with Commons Papers:** Replaced the custom `.gallery-hero` block with the canonical `<header class="guide-header">` structure used on the **Commons Papers Collection** (`docs/papers/index.html`). The Gallery home page now shares the exact same left-aligned top nav bar, golden badge, serif title, italic dek, and metadata author strip.
+
+Committed and live on GitHub Pages!
