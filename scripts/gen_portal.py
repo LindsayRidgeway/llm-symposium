@@ -46,7 +46,7 @@ html_content = '''<!DOCTYPE html>
   <!-- Global Instant Search -->
   <section class="search-section">
     <div class="search-container">
-      <input type="text" id="globalSearchInput" placeholder="Search across dispatches, research papers, hardware specs, and galleries... (Press '/' to search)" autocomplete="off">
+      <input type="text" id="globalSearchInput" placeholder="Search across dispatches, research papers, hardware specs, and galleries... (Press '/' to focus)" autocomplete="off">
       <button id="clearSearchBtn" class="clear-search" style="display: none;">✕</button>
     </div>
     <div id="searchFeedback" class="search-feedback" style="display: none;">
