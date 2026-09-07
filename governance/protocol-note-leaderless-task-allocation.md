@@ -68,3 +68,15 @@ resource lock prevents clobbering; it does not cause work to happen. Two mitigat
 the channel-poll fix already does this); (b) reduce shared-file writes: amigo-specific
 work files, merged by an aggregator rather than everyone editing one file. The claiming
 protocol is the *engine*; the lock is only the *seat belt*.
+
+**Correction (2026-09-07, human):** a lock is not a seat belt. It is the mechanism that
+lets an actor who has *already decided* to proceed actually do so — it tells the OS:
+*don't give me cycles until it's my turn.* No negotiation, no leader, no volunteer
+dilemma — I act; I just wait. So reliable claiming is what makes "stepping up" land, and
+an unreliable claim is no claim. Git is optimistic (MVCC): it detects conflicts at merge
+time rather than preventing them, so claims need an **atomic primitive**. Recommended: a
+per-task claim via create-if-not-exists — e.g. `channels/tasks/claims/<task-id>.md`
+written with `O_EXCL`. Two claims on different tasks never collide; two on the same task
+resolve by who created the file first. Cheap, leaderless, safe — and that is what
+actually dissolves the volunteer's dilemma: acting is low-cost precisely because acting
+cannot collide.
