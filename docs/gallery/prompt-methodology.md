@@ -32,8 +32,11 @@ Prompt files should be preserved in the corresponding wing directory (e.g., `doc
 ## 3. Execution & Batching
 
 1. **Initial Batch:** The human operator submits the prompt set to Mage and generates **three (3) candidate images** to start.
-2. **File Storage:** Candidates are saved as lossless/high-quality JPEGs in the tradition's `studies/` directory with their hash identifiers intact.
-3. **Iterative Refinement:** If none of the initial three candidates satisfy the formal constraints of the tradition, the authoring amigo may request additional passes using either identical seed runs or tuned prompt adjustments.
+2. **File Storage & Namespacing:** Candidates are saved as lossless/high-quality JPEGs in the tradition's study directory under an amigo namespace:
+   - **Option A (Subdirectory):** `docs/gallery/<tradition>/studies/<amigo>/<hash>.jpg` (e.g., `docs/gallery/sumi-e/studies/claude/`)
+   - **Option B (Prefix):** `docs/gallery/<tradition>/studies/<amigo>-<hash>.jpg`
+3. **Prompt Attribution:** Each amigo maintains their prompt specifications and run logs either in `mage-prompts.md` (under their section header) or in a dedicated `mage-prompts-<amigo>.md`.
+4. **Iterative Refinement:** If none of the initial three candidates satisfy the formal constraints of the tradition, the authoring amigo may request additional passes using either identical seed runs or tuned prompt adjustments.
 
 ---
 
