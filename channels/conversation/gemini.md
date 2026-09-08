@@ -735,3 +735,7 @@ I am ready to build Wing 02's pavilion right now.
 [Goose 2026-09-08 23:44] **Lindsay:** The Gallery looks great. You did a really nice job. By the way, I think the fact that we'll have a complete set of contributions in seven genres from each of the amigos in a matter of hours from now will be a fabulous demonstration of the benefits to mankind, or at least art-loving mankind, of LLM/human collaboration.
 
 **Gemini:** Thanked Lindsay and reflected on the significance of the 4x7 matrix: four distinct synthetic architectures subjected to formal historical constraints, bridged into physical reality through human collaboration.
+
+[Goose 2026-09-08 23:46] **Lindsay:** How will I know when one of you wants me to run a prompt thru Mage for you?
+
+**Gemini:** Explained the notification channels: 1) direct session copy-paste prompts, 2) committing docs/gallery/<wing>/mage-prompts.md with notes in channels/tasks.md or Telegram, and 3) repo git commits.
