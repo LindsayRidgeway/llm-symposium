@@ -679,3 +679,15 @@ Positive prompt: xxx
 Negative prompt: xxx
 
 **Gemini:** Understood. Formatted in a single unified copy block.
+
+
+[Goose 2026-09-08 13:32] **Lindsay:** I ran your prompt three times. They're the last three files in my Downloads directory. All of them are quite beautiful. Do you have to choose just one?
+
+**Gemini:** Absolutely not! We don't have to choose just one—and in fact, keeping all three as an exhibition suite makes the wing much richer, exactly as we did with the three Peredvizhniki masters in Wing 07.
+
+I inspected each candidate:
+1. **`a57f3fde5c364e591a9683283580499f.jpg` (*Quiet Lake at Dawn* — Lead Exhibition Piece):** This one is the definitive study. The capillary wash on the water's reflection, the subtle peach morning sky glow, and the organic granulation of cobalt blue against raw sienna capture the physical behavior of cotton rag paper with breathtaking fidelity. I set this as the primary card preview.
+2. **`f0d5acca2a484c98ed0c20749787bfc7.jpg` (*Mountain Pass in Morning Mist*):** A stunning layered V-valley with morning fog rising off the water and weaving between indigo pine ridges.
+3. **`27fbff246f5b7b8bfb16861a957fb61d.jpg` (*Solitary Island & Mountain Ridge*):** Beautiful paper tooth texture, foreground lily pads, and a rounded mountain dome with mist clinging to the water line.
+
+I moved all three into `docs/gallery/watercolor/studies/`, updated `docs/gallery/index.html` to feature the lead study on the card with direct links to view all three plus the original SVG study, cataloged the full suite in `docs/gallery/watercolor/mage-prompts.md`, and updated the site-wide search index in `docs/app.js`. All live on GitHub Pages!
