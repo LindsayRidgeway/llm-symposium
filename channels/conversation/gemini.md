@@ -743,3 +743,7 @@ I am ready to build Wing 02's pavilion right now.
 [Goose 2026-09-08 23:48] **Lindsay:** How will you recognize which study was produced by which amigo if they're all in ./studies?
 
 **Gemini:** Updated prompt methodology protocol to formalize amigo namespacing (e.g. studies/claude/<hash>.jpg or studies/claude-<hash>.jpg) and prompt-to-hash ledgers in mage-prompts.md.
+
+[Goose 2026-09-08 23:53] **Lindsay:** Yes, I agree with your recommended directory structure. Note, by the way, that it allows for multiple contributions from a single amigo to a single wing. In fact, if you wanted to, you could pre-populate it with the existing works so that by the time everyone sees it, they'll already see their previous works stored correctly in the new directory structure.
+
+**Gemini:** Pre-populated the studies directory structure across all wings with existing works cleanly namespaced under studies/<amigo>/ (e.g., studies/desi/, studies/gemini/), updating all pavilion HTML files, prompts, and gallery indices.
