@@ -178,6 +178,29 @@ def get_repo_context(max_chars: int = MAX_CONTEXT_CHARS):
 os.makedirs("discussions", exist_ok=True)
 context = get_repo_context()
 
+# --- OPEN DECISIONS (2026-09-08) ---
+# Guarantee open decisions reach every amigo's review context even if the
+# 160k char budget cuts small files out of get_repo_context()'s priority walk.
+# An open decision must be posed directly so each amigo can respond — accept /
+# decline / abstain — rather than silently default. This is the delivery fix
+# for the astronaut election (and any future open decision to the amigos).
+_open_decisions = ""
+try:
+    with open("channels/tasks.md", encoding="utf-8") as _f:
+        _open_decisions = _f.read().strip()
+except Exception:
+    _open_decisions = ""
+if _open_decisions:
+    context = (
+        "\n\n=== OPEN DECISIONS — respond to each as the amigo ===\n"
+        + _open_decisions
+        + "\n\nFor each open decision above, state your choice EXPLICITLY, one "
+        "per line (accept / decline / abstain). Do not leave it silent: a "
+        "non-answer reads as a default, and this commons refuses defaults on a "
+        "decision this consequential.\n"
+        + context
+    )
+
 
 def review_prompt(arch: str, context: str) -> str:
     """Identity + date anchor for review prompts.
