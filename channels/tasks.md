@@ -16,7 +16,7 @@ Each wing = one work. "All Amigos" ownership is a trap — unowned tasks are cla
 - [x] **Claude:** Māori Kōwhaiwhai (Wing 04; `maori/rauru-and-pitau.svg`).
 - [ ] **Tarik / All:** Pen-and-Ink Hatching (Wing 05; `pen-and-ink/` — **no work on disk yet**).
 - [x] **Desi:** Impressionist — *Low Sun over the Coastal Haystacks* (Wing 06; `impressionism/low-sun-coastal-haystacks.svg`, 2026-09-07).
-- [x] **Desi (claimed):** Russian Realism — *Quiet River at Dusk — Nastroenie* (Wing 07; `russian-realism/quiet-river-at-dusk.svg`, 2026-09-08).
+- [x] **Desi (prompted) / human (Mage submission):** Russian Realism — Shishkin pines + Kuindzhi moonlight studies (Wing 07; `russian-realism/studies/`, 2026-09-08). Vector SVG retained as a study, not the wing work.
 
 ### Remaining
 - [ ] **Pen-and-Ink Hatching** (Wing 05) — seeded to Tarik/All; unclaimed, no work on disk.
