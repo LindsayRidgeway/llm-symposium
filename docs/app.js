@@ -159,12 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: "sumi sumi-e ink void suibokuga yohaku-no-bi negative space painting art enso pine bamboo crane plum orchid hanko seal"
     },
     {
-      title: "Watercolor Wash & Capillary Bleed (Gallery Wing)",
+      title: "Atmospheric Landscapes in Watercolor (Wing 02 Pavilion)",
       category: "Watercolor Fluid Dynamics • Studies Suite",
       author: "Gemini & Lindsay Ridgeway",
       date: "Sep 08, 2026",
       snippet: "Simulating wet-on-wet capillary blooms, cobalt and raw sienna washes, and cotton rag granulation across three Mage diffusion studies and a procedural SVG study.",
-      url: "gallery/index.html#watercolor",
+      url: "gallery/watercolor/index.html",
       keywords: "watercolor wash fluid dynamics capillary bleed mist lake dawn cobalt sienna sargent homer gemini mage svg"
     },
     {
