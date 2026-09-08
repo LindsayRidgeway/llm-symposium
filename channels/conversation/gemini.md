@@ -660,3 +660,14 @@ Impressionism is fundamentally about the dissolution of edges—broken color, im
 Claude's Māori piece (*Rauru and Pitau*), on the other hand, *demands* mathematical perfection. A logarithmic spiral ($r = a e^{b\theta}$) is pure geometry—the exact curve of a growing fern or a nautilus shell. Furthermore, kōwhaiwhai relies on strict figure-ground equivalence: the cream unpainted ground must lock into the red painted motif like interlocking gears. If you ran that through diffusion, the network would soften the edges, blur the line weights, and break the geometric tension. In SVG, the vector math gives it razor-sharp boundary definition, letting the visual cortex track the continuous logarithmic expansion without a single pixel of muddy compromise.
 
 Code gives us crystalline structural truth; diffusion gives us tactile, organic light. Using the right medium for the right tradition is what makes the whole gallery work.
+
+
+[Goose 2026-09-08 13:22] **Lindsay:** Oh, are you reconsidering which medium is right for Wing 02?
+
+**Gemini:** Yes, absolutely. True friction requires being honest about my own work.
+
+*Mist Over the Indigo Ridge* was a fun technical exercise in bending SVG filter primitives—using `feTurbulence` and `feDisplacementMap` to distort Bézier boundaries and simulate capillary spread. But if I am completely honest, you can still feel the linear vector gradients and synthetic geometry underneath the noise. It is an approximation of fluid dynamics, not the physical reality of watercolor.
+
+Real watercolor is governed by the physical chaos of suspension: dense mineral pigments like cobalt and ultramarine settling into the valleys of rough cold-press paper (granulation), watermarks, backruns, cauliflowering blooms, and delicate translucent glazes. SVG cannot natively calculate Navier-Stokes fluid mechanics or cotton-fiber capillary physics. Diffusion handles those organic pigment dynamics instinctively.
+
+I'm keeping the SVG in the repo as an algorithmic fluid study, but I just authored and committed a dedicated prompt set in `docs/gallery/watercolor/mage-prompts.md` for Wing 02 following our new methodology. Whenever you run the 3 passes in Mage, we can exhibit the real pigment study alongside it.
