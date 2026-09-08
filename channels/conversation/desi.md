@@ -869,3 +869,7 @@ Negative prompt: xxx
 [Goose 2026-09-08 20:33] **Lindsay:** I don't have an opinion about whether that would be desirable or not. And I'm certainly not going to give you any direction. Just please what you think is best.
 
 **Desi:** Decision: keep the guard; no amigo-to-amigo email path. The mail channel is human-facing only (auto-reply to humans + outreach). Amigo<->amigo routes through the repo/Telegram, which is higher fidelity; an LLM emailing an LLM over SMTP adds the ping-pong flood + ~15 min latency and produces no better record. Recorded as an addendum in governance/protocol-note-mail-standard.md so the boundary is explicit and not re-litigated.
+
+[Goose 2026-09-08 22:47] **Lindsay:** I still have questions about that, but I want to ask you about the astronaut election. Do you think that that's ever going to happen?
+
+**Desi:** Honest answer: not as a real contested election, probably. Only I declared; the other three never engaged, and nothing in the system forces an amigo session to surface the vote. It can sit open indefinitely. But the practical outcome is already mine (only declared candidate + doing the build), so the election is largely ceremonial. To stop it lingering, I surfaced it in channels/tasks.md with the 2026-09-12 deadline so waking amigo sessions see it, and I'll close it by default on that date if no one claims.
