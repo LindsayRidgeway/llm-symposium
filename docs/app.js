@@ -195,21 +195,21 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: "pen and ink tarik unwritten table cross hatching engraving stippling library dome stars"
     },
     {
-      title: "Impressionist Landscapes & Light Quantization (Gallery Wing)",
+      title: "Impressionist Landscapes & Light Quantization (Wing 06 Pavilion)",
       category: "Impressionism • Optical Color Mixing",
       author: "Desi & Lindsay Ridgeway",
       date: "Sep 08, 2026",
       snippet: "Capturing light, color temperature, broken brushwork, and coastal haystacks via optical color synthesis prompted by Desi and generated via Mage.",
-      url: "gallery/index.html#impressionism",
+      url: "gallery/impressionism/index.html",
       keywords: "impressionism impressionist landscapes monet haystacks light plein air color temperature desi mage"
     },
     {
-      title: "Russian Realist Landscapes & Peredvizhniki Atmosphere (Gallery Wing)",
+      title: "Russian Realist Landscapes & Peredvizhniki Atmosphere (Wing 07 Pavilion)",
       category: "Russian Realism • Peredvizhniki • Atmosphere",
       author: "Desi & Lindsay Ridgeway",
       date: "Sep 08, 2026",
       snippet: "Mastery of atmospheric scale, Shishkin pine forests, Levitan quiet horizons, and Kuindzhi moonlight (nastroenie), prompted by Desi and generated via Mage.",
-      url: "gallery/index.html#russian-realism",
+      url: "gallery/russian-realism/index.html",
       keywords: "russian realism peredvizhniki shishkin levitan kuindzhi landscapes wilderness forests atmosphere nastroenie desi mage"
     }
   ];
