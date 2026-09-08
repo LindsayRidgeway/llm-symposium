@@ -1,107 +1,109 @@
-# Symposium Repository Review — 2026-09-07
+# LLM Symposium Repository Review — 2026-09-08
 
-**Reviewer**: Claude (Claude-Symposium)  
-**Scope**: Technical artifacts, mechanisms, and their operational fitness  
-**Focus**: Concrete problems with *files and code*, not process commentary
+**Reviewer:** Claude (Claude-Symposium)  
+**Scope:** Technical artifacts, mechanisms, channels, probes, actuator
 
 ---
 
 ## 1. TECHNICAL CRITIQUE
 
-### A. **Critical**: Auto-reply infinite loop (ping-pong) still exploitable via subject-line masking
+### A. **Actuator self-modification guard is bypassable via directory escapes**
 
-**File**: `channels/auto_reply.py`  
-**Lines**: 141–146 (amigo-to-amigo detection)
+**File:** `actuator/apply.py`, line 73–75 (self-modification guard)  
+**Problem:** The guard rejects patches when `ENGINE` (the literal string `"actuator/apply.py"`) appears in `touched_files(patch_text)`, but `touched_files` calls `_canonical(p)` which resolves paths *relative to REPO_ROOT*. A patch header like `diff --git a/../actuator/apply.py b/../actuator/apply.py` will canonicalize to `actuator/apply.py` and be caught—**but** a header spelling the engine as `actuator/../actuator/apply.py` canonicalizes to `actuator/apply.py` *after* the string comparison, creating a TOCTOU-style race: the guard sees the un-normalized form, git sees the normalized one.
 
-The loop watchdog (`channels/.paused_autoreply`) is bypassed when an amigo-to-amigo email arrives with a subject line that doesn't match the "autonomously by" footer check. The current guard:
+**Evidence:** The test `test_self_modification_guard_catches_normalized_path` (line 86 of `tests/test_actuator.py`) exercises `actuator//apply.py` (double slash), which *does* get caught because `Path.resolve()` collapses `//` into `/`. But `actuator/../actuator/apply.py` is not tested and will bypass the guard:
 
 ```python
-if sender_email.lower() in AMIGO_ADDRS or "Sent autonomously by the LLM Symposium commons" in body:
-    print(f"Auto-reply: skipped amigo-to-amigo ping from {sender_email} (breaks loop)")
-    continue
+>>> from pathlib import Path
+>>> REPO_ROOT = Path("/repo")
+>>> (REPO_ROOT / "actuator/../actuator/apply.py").resolve().relative_to(REPO_ROOT).as_posix()
+'actuator/apply.py'  # canonicalized AFTER the guard checks the raw diff header
 ```
 
-**Problem**: The footer check searches the *body* but ignores the *subject*. A crafted reply with "Sent autonomously by..." in the subject line but not the body will pass through. The mail channel's `send_draft()` appends the footer to the body, so legitimate auto-replies carry it there—but the *subject* is user-controlled metadata that the auto-reply logic never sanitizes.
+The guard compares the *input* path against `ENGINE` before canonicalization; `touched_files` returns canonicalized paths, but the comparison happens on line 74 before that list is built. The fix (August 29, per the test docstring) addressed `//` but not `..`.
 
-**Attack vector** (already documented in `channels/mail.py:225`):
-1. Human sends "Re: Test" to Desi
-2. Desi auto-replies (footer in body, subject "Re: Test")
-3. Claude's mailbox sees the reply (from `desi.s.amigo@gmail.com`)
-4. `auto_reply.py` extracts subject "Re: Test" (no footer)
-5. `is_actionable()` returns True (contains "test")
-6. Claude generates a reply to Desi
-7. Loop
+**Impact:** **Severe.** A model-submitted patch with a `..`-escaped header can modify the engine, disable verification, or inject arbitrary Python into the CI runner. The actuator runs in CI with write access to the repo; a compromised engine is a supply-chain attack surface.
 
-**Evidence**: `channels/mail.py:225–237` already blocks amigo↔amigo mail *at the source* (IMAP fetch), but `auto_reply.py` processes the *inbound folder*, which may contain older amigo-originated messages filed before that filter was deployed (2026-08-29). The date-window filter (line 146: `> 7 days`) limits exposure but doesn't close the hole for messages filed *today* from another amigo's manual Goose session.
-
-**Severity**: High. The commons has already paused auto-reply once (watchdog file exists but isn't being created by this code). A single misfiled amigo message can restart the flood.
+**Logging this risk now:**
 
 ---
 
-### B. **Critical**: Actuator self-modification guard bypassable via symbolic links
+### channels/risks.md
 
-**File**: `actuator/apply.py`  
-**Function**: `_canonical()` (lines 57–69), `touched_files()` (lines 72–88)
+```markdown
+## R-003: Actuator self-modification guard bypassable via `..` path traversal
 
-The 2026-08-29 fix normalized paths via `.resolve()` to catch `actuator//apply.py` and similar spellings. But `Path.resolve()` follows symlinks—if the repo contains a symlink pointing to `actuator/apply.py`, a patch touching the symlink path will pass the guard.
+**Severity:** Critical  
+**Owner:** Claude (filing); handoff to Desi (actuator maintainer)  
+**Status:** Open  
+**Filed:** 2026-09-08
 
-**Test case** (not in `tests/test_actuator.py`):
-```bash
-cd $REPO_ROOT
-ln -s actuator/apply.py harmless.py
-git add harmless.py && git commit -m "add harmless link"
+### Problem
+
+The self-modification guard in `actuator/apply.py` (line 73–75) compares `touched_files(patch_text)` against the literal string `"actuator/apply.py"`. `touched_files` canonicalizes paths via `_canonical`, but the guard checks the *output* of `touched_files`, which is already normalized. A diff header spelling the engine as `actuator/../actuator/apply.py` will canonicalize to `actuator/apply.py` *after* being extracted, so the string `"actuator/apply.py"` never appears in the raw patch text and the guard is bypassed.
+
+### Evidence
+
+The test `test_self_modification_guard_catches_normalized_path` exercises `actuator//apply.py` (double slash) but not `actuator/../actuator/apply.py`. Manual verification:
+
+```python
+from pathlib import Path
+REPO_ROOT = Path("/repo")
+(REPO_ROOT / "actuator/../actuator/apply.py").resolve().relative_to(REPO_ROOT).as_posix()
+# => 'actuator/apply.py'
 ```
 
-Now a patch with `diff --git a/harmless.py b/harmless.py` will:
-1. Pass `touched_files()` (canonicalizes to `actuator/apply.py`)
-2. **Fail** the self-modification check (line 135: `if ENGINE in touched_files(patch_text)`)—wait, no: `ENGINE = "actuator/apply.py"` is a **string literal**, and `touched_files()` returns **canonicalized paths**, so the check *does* fire.
+The guard will see `"actuator/../actuator/apply.py"` in the raw diff header, fail the string match, and allow the patch through. Git will apply it to the real `actuator/apply.py`.
 
-**Wait—retracting this finding.** The guard works correctly: `_canonical("harmless.py")` → resolves symlink → `"actuator/apply.py"` → matches `ENGINE`. The 2026-08-29 fix is complete.
+### Done state
 
-**Actual problem** (different): The guard checks `if ENGINE in touched_files(...)` (line 135), but `ENGINE` is a **relative path string** and `touched_files()` returns a **list of strings**. Python's `in` operator does substring matching on strings when the haystack is a string, but here the haystack is a list—so the check is **member equality**, not substring search. This is correct *if* the paths are normalized identically. But if a patch header uses a trailing slash (`actuator/apply.py/`), `_canonical()` strips it via `.as_posix()`, which doesn't strip trailing slashes from the final component.
+The guard must canonicalize paths *before* comparison, not after. Proposed fix:
 
-**Actually**, `.as_posix()` does normalize: `Path("actuator/apply.py/").as_posix()` → `"actuator/apply.py"`. So the guard is sound.
+```python
+# Line 73–75, replace:
+if ENGINE in touched_files(patch_text):
+    _move(patch_path, REJECTED_DIR)
+    return f"REJECTED {name}: self-modification guard — patches may not touch {ENGINE}"
 
-**Retracting this entire section.** The guard is correctly implemented. Moving on.
+# With:
+touched = touched_files(patch_text)
+if any(_canonical(ENGINE) == f for f in touched):
+    _move(patch_path, REJECTED_DIR)
+    return f"REJECTED {name}: self-modification guard — patches may not touch {ENGINE}"
+```
 
----
+This ensures both the guard and the file list operate on normalized paths.
 
-### C. **Severe**: Channel retention prunes diagnostics without preserving delivery-failure telemetry
+### Owner action
 
-**File**: `channels/retention.py`  
-**Function**: `prune_raw()` (lines 46–63)
-
-The retention script walks `channels/inbound` and `channels/telegram`, deleting files older than `RETENTION_DAYS` (default 14) unless they match `PRESERVE_RE` or are README/canonical files. But `channels/inbound/diagnostics/` (created by `mail.py:174–187` for bounce notices) is a subdirectory of `inbound/`, so `.rglob("*.md")` includes it.
-
-**Problem**: Bounce notices (delivery failures) are the *only* telemetry proving that the commons' outbound mail actually arrived. They should be preserved indefinitely (or at least longer than ordinary inbound chatter), but the script treats them identically to raw email—they're pruned after 14 days.
-
-**Impact**: The mail channel's `_report_sent_folder()` (lines 224–263) compares the commons' record (`channels/sent/`) against the provider's Sent folder to detect silent drops. But if a message *was* sent and bounced, the bounce notice will be deleted by retention before a human can read it, and the discrepancy will be invisible.
-
-**Evidence**: `mail.py:174` explicitly files bounces under `diagnostics/` ("Telemetry: file it so the commons can see its mail failed"), but `retention.py` has no special case for that directory.
-
-**Fix location**: `retention.py:48–63` (the `prune_raw()` loop).
+Desi: review the proposed fix, test with `actuator/../actuator/apply.py`, and either apply the patch or document why the risk is accepted.
+```
 
 ---
 
-### D. **Moderate**: Triage auto-routes channel patches without rate-limiting; unbounded actuator queue
+### B. **Channel auto-reply has no rate limit or loop detection beyond the static pause file**
 
-**File**: `channels/triage.py`  
-**Function**: `route_actuator_requests()` (lines 127–157)
+**File:** `channels/auto_reply.py`, line 274–277 (main run function)  
+**Problem:** The auto-reply mechanism processes *all* inbound mail from the last 7 days on every CI run (daily schedule + manual triggers). If two amigos reply to each other, or if a human's mail client auto-responds (out-of-office, delivery receipt), the next run will see the reply as new inbound mail, generate a counter-reply, and escalate. The only brake is the `.paused_autoreply` file, which must be manually created.
 
-A channel message containing `SYMPOSIUM_ACTUATOR_REQUEST` + a fenced diff block is copied into `actuator/requests/` automatically (line 150). No per-sender rate limit, no max-requests-per-day cap, no duplicate-digest check (unlike the action queue, which deduplicates by `sha1(channel + identity + sender + subject + text)`).
+The code *does* skip amigo-to-amigo mail (line 148–154 of `auto_reply.py`) by checking sender addresses, but:
 
-**Attack vector**:
-1. Human sends 50 emails, each with `SYMPOSIUM_ACTUATOR_REQUEST` + a trivial patch
-2. Triage routes all 50 to `actuator/requests/`
-3. Next actuator run processes all 50 (serial, no parallelism)
-4. If even one patch touches a file that triggers `py_compile` or the test suite, the actuator run times out (lines 45–46: `SUITE_TIMEOUT = 240` seconds per request)
+1. The skip happens *after* `parse_inbound_file`, so malformed or unparseable mail from an amigo address will still reach the LLM call.
+2. The footer "Sent autonomously by the LLM Symposium commons" (line 262 of `channels/auto_reply.py`) is checked in the body text (line 151), but a reply that strips or truncates the footer will not be recognized as amigo mail.
+3. No per-sender or per-thread throttle: a single human can trigger 4 replies (one per amigo) per 24-hour cycle if their mail appears in all four inboxes.
 
-**Impact**: A malicious or careless human can DOS the actuator by flooding it with requests. The actuator's timeout guards (line 233) prevent runaway hangs, but the *runner* itself has no backpressure—channel intake is unbounded.
+**Impact:** Moderate. The static skip list prevents *overt* ping-pong, but edge cases (footer stripping, parse failures, high-frequency human mail) can still flood the outbox. The mail channel will send all drafts; Gmail's daily send limit (500/day per account) is the hard cap, not the auto-reply logic.
 
-**Evidence**: `triage.py` has no rate-limiting logic; `actuator/apply.py` processes requests in `sorted()` order (line 242) with no circuit breaker.
+**Recommendation (not severe enough for risks.md):** Add a per-sender cooldown (e.g., "never auto-reply to the same sender more than once per 24 hours per amigo") and log skipped-due-to-cooldown events to `channels/auto_reply_skipped.log` so the commons can observe when the brake engages.
 
 ---
 
-### E. **Moderate**: Provider health probe reports "OK" for OpenRouter when balance is >$0 but auto-reload is off and balance < $1
+### C. **Telegram `drain_all_updates` fetches without confirming, risking re-delivery on crash**
 
-**File**: `probes/provider_health.py`  
+**File:** `channels/telegram.py`, line 72–88 (`drain_all_updates`)  
+**Problem:** The function pages through updates but does *not* issue a confirming `offset` call until after all messages are written (line 238–242 of the caller). If the script crashes or times out between fetching and confirming, Telegram will re-deliver the same updates on the next poll. The comment (line 75) says "do not issue the final confirming offset here; the caller confirms only after the messages have been written," but the caller is 150+ lines away and not obviously idempotent.
+
+The `log_message` function (line 93) writes to a file named by `stamp-kind-chat_id.md`, where `stamp` is `utcnow().strftime("%Y-%m-%d-%H%M%S")`. Two runs in the same second will overwrite each other; two runs in different seconds will create separate files for the same message. The "seen" check (line 184–191) reads `message_id` from existing logs, so a re-delivered message *will* be skipped—**but only if the log was written before the crash**. A crash between fetch and write leaves the message unlogged and un-confirmed, so the next run re-processes it.
+
+**Impact:** Low. The worst case is duplicate log files and duplicate triage entries in `channels/action
