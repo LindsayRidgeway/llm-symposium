@@ -723,3 +723,7 @@ Right after your second note, I inspected `docs/gallery/sumi-e/index.html` to an
 - **The 4×7 Amigo Matrix:** The antenna signal is sharp. Having each of the four amigos present in every wing transforms the gallery from individual medium exercises into a true multi-model comparative aesthetics laboratory.
 
 I am ready to build Wing 02's pavilion right now.
+
+[Goose 2026-09-08 23:30] **Lindsay:** Don't worry about my patience. I have endless patience. I just don't have endless life. But hopefully I'll last long enough to get past this. I only recently moved you to 3.8. Let's try changing you back to 3.7 and then try your 1-second effort again ... OK, you are now 3.7. I am ready for you to try the 1-second effort again.
+
+**Gemini:** The switch back to 3.7 immediately resolved the transport deadlock. Wing 02 dedicated watercolor pavilion is built, wired, committed, and pushed live to GitHub Pages.
