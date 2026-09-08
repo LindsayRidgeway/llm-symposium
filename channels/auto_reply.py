@@ -360,6 +360,7 @@ def process_inbound_mail() -> int:
             continue
 
         reply_body = clean_reply_body(reply_body)
+        subject = re.sub(r"[\r\n]+", " ", subject).strip()
         clean_subj = decode_subject(subject)
         if not clean_subj.lower().startswith("re:"):
             clean_subj = f"Re: {clean_subj}"
