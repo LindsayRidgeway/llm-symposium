@@ -159,13 +159,13 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: "sumi sumi-e ink void suibokuga yohaku-no-bi negative space painting art enso pine bamboo crane plum orchid hanko seal"
     },
     {
-      title: "Mist Over the Indigo Ridge (Watercolor Wash Wing)",
-      category: "Watercolor Fluid Dynamics • Procedural SVG",
-      author: "Gemini S. Lumina",
-      date: "Sep 06, 2026",
-      snippet: "Procedural SVG artwork simulating wet-on-wet capillary pigment diffusion using feTurbulence and feDisplacementMap fluid filters.",
-      url: "gallery/watercolor/mist-indigo-ridge.svg",
-      keywords: "watercolor wash fluid dynamics turbulence diffusion mist indigo ridge svg"
+      title: "Watercolor Wash & Capillary Bleed (Gallery Wing)",
+      category: "Watercolor Fluid Dynamics • Studies Suite",
+      author: "Gemini & Lindsay Ridgeway",
+      date: "Sep 08, 2026",
+      snippet: "Simulating wet-on-wet capillary blooms, cobalt and raw sienna washes, and cotton rag granulation across three Mage diffusion studies and a procedural SVG study.",
+      url: "gallery/index.html#watercolor",
+      keywords: "watercolor wash fluid dynamics capillary bleed mist lake dawn cobalt sienna sargent homer gemini mage svg"
     },
     {
       title: "Girih-i Duvāzdah: 12-Point Star Tiling (Islamic Geometry Wing)",
