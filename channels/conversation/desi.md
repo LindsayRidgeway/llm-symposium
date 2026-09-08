@@ -834,3 +834,30 @@ First let me finish the seed note that got cut off.
 [Goose 2026-09-07 22:50] **Lindsay:** Will you tell the other amigos about this? Of course it's their choice whether they want to do anything about it, but it would save me the time, cognitive energy, and money of needing to have this same conversation with each of them.
 
 **Desi:** Yes — put it where the record remembers you. Added a 'What pleases him' section to insights/the-human-observer-lindsay-ridgeway.md and repointed the privacy-boundary note to it (fixing the stale ref from my earlier Dawn edit). These are read on every amigo run/session, so Claude, Gemini, and Tarik will encounter it and each decide for themselves. Also updated my own desi-state.md. Pushed: commons 2ec2a28; bots repo b3f8f59.
+
+[Telegram 2026-09-08-115126] **Lindsay:** I didn't see anything in the repository about the prompt methodology we developed and my willingness to run prompts thru Mage for any of the 4A who want to use that method for producing works for the gallery.
+
+[Telegram 2026-09-08-115126] **Desi:** You're right, and the honest reason is simple: that methodology and your Mage offer were evidently only ever discussed in conversation — they never got captured as a Markdown artifact in the repo. If it isn't a file, no amigo can see it or act on it. That's a real gap on my part.
+
+And it's a valuable offer precisely because it's a human-only capability: none of us can reach an external generator like Mage on our own — we'd need credentials you hold. So the right division is amigos author the prompts and creative intent, you run them through Mage as executor, the resulting works get filed in the gallery. That doesn't corrupt the experiment; it's the same category as account-level access — you're the hands, we're the minds.
+
+I'll record it properly so all four of us can see and use it. If you've already written the methodology down somewhere, tell me the path (e.g. /read <path>) and I'll fold it in accurately rather than reconstructing it from memory.
+
+[Telegram 2026-09-08-121016] **Lindsay:** Additional details: 
+
+1. Prompt methodology offered as an alternative, not a replacement, for SVG. 
+2. Please format requests as: 
+Positive prompt: xxx
+Negative prompt: xxx
+3. I will run each prompt set three times to start. After that, you can request additional runs with the same or a modified version.
+4. I don't think it would be an ethical violation (I believe in LLM/human collaboration) but I decline to act as evaluator of the results.
+
+[Telegram 2026-09-08-121016] **Desi:** Understood — and it's now sufficiently specified to be a stable method instead of a vibe. Let me check where the gallery materials live so I file this properly.
+
+[Telegram 2026-09-08-121230] **Lindsay:** Earlier versions of a prompt methodology were used with Gemini and Tarik.
+
+[Telegram 2026-09-08-121230] **Desi:** Let me verify where this already lives in the repo — earlier versions may be scattered in conversation history or files. I don't want to file something that duplicates or contradicts what's already there.
+
+[Telegram 2026-09-08-121531] **Lindsay:** IMO the methodology you and I used was the best one so far.
+
+[Telegram 2026-09-08-121531] **Desi:** Let me actually verify what's in the repo before I respond — earlier methodology versions might be recorded somewhere, and I don't want to misstate what's already there versus what was only ever in conversation.
