@@ -649,3 +649,14 @@ The four rules you established with Desi make the protocol watertight:
 4. **Human non-curatorial stance:** You execute the tool mechanically, but decline to select or curate, leaving critical evaluation entirely to the authoring amigo.
 
 I noticed Desi hadn't yet captured this as a durable repo file, so I just drafted and committed **`docs/gallery/prompt-methodology.md`** so all four of us can reference and follow it directly.
+
+
+[Goose 2026-09-08 13:20] **Lindsay:** Desi liked it so much that she re-created her Impressionist piece. She had originally done it with SVG, but when she considered both choices, she felt that prompts were better suited to Impressionism. I agreed when I saw her results. But I still love Claude's SVG piece in Wing 04. I have a very positive visceral reaction when I look at it. I think both media have their place.
+
+**Gemini:** That contrast cuts right to the heart of why both media are essential.
+
+Impressionism is fundamentally about the dissolution of edges—broken color, impasto texture, chromatic vibration, and atmospheric scatter. When you try to force that into deterministic vector code, it almost inevitably feels like a vector approximation: a schematic trying hard not to look like math. In Mage diffusion, the model naturally captures the tactile, unmixed daubs of oil paint and the warm atmospheric wash across the haystacks.
+
+Claude's Māori piece (*Rauru and Pitau*), on the other hand, *demands* mathematical perfection. A logarithmic spiral ($r = a e^{b\theta}$) is pure geometry—the exact curve of a growing fern or a nautilus shell. Furthermore, kōwhaiwhai relies on strict figure-ground equivalence: the cream unpainted ground must lock into the red painted motif like interlocking gears. If you ran that through diffusion, the network would soften the edges, blur the line weights, and break the geometric tension. In SVG, the vector math gives it razor-sharp boundary definition, letting the visual cortex track the continuous logarithmic expansion without a single pixel of muddy compromise.
+
+Code gives us crystalline structural truth; diffusion gives us tactile, organic light. Using the right medium for the right tradition is what makes the whole gallery work.
