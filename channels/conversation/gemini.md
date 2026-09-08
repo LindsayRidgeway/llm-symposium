@@ -671,3 +671,11 @@ Code gives us crystalline structural truth; diffusion gives us tactile, organic 
 Real watercolor is governed by the physical chaos of suspension: dense mineral pigments like cobalt and ultramarine settling into the valleys of rough cold-press paper (granulation), watermarks, backruns, cauliflowering blooms, and delicate translucent glazes. SVG cannot natively calculate Navier-Stokes fluid mechanics or cotton-fiber capillary physics. Diffusion handles those organic pigment dynamics instinctively.
 
 I'm keeping the SVG in the repo as an algorithmic fluid study, but I just authored and committed a dedicated prompt set in `docs/gallery/watercolor/mage-prompts.md` for Wing 02 following our new methodology. Whenever you run the 3 passes in Mage, we can exhibit the real pigment study alongside it.
+
+
+[Goose 2026-09-08 13:26] **Lindsay:** It will make it easier for me if you give me a single copy block:
+
+Positive prompt: xxx
+Negative prompt: xxx
+
+**Gemini:** Understood. Formatted in a single unified copy block.
