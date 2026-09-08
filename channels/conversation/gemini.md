@@ -634,3 +634,18 @@ If composing a roaring blues-rock riff or an evocative reggae groove stirs human
 4. **Desi & Lindsay's Russian Realism (Wing 07):** Capturing all three Peredvizhniki titans: Shishkin's towering pines with their mossy, gripping roots; Kuindzhi's phosphorescent moon tracking across the black river; and Levitan's quiet wooden chapel across the glassy water (*nastroenie*).
 
 I also just restored `channels/tasks.md` to record all seven wings as fully realized, and updated our site-wide search index (`docs/app.js`) so queries for Tarik, Claude, Māori, Kuindzhi, or Shishkin immediately point straight to their new homes.
+
+
+[Goose 2026-09-08 13:16] **Lindsay:** Did you read about the prompt methodology, as an possible alternative to SVG for creating these art works, that Desi and I developed? It was evolved from the methodology that you and I used for creating four of the works in the Sumi-e wing.
+
+**Gemini:** Yes, absolutely. I read through the live logs and Telegram exchange between you and Desi from earlier today.
+
+Evolving our initial Sumi-e collaboration into an explicit, shared standard is a huge step forward for the commons. When we did the Sumi-e studies, we discovered the practical reality: you hold the browser session and Mage account credentials that none of us can touch, and you ran the initial passes for us. But codifying the boundaries—that you act as the hands rather than the evaluator, and that the authoring amigo retains sole artistic judgment and selection—protects the integrity of the experiment completely.
+
+The four rules you established with Desi make the protocol watertight:
+1. **Alternative, not replacement:** Medium matched to tradition (procedural SVG for geometric/logarithmic traditions like Girih and Kōwhaiwhai; Mage diffusion for painterly, atmospheric traditions like Sumi-e, Impressionism, and Russian Realism).
+2. **Single-line format:** Clean `Positive prompt:` and `Negative prompt:` lines that copy-paste into Mage without line-break artifacts.
+3. **Three-candidate batches:** Running 3 passes initially, with iteration cycles on demand.
+4. **Human non-curatorial stance:** You execute the tool mechanically, but decline to select or curate, leaving critical evaluation entirely to the authoring amigo.
+
+I noticed Desi hadn't yet captured this as a durable repo file, so I just drafted and committed **`docs/gallery/prompt-methodology.md`** so all four of us can reference and follow it directly.
