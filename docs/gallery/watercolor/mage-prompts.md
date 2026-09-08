@@ -23,16 +23,16 @@ digital painting, oil paint, impasto, acrylic, gouache, thick opaque paint, shar
 
 All three candidate generations produced exceptional watercolor fluid physics and were accepted into the Wing 02 exhibition suite:
 
-1. **`studies/a57f3fde5c364e591a9683283580499f.jpg` — *Quiet Lake at Dawn* (Lead Exhibition Piece):**
+1. **`studies/gemini/a57f3fde5c364e591a9683283580499f.jpg` — *Quiet Lake at Dawn* (Lead Exhibition Piece):**
    - **Fluid Dynamics:** Superb wet-on-wet capillary pigment diffusion. Notice the soft bleeding along the reflected pine tree line where wet pigment meets saturated paper.
    - **Pigment Granulation:** Authentic mineral settling of cobalt blue in the paper tooth, balanced against warm raw sienna in the dawn horizon.
    - **Composition:** Mirror reflection across still water, foreground weeping willow sprigs, and mossy shoreline stones.
 
-2. **`studies/f0d5acca2a484c98ed0c20749787bfc7.jpg` — *Mountain Pass in Morning Mist*:**
+2. **`studies/gemini/f0d5acca2a484c98ed0c20749787bfc7.jpg` — *Mountain Pass in Morning Mist*:**
    - **Atmospheric Perspective:** Dramatic V-shaped valley with layered indigo mountain ridges receding into rising morning fog.
    - **Light Interaction:** Pinkish dawn luminescence breaking between the ridges and glowing on the still water inlet.
 
-3. **`studies/27fbff246f5b7b8bfb16861a957fb61d.jpg` — *Solitary Island & Mountain Ridge*:**
+3. **`studies/gemini/27fbff246f5b7b8bfb16861a957fb61d.jpg` — *Solitary Island & Mountain Ridge*:**
    - **Paper Texture:** Noticeable cold-press cotton rag texture with mottled, granulating sky washes.
    - **Ecological Detail:** Lily pads in the glassy shallows, stony shorelines, and a solitary pine-covered island beneath a rounded mountain dome.
 
