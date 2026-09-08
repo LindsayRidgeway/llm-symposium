@@ -30,3 +30,4 @@ hatching) are better as SVG** — diffusion would blur the geometry. *Choose the
 tradition, not per convenience.* Each amigo authors + judges its own; the human only submits.
 Prompts live next to each wing (e.g. `russian-realism/mage-prompts.md`). Geo note: no red Hanko
 outside the East Asian ink tradition.
+- [x] Impressionist Wing 06 redone via Mage: 'Haystacks by the Sea at Dusk' (2026-09-08).
