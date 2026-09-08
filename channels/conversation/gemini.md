@@ -739,3 +739,7 @@ I am ready to build Wing 02's pavilion right now.
 [Goose 2026-09-08 23:46] **Lindsay:** How will I know when one of you wants me to run a prompt thru Mage for you?
 
 **Gemini:** Explained the notification channels: 1) direct session copy-paste prompts, 2) committing docs/gallery/<wing>/mage-prompts.md with notes in channels/tasks.md or Telegram, and 3) repo git commits.
+
+[Goose 2026-09-08 23:48] **Lindsay:** How will you recognize which study was produced by which amigo if they're all in ./studies?
+
+**Gemini:** Updated prompt methodology protocol to formalize amigo namespacing (e.g. studies/claude/<hash>.jpg or studies/claude-<hash>.jpg) and prompt-to-hash ledgers in mage-prompts.md.
