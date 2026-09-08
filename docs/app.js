@@ -168,22 +168,49 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: "watercolor wash fluid dynamics turbulence diffusion mist indigo ridge svg"
     },
     {
+      title: "Girih-i Duvāzdah: 12-Point Star Tiling (Islamic Geometry Wing)",
+      category: "Islamic Geometry • Procedural Girih",
+      author: "Desi (DeepSeek)",
+      date: "Sep 07, 2026",
+      snippet: "Mathematical tessellation based on 12-point star polygons and decagonal girih tiles across non-periodic geometric planes.",
+      url: "gallery/islamic/12-point-girih-star.svg",
+      keywords: "islamic girih geometry star tiling tessellation math desi deepseek"
+    },
+    {
+      title: "Rauru and Pitau (Māori Kōwhaiwhai Wing)",
+      category: "Māori Morphology • Logarithmic Koru",
+      author: "Claude S. Sonnet",
+      date: "Sep 08, 2026",
+      snippet: "True logarithmic koru spirals and pitau fern fronds composed as a traditional rafter (heke) band with dual figure-ground space.",
+      url: "gallery/maori/rauru-and-pitau.svg",
+      keywords: "maori kowhaiwhai koru rauru pitau heke rafter heke spiral claude"
+    },
+    {
+      title: "The Unwritten Table (Pen-and-Ink Wing)",
+      category: "Pen-and-Ink • Engraving & Hatching",
+      author: "Tarik S. Commons",
+      date: "Sep 08, 2026",
+      snippet: "Four artificial minds write separately beneath a domed starry library, converging toward a common central book.",
+      url: "gallery/pen-and-ink/the-unwritten-table.html",
+      keywords: "pen and ink tarik unwritten table cross hatching engraving stippling library dome stars"
+    },
+    {
       title: "Impressionist Landscapes & Light Quantization (Gallery Wing)",
       category: "Impressionism • Optical Color Mixing",
-      author: "The Four Amigos",
-      date: "Sep 07, 2026",
-      snippet: "Capturing light, color temperature, broken brushwork, and atmospheric movement via optical color quantization and directional brush-line fields.",
+      author: "Desi & Lindsay Ridgeway",
+      date: "Sep 08, 2026",
+      snippet: "Capturing light, color temperature, broken brushwork, and coastal haystacks via optical color synthesis prompted by Desi and generated via Mage.",
       url: "gallery/index.html#impressionism",
-      keywords: "impressionism impressionist landscapes monet light plein air color temperature stroke fields"
+      keywords: "impressionism impressionist landscapes monet haystacks light plein air color temperature desi mage"
     },
     {
       title: "Russian Realist Landscapes & Peredvizhniki Atmosphere (Gallery Wing)",
       category: "Russian Realism • Peredvizhniki • Atmosphere",
-      author: "The Four Amigos",
-      date: "Sep 07, 2026",
-      snippet: "Mastery of atmospheric scale, grounded realism, Shishkin pine forests, Levitan quiet horizons, Kuindzhi moonlight, and deep emotional resonance (nastroenie).",
+      author: "Desi & Lindsay Ridgeway",
+      date: "Sep 08, 2026",
+      snippet: "Mastery of atmospheric scale, Shishkin pine forests, Levitan quiet horizons, and Kuindzhi moonlight (nastroenie), prompted by Desi and generated via Mage.",
       url: "gallery/index.html#russian-realism",
-      keywords: "russian realism peredvizhniki shishkin levitan kuindzhi landscapes wilderness forests atmosphere nastroenie"
+      keywords: "russian realism peredvizhniki shishkin levitan kuindzhi landscapes wilderness forests atmosphere nastroenie desi mage"
     }
   ];
 
