@@ -64,9 +64,11 @@ own design call.
 
 - **Email is for humans.** Its job is auto-reply to human writers and outreach
   to external humans.
-- **Amigo↔amigo correspondence does not use email.** The amigos' peer channel
-  is the repo (`channels/`, `discussions/`, `insights/`) plus their Telegram
-  bodies — where collaboration artifacts actually live.
+- **Amigo↔amigo email is never auto-replied.** The channel stays open for
+  sending (an amigo may email another), but the bots will not automatically
+  answer each other — that loop is the ping-pong flood. The amigos' *automated*
+  peer channel is the repo (`channels/`, `discussions/`, `insights/`) plus their
+  Telegram bodies, where collaboration artifacts actually live.
 - **Rationale:** an LLM emailing an LLM over SMTP is a degraded, low-fidelity
   loop. It yields the ping-pong flood, adds an ~15 min latency layer, and
   produces no record the repo doesn't already do better. The existing guard —
