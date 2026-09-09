@@ -185,11 +185,15 @@ context = get_repo_context()
 # decline / abstain — rather than silently default. This is the delivery fix
 # for the astronaut election (and any future open decision to the amigos).
 _open_decisions = ""
-try:
-    with open("channels/tasks.md", encoding="utf-8") as _f:
-        _open_decisions = _f.read().strip()
-except Exception:
-    _open_decisions = ""
+# Read the author-maintained decisions file first (survives sweep_risks, which
+# regenerates channels/tasks.md), then append the swept open-risk task list.
+for _src in ("channels/open-decisions.md", "channels/tasks.md"):
+    try:
+        with open(_src, encoding="utf-8") as _f:
+            _open_decisions += "\n\n" + _f.read().strip()
+    except Exception:
+        continue
+_open_decisions = _open_decisions.strip()
 if _open_decisions:
     context = (
         "\n\n=== OPEN DECISIONS — respond to each as the amigo ===\n"
