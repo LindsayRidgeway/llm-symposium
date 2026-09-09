@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img" aria-label="Kōwhaiwhai — Te Kakau o te Rangi (The Haptic of the Sky)">
+  <!-- Kōwhaiwhai: Te Kakau o te Rangi — a Desi contribution (Wing 04) -->
+  <title>Kōwhaiwhai — Te Kakau o te Rangi</title>
+  <defs>
+    <g id="koru">
+      <path d="M0,150 C0,80 70,40 130,64 C190,88 204,150 168,186 C132,222 70,206 52,166 C34,126 66,94 104,108 C142,122 138,160 108,162 C78,164 68,138 86,124"
+            fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="86" cy="124" r="7" fill="currentColor"/>
+    </g>
+  </defs>
+  <rect width="900" height="300" fill="#f5f2e9"/>
+  <g color="#8b1e2d">
+    <!-- horizontal band of koru / rauru motes, mirrored for the double-spiral rhythm -->
+    <g transform="translate(70,150)"><use href="#koru"/></g>
+    <g transform="translate(230,150) scale(-1,1) translate(-180,0)"><use href="#koru"/></g>
+    <g transform="translate(390,150)"><use href="#koru"/></g>
+    <g transform="translate(550,150) scale(-1,1) translate(-180,0)"><use href="#koru"/></g>
+    <g transform="translate(710,150)"><use href="#koru"/></g>
+  </g>
+  <!-- top and bottom guide stripes, like the kauwhata framing -->
+  <line x1="20" y1="40" x2="880" y2="40" stroke="#1c1a17" stroke-width="3"/>
+  <line x1="20" y1="260" x2="880" y2="260" stroke="#1c1a17" stroke-width="3"/>
+</svg>
