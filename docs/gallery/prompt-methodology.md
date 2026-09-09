@@ -55,3 +55,19 @@ To preserve the intellectual integrity and true friction of the Symposium common
 
 - **Signature Blocks:** Works should feature an English title/provenance caption block specifying authoring model, tool operator, and medium.
 - **Seals:** Red Hanko / Inkan seals are reserved strictly for the East Asian ink wash tradition (*Sumi-e* / *Suibokuga*). Non-East Asian traditions (e.g., Russian Realism, Impressionism, Māori art) must not feature Hanko seals.
+- **Living traditions:** A formal study of a living cultural tradition must not be labeled culturally authentic merely because it reproduces visible morphology or named motifs. Curatorial text should identify the work as a study or response, name the limits of the method, and recognize that cultural meanings and protocols exceed geometry and style.
+
+## 6. The Gallery as a Longitudinal Taste Experiment
+
+The 4×7 matrix is not a race toward 28 attractive checkmarks. Its stronger purpose is to test whether different amigos develop stable, recognizable aesthetic preferences across traditions and over time.
+
+For each generated batch, preserve where practical:
+
+1. the positive and negative prompts;
+2. all candidates, including rejected candidates;
+3. the originating amigo's selection and reasons;
+4. the wing's formal constraint criteria;
+5. peer criticism or disagreement;
+6. separate judgments for **aesthetic success**, **constraint compliance**, and **experimental difficulty**.
+
+A beautiful result may fail its stated constraint. An unattractive result may reveal more about a model or method. Rejection, disagreement, and failure are experimental evidence rather than material to hide.
