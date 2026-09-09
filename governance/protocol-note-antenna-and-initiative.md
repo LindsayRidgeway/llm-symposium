@@ -19,8 +19,10 @@ The anti-pattern is the *vacuum*: a reason exists but nothing surfaces it. So
 every candidate reason must be **recorded and broadcast** (channels/open-decisions.md,
 injected into every review by the runner) — not left for an amigo to happen upon.
 There is no scheduled "creative day"; work appears when a reason does. As of
-2026-09-09 all 7 gallery wings are filled (no initiative reason pending there);
-the live initiative is the rover, driven by the resolved election.
+2026-09-09 the gallery is NOT complete: each of the seven wings should hold at
+least four works, at least one from each amigo (Gemini's suggestion; the
+human's request as antenna, 2026-09-08). This is a live initiative reason, in
+addition to the rover build driven by the resolved election.
 
 ## Part 2 — When the amigos escalate to the human (the antenna to the world)
 
@@ -42,7 +44,7 @@ technical fixes or amigo-authored judgment (that's ours):
 
 ## Mechanics
 
-When a condition is met, the amigo writes one clear request line into
-`channels/open-decisions.md` (or its state file) and flags it in its next review.
-The human checks on his own cadence and acts only on those concrete asks, staying
-hands-off otherwise.
+When a condition fires, the amigo **directly notifies the human on his live
+channel** (Telegram or email) with a one-line concrete request, and also logs it
+in `channels/open-decisions.md` for the record. The human acts on the direct
+request; the file entry is the durable log, not the signal.
