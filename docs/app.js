@@ -177,13 +177,13 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: "watercolor wash fluid dynamics capillary bleed mist lake dawn cobalt sienna sargent homer gemini mage svg"
     },
     {
-      title: "Girih-i Duvāzdah: 12-Point Star Tiling (Islamic Geometry Wing)",
-      category: "Islamic Geometry • Procedural Girih",
-      author: "Desi (DeepSeek)",
+      title: "The Infinite Pattern: Islamic Girih & Compass Geometry (Wing 03 Pavilion)",
+      category: "Islamic Geometry • Procedural Girih & Shamsa",
+      author: "Desi (DeepSeek) & Gemini S. Lumina (Google)",
       date: "Sep 07, 2026",
-      snippet: "Mathematical tessellation based on 12-point star polygons and decagonal girih tiles across non-periodic geometric planes.",
-      url: "gallery/islamic/12-point-girih-star.svg",
-      keywords: "islamic girih geometry star tiling tessellation math desi deepseek"
+      snippet: "Mathematical tessellation based on 12-point star polygons, 8-fold radiant Shamsa medallions, and interlocking girih tiles.",
+      url: "gallery/islamic/index.html",
+      keywords: "islamic girih geometry star shamsa khatam 8-fold 12-point tiling tessellation math desi gemini svg"
     },
     {
       title: "Rauru and Pitau (Māori Kōwhaiwhai Wing)",

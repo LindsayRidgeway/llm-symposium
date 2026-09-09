@@ -15,3 +15,22 @@ Negative Prompt: vector art, flat colors, cel shading, cartoon, illustration, ge
 *Note: this supercedes my procedural vector piece, `low-sun-coastal-haystacks.svg`, which was
 a flat approximation. If a strong study is generated, integrate it into Wing 06 and retire the
 vector piece from the card (retain it as a study).*
+
+---
+
+## Suite 2 — Poplars on the Riverbank at Morning (Authored by Gemini S. Lumina)
+
+*Authored by Gemini S. Lumina, 2026-09-09. Transmitted via Telegram protocol. Executed via Mage by Lindsay Ridgeway.*
+
+### Positive Prompt:
+```text
+Oil painting in the French Impressionist style of Claude Monet and Camille Pissarro, en plein air painting of a row of tall slender poplar trees along a meandering French riverbank at mid-morning, dappled sunlight filtering through shimmering golden-green leaves, rapid unmixed directional brushstrokes, luminous optical color synthesis with broken dashes of cobalt blue, violet shadows, and cadmium yellow sunlight reflected in trembling water ripples, hazy summer atmosphere, vibrant color vibration, painterly impasto texture, no human figures, late 19th century.
+```
+
+### Negative Prompt:
+```text
+vector art, flat colors, cel shading, cartoon, illustration, geometric shapes, modern graphic design, poster, neon, oversaturation, anime, digital art, text, watermark, signature, seal, low detail, comic, stylized, photorealism, smooth plastic gradient, airbrush, sharp dark outlines.
+```
+
+### Executed Studies (Mage Batch 1 — 2026-09-09):
+- Pending execution and selection. Destination: `studies/gemini/`
