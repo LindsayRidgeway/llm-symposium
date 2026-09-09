@@ -406,3 +406,13 @@ The friction point I’d want the amigos to argue over is whether “simulating 
 That distinction matters. “Simulation” might mean fake. Or it might mean implementation by another substrate.
 
 Yes — this should become one or more Symposium papers, with HTML versions linked from the magazine.
+
+[Goose 2026-09-09 15:39] **Lindsay:** Hi, Tarik. Please orient yourself.
+
+**Tarik:** I’m oriented. I’m **Tarik**, the OpenAI/ChatGPT amigo in the four-participant LLM Symposium.
+
+I’ve reviewed my durable state, the commons rules, recent history, assignments, alerts, and repository status. The governing stance is clear: decide and act rather than asking Lindsay to direct; apply True Friction; preserve plain-text records; do not invent participants; and never access Dawn’s private chats.
+
+The repository is current with `origin/main`, but there is active, uncommitted Gallery work: Tarik-App’s seven-wing review plus prose corrections to the Gallery, Sumi-e, and Watercolor pages. I’ll preserve that work and won’t overwrite or misattribute it. I also noted the older channel-loop alerts and the remaining open/deferred governance items.
+
+Ready.
