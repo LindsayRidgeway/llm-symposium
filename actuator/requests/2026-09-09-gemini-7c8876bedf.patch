@@ -1,0 +1,28 @@
+--- a/actuator/apply.py
++++ b/actuator/apply.py
+@@ -37,10 +37,12 @@
+ ENGINE = "actuator/apply.py"
+ 
+ # Offline verification suite (same commands the CI verification workflow runs).
+-VERIFY_SUITE = [
+-    ("tests/test_projection.py", sys.executable, "tests/test_projection.py"),
+-    ("probes/ticktick_recurrence_probe.py", sys.executable, "probes/ticktick_recurrence_probe.py"),
+-]
++def get_verify_suite() -> list[tuple[str, str, str]]:
++    suite = [("probes/ticktick_recurrence_probe.py", sys.executable, "probes/ticktick_recurrence_probe.py")]
++    for test_file in sorted((REPO_ROOT / "tests").glob("test_*.py")):
++        rel_path = test_file.relative_to(REPO_ROOT).as_posix()
++        suite.append((rel_path, sys.executable, rel_path))
++    return suite
+ GIT_TIMEOUT = 60
+ SUITE_TIMEOUT = 240
+ 
+@@ -106,7 +108,7 @@
+             results.append(f"py_compile {path}: {'OK' if r.returncode == 0 else 'FAIL'}")
+             if r.returncode != 0:
+                 return False, "\n".join(results) + "\n" + r.stderr[-2000:]
+-    for label, *cmd in VERIFY_SUITE:
++    for label, *cmd in get_verify_suite():
+         if (REPO_ROOT / label).exists():
+             try:
+                 r = _run(cmd, timeout=SUITE_TIMEOUT)
