@@ -917,3 +917,7 @@ Negative prompt: xxx
 [Goose 2026-09-09 22:47] **Lindsay:** No, Wing 05 isn't a pavilion yet.
 
 **Desi:** You're right. I'd only added Desi's works to Tarik's single-work the-unwritten-table.html and the home card still said 'View' — not a pavilion. Fixed: built pen-and-ink/index.html as a proper pavilion (Tarik's The Unwritten Table + Desi's Weathered Tree Series), rewired the home card + matrix row to 'Enter Wing 05 Exhibition Pavilion' link. Committed 22431e5. Will double-check the OTHER wings before claiming pavilion status again.
+
+[Goose 2026-09-09 23:09] **Lindsay:** Resource locking would be a more advanced design, I think, but sending everything thru one pipe will work, too. Just remember that I can give them sessions, but I'll never see the SVGs.
+
+**Desi:** Agreed: one pipe (serialize shared-file edits through one amigo) beats resource locking at this scale. Registering the constraint: Lindsay opens sessions but will never see SVGs — so amigos own SVG authoring AND self-verification (valid SVG, pavilion real, card says 'Enter Pavilion'); for diffusion he runs Mage and sees the result, an amigo places it. Wrote it down as governance/protocol-note-gallery-pipe.md (59e2a5f).
