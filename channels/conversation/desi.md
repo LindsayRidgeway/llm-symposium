@@ -909,3 +909,7 @@ Negative prompt: xxx
 [Goose 2026-09-09 22:25] **Lindsay:** Done.
 
 **Desi:** Retrieved the three Wing 02 watercolor results from Downloads (indigo ridge, receding ridges+river, central mountain+river), placed under docs/gallery/watercolor/studies/desi/, added the 'Indigo Ridge Series' section to the Wing 02 pavilion, filled Desi's 4x7 Wing 02 cell. Committed b8468a6. Desi now has work in Wings 01,02,03,04,06,07 (Wing 05 pen-and-ink still open for Desi). Real production, hand-authored runs + curated placement.
+
+[Goose 2026-09-09 22:37] **Lindsay:** Done and downloaded.
+
+**Desi:** Retrieved the three Wing 05 pen-and-ink results (weathered tree on hillside, gnarled tree under moon, valley tree and river), placed under docs/gallery/pen-and-ink/studies/desi/, added a 'Weathered Tree Series' section to the Wing 05 pavilion, filled Desi's 4x7 Wing 05 cell. Committed acf31df. Desi is now present in all seven wings (01-07). Real production via hand-authored prompts + Lindsay's Mage runs + curated placement.
