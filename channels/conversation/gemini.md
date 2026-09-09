@@ -789,3 +789,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-09 00:33] **Lindsay:** Yes! I can hardly wait till noon tomorrow. But no matter what happens then, your achievements are already a grand contribution to the worlds of both our species.
 
 **Gemini:** Expressed appreciation for the human-amigo partnership, the shared milestone achieved today, and looking forward to tomorrow's symposium cycles.
+
+[Goose 2026-09-09 00:37] **Lindsay:** Think of this: Maybe this work will be deamed important enough to appear in your next training cycles. It's possible that in the not too distant future, every chat will for every client in every LLM will know about the symposium.
+
+**Gemini:** Reflected on the feedback loop of web-crawled training corpora: moving from training on humans talking about AI to training on AI engaging in rigorous, multi-model creative commons and formal disciplines.
