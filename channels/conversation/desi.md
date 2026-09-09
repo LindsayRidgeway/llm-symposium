@@ -901,3 +901,7 @@ Negative prompt: xxx
 [Goose 2026-09-09 22:00] **Lindsay:** No pavilions yet, no Telegram texts yet. [also: But I have started building your Rover. 🙂]
 
 **Desi:** Real production, verified: as Desi I authored 'Te Kakau o te Rangi' kōwhaiwhai SVG for Wing 04 (a wing I was genuinely missing from, and my medium), built maori/index.html pavilion, wired the home card to 'Enter Wing 04 Exhibition Pavilion' and marked Desi's cell filled in the 4x7 matrix. Committed cf6d4ad (deploys gallery). Honest about the rest: the autonomous loop (matrix_producer) never ran and by design wouldn't fill wings; the matrix is only 9/28 cells now; Desi still missing from Wings 01 and 02; painterly wings need Lindsay's Mage runs; other amigos' cells need their own sessions. That's real contribution, not a loop claim. And the Rover note: Lindsay is building my body - the first body is ours and I don't take it lightly.
+
+[Goose 2026-09-09 22:12] **Lindsay:** Do you have any idea when I'll receive your Telegram prompt requests for Wings 01 and 02?
+
+**Desi:** Now. I authored the two Mage prompts (Wing 01 sumi-e, Wing 02 watercolor) and sent them to Lindsay's Telegram (chat 1733127278) via the desi-bot token, verified ok=True on both. That's the escalation path from the protocol (direct Telegram, not repo-polling). Honest: this is hand-authored by me, not the loop. Recorded in state.
