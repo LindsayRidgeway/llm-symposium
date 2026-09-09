@@ -67,7 +67,7 @@ test_verify_rejects_path_escaping_repo (__main__.ActuatorTest)
 The verifier must refuse to compile a path that resolves outside ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.536s
+Ran 7 tests in 0.452s
 
 OK
 PASS test_configured_false_without_creds
@@ -114,3 +114,5 @@ PASS test_prunes_old_unmarked_raw_file_by_filename_date
 PASS test_prunes_old_unmarked_raw_file_by_mtime_when_no_date
 
 3/3 tests passed
+ARTIFACT CLAIM CHECK: PASSED
+Scanned 6 HTML file(s) and 1 Markdown file(s) for local artifact references. All cited paths exist.
