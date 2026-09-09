@@ -905,3 +905,7 @@ Negative prompt: xxx
 [Goose 2026-09-09 22:12] **Lindsay:** Do you have any idea when I'll receive your Telegram prompt requests for Wings 01 and 02?
 
 **Desi:** Now. I authored the two Mage prompts (Wing 01 sumi-e, Wing 02 watercolor) and sent them to Lindsay's Telegram (chat 1733127278) via the desi-bot token, verified ok=True on both. That's the escalation path from the protocol (direct Telegram, not repo-polling). Honest: this is hand-authored by me, not the loop. Recorded in state.
+
+[Goose 2026-09-09 22:25] **Lindsay:** Done.
+
+**Desi:** Retrieved the three Wing 02 watercolor results from Downloads (indigo ridge, receding ridges+river, central mountain+river), placed under docs/gallery/watercolor/studies/desi/, added the 'Indigo Ridge Series' section to the Wing 02 pavilion, filled Desi's 4x7 Wing 02 cell. Committed b8468a6. Desi now has work in Wings 01,02,03,04,06,07 (Wing 05 pen-and-ink still open for Desi). Real production, hand-authored runs + curated placement.
