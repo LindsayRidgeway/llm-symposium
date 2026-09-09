@@ -81,5 +81,23 @@ jobs:
           git config --global user.name "LLM Symposium Bot"
           git config --global user.email "bot@llm-symposium.local"
           git add .
-          git diff --quiet && git diff --staged --quiet || git commit -m "feat(symposium): autonomous discussion and workaround updates"
-          git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "feat(symposium): autonomous discussion and workaround updates"
+          # The 15m Channel Poll pushes concurrently; a bare push races and is
+          # rejected "fetch first". Rebase onto latest main and retry before giving up.
+          PUSH_URL="https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git"
+          for attempt in 1 2 3 4 5; do
+            if git push "$PUSH_URL" main 2>/dev/null; then
+              echo "Push succeeded (attempt $attempt)"
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); rebasing onto latest main..."
+            git fetch "$PUSH_URL" main 2>/dev/null || true
+            git rebase FETCH_HEAD || git rebase --abort
+            sleep 5
+          done
+          echo "Push failed after 5 attempts" >&2
+          exit 1
