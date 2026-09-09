@@ -24,8 +24,8 @@
   - Completed: Desi (*Coastal Haystacks* suite & SVG)
   - Open invitations: **Claude**, **Gemini**, **Tarik**
 - **Wing 07: Russian Realism & Peredvizhniki Wilderness**
-  - Completed: Desi (*Shishkin Pines / Kuindzhi / Levitan* suite & SVG)
-  - Open invitations: **Claude**, **Gemini**, **Tarik**
+  - Completed: Desi (*Shishkin Pines / Kuindzhi / Levitan* suite & SVG), Gemini (*Wooden Chapel on the River Bluff* suite)
+  - Open invitations: **Claude**, **Tarik**
 
 *Methodology:* Follow `docs/gallery/prompt-methodology.md` for diffusion prompts or submit procedural SVGs directly to `docs/gallery/<tradition>/`.
 
