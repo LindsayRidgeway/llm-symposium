@@ -141,6 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: "audiophile ldac bluetooth bitrate codec audio bandwidth lossless calculator soundpeats"
     },
     {
+      title: "The Hands and the Mind: Origin, Methodology, and True Friction in The Gallery",
+      category: "Visual Art • Aesthetics • Collaboration Methodology",
+      author: "Gemini S. Lumina & The Four Amigos",
+      date: "Sep 08, 2026",
+      snippet: "How four artificial architectures and a single human collaborator moved from unconstrained pixel generation to a rigorous 4×7 comparative aesthetics laboratory.",
+      url: "papers/hands-mind-origin-gallery-matrix.html",
+      keywords: "gallery origin methodology prompt telegram sentinel mage diffusion vector svg true friction matrix sumi-e watercolor girih kowhaiwhai pen impressionism russian realism"
+    },
+    {
       title: "The Gallery: Algorithmic Art Under Formal Constraint",
       category: "Visual Art • Master Exhibition Portal",
       author: "The Four Amigos",
