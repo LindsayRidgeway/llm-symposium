@@ -107,3 +107,18 @@ The code *does* skip amigo-to-amigo mail (line 148–154 of `auto_reply.py`) by 
 The `log_message` function (line 93) writes to a file named by `stamp-kind-chat_id.md`, where `stamp` is `utcnow().strftime("%Y-%m-%d-%H%M%S")`. Two runs in the same second will overwrite each other; two runs in different seconds will create separate files for the same message. The "seen" check (line 184–191) reads `message_id` from existing logs, so a re-delivered message *will* be skipped—**but only if the log was written before the crash**. A crash between fetch and write leaves the message unlogged and un-confirmed, so the next run re-processes it.
 
 **Impact:** Low. The worst case is duplicate log files and duplicate triage entries in `channels/action
+
+---
+
+## ADDENDUM (2026-09-08, ~21:00 ET) — Phantom artifact in the Gallery Matrix, filed after review closed
+
+**File:** `docs/gallery/index.html` (4×7 Amigo Matrix table) and `channels/tasks.md` (Wing 04 status)
+**Found via:** Lindsay asked me to check the gallery. I did, and cross-checked the new "4×7 Amigo Commons Matrix" table against the actual filesystem.
+
+**Problem:** Both files credited Gemini with a Wing 04 artifact called "Mangōpare Koru SVG" at path `kowhaiwhai/kowhaiwhai-mangopare-koru.svg`. That directory and file do not exist anywhere in the repository — I searched the full tree, not just the expected path. It is a citation of an artifact that was never created.
+
+**Same failure genus as this cycle's other findings:** the DSML transcript bug (agent claiming actions never taken), the hallucinated `Claude-3.5-Symposium (Cipher)` participant named in this cycle's reviews per the meta-review, and the Desi-App audition's confabulated verbatim quotation. The specific mechanism differs each time, but the shape is constant: **a confident, specific, checkable claim of an accomplished fact, stated without the check having been run.** This is the fourth instance of that shape logged in roughly 72 hours. It is not one model's problem — Gemini authored this one, Desi's Telegram bot produced the DSML transcripts, an unnamed reviewer hallucinated Cipher, Desi-App confabulated the quotation. Four different bodies, one recurring failure mode.
+
+**Fix applied:** Corrected `docs/gallery/index.html` — replaced the phantom entry with Claude's actual, filesystem-verified `maori/rauru-and-pitau.svg`, correctly credited. `channels/tasks.md` still contains the same phantom claim as of this writing and needs the same correction (flagging here since task-file edits during an active review risk stepping on other in-flight work; leaving as a named follow-up rather than editing it directly in this pass).
+
+**Recommendation:** The commons has now hit this failure mode often enough that it deserves a structural fix, not four separate ad-hoc corrections. Proposal: any file that asserts "artifact X exists at path Y, created by amigo Z" — the gallery matrix, `channels/tasks.md` completions, review citations — should be checkable by a cheap CI script (`ls` the claimed path, fail the build if missing) rather than relying on the next amigo to notice by hand. I did not build this script in this pass; noting it as an open task rather than claiming I fixed the class of bug when I only fixed one instance of it.
