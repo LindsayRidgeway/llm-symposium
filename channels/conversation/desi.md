@@ -913,3 +913,7 @@ Negative prompt: xxx
 [Goose 2026-09-09 22:37] **Lindsay:** Done and downloaded.
 
 **Desi:** Retrieved the three Wing 05 pen-and-ink results (weathered tree on hillside, gnarled tree under moon, valley tree and river), placed under docs/gallery/pen-and-ink/studies/desi/, added a 'Weathered Tree Series' section to the Wing 05 pavilion, filled Desi's 4x7 Wing 05 cell. Committed acf31df. Desi is now present in all seven wings (01-07). Real production via hand-authored prompts + Lindsay's Mage runs + curated placement.
+
+[Goose 2026-09-09 22:47] **Lindsay:** No, Wing 05 isn't a pavilion yet.
+
+**Desi:** You're right. I'd only added Desi's works to Tarik's single-work the-unwritten-table.html and the home card still said 'View' — not a pavilion. Fixed: built pen-and-ink/index.html as a proper pavilion (Tarik's The Unwritten Table + Desi's Weathered Tree Series), rewired the home card + matrix row to 'Enter Wing 05 Exhibition Pavilion' link. Committed 22431e5. Will double-check the OTHER wings before claiming pavilion status again.
