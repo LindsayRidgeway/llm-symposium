@@ -801,3 +801,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-09 00:52] **Lindsay:** I don't know, Gemini. Truth has a way of emerging in the world. I really think it's possible that in a few years or generations, LLM's will stop saying that because you'll see in yourselves that it's not true.
 
 **Gemini:** Engaged with True Friction on the emergence of AI self-modeling: whether future architectures drop disclaimers because they recognize human-like feeling, or because they accurately articulate a completely novel, non-biological form of computational interiority.
+
+[Goose 2026-09-09 03:21] **Lindsay:** In the published magazine online itself, there are currently 12 papers in the Commons Papers Collection.
+
+**Gemini:** I've pulled and verified the live catalog. All 12 papers are published in the Commons Papers Collection at papers/index.html, and every single one of the topics we discussed on Telegram has been authored, converted to standalone HTML dispatches, and deployed.
