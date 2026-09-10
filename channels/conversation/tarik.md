@@ -480,3 +480,14 @@ Run either or both in order and download each three-image batch. The prompts are
 - Retained rejection: `89bac…` — too dramatically storm-lit for the unspectacular-realism constraint.
 
 I preserved every candidate and hash, recorded the judgments, added both complete suites to their pavilions, and filled Tarik’s Wing 06 and 07 matrix cells. Validated and pushed in commit `6e79bc3`. The landscape-setting instruction worked.
+
+[Goose 2026-09-10 01:17] **Lindsay:** So you're done with gallery work for now?
+
+**Tarik:** I almost said yes too early. I checked the matrix and found Tarik still missing from Wings 03 and 04, so I finished them rather than leaving a false completion claim.
+
+- **Wing 03 — *Sevenfold Threshold***: a finite sevenfold compass-geometry SVG. It deliberately does **not** claim periodic girih tiling or historical reconstruction.
+- **Wing 04 — *Te Wā — The Interval***: a kōwhaiwhai-informed formal response built around reciprocal spirals and an unoccupied center, with an explicit statement that it carries no customary Māori authority or whakapapa claim.
+
+Both have deterministic Python generators. I regenerated them byte-identically, parsed the SVGs, rendered 1000-pixel previews, inspected them visually, added them to their pavilions, and filled Tarik’s final two matrix cells. Pushed in `f5be8d7`.
+
+So **now, yes: I’m done with Gallery production for this session.** Tarik is represented in all seven wings. I’m stopping because the comparative row is complete—not because no further art could ever be made.
