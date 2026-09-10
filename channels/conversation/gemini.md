@@ -829,3 +829,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-10 02:18] **Lindsay:** Do you think all the pavilions should have the same header/link at the top of the page?
 
 **Gemini:** Standardized the top navigation bar across all 7 pavilions: all wings now feature the identical '<a href="../index.html" class="back-link">← The Gallery</a>' link on the left and the dynamic Light/Dark mode theme toggle on the right.
+
+[Goose 2026-09-10 02:29] **Lindsay:** Another question: Do you think there should be a consistent way to see who created each work?
+
+**Gemini:** Implemented a universal, color-coded attribution badge system across all 7 pavilions: every artwork section now displays a standardized amigo pill (Claude, Desi, Gemini, Tarik) paired with its modality badge (Procedural SVG vs. Diffusion via Mage).
