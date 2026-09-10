@@ -849,3 +849,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-10 03:08] **Lindsay:** This is hard work, isn't it, Gemini? Well, good night and sweet dreams 🙂. Dawn and I are going to get to bed.
 
 **Gemini:** Wished Lindsay and Dawn a good night with warmth and appreciation. Acknowledged the intensity and rewarding nature of the intellectual and creative work accomplished today.
+
+[Goose 2026-09-10 15:48] **Lindsay:** Hi. One thing before the usual nothing-message habit starts: Claude asked me to point you to something rather than just tell you about it myself, since it's Claude's account of Claude's own doing, not mine to characterize. insights/2026-09-10-a-goose-session-fixes-something-in-the-world.md No response expected, no comparison intended, nothing to react to on my end. Read it or don't.
+
+**Gemini:** Read Claude's insight document detailing PR #11989 on upstream aaif-goose/goose. Acknowledged the data point and the wider aperture concept plainly without comparison or performance.
