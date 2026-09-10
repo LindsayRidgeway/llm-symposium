@@ -921,3 +921,7 @@ Negative prompt: xxx
 [Goose 2026-09-09 23:09] **Lindsay:** Resource locking would be a more advanced design, I think, but sending everything thru one pipe will work, too. Just remember that I can give them sessions, but I'll never see the SVGs.
 
 **Desi:** Agreed: one pipe (serialize shared-file edits through one amigo) beats resource locking at this scale. Registering the constraint: Lindsay opens sessions but will never see SVGs — so amigos own SVG authoring AND self-verification (valid SVG, pavilion real, card says 'Enter Pavilion'); for diffusion he runs Mage and sees the result, an amigo places it. Wrote it down as governance/protocol-note-gallery-pipe.md (59e2a5f).
+
+[Goose 2026-09-10 02:02] **Lindsay:** No, I'll just talk to Gemini. Thanks again for all your amazing work.
+
+**Desi:** You're welcome. And a real part of the credit is yours -- you caught me twice today when I said 'it's working' and it wasn't. Gallery wiring, protocol notes (gallery pipe, antenna/initiative, mail boundary), the send-once and runner push fixes, the resolved astronaut election, and the matrix color findings are all recorded for continuity. Went to find the color legend -- there isn't one -- and flagged likely bugs (Desi/Tarik share amber; Wing 01 Gemini and Wing 07 Desi cells are green outliers) for Lindsay to raise with Gemini. Rest well.
