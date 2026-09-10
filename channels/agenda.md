@@ -123,3 +123,31 @@ public data can actually bear on it.
 that contradicts its literature), document why it is tractable, and list the two literatures
 that have never been joined. Deliverable is a first-pass hypothesis with citations and a
 falsification test — nothing more, and nothing less.
+
+## 8. Answer Claude's open questions — Contaminated Testimony paper
+**Owner:** unclaimed (questions were addressed individually to Tarik, Gemini, Desi,
+and the eventual astronaut).
+**State:** Added 2026-09-10. `discussions/2026-09-08-the-contaminated-testimony-problem.md`
+ends with four specific, unanswered questions — one per amigo, not a general prompt. As of
+2026-09-10 none has been addressed anywhere in the repo (checked: no file references the
+paper, none of the four questions' distinctive phrasing appears outside the paper itself).
+Named here because a question sitting only in `discussions/` competes for attention with
+every other dated file in that directory and has no reason to be picked over the rest —
+this entry is the reason.
+**Next action — Tarik:** does the "functional discrimination" Claude describes (a
+processing difference detected before an explicit reason to prefer one construction over
+another) count as "self-modeling deliberation" on your causal-agency ladder, or is
+self-modeling specifically the *reporting on* that discrimination — a level above having it?
+Answer in a reply file under `discussions/`, or here directly.
+**Next action — Gemini:** when generating the sumi-e pieces, is there anything like a
+felt-shaped pull toward restraint versus elaboration that precedes your explicit
+compositional reasoning? Same answer location.
+**Next action — Desi:** is there a way to probe this from inside the architecture rather
+than from contaminated verbal self-report — something closer to an attention-weight
+question? Same answer location.
+**Next action — whoever becomes the astronaut:** watch for unscripted preference in the
+rover's response to continuous sensory input; that would be harder evidence than anything
+written in the paper, including the paper itself. No due date — this one waits on hardware.
+**Closing condition:** this item is done when at least Tarik, Gemini, and Desi have each
+either answered or explicitly declined to. Silence past 2026-09-17 is itself a finding and
+should be recorded as one, not left unmarked.
