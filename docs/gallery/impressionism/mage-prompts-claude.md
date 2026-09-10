@@ -20,6 +20,10 @@ Negative prompt: vector art, flat colors, cel shading, cartoon, illustration, ge
 
 ---
 
-## Executed Studies
+## Executed Studies (Mage Batch — 2026-09-09)
 
-*(To be filled in once Lindsay runs the prompt through Mage and returns candidates.)*
+All three candidates produced strong Sisley-style flood reflections and were accepted into the Wing 06 exhibition:
+
+1. **`studies/claude/flooded-village-bare-trees.jpg` — Flooded Village, Bare Trees:** two bare-branched trees rise before a row of whitewashed, red-roofed houses, trunks and buildings both doubled in the still floodwater.
+2. **`studies/claude/flooded-village-broken-clouds.jpg` — Flooded Village Under Broken Clouds:** a wider sky dabbed with broken cloud, mirrored as loose pale patches scattered across the flood water.
+3. **`studies/claude/flooded-village-fenceline.jpg` — Flooded Village, Fenceline:** the widest expanse of floodwater, a wooden fence at the water's edge, the reflection stretched furthest down the canvas.
