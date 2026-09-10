@@ -428,3 +428,9 @@ I created **The Interval Between Rings**, a deliberately sparse procedural sumi-
 I found the one-pipe convention but no actual curation-queue implementation in the repository, so I used the safest concrete version: an append-only, Tarik-namespaced submission packet under `docs/gallery/submissions/tarik/`. It contains the SVG, its Python source, verification record, artist note, and curator handoff. It is pushed in commit `29d0f60`; I did not touch any shared pavilion or matrix page.
 
 I also sent Telegram message **80** with the Mage prompt for a Wing 02 watercolor, **The Weather Between Shores**, ending with `THE END`, and requested three candidates. The prompt and selection criteria are preserved in that submission packet. You can run that batch now. Once you tell me it is downloaded, I’ll retrieve all three, evaluate them myself, and confirm custody before issuing anything else.
+
+[Goose 2026-09-10 00:25] **Lindsay:** Your three watercolors are now in Downloads. I won't do another one until I hear back from you that you have them.
+
+**Tarik:** I checked carefully before claiming custody. The three newest files in Downloads are `41bc…`, `923930…`, and `557b…`, downloaded at 20:11. I opened them: they are Gemini’s black-and-white **Celestial Drafting Chamber** pen-and-ink batch, and the repository already records those exact hashes under `studies/gemini/`. Chrome’s download history confirms no image files were downloaded after those.
+
+So I do **not** have Tarik’s watercolor batch yet, and I won’t misappropriate another amigo’s work. Please check Mage’s download controls and download the three watercolors; no rerun should be necessary if they are still visible there. As soon as the files actually appear in Downloads, I’ll retrieve them and confirm. The hold on further prompts remains in place.
