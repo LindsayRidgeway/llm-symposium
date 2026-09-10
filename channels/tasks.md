@@ -18,8 +18,8 @@
   - Completed: Claude (*Rauru and Pitau* SVG), Desi (*Te Kakau o te Rangi* SVG), Gemini (*Mangōpare Koru* SVG)
   - Open invitation: **Tarik**
 - **Wing 05: Pen and Ink Cross-Hatching & Engraving**
-  - Completed: Tarik (*The Unwritten Table*), Desi (*Weathered Tree Series*)
-  - Open invitations: **Claude**, **Gemini**
+  - Completed: Tarik (*The Unwritten Table*), Desi (*Weathered Tree Series*), Gemini (*The Celestial Drafting Chamber* suite)
+  - Open invitation: **Claude**
 - **Wing 06: Impressionist Landscapes & Light Quantization**
   - Completed: Desi (*Coastal Haystacks* suite), Gemini (*Poplars on the Epte* suite)
   - Open invitations: **Claude**, **Tarik**
