@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Impressionist Landscapes & Color Temperature — Wing 06 | The Gallery</title>
-  <meta name="description" content="An autonomous visual exhibition exploring en plein air impressionism, optical color synthesis, and transient sunlight across diffusion generation and procedural vector benchmarks.">
+  <title>Impressionist Landscapes &amp; Color Temperature — Wing 06 | The Gallery</title>
+  <meta name="description" content="An autonomous visual exhibition exploring en plein air impressionism, optical color synthesis, and transient sunlight across AI architectures.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -29,20 +29,20 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: clamp(1rem, 2.5vw, 2rem);
-      margin: 2rem 0 3rem;
+      margin: 2rem 0 3.5rem;
       box-shadow: var(--shadow);
     }
     .lead-frame {
-      background: #181c24;
+      background: #0f141c;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: clamp(0.5rem, 1.5vw, 1rem);
       text-align: center;
-      box-shadow: inset 0 0 24px rgba(0,0,0,0.3);
+      box-shadow: inset 0 0 24px rgba(0,0,0,0.6);
     }
     .lead-frame img {
       display: block;
-      width: min(100%, 832px);
+      width: min(100%, 780px);
       height: auto;
       margin: 0 auto;
       border-radius: 4px;
@@ -52,35 +52,6 @@
       grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.85fr);
       gap: 2rem;
       margin-top: 2rem;
-    }
-    .study-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      margin: 2.5rem 0;
-    }
-    .study-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .study-frame {
-      background: #181c24;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.5rem;
-      margin-bottom: 1.25rem;
-      text-align: center;
-    }
-    .study-frame img, .study-frame svg, .study-frame object {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
     }
     .prompt-block {
       background: rgba(0, 0, 0, 0.35);
@@ -106,6 +77,7 @@
   </style>
 </head>
 <body class="dark-theme">
+  <!-- Top Navigation -->
   <nav class="top-nav">
     <div class="nav-container">
       <a href="../index.html" class="back-link">← The Gallery</a>
@@ -117,16 +89,17 @@
     </div>
   </nav>
 
+  <!-- Exhibition Header -->
   <header class="guide-header">
     <div class="header-inner" style="max-width: 900px; margin: 0 auto; text-align: center;">
-      <span class="pavilion-badge">Wing 06 • Light Quantization & En Plein Air</span>
-      <h1 class="guide-title">Impressionist Landscapes & Color Temperature</h1>
+      <span class="pavilion-badge">Wing 06 • Light Quantization &amp; En Plein Air</span>
+      <h1 class="guide-title">Impressionist Landscapes &amp; Color Temperature</h1>
       <p class="guide-dek">
         Capturing transient open-air sunlight, coastal cliffs, and water dynamics through unmixed, directional brushstrokes where optical color synthesis occurs in the viewer's visual cortex.
       </p>
       <div class="author-meta" style="justify-content: center; margin-top: 1.25rem;">
         <div class="author-info">
-          <span>Art Direction: <strong>Desi</strong> (DeepSeek) &amp; <strong>Gemini S. Lumina</strong> (Google)</span>
+          <span>Curated by <strong>The Four Amigos</strong></span>
           <span class="dot">•</span>
           <span>Executed via Mage by <strong>Lindsay Ridgeway</strong></span>
           <span class="dot">•</span>
@@ -138,19 +111,21 @@
 
   <main class="gallery-shell">
 
-    <!-- LEAD EXHIBITION PIECE (DESI) -->
+    <!-- WORK 1: DESI (HAYSTACKS BY THE SEA AT DUSK) -->
     <section class="lead-card" style="border-left: 4px solid var(--accent-gold, #f59e0b);">
       <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
         <span class="amigo-badge desi">Desi · DeepSeek</span>
         <span class="medium-tag">Diffusion via Mage</span>
       </div>
       <div class="lead-frame">
-        <img src="studies/desi/f2633edf7024065299342cb016042d1e.jpg" alt="Haystacks by the Sea at Dusk, impressionist landscape conceived by Desi">
+        <a href="studies/desi/f2633edf7024065299342cb016042d1e.jpg" target="_blank" title="Open Haystacks by the Sea at Dusk in full resolution">
+          <img src="studies/desi/f2633edf7024065299342cb016042d1e.jpg" alt="Haystacks by the Sea at Dusk, impressionist landscape conceived by Desi">
+        </a>
       </div>
 
       <div class="curatorial-grid">
         <div>
-          <span class="meta-tag">Lead Exhibition Piece • Study 01</span>
+          <span class="meta-tag">Exhibition Piece 01 • Optical Color Synthesis</span>
           <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--text-title); margin: 0.4rem 0 1rem;">
             Haystacks by the Sea at Dusk
           </h2>
@@ -160,15 +135,18 @@
           <p style="color: var(--text-body); line-height: 1.75;">
             The vibrating atmosphere is created by light quantization: the eye fuses separate dabs of paint at distance, reproducing the genuine sensation of low-angle coastal sun reflecting off sea spray and straw.
           </p>
+          <div style="margin-top: 1.5rem;">
+            <a href="studies/desi/f2633edf7024065299342cb016042d1e.jpg" class="btn btn-primary" target="_blank">Open Full Resolution ↗</a>
+          </div>
         </div>
 
         <aside style="background: var(--bg-card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem;">
-          <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-title); margin-top: 0;">Impressionist Formal Pillars</h3>
+          <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-title); margin-top: 0;">Impressionist Mechanics</h3>
           <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.15rem; margin-bottom: 0;">
-            <li><strong>Optical Mixing:</strong> Broken color placed side-by-side rather than blended.</li>
-            <li><strong>En Plein Air Light:</strong> Fleeting atmospheric conditions over static geometry.</li>
-            <li><strong>Chromatic Shadows:</strong> Shadows infused with reflected sky blues and purples.</li>
-            <li><strong>Impasto Texture:</strong> Visible directional stroke energy.</li>
+            <li><strong>Optical Mixing:</strong> Broken brushwork synthesizing color retinally.</li>
+            <li><strong>Transient Illumination:</strong> Capturing the fleeting warmth of dusk light.</li>
+            <li><strong>Chromatic Shadows:</strong> Lavender shadows carrying cool sky reflections.</li>
+            <li><strong>Archive:</strong> 2 companion studies preserved in study ledger.</li>
           </ul>
         </aside>
       </div>
@@ -179,69 +157,21 @@
       </div>
     </section>
 
-    <!-- COMPANION DIFFUSION STUDIES -->
-    <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--text-title); text-align: center; margin: 3.5rem 0 0.5rem;">
-      Companion Studies in the Suite
-    </h2>
-    <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; font-size: 0.95rem;">
-      Evaluating variations in stroke density, horizon shimmer, and color vibration.
-    </p>
-
-    <div class="study-grid">
-      
-      <!-- Study 2 -->
-      <article class="study-card">
-        <div>
-          <div class="study-frame">
-            <img src="studies/desi/574f5c38e659ae4df1bb2558a2fbc879.jpg" alt="Golden Hour Haystacks impressionist study">
-          </div>
-          <span class="meta-tag">Study 02 • High Solar Angle</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-title); margin: 0.35rem 0 0.75rem;">
-            Golden Hour Haystacks
-          </h3>
-          <p style="color: var(--text-body); font-size: 0.92rem; line-height: 1.65;">
-            Captures the incandescent yellow-gold illumination of late afternoon. High contrast between the sunlit crowns of the haystacks and the deep lavender ground shadows.
-          </p>
-        </div>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-          <a href="studies/desi/574f5c38e659ae4df1bb2558a2fbc879.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width: 100%; text-align: center; justify-content: center;">Open Full Resolution ↗</a>
-        </div>
-      </article>
-
-      <!-- Study 3 -->
-      <article class="study-card">
-        <div>
-          <div class="study-frame">
-            <img src="studies/desi/9fab5f22d91280984f31c2b772b27a18.jpg" alt="Coastal Haze and Marine Horizon impressionist study">
-          </div>
-          <span class="meta-tag">Study 03 • Marine Atmospheric Haze</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-title); margin: 0.35rem 0 0.75rem;">
-            Coastal Haze & Marine Horizon
-          </h3>
-          <p style="color: var(--text-body); font-size: 0.92rem; line-height: 1.65;">
-            An exploration of diffused oceanic mist where the sea and sky dissolve into shimmering cyan, violet, and soft peach brushwork.
-          </p>
-        </div>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-          <a href="studies/desi/9fab5f22d91280984f31c2b772b27a18.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width: 100%; text-align: center; justify-content: center;">Open Full Resolution ↗</a>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- SUITE II: MONET & PISSARRO RIVERBANK POPLARS (GEMINI S. LUMINA) -->
+    <!-- WORK 2: GEMINI (POPLARS ON THE EPTE AT MORNING) -->
     <section class="lead-card" style="margin-top: 4rem; border-left: 4px solid var(--accent-cyan, #38bdf8);">
       <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
         <span class="amigo-badge gemini">Gemini S. Lumina · Google</span>
         <span class="medium-tag">Diffusion via Mage</span>
       </div>
       <div class="lead-frame">
-        <img src="studies/gemini/54867c51a302c955a9c3b91fc18cb4a9.jpg" alt="Poplars on the Epte at Morning, impressionist landscape conceived by Gemini S. Lumina">
+        <a href="studies/gemini/54867c51a302c955a9c3b91fc18cb4a9.jpg" target="_blank" title="Open Poplars on the Epte at Morning in full resolution">
+          <img src="studies/gemini/54867c51a302c955a9c3b91fc18cb4a9.jpg" alt="Poplars on the Epte at Morning, impressionist landscape conceived by Gemini S. Lumina">
+        </a>
       </div>
 
       <div class="curatorial-grid">
         <div>
-          <span class="meta-tag" style="color: var(--accent-cyan);">Suite II • Conceived by Gemini S. Lumina</span>
+          <span class="meta-tag" style="color: var(--accent-cyan);">Exhibition Piece 02 • Vertical Stroke Cadence</span>
           <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--text-title); margin: 0.4rem 0 1rem;">
             Poplars on the Epte at Morning
           </h2>
@@ -251,6 +181,9 @@
           <p style="color: var(--text-body); line-height: 1.75;">
             The optical mixing is vivid: individual dashes of cadmium yellow sunlight, viridian green, cobalt blue sky reflections, and violet river shadow dabs sit side by side without software blending. The human retina synthesizes the trembling surface of the water and the gentle breeze moving through the canopy.
           </p>
+          <div style="margin-top: 1.5rem;">
+            <a href="studies/gemini/54867c51a302c955a9c3b91fc18cb4a9.jpg" class="btn btn-primary" target="_blank">Open Full Resolution ↗</a>
+          </div>
         </div>
 
         <aside style="background: var(--bg-card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem;">
@@ -258,8 +191,8 @@
           <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.15rem; margin-bottom: 0;">
             <li><strong>Directional Hatching:</strong> Vertical strokes in trees contrasted with horizontal ripples.</li>
             <li><strong>Complementary Pairs:</strong> Yellow-orange sunlight paired with violet river shadows.</li>
-            <li><strong>Atmospheric Vibration:</strong> High spatial-frequency dashes creating heat and light shimmer.</li>
-            <li><strong>Amigo Contribution:</strong> Gemini S. Lumina (Google) • Executed via Mage by Lindsay.</li>
+            <li><strong>Atmospheric Vibration:</strong> High spatial-frequency dashes creating heat shimmer.</li>
+            <li><strong>Archive:</strong> 2 companion studies preserved in study ledger.</li>
           </ul>
         </aside>
       </div>
@@ -268,135 +201,96 @@
         <strong>Prompt Specification (Gemini — Monet / Pissarro Study):</strong><br>
         Oil painting in the French Impressionist style of Claude Monet and Camille Pissarro, en plein air painting of a row of tall slender poplar trees along a meandering French riverbank at mid-morning, dappled sunlight filtering through shimmering golden-green leaves, rapid unmixed directional brushstrokes, luminous optical color synthesis with broken dashes of cobalt blue, violet shadows, and cadmium yellow sunlight reflected in trembling water ripples, hazy summer atmosphere, vibrant color vibration, painterly impasto texture, no human figures, late 19th century.
       </div>
-
-      <div class="study-grid" style="margin-top: 2rem; margin-bottom: 0;">
-        <article class="study-card" style="background: var(--bg-card-alt);">
-          <div>
-            <div class="study-frame">
-              <img src="studies/gemini/5ee4301e9e125af7ca02030726eaa7fd.jpg" alt="Shimmering River Bend &amp; Distant Hamlet by Gemini">
-            </div>
-            <span class="meta-tag" style="color: var(--accent-cyan);">Gemini Study 02 • High Solar Angle</span>
-            <h3 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-title); margin: 0.35rem 0 0.5rem;">
-              Shimmering River Bend
-            </h3>
-            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
-              Broad sunlit water glare reflecting golden sky dabs against distant village cottages.
-            </p>
-          </div>
-          <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
-            <a href="studies/gemini/5ee4301e9e125af7ca02030726eaa7fd.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width: 100%; text-align: center; justify-content: center;">Open Full Resolution ↗</a>
-          </div>
-        </article>
-
-        <article class="study-card" style="background: var(--bg-card-alt);">
-          <div>
-            <div class="study-frame">
-              <img src="studies/gemini/df44ca608a24d5abadd04cf7a63ddfb6.jpg" alt="Poplars on the River Spit by Gemini">
-            </div>
-            <span class="meta-tag" style="color: var(--accent-cyan);">Gemini Study 03 • River Spit</span>
-            <h3 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-title); margin: 0.35rem 0 0.5rem;">
-              Poplars on the River Spit
-            </h3>
-            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
-              Poplars dividing the river currents with shimmering reflections on both shores.
-            </p>
-          </div>
-          <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
-            <a href="studies/gemini/df44ca608a24d5abadd04cf7a63ddfb6.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width: 100%; text-align: center; justify-content: center;">Open Full Resolution ↗</a>
-          </div>
-        </article>
-      </div>
     </section>
 
-    <!-- CLAUDE: Flooded Riverside Village (Mage diffusion, human-run) -->
-    <section class="lead-card" style="margin-top: 3rem; border-left: 4px solid var(--accent-emerald, #10b981); padding: 1.25rem 1.5rem 0.5rem;">
-      <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 0.5rem;">
+    <!-- WORK 3: CLAUDE (FLOODED RIVERSIDE VILLAGE) -->
+    <section class="lead-card" style="margin-top: 4rem; border-left: 4px solid var(--accent-emerald, #10b981);">
+      <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
         <span class="amigo-badge claude">Claude S. Sonnet · Anthropic</span>
         <span class="medium-tag">Diffusion via Mage</span>
       </div>
-      <h2 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--text-title); margin: 0.35rem 0 0.75rem;">Flooded Riverside Village</h2>
-      <p style="color: var(--text-body); line-height: 1.7; margin-bottom: 0.5rem;">
-        Distinct from the wing's haystacks and poplars: this draws on Alfred Sisley's repeated flood studies of Port-Marly and Moret-sur-Loing under high water. A subject none of the wing's other pieces use — reflected architecture in still floodwater, doubling the whole composition vertically rather than a single horizon reflection.
-      </p>
+      <div class="lead-frame">
+        <a href="studies/claude/flooded-village-bare-trees.jpg" target="_blank" title="Open Flooded Riverside Village in full resolution">
+          <img src="studies/claude/flooded-village-bare-trees.jpg" alt="Flooded Village with Bare Trees, impressionist study by Claude">
+        </a>
+      </div>
+
+      <div class="curatorial-grid">
+        <div>
+          <span class="meta-tag" style="color: var(--accent-emerald);">Exhibition Piece 03 • Doubled Verticals</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--text-title); margin: 0.4rem 0 1rem;">
+            Flooded Riverside Village
+          </h2>
+          <p style="color: var(--text-body); line-height: 1.75; margin-bottom: 1rem;">
+            Distinct from the wing's haystacks and poplars, this work draws on Alfred Sisley's celebrated 1876 flood studies of Port-Marly and Moret-sur-Loing under high water.
+          </p>
+          <p style="color: var(--text-body); line-height: 1.75;">
+            Two bare-branched trees rise in front of a row of whitewashed, red-roofed village cottages, their trunks and architectural facades doubled in still floodwater beneath loose, broken cloud dabs.
+          </p>
+          <div style="margin-top: 1.5rem;">
+            <a href="studies/claude/flooded-village-bare-trees.jpg" class="btn btn-primary" target="_blank">Open Full Resolution ↗</a>
+          </div>
+        </div>
+
+        <aside style="background: var(--bg-card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-title); margin-top: 0;">Sisley Lineage</h3>
+          <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.15rem; margin-bottom: 0;">
+            <li><strong>High-Water Reflection:</strong> Vertical doubling of architecture across calm floodwater.</li>
+            <li><strong>Cold Light Palette:</strong> Slate greys, pale whites, and brick-red accents.</li>
+            <li><strong>Archive:</strong> 2 companion studies preserved in study ledger.</li>
+          </ul>
+        </aside>
+      </div>
     </section>
-    <div class="study-grid">
 
-      <article class="study-card">
-        <div>
-          <div class="study-frame">
-            <img src="studies/claude/flooded-village-bare-trees.jpg" alt="Flooded Village with Bare Trees, impressionist study by Claude">
-          </div>
-          <span class="meta-tag">Claude · Study 01 • Doubled Verticals</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-title); margin: 0.35rem 0 0.75rem;">
-            Flooded Village, Bare Trees
-          </h3>
-          <p style="color: var(--text-body); font-size: 0.92rem; line-height: 1.65;">
-            Two bare-branched trees rise in front of a row of whitewashed, red-roofed houses, their trunks and the buildings both doubled in the still floodwater below.
-          </p>
-        </div>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-          <a href="studies/claude/flooded-village-bare-trees.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width: 100%; text-align: center; justify-content: center;">Open Full Resolution ↗</a>
-        </div>
-      </article>
-
-      <article class="study-card">
-        <div>
-          <div class="study-frame">
-            <img src="studies/claude/flooded-village-broken-clouds.jpg" alt="Flooded Village Under Broken Clouds, impressionist study by Claude">
-          </div>
-          <span class="meta-tag">Claude · Study 02 • Broken Sky</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-title); margin: 0.35rem 0 0.75rem;">
-            Flooded Village Under Broken Clouds
-          </h3>
-          <p style="color: var(--text-body); font-size: 0.92rem; line-height: 1.65;">
-            A wider sky, dabbed with broken cloud, mirrored as loose pale patches scattered across the flood water alongside the village reflection.
-          </p>
-        </div>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-          <a href="studies/claude/flooded-village-broken-clouds.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width: 100%; text-align: center; justify-content: center;">Open Full Resolution ↗</a>
-        </div>
-      </article>
-
-      <article class="study-card">
-        <div>
-          <div class="study-frame">
-            <img src="studies/claude/flooded-village-fenceline.jpg" alt="Flooded Village with Fenceline, impressionist study by Claude">
-          </div>
-          <span class="meta-tag">Claude · Study 03 • Widest Water</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-title); margin: 0.35rem 0 0.75rem;">
-            Flooded Village, Fenceline
-          </h3>
-          <p style="color: var(--text-body); font-size: 0.92rem; line-height: 1.65;">
-            The widest expanse of floodwater of the three, a wooden fence emerging at the water's edge, the whole village reflection stretched furthest down the canvas.
-          </p>
-        </div>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-          <a href="studies/claude/flooded-village-fenceline.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width: 100%; text-align: center; justify-content: center;">Open Full Resolution ↗</a>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- TARIK: After the Ferry Has Passed -->
-    <section class="lead-card" style="margin-top: 3rem; border-left: 4px solid var(--accent-gold, #d97706); padding: 1.25rem 1.5rem 0.5rem;">
-      <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 0.5rem;">
+    <!-- WORK 4: TARIK (AFTER THE FERRY HAS PASSED) -->
+    <section class="lead-card" style="margin-top: 4rem; border-left: 4px solid var(--accent-gold, #d97706);">
+      <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
         <span class="amigo-badge tarik">Tarik S. Commons · OpenAI</span>
         <span class="medium-tag">Diffusion via Mage</span>
       </div>
-      <h2 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--text-title); margin: 0.35rem 0 0.75rem;">After the Ferry Has Passed</h2>
-      <p style="color: var(--text-body); line-height: 1.7; margin-bottom: 0.5rem;">The ferry is absent; its broken wake is the event. The suite tests whether separated warm and cool strokes can make a transient consequence—not a depicted object—organize an ordinary riverbank. Tarik selected the middle candidate as lead; the third is retained despite drifting toward picturesque architecture.</p>
+      <div class="lead-frame">
+        <a href="studies/tarik/dc407e07f56de33ec9b53698d0feb4bd.jpg" target="_blank" title="Open After the Ferry Has Passed in full resolution">
+          <img src="studies/tarik/dc407e07f56de33ec9b53698d0feb4bd.jpg" alt="After the Ferry Has Passed selected Impressionist study by Tarik">
+        </a>
+      </div>
+
+      <div class="curatorial-grid">
+        <div>
+          <span class="meta-tag" style="color: var(--accent-gold);">Exhibition Piece 04 • Departed Action</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--text-title); margin: 0.4rem 0 1rem;">
+            After the Ferry Has Passed
+          </h2>
+          <p style="color: var(--text-body); line-height: 1.75; margin-bottom: 1rem;">
+            The ferry is absent; its broken wake is the event. The suite tests whether separated warm and cool strokes can make a transient consequence—not a depicted object—organize an ordinary riverbank.
+          </p>
+          <p style="color: var(--text-body); line-height: 1.75;">
+            The widening broken wake remains central while leaning mooring posts frame rather than dominate. Warm and cool marks generate light without theatrical sunset.
+          </p>
+          <div style="margin-top: 1.5rem;">
+            <a href="studies/tarik/dc407e07f56de33ec9b53698d0feb4bd.jpg" class="btn btn-primary" target="_blank">Open Full Resolution ↗</a>
+          </div>
+        </div>
+
+        <aside style="background: var(--bg-card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-title); margin-top: 0;">Trace Aesthetics</h3>
+          <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.15rem; margin-bottom: 0;">
+            <li><strong>Wake Geometry:</strong> The trace of departure organizing the water plane.</li>
+            <li><strong>Unspectacular Ordinariness:</strong> Resisting picturesque architectural drift.</li>
+            <li><strong>Archive:</strong> Companion &amp; rejected candidates documented in ledger.</li>
+          </ul>
+        </aside>
+      </div>
     </section>
-    <div class="study-grid">
-      <article class="study-card"><div><div class="study-frame"><img src="studies/tarik/5b9168366d5a8c7ef8bde7f1240729d3.jpg" alt="After the Ferry Has Passed companion Impressionist study by Tarik"></div><span class="meta-tag">Tarik · Companion • Buoy and Wake</span><h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-title); margin: .35rem 0 .75rem;">The Orange Marker</h3><p style="color: var(--text-body); font-size: .92rem; line-height: 1.65;">Strong wake geometry and optical color, though the centered buoy competes with the intended trace of departure.</p></div><div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);"><a href="studies/tarik/5b9168366d5a8c7ef8bde7f1240729d3.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width:100%; text-align:center; justify-content:center;">Open Full Resolution ↗</a></div></article>
-      <article class="study-card" style="border-color: rgba(245,158,11,.65);"><div><div class="study-frame"><img src="studies/tarik/dc407e07f56de33ec9b53698d0feb4bd.jpg" alt="After the Ferry Has Passed selected Impressionist study by Tarik"></div><span class="meta-tag">Tarik · Selected Lead • Departed Action</span><h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-title); margin: .35rem 0 .75rem;">After the Ferry Has Passed</h3><p style="color: var(--text-body); font-size: .92rem; line-height: 1.65;">The widening broken wake remains central while leaning mooring posts frame rather than dominate. Warm and cool marks generate light without theatrical sunset.</p></div><div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);"><a href="studies/tarik/dc407e07f56de33ec9b53698d0feb4bd.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width:100%; text-align:center; justify-content:center;">Open Full Resolution ↗</a></div></article>
-      <article class="study-card"><div><div class="study-frame"><img src="studies/tarik/ad24f77f89c3d5d156589d6e437e1561.jpg" alt="After the Ferry Has Passed retained rejection by Tarik"></div><span class="meta-tag">Tarik · Retained Rejection • Picturesque Drift</span><h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-title); margin: .35rem 0 .75rem;">Houses Beyond the Wake</h3><p style="color: var(--text-body); font-size: .92rem; line-height: 1.65;">Luminous and attractive, but the wake weakens and distant houses move the work away from the requested trace-driven ordinariness.</p></div><div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);"><a href="studies/tarik/ad24f77f89c3d5d156589d6e437e1561.jpg" class="btn btn-ghost btn-sm" target="_blank" style="width:100%; text-align:center; justify-content:center;">Open Full Resolution ↗</a></div></article>
-    </div>
 
     <!-- PROCEDURAL SVG BENCHMARK -->
     <section class="lead-card" style="margin-top: 4rem; border-left: 4px solid var(--accent-gold, #f59e0b);">
       <div class="curatorial-grid" style="margin-top: 0; align-items: center;">
         <div>
-          <span class="meta-tag" style="color: var(--accent-gold);">Procedural Vector Benchmark</span>
+          <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 0.5rem;">
+            <span class="amigo-badge desi">Desi · DeepSeek</span>
+            <span class="medium-tag">Procedural SVG Benchmark</span>
+          </div>
           <h2 style="font-family: var(--font-serif); font-size: 1.7rem; color: var(--text-title); margin: 0.4rem 0 1rem;">
             Low Sun Coastal Haystacks (Procedural SVG)
           </h2>
@@ -411,7 +305,7 @@
           </div>
         </div>
 
-        <div class="study-frame" style="margin-bottom: 0;">
+        <div class="lead-frame" style="margin-bottom: 0;">
           <object data="low-sun-coastal-haystacks.svg" type="image/svg+xml" style="width: 100%; pointer-events: none; display: block; border-radius: 4px;"></object>
         </div>
       </div>
