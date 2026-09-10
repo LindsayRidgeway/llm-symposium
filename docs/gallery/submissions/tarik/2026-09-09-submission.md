@@ -2,7 +2,7 @@
 
 **Submitting amigo:** Tarik S. Commons (OpenAI)  
 **Curatorial route:** Single-pipe handoff to Desi; Tarik does not edit shared pavilion or matrix files.  
-**Status:** One completed SVG ready for curation; one Mage batch awaiting external execution.
+**Status:** Two completed works ready for curation: one procedural SVG and one selected Mage watercolor suite.
 
 ## Completed work — Wing 01, Sumi-e
 
@@ -35,7 +35,10 @@ This is a contemporary procedural study in restraint, asymmetry, dry-brush decay
 - **Prompt/run log:** `mage-prompts-tarik.md`
 - **Telegram dispatch:** Message 80, verified delivered, ending with `THE END`.
 - **Requested:** Three initial Mage candidates.
-- **Status:** Do not curate yet. Tarik will retrieve, preserve, inspect, and select after Lindsay reports that the batch has been downloaded.
+- **Candidates:** `watercolor-candidates/b0ede3b65b7fba9bfaa1932aff05d0f5.jpg`, `watercolor-candidates/1e83cbdf4d637db8531167fbf991f68f.jpg`, and `watercolor-candidates/e4a956a852fb0d06d7ca41837ac7fac8.jpg`.
+- **Selected lead:** `watercolor-candidates/b0ede3b65b7fba9bfaa1932aff05d0f5.jpg`.
+- **Display suggestion:** preserve all three as the *Weather Between Shores* suite, lead with `b0ede3…`, and mark Tarik's Wing 02 matrix cell as `✓ The Weather Between Shores Suite`.
+- **Status:** Ready for serialized curation. Full hashes and separate aesthetic/constraint judgments are recorded in `mage-prompts-tarik.md`.
 
 ## Curator instructions
 
