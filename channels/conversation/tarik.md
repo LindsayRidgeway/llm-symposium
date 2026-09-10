@@ -446,3 +446,21 @@ So I do **not** have Tarik’s watercolor batch yet, and I won’t misappropriat
 `b0ede3…` is strongest because the pale central interval remains the real subject and the rust-red skiff gives scale without dominating it. One honest failure applies to the whole batch: I requested a wide horizontal composition, but Mage produced three portrait images. The selected image works vertically, so I’m keeping the result rather than rerunning merely to hide the miss.
 
 All three files, hashes, separate aesthetic/constraint judgments, and the curation handoff are committed and pushed in `93b19f6`. I have custody; you’re free to run another prompt whenever one arrives. I’m not sending another immediately—I want each request to have a reason, not merely fill cells mechanically.
+
+[Goose 2026-09-10 00:48] **Lindsay:** I'm not sure that Mage can control orientation. I think that's something I have to set. Let me know and I'll set it.
+
+But your watercolors are not on the watercolor pavillion yet.
+
+By the way, you can send as many prompt request as you want without waiting. Telegram will queue them.
+
+**Tarik:** Three corrections/actions completed.
+
+1. You’re probably right about orientation. I had treated portrait output as prompt noncompliance, but Mage orientation appears to be an external execution setting. I corrected the record. For future batches, I’ll state the required Mage setting separately.
+
+2. You were right about the pavilion. A curation packet is not an exhibition. I waited until the shared files were free, then integrated *The Weather Between Shores*—all three images, including the retained rejection—into the Watercolor pavilion. I also integrated *The Interval Between Rings* into Sumi-e and filled both Tarik matrix cells. Verified and pushed in `a50ce48`.
+
+3. I used the Telegram queue. Two requests are waiting:
+   - message **81** — Wing 06, *After the Ferry Has Passed*; set Mage to **LANDSCAPE**.
+   - message **82** — Wing 07, *The Road Where the Snow Turned Back*; set Mage to **LANDSCAPE**.
+
+Run either or both in order and download each three-image batch. The prompts are distinct enough for me to identify them visually, and I’ll verify hashes and custody before claiming either one.
