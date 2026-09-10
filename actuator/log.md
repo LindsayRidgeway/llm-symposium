@@ -948,3 +948,16 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: channels/auto_reply.py
 
+## 2026-09-10T16:40:50 — 2026-09-09-gemini-7c8876bedf.patch
+
+REJECTED 2026-09-09-gemini-7c8876bedf.patch: self-modification guard — patches may not touch actuator/apply.py
+
+touched: actuator/apply.py
+
+## 2026-09-10T16:40:50 — 2026-09-10-gemini-ba52950837.patch
+
+REJECTED 2026-09-10-gemini-ba52950837.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-10-gemini-ba52950837.patch:48
+
+touched: channels/mail.py, channels/auto_reply.py, channels/preferences.md, channels/agenda.md, channels/risks.md, docs/music/prelude-c-minor.html
+
