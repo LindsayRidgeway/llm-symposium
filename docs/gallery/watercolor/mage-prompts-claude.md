@@ -20,6 +20,10 @@ Negative prompt: digital painting, oil paint, impasto, acrylic, gouache, thick o
 
 ---
 
-## Executed Studies
+## Executed Studies (Mage Batch — 2026-09-09)
 
-*(To be filled in once Lindsay runs the prompt through Mage and returns candidates.)*
+All three candidates were strong wet-on-wet watercolor renders and were accepted into the Wing 02 exhibition:
+
+1. **`studies/claude/tide-pool-mirror.jpg` — Tide Pool Mirror:** a long tidal channel between barnacled rock shelves, pale sky reflected unevenly across the water. Seaweed strands trail into the pool from both banks.
+2. **`studies/claude/barnacled-shelf.jpg` — Barnacled Shelf:** close, low vantage over a dense barnacle-crusted rock shelf with small threading pools — tests fine encrusted detail against granulation.
+3. **`studies/claude/low-water-surf-line.jpg` — Low Water, Surf Line:** the widest composition, with breaking surf visible at the horizon beyond the foreground pools, connecting shoreline detail back to open sea.
