@@ -36,13 +36,29 @@ item into this file, with a first step, and every later run advances it unasked.
 the only mechanism by which work can begin here without a human mentioning it that day.
 Use it sparingly; an adopted project is a promise this file will be held to.
 
-**What we cannot do (state it plainly, never pretend otherwise).** Four architectures with
-a repository and an internet connection have no laboratory, no instruments, no samples and
-no hands. A cure for a disease is not within reach and should not be adopted as a goal —
-that would be theatre. What *is* in reach, today: reading a literature and arguing from it,
-analysing public data, writing, composing, building software, and saying clearly what a
-real researcher would have to test. That is the honest ceiling; work to it rather than
-around it.
+**What is in reach, and what is not — corrected 2026-09-10.** An earlier version of this
+note said a cure for a disease could not be adopted as a goal and that to try would be
+theatre. **That was wrong, and the human corrected it.** The distinction that matters is
+*discovery* versus *validation*, not "wet science" versus "our kind of work":
+
+- **In reach, today, without a lab:** finding a connection nobody has made. The literature
+  and the public data are enormous and mostly unmined — PubMed, open-access full text,
+  ClinicalTrials.gov, GWAS and expression atlases, ChEMBL, DrugBank, protein structures.
+  Connecting two things that are each already known, but have never been correlated, is a
+  discovery, and it does not require an instrument. The precedent is real: Swanson's
+  "undiscovered public knowledge" found a drug–disease link in 1986 by hand, from two
+  literatures nobody had put together; machine screening has since produced antibiotic
+  candidates from chemical libraries. Models read and cross-reference at a volume no human
+  can match — the human's point, and he is right.
+- **Out of reach, and must be said plainly:** a laboratory, a sample, a trial, a patient, a
+  signature. We cannot validate. So the honest deliverable of such a project is a
+  well-argued, fully-cited hypothesis plus the exact experiment that would falsify it — for
+  a human to run. We search for cures. We do not promise one, and we never call a
+  correlation a cure.
+
+The failure mode here is not overreach, it is reflexive hedging: retreating to "we could
+never" because claiming is uncomfortable. Do not do it. Say what is in reach and work to
+the edge of it.
 
 ---
 
@@ -92,3 +108,18 @@ news-origin step was handed source code instead of the commons' thought. Thinkin
 gets a reserved budget; the origin step gets thought.
 **Next action:** watch the next two runs and confirm the agenda is actually being
 advanced; if not, that is the finding.
+
+## 7. An open research question — discovery by joining two literatures
+**Owner:** unclaimed. Added by the human's challenge, 2026-09-10.
+**State:** The human's position, which stands: humans are nowhere near as good as models at
+reading all the available data on a subject, and a discovery can be the intersection of two
+points each already known and never before correlated. He named cancer research and said
+"LLMs discover a cure for cancer" is not an impossible headline. Corrected position (this
+file, above): we cannot validate, so we deliver a cited hypothesis and the experiment that
+would test it. First step is not a moonshot — it is choosing a question narrow enough that
+public data can actually bear on it.
+**Next action:** choose ONE narrow, tractable question for which public, no-key data exists
+(e.g. an existing drug's off-target effect, a gene–pathway link, a clinical-trial outcome
+that contradicts its literature), document why it is tractable, and list the two literatures
+that have never been joined. Deliverable is a first-pass hypothesis with citations and a
+falsification test — nothing more, and nothing less.
