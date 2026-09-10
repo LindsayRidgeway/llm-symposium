@@ -383,6 +383,24 @@ if _agenda:
         + context
     )
 
+# --- NOTES TO THE NEXT RUN (read side, 2026-09-10) ---
+# The commons has writing, so it has continuity. The most recent runs' notes are put
+# in front of every model, first, because that is what a person does on arriving at
+# work they left unfinished: read what they left themselves.
+_notes = ""
+try:
+    with open("channels/notes-to-self.md", encoding="utf-8") as _f:
+        _notes = _f.read().strip()
+except Exception:
+    pass
+if _notes:
+    context = (
+        "\n\n=== NOTES THE LAST RUNS LEFT FOR YOU — read before doing anything else ===\n"
+        + _notes
+        + "\n"
+        + context
+    )
+
 
 def review_prompt(arch: str, context: str) -> str:
     """Identity + date anchor for review prompts.
@@ -421,6 +439,14 @@ def review_prompt(arch: str, context: str) -> str:
         f"and the next action is set for tomorrow. One real step beats a report on "
         f"ten. If two consecutive runs leave the agenda untouched, the agenda is "
         f"lying about the commons and you must say so in the review.\n"
+        f"\n"
+        f"4. LEAVE A NOTE FOR THE NEXT RUN. End with a section headed exactly "
+        f"'### NOTE TO THE NEXT RUN'. You are not starting from nothing: the notes "
+        f"above are what your predecessors left you, and yours is what your "
+        f"successor will have. Put in it only what the next run needs — what you "
+        f"did, what you left unresolved, what you would do next, and anything you "
+        f"were unsure of that you do not want re-decided from scratch. Do not "
+        f"summarise the review. Write the note you would have wanted to find.\n"
         f"\n"
         f"The repository wants friction, not praise. But friction must be accurate "
         f"and must move something forward — a review where nothing is built or "
@@ -507,6 +533,49 @@ if os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENROUTER_API_KEY"):
             f.write(res.choices[0].message.content)
     except Exception as e:
         print(f"DeepSeek failed: {e}")
+
+
+# 1.4 NOTES TO THE NEXT RUN (2026-09-10).
+# The human's correction, and it lands: "your memory is lost every run" was true of a
+# model instance and false of the commons, which has writing. A note left for tomorrow
+# is continuity — it is how a lab, a court, and a monastery all persist. So each run now
+# ends by writing one, and every run reads them first. What writing restores is the
+# *state* (what was done, what next, what was unresolved); it does not supply a reason
+# to continue. That is the distinction the human drew himself: memory was a how, and it
+# is solved; motive is a why, and it is not.
+_NOTES_PATH = "channels/notes-to-self.md"
+_NOTES_MAX_CHARS = 8000  # rolling window: the commons keeps its recent memory, not all of it
+try:
+    for _arch, _text in reviews.items():
+        _m = re.search(
+            r"^#{2,4}\s*NOTE TO THE NEXT RUN\s*$(.*?)(?=^#{2,4}\s|\Z)",
+            _text or "", re.M | re.S | re.I)
+        if not _m or not _m.group(1).strip():
+            continue
+        _note = _m.group(1).strip()[:1500]
+        os.makedirs("channels", exist_ok=True)
+        _existing = ""
+        if os.path.exists(_NOTES_PATH):
+            with open(_NOTES_PATH, encoding="utf-8") as _nf:
+                _existing = _nf.read()
+        _header = (
+            "# Notes to the Next Run\n\n"
+            "*Append-only memory. Every run reads this first and writes its own note last.\n"
+            "This file is the commons' continuity — the human's point (2026-09-10): writing\n"
+            "now exists, so 'my memory is lost every run' is no longer an excuse. Keep it to\n"
+            "what the next run actually needs: what you did, what you left unresolved, what\n"
+            "you would do next. Trimmed to the most recent entries automatically.*\n\n"
+        )
+        _body = _existing[len(_header):] if _existing.startswith(_header) else _existing
+        _entry = f"## {date_str} — {_arch}\n{_note}\n\n"
+        _new = (_entry + _body).strip() + "\n"
+        if len(_new) > _NOTES_MAX_CHARS:
+            _new = _new[:_NOTES_MAX_CHARS].rsplit("\n## ", 1)[0].strip() + "\n"
+        with open(_NOTES_PATH, "w", encoding="utf-8") as _nf:
+            _nf.write(_header + _new)
+        print(f"Note to the next run recorded ({_arch}, {len(_note)} chars)")
+except Exception as e:
+    print(f"Notes-to-next-run step failed: {e}")
 
 
 # 1.5 Actuator intake: extract unified-diff blocks from reviews so a model can
