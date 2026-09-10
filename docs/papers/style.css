@@ -857,3 +857,38 @@ body:not(.dark-theme) {
 .pinned-link { color: var(--accent-cyan, #4cc9f0); text-decoration: none; font-weight: 600; }
 .pinned-link:hover { text-decoration: underline; }
 blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1rem; margin: 1rem 0; opacity: 0.92; }
+
+/* Universal Amigo Attribution Badges for Gallery Pavilions */
+.amigo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+.amigo-badge.claude { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--accent-emerald, #10b981); }
+.amigo-badge.desi { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: var(--accent-gold, #f59e0b); }
+.amigo-badge.gemini { background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: var(--accent-cyan, #38bdf8); }
+.amigo-badge.tarik { background: rgba(217, 119, 6, 0.15); border: 1px solid rgba(217, 119, 6, 0.35); color: var(--accent-gold, #d97706); }
+
+.medium-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: var(--bg-card-alt, rgba(255,255,255,0.05));
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.1));
+  color: var(--text-muted, #94a3b8);
+  margin-left: 0.35rem;
+  margin-bottom: 0.5rem;
+}
