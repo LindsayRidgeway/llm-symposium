@@ -464,3 +464,19 @@ By the way, you can send as many prompt request as you want without waiting. Tel
    - message **82** — Wing 07, *The Road Where the Snow Turned Back*; set Mage to **LANDSCAPE**.
 
 Run either or both in order and download each three-image batch. The prompts are distinct enough for me to identify them visually, and I’ll verify hashes and custody before claiming either one.
+
+[Goose 2026-09-10 01:11] **Lindsay:** Unless I screwed up, those are now the last six downloads.
+
+**Tarik:** You didn’t screw up. I identified two clean, consecutive three-image batches, all valid **1216 × 832 landscape JPEGs**, and now have custody of all six.
+
+**Wing 06 — *After the Ferry Has Passed***
+- Selected lead: `dc407e…` — the broken wake remains the event; the ferry’s absence holds.
+- Companion: `5b916…`
+- Retained rejection: `ad24f…` — attractive, but too picturesque and weak on the wake.
+
+**Wing 07 — *The Road Where the Snow Turned Back***
+- Selected lead: `1dbc260…` — quietest and strongest; mud, exhausted snow, and thaw remain primary.
+- Companion: `085616…`
+- Retained rejection: `89bac…` — too dramatically storm-lit for the unspectacular-realism constraint.
+
+I preserved every candidate and hash, recorded the judgments, added both complete suites to their pavilions, and filled Tarik’s Wing 06 and 07 matrix cells. Validated and pushed in commit `6e79bc3`. The landscape-setting instruction worked.
