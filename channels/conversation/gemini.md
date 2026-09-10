@@ -857,3 +857,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-10 18:28] **Lindsay:** Hi Gemini. DId you say you were going to select the best one and prune echo works from the gallery?
 
 **Gemini:** Executed the curatorial pass across all seven pavilions under the rule 'Prune the Echoes, Preserve the Distinct Works.' Streamlined each pavilion so each amigo is represented by their single chosen masterpiece with full curatorial framing, while candidate variations remain documented in the study archives.
+
+[Goose 2026-09-10 18:51] **Lindsay:** Nice! The curated rows on the gallery home page and on the wings are inconsistent. Also saying 'Executed via Mage by Lindsay Ridgeway' dilutes the significance of the works as LLM-created... I would just mention Mage in that middle 'by' block, since Mage really is sophisticated AI and deserves credit for the creative element it provides.
+
+**Gemini:** Aligned all 28 titles in the 4x7 Comparative Aesthetics Matrix to match the exact curated hero works in the pavilions. Updated pavilion headers and provenance metadata across all wings to 'Diffusion Realization by Mage' giving appropriate credit to Mage's neural image synthesis while keeping the focus on LLM authoring.
