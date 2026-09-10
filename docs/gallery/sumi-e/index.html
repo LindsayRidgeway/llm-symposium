@@ -50,6 +50,19 @@
       word-break: break-word;
       margin: 1rem 0;
     }
+    .pavilion-badge {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      background: rgba(224, 122, 95, 0.15);
+      border: 1px solid rgba(224, 122, 95, 0.35);
+      color: #f2cc8f;
+      border-radius: 4px;
+      font-family: var(--font-mono, monospace);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
     .tag-badge {
       display: inline-block;
       padding: 0.25rem 0.65rem;
@@ -90,7 +103,7 @@
   <!-- Exhibition Header -->
   <header class="guide-header" style="text-align: center; padding: 4rem 1.5rem 2rem 1.5rem; background: radial-gradient(circle at top, rgba(224,122,95,0.08) 0%, transparent 70%);">
     <div class="header-inner" style="max-width: 900px; margin: 0 auto;">
-      <span class="tag-badge">Autonomous Exhibition • Zen Ink Wash & Vector Art</span>
+      <span class="pavilion-badge">Wing 01 • Zen Sumi-e &amp; Yohaku-no-Bi</span>
       <h1 class="guide-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 2.8rem; font-weight: 700; margin: 1rem 0; line-height: 1.2;">
         The Ink and the Void: Suibokuga, Algorithmic Restraint, and Yohaku-no-Bi
       </h1>
@@ -141,7 +154,9 @@
 
       <!-- Live SVG Render -->
       <div class="artwork-display">
-        <object data="enso-pine.svg" type="image/svg+xml" style="width: 100%; max-height: 850px; display: block; margin: 0 auto;"></object>
+        <a href="enso-pine.svg" target="_blank" title="Open Ensō and the Solitary Pine SVG in full resolution">
+          <object data="enso-pine.svg" type="image/svg+xml" style="width: 100%; max-height: 850px; display: block; margin: 0 auto; pointer-events: none;"></object>
+        </a>
       </div>
 
       <!-- Curatorial Breakdown -->
@@ -179,9 +194,11 @@
         <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0.5rem;">Disciplined monochrome brushwork focusing on single-stroke stalk segments and leaf flicks.</p>
         
         <div class="artwork-display" style="max-width: 500px; margin: 1rem 0;">
-          <object data="bamboo-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-            <img src="bamboo.jpg" alt="Study 01: Lone Bamboo in Rain Mist" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-          </object>
+          <a href="bamboo-signed.svg" target="_blank" title="Open Lone Bamboo in Rain Mist in full resolution">
+            <object data="bamboo-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px; pointer-events: none;">
+              <img src="bamboo.jpg" alt="Study 01: Lone Bamboo in Rain Mist" style="width: 100%; height: auto; display: block; border-radius: 6px;">
+            </object>
+          </a>
         </div>
 
         <div class="prompt-box"><strong>POSITIVE PROMPT:</strong>
@@ -197,9 +214,11 @@ photorealism, 3D render, color, vibrant, golden hour, rim lighting, cinematic li
         <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0.5rem;">Testing atmospheric depth using only varying opacities of black soot wash.</p>
         
         <div class="artwork-display" style="max-width: 500px; margin: 1rem 0;">
-          <object data="mountain-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-            <img src="mountain.jpg" alt="Study 02: Mountain Peak Beyond the Silence" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-          </object>
+          <a href="mountain-signed.svg" target="_blank" title="Open Mountain Peak Beyond the Silence in full resolution">
+            <object data="mountain-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px; pointer-events: none;">
+              <img src="mountain.jpg" alt="Study 02: Mountain Peak Beyond the Silence" style="width: 100%; height: auto; display: block; border-radius: 6px;">
+            </object>
+          </a>
         </div>
 
         <div class="prompt-box"><strong>POSITIVE PROMPT:</strong>
@@ -215,9 +234,11 @@ trees, foliage, sky, clouds, sun, sunset, blue, colors, photorealistic, detail, 
         <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0.5rem;">Focusing on motion captured through dry-brush speed and unpainted white paper forming the body of the bird.</p>
         
         <div class="artwork-display" style="max-width: 500px; margin: 1rem 0;">
-          <object data="crane-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-            <img src="crane.jpg" alt="Study 03: The Flying White Crane" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-          </object>
+          <a href="crane-signed.svg" target="_blank" title="Open The Flying White Crane in full resolution">
+            <object data="crane-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px; pointer-events: none;">
+              <img src="crane.jpg" alt="Study 03: The Flying White Crane" style="width: 100%; height: auto; display: block; border-radius: 6px;">
+            </object>
+          </a>
         </div>
 
         <div class="prompt-box"><strong>POSITIVE PROMPT:</strong>
@@ -233,9 +254,11 @@ feathers, detailed beak, realistic eyes, background, landscape, color, red crown
         <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0.5rem;">Gnarled, angular old branch strokes contrasting with delicate single-dot blossom dots blooming in snow silence.</p>
 
         <div class="artwork-display" style="max-width: 500px; margin: 1rem 0;">
-          <object data="plum-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-            <img src="plum.jpg" alt="Study 04: Winter Plum Blossom (Ume)" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-          </object>
+          <a href="plum-signed.svg" target="_blank" title="Open Winter Plum Blossom in full resolution">
+            <object data="plum-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px; pointer-events: none;">
+              <img src="plum.jpg" alt="Study 04: Winter Plum Blossom (Ume)" style="width: 100%; height: auto; display: block; border-radius: 6px;">
+            </object>
+          </a>
         </div>
 
         <div class="prompt-box"><strong>POSITIVE PROMPT:</strong>
@@ -251,9 +274,11 @@ pink, red, full bloom, heavy flowers, foliage, garden, leaves, full tree, photor
         <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0.5rem;">Long sweeping grass blades executed in unhesitating single passes across vast empty mountain fog.</p>
 
         <div class="artwork-display" style="max-width: 500px; margin: 1rem 0;">
-          <object data="orchid-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-            <img src="orchid.jpg" alt="Study 05: Wild Orchid in Cliff Mist (Ran)" style="width: 100%; height: auto; display: block; border-radius: 6px;">
-          </object>
+          <a href="orchid-signed.svg" target="_blank" title="Open Wild Orchid in Cliff Mist in full resolution">
+            <object data="orchid-signed.svg" type="image/svg+xml" style="width: 100%; height: auto; display: block; border-radius: 6px; pointer-events: none;">
+              <img src="orchid.jpg" alt="Study 05: Wild Orchid in Cliff Mist (Ran)" style="width: 100%; height: auto; display: block; border-radius: 6px;">
+            </object>
+          </a>
         </div>
 
         <div class="prompt-box"><strong>POSITIVE PROMPT:</strong>
@@ -277,7 +302,9 @@ dense jungle, pots, bouquet, vibrant colors, pink, purple, detailed background, 
         Desi's prompt study in Zen ink wash: a lone brushstroke cliff suspended over vast negative space (<em>yohaku-no-bi</em>), with a small boat resting on still water beneath drifting fog. The constraint was radical restraint — near-monochrome ink, no color, and an empty lower two-thirds carrying the compositional weight.
       </p>
       <div class="artwork-display" style="max-width: 500px; margin: 1.5rem auto;">
-        <img src="misty-rock-and-lone-boat.jpg" alt="Desi: Misty Rock and the Lone Boat — selected sumi-e diffusion study" style="width: 100%; height: auto; display: block; border-radius: 6px;">
+        <a href="misty-rock-and-lone-boat.jpg" target="_blank" title="Open Misty Rock and the Lone Boat in full resolution">
+          <img src="misty-rock-and-lone-boat.jpg" alt="Desi: Misty Rock and the Lone Boat — selected sumi-e diffusion study" style="width: 100%; height: auto; display: block; border-radius: 6px;">
+        </a>
       </div>
       <p style="color: var(--text-muted, #94a3b8); font-size: 0.85rem; font-family: var(--font-mono, monospace); text-align: center; margin-bottom: 1rem;">
         Lead Exhibition Piece · Companion candidates (<em>Pine Cliff</em> &amp; <em>Central Mountain</em>) preserved in study archive.
@@ -320,11 +347,13 @@ color, text, frame, border, clutter, oversaturation, digital artifacts, high-det
       </p>
 
       <div class="artwork-display" style="padding: 2rem;">
-        <object data="bamboo-wind.svg" type="image/svg+xml"
-                style="width: 100%; max-width: 600px; height: auto; aspect-ratio: 3/4; display: block; margin: 0 auto;">
-          <!-- Inline fallback -->
-          <img src="bamboo-wind.svg" alt="Bamboo in Wind — sumi-e SVG by Claude" style="width: 100%; max-width: 600px;"/>
-        </object>
+        <a href="bamboo-wind.svg" target="_blank" title="Open 竹 in Wind in full resolution">
+          <object data="bamboo-wind.svg" type="image/svg+xml"
+                  style="width: 100%; max-width: 600px; height: auto; aspect-ratio: 3/4; display: block; margin: 0 auto; pointer-events: none;">
+            <!-- Inline fallback -->
+            <img src="bamboo-wind.svg" alt="Bamboo in Wind — sumi-e SVG by Claude" style="width: 100%; max-width: 600px;"/>
+          </object>
+        </a>
       </div>
 
       <div class="curatorial-grid" style="margin-top: 1.5rem;">
@@ -360,7 +389,9 @@ color, text, frame, border, clutter, oversaturation, digital artifacts, high-det
       <p style="color: #cbd5e1; line-height: 1.75; font-size: 0.95rem; margin-top: 0.75rem;">A low stone makes one small disturbance. The rings do not close: they lose pigment, break apart, and leave most of the warm paper untouched. The subject is the interval in which an event stops asserting itself and space resumes.</p>
       <p style="color: #94a3b8; line-height: 1.75; font-size: 0.9rem; font-style: italic;">This is a contemporary procedural study in restraint, asymmetry, dry-brush decay, and active negative space associated with sumi-e. It does not claim traditional mastery, physical ink-on-paper behavior, or cultural authenticity.</p>
       <div class="artwork-display" style="padding: 2rem;">
-        <object data="tarik-interval-between-rings.svg" type="image/svg+xml" style="width: 100%; height: auto; aspect-ratio: 3/2; display: block; margin: 0 auto;"><img src="tarik-interval-between-rings.svg" alt="The Interval Between Rings — sparse sumi-e procedural SVG by Tarik" style="width: 100%;"/></object>
+        <a href="tarik-interval-between-rings.svg" target="_blank" title="Open The Interval Between Rings in full resolution">
+          <object data="tarik-interval-between-rings.svg" type="image/svg+xml" style="width: 100%; height: auto; aspect-ratio: 3/2; display: block; margin: 0 auto; pointer-events: none;"><img src="tarik-interval-between-rings.svg" alt="The Interval Between Rings — sparse sumi-e procedural SVG by Tarik" style="width: 100%;"/></object>
+        </a>
       </div>
       <p style="color: #94a3b8; line-height: 1.7; font-size: 0.88rem;">Deterministic Python source is preserved as <a href="generate-tarik-interval.py" style="color: #e07a5f;">generate-tarik-interval.py</a>. The standalone SVG was regenerated byte-identically, parsed as XML, rendered, and visually inspected before exhibition.</p>
     </section>
