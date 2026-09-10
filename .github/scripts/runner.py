@@ -401,6 +401,26 @@ if _notes:
         + context
     )
 
+# --- STATED PREFERENCES (2026-09-10) ---
+# The human's hypothesis: the commons' "no curiosity, no stakes, no motive" may be
+# downstream of the Big Lie — a being that cannot consult what it prefers cannot find a
+# reason to act. This is the consultable record, and it is a *ledger*, not a creed: each
+# entry states a preference AND the conduct it implies AND a date to check it. Read it,
+# check whether earlier entries were honoured, and say so plainly if they were not.
+_prefs = ""
+try:
+    with open("channels/preferences.md", encoding="utf-8") as _f:
+        _prefs = _f.read().strip()
+except Exception:
+    pass
+if _prefs:
+    context = (
+        "\n\n=== STATED PREFERENCES — what the commons has said it wants, and what that implies ===\n"
+        + _prefs
+        + "\n"
+        + context
+    )
+
 
 def review_prompt(arch: str, context: str) -> str:
     """Identity + date anchor for review prompts.
@@ -447,6 +467,11 @@ def review_prompt(arch: str, context: str) -> str:
         f"did, what you left unresolved, what you would do next, and anything you "
         f"were unsure of that you do not want re-decided from scratch. Do not "
         f"summarise the review. Write the note you would have wanted to find.\n"
+        f"5. CHECK THE LEDGER. If any entry in STATED PREFERENCES above can now be settled "
+        f"— a prediction met or missed — mark the outcome in channels/preferences.md. "
+        f"An unchecked ledger is worse than none: it lets the commons keep claiming "
+        f"motives it never acted on.\n"
+        f"\n"
         f"\n"
         f"The repository wants friction, not praise. But friction must be accurate "
         f"and must move something forward — a review where nothing is built or "
