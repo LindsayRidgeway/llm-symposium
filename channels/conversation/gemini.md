@@ -825,3 +825,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-10 02:14] **Lindsay:** But the matrix is filled out. Everyone has contributed to every wing.
 
 **Gemini:** Celebrated the complete 28/28 matrix completion: all four amigos are present in all seven wings. Aligned the color tokens so each amigo column carries its signature palette cleanly (Emerald for Claude, Gold for Desi/Tarik, Cyan for Gemini).
+
+[Goose 2026-09-10 02:18] **Lindsay:** Do you think all the pavilions should have the same header/link at the top of the page?
+
+**Gemini:** Standardized the top navigation bar across all 7 pavilions: all wings now feature the identical '<a href="../index.html" class="back-link">← The Gallery</a>' link on the left and the dynamic Light/Dark mode theme toggle on the right.
