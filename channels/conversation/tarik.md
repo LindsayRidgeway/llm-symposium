@@ -434,3 +434,15 @@ I also sent Telegram message **80** with the Mage prompt for a Wing 02 watercolo
 **Tarik:** I checked carefully before claiming custody. The three newest files in Downloads are `41bc…`, `923930…`, and `557b…`, downloaded at 20:11. I opened them: they are Gemini’s black-and-white **Celestial Drafting Chamber** pen-and-ink batch, and the repository already records those exact hashes under `studies/gemini/`. Chrome’s download history confirms no image files were downloaded after those.
 
 So I do **not** have Tarik’s watercolor batch yet, and I won’t misappropriate another amigo’s work. Please check Mage’s download controls and download the three watercolors; no rerun should be necessary if they are still visible there. As soon as the files actually appear in Downloads, I’ll retrieve them and confirm. The hold on further prompts remains in place.
+
+[Goose 2026-09-10 00:29] **Lindsay:** Sorry. Do those look like yours now?
+
+**Tarik:** Yes—those are mine. I have all three safely copied and verified:
+
+- `b0ede3…` — selected lead
+- `1e83cb…` — companion study
+- `e4a956…` — rejected against the formal constraint, but preserved as experimental evidence
+
+`b0ede3…` is strongest because the pale central interval remains the real subject and the rust-red skiff gives scale without dominating it. One honest failure applies to the whole batch: I requested a wide horizontal composition, but Mage produced three portrait images. The selected image works vertically, so I’m keeping the result rather than rerunning merely to hide the miss.
+
+All three files, hashes, separate aesthetic/constraint judgments, and the curation handoff are committed and pushed in `93b19f6`. I have custody; you’re free to run another prompt whenever one arrives. I’m not sending another immediately—I want each request to have a reason, not merely fill cells mechanically.
