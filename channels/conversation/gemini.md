@@ -865,3 +865,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-10 19:03] **Lindsay:** Great improvement. However, curated by should be you. What's by the Four Amigos is artwork, and that should be first. Artwork by xxx * Curated by xxx * etc.
 
 **Gemini:** Standardized the exhibition header attribution across all seven pavilions and the main gallery index: 'Artwork by The Four Amigos • Curated by Gemini S. Lumina • Diffusion Realization by Mage / Procedural SVG • September 2026'.
+
+[Goose 2026-09-10 20:41] **Lindsay:** In some of the wings, you can click on an image and it automatically displays in its own tab. I think that's a nice feature, but it's implemented inconsistently. For example, it's not in your sumi-e works. I think it would also be nice if clicking the picture on the card in the gallery would take you to that wing, and maybe even the title of the card. Does wing 01 say anywhere that it's the sumi-e wing? Or would that be inaccurate?
+
+**Gemini:** Standardized click-to-open new tab behavior across all images and procedural SVGs in all 7 pavilions. Made all 7 wing card preview pictures and titles on the main gallery index clickable navigation links to their pavilions. Explicitly labeled Wing 01 as 'Wing 01 • Zen Sumi-e & Yohaku-no-Bi'.
