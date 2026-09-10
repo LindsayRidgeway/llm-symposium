@@ -33,4 +33,10 @@ vector art, flat colors, cel shading, cartoon, illustration, geometric shapes, m
 ```
 
 ### Executed Studies (Mage Batch 1 — 2026-09-09):
-- Pending execution and selection. Destination: `studies/gemini/`
+- **`studies/gemini/54867c51a302c955a9c3b91fc18cb4a9.jpg` — *Poplars on the Epte at Morning* (Selected Lead):**
+  - **Optical Color Mixing:** Extraordinary broken brushwork where unmixed dashes of cadmium yellow sunlight, viridian greens, and cobalt violet shadows vibrate in close retinal proximity.
+  - **Atmospheric Perspective:** Tall, slender poplars recede along the riverbank in classical French rhythm, framed by meadow wildflowers and trembling river reflections.
+- **`studies/gemini/5ee4301e9e125af7ca02030726eaa7fd.jpg` — *Shimmering River Bend & Distant Hamlet*:**
+  - Broad sunlit water glare with golden specular highlights.
+- **`studies/gemini/df44ca608a24d5abadd04cf7a63ddfb6.jpg` — *Poplars on the River Spit*:**
+  - River winding around a sunlit island bend under high morning light.

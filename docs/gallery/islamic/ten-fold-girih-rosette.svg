@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="100%" height="100%">
+
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="72%">
+      <stop offset="0%" stop-color="#161d47"/>
+      <stop offset="100%" stop-color="#0c1130"/>
+    </radialGradient>
+    <filter id="grain" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.9  0 0 0 0 0.85  0 0 0 0 0.7  0 0 0 0.045 0"/>
+    </filter>
+  </defs>
+
+<rect width="1200" height="1200" fill="url(#bgGrad)"/>
+<rect width="1200" height="1200" filter="url(#grain)" opacity="0.5"/>
+<path d="M 920.00 600.00 L 501.11 904.34 L 341.11 411.91 L 858.89 411.91 L 698.89 904.34 L 280.00 600.00 L 698.89 295.66 L 858.89 788.09 L 341.11 788.09 L 501.11 295.66 L 920.00 600.00" fill="none" stroke="#e8cf7a" stroke-width="3.2" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 799.72 664.89 L 476.57 769.89 L 476.57 430.11 L 799.72 535.11 L 600.00 810.00 L 400.28 535.11 L 723.43 430.11 L 723.43 769.89 L 400.28 664.89 L 600.00 390.00 L 799.72 664.89" fill="none" stroke="#a8481f" stroke-width="2.0" stroke-linejoin="round" opacity="0.85"/>
+<polygon points="920.00,600.00 858.89,788.09 698.89,904.34 501.11,904.34 341.11,788.09 280.00,600.00 341.11,411.91 501.11,295.66 698.89,295.66 858.89,411.91" fill="none" stroke="#c9a227" stroke-width="0.8" opacity="0.18"/>
+<path d="M 1064.88 751.05 L 895.41 764.39 L 1005.81 635.12 L 1019.15 804.59 L 889.88 694.19 L 1059.35 680.85 L 948.95 810.12 L 935.61 640.65 L 1064.88 751.05" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 887.31 995.45 L 742.37 906.63 L 907.66 866.94 L 818.84 1011.89 L 779.16 846.59 L 924.10 935.41 L 758.80 975.09 L 847.63 830.15 L 887.31 995.45" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 600.00 1088.80 L 534.95 931.75 L 692.00 996.80 L 534.95 1061.85 L 600.00 904.80 L 665.05 1061.85 L 508.00 996.80 L 665.05 931.75 L 600.00 1088.80" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 312.69 995.45 L 352.37 830.15 L 441.20 975.09 L 275.90 935.41 L 420.84 846.59 L 381.16 1011.89 L 292.34 866.94 L 457.63 906.63 L 312.69 995.45" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 135.12 751.05 L 264.39 640.65 L 251.05 810.12 L 140.65 680.85 L 310.12 694.19 L 180.85 804.59 L 194.19 635.12 L 304.59 764.39 L 135.12 751.05" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 135.12 448.95 L 304.59 435.61 L 194.19 564.88 L 180.85 395.41 L 310.12 505.81 L 140.65 519.15 L 251.05 389.88 L 264.39 559.35 L 135.12 448.95" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 312.69 204.55 L 457.63 293.37 L 292.34 333.06 L 381.16 188.11 L 420.84 353.41 L 275.90 264.59 L 441.20 224.91 L 352.37 369.85 L 312.69 204.55" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 600.00 111.20 L 665.05 268.25 L 508.00 203.20 L 665.05 138.15 L 600.00 295.20 L 534.95 138.15 L 692.00 203.20 L 534.95 268.25 L 600.00 111.20" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 887.31 204.55 L 847.63 369.85 L 758.80 224.91 L 924.10 264.59 L 779.16 353.41 L 818.84 188.11 L 907.66 333.06 L 742.37 293.37 L 887.31 204.55" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 1064.88 448.95 L 935.61 559.35 L 948.95 389.88 L 1059.35 519.15 L 889.88 505.81 L 1019.15 395.41 L 1005.81 564.88 L 895.41 435.61 L 1064.88 448.95" fill="none" stroke="#efe6d2" stroke-width="1.8" stroke-linejoin="round" opacity="1.0"/>
+<path d="M 1132.76 684.38 L 218.59 981.41 L 515.62 67.24 L 1080.61 844.88 L 119.39 844.88 L 684.38 67.24 L 981.41 981.41 L 67.24 684.38 L 844.88 119.39 L 844.88 1080.61 L 67.24 515.62 L 981.41 218.59 L 684.38 1132.76 L 119.39 355.12 L 1080.61 355.12 L 515.62 1132.76 L 218.59 218.59 L 1132.76 515.62 L 355.12 1080.61 L 355.12 119.39 L 1132.76 684.38" fill="none" stroke="#c9a227" stroke-width="1.3" stroke-linejoin="round" opacity="0.5"/>
+<circle cx="600.0" cy="600.0" r="561.40" fill="none" stroke="#c9a227" stroke-width="2.2" opacity="0.5"/>
+<circle cx="600.0" cy="600.0" r="577.40" fill="none" stroke="#a8481f" stroke-width="1.1" opacity="0.35"/>
+<path d="M 210.00 150.00 L 131.46 207.06 L 101.46 114.73 L 198.54 114.73 L 168.54 207.06 L 90.00 150.00 L 168.54 92.94 L 198.54 185.27 L 101.46 185.27 L 131.46 92.94 L 210.00 150.00" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round" opacity="0.7"/>
+<path d="M 1110.00 150.00 L 1031.46 207.06 L 1001.46 114.73 L 1098.54 114.73 L 1068.54 207.06 L 990.00 150.00 L 1068.54 92.94 L 1098.54 185.27 L 1001.46 185.27 L 1031.46 92.94 L 1110.00 150.00" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round" opacity="0.7"/>
+<path d="M 210.00 1050.00 L 131.46 1107.06 L 101.46 1014.73 L 198.54 1014.73 L 168.54 1107.06 L 90.00 1050.00 L 168.54 992.94 L 198.54 1085.27 L 101.46 1085.27 L 131.46 992.94 L 210.00 1050.00" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round" opacity="0.7"/>
+<path d="M 1110.00 1050.00 L 1031.46 1107.06 L 1001.46 1014.73 L 1098.54 1014.73 L 1068.54 1107.06 L 990.00 1050.00 L 1068.54 992.94 L 1098.54 1085.27 L 1001.46 1085.27 L 1031.46 992.94 L 1110.00 1050.00" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round" opacity="0.7"/>
+<text x="1136" y="1160" font-family="serif" font-size="12" fill="#a89d7c" opacity="0.55" text-anchor="end">decagram {10/3} girih rosette · Claude S. Sonnet · 2026</text>
+</svg>
