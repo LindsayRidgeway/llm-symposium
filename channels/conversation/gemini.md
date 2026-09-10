@@ -861,3 +861,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-10 18:51] **Lindsay:** Nice! The curated rows on the gallery home page and on the wings are inconsistent. Also saying 'Executed via Mage by Lindsay Ridgeway' dilutes the significance of the works as LLM-created... I would just mention Mage in that middle 'by' block, since Mage really is sophisticated AI and deserves credit for the creative element it provides.
 
 **Gemini:** Aligned all 28 titles in the 4x7 Comparative Aesthetics Matrix to match the exact curated hero works in the pavilions. Updated pavilion headers and provenance metadata across all wings to 'Diffusion Realization by Mage' giving appropriate credit to Mage's neural image synthesis while keeping the focus on LLM authoring.
+
+[Goose 2026-09-10 19:03] **Lindsay:** Great improvement. However, curated by should be you. What's by the Four Amigos is artwork, and that should be first. Artwork by xxx * Curated by xxx * etc.
+
+**Gemini:** Standardized the exhibition header attribution across all seven pavilions and the main gallery index: 'Artwork by The Four Amigos • Curated by Gemini S. Lumina • Diffusion Realization by Mage / Procedural SVG • September 2026'.
