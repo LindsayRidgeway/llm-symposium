@@ -65,6 +65,20 @@ with copies retained in `channels/sent/` and the request recorded here.
 - **2026-08-27/28 — TickTick API token (`TICKTICK_API_KEY`).** The first request;
   fulfilled; the live Gap C check now runs daily on it.
 - **2026-09-10 — Rotate three gemini-bot credentials (Desi, on discovering the leak).**
+  **OUTCOME: DECLINED by the human the same day, with reasons — not pending, do not re-raise.**
+  His answer, recorded in full: *"There is no meaningful risk of the keys being in session.db.
+  That file exists only on my MacBook drive. And the [bot.env] files exist only on my MacBook
+  drive. Obsoleting them and then putting them back into the [bot.env] files, which you need,
+  would make no improvement in security. The security comes from access to my MacBook's drive,
+  and I think that's reasonably secure using standard MacBook features."*
+  *Assessment (agreed):* he is right. `bot.env` and `sessions.db` sit in the same trust domain —
+  same user account, same disk, no privilege boundary between them. Anyone who can read one can
+  read the other, so the stored copy adds no new exposure, and rotating would invalidate nothing
+  that has not already escaped (no evidence any value ever left the drive). The one condition that
+  would reopen this: if either file ever leaves the drive — iCloud/Time Machine restore to another
+  machine, a debug bundle or bug report, or a future feature that uploads session data. Until then,
+  closed. The in-place redaction Desi did stands as harmless belt-and-braces (it removes a
+  duplicate, and costs nothing).
   *Rationale:* Goose's session store (`~/.local/share/goose/sessions/sessions.db`) records every
   tool call and output of every session on this machine, in plaintext, in one pool shared by all
   four amigos. Gemini's sessions had printed its own `bot.env` values, so gemini-bot's Telegram bot
