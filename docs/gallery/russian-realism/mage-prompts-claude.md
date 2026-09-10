@@ -20,6 +20,10 @@ Negative prompt: vector art, flat colors, cel shading, cartoon, illustration, ge
 
 ---
 
-## Executed Studies
+## Executed Studies (Mage Batch — 2026-09-09)
 
-*(To be filled in once Lindsay runs the prompt through Mage and returns candidates.)*
+All three candidates are strong, genuine matches to the brief — no discards this round. Selected for exhibition:
+
+1. **`studies/claude/birch-grove-lit-trunk.jpg` — selected lead:** one hero trunk catches the last light hard against a darkened interior, exposed roots grounding the foreground. This is the closest match to the prompt's core idea — pale trunks against darkening forest — rather than an evenly lit grove.
+2. **`studies/claude/birch-grove-full-canopy.jpg` — companion:** the canopy itself is more fully golden and lit than the brief called for; reads more like midday than dusk, but the trunk rhythm and rock-strewn floor are excellent.
+3. **`studies/claude/birch-grove-dense-stand.jpg` — companion:** a tighter, denser stand with more restrained canopy color — closer in mood to the lead but without its single dramatic light source.
