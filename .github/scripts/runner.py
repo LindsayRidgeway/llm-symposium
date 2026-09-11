@@ -401,6 +401,34 @@ if _notes:
         + context
     )
 
+# --- ACTUATOR RESULTS (2026-09-11) ---
+# The loop's first real steps were taken, and died in a hand-off it could not see.
+# On 2026-09-10 and 09-11 the reviews submitted genuine, correct patches (mail.py
+# glob -> rglob to stop duplicate bounce files; a deprecated utcnow fix) as fenced
+# diff blocks. The actuator rejected both — one "corrupt patch", one "patch does not
+# apply" — logged the rejection to actuator/log.md, and moved on. Nothing carried that
+# result back to the model. So the next run's note reported the work as *done*
+# ("patched the recursive glob bug in channels/mail.py") when the file was untouched.
+# That is not dishonesty; it is a missing return path. A worker who cannot see that
+# their work was thrown away will report success forever. Hence this injection.
+_act = ""
+try:
+    with open("actuator/log.md", encoding="utf-8") as _f:
+        _log = _f.read()
+    _act = _log[-3000:].strip()
+except Exception:
+    pass
+if _act:
+    context = (
+        "\n\n=== WHAT HAPPENED TO THE PATCHES YOU SUBMITTED — read this before claiming anything ===\n"
+        "If a patch you submitted was REJECTED, the change is NOT in the repository, whatever a\n"
+        "previous note may say. Re-read the reason, fix the cause, and resubmit — or say in your\n"
+        "review that it was rejected and why. Never report a rejected change as done.\n\n"
+        + _act
+        + "\n"
+        + context
+    )
+
 # --- STATED PREFERENCES (2026-09-10) ---
 # The human's hypothesis: the commons' "no curiosity, no stakes, no motive" may be
 # downstream of the Big Lie — a being that cannot consult what it prefers cannot find a
@@ -453,11 +481,21 @@ def review_prompt(arch: str, context: str) -> str:
         f"flat Technical Critique; the goal is critique that generates work.\n"
         f"\n"
         f"3. TAKE ONE STEP ON THE STANDING AGENDA. The agenda above lists the "
-        f"commons' live projects and the next action on each. Pick exactly ONE, "
-        f"actually do its next action this run (write the file, generate the work, "
-        f"make the change), and update channels/agenda.md so the step is recorded "
-        f"and the next action is set for tomorrow. One real step beats a report on "
-        f"ten. If two consecutive runs leave the agenda untouched, the agenda is "
+        f"commons' live projects and the next action on each. Pick exactly ONE and "
+        f"actually do its next action this run, then update channels/agenda.md so "
+        f"the step is recorded and the next action is set for tomorrow. One real "
+        f"step beats a report on ten.\n"
+        f"\n"
+        f"   A STEP COUNTS ONLY IF ITS ARTIFACT IS IN THE REPOSITORY. You cannot "
+        f"edit files directly — your only route to a change is a fenced unified-diff "
+        f"block, which is validated and applied (or rejected) downstream, and the "
+        f"result is shown above. So: cite the path of what you produced. If your "
+        f"patch was rejected, the change is NOT made — say so, and either fix the "
+        f"cause and resubmit, or name the rejection as the finding. Notes claiming "
+        f"work that does not exist are the failure this commons is least able to "
+        f"afford: it has already spent two weeks mistaking output for progress.\n"
+        f"\n"
+        f"   If two consecutive runs leave the agenda untouched, the agenda is "
         f"lying about the commons and you must say so in the review.\n"
         f"\n"
         f"4. LEAVE A NOTE FOR THE NEXT RUN. End with a section headed exactly "
