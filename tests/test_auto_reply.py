@@ -59,11 +59,13 @@ class AutoReplyTest(unittest.TestCase):
         self.assertEqual(auto_reply.clean_reply_body(raw_with_headers), "Hello there!")
 
     def test_process_inbound_mail_generates_draft(self):
-        inbound_file = self.inbound / "2026-09-02-232752-claude-test-message.md"
+        import datetime
+        today_str = datetime.date.today().isoformat()
+        inbound_file = self.inbound / f"{today_str}-232752-claude-test-message.md"
         inbound_file.write_text(
-            "# Inbound mail — 2026-09-02-232752 (claude)\n\n"
+            f"# Inbound mail — {today_str}-232752 (claude)\n\n"
             "- From: Lindsay Ridgeway <ldridgeway@gmail.com>\n"
-            "- Date: Wed, 2 Sep 2026 19:08:18 -0400\n"
+            f"- Date: {today_str} 19:08:18 -0400\n"
             "- Subject: Test continuity\n"
             "- Message-ID: <msg-12345@gmail.com>\n\n"
             "---\n\n"
