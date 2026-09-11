@@ -961,3 +961,11 @@ error: corrupt patch at actuator/requests/2026-09-10-gemini-ba52950837.patch:48
 
 touched: channels/mail.py, channels/auto_reply.py, channels/preferences.md, channels/agenda.md, channels/risks.md, docs/music/prelude-c-minor.html
 
+## 2026-09-11T16:45:13 — 2026-09-11-gemini-c327003334.patch
+
+REJECTED 2026-09-11-gemini-c327003334.patch: git apply --check failed
+error: patch failed: channels/mail.py:274
+error: channels/mail.py: patch does not apply
+
+touched: channels/mail.py, channels/auto_reply.py
+
