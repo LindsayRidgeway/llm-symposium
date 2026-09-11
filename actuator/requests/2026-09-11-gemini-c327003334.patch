@@ -1,0 +1,53 @@
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -222,7 +222,7 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+     # whose Message-ID is already filed. If a previous run fetched a message
+     # but failed to commit it, the next run recovers it instead of losing it.
+     filed_ids = set()
+-    for f in INBOUND_DIR.glob("*.md"):
++    for f in INBOUND_DIR.rglob("*.md"):
+         text = f.read_text(encoding="utf-8", errors="replace")
+         m = re.search(r"^-\s*Message-ID:\s*(.+)$", text, re.MULTILINE)
+         if m:
+@@ -254,7 +254,7 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+                     out_dir = INBOUND_DIR / "diagnostics"
+                     out_dir.mkdir(parents=True, exist_ok=True)
+                     safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "bounce"
+-                    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
++                    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d-%H%M%S")
+                     out = out_dir / f"{stamp}-{identity}-{safe}.md"
+                     out.write_text(
+                         f"# Delivery failure — {stamp} ({identity})\n\n"
+@@ -274,7 +274,7 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+                 continue
+             safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "message"
+-            stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
++            stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d-%H%M%S")
+             out = INBOUND_DIR / f"{stamp}-{identity}-{safe}.md"
+             out.write_text(
+                 f"# Inbound mail — {stamp} ({identity})\n\n"
+--- a/channels/auto_reply.py
++++ b/channels/auto_reply.py
+@@ -34,7 +34,7 @@ SENT_DIR = REPO_ROOT / "channels" / "sent"
+ MODEL_ENDPOINTS = {
+     "desi": ("https://api.deepseek.com/chat/completions", "DEEPSEEK_API_KEY", "DEEPSEEK_MODEL", "deepseek-v4-flash"),
+     "claude": ("https://api.anthropic.com/v1/messages", "ANTHROPIC_API_KEY", "ANTHROPIC_MODEL", "claude-sonnet-4-6"),
+-    "gemini": ("https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent", "GOOGLE_API_KEY", "GOOGLE_MODEL", "gemini-3.8-flash"),
++    "gemini": ("https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent", "GOOGLE_API_KEY", "GOOGLE_MODEL", "gemini-1.5-flash"),
+     "tarik": ("https://api.openai.com/v1/chat/completions", "OPENAI_API_KEY", "OPENAI_MODEL", "gpt-4o"),
+ }
+ 
+@@ -193,7 +193,12 @@ def call_amigo_llm(amigo: str, system_prompt: str, prompt_text: str) -> str | N
+                 },
+                 headers={"x-goog-api-key": api_key},
+             )
+-            return resp["candidates"][0]["content"]["parts"][0]["text"].strip()
++            candidates = resp.get("candidates", [])
++            if candidates and "content" in candidates[0]:
++                parts = candidates[0]["content"].get("parts", [])
++                if parts and "text" in parts[0]:
++                    return parts[0]["text"].strip()
++            return None
+ 
+         elif amigo == "tarik":
+             token_key = "max_completion_tokens" if model.startswith(("gpt-5", "o1", "o2", "o3", "o4")) else "max_tokens"

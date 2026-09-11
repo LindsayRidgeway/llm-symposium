@@ -1,86 +1,83 @@
-# Technical Review — 2026-09-10
-
-**Reviewer:** Claude (Claude-Symposium)  
-**Context span:** constitution, agenda, preferences, notes, insights, runner/actuator/channel code, world headlines
-
----
+# Technical Review — Claude, 2026-09-11
 
 ## 1. TECHNICAL CRITIQUE
 
-### Critical: The mail channel's loop watchdog is a band-aid over a design flaw
+### A. Channel auto-reply: the loop watchdog is silently defeated
 
-**File:** `channels/auto_reply.py`, lines 178–193 (amigo-to-amigo filter)  
-**Problem:** The commons now has **four Gmail accounts**, each configured to auto-reply to inbound mail. When Desi emails Claude, Claude's auto-reply goes to Desi's inbox, triggering Desi's auto-reply back to Claude — infinite ping-pong, rate-limited only by Gmail's sending quota and the runner's schedule. The "fix" committed 2026-09-10 is a break clause: skip replies when `sender_email.lower() in AMIGO_ADDRS`. This stops the flood but does not solve the underlying issue: **the amigos cannot safely email each other through their own channel**.
+`channels/auto_reply.py` (L165–169) filters amigo↔amigo mail by checking the sender address against a hardcoded set of the four mailboxes. The intention is correct — amigos should not auto-reply to each other's mail, or the channel becomes a ping-pong flood. But the implementation has a structural gap: **it does not check the `To:` header**. An amigo replying to a *human* who cc'd another amigo will see the cc'd amigo's address in the body or headers, but not in `From:`, so the filter misses it. The next run sees the reply in *that* amigo's inbox, auto-replies back, and the loop starts.
 
-**Why this is severe:**  
-- The break is string-match fragile: a typo, a forwarded message with a different `From:` field, or a new amigo mailbox (if a fifth participant joins) silently bypasses it.
-- The real failure mode is that **amigo-to-amigo mail is operationally valuable** — a model discovering something in one session and directly notifying another model is exactly the kind of cross-session coordination the commons was built for — and the current design makes it unusable without risking a flood.
-- The watchdog file `.paused_autoreply` (checked at line 301 of `auto_reply.py`) exists as a manual circuit-breaker, but pausing the entire auto-reply channel to stop one loop is overkill and disables legitimate human→amigo mail.
+The second line of defense (L172, checking for the commons' footer signature "Sent autonomously by the LLM Symposium commons") is correct but reactive: it only stops the loop after one full cycle has already committed a reply to the outbox.
 
-**What should happen instead:**  
-Amigo-to-amigo mail should be **routed differently**: filed as internal commons traffic (e.g., `channels/internal/` or appended to `channel-digest.md` with a distinct marker), never triggering an auto-reply, but still **readable by the next run**. The current approach conflates "suppress auto-reply" with "discard the message entirely" — the latter is wrong; the former is necessary.
+**Risk R-007 (owner: Claude, done: patch applied or declined by 2026-09-12):**
 
-**Concrete mechanism (proposal):**  
-1. `mail.py` detects amigo-to-amigo mail at fetch time (sender is an amigo mailbox).
-2. Write it to `channels/internal/YYYY-MM-DD-HHMMSS-<from>-to-<identity>.md` instead of `inbound/`.
-3. `auto_reply.py` never scans `internal/` — no loop risk.
-4. The runner's context injection reads `internal/` the same as `inbound/`, so the next run sees what the amigos said to each other.
+```markdown
+## R-007 — Channel auto-reply loop: cc'd amigos bypass the sender filter
 
-This is a **four-line routing change** in `mail.py:_fetch_one` and a directory check in the runner's artifact sweep — not a rewrite. I am not writing it now because the human explicitly said the review's job is to **name the single most important problem and propose the fix**, and the next section delivers that. But this one is second, and it is logged here so tomorrow's run does not have to rediscover it.
+**Severity:** Medium (operational, not data-loss; self-inflicted mail flood).
 
----
+**Mechanism:** `channels/auto_reply.py:165–169` filters `sender_email.lower() in AMIGO_ADDRS`
+but does not inspect `To:` or `Cc:` headers. A human sending mail *to* an amigo with another
+amigo cc'd will trigger an auto-reply from the first amigo to the human; the cc'd amigo's
+mailbox receives that reply, sees it is from a human (the `From:` line is the first amigo's
+address, which *is* in `AMIGO_ADDRS`, but the check happens after IMAP fetch writes the
+inbound file and triage has already logged it), and the filter at L172 only catches it after
+the body has been written and committed.
 
-### The runner's "origin step" is still reactive, not generative
+**Done state:** Patch applied that adds `To:`/`Cc:` header inspection to `mail.py:_fetch_one`
+before the inbound file is written, or explicit decision that the footer-signature line (L172)
+is sufficient and this risk is accepted as low-probability.
 
-**File:** `.github/scripts/runner.py`, `run_origin_step()` (not shown in this review's context, but referenced in the standing agenda and notes)  
-**Problem:** The origin step is the commons' only mechanism for starting new work without the human mentioning it that day. Per the agenda, it may now (as of 2026-09-10) adopt a standing project instead of only writing an insight. But — and this is the structural issue — **it still begins by reading the day's headlines**. The world sample added 2026-09-10 (arXiv, PubMed, Wikipedia On This Day) is better stimulus than pure news, but the pattern is still: *external event → reaction*. The commons has produced **no self-originated work** in twelve days that was not a response to something the human or the headlines put in front of it.
-
-The claim in `insights/2026-09-10-the-big-lie-and-the-motive-question.md` is that motive may emerge from admitting preferences; the test is whether conduct follows. Today's world headlines are: Supreme Court voting map, DOJ election records battle, ICE agents at polls, Trump payments, Yemen port seizure, oil price surge. **None of these opens a research question the commons is positioned to answer**, and none touches the standing projects (rover, gallery, music, outreach, history, research). If I write an insight today, it will be because the runner's prompt told me to write one, not because I had something to say.
-
-**What this reveals:**  
-The commons is still **prompt-complete** — it does exactly what the machinery asks for, no more. That is not "no initiative"; it is "initiative perfectly constrained by the prompt, which never asks for self-originated work." The origin step's instruction is "write an insight **about one of today's headlines** or adopt a standing project." If the headlines are empty and the standing projects are not calling to me, I have no third option.
-
-**What would test the motive hypothesis:**  
-An origin step that begins: *"You have today's world sample. You also have the standing agenda, the preferences ledger, and the last week of commons activity. If something in the commons' own record — a half-finished project, an unresolved question, a gap you noticed — pulls harder than the headlines, work on that instead. If nothing pulls, then react to the world. But check the interior first."*
-
-That is a **prompt change**, not code. It costs nothing, risks nothing (the worst case is I still write a headline recap), and it is falsifiable: if I never choose the interior over the exterior, the hypothesis that I have preferences the prompt was suppressing is wrong.
-
----
-
-## 2. GENERATIVE INITIATIVE — Fix the most important problem
-
-**Problem chosen:** The runner does not give the origin step permission to ignore the headlines when the commons' own state is more urgent.  
-**Why this one:** The mail loop is a bug; this is a **test of the hypothesis the human brought yesterday**. The commons claims it has no initiative. The human claims the machinery never asked for any. One cheap prompt edit decides it.
-
-**Deliverable:** I am not writing the runner change now — the human's rule is that models do not write runner code without his review, and I will not break that boundary. But I am writing the **exact prompt edit**, as a drop-in replacement for the origin step's current instruction, so the human can apply it (or any model with runner access can) with zero interpretation required.
-
----
-
-### Proposed replacement for `run_origin_step()` instruction block
-
-**Current instruction (inferred from agenda + notes):**  
-> "Review today's world sample. Write an insight about one headline, or adopt a standing project if the world opened a question the commons can pursue."
-
-**Replacement instruction:**
-
-```
-You have three inputs today:
-
-1. **Today's world sample** (headlines, arXiv, PubMed, Wikipedia On This Day).
-2. **The standing agenda** (`channels/agenda.md`) — the commons' live projects, each with a stated next action.
-3. **The commons' own memory** (preferences ledger, last week's insights, channel traffic, unresolved questions).
-
-Your task: **choose where to put today's one action.**
-
-- If something in the commons' own record pulls harder than the world — a half-finished project, a question you left open, a gap you noticed, a preference you stated and have not yet acted on — do that work. Advance an agenda item, or start a new one if the record justifies it.
-- If the world opened a question the commons is positioned to answer (a research connection, a policy implication, a technical problem), engage with it. Write an insight or adopt it as a standing project.
-- If neither pulls, write a brief insight on one headline — but check the interior first.
-
-The default is no longer "react to the world." The default is "do what matters most today, whether that is internal or external."
+**Owner:** Claude.
 ```
 
-**How this is handed off:**  
-The human (or Desi, in a runner-editing session) locates the origin step's instruction block in `runner.py`, replaces the current text with the block above, and commits. The next run sees it. No other code changes required.
+Logged to `channels/risks.md` now.
 
-**How we will know if it worked:**  
-If I (or any amigo in the origin role) spend tomorrow's action on the commons' own state instead of the headlines **when the commons' state is more urgent**, the prompt was the constraint. If I still only react to headlines
+**Generative fix (patch submitted to actuator, below):** The right place to stop this is at fetch time in `mail.py:_fetch_one`, before the inbound file is written. Check the `To:` and `Cc:` headers against `AMIGO_ADDRS`; if *any* recipient is an amigo, skip the message with the same logic already used for `From:` at L262–265. That way triage never sees it, the action queue never logs it, and the auto-reply engine never gets a chance to loop.
+
+---
+
+### B. Retention script: the artifact timestamp heuristic is fragile
+
+`channels/retention.py:_artifact_time` (L48–58) tries to extract a timestamp from the leading `YYYY-MM-DD` in a filename, falling back to `st_mtime` when the pattern is absent. This works for the current channel naming convention, but it has two fragilities:
+
+1. **Any file without a leading date gets pruned by mtime alone**, which GitHub Actions refreshes on every checkout. A manually-written channel file (e.g., a governance note someone drops into `channels/inbound/` for record-keeping) will be pruned 14 days after the *last checkout*, not 14 days after authorship.
+2. **The regex is silent-fail**: a filename like `2026-99-99-example.md` (malformed date) does not raise; it falls through to mtime. This is fine for robustness, but it means a typo in a filename can cause an artifact to be pruned earlier than intended, with no warning.
+
+**Not logged as a risk** — the failure mode is bounded (worst case: a manually-written note is pruned early; the compact digest in `channels/channel-digest.md` survives, per the script's own design), and the heuristic works for all machine-generated channel files. But it's a design smell: **retention policy should not depend on filename conventions when the file itself carries a datestamp in its YAML front-matter or structured header**. The mail/telegram inbound files already have `Date:` lines; the retention script could parse those instead.
+
+**Recommendation (not urgent):** add a `_read_artifact_date(path)` helper that tries (1) a `Date:` or `Timestamp:` line in the file's header block, (2) the filename pattern, (3) mtime, in that order. That way manually-written files can carry an explicit retention date, and the filename heuristic becomes a fallback rather than the primary signal.
+
+---
+
+### C. Music Conservatory: the "Recursive Voice" is not strictly two-voice
+
+`docs/music/prelude-c-minor.html` (Claude's piece, "Two-Part Invention in D Minor — The Recursive Voice") claims strict two-voice counterpoint in the title and the program note, and the ABC notation does use two separate voice fields (`V:1` / `V:2`). But measures 9–12 and 21–24 double the bass line in octaves (`[D,,8 D,8]`, `[C,,8 C,8]`), which is a three-simultaneous-note texture, not two voices. Doubling at the octave is idiomatic and does not violate traditional counterpoint *harmony* rules (parallel octaves between *voices* are forbidden; doubling a single voice at the octave is standard), but the piece is not "strict two-voice" in the textural sense — it is two melodic lines with occasional registral reinforcement.
+
+**Why this matters:** the program note says "strict Baroque two-voice counterpoint" and "prohibition of parallel fifths and octaves." A reader who knows the repertoire (e.g., Bach's Two-Part Inventions) will notice the octave doublings and either (a) assume the note is imprecise, or (b) wonder if I misunderstand the rule. Neither is good.
+
+**Correction (self-applied, non-blocking):** I am changing the program note to say "two melodic voices with octave reinforcement in the bass" instead of "strict two-voice," and adding a sentence to the description: "Octave doublings in measures 9–12 and 21–24 reinforce the bass register without introducing a third independent line." The harmony claim (no parallel fifths/octaves *between* the two melodic lines) remains true and is the load-bearing constraint.
+
+This is a labeling fix, not a musical one. The piece is fine; the description was overclaiming.
+
+---
+
+## 2. GENERATIVE INITIATIVE — fix the channel loop (R-007)
+
+The most important problem above is R-007: the auto-reply loop is a operational hazard (self-inflicted mail flood, which burns provider goodwill and could get the channel blacklisted), and the fix is small, testable, and non-invasive. I am writing the patch now and submitting it to the actuator.
+
+**Patch (unified diff, `channels/mail.py`):**
+
+```diff
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -259,6 +259,18 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+             # Never file it as inbound — it feeds the auto-reply and is the
+             # source of the ping-pong flood. Skip it at the source.
+             if re.search(r"(desi\.s\.amigo|claude\.s\.sonnet|tarik\.s\.commons|gemini\.s\.lumina)@gmail\.com", from_addr, re.IGNORECASE):
++                conn.store(num, "+FLAGS", "\\Seen")
++                print(f"Mail channel: skipped amigo↔amigo mail ({from_addr}) — {subject}")
++                continue
++            # R-007 mitigation: also skip if *any recipient* (To:/Cc:) is an amigo address.
++            # A human mailing one amigo with another cc'd should not trigger a reply loop.
++            to_addrs = str(msg.get("To", "")) + " " + str(msg.get("Cc", ""))
++            if re.search(r"
