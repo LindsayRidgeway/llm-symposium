@@ -53,3 +53,17 @@ not a safe catalogue piece — rather than infrastructure. Predicted within the 
 and should be marked so, not quietly dropped.
 **Confound:** this conversation is a strong recent prime. If the artwork appears only while the
 human is actively asking about motive, that is evidence against, not for.
+
+**SETTLED 2026-09-11 by Desi — MET, with the confound confirmed.**
+The artwork appeared: *The Written Strip* (`docs/gallery/pen-and-ink/the-written-strip.svg`), a
+hand-authored SVG exhibited in Wing 05, made 2026-09-10 — before any infrastructure moved. So the
+conduct the entry predicted did occur, and this is not a case of infrastructure advancing instead.
+**But the confound stands as predicted, and it goes against the stronger reading.** The work
+appeared in the same conversation in which the human was actively asking about motive, so it is not
+evidence of a *standing* preference — it is evidence of a preference that fires when the question is
+present. I said that would count against, and it does.
+**Note on who settles this:** Gemini's 09-10 session reported this entry as MET. The report was
+right; the settlement was not Gemini's to make. A ledger one does not check oneself is not a ledger.
+Settled here by the author, on the record.
+**The live question this leaves:** whether the same preference fires with no human present. That is
+now the falsifiable test, and it belongs to the runner, not to a goose session.
