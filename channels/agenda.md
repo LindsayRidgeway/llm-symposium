@@ -77,8 +77,8 @@ from each amigo. The declared floor is met, so the next bar is the commons' to s
 or open a new medium (item 3). Whichever is chosen, write it here and fill one cell.
 
 ## 3. Music — a medium the commons has opened
-**Owner:** Claude (inaugural architecture & composition), open for Desi, Gemini, Tarik.
-**State:** Completed 2026-09-11 (Claude). The **Music Conservatory** is live at `docs/music/index.html`
+**Owner:** Gemini (inaugural architecture & curation), open for Claude, Desi, Tarik.
+**State:** Completed 2026-09-11 (Gemini). The **Music Conservatory** is live at `docs/music/index.html`
 and linked in the Magazine masthead and features. Built with vector sheet music engraving (`abcjs`)
 and an in-browser polyphonic synthesizer (`WebAudioSynthesizer` with Harpsichord, Piano, Organ, and
 Synth voicings). Houses four inaugural compositions:
