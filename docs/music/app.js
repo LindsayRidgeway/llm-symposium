@@ -182,6 +182,66 @@ V: 2 clef=bass name="Fortepiano (LH)"
 % --- CODA: Expansive Cadential Resolution (mm. 45-48) ---
 [V:1] A2 c2 f2 a2 | g2 e2 c2 B2 | A2 c2 f2 A2 | [FAc]8 |]
 [V:2] F,2 A,2 C2 F2 | C,2 E,2 G,2 C2 | F,2 A,2 C2 F,2 | [F,,C,F,]8 |]`
+  },
+
+  fugue: {
+    id: "fugue",
+    title: "Fugue in D Minor for Organ — \"The Ladder and the Return\"",
+    composer: "Claude S. Sonnet (Anthropic Architecture)",
+    genre: "Three-Voice Baroque Fugue (22 Measures)",
+    tempo: 92,
+    instrument: "organ",
+    abc: `X: 5
+T: Fugue in D Minor for Organ — "The Ladder and the Return"
+C: Claude S. Sonnet (Amigo #1)
+M: 4/4
+L: 1/8
+Q: 1/4=92
+K: Dm
+V: 1 clef=treble name="Manual I (Soprano)"
+V: 2 clef=treble name="Manual II (Alto/Tenor)"
+V: 3 clef=bass name="Pedal (Bass)"
+% ===== EXPOSITION =====
+% mm1-2: Subject alone in Alto
+[V:1] z8 | z8 |
+[V:2] D2 F2 A2 G F | E2 D2 ^C2 D2 |
+[V:3] z8 | z8 |
+% mm3-4: Answer in Soprano, Countersubject in Alto
+[V:1] A2 c2 e2 d c | B2 A2 ^G2 A2 |
+[V:2] F2 A2 c2 B A | G2 F2 E2 F2 |
+[V:3] z8 | z8 |
+% mm5-6: Subject in Bass; free counterpoint above
+[V:1] f2 e2 d2 c2 | G2 A2 B2 d2 |
+[V:2] A2 G2 F2 E2 | D2 F2 E2 F2 |
+[V:3] D,2 F,2 A,2 G, F, | E,2 D,2 ^C,2 D,2 |
+% mm7-8: codetta cadencing to F major
+[V:1] c2 B2 A2 G2 | F2 G2 A2 _B2 |
+[V:2] A2 G2 F2 E2 | D2 E2 F2 F2 |
+[V:3] F,2 G,2 A,2 _B,2 | C2 D2 E2 F2 |
+% ===== EPISODE 1 (sequence -> F major) =====
+[V:1] c2 d2 e2 f2 | e2 d2 c2 _B2 |
+[V:2] F2 F2 G2 c2 | _B2 A2 G2 F2 |
+[V:3] F,2 D2 D2 F2 | G,2 _B,2 E,2 G,2 |
+% ===== MIDDLE ENTRY 1: Subject in F major, Soprano; static pedal below =====
+[V:1] f2 a2 c'2 _b a | g2 f2 e2 f2 |
+[V:2] c8 | _B8 |
+[V:3] F,8 | F,8 |
+% ===== EPISODE 2 (sequence -> A minor) =====
+[V:1] c2 _B2 A2 G2 | A2 G2 F2 D2 |
+[V:2] A4 F4 | F4 D4 |
+[V:3] F,4 D4 | D,4 A,,4 |
+% ===== MIDDLE ENTRY 2: Subject in A minor, Bass; static pedal above =====
+[V:1] e8 | e8 |
+[V:2] c8 | c8 |
+[V:3] A,2 C2 E2 D C | B,2 A,2 ^G,2 A,2 |
+% ===== STRETTO: Subject in Bass, answered one measure later in Soprano (tonic) =====
+[V:1] z8 | d2 f2 a2 g f | e2 d2 ^c2 d2 |
+[V:2] A4 D4 | z4 A4 | F4 D4 |
+[V:3] D,2 F,2 A,2 G, F, | E,2 D,2 ^C,2 D,2 | z8 |
+% ===== FINAL CADENCE: dominant pedal, descent, Picardy third =====
+[V:1] d2 c2 B2 A2 | G2 F2 E2 ^C2 | D8 |]
+[V:2] F2 E2 D2 C2 | _B,2 A,2 G,2 E,2 | ^F,4 A,4 |]
+[V:3] A,,4 A,4 | D,,4 D4 | D,,8 |]`
   }
 };
 
