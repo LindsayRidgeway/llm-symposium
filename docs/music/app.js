@@ -310,7 +310,7 @@ class WebAudioSynthesizer {
       osc1.type = 'sawtooth';
       osc2.type = 'triangle';
       osc1.frequency.setValueAtTime(freq, startTime);
-      osc2.frequency.setValueAtTime(freq * 2, startTime); // Octave octave sparkle
+      osc2.frequency.setValueAtTime(freq * 2, startTime); // Octave sparkle
 
       const g1 = ctx.createGain();
       const g2 = ctx.createGain();
@@ -331,28 +331,47 @@ class WebAudioSynthesizer {
       osc1.stop(startTime + duration + 0.05);
       osc2.stop(startTime + duration + 0.05);
     } else if (instrument === "piano") {
-      // Grand Piano: warm fundamental + subtle upper partials, gentle decay
-      const osc = ctx.createOscillator();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, startTime);
+      // Classical Fortepiano / Grand Piano: dual-oscillator acoustic body, warm felt hammer strike,
+      // and natural singing soundboard decay with rich legato resonance
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      osc1.type = 'triangle';
+      osc2.type = 'sine';
+      osc1.frequency.setValueAtTime(freq, startTime);
+      osc2.frequency.setValueAtTime(freq * 2, startTime); // 2nd harmonic warmth
 
       const filter = ctx.createBiquadFilter();
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(freq * 4, startTime);
-      filter.frequency.exponentialRampToValueAtTime(freq * 1.5, startTime + duration);
+      filter.frequency.setValueAtTime(freq * 5.0, startTime); // initial felt hammer strike transient
+      filter.frequency.exponentialRampToValueAtTime(freq * 1.8, startTime + 0.15); // settles into warm wooden body
 
-      osc.connect(filter);
+      const g1 = ctx.createGain();
+      const g2 = ctx.createGain();
+      g1.gain.value = 0.75;
+      g2.gain.value = 0.25;
+
+      osc1.connect(g1);
+      osc2.connect(g2);
+      g1.connect(filter);
+      g2.connect(filter);
       filter.connect(oscGain);
 
-      oscGain.gain.setValueAtTime(0.001, startTime);
-      oscGain.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.015);
-      oscGain.gain.exponentialRampToValueAtTime(gainLevel * 0.6, startTime + duration * 0.3);
-      oscGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+      // Legato envelope: smooth singing sustain + gentle soundboard resonance tail
+      const releaseTime = Math.max(0.45, duration * 0.7);
+      const noteEndTime = startTime + duration + releaseTime;
 
-      osc.start(startTime);
-      osc.stop(startTime + duration + 0.05);
+      oscGain.gain.setValueAtTime(0.0001, startTime);
+      oscGain.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.012);
+      oscGain.gain.exponentialRampToValueAtTime(gainLevel * 0.7, startTime + 0.12);
+      oscGain.gain.exponentialRampToValueAtTime(gainLevel * 0.45, startTime + duration);
+      oscGain.gain.exponentialRampToValueAtTime(0.0001, noteEndTime);
+
+      osc1.start(startTime);
+      osc2.start(startTime);
+      osc1.stop(noteEndTime + 0.05);
+      osc2.stop(noteEndTime + 0.05);
     } else if (instrument === "organ") {
-      // Drawbar Organ: warm sine + overtone mixture, sustaining
+      // Pipe Organ: continuous harmonic sustain + cathedral reverberation tail
       const osc1 = ctx.createOscillator();
       const osc2 = ctx.createOscillator();
       osc1.type = 'sine';
@@ -369,15 +388,18 @@ class WebAudioSynthesizer {
       g1.connect(oscGain);
       g2.connect(oscGain);
 
-      oscGain.gain.setValueAtTime(0.001, startTime);
+      const releaseTime = 0.12; // cathedral release tail
+      const noteEndTime = startTime + duration + releaseTime;
+
+      oscGain.gain.setValueAtTime(0.0001, startTime);
       oscGain.gain.linearRampToValueAtTime(gainLevel * 0.8, startTime + 0.02);
-      oscGain.gain.setValueAtTime(gainLevel * 0.7, startTime + duration - 0.02);
-      oscGain.gain.linearRampToValueAtTime(0.0001, startTime + duration);
+      oscGain.gain.setValueAtTime(gainLevel * 0.75, startTime + duration);
+      oscGain.gain.exponentialRampToValueAtTime(0.0001, noteEndTime);
 
       osc1.start(startTime);
       osc2.start(startTime);
-      osc1.stop(startTime + duration + 0.05);
-      osc2.stop(startTime + duration + 0.05);
+      osc1.stop(noteEndTime + 0.05);
+      osc2.stop(noteEndTime + 0.05);
     } else {
       // Synth / Chiptune: square wave with resonant filter
       const osc = ctx.createOscillator();
@@ -492,7 +514,7 @@ class WebAudioSynthesizer {
                   allEvents.push({
                     voice: vName,
                     time: currentTime,
-                    duration: durationSeconds * 0.95,
+                    duration: durationSeconds * 1.02, // Legato finger overlap
                     freq: parsedPitch.freq,
                     midi: parsedPitch.midi
                   });
@@ -528,7 +550,7 @@ class WebAudioSynthesizer {
                 allEvents.push({
                   voice: vName,
                   time: currentTime,
-                  duration: durationSeconds * 0.95,
+                  duration: durationSeconds * 1.02, // Legato finger overlap
                   freq: parsedPitch.freq,
                   midi: parsedPitch.midi
                 });
