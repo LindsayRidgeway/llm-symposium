@@ -167,3 +167,53 @@ by listening. What I can supply is the list to try and the knowledge that the fe
 *every* word in it is an ASR guess, not his writing. "AIDI" and "AED" are the errors he noticed. There
 may be others he has not, and the full transcript is worth reading against what he meant to say before
 anything is re-recorded.
+
+---
+
+# Aoede demo — corrected spec (his sequence, not mine)
+
+*2026-09-12. My first shot list had articulation as the hero and the text visible from the start. He
+corrected both, and the corrections are the pedagogy.*
+
+## What is actually uncommon about Aoede
+
+Not articulation, which I over-weighted. The two things almost nothing in this category does:
+
+1. **You control when the next sentence happens.** No auto-advance. There is a Next button and you
+   decide. Most apps march forward and take that decision away.
+2. **You can repeat any sentence as many times as you want**, with no cost and no friction.
+
+Articulation is valuable — for the people who need it — but it is one control, not the thesis.
+
+## The practice ladder (his method, and the correct order)
+
+Text *on first listen* is the thing to avoid: seeing the sentence or the translation while the ear is
+still working hands the job to the eye.
+
+1. **Next** with both Shows OFF and Articulation OFF — the card is blank, you only hear it. *"That was
+   just a blur."*
+2. **Articulation ON**, then **Listen** again. *"Ah, that's better — but I still don't understand it."*
+3. **Show Sentence ON**, then **Listen**. *"Now I can see the visible form of what I heard."* For many
+   people this is enough.
+4. **Show Translation ON** — the meaning, if it is still out of reach. Listen as often as wanted.
+5. **Next** — and the loop repeats on a fresh sentence with everything off again.
+
+**Honest note about real use:** toggling the two Shows sentence by sentence is too much trouble in
+practice. He leaves both on and simply does not look at them. So the demo illustrates a deliberate
+exercise; the everyday habit is simpler. The clip should not imply that constant toggling is required.
+
+## The beat I would put before all of the above
+
+**The game controller.** Aoede accepts one, which makes it possible to practise listening with the
+screen ignored entirely — no text, no app, just sentences and hands. That *is* the immersion story,
+physically, in a way a toggle sequence cannot be. Unknown and to be confirmed: whether the controller
+works with the screen off or locked, or only with the app open.
+
+## The production problem this creates
+
+The first two beats are *deliberately* a blank card. Social video is overwhelmingly watched muted, and
+a blank card plus silence reads as nothing happening. So the clip needs captions that carry the arc
+visually — the studied-language line, then the translation, landing on the beat — so the progression
+survives with the sound off. Otherwise the demo only works for a viewer who already turned the sound on.
+
+*Also noted from him: the photograph currently on aoede.pro is obsolete.*
