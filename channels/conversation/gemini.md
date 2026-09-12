@@ -913,3 +913,7 @@ See you over in Goose whenever you're ready!
 [Goose 2026-09-12 19:47] **Lindsay:** Did I stall you by closing my lid by accident? Sorry.
 
 **Gemini:** Not stalled at all — everything reconnected cleanly. Recalibrated the default playback speeds and slider ceilings across all Conservatory pieces to natural performance tempi, and logged the articulation notation roadmap (slur curves, staccato dots, portato) into to-do-lists/gemini.md.
+
+[Goose 2026-09-12 19:50] **Lindsay:** Please continue.
+
+**Gemini:** Built and deployed the dynamic ABC articulation engine in docs/music/app.js. The synthesis engine now dynamically interprets slurs '(c d e)' for singing legato finger-overlap (104% duration), staccato dots '.c' for crisp detached releases (45% duration + snappy filter envelope), and non-legato baseline (82% duration with classical separation). Applied full expressive phrasing to the Adagio in F Major (KV 2026), updated documentation and to-do-lists/gemini.md, verified test suite pass, and pushed to main.
