@@ -217,3 +217,36 @@ visually — the studied-language line, then the translation, landing on the bea
 survives with the sound off. Otherwise the demo only works for a viewer who already turned the sound on.
 
 *Also noted from him: the photograph currently on aoede.pro is obsolete.*
+
+---
+
+# Aoede demo — corrected opening, and two memory features
+
+*2026-09-12. Correcting my previous section: I wrote that the card goes blank. That was wrong about the
+page and imprecise about the card.*
+
+**The page is never blank.** The demo opens on the **app home page** (not the website homepage), the
+user clicks **Load Book**, and the listening page then appears **with a sentence already in it** —
+either the first sentence of the book or the last sentence read in the previous session.
+
+**And the demo should start mid-book, on purpose.** Opening at, say, sentence 126 of 5,388 is not a
+detail to hide; it is the demonstration that the app remembers where you left off. Position memory is
+a *stated* feature (`Position: 126/5388`), so the counter itself carries the point on screen.
+
+At the time of writing, what I verified from the draft recording at 60 seconds — both Show toggles off
+— is that the **sentence card renders empty**; the transport bar, the position counter and the toggle
+panel are all still on screen. So "blank card", not "blank page", and the caption design still has to
+carry the arc for a muted viewer.
+
+**Second memory feature, not for the demo:** when the app is shut down, it remembers whether you were
+on the listening page and reopens there next time. He judges this too small to demo — noted as such,
+not as an omission.
+
+**On the dismissal.** He adds: *"Just another AI wrapper my foot."* Fair, and worth writing down
+precisely, because the rebuttal is a list rather than an argument. A wrapper does not self-translate
+its entire interface into the reader's own language with no human translator in the loop; does not
+read any of 70,000+ public-domain books at five graded levels; does not let you control when the next
+sentence arrives and repeat one sentence without limit; does not remember your place across sessions,
+and across shutdowns; and does not accept a game controller so you can practise with the screen
+ignored. The label was applied by people who did not look — which is exactly why the demonstration,
+rather than another description, is the right instrument.
