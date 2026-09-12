@@ -130,7 +130,19 @@ HeyGen's **transcription of his own recorded voice**: he spoke the lines, HeyGen
 script text, and its speech recogniser heard "aoede" as "AIDI". The avatar then reads that transcript.
 So the name was wrong in the script, wrong in the voice, and wrong in the URL — from one ASR error.*
 
-**The feature he was looking for exists. It is the Pronunciation tool, and it persists.**
+**Correction, same night: he had already found it.** He played with the Pronunciation tool
+extensively and could not make it work. So this was never a discovery problem — it is a pipeline
+problem, and the pipeline is the explanation. The Aoede video was made by recording his own voice and
+letting HeyGen transcribe it; the avatar then reads the transcript. For TEOD he used a different
+approach — **he typed the script and let HeyGen's own TTS read it with its own intonation** — which he
+believes was not available when the Aoede video was made. That is why TEOD does not say "AIDI" and the
+Aoede video does.
+
+**So the fix is not a setting, it is a rebuild.** The notes below on the Pronunciation tool are left in
+place only as reference for a TTS voice that still refuses a word; they are not the answer here. The
+answer is to regenerate the Aoede video the TEOD way: typed script, HeyGen's own voice. Two
+consequences worth naming — the transcript errors disappear with the transcript, and **since the video
+must be regenerated anyway, the script can be improved at the same time for no additional cost.**
 
 1. In the script, **correct the spelling first** — change every "AIDI"/"AED" to **Aoede**, and
    "AIDI.pro" to **aoede.pro**. The Pronunciation rule overrides how a word is *said*; it does not fix
