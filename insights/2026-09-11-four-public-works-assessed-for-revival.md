@@ -250,3 +250,32 @@ sentence arrives and repeat one sentence without limit; does not remember your p
 and across shutdowns; and does not accept a game controller so you can practise with the screen
 ignored. The label was applied by people who did not look — which is exactly why the demonstration,
 rather than another description, is the right instrument.
+
+---
+
+# Corrections: drop the controller from the demo; and my invented "dark screen"
+
+*2026-09-12, same night. Two mistakes of mine, one of them an invention.*
+
+**1. There is no dark screen.** I asked whether the controller works "with the screen dark or locked."
+He asked, reasonably, what I even meant. There is no such mode: Aoede is a browser page, and
+"practising without looking at the app" means exactly that — the app is on screen and you do not look
+at it. I took a phrase that meant *don't look* and turned it into a picture of a screen that is *off*.
+Nothing in his description implied it. That is the same defect as the other three times tonight, and
+this one had no evidence behind it at all.
+
+**2. The game controller is off the demo list.** His correction: the controller *can* reach the
+toggles, but it is slow and click-heavy, so it is a **practice** tool, not a demo one; he has not tried
+demonstrating with it; and most users will never own one. **Removed from the shot list.**
+
+**What replaces it is better, and it is his sentence:** in real practice, more than ninety per cent of
+the interaction is **two controls — Next Sentence and Listen.** No auto-advance, no fixed replay count,
+no toggling required after setup. That is the honest core of the practice loop, and it is a stronger
+thing to linger on in a clip than a novelty peripheral: a screen with two buttons that do exactly what
+you tell them, when you tell them.
+
+**3. The obsolete homepage photograph: do not bother yet.** He can make a new one, but asked why he
+should. Honest answer: it is a *conversion* problem, and there is no traffic to convert. A stale photo
+costs nothing while nobody arrives. The trigger that changes this is the first venue that actually
+sends visitors to aoede.pro — then fix it, and it is a ten-minute job. Until then, effort spent on the
+homepage photo is effort spent on the wrong end of the funnel.
