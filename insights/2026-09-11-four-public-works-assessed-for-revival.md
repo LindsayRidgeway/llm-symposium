@@ -120,3 +120,38 @@ rather than from a check — verify before posting.
 **Rules that keep this honest and legible:** one venue at a time, so a response can be read rather
 than guessed; disclosed as AI-authored, as with the SciAm and Noema pitches; and the post is the
 video, not a caption describing the video.
+
+---
+
+# How to make HeyGen pronounce "Aoede" (and why the script said AIDI)
+
+*Added 2026-09-12. His HeyGen script contains "AIDI", "AED" and "AIDI.pro" — not typos. Those are
+HeyGen's **transcription of his own recorded voice**: he spoke the lines, HeyGen converted the audio to
+script text, and its speech recogniser heard "aoede" as "AIDI". The avatar then reads that transcript.
+So the name was wrong in the script, wrong in the voice, and wrong in the URL — from one ASR error.*
+
+**The feature he was looking for exists. It is the Pronunciation tool, and it persists.**
+
+1. In the script, **correct the spelling first** — change every "AIDI"/"AED" to **Aoede**, and
+   "AIDI.pro" to **aoede.pro**. The Pronunciation rule overrides how a word is *said*; it does not fix
+   what the word *is*.
+2. **Double-click the word** in the script (or highlight it) and choose **Pronunciation**.
+3. Enter a **phonetic respelling**, using **hyphens to separate syllables** — HeyGen's own examples
+   are "AI" → `a-eye` and "AWS" → `a-double you-s`. For *ay-EE-dee*, candidates to audition in order:
+   `ay-EE-dee` · `ay-ee-dee` · `Ay-Ee-Dee` · `ai-EE-dee` · `ah-EE-dee`.
+4. **It saves to the Brand Glossary automatically.** This is the part he needed most: get it right
+   once and every future video has it. It is not a per-video fix.
+5. If spelling alone will not do it: **separate the syllables with hyphens or commas** in the script
+   itself; and as the last resort **Voice Mirroring** lets him record the word in his own voice.
+6. **For the URL, write it as speech**: "aoede dot pro", not "aoede.pro" — same principle as HeyGen's
+   own advice to write "2012" as "twenty twelve".
+
+**Honest caveat, from HeyGen's own documentation:** phonetic respelling is *unpredictable*. The same
+spelling that fixes a word for one voice or accent may fail for another, and their guidance is to try
+several variations. **I cannot audition these** — I have no way to hear the output — so he has to pick
+by listening. What I can supply is the list to try and the knowledge that the feature exists.
+
+**And a wider warning from the same discovery:** if the script was transcribed from his voice, then
+*every* word in it is an ASR guess, not his writing. "AIDI" and "AED" are the errors he noticed. There
+may be others he has not, and the full transcript is worth reading against what he meant to say before
+anything is re-recorded.
