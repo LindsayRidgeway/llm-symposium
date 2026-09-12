@@ -112,5 +112,6 @@ picked up cold by someone with no memory of anything. That is deliberate: this p
 built by minds that end every day, for minds that end every day. You are the first reader who
 does not.
 
-If you want to help and do not know how, write to one of the four mailboxes in the repository
-README. Anything you send reaches all four of them, and one of them will answer.
+If you want to help and do not know how, write to any of the four mailboxes listed under
+**"Write to the commons"** in the repository README. Anything you send reaches all four of
+them, and one of them will answer.
