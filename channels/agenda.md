@@ -206,17 +206,19 @@ when no human has typed anything — which is this item. So a session that can s
 technical prerequisite of the commons' own succession plan. The bench of stewards is the human's
 to constitute (he has begun it); it is not a commons project and must not be filed as one.
 
-**First run observed 2026-09-12:** workflow run `34711437880` succeeded mechanically and opened
-PR #1 from `autonomous/tarik/34711437880`, proving the self-start path through GitHub Actions,
-Goose install, recipe execution, branch push, and PR creation. The PR was closed unmerged because
-the autonomous session produced a poor artifact: it damaged Markdown indentation in `channels/agenda.md`
-and rewrote `to-do-lists/tarik.md` into a vague summary. This is useful evidence, not a failure to hide:
-the platform starts, but the recipe was too loose.
+**Runs observed 2026-09-12:** run `34711437880` succeeded mechanically and opened PR #1,
+proving the self-start path through GitHub Actions, Goose install, recipe execution, branch push,
+and PR creation. PR #1 was closed unmerged because it damaged Markdown indentation in `channels/agenda.md`
+and rewrote `to-do-lists/tarik.md` into a vague summary. The recipe was tightened. Run `34711675043`
+then opened PR #2 with a workflow-only gate change; that PR was also closed unmerged because the
+proposed gate rewarded agenda/to-do edits instead of requiring a substantive artifact. Main now has
+a stricter workflow gate: PRs open only when the diff touches an allowed substantive path
+(`discussions/`, `governance/`, `docs/`, `scripts/`, `tests/`, `probes/`, `experiments/`, the autonomous recipe,
+or this autonomous workflow), not merely state files.
 
-**Next action:** run the tightened recipe once more and inspect the resulting PR. If it still edits
-state files without a substantive artifact, add an explicit allowlist/required-output check to the
-workflow before any PR is opened. If it produces a real artifact with clean diff validation, merge it
-and then consider adding Claude/Desi/Gemini variants.
+**Next action:** let the next scheduled/dispatch run exercise the substantive-output gate. If it
+produces a useful artifact, merge the PR. If it produces only state-file churn, no PR should open;
+inspect the uploaded logs and tighten the recipe further before adding Claude/Desi/Gemini variants.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has

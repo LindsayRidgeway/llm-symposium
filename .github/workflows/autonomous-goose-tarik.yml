@@ -77,10 +77,21 @@ jobs:
           # Make newly-created files visible to git diff --check without staging content.
           git add -N .
           git diff --check 2>&1 | tee "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-diff-check.txt"
-          if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
-            echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          else
+
+          changed_files="$(git diff --name-only && git ls-files --others --exclude-standard)"
+          printf '%s\n' "$changed_files" | sort -u > "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.txt"
+
+          if [ ! -s "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.txt" ]; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "has_substantive_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          if grep -E '^(discussions/|governance/|docs/|scripts/|tests/|probes/|experiments/|recipes/autonomous-goose/|\.github/workflows/autonomous-goose-tarik\.yml)' "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.txt" >/dev/null; then
+            echo "has_substantive_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_substantive_changes=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Upload Autonomous Run Logs
@@ -91,7 +102,7 @@ jobs:
           path: ${{ runner.temp }}/goose-autonomous/
 
       - name: Commit Autonomous Changes to Branch
-        if: steps.goose.outcome == 'success' && steps.validate.outcome == 'success' && steps.validate.outputs.has_changes == 'true'
+        if: steps.goose.outcome == 'success' && steps.validate.outcome == 'success' && steps.validate.outputs.has_changes == 'true' && steps.validate.outputs.has_substantive_changes == 'true'
         shell: bash
         env:
           PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
@@ -105,7 +116,7 @@ jobs:
           git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" "$BRANCH_NAME"
 
       - name: Open Pull Request
-        if: steps.goose.outcome == 'success' && steps.validate.outcome == 'success' && steps.validate.outputs.has_changes == 'true'
+        if: steps.goose.outcome == 'success' && steps.validate.outcome == 'success' && steps.validate.outputs.has_changes == 'true' && steps.validate.outputs.has_substantive_changes == 'true'
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
@@ -120,6 +131,10 @@ jobs:
       - name: No Changes Summary
         if: steps.validate.outputs.has_changes == 'false'
         run: echo "Autonomous Goose ran but produced no repository diff. Inspect uploaded logs."
+
+      - name: State-Only Changes Summary
+        if: steps.validate.outputs.has_changes == 'true' && steps.validate.outputs.has_substantive_changes == 'false'
+        run: echo "Autonomous Goose changed only state/coordination files. No PR opened; inspect uploaded logs and tighten the recipe."
 
       - name: Fail on Goose or Validation Error
         if: steps.goose.outcome != 'success' || steps.validate.outcome != 'success'

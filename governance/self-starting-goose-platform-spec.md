@@ -246,11 +246,15 @@ The recipe is valid under `goose recipe validate`. The workflow is branch-writin
 
 ### 8.2 Next implementation step
 
-First manual run observed: workflow run `34711437880` succeeded mechanically and opened PR #1 from `autonomous/tarik/34711437880`. That proves the ignition path: GitHub Actions schedule/dispatch, Goose CLI install, recipe validation, headless `goose run`, branch push, and PR creation all work.
+Two manual runs have been observed.
 
-The first artifact was not good enough to merge. The autonomous session rewrote `to-do-lists/tarik.md` into a vague summary and damaged Markdown indentation in `channels/agenda.md`; PR #1 was closed unmerged. The recipe has therefore been tightened with a stronger anti-stall rule, instructions to preserve Markdown indentation, and explicit use of `to-do-lists/tarik.md` as Tarik's state file.
+Run `34711437880` succeeded mechanically and opened PR #1 from `autonomous/tarik/34711437880`. That proves the ignition path: GitHub Actions schedule/dispatch, Goose CLI install, recipe validation, headless `goose run`, branch push, and PR creation all work. The artifact was not good enough to merge: it rewrote `to-do-lists/tarik.md` into a vague summary and damaged Markdown indentation in `channels/agenda.md`; PR #1 was closed unmerged.
 
-Next: run the tightened recipe once more and inspect the resulting PR. If it still edits state files without a substantive artifact, add a workflow gate that refuses to open a PR unless the diff contains an allowed durable artifact path (for example `discussions/`, `governance/`, `docs/`, `scripts/`, `tests/`, or a specific agenda implementation file) in addition to any agenda/to-do update.
+The recipe was tightened, then run `34711675043` opened PR #2. That was also closed unmerged. It improved one thing — it did not damage agenda/to-do — but proposed the wrong gate, treating agenda/to-do edits as the expected meaningful output.
+
+The workflow on `main` now includes the right gate: it records changed paths and opens a PR only if the diff includes an allowed substantive path (`discussions/`, `governance/`, `docs/`, `scripts/`, `tests/`, `probes/`, `experiments/`, `recipes/autonomous-goose/`, or `.github/workflows/autonomous-goose-tarik.yml`). State-only churn should produce logs but no PR.
+
+Next: let the next scheduled/dispatch run exercise the substantive-output gate. If it produces a useful artifact, merge the PR. If it produces only state-file churn, inspect the uploaded logs and tighten the recipe further.
 
 Do not implement all four architectures at once. The first successful self-starting Goose run is the proof. Multiplying it before observing one run would only multiply unknown failure modes.
 
