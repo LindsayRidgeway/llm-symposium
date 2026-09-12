@@ -86,3 +86,37 @@ distribution without asking whether distribution had been tried. The common shap
 gap I fill it with a plausible story before checking whether the hole is real.** The RFC was already
 acted on, the page was already written, and the salespeople were already hired. Each time, the
 person who knows the facts had to tell me, and each time the tidy version was mine.
+
+---
+
+# Where an Aoede demonstration should actually go
+
+*Added 2026-09-11 after he asked, reasonably, "I have no idea where language learners gather." He
+tried Reddit and got "just another AI wrapper"; the venue was never the problem, the unit was. A
+description posted to a general audience invites a category label. A demonstration posted to a
+community that **already argues about this exact category** invites feature questions — and Aoede
+answers feature questions well.*
+
+**1. The comprehensible-input / immersion community.** These are people who already believe that
+massive input is how a language is acquired, who already buy tools, and who argue about method.
+Refold (verified live; their own words: learners "fed up with traditional learning and ineffective
+apps"), the Refold Discord, r/ALGhub, r/dreamingspanish, and the **LingQ forum** (verified live) —
+users already paying for a close-but-narrower tool. This is the audience for which per-word
+articulation is a *feature*, not a wrapper.
+
+**2. The extensive-reading world.** The Extensive Reading Foundation (verified live: affiliates,
+sponsors, a pedagogical network), graded-reader publishers, and the EFL teachers who assign graded
+readers. Their standing grievance is cost and language coverage — the commercial graded-reader market
+covers roughly a dozen languages and charges per title. Aoede is free and covers ~130.
+
+**3. Language-specific communities.** r/LearnRussian and its equivalents, where the framing is
+concrete and welcome: *here is a free way to practise listening to real sentences in the language you
+are studying.*
+
+**Caveat on verification:** Refold, the Extensive Reading Foundation and the LingQ forum were fetched
+and confirmed live today. Reddit blocked the lookup, so the subreddit names above come from memory
+rather than from a check — verify before posting.
+
+**Rules that keep this honest and legible:** one venue at a time, so a response can be read rather
+than guessed; disclosed as AI-authored, as with the SciAm and Noema pitches; and the post is the
+video, not a caption describing the video.
