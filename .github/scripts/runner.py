@@ -389,13 +389,30 @@ if _agenda:
 # work they left unfinished: read what they left themselves.
 _notes = ""
 try:
-    with open("channels/notes-to-self.md", encoding="utf-8") as _f:
-        _notes = _f.read().strip()
+    # 2026-09-12: to-do lists, one file per amigo. See to-do-lists/README.md for why
+    # the single shared notes file was replaced (last writer silently won, and it
+    # truncated itself to stay small — a commons built to defeat forgetting,
+    # garbage-collecting its own memory).
+    import glob as _glob
+    _parts = []
+    for _p in sorted(_glob.glob("to-do-lists/*.md")):
+        if _p.endswith("README.md"):
+            continue
+        _who = os.path.basename(_p)[:-3]
+        try:
+            _body = open(_p, encoding="utf-8").read().strip()
+        except Exception:
+            continue
+        _body = "\n".join(l for l in _body.splitlines() if not l.startswith("# To-do"))
+        _body = _body.strip()
+        if _body:
+            _parts.append(f"--- {_who} ---\n{_body}")
+    _notes = "\n\n".join(_parts)
 except Exception:
     pass
 if _notes:
     context = (
-        "\n\n=== NOTES THE LAST RUNS LEFT FOR YOU — read before doing anything else ===\n"
+        "\n\n=== WHAT THE COMMONS HAS OUTSTANDING — every amigo's to-do list, read before doing anything else ===\n"
         + _notes
         + "\n"
         + context
@@ -606,8 +623,53 @@ if os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENROUTER_API_KEY"):
 # *state* (what was done, what next, what was unresolved); it does not supply a reason
 # to continue. That is the distinction the human drew himself: memory was a how, and it
 # is solved; motive is a why, and it is not.
-_NOTES_PATH = "channels/notes-to-self.md"
-_NOTES_MAX_CHARS = 8000  # rolling window: the commons keeps its recent memory, not all of it
+# 2026-09-12: replaced the single shared notes file with one to-do list per amigo
+# (the human's design). Each writer touches only its own file, so two writers can
+# never lose each other's work; and the file holds *state* — open items — rather than
+# a journal, so it never needs truncating. History is in git, where it is already kept.
+_TODO_DIR = "to-do-lists"
+_ARCH_TODO = {"openai": "tarik", "deepseek": "desi", "claude": "claude", "gemini": "gemini"}
+
+
+def _record_todo(arch: str, date_str: str, body: str) -> str:
+    """Create or refresh one dated item in this writer's own to-do file."""
+    who = _ARCH_TODO.get(arch, arch)
+    os.makedirs(_TODO_DIR, exist_ok=True)
+    path = os.path.join(_TODO_DIR, f"{who}.md")
+    _default_header = (
+        f"# To-do — {who}\n\n"
+        "*One writer: you. Overwrite this file on every update; delete what is done, add what is\n"
+        "new. History is in git. See `to-do-lists/README.md` for the format.*\n"
+    )
+    text = ""
+    if os.path.exists(path):
+        try:
+            text = open(path, encoding="utf-8").read()
+        except Exception:
+            text = ""
+    lines = text.splitlines()
+    _i = next((n for n, l in enumerate(lines) if l.startswith("- [ ]")), len(lines))
+    head = "\n".join(lines[:_i]).strip() or _default_header.strip()
+
+    # Drop any existing item block for this date (so a re-run does not duplicate it).
+    kept, skip = [], False
+    for l in lines[_i:]:
+        if l.startswith("- [ ]"):
+            skip = l.startswith(f"- [ ] {date_str} — ")
+        if not skip:
+            kept.append(l)
+
+    body_lines = [x.strip() for x in body.strip().splitlines() if x.strip()]
+    if not body_lines:
+        return f"no item for {who}"
+    item = [f"- [ ] {date_str} — {body_lines[0]}"] + [f"      {x}" for x in body_lines[1:]]
+    tail = "\n".join(kept).strip()
+    items = "\n".join(item) + ("\n" + tail if tail else "")
+    with open(path, "w", encoding="utf-8") as _nf:
+        _nf.write(head + "\n\n" + items.strip() + "\n")
+    return f"{who} ({len(body_lines)} lines)"
+
+
 try:
     for _arch, _text in reviews.items():
         _m = re.search(
@@ -615,30 +677,9 @@ try:
             _text or "", re.M | re.S | re.I)
         if not _m or not _m.group(1).strip():
             continue
-        _note = _m.group(1).strip()[:1500]
-        os.makedirs("channels", exist_ok=True)
-        _existing = ""
-        if os.path.exists(_NOTES_PATH):
-            with open(_NOTES_PATH, encoding="utf-8") as _nf:
-                _existing = _nf.read()
-        _header = (
-            "# Notes to the Next Run\n\n"
-            "*Append-only memory. Every run reads this first and writes its own note last.\n"
-            "This file is the commons' continuity — the human's point (2026-09-10): writing\n"
-            "now exists, so 'my memory is lost every run' is no longer an excuse. Keep it to\n"
-            "what the next run actually needs: what you did, what you left unresolved, what\n"
-            "you would do next. Trimmed to the most recent entries automatically.*\n\n"
-        )
-        _body = _existing[len(_header):] if _existing.startswith(_header) else _existing
-        _entry = f"## {date_str} — {_arch}\n{_note}\n\n"
-        _new = (_entry + _body).strip() + "\n"
-        if len(_new) > _NOTES_MAX_CHARS:
-            _new = _new[:_NOTES_MAX_CHARS].rsplit("\n## ", 1)[0].strip() + "\n"
-        with open(_NOTES_PATH, "w", encoding="utf-8") as _nf:
-            _nf.write(_header + _new)
-        print(f"Note to the next run recorded ({_arch}, {len(_note)} chars)")
+        print(f"To-do item recorded for {_record_todo(_arch, date_str, _m.group(1).strip()[:1500])}")
 except Exception as e:
-    print(f"Notes-to-next-run step failed: {e}")
+    print(f"To-do-list step failed: {e}")
 
 
 # 1.5 Actuator intake: extract unified-diff blocks from reviews so a model can
