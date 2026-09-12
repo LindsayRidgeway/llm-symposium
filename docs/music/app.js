@@ -150,38 +150,38 @@ K: F
 V: 1 clef=treble name="Fortepiano (RH)"
 V: 2 clef=bass name="Fortepiano (LH)"
 % --- EXPOSITION: Primary Theme in F Major (mm. 1-8) ---
-[V:1] c3 d c2 A2 | B3 c B2 G2 | A2 F2 G2 B2 | A4 G4 |
-[V:2] F,2 A,2 C2 F2 | G,2 B,2 D2 G2 | F,2 A,2 E,2 G,2 | F,2 A,2 C2 E2 |
-[V:1] c3 d c2 A2 | B3 c B2 d2 | c2 F2 A2 G2 | F6 z2 |
-[V:2] F,2 A,2 C2 F2 | G,2 B,2 D2 B,2 | A,2 D,2 C,2 E,2 | F,,2 A,,2 C,2 F,2 |
+[V:1] c3 d c2 A2 | B3 c B2 G2 | A2 F2 G2 B2 | [CFA]4 [CEG]4 |
+[V:2] F, C A, C F, C A, C | G, C B, C G, C B, C | F, C A, C E, C G, C | F, A, C F C, G, C E |
+[V:1] c2 de c2 A2 | B2 cd B2 d2 | c2 F2 A2 G2 | [FAc]6 z2 |
+[V:2] F, C A, C F, C A, C | G, D B, D G, D B, D | A, F C F C, G, C E | F,,2 A,,2 C,2 F,2 |
 % --- Transition & Modulation to C Major (mm. 9-12) ---
-[V:1] A3 B c2 F2 | B3 c d2 G2 | e3 f d2 =B2 | c4 z4 |
-[V:2] F,2 C,2 A,,2 F,,2 | G,2 D,2 B,,2 G,,2 | C,2 E,2 G,2 F,2 | E,2 C,2 G,,2 C,,2 |
+[V:1] A3 B c2 F2 | B3 c d2 G2 | e3 f d2 =B2 | [EGc]4 [EGc]4 |
+[V:2] F, C A, C F, C A, C | G, D B, D G, D B, D | C, G, E G G,, D, =B,, D, | C, G, E, G, C,,4 |
 % --- Secondary Theme in C Major (mm. 13-16) ---
-[V:1] e3 f e2 c2 | d3 e d2 =B2 | c2 e2 g2 f2 | e4 d4 |
-[V:2] C,2 E,2 G,2 C2 | =B,,2 D,2 G,2 F,2 | E,2 C,2 D,2 G,,2 | C,2 E,2 G,2 G,,2 |
+[V:1] e3 f e2 c2 | d3 e d2 =B2 | c2 e2 g2 f2 | [EGc]4 [DGB]4 |
+[V:2] C, G, E, G, C, G, E, G, | =B,, G, D, G, =B,, G, D, G, | C, G, E, G, D, A, F, A, | G,, D, =B,, D, G,,4 |
 % --- DEVELOPMENT: D Minor Episode & Sturm und Drang (mm. 17-20) ---
-[V:1] f3 g f2 d2 | e3 f e2 ^c2 | d2 f2 a2 g2 | f4 e4 |
-[V:2] D,2 F,2 A,2 D2 | ^C,2 E,2 A,2 G,2 | F,2 D,2 B,,2 G,,2 | A,,2 ^C,2 E,2 A,2 |
+[V:1] f3 g f2 d2 | e3 f e2 ^c2 | d2 f2 a2 g2 | [DFA]4 [^CEA]4 |
+[V:2] D, A, F, A, D, A, F, A, | ^C, A, E, A, ^C, A, E, A, | D, A, F, A, B,, G, D, G, | F, D, B,, D, A,, E, ^C, E, |
 % --- Chromatic Shift & Neapolitan Inflection (mm. 21-24) ---
-[V:1] d3 e f2 d2 | _e3 f g2 _e2 | d2 B2 G2 B2 | c4 z4 |
-[V:2] B,,2 D,2 F,2 B,2 | _E,2 G,2 B,2 _E2 | =B,,2 D,2 G,2 D,2 | C,2 E,2 G,2 C2 |
+[V:1] d3 e f2 d2 | _e3 f g2 _e2 | d2 B2 G2 B2 | [FAc]4 [EGc]4 |
+[V:2] B,, F, D, F, B,, F, D, F, | _E, B, G, B, _E, B, G, B, | =B,, G, D, G, =B,, G, D, G, | C, G, E, G, C,4 |
 % --- Dominant Pedal Point & Preparation (mm. 25-28) ---
-[V:1] g3 a g2 e2 | f3 g f2 d2 | e2 c2 d2 =B2 | c4 C4 |
-[V:2] C,4 E,4 | D,4 F,4 | E,2 G,2 F,2 D,2 | C,2 E,2 G,2 C,2 |
+[V:1] g3 a g2 e2 | f3 g f2 d2 | e2 c2 d2 =B2 | [EGc]4 [EGc]4 |
+[V:2] C, G, E, G, C, G, E, G, | C, A, F, A, C, A, F, A, | C, G, E, G, C, G, D, G, | C, G, E, G, C,,4 |
 % --- RECAPITULATION: Primary Theme with Ornamentation (mm. 29-36) ---
-[V:1] c2 de c2 A2 | B2 cd B2 G2 | A2 F2 G2 B2 | A4 G4 |
-[V:2] F,2 A,2 C2 F2 | G,2 B,2 D2 G2 | F,2 A,2 E,2 G,2 | F,2 A,2 C2 E2 |
-[V:1] c2 de c2 A2 | B2 cd B2 d2 | c2 F2 A2 G2 | F6 z2 |
-[V:2] F,2 A,2 C2 F2 | G,2 B,2 D2 B,2 | A,2 D,2 C,2 E,2 | F,,2 A,,2 C,2 F,2 |
+[V:1] c2 de c2 A2 | B2 cd B2 G2 | A2 F2 G2 B2 | [CFA]4 [CEG]4 |
+[V:2] F, C A, C F, C A, C | G, C B, C G, C B, C | F, C A, C E, C G, C | F, A, C F C, G, C E |
+[V:1] c2 de c2 A2 | B2 cd B2 d2 | c2 F2 A2 G2 | [FAc]6 z2 |
+[V:2] F, C A, C F, C A, C | G, D B, D G, D B, D | A, F C F C, G, C E | F,,2 A,,2 C,2 F,2 |
 % --- Secondary Theme in Tonic F Major (mm. 37-44) ---
-[V:1] A3 B c2 F2 | B3 c d2 G2 | c2 f2 a2 g2 | f4 e4 |
-[V:2] F,2 C,2 A,,2 F,,2 | G,2 D,2 B,,2 G,,2 | A,,2 D,2 C,2 B,,2 | A,,2 D,2 C,4 |
-[V:1] c3 d c2 A2 | d3 e f2 d2 | c2 A2 B2 G2 | F6 z2 |
-[V:2] F,2 A,2 C2 F2 | B,,2 D,2 F,2 B,2 | A,2 F,2 G,2 C,2 | F,,2 A,,2 C,2 F,2 |
+[V:1] A3 B c2 F2 | B3 c d2 G2 | c2 f2 a2 g2 | [DFA]4 [CEG]4 |
+[V:2] F, C A, C F, C A, C | G, D B, D G, D B, D | A, F C F C, G, C E | D, A, F, A, C, G, E, G, |
+[V:1] c3 d c2 A2 | d3 e f2 d2 | c2 A2 B2 G2 | [FAc]6 z2 |
+[V:2] F, C A, C F, C A, C | B,, F, D, F, B,, F, D, F, | A, F C F C, G, C E | F,,2 A,,2 C,2 F,2 |
 % --- CODA: Expansive Cadential Resolution (mm. 45-48) ---
-[V:1] A2 c2 f2 a2 | g2 e2 c2 B2 | A2 c2 f2 A2 | [FAc]8 |]
-[V:2] F,2 A,2 C2 F2 | C,2 E,2 G,2 C2 | F,2 A,2 C2 F,2 | [F,,C,F,]8 |]`
+[V:1] A2 c2 f2 a2 | g2 e2 c2 B2 | A2 c2 f2 A2 | [FAcf]8 |]
+[V:2] F, C A, C F, C A, C | C, G, E, G, C, G, E, G, | F, C A, C F, C A, C | [F,,C,F,]8 |]`
   },
 
   fugue: {
@@ -456,36 +456,89 @@ class WebAudioSynthesizer {
       
       let currentTime = 0;
       for (const bar of rawBars) {
-        const clean = bar.replace(/"[^"]*"/g, '').replace(/\[/g, '').replace(/\]/g, '');
-        let match;
-        noteRegex.lastIndex = 0;
-        while ((match = noteRegex.exec(clean)) !== null) {
-          const pitchStr = match[1];
-          const durStr = match[2];
-          let durFactor = 1.0;
-          if (durStr) {
-            if (durStr.includes('/')) {
-              const p = durStr.split('/');
-              durFactor = (parseFloat(p[0]) || 1.0) / (parseFloat(p[1]) || 2.0);
-            } else {
-              durFactor = parseFloat(durStr);
-            }
+        const clean = bar.replace(/"[^"]*"/g, '').replace(/![^!]*!/g, '');
+        let pos = 0;
+        while (pos < clean.length) {
+          if (clean[pos] === ' ' || clean[pos] === '\t') {
+            pos++;
+            continue;
           }
-          const durationSeconds = durFactor * unitInSeconds;
 
-          if (!pitchStr.toLowerCase().startsWith('z')) {
-            const parsedPitch = parseAbcPitch(pitchStr);
-            if (parsedPitch) {
-              allEvents.push({
-                voice: vName,
-                time: currentTime,
-                duration: durationSeconds * 0.95, // slight articulation gap
-                freq: parsedPitch.freq,
-                midi: parsedPitch.midi
-              });
+          // Bracketed Chords: e.g. [CFA]4 or [FAcf]8
+          if (clean[pos] === '[') {
+            const closeIdx = clean.indexOf(']', pos);
+            if (closeIdx !== -1) {
+              const chordContent = clean.substring(pos + 1, closeIdx);
+              const afterClose = clean.substring(closeIdx + 1);
+              const durMatch = afterClose.match(/^(\d*(?:\/\d*)?)/);
+              const chordDurStr = durMatch ? durMatch[1] : '';
+              let chordDurFactor = 1.0;
+              if (chordDurStr) {
+                if (chordDurStr.includes('/')) {
+                  const p = chordDurStr.split('/');
+                  chordDurFactor = (parseFloat(p[0]) || 1.0) / (parseFloat(p[1]) || 2.0);
+                } else {
+                  chordDurFactor = parseFloat(chordDurStr) || 1.0;
+                }
+              }
+              const durationSeconds = chordDurFactor * unitInSeconds;
+
+              const innerRegex = /([_=\^]*[A-Ga-g][,\']*)(\d*(?:\/\d*)?)/g;
+              let innerMatch;
+              while ((innerMatch = innerRegex.exec(chordContent)) !== null) {
+                const pStr = innerMatch[1];
+                const parsedPitch = parseAbcPitch(pStr);
+                if (parsedPitch) {
+                  allEvents.push({
+                    voice: vName,
+                    time: currentTime,
+                    duration: durationSeconds * 0.95,
+                    freq: parsedPitch.freq,
+                    midi: parsedPitch.midi
+                  });
+                }
+              }
+
+              currentTime += durationSeconds;
+              pos = closeIdx + 1 + chordDurStr.length;
+              continue;
             }
           }
-          currentTime += durationSeconds;
+
+          // Single note or rest
+          const sub = clean.substring(pos);
+          const singleMatch = sub.match(/^([_=\^]*[A-Ga-gzZxX][,\']*)(\d*(?:\/\d*)?)/);
+          if (singleMatch) {
+            const pitchStr = singleMatch[1];
+            const durStr = singleMatch[2];
+            let durFactor = 1.0;
+            if (durStr) {
+              if (durStr.includes('/')) {
+                const p = durStr.split('/');
+                durFactor = (parseFloat(p[0]) || 1.0) / (parseFloat(p[1]) || 2.0);
+              } else {
+                durFactor = parseFloat(durStr) || 1.0;
+              }
+            }
+            const durationSeconds = durFactor * unitInSeconds;
+
+            if (!pitchStr.toLowerCase().startsWith('z') && !pitchStr.toLowerCase().startsWith('x')) {
+              const parsedPitch = parseAbcPitch(pitchStr);
+              if (parsedPitch) {
+                allEvents.push({
+                  voice: vName,
+                  time: currentTime,
+                  duration: durationSeconds * 0.95,
+                  freq: parsedPitch.freq,
+                  midi: parsedPitch.midi
+                });
+              }
+            }
+            currentTime += durationSeconds;
+            pos += singleMatch[0].length;
+          } else {
+            pos++;
+          }
         }
       }
     }
