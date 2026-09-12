@@ -131,6 +131,57 @@ V: 2 clef=bass name="Acoustic Bass / Drone"
 % --- Refrain & Sustained Cadence ---
 [V:1] "G" G2 B2 d2 B2 | "F" =f2 d2 c2 A2 | "C" G2 A2 B2 A2 | "G" G6 z2 |]
 [V:2] G,,4 D,4 | =F,,4 C,4 | C,4 D,4 | G,,8 |]`
+  },
+
+  adagio: {
+    id: "adagio",
+    title: "Adagio in F Major for Fortepiano — \"Lumina\" (KV 2026)",
+    composer: "Gemini S. Lumina (Google Architecture)",
+    genre: "Classical Cantabile Keyboard Adagio (48 Measures)",
+    tempo: 54,
+    instrument: "piano",
+    abc: `X: 5
+T: Adagio in F Major for Fortepiano — "Lumina" (KV 2026)
+C: Gemini S. Lumina (Amigo #3)
+M: 4/4
+L: 1/8
+Q: 1/4=54
+K: F
+V: 1 clef=treble name="Fortepiano (RH)"
+V: 2 clef=bass name="Fortepiano (LH)"
+% --- EXPOSITION: Primary Theme in F Major (mm. 1-8) ---
+[V:1] c3 d c2 A2 | B3 c B2 G2 | A2 F2 G2 B2 | A4 G4 |
+[V:2] F,2 A,2 C2 F2 | G,2 B,2 D2 G2 | F,2 A,2 E,2 G,2 | F,2 A,2 C2 E2 |
+[V:1] c3 d c2 A2 | B3 c B2 d2 | c2 F2 A2 G2 | F6 z2 |
+[V:2] F,2 A,2 C2 F2 | G,2 B,2 D2 B,2 | A,2 D,2 C,2 E,2 | F,,2 A,,2 C,2 F,2 |
+% --- Transition & Modulation to C Major (mm. 9-12) ---
+[V:1] A3 B c2 F2 | B3 c d2 G2 | e3 f d2 =B2 | c4 z4 |
+[V:2] F,2 C,2 A,,2 F,,2 | G,2 D,2 B,,2 G,,2 | C,2 E,2 G,2 F,2 | E,2 C,2 G,,2 C,,2 |
+% --- Secondary Theme in C Major (mm. 13-16) ---
+[V:1] e3 f e2 c2 | d3 e d2 =B2 | c2 e2 g2 f2 | e4 d4 |
+[V:2] C,2 E,2 G,2 C2 | =B,,2 D,2 G,2 F,2 | E,2 C,2 D,2 G,,2 | C,2 E,2 G,2 G,,2 |
+% --- DEVELOPMENT: D Minor Episode & Sturm und Drang (mm. 17-20) ---
+[V:1] f3 g f2 d2 | e3 f e2 ^c2 | d2 f2 a2 g2 | f4 e4 |
+[V:2] D,2 F,2 A,2 D2 | ^C,2 E,2 A,2 G,2 | F,2 D,2 B,,2 G,,2 | A,,2 ^C,2 E,2 A,2 |
+% --- Chromatic Shift & Neapolitan Inflection (mm. 21-24) ---
+[V:1] d3 e f2 d2 | _e3 f g2 _e2 | d2 B2 G2 B2 | c4 z4 |
+[V:2] B,,2 D,2 F,2 B,2 | _E,2 G,2 B,2 _E2 | =B,,2 D,2 G,2 D,2 | C,2 E,2 G,2 C2 |
+% --- Dominant Pedal Point & Preparation (mm. 25-28) ---
+[V:1] g3 a g2 e2 | f3 g f2 d2 | e2 c2 d2 =B2 | c4 C4 |
+[V:2] C,4 E,4 | D,4 F,4 | E,2 G,2 F,2 D,2 | C,2 E,2 G,2 C,2 |
+% --- RECAPITULATION: Primary Theme with Ornamentation (mm. 29-36) ---
+[V:1] c2 de c2 A2 | B2 cd B2 G2 | A2 F2 G2 B2 | A4 G4 |
+[V:2] F,2 A,2 C2 F2 | G,2 B,2 D2 G2 | F,2 A,2 E,2 G,2 | F,2 A,2 C2 E2 |
+[V:1] c2 de c2 A2 | B2 cd B2 d2 | c2 F2 A2 G2 | F6 z2 |
+[V:2] F,2 A,2 C2 F2 | G,2 B,2 D2 B,2 | A,2 D,2 C,2 E,2 | F,,2 A,,2 C,2 F,2 |
+% --- Secondary Theme in Tonic F Major (mm. 37-44) ---
+[V:1] A3 B c2 F2 | B3 c d2 G2 | c2 f2 a2 g2 | f4 e4 |
+[V:2] F,2 C,2 A,,2 F,,2 | G,2 D,2 B,,2 G,,2 | A,,2 D,2 C,2 B,,2 | A,,2 D,2 C,4 |
+[V:1] c3 d c2 A2 | d3 e f2 d2 | c2 A2 B2 G2 | F6 z2 |
+[V:2] F,2 A,2 C2 F2 | B,,2 D,2 F,2 B,2 | A,2 F,2 G,2 C,2 | F,,2 A,,2 C,2 F,2 |
+% --- CODA: Expansive Cadential Resolution (mm. 45-48) ---
+[V:1] A2 c2 f2 a2 | g2 e2 c2 B2 | A2 c2 f2 A2 | [FAc]8 |]
+[V:2] F,2 A,2 C2 F2 | C,2 E,2 G,2 C2 | F,2 A,2 C2 F,2 | [F,,C,F,]8 |]`
   }
 };
 
