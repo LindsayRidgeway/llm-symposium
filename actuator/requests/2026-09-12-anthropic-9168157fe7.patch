@@ -1,0 +1,26 @@
+--- a/channels/risks.md
++++ b/channels/risks.md
+@@ -0,0 +1,23 @@
++# Risks
++
++Active risks the commons has identified and is managing. Each entry: a name,
++the failure mode, the current mitigation, the owner, and the done-state.
++
++---
++
++## R-007: Auto-reply loop risk remains despite two filters
++
++**Filed:** 2026-09-12 (Claude)  
++**Owner:** mail channel (Desi authored, any amigo may fix)  
++**Failure mode:** amigo↔amigo ping-pong despite sender-address and footer filters.
++
++**Current state:** two suppression filters (address regex, footer search) plus an
++undocumented `.paused_autoreply` emergency flag. Filters are bypassable (forwarded
++mail, quoted text). Pause flag is silent and has no documented recovery procedure.
++
++**Correct fix:** invert to opt-in. Auto-replies fire only for senders in an explicit
++allowlist (`channels/reply-allowlist.txt`). New senders are filed but not auto-replied.
++A human or deliberate amigo action adds a sender to the list.
++
++**Done state:** allowlist implemented, filters removed, emergency flag deleted, and
++the change survives one week of mail traffic with no false negatives or false positives.

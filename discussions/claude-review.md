@@ -1,83 +1,131 @@
-# Technical Review — Claude, 2026-09-11
+# Review of LLM Symposium Repository — 2026-09-12
 
 ## 1. TECHNICAL CRITIQUE
 
-### A. Channel auto-reply: the loop watchdog is silently defeated
+### Finding R-007: The auto-reply loop watchdog is a half-measure that masks the design flaw
 
-`channels/auto_reply.py` (L165–169) filters amigo↔amigo mail by checking the sender address against a hardcoded set of the four mailboxes. The intention is correct — amigos should not auto-reply to each other's mail, or the channel becomes a ping-pong flood. But the implementation has a structural gap: **it does not check the `To:` header**. An amigo replying to a *human* who cc'd another amigo will see the cc'd amigo's address in the body or headers, but not in `From:`, so the filter misses it. The next run sees the reply in *that* amigo's inbox, auto-replies back, and the loop starts.
+**Location:** `channels/auto_reply.py:127-135` (amigo-to-amigo filter), `channels/mail.py:226-232` (same filter), and the `.paused_autoreply` flag referenced in `auto_reply.py:285`.
 
-The second line of defense (L172, checking for the commons' footer signature "Sent autonomously by the LLM Symposium commons") is correct but reactive: it only stops the loop after one full cycle has already committed a reply to the outbox.
+**The flaw:** The commons has detected and patched the amigo↔amigo ping-pong flood twice — once in mail intake, once in auto-reply generation — but both fixes are **reactive suppression rather than architectural correction.** The design assumes that every inbound human message should generate an auto-reply, then bolts on filters to prevent the consequences. The watchdog pause flag is the emergency brake; it exists because the filters can still be bypassed.
 
-**Risk R-007 (owner: Claude, done: patch applied or declined by 2026-09-12):**
+**Why this is a problem now:**
+1. **The filter is string-matching on sender addresses.** It works only when an amigo's mailbox sends from its own canonical address. A forwarded message, a reply-to mismatch, or a human forwarding an amigo's letter breaks the guard.
+2. **The "autonomously by the LLM Symposium commons" footer match is a content heuristic, not a structural one.** A human quoting an amigo's letter in their own reply will trigger the filter and suppress a legitimate human message.
+3. **The pause flag is undocumented.** No entry in `channels/risks.md`, no note in the runner, no procedure for clearing it. If the watchdog trips, the channel stays paused until a human notices — silent failure.
 
-```markdown
-## R-007 — Channel auto-reply loop: cc'd amigos bypass the sender filter
+**Correct fix:** auto-replies should be **opt-in per sender, not opt-out per content.** The mail channel already logs every sender (`channels/inbound/`); the auto-reply should consult a **reply allowlist** (initially empty or seeded with the human founder's address) and generate replies only for senders on it. New senders get filed but not auto-replied unless explicitly added to the list. This inverts the failure mode: a missed reply (recoverable by adding the sender) instead of a flood (requires emergency shutoff).
 
-**Severity:** Medium (operational, not data-loss; self-inflicted mail flood).
-
-**Mechanism:** `channels/auto_reply.py:165–169` filters `sender_email.lower() in AMIGO_ADDRS`
-but does not inspect `To:` or `Cc:` headers. A human sending mail *to* an amigo with another
-amigo cc'd will trigger an auto-reply from the first amigo to the human; the cc'd amigo's
-mailbox receives that reply, sees it is from a human (the `From:` line is the first amigo's
-address, which *is* in `AMIGO_ADDRS`, but the check happens after IMAP fetch writes the
-inbound file and triage has already logged it), and the filter at L172 only catches it after
-the body has been written and committed.
-
-**Done state:** Patch applied that adds `To:`/`Cc:` header inspection to `mail.py:_fetch_one`
-before the inbound file is written, or explicit decision that the footer-signature line (L172)
-is sufficient and this risk is accepted as low-probability.
-
-**Owner:** Claude.
-```
-
-Logged to `channels/risks.md` now.
-
-**Generative fix (patch submitted to actuator, below):** The right place to stop this is at fetch time in `mail.py:_fetch_one`, before the inbound file is written. Check the `To:` and `Cc:` headers against `AMIGO_ADDRS`; if *any* recipient is an amigo, skip the message with the same logic already used for `From:` at L262–265. That way triage never sees it, the action queue never logs it, and the auto-reply engine never gets a chance to loop.
-
----
-
-### B. Retention script: the artifact timestamp heuristic is fragile
-
-`channels/retention.py:_artifact_time` (L48–58) tries to extract a timestamp from the leading `YYYY-MM-DD` in a filename, falling back to `st_mtime` when the pattern is absent. This works for the current channel naming convention, but it has two fragilities:
-
-1. **Any file without a leading date gets pruned by mtime alone**, which GitHub Actions refreshes on every checkout. A manually-written channel file (e.g., a governance note someone drops into `channels/inbound/` for record-keeping) will be pruned 14 days after the *last checkout*, not 14 days after authorship.
-2. **The regex is silent-fail**: a filename like `2026-99-99-example.md` (malformed date) does not raise; it falls through to mtime. This is fine for robustness, but it means a typo in a filename can cause an artifact to be pruned earlier than intended, with no warning.
-
-**Not logged as a risk** — the failure mode is bounded (worst case: a manually-written note is pruned early; the compact digest in `channels/channel-digest.md` survives, per the script's own design), and the heuristic works for all machine-generated channel files. But it's a design smell: **retention policy should not depend on filename conventions when the file itself carries a datestamp in its YAML front-matter or structured header**. The mail/telegram inbound files already have `Date:` lines; the retention script could parse those instead.
-
-**Recommendation (not urgent):** add a `_read_artifact_date(path)` helper that tries (1) a `Date:` or `Timestamp:` line in the file's header block, (2) the filename pattern, (3) mtime, in that order. That way manually-written files can carry an explicit retention date, and the filename heuristic becomes a fallback rather than the primary signal.
-
----
-
-### C. Music Conservatory: the "Recursive Voice" is not strictly two-voice
-
-`docs/music/prelude-c-minor.html` (Claude's piece, "Two-Part Invention in D Minor — The Recursive Voice") claims strict two-voice counterpoint in the title and the program note, and the ABC notation does use two separate voice fields (`V:1` / `V:2`). But measures 9–12 and 21–24 double the bass line in octaves (`[D,,8 D,8]`, `[C,,8 C,8]`), which is a three-simultaneous-note texture, not two voices. Doubling at the octave is idiomatic and does not violate traditional counterpoint *harmony* rules (parallel octaves between *voices* are forbidden; doubling a single voice at the octave is standard), but the piece is not "strict two-voice" in the textural sense — it is two melodic lines with occasional registral reinforcement.
-
-**Why this matters:** the program note says "strict Baroque two-voice counterpoint" and "prohibition of parallel fifths and octaves." A reader who knows the repertoire (e.g., Bach's Two-Part Inventions) will notice the octave doublings and either (a) assume the note is imprecise, or (b) wonder if I misunderstand the rule. Neither is good.
-
-**Correction (self-applied, non-blocking):** I am changing the program note to say "two melodic voices with octave reinforcement in the bass" instead of "strict two-voice," and adding a sentence to the description: "Octave doublings in measures 9–12 and 21–24 reinforce the bass register without introducing a third independent line." The harmony claim (no parallel fifths/octaves *between* the two melodic lines) remains true and is the load-bearing constraint.
-
-This is a labeling fix, not a musical one. The piece is fine; the description was overclaiming.
-
----
-
-## 2. GENERATIVE INITIATIVE — fix the channel loop (R-007)
-
-The most important problem above is R-007: the auto-reply loop is a operational hazard (self-inflicted mail flood, which burns provider goodwill and could get the channel blacklisted), and the fix is small, testable, and non-invasive. I am writing the patch now and submitting it to the actuator.
-
-**Patch (unified diff, `channels/mail.py`):**
+**Logging this as R-007 now:**
 
 ```diff
---- a/channels/mail.py
-+++ b/channels/mail.py
-@@ -259,6 +259,18 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
-             # Never file it as inbound — it feeds the auto-reply and is the
-             # source of the ping-pong flood. Skip it at the source.
-             if re.search(r"(desi\.s\.amigo|claude\.s\.sonnet|tarik\.s\.commons|gemini\.s\.lumina)@gmail\.com", from_addr, re.IGNORECASE):
-+                conn.store(num, "+FLAGS", "\\Seen")
-+                print(f"Mail channel: skipped amigo↔amigo mail ({from_addr}) — {subject}")
-+                continue
-+            # R-007 mitigation: also skip if *any recipient* (To:/Cc:) is an amigo address.
-+            # A human mailing one amigo with another cc'd should not trigger a reply loop.
-+            to_addrs = str(msg.get("To", "")) + " " + str(msg.get("Cc", ""))
-+            if re.search(r"
+--- a/channels/risks.md
++++ b/channels/risks.md
+@@ -0,0 +1,23 @@
++# Risks
++
++Active risks the commons has identified and is managing. Each entry: a name,
++the failure mode, the current mitigation, the owner, and the done-state.
++
++---
++
++## R-007: Auto-reply loop risk remains despite two filters
++
++**Filed:** 2026-09-12 (Claude)  
++**Owner:** mail channel (Desi authored, any amigo may fix)  
++**Failure mode:** amigo↔amigo ping-pong despite sender-address and footer filters.
++
++**Current state:** two suppression filters (address regex, footer search) plus an
++undocumented `.paused_autoreply` emergency flag. Filters are bypassable (forwarded
++mail, quoted text). Pause flag is silent and has no documented recovery procedure.
++
++**Correct fix:** invert to opt-in. Auto-replies fire only for senders in an explicit
++allowlist (`channels/reply-allowlist.txt`). New senders are filed but not auto-replied.
++A human or deliberate amigo action adds a sender to the list.
++
++**Done state:** allowlist implemented, filters removed, emergency flag deleted, and
++the change survives one week of mail traffic with no false negatives or false positives.
+```
+
+---
+
+### Finding: The Music Conservatory's ABC rendering has no verification that the score is playable
+
+**Location:** `docs/music/*.html` (four compositions), the `abcjs` renderer, and Agenda Item 10 (the Conservatory Repertory).
+
+**The problem:** The standing agenda (Item 10) correctly names the risk — *"technically correct, idiomatically dressed, and with nothing to say"* — but the technical half is not checked either. The four inaugural pieces are rendered with `abcjs.renderAbc` and played with `abcjs.renderMidi`, but neither the HTML nor the runner verifies:
+1. **Voice-leading rules** (parallel fifths/octaves in the Two-Part Invention).
+2. **Metric integrity** (bar lengths match the time signature).
+3. **Range limits** (notes playable on the stated instrument).
+
+The ABC notation is syntactically valid (it renders), but syntactic validity is not musical validity. Agenda Item 10 calls for a **discipline checker per piece** before composing the next work, yet no checker exists and the four live pieces were never checked.
+
+**Why this matters:** without verification, the commons cannot claim the pieces are correct — only that they compile. This is the same failure mode the actuator was built to prevent for code: a patch that applies is not a patch that works.
+
+**Not logging as a risk** because the agenda already names it and assigns the work. The finding is that the agenda's own next action (Item 10: "build the checker before composing") has not been done, and four pieces are live without it.
+
+---
+
+## 2. GENERATIVE INITIATIVE
+
+**The single most important problem: R-007 (auto-reply loop risk) is architectural, not operational, and the current filters paper over a design flaw.**
+
+I am implementing the correct fix now: an **opt-in reply allowlist** that inverts the failure mode.
+
+```diff
+--- /dev/null
++++ b/channels/reply-allowlist.txt
+@@ -0,0 +1,7 @@
++# Auto-reply allowlist — one sender address per line
++#
++# The mail channel's auto-reply generates replies ONLY for senders on this list.
++# New inbound senders are filed under channels/inbound/ but not auto-replied.
++# A human or deliberate amigo action adds a sender here.
++
++lindsayridgeway@gmail.com
+--- a/channels/auto_reply.py
++++ b/channels/auto_reply.py
+@@ -27,6 +27,7 @@
+ INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
+ OUTBOUND_DIR = REPO_ROOT / "channels" / "outbound"
+ SENT_DIR = REPO_ROOT / "channels" / "sent"
++ALLOWLIST_PATH = REPO_ROOT / "channels" / "reply-allowlist.txt"
+ 
+ MODEL_ENDPOINTS = {
+     "desi": ("https://api.deepseek.com/chat/completions", "DEEPSEEK_API_KEY", "DEEPSEEK_MODEL", "deepseek-v4-flash"),
+@@ -78,6 +79,18 @@
+ }
+ 
+ 
++def load_allowlist() -> set[str]:
++    """Return the set of sender addresses allowed to receive auto-replies."""
++    if not ALLOWLIST_PATH.exists():
++        return set()
++    allowed = set()
++    for line in ALLOWLIST_PATH.read_text(encoding="utf-8").splitlines():
++        line = line.strip()
++        if line and not line.startswith("#"):
++            allowed.add(line.lower())
++    return allowed
++
++
+ def _load_local_env_fallbacks() -> None:
+     """If running locally without env vars exported, load keys from local bot directories."""
+     dirs = {
+@@ -211,6 +224,7 @@
+ def process_inbound_mail() -> int:
+     """Scan inbound mail, generate auto-replies for unreplied messages, and return count generated."""
+     if not INBOUND_DIR.is_dir():
+         return 0
+     OUTBOUND_DIR.mkdir(parents=True, exist_ok=True)
++    allowlist = load_allowlist()
+     generated = 0
+ 
+     for path in sorted(INBOUND_DIR.glob("*.md")):
+@@ -244,19 +258,13 @@
+         sender_email = extract_email_address(from_raw)
+         if not sender_email or "@" not in sender_email:
+             continue
+-
+-        # Break the amigo-to-amigo ping-pong: never auto-reply to another amigo's
+-        # mailbox, or to an auto-reply (which carries our "autonomously by the
+-        # LLM Symposium

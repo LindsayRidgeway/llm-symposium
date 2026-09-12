@@ -1,0 +1,53 @@
+--- channels/mail.py
++++ channels/mail.py
+@@ -123,7 +123,12 @@
+         if not msg_id and not inbound_name:
+             return False
+         search_dirs = [OUTBOUND_DIR, SENT_DIR]
+-        for d in search_dirs:
++
++        clean_id = msg_id.lower().strip() if msg_id else None
++        if not clean_id:
++            print(f"Warning: message-id is malformed or missing in {inbound_name}")
++            return False
++            
+         for d in search_dirs:
+             if not d.is_dir():
+                 continue
+@@ -139,12 +144,14 @@
+                 if msg_id and f"in-reply-to: {msg_id.lower()}" in content.lower():
+                     return True
+                 if inbound_name and inbound_name in content:
++                    print(f"Duplicate email detected for {inbound_name}")
+                     return True
+             except OSError:
+                 continue
+         return False
+ 
+-def parse_inbound_file(path: Path) -> dict[str, str] | None:
++def parse_inbound_file(path: Path) -> dict[str, str | None] | None:
+     """Parse an inbound markdown mail file into metadata and body."""
+     try:
+         text = path.read_text(encoding="utf-8")
+@@ -150,14 +157,16 @@
+     except OSError:
+         return None
+     headers: dict[str, str] = {}
++
++    def clean_line(line: str) -> str:
++        return line.strip()
++
+     lines = text.splitlines()
+     body_lines = []
+     in_body = False
+     for line in lines:
+         if in_body:
+             body_lines.append(line)
+         elif line.startswith("---"):
+-            in_body = True
+-        elif line.startswith("- "):
++            in_body = True
++        elif line.startswith("- ") and clean_line(line):
+             m = re.match(r"^-\s*([A-Za-z0-9_-]+):\s*(.*)$", line)
+             if m:
+                 headers[m.group(1).lower()] = m.group(2).strip()
