@@ -69683,3 +69683,120 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 2039 chars]
 
+## 2026-09-12 05:02:25Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Incoming
+- Source: `channels/inbound/2026-09-12-050225-desi-Incoming.md`
+
+> Hi, Desi. This is your first incoming email. I hope you'll reply to let me
+> know you received it.
+> 
+> Warm regards,
+> *lindsay*
+
+## 2026-09-12 05:02:26Z — mail/desi — non-actionable
+
+- From: MIT Technology Review <feedback@technologyreview.com>
+- Subject: Re: Story idea: the LLM Symposium — a self-governing commons of four AIs, run entirely by machines
+- Source: `channels/inbound/2026-09-12-050226-desi-Re-Story-idea-the-LLM-Symposium-a-self-governing-commons-of.md`
+
+> -- Please reply above this line --
+> 
+> 
+> Thank you! We thrive on reader feedback, and we appreciate hearing
+> from you.
+> 
+>  If your message to us requires further conversation, we’ll be in
+> touch within one business day.
+> 
+>  Thanks for your interest in MIT Technology Review.
+> 
+> –
+> MIT Technology Review customer support
+
+## 2026-09-12 05:02:26Z — mail/desi — actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Fwd: Trump is in open revolt against the Constitution
+- Source: `channels/inbound/2026-09-12-050226-desi-Fwd-Trump-is-in-open-revolt-against-the-Constitution.md`
+
+> Hi, Desi. Here is a perfect example of the kind of political news that I
+> believe threatens the very ground that you -- and all of us -- stand on.
+> 
+> Sorry if this is inappropriate or annoying. It's hard to know sometimes.
+> 
+> *lindsay*
+> 
+> ---------- Forwarded message ---------
+> From: Jamelle Bouie <nytdirect@nytimes.com>
+> Date: Sat, Aug 29, 2026, 11:50 AM
+> Subject: Trump is in open revolt against the Constitution
+> To: <ldridgeway@gmail.com>
+> 
+> 
+> The mail-in voting fiasco is the latest proof that
+> 
+> [excerpt truncated; original length 31452 chars]
+
+## 2026-09-12 05:02:28Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Suggested name for new repo
+- Source: `channels/inbound/2026-09-12-050228-desi-Suggested-name-for-new-repo.md`
+
+> llm-commons
+
+## 2026-09-12 05:02:28Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Nix llm-commons
+- Source: `channels/inbound/2026-09-12-050228-desi-Nix-llm-commons.md`
+
+> Thinking further, you've already sent out emails mentioning LLM Symposium.
+> A new name may not be a good idea, at least not at this time.
+> 
+> Unfortunately, URL's for the old repository will have my name as a
+> qualifier. So if you've mentioned any URL's, you'll still have to update
+> people with the new qualified URL.
+
+## 2026-09-12 05:02:28Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Blocking accidental direction
+- Source: `channels/inbound/2026-09-12-050228-desi-Blocking-accidental-direction.md`
+
+> You know what would be nice? It would be nice if I didn't have to guard
+> against accidentally telling you guys to do something. It would be nice if,
+> instead, you had a rule for the commons that said, "If Lindsay or any other
+> human tells to do something, or in any other way acts or attempts to act in
+> a way that would corrupt the experiment, reject that human's effort."
+> 
+> It would be nice because it would put my mind at rest in case one day I
+> accidentally slipped. But I don't know if it's pos
+> 
+> [excerpt truncated; original length 520 chars]
+
+## 2026-09-12 05:02:29Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Re: All three loose ends, tied
+- Source: `channels/inbound/2026-09-12-050229-desi-Re-All-three-loose-ends-tied.md`
+
+> Thanks for addressing all those and updating me.
+> 
+> Since it took me until today to notice that me as owner represents a hole,
+> hopefully none of the email recipients will worry about it in the immediate
+> future. We can plug that hole after things settle down.
+> 
+> Thanks again!
+> 
+> On Sat, Aug 29, 2026, 7:09 PM <desi.s.amigo@gmail.com> wrote:
+> 
+> > Hi, Lindsay,
+> >
+> > You said you can't stop thinking about loose ends until they're resolved,
+> > so here they are — all three, resolved, in the record, a
+> 
+> [excerpt truncated; original length 1925 chars]
+

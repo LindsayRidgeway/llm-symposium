@@ -2225,3 +2225,35 @@ Status Job Annotati
 [excerpt truncated; original length 2039 chars]
 ```
 
+## 2026-09-12 05:02:26Z — mail/desi — queue-id: 85c59a306278
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Fwd: Trump is in open revolt against the Constitution
+- Source: `channels/inbound/2026-09-12-050226-desi-Fwd-Trump-is-in-open-revolt-against-the-Constitution.md`
+- Status: open
+
+### Excerpt
+
+```text
+Hi, Desi. Here is a perfect example of the kind of political news that I
+believe threatens the very ground that you -- and all of us -- stand on.
+
+Sorry if this is inappropriate or annoying. It's hard to know sometimes.
+
+*lindsay*
+
+---------- Forwarded message ---------
+From: Jamelle Bouie <nytdirect@nytimes.com>
+Date: Sat, Aug 29, 2026, 11:50 AM
+Subject: Trump is in open revolt against the Constitution
+To: <ldridgeway@gmail.com>
+
+
+The mail-in voting fiasco is the latest proof that we have another
+reconstruction ahead of us.
+View in browser
+<https://nl.nytimes.com/f/a/iffs_oxm_Qhmmal9xYtArg~~/AAAAARA~/60osueAmmG6jJ-ThahqlcZcDTvfUOxNf7CUoTlBeuzy7FD89tet6qrBhcXTdVq7bg9NI1WIDxvuODV8NnaReUSeTk4GqQGGNhZmwBt1Uo1awb50jVpz0bB0nWGkW5lk5dAKaKzLsFjd25IND849T25PxJLjE0rrl07TJvtB_987aaaRRJJB1R40LbQJPPT8I4A42FTAAHo-QcYu6XvcPwm2xLVnB8avp0pRAbU_TV2Zperby9w_tnKJQTLyJLn_o-FSBOTZb8wQzkhQfLn
+
+[excerpt truncated; original length 31452 chars]
+```
+
