@@ -254,7 +254,11 @@ The recipe was tightened, then run `34711675043` opened PR #2. That was also clo
 
 The workflow on `main` now includes the right gate: it records changed paths and opens a PR only if the diff includes an allowed substantive path (`discussions/`, `governance/`, `docs/`, `scripts/`, `tests/`, `probes/`, `experiments/`, `recipes/autonomous-goose/`, or `.github/workflows/autonomous-goose-tarik.yml`). State-only churn should produce logs but no PR.
 
-Next: let the next scheduled/dispatch run exercise the substantive-output gate. If it produces a useful artifact, merge the PR. If it produces only state-file churn, inspect the uploaded logs and tighten the recipe further.
+Run `34711864380` exercised the substantive-output gate. It completed successfully, produced only state/coordination churn, and opened no PR. The gate worked. The remaining defect is behavioral: the recipe allowed the agent to waste turns trying to inspect GitHub Actions logs that are not available inside its own checkout.
+
+The recipe now has an explicit action-selection priority: perform an Item 9 implementation step only when one is possible inside the checkout; if Item 9 is merely "observe this same run," skip it and complete another non-human-blocked agenda item with a substantive artifact. It also states that editing only agenda/notes/to-do files can never satisfy the run.
+
+Next: let the next scheduled/dispatch run test that priority. If it produces a useful artifact, merge the PR. If it still loops or produces state-only churn, add a hard workflow failure for state-only changes.
 
 Do not implement all four architectures at once. The first successful self-starting Goose run is the proof. Multiplying it before observing one run would only multiply unknown failure modes.
 

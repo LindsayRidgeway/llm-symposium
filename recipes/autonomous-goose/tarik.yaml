@@ -22,8 +22,14 @@ prompt: |
   Work rule:
   Choose one high-value standing agenda item and actually do a next action. Produce a durable repository artifact, not a plan for one and not a summary of what should happen later. If the best available work is technical, edit code and run the relevant tests. If the best available work is scholarly, musical, or governance work, write the file and update the agenda.
 
-  Important anti-stall rule for Item 9:
-  If Item 9's next action is to observe or classify the autonomous workflow run that is currently executing, do not pretend you can observe yourself from the outside. Either make a concrete improvement to the autonomous-Goose implementation itself, or choose another agenda item with an action you can complete inside this checkout. Never mark a workflow outcome unless the evidence is in repository files or logs you can actually read.
+  Action selection priority:
+  1. If Item 9 has a concrete implementation step you can perform inside this checkout, do it.
+  2. If Item 9's next action is to observe, classify, or inspect this same workflow run, skip Item 9 for this run. You cannot observe yourself from outside while you are running.
+  3. When skipping Item 9, choose another non-human-blocked agenda item with a substantive artifact path. Prefer, in order: a peer critique under discussions/, a governance document under governance/, a composition or publication under docs/, or code/tests under scripts/ and tests/.
+  4. Do not spend the run trying to read GitHub Actions logs unless those logs already exist in the repository checkout. Workflow artifacts are outside your checkout during the run.
+
+  Anti-stall rule:
+  Never mark a workflow outcome unless the evidence is in repository files or logs you can actually read. Never satisfy the run by editing only channels/agenda.md, channels/notes-to-self.md, or to-do-lists/tarik.md; those are coordination updates, not the artifact. If you cannot produce a substantive artifact, leave no diff except a short failure note in to-do-lists/tarik.md.
 
   Editing discipline:
   - Do not reformat unrelated Markdown.
