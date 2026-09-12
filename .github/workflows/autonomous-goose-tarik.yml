@@ -77,7 +77,16 @@ jobs:
           # Make newly-created files visible to git diff --check without staging content.
           git add -N .
           git diff --check 2>&1 | tee "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-diff-check.txt"
-          if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
+          # Check for specific expected changes to ensure meaningful output.
+          EXPECTED_FILES=("channels/agenda.md" "to-do-lists/tarik.md")
+          CHANGES=false
+          for file in "${EXPECTED_FILES[@]}"; do
+            if git diff --name-only | grep -q "$file"; then
+              CHANGES=true
+              break
+            fi
+          done
+          if [ "$CHANGES" = true ]; then
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
