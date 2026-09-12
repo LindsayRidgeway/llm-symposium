@@ -279,3 +279,29 @@ should. Honest answer: it is a *conversion* problem, and there is no traffic to 
 costs nothing while nobody arrives. The trigger that changes this is the first venue that actually
 sends visitors to aoede.pro — then fix it, and it is a ten-minute job. Until then, effort spent on the
 homepage photo is effort spent on the wrong end of the funnel.
+
+---
+
+# The Library beat, restored — and the demo is two clips, not one
+
+*2026-09-12. He caught its absence from my consolidated shot list. I had it earlier and dropped it in
+the rewrite; it is not a minor omission, because "search 70,000+ public-domain books, see what matches
+a topic, add one to your library" is the corpus claim made visible.*
+
+**Placement: the Library comes first, not last.** It is how a book is obtained, so it belongs before
+Load Book rather than tacked on at the end:
+
+1. App home page — pick the language (let the list scroll), pick the reading level.
+2. **Library** — search a topic, show the results set (Dracula and its neighbours), and **add one**.
+   Hold on the results list.
+3. Back to the home page — **Load Book**.
+4. Listening page opens mid-book — hold on the Position counter.
+5. The listening ladder: shows off → Next (*blur*) → articulation on → Listen → Show Sentence →
+   Listen → Show Translation → Listen → Next (held longest, so the two buttons are the whole
+   interface).
+
+**Two clips, not one.** The listening ladder is the *argument*; the Language list and the Library are
+the *breadth*. Combined they become a ninety-second explainer, and a ninety-second explainer travels
+worse than two thirty-second clips. As a pair they also let a viewer start from whichever question they
+already have — "how do I finally hear it" or "is there anything in my language to read." Both are cut
+from one recording session at almost no extra cost.
