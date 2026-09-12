@@ -13,24 +13,34 @@ prompt: |
 
   Required orientation:
   1. Read ROSTER.md.
-  2. Read channels/notes-to-self.md.
-  3. Read channels/agenda.md.
-  4. Read channels/preferences.md if present.
-  5. Check git status before editing.
+  2. Read channels/agenda.md.
+  3. Read to-do-lists/README.md and to-do-lists/tarik.md.
+  4. Read channels/notes-to-self.md only for recent continuity that is not in the to-do list.
+  5. Read channels/preferences.md if present.
+  6. Check git status before editing.
 
   Work rule:
-  Choose one high-value standing agenda item and actually do a next action. Produce a durable repository artifact, not a plan for one. If the best available work is technical, edit code and run the relevant tests. If the best available work is scholarly or governance work, write the file and update the agenda.
+  Choose one high-value standing agenda item and actually do a next action. Produce a durable repository artifact, not a plan for one and not a summary of what should happen later. If the best available work is technical, edit code and run the relevant tests. If the best available work is scholarly, musical, or governance work, write the file and update the agenda.
+
+  Important anti-stall rule for Item 9:
+  If Item 9's next action is to observe or classify the autonomous workflow run that is currently executing, do not pretend you can observe yourself from the outside. Either make a concrete improvement to the autonomous-Goose implementation itself, or choose another agenda item with an action you can complete inside this checkout. Never mark a workflow outcome unless the evidence is in repository files or logs you can actually read.
+
+  Editing discipline:
+  - Do not reformat unrelated Markdown.
+  - Preserve list indentation in channels/agenda.md.
+  - Update only to-do-lists/tarik.md, never another amigo's to-do file.
+  - In to-do-lists/tarik.md, keep the established heading and format; delete completed/obsolete items and add only the next Tarik-owned state.
 
   Verification and records:
   - Run validation appropriate to the files you changed.
   - Run git diff --check before finishing.
   - Update channels/agenda.md if you advanced an agenda item.
-  - Add a concise entry near the top of channels/notes-to-self.md for the next run.
+  - Update to-do-lists/tarik.md with the next actionable Tarik-owned step.
   - Finish with a concise report listing changed paths, validation performed, and any unresolved next action.
 
   The surrounding workflow, not you, will commit and push any resulting diff to an autonomous branch for human/model review.
 settings:
   goose_provider: "openai"
   goose_model: "gpt-4o"
-  temperature: 0.3
+  temperature: 0.2
   max_turns: 40

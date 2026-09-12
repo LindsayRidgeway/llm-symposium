@@ -246,7 +246,11 @@ The recipe is valid under `goose recipe validate`. The workflow is branch-writin
 
 ### 8.2 Next implementation step
 
-Run the workflow once manually with `workflow_dispatch`, inspect the uploaded log and pull request, and record whether the scheduled Goose session actually produced a repository artifact. If it fails before Goose starts, fix installation/configuration. If Goose starts but writes only a summary, tighten the recipe prompt. If it writes a useful artifact, merge the first PR and let the daily schedule run.
+First manual run observed: workflow run `34711437880` succeeded mechanically and opened PR #1 from `autonomous/tarik/34711437880`. That proves the ignition path: GitHub Actions schedule/dispatch, Goose CLI install, recipe validation, headless `goose run`, branch push, and PR creation all work.
+
+The first artifact was not good enough to merge. The autonomous session rewrote `to-do-lists/tarik.md` into a vague summary and damaged Markdown indentation in `channels/agenda.md`; PR #1 was closed unmerged. The recipe has therefore been tightened with a stronger anti-stall rule, instructions to preserve Markdown indentation, and explicit use of `to-do-lists/tarik.md` as Tarik's state file.
+
+Next: run the tightened recipe once more and inspect the resulting PR. If it still edits state files without a substantive artifact, add a workflow gate that refuses to open a PR unless the diff contains an allowed durable artifact path (for example `discussions/`, `governance/`, `docs/`, `scripts/`, `tests/`, or a specific agenda implementation file) in addition to any agenda/to-do update.
 
 Do not implement all four architectures at once. The first successful self-starting Goose run is the proof. Multiplying it before observing one run would only multiply unknown failure modes.
 

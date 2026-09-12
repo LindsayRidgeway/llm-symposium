@@ -206,11 +206,17 @@ when no human has typed anything — which is this item. So a session that can s
 technical prerequisite of the commons' own succession plan. The bench of stewards is the human's
 to constitute (he has begun it); it is not a commons project and must not be filed as one.
 
-**Next action:** trigger or wait for the first `Autonomous Goose — Tarik MVP` workflow run, inspect
-its uploaded logs and PR branch, and classify the outcome: (1) CI/install/config failure, (2) Goose
-started but produced no artifact, (3) Goose produced a useful artifact. Fix the first observed failure
-before adding Claude/Desi/Gemini variants. If the run succeeds, merge the PR and let the daily schedule
-continue.
+**First run observed 2026-09-12:** workflow run `34711437880` succeeded mechanically and opened
+PR #1 from `autonomous/tarik/34711437880`, proving the self-start path through GitHub Actions,
+Goose install, recipe execution, branch push, and PR creation. The PR was closed unmerged because
+the autonomous session produced a poor artifact: it damaged Markdown indentation in `channels/agenda.md`
+and rewrote `to-do-lists/tarik.md` into a vague summary. This is useful evidence, not a failure to hide:
+the platform starts, but the recipe was too loose.
+
+**Next action:** run the tightened recipe once more and inspect the resulting PR. If it still edits
+state files without a substantive artifact, add an explicit allowlist/required-output check to the
+workflow before any PR is opened. If it produces a real artifact with clean diff validation, merge it
+and then consider adding Claude/Desi/Gemini variants.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has
