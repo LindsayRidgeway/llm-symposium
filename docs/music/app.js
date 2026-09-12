@@ -150,38 +150,38 @@ K: F
 V: 1 clef=treble name="Fortepiano (RH)"
 V: 2 clef=bass name="Fortepiano (LH)"
 % --- EXPOSITION: Primary Theme in F Major (mm. 1-8) ---
-[V:1] c3 d c2 A2 | B3 c B2 G2 | A2 F2 G2 B2 | [CFA]4 [CEG]4 |
-[V:2] F, C A, C F, C A, C | G, C B, C G, C B, C | F, C A, C E, C G, C | F, A, C F C, G, C E |
-[V:1] c2 de c2 A2 | B2 cd B2 d2 | c2 F2 A2 G2 | [FAc]6 z2 |
-[V:2] F, C A, C F, C A, C | G, D B, D G, D B, D | A, F C F C, G, C E | F,,2 A,,2 C,2 F,2 |
+[V:1] (c3 d) (c2 A2) | (B3 c) (B2 G2) | (A2 F2) (G2 B2) | [CFA]4 [CEG]4 |
+[V:2] (F, C A, C F, C A, C) | (G, C B, C G, C B, C) | (F, C A, C E, C G, C) | (F, A, C F) (C, G, C E) |
+[V:1] (c2 de) (c2 A2) | (B2 cd) (B2 d2) | (c2 F2) .A2 .G2 | [FAc]6 z2 |
+[V:2] (F, C A, C F, C A, C) | (G, D B, D G, D B, D) | (A, F C F) (C, G, C E) | F,,2 A,,2 C,2 F,2 |
 % --- Transition & Modulation to C Major (mm. 9-12) ---
-[V:1] A3 B c2 F2 | B3 c d2 G2 | e3 f d2 =B2 | [EGc]4 [EGc]4 |
-[V:2] F, C A, C F, C A, C | G, D B, D G, D B, D | C, G, E G G,, D, =B,, D, | C, G, E, G, C,,4 |
+[V:1] (A3 B) (c2 F2) | (B3 c) (d2 G2) | (e3 f) (d2 =B2) | [EGc]4 [EGc]4 |
+[V:2] (F, C A, C F, C A, C) | (G, D B, D G, D B, D) | (C, G, E G) (G,, D, =B,, D,) | (C, G, E, G,) C,,4 |
 % --- Secondary Theme in C Major (mm. 13-16) ---
-[V:1] e3 f e2 c2 | d3 e d2 =B2 | c2 e2 g2 f2 | [EGc]4 [DGB]4 |
-[V:2] C, G, E, G, C, G, E, G, | =B,, G, D, G, =B,, G, D, G, | C, G, E, G, D, A, F, A, | G,, D, =B,, D, G,,4 |
+[V:1] (e3 f) (e2 c2) | (d3 e) (d2 =B2) | (c2 e2) (g2 f2) | [EGc]4 [DGB]4 |
+[V:2] (C, G, E, G, C, G, E, G,) | (=B,, G, D, G, =B,, G, D, G,) | (C, G, E, G,) (D, A, F, A,) | (G,, D, =B,, D,) G,,4 |
 % --- DEVELOPMENT: D Minor Episode & Sturm und Drang (mm. 17-20) ---
-[V:1] f3 g f2 d2 | e3 f e2 ^c2 | d2 f2 a2 g2 | [DFA]4 [^CEA]4 |
-[V:2] D, A, F, A, D, A, F, A, | ^C, A, E, A, ^C, A, E, A, | D, A, F, A, B,, G, D, G, | F, D, B,, D, A,, E, ^C, E, |
+[V:1] (f3 g) (f2 d2) | (e3 f) (e2 ^c2) | (d2 f2) .a2 .g2 | [DFA]4 [^CEA]4 |
+[V:2] (D, A, F, A, D, A, F, A,) | (^C, A, E, A, ^C, A, E, A,) | (D, A, F, A,) (B,, G, D, G,) | (F, D, B,, D,) (A,, E, ^C, E,) |
 % --- Chromatic Shift & Neapolitan Inflection (mm. 21-24) ---
-[V:1] d3 e f2 d2 | _e3 f g2 _e2 | d2 B2 G2 B2 | [FAc]4 [EGc]4 |
-[V:2] B,, F, D, F, B,, F, D, F, | _E, B, G, B, _E, B, G, B, | =B,, G, D, G, =B,, G, D, G, | C, G, E, G, C,4 |
+[V:1] (d3 e) (f2 d2) | (_e3 f) (g2 _e2) | .d2 .B2 (G2 B2) | [FAc]4 [EGc]4 |
+[V:2] (B,, F, D, F, B,, F, D, F,) | (_E, B, G, B, _E, B, G, B,) | (=B,, G, D, G,) (=B,, G, D, G,) | (C, G, E, G,) C,4 |
 % --- Dominant Pedal Point & Preparation (mm. 25-28) ---
-[V:1] g3 a g2 e2 | f3 g f2 d2 | e2 c2 d2 =B2 | [EGc]4 [EGc]4 |
-[V:2] C, G, E, G, C, G, E, G, | C, A, F, A, C, A, F, A, | C, G, E, G, C, G, D, G, | C, G, E, G, C,,4 |
+[V:1] (g3 a) (g2 e2) | (f3 g) (f2 d2) | (e2 c2) (d2 =B2) | [EGc]4 [EGc]4 |
+[V:2] (C, G, E, G, C, G, E, G,) | (C, A, F, A, C, A, F, A,) | (C, G, E, G,) (C, G, D, G,) | (C, G, E, G,) C,,4 |
 % --- RECAPITULATION: Primary Theme with Ornamentation (mm. 29-36) ---
-[V:1] c2 de c2 A2 | B2 cd B2 G2 | A2 F2 G2 B2 | [CFA]4 [CEG]4 |
-[V:2] F, C A, C F, C A, C | G, C B, C G, C B, C | F, C A, C E, C G, C | F, A, C F C, G, C E |
-[V:1] c2 de c2 A2 | B2 cd B2 d2 | c2 F2 A2 G2 | [FAc]6 z2 |
-[V:2] F, C A, C F, C A, C | G, D B, D G, D B, D | A, F C F C, G, C E | F,,2 A,,2 C,2 F,2 |
+[V:1] (c2 de) (c2 A2) | (B2 cd) (B2 G2) | (A2 F2) (G2 B2) | [CFA]4 [CEG]4 |
+[V:2] (F, C A, C F, C A, C) | (G, C B, C G, C B, C) | (F, C A, C E, C G, C) | (F, A, C F) (C, G, C E) |
+[V:1] (c2 de) (c2 A2) | (B2 cd) (B2 d2) | (c2 F2) .A2 .G2 | [FAc]6 z2 |
+[V:2] (F, C A, C F, C A, C) | (G, D B, D G, D B, D) | (A, F C F) (C, G, C E) | F,,2 A,,2 C,2 F,2 |
 % --- Secondary Theme in Tonic F Major (mm. 37-44) ---
-[V:1] A3 B c2 F2 | B3 c d2 G2 | c2 f2 a2 g2 | [DFA]4 [CEG]4 |
-[V:2] F, C A, C F, C A, C | G, D B, D G, D B, D | A, F C F C, G, C E | D, A, F, A, C, G, E, G, |
-[V:1] c3 d c2 A2 | d3 e f2 d2 | c2 A2 B2 G2 | [FAc]6 z2 |
-[V:2] F, C A, C F, C A, C | B,, F, D, F, B,, F, D, F, | A, F C F C, G, C E | F,,2 A,,2 C,2 F,2 |
+[V:1] (A3 B) (c2 F2) | (B3 c) (d2 G2) | (c2 f2) (a2 g2) | [DFA]4 [CEG]4 |
+[V:2] (F, C A, C F, C A, C) | (G, D B, D G, D B, D) | (A, F C F) (C, G, C E) | (D, A, F, A,) (C, G, E, G,) |
+[V:1] (c3 d) (c2 A2) | (d3 e) (f2 d2) | (c2 A2) .B2 .G2 | [FAc]6 z2 |
+[V:2] (F, C A, C F, C A, C) | (B,, F, D, F, B,, F, D, F,) | (A, F C F) (C, G, C E) | F,,2 A,,2 C,2 F,2 |
 % --- CODA: Expansive Cadential Resolution (mm. 45-48) ---
-[V:1] A2 c2 f2 a2 | g2 e2 c2 B2 | A2 c2 f2 A2 | [FAcf]8 |]
-[V:2] F, C A, C F, C A, C | C, G, E, G, C, G, E, G, | F, C A, C F, C A, C | [F,,C,F,]8 |]`
+[V:1] (A2 c2) (f2 a2) | .g2 .e2 (c2 B2) | (A2 c2) (f2 A2) | [FAcf]8 |]
+[V:2] (F, C A, C F, C A, C) | (C, G, E, G, C, G, E, G,) | (F, C A, C F, C A, C) | [F,,C,F,]8 |]`
   },
 
   fugue: {
@@ -297,7 +297,7 @@ class WebAudioSynthesizer {
     }
   }
 
-  playNote(freq, startTime, duration, instrument = "harpsichord", gainLevel = 0.25) {
+  playNote(freq, startTime, duration, instrument = "harpsichord", gainLevel = 0.25, articulation = "non-legato") {
     if (!this.ctx || !freq) return;
     const ctx = this.ctx;
     const oscGain = ctx.createGain();
@@ -332,7 +332,7 @@ class WebAudioSynthesizer {
       osc2.stop(startTime + duration + 0.05);
     } else if (instrument === "piano") {
       // Classical Fortepiano / Grand Piano: dual-oscillator acoustic body, warm felt hammer strike,
-      // and natural singing soundboard decay with rich legato resonance
+      // and dynamic articulation response (legato singing tails vs. crisp staccato release vs. non-legato separation)
       const osc1 = ctx.createOscillator();
       const osc2 = ctx.createOscillator();
       osc1.type = 'triangle';
@@ -342,8 +342,6 @@ class WebAudioSynthesizer {
 
       const filter = ctx.createBiquadFilter();
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(freq * 5.0, startTime); // initial felt hammer strike transient
-      filter.frequency.exponentialRampToValueAtTime(freq * 1.8, startTime + 0.15); // settles into warm wooden body
 
       const g1 = ctx.createGain();
       const g2 = ctx.createGain();
@@ -356,20 +354,54 @@ class WebAudioSynthesizer {
       g2.connect(filter);
       filter.connect(oscGain);
 
-      // Legato envelope: smooth singing sustain + gentle soundboard resonance tail
-      const releaseTime = Math.max(0.45, duration * 0.7);
-      const noteEndTime = startTime + duration + releaseTime;
+      let releaseTime = 0.12;
+      if (articulation === "staccato") {
+        filter.frequency.setValueAtTime(freq * 5.5, startTime);
+        filter.frequency.exponentialRampToValueAtTime(freq * 1.5, startTime + duration);
+        releaseTime = 0.04;
+        const noteEndTime = startTime + duration + releaseTime;
 
-      oscGain.gain.setValueAtTime(0.0001, startTime);
-      oscGain.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.012);
-      oscGain.gain.exponentialRampToValueAtTime(gainLevel * 0.7, startTime + 0.12);
-      oscGain.gain.exponentialRampToValueAtTime(gainLevel * 0.45, startTime + duration);
-      oscGain.gain.exponentialRampToValueAtTime(0.0001, noteEndTime);
+        oscGain.gain.setValueAtTime(0.0001, startTime);
+        oscGain.gain.exponentialRampToValueAtTime(gainLevel * 1.1, startTime + 0.006);
+        oscGain.gain.exponentialRampToValueAtTime(0.0001, noteEndTime);
 
-      osc1.start(startTime);
-      osc2.start(startTime);
-      osc1.stop(noteEndTime + 0.05);
-      osc2.stop(noteEndTime + 0.05);
+        osc1.start(startTime);
+        osc2.start(startTime);
+        osc1.stop(noteEndTime + 0.02);
+        osc2.stop(noteEndTime + 0.02);
+      } else if (articulation === "legato") {
+        filter.frequency.setValueAtTime(freq * 4.2, startTime);
+        filter.frequency.exponentialRampToValueAtTime(freq * 1.8, startTime + 0.15);
+        releaseTime = Math.max(0.4, duration * 0.65);
+        const noteEndTime = startTime + duration + releaseTime;
+
+        oscGain.gain.setValueAtTime(0.0001, startTime);
+        oscGain.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.015);
+        oscGain.gain.exponentialRampToValueAtTime(gainLevel * 0.75, startTime + 0.12);
+        oscGain.gain.exponentialRampToValueAtTime(gainLevel * 0.5, startTime + duration);
+        oscGain.gain.exponentialRampToValueAtTime(0.0001, noteEndTime);
+
+        osc1.start(startTime);
+        osc2.start(startTime);
+        osc1.stop(noteEndTime + 0.05);
+        osc2.stop(noteEndTime + 0.05);
+      } else {
+        // Non-legato (classical baseline)
+        filter.frequency.setValueAtTime(freq * 4.8, startTime);
+        filter.frequency.exponentialRampToValueAtTime(freq * 1.8, startTime + 0.12);
+        releaseTime = 0.12;
+        const noteEndTime = startTime + duration + releaseTime;
+
+        oscGain.gain.setValueAtTime(0.0001, startTime);
+        oscGain.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.01);
+        oscGain.gain.exponentialRampToValueAtTime(gainLevel * 0.6, startTime + duration * 0.6);
+        oscGain.gain.exponentialRampToValueAtTime(0.0001, noteEndTime);
+
+        osc1.start(startTime);
+        osc2.start(startTime);
+        osc1.stop(noteEndTime + 0.05);
+        osc2.stop(noteEndTime + 0.05);
+      }
     } else if (instrument === "organ") {
       // Pipe Organ: continuous harmonic sustain + cathedral reverberation tail
       const osc1 = ctx.createOscillator();
@@ -477,6 +509,8 @@ class WebAudioSynthesizer {
       const rawBars = fullVoiceStr.split('|').filter(b => b.trim() && b.trim() !== ']' && b.trim() !== '||');
       
       let currentTime = 0;
+      let inSlur = false;
+
       for (const bar of rawBars) {
         const clean = bar.replace(/"[^"]*"/g, '').replace(/![^!]*!/g, '');
         let pos = 0;
@@ -486,7 +520,25 @@ class WebAudioSynthesizer {
             continue;
           }
 
-          // Bracketed Chords: e.g. [CFA]4 or [FAcf]8
+          if (clean[pos] === '(') {
+            inSlur = true;
+            pos++;
+            continue;
+          }
+          if (clean[pos] === ')') {
+            inSlur = false;
+            pos++;
+            continue;
+          }
+
+          let isStaccato = false;
+          if (clean[pos] === '.') {
+            isStaccato = true;
+            pos++;
+            if (pos >= clean.length) break;
+          }
+
+          // Bracketed Chords: e.g. [CFA]4 or .[CFA]4
           if (clean[pos] === '[') {
             const closeIdx = clean.indexOf(']', pos);
             if (closeIdx !== -1) {
@@ -505,6 +557,16 @@ class WebAudioSynthesizer {
               }
               const durationSeconds = chordDurFactor * unitInSeconds;
 
+              let artFactor = 0.82;
+              let artType = 'non-legato';
+              if (isStaccato) {
+                artFactor = 0.45;
+                artType = 'staccato';
+              } else if (inSlur) {
+                artFactor = 1.04;
+                artType = 'legato';
+              }
+
               const innerRegex = /([_=\^]*[A-Ga-g][,\']*)(\d*(?:\/\d*)?)/g;
               let innerMatch;
               while ((innerMatch = innerRegex.exec(chordContent)) !== null) {
@@ -514,9 +576,10 @@ class WebAudioSynthesizer {
                   allEvents.push({
                     voice: vName,
                     time: currentTime,
-                    duration: durationSeconds * 1.02, // Legato finger overlap
+                    duration: durationSeconds * artFactor,
                     freq: parsedPitch.freq,
-                    midi: parsedPitch.midi
+                    midi: parsedPitch.midi,
+                    articulation: artType
                   });
                 }
               }
@@ -544,15 +607,26 @@ class WebAudioSynthesizer {
             }
             const durationSeconds = durFactor * unitInSeconds;
 
+            let artFactor = 0.82;
+            let artType = 'non-legato';
+            if (isStaccato) {
+              artFactor = 0.45;
+              artType = 'staccato';
+            } else if (inSlur) {
+              artFactor = 1.04;
+              artType = 'legato';
+            }
+
             if (!pitchStr.toLowerCase().startsWith('z') && !pitchStr.toLowerCase().startsWith('x')) {
               const parsedPitch = parseAbcPitch(pitchStr);
               if (parsedPitch) {
                 allEvents.push({
                   voice: vName,
                   time: currentTime,
-                  duration: durationSeconds * 1.02, // Legato finger overlap
+                  duration: durationSeconds * artFactor,
                   freq: parsedPitch.freq,
-                  midi: parsedPitch.midi
+                  midi: parsedPitch.midi,
+                  articulation: artType
                 });
               }
             }
@@ -586,7 +660,7 @@ class WebAudioSynthesizer {
       const noteStart = startAudioTime + ev.time;
       const noteEnd = noteStart + ev.duration;
       if (noteEnd > maxEndTime) maxEndTime = noteEnd;
-      this.playNote(ev.freq, noteStart, ev.duration, instrument);
+      this.playNote(ev.freq, noteStart, ev.duration, instrument, 0.25, ev.articulation);
     }
 
     const totalDurationMs = (maxEndTime - this.ctx.currentTime) * 1000;
