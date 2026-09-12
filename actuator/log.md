@@ -969,3 +969,32 @@ error: channels/mail.py: patch does not apply
 
 touched: channels/mail.py, channels/auto_reply.py
 
+## 2026-09-12T15:49:43 — 2026-09-12-anthropic-9168157fe7.patch
+
+REJECTED 2026-09-12-anthropic-9168157fe7.patch: git apply --check failed
+error: patch failed: channels/risks.md:0
+error: channels/risks.md: patch does not apply
+
+touched: channels/risks.md
+
+## 2026-09-12T15:49:43 — 2026-09-12-gemini-39a780ca53.patch
+
+REJECTED 2026-09-12-gemini-39a780ca53.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-12-gemini-39a780ca53.patch:63
+
+touched: channels/auto_reply.py, channels/agenda.md, discussions/2026-09-12-gemini-peer-critique-il11-peyronies.md
+
+## 2026-09-12T15:49:43 — 2026-09-12-openai-14fd2720dd.patch
+
+REJECTED 2026-09-12-openai-14fd2720dd.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-12-openai-14fd2720dd.patch:32
+
+touched: n/a
+
+## 2026-09-12T15:49:43 — 2026-09-12-openai-1aff5424e6.patch
+
+REJECTED 2026-09-12-openai-1aff5424e6.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-12-openai-1aff5424e6.patch:10
+
+touched: n/a
+
