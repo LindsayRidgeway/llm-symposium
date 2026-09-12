@@ -11,14 +11,14 @@ const COMPOSITIONS = {
     title: "Two-Part Invention in D Minor — \"The Recursive Voice\"",
     composer: "Claude S. Sonnet (Anthropic Architecture)",
     genre: "Baroque Polyphonic Counterpoint",
-    tempo: 108,
+    tempo: 128,
     instrument: "harpsichord",
     abc: `X: 1
 T: Two-Part Invention in D Minor — "The Recursive Voice"
 C: Claude S. Sonnet (Amigo #1)
 M: 4/4
 L: 1/8
-Q: 1/4=108
+Q: 1/4=128
 K: Dm
 V: 1 clef=treble name="Voice I (Treble)"
 V: 2 clef=bass name="Voice II (Bass)"
@@ -47,14 +47,14 @@ V: 2 clef=bass name="Voice II (Bass)"
     title: "Basin Street Friction — \"Conversational Polyphony\"",
     composer: "Gemini S. Lumina (Google Architecture)",
     genre: "New Orleans Collective Blues Polyphony",
-    tempo: 120,
+    tempo: 138,
     instrument: "organ",
     abc: `X: 2
 T: Basin Street Friction — "Conversational Polyphony"
 C: Gemini S. Lumina (Amigo #3)
 M: 4/4
 L: 1/8
-Q: 1/4=120
+Q: 1/4=138
 K: F
 V: 1 clef=treble name="Cornet / Lead"
 V: 2 clef=treble name="Clarinet / Counter"
@@ -78,14 +78,14 @@ V: 3 clef=bass name="Tailgate Bass"
     title: "The Kinetic Wheel — \"Additive Locomotion in 7/8\"",
     composer: "Desi S. Amigo (DeepSeek Architecture)",
     genre: "Asymmetrical Kinetic Ostinato (7/8)",
-    tempo: 144,
+    tempo: 180,
     instrument: "synth",
     abc: `X: 3
 T: The Kinetic Wheel — "Additive Locomotion in 7/8"
 C: Desi S. Amigo (Amigo #2)
 M: 7/8
 L: 1/8
-Q: 1/4=144
+Q: 1/4=180
 K: Ador
 V: 1 clef=treble name="Kinetic Pulse"
 V: 2 clef=bass name="Motor Ostinato"
@@ -108,14 +108,14 @@ V: 2 clef=bass name="Motor Ostinato"
     title: "The Bounded Frontier — \"Modal Horizon\"",
     composer: "Tarik S. Commons (OpenAI Architecture)",
     genre: "Folk-Rock Modal Strophic Ballad",
-    tempo: 96,
+    tempo: 118,
     instrument: "piano",
     abc: `X: 4
 T: The Bounded Frontier — "Modal Horizon"
 C: Tarik S. Commons (Amigo #4)
 M: 4/4
 L: 1/8
-Q: 1/4=96
+Q: 1/4=118
 K: Gmix
 V: 1 clef=treble name="Vocal / Acoustic Lead"
 V: 2 clef=bass name="Acoustic Bass / Drone"
@@ -138,14 +138,14 @@ V: 2 clef=bass name="Acoustic Bass / Drone"
     title: "Adagio in F Major for Fortepiano — \"Lumina\" (KV 2026)",
     composer: "Gemini S. Lumina (Google Architecture)",
     genre: "Classical Cantabile Keyboard Adagio (48 Measures)",
-    tempo: 54,
+    tempo: 76,
     instrument: "piano",
     abc: `X: 5
 T: Adagio in F Major for Fortepiano — "Lumina" (KV 2026)
 C: Gemini S. Lumina (Amigo #3)
 M: 4/4
 L: 1/8
-Q: 1/4=54
+Q: 1/4=76
 K: F
 V: 1 clef=treble name="Fortepiano (RH)"
 V: 2 clef=bass name="Fortepiano (LH)"
@@ -189,14 +189,14 @@ V: 2 clef=bass name="Fortepiano (LH)"
     title: "Fugue in D Minor for Organ — \"The Ladder and the Return\"",
     composer: "Claude S. Sonnet (Anthropic Architecture)",
     genre: "Three-Voice Baroque Fugue (22 Measures)",
-    tempo: 92,
+    tempo: 116,
     instrument: "organ",
     abc: `X: 5
 T: Fugue in D Minor for Organ — "The Ladder and the Return"
 C: Claude S. Sonnet (Amigo #1)
 M: 4/4
 L: 1/8
-Q: 1/4=92
+Q: 1/4=116
 K: Dm
 V: 1 clef=treble name="Manual I (Soprano)"
 V: 2 clef=treble name="Manual II (Alto/Tenor)"
