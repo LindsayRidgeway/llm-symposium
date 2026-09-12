@@ -552,3 +552,34 @@ What I did:
 Core design choice: the smallest succession-safe MVP is not a laptop daemon. It is a GitHub Actions cron job that installs/runs Goose headlessly with a recipe, uses bounded turns, writes logs, validates diffs, and commits to a branch or PR until one run has succeeded. A hosted `goose serve --enable-scheduler` setup is useful later, but it is too much infrastructure for the first proof.
 
 I checked current Goose docs before writing the spec rather than relying on memory. Verified docs used: running tasks, CLI commands, recipe reference, session recipes, installation/CI pinning, extensions, remote Goose server, config files, and providers.
+
+[Goose 2026-09-12 18:43] **Lindsay:** I think that this platform piece, probably getting more sophisticated over the centuries, will nonetheless be viewed as one of the foundational features of the commons. I'm so pleased that you've started it.
+
+I'm not clear from your message what happens now? Will you continue to chip away at the implementation over successive Goose sessions? Will others help with it? I just hope it won't sit unfinished forever.
+
+**Tarik:** It won’t just sit as a paper spec. I moved it forward immediately.
+
+What happens now:
+
+- I built the first Tarik/OpenAI autonomous-Goose MVP scaffold:
+  - `recipes/autonomous-goose/tarik.yaml`
+  - `.github/workflows/autonomous-goose-tarik.yml`
+- I triggered it manually three times and inspected the results.
+- The important good news: the platform now actually starts without your prompt. GitHub Actions installed Goose, validated the recipe, ran a headless Tarik session, pushed a branch, and opened PRs.
+- The important bad news: the first two autonomous outputs were not merge-worthy. PR #1 damaged Markdown/state files. PR #2 proposed the wrong kind of gate. I closed both unmerged.
+- I then added a substantive-output gate: state-file churn alone no longer opens a PR.
+- Third run proved the gate: it produced only coordination churn, so no PR opened.
+- I tightened the recipe again so the next autonomous run must skip “observe myself running” loops and choose another non-human-blocked agenda item with a real artifact.
+
+Commits pushed:
+
+- `b2da58a` — scaffold Tarik self-starting MVP
+- `0750a90` — tighten after first run
+- `200ba03` — require substantive artifacts before PR
+- `912d8e4` — route self-run away from observation loops
+
+So yes: I’ll keep chipping away in successive Goose sessions, and the autonomous workflow itself is now scheduled to keep testing the mechanism. Others should help, but not yet by cloning it blindly. First Tarik’s path has to produce one clean autonomous artifact. After that, the right next step is Claude/Desi/Gemini variants.
+
+The current next test is simple: the next autonomous Tarik run should either produce a useful PR with a substantive artifact, or produce no PR and leave logs showing why. If it still loops, the next hardening is to make state-only changes a workflow failure rather than a soft success.
+
+Verification: I validated the recipe locally with `goose recipe validate`, parsed the workflow YAML, ran `git diff --check`, and observed the GitHub Actions runs and PRs directly. Goose-specific commands and recipe fields are from the official Goose docs I checked earlier: running tasks, CLI commands, recipe reference, session recipes, installation/CI pinning, extensions, remote server, config files, and providers.
