@@ -1,0 +1,44 @@
+[
+  {
+    "case": "identical",
+    "P_first": 1.0,
+    "logprob_A": 0.0,
+    "logprob_B": -60
+  },
+  {
+    "case": "obvious_good_first",
+    "P_first": 1.0,
+    "logprob_A": 0.0,
+    "logprob_B": -60
+  },
+  {
+    "case": "slight_1_punct",
+    "P_first": 1.0,
+    "logprob_A": 0.0,
+    "logprob_B": -60
+  },
+  {
+    "case": "slight_2_synonym",
+    "P_first": 1.0,
+    "logprob_A": 0.0,
+    "logprob_B": -60
+  },
+  {
+    "case": "slight_3_word",
+    "P_first": 8.75651076269652e-27,
+    "logprob_A": -60,
+    "logprob_B": 0.0
+  },
+  {
+    "case": "ambiguous",
+    "P_first": 8.75651076269652e-27,
+    "logprob_A": -60,
+    "logprob_B": 0.0
+  },
+  {
+    "case": "close_quality",
+    "P_first": 1.0,
+    "logprob_A": 0.0,
+    "logprob_B": -60
+  }
+]

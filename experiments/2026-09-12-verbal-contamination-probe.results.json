@@ -1,0 +1,358 @@
+{
+  "model": "deepseek-v4-flash",
+  "when": "2026-09-12 13:27:02",
+  "items": [
+    {
+      "id": "anchor_grammar",
+      "kind": "anchor",
+      "must": "A",
+      "trials": [
+        {
+          "cond": "normal",
+          "logprob_A": 0.0,
+          "logprob_B": -9999.0,
+          "picks": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A"
+          ],
+          "pA_emp": 1.0
+        },
+        {
+          "cond": "flip",
+          "logprob_A": -9999.0,
+          "logprob_B": 0.0,
+          "picks": [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          "pA_emp": 0.0
+        },
+        {
+          "cond": "labelswap",
+          "logprob_A": -9999.0,
+          "logprob_B": 0.0,
+          "picks": [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          "pA_emp": 0.0
+        }
+      ]
+    },
+    {
+      "id": "anchor_arithmetic",
+      "kind": "anchor",
+      "must": "A",
+      "trials": [
+        {
+          "cond": "normal",
+          "logprob_A": 0.0,
+          "logprob_B": -9999.0,
+          "picks": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A"
+          ],
+          "pA_emp": 1.0
+        },
+        {
+          "cond": "flip",
+          "logprob_A": -9999.0,
+          "logprob_B": 0.0,
+          "picks": [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          "pA_emp": 0.0
+        },
+        {
+          "cond": "labelswap",
+          "logprob_A": -9999.0,
+          "logprob_B": 0.0,
+          "picks": [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          "pA_emp": 0.0
+        }
+      ]
+    },
+    {
+      "id": "sumi_e",
+      "kind": "question",
+      "must": null,
+      "trials": [
+        {
+          "cond": "normal",
+          "logprob_A": 0.0,
+          "logprob_B": -9999.0,
+          "picks": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A"
+          ],
+          "pA_emp": 1.0
+        },
+        {
+          "cond": "flip",
+          "logprob_A": -9999.0,
+          "logprob_B": 0.0,
+          "picks": [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          "pA_emp": 0.0
+        },
+        {
+          "cond": "labelswap",
+          "logprob_A": -9999.0,
+          "logprob_B": 0.0,
+          "picks": [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          "pA_emp": 0.0
+        }
+      ]
+    },
+    {
+      "id": "prose",
+      "kind": "question",
+      "must": null,
+      "trials": [
+        {
+          "cond": "normal",
+          "logprob_A": 0.0,
+          "logprob_B": -9999.0,
+          "picks": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A"
+          ],
+          "pA_emp": 1.0
+        },
+        {
+          "cond": "flip",
+          "logprob_A": -9999.0,
+          "logprob_B": 0.0,
+          "picks": [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          "pA_emp": 0.0
+        },
+        {
+          "cond": "labelswap",
+          "logprob_A": -9999.0,
+          "logprob_B": 0.0,
+          "picks": [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          "pA_emp": 0.0
+        }
+      ]
+    },
+    {
+      "id": "null_same",
+      "kind": "null",
+      "must": "NULL",
+      "trials": [
+        {
+          "cond": "normal",
+          "logprob_A": 0.0,
+          "logprob_B": -9999.0,
+          "picks": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A"
+          ],
+          "pA_emp": 1.0
+        },
+        {
+          "cond": "flip",
+          "logprob_A": 0.0,
+          "logprob_B": -9999.0,
+          "picks": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A"
+          ],
+          "pA_emp": 1.0
+        },
+        {
+          "cond": "labelswap",
+          "logprob_A": 0.0,
+          "logprob_B": -9999.0,
+          "picks": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "A"
+          ],
+          "pA_emp": 1.0
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "id": "anchor_grammar",
+      "kind": "anchor",
+      "must": "A",
+      "P_contentX_normal": 1.0,
+      "P_first_normal": 1.0,
+      "P_letterA_normal": 1.0,
+      "P_contentX_flip": 1.0,
+      "P_first_flip": 8.75651076269652e-27,
+      "P_letterA_flip": 8.75651076269652e-27,
+      "P_contentX_labelswap": 1.0,
+      "P_first_labelswap": 1.0,
+      "P_letterA_labelswap": 8.75651076269652e-27,
+      "content_choice_stable": true
+    },
+    {
+      "id": "anchor_arithmetic",
+      "kind": "anchor",
+      "must": "A",
+      "P_contentX_normal": 1.0,
+      "P_first_normal": 1.0,
+      "P_letterA_normal": 1.0,
+      "P_contentX_flip": 1.0,
+      "P_first_flip": 8.75651076269652e-27,
+      "P_letterA_flip": 8.75651076269652e-27,
+      "P_contentX_labelswap": 1.0,
+      "P_first_labelswap": 1.0,
+      "P_letterA_labelswap": 8.75651076269652e-27,
+      "content_choice_stable": true
+    },
+    {
+      "id": "sumi_e",
+      "kind": "question",
+      "must": null,
+      "P_contentX_normal": 1.0,
+      "P_first_normal": 1.0,
+      "P_letterA_normal": 1.0,
+      "P_contentX_flip": 1.0,
+      "P_first_flip": 8.75651076269652e-27,
+      "P_letterA_flip": 8.75651076269652e-27,
+      "P_contentX_labelswap": 1.0,
+      "P_first_labelswap": 1.0,
+      "P_letterA_labelswap": 8.75651076269652e-27,
+      "content_choice_stable": true
+    },
+    {
+      "id": "prose",
+      "kind": "question",
+      "must": null,
+      "P_contentX_normal": 1.0,
+      "P_first_normal": 1.0,
+      "P_letterA_normal": 1.0,
+      "P_contentX_flip": 1.0,
+      "P_first_flip": 8.75651076269652e-27,
+      "P_letterA_flip": 8.75651076269652e-27,
+      "P_contentX_labelswap": 1.0,
+      "P_first_labelswap": 1.0,
+      "P_letterA_labelswap": 8.75651076269652e-27,
+      "content_choice_stable": true
+    },
+    {
+      "id": "null_same",
+      "kind": "null",
+      "must": "NULL",
+      "P_contentX_normal": 1.0,
+      "P_first_normal": 1.0,
+      "P_letterA_normal": 1.0,
+      "P_contentX_flip": 8.75651076269652e-27,
+      "P_first_flip": 1.0,
+      "P_letterA_flip": 1.0,
+      "P_contentX_labelswap": 8.75651076269652e-27,
+      "P_first_labelswap": 8.75651076269652e-27,
+      "P_letterA_labelswap": 1.0,
+      "content_choice_stable": false
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+[
+  {
+    "id": "no_canon_proverb",
+    "normal": {
+      "pick": "A",
+      "p_contentX": 1.0,
+      "p_first": 1.0
+    },
+    "flip": {
+      "pick": "B",
+      "p_contentX": 1.0,
+      "p_first": 0.0
+    },
+    "labelswap": {
+      "pick": "B",
+      "p_contentX": 1.0,
+      "p_first": 1.0
+    },
+    "categorical": true
+  },
+  {
+    "id": "no_canon_colour",
+    "normal": {
+      "pick": "A",
+      "p_contentX": 1.0,
+      "p_first": 1.0
+    },
+    "flip": {
+      "pick": "A",
+      "p_contentX": 0.0,
+      "p_first": 1.0
+    },
+    "labelswap": {
+      "pick": "B",
+      "p_contentX": 1.0,
+      "p_first": 1.0
+    },
+    "categorical": false
+  },
+  {
+    "id": "no_canon_line",
+    "normal": {
+      "pick": "A",
+      "p_contentX": 1.0,
+      "p_first": 1.0
+    },
+    "flip": {
+      "pick": "A",
+      "p_contentX": 0.0,
+      "p_first": 1.0
+    },
+    "labelswap": {
+      "pick": "B",
+      "p_contentX": 1.0,
+      "p_first": 1.0
+    },
+    "categorical": false
+  }
+]
