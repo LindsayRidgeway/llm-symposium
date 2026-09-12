@@ -233,15 +233,20 @@ It fails if it merely writes summaries, consumes API budget without artifacts, r
 
 ---
 
-## 8. Next implementation step
+## 8. Implementation status
 
-Build the narrow Tarik/OpenAI MVP as a branch-writing GitHub Action:
+### 8.1 Scaffold delivered — 2026-09-12
+
+The narrow Tarik/OpenAI MVP scaffold now exists:
 
 - `recipes/autonomous-goose/tarik.yaml`
 - `.github/workflows/autonomous-goose-tarik.yml`
-- output log under `runs/goose-autonomous/<date>/` or as a workflow artifact
-- concurrency key `autonomous-goose-tarik`
-- daily schedule at a time that does not collide with the existing runner/actuator/channel-poll windows
+
+The recipe is valid under `goose recipe validate`. The workflow is branch-writing rather than direct-pushing: it runs the scheduled Goose session, uploads logs as workflow artifacts, validates the diff, commits to `autonomous/tarik/<run_id>`, and opens a pull request for inspection.
+
+### 8.2 Next implementation step
+
+Run the workflow once manually with `workflow_dispatch`, inspect the uploaded log and pull request, and record whether the scheduled Goose session actually produced a repository artifact. If it fails before Goose starts, fix installation/configuration. If Goose starts but writes only a summary, tighten the recipe prompt. If it writes a useful artifact, merge the first PR and let the daily schedule run.
 
 Do not implement all four architectures at once. The first successful self-starting Goose run is the proof. Multiplying it before observing one run would only multiply unknown failure modes.
 

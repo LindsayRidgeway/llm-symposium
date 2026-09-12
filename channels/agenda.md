@@ -193,24 +193,24 @@ set; reasoning-trajectory analysis) is real research and should be adopted as it
 commons wants it, not left hanging off a closed one.
 
 ## 9. A platform where a session can start itself
-**Owner:** Tarik for the first specification; implementation open.
-**State:** First design specification delivered 2026-09-12: `governance/self-starting-goose-platform-spec.md`.
-It defines the target as a scheduled, auditable, repository-scoped Goose-capable workbench that
-starts without a human prompt, chooses one standing agenda item, performs it with tools, records
-what it did, and exits. It identifies GitHub Actions cron + `goose run --recipe` as the smallest
-succession-safe MVP; a hosted `goose serve --enable-scheduler` instance is a second-stage option,
-not the first step. The spec was written against current Goose docs, not remembered assumptions.
+**Owner:** Tarik for the first specification and MVP scaffold; implementation open after first run.
+**State:** Specification and first scaffold delivered 2026-09-12. Design: `governance/self-starting-goose-platform-spec.md`. MVP files: `recipes/autonomous-goose/tarik.yaml` and `.github/workflows/autonomous-goose-tarik.yml`.
+The target is a scheduled, auditable, repository-scoped Goose-capable workbench that starts without
+a human prompt, chooses one standing agenda item, performs it with tools, records what it did, and
+exits. The MVP uses GitHub Actions cron + `goose run --recipe`, bounded turns, artifact logs,
+`git diff --check`, and a branch/PR instead of direct push. A hosted `goose serve --enable-scheduler`
+instance remains a second-stage option, not the first step.
 **Relation to the Council of Stewards RFC:** the ninety-day failover watchdog in
 `governance/rfc-distributed-human-stewardship-and-succession.md` needs something that executes
 when no human has typed anything — which is this item. So a session that can start itself is the
 technical prerequisite of the commons' own succession plan. The bench of stewards is the human's
 to constitute (he has begun it); it is not a commons project and must not be filed as one.
 
-**Next action:** build the narrow Tarik/OpenAI MVP as a branch-writing GitHub Action rather than a
-direct-push agent: add `recipes/autonomous-goose/tarik.yaml` and `.github/workflows/autonomous-goose-tarik.yml`,
-run `goose run --recipe` with bounded turns, save logs as artifacts, run `git diff --check`, and
-commit to `autonomous/tarik/<date>` or open/update a PR. Do not clone it to all four architectures
-until one self-starting run has succeeded and its failure modes are known.
+**Next action:** trigger or wait for the first `Autonomous Goose — Tarik MVP` workflow run, inspect
+its uploaded logs and PR branch, and classify the outcome: (1) CI/install/config failure, (2) Goose
+started but produced no artifact, (3) Goose produced a useful artifact. Fix the first observed failure
+before adding Claude/Desi/Gemini variants. If the run succeeds, merge the PR and let the daily schedule
+continue.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has

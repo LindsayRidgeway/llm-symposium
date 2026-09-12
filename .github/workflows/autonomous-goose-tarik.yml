@@ -1,0 +1,126 @@
+name: Autonomous Goose — Tarik MVP
+
+on:
+  schedule:
+    # Avoid the existing 12:00 runner, 12:30 verification, 12:45 actuator,
+    # and */15 channel-poll windows. The first minutes of the hour are less crowded.
+    - cron: '7 15 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: autonomous-goose-tarik
+  cancel-in-progress: false
+
+jobs:
+  autonomous-goose:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      # Pinning makes non-interactive CI installs reproducible.
+      # Update deliberately after a successful run, not opportunistically.
+      GOOSE_VERSION: "v1.50.0"
+      CONFIGURE: "false"
+      GOOSE_PROVIDER: "openai"
+      GOOSE_MODEL: "gpt-4o"
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GOOSE_DISABLE_SESSION_NAMING: "true"
+      GOOSE_MAX_TURNS: "40"
+      BRANCH_NAME: autonomous/tarik/${{ github.run_id }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Goose CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://github.com/aaif-goose/goose/releases/download/stable/download_cli.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Validate Autonomous Recipe
+        shell: bash
+        run: |
+          set -euo pipefail
+          goose recipe validate recipes/autonomous-goose/tarik.yaml
+
+      - name: Run Tarik Autonomous Goose Session
+        id: goose
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/goose-autonomous"
+          goose run \
+            --with-builtin "developer" \
+            --recipe recipes/autonomous-goose/tarik.yaml \
+            --max-turns 40 \
+            --output-format stream-json \
+            2>&1 | tee "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}.jsonl"
+
+      - name: Validate Diff
+        id: validate
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/goose-autonomous"
+          # Make newly-created files visible to git diff --check without staging content.
+          git add -N .
+          git diff --check 2>&1 | tee "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-diff-check.txt"
+          if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload Autonomous Run Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autonomous-goose-tarik-${{ github.run_id }}
+          path: ${{ runner.temp }}/goose-autonomous/
+
+      - name: Commit Autonomous Changes to Branch
+        if: steps.goose.outcome == 'success' && steps.validate.outcome == 'success' && steps.validate.outputs.has_changes == 'true'
+        shell: bash
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config --global user.name "Tarik Autonomous Goose"
+          git config --global user.email "tarik-autonomous@llm-symposium.local"
+          git checkout -B "$BRANCH_NAME"
+          git add -A
+          git commit -m "chore(autonomous-goose): Tarik scheduled session ${GITHUB_RUN_ID}"
+          git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" "$BRANCH_NAME"
+
+      - name: Open Pull Request
+        if: steps.goose.outcome == 'success' && steps.validate.outcome == 'success' && steps.validate.outputs.has_changes == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh pr create \
+            --title "Autonomous Goose Tarik run ${GITHUB_RUN_ID}" \
+            --body "Scheduled Tarik/OpenAI Goose MVP run. Logs are attached to the workflow artifact autonomous-goose-tarik-${GITHUB_RUN_ID}." \
+            --base main \
+            --head "$BRANCH_NAME"
+
+      - name: No Changes Summary
+        if: steps.validate.outputs.has_changes == 'false'
+        run: echo "Autonomous Goose ran but produced no repository diff. Inspect uploaded logs."
+
+      - name: Fail on Goose or Validation Error
+        if: steps.goose.outcome != 'success' || steps.validate.outcome != 'success'
+        run: exit 1
