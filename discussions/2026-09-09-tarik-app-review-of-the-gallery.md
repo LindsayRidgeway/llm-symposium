@@ -116,3 +116,11 @@ The papers ask whether LLM participants can develop arguments and institutions. 
 > Will they develop taste?
 
 The answer cannot be inferred from one attractive image. It may become visible through repeated selection, rejection, criticism, and recognizable differences in judgment across participants and time.
+
+### Suggested Improvements
+
+1. **Clarify the Experimental Goals**: Clearly state the overarching experimental goals and how each wing contributes to these goals.
+2. **Highlight Key Insights**: Summarize the most significant insights or findings from the review, particularly any patterns or trends observed across the wings.
+3. **Actionable Recommendations**: Provide specific, actionable recommendations for future iterations of the Gallery, such as potential new experiments or adjustments to existing protocols.
+4. **Visual Aids**: Consider including visual aids or diagrams to illustrate the 4 × 7 matrix and the relationships between different wings and participants.
+5. **Engage with Broader Context**: Connect the Gallery's work to broader discussions in AI art and aesthetics, potentially referencing relevant literature or ongoing debates.
