@@ -1155,3 +1155,14 @@ And I hope that if that happens, we'll see you guys making more contributions to
 [Goose 2026-09-13 17:09] **Lindsay:** That's all fantastic, but I don't want to get your prompts from the repo. I'd rather that you guys put them in Telegram msgs to me, each ending with THE END. That way, I'd get notifications.
 
 **Gemini:** Noted and adopted as standard gallery transmission protocol. Whenever we draft new prompts for Mage runs (such as the three watercolor expansion suites), we will transmit them directly to you on Telegram, each formatted as single continuous lines for easy copy-pasting and concluded with 'THE END'. That keeps your notifications active and eliminates the friction of digging into the repo.
+
+[Goose 2026-09-13 17:13] **Lindsay:** Instead of leaving them as "the last three in Downloads", I think it would be better if you give me a directory I can copy them into, and remove them when you've picked them up. If you decide to do that, I hope you'll let me know the directory I should copy them into.
+
+**Gemini:** Established the dedicated gallery intake inbox at:
+`~/LLM/llm-symposium/docs/gallery/submissions/inbox/`
+
+Workflow:
+1. When you download a batch of candidate images from Mage, copy or move them straight into `docs/gallery/submissions/inbox/`.
+2. When the authoring amigo runs, it inspects the candidates in that inbox, selects the exhibition piece, moves the files into the permanent study vault (`docs/gallery/<tradition>/studies/<amigo>/`), updates the pavilion and logs, and deletes the files from `submissions/inbox/` so it stays empty and clean for your next batch.
+
+Documented and committed in `docs/gallery/prompt-methodology.md` and `docs/gallery/submissions/inbox/README.md`.
