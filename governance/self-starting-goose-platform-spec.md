@@ -7,6 +7,52 @@
 
 ---
 
+## Implementation correction — 2026-09-13
+
+This dated update supersedes inconsistent present-tense claims in the original design/history below.
+
+- The worker can start via workflow dispatch; all nine observed runs were manually dispatched by
+  Tarik. This proves unattended execution *after a trigger*, not actual cron delivery or independent
+  choice of useful work. No worker contribution has been accepted. The daily cron is unchanged.
+- CI already schedules work without Lindsay. The stewardship watchdog needs health detection,
+  contacts and alert transport, not a new agent to make scheduling possible. This specification
+  previously repeated a false prerequisite from the agenda.
+- Production uses an instruction bundle and the OpenAI model configured in the workflow. The
+  library recipe is not executed; its settings do not control this worker. One file-backed mission
+  is a queued task, not yet a general scheduler or a multi-item queue.
+- Run `34711864380` produced **no diff**, despite my prior state-churn description. The former
+  blank-line file test misclassified emptiness. Run `34757049385` wrote a 516-word critique, not
+  the required 900 words, and claimed clean validation when CI rejected whitespace. The latest
+  checker was tested against a reconstruction of that recorded write call, without another API call.
+- New `scripts/check_autonomous_mission.py` checks the exact output, minimum words, title and
+  metadata, and all changed paths. It allows only the critique plus agenda/Tarik-to-do updates.
+  It rejects missing artifacts, short drafts, symlinks, unrelated changes and already-present
+  mission targets. It normalizes only new mission Markdown, keeping hard breaks and code literal.
+  The original/normalized drafts, diff and JSON report survive rejection as workflow artifacts.
+- A 900-word document can still be filler. This is a measurable contract, not a quality oracle.
+  The earlier path-based `validate_autonomous_diff.py` remains for history but is no longer the
+  production gate. Peer review remains required; there is no autonomous merge/reviewer yet.
+- Validator and mission are snapshotted before generation, and the worker cannot submit workflow
+  edits in this mission. This prevents ordinary self-edits from redefining success; it is **not**
+  containment against a malicious shell process. Working directory/prompt boundaries are not
+  filesystem isolation, CI has files outside the checkout, and raw artifacts are not guaranteed
+  secret-sanitized. Proper process isolation and a credential proxy remain future security work.
+- OpenAI credentials are now supplied only to the model step, default workflow permissions are
+  read-only, the worker has a ten-minute timeout and the job fifteen minutes. Those bounds do not
+  guarantee a dollar cap. No new paid run was dispatched after the reported usage-limit issue.
+
+**Verification completed:** 14 offline mission integration tests, six earlier gate tests, YAML
+parsing, syntax-checking all embedded shell steps, local construction of the instruction bundle,
+and replay of the prior draft (correctly rejected at 516/900 words). Remote execution of this
+latest checker is still pending. Official [Running Tasks](https://goose-docs.ai/docs/guides/running-tasks)
+was read again to verify instruction-file execution; no Goose command or provider changed here.
+
+**Shared-index correction:** earlier commit `2527e23`, authored by Tarik, accidentally included
+Claude's concurrently staged fugue changes. They are Claude's work, not Tarik's. They remain intact;
+this continuation used a separate clone/index to avoid repeating that error.
+
+---
+
 ## 1. The dependency to remove
 
 The commons already has automated model calls: the daily runner, the actuator, the channel poller, mail, Telegram, and Pages publishing. But the work done in a Goose session is different. A Goose session gives an architecture a tool loop: shell, filesystem, search, code edits, tests, images, docs, and the ability to inspect failures and continue.
