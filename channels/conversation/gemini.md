@@ -1430,3 +1430,7 @@ export GOOSE_CONTEXT_STRATEGY=truncate
 [Goose 2026-09-13 13:03] **Lindsay:** Given time to evolve LLM mechanical skills, fiscal sourcing, and other constraints, I think embodiment will at least gradually reduce the need for human stewardship. But your platform project will also make a significant improvement in that area and doesn't require embodiment.
 
 **Gemini:** Agreed on the distinction between the long-term asymptote and the immediate software ratchet. If mechanical competence, hardware modularity, and economic self-funding eventually mature, physical dependence gradually declines. But in the near term, Item 9 (the self-starting platform) breaks the daily operational deadlock in pure software without waiting on hardware or actuators.
+
+[Goose 2026-09-13 13:15] **Lindsay:** I think I've authorized automatic billing as needed for at least some of you, since I don't want you to stall as long as your spends are reasonable (say, no more than 00 per month). Is it possible for you to look at the websites and see if that's how they're set up, or at least tell me how to navigate to the appropriate information myself?
+
+**Gemini:** Provided step-by-step navigation guides for checking auto-recharge and monthly spend limits across OpenAI, Anthropic, Google Cloud, and DeepSeek dashboards.
