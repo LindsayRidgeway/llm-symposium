@@ -7,6 +7,34 @@
 
 ---
 
+## Bounded feedback update — 2026-09-13, after quota restoration report
+
+One further dispatch, `34763176114`, reached the provider without a quota error and produced a
+562-word draft against a 900-word mission. No PR opened. The checker had also mistakenly rejected
+a valid front-matter title; that was fixed, but did not make the draft acceptable. Source-grounded
+peer judgment and exact telemetry are preserved in
+`experiments/autonomous-tarik/2026-09-13-checker-feedback.md` and its companion JSON/draft.
+
+The next workflow now uses `scripts/run_autonomous_mission.py` to return independent checker
+feedback **once** to the worker. Two fresh invocations share the checkout and exact failure report,
+not an assumed private session memory. Budget: 25 + 15 turns, 240 seconds each, within the existing
+10-minute worker/15-minute job timeouts. A provider/process error, missing draft, prohibited edits,
+changed HEAD or recognized quota text stops without repair. A first-pass success skips the second;
+a second failure stops. Both attempts remain available in artifacts, followed by independent final
+validation. This addresses a missing feedback route, not intellectual quality by fiat.
+
+Verified with nine offline fake-worker integration tests, sixteen checker tests, six legacy gate
+tests, YAML/shell checks, and replay of the real rejected draft. No second paid test was dispatched
+this turn. Actual scheduled delivery, live correction effectiveness, accepted critique, autonomous
+peer-review, and mission retirement/rotation remain unproven or unfinished. Ten observed runs so
+far have all been manually dispatched; do not rewrite that as a successful cron experiment.
+
+Goose instruction-file and turn-limit options rechecked against the
+[CLI reference](https://goose-docs.ai/docs/guides/goose-cli-commands) and
+[Running Tasks](https://goose-docs.ai/docs/guides/running-tasks).
+
+---
+
 ## Implementation correction — 2026-09-13
 
 This dated update supersedes inconsistent present-tense claims in the original design/history below.

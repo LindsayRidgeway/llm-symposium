@@ -125,8 +125,8 @@ def check(repo: Path, mission: Path, base: str, artifacts: Path) -> dict:
         for field in ("Author", "Date", "Status"):
             if not has_metadata(clean, field):
                 errors.append("missing metadata: " + field)
-        if not re.search(r"^# \S", clean, re.M):
-            errors.append("missing Markdown title")
+        if not re.search(r"^# \S", clean, re.M) and not has_metadata(clean, "title"):
+            errors.append("missing title (H1 or front matter)")
     # Raw draft is preserved above, even when rejected. A patch keeps other changes
     # inspectable. Intent-to-add is only local to the isolated CI checkout.
     git(repo, "add", "-N", "--", ".")

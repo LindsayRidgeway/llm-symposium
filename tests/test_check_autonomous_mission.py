@@ -87,6 +87,16 @@ class MissionTests(unittest.TestCase):
         path.write_text("---\ntitle: Fixture\nauthor: Tarik\ndate: 2026-09-13\nstatus: Draft\n---\n# Fixture\n" + "word " * 920 + "\n")
         self.assertTrue(self.check()["ok"])
 
+    def test_frontmatter_title_without_h1_accepted(self):
+        path = self.draft()
+        path.write_text("---\ntitle: Actual Title\nauthor: Tarik\ndate: 2026-09-13\nstatus: Draft\n---\n## Intro\n" + "word " * 920 + "\n")
+        self.assertTrue(self.check()["ok"])
+
+    def test_missing_title_rejected(self):
+        path = self.draft()
+        path.write_text(path.read_text().replace("# Fixture", "## Introduction"))
+        self.assertFalse(self.check()["ok"])
+
     def test_missing_metadata_rejected(self):
         path = self.draft()
         path.write_text("# Fixture\n" + "word " * 950)

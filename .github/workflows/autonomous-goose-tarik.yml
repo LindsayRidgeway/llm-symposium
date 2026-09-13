@@ -59,9 +59,11 @@ jobs:
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/goose-control" "$RUNNER_TEMP/goose-autonomous"
           cp scripts/check_autonomous_mission.py "$RUNNER_TEMP/goose-control/check.py"
+          cp scripts/run_autonomous_mission.py "$RUNNER_TEMP/goose-control/run.py"
           cp recipes/autonomous-goose/tarik-mission.md "$RUNNER_TEMP/goose-control/mission.md"
           git rev-parse HEAD > "$RUNNER_TEMP/goose-control/base.txt"
           python3 tests/test_check_autonomous_mission.py
+          python3 tests/test_run_autonomous_mission.py
 
       - name: Build Autonomous Instruction Bundle
         shell: bash
@@ -127,14 +129,13 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         continue-on-error: true
         run: |
-          set -o pipefail
-          mkdir -p "$RUNNER_TEMP/goose-autonomous"
-          goose run \
-            --with-builtin "developer" \
+          set -euo pipefail
+          python3 "$RUNNER_TEMP/goose-control/run.py" \
             --instructions "$RUNNER_TEMP/tarik-instructions.md" \
-            --max-turns 40 \
-            --output-format stream-json \
-            2>&1 | tee "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}.jsonl"
+            --mission "$RUNNER_TEMP/goose-control/mission.md" \
+            --checker "$RUNNER_TEMP/goose-control/check.py" \
+            --base "$(cat "$RUNNER_TEMP/goose-control/base.txt")" \
+            --artifacts "$RUNNER_TEMP/goose-autonomous"
 
       - name: Validate Mission Output
         id: validate
@@ -148,7 +149,7 @@ jobs:
           python3 "$RUNNER_TEMP/goose-control/check.py" \
             --mission "$RUNNER_TEMP/goose-control/mission.md" \
             --base "$base" \
-            --artifacts "$RUNNER_TEMP/goose-autonomous"
+            --artifacts "$RUNNER_TEMP/goose-autonomous/final"
 
       - name: Upload Autonomous Run Logs
         if: always()
@@ -180,12 +181,12 @@ jobs:
           set -euo pipefail
           gh pr create \
             --title "Autonomous Goose Tarik run ${GITHUB_RUN_ID}" \
-            --body "Scheduled Tarik/OpenAI Goose MVP run. Mechanical mission checks passed; intellectual quality still needs peer review. Logs, original/normalized draft, patch, and mission-check.json are in workflow artifact autonomous-goose-tarik-${GITHUB_RUN_ID}." \
+            --body "Scheduled Tarik/OpenAI Goose MVP run. Mechanical mission checks passed; intellectual quality still needs peer review. Both attempts, orchestration.json, original/normalized drafts, patches, and final/mission-check.json are in workflow artifact autonomous-goose-tarik-${GITHUB_RUN_ID}." \
             --base main \
             --head "$BRANCH_NAME"
 
       - name: Require Successful Mission Contract
         if: always() && (steps.goose.outcome != 'success' || steps.validate.outcome != 'success')
         run: |
-          echo "Mission did not pass. No PR authorized; inspect mission-check.json and preserved draft."
+          echo "Mission did not pass. No PR authorized; inspect orchestration.json, final/mission-check.json and preserved drafts."
           exit 1

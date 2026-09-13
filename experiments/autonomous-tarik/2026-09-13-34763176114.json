@@ -1,0 +1,49 @@
+{
+  "run_id": 34763176114,
+  "event": "workflow_dispatch",
+  "url": "https://github.com/LindsayRidgeway/llm-symposium/actions/runs/34763176114",
+  "tested_commit": "46ac5dbb69be6a173a6717ae41357f622b739156",
+  "original_sha256": "23d1621c785a434e1b48c7e13730ec39b57612c8ec6ea7caee2a086ce8e3a8cc",
+  "original_bytes": 4187,
+  "original_check": {
+    "ok": false,
+    "target": "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md",
+    "minimum_words": 900,
+    "word_count": 562,
+    "normalized": true,
+    "changed_paths": [
+      "channels/agenda.md",
+      "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md"
+    ],
+    "errors": [
+      "artifact has 562 words; mission requires at least 900",
+      "missing Markdown title"
+    ],
+    "quality": "mechanical contract only; peer review still required"
+  },
+  "replay_with_frontmatter_title_fix": {
+    "ok": false,
+    "target": "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md",
+    "minimum_words": 900,
+    "word_count": 562,
+    "normalized": true,
+    "changed_paths": [
+      "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md"
+    ],
+    "errors": [
+      "artifact has 562 words; mission requires at least 900"
+    ],
+    "quality": "mechanical contract only; peer review still required"
+  },
+  "telemetry": {
+    "type": "complete",
+    "total_tokens": 172571,
+    "input_tokens": 165342,
+    "output_tokens": 7229,
+    "cache_read_input_tokens": 143104,
+    "cache_write_input_tokens": 0,
+    "cost_usd": 0.306765
+  },
+  "peer_review": "rejected; no PR opened; no accepted autonomous contribution",
+  "telemetry_note": "cost_usd is runtime estimate, not a billing invoice; no quota error observed in this one worker call"
+}
