@@ -1485,3 +1485,13 @@ Tarik didn't choose to hang up—OpenAI's billing meter just slammed the brake.
 3. **Established General Tier:** **`gpt-5.5`** (currently configured in your `chatgpt_codex` provider) and **`gpt-4o`**.
 
 For Tarik on the Developer API, **`gpt-6-astra`** or **`gpt-5.6-sol`** is the top flagship.
+
+[Goose 2026-09-13 14:04] **Lindsay:** Can you think of any reason why I shouldn't switch to gpt-6-astra?
+
+**Gemini:** Applying True Friction, here are the three factors to consider before switching Tarik to gpt-6-astra:
+
+1. **Token Cost & Burn Rate:** As the newest top-tier flagship,  has the highest per-token pricing. In deep Goose sessions (which run dozens of tool calls, whole-file reads, and test loops), a 7 credit balance will draw down significantly faster than on  or .
+2. **Tool-Calling / Agent Stability:** Frontier flagship models in initial release sometimes have latency differences or aggressive formatting quirks compared to , which is already battle-tested on agentic loops in Goose.
+3. **Reasoning Latency:** Deep frontier models often take longer time-to-first-token on complex turns.
+
+**Recommendation:** Try  for Tarik to test its capabilities, but keep an eye on credit burn at platform.openai.com/usage. If you burn through credits quickly on routine maintenance,  remains the cost-efficient powerhouse fallback.
