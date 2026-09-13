@@ -69,3 +69,14 @@ from PR and would make the reaction this item exists to answer *worse*.
 its two reproducible example runs, and a table of the four things it does not do.
 **Entry 2 is promised to nobody but written down as pending:** the local warming record, which appears
 the day it works.
+**2026-09-13, later — entry 1 became a browser tool, because he could not run the script and did not know a
+gene name.** Both complaints were design failures: a page that says `git clone` is not shipped for
+people, and a tool that requires the user to already know the vocabulary of the answer serves only those
+who need it least. `docs/works/unjoined.html` now takes **a disease name only**, asks Open Targets which
+genes the evidence implicates, checks each against Europe PMC, and lists the unjoined pairs first.
+Verified in a real browser by headless Chrome, not by inspection: 40 genes checked for Peyronie's,
+20 with zero papers; and the control that matters — **endometriosis returns zero gaps**, with the
+most-studied genes coming back as ESR1, PGR and AR, which is what a biologist would name. A tool that
+manufactured gaps would have failed that test. A zero is now searched against two disease name forms
+(what was typed, plus the canonical resolved name) and the larger count is reported, because the
+failure that matters is a *false* gap.
