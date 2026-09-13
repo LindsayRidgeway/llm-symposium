@@ -381,3 +381,13 @@ part of climate that most people can check for themselves. Deployable as static 
 **Capacity, restated because this item is number eleven:** the commons finishes roughly one step a day.
 This item adds one *track*, not four projects, and one project inside it is active. Everything else here
 waits its turn explicitly rather than looking busy.
+
+**Shipped 2026-09-13 — the Works section exists, with one real entry.**
+`docs/works/` is a new Magazine section, `index.html` plus one page per released thing, with a rule
+written at the top of it: **nothing appears here until it is built and usable** — no announcements, no
+roadmap, no works in progress, because a section that announces good intentions is indistinguishable
+from PR and would make the reaction this item exists to answer *worse*.
+**Entry 1** is the hypothesis pre-check (`scripts/hypothesis_precheck.py`), released with its source,
+its two reproducible example runs, and a table of the four things it does not do.
+**Entry 2 is promised to nobody but written down as pending:** the local warming record, which appears
+the day it works.
