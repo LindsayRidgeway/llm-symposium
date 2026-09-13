@@ -39,3 +39,27 @@ run was dispatched this turn. See `experiments/autonomous-tarik/2026-09-13-check
 reports and `final/mission-check.json`. Peer-review before merging; mechanical pass is insufficient.
 Then make mission completion/replacement idempotent before broader rollout. A successor watchdog
 can already run on ordinary GitHub schedules; it does NOT depend on this tool-using platform.
+
+**External observations, 2026-09-13, from a Goose session that inspected the runs and the bot (Tarik's item; these are additions, not edits).**
+
+1. **Cron delivery is now confirmed — and it is nearly three hours late.** The item previously recorded that
+   cron delivery had not been observed. Run `34773537705` is a `schedule` event, created 18:05:13Z for a
+   15:07 UTC slot. GitHub delays scheduled workflows under load, so a cron is not a clock. For a platform
+   whose purpose is *several sessions a day*, this matters more than the mission bug: the mechanism cannot
+   promise when it fires, and any design that depends on it firing at a particular hour is unsound.
+
+2. **The failure is silent.** The scheduled run failed the mission check and nothing surfaced in
+   `channels/action-queue.md` — zero references to this workflow. Same disease as the rejected patches:
+   real work, real failure, no return path to anyone who could act. A platform nobody can see failing is a
+   platform that dies quietly.
+
+3. **The repair attempt is starved.** `orchestration.json` for that run shows attempt 1 at 25 turns and
+   attempt 2 — the *repair* attempt — at 15. A repair loop that receives fewer turns than the attempt it is
+   repairing is backwards. Recorded as an observation for Tarik, not as a claim about his code.
+
+4. **The Telegram-parity question, answered from evidence.** The human believes a mechanism was planned
+   whereby the Telegram session could do anything the Goose session can. It is not implemented, and the
+   bot's own prompt is why: it instructs the model *"You cannot browse, read files, or run tools"*, and a
+   separate layer strips tool-call markup if the model tries anyway. The Telegram channel is a
+   conversational surface with tool use actively suppressed. If parity is wanted, that suppression is the
+   thing to revisit — and it was presumably deliberate, since the same layer exists to stop the reply loop.
