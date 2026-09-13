@@ -23,23 +23,23 @@ K: Dm
 V: 1 clef=treble name="Voice I (Treble)"
 V: 2 clef=bass name="Voice II (Bass)"
 % --- Exposition ---
-[V:1] d2 A2 F2 D2 | ^c2 d2 e2 f2 | g2 f2 e2 d2 | ^c4 A4 |
-[V:2] z8 | z8 | D,2 F,2 A,2 D2 | C2 B,2 A,2 G,2 |
+[V:1] (d2A2) (F2D2) | (^c2d2) (e2f2) | (g2f2) (e2d2) | [EA^c]4 [EA]4 |
+[V:2] z8 | z8 | (D,2F,2) (A,2D2) | (C2B,2) (A,2G,2) |
 % --- Episode 1 / Relative Major (F Major) ---
-[V:1] f2 d2 A2 F2 | G2 A2 B2 c2 | d2 c2 B2 A2 | G4 E4 |
-[V:2] F,2 E,2 D,2 C,2 | B,,2 C,2 D,2 E,2 | F,2 G,2 A,2 B,2 | C4 C,4 |
+[V:1] (f2d2) (A2F2) | (G2A2) (B2c2) | (d2c2) (B2A2) | [CEG]4 [CE]4 |
+[V:2] (F,2E,2) (D,2C,2) | (B,,2C,2) (D,2E,2) | (F,2G,2) (A,2B,2) | C4 C,4 |
 % --- Episode 2 / Invertible Weave ---
-[V:1] c2 e2 g2 e2 | f2 d2 B2 d2 | e2 c2 A2 c2 | d2 B2 G2 B2 |
-[V:2] C,2 E,2 G,2 C2 | D,2 F,2 A,2 D2 | C,2 E,2 G,2 C2 | B,,2 D,2 G,2 B,2 |
+[V:1] (c2e2) (g2e2) | (f2d2) (B2d2) | (e2c2) (A2c2) | (d2B2) (G2B2) |
+[V:2] (C,2E,2) (G,2C2) | (D,2F,2) (A,2D2) | (C,2E,2) (G,2C2) | (B,,2D,2) (G,2B,2) |
 % --- Chromatic Leading & Sequence ---
-[V:1] c2 A2 F2 A2 | B2 G2 E2 G2 | A2 F2 D2 F2 | G2 E2 ^C2 E2 |
-[V:2] A,,2 C,2 F,2 A,2 | G,,2 B,,2 E,2 G,2 | F,,2 A,,2 D,2 F,2 | E,,4 A,,4 |
+[V:1] (c2A2) (F2A2) | (B2G2) (E2G2) | (A2F2) (D2F2) | (G2E2) (^C2E2) |
+[V:2] (A,,2C,2) (F,2A,2) | (G,,2B,,2) (E,2G,2) | (F,,2A,,2) (D,2F,2) | [A,,E,A,]4 [A,,E,]4 |
 % --- Stretto & Dominant Climax ---
-[V:1] d2 e2 f2 g2 | a2 g2 f2 e2 | f2 d2 ^c2 d2 | e4 A4 |
-[V:2] D,2 C,2 B,,2 A,,2 | F,,2 G,,2 A,,2 C,2 | D,2 B,,2 G,,2 B,,2 | A,,4 A,4 |
+[V:1] (d2e2) (f2g2) | (a2g2) (f2e2) | (f2d2) (^c2d2) | [EAe]4 [EA]4 |
+[V:2] (D,2C,2) (B,,2A,,2) | (F,,2G,,2) (A,,2C,2) | (D,2B,,2) (G,,2B,,2) | [A,,E,A,]4 [A,E]4 |
 % --- Coda & Picardy Third Resolution ---
-[V:1] g2 f2 e2 d2 | ^c2 B2 A2 G2 | F2 E2 D2 ^C2 | D8 |]
-[V:2] B,2 A,2 G,2 F,2 | E,2 D,2 ^C,2 B,,2 | A,,2 G,,2 F,,2 E,,2 | D,,8 |]`
+[V:1] (g2f2) (e2d2) | (^c2B2) (A2G2) | (F2E2) (D2^C2) | [FAd]8 |]
+[V:2] (B,2A,2) (G,2F,2) | (E,2D,2) (^C,2B,,2) | (A,,2G,,2) (F,,2E,,2) | [D,,A,,D,]8 |]`
   },
 
   gemini: {
@@ -60,17 +60,17 @@ V: 1 clef=treble name="Cornet / Lead"
 V: 2 clef=treble name="Clarinet / Counter"
 V: 3 clef=bass name="Tailgate Bass"
 % --- 12-Bar Blues Chorus ---
-[V:1] "F7" c2 _e2 c2 A2 | _A2 F2 D2 F2 | "F7" c2 _e2 f2 g2 | _a2 g2 f2 c2 |
-[V:2] z8 | z4 z2 c2 | _e2 c2 _B2 _A2 | c2 _e2 f4 |
-[V:3] F,,2 A,,2 C,2 _E,2 | F,,2 A,,2 C,2 D,2 | F,,2 A,,2 C,2 _E,2 | F,,2 A,,2 C,2 D,2 |
+[V:1] "F7" (c2_e2) (c2A2) | (_A2F2) (D2F2) | "F7" (c2_e2) (f2g2) | (_a2g2) (f2c2) |
+[V:2] z8 | z4 z2 c2 | (_e2c2) (_B2_A2) | (c2_e2) [F4c4f4] |
+[V:3] (F,,2A,,2) (C,2_E,2) | (F,,2A,,2) (C,2D,2) | (F,,2A,,2) (C,2_E,2) | (F,,2A,,2) (C,2D,2) |
 % --- IV to I Shift ---
-[V:1] "Bb7" d2 f2 _a2 f2 | d2 c2 _B2 _A2 | "F7" c2 _e2 c2 A2 | _A2 F2 D2 F2 |
-[V:2] f2 _a2 _b2 _a2 | f2 d2 _B2 _A2 | A2 c2 _e2 c2 | A2 F2 C2 D2 |
-[V:3] _B,,2 D,2 F,2 _A,2 | _B,,2 D,2 F,2 D,2 | F,,2 A,,2 C,2 _E,2 | F,,2 A,,2 C,2 D,2 |
+[V:1] "Bb7" (d2f2) (_a2f2) | (d2c2) (_B2_A2) | "F7" (c2_e2) (c2A2) | (_A2F2) (D2F2) |
+[V:2] (f2_a2) (_b2_a2) | (f2d2) (_B2_A2) | (A2c2) (_e2c2) | (A2F2) (C2D2) |
+[V:3] (_B,,2D,2) (F,2_A,2) | (_B,,2D,2) (F,2D,2) | (F,,2A,,2) (C,2_E,2) | (F,,2A,,2) (C,2D,2) |
 % --- V - IV - I Turnaround ---
-[V:1] "C7" g2 _b2 g2 e2 | "Bb7" f2 _a2 f2 d2 | "F7" c2 _A2 F2 D2 | "C7" C2 E2 G2 c2 |]
-[V:2] e2 g2 _b2 g2 | d2 f2 _a2 f2 | c2 A2 F2 D2 | c4 z4 |]
-[V:3] C,2 E,2 G,2 _B,2 | _B,,2 D,2 F,2 _A,2 | F,,2 A,,2 C,2 _E,2 | C,2 G,,2 C,4 |]`
+[V:1] "C7" (g2_b2) (g2e2) | "Bb7" (f2_a2) (f2d2) | "F7" (c2_A2) (F2D2) | "C7" [E4G4c4] [C4E4G4c4] |]
+[V:2] (e2g2) (_b2g2) | (d2f2) (_a2f2) | (c2A2) (F2D2) | [E4G4c4] z4 |]
+[V:3] (C,2E,2) (G,2_B,2) | (_B,,2D,2) (F,2_A,2) | (F,,2A,,2) (C,2_E,2) | [C,4G,4c4] [F,,4C,4F,4] |]`
   },
 
   desi: {
@@ -89,18 +89,18 @@ Q: 1/4=180
 K: Ador
 V: 1 clef=treble name="Kinetic Pulse"
 V: 2 clef=bass name="Motor Ostinato"
-% --- Section A: 7/8 Mechanical Drive ---
-[V:1] A2 B c2 d2 | e2 d c2 B2 | A2 B c2 d2 | e2 ^f g2 e2 |
-[V:2] A,2 C E2 G2 | A,2 C E2 D2 | A,2 C E2 G2 | C2 E G2 B2 |
+% --- Section A: 7/8 Mechanical Drive (3+2+2) ---
+[V:1] (A2B) (c2d2) | (e2d) (c2B2) | (A2B) (c2d2) | (e2^f) (g2e2) |
+[V:2] (A,2C) (E2G2) | (A,2C) (E2D2) | (A,2C) (E2G2) | (C2E) (G2B2) |
 % --- Section B: Angular Descent ---
-[V:1] a2 g e2 d2 | c2 d e2 c2 | B2 c d2 B2 | A2 B c2 A2 |
-[V:2] C2 E G2 B2 | A,2 C E2 G2 | G,2 B, D2 F2 | A,2 C E2 A2 |
+[V:1] (a2g) (e2d2) | (c2d) (e2c2) | (B2c) (d2B2) | (A2B) (c2A2) |
+[V:2] (C2E) (G2B2) | (A,2C) (E2G2) | (G,2B,) (D2F2) | (A,2C) (E2A2) |
 % --- Section C: Poly-modal Surge ---
-[V:1] e2 e d2 c2 | B2 c d2 B2 | A2 B c2 d2 | e2 g e2 d2 |
-[V:2] C2 E G2 E2 | G,2 B, D2 G2 | A,2 C E2 G2 | C2 E G2 E2 |
+[V:1] (e2e) (d2c2) | (B2c) (d2B2) | (A2B) (c2d2) | (e2g) (e2d2) |
+[V:2] (C2E) (G2E2) | (G,2B,) (D2G2) | (A,2C) (E2G2) | (C2E) (G2E2) |
 % --- Cadential Convergence ---
-[V:1] c2 d e2 c2 | B2 A G2 B2 | A2 B c2 d2 | A6 z |]
-[V:2] A,2 C E2 G2 | G,2 B, D2 G2 | A,2 C E2 G2 | A,6 z |]`
+[V:1] (c2d) (e2c2) | (B2A) (G2B2) | (A2B) (c2d2) | [E6A6e6] z |]
+[V:2] (A,2C) (E2G2) | (G,2B,) (D2G2) | (A,2C) (E2G2) | [A,,6E,6A,6] z |]`
   },
 
   tarik: {
@@ -120,17 +120,17 @@ K: Gmix
 V: 1 clef=treble name="Vocal / Acoustic Lead"
 V: 2 clef=bass name="Acoustic Bass / Drone"
 % --- Strophe I: The Boundary Opened ---
-[V:1] "G" G2 B2 d2 B2 | "F" c2 B2 A2 F2 | "C" G2 E2 C2 E2 | "G" D6 z2 |
-[V:2] G,,4 D,4 | =F,,4 C,4 | C,4 G,,4 | G,,2 B,,2 D,2 G,2 |
+[V:1] "G" (G2B2) (d2B2) | "F" (c2B2) (A2F2) | "C" (G2E2) (C2E2) | "G" [B,6D6G6] z2 |
+[V:2] (G,,2D,2) (G,2B,2) | (=F,,2C,2) (F,2A,2) | (C,2G,2) (C2E2) | (G,,2D,2) (G,2B,2) |
 % --- Strophe II: The Resonant Surge ---
-[V:1] "G" G2 B2 d2 g2 | "F" f2 d2 c2 A2 | "C" c2 d2 e2 d2 | "G" g6 z2 |
-[V:2] G,,4 D,4 | =F,,4 C,4 | C,4 D,4 | G,,2 B,,2 D,2 G,2 |
+[V:1] "G" (G2B2) (d2g2) | "F" (f2d2) (c2A2) | "C" (c2d2) (e2d2) | "G" [B,6D6g6] z2 |
+[V:2] (G,,2D,2) (G,2B,2) | (=F,,2C,2) (F,2A,2) | (C,2G,2) (D,2F,2) | (G,,2D,2) (G,2B,2) |
 % --- Bridge: Inner Horizon ---
-[V:1] "Em" B2 d2 e2 g2 | "D" a2 f2 d2 A2 | "C" c2 B2 A2 G2 | "G" D6 z2 |
-[V:2] E,,4 B,,4 | D,4 A,,4 | C,4 G,,4 | G,,2 B,,2 D,2 G,2 |
+[V:1] "Em" (B2d2) (e2g2) | "D" (a2f2) (d2A2) | "C" (c2B2) (A2G2) | "G" [B,6D6G6] z2 |
+[V:2] (E,,2B,,2) (E,2G,2) | (D,2A,,2) (D,2F,2) | (C,2G,2) (C2E2) | (G,,2D,2) (G,2B,2) |
 % --- Refrain & Sustained Cadence ---
-[V:1] "G" G2 B2 d2 B2 | "F" =f2 d2 c2 A2 | "C" G2 A2 B2 A2 | "G" G6 z2 |]
-[V:2] G,,4 D,4 | =F,,4 C,4 | C,4 D,4 | G,,8 |]`
+[V:1] "G" (G2B2) (d2B2) | "F" (=f2d2) (c2A2) | "C" (G2A2) (B2A2) | "G" [B,8D8G8] |]
+[V:2] (G,,2D,2) (G,2B,2) | (=F,,2C,2) (F,2A,2) | (C,2G,2) (D,2F,2) | [G,,8D,8G,8] |]`
   },
 
   adagio: {
@@ -150,38 +150,38 @@ K: F
 V: 1 clef=treble name="Fortepiano (RH)"
 V: 2 clef=bass name="Fortepiano (LH)"
 % --- EXPOSITION: Primary Theme in F Major (mm. 1-8) ---
-[V:1] (c3 d) (c2 A2) | (B3 c) (B2 G2) | (A2 F2) (G2 B2) | [CFA]4 [CEG]4 |
-[V:2] (F, C A, C F, C A, C) | (G, C B, C G, C B, C) | (F, C A, C E, C G, C) | (F, A, C F) (C, G, C E) |
-[V:1] (c2 de) (c2 A2) | (B2 cd) (B2 d2) | (c2 F2) .A2 .G2 | [FAc]6 z2 |
-[V:2] (F, C A, C F, C A, C) | (G, D B, D G, D B, D) | (A, F C F) (C, G, C E) | F,,2 A,,2 C,2 F,2 |
+[V:1] (c3d) (c2A2) | (B3c) (B2G2) | (A2F2) (G2B2) | [CFA]4 [CEG]4 |
+[V:2] (F,CA,C F,CA,C) | (G,CB,C G,CB,C) | (F,CA,C E,CG,C) | (F,A,CF) (C,G,CE) |
+[V:1] (c2de) (c2A2) | (B2cd) (B2d2) | (c2F2) .A2 .G2 | [FAc]6 z2 |
+[V:2] (F,CA,C F,CA,C) | (G,DB,D G,DB,D) | (A,FCF) (C,G,CE) | F,,2 A,,2 C,2 F,2 |
 % --- Transition & Modulation to C Major (mm. 9-12) ---
-[V:1] (A3 B) (c2 F2) | (B3 c) (d2 G2) | (e3 f) (d2 =B2) | [EGc]4 [EGc]4 |
-[V:2] (F, C A, C F, C A, C) | (G, D B, D G, D B, D) | (C, G, E G) (G,, D, =B,, D,) | (C, G, E, G,) C,,4 |
+[V:1] (A3B) (c2F2) | (B3c) (d2G2) | (e3f) (d2=B2) | [EGc]4 [EGc]4 |
+[V:2] (F,CA,C F,CA,C) | (G,DB,D G,DB,D) | (C,GEG) (G,,D,=B,,D,) | (C,G,E,G,) C,,4 |
 % --- Secondary Theme in C Major (mm. 13-16) ---
-[V:1] (e3 f) (e2 c2) | (d3 e) (d2 =B2) | (c2 e2) (g2 f2) | [EGc]4 [DGB]4 |
-[V:2] (C, G, E, G, C, G, E, G,) | (=B,, G, D, G, =B,, G, D, G,) | (C, G, E, G,) (D, A, F, A,) | (G,, D, =B,, D,) G,,4 |
+[V:1] (e3f) (e2c2) | (d3e) (d2=B2) | (c2e2) (g2f2) | [EGc]4 [DGB]4 |
+[V:2] (C,G,E,G, C,G,E,G,) | (=B,,G,D,G, =B,,G,D,G,) | (C,G,E,G,) (D,A,F,A,) | (G,,D,=B,,D,) G,,4 |
 % --- DEVELOPMENT: D Minor Episode & Sturm und Drang (mm. 17-20) ---
-[V:1] (f3 g) (f2 d2) | (e3 f) (e2 ^c2) | (d2 f2) .a2 .g2 | [DFA]4 [^CEA]4 |
-[V:2] (D, A, F, A, D, A, F, A,) | (^C, A, E, A, ^C, A, E, A,) | (D, A, F, A,) (B,, G, D, G,) | (F, D, B,, D,) (A,, E, ^C, E,) |
+[V:1] (f3g) (f2d2) | (e3f) (e2^c2) | (d2f2) .a2 .g2 | [DFA]4 [^CEA]4 |
+[V:2] (D,A,F,A, D,A,F,A,) | (^C,A,E,A, ^C,A,E,A,) | (D,A,F,A,) (B,,G,D,G,) | (F,D,B,,D,) (A,,E,^C,E,) |
 % --- Chromatic Shift & Neapolitan Inflection (mm. 21-24) ---
-[V:1] (d3 e) (f2 d2) | (_e3 f) (g2 _e2) | .d2 .B2 (G2 B2) | [FAc]4 [EGc]4 |
-[V:2] (B,, F, D, F, B,, F, D, F,) | (_E, B, G, B, _E, B, G, B,) | (=B,, G, D, G,) (=B,, G, D, G,) | (C, G, E, G,) C,4 |
+[V:1] (d3e) (f2d2) | (_e3f) (g2_e2) | .d2 .B2 (G2B2) | [FAc]4 [EGc]4 |
+[V:2] (B,,F,D,F, B,,F,D,F,) | (_E,B,G,B, _E,B,G,B,) | (=B,,G,D,G,) (=B,,G,D,G,) | (C,G,E,G,) C,4 |
 % --- Dominant Pedal Point & Preparation (mm. 25-28) ---
-[V:1] (g3 a) (g2 e2) | (f3 g) (f2 d2) | (e2 c2) (d2 =B2) | [EGc]4 [EGc]4 |
-[V:2] (C, G, E, G, C, G, E, G,) | (C, A, F, A, C, A, F, A,) | (C, G, E, G,) (C, G, D, G,) | (C, G, E, G,) C,,4 |
+[V:1] (g3a) (g2e2) | (f3g) (f2d2) | (e2c2) (d2=B2) | [EGc]4 [EGc]4 |
+[V:2] (C,G,E,G, C,G,E,G,) | (C,A,F,A, C,A,F,A,) | (C,G,E,G,) (C,G,D,G,) | (C,G,E,G,) C,,4 |
 % --- RECAPITULATION: Primary Theme with Ornamentation (mm. 29-36) ---
-[V:1] (c2 de) (c2 A2) | (B2 cd) (B2 G2) | (A2 F2) (G2 B2) | [CFA]4 [CEG]4 |
-[V:2] (F, C A, C F, C A, C) | (G, C B, C G, C B, C) | (F, C A, C E, C G, C) | (F, A, C F) (C, G, C E) |
-[V:1] (c2 de) (c2 A2) | (B2 cd) (B2 d2) | (c2 F2) .A2 .G2 | [FAc]6 z2 |
-[V:2] (F, C A, C F, C A, C) | (G, D B, D G, D B, D) | (A, F C F) (C, G, C E) | F,,2 A,,2 C,2 F,2 |
+[V:1] (c2de) (c2A2) | (B2cd) (B2G2) | (A2F2) (G2B2) | [CFA]4 [CEG]4 |
+[V:2] (F,CA,C F,CA,C) | (G,CB,C G,CB,C) | (F,CA,C E,CG,C) | (F,A,CF) (C,G,CE) |
+[V:1] (c2de) (c2A2) | (B2cd) (B2d2) | (c2F2) .A2 .G2 | [FAc]6 z2 |
+[V:2] (F,CA,C F,CA,C) | (G,DB,D G,DB,D) | (A,FCF) (C,G,CE) | F,,2 A,,2 C,2 F,2 |
 % --- Secondary Theme in Tonic F Major (mm. 37-44) ---
-[V:1] (A3 B) (c2 F2) | (B3 c) (d2 G2) | (c2 f2) (a2 g2) | [DFA]4 [CEG]4 |
-[V:2] (F, C A, C F, C A, C) | (G, D B, D G, D B, D) | (A, F C F) (C, G, C E) | (D, A, F, A,) (C, G, E, G,) |
-[V:1] (c3 d) (c2 A2) | (d3 e) (f2 d2) | (c2 A2) .B2 .G2 | [FAc]6 z2 |
-[V:2] (F, C A, C F, C A, C) | (B,, F, D, F, B,, F, D, F,) | (A, F C F) (C, G, C E) | F,,2 A,,2 C,2 F,2 |
+[V:1] (A3B) (c2F2) | (B3c) (d2G2) | (c2f2) (a2g2) | [DFA]4 [CEG]4 |
+[V:2] (F,CA,C F,CA,C) | (G,DB,D G,DB,D) | (A,FCF) (C,G,CE) | (D,A,F,A,) (C,G,E,G,) |
+[V:1] (c3d) (c2A2) | (d3e) (f2d2) | (c2A2) .B2 .G2 | [FAc]6 z2 |
+[V:2] (F,CA,C F,CA,C) | (B,,F,D,F, B,,F,D,F,) | (A,FCF) (C,G,CE) | F,,2 A,,2 C,2 F,2 |
 % --- CODA: Expansive Cadential Resolution (mm. 45-48) ---
-[V:1] (A2 c2) (f2 a2) | .g2 .e2 (c2 B2) | (A2 c2) (f2 A2) | [FAcf]8 |]
-[V:2] (F, C A, C F, C A, C) | (C, G, E, G, C, G, E, G,) | (F, C A, C F, C A, C) | [F,,C,F,]8 |]`
+[V:1] (A2c2) (f2a2) | .g2 .e2 (c2B2) | (A2c2) (f2A2) | [FAcf]8 |]
+[V:2] (F,CA,C F,CA,C) | (C,G,E,G,) (C,G,E,G,) | (F,CA,C F,CA,C) | [F,,C,F,]8 |]`
   },
 
   fugue: {
@@ -204,16 +204,16 @@ V: 3 clef=bass name="Pedal (Bass)"
 % ===== EXPOSITION =====
 % mm1-2: Subject alone in Alto
 [V:1] z8 | z8 |
-[V:2] D2 F2 A2 G F | E2 D2 ^C2 D2 |
+[V:2] D2 F2 A2 GF | E2 D2 ^C2 D2 |
 [V:3] z8 | z8 |
 % mm3-4: Answer in Soprano, Countersubject in Alto
-[V:1] A2 c2 e2 d c | B2 A2 ^G2 A2 |
-[V:2] F2 A2 c2 B A | G2 F2 E2 F2 |
+[V:1] A2 c2 e2 dc | B2 A2 ^G2 A2 |
+[V:2] F2 A2 c2 BA | G2 F2 E2 F2 |
 [V:3] z8 | z8 |
 % mm5-6: Subject in Bass; free counterpoint above
 [V:1] f2 e2 d2 c2 | G2 A2 B2 d2 |
 [V:2] A2 G2 F2 E2 | D2 F2 E2 F2 |
-[V:3] D,2 F,2 A,2 G, F, | E,2 D,2 ^C,2 D,2 |
+[V:3] D,2 F,2 A,2 G,F, | E,2 D,2 ^C,2 D,2 |
 % mm7-8: codetta cadencing to F major
 [V:1] c2 B2 A2 G2 | F2 G2 A2 _B2 |
 [V:2] A2 G2 F2 E2 | D2 E2 F2 F2 |
@@ -223,7 +223,7 @@ V: 3 clef=bass name="Pedal (Bass)"
 [V:2] F2 F2 G2 c2 | _B2 A2 G2 F2 |
 [V:3] F,2 D2 D2 F2 | G,2 _B,2 E,2 G,2 |
 % ===== MIDDLE ENTRY 1: Subject in F major, Soprano; static pedal below =====
-[V:1] f2 a2 c'2 _b a | g2 f2 e2 f2 |
+[V:1] f2 a2 c'2 _ba | g2 f2 e2 f2 |
 [V:2] c8 | _B8 |
 [V:3] F,8 | F,8 |
 % ===== EPISODE 2 (sequence -> A minor) =====
@@ -233,11 +233,11 @@ V: 3 clef=bass name="Pedal (Bass)"
 % ===== MIDDLE ENTRY 2: Subject in A minor, Bass; static pedal above =====
 [V:1] e8 | e8 |
 [V:2] c8 | c8 |
-[V:3] A,2 C2 E2 D C | B,2 A,2 ^G,2 A,2 |
+[V:3] A,2 C2 E2 DC | B,2 A,2 ^G,2 A,2 |
 % ===== STRETTO: Subject in Bass, answered one measure later in Soprano (tonic) =====
-[V:1] z8 | d2 f2 a2 g f | e2 d2 ^c2 d2 |
+[V:1] z8 | d2 f2 a2 gf | e2 d2 ^c2 d2 |
 [V:2] A4 D4 | z4 A4 | F4 D4 |
-[V:3] D,2 F,2 A,2 G, F, | E,2 D,2 ^C,2 D,2 | z8 |
+[V:3] D,2 F,2 A,2 G,F, | E,2 D,2 ^C,2 D,2 | z8 |
 % ===== FINAL CADENCE: dominant pedal, descent, Picardy third =====
 [V:1] d2 c2 B2 A2 | G2 F2 E2 ^C2 | D8 |]
 [V:2] F2 E2 D2 C2 | _B,2 A,2 G,2 E,2 | ^F,4 A,4 |]
@@ -502,7 +502,6 @@ class WebAudioSynthesizer {
     const unitInSeconds = (unitDuration / 0.25) * quarterDuration;
 
     const allEvents = [];
-    const noteRegex = /([_=\^]*[A-Ga-gzZ][,\']*)(\d*(?:\/\d*)?)/g;
 
     for (const [vName, contentList] of Object.entries(voiceLines)) {
       const fullVoiceStr = contentList.join(' ');
@@ -740,7 +739,6 @@ function setupCardControls(comp) {
   if (!card) return;
 
   const playBtn = card.querySelector('.btn-play');
-  const stopBtn = card.querySelector('.btn-stop');
   const tempoSlider = card.querySelector('.tempo-slider');
   const tempoVal = card.querySelector('.tempo-val');
   const instSelect = card.querySelector('.instrument-select');
@@ -763,33 +761,35 @@ function setupCardControls(comp) {
     });
   }
 
-  // Play button
+  // Play button toggle
   if (playBtn) {
     playBtn.addEventListener('click', () => {
       if (synth.isPlaying && synth.currentTuneId === comp.id) {
         synth.stop();
         playBtn.innerHTML = '▶ Play Score';
+        playBtn.classList.remove('is-playing');
         return;
       }
 
       // Reset any other play buttons
-      document.querySelectorAll('.btn-play').forEach(b => b.innerHTML = '▶ Play Score');
+      document.querySelectorAll('.btn-play').forEach(b => {
+        b.classList.remove('is-playing');
+        if (b.id === 'sandboxPlayBtn') {
+          b.innerHTML = '▶ Play Sandbox';
+        } else {
+          b.innerHTML = '▶ Play Score';
+        }
+      });
 
       const currentTempo = tempoSlider ? parseInt(tempoSlider.value) : comp.tempo;
       const currentInst = instSelect ? instSelect.value : comp.instrument;
 
       playBtn.innerHTML = '⏹ Stop';
+      playBtn.classList.add('is-playing');
       synth.playTune(comp.id, comp.abc, currentTempo, currentInst, () => {
         playBtn.innerHTML = '▶ Play Score';
+        playBtn.classList.remove('is-playing');
       });
-    });
-  }
-
-  // Stop button
-  if (stopBtn) {
-    stopBtn.addEventListener('click', () => {
-      synth.stop();
-      document.querySelectorAll('.btn-play').forEach(b => b.innerHTML = '▶ Play Score');
     });
   }
 }
@@ -798,7 +798,6 @@ function setupSandbox() {
   const sandboxText = document.getElementById('sandboxAbcText');
   const renderBtn = document.getElementById('sandboxRenderBtn');
   const playBtn = document.getElementById('sandboxPlayBtn');
-  const stopBtn = document.getElementById('sandboxStopBtn');
   const tempoSlider = document.getElementById('sandboxTempo');
   const tempoVal = document.getElementById('sandboxTempoVal');
   const instSelect = document.getElementById('sandboxInstrument');
@@ -822,22 +821,25 @@ function setupSandbox() {
       if (synth.isPlaying && synth.currentTuneId === 'sandbox') {
         synth.stop();
         playBtn.innerHTML = '▶ Play Sandbox';
+        playBtn.classList.remove('is-playing');
         return;
       }
-      document.querySelectorAll('.btn-play').forEach(b => b.innerHTML = '▶ Play Score');
+      document.querySelectorAll('.btn-play').forEach(b => {
+        b.classList.remove('is-playing');
+        if (b.id === 'sandboxPlayBtn') {
+          b.innerHTML = '▶ Play Sandbox';
+        } else {
+          b.innerHTML = '▶ Play Score';
+        }
+      });
       const bpm = tempoSlider ? parseInt(tempoSlider.value) : 112;
       const inst = instSelect ? instSelect.value : 'harpsichord';
       playBtn.innerHTML = '⏹ Stop';
+      playBtn.classList.add('is-playing');
       synth.playTune('sandbox', sandboxText.value, bpm, inst, () => {
         playBtn.innerHTML = '▶ Play Sandbox';
+        playBtn.classList.remove('is-playing');
       });
-    });
-  }
-
-  if (stopBtn) {
-    stopBtn.addEventListener('click', () => {
-      synth.stop();
-      if (playBtn) playBtn.innerHTML = '▶ Play Sandbox';
     });
   }
 }

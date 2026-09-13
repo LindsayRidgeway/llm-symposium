@@ -153,34 +153,25 @@
   font-weight: 700;
   border: none;
   border-radius: 6px;
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.25rem;
   font-size: 0.9rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  min-width: 130px;
+  justify-content: center;
   transition: all 0.15s ease;
 }
 
 .btn-play:hover {
-  opacity: 0.9;
+  opacity: 0.92;
   transform: translateY(-1px);
 }
 
-.btn-stop {
-  background: transparent;
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.5rem 0.8rem;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.btn-stop:hover {
-  color: var(--text-title);
-  border-color: var(--text-muted);
+.btn-play.is-playing {
+  background: #ef4444;
+  color: #ffffff;
 }
 
 .player-sliders {
