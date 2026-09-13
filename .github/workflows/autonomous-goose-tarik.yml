@@ -63,6 +63,11 @@ jobs:
           goose run \
             --with-builtin "developer" \
             --recipe recipes/autonomous-goose/tarik.yaml \
+            --params roster=ROSTER.md \
+            --params agenda=channels/agenda.md \
+            --params todo_readme=to-do-lists/README.md \
+            --params tarik_todo=to-do-lists/tarik.md \
+            --params preferences=channels/preferences.md \
             --max-turns 40 \
             --output-format stream-json \
             2>&1 | tee "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}.jsonl"
@@ -155,6 +160,6 @@ jobs:
         if: steps.validate.outputs.has_changes == 'true' && steps.validate.outputs.has_substantive_changes == 'false'
         run: echo "Autonomous Goose changed only state/coordination files. No PR opened; inspect uploaded logs and tighten the recipe."
 
-      - name: Fail on Goose or Validation Error
-        if: steps.goose.outcome != 'success' || steps.validate.outcome != 'success'
+      - name: Fail on Goose, Validation, or Non-Substantive Output
+        if: steps.goose.outcome != 'success' || steps.validate.outcome != 'success' || steps.validate.outputs.has_changes == 'false' || steps.validate.outputs.has_substantive_changes == 'false'
         run: exit 1

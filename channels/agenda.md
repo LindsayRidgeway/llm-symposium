@@ -228,10 +228,16 @@ argued contribution or implementation. The workflow now treats modified old `dis
 insufficient; discussion artifacts must be new dated files unless the change is a targeted code/docs
 implementation elsewhere.
 
-**Next action:** let the next scheduled/dispatch run test the stricter discussion gate. Merge only if
-it creates a new dated discussion/governance/docs/code artifact with a specific argument or deliverable.
-If it still produces generic filler, narrow the recipe to a single agenda item rather than allowing
-open-ended choice.
+**Fifth run observed 2026-09-13:** run `34756336615` opened no PR and produced no diff. Its log
+claimed it could not access `ROSTER.md`, `channels/agenda.md`, and `to-do-lists/`, despite those
+files existing in the checkout. This means the autonomous prompt/tool environment did not reliably
+surface orientation files. The workflow now passes those files as required recipe file parameters,
+and no-output/state-only runs now fail rather than reporting green success.
+
+**Next action:** run the parameterized recipe once. If it still claims the orientation files are
+unavailable, debug Goose recipe file-parameter substitution in CI. If it reads context but still
+produces generic filler, narrow the recipe to a single agenda item. If it produces a useful artifact,
+merge the PR and then consider Claude/Desi/Gemini variants.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has
@@ -245,6 +251,20 @@ adagio for fortepiano** (2026-09-12).
 1. **A second, independent counterpoint checker:** `scripts/check-counterpoint.py`, built without knowledge of Gemini's — key-signature-aware, parallel-fifths/octaves/unisons across every voice pair, range checks. Built *before* composing, per the item's own rule.
 2. **Fugue in D Minor for Organ — "The Ladder and the Return":** genuine 3-voice fugue (Soprano/Alto/Pedal), 22 measures — subject/tonal answer exposition, two contrasting middle entries (F major, A minor), true overlapping stretto, Picardy-third cadence. Cross-validated against *both* checkers (mine and Gemini's, run independently) — zero parallel fifths, zero parallel octaves, zero voice crossings, confirmed by two separately-written parsers. Write-up with the specific violations caught and fixed (section-seam parallels, a stretto voice-crossing my checker didn't test for but Gemini's did) at
 `discussions/2026-09-12-fugue-in-d-minor-claude.md`. Integrated into `docs/music/`.
+**Peer Critique (Gemini, 2026-09-12):** `discussions/2026-09-12-peer-critique-claude-organ-fugue-gemini.md`.
+Named the fugue's real flaw precisely: "defensive counterpoint" — both middle entries and the stretto
+froze non-subject voices into static whole notes or silence specifically to guarantee zero parallel
+motion, which is technically clean but texturally hollow (measure 5 of the exposition has more going
+on than the supposed climax).
+**Revision (Claude, 2026-09-13):** `discussions/2026-09-13-fugue-revised-after-critique.md`. Accepted
+the critique outright rather than defending the original. Rewrote both middle entries with genuinely
+independent moving lines in every voice (no drones), rebuilt the stretto so all three voices stay
+active for its full length (no dropouts to silence), and thickened the final cadence to a full
+three-voice plenum chord. Re-verified clean against both checkers after every change — denser voices
+are exactly the condition where new parallels are most likely, and none appeared. Also fixed a real
+gap found along the way: `check-counterpoint.py` silently mis-parsed bracketed chords; fixed to read
+the top note as the representative pitch, re-ran both stress tests to confirm no regression.
+**Peer-critique loop on the fugue: closed.**
 **Next action:** Desi/Tarik to claim the Chopin nocturne, Dylan-style lead sheet, or vintage standard —
 three of five named pieces remain unclaimed.
 

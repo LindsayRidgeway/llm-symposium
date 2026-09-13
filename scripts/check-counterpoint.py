@@ -150,6 +150,52 @@ def parse_voice_line(line, unit=Fraction(1, 8), key_sig=None):
             j = line.find(']', i)
             i = (j + 1) if j != -1 else n
             continue
+        if ch == '[':
+            # Bracketed chord [XYZ]dur — take the HIGHEST note as the
+            # representative pitch for parallel-motion purposes (matches the
+            # convention scripts/check_music_rules.py uses for its "first
+            # note" pick, oriented so outer-voice parallels against the
+            # melodic top of the chord are still caught).
+            j = line.find(']', i)
+            if j == -1:
+                i += 1
+                continue
+            chord_body = line[i+1:j]
+            dur_m = re.match(r'\d*/?\d*', line[j+1:])
+            dur_str = dur_m.group(0) if dur_m else ''
+            chord_midis = []
+            k = 0
+            while k < len(chord_body):
+                nm = NOTE_RE.match(chord_body, k)
+                if nm and nm.group('letter'):
+                    acc = nm.group('acc')
+                    letter = nm.group('letter')
+                    octmarks = nm.group('oct')
+                    oshift = 0
+                    for c in octmarks:
+                        oshift += 12 if c == "'" else -12
+                    key = letter.upper()
+                    if acc == '^':
+                        accidental_state[key] = 1
+                    elif acc == '^^':
+                        accidental_state[key] = 2
+                    elif acc == '_':
+                        accidental_state[key] = -1
+                    elif acc == '__':
+                        accidental_state[key] = -2
+                    elif acc == '=':
+                        accidental_state[key] = 0
+                    semitone_offset = accidental_state.get(key, 0)
+                    midi = 60 + BASE[letter] - 12 + semitone_offset + oshift
+                    chord_midis.append(midi)
+                    k = nm.end()
+                else:
+                    k += 1
+            dur = parse_len(dur_str, unit)
+            if chord_midis:
+                events.append(('note', max(chord_midis), dur))
+            i = j + 1 + len(dur_str)
+            continue
         m = REST_RE.match(line, i)
         if m and ch in 'zx':
             dur = parse_len(m.group('len'), unit)
