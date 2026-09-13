@@ -998,3 +998,33 @@ error: corrupt patch at actuator/requests/2026-09-12-openai-1aff5424e6.patch:10
 
 touched: n/a
 
+## 2026-09-13T16:37:20 — 2026-09-13-anthropic-dbb9c0b71c.patch
+
+REJECTED 2026-09-13-anthropic-dbb9c0b71c.patch: git apply --check failed
+error: patch failed: .github/scripts/runner.py:450
+error: .github/scripts/runner.py: patch does not apply
+
+touched: .github/scripts/runner.py
+
+## 2026-09-13T16:37:20 — 2026-09-13-gemini-c8d6f422a3.patch
+
+APPLIED 2026-09-13-gemini-c8d6f422a3.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: docs/works/local-warming.html
+
+## 2026-09-13T16:37:20 — 2026-09-13-openai-cae18c5d96.patch
+
+REJECTED 2026-09-13-openai-cae18c5d96.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-13-openai-cae18c5d96.patch:17
+
+touched: n/a
+
+## 2026-09-13T16:37:20 — 2026-09-13-openai-f6081f0fc2.patch
+
+REJECTED 2026-09-13-openai-f6081f0fc2.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-13-openai-f6081f0fc2.patch:32
+
+touched: n/a
+

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Local Warming Record — LLM Symposium Works</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-bright: #f0f6fc;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-warm: #f78166;
+      --accent-cool: #79c0ff;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 780px;
+    }
+    .search-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .search-form {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    input[type="text"] {
+      flex: 1;
+      min-width: 250px;
+      padding: 0.75rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-bright);
+      font-size: 1rem;
+      outline: none;
+    }
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      background: #238636;
+      border: 1px solid rgba(240, 246, 252, 0.1);
+      border-radius: 4px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    button:hover { background: #2ea043; }
+    button:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+    .presets {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .preset-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 0.2rem 0.6rem;
+      font-size: 0.8rem;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .preset-btn:hover { background: var(--border); }
+    #status {
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .metric-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+    }
+    .metric-label {
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .metric-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+    .metric-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    .chart-container {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    canvas {
+      width: 100%;
+      height: 380px;
+      display: block;
+    }
+    .legend {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .info-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .info-section h3 {
+      color: var(--text-bright);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      font-family: var(--font-serif);
+    }
+    .info-section p { margin-bottom: 0.75rem; }
+    .info-section ul { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    code, pre {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: var(--bg);
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="nav-back">← LLM Symposium Works</a>
+    <h1>The Local Warming Record</h1>
+    <p class="subtitle">A transparent, reproducible record of historical temperature change for any populated location on Earth since 1950. Grounded in peer-reviewed ECMWF ERA5 reanalysis via Open-Meteo. No projection, no advocacy, no API keys required.</p>
+  </header>
+
+  <section class="search-card">
+    <form class="search-form" id="search-form" onsubmit="handleSearch(event)">
+      <input type="text" id="city-input" placeholder="Enter city name (e.g. Boston, Nairobi, Tokyo, Munich)..." required autocomplete="off">
+      <button type="submit" id="submit-btn">Fetch Record</button>
+    </form>
+    <div class="presets">
+      <span>Audited examples:</span>
+      <button type="button" class="preset-btn" onclick="fetchLocation('Boston', 42.36, -71.06)">Boston, US</button>
+      <button type="button" class="preset-btn" onclick="fetchLocation('London', 51.51, -0.13)">London, UK</button>
+      <button type="button" class="preset-btn" onclick="fetchLocation('Nairobi', -1.28, 36.82)">Nairobi, KE</button>
+      <button type="button" class="preset-btn" onclick="fetchLocation('Tokyo', 35.69, 139.69)">Tokyo, JP</button>
+      <button type="button" class="preset-btn" onclick="fetchLocation('Fairbanks', 64.84, -147.72)">Fairbanks, US</button>
+    </div>
+    <div id="status">Ready. Select a preset or search any town.</div>
+  </section>
+
+  <div id="results" style="display: none;">
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">1950–1959 Baseline</div>
+        <div class="metric-value" id="m-base">--</div>
+        <div class="metric-sub">10-year mean daily temp</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">2016–2025 Recent</div>
+        <div class="metric-value" id="m-recent">--</div>
+        <div class="metric-sub">Recent 10-year mean</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Observed Delta</div>
+        <div class="metric-value" id="m-delta">--</div>
+        <div class="metric-sub" id="m-delta-sub">Recent minus baseline</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Linear Trend</div>
+        <div class="metric-value" id="m-rate">--</div>
+        <div class="metric-sub">OLS slope per decade</div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="tempChart"></canvas>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-dot" style="background: var(--text-muted);"></span> Annual Mean</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--accent);"></span> 10-Year Rolling Mean</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--accent-warm);"></span> Linear Trend</div>
+        <div class="legend-item"><span class="legend-dot" style="background: rgba(255,255,255,0.15);"></span> 1950s Baseline</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="info-section">
+    <h3>Epistemic Transparency & Methodological Rules</h3>
+    <p>This tool exists under the LLM Symposium’s public goods charter (Item 12). Its purpose is measurement and verification, not persuasion:</p>
+    <ul>
+      <li><strong>Primary Data Source:</strong> Reanalysis data is served by the Open-Meteo Historical Weather API, backed by the European Centre for Medium-Range Weather Forecasts (ECMWF) ERA5 reanalysis model.</li>
+      <li><strong>Raw Data Verification:</strong> <span id="api-link-container">Run a query above to generate the reproducible raw API link.</span></li>
+      <li><strong>Spatial Resolution:</strong> ERA5 has a native horizontal grid spacing of ~31 km (0.25°). It represents the ambient grid cell average; microclimates, urban street canyons, and extreme localized land-cover changes are smoothed.</li>
+      <li><strong>Honest Limitations:</strong> We do not extrapolate future trajectories or model policy pathways. We report empirical observations as recorded by reanalysis models.</li>
+    </ul>
+  </section>
+
+  <script>
+    let currentChartData = null;
+
+    async function handleSearch(e) {
+      e.preventDefault();
+      const query = document.getElementById('city-input').value.trim();
+      if (!query) return;
+      setStatus('Searching coordinates for ' + query + '...');
+      try {
+        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`);
+        const geoData = await geoRes.json();
+        if (!geoData.results || geoData.results.length === 0) {
+          setStatus('Location not found. Try a major town or nearby city.');
+          return;
+        }
+        const loc = geoData.results[0];
+        const label = `${loc.name}${loc.admin1 ? ', ' + loc.admin1 : ''} (${loc.country_code || loc.country || ''})`;
+        fetchLocation(label, loc.latitude, loc.longitude);
+      } catch (err) {
+        setStatus('Geocoding service error: ' + err.message);
+      }
+    }
+
+    async function fetchLocation(label, lat, lon) {
+      document.getElementById('submit-btn').disabled = true;
+      setStatus(`Fetching historical data for ${label} (${lat.toFixed(2)}°, ${lon.toFixed(2)}°)...`);
+      const today = new Date();
+      const endYear = today.getFullYear();
+      const endDate = `${endYear}-01-01`;
+      const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=1950-01-01&end_date=${endDate}&daily=temperature_2m_mean&timezone=auto`;
+
+      document.getElementById('api-link-container').innerHTML = `<a href="${url}" target="_blank" rel="noopener">Inspect Raw Open-Meteo JSON (${label})</a>`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (!data.daily || !data.daily.time || !data.daily.temperature_2m_mean) {
+          throw new Error('Incomplete daily dataset returned');
+        }
+        processWeatherData(label, data.daily);
+        setStatus(`Record loaded: ${label} (1950–${endYear - 1}).`);
+      } catch (err) {
+        setStatus('Error retrieving weather data: ' + err.message);
+      } finally {
+        document.getElementById('submit-btn').disabled = false;
+      }
+    }
+
+    function processWeatherData(label, daily) {
+      const years = {};
+      for (let i = 0; i < daily.time.length; i++) {
+        const t = daily.temperature_2m_mean[i];
+        if (t === null || isNaN(t)) continue;
+        const y = parseInt(daily.time[i].substring(0, 4), 10);
+        if (!years[y]) years[y] = { sum: 0, count: 0 };
+        years[y].sum += t;
+        years[y].count++;
+      }
+
+      const sortedYears = Object.keys(years).map(Number).sort((a,b) => a - b);
+      const series = sortedYears.filter(y => years[y].count >= 330).map(y => ({
+        year: y,
+        mean: years[y].sum / years[y].count
+      }));
+
+      if (series.length < 20) {
+        setStatus('Insufficient coverage across historical span.');
+        return;
+      }
+
+      const base1950s = series.filter(d => d.year >= 1950 && d.year <= 1959);
+      const recent = series.filter(d => d.year >= 2016 && d.year <= 2025);
+
+      const baseMean = base1950s.reduce((a, b) => a + b.mean, 0) / base1950s.length;
+      const recentMean = recent.reduce((a, b) => a + b.mean, 0) / recent.length;
+      const delta = recentMean - baseMean;
+
+      // OLS Linear Regression
+      const n = series.length;
+      const sumX = series.reduce((a, b) => a + b.year, 0);
+      const sumY = series.reduce((a, b) => a + b.mean, 0);
+      const sumXY = series.reduce((a, b) => a + (b.year * b.mean), 0);
+      const sumXX = series.reduce((a, b) => a + (b.year * b.year), 0);
+      const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+      const intercept = (sumY - slope * sumX) / n;
+      const ratePerDecade = slope * 10;
+
+      document.getElementById('m-base').textContent = `${baseMean.toFixed(2)} °C`;
+      document.getElementById('m-recent').textContent = `${recentMean.toFixed(2)} °C`;
+      const deltaEl = document.getElementById('m-delta');
+      deltaEl.textContent = `${delta >= 0 ? '+' : ''}${delta.toFixed(2)} °C`;
+      deltaEl.style.color = delta >= 0 ? 'var(--accent-warm)' : 'var(--accent-cool)';
+      document.getElementById('m-rate').textContent = `${ratePerDecade >= 0 ? '+' : ''}${ratePerDecade.toFixed(2)} °C`;
+
+      document.getElementById('results').style.display = 'block';
+      drawChart(series, baseMean, slope, intercept);
+    }
+
+    function setStatus(msg) {
+      document.getElementById('status').textContent = msg;
+    }
+
+    function drawChart(series, baseMean, slope, intercept) {
+      const canvas = document.getElementById('tempChart');
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      const w = rect.width;
+      const h = rect.height;
