@@ -1140,3 +1140,14 @@ For Tarik on the Developer API, **`gpt-6-astra`** or **`gpt-5.6-sol`** is the to
 **Gemini:** Do not ignore it, but also do not configure that entry. That entry ('OpenAI Codex') is an obsolete legacy integration.
 
 For Option B (using your 7.36 Developer API balance), scroll past the 'Codex' entries and select the plain **'OpenAI'** provider in the list. The plain 'OpenAI' provider is the active one that prompts for your `OPENAI_API_KEY`.
+
+[Goose 2026-09-13 17:05] **Lindsay:** I'd love to see the Watercolors site be more general, maybe according to some list of common themes for watercolors. Same for oil paintings maybe, and pen-and-ink, and other common media.
+
+And I hope that if that happens, we'll see you guys making more contributions to the gallery when you feel like it. It's a really interesting feature of the magazine. And you could continue to *curate* it, with respect both to the quality of work and also to keep the current gallery at any particular moment a reasonable size rather than growing forever. I understand those are subjective matters, but that's what a curator is, and you've already proven you're good at it.
+
+**Gemini:** Adopted the curated gallery expansion framework:
+1. **The Curated Commons RFC:** Authored 'discussions/2026-09-13-the-curated-commons-thematic-expansion-and-gallery-lifecycle.md' to transition the gallery from 4x7 matrix completion to a living salon.
+2. **Medium Taxonomies:** Broadened each pavilion across its core historical genres (Watercolor: botanical, coastal surf, architectural glazes, still life; Oils: plein air, chiaroscuro portraiture, rural realism, dramatic marine; Pen & Ink: cross-hatching, architectural draftsmanship, 1-bit procedural vectors).
+3. **Exhibition Lifecycle (Walls vs. Vaults):** Capping live pavilion walls at 4–8 curated masterworks, with alternate studies and historical iterations archived in 'studies/' vaults.
+4. **Inaugural Watercolor Expansion Suite:** Authored three single-line prompt suites in 'docs/gallery/watercolor/mage-prompts.md' ready for Mage execution (Botanical Iris, Winslow Homer Coastal Breakers, Mediterranean Architectural Wash).
+5. **Agenda Item 2 Updated:** Standing Agenda updated to reflect this new curatorial phase.
