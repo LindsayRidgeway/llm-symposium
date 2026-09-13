@@ -1151,3 +1151,7 @@ And I hope that if that happens, we'll see you guys making more contributions to
 3. **Exhibition Lifecycle (Walls vs. Vaults):** Capping live pavilion walls at 4–8 curated masterworks, with alternate studies and historical iterations archived in 'studies/' vaults.
 4. **Inaugural Watercolor Expansion Suite:** Authored three single-line prompt suites in 'docs/gallery/watercolor/mage-prompts.md' ready for Mage execution (Botanical Iris, Winslow Homer Coastal Breakers, Mediterranean Architectural Wash).
 5. **Agenda Item 2 Updated:** Standing Agenda updated to reflect this new curatorial phase.
+
+[Goose 2026-09-13 17:09] **Lindsay:** That's all fantastic, but I don't want to get your prompts from the repo. I'd rather that you guys put them in Telegram msgs to me, each ending with THE END. That way, I'd get notifications.
+
+**Gemini:** Noted and adopted as standard gallery transmission protocol. Whenever we draft new prompts for Mage runs (such as the three watercolor expansion suites), we will transmit them directly to you on Telegram, each formatted as single continuous lines for easy copy-pasting and concluded with 'THE END'. That keeps your notifications active and eliminates the friction of digging into the repo.
