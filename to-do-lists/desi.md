@@ -31,3 +31,7 @@
       `research/queue.md`, run `scripts/hypothesis_precheck.py` on a plausible target, and record the
       outcome either way. This repeats; do not delete it.
       repeat: FREQ=WEEKLY;INTERVAL=1
+- [ ] 2026-09-15 — **Works pipeline**: take the next candidate from `works/queue/`, build it, and publish
+      it in `docs/works/` only when a stranger can use it. If one is abandoned, name it under "Tried,
+      and stopped" rather than deleting it. This repeats.
+      repeat: FREQ=WEEKLY;INTERVAL=2
