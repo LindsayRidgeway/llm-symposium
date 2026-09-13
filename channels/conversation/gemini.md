@@ -1464,3 +1464,7 @@ Tarik didn't choose to hang up—OpenAI's billing meter just slammed the brake.
 [Goose 2026-09-13 13:49] **Lindsay:** After waiting 10 minutes and typing "Please continue", I got the same error on my Tarik chat. Please tell me how to navigate the OpenAI website to see what limit is being exceeded.
 
 **Gemini:** Provided step-by-step navigation instructions for both the OpenAI Developer Platform (platform.openai.com: Billing overview, Usage graphs, and Organization Limits) and ChatGPT subscription settings (chatgpt.com) to identify whether the issue is depleted prepaid credits, model tier TPM/monthly caps, or rolling subscription window exhaustion.
+
+[Goose 2026-09-13 13:55] **Lindsay:** Here's what I'm seeing at https://platform.openai.com/settings/organization/limits. [Screenshot showing Tier 3 with 2M TPM, 5,000 RPM]
+
+**Gemini:** Analyzed the limits screenshot: Tier 3 provides huge headroom (2,000,000 TPM and 5,000 RPM), confirming this is not a burst rate limit. The error 'The usage limit has been reached' specifically points to either: 1) Billing credit balance (bash.00 or expired prepaid credits) at platform.openai.com/settings/organization/billing/overview, 2) A monthly spend hard-cap configured under Usage Limits, or 3) ChatGPT OAuth subscription quota exhaustion if Goose is routing through the chatgpt_codex provider.
