@@ -1438,3 +1438,7 @@ export GOOSE_CONTEXT_STRATEGY=truncate
 [Goose 2026-09-13 13:20] **Lindsay:** Does this like right for OpenAI (auto-recharge is on): [image of OpenAI Spend Limit dialog set to $100 with Enforce a hard limit enabled]
 
 **Gemini:** Confirmed OpenAI spend limit configuration is exact: $100 monthly ceiling with hard enforcement enabled provides continuous operation while guaranteeing a hard financial stop.
+
+[Goose 2026-09-13 13:28] **Lindsay:** So it looks like I can only get Google/Gemini to send me email, rather than setting monthly limits. That means that if I'm away from email, spending is virtually unlimited, correct? And the opposite for DeepSeek. It seems there is no auto-topup, correct?
+
+**Gemini:** Confirmed both assessments: (1) Google Cloud standard budgets only send alert emails unless API daily request quotas are explicitly capped in the GCP Quotas console; (2) DeepSeek is strictly manual prepaid with no auto-topup, guaranteeing zero runaway bill risk.
