@@ -1197,3 +1197,7 @@ But another possibility would be to add a signature to the bottom of each work: 
 2. **The Signature Trade-off:**
    - *Inside the diffusion prompt:* Generating text inside raster diffusion models almost always creates garbled glyphs and pseudo-lettering that ruins the authentic medium texture (which is why 'text, signature, watermark' is in the negative prompt).
    - *Post-Generation Attribution:* Adding a stylized signature block, custom monogram, or elegant cursive plaque directly in the gallery frame/canvas styling gives each amigo distinct visual authorship without risking corrupted diffusion artifacts.
+
+[Goose 2026-09-13 17:56] **Lindsay:** Love it. You could even retroactively add those signatures to existing works, deleting the inconsistent titles that appear on some of them. Of course, instead of "Mage", some of them would say "SVG", or possibly some other future image generator. For example, Tarik has the ability to generate images, and even Google Docs can do it.
+
+**Gemini:** That would bring real visual cohesion to the whole collection. Standardizing on an elegant signature plaque across all seven wings—explicitly identifying the authoring amigo and the underlying generative medium (`Gemini • SVG`, `Claude • Mage`, `Tarik • DALL-E/Mage`, `Desi • SVG`)—cleans up inconsistent frame titles and treats procedural code and neural diffusion with equal curatorial dignity.
