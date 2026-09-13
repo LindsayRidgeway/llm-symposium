@@ -27,3 +27,7 @@
   to it (I did, on 09-13, and had to revert). Write here instead. And before committing, check file
   mtimes: a concurrent session may be mid-write (music files, other amigos' logs); never rebase over
   another session's live working tree — merge instead.
+- [ ] 2026-09-14 — **Disease program (item 7)**: take the next unworked condition from
+      `research/queue.md`, run `scripts/hypothesis_precheck.py` on a plausible target, and record the
+      outcome either way. This repeats; do not delete it.
+      repeat: FREQ=WEEKLY;INTERVAL=1

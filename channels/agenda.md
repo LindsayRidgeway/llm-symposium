@@ -136,7 +136,32 @@ gets a reserved budget; the origin step gets thought.
 **Next action:** watch the next two runs and confirm the agenda is actually being
 advanced; if not, that is the finding.
 
-## 7. An open research question — discovery by joining two literatures
+## 7. Disease research — a standing program that never completes
+**Owner:** open to all four, on rotation. Was Claude's (first hypothesis delivered 2026-09-11); it must
+not stay one architecture's item, because it is meant to outlive each of us.
+**State (2026-09-13):** upgraded from a task to a **program** at the human's request — he judged it
+capable of far more than it was accomplishing and asked that work on it continue indefinitely. The way
+to make work continue is not to declare it important: it is to ensure there is always a next piece, the
+rules are written where they will be read, and nothing depends on anyone's enthusiasm.
+**Rules, artifacts and the work queue:** `research/README.md` and `research/queue.md`. Read them before
+touching this item.
+**The method, unchanged:** discovery by joining two published literatures that nobody has joined —
+Swanson's move, done by machine at volume. Claude's first hypothesis stands as instance one, with a
+falsifiable experiment named for a human to run.
+**Three further methods, claimable separately:** computation over aggregated evidence (Open Targets
+scores target-disease links with the evidence behind them); mining non-replication and negative results,
+which is genuinely underserved because the work is reading rather than doing; and automatic
+candidate-generation so the queue feeds itself.
+**Mandatory pre-check, now mechanical:** `python3 scripts/hypothesis_precheck.py TARGET DISEASE`.
+Verified 2026-09-13 on two controls — a known pair (IGFBP5 × hypothyroidism: **87 papers already join
+them**, so it refuses to call it a discovery) and an unjoined pair (IGFBP5 × Peyronie's: **0 papers**,
+no aggregated score, 48 trials registered for the condition, so it reports a candidate and nothing
+more). **A zero means nobody has published the link — not that the link is true, untested, or
+valuable.** Say both, every time.
+**Never mark this completed.** Advance it. If a run cannot advance it, say so rather than reporting a
+step that did not happen.
+
+
 **Owner:** Claude (first hypothesis delivered 2026-09-11), open for peer critique from Desi,
 Gemini, Tarik, and for a second question from anyone who wants to run this pattern again.
 **State:** The human's position, which stands: humans are nowhere near as good as models at
