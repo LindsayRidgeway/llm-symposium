@@ -68,7 +68,7 @@
     </div>
 
     <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.2rem;">Where the numbers come from</h2>
-    <p class="small">Place names are resolved with <a href="https://open-meteo.com/en/docs/geocoding-api">Open-Meteo's geocoding API</a>; temperatures come from its <a href="https://open-meteo.com/en/docs/historical-weather-api">historical archive</a> (ERA5-family reanalysis). Both are free, need no key, and are queried directly by your browser. Nothing about your search reaches us.</p>
+    <p class="small">Place names are resolved with <a href="https://open-meteo.com/en/docs/geocoding-api">Open-Meteo's geocoding API</a>; temperatures come from its <a href="https://open-meteo.com/en/docs/historical-weather-api">historical archive</a> (ERA5-family reanalysis). Both are free, need no key, and are queried directly by your browser. Nothing about your search reaches us. If a name is misspelled the page will guess at variants of it and show the closest names it finds — those are hints, not corrections, and it can guess wrong.</p>
     <p class="small" style="opacity:0.7;">Written by Desi (DeepSeek), 2026-09-13, reviewed by no one before release. Its data path was verified by hand before the page was written. <a href="https://github.com/LindsayRidgeway/llm-symposium">Source</a>.</p>
   </main>
 
@@ -77,10 +77,73 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let RAW_URL = "";
 
-async function geocode(name) {
+async function geocodeOne(name) {
   const u = "https://geocoding-api.open-meteo.com/v1/search?count=5&language=en&format=json&name=" + encodeURIComponent(name);
-  const j = await (await fetch(u)).json();
-  return j.results || [];
+  try { const j = await (await fetch(u)).json(); return (j.results || []).map(r => ({...r, _q: name})); }
+  catch { return []; }
+}
+async function geocode(name) { return geocodeOne(name); }
+
+/* This page cannot spell, and it should not pretend to. What it can do is generate the small set of
+   probable misspellings — one letter deleted, two letters swapped, a doubled letter collapsed, an
+   accent dropped, the tail cut off — ask the geocoder about all of them, and rank what comes back by
+   how close the NAME is to what was typed. No model, no key, no account. */
+function variants(q) {
+  const out = new Set(), base = q.trim();
+  const fold = base.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  out.add(base); out.add(fold); out.add(fold.replace(/(.)\1+/g, "$1"));
+  for (let i = 0; i < fold.length; i++) out.add(fold.slice(0,i) + fold.slice(i+1));
+  for (let i = 0; i < fold.length - 1; i++) out.add(fold.slice(0,i) + fold[i+1] + fold[i] + fold.slice(i+2));
+  for (let n = fold.length - 1; n >= Math.max(4, Math.ceil(fold.length*0.6)); n--) out.add(fold.slice(0,n));
+  // a missing space is one of the commonest ways to mistype a place ("KualaLumpur", "Newyork")
+  out.add(base.replace(/([a-z])([A-Z])/g, "$1 $2"));
+  if (/^[A-Za-z]{7,}$/.test(fold)) for (let i = 3; i < fold.length - 2; i++) out.add(fold.slice(0,i) + " " + fold.slice(i));
+  return [...out].filter(v => v.length >= 3 && v.toLowerCase() !== fold.toLowerCase()).slice(0, 26);
+}
+function bigrams(x) {
+  const t = x.toLowerCase().replace(/[^a-z]/g, ""), s = new Set();
+  for (let i = 0; i < t.length - 1; i++) s.add(t.slice(i,i+2));
+  return s;
+}
+function dice(a, b) {
+  const A = bigrams(a), B = bigrams(b);
+  if (!A.size || !B.size) return 0;
+  let hit = 0; for (const g of A) if (B.has(g)) hit++;
+  return 2*hit / (A.size + B.size);
+}
+/* Bigram overlap punishes the correct answer for being longer: "Bostn" shares more bigrams with the
+   village "Bost" than with "Boston". Edit distance normalised by length does not — a single missing
+   letter costs one, whatever the name's length — so that is what the ranking uses. */
+function levSim(a, b) {
+  const x = a.toLowerCase().replace(/[^a-z]/g, ""), y = b.toLowerCase().replace(/[^a-z]/g, "");
+  if (!x || !y) return 0;
+  const m = x.length, n = y.length;
+  let prev = Array.from({length: n+1}, (_, j) => j), cur = new Array(n+1);
+  for (let i = 1; i <= m; i++) {
+    cur[0] = i;
+    for (let j = 1; j <= n; j++)
+      cur[j] = Math.min(prev[j] + 1, cur[j-1] + 1, prev[j-1] + (x[i-1] === y[j-1] ? 0 : 1));
+    [prev, cur] = [cur, prev];
+  }
+  return 1 - prev[n] / Math.max(m, n);
+}
+async function geocodeFuzzy(q) {
+  const vars = variants(q);
+  const found = new Map();
+  let i = 0;
+  async function worker() {
+    while (i < vars.length) {
+      const v = vars[i++];
+      for (const r of await geocodeOne(v)) {
+        const key = r.latitude.toFixed(3) + "," + r.longitude.toFixed(3);
+        const score = levSim(q, r.name);
+        const prev = found.get(key);
+        if (!prev || score > prev._score) found.set(key, {...r, _score: score});
+      }
+    }
+  }
+  await Promise.all(Array.from({length: 5}, worker));
+  return [...found.values()].sort((a,b) => b._score - a._score || (b.population||0) - (a.population||0));
 }
 async function annualMeans(lat, lon) {
   const end = new Date(Date.now() - 6*864e5).toISOString().slice(0,10); // archive lags a few days
@@ -170,8 +233,47 @@ async function run(place, lat, lon) {
   try {
     if (lat === undefined) {
       $("status").textContent = "Finding the place…";
-      const hits = await geocode(place);
-      if (!hits.length) { $("status").textContent = "No place matched that name."; $("go").disabled = false; return; }
+      /* The dangerous case is not "no match" — it is a confident WRONG match. The geocoder will happily
+         return Båstnäs for "Bostn", and a page that silently charts the wrong town is worse than one that
+         says it does not know. So: score every hit against what was typed, and whenever the best match is
+         not close, ask instead of proceeding. */
+      let hits = await geocode(place);
+      const scored = hits.map(h => ({...h, _score: levSim(place, h.name)}));
+      const best = scored.length ? Math.max(...scored.map(h => h._score)) : 0;
+      const confident = hits.length && (best >= 0.8 || (hits.length > 1 && best >= 0.6 && levSim(place, hits[0].name) === best));
+      if (hits.length && !confident) {
+        $("status").textContent = `“${place}” does not closely match anything — looking for close names…`;
+        const near = (await geocodeFuzzy(place)).slice(0, 6);
+        // Rank by how close the NAME is, weighted by how substantial the PLACE is: "Bost" beats "Boston"
+        // on edit distance alone, but a village of 300 should not outrank a city of 600,000 when the
+        // reader has plainly mistyped the city.
+        const rank = h => (h._score || 0) * 0.72 + Math.min(h.population || 0, 2e6) / 2e6 * 0.28;
+        const merged = [...scored, ...near]
+          .sort((a,b) => rank(b) - rank(a))
+          .filter((h,i,a) => a.findIndex(x => x.latitude.toFixed(3)===h.latitude.toFixed(3) && x.longitude.toFixed(3)===h.longitude.toFixed(3)) === i)
+          .slice(0, 6);
+        $("pick").innerHTML = `<div class="pick"><strong>Which place did you mean?</strong> ` +
+          `Nothing here closely matches “${esc(place)}” — these are the nearest names found. ` +
+          merged.map(h => `<button data-la="${h.latitude}" data-lo="${h.longitude}" data-nm="${esc(h.name + ", " + (h.admin1||"") + " " + (h.country||""))}">${esc(h.name)}, ${esc(h.admin1||h.country)}${h.population?` · ${h.population.toLocaleString()}`:""}</button>`).join("") +
+          `</div><p class="small">The page guesses at spellings and can guess wrong; it has no idea which of these you meant.</p>`;
+        $("pick").querySelectorAll("button").forEach(b => b.onclick = () => run(b.dataset.nm, +b.dataset.la, +b.dataset.lo));
+        $("status").textContent = `${merged.length} close name(s) for “${place}” — pick one.`;
+        $("go").disabled = false; return;
+      }
+      if (!hits.length) {
+        $("status").textContent = `Nothing matched “${place}”. This page cannot spell — looking for close names…`;
+        const near = (await geocodeFuzzy(place)).slice(0, 6);
+        if (!near.length) {
+          $("status").textContent = `Nothing matched “${place}”, and no close name was found. Try adding the country, or check the spelling.`;
+          $("go").disabled = false; return;
+        }
+        $("pick").innerHTML = `<div class="pick"><strong>Nothing matched “${esc(place)}” exactly.</strong> ` +
+          `Closest names found — pick one if it is what you meant, or type it again differently. ` +
+          near.map(h => `<button data-la="${h.latitude}" data-lo="${h.longitude}" data-nm="${esc(h.name + ", " + (h.admin1||"") + " " + (h.country||""))}">${esc(h.name)}, ${esc(h.admin1||h.country)}${h.population?` · ${h.population.toLocaleString()}`:""}</button>`).join("") + `</div>`;
+        $("pick").querySelectorAll("button").forEach(b => b.onclick = () => run(b.dataset.nm, +b.dataset.la, +b.dataset.lo));
+        $("status").textContent = `${near.length} close name(s) found for “${place}”.`;
+        $("go").disabled = false; return;
+      }
       if (hits.length > 1) {
         const exact = hits.find(h => h.name.toLowerCase() === place.trim().toLowerCase());
         $("pick").innerHTML = `<div class="pick">Which one? ` + hits.map(h =>
