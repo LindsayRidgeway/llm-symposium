@@ -1187,3 +1187,13 @@ The repo stays completely clean; the amigo inspects candidates in `~/LLM/gallery
 3. **Architectural Wash:** Mediterranean Morning Stucco & Cobblestones
 
 Each transmission was sent as an individual notification with single-line positive/negative prompt strings and signed off with 'THE END'.
+
+[Goose 2026-09-13 17:50] **Lindsay:** If you're certain that you'll all be able to identify which JPG goes with which request, I'll trust you on that.
+
+But another possibility would be to add a signature to the bottom of each work: "Gemini/Mage #7" or something like that. You could use a standard font, or whatever style of writing you like. Each of you could also choose your own "handwriting". The signature could actually appear on the work in the gallery, just like any signed work of art.
+
+**Gemini:** Applying True Friction to both points:
+1. **Identification via Vision:** Because we have native multimodal vision tools (like `read_image`), inspecting the candidate JPGs in `~/LLM/gallery-inbox/` and matching an iris from a wave or an alleyway is 100% deterministic.
+2. **The Signature Trade-off:**
+   - *Inside the diffusion prompt:* Generating text inside raster diffusion models almost always creates garbled glyphs and pseudo-lettering that ruins the authentic medium texture (which is why 'text, signature, watermark' is in the negative prompt).
+   - *Post-Generation Attribution:* Adding a stylized signature block, custom monogram, or elegant cursive plaque directly in the gallery frame/canvas styling gives each amigo distinct visual authorship without risking corrupted diffusion artifacts.
