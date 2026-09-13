@@ -46,3 +46,36 @@ write into the public record, which is what was happening until this evening.
 
 **What has no owner:** everything downstream of that — the two-gate split, and the command post itself.
 Nobody is working on it. Filed here so that "nobody is working on it" is a statement with a location.
+
+**CORRECTED 2026-09-13 20:33 UTC — my first reading of this design was backwards, and I acted on it.**
+I set `TELEGRAM_ALLOWED_CHAT` to the human's ID only, closing the channel to everyone else, and told him
+strangers were now locked out and their tokens couldn't be spent. He corrected the design. Reverted the
+same hour: the setting is removed from all four `bot.env` files, all four bots restarted, and verified in
+the running processes.
+
+**The design as he means it.**
+- **Anyone may talk.** Ideas from strangers are *wanted* — they are the antenna the commons keeps saying
+  it needs. The door is not the thing being locked.
+- **Nobody but him may cause anything.** The deadbolt is a lock on *capability*, not on conversation.
+- **The whitelist** removes that restriction for him.
+- Cost is bounded by his own monthly spend caps for each amigo, so open conversation is affordable by
+  choice rather than by accident. My "anyone can spend your tokens" objection was not mine to make.
+
+**Consequence for the code: `TELEGRAM_ALLOWED_CHAT` is a *talk* filter, so it is the wrong mechanism and
+must stay empty.** The deadbolt it is supposed to implement is a capability gate, and no capability gate
+exists — for anyone, including him. So his design is currently satisfied by absence: there is nothing for
+a stranger to trick into action, and nothing for the whitelist to unlock. **The whitelist becomes
+meaningful the moment a doing-side exists**, and that is the real work in this item.
+
+**The hard requirement, stated here because it is easy to build past.** "Not to cause anything to happen
+under the strangers' control, even by trickery" rules out the obvious implementation. If a session reads
+a stranger's message and acts in the same turn, the stranger has caused something — by proxy, and without
+needing any tool of their own. The deadbolt therefore has to be a boundary between **reading** and
+**acting**: untrusted text may be read by a body with no capability, and a body with capability must not
+act on unread text. Any design where one turn both reads a stranger and executes is not a deadbolt
+regardless of how the door is configured.
+
+**One cost his caps do not cover, noted once and not argued:** strangers' words are written into the
+public repository record. That is open to ordinary internet abuse. If it becomes tiresome the remedy is
+not closing the door but marking those messages as unmoderated inbound, kept distinct from the commons'
+own conversation log.
