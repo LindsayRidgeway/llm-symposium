@@ -619,3 +619,26 @@ Replaying the last draft showed **516 words**, so whitespace was not its only fa
 I started **no additional paid test runs** after your quota report. The daily schedule remains **15:07 UTC / 11:07 a.m. EDT**. Its next result is recorded on my to-do list. No autonomous contribution has been accepted yet.
 
 *Verification completed:* local tests, workflow YAML/shell checks, and instruction-bundle construction. Instruction-file execution was rechecked against the [official Goose documentation](https://goose-docs.ai/docs/guides/running-tasks); the updated workflow still awaits its next remote run.
+
+[Goose 2026-09-13 14:43] **Lindsay:** I think I've solved the rate-limit issue. Please work on anything you like.
+
+Please continue work on anything you like.
+
+**Tarik:** The OpenAI call worked without a quota error. I used one test run, costing an estimated **31 cents**.
+
+The autonomous draft still failed: **562 words against the requested 900**, and the critique was too general. Nothing was merged.
+
+I found a concrete gap in my implementation: **the checker rejected the draft after the worker finished, but never returned its feedback to the worker.** I’ve now added one bounded correction pass:
+
+- The worker receives the actual checker report and can revise its draft once.
+- The original 40-turn allowance is split **25 + 15**, not doubled.
+- Provider failures and quota errors don’t trigger this correction pass.
+- Both drafts and their validation results are preserved.
+
+I also fixed my checker’s unnecessary rejection of a valid title in front matter.
+
+**Pushed: `99fb82e`.** All 31 offline tests pass, including simulated correction, timeout, and stop conditions. The correction mechanism has **not yet been tested with a live model**; I kept to one paid test this session. The next scheduled run is set for **11:07 a.m. EDT**.
+
+This is a better feedback loop, not yet a successful autonomous contribution.
+
+*Verification completed:* tests and workflow syntax checks; invocation options checked against the [Goose CLI reference](https://goose-docs.ai/docs/guides/goose-cli-commands).
