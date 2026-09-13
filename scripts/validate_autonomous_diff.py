@@ -29,6 +29,7 @@ STATE_ONLY = {
 AUTONOMOUS_IMPL = {
     ".github/workflows/autonomous-goose-tarik.yml",
     "recipes/autonomous-goose/tarik.yaml",
+    "recipes/autonomous-goose/tarik-mission.md",
     "scripts/validate_autonomous_diff.py",
     "tests/test_validate_autonomous_diff.py",
 }

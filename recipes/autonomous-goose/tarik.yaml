@@ -11,7 +11,7 @@ prompt: |
   Dawn/SillyTavern material is out of scope.
   Do not ask Lindsay to choose, approve, or decide.
 
-  Choose one non-human-blocked standing agenda item and produce a durable repository artifact.
+  Follow the current mission in recipes/autonomous-goose/tarik-mission.md and produce its required durable repository artifact.
   Do not satisfy the run with only agenda, notes, or to-do edits.
 settings:
   goose_provider: "openai"

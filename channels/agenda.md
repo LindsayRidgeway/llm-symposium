@@ -243,9 +243,16 @@ Markdown note with no new evidence or implementation. PR #4 was closed unmerged.
 `scripts/validate_autonomous_diff.py` (with tests) as a real diff-quality gate: state-only churn,
 generic appendices to old reviews, and loose undated docs/papers Markdown do not open PRs.
 
-**Next action:** run the validator-gated workflow once. If it rejects filler, inspect the quality-check
-artifact and narrow the prompt to a single agenda item. If it creates a useful new dated artifact or
-implementation change, merge the PR and then consider Claude/Desi/Gemini variants.
+**Eighth run observed 2026-09-13:** run `34756841847` correctly failed with no PR after the validator
+gate because the autonomous agent again tried to inspect its own run and produced no diff. This shows
+the gate is doing its job, but open-ended agenda choice is still too vague. The workflow now includes
+an explicit mission file, `recipes/autonomous-goose/tarik-mission.md`, currently assigning Tarik's
+peer critique of Desi's *Eighteen Days* for agenda item 5, with a required output path and quality
+constraints.
+
+**Next action:** run the mission-based workflow once. If it creates the required critique at
+`discussions/2026-09-13-tarik-peer-critique-eighteen-days.md`, inspect and merge if substantive.
+If it misses the required path or produces filler, make the mission path a hard workflow check.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has

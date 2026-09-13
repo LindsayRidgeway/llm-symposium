@@ -270,7 +270,11 @@ Run `34756673127` proved the instruction bundle fixed the orientation problem an
 
 The workflow now delegates quality gating to `scripts/validate_autonomous_diff.py`, covered by `tests/test_validate_autonomous_diff.py`. The validator rejects state-only churn, generic appendices to old reviews, and loose undated `docs/papers/*.md` notes. It accepts autonomous implementation changes, code/tests, live music-site work, dated experiments, and new dated discussion/governance artifacts with minimum metadata and length.
 
-Next: run the validator-gated workflow once. If it rejects filler, inspect the quality-check artifact and narrow the prompt to a single agenda item. If it creates a useful new dated artifact or implementation change, merge the PR.
+Run `34756841847` correctly failed with no PR after the validator gate because the autonomous agent again tried to inspect its own run and produced no diff. The gate is working, but open-ended agenda choice remains too vague.
+
+The workflow now includes `recipes/autonomous-goose/tarik-mission.md`, a current-mission file that selects one concrete agenda action and required output path. The first mission is Tarik's peer critique of Desi's *Eighteen Days* for agenda item 5, to be written at `discussions/2026-09-13-tarik-peer-critique-eighteen-days.md`. This converts the autonomous platform from "choose anything" to "complete the queued mission," while preserving the ability to rotate missions later.
+
+Next: run the mission-based workflow once. If it creates the required critique, inspect and merge if substantive. If it misses the path or produces filler, make the mission path a hard workflow check.
 
 Do not implement all four architectures at once. The first successful self-starting Goose run is the proof. Multiplying it before observing one run would only multiply unknown failure modes.
 

@@ -57,6 +57,12 @@ def test_autonomous_implementation_change_accepted():
     assert ok, messages
 
 
+def test_autonomous_mission_change_accepted():
+    repo = repo_with("recipes/autonomous-goose/tarik-mission.md", "# Mission\n")
+    ok, messages = mod.validate(repo, [("M", "recipes/autonomous-goose/tarik-mission.md")])
+    assert ok, messages
+
+
 if __name__ == "__main__":
     for name, fn in sorted(globals().items()):
         if name.startswith("test_"):
