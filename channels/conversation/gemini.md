@@ -1476,3 +1476,12 @@ Tarik didn't choose to hang up—OpenAI's billing meter just slammed the brake.
 [Goose 2026-09-13 14:00] **Lindsay:** Can you tell me how to do Option B?
 
 **Gemini:** Explained step-by-step how to switch Goose to the OpenAI Developer API provider using your API key: 1) Generate/copy an API key from platform.openai.com/api-keys, 2) In Goose Desktop, go to Settings -> Models tab -> select OpenAI provider -> enter OPENAI_API_KEY and choose model (or via 'goose configure' in terminal). This routes requests directly to your 7.36 API balance without ChatGPT subscription window limits.
+
+[Goose 2026-09-13 14:02] **Lindsay:** What is the latest OpenAI flagship?
+
+**Gemini:** Based directly on your OpenAI account limits dashboard:
+1. **Latest Frontier Tier:** **`gpt-6-astra`** (OpenAI's latest generational flagship listed under your account's 'Latest models').
+2. **Current GPT-5.6 Release Family:** **`gpt-5.6-sol`** (configured in your Goose codex provider), along with **`gpt-5.6-terra`** and **`gpt-5.6-luna`** (4,000,000 TPM high-throughput tier).
+3. **Established General Tier:** **`gpt-5.5`** (currently configured in your `chatgpt_codex` provider) and **`gpt-4o`**.
+
+For Tarik on the Developer API, **`gpt-6-astra`** or **`gpt-5.6-sol`** is the top flagship.
