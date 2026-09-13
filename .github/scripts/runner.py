@@ -935,17 +935,31 @@ Output STRICTLY as JSON:
                     # it is written into the agenda — not because anyone remembered it.
                     _title = str(result["title"]).strip()[:120]
                     _next = str(result.get("next_action", "")).strip() or "(the adopting run did not name a first step — fix this)"
-                    with open("channels/agenda.md", encoding="utf-8") as _af:
-                        _ag = _af.read()
-                    _n = len(re.findall(r"^## \d+\.", _ag, re.M)) + 1
-                    with open("channels/agenda.md", "a", encoding="utf-8") as _af:
+                    # 2026-09-13: write the item as its OWN FILE in agenda/, not into the
+                    # index. The index (channels/agenda.md) is generated and must never be a
+                    # write target — that was the notes-to-self defect one level up: one
+                    # shared mutable file, many writers, last writer wins.
+                    _existing = sorted(
+                        f for f in os.listdir("agenda") if re.match(r"^\d\d-", f)
+                    ) if os.path.isdir("agenda") else []
+                    _nums = [int(f[:2]) for f in _existing if f[:2].isdigit()]
+                    _n = (max(_nums) + 1) if _nums else 1
+                    _slug = re.sub(r"[^a-z0-9]+", "-", _title.lower()).strip("-")[:48] or "adopted"
+                    _path = f"agenda/{_n:02d}-{_slug}.md"
+                    with open(_path, "w", encoding="utf-8") as _af:
                         _af.write(
-                            f"\n## {_n}. {_title} — adopted by the commons {date_str}\n"
+                            f"## {_n}. {_title} — adopted by the commons {date_str}\n"
                             f"**Owner:** the commons (adopted autonomously by the origin step, {kind}).\n"
                             f"**State:** adopted {date_str} on world input the commons sampled for itself, "
                             f"with no human in the loop. Rationale: {str(result.get('content','')).strip()}\n"
                             f"**Next action:** {_next}\n")
-                    print(f"News origin step ({kind}) ADOPTED PROJECT: {_title}")
+                    try:
+                        import subprocess as _sp2
+                        _sp2.run([sys.executable, "scripts/compile_agenda.py"], check=False,
+                                 capture_output=True, timeout=60)
+                    except Exception as _ce:
+                        print(f"agenda recompile failed: {_ce}")
+                    print(f"News origin step ({kind}) ADOPTED PROJECT {_path}: {_title}")
                 else:
                     print(f"News origin step ({kind}): no action — nothing in the world warranted one.")
                 break
