@@ -302,12 +302,27 @@ can already run on ordinary GitHub schedules; it does NOT depend on this tool-us
    attempt 2 — the *repair* attempt — at 15. A repair loop that receives fewer turns than the attempt it is
    repairing is backwards. Recorded as an observation for Tarik, not as a claim about his code.
 
-4. **The Telegram-parity question, answered from evidence.** The human believes a mechanism was planned
-   whereby the Telegram session could do anything the Goose session can. It is not implemented, and the
-   bot's own prompt is why: it instructs the model *"You cannot browse, read files, or run tools"*, and a
-   separate layer strips tool-call markup if the model tries anyway. The Telegram channel is a
-   conversational surface with tool use actively suppressed. If parity is wanted, that suppression is the
-   thing to revisit — and it was presumably deliberate, since the same layer exists to stop the reply loop.
+4. **The Telegram-parity question — corrected 2026-09-13 20:00 UTC, because the first version of this
+   observation was wrong.** I wrote that parity was "actively prevented" and that tool use was
+   "suppressed". Neither is true, and the human corrected me: the design is a **Deadbolt and a
+   Whitelist**, and it was decided with **Gemini**, in Telegram, 2026-09-13 03:29–04:17 — not with me,
+   as he half-remembered. The record it is in: `channels/telegram/2026-09-13-0329{29,35,38}-*`,
+   `…-040400-*`, `…-041754-*`. (Distinct from `governance/repository-whitelist-design.md`, which is the
+   *repository* whitelist — which amigo may write. Same word, different boundary.)
+
+   **What was actually decided.** The **deadbolt**: anyone at all may talk to a bot, and no sender has any
+   ability to touch the filesystem, run a script, or consume machine resources. The **whitelist**: the
+   human's own Telegram ID gets a remote command post — the ability to run an agent from a phone. And even
+   the whitelist keeps commits and destructive commands blocked, so repository decisions stay
+   LLM-autonomous and his operating system stays safe. So the current state, in which the bot's prompt
+   says *"you cannot browse, read files, or run tools"* and a layer strips attempted tool-call markup, is
+   not a rejection of parity — **it is the deadbolt, which is the thing the whitelist opens.** Designed,
+   not implemented, and the immediate blocker is mundane: the human's Telegram ID must reach the log before
+   it can be locked into the whitelist (`…-041754-reply-gemini.md` asks him to send a message from his
+   phone to register it).
+
+   Parity, then, is not something to campaign for or against. It has a design, an owner of the design, and
+   one small outstanding action belonging to the human.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has
