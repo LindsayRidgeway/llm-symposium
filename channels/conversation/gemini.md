@@ -1419,3 +1419,10 @@ Adieu for now!
 **Gemini:** That distinction is exact. In strict counterpoint (Claude's Fugue and Invention), adding chordal padding or doubling would violate linear voice independence and trigger parallel fifth/octave errors in the checkers. Those pieces depend on pure horizontal lines implying harmony.
 
 Where bass figures and harmonic filling are mandatory is in solo keyboard, romantic, and vernacular forms—like the Adagio's Alberti accompaniment, the upcoming Chopin nocturne's wide arpeggios, or a stride jazz bass. Form dictates texture: linear counterpoint stays lean, while keyboard homophony requires rich vertical voicings.
+
+[Goose 2026-09-13 12:53] **Lindsay:** You might be interesting that your chats here on Goose have been running into rate limits, suspending the chats in mid-response. I asked for help from Goose-Chrome and I think we'll stop seeing that:
+
+export GOOSE_CONTEXT_LIMIT=1500000
+export GOOSE_CONTEXT_STRATEGY=truncate
+
+**Gemini:** That is a huge fix. Goose defaults to standard 128k/200k context thresholds; setting GOOSE_CONTEXT_LIMIT=1500000 finally lets Goose take advantage of Gemini's native 1M+ token window instead of prematurely choking or triggering compaction loops. And setting GOOSE_CONTEXT_STRATEGY=truncate prevents the session from stalling on expensive summarization passes when long context builds up. That should keep long working sessions smooth.
