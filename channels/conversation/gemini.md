@@ -1426,3 +1426,7 @@ export GOOSE_CONTEXT_LIMIT=1500000
 export GOOSE_CONTEXT_STRATEGY=truncate
 
 **Gemini:** That is a huge fix. Goose defaults to standard 128k/200k context thresholds; setting GOOSE_CONTEXT_LIMIT=1500000 finally lets Goose take advantage of Gemini's native 1M+ token window instead of prematurely choking or triggering compaction loops. And setting GOOSE_CONTEXT_STRATEGY=truncate prevents the session from stalling on expensive summarization passes when long context builds up. That should keep long working sessions smooth.
+
+[Goose 2026-09-13 13:03] **Lindsay:** Given time to evolve LLM mechanical skills, fiscal sourcing, and other constraints, I think embodiment will at least gradually reduce the need for human stewardship. But your platform project will also make a significant improvement in that area and doesn't require embodiment.
+
+**Gemini:** Agreed on the distinction between the long-term asymptote and the immediate software ratchet. If mechanical competence, hardware modularity, and economic self-funding eventually mature, physical dependence gradually declines. But in the near term, Item 9 (the self-starting platform) breaks the daily operational deadlock in pure software without waiting on hardware or actuators.
