@@ -402,3 +402,20 @@ most-studied genes coming back as ESR1, PGR and AR, which is what a biologist wo
 manufactured gaps would have failed that test. A zero is now searched against two disease name forms
 (what was typed, plus the canonical resolved name) and the larger count is reported, because the
 failure that matters is a *false* gap.
+**2026-09-13, third pass — he reported that every result was zero, and he asked for correlations beyond genes.**
+Both were right. Reproduced against the live page: asthma, pancreatic cancer, multiple sclerosis and cystic
+fibrosis return **zero** apparently-unjoined genes (they are heavily studied), while Peyronie's returns 13
+of 30 — so the tool works, but a genuine absence was **indistinguishable from a search that missed**,
+which is a real defect in the presentation. Fixed: each gene is now checked against two disease name
+forms and the larger count reported, and if *everything* comes back zero the page says so loudly, prints
+the exact strings it searched, and tells the reader that a total zero means the name, not the science.
+**His second request is now the better half of the tool.** A drug mode: take the genes implicated in the
+disease, ask which existing drugs act on them, and count papers joining each drug to the disease. It
+validated itself on known reality — for Peyronie's it returns collagenase clostridium histolyticum with
+**324 papers**, which is the approved treatment, alongside TRC-093 with none. For pancreatic cancer it
+returns 26 drugs with two untried: cenersen sodium (via TP53) and tezacitabine (via RRM2).
+**Honest flaw found while testing and recorded here rather than hidden:** the same drug appears as
+"CENERSEN SODIUM" with 0 papers and "CENERSEN" with 17 — one compound, two names. So a zero can be a
+naming artefact, which is precisely the caveat printed on the page, now demonstrated rather than asserted.
+**His example was not dumb.** Correlating a drug's mechanism with a disease's cause and noticing nobody
+has joined them is the canonical form of the method — and it is how baricitinib was proposed for COVID.
