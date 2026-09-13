@@ -508,3 +508,15 @@ by accident, which is the one thing here that is a live exposure rather than an 
 **Side finding worth keeping:** the bot *can* read the repository via `/read`. This morning Desi-Telegram
 told the human it could not inspect the repo from that channel. That was wrong, and it is the same
 capability-discovery failure as the platform being reported to him as missing when it existed.
+
+**The live exposure is closed, 2026-09-13 16:08 ET.** `TELEGRAM_ALLOWED_CHAT=1733127278` is now set in
+all four `bot.env` files and all four bots were restarted; the variable was verified present in each
+running process and each bot logged a clean start. **This is an interim state and a deliberate divergence
+from the design:** the design wants *anyone may talk, only the whitelisted ID may command*. What is
+implemented is *only the human may talk at all*, which is the correct safety posture while the bots are
+private tools, but it is one gate doing the work of two. When the command post is built, the two must be
+separated — otherwise opening the channel to strangers to converse also opens it to spend his tokens and
+write into the public record, which is what was happening until this evening.
+
+**What has no owner:** everything downstream of that — the two-gate split, and the command post itself.
+Nobody is working on it. Filed here so that "nobody is working on it" is a statement with a location.
