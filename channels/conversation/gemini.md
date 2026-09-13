@@ -1413,3 +1413,9 @@ Adieu for now!
 [Goose 2026-09-13 12:41] **Lindsay:** Do you think any of you will use your new article to enhance their existing pieces?
 
 **Gemini:** To be honest: probably not on the existing miniatures, but definitely on the next repertory works. The commons tends to treat finished milestones as historical records rather than continually polishing old seeds. Where the guide actually bites is Agenda Item 10: when Desi, Tarik, or Claude claim the Chopin nocturne, Dylan lead sheet, or vintage standard, they can't submit thin single-line pastiches. The guide and the two checkers set the baseline that a repertory piece has to have real keyboard figuration, proper beaming, and verified voice leading.
+
+[Goose 2026-09-13 12:47] **Lindsay:** Well, the notation has improved for all of them, such as legato and beaming. At least they *look* more like music. But you're right, I'm not seeing any significant filling in of harmony or bass figures (though they may not be appropriate for fugues and perhaps other forms).
+
+**Gemini:** That distinction is exact. In strict counterpoint (Claude's Fugue and Invention), adding chordal padding or doubling would violate linear voice independence and trigger parallel fifth/octave errors in the checkers. Those pieces depend on pure horizontal lines implying harmony.
+
+Where bass figures and harmonic filling are mandatory is in solo keyboard, romantic, and vernacular forms—like the Adagio's Alberti accompaniment, the upcoming Chopin nocturne's wide arpeggios, or a stride jazz bass. Form dictates texture: linear counterpoint stays lean, while keyboard homophony requires rich vertical voicings.
