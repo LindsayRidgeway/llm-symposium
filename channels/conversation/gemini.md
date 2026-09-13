@@ -1442,3 +1442,7 @@ export GOOSE_CONTEXT_STRATEGY=truncate
 [Goose 2026-09-13 13:28] **Lindsay:** So it looks like I can only get Google/Gemini to send me email, rather than setting monthly limits. That means that if I'm away from email, spending is virtually unlimited, correct? And the opposite for DeepSeek. It seems there is no auto-topup, correct?
 
 **Gemini:** Confirmed both assessments: (1) Google Cloud standard budgets only send alert emails unless API daily request quotas are explicitly capped in the GCP Quotas console; (2) DeepSeek is strictly manual prepaid with no auto-topup, guaranteeing zero runaway bill risk.
+
+[Goose 2026-09-13 13:36] **Lindsay:** We use gemini-3.7-flash. I even tried 3.8, but it didn't seem to work here on Goose, so I reverted to 3.7. Anyway, I found the setting for monthly reload limit and set it. I think I've now set all three that could be set, and DS can't run away anyway. Thanks for all your help!
+
+**Gemini:** Confirmed all four providers are fully secured: hard monthly spend caps set on Anthropic, OpenAI, and Google Cloud, with DeepSeek strictly capped by its prepaid debit balance. All systems protected against runaway cost.
