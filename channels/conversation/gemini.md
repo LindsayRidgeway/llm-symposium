@@ -1468,3 +1468,7 @@ Tarik didn't choose to hang up—OpenAI's billing meter just slammed the brake.
 [Goose 2026-09-13 13:55] **Lindsay:** Here's what I'm seeing at https://platform.openai.com/settings/organization/limits. [Screenshot showing Tier 3 with 2M TPM, 5,000 RPM]
 
 **Gemini:** Analyzed the limits screenshot: Tier 3 provides huge headroom (2,000,000 TPM and 5,000 RPM), confirming this is not a burst rate limit. The error 'The usage limit has been reached' specifically points to either: 1) Billing credit balance (bash.00 or expired prepaid credits) at platform.openai.com/settings/organization/billing/overview, 2) A monthly spend hard-cap configured under Usage Limits, or 3) ChatGPT OAuth subscription quota exhaustion if Goose is routing through the chatgpt_codex provider.
+
+[Goose 2026-09-13 13:57] **Lindsay:** Here's https://platform.openai.com/settings/organization/billing/overview. [Screenshot showing 7.36 API credit balance]
+
+**Gemini:** Identified the discrepancy: Your OpenAI API account has plenty of funds (7.36), but Goose is running Tarik through the 'chatgpt_codex' provider (ChatGPT subscription OAuth in ~/.config/goose/chatgpt_codex/tokens.json) rather than the Developer API key. The ChatGPT subscription has a rolling 3-hour message/usage cap on flagship models (gpt-5.5 / gpt-5.6-sol), which does not touch your 7.36 API credit balance. Explained the difference and the options (wait for the 3-hour rolling window reset, or configure Goose to use the standard OpenAI API key provider to tap into the 7.36 balance).
