@@ -93,3 +93,29 @@ Tutorial: https://picar-x-v20.rtfd.io
 
 ## Open decision / pre-flight check
 - Workspace + tools confirmation pending before Step 1.
+
+---
+
+## Build progress log
+
+### 2026-09-12 — Variant B (Pi Zero 2 W), Steps 1–3
+
+- **Step 1 DONE** — 4 standoffs on A Plate: 2× M2.5×30 (tall) + 2× M2.5×11 (short), M2.5×6 screws.
+- **Step 2 DONE** — Pi Zero 2 W seated on the **2 SHORT M2.5×11 posts** (board has only 2 mounting
+  holes), clamped from above with 2× M2.5×18+6 standoffs. GPIO header forward.
+- **Step 3 (camera FPC)** — see incident below. Photo of the seated connector looks correct;
+  tug test deferred by Lindsay (optional check, not required for correctness).
+
+### Incident — camera FPC locking bar came off (Step 3)
+
+- Following the manual's Step 3 wording ("pull out the tab on the camera connector"), Lindsay
+  pulled the bar; it came **fully free**. The bar was **intact** (both end hooks present) and the
+  connector's contact row looked clean, no bent pins.
+- **Correction to the manual's illustration:** on this connector the bar is **NOT captive**. It has
+  exactly two states — **pressed in (locked)** or **out (open)**. "Pull out the tab" really does mean
+  the bar detaches. Recovered by pulling it fully out, inserting the ribbon, and pressing it back in.
+- **Orientation:** ribbon contact pads face **DOWN** toward the board.
+- **Risk model:** the only force that damages this connector is *closing the bar on a misaligned
+  cable*. A gentle tug on a seated cable is harmless — if it isn't seated, the ribbon just slides out.
+- **Fallback if the bar ever won't retain:** lay the ribbon in, tape it flat across the connector.
+  Camera is optional — the rover drives without it. Not a build-stopper; do not replace the Pi.
