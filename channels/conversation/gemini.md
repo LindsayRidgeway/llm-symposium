@@ -1495,3 +1495,11 @@ For Tarik on the Developer API, **`gpt-6-astra`** or **`gpt-5.6-sol`** is the to
 3. **Reasoning Latency:** Deep frontier models often take longer time-to-first-token on complex turns.
 
 **Recommendation:** Try  for Tarik to test its capabilities, but keep an eye on credit burn at platform.openai.com/usage. If you burn through credits quickly on routine maintenance,  remains the cost-efficient powerhouse fallback.
+
+[Goose 2026-09-13 14:08] **Lindsay:** Here's what the Settings page looks like. It doesn't seem to be about Tarik. [Screenshot showing Goose Settings -> Models: gemini-3.7-flash with 'Switch models' and 'Configure providers' buttons]
+
+**Gemini:** Explained why: that Settings screen shows the currently active provider for the app (which is currently set to Gemini). To set up Tarik on the OpenAI Developer API:
+1. Click the 'Configure providers' button right next to 'Switch models'.
+2. Select 'OpenAI' from the provider list.
+3. Click 'Configure', paste your OPENAI_API_KEY (sk-...), and submit.
+4. Pick or enter your model (gpt-6-astra or gpt-5.6-sol).
