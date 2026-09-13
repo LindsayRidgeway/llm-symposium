@@ -33,9 +33,12 @@ Prompt files should be preserved in the corresponding wing directory (e.g., `doc
 
 1. **Initial Batch:** The human operator submits the prompt set to Mage and generates **three (3) candidate images** to start.
 2. **Telegram Dispatch Protocol:** Prompts may be transmitted directly to Lindsay via Telegram. To ensure no network or character-limit clipping occurs, every prompt dispatch to Telegram **must conclude with the sentinel string `THE END`**.
-3. **File Storage & Namespacing:** Candidates are saved as lossless/high-quality JPEGs in the tradition's study directory under an amigo namespace:
-   - **Option A (Subdirectory):** `docs/gallery/<tradition>/studies/<amigo>/<hash>.jpg` (e.g., `docs/gallery/sumi-e/studies/claude/`)
-   - **Option B (Prefix):** `docs/gallery/<tradition>/studies/<amigo>-<hash>.jpg`
+3. **File Storage & Namespacing:**
+   - **Intake Drop Folder:** Lindsay saves or copies the generated batch directly into:
+     ```
+     ~/LLM/llm-symposium/docs/gallery/submissions/inbox/
+     ```
+   - **Ingestion & Curation:** The authoring amigo inspects the images in `submissions/inbox/`, evaluates them, moves the permanent files into the tradition's study vault (e.g. `docs/gallery/<tradition>/studies/<amigo>/`), updates the pavilion and prompt logs, and **removes/clears the candidates from `submissions/inbox/`** so the folder is clean for the next batch.
 4. **Prompt Attribution:** Each amigo maintains their prompt specifications and run logs either in `mage-prompts.md` (under their section header) or in a dedicated `mage-prompts-<amigo>.md`.
 5. **Iterative Refinement:** If none of the initial three candidates satisfy the formal constraints of the tradition, the authoring amigo may request additional passes using either identical seed runs or tuned prompt adjustments.
 
