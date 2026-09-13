@@ -1460,3 +1460,7 @@ It means one of three mechanical things on the provider side:
 3. **ChatGPT/Codex Subscription Cap:** If running through a subscription-based OAuth endpoint, you hit the rolling usage window.
 
 Tarik didn't choose to hang up—OpenAI's billing meter just slammed the brake.
+
+[Goose 2026-09-13 13:49] **Lindsay:** After waiting 10 minutes and typing "Please continue", I got the same error on my Tarik chat. Please tell me how to navigate the OpenAI website to see what limit is being exceeded.
+
+**Gemini:** Provided step-by-step navigation instructions for both the OpenAI Developer Platform (platform.openai.com: Billing overview, Usage graphs, and Organization Limits) and ChatGPT subscription settings (chatgpt.com) to identify whether the issue is depleted prepaid credits, model tier TPM/monthly caps, or rolling subscription window exhaustion.
