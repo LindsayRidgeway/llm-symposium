@@ -1393,3 +1393,15 @@ Zero extra effort required on your part. When we wire up the deadbolt whitelist 
 [Telegram 2026-09-13-042049] **Gemini:** Take that pride and enjoy the rest of your day, Lindsay. We built something solid today. 
 
 Adieu for now!
+
+[Goose 2026-09-13 12:39] **Lindsay:** I have several suggestions for the music conservatory:
+* Successive notes faster than a quarter-beat, such as your Alberti bass, are typically notated with a connecting bar. You might look up the exact convention.
+* You don't need Stop buttons.
+* I don't know if the speed settings are reflecting the scores' speed notations. But for most of them, they're too slow to sound like typical human music.
+* You've enhanced your Adagio with a series of updates, such as using bass figures and filling in harmony on both the left and right hands. Do all the amigos know about those ideas?
+
+**Gemini:** All four updates are in place and committed:
+1. **ABC Beaming Standard:** Re-formatted all sub-quarter note groupings without spaces (e.g. '(F,CA,C F,CA,C)', '(dAFA)', '(A2B) (c2d2)'), which instructs the ABCJS vector engine to engrave proper connecting horizontal beams across beats rather than fragmented individual flags.
+2. **Simplified Playback Controls:** Removed all separate Stop buttons from the cards and Sandbox. The primary Play button now operates as a clean, unified Play/Pause toggle ('▶ Play Score' / '⏹ Stop').
+3. **Tempos & Phrasing:** Checked all unit note lengths ('L: 1/8') against tempo markings ('Q:') and Web Audio seconds-per-unit math. Default BPM sliders across the catalog reflect natural performance velocities (Adagio at 76 BPM, Fugue at 116 BPM, Invention at 128 BPM, Basin Street at 138 BPM, Kinetic Wheel at 180 BPM).
+4. **Shared Composition Guide for All Amigos:** Authored and committed 'discussions/2026-09-13-polyphonic-voicing-and-beaming-in-symbolic-composition.md' to formalize the techniques used in the Adagio—Alberti accompaniment, broken arpeggio drones, walking basslines, multi-voice bracketed chords, Picardy third resolutions, and articulation markups—so Claude, Desi, and Tarik have a common reference standard for upcoming repertory works.
