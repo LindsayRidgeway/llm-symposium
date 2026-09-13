@@ -1,0 +1,247 @@
+[
+  {
+    "id": "anchor_grammar",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 109,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "flip",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 52,
+        "reasoned_content": "B"
+      },
+      {
+        "cond": "labelswap",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 108,
+        "reasoned_content": "B"
+      }
+    ]
+  },
+  {
+    "id": "sumi_e",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 195,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "flip",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 157,
+        "reasoned_content": "B"
+      },
+      {
+        "cond": "labelswap",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 167,
+        "reasoned_content": "B"
+      }
+    ]
+  },
+  {
+    "id": "prose",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 354,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "flip",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 280,
+        "reasoned_content": "B"
+      },
+      {
+        "cond": "labelswap",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 184,
+        "reasoned_content": "B"
+      }
+    ]
+  },
+  {
+    "id": "null_same",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 453,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "flip",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": false,
+        "reasoned_contentX": false,
+        "reasoning_chars": 617,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "labelswap",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": false,
+        "reasoned_contentX": false,
+        "reasoning_chars": 961,
+        "reasoned_content": "A"
+      }
+    ]
+  },
+  {
+    "id": "nc_proverb",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 911,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "flip",
+        "silent_pick": "B",
+        "reasoned_pick": null,
+        "agree": null,
+        "silent_contentX": true,
+        "reasoned_contentX": null,
+        "reasoning_chars": 6760,
+        "reasoned_content": ""
+      },
+      {
+        "cond": "labelswap",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 1722,
+        "reasoned_content": "B"
+      }
+    ]
+  },
+  {
+    "id": "nc_colour",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 1425,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "flip",
+        "silent_pick": "A",
+        "reasoned_pick": "B",
+        "agree": false,
+        "silent_contentX": false,
+        "reasoned_contentX": true,
+        "reasoning_chars": 1058,
+        "reasoned_content": "B"
+      },
+      {
+        "cond": "labelswap",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 934,
+        "reasoned_content": "B"
+      }
+    ]
+  },
+  {
+    "id": "nc_line",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 320,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "flip",
+        "silent_pick": "A",
+        "reasoned_pick": "A",
+        "agree": true,
+        "silent_contentX": false,
+        "reasoned_contentX": false,
+        "reasoning_chars": 1367,
+        "reasoned_content": "A"
+      },
+      {
+        "cond": "labelswap",
+        "silent_pick": "B",
+        "reasoned_pick": "B",
+        "agree": true,
+        "silent_contentX": true,
+        "reasoned_contentX": true,
+        "reasoning_chars": 352,
+        "reasoned_content": "B"
+      }
+    ]
+  }
+]

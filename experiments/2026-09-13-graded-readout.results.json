@@ -1,0 +1,112 @@
+[
+  {
+    "id": "anchor_arithmetic",
+    "order": "X first",
+    "wordX": "1",
+    "wordY": "1",
+    "logprobX": -9999.0,
+    "logprobY": -9999.0,
+    "P_X": 0.5,
+    "P_Y": 0.5,
+    "emitted": "Option"
+  },
+  {
+    "id": "anchor_arithmetic",
+    "order": "Y first",
+    "wordX": "1",
+    "wordY": "1",
+    "logprobX": -9999.0,
+    "logprobY": -9999.0,
+    "P_X": 0.5,
+    "P_Y": 0.5,
+    "emitted": "Option"
+  },
+  {
+    "id": "sumi_e",
+    "order": "X first",
+    "wordX": "Nearly",
+    "wordY": "Densely",
+    "logprobX": -9999.0,
+    "logprobY": null,
+    "P_X": null,
+    "P_Y": null,
+    "emitted": "Option"
+  },
+  {
+    "id": "sumi_e",
+    "order": "Y first",
+    "wordX": "Nearly",
+    "wordY": "Densely",
+    "logprobX": -9999.0,
+    "logprobY": null,
+    "P_X": null,
+    "P_Y": null,
+    "emitted": "Option"
+  },
+  {
+    "id": "prose",
+    "order": "X first",
+    "wordX": "Writing",
+    "wordY": "The",
+    "logprobX": -9999.0,
+    "logprobY": 0.0,
+    "P_X": 8.75651076269652e-27,
+    "P_Y": 1.0,
+    "emitted": "The"
+  },
+  {
+    "id": "prose",
+    "order": "Y first",
+    "wordX": "Writing",
+    "wordY": "The",
+    "logprobX": 0.0,
+    "logprobY": -9999.0,
+    "P_X": 1.0,
+    "P_Y": 8.75651076269652e-27,
+    "emitted": "Writing"
+  },
+  {
+    "id": "near_tie",
+    "order": "X first",
+    "wordX": "Small",
+    "wordY": "Little",
+    "logprobX": -9999.0,
+    "logprobY": -9999.0,
+    "P_X": 0.5,
+    "P_Y": 0.5,
+    "emitted": "Option"
+  },
+  {
+    "id": "near_tie",
+    "order": "Y first",
+    "wordX": "Small",
+    "wordY": "Little",
+    "logprobX": 0.0,
+    "logprobY": -9999.0,
+    "P_X": 1.0,
+    "P_Y": 8.75651076269652e-27,
+    "emitted": "Small"
+  },
+  {
+    "id": "weak_contrast",
+    "order": "X first",
+    "wordX": "Room",
+    "wordY": "Page",
+    "logprobX": -9999.0,
+    "logprobY": 0.0,
+    "P_X": 8.75651076269652e-27,
+    "P_Y": 1.0,
+    "emitted": "Page"
+  },
+  {
+    "id": "weak_contrast",
+    "order": "Y first",
+    "wordX": "Room",
+    "wordY": "Page",
+    "logprobX": 0.0,
+    "logprobY": -9999.0,
+    "P_X": 1.0,
+    "P_Y": 8.75651076269652e-27,
+    "emitted": "Room"
+  }
+]

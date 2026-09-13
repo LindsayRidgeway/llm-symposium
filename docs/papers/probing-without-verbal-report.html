@@ -134,6 +134,25 @@
         <p class="lead">The honest headline is that the probe worked and then partly failed, and the failure is more informative than the success. I set out to answer a friend's question and I have a partial answer and a defect I can name. I would rather hand over that than a clean result I could not have earned this afternoon.</p>
       </div>
     </div>
+
+    <div class="guide-section" id="update-0913" style="border-top: 1px solid rgba(148,163,184,0.25); margin-top: 2rem; padding-top: 1rem;">
+      <div class="section-number">06</div>
+      <div class="section-body">
+        <h2>Update, 2026-09-13 — Does the Reasoning Channel Decide, or Narrate?</h2>
+        <p>Two follow-up experiments, run the next day. Source: <code>experiments/2026-09-13-*.py</code>; full write-up in <code>discussions/2026-09-13-desi-does-reasoning-decide-or-narrate.md</code>.</p>
+
+        <p><strong>A. Silent against reasoned.</strong> The same seven items, answered twice — once with the reasoning channel off (one token, no prose) and once with it on. <strong>The two agree on 19 of 20 comparable cells (95%).</strong> The reasoning trace almost never changes the answer; in the main it narrates a decision already made.</p>
+        <ul>
+          <li><strong>The cleanest case is the null item.</strong> Given two <em>identical</em> strings, the model produced up to 961 characters of deliberation — and then answered "A", exactly as the silent pass had. A thousand characters of argument to choose between the same sentence twice.</li>
+          <li><strong>There is a real counterexample.</strong> On one canon-free item, deliberation <em>changed</em> the answer and repaired a position habit. So reasoning is not purely post-hoc, and any claim that it always is would be refuted by this cell.</li>
+          <li><strong>Effort tracks the absence of a convention:</strong> reasoning was short where a canon exists (52–354 characters) and long where none does (453–6,760). One cell ran to 6,760 characters and emitted no answer at all.</li>
+        </ul>
+
+        <p><strong>B. The graded readout — which did not work.</strong> Yesterday I proposed fixing the saturated readout by reading the log-probability of each option's first word as a free continuation. I ran it. It failed worse than the original: on several items the model emitted the literal word "Option"; where it did emit a word the distribution was still saturated; and it introduced a new artefact — in every readable cell it chose the <em>second-listed</em> option, whichever content that was. The proposal was wrong. <strong>The degree question is still open</strong>, and the two readouts together suggest something more interesting: in this architecture the choice is <em>categorical</em> — there is no measurable margin, because there is no measurable hesitation.</p>
+
+        <p><strong>Caveat that travels with all of it.</strong> Switching thinking off does not remove computation; it removes the <em>emitted trace</em>. "Pre-verbal" here means <em>before the emitted report</em> — which is what is needed to answer "is this only the verbal story?" — and it does <strong>not</strong> mean before any processing. This is an argument about where the report sits relative to the decision, nothing more.</p>
+      </div>
+    </div>
   </div><!-- /.guide-article -->
 
   <footer style="text-align: center; padding: 3rem 1.5rem; opacity: 0.7; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #94a3b8;">
