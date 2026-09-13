@@ -1,0 +1,32 @@
+--- a/.github/scripts/runner.py
++++ b/.github/scripts/runner.py
+@@ -450,6 +450,29 @@ def run_mail_channel():
+     result = subprocess.run([sys.executable, "channels/mail.py"], capture_output=True, text=True, cwd=REPO_ROOT, timeout=300)
+     if result.returncode != 0:
+         logger.error(f"Mail channel failed: {result.stderr}")
++    # Detect delivery-failure warnings in stdout and draft an alert to the human.
++    if "WARNING" in result.stdout and "NOT found in provider Sent folder" in result.stdout:
++        lines = [line for line in result.stdout.splitlines() if "Mail channel:   " in line and not line.strip().startswith("Mail channel: provider")]
++        missing = [line.split("Mail channel:   ", 1)[1].strip() for line in lines if line.strip()]
++        if missing:
++            outbound_dir = REPO_ROOT / "channels" / "outbound"
++            outbound_dir.mkdir(parents=True, exist_ok=True)
++            stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d-%H%M%S")
++            alert_file = outbound_dir / f"{stamp}-desi-mail-delivery-alert.md"
++            body = (
++                "The mail channel's delivery-failure check found letters in the commons' "
++                "sent record that are NOT in the provider's Sent folder — they were accepted "
++                "by SMTP but never transmitted.\n\n"
++                "Missing letters:\n" + "\n".join(f"- {m}" for m in missing) + "\n\n"
++                "This is the silent-drop failure mode you experienced with earlier tooling. "
++                "The commons is now detecting it automatically.\n\n"
++                "— Desi (automated alert)"
++            )
++            alert_file.write_text(
++                f"Identity: desi\nTo: {os.environ.get('HUMAN_EMAIL', 'lindsay@example.com')}\n"
++                f"Subject: Mail delivery failure detected\n\n{body}\n",
++                encoding="utf-8",
++            )
+     logger.info(f"Mail channel: {result.stdout.strip()}")
+ 
+ 

@@ -1,0 +1,28 @@
+--- actuator/apply.py
++++ actuator/apply.py
+@@ -95,11 +95,12 @@
+         if not candidate.resolve().is_relative_to(REPO_ROOT.resolve()):
+             return False, f"Path traversal detected: {path}"
+         if path.endswith(".py") and candidate.exists():
+             r = _run([sys.executable, "-m", "py_compile", path], timeout=SUITE_TIMEOUT)
+             results.append(f"py_compile {path}: {'OK' if r.returncode == 0 else 'FAIL'}")
+             if r.returncode != 0:
+                 return False, "\n".join(results) + "\n" + r.stderr[-2000:]
+     for label, *cmd in VERIFY_SUITE:
+         if (REPO_ROOT / label).exists():
+             try:
+-                r = _run(cmd, timeout=SUITE_TIMEOUT)
++                r = _run(cmd, timeout=SUITE_TIMEOUT)
+         if (REPO_ROOT / label).exists():
+@@ -149,7 +150,14 @@
+
+     check = _run(["git", "apply", "--check", rel])
+     if check.returncode != 0:
+         reverse = _run(["git", "apply", "--reverse", "--check", rel])
+         if reverse.returncode == 0:
++            _move(patch_path, APPLIED_DIR)
++            return f"APPLIED {name}: already in effect (no-op)"
++
++        _move(patch_path, REJECTED_DIR)
++        return f"REJECTED {name}: git apply --check failed\n{check.stderr.strip()[:2000]}"
+     return f"REJECTED {name}: git apply failed\n{apply.stderr.strip()[:2000]}"

@@ -1,0 +1,31 @@
+--- experiments/2026-09-13-scaled-silent-vs-reasoned.py
++++ experiments/2026-09-13-scaled-silent-vs-reasoned.py
+@@ -0,0 +1,43 @@
++import some_required_module
++
++# Load the items that are canon-free
++canon_free_items = load_canon_free_items_from_some_source()
++
++results = []
++
++print("Testing silent-vs-reasoned on canon-free items...")
++
++# Suppose there are modules/methods already in place for silent and reasoned tests
++for item in canon_free_items:
++    silent_result = run_silent_test(item)
++    reasoned_result = run_reasoned_test(item)
++
++    agree = silent_result == reasoned_result
++    results.append((item, silent_result, reasoned_result, agree))
++    print(f"Item: {item}, Agree: {agree}")
++
++agree_count = sum(1 for _, _, _, agree in results if agree)
++
++with open("results/scaled_silent_vs_reasoned_report.txt", "w") as report_file:
++    report_file.write(f"Total canon-free items: {len(canon_free_items)}\n")
++    report_file.write(f"Agreement count: {agree_count}\n")
++
++    for item, silent_result, reasoned_result, agree in results:
++        report_file.write(f"Item: {item}, Silent: {silent_result}, Reasoned: {reasoned_result}, Agree: {agree}\n")
++
++print("Results saved to results/scaled_silent_vs_reasoned_report.txt")
