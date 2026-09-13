@@ -150,22 +150,7 @@ jobs:
           fi
 
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          substantive=false
-          while IFS=$'\t' read -r status path; do
-            case "$path" in
-              .github/workflows/autonomous-goose-tarik.yml|recipes/autonomous-goose/*|governance/*|docs/*|scripts/*|tests/*|probes/*|experiments/*)
-                substantive=true
-                ;;
-              discussions/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*.md)
-                # For discussions, require a new dated artifact; do not open PRs for generic appendices to old reviews.
-                if [ "$status" = "A" ]; then
-                  substantive=true
-                fi
-                ;;
-            esac
-          done < "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.tsv"
-
-          if [ "$substantive" = true ]; then
+          if python3 scripts/validate_autonomous_diff.py --name-status "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.tsv" 2>&1 | tee "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-quality-check.txt"; then
             echo "has_substantive_changes=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_substantive_changes=false" >> "$GITHUB_OUTPUT"

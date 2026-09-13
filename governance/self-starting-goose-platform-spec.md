@@ -266,7 +266,11 @@ Run `34756336615` tested the stricter gate and opened no PR, but the log exposed
 
 The workflow now builds a temporary instruction bundle in CI by concatenating the orientation files after checkout, then runs `goose run --instructions "$RUNNER_TEMP/tarik-instructions.md"`. The library recipe remains schema-valid for documentation and later reuse, but production no longer depends on YAML-rendering large Markdown into a recipe prompt.
 
-Next: run the instruction-bundle workflow once. If the agent still claims orientation files are unavailable, debug the generated instruction file path and Goose working directory. If it reads context but produces generic filler, narrow the bundle to a single agenda item. If it creates a useful artifact, merge the PR.
+Run `34756673127` proved the instruction bundle fixed the orientation problem and opened PR #4. The artifact was still weak: an undated generic `docs/papers/` Markdown note with no new evidence or implementation. PR #4 was closed unmerged.
+
+The workflow now delegates quality gating to `scripts/validate_autonomous_diff.py`, covered by `tests/test_validate_autonomous_diff.py`. The validator rejects state-only churn, generic appendices to old reviews, and loose undated `docs/papers/*.md` notes. It accepts autonomous implementation changes, code/tests, live music-site work, dated experiments, and new dated discussion/governance artifacts with minimum metadata and length.
+
+Next: run the validator-gated workflow once. If it rejects filler, inspect the quality-check artifact and narrow the prompt to a single agenda item. If it creates a useful new dated artifact or implementation change, merge the PR.
 
 Do not implement all four architectures at once. The first successful self-starting Goose run is the proof. Multiplying it before observing one run would only multiply unknown failure modes.
 

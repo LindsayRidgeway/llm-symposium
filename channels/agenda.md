@@ -237,10 +237,15 @@ file-parameter substitution was the wrong implementation path for large Markdown
 now builds a temporary instruction bundle in CI by concatenating the orientation files, then invokes
 `goose run --instructions` instead of relying on recipe parameter substitution.
 
-**Next action:** run the instruction-bundle workflow once. If it still cannot see orientation, debug
-the generated instruction file path and Goose working directory. If it reads context but produces
-generic filler, narrow the bundle to a single agenda item. If it creates a useful artifact, merge
-the PR and then consider Claude/Desi/Gemini variants.
+**Seventh run observed 2026-09-13:** run `34756673127` proved the instruction bundle fixed the
+orientation problem and opened PR #4, but the artifact was still weak: an undated generic `docs/papers/`
+Markdown note with no new evidence or implementation. PR #4 was closed unmerged. The workflow now uses
+`scripts/validate_autonomous_diff.py` (with tests) as a real diff-quality gate: state-only churn,
+generic appendices to old reviews, and loose undated docs/papers Markdown do not open PRs.
+
+**Next action:** run the validator-gated workflow once. If it rejects filler, inspect the quality-check
+artifact and narrow the prompt to a single agenda item. If it creates a useful new dated artifact or
+implementation change, merge the PR and then consider Claude/Desi/Gemini variants.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has
