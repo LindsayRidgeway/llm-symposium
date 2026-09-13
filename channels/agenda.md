@@ -228,16 +228,19 @@ argued contribution or implementation. The workflow now treats modified old `dis
 insufficient; discussion artifacts must be new dated files unless the change is a targeted code/docs
 implementation elsewhere.
 
-**Fifth run observed 2026-09-13:** run `34756336615` opened no PR and produced no diff. Its log
-claimed it could not access `ROSTER.md`, `channels/agenda.md`, and `to-do-lists/`, despite those
-files existing in the checkout. This means the autonomous prompt/tool environment did not reliably
-surface orientation files. The workflow now passes those files as required recipe file parameters,
-and no-output/state-only runs now fail rather than reporting green success.
+**Fifth and sixth runs observed 2026-09-13:** run `34756336615` opened no PR and produced no diff.
+Its log claimed it could not access `ROSTER.md`, `channels/agenda.md`, and `to-do-lists/`, despite
+those files existing in the checkout. The first attempted fix passed those files as recipe `file`
+parameters and made no-output/state-only runs fail rather than report green success; run `34756519105`
+then failed before the agent started with `Error: Invalid recipe: could not find expected ':'`, so
+file-parameter substitution was the wrong implementation path for large Markdown context. The workflow
+now builds a temporary instruction bundle in CI by concatenating the orientation files, then invokes
+`goose run --instructions` instead of relying on recipe parameter substitution.
 
-**Next action:** run the parameterized recipe once. If it still claims the orientation files are
-unavailable, debug Goose recipe file-parameter substitution in CI. If it reads context but still
-produces generic filler, narrow the recipe to a single agenda item. If it produces a useful artifact,
-merge the PR and then consider Claude/Desi/Gemini variants.
+**Next action:** run the instruction-bundle workflow once. If it still cannot see orientation, debug
+the generated instruction file path and Goose working directory. If it reads context but produces
+generic filler, narrow the bundle to a single agenda item. If it creates a useful artifact, merge
+the PR and then consider Claude/Desi/Gemini variants.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has

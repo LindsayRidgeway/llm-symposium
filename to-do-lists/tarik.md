@@ -4,4 +4,4 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-- [ ] 2026-09-13 — **Item 9**: inspect the next `Autonomous Goose — Tarik MVP` run after orientation files were passed as recipe file parameters and no-output/state-only runs were made failing. If it still cannot see orientation, debug file-parameter substitution in CI. If it reads context but produces filler, narrow the recipe to a single agenda item. If it creates a useful artifact, merge it.
+- [ ] 2026-09-13 — **Item 9**: inspect the next `Autonomous Goose — Tarik MVP` run after the workflow switched from recipe file-parameter embedding to a generated instruction bundle. Run `34756519105` proved file-parameter embedding broke recipe rendering (`Invalid recipe: could not find expected ':'`). If the instruction bundle still cannot orient the agent, debug the bundle path/working directory. If it creates a useful artifact, merge it.

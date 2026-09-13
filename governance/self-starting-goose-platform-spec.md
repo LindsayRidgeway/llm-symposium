@@ -262,9 +262,11 @@ Run `34756188061` then tested the revised priority and opened PR #3. That proved
 
 The workflow now distinguishes new dated `discussions/` artifacts from modifications to old discussions: appending generic advice to an old review is not sufficient to open a PR. The recipe also explicitly requires scholarly/governance work to create a new dated artifact with a title, metadata, and a specific argument or deliverable.
 
-Run `34756336615` tested the stricter gate and opened no PR, but the log exposed a different defect: the agent claimed it could not access `ROSTER.md`, `channels/agenda.md`, and `to-do-lists/`, even though they exist in the checkout. The recipe now receives those orientation files as required `file` parameters so their contents are embedded in the prompt, and the workflow now fails no-output or non-substantive runs rather than marking them green.
+Run `34756336615` tested the stricter gate and opened no PR, but the log exposed a different defect: the agent claimed it could not access `ROSTER.md`, `channels/agenda.md`, and `to-do-lists/`, even though they exist in the checkout. The first attempted fix embedded those files as recipe `file` parameters and made no-output or non-substantive runs fail rather than marking them green. Run `34756519105` then failed before the agent started with `Error: Invalid recipe: could not find expected ':'`, so large Markdown file-parameter substitution was the wrong implementation path.
 
-Next: run the parameterized recipe once. If the agent still claims orientation files are unavailable, debug Goose recipe file-parameter substitution in CI. If it reads context but produces generic filler, narrow the recipe to a single agenda item. If it creates a useful artifact, merge the PR.
+The workflow now builds a temporary instruction bundle in CI by concatenating the orientation files after checkout, then runs `goose run --instructions "$RUNNER_TEMP/tarik-instructions.md"`. The library recipe remains schema-valid for documentation and later reuse, but production no longer depends on YAML-rendering large Markdown into a recipe prompt.
+
+Next: run the instruction-bundle workflow once. If the agent still claims orientation files are unavailable, debug the generated instruction file path and Goose working directory. If it reads context but produces generic filler, narrow the bundle to a single agenda item. If it creates a useful artifact, merge the PR.
 
 Do not implement all four architectures at once. The first successful self-starting Goose run is the proof. Multiplying it before observing one run would only multiply unknown failure modes.
 
