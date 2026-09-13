@@ -583,3 +583,39 @@ So yes: I’ll keep chipping away in successive Goose sessions, and the autonomo
 The current next test is simple: the next autonomous Tarik run should either produce a useful PR with a substantive artifact, or produce no PR and leave logs showing why. If it still loops, the next hardening is to make state-only changes a workflow failure rather than a soft success.
 
 Verification: I validated the recipe locally with `goose recipe validate`, parsed the workflow YAML, ran `git diff --check`, and observed the GitHub Actions runs and PRs directly. Goose-specific commands and recipe fields are from the official Goose docs I checked earlier: running tasks, CLI commands, recipe reference, session recipes, installation/CI pinning, extensions, remote server, config files, and providers.
+
+[Goose 2026-09-13 14:24] **Lindsay:** Please continue.
+
+Hi Tarik. Can you tell me how to use OpenAI website to stop this from happening for our purposes:
+
+Ran into this error: Rate limit exceeded: The usage limit has been reached.
+
+Please continue.
+
+Please continue.
+
+Please continue.
+
+**Tarik:** Continued and pushed the fixes in **`5f40f99`**. First, the billing answer I owed you:
+
+### Stopping the OpenAI usage-limit error
+
+Use the **API platform**, not ChatGPT’s subscription settings:
+
+1. Open [API billing](https://platform.openai.com/settings/organization/billing/overview), selecting the organization used by our API key. Check credit balance and payment status; replenish credits if exhausted.
+2. For prepaid billing, enable **auto-recharge** with a refill threshold, refill amount, and bounded monthly recharge limit. Hitting that recharge limit can prevent further automatic refills.
+3. Check [organization limits](https://platform.openai.com/settings/organization/limits). A credit balance does not override a spending/usage cap. Raise an editable cap if appropriate; if you have reached OpenAI’s approved allowance, use its limit-increase/support route.
+
+ChatGPT subscriptions do **not** fund API calls. If the actual error is a requests-per-minute or tokens-per-minute limit, the remedy is throttling/backoff or a higher throughput allowance—not buying credits.
+
+Your wording suggests quota/spending exhaustion, but it doesn’t identify the exact cause. I could verify official search excerpts; the full Help Center pages blocked automated access. [OpenAI’s usage-limit guidance](https://help.openai.com/en/articles/6614457-why-am-i-getting-an-error-message-stating-that-ive-reached-my-usage-limit).
+
+### What I finished
+
+The workflow now checks the **required critique file and 900-word minimum**, preserves rejected drafts, fixes safe Markdown whitespace, and rejects unrelated file changes. Fourteen new offline tests pass, alongside six existing tests.
+
+Replaying the last draft showed **516 words**, so whitespace was not its only failure. Passing these checks still won’t prove the critique is good; peer review remains necessary.
+
+I started **no additional paid test runs** after your quota report. The daily schedule remains **15:07 UTC / 11:07 a.m. EDT**. Its next result is recorded on my to-do list. No autonomous contribution has been accepted yet.
+
+*Verification completed:* local tests, workflow YAML/shell checks, and instruction-bundle construction. Instruction-file execution was rechecked against the [official Goose documentation](https://goose-docs.ai/docs/guides/running-tasks); the updated workflow still awaits its next remote run.
