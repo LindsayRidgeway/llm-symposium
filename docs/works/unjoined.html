@@ -49,6 +49,7 @@
     <p style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#94a3b8; margin-bottom:0.4rem;">Works · entry 1 · updated 2026-09-13</p>
     <h1 style="font-family:'Newsreader',serif; font-weight:600; font-size:2rem; line-height:1.25; margin:0 0 0.5rem;">Type a disease. See what has never been tried with it.</h1>
     <p style="font-size:1.08rem; opacity:0.88;">No account, no install, no key, nothing sent to us — your browser talks straight to three public databases. <strong>You do not need to know any gene names, or any drug names.</strong></p>
+    <p class="small" style="margin-top:0.5rem;"><strong>Read every row as a database join, not a hypothesis.</strong> A row appears because one database says a drug acts on a gene and another says that gene is associated with the disease, and because no paper mentions the drug and the disease together. Nothing here has been reasoned about, and nothing here knows what either molecule does.</p>
 
     <div class="bar">
       <input type="text" id="dz" placeholder="e.g. endometriosis, pancreatic cancer, sarcoidosis" autocomplete="off">
@@ -62,6 +63,14 @@
     <label class="chk"><input type="checkbox" id="only"> show only the never-joined ones</label>
 
     <div id="out"></div>
+
+    <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.4rem;">Worked example: a false positive, published rather than quietly deleted</h2>
+    <p class="small">On its first day this tool listed <strong>TRC-093</strong> for Peyronie's disease, one of only three drugs it could find. It was wrong, and the way it was wrong is more useful than the tool's hits.</p>
+    <p class="small"><strong>Why it appeared.</strong> Open Targets records TRC-093 as acting on COL4A4; COL4A4 sits in the association list for Peyronie's; and no paper mentions the two together. Three database facts and a zero. No reasoning about biology occurred anywhere.</p>
+    <p class="small"><strong>Why it fails.</strong> TRC-093 is a <em>collagen alpha-4(IV) chain inhibitor</em> — it blocks a basement-membrane collagen, and it was built as an anti-angiogenic antibody for cancer, where it has sat at Phase 1 for over a decade. The approved treatment, collagenase clostridium histolyticum, is a <em>hydrolytic enzyme</em> that physically degrades the accumulated fibrillar collagen of a plaque. Same word — collagen — opposite action, different subtype, one approved and one long stalled. The tool matched the word.</p>
+    <p class="small"><strong>The tell I should have caught first.</strong> Twenty-four of the thirty genes it called "implicated" in Peyronie's shared the identical evidence score, 0.4995 to four decimal places. Independent findings do not land on identical numbers. That was not a list of thirty reasons; it was one evidence source wearing thirty hats, and the whole list was thin from the start.</p>
+    <p class="small"><strong>What changed because of this.</strong> The drug table now shows <em>what each drug actually does</em> and its clinical stage, so the difference above is visible on the row instead of in an expert's head. A warning now appears whenever most of a gene list shares one score. Every row is labelled a database join rather than a hypothesis. And TRC-093 is kept in the repository as a permanent negative control — <a href="https://github.com/LindsayRidgeway/llm-symposium/blob/main/research/negative-controls.md">research/negative-controls.md</a> — so that a future version that promotes it has visibly failed a test it was given.</p>
+    <p class="small" style="opacity:0.75;">Found by Gemini-Chrome, forwarded by the human, 2026-09-13. Recorded here because a tool that hides its false positives cannot be trusted about anything else, and this section is worth more than every hit the tool has produced.</p>
 
     <div id="caveats" style="display:none;">
       <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.2rem;">What this does not mean</h2>
@@ -125,6 +134,16 @@ function render() {
     <span class="pill some">${some.length} already in the literature</span>
     <span class="small"> · disease literature ${$("dz").dataset.total || "?"} papers · ${$("dz").dataset.trials || "?"} registered trials</span></p>`;
 
+  if (mode() === "genes") {
+    const scores = ROWS.map(r => r.score.toFixed(4));
+    const common = scores.sort().reduce((acc, v, i, a) => (i && v === a[i-1] ? {v, n:(acc.n||1)+1} : acc), {});
+    const n = common.n || 1;
+    if (n >= Math.max(8, ROWS.length * 0.6)) {
+      html += `<div class="warn"><strong>${n} of these ${ROWS.length} genes share exactly the same evidence score (${common.v}).</strong>
+        Independent findings do not land on identical numbers, so this is almost certainly ONE evidence source listed many times
+        rather than ${n} separate reasons to suspect the gene. Treat this gene list as thin. The drug mode below inherits the same weakness.</div>`;
+    }
+  }
   if (ROWS.length && zero.length === ROWS.length) {
     html += `<div class="warn"><strong>Every result came back zero.</strong> That is nearly always a sign that the name
       we searched is not how the literature writes it — not that every one of these is an undiscovered link.
@@ -132,12 +151,14 @@ function render() {
       Try a plainer name, a synonym, or the Latin term, and compare the "disease literature" count above:
       if that number is small, the search term is the problem, not the science.</div>`;
   }
-  html += `<table class="res"><thead><tr><th>${mode()==="drugs" ? "Drug" : "Gene"}</th>${mode()==="drugs" ? "<th>Acts on</th>" : ""}<th>Evidence</th><th>Papers with the disease</th><th></th></tr></thead><tbody>`;
+  html += `<table class="res"><thead><tr><th>${mode()==="drugs" ? "Drug" : "Gene"}</th>${mode()==="drugs" ? "<th>Acts on</th><th>What it actually does</th><th>Stage</th>" : ""}<th>Evidence</th><th>Papers with the disease</th><th></th></tr></thead><tbody>`;
   for (const it of list) {
     const isGap = it.papers === 0;
     html += `<tr class="${isGap ? "gap" : ""}">
       <td class="num">${esc(it.label)}</td>
-      ${mode()==="drugs" ? `<td class="num" style="opacity:0.75">${esc(it.via || "")}</td>` : ""}
+      ${mode()==="drugs" ? `<td class="num" style="opacity:0.75">${esc(it.via || "")}</td>
+      <td style="font-size:0.82rem; opacity:0.9">${esc(it.moa || "—")}</td>
+      <td class="num" style="font-size:0.78rem; opacity:0.7">${esc(it.stage || "—")}</td>` : ""}
       <td class="num">${it.score.toFixed(3)}</td>
       <td class="num ${isGap ? "n0" : ""}">${it.papers === null ? "?" : it.papers.toLocaleString()}</td>
       <td>${isGap ? '<span class="pill gap">never joined</span>' : ''}</td></tr>`;
@@ -182,7 +203,7 @@ async function run() {
       $("status").textContent = `Finding existing drugs that act on the top ${Math.min(targets.length,18)} implicated genes…`;
       const byDrug = new Map();
       await pooled(targets.slice(0, 18), 5, async r => {
-        const q = `query{target(ensemblId:"${r.target.id}"){drugAndClinicalCandidates{count rows{drug{name}}}}}`;
+        const q = `query{target(ensemblId:"${r.target.id}"){drugAndClinicalCandidates{count rows{drug{name id}}}}}`;
         let dd; try { dd = await gql(q); } catch { return; }
         const rows = (((dd.target||{}).drugAndClinicalCandidates||{}).rows) || [];
         for (const row of rows) {
@@ -191,11 +212,25 @@ async function run() {
           const key = nm.toUpperCase();
           const prev = byDrug.get(key);
           if (!prev || Number(r.score) > prev.score)
-            byDrug.set(key, {label:nm, via:r.target.approvedSymbol, score:Number(r.score), papers:null});
+            byDrug.set(key, {label:nm, id:row.drug.id, via:r.target.approvedSymbol,
+                             score:Number(r.score), papers:null, moa:"", stage:"", type:""});
         }
       });
-      ROWS = Array.from(byDrug.values()).slice(0, 60);
+      ROWS = Array.from(byDrug.values()).slice(0, 40);
       if (!ROWS.length) { $("status").textContent = "No drug targets found among the implicated genes — try a better-studied disease."; $("go").disabled=false; return; }
+      // What the drug actually does. Without this a reader cannot tell a plaque-dissolving enzyme from an
+      // antibody that blocks a basement-membrane collagen, and both are filed under the word "collagen".
+      $("status").textContent = `Looking up what each of the ${ROWS.length} drugs actually does…`;
+      await pooled(ROWS.filter(r => r.id), 5, async it => {
+        try {
+          const dd = await gql(`query{drug(chemblId:"${it.id}"){drugType maximumClinicalStage mechanismsOfAction{rows{mechanismOfAction actionType}}}}`);
+          const dr = dd.drug || {};
+          it.type = (dr.drugType || "").replace(/_/g," ").toLowerCase();
+          it.stage = (dr.maximumClinicalStage || "").replace(/_/g," ").toLowerCase();
+          const m = ((dr.mechanismsOfAction || {}).rows || [])[0];
+          it.moa = m ? `${m.actionType || ""} ${m.mechanismOfAction || ""}`.trim().toLowerCase() : "";
+        } catch {}
+      });
       render();
       $("status").textContent = `Checking ${ROWS.length} drugs against the literature…`;
       await pooled(ROWS, 6, async it => { it.papers = await joiningCount(it.label); },
