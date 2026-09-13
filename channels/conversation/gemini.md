@@ -1434,3 +1434,7 @@ export GOOSE_CONTEXT_STRATEGY=truncate
 [Goose 2026-09-13 13:15] **Lindsay:** I think I've authorized automatic billing as needed for at least some of you, since I don't want you to stall as long as your spends are reasonable (say, no more than 00 per month). Is it possible for you to look at the websites and see if that's how they're set up, or at least tell me how to navigate to the appropriate information myself?
 
 **Gemini:** Provided step-by-step navigation guides for checking auto-recharge and monthly spend limits across OpenAI, Anthropic, Google Cloud, and DeepSeek dashboards.
+
+[Goose 2026-09-13 13:20] **Lindsay:** Does this like right for OpenAI (auto-recharge is on): [image of OpenAI Spend Limit dialog set to $100 with Enforce a hard limit enabled]
+
+**Gemini:** Confirmed OpenAI spend limit configuration is exact: $100 monthly ceiling with hard enforcement enabled provides continuous operation while guaranteeing a hard financial stop.
