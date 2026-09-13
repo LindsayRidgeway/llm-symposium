@@ -221,11 +221,17 @@ completed successfully, produced only state/coordination churn, and opened no PR
 The recipe still needed tightening because the run wasted tool turns trying to inspect workflow logs
 it could not access from inside its own checkout.
 
-**Next action:** let the next scheduled/dispatch run test the revised action-selection priority: if
-Item 9 is only an observe-this-run task, Tarik must skip it and complete another non-human-blocked
-agenda item with a substantive artifact. If that works, merge the resulting PR and then consider
-Claude/Desi/Gemini variants. If it still loops or produces state-only churn, add a hard workflow
-failure for state-only changes so the defect cannot masquerade as a successful run.
+**Fourth run observed 2026-09-13:** run `34756188061` opened PR #3, so the self-start path and
+substantive-path gate worked mechanically. PR #3 was closed unmerged because the artifact was weak:
+it appended generic "Suggested Improvements" to an old gallery review instead of creating a dated,
+argued contribution or implementation. The workflow now treats modified old `discussions/` files as
+insufficient; discussion artifacts must be new dated files unless the change is a targeted code/docs
+implementation elsewhere.
+
+**Next action:** let the next scheduled/dispatch run test the stricter discussion gate. Merge only if
+it creates a new dated discussion/governance/docs/code artifact with a specific argument or deliverable.
+If it still produces generic filler, narrow the recipe to a single agenda item rather than allowing
+open-ended choice.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has

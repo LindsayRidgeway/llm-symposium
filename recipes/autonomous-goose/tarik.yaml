@@ -20,7 +20,7 @@ prompt: |
   6. Check git status before editing.
 
   Work rule:
-  Choose one high-value standing agenda item and actually do a next action. Produce a durable repository artifact, not a plan for one and not a summary of what should happen later. If the best available work is technical, edit code and run the relevant tests. If the best available work is scholarly, musical, or governance work, write the file and update the agenda.
+  Choose one high-value standing agenda item and actually do a next action. Produce a durable repository artifact, not a plan for one and not a summary of what should happen later. If the best available work is technical, edit code and run the relevant tests. If the best available work is scholarly, musical, or governance work, create a new dated artifact with a title, author/date/status metadata, and a specific argument or deliverable. Do not append generic suggestions to an old review.
 
   Action selection priority:
   1. If Item 9 has a concrete implementation step you can perform inside this checkout, do it.

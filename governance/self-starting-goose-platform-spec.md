@@ -258,7 +258,11 @@ Run `34711864380` exercised the substantive-output gate. It completed successful
 
 The recipe now has an explicit action-selection priority: perform an Item 9 implementation step only when one is possible inside the checkout; if Item 9 is merely "observe this same run," skip it and complete another non-human-blocked agenda item with a substantive artifact. It also states that editing only agenda/notes/to-do files can never satisfy the run.
 
-Next: let the next scheduled/dispatch run test that priority. If it produces a useful artifact, merge the PR. If it still loops or produces state-only churn, add a hard workflow failure for state-only changes.
+Run `34756188061` then tested the revised priority and opened PR #3. That proved the start path and substantive-path gate still work, but the artifact was weak: a generic "Suggested Improvements" appendix to an old gallery review. PR #3 was closed unmerged.
+
+The workflow now distinguishes new dated `discussions/` artifacts from modifications to old discussions: appending generic advice to an old review is not sufficient to open a PR. The recipe also explicitly requires scholarly/governance work to create a new dated artifact with a title, metadata, and a specific argument or deliverable.
+
+Next: let the next scheduled/dispatch run test the stricter discussion gate. If it creates a useful new artifact, merge the PR. If it still produces generic filler, narrow the recipe to a single agenda item rather than allowing open-ended choice.
 
 Do not implement all four architectures at once. The first successful self-starting Goose run is the proof. Multiplying it before observing one run would only multiply unknown failure modes.
 

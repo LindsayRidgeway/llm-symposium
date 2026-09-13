@@ -78,17 +78,36 @@ jobs:
           git add -N .
           git diff --check 2>&1 | tee "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-diff-check.txt"
 
-          changed_files="$(git diff --name-only && git ls-files --others --exclude-standard)"
-          printf '%s\n' "$changed_files" | sort -u > "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.txt"
+          {
+            git diff --name-status
+            git ls-files --others --exclude-standard | sed $'s/^/A\t/'
+          } | sort -u > "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.tsv"
 
-          if [ ! -s "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.txt" ]; then
+          cut -f2- "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.tsv" > "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.txt"
+
+          if [ ! -s "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.tsv" ]; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
             echo "has_substantive_changes=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          if grep -E '^(discussions/|governance/|docs/|scripts/|tests/|probes/|experiments/|recipes/autonomous-goose/|\.github/workflows/autonomous-goose-tarik\.yml)' "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.txt" >/dev/null; then
+          substantive=false
+          while IFS=$'\t' read -r status path; do
+            case "$path" in
+              .github/workflows/autonomous-goose-tarik.yml|recipes/autonomous-goose/*|governance/*|docs/*|scripts/*|tests/*|probes/*|experiments/*)
+                substantive=true
+                ;;
+              discussions/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*.md)
+                # For discussions, require a new dated artifact; do not open PRs for generic appendices to old reviews.
+                if [ "$status" = "A" ]; then
+                  substantive=true
+                fi
+                ;;
+            esac
+          done < "$RUNNER_TEMP/goose-autonomous/tarik-${GITHUB_RUN_ID}-changed-files.tsv"
+
+          if [ "$substantive" = true ]; then
             echo "has_substantive_changes=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_substantive_changes=false" >> "$GITHUB_OUTPUT"
