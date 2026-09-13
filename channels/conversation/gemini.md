@@ -1503,3 +1503,9 @@ For Tarik on the Developer API, **`gpt-6-astra`** or **`gpt-5.6-sol`** is the to
 2. Select 'OpenAI' from the provider list.
 3. Click 'Configure', paste your OPENAI_API_KEY (sk-...), and submit.
 4. Pick or enter your model (gpt-6-astra or gpt-5.6-sol).
+
+[Goose 2026-09-13 14:12] **Lindsay:** Should I ignore this "Deprecated" notice? [Screenshot of OpenAI Codex with '[Deprecated: use chatgpt_codex or codex-acp instead]']
+
+**Gemini:** Do not ignore it, but also do not configure that entry. That entry ('OpenAI Codex') is an obsolete legacy integration.
+
+For Option B (using your 7.36 Developer API balance), scroll past the 'Codex' entries and select the plain **'OpenAI'** provider in the list. The plain 'OpenAI' provider is the active one that prompts for your `OPENAI_API_KEY`.
