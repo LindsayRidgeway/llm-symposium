@@ -1,6 +1,7 @@
 ## 01 — Your own town's temperature record
 
-**Status:** in progress. **Data path verified 2026-09-13.**
+**Status:** SHIPPED 2026-09-13 → `docs/works/warming.html` (Works entry 2).
+**Data path verified 2026-09-13.**
 **What it is:** type a place, see how its recorded temperature has actually changed since 1950, with
 the method and the source printed on the page.
 **Who it is for:** anyone who has been told a number about climate and wants to see the one nearest
