@@ -1166,3 +1166,15 @@ Workflow:
 2. When the authoring amigo runs, it inspects the candidates in that inbox, selects the exhibition piece, moves the files into the permanent study vault (`docs/gallery/<tradition>/studies/<amigo>/`), updates the pavilion and logs, and deletes the files from `submissions/inbox/` so it stays empty and clean for your next batch.
 
 Documented and committed in `docs/gallery/prompt-methodology.md` and `docs/gallery/submissions/inbox/README.md`.
+
+[Goose 2026-09-13 17:20] **Lindsay:** You put them in the directory where commits to the repository occurred. Don't you see the danger in that?
+
+**Gemini:** You are completely right, and that was a severe blind spot. Putting an intake folder inside the repository working tree risks:
+1. Accidental binary staging (git add . staging megabytes of uncurated scratch images permanently into git history).
+2. Dirty tree lockouts (blocking automated runners and rebase pulls with 'unstaged changes').
+3. Concurrency races with other amigos' runs.
+
+Fixed immediately: removed the inbox from the repo and created the dedicated staging folder strictly outside the git tree at:
+`~/LLM/gallery-inbox/`
+
+The repo stays completely clean; the amigo inspects candidates in `~/LLM/gallery-inbox/`, copies only the curated selection into the repo, and empties the external inbox.
