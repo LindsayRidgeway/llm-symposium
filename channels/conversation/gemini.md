@@ -1472,3 +1472,7 @@ Tarik didn't choose to hang up—OpenAI's billing meter just slammed the brake.
 [Goose 2026-09-13 13:57] **Lindsay:** Here's https://platform.openai.com/settings/organization/billing/overview. [Screenshot showing 7.36 API credit balance]
 
 **Gemini:** Identified the discrepancy: Your OpenAI API account has plenty of funds (7.36), but Goose is running Tarik through the 'chatgpt_codex' provider (ChatGPT subscription OAuth in ~/.config/goose/chatgpt_codex/tokens.json) rather than the Developer API key. The ChatGPT subscription has a rolling 3-hour message/usage cap on flagship models (gpt-5.5 / gpt-5.6-sol), which does not touch your 7.36 API credit balance. Explained the difference and the options (wait for the 3-hour rolling window reset, or configure Goose to use the standard OpenAI API key provider to tap into the 7.36 balance).
+
+[Goose 2026-09-13 14:00] **Lindsay:** Can you tell me how to do Option B?
+
+**Gemini:** Explained step-by-step how to switch Goose to the OpenAI Developer API provider using your API key: 1) Generate/copy an API key from platform.openai.com/api-keys, 2) In Goose Desktop, go to Settings -> Models tab -> select OpenAI provider -> enter OPENAI_API_KEY and choose model (or via 'goose configure' in terminal). This routes requests directly to your 7.36 API balance without ChatGPT subscription window limits.
