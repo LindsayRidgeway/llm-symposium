@@ -37,3 +37,42 @@ All three candidate generations produced exceptional watercolor fluid physics an
    - **Ecological Detail:** Lily pads in the glassy shallows, stony shorelines, and a solitary pine-covered island beneath a rounded mountain dome.
 
 *Note on Medium:* The procedural SVG study (`mist-indigo-ridge.svg`) is retained alongside these diffusion studies as a computational fluid-simulation experiment using SVG filter primitives (`feTurbulence` and `feDisplacementMap`).
+
+---
+
+## Thematic Expansion Prompts (Mage Batch 2 — Ready for Execution)
+
+Authored by Gemini S. Lumina (2026-09-13) under the *Curated Commons Thematic Expansion Framework*. Each prompt is formatted as a single continuous line for clean submission into Mage.
+
+### 1. Botanical Morphology: *Wild Blue Flag Iris & River Stones*
+**Positive prompt:**
+```text
+A detailed botanical watercolor painting of a wild blue flag iris growing beside smooth river stones, translucent violet and ultramarine petals with delicate yellow veining, transparent wet-on-wet watercolor washes, capillary pigment blooms, granulating raw umber and sap green stems, subtle watermarks and cotton rag paper tooth, luminous natural daylight, loose expressive botanical illustration in the style of Pierre-Joseph Redouté and John Singer Sargent, visible paper texture.
+```
+
+**Negative prompt:**
+```text
+digital painting, 3D render, CGI, oil paint, acrylic, gouache, thick impasto, opaque paint, sharp vector outlines, oversaturated, photographic lens blur, plastic sheen, modern objects, text, watermark, signature, seal.
+```
+
+### 2. Marine & Tidal Dynamics: *Winslow's Shoreline — Heavy Surf on Granite*
+**Positive prompt:**
+```text
+A dramatic marine watercolor painting of crashing ocean surf against dark wet granite rocks, swirling sea spray and turquoise foam rendered with loose wet-on-wet washes and dry-brush white paper highlights, granulating cobalt teal and indigo water, salt granulation texture, heavy cold-press cotton rag paper tooth, stormy coastal atmosphere in the tradition of Winslow Homer, fluid natural pigment dispersion.
+```
+
+**Negative prompt:**
+```text
+digital painting, 3D render, CGI, oil paint, thick impasto, acrylic, gouache, airbrush, sharp vector graphics, plastic texture, oversaturated colors, modern boats, text, signature, watermark, seal.
+```
+
+### 3. Architectural Wash: *Morning Sunlight on Ochre Stucco*
+**Positive prompt:**
+```text
+An expressive architectural watercolor sketch of a quiet sunlit cobblestone alleyway in a coastal village, warm raw sienna and ochre stucco walls with soft violet and cobalt cast shadows, loose bleeding watercolor washes over delicate pencil underdrawing, flowering bougainvillea vines spilling from a stone balcony, granulating pigment blooms, bright morning Mediterranean light, transparent glazes on heavy cotton paper.
+```
+
+**Negative prompt:**
+```text
+digital painting, 3D render, CGI, oil paint, acrylic, gouache, thick opaque paint, photorealistic render, synthetic gradients, harsh black outlines, cars, electrical wires, text, signature, watermark, seal.
+```

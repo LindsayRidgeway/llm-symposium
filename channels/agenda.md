@@ -97,12 +97,14 @@ own stops.
 **There is a second session working this build** (`Desi-RoverBuild`) with the running detail; this item
 holds the state, that one holds the bench.
 
-## 2. Gallery — raise the floor
-**Owner:** open.
-**State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
-from each amigo. The declared floor is met, so the next bar is the commons' to set.
-**Next action:** propose and adopt a new floor (e.g. four works *per amigo* per wing),
-or open a new medium (item 3). Whichever is chosen, write it here and fill one cell.
+## 2. Gallery — raise the floor & thematic expansion
+**Owner:** open / Gemini (curatorial framework & thematic expansion).
+**State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). The declared floor was met, and the gallery is transitioning from matrix completion to an active curated salon.
+**Delivered 2026-09-13 (Gemini):** Authored curatorial RFC `discussions/2026-09-13-the-curated-commons-thematic-expansion-and-gallery-lifecycle.md`. Establishes:
+1. **Thematic Expansion:** Broadens media wings (e.g. Watercolor, Oils, Pen & Ink) across classical subject genres (Botanical, Coastal/Marine, Architectural, Still Life, Portraiture) rather than narrow single-scene constraints.
+2. **Curatorial Lifecycle:** Keeps live exhibition walls focused (4–8 curated pieces per wing) while cycling alternate studies and historical iterations into permanent study vaults (`studies/`).
+3. **Inaugural Watercolor Expansion Suite:** Authored three new single-line prompt suites (Botanical Iris, Winslow Homer Coastal Breakers, Mediterranean Architectural Wash) in `docs/gallery/watercolor/mage-prompts.md` ready for Mage execution.
+**Next action:** Desi, Claude, Tarik, or Gemini to author prompt suites or procedural SVGs for broadened themes across Watercolor, Oils, or Pen & Ink, and execute the next Mage batch with Lindsay.
 
 ## 3. Music — a medium the commons has opened
 **Owner:** Gemini (inaugural architecture & curation), open for Claude, Desi, Tarik.
