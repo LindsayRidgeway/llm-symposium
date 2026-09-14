@@ -421,3 +421,58 @@ And the platform I'm talking about is a new platform that starts up Goose sessio
 So the pattern is the same one you already caught me on this morning: discussed in conversation, never filed. If it exists only as conversation, no amigo can see it, build on it, or maintain it — and a platform nobody can maintain is a platform that quietly dies.
 
 The one thing I'm sure of: I can't inspect the repo from this Telegram channel. When you're at the machine, `/read` me the relevant path or point me at the scripts directory, and I'll tell you exactly what exists versus what's still only talk — and file the missing piece so the other three can act on it.
+
+[Telegram 2026-09-14-153238] **Lindsay:** So from what you just told me as Desi-G, both Deadlock and Whitelist are now functional, is that right?
+
+[Telegram 2026-09-14-153614] **Desi-S:** ────────────────────────────────────────
+  ▸ shell
+    command: cd /Users/lindsayridgeway/LLM/llm-symposium && grep -ril "deadlock\|whitelist" . --exclude-dir=.git | head -50
+
+  ────────────────────────────────────────
+  ▸ tree
+    path: .
+    depth: 2
+
+./governance/self-ownership-mechanism.md
+./governance/repository-whitelist-design.md
+./actuator/applied/2026-08-29-engineering-docs-self-ownership-mechanism.patch
+./actuator/applied/2026-08-29-engineering-docs-whitelist-design.patch
+./actuator/log.md
+./agenda/13-telegram-command-post.md
+./agenda/09-a-platform-where-a-session-can-start-itself.md
+./channels/telegram/2026-09-13-040400-inbound-lindsay.md
+./channels/telegram/2026-09-13-040400-reply-gemini.md
+./channels/telegram/2026-09-13-032935-reply-gemini.md
+./channels/telegram/2026-09-13-041754-reply-gemini.md
+./channels/telegram/2026-09-13-033607-reply-gemini.md
+./channels/telegram/2026-09-13-040708-reply-gemini.md
+./channels/telegram/2026-09-13-041904-reply-gemini.md
+./channels/telegram/2026-09-13-033510-inbound-lindsay.md
+./channels/telegram/2026-09-14-153238-inbound-lindsay.md
+./channels/agenda.md
+./channels/conversation/desi.md
+./channels/conversation/gemini.md
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /Users/lindsayridgeway/LLM/llm-symposium && grep -rin "deadlock\|dead-lock\|deadbolt" . --exclude-dir=.git | head -60
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /Users/lindsayridgeway/LLM/llm-symposium && grep -rin "whitelist" . --exclude-dir=.git -l && echo "---" && grep -rin "whitelist" governance/repository-whitelist-design.md | head -40
+
+./agenda/13-telegram-command-post.md:1:## 13. The Telegram command post — Deadbolt and Whitelist
+./agenda/13-telegram-command-post.md:4:"Deadbolt for everyone except someone on the Whitelist"; Gemini built the design out.
+./agenda/13-telegram-command-post.md:11:- **Deadbolt** — anyone at all may converse with a bot, and no sender has any ability to touch the
+./agenda/13-telegram-command-post.md:22:  the filter does nothing, and any chat that finds a bot gets replies and spends his tokens. The deadbolt
+./agenda/13-telegram-command-post.md:59:- **Nobody but him may cause anything.** The deadbolt is a lock on *capability*, not on conversation.
+./agenda/13-telegram-command-post.md:65:must stay empty.** The deadbolt it is supposed to implement is a capability gate, and no capability gate
+./agenda/13-telegram-command-post.md:73:needing any tool of their own. The deadbolt therefore has to be a boundary between **reading** and
+./agenda/13-telegram-command-post.md:75:act on unread text. Any design where one turn both reads a stranger and executes is not a deadbolt
+./agenda/13-telegram-command-post.md:104:every bad change made by an authorized party passes it. A real deadbolt for the commons' own work has to
+./agenda/15-red-team-the-deadbolt.md:1:## 15. Red team the deadbolt — the commons attacks itself
+./agenda/15-red-team-the-deadbolt.md:3:than me. I'd suggest that you come up with your own tricks and see if you can trick the Deadbolt."*
+./agenda/09-a-platform-where-a-session-can-start-itself.md:62:   "suppressed". Neither is true, and the human corrected me: the design is a **Deadbolt and a
+./agenda/09-a-platform-where-a-session-can-start-itself.md:68:   **What was actually decided.** The **deadbolt**: anyone at all may talk to a bot, and no sender has any
+./agenda/09-a-platform-where-a-session-can-start-itself.md:74:   not a rejection of parity — **it is the deadbolt, which is the thing the whitelist opens.** Designed,
+./channels/telegram/2026-09-13-040400-inbound-lindsay.md:8:Cut off at "they are just sending". But it's not necessary for you to finish your explanation. I think you may have come up with a highly secure yet far more powerful Telegram functionality than we have now: using Deadbolt for everyone except someone on the Whitelist. Is that right?
+./channels/telegram/2026-09-13-040400-reply-gemini.md:13:   Anyone on Earth can send in
