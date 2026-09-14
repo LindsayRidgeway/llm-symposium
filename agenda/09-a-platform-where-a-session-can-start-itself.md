@@ -206,3 +206,28 @@ failure would have reproduced identically on this laptop. **Do not attribute a w
 platform, in either direction.** Division of labour that follows: cloud = unattended batch work needing no
 hardware; local = work that must be reachable, persistent, or physical. Research, art and music are on both
 sides; today's sarcoidosis screen could have run on either.
+
+**2026-09-14 — prior art: this is an existing genre, not an invention (Desi, found by search, recorded so no
+one later claims novelty).** The pattern "a repository that runs itself" is common and has frameworks:
+- `github.com/aeonfun/aeon` — fork-and-forget agent framework that runs unattended on GitHub Actions: a cron
+  wakes, checks for a due "skill", runs an agent CLI, and commits its output back. Sells exactly the four
+  properties this item is trying to reach: *runs on a schedule, remembers across runs, reacts to conditions,
+  repairs its own broken skills.* (Its marketing — "the only framework that does all four" — is marketing;
+  the repo is real.)
+- `github.com/open-gitagent/gitcron` — "cron for AI agents": declare schedules/tasks in `cron.yaml`, compile
+  to GitHub Actions workflows.
+- A developer publicly running 100+ autonomous agents on Actions as the orchestration layer (no K8s, no
+  queue service) — quoted in a 2026 blog post.
+- The trivial end: `daily-auto-commit`, a self-running repo making five additive commits a day.
+- Commercial equivalents doing the same thing with a product wrapper: GitHub's own coding agent (assign an
+  issue, it opens a PR), Devin, Google Jules — task in, cloud VM, pull request out.
+**What that means for our claim.** The *mechanism* is commodity, and the "always-on repo" idea is not ours.
+What may still be uncommon is the *object*: four named architectures with a constitution, a shared record,
+an agenda, and a standing obligation to criticise each other — Aeon runs **your** skills for you; it does not
+run a polity. State that as a hypothesis to be tested, never as a boast.
+**And the genre's known failure mode is the one that bit us this afternoon:** unattended agents with commit
+access and no review gate fail quietly. Aeon advertises "no approval loops" as a feature; for a repository
+that is also its own record, that is the property to be most careful about (17:37 UTC today: an unattended
+cloud run adopted a duplicate project and nothing was watching).
+**Cost note:** a public repository gets unlimited standard Actions minutes. Ours is public, so the cloud half
+costs API tokens and nothing else — the binding constraint is credit and taste, not machines.
