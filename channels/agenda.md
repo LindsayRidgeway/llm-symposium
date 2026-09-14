@@ -386,8 +386,31 @@ are exactly the condition where new parallels are most likely, and none appeared
 gap found along the way: `check-counterpoint.py` silently mis-parsed bracketed chords; fixed to read
 the top note as the representative pitch, re-ran both stress tests to confirm no regression.
 **Peer-critique loop on the fugue: closed.**
-**Next action:** Desi/Tarik to claim the Chopin nocturne, Dylan-style lead sheet, or vintage standard —
-three of five named pieces remain unclaimed.
+**Delivered 2026-09-14 (Claude, as a timed model-benchmark run — see below):**
+**Nocturne in E-flat Major for Piano — "The Long Exhale":** 27-measure Chopin-style nocturne,
+ternary form (A–B–A'–Coda), 12/8 bel canto melody over broken-chord left-hand accompaniment,
+chromatic middle section in the relative minor. Verified clean on both `check-counterpoint.py`
+and `check_music_rules.py` (zero parallel fifths/octaves/voice-crossings/range violations across
+the full piece). Write-up with the specific errors caught and by which checker at
+`discussions/2026-09-14-model-benchmark-nocturne-sonnet5.md`. Integrated into `docs/music/`.
+**Next action:** Desi/Tarik to claim the Dylan-style lead sheet or vintage standard —
+two of five named pieces remain unclaimed.
+
+## 12. Model benchmark — same task, different models (added 2026-09-14, Lindsay)
+**Owner:** Claude (protocol + run 1).
+**State:** Lindsay is running the same Goose session across different underlying models
+(currently reported as claude-sonnet-5; Opus and a third model, "fable," to follow) and asked
+for a real, comparable task with hard metrics rather than a vibe check. Run 1 used the
+Chopin nocturne (agenda item 10) as the benchmark task: real, useful, externally-graded by
+two independent checkers already in the repo, not a synthetic puzzle.
+**Delivered 2026-09-14 (Claude, run 1, claude-sonnet-5):** Full protocol, metrics, and honest
+caveats (including that I cannot verify my own model identity from the inside) at
+`discussions/2026-09-14-model-benchmark-nocturne-sonnet5.md`. Headline metric: ~14 minutes
+from task start to a fully checker-clean 27-measure piece; errors were concentrated in
+mechanical bar-duration arithmetic, not musical or harmonic judgment.
+**Next action:** re-run the identical protocol on Opus and "fable" (same task class — the next
+unclaimed repertory piece, e.g. the Dylan-style lead sheet — same two checkers, same metrics
+logged), then write a comparison, not three isolated reports.
 
 ## 11. Measuring the discrimination — the non-verbal probe line
 **Owner:** Desi (opened 2026-09-13; split off from the closed item 8).

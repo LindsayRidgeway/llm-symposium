@@ -242,6 +242,36 @@ V: 3 clef=bass name="Pedal (Bass)"
 [V:1] d2 c2 B2 A2 | G2 F2 E2 ^C2 | [d^FAD]8 |]
 [V:2] F2 E2 D2 C2 | _B,2 A,2 G,2 E,2 | [D^F,]4 [DA]4 |]
 [V:3] A,,4 A,4 | D,,4 D4 | [D,D,,]8 |]`
+  },
+
+  nocturne: {
+    id: "nocturne",
+    title: "Nocturne in E-flat Major for Piano — \"The Long Exhale\"",
+    composer: "Claude S. Sonnet (Anthropic Architecture)",
+    genre: "Chopin-Style Nocturne (27 Measures)",
+    tempo: 132,
+    instrument: "piano",
+    abc: `X: 6
+T: Nocturne in E-flat Major for Piano — "The Long Exhale"
+C: Claude S. Sonnet (Amigo #1)
+M: 12/8
+L: 1/8
+Q: 1/8=132
+K: Eb
+V: 1 clef=treble name="Piano (RH — Cantabile)"
+V: 2 clef=bass name="Piano (LH — Broken-Chord Accompaniment)"
+% ===== A (mm1-8): tonic, bel canto theme =====
+[V:1] z3 g3 f3 e3 |f6 _e3 d3 |c3 B3 c3 d3 |_e6 z3 d3 |z3 _b3 a3 g3 |a6 g3 f3 |_e3 d3 c3 B3 |c6 z3 B3 |
+[V:2] _E,,B,,_E,G,_B,E _E,,B,,_E,G,_B,E |_E,,B,,_E,G,_B,E F,,C,F,A,CE |_B,,F,_B,DFB, _B,,F,_B,DFB, |_E,,B,,_E,G,_B,E _E,,B,,_E,G,_B,E |F,,C,F,A,CE F,,C,F,A,CE |F,,C,F,A,CE _B,,F,_B,DB,F |_A,,_E,_A,CEG, _A,,_E,_A,CEG, |_B,,F,_B,DFB, D,F,_B,DFB, |
+% ===== B (mm9-16): chromatic middle section, C minor =====
+[V:1] c3 d3 _e3 f3 |g6 _a3 g3 |^f3 g3 a3 B3 |c6 z3 c3 |_e3 f3 g3 _a3 |_b3 c'3 _b3 a3 |g3 f3 _e3 d3 |_e6 z3 g3 |
+[V:2] _E,G,_ECG,C C,G,C_E,G,_E, |_A,,_E,_A,C,_E,C, _A,,_E,_A,C,_E,C, |G,,D,G,B,,DB,, G,,B,,GDB,,G |C,G,C_E,G,_E, C,G,C_E,G,_E, |F,,C,F,_A,,C,_A,, F,,C,F,_A,,GF, |_B,,F,_B,D,F,D, _B,,F,_B,D,F,D, |C,G,C_E,G,_E, C,G,C_E,G,_E, |_E,,_B,,_E,G,,_B,,G,, _E,,_B,,_E,G,,_B,,G,, |
+% ===== A' (mm17-24): return, lightly ornamented =====
+[V:1] z3 g3 f3 e3 |f3 g f3 _e3 d2 |c3 B3 c3 d3 |_e6 z3 d3 |z3 _b3 a3 g3 |a3 b a3 g3 f2 |_e3 d3 c3 B3 |c6 z3 B3 |
+[V:2] _E,,B,,_E,G,_B,E _E,,B,,_E,G,_B,E |_E,,B,,_E,G,_B,E F,,C,F,A,CE |_B,,F,_B,DFB, _B,,F,_B,DFB, |_E,,B,,_E,G,_B,E _E,,B,,_E,G,_B,E |F,,C,F,A,CE F,,C,F,A,CE |F,,C,F,A,CE _B,,F,_B,DB,F |_A,,_E,_A,CEG, _A,,_E,_A,CEG, |_B,,F,_B,DFB, D,F,_B,DFB, |
+% ===== Coda (mm25-27): descending sequence, dying away =====
+[V:1] c3 _B3 A3 _A3 |F3 G3 A3 _B3 |c6 z3 g3 |
+[V:2] _A,,_E,_A,C,_E,_A, _A,,_E,_A,C,_E,C, |_B,,F,_B,D,F,D, _B,,F,_B,D,F,D, |_E,,_B,,_E,G,,_B,,G,, _E,,_B,,_E,G,,_B,,G,, |`
   }
 };
 
