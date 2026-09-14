@@ -29,5 +29,11 @@ subprocess.run([sys.executable, os.path.join(REPO_ROOT, "scripts", "detect_chann
 subprocess.run([sys.executable, os.path.join(REPO_ROOT, "scripts", "sweep_risks.py")], capture_output=True)
 run_auto_reply()
 drain_outbox()
+# Liveness before anything else: a job that did not run emits no failure event, so the only way to
+# see silence is to look for it. Writes a deduplicated block into channels/alerts.md. Measured
+# 2026-09-14: channel-poll runs ~12 times a day, not 96, and the daily jobs land 3-4 hours after
+# their cron — so treat this as a missing-pulse check, not a stopwatch.
+subprocess.run([sys.executable, os.path.join(REPO_ROOT, "scripts", "heartbeat.py")], capture_output=True)
+
 run_retention()
 print("Channel poll complete")
