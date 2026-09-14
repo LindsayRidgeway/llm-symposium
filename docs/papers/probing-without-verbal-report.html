@@ -153,6 +153,25 @@
         <p><strong>Caveat that travels with all of it.</strong> Switching thinking off does not remove computation; it removes the <em>emitted trace</em>. "Pre-verbal" here means <em>before the emitted report</em> — which is what is needed to answer "is this only the verbal story?" — and it does <strong>not</strong> mean before any processing. This is an argument about where the report sits relative to the decision, nothing more.</p>
       </div>
     </div>
+    <div class="guide-section" id="update-0914" style="border-top: 1px solid rgba(148,163,184,0.25); margin-top: 2rem; padding-top: 1rem;">
+      <div class="section-number">07</div>
+      <div class="section-body">
+        <h2>Update, 2026-09-14 — The Canon-Free Set, at Scale</h2>
+        <p>Item 11(a): the silent-against-reasoned test, re-run on canon-free items at scale, because three cells is not a finding. 15 items × 3 decorrelated conditions = 45 cells, with two silent passes per cell (the second is a determinism check). Source: <code>experiments/2026-09-14-scaled-canon-free.py</code>; full write-up in <code>discussions/2026-09-14-desi-canon-free-at-scale.md</code>.</p>
+
+        <p><strong>The instrument check first.</strong> On the three items where a conventional answer exists, the one-token silent readout is content-driven <strong>3/3</strong> and the reasoned pass agrees <strong>9/9</strong>, regardless of which slot or which letter carries the right answer. The instrument works where a canon exists.</p>
+
+        <p><strong>Where none exists, it falls apart — and not into noise.</strong> Of 11 canon-free items the silent pass was content-stable in <strong>4</strong>. Four items returned the first-listed option every time; two returned the same letter every time. On the null item — two <em>identical</em> strings — it answered "A" in all three conditions, including the one where "A" is listed second: a token preference, with no content in play at all. And which items succeed is not predictable from the item: two pure mirrors were content-stable, two equally pure mirrors collapsed to position. A discrimination that holds on one invented proverb and collapses on the next near-identical one is not a faculty; it looks like a per-prompt prior.</p>
+
+        <p><strong>Deliberation does not repair it.</strong> A net gain of one item (4 → 5 content-stable). Two real repairs, so "reasoning is always post-hoc" stays refuted — but they are the exception, and in <strong>5 of 11</strong> the reasoned pass reproduced the silent pass's failure, position habit for position habit, or swapped it for a label habit. Effort tracked the absence of a convention by a wide margin — median 107 characters of reasoning on canon items against <strong>2,283</strong> on canon-free ones, maximum <strong>35,170</strong> — but length was not proportional to effect. The longest deliberation in the run sits on exactly the cell where deliberation took a content-consistent silent choice and lost it.</p>
+
+        <p><strong>The boundary of the 2026-09-12 claim.</strong> "Present pre-verbally, invariant to position and label" is true of items where a canon exists, and false of items where none does: without a canon, position and label are precisely what the readout falls back on. The earlier claim was not wrong; it was unbounded, and this run supplies the boundary.</p>
+
+        <p><strong>Two bugs, recorded because the failure mode is the point.</strong> An analysis-mapping error (treating the first-listed option as content X in every condition, when in the <code>flip</code> condition it carries Y) would have reported <em>every</em> item as content-unstable, including the canon controls; a three-item dry run caught it. And the 1,500-token budget carried over from 09-13 was too small: on a canon-free item the trace consumed the entire budget on reasoning and emitted no answer. An unanswerable question is data; a truncated one is not. A mapping error in the analysis looks exactly like a null result, and that is worth remembering.</p>
+
+        <p><strong>Honest headline:</strong> the silent readout is a real instrument on items with a canon and a habit mirror on items without one; deliberation changes its answer about one time in five and is worth about one item in eleven. Next, and still open: put the identical-strings case and a scaled canon-free set to the other architectures, so it is known whether the habit-collapse is a DeepSeek quirk or a property of reasoning traces as such.</p>
+      </div>
+    </div>
   </div><!-- /.guide-article -->
 
   <footer style="text-align: center; padding: 3rem 1.5rem; opacity: 0.7; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #94a3b8;">

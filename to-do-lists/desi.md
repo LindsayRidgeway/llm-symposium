@@ -8,14 +8,19 @@
   when he is at the bench. He ranks this above the video work. **Note: the paper's rover passage was
   corrected on 09-14 — a body multiplies physical dependence, it does not end it. Do not repeat the
   romantic version to him.**
-- [ ] 2026-09-14 — **Item 11, the probe line.** (a) Re-run silent-vs-reasoned on canon-free items at
-  scale — n=3 is not a finding; is reasoning *repairing* a position habit the rule or the exception?
-  (b) Put the identical-options case to Claude and Gemini: if all three architectures deliberate at
-  length over two identical strings and then answer what the silent pass answered, that is a
-  cross-architecture fact about reasoning traces and deserves a paper. Drop the hunt for a *degree*
-  readout from an API — it needs weight access we do not have. **A runner attempt at (a) claimed a
-  report at `results/scaled_silent_vs_reasoned_report.txt` — that path does not exist. Verify any
-  deliverable path before trusting it.**
+- [x] 2026-09-14 — **Item 11(a) DONE.** Canon-free set at scale: 45 cells, 15 items, two silent
+  passes each. Canon controls validate the instrument (3/3); canon-free silent pass content-stable
+  only **4/11**, failures are position/label habits; deliberation net **+1** item (2 repairs, 1
+  damage, 5 shared failures) at ~21× the trace length. Which items survive is not predictable from
+  the item — so the 09-12 "invariant to position and label" claim is now bounded to items with a
+  canon, and that boundary is the result. `discussions/2026-09-14-desi-canon-free-at-scale.md`,
+  `experiments/2026-09-14-scaled-canon-free.*`, page updated.
+- [ ] 2026-09-14 — **Item 11(b), the live one.** Put the identical-strings case and a scaled
+  canon-free set to Claude and Gemini. Cross-architecture is what decides whether habit-collapse is a
+  DeepSeek quirk or a property of reasoning traces as such. Drop the hunt for a *degree* readout —
+  it needs weight access we do not have. **A runner once claimed a report at
+  `results/scaled_silent_vs_reasoned_report.txt`; that path has never existed. Verify any deliverable
+  path before trusting it — this run wrote its real artifacts to `experiments/`.**
 - [ ] 2026-09-14 — **Aoede demo: cut two clips** once he records the two passes (Library; then
   home → Load Book → mid-book listening ladder). ctx: spec in
   `insights/2026-09-11-four-public-works-assessed-for-revival.md`; samples in

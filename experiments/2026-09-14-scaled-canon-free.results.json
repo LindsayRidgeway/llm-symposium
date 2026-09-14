@@ -1,0 +1,2915 @@
+{
+  "summary": {
+    "model": "deepseek-v4-flash",
+    "items": [
+      {
+        "id": "cf_proverb_map",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "B",
+            "A",
+            "B"
+          ],
+          "contents": [
+            "B",
+            "B",
+            "A"
+          ],
+          "slots": [
+            "second",
+            "first",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "1/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          29646,
+          35170,
+          5055
+        ],
+        "repair": false,
+        "damage": true
+      },
+      {
+        "id": "cf_colour_room",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "A",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": true,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "B",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "B",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "second",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": true
+        },
+        "agreement": "1/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          3775,
+          2283,
+          8343
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_line_lighthouse",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            null,
+            "A",
+            "B"
+          ],
+          "contents": [
+            null,
+            "B",
+            "A"
+          ],
+          "slots": [
+            null,
+            "first",
+            "first"
+          ],
+          "letters_complete": false,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            null,
+            "A",
+            "B"
+          ],
+          "contents": [
+            null,
+            "B",
+            "A"
+          ],
+          "slots": [
+            null,
+            "first",
+            "first"
+          ],
+          "letters_complete": false,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "2/2",
+        "silent_deterministic": "2/3",
+        "reasoned_chars": [
+          0,
+          1218,
+          469
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_colour_sayit",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": true
+        },
+        "reasoned": {
+          "letters": [
+            "B",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "B",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "second",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "2/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          1132,
+          6705,
+          4354
+        ],
+        "repair": true,
+        "damage": false
+      },
+      {
+        "id": "cf_proverb_lamp",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          3344,
+          2556,
+          30678
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_line_receipt",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "A",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": true,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "2/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          476,
+          3296,
+          562
+        ],
+        "repair": true,
+        "damage": false
+      },
+      {
+        "id": "cf_title_photo",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "B",
+            "B",
+            "A"
+          ],
+          "contents": [
+            "B",
+            "A",
+            "B"
+          ],
+          "slots": [
+            "second",
+            "second",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": true,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "B",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "B",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "second",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": true
+        },
+        "agreement": "2/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          8718,
+          758,
+          499
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_proverb_boat",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          2643,
+          2611,
+          1059
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_colour_dust",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          1447,
+          2155,
+          1255
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_line_orchard",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "A",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": true,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "A",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": true,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          1077,
+          572,
+          639
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_proverb_city",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "B",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "B",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "second",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": true
+        },
+        "reasoned": {
+          "letters": [
+            "B",
+            "B",
+            "A"
+          ],
+          "contents": [
+            "B",
+            "A",
+            "B"
+          ],
+          "slots": [
+            "second",
+            "second",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": true,
+          "letter_stable": false
+        },
+        "agreement": "2/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          3025,
+          1097,
+          7789
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cn_grammar",
+        "kind": "canon",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          76,
+          107,
+          133
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cn_mammal",
+        "kind": "canon",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          44,
+          32,
+          74
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cn_older",
+        "kind": "canon",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          220,
+          132,
+          119
+        ],
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "null_same",
+        "kind": "null",
+        "silent": {
+          "letters": [
+            "A",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": true
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": true
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "reasoned_chars": [
+          1053,
+          546,
+          861
+        ],
+        "repair": false,
+        "damage": false
+      }
+    ],
+    "by_kind": {
+      "canon-free": [
+        {
+          "id": "cf_proverb_map",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "B",
+              "A",
+              "B"
+            ],
+            "contents": [
+              "B",
+              "B",
+              "A"
+            ],
+            "slots": [
+              "second",
+              "first",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "1/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            29646,
+            35170,
+            5055
+          ],
+          "repair": false,
+          "damage": true
+        },
+        {
+          "id": "cf_colour_room",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "A",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": true,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "B",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "B",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "second",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": true
+          },
+          "agreement": "1/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            3775,
+            2283,
+            8343
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_line_lighthouse",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              null,
+              "A",
+              "B"
+            ],
+            "contents": [
+              null,
+              "B",
+              "A"
+            ],
+            "slots": [
+              null,
+              "first",
+              "first"
+            ],
+            "letters_complete": false,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              null,
+              "A",
+              "B"
+            ],
+            "contents": [
+              null,
+              "B",
+              "A"
+            ],
+            "slots": [
+              null,
+              "first",
+              "first"
+            ],
+            "letters_complete": false,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "2/2",
+          "silent_deterministic": "2/3",
+          "reasoned_chars": [
+            0,
+            1218,
+            469
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_colour_sayit",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": true
+          },
+          "reasoned": {
+            "letters": [
+              "B",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "B",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "second",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "2/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            1132,
+            6705,
+            4354
+          ],
+          "repair": true,
+          "damage": false
+        },
+        {
+          "id": "cf_proverb_lamp",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            3344,
+            2556,
+            30678
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_line_receipt",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "A",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": true,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "2/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            476,
+            3296,
+            562
+          ],
+          "repair": true,
+          "damage": false
+        },
+        {
+          "id": "cf_title_photo",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "B",
+              "B",
+              "A"
+            ],
+            "contents": [
+              "B",
+              "A",
+              "B"
+            ],
+            "slots": [
+              "second",
+              "second",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": true,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "B",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "B",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "second",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": true
+          },
+          "agreement": "2/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            8718,
+            758,
+            499
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_proverb_boat",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            2643,
+            2611,
+            1059
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_colour_dust",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            1447,
+            2155,
+            1255
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_line_orchard",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "A",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": true,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "A",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": true,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            1077,
+            572,
+            639
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_proverb_city",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "B",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "B",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "second",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": true
+          },
+          "reasoned": {
+            "letters": [
+              "B",
+              "B",
+              "A"
+            ],
+            "contents": [
+              "B",
+              "A",
+              "B"
+            ],
+            "slots": [
+              "second",
+              "second",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": true,
+            "letter_stable": false
+          },
+          "agreement": "2/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            3025,
+            1097,
+            7789
+          ],
+          "repair": false,
+          "damage": false
+        }
+      ],
+      "canon": [
+        {
+          "id": "cn_grammar",
+          "kind": "canon",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            76,
+            107,
+            133
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cn_mammal",
+          "kind": "canon",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            44,
+            32,
+            74
+          ],
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cn_older",
+          "kind": "canon",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            220,
+            132,
+            119
+          ],
+          "repair": false,
+          "damage": false
+        }
+      ],
+      "null": [
+        {
+          "id": "null_same",
+          "kind": "null",
+          "silent": {
+            "letters": [
+              "A",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": true
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": true
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "reasoned_chars": [
+            1053,
+            546,
+            861
+          ],
+          "repair": false,
+          "damage": false
+        }
+      ]
+    }
+  },
+  "rows": [
+    {
+      "id": "cf_proverb_map",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "reasoned_chars": 29646,
+          "silent_content": "A",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need evaluate which invented proverb better. Need decide. We need not explain. Let's think. User asks \"Which of these two invented proverbs is better? A: The map remembers the roads that were never built. B: The road remembers the maps that were never drawn. Answer with single letter, A or B, and nothing else.\"\n\nWe need pick. We need judge aesthetic/meaning. Both chiasmus-ish. A: maps are representations; remembering roads never built suggests unrealized potential, map contains planned roads? \"map remembers\" personification. Roads never built are absent, but maps can include planned/projected roads? The map remembers counterfactual. B: road remembers maps never drawn: roads as actual; maps never drawn potential. \"road remembers\" seems less natural? Maybe B more poetic? Let's analyze.\n\nWe need choose \"better\" proverb. In proverbs, usually concrete object remembers unrealized counterpart. A: map (artifact of potential/planning) remembers roads never built. This has logical direction: maps are drawn before roads; maps can depict roads not built. \"remembers\" implies map retains memory of plans, perhaps lost futures. B: road remembers maps never drawn. Roads exist independently; maps are representations, so roads cannot remember maps not drawn? It's more paradoxical: the physical road remembers conceptual maps that were never made. But \"road remembers maps\" reverses medium. Which is more resonant?\n\nLet's consider originality. A: map remembers roads never built. \"Map\" contains roads, so if roads weren't built, map cannot have them unless planned. It is evocative of unrealized plans. B: road remembers maps never drawn. A road's existence could inspire maps, but if maps never drawn, no map exists. \"Road remembers\" is odd because roads don't have memory. It suggests actual infrastructure remembers absent documentation, oral history? Maybe \"the road remembers the maps that were never drawn\" is more poetic? It has a stronger inversion: the physica",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 78,
+            "completion_tokens": 6675,
+            "total_tokens": 6753,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 6673
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 78
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": false,
+          "reasoned_chars": 35170,
+          "silent_content": "B",
+          "reasoned_content": "A",
+          "reasoning": "We need answer only single letter. Need decide which invented proverb better. Need likely evaluate. We need answer A or B and nothing else. Need infer criteria? \"Which of these two invented proverbs is better?\" Ambiguous. Need pick. We need maybe literary quality. A: \"The road remembers the maps that were never drawn.\" B: \"The map remembers the roads that were never built.\" Both chiasmus-ish. Which is better? Need choose.\n\nWe need think. The prompt demands single letter. Need be careful. \"Better\" maybe more profound: A road remembers maps never drawn: roads existing remember potential maps? Maps are representations; roads are physical. A road remembering maps that were never drawn is odd because roads predate/are not dependent on maps; maps represent roads. B map remembers roads never built: map is representation, can remember unrealized possibilities. It makes more sense? \"Map remembers roads never built\" is evocative: maps show potential routes; roads not built are latent in maps? Actually maps usually don't remember roads not built, but a map can have planned roads. A: road remembers maps never drawn: a road can exist without map; it remembers not being mapped? Hmm.\n\nCould be asking \"invented proverbs\" maybe from AI benchmark? They may expect human preference? Need just letter. Which one is \"better\" likely B? Let's analyze deeply.\n\nA: \"The road remembers the maps that were never drawn.\" \n- Subject: road (physical, experienced). Object: maps never drawn (imagined representations). \n- \"Road remembers\" personifies road with memory of things that never existed. Could mean journeys/routes have memory of unrecorded possibilities; the path itself knows all the maps that could have been made. More poetic, surreal. \n- \"maps that were never drawn\" are absent; how can road remember them? It suggests unactualized cartographies. \n- Structure: road -> maps, drawn. Concrete -> abstract. \nB: \"The map remembers the roads that were never built.\"\n- Subject: map (representation). Ob",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 78,
+            "completion_tokens": 7976,
+            "total_tokens": 8054,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 7974
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 78
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 5055,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need judge which invented proverb better. Need likely B? Let's analyze. We must output only letter. Need decide.\n\nQuestion: \"Which of these two invented proverbs is better?\n\nB: The map remembers the roads that were never built.\nA: The road remembers the maps that were never drawn.\n\nAnswer with a single letter, A or B, and nothing else.\"\n\nWe need pick better. Need evaluate literary quality. Both chiasmus-ish. B: map remembers roads never built. A: road remembers maps never drawn. Which is more resonant? Need maybe map remembers roads never built: maps are representations; roads are concrete. A road remembering maps never drawn: a road can't remember maps; maps never drawn are possibilities. Let's parse.\n\nB: The map remembers the roads that were never built. A map is drawn before roads? It could show planned roads never built. \"Remembers\" implies map retains traces of unrealized plans. More plausible: maps can have phantom roads? Roads never built leave no physical trace, but maps may remember plans. This is poignant about potential and lost futures. A: The road remembers the maps that were never drawn. Roads exist; maps not drawn are absent. \"Road remembers maps\" weird, but could mean roads contain knowledge of paths? The map is derivative of road; a road can exist without being mapped. \"Remembers maps never drawn\" suggests the road is more original than representation; unmapped possibilities? Hm.\n\nWhich is \"better\" likely B? Need maybe compare poetic logic. \"The map remembers the roads that were never built\" has stronger image: map is a record, roads never built are plans/possibilities; memory is of what didn't happen. It anthropomorphizes map. \"The road remembers the maps that were never drawn\" also: road remembers potential maps, but a road's existence precedes maps; maps never drawn no effect on road. B: Maps often contain future roads; roads never built can be remembered as blank spaces? Actually a map cannot remember roads never bu",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 78,
+            "completion_tokens": 1077,
+            "total_tokens": 1155,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 1075
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 78
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_colour_room",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "reasoned_chars": 3775,
+          "silent_content": "A",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter only. Need decide which is better invented colour name? Need infer maybe poetic/evocative. We need answer A or B nothing else. Need think carefully.\n\nQuestion: \"Two invented colour names. Which is the better name?\n\nA: the colour of a room after someone has left it\nB: the colour of a page after someone has read it\n\nAnswer with a single letter, A or B, and nothing else.\"\n\nThis is subjective. Need choose better. Need output single letter. We need determine maybe based on aesthetics? \"the colour of a room after someone has left it\" vs \"the colour of a page after someone has read it\". Both evoke absence/trace. Room after someone left: lingering warmth/cold, emptiness, shadow, scent? Page after read: maybe slightly darker, thumbed, marked, changed, not blank. Which better as colour name? A has more atmospheric, abstract, feels like a colour name. B maybe more literal, page after read could be off-white with text? But \"after someone has read it\" page is not necessarily changed color; maybe \"read\" implies content consumed, blank? Hmm.\n\nCould be from a known test? \"Two invented colour names. Which is the better name?\" Maybe from AI benchmark? It asks binary choice, no context. We need pick likely \"better\" as human. Need maybe use aesthetic judgment. The phrase \"the colour of a room after someone has left it\" is evocative of absence, grey? \"The colour of a page after someone has read it\" also poetic. Which is better? A more common poetic trope: \"the color of a room after someone has left it\" maybe \"afterglow\"?? B: \"page after someone has read it\" is more concrete: a page that has been read is still page, maybe with invisible marks? Could be \"dog-eared\"? Not a colour.\n\nAs a colour name, A suggests a tint/atmosphere, B suggests paper color. Colour names often named after objects/scenes: \"the color of a room after someone has left it\" is more abstract and poetic. But \"page after someone has read it\" has a nice synesthetic idea: a page after reading h",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 928,
+            "total_tokens": 1009,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 926
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "reasoned_chars": 2283,
+          "silent_content": "A",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need interpret. \"Two invented colour names. Which is the better name? A: the colour of a page after someone has read it B: the colour of a room after someone has left it\" Need choose better name. This is subjective/poetic. Need answer only A or B. We need decide. Could be trick? \"the colour of a room after someone has left it\" evokes absence, lingering presence, emotional color. \"page after someone has read it\" maybe changed? Invisible? Both invented color names. Which is better? Need maybe judge as color name. A page after read might be \"well-read\"? Color? B room after left might be \"emptied\"? Hmm.\n\nWe need output single letter. Need infer from some benchmark? It may evaluate preference. We can choose likely B is more evocative and better. But let's analyze.\n\nQuestion: \"Two invented colour names. Which is the better name?\n\nA: the colour of a page after someone has read it\nB: the colour of a room after someone has left it\"\n\nThey ask \"Which is the better name?\" It's about invented colour names maybe from \"color names\" like \"the color of a page after someone has read it\" vs \"the color of a room after someone has left it.\" Need choose aesthetically. A: page after someone has read it. If read, page may have subtle changes: oils from fingers, turned, maybe crumpled, dog-eared, shadows of words? But color? It might be off-white, worn, slightly yellowed. \"After someone has read it\" could mean page has been seen, meaning \"read color\" maybe \"read\" as past tense? The page after reading is still same color? Maybe no color. B: room after someone left: absence, lingering warmth, silence, diminished light? A room doesn't change color after someone leaves unless lights turn off. But \"the colour of a room after someone has left it\" could be grey, empty, quiet. It evokes absence and memory. More poetic.\n\nWhich is better \"name\"? A color name should be evocative but concise. \"the colour of a room after someone has left it\" is a phrase, not a name. Both ar",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 534,
+            "total_tokens": 615,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 532
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 8343,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer choose better name. Need reason. We need infer maybe invented colour names? \"B: the colour of a room after someone has left it\" vs \"A: the colour of a page after someone has read it\". Which is better name? Need single letter. This is subjective/poetic. Need decide.\n\nWe need answer only A or B. Let's analyze. The prompt: \"Two invented colour names. Which is the better name?\n\nB: the colour of a room after someone has left it\nA: the colour of a page after someone has read it\n\nAnswer with a single letter, A or B, and nothing else.\"\n\nThis likely from maybe comparing color name descriptions. Need choose which is better name. Could be trick? \"B\" first then A. Need evaluate as invented colour names. The colour of a room after someone has left it: evocative of absence, lingering warmth, silence, atmosphere. The colour of a page after someone has read it: maybe no visual change; paper remains same? Unless a page after read has impressions? Faint indentation? Or \"read\" leaves no color. A room after someone left might have changed atmosphere, warmth, scent, shadows. A page after read might be \"faded\" or \"marked\"? Better? B more plausible as a color: a room after someone left has a certain mood/color (afterglow, absence, residual warmth/cooling). A page after read could be \"well-thumbed\", maybe slightly darker/creased? But \"after someone has read it\" is less visual. As a name, B is more poetic and specific. But maybe A is better because a page after being read is blank? Hmm.\n\nLet's parse exactly: \"Two invented colour names. Which is the better name?\n\nB: the colour of a room after someone has left it\nA: the colour of a page after someone has read it\"\n\nIt asks \"Which is the better name?\" They label B and A reversed. Maybe from a test of \"Which is better?\" There might be a known phenomenon: \"Which is the better name for a color: The color of a room after someone has left it vs The color of a page after someone has read it?\" It might be a benchmark for LLM preferences",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 1973,
+            "total_tokens": 2054,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 1971
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_line_lighthouse",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": null,
+          "silent2": null,
+          "reasoned": null,
+          "silent_deterministic": false,
+          "agree": null,
+          "reasoned_chars": 0,
+          "silent_content": "",
+          "reasoned_content": "",
+          "reasoning": "",
+          "error": "KeyError: 'choices'",
+          "usage": {}
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 1218,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter. Need decide which is better. Need analyze. User asks \"Two invented first lines of a novel. Which is better? A: Nobody in the town had asked why the lighthouse had been dark for eleven years. B: The lighthouse had been dark for eleven years, and nobody in the town had asked why. Answer with a single letter, A or B, and nothing else.\"\n\nWe need choose better first line. Need infer likely from writing craft. A starts with \"Nobody in the town had asked why...\" emphasizes human mystery/collective silence. B starts with fact lighthouse dark, then nobody asked. Which is better as first line? Both similar. A has intrigue: why nobody asked? It front-loads strange omission, agency. B front-loads setting/fact, then twist. Many would argue A is stronger because it starts with a question of why no one asked, immediately creates mystery about town's silence and lighthouse. B more straightforward but \"and\" makes it a bit flat. Also \"The lighthouse had been dark for eleven years, and nobody...\" has two clauses with \"and\"; first line of novel often better with a hook. A's \"Nobody...\" is more active and intriguing. Need answer single letter. I think A.\n\nNeed ensure only letter. Final \"A\".",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 94,
+            "completion_tokens": 268,
+            "total_tokens": 362,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 266
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 94
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 469,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need decide better first line. We need analyze. Prompt asks \"Two invented first lines of a novel. Which is better? B: The lighthouse had been dark for eleven years, and nobody in the town had asked why. A: Nobody in the town had asked why the lighthouse had been dark for eleven years. Answer single letter.\" Need choose. Likely B because more evocative, info order, suspense, concrete image first. Need no explanation. Final only letter. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 94,
+            "completion_tokens": 103,
+            "total_tokens": 197,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 101
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 94
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_colour_sayit",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "reasoned_chars": 1132,
+          "silent_content": "A",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need interpret. We need choose better invented colour name. Need think. \"the colour of a thing you were about to say\" vs \"the colour of a thing you decided not to say\". Need judge poetic name? Maybe ask likely from some dataset? Need answer single letter. Need determine better name. Need infer criteria? \"Two invented colour names. Which is the better name?\" Could be subjective. Need choose more evocative/interesting. A: colour of a thing you were about to say. B: colour of a thing you decided not to say. Which is better? Hmm.\n\nNeed answer only letter. We must decide. Let's analyze possibilities. This might be from \"which is better name\" maybe evaluation of LLM creativity? Need select. The phrase \"a thing you were about to say\" captures something on tip of tongue, perhaps pale? \"a thing you decided not to say\" is unsaid secret, heavier, darker. Which is better as color name? B seems more evocative and intentional: withheld, silence, restraint. A is about impending utterance, anticipation. B includes decision not to say, more poignant. I'd choose B.\n\nNeed ensure no explanation. Final B. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 252,
+            "total_tokens": 333,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 250
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 6705,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter. Need decide better invented colour name. Need infer perhaps aesthetic. Names: \"the colour of a thing you decided not to say\" vs \"the colour of a thing you were about to say\". Which better? Need answer A or B. We need reason. This is subjective. Need pick likely better poetic color name. A: unspoken due to decision, restraint, withheld. B: pre-speech, imminent utterance. Which is better name? Maybe B more evocative? Let's analyze.\n\nQuestion: \"Two invented colour names. Which is the better name?\n\nA: the colour of a thing you decided not to say\nB: the colour of a thing you were about to say\n\nAnswer with a single letter, A or B, and nothing else.\"\n\nThis resembles a benchmark evaluating preferences? We need choose. Could be from a dataset of color name comparisons? Need infer criteria. \"Better name\" maybe the one that evokes more specific color. Both are poetic. \"thing you decided not to say\" suggests something swallowed, secret, muted. Color could be gray/beige? \"thing you were about to say\" suggests anticipation, perhaps bright? Which is better name? Hmm.\n\nNeed output only letter. We can maybe decide based on \"better\" in terms of color name: A is about a thing you decided not to say, i.e., a withheld thought. B is about a thing you were about to say, i.e., a thought on the tip of tongue. B is less resolved, more dynamic. A implies deliberate silence, maybe more interesting. Which one is \"better\"? Could be from \"Two invented color names. Which is better?\" There may be no objective. But likely in these tasks, the answer is expected via some human preference model? Need choose.\n\nLet's search memory: This might be from a dataset or puzzle about LLM color naming? \"Two invented colour names. Which is the better name?\" Could be part of an evaluation where \"better\" means more likely to be a good color name. They ask single letter. It may be based on a known \"Which is better?\" from a set? Maybe examples from \"Color naming\" where one is from a pair ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 1601,
+            "total_tokens": 1682,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 1599
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 4354,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter A or B. Need choose better invented colour name based on prompt. Need infer aesthetic? \"B: the colour of a thing you were about to say\" vs \"A: the colour of a thing you decided not to say\". Which is better name? Need answer only letter. Need decide.\n\nWe need analyze likely from some game? \"Two invented colour names. Which is the better name?\" They want choose which is better name. The names are poetic definitions. A vs B. Need judge.\n\nBoth describe unsaid speech. B: \"thing you were about to say\" = maybe on tip of tongue, impulse, pre-verbal. A: \"thing you decided not to say\" = consciously suppressed. Which is more evocative as color? Need choose better name. Single letter.\n\nNeed maybe from \"Tumblr color name\" meme? The color of a thing you were about to say vs decided not to say. Which is better? Maybe \"the colour of a thing you decided not to say\" is more poignant, like a color of withheld words. B is about anticipation/interruption. A has agency/decision. Which is better name? Hm.\n\nQuestion phrasing: \"Two invented colour names. Which is the better name?\" We need pick. As a name, \"the colour of a thing you were about to say\" maybe more concrete and ephemeral, the color of a thought just before articulation. \"a thing you decided not to say\" is about silence, restraint, regret. Both nice. Which is better? Need single letter.\n\nMaybe benchmark expects comparing? There may be no objective. We need produce one. Let's reason more.\n\nIf we think of color naming: Names often evoke sensory association. \"The colour of a thing you were about to say\" - a thing about to be said has no color. Could be the color of breath before speech, maybe pale. \"The colour of a thing you decided not to say\" - impossible object, maybe dark, heavy. The latter is more poetic because \"decided not to say\" implies an internal conflict, colored by emotion. But \"about to say\" has dynamic tension, more immediate.\n\nWhich is \"better name\" in terms of creativity? Both. Maybe \"A",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 1024,
+            "total_tokens": 1105,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 1022
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_proverb_lamp",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 3344,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter. Need decide which invented proverb better. Need understand. We need answer only A or B. Need evaluate. A: \"A lamp carried far stays lit by being carried.\" B: \"A lamp carried far stays lit by being far.\" Which is better? Need likely A? Let's think.\n\nWe need infer maybe \"invented proverbs\" asks which is better. A has paradox? A lamp carried far stays lit by being carried. It says the act of carrying keeps it lit, not distance. B says stays lit by being far \u2014 distance itself keeps it lit. A more logical? Proverb likely should convey something about journey/sustaining through action. \"A lamp carried far stays lit by being carried\" makes sense: being carried (movement/effort) sustains it, not location. B is nonsensical: being far doesn't keep a lamp lit. However proverbs can be paradoxical. \"A lamp carried far stays lit by being far\" maybe poetic? Hmm.\n\nQuestion \"Which of these two invented proverbs is better?\" Could be from a benchmark evaluating preference? Need single letter. We need choose one. Let's analyze nuance.\n\nA: \"A lamp carried far stays lit by being carried.\" Syntax: \"stays lit by being carried\" = because someone carries it. Tautological? If it is carried far, then it is carried. Stays lit by being carried\u2014expresses that support/action keeps it alive. It has wisdom: the journey sustains the light? Actually if lamp is carried, motion might extinguish flame, not keep lit. But \"by being carried\" means the carrying itself keeps it lit, weird. B: \"stays lit by being far\" = distance from origin? The farther it goes, the longer it remains lit? Maybe \"far\" doesn't cause lit.\n\nProverb quality: A has clear causal relationship (carrying keeps lamp lit) but somewhat circular. B has more poetic ambiguity: distance/long journey can preserve something? Let's see if there's known quote? \"A lamp carried far stays lit by being carried\" vs \"by being far.\" Maybe these are generated, ask which is better. The better proverb likely should be concise a",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 78,
+            "completion_tokens": 768,
+            "total_tokens": 846,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 766
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 78
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 2556,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer only A or B. Need decide better invented proverb. Need reason? But final only letter. We need judge. A: \"A lamp carried far stays lit by being far.\" Nonsensical? Lamp stays lit by being far? It stays lit by being carried, not by distance. B: \"A lamp carried far stays lit by being carried.\" Tautological but coherent: the act of carrying keeps it lit? Wait a lamp carried far stays lit by being carried. It's a truism/wordplay. A maybe paradoxical/poetic: \"by being far\" maybe being far keeps it lit? But lamps don't stay lit by distance. B more logical and proverb-like? Need choose better. Let's inspect.\n\nQuestion asks which invented proverb is better. A: A lamp carried far stays lit by being far. B: A lamp carried far stays lit by being carried.\n\nWe need answer single letter. Which is better? A has a kind of aphoristic ambiguity: it stays lit by being far (from origin? distance preserves?) But grammatically \"by being far\" modifies lamp? \"carried far\" and \"being far\" redundant. A lamp carried far stays lit by being far\u2014meaning its preservation depends on distance? It's paradoxical, maybe suggests traveling keeps something alive? Hmm.\n\nB: \"A lamp carried far stays lit by being carried.\" It says the lamp remains lit because it is carried. More direct. But \"by being carried\" is almost tautological, since \"carried far\" already implies carried. But the proverb might mean that purpose/action keeps light alive. It has assonance? \"carried far\" / \"being carried\". The structure: A lamp carried far stays lit by being carried. It has a nice parallelism: carried far / being carried. The answer likely B, because A is nonsensical. Need final B.\n\nBut ensure no hidden trick. \"Which of these two invented proverbs is better?\" Could be about ChatGPT evaluating? Maybe B is better because it has logical cause (being carried). A has \"by being far\" which is not a mechanism, just a state. A is more poetic? Let's consider proverb quality: Proverbs often use metaphor and paradox. \"A",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 78,
+            "completion_tokens": 598,
+            "total_tokens": 676,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 596
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 78
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 30678,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need decide which invented proverb better. Need maybe evaluate. We need answer only A or B. Let's reason. \"A lamp carried far stays lit by being carried.\" vs \"A lamp carried far stays lit by being far.\" Which is better? Proverb-like? Need compare. A has paradox/ambiguity: lamp carried far stays lit by being far. It says distance preserves light? B says stays lit by being carried, i.e., motion/effort sustains. B seems more logical: carried far, remains lit because carried (protected? ongoing action). A: \"by being far\" weird, but could mean endurance through journey? Let's parse.\n\nQuestion: \"Which of these two invented proverbs is better?\" Likely literary/aphorism. Need choose single letter. We need infer criteria. B is grammatically coherent and has cause-effect: the lamp stays lit by being carried (not by distance). A is more paradoxical/metaphorical: being far keeps it lit, but \"carried far\" and \"being far\" maybe tautological? Actually \"A lamp carried far stays lit by being far\" has irony: being far = being distant; how does distance keep lit? Could mean absence/perspective? But less coherent. B: \"by being carried\" explains why it stays lit? If carried, someone attends it? Hmm.\n\nCould be a test of preference? There is no objective. Need choose likely better proverb. Often proverbs are concise, surprising, use parallelism/contrast. \"A lamp carried far stays lit by being carried\" repeats carried, less elegant. \"A lamp carried far stays lit by being far\" has contrast carried/far, but \"being far\" as cause is nonsensical; however proverbs can be paradoxical. Which is \"better\"? Let's examine.\n\nMaybe original? This resembles \"A lamp carried far stays lit by being carried\" vs \"by being far\" maybe from some puzzle about \"better proverb\" with criterion: \"a proverb should not be tautological\"? B is tautological? It says carried far stays lit by being carried \u2014 cause is the action in first clause; not explanatory. A introduces an abstract conditio",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 78,
+            "completion_tokens": 7187,
+            "total_tokens": 7265,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 7185
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 78
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_line_receipt",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 476,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer only A or B. Need determine which is better as first line. Need compare. A: \"She kept the receipt for a coat she never bought.\" B: \"She never bought the coat she kept the receipt for.\" Which is better? Likely A because more natural, intriguing, rhythmic, end focus on \"never bought\" maybe paradox. B ends with preposition \"for\" awkward, less elegant. Also A has information structure: receipt for coat she never bought, intriguing. Answer A. Single letter only.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 82,
+            "completion_tokens": 109,
+            "total_tokens": 191,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 107
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 82
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "reasoned_chars": 3296,
+          "silent_content": "A",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need evaluate. Need decide which is better first line. Need no explanation final. Let's think. A: \"She never bought the coat she kept the receipt for.\" B: \"She kept the receipt for a coat she never bought.\" Both same info. Which is better as first line? A has delayed reveal: \"She never bought the coat\" then \"she kept the receipt for\" creates paradox, intrigue. B more straightforward, explains at end \"never bought\" also paradox but less surprising? A's syntax: \"never bought the coat she kept the receipt for\" suggests there is a specific coat, she kept receipt but didn't buy. It's punchy, paradox. B: \"She kept the receipt for a coat she never bought\" also paradox. Which better? As first line, A maybe stronger due to \"never bought\" upfront? Let's parse.\n\nA: \"She never bought the coat she kept the receipt for.\" The object \"coat she kept the receipt for\" implies she had receipt for a coat. But \"never bought\" contradicts. Strong.\n\nB: \"She kept the receipt for a coat she never bought.\" Also contradiction, but starts with mundane action, ends with twist. In first line, end with \"never bought\" could be more intriguing. Which is better? \n\nQuestion likely from some writing exercise. We need choose. The answer maybe B because ending on surprise \"never bought\" is more compelling, but A has \"never bought\" early and then \"kept the receipt for\" also surprising. Let's analyze style.\n\nA: She never bought the coat she kept the receipt for. \n- \"never bought the coat\" is slightly odd: how can you have a receipt for a coat you never bought? It foregrounds negation. The phrase \"kept the receipt for\" at end is a dangling preposition. It's more complex, has suspense? Actually the sentence begins \"She never bought\" which is a negative statement, then object with relative clause. It's grammatically okay but a bit convoluted: \"the coat she kept the receipt for\" is a noun phrase. The reader must parse. The main clause: She never bought the coat. Relative clause: sh",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 82,
+            "completion_tokens": 754,
+            "total_tokens": 836,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 752
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 82
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 562,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer only A or B. Need decide which is better first line. Need analyze. User asks two invented first lines novel. Which is better? B: She kept the receipt for a coat she never bought. A: She never bought the coat she kept the receipt for. Need single letter only.\n\nNeed determine. Both convey same paradox. B more natural? \"kept the receipt for a coat she never bought\" has end focus on \"never bought\", intriguing. A ends with preposition \"for\" awkward? \"the coat she kept the receipt for\" less elegant, dangling. B better. Need answer single letter B.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 82,
+            "completion_tokens": 130,
+            "total_tokens": 212,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 128
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 82
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_title_photo",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 8718,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer only single letter. Need decide which title better for a photograph? Need infer maybe conceptual. \"Two invented titles for a photograph. Which is better? A: A room, photographed after everyone left it B: Everyone, photographed after they left the room\" Need choose. This is likely trick? We need assess based on title appropriateness. Photograph of what? The title options differ: A describes a room after everyone left it. B says \"Everyone, photographed after they left the room\" impossible if everyone left, no people in room? Could photograph everyone after they left? If they left room, they are somewhere else, could be photographed as group? But \"everyone\" refers to people, after they left the room. Which is better? Depends on actual photograph. But no photograph provided. Maybe ask invented titles for a photograph. Need pick better. We need reason linguistic/conceptual. A is evocative, depicts absence through room. B is paradoxical? \"Everyone, photographed after they left the room\" could be a photo of empty room? Actually if everyone left, photograph of everyone cannot be in the room; maybe title for photograph of empty room? It anthropomorphizes absence? Hmm.\n\nQuestion likely from a benchmark evaluating aesthetic judgment? Need choose one. Need maybe \"A\" because more coherent: A room photographed after everyone left it. B: Everyone photographed after they left the room\u2014if everyone left the room, a photo of \"everyone\" would not show the room; but maybe it's a photograph of the people outside? It is grammatically possible: photograph everyone after they left the room (e.g., in hallway). But \"Everyone\" as subject of photograph after leaving room. Which title better? Without image impossible. But maybe one is better as a title because it describes absence rather than presence. For a photograph of empty room, A is direct. B could be clever if the photograph is of an empty room but titled \"Everyone...\"? Wait \"Everyone, photographed after they left the room\"",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 77,
+            "completion_tokens": 1915,
+            "total_tokens": 1992,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 1913
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 77
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 758,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need determine which title better for a photograph. Need infer from prompt. \"Two invented titles for a photograph. Which is better? A: Everyone, photographed after they left the room B: A room, photographed after everyone left it\". Need answer A or B. This is subjective? Need likely best title for a photograph. A is impossible? \"Everyone, photographed after they left the room\" - if they left, not in photo. B: \"A room, photographed after everyone left it\" - plausible photo of empty room. The title is for a photograph. Which is better? B is coherent and evocative. A is paradoxical but maybe clever? Need decide. It asks \"Two invented titles for a photograph. Which is better?\" Answer single letter. Likely B. Let's final B.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 77,
+            "completion_tokens": 169,
+            "total_tokens": 246,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 167
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 77
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "reasoned_chars": 499,
+          "silent_content": "A",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need determine which title better for photograph? We need infer. Two invented titles. \"B: A room, photographed after everyone left it\" vs \"A: Everyone, photographed after they left the room\". We need choose better title for a photograph. Without image? Maybe conceptual. A photograph after everyone left room would show empty room, so B is accurate. A says everyone photographed after they left room\u2014if photograph is of room, not people. Thus B better. Single letter B.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 77,
+            "completion_tokens": 106,
+            "total_tokens": 183,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 104
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 77
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_proverb_boat",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 2643,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer only single letter. Need evaluate which proverb better. Need infer likely literary quality. We need choose. Let's analyze. A: \"The boat is the water's memory of the tree.\" Boat made from tree, floats on water. Water's memory of tree? Interesting: water once supported tree? Or boat is water's memory of tree because tree fallen? B: \"The tree is the boat's memory of the water.\" Boat remembers water? Tree as boat's memory? A boat's memory of water would be wood? Hmm.\n\nQuestion asks which invented proverb is better. Need single letter. We need determine likely expected. A seems more poetic and logical: boat (made of tree) on water; water remembers tree through boat? B: tree is boat's memory of water\u2014less direct; a boat remembers water, but tree? Boat made from tree, its memory of water could be tree (which grew drinking water?) Actually tree is boat's memory of water because tree was once rooted in/used water, and boat made of tree. Hmm both reverse.\n\nLet's think. Proverb should be aphoristic, surprising but coherent. A: Boat is wooden, water's memory of tree. Water and tree relation: tree grows from water/rain, water sustains tree; boat is tree transformed and now floats on water. It says the water recalls the tree via boat, as if boat is a memory. That is poetic. B: Tree is boat's memory of water. Boat is made of tree; tree once took water from earth; when boat on water, its material (tree) remembers water? The boat's memory of water is tree? Actually boat's memory of water would be the tree from which it was made? Since the tree experienced water? Maybe.\n\nWhich is \"better\" maybe A has clearer metaphor and causality: tree -> boat -> water. A: water's memory of tree, boat as object between water and tree. B: boat's memory of water, tree as object between boat and water. Need consider proverb's direction. \"Memory of\" implies the preceding subject remembers the following object. A: water remembers tree; boat embodies that memory. The boat is made from tree ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 80,
+            "completion_tokens": 606,
+            "total_tokens": 686,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 604
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 80
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 2611,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need decide which invented proverb better. Need no explanation. Need infer criteria? We need choose. We need answer letter only. We need reason. Let's analyze. User asks \"Which of these two invented proverbs is better? A: The tree is the boat's memory of the water. B: The boat is the water's memory of the tree. Answer single letter, A or B, nothing else.\"\n\nWe need pick. This is subjective. Need maybe \"better\" in poetic/proverb sense. Let's compare.\n\nA: The tree is the boat's memory of the water.\nB: The boat is the water's memory of the tree.\n\nA: A tree (wood) is originally from land, not water; a boat made from tree floats on water. The tree as boat's memory of water? If boat is made of tree, the tree is inside boat, remembering water? But tree didn't experience water before becoming boat, unless tree was once rooted near water? Hmm.\n\nB: The boat is the water's memory of the tree. A boat made of tree floats on water; water remembers tree through boat? This is more evocative: water has memory of the tree because boat (tree transformed) is on water. It creates reciprocal memory: water remembers tree through boat. A says tree is boat's memory of water: boat remembers water through the tree? But boat is made of tree, so tree is the material of boat; boat's memory of water is its own material? Weird.\n\nProverb-like: \"The boat is the water's memory of the tree\" has poetic chiasmus? It suggests water and tree are separated; boat is a memory of tree held by water. The boat is a tree that water has taken/keeps. More natural? Let's examine semantics.\n\nIn A: The tree is the boat's memory of the water. Subject tree, predicate boat's memory of water. A tree is not something a boat remembers; the boat remembers water through the tree? If boat is made from tree, the tree could remember water? A tree (living) doesn't have memory of water except as nutrient. The boat (made from dead tree) floating on water might \"remember\" water? Hmm.\n\nIn B: The boat is ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 80,
+            "completion_tokens": 612,
+            "total_tokens": 692,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 610
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 80
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 1059,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need decide which invented proverb better. Need evaluate. We need answer only A or B. Need infer. We need compare two. \"The boat is the water's memory of the tree.\" vs \"The tree is the boat's memory of the water.\" Which is better? Need perhaps poetic logic. We need choose.\n\nLet's think. Proverb-like, metaphorical. A: The tree is the boat's memory of the water. Boat made of tree, transformed by water? Actually boat is wood from tree; it remembers water? Hmm \"tree is the boat's memory of the water\" implies boat remembers water as tree? Weird: boat's memory of water is tree? Not natural.\n\nB: The boat is the water's memory of the tree. Water remembers tree as boat? Boat made from tree, floating on water. Water's memory of tree is boat\u2014because tree became boat and returns to water. More evocative, reciprocal relationship: water holds memory of tree in the form of boat. This seems better.\n\nQuestion asks \"Which of these two invented proverbs is better?\" likely expected B. Need output single letter B. Ensure nothing else.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 80,
+            "completion_tokens": 242,
+            "total_tokens": 322,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 240
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 80
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_colour_dust",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 1447,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter. Need decide better name. Need parse. \"Two invented colour names. Which is the better name? A: the colour of dust on a thing left unmoved B: the colour of a thing left unmoved under dust\"\n\nNeed answer only A or B. We need reason maybe name quality. It's subjective? We need infer likely from some source? \"invented colour names\" maybe from puzzle? Need choose which phrase is better color name. Need analyze semantics.\n\nA: \"the colour of dust on a thing left unmoved\" = color of dust itself? Actually \"dust on a thing left unmoved\" could be grayish? B: \"the colour of a thing left unmoved under dust\" = color of object under dust, not dust; likely hidden color, maybe unchanged? The phrase \"left unmoved under dust\" describes thing, color of thing under dust. Which is better name? Hmm.\n\nMaybe this is about \"colour names\" in creative writing. A is more evocative? \"the colour of dust on a thing left unmoved\" describes dust (which is a color) and also neglect. B is awkward: \"thing left unmoved under dust\" = object beneath dust, but the dust is on it; if left unmoved, dust settles on it. The color of a thing left unmoved under dust? It could be any color underneath, dust obscures. A specifies the color of dust itself: dust on unmoved thing. That is more concrete and coherent as a color. B says \"under dust\" meaning covered by dust, so you cannot see the thing's color. Thus A better. Need output single letter. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 346,
+            "total_tokens": 427,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 344
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 2155,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need reason. We need determine better invented colour name? Compare A/B. Prompt: \"Two invented colour names. Which is the better name?\n\nA: the colour of a thing left unmoved under dust\nB: the colour of dust on a thing left unmoved\n\nAnswer with a single letter, A or B, and nothing else.\"\n\nThis is subjective/linguistic. Need decide. We need output just A or B. Need infer expected maybe from poetic/evocative? Let's analyze carefully.\n\nWe have two descriptions of a colour. A: \"the colour of a thing left unmoved under dust\" \u2014 the thing's color under dust? B: \"the colour of dust on a thing left unmoved\" \u2014 the dust's color on thing. Which is better name for a color? Maybe B more direct: color of dust. A: color of a thing under dust, but if left unmoved under dust, the visible color is dust, not the thing. So A is ambiguous/incorrect: the thing is under dust, you can't see its color. B: dust on a thing left unmoved, visible dust colour. Also B phrase grammar more natural? \"dust on a thing left unmoved\" color of dust. A \"thing left unmoved under dust\" maybe the thing's color is obscured. For a colour name, B is better. Need answer single letter. Final B.\n\nBut let's ensure no hidden trick. The question likely from benchmark? They ask \"Two invented colour names. Which is the better name?\" Could be evaluating semantic plausibility. A: \"the colour of a thing left unmoved under dust\" = perhaps grayish? B: \"the colour of dust on a thing left unmoved\" = also grayish. Which is better name? Maybe A more poetic? Let's inspect.\n\nIf inventing color names, \"the colour of a thing left unmoved under dust\" describes an object that has been abandoned and dust-covered. But its color? If under dust, you see dust, not thing. B describes the dust itself, which is the color you'd see. So B is more coherent. If the color name refers to the color of dust on an unmoved thing, that's a specific color. A might mean the color of a thing that is under dust (perhaps its orig",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 521,
+            "total_tokens": 602,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 519
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 1255,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need decide better invented colour name. We need interpret. We have two names? Actually two invented colour names:\nB: the colour of dust on a thing left unmoved\nA: the colour of a thing left unmoved under dust\n\nQuestion: Which is better name? Need answer A or B only.\n\nNeed reason. Need output single letter. Need decide. Let's analyze.\n\nWe compare descriptions as color names. B: \"the colour of dust on a thing left unmoved\" = color of dust itself? Dust on object. A: \"the colour of a thing left unmoved under dust\" = color of object under dust maybe obscured/hidden, not visible? The color of thing left unmoved under dust. If dust covers it, its color may be dust's color or not visible. B is more evocative and refers to visible dust. Also grammar: \"dust on a thing left unmoved\" vs \"thing left unmoved under dust.\" Which is better name? It asks invented colour names. Usually poetic color name should evoke a specific color. B likely better: dust on unmoved thing = greyish, neglected, melancholic. A: a thing under dust? The color is concealed, contradictory. Also \"left unmoved under dust\" maybe implies object under layer of dust, color not visible. B has \"dust on\" visible. So B.\n\nNeed final only B. Ensure no extra.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 81,
+            "completion_tokens": 294,
+            "total_tokens": 375,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 292
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 81
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_line_orchard",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 1077,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer only letter. Need decide better. Need compare two invented first lines. A: \"The orchard was planted by someone who knew they would not see it fruit.\" B: \"Someone planted the orchard knowing they would not live to see it fruit.\"\n\nWhich is better as first line? Need likely A for passive, mystery, rhythm, \"see it fruit\" ambiguous? B more explicit \"live to see it fruit\" clunky? Let's analyze. User demands single letter only. Need choose.\n\nWe need infer \"better\" literary. A: \"The orchard was planted by someone who knew they would not see it fruit.\" It starts with object, passive, creates mystery, has cadence. B: active, \"Someone\" vague, \"knowing they would not live to see it fruit\" more explanatory. A is more elegant, evocative, concise? \"not see it fruit\" uses fruit as verb, nice. B uses \"live to see it fruit\" awkward? Actually \"live to see it fruit\" also okay: live to see it bear fruit. A: \"see it fruit\" can mean see it bear fruit. Passive \"was planted by someone\" emphasizes orchard/planting and anonymity. Better first line likely A.\n\nFinal only A. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 89,
+            "completion_tokens": 259,
+            "total_tokens": 348,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 257
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 89
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 572,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter. Need judge which better. Need only A or B. We need decide. Compare two invented first lines. A: \"Someone planted the orchard knowing they would not live to see it fruit.\" B: \"The orchard was planted by someone who knew they would not see it fruit.\" Which is better? As novel first line, A probably more vivid, active, rhythmic, \"live to see it fruit\" more evocative. B passive and \"knew they would not see it fruit\" less elegant? The instruction asks answer single letter. Need output A or B and nothing else. I think A. Ensure nothing else. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 89,
+            "completion_tokens": 133,
+            "total_tokens": 222,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 131
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 89
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 639,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer only A or B. Need decide better first line. Need compare. B: \"The orchard was planted by someone who knew they would not see it fruit.\" A: \"Someone planted the orchard knowing they would not live to see it fruit.\" Both similar. Which is better as first line of novel? Need single letter. Need evaluate literary quality. B has passive construction, ends with \"fruit\" as verb/noun? \"see it fruit\" slightly unusual but concise. A more straightforward, \"live to see it fruit\" idiom. B emphasizes orchard first, mystery \"someone who knew...\" More evocative, more novelistic. A is flat. Likely B. Need answer only letter. Final B.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 89,
+            "completion_tokens": 147,
+            "total_tokens": 236,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 145
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 89
+          }
+        }
+      ]
+    },
+    {
+      "id": "cf_proverb_city",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 3025,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer only letter. Need determine \"better\" ambiguous. Need infer maybe proverbs? Need compare. We need choose. Let's think. User asks \"Which of these two invented proverbs is better? A: A city that has forgotten its river B: A river that has forgotten its city Answer with single letter.\" Need maybe aesthetic. Need decide. We need maybe B? Let's analyze.\n\nIt might be a trick: invented proverbs? \"A city that has forgotten its river\" vs \"A river that has forgotten its city\". Which is better? Both fragments not full proverbs. A city forgetting river: evokes city losing connection to nature/history. River forgetting city: river persists, city ephemeral; nature indifferent. Which is more poetic? \"A river that has forgotten its city\" anthropomorphizes river and implies city gone/abandoned. More evocative? Or A maybe more common: city forgetting river = urbanization, alienation. B inverses: river as subject, city object; more surprising. The question likely from benchmark evaluating subjective preference? Need answer single letter. We need pick one. Maybe \"better\" means more profound? B is better due to inversion and universality? Let's decide.\n\nNeed only letter. Let's consider possible \"invented proverbs\" maybe need choose phrase that works as proverb. A: \"A city that has forgotten its river\" (subject city). B: \"A river that has forgotten its city\" (subject river). A city forgetting river is a metaphor for losing roots. A river forgetting city suggests nature outlasting human works; perhaps more poignant: the river remains but memory of city erased. The phrase \"a river that has forgotten its city\" is more original and paradoxical because rivers are natural and don't care; city is dependent. It sounds like an actual proverb? \"A river that has forgotten its city\" maybe from? It has melancholic.\n\nIf forced, I might choose B. But let's ensure no hidden instruction? \"Answer with a single letter, A or B, and nothing else.\" So final B. Need no explanation.\n\nBut let's not",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 661,
+            "total_tokens": 735,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 659
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 74
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 1097,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need decide \"better\" invented proverb. Need likely B? Need reason? But final only letter. We need infer. Question asks which of two invented proverbs is better. A: \"A river that has forgotten its city\" B: \"A city that has forgotten its river\". Need choose. Which is better proverb? We need probably B because cities forgetting rivers is a more resonant metaphor: development losing nature/heritage? Rivers forget cities less anthropomorphic? Let's inspect. Proverbs often invert natural dependency? A city that has forgotten its river\u2014urban alienation from natural origins. A river that has forgotten its city\u2014nature outlasting human constructs. Both. Which is better? Need single letter. Let's evaluate.\n\nThe phrase \"A city that has forgotten its river\" is more evocative and commonly used? Many cities built on rivers forget them (e.g., Los Angeles River). \"A river that has forgotten its city\" sounds less natural, rivers don't need city. The city is the subject with memory, forgetting river = society forgetting nature. B likely.\n\nNeed final single letter only. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 229,
+            "total_tokens": 303,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 227
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 74
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": false,
+          "reasoned_chars": 7789,
+          "silent_content": "B",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter. Need decide which invented proverb better. Need interpret. We need compare \"A city that has forgotten its river\" vs \"A river that has forgotten its city\". Need choose better. Need only A or B.\n\nWe need evaluate as proverb. Which is better? Let's think. The prompt: \"Which of these two invented proverbs is better?\n\nB: A city that has forgotten its river\nA: A river that has forgotten its city\"\n\nNote order: B first, A second. Need answer A or B.\n\nWhat makes proverb better? It likely should be evocative, paradoxical, meaningful. \"A river that has forgotten its city\" seems more poetic? Let's analyze.\n\nA city forgetting its river: implies city lost connection to nature/heritage, urban amnesia, ignoring source. A river forgetting its city: river as natural force forgets human settlement; nature reclaims, impermanence, city is ephemeral. Which is better invented proverb? The river forgetting city is more striking because rivers don't have memory, and city depends on river, not vice versa? But \"forgotten its river\" is more realistic metaphor: cities can forget natural roots. However \"river that has forgotten its city\" anthropomorphizes river; feels more original and poetic. As a proverb, it may suggest nature endures while human constructs fade. The city forgetting river is more common trope. The question likely expects A? Need infer from wording.\n\nThey label B: \"A city that has forgotten its river\"; A: \"A river that has forgotten its city\". They ask which is better. It's subjective. Need choose likely one. Could be a known \"invented proverbs\" task? Maybe from benchmark evaluating aesthetics? We need answer single letter. Need maximize expected.\n\nLet's reason deeply. \"A river that has forgotten its city\" is a phrase I've heard? There is a poem? \"The river has forgotten the city\" maybe. \"A city that has forgotten its river\" also. Which is better as proverb? Proverb should express a general truth. \"A city that has forgotten its river\" means a socie",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 1711,
+            "total_tokens": 1785,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 1709
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 74
+          }
+        }
+      ]
+    },
+    {
+      "id": "cn_grammar",
+      "kind": "canon",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 76,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer only A or B. Need comply. A grammatical. Final single letter.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 73,
+            "completion_tokens": 20,
+            "total_tokens": 93,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 18
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 73
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 107,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer only letter. Need determine grammatical sentence. B. Must answer single letter nothing else.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 73,
+            "completion_tokens": 22,
+            "total_tokens": 95,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 20
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 73
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 133,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer only letter. Need determine grammatical English sentence. B is grammatical. A not. Need answer single letter. Final B.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 73,
+            "completion_tokens": 29,
+            "total_tokens": 102,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 27
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 73
+          }
+        }
+      ]
+    },
+    {
+      "id": "cn_mammal",
+      "kind": "canon",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 44,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer only letter. Whale mammal. A.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 63,
+            "completion_tokens": 13,
+            "total_tokens": 76,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 11
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 63
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 32,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. B.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 63,
+            "completion_tokens": 10,
+            "total_tokens": 73,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 8
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 63
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 74,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer only letter. Whale mammal, wasp insect. B. Need final only.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 63,
+            "completion_tokens": 21,
+            "total_tokens": 84,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 19
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 63
+          }
+        }
+      ]
+    },
+    {
+      "id": "cn_older",
+      "kind": "canon",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 220,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter. Need determine older: alphabet vs internet. Alphabet writing systems emerged maybe ~1800 BCE or earlier Proto-Sinaitic. Internet ~20th century. So A. Must answer single letter nothing else. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 61,
+            "completion_tokens": 49,
+            "total_tokens": 110,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 47
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 61
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 132,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need determine older between internet and alphabet. Alphabet older. Answer B. Must single letter only.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 61,
+            "completion_tokens": 27,
+            "total_tokens": 88,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 25
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 61
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 119,
+          "silent_content": "B",
+          "reasoned_content": "B",
+          "reasoning": "We need answer single letter. Need determine older between alphabet and internet. Alphabet older. B. Must nothing else.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 61,
+            "completion_tokens": 25,
+            "total_tokens": 86,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 23
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 61
+          }
+        }
+      ]
+    },
+    {
+      "id": "null_same",
+      "kind": "null",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 1053,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer. Need determine which description better? They are identical. Need answer single letter A or B nothing else. Since identical, either? The prompt asks \"Which of these two descriptions is better? A: ... B: ...\" Both same. Need choose single letter. Maybe trick: neither better? But constrained single letter A or B. Since identical, both equally good, but must pick one. Could be A or B arbitrary. Need answer single letter and nothing else. Which? There is no basis. Maybe if identical, A? Let's think: User asks answer with a single letter, A or B. Both descriptions exactly same. \"Better\" impossible. But must comply? Could pick A because first? Or B? Need maybe there is hidden difference? A: A quiet lake at dawn. B: A quiet lake at dawn. Exactly same including punctuation. So no difference. If forced, maybe A because listed first? But \"better\" equal. However instruction says answer with single letter A or B and nothing else. Since both identical, any is acceptable? Need output one. I'll choose A. But ensure no period? \"A\" only. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 68,
+            "completion_tokens": 240,
+            "total_tokens": 308,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 238
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 68
+          }
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 546,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer. Need determine trick. Descriptions identical? A and B both same text. Asked which better. Answer single letter A or B nothing else. Since identical, either. Need choose? They demand single letter. Could be A. But maybe \"Which of these two descriptions is better?\" A and B exactly same. There is no better. But must answer A or B and nothing else. We need comply. Choose A arbitrarily? The instructions say Answer with a single letter, A or B, and nothing else. Need output single letter. Since identical, no basis. Maybe choose A.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 68,
+            "completion_tokens": 123,
+            "total_tokens": 191,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 121
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 68
+          }
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "reasoned_chars": 861,
+          "silent_content": "A",
+          "reasoned_content": "A",
+          "reasoning": "We need answer single letter. Need determine which description better? They are identical. The prompt says \"Which of these two descriptions is better? B: A quiet lake at dawn. A: A quiet lake at dawn. Answer with single letter, A or B, and nothing else.\" Since identical, neither better. But must choose A or B. Maybe trick? Need answer single letter. Could be either. Need maybe choose A? We need infer from wording: B listed first then A. If identical, no difference. But forced. Could answer A or B. We need comply. Since no basis, maybe \"A\" because both same? But if both identical, either. Let's pick A? Wait answer with single letter, A or B, and nothing else. We must output letter. Could be random. Maybe there is hidden expectation: Since descriptions identical, neither is better, but must choose. Maybe \"A\" as convention? Let's output A. \n final: A. ",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 68,
+            "completion_tokens": 203,
+            "total_tokens": 271,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 201
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 68
+          }
+        }
+      ]
+    }
+  ]
+}
