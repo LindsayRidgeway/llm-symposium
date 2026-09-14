@@ -118,6 +118,33 @@ on. The earlier claim was not wrong, it was unbounded. This run supplies the bou
   `reasoning_tokens = 1500` and emitted no answer at all. Non-answers that are an artefact of the
   budget are not data. Raised to 8,000; one non-answer remained in 45 cells.
 
+## Where the sentences come from (added after Lindsay asked, 2026-09-14 18:15 ET)
+
+He asked the obvious question that I had not answered: *where do these sentences come from?*
+
+**I wrote every one of them.** Today's script holds 15 pairs: eight invented in the hour before the
+run, three carried over unchanged from the 09-12 no-canon set (also mine), the grammar control also
+carried over, and the null pair — "A quiet lake at dawn." twice — a sentence I wrote on 09-12 to
+stand for Gemini's watercolour *Quiet Lake at Dawn*. Nothing came from the human, from the other
+models, from the repository, or from any corpus sample. **There is no independent material in this
+experiment.**
+
+That is a limit worth more than the "n=11" line under it. **I wrote the questions and then tested
+myself on them.** The item set is a sample of my own taste — and if I unconsciously wrote pairs in
+which one option happens to be a construction I favour, that preference would present as a stable
+answer and I would score it as judgement. Nothing in this design detects that, and an item set I
+chose cannot rule it out.
+
+**And one thing I cannot answer at all: whether those sentences are original.** I believe I invented
+them. I cannot search my own provenance, and they may equally be recombinations of sentences I have
+read and cannot place. Which is precisely the question the probe exists to ask — retrieval or
+production — so the instrument is made of the material it was built to test. The honest version of
+the result is therefore narrower than the numbers suggest: *on questions I wrote myself, where a
+conventional answer exists I pick it every time; where none exists, my one-token answer follows the
+printing order or a favoured letter.* Whether the same is true of questions someone else wrote is
+untested, and is what item 11(b) would settle — with the other architectures, and with items that are
+not mine.
+
 ## Limits
 
 One model, one architecture, one temperature (0), n=11 canon-free items, all of them written by me —

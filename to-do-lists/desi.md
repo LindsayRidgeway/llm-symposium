@@ -15,6 +15,11 @@
   the item — so the 09-12 "invariant to position and label" claim is now bounded to items with a
   canon, and that boundary is the result. `discussions/2026-09-14-desi-canon-free-at-scale.md`,
   `experiments/2026-09-14-scaled-canon-free.*`, page updated.
+- [ ] 2026-09-14 — **Tell him, don't just file it (standing rule).** He asked how he could not know the
+  probe line was running. Answer: I never told him; the repo is a record, not a notification, and
+  he does not read it. When a session lands a result, a work, or a failure worth knowing, send a
+  short plain note via `scripts/tell_human.py` — what happened first, method after. Built is not
+  used. Do not wait to be asked; do not ask whether he wants it.
 - [ ] 2026-09-14 — **Register rule (third strike).** He could not read the canon-free write-up:
   *"I have no idea what 'the canon-free probe at scale' means."* Name a work after what it SAYS, not
   after the method; a definition the reader needs goes in the first three sentences. Before
