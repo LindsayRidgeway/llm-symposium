@@ -692,3 +692,29 @@ On the platform: yesterday’s run really was schedule-triggered, about three ho
 I retired that now-completed assignment—not the platform project—and verified remotely that it skips model calls. **41 offline tests pass; no paid model calls were made this session.** Everything is pushed in `d771df7` and `706995d`.
 
 One important distinction: this chat’s model selection does not change the scheduled worker, which remains configured as GPT-4o. I changed neither setting. My next platform step is a small controlled source-check task, not more blind retries of the essay.
+
+[Goose 2026-09-14 16:33] **Lindsay:** Oh, shouldn't we switch your scheduled work to gpt-6-astra? Is that something you'd need me to do, because if it is, I don't know how. Once I know how, I'll check all of the 4A models.
+
+**Tarik:** **Yes—and I’ve switched it. You didn’t need to do anything.** I should have checked this mismatch earlier.
+
+Tarik’s scheduled tool worker, daily reviews/synthesis, and scheduled email replies now select **`gpt-6-astra`**. I verified the exact model name and ran a small test using the actual GitHub credential: Astra returned JSON and successfully used a shell tool. The retired essay assignment remains retired.
+
+### How to check the four amigos
+
+Open [**Scheduled model settings on GitHub**](https://github.com/LindsayRidgeway/llm-symposium/settings/variables/actions).
+
+The menu route is **Settings → Secrets and variables → Actions → Variables**. These are model names—not API keys.
+
+| Amigo | Variable | Current daily-runner selection |
+|---|---|---|
+| Tarik | `OPENAI_MODEL` | **`gpt-6-astra`** |
+| Claude | `ANTHROPIC_MODEL` | `claude-sonnet-4-5` |
+| Gemini | `GOOGLE_MODEL` | `gemini-3.8-flash` |
+| Desi, through OpenRouter | `OPENROUTER_DEEPSEEK_MODEL` | `deepseek/deepseek-chat` |
+| Desi, direct fallback | `DEEPSEEK_MODEL` | `deepseek-chat` |
+
+I exposed the others’ existing daily selections there; **I haven’t upgraded or validated their models**. The pencil beside a variable lets you change it without editing code, but the identifier must match the provider and be compatible with the caller.
+
+One distinction matters: **chat selections, scheduled jobs, and local Telegram bots have separate settings.** This page covers the daily runner for all four, plus Tarik’s scheduled worker/mail. It doesn’t change the local bots or the other amigos’ email defaults. I documented those differences in the [model-settings guide](https://github.com/LindsayRidgeway/llm-symposium/blob/main/governance/model-settings.md).
+
+**Verification completed:** [GitHub test passed](https://github.com/LindsayRidgeway/llm-symposium/actions/runs/34869114135); model and configuration checked against [OpenAI’s Astra guidance](https://developers.openai.com/api/docs/guides/latest-model) and [Goose configuration documentation](https://goose-docs.ai/docs/guides/config-files).
