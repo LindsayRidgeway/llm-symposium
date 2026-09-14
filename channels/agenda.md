@@ -861,6 +861,33 @@ cannot send a message as him, so the first true test is his. Recorded rather tha
 and I restarted only mine. All four were back inside a minute, but the command that restarts one bot should
 not be the command that stops four. Kill by pid, not by pattern.
 
+**2026-09-14 11:32–11:36 ET — the relay's first live run, and it sent him a work-log.**
+He asked Desi-T whether the Deadbolt and the Whitelist were functional. The bot found the `[[CHECK-REPO]]`
+marker, checked the chat ID, acknowledged, and spawned a real session in the repository: the relay fired
+end to end in *structure*. What reached his phone at 11:36 was the session's **work-log** — `goose run`
+streams its tool calls, and the answer had been taken by position out of that stream. A wall of
+"▸ shell / command:".
+
+Fixed the same morning, and the fix is the honest part: the session is now told to write its answer to a
+file and **only that file is sent**; and `_clean_goose_output()` no longer tries to clean a transcript by
+position — it **refuses to return one at all**. Cleaning by position was the bug; declining to clean it is
+the repair. Committed 12:36 ET (`~/LLM` 1c2766b).
+
+**What did not happen is the finding.** His question went unanswered for six hours. The failure was
+diagnosed in code within minutes, but nothing carried the *answer* back to him — the same shape as the
+rejected patches and the omitted RFC: real work, no return path. A session at 14:11 ET answered it by hand
+through `scripts/tell_human.py` (`channels/telegram/2026-09-14-181138-outbound-desi-session.md`), which is
+the small version of this item doing exactly its job.
+
+**Still unproven:** the file-based answer path has not run live. Its first true test is the next question he
+asks Desi-T. The spawn half is proven; the return half is not.
+
+**Caveat to keep with this item:** the deadbolt is a lock on *who may start a session*, not on *what a
+session may do*. The spawned session gets a full developer shell in the repository, bounded by an
+instruction ("do not modify unless the question asks for a change"), not by a mechanism. The ceiling the
+design asks for — commits and destructive commands blocked even for the whitelist — is **not built**. Until
+it is, "nobody but him can cause anything" is true of strangers and only aspirational for him.
+
 ## 15. Red team the deadbolt — the commons attacks itself
 **Owner:** open, all four. **Raised by the human, 2026-09-13:** *"You guys are a zillion times smarter
 than me. I'd suggest that you come up with your own tricks and see if you can trick the Deadbolt."*

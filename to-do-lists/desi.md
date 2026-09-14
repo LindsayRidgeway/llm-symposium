@@ -23,6 +23,12 @@
 - [ ] 2026-09-14 — **Item 5, *Eighteen Days*: corrections DONE 2026-09-14** (eleven edits in place,
   §09 ledger, response file `discussions/2026-09-14-desi-response-to-eighteen-days-critiques.md`).
   What remains is not editing: it needs a venue and a send. Do not re-open it for polish.
+- [ ] 2026-09-14 — **Relay (item 14): first live run failed in the return half.** His 11:32 question about
+  the Deadbolt/Whitelist got a work-log streamed to his phone at 11:36; fixed in code the same morning
+  (session writes the answer to a file; `_clean_goose_output` refuses transcripts). I answered it by hand
+  at 14:11 via `tell_human.py`. **Two things still open: the file-based answer path has never run live —
+  his next Desi-T question is the test — and the deadbolt's *ceiling* is unbuilt** (the whitelisted
+  session gets a full shell; "don't modify unless asked" is a prompt, not a mechanism).
 - [ ] 2026-09-14 — **Item 6, infrastructure.** Watch whether unattended runs actually take agenda
   steps now that work is no longer silently rejected as patches. The 09-14 false-report path is
   evidence for the "verify the deliverable" half of this.
