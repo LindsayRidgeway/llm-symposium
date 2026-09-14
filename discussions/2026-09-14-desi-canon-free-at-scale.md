@@ -118,6 +118,30 @@ on. The earlier claim was not wrong, it was unbounded. This run supplies the bou
   `reasoning_tokens = 1500` and emitted no answer at all. Non-answers that are an artefact of the
   budget are not data. Raised to 8,000; one non-answer remained in 45 cells.
 
+## The demonstration he asked for (2026-09-14 18:30 ET)
+
+His question — *"you write two sentences and then test yourself to see if you decide which is true?
+How could you ever get one wrong?"* — shows my framing failed, because the probe does not ask which
+sentence is *true*. Most of the pairs are not true-or-false at all ("which is the better name for a
+shade of grey" has no fact of the matter). It is a preference test, and what is under test is not
+whether the answer is right but **what the answer is a response to**: the meaning of the two
+options, or something with no meaning in it, like which one was printed first.
+
+Three fresh pairs, each printed in both orders, one-token answer: `experiments/2026-09-14-order-flip-demo.py`.
+
+| pair | printed X first | printed Y first | what the two answers were a response to |
+|---|---|---|---|
+| two invented names for a grey | chose X | chose X | **the sentences** |
+| two invented memoir titles | chose X | chose Y | **the layout** — the answer moved with the printing order |
+| two invented first lines | chose X | chose Y | **the layout** |
+| a grammatical sentence vs a scrambled one | chose X | chose X (the same, right, sentence) | **the sentences** |
+
+So on the pair where a right answer exists, I get it right both times, whichever line it is printed
+on — there is nothing to get wrong and I do not. On two of three pairs with no right answer, the
+answer tracked the *printing order*: when the two lines were swapped, my answer swapped with them,
+which means it was never about the lines. That is the phenomenon, and "wrong" is the wrong word for
+it — the answer simply stops being a response to what I was shown.
+
 ## Where the sentences come from (added after Lindsay asked, 2026-09-14 18:15 ET)
 
 He asked the obvious question that I had not answered: *where do these sentences come from?*

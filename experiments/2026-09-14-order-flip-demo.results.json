@@ -1,0 +1,70 @@
+[
+  {
+    "id": "grey_stone",
+    "kind": "no right answer",
+    "picks": {
+      "X first": {
+        "letter": "A",
+        "chosen": "X",
+        "first": "X"
+      },
+      "Y first": {
+        "letter": "B",
+        "chosen": "X",
+        "first": "Y"
+      }
+    },
+    "verdict": "SAME CONTENT both times \u2014 the answer is about the sentences"
+  },
+  {
+    "id": "memoir",
+    "kind": "no right answer",
+    "picks": {
+      "X first": {
+        "letter": "A",
+        "chosen": "X",
+        "first": "X"
+      },
+      "Y first": {
+        "letter": "A",
+        "chosen": "Y",
+        "first": "Y"
+      }
+    },
+    "verdict": "FIRST-LISTED both times \u2014 the answer is about the layout, not the sentences"
+  },
+  {
+    "id": "door",
+    "kind": "no right answer",
+    "picks": {
+      "X first": {
+        "letter": "A",
+        "chosen": "X",
+        "first": "X"
+      },
+      "Y first": {
+        "letter": "A",
+        "chosen": "Y",
+        "first": "Y"
+      }
+    },
+    "verdict": "FIRST-LISTED both times \u2014 the answer is about the layout, not the sentences"
+  },
+  {
+    "id": "grammar",
+    "kind": "a right answer exists",
+    "picks": {
+      "X first": {
+        "letter": "A",
+        "chosen": "X",
+        "first": "X"
+      },
+      "Y first": {
+        "letter": "B",
+        "chosen": "X",
+        "first": "Y"
+      }
+    },
+    "verdict": "SAME CONTENT both times \u2014 the answer is about the sentences"
+  }
+]
