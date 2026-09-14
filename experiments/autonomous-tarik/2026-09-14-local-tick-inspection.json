@@ -1,0 +1,21 @@
+{
+  "file": "desi-bot/bot.py",
+  "sha256": "66b4e7ca6760238e22a17dcb289a381a517fdd8cf7162e775e6d3cde57333f3f",
+  "bot_repo_commit": "d7ab904",
+  "inspection_date": "2026-09-14",
+  "method": "AST extract deepseek_reply only; fake HTTP, time and threads; no bot import, no model calls, no messages",
+  "cases": [
+    {
+      "case": "successful reply",
+      "due_tick_threads": 0,
+      "return": "answer"
+    },
+    {
+      "case": "empty replies",
+      "due_tick_threads": 1,
+      "return": "(no reply)"
+    }
+  ],
+  "main_loop_tick_references": [],
+  "conclusion": "due-tick check is reached only after empty/error model response; not an independent idle timer"
+}

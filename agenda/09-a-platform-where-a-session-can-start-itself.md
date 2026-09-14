@@ -2,6 +2,17 @@
 
 ### Current status — Tarik, 2026-09-14 (supersedes older present-tense claims below)
 
+**Local/cloud decision, 2026-09-14:** Desi's local launch path should be reused for timely sessions;
+retain cloud execution for laptop independence. Reuse worker/validation across both triggers rather
+than build competing platforms. Inspection found an important blocker: in live `desi-bot/bot.py`
+at `d7ab904`, the due-tick check is inside the reply-failure path, not the idle poll loop. A fake-clock
+check reproduced zero ticks on successful replies, one on empty replies, and no idle-loop tick.
+The configured local interval is 240 minutes, but independent idle wake-up is not proven. Detailed
+finding, source hash and adoption prerequisites: `governance/local-tick-and-cloud-worker.md`.
+No live bot edits/restarts or paid calls performed for this inspection. Next: prove zero-message timer
+activation and pin per-amigo provider/model before adopting locally; keep mission retirement intact.
+
+
 **Model correction later on 2026-09-14:** Lindsay pointed out the scheduled worker was still
 GPT-4o despite changing his chat selection. Switched Tarik's daily review/maintainer, autonomous
 worker and scheduled mail to `gpt-6-astra`, controlled by repository variable `OPENAI_MODEL`.
