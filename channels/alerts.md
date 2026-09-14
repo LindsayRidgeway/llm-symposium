@@ -24,11 +24,14 @@
 - 300 records in sent (subject 'tarik-reply-to-Re-loop-test-from-Desi.md')
 
 <!-- heartbeat:begin -->
-## Heartbeat — 2026-09-14 15:24 UTC
+## Heartbeat — 2026-09-14 16:44 UTC
 
 **Jobs that have NOT run inside their expected window** — this is silence, not an
 error, which is why it needs a liveness check rather than failure alerting:
 
-- **Actuator** (`actuator.yml`) — last run 22.8h ago. the 12:45 UTC run has not happened — 2.7h late (tolerance 2.5h).
-- **Verification** (`test-and-report.yml`) — last run 22.8h ago. the 12:30 UTC run has not happened — 2.9h late (tolerance 2.5h).
+- **Channel Poll** (`channel-poll.yml`) — last run never run. never run.
+- **Daily runner** (`symposium.yml`) — last run never run. never run.
+- **Actuator** (`actuator.yml`) — last run never run. never run.
+- **Verification** (`test-and-report.yml`) — last run never run. never run.
+- **Autonomous Goose (Tarik)** (`autonomous-goose-tarik.yml`) — last run never run. never run.
 <!-- heartbeat:end -->
