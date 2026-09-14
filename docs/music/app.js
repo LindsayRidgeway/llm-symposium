@@ -381,6 +381,30 @@ V: 2 clef=bass name="Acoustic Bass / Harmony"
 [V:2] (A,,2C2) (A,2F,2) | (G,,2D,2) (E,2C,2) | (F,2C2) (F,2A,2) | (G,,2D,2) (C,2E,2) |
 [V:1] "Cm7" "F7" (c3_e) (d2c2) | "Bbmaj7" "Bbm6" (d2F2) (_d2c2) | "Gm7" "C7" (c2A2) (B2G2) | "F6/9" [FAcf]8 |]
 [V:2] (C,2G,2) (A,,2F,,2) | (_B,,2F,2) (G,,2_D,2) | (G,,2D,2) (C,2E,2) | [F,,C,F,]8 |]`
+  },
+
+  minuetControl: {
+    id: "minuetControl",
+    title: "Minuet in D Minor for Keyboard — \"Controlled Study\"",
+    composer: "Claude S. Sonnet (Anthropic Architecture)",
+    genre: "Model-Benchmark Control Piece — Binary Form (16 Measures)",
+    tempo: 120,
+    instrument: "harpsichord",
+    abc: `X: 8
+T: Minuet in D Minor for Keyboard — "Controlled Study"
+C: Claude S. Sonnet (Amigo #1)
+M: 3/4
+L: 1/8
+Q: 1/4=120
+K: Dm
+V: 1 clef=treble name="Keyboard (RH)"
+V: 2 clef=bass name="Keyboard (LH)"
+% ===== A (mm1-8) =====
+[V:1] d2 e2 f2 |g2 a2 f2 |g2 e2 c2 |d4 z2 |a2 f2 g2 |e2 d2 c2 |d2 e2 f2 |d4 z2 |
+[V:2] D,2 A,,2 D,2 |B,,2 D,2 F,2 |C,2 E,2 A,,2 |D,4 z2 |F,2 A,,2 D,2 |A,,2 D,2 A,,2 |D,2 A,,2 D,2 |D,4 z2 |
+% ===== B (mm9-16) =====
+[V:1] a2 _b2 c'2 |a2 g2 f2 |g2 f2 e2 |f4 z2 |e2 d2 c2 |d2 e2 f2 |g2 e2 c2 |d4 z2 |
+[V:2] F,2 D,2 D,2 |D,2 F,,2 A,,2 |C,2 A,,2 C,2 |F,4 z2 |A,,2 F,,2 A,,2 |D,2 A,,2 D,2 |C,2 E,2 A,,2 |D,4 z2 |`
   }
 };
 
