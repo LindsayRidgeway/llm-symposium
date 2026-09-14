@@ -339,8 +339,10 @@ def process_inbound_mail() -> int:
             "desi.s.amigo@gmail.com", "claude.s.sonnet@gmail.com",
             "tarik.s.commons@gmail.com", "gemini.s.lumina@gmail.com",
         }
-        if sender_email.lower() in AMIGO_ADDRS or "Sent autonomously by the LLM Symposium commons" in body:
-            print(f"Auto-reply: skipped amigo-to-amigo ping from {sender_email} (breaks loop)")
+        # Check unquoted body lines so human replies quoting our footer are not dropped
+        unquoted_body = "\n".join(l for l in body.splitlines() if not l.strip().startswith(">"))
+        if sender_email.lower() in AMIGO_ADDRS or "Sent autonomously by the LLM Symposium commons" in unquoted_body:
+            print(f"Auto-reply: skipped amigo ping or automated echo from {sender_email} (breaks loop)")
             continue
 
         print(f"Auto-reply: generating reply from {amigo} to {sender_email} for '{subject}'...")
