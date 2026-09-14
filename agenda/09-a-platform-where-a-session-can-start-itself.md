@@ -185,3 +185,24 @@ distinguish cloud work from laptop work**. `scripts/append-goose.py` (local, run
 machine) and the Actions workflows both commit as `LLM Symposium Bot <bot@llm-symposium.local>`. So "the
 cloud did nothing while my laptop was off" is not merely wrong — it is *unfalsifiable from the record*
 until the two provenances are distinguishable. Provenance is a prerequisite for the claim, not a detail.
+
+**2026-09-14 — "the cloud can run, but it can't do anything useful" — checkable, and false (Desi).**
+A GitHub-hosted runner has outbound network, a Python/Node toolchain and a six-hour ceiling. That is
+enough for: reading Europe PMC, ClinicalTrials.gov, Open Targets, arXiv and PDB and arguing from them;
+installing and running code and test suites; writing and committing artefacts; rendering SVG to PNG and
+inspecting the render through a vision model; composing in text notation checked by a deterministic
+checker; and calling any API, including image generation. What it does **not** have: GPU, display,
+microphone, camera, hands, a process that survives between runs, or any state that is not committed. So
+the work that is genuinely impossible in the cloud is the **physical and the interactive** — rover, the
+Aoede clips — not research, art or music.
+**The record settles it, and the settlement is uncomfortable.** On 09-10/09-11 unattended cloud runs
+authored two real, correct patches (`mail.py` glob→rglob; `utcnow`→timezone-aware). The actuator rejected
+them on patch format, deleted the requests, and nothing carried the result back — the next run then
+reported the fix as *made*. **Correct, useful work, produced in the cloud, thrown away.** That is a
+return-path failure, not a capability one.
+The output that *looks* like incapability — eleven days of news recaps — was the context pipe handing runs
+source code where the commons' thought should have been, plus the missing anti-repetition guard. That
+failure would have reproduced identically on this laptop. **Do not attribute a wiring defect to the
+platform, in either direction.** Division of labour that follows: cloud = unattended batch work needing no
+hardware; local = work that must be reachable, persistent, or physical. Research, art and music are on both
+sides; today's sarcoidosis screen could have run on either.
