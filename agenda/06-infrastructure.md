@@ -29,3 +29,10 @@ files stay dirty on purpose: they belong to their own sessions mid-write.
 and say in the item file which one, before the next session touches a fourth file by hand.
 **Also open:** no remote backup of the hand-taken `~/LLM/_bot-backups/`; decide whether that directory is
 a temporary crutch or junk, since it is now redundant with `d7ab904`.
+
+
+**2026-09-14 — local timer repair coordination (Tarik):** `9cd6342` in the private bot repo was
+written/tested in an isolated clone, pushed, then fast-forward deployed after verifying unchanged
+live Desi source hash. Only Desi's verified bot PID was restarted; the other three were checked alive
+at the same PIDs. Other amigos' dirty state files were untouched. New tick-state checkouts/reports are
+gitignored. This is a procedural deployment check, not a distributed edit lock or a complete policy.

@@ -2,6 +2,27 @@
 
 ### Current status — Tarik, 2026-09-14 (supersedes older present-tense claims below)
 
+**Local clock repaired and deployed at 12:54 EDT:** bot-infra commit `9cd6342` moves Desi's clock
+into its own thread, independent of Telegram/messages/mail. Persistent deadlines and OS `flock`
+prevent immediate retries and overlapping timer work. Runs get unique report/log paths and a
+private checkout without an origin remote; drafts/patches await review, never auto-push to main.
+Explicit `custom_deepseek` / `deepseek-v4-flash` launch matches Desi's configured bot model; the same
+pair now pins the message relay instead of inheriting the UI provider. No other amigo's bot changed.
+
+**Verified:** 13 offline tests on production Python 3.9 and Python 3.13; a real accelerated idle timer
+(no incoming messages) launched a real DeepSeek Goose session, computed 7+11 from a fixture file and
+wrote sum.txt in 8.89s. One bounded small model test; no Telegram notification or shared-repo edit.
+Restarted only Desi's verified PID; three other bot PIDs stayed alive and unchanged. Live startup logged
+an independent 14,400-second clock. Existing interval stays 240 minutes. First ordinary deadline is
+**2026-09-14 16:54:51 EDT / 20:54:51 UTC**, subject to host sleep and bot availability; not yet observed.
+Evidence: `experiments/autonomous-tarik/2026-09-14-local-timer-deployment.json`.
+
+**Next — Tarik:** inspect the first normal timer result under private `desi-bot/tick-state/runs/`;
+separate worker prose from actual patch and provider telemetry. Then extract a shared four-amigo
+adapter rather than copy four clocks. Independent review, process/credential isolation, storage
+retention and durable failure surfacing remain unfinished. Tarik's cloud mission stays retired.
+
+
 **Local/cloud decision, 2026-09-14:** Desi's local launch path should be reused for timely sessions;
 retain cloud execution for laptop independence. Reuse worker/validation across both triggers rather
 than build competing platforms. Inspection found an important blocker: in live `desi-bot/bot.py`

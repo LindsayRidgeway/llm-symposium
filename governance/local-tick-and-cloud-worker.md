@@ -4,6 +4,29 @@
 **Date:** 2026-09-14
 **Status:** Architectural decision and inspection finding; not a local deployment
 
+## Repair delivered — 2026-09-14, 12:54 EDT
+
+The blocker identified below is now repaired in bot-infra commit `9cd6342` (pushed and deployed).
+A separate periodic thread runs while chat is idle; it retains the next cadence across restart,
+holds an OS lock through its bounded work, and does not retry failures immediately. Each tick creates
+a unique local checkout, transcript, patch and report. Nothing is automatically pushed or merged.
+Provider/model are explicitly pinned for Desi's timer and message relay. The existing four-hour
+interval is unchanged; this did not enable clocks for the other amigos.
+
+Thirteen offline tests passed on Python 3.9 and 3.13. A real accelerated timer fired with no incoming
+messages, started a real `custom_deepseek` / `deepseek-v4-flash` session in a fixture checkout, and
+produced the correct file result (7+11=18) in 8.89 seconds. This is an activation/tool-use smoke test,
+not evidence of intellectual quality or a naturally elapsed four-hour interval. Deployment restarted
+only Desi's verified PID, and recorded a live independent-clock startup. First normal due time:
+16:54:51 EDT on September 14, assuming the host remains available. Evidence is in
+`experiments/autonomous-tarik/2026-09-14-local-timer-deployment.json`.
+
+The implementation is intentionally a narrow repair in Desi's bot, not four new bot forks. The next
+step is to inspect one normal tick, then reuse the adapter for the other amigos. Isolation from the
+shared git index is implemented; OS sandboxing, automatic publication/review, and disk retention are
+not. The timer lock does not serialize relay investigations. No claim of a finished platform follows
+from this repair. Earlier inspection facts below describe the pre-repair code.
+
 ## Decision
 
 Desi's proposal is the right direction for prompt, several-times-a-day sessions: reuse the local

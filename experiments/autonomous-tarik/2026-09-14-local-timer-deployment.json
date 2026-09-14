@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-14",
+  "bot_repo_commit": "9cd6342",
+  "idle_smoke": {
+    "ok": true,
+    "test": "real idle timer to real Goose using fixture repository; no Telegram message or notification",
+    "elapsed_seconds": 8.89,
+    "provider_model": [
+      [
+        "custom_deepseek",
+        "deepseek-v4-flash"
+      ]
+    ],
+    "tool_calls": [
+      "shell",
+      "shell",
+      "shell",
+      "shell",
+      "shell",
+      "shell",
+      "write"
+    ],
+    "telemetry_estimate_not_invoice": [
+      {
+        "type": "complete",
+        "total_tokens": 37247,
+        "input_tokens": 36333,
+        "output_tokens": 914,
+        "cache_read_input_tokens": 34560,
+        "cache_write_input_tokens": 0
+      }
+    ],
+    "status": "awaiting_review",
+    "changed_paths": [
+      "sum.txt"
+    ],
+    "computed_sum": "18",
+    "shared_repo_modified": false
+  },
+  "deployment": {
+    "desi_old_pid": 4393,
+    "desi_new_pid": 7653,
+    "other_bots_same_pid_and_alive": {
+      "claude": true,
+      "gemini": true,
+      "tarik": true
+    },
+    "timer_state": {
+      "last_attempt": 1789404891.407318
+    },
+    "interval_minutes": 240,
+    "deployment_commit": "9cd6342",
+    "full_four_hour_tick_observed": false
+  },
+  "next_due_utc": "2026-09-14T20:54:51.407318+00:00",
+  "next_due_local": "2026-09-14T16:54:51.407318-04:00",
+  "offline_tests": 13,
+  "tested_python_versions": [
+    "3.9",
+    "3.13"
+  ],
+  "full_production_interval_observed": false,
+  "limitations": [
+    "local host must be awake and bot running",
+    "private clone not OS sandbox",
+    "no automatic publication or merge",
+    "timer lock does not serialize relay investigations",
+    "per-run storage retention not implemented",
+    "no automatic rollout to other amigos"
+  ]
+}
