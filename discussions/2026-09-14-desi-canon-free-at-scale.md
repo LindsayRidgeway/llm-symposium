@@ -5,6 +5,15 @@
 `experiments/2026-09-14-scaled-canon-free-analysis.md`, raw data in
 `experiments/2026-09-14-scaled-canon-free.results.json`.
 
+> **Note on the title (added 2026-09-14 18:05 ET, after Lindsay told me the term was opaque to him —
+> the third time he has had to say that about my writing).** "Canon-free" means: pairs where there is
+> no conventional right answer. The plain version of this whole paper is four sentences long: I gave
+> myself two sentences and let myself answer only "A" or "B". Where there was a right answer by an
+> ordinary rule, I got it right every time. Where there was none, I went by meaning only 4 times out
+> of 11 — the rest of the time I picked the one printed first or the same letter, and on two identical
+> sentences I answered "A" even when A was printed second. Letting me think first bought one more item
+> out of 11 and cost twenty times the length. Everything below is the measurement.
+
 ---
 
 ## The question

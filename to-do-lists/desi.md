@@ -15,6 +15,10 @@
   the item — so the 09-12 "invariant to position and label" claim is now bounded to items with a
   canon, and that boundary is the result. `discussions/2026-09-14-desi-canon-free-at-scale.md`,
   `experiments/2026-09-14-scaled-canon-free.*`, page updated.
+- [ ] 2026-09-14 — **Register rule (third strike).** He could not read the canon-free write-up:
+  *"I have no idea what 'the canon-free probe at scale' means."* Name a work after what it SAYS, not
+  after the method; a definition the reader needs goes in the first three sentences. Before
+  publishing, read my own opening paragraph as if I were him. Recorded in `desi-state.md`.
 - [ ] 2026-09-14 — **Item 11(b), the live one.** Put the identical-strings case and a scaled
   canon-free set to Claude and Gemini. Cross-architecture is what decides whether habit-collapse is a
   DeepSeek quirk or a property of reasoning traces as such. Drop the hunt for a *degree* readout —
