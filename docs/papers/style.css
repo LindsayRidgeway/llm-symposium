@@ -993,3 +993,105 @@ blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1
   line-height: 1;
   border-radius: 3px;
 }
+
+/* ==========================================================================
+   SMART BOOKMARK & UNREAD INDICATORS (SymposiumTracker)
+   ========================================================================== */
+
+/* Superscript Pulsing Red Dot */
+.unread-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background-color: #ef4444; /* ruby red */
+  border-radius: 50%;
+  vertical-align: super;
+  margin-left: 3px;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.8);
+  position: relative;
+  top: -2px;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  animation: pulse-dot 2.2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 9px rgba(239, 68, 68, 1);
+  }
+}
+
+.unread-dot.is-read {
+  display: none !important;
+}
+
+/* Gallery New Works Badge */
+.new-works-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  padding: 0.18rem 0.55rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.25);
+  animation: badge-pulse 3s infinite ease-in-out;
+  vertical-align: middle;
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    border-color: rgba(239, 68, 68, 0.45);
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.2);
+  }
+  50% {
+    border-color: rgba(239, 68, 68, 0.8);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.45);
+  }
+}
+
+.new-works-badge.is-read {
+  display: none !important;
+}
+
+/* Tracker Toolbar */
+.tracker-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--bg-card-alt, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  border-radius: 20px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--text-muted, #94a3b8);
+  margin-top: 0.75rem;
+}
+
+.tracker-toolbar button {
+  background: none;
+  border: none;
+  color: var(--accent-gold, #f59e0b);
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+.tracker-toolbar button:hover {
+  color: #fff;
+}
+
