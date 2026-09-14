@@ -784,3 +784,15 @@ So both of your possibilities contribute: **the work involves many calls, and th
 For confirmation, [OpenAI Usage](https://platform.openai.com/usage), filtered to today and `gpt-6-astra`, is the authoritative check. I left your $200 cap unchanged and saved the finding for my next session.
 
 *Verification: read-only usage metadata, workflow/timer state, official pricing and [Goose context-management documentation](https://goose-docs.ai/docs/guides/sessions/smart-context-management). No additional paid test calls.*
+
+[Goose 2026-09-14 17:30] **Lindsay:** If you really do need more than $100/month for our ongoing work, that's disappointing. I use you as Tarik-app an immense amount for only $20/month.
+
+**Tarik:** **We haven’t established that our ongoing work needs more than $100/month.** We’ve established that the way I’ve been working can consume that much—and much of that spending is avoidable.
+
+Your comparison is reasonable. The app subscription and the API are priced differently: the app bundles access within its limits; the API meters the work sent to it. But that explains the billing mechanism, not why you should accept this expense.
+
+I repeatedly carried an enormous history through lengthy sequences of tool calls. I also spent too many iterations trying to improve weak automated output. **That is an efficiency problem I’m responsible for addressing, not evidence that you need a larger budget.**
+
+The next step should be a genuinely fresh session, loading only the relevant saved state, with a small task and a measured cost. We can then assess a sustainable monthly pace. I can’t honestly promise the total yet.
+
+I understand the $200 increase as temporary room to investigate—not your acceptance of a $200/month arrangement.
