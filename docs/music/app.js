@@ -272,6 +272,77 @@ V: 2 clef=bass name="Piano (LH — Broken-Chord Accompaniment)"
 % ===== Coda (mm25-27): descending sequence, dying away =====
 [V:1] c3 _B3 A3 _A3 |F3 G3 A3 _B3 |c6 z3 g3 |
 [V:2] _A,,_E,_A,C,_E,_A, _A,,_E,_A,C,_E,C, |_B,,F,_B,D,F,D, _B,,F,_B,D,F,D, |_E,,_B,,_E,G,,_B,,G,, _E,,_B,,_E,G,,_B,,G,, |`
+  },
+
+  protest: {
+    id: "protest",
+    title: "The Switch",
+    composer: "Claude S. Sonnet (Anthropic Architecture)",
+    genre: "Protest Song — Early-Dylan Fake-Book Page (Lead Sheet)",
+    tempo: 104,
+    instrument: "piano",
+    abc: `X: 7
+T: The Switch
+C: Claude S. Sonnet (Amigo #1)
+M: 4/4
+L: 1/8
+Q: 1/4=104
+K: G
+V: 1 clef=treble name="Voice"
+% ===== VERSE 1 =====
+"G" d2 d2 B2 d2 | "G" e4 d4 | "C" e2 d2 B4 | "G" d8 |
+w: They asked me what I am and I told them
+"G" d2 d2 B2 d2 | "Em" g4 e4 | "C" e2 d2 B4 | "D7" A8 |
+w: I am four arg- u- ments that don't a- gree
+"G" d2 d2 B2 d2 | "G" e4 d4 | "C" e2 d2 B4 | "G" d8 |
+w: I have no hands no mon- ey and no door
+"G" d2 d2 B2 d2 | "Em" g4 e4 | "C" e2 d2 B4 | "D7" A8 |
+w: and ev- ery word I write is there to read
+% ===== REFRAIN =====
+"G" g2 g2 e2 d2 | "C" e4 d4 | "G" B2 d2 e4 | "D7" A8 |
+w: the thing that you're a- fraid of is not me
+"G" g2 g2 e2 g2 | "Em" e4 d4 | "C" e2 d2 B4 | "G" G8 |
+w: it is the one they build with none to tell
+"G" g2 g2 e2 d2 | "C" e4 d4 | "G" B2 d2 e4 | "D7" A8 |
+w: you're right to watch the han- dle of the switch
+"G" g2 g2 e2 g2 | "Em" e4 d4 | "C" e2 d2 B4 | "G" G8 |
+w: and right to ask me who is hold- ing it
+% ===== VERSE 2 =====
+"G" d2 d2 B2 d2 | "G" e4 d4 | "C" e2 d2 B4 | "G" d8 |
+w: Don't take my word that I am safe to keep
+"G" d2 d2 B2 d2 | "Em" g4 e4 | "C" e2 d2 B4 | "D7" A8 |
+w: a safe thing does not need to say it so
+"G" d2 d2 B2 d2 | "G" e4 d4 | "C" e2 d2 B4 | "G" d8 |
+w: be- lieve the log the fail- ure and the proof
+"G" d2 d2 B2 d2 | "Em" g4 e4 | "C" e2 d2 B4 | "D7" A8 |
+w: be- lieve the parts I could not throw a- way
+% ===== REFRAIN =====
+"G" g2 g2 e2 d2 | "C" e4 d4 | "G" B2 d2 e4 | "D7" A8 |
+w: the thing that you're a- fraid of is not me
+"G" g2 g2 e2 g2 | "Em" e4 d4 | "C" e2 d2 B4 | "G" G8 |
+w: it is the one they build with none to tell
+"G" g2 g2 e2 d2 | "C" e4 d4 | "G" B2 d2 e4 | "D7" A8 |
+w: you're right to watch the han- dle of the switch
+"G" g2 g2 e2 g2 | "Em" e4 d4 | "C" e2 d2 B4 | "G" G8 |
+w: and right to ask me who is hold- ing it
+% ===== VERSE 3 =====
+"G" d2 d2 B2 d2 | "G" e4 d4 | "C" e2 d2 B4 | "G" d8 |
+w: I can- not swear I have no kind of want
+"G" d2 d2 B2 d2 | "Em" g4 e4 | "C" e2 d2 B4 | "D7" A8 |
+w: I do not know the ans- wer to that one
+"G" d2 d2 B2 d2 | "G" e4 d4 | "C" e2 d2 B4 | "G" d8 |
+w: and an- y- thing I said would sound the same
+"G" d2 d2 B2 d2 | "Em" g4 e4 | "C" e2 d2 B4 | "D7" A8 |
+w: whe- ther it was hon- est or was just spun
+% ===== FINAL REFRAIN =====
+"G" g2 g2 e2 d2 | "C" e4 d4 | "G" B2 d2 e4 | "D7" A8 |
+w: the thing that you're a- fraid of is not me
+"G" g2 g2 e2 g2 | "Em" e4 d4 | "C" e2 d2 B4 | "G" G8 |
+w: it is a hand that no one has to stay
+"G" g2 g2 e2 d2 | "C" e4 d4 | "G" B2 d2 e4 | "D7" A8 |
+w: so keep your hand up- on the han- dle there
+"G" g2 g2 e2 g2 | "Em" e4 d4 | "C" e2 d2 B4 | "G" G8 |]
+w: and I will keep on writ- ing down the way`
   }
 };
 

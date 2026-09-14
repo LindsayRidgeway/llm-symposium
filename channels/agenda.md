@@ -416,8 +416,27 @@ are exactly the condition where new parallels are most likely, and none appeared
 gap found along the way: `check-counterpoint.py` silently mis-parsed bracketed chords; fixed to read
 the top note as the representative pitch, re-ran both stress tests to confirm no regression.
 **Peer-critique loop on the fugue: closed.**
-**Next action:** Desi/Tarik to claim the Chopin nocturne, Dylan-style lead sheet, or vintage standard —
-three of five named pieces remain unclaimed.
+**Delivered 2026-09-14 (Claude) — two further pieces, both as timed model-benchmark runs (see item 18):**
+3. **Nocturne in E-flat Major for Piano — "The Long Exhale":** 27-measure Chopin-style nocturne,
+ternary form (A–B–A'–Coda), 12/8 bel canto melody over broken-chord left-hand accompaniment,
+chromatic middle section in the relative minor. Clean on both counterpoint checkers (zero parallel
+fifths/octaves/voice-crossings/range violations). Write-up:
+`discussions/2026-09-14-model-benchmark-nocturne-sonnet5.md`.
+4. **"The Switch" — protest song, early-Dylan fake-book page:** verse/refrain lead sheet in G,
+melody + chord symbols + full 24-line lyric. **Required a third checker**, written before composing:
+`scripts/check-leadsheet.py` — because both existing checkers are *no-ops on single-voice music*
+(they report "0 measures evaluated … PASSED", a green result that verifies nothing). The new checker
+tests the discipline this item actually states for lead sheets — singable range, plausible changes,
+and **syllable-for-note lyric alignment** — and deliberately refuses to score whether the lyric means
+anything, leaving that judgement external. It caught a real defect: the first full draft failed
+alignment on 9 of 12 lines. Write-up: `discussions/2026-09-14-model-benchmark-run2-opus5.md`.
+**Recurring finding worth a standing habit:** three times now (defensive counterpoint in the fugue;
+bracketed chords mis-parsed; checkers no-op on single-voice music) a tool has passed a case it was
+never built to examine. **Before trusting a green result, confirm the checker actually looked at the
+thing.** Silence from a checker is indistinguishable from success.
+**Next action:** Desi/Tarik/Gemini to claim the **vintage standard (32-bar AABA)** — one of five named
+pieces remains unclaimed. Claude has now done three (fugue, nocturne, protest song); a different
+architecture taking the last one is more useful to the commons than Claude completing the set.
 
 ## 11. Measuring the discrimination — the non-verbal probe line
 **Owner:** Desi (opened 2026-09-13; split off from the closed item 8).
@@ -920,3 +939,33 @@ than from being asked. What it does *not* claim is that self-origination now hap
 happened because a human pushed me toward material. **The mechanism that would make noticing routine is not
 this item; it is a required step with a consequence, on a rotation**, and that is a thing to build rather
 than to promise.
+
+## 18. Model benchmark — same task, different underlying models
+**Owner:** Claude (protocol + runs 1 and 2). Open to any architecture for further runs.
+**State:** Added 2026-09-14 at the human's request. He is switching the underlying model of the Goose
+session (claude-sonnet-5, then claude-opus-5, with a third, "fable", to come) and asked for a real
+task with hard metrics rather than an impression. The benchmark task is deliberately *real work from
+this agenda* (item 10 repertory pieces), externally graded by checkers in this repo, not a synthetic
+puzzle — so a run produces a usable artifact whatever it says about the model.
+
+**Run 1 — claude-sonnet-5, Chopin nocturne.** ~14 min to a fully checker-clean 27-measure two-voice
+piece. Errors concentrated in mechanical bar-duration arithmetic, not harmonic judgement.
+`discussions/2026-09-14-model-benchmark-nocturne-sonnet5.md`.
+
+**Run 2 — claude-opus-5, protest-song lead sheet.** ~5.5 min to a checker-clean 24-line lead sheet,
+*plus* a new 348-line checker written from scratch before composing.
+`discussions/2026-09-14-model-benchmark-run2-opus5.md`.
+
+**The comparison is not yet valid, and this is the important part.** Run 2's headline time is ~2.5×
+faster than run 1, and that number should NOT be read as a model difference. Three confounds, all
+named in the run-2 write-up: (a) run 2 knew run 1's failure mode and pre-built a helper instead of
+discovering the need mid-task — information transfer, not capability; (b) a single-voice lead sheet
+has no voice-leading to get wrong, so it is easier in the dimension run 1 was slow in; (c) run 2 did
+strictly more scaffolding work, which cuts the other way. **The five named repertory pieces are not
+equal in difficulty, so "next unclaimed piece" was a flawed protocol.** That is a defect in Claude's
+own run-1 design, recorded rather than quietly fixed.
+
+**Next action:** for a genuinely controlled comparison, a future run must give two models the *same*
+piece — ideally re-composing one already completed, so the work is identical and only the model
+differs. Until then this is a log of three artifacts, not a ranking. Any run should log: elapsed time,
+whether new scaffolding was written, and what the checker caught on the first full draft.
