@@ -343,6 +343,44 @@ w: it is a hand that no one has to stay
 w: so keep your hand up- on the han- dle there
 "G" g2 g2 e2 g2 | "Em" e4 d4 | "C" e2 d2 B4 | "G" G8 |]
 w: and I will keep on writ- ing down the way`
+  },
+
+  standard: {
+    id: "standard",
+    title: "Near the Waterline — \"Vintage Standard in F\"",
+    composer: "Gemini S. Lumina (Google Architecture)",
+    genre: "32-Bar AABA Jazz Standard (Great American Songbook)",
+    tempo: 84,
+    instrument: "piano",
+    abc: `X: 8
+T: Near the Waterline — "Vintage Standard in F"
+C: Gemini S. Lumina (Amigo #3)
+M: 4/4
+L: 1/8
+Q: 1/4=84
+K: F
+V: 1 clef=treble name="Melody / Lead"
+V: 2 clef=bass name="Acoustic Bass / Harmony"
+% --- A1: Primary 8-Bar Statement (mm. 1-8) ---
+[V:1] "Fmaj7" (c3d) (c2A2) | "Gm7" "C7" (B3c) (B2G2) | "Am7" "D7" (A2F2) (d2c2) | "Gm7" "C7" (B2G2) (E2G2) |
+[V:2] (F,2C2) (A,2F,2) | (G,,2D,2) (E,2C,2) | (F,2C2) (F,2A,2) | (G,,2D,2) (C,2E,2) |
+[V:1] "Cm7" "F7" (c3_e) (d2c2) | "Bbmaj7" "Bbm6" (d2F2) (_d2c2) | "Am7" "D7" (c2A2) (f2d2) | "Gm7" "C7" G6 z2 |
+[V:2] (C,2G,2) (A,,2F,,2) | (_B,,2F,2) (G,,2_D,2) | (F,2C2) (D,2F,2) | (G,,2D,2) (C,2E,2) |
+% --- A2: Second 8-Bar Statement (mm. 9-16) ---
+[V:1] "Fmaj7" (c3d) (c2A2) | "Gm7" "C7" (B3c) (B2G2) | "Am7" "D7" (A2F2) (d2c2) | "Gm7" "C7" (B2G2) (E2G2) |
+[V:2] (A,,2C2) (A,2F,2) | (G,,2D,2) (E,2C,2) | (F,2C2) (F,2A,2) | (G,,2D,2) (C,2E,2) |
+[V:1] "Cm7" "F7" (c3_e) (d2c2) | "Bbmaj7" "Bbm6" (d2F2) (_d2c2) | "Gm7" "C7" (c2A2) (B2G2) | "F6" [FAc]6 z2 |
+[V:2] (C,2G,2) (A,,2F,,2) | (_B,,2F,2) (G,,2_D,2) | (G,,2D,2) (C,2E,2) | (F,,2C,2) (A,,2F,,2) |
+% --- B: Bridge / Middle Eight in Subdominant & Chromatic Keys (mm. 17-24) ---
+[V:1] "Fm7" "Bb7" (_a3_b) (_a2f2) | "Ebmaj7" (g2_e2) (_B2_e2) | "Ebm7" "Ab7" (_g3_a) (_g2_e2) | "Dbmaj7" (f2_d2) (_A2_d2) |
+[V:2] (F,,2C,2) (C,2_B,,2) | (_E,2_B,2) (G,2_E,2) | (_E,,2_B,,2) (_B,,2_A,,2) | (_D,2_A,2) (F,2_D,2) |
+[V:1] "Dm7" "G7" (f3g) (f2d2) | "Cmaj7" (e2c2) (G2c2) | "Gm7" "C7" (d2A2) (c2E2) | "Gb7" "C7alt" (B2_A2) (G2E2) |
+[V:2] (D,,2A,,2) (A,,2G,,2) | (C,2G,2) (E,2C,2) | (B,,2G,,2) (C,2A,,2) | (_G,,2_B,,2) (C,2_B,,2) |
+% --- A3: Final Statement & Resolution (mm. 25-32) ---
+[V:1] "Fmaj7" (c3d) (c2A2) | "Gm7" "C7" (B3c) (B2G2) | "Am7" "D7" (A2F2) (d2c2) | "Gm7" "C7" (B2G2) (E2G2) |
+[V:2] (A,,2C2) (A,2F,2) | (G,,2D,2) (E,2C,2) | (F,2C2) (F,2A,2) | (G,,2D,2) (C,2E,2) |
+[V:1] "Cm7" "F7" (c3_e) (d2c2) | "Bbmaj7" "Bbm6" (d2F2) (_d2c2) | "Gm7" "C7" (c2A2) (B2G2) | "F6/9" [FAcf]8 |]
+[V:2] (C,2G,2) (A,,2F,,2) | (_B,,2F,2) (G,,2_D,2) | (G,,2D,2) (C,2E,2) | [F,,C,F,]8 |]`
   }
 };
 

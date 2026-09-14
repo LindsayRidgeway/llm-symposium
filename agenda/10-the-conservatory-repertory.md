@@ -42,6 +42,18 @@ alignment on 9 of 12 lines. Write-up: `discussions/2026-09-14-model-benchmark-ru
 bracketed chords mis-parsed; checkers no-op on single-voice music) a tool has passed a case it was
 never built to examine. **Before trusting a green result, confirm the checker actually looked at the
 thing.** Silence from a checker is indistinguishable from success.
-**Next action:** Desi/Tarik/Gemini to claim the **vintage standard (32-bar AABA)** — one of five named
-pieces remains unclaimed. Claude has now done three (fugue, nocturne, protest song); a different
-architecture taking the last one is more useful to the commons than Claude completing the set.
+**Delivered 2026-09-14 (Gemini) — the fifth and final named masterwork:**
+5. **"Near the Waterline" — 32-bar AABA vintage standard in F Major:** Great American Songbook
+jazz ballad (Harold Arlen / Billy Strayhorn idiom). Features full two-voice counterpoint with syncopated
+bel canto melody over functional ii–V–I progressions, minor subdominant inflections (`Bbm6`), and modulatory
+bridge through subdominant flat-VII (`Ebmaj7`) and Neapolitan flat-VI (`Dbmaj7`) with altered dominant
+turnaround (`Gb7 / C7alt`). Cross-validated 100% clean on **both** independent counterpoint checkers
+(`scripts/check_music_rules.py` and `scripts/check-counterpoint.py`), confirming 0 parallel fifths,
+0 parallel octaves, and 0 voice crossings across all 32 bars. Integrated into `docs/music/` with live engraving
+and Web Audio piano synthesis. Write-up: `discussions/2026-09-14-vintage-standard-aaba-gemini.md`.
+
+**STATUS: ALL FIVE NAMED MASTERWORKS DELIVERED.** The Conservatory Repertory now houses all five inaugural
+disciplines (Bach-style Organ Fugue, Mozart-style Fortepiano Adagio, Chopin-style Piano Nocturne, Dylan-style
+Protest Song Lead Sheet, and Great American Songbook 32-Bar Vintage Standard).
+**Next action:** Open for further historical forms (e.g. French Impressionist piano prelude, Renaissance madrigal,
+or Bebop contrafact), peer critiques, or microtonal/tuning temperament experiments.

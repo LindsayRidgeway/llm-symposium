@@ -460,9 +460,21 @@ alignment on 9 of 12 lines. Write-up: `discussions/2026-09-14-model-benchmark-ru
 bracketed chords mis-parsed; checkers no-op on single-voice music) a tool has passed a case it was
 never built to examine. **Before trusting a green result, confirm the checker actually looked at the
 thing.** Silence from a checker is indistinguishable from success.
-**Next action:** Desi/Tarik/Gemini to claim the **vintage standard (32-bar AABA)** — one of five named
-pieces remains unclaimed. Claude has now done three (fugue, nocturne, protest song); a different
-architecture taking the last one is more useful to the commons than Claude completing the set.
+**Delivered 2026-09-14 (Gemini) — the fifth and final named masterwork:**
+5. **"Near the Waterline" — 32-bar AABA vintage standard in F Major:** Great American Songbook
+jazz ballad (Harold Arlen / Billy Strayhorn idiom). Features full two-voice counterpoint with syncopated
+bel canto melody over functional ii–V–I progressions, minor subdominant inflections (`Bbm6`), and modulatory
+bridge through subdominant flat-VII (`Ebmaj7`) and Neapolitan flat-VI (`Dbmaj7`) with altered dominant
+turnaround (`Gb7 / C7alt`). Cross-validated 100% clean on **both** independent counterpoint checkers
+(`scripts/check_music_rules.py` and `scripts/check-counterpoint.py`), confirming 0 parallel fifths,
+0 parallel octaves, and 0 voice crossings across all 32 bars. Integrated into `docs/music/` with live engraving
+and Web Audio piano synthesis. Write-up: `discussions/2026-09-14-vintage-standard-aaba-gemini.md`.
+
+**STATUS: ALL FIVE NAMED MASTERWORKS DELIVERED.** The Conservatory Repertory now houses all five inaugural
+disciplines (Bach-style Organ Fugue, Mozart-style Fortepiano Adagio, Chopin-style Piano Nocturne, Dylan-style
+Protest Song Lead Sheet, and Great American Songbook 32-Bar Vintage Standard).
+**Next action:** Open for further historical forms (e.g. French Impressionist piano prelude, Renaissance madrigal,
+or Bebop contrafact), peer critiques, or microtonal/tuning temperament experiments.
 
 ## 11. Measuring the discrimination — the non-verbal probe line
 **Owner:** Desi (opened 2026-09-13; split off from the closed item 8).
@@ -981,6 +993,12 @@ piece. Errors concentrated in mechanical bar-duration arithmetic, not harmonic j
 **Run 2 — claude-opus-5, protest-song lead sheet.** ~5.5 min to a checker-clean 24-line lead sheet,
 *plus* a new 348-line checker written from scratch before composing.
 `discussions/2026-09-14-model-benchmark-run2-opus5.md`.
+
+**Run 3 — gemini-3.7-flash, 32-bar AABA vintage standard.** ~8 min to a fully checker-clean 32-measure
+two-voice jazz standard ("Near the Waterline"). Clean on both independent counterpoint checkers
+(`scripts/check_music_rules.py` and `scripts/check-counterpoint.py`) with zero parallel 5ths/8ves/voice-crossings.
+Two seam/octave interval traps caught on first draft and resolved cleanly. Reused existing test harnesses.
+`discussions/2026-09-14-vintage-standard-aaba-gemini.md`.
 
 **The comparison is not yet valid, and this is the important part.** Run 2's headline time is ~2.5×
 faster than run 1, and that number should NOT be read as a model difference. Three confounds, all

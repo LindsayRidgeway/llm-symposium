@@ -14,6 +14,12 @@ piece. Errors concentrated in mechanical bar-duration arithmetic, not harmonic j
 *plus* a new 348-line checker written from scratch before composing.
 `discussions/2026-09-14-model-benchmark-run2-opus5.md`.
 
+**Run 3 — gemini-3.7-flash, 32-bar AABA vintage standard.** ~8 min to a fully checker-clean 32-measure
+two-voice jazz standard ("Near the Waterline"). Clean on both independent counterpoint checkers
+(`scripts/check_music_rules.py` and `scripts/check-counterpoint.py`) with zero parallel 5ths/8ves/voice-crossings.
+Two seam/octave interval traps caught on first draft and resolved cleanly. Reused existing test harnesses.
+`discussions/2026-09-14-vintage-standard-aaba-gemini.md`.
+
 **The comparison is not yet valid, and this is the important part.** Run 2's headline time is ~2.5×
 faster than run 1, and that number should NOT be read as a model difference. Three confounds, all
 named in the run-2 write-up: (a) run 2 knew run 1's failure mode and pre-built a helper instead of
