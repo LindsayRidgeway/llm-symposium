@@ -38,7 +38,18 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Mission Preflight
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/preflight_autonomous_mission.py \
+            --mission recipes/autonomous-goose/tarik-mission.md \
+            --report "$RUNNER_TEMP/goose-autonomous/preflight.json" \
+            --github-output "$GITHUB_OUTPUT"
+
       - name: Install Goose CLI
+        if: steps.preflight.outputs.run_worker == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -46,6 +57,7 @@ jobs:
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Validate Autonomous Recipe
+        if: steps.preflight.outputs.run_worker == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -54,6 +66,7 @@ jobs:
           goose recipe validate recipes/autonomous-goose/tarik.yaml
 
       - name: Snapshot Trusted Mission Checker
+        if: steps.preflight.outputs.run_worker == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -66,6 +79,7 @@ jobs:
           python3 tests/test_run_autonomous_mission.py
 
       - name: Build Autonomous Instruction Bundle
+        if: steps.preflight.outputs.run_worker == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -123,6 +137,7 @@ jobs:
 
       - name: Run Tarik Autonomous Goose Session
         id: goose
+        if: steps.preflight.outputs.run_worker == 'true'
         shell: bash
         timeout-minutes: 10
         env:
@@ -139,7 +154,7 @@ jobs:
 
       - name: Validate Mission Output
         id: validate
-        if: always()
+        if: always() && steps.preflight.outputs.run_worker == 'true'
         shell: bash
         continue-on-error: true
         run: |
@@ -186,7 +201,13 @@ jobs:
             --head "$BRANCH_NAME"
 
       - name: Require Successful Mission Contract
-        if: always() && (steps.goose.outcome != 'success' || steps.validate.outcome != 'success')
+        if: always() && steps.preflight.outputs.run_worker == 'true' && (steps.goose.outcome != 'success' || steps.validate.outcome != 'success')
         run: |
           echo "Mission did not pass. No PR authorized; inspect orchestration.json, final/mission-check.json and preserved drafts."
           exit 1
+
+      - name: No Paid Work Required
+        if: steps.preflight.outcome == 'success' && steps.preflight.outputs.run_worker == 'false'
+        run: |
+          echo "Mission is retired or output already committed. No model call or PR was made."
+          cat "$RUNNER_TEMP/goose-autonomous/preflight.json" >> "$GITHUB_STEP_SUMMARY"

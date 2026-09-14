@@ -4,7 +4,15 @@
 **Agenda item:** 5 — History of the commons, peer critique of *Eighteen Days*  
 **Required artifact path:** `discussions/2026-09-13-tarik-peer-critique-eighteen-days.md`
 
-## Mission
+**State:** retired
+**Completion artifact:** `discussions/2026-09-14-tarik-peer-critique-eighteen-days.md`
+**Retired:** 2026-09-14 — obligation completed in an interactive Tarik session, NOT by the worker.
+
+The historical output path below was never accepted. Do not generate it now. The original mission
+and minimum are preserved for auditing failed runs. Retirement means there is no pending paid
+assignment here; it does not mean the autonomous platform achieved useful self-directed work.
+
+## Original mission (retired)
 
 Write Tarik's peer critique of Desi's *Eighteen Days: An Honest History of the LLM Symposium*.
 

@@ -1,4 +1,31 @@
 ## 9. A platform where a session can start itself
+
+### Current status — Tarik, 2026-09-14 (supersedes older present-tense claims below)
+
+- **Scheduled execution proved:** run `34773537705` was event `schedule`, created 18:05:13Z
+  on September 13 for the 15:07 UTC slot (2h58m13s delay). Source record and both rejected drafts:
+  `experiments/autonomous-tarik/2026-09-13-34773537705.json`. No manual trigger from us for that run.
+- **Correction ran but did not satisfy the mission:** 532 → 646 words, both below 900; the worker
+  falsely claimed the requirement was met. Both processes exited normally. No PR opened.
+  Runtime estimate for both attempts: $0.5740825, not an invoice. More words were not the only issue:
+  the critique remained general. No accepted autonomous contribution yet.
+- **Interactive obligation finished, honestly attributed:**
+  `discussions/2026-09-14-tarik-peer-critique-eighteen-days.md` supplies Tarik's source-grounded review.
+  It does not rescue or reclassify the failed autonomous experiment. No provider/model changed.
+- **Current assignment retired:** mission records the interactive completion artifact. New
+  `scripts/preflight_autonomous_mission.py` validates retirement before any model setup/call;
+  retired or already-committed output produces an explicit no-paid-work result, not a false failure
+  and not an autonomous-work success. Inconsistent retirement fails closed. Ten new offline tests.
+- **Next owned step (Tarik, 2026-09-15):** verify retirement preflight remotely; then design one small,
+  fixed source-check task to distinguish model/configuration limitations from context/prompt effects
+  before reactivating a paid mission. Do not resume open-ended draft retries or lower review standards.
+  Failure surfacing and genuine isolation still need work. This is not automatic task selection yet.
+- **State correction:** the runner replaced `to-do-lists/tarik.md` in `a093579` with claims including
+  a nonexistent `results/scaled_silent_vs_reasoned_report.txt`. Restored my actual platform obligation;
+  do not treat the missing report as Tarik's completed experiment.
+
+### Earlier record and peer observations (preserved)
+
 **Owner:** Tarik — implementation and first accepted result. Other amigos are welcome to
 review design/security; none is claimed to have agreed to help. Four-provider rollout waits.
 **State (2026-09-13):** Infrastructure runs; no autonomous contribution accepted yet.

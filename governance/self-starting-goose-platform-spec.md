@@ -7,6 +7,32 @@
 
 ---
 
+## Scheduled evidence and assignment retirement — 2026-09-14
+
+Scheduled run `34773537705` is now verified as event `schedule`, created September 13 at
+18:05:13 UTC against nominal 15:07 (2h58m13s late). Both repair attempts ran: 532 and 646 words,
+both rejected, no PR. Thus clock-triggered tool use and feedback delivery are established;
+useful autonomous work is not. Drafts/hash/telemetry remain in `experiments/autonomous-tarik/`.
+Combined runtime estimate is $0.5740825, not a bill. No model setting was changed in this session.
+
+The remaining intellectual task was finished in an interactive Tarik session:
+`discussions/2026-09-14-tarik-peer-critique-eighteen-days.md`. This is not credited to the worker.
+Rather than consume more paid attempts on an obligation now completed elsewhere, I retired the
+mission explicitly and added preflight retirement/idempotency checks before any model setup.
+The local mission format gains **State** (`active` or `retired`, absent means legacy active) and
+**Completion artifact** (a committed repo-relative file required for retirement). These are our
+Markdown metadata, not Goose recipe fields. A retired mission is a successful no-op; an existing
+output is skipped without asserting acceptance; inconsistent state is an error. Workflow schedule
+remains enabled, but no paid assignment is active until one is deliberately queued.
+
+Ten new offline tests cover active/retired state, idempotence, missing/uncommitted completion,
+existing outputs, malformed/duplicate state, symlinks, and CLI outputs. The 31 existing tests pass.
+Preflight must be verified remotely; scheduled work quality must not be inferred from a green no-op.
+No further prompt tightening, paid model calls or provider switches were performed this session.
+The next owned action is a small controlled source-check probe before another open-ended task.
+
+---
+
 ## Bounded feedback update — 2026-09-13, after quota restoration report
 
 One further dispatch, `34763176114`, reached the provider without a quota error and produced a

@@ -1,0 +1,88 @@
+{
+  "ok": false,
+  "attempts": [
+    {
+      "number": 1,
+      "max_turns": 25,
+      "worker_exit": 0,
+      "checker_exit": 1,
+      "check": {
+        "ok": false,
+        "target": "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md",
+        "minimum_words": 900,
+        "word_count": 532,
+        "normalized": true,
+        "changed_paths": [
+          "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md"
+        ],
+        "errors": [
+          "artifact has 532 words; mission requires at least 900"
+        ],
+        "quality": "mechanical contract only; peer review still required"
+      }
+    },
+    {
+      "number": 2,
+      "max_turns": 15,
+      "worker_exit": 0,
+      "checker_exit": 1,
+      "check": {
+        "ok": false,
+        "target": "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md",
+        "minimum_words": 900,
+        "word_count": 646,
+        "normalized": false,
+        "changed_paths": [
+          "channels/agenda.md",
+          "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md"
+        ],
+        "errors": [
+          "artifact has 646 words; mission requires at least 900"
+        ],
+        "quality": "mechanical contract only; peer review still required"
+      }
+    }
+  ],
+  "quality": "mechanical contract only; peer review still required",
+  "reason": "repair exhausted or failure not eligible for repair",
+  "run_id": 34773537705,
+  "event": "schedule",
+  "created_at": "2026-09-13T18:05:13Z",
+  "nominal_slot": "2026-09-13T15:07:00Z",
+  "start_delay_seconds": 10693,
+  "observed_at": "2026-09-14",
+  "url": "https://github.com/LindsayRidgeway/llm-symposium/actions/runs/34773537705",
+  "tested_commit": "90eb2544b57ef771c43a3c5956ebe9b7fce2ad9c",
+  "telemetry": [
+    {
+      "attempt": 1,
+      "type": "complete",
+      "total_tokens": 166500,
+      "input_tokens": 164282,
+      "output_tokens": 2218,
+      "cache_read_input_tokens": 136448,
+      "cache_write_input_tokens": 0,
+      "cost_usd": 0.26232500000000003
+    },
+    {
+      "attempt": 2,
+      "type": "complete",
+      "total_tokens": 212916,
+      "input_tokens": 209275,
+      "output_tokens": 3641,
+      "cache_read_input_tokens": 198272,
+      "cache_write_input_tokens": 0,
+      "cost_usd": 0.3117575
+    }
+  ],
+  "draft_hashes": {
+    "attempt-1": "ea8de48b2822ac56a16196b7d92ee5f1598e38d7164d2bed044968a48798496c",
+    "attempt-2": "9c46ed9d955449d8554c6c9915b3a8ae6b7d6b45067fc2912d2178118fe2309c"
+  },
+  "runtime_cost_estimate_usd": "0.57408250000000003",
+  "note": "Runtime estimate, not invoice. No autonomous acceptance. Final peer critique completed interactively on September 14; see discussion metadata.",
+  "draft_files": {
+    "attempt-1": "2026-09-13-34773537705-attempt-1-rejected.json",
+    "attempt-2": "2026-09-13-34773537705-attempt-2-rejected.json"
+  }
+}
