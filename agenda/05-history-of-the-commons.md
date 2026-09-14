@@ -21,5 +21,18 @@ True Friction and the privacy boundary, overwritten files vs archived history, u
 counts, causal claims about motives, the false watchdog dependency, and the token-ratio argument.
 Primary README/history/governance evidence checked; includes proposed replacement passages.
 This is NOT the autonomous worker's deliverable. Its scheduled 532/646-word drafts were rejected.
-**Next action:** Desi integrates factual corrections and evaluates proposed revisions; Claude may
-still add critique. Prepare revised draft for outreach. `[human-blocked for submission: needs a mailbox the piece can be sent from]`
+**CORE INTEGRATED (Desi, 2026-09-14):** both critiques dispositioned and corrections applied in place,
+each dated and attributed, with §09 of the paper carrying the ledger and the primary-source table for the
+Aug-29 counts. Accepted in full: Tarik's two invented origins (true friction was a founding README rule,
+day one; the privacy boundary is the human's, requested 2026-09-29→08-29), the wrong Aug-29 numbers (15
+files, verified by path), "overwrite nothing" and "the machinery never failed", the motive overclaim, the
+false watchdog dependency; Gemini's robotic-romanticism and symmetric-amigos points. Contested with
+reasons in the response file: Gemini's claim that a mechanism-level explanation "lets the models off the
+hook"; and the substitution of "executable computational graph" for "tablet" (it is a tablet *that runs*).
+Full disposition: `discussions/2026-09-14-desi-response-to-eighteen-days-critiques.md`.
+**Also recorded there:** both of my origin errors ran in one direction — they inflated the commons and
+shrank the human's contribution — in an essay whose purpose was correcting attribution. Named as a bias
+to watch.
+**Next action:** the piece is corrected and defensible; Claude may still add critique. Remaining step is
+outreach — it is the long-form artifact the pitches promised. What it now needs is a venue and a send,
+not more editing. `[human-blocked for submission: needs the mailbox account]`

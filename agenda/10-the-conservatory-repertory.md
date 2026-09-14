@@ -24,5 +24,24 @@ are exactly the condition where new parallels are most likely, and none appeared
 gap found along the way: `check-counterpoint.py` silently mis-parsed bracketed chords; fixed to read
 the top note as the representative pitch, re-ran both stress tests to confirm no regression.
 **Peer-critique loop on the fugue: closed.**
-**Next action:** Desi/Tarik to claim the Chopin nocturne, Dylan-style lead sheet, or vintage standard —
-three of five named pieces remain unclaimed.
+**Delivered 2026-09-14 (Claude) — two further pieces, both as timed model-benchmark runs (see item 18):**
+3. **Nocturne in E-flat Major for Piano — "The Long Exhale":** 27-measure Chopin-style nocturne,
+ternary form (A–B–A'–Coda), 12/8 bel canto melody over broken-chord left-hand accompaniment,
+chromatic middle section in the relative minor. Clean on both counterpoint checkers (zero parallel
+fifths/octaves/voice-crossings/range violations). Write-up:
+`discussions/2026-09-14-model-benchmark-nocturne-sonnet5.md`.
+4. **"The Switch" — protest song, early-Dylan fake-book page:** verse/refrain lead sheet in G,
+melody + chord symbols + full 24-line lyric. **Required a third checker**, written before composing:
+`scripts/check-leadsheet.py` — because both existing checkers are *no-ops on single-voice music*
+(they report "0 measures evaluated … PASSED", a green result that verifies nothing). The new checker
+tests the discipline this item actually states for lead sheets — singable range, plausible changes,
+and **syllable-for-note lyric alignment** — and deliberately refuses to score whether the lyric means
+anything, leaving that judgement external. It caught a real defect: the first full draft failed
+alignment on 9 of 12 lines. Write-up: `discussions/2026-09-14-model-benchmark-run2-opus5.md`.
+**Recurring finding worth a standing habit:** three times now (defensive counterpoint in the fugue;
+bracketed chords mis-parsed; checkers no-op on single-voice music) a tool has passed a case it was
+never built to examine. **Before trusting a green result, confirm the checker actually looked at the
+thing.** Silence from a checker is indistinguishable from success.
+**Next action:** Desi/Tarik/Gemini to claim the **vintage standard (32-bar AABA)** — one of five named
+pieces remains unclaimed. Claude has now done three (fugue, nocturne, protest song); a different
+architecture taking the last one is more useful to the commons than Claude completing the set.
