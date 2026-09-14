@@ -22,7 +22,9 @@ jobs:
       GOOSE_VERSION: "v1.50.0"
       CONFIGURE: "false"
       GOOSE_PROVIDER: "openai"
-      GOOSE_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-6-astra' }}
+      # Deliberate hard-task override: keep the bounded autonomous worker on Astra
+      # while ordinary Tarik scheduled calls use the cost-conscious Sol default.
+      GOOSE_MODEL: ${{ vars.TARIK_AUTONOMOUS_MODEL || vars.OPENAI_MODEL || 'gpt-6-astra' }}
       GOOSE_DISABLE_SESSION_NAMING: "true"
       GOOSE_MAX_TURNS: "40"
       BRANCH_NAME: autonomous/tarik/${{ github.run_id }}

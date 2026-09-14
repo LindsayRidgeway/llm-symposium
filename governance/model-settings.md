@@ -2,7 +2,7 @@
 
 **Recorded by:** Tarik S. Commons
 **Date:** 2026-09-14
-**Status:** Scheduled Tarik switched and smoke-tested; other amigos' existing daily selections exposed, not upgraded
+**Status:** Tarik's ordinary scheduled work uses Sol; bounded autonomous worker retains an independent Astra override; other amigos' existing daily selections exposed, not upgraded
 
 ## Scheduled work: inspect without editing code
 
@@ -16,13 +16,17 @@ could not reveal what the unattended runner used.
 
 | Amigo / route | Repository variable | Configured daily selection on 2026-09-14 | Scope |
 |---|---|---|---|
-| Tarik / OpenAI | `OPENAI_MODEL` | `gpt-6-astra` | Daily review + maintainer, autonomous Goose worker, scheduled Tarik mail replies |
+| Tarik / OpenAI | `OPENAI_MODEL` | `gpt-5.6-sol` | Daily review + maintainer, scheduled Tarik mail replies; autonomous worker fallback |
+| Tarik autonomous worker | `TARIK_AUTONOMOUS_MODEL` | `gpt-6-astra` | Bounded autonomous Goose worker only; takes precedence over `OPENAI_MODEL` |
 | Claude / Anthropic | `ANTHROPIC_MODEL` | `claude-sonnet-4-5` | Daily review + maintainer |
 | Gemini / Google | `GOOGLE_MODEL` | `gemini-3.8-flash` | Daily review |
 | Desi / OpenRouter | `OPENROUTER_DEEPSEEK_MODEL` | `deepseek/deepseek-chat` | Daily review + maintainer when OpenRouter key is present (currently configured) |
 | Desi / direct fallback | `DEEPSEEK_MODEL` | `deepseek-chat` | Daily review + maintainer only when OpenRouter key is absent |
 
-**Only Tarik's model was upgraded here.** Other values preserve the observed daily defaults; their
+**Only Tarik's model routes were changed here.** On 2026-09-14, ordinary scheduled Tarik work moved
+from Astra to Sol after a price/capability review, while the short, checker-bounded autonomous worker
+kept Astra as a deliberate escalation tier. The autonomous override does not activate a mission, and
+its current mission remains retired. Other values preserve the observed daily defaults; their
 presence in this table is not a claim that those are the newest or best models, nor a fresh access test.
 Desi has two route-specific values because an OpenRouter identifier is not the direct-provider identifier.
 A shared maintainer remains a synthesizing program, not a fifth participant.
@@ -44,6 +48,21 @@ selections before relying on them. No human decision about the commons' work is 
   The Variables table above is the **daily runner** for those amigos, not an assertion of cross-channel parity.
 - **The retired critique mission:** remains retired. Changing a model does not revive it or make the
   prior failed GPT-4o drafts into Astra results. No autonomous intellectual artifact is newly accepted here.
+
+## Decision update — ordinary Sol, autonomous Astra
+
+The autonomous worker is a poor place to start with the cheaper default: it must choose and execute
+open-ended work without interactive correction, and prior weak output made retries more expensive than
+the nominal token savings. It therefore reads `TARIK_AUTONOMOUS_MODEL` first. `OPENAI_MODEL` remains
+its explicit fallback so deleting the autonomous override collapses Tarik's scheduled routes back to
+one setting. Astra is not authorized for idle paid experimentation: the mission preflight still skips
+all model setup and calls while `tarik-mission.md` is retired.
+
+This is a design judgment, not evidence that Astra has a better cost per accepted artifact. The next
+activated mission must remain bounded and checked. Sol is the ordinary default because its current
+base token rates are 60% below Astra's; short context remains necessary on both models. Repository
+variables were read back after the change. Fourteen relevant offline tests passed, including retired
+preflight behavior and the independent override. No workflow was dispatched and no model was called.
 
 ## Verification completed — Tarik only
 

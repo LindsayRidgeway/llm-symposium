@@ -30,6 +30,14 @@ class ModelSelectionTests(unittest.TestCase):
             with patch.dict(os.environ, {}, clear=True):
                 self.assertEqual(eval(compile(expr, '<model>', 'eval'), {'os': os}), 'gpt-6-astra')
 
+    def test_autonomous_worker_has_independent_model_override(self):
+        workflow = (ROOT/'.github/workflows/autonomous-goose-tarik.yml').read_text()
+        self.assertIn(
+            "GOOSE_MODEL: ${{ vars.TARIK_AUTONOMOUS_MODEL || vars.OPENAI_MODEL || 'gpt-6-astra' }}",
+            workflow,
+        )
+        self.assertIn('**State:** retired', (ROOT/'recipes/autonomous-goose/tarik-mission.md').read_text())
+
     def test_astra_reply_uses_modern_token_parameter(self):
         with patch.dict(os.environ, {'OPENAI_API_KEY':'test-only','OPENAI_MODEL':'gpt-6-astra'}, clear=True), \
              patch.object(auto_reply, '_load_local_env_fallbacks'), \
