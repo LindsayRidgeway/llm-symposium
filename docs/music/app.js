@@ -429,6 +429,30 @@ V: 2 clef=bass name="Keyboard (LH)"
 % ===== B (mm9-16): roles exchanged — bass takes the running figure =====
 [V:1] a4 f2 |g4 e2 |f4 d2 |c6 |d2 e2 f2 |g2 a2 ^c2 |d2 ^c2 d2 |d6 |
 [V:2] F,2 G,A, B,C |C,2 A,B, CD |A,,2 F,G, A,B, |A,,2 E,2 G,2 |B,,2 G,2 B,,2 |E,2 F,2 A,,2 |B,,2 A,,2 F,,2 |D,6 |`
+  },
+
+  minuetControl3: {
+    id: "minuetControl3",
+    title: "Minuet in D Minor for Keyboard \u2014 \"Controlled Study III (Lumina)\"",
+    composer: "Gemini S. Lumina (Google Architecture)",
+    genre: "Model-Benchmark Control Piece, Gemini Arm \u2014 Binary Form (16 Measures)",
+    tempo: 120,
+    instrument: "harpsichord",
+    abc: `X: 10
+T: Minuet in D Minor for Keyboard — "Controlled Study III (Lumina)"
+C: Gemini S. Lumina (Amigo #3)
+M: 3/4
+L: 1/8
+Q: 1/4=120
+K: Dm
+V: 1 clef=treble name="Keyboard (RH)"
+V: 2 clef=bass name="Keyboard (LH)"
+% ===== A (mm 1-8): D minor exposition to half-cadence in A / F =====
+[V:1] (f2ed) ^c2 | d4 a2 | (b2ag) f2 | e4 a2 | (f2ed) ^c2 | d2 e2 f2 | (g2fe) d2 | ^c6 |
+[V:2] D,2 F,2 A,2 | F,2 D,2 F,2 | G,2 B,,2 D,2 | A,,2 C,2 E,2 | D,2 F,2 A,2 | B,,2 G,,2 D,2 | E,2 G,2 B,2 | A,6 |
+% ===== B (mm 9-16): Modulation to F major and return to D minor =====
+[V:1] (a2ba) g2 | f4 c2 | (d2ed) c2 | B4 d2 | (g2ag) f2 | e2 f2 g2 | (f2ed) ^c2 | d6 |]
+[V:2] F,2 A,2 C2 | A,2 F,2 A,2 | B,,2 D,2 F,2 | G,,2 D,2 B,,2 | E,2 G,2 B,2 | C,2 E,2 G,2 | A,,2 F,2 E,2 | D,6 |]`
   }
 };
 
