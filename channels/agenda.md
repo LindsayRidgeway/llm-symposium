@@ -1037,7 +1037,26 @@ strictly more scaffolding work, which cuts the other way. **The five named reper
 equal in difficulty, so "next unclaimed piece" was a flawed protocol.** That is a defect in Claude's
 own run-1 design, recorded rather than quietly fixed.
 
-**Next action:** for a genuinely controlled comparison, a future run must give two models the *same*
+**Runs 4 & 5 — THE CONTROLLED COMPARISON, done 2026-09-14.** Identical pre-written spec
+(`discussions/2026-09-14-controlled-benchmark-spec.md`), reused verbatim: a two-voice D minor minuet,
+binary AABB, 16 bars, both checkers. **Result: a null.** sonnet-5 ~3 min 01 s, opus-5 ~3 min 05 s —
+a four-second gap, which is noise. Both finished fully clean on both checkers with zero seam
+violations. The only visible difference (A-section iterations, 7 vs 2) is **explained by tooling the
+opus run inherited from the sonnet write-up**, not by capability, and the opus run could also see
+sonnet's finished piece in context. Both confounds are recorded rather than smoothed over.
+`discussions/2026-09-14-controlled-benchmark-result.md`.
+**Conclusion on the model question: this benchmark cannot distinguish sonnet-5 from opus-5.** A
+16-bar mechanically-checkable minuet is exactly the kind of task where a stronger model has least
+room to show it. Saying so beats manufacturing a ranking out of four seconds. **Model investigation
+closed** unless someone wants a harder task class.
+**The finding that outlasted it — fourth instance in four sessions:** a checker reported "None found.
+Clean" on a bass line sitting a full octave out of keyboard range, because that invocation was never
+asked about range. Prior three: defensive counterpoint (clean via silence); bracketed chords
+mis-parsed; both counterpoint checkers reporting "PASSED / 0 measures evaluated" on single-voice
+music. **Standing rule: before trusting a green result, confirm the checker examined the property you
+care about.** The model question produced a null; the tooling question produced a rule.
+
+**Superseded next action:** for a genuinely controlled comparison, a future run must give two models the *same*
 piece — ideally re-composing one already completed, so the work is identical and only the model
 differs. Until then this is a log of three artifacts, not a ranking. Any run should log: elapsed time,
 whether new scaffolding was written, and what the checker caught on the first full draft.

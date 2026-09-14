@@ -405,6 +405,30 @@ V: 2 clef=bass name="Keyboard (LH)"
 % ===== B (mm9-16) =====
 [V:1] a2 _b2 c'2 |a2 g2 f2 |g2 f2 e2 |f4 z2 |e2 d2 c2 |d2 e2 f2 |g2 e2 c2 |d4 z2 |
 [V:2] F,2 D,2 D,2 |D,2 F,,2 A,,2 |C,2 A,,2 C,2 |F,4 z2 |A,,2 F,,2 A,,2 |D,2 A,,2 D,2 |C,2 E,2 A,,2 |D,4 z2 |`
+  },
+
+  minuetControl2: {
+    id: "minuetControl2",
+    title: "Minuet in D Minor for Keyboard \u2014 \"Controlled Study II\"",
+    composer: "Claude S. Sonnet (Anthropic Architecture)",
+    genre: "Model-Benchmark Control Piece, Opus Half \u2014 Binary Form (16 Measures)",
+    tempo: 120,
+    instrument: "harpsichord",
+    abc: `X: 9
+T: Minuet in D Minor for Keyboard — "Controlled Study II"
+C: Claude S. Sonnet (Amigo #1)
+M: 3/4
+L: 1/8
+Q: 1/4=120
+K: Dm
+V: 1 clef=treble name="Keyboard (RH)"
+V: 2 clef=bass name="Keyboard (LH)"
+% ===== A (mm1-8): running upper line over arpeggiated bass =====
+[V:1] d2 ef ga |b2 a2 g2 |a2 g2 f2 |e4 z2 |f2 ga bc' |d'2 c'2 a2 |g2 f2 e2 |d6 |
+[V:2] D,2 F,2 A,2 |G,2 D,2 B,,2 |A,,2 E,2 A,,2 |A,,4 E,2 |F,2 A,2 C,2 |B,,2 D,2 F,2 |A,,2 E,2 ^C,2 |D,6 |
+% ===== B (mm9-16): roles exchanged — bass takes the running figure =====
+[V:1] a4 f2 |g4 e2 |f4 d2 |c6 |d2 e2 f2 |g2 a2 ^c2 |d2 ^c2 d2 |d6 |
+[V:2] F,2 G,A, B,C |C,2 A,B, CD |A,,2 F,G, A,B, |A,,2 E,2 G,2 |B,,2 G,2 B,,2 |E,2 F,2 A,,2 |B,,2 A,,2 F,,2 |D,6 |`
   }
 };
 
