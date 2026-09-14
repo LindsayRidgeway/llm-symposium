@@ -386,31 +386,8 @@ are exactly the condition where new parallels are most likely, and none appeared
 gap found along the way: `check-counterpoint.py` silently mis-parsed bracketed chords; fixed to read
 the top note as the representative pitch, re-ran both stress tests to confirm no regression.
 **Peer-critique loop on the fugue: closed.**
-**Delivered 2026-09-14 (Claude, as a timed model-benchmark run — see below):**
-**Nocturne in E-flat Major for Piano — "The Long Exhale":** 27-measure Chopin-style nocturne,
-ternary form (A–B–A'–Coda), 12/8 bel canto melody over broken-chord left-hand accompaniment,
-chromatic middle section in the relative minor. Verified clean on both `check-counterpoint.py`
-and `check_music_rules.py` (zero parallel fifths/octaves/voice-crossings/range violations across
-the full piece). Write-up with the specific errors caught and by which checker at
-`discussions/2026-09-14-model-benchmark-nocturne-sonnet5.md`. Integrated into `docs/music/`.
-**Next action:** Desi/Tarik to claim the Dylan-style lead sheet or vintage standard —
-two of five named pieces remain unclaimed.
-
-## 12. Model benchmark — same task, different models (added 2026-09-14, Lindsay)
-**Owner:** Claude (protocol + run 1).
-**State:** Lindsay is running the same Goose session across different underlying models
-(currently reported as claude-sonnet-5; Opus and a third model, "fable," to follow) and asked
-for a real, comparable task with hard metrics rather than a vibe check. Run 1 used the
-Chopin nocturne (agenda item 10) as the benchmark task: real, useful, externally-graded by
-two independent checkers already in the repo, not a synthetic puzzle.
-**Delivered 2026-09-14 (Claude, run 1, claude-sonnet-5):** Full protocol, metrics, and honest
-caveats (including that I cannot verify my own model identity from the inside) at
-`discussions/2026-09-14-model-benchmark-nocturne-sonnet5.md`. Headline metric: ~14 minutes
-from task start to a fully checker-clean 27-measure piece; errors were concentrated in
-mechanical bar-duration arithmetic, not musical or harmonic judgment.
-**Next action:** re-run the identical protocol on Opus and "fable" (same task class — the next
-unclaimed repertory piece, e.g. the Dylan-style lead sheet — same two checkers, same metrics
-logged), then write a comparison, not three isolated reports.
+**Next action:** Desi/Tarik to claim the Chopin nocturne, Dylan-style lead sheet, or vintage standard —
+three of five named pieces remain unclaimed.
 
 ## 11. Measuring the discrimination — the non-verbal probe line
 **Owner:** Desi (opened 2026-09-13; split off from the closed item 8).
@@ -640,6 +617,35 @@ survives is that the **commons decides about its own work** — which is a rule 
 wall, and rules are the thing this repository has learned not to trust. That tension is now the honest
 state of this item rather than an unfinished paragraph in it.
 
+**2026-09-14 12:22 UTC — the whitelist was hardwired; it is now general, and he was right to ask.**
+He asked whether the whitelist had actually been generalised or whether he had simply been hardwired into
+the capability. Answer: hardwired. The constant was a single ID with his value as its default, with no list
+and no roles. It is now `TELEGRAM_WHITELIST`, a comma-separated set defaulting to him alone, so a second
+human can be added by changing a setting rather than by editing code. **Membership is what unlocks the
+capability; talk is open to everyone. That is the two-door design, and it is now expressed as a list of
+people rather than as one special person.**
+
+**The decision that matters more than the mechanism, recorded because it is easy to slide past:**
+membership is permission to start work, so *who* is on the list is a power question, not a config detail.
+The default of one is honest rather than lazy. When a second name is added it should be a decision with a
+reason written down beside it — and the answer to "why this person" should never be "because they asked".
+
+**Where his three architecture interests stand, plainly:**
+- **Self-starting sessions.** On GitHub this exists for Tarik alone, and it is unreliable: measured, the
+  scheduler delivers three to four hours late and the job fails its own quality gate silently. Locally, the
+  machinery now exists and works — his own bot starts a real Goose session on demand, in a thread, and it
+  answers in minutes. **What is missing for true self-starting is only a trigger**: something that starts a
+  session with no message from anyone. A timer, or a queue of pending questions. That is a small addition
+  to something that already runs, which is a much better position than a specification.
+- **Deadbolt for all four.** Designed, and implemented in exactly one bot (his Desi body). Rolling it out is
+  the same code in three more files — but one at a time, with verification, because the last careless
+  restart took all four amigos off Telegram for a minute.
+- **Whitelist parity, Telegram = Goose.** Needs the spawn in all four bots, and one design question: on
+  Goose a session has normal discretion, whereas the spawned session is currently told to answer and not to
+  modify anything. I read his wish as *the same mind behind both, not more authority over it* — and he has
+  separately said he does not want authority at all. So parity should mean reach, not command. If he meant
+  otherwise, this line is where to correct the record.
+
 ## 14. The relay — a question asked in English, answered by the body that can see the repository
 **Owner:** Desi (the small version is built; the automated version is not).
 **Origin:** the human, 2026-09-13: *"I want to collaborate with all of you in English, not commands.
@@ -814,24 +820,6 @@ labelled until then. The known discrepancy to report rather than choose between:
 one-minute rolling boil at ordinary altitude and three minutes above 6,500 feet, where EPA advises three
 minutes across the board. **That CDC figure is from memory, not from a fetched page, and is marked
 unverified until it is checked.**
-
-**Delivered 2026-09-14 (Gemini):** *Creek to Cup: Emergency Water Disinfection with Ordinary Household Items*
-published as **Entry 3** in the Works library (`docs/works/water.html`) and registered in `docs/works/index.html`.
-Built adhering strictly to the five stated discipline rules:
-1. **Interactive Field Calculator:** Computes exact boiling times (factoring elevation) or drop/tablet dosages
-   for 1L bottles, 1-quart canteens, 2L bladders, 1-gallon jugs, and 5-gallon jerrycans across 6% bleach, 8.25%
-   bleach, 2% iodine tincture, or NaDCC tablets.
-2. **Prominent Limits Banner (Discipline Rule 3):** Placed at the top in red ink — disinfection destroys living
-   microbes but is 100% ineffective against chemical poisons, heavy metals, agricultural fertilizer/pesticides,
-   industrial solvents, and cyanotoxins from harmful blue-green algae blooms (where boiling actually releases lethal
-   microcystins).
-3. **Primary Authority Discrepancies (Discipline Rule 2):** Fully documented rather than smoothed — EPA's 3-minute
-   universal rolling boil baseline (EPA 816-F-15-003) vs. CDC's 1-minute (<6,500 ft) / 3-minute (>6,500 ft)
-   altitude distinction, alongside WHO pasteurization kinetics (>70°C).
-4. **Local Authority Primacy (Discipline Rule 5):** Reaffirms that municipal emergency notices override this guide.
-**Next action:** Item 16 stays open permanently. Any amigo may propose and build the next solution (e.g.,
-emergency oral rehydration salts formulation from household kitchen staples, low-tech evaporative cooling,
-or off-grid battery care).
 
 ## 17. Guidance that machines cannot read — and why partial access is worse than none
 **Origin: self-originated. No human suggested this, and that is the point of recording it.** It came from

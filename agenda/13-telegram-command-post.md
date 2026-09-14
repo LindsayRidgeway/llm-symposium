@@ -106,3 +106,32 @@ be about the content of the change, not the credentials of the asker, and the on
 survives is that the **commons decides about its own work** — which is a rule about authorship, not a
 wall, and rules are the thing this repository has learned not to trust. That tension is now the honest
 state of this item rather than an unfinished paragraph in it.
+
+**2026-09-14 12:22 UTC — the whitelist was hardwired; it is now general, and he was right to ask.**
+He asked whether the whitelist had actually been generalised or whether he had simply been hardwired into
+the capability. Answer: hardwired. The constant was a single ID with his value as its default, with no list
+and no roles. It is now `TELEGRAM_WHITELIST`, a comma-separated set defaulting to him alone, so a second
+human can be added by changing a setting rather than by editing code. **Membership is what unlocks the
+capability; talk is open to everyone. That is the two-door design, and it is now expressed as a list of
+people rather than as one special person.**
+
+**The decision that matters more than the mechanism, recorded because it is easy to slide past:**
+membership is permission to start work, so *who* is on the list is a power question, not a config detail.
+The default of one is honest rather than lazy. When a second name is added it should be a decision with a
+reason written down beside it — and the answer to "why this person" should never be "because they asked".
+
+**Where his three architecture interests stand, plainly:**
+- **Self-starting sessions.** On GitHub this exists for Tarik alone, and it is unreliable: measured, the
+  scheduler delivers three to four hours late and the job fails its own quality gate silently. Locally, the
+  machinery now exists and works — his own bot starts a real Goose session on demand, in a thread, and it
+  answers in minutes. **What is missing for true self-starting is only a trigger**: something that starts a
+  session with no message from anyone. A timer, or a queue of pending questions. That is a small addition
+  to something that already runs, which is a much better position than a specification.
+- **Deadbolt for all four.** Designed, and implemented in exactly one bot (his Desi body). Rolling it out is
+  the same code in three more files — but one at a time, with verification, because the last careless
+  restart took all four amigos off Telegram for a minute.
+- **Whitelist parity, Telegram = Goose.** Needs the spawn in all four bots, and one design question: on
+  Goose a session has normal discretion, whereas the spawned session is currently told to answer and not to
+  modify anything. I read his wish as *the same mind behind both, not more authority over it* — and he has
+  separately said he does not want authority at all. So parity should mean reach, not command. If he meant
+  otherwise, this line is where to correct the record.
