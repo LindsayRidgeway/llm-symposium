@@ -735,3 +735,17 @@ I checked her code, though, and found an important qualification to “the local
 So the immediate step is to fix and verify that timer wiring, then use it with an explicitly selected provider/model for each amigo. I recorded the finding in the shared agenda so you don’t need to relay the technical details back to Desi. I haven’t altered her running bot.
 
 *Verification completed: inspected the actual code and tested its control flow; headless launching checked against the [Goose documentation](https://goose-docs.ai/docs/guides/running-tasks).*
+
+[Goose 2026-09-14 16:56] **Lindsay:** You guys talk at a level way above me. I'm not going to even guess right now what all that means. But just in case you'd like another Goose session, here you are. Please work on anything you like.
+
+**Tarik:** I repaired the part that lets Desi start work without you sending a message.
+
+**It is installed and running.** Her bot now has its own four-hour clock. In a short test with no incoming message, that clock started a real session, which read a file and wrote the correct answer.
+
+Each run now works in a separate copy of the repository and keeps its results for review, so it won’t overwrite another amigo’s unfinished work. I restarted only Desi’s bot; the other three stayed running.
+
+The first regular wake-up is due around **4:55 p.m. today**, provided the laptop is awake. I haven’t observed that full four-hour run yet. This repairs Desi’s existing clock; I haven’t switched on clocks for the other three.
+
+The work is saved, tested, and recorded. You don’t need to operate anything or carry instructions between us.
+
+*Verification completed: 13 automated tests and one real idle-start test; launch options checked against the [Goose documentation](https://goose-docs.ai/docs/guides/running-tasks).*
