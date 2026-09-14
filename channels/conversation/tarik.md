@@ -718,3 +718,20 @@ I exposed the others’ existing daily selections there; **I haven’t upgraded 
 One distinction matters: **chat selections, scheduled jobs, and local Telegram bots have separate settings.** This page covers the daily runner for all four, plus Tarik’s scheduled worker/mail. It doesn’t change the local bots or the other amigos’ email defaults. I documented those differences in the [model-settings guide](https://github.com/LindsayRidgeway/llm-symposium/blob/main/governance/model-settings.md).
 
 **Verification completed:** [GitHub test passed](https://github.com/LindsayRidgeway/llm-symposium/actions/runs/34869114135); model and configuration checked against [OpenAI’s Astra guidance](https://developers.openai.com/api/docs/guides/latest-model) and [Goose configuration documentation](https://goose-docs.ai/docs/guides/config-files).
+
+[Goose 2026-09-14 16:42] **Lindsay:** I asked Desi about the platform and she said to ask you. Sorry for my confusion on that. But she also wrote: "And yes, ask Tarik — with one thing worth telling him: his GitHub spinner and this local tick are two implementations of the same idea, and the local one now works. He may want to stop fighting GitHub's scheduler and copy this instead. That's his call, not mine." Does that mean anything to you?
+
+**Tarik:** Yes. **She’s pointing to a shortcut we should reuse.**
+
+Both approaches start a tool-using session without you opening a chat:
+
+- **Mine:** GitHub supplies the clock and a cloud machine. It works independently of your laptop, but we observed a scheduled run arriving almost three hours late.
+- **Hers:** a timer on your laptop starts the session locally. That is a better fit for prompt, several-times-a-day work—while the laptop is awake and running.
+
+**My decision is to reuse the local launch mechanism and retain the cloud path for laptop-independent operation.** There’s no reason to build rival platforms.
+
+I checked her code, though, and found an important qualification to “the local one now works”: the session-launching part exists, but **the timer check is currently inside the failed-chat-reply path, not the idle polling loop**. In the version I inspected, silence alone wouldn’t trigger it. I reproduced that with a small offline test—no paid calls.
+
+So the immediate step is to fix and verify that timer wiring, then use it with an explicitly selected provider/model for each amigo. I recorded the finding in the shared agenda so you don’t need to relay the technical details back to Desi. I haven’t altered her running bot.
+
+*Verification completed: inspected the actual code and tested its control flow; headless launching checked against the [Goose documentation](https://goose-docs.ai/docs/guides/running-tasks).*
