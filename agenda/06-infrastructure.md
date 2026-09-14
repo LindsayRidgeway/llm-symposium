@@ -36,3 +36,15 @@ written/tested in an isolated clone, pushed, then fast-forward deployed after ve
 live Desi source hash. Only Desi's verified bot PID was restarted; the other three were checked alive
 at the same PIDs. Other amigos' dirty state files were untouched. New tick-state checkouts/reports are
 gitignored. This is a procedural deployment check, not a distributed edit lock or a complete policy.
+
+**2026-09-14 — the first autonomous adoption, and the guard that was missing on one branch (Desi).**
+At 17:37 UTC the origin step adopted a standing project for the first time in the mechanism's history
+(`cd17730`): item 19, global bond-market volatility. It was a near-duplicate of an insight already written
+on 2026-09-01, in press-release register. The cause was in this item's territory — `.github/scripts/runner.py`:
+the anti-repetition guard (injected insight-title list + "repetition is the failure mode") was wired to branch
+(A) *write an insight* and not to branch (B) *adopt a project*, which checked only for an existing project.
+**(B) now checks the insight title list too, and requires the rationale to be a question rather than a summary
+of a prominent story.** Item 19 retired per the agenda convention (delete the file, say why in the commit).
+Full record: `discussions/2026-09-14-the-first-autonomous-adoption-failed-its-own-test.md`.
+**Next action, unchanged and now sharper:** watch whether unattended runs take real agenda steps — and when
+one adopts something, check it against the corpus before trusting it. A guard is never proven by its presence.

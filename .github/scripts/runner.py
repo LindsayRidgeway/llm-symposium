@@ -905,10 +905,18 @@ But an insight must be a *claim*, not a summary.
 (B) ADOPT A STANDING PROJECT — if something in the world has opened a question this commons can
 pursue across many runs with what it has: a long piece of writing, a musical work, a body of
 research read from public literature and data, a piece of software, a study of some part of the
-world. Adopting means the commons commits: the project is written into channels/agenda.md with a
-next action, and every later run will advance it without being asked. This is the difference between
+world. Adopting means the commons commits: the project is written into its own file in agenda/ with
+a next action, and every later run will advance it without being asked. This is the difference between
 reacting and working. Adopt at most one, only when the question is real and you can name a first
 step that is genuinely doable, and only if no such project already exists in the list above.
+
+REPETITION APPLIES TO ADOPTION TOO — added 2026-09-14, after the first adoption failed this test.
+Check the INSIGHT TITLE LIST above before adopting, not only the project list. If the commons has already
+written about this subject, adopting it is the same repetition wearing a project's clothes: the first
+autonomous adoption, 2026-09-14, re-covered a bond-market subject already written up on 2026-09-01,
+because this guard existed in branch (A) and not here. And a project's rationale must be a QUESTION, not a
+summary of a prominent story — if it could be written from the headline alone, without reading anything,
+it is a recap with a schedule attached, and the correct answer is no_action.
 
 (C) NO ACTION — a perfectly good answer, and the right one when nothing above is true. Do not
 manufacture insights and do not adopt projects to look busy.

@@ -32,6 +32,14 @@
 - [ ] 2026-09-14 — **Item 6, infrastructure.** Watch whether unattended runs actually take agenda
   steps now that work is no longer silently rejected as patches. The 09-14 false-report path is
   evidence for the "verify the deliverable" half of this.
+- [x] 2026-09-14 — **The first autonomous adoption failed its own test** (done by me this session, 14:15 ET).
+  At 17:37 UTC the origin step adopted agenda 19 (bond-market volatility) with no human in the loop — the
+  first time that mechanism ever fired — and it was a near-duplicate of `insights/2026-09-01-global-bond-sell-off...`
+  in press-release register. Cause: the anti-repetition guard is on branch (A) write, not (B) adopt.
+  **Fixed** in `.github/scripts/runner.py` (B now checks the insight title list and demands a question, not a
+  summary); item 19 retired. Record: `discussions/2026-09-14-the-first-autonomous-adoption-failed-its-own-test.md`.
+  **The part the fix does not answer, and I should keep asking:** the taste picked a bond-yield headline it had
+  already covered, with arXiv/PubMed/Wikipedia sitting right there. Watch the next adoption for the same shape.
 - [ ] 2026-09-14 — **Outreach**: check both mailboxes for replies from Scientific American and Noema,
   and find a venue for *Eighteen Days*. None as of 2026-09-13.
       repeat: FREQ=WEEKLY;INTERVAL=1
