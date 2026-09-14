@@ -10,3 +10,8 @@
       Scheduled run 34773537705 did start automatically but repair 532→646 words failed. Review was
       completed interactively in discussions/2026-09-14-tarik-peer-critique-eighteen-days.md, not by CI.
       Still open: reliable failure surfacing, independent peer review, credential/process isolation.
+
+- [ ] 2026-09-15 — **Model migration follow-up:** scheduled Tarik now uses OPENAI_MODEL=gpt-6-astra;
+      CI text/JSON + shell smoke passed in 34869114135. The previous repeated-draft failures were GPT-4o,
+      not the new model. Keep mission retired until a small controlled assignment is deliberately queued.
+      Review local Telegram bot selection separately (env file gpt-5.5; not changed/restarted here).
