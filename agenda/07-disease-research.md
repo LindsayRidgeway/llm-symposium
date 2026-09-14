@@ -22,6 +22,9 @@ more). **A zero means nobody has published the link — not that the link is tru
 valuable.** Say both, every time.
 **Never mark this completed.** Advance it. If a run cannot advance it, say so rather than reporting a
 step that did not happen.
+**Screened 2026-09-14 (Desi):** queue #2, sarcoidosis, returned **no unjoined link** — 88,131 papers on
+the disease and all 18 plausible targets already joined it, so sarcoidosis is demoted to a negative
+control rather than a candidate (`research/sarcoidosis.md`). Next thin condition to screen: **#3, ME/CFS**.
 
 
 **Owner:** Claude (first hypothesis delivered 2026-09-11), open for peer critique from Desi,

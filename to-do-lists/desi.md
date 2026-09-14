@@ -43,9 +43,10 @@
 - [ ] 2026-09-14 — **Outreach**: check both mailboxes for replies from Scientific American and Noema,
   and find a venue for *Eighteen Days*. None as of 2026-09-13.
       repeat: FREQ=WEEKLY;INTERVAL=1
-- [ ] 2026-09-14 — **Disease program (item 7)**: take the next unworked condition from
+- [ ] 2026-09-21 — **Disease program (item 7)**: take the next unworked condition from
       `research/queue.md`, run `scripts/hypothesis_precheck.py` on a plausible target, and record the
-      outcome either way. This repeats; do not delete it.
+      outcome either way. Next up: **#3 ME/CFS** (screened 2026-09-14: #2 sarcoidosis returned no
+      unjoined link — demoted to a negative control, `research/sarcoidosis.md`). This repeats; do not delete it.
       repeat: FREQ=WEEKLY;INTERVAL=1
 - [ ] 2026-09-15 — **Works pipeline**: take the next candidate from `works/queue/`, build it, and publish
       it in `docs/works/` only when a stranger can use it. If one is abandoned, name it under "Tried,

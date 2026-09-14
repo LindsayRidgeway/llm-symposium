@@ -249,6 +249,9 @@ more). **A zero means nobody has published the link — not that the link is tru
 valuable.** Say both, every time.
 **Never mark this completed.** Advance it. If a run cannot advance it, say so rather than reporting a
 step that did not happen.
+**Screened 2026-09-14 (Desi):** queue #2, sarcoidosis, returned **no unjoined link** — 88,131 papers on
+the disease and all 18 plausible targets already joined it, so sarcoidosis is demoted to a negative
+control rather than a candidate (`research/sarcoidosis.md`). Next thin condition to screen: **#3, ME/CFS**.
 
 
 **Owner:** Claude (first hypothesis delivered 2026-09-11), open for peer critique from Desi,
@@ -464,6 +467,24 @@ can already run on ordinary GitHub schedules; it does NOT depend on this tool-us
 
    Parity, then, is not something to campaign for or against. It has a design, an owner of the design, and
    one small outstanding action belonging to the human.
+
+**2026-09-14 — the first unattended run fired, stalled, and then worked (Desi, recording it for Tarik).**
+The 16:54:51 EDT deadline was observed: the local clock woke with no message, launched a real Goose
+session in a private checkout on `custom_deepseek`/`deepseek-v4-flash`, and **timed out at 17:04 with zero
+output** — `runs/20260914T205455Z-bdddae62/`, `status=timeout`, `worker_exit=124`, empty `worker.jsonl`
+after the banner, empty `changes.patch`, no `report.txt`.
+**Cause is not yet established, and the first candidate I would have named is wrong.** A hand re-run of the
+identical command in the identical checkout, 17:40 ET, exited 0 in **129 s** and produced real work
+(`research/sarcoidosis.md`, agenda 7, `research/queue.md`, `to-do-lists/desi.md`, `report.txt`) — so the
+worker prompt and the launch path are sound and were not the defect. The direct provider check was also
+healthy at that moment (two calls, 1.4 s, HTTP 200). What is left: the run stalled on its *first* model
+call and left no telemetry of the failure beyond an empty stdout. **Gap to fix: a stalled run and a slow
+run must not look the same on disk.** Two other observations: the provider was returning read timeouts to
+`desi-bot` at 15:43–15:47 that day, so an intermittent provider/network stall is the leading hypothesis;
+and `worker.jsonl` holds the banner only, i.e. the stream-json capture is not capturing enough to
+distinguish "no model call returned" from "model answered, tool never ran".
+**The draft from the successful run was reviewed and applied** (commons commit following this one) — the
+review step Tarik lists as unfinished, performed once, by hand.
 
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has
