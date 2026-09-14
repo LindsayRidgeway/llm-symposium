@@ -1,0 +1,93 @@
+name: Check Tarik Scheduled Model
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GOOSE_VERSION: "v1.50.0"
+      CONFIGURE: "false"
+      GOOSE_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-6-astra' }}
+      GOOSE_PROVIDER: "openai"
+      GOOSE_DISABLE_SESSION_NAMING: "true"
+    steps:
+      - name: Install same pinned Goose as scheduled worker
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://github.com/aaif-goose/goose/releases/download/stable/download_cli.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Verify model access and text JSON with CI credential
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, urllib.request
+          from urllib.parse import quote
+          key = os.environ['OPENAI_API_KEY'].strip()
+          model = os.environ['GOOSE_MODEL']
+          headers = {'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'}
+          request = urllib.request.Request('https://api.openai.com/v1/models/' + quote(model, safe=''), headers=headers)
+          with urllib.request.urlopen(request, timeout=20) as response:
+              catalog = json.load(response)
+          assert catalog['id'] == model
+          payload = {'model': model, 'messages': [{'role': 'user', 'content': 'Return a JSON object with ok set to true. Nothing else.'}],
+                     'response_format': {'type': 'json_object'}, 'max_completion_tokens': 512}
+          request = urllib.request.Request('https://api.openai.com/v1/chat/completions',
+                                           data=json.dumps(payload).encode(), headers=headers)
+          with urllib.request.urlopen(request, timeout=60) as response:
+              result = json.load(response)
+          assert json.loads(result['choices'][0]['message']['content'])['ok'] is True
+          print(json.dumps({'requested_model': model, 'returned_model': result['model'], 'text_json_ok': True, 'usage': result.get('usage')}))
+          PY
+
+      - name: Verify actual Goose tool execution in scratch directory
+        timeout-minutes: 2
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GOOSE_PATH_ROOT: ${{ runner.temp }}/goose-model-check
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/model-check-work"
+          cd "$RUNNER_TEMP/model-check-work"
+          printf '7 11\n' > input.txt
+          cat > "$RUNNER_TEMP/model-check.md" <<'EOF'
+          Use the shell tool to read input.txt in the current directory, add the two integers, and write the sum followed by a newline to result.txt. Then say DONE. Do not read any other files or directories. Do not ask questions.
+          EOF
+          goose run --with-builtin developer --instructions "$RUNNER_TEMP/model-check.md" --max-turns 4 --output-format stream-json > "$RUNNER_TEMP/model-check.log" 2>&1
+          test "$(cat result.txt)" = '18'
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          calls, models, usage = [], set(), []
+          for line in (Path(os.environ['RUNNER_TEMP']) / 'model-check.log').read_text().splitlines():
+              try:
+                  event = json.loads(line)
+              except ValueError:
+                  continue
+              message = event.get('message', {})
+              inference = message.get('metadata', {}).get('inference', {})
+              if inference.get('requestedModel'):
+                  models.add(inference['requestedModel'])
+              for content in message.get('content', []):
+                  if content.get('type') == 'toolRequest':
+                      calls.append(content.get('toolCall', {}).get('value', {}).get('name'))
+              if event.get('type') == 'complete':
+                  usage.append(event)
+          assert 'shell' in calls
+          assert os.environ['GOOSE_MODEL'] in models
+          report = {'tool_smoke_ok': True, 'requested_models': sorted(models), 'tool_calls': calls, 'result': '18', 'telemetry_estimate_not_invoice': usage}
+          print(json.dumps(report))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('Tarik model smoke passed: ' + os.environ['GOOSE_MODEL'] + '. Text JSON and shell execution checked with CI credential. No repository or mail changes.\n')
+          PY

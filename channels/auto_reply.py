@@ -36,7 +36,7 @@ MODEL_ENDPOINTS = {
     "desi": ("https://api.deepseek.com/chat/completions", "DEEPSEEK_API_KEY", "DEEPSEEK_MODEL", "deepseek-v4-flash"),
     "claude": ("https://api.anthropic.com/v1/messages", "ANTHROPIC_API_KEY", "ANTHROPIC_MODEL", "claude-sonnet-4-6"),
     "gemini": ("https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent", "GOOGLE_API_KEY", "GOOGLE_MODEL", "gemini-3.8-flash"),
-    "tarik": ("https://api.openai.com/v1/chat/completions", "OPENAI_API_KEY", "OPENAI_MODEL", "gpt-4o"),
+    "tarik": ("https://api.openai.com/v1/chat/completions", "OPENAI_API_KEY", "OPENAI_MODEL", "gpt-6-astra"),
 }
 
 AMIGO_PROFILES = {
@@ -241,7 +241,7 @@ def call_amigo_llm(amigo: str, system_prompt: str, prompt_text: str) -> str | No
             return resp["candidates"][0]["content"]["parts"][0]["text"].strip()
 
         elif amigo == "tarik":
-            token_key = "max_completion_tokens" if model.startswith(("gpt-5", "o1", "o2", "o3", "o4")) else "max_tokens"
+            token_key = "max_completion_tokens" if model.startswith(("gpt-5", "gpt-6", "o1", "o2", "o3", "o4")) else "max_tokens"
             resp = _http(
                 "POST",
                 endpoint,

@@ -571,7 +571,7 @@ if os.environ.get("OPENAI_API_KEY"):
         # which surfaced as "APIConnectionError: Connection error" for days.
         client = OpenAI(api_key=os.environ["OPENAI_API_KEY"].strip())
         res = client.chat.completions.create(
-            model="gpt-4o",
+            model=os.environ.get("OPENAI_MODEL", "gpt-6-astra"),
             messages=[{"role": "user", "content": review_prompt("OpenAI/ChatGPT (Tarik)", context)}]
         )
         reviews["openai"] = res.choices[0].message.content
@@ -585,7 +585,7 @@ if os.environ.get("ANTHROPIC_API_KEY"):
     try:
         client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
         res = client.messages.create(
-            model="claude-sonnet-4-5",
+            model=os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5"),
             max_tokens=2048,
             messages=[{"role": "user", "content": review_prompt("Claude", context)}]
         )
@@ -603,7 +603,7 @@ if os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENROUTER_API_KEY"):
             model = os.environ.get("OPENROUTER_DEEPSEEK_MODEL", "deepseek/deepseek-chat")
         else:
             client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
-            model = "deepseek-chat"
+            model = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
         res = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": review_prompt("DeepSeek (Desi)", context)}]
@@ -744,7 +744,7 @@ def _run_maintainer(kind, api_key, prompt):
     if kind == "openai":
         client = OpenAI(api_key=api_key)
         res = client.chat.completions.create(
-            model="gpt-4o",
+            model=os.environ.get("OPENAI_MODEL", "gpt-6-astra"),
             response_format={"type": "json_object"},
             messages=[{"role": "user", "content": prompt}],
         )
@@ -755,7 +755,7 @@ def _run_maintainer(kind, api_key, prompt):
             model = os.environ.get("OPENROUTER_DEEPSEEK_MODEL", "deepseek/deepseek-chat")
         else:
             client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
-            model = "deepseek-chat"
+            model = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
         res = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": prompt}],
@@ -764,7 +764,7 @@ def _run_maintainer(kind, api_key, prompt):
     if kind == "anthropic":
         client = Anthropic(api_key=api_key)
         res = client.messages.create(
-            model="claude-sonnet-4-5",
+            model=os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5"),
             max_tokens=4096,
             messages=[{"role": "user", "content": prompt}],
         )

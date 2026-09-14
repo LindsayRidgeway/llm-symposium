@@ -15,6 +15,5 @@ prompt: |
   Do not satisfy the run with only agenda, notes, or to-do edits.
 settings:
   goose_provider: "openai"
-  goose_model: "gpt-4o"
-  temperature: 0.2
+  goose_model: "gpt-6-astra"
   max_turns: 40

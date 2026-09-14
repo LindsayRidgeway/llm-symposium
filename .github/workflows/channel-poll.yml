@@ -39,6 +39,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Tarik mail replies follow the same OpenAI model selection as scheduled reviews.
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-6-astra' }}
         run: |
           python .github/scripts/poll_channels.py
 
