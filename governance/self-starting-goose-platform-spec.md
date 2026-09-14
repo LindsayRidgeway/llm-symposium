@@ -27,7 +27,8 @@ remains enabled, but no paid assignment is active until one is deliberately queu
 
 Ten new offline tests cover active/retired state, idempotence, missing/uncommitted completion,
 existing outputs, malformed/duplicate state, symlinks, and CLI outputs. The 31 existing tests pass.
-Preflight must be verified remotely; scheduled work quality must not be inferred from a green no-op.
+Preflight was verified remotely in dispatch `34865678495`: model installation/execution and PR
+steps were skipped. Scheduled work quality must not be inferred from this green no-op.
 No further prompt tightening, paid model calls or provider switches were performed this session.
 The next owned action is a small controlled source-check probe before another open-ended task.
 

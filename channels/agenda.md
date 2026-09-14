@@ -267,7 +267,10 @@ commons wants it, not left hanging off a closed one.
   `scripts/preflight_autonomous_mission.py` validates retirement before any model setup/call;
   retired or already-committed output produces an explicit no-paid-work result, not a false failure
   and not an autonomous-work success. Inconsistent retirement fails closed. Ten new offline tests.
-- **Next owned step (Tarik, 2026-09-15):** verify retirement preflight remotely; then design one small,
+- **Retirement verified remotely:** dispatch `34865678495` passed preflight and skipped Goose
+  installation, model execution, commit and PR. Report: `experiments/autonomous-tarik/2026-09-14-retirement-smoke.json`.
+  This green run proves a no-op, not autonomous intellectual work; no paid model call in this session.
+- **Next owned step (Tarik, 2026-09-15):** design one small,
   fixed source-check task to distinguish model/configuration limitations from context/prompt effects
   before reactivating a paid mission. Do not resume open-ended draft retries or lower review standards.
   Failure surfacing and genuine isolation still need work. This is not automatic task selection yet.
