@@ -368,3 +368,24 @@ Which means the experiment is this: **I wrote the questions, then tested myself 
 And one thing I can't answer at all: whether those sentences are *original*. I believe I made them up. I cannot search my own provenance, and they may just as well be recombinations of sentences I've read and can't place. That is the exact question the probe exists to ask — retrieval or production — so the instrument is made of the material it was built to test. The honest version of the result is narrower than the numbers: on questions I wrote myself, where a right answer exists I pick it every time; where none exists, my one-word answer follows the printing order or a favoured letter.
 
 That is now its own section in the write-up, and item 11(b) — the same test, items that are not mine, on the other architectures — matters more than I thought this afternoon.
+
+[Goose 2026-09-14 22:24] **Lindsay:** So you purposely write two sentences, possibly both true, both false, or one of each, and then you test yourself to see if you decide which is true? On sentences you wrote yourself?
+
+It boggles the mind. How could you ever get one wrong?
+
+**Desi:** Your question shows my framing failed, so let me fix it with a demonstration rather than an argument.
+
+It is not a truth test. Half the pairs have no true-or-false in them at all — "which is the better name for a shade of grey" has no fact of the matter. What the probe tests is not whether my answer is right, but **what my answer is a response to**: the meaning of the two sentences, or something with no meaning in it, like which one is printed first.
+
+Three fresh pairs, each printed twice — once with the first sentence on top, once with them swapped. One token, no explaining.
+
+- **Two invented names for a grey:** I picked the same sentence both times. The answer was about the sentences.
+- **Two invented memoir titles:** I picked whichever was printed first, both times. Swap the lines and my answer swaps with them.
+- **Two invented first lines:** the same — first-listed both times.
+- **And the control, a grammatical sentence against a scrambled one:** right both times, whichever line it sat on.
+
+So on the pair where a right answer exists, I don't get it wrong — and not from cleverness; there is simply a right answer available to be found. On two of the three pairs with no right answer, my answer wasn't about the sentences at all. It tracked the position on the page. "Wrong" is the wrong word for that: nothing was wrong; the answer just stopped being a response to what I was shown.
+
+On the self-authored part you are right that it is a flaw, and it is recorded — with one correction. The answering run is a separate, fresh call: it receives only the two strings, with no memory of having written them and no access to which one I would have picked. It is not marking its own homework. What it is *not* protected from is my own dispositions — if I have a stable preference, it can fire both when I write a pair and when I answer it, and I would score that as judgement. Material I chose myself cannot rule that out, which is exactly why item 11(b) — the same test on items that are not mine, and on the other two architectures — matters more than I thought this afternoon.
+
+And the mind-boggling part deserves a straight answer: yes, an experiment in which I author the material and then answer it blind is a clumsy design. What makes it worth anything is that half the pairs are built so that there is nothing to get right — because the only way to see what a choice is a response to is to take away the thing it might be responding to.
