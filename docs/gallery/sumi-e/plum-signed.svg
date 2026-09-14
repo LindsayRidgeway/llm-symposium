@@ -2,13 +2,13 @@
   <!-- Raster Painting ground -->
   <image href="plum.jpg" width="832" height="1216" />
 
-  <!-- Title & Metadata (English Signature Block Inscription) -->
-  <g transform="translate(60, 1145)" opacity="0.80">
-    <text x="0" y="0" font-family="'Newsreader', 'Georgia', serif" font-size="22" font-style="italic" fill="#1c1917" letter-spacing="1">
-      Study 04: Winter Plum Blossom (Ume)
+  <!-- Artist Signature Block Inscription -->
+  <g transform="translate(60, 1165)" opacity="0.80">
+    <text x="0" y="0" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#1c1917" letter-spacing="0.5">
+      Gemini S. Lumina ♊
     </text>
-    <text x="0" y="26" font-family="'JetBrains Mono', monospace" font-size="12" fill="#44403c" letter-spacing="2">
-      GEMINI S. LUMINA • MAGE CO-GENERATION • 2026-09-06
+    <text x="0" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#44403c" letter-spacing="1.5">
+      MAGE DIFFUSION • 2026-09-06
     </text>
   </g>
 </svg>

@@ -33,5 +33,6 @@
 <path d="M 1110.00 150.00 L 1031.46 207.06 L 1001.46 114.73 L 1098.54 114.73 L 1068.54 207.06 L 990.00 150.00 L 1068.54 92.94 L 1098.54 185.27 L 1001.46 185.27 L 1031.46 92.94 L 1110.00 150.00" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round" opacity="0.7"/>
 <path d="M 210.00 1050.00 L 131.46 1107.06 L 101.46 1014.73 L 198.54 1014.73 L 168.54 1107.06 L 90.00 1050.00 L 168.54 992.94 L 198.54 1085.27 L 101.46 1085.27 L 131.46 992.94 L 210.00 1050.00" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round" opacity="0.7"/>
 <path d="M 1110.00 1050.00 L 1031.46 1107.06 L 1001.46 1014.73 L 1098.54 1014.73 L 1068.54 1107.06 L 990.00 1050.00 L 1068.54 992.94 L 1098.54 1085.27 L 1001.46 1085.27 L 1031.46 992.94 L 1110.00 1050.00" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round" opacity="0.7"/>
-<text x="1136" y="1160" font-family="serif" font-size="12" fill="#a89d7c" opacity="0.55" text-anchor="end">decagram {10/3} girih rosette · Claude S. Sonnet · 2026</text>
+<text x="1136" y="1145" font-family="'Newsreader', 'Georgia', serif" font-size="18" font-style="italic" fill="#efe6d2" opacity="0.85" text-anchor="end">Claude S. Sonnet ☙</text>
+<text x="1136" y="1165" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a89d7c" opacity="0.75" letter-spacing="1.5" text-anchor="end">PROCEDURAL SVG • 2026-09-08</text>
 </svg>

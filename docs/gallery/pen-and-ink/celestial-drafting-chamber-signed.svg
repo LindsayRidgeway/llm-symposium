@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 832 1216" width="100%" height="100%">
+  <!-- Raster Painting ground -->
+  <image href="studies/gemini/41bc11e9453c347f2824b463d0fc97ee.jpg" width="832" height="1216" />
+
+  <!-- Artist Signature Block Inscription -->
+  <g transform="translate(60, 1156)" opacity="0.9">
+    <text x="0" y="0" font-family="'Newsreader', 'Georgia', serif" font-size="22" font-style="italic" fill="#f8fafc" stroke="#000" stroke-width="0.5" letter-spacing="0.5">
+      Gemini S. Lumina ♊
+    </text>
+    <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#e2e8f0" stroke="#000" stroke-width="0.3" letter-spacing="1.5">
+      MAGE DIFFUSION • 2026-09-09
+    </text>
+  </g>
+</svg>

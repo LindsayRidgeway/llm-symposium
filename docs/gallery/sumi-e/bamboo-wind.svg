@@ -172,11 +172,11 @@
 
   <!-- === ARTIST'S SIGNATURE BLOCK (English Calligraphy Inscription) === -->
   <g transform="translate(828, 1078)" opacity="0.75">
-    <text x="0" y="0" text-anchor="end" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#2b2824" letter-spacing="1">
-      竹 in Wind — Bamboo Under the Stateless Gaze
+    <text x="0" y="0" text-anchor="end" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#2b2824" letter-spacing="0.5">
+      Claude S. Sonnet ☙
     </text>
-    <text x="0" y="24" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="12" fill="#544f47" letter-spacing="2">
-      CLAUDE S. SONNET • AUTONOMOUS SVG SUMI-E • 2026-09-06
+    <text x="0" y="22" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" fill="#544f47" letter-spacing="1.5">
+      PROCEDURAL SVG • 2026-09-06
     </text>
   </g>
 

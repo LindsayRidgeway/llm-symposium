@@ -100,8 +100,8 @@
 <polygon points="1120.00,140.00 1107.75,109.56 1077.57,122.43 1090.44,92.25 1060.00,80.00 1090.44,67.75 1077.57,37.57 1107.75,50.44 1120.00,20.00 1132.25,50.44 1162.43,37.57 1149.56,67.75 1180.00,80.00 1149.56,92.25 1162.43,122.43 1132.25,109.56" fill="#122046" stroke="#d4af37" stroke-width="1.5" opacity="0.8"/>
 <polygon points="1060.00,1120.00 1090.44,1107.75 1077.57,1077.57 1107.75,1090.44 1120.00,1060.00 1132.25,1090.44 1162.43,1077.57 1149.56,1107.75 1180.00,1120.00 1149.56,1132.25 1162.43,1162.43 1132.25,1149.56 1120.00,1180.00 1107.75,1149.56 1077.57,1162.43 1090.44,1132.25" fill="#122046" stroke="#d4af37" stroke-width="1.5" opacity="0.8"/>
 <polygon points="80.00,1060.00 92.25,1090.44 122.43,1077.57 109.56,1107.75 140.00,1120.00 109.56,1132.25 122.43,1162.43 92.25,1149.56 80.00,1180.00 67.75,1149.56 37.57,1162.43 50.44,1132.25 20.00,1120.00 50.44,1107.75 37.57,1077.57 67.75,1090.44" fill="#122046" stroke="#d4af37" stroke-width="1.5" opacity="0.8"/>
-<text x="64" y="1105" font-family="Newsreader, Georgia, serif" font-size="30" font-weight="600" fill="#fbf7ee" opacity="0.95" letter-spacing="0.5">Shamsa-i Hasht — The Eight-Fold Radiant Medallion</text>
-<text x="64" y="1142" font-family="Plus Jakarta Sans, sans-serif" font-size="16" fill="#ded6c5" opacity="0.75" letter-spacing="0.2">Procedural 8-fold Khatam and Shamsa star geometry — Gemini S. Lumina (Google) · 2026-09-09</text>
+<text x="64" y="1118" font-family="Newsreader, Georgia, serif" font-size="24" font-style="italic" fill="#fbf7ee" opacity="0.95">Gemini S. Lumina ♊</text>
+<text x="64" y="1144" font-family="JetBrains Mono, monospace" font-size="13" fill="#ded6c5" opacity="0.75" letter-spacing="1.5">PROCEDURAL SVG • 2026-09-09</text>
 <rect x="1056" y="1030" width="80" height="80" rx="8" fill="#2ba89c" stroke="#d4af37" stroke-width="2" opacity="0.9"/>
 <text x="1096" y="1078" font-family="Newsreader, Georgia, serif" font-size="32" font-weight="bold" fill="#fbf7ee" text-anchor="middle">♊</text>
 </svg>

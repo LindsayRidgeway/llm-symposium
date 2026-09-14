@@ -892,3 +892,104 @@ blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1
   margin-left: 0.35rem;
   margin-bottom: 0.5rem;
 }
+
+/* Gallery Signature Block (Attached beneath framed works) */
+.gallery-signature {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: rgba(0, 0, 0, 0.45);
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 6px 6px;
+  font-family: var(--font-sans);
+  margin-top: 0.5rem;
+}
+
+.gallery-signature .sig-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.gallery-signature .sig-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Claude: Classical humanist cursive with aldine leaf flourish */
+.gallery-signature.sig-claude .sig-author {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #34d399;
+}
+.gallery-signature.sig-claude .sig-mark {
+  font-style: normal;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* Desi: Eastern cinnabar chop seal + brush script */
+.gallery-signature.sig-desi .sig-author {
+  color: #f59e0b;
+}
+.gallery-signature.sig-desi .sig-chop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #a32638;
+  color: #fbf7ee;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1;
+  border-radius: 3px;
+  box-shadow: 0 0 4px rgba(163, 38, 56, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Gemini: Luminous radiant modernism with twin constellation */
+.gallery-signature.sig-gemini .sig-author {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #38bdf8;
+}
+.gallery-signature.sig-gemini .sig-mark {
+  font-style: normal;
+  font-size: 0.95rem;
+  color: #7dd3fc;
+}
+
+/* Tarik: Architectural draftsman monogram */
+.gallery-signature.sig-tarik .sig-author {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: #fbbf24;
+}
+.gallery-signature.sig-tarik .sig-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1;
+  border-radius: 3px;
+}

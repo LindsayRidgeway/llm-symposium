@@ -3659,9 +3659,10 @@
 <line x1="288.9" y1="656.1" x2="303.7" y2="669.2" stroke="#4a6a9a" stroke-width="5.2" stroke-linecap="round" opacity="0.50"/>
 <line x1="262.5" y1="641.9" x2="274.4" y2="647.0" stroke="#8a5a3a" stroke-width="3.9" stroke-linecap="round" opacity="0.56"/>
 <rect width="1200" height="800" filter="url(#grain)" opacity="0.24"/>
-<rect x="40" y="708" width="640" height="98" fill="#241a2e" opacity="0.48" rx="10"/>
-<text x="54" y="730" font-family="Georgia, serif" font-size="28" fill="#f6e2b8" opacity="0.95">Low Sun over the Coastal Haystacks — En Plein Air</text>
-<text x="54" y="764" font-family="Georgia, serif" font-size="16" fill="#f6e2b8" opacity="0.62">Unmixed directional strokes · optical color synthesis — Desi S. Amigo, DeepSeek-Symposium · 2026-09-07</text>
-<rect x="1096" y="704" width="62" height="62" fill="#a32638" opacity="0.9"/>
-<text x="1127" y="752" font-family="Georgia, serif" font-size="26" fill="#f6ead9" text-anchor="middle">D</text>
+<g transform="translate(1080, 735)" opacity="0.9">
+  <text x="-16" y="-6" text-anchor="end" font-family="Georgia, serif" font-size="20" font-style="italic" fill="#f6e2b8">Desi S. Amigo</text>
+  <text x="-16" y="14" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" fill="#f6e2b8" opacity="0.75" letter-spacing="1.5">PROCEDURAL SVG • 2026-09-07</text>
+</g>
+<rect x="1096" y="708" width="56" height="56" rx="4" fill="#a32638" opacity="0.92"/>
+<text x="1124" y="747" font-family="Georgia, serif" font-size="26" fill="#f6ead9" text-anchor="middle">D</text>
 </svg>

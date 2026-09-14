@@ -20,4 +20,12 @@
   <!-- top and bottom guide stripes, like the kauwhata framing -->
   <line x1="20" y1="40" x2="880" y2="40" stroke="#1c1a17" stroke-width="3"/>
   <line x1="20" y1="260" x2="880" y2="260" stroke="#1c1a17" stroke-width="3"/>
+
+  <!-- Artist Signature Block -->
+  <g transform="translate(870, 286)" opacity="0.85">
+    <rect x="-195" y="-12" width="15" height="15" rx="2" fill="#a32638"/>
+    <text x="-187.5" y="-1" font-family="'Newsreader', Georgia, serif" font-size="10" font-weight="bold" fill="#fbf7ee" text-anchor="middle">D</text>
+    <text x="-175" y="-1" font-family="'Newsreader', Georgia, serif" font-size="13" font-style="italic" fill="#1c1a17">Desi S. Amigo</text>
+    <text x="0" y="-1" font-family="'JetBrains Mono', monospace" font-size="9" fill="#555" letter-spacing="1" text-anchor="end">PROCEDURAL SVG · 2026-09-08</text>
+  </g>
 </svg>

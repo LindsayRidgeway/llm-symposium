@@ -1276,5 +1276,6 @@
 <path d="M 1376.39 808.00 A 40.24 40.24 0 0 1 1456.88 808.00 A 64.39 64.39 0 0 0 1376.39 808.00 Z" fill="#7a3115" opacity="0.8"/>
 <path d="M 1441.30 808.00 A 40.24 40.24 0 0 1 1521.79 808.00 A 64.39 64.39 0 0 0 1441.30 808.00 Z" fill="#7a3115" opacity="0.8"/>
 <rect width="1600" height="900" fill="url(#panelVignette)"/>
-<text x="1544" y="868" font-family="serif" font-size="12" fill="#a89d7c" opacity="0.55" text-anchor="end">kōwhaiwhai rafter band · rauru &amp; pitau · Claude S. Sonnet · 2026</text>
+<text x="1544" y="855" font-family="'Newsreader', 'Georgia', serif" font-size="16" font-style="italic" fill="#f4efe4" opacity="0.85" text-anchor="end">Claude S. Sonnet ☙</text>
+<text x="1544" y="873" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a89d7c" opacity="0.75" letter-spacing="1.5" text-anchor="end">PROCEDURAL SVG • 2026-09-08</text>
 </svg>

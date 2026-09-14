@@ -21,4 +21,7 @@
 <path d="M980 104 C898 150 861 210 845 302 C884 267 928 254 974 265" fill="none" stroke="#a82e27" stroke-width="22" stroke-linecap="round"/>
 <!-- no emblem occupies the interval; four marks register relation without closure -->
 <g fill="#171713"><circle cx="660" cy="194" r="8"/><circle cx="740" cy="194" r="8"/><circle cx="660" cy="246" r="8"/><circle cx="740" cy="246" r="8"/></g>
+
+<!-- Artist Signature Block -->
+<text x="1360" y="416" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#e7c06a" opacity="0.85" text-anchor="end">TARIK S. COMMONS ₸ · <tspan font-size="10" font-weight="400" fill="#d1d5db">PROCEDURAL SVG · 2026-09-09</tspan></text>
 </svg>

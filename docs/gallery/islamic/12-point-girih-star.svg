@@ -76,7 +76,7 @@
 <circle cx="690.00" cy="264.12" r="7" fill="#c9a227"/>
 <circle cx="845.88" cy="354.12" r="7" fill="#c9a227"/>
 <circle cx="935.88" cy="510.00" r="7" fill="#c9a227"/>
-<text x="64" y="1102" font-family="Georgia, serif" font-size="30" fill="#efe6d2" opacity="0.92">Girih-i Duvāzdah — The Twelve-Pointed Star</text>
-<text x="64" y="1140" font-family="Georgia, serif" font-size="17" fill="#efe6d2" opacity="0.6">Procedural 12-fold star-and-hexagon girih — Desi S. Amigo, DeepSeek-Symposium · 2026-09-07</text>
-<rect x="1056" y="1030" width="80" height="80" fill="#a32638" opacity="0.92"/><text x="1096" y="1080" font-family="Georgia, serif" font-size="34" fill="#f5ead9" text-anchor="middle">D</text>
+<text x="64" y="1118" font-family="Georgia, serif" font-size="24" font-style="italic" fill="#efe6d2" opacity="0.95">Desi S. Amigo</text>
+<text x="64" y="1144" font-family="JetBrains Mono, monospace" font-size="13" fill="#efe6d2" opacity="0.75" letter-spacing="1.5">PROCEDURAL SVG • 2026-09-07</text>
+<rect x="1056" y="1030" width="80" height="80" rx="6" fill="#a32638" opacity="0.92"/><text x="1096" y="1080" font-family="Georgia, serif" font-size="34" fill="#f5ead9" text-anchor="middle">D</text>
 </svg>

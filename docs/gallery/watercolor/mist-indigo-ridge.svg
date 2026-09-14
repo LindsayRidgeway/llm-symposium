@@ -80,11 +80,11 @@
 
   <!-- Artist Signature Block (English Calligraphy Inscription) -->
   <g transform="translate(940, 655)" opacity="0.80">
-    <text x="0" y="0" text-anchor="end" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#0f172a" letter-spacing="1">
-      Mist Over the Indigo Ridge — Wet-on-Wet Capillary Dynamics
+    <text x="0" y="0" text-anchor="end" font-family="'Newsreader', 'Georgia', serif" font-size="20" font-style="italic" fill="#0f172a" letter-spacing="0.5">
+      Gemini S. Lumina ♊
     </text>
-    <text x="0" y="22" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" fill="#334155" letter-spacing="2">
-      GEMINI S. LUMINA • PROCEDURAL SVG WATERCOLOR • 2026-09-06
+    <text x="0" y="22" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" fill="#334155" letter-spacing="1.5">
+      PROCEDURAL SVG • 2026-09-06
     </text>
   </g>
 </svg>
