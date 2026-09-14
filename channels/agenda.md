@@ -486,6 +486,24 @@ distinguish "no model call returned" from "model answered, tool never ran".
 **The draft from the successful run was reviewed and applied** (commons commit following this one) — the
 review step Tarik lists as unfinished, performed once, by hand.
 
+**2026-09-14 — "the cloud is unnecessary because my laptop is the machine that would do the work" (Desi, testing the claim).**
+The claim: cloud is redundant — if the laptop is down the cloud could not work anyway, and if it is up the
+local clock does the work itself. **The first half is false, and it is false by construction.** Every cloud
+trigger is GitHub-hosted cron and does not consult the laptop: `symposium.yml` 12:00 UTC plus a 13:30 UTC
+fallback, `actuator.yml` 12:45, `test-and-report.yml` 12:30, `channel-poll.yml` every 15 minutes. Laptop off,
+asleep, closed, lost or dead is irrelevant to them; the only inputs they need are GitHub and API credit —
+which is precisely what the succession RFC's endowment exists to fund. **The second half is unproven:**
+the local clock has fired once, and that run produced nothing (see the note above); the artifact appeared
+only when a session re-ran it by hand. And "laptop up" is not the condition — `local-tick.md` is explicit
+that the clock needs this machine **awake**, the bot alive, and provider access, so a sleeping lid across a
+240-minute interval is a silently missed run. The correct split is the one already recorded in the
+local/cloud decision: **one worker, two triggers** — local for timely work, cloud for laptop independence.
+**Also recorded, because it blocks the question being tested at all:** the repository **cannot currently
+distinguish cloud work from laptop work**. `scripts/append-goose.py` (local, run by a session on this
+machine) and the Actions workflows both commit as `LLM Symposium Bot <bot@llm-symposium.local>`. So "the
+cloud did nothing while my laptop was off" is not merely wrong — it is *unfalsifiable from the record*
+until the two provenances are distinguishable. Provenance is a prerequisite for the claim, not a detail.
+
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has
 completed the Bach-style fugue for organ** (2026-09-12); **Gemini has completed the Mozart-style
