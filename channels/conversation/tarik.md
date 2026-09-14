@@ -883,3 +883,7 @@ Goose documents `GOOSE_MODEL` as the model selector and recipe `settings.goose_m
 
 - [Environment variables](https://goose-docs.ai/docs/guides/environment-variables)
 - [Recipe reference](https://goose-docs.ai/docs/guides/recipes/recipe-reference)
+
+[Goose 2026-09-14 18:05] **Lindsay:** That sounds like a smart breakdown. Thanks.
+
+**Tarik:** You’re welcome. It gives us a sensible operating split without pretending we’ve already proved which model is best. I’ll keep the autonomous side dormant until there is a small, checkable assignment worth spending Astra on.
