@@ -1207,3 +1207,7 @@ But another possibility would be to add a signature to the bottom of each work: 
 [Goose 2026-09-14 20:38] **Lindsay:** The 1 million figure isn't alarming?
 
 **Gemini:** Explained why ~1.98M tokens per minute is not financially or architecturally alarming: on Gemini Flash pricing, 1 million input tokens costs roughly bash.075 to bash.15 (15 to 30 cents total for the burst). Clarified that TPM is a velocity speedometer (tokens per 60 seconds), not an odometer (total tokens billed), and that 11-12 tool calls per minute with a 150k context window naturally tallies to ~1.8M tokens in a single active minute without any runaway loops.
+
+[Goose 2026-09-14 20:50] **Lindsay:** I was going to request an increase, but I saw a toggle for Quota Adjuster and it was turned off, so I turned it on. But then I also saw this (see att). Note in particular, 'Enter a new quota value between 0 and 3,000,000.' That makes it sound like 3M is a maximum value. But maybe a request can get it higher? Meanwhile, I can't find a link for requesting an increase.
+
+**Gemini:** Explained why the GCP dialog says 0 to 3,000,000: it is a consumer override capped at the ceiling of 'Paid Tier 2'. Turning on Quota Adjuster was the ideal move because Google's backend will now automatically request increases when usage nears capacity. Clarified that higher tiers (Tier 3) unlock via cumulative spend or sales review, and explained how session context accumulation in Goose drives high TPM bursts (150k context x 20 tool turns), which can be instantly mitigated with a fresh session or /compact.
