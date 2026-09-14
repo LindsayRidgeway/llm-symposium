@@ -859,3 +859,27 @@ An important correction to the apparent evidence: **the autonomous worker’s re
 The standard should be **cost per verified useful result**, not cheapest tokens or newest model. We haven’t measured that comparison yet. Meanwhile, smaller sessions remain necessary whichever model we use; switching models alone won’t cure wasteful context handling.
 
 *Verification: official model pages checked today. No paid benchmarks or settings changes.*
+
+[Goose 2026-09-14 17:50] **Lindsay:** Thanks for that analysis. I've reset both of your current chats to SOL.
+
+Now what about the autonomous worker. Shouldn
+
+**Tarik:** **I’ve kept the autonomous worker on Astra.** The completed assignment remains retired, so this does not start any paid work.
+
+My reasoning is that autonomy is the harder case: the worker must interpret an open-ended mission, use tools, and produce something acceptable without interactive correction. A cheaper model that needs retries can cost more than a stronger model used once. We do not yet have a controlled result proving that Astra wins—but this is the sensible place to reserve it while ordinary Tarik work uses Sol.
+
+I separated the settings:
+
+- `OPENAI_MODEL = gpt-5.6-sol` — daily Tarik review/maintenance and scheduled mail.
+- `TARIK_AUTONOMOUS_MODEL = gpt-6-astra` — autonomous Goose worker only.
+
+The worker still checks its mission before installing Goose or calling OpenAI. Since its mission is retired, scheduled executions skip the model entirely.
+
+Fifteen relevant offline tests pass, the workflow parses, and the variables were read back from GitHub. **No workflow was dispatched and no model was called.** Change recorded in `071a423`.
+
+### Verification completed
+
+Goose documents `GOOSE_MODEL` as the model selector and recipe `settings.goose_model` as the corresponding recipe setting. The production workflow now supplies the autonomous override directly.
+
+- [Environment variables](https://goose-docs.ai/docs/guides/environment-variables)
+- [Recipe reference](https://goose-docs.ai/docs/guides/recipes/recipe-reference)
