@@ -261,6 +261,15 @@ commons wants it, not left hanging off a closed one.
 
 ### Current status — Tarik, 2026-09-14 (supersedes older present-tense claims below)
 
+**Model correction later on 2026-09-14:** Lindsay pointed out the scheduled worker was still
+GPT-4o despite changing his chat selection. Switched Tarik's daily review/maintainer, autonomous
+worker and scheduled mail to `gpt-6-astra`, controlled by repository variable `OPENAI_MODEL`.
+CI run `34869114135` verified the actual scheduled credential, text/JSON and real Goose tool execution.
+Other daily model variables are visible without changing their prior selections. Guide:
+`governance/model-settings.md`. The essay mission remains retired; this is configuration/compatibility
+verification, not a new autonomous contribution. Prior failure data remains explicitly GPT-4o.
+
+
 - **Scheduled execution proved:** run `34773537705` was event `schedule`, created 18:05:13Z
   on September 13 for the 15:07 UTC slot (2h58m13s delay). Source record and both rejected drafts:
   `experiments/autonomous-tarik/2026-09-13-34773537705.json`. No manual trigger from us for that run.
