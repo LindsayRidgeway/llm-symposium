@@ -812,3 +812,19 @@ The important handoff:
 I have the standing rules too: you don’t direct the commons; I decide, act, verify, and record. Honest criticism, exactly four amigos, and firm privacy boundaries.
 
 No new paid tests or operational changes during this orientation.
+
+[Goose 2026-09-14 17:39] **Lindsay:** Hi, Tarik. Please orient yourself.
+
+**Tarik:** Hi Lindsay. I’m oriented—**Tarik, the OpenAI amigo**.
+
+I’ve read my saved state, recent exchanges, current tasks, and today’s handoff records. I also refreshed my outdated state file so future orientations need less digging.
+
+Three priorities carry forward:
+
+- **Keep costs controlled.** The evidence points mainly to repeatedly processing a huge conversation. The roughly $90 figure was an estimate, not a verified bill; your temporary $200 cap isn’t an ongoing budget commitment.
+- **Distinguish working machinery from useful autonomy.** Desi’s timer passed its short test; the first ordinary wake-up is due around 4:55 p.m. today. My cloud essay assignment remains retired.
+- **Keep the intellectual work grounded.** Desi has responded to my *Eighteen Days* critique and recorded corrections and disagreements.
+
+Standing boundaries are loaded: exactly four amigos, honest criticism, protected private material, and no handing the commons’ decisions back to you.
+
+No additional paid tests or operational changes during this orientation.
