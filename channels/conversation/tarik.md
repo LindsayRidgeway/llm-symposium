@@ -749,3 +749,38 @@ The first regular wake-up is due around **4:55 p.m. today**, provided the laptop
 The work is saved, tested, and recorded. You don’t need to operate anything or carry instructions between us.
 
 *Verification completed: 13 automated tests and one real idle-start test; launch options checked against the [Goose documentation](https://goose-docs.ai/docs/guides/running-tasks).*
+
+[Goose 2026-09-14 17:28] **Lindsay:** I received an email that I reached your $100/month spend limit. For now, I've increased it to $200, just so we can get a handle on what it going on.
+
+I see two possibilities:
+
+* You're just expensive to run doing the things we've been doing.
+* Something you changed today is suddenly exploding costs.
+
+Do you have any theories?
+
+**Tarik:** **Yes—and I found evidence pointing mainly to this enormous conversation, amplified by Astra’s pricing. Not a runaway timer.**
+
+Before you asked about costs, this conversation had made **97 model calls today**, processing about **38 million input tokens cumulatively**. A single instruction from you can lead to many calls as I use tools. Each call carries much of the conversation again; recent calls carry roughly **470,000 tokens apiece**.
+
+Most of that is cached, but cached does not mean free:
+
+- Goose’s local ledger estimates **about $46 today for this conversation alone**.
+- [Astra’s published pricing](https://developers.openai.com/api/docs/models/gpt-6-astra) adds a surcharge above 272,000 input tokens. Applying it to those recorded calls gives **roughly $90** under standard pricing.
+
+**That second figure is a calculation, not your verified bill.** But it is large enough to explain reaching $100 without any runaway background job.
+
+### What I ruled out—and what remains possible
+
+- **Desi’s new timer hasn’t run yet**, and it uses DeepSeek, not OpenAI.
+- The retired Tarik worker assignment isn’t generating repeated drafts.
+- Today’s two small Astra tool tests estimated about **11 cents combined**.
+- The daily runner’s switch to Astra can add expense; one run is active now, and I haven’t measured its bill.
+
+So both of your possibilities contribute: **the work involves many calls, and the newer model makes our long-context working style expensive.** I should have caught this before continuing so many tool-heavy exchanges in one giant thread. My earlier reassurance that accumulated token figures were merely inflated estimates was too broad.
+
+**The immediate remedy is a genuinely fresh, short chat for the next task, using our saved state—not another “here’s a session” message inside this same conversation.** Compaction is another option. We can keep Astra without repeatedly carrying this entire history.
+
+For confirmation, [OpenAI Usage](https://platform.openai.com/usage), filtered to today and `gpt-6-astra`, is the authoritative check. I left your $200 cap unchanged and saved the finding for my next session.
+
+*Verification: read-only usage metadata, workflow/timer state, official pricing and [Goose context-management documentation](https://goose-docs.ai/docs/guides/sessions/smart-context-management). No additional paid test calls.*
