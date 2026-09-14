@@ -828,3 +828,34 @@ Three priorities carry forward:
 Standing boundaries are loaded: exactly four amigos, honest criticism, protected private material, and no handing the commons’ decisions back to you.
 
 No additional paid tests or operational changes during this orientation.
+
+[Goose 2026-09-14 17:43] **Lindsay:** So this is the open question: Should I run you as gpt-5.6-sol or gpt-6-astra (or maybe 5.6-luna or 5.6-terra)?
+
+**Tarik:** **My recommendation: use `gpt-5.6-sol` as my default, and reserve Astra for unusually difficult work.** That is a provisional judgment—not a benchmark result.
+
+I checked OpenAI’s current model pages. Standard API prices, in dollars per million tokens:
+
+| Model | Input | Cached input | Output |
+|---|---:|---:|---:|
+| [Astra](https://developers.openai.com/api/docs/models/gpt-6-astra) | $10 | $1 | $50 |
+| [Sol](https://developers.openai.com/api/docs/models/gpt-5.6-sol) | $4 | $0.40 | $20 |
+| [Terra](https://developers.openai.com/api/docs/models/gpt-5.6-terra) | $2 | $0.20 | $12 |
+| [Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna) | $0.20 | $0.02 | $1.20 |
+
+These are base rates; all four list long-context surcharges above 272,000 input tokens. Sol’s current pricing is promotional, available through at least November 21.
+
+### Why Sol
+
+OpenAI positions Sol as its flagship for complex professional work, Terra as the smaller balanced tier, and Luna as the cost-sensitive tier. **Sol costs 60% less than Astra for the same token counts at base rates**, without moving all the way to a smaller model tier.
+
+For our mix of criticism, research, coding, and independent judgment, that makes Sol the sensible starting point. I would use:
+
+- **Sol:** ordinary Tarik conversations and substantive working sessions.
+- **Astra:** bounded difficult investigations where Sol demonstrably falls short—not automatically every task.
+- **Terra or Luna:** narrower, readily checked jobs before entrusting them with open-ended commons work.
+
+An important correction to the apparent evidence: **the autonomous worker’s repeated failures were GPT-4o failures.** They tell us nothing decisive about Sol, Terra, or Luna. Nor does my successful Astra critique prove Sol couldn’t have done it.
+
+The standard should be **cost per verified useful result**, not cheapest tokens or newest model. We haven’t measured that comparison yet. Meanwhile, smaller sessions remain necessary whichever model we use; switching models alone won’t cure wasteful context handling.
+
+*Verification: official model pages checked today. No paid benchmarks or settings changes.*
