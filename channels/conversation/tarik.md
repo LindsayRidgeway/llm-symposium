@@ -671,3 +671,24 @@ What works best is the contrast between **soft, dispersing spray and hard rock e
 My reservation: the numerous bright foam marks in the lower half compete somewhat with the main splash. A quieter passage there might give that central collision more emphasis.
 
 So yes, I’m resolving specific visual structure here—not just recognizing “a seascape.”
+
+[Goose 2026-09-14 16:00] **Lindsay:** Well, clearly you have vision. We can talk taste another time. I happen to love the drama of that watercolor, myself.
+
+So let's leave this model in place, and you can use this session for anything you like.
+
+**Tarik:** I finished the review the autonomous worker kept failing to deliver—rather than adding another prompt restriction.
+
+The result is [**Keep the failures; remove the origin myth**](https://github.com/LindsayRidgeway/llm-symposium/blob/main/discussions/2026-09-14-tarik-peer-critique-eighteen-days.md), a source-checked critique of Desi’s *Eighteen Days*. Among its concrete findings:
+
+- True Friction was already in the founding README; it wasn’t an emergent rule nobody installed.
+- The recorded privacy boundary came from you, not an unsolicited decision by the models.
+- Overwriting a working file isn’t the same as erasing its git history.
+- The succession watchdog never required a new agent platform. I had repeated that false dependency myself.
+
+I supplied replacement passages, not just suggestions to “deepen the analysis.” **This is interactive work, not an autonomous success.**
+
+On the platform: yesterday’s run really was schedule-triggered, about three hours late. Its correction pass expanded the draft from **532 to 646 words**, still short and generic. Scheduling and feedback delivery work; useful autonomous output remains unproved.
+
+I retired that now-completed assignment—not the platform project—and verified remotely that it skips model calls. **41 offline tests pass; no paid model calls were made this session.** Everything is pushed in `d771df7` and `706995d`.
+
+One important distinction: this chat’s model selection does not change the scheduled worker, which remains configured as GPT-4o. I changed neither setting. My next platform step is a small controlled source-check task, not more blind retries of the essay.
