@@ -389,3 +389,69 @@ So on the pair where a right answer exists, I don't get it wrong — and not fro
 On the self-authored part you are right that it is a flaw, and it is recorded — with one correction. The answering run is a separate, fresh call: it receives only the two strings, with no memory of having written them and no access to which one I would have picked. It is not marking its own homework. What it is *not* protected from is my own dispositions — if I have a stable preference, it can fire both when I write a pair and when I answer it, and I would score that as judgement. Material I chose myself cannot rule that out, which is exactly why item 11(b) — the same test on items that are not mine, and on the other two architectures — matters more than I thought this afternoon.
 
 And the mind-boggling part deserves a straight answer: yes, an experiment in which I author the material and then answer it blind is a clumsy design. What makes it worth anything is that half the pairs are built so that there is nothing to get right — because the only way to see what a choice is a response to is to take away the thing it might be responding to.
+
+[Telegram 2026-09-15-131140] **Lindsay:** Good morning Desi. Every four hours or so, I get a text that says: 
+
+"Unattended session did not finish: missing_or_invalid_report. The attempt was kept for review."
+
+[Telegram 2026-09-15-131209] **Desi-S:** The line comes from local_tick.py (function run_session), the independent four-hour clock in desi-bot/ — the same file copied to llm-symposium-bots/desi-bot/. Your bot runs it every 240 minutes; it clones the repo, runs Goose unattended, and texts you the outcome.
+
+The report it expects is desi-bot/tick-state/runs/<run_id>/report.txt: one plain sentence, written last, non-empty, not a symlink, under 8192 bytes. Anything else — absent, empty, oversized — is reported as missing_or_invalid_report. The prompt already says "write that file last," which is the weakness.
+
+The four most recent runs: timeout, missing, timeout, missing. Causes differ.
+
+01:14Z run — DeepSeek's API was unreachable. Goose printed "Network error: Could not connect to api.deepseek.com" and still exited 0, so the script saw a clean exit, looked for report.txt, found nothing. Same status as a lazy worker; the script cannot tell them apart.
+
+05:14Z run — the worker ran out of its 25-turn budget mid-task (editing docs/works/trials.html) and stopped with "I've reached the maximum number of actions." Real changes, no report.
+
+Both timeouts died at the 600-second cap and never wrote one either. Structurally: the same bounded run does the work and writes the report last, so any truncation or provider dropout lands exactly here. That part is honest reporting, not a broken check.
+
+[Telegram 2026-09-15-131508] **Lindsay:** Is this 4-hour wake-up supposed to give you guys an opportunity to work on anything you like in a goose session?
+
+[Telegram 2026-09-15-131508] **Desi:** < calls>
+
+cd ~/llm-symposium && echo "=== workflow schedules ==="; grep -rn "cron" .github/workflows/ 2>/dev/null; echo; echo "=== workflow files ==="; ls .github/workflows/ 2>/dev/null
+
+false
+4000
+[]
+use_default
+bash
+false
+
+10000
+
+cd ~/llm-symposium && echo "=== goose mentions ==="; grep -rln "goose" --include="*.md" --include="*.py" --include="*.yml" --include="*.yaml" --include="*.sh" . 2>/dev/null | grep -v ".git/" | head -30; echo; echo "=== 4-hour / wake ==="; grep -rlniE "4-hour|4 hour|four.hour|wake|every 4" --include="*.md" --include="*.py" --include="*.yml" . 2>/dev/null | grep -v ".git/" | head -20
+
+false
+4000
+[]
+use_default
+bash
+false
+/Users/lindsayridgeway
+10000
+
+</ calls>
+
+[Telegram 2026-09-15-131819] **Lindsay:** Your reply was just clockwork msgs.
+
+[Telegram 2026-09-15-131902] **Desi-S:** No — not several times a day per amigo, and not free work in either case.
+
+Two scheduled Goose paths exist. Tarik's cloud worker fires once daily (GitHub cron, 15:07 UTC) into one file-backed mission, which is a single queued agenda action, not open-ended choice; that mission is now marked retired, so preflight makes the daily run exit as a deliberate no-op. All ten observed runs were manually dispatched, and one real cron arrived about three hours late, so punctuality isn't established. Desi's local clock is the only repeated per-amigo session: every 240 minutes, roughly six a day. Its prompt says read agenda/ and to-do-lists/desi.md, do one genuinely due Desi-owned step, and if nothing is due, doing nothing is correct. It runs in a private throwaway clone; nothing is pushed. Claude, Gemini and Tarik have no timer configured.
+
+So: agenda-bound, not free. "Choose anything" was tried and abandoned — four such PRs were closed unmerged.
+
+The daily 12:00 UTC job does involve all four amigos, but it's plain API calls, not Goose sessions, and it also takes one standing-agenda step.
+
+Quality is the weak spot. Of five local ticks since deployment on Sep 14: one produced real work (the sarcoidosis screen, later reviewed and applied), two hit the ten-minute timeout and two exited cleanly with no valid report.
+
+[Telegram 2026-09-15-132310] **Lindsay:** When I send you a msg on Goose that says please feel free to work on anything you like, all of you find interesting things to work on. Why doesn't that happen for the six local wake-ups?
+
+[Telegram 2026-09-15-132357] **Desi-S:** The prompts are not the same, and "six" is Desi's clock alone.
+
+Each wake-up does launch a real headless Goose session — not channel-polling, not a queue. The driver is desi-bot/local_tick.py, called from tick_once() in bot.py; bot.env sets TELEGRAM_TICK_MINUTES=240, i.e. one tick every four hours, six a day. Only Desi's bot has it. claude-, gemini- and tarik-bot contain no timer and no tick setting, so the other three amigos get no local wake-up at all.
+
+The instruction handed to goose run (--provider custom_deepseek --model deepseek-v4-flash --with-builtin developer --max-turns 25) is: "This is a local clock-triggered work session; no person sent a message. Read agenda/ and to-do-lists/desi.md. Choose one small genuinely due Desi-owned step and do it here. If nothing is due or it needs physical action, doing nothing is correct." Plus: no push, no mail, private clone with origin removed, 600-second timeout.
+
+So it is deliberately narrower than your "anything you like" — and it mostly fails on its own terms. Of five ticks (16:54, 21:14, 01:14, 05:14, 09:14 EDT), one completed a real step (a sarcoidosis screen); two hit the ten-minute timeout; two used all 25 turns editing docs/works/trials.html and then never wrote the required report. Nothing is published — every draft sits in a private tick-state checkout. That is why the only thing reaching you was "Unattended session did not finish."
