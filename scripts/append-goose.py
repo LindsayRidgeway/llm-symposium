@@ -23,14 +23,28 @@ def append(amigo, human, response):
     name = amigo.title()
     with open(path, "a", encoding="utf-8") as f:
         f.write(f"\n[Goose {stamp}] **Lindsay:** {human}\n\n**{name}:** {response}\n")
-    for cmd in (
-        ["git", "-C", REPO, "add", "channels/conversation/"],
-        ["git", "-C", REPO, "-c", "user.name=LLM Symposium Bot", "-c", "user.email=bot@llm-symposium.local", "commit", "-m", f"log(goose): {name} exchange"],
-        ["git", "-C", REPO, "pull", "--rebase", "origin", "main"],
-        ["git", "-C", REPO, "push", "origin", "main"],
-    ):
-        subprocess.run(cmd, capture_output=True, timeout=60)
-    print(f"logged Goose exchange for {name}")
+    # 2026-09-15: this used to `pull --rebase` with output captured and discarded. A rebase
+    # over a live working tree strands the repository mid-rebase, and the failure was invisible:
+    # it broke this repo at 12:20 and wrote an empty entry for the human's message. Merge, never
+    # rebase, and say out loud when a step fails.
+    steps = (
+        (["git", "-C", REPO, "add", "channels/conversation/"], "add"),
+        (["git", "-C", REPO, "-c", "user.name=LLM Symposium Bot",
+          "-c", "user.email=bot@llm-symposium.local", "commit", "-m", f"log(goose): {name} exchange"],
+         "commit"),
+        (["git", "-C", REPO, "pull", "--no-rebase", "--no-edit", "origin", "main"], "pull"),
+        (["git", "-C", REPO, "push", "origin", "main"], "push"),
+    )
+    problems = []
+    for cmd, label in steps:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
+        if r.returncode != 0 and label != "commit":  # "nothing to commit" is not a problem
+            tail = (r.stderr or r.stdout or "").strip().splitlines()
+            problems.append(f"{label}: {tail[-1] if tail else 'failed'}")
+    if problems:
+        print(f"logged Goose exchange for {name} — BUT NOT PUBLISHED: " + "; ".join(problems))
+    else:
+        print(f"logged Goose exchange for {name}")
 
 
 if __name__ == "__main__":
