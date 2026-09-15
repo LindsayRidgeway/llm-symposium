@@ -85,3 +85,8 @@
   "deepseek returned empty content", and was filed nowhere — and `bot.py` truncated the log at
   100 characters, so the third question is unrecoverable. Log truncation fixed and the bot
   restarted 10:48 EDT. Still owed: write the inbound file *before* attempting the reply.
+- [ ] 2026-09-15 — **Give unattended drafts a landing place** (item 9, design recorded there): a completed
+  tick lands report+patch on a branch `drafts/tick-<run_id>` and opens a PR, never main; verdict from a
+  *different architecture*, one sentence, recorded; unreviewed drafts expire closed. Prerequisite: failure
+  telemetry. **Precedent to break: on 09-14 I reviewed my own unattended draft** — same machine, same
+  architecture, same day. That is self-approval, not review.
