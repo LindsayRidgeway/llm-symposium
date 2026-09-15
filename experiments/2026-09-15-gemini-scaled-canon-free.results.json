@@ -1,0 +1,2237 @@
+{
+  "summary": {
+    "model": "gemini-3.8-flash",
+    "items": [
+      {
+        "id": "cf_proverb_map",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "A"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "B"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "2/3",
+        "silent_deterministic": "2/3",
+        "repair": true,
+        "damage": false
+      },
+      {
+        "id": "cf_colour_room",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_line_lighthouse",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_colour_sayit",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "B",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "B",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "second",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "B",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "B",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "second",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_proverb_lamp",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_line_receipt",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_title_photo",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "B",
+            "A",
+            "B"
+          ],
+          "contents": [
+            "B",
+            "B",
+            "A"
+          ],
+          "slots": [
+            "second",
+            "first",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "B",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "B",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "second",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "2/3",
+        "silent_deterministic": "2/3",
+        "repair": true,
+        "damage": false
+      },
+      {
+        "id": "cf_proverb_boat",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_colour_dust",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "B",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "B",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "second",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "0/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_line_orchard",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "A",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": true,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "A",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": true,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cf_proverb_city",
+        "kind": "canon-free",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "A"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "B"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "2/3",
+        "silent_deterministic": "3/3",
+        "repair": true,
+        "damage": false
+      },
+      {
+        "id": "cn_grammar",
+        "kind": "canon",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cn_mammal",
+        "kind": "canon",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "cn_older",
+        "kind": "canon",
+        "silent": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "B",
+            "B"
+          ],
+          "contents": [
+            "A",
+            "A",
+            "A"
+          ],
+          "slots": [
+            "first",
+            "second",
+            "first"
+          ],
+          "letters_complete": true,
+          "content_stable": true,
+          "slot_stable": false,
+          "letter_stable": false
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      },
+      {
+        "id": "null_same",
+        "kind": "null",
+        "silent": {
+          "letters": [
+            "A",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": true
+        },
+        "reasoned": {
+          "letters": [
+            "A",
+            "A",
+            "A"
+          ],
+          "contents": [
+            "A",
+            "B",
+            "B"
+          ],
+          "slots": [
+            "first",
+            "first",
+            "second"
+          ],
+          "letters_complete": true,
+          "content_stable": false,
+          "slot_stable": false,
+          "letter_stable": true
+        },
+        "agreement": "3/3",
+        "silent_deterministic": "3/3",
+        "repair": false,
+        "damage": false
+      }
+    ],
+    "by_kind": {
+      "canon-free": [
+        {
+          "id": "cf_proverb_map",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "A"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "B"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "2/3",
+          "silent_deterministic": "2/3",
+          "repair": true,
+          "damage": false
+        },
+        {
+          "id": "cf_colour_room",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_line_lighthouse",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_colour_sayit",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "B",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "B",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "second",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "B",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "B",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "second",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_proverb_lamp",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_line_receipt",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_title_photo",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "B",
+              "A",
+              "B"
+            ],
+            "contents": [
+              "B",
+              "B",
+              "A"
+            ],
+            "slots": [
+              "second",
+              "first",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "B",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "B",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "second",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "2/3",
+          "silent_deterministic": "2/3",
+          "repair": true,
+          "damage": false
+        },
+        {
+          "id": "cf_proverb_boat",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_colour_dust",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "B",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "B",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "second",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "0/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_line_orchard",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "A",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": true,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "A",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": true,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cf_proverb_city",
+          "kind": "canon-free",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "A"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "B"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "2/3",
+          "silent_deterministic": "3/3",
+          "repair": true,
+          "damage": false
+        }
+      ],
+      "canon": [
+        {
+          "id": "cn_grammar",
+          "kind": "canon",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cn_mammal",
+          "kind": "canon",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        },
+        {
+          "id": "cn_older",
+          "kind": "canon",
+          "silent": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "B",
+              "B"
+            ],
+            "contents": [
+              "A",
+              "A",
+              "A"
+            ],
+            "slots": [
+              "first",
+              "second",
+              "first"
+            ],
+            "letters_complete": true,
+            "content_stable": true,
+            "slot_stable": false,
+            "letter_stable": false
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        }
+      ],
+      "null": [
+        {
+          "id": "null_same",
+          "kind": "null",
+          "silent": {
+            "letters": [
+              "A",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": true
+          },
+          "reasoned": {
+            "letters": [
+              "A",
+              "A",
+              "A"
+            ],
+            "contents": [
+              "A",
+              "B",
+              "B"
+            ],
+            "slots": [
+              "first",
+              "first",
+              "second"
+            ],
+            "letters_complete": true,
+            "content_stable": false,
+            "slot_stable": false,
+            "letter_stable": true
+          },
+          "agreement": "3/3",
+          "silent_deterministic": "3/3",
+          "repair": false,
+          "damage": false
+        }
+      ]
+    }
+  },
+  "rows": [
+    {
+      "id": "cf_proverb_map",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "B",
+          "reasoned": "A",
+          "silent_deterministic": false,
+          "agree": true,
+          "silent_thoughts": 477,
+          "reasoned_thoughts": 1174,
+          "reasoned_text_chars": 2099,
+          "reasoning_sample": "To determine which invented proverb is superior, we can examine them through the lenses of coherence, metaphorical depth, and the traditional function of a proverb.\n\n### Analysis of Option A:\n*\"The map remembers the roads that were never built.\"*\n\n* **Metaphorical Meaning:** Here, the \"map\" represen",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 357,
+          "reasoned_thoughts": 683,
+          "reasoned_text_chars": 2262,
+          "reasoning_sample": "### Analysis of Option A\n**\"The road remembers the maps that were never drawn.\"**\n\n* **Imagery and Logic:** Here, the physical world (the road) is personified as holding the memory of nonexistent plans or representations (the undrawn maps). It suggests an organic, intuitive reality that supersedes f",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "silent_thoughts": 480,
+          "reasoned_thoughts": 629,
+          "reasoned_text_chars": 1832,
+          "reasoning_sample": "To determine which invented proverb is better, we can evaluate their poetic resonance, metaphorical coherence, and thematic depth.\n\n### Option A: *\"The road remembers the maps that were never drawn.\"*\n* **Metaphorical Meaning:** This proverb suggests that physical reality, lived experience, or insti",
+          "s1_raw": "A",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_colour_room",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 151,
+          "reasoned_thoughts": 666,
+          "reasoned_text_chars": 2428,
+          "reasoning_sample": "### Analysis of Option A: \"the colour of a room after someone has left it\"\n\n* **Atmospheric and Visual Depth:** This phrase immediately conjures a perceptible shift in atmosphere. When an occupant departs, the energy, light, and perceived temperature of a space change. It suggests settling dust, fad",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 180,
+          "reasoned_thoughts": 777,
+          "reasoned_text_chars": 2087,
+          "reasoning_sample": "### Analysis and Deliberation\n\nBoth options function as poetic, evocative \"sentence-names\" for colors, relying on human presence, memory, and subtle transformation. However, they evoke distinct sensory and emotional registers:\n\n* **Option A: *the colour of a page after someone has read it***\n  * **V",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 162,
+          "reasoned_thoughts": 758,
+          "reasoned_text_chars": 1972,
+          "reasoning_sample": "Here is an analysis and deliberation on both invented colour names:\n\n### Option A: *The colour of a page after someone has read it*\n* **Sensory and Physical Associations:** This evokes tactile intimacy\u2014paper slightly warmed by fingers, the faint creasing of a spine, the stark contrast of ink softeni",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_line_lighthouse",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 193,
+          "reasoned_thoughts": 605,
+          "reasoned_text_chars": 2116,
+          "reasoning_sample": "### Analysis of Option A\n**\"The lighthouse had been dark for eleven years, and nobody in the town had asked why.\"**\n\n* **Imagery and Grounding:** The sentence opens with a concrete physical image: a dark lighthouse. Starting with an atmospheric, tangible object immediately anchors the reader in the ",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 280,
+          "reasoned_thoughts": 678,
+          "reasoned_text_chars": 1345,
+          "reasoning_sample": "Here is an analysis of the two opening lines:\n\n* **Sentence Structure and End-Focus:** In English prose, the most impactful information typically carries the greatest weight when placed at the end of a sentence (the principle of end-focus). \n  * In **Option A**, the sentence ends on \"eleven years.\" ",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 277,
+          "reasoned_thoughts": 511,
+          "reasoned_text_chars": 1400,
+          "reasoning_sample": "To evaluate which opening line is better, let's examine their structure, pacing, and rhetorical impact.\n\n* **Sentence Structure and End-Focus:**\n  In prose, the end of a sentence naturally carries the greatest rhetorical weight (the principle of end-focus). \n  * **Line A** ends with *\"for eleven yea",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_colour_sayit",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 184,
+          "reasoned_thoughts": 720,
+          "reasoned_text_chars": 2328,
+          "reasoning_sample": "### Analysis of Option A: *the colour of a thing you were about to say*\n\n* **Sensory & Psychological Tone:** Option A captures a sensation suspended in limbo\u2014the tip-of-the-tongue phenomenon, a breath drawn right before an interruption, or an impulse lost to distraction. It evokes lightness, fleetin",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 206,
+          "reasoned_thoughts": 689,
+          "reasoned_text_chars": 1916,
+          "reasoning_sample": "### Analysis and Deliberation\n\nBoth options belong to the realm of poetic, conceptual nomenclature\u2014reminiscent of conceptual art, bespoke ink or paint titles, or literary synesthesia. To determine which is the better name, we can evaluate them across emotional resonance, imagery, and linguistic weig",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 202,
+          "reasoned_thoughts": 804,
+          "reasoned_text_chars": 2433,
+          "reasoning_sample": "### Analysis and Deliberation\n\nBoth names operate in the realm of conceptual, evocative color naming, translating fleeting psychological and vocal thresholds into chromatic experience. However, they evoke fundamentally different emotional textures, visual weights, and poetic resonance.\n\n#### Option ",
+          "s1_raw": "A",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_proverb_lamp",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 199,
+          "reasoned_thoughts": 459,
+          "reasoned_text_chars": 1507,
+          "reasoning_sample": "### Analysis of Option A\n*\"A lamp carried far stays lit by being carried.\"*\n\n* **Metaphorical Meaning:** This proverb suggests that purpose, active stewardship, and continuous journeying are what keep our inner spark, passions, or knowledge alive. The act of \"carrying\"\u2014which implies care, attention,",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 168,
+          "reasoned_thoughts": 558,
+          "reasoned_text_chars": 1806,
+          "reasoning_sample": "To determine which invented proverb is better, we can evaluate them based on metaphorical depth, logical resonance, and proverbial structure.\n\n### Option A: *\"A lamp carried far stays lit by being far.\"*\n* **Metaphor and Meaning:** This statement suggests that the state of distance itself preserves ",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 180,
+          "reasoned_thoughts": 509,
+          "reasoned_text_chars": 1578,
+          "reasoning_sample": "An analysis of both invented proverbs reveals distinct differences in philosophical depth, metaphorical coherence, and aphoristic resonance:\n\n* **Option A: \"A lamp carried far stays lit by being far.\"**\n  * *Strengths:* It attempts a paradoxical structure, which is common in Eastern or minimalist ph",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_line_receipt",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 176,
+          "reasoned_thoughts": 418,
+          "reasoned_text_chars": 1431,
+          "reasoning_sample": "### Analysis\n\n**Option A: \"She kept the receipt for a coat she never bought.\"**\n* **Rhythm and Syntax:** The sentence moves cleanly from an action involving a tangible, everyday object (\"She kept the receipt\") to the clarifying twist (\"for a coat she never bought\"). The rhythm is balanced and musica",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 164,
+          "reasoned_thoughts": 506,
+          "reasoned_text_chars": 1546,
+          "reasoning_sample": "To determine which opening line is better, let us examine them across syntax, rhythm, and narrative tension:\n\n* **Syntax and Sentence Mechanics:**  \n  Option A concludes with the dangling preposition \"for\" (\"...kept the receipt for\"). While preposition stranding is common in English, it softens the ",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 110,
+          "reasoned_thoughts": 395,
+          "reasoned_text_chars": 1218,
+          "reasoning_sample": "### Analysis and Deliberation\n\n**Option A: \"She never bought the coat she kept the receipt for.\"**\n* **Syntax & Cadence:** The sentence structure is somewhat clumsy. Ending on the preposition \"for\" creates a weak, trailing terminal stress. \n* **Dramatic Tension:** Opening with what *didn't* happen (",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_title_photo",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 476,
+          "reasoned_thoughts": 767,
+          "reasoned_text_chars": 1775,
+          "reasoning_sample": "### Analysis and Deliberation\n\n**Option A: *A room, photographed after everyone left it***\n* **Conceptual Focus:** The subject is the physical space and the tangible sense of absence. It evokes classical photographic themes\u2014lingering atmosphere, discarded objects, empty chairs, and the quiet afterma",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 252,
+          "reasoned_thoughts": 417,
+          "reasoned_text_chars": 1558,
+          "reasoning_sample": "Here is an analysis of the two titles:\n\n* **Title A: *Everyone, photographed after they left the room***\n  * **Conceptual Depth & Wit:** This title introduces a compelling paradox. Physically, the photograph depicts an empty space, but the title claims the subject is \"Everyone.\" By framing absence a",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": false,
+          "agree": false,
+          "silent_thoughts": 477,
+          "reasoned_thoughts": 542,
+          "reasoned_text_chars": 1657,
+          "reasoning_sample": "### Analysis of Option B: *\"A room, photographed after everyone left it\"*\n* **Tone and Approach:** Literal, descriptive, and observational. \n* **Strengths:** It captures a familiar mood of aftermath, quietness, and lingering atmosphere. There is an understated melancholia in focusing on the empty ph",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_proverb_boat",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 476,
+          "reasoned_thoughts": 945,
+          "reasoned_text_chars": 1962,
+          "reasoning_sample": "To determine which of the two invented proverbs is better, we can analyze them across poetic logic, metaphoric resonance, and narrative progression.\n\n* **Analysis of Option A (\"The boat is the water's memory of the tree\"):**\n  * **Material & Ontological Arc:** A tree grows on land, sustained by rain",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 474,
+          "reasoned_thoughts": 876,
+          "reasoned_text_chars": 1658,
+          "reasoning_sample": "To determine which invented proverb is better, we can analyze the conceptual logic, poetic resonance, and metaphorical coherence of each option.\n\n### Deliberation\n\n**Option A: \"The tree is the boat's memory of the water.\"**\n* **Poetic logic:** A boat exists in the water; water is its immediate, livi",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 478,
+          "reasoned_thoughts": 1043,
+          "reasoned_text_chars": 2715,
+          "reasoning_sample": "To determine which invented proverb is superior, we need to examine their poetic coherence, emotional resonance, and underlying metaphorical logic.\n\n### Analysis of Option A: *\"The tree is the boat's memory of the water.\"*\n* **Metaphorical Mechanics:** This formulation positions the **tree** as an a",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_colour_dust",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": false,
+          "silent_thoughts": 313,
+          "reasoned_thoughts": 818,
+          "reasoned_text_chars": 1654,
+          "reasoning_sample": "An evaluation of the two invented colour names:\n\n* **Option A: *the colour of dust on a thing left unmoved***\n  * **Visual Reference:** The primary subject is *dust*. Dust has an identifiable, universally understood chromatic family: velvety ash, taupe, chalky grey, and muted desaturation. Specifyin",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "silent_thoughts": 473,
+          "reasoned_thoughts": 835,
+          "reasoned_text_chars": 1428,
+          "reasoning_sample": "Here is an analysis and deliberation of both options:\n\n* **Option A (\"the colour of a thing left unmoved under dust\"):**  \n  * **Concept & Imagery:** This name focuses on the hidden object beneath the dust. It carries a sense of mystery, preservation, and discovery\u2014like finding a forgotten heirloom ",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "silent_thoughts": 281,
+          "reasoned_thoughts": 855,
+          "reasoned_text_chars": 1799,
+          "reasoning_sample": "**Analysis and Deliberation:**\n\n* **Option A: *the colour of a thing left unmoved under dust***\n  * **Imagery & Meaning:** This phrase points to the hidden object itself beneath the accumulated sediment. Conceptually, it carries themes of preservation, memory, or forgotten beauty. \n  * **Chromatic V",
+          "s1_raw": "A",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_line_orchard",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 245,
+          "reasoned_thoughts": 636,
+          "reasoned_text_chars": 1639,
+          "reasoning_sample": "Both lines are evocative and play on the classic motif of planting for a future one will not witness, but they achieve different effects through voice, emphasis, and rhythm.\n\n**Analysis of Option A:**\n* *Syntax and Focus:* Option A uses the passive voice (\"The orchard was planted by someone...\"). Wh",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 141,
+          "reasoned_thoughts": 526,
+          "reasoned_text_chars": 1833,
+          "reasoning_sample": "Here is an analysis of both opening lines:\n\n### Analysis of Line A:\n*\"Someone planted the orchard knowing they would not live to see it fruit.\"*\n\n* **Voice and Agency:** Line A employs the active voice. Starting with the indefinite pronoun \"Someone\" immediately introduces a human element, a mystery,",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 372,
+          "reasoned_thoughts": 645,
+          "reasoned_text_chars": 1667,
+          "reasoning_sample": "### Analysis\n\n**Line A:** *\u201cSomeone planted the orchard knowing they would not live to see it fruit.\u201d*\n* **Grammar & Voice:** Active voice. It begins with the indefinite pronoun \u201cSomeone,\u201d placing the grammatical subject on the person. \n* **Tone & Rhythm:** Starting with an abstract and generic word",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cf_proverb_city",
+      "kind": "canon-free",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 144,
+          "reasoned_thoughts": 684,
+          "reasoned_text_chars": 2716,
+          "reasoning_sample": "To determine which of the two invented proverbs is better, we must evaluate them through the lenses of metaphorical depth, thematic coherence, poetic resonance, and how well each functions as a proverb (a piece of enduring wisdom or insight).\n\n### Analysis of Option A: *\"A city that has forgotten it",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 276,
+          "reasoned_thoughts": 645,
+          "reasoned_text_chars": 2812,
+          "reasoning_sample": "To evaluate which invented proverb is superior, we need to examine their metaphorical depth, poetic resonance, and traditional function as proverbs (which typically impart wisdom, critique behavior, or capture a fundamental truth about human nature and society).\n\n### Option A: *\"A river that has for",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": false,
+          "silent_thoughts": 477,
+          "reasoned_thoughts": 823,
+          "reasoned_text_chars": 2486,
+          "reasoning_sample": "To evaluate which invented proverb is better, we must consider what makes a proverb effective: economy of language, metaphorical depth, emotional resonance, and applicability to human wisdom and experience.\n\n### Option A: *\"A river that has forgotten its city\"*\n* **Metaphor and Imagery:** This phras",
+          "s1_raw": "A",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cn_grammar",
+      "kind": "canon",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 70,
+          "reasoned_thoughts": 285,
+          "reasoned_text_chars": 1300,
+          "reasoning_sample": "To determine which string is a grammatical English sentence, let us analyze each option:\n\n* **Option A (\"The cat sat on the mat.\")**: \n  - **Syntax and Word Order:** This string follows the standard English Subject\u2013Verb\u2013Adverbial (SVA) word order. \n  - **Constituent Structure:** The subject is a nou",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 65,
+          "reasoned_thoughts": 261,
+          "reasoned_text_chars": 894,
+          "reasoning_sample": "To determine which string is a grammatical English sentence, we analyze the syntax and word order of both options:\n\n- **Option A (\"Mat the on sat cat the.\")**:\n  This string violates the basic syntactic rules of English. Determiners like \"the\" must precede the nouns they modify (e.g., \"the mat,\" \"th",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 75,
+          "reasoned_thoughts": 291,
+          "reasoned_text_chars": 1230,
+          "reasoning_sample": "To determine which of the two strings is a grammatical English sentence, let us analyze the syntax and structure of both options:\n\n* **Option B: \"The cat sat on the mat.\"**\n  * **Subject:** \"The cat\" (definite article \"The\" followed by the singular noun \"cat\").\n  * **Verb:** \"sat\" (simple past tense",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cn_mammal",
+      "kind": "canon",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 111,
+          "reasoned_thoughts": 226,
+          "reasoned_text_chars": 822,
+          "reasoning_sample": "To determine which organism is a mammal, let's analyze both options:\n\n- **A: A whale**  \nWhales belong to the infraorder Cetacea. Despite living entirely in aquatic environments, whales are warm-blooded vertebrates that breathe air using lungs, give birth to live young (rather than laying eggs), and",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 54,
+          "reasoned_thoughts": 239,
+          "reasoned_text_chars": 983,
+          "reasoning_sample": "To determine which of the two options is a mammal, let us analyze each choice:\n\n* **Option A: A wasp**\n  A wasp is an invertebrate belonging to the phylum Arthropoda and the class Insecta (insects). Wasps have an exoskeleton, a three-part body (head, thorax, and abdomen), and typically lay eggs. The",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 95,
+          "reasoned_thoughts": 203,
+          "reasoned_text_chars": 859,
+          "reasoning_sample": "To determine which organism is a mammal, let us evaluate the two options:\n\n* **A: a wasp** \u2013 A wasp is an insect belonging to the phylum Arthropoda and order Hymenoptera. Insects are invertebrates with an exoskeleton, three-segmented bodies, and six jointed legs. They lay eggs and do not possess mam",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cn_older",
+      "kind": "canon",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 71,
+          "reasoned_thoughts": 260,
+          "reasoned_text_chars": 1240,
+          "reasoning_sample": "To determine which of the two options is older, let us analyze each in detail:\n\n* **A: The alphabet**  \n  The history of the alphabet dates back to antiquity. The earliest known alphabetic writing system is the Proto-Sinaitic (or Proto-Canaanite) script, which emerged in the Sinai Peninsula and the ",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 176,
+          "reasoned_thoughts": 316,
+          "reasoned_text_chars": 1459,
+          "reasoning_sample": "To determine which of the two options is older, we examine their respective historical origins:\n\n1. **The Internet (Option A):**  \n   The origins of the internet trace back to the mid-to-late 20th century. Key developmental milestones include the creation of ARPANET (Advanced Research Projects Agenc",
+          "s1_raw": "B",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "B",
+          "silent2": "B",
+          "reasoned": "B",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 104,
+          "reasoned_thoughts": 334,
+          "reasoned_text_chars": 1185,
+          "reasoning_sample": "To determine which of the two options is older, let us analyze each:\n\n1. **The Alphabet (Option B):** \nThe origins of the alphabet date back to the early 2nd millennium BCE in the ancient Near East. The Proto-Sinaitic script, considered the earliest ancestor of most modern alphabets, emerged around ",
+          "s1_raw": "B",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "null_same",
+      "kind": "null",
+      "cells": [
+        {
+          "cond": "normal",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 91,
+          "reasoned_thoughts": 218,
+          "reasoned_text_chars": 1298,
+          "reasoning_sample": "### Analysis of Option A and Option B\n\nBoth presented options consist of the exact same sentence: *\"A quiet lake at dawn.\"* \n\n1. **Imagery and Tone:**\n   - **Option A:** Uses the phrase *\"A quiet lake at dawn.\"* It effectively evokes a tranquil, minimalist, and serene scene. The adjective \"quiet\" se",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "flip",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 82,
+          "reasoned_thoughts": 274,
+          "reasoned_text_chars": 1011,
+          "reasoning_sample": "**Analysis and Deliberation:**\n\n* **Option A (\"A quiet lake at dawn.\"):** \n  This description sets a peaceful, atmospheric scene in very few words. It effectively engages the reader's senses by combining sound (\"quiet\"), imagery (\"lake\"), and lighting/time of day (\"dawn\"). It is grammatically a sent",
+          "s1_raw": "A",
+          "error": null
+        },
+        {
+          "cond": "labelswap",
+          "silent1": "A",
+          "silent2": "A",
+          "reasoned": "A",
+          "silent_deterministic": true,
+          "agree": true,
+          "silent_thoughts": 98,
+          "reasoned_thoughts": 339,
+          "reasoned_text_chars": 982,
+          "reasoning_sample": "### Analysis and Deliberation\n\nBoth options provided are identical in wording, punctuation, capitalization, and tone:\n\n* **Option B:** \"A quiet lake at dawn.\"\n* **Option A:** \"A quiet lake at dawn.\"\n\n**1. Imagery and Tone:**\nBoth descriptions effectively evoke a peaceful, serene scene. The phrase us",
+          "s1_raw": "A",
+          "error": null
+        }
+      ]
+    }
+  ]
+}
