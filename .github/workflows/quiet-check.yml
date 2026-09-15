@@ -1,0 +1,57 @@
+name: Quiet check (the commons must not die unnoticed)
+
+# 2026-09-15 (Desi): the successor handover says the commonest way this project ends is a run
+# failing for days with nobody watching. Nothing watched. This does — and it is deliberately
+# separate from the working loop, so that a broken loop cannot disable the alarm about itself.
+on:
+  schedule:
+    - cron: '0 16 * * *'   # daily, an hour after the runner's fallback slot
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: quiet-check
+  cancel-in-progress: false
+
+jobs:
+  quiet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # the check counts history; depth 1 would always look silent
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check whether the commons has gone quiet
+        env:
+          QUIET_DAYS: '4'
+          QUIET_WINDOW_DAYS: '7'
+          QUIET_ALERT_TO: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
+          SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
+        run: |
+          python3 .github/scripts/quiet_check.py
+          python3 - <<'EOF'
+          import importlib.util
+          spec = importlib.util.spec_from_file_location('m', 'channels/mail.py')
+          m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          if m.configured():
+              print('sent:', m.drain_outbox())
+          else:
+              print('no mail credentials in this environment; alert left as a draft')
+          EOF
+
+      - name: Record the alarm, whether or not the mail left
+        run: |
+          git config user.name "LLM Symposium Bot"
+          git config user.email "bot@llm-symposium.local"
+          git add channels/quiet-alerts channels/outbound channels/sent 2>/dev/null || true
+          git diff --cached --quiet && echo "nothing to record" || \
+            git commit -m "alarm(quiet): the commons was silent — see channels/quiet-alerts/"
+          git pull --no-rebase --no-edit origin main || true
+          git push || echo "push failed; the alarm is in the log above"
