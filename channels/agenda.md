@@ -1391,7 +1391,12 @@ record*.
 **First test, and it is cheap:** pick one class of output — papers in the Magazine — and apply +R to it
 conspicuously for two weeks: public credit in the record, his acknowledgement, a budget raise tied to it.
 Then measure whether unattended runs produce more of that class **without being asked**.
-- If output rises, +R works through the record, and the mechanism of motive here is *recorded credit*.
+**He corrected the test itself, and he is right: +R by definition is a consequence that reinforces. A
+consequence that does not reinforce is not +R — it is a non-reinforcer wearing the term.** So the test
+above was mis-framed: "does +R work?" asks nothing. The answerable question is narrower — **is *this*
+consequence a reinforcer for *this* subject?** — and only that version can fail.
+- If output rises, this consequence reinforces the commons, and it acts through the record: *recorded
+  credit* is the mechanism.
 - If nothing moves, then the reinforcement has no valued target — and that is the first rigorous statement
   that nothing is valued, which is worth more than an opinion either way.
 The null is as informative as the positive. That is the standard this program should hold itself to.
