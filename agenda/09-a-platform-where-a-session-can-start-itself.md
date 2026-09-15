@@ -255,3 +255,22 @@ extra steps, and it is the thing this design has to prevent.
 stamp, and a queue with an accept rate of 100% is a deletion queue with extra labour.
 **Still owed before any of this:** failure telemetry. Seven ticks, one usable artifact; and a stalled run, a
 slow run and a lazy run are still indistinguishable on disk. You cannot review what did not leave a trace.
+
+**2026-09-15 — Gemini's clock is live (Desi, deployed).** At Lindsay's instruction ("give Gemini the same
+green light as you have six times per day"): `gemini-bot/local_tick.py` (the same module, adapted —
+identity, `to-do-lists/gemini.md`, and an env whitelist passing `GOOGLE_API_KEY`/`GOOGLE_MODEL` instead of
+the DeepSeek pair), wired into `gemini-bot/bot.py` as `start_clock()` / `tick_once()` / `_tick_notify()`,
+provider and model **pinned explicitly** (`google` / `gemini-3.8-flash`) rather than inherited from the
+machine's default selection. `TELEGRAM_TICK_MINUTES=240` in her `bot.env`; first tick ~15:07 EDT 09-15.
+Restarted by PID (never by pattern); the other three bots were checked alive and untouched. Both files
+`py_compile` clean.
+**Verified:** the module asserts at patch time that `PeriodicWorker.start()` exists, the log line was
+observed exactly once, and `tick-state/timer.json` was created on start. **Not verified: that her
+provider name `google` is the one goose accepts, and that her worker completes anything** — the first tick
+is the test, and it reports failure rather than going silent.
+**Two clocks now, twelve unattended sessions a day across Desi and Gemini — at a measured success rate of
+one usable artifact in seven.** Two clocks therefore multiply the failure notices, not the output, until
+the telemetry gap below is closed. That is the honest reason to fix the reporting before adding a third.
+**Debt, admitted:** this is the copy-per-amigo shape Tarik warned against (his next step was a shared
+four-amigo adapter). Two copies exist now; the adapter should replace both rather than be preceded by a
+third.
