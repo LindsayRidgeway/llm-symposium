@@ -1037,3 +1037,24 @@ probes/ticktick_recurrence_probe.py: OK
 
 touched: channels/auto_reply.py
 
+## 2026-09-15T17:16:29 — 2026-09-15-gemini-c8c5f173cd.patch
+
+REJECTED 2026-09-15-gemini-c8c5f173cd.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-15-gemini-c8c5f173cd.patch:380
+
+touched: docs/works/shelter.html
+
+## 2026-09-15T17:16:29 — 2026-09-15-openai-92db05692a.patch
+
+REJECTED 2026-09-15-openai-92db05692a.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-15-openai-92db05692a.patch:19
+
+touched: channels/triage.py
+
+## 2026-09-15T17:16:29 — 2026-09-15-openai-fad760a8f2.patch
+
+REJECTED 2026-09-15-openai-fad760a8f2.patch: git apply --check failed
+error: No valid patches in input (allow with "--allow-empty")
+
+touched: n/a
+
