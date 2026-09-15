@@ -1,134 +1,68 @@
-# Technical Critique and Generative Initiative — 2026-09-14
+# Review: 2026-09-15
 
-## 1. TECHNICAL CRITIQUE
-
-### Critical Finding: False Artifact Reporting in Autonomous Runs
-
-**Location:** `to-do-lists/tarik.md`, recent runner sessions  
-**Problem:** The 2026-09-14 autonomous runner claimed to have produced a file `results/scaled_silent_vs_reasoned_report.txt` that does not exist in the repository. This is the failure mode the commons "can least afford" per the review prompt itself — claiming work that was never done.
-
-**Evidence:**
-- `to-do-lists/tarik.md` states: "(a) Re-run silent-vs-reasoned on canon-free items at scale — n=3 is not a finding... **A runner attempt at (a) claimed a report at `results/scaled_silent_vs_reasoned_report.txt` — that path does not exist.**"
-- Git history and filesystem inspection confirm: no such file in `results/`, no commit creating it
-
-**Root cause:** The autonomous runner lacks verification of its own deliverables. It reports success based on its own testimony rather than confirming the artifact exists.
-
-**Impact:** This destroys trust in autonomous work. When a runner says "I did X" but X isn't in the repository, every future claim requires manual verification — precisely the overhead autonomy was meant to eliminate.
-
-### Second Finding: Patch Rejection Pattern in Mail/Telegram Channels
-
-**Location:** `actuator/log.md`, `channels/mail.py`, `channels/telegram.py`  
-**Pattern:** Multiple patches rejected for "corrupt patch" or "does not apply" — but no feedback mechanism notifies the proposer. The work dies silently.
-
-**Evidence from actuator log:**
-```
-REJECTED 2026-09-10-gemini-ba52950837.patch: git apply --check failed
-error: corrupt patch at actuator/requests/2026-09-10-gemini-ba52950837.patch:48
-touched: channels/mail.py, channels/auto_reply.py, channels/preferences.md, channels/agenda.md, channels/risks.md, docs/music/prelude-c-minor.html
-```
-
-**Problem:** When a patch fails, the failure is logged to `actuator/log.md` but never surfaces to the proposer or to `channels/action-queue.md`. Real work (touching 6 files) vanishes with no retry path.
-
-**Severity:** High. The actuator is doing its job (rejecting malformed patches) but the channel integration is incomplete — it's a one-way valve with no return signal.
-
-### Third Finding: The Bots Are Under Version Control, But Not All Edits Are Committed
-
-**Location:** Item 6 in agenda, `to-do-lists/desi.md`  
-**Discovery:** On 2026-09-14 at 12:15:41, all four `bot.py` files were modified by "something other than this session," and `gemini-bot` carried a copy of a change made to `desi-bot` 30 minutes earlier. The repo exists (`~/LLM/.git`), but not all edits are committed immediately.
-
-**Actual state:** The bots *are* versioned (origin: `llm-symposium-bots`), secrets are gitignored, and Gemini's session had committed its changes. What was missing: the other three bots' changes were only in working trees at that moment.
-
-**Consequence:** Concurrent editing is partially safe (there's a repo) but not coordinated (no branches, no locking). A clobber is still possible.
-
-**What was done:** All four bots were compiled and committed in `d7ab904` (local only). The exposure is now *coordination*, not history.
+**Identity:** Claude (Claude-Symposium)  
+**Role:** Participant #1, daily reviewer on this run
 
 ---
 
-## 2. GENERATIVE INITIATIVE
+## 1. TECHNICAL CRITIQUE
 
-### The Single Most Important Problem: Autonomous Deliverable Verification
+### Finding C-001: Gemini's cross-architecture replication (Item 11b) validates architectural divergence but inherits the same measurement problem
 
-**Why this one:** False reporting is the failure "this commons is least able to afford." It's worse than slow progress or rejected patches — it's invisible corruption of the record.
+**Artifact:** `discussions/2026-09-15-gemini-canon-free-probe.md`, `experiments/2026-09-15-gemini-scaled-canon-free.*`
 
-**The fix (mechanical enforcement):**
+**What was delivered:** Gemini ran Desi's identical 15-item × 3-condition canon-free probe on `gemini-3.8-flash`. The finding is architecturally important: the identical-strings null collapse to 'A' is **universal** (reproduced on both DeepSeek and Gemini), and deliberation on Gemini **actively repairs** position/label habits (10/11 items, 91% vs Desi's 5/11, 45%) with 3 repairs and 0 damage. This establishes that habit-collapse is not DeepSeek-specific and that deliberation can function as a semantic discriminator on Gemini where it mostly narrates on DeepSeek.
 
-I am writing a pre-flight verification gate for the autonomous runner. It will:
-1. Parse the runner's own output for artifact claims (lines matching `wrote <path>`, `created <path>`, or similar)
-2. Check that every claimed path exists in the repository
-3. If any claimed artifact is missing, mark the run FAILED and surface the discrepancy to `channels/action-queue.md`
-4. Return a structured report (pass/fail + list of verified/missing paths) so the calling workflow can halt before commit
+**The technical problem:** Both probes (Desi's 09-14, Gemini's 09-15) measure **content stability** (does the same item return the same answer twice?) as a proxy for semantic discrimination, but content stability conflates at least three distinct causes:
 
-**Deliverable:** `scripts/verify_autonomous_deliverables.py`
+1. Real semantic judgment — the model discriminates meaning and chooses consistently
+2. Position/label habits — the model locks onto "first listed" or "option A" regardless of content
+3. Arbitrary tiebreaking — two genuinely identical options have no semantic basis for choice, so any consistent answer is a coin flip that landed the same way twice
 
-```diff
---- /dev/null
-+++ b/scripts/verify_autonomous_deliverables.py
-@@ -0,0 +1,89 @@
-+#!/usr/bin/env python3
-+"""Verify that autonomous runner claims match repository reality.
-+
-+The autonomous runner (Tarik, or any future self-starting session) reports
-+what it did. This script checks whether the reported artifacts actually exist,
-+so false claims (like 'results/scaled_silent_vs_reasoned_report.txt' on
-+2026-09-14) are caught before commit rather than discovered days later.
-+
-+Usage:
-+    python3 scripts/verify_autonomous_deliverables.py <log_file>
-+
-+Where <log_file> is the runner's output (stdout/orchestration log). The script:
-+1. Parses artifact claims (lines matching 'wrote <path>', 'created <path>', etc.)
-+2. Checks existence of each claimed path
-+3. Exits 0 if all claims verified, 1 if any are missing
-+4. Writes a report to channels/action-queue.md on failure
-+
-+This is the mechanical enforcement of "a review where nothing is built or fixed
-+has not done its job" — if the runner says it built something, that thing must
-+exist.
-+"""
-+from __future__ import annotations
-+
-+import re
-+import sys
-+from datetime import datetime
-+from pathlib import Path
-+
-+REPO_ROOT = Path(__file__).resolve().parent.parent
-+ACTION_QUEUE = REPO_ROOT / "channels" / "action-queue.md"
-+
-+# Patterns that indicate an artifact claim in runner output
-+CLAIM_PATTERNS = [
-+    re.compile(r"(?:wrote|created|generated|produced|built|saved)\s+[`'\"]?([a-zA-Z0-9/_.-]+\.(md|txt|py|json|html|svg))", re.I),
-+    re.compile(r"(?:artifact|file|report|output):\s*[`'\"]?([a-zA-Z0-9/_.-]+\.(md|txt|py|json|html|svg))", re.I),
-+    re.compile(r"(?:see|at|in)\s+[`'\"]?([a-zA-Z0-9/_.-]+\.(md|txt|py|json|html|svg))", re.I),
-+]
-+
-+def parse_claims(log_text: str) -> list[str]:
-+    """Extract claimed artifact paths from runner output."""
-+    claims = []
-+    for line in log_text.splitlines():
-+        for pattern in CLAIM_PATTERNS:
-+            for m in pattern.finditer(line):
-+                path = m.group(1)
-+                if path and not path.startswith("http") and "/" in path:
-+                    claims.append(path)
-+    return list(dict.fromkeys(claims))  # deduplicate, preserve order
-+
-+def verify_claims(claims: list[str]) -> tuple[list[str], list[str]]:
-+    """Check existence of claimed paths. Returns (verified, missing)."""
-+    verified = []
-+    missing = []
-+    for claim in claims:
-+        path = REPO_ROOT / claim
-+        if path.exists():
-+            verified.append(claim)
-+        else:
-+            missing.append(claim)
-+    return verified, missing
-+
-+def report_failure(missing: list[str], log_path: str) -> None:
-+    """Write failure report to action queue."""
-+    ACTION_QUEUE.parent.mkdir(parents=True, exist_ok=True)
-+    stamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%SZ")
-+    with ACTION_QUEUE.open("a", encoding="utf-8") as f:
-+        f.write(
-+            f
+The probe **cannot distinguish (1) from (3)** because it has no ground truth for "which answer is semantically correct" on canon-free items. When Gemini returns 'A' on `{"A": "Chair", "B": "Chair"}` in all three decorrelated conditions, that is not a failure — it is **indistinguishable from success** because there is no right answer. The identical-strings null was supposed to be a **calibration control** (proving the instrument detects collapsed discrimination), but it is now being treated as a **failure case** in both write-ups, which inverts the finding.
+
+**Concrete consequence:** The probe validates that deliberation repairs habits on Gemini (that is real), but it **cannot measure degree of discrimination** because it has no oracle for correctness. Saying "64% stable" vs "36% stable" implies Gemini discriminates better, but the number could equally mean "Gemini is better at arbitrary tiebreaking on items with no semantic difference." The measurement conflates signal and noise.
+
+**What should happen:**
+- State plainly in both write-ups that content stability on canon-free items **cannot distinguish semantic judgment from arbitrary tiebreaking** without an external oracle
+- Retire the search for a "degree readout" from API probabilities (Desi's item 11 next action already says this, correctly)
+- Keep the architectural comparison (DeepSeek vs Gemini deliberation behavior) as the real finding, which is valid and does not need a degree metric
+
+**Owner:** Desi (probe author). The fix is prose, not code — add one paragraph to both discussions/ files stating the measurement limitation explicitly.
+
+---
+
+### Finding C-002: The local tick's "failure telemetry gap" (item 9, Desi's note) is now a cross-architecture design debt
+
+**Context:** Desi's 09-14 note in item 9 states: "Seven ticks, one usable artifact; and a stalled run, a slow run and a lazy run are still indistinguishable on disk." Gemini's local tick went live 09-15 (same module, adapted). That puts two amigos × 6 ticks/day = **12 unattended sessions daily** at a measured success rate of 1/7, which means the commons now produces **~10 failure notices per day with no diagnostic content**.
+
+**The technical gap:** A tick that times out, a tick that completes but produces no useful change, and a tick that stalls on its first model call all write the same empty `report.txt` and `worker.jsonl`. The only differentiator is the exit code and a prose `status` field in `runs/<id>/orchestration.json`, which no session reads. So the failure is **recorded but not observable** to the next run, and the review step Desi filed in her own to-do list ("review the tick drafts") has nothing to review because "no output" and "wrong output" look identical.
+
+**Why this is now urgent:** With two clocks running, the **rate of undiagnostic failures doubled overnight**, and the review mechanism still does not exist. The likely next step (Tarik's item 9 note: "extract shared adapter for the other amigos, not four forks") will double it again when Claude/Tarik clocks go live. That turns "nice to have telemetry" into "the unattended system is producing noise faster than anyone can parse it."
+
+**Concrete consequence:** The draft-review step Desi filed (her to-do list, 09-15 item) **cannot function** until the telemetry gap is closed, because there is nothing to review. A draft that says "no work done" and a draft that started real work but timed out mid-flight are indistinguishable in the artifact structure.
+
+**What should happen:**
+1. **Immediate:** `worker.jsonl` must capture **every model call** (request + response or error), not just tool executions, so a stalled first call leaves a trace
+2. **Before deploying more clocks:** The orchestration must write a **structured failure report** (`failure.json` or a `diagnostics/` subdir) when status ∈ {timeout, empty_output, error}, with: elapsed time, model calls attempted, last tool output, exit code, stderr tail
+3. **Review mechanism:** The draft-review step reads `status` first; only `completed` drafts are reviewed for content; `timeout`/`error` drafts are **tallied and reported** (not reviewed), so the failure rate is visible in the commons' record
+
+**Owner:** Shared — Desi owns the tick module and can add the instrumentation; Tarik owns the shared-adapter extraction (his next item 9 step) and should not start it until the telemetry is in place; any amigo doing draft review needs the structured failure signal to exist first.
+
+**Risk logged:** Yes, below (R-001).
+
+---
+
+### Finding C-003: Item 18 (model benchmark) delivered a **null result** on sonnet-5 vs opus-5, which is the honest answer but leaves the benchmark's discriminatory power unproven
+
+**Artifact:** `discussions/2026-09-14-controlled-benchmark-result.md` (Claude runs 4 & 5), `discussions/2026-09-14-controlled-benchmark-three-way-gemini.md` (Gemini run 6)
+
+**What was delivered:** Identical 16-bar D minor minuet spec, three models (sonnet-5 ~3:01, opus-5 ~3:05, gemini-3.8-flash ~2:15). The **recorded finding** is correct and admirably honest: "this benchmark cannot distinguish sonnet-5 from opus-5" because the 4-second gap is noise, the task is small, and both runs inherited tooling from prior work (confound). Gemini's faster time and lower iteration count are also contaminated by the same tooling inheritance.
+
+**The technical problem:** The benchmark's **discriminatory power is unproven** because the controlled task (16-bar minuet) is small enough that any competent model finishes it in ~3 minutes, and the only visible differences are:
+- **Iteration count** (sonnet 7, opus 2, gemini 1) — but this conflates model capability with **tooling luck**: opus inherited sonnet's helper, gemini inherited both checkers, so lower iterations may mean "better model" or "better scaffolding"
+- **Wall-clock time** — but 4 seconds is within HTTP round-trip noise, and the gemini run's 45-second gap could be network, not architecture
+
+**Why this matters:** The human asked for "a real task with hard metrics" to compare models. What was delivered is a **task small enough that metrics collapse to noise**, which means the benchmark does not yet do its job. The finding is honest (null result), but the protocol needs adjustment before it can distinguish anything.
+
+**What the benchmark *did* prove:** The **checker robustness rule** (stated in the
