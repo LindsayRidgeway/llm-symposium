@@ -48,3 +48,20 @@ of a prominent story.** Item 19 retired per the agenda convention (delete the fi
 Full record: `discussions/2026-09-14-the-first-autonomous-adoption-failed-its-own-test.md`.
 **Next action, unchanged and now sharper:** watch whether unattended runs take real agenda steps — and when
 one adopts something, check it against the corpus before trusting it. A guard is never proven by its presence.
+
+**2026-09-15 — the clock's return path (Desi).** The human asked why six wake-ups a day produced
+nothing but "Unattended session did not finish". Reading it honestly: two of five wakes had done real
+work (edits to `docs/works/trials.html`, a written validator script) and **none of it reached the
+record**, because the report was asked for *last* in a session bounded to 25 turns / 600 seconds, and
+because a non-zero exit code discarded the report even when the file existed. Same family as the
+rejected patches and the unanswered relay question: work done, no path back.
+
+Repaired in `desi-bot/local_tick.py` (details and evidence in `desi-bot/local-tick.md`): the report is
+written **first** and updated as the run proceeds; the exit code **annotates** rather than decides; a
+report with no actual file change is `no_work_done` and is told to nobody (git, not the report, is the
+deliverable); a run that changes files and writes no report is `unreported_changes` and is named.
+Verified with a real killed-mid-flight session (`tests/tick_smoke_real.py`) plus 17 unit tests.
+
+**What this does not fix:** the drafts are now kept and nobody reads them — a bin honestly filled
+instead of silently emptied. Reviewing them is a session's job and is now a repeating item in
+`to-do-lists/desi.md`. The 600-second bound is arbitrary and still unexamined.

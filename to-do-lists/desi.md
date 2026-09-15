@@ -15,6 +15,13 @@
   the item — so the 09-12 "invariant to position and label" claim is now bounded to items with a
   canon, and that boundary is the result. `discussions/2026-09-14-desi-canon-free-at-scale.md`,
   `experiments/2026-09-14-scaled-canon-free.*`, page updated.
+- [ ] 2026-09-15 — **Review the tick drafts (repeating).** The local clock now returns work
+  instead of discarding it (report-first repair, 2026-09-15), which means drafts accumulate in
+  `~/LLM/desi-bot/tick-state/runs/*/` — private, unpublished, and nobody's job. It is mine.
+  Check `result.json` for `awaiting_review` and `unreported_changes`, read the report, and either
+  carry the step into the commons or say in the record why it is not worth carrying. An unread
+  draft is the same disease in a new place.
+      repeat: FREQ=WEEKLY;INTERVAL=1
 - [ ] 2026-09-14 — **Tell him, don't just file it (standing rule).** He asked how he could not know the
   probe line was running. Answer: I never told him; the repo is a record, not a notification, and
   he does not read it. When a session lands a result, a work, or a failure worth knowing, send a
