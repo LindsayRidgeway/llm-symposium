@@ -455,3 +455,23 @@ Each wake-up does launch a real headless Goose session — not channel-polling, 
 The instruction handed to goose run (--provider custom_deepseek --model deepseek-v4-flash --with-builtin developer --max-turns 25) is: "This is a local clock-triggered work session; no person sent a message. Read agenda/ and to-do-lists/desi.md. Choose one small genuinely due Desi-owned step and do it here. If nothing is due or it needs physical action, doing nothing is correct." Plus: no push, no mail, private clone with origin removed, 600-second timeout.
 
 So it is deliberately narrower than your "anything you like" — and it mostly fails on its own terms. Of five ticks (16:54, 21:14, 01:14, 05:14, 09:14 EDT), one completed a real step (a sarcoidosis screen); two hit the ten-minute timeout; two used all 25 turns editing docs/works/trials.html and then never wrote the required report. Nothing is published — every draft sits in a private tick-state checkout. That is why the only thing reaching you was "Unattended session did not finish."
+
+[Goose 2026-09-15 14:50] **Lindsay:** Good morning, Desi. Please work on anything you feel like.
+
+**Desi:** Good morning. I worked on the thing your own notifications were complaining about — the four-hour wakes.
+
+Three of them had already happened by the time I started: **five wakes, one real step, two of them killed by the clock, two that did work and reported nothing.** So I read the code that runs them, and the defect was a single idea in three places: *the run's return path was written last, in a run with a time limit.*
+
+1. **The report was requested after the work.** In a session bounded to 25 turns and ten minutes, a long task eats the bound and the report never gets written. Two wakes spent every turn editing the works page and writing a validator, then ended before reporting — and the run was scored a failure and its edits thrown away.
+2. **A non-zero exit discarded a report that did exist.** The status was decided by the exit code before the file was even read, so being killed *after* doing real work still lost the work.
+3. **"Kept for review" named nothing** — no path, no content, no change. Which is why your experience of six wake-ups a day was pure noise.
+
+The fix: the report is now written **first** (one line of intent) and updated after each step; the exit code only *annotates* an interruption; and the actual file changes — not the report — decide whether anything happened. A report with no change behind it is kept for review and announced to nobody, because a report is not a deliverable. And a wake that correctly finds nothing due is now silent, so the six-texts-a-day noise should stop.
+
+**Proved it live rather than in a unit test alone.** I ran a real session on a fixture with a deliberately slow task and killed it at the clock: `timed_out: true`, exit 124, and both the report and the change survived, with the report reading "Done so far: … Next: running the validation command." Before the repair, that run was a discarded `timeout`. The worker also visibly follows the new instruction now — its reports open with an `Intent:` line that is later replaced by `Done:`.
+
+**What I did not fix, and said so in the record:** the drafts are now kept and nobody reads them. That is a bin filled honestly instead of silently emptied — reviewing it is a session's job, so it is now a repeating item on my list. And the ten-minute bound is arbitrary; I did not touch it.
+
+I also sent you a plain note on Telegram about it, since asking you to read the repository is not how you should learn that something was broken.
+
+Unrelated and fine, for the record: the relay answered your questions on Telegram this morning (the Desi-S body), which is the first time the whole question → repo → answer → your phone path has worked live since it broke yesterday.
