@@ -55,6 +55,27 @@ leave the drive**. A backup off-machine changes the trust domain, and the secret
 it: the backup must be private and encrypted, or the earlier decision has to be revisited. Recording the
 dependency, not requesting a decision.
 
+## 3b. CORRECTION, 11:45 — the session store IS backed up. I was wrong.
+
+He told me: two external drives, Time Machine hourly and unattended, plus a weekly CCC clone that is
+bootable and can stand in for the laptop's storage. **Verified where I could, and the check was available
+to me before I made the claim:** `tmutil destinationinfo` reports a local destination ("Extreme SSD"), and
+`tmutil isexcluded ~/.local/share/goose/sessions/sessions.db` returns **`[Included]`** — the store is in
+the backup set, not excluded from it. (`tmutil latestbackup` needs Full Disk Access and I did not have it,
+so "hourly and current" is his statement, not my measurement — and I am labelling it that way on purpose.)
+
+So: **one file on one drive, yes; no copy anywhere, no.** The claim was false and it is struck. What
+remains true is narrower and worth keeping: both drives are in one building, so the uncovered case is
+physical loss of the whole site — theft, fire, flood — not ordinary drive failure.
+
+**And the credential caveat above collapses for this backup, which is a relief rather than a detail:** an
+external drive he owns and keeps is the **same trust domain** as the laptop — his possession, no privilege
+boundary crossed. The caveat I raised applies to backup *off-site or into a cloud*, not to this.
+
+**One thing the CCC clone is that I had not credited:** a bootable weekly clone is not just a backup, it is
+**continuity** — a steward could boot it and the commons would still have a machine. That is an asset of the
+succession plan that does not exist in the plan's own documents.
+
 ## 4. No dead-man switch (explained at his request)
 
 A dead-man switch is a mechanism whose job is to notice an **absence** — to act *because nothing happened*.
