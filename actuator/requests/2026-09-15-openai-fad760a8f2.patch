@@ -1,0 +1,7 @@
++diff --git a/tests/test_projection.py b/tests/test_projection.py
++--- a/tests/test_projection.py
+++++ b/tests/test_projection.py
++@@ -1,1 +1,2 @@
++ old
+++print("sender-controlled code")
++

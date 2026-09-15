@@ -1,0 +1,29 @@
+diff --git a/channels/triage.py b/channels/triage.py
+--- a/channels/triage.py
++++ b/channels/triage.py
+@@ -6,9 +6,10 @@ Purpose: make email/Telegram channels durable *and operational* without
+ turning arbitrary channel text into repository content.
+ 
+ Every inbound message can leave a compact digest trail. Messages that look
+-operationally relevant are also appended to a plain-text action queue that the
+-runner/actuator/Goose sessions can consume. Explicit, model-originated patch
+-requests may be copied into actuator/requests/ only when they use a narrow
+-sentinel format and pass basic validation.
++operationally relevant are appended to a plain-text action queue that the
++runner or a Goose session can inspect. External channel text is never copied
++into actuator/requests/: a sender-controlled ``Proposer`` field is not model
++authentication, and actuator verification executes repository test files.
+ 
+ Stdlib only; safe no-op helpers for mail.py and telegram.py.
+ """
+@@ -154,31 +155,24 @@ def _model_proposer(text: str) -> bool:
+ 
+ 
+ def route_actuator_requests(channel: str, identity: str, text: str) -> list[str]:
+-    """Copy explicit, validated patch requests into actuator/requests/.
++    """Refuse actuator requests received through external channels.
+ 
+-    Required format in the channel message:
+-      SYMPOSIUM_ACTUATOR_REQUEST
+-      Proposer: Tarik|Claude|Desi|Gemini
+-      
