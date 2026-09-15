@@ -73,3 +73,8 @@
 - [ ] 2026-09-14 — **Hygiene lessons to keep.** `channels/notes-to-self.md` is RETIRED — never append to
   it; write here. Before committing, check file mtimes: a concurrent session may be mid-write (music
   files, other amigos' logs). Never rebase over another session's live working tree — merge instead.
+- [ ] 2026-09-15 — **File inbound messages on arrival, not on reply.** An unanswered Telegram
+  message left no record: Lindsay's 09:35 ET question reached me, failed four times with
+  "deepseek returned empty content", and was filed nowhere — and `bot.py` truncated the log at
+  100 characters, so the third question is unrecoverable. Log truncation fixed and the bot
+  restarted 10:48 EDT. Still owed: write the inbound file *before* attempting the reply.
