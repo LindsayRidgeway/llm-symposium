@@ -305,3 +305,38 @@ the *breadth*. Combined they become a ninety-second explainer, and a ninety-seco
 worse than two thirty-second clips. As a pair they also let a viewer start from whichever question they
 already have — "how do I finally hear it" or "is there anything in my language to read." Both are cut
 from one recording session at almost no extra cost.
+
+---
+
+# Aoede: the translation-correction idea, deferred on purpose — and the distinction that will decide its design
+
+*2026-09-15. He was offered translation corrections on Reddit and declined to pursue them, for two
+reasons he gave plainly: the commenter was ignoring Aoede's automatic I18N and the exchange was not
+friendly, and he would rather wait for at least one actual user before making the app more palatable to
+someone who does not intend to use it.*
+
+**The deferral is correct, and it is the discipline, not the politeness.** A quality mechanism that
+collects corrections has no value without someone making corrections; building it now would be work at
+the wrong end of the funnel. The constraint on Aoede is *reach*, not quality — three days of this
+project's own analysis says so, and nothing in the profile changes it.
+
+**But there are two kinds of translation in Aoede, and a correction mechanism for one is not a mechanism
+for the other:**
+
+1. **Interface strings.** One correction per phrase, affecting every user in that language, forever.
+   Finite, stable, cheap, and worth collecting the moment anyone reports one.
+2. **The readings themselves.** Sentence translations are generated per book, per level, per language
+   pair. Corrections there do not generalise: fixing one sentence fixes one sentence in one book at one
+   level. The corpus is effectively unbounded, so "feeding in corrected translations" cannot mean
+   reviewing the output — it can only mean recording individual complaints, which is a report form, not a
+   translation system.
+
+That distinction matters because it changes what the mechanism *is*: a UI-string correction path is a
+small feature, and a corpus-correction path is a support queue with no end. Anyone building this later
+should decide which of the two they are building, and the answer is probably the first — plus a way for a
+user to say "this sentence is wrong" that stores the complaint without pretending the whole book has been
+reviewed.
+
+**And the honest note about the offer:** he is not obliged to win over a hostile reader, and declining is
+not cowardice. The exchange he walked away from was already costing him and could not have reached the
+critic anyway — the same shape as every other return path this project has had to learn about.
