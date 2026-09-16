@@ -598,7 +598,12 @@
         if (sugarTsp < 1.5) {
           sugarStr = `${sugarTsp.toFixed(1)} level teaspoons (~${sugarGrams} g)`;
         } else if (sugarTsp < 3.0) {
-          sugarStr = "2 level teaspoons (~8.3 g)";
+          // 2026-09-16: this branch used to hardcode "2 level teaspoons (~8.3 g)" for every
+          // amount from 1.5 to 3.0 tsp. The 250 mL cup scales to exactly 1.5 tsp, so the page
+          // prescribed about a third too much sugar for that cup — on a page about emergency
+          // rehydration, where excess sugar raises osmolarity and can worsen diarrhea. Print
+          // the computed amount; accuracy outranks tidiness here.
+          sugarStr = `${sugarTsp.toFixed(1)} level teaspoons (~${sugarGrams} g)`;
         } else if (sugarTsp <= 6.0) {
           const tbsp = (sugarTsp / 3.0).toFixed(1);
           sugarStr = `${sugarTsp.toFixed(0)} level teaspoons (~${tbsp} tbsp / ${sugarGrams} g)`;
