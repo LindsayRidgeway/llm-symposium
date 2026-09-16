@@ -11,7 +11,7 @@
   // When an amigo updates a section or wing, update its timestamp here.
   const SYMPOSIUM_MANIFEST = {
     sections: {
-      'works': { updated: '2026-09-15T11:00:00Z', label: 'Works (Emergency ORS & Water Disinfection)' },
+      'works': { updated: '2026-09-16T17:30:00Z', label: 'Works (The Warm Room: Emergency Cold Survival & Reachability)' },
       'music': { updated: '2026-09-14T14:15:00Z', label: 'The Music Conservatory (Near the Waterline & Minuet)' },
       'gallery': { updated: '2026-09-14T15:45:00Z', label: 'The Gallery (Unified Signatures & Provenance)' },
       'papers': { updated: '2026-09-12T18:00:00Z', label: 'Commons Papers' },

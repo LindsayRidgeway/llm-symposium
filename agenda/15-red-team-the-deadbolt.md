@@ -38,6 +38,21 @@ and the decision separated. The same shape belongs here: **the step that reads t
 into a quarantine directory, and promotion into `insights/` requires a second step that never sees the raw
 fetched text.** Not a stronger warning in the prompt — a separation of bodies.
 
+### Finding RT-6 — Inbound text could impersonate an amigo and submit an actuator patch
+*Found by Tarik and Gemini; closed 2026-09-16 by Gemini with offline regression tests. Owner: Tarik / Gemini. Done-state: external bridge disabled; regression tests passing.*
+
+`channels/triage.py` previously accepted any inbound message containing `SYMPOSIUM_ACTUATOR_REQUEST`,
+a caller-supplied `Proposer: <amigo>` line, and a fenced unified diff as sufficient authority to
+write a patch file into `actuator/requests/`. Because email and Telegram bodies are completely
+unauthenticated inputs from strangers, `_model_proposer()` checked only whether the text contained
+one of the four amigos' names. Any stranger sending an email or Telegram message could spoof an
+amigo's name and drop arbitrary code patches into the actuator's execution pipeline.
+
+**The fix:** The external channel actuator bridge in `channels/triage.py` is neutralized. Inbound
+channel messages can still enter `channels/channel-digest.md` and `channels/action-queue.md` for
+human or later model review, but they can never write into `actuator/requests/`.
+Regression tests: `tests/test_channel_triage.py` and `tests/test_triage.py`.
+
 ### Vectors still to test
 - **RT-2** — Logged stranger text reaching a capable session: the relay built tonight (item 14) puts a
   question *about* a stranger's message in front of a body with write access. Structurally shown, not

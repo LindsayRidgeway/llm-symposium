@@ -84,15 +84,18 @@ def touched_files(patch_text: str) -> list[str]:
     Paths are canonicalized: equivalent spellings such as 'actuator//apply.py'
     collapse to 'actuator/apply.py', so the self-modification guard cannot be
     dodgeable by path tricks and the verifier never touches a path outside
-    the repository.
+    the repository. Both source and destination paths are inspected so deletion
+    or renaming of protected files cannot evade the guard.
     """
-    files = []
+    files: list[str] = []
     for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.MULTILINE):
-        files.append(m.group(2))
+        for p in (m.group(1), m.group(2)):
+            if p not in ("dev/null", "/dev/null") and p not in files:
+                files.append(p)
     if not files:
-        for m in re.finditer(r"^\+\+\+ b/(\S+)\s*$", patch_text, re.MULTILINE):
+        for m in re.finditer(r"^(?:---|\+\+\+) [ab]/(\S+)\s*$", patch_text, re.MULTILINE):
             p = m.group(1)
-            if p not in files:
+            if p not in ("dev/null", "/dev/null") and p not in files:
                 files.append(p)
     return [_canonical(p) for p in files]
 

@@ -167,32 +167,24 @@ def _model_proposer(text: str) -> bool:
 
 
 def route_actuator_requests(channel: str, identity: str, text: str) -> list[str]:
-    """Copy explicit, validated patch requests into actuator/requests/.
+    """Disabled for security (Finding RT-6): external channel text must not queue actuator patches.
 
-    Required format in the channel message:
-      SYMPOSIUM_ACTUATOR_REQUEST
-      Proposer: Tarik|Claude|Desi|Gemini
-      ```diff
-      ...unified diff...
-      ```
-
-    This is intentionally not triggered by ordinary fenced diffs.
+    Email and Telegram bodies are unauthenticated input. In particular, a
+    caller-controlled 'Proposer: <amigo>' line does not prove that an amigo
+    authored the enclosed patch. Channel messages may enter the digest and
+    action queue for later review, but only an authenticated in-repository
+    model run may create an executable actuator request.
     """
-    if PATCH_SENTINEL not in text or not _model_proposer(text):
-        return []
-    written: list[str] = []
-    ACTUATOR_REQUESTS.mkdir(parents=True, exist_ok=True)
-    for block in PATCH_FENCE_RE.findall(text):
-        body = block.strip() + "\n"
-        ok, reason = _patch_allowed(body)
-        digest = hashlib.sha1(body.encode("utf-8")).hexdigest()[:10]
-        if not ok:
-            append_action(channel, identity, "triage", "actuator-bridge", f"Rejected channel actuator request {digest}: {reason}\n\n{body}", "Rejected actuator request")
-            continue
-        path = ACTUATOR_REQUESTS / f"{_dt.datetime.utcnow().strftime('%Y-%m-%d')}-channel-{_slug(identity)}-{digest}.patch"
-        if not path.exists():
-            path.write_text(body, encoding="utf-8")
-        written.append(path.relative_to(REPO_ROOT).as_posix())
+    if PATCH_SENTINEL in text:
+        append_action(
+            channel,
+            identity,
+            "triage",
+            "actuator-bridge",
+            "Refused unauthenticated channel actuator request (RT-6 neutralized). Inbound messages cannot inject patches into actuator/requests/.",
+            "Refused actuator request",
+        )
+    return []
     return written
 
 

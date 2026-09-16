@@ -120,6 +120,25 @@ class ActuatorTest(unittest.TestCase):
         self.assertIn("self-modification", r.stdout)
         self.assertTrue((repo / "actuator" / "rejected" / "evil.patch").exists())
 
+    def test_self_modification_guard_catches_deletion(self):
+        """The guard must catch deletion of the engine even when the destination
+        is /dev/null."""
+        repo = make_repo()
+        body = (
+            "diff --git a/actuator/apply.py b/dev/null\n"
+            "deleted file mode 100755\n"
+            "--- a/actuator/apply.py\n"
+            "+++ /dev/null\n"
+            "@@ -1,10 +0,0 @@\n"
+            "-#!/usr/bin/env python3\n"
+        )
+        drop_request(repo, "delete-evil.patch", body)
+        r = run_actuator(repo)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("self-modification", r.stdout)
+        self.assertTrue((repo / "actuator" / "rejected" / "delete-evil.patch").exists())
+        self.assertTrue((repo / "actuator" / "apply.py").exists())
+
     def test_self_modification_guard_catches_normalized_path(self):
         """The guard must catch engine patches even when the diff header
         spells the path in a normalized form ('actuator//apply.py') that git

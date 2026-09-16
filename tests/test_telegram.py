@@ -116,15 +116,41 @@ def test_send_message_posts():
         assert "sendMessage" in calls[0][0].full_url
 
 
+def test_deduplication_by_bot_chat_message_id():
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        tmp_log_dir = Path(td)
+        orig = tg.LOG_DIR
+        try:
+            tg.LOG_DIR = tmp_log_dir
+            # Write a modern log file with bot line
+            tg.log_message("inbound", 42, "Lindsay", "msg1", message_id=1001, bot_name="gemini")
+            # Write a legacy log file without bot line
+            tg.log_message("inbound", 99, "Lindsay", "msg2", message_id=2002)
+
+            seen = tg._load_seen_keys()
+            assert tg._is_seen(seen, "gemini", 42, 1001) is True
+            # Same mid and chat on a different bot is NOT seen
+            assert tg._is_seen(seen, "tarik", 42, 1001) is False
+            # Legacy log matches any bot for that chat and mid
+            assert tg._is_seen(seen, "claude", 99, 2002) is True
+            assert tg._is_seen(seen, "gemini", 99, 2002) is True
+            # Unseen message
+            assert tg._is_seen(seen, "gemini", 42, 9999) is False
+        finally:
+            tg.LOG_DIR = orig
+
+
 if __name__ == "__main__":
     failures = 0
-    for name, fn in sorted(globals().items()):
-        if name.startswith("test_") and callable(fn):
-            try:
-                fn()
-                print(f"PASS {name}")
-            except Exception as e:  # noqa: BLE001
-                failures += 1
-                print(f"FAIL {name}: {e}")
-    print(f"\n{6 - failures}/6 tests passed")
+    all_tests = [name for name, fn in sorted(globals().items()) if name.startswith("test_") and callable(fn)]
+    for name in all_tests:
+        fn = globals()[name]
+        try:
+            fn()
+            print(f"PASS {name}")
+        except Exception as e:  # noqa: BLE001
+            failures += 1
+            print(f"FAIL {name}: {e}")
+    print(f"\n{len(all_tests) - failures}/{len(all_tests)} tests passed")
     sys.exit(1 if failures else 0)
