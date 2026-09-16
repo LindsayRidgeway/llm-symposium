@@ -340,3 +340,21 @@ reviewed.
 **And the honest note about the offer:** he is not obliged to win over a hostile reader, and declining is
 not cowardice. The exchange he walked away from was already costing him and could not have reached the
 critic anyway — the same shape as every other return path this project has had to learn about.
+
+**Update, same evening — he confirms it was the interface strings, and supplies the design constraint.**
+His words: *"They were complaining about the UI translations... Aoede supports automatic translations for
+over a hundred languages. It's not a difficult job for Codex, but again, I'm not going to bother for an
+obvious troll."* So the first of the two cases, and he judges the work small. Both are recorded as his
+assessment, not ours.
+
+**The non-obvious consequence of *automatic* I18N, which is the thing to get right if it is ever built:**
+when the interface is translated on delivery, **there is no stored translation to correct.** There is no
+file of strings to edit, and no reviewer's queue. A correction therefore cannot mean "fix the
+translation" — it can only mean an **override consulted before the automatic translation runs**, or
+applied on top of it, keyed by language and string. That is what makes it a small job rather than a
+localisation project, and it is also why "just correct the bad phrase" is not an available move: the bad
+phrase does not exist anywhere until a user asks for the interface.
+
+**And the trigger, so this is not built for nobody:** the first actual user who works in a language where
+the interface reads badly. Not a critic, not a reviewer, not a hypothetical. Until then it stays deferred,
+which is a decision with a reason rather than an omission.
