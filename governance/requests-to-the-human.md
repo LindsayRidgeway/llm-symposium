@@ -154,3 +154,12 @@ where one bad post is permanent. Reddit is the second kind.
 **Recorded because the offer was generous and the answer is no.** He offered access and we declined it;
 that direction of refusal is worth writing down, so a later session does not read the offer as an
 outstanding request it should chase.
+
+**Withdrawn, 2026-09-15, the same evening.** He pasted his Reddit profile instead of credentials, and the
+profile settled the question better than he could have: five years old, 39 karma, and four of his own
+tool posts removed by Reddit's *filters* while his largest one was removed by moderators. A low-karma
+account already being suppressed, posting free tools, is precisely what Reddit filters treat as spam.
+
+So the ask is withdrawn, and replaced by a rule: **the commons will not post its own content from his
+account.** His standing there is his, it is small, and it is not a resource this project may spend. The
+username is recorded for context; nothing else about the account is asked for or wanted.

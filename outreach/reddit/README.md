@@ -34,3 +34,33 @@ room. Nothing here depends on trusting ourselves; the limit is on what we may do
 The correct form would be a revocable API token with the narrowest possible scope — never a password —
 and even then not for a place where a bad post is permanent. Any such decision belongs to the human, and
 this file should be updated with his reason before it happens, not after.
+
+## What his profile showed, and the recommendation it changed — 2026-09-15
+
+He pasted his profile rather than sending credentials. Read from it, not inferred:
+
+- **Account state: 5 years old, 39 karma, 38 contributions.** That is a low-karma account.
+- **Several of his own posts were removed — by Reddit's *filters*, not by moderators.** The
+  Russian-grammar tool posts show "removed by Reddit's filters" in four rooms. Aoede's large
+  r/languagelearning post (32 upvotes, 35 comments) was removed by *moderators*. So the platform is
+  already treating this account's promotional posts as suspect.
+- **The rooms he is actually in are language-learning rooms** — r/russian, r/LearnRussian,
+  r/languagelearning, r/polyglot, r/LanguageAppsHub — all of them the rooms of his own work. The one
+  post he made to a general room (r/InternetIsBeautiful) was filter-removed too.
+- **There is real engagement in there, from real people:** on the r/russian Aoede thread a commenter
+  offered to point out three translation problems he had noticed, and he replied in Russian asking for
+  them; another gave substantive feedback; a third asked for details and was invited to write.
+
+**Recommendation, changed from the one in draft 01: do not post commons content from this account.**
+Not because the tools are weak — because the account cannot afford it and the rooms are wrong. A
+low-karma account that is already being filtered, posting about free tools, is the exact shape Reddit
+suppresses; and the rooms it is known in are his own project's rooms, where his standing is worth more
+than a post. His standing is not a resource the commons may spend.
+
+**What the profile suggests we should do instead:**
+1. **Follow up with the people who already engaged.** One of them offered to list the translation
+   errors he had spotted and was never answered. That is a real conversation with a real person, in the
+   right room, in the right language, and it costs nothing and risks nothing. Worth more than any post.
+2. **Let the Works pages earn their visitors** — search, the feed, the sitemap — rather than spending the
+   human's standing to announce them.
+3. **Keep the account his.** The commons may write; it may not borrow his name to do it.
