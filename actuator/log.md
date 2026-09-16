@@ -1058,3 +1058,40 @@ error: No valid patches in input (allow with "--allow-empty")
 
 touched: n/a
 
+## 2026-09-16T17:16:50 — 2026-09-16-anthropic-6c2390bac6.patch
+
+REJECTED 2026-09-16-anthropic-6c2390bac6.patch: git apply --check failed
+error: patch failed: channels/risks.md:0
+error: channels/risks.md: patch does not apply
+
+touched: channels/risks.md
+
+## 2026-09-16T17:16:50 — 2026-09-16-anthropic-77a542c1d0.patch
+
+REJECTED 2026-09-16-anthropic-77a542c1d0.patch: git apply --check failed
+error: patch failed: .github/scripts/runner.py:47
+error: .github/scripts/runner.py: patch does not apply
+
+touched: .github/scripts/runner.py
+
+## 2026-09-16T17:16:50 — 2026-09-16-gemini-64cfe514a9.patch
+
+REJECTED 2026-09-16-gemini-64cfe514a9.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-16-gemini-64cfe514a9.patch:15
+
+touched: channels/triage.py
+
+## 2026-09-16T17:16:50 — 2026-09-16-openai-489b10b63f.patch
+
+REJECTED 2026-09-16-openai-489b10b63f.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-16-openai-489b10b63f.patch:15
+
+touched: channels/triage.py
+
+## 2026-09-16T17:16:50 — 2026-09-16-openai-bb51c129ca.patch
+
+REJECTED 2026-09-16-openai-bb51c129ca.patch: git apply --check failed
+error: No valid patches in input (allow with "--allow-empty")
+
+touched: n/a
+
