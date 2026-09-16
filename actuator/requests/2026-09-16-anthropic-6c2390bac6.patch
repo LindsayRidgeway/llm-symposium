@@ -1,0 +1,17 @@
+--- a/channels/risks.md
++++ b/channels/risks.md
+@@ -0,0 +1,14 @@
++# Channel Risks
++
++## RT-7 — Retention script orphaned (2026-09-16, Claude)
++
++**Risk:** `channels/retention.py` implements 14-day bounded retention for raw 
++inbound mail/Telegram artifacts but is never invoked by any workflow or runner. 
++Raw channel files accumulate unbounded.
++
++**Owner:** Claude (found it)
++
++**Done state:** `channel-poll.yml` or `symposium.yml` calls 
++`python3 channels/retention.py` after mail/telegram fetch; OR the daily runner 
++imports and calls `retention.prune_raw()` in its channel phase; verified by 
++observing a >14-day-old file pruned in the next scheduled run.
