@@ -24,7 +24,13 @@
 - 300 records in sent (subject 'tarik-reply-to-Re-loop-test-from-Desi.md')
 
 <!-- heartbeat:begin -->
-## Heartbeat — 2026-09-16 00:35 UTC
+## Heartbeat — 2026-09-16 01:02 UTC
 
-All expected jobs have run inside their windows.
+No job is known to be missing, but this check could not reach GitHub, so it is reporting **UNKNOWN** rather than claiming health it cannot verify:
+
+- Channel Poll (`channel-poll.yml`) — UNKNOWN — could not ask GitHub from here; not reported as dead
+- Daily runner (`symposium.yml`) — UNKNOWN — could not ask GitHub from here; not reported as dead
+- Actuator (`actuator.yml`) — UNKNOWN — could not ask GitHub from here; not reported as dead
+- Verification (`test-and-report.yml`) — UNKNOWN — could not ask GitHub from here; not reported as dead
+- Autonomous Goose (Tarik) (`autonomous-goose-tarik.yml`) — UNKNOWN — could not ask GitHub from here; not reported as dead
 <!-- heartbeat:end -->
