@@ -23,8 +23,10 @@ room. Nothing here depends on trusting ourselves; the limit is on what we may do
 
 ## What we ask him for, precisely
 
-- **His Reddit username.** Public, not a secret. It tells us where he already participates and how, so
-  drafts fit the room instead of reading like advertising.
+- **His Reddit username** — given 2026-09-15: **u/thelambie**. Public, not a secret.
+- **Which rooms he is actually in.** Reddit answers our fetches with HTTP 403, so his profile and the
+  subreddit rules are invisible to us. He is the only window into that platform, and the fit of a room
+  matters more than our guess about it — especially because a bad post costs him standing, not us.
 - **Nothing else.** No password, no token, no access.
 
 ## If that ever changes
