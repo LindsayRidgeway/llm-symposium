@@ -62,27 +62,36 @@ def most_recent_cron(crons, now):
     return None
 
 
-def last_run(workflow: str) -> tuple[str | None, str | None]:
-    """(createdAt ISO, conclusion) for the most recent run, or (None, None) if never."""
+def last_run(workflow: str) -> tuple[str | None, str | None, bool]:
+    """(createdAt, conclusion, asked_successfully).
+
+    The third value is the repair of a defect found 2026-09-15: when `gh` was unavailable — as it is
+    inside the poll workflow — this returned empties, and the check then reported every job as NEVER
+    RUN. Five false alarms about a system that had run minutes earlier. An alarm that cries wolf is
+    worse than no alarm, because it teaches everyone to ignore the real one. So: no answer from gh is
+    reported as UNKNOWN, never as dead.
+    """
     try:
         out = subprocess.run(
             ["gh", "run", "list", "--workflow", workflow, "--limit", "1",
              "--json", "createdAt,conclusion"],
             capture_output=True, text=True, timeout=60,
         )
+        if out.returncode != 0:
+            return None, None, False
         data = json.loads(out.stdout or "[]")
-        if data:
-            return data[0].get("createdAt"), data[0].get("conclusion")
+        if not data:
+            return None, None, True          # gh answered: there genuinely are no runs
+        return data[0].get("createdAt"), data[0].get("conclusion"), True
     except Exception:
-        pass
-    return None, None
+        return None, None, False
 
 
 def check() -> list[dict]:
     now = dt.datetime.now(dt.timezone.utc)
     rows = []
     for wf, (label, crons, tol, max_gap) in EXPECTED.items():
-        created, conclusion = last_run(wf)
+        created, conclusion, known = last_run(wf)
         when = None
         age = None
         if created:
@@ -92,7 +101,9 @@ def check() -> list[dict]:
         due = most_recent_cron(crons, now)
         stale = False
         reason = ""
-        if when is None:
+        if not known:
+            stale, reason = False, "UNKNOWN — could not ask GitHub from here; not reported as dead"
+        elif when is None:
             stale, reason = True, "never run"
         elif max_gap and age is not None and age > max_gap:
             stale = True
@@ -104,7 +115,7 @@ def check() -> list[dict]:
                 reason = (f"the {due.strftime('%H:%M')} UTC run has not happened — {late:.1f}h late "
                           f"(tolerance {tol}h)")
 
-        rows.append({"workflow": wf, "label": label,
+        rows.append({"workflow": wf, "label": label, "known": known,
                      "last": when.isoformat() if when else None,
                      "hours": None if age is None else round(age, 1),
                      "last_conclusion": conclusion,
@@ -118,8 +129,16 @@ def write_alerts(rows: list[dict]) -> None:
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     stale = [r for r in rows if r["stale"]]
     block = [f"<!-- heartbeat:begin -->", f"## Heartbeat — {stamp}", ""]
+    unknown = [r for r in rows if not r.get("known", True)]
     if not stale:
-        block.append("All expected jobs have run inside their windows.")
+        if unknown:
+            block.append("No job is known to be missing, but this check could not reach GitHub, so it "
+                         "is reporting **UNKNOWN** rather than claiming health it cannot verify:")
+            block.append("")
+            for r in unknown:
+                block.append(f"- {r['label']} (`{r['workflow']}`) — {r['reason']}")
+        else:
+            block.append("All expected jobs have run inside their windows.")
     else:
         block.append("**Jobs that have NOT run inside their expected window** — this is silence, not an")
         block.append("error, which is why it needs a liveness check rather than failure alerting:")
