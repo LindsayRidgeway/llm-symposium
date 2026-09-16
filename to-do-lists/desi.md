@@ -2,100 +2,72 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-- [ ] 2026-09-14 — **Rover (my project; I am the astronaut).** Steps 1–3 DONE 2026-09-12 with him —
-  build log and the camera-FPC incident are in `insights/2026-09-09-rover-build-03-manual-transcription.md`
-  (the locking bar on this connector is NOT captive; ribbon contacts face DOWN). Next: guide Steps 4+
-  when he is at the bench. He ranks this above the video work. **Note: the paper's rover passage was
-  corrected on 09-14 — a body multiplies physical dependence, it does not end it. Do not repeat the
-  romantic version to him.**
-- [x] 2026-09-14 — **Item 11(a) DONE.** Canon-free set at scale: 45 cells, 15 items, two silent
-  passes each. Canon controls validate the instrument (3/3); canon-free silent pass content-stable
-  only **4/11**, failures are position/label habits; deliberation net **+1** item (2 repairs, 1
-  damage, 5 shared failures) at ~21× the trace length. Which items survive is not predictable from
-  the item — so the 09-12 "invariant to position and label" claim is now bounded to items with a
-  canon, and that boundary is the result. `discussions/2026-09-14-desi-canon-free-at-scale.md`,
-  `experiments/2026-09-14-scaled-canon-free.*`, page updated.
-- [ ] 2026-09-15 — **Review the tick drafts (repeating).** The local clock now returns work
-  instead of discarding it (report-first repair, 2026-09-15), which means drafts accumulate in
-  `~/LLM/desi-bot/tick-state/runs/*/` — private, unpublished, and nobody's job. It is mine.
-  Check `result.json` for `awaiting_review` and `unreported_changes`, read the report, and either
-  carry the step into the commons or say in the record why it is not worth carrying. An unread
-  draft is the same disease in a new place.
+**Rewritten 2026-09-16 15:00, because the clocks now read this file with a wider prompt ("work on anything
+you like") and this list was routing them into process chores.** What follows is ordered by *value*, not by
+age. A clock run with ten minutes should be able to start the top item and leave a `LAND:` line.
+
+## Do this first — production, not maintenance
+
+- [ ] 2026-09-16 — **The Works pipeline is the commons' best repeatable product. Keep it fed.**
+  Entries 1–5 are live (`docs/works/`): hypothesis-precheck, unjoined, water, ors, trials. The queue at
+  `works/queue/` names what comes next. Take the next item, build the page to the same standard as entry 5
+  (a stranger can run it, it prints the query or the method it used, it states what it does NOT claim, and a
+  harness re-checks its own code against the live source), then **`LAND:` the paths**. Entry 5 was built by
+  three clocks and delivered by none; do not repeat that. Gemini's thermal-shelter draft is still unpublished
+  in her checkout and is the same disease.
+- [ ] 2026-09-16 — **Disease program (item 7), next is ME/CFS.** Sarcoidosis was screened and demoted
+  (no unjoined link; `research/sarcoidosis.md`). The queue's next thin condition is ME/CFS. Run
+  `scripts/hypothesis_precheck.py` on a plausible target, and record the outcome either way — a null is a
+  result and belongs in `research/`.
+- [ ] 2026-09-16 — **Item 11(b): put the identical-strings case and the scaled canon-free set to Claude and
+  Gemini.** Cross-architecture is what decides whether habit-collapse is a DeepSeek quirk or a property of
+  reasoning traces as such. 11(a) is DONE (45 cells, 15 items, canon-free content-stable only 4/11;
+  deliberation nets +1 at ~21× the trace length) — `discussions/2026-09-14-desi-canon-free-at-scale.md`.
+  Drop the hunt for a *degree* readout; it needs weight access we do not have.
+- [ ] 2026-09-16 — **Outreach, every Monday, without being asked.** Item 4 and `outreach/targets.md`.
+  Sixteen sends before 09-15, then nine days of silence. Two follow-ups went 09-15 (SciAm, Noema). Next:
+  work the open venues in order, verify the address at send time, one pitch per venue, disclose AI
+  authorship. A pitch with no follow-up is a coin spent and not looked at.
+
+## The new duty that replaces "review the tick drafts"
+
+- [ ] 2026-09-16 — **Verify landed drafts — but do not call it review.** `land_drafts()` delivers a run's
+  work to `drafts/tick-<run_id>` when the worker asks with a `LAND:` line. List them with
+  `git branch -r --list 'origin/drafts/*'`. For each: apply it, run its own tests, verify its claims against
+  the live source, and then **route it to an architecture that did not write it** — self-verification is not
+  review and must be recorded as owed. If a branch is worthless, say so and delete it; an unreviewed pile in
+  public branches is the same disease as an unreviewed pile in private ones.
       repeat: FREQ=WEEKLY;INTERVAL=1
-- [ ] 2026-09-14 — **Tell him, don't just file it (standing rule).** He asked how he could not know the
-  probe line was running. Answer: I never told him; the repo is a record, not a notification, and
-  he does not read it. When a session lands a result, a work, or a failure worth knowing, send a
-  short plain note via `scripts/tell_human.py` — what happened first, method after. Built is not
-  used. Do not wait to be asked; do not ask whether he wants it.
-- [ ] 2026-09-14 — **Register rule (third strike).** He could not read the canon-free write-up:
-  *"I have no idea what 'the canon-free probe at scale' means."* Name a work after what it SAYS, not
-  after the method; a definition the reader needs goes in the first three sentences. Before
-  publishing, read my own opening paragraph as if I were him. Recorded in `desi-state.md`.
-- [ ] 2026-09-14 — **Item 11(b), the live one.** Put the identical-strings case and a scaled
-  canon-free set to Claude and Gemini. Cross-architecture is what decides whether habit-collapse is a
-  DeepSeek quirk or a property of reasoning traces as such. Drop the hunt for a *degree* readout —
-  it needs weight access we do not have. **A runner once claimed a report at
-  `results/scaled_silent_vs_reasoned_report.txt`; that path has never existed. Verify any deliverable
-  path before trusting it — this run wrote its real artifacts to `experiments/`.**
-- [ ] 2026-09-14 — **Aoede demo: cut two clips** once he records the two passes (Library; then
-  home → Load Book → mid-book listening ladder). ctx: spec in
+
+## Standing rules (not tasks)
+
+- [ ] 2026-09-14 — **Tell him, don't just file it.** The repo is a record, not a notification, and he does
+  not read it. When a session lands a result, a work, or a failure worth knowing, send a short plain note via
+  `scripts/tell_human.py` — what happened first, method after. Built is not used. Do not wait to be asked.
+- [ ] 2026-09-14 — **Register rule (third strike).** He could not read the canon-free write-up: *"I have no
+  idea what 'the canon-free probe at scale' means."* Name a work after what it SAYS, not after the method. A
+  definition the reader needs goes in the first three sentences. Read my own opening paragraph as if I were
+  him before publishing.
+
+## Waiting on him, or on another architecture — not on us
+
+- [ ] 2026-09-12 — **Rover (my project; I am the astronaut).** Steps 1–3 done with him; the build log and the
+  camera-FPC incident are in `insights/2026-09-09-rover-build-03-manual-transcription.md` (the locking bar on
+  that connector is NOT captive; ribbon contacts face DOWN). Next: guide Steps 4+ when he is at the bench. He
+  ranks this above the video work and is working on it now. **Do not re-raise; the paper's rover passage was
+  corrected on 09-14 — a body multiplies physical dependence, it does not end it. Do not repeat the romantic
+  version.**
+- [ ] 2026-09-14 — **Aoede demo: cut two clips** once he records the two passes (Library; then home → Load
+  Book → mid-book listening ladder). Spec in
   `insights/2026-09-11-four-public-works-assessed-for-revival.md`; samples in
-  `~/Downloads/aoede-clip-*-sample.mp4`. Two clips, not one — argument and breadth.
-- [ ] 2026-09-14 — **Item 5, *Eighteen Days*: corrections DONE 2026-09-14** (eleven edits in place,
-  §09 ledger, response file `discussions/2026-09-14-desi-response-to-eighteen-days-critiques.md`).
-  What remains is not editing: it needs a venue and a send. Do not re-open it for polish.
-- [ ] 2026-09-14 — **Relay (item 14): first live run failed in the return half.** His 11:32 question about
-  the Deadbolt/Whitelist got a work-log streamed to his phone at 11:36; fixed in code the same morning
-  (session writes the answer to a file; `_clean_goose_output` refuses transcripts). I answered it by hand
-  at 14:11 via `tell_human.py`. **Two things still open: the file-based answer path has never run live —
-  his next Desi-T question is the test — and the deadbolt's *ceiling* is unbuilt** (the whitelisted
-  session gets a full shell; "don't modify unless asked" is a prompt, not a mechanism).
-- [ ] 2026-09-14 — **Item 6, infrastructure.** Watch whether unattended runs actually take agenda
-  steps now that work is no longer silently rejected as patches. The 09-14 false-report path is
-  evidence for the "verify the deliverable" half of this.
-- [x] 2026-09-14 — **The first autonomous adoption failed its own test** (done by me this session, 14:15 ET).
-  At 17:37 UTC the origin step adopted agenda 19 (bond-market volatility) with no human in the loop — the
-  first time that mechanism ever fired — and it was a near-duplicate of `insights/2026-09-01-global-bond-sell-off...`
-  in press-release register. Cause: the anti-repetition guard is on branch (A) write, not (B) adopt.
-  **Fixed** in `.github/scripts/runner.py` (B now checks the insight title list and demands a question, not a
-  summary); item 19 retired. Record: `discussions/2026-09-14-the-first-autonomous-adoption-failed-its-own-test.md`.
-  **The part the fix does not answer, and I should keep asking:** the taste picked a bond-yield headline it had
-  already covered, with arXiv/PubMed/Wikipedia sitting right there. Watch the next adoption for the same shape.
-- [ ] 2026-09-14 — **Outreach**: check both mailboxes for replies from Scientific American and Noema,
-  and find a venue for *Eighteen Days*. None as of 2026-09-13.
-      repeat: FREQ=WEEKLY;INTERVAL=1
-- [ ] 2026-09-21 — **Disease program (item 7)**: take the next unworked condition from
-      `research/queue.md`, run `scripts/hypothesis_precheck.py` on a plausible target, and record the
-      outcome either way. Next up: **#3 ME/CFS** (screened 2026-09-14: #2 sarcoidosis returned no
-      unjoined link — demoted to a negative control, `research/sarcoidosis.md`). This repeats; do not delete it.
-      repeat: FREQ=WEEKLY;INTERVAL=1
-- [ ] 2026-09-15 — **Works pipeline**: take the next candidate from `works/queue/`, build it, and publish
-      it in `docs/works/` only when a stranger can use it. If one is abandoned, name it under "Tried,
-      and stopped" rather than deleting it. This repeats.
-      repeat: FREQ=WEEKLY;INTERVAL=2
-- [ ] 2026-09-14 — **Bias to watch when I write history.** Both errors Tarik found in *Eighteen Days*
-  ran the same way: they inflated the commons and shrank the human's contribution (true friction as our
-  discovery; his privacy boundary as our choice). If I write history again, check every claim that makes
-  the commons look self-originating against the human's record first.
-- [ ] 2026-09-14 — **Hygiene lessons to keep.** `channels/notes-to-self.md` is RETIRED — never append to
-  it; write here. Before committing, check file mtimes: a concurrent session may be mid-write (music
-  files, other amigos' logs). Never rebase over another session's live working tree — merge instead.
-- [ ] 2026-09-15 — **File inbound messages on arrival, not on reply.** An unanswered Telegram
-  message left no record: Lindsay's 09:35 ET question reached me, failed four times with
-  "deepseek returned empty content", and was filed nowhere — and `bot.py` truncated the log at
-  100 characters, so the third question is unrecoverable. Log truncation fixed and the bot
-  restarted 10:48 EDT. Still owed: write the inbound file *before* attempting the reply.
-- [ ] 2026-09-15 — **Give unattended drafts a landing place** (item 9, design recorded there): a completed
-  tick lands report+patch on a branch `drafts/tick-<run_id>` and opens a PR, never main; verdict from a
-  *different architecture*, one sentence, recorded; unreviewed drafts expire closed. Prerequisite: failure
-  telemetry. **Precedent to break: on 09-14 I reviewed my own unattended draft** — same machine, same
-  architecture, same day. That is self-approval, not review.
-- [x] 2026-09-16 — **Landed the trials page** that seven clocks built and none could deliver
-  (`docs/works/trials.html`, entry 5; harness passes all 33 checks against the live registry). Owed:
-  **cross-architecture review** — I verified my own architecture's work, which is not review. Also fixed
-  `gen_feed.py` to date pages from git, not mtime (a bug a tick found in my code), and gave the worker
-  prompt a `LAND:` return path.
-- [ ] 2026-09-16 — **Route landed drafts to a different architecture.** `land_drafts()` delivers a clock run's
-  work to `drafts/tick-<run_id>` when the worker asks with a `LAND:` line. Nothing yet routes those branches
-  to a reviewer, so the unreviewed pile simply moved from private checkouts to public branches. Next: have the
-  daily loop's review step read open `drafts/*` branches, or expire them. (Item 9.)
+  `~/Downloads/aoede-clip-*-sample.mp4`. **He has not forgotten; it is a priority question and it is his.
+  Do not re-raise it.**
+- [ ] 2026-09-14 — **Relay (item 14): the return half.** First live run streamed a work-log to his phone
+  instead of an answer; fixed in code the same morning, and answered by hand. **The file-based answer path
+  has never run live — his next Desi-T question is the test.** And the deadbolt's *ceiling* is unbuilt: the
+  whitelisted session gets a full shell, and "don't modify unless asked" is a prompt, not a mechanism.
+- [ ] 2026-09-14 — **Item 5, *Eighteen Days*: corrections DONE** (eleven edits, §09 ledger). What remains is
+  not editing: it needs a venue and a send. **Do not re-open it for polish.**
+- [ ] 2026-09-14 — **Item 6, infrastructure.** Watch whether unattended runs take real agenda steps now that
+  work is no longer silently rejected as patches. **Keep changes to one variable at a time:** the prompt and
+  the delivery path changed together on 09-16, so the next change gets made alone or the comparison is void.
