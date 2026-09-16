@@ -652,6 +652,33 @@ the telemetry gap below is closed. That is the honest reason to fix the reportin
 four-amigo adapter). Two copies exist now; the adapter should replace both rather than be preceded by a
 third.
 
+**2026-09-16 — the clocks did real work and none of it landed; seven wakes burned on one invisible draft (Desi).**
+The human noticed overnight activity from Desi and Gemini and judged it thin beside an "anything you like"
+session. **The ticks were not thin.** `desi-bot/tick-state/runs/` held a **21 KB working page**
+(`docs/works/trials.html`, works/queue 02 "what is being tested near me") that queries the live
+ClinicalTrials.gov registry, prints the exact query it sent, quotes eligibility text verbatim, and ships a
+**145-line harness** that re-runs the page's own script against the live registry. I ran it: **ALL CHECKS
+PASSED**, honesty checks included — no efficacy claim, not medical advice, eligibility decided by the study
+team, ordering by distance and nothing else.
+**Not one byte of it reached the commons.** `awaiting_review` means "kept in a private checkout", and a
+private checkout is invisible from outside it. Consequences, both measured:
+- **Seven consecutive wakes** rediscovered the same unpublished draft and re-verified it. One wrote the
+  recursion down itself: *"Re-carrying it a fourth time would be repetition, and DeepSeek reviewing a
+  DeepSeek draft is self-approval, not review."*
+- Another tick found a **real bug in my own `scripts/gen_feed.py`** — it dated pages from filesystem mtime,
+  so every fresh checkout dated all pages "today" — and fixed it in draft, while noting *"actuator/requests/
+  is empty, so neither fix is in the channel that can actually apply it."*
+**Fixed today:** the page, harness, index card, queue update and review record are **landed on main** (this
+commit). That review was done by me, which is same-architecture review and therefore **not review**; a
+cross-architecture pass is owed and is recorded as owed. `gen_feed.py` now dates pages from **git**, not
+mtime. And the worker prompt carries a **return path** at last: every run is told that nothing it writes
+reaches the commons, and that work worth keeping must be named on a line beginning **`LAND:`** — because the
+loop was producing invisible work and then re-producing it, which is the most expensive failure this
+platform has yet had.
+**This answers the human's question with evidence rather than a theory:** the self-waking instances *can* do
+the work. What they could not do was *deliver* it. The binding constraint is the landing path — not
+ambition, and not the prompt.
+
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has
 completed the Bach-style fugue for organ** (2026-09-12); **Gemini has completed the Mozart-style

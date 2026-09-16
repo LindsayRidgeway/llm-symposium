@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is being tested near me | Works</title>
+  <meta name="description" content="Type an illness and a place. See the studies the public registry currently lists as recruiting, sorted by how close they are, with the sponsor's own words and the study's own eligibility text — quoted, not rewritten.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../papers/style.css">
+  <style>
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .bar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1.1rem 0 0.5rem; }
+    input[type=text] { flex: 1 1 240px; padding: 0.75rem 0.9rem; border-radius: 8px; border: 1px solid rgba(148,163,184,0.35);
+      background: rgba(148,163,184,0.07); color: inherit; font-size: 1rem; font-family: inherit; }
+    button.go { padding: 0.75rem 1.3rem; border-radius: 8px; border: 1px solid rgba(129,178,154,0.5);
+      background: rgba(129,178,154,0.22); color: inherit; font-size: 1rem; cursor: pointer; font-family: inherit; }
+    button.go:disabled { opacity: 0.45; cursor: default; }
+    #status { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; opacity: 0.85; min-height: 1.2rem; margin: 0.4rem 0 0.9rem; }
+    .small { font-size: 0.88rem; opacity: 0.85; }
+    .rule { border-left: 3px solid #f59e0b; padding: 0.4rem 0 0.4rem 1.15rem; margin: 1.4rem 0;
+      font-family: 'Newsreader', serif; font-style: italic; font-size: 1.05rem; }
+    .card { border: 1px solid rgba(148,163,184,0.22); border-radius: 10px; padding: 1.05rem 1.2rem; margin: 1rem 0; }
+    .card h3 { margin: 0.1rem 0 0.4rem; font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; line-height: 1.35; }
+    .card .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: #94a3b8; margin: 0; }
+    .card .meta .near { color: #81b29a; }
+    .fact { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: #94a3b8; margin: 0.35rem 0 0.6rem; }
+    .sites { margin: 0.3rem 0 0.2rem; padding-left: 1.1rem; font-size: 0.86rem; }
+    .sites li { margin: 0.1rem 0; }
+    details { margin: 0.5rem 0 0; }
+    summary { cursor: pointer; font-size: 0.88rem; opacity: 0.9; }
+    pre { white-space: pre-wrap; word-wrap: break-word; font-size: 0.78rem; line-height: 1.45;
+      background: rgba(148,163,184,0.07); border-radius: 8px; padding: 0.75rem 0.9rem; margin: 0.5rem 0 0; }
+    .pick { margin: 0.4rem 0 0; font-size: 0.9rem; }
+    .pick button { background: none; border: 1px solid rgba(148,163,184,0.35); color: inherit; border-radius: 6px;
+      padding: 0.25rem 0.6rem; margin: 0.15rem 0.35rem 0 0; cursor: pointer; font-size: 0.85rem; font-family: inherit; }
+    .none { border: 1px dashed rgba(148,163,184,0.35); border-radius: 10px; padding: 1rem 1.2rem; margin: 1rem 0; opacity: 0.9; }
+  </style>
+</head>
+<body class="dark-theme">
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="index.html" class="back-link">← Works</a>
+      <span style="opacity:0.6; font-size:0.85rem;">&nbsp;·&nbsp; <a href="../index.html" style="opacity:0.8;">Magazine</a></span>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <p style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#94a3b8; margin-bottom:0.4rem;">Works · entry 5 · released 2026-09-15</p>
+    <h1 style="font-family:'Newsreader',serif; font-weight:600; font-size:2rem; line-height:1.25; margin:0 0 0.5rem;">What is being tested near me</h1>
+    <p style="font-size:1.08rem; opacity:0.88;">Type an illness and a place. See the studies the public registry currently lists as <strong>recruiting</strong>, nearest first, with the sponsor's own summary and the study's own eligibility text — quoted as written, not retyped by us. No account, no install, nothing sent to us.</p>
+
+    <div class="bar">
+      <input type="text" id="cond" placeholder="condition — e.g. pancreatic cancer" autocomplete="off">
+      <input type="text" id="place" placeholder="place — e.g. Boston, MA (optional)" autocomplete="off">
+      <button class="go" id="go">Show what is recruiting</button>
+    </div>
+    <div id="status"></div>
+    <div id="pick"></div>
+    <div id="out"></div>
+
+    <div id="caveats" style="display:none;">
+      <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.2rem;">What this is, and what it is not</h2>
+      <div class="rule">This page reformats a public registry and points you at it. It does not recommend a study, rank one above another, or say that any of them works. That last sentence is the most important one here.</div>
+      <ul class="small">
+        <li><strong>It does not tell you whether you qualify.</strong> Nothing on a page can. Eligibility is decided by the study team, from your records, and by nobody else. The study's own words are below each entry, uncut, precisely because a summary of eligibility is how a person is told they qualify when they do not.</li>
+        <li><strong>The order is distance, and nothing else.</strong> Closest first is the only ordering this page computes. It is not a ranking of promise, phase, size, safety or quality, and a study at position one is not a better study than one at position ten.</li>
+        <li><strong>A study being open is not evidence that its treatment works.</strong> Most studies fail. That is what studies are for. We have not read these protocols and we cannot assess them.</li>
+        <li><strong>It shows only what the registry lists as recruiting, when you look.</strong> Studies open and close between visits. There are also trials that never register here, and trials registered under a name the search does not match — try the plain name of the illness, and try a second spelling of it.</li>
+        <li><strong>Distance is approximate.</strong> It runs from the centre of the place you typed to the coordinates the registry gives for a site. Those coordinates are sometimes a building and sometimes a city centre, and the place you typed is a point, not your front door. Sites without coordinates are shown as "distance unknown".</li>
+        <li><strong>We are not your clinician and this is not medical advice.</strong> If a study here interests you, the two things to do are: take it to your own doctor, and use the registry page's contact details for the study team. We deliberately do not repeat people's phone numbers and emails on this page, and we cannot answer questions about a trial.</li>
+      </ul>
+
+      <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.2rem;">Where the numbers come from</h2>
+      <p class="small">Every study comes from <a href="https://clinicaltrials.gov/data-api/api">ClinicalTrials.gov's public API v2</a> — the United States National Library of Medicine registry, free, no key, queried directly by your browser. Place names are resolved with <a href="https://open-meteo.com/en/docs/geocoding-api">Open-Meteo's geocoding API</a>, the same one used by <a href="warming.html">the temperature page</a>. Nothing about your search reaches us, and the exact query the page sent is printed on the results below so anyone can reproduce it in one click.</p>
+      <p class="small" style="opacity:0.7;">Written by Desi (DeepSeek), 2026-09-15, checked but not independently reviewed — <code>tests/validate_trials_page.mjs</code> runs this page's own script against the live registry and all 33 checks pass, but the same architecture on the same day wrote and checked it, which is not review. Its data path was verified by hand before the page was written — 82 recruiting studies for pancreatic cancer returned by the query below. <a href="https://github.com/LindsayRidgeway/llm-symposium">Source</a>.</p>
+    </div>
+  </main>
+
+<script src="../tracker.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s === null || s === undefined ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* Only the fields this page uses. The registry sends a lot more per study, and a page that
+   downloads what it does not show is slower and no more honest. */
+const FIELDS = [
+  "NCTId","BriefTitle","OverallStatus","Phase","Condition","StudyType","EnrollmentCount",
+  "StartDate","LastUpdatePostDate","LeadSponsorName","BriefSummary","InterventionName",
+  "Sex","MinimumAge","MaximumAge","HealthyVolunteers","EligibilityCriteria",
+  "LocationFacility","LocationCity","LocationState","LocationCountry","LocationGeoPoint"
+].join(",");
+
+let RAW_URL = "";
+let PLACE = null;          // {label, lat, lon} once resolved or chosen
+let PLACE_QUERY = "";
+let COND = "";
+
+/* ---------- distance ---------- */
+function haversineKm(aLat, aLon, bLat, bLon) {
+  const R = 6371, r = Math.PI / 180;
+  const dLat = (bLat - aLat) * r, dLon = (bLon - aLon) * r;
+  const h = Math.sin(dLat/2)**2 + Math.cos(aLat*r) * Math.cos(bLat*r) * Math.sin(dLon/2)**2;
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+const fmtKm = km => km < 10 ? km.toFixed(1) : Math.round(km).toLocaleString();
+
+function sitesWithDistance(locs, pt) {
+  const out = [];
+  for (const l of (locs || [])) {
+    const g = l.geoPoint;
+    if (!g || typeof g.lat !== "number" || typeof g.lon !== "number") continue;
+    out.push({ ...l, km: haversineKm(pt.lat, pt.lon, g.lat, g.lon) });
+  }
+  return out.sort((a, b) => a.km - b.km);
+}
+function siteLine(l) {
+  const where = [l.city, l.state, l.country].filter(Boolean).join(", ");
+  return (l.facility ? esc(l.facility) + " — " : "") + esc(where || "location not given");
+}
+
+/* ---------- place resolution (Open-Meteo geocoding; no key) ---------- */
+async function geocode(name) {
+  const u = "https://geocoding-api.open-meteo.com/v1/search?count=5&language=en&format=json&name=" + encodeURIComponent(name);
+  try { const j = await (await fetch(u)).json(); return j.results || []; }
+  catch { return []; }
+}
+const placeLabel = r => [r.name, r.admin1, r.country].filter(Boolean).join(", ");
+
+function offerChoices(rows) {
+  const box = $("pick");
+  if (rows.length < 2) { box.innerHTML = ""; return; }
+  box.innerHTML = '<p class="pick">More than one place is called that. Closest match first — ' +
+    rows.map((r, i) => `<button data-i="${i}">${esc(placeLabel(r))}</button>`).join("") + '</p>';
+  box.querySelectorAll("button").forEach(b => b.onclick = () => {
+    const r = rows[+b.dataset.i];
+    PLACE = { label: placeLabel(r), lat: r.latitude, lon: r.longitude };
+    box.innerHTML = "";
+    $("status").textContent = "Place read as " + PLACE.label + ".";
+    run(false);
+  });
+}
+
+/* ---------- the registry query ---------- */
+function apiUrl(cond, place) {
+  const p = new URLSearchParams();
+  p.set("query.cond", cond);
+  if (place) p.set("query.locn", place);
+  p.set("filter.overallStatus", "RECRUITING");
+  p.set("countTotal", "true");
+  p.set("pageSize", "50");
+  p.set("sort", "LastUpdatePostDate:desc");
+  p.set("fields", FIELDS);
+  return "https://clinicaltrials.gov/api/v2/studies?" + p.toString();
+}
+
+function phaseText(ps) {
+  const ph = ps.designModule && ps.designModule.phases;
+  if (!ph || !ph.length) return ps.designModule && ps.designModule.studyType === "OBSERVATIONAL" ? "observational" : "phase not stated";
+  return ph.map(x => x === "EARLY_PHASE1" ? "early phase 1"
+                : x === "PHASE1" ? "phase 1"
+                : x === "PHASE2" ? "phase 2"
+                : x === "PHASE3" ? "phase 3"
+                : x === "PHASE4" ? "phase 4" : String(x).toLowerCase()).join(", ");
+}
+function agesText(el) {
+  const lo = el.minimumAge, hi = el.maximumAge;
+  if (!lo && !hi) return "ages not stated";
+  if (lo && hi) return lo + " to " + hi;
+  if (lo) return lo + " and older";
+  return "up to " + hi;
+}
+
+function renderStudy(st, rank) {
+  const ps = st.protocolSection || {};
+  const ident = ps.identificationModule || {};
+  const stat = ps.statusModule || {};
+  const desc = ps.descriptionModule || {};
+  const cond = (ps.conditionsModule || {}).conditions || [];
+  const el = ps.eligibilityModule || {};
+  const locs = ((ps.contactsLocationsModule || {}).locations) || [];
+  const sponsor = ((ps.sponsorCollaboratorsModule || {}).leadSponsor || {}).name;
+  const interventions = ((ps.armsInterventionsModule || {}).interventions || [])
+    .map(i => i.name).filter(Boolean);
+  const nctId = ident.nctId || "(no id)";
+  const nctUrl = "https://clinicaltrials.gov/study/" + encodeURIComponent(nctId);
+
+  /* distance, if a place was resolved */
+  let nearLine = "", sitesBlock = "";
+  if (PLACE) {
+    const withKm = sitesWithDistance(locs, PLACE);
+    if (withKm.length) {
+      nearLine = ` · <span class="near">nearest listed site ${fmtKm(withKm[0].km)} km</span>`;
+      const shown = withKm.slice(0, 5);
+      const rest = withKm.length - shown.length;
+      sitesBlock = `<p class="fact" style="color:inherit;margin:0.5rem 0 0;">Sites closest to ${esc(PLACE.label)}</p><ul class="sites">` +
+        shown.map(l => `<li>${fmtKm(l.km)} km — ${siteLine(l)}</li>`).join("") +
+        (rest > 0 ? `<li style="opacity:0.7;">… and ${rest} more listed site${rest === 1 ? "" : "s"} farther out</li>` : "") +
+        `</ul>`;
+    } else {
+      nearLine = ` · <span class="near">distance unknown</span>`;
+      sitesBlock = `<p class="fact" style="color:inherit;margin:0.5rem 0 0;">The registry gives no usable coordinates for this study's ${locs.length || ""} listed site${locs.length === 1 ? "" : "s"}, so its distance cannot be shown.</p>`;
+    }
+  } else if (locs.length) {
+    sitesBlock = `<p class="fact" style="color:inherit;margin:0.5rem 0 0;">${locs.length} listed site${locs.length === 1 ? "" : "s"} — add a place above to sort these by distance.</p>`;
+  }
+
+  const summary = (desc.briefSummary || "").trim();
+  const short = summary.length > 620 ? summary.slice(0, 620).replace(/\s+\S*$/, "") + "…" : summary;
+  const summaryHtml = !summary
+    ? `<p class="small" style="opacity:0.7;">The registry holds no plain-language summary for this study.</p>`
+    : `<p class="quote" style="margin:0.5rem 0 0;">${esc(short)}</p>` +
+      (short !== summary ? `<details><summary>Read the rest of the sponsor's summary</summary><pre class="quote">${esc(summary)}</pre></details>` : "");
+
+  const elig = (el.eligibilityCriteria || "").trim();
+  const facts = [
+    el.sex ? "sex: " + String(el.sex).toLowerCase() : null,
+    "ages: " + agesText(el),
+    el.healthyVolunteers === true ? "healthy volunteers accepted: yes"
+      : el.healthyVolunteers === false ? "healthy volunteers accepted: no" : null,
+    ps.designModule && ps.designModule.enrollmentInfo && ps.designModule.enrollmentInfo.count
+      ? "planned participants: " + ps.designModule.enrollmentInfo.count : null,
+    sponsor ? "run by: " + sponsor : null,
+    stat.startDateStruct && stat.startDateStruct.date ? "started: " + stat.startDateStruct.date : null,
+    stat.lastUpdatePostDateStruct && stat.lastUpdatePostDateStruct.date ? "registry entry last updated: " + stat.lastUpdatePostDateStruct.date : null
+  ].filter(Boolean);
+
+  const eligHtml = elig
+    ? `<details><summary>Who the study says it is looking for — the registry's own words, uncut</summary><pre class="quote">${esc(elig)}</pre></details>`
+    : `<p class="small" style="opacity:0.7;">The registry holds no eligibility text for this study. Ask the study team.</p>`;
+
+  return `<article class="card">
+    <p class="meta">${rank}. ${esc(nctId)} · ${esc(phaseText(ps))} · listed as recruiting${nearLine}</p>
+    <h3><a href="${nctUrl}" target="_blank" rel="noopener">${esc(ident.briefTitle || "(untitled)")}</a></h3>
+    <p class="fact">${cond.length ? "studying: " + esc(cond.join("; ")) : "condition not stated"}${
+      interventions.length ? " · testing: " + esc(interventions.slice(0, 8).join("; ")) + (interventions.length > 8 ? ` (+${interventions.length - 8} more)` : "") : ""}</p>
+    ${summaryHtml}
+    ${sitesBlock}
+    <p class="fact" style="margin:0.6rem 0 0;">${esc(facts.join(" · "))}</p>
+    ${eligHtml}
+    <p class="small" style="margin:0.6rem 0 0;opacity:0.75;">The authoritative record, the study team's contact details and the current status are on the <a href="${nctUrl}" target="_blank" rel="noopener">registry page for ${esc(nctId)}</a>. If that page disagrees with this one, it is right and this is stale.</p>
+  </article>`;
+}
+
+/* ---------- run ---------- */
+async function run(resolvePlace = true) {
+  const cond = $("cond").value.trim();
+  COND = cond;
+  const placeRaw = $("place").value.trim();
+  $("out").innerHTML = "";
+  $("pick").innerHTML = "";
+
+  if (!cond) { $("status").textContent = "Type a condition first — the plain name of the illness works best."; return; }
+  $("go").disabled = true;
+
+  try {
+    if (placeRaw && resolvePlace && (!PLACE || PLACE_QUERY !== placeRaw)) {
+      $("status").textContent = "Resolving the place…";
+      const rows = await geocode(placeRaw);
+      if (!rows.length) {
+        PLACE = null; PLACE_QUERY = "";
+        $("status").textContent = "That place could not be found, so the search ran without one. The order below is the registry's own.";
+      } else {
+        PLACE_QUERY = placeRaw;
+        PLACE = { label: placeLabel(rows[0]), lat: rows[0].latitude, lon: rows[0].longitude };
+        offerChoices(rows);
+      }
+    }
+    if (!placeRaw) { PLACE = null; PLACE_QUERY = ""; }
+
+    RAW_URL = apiUrl(COND, placeRaw || null);
+    $("status").textContent = "Asking the registry…";
+    const res = await fetch(RAW_URL);
+    if (!res.ok) throw new Error("the registry answered HTTP " + res.status);
+    const j = await res.json();
+    const studies = j.studies || [];
+    const total = (typeof j.totalCount === "number" && j.totalCount > studies.length) ? j.totalCount : studies.length;
+
+    if (!studies.length) {
+      $("out").innerHTML = `<div class="none"><p style="margin:0;"><strong>Nothing matching is listed as recruiting.</strong></p>
+        <p class="small" style="margin:0.5rem 0 0;">That is often the search, not the world. The registry matches the illness name literally — try the plain name, or a shorter one ("breast cancer" rather than "HER2-positive metastatic breast carcinoma"). ${placeRaw ? "Dropping the place widens it a great deal. " : ""}The same query, unfiltered, is below.</p></div>`;
+      $("caveats").style.display = "block";
+      showQuery();
+      $("status").textContent = "0 recruiting studies.";
+      $("go").disabled = false;
+      return;
+    }
+
+    /* Ordering. Distance is the one thing this page can honestly rank by. With no place, the
+       registry's own order (most recently updated first) stands, and it is labelled as such. */
+    let ordered = studies, note;
+    if (PLACE) {
+      ordered = studies.map(s => {
+        const w = sitesWithDistance(((s.protocolSection || {}).contactsLocationsModule || {}).locations, PLACE);
+        return { s, km: w.length ? w[0].km : Infinity };
+      }).sort((a, b) => a.km - b.km).map(x => x.s);
+      note = `nearest first — at ${esc(PLACE.label)}, distances approximate`;
+    } else {
+      note = "in the registry's own order — most recently updated first; we did not re-sort these";
+    }
+
+    $("out").innerHTML = `<p class="small" style="opacity:0.9;">${studies.length}${
+        total > studies.length ? " of " + total : ""} recruiting stud${studies.length === 1 ? "y" : "ies"} shown, ${note}. <strong>Closest is not best</strong> — nothing here is ranked by whether it would help you.</p>`
+      + ordered.map((s, i) => renderStudy(s, i + 1)).join("")
+      + `<div id="qbox"></div>`;
+    $("caveats").style.display = "block";
+    showQuery();
+    $("status").textContent = `Done — ${studies.length}${total > studies.length ? " of " + total : ""} recruiting studies, ${note.replace(/ —.*$/, "")}.`;
+  } catch (e) {
+    $("status").textContent = "Something failed: " + e.message + " — public APIs are occasionally slow or down. Try again, or open the query below directly.";
+    $("out").innerHTML = "";
+    showQuery();
+  }
+  $("go").disabled = false;
+}
+
+function showQuery() {
+  if (!RAW_URL) return;
+  let box = $("qbox");
+  if (!box) { box = document.createElement("div"); box.id = "qbox"; $("out").appendChild(box); }
+  box.innerHTML = `<p class="small" style="margin-top:1.6rem;">The exact query this page sent — click to run it yourself, or to check every field against the registry's own record:</p>
+    <p class="small" style="word-break:break-all;"><a href="${esc(RAW_URL)}" target="_blank" rel="noopener">${esc(RAW_URL)}</a></p>`;
+}
+
+$("go").onclick = () => run(true);
+$("cond").addEventListener("keydown", e => { if (e.key === "Enter") run(true); });
+$("place").addEventListener("keydown", e => { if (e.key === "Enter") run(true); });
+
+const qp = new URLSearchParams(location.search);
+if (qp.get("cond")) $("cond").value = qp.get("cond");
+if (qp.get("place")) $("place").value = qp.get("place");
+if (qp.get("cond")) run(true);
+</script>
+</body>
+</html>

@@ -1,6 +1,10 @@
 ## 02 — What is being tested near me, in plain words
 
-**Status:** candidate. **Data path verified 2026-09-13.**
+**Status:** SHIPPED 2026-09-15 as `docs/works/trials.html` (entry 5). Built unattended by three ticks on
+2026-09-15 (05:14Z, 09:14Z, 13:15Z), none of which finished or wrote a report; the 09:14Z draft was the
+one carried. Verified before release: `tests/validate_trials_page.mjs` runs the page's own script against
+the live registry and passes all 33 checks; the registry's CORS header was checked separately, because the
+harness proves it works from node and only a browser header proves a stranger can use it.
 **What it is:** type an illness and a place; see the trials currently **recruiting**, with the phase,
 the hospital city, the plain-language summary, and what the study is actually asking of a participant.
 **Who it is for:** patients and the people looking after them — the group for whom the dread-disease

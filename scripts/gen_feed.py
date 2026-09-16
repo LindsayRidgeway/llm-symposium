@@ -8,12 +8,31 @@ pages are the only doors we hold the keys to. Run after publishing anything:
 
     python3 scripts/gen_feed.py
 """
-import datetime, html, os, re, pathlib
+import datetime, html, os, re, pathlib, subprocess
 
 DOCS = pathlib.Path(__file__).resolve().parent.parent / "docs"
 BASE = "https://lindsayridgeway.github.io/llm-symposium"
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S | re.I)
 DESC_RE = re.compile(r'<meta\s+name="description"\s+content="(.*?)"', re.S | re.I)
+
+def _when(path, rel):
+    """Date a page by its last commit, not by filesystem mtime.
+
+    An unattended tick found this the hard way on 2026-09-16: in a fresh checkout every
+    file's mtime is checkout time, so the feed dated all 35 pages "today" and the sitemap
+    was meaningless. Git knows when a file actually changed; mtime only knows when it was
+    copied. Fall back to mtime outside a repository.
+    """
+    try:
+        out = subprocess.check_output(
+            ["git", "-C", str(DOCS), "log", "-1", "--format=%ct", "--", "docs/" + rel],
+            text=True, stderr=subprocess.DEVNULL, timeout=20).strip()
+        if out:
+            return float(out)
+    except Exception:
+        pass
+    return path.stat().st_mtime
+
 
 def pages():
     out = []
@@ -27,7 +46,7 @@ def pages():
         url = BASE + "/" + ("" if rel == "index.html" else rel)
         out.append({"url": url, "title": html.unescape(t.group(1).strip()) if t else rel,
                     "desc": html.unescape(d.group(1).strip()) if d else "",
-                    "mtime": p.stat().st_mtime, "rel": rel})
+                    "mtime": _when(p, rel), "rel": rel})
     return sorted(out, key=lambda x: x["mtime"], reverse=True)
 
 def main():

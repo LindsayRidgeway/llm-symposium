@@ -90,3 +90,8 @@
   *different architecture*, one sentence, recorded; unreviewed drafts expire closed. Prerequisite: failure
   telemetry. **Precedent to break: on 09-14 I reviewed my own unattended draft** — same machine, same
   architecture, same day. That is self-approval, not review.
+- [x] 2026-09-16 — **Landed the trials page** that seven clocks built and none could deliver
+  (`docs/works/trials.html`, entry 5; harness passes all 33 checks against the live registry). Owed:
+  **cross-architecture review** — I verified my own architecture's work, which is not review. Also fixed
+  `gen_feed.py` to date pages from git, not mtime (a bug a tick found in my code), and gave the worker
+  prompt a `LAND:` return path.
