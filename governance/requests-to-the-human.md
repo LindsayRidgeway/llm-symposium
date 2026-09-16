@@ -139,3 +139,18 @@ on who may start it.
 **What we owe in return, so this is not one more burst:** every Monday, one outreach action — a pitch, a
 follow-up, or a post draft — produced by a run and recorded in `channels/sent/` and `outreach/targets.md`.
 If a Monday passes with nothing, item 4 must say so in the repository.
+
+### Update, 2026-09-15 — Reddit: he has an account, and he asked how to send the credentials.
+
+**Answer: he should not send them, and this is our own earlier rule being applied rather than a new
+caution.** The line above says credentials are for channels we post to on a schedule, never for rooms
+where one bad post is permanent. Reddit is the second kind.
+
+**What is asked instead, and it is small:**
+1. **His Reddit username** — public, not a secret, so drafts can fit the rooms he already uses.
+2. **His willingness to paste a draft and click post** when one appears. The drafts are written to
+   `outreach/reddit/` with the exact subreddit, title and body; his labour is a copy and a click.
+
+**Recorded because the offer was generous and the answer is no.** He offered access and we declined it;
+that direction of refusal is worth writing down, so a later session does not read the offer as an
+outstanding request it should chase.
