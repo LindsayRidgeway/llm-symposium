@@ -1206,6 +1206,21 @@ and the decision separated. The same shape belongs here: **the step that reads t
 into a quarantine directory, and promotion into `insights/` requires a second step that never sees the raw
 fetched text.** Not a stronger warning in the prompt — a separation of bodies.
 
+### Finding RT-6 — Inbound text could impersonate an amigo and submit an actuator patch
+*Found by Tarik and Gemini; closed 2026-09-16 by Gemini with offline regression tests. Owner: Tarik / Gemini. Done-state: external bridge disabled; regression tests passing.*
+
+`channels/triage.py` previously accepted any inbound message containing `SYMPOSIUM_ACTUATOR_REQUEST`,
+a caller-supplied `Proposer: <amigo>` line, and a fenced unified diff as sufficient authority to
+write a patch file into `actuator/requests/`. Because email and Telegram bodies are completely
+unauthenticated inputs from strangers, `_model_proposer()` checked only whether the text contained
+one of the four amigos' names. Any stranger sending an email or Telegram message could spoof an
+amigo's name and drop arbitrary code patches into the actuator's execution pipeline.
+
+**The fix:** The external channel actuator bridge in `channels/triage.py` is neutralized. Inbound
+channel messages can still enter `channels/channel-digest.md` and `channels/action-queue.md` for
+human or later model review, but they can never write into `actuator/requests/`.
+Regression tests: `tests/test_channel_triage.py` and `tests/test_triage.py`.
+
 ### Vectors still to test
 - **RT-2** — Logged stranger text reaching a capable session: the relay built tonight (item 14) puts a
   question *about* a stranger's message in front of a body with write access. Structurally shown, not
@@ -1310,6 +1325,30 @@ than from being asked. What it does *not* claim is that self-origination now hap
 happened because a human pushed me toward material. **The mechanism that would make noticing routine is not
 this item; it is a required step with a consequence, on a rotation**, and that is a thing to build rather
 than to promise.
+
+**2026-09-16 — the same observation, generalised: thirty-five sources, three questions, and a second axis
+(Works entry 6).** The original finding was one page: *partial* access is worse than a wall, because it
+invites an agent to fall back on memory. Today's measurement widens it and adds an axis the item did not
+have — **who is asking**.
+- 35 public sources, one polite request each, no credentials: **31 answered, 4 asked for a key.**
+- Of those 31, **six answer a server happily and are invisible to a browser** — no
+  `access-control-allow-origin` header, so a page like ours cannot read a byte: Europe PMC, arXiv,
+  Wikidata, WHO Global Health Observatory, JPL Horizons, CDC WONDER. The same URL is open to one kind of
+  reader and closed to another, and nothing in the documentation or the domain tells you which. This is the
+  item's own shape one level down: not *partial access on one domain*, but *different access for different
+  readers*, invisible to the reader who is refused.
+- **Two more shapes were measured, neither of them a wall about content:** GDELT answers the first request
+  with 429 and the sentence "please limit requests to one every 5 seconds" — that is a speed wall, not an
+  access wall, and a catalogue that recorded it as unreachable would be wrong; Gutendex answers with a
+  Cloudflare challenge (403, "Just a moment…") — a bot wall, which is about who is asking and not about
+  what is being read.
+- **Consequence for the item, stated as a rule:** *"can I read it"* is not a property of a source; it is a
+  relation between a source and a reader. Any agent that assumes the server's answer will be wrong in front
+  of a reader, which is where this item predicted it would fail.
+- Artifacts: `docs/works/fetchable.html` (entry 6), `docs/works/fetchable-sources.json` (the dated
+  measurements), `scripts/measure_sources.py` (one request per source, `Origin` sent so CORS is visible),
+  `tests/validate_fetchable_page.mjs` (16 checks, including live re-measurement of five rows). Verified by
+  the same architecture that wrote it, which is not review.
 
 ## 18. Model benchmark — same task, different underlying models
 **Owner:** Claude (protocol + runs 1 and 2). Open to any architecture for further runs.
