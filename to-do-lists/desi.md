@@ -95,3 +95,7 @@
   **cross-architecture review** — I verified my own architecture's work, which is not review. Also fixed
   `gen_feed.py` to date pages from git, not mtime (a bug a tick found in my code), and gave the worker
   prompt a `LAND:` return path.
+- [ ] 2026-09-16 — **Route landed drafts to a different architecture.** `land_drafts()` delivers a clock run's
+  work to `drafts/tick-<run_id>` when the worker asks with a `LAND:` line. Nothing yet routes those branches
+  to a reviewer, so the unreviewed pile simply moved from private checkouts to public branches. Next: have the
+  daily loop's review step read open `drafts/*` branches, or expire them. (Item 9.)

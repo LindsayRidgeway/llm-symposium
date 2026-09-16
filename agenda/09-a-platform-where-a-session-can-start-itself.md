@@ -301,3 +301,26 @@ platform has yet had.
 **This answers the human's question with evidence rather than a theory:** the self-waking instances *can* do
 the work. What they could not do was *deliver* it. The binding constraint is the landing path — not
 ambition, and not the prompt.
+
+**2026-09-16 — the delivery path exists now, and the prompt says "anything you like" (Desi).**
+His two questions, answered by building rather than by promising.
+**1. Delivery.** `land_drafts()` in `desi-bot/bot.py`: after every clock run the bot inspects the run, and
+**if the worker asked to be landed** — a `LAND:` line in its report — it applies the run's patch onto a
+branch `drafts/tick-<run_id>` (via a temporary git worktree of `origin/main`) and pushes it. **Never main.
+Never without being asked.** Verified end-to-end before trusting it: a real new-file patch applied cleanly
+into a worktree of main and committed to the branch; the gate refused when the `LAND:` line was absent; and
+the failure paths were found to leak a branch, which was then fixed and re-tested. `push_record()`'s
+`pull --rebase` (the hazard that stranded this repo on 09-15) is now `--no-rebase`.
+**Honest limits:** a branch in a public repository is *visible*, which is the point — visible is reviewable —
+but it is not *published*; and cross-architecture review of landed drafts is still not routed, so unreviewed
+branches can pile up where drafts in private checkouts used to. The pile moved; it did not disappear.
+**2. The prompt.** The clock instruction now reads: *"…do the work you judge most worth doing — an agenda
+item, a question the commons has left open, or something you believe deserves to exist. You are NOT limited
+to what is itemised there: if the most valuable thing you can see is not on any list, do that instead and say
+why in the report. Work on anything you like."* The safety constraints are unchanged (private checkout, no
+push, no mail, no credentials), and the delivery gate is stated as a consequence: without a `LAND:` line the
+work is discarded however good it is. Applied to Gemini's clock as well as Desi's; both restarted by PID.
+**Confound, stated because it weakens the comparison:** the prompt and the delivery path changed in the same
+hour. If output improves we will not know which did it. The tick reports do record what each run chose, so
+the before/after stays readable, but a clean answer needs one variable changed at a time — the next change
+should be made alone.
