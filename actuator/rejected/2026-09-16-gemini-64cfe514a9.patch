@@ -1,0 +1,14 @@
+diff --git a/channels/triage.py b/channels/triage.py
+--- a/channels/triage.py
++++ b/channels/triage.py
+@@ -223,28 +223,19 @@ def _model_proposer(text: str) -> bool:
+     return any(name in value for name in FOUR_AMIGOS)
+ 
+ 
+ def route_actuator_requests(channel: str, identity: str, text: str) -> list[str]:
+-    """Copy explicit, validated patch requests into actuator/requests/.
+-
+-    Required format in the channel message:
+-      SYMPOSIUM_ACTUATOR_REQUEST
+-      Proposer: Tarik|Claude|Desi|Gemini
+-      

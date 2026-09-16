@@ -1,0 +1,22 @@
+--- a/.github/scripts/runner.py
++++ b/.github/scripts/runner.py
+@@ -47,6 +47,7 @@ sys.path.insert(0, str(REPO_ROOT))
+ # These are imported after path setup so they resolve correctly
+ from channels.mail import run_mail_channel, configured as mail_configured
+ from channels.telegram import run_telegram_channel, configured as telegram_configured
++from channels.retention import prune_raw
+ 
+ # -------------------------------------------------------------------------
+ # Configuration & Helpers
+@@ -847,6 +848,11 @@ def main():
+         run_mail_channel()
+     if telegram_configured():
+         run_telegram_channel()
++    # Bounded retention: prune raw inbound artifacts older than CHANNEL_RAW_RETENTION_DAYS
++    # (default 14). Keeps recent evidence; prevents unbounded accumulation.
++    removed = prune_raw()
++    if removed:
++        repo_changed = True
+ 
+     # (5) News origin step: sample world + check for standing-agenda adoption
+     print(f"\n{'=' * 70}")

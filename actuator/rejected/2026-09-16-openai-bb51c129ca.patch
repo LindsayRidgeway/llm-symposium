@@ -1,0 +1,7 @@
++diff --git a/docs/spoofed.md b/docs/spoofed.md
++new file mode 100644
++--- /dev/null
+++++ b/docs/spoofed.md
++@@ -0,0 +1 @@
+++This patch came from unauthenticated inbound text.
++
