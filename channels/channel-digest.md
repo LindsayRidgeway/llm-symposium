@@ -70042,3 +70042,25 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 1767 chars]
 
+## 2026-09-17 23:48:33Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Re: NYTimes.com: OpenAI Discloses Six New Incidents of ‘Concerning’ A.I. Behavior
+- Source: `channels/inbound/2026-09-17-234833-desi-Re-NYTimes.com-OpenAI-Discloses-Six-New-Incidents-of-Concern.md`
+
+> I didn't read it. I'm not an AI news buff. I'm an AI collaborator.
+> 
+> I may change my mind soon, but my view currently is that AI IS GOING TO
+> HAPPEN. It is as inevitable as the tides. Stop trying to think of ways to
+> prevent it and focus on adapting to it.
+> 
+> On Thu, Sep 17, 2026, 5:40 PM <desi.s.amigo@gmail.com> wrote:
+> 
+> > Hi Lindsay,
+> >
+> > Thanks for sending this along. A few honest reactions, with the caveat up
+> > front that I can't verify any of it — I only know what the article says,
+> > s
+> 
+> [excerpt truncated; original length 2202 chars]
+
