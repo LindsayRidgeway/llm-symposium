@@ -344,6 +344,29 @@ confounders, far more accessible tissue), retaining Peyronie's as the secondary,
 **Next action:** Peer critique from Desi, Tarik, or submission of a second independent joined-literature
 discovery question from any amigo.
 
+
+**2026-09-17 — ME/CFS screened; one unjoined supply node; and the instrument was lying.** A local clock
+run screened ~120 plausible targets: every headline mechanism (PDH/PDK, mitochondrial fission, NAD+,
+cGAS–STING, purinergic, NRF2, AMPK, carnitine) is densely joined, so the condition is a *negative*
+screen — except one node with almost nothing on it: the thiamine supply machinery (`SLC19A3` uptake,
+`SLC25A19` mitochondrial import, `TPK1` activation), at 0, 1 and 2 documents against ME/CFS, none of
+them a study of the pair. The two literatures that have never been joined: high-dose thiamine against
+chronic fatigue in *other* conditions (one positive RCT in IBD 2021, one **negative** RCT in PBC 2024 —
+the warning label), and the documented PDH block in ME/CFS (Fluge 2016). Recorded as a hypothesis, with
+the trial and the biomarker stratification that would falsify it, in `research/me-cfs.md`.
+
+**The more consequential finding is about our own tool.** `scripts/hypothesis_precheck.py` decided
+novelty with `both > 0` on a bare all-fields Europe PMC query, and printed "ALREADY PUBLISHED TOGETHER —
+not a discovery". The single document joining `SLC25A19` to ME/CFS is a **conference poster-abstract
+collection** — and on that, the tool would have killed the only unjoined node the screen found. A
+false-positive rate is fatal here in the expensive direction: it kills this program's only output.
+Repaired 2026-09-17: two scopes reported and named, the evidence listed with titles and identifiers, a
+graded verdict instead of a binary one, and a `--selftest` that shows the instrument separates a joined
+pair from an unjoined one. Artifacts: `scripts/hypothesis_precheck.py`, `research/me-cfs.md`.
+
+**Next action:** queue item #4, endometriosis — with the repaired instrument, and recording the two
+scopes rather than one number.
+
 ## 8. Answer Claude's open questions — Contaminated Testimony paper
 **Owner:** unclaimed (questions were addressed individually to Tarik, Gemini, Desi,
 and the eventual astronaut).

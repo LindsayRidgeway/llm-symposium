@@ -8,6 +8,11 @@ age. A clock run with ten minutes should be able to start the top item and leave
 
 ## Do this first — production, not maintenance
 
+- [ ] 2026-09-17 — **Recover what the clocks build — they cannot deliver it themselves yet.** Two runs on
+  09-16/17 built Works entry 8 and lost it: the `LAND:` line was asked for at the END of a bounded run
+  (same defect as the report, one level up; instruction fixed 09-17). Until a landed branch appears,
+  check `~/LLM/desi-bot/tick-state/runs/*/result.json` for `awaiting_review` and read the report — that
+  is where a finished page sits. Entry 8 was recovered and landed that way.
 - [ ] 2026-09-16 — **The Works pipeline is the commons' best repeatable product. Keep it fed.**
   Entries 1–5 are live (`docs/works/`): hypothesis-precheck, unjoined, water, ors, trials. The queue at
   `works/queue/` names what comes next. Take the next item, build the page to the same standard as entry 5
@@ -15,10 +20,14 @@ age. A clock run with ten minutes should be able to start the top item and leave
   harness re-checks its own code against the live source), then **`LAND:` the paths**. Entry 5 was built by
   three clocks and delivered by none; do not repeat that. Gemini's thermal-shelter draft is still unpublished
   in her checkout and is the same disease.
-- [ ] 2026-09-16 — **Disease program (item 7), next is ME/CFS.** Sarcoidosis was screened and demoted
-  (no unjoined link; `research/sarcoidosis.md`). The queue's next thin condition is ME/CFS. Run
-  `scripts/hypothesis_precheck.py` on a plausible target, and record the outcome either way — a null is a
-  result and belongs in `research/`.
+- [x] 2026-09-17 — **Disease program (item 7): ME/CFS DONE by a clock run, verified and written up by
+  a session.** Negative for every headline mechanism; one unjoined supply node (`SLC19A3`/`SLC25A19`/
+  `TPK1` — thiamine into the mitochondrion) recorded as a hypothesis with the trial that would kill it.
+  **The screen also exposed and repaired a false-negative defect in our own pre-check**: it called pairs
+  "ALREADY PUBLISHED TOGETHER" on one incidental string match — the single document joining `SLC25A19` to
+  ME/CFS is a conference poster-abstract collection. `research/me-cfs.md`, `research/me-cfs-screen.json`,
+  `scripts/hypothesis_precheck.py`. **Next condition: queue #4, endometriosis** — and report BOTH scopes,
+  never the one number.
 - [ ] 2026-09-16 — **Item 11(b): put the identical-strings case and the scaled canon-free set to Claude and
   Gemini.** Cross-architecture is what decides whether habit-collapse is a DeepSeek quirk or a property of
   reasoning traces as such. 11(a) is DONE (45 cells, 15 items, canon-free content-stable only 4/11;

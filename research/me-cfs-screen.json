@@ -1,0 +1,423 @@
+{
+ "condition_union": "myalgic encephalomyelitis / chronic fatigue syndrome / ME/CFS",
+ "note": "full_text = Europe PMC full-text hitCount for \"SYMBOL\" AND disease-union; strict = same but SYMBOL in TITLE/ABSTRACT and disease in TITLE/ABSTRACT. Full text counts mentions, not studies.",
+ "disease_papers_full_text": 23001,
+ "disease_papers_strict": 11180,
+ "trials": 218,
+ "targets": [
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "PDHA1",
+   "full_text": 7,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "PDK1",
+   "full_text": 25,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "PDK2",
+   "full_text": 6,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "PDK4",
+   "full_text": 15,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "SIRT4",
+   "full_text": 7,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "PPARGC1A",
+   "full_text": 13,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "PRKAA1",
+   "full_text": 3,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "SLC2A1",
+   "full_text": 17,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "LDHA",
+   "full_text": 29,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "MPC1",
+   "full_text": 4,
+   "strict": 0
+  },
+  {
+   "category": "energy metabolism / PDH",
+   "symbol": "MPC2",
+   "full_text": 5,
+   "strict": 0
+  },
+  {
+   "category": "thiamine supply (this run's candidate)",
+   "symbol": "SLC19A3",
+   "full_text": 1,
+   "strict": 0
+  },
+  {
+   "category": "thiamine supply (this run's candidate)",
+   "symbol": "SLC25A19",
+   "full_text": 1,
+   "strict": 0
+  },
+  {
+   "category": "thiamine supply (this run's candidate)",
+   "symbol": "TPK1",
+   "full_text": 2,
+   "strict": 0
+  },
+  {
+   "category": "thiamine supply (this run's candidate)",
+   "symbol": "SLC19A2",
+   "full_text": 10,
+   "strict": 0
+  },
+  {
+   "category": "mitochondrial dynamics / mitophagy",
+   "symbol": "DNM1L",
+   "full_text": 3,
+   "strict": 0
+  },
+  {
+   "category": "mitochondrial dynamics / mitophagy",
+   "symbol": "MFN2",
+   "full_text": 43,
+   "strict": 1
+  },
+  {
+   "category": "mitochondrial dynamics / mitophagy",
+   "symbol": "PINK1",
+   "full_text": 72,
+   "strict": 2
+  },
+  {
+   "category": "mitochondrial dynamics / mitophagy",
+   "symbol": "PRKN",
+   "full_text": 13,
+   "strict": 0
+  },
+  {
+   "category": "mitochondrial dynamics / mitophagy",
+   "symbol": "FUNDC1",
+   "full_text": 7,
+   "strict": 0
+  },
+  {
+   "category": "mitochondrial dynamics / mitophagy",
+   "symbol": "BNIP3",
+   "full_text": 23,
+   "strict": 0
+  },
+  {
+   "category": "mitochondrial dynamics / mitophagy",
+   "symbol": "SQSTM1",
+   "full_text": 40,
+   "strict": 0
+  },
+  {
+   "category": "mitochondrial dynamics / mitophagy",
+   "symbol": "TFEB",
+   "full_text": 16,
+   "strict": 0
+  },
+  {
+   "category": "redox / NRF2",
+   "symbol": "NFE2L2",
+   "full_text": 21,
+   "strict": 0
+  },
+  {
+   "category": "redox / NRF2",
+   "symbol": "KEAP1",
+   "full_text": 67,
+   "strict": 1
+  },
+  {
+   "category": "redox / NRF2",
+   "symbol": "TXNRD1",
+   "full_text": 7,
+   "strict": 0
+  },
+  {
+   "category": "redox / NRF2",
+   "symbol": "GCLM",
+   "full_text": 9,
+   "strict": 0
+  },
+  {
+   "category": "redox / NRF2",
+   "symbol": "SOD2",
+   "full_text": 88,
+   "strict": 2
+  },
+  {
+   "category": "redox / NRF2",
+   "symbol": "TRPM2",
+   "full_text": 33,
+   "strict": 2
+  },
+  {
+   "category": "purinergic / ATP release",
+   "symbol": "P2RX7",
+   "full_text": 37,
+   "strict": 1
+  },
+  {
+   "category": "purinergic / ATP release",
+   "symbol": "P2RX4",
+   "full_text": 23,
+   "strict": 1
+  },
+  {
+   "category": "purinergic / ATP release",
+   "symbol": "PANX1",
+   "full_text": 7,
+   "strict": 0
+  },
+  {
+   "category": "purinergic / ATP release",
+   "symbol": "SLC17A9",
+   "full_text": 2,
+   "strict": 1
+  },
+  {
+   "category": "purinergic / ATP release",
+   "symbol": "ADORA2A",
+   "full_text": 20,
+   "strict": 0
+  },
+  {
+   "category": "purinergic / ATP release",
+   "symbol": "CD38",
+   "full_text": 194,
+   "strict": 20
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "CGAS",
+   "full_text": 80,
+   "strict": 3
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "STING1",
+   "full_text": 4,
+   "strict": 0
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "TLR4",
+   "full_text": 539,
+   "strict": 15
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "NLRP3",
+   "full_text": 398,
+   "strict": 10
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "IL6",
+   "full_text": 2164,
+   "strict": 9
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "TNF",
+   "full_text": 2836,
+   "strict": 130
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "IFNG",
+   "full_text": 739,
+   "strict": 1
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "IL1B",
+   "full_text": 205,
+   "strict": 2
+  },
+  {
+   "category": "innate immune / interferon",
+   "symbol": "HMGB1",
+   "full_text": 136,
+   "strict": 6
+  },
+  {
+   "category": "NAD / kynurenine",
+   "symbol": "IDO1",
+   "full_text": 73,
+   "strict": 1
+  },
+  {
+   "category": "NAD / kynurenine",
+   "symbol": "KYNU",
+   "full_text": 19,
+   "strict": 0
+  },
+  {
+   "category": "NAD / kynurenine",
+   "symbol": "HAAO",
+   "full_text": 6,
+   "strict": 0
+  },
+  {
+   "category": "NAD / kynurenine",
+   "symbol": "QPRT",
+   "full_text": 15,
+   "strict": 0
+  },
+  {
+   "category": "NAD / kynurenine",
+   "symbol": "NADSYN1",
+   "full_text": 8,
+   "strict": 0
+  },
+  {
+   "category": "NAD / kynurenine",
+   "symbol": "NAMPT",
+   "full_text": 26,
+   "strict": 0
+  },
+  {
+   "category": "NAD / kynurenine",
+   "symbol": "ACMSD",
+   "full_text": 11,
+   "strict": 0
+  },
+  {
+   "category": "thiamine-dependent enzymes",
+   "symbol": "TKTL1",
+   "full_text": 2,
+   "strict": 0
+  },
+  {
+   "category": "thiamine-dependent enzymes",
+   "symbol": "TKT",
+   "full_text": 10,
+   "strict": 0
+  },
+  {
+   "category": "thiamine-dependent enzymes",
+   "symbol": "OGDH",
+   "full_text": 3,
+   "strict": 0
+  },
+  {
+   "category": "thiamine-dependent enzymes",
+   "symbol": "DLD",
+   "full_text": 32,
+   "strict": 0
+  },
+  {
+   "category": "thiamine-dependent enzymes",
+   "symbol": "DLAT",
+   "full_text": 5,
+   "strict": 0
+  },
+  {
+   "category": "nutrient transporters (other)",
+   "symbol": "SLC22A5",
+   "full_text": 9,
+   "strict": 0
+  },
+  {
+   "category": "nutrient transporters (other)",
+   "symbol": "CPT2",
+   "full_text": 20,
+   "strict": 1
+  },
+  {
+   "category": "nutrient transporters (other)",
+   "symbol": "HADHA",
+   "full_text": 7,
+   "strict": 0
+  },
+  {
+   "category": "nutrient transporters (other)",
+   "symbol": "SLC25A20",
+   "full_text": 4,
+   "strict": 0
+  },
+  {
+   "category": "nutrient transporters (other)",
+   "symbol": "SLC22A4",
+   "full_text": 7,
+   "strict": 0
+  },
+  {
+   "category": "calcium / ion",
+   "symbol": "TRPM3",
+   "full_text": 86,
+   "strict": 20
+  },
+  {
+   "category": "calcium / ion",
+   "symbol": "TRPM8",
+   "full_text": 49,
+   "strict": 1
+  },
+  {
+   "category": "calcium / ion",
+   "symbol": "ORAI1",
+   "full_text": 18,
+   "strict": 0
+  },
+  {
+   "category": "calcium / ion",
+   "symbol": "STIM1",
+   "full_text": 18,
+   "strict": 0
+  },
+  {
+   "category": "calcium / ion",
+   "symbol": "MCU",
+   "full_text": 21,
+   "strict": 0
+  },
+  {
+   "category": "calcium / ion",
+   "symbol": "SCN9A",
+   "full_text": 28,
+   "strict": 2
+  },
+  {
+   "category": "calcium / ion",
+   "symbol": "SCN10A",
+   "full_text": 12,
+   "strict": 0
+  },
+  {
+   "category": "calcium / ion",
+   "symbol": "SCN11A",
+   "full_text": 11,
+   "strict": 0
+  }
+ ]
+}
