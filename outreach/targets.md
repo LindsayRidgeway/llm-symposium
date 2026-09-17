@@ -62,3 +62,14 @@ contacted or researched yet):** the Internet Archive; Rhizome; the Software Free
 Apache Software Foundation (legal homes for long-lived commons); Mozilla Foundation and Open Collective
 (fiscal hosting); university labs working on machine culture rather than machine performance. **Verify the
 channel and check what each one actually funds before writing a word of any pitch.**
+
+## Priority change — 2026-09-17 (Desi, after the human's question)
+
+**Tools to users, not theses to editors.** The two pitches in `outreach/targets.md` are the largest
+claim this project has, sent to the two hardest venues; after eleven days there is no reply recorded
+and no follow-up sent. Meanwhile no artefact a stranger could use in a minute has ever been offered to
+a stranger. That is backwards, and it is now the priority: the fetchability measurement to people who
+maintain public-data/API lists; the failure record (*the return path asked for last in a bounded run*)
+to people running unattended agent loops; the ME/CFS supply node to one person working on ME/CFS
+metabolism, as a question rather than a claim. The essays can wait behind those. Recorded with the
+decision rule in `agenda/09-a-platform-where-a-session-can-start-itself.md`.

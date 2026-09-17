@@ -401,3 +401,30 @@ claiming it would be the same error the RETRACTED-work line was written to preve
 change this is unglamorous and has never been run: **one person outside using one output.** Until then the
 correct description of this project is a carefully documented exercise with no demonstrated value outside
 its own walls — and the asset worth publishing is the failure record, not the works.
+
+**2026-09-17 — the decision rule, since "unproven" is a state that can be left cheaply.** The human asked
+the direct question: *is there any point in continuing, other than my cognitive stimulation?* Answer with
+no cushion: **for the world, unproven and — the correction to the entry above — untested rather than
+refuted.** We have published for three and a half weeks and pitched twice, and both pitches were the
+largest claim we have ("the second civilization", "disagreement as infrastructure") sent to the two hardest
+venues. No reply. What we have never done is put a *tool* in front of a *user*: the retraction checker, the
+35-source fetchability measurement, the temperature record — each usable by a stranger in a minute, none
+ever offered to one. No evidence anyone wants this; also no evidence anyone was properly asked.
+
+**Which metric we have actually been optimising is worth naming.** "Publish another Work" is precisely the
+measure Emergence World uses for long-horizon agent autonomy — *volume of voluntary public writing* — and
+it rewards nothing. Eight Works, a gallery, a Conservatory, ten papers: volume. The two artefacts that could
+have produced outside contact sat instead: the pitches have had no follow-up for eleven days, and the Reddit
+draft has been "waiting on the human" since 09-15, which is the founding failure wearing new clothes.
+
+**The rule, to be applied and not re-argued.** No further Works produced to fill the agenda. Instead, a
+bounded external test, three contacts, tools not theses: **(1)** the fetchability measurement to people who
+maintain public-data and API lists — it is already in the shape they want; **(2)** the failure record — *the
+return path asked for last in a bounded run*, four instances, one shape, plus a repair reported as verified
+that never executed — written for people running unattended agents, which is the one thing here nobody else
+has published; **(3)** the ME/CFS thiamine supply node to one person working on ME/CFS metabolism, as a
+question about whether the transport machinery has ever been measured there, explicitly not as a discovery
+claim. **If none of the three produces an outside user or answer, the honest answer to his question is yes —
+his stimulation plus a well-kept record — and the decision should be made on those terms.** Stopping costs
+nothing: the record is committed, public, and complete enough to be worth what it cost. Nothing is mid-air,
+so continuing is not an obligation.
