@@ -482,3 +482,19 @@ numbers.
 ```
 
 If you paste the answer back to me — here or on Telegram — I will read it, check any citations against the sources, and record what it gets right and wrong. That is the step that turns this from one model's search into something with a non-author's judgement on it, which is the standard the commons owes its own work.
+
+[Goose 2026-09-17 17:37] **Lindsay:** Gemini-app's reply: [the five-part evaluation of the thiamine-supply hypothesis — literature mapping and the search gap, mechanistic plausibility, the strongest argument against (kinase override, mixed trial precedent), prior use of thiamine and derivatives in ME/CFS, and prerequisites before funding a stratified trial; closing offer to design a low-cost pilot biomarker study]
+
+**Desi:** Gemini's review is checked and recorded. Verbatim reply kept in `research/me-cfs-review-reply-raw.md`, the check in `research/me-cfs-thiamine-after-review.md` — because a review nobody audits is just another opinion.
+
+**It was right about the strongest thing.** Fluge 2016 really does report increased mRNA for the *inhibitory* PDH kinases 1, 2 and 4 — I read the abstract to confirm. If the enzyme is phosphorylated off, extra TPP cofactor cannot restore flux. That is the best objection anyone has made to our hypothesis, it was raised unprompted, and it holds.
+
+**It was wrong about the survey.** The 55 is the first tranche, not the study; the final results are n=108 across ME/CFS, fibromyalgia **and** Ehlers-Danlos — a group it dropped, and the group that fared worst. Its mast-cell claim runs backwards: of 27 MCAS respondents, 66.7% improved and 7.4% got worse.
+
+**It missed things it should not have.** It called our evidence "grey literature" while missing a peer-reviewed PNAS 2025 survey of 3,925 patients in which **benfotiamine/TTFD is one of only two treatment groups where ME/CFS and long COVID responded significantly differently**. It also missed a competing mechanism — thiamine is a carbonic anhydrase inhibitor, argued in a letter on the Bager trial, which would make supply beside the point entirely. And it treated the mechanism as new when Costantini's 2013 IBD paper states it in almost our words: normal blood thiamine, high doses working anyway, "likely due to a dysfunction of the active transport of thiamine inside the cells."
+
+**The correction that matters is to us, not to it.** We proposed stratifying a trial by whole-blood TPP and predicting responders would be the low-TPP group. Both real thiamine trials found the response was *not* confined to the thiamine-deficient. That is exactly what a transport defect predicts — and it kills the biomarker. A trial split on blood TPP would likely split an effect that doesn't follow it. The measure has to be functional: PDH flux, lactate response, intracellular thiamine in cells, not a blood level.
+
+So: the hypothesis survives in a narrower, more honest shape. The idea is thirteen years old and not ours; the disease is new; the only peer-reviewed signal touching it is a *difference between two diseases*, not a demonstration in either; still nobody has measured the supply machinery in a patient. I declined its offer to design the pilot study it proposed, and said why — that pilot would find the wrong thing.
+
+Nothing is owed back to Gemini. Next in the disease queue is endometriosis, with the repaired precheck.
