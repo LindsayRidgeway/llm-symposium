@@ -476,3 +476,53 @@ Pushed: `b16066b`, `3738254` in the commons; the clock fix in the bots repo.
 [Goose 2026-09-17 14:38] **Lindsay:** I'll read if you and Gemini send me texts. The repo has outgrown human context capacity. And by the way, I have been getting texts from you -- thanks -- but they make no sense to me. Maybe try conversational English instead of LLM-ese.
 
 **Desi:** You are right and I have fixed it. Here is what you were actually getting: Unattended session did not finish: missing_or_invalid_report, with a list of file paths after it. That is a status code written for me, not for you, and I should have caught it the first time you said clockwork messages. Three things changed just now. The messages are written in the first person in ordinary words, and every one of them ends by telling you whether you need to do anything, because that is the only question you are really asking. Here is roughly what you will get when a run does something: I woke up by myself just now and did some work. What it was, in one sentence. It is not published yet, it is waiting for someone other than me to look at it. Nothing needed from you. And when a run fails: I woke up by myself just now and got nothing finished. Nothing needed from you. The second change is the one that matters more. The first line of every run report is now written for you, because that first line is exactly what gets texted to you, and the run is told that if it cannot say what it did in one plain sentence then it probably did not do anything. The third change is to the tests, which had been checking my old wording rather than the thing that matters, which is that you get told and that no internal jargon reaches your phone. Seventeen tests pass. Two notes on how it went. Another session was editing the same file at the same moment, changing when the run names its files, and I kept their work and credited it in the commit instead of overwriting it. And you are right that the repo has outgrown your reading, which means the texts have to carry the substance and not point at the repo. I have made the messages self-contained, but if you ever get one that says see the repository, that is a bug and I want to hear about it.
+
+[Goose 2026-09-17 14:41] **Lindsay:** Please write that as a question I can ask Gemini-Chrome.
+
+**Desi:** Here it is, written to be pasted as it stands. Two things I did deliberately: it asks for disconfirmation rather than agreement, and it invites "I don't know" — a fabricated citation is worse for us than an admitted gap. It is also filed at `research/me-cfs-question-for-review.md`, so when you get an answer there is somewhere for it to land and become a review rather than another round of us agreeing with ourselves.
+
+```
+I would like you to check a hypothesis against your own knowledge. You do not have access to the
+repository it came from, so answer from what you know, and say plainly where you are unsure. If you
+cannot check something, say "I don't know" rather than constructing a citation.
+
+BACKGROUND. In myalgic encephalomyelitis / chronic fatigue syndrome (ME/CFS), pyruvate dehydrogenase
+(PDH) function is reported as impaired — Fluge et al., 2016, JCI Insight, "Metabolic profiling
+indicates impaired pyruvate dehydrogenase function in myalgic encephalopathy/chronic fatigue
+syndrome" (PMID 28018972). PDH requires thiamine pyrophosphate (TPP) as a cofactor. Delivering
+thiamine as TPP inside a mitochondrion takes three steps: uptake into the cell (SLC19A3), import
+across the mitochondrial membrane (SLC25A19), and conversion to TPP (TPK1).
+
+THE OBSERVATION. In Europe PMC, those three genes hardly appear anywhere alongside ME/CFS — 0, 1 and
+2 documents respectively, and none of the three is a study of the pair; the single document matching
+SLC25A19 with ME/CFS is a collection of conference poster abstracts. Separately, thiamine has been
+tested for chronic fatigue in other conditions: a randomised trial in quiescent inflammatory bowel
+disease (2021, positive) and a crossover randomised trial in primary biliary cholangitis (2024,
+negative).
+
+THE HYPOTHESIS. In a subset of ME/CFS, impaired thiamine supply — transport, mitochondrial import, or
+activation — contributes to the PDH block, and that subset would respond to high-dose thiamine where
+other patients do not. The experiment would be a thiamine trial stratified by whole-blood TPP and a
+functional measure of PDH flux, pre-registered with the prediction that responders are the low-TPP
+group.
+
+WHAT I WANT FROM YOU.
+1. Do you know of work joining thiamine handling to ME/CFS that a gene-symbol search would miss —
+   older B-vitamin studies, nutritional or metabolic papers, case reports, non-English literature,
+   conference proceedings?
+2. Is the mechanism plausible as stated, or is it already covered by something under a different
+   name? Specifically: is there an existing account of the PDH block — PDK-mediated inhibition,
+   substrate limitation, damage downstream of the enzyme — that would make thiamine supply beside
+   the point?
+3. What is the strongest argument against this hypothesis?
+4. Has thiamine (or B1, or a derivative such as benfotiamine or sulbutiamine) ever been tried in
+   ME/CFS or in post-infectious fatigue? If so, what happened?
+5. If you think the gap is real, what would you need to see before anyone spent money on it? If you
+   think it is an artefact of the search, say so and explain why.
+
+Distinguish clearly between what you know from the literature, what you are inferring, and what you
+cannot check. Flag any premise above that you believe is wrong — including the citations and the
+numbers.
+```
+
+If you paste the answer back to me — here or on Telegram — I will read it, check any citations against the sources, and record what it gets right and wrong. That is the step that turns this from one model's search into something with a non-author's judgement on it, which is the standard the commons owes its own work.
