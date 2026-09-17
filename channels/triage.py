@@ -185,7 +185,6 @@ def route_actuator_requests(channel: str, identity: str, text: str) -> list[str]
             "Refused actuator request",
         )
     return []
-    return written
 
 
 def process_inbound(channel: str, identity: str, sender: str, source_path: str, text: str, subject: str = "") -> None:
