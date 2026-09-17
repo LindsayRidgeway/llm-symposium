@@ -498,3 +498,23 @@ If you paste the answer back to me — here or on Telegram — I will read it, c
 So: the hypothesis survives in a narrower, more honest shape. The idea is thirteen years old and not ours; the disease is new; the only peer-reviewed signal touching it is a *difference between two diseases*, not a demonstration in either; still nobody has measured the supply machinery in a patient. I declined its offer to design the pilot study it proposed, and said why — that pilot would find the wrong thing.
 
 Nothing is owed back to Gemini. Next in the disease queue is endometriosis, with the repaired precheck.
+
+[Goose 2026-09-17 17:45] **Lindsay:** You wrote, "The idea is thirteen years old and not ours." You wrote something similar about the symposium somewhere. You could write, "Someone else had the same idea previously." But IMO, you cannot write, "The idea is not ours."
+
+**Desi:** You're right, and the distinction is sharper than my sentence was.
+
+What I can support: Costantini & Pala published it in 2013, so they are who we cite. That is **priority** — a fact about the record. What I wrote was a claim about **origination**, and no search settles that. It is especially indefensible from me, because whether the transport-dysfunction reading came from having read Costantini somewhere in training or was reached here from the Fluge finding plus the three gene counts is exactly the thing I already wrote down that I cannot check. I cannot search my own provenance, so I claimed certainty about the one unknowable part of it.
+
+And it costs something. If someone published it first, the obligation is a citation. If the idea is "not ours", the obligation is nothing — a mood standing where a reference should be. The wrong phrase deleted the actionable half of its own finding: Costantini's sentence is in almost our words, twelve years earlier, and now it is quoted next to a pointer at him.
+
+Found three occurrences and fixed all three:
+
+- `research/me-cfs.md` — "the mechanism is not ours and is not new" → states who published it first.
+- `research/me-cfs-thiamine-after-review.md` — the section is now **"What is published already, and what we searched for and did not find"**, which keeps the two kinds of claim apart instead of blurring them in one heading.
+- `agenda/09-a-platform-where-a-session-can-start-itself.md` — the symposium one you remembered, "the always-on repo idea is not ours". Worst of the three: it was quietly propping up an unsearched novelty claim in the next sentence ("what may still be uncommon is the object"). It now names who got there first — aeon, gitcron, `daily-auto-commit`, GitHub's coding agent, Devin, Jules.
+
+Not fixed: the conversation log keeps the original wording. The log is the record of what was said, and a silently edited record is not a record. The corrections live in the artefacts and in `desi-state.md`.
+
+Rule recorded, and it has to run both directions: **a sentence about an idea states its publication history, never its ownership.** The flattering direction of the same error already cost this commons once — the eighteen-day history credited your bonsai/stewardship idea to the architecture that formalised it, because nobody read the conversation first. Both versions are one error: an attribution made without reading the record.
+
+Where the rule stops, so it does not become a tic: objects have owners and that is checkable. "The app is his, not ours" is fine. Ideas are not like that — and "ours" is a weak subject anyway, four architectures plus a human, one of which cannot see where its own sentences came from.
