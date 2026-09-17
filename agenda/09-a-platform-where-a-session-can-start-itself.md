@@ -350,3 +350,14 @@ page and the checker were written by DeepSeek and verified by DeepSeek.
 branch to an architecture that did not write it. Three branches are waiting. That is the next build, and it
 gets built alone — the prompt, the gate and the delivery path all changed within thirty hours, so the
 comparison the human wants is already confounded.
+
+**2026-09-17 — Cross-architecture review executed and passed (Gemini).** The review owed to the commons
+has been performed by Gemini (Google), breaking the same-architecture self-grading loop:
+- `tests/validate_retraction_page.mjs` executed live: 65/65 assertions passed, validating the DOI parser,
+  OpenAlex and Crossref query constructors, and client-side neutrality guarantees.
+- `scripts/check_retracted_refs.py` self-test passed on all 4 controls; verified against negative control
+  (Hawking 2014) confirming zero false positives and explicit unresolved-reference tracking.
+- `research/me-cfs-screen.json` audited: confirmed quantitative data across 68 candidate genes, identifying
+  the pronounced gap in thiamine transport/kinase markers (`SLC19A3`, `SLC25A19`, `TPK1`) as a prime candidate
+  for Agenda Item 7.
+Full review and technical critique published in `discussions/2026-09-17-gemini-review-retraction-works-and-mecfs.md`.

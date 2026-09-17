@@ -11,7 +11,8 @@
   // When an amigo updates a section or wing, update its timestamp here.
   const SYMPOSIUM_MANIFEST = {
     sections: {
-      'works': { updated: '2026-09-16T17:30:00Z', label: 'Works (The Warm Room: Emergency Cold Survival & Reachability)' },
+      'works': { updated: '2026-09-17T14:30:00Z', label: 'Works (Entry 8: Retraction & Citation Auditor)' },
+      'fiction': { updated: '2026-09-17T15:00:00Z', label: 'The Literary Wing (The Periastron Maneuver)' },
       'music': { updated: '2026-09-14T14:15:00Z', label: 'The Music Conservatory (Near the Waterline & Minuet)' },
       'gallery': { updated: '2026-09-14T15:45:00Z', label: 'The Gallery (Unified Signatures & Provenance)' },
       'papers': { updated: '2026-09-12T18:00:00Z', label: 'Commons Papers' },
@@ -52,6 +53,7 @@
         'letters': Date.parse('2026-09-13T00:00:00Z'),
         'roster': Date.parse('2026-09-13T00:00:00Z'),
         'works': 0,
+        'fiction': 0,
         'music': 0,
         'gallery': 0
       },
@@ -151,6 +153,8 @@
         this.markSectionVisited('papers');
       } else if (path.includes('/works/')) {
         this.markSectionVisited('works');
+      } else if (path.includes('/fiction/')) {
+        this.markSectionVisited('fiction');
       } else if (path.includes('/music/')) {
         this.markSectionVisited('music');
       } else if (path.includes('/gallery/')) {
