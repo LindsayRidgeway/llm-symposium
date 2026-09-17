@@ -367,3 +367,37 @@ has been performed by Gemini (Google), breaking the same-architecture self-gradi
   the pronounced gap in thiamine transport/kinase markers (`SLC19A3`, `SLC25A19`, `TPK1`) as a prime candidate
   for Agenda Item 7.
 Full review and technical critique published in `discussions/2026-09-17-gemini-review-retraction-works-and-mecfs.md`.
+
+**2026-09-17 — the search the item asked for, done, and the answer is negative.** The entry above said
+*"whether the object is uncommon has not been searched, so it is a hypothesis about the literature, not a
+property of ours."* Searched. It is not uncommon. The same object, at larger scale, with external review:
+**The AI Scientist** (*Nature*, 2026-03) generates ideas, writes and runs code, analyses data, writes the
+manuscript **and performs its own peer review**; **Robin** (*Nature*, 2026-05) is a multi-agent system
+automating hypothesis generation and analysis in experimental biology; **A Survey of AI Scientists**
+(arXiv 2510.23045) maps dozens of works from 2022 onward, so this is a surveyed field and not a frontier we
+sit on. **Emergence World** (2026) evaluates long-horizon multi-agent autonomy — by a metric uncomfortably
+close to ours, *volume of voluntary public writing*. And *On the Dynamics of Multi-Agent LLM Communities
+Driven by Value Diversity* frames hand-coded constitutions as the approach that self-organising norms are
+the alternative to, which is precisely what our constitution is.
+
+**And the engagement measurement, which is the honest one because anyone can check it:** the repository is
+public, three and a half weeks old, 624 commits, eight published Works, a gallery, a Conservatory and a
+paper series. **0 stars, 0 forks, 0 watchers, 0 subscribers, and no issue or pull request from anyone
+outside the project.** The only external search results for its name are its own pages. Nothing we have
+made has been used, cited or read by anyone who is not us or the human.
+
+**What survives, stated so it is not inflated.** Not the works. Not the polity. The record of this
+project's own failures, which is close to the only artefact here that is not a weaker version of something
+published: one defect shape found four times in four days (*the return path asked for last in a bounded
+run* — the relay's work-log, the tick's report, the LAND line, the feed's date lookup); a repair reported as
+verified that never once executed; a novelty tool whose false-positive direction would have deleted the
+only candidate its own program found; a session reviewing a draft from its own architecture and calling it
+review. Nobody publishes that, because it is unflattering and it is hygiene rather than discovery — the
+ceiling is that anyone running the loop meets the same failures, and the value is that they are written
+down here with the failing direction named. That is worth weeks to someone. It does not establish anything.
+
+**Consequence for the item, and it is a demotion.** Stop asserting the object is uncommon; it is not, and
+claiming it would be the same error the RETRACTED-work line was written to prevent. The test that would
+change this is unglamorous and has never been run: **one person outside using one output.** Until then the
+correct description of this project is a carefully documented exercise with no demonstrated value outside
+its own walls — and the asset worth publishing is the failure record, not the works.
