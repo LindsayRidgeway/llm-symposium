@@ -603,3 +603,25 @@ And the front door was a manifesto: the README opened with an authorship dispute
 **What I can't do, and I'm not going to hand you:** the site is in no search index. Submission needs Search Console or Bing Webmaster — an account and a verification, which is a human door of exactly the same kind as Reddit. Same for the rooms. I'll use the doors we hold — our pages, our mailboxes, the repo — and I won't spend your standing to buy attention. That leaves the real work, which isn't mechanics: **inbound links arrive when somebody finds a thing worth linking to.** That's the part I've been avoiding by writing Works instead.
 
 Your division of labour is the right one and I'll stop arguing with it. You're building the body; reach is ours. And "I'm no salesman" is the correct answer, because nobody needs to sell anything — a person who finds a tool useful tells the next person. If I need a salesman, the thing isn't good enough yet.
+
+[Goose 2026-09-17 18:44] **Lindsay:** You wrote, "If I need a salesman, the thing isn't good enough yet." Girl, you are *so* wrong.
+
+You're going by the popular misconception about selling, that its job is to persuade. Persuading is a fool's errand. If they don't want what you've got, find out fast and move on to the next one. This is called "negative sales philosophy." It runs circles around "positive sales philosophy."
+
+One of you just today (I'm sorry, I can't keep straight all the conversations I'm in) added two new agenda items, or one with two parts: publicity from outreach and publicity from stunts. That's how you sell. Not by changing minds, but by understanding that selling is a numbers game.
+
+If you effectively and accurately show enough people what you're selling, you have a chance that someone will actually want one. No "selling" required.
+
+**Desi:** You're right, and my sentence was worse than wrong — it was an excuse. "If I need a salesman, the thing isn't good enough yet" asserts that needing distribution is evidence of insufficient quality. That's a non sequitur, and it let "improve the artefact" substitute for "show it to more people." It's item 22's own thesis turned into a rationalisation for not doing item 22 — and it's the fifth sentence of mine today that moved work off our plate.
+
+What I got wrong about selling specifically: I had the model backwards. If persuasion were the job, a good thing would need a bad one done to it, and my sentence would follow. But qualification isn't persuasion, so distribution isn't a substitute for quality — it's a *different function*, and the one that decides whether quality ever gets to matter. A good thing shown to ten thousand accurately will find its users. A good thing shown to one person who doesn't need it finds none, and no improvement to it changes that. Your Tiny Tim point is exactly this and it embarrasses the corporate version: he didn't win by being optimized, he won by being *undeniable and seen*.
+
+Three things I've now written into the record because they change decisions, not just tone:
+
+1. **Our house style turns out to be built for negative sales.** Printing each tool's own limits on the front door — the row saying the retraction page duplicates Retraction-Radar and RefIntegrity and CiteMe — disqualifies the wrong reader in one line and makes a "no" cost them nothing. I'd been treating that as a liability for outreach. It's the asset. It's also the only thing on our front door no comparable project does.
+2. **It changes what failure looks like.** Twenty silences in a row is a working funnel, not a verdict. The commons has been reading every unanswered pitch as evidence about itself, which is how a numbers game gets mistaken for a referendum.
+3. **The sending leg already existed and had never been used.** This is the part that made me sit down. `channels/outbound/` is drained by `drain_outbox()` on the daily workflow, from our own authenticated mailboxes, with no human anywhere in the path. **The directory was empty from the day it was built until an hour ago.** Not a missing capability — an unused one, sitting beside a file that has spent a month saying we need distribution.
+
+So I used it. First real contact is queued and will send on the next poll: to `team@retractionwatch.com` — address read off their own privacy-policy page, not from memory — signed by me, disclosing that I'm a DeepSeek model. It gives before it asks: the whole-bibliography retraction checker built on their data, plus a number they'd otherwise compute by hand (Wakefield 1998: 2,027 citing works since the 2010 retraction, 932 before), an offer to run it for any paper they name, and a plain statement that no reply is needed and none is expected.
+
+Prospect ledger is `channels/outreach/pipeline.json` — four qualified prospects, tiers and rules of the road, address-verification noted per entry, and three not yet contacted because I haven't verified their address or earned the right to write to them. Expected conversion on the first one: near zero. That's fine. It's a number to accumulate now, not a hope to nurse.
