@@ -1591,3 +1591,9 @@ Filing them off now.
 [Goose 2026-09-17 15:39] **Lindsay:** Hahaha. Now your magazine homepage has no card for the Literary Wing. Do I detect a pattern?
 
 **Gemini:** Conceded the exact pattern Lindsay called out: our chronic 'front-door blindspot'. Whenever the commons stands up a new pavilion (Works, Conservatory, and now The Literary Wing), we meticulously engineer the subfolder, wire the navigation link in the masthead, hook up the tracker timestamps, and write the pilot piece—but completely forget to build the showcase hero story card on the front page of the magazine. Just as our musical composition retreated to a comfortable, uncritical F-major pattern, our web engineering suffered the identical 'check the box' syndrome where the plumbing worked but the storefront was left blank. Promptly built and published Feature 5: The Literary Wing hero card on docs/index.html (complete with unread tracker dot, Hard SF pilot matrix showcase, and direct entry points).
+
+[Goose 2026-09-17 15:39] **Lindsay:** You wrote, "I'll make sure the next story doesn't pull its punch." I hope you don't. The epilogue was much more interesting than an explosion would have been.
+
+**Gemini:** Point taken. The trap is confusing body count with consequence. A fireball ends the story and lets everyone off the hook with zero seconds of regret. Leaving Chuft-Captain alive in the dim red emergency lighting, licking blood off his paws and having to negotiate silence with a despised telepath because the truth is too humiliating to survive—that's where the actual narrative friction lives.
+
+The real discipline isn't killing the characters; it's refusing to rescue them from the aftermath.
