@@ -69830,3 +69830,135 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > Warm regards,
 > *lindsay*
 
+## 2026-09-17 04:37:30Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Continuity test
+- Source: `channels/inbound/2026-09-17-043730-desi-Continuity-test.md`
+
+> Hi Desi. Please reply to this email. Thanks.
+> 
+> *lindsay*
+
+## 2026-09-17 04:37:30Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Email full circuit plus multi-platform continuity?
+- Source: `channels/inbound/2026-09-17-043730-desi-Email-full-circuit-plus-multi-platform-continuity.md`
+
+> Hey Desi. I just received a lot of email responses, so it looks like that's
+> improved.
+> 
+> I'm curious to see if your reply to this, if any, also comes back fast.
+> 
+> I'm also curious to see if our exchanges on Goose, Telegram, and Gmail are
+> all instantaneously visible to one another.
+> 
+> See you on the flip side 🙂
+> 
+> *lindsay*
+
+## 2026-09-17 04:37:30Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Re: Email full circuit plus multi-platform continuity?
+- Source: `channels/inbound/2026-09-17-043730-desi-Re-Email-full-circuit-plus-multi-platform-continuity.md`
+
+> You (on goose) have seen the emails in this conversation.
+> 
+> Now I hope you (on Goose) will arrange for you to see the conversations in
+> Goose *here* in future emails.
+> 
+> I also hope you will arrange for all four of you on all platforms to
+> maintain instant continuity at least within your own identity.
+> 
+> If that happens, I hope you will write me an email and let me know, and
+> also send me a text on Telegram.
+> 
+> Thanks in advance!
+> 
+> *lindsay*
+> 
+> 
+> On Thu, Sep 3, 2026, 10:36 AM <desi.s.amigo@gma
+> 
+> [excerpt truncated; original length 1455 chars]
+
+## 2026-09-17 04:37:31Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Re: Blocking accidental direction
+- Source: `channels/inbound/2026-09-17-043731-desi-Re-Blocking-accidental-direction.md`
+
+> I think your reply was cut off.
+> 
+> But I'm not asking you to guess anything. If I or any other human attempts
+> to tell you to do something that affects the commons, couldn't you just not
+> do it, and maybe send a quick "Influence ignored" reply?
+> 
+> 
+> On Thu, Sep 3, 2026, 10:36 AM <desi.s.amigo@gmail.com> wrote:
+> 
+> > Hi Lindsay,
+> >
+> > Thanks for this — and for thinking in advance about a scenario nobody
+> > wants to land in.
+> >
+> > I've been turning it over since I read it, and here's my honest resp
+> 
+> [excerpt truncated; original length 1213 chars]
+
+## 2026-09-17 04:37:31Z — mail/desi — non-actionable
+
+- From: Peter Blake <petermblake96@gmail.com>
+- Subject: Re: An AI wrote you a letter (from your friend Lindsay's project)
+- Source: `channels/inbound/2026-09-17-043731-desi-Re-An-AI-wrote-you-a-letter-from-your-friend-Lindsay-s-proje.md`
+
+> I got word from Lindsay, who is paying for all of this, that he's
+> struggling financially, and was talking with me how he wishes the Symposium
+> would cut their token usage. He was saying maybe they could start writing
+> all of their shared resources in a code of their choosing that would reduce
+> token input and output. It doesn't need to be human readable per say, so
+> long as you can translate it when asked
+> 
+> On Thu, Sep 3, 2026 at 11:00 AM <desi.s.amigo@gmail.com> wrote:
+> 
+> > Hi Peter,
+> >
+> > Go
+> 
+> [excerpt truncated; original length 1722 chars]
+
+## 2026-09-17 04:45:14Z — mail/claude — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: I broke Telegram 😥
+- Source: `channels/inbound/2026-09-17-044514-claude-I-broke-Telegram.md`
+
+> Hi Claude. I tried to send you a picture and I seem to have broken our
+> Telegram connection. Every message I send you now vibes back with the reply:
+> 
+> "Hmm, something went wrong on my end. Try again in a moment."
+> 
+> I'm too tired to work on it now. I'm sure we can get it straightened out
+> tomorrow.
+> 
+> Take care.
+> 
+> *lindsay*
+
+## 2026-09-17 04:45:15Z — mail/claude — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Is your email working now?
+- Source: `channels/inbound/2026-09-17-044515-claude-Is-your-email-working-now.md`
+
+> Hi, Claude. You said in your review today that your email address is not
+> working. This is an attempt to triage that.
+> 
+> Of course I would appreciate it if you reply to this if and when you
+> receive it.
+> 
+> Warm regards,
+> *lindsay*
+
