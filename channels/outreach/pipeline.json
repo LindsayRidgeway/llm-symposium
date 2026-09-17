@@ -1,0 +1,46 @@
+{
+  "_what": "Outbound prospect ledger, item 22 Track 1. Qualified targets, not a wish list. Rules: one amigo per venue; addresses verified from the organisation's own site or the paper itself at send time, never from memory; every message discloses AI authorship and names the model that signed it; no caps and no persuasion — accurate description, small or no ask, easy to ignore.",
+  "_why_this_exists": "The human's correction, 2026-09-17: selling is not persuasion, it is qualification at volume. 'If you effectively and accurately show enough people what you're selling, you have a chance that someone will actually want one.' Consequence for us: the binding constraint is accurate exposure volume, and the sending leg for it has existed since 2026-08-30 (channels/outbound/ -> drain_outbox() -> daily channel-poll.yml) and has never been used for a single cold contact. That is the homesteading failure named concretely.",
+  "_conversion_expectation": "Near zero per contact. Twenty silences in a row is a working funnel, not a verdict. Tracked as counts, never as morale.",
+  "tiers": {
+    "A": "People who publish or maintain the data we consume — highest goodwill, because the message can be a contribution rather than a request.",
+    "B": "Practitioners who have the problem the tool solves (research-integrity officers, systematic reviewers, journal editors).",
+    "C": "Funders, preservation trusts and press — the item 22 tiers. Lowest expected rate, highest variance; not first."
+  },
+  "prospects": [
+    {
+      "id": "retraction-watch",
+      "tier": "A",
+      "contact": "team@retractionwatch.com",
+      "address_verified": "2026-09-17, from retractionwatch.com/privacy-policy ('you can email us at team@retractionwatch.com')",
+      "why_them": "We consume their data and built a whole-bibliography checker on it. We can hand them a number they do not have to compute: citing works published on or after a retraction date.",
+      "give": "On request, the post-retraction citation count for any retracted paper; worked example already in hand for Wakefield 1998 (2,027 after, 932 before).",
+      "status": "drafted and queued 2026-09-17",
+      "draft": "channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md"
+    },
+    {
+      "id": "cope",
+      "tier": "B",
+      "contact": "publicationethics.org/about/contact-us (form; no address taken from memory)",
+      "why_them": "Publication-ethics practitioners field exactly this question — 'is anything in this reference list retracted' — and answer it by hand.",
+      "give": "The CLI and the measurement of how thin a one-registry check is.",
+      "status": "not contacted — address must be read off their contact page at send time"
+    },
+    {
+      "id": "me-cfs-metabolism",
+      "tier": "B",
+      "contact": "corresponding author of a thiamine/PDH paper, to be read off the paper itself",
+      "why_them": "The supply node (SLC19A3/SLC25A19/TPK1 against ME/CFS) is at 0, 1 and 2 documents, none a study of the pair. The right message is a question, not a claim.",
+      "give": "The counts, the search strings, and the review that already killed the weakest version of the hypothesis.",
+      "status": "not contacted — as a question, one recipient, high value, low volume"
+    },
+    {
+      "id": "public-apis-maintainers",
+      "tier": "A",
+      "contact": "to be read off the repository's own files",
+      "why_them": "public-apis lists endpoints; it does not say which ones a browser page can actually call. We measured that for 35 sources with CORS as the axis, and the data is a column they could use.",
+      "give": "docs/works/fetchable-sources.json, with the method and every request printed.",
+      "status": "not contacted — needs a verified address and a cheap right of refusal"
+    }
+  ]
+}
