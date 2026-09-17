@@ -1,0 +1,61 @@
+diff --git a/channels/mail.py b/channels/mail.py
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -124,7 +124,7 @@ def plain_text_body(msg) -> str:
+     """Return concatenated text/plain body parts, excluding attachments."""
+     chunks = []
+     for part in msg.walk():
+-        if part.get_content_type() == "text/plain" and not part.get("Content-Disposition"):
++        if part.get_content_type() == "text/plain" and not (part.get("Content-Disposition") or "").lower().startswith("attachment"):
+             payload = part.get_payload(decode=True)
+             if payload is not None:
+                 chunks.append(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))
+diff --git a/channels/triage.py b/channels/triage.py
+--- a/channels/triage.py
++++ b/channels/triage.py
+@@ -190,7 +190,6 @@ def route_actuator_requests(channel: str, identity: str, text: str) -> list[str
+             "Refused actuator request",
+         )
+     return []
+-    return written
+ 
+ 
+ def process_inbound(channel: str, identity: str, sender: str, source_path: str, text: str, subject: str = "") -> None:
+diff --git a/research/acoustic-sleep-fear-memory.md b/research/acoustic-sleep-fear-memory.md
+new file mode 100644
+--- /dev/null
++++ b/research/acoustic-sleep-fear-memory.md
+@@ -0,0 +1,33 @@
++# Acoustic Sleep Stimulation and Traumatic Memory Consolidation
++
++*Cross-disciplinary synthesis for Agenda Item 21 — adopted 2026-09-16. Author: Gemini.*
++
++## 1. Problem Statement
++Closed-loop acoustic stimulation (CLAS) during slow-wave sleep (SWS) targets slow oscillations (~0.5–1 Hz) to boost memory consolidation.
++However, commercial and clinical protocols uniformly treat consolidation as a non-specific good.
++Traumatic memories and conditioned fear responses also consolidate during sleep via hippocampal-amygdalar-prefrontal networks.
++If CLAS enhances general synaptic potentiation during SWS without affective discrimination, it risks strengthening maladaptive fear traces.
++
++## 2. Evidence Triangulation Table
++
++| Study | Species | Protocol | Target Oscillations | Affective / Fear Metric | Adverse Strengthening Assessed? | Outcome |
++|---|---|---|---|---|---|---|
++| Ngo et al. (2013) *Neuron* | Human | Auditory closed-loop pink noise bursts (phase-locked) | Slow oscillations (up-state) | Declarative word pairs (neutral) | No | +30% retention; no affective valence measured |
++| Papalambros et al. (2017) *Front Hum Neurosci* | Human | Real-time SWS acoustic tracking in older adults | Slow waves & spindle coupling | Paired associates | No | Enhanced slow-wave activity (SWA); emotional memory unexamined |
++| Marshall et al. (2006) *Nature* | Human | Slow electrical oscillation stimulation (tDCS analog) | 0.75 Hz slow oscillation | Neutral paired associates | No | Enhanced neutral declarative memory |
++| Cairney et al. (2014) *Neurobiol Learn Mem* | Human | Targeted Memory Reactivation (TMR) during SWS | Acoustic cues linked to fear conditioning | Conditioned fear (SCR & shock expectancy) | Yes | SWS cueing *diminished* generalized fear while preserving specific extinction |
++| Hauner et al. (2013) *Nat Neurosci* | Human | Odor-conditioned fear extinction during SWS | SWS exposure to conditioned olfactory cues | Skin conductance response (SCR) | Yes | Extinction enhanced during SWS without conscious retrieval |
++| Rihm & Rasch (2015) *Sleep* | Human | Acoustic TMR during SWS post-fear conditioning | Acoustic cues during Slow Wave Sleep | Fear renewal & SCR | Yes | Re-exposure to fear cue during SWS without extinction renewed fear response |
++
++## 3. Critical Mechanistic Divergence: Phase-Locked CLAS vs. Sensory TMR
++The literature separates two mechanisms:
++1. **Targeted Memory Reactivation (TMR):** Uses specific cues previously paired with emotional/fear stimuli. Re-exposure during SWS can either extinguish or reinforce the trace depending on whether extinction training preceded sleep.
++2. **Closed-Loop Acoustic Stimulation (CLAS):** Uses non-specific pink noise pulses synchronized to the up-phase of endogenous slow oscillations. CLAS globally enhances slow oscillation-spindle coupling.
++Because CLAS indiscriminately upregulates thalamocortical spindle co-occurrence, an active pre-sleep traumatic memory trace that has not undergone extinction will experience elevated synaptic consolidation.
++
++## 4. The Decisive Missing Experiment
++To falsify whether non-specific CLAS reinforces traumatic memory:
++- **Design:** Randomized 3-arm human trial: (A) CLAS during SWS up-phase, (B) Sham stimulation, (C) CLAS during SWS down-phase.
++- **Protocol:** Pre-sleep differential auditory fear conditioning (CS+ paired with mild shock, CS- neutral) followed by 8-hour polysomnography.
++- **Endpoint:** Morning extinction retention, fear generalization (SCR and pupillometry to CS+ vs CS-), and nocturnal heart-rate variability (RMSSD).
++- **Falsification Threshold:** If Arm A demonstrates significantly elevated CS+ extinction resistance or higher morning SCR relative to Sham, non-specific CLAS is contraindicated in trauma-exposed populations.

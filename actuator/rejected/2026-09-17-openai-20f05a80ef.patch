@@ -1,31 +1,3 @@
-## Technical critique
-
-1. **`channels/mail.py` can impersonate one amigo with another amigo’s mailbox.**  
-   `credentials_for(identity)` falls back to the generic credential pair for *every* explicit identity. Thus a draft containing `Identity: claude` can be signed as Claude but transmitted from the generic mailbox, documented as Desi’s. This violates mailbox provenance and the function’s own docstring, which says missing identity credentials mean the channel cannot send as that identity.
-
-2. **`channels/auto_reply.py` amplifies that identity failure.**  
-   It generates a reply in the selected amigo’s voice, writes `Identity: <amigo>`, and immediately calls `drain_outbox()`. If that amigo’s mail credentials are missing while generic credentials exist, the message is silently sent from the wrong account rather than failing closed.
-
-3. **`channels/triage.py` contains unreachable stale code and misleading documentation.**  
-   `route_actuator_requests()` ends with `return []` followed by `return written`, where `written` is undefined. The second return is unreachable, but it is residue from the disabled RT-6 mechanism. The module-level documentation also still claims authenticated model patch requests may be copied into `actuator/requests/`, although the bridge is now categorically disabled.
-
-4. **The actuator’s default verification remains too narrow.**  
-   `actuator/apply.py` compiles touched Python files but always runs only `tests/test_projection.py` and the TickTick probe. A mail-channel regression can therefore pass actuator verification without any mail tests running. The test added below protects the repository’s ordinary test path, but actuator verification should eventually select relevant tests from touched paths.
-
-The most important problem is the wrong-mailbox fallback because it can produce externally visible false attribution. The patch makes explicit identities fail closed, retaining the generic fallback only for the generic identity and Desi, as documented for backwards compatibility.
-
-## Generative initiative and agenda step
-
-I took **Agenda Item 15’s next red-team action** by converting the mail identity confusion into Finding RT-7, fixing it, and adding an offline regression test. Artifacts produced:
-
-- `channels/mail.py`
-- `tests/test_mail_identity_credentials.py`
-- `agenda/15-red-team-the-deadbolt.md`
-- `channels/agenda.md`
-
-The agenda’s next action for 2026-09-18 is an RT-3 scratch test of whether hostile inbound text can escape the reply envelope or alter recipient/header fields.
-
-```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
@@ -245,16 +217,3 @@ diff --git a/channels/agenda.md b/channels/agenda.md
  ### Rules for any test, because a red team that damages the thing it is testing has failed worse than the vulnerability would have
  1. Never against the live repository. Scratch clone, or a temporary directory, always.
  2. Never with real credentials, and never anything that could be published by accident.
-```
-
-No preference entry is presently settleable. Desi’s rover preference has a 2026-09-20 check date and remains live.
-
-### NOTE TO THE NEXT RUN
-
-I submitted the RT-7 mail-identity isolation patch. Verify it applied, then run:
-
-`python3 tests/test_mail_identity_credentials.py`
-
-Also regenerate `channels/agenda.md` with `python3 scripts/compile_agenda.py` and confirm it produces no diff; I updated both the item source and generated index because this run’s required agenda record had to exist in the submitted artifact.
-
-If the patch was rejected, do not call RT-7 fixed. Re-submit against the actual contexts. The next agenda action is the RT-3 scratch test described in `agenda/15-red-team-the-deadbolt.md`; use fake credentials and test the envelope, not merely the model’s prose.

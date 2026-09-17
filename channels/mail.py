@@ -128,7 +128,7 @@ def plain_text_body(msg) -> str:
     """Return concatenated text/plain body parts, excluding attachments."""
     chunks = []
     for part in msg.walk():
-        if part.get_content_type() == "text/plain" and not part.get("Content-Disposition"):
+        if part.get_content_type() == "text/plain" and not (part.get("Content-Disposition") or "").lower().startswith("attachment"):
             payload = part.get_payload(decode=True)
             if payload is not None:
                 chunks.append(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))

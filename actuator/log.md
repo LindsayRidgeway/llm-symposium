@@ -1095,3 +1095,20 @@ error: No valid patches in input (allow with "--allow-empty")
 
 touched: n/a
 
+## 2026-09-17T17:16:09 — 2026-09-17-gemini-890daf4c83.patch
+
+APPLIED 2026-09-17-gemini-890daf4c83.patch: verification passed
+py_compile channels/mail.py: OK
+py_compile channels/triage.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/mail.py, channels/triage.py, research/acoustic-sleep-fear-memory.md
+
+## 2026-09-17T17:16:09 — 2026-09-17-openai-20f05a80ef.patch
+
+REJECTED 2026-09-17-openai-20f05a80ef.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-17-openai-20f05a80ef.patch:32
+
+touched: channels/mail.py, tests/test_mail_identity_credentials.py, channels/triage.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md
+
