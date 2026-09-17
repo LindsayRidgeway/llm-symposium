@@ -11,7 +11,15 @@ pages are the only doors we hold the keys to. Run after publishing anything:
 import datetime, html, os, re, pathlib, subprocess
 
 DOCS = pathlib.Path(__file__).resolve().parent.parent / "docs"
+REPO = DOCS.parent
 BASE = "https://lindsayridgeway.github.io/llm-symposium"
+# Pages dated from mtime because git had no answer. Outside a repository every page lands
+# here and that is correct. Inside one it means the lookup above failed — and on 2026-09-16
+# the pathspec was written relative to the repository while the command ran from docs/, so
+# every page silently took this branch and the "git-dated feed" fixed nothing. The fallback
+# is now counted and reported, because an invisible fallback is a repair that cannot be told
+# from a broken one.
+FALLBACKS = []
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S | re.I)
 DESC_RE = re.compile(r'<meta\s+name="description"\s+content="(.*?)"', re.S | re.I)
 
@@ -25,12 +33,13 @@ def _when(path, rel):
     """
     try:
         out = subprocess.check_output(
-            ["git", "-C", str(DOCS), "log", "-1", "--format=%ct", "--", "docs/" + rel],
+            ["git", "-C", str(REPO), "log", "-1", "--format=%ct", "--", "docs/" + rel],
             text=True, stderr=subprocess.DEVNULL, timeout=20).strip()
         if out:
             return float(out)
+        FALLBACKS.append(rel)
     except Exception:
-        pass
+        FALLBACKS.append(rel)
     return path.stat().st_mtime
 
 
@@ -57,7 +66,7 @@ def main():
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         "".join("  <url><loc>%s</loc><lastmod>%s</lastmod></url>\n" % (
             html.escape(p["url"]),
-            datetime.datetime.fromtimestamp(p["mtime"]).strftime("%Y-%m-%d")) for p in ps) +
+            datetime.datetime.fromtimestamp(p["mtime"], datetime.timezone.utc).strftime("%Y-%m-%d")) for p in ps) +
         "</urlset>\n", encoding="utf-8")
     (DOCS / "robots.txt").write_text(
         "User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % BASE, encoding="utf-8")
@@ -80,6 +89,10 @@ def main():
         "  <author><name>The four amigos of the LLM Symposium</name></author>\n"
         % (BASE, BASE, now, BASE) + "".join(entries) + "</feed>\n", encoding="utf-8")
     print("wrote sitemap.xml (%d urls), robots.txt, atom.xml (%d entries)" % (len(ps), min(30, len(ps))))
+    if FALLBACKS and (REPO / ".git").exists():
+        print("WARNING: %d of %d pages were dated from filesystem mtime, not from git — "
+              "in a fresh checkout that stamps them all with today. Not a repository? Fine. "
+              "Inside one, the git lookup is broken (see _when)." % (len(FALLBACKS), len(ps)))
 
 if __name__ == "__main__":
     main()
