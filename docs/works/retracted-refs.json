@@ -1,0 +1,554 @@
+{
+  "generated_utc": "2026-09-16 21:20 UTC",
+  "method": "OpenAlex referenced_works -> OpenAlex is_retracted in batches of 100 -> Crossref updated-by/update-to, asked separately by DOI. Every count here was measured, not written down.",
+  "detector_selftest": [
+    {
+      "doi": "10.1016/S0140-6736(97)11096-0",
+      "why": "Wakefield et al. 1998, the paper that started the MMR scare",
+      "title": "RETRACTED: Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children",
+      "publication_year": 1998,
+      "flagged_retracted": true
+    },
+    {
+      "doi": "10.1056/NEJMoa1200303",
+      "why": "PREDIMED: retracted 2018, then republished with the conclusion intact",
+      "title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+      "publication_year": 2013,
+      "flagged_retracted": true
+    },
+    {
+      "doi": "10.1016/S0140-6736(20)31180-6",
+      "why": "Mehra et al. 2020, the Surgisphere hydroxychloroquine paper",
+      "title": "RETRACTED: Hydroxychloroquine or chloroquine with or without a macrolide for treatment of COVID-19: a multinational registry analysis",
+      "publication_year": 2020,
+      "flagged_retracted": true
+    },
+    {
+      "doi": "10.1016/S0140-6736(11)61590-0",
+      "why": "SCIPIO (cardiac stem cells), retracted 2019",
+      "title": "RETRACTED: Cardiac stem cells in patients with ischaemic cardiomyopathy (SCIPIO): initial results of a randomised phase 1 trial",
+      "publication_year": 2011,
+      "flagged_retracted": true
+    }
+  ],
+  "selftest_all_fired": true,
+  "documents": [
+    {
+      "doi": "10.1093/eurheartj/ehy339",
+      "title": "2018 ESC/ESH Guidelines for the management of arterial hypertension",
+      "publication_year": 2018,
+      "this_document_is_flagged_retracted": false,
+      "references_listed": 669,
+      "references_resolved": 651,
+      "references_unresolved": 18,
+      "reference_requests": 14,
+      "flagged_retracted": [
+        {
+          "id": "https://openalex.org/W2166000498",
+          "doi": "10.1056/nejmoa1200303",
+          "title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+          "publication_year": 2013,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc1806491"
+              }
+            ],
+            "update_to": [],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc1806491"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        },
+        {
+          "id": "https://openalex.org/W2802565200",
+          "doi": "10.1056/nejmoa1712231",
+          "title": "RETRACTED: Relationship between Clinic and Ambulatory Blood-Pressure Measurements and Mortality",
+          "publication_year": 2018,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "RETRACTED: Relationship between Clinic and Ambulatory Blood-Pressure Measurements and Mortality",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc2001445"
+              }
+            ],
+            "update_to": [],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc2001445"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        }
+      ],
+      "flagged_count": 2,
+      "crossref_checked": 2,
+      "crossref_confirmed": 2,
+      "crossref_unconfirmed": 0,
+      "label": "2018 ESC/ESH Guidelines for the management of arterial hypertension"
+    },
+    {
+      "doi": "10.1161/cir.0000000000000625",
+      "title": "2018 AHA/ACC/AACVPR/AAPA/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Blood Cholesterol: A Report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines",
+      "publication_year": 2019,
+      "this_document_is_flagged_retracted": false,
+      "references_listed": 470,
+      "references_resolved": 468,
+      "references_unresolved": 2,
+      "reference_requests": 10,
+      "flagged_retracted": [
+        {
+          "id": "https://openalex.org/W173808884",
+          "doi": "10.1002/14651858.cd009217.pub2",
+          "title": "Reduced dietary salt for the prevention of cardiovascular disease",
+          "publication_year": 2013,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "reference-entry",
+            "crossref_title": "Reduced dietary salt for the prevention of cardiovascular disease",
+            "updated_by": [
+              {
+                "type": "new_version",
+                "doi": "10.1002/14651858.cd009217.pub3"
+              }
+            ],
+            "update_to": [
+              {
+                "type": "retraction",
+                "doi": "10.1002/14651858.cd009217"
+              }
+            ],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1002/14651858.cd009217"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        },
+        {
+          "id": "https://openalex.org/W2166000498",
+          "doi": "10.1056/nejmoa1200303",
+          "title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+          "publication_year": 2013,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc1806491"
+              }
+            ],
+            "update_to": [],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc1806491"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        },
+        {
+          "id": "https://openalex.org/W2808192013",
+          "doi": "10.1056/nejmc1806491",
+          "title": "Retraction and Republication: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet. N Engl J Med 2013;368:1279-90.",
+          "publication_year": 2018,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "Retraction and Republication: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet. N Engl J Med 2013;368:1279-90.",
+            "updated_by": [],
+            "update_to": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmoa1200303"
+              }
+            ],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmoa1200303"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        }
+      ],
+      "flagged_count": 3,
+      "crossref_checked": 3,
+      "crossref_confirmed": 3,
+      "crossref_unconfirmed": 0,
+      "label": "2018 AHA/ACC cholesterol guideline"
+    },
+    {
+      "doi": "10.1093/eurheartj/eht151",
+      "title": "2013 ESH/ESC Guidelines for the management of arterial hypertension",
+      "publication_year": 2013,
+      "this_document_is_flagged_retracted": false,
+      "references_listed": 1035,
+      "references_resolved": 1028,
+      "references_unresolved": 7,
+      "reference_requests": 22,
+      "flagged_retracted": [
+        {
+          "id": "https://openalex.org/W2166000498",
+          "doi": "10.1056/nejmoa1200303",
+          "title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+          "publication_year": 2013,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc1806491"
+              }
+            ],
+            "update_to": [],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc1806491"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        }
+      ],
+      "flagged_count": 1,
+      "crossref_checked": 1,
+      "crossref_confirmed": 1,
+      "crossref_unconfirmed": 0,
+      "label": "2013 ESH/ESC Guidelines for the management of arterial hypertension"
+    },
+    {
+      "doi": "10.2337/dc14-s014",
+      "title": "Standards of Medical Care in Diabetes\u20142014",
+      "publication_year": 2013,
+      "this_document_is_flagged_retracted": false,
+      "references_listed": 628,
+      "references_resolved": 608,
+      "references_unresolved": 20,
+      "reference_requests": 14,
+      "flagged_retracted": [
+        {
+          "id": "https://openalex.org/W2096125954",
+          "doi": "10.1093/fampra/cmp003",
+          "title": "Different models to mobilize peer support to improve diabetes self-management and clinical outcomes: evidence, logistics, evaluation considerations and needs for future research",
+          "publication_year": 2009,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "Different models to mobilize peer support to improve diabetes self-management and clinical outcomes: evidence, logistics, evaluation considerations and needs for future research",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1093/fampra/cms039"
+              }
+            ],
+            "update_to": [],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1093/fampra/cms039"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        },
+        {
+          "id": "https://openalex.org/W2108527237",
+          "doi": "10.1002/14651858.cd003417.pub2",
+          "title": "Group based training for self-management strategies in people with type 2 diabetes mellitus",
+          "publication_year": 2005,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "reference-entry",
+            "crossref_title": "Group based training for self-management strategies in people with type 2 diabetes mellitus",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1002/14651858.cd003417.pub3"
+              },
+              {
+                "type": "withdrawal",
+                "doi": "10.1002/14651858.cd003417.pub3"
+              }
+            ],
+            "update_to": [],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1002/14651858.cd003417.pub3"
+              },
+              {
+                "type": "withdrawal",
+                "doi": "10.1002/14651858.cd003417.pub3"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        },
+        {
+          "id": "https://openalex.org/W2166000498",
+          "doi": "10.1056/nejmoa1200303",
+          "title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+          "publication_year": 2013,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc1806491"
+              }
+            ],
+            "update_to": [],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejmc1806491"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        }
+      ],
+      "flagged_count": 3,
+      "crossref_checked": 3,
+      "crossref_confirmed": 3,
+      "crossref_unconfirmed": 0,
+      "label": "Standards of Medical Care in Diabetes \u2014 2014"
+    },
+    {
+      "doi": "10.1161/cir.0b013e3182742cf6",
+      "title": "2013 ACCF/AHA Guideline for the Management of ST-Elevation Myocardial Infarction",
+      "publication_year": 2012,
+      "this_document_is_flagged_retracted": false,
+      "references_listed": 702,
+      "references_resolved": 699,
+      "references_unresolved": 3,
+      "reference_requests": 16,
+      "flagged_retracted": [
+        {
+          "id": "https://openalex.org/W2132735690",
+          "doi": "10.1016/s0140-6736(11)61590-0",
+          "title": "RETRACTED: Cardiac stem cells in patients with ischaemic cardiomyopathy (SCIPIO): initial results of a randomised phase 1 trial",
+          "publication_year": 2011,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "RETRACTED: Cardiac stem cells in patients with ischaemic cardiomyopathy (SCIPIO): initial results of a randomised phase 1 trial",
+            "updated_by": [
+              {
+                "type": "expression_of_concern",
+                "doi": "10.1016/s0140-6736(14)60608-5"
+              },
+              {
+                "type": "retraction",
+                "doi": "10.1016/s0140-6736(19)30542-2"
+              },
+              {
+                "type": "erratum",
+                "doi": "10.1016/s0140-6736(19)30542-2"
+              }
+            ],
+            "update_to": [
+              {
+                "type": "retraction",
+                "doi": "10.1016/s0140-6736(11)61648-6"
+              },
+              {
+                "type": "retraction",
+                "doi": "10.1016/s0140-6736(14)60608-5"
+              },
+              {
+                "type": "retraction",
+                "doi": "10.1016/s0140-6736(19)30542-2"
+              }
+            ],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1016/s0140-6736(19)30542-2"
+              },
+              {
+                "type": "retraction",
+                "doi": "10.1016/s0140-6736(11)61648-6"
+              },
+              {
+                "type": "retraction",
+                "doi": "10.1016/s0140-6736(14)60608-5"
+              },
+              {
+                "type": "retraction",
+                "doi": "10.1016/s0140-6736(19)30542-2"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        }
+      ],
+      "flagged_count": 1,
+      "crossref_checked": 1,
+      "crossref_confirmed": 1,
+      "crossref_unconfirmed": 0,
+      "label": "2013 ACCF/AHA Guideline for the Management of ST-Elevation MI"
+    },
+    {
+      "doi": "10.1016/j.kint.2021.05.021",
+      "title": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases",
+      "publication_year": 2021,
+      "this_document_is_flagged_retracted": false,
+      "references_listed": 1062,
+      "references_resolved": 978,
+      "references_unresolved": 84,
+      "reference_requests": 22,
+      "flagged_retracted": [
+        {
+          "id": "https://openalex.org/W3131777419",
+          "doi": "10.1056/nejmoa2023386",
+          "title": "RETRACTED: Avacopan for the Treatment of ANCA-Associated Vasculitis",
+          "publication_year": 2021,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "RETRACTED: Avacopan for the Treatment of ANCA-Associated Vasculitis",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejme2608684"
+              }
+            ],
+            "update_to": [],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1056/nejme2608684"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        }
+      ],
+      "flagged_count": 1,
+      "crossref_checked": 1,
+      "crossref_confirmed": 1,
+      "crossref_unconfirmed": 0,
+      "label": "KDIGO 2021 Clinical Practice Guideline for Glomerular Diseases"
+    },
+    {
+      "doi": "10.1210/jc.2016-2573",
+      "title": "Pediatric Obesity\u2014Assessment, Treatment, and Prevention: An Endocrine Society Clinical Practice Guideline",
+      "publication_year": 2017,
+      "this_document_is_flagged_retracted": false,
+      "references_listed": 418,
+      "references_resolved": 405,
+      "references_unresolved": 13,
+      "reference_requests": 10,
+      "flagged_retracted": [
+        {
+          "id": "https://openalex.org/W2119057053",
+          "doi": "10.1002/14651858.cd001872.pub2",
+          "title": "Interventions for treating obesity in children",
+          "publication_year": 2009,
+          "is_retracted": true,
+          "crossref": {
+            "checked": true,
+            "crossref_type": "journal-article",
+            "crossref_title": "Interventions for treating obesity in children",
+            "updated_by": [
+              {
+                "type": "retraction",
+                "doi": "10.1002/14651858.cd001872.pub3"
+              },
+              {
+                "type": "withdrawal",
+                "doi": "10.1002/14651858.cd001872.pub3"
+              }
+            ],
+            "update_to": [
+              {
+                "type": "new_version",
+                "doi": "10.1002/14651858.cd001872"
+              }
+            ],
+            "retraction_notices": [
+              {
+                "type": "retraction",
+                "doi": "10.1002/14651858.cd001872.pub3"
+              },
+              {
+                "type": "withdrawal",
+                "doi": "10.1002/14651858.cd001872.pub3"
+              }
+            ],
+            "confirms_retraction": true
+          }
+        }
+      ],
+      "flagged_count": 1,
+      "crossref_checked": 1,
+      "crossref_confirmed": 1,
+      "crossref_unconfirmed": 0,
+      "label": "Endocrine Society: Pediatric Obesity \u2014 Assessment, Treatment, Prevention"
+    },
+    {
+      "doi": "10.1161/cir.0000000000000065",
+      "title": "The Heart Failure Paradox: An Epidemic of Scientific Success",
+      "publication_year": 2014,
+      "this_document_is_flagged_retracted": false,
+      "references_listed": 72,
+      "references_resolved": 72,
+      "references_unresolved": 0,
+      "reference_requests": 2,
+      "flagged_retracted": [],
+      "flagged_count": 0,
+      "crossref_checked": 0,
+      "crossref_confirmed": 0,
+      "crossref_unconfirmed": 0,
+      "label": "2017 ACC/AHA hypertension guideline"
+    }
+  ],
+  "counts": {
+    "documents": 8,
+    "references_listed": 5056,
+    "references_resolved": 4909,
+    "references_unresolved": 147,
+    "flagged_retracted": 12,
+    "documents_with_at_least_one": 7,
+    "crossref_checked": 12,
+    "crossref_confirmed": 12
+  },
+  "requests_made": 134
+}

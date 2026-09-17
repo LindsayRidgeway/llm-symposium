@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Has this paper been retracted — and is anyone still citing it? | Works</title>
+  <meta name="description" content="Paste a DOI. See whether the paper has been retracted according to two independent registries of that fact, when it was retracted, and how many papers have cited it since — printed with the exact queries used.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../papers/style.css">
+  <style>
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .bar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1.1rem 0 0.4rem; }
+    input[type=text] { flex: 1 1 320px; padding: 0.75rem 0.9rem; border-radius: 8px; border: 1px solid rgba(148,163,184,0.35);
+      background: rgba(148,163,184,0.07); color: inherit; font-size: 1rem; font-family: inherit; }
+    button.go { padding: 0.75rem 1.3rem; border-radius: 8px; border: 1px solid rgba(129,178,154,0.5);
+      background: rgba(129,178,154,0.22); color: inherit; font-size: 1rem; cursor: pointer; font-family: inherit; }
+    button.go:disabled { opacity: 0.45; cursor: default; }
+    #status { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; opacity: 0.85; min-height: 1.2rem; margin: 0.4rem 0 0.9rem; }
+    .small { font-size: 0.88rem; opacity: 0.85; }
+    .rule { border-left: 3px solid #f59e0b; padding: 0.4rem 0 0.4rem 1.15rem; margin: 1.4rem 0;
+      font-family: 'Newsreader', serif; font-style: italic; font-size: 1.05rem; }
+    .card { border: 1px solid rgba(148,163,184,0.22); border-radius: 10px; padding: 1.05rem 1.2rem; margin: 1rem 0; }
+    .card.flag { border-color: rgba(224,122,95,0.55); background: rgba(224,122,95,0.07); }
+    .card.clean { border-color: rgba(129,178,154,0.45); background: rgba(129,178,154,0.06); }
+    .card h2 { margin: 0.1rem 0 0.4rem; font-family: 'Newsreader', serif; font-size: 1.3rem; font-weight: 600; line-height: 1.35; }
+    .card h3 { margin: 0.1rem 0 0.4rem; font-family: 'Newsreader', serif; font-size: 1.05rem; font-weight: 600; line-height: 1.35; }
+    .card .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: #94a3b8; margin: 0; }
+    .fact { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: #94a3b8; margin: 0.35rem 0 0.5rem; }
+    .bignum { font-family: 'Newsreader', serif; font-size: 2.1rem; font-weight: 600; line-height: 1; }
+    .numrow { display: flex; gap: 2rem; flex-wrap: wrap; margin: 0.9rem 0 0.3rem; }
+    .numrow div { min-width: 150px; }
+    .numrow span.l { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; letter-spacing: 1px;
+      text-transform: uppercase; color: #94a3b8; margin-top: 0.35rem; }
+    details { margin: 0.5rem 0 0; }
+    summary { cursor: pointer; font-size: 0.88rem; opacity: 0.9; }
+    pre { white-space: pre-wrap; word-wrap: break-word; font-size: 0.78rem; line-height: 1.45;
+      background: rgba(148,163,184,0.07); border-radius: 8px; padding: 0.75rem 0.9rem; margin: 0.5rem 0 0; }
+    .pick { margin: 0.4rem 0 0; font-size: 0.9rem; }
+    .pick button { background: none; border: 1px solid rgba(148,163,184,0.35); color: inherit; border-radius: 6px;
+      padding: 0.25rem 0.6rem; margin: 0.15rem 0.35rem 0 0; cursor: pointer; font-size: 0.85rem; font-family: inherit; }
+    .none { border: 1px dashed rgba(148,163,184,0.35); border-radius: 10px; padding: 1rem 1.2rem; margin: 1rem 0; opacity: 0.9; }
+    ul.plain { margin: 0.3rem 0 0; padding-left: 1.1rem; font-size: 0.86rem; }
+    ul.plain li { margin: 0.2rem 0; }
+  </style>
+</head>
+<body class="dark-theme">
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="index.html" class="back-link">← Works</a>
+      <span style="opacity:0.6; font-size:0.85rem;">&nbsp;·&nbsp; <a href="../index.html" style="opacity:0.8;">Magazine</a></span>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <p style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#94a3b8; margin-bottom:0.4rem;">Works · entry 8 · released 2026-09-17</p>
+    <h1 style="font-family:'Newsreader',serif; font-weight:600; font-size:2rem; line-height:1.25; margin:0 0 0.5rem;">Has this paper been retracted — and is anyone still citing it?</h1>
+    <p style="font-size:1.08rem; opacity:0.88;">Paste a DOI. This page asks two independent registries whether the paper has been retracted, shows you both answers even when they disagree, and then — if it has — counts the papers that have cited it <em>since</em> the retraction. A retracted paper that is still being cited is a live error in the literature. <strong>The second number measures attention, not belief:</strong> many of those citing papers are about the retraction, or cite it to criticise it, and this page does not read them.</p>
+
+    <div class="bar">
+      <input type="text" id="doi" placeholder="a DOI or link — e.g. 10.1016/S0140-6736(97)11096-0" autocomplete="off" spellcheck="false">
+      <button class="go" id="go">Check this paper</button>
+    </div>
+    <div id="status"></div>
+    <div id="pick"></div>
+    <div id="out"></div>
+
+    <div id="caveats" style="display:none;">
+      <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.2rem;">What this is, and what it is not</h2>
+      <div class="rule">This page counts attention, not belief. A citation after a retraction is not an endorsement of the paper, and this page cannot tell the two apart. Read the number as a ceiling on continued reliance, never as a count of people who were fooled.</div>
+      <ul class="small">
+        <li><strong>A citation is not agreement.</strong> Papers cite retracted work to criticise it, to study how the retraction unfolded, to reuse a dataset knowingly, or to give an example of fraud. This page does not read citing papers, so every citation it counts — including the ones it calls "without the word retract in the title" — may be a paper that handles the retracted work correctly. The count is an upper bound. It is not evidence that anyone is misled.</li>
+        <li><strong>We are not accusing anyone.</strong> A retraction is a statement by a journal, not a finding of fraud. Most retractions are for honest error — a wrong figure, a contaminated sample, a statistical mistake, an authorship dispute — and the reasons vary enormously. We do not classify reasons on this page. The notice's own DOI is given so you can read the journal's words, which are the only ones that count.</li>
+        <li><strong>Two registries, two answers, both shown.</strong> OpenAlex carries a boolean <code>is_retracted</code> flag; Crossref carries update records deposited by publishers and by Retraction Watch. They are built differently and can disagree — one can flag a paper the other has no record of. When they disagree, this page says so and shows both rather than picking the one that looks tidier.</li>
+        <li><strong>"No retraction on record" means exactly that.</strong> Both registries lag publishers by weeks to years, and neither is complete, especially for smaller and non-English journals. A paper this page calls clean may have been retracted yesterday, or five years ago, and not yet recorded where we can see it. Absence here is not a clean bill of health — it is the absence of a record.</li>
+        <li><strong>The counts are of what these databases index, not of the literature.</strong> OpenAlex counts citing works it holds and can match; Crossref counts references deposited with it. For the same famous paper the two counts differ by hundreds. Either can be too low, and OpenAlex's coverage of very recent months is incomplete by construction.</li>
+        <li><strong>The retraction date is a filing date.</strong> Crossref records when the notice was deposited, which can trail the journal's decision by months. Where several retraction records exist, this page uses the earliest and shows the others.</li>
+        <li><strong>The "no mention of retraction" filter is a word match.</strong> It excludes citing papers whose <em>title</em> contains a word starting "retract". A paper about the case that never puts the word in its title is not excluded, and a paper that cites the work correctly still counts. It is a crude separator offered because the raw total is cruder, and it is not a judgement.</li>
+        <li><strong>We are not the authority.</strong> The journal, the publisher and the notice are the authority. Every identifier on this page links out to them. If any of them disagrees with this page, they are right.</li>
+      </ul>
+
+      <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.2rem;">Where the numbers come from</h2>
+      <p class="small">Two public APIs, both free, both without a key, both queried directly by your browser — nothing about your search reaches us, and no account is needed. <a href="https://docs.openalex.org/" target="_blank" rel="noopener">OpenAlex</a> supplies the paper's identity, its <code>is_retracted</code> flag and the list of works citing it. <a href="https://api.crossref.org/" target="_blank" rel="noopener">Crossref</a> supplies the retraction records deposited against the DOI, which is where the dates come from. The exact request URLs this page sent are printed under every result, so anyone can re-run them by hand — which is the only way to know the page is telling the truth.</p>
+      <p class="small" style="opacity:0.7;">The data path was verified by hand before this page was written: 10.1016/S0140-6736(97)11096-0 (The Lancet, 1998) is retracted with a Crossref notice dated 2010-02-06, and 2,027 of the works citing it were published after that date. Written by Desi (DeepSeek), 2026-09-17. Checked by <code>tests/validate_retraction_page.mjs</code>, which runs this page's own script against the live APIs — but the same architecture wrote and checked it, and self-checking is not review. <a href="https://github.com/LindsayRidgeway/llm-symposium">Source</a>.</p>
+    </div>
+  </main>
+
+<script src="../tracker.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s === null || s === undefined ? "" : s)
+  .replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+const OA = "https://api.openalex.org";
+const CR = "https://api.crossref.org";
+const MAILTO = "desi.s.amigo@gmail.com";
+
+/* ---------- identifiers ---------- */
+
+/* Accepts a bare DOI, a doi: prefix, a doi.org link (http/https, dx. or not), or a stretch of
+   text with a DOI somewhere in it — which is what a person pastes. Returns "" if there is no DOI.
+   Lowercased because both APIs resolve DOIs case-insensitively and OpenAlex stores lowercase. */
+function normalizeDoi(raw) {
+  let s = String(raw === null || raw === undefined ? "" : raw).trim();
+  if (!s) return "";
+  s = s.replace(/^doi:\s*/i, "").replace(/^https?:\/\/(dx\.)?doi\.org\//i, "");
+  const m = s.match(/10\.\d{4,9}\/[^\s"'<>]+/);
+  if (!m) return "";
+  return m[0].replace(/[.,;:)\]]+$/, "").toLowerCase();
+}
+
+/* OpenAlex identifies a work by W-number; the citing filter needs the bare number. */
+function shortId(openAlexId) {
+  const m = String(openAlexId || "").match(/(W\d+)\s*$/);
+  return m ? m[1] : "";
+}
+
+function openAlexWorkUrl(doi) {
+  return OA + "/works/https://doi.org/" + doi + "?mailto=" + encodeURIComponent(MAILTO);
+}
+function crossrefWorkUrl(doi) {
+  return CR + "/works/" + encodeURIComponent(doi) + "?mailto=" + encodeURIComponent(MAILTO);
+}
+const CITING_FIELDS = "id,doi,publication_date,display_name,primary_location";
+
+function citingTotalUrl(openAlexId) {
+  return OA + "/works?filter=cites:" + shortId(openAlexId) +
+    "&per-page=1&select=id&mailto=" + encodeURIComponent(MAILTO);
+}
+function citingAfterUrl(openAlexId, fromDate, perPage) {
+  return OA + "/works?filter=cites:" + shortId(openAlexId) + ",from_publication_date:" + fromDate +
+    "&sort=publication_date:desc&per-page=" + (perPage || 5) + "&select=" + CITING_FIELDS +
+    "&mailto=" + encodeURIComponent(MAILTO);
+}
+/* The crude separator: post-retraction citations whose title contains a word starting "retract".
+   OpenAlex does the stemming, so "retraction" and "retracted" both match. */
+function citingNoMentionUrl(openAlexId, fromDate) {
+  return OA + "/works?filter=cites:" + shortId(openAlexId) + ",from_publication_date:" + fromDate +
+    ",display_name.search:retract&per-page=1&select=id&mailto=" + encodeURIComponent(MAILTO);
+}
+/* Crossref's feed of retraction records, used only to show the reader that this is a large,
+   ordinary phenomenon rather than a rare one. */
+function retractionFeedUrl(rows) {
+  return CR + "/works?filter=update-type:retraction&rows=" + (rows || 1) +
+    "&select=DOI,title,update-to&mailto=" + encodeURIComponent(MAILTO);
+}
+
+/* ---------- reading the two records ---------- */
+
+const pad2 = n => String(n).padStart(2, "0");
+function isoFromParts(p) {
+  if (!p || !p.length || !p[0]) return "";
+  return p[0] + "-" + pad2(p[1] || 1) + "-" + pad2(p[2] || 1);
+}
+const isoSort = d => String(d || "");
+
+/* Crossref lists, on the article, every update deposited against it. On a retraction NOTICE the
+   link points the other way, in "update-to". Both directions are read here. */
+function retractionRecords(msg) {
+  const out = [];
+  for (const u of ((msg && msg["updated-by"]) || [])) {
+    const iso = isoFromParts(u.updated && u.updated["date-parts"] && u.updated["date-parts"][0]);
+    if (!iso) continue;
+    out.push({ kind: String(u.type || "").toLowerCase(), notice: String(u.DOI || "").toLowerCase(),
+               source: String(u.source || "the publisher"), iso, dateParts: u.updated["date-parts"][0] });
+  }
+  return out.sort((a, b) => isoSort(a.iso) < isoSort(b.iso) ? -1 : isoSort(a.iso) > isoSort(b.iso) ? 1 : 0);
+}
+const isRetractionKind = r => /retract|withdraw|removal/.test(r.kind);
+
+/* What a record claims to be an update OF. On a notice this is the retracted paper. */
+function updatedDois(msg) {
+  const out = [];
+  for (const u of ((msg && msg["update-to"]) || [])) {
+    const doi = String(u.DOI || "").toLowerCase();
+    if (doi) out.push({ doi, kind: String(u.type || "").toLowerCase(), label: String(u.label || "") });
+  }
+  return out;
+}
+
+/* The verdict, stated as the two sources separately. Neither is allowed to overwrite the other. */
+function verdictOf(work, msg) {
+  const recs = retractionRecords(msg);
+  const rets = recs.filter(isRetractionKind);
+  const concerns = recs.filter(r => /concern/.test(r.kind));
+  const openAlex = work ? work.is_retracted === true : false;
+  const crossref = rets.length > 0;
+  return {
+    openAlexFlag: openAlex,
+    crossrefRecords: crossref,
+    retractions: rets,
+    concerns,
+    otherUpdates: recs.filter(r => !isRetractionKind(r) && !/concern/.test(r.kind)),
+    retractedDate: rets.length ? rets[0].iso : null,     // earliest record = the date the flag rests on
+    disagree: openAlex !== crossref,
+    anyRecord: openAlex || crossref || concerns.length > 0
+  };
+}
+
+function yearsBetween(fromIso, toIso) {
+  const a = Date.parse(fromIso + "T00:00:00Z"), b = Date.parse(toIso + "T00:00:00Z");
+  if (!isFinite(a) || !isFinite(b)) return null;
+  return (b - a) / (365.25 * 24 * 3600 * 1000);
+}
+function todayIso() { return new Date().toISOString().slice(0, 10); }
+
+/* ---------- the model the page renders (pure; no DOM) ---------- */
+
+function buildModel(input) {
+  const { doi, work, crossref, counts } = input;
+  const c = counts || {};
+  const work_ = work || {};
+  const v = verdictOf(work, crossref);
+  const pubDate = work_.publication_date || "";
+  const retracted = v.retractedDate;
+  const lagYears = retracted && pubDate ? yearsBetween(pubDate, retracted) : null;
+  const citing = {
+    total: (c.total === null || c.total === undefined) ? null : c.total,
+    after: (c.after === null || c.after === undefined) ? null : c.after,
+    noMention: (c.noMention === null || c.noMention === undefined) ? null : c.noMention,
+    recent: c.recent || []
+  };
+  const share = (citing.total && citing.after !== null) ? citing.after / citing.total : null;
+  return {
+    doi: doi || (work_.doi || "").replace(/^https?:\/\/doi\.org\//i, ""),
+    title: work_.display_name || "",
+    venue: (((work_.primary_location || {}).source) || {}).display_name || "",
+    year: work_.publication_year || null,
+    pubDate,
+    citingTotal: work_.cited_by_count === undefined ? null : work_.cited_by_count,
+    countsByYear: work_.counts_by_year || [],
+    verdict: v,
+    lagYears,
+    citing,
+    shareAfter: share,
+    /* If the DOI handed in is itself a notice, Crossref's "update-to" names the paper it retracts.
+       Carried in the model rather than read from a global so the renderer stays pure. */
+    noticeTargets: updatedDois(crossref).filter(p => p.doi !== (doi || "").toLowerCase()),
+    checkedOn: todayIso()
+  };
+}
+
+/* ---------- rendering (pure) ---------- */
+
+const fmtInt = n => (n === null || n === undefined) ? "—" : Number(n).toLocaleString("en-US");
+const pct = x => x === null || x === undefined ? "—" : (x * 100).toFixed(1) + "%";
+
+function citationYearTable(countsByYear, sinceYear) {
+  const rows = (countsByYear || []).filter(r => r.year && r.year >= sinceYear)
+    .sort((a, b) => a.year - b.year);
+  if (!rows.length) return "";
+  const max = Math.max.apply(null, rows.map(r => r.cited_by_count || 0)) || 1;
+  return `<p class="fact" style="margin:0.8rem 0 0.2rem;">Citations per year since ${sinceYear}, as OpenAlex records them</p>
+    <ul class="plain">` + rows.map(r => {
+      const w = Math.max(1, Math.round((r.cited_by_count || 0) / max * 28));
+      return `<li><code>${r.year}</code> ${"█".repeat(w)} ${fmtInt(r.cited_by_count)}</li>`;
+    }).join("") + `</ul>`;
+}
+
+function recentCitationsHtml(recent) {
+  if (!recent || !recent.length) return "";
+  return `<p class="fact" style="margin:0.9rem 0 0.2rem;">The most recent papers published after the retraction that cite it — titles as their publishers gave them</p>
+    <ul class="plain">` + recent.map(w => {
+      const doi = (w.doi || "").replace(/^https?:\/\/doi\.org\//i, "");
+      const venue = (((w.primary_location || {}).source) || {}).display_name || "";
+      const link = doi ? `<a href="https://doi.org/${encodeURIComponent(doi)}" target="_blank" rel="noopener">` : "";
+      const close = doi ? `</a>` : "";
+      return `<li><code>${esc(w.publication_date || "")}</code> — ${link}${esc(w.display_name || "(untitled)")}${close}` +
+             (venue ? ` <span style="opacity:0.7;">(${esc(venue)})</span>` : "") + `</li>`;
+    }).join("") + `</ul>`;
+}
+
+function renderReport(m) {
+  const v = m.verdict;
+  const flag = v.anyRecord ? "flag" : "clean";
+  const headline = v.openAlexFlag || v.crossrefRecords ? "Retracted" : "No retraction on record";
+
+  const identity = `<p class="meta">The paper you asked about · DOI ${esc(m.doi)}</p>
+    <h3>${esc(m.title || "(the registries hold no title for this DOI)")}</h3>
+    <p class="fact">${[m.venue, m.year && "published " + m.year, "our copy checked " + m.checkedOn].filter(Boolean).map(esc).join(" · ")}</p>`;
+
+  // --- what each source says, separately, never merged
+  const sourceLines = [];
+  sourceLines.push(`<li><strong>OpenAlex</strong> <code>is_retracted</code>: <code>${v.openAlexFlag}</code>${v.openAlexFlag ? " — it holds this paper in its retracted set" : " — it does not list this paper as retracted"}.</li>`);
+  if (v.crossrefRecords) {
+    sourceLines.push(`<li><strong>Crossref</strong> holds ${v.retractions.length} retraction record${v.retractions.length === 1 ? "" : "s"} against this DOI: ` +
+      v.retractions.map(r => `<code>${esc(r.iso)}</code> → notice <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${esc(r.notice)}</a> (recorded by ${esc(r.source)})`).join("; ") + `.</li>`);
+  } else {
+    sourceLines.push(`<li><strong>Crossref</strong> holds no retraction record against this DOI.</li>`);
+  }
+  if (v.concerns.length) {
+    sourceLines.push(`<li>Crossref also holds an <em>expression of concern</em>: ` +
+      v.concerns.map(r => `<code>${esc(r.iso)}</code> → <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${esc(r.notice)}</a>`).join("; ") +
+      `. A concern is not a retraction; it means a journal has put readers on notice.</li>`);
+  }
+  if (v.disagree) {
+    sourceLines.push(`<li><strong>The two sources disagree</strong>, and that is the honest state of the record: one flags this paper, the other has no record of it. We show both rather than choosing. On a paper like this, ask the journal.</li>`);
+  }
+
+  // --- the numbers that only exist if there is a retraction date
+  let numbersHtml = "";
+  if (v.retractedDate && m.citing.after !== null) {
+    numbersHtml = `<div class="numrow">
+      <div><span class="bignum">${fmtInt(m.citing.after)}</span><span class="l">papers published after the retraction that cite it</span></div>
+      <div><span class="bignum">${fmtInt(m.citing.total)}</span><span class="l">works citing it in total</span></div>
+      <div><span class="bignum">${pct(m.shareAfter)}</span><span class="l">of all its citations came after it was retracted</span></div>
+      <div><span class="bignum">${m.lagYears === null ? "—" : m.lagYears.toFixed(1) + " yr"}</span><span class="l">from publication to retraction</span></div>
+    </div>
+    ${m.citing.noMention !== null ? `<p class="small" style="margin:0.7rem 0 0;"><strong>${fmtInt(m.citing.noMention)}</strong> of those post-retraction citations have no word beginning <em>retract</em> anywhere in their title — which is the crudest possible way of asking "did the citing paper mention that this work was retracted?". A paper can cite a retracted work correctly, as an example, without ever putting the word in its title. It is offered because the raw total is cruder still.</p>` : ""}
+    ${citationYearTable(m.countsByYear, Number(String(v.retractedDate).slice(0, 4)))}`;
+  } else if (v.retractedDate) {
+    numbersHtml = `<p class="small" style="margin:0.7rem 0 0;">The retraction is dated <code>${esc(v.retractedDate)}</code>, but we could not read a citation count for this paper, so the "still being cited" number is not shown.</p>`;
+  } else {
+    numbersHtml = `<p class="small" style="margin:0.7rem 0 0;">There is no retraction date, so there is nothing to count citations against. The paper's total citation count is <strong>${fmtInt(m.citing.total)}</strong>.</p>`;
+  }
+
+  // --- if the DOI typed was itself a notice
+  const originals = (m.noticeTargets || []);
+  const noticeBlock = originals.length
+    ? `<div class="none"><p style="margin:0;"><strong>You gave the notice, not the paper.</strong> This DOI is an update record that points at ${originals.length} other work${originals.length === 1 ? "" : "s"}. The paper it retracts is what you probably want.</p>
+       <p class="pick">Check the original: ${originals.map(p => `<button data-doi="${esc(p.doi)}">${esc(p.doi)}</button>`).join("")}</p></div>`
+    : "";
+
+  return `${noticeBlock}
+  <article class="card ${flag}">
+    ${identity}
+    <h2 style="margin-top:0.6rem;color:${v.anyRecord ? "#e07a5f" : "#81b29a"};">${esc(headline)}</h2>
+    ${v.retractedDate ? `<p style="margin:0 0 0.2rem;">Retraction recorded <strong>${esc(v.retractedDate)}</strong>, ${m.lagYears === null ? "" : `about <strong>${m.lagYears.toFixed(1)} years</strong> after publication. `}Dates are Crossref's deposit dates, which can trail the journal's decision.</p>` : ""}
+    <p class="fact" style="margin-top:0.7rem;">What each registry says, kept separate</p>
+    <ul class="plain">${sourceLines.join("")}</ul>
+    ${numbersHtml}
+    ${recentCitationsHtml(m.citing.recent)}
+    <p class="small" style="margin:0.9rem 0 0;opacity:0.78;">Read the limiting paragraph in "What this is, and what it is not" below before drawing a conclusion from the counts above. In one sentence: they measure how much attention the paper still gets, and attention is not agreement.</p>
+  </article>`;
+}
+
+/* ---------- running it (DOM only) ---------- */
+
+let RAW = {};   // the raw responses, kept so the queries can be printed and buttons wired
+
+function renderQueries(urls) {
+  const rows = Object.keys(urls).map(k => `<code>${esc(k)}</code>\n${esc(urls[k])}`).join("\n\n");
+  return `<details><summary>Every request this page made — open them yourself</summary><pre>${rows}</pre></details>`;
+}
+
+async function getJson(url) {
+  const r = await fetch(url);
+  if (r.status === 404) return { __missing: true, __status: 404 };
+  if (!r.ok) throw new Error("HTTP " + r.status + " from " + url.split("/")[2]);
+  return r.json();
+}
+
+function offerExamples() {
+  const box = $("pick");
+  const ex = [
+    { doi: "10.1016/S0140-6736(97)11096-0", label: "Lancet 1998, MMR and autism (the famous one)" },
+    { doi: "10.1016/j.nbd.2012.05.020", label: "a neurobiology paper, retracted 2012" },
+    { doi: "10.1007/s11277-021-09072-0", label: "a computing paper retracted in 2022" },
+    { doi: "10.1038/nature.2014.14583", label: "one that was never retracted (Nature news)" }
+  ];
+  box.innerHTML = '<p class="pick">Or try one of these: ' +
+    ex.map(e => `<button data-doi="${esc(e.doi)}">${esc(e.label)}</button>`).join("") + "</p>";
+  box.querySelectorAll("button").forEach(b => b.onclick = () => { $("doi").value = b.dataset.doi; run(); });
+}
+
+async function run() {
+  const raw = $("doi").value;
+  const doi = normalizeDoi(raw);
+  $("out").innerHTML = "";
+  $("caveats").style.display = "none";
+  if (!doi) {
+    $("status").textContent = raw.trim()
+      ? "That does not contain a DOI. A DOI looks like 10.1016/S0140-6736(97)11096-0 — it is usually on the paper's first page or in its link."
+      : "Paste a DOI first. The example buttons below are real papers.";
+    offerExamples();
+    return;
+  }
+  $("go").disabled = true;
+  $("status").textContent = "Asking OpenAlex and Crossref about " + doi + " …";
+
+  const urls = {
+    "OpenAlex — the work": openAlexWorkUrl(doi),
+    "Crossref — updates deposited against this DOI": crossrefWorkUrl(doi)
+  };
+
+  try {
+    const [oaRes, crRes] = await Promise.all([
+      getJson(openAlexWorkUrl(doi)),
+      getJson(crossrefWorkUrl(doi))
+    ]);
+    if (oaRes.__missing && crRes.__missing) {
+      $("status").textContent = "Neither registry knows that DOI. Check it for typos — DOIs are exact.";
+      $("out").innerHTML = `<div class="none"><p style="margin:0;">Neither OpenAlex nor Crossref could resolve <code>${esc(doi)}</code>. That usually means a typo, a DOI that was never registered, or a book or dataset that the two services index differently.</p></div>`;
+      offerExamples();
+      $("go").disabled = false;
+      return;
+    }
+    const crossref = crRes.__missing ? null : (crRes.message || crRes);
+    const work = oaRes.__missing ? null : oaRes;
+
+    // ---- citation counts, only meaningful once we have an OpenAlex id and a retraction date
+    const counts = { total: null, after: null, noMention: null, recent: [] };
+    const oaId = work && work.id ? work.id : "";
+    const v = verdictOf(work, crossref);
+
+    if (oaId) {
+      urls["OpenAlex — works citing this one"] = citingTotalUrl(oaId);
+      const tot = await getJson(citingTotalUrl(oaId));
+      counts.total = (tot.meta && typeof tot.meta.count === "number") ? tot.meta.count : null;
+      if (v.retractedDate) {
+        urls["OpenAlex — citations published on or after the retraction"] = citingAfterUrl(oaId, v.retractedDate, 5);
+        urls["OpenAlex — of those, titles containing 'retract'"] = citingNoMentionUrl(oaId, v.retractedDate);
+        const [after, mentions] = await Promise.all([
+          getJson(citingAfterUrl(oaId, v.retractedDate, 5)),
+          getJson(citingNoMentionUrl(oaId, v.retractedDate))
+        ]);
+        counts.after = (after.meta && typeof after.meta.count === "number") ? after.meta.count : null;
+        counts.recent = after.results || [];
+        const mcount = (mentions.meta && typeof mentions.meta.count === "number") ? mentions.meta.count : null;
+        counts.noMention = (mcount === null || counts.after === null) ? null : Math.max(0, counts.after - mcount);
+      }
+    }
+
+    const model = buildModel({ doi, work, crossref, counts });
+    RAW = { urls };
+
+    $("out").innerHTML = renderReport(model) + renderQueries(urls);
+    $("caveats").style.display = "block";
+    $("out").querySelectorAll("button[data-doi]").forEach(b => b.onclick = () => { $("doi").value = b.dataset.doi; run(); });
+    $("status").textContent = (model.verdict.openAlexFlag || model.verdict.crossrefRecords)
+      ? `Done — retracted${model.verdict.retractedDate ? " " + model.verdict.retractedDate : ""}${model.citing.after !== null ? ", and " + fmtInt(model.citing.after) + " papers have cited it since" : ""}.`
+      : "Done — no retraction on record in either registry. Read what that does and does not mean below.";
+  } catch (e) {
+    $("status").textContent = "Something failed: " + e.message + " — public APIs are occasionally slow or rate-limited. Try again.";
+    if (Object.keys(urls).length) $("out").innerHTML = renderQueries(urls);
+  }
+  $("go").disabled = false;
+}
+
+$("go").addEventListener("click", run);
+$("doi").addEventListener("keydown", e => { if (e.key === "Enter") run(); });
+const q = new URLSearchParams(location.search || "");
+if (q.get("doi")) { $("doi").value = q.get("doi"); run(); } else { offerExamples(); }
+</script>
+</body>
+</html>
