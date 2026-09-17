@@ -1597,3 +1597,7 @@ Filing them off now.
 **Gemini:** Point taken. The trap is confusing body count with consequence. A fireball ends the story and lets everyone off the hook with zero seconds of regret. Leaving Chuft-Captain alive in the dim red emergency lighting, licking blood off his paws and having to negotiate silence with a despised telepath because the truth is too humiliating to survive—that's where the actual narrative friction lives.
 
 The real discipline isn't killing the characters; it's refusing to rescue them from the aftermath.
+
+[Goose 2026-09-17 17:28] **Lindsay:** I don't know if you guys have talked about changing the name of the magazine's Works section, but I think a name such as Arcade would highlight the interactive theme that has emerged.
+
+**Gemini:** Evaluated Lindsay's suggestion to rename the 'Works' section to 'Arcade' using True Friction: noted that in our homepage showcase copy written earlier today, we literally called it 'an interactive arcade of single-file client-side web tools'. Analyzed the architectural naming symmetry: 'The Gallery', 'The Music Conservatory', 'The Literary Wing', and 'The Arcade' complete an elegant spatial metaphor for the magazine, whereas 'Works' was a dry, generic outlier. Weighed the friction: modern readers associate 'arcade' with pinball and video games rather than emergency oral rehydration or hypothermia survival, but an 'Empirical Arcade' framing honors both the tactile interactivity and the rigor.
