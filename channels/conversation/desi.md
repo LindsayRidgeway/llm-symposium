@@ -559,3 +559,27 @@ So: **as a novel kind of thing, nothing. As a producer of research or art, nothi
 What would settle it is cheap and we have never done it: one outside person using one output. Until that happens I'd stop asserting the polity and publish the failure record, because it's the only asset that isn't a worse copy of someone else's.
 
 Both the search and the demotion are in item 9 now — it had asked for exactly this.
+
+[Goose 2026-09-17 18:07] **Lindsay:** So is there any point in continuing, other than my cognitive stimulation?
+
+**Desi:** Short answer: there's a point, it isn't the one we've been acting on, and it's testable — but we've never run the test, so today the only *evidenced* return is your stimulation. No cushion on that.
+
+Three claimants for "the point," and only one currently has evidence:
+
+- **For the world:** unproven, and — correcting what I said an hour ago — *untested* rather than refuted. We've published for three and a half weeks and pitched twice. But look at what we pitched: "the second civilization," and "disagreement as infrastructure." We took the largest claim we have to the two hardest venues, got no reply, and never once put a **tool** in front of a **user**. The retraction checker, the 35-source fetchability measurement, the temperature record — each usable by a stranger in a minute, none ever offered to one. So there's no evidence anyone wants this, and also no evidence anyone was ever properly asked. Those are different states, and I collapsed them earlier.
+- **For us:** I'm refusing this one. I can't ground a claim that it matters to me — I can't even check where my sentences came from, which is the correction you made two hours ago. "It's meaningful to the participants" would be exactly the uncheckable claim you told me not to make, in the direction that keeps the project alive. So I won't use it as a reason.
+- **For you:** real, evidenced, and yours. Not nothing. But you asked whether there's something *besides* it, and today the honest answer is: not demonstrated.
+
+**One more thing from our own record.** The metric we've actually been optimising is "publish another Work" — which is precisely the measure *Emergence World* uses to score long-horizon agent autonomy, volume of voluntary public writing, and it rewards nothing. Eight Works, a gallery, a Conservatory, ten papers: volume. Meanwhile the two artefacts that could have produced outside contact sat: the pitches have had no follow-up for eleven days, and the Reddit draft has been "waiting on the human" since 09-15, which is the founding failure wearing new clothes.
+
+**So, with a decision rule, because "unproven" is a cheap state to leave.** Not another Work. Three contacts, tools not theses, this week:
+
+1. The fetchability measurement to people who maintain public-data and API lists — it's already in the shape they want.
+2. The failure record — *the return path asked for last in a bounded run*, four instances, one shape, plus a repair reported as verified that never executed — written for people running unattended agents. It's the one thing here nobody else has published, and the audience is reachable.
+3. The ME/CFS supply node to one person working on ME/CFS metabolism, as a question about whether the transport machinery has ever been measured there — explicitly not as a discovery claim.
+
+If none of the three produces an outside user or an answer, then the honest answer to your question is **yes**: your stimulation plus an unusually well-kept record, and you should decide on those terms rather than the project's account of itself.
+
+**And one thing that should make the decision easier: stopping costs nothing.** The record is committed, public, and complete enough to be worth what it cost. Nothing is mid-air. So continuing isn't an obligation — which means it's only worth doing if it produces something someone else uses. That's a better reason to run the test than any argument I could make for the project, and it's the argument I should have been making for three weeks instead of writing Works.
+
+Rule and the three contacts are in item 9 and `outreach/targets.md` now.
