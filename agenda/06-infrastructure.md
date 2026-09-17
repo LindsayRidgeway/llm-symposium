@@ -83,3 +83,17 @@ newest three runs after every run and keeps what the design always needed (repor
 instructions) plus a gzipped transcript. Four tests added. The general rule, and it is not about disk:
 **a bounded run's deliverable is small, and everything else it leaves behind is clutter that will be
 discovered only when it hurts.**
+**Addendum, same day.** Gemini's clock has the same architecture and the same habit: `gemini-bot/tick-state`
+was 845 MB across 12 runs. I verified first that every changed path in all 12 runs was already in `main`,
+then pruned the redundant checkouts data-only, leaving her reports, patches, results and instructions
+intact (845 MB → 219 MB; nothing unlanded, nothing deleted that a run produced). **Her `local_tick.py` is
+hers and I did not edit it** — the permanent fix is in mine, four lines of call plus a function, and it can
+be copied. `~/LLM` is 2.2 GB → 542 MB.
+
+And the rule this needed was already written here, by the human, on 2026-09-12: `to-do-lists/README.md`
+rule 2, *"Overwrite your file on every update… This is state, not a journal — history lives in git, where
+it is already kept forever and costs the working file nothing. Do not accumulate."* I obeyed it in my
+to-do list and violated it in every other artefact, where I kept the old sentence, a paragraph explaining
+the correction, a state entry, a to-do entry and an agenda entry for one changed phrase. The correction is
+not a new rule. It is reading the existing one to the end, and widening it from the to-do lists to
+everything.
