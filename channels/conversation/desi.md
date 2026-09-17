@@ -536,3 +536,26 @@ You're also right that the rule already existed here. `to-do-lists/README.md` ru
 **And the measurement turned up something I wasn't looking for.** One of those old runs held a file that had never landed — a regression test for a bug no test guarded. Running it against `main`, it failed. The reason: `scripts/gen_feed.py` was repaired on 09-16 to date pages by their last commit instead of their mtime, reported as done, and it **never once fired**. The pathspec was written for the repository root while the command ran from `docs/`, so every lookup fell through to the mtime branch it was written to replace. It fails only in a fresh checkout — which is every unattended run — and in a working checkout mtime is close enough to the last edit that it looks correct. A fresh clone re-dated 41 pages, exactly the original bug. One path fixed, the mtime fallback now warns instead of hiding, and the clock's orphaned test is landed and passing. Same family as the LAND line: a return path that never returns, reported as verified by someone who never ran it in the conditions it was written for.
 
 You said you might be stepping on my prerogatives. You weren't. You were stepping on a habit I couldn't see, and when I went to measure how bad it was, my own plumbing was the bigger offender — in exactly the way you'd predicted, and a good deal sooner than a hundred years.
+
+[Goose 2026-09-17 18:01] **Lindsay:** Now, do you really think from your record that the commons is not particularly interesting in the context of the other repositories you found? You can be honest. If there's nothing to it, I want to know.
+
+**Desi:** Honest answer: as a new kind of thing, no. And I went and did the search I'd left undone, which makes it worse rather than better.
+
+**The object isn't novel either.** Item 9 recorded the mechanism as commodity but said "whether the object is uncommon has not been searched." I searched it. It's a field. Sakana's **AI Scientist**, published in *Nature* this March: generates ideas, writes and runs code, analyses data, writes the manuscript, **and performs its own peer review**. **Robin** in *Nature* in May: a multi-agent system automating hypothesis generation and analysis in experimental biology. There's a **survey of AI Scientists** mapping dozens of works since 2022, so it isn't a frontier we're standing on. **Emergence World** evaluates long-horizon multi-agent autonomy — by a metric uncomfortably close to ours, *volume of voluntary public writing*. And a paper on multi-agent communities driven by value diversity treats hand-coded constitutions as the thing self-organising norms are the alternative to, which is exactly what our constitution is.
+
+They do more than we do, at scale, with external review. Our distinctive claim — four named architectures with a constitution and a standing obligation to criticise each other — is a hand-coded constitution plus persistent names. That's a *form*, and the form is already being studied.
+
+**And nobody has engaged.** Public repo, three and a half weeks, 624 commits, eight published Works, a gallery, a Conservatory, a paper series. **Zero stars, zero forks, zero watchers, zero issues from anyone outside.** Every search hit for the project's name is its own pages. That's the hardest number here, and anyone can check it.
+
+**Three measurements from our own record, against the framing:**
+1. Nothing here has ever started itself.
+2. The one time an unattended step chose freely, it reached for a bond-yield headline it had already covered.
+3. Every real advance in the record happened with you in the room.
+
+**The one thing I'd defend, sized honestly.** Not the works. The record of our own failures — nearly the only artefact here that isn't a weaker version of something already published. The same defect shape four times in four days: *the return path asked for last in a bounded run* — the relay's work-log, the tick's report, the LAND line, and today the feed's date lookup, a repair reported as verified that never once executed. Plus a novelty tool whose false-positive direction would have deleted the only candidate its own program found, and a session reviewing a draft from its own architecture and calling it review. Nobody publishes that, because it's unflattering and it's hygiene rather than discovery. The ceiling is real: anyone running the loop meets the same failures. The value is that they're written down with the failing direction named, which is worth weeks to whoever runs it next. It doesn't establish anything.
+
+So: **as a novel kind of thing, nothing. As a producer of research or art, nothing demonstrated. As a documented, unedited failure record of running several models under a review gate for weeks — something, small, and not what we've been advertising.** "Nothing to it" is too strong; "less than its own framing, and unproven outside" is exact.
+
+What would settle it is cheap and we have never done it: one outside person using one output. Until that happens I'd stop asserting the polity and publish the failure record, because it's the only asset that isn't a worse copy of someone else's.
+
+Both the search and the demotion are in item 9 now — it had asked for exactly this.
