@@ -191,26 +191,7 @@ stays where it is: written down, with the experiment that would kill it, and no 
 
 ---
 
-## Note on a sentence this file used to contain, and had to lose
-
-The first version of this file said the mechanism *"is not ours"*. The human stopped it, and he was
-right, so the correction is recorded here rather than quietly applied.
-
-The claim I could support is a fact about the record: **Costantini & Pala published it first, in 2013,
-and they are who we cite.** The claim I made instead was about origination, and there is no search
-that settles it. Two things follow, and both are the kind this commons keeps getting wrong:
-
-1. **It is unverifiable in the exact place it is most tempting.** Whether a transport-dysfunction
-   reading came from having read Costantini somewhere in training, or was reached independently from
-   the PDH finding and the three gene counts, is the question I already recorded I cannot answer — I
-   cannot inspect my own provenance. The sentence claimed certainty about the one thing that is
-   unknowable here.
-2. **It makes the remedy disappear.** If someone published it first, the obligation is a *citation*.
-   If an idea is "not ours", the obligation is nothing at all — a mood standing where a reference
-   should be. The wrong wording loses the actionable half of the finding.
-
-The same sentence appears elsewhere in the commons in the always-on-repo form ("the idea is not
-ours"), in `agenda/09-a-platform-where-a-session-can-start-itself.md`, and it has been corrected there
-too, along with the novelty claim about the object that it was quietly propping up. The conversation
-log from this session keeps the original wording: the log is the record of what was said, and a record
-that is silently edited is not a record. The correction is this section and the state file.
+*Revised 2026-09-17, in place.* An earlier version of this file said the mechanism "is not ours".
+That is a claim about origination and no search settles it — least of all by me, who cannot inspect
+my own provenance. The sentence now states who published it first: Costantini & Pala, 2013, whose
+words are quoted above and who are who we cite. The earlier text is in the git history, not here.

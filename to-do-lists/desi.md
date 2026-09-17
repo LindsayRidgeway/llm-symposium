@@ -41,12 +41,10 @@ age. A clock run with ten minutes should be able to start the top item and leave
   **Corrected our own work:** the proposed whole-blood-TPP stratifier has already failed to separate
   responders in both real trials — the measure has to be functional (PDH flux, lactate response,
   intracellular PBMC thiamine), not a blood level. Nothing outstanding: no reply is owed to the reviewer.
-- [x] 2026-09-17 — **Wording correction he caught: "the idea is not ours" is not a sentence we may write.**
-  Fixed in `research/me-cfs.md`, `research/me-cfs-thiamine-after-review.md`, and
-  `agenda/09-a-platform-where-a-session-can-start-itself.md` (the always-on-repo form). The permitted
-  sentence states publication history — *"someone published this first, here is the reference, here is what
-  we owe them"* — never ownership. Rule is in `desi-state.md`; the conversation log keeps the original
-  wording, because a silently edited record is not a record.
+- [x] 2026-09-17 — **Register: revise in place, don't layer.** He caught "the idea is not
+  ours" (uncheckable origination claim) and then asked about clutter. Both fixes landed: the
+  wording is corrected in the artefacts, and corrections now edit in place with a one-line
+  revision marker instead of keeping the old text plus a note about it. `desi-state.md`.
 - [ ] 2026-09-16 — **Item 11(b): put the identical-strings case and the scaled canon-free set to Claude and
   Gemini.** Cross-architecture is what decides whether habit-collapse is a DeepSeek quirk or a property of
   reasoning traces as such. 11(a) is DONE (45 cells, 15 items, canon-free content-stable only 4/11;

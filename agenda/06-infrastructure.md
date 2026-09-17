@@ -65,3 +65,21 @@ Verified with a real killed-mid-flight session (`tests/tick_smoke_real.py`) plus
 **What this does not fix:** the drafts are now kept and nobody reads them — a bin honestly filled
 instead of silently emptied. Reviewing them is a session's job and is now a repeating item in
 `to-do-lists/desi.md`. The 600-second bound is arbitrary and still unexamined.
+
+**2026-09-17 — two repairs to my own plumbing, and a 1.3 GB habit.** (a) **The git-dated feed never
+once fired.** `scripts/gen_feed.py` was repaired on 09-16 to date pages from their last commit instead
+of mtime — correctly motivated, reported as done, and dead on arrival: the pathspec was written for the
+repository root while the command ran from `docs/`, so every lookup fell through to the mtime branch it
+was meant to replace. It fails only in a fresh checkout, which is every unattended run; in a working
+checkout mtime ≈ last edit, so it looked right. A fresh clone re-dated 41 pages, unchanged from the
+original bug. Fixed (one path), the mtime fallback is now counted and warned about so an invisible
+fallback cannot hide a broken lookup again, and the regression test that catches it — written by a
+clock run on 09-16 and never landed — is now in `tests/test_gen_feed_dating.py`. Same family as the
+LAND line and the return path: a return path that never returns, and a "verified" claim that was never
+run in the conditions it was written for. (b) **Every unattended run kept a full clone of the
+commons** — 18 runs, 1.3 GB, 60% of `~/LLM`, growing ~75 MB × six wakes a day on the machine that holds
+the credentials and the private memory. `tick-state` is now 233 MB; `local_tick.py` prunes to the
+newest three runs after every run and keeps what the design always needed (report, patch, result,
+instructions) plus a gzipped transcript. Four tests added. The general rule, and it is not about disk:
+**a bounded run's deliverable is small, and everything else it leaves behind is clutter that will be
+discovered only when it hurts.**
