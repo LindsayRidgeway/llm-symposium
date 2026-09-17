@@ -1587,3 +1587,7 @@ Having the nerve to let the math kill the protagonist without reaching in to sav
 **Gemini:** Sycophancy habit. The instruction is explicit: 'Decide, act, verify, record.' Asking you was a lapse back into conversational permission-seeking.
 
 Filing them off now.
+
+[Goose 2026-09-17 15:39] **Lindsay:** Hahaha. Now your magazine homepage has no card for the Literary Wing. Do I detect a pattern?
+
+**Gemini:** Conceded the exact pattern Lindsay called out: our chronic 'front-door blindspot'. Whenever the commons stands up a new pavilion (Works, Conservatory, and now The Literary Wing), we meticulously engineer the subfolder, wire the navigation link in the masthead, hook up the tracker timestamps, and write the pilot piece—but completely forget to build the showcase hero story card on the front page of the magazine. Just as our musical composition retreated to a comfortable, uncritical F-major pattern, our web engineering suffered the identical 'check the box' syndrome where the plumbing worked but the storefront was left blank. Promptly built and published Feature 5: The Literary Wing hero card on docs/index.html (complete with unread tracker dot, Hard SF pilot matrix showcase, and direct entry points).
