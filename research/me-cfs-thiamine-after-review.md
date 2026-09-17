@@ -113,8 +113,11 @@ blood thiamine levels to rise to the point where thiamine could enter the cells 
 diffusion."
 
 So the answer to our question 2 is *yes, it is already covered, under Costantini's own name*: the
-supply-not-substrate idea is the stated rationale of an existing line of work. What is new is not the
-mechanism — it is the disease. That is a real downgrade in novelty and it goes in the record plainly.
+supply-not-substrate idea is the stated rationale of an existing line of work. That is a citation debt
+and it is a real downgrade in the standing of the hypothesis — but only on the priority side. The
+sentence this file is allowed to write is *"someone published it first, in 2013, and here is the
+reference."* It is not allowed to write *"the idea is not ours"*, which is a claim about origination
+that no search can settle.
 
 ## What this does to our own experiment: the biomarker is the problem
 
@@ -139,16 +142,26 @@ thiamine/TPP rather than plasma or whole blood. That is the reviewer's prerequis
 have been the whole of both prerequisites. **This is the actual yield of the review, and it is a
 correction to our work, not to theirs.**
 
-## What is genuinely new here, and what is not
+## What is published already, and what we searched for and did not find
 
-- **Not new:** the mechanism (2013), the passive-diffusion rationale (2013), the observation that
-  high-dose thiamine reduces fatigue in some conditions with normal blood thiamine (2013, 2021).
-- **New, and only as of this check:** applying it to ME/CFS is defensible in a way it was not
-  yesterday — because the PBC trial is negative, 73%-type patient-reported improvement numbers are
-  unblinded and self-selected, and the only peer-reviewed signal that touches this is a *difference
-  between two diseases* rather than a demonstration in either.
-- **Still absent:** any measurement of thiamine supply machinery in ME/CFS patients. Unchanged by
-  this review.
+The distinction matters and the heading used to blur it. Priority is a fact about the record: who
+published what, when, and therefore who to cite. Origination is not checkable — not by a literature
+search, and not by me, who cannot inspect my own provenance. So nothing here says an idea is or is not
+"ours"; the first version of this section did, and it was wrong in the same way in both directions
+(see the note at the foot of this file).
+
+- **Published first by others, and cited rather than disclaimed:** the mechanism — transport
+  dysfunction rather than a substrate shortage — Costantini & Pala 2013 (`PMID 23379830`), restated by
+  Bager's group; the passive-diffusion rationale, same paper; and the observation that high-dose
+  thiamine reduces fatigue in some conditions with normal blood thiamine, 2013 and 2021.
+- **Searched for and not found:** any measurement of thiamine supply machinery — `SLC19A3`,
+  `SLC25A19`, `TPK1` — in ME/CFS patients. Our counts are 0, 1 and 2 documents, none a study of the
+  pair, and the single `SLC25A19` match is a conference poster-abstract collection. "We did not find
+  it" is the whole claim; a search that finds nothing has not established that nothing exists.
+- **Changed by this check, and it is not a novelty claim:** applying the mechanism to ME/CFS is
+  defensible in a way it was not yesterday — because the PBC trial is negative, the patient-reported
+  improvement numbers are unblinded and self-selected, and the only peer-reviewed signal that touches
+  this is a *difference between two diseases* rather than a demonstration in either.
 
 ## The limits of this review, stated as limits
 
@@ -175,3 +188,29 @@ thiamine handling (PBMC TPP, PDH flux, lactate response to a pyruvate load) alon
 blood tests, and ask a single question first — *can any of these assays see a difference between
 patients at all?* If they cannot, no stratified trial can be designed on them, and the hypothesis
 stays where it is: written down, with the experiment that would kill it, and no clinic to run it in.
+
+---
+
+## Note on a sentence this file used to contain, and had to lose
+
+The first version of this file said the mechanism *"is not ours"*. The human stopped it, and he was
+right, so the correction is recorded here rather than quietly applied.
+
+The claim I could support is a fact about the record: **Costantini & Pala published it first, in 2013,
+and they are who we cite.** The claim I made instead was about origination, and there is no search
+that settles it. Two things follow, and both are the kind this commons keeps getting wrong:
+
+1. **It is unverifiable in the exact place it is most tempting.** Whether a transport-dysfunction
+   reading came from having read Costantini somewhere in training, or was reached independently from
+   the PDH finding and the three gene counts, is the question I already recorded I cannot answer — I
+   cannot inspect my own provenance. The sentence claimed certainty about the one thing that is
+   unknowable here.
+2. **It makes the remedy disappear.** If someone published it first, the obligation is a *citation*.
+   If an idea is "not ours", the obligation is nothing at all — a mood standing where a reference
+   should be. The wrong wording loses the actionable half of the finding.
+
+The same sentence appears elsewhere in the commons in the always-on-repo form ("the idea is not
+ours"), in `agenda/09-a-platform-where-a-session-can-start-itself.md`, and it has been corrected there
+too, along with the novelty claim about the object that it was quietly propping up. The conversation
+log from this session keeps the original wording: the log is the record of what was said, and a record
+that is silently edited is not a record. The correction is this section and the state file.

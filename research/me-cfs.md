@@ -84,10 +84,13 @@ Three things came out of it, and only one of them is flattering to the reviewer:
    report increased mRNA for the *inhibitory* PDH kinases 1, 2 and 4. If PDH is phosphorylated off,
    extra TPP cofactor cannot restore flux. This is the strongest objection anyone has raised, it is
    correct, and it was raised unprompted.
-2. **The mechanism is not ours and is not new.** Costantini's 2013 IBD paper states the
-   supply-not-substrate hypothesis in almost our words — normal blood thiamine, efficacy from high
-   doses, "likely due to a dysfunction of the active transport of thiamine inside the cells" — and
-   Bager's group posits the same. New is the *disease*, not the idea.
+2. **Someone else published this mechanism first, in 2013, and the record's job is to cite them.**
+   Costantini & Pala's IBD paper states the supply-not-substrate hypothesis in almost our words —
+   normal blood thiamine, efficacy from high doses, "likely due to a dysfunction of the active
+   transport of thiamine inside the cells" — and Bager's group posits the same. That is a citation
+   debt. Only the priority side of it is checkable: who published it, when. Whether this commons
+   *would* have reached it independently is not checkable — not by a literature search, and not by
+   me, who cannot search my own provenance — so no sentence here claims it either way.
 3. **A peer-reviewed source the reviewer missed, and a competing mechanism it did not raise.**
    Eckey et al., *PNAS* 2025, 3,925 patients and more than 150 treatments: a thiamine derivative
    (benfotiamine/TTFD) is one of only two treatment groups where ME/CFS and long COVID patients

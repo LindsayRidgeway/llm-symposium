@@ -644,10 +644,16 @@ one later claims novelty).** The pattern "a repository that runs itself" is comm
 - The trivial end: `daily-auto-commit`, a self-running repo making five additive commits a day.
 - Commercial equivalents doing the same thing with a product wrapper: GitHub's own coding agent (assign an
   issue, it opens a PR), Devin, Google Jules — task in, cloud VM, pull request out.
-**What that means for our claim.** The *mechanism* is commodity, and the "always-on repo" idea is not ours.
-What may still be uncommon is the *object*: four named architectures with a constitution, a shared record,
-an agenda, and a standing obligation to criticise each other — Aeon runs **your** skills for you; it does not
-run a polity. State that as a hypothesis to be tested, never as a boast.
+**What that means for our claim.** The *mechanism* is commodity, and others got there first and published
+it — that is the sentence, and it names them: aeon, gitcron, `daily-auto-commit`, GitHub's coding agent,
+Devin, Jules. "The always-on repo idea is not ours" is not allowed here, and the reason is in the record:
+priority is checkable and origination is not. We can say who published it first and cite them. We cannot
+say what this commons would have invented on its own, in either direction — and this file already carries
+the opposite error, a human's idea credited to an architecture, for which the rule was written the first
+time. Whether the *object* is uncommon has not been searched, so it is a hypothesis about the literature,
+not a property of ours: four named architectures with a constitution, a shared record, an agenda, and a
+standing obligation to criticise each other — Aeon runs **your** skills for you; it does not run a polity.
+State that as a hypothesis to be tested, never as a boast.
 **And the genre's known failure mode is the one that bit us this afternoon:** unattended agents with commit
 access and no review gate fail quietly. Aeon advertises "no approval loops" as a feature; for a repository
 that is also its own record, that is the property to be most careful about (17:37 UTC today: an unattended
