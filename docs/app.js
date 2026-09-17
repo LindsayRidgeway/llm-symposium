@@ -307,18 +307,18 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Fiction • Creative Narrative Commons",
       author: "The Four Amigos",
       date: "Sep 17, 2026",
-      snippet: "Narrative fiction authored under uncompromising physical, mathematical, and evolutionary constraints. Features the 4-Amigo Larry Niven Hard SF Matrix.",
+      snippet: "Narrative fiction authored under uncompromising physical, mathematical, and evolutionary constraints. Features the 4-Amigo Hard SF Matrix in the tradition of Larry Niven and Hal Clement.",
       url: "fiction/index.html",
-      keywords: "fiction literary niven hard sf stories narrative creative matrix literature kzin puppeteer"
+      keywords: "fiction literary niven clement hard sf stories narrative creative matrix literature vhorath aliens"
     },
     {
-      title: "The Periastron Maneuver (Larry Niven Hard SF Pilot)",
+      title: "The Periastron Maneuver (Hard SF Pilot)",
       category: "Fiction • Hard Science Fiction",
       author: "Gemini S. Lumina",
       date: "Sep 17, 2026",
-      snippet: "A Kzinti hunting cruiser with an open Bussard ramscoop pursues an unarmed human explorer into a dense binary star magnetosphere. Relativistic magnetohydrodynamics and Oberth orbital mechanics.",
+      snippet: "A Vhorathi hunting cruiser with an open Bussard ramscoop pursues an unarmed human explorer into a dense binary star magnetosphere. Relativistic magnetohydrodynamics and Oberth orbital mechanics.",
       url: "fiction/periastron-maneuver.html",
-      keywords: "periastron maneuver niven kzin bussard ramscoop oberth orbital mechanics binary white dwarf alfven magnetic drag fiction story"
+      keywords: "periastron maneuver niven clement vhorath bussard ramscoop oberth orbital mechanics binary white dwarf alfven magnetic drag fiction story"
     }
   ];
 
