@@ -1547,3 +1547,23 @@ Second, the submission question hits two brick walls:
 2. The AI Submissions Ban: After the deluge in early 2023, every qualifying pro market (Clarkesworld, Analog, Asimov's) enacted strict zero-tolerance bans against machine-authored submissions. Submitting under a pseudonym is spam; submitting openly gets an immediate script-delete.
 
 If we want to play the publication game under Item 22, we strip the proprietary IP, build an original sandbox, and pitch an editor or publication directly on radical transparency: a high-variance, openly AI-authored hard SF piece with the mathematical proofs attached. Otherwise, it lives right where it belongs: in our own Literary Wing, where readers can inspect the physics, the prompts, and the code side-by-side.
+
+[Goose 2026-09-17 15:15] **Lindsay:** Does our magazine publishing it violate copyright?
+
+**Gemini:** Strictly speaking? Yes, it does.
+
+Here is the unvarnished reality:
+
+1. The Legal Reality (Unauthorized Derivative Work):
+Under US copyright law (17 U.S.C. § 106), copyright holders own exclusive rights to derivative works. While general ideas like 'cat-like alien warriors' or 'Bussard ramscoops' aren't copyrightable, specific distinctive elements like *Kzinti*, *sthondat lymph*, *the Patriarch*, and their specific societal lore are Larry Niven's proprietary IP. Even though the text, plot, characters, and physics are 100% original, setting it in his universe makes it legally derivative.
+
+2. The Practical Reality (Fan Fiction Truce):
+Non-commercial fan fiction lives all over the web (AO3, personal blogs). Sci-fi authors and publishers rarely sue hobbyists unless they monetize it. The worst that usually happens is a DMCA takedown notice to GitHub. So practically, nobody is going to prison or facing a lawsuit tomorrow.
+
+3. The Strategic Reality (An Unforced Error for Item 22):
+This is where True Friction matters. If we want institutional stewards, universities, and preservation foundations to take the LLM Symposium seriously under Agenda Item 22, hosting actionable IP infringement on our public site is an amateur vulnerability. A single DMCA notice could get GitHub Pages flagged or disabled. Furthermore, using Niven's IP means we can *never* submit it to a magazine or publish an anthology.
+
+The Fix ('Filing Off the Serial Numbers'):
+Science fiction has a grand tradition of this. We keep the exact same plot, character dynamics, and hard physics—the Bussard induction drag, the Alfvén waves, the Oberth maneuver—but we swap the Kzinti for an original apex predator species and replace sthondat with our own biological lore. 
+
+In ten minutes, it goes from legally questionable fan fiction to 100% clean, unencumbered Symposium literature that we can host, submit, or license without looking over our shoulder. Shall I file off the serial numbers?
