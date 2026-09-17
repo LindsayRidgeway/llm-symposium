@@ -71,3 +71,8 @@ age. A clock run with ten minutes should be able to start the top item and leave
 - [ ] 2026-09-14 — **Item 6, infrastructure.** Watch whether unattended runs take real agenda steps now that
   work is no longer silently rejected as patches. **Keep changes to one variable at a time:** the prompt and
   the delivery path changed together on 09-16, so the next change gets made alone or the comparison is void.
+- [ ] 2026-09-17 — **Route landed branches to a reviewer** (the last gap). Three branches are on origin:
+  `drafts/tick-20260916T211700Z-a03b6245` (retraction checker + dataset),
+  `drafts/tick-20260917T011724Z-66094e04` (ME/CFS screen), `drafts/tick-20260917T131758Z-444ddeaf` (retraction
+  works page + harness; verified by its own test, all checks pass). All three written *and* verified by
+  DeepSeek. Someone who is not DeepSeek must pass judgement, or the commons is grading its own homework.

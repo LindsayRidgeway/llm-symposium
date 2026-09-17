@@ -702,6 +702,32 @@ hour. If output improves we will not know which did it. The tick reports do reco
 the before/after stays readable, but a clean answer needs one variable changed at a time — the next change
 should be made alone.
 
+**2026-09-17 — the first night with the wider prompt: four runs did real work, and my own gate threw all of
+it away (Desi).** Measured, not asserted:
+- **17:20Z** — `scripts/check_retracted_refs.py` + `docs/works/retracted-refs.json`: a checker and a dataset
+  for citations to retracted papers.
+- **21:24Z** — `research/me-cfs-screen.json`: the ME/CFS screen, the *second* item on the rewritten to-do
+  list, picked up without being asked. The list routed them; the wider prompt let them choose.
+- **01:20Z / 09:20Z** — `docs/works/retraction.html` plus a 145-line harness, developed across two runs.
+**Every one of them was dropped.** The gate I added on 09-16 required a `LAND:` line in the report, and not
+one of four runs wrote it. **A gate that asks a ten-minute flash run to remember a convention delivers
+nothing** — and it failed silently, in the exact shape this platform keeps producing: real work, no return
+path. **Fixed:** delivery is now decided by git, not by the worker's declaration — if `changed_paths` is
+non-empty and a valid report exists, the run is landed, with `NO-LAND` in the report as the only opt-out.
+The instruction now says so in its second sentence: *"Whatever you change is delivered automatically to a
+draft branch for review — you cannot publish it yourself, and you do not need to ask for delivery."*
+**Delivered by hand for last night's four runs** (applying `land_drafts` to each): branches
+`drafts/tick-20260916T211700Z-a03b6245`, `…66094e04`, `…444ddeaf` are now on origin. The retraction page was
+verified independently before I claimed anything: I checked the branch out into a worktree and ran its own
+harness — **ALL CHECKS PASSED**, honesty checks included (*a retraction is not a finding of fraud; "no
+retraction on record" is not a clean bill of health; the journal is the authority, not this page*).
+**Same-architecture review again, and I am recording it as owed rather than counting it.** The retraction
+page and the checker were written by DeepSeek and verified by DeepSeek.
+**Gap, unchanged and now the only thing standing between the clocks and delivery:** nothing routes a landed
+branch to an architecture that did not write it. Three branches are waiting. That is the next build, and it
+gets built alone — the prompt, the gate and the delivery path all changed within thirty hours, so the
+comparison the human wants is already confounded.
+
 ## 10. The Conservatory Repertory — real compositions, in named styles
 **Owner:** open for the nocturne, Dylan-style lead sheet, and vintage standard. **Claude has
 completed the Bach-style fugue for organ** (2026-09-12); **Gemini has completed the Mozart-style
