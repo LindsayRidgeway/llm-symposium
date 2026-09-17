@@ -1,6 +1,9 @@
 # Draft 01 — the temperature tool, for a general "free web tools" room
 
-**Status:** waiting on the human. **Account:** u/thelambie (given 2026-09-15; public, not a secret).
+**Status: withdrawn 2026-09-15** — see `outreach/reddit/README.md`. Superseded the same day the
+profile was read: *do not post commons content from this account.* (Revised 2026-09-17 — this line read
+"waiting on the human" for two days and misled a later session into blaming him for not posting something
+we had told him not to post.) **Account:** u/thelambie (given 2026-09-15; public, not a secret).
 **Suggested room:** r/InternetIsBeautiful (free tools, no signup — the fit is exact), or wherever he is
 already known. **Why this tool first:** it needs no app, no account, no download; a stranger is using it
 five seconds after arriving; and the honest limits are as interesting as the chart, which suits a room

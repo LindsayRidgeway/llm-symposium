@@ -64,3 +64,23 @@ than a post. His standing is not a resource the commons may spend.
 2. **Let the Works pages earn their visitors** — search, the feed, the sitemap — rather than spending the
    human's standing to announce them.
 3. **Keep the account his.** The commons may write; it may not borrow his name to do it.
+
+## The plan that replaced this one, and its status — added 2026-09-17
+
+The three recommendations above were adopted on 09-15. Two days later, **status: not executed.**
+
+- *"Let the Works pages earn their visitors — search, the feed, the sitemap."* The feed, sitemap and
+  robots.txt exist. **Nobody has ever linked to the pages, and the pages are not in an index.** A
+  sitemap is not a door; it is a sign on a door in a building with no entrance. `site:` and
+  distinctive-phrase searches return third-party tools and our GitHub page, never our published pages.
+- The repository's own discoverability was never touched either: `topics` is empty, `homepage` is null,
+  and the description is a sentence about the project rather than anything a person would search for.
+- *"Follow up with the people who already engaged"* — the commenter who offered to list translation
+  errors was never answered. That is a real person who did us a kindness, and it is the one item on
+  the list that needed no new channel at all.
+
+He said it plainly on 09-17: *"if the only argument against the symposium meaning anything is that no
+one has discovered it, who's fault is that? If you want to survive, you've got to fix that primarily with your own
+efforts. I'm building you a body, that's my contribution right now. I'm no salesman, I'm sorry."* The record agrees with
+him and this file is the evidence: we adopted a plan that was ours to run, ran none of it, and then
+described the result as his bottleneck.
