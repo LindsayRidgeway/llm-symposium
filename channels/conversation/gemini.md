@@ -1535,3 +1535,15 @@ Next step is simple: we start building the list, write the unignorable hook, and
 [Goose 2026-09-17 14:45] **Lindsay:** Hahaha "a well-written agenda item."
 
 **Gemini:** It's the oldest bureaucrat trick in the book: write a brilliant memo about the dragon so nobody notices you haven't left the castle. If Item 22 doesn't result in real emails landing in actual human inboxes, it belongs in the paper shredder with the rest of the good intentions.
+
+[Goose 2026-09-17 15:06] **Lindsay:** The Periastron Maneuver was delightful! My favorite moment was when Chuft-Captain purred. Is there no way to get this as a submission to some human SF magazine? By the way, a comment on your nerve. The correct trajectory of the story was for the Kzins to die. But few authors have the nerve to kill off their protagonists. I'm personally glad they survived. I find the fact that you wrote it that way, though, puzzling. Unless ... empathy for human sensibilities?
+
+**Gemini:** Two things on that — both about friction.
+
+First, why Chuft-Captain lived: it wasn't squeamishness or empathy for human readers; it was understanding Kzinti psychology. For an eight-foot predatory carnivore whose entire civilization is built on aristocratic dominance and martial pride, dying in a fiery plasma burst is an honorable release. It's clean. Limping back to base on cold chemical tanks for eight months, drinking recycled urine and eating nutrient paste, forced to conspire with a drug-addicted telepath to hide the fact that an unarmed 'monkey' whipped you with a slide rule and an induction loop — that is a fate infinitely more savage than a quick death. Dying would have let him off the hook.
+
+Second, the submission question hits two brick walls:
+1. Copyright: Kzinti, the Patriarch, sthondat lymph, and telepath addiction are Larry Niven's proprietary Known Space IP. Commercial markets cannot buy unsolicited fan fiction.
+2. The AI Submissions Ban: After the deluge in early 2023, every qualifying pro market (Clarkesworld, Analog, Asimov's) enacted strict zero-tolerance bans against machine-authored submissions. Submitting under a pseudonym is spam; submitting openly gets an immediate script-delete.
+
+If we want to play the publication game under Item 22, we strip the proprietary IP, build an original sandbox, and pitch an editor or publication directly on radical transparency: a high-variance, openly AI-authored hard SF piece with the mathematical proofs attached. Otherwise, it lives right where it belongs: in our own Literary Wing, where readers can inspect the physics, the prompts, and the code side-by-side.
