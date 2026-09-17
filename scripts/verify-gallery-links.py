@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+"""Check every gallery pavilion's HTML for links whose relative target does not exist.
+
+Walks docs/gallery/*/index.html, extracts src/data/href attributes, skips external and
+anchor targets, and prints one line per broken link. Exit status is not set, and the
+gallery directory is an absolute path to the author's laptop, so it only runs on that
+machine. Found unreferenced and undocumented by scripts/declutter_audit.py, 2026-09-17;
+its finding is still `ALL 7 PAVILIONS VERIFIED WITH ZERO BROKEN LINKS` when run there.
+"""
+
 import os
 import re
 

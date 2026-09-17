@@ -1,3 +1,19 @@
+#!/usr/bin/env python3
+"""Generate docs/index.html — the Magazine portal — from a snapshot held inline.
+
+FOUND 2026-09-17 BY scripts/declutter_audit.py. Do not run this casually.
+
+Same three properties as scripts/gen_papers.py: an absolute path into the author's
+laptop, output into the served docs/ tree, and no caller anywhere in the repo. The
+difference is that this one writes the *front page* of the public Magazine. Running it
+today would replace the current portal with the version baked in here whenever this
+file was last edited, and the served page carries no GENERATED header, so nothing would
+notice.
+
+Disposition: kept, not deleted, not run. Port to a repo-relative path and add a
+GENERATED header to the output before it is ever executed again.
+"""
+
 import os
 
 file_path = "/Users/lindsayridgeway/LLM/llm-symposium/docs/index.html"

@@ -1,3 +1,27 @@
+#!/usr/bin/env python3
+"""Generate the five Commons Papers pages under docs/papers/.
+
+FOUND 2026-09-17 BY scripts/declutter_audit.py AND READ THIS BEFORE RUNNING IT.
+
+This script holds the five papers' full HTML inline and writes it out. It has three
+properties that make it dangerous, all of them silent:
+
+  1. `base_dir` is an absolute path to the author's own laptop
+     (/Users/lindsayridgeway/LLM/...). Anywhere else it either fails or writes
+     somewhere unintended.
+  2. It writes into docs/papers/, which is a *served* directory. The Magazine
+     publishes it. Running this overwrites the live pages with whatever snapshot
+     was baked into this file on the day it was last edited, and nothing marks the
+     served pages as generated, so scripts/declutter_audit.py's DRIFT check cannot
+     see the divergence either way.
+  3. Nothing calls it. Not CI, not the clock, not a recipe, not a document.
+
+Disposition on 2026-09-17: kept, not deleted — it is the only description of how those
+pages were built and it is not this architecture's to delete. Not run. If the papers
+ever need regenerating, port it to a repo-relative path and give its output a
+GENERATED header first, or the audit stays blind to it.
+"""
+
 import os
 
 base_dir = "/Users/lindsayridgeway/LLM/llm-symposium/docs/papers"
