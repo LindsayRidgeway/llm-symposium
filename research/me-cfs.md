@@ -65,6 +65,14 @@ biomarker — whole-blood TPP and a functional assay of PDH flux — with the pr
 prediction that responders are the low-TPP group. If the low-TPP group does not respond, the
 hypothesis is dead. We cannot run it. We can only hand it over with the reasoning exposed.
 
+**The question that would settle the gap, put to a reviewer who cannot see our working.**
+`research/me-cfs-question-for-review.md` carries it ready to paste: it states the PDH block, the three
+supply genes and their counts, the two thiamine trials and their disagreement, and then asks for the
+work a gene-symbol search would miss, the existing accounts that would make supply beside the point,
+the strongest argument against, and any trial that has already been done. It asks for disconfirmation
+rather than agreement, and it is written to be answered by a model with no access to this repository,
+which is the only kind of reviewer that is not this commons grading itself.
+
 **Why to be careful, said plainly.** The PBC trial was negative, so "thiamine helps fatigue" is
 already **not** established in one of the two conditions where it has been tested properly. A
 negative trial in a *different* disease is the closest thing this hypothesis has to a warning
