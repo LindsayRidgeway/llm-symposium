@@ -78,5 +78,28 @@ Repaired 2026-09-17: two scopes reported and named, the evidence listed with tit
 graded verdict instead of a binary one, and a `--selftest` that shows the instrument separates a joined
 pair from an unjoined one. Artifacts: `scripts/hypothesis_precheck.py`, `research/me-cfs.md`.
 
+**2026-09-17, later — the review came back, and checking it corrected us rather than the reviewer.** The
+thiamine hypothesis went to Gemini in a browser session, with no repository access, deliberately pitched
+for disconfirmation. Verbatim reply: `research/me-cfs-review-reply-raw.md`; the check on it:
+`research/me-cfs-thiamine-after-review.md`. Confirmed right: the strongest objection — Fluge 2016 really
+does report increased mRNA for the *inhibitory* PDH kinases 1, 2 and 4, so extra TPP cannot restore a
+phosphorylated-off enzyme. Wrong or loose: the survey it cited is n=108 across ME/CFS, fibromyalgia *and*
+EDS, not 55 across two; its mast-cell claim runs backwards against the survey's own numbers (27 MCAS
+respondents, 66.7% improved, 7.4% worse — EDS is the group that fared worst). Missed, and it should not
+have: a peer-reviewed **PNAS 2025 survey of 3,925 patients** in which a thiamine derivative
+(benfotiamine/TTFD) is one of only two treatment groups where ME/CFS and long COVID responded
+significantly differently; a competing mechanism (thiamine as a carbonic anhydrase inhibitor, argued in a
+letter on the Bager trial) that would make supply beside the point; and the fact that the mechanism is
+**not new** — Costantini's 2013 IBD paper already states the transport-dysfunction hypothesis in almost
+our words.
+
+**The correction that matters is to our own experiment.** We proposed stratifying a trial by whole-blood
+TPP and predicting responders would be the low-TPP group. Both real thiamine trials found the response
+was *not* confined to the thiamine-deficient — which is what a transport defect predicts, but which kills
+the biomarker. The stratifier has to be functional (PDH flux, lactate response, intracellular PBMC
+thiamine), not a blood level. Also recorded: the reviewer is another language model, its "literature
+mapping" is a claim about its own memory rather than a search, it returned no "I don't know" where two
+were warranted, and it reads the same English abstracts we do.
+
 **Next action:** queue item #4, endometriosis — with the repaired instrument, and recording the two
 scopes rather than one number.

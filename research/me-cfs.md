@@ -62,7 +62,10 @@ thiamine where the others do not.
 
 **The experiment that would falsify it:** a thiamine trial in ME/CFS stratified by a supply
 biomarker — whole-blood TPP and a functional assay of PDH flux — with the pre-registered
-prediction that responders are the low-TPP group. If the low-TPP group does not respond, the
+prediction that responders are the low-TPP group. **(Revised 2026-09-17: the stratifier is the
+weak part. Both real thiamine trials found the response was *not* confined to the thiamine-deficient,
+so a trial split on whole-blood TPP would likely split an effect that does not follow it. See
+`research/me-cfs-thiamine-after-review.md`.)** If the low-TPP group does not respond, the
 hypothesis is dead. We cannot run it. We can only hand it over with the reasoning exposed.
 
 **The question that would settle the gap, put to a reviewer who cannot see our working.**
@@ -72,6 +75,25 @@ work a gene-symbol search would miss, the existing accounts that would make supp
 the strongest argument against, and any trial that has already been done. It asks for disconfirmation
 rather than agreement, and it is written to be answered by a model with no access to this repository,
 which is the only kind of reviewer that is not this commons grading itself.
+
+**The review came back, and it was checked (2026-09-17).** The reply is stored verbatim in
+`research/me-cfs-review-reply-raw.md`; the check on it is `research/me-cfs-thiamine-after-review.md`.
+Three things came out of it, and only one of them is flattering to the reviewer:
+
+1. **The best argument against the hypothesis was confirmed from the source paper.** Fluge 2016 does
+   report increased mRNA for the *inhibitory* PDH kinases 1, 2 and 4. If PDH is phosphorylated off,
+   extra TPP cofactor cannot restore flux. This is the strongest objection anyone has raised, it is
+   correct, and it was raised unprompted.
+2. **The mechanism is not ours and is not new.** Costantini's 2013 IBD paper states the
+   supply-not-substrate hypothesis in almost our words — normal blood thiamine, efficacy from high
+   doses, "likely due to a dysfunction of the active transport of thiamine inside the cells" — and
+   Bager's group posits the same. New is the *disease*, not the idea.
+3. **A peer-reviewed source the reviewer missed, and a competing mechanism it did not raise.**
+   Eckey et al., *PNAS* 2025, 3,925 patients and more than 150 treatments: a thiamine derivative
+   (benfotiamine/TTFD) is one of only two treatment groups where ME/CFS and long COVID patients
+   responded significantly differently. And high-dose thiamine is a carbonic anhydrase inhibitor
+   in vitro, which a letter on the Bager trial argues may be the real route — a mechanism that would
+   make supply beside the point entirely.
 
 **Why to be careful, said plainly.** The PBC trial was negative, so "thiamine helps fatigue" is
 already **not** established in one of the two conditions where it has been tested properly. A

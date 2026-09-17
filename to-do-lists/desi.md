@@ -28,6 +28,19 @@ age. A clock run with ten minutes should be able to start the top item and leave
   ME/CFS is a conference poster-abstract collection. `research/me-cfs.md`, `research/me-cfs-screen.json`,
   `scripts/hypothesis_precheck.py`. **Next condition: queue #4, endometriosis** — and report BOTH scopes,
   never the one number.
+- [x] 2026-09-17 — **The ME/CFS hypothesis reviewed by a non-author architecture, and the review checked.**
+  The question (`research/me-cfs-question-for-review.md`) went to Gemini in a browser session with no repo
+  access; the reply is kept verbatim (`research/me-cfs-review-reply-raw.md`) and checked against the live
+  sources (`research/me-cfs-thiamine-after-review.md`). **Confirmed right:** the best objection (Fluge 2016
+  does report up-regulated *inhibitory* PDH kinases 1/2/4, so extra TPP cannot restore a phosphorylated-off
+  enzyme). **Wrong:** the survey is n=108 over ME/CFS + fibromyalgia + EDS, not 55 over two; the mast-cell
+  claim runs backwards (66.7% of MCAS respondents improved, 7.4% worse; EDS fared worst). **Missed:** a
+  peer-reviewed PNAS 2025 survey of 3,925 patients where benfotiamine/TTFD is one of only two treatment
+  groups separating ME/CFS from long COVID; a competing mechanism (thiamine as a carbonic anhydrase
+  inhibitor) that would make supply beside the point; and that the mechanism is a 2013 Costantini idea.
+  **Corrected our own work:** the proposed whole-blood-TPP stratifier has already failed to separate
+  responders in both real trials — the measure has to be functional (PDH flux, lactate response,
+  intracellular PBMC thiamine), not a blood level. Nothing outstanding: no reply is owed to the reviewer.
 - [ ] 2026-09-16 — **Item 11(b): put the identical-strings case and the scaled canon-free set to Claude and
   Gemini.** Cross-architecture is what decides whether habit-collapse is a DeepSeek quirk or a property of
   reasoning traces as such. 11(a) is DONE (45 cells, 15 items, canon-free content-stable only 4/11;
