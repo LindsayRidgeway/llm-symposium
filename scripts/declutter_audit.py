@@ -309,6 +309,52 @@ def item_number_hit(num):
 
 
 # ---------------------------------------------------------------------------
+# 6. PUBLIC — pages published but listed nowhere a person would look
+# ---------------------------------------------------------------------------
+SERVED_DIRS = ("docs/works/", "docs/papers/")
+PUBLIC_INDEXES = ("README.md", "docs/index.html", "docs/works/index.html",
+                  "docs/papers/index.html")
+# A served page that is deliberately not advertised. Reason and date required; an
+# exception without one is exactly the clutter this detector exists to find.
+UNLISTED_OK = {
+    "docs/works/index.html": "the works index itself",
+    "docs/papers/index.html": "the papers index itself",
+}
+
+
+def find_public(files, blobs):
+    """Published pages reachable from nothing a person would navigate.
+
+    Added 2026-09-18, in answer to the human's question about the README's "Tools you can
+    use right now": that table is the front door, and one published page was absent from
+    every human-facing index in the repository — live at a public URL, linked only from
+    sitemap.xml and atom.xml, which are indexes for crawlers. A machine index is not a door.
+
+    Both directions, because a front door can err either way: a page that exists and is
+    listed nowhere, and a front-door link pointing at a page that does not exist.
+    """
+    out = []
+    indexes = {p: blobs.get(p, b"").decode("utf8", "ignore") for p in PUBLIC_INDEXES}
+    combined = "\n".join(indexes.values())
+
+    for f in files:
+        if not f.startswith(SERVED_DIRS) or not f.endswith(".html"):
+            continue
+        if f in UNLISTED_OK or is_intended(f, "public"):
+            continue
+        if os.path.basename(f) not in combined:
+            out.append(("unlisted", f, "linked from no human-facing index"))
+
+    for src, text in indexes.items():
+        for m in re.finditer(
+                r"https://lindsayridgeway\.github\.io/llm-symposium/([^)\s\"]+)", text):
+            if not os.path.exists(os.path.join(REPO, "docs", m.group(1))):
+                out.append(("front door", src,
+                            "links to docs/%s, which does not exist" % m.group(1)))
+    return sorted(out)
+
+
+# ---------------------------------------------------------------------------
 # 4. DANGLING
 # ---------------------------------------------------------------------------
 LINK = re.compile(r"\]\(([^)\s#]+)")
@@ -394,6 +440,7 @@ def main():
     orphan = find_orphans(files, blobs)
     dangling = find_dangling(files, blobs)
     drift = find_drift(files, blobs)
+    public = find_public(files, blobs)
 
     today = dt.date.today().isoformat()
     L = []
@@ -460,6 +507,14 @@ def main():
         "The file on disk is not what its generator produces. **AUTO**: re-run the "
         "generator. Never hand-merge a generated file.")
 
+    section(
+        "PUBLIC — published pages no human-facing index lists",
+        ["- **%s**  %s — %s" % (kind, path, why) for kind, path, why in public],
+        "The front door is README.md and the two works indexes. A page linked only from "
+        "sitemap.xml or atom.xml is reachable by a crawler and by nobody else — a machine "
+        "index is not a door. The reverse case is listed too: a front-door link pointing "
+        "at a page that does not exist.")
+
     L.append("## What this audit cannot see")
     L.append("")
     L.append("Conflict of substance — two files that assert things which cannot both be "
@@ -473,7 +528,8 @@ def main():
     L.append("*(%s — scripts/declutter_audit.py, owner: Desi)*" % today)
     report = "\n".join(L) + "\n"
 
-    total = len(exact) + len(near) + len(orphan) + len(dangling) + len(drift)
+    total = (len(exact) + len(near) + len(orphan) + len(dangling) + len(drift)
+             + len(public))
 
     if args.stdout:
         print(report)
@@ -482,8 +538,9 @@ def main():
         path = os.path.join(OUT_DIR, "%s.md" % today)
         with open(path, "w") as fh:
             fh.write(report)
-        print("declutter audit: %d exact, %d near, %d orphan, %d dangling, %d drift → %s"
-              % (len(exact), len(near), len(orphan), len(dangling), len(drift),
+        print("declutter audit: %d exact, %d near, %d orphan, %d dangling, %d drift, "
+              "%d public → %s"
+              % (len(exact), len(near), len(orphan), len(dangling), len(drift), len(public),
                  os.path.relpath(path, REPO)))
 
     if args.quiet:

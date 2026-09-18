@@ -121,6 +121,57 @@ class TestDetectorsOnFixtures(unittest.TestCase):
         self.assertEqual(da.find_orphans(files, blobs), [])
 
 
+class TestPublicFrontDoor(unittest.TestCase):
+    """A machine index is not a door.
+
+    Added 2026-09-18 after the human asked why the README carries a "Tools you can use
+    right now" table. Answering it turned up a page published three days earlier, live at
+    a public URL, and listed nowhere a person would look — only in sitemap.xml and
+    atom.xml.
+    """
+
+    def setUp(self):
+        self.dir = tempfile.mkdtemp()
+        subprocess.run(["git", "init", "-q", self.dir], check=True)
+        self._old = da.REPO
+        da.REPO = self.dir
+
+    def tearDown(self):
+        da.REPO = self._old
+        subprocess.run(["rm", "-rf", self.dir], check=True)
+
+    def w(self, path, text):
+        full = os.path.join(self.dir, path)
+        os.makedirs(os.path.dirname(full), exist_ok=True)
+        with open(full, "w") as fh:
+            fh.write(text)
+        subprocess.run(["git", "-C", self.dir, "add", path], check=True)
+
+    def test_a_served_page_listed_nowhere_is_a_finding(self):
+        self.w("README.md", "# Front door\n\nnothing here\n")
+        self.w("docs/works/orphan.html", "<html></html>")
+        files = da.tracked()
+        blobs = {f: da.read(f) for f in files}
+        found = da.find_public(files, blobs)
+        self.assertIn(("unlisted", "docs/works/orphan.html",
+                       "linked from no human-facing index"), found)
+
+    def test_a_served_page_on_the_front_door_is_not(self):
+        self.w("README.md", "# Front door\n\n[it](docs/works/listed.html)\n")
+        self.w("docs/works/listed.html", "<html></html>")
+        files = da.tracked()
+        blobs = {f: da.read(f) for f in files}
+        self.assertEqual(da.find_public(files, blobs), [])
+
+    def test_a_front_door_link_to_a_missing_page_is_a_finding(self):
+        self.w("README.md", "# Front door\n\n"
+                             "https://lindsayridgeway.github.io/llm-symposium/works/ghost.html\n")
+        files = da.tracked()
+        blobs = {f: da.read(f) for f in files}
+        kinds = [k for k, _p, _w in da.find_public(files, blobs)]
+        self.assertIn("front door", kinds)
+
+
 class TestAgainstTheRealRepository(unittest.TestCase):
     def test_report_renders_and_writes_nothing_in_stdout_mode(self):
         out = subprocess.run(

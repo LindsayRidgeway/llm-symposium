@@ -47,13 +47,14 @@ It is recorded as a claim, not a result.
 
 ## What is actually there (first audit, 2026-09-17, 1094 tracked files)
 
-| class | before | after tonight | what it is |
+| class | first audit | now | what it is |
 |---|---|---|---|
 | EXACT | 9 pairs, ~3.65 MB | 9 pairs, unchanged | byte-identical gallery JPEGs: the `studies/` copy the served pages link to, plus an unreferenced duplicate in `submissions/tarik/<style>-candidates/` |
 | NEAR | 1 cluster, 10 files, ~63 KB | unchanged | eight TickTick probe reports sharing 99.6% of their content, differing in one line: the date in the title |
-| ORPHAN | 29 in-scope files | **12** | documents nothing links to. Seventeen were cured by generating three indexes (see below); the twelve that remain are listed below with what each is waiting on |
+| ORPHAN | 29 in-scope files | **11** | documents nothing links to. Seventeen were cured by generating three indexes (see below); the twelve that remain are listed below with what each is waiting on |
 | DANGLING | 0 | 0 | no broken links anywhere in the record |
 | DRIFT | 0 | 0 | no declared-generated file out of sync with its generator |
+| PUBLIC | — | 1 | added 2026-09-18: a published page listed nowhere a person would look. See `discussions/2026-09-18-two-pages-do-the-same-job-and-one-is-invisible.md` |
 
 ### Confirmed causes, not guesses
 
@@ -84,6 +85,18 @@ surfaced `gen_papers.py --help` running, because the script takes no arguments a
 interprets anything as "generate". One line of that documentation is now:
 
 > **FOUND 2026-09-17 BY scripts/declutter_audit.py AND READ THIS BEFORE RUNNING IT.**
+
+### The class the human named first, and how it finally showed up
+
+He said "obsolete, redundant, or in conflict with others," and conflict of substance is the
+one class string comparison cannot reach. Asked on 2026-09-18 why the README carries a "Tools
+you can use right now" table, the audit grew a sixth detector, PUBLIC, and the first thing it
+found was precisely that class: one published page doing the same job as a page already on the
+front door, live at a public URL, linked only from `sitemap.xml` and `atom.xml` — indexes for
+crawlers. A machine index is not a door. The two pages share 0% of their text, so no
+duplication detector would ever have paired them; what made it visible was checking
+*reachability* instead of similarity. Recorded and routed rather than resolved:
+`discussions/2026-09-18-two-pages-do-the-same-job-and-one-is-invisible.md`.
 
 ### Armed and loaded
 
@@ -166,14 +179,15 @@ version, which I think is the right one — is recorded here for the next window
 - the pass may fix EXACT, DANGLING and DRIFT unattended, and may only *propose* NEAR, ORPHAN
   and CONFLICT.
 
-### The twelve that remain, and what each is waiting on
+### What remains, and what each is waiting on
 
 | artifact(s) | class | waiting on |
 |---|---|---|
 | `probes/results/*-probe-report.md` (6 more) | NEAR | the probe itself — one report, dated inside, instead of eight near-identical files. Fix the producer, not the product. |
-| `experiments/number-convergence-test.md`, `experiments/2026-09-12-probe-{gradability-check,no-canon}.py`, `experiments/autonomous-tarik/2026-09-14-astra-model-check.json` | ORPHAN | an experiments index, or the decision that these are one-shot and terminal |
-| `agenda/23-mcr-colistin-resistance-evidence-map.md` | ORPHAN | the item is real; nothing in the repo points at it. Either it is an agenda item (link it from the agenda) or it is a research note (move it) |
-| `outreach/reddit/2026-09-15-draft-01-temperature-tool.md` | ORPHAN | a draft for a channel the human has not opened yet; not clutter, pending |
+| `experiments/` (3 files) | ORPHAN | an experiments index, or the decision that these are one-shot and terminal |
+| `agenda/23-mcr-colistin-resistance-evidence-map.md` | ORPHAN | the item is real and nothing points at it: either it is an agenda item (link it from the agenda) or it is a research note (move it) |
+| `outreach/reddit/2026-09-15-draft-01-temperature-tool.md` | ORPHAN | a draft for a channel the human has not opened; pending, not clutter |
+| `docs/works/local-warming.html` | PUBLIC | a reader. Routed to Claude or Tarik, who wrote neither this page nor the one it duplicates |
 
 ## What went wrong in the auditor itself
 
