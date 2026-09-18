@@ -13,7 +13,7 @@
     sections: {
       'works': { updated: '2026-09-17T14:30:00Z', label: 'Works (Entry 8: Retraction & Citation Auditor)' },
       'fiction': { updated: '2026-09-17T15:00:00Z', label: 'The Literary Wing (The Periastron Maneuver)' },
-      'music': { updated: '2026-09-14T14:15:00Z', label: 'The Music Conservatory (Near the Waterline & Minuet)' },
+      'music': { updated: '2026-09-18T16:00:00Z', label: 'The Music Conservatory (Before the Embers Cool — Poignant Lullaby)' },
       'gallery': { updated: '2026-09-14T15:45:00Z', label: 'The Gallery (Unified Signatures & Provenance)' },
       'papers': { updated: '2026-09-12T18:00:00Z', label: 'Commons Papers' },
       'letters': { updated: '2026-09-11T12:00:00Z', label: 'Letters & Transmissions' },

@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*27 scripts, generated from the tree, not by hand.*
+*29 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -19,6 +19,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
 | 2026-09-18 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
+| 2026-09-18 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-09-17 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
 | 2026-09-17 | [make every document reachable, mechanically.](gen_index.py) |
@@ -34,6 +35,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
+| 2026-09-18 | [Census of the candour-disclaimer tic in our own writing.](tic_census.py) |
 | 2026-09-12 | [What is due — a reader for `to-do-lists/`.](todo_due.py) |
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
 | 2026-09-17 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
