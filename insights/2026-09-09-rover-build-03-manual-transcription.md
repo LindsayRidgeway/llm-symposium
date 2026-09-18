@@ -119,3 +119,120 @@ Tutorial: https://picar-x-v20.rtfd.io
   cable*. A gentle tug on a seated cable is harmless — if it isn't seated, the ribbon just slides out.
 - **Fallback if the bar ever won't retain:** lay the ribbon in, tape it flat across the connector.
   Camera is optional — the rover drives without it. Not a build-stopper; do not replace the Pi.
+
+### 2026-09-15 — Step 4 (Robot HAT) DONE
+- HAT seated flat on the GPIO header; its holes lined up over the standoffs; all **4× M2.5×6**
+  screws in. Batteries arrived and are charging (they go in at Step 6).
+
+### 2026-09-17 — Step 5 (rear motors) DONE — **Variant B complete**
+- Both TT motors mounted at the rear: shafts outward, **wires inward**.
+- Per motor: 2× **M3×25** screw + **spring washer** (between the motor tab and the nut) + **M3 nut**.
+  Snug only — the gearbox tabs are plastic.
+- **Packaging note:** the TT motors ship with a **clear plastic protective cap** over the tail of
+  the motor can. It stands proud of the motor and stops it seating flush against the body. It is
+  packaging — remove it. Tell: transparent, and the motor's own metal can is already closed beneath.
+- **Reminder:** re-check the motor nuts after the first test run — vibration is what loosens mounts.
+
+### 2026-09-17 — Reference found: official Z0104V40 assembly PDF (matches our kit exactly)
+- https://raw.githubusercontent.com/sunfounder/sf-pdf/master/assembly_file/z0104v40-a0001013-picar-x.pdf
+  (local copy /tmp/picarx40.pdf; 2 pages, all steps, vector art — renders sharp at any zoom)
+- Use this instead of squinting at phone photos of the sheet. Step numbering matches our sheet.
+- Extracted PNGs: /tmp/pg0_200.png (parts page), /tmp/s8.png (Step 8), /tmp/s21.png (Step 21).
+
+### Clarification — the "Servo Arm" is the plastic horn from the servo package
+- Each servo packet contains: the servo + a few **plastic arms** (round hub + flat arm with a row of
+  small holes) + a few tiny screws. Those arms are the manual's "**Servo Arm**."
+  (Confirmed against SunFounder's own parts illustration, "Servo (with package)".)
+- **TWO DIFFERENT TINY SCREWS — DO NOT MIX:**
+  - **M1.5×3** (kit's separate packet) → fastens the servo arm to the **metal plates** (Steps 8, 21).
+  - **"Servo screw" = the SMALLEST screw inside the servo package** → fastens the arm to the
+    **servo's output shaft** (Steps 18, 19, 22). SunFounder prints this note on the sheet.
+  - Rule of thumb: kit packet → plates; servo packet → servo shaft.
+- **Step 8**: servo arm onto the FRONT plate with M1.5×3 screws (drawing shows four screw points).
+- **Step 21**: servo arm onto the **G plate** with ONE M1.5×3 screw, deliberately NOT tight —
+  "allowing for free rotation between them" (it's the pan-tilt pivot).
+- **Step 18/19 (note for later)**: "Adjust servo angle to the middle position BEFORE securing the
+  servo and servo arm." **Step 20**: watch the direction of the steering servo's wire.
+  **Step 22**: seat the steering servo's arm with a servo screw.
+
+### Power / storage state (2026-09-17)
+- Battery connected to the HAT; connector is stiff/latching and would not come free — left connected.
+- HAT power switch is a **push button** (state not readable by eye). Pi's green ACT LED is under the
+  HAT and hard to see. Rule adopted: don't touch the button until Step 17 (servo zeroing).
+- microSD: 32GB card shipped pre-installed in the Pi, pre-loaded with OS + software (per Amazon
+  listing). No imaging needed.
+
+### 2026-09-17 — FIELD FINDING (Lindsay): magnetic tools slow you down on tiny screws
+This corrects the earlier tooling advice in this log. Recorded because it will matter for builds 2–4.
+
+- The **motor mounting screws took two days**, with tweezers / kit needle-nose pliers in play.
+  Bare fingers finished the last screw **in seconds**. The tools were the problem, not the hands.
+- **Magnetic tools are a net negative for placing and starting small screws.** The magnet holds the
+  screw rigid and off-axis to the driver tip, so fine positioning into the hole becomes a fight; when
+  you release, the screw follows the magnet back out.
+- Principle: **a magnet gives grip; fingers give feel.** Carrying a screw needs grip, *starting* one
+  needs feel. So:
+  1. **Fingers start it** — locate the hole by feel, turn COUNTERCLOCKWISE until the lead thread
+     drops in, then turn clockwise.
+  2. **Driver finishes it** — only after it is threaded.
+  3. **Pliers hold, they never drive.**
+  4. If a magnetic driver fights you, **demagnetize it** (cheap demagnetizer block) or keep a
+     non-magnetic driver for the M1.5 and M2 screws.
+- The putty/Blu-Tack tip offered earlier has the same flaw as the magnet — withdrawn.
+- Note: he never came close to forcing anything; the time went into tool fighting, not brute force.
+
+### 2026-09-17 — TECHNIQUE (Lindsay, solved it himself): first fastener as the fixture
+For joining a part that has to be held in alignment (servo arm to plate, Step 8):
+
+1. **Drive the first screw through the plate with the arm NOT yet in place.** Easy — nothing to hold.
+2. **Hold that screw with the driver, slide the arm into position over it, and drive it home.** The
+   screw becomes the locating pin.
+3. **Now the arm is fixed.** The remaining screws are just position-and-drive — no third hand, no
+   re-aligning.
+
+Principle to reuse everywhere: **the first fastener takes the alignment load; the rest are trivial.**
+Applies to plate-to-plate, plate-to-module, and the rivets.
+
+Refinements to apply on builds 2–4:
+- **Snug the first screw, don't torque it.** Start the others, then final-tighten all evenly — avoids
+  pulling a small plastic part cocked against one corner.
+- Remaining screws still start **by finger** (per the magnetic-tool finding above): alignment is
+  solved, but the thread still needs feel.
+
+### 2026-09-17 — CORRECTION (Lindsay): the load-bearing trick is STEP 1, not the fixture idea
+- The breakthrough is **separating the two operations in time**:
+  1. Put the screw through the **empty hole first**, with nothing to hold. Easy.
+  2. **Then** slide the part into position over the protruding screw.
+  3. **Then** drive it.
+- **Doing (1) and (2) simultaneously was the killer.** Position + start + hold all at once = failure.
+- General principle: **never combine "hold/position the part" with "start the fastener."** One hand
+  job at a time. Serialize; don't multiplex.
+- Same reason the rivet procedure works: it is explicitly three separate motions
+  (Insert → Push → Lock), not one.
+
+### Step 9 — DONE (09-17) — ultrasonic module + H plate riveted to the front
+Lindsay: "The rivets were much easier to deal with than the tiny screws. Step nine complete."
+
+FIELD FINDING — rivets are the *easy* fasteners, and the reason is structural:
+- The R3080 rivet is ONE big part going through a BIG hole. It is self-aligning: if the hole is
+  roughly lined up, the shaft finds its way in.
+- Insert → Push → Lock are three motions, but they are three motions of the SAME hand on the SAME
+  part. Nothing has to be held still while a thread is started. The failure mode that makes M1.5×3
+  screws brutal (hold part + start thread = two hands, two jobs, simultaneously) simply does not
+  exist for a rivet.
+- Generalization for the build log: FRICTION SCALES WITH PART SIZE, NOT WITH STEP COUNT. A step
+  with three motions on one big part is cheaper than a step with one motion on a screw you can
+  barely see. Do not budget assembly-line time by counting steps — budget it by counting tiny screws.
+- Corollary for builds 2–4: the rivet steps (9, 12, 16, 21, 24, 25) will go fast. The screw steps
+  (8, 10, 18, 19, 21, 22, 24, 25) are where the days go.
+
+### Step 10 — 2× M3x26 standoff + 2× M3x6 screw (bottom of the car)
+Manual: "Fasten 2 standoffs to the bottom of the car with screws."
+From the official PDF diagram: the screw goes DOWN through the hole in the car's belly plate from
+ABOVE (inside the car); the M3x26 standoff hangs BELOW the plate and the screw threads into it.
+The two holes are the pair near the front of the belly plate, left and right of the centerline, just
+behind the ultrasonic bracket. These two standoffs become the front mounting posts used later by the
+front wheel assembly (E/F plates, Step 25 region).
+Technique note (blind-start trick): drop the M3x6 screw through the plate hole from the top, then
+spin the M3x26 standoff up onto the screw tip from underneath with your fingers. The standoff is a
+big, easy-to-hold part; turning IT is far easier than driving a screwdriver at a hidden hole.
