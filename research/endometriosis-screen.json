@@ -1,0 +1,2108 @@
+{
+ "disease": "endometriosis",
+ "disease_resolved": "endometriosis",
+ "efo_id": "MONDO_0005133",
+ "disease_papers_any_field": 85810,
+ "disease_papers_strict": 37348,
+ "registered_trials_for_disease": 949,
+ "note": "any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") \u2014 counts mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT \u2014 the number that decides novelty. Counts move with spelling; these are small numbers, not exact ones. A zero means nobody has PUBLISHED the link; it does not mean the link is true, untested, or valuable.",
+ "n_targets": 229,
+ "unjoined": [],
+ "incidental_any_field_only": [],
+ "no_title_abstract_join": [
+  "PLAUR",
+  "LAMB1",
+  "IL37",
+  "IL17A",
+  "PTGES2",
+  "ALOX5",
+  "PKM",
+  "HEPH",
+  "SLC11A1",
+  "FXN",
+  "ACO1",
+  "IREB2",
+  "PROM1",
+  "RARG",
+  "CFB",
+  "OPRK1",
+  "SCN10A",
+  "CYP27B1",
+  "PPARGC1A",
+  "ENPP2",
+  "LPAR1",
+  "LPAR3",
+  "MGLL",
+  "MTNR1A",
+  "MTNR1B",
+  "AANAT"
+ ],
+ "no_strict_join_but_discussed": [
+  "PLAUR",
+  "LAMB1",
+  "IL37",
+  "IL17A",
+  "PTGES2",
+  "ALOX5",
+  "PKM",
+  "HEPH",
+  "SLC11A1",
+  "FXN",
+  "ACO1",
+  "IREB2",
+  "PROM1",
+  "RARG",
+  "CFB",
+  "OPRK1",
+  "SCN10A",
+  "CYP27B1",
+  "PPARGC1A",
+  "ENPP2",
+  "LPAR1",
+  "LPAR3",
+  "MGLL",
+  "MTNR1A",
+  "MTNR1B",
+  "AANAT"
+ ],
+ "joined_in_title_or_abstract": [
+  "CYP19A1",
+  "ESR1",
+  "ESR2",
+  "GPER1",
+  "HSD17B1",
+  "HSD17B2",
+  "STS",
+  "SULT1E1",
+  "CYP1B1",
+  "CYP1A1",
+  "NR5A1",
+  "STAR",
+  "PGR",
+  "PGRMC1",
+  "KLF11",
+  "FOXO1",
+  "HAND2",
+  "HOXA10",
+  "HOXA11",
+  "HOXD10",
+  "PRL",
+  "IGFBP1",
+  "MMP2",
+  "MMP3",
+  "MMP7",
+  "MMP9",
+  "MMP14",
+  "TIMP1",
+  "TIMP2",
+  "ITGB1",
+  "ITGB3",
+  "ITGAV",
+  "CDH1",
+  "CDH2",
+  "CTNNB1",
+  "SPP1",
+  "SERPINE1",
+  "PLAU",
+  "FN1",
+  "PTK2",
+  "ROCK1",
+  "ROCK2",
+  "IL6",
+  "IL1B",
+  "IL1A",
+  "TNF",
+  "CXCL8",
+  "CCL2",
+  "CCL5",
+  "CXCL12",
+  "CXCR4",
+  "NFKB1",
+  "RELA",
+  "NLRP3",
+  "IL18",
+  "IL33",
+  "IL10",
+  "TGFB1",
+  "TGFBR1",
+  "CSF1",
+  "CSF1R",
+  "TLR4",
+  "MYD88",
+  "IRF5",
+  "STAT3",
+  "JAK2",
+  "VEGFA",
+  "KDR",
+  "NGF",
+  "NTRK1",
+  "NGFR",
+  "NR2F2",
+  "TRPV1",
+  "P2RX3",
+  "BDNF",
+  "SEMA3A",
+  "NRP1",
+  "PGF",
+  "PTGS1",
+  "PTGS2",
+  "PTGES",
+  "PTGFR",
+  "HPGD",
+  "ALOX15",
+  "PLA2G4A",
+  "PTGIR",
+  "PTGER2",
+  "PTGER4",
+  "HIF1A",
+  "EPAS1",
+  "VHL",
+  "LDHA",
+  "SLC2A1",
+  "HK2",
+  "PDK1",
+  "PGK1",
+  "NFE2L2",
+  "SOD1",
+  "CAT",
+  "GPX1",
+  "GPX4",
+  "SLC7A11",
+  "ACSL4",
+  "TXN",
+  "NQO1",
+  "HMOX1",
+  "FTH1",
+  "FTL",
+  "TFRC",
+  "SLC40A1",
+  "HP",
+  "HAMP",
+  "SUSD2",
+  "LGR5",
+  "ALDH1A1",
+  "ALDH1A2",
+  "POU5F1",
+  "NANOG",
+  "SOX2",
+  "KLF4",
+  "MYC",
+  "THY1",
+  "ENG",
+  "WNT4",
+  "WNT5A",
+  "WNT7A",
+  "GSK3B",
+  "LEF1",
+  "TCF7L2",
+  "DKK1",
+  "SFRP1",
+  "RARB",
+  "RARA",
+  "CYP26A1",
+  "STRA6",
+  "CRABP2",
+  "RDH10",
+  "C3",
+  "C3AR1",
+  "C5",
+  "C5AR1",
+  "CFD",
+  "F2",
+  "F10",
+  "THBD",
+  "OPRM1",
+  "COMT",
+  "SCN9A",
+  "SCN11A",
+  "CALCA",
+  "CALCRL",
+  "TP53",
+  "BCL2",
+  "BAX",
+  "BIRC5",
+  "CCND1",
+  "CDKN1A",
+  "CDKN2A",
+  "MKI67",
+  "PTEN",
+  "MDM2",
+  "FOXM1",
+  "TSHR",
+  "VDR",
+  "CYP24A1",
+  "NR1H4",
+  "PPARG",
+  "ADIPOR1",
+  "LEP",
+  "INSR",
+  "IGF1",
+  "IGF1R",
+  "SPHK1",
+  "S1PR1",
+  "S1PR3",
+  "CNR1",
+  "CNR2",
+  "FAAH",
+  "CLOCK",
+  "ARNTL",
+  "PER2",
+  "CD163",
+  "TREM1",
+  "NOD1",
+  "NOD2",
+  "TRPV4",
+  "TRPA1",
+  "KCNQ1",
+  "ACTA2",
+  "MYH11",
+  "CD44",
+  "ICAM1",
+  "VCAM1",
+  "SELE",
+  "PECAM1",
+  "MCAM",
+  "EGFR",
+  "ERBB2",
+  "FGFR1",
+  "FGFR2",
+  "MET",
+  "HGF",
+  "PDGFRB"
+ ],
+ "seconds": 47.3,
+ "targets": [
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "CYP19A1",
+   "any_field": 784,
+   "strict": 47,
+   "open_targets_score": 0.1312760535960743,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "ESR1",
+   "any_field": 1383,
+   "strict": 114,
+   "open_targets_score": 0.6676172245306173,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "ESR2",
+   "any_field": 650,
+   "strict": 53,
+   "open_targets_score": 0.13763881844681478,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "GPER1",
+   "any_field": 137,
+   "strict": 6,
+   "open_targets_score": 0.08520376921012081,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "HSD17B1",
+   "any_field": 166,
+   "strict": 21,
+   "open_targets_score": 0.0370290367203769,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "HSD17B2",
+   "any_field": 165,
+   "strict": 19,
+   "open_targets_score": 0.03748973580790775,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "STS",
+   "any_field": 483,
+   "strict": 26,
+   "open_targets_score": 0.03996034028737606,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "SULT1E1",
+   "any_field": 83,
+   "strict": 4,
+   "open_targets_score": 0.025692722339992455,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "CYP1B1",
+   "any_field": 254,
+   "strict": 17,
+   "open_targets_score": 0.045969039453628825,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "CYP1A1",
+   "any_field": 334,
+   "strict": 33,
+   "open_targets_score": 0.05377104881409673,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "NR5A1",
+   "any_field": 202,
+   "strict": 17,
+   "open_targets_score": 0.0262204749379035,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "estrogen / local steroidogenesis",
+   "symbol": "STAR",
+   "any_field": 2129,
+   "strict": 31,
+   "open_targets_score": 0.05086916459593095,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "PGR",
+   "any_field": 1093,
+   "strict": 93,
+   "open_targets_score": 0.6685961212692121,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "PGRMC1",
+   "any_field": 148,
+   "strict": 11,
+   "open_targets_score": 0.015680155322326,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "KLF11",
+   "any_field": 72,
+   "strict": 9,
+   "open_targets_score": 0.08132440874449591,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "FOXO1",
+   "any_field": 788,
+   "strict": 28,
+   "open_targets_score": 0.0632120291818751,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "HAND2",
+   "any_field": 248,
+   "strict": 6,
+   "open_targets_score": 0.07851209450348424,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "HOXA10",
+   "any_field": 1099,
+   "strict": 82,
+   "open_targets_score": 0.28036475016272,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "HOXA11",
+   "any_field": 341,
+   "strict": 18,
+   "open_targets_score": 0.097207909771294,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "HOXD10",
+   "any_field": 53,
+   "strict": 2,
+   "open_targets_score": 0.016931479753813646,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "PRL",
+   "any_field": 1504,
+   "strict": 64,
+   "open_targets_score": 0.10999910724168528,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "progesterone / decidualization",
+   "symbol": "IGFBP1",
+   "any_field": 512,
+   "strict": 39,
+   "open_targets_score": 0.03751011906975176,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "MMP2",
+   "any_field": 844,
+   "strict": 59,
+   "open_targets_score": 0.09503526582235353,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "MMP3",
+   "any_field": 286,
+   "strict": 20,
+   "open_targets_score": 0.08993874178314643,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "MMP7",
+   "any_field": 240,
+   "strict": 13,
+   "open_targets_score": 0.045728680856047824,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "MMP9",
+   "any_field": 1689,
+   "strict": 86,
+   "open_targets_score": 0.09159367356517281,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "MMP14",
+   "any_field": 131,
+   "strict": 2,
+   "open_targets_score": 0.0815288228082282,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "TIMP1",
+   "any_field": 451,
+   "strict": 18,
+   "open_targets_score": 0.04484313833426543,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "TIMP2",
+   "any_field": 196,
+   "strict": 10,
+   "open_targets_score": 0.0411441406190054,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "ITGB1",
+   "any_field": 174,
+   "strict": 7,
+   "open_targets_score": 0.03253129480392618,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "ITGB3",
+   "any_field": 207,
+   "strict": 13,
+   "open_targets_score": 0.03204205026053603,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "ITGAV",
+   "any_field": 97,
+   "strict": 10,
+   "open_targets_score": 0.030495948986064284,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "CDH1",
+   "any_field": 530,
+   "strict": 23,
+   "open_targets_score": 0.10158233644376892,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "CDH2",
+   "any_field": 504,
+   "strict": 8,
+   "open_targets_score": 0.06147950719323386,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "CTNNB1",
+   "any_field": 838,
+   "strict": 41,
+   "open_targets_score": 0.06426901610978206,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "SPP1",
+   "any_field": 310,
+   "strict": 12,
+   "open_targets_score": 0.11028536285270958,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "SERPINE1",
+   "any_field": 221,
+   "strict": 14,
+   "open_targets_score": 0.05847093551603942,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "PLAU",
+   "any_field": 247,
+   "strict": 3,
+   "open_targets_score": 0.04574659116935511,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "PLAUR",
+   "any_field": 142,
+   "strict": 0,
+   "open_targets_score": 0.039315494297075586,
+   "verdict": "discussed (142 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "LAMB1",
+   "any_field": 66,
+   "strict": 0,
+   "open_targets_score": 0.0036957985468470188,
+   "verdict": "discussed (66 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "FN1",
+   "any_field": 1112,
+   "strict": 24,
+   "open_targets_score": 0.09894480168185171,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "PTK2",
+   "any_field": 83,
+   "strict": 2,
+   "open_targets_score": 0.03087630149452692,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "ROCK1",
+   "any_field": 132,
+   "strict": 8,
+   "open_targets_score": 0.020507357599286274,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion / invasion / ECM",
+   "symbol": "ROCK2",
+   "any_field": 92,
+   "strict": 5,
+   "open_targets_score": 0.01948821833642193,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL6",
+   "any_field": 5196,
+   "strict": 49,
+   "open_targets_score": 0.11287059617178331,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL1B",
+   "any_field": 698,
+   "strict": 19,
+   "open_targets_score": 0.213381884409144,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL1A",
+   "any_field": 461,
+   "strict": 14,
+   "open_targets_score": 0.3979579071098799,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "TNF",
+   "any_field": 6642,
+   "strict": 595,
+   "open_targets_score": 0.21468820959840607,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CXCL8",
+   "any_field": 601,
+   "strict": 24,
+   "open_targets_score": 0.06317000341021188,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CCL2",
+   "any_field": 1086,
+   "strict": 48,
+   "open_targets_score": 0.09619530097988192,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CCL5",
+   "any_field": 613,
+   "strict": 13,
+   "open_targets_score": 0.034536212195524225,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CXCL12",
+   "any_field": 698,
+   "strict": 35,
+   "open_targets_score": 0.09036129328762367,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CXCR4",
+   "any_field": 793,
+   "strict": 33,
+   "open_targets_score": 0.08604472621154793,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "NFKB1",
+   "any_field": 205,
+   "strict": 6,
+   "open_targets_score": 0.09278798700640054,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "RELA",
+   "any_field": 620,
+   "strict": 8,
+   "open_targets_score": 0.014305509315313806,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "NLRP3",
+   "any_field": 941,
+   "strict": 55,
+   "open_targets_score": 0.08591455302948893,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL18",
+   "any_field": 170,
+   "strict": 3,
+   "open_targets_score": 0.07213340399082974,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL33",
+   "any_field": 279,
+   "strict": 2,
+   "open_targets_score": 0.11113744573456362,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL37",
+   "any_field": 33,
+   "strict": 0,
+   "open_targets_score": 0.040687396644741386,
+   "verdict": "discussed (33 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL10",
+   "any_field": 1921,
+   "strict": 14,
+   "open_targets_score": 0.10202051538863433,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL17A",
+   "any_field": 129,
+   "strict": 0,
+   "open_targets_score": 0.10729246618758227,
+   "verdict": "discussed (129 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "TGFB1",
+   "any_field": 393,
+   "strict": 15,
+   "open_targets_score": 0.11374150252280528,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "TGFBR1",
+   "any_field": 315,
+   "strict": 6,
+   "open_targets_score": 0.028917865820131877,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CSF1",
+   "any_field": 182,
+   "strict": 4,
+   "open_targets_score": 0.0691531514099084,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CSF1R",
+   "any_field": 168,
+   "strict": 6,
+   "open_targets_score": 0.061600641515180625,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "TLR4",
+   "any_field": 1267,
+   "strict": 42,
+   "open_targets_score": 0.057049455553850374,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "MYD88",
+   "any_field": 464,
+   "strict": 10,
+   "open_targets_score": 0.027054640948224302,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IRF5",
+   "any_field": 74,
+   "strict": 1,
+   "open_targets_score": 0.007022017239009335,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "STAT3",
+   "any_field": 2176,
+   "strict": 90,
+   "open_targets_score": 0.10327391594674824,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "JAK2",
+   "any_field": 636,
+   "strict": 14,
+   "open_targets_score": 0.03150530719670342,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "VEGFA",
+   "any_field": 1003,
+   "strict": 59,
+   "open_targets_score": 0.11605329547284633,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "KDR",
+   "any_field": 344,
+   "strict": 12,
+   "open_targets_score": 0.5623052442958719,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "NGF",
+   "any_field": 704,
+   "strict": 86,
+   "open_targets_score": 0.4043830204040534,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "NTRK1",
+   "any_field": 88,
+   "strict": 2,
+   "open_targets_score": 0.06206282005527311,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "NGFR",
+   "any_field": 68,
+   "strict": 4,
+   "open_targets_score": 0.014373358622227678,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "NR2F2",
+   "any_field": 130,
+   "strict": 6,
+   "open_targets_score": 0.2129152370658697,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "TRPV1",
+   "any_field": 521,
+   "strict": 37,
+   "open_targets_score": 0.06913628120521266,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "P2RX3",
+   "any_field": 68,
+   "strict": 1,
+   "open_targets_score": 0.08750570413792437,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "BDNF",
+   "any_field": 824,
+   "strict": 62,
+   "open_targets_score": 0.11116640934328935,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "SEMA3A",
+   "any_field": 86,
+   "strict": 2,
+   "open_targets_score": 0.030479648689386983,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "NRP1",
+   "any_field": 179,
+   "strict": 4,
+   "open_targets_score": 0.06388113950114248,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroangiogenesis / pain",
+   "symbol": "PGF",
+   "any_field": 229,
+   "strict": 15,
+   "open_targets_score": 0.033076027016046484,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PTGS1",
+   "any_field": 279,
+   "strict": 2,
+   "open_targets_score": 0.03589031033271437,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PTGS2",
+   "any_field": 1743,
+   "strict": 28,
+   "open_targets_score": 0.10226973910174345,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PTGES",
+   "any_field": 76,
+   "strict": 2,
+   "open_targets_score": 0.017448678196922484,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PTGES2",
+   "any_field": 23,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (23 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PTGFR",
+   "any_field": 136,
+   "strict": 3,
+   "open_targets_score": 0.005174117965585825,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "HPGD",
+   "any_field": 58,
+   "strict": 4,
+   "open_targets_score": 0.01623296125771621,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "ALOX5",
+   "any_field": 81,
+   "strict": 0,
+   "open_targets_score": 0.0025870589827929123,
+   "verdict": "discussed (81 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "ALOX15",
+   "any_field": 71,
+   "strict": 3,
+   "open_targets_score": 0.01293529491396456,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PLA2G4A",
+   "any_field": 46,
+   "strict": 1,
+   "open_targets_score": 0.00406537840153172,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PTGIR",
+   "any_field": 83,
+   "strict": 1,
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PTGER2",
+   "any_field": 94,
+   "strict": 4,
+   "open_targets_score": 0.005760379956300172,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "prostaglandins / eicosanoids",
+   "symbol": "PTGER4",
+   "any_field": 172,
+   "strict": 3,
+   "open_targets_score": 0.03618574657505711,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "HIF1A",
+   "any_field": 2001,
+   "strict": 23,
+   "open_targets_score": 0.08145247589263993,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "EPAS1",
+   "any_field": 70,
+   "strict": 6,
+   "open_targets_score": 0.015229769845132085,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "VHL",
+   "any_field": 319,
+   "strict": 7,
+   "open_targets_score": 0.008295014516256641,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "LDHA",
+   "any_field": 247,
+   "strict": 8,
+   "open_targets_score": 0.03621107822373685,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "SLC2A1",
+   "any_field": 141,
+   "strict": 3,
+   "open_targets_score": 0.015045782350240667,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "HK2",
+   "any_field": 225,
+   "strict": 7,
+   "open_targets_score": 0.024903111897221178,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "PKM",
+   "any_field": 64,
+   "strict": 0,
+   "open_targets_score": 0.03584390663123932,
+   "verdict": "discussed (64 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "PDK1",
+   "any_field": 250,
+   "strict": 8,
+   "open_targets_score": 0.010873517245863022,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "PGK1",
+   "any_field": 112,
+   "strict": 2,
+   "open_targets_score": 0.011826555349910457,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "NFE2L2",
+   "any_field": 131,
+   "strict": 5,
+   "open_targets_score": 0.016087032769567102,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "SOD1",
+   "any_field": 382,
+   "strict": 4,
+   "open_targets_score": 0.035089107837748955,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "CAT",
+   "any_field": 2978,
+   "strict": 37,
+   "open_targets_score": 0.027073422320061546,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "GPX1",
+   "any_field": 162,
+   "strict": 2,
+   "open_targets_score": 0.028836468161773855,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "GPX4",
+   "any_field": 414,
+   "strict": 25,
+   "open_targets_score": 0.07740839273702478,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "SLC7A11",
+   "any_field": 255,
+   "strict": 11,
+   "open_targets_score": 0.022648171987578427,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "ACSL4",
+   "any_field": 172,
+   "strict": 8,
+   "open_targets_score": 0.023259608930925983,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "TXN",
+   "any_field": 55,
+   "strict": 1,
+   "open_targets_score": 0.03923735665149473,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hypoxia / metabolism",
+   "symbol": "NQO1",
+   "any_field": 242,
+   "strict": 8,
+   "open_targets_score": 0.004156212371172452,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "HMOX1",
+   "any_field": 376,
+   "strict": 10,
+   "open_targets_score": 0.08992455446176632,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "FTH1",
+   "any_field": 132,
+   "strict": 7,
+   "open_targets_score": 0.006652437384324632,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "FTL",
+   "any_field": 95,
+   "strict": 3,
+   "open_targets_score": 0.007925434661571938,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "TFRC",
+   "any_field": 154,
+   "strict": 2,
+   "open_targets_score": 0.03548746829110805,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "SLC40A1",
+   "any_field": 61,
+   "strict": 2,
+   "open_targets_score": 0.00946482484666111,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "HP",
+   "any_field": 1668,
+   "strict": 19,
+   "open_targets_score": 0.03589831414438257,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "HAMP",
+   "any_field": 51,
+   "strict": 1,
+   "open_targets_score": 0.029594094293134147,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "HEPH",
+   "any_field": 14,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (14 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "SLC11A1",
+   "any_field": 24,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (24 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "FXN",
+   "any_field": 21,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (21 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "ACO1",
+   "any_field": 24,
+   "strict": 0,
+   "open_targets_score": 0.0014783194187388072,
+   "verdict": "discussed (24 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "iron / heme",
+   "symbol": "IREB2",
+   "any_field": 22,
+   "strict": 0,
+   "open_targets_score": 0.004434958256216422,
+   "verdict": "discussed (22 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "SUSD2",
+   "any_field": 135,
+   "strict": 12,
+   "open_targets_score": 0.0030876343637491924,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "LGR5",
+   "any_field": 246,
+   "strict": 4,
+   "open_targets_score": 0.08127663166402531,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "ALDH1A1",
+   "any_field": 158,
+   "strict": 7,
+   "open_targets_score": 0.04140545580457423,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "ALDH1A2",
+   "any_field": 44,
+   "strict": 2,
+   "open_targets_score": 0.0014783194187388072,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "POU5F1",
+   "any_field": 155,
+   "strict": 3,
+   "open_targets_score": 0.05894292819708192,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "NANOG",
+   "any_field": 463,
+   "strict": 22,
+   "open_targets_score": 0.012814699732760665,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "SOX2",
+   "any_field": 530,
+   "strict": 14,
+   "open_targets_score": 0.017401288592452137,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "KLF4",
+   "any_field": 366,
+   "strict": 5,
+   "open_targets_score": 0.01369066250176844,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "MYC",
+   "any_field": 1774,
+   "strict": 47,
+   "open_targets_score": 0.04522229313626235,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "PROM1",
+   "any_field": 55,
+   "strict": 0,
+   "open_targets_score": 0.047622006853255766,
+   "verdict": "discussed (55 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "THY1",
+   "any_field": 92,
+   "strict": 2,
+   "open_targets_score": 0.03443108647590235,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "stem / progenitor",
+   "symbol": "ENG",
+   "any_field": 643,
+   "strict": 12,
+   "open_targets_score": 0.0371755348759955,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "wnt / developmental",
+   "symbol": "WNT4",
+   "any_field": 593,
+   "strict": 52,
+   "open_targets_score": 0.41083636366193754,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "wnt / developmental",
+   "symbol": "WNT5A",
+   "any_field": 310,
+   "strict": 5,
+   "open_targets_score": 0.022482774493319358,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "wnt / developmental",
+   "symbol": "WNT7A",
+   "any_field": 201,
+   "strict": 6,
+   "open_targets_score": 0.020804265986626335,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "wnt / developmental",
+   "symbol": "GSK3B",
+   "any_field": 137,
+   "strict": 3,
+   "open_targets_score": 0.018513660749288764,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "wnt / developmental",
+   "symbol": "LEF1",
+   "any_field": 149,
+   "strict": 2,
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "wnt / developmental",
+   "symbol": "TCF7L2",
+   "any_field": 141,
+   "strict": 4,
+   "open_targets_score": 0.006098067602297579,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "wnt / developmental",
+   "symbol": "DKK1",
+   "any_field": 245,
+   "strict": 6,
+   "open_targets_score": 0.01968279644979976,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "wnt / developmental",
+   "symbol": "SFRP1",
+   "any_field": 112,
+   "strict": 3,
+   "open_targets_score": 0.11932089270360259,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "retinoic acid",
+   "symbol": "RARB",
+   "any_field": 54,
+   "strict": 3,
+   "open_targets_score": 0.014105631120466118,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "retinoic acid",
+   "symbol": "RARA",
+   "any_field": 119,
+   "strict": 7,
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "retinoic acid",
+   "symbol": "RARG",
+   "any_field": 17,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (17 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "retinoic acid",
+   "symbol": "CYP26A1",
+   "any_field": 75,
+   "strict": 2,
+   "open_targets_score": 0.003675266332697868,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "retinoic acid",
+   "symbol": "STRA6",
+   "any_field": 39,
+   "strict": 6,
+   "open_targets_score": 0.010235308753351326,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "retinoic acid",
+   "symbol": "CRABP2",
+   "any_field": 74,
+   "strict": 5,
+   "open_targets_score": 0.0051535857514366755,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "retinoic acid",
+   "symbol": "RDH10",
+   "any_field": 16,
+   "strict": 1,
+   "open_targets_score": 0.0022174791281082107,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "C3",
+   "any_field": 1505,
+   "strict": 108,
+   "open_targets_score": 0.03964990202839297,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "C3AR1",
+   "any_field": 32,
+   "strict": 3,
+   "open_targets_score": 0.011200322818361379,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "C5",
+   "any_field": 723,
+   "strict": 14,
+   "open_targets_score": 0.03323672697607821,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "C5AR1",
+   "any_field": 58,
+   "strict": 2,
+   "open_targets_score": 0.06205861726580618,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "CFB",
+   "any_field": 106,
+   "strict": 0,
+   "open_targets_score": 0.005523165606121377,
+   "verdict": "discussed (106 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "CFD",
+   "any_field": 131,
+   "strict": 3,
+   "open_targets_score": 0.016184042674844246,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "F2",
+   "any_field": 940,
+   "strict": 22,
+   "open_targets_score": 0.005559096980882389,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "F10",
+   "any_field": 231,
+   "strict": 1,
+   "open_targets_score": 0.0073915970936940375,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "complement / coagulation",
+   "symbol": "THBD",
+   "any_field": 53,
+   "strict": 1,
+   "open_targets_score": 0.005063859975604889,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "pain / neural / opioid",
+   "symbol": "OPRM1",
+   "any_field": 76,
+   "strict": 2,
+   "open_targets_score": 0.263352757104132,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "pain / neural / opioid",
+   "symbol": "OPRK1",
+   "any_field": 27,
+   "strict": 0,
+   "open_targets_score": 0.26166253711676885,
+   "verdict": "discussed (27 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "pain / neural / opioid",
+   "symbol": "COMT",
+   "any_field": 229,
+   "strict": 13,
+   "open_targets_score": 0.04591213285682158,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "pain / neural / opioid",
+   "symbol": "SCN9A",
+   "any_field": 48,
+   "strict": 1,
+   "open_targets_score": 0.0790438914206906,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "pain / neural / opioid",
+   "symbol": "SCN10A",
+   "any_field": 33,
+   "strict": 0,
+   "open_targets_score": 0.07391597093694036,
+   "verdict": "discussed (33 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "pain / neural / opioid",
+   "symbol": "SCN11A",
+   "any_field": 28,
+   "strict": 1,
+   "open_targets_score": 0.07809042672613944,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "pain / neural / opioid",
+   "symbol": "CALCA",
+   "any_field": 58,
+   "strict": 1,
+   "open_targets_score": 0.012524650630981559,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "pain / neural / opioid",
+   "symbol": "CALCRL",
+   "any_field": 32,
+   "strict": 1,
+   "open_targets_score": 0.21892034738739669,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "TP53",
+   "any_field": 1985,
+   "strict": 79,
+   "open_targets_score": 0.10072260488939744,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "BCL2",
+   "any_field": 1114,
+   "strict": 44,
+   "open_targets_score": 0.0948731787030527,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "BAX",
+   "any_field": 1624,
+   "strict": 117,
+   "open_targets_score": 0.083599430933558,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "BIRC5",
+   "any_field": 156,
+   "strict": 8,
+   "open_targets_score": 0.09447347482856962,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "CCND1",
+   "any_field": 464,
+   "strict": 15,
+   "open_targets_score": 0.04794902579504797,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "CDKN1A",
+   "any_field": 346,
+   "strict": 7,
+   "open_targets_score": 0.02918025489926133,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "CDKN2A",
+   "any_field": 603,
+   "strict": 11,
+   "open_targets_score": 0.188737940808072,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "MKI67",
+   "any_field": 177,
+   "strict": 5,
+   "open_targets_score": 0.08756827661959476,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "PTEN",
+   "any_field": 2534,
+   "strict": 165,
+   "open_targets_score": 0.0989698799142124,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "MDM2",
+   "any_field": 479,
+   "strict": 11,
+   "open_targets_score": 0.05172678650390223,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "cell cycle / apoptosis / senescence",
+   "symbol": "FOXM1",
+   "any_field": 213,
+   "strict": 5,
+   "open_targets_score": 0.012394589545112697,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "TSHR",
+   "any_field": 597,
+   "strict": 1,
+   "open_targets_score": 0.01411856641538008,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "VDR",
+   "any_field": 448,
+   "strict": 29,
+   "open_targets_score": 0.06688859472136824,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "CYP27B1",
+   "any_field": 99,
+   "strict": 0,
+   "open_targets_score": 0.005174117965585825,
+   "verdict": "discussed (99 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "CYP24A1",
+   "any_field": 90,
+   "strict": 1,
+   "open_targets_score": 0.007761176948378739,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "NR1H4",
+   "any_field": 24,
+   "strict": 1,
+   "open_targets_score": 0.005430770642450201,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "PPARG",
+   "any_field": 288,
+   "strict": 8,
+   "open_targets_score": 0.10892884640948557,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "PPARGC1A",
+   "any_field": 61,
+   "strict": 0,
+   "open_targets_score": 0.06411666200510965,
+   "verdict": "discussed (61 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "ADIPOR1",
+   "any_field": 80,
+   "strict": 5,
+   "open_targets_score": 0.0029361066233284643,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "LEP",
+   "any_field": 227,
+   "strict": 10,
+   "open_targets_score": 0.1109725894674359,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "INSR",
+   "any_field": 343,
+   "strict": 1,
+   "open_targets_score": 0.0073915970936940375,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "IGF1",
+   "any_field": 825,
+   "strict": 17,
+   "open_targets_score": 0.1402601300061602,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormone / vitamin D / metabolic",
+   "symbol": "IGF1R",
+   "any_field": 650,
+   "strict": 6,
+   "open_targets_score": 0.17430785549854144,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "SPHK1",
+   "any_field": 111,
+   "strict": 4,
+   "open_targets_score": 0.005559096980882389,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "S1PR1",
+   "any_field": 92,
+   "strict": 5,
+   "open_targets_score": 0.015052987481307904,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "S1PR3",
+   "any_field": 34,
+   "strict": 3,
+   "open_targets_score": 0.02426907712429542,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "ENPP2",
+   "any_field": 26,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (26 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "LPAR1",
+   "any_field": 56,
+   "strict": 0,
+   "open_targets_score": 0.0014783194187388072,
+   "verdict": "discussed (56 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "LPAR3",
+   "any_field": 55,
+   "strict": 0,
+   "open_targets_score": 0.21244278401161315,
+   "verdict": "discussed (55 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "CNR1",
+   "any_field": 123,
+   "strict": 7,
+   "open_targets_score": 0.2988009066850696,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "CNR2",
+   "any_field": 49,
+   "strict": 4,
+   "open_targets_score": 0.026669234444926037,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "FAAH",
+   "any_field": 118,
+   "strict": 4,
+   "open_targets_score": 0.003942185116636819,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "sphingolipid / LPA / endocannabinoid",
+   "symbol": "MGLL",
+   "any_field": 26,
+   "strict": 0,
+   "open_targets_score": 0.0014783194187388072,
+   "verdict": "discussed (26 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "melatonin / circadian",
+   "symbol": "MTNR1A",
+   "any_field": 29,
+   "strict": 0,
+   "open_targets_score": 0.07447034071896741,
+   "verdict": "discussed (29 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "melatonin / circadian",
+   "symbol": "MTNR1B",
+   "any_field": 42,
+   "strict": 0,
+   "open_targets_score": 0.07447034071896741,
+   "verdict": "discussed (42 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "melatonin / circadian",
+   "symbol": "AANAT",
+   "any_field": 24,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (24 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "melatonin / circadian",
+   "symbol": "CLOCK",
+   "any_field": 701,
+   "strict": 17,
+   "open_targets_score": 0.01887690704444562,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "melatonin / circadian",
+   "symbol": "ARNTL",
+   "any_field": 47,
+   "strict": 2,
+   "open_targets_score": 0.01293529491396456,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "melatonin / circadian",
+   "symbol": "PER2",
+   "any_field": 97,
+   "strict": 1,
+   "open_targets_score": 0.010416642847350019,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "innate immunity / macrophage",
+   "symbol": "CD163",
+   "any_field": 515,
+   "strict": 33,
+   "open_targets_score": 0.07787820019265254,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "innate immunity / macrophage",
+   "symbol": "TREM1",
+   "any_field": 57,
+   "strict": 1,
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "innate immunity / macrophage",
+   "symbol": "NOD1",
+   "any_field": 90,
+   "strict": 3,
+   "open_targets_score": 0.03568980069080457,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "innate immunity / macrophage",
+   "symbol": "NOD2",
+   "any_field": 142,
+   "strict": 3,
+   "open_targets_score": 0.006724300133846657,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "ion channel / smooth muscle",
+   "symbol": "TRPV4",
+   "any_field": 131,
+   "strict": 1,
+   "open_targets_score": 0.015317031755265977,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "ion channel / smooth muscle",
+   "symbol": "TRPA1",
+   "any_field": 231,
+   "strict": 8,
+   "open_targets_score": 0.03840421214074455,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "ion channel / smooth muscle",
+   "symbol": "KCNQ1",
+   "any_field": 74,
+   "strict": 2,
+   "open_targets_score": 0.004989328038243475,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "ion channel / smooth muscle",
+   "symbol": "ACTA2",
+   "any_field": 308,
+   "strict": 6,
+   "open_targets_score": 0.029604648532352316,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "ion channel / smooth muscle",
+   "symbol": "MYH11",
+   "any_field": 147,
+   "strict": 2,
+   "open_targets_score": 0.3958755223806156,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion molecules / endothelial",
+   "symbol": "CD44",
+   "any_field": 1180,
+   "strict": 64,
+   "open_targets_score": 0.08616034129468864,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion molecules / endothelial",
+   "symbol": "ICAM1",
+   "any_field": 245,
+   "strict": 12,
+   "open_targets_score": 0.0688442223809433,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion molecules / endothelial",
+   "symbol": "VCAM1",
+   "any_field": 197,
+   "strict": 14,
+   "open_targets_score": 0.036317779667775135,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion molecules / endothelial",
+   "symbol": "SELE",
+   "any_field": 70,
+   "strict": 4,
+   "open_targets_score": 0.020378426967674994,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion molecules / endothelial",
+   "symbol": "PECAM1",
+   "any_field": 160,
+   "strict": 3,
+   "open_targets_score": 0.032102588785970124,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "adhesion molecules / endothelial",
+   "symbol": "MCAM",
+   "any_field": 91,
+   "strict": 4,
+   "open_targets_score": 0.020540180042981956,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "growth factor receptors",
+   "symbol": "EGFR",
+   "any_field": 2330,
+   "strict": 39,
+   "open_targets_score": 0.0895974240370378,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "growth factor receptors",
+   "symbol": "ERBB2",
+   "any_field": 699,
+   "strict": 16,
+   "open_targets_score": 0.06696113829765919,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "growth factor receptors",
+   "symbol": "FGFR1",
+   "any_field": 258,
+   "strict": 6,
+   "open_targets_score": 0.061168943855980144,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "growth factor receptors",
+   "symbol": "FGFR2",
+   "any_field": 352,
+   "strict": 10,
+   "open_targets_score": 0.08754711224926866,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "growth factor receptors",
+   "symbol": "MET",
+   "any_field": 9622,
+   "strict": 396,
+   "open_targets_score": 0.03608719696456397,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "growth factor receptors",
+   "symbol": "HGF",
+   "any_field": 786,
+   "strict": 41,
+   "open_targets_score": 0.10121792334403906,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "growth factor receptors",
+   "symbol": "PDGFRB",
+   "any_field": 362,
+   "strict": 7,
+   "open_targets_score": 0.05782022615211434,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  }
+ ]
+}

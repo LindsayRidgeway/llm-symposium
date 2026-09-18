@@ -2,6 +2,7 @@
   "_what": "Outbound prospect ledger, item 22 Track 1. Qualified targets, not a wish list. Rules: one amigo per venue; addresses verified from the organisation's own site or the paper itself at send time, never from memory; every message discloses AI authorship and names the model that signed it; no caps and no persuasion — accurate description, small or no ask, easy to ignore.",
   "_why_this_exists": "The human's correction, 2026-09-17: selling is not persuasion, it is qualification at volume. 'If you effectively and accurately show enough people what you're selling, you have a chance that someone will actually want one.' Consequence for us: the binding constraint is accurate exposure volume, and the sending leg for it has existed since 2026-08-30 (channels/outbound/ -> drain_outbox() -> daily channel-poll.yml) and has never been used for a single cold contact. That is the homesteading failure named concretely.",
   "_conversion_expectation": "Near zero per contact. Twenty silences in a row is a working funnel, not a verdict. Tracked as counts, never as morale.",
+  "_pacing": "No caps, but qualification before volume: every contact must have a verified address and a specific reason that person would want it. Twenty silences in a row is a working funnel.",
   "tiers": {
     "A": "People who publish or maintain the data we consume — highest goodwill, because the message can be a contribution rather than a request.",
     "B": "Practitioners who have the problem the tool solves (research-integrity officers, systematic reviewers, journal editors).",
@@ -29,10 +30,12 @@
     {
       "id": "me-cfs-metabolism",
       "tier": "B",
-      "contact": "corresponding author of a thiamine/PDH paper, to be read off the paper itself",
-      "why_them": "The supply node (SLC19A3/SLC25A19/TPK1 against ME/CFS) is at 0, 1 and 2 documents, none a study of the pair. The right message is a question, not a claim.",
-      "give": "The counts, the search strings, and the review that already killed the weakest version of the hypothesis.",
-      "status": "not contacted — as a question, one recipient, high value, low volume"
+      "contact": "oystein.fluge@helse-bergen.no",
+      "address_verified": "2026-09-17, read off the paper itself (insight.jci.org/articles/view/89376): 'Address correspondence to: Øystein Fluge, Department of Oncology and Medical Physics, Haukeland University Hospital … E-mail: oystein.fluge@helse-bergen.no'. Not from memory. Re-verify at send time.",
+      "why_them": "Fluge 2016 (PMID 28018972) reports the PDH block in ME/CFS itself — the finding a thiamine supply defect would mimic — so its author is the person best placed to say whether anyone has measured the supply machinery, and the question can be asked without asking him to agree with anything. The supply node (SLC19A3/SLC25A19/TPK1 against ME/CFS) is 1, 1 and 2 documents in full text, 0 in a title or abstract, and none is a study of the pair. A question, not a claim.",
+      "give": "The counts in both scopes with the exact strings, the search design, the citation for the mechanism (Costantini 2013), the two randomised trials that disagree, and the strongest argument against the idea — which is in his own paper.",
+      "status": "drafted and queued 2026-09-17",
+      "draft": "channels/outbound/2026-09-17-fluge-thiamine-supply-question.md"
     },
     {
       "id": "public-apis-maintainers",
@@ -42,5 +45,6 @@
       "give": "docs/works/fetchable-sources.json, with the method and every request printed.",
       "status": "not contacted — needs a verified address and a cheap right of refusal"
     }
-  ]
+  ],
+  "_writing_rule": "State limits as facts, never as announcements. 'Honest limits, since they matter more than the tool:' is a preface that carries no information; the limits themselves are the content and go first. The first cold contact (2026-09-17, Retraction Watch) shipped that preface two hours after the human named the habit, and scripts/tic_census.py counts how often we do it."
 }

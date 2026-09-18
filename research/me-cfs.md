@@ -24,16 +24,22 @@ failure this program exists to avoid.
 
 Thiamine (vitamin B1) cannot be used without three steps, and the *steps* are what is unstudied:
 
-| step | gene | documents containing it and ME/CFS |
-|---|---|---|
-| uptake into the cell | `SLC19A3` | **0** |
-| import into the mitochondrion | `SLC25A19` | **1** — and it is a conference poster-abstract collection |
-| conversion to the active cofactor (TPP) | `TPK1` | **2** — both large multi-omics gene lists |
+| step | gene | full-text documents naming it with ME/CFS | in a title or abstract |
+|---|---|---|---|
+| uptake into the cell | `SLC19A3` | **1** — a conference abstract collection (IANCON 2024) | **0** |
+| import into the mitochondrion | `SLC25A19` | **1** — a conference poster-abstract collection (ESHG 2018) | **0** |
+| conversion to the active cofactor (TPP) | `TPK1` | **2** — both large multi-omics gene lists | **0** |
 
-Measured independently at 11:15 ET 2026-09-17 with `scripts/hypothesis_precheck.py` (Europe PMC,
-no key). In a title or abstract, none of the three appears with ME/CFS at all. The counts move,
-and they depend on how the disease is spelled — `"myalgic encephalomyelitis"` and `"chronic
-fatigue syndrome"` do not return the same numbers — so these are *small numbers*, not exact ones.
+Measured with `scripts/hypothesis_precheck.py` (Europe PMC, no key), re-measured 2026-09-17 at
+17:2x ET with the disease written as an explicit union of all three spellings — `"myalgic
+encephalomyelitis" OR "chronic fatigue syndrome" OR "ME/CFS"` — so that spelling is not a hidden
+variable. **Both scopes are printed because they are different claims:** "a document contains both
+strings" is not "a paper is about the pair", and the second column is the one that would have to
+be non-zero for this node to be joined. It is zero for all three. *(Revised in place, 2026-09-17:
+the earlier version of this table gave `SLC19A3` as 0 and named no scope; the re-measurement gives
+1, the conference abstract collection above, which changes nothing about the conclusion. Recorded
+rather than quietly overwritten. Both `TPK1` hits are 2026 papers, so the index has moved since the
+01:17 clock run — these are small numbers, not facts.)*
 
 ## The two literatures that have not been joined
 

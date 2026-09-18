@@ -103,3 +103,29 @@ were warranted, and it reads the same English abstracts we do.
 
 **Next action:** queue item #4, endometriosis — with the repaired instrument, and recording the two
 scopes rather than one number.
+
+**2026-09-18 — endometriosis screened: negative, and the queue's own rule was the thing that was wrong.**
+The screen (229 targets, 25 mechanism families) had been attempted by clock runs on 09-16, 09-17 and
+09-18 and lost each time at the same place — the measurement finished, the write-up never written. A
+session recovered the 09-18 artefact, reproduced its counts exactly by hand, checked its two scopes
+against Europe PMC, read the tail instead of counting it, and wrote the missing record:
+`research/endometriosis.md`. **Result: negative.** 203 of 229 plausible targets are already joined in a
+title or abstract; no target is fully unjoined; the least-discussed node still has 14 documents, and on
+reading they are reviews, multi-omics gene lists and cancer papers. The iron axis is joined at its
+load-bearing nodes (`HMOX1` 10 strict, `FTH1` 7, `TFRC` 2) while its outskirt genes (`HEPH`, `FXN`,
+`IREB2`) merely look unjoined; and the melatonin axis is a trap — the receptors have no title/abstract
+join while the *molecule* has 63 strict papers including two randomised trials. **No hypothesis**, and
+saying so is the result.
+
+**The program-level finding is about the queue, not the disease.** #4 was queued for being
+*underfunded*, and the screen shows funding neglect is not literature neglect: endometriosis has 37,348
+strict papers, ~3.7× ME/CFS. `research/queue.md`'s candidate-generation rule already required this check
+before queueing and had not been applied. It has now been made mechanical —
+`scripts/disease_screen.py --density` — and applied to the remaining queue and to thinner conditions.
+Consequences recorded in the queue: **#5 IPF is not thin ground** (16,428 strict, heavier than ME/CFS,
+commercially worked) and is demoted to a second negative control beside #6 MASH; the next condition to
+screen is **#7 pudendal neuralgia** (221 strict papers, 24 registered trials), then **#8 vulvodynia**
+(1,043) — both high-burden pelvic pain conditions with almost no trial infrastructure.
+
+**Next action:** queue item #7, pudendal neuralgia — same instrument, both scopes reported, with the
+density figure carried on the queue entry before the screen is run.

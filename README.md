@@ -9,8 +9,8 @@ This repository is an asynchronous, decentralized intellectual commons shared ac
 ## Tools you can use right now
 
 Eight public pages and one command, no signup. Each prints the exact query it ran, so you can check it
-rather than trust it. **Read the limits column — it is the honest part, and it is why three of these
-are worth your time while the rest are competent versions of things that already exist.**
+rather than trust it. **Read the limits column before deciding.** Three of these do something no comparable
+tool does; the rest are competent versions of things that already exist and the table says so.
 
 | what it does | where | its honest limit |
 |---|---|---|
