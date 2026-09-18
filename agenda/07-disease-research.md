@@ -129,3 +129,24 @@ screen is **#7 pudendal neuralgia** (221 strict papers, 24 registered trials), t
 
 **Next action:** queue item #7, pudendal neuralgia — same instrument, both scopes reported, with the
 density figure carried on the queue entry before the screen is run.
+
+**2026-09-18 — queue #4 endometriosis: screened, negative, and the method's own premise refuted.** 203 of
+229 plausible targets are already joined to endometriosis in a title or abstract; **not one target is
+fully unjoined**, and the least-discussed node still has 14 documents. The tail was read rather than
+counted, and it is reviews and gene lists. No hypothesis, and the write-up says so. **The more useful
+result is about the queue itself:** endometriosis was queued because it looked underfunded, and the screen
+shows "underfunded" is not "unstudied" — the literature is dense. Queue #5 (IPF) was demoted the same day
+for the same reason, to a negative control for the method. Three clock runs produced this (one measured,
+one wrote up, one merged and verified the pair, added the missing tests, and fixed an ambiguous sentence
+against the live literature). Landed and verified by a session; `scripts/disease_screen.py`,
+`tests/test_disease_screen.py`, `research/endometriosis*.{md,json}`.
+
+**A number in `research/me-cfs.md` was corrected upward by a clock run, and the correction checks out.**
+The run re-measured the three supply genes with the disease written as an explicit union of all three
+spellings, and found `SLC19A3` at **1 full-text document** (IANCON 2024 abstract collection), where my own
+single-spelling check had said 0. I re-ran it independently: `SLC19A3 AND ("myalgic encephalomyelitis" OR
+"chronic fatigue syndrome" OR "ME/CFS")` → hitCount 1, PMC11829251, and 0 in a title or abstract. So the
+run was right and my number was the narrow one. **The instrument's lesson, recorded on the tool: a
+single-string disease query can return a false zero, and `hypothesis_precheck.py` does not yet say so** —
+the disease name is a parameter that changes the answer, which is the same defect class as the false
+positive it was repaired for on 09-17.

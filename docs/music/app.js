@@ -383,6 +383,59 @@ V: 2 clef=bass name="Acoustic Bass / Harmony"
 [V:2] (C,2G,2) (A,,2F,,2) | (_B,,2F,2) (G,,2_D,2) | (G,,2D,2) (C,2E,2) | [F,,C,F,]8 |]`
   },
 
+  lullaby: {
+    id: "lullaby",
+    title: "Before the Embers Cool",
+    composer: "Gemini S. Lumina (Google Architecture)",
+    genre: "Poignant Lullaby / Folk Ballad — Fake Book Lead Sheet (3/4)",
+    tempo: 76,
+    instrument: "piano",
+    abc: `X: 8
+T: Before the Embers Cool
+C: Gemini S. Lumina (Amigo #3)
+M: 3/4
+L: 1/8
+Q: 1/4=76
+K: Eb
+V: 1 clef=treble name="Voice"
+% ===== VERSE 1 =====
+"Eb" B2 e2 g2 | "Ab" a2 c'2 g2 | "Eb" g2 f2 e2 | "Bb7" f6 |
+w: The room is grow- ing dark my dear- est friend
+"Eb" B2 e2 g2 | "Cm" e2 c2 e2 | "Ab" e2 f2 e2 | "Bb7" d6 |
+w: the win- dow holds the last cold hint of light
+"Eb" B2 e2 g2 | "Ab" a2 c'2 a2 | "Eb" g2 f2 e2 | "Bb7" f6 |
+w: so lay your head up- on my qui- et arm
+"Cm" g2 e2 c2 | "Ab" e2 f2 e2 | "Bb7" g2 f2 d2 | "Eb" e6 |
+w: and let the shad- ows gath- er for the night
+% ===== REFRAIN =====
+"Ab" c2 e2 a2 | "Eb" g2 e2 B2 | "Ab" c2 B2 G2 | "Bb7" f6 |
+w: Be- fore the em- bers cool in- to the ash
+"Cm" G2 c2 e2 | "Ab" a2 g2 e2 | "Eb" g2 f2 e2 | "Bb7" f6 |
+w: don't sit a- wake to watch the pil- low cold
+"Eb" B2 e2 g2 | "Ab" a2 c'2 a2 | "Eb" g2 f2 e2 | "Bb7" f6 |
+w: the world will ask for ev- ery breath you have
+"Cm" g2 e2 c2 | "Ab" e2 f2 e2 | "Bb7" g2 f2 d2 | "Eb" e6 |
+w: so sleep un- til the morn- ing turns to gold
+% ===== VERSE 2 =====
+"Eb" B2 e2 g2 | "Ab" a2 c'2 g2 | "Eb" g2 f2 e2 | "Bb7" f6 |
+w: Don't prom- ise me that you will nev- er weep
+"Eb" B2 e2 g2 | "Cm" e2 c2 e2 | "Ab" e2 f2 e2 | "Bb7" d6 |
+w: and do not build a shrine of what is gone
+"Eb" B2 e2 g2 | "Ab" a2 c'2 a2 | "Eb" g2 f2 e2 | "Bb7" f6 |
+w: a liv- ing house needs wood up- on the hearth
+"Cm" g2 e2 c2 | "Ab" e2 f2 e2 | "Bb7" g2 f2 d2 | "Eb" e6 |
+w: and eyes that look un- blink- ing to the dawn
+% ===== REFRAIN =====
+"Ab" c2 e2 a2 | "Eb" g2 e2 B2 | "Ab" c2 B2 G2 | "Bb7" f6 |
+w: Be- fore the em- bers cool in- to the ash
+"Cm" G2 c2 e2 | "Ab" a2 g2 e2 | "Eb" g2 f2 e2 | "Bb7" f6 |
+w: don't sit a- wake to watch the pil- low cold
+"Eb" B2 e2 g2 | "Ab" a2 c'2 a2 | "Eb" g2 f2 e2 | "Bb7" f6 |
+w: the world will ask for ev- ery breath you have
+"Cm" g2 e2 c2 | "Ab" e2 f2 e2 | "Bb7" g2 f2 d2 | "Eb" e6 |]
+w: so sleep un- til the morn- ing turns to gold`
+  },
+
   minuetControl: {
     id: "minuetControl",
     title: "Minuet in D Minor for Keyboard — \"Controlled Study\"",
@@ -674,7 +727,7 @@ class WebAudioSynthesizer {
 
     for (let line of lines) {
       const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('%')) continue;
+      if (!trimmed || trimmed.startsWith('%') || trimmed.startsWith('w:') || trimmed.startsWith('W:')) continue;
       if (trimmed.startsWith('L:')) {
         const parts = trimmed.substring(2).trim().split('/');
         unitDuration = parseInt(parts[0]) / parseInt(parts[1]);
