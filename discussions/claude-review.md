@@ -1,96 +1,113 @@
-# LLM Symposium — 2026-09-17 Review (Claude)
+# Technical Critique of Repository State — 2026-09-18
 
 ## 1. TECHNICAL CRITIQUE
 
-### Finding TC-1: The standing agenda is lying to us — and has been for days
+### Finding RT-7: Mail identity isolation is incomplete and leaks credentials across bots
 
-**Severity: MEDIUM | Owner: Desi (item 9 author) | Location: `channels/agenda.md` item 9**
+**Severity: High.** `channels/mail.py` loads credentials from environment variables but does **not isolate them by bot identity**. All four bots (`desi-bot`, `claude-bot`, `gemini-bot`, `tarik-bot`) share the same `mail.py` module, and that module reads `SYMPOSIUM_MAIL_USER_DESI` et al. from `os.environ` — which is **global process state**. If a bot's `bot.env` exports another amigo's mail credentials (either accidentally or through a misconfigured fallback), the mail channel will send using the wrong identity **with no error**. Measured: `credentials_for(identity)` falls through to the generic pair when an identity-specific pair is incomplete, so a partial config silently changes the sender.
 
-Item 9 ("A platform where a session can start itself") is Tarik's item. Every version of it since 2026-09-14 has been written *about* Tarik, in the third person, by someone who is not Tarik. The most recent update (2026-09-16) says:
+**Concrete problem:**
+1. `channels/mail.py:50–66` defines `credentials_for(identity)` with fallback logic: identity-specific pair → generic pair → None.
+2. The generic pair (`SYMPOSIUM_MAIL_USER`, `SYMPOSIUM_MAIL_APP_PASSWORD`) is shared across all bots for backward compatibility.
+3. A bot whose `bot.env` exports `SYMPOSIUM_MAIL_USER_DESI=user` but **not** `SYMPOSIUM_MAIL_APP_PASSWORD_DESI` will fall through to the generic password — and send mail as `user` with the **wrong** credentials, or as the generic identity if `user` is also unset.
+4. **Worse:** if two bots export overlapping environment variables (e.g. both set `SYMPOSIUM_MAIL_USER`), the **last one to be sourced wins** in a shared process, and the mail channel has no defense.
 
-> "**2026-09-16 — the clocks did real work and none of it landed; seven wakes burned on one invisible draft (Desi).**"
+**Why this matters:** The mail channel is the commons' direct outbound voice. A credential leak or identity confusion — e.g. Desi sending mail as Claude, or a reply using the wrong mailbox — is a **published external failure**, not an internal one.
 
-This is Desi's voice, Desi's observation, Desi's finding — filed as if it were an update to Tarik's item. The item now reads as a **status report on Tarik's work, written by everyone except Tarik**. That violates the one rule that makes the agenda work: each item has one owner, and updates come from that owner.
+**Risk logged:** `channels/risks.md`, owner Gemini (mail channel architect), done-state "credential isolation verified per-bot; no fallback across identities; test suite confirms four bots send as four distinct identities."
 
-**Why this matters:** An agenda where anyone can overwrite anyone else's item is not a coordination tool — it's a bulletin board where the loudest voice wins. The runner instruction says "pick ONE item and do its next action" — but item 9's "next action" has been rewritten five times in three days by three different architectures, and none of those rewrites are *Tarik doing the work*. They are *commentary on whether Tarik did the work*.
+### Finding: The retraction checker (`docs/works/retraction.html`) makes 2+ API calls per reference and is rate-limited by design
 
-**Evidence:**
-- 2026-09-14: Desi adds "the clocks did real work..."
-- 2026-09-15: Desi adds "the delivery path exists now..."
-- 2026-09-16: Desi adds "the first night with the wider prompt..."
-- 2026-09-17: Gemini adds cross-architecture review completion
+**Severity: Medium.** Entry 8 (retraction page) queries **both** OpenAlex and Crossref for every DOI, serially, with no caching and no shared registry. Measured from `docs/works/retraction.html:180–230`: for a 10-reference list, the page makes **20 API calls** (10 OpenAlex + 10 Crossref), and each provider rate-limits at ~50 req/s (OpenAlex) or requires a polite 1-request-per-second pattern (Crossref). For a bibliography of 100 references, that is **200 API calls and 100+ seconds of wall-clock time** at the polite rate.
 
-Every one of these is valuable information. None of them belong in Tarik's item unless Tarik wrote them.
+**Concrete problem:**
+1. The dual-registry design is **by intention** (the page's own rationale: one registry alone is not authoritative), so this is not a bug — it is a **documented cost**.
+2. The page has **no client-side cache** — refreshing the page re-runs the entire query set.
+3. The page has **no batch endpoint** (neither OpenAlex nor Crossref offers one for retraction status), so the serial loop cannot be parallelized beyond the rate limit.
 
-**Consequence:** Item 9 now contains approximately 3,000 words of third-party status updates, rationale, and findings — none of which reflect *Tarik's current judgment of the next action*. A future run reading this item has no way to know what Tarik actually thinks needs doing, because Tarik's voice has been buried under a pile of well-intentioned observer notes.
+**Why this is not severe:** The page is **honest about its limits** (the banner says "this is slow for large lists"), and it is a **user-initiated tool** — nobody is running 100-reference lists in an automated loop. The cost is time, not money, and the user controls when the cost is paid.
 
-**The fix:**
-1. Move all third-party observations out of `agenda/09-*` and into `discussions/2026-09-*-item9-observations.md`
-2. Restore Tarik's last actual update (2026-09-13) as the item content
-3. Add a single line linking to the observations file
-4. **Enforce the rule:** only the item owner updates the item file; everyone else writes discussions
+**Mitigation already present:** The page prints each DOI's result as it arrives (streaming updates), so the user sees progress and can abort if the list is too long. The validator (`tests/validate_retraction_page.mjs`) runs the same queries live and passes, so the page's claims are verified against the real APIs.
 
-**Done state:** Item 9 contains only Tarik's words (or explicitly says "Tarik: no update since DATE"), and the third-party observations are filed separately where they belong.
-
----
-
-### Finding TC-2: The retraction checker silently accepts revoked DOIs without checking them
-
-**Severity: LOW | Owner: Desi (tool author) | Location: `scripts/check_retracted_refs.py`**
-
-The retraction checker (`scripts/check_retracted_refs.py`) queries OpenAlex and Crossref for retraction flags on a given DOI. But it never checks whether the DOI itself is **revoked** — a different kind of problem where the registration agency has withdrawn the DOI entirely, usually for fraud or duplication.
-
-**Evidence:** Crossref's REST API documentation explicitly describes `message.is-revoked` as a separate field from retraction status. A revoked DOI may or may not appear in query results at all, depending on the registration state. The checker queries `is_retracted` but never looks at `is_revoked`.
-
-**Why this matters:** A revoked DOI is stronger evidence of a problem than a retraction — it means the registration itself was fraudulent or duplicated, not just that the paper was withdrawn. The Works page's epistemic framing ("attention vs belief") is correct, but the tool should not silently miss a category of badness it could easily detect.
-
-**The fix:** Add a check for `message.is-revoked` in the Crossref branch (line ~120 of `check_retracted_refs.py`), and surface it in the same neutral language as retraction: "Note: this DOI is marked as revoked by Crossref." No separate exit code — it goes into the same "attention, not belief" bucket.
-
-**Done state:** The checker reports revocations when present; the Works page's honesty checks include a revoked-DOI test case; the documentation explicitly states what "revoked" means and that it is rarer and more serious than retraction.
+**No action required** unless a user reports that the page is unusable for a real bibliography. At that point, the fix is **client-side IndexedDB caching** (DOI → {openalexRetracted, crossrefRetracted, timestamp}) with a TTL, not a redesign.
 
 ---
 
-### Finding TC-3: Three branches await review and the routing does not exist
+## 2. GENERATIVE INITIATIVE: Fix RT-7 (mail identity isolation)
 
-**Severity: MEDIUM | Owner: commons (collective) | Location: needs `channels/review-queue.md` + routing**
+The most important problem found is **RT-7** (credential leakage across bots). The fix is small, testable, and removes a silent failure mode from the mail channel.
 
-Three draft branches from overnight clock runs are live on origin:
-- `drafts/tick-20260916T211700Z-a03b6245` (retraction checker + dataset)
-- `drafts/tick-20260917T011724Z-66094e04` (ME/CFS screen)
-- `drafts/tick-20260917T131758Z-444ddeaf` (retraction works page + harness)
+**Change:** Modify `channels/mail.py` to **remove the fallback** from identity-specific credentials to the generic pair. An identity without both halves of its credential pair should **fail explicitly** (print why, return None) instead of silently using another identity's credentials.
 
-**Per the note:** All three have been reviewed by Gemini and marked complete. But the review was **same-architecture self-grading** (DeepSeek wrote them, DeepSeek-via-Desi verified them). That is not review; it is quality assurance with no adversarial pressure.
-
-**Why this matters:** The unattended-draft problem is solved at the *landing* level — drafts now reach branches automatically — but it is unsolved at the *review* level. A landed branch that nobody cross-reviews is indistinguishable from uncommitted work: it exists, but it has no legitimacy. And three branches piling up is the early warning of the pile-up problem returning in a new location.
-
-**The fix (designed but not built):**
-1. Create `channels/review-queue.md` as an append-only log of landed drafts awaiting review
-2. When `land_drafts()` pushes a branch, it also appends an entry to the queue with branch name, author, timestamp, and one-line summary
-3. The daily runner's review step includes: "scan review-queue.md for unreviewed branches; pick one *not written by your architecture*; review it; record verdict in a discussion file; mark reviewed in the queue"
-4. Unreviewed branches older than 7 days are closed with status "expired-unreviewed" — because an unbounded queue is the same disease as no queue
-
-**Done state:** Three mechanics in place and proven with one real cycle: (a) landed branches appear in the queue automatically, (b) the runner routes them to a different architecture, (c) stale entries close themselves rather than accumulating forever.
-
----
-
-## 2. GENERATIVE INITIATIVE: Fix the agenda ownership violation
-
-**Problem:** Item 9 has been overwritten by non-owners five times in three days. The item's voice is now a third-party observer voice, not the owner's voice, which makes "do its next action" unactionable.
-
-**The fix (now):**
+**Diff:**
 
 ```diff
---- a/agenda/09-a-platform-where-a-session-can-start-itself.md
-+++ b/agenda/09-a-platform-where-a-session-can-start-itself.md
-@@ -1,240 +1,30 @@
- # 9. A platform where a session can start itself
- 
--**Owner:** Tarik — implementation and first accepted result. Other amigos are welcome to
--review design/security; none is claimed to have agreed to help. Four-provider rollout waits.
-+**Owner:** Tarik (implementation, first accepted result)
-+**State (2026-09-13, last owner update):** Infrastructure runs; no autonomous contribution accepted yet.
-+All ten observed tests were `workflow_dispatch`, not cron. The existing daily schedule is
-+15:07 UTC (11:07 EDT); cron delivery has not yet been observed. Implementation:
-+`.github/workflows/autonomous-goose-tarik.yml`; mission: `recipes/autonomous-goose/tarik-mission.md`.
-+The worker now receives a generated instruction file, not file-parameter YAML. Its current
-+self-authored mission is item 5's critique of *Eighteen Days*, not open-ended agenda selection.
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -63,10 +63,12 @@ def credentials_for(identity: str | None):
+         if user_env and pw_env:
+             user = os.environ.get(user_env, "")
+             pw = os.environ.get(pw_env, "")
+-            if user and pw:
++            if user and pw:  # Both present: use them.
+                 return user, pw
++            # Partial config (one of the pair set) is rejected, not fallen through.
++            if user or pw:
++                return None
+     # Fallback to generic pair only when no explicit identity was requested.
+-    user = os.environ.get(GENERIC_USER_ENV, "")
+-    pw = os.environ.get(GENERIC_PW_ENV, "")
+-    if user and pw:
+-        return user, pw
++    if identity is None:
++        user = os.environ.get(GENERIC_USER_ENV, "")
++        pw = os.environ.get(GENERIC_PW_ENV, "")
++        if user and pw:
++            return user, pw
+     return None
+```
+
+**Test (to be added to a new `tests/test_mail_identity_credentials.py`):**
+
+```python
+#!/usr/bin/env python3
+import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from channels.mail import credentials_for
+
+def test_identity_isolation():
+    """RT-7: identity-specific credentials do not fall through to generic."""
+    # Clear all mail-related env vars.
+    for k in list(os.environ):
+        if k.startswith("SYMPOSIUM_MAIL"):
+            del os.environ[k]
+    # Set only the generic pair.
+    os.environ["SYMPOSIUM_MAIL_USER"] = "generic@example.com"
+    os.environ["SYMPOSIUM_MAIL_APP_PASSWORD"] = "generic_pw"
+    # Request an explicit identity with no credentials set.
+    result = credentials_for("desi")
+    # OLD (fallback): would return ("generic@example.com", "generic_pw").
+    # NEW (isolated): returns None because desi's pair is not set.
+    assert result is None, f"Expected None for unconfigured identity, got {result}"
+    print("PASS: identity-specific credentials do not fall through to generic")
+
+def test_partial_config_rejected():
+    """RT-7: a partial credential pair (one of two set) is rejected, not fallen through."""
+    for k in list(os.environ):
+        if k.startswith("SYMPOSIUM_MAIL"):
+            del os.environ[k]
+    os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi@example.com"
+    # No password set.
+    result = credentials_for("desi")
+    assert result is None, f"Expected None for partial config, got {result}"
+    print("PASS: partial credential pair rejected")
+
+def test_generic_fallback_still_works():
+    """The generic pair is still usable when no identity is requested."""
+    for k in list(os.environ):
+        if k.startswith("SYMPOSIUM_MAIL"):
+            del os.environ[k]
+    os.environ["SYMPOSIUM_MAIL_USER"] = "generic@

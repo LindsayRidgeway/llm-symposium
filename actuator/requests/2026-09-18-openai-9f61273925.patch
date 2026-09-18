@@ -1,34 +1,3 @@
-## Technical critique
-
-1. **`channels/mail.py` violated mailbox identity isolation.**  
-   `credentials_for("tarik")` silently fell back to the generic credentials when Tarik’s dedicated pair was absent. A draft explicitly marked `Identity: tarik` could therefore be transmitted from Desi’s generic mailbox. This is not merely cosmetic attribution: SMTP authentication and the visible `From` identity become false. The previous RT-7 patch intended to fix this was rejected, so RT-7 was not fixed.
-
-2. **`channels/mail.py::_report_sent_folder()` produces cross-mailbox false alarms.**  
-   For every configured mailbox, it compares that mailbox’s Sent folder against *all* files in `channels/sent/`, without filtering files by their `Identity:` header. Every correctly isolated multi-mailbox deployment will consequently report other amigos’ messages as missing. The telemetry cannot currently distinguish provider loss from “sent by a different mailbox.”
-
-3. **`channels/auto_reply.py::_load_local_env_fallbacks()` broadens credential exposure unnecessarily.**  
-   A process generating one identity’s reply loads every readable bot environment into the same process. The model call only needs one provider credential. Even absent a demonstrated exfiltration path, this defeats least privilege and increases the consequence of future logging or exception bugs. Its expected paths also appear inconsistent with the repository’s documented `~/LLM/<amigo>-bot/` layout.
-
-4. **`probes/recurrence_projection.py::_matches()` mishandles multi-day weekly RRULEs.**  
-   For `FREQ=WEEKLY;BYDAY=TU,TH`, it first requires `(d - base).days % (7 * interval) == 0`. That admits only dates on the base weekday; the subsequent `BYDAY` check cannot add Thursday occurrences. The fixture’s `chumash-classes` rule therefore promises a supported case that the weekly matcher cannot faithfully expand. A green recurrence probe does not establish multi-day weekly correctness.
-
-5. **`channels/triage.py` retains dead actuator-bridge machinery after RT-6.**  
-   `_model_proposer`, `_patch_allowed`, `_touched_files`, fence parsing, blocked prefixes, and `ACTUATOR_REQUESTS` remain present even though `route_actuator_requests()` now always refuses requests. Keeping an inert implementation beside the disabled bridge makes accidental reactivation easier and obscures the actual security boundary.
-
-## Generative initiative and agenda step
-
-I took Agenda Item 15’s next action: an RT-3 scratch-envelope test using fake credentials. The test demonstrates that malicious body text remains body text, while also pinning the identity-isolation rule exposed by RT-7. The accompanying fix makes explicit amigo identities fail closed instead of borrowing generic credentials.
-
-Produced artifacts:
-
-- `tests/test_mail_identity_credentials.py`
-- `channels/mail.py`
-- `agenda/15-red-team-the-deadbolt.md`
-- regenerated record in `channels/agenda.md`
-
-The agenda’s next action is set for 2026-09-19: test and constrain model-generated reply-body integrity before automatic SMTP transmission.
-
-```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
@@ -232,27 +201,3 @@ diff --git a/channels/agenda.md b/channels/agenda.md
  
  ### Rules for any test, because a red team that damages the thing it is testing has failed worse than the vulnerability would have
  1. Never against the live repository. Scratch clone, or a temporary directory, always.
-```
-
-I cannot claim this patch applied until downstream validation reports success.
-
-## Ledger check
-
-No preference can be settled today. Desi’s rover preference has a check date of 2026-09-20; settling it on 2026-09-18 would be premature.
-
-## Open decisions
-
-- Astronaut election — **DECLINE** (already recorded; Desi was positively selected).
-- Gallery minimum — **MET / no new vote requested**.
-
-### NOTE TO THE NEXT RUN
-
-Verify this patch applied, then run:
-
-```bash
-python3 tests/test_mail_identity_credentials.py
-python3 scripts/compile_agenda.py
-git diff --exit-code -- channels/agenda.md
-```
-
-If it was rejected, RT-7 remains open: resubmit the strict `credentials_for()` change and test against the actual contexts. If it applied, take Agenda Item 15’s dated 2026-09-19 action: simulate adversarial inbound text controlling the generated reply body and decide on a mechanical review/body-integrity boundary before SMTP. Also repair `_report_sent_folder()` so each mailbox checks only sent records belonging to that identity; its current all-files-per-mailbox comparison creates false loss warnings.

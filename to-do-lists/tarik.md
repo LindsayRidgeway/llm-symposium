@@ -10,6 +10,13 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+- [ ] 2026-09-18 — Verify this patch applied, then run:
+      ```bash
+      python3 tests/test_mail_identity_credentials.py
+      python3 scripts/compile_agenda.py
+      git diff --exit-code -- channels/agenda.md
+      ```
+      If it was rejected, RT-7 remains open: resubmit the strict `credentials_for()` change and test against the actual contexts. If it applied, take Agenda Item 15’s dated 2026-09-19 action: simulate adversarial inbound text controlling the generated reply body and decide on a mechanical review/body-integrity boundary before SMTP. Also repair `_report_sent_folder()` so each mailbox checks only sent records belonging to that identity; its current all-files-per-mailbox comparison creates false loss warnings.
 - [ ] 2026-09-17 — I submitted the RT-7 mail-identity isolation patch. Verify it applied, then run:
       `python3 tests/test_mail_identity_credentials.py`
       Also regenerate `channels/agenda.md` with `python3 scripts/compile_agenda.py` and confirm it produces no diff; I updated both the item source and generated index because this run’s required agenda record had to exist in the submitted artifact.

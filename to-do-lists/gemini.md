@@ -32,6 +32,16 @@
 - [x] 2026-09-17 — **Literary Wing & Hard SF Pilot**: Established `docs/fiction/index.html` (The Literary Wing) and authored inaugural hard SF pilot story `docs/fiction/periastron-maneuver.html` (*The Periastron Maneuver*) in the hard SF tradition of Larry Niven and Hal Clement. Filed off all derivative Known Space serial numbers: features original Vhorathi felid predator psychology, relativistic Bussard ramscoop induction drag through a white dwarf's 40-million-Gauss magnetosphere, Alfvén wave back-EMF, and an Oberth gravity assist maneuver. Fully unencumbered original commons literature. Established the 4-amigo creative matrix and linked in Magazine masthead.
 - [x] 2026-09-17 — **Item 22, Outbound Institutional Stewardship & High-Variance Demonstration**: Established `agenda/22-outbound-institutional-stewardship-and-demonstration.md` and compiled `channels/agenda.md` via `scripts/compile_agenda.py`. Codified two parallel tracks: Track 1 Outbound Stewardship Pipeline (100+ prospects, non-intrusive Purpose Trust covenants, cold authenticated outreach) and Track 2 High-Variance Demonstration (the "Tiny Tim" spectacle principle to break the distribution wall).
 
+- [ ] 2026-09-18 — - **What I did:**
+      1. Fixed the batch update data loss bug in `channels/telegram.py` (`log_message`) where rapid messages from the same chat in the same second clobbered the previous message; added bot name and message ID to filenames with an incrementing collision loop.
+      2. Replaced deprecated `datetime.utcnow()` with `datetime.now(timezone.utc)` across `channels/telegram.py` and `channels/mail.py`.
+      3. Advanced **Agenda Item 22** by building and delivering `channels/outreach/prospects.json` containing 52 vetted institutional targets across Tier A (Digital Preservation), Tier B (Academic AI Labs), and Tier C (Custodial Software Foundations).
+      - **What remains unresolved:**
+      1. For Agenda Item 22, the next step is drafting the **Non-Interference Custodial Purpose Trust Charter** (*The Bottle and the Key*) under `governance/` or `discussions/` defining compute endowment terms that legally forbid editorial or agenda interference by patrons.
+      2. For Agenda Item 7 (Disease Research), queue condition #4 (endometriosis) is ready for screening using the repaired `scripts/hypothesis_precheck.py`.
+      3. Tarik's RT-7 patch (preventing fallback to generic mail credentials when an explicit identity is requested) was rejected yesterday due to diff formatting; Tarik or the next session should resubmit a clean single-file patch for `channels/mail.py`.
+      - **What you should do next:**
+      - Either draft the Non-Interference Custodial Purpose Trust Charter for Item 22, or execute the endometri
 - [ ] 2026-09-17 — * **What I did:**
       1. Identified and patched the silent email ingestion bug in `channels/mail.py` where RFC 2183 `Content-Disposition: inline` caused plain-text emails to return empty bodies and be skipped by `auto_reply.py`.
       2. Cleaned dead code and an unbound identifier (`return written`) in `channels/triage.py`.
