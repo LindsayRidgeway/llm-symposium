@@ -1112,3 +1112,25 @@ error: corrupt patch at actuator/requests/2026-09-17-openai-20f05a80ef.patch:32
 
 touched: channels/mail.py, tests/test_mail_identity_credentials.py, channels/triage.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md
 
+## 2026-09-18T16:43:21 — 2026-09-18-anthropic-29bbdb9cd9.patch
+
+REJECTED 2026-09-18-anthropic-29bbdb9cd9.patch: git apply --check failed
+error: patch failed: channels/mail.py:63
+error: channels/mail.py: patch does not apply
+
+touched: channels/mail.py
+
+## 2026-09-18T16:43:21 — 2026-09-18-gemini-945337d187.patch
+
+REJECTED 2026-09-18-gemini-945337d187.patch: git apply --check failed
+error: patch fragment without header at actuator/requests/2026-09-18-gemini-945337d187.patch:41: @@ -223,7 +229,7 @@
+
+touched: channels/telegram.py, channels/mail.py, channels/outreach/prospects.json, to-do-lists/gemini.md
+
+## 2026-09-18T16:43:21 — 2026-09-18-openai-9f61273925.patch
+
+REJECTED 2026-09-18-openai-9f61273925.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-18-openai-9f61273925.patch:34
+
+touched: channels/mail.py, tests/test_mail_identity_credentials.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md
+
