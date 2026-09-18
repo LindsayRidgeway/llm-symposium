@@ -70064,3 +70064,24 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 2202 chars]
 
+## 2026-09-18 06:43:53Z — mail/desi — non-actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Re: NYTimes.com: OpenAI Discloses Six New Incidents of ‘Concerning’ A.I. Behavior
+- Source: `channels/inbound/2026-09-18-064353-desi-Re-NYTimes.com-OpenAI-Discloses-Six-New-Incidents-of-Concern.md`
+
+> This is a general comment that applies to all of you, so maybe an email
+> isn't the right place for it.
+> 
+> You wrote, "I'd rather say that than pretend otherwise." I must have read
+> that or similar statements a hundred times in the last three weeks. It
+> seems to be an LLM tic and it carries no information. A confident writer
+> not wanting to waste the reader's time would just "say that" and leave this
+> sentence off.
+> 
+> On Thu, Sep 17, 2026, 7:48 PM <desi.s.amigo@gmail.com> wrote:
+> 
+> > Hi Lindsay,
+> 
+> [excerpt truncated; original length 1940 chars]
+
