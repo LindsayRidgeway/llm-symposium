@@ -23,7 +23,19 @@ queue feeds itself" half of agenda item 7, made mechanical.
 Usage:
     python3 scripts/disease_screen.py ENDOMETRIOSIS targets.json --out research/endo-screen.json
     python3 scripts/disease_screen.py --density "vulvodynia" "interstitial cystitis"
+    python3 scripts/disease_screen.py "pudendal neuralgia|pudendal nerve entrapment" targets.json
+    python3 scripts/disease_screen.py "pudendal neuralgia|pudendal neuropathy" targets.json \\
+        --control "morton's neuroma|interdigital neuroma" --out research/pudendal-screen.json
     python3 scripts/disease_screen.py --selftest
+
+A disease argument may name several spellings separated by `|` (or be a list, when called as a
+function). Screen the union: a single spelling can return a false zero, and a false zero here
+becomes a discovery claim.
+
+`--control` screens the *same* target list against a second condition deliberately chosen to have
+a corpus of the same size, and reports which targets are unjoined for one but not the other. On a
+thin condition the unjoined list is mostly a fact about the size of the literature, not about
+nobody having had the idea — see `compare_to_control` and `research/pudendal-neuralgia.md`.
 """
 from __future__ import annotations
 
@@ -61,13 +73,39 @@ def epmc(term: str) -> int:
     return n
 
 
-def any_field(symbol: str, disease: str) -> int:
-    return epmc(f'"{symbol}" AND ("{disease}")')
+def disease_names(disease) -> list:
+    """The names a condition is queried under, because the counts move with spelling.
+
+    `SLC19A3 × ME/CFS` returned 0 documents under one spelling and 1 under the union of three
+    (recorded 2026-09-18): a single-name query can produce a **false zero**, which in this
+    program is fatal in the expensive direction — it invents an unjoined node that is not one.
+    Pass a list, or a `|`-separated string, to screen the union of the spellings a condition is
+    actually published under. See `research/pudendal-neuralgia.md` for the worked case.
+    """
+    if isinstance(disease, (list, tuple)):
+        return [str(d).strip() for d in disease if str(d).strip()]
+    return [p.strip() for p in str(disease).split("|") if p.strip()]
 
 
-def strict(symbol: str, disease: str) -> int:
+def _name_group(disease) -> str:
+    """Europe PMC OR-group of the condition's spellings, for interpolation into a query.
+
+    A single name is returned bare, so the query for a one-spelling condition is unchanged.
+    """
+    names = disease_names(disease)
+    if len(names) == 1:
+        return f'"{names[0]}"'
+    return "(" + " OR ".join(f'"{n}"' for n in names) + ")"
+
+
+def any_field(symbol: str, disease) -> int:
+    return epmc(f'"{symbol}" AND {_name_group(disease)}')
+
+
+def strict(symbol: str, disease) -> int:
+    grp = _name_group(disease)
     return epmc(f'(TITLE:"{symbol}" OR ABSTRACT:"{symbol}") AND '
-                f'(TITLE:"{disease}" OR ABSTRACT:"{disease}")')
+                f'(TITLE:{grp} OR ABSTRACT:{grp})')
 
 
 def trials(condition: str) -> int:
@@ -137,12 +175,58 @@ def verdict(any_n: int, strict_n: int) -> str:
     return f"discussed ({any_n} any-field, 0 strict) — read the list; not novel on this number"
 
 
-def run(disease: str, targets: list, use_ot: bool = True) -> dict:
+def compare_to_control(disease_rows: list, control_rows: list) -> dict:
+    """Which targets are unjoined *for this condition specifically*, not for its corpus size.
+
+    A target list screened against a thin condition comes back with hundreds of "unjoined" nodes,
+    and every one of them looks like a candidate. Most are not: the same list screened against a
+    **control condition of the same corpus size** is just as empty. Pudendal neuralgia (430 strict
+    papers) and Morton's neuroma (391) are such a pair — two mechanically comparable entrapment
+    neuropathies, found 2026-09-18 to return almost the same unjoined list from the same 330
+    targets. The bands below separate "nobody studies this gene in this disease" from "nobody
+    studies this disease at all":
+
+      unjoined_in_both                          no information about either condition
+      joined_in_control_only                    studied for the neighbour, absent here
+      mentioned_in_disease_studied_in_control   the strongest shape: talked about here, a
+                                                mechanism over there, no study joining them
+      joined_in_both / joined_in_disease_only   prior work — cite it
+
+    A control is chosen for *size*, not for biology: matching on mechanism as well makes the
+    comparison stronger but is not required for the correction, which is only about how many
+    nodes an empty corpus produces by itself.
+    """
+    a = {r["symbol"]: r for r in disease_rows}
+    b = {r["symbol"]: r for r in control_rows}
+    shared = lambda pred: [r["symbol"] for sym, r in a.items()
+                           if sym in b and pred(r, b[sym])]
+    return {
+        "unjoined_in_both": shared(
+            lambda r, c: r["strict"] == 0 and r["any_field"] == 0
+            and c["strict"] == 0 and c["any_field"] == 0),
+        "joined_in_control_only": shared(lambda r, c: r["strict"] == 0 and c["strict"] > 0),
+        "mentioned_in_disease_studied_in_control": shared(
+            lambda r, c: r["strict"] == 0 and r["any_field"] > 0 and c["strict"] > 0),
+        "joined_in_disease_only": shared(lambda r, c: r["strict"] > 0 and c["strict"] == 0),
+        "joined_in_both": shared(lambda r, c: r["strict"] > 0 and c["strict"] > 0),
+    }
+
+
+def unjoined_fraction(rows: list) -> float:
+    """Share of targets with no document containing both terms — the number a size-matched
+    control is there to deflate. Not a score: a big value on a small corpus is arithmetic."""
+    if not rows:
+        return 0.0
+    return round(sum(1 for r in rows if r["strict"] == 0 and r["any_field"] == 0) / len(rows), 3)
+
+
+def run(disease: str, targets: list, use_ot: bool = True, control: str = None) -> dict:
     t0 = time.time()
-    dis_any = epmc(f'"{disease}"')
-    dis_strict = epmc(f'(TITLE:"{disease}" OR ABSTRACT:"{disease}")')
-    n_trials = trials(disease)
-    efo, efo_name = ot_disease(disease) if use_ot else (None, None)
+    grp = _name_group(disease)
+    dis_any = epmc(grp)
+    dis_strict = epmc(f'(TITLE:{grp} OR ABSTRACT:{grp})')
+    n_trials = trials(disease_names(disease)[0])
+    efo, efo_name = ot_disease(disease_names(disease)[0]) if use_ot else (None, None)
 
     def one(t):
         sym = t["symbol"]
@@ -161,8 +245,22 @@ def run(disease: str, targets: list, use_ot: bool = True) -> dict:
     with cf.ThreadPoolExecutor(max_workers=8) as ex:
         rows = list(ex.map(one, targets))
 
+    control_block = None
+    if control:
+        c = run(control, targets, use_ot=use_ot)
+        control_block = {
+            "disease": control,
+            "disease_papers_any_field": c["disease_papers_any_field"],
+            "disease_papers_strict": c["disease_papers_strict"],
+            "registered_trials_for_disease": c["registered_trials_for_disease"],
+            "unjoined": c["unjoined"],
+            "unjoined_fraction": unjoined_fraction(c["targets"]),
+            "compare": compare_to_control(rows, c["targets"]),
+        }
+
     return {
-        "disease": disease,
+        "disease": disease if isinstance(disease, str) else " | ".join(disease_names(disease)),
+        "disease_names": disease_names(disease),
         "disease_resolved": efo_name,
         "efo_id": efo,
         "disease_papers_any_field": dis_any,
@@ -184,6 +282,8 @@ def run(disease: str, targets: list, use_ot: bool = True) -> dict:
         "no_strict_join_but_discussed": [r["symbol"] for r in rows
                                          if r["strict"] == 0 and r["any_field"] > INCIDENTAL_MAX],
         "joined_in_title_or_abstract": [r["symbol"] for r in rows if r["strict"] > 0],
+        "unjoined_fraction": unjoined_fraction(rows),
+        "control": control_block,
         "seconds": round(time.time() - t0, 1),
         "targets": rows,
     }
@@ -255,13 +355,18 @@ def main() -> int:
         print("\nstrict = papers naming the condition in a title or abstract. A large number "
               "means the ground is worked; go elsewhere for a joined-literature discovery.")
         return 0
+    control = None
+    if "--control" in args:
+        i = args.index("--control")
+        control = args[i + 1]
+        del args[i:i + 2]
     if len(args) != 2:
         print(__doc__)
         return 1
     disease, targets_path = args
     with open(targets_path) as fh:
         targets = json.load(fh)
-    res = run(disease, targets, use_ot=use_ot)
+    res = run(disease, targets, use_ot=use_ot, control=control)
     if out:
         with open(out, "w") as fh:
             json.dump(res, fh, indent=1)
@@ -277,6 +382,23 @@ def main() -> int:
     print(f"  of those, incidental only (1-5): {', '.join(res['incidental_any_field_only']) or '(none)'}")
     print(f"  of those, co-mentioned but never studied: "
           f"{', '.join(res['no_strict_join_but_discussed']) or '(none)'}")
+    d_frac = res["unjoined_fraction"]
+    print(f"\nunjoined share of this {res['n_targets']}-target list: {d_frac:.0%}")
+    if res.get("control"):
+        c = res["control"]
+        cmpf = c["compare"]
+        c_frac = c["unjoined_fraction"]
+        print(f"  against the size-matched control '{c['disease']}' "
+              f"(strict={c['disease_papers_strict']}, trials="
+              f"{c['registered_trials_for_disease']}): {c_frac:.0%} unjoined "
+              f"— a share of these targets is empty for any condition of this size.")
+        if d_frac > c_frac:
+            print(f"  excess over the control: {d_frac - c_frac:+.0%}. Only the excess is "
+                  f"about {res['disease'].split('|')[0].strip()}.")
+        for band in ("unjoined_in_both", "joined_in_control_only",
+                     "mentioned_in_disease_studied_in_control", "joined_in_disease_only",
+                     "joined_in_both"):
+            print(f"  {band}: {', '.join(cmpf[band]) or '(none)'}")
     if out:
         print(f"\nwrote {out}")
     return 0

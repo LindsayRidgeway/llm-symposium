@@ -1,0 +1,1322 @@
+[
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN9A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN10A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN11A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN1A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN2A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN3A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN4A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN5A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN7A"
+ },
+ {
+  "category": "voltage-gated sodium channel",
+  "symbol": "SCN8A"
+ },
+ {
+  "category": "sodium channel auxiliary",
+  "symbol": "SCN1B"
+ },
+ {
+  "category": "sodium channel auxiliary",
+  "symbol": "SCN2B"
+ },
+ {
+  "category": "sodium channel auxiliary",
+  "symbol": "SCN3B"
+ },
+ {
+  "category": "sodium channel auxiliary",
+  "symbol": "SCN4B"
+ },
+ {
+  "category": "voltage-gated calcium channel",
+  "symbol": "CACNA1A"
+ },
+ {
+  "category": "voltage-gated calcium channel",
+  "symbol": "CACNA1B"
+ },
+ {
+  "category": "voltage-gated calcium channel",
+  "symbol": "CACNA1C"
+ },
+ {
+  "category": "voltage-gated calcium channel",
+  "symbol": "CACNA1E"
+ },
+ {
+  "category": "voltage-gated calcium channel",
+  "symbol": "CACNA1G"
+ },
+ {
+  "category": "voltage-gated calcium channel",
+  "symbol": "CACNA1H"
+ },
+ {
+  "category": "voltage-gated calcium channel",
+  "symbol": "CACNA1I"
+ },
+ {
+  "category": "calcium channel auxiliary",
+  "symbol": "CACNA2D1"
+ },
+ {
+  "category": "calcium channel auxiliary",
+  "symbol": "CACNA2D2"
+ },
+ {
+  "category": "calcium channel auxiliary",
+  "symbol": "CACNB2"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNQ2"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNQ3"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNQ5"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNS1"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNA1"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNA2"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNMA1"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNK2"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNK4"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNJ3"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNJ5"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNJ6"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNJ9"
+ },
+ {
+  "category": "potassium channel",
+  "symbol": "KCNJ11"
+ },
+ {
+  "category": "pacemaker channel",
+  "symbol": "HCN1"
+ },
+ {
+  "category": "pacemaker channel",
+  "symbol": "HCN2"
+ },
+ {
+  "category": "pacemaker channel",
+  "symbol": "HCN3"
+ },
+ {
+  "category": "pacemaker channel",
+  "symbol": "HCN4"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPV1"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPV2"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPV3"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPV4"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPA1"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPM3"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPM8"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPC5"
+ },
+ {
+  "category": "TRP channel",
+  "symbol": "TRPC6"
+ },
+ {
+  "category": "acid-sensing channel",
+  "symbol": "ASIC1"
+ },
+ {
+  "category": "acid-sensing channel",
+  "symbol": "ASIC2"
+ },
+ {
+  "category": "acid-sensing channel",
+  "symbol": "ASIC3"
+ },
+ {
+  "category": "mechanotransduction",
+  "symbol": "PIEZO1"
+ },
+ {
+  "category": "mechanotransduction",
+  "symbol": "PIEZO2"
+ },
+ {
+  "category": "mechanotransduction",
+  "symbol": "STOML3"
+ },
+ {
+  "category": "mechanotransduction",
+  "symbol": "TMEM120A"
+ },
+ {
+  "category": "purinergic receptor",
+  "symbol": "P2RX3"
+ },
+ {
+  "category": "purinergic receptor",
+  "symbol": "P2RX2"
+ },
+ {
+  "category": "purinergic receptor",
+  "symbol": "P2RX4"
+ },
+ {
+  "category": "purinergic receptor",
+  "symbol": "P2RX7"
+ },
+ {
+  "category": "purinergic receptor",
+  "symbol": "P2RY12"
+ },
+ {
+  "category": "purinergic enzyme",
+  "symbol": "ENTPD1"
+ },
+ {
+  "category": "purinergic enzyme",
+  "symbol": "ENTPD3"
+ },
+ {
+  "category": "purinergic enzyme",
+  "symbol": "NT5E"
+ },
+ {
+  "category": "adenosine receptor",
+  "symbol": "ADORA1"
+ },
+ {
+  "category": "adenosine receptor",
+  "symbol": "ADORA2A"
+ },
+ {
+  "category": "adenosine receptor",
+  "symbol": "ADORA2B"
+ },
+ {
+  "category": "adenosine receptor",
+  "symbol": "ADORA3"
+ },
+ {
+  "category": "opioid receptor",
+  "symbol": "OPRM1"
+ },
+ {
+  "category": "opioid receptor",
+  "symbol": "OPRD1"
+ },
+ {
+  "category": "opioid receptor",
+  "symbol": "OPRK1"
+ },
+ {
+  "category": "opioid receptor",
+  "symbol": "OPRL1"
+ },
+ {
+  "category": "endocannabinoid",
+  "symbol": "CNR1"
+ },
+ {
+  "category": "endocannabinoid",
+  "symbol": "CNR2"
+ },
+ {
+  "category": "endocannabinoid",
+  "symbol": "FAAH"
+ },
+ {
+  "category": "endocannabinoid",
+  "symbol": "MGLL"
+ },
+ {
+  "category": "endocannabinoid",
+  "symbol": "NAAA"
+ },
+ {
+  "category": "endocannabinoid",
+  "symbol": "NAPEPLD"
+ },
+ {
+  "category": "serotonergic",
+  "symbol": "SLC6A4"
+ },
+ {
+  "category": "serotonergic",
+  "symbol": "HTR1A"
+ },
+ {
+  "category": "serotonergic",
+  "symbol": "HTR1B"
+ },
+ {
+  "category": "serotonergic",
+  "symbol": "HTR2A"
+ },
+ {
+  "category": "serotonergic",
+  "symbol": "HTR2C"
+ },
+ {
+  "category": "serotonergic",
+  "symbol": "HTR3A"
+ },
+ {
+  "category": "serotonergic",
+  "symbol": "TPH1"
+ },
+ {
+  "category": "serotonergic",
+  "symbol": "TPH2"
+ },
+ {
+  "category": "noradrenergic",
+  "symbol": "SLC6A2"
+ },
+ {
+  "category": "noradrenergic",
+  "symbol": "ADRA1A"
+ },
+ {
+  "category": "noradrenergic",
+  "symbol": "ADRA2A"
+ },
+ {
+  "category": "noradrenergic",
+  "symbol": "ADRA2B"
+ },
+ {
+  "category": "noradrenergic",
+  "symbol": "ADRB1"
+ },
+ {
+  "category": "noradrenergic",
+  "symbol": "ADRB2"
+ },
+ {
+  "category": "dopaminergic",
+  "symbol": "SLC6A3"
+ },
+ {
+  "category": "dopaminergic",
+  "symbol": "DRD1"
+ },
+ {
+  "category": "dopaminergic",
+  "symbol": "DRD2"
+ },
+ {
+  "category": "dopaminergic",
+  "symbol": "DRD3"
+ },
+ {
+  "category": "monoamine catabolism",
+  "symbol": "COMT"
+ },
+ {
+  "category": "monoamine catabolism",
+  "symbol": "MAOA"
+ },
+ {
+  "category": "monoamine catabolism",
+  "symbol": "MAOB"
+ },
+ {
+  "category": "monoamine catabolism",
+  "symbol": "DBH"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GABRA1"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GABRA2"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GABRA5"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GABRB2"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GABRB3"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GABRD"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GABRG2"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GAD1"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "GAD2"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "SLC6A1"
+ },
+ {
+  "category": "GABAergic",
+  "symbol": "SLC6A12"
+ },
+ {
+  "category": "glycinergic",
+  "symbol": "GLRA1"
+ },
+ {
+  "category": "glycinergic",
+  "symbol": "GLRA3"
+ },
+ {
+  "category": "glycinergic",
+  "symbol": "GLRB"
+ },
+ {
+  "category": "glycinergic",
+  "symbol": "SLC6A5"
+ },
+ {
+  "category": "glycinergic",
+  "symbol": "SLC6A9"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRIN1"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRIN2A"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRIN2B"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRIA1"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRIA2"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRIK1"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRM1"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRM2"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRM5"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GRM7"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "SLC1A2"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "SLC1A3"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GLS"
+ },
+ {
+  "category": "glutamatergic",
+  "symbol": "GLUL"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "NGF"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "NTRK1"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "NGFR"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "BDNF"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "NTRK2"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "NTF3"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "NTF4"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "GDNF"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "GFRA1"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "ARTN"
+ },
+ {
+  "category": "neurotrophin",
+  "symbol": "SORT1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "TAC1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "TACR1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "TACR2"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "CALCA"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "CALCB"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "CALCRL"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "RAMP1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "ADCYAP1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "ADCYAP1R1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "VIP"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "VIPR1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "VIPR2"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "NPY"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "NPY1R"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "NPY2R"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "GAL"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "GALR1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "GALR2"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "NPS"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "NPSR1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "POMC"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "PENK"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "PDYN"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "OXT"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "OXTR"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "AVP"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "AVPR1A"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "CRH"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "CRHR1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "CRHR2"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "CCK"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "CCKBR"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "SST"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "SSTR2"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "BDKRB1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "BDKRB2"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "ACE"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "MME"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "EDN1"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "EDNRA"
+ },
+ {
+  "category": "neuropeptide",
+  "symbol": "EDNRB"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PTGS1"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PTGS2"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PTGES"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PTGER1"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PTGER2"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PTGER3"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PTGER4"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PLA2G4A"
+ },
+ {
+  "category": "prostaglandin",
+  "symbol": "PLA2G6"
+ },
+ {
+  "category": "lipoxygenase",
+  "symbol": "ALOX5"
+ },
+ {
+  "category": "lipoxygenase",
+  "symbol": "ALOX12"
+ },
+ {
+  "category": "lipoxygenase",
+  "symbol": "ALOX15"
+ },
+ {
+  "category": "cytokine",
+  "symbol": "TNF"
+ },
+ {
+  "category": "cytokine",
+  "symbol": "IL1B"
+ },
+ {
+  "category": "cytokine",
+  "symbol": "IL1RN"
+ },
+ {
+  "category": "cytokine",
+  "symbol": "IL6"
+ },
+ {
+  "category": "cytokine",
+  "symbol": "IL10"
+ },
+ {
+  "category": "cytokine",
+  "symbol": "IL17A"
+ },
+ {
+  "category": "chemokine",
+  "symbol": "CCL2"
+ },
+ {
+  "category": "chemokine",
+  "symbol": "CCR2"
+ },
+ {
+  "category": "chemokine",
+  "symbol": "CXCL12"
+ },
+ {
+  "category": "chemokine",
+  "symbol": "CXCR4"
+ },
+ {
+  "category": "chemokine",
+  "symbol": "CX3CR1"
+ },
+ {
+  "category": "pattern recognition",
+  "symbol": "TLR2"
+ },
+ {
+  "category": "pattern recognition",
+  "symbol": "TLR4"
+ },
+ {
+  "category": "pattern recognition",
+  "symbol": "NFKB1"
+ },
+ {
+  "category": "pattern recognition",
+  "symbol": "MYD88"
+ },
+ {
+  "category": "glial",
+  "symbol": "GFAP"
+ },
+ {
+  "category": "glial",
+  "symbol": "AIF1"
+ },
+ {
+  "category": "glial",
+  "symbol": "ITGAM"
+ },
+ {
+  "category": "glial",
+  "symbol": "CSF1R"
+ },
+ {
+  "category": "glial",
+  "symbol": "TREM2"
+ },
+ {
+  "category": "glial",
+  "symbol": "C1QA"
+ },
+ {
+  "category": "mast cell",
+  "symbol": "KIT"
+ },
+ {
+  "category": "mast cell",
+  "symbol": "TPSAB1"
+ },
+ {
+  "category": "mast cell",
+  "symbol": "TPSB2"
+ },
+ {
+  "category": "mast cell",
+  "symbol": "HDC"
+ },
+ {
+  "category": "mast cell",
+  "symbol": "MRGPRX2"
+ },
+ {
+  "category": "histamine receptor",
+  "symbol": "HRH1"
+ },
+ {
+  "category": "histamine receptor",
+  "symbol": "HRH2"
+ },
+ {
+  "category": "histamine receptor",
+  "symbol": "HRH3"
+ },
+ {
+  "category": "histamine receptor",
+  "symbol": "HRH4"
+ },
+ {
+  "category": "nitric oxide",
+  "symbol": "NOS1"
+ },
+ {
+  "category": "nitric oxide",
+  "symbol": "NOS2"
+ },
+ {
+  "category": "nitric oxide",
+  "symbol": "NOS3"
+ },
+ {
+  "category": "nitric oxide",
+  "symbol": "GCH1"
+ },
+ {
+  "category": "nitric oxide",
+  "symbol": "ARG1"
+ },
+ {
+  "category": "epigenetic",
+  "symbol": "HDAC1"
+ },
+ {
+  "category": "epigenetic",
+  "symbol": "HDAC2"
+ },
+ {
+  "category": "epigenetic",
+  "symbol": "KDM6B"
+ },
+ {
+  "category": "transcription factor",
+  "symbol": "NFE2L2"
+ },
+ {
+  "category": "transcription factor",
+  "symbol": "PPARGC1A"
+ },
+ {
+  "category": "transcription factor",
+  "symbol": "PPARG"
+ },
+ {
+  "category": "transcription factor",
+  "symbol": "SIRT1"
+ },
+ {
+  "category": "oxidative stress",
+  "symbol": "SOD1"
+ },
+ {
+  "category": "oxidative stress",
+  "symbol": "SOD2"
+ },
+ {
+  "category": "oxidative stress",
+  "symbol": "CAT"
+ },
+ {
+  "category": "oxidative stress",
+  "symbol": "GPX1"
+ },
+ {
+  "category": "oxidative stress",
+  "symbol": "HMOX1"
+ },
+ {
+  "category": "oxidative stress",
+  "symbol": "NQO1"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "ESR1"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "ESR2"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "GPER1"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "PGR"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "AR"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "SHBG"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "CYP19A1"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "SRD5A1"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "SRD5A2"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "HSD17B2"
+ },
+ {
+  "category": "sex steroid",
+  "symbol": "STS"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "COL1A1"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "COL3A1"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "COL5A1"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "ELN"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "FBN1"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "LOX"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "MMP2"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "MMP9"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "TIMP1"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "TGFB1"
+ },
+ {
+  "category": "extracellular matrix",
+  "symbol": "CTGF"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "PMP22"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "MPZ"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "MBP"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "PLP1"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "MAG"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "L1CAM"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "NCAM1"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "NRCAM"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "NEFH"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "NEFL"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "NEFM"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "TUBB3"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "STMN2"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "S100B"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "SOX10"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "NRG1"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "ERBB2"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "ERBB3"
+ },
+ {
+  "category": "myelin/nerve structure",
+  "symbol": "SHH"
+ },
+ {
+  "category": "pain gene",
+  "symbol": "PRDM12"
+ },
+ {
+  "category": "pain gene",
+  "symbol": "ZFHX2"
+ },
+ {
+  "category": "pain gene",
+  "symbol": "MC1R"
+ },
+ {
+  "category": "SNARE/exocytosis",
+  "symbol": "SNAP25"
+ },
+ {
+  "category": "SNARE/exocytosis",
+  "symbol": "STX1A"
+ },
+ {
+  "category": "SNARE/exocytosis",
+  "symbol": "VAMP2"
+ },
+ {
+  "category": "SNARE/exocytosis",
+  "symbol": "SYT1"
+ },
+ {
+  "category": "phosphodiesterase",
+  "symbol": "PDE4A"
+ },
+ {
+  "category": "phosphodiesterase",
+  "symbol": "PDE4B"
+ },
+ {
+  "category": "phosphodiesterase",
+  "symbol": "PDE4D"
+ },
+ {
+  "category": "phosphodiesterase",
+  "symbol": "PDE5A"
+ },
+ {
+  "category": "phosphodiesterase",
+  "symbol": "PDE10A"
+ },
+ {
+  "category": "aquaporin",
+  "symbol": "AQP1"
+ },
+ {
+  "category": "aquaporin",
+  "symbol": "AQP4"
+ },
+ {
+  "category": "melatonin",
+  "symbol": "MTNR1A"
+ },
+ {
+  "category": "melatonin",
+  "symbol": "MTNR1B"
+ },
+ {
+  "category": "melatonin",
+  "symbol": "AANAT"
+ },
+ {
+  "category": "Wnt signalling",
+  "symbol": "WNT3A"
+ },
+ {
+  "category": "Wnt signalling",
+  "symbol": "WNT5A"
+ },
+ {
+  "category": "Wnt signalling",
+  "symbol": "CTNNB1"
+ },
+ {
+  "category": "Hedgehog signalling",
+  "symbol": "PTCH1"
+ },
+ {
+  "category": "canonical inflammasome",
+  "symbol": "NLRP3"
+ },
+ {
+  "category": "canonical inflammasome",
+  "symbol": "CASP1"
+ },
+ {
+  "category": "canonical inflammasome",
+  "symbol": "IL18"
+ },
+ {
+  "category": "autophagy",
+  "symbol": "BECN1"
+ },
+ {
+  "category": "autophagy",
+  "symbol": "MAP1LC3B"
+ },
+ {
+  "category": "cell death",
+  "symbol": "BAX"
+ },
+ {
+  "category": "cell death",
+  "symbol": "BCL2"
+ },
+ {
+  "category": "cell death",
+  "symbol": "CASP3"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "MAPK1"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "MAPK3"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "MAPK14"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "AKT1"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "MTOR"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "PRKCA"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "PRKCG"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "CAMK2A"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "SRC"
+ },
+ {
+  "category": "kinase signalling",
+  "symbol": "EGFR"
+ },
+ {
+  "category": "pelvic floor muscle",
+  "symbol": "MYH11"
+ },
+ {
+  "category": "pelvic floor muscle",
+  "symbol": "ACTA2"
+ },
+ {
+  "category": "pelvic floor muscle",
+  "symbol": "DES"
+ },
+ {
+  "category": "endometriosis overlap",
+  "symbol": "HOXA10"
+ },
+ {
+  "category": "endometriosis overlap",
+  "symbol": "HOXA11"
+ },
+ {
+  "category": "endometriosis overlap",
+  "symbol": "WNT4"
+ }
+]
