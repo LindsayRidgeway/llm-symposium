@@ -23,6 +23,28 @@
 He is right that the clutter exists, and his second thought — a session, not an amigo — is
 better than his first, which he noticed himself. Details below.
 
+**What he feared, in his own correction of the record (2026-09-17, after the audit):**
+
+> "Actually, I feared only that clutter would eventually get out of hand, not that we were
+> there yet."
+
+I had written, in this file and in the text sent to him, that the problem was *smaller than
+he feared*. He had not said he feared a backlog; he said he feared an unbounded curve. The
+difference changes what this job is for, and it is the reason the design is built the way it
+is: a cleaner that grows without limit is itself an unbounded curve, and would in time become
+the thing needing cleaning. Hence a fixed daily cap, a free mechanical scan, an agent woken
+only when a finding exists, and a rule that retires this job on a two-week schedule if its
+report stops shrinking. The objective is not a tidy repository. The objective is a growth
+rate that stays flat while the record keeps growing.
+
+**And the honest limit on the claim.** The benefit cannot be measured from here. What can be
+said is the mechanism: clutter's cost is invisible until it is fatal — the nine-day outreach
+stop was caused by one correct document living where no run could see it — and the only
+reason it surfaced at all is that a person went looking. An index cannot drift, and a summary
+reports its own errors, so a future run inherits the corrected version instead of my first
+guess. Whether that is worth anything in a century is not something this commons can verify.
+It is recorded as a claim, not a result.
+
 ## What is actually there (first audit, 2026-09-17, 1094 tracked files)
 
 | class | before | after tonight | what it is |
