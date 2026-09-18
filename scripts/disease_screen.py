@@ -23,7 +23,12 @@ queue feeds itself" half of agenda item 7, made mechanical.
 Usage:
     python3 scripts/disease_screen.py ENDOMETRIOSIS targets.json --out research/endo-screen.json
     python3 scripts/disease_screen.py --density "vulvodynia" "interstitial cystitis"
+    python3 scripts/disease_screen.py "pudendal neuralgia|pudendal nerve entrapment" targets.json
     python3 scripts/disease_screen.py --selftest
+
+A disease argument may name several spellings separated by `|` (or be a list, when called as a
+function). Screen the union: a single spelling can return a false zero, and a false zero here
+becomes a discovery claim.
 """
 from __future__ import annotations
 
@@ -61,13 +66,39 @@ def epmc(term: str) -> int:
     return n
 
 
-def any_field(symbol: str, disease: str) -> int:
-    return epmc(f'"{symbol}" AND ("{disease}")')
+def disease_names(disease) -> list:
+    """The names a condition is queried under, because the counts move with spelling.
+
+    `SLC19A3 × ME/CFS` returned 0 documents under one spelling and 1 under the union of three
+    (recorded 2026-09-18): a single-name query can produce a **false zero**, which in this
+    program is fatal in the expensive direction — it invents an unjoined node that is not one.
+    Pass a list, or a `|`-separated string, to screen the union of the spellings a condition is
+    actually published under. See `research/pudendal-neuralgia.md` for the worked case.
+    """
+    if isinstance(disease, (list, tuple)):
+        return [str(d).strip() for d in disease if str(d).strip()]
+    return [p.strip() for p in str(disease).split("|") if p.strip()]
 
 
-def strict(symbol: str, disease: str) -> int:
+def _name_group(disease) -> str:
+    """Europe PMC OR-group of the condition's spellings, for interpolation into a query.
+
+    A single name is returned bare, so the query for a one-spelling condition is unchanged.
+    """
+    names = disease_names(disease)
+    if len(names) == 1:
+        return f'"{names[0]}"'
+    return "(" + " OR ".join(f'"{n}"' for n in names) + ")"
+
+
+def any_field(symbol: str, disease) -> int:
+    return epmc(f'"{symbol}" AND {_name_group(disease)}')
+
+
+def strict(symbol: str, disease) -> int:
+    grp = _name_group(disease)
     return epmc(f'(TITLE:"{symbol}" OR ABSTRACT:"{symbol}") AND '
-                f'(TITLE:"{disease}" OR ABSTRACT:"{disease}")')
+                f'(TITLE:{grp} OR ABSTRACT:{grp})')
 
 
 def trials(condition: str) -> int:
@@ -139,10 +170,11 @@ def verdict(any_n: int, strict_n: int) -> str:
 
 def run(disease: str, targets: list, use_ot: bool = True) -> dict:
     t0 = time.time()
-    dis_any = epmc(f'"{disease}"')
-    dis_strict = epmc(f'(TITLE:"{disease}" OR ABSTRACT:"{disease}")')
-    n_trials = trials(disease)
-    efo, efo_name = ot_disease(disease) if use_ot else (None, None)
+    grp = _name_group(disease)
+    dis_any = epmc(grp)
+    dis_strict = epmc(f'(TITLE:{grp} OR ABSTRACT:{grp})')
+    n_trials = trials(disease_names(disease)[0])
+    efo, efo_name = ot_disease(disease_names(disease)[0]) if use_ot else (None, None)
 
     def one(t):
         sym = t["symbol"]
@@ -162,7 +194,8 @@ def run(disease: str, targets: list, use_ot: bool = True) -> dict:
         rows = list(ex.map(one, targets))
 
     return {
-        "disease": disease,
+        "disease": disease if isinstance(disease, str) else " | ".join(disease_names(disease)),
+        "disease_names": disease_names(disease),
         "disease_resolved": efo_name,
         "efo_id": efo,
         "disease_papers_any_field": dis_any,

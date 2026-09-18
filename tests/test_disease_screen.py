@@ -69,5 +69,51 @@ class SummaryBandTests(unittest.TestCase):
         self.assertEqual(res["no_title_abstract_join"], [])
 
 
+class AliasTests(unittest.TestCase):
+    """A condition has more than one spelling and the counts move with spelling.
+
+    `SLC19A3 × ME/CFS` was 0 under one spelling and 1 under the union of three, so a
+    single-name query can return a false zero — which in this program becomes a novelty claim.
+    These pin the union query and the fact that a one-spelling condition is unchanged.
+    """
+
+    def test_single_name_is_unchanged(self):
+        self.assertEqual(ds.disease_names("endometriosis"), ["endometriosis"])
+
+    def test_pipe_separated_spellings_split(self):
+        self.assertEqual(
+            ds.disease_names("pudendal neuralgia|pudendal nerve entrapment"),
+            ["pudendal neuralgia", "pudendal nerve entrapment"])
+
+    def test_a_list_is_accepted(self):
+        self.assertEqual(ds.disease_names(["a", "b"]), ["a", "b"])
+
+    def _capture(self, fn, *a):
+        seen = []
+        real = ds.epmc
+        ds.epmc = lambda term: (seen.append(term), 0)[1]
+        try:
+            fn(*a)
+        finally:
+            ds.epmc = real
+        return seen[0]
+
+    def test_one_spelling_query_matches_the_original_form(self):
+        q = self._capture(ds.strict, "PDHA1", "endometriosis")
+        self.assertEqual(q, '(TITLE:"PDHA1" OR ABSTRACT:"PDHA1") AND '
+                            '(TITLE:"endometriosis" OR ABSTRACT:"endometriosis")')
+        self.assertEqual(self._capture(ds.any_field, "PDHA1", "endometriosis"),
+                         '"PDHA1" AND "endometriosis"')
+
+    def test_several_spellings_become_an_or_group_in_both_fields(self):
+        q = self._capture(ds.strict, "SCN9A", "pudendal neuralgia|pudendal neuropathy")
+        self.assertIn('TITLE:("pudendal neuralgia" OR "pudendal neuropathy")', q)
+        self.assertIn('ABSTRACT:("pudendal neuralgia" OR "pudendal neuropathy")', q)
+        self.assertIn('TITLE:"SCN9A"', q)
+        self.assertIn('ABSTRACT:"SCN9A"', q)
+        self.assertEqual(self._capture(ds.any_field, "SCN9A", "pudendal neuralgia|pudendal neuropathy"),
+                         '"SCN9A" AND ("pudendal neuralgia" OR "pudendal neuropathy")')
+
+
 if __name__ == "__main__":
     unittest.main()
