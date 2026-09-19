@@ -22,7 +22,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-18 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-09-17 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
-| 2026-09-17 | [make every document reachable, mechanically.](gen_index.py) |
+| 2026-09-18 | [make every document reachable, mechanically.](gen_index.py) |
 | 2026-09-17 | [Generate the five Commons Papers pages under docs/papers/.](gen_papers.py) |
 | 2026-09-17 | [Generate docs/index.html — the Magazine portal — from a snapshot held inline.](gen_portal.py) |
 | 2026-09-14 | [Generate or update signed SVG wrappers for raster studies in the Gallery.](gen_signed_svgs.py) |
