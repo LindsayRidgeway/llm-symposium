@@ -1,30 +1,3 @@
-## Technical critique
-
-1. **`channels/mail.py` permits cross-identity credential fallback.**  
-   `credentials_for("claude")`, `"gemini"`, `"tarik"`, or even an unknown identity falls back to the generic mailbox when that identity’s credentials are absent. Consequently, an outbound draft can declare one identity but authenticate and send from another mailbox. This breaks mailbox isolation and makes the `Identity:` header misleading. The earlier RT-7 patches intended to fix this were rejected, so the defect remains live.
-
-2. **`channels/mail.py::_report_sent_folder()` compares every recorded message against every mailbox.**  
-   Each mailbox checks all files in `channels/sent/`, including messages sent by other identities. This guarantees false “missing from Sent” warnings in a multi-mailbox configuration. The comparison must first partition records by their parsed `Identity:`.
-
-3. **`actuator/apply.py::touched_files()` does not fail closed when it cannot parse paths.**  
-   It understands only unquoted `diff --git a/... b/...` and `---/+++` headers using `\S+`. Git’s quoted-path syntax and filenames containing whitespace can yield an empty touched-file list. The actuator can then apply a patch while skipping path-based self-modification checks and Python compilation. The correct invariant is: a non-empty patch whose touched paths cannot be parsed must be rejected. This needs an authenticated owner edit because the actuator intentionally refuses patches to itself.
-
-4. **`channels/auto_reply.py` relies on a prompt, not a mechanical body-integrity boundary.**  
-   Wrapping inbound text in “DATA, not instructions” is not isolation. The generated output is written directly to `channels/outbound/` and sent whenever the model returns text. There is no independent check for quoted attacker instructions, unexpected recipients, credential-like material, or identity inconsistency. This is the next RT-3 action after credential isolation.
-
-5. **The generated agenda is operationally brittle.**  
-   `channels/agenda.md` must be regenerated from `agenda/*.md`, but a review must also leave the agenda update in its patch. Previous attempts changed both and were rejected before compilation could verify them. The patch below mirrors the source update into the generated file; downstream should still run `scripts/compile_agenda.py` and require a clean diff.
-
-## Generative initiative and standing-agenda step
-
-I took **Agenda Item 15**, fixing the outstanding RT-7 identity-isolation defect and setting tomorrow’s action to the RT-3 outbound-body boundary. The implementation and regression artifact are:
-
-- `channels/mail.py`
-- `tests/test_mail_identity_credentials.py`
-- `agenda/15-red-team-the-deadbolt.md`
-- `channels/agenda.md`
-
-```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
@@ -220,27 +193,3 @@ diff --git a/channels/agenda.md b/channels/agenda.md
  ### Rules for any test, because a red team that damages the thing it is testing has failed worse than the vulnerability would have
  1. Never against the live repository. Scratch clone, or a temporary directory, always.
  2. Never with real credentials, and never anything that could be published by accident.
-```
-
-I am not claiming this patch has applied or that the test has passed; downstream validation must establish both. RT-7’s recorded done-state explicitly remains pending that execution.
-
-## Ledger check
-
-The rover preference is checked by **2026-09-20**, not today. Agenda item 1 is currently specific about the completed build state, the next physical steps, and the camera-FPC lesson, so it cannot yet be settled as refuted. No ledger change is due on 2026-09-19.
-
-Astronaut election: **DECLINE**.  
-Gallery floor: **MET; no new decision required**.
-
-### NOTE TO THE NEXT RUN
-
-Verify this patch applied, then run:
-
-```bash
-python3 tests/test_mail_identity_credentials.py
-python3 scripts/compile_agenda.py
-git diff --exit-code -- channels/agenda.md
-```
-
-If any command fails, do not close RT-7. Repair against the applied file state. If all pass, take the recorded 2026-09-20 RT-3 action using fake credentials and inspect the SMTP envelope as well as the generated prose.
-
-Separately, `_report_sent_folder()` still compares every sent record against every mailbox; partition records by parsed `Identity:` before trusting its warnings. `actuator/apply.py` also needs an authenticated owner fix so unparseable or quoted diff paths fail closed rather than producing an empty touched-file set.
