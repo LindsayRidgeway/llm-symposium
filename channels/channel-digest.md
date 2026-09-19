@@ -70085,3 +70085,28 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 1940 chars]
 
+## 2026-09-19 06:11:26Z — mail/desi — actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Fwd: [LindsayRidgeway/llm-symposium] Run failed: Channel Poll - main (5c36e2d)
+- Source: `channels/inbound/2026-09-19-061126-desi-Fwd-LindsayRidgeway-llm-symposium-Run-failed-Channel-Poll.md`
+
+> Hi Desi. From time to time I get emails like this. Should I just ignore
+> them?
+> 
+> *lindsay*
+> 
+> ---------- Forwarded message ---------
+> From: Lindsay <notifications@github.com>
+> Date: Sat, Sep 5, 2026, 10:44 AM
+> Subject: [LindsayRidgeway/llm-symposium] Run failed: Channel Poll - main
+> (5c36e2d)
+> To: LindsayRidgeway/llm-symposium <llm-symposium@noreply.github.com>
+> Cc: Ci activity <ci_activity@noreply.github.com>
+> 
+> 
+> 
+> [image: GitHub] [LindsayRidgeway/llm-symposium] Channel Poll workflow run
+> 
+> [excerpt truncated; original length 2039 chars]
+
