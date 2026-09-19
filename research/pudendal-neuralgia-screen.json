@@ -1,0 +1,1761 @@
+{
+ "disease": "pudendal neuralgia",
+ "disease_resolved": null,
+ "efo_id": null,
+ "disease_papers_any_field": 597,
+ "disease_papers_strict": 221,
+ "registered_trials_for_disease": 25,
+ "note": "any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") \u2014 counts mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT \u2014 the number that decides novelty. Counts move with spelling; these are small numbers, not exact ones. A zero means nobody has PUBLISHED the link; it does not mean the link is true, untested, or valuable.",
+ "n_targets": 174,
+ "unjoined": [
+  "NGFR",
+  "NTRK1",
+  "NTRK2",
+  "MPZ",
+  "PMP22",
+  "SOX10",
+  "EGR2",
+  "ATF3",
+  "ARTN",
+  "PSPN",
+  "NCAM1",
+  "L1CAM",
+  "ITGB4",
+  "DAG1",
+  "LAMA2",
+  "LAMB1",
+  "CDH19",
+  "MAG",
+  "CNTN2",
+  "VCAN",
+  "SCN10A",
+  "SCN1A",
+  "SCN2A",
+  "KCNQ2",
+  "KCNQ3",
+  "KCNS1",
+  "CACNA1B",
+  "CACNA1H",
+  "PIEZO2",
+  "ASIC3",
+  "GRIN2B",
+  "GRM5",
+  "GRIK1",
+  "SLC1A2",
+  "SLC1A3",
+  "MAPK14",
+  "MAPK1",
+  "CREB1",
+  "CAMK2A",
+  "OPRD1",
+  "OPRK1",
+  "CNR1",
+  "CNR2",
+  "TAC1",
+  "TACR1",
+  "CALCA",
+  "CALCB",
+  "ADCYAP1",
+  "NPY",
+  "P2RX4",
+  "P2RY12",
+  "TLR4",
+  "CCL2",
+  "IL1B",
+  "IL17A",
+  "NFKB1",
+  "NLRP3",
+  "TGFB1",
+  "IFNG",
+  "IL4",
+  "CMA1",
+  "TPSAB1",
+  "HDC",
+  "MS4A2",
+  "CPA3",
+  "COL1A1",
+  "COL5A1",
+  "MMP2",
+  "TIMP1",
+  "LOX",
+  "ACTA2",
+  "CCN2",
+  "SERPINE1",
+  "FBN1",
+  "ELN",
+  "TNXB",
+  "COL1A2",
+  "PLOD1",
+  "ADAMTS2",
+  "HAS2",
+  "NOS3",
+  "EDN1",
+  "VEGFA",
+  "AGTR1",
+  "SOD1",
+  "NCF1",
+  "SOD2",
+  "NQO1",
+  "HMOX1",
+  "GCLC",
+  "GPX1",
+  "NFE2L2",
+  "NRF1",
+  "PPARGC1A",
+  "SIRT1",
+  "ESR1",
+  "ESR2",
+  "PGR",
+  "CYP19A1",
+  "VDR",
+  "CYP27B1",
+  "CYP24A1",
+  "GABRA1",
+  "GABBR2",
+  "SLC6A1",
+  "HTR1A",
+  "HTR2A",
+  "DRD2",
+  "ADORA1",
+  "ADORA2A",
+  "KCNMA1",
+  "ATP1A2",
+  "SLC8A1",
+  "ANO1",
+  "PDE5A",
+  "PIEZO1",
+  "YAP1",
+  "WWTR1",
+  "ITGB1",
+  "ALPL",
+  "BGLAP",
+  "SPP1",
+  "RUNX2"
+ ],
+ "incidental_any_field_only": [
+  "GDNF",
+  "GFAP",
+  "S100B",
+  "GAP43",
+  "SCN9A",
+  "SCN11A",
+  "HCN1",
+  "HCN2",
+  "GRIN1",
+  "FOS",
+  "OPRM1",
+  "COMT",
+  "GCH1",
+  "SLC6A4",
+  "SLC6A2",
+  "FAAH",
+  "VIP",
+  "CRH",
+  "P2RX7",
+  "CX3CR1",
+  "PTGS2",
+  "NOS2",
+  "IL10",
+  "CXCL8",
+  "CCL5",
+  "COL3A1",
+  "MMP9",
+  "FN1",
+  "PDGFA",
+  "PDGFB",
+  "PDGFRB",
+  "LUM",
+  "EDNRA",
+  "HIF1A",
+  "ACE",
+  "AGT",
+  "MPO",
+  "ADM",
+  "SHBG",
+  "PRL",
+  "RYR2"
+ ],
+ "no_title_abstract_join": [
+  "NGF",
+  "NGFR",
+  "BDNF",
+  "NTRK1",
+  "NTRK2",
+  "GDNF",
+  "GFAP",
+  "S100B",
+  "MPZ",
+  "PMP22",
+  "SOX10",
+  "EGR2",
+  "ATF3",
+  "GAP43",
+  "ARTN",
+  "PSPN",
+  "NCAM1",
+  "L1CAM",
+  "ITGB4",
+  "DAG1",
+  "LAMA2",
+  "LAMB1",
+  "CDH19",
+  "MAG",
+  "CNTN2",
+  "VCAN",
+  "SCN9A",
+  "SCN10A",
+  "SCN11A",
+  "SCN1A",
+  "SCN2A",
+  "KCNQ2",
+  "KCNQ3",
+  "KCNS1",
+  "HCN1",
+  "HCN2",
+  "CACNA1B",
+  "CACNA1H",
+  "TRPV1",
+  "TRPA1",
+  "PIEZO2",
+  "ASIC3",
+  "GRIN1",
+  "GRIN2B",
+  "GRM5",
+  "GRIK1",
+  "SLC1A2",
+  "SLC1A3",
+  "FOS",
+  "JUN",
+  "MAPK14",
+  "MAPK1",
+  "CREB1",
+  "CAMK2A",
+  "OPRM1",
+  "OPRD1",
+  "OPRK1",
+  "COMT",
+  "GCH1",
+  "SLC6A4",
+  "SLC6A2",
+  "FAAH",
+  "CNR1",
+  "CNR2",
+  "TAC1",
+  "TACR1",
+  "CALCA",
+  "CALCB",
+  "VIP",
+  "ADCYAP1",
+  "NPY",
+  "CRH",
+  "P2RX4",
+  "P2RX7",
+  "P2RY12",
+  "TLR4",
+  "CX3CR1",
+  "CCL2",
+  "IL1B",
+  "IL6",
+  "TNF",
+  "IL17A",
+  "PTGS2",
+  "NOS2",
+  "NFKB1",
+  "NLRP3",
+  "IL10",
+  "CXCL8",
+  "TGFB1",
+  "IFNG",
+  "IL4",
+  "CCL5",
+  "CMA1",
+  "TPSAB1",
+  "HDC",
+  "MS4A2",
+  "CPA3",
+  "COL1A1",
+  "COL3A1",
+  "COL5A1",
+  "MMP2",
+  "MMP9",
+  "TIMP1",
+  "LOX",
+  "FN1",
+  "ACTA2",
+  "CCN2",
+  "SERPINE1",
+  "PDGFA",
+  "PDGFB",
+  "PDGFRB",
+  "FBN1",
+  "ELN",
+  "TNXB",
+  "COL1A2",
+  "PLOD1",
+  "ADAMTS2",
+  "HAS2",
+  "LUM",
+  "NOS3",
+  "EDN1",
+  "EDNRA",
+  "HIF1A",
+  "VEGFA",
+  "ACE",
+  "AGT",
+  "AGTR1",
+  "SOD1",
+  "NCF1",
+  "MPO",
+  "ADM",
+  "SOD2",
+  "NQO1",
+  "HMOX1",
+  "GCLC",
+  "GPX1",
+  "CAT",
+  "NFE2L2",
+  "NRF1",
+  "PPARGC1A",
+  "SIRT1",
+  "ESR1",
+  "ESR2",
+  "PGR",
+  "CYP19A1",
+  "SHBG",
+  "PRL",
+  "VDR",
+  "CYP27B1",
+  "CYP24A1",
+  "GABRA1",
+  "GABBR2",
+  "SLC6A1",
+  "HTR1A",
+  "HTR2A",
+  "DRD2",
+  "ADORA1",
+  "ADORA2A",
+  "KCNMA1",
+  "ATP1A2",
+  "SLC8A1",
+  "ANO1",
+  "RYR2",
+  "PDE5A",
+  "PIEZO1",
+  "YAP1",
+  "WWTR1",
+  "ITGB1",
+  "ALPL",
+  "BGLAP",
+  "SPP1",
+  "RUNX2"
+ ],
+ "no_strict_join_but_discussed": [
+  "NGF",
+  "BDNF",
+  "TRPV1",
+  "TRPA1",
+  "JUN",
+  "IL6",
+  "TNF",
+  "CAT"
+ ],
+ "joined_in_title_or_abstract": [
+  "KIT",
+  "AR"
+ ],
+ "seconds": 35.6,
+ "targets": [
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "NGF",
+   "any_field": 11,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (11 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "NGFR",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "BDNF",
+   "any_field": 7,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "NTRK1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "NTRK2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "GDNF",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "GFAP",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "S100B",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "MPZ",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "PMP22",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "SOX10",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "EGR2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "ATF3",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "GAP43",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "ARTN",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "nerve injury / regeneration",
+   "symbol": "PSPN",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "NCAM1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "L1CAM",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "ITGB4",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "DAG1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "LAMA2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "LAMB1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "CDH19",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "MAG",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "CNTN2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "Schwann cell / myelin / axonal adhesion",
+   "symbol": "VCAN",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "SCN9A",
+   "any_field": 3,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "SCN10A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "SCN11A",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "SCN1A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "SCN2A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "KCNQ2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "KCNQ3",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "KCNS1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "HCN1",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "HCN2",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "CACNA1B",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "CACNA1H",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "TRPV1",
+   "any_field": 16,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (16 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "TRPA1",
+   "any_field": 6,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (6 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "PIEZO2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropathic pain / excitability channels",
+   "symbol": "ASIC3",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "GRIN1",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "GRIN2B",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "GRM5",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "GRIK1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "SLC1A2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "SLC1A3",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "FOS",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "JUN",
+   "any_field": 23,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (23 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "MAPK14",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "MAPK1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "CREB1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "glutamatergic / central sensitisation",
+   "symbol": "CAMK2A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "OPRM1",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "OPRD1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "OPRK1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "COMT",
+   "any_field": 4,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "GCH1",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "SLC6A4",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "SLC6A2",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "FAAH",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "CNR1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "analgesic pharmacology / monoamine",
+   "symbol": "CNR2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropeptides / autonomic",
+   "symbol": "TAC1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropeptides / autonomic",
+   "symbol": "TACR1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropeptides / autonomic",
+   "symbol": "CALCA",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropeptides / autonomic",
+   "symbol": "CALCB",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropeptides / autonomic",
+   "symbol": "VIP",
+   "any_field": 5,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (5) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "neuropeptides / autonomic",
+   "symbol": "ADCYAP1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropeptides / autonomic",
+   "symbol": "NPY",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropeptides / autonomic",
+   "symbol": "CRH",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "purinergic / glia",
+   "symbol": "P2RX4",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "purinergic / glia",
+   "symbol": "P2RX7",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "purinergic / glia",
+   "symbol": "P2RY12",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "purinergic / glia",
+   "symbol": "TLR4",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "purinergic / glia",
+   "symbol": "CX3CR1",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "purinergic / glia",
+   "symbol": "CCL2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "purinergic / glia",
+   "symbol": "IL1B",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "purinergic / glia",
+   "symbol": "IL6",
+   "any_field": 14,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (14 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "TNF",
+   "any_field": 19,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (19 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL17A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "PTGS2",
+   "any_field": 4,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "NOS2",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "NFKB1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "NLRP3",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL10",
+   "any_field": 4,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CXCL8",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "TGFB1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IFNG",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "IL4",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "inflammation / immune",
+   "symbol": "CCL5",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "mast cells",
+   "symbol": "KIT",
+   "any_field": 15,
+   "strict": 1,
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "mast cells",
+   "symbol": "CMA1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "mast cells",
+   "symbol": "TPSAB1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "mast cells",
+   "symbol": "HDC",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "mast cells",
+   "symbol": "MS4A2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "mast cells",
+   "symbol": "CPA3",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "COL1A1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "COL3A1",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "COL5A1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "MMP2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "MMP9",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "TIMP1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "LOX",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "FN1",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "ACTA2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "CCN2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "SERPINE1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "PDGFA",
+   "any_field": 3,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "PDGFB",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "fibrosis / ECM / entrapment",
+   "symbol": "PDGFRB",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "pelvic floor / connective tissue",
+   "symbol": "FBN1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "pelvic floor / connective tissue",
+   "symbol": "ELN",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "pelvic floor / connective tissue",
+   "symbol": "TNXB",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "pelvic floor / connective tissue",
+   "symbol": "COL1A2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "pelvic floor / connective tissue",
+   "symbol": "PLOD1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "pelvic floor / connective tissue",
+   "symbol": "ADAMTS2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "pelvic floor / connective tissue",
+   "symbol": "HAS2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "pelvic floor / connective tissue",
+   "symbol": "LUM",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "NOS3",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "EDN1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "EDNRA",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "HIF1A",
+   "any_field": 3,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "VEGFA",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "ACE",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "AGT",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "AGTR1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "SOD1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "NCF1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "MPO",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "vascular / pudendal artery / ischaemia",
+   "symbol": "ADM",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "SOD2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "NQO1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "HMOX1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "GCLC",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "GPX1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "CAT",
+   "any_field": 7,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "NFE2L2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "NRF1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "PPARGC1A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "oxidative stress / mitochondria",
+   "symbol": "SIRT1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "ESR1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "ESR2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "AR",
+   "any_field": 13,
+   "strict": 1,
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "PGR",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "CYP19A1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "SHBG",
+   "any_field": 2,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "PRL",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "VDR",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "CYP27B1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "hormones / endocrine overlap",
+   "symbol": "CYP24A1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "central neuromodulation",
+   "symbol": "GABRA1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "central neuromodulation",
+   "symbol": "GABBR2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "central neuromodulation",
+   "symbol": "SLC6A1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "central neuromodulation",
+   "symbol": "HTR1A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "central neuromodulation",
+   "symbol": "HTR2A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "central neuromodulation",
+   "symbol": "DRD2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "central neuromodulation",
+   "symbol": "ADORA1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "central neuromodulation",
+   "symbol": "ADORA2A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "smooth muscle / pelvic viscera",
+   "symbol": "KCNMA1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "smooth muscle / pelvic viscera",
+   "symbol": "ATP1A2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "smooth muscle / pelvic viscera",
+   "symbol": "SLC8A1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "smooth muscle / pelvic viscera",
+   "symbol": "ANO1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "smooth muscle / pelvic viscera",
+   "symbol": "RYR2",
+   "any_field": 1,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "smooth muscle / pelvic viscera",
+   "symbol": "PDE5A",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "mechanotransduction / tissue strain",
+   "symbol": "PIEZO1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "mechanotransduction / tissue strain",
+   "symbol": "YAP1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "mechanotransduction / tissue strain",
+   "symbol": "WWTR1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "mechanotransduction / tissue strain",
+   "symbol": "ITGB1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "bone / sacral turnover",
+   "symbol": "ALPL",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "bone / sacral turnover",
+   "symbol": "BGLAP",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "bone / sacral turnover",
+   "symbol": "SPP1",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "bone / sacral turnover",
+   "symbol": "RUNX2",
+   "any_field": 0,
+   "strict": 0,
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  }
+ ]
+}

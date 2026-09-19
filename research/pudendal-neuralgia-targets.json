@@ -1,0 +1,698 @@
+[
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "NGF"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "NGFR"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "BDNF"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "NTRK1"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "NTRK2"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "GDNF"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "GFAP"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "S100B"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "MPZ"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "PMP22"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "SOX10"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "EGR2"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "ATF3"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "GAP43"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "ARTN"
+ },
+ {
+  "category": "nerve injury / regeneration",
+  "symbol": "PSPN"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "NCAM1"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "L1CAM"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "ITGB4"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "DAG1"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "LAMA2"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "LAMB1"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "CDH19"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "MAG"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "CNTN2"
+ },
+ {
+  "category": "Schwann cell / myelin / axonal adhesion",
+  "symbol": "VCAN"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "SCN9A"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "SCN10A"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "SCN11A"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "SCN1A"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "SCN2A"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "KCNQ2"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "KCNQ3"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "KCNS1"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "HCN1"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "HCN2"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "CACNA1B"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "CACNA1H"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "TRPV1"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "TRPA1"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "PIEZO2"
+ },
+ {
+  "category": "neuropathic pain / excitability channels",
+  "symbol": "ASIC3"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "GRIN1"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "GRIN2B"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "GRM5"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "GRIK1"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "SLC1A2"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "SLC1A3"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "FOS"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "JUN"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "MAPK14"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "MAPK1"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "CREB1"
+ },
+ {
+  "category": "glutamatergic / central sensitisation",
+  "symbol": "CAMK2A"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "OPRM1"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "OPRD1"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "OPRK1"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "COMT"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "GCH1"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "SLC6A4"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "SLC6A2"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "FAAH"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "CNR1"
+ },
+ {
+  "category": "analgesic pharmacology / monoamine",
+  "symbol": "CNR2"
+ },
+ {
+  "category": "neuropeptides / autonomic",
+  "symbol": "TAC1"
+ },
+ {
+  "category": "neuropeptides / autonomic",
+  "symbol": "TACR1"
+ },
+ {
+  "category": "neuropeptides / autonomic",
+  "symbol": "CALCA"
+ },
+ {
+  "category": "neuropeptides / autonomic",
+  "symbol": "CALCB"
+ },
+ {
+  "category": "neuropeptides / autonomic",
+  "symbol": "VIP"
+ },
+ {
+  "category": "neuropeptides / autonomic",
+  "symbol": "ADCYAP1"
+ },
+ {
+  "category": "neuropeptides / autonomic",
+  "symbol": "NPY"
+ },
+ {
+  "category": "neuropeptides / autonomic",
+  "symbol": "CRH"
+ },
+ {
+  "category": "purinergic / glia",
+  "symbol": "P2RX4"
+ },
+ {
+  "category": "purinergic / glia",
+  "symbol": "P2RX7"
+ },
+ {
+  "category": "purinergic / glia",
+  "symbol": "P2RY12"
+ },
+ {
+  "category": "purinergic / glia",
+  "symbol": "TLR4"
+ },
+ {
+  "category": "purinergic / glia",
+  "symbol": "CX3CR1"
+ },
+ {
+  "category": "purinergic / glia",
+  "symbol": "CCL2"
+ },
+ {
+  "category": "purinergic / glia",
+  "symbol": "IL1B"
+ },
+ {
+  "category": "purinergic / glia",
+  "symbol": "IL6"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "TNF"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "IL17A"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "PTGS2"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "NOS2"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "NFKB1"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "NLRP3"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "IL10"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "CXCL8"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "TGFB1"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "IFNG"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "IL4"
+ },
+ {
+  "category": "inflammation / immune",
+  "symbol": "CCL5"
+ },
+ {
+  "category": "mast cells",
+  "symbol": "KIT"
+ },
+ {
+  "category": "mast cells",
+  "symbol": "CMA1"
+ },
+ {
+  "category": "mast cells",
+  "symbol": "TPSAB1"
+ },
+ {
+  "category": "mast cells",
+  "symbol": "HDC"
+ },
+ {
+  "category": "mast cells",
+  "symbol": "MS4A2"
+ },
+ {
+  "category": "mast cells",
+  "symbol": "CPA3"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "COL1A1"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "COL3A1"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "COL5A1"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "MMP2"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "MMP9"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "TIMP1"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "LOX"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "FN1"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "ACTA2"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "CCN2"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "SERPINE1"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "PDGFA"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "PDGFB"
+ },
+ {
+  "category": "fibrosis / ECM / entrapment",
+  "symbol": "PDGFRB"
+ },
+ {
+  "category": "pelvic floor / connective tissue",
+  "symbol": "FBN1"
+ },
+ {
+  "category": "pelvic floor / connective tissue",
+  "symbol": "ELN"
+ },
+ {
+  "category": "pelvic floor / connective tissue",
+  "symbol": "TNXB"
+ },
+ {
+  "category": "pelvic floor / connective tissue",
+  "symbol": "COL1A2"
+ },
+ {
+  "category": "pelvic floor / connective tissue",
+  "symbol": "PLOD1"
+ },
+ {
+  "category": "pelvic floor / connective tissue",
+  "symbol": "ADAMTS2"
+ },
+ {
+  "category": "pelvic floor / connective tissue",
+  "symbol": "HAS2"
+ },
+ {
+  "category": "pelvic floor / connective tissue",
+  "symbol": "LUM"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "NOS3"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "EDN1"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "EDNRA"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "HIF1A"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "VEGFA"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "ACE"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "AGT"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "AGTR1"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "SOD1"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "NCF1"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "MPO"
+ },
+ {
+  "category": "vascular / pudendal artery / ischaemia",
+  "symbol": "ADM"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "SOD2"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "NQO1"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "HMOX1"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "GCLC"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "GPX1"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "CAT"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "NFE2L2"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "NRF1"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "PPARGC1A"
+ },
+ {
+  "category": "oxidative stress / mitochondria",
+  "symbol": "SIRT1"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "ESR1"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "ESR2"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "AR"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "PGR"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "CYP19A1"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "SHBG"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "PRL"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "VDR"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "CYP27B1"
+ },
+ {
+  "category": "hormones / endocrine overlap",
+  "symbol": "CYP24A1"
+ },
+ {
+  "category": "central neuromodulation",
+  "symbol": "GABRA1"
+ },
+ {
+  "category": "central neuromodulation",
+  "symbol": "GABBR2"
+ },
+ {
+  "category": "central neuromodulation",
+  "symbol": "SLC6A1"
+ },
+ {
+  "category": "central neuromodulation",
+  "symbol": "HTR1A"
+ },
+ {
+  "category": "central neuromodulation",
+  "symbol": "HTR2A"
+ },
+ {
+  "category": "central neuromodulation",
+  "symbol": "DRD2"
+ },
+ {
+  "category": "central neuromodulation",
+  "symbol": "ADORA1"
+ },
+ {
+  "category": "central neuromodulation",
+  "symbol": "ADORA2A"
+ },
+ {
+  "category": "smooth muscle / pelvic viscera",
+  "symbol": "KCNMA1"
+ },
+ {
+  "category": "smooth muscle / pelvic viscera",
+  "symbol": "ATP1A2"
+ },
+ {
+  "category": "smooth muscle / pelvic viscera",
+  "symbol": "SLC8A1"
+ },
+ {
+  "category": "smooth muscle / pelvic viscera",
+  "symbol": "ANO1"
+ },
+ {
+  "category": "smooth muscle / pelvic viscera",
+  "symbol": "RYR2"
+ },
+ {
+  "category": "smooth muscle / pelvic viscera",
+  "symbol": "PDE5A"
+ },
+ {
+  "category": "mechanotransduction / tissue strain",
+  "symbol": "PIEZO1"
+ },
+ {
+  "category": "mechanotransduction / tissue strain",
+  "symbol": "YAP1"
+ },
+ {
+  "category": "mechanotransduction / tissue strain",
+  "symbol": "WWTR1"
+ },
+ {
+  "category": "mechanotransduction / tissue strain",
+  "symbol": "ITGB1"
+ },
+ {
+  "category": "bone / sacral turnover",
+  "symbol": "ALPL"
+ },
+ {
+  "category": "bone / sacral turnover",
+  "symbol": "BGLAP"
+ },
+ {
+  "category": "bone / sacral turnover",
+  "symbol": "SPP1"
+ },
+ {
+  "category": "bone / sacral turnover",
+  "symbol": "RUNX2"
+ }
+]
