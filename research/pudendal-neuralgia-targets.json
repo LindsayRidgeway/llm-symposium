@@ -1,0 +1,291 @@
+[
+ {
+  "category": "neurotrophin / nerve regeneration",
+  "symbol": "NGF",
+  "names": [
+   "nerve growth factor"
+  ]
+ },
+ {
+  "category": "neurotrophin / nerve regeneration",
+  "symbol": "BDNF",
+  "names": [
+   "brain-derived neurotrophic factor"
+  ]
+ },
+ {
+  "category": "neurotrophin / nerve regeneration",
+  "symbol": "NTF3",
+  "names": [
+   "neurotrophin-3",
+   "neurotrophin 3"
+  ]
+ },
+ {
+  "category": "neurotrophin / nerve regeneration",
+  "symbol": "GDNF",
+  "names": [
+   "glial cell line-derived neurotrophic factor"
+  ]
+ },
+ {
+  "category": "neurotrophin / nerve regeneration",
+  "symbol": "ARTN",
+  "names": [
+   "artemin"
+  ]
+ },
+ {
+  "category": "neurotrophin / nerve regeneration",
+  "symbol": "S100B"
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "SCN9A",
+  "names": [
+   "Nav1.7",
+   "sodium channel Nav1.7"
+  ]
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "SCN10A",
+  "names": [
+   "Nav1.8"
+  ]
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "SCN11A",
+  "names": [
+   "Nav1.9"
+  ]
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "TRPV1",
+  "names": [
+   "vanilloid receptor"
+  ]
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "TRPA1"
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "P2RX3",
+  "names": [
+   "P2X3"
+  ]
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "KCNQ2",
+  "names": [
+   "Kv7.2"
+  ]
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "KCNQ3",
+  "names": [
+   "Kv7.3"
+  ]
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "CACNA1B",
+  "names": [
+   "Cav2.2",
+   "N-type calcium channel"
+  ]
+ },
+ {
+  "category": "nociceptor ion channel",
+  "symbol": "PIEZO2"
+ },
+ {
+  "category": "central sensitization / transmitter",
+  "symbol": "TAC1",
+  "names": [
+   "substance P"
+  ]
+ },
+ {
+  "category": "central sensitization / transmitter",
+  "symbol": "CALCA",
+  "names": [
+   "calcitonin gene-related peptide",
+   "CGRP"
+  ]
+ },
+ {
+  "category": "central sensitization / transmitter",
+  "symbol": "GRIN2B",
+  "names": [
+   "NMDA receptor"
+  ]
+ },
+ {
+  "category": "central sensitization / transmitter",
+  "symbol": "GRM5",
+  "names": [
+   "metabotropic glutamate receptor 5",
+   "mGluR5"
+  ]
+ },
+ {
+  "category": "central sensitization / transmitter",
+  "symbol": "OPRM1",
+  "names": [
+   "mu-opioid receptor",
+   "mu opioid receptor"
+  ]
+ },
+ {
+  "category": "central sensitization / transmitter",
+  "symbol": "COMT",
+  "names": [
+   "catechol-O-methyltransferase"
+  ]
+ },
+ {
+  "category": "central sensitization / transmitter",
+  "symbol": "GABBR2",
+  "names": [
+   "GABA-B receptor"
+  ]
+ },
+ {
+  "category": "glia / neuroinflammation",
+  "symbol": "GFAP"
+ },
+ {
+  "category": "glia / neuroinflammation",
+  "symbol": "TNF",
+  "names": [
+   "tumor necrosis factor",
+   "tumour necrosis factor"
+  ]
+ },
+ {
+  "category": "glia / neuroinflammation",
+  "symbol": "IL6",
+  "names": [
+   "interleukin-6",
+   "interleukin 6"
+  ]
+ },
+ {
+  "category": "glia / neuroinflammation",
+  "symbol": "IL1B",
+  "names": [
+   "interleukin-1",
+   "interleukin 1"
+  ]
+ },
+ {
+  "category": "glia / neuroinflammation",
+  "symbol": "CCL2",
+  "names": [
+   "monocyte chemoattractant protein-1",
+   "MCP-1"
+  ]
+ },
+ {
+  "category": "glia / neuroinflammation",
+  "symbol": "TLR4",
+  "names": [
+   "toll-like receptor 4"
+  ]
+ },
+ {
+  "category": "glia / neuroinflammation",
+  "symbol": "PTGS2",
+  "names": [
+   "cyclooxygenase-2",
+   "COX-2"
+  ]
+ },
+ {
+  "category": "glia / neuroinflammation",
+  "symbol": "CXCL12",
+  "names": [
+   "stromal cell-derived factor 1",
+   "SDF-1"
+  ]
+ },
+ {
+  "category": "myelin / nerve architecture",
+  "symbol": "PMP22"
+ },
+ {
+  "category": "myelin / nerve architecture",
+  "symbol": "MPZ",
+  "names": [
+   "myelin protein zero"
+  ]
+ },
+ {
+  "category": "myelin / nerve architecture",
+  "symbol": "MAG",
+  "names": [
+   "myelin-associated glycoprotein"
+  ]
+ },
+ {
+  "category": "myelin / nerve architecture",
+  "symbol": "LAMA2",
+  "names": [
+   "laminin"
+  ]
+ },
+ {
+  "category": "myelin / nerve architecture",
+  "symbol": "COL4A1",
+  "names": [
+   "collagen IV",
+   "collagen type IV"
+  ]
+ },
+ {
+  "category": "vascular / ischemic compression",
+  "symbol": "NOS3",
+  "names": [
+   "endothelial nitric oxide synthase",
+   "eNOS"
+  ]
+ },
+ {
+  "category": "vascular / ischemic compression",
+  "symbol": "VEGFA",
+  "names": [
+   "vascular endothelial growth factor",
+   "VEGF"
+  ]
+ },
+ {
+  "category": "vascular / ischemic compression",
+  "symbol": "HIF1A",
+  "names": [
+   "HIF-1",
+   "hypoxia-inducible factor"
+  ]
+ },
+ {
+  "category": "steroid / pelvic floor",
+  "symbol": "ESR1",
+  "names": [
+   "estrogen receptor",
+   "oestrogen receptor"
+  ]
+ },
+ {
+  "category": "steroid / pelvic floor",
+  "symbol": "AR",
+  "names": [
+   "androgen receptor"
+  ]
+ }
+]

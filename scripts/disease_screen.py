@@ -20,8 +20,18 @@ Choosing the targets is a judgement and stays with whoever runs the screen; the 
 measures how much literature already joins each one. This is the "candidate-generation so the
 queue feeds itself" half of agenda item 7, made mechanical.
 
+**Names, not just symbols (`names`), and disease forms (`--forms`).** Added 2026-09-18 after the
+pudendal-neuralgia screen: a symbol-only query against a thin disease returned 39 of 41 targets as
+"no title/abstract join", which is a *false-gap generator*, not a finding. The literature writes
+"nerve growth factor", not "NGF"; "substance P", not "TAC1"; "endothelial nitric oxide synthase", not
+"NOS3". A target entry may now carry `"names": ["nerve growth factor", ...]`, and `--forms` may add
+disease spellings; the screen reports the *maximum* join over (symbol|names) × (disease|forms), the
+pair that produced it, and a `naming_sensitive` flag on any row whose number came from something
+other than the plain symbol. The default query is unchanged when neither is supplied.
+
 Usage:
     python3 scripts/disease_screen.py ENDOMETRIOSIS targets.json --out research/endo-screen.json
+    python3 scripts/disease_screen.py "pudendal neuralgia" targets.json --forms "pudendal nerve,pudendal neuropathy"
     python3 scripts/disease_screen.py --density "vulvodynia" "interstitial cystitis"
     python3 scripts/disease_screen.py --selftest
 """
@@ -137,23 +147,39 @@ def verdict(any_n: int, strict_n: int) -> str:
     return f"discussed ({any_n} any-field, 0 strict) — read the list; not novel on this number"
 
 
-def run(disease: str, targets: list, use_ot: bool = True) -> dict:
+def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) -> dict:
     t0 = time.time()
-    dis_any = epmc(f'"{disease}"')
-    dis_strict = epmc(f'(TITLE:"{disease}" OR ABSTRACT:"{disease}")')
+    forms = [disease] + [f for f in (forms or []) if f and f != disease]
+    dis_any = max(epmc(f'"{f}"') for f in forms)
+    dis_strict = max(epmc(f'(TITLE:"{f}" OR ABSTRACT:"{f}")') for f in forms)
     n_trials = trials(disease)
     efo, efo_name = ot_disease(disease) if use_ot else (None, None)
 
     def one(t):
         sym = t["symbol"]
-        a = any_field(sym, disease)
-        s = strict(sym, disease)
+        # A target is a symbol AND the names a paper would actually use for it.
+        names = [sym] + [n for n in t.get("names", []) if n]
+        best = None  # (strict, any_field, name, disease form)
+        for name in names:
+            for form in forms:
+                cand = (strict(name, form), any_field(name, form), name, form)
+                if best is None or cand[:2] > best[:2]:
+                    best = cand
+        s, a, name, form = best
+        # What the plain symbol-only query would have reported, kept so a reader can see the
+        # difference a name makes rather than trusting the maximum on its own.
+        sym_s, sym_a = strict(sym, disease), any_field(sym, disease)
         score = ot_score(sym, efo) if use_ot else None
         return {
             "category": t.get("category", ""),
             "symbol": sym,
             "any_field": a,
             "strict": s,
+            "symbol_only_strict": sym_s,
+            "symbol_only_any_field": sym_a,
+            "matched_name": name,
+            "matched_disease_form": form,
+            "naming_sensitive": (name != sym or form != disease),
             "open_targets_score": score,
             "verdict": verdict(a, s),
         }
@@ -163,6 +189,7 @@ def run(disease: str, targets: list, use_ot: bool = True) -> dict:
 
     return {
         "disease": disease,
+        "disease_forms_searched": forms,
         "disease_resolved": efo_name,
         "efo_id": efo,
         "disease_papers_any_field": dis_any,
@@ -172,7 +199,9 @@ def run(disease: str, targets: list, use_ot: bool = True) -> dict:
                  "mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT "
                  "— the number that decides novelty. Counts move with spelling; these are small "
                  "numbers, not exact ones. A zero means nobody has PUBLISHED the link; it does "
-                 "not mean the link is true, untested, or valuable."),
+                 "not mean the link is true, untested, or valuable. Where a target carries "
+                 "`names`, any_field/strict are the maximum over the symbol and every name, so a "
+                 "row is only 'unjoined' if it is unjoined under every spelling supplied."),
         "n_targets": len(targets),
         # Every band where strict == 0 is candidate territory, and the three bands are
         # different claims. The summary used to print only the first two, which hid the one
@@ -184,6 +213,12 @@ def run(disease: str, targets: list, use_ot: bool = True) -> dict:
         "no_strict_join_but_discussed": [r["symbol"] for r in rows
                                          if r["strict"] == 0 and r["any_field"] > INCIDENTAL_MAX],
         "joined_in_title_or_abstract": [r["symbol"] for r in rows if r["strict"] > 0],
+        # The rows a symbol-only screen would have called unjoined but which are joined under a
+        # name the literature actually uses. This is the false-gap count, and it belongs in the
+        # artefact: the whole defect is that a false gap is indistinguishable from a real one.
+        "false_gaps_repaired_by_names": [r["symbol"] for r in rows
+                                         if r["naming_sensitive"] and r["symbol_only_strict"] == 0
+                                         and r["strict"] > 0],
         "seconds": round(time.time() - t0, 1),
         "targets": rows,
     }
@@ -255,13 +290,19 @@ def main() -> int:
         print("\nstrict = papers naming the condition in a title or abstract. A large number "
               "means the ground is worked; go elsewhere for a joined-literature discovery.")
         return 0
+    if "--forms" in args:
+        i = args.index("--forms")
+        forms = [x.strip() for x in args[i + 1].split(",") if x.strip()]
+        del args[i:i + 2]
+    else:
+        forms = None
     if len(args) != 2:
         print(__doc__)
         return 1
     disease, targets_path = args
     with open(targets_path) as fh:
         targets = json.load(fh)
-    res = run(disease, targets, use_ot=use_ot)
+    res = run(disease, targets, use_ot=use_ot, forms=forms)
     if out:
         with open(out, "w") as fh:
             json.dump(res, fh, indent=1)
@@ -277,6 +318,12 @@ def main() -> int:
     print(f"  of those, incidental only (1-5): {', '.join(res['incidental_any_field_only']) or '(none)'}")
     print(f"  of those, co-mentioned but never studied: "
           f"{', '.join(res['no_strict_join_but_discussed']) or '(none)'}")
+    if res["disease_forms_searched"] and len(res["disease_forms_searched"]) > 1:
+        print(f"\ndisease forms searched: {', '.join(res['disease_forms_searched'])}")
+    fg = res["false_gaps_repaired_by_names"]
+    if fg:
+        print(f"\nrows a symbol-only query would have called unjoined, but which are joined under a "
+              f"name the literature uses ({len(fg)}): {', '.join(fg)}")
     if out:
         print(f"\nwrote {out}")
     return 0
