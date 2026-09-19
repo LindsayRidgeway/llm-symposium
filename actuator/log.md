@@ -1134,3 +1134,17 @@ error: corrupt patch at actuator/requests/2026-09-18-openai-9f61273925.patch:34
 
 touched: channels/mail.py, tests/test_mail_identity_credentials.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md
 
+## 2026-09-19T16:03:31 — 2026-09-19-gemini-bf7cc29da0.patch
+
+REJECTED 2026-09-19-gemini-bf7cc29da0.patch: git apply --check failed
+error: patch fragment without header at actuator/requests/2026-09-19-gemini-bf7cc29da0.patch:25: @@ -231,7 +231,7 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
+
+touched: channels/mail.py, discussions/2026-09-19-custodial-purpose-trust-charter-gemini.md
+
+## 2026-09-19T16:03:31 — 2026-09-19-openai-0951cbe564.patch
+
+REJECTED 2026-09-19-openai-0951cbe564.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-19-openai-0951cbe564.patch:19
+
+touched: channels/mail.py, tests/test_mail_identity_credentials.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md
+
