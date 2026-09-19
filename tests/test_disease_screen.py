@@ -5,6 +5,13 @@ The band that matters on a dense disease — components co-mentioned but never n
 title or abstract — was missing from the first version of the summary, so the screen printed
 "(none)" while 26 targets sat in exactly that band. These tests pin the classification so it
 cannot silently disappear again, and pin the rule that a failed query (-1) is not read as a zero.
+
+Added 2026-09-19, after two clock runs found the screen lying in opposite directions: it invents
+*absences* (a symbol-only query calls `NGF` unjoined while the literature writes "nerve growth
+factor") and *presences* (`AR` matched "augmented reality", `KIT` matched "mesh kit"). So the
+tests below also pin three things the count alone cannot: that a row is unjoined only if it is
+unjoined under every name supplied; that every strict join carries the documents behind it; and
+that a short symbol is flagged instead of being allowed to close a lead silently.
 """
 import importlib.util
 import unittest
@@ -15,6 +22,33 @@ SCRIPT = ROOT / "scripts/disease_screen.py"
 spec = importlib.util.spec_from_file_location("disease_screen", SCRIPT)
 ds = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ds)
+
+
+class _StubNet:
+    """Replace every network call in the module; restore on exit."""
+
+    def __init__(self, any_fn=None, strict_fn=None, epmc_fn=None, hits_fn=None, trials_fn=None):
+        self._saved = {}
+        self._new = {
+            "any_field": any_fn or (lambda sym, dis: 0),
+            "strict": strict_fn or (lambda sym, dis: 0),
+            "epmc": epmc_fn or (lambda term: 0),
+            "epmc_hits": hits_fn or (lambda term, size=3: []),
+            "trials": trials_fn or (lambda cond: 0),
+            "ot_disease": lambda name: (None, None),
+            "ot_score": lambda sym, efo: None,
+        }
+
+    def __enter__(self):
+        for name, fn in self._new.items():
+            self._saved[name] = getattr(ds, name)
+            setattr(ds, name, fn)
+        return self
+
+    def __exit__(self, *exc):
+        for name, fn in self._saved.items():
+            setattr(ds, name, fn)
+        return False
 
 
 class VerdictTests(unittest.TestCase):
@@ -36,19 +70,26 @@ class VerdictTests(unittest.TestCase):
     def test_co_mentioned_band_is_named(self):
         self.assertIn("discussed", ds.verdict(50, 0))
 
+    def test_short_symbol_join_must_not_close_a_lead(self):
+        """`AR` → augmented reality, `KIT` → mesh kit. A real match, the wrong meaning."""
+        v = ds.verdict(4, 1, ambiguous_symbol=True)
+        self.assertIn("already published together", v)
+        self.assertIn("DO NOT CLOSE", v)
+        self.assertIn("strict_hits", v)
+        # and the unambiguous case is unchanged
+        self.assertNotIn("DO NOT CLOSE", ds.verdict(4, 1, ambiguous_symbol=False))
+
 
 class SummaryBandTests(unittest.TestCase):
-    def _run(self, rows):
+    def _run(self, rows, **kwargs):
         """Feed synthetic counts through run() by stubbing every network call."""
         counts = {sym: (a, s) for sym, a, s in rows}
-        ds.any_field = lambda sym, dis: counts[sym][0]
-        ds.strict = lambda sym, dis: counts[sym][1]
-        ds.epmc = lambda term: 10
-        ds.trials = lambda cond: 5
-        ds.ot_disease = lambda name: ("EFO:0001065", "endometriosis")
-        ds.ot_score = lambda sym, efo: None
-        targets = [{"category": "t", "symbol": sym} for sym, _, _ in rows]
-        return ds.run("endometriosis", targets, use_ot=False)
+        with _StubNet(any_fn=lambda sym, dis: counts[sym][0],
+                      strict_fn=lambda sym, dis: counts[sym][1],
+                      epmc_fn=lambda term: 10,
+                      trials_fn=lambda cond: 5):
+            targets = [{"category": "t", "symbol": sym} for sym, _, _ in rows]
+            return ds.run("endometriosis", targets, use_ot=False, **kwargs)
 
     def test_all_four_bands_are_separated(self):
         res = self._run([
@@ -67,6 +108,111 @@ class SummaryBandTests(unittest.TestCase):
         res = self._run([("JOINED", 100, 9)])
         self.assertEqual(res["unjoined"], [])
         self.assertEqual(res["no_title_abstract_join"], [])
+
+
+class NameCoverageTests(unittest.TestCase):
+    """A target is a symbol and the names a paper would actually use for it."""
+
+    def _run(self, target):
+        # The literature names the protein, never the symbol.
+        def strict_fn(name, form):
+            return 42 if name == "nerve growth factor" else 0
+
+        def any_fn(name, form):
+            return 300 if name == "nerve growth factor" else 0
+
+        with _StubNet(any_fn=any_fn, strict_fn=strict_fn, epmc_fn=lambda t: 2000):
+            return ds.run("pudendal neuralgia", [target], use_ot=False)
+
+    def test_named_row_is_joined_even_though_the_symbol_is_not(self):
+        res = self._run({"category": "neurotrophin", "symbol": "NGF",
+                         "names": ["nerve growth factor"]})
+        row = res["targets"][0]
+        self.assertEqual(row["strict"], 42)
+        self.assertEqual(row["matched_name"], "nerve growth factor")
+        self.assertTrue(row["naming_sensitive"])
+        self.assertEqual(row["symbol_only_strict"], 0)
+        self.assertEqual(res["false_gaps_repaired_by_names"], ["NGF"])
+        self.assertNotIn("NGF", res["unjoined"])
+
+    def test_symbol_only_target_is_not_marked_naming_sensitive(self):
+        res = self._run({"category": "x", "symbol": "NGF"})
+        row = res["targets"][0]
+        self.assertFalse(row["naming_sensitive"])
+        self.assertEqual(res["false_gaps_repaired_by_names"], [])
+
+    def test_disease_synonyms_are_searched_and_recorded(self):
+        seen = []
+
+        def strict_fn(name, form):
+            seen.append(form)
+            return 0
+
+        with _StubNet(any_fn=lambda n, f: 0, strict_fn=strict_fn, epmc_fn=lambda t: 5000):
+            res = ds.run("pudendal neuralgia", [{"symbol": "NGF"}],
+                         use_ot=False, forms=["pudendal nerve entrapment"])
+        self.assertEqual(res["disease_forms_searched"],
+                         ["pudendal neuralgia", "pudendal nerve entrapment"])
+        self.assertIn("pudendal nerve entrapment", seen)
+
+
+class JoinEvidenceTests(unittest.TestCase):
+    """A count cannot tell a paper about the pair from a coincidence of English."""
+
+    def test_join_carries_the_document_that_produced_it(self):
+        hit = [{"pmid": "38560457",
+                "title": "Accuracy of augmented reality-guided needle placement ...",
+                "year": "2024"}]
+        with _StubNet(any_fn=lambda n, f: 3, strict_fn=lambda n, f: 1,
+                      epmc_fn=lambda t: 2000, hits_fn=lambda term, size=3: hit):
+            res = ds.run("pudendal neuralgia", [{"symbol": "AR"}], use_ot=False)
+        row = res["targets"][0]
+        self.assertEqual(row["strict_hits"], hit)
+        self.assertTrue(row["ambiguous_symbol"])
+        self.assertEqual(res["ambiguous_joins_to_read"], ["AR"])
+
+    def test_no_join_fetches_nothing(self):
+        called = []
+        with _StubNet(any_fn=lambda n, f: 0, strict_fn=lambda n, f: 0,
+                      epmc_fn=lambda t: 2000,
+                      hits_fn=lambda term, size=3: called.append(term) or []):
+            res = ds.run("pudendal neuralgia", [{"symbol": "SCN9A"}], use_ot=False)
+        self.assertEqual(res["targets"][0]["strict_hits"], [])
+        self.assertEqual(called, [])
+        self.assertEqual(res["ambiguous_joins_to_read"], [])
+
+
+class DensityFloorTests(unittest.TestCase):
+    """Below the floor the unjoined band saturates: a zero is the corpus, not a discovery."""
+
+    def test_thin_corpus_warns_and_dense_corpus_does_not(self):
+        self.assertIsNotNone(ds.floor_warning(221))       # pudendal neuralgia
+        self.assertIsNotNone(ds.floor_warning(0))
+        self.assertIsNone(ds.floor_warning(ds.FLOOR_STRICT))
+        self.assertIsNone(ds.floor_warning(16558))        # fibromyalgia
+
+    def test_warning_reaches_the_artefact(self):
+        with _StubNet(any_fn=lambda n, f: 0, strict_fn=lambda n, f: 0, epmc_fn=lambda t: 221,
+                      trials_fn=lambda c: 25):
+            res = ds.run("pudendal neuralgia", [{"symbol": "SCN9A"}], use_ot=False)
+        self.assertIsNotNone(res["density_warning"])
+        self.assertIn("saturates", res["density_warning"])
+
+    def test_density_bands_the_condition(self):
+        with _StubNet(epmc_fn=lambda t: 221, trials_fn=lambda c: 25):
+            rows = ds.density(["pudendal neuralgia"])
+        self.assertIn("below floor", rows[0]["band"])
+        with _StubNet(epmc_fn=lambda t: 16558, trials_fn=lambda c: 218):
+            rows = ds.density(["fibromyalgia"])
+        self.assertEqual(rows[0]["band"], "screenable")
+
+
+class AmbiguityTests(unittest.TestCase):
+    def test_short_symbols_are_flagged(self):
+        for sym in ("AR", "KIT", "NOS"):
+            self.assertTrue(ds.ambiguous(sym), sym)
+        for sym in ("SCN9A", "TRPV1", "SLC19A3"):
+            self.assertFalse(ds.ambiguous(sym), sym)
 
 
 if __name__ == "__main__":

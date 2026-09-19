@@ -1,0 +1,68 @@
+{
+ "what": "Calibration of the disease-target screen's power against the rarity of the disease term.",
+ "why": "The screen reports a target as 'unjoined' when no document contains both the symbol and the condition. What it actually measures is whether a co-mention COULD occur, and that depends on how often the condition is written down. The same 128-target list was run against five conditions of increasing literature density; the unjoined count falls monotonically. A zero on a rare term is the least informative zero, not the most - the opposite of the queue's working assumption.",
+ "method": "python3 scripts/disease_screen.py \"<condition>\" research/pudendal-neuralgia-targets.json --no-ot --out <file>; runs 2026-09-19. Density from scripts/disease_screen.py --density.",
+ "caveat": "The two title/abstract joins for pudendal neuralgia are both symbol collisions, not prior work: 'AR' matched 'augmented reality' (PMID 38560457) and 'KIT' matched the word 'kit' in a mesh-kit paper (PMID 24217793). A strict join is therefore an upper bound on prior work, not a proof of it.",
+ "conditions": [
+  {
+   "condition": "pudendal neuralgia",
+   "disease_papers_any_field": 597,
+   "disease_papers_strict": 221,
+   "registered_trials": 25,
+   "n_targets": 128,
+   "unjoined_0_0": 95,
+   "incidental_only_1_5": 25,
+   "co_mentioned_only_gt5": 6,
+   "joined_in_title_or_abstract": 2,
+   "median_any_field": 0.0
+  },
+  {
+   "condition": "vulvodynia",
+   "disease_papers_any_field": 2800,
+   "disease_papers_strict": 1044,
+   "registered_trials": 111,
+   "n_targets": 128,
+   "unjoined_0_0": 25,
+   "incidental_only_1_5": 62,
+   "co_mentioned_only_gt5": 31,
+   "joined_in_title_or_abstract": 10,
+   "median_any_field": 3.0
+  },
+  {
+   "condition": "chronic pelvic pain",
+   "disease_papers_any_field": 16594,
+   "disease_papers_strict": 6348,
+   "registered_trials": 347,
+   "n_targets": 128,
+   "unjoined_0_0": 2,
+   "incidental_only_1_5": 19,
+   "co_mentioned_only_gt5": 53,
+   "joined_in_title_or_abstract": 54,
+   "median_any_field": 17.5
+  },
+  {
+   "condition": "fibromyalgia",
+   "disease_papers_any_field": 53816,
+   "disease_papers_strict": 16558,
+   "registered_trials": 1481,
+   "n_targets": 128,
+   "unjoined_0_0": 0,
+   "incidental_only_1_5": 2,
+   "co_mentioned_only_gt5": 72,
+   "joined_in_title_or_abstract": 54,
+   "median_any_field": 61.5
+  },
+  {
+   "condition": "migraine",
+   "disease_papers_any_field": 124374,
+   "disease_papers_strict": 53444,
+   "registered_trials": 1811,
+   "n_targets": 128,
+   "unjoined_0_0": 0,
+   "incidental_only_1_5": 0,
+   "co_mentioned_only_gt5": 34,
+   "joined_in_title_or_abstract": 94,
+   "median_any_field": 179.0
+  }
+ ]
+}
