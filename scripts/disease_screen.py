@@ -15,13 +15,17 @@ condition. The output is a JSON screen, so a later run can read the counts inste
 the searches, and so a negative result ("nothing here is unjoined") is recorded rather than
 forgotten — which is the failure mode this program exists to avoid.
 
-A target list is data, not code: pass a JSON file of `[{"category": "...", "symbol": "..."}, ...]`.
-Choosing the targets is a judgement and stays with whoever runs the screen; the screen only
-measures how much literature already joins each one. This is the "candidate-generation so the
+A target list is data, not code: pass a JSON file of
+`[{"category": "...", "symbol": "NGF", "names": ["nerve growth factor"]}, ...]`. `names` is the
+words a paper actually uses; the screen unions them with the symbol, because a symbol-only query
+against a thin disease invents gaps ("TAC1" returns 0 papers with pudendal neuralgia; "substance P"
+returns 27). Choosing the targets is a judgement and stays with whoever runs the screen; the screen
+only measures how much literature already joins each one. This is the "candidate-generation so the
 queue feeds itself" half of agenda item 7, made mechanical.
 
 Usage:
     python3 scripts/disease_screen.py ENDOMETRIOSIS targets.json --out research/endo-screen.json
+    python3 scripts/disease_screen.py "pudendal neuralgia" targets.json --forms "pudendal nerve entrapment,pudendal neuropathy"
     python3 scripts/disease_screen.py --density "vulvodynia" "interstitial cystitis"
     python3 scripts/disease_screen.py --selftest
 """
@@ -61,13 +65,28 @@ def epmc(term: str) -> int:
     return n
 
 
+def _split_names(term) -> list:
+    """One name, or several separated by '|'. Both a target and a condition have spellings.
+
+    A pipe-separated list is treated as *the same thing spelled several ways*, so the query
+    unions them; it is not an AND. Passing one name leaves the query unchanged.
+    """
+    if isinstance(term, (list, tuple)):
+        return [str(x).strip() for x in term if str(x).strip()]
+    return [x.strip() for x in str(term).split("|") if x.strip()]
+
+
+def _or(names: list) -> str:
+    return " OR ".join('"%s"' % n for n in names)
+
+
 def any_field(symbol: str, disease: str) -> int:
-    return epmc(f'"{symbol}" AND ("{disease}")')
+    return epmc("(%s) AND (%s)" % (_or(_split_names(symbol)), _or(_split_names(disease))))
 
 
 def strict(symbol: str, disease: str) -> int:
-    return epmc(f'(TITLE:"{symbol}" OR ABSTRACT:"{symbol}") AND '
-                f'(TITLE:"{disease}" OR ABSTRACT:"{disease}")')
+    s, d = _or(_split_names(symbol)), _or(_split_names(disease))
+    return epmc(f"(TITLE:({s}) OR ABSTRACT:({s})) AND (TITLE:({d}) OR ABSTRACT:({d}))")
 
 
 def trials(condition: str) -> int:
@@ -137,23 +156,41 @@ def verdict(any_n: int, strict_n: int) -> str:
     return f"discussed ({any_n} any-field, 0 strict) — read the list; not novel on this number"
 
 
-def run(disease: str, targets: list, use_ot: bool = True) -> dict:
+def run(disease: str, targets: list, use_ot: bool = True, forms=None) -> dict:
     t0 = time.time()
-    dis_any = epmc(f'"{disease}"')
-    dis_strict = epmc(f'(TITLE:"{disease}" OR ABSTRACT:"{disease}")')
-    n_trials = trials(disease)
-    efo, efo_name = ot_disease(disease) if use_ot else (None, None)
+    names = _split_names(disease)
+    for f in _split_names(forms):
+        if f not in names:
+            names.append(f)
+    dis_pipe = "|".join(names)
+    dis_any = epmc("(%s)" % _or(names))
+    dis_strict = epmc("(TITLE:(%s) OR ABSTRACT:(%s))" % (_or(names), _or(names)))
+    n_trials = trials(names[0])
+    efo, efo_name = ot_disease(names[0]) if use_ot else (None, None)
 
     def one(t):
         sym = t["symbol"]
-        a = any_field(sym, disease)
-        s = strict(sym, disease)
+        # A target is a symbol AND the names a paper would actually use for it: the literature
+        # writes "substance P", not "TAC1". The join is the union over all of them, so a row is
+        # "unjoined" only if it is unjoined under every name supplied.
+        target_names = [sym] + [n for n in t.get("names", []) if n]
+        tp = "|".join(target_names)
+        a = any_field(tp, dis_pipe)
+        s = strict(tp, dis_pipe)
+        # What the plain symbol-only query against the primary spelling would have reported,
+        # kept so a reader can see the difference a name makes rather than trusting the union.
+        sym_s = strict(sym, names[0])
+        sym_a = any_field(sym, names[0])
         score = ot_score(sym, efo) if use_ot else None
         return {
             "category": t.get("category", ""),
             "symbol": sym,
+            "names": target_names[1:],
             "any_field": a,
             "strict": s,
+            "symbol_only_strict": sym_s,
+            "symbol_only_any_field": sym_a,
+            "naming_sensitive": bool(target_names[1:]) and (s != sym_s or a != sym_a),
             "open_targets_score": score,
             "verdict": verdict(a, s),
         }
@@ -162,17 +199,21 @@ def run(disease: str, targets: list, use_ot: bool = True) -> dict:
         rows = list(ex.map(one, targets))
 
     return {
-        "disease": disease,
+        "disease": names[0],
+        "disease_forms_searched": names,
         "disease_resolved": efo_name,
         "efo_id": efo,
         "disease_papers_any_field": dis_any,
         "disease_papers_strict": dis_strict,
         "registered_trials_for_disease": n_trials,
-        "note": ("any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") — counts "
-                 "mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT "
-                 "— the number that decides novelty. Counts move with spelling; these are small "
-                 "numbers, not exact ones. A zero means nobody has PUBLISHED the link; it does "
-                 "not mean the link is true, untested, or valuable."),
+        "note": ("any_field = Europe PMC hitCount for any of TARGET's names AND any of the "
+                 "disease's spellings — counts mentions, not studies. strict = the same union "
+                 "with both sides required in a TITLE or ABSTRACT — the number that decides "
+                 "novelty. Counts move with spelling; these are small numbers, not exact ones. A "
+                 "zero means nobody has PUBLISHED the link; it does not mean the link is true, "
+                 "untested, or valuable. `symbol_only_*` is what the plain symbol against the "
+                 "primary spelling returns, so the rows where a name changes the answer are "
+                 "visible instead of implied."),
         "n_targets": len(targets),
         # Every band where strict == 0 is candidate territory, and the three bands are
         # different claims. The summary used to print only the first two, which hid the one
@@ -184,6 +225,12 @@ def run(disease: str, targets: list, use_ot: bool = True) -> dict:
         "no_strict_join_but_discussed": [r["symbol"] for r in rows
                                          if r["strict"] == 0 and r["any_field"] > INCIDENTAL_MAX],
         "joined_in_title_or_abstract": [r["symbol"] for r in rows if r["strict"] > 0],
+        # The rows a symbol-only screen would have called unjoined but which are joined once the
+        # names the literature actually uses are searched. This is the false-gap count, and it
+        # belongs in the artefact: the whole defect is that a false gap looks like a real one.
+        "false_gaps_repaired_by_names": [r["symbol"] for r in rows
+                                         if r.get("naming_sensitive")
+                                         and r["symbol_only_strict"] == 0 and r["strict"] > 0],
         "seconds": round(time.time() - t0, 1),
         "targets": rows,
     }
@@ -255,13 +302,19 @@ def main() -> int:
         print("\nstrict = papers naming the condition in a title or abstract. A large number "
               "means the ground is worked; go elsewhere for a joined-literature discovery.")
         return 0
+    if "--forms" in args:
+        i = args.index("--forms")
+        forms = args[i + 1].split(",") if i + 1 < len(args) else None
+        del args[i:i + 2]
+    else:
+        forms = None
     if len(args) != 2:
         print(__doc__)
         return 1
     disease, targets_path = args
     with open(targets_path) as fh:
         targets = json.load(fh)
-    res = run(disease, targets, use_ot=use_ot)
+    res = run(disease, targets, use_ot=use_ot, forms=forms)
     if out:
         with open(out, "w") as fh:
             json.dump(res, fh, indent=1)
@@ -277,6 +330,12 @@ def main() -> int:
     print(f"  of those, incidental only (1-5): {', '.join(res['incidental_any_field_only']) or '(none)'}")
     print(f"  of those, co-mentioned but never studied: "
           f"{', '.join(res['no_strict_join_but_discussed']) or '(none)'}")
+    fg = res["false_gaps_repaired_by_names"]
+    if fg:
+        print(f"  a symbol-only query would have called these unjoined, but they join under a "
+              f"name the literature uses ({len(fg)}): {', '.join(fg)}")
+    if len(res["disease_forms_searched"]) > 1:
+        print(f"\ndisease spellings searched: {', '.join(res['disease_forms_searched'])}")
     if out:
         print(f"\nwrote {out}")
     return 0
