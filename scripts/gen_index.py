@@ -20,6 +20,10 @@ anything.
 Usage:
     python3 scripts/gen_index.py            # write governance/README.md, discussions/README.md
     python3 scripts/gen_index.py --stdout   # print, write nothing
+
+Order matters: the index is built with `git ls-files`, so a brand-new document is invisible
+until it is staged. `git add <new file>` first, then run this. (Hit and diagnosed 2026-09-18 —
+this generator reported "unchanged" for a discussions file that had not been added yet.)
 """
 
 import argparse
