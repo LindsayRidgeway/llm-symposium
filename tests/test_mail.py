@@ -63,6 +63,90 @@ def test_credentials_for_partial_is_unconfigured():
         assert mail.credentials_for("desi") is None  # password missing
 
 
+def test_credentials_do_not_leak_across_identities():
+    """Finding RT-7: the generic pair belongs to Desi; it must never be used to
+    transmit a letter that claims another amigo's identity."""
+    with _clear():
+        os.environ["SYMPOSIUM_MAIL_USER"] = "desi.s.amigo@gmail.com"
+        os.environ["SYMPOSIUM_MAIL_APP_PASSWORD"] = "pw-desi"
+        assert mail.credentials_for("claude") is None
+        assert mail.credentials_for("gemini") is None
+        assert mail.credentials_for("tarik") is None
+        # ... while Desi, the pair's owner, still falls back to it.
+        assert mail.credentials_for("desi") == ("desi.s.amigo@gmail.com", "pw-desi")
+
+
+def test_credentials_for_unknown_identity_is_none():
+    """An unrecognised identity must fail closed, not borrow the generic pair."""
+    with _clear():
+        os.environ["SYMPOSIUM_MAIL_USER"] = "desi.s.amigo@gmail.com"
+        os.environ["SYMPOSIUM_MAIL_APP_PASSWORD"] = "pw-desi"
+        assert mail.credentials_for("mallory") is None
+
+
+def test_drain_outbox_refuses_identity_without_its_own_creds():
+    """Finding RT-7 regression: a draft claiming `Identity: claude` while only
+    the generic (Desi) pair is configured must stay in the outbox, and SMTP
+    must never be touched — no silent send under the wrong From:."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD"] = "pw-desi"
+            mail.REPO_ROOT = Path(td)
+            outbox = Path(td) / "channels" / "outbound"
+            sent = Path(td) / "channels" / "sent"
+            outbox.mkdir(parents=True)
+            draft = outbox / "draft.md"
+            draft.write_text(
+                "Identity: claude\nTo: someone@example.com\nSubject: Hi\n\nHello\n",
+                encoding="utf-8",
+            )
+            mail.OUTBOUND_DIR = outbox
+            mail.SENT_DIR = sent
+            mail.INBOUND_DIR = Path(td) / "channels" / "inbound"
+
+            with mock.patch.object(mail.smtplib, "SMTP") as smtp:
+                n = mail.drain_outbox()  # must not raise; logs a refusal
+            assert n == 0
+            assert draft.exists()          # refused, still in outbox
+            assert not sent.exists() or not list(sent.glob("*.md"))
+            smtp.assert_not_called()
+
+
+def test_sent_letters_are_partitioned_by_mailbox():
+    """Gemini's telemetry finding (2026-09-18): each mailbox is checked against
+    its own letters, so Desi's record cannot raise a false loss warning on
+    Claude's mailbox."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD"] = "pw-desi"
+            os.environ["SYMPOSIUM_MAIL_USER_CLAUDE"] = "claude.symposium@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE"] = "pw-claude"
+            sent = Path(td) / "channels" / "sent"
+            sent.mkdir(parents=True)
+            (sent / "a.md").write_text(
+                "Identity: desi\nTo: someone@example.com\nSubject: From Desi\n\nhi\n",
+                encoding="utf-8",
+            )
+            (sent / "b.md").write_text(
+                "Identity: claude\nTo: someone@example.com\nSubject: From Claude\n\nhi\n",
+                encoding="utf-8",
+            )
+            mail.SENT_DIR = sent
+
+            desi_letters = mail._sent_letters_for(mail.credentials_for("desi"))
+            claude_letters = mail._sent_letters_for(mail.credentials_for("claude"))
+            assert [p.name for p, _ in desi_letters] == ["a.md"]
+            assert [s for _, s in desi_letters] == ["From Desi"]
+            assert [p.name for p, _ in claude_letters] == ["b.md"]
+            assert [s for _, s in claude_letters] == ["From Claude"]
+
+
 def test_parse_draft_basic():
     headers, body = mail.parse_draft(
         "Identity: desi\n"

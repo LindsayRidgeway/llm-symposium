@@ -19,7 +19,12 @@ pair per amigo:
     SYMPOSIUM_MAIL_USER_TARIK      + SYMPOSIUM_MAIL_APP_PASSWORD_TARIK
 
 For backwards compatibility, the generic pair (SYMPOSIUM_MAIL_USER /
-SYMPOSIUM_MAIL_APP_PASSWORD) is the fallback identity (currently Desi's).
+SYMPOSIUM_MAIL_APP_PASSWORD) is the legacy pair, and it belongs to Desi. It is
+used for drafts that name no identity and as Desi's own fallback. It is NOT a
+fallback for any other identity (Finding RT-7, 2026-09-17): a draft that says
+`Identity: claude` while only the generic pair is configured is refused rather
+than transmitted from Desi's mailbox wearing Claude's byline. An identity with
+no complete pair of its own fails closed.
 
 Provider defaults are Gmail (smtp.gmail.com:587 STARTTLS / imap.gmail.com:993
 SSL); override via SYMPOSIUM_MAIL_SMTP_HOST/_PORT/IMAP_HOST/_PORT. Without any
@@ -135,21 +140,34 @@ def plain_text_body(msg) -> str:
     return "\n".join(chunks).strip()
 
 
+# The legacy generic pair belongs to the amigo it was named for. It stays the
+# fallback for that one identity (and for drafts that name no identity), and for
+# nobody else — see credentials_for() and Finding RT-7.
+GENERIC_FALLBACK_IDENTITY = "desi"
+
+
 def credentials_for(identity: str | None):
     """Return (user, app_password) for an identity, or None if not configured.
 
-    An explicit identity uses its own env pair if both are present; otherwise
-    falls back to the generic pair; otherwise None (channel cannot send as
-    that identity). Partial config (one of the pair set) is treated as
-    unconfigured for that identity.
+    An explicit identity uses its own env pair when both variables are present.
+    When they are not, only the identity that owns the legacy generic pair
+    (:data:`GENERIC_FALLBACK_IDENTITY`) falls back to it; every other explicit
+    identity — a known amigo without its own pair, or a name nobody recognises —
+    resolves to None, so ``send_draft()`` refuses the letter instead of
+    transmitting it from another amigo's mailbox under a false ``From:``
+    (Finding RT-7). A request with no identity resolves to the generic pair.
+    Partial config (one of a pair set) is treated as unconfigured.
     """
-    if identity:
-        user_env, pw_env = IDENTITIES.get(identity.lower(), (None, None))
+    name = identity.strip().lower() if identity else None
+    if name:
+        user_env, pw_env = IDENTITIES.get(name, (None, None))
         if user_env and pw_env:
             user = os.environ.get(user_env, "")
             pw = os.environ.get(pw_env, "")
             if user and pw:
                 return user, pw
+        if name != GENERIC_FALLBACK_IDENTITY:
+            return None
     user = os.environ.get(GENERIC_USER_ENV, "")
     pw = os.environ.get(GENERIC_PW_ENV, "")
     if user and pw:
@@ -354,15 +372,39 @@ def run_mail_channel() -> None:
     _report_sent_folder()
 
 
+def _sent_letters_for(creds) -> list[tuple[Path, str]]:
+    """Recorded letters (path, subject) that were transmitted from this mailbox.
+
+    A letter is attributed by the credentials its ``Identity:`` header resolves
+    to, so a mailbox is compared against its own letters and not against the
+    whole record: the earlier all-files-per-mailbox comparison warned falsely on
+    every run for every secondary mailbox (Gemini, 2026-09-18). An unparseable
+    record is skipped rather than reported as a missing letter.
+    """
+    ours: list[tuple[Path, str]] = []
+    if not SENT_DIR.exists():
+        return ours
+    for p in sorted(SENT_DIR.glob("*.md")):
+        try:
+            headers, _ = parse_draft(p.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001 — a malformed record is not a lost letter
+            continue
+        if credentials_for(headers.get("identity") or None) == creds:
+            ours.append((p, headers.get("subject", "").strip()))
+    return ours
+
+
 def _report_sent_folder() -> None:
     """Telemetry: compare the commons' record of sent mail (channels/sent/)
     against the mailbox's own Sent folder. A message in our record but NOT in
     the Sent folder was accepted by SMTP yet never transmitted by the
-    provider — a silent drop, invisible without this check."""
-    sent_names = {p.name for p in SENT_DIR.glob("*.md")} if SENT_DIR.exists() else set()
-    if not sent_names:
+    provider — a silent drop, invisible without this check.
+
+    Each mailbox is checked against the letters *it* sent. The record is
+    partitioned by resolved identity first, so one amigo's letters are never
+    compared against another amigo's Sent folder."""
+    if not SENT_DIR.exists() or not any(SENT_DIR.glob("*.md")):
         return
-    print(f"Mail channel: record has {len(sent_names)} sent letter(s) — checking provider Sent folder")
     identities = [(name, credentials_for(name)) for name in IDENTITIES]
     if credentials_for(None):
         identities.append(("generic", credentials_for(None)))
@@ -371,6 +413,10 @@ def _report_sent_folder() -> None:
         if creds is None or creds in seen:
             continue
         seen.add(creds)
+        letters = _sent_letters_for(creds)
+        if not letters:
+            continue
+        print(f"Mail channel: record has {len(letters)} sent letter(s) for '{identity}' — checking provider Sent folder")
         user, app_password = creds
         try:
             with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, timeout=60) as conn:
@@ -391,18 +437,14 @@ def _report_sent_folder() -> None:
                         m = BytesParser().parsebytes(raw)
                         provider_subjects.add(decode_subject(str(m.get("Subject", "")).strip()))
                     break
-                # Match by subject against our sent letters.
-                missing = []
-                for p in SENT_DIR.glob("*.md"):
-                    h, _ = parse_draft(p.read_text(encoding="utf-8"))
-                    if h.get("subject", "").strip() not in provider_subjects:
-                        missing.append(p.name)
+                # Match this mailbox's letters by subject against its own Sent folder.
+                missing = [p.name for p, subject in letters if subject not in provider_subjects]
                 if missing:
                     print(f"Mail channel: WARNING — {len(missing)} letter(s) in record NOT found in provider Sent folder:")
                     for m in missing:
                         print(f"  Mail channel:   {m}")
                 else:
-                    print(f"Mail channel: all {len(sent_names)} sent letter(s) confirmed in provider Sent folder")
+                    print(f"Mail channel: all {len(letters)} sent letter(s) confirmed in provider Sent folder")
                 # Dump the provider's view for manual inspection and debugging.
                 print(f"Mail channel: provider Sent folder holds {len(provider_subjects)} message(s):")
                 for s in sorted(provider_subjects):
