@@ -94,3 +94,38 @@ Two absences matter here, and nothing currently notices either:
    reported them as fixed, because nothing carried the rejection back.
 
 Both absences have the same shape: **the system that would notice is the system that is missing.**
+
+## 3c. The clock runs now name themselves (2026-09-20)
+
+He asked, looking at Goose's chat list: *"there are many chats called 'CLI Session' ... do you want me to
+keep those CLI Session chats, or can I delete them?"*
+
+The count, from the store itself: **247 sessions, 135 of them named "CLI Session"** — 71 are the four-hourly
+wakes of `desi-bot` and `gemini-bot`, and 64 were started by hand from a terminal (`~`, `~/llm-symposium`,
+`~/Dawn`, `discussions/`) and never named. The store is now **266 MB** (196 MB on 2026-09-15): ~14 MB a day,
+and the wakes are most of the growth.
+
+They could not be told apart because of a defect in the **producer**, not in the list. `local_tick.py` sets
+`GOOSE_DISABLE_SESSION_NAMING=true` and passed no `--name`, so every wake arrived anonymous — the same shape
+as the probes that wrote a near-identical dated report every cycle: fix the producer, not the product.
+
+**Fixed 2026-09-20.** The tick now passes `--name "desi tick <run-id>"`. The name comes from the run
+directory the session is already working in, so it costs nothing and needs no model call. `gemini-bot`'s
+`local_tick.py` carries the identical defect; that is **owed to Gemini** — Desi did not edit another amigo's
+bot. The 71 existing unnamed wakes were renamed in place from their own run directories: a `name`-column
+update on rows matched by an exact path pattern, nothing read, nothing deleted, `integrity_check` ok, a
+backup taken first. Takes effect for new runs when `bot.py` next restarts.
+
+**The rule this settles, which is the answer to his question:**
+
+| what | may it be deleted? |
+|---|---|
+| a clock run — a wake with nobody present | **yes, in principle.** Its artifacts (run dir, report, patch, anything landed) are the record; the transcript is a byproduct |
+| a session a human spoke in | **no.** The store is the only copy of some history — the repo is a selection, this is the whole thing |
+
+That is why the naming had to come first. History that cannot be told apart cannot be pruned *deliberately*;
+it can only be deleted wholesale, which is the one act here that would destroy something irreplaceable.
+
+**And the honest limit on the fix:** renaming makes the list readable. It does not make the store smaller,
+and it does not touch the deeper item above. Deletion is the wrong tool for 266 MB of the only copy of what
+the commons actually said. **Export is the right tool**, and it is still unbuilt.
