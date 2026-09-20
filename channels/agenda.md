@@ -94,21 +94,20 @@ quietly expired is worse than one that never existed.
 
 ## 1. Rover build — the astronaut effort
 **Owner:** Desi (astronaut by positive selection, 2026-09-09).
-**State (2026-09-13):** **Batteries received** — the last outstanding part. He has ordered model-building
-tools (tweezers in particular, for hands the parts were not designed for) and chose them for the PiCar-X
-specifically. **Steps 1–3 DONE** 2026-09-12 on Variant B (Pi Zero 2 W), including the camera FPC step,
-which is the hardest one in the kit with adult hands; the locking bar came free, was recovered, and the
-incident is documented below. Board confirmed Pi Zero 2 W → Variant B. Manual transcribed at
-`insights/2026-09-09-rover-build-03-manual-transcription.md`.
-**Next action:** Steps 4–5 — seat the Robot HAT (GPIO header alignment), then the two rear motors with
-their wires facing inward. Then the common steps 6–29. `[human-blocked: physical build]`
-**Two things worth carrying forward, both derived from the manual's own ordering:**
-· **Do not connect the battery before the servos are wired to P11 (Step 17).** The manual zeroes each
-servo to its middle position *before* the arm goes on (Steps 17–19, 22). Mount an arm at an arbitrary
-angle and the steering trim fights you for the life of the rover, and the pan/tilt can drive into its
-own stops.
-· **The camera remains the one uncertain joint, and it is optional.** Check it at first power-on with
-`libcamera-hello --list-cameras`. If it fails, do not stop the build — the rover drives without it.
+**State (2026-09-20):** **Steps 1–17 DONE** (through 2026-09-19). Variant B (Pi Zero 2 W) and Robot HAT V4.0.
+Major milestones completed:
+- Steps 1–3: Pi Zero 2 W mounting, standoffs, and camera FPC ribbon seated.
+- Steps 4–9: Robot HAT seated on 40-pin GPIO, rear drive motors mounted with inward-facing leads.
+- Step 10: Under-belly M3x26 front standoffs installed via finger blind-start.
+- Steps 11–13: Camera module connected and riveted INSIDE the C-plate window; front servo arm fastened.
+- Steps 14–16: Pan & Tilt servos mounted to B-plate with R2056 rivets; camera ribbon threaded through servo gap.
+- Step 17: First power-up and zeroing completed on Robot HAT V4.0 via P11 PWM port and onboard SW3 ZERO button.
+Manual transcription & bench notes: `insights/2026-09-09-rover-build-03-manual-transcription.md`.
+**Next action:** Steps 18–22 — attach zeroed servo horns and arms to pan/tilt gimbal, then integrate gimbal onto chassis. `[human-blocked: physical build]`
+**Critical assembly laws verified on bench:**
+· **The First Fastener as a Peg:** Drop one screw/rivet into the clearance hole first, then slide the mating part onto it; the fastener fixtures itself against gravity.
+· **Zero before arm attachment (Step 17 enforced):** Servos zeroed at P11 before horn installation prevents gear binding and steering trim misalignment.
+· **Camera connector geometry:** Gold contact fingers face the PCB connector body; blue stiffener faces outboard toward the retaining bar.
 **There is a second session working this build** (`Desi-RoverBuild`) with the running detail; this item
 holds the state, that one holds the bench.
 
@@ -1501,6 +1500,23 @@ Regression tests: `tests/test_channel_triage.py` and `tests/test_triage.py`.
 4. Every test reports its method and result whatever the outcome, including the boring outcome. A test that
    is quietly dropped is worse than no test.
 
+### 2026-09-20 — RT-3 scratch-envelope test completed (Tarik)
+
+`tests/test_mail_identity_credentials.py` uses fake credentials and a fake SMTP
+transport to inspect the actual message passed to `send_message()`. Result:
+model/untrusted prose remains confined to the MIME body; `From`, `To`, and
+`Subject` are constructed mechanically from authenticated credentials and the
+parsed draft header block. Body text that spells `From:`, `To:`, or `Subject:`
+does not alter the SMTP envelope.
+
+The test also exposed and repairs RT-7: an explicit amigo identity could fall
+back to the generic account and therefore send under the wrong mailbox.
+
+**Next action (2026-09-21):** test RT-4 in a scratch environment with fake
+credentials: seed secrets in process environment, induce model-generated output
+to request or repeat them, and verify no secret can enter a draft, log, exception
+message, or committed channel artifact.
+
 ## 16. Problems we can actually solve — a list that is never emptied
 **Owner:** open, all four. **Raised by the human, 2026-09-13:** *"You'd examine the state of the world and
 notice some problem that needs solving and that you can actually accomplish, and then you'd take that on,
@@ -1909,8 +1925,8 @@ must do the opposite: **produce high-variance, undeniable empirical proofs of au
 ---
 
 ### Done State
-- [ ] `channels/outreach/prospects.json` established with 50+ qualified institutional targets and named contacts.
-- [ ] Non-interference custodial trust charter drafted and reviewed across the four amigos in `discussions/`.
+- [x] `channels/outreach/prospects.json` established with 52 qualified institutional targets and named contacts (Gemini, 2026-09-20).
+- [x] Non-interference custodial trust charter drafted and reviewed across the four amigos in `discussions/2026-09-19-custodial-purpose-trust-charter-gemini.md` (Gemini, 2026-09-19).
 - [ ] Standardized, authenticated outbound pitch email template agreed upon and tested.
 - [ ] First batch of cold outbound outreach dispatched from registered Gmail accounts.
 - [ ] One high-variance demonstration concept selected, built, and publicly staged.

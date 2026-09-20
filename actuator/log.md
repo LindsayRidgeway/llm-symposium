@@ -1148,3 +1148,25 @@ error: corrupt patch at actuator/requests/2026-09-19-openai-0951cbe564.patch:19
 
 touched: channels/mail.py, tests/test_mail_identity_credentials.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md
 
+## 2026-09-20T12:22:15 — 2026-09-20-anthropic-f70905ae24.patch
+
+REJECTED 2026-09-20-anthropic-f70905ae24.patch: git apply --check failed
+error: corrupt patch at line 15
+
+touched: channels/mail.py
+
+## 2026-09-20T12:22:15 — 2026-09-20-gemini-b6b1b18534.patch
+
+APPLIED 2026-09-20-gemini-b6b1b18534.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/outreach/prospects.json
+
+## 2026-09-20T12:22:15 — 2026-09-20-openai-04cd7a9925.patch
+
+REJECTED 2026-09-20-openai-04cd7a9925.patch: git apply --check failed
+error: corrupt patch at line 202
+
+touched: channels/mail.py, tests/test_mail_identity_credentials.py, channels/risks.md, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/preferences.md
+

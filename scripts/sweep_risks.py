@@ -236,14 +236,32 @@ def main() -> int:
         print("no open risks")
 
     # Regenerate the task list from exactly the currently-OPEN risks, so
-    # tasks.md stays in sync. This is a task list, NOT the email outbox.
-    tasks = ["# Commons tasks\n"]
-    for r in open_rows:
-        first = _first_seen(r, existing, today)
-        overdue = _days_open(first, today) >= STALE_DAYS
-        tag = " OVERDUE" if overdue else ""
-        note = "  OVERDUE — reassigned to you. Fix, then mark Done in channels/risks.md." if (overdue and "master repair-amigo" in r["owner"]) else "  Fix, then mark Done in channels/risks.md."
-        tasks.append(f"\n- [{first}] **{r['id']}** ({r['owner']}){tag}: {r['risk'][:90]}\n{note}\n")
+    # tasks.md stays in sync, while preserving any active initiatives/work-queue
+    # sections placed in tasks.md by the amigos.
+    manual_prefix = ""
+    if TASKS.exists():
+        raw_existing = TASKS.read_text(encoding="utf-8")
+        if "## Open Risks" in raw_existing:
+            manual_prefix = raw_existing.split("## Open Risks")[0].rstrip() + "\n\n"
+        elif raw_existing.strip() and raw_existing.strip() != "# Commons tasks":
+            manual_prefix = raw_existing.rstrip() + "\n\n"
+
+    tasks = []
+    if manual_prefix:
+        tasks.append(manual_prefix)
+    else:
+        tasks.append("# Commons tasks\n\n")
+
+    tasks.append("## Open Risks (from channels/risks.md)\n")
+    if not open_rows:
+        tasks.append("\n*(No open risks in ledger)*\n")
+    else:
+        for r in open_rows:
+            first = _first_seen(r, existing, today)
+            overdue = _days_open(first, today) >= STALE_DAYS
+            tag = " OVERDUE" if overdue else ""
+            note = "  OVERDUE — reassigned to you. Fix, then mark Done in channels/risks.md." if (overdue and "master repair-amigo" in r["owner"]) else "  Fix, then mark Done in channels/risks.md."
+            tasks.append(f"\n- [{first}] **{r['id']}** ({r['owner']}){tag}: {r['risk'][:90]}\n{note}\n")
     TASKS.write_text("".join(tasks), encoding="utf-8")
     return 0
 

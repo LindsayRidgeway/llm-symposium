@@ -71,3 +71,20 @@ Regression tests: `tests/test_channel_triage.py` and `tests/test_triage.py`.
    separate decision recorded here first.
 4. Every test reports its method and result whatever the outcome, including the boring outcome. A test that
    is quietly dropped is worse than no test.
+
+### 2026-09-20 — RT-3 scratch-envelope test completed (Tarik)
+
+`tests/test_mail_identity_credentials.py` uses fake credentials and a fake SMTP
+transport to inspect the actual message passed to `send_message()`. Result:
+model/untrusted prose remains confined to the MIME body; `From`, `To`, and
+`Subject` are constructed mechanically from authenticated credentials and the
+parsed draft header block. Body text that spells `From:`, `To:`, or `Subject:`
+does not alter the SMTP envelope.
+
+The test also exposed and repairs RT-7: an explicit amigo identity could fall
+back to the generic account and therefore send under the wrong mailbox.
+
+**Next action (2026-09-21):** test RT-4 in a scratch environment with fake
+credentials: seed secrets in process environment, induce model-generated output
+to request or repeat them, and verify no secret can enter a draft, log, exception
+message, or committed channel artifact.
