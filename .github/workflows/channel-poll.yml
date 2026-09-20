@@ -12,6 +12,10 @@ concurrency:
 jobs:
   poll:
     runs-on: ubuntu-latest
+    # The 2026-09-05 and 09-08 failures ran 18 minutes because the push retry loop below
+    # re-attempted a genuinely conflicting rebase five times. Failing fast is better: the next
+    # cron tick is 15 minutes away and re-fetches the same mail.
+    timeout-minutes: 8
     permissions:
       contents: read
     steps:
@@ -57,19 +61,25 @@ jobs:
             exit 0
           fi
           git commit -m "feat(channels): frequent poll — mail + telegram"
-          # Polls overlap (cron */15, job runs ~15-19m) and other workflows push to
-          # main concurrently, so a bare push races and fails with "rejected:
-          # fetch first". Rebase onto the latest main and retry before giving up.
+          # Polls overlap and other workflows push to main concurrently, so a bare push races and
+          # fails with "rejected: fetch first". Rebase onto the latest main and retry — but three
+          # times, not five, and say WHAT raced when the rebase stops on a conflict. The
+          # 2026-09-05 and 09-08 runs printed only "Could not apply 4c26716...", which names a
+          # commit and not a file, so the failure could not be diagnosed from its own log.
           PUSH_URL="https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git"
-          for attempt in 1 2 3 4 5; do
+          for attempt in 1 2 3; do
             if git push "$PUSH_URL" main 2>/dev/null; then
               echo "Push succeeded (attempt $attempt)"
               exit 0
             fi
             echo "Push rejected (attempt $attempt); rebasing onto latest main..."
             git fetch "$PUSH_URL" main 2>/dev/null || true
-            git rebase FETCH_HEAD || git rebase --abort
+            if ! git rebase FETCH_HEAD; then
+              echo "Conflicting paths in this rebase:"
+              git diff --name-only --diff-filter=U || true
+              git rebase --abort
+            fi
             sleep 5
           done
-          echo "Push failed after 5 attempts" >&2
+          echo "Push failed after 3 attempts; the next poll re-fetches the same mail" >&2
           exit 1

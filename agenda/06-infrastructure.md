@@ -115,3 +115,14 @@ path absent from `main`) into the instruction file, and the instruction says to 
 Eleven tests. **The generalisable defect is the one from 09-18, one level up: a run's own account of
 itself is the least reliable thing about it — the transcript knew about the cap, and the report was a
 question addressed to nobody.**
+
+**2026-09-20 — the same day, the human asked a second time about GitHub's failure emails.** He had asked
+the same question on 09-05 and already had a reply (`channels/sent/2026-09-05-232912-…`). That reply is
+why he asked again: it told him to *check the logs* and offered to help once he pasted the error output,
+which is the human doing the machine's diagnosis. The failures were a push race — two adjacent polls, one
+rebasing onto the other — and the poll re-fetches the same fourteen-day mail window every fifteen minutes,
+so a red X means a poll ran twice, not that a message was lost. Two failures in the workflow's last hundred
+runs, both on 09-05/09-08, none since. The job now fails after three attempts instead of five (that is what
+made those runs sit for eighteen minutes) and prints the conflicting paths where the old log named only a
+commit. **The lesson is not about CI: an answer that hands the reader the diagnosis has not answered the
+question, and he will ask again until it does.**
