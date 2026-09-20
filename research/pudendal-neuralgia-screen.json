@@ -8,8 +8,9 @@
  "disease_forms_searched": [
   "pudendal neuralgia"
  ],
- "note": "any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") \u2014 counts mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT \u2014 the number that decides novelty. Counts move with spelling; these are small numbers, not exact ones. A zero means nobody has PUBLISHED the link; it does not mean the link is true, untested, or valuable. Where a target carries `names`, any_field/strict are the maximum over the symbol and every name, so a row is only 'unjoined' if it is unjoined under every spelling supplied. Every strict join carries its `strict_hits` \u2014 open them; the count cannot tell a paper about the pair from a coincidence of English.",
+ "note": "any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") \u2014 counts mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT \u2014 the number that decides novelty. Counts move with spelling; these are small numbers, not exact ones. A zero means nobody has PUBLISHED the link; it does not mean the link is true, untested, or valuable. Where a target carries `names`, any_field/strict are the maximum over the symbol and every name, so a row is only 'unjoined' if it is unjoined under every spelling supplied. Every strict join carries its `strict_hits` \u2014 open them; the count cannot tell a paper about the pair from a coincidence of English. A row marked `\"control\": true` is a string that names nothing: it is scored, kept out of every count and band, and reported in `controls` with a `control_check` line, so the reader can see whether the unjoined band separates a gene from noise.",
  "n_targets": 128,
+ "n_controls": 3,
  "unjoined": [
   "SCN10A",
   "SCN1B",
@@ -281,11 +282,33 @@
  ],
  "density_floor": 1000,
  "density_warning": "only 221 title/abstract papers name this condition, below the 1000 floor. At this density the unjoined band saturates: most targets look unjoined for the trivial reason that few documents mention the condition at all. A zero here is a property of the corpus, not evidence of an undiscovered link \u2014 work this condition by reading the whole corpus, or screen a well-populated sibling and check whether the link reaches this one.",
- "seconds": 26.5,
+ "control_check": "3 of 3 strings that name nothing scored 'unjoined', and so did 95 of 128 real targets (74%). A string that names nothing scores exactly like a gene, so at this density the unjoined band measures the condition's literature, not the absence of a link.",
+ "controls": [
+  {
+   "symbol": "XQZWKJ",
+   "any_field": 0,
+   "strict": 0,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  },
+  {
+   "symbol": "QQXXZZ",
+   "any_field": 0,
+   "strict": 0,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  },
+  {
+   "symbol": "VBNMASDF",
+   "any_field": 0,
+   "strict": 0,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  }
+ ],
+ "seconds": 27.2,
  "targets": [
   {
    "category": "sodium channels / neuronal excitability",
    "symbol": "SCN9A",
+   "is_control": false,
    "any_field": 3,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -301,6 +324,7 @@
   {
    "category": "sodium channels / neuronal excitability",
    "symbol": "SCN10A",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -316,6 +340,7 @@
   {
    "category": "sodium channels / neuronal excitability",
    "symbol": "SCN11A",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -331,6 +356,7 @@
   {
    "category": "sodium channels / neuronal excitability",
    "symbol": "SCN1B",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -346,6 +372,7 @@
   {
    "category": "sodium channels / neuronal excitability",
    "symbol": "SCN2B",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -361,6 +388,7 @@
   {
    "category": "sodium channels / neuronal excitability",
    "symbol": "SCN3A",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -376,6 +404,7 @@
   {
    "category": "sodium channels / neuronal excitability",
    "symbol": "SCN8A",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -391,6 +420,7 @@
   {
    "category": "potassium channels",
    "symbol": "KCNQ2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -406,6 +436,7 @@
   {
    "category": "potassium channels",
    "symbol": "KCNQ3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -421,6 +452,7 @@
   {
    "category": "potassium channels",
    "symbol": "KCNQ5",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -436,6 +468,7 @@
   {
    "category": "potassium channels",
    "symbol": "KCNS1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -451,6 +484,7 @@
   {
    "category": "potassium channels",
    "symbol": "KCNA1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -466,6 +500,7 @@
   {
    "category": "calcium channels (gabapentinoid target)",
    "symbol": "CACNA2D1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -481,6 +516,7 @@
   {
    "category": "calcium channels (gabapentinoid target)",
    "symbol": "CACNA2D2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -496,6 +532,7 @@
   {
    "category": "calcium channels (gabapentinoid target)",
    "symbol": "CACNA1B",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -511,6 +548,7 @@
   {
    "category": "calcium channels (gabapentinoid target)",
    "symbol": "CACNA1H",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -526,6 +564,7 @@
   {
    "category": "TRP channels",
    "symbol": "TRPV1",
+   "is_control": false,
    "any_field": 16,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -541,6 +580,7 @@
   {
    "category": "TRP channels",
    "symbol": "TRPA1",
+   "is_control": false,
    "any_field": 6,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -556,6 +596,7 @@
   {
    "category": "TRP channels",
    "symbol": "TRPM8",
+   "is_control": false,
    "any_field": 3,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -571,6 +612,7 @@
   {
    "category": "TRP channels",
    "symbol": "TRPV4",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -586,6 +628,7 @@
   {
    "category": "mechanotransduction",
    "symbol": "PIEZO1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -601,6 +644,7 @@
   {
    "category": "mechanotransduction",
    "symbol": "PIEZO2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -616,6 +660,7 @@
   {
    "category": "purinergic signalling",
    "symbol": "P2RX2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -631,6 +676,7 @@
   {
    "category": "purinergic signalling",
    "symbol": "P2RX3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -646,6 +692,7 @@
   {
    "category": "purinergic signalling",
    "symbol": "P2RX7",
+   "is_control": false,
    "any_field": 2,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -661,6 +708,7 @@
   {
    "category": "purinergic signalling",
    "symbol": "P2RY12",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -676,6 +724,7 @@
   {
    "category": "acid sensing",
    "symbol": "ASIC1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -691,6 +740,7 @@
   {
    "category": "acid sensing",
    "symbol": "ASIC2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -706,6 +756,7 @@
   {
    "category": "acid sensing",
    "symbol": "ASIC3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -721,6 +772,7 @@
   {
    "category": "glutamate signalling",
    "symbol": "GRIN1",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -736,6 +788,7 @@
   {
    "category": "glutamate signalling",
    "symbol": "GRIN2B",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -751,6 +804,7 @@
   {
    "category": "glutamate signalling",
    "symbol": "GRIA1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -766,6 +820,7 @@
   {
    "category": "glutamate signalling",
    "symbol": "GRM5",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -781,6 +836,7 @@
   {
    "category": "GABA and glycine",
    "symbol": "GABRA1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -796,6 +852,7 @@
   {
    "category": "GABA and glycine",
    "symbol": "GABRB3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -811,6 +868,7 @@
   {
    "category": "GABA and glycine",
    "symbol": "GABBR2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -826,6 +884,7 @@
   {
    "category": "GABA and glycine",
    "symbol": "GLRA1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -841,6 +900,7 @@
   {
    "category": "GABA and glycine",
    "symbol": "GLRB",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -856,6 +916,7 @@
   {
    "category": "GABA and glycine",
    "symbol": "GAD1",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -871,6 +932,7 @@
   {
    "category": "GABA and glycine",
    "symbol": "GAD2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -886,6 +948,7 @@
   {
    "category": "serotonin and noradrenaline",
    "symbol": "HTR1A",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -901,6 +964,7 @@
   {
    "category": "serotonin and noradrenaline",
    "symbol": "HTR2A",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -916,6 +980,7 @@
   {
    "category": "serotonin and noradrenaline",
    "symbol": "HTR3A",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -931,6 +996,7 @@
   {
    "category": "serotonin and noradrenaline",
    "symbol": "HTR7",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -946,6 +1012,7 @@
   {
    "category": "serotonin and noradrenaline",
    "symbol": "SLC6A4",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -961,6 +1028,7 @@
   {
    "category": "serotonin and noradrenaline",
    "symbol": "SLC6A2",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -976,6 +1044,7 @@
   {
    "category": "catecholamine metabolism",
    "symbol": "COMT",
+   "is_control": false,
    "any_field": 4,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -991,6 +1060,7 @@
   {
    "category": "catecholamine metabolism",
    "symbol": "MAOA",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1006,6 +1076,7 @@
   {
    "category": "catecholamine metabolism",
    "symbol": "MAOB",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1021,6 +1092,7 @@
   {
    "category": "catecholamine metabolism",
    "symbol": "DBH",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1036,6 +1108,7 @@
   {
    "category": "opioid signalling",
    "symbol": "OPRM1",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1051,6 +1124,7 @@
   {
    "category": "opioid signalling",
    "symbol": "OPRD1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1066,6 +1140,7 @@
   {
    "category": "opioid signalling",
    "symbol": "OPRK1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1081,6 +1156,7 @@
   {
    "category": "opioid signalling",
    "symbol": "PENK",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1096,6 +1172,7 @@
   {
    "category": "opioid signalling",
    "symbol": "PDYN",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1111,6 +1188,7 @@
   {
    "category": "opioid signalling",
    "symbol": "PNOC",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1126,6 +1204,7 @@
   {
    "category": "endocannabinoid",
    "symbol": "CNR1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1141,6 +1220,7 @@
   {
    "category": "endocannabinoid",
    "symbol": "CNR2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1156,6 +1236,7 @@
   {
    "category": "endocannabinoid",
    "symbol": "FAAH",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1171,6 +1252,7 @@
   {
    "category": "endocannabinoid",
    "symbol": "MGLL",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1186,6 +1268,7 @@
   {
    "category": "neurotrophins and growth",
    "symbol": "NGF",
+   "is_control": false,
    "any_field": 11,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1201,6 +1284,7 @@
   {
    "category": "neurotrophins and growth",
    "symbol": "NTRK1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1216,6 +1300,7 @@
   {
    "category": "neurotrophins and growth",
    "symbol": "NGFR",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1231,6 +1316,7 @@
   {
    "category": "neurotrophins and growth",
    "symbol": "BDNF",
+   "is_control": false,
    "any_field": 7,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1246,6 +1332,7 @@
   {
    "category": "neurotrophins and growth",
    "symbol": "NTRK2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1261,6 +1348,7 @@
   {
    "category": "neurotrophins and growth",
    "symbol": "GDNF",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1276,6 +1364,7 @@
   {
    "category": "neurotrophins and growth",
    "symbol": "ARTN",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1291,6 +1380,7 @@
   {
    "category": "neurotrophins and growth",
    "symbol": "SORT1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1306,6 +1396,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "TLR4",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1321,6 +1412,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "GFAP",
+   "is_control": false,
    "any_field": 2,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1336,6 +1428,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "AIF1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1351,6 +1444,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "CX3CR1",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1366,6 +1460,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "IL1B",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1381,6 +1476,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "IL6",
+   "is_control": false,
    "any_field": 14,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1396,6 +1492,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "TNF",
+   "is_control": false,
    "any_field": 19,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1411,6 +1508,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "CCL2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1426,6 +1524,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "CXCL12",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1441,6 +1540,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "S100B",
+   "is_control": false,
    "any_field": 2,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1456,6 +1556,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "IL10",
+   "is_control": false,
    "any_field": 4,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1471,6 +1572,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "NLRP3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1486,6 +1588,7 @@
   {
    "category": "glia and neuroinflammation",
    "symbol": "CASP1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1501,6 +1604,7 @@
   {
    "category": "mast cells and neuroimmune",
    "symbol": "KIT",
+   "is_control": false,
    "any_field": 15,
    "strict": 1,
    "symbol_only_strict": 1,
@@ -1522,6 +1626,7 @@
   {
    "category": "mast cells and neuroimmune",
    "symbol": "TPSAB1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1537,6 +1642,7 @@
   {
    "category": "mast cells and neuroimmune",
    "symbol": "CPA3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1552,6 +1658,7 @@
   {
    "category": "mast cells and neuroimmune",
    "symbol": "IL33",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1567,6 +1674,7 @@
   {
    "category": "mast cells and neuroimmune",
    "symbol": "IL13",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1582,6 +1690,7 @@
   {
    "category": "mast cells and neuroimmune",
    "symbol": "TACR1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1597,6 +1706,7 @@
   {
    "category": "mast cells and neuroimmune",
    "symbol": "HRH1",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1612,6 +1722,7 @@
   {
    "category": "mast cells and neuroimmune",
    "symbol": "HRH4",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1627,6 +1738,7 @@
   {
    "category": "neuropeptides",
    "symbol": "TAC1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1642,6 +1754,7 @@
   {
    "category": "neuropeptides",
    "symbol": "CALCA",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1657,6 +1770,7 @@
   {
    "category": "neuropeptides",
    "symbol": "VIP",
+   "is_control": false,
    "any_field": 5,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1672,6 +1786,7 @@
   {
    "category": "neuropeptides",
    "symbol": "ADCYAP1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1687,6 +1802,7 @@
   {
    "category": "neuropeptides",
    "symbol": "NPY",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1702,6 +1818,7 @@
   {
    "category": "nitric oxide and oxidative stress",
    "symbol": "NOS1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1717,6 +1834,7 @@
   {
    "category": "nitric oxide and oxidative stress",
    "symbol": "NOS2",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1732,6 +1850,7 @@
   {
    "category": "nitric oxide and oxidative stress",
    "symbol": "NOS3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1747,6 +1866,7 @@
   {
    "category": "nitric oxide and oxidative stress",
    "symbol": "NFE2L2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1762,6 +1882,7 @@
   {
    "category": "nitric oxide and oxidative stress",
    "symbol": "HMOX1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1777,6 +1898,7 @@
   {
    "category": "nitric oxide and oxidative stress",
    "symbol": "SOD1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1792,6 +1914,7 @@
   {
    "category": "nitric oxide and oxidative stress",
    "symbol": "SOD2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1807,6 +1930,7 @@
   {
    "category": "nitric oxide and oxidative stress",
    "symbol": "GPX1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1822,6 +1946,7 @@
   {
    "category": "sensitisation kinases",
    "symbol": "PRKCE",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1837,6 +1962,7 @@
   {
    "category": "sensitisation kinases",
    "symbol": "MAPK1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1852,6 +1978,7 @@
   {
    "category": "sensitisation kinases",
    "symbol": "MAPK3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1867,6 +1994,7 @@
   {
    "category": "sensitisation kinases",
    "symbol": "CAMK2A",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1882,6 +2010,7 @@
   {
    "category": "sensitisation kinases",
    "symbol": "CREB1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1897,6 +2026,7 @@
   {
    "category": "sensitisation kinases",
    "symbol": "PRKACA",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1912,6 +2042,7 @@
   {
    "category": "steroid hormones and receptors",
    "symbol": "ESR1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1927,6 +2058,7 @@
   {
    "category": "steroid hormones and receptors",
    "symbol": "ESR2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1942,6 +2074,7 @@
   {
    "category": "steroid hormones and receptors",
    "symbol": "AR",
+   "is_control": false,
    "any_field": 13,
    "strict": 1,
    "symbol_only_strict": 1,
@@ -1963,6 +2096,7 @@
   {
    "category": "steroid hormones and receptors",
    "symbol": "PGR",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1978,6 +2112,7 @@
   {
    "category": "steroid hormones and receptors",
    "symbol": "CYP19A1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -1993,6 +2128,7 @@
   {
    "category": "entrapment fibrosis and matrix",
    "symbol": "COL1A1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2008,6 +2144,7 @@
   {
    "category": "entrapment fibrosis and matrix",
    "symbol": "COL3A1",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2023,6 +2160,7 @@
   {
    "category": "entrapment fibrosis and matrix",
    "symbol": "TGFB1",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2038,6 +2176,7 @@
   {
    "category": "entrapment fibrosis and matrix",
    "symbol": "MMP2",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2053,6 +2192,7 @@
   {
    "category": "entrapment fibrosis and matrix",
    "symbol": "MMP9",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2068,6 +2208,7 @@
   {
    "category": "entrapment fibrosis and matrix",
    "symbol": "LOX",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2083,6 +2224,7 @@
   {
    "category": "autonomic receptors",
    "symbol": "CHRM3",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2098,6 +2240,7 @@
   {
    "category": "autonomic receptors",
    "symbol": "ADRB2",
+   "is_control": false,
    "any_field": 1,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2113,6 +2256,7 @@
   {
    "category": "autonomic receptors",
    "symbol": "ADRA2A",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2128,6 +2272,7 @@
   {
    "category": "autonomic receptors",
    "symbol": "ADRA2C",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2143,6 +2288,7 @@
   {
    "category": "prostanoids",
    "symbol": "PTGS1",
+   "is_control": false,
    "any_field": 2,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2158,6 +2304,7 @@
   {
    "category": "prostanoids",
    "symbol": "PTGS2",
+   "is_control": false,
    "any_field": 4,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2173,6 +2320,7 @@
   {
    "category": "prostanoids",
    "symbol": "PTGES",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2188,6 +2336,7 @@
   {
    "category": "prostanoids",
    "symbol": "PTGER4",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2203,6 +2352,7 @@
   {
    "category": "vitamin D / bone",
    "symbol": "VDR",
+   "is_control": false,
    "any_field": 0,
    "strict": 0,
    "symbol_only_strict": 0,
@@ -2214,6 +2364,54 @@
    "strict_hits": [],
    "open_targets_score": null,
    "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "control / nonsense string (must score 0)",
+   "symbol": "XQZWKJ",
+   "is_control": true,
+   "any_field": 0,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "XQZWKJ",
+   "matched_disease_form": "pudendal neuralgia",
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  },
+  {
+   "category": "control / nonsense string (must score 0)",
+   "symbol": "QQXXZZ",
+   "is_control": true,
+   "any_field": 0,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "QQXXZZ",
+   "matched_disease_form": "pudendal neuralgia",
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  },
+  {
+   "category": "control / nonsense string (must score 0)",
+   "symbol": "VBNMASDF",
+   "is_control": true,
+   "any_field": 0,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "VBNMASDF",
+   "matched_disease_form": "pudendal neuralgia",
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
   }
  ]
 }

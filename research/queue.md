@@ -21,9 +21,12 @@ that is mostly the probability that a document could have mentioned the conditio
 genes gave 95 unjoined against pudendal neuralgia (221 strict), 25 against vulvodynia (1,044), 2 against
 chronic pelvic pain (6,348) and 0 against fibromyalgia (16,558); and the *same condition under a different
 name* moved the answer from 95 to 104. **Below roughly a thousand strict papers the unjoined band
-saturates and a zero is not evidence.** Such a condition should be worked another way — read the corpus
-by hand, or screen a well-populated sibling and ask whether the link reaches this one — not screened and
-believed. Two further caveats from the same run: a `strict` join can be a symbol collision ("AR" =
+saturates and a zero is not evidence** — and since 2026-09-20 that is measured, not inferred: every screen
+should carry two or three null controls (`"control": true` in the target list) and the artefact reports
+what they scored. On pudendal neuralgia three strings that name nothing, absent from Europe PMC entirely,
+scored 'unjoined' exactly like 74% of the real genes. Such a condition should be worked another way —
+read the corpus by hand, or screen a well-populated sibling and ask whether the link reaches this one —
+not screened and believed. Two further caveats from the same run: a `strict` join can be a symbol collision ("AR" =
 augmented reality, "KIT" = the word "kit"), so read a join before it closes a lead; and `any_field`
 hits are overwhelmingly reviews and abstract collections, so "discussed" is not "studied".
 

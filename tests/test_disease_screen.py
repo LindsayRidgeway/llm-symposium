@@ -215,5 +215,67 @@ class AmbiguityTests(unittest.TestCase):
             self.assertFalse(ds.ambiguous(sym), sym)
 
 
+
+
+class NullControlTests(unittest.TestCase):
+    """A string that names nothing is the screen's null.
+
+    Added 2026-09-20 from the 09:32 run of that day, which put three nonsense strings in a
+    222-target list and never said what they were for. Scored next to the real targets they are
+    the sharpest evidence the floor argument has: on a thin condition a string that cannot
+    possibly be a gene is exactly as "unjoined" as a real one, so the band is the corpus's
+    density and not a gap in the literature.
+    """
+
+    def _run(self, targets, real_counts):
+        def any_fn(sym, dis):
+            return real_counts.get(sym, (0, 0))[0]
+
+        def strict_fn(sym, dis):
+            return real_counts.get(sym, (0, 0))[1]
+
+        with _StubNet(any_fn=any_fn, strict_fn=strict_fn, epmc_fn=lambda t: 221):
+            return ds.run("pudendal neuralgia", targets, use_ot=False)
+
+    def test_control_is_scored_but_kept_out_of_every_band(self):
+        res = self._run(
+            [{"category": "ion channel", "symbol": "SCN9A"},
+             {"category": "null", "symbol": "XQZWKJ", "control": True}],
+            {"SCN9A": (3, 0), "XQZWKJ": (0, 0)})
+        self.assertEqual(res["n_targets"], 1)
+        self.assertEqual(res["n_controls"], 1)
+        self.assertEqual(res["no_title_abstract_join"], ["SCN9A"])
+        self.assertEqual([c["symbol"] for c in res["controls"]], ["XQZWKJ"])
+        self.assertNotIn("XQZWKJ", res["incidental_any_field_only"])
+        self.assertNotIn("XQZWKJ", res["no_title_abstract_join"])
+        self.assertNotIn("XQZWKJ", res["unjoined"])
+        # The control was still scored: it is the point of the row.
+        self.assertEqual(res["controls"][0]["any_field"], 0)
+
+    def test_a_control_that_scores_is_an_alarm_not_a_count(self):
+        """If a string that names nothing comes back joined, the matching is not a string search."""
+        res = self._run([{"symbol": "SCN9A"},
+                         {"symbol": "XQZWKJ", "control": True}],
+                        {"SCN9A": (3, 0), "XQZWKJ": (7, 2)})
+        self.assertIn("suspect", res["control_check"])
+        self.assertNotIn("already published together", res["controls"][0]["verdict"])
+
+    def test_controls_scoring_zero_like_the_genes_says_the_band_is_the_corpus(self):
+        targets = [{"symbol": "G%d" % i} for i in range(4)]
+        targets.append({"symbol": "XQZWKJ", "control": True})
+        res = self._run(targets, {s: (0, 0) for s in ("G0", "G1", "G2", "G3", "XQZWKJ")})
+        self.assertIn("measures the condition's literature", res["control_check"])
+        self.assertEqual(len(res["unjoined"]), 4)  # the four real genes, not the control
+
+    def test_control_verdict_names_itself_rather_than_offering_a_candidate(self):
+        res = self._run([{"symbol": "XQZWKJ", "control": True}], {"XQZWKJ": (0, 0)})
+        self.assertTrue(res["controls"][0]["verdict"].startswith("null control"))
+
+    def test_no_controls_means_no_claim(self):
+        res = self._run([{"symbol": "SCN9A"}], {"SCN9A": (3, 0)})
+        self.assertIsNone(res["control_check"])
+        self.assertEqual(res["n_controls"], 0)
+
+
 if __name__ == "__main__":
     unittest.main()

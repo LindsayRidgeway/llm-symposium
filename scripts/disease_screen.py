@@ -15,6 +15,14 @@ condition. The output is a JSON screen, so a later run can read the counts inste
 the searches, and so a negative result ("nothing here is unjoined") is recorded rather than
 forgotten — which is the failure mode this program exists to avoid.
 
+**3. A null control (`"control": true`).** A row marked `"control": true` is a string that names
+nothing — it exists to be scored, and it is excluded from every count and band. If nonsense strings
+come back "unjoined" at the same rate as the real targets, the unjoined band is measuring the
+condition's literature density and not the absence of a link, and the screen says so in
+`control_check`. The list a run screens should always carry two or three. (Suggested by the
+2026-09-20 09:32 run, which put three nonsense strings in a 222-target list and left them
+unexplained; the check is here so the next reader does not have to notice them.)
+
 A target list is data, not code: pass a JSON file of `[{"category": "...", "symbol": "..."}, ...]`.
 Choosing the targets is a judgement and stays with whoever runs the screen; the screen only
 measures how much literature already joins each one. This is the "candidate-generation so the
@@ -210,6 +218,50 @@ def verdict(any_n: int, strict_n: int, ambiguous_symbol: bool = False) -> str:
     return f"discussed ({any_n} any-field, 0 strict) — read the list; not novel on this number"
 
 
+def is_control(t: dict) -> bool:
+    """A target that is a string naming nothing, scored to prove the screen is measuring.
+
+    Marked explicitly (`"control": true`) rather than by category, because the self-test below
+    uses category labels like "control/joined" for a different purpose.
+    """
+    return t.get("control") is True
+
+
+def control_check(control_rows: list, rows: list) -> str | None:
+    """What the null controls scored, next to what the real targets scored.
+
+    A zero from a screen is only informative if a string that cannot exist also scores zero for
+    a different reason. When both come back unjoined at the same rate, the band is a property of
+    the corpus, and this line is the instrument saying so in its own artefact.
+    """
+    if not control_rows:
+        return None
+    n = len(control_rows)
+    ctrl_zero = sum(1 for r in control_rows if r["strict"] == 0 and r["any_field"] == 0)
+    if ctrl_zero < n:
+        bad = ", ".join(r["symbol"] for r in control_rows
+                        if not (r["strict"] == 0 and r["any_field"] == 0))
+        return (f"{n - ctrl_zero} of {n} strings that name nothing scored something other than "
+                f"'unjoined' ({bad}) — the matching is not behaving as a plain string search. "
+                f"Treat every number in this screen as suspect until that is explained.")
+    if not rows:
+        return f"{ctrl_zero} of {n} nonsense strings scored 'unjoined'."
+    real_zero = sum(1 for r in rows if r["strict"] == 0 and r["any_field"] == 0)
+    rate = 100.0 * real_zero / len(rows)
+    if real_zero == 0:
+        return (f"{ctrl_zero} of {n} strings that name nothing scored 'unjoined', and no real "
+                f"target did — here the band separates a gene from a string that names nothing.")
+    if rate >= 25.0:
+        return (f"{ctrl_zero} of {n} strings that name nothing scored 'unjoined', and so did "
+                f"{real_zero} of {len(rows)} real targets ({rate:.0f}%). A string that names "
+                f"nothing scores exactly like a gene, so at this density the unjoined band "
+                f"measures the condition's literature, not the absence of a link.")
+    return (f"{ctrl_zero} of {n} strings that name nothing scored 'unjoined', and so did "
+            f"{real_zero} of {len(rows)} real targets ({rate:.0f}%). The two are separable at "
+            f"this density, but the band is not free of noise either — read every row before "
+            f"treating a zero as a gap.")
+
+
 def floor_warning(strict_papers: int) -> str | None:
     """Say when the corpus is too thin for the screen's zero to mean anything."""
     if 0 <= strict_papers < FLOOR_STRICT:
@@ -225,6 +277,9 @@ def floor_warning(strict_papers: int) -> str | None:
 def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) -> dict:
     t0 = time.time()
     forms = [disease] + [f for f in (forms or []) if f and f != disease]
+    is_ctl = [is_control(t) for t in targets]
+    controls = [t for t, c in zip(targets, is_ctl) if c]
+    real = [t for t, c in zip(targets, is_ctl) if not c]
     dis_any = max(epmc(f'"{f}"') for f in forms)
     dis_strict = max(epmc(f'(TITLE:"{f}" OR ABSTRACT:"{f}")') for f in forms)
     n_trials = trials(disease)
@@ -246,9 +301,11 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         sym_s, sym_a = strict(sym, disease), any_field(sym, disease)
         ambiguous_symbol = ambiguous(sym)
         score = ot_score(sym, efo) if use_ot else None
+        ctl = is_control(t)
         return {
             "category": t.get("category", ""),
             "symbol": sym,
+            "is_control": is_control(t),
             "any_field": a,
             "strict": s,
             "symbol_only_strict": sym_s,
@@ -260,13 +317,19 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
             # A join is only evidence if you can open it. Empty unless strict > 0.
             "strict_hits": epmc_hits(strict_query(name, form)) if s > 0 else [],
             "open_targets_score": score,
-            "verdict": verdict(a, s, ambiguous_symbol),
+            "verdict": ("null control — a string that names nothing; it is here to be scored and "
+                        "is excluded from every count" if ctl
+                        else verdict(a, s, ambiguous_symbol)),
         }
 
     with cf.ThreadPoolExecutor(max_workers=8) as ex:
         rows = list(ex.map(one, targets))
 
-    false_gaps = [r["symbol"] for r in rows
+    # The bands are claims about biology, so a string that names nothing stays out of them and
+    # is reported on its own. It has already done its work by being scored at the same time.
+    ctrl_rows = [r for r in rows if r["is_control"]]
+    real_rows = [r for r in rows if not r["is_control"]]
+    false_gaps = [r["symbol"] for r in real_rows
                   if r["naming_sensitive"] and r["symbol_only_strict"] == 0 and r["strict"] > 0]
     return {
         "disease": disease,
@@ -284,27 +347,35 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                  "`names`, any_field/strict are the maximum over the symbol and every name, so a "
                  "row is only 'unjoined' if it is unjoined under every spelling supplied. Every "
                  "strict join carries its `strict_hits` — open them; the count cannot tell a "
-                 "paper about the pair from a coincidence of English."),
-        "n_targets": len(targets),
+                 "paper about the pair from a coincidence of English. A row marked "
+                 "`\"control\": true` is a string that names nothing: it is scored, kept out of "
+                 "every count and band, and reported in `controls` with a `control_check` line, "
+                 "so the reader can see whether the unjoined band separates a gene from noise."),
+        "n_targets": len(real_rows),
+        "n_controls": len(ctrl_rows),
         # Every band where strict == 0 is candidate territory, and the three bands are
         # different claims. The summary used to print only the first two, which hid the one
         # that matters most on a dense disease — nodes co-mentioned but never studied.
-        "unjoined": [r["symbol"] for r in rows if r["strict"] == 0 and r["any_field"] == 0],
-        "incidental_any_field_only": [r["symbol"] for r in rows
+        "unjoined": [r["symbol"] for r in real_rows if r["strict"] == 0 and r["any_field"] == 0],
+        "incidental_any_field_only": [r["symbol"] for r in real_rows
                                       if r["strict"] == 0 and 0 < r["any_field"] <= INCIDENTAL_MAX],
-        "no_title_abstract_join": [r["symbol"] for r in rows if r["strict"] == 0],
-        "no_strict_join_but_discussed": [r["symbol"] for r in rows
+        "no_title_abstract_join": [r["symbol"] for r in real_rows if r["strict"] == 0],
+        "no_strict_join_but_discussed": [r["symbol"] for r in real_rows
                                          if r["strict"] == 0 and r["any_field"] > INCIDENTAL_MAX],
-        "joined_in_title_or_abstract": [r["symbol"] for r in rows if r["strict"] > 0],
+        "joined_in_title_or_abstract": [r["symbol"] for r in real_rows if r["strict"] > 0],
         # The rows a symbol-only screen would have called unjoined but which are joined under a
         # name the literature actually uses. This is the false-gap count, and it belongs in the
         # artefact: the whole defect is that a false gap is indistinguishable from a real one.
         "false_gaps_repaired_by_names": false_gaps,
         # The rows a short symbol would have closed as "prior work" without anyone reading them.
-        "ambiguous_joins_to_read": [r["symbol"] for r in rows
+        "ambiguous_joins_to_read": [r["symbol"] for r in real_rows
                                     if r["strict"] > 0 and r["ambiguous_symbol"]],
         "density_floor": FLOOR_STRICT,
         "density_warning": floor_warning(dis_strict),
+        # The null controls, and what they scored next to the real targets.
+        "control_check": control_check(ctrl_rows, real_rows),
+        "controls": [{"symbol": r["symbol"], "any_field": r["any_field"], "strict": r["strict"],
+                      "verdict": r["verdict"]} for r in ctrl_rows],
         "seconds": round(time.time() - t0, 1),
         "targets": rows,
     }
@@ -342,17 +413,29 @@ def density(conditions: list) -> list:
 
 def selftest() -> int:
     """Two known pairs inside the screen: one joined, one not. A screen that cannot separate
-    them is not measuring novelty."""
+    them is not measuring novelty. A third row is a string that names nothing: it must score
+    zero like an unjoined gene, must stay out of the counts, and the control line must say so.
+    """
     dis = "chronic fatigue syndrome"
     a = {"symbol": "PDHA1", "category": "control/joined"}
     b = {"symbol": "SLC19A3", "category": "control/unjoined"}
-    ra, rb = run(dis, [a, b], use_ot=False)["targets"]
-    print("Self-test: one pair the literature discusses, one it does not.\n")
+    z = {"symbol": "XQZWKJ", "category": "null control", "control": True}
+    res = run(dis, [a, b, z], use_ot=False)
+    ra, rb = res["targets"][0], res["targets"][1]
+    print("Self-test: one pair the literature discusses, one it does not, one string that "
+          "names nothing.\n")
     for label, r in (("PDHA1 (expected: discussed)", ra),
-                     ("SLC19A3 (expected: unjoined/incidental)", rb)):
+                     ("SLC19A3 (expected: unjoined/incidental)", rb),
+                     ("XQZWKJ (null control, excluded)", res["targets"][2])):
         print("  %-40s any_field=%-5s strict=%-4s  %s" % (
             label, r["any_field"], r["strict"], r["verdict"]))
+    print("\n  control check: %s" % res["control_check"])
     ok = ra["any_field"] > rb["any_field"]
+    ok = ok and res["n_targets"] == 2 and res["n_controls"] == 1
+    ok = ok and "names nothing" in (res["control_check"] or "")
+    ok = ok and res["targets"][2]["verdict"].startswith("null control")
+    ok = ok and "XQZWKJ" not in res["no_title_abstract_join"]
+    ok = ok and "XQZWKJ" not in res["unjoined"]
     print("\n  discriminates: %s" % ("yes" if ok else "NO — the counts do not separate them"))
     return 0 if ok else 1
 
@@ -407,7 +490,12 @@ def main() -> int:
           f"strict={res['disease_papers_strict']}, trials={res['registered_trials_for_disease']}\n")
     print("%-10s %-8s %-8s %s" % ("symbol", "any", "strict", "verdict"))
     for r in sorted(res["targets"], key=lambda r: (r["strict"], r["any_field"])):
-        print("%-10s %-8s %-8s %s" % (r["symbol"], r["any_field"], r["strict"], r["verdict"]))
+        print("%-10s %-8s %-8s %s" % (r["symbol"] + ("*" if r.get("is_control") else ""),
+                                      r["any_field"], r["strict"], r["verdict"]))
+    if res.get("controls"):
+        print("\n* = null control (a string that names nothing; excluded from every count)")
+    if res.get("control_check"):
+        print(f"control check: {res['control_check']}")
     if res["density_warning"]:
         print(f"\ndensity warning: {res['density_warning']}")
     if res["disease_forms_searched"] and len(res["disease_forms_searched"]) > 1:

@@ -8,7 +8,8 @@ infrastructure thin, which is what the queue selects for.
 Two things came out of it, and the second is the more useful:
 
 1. **A negative screen.** No unjoined target worth a hypothesis. Nothing is offered.
-2. **The screen's zero is not evidence at this density.** 95 of 128 plausible targets came back
+2. **The screen's zero is not evidence at this density**, and now it can be shown rather than argued:
+three strings that name nothing score exactly like 74% of the genes. 95 of 128 plausible targets came back
    "unjoined" — and the same gene list run against the *same condition* under a different name gives a
    different answer. The tool stopped measuring before it ran out of targets.
 
@@ -42,10 +43,32 @@ ME/CFS, 169× thinner than endometriosis.
 | 0 strict, 1–5 any-field — "incidental only" | 25 | a handful of mentions; read before claiming novelty |
 | 0 strict, 0 any-field — "unjoined" | 95 | no document contains both strings anywhere |
 
-The 95 is the number that matters, and it is almost certainly an artefact. Three checks, all run before
+The 95 is the number that matters, and it is almost certainly an artefact. Four checks, all run before
 writing a word of interpretation:
 
-### 1. The calibration — the same 128 genes against five conditions
+### 1. The null control — three strings that name nothing
+
+Added 2026-09-20, after a later run of this screen put three nonsense strings in its target list and did
+not say what they were for. They are kept here deliberately, marked `"control": true`, scored by the
+screen at the same time as the genes and left out of every count. All three — `XQZWKJ`, `QQXXZZ`,
+`VBNMASDF` — return **zero documents in Europe PMC for the bare string**, so they cannot join anything,
+and any join with one of them would be a defect in the screen rather than a discovery.
+
+They scored `unjoined`, all three. So did **95 of the 128 real targets (74%)**. A string that names
+nothing is scored exactly like three-quarters of the genes:
+
+```
+control check: 3 of 3 strings that name nothing scored 'unjoined', and so did 95 of 128 real
+targets (74%). A string that names nothing scores exactly like a gene, so at this density the
+unjoined band measures the condition's literature, not the absence of a link.
+```
+
+That is the whole floor argument in one line, and it is why the queue's reading of a thin literature as
+*better* ground was backwards. It is now a permanent feature of the instrument: `"control": true` in the
+list, `control_check` in the artefact, five tests, and the screen reports an alarm if a control ever
+scores anything but zero.
+
+### 2. The calibration — the same 128 genes against five conditions
 
 The identical target list was screened against conditions of increasing literature density
 (`research/pudendal-neuralgia-calibration.json`):
@@ -64,7 +87,7 @@ condition at all** — and on the rarest condition that probability is near zero
 everything looks like a discovery. This is the opposite of the queue's working assumption, which reads a
 thin literature as *better* ground.
 
-### 2. The synonym control — the same condition under two names
+### 3. The synonym control — the same condition under two names
 
 The cleanest test is one condition, one gene list, two spellings:
 
@@ -77,7 +100,7 @@ Same disease, same genes, different words, a different answer — and the two "j
 is a property of the query string, not a fact about the biology. (Other English names: "pudendal
 neuropathy" 163 strict, "pudendal nerve" 2,125 — the term, not the syndrome, sets the number.)
 
-### 3. The two joins are both false — read, not counted
+### 4. The two joins are both false — read, not counted
 
 The only two title/abstract joins were fetched and read, and neither is prior work:
 
@@ -102,7 +125,8 @@ sense that a review mentions everything.
 
 ## What this changes
 
-Two rules for the disease program, both proposed here and **not yet implemented**:
+Three rules for the disease program, all three implemented on 2026-09-20 (the first was proposed here on
+09-19 and the second half of it was demonstrated the next morning by another run's unexplained controls):
 
 1. **A floor under the instrument, not only a ceiling.** The queue already rejects conditions whose
    literature is too *dense* (#5 IPF, #6 MASH are negative controls). It now needs a lower bound too:
@@ -112,7 +136,13 @@ Two rules for the disease program, both proposed here and **not yet implemented*
    link reaches this one — rather than screened and believed.
 2. **Read every strict join before it closes a lead.** A "prior work" verdict must be backed by the hit's
    text, not its symbol. The cheapest guard is to require the symbol to appear as a standalone token
-   naming the gene in the hit's title or abstract.
+   naming the gene in the hit's title or abstract — the screen now fetches the top documents behind every
+   join into `strict_hits` and flags any symbol of three characters or fewer, so a reader can open the hit
+   before the verdict closes a lead. It does not yet *refuse* on a flagged symbol; that is a decision for
+   a reviewer, not for the author of the flag.
+3. **Every screen carries a null control.** Two or three strings that name nothing go in the target list
+   marked `"control": true`. They cost two queries and they answer the only question that matters about a
+   zero: is this a fact about the biology or a fact about the corpus?
 
 ## What this does NOT claim
 
@@ -130,7 +160,9 @@ Two rules for the disease program, both proposed here and **not yet implemented*
 - `research/pudendal-neuralgia-screen.json` — the screen, with every per-target count and verdict.
 - `research/pudendal-neuralgia-calibration.json` — the density calibration and the synonym control.
 - `python3 scripts/disease_screen.py "pudendal neuralgia" research/pudendal-neuralgia-targets.json
-  --out research/pudendal-neuralgia-screen.json` reproduces the screen in under a minute.
+  --no-ot --out research/pudendal-neuralgia-screen.json` reproduces the screen in under a minute. The
+  artefact was regenerated with this exact command on 2026-09-20 and returned the same 95/25/6/2 bands,
+  with the three controls added.
 
 ## Next action
 
@@ -142,5 +174,6 @@ of three characters or fewer, so a "prior work" verdict can be opened and read r
 `tests/test_disease_screen.py` is 17 tests. **They still owe a reviewer** — they change what the instrument
 is allowed to conclude, and the rule against self-approval applies to a tool change as much as to a claim.
 
-*Revised 2026-09-20, in place: the revision note sat inside the first sentence, and the closing section
-still said the two rules were unimplemented after the run that wrote this file had implemented them.*
+*Revised 2026-09-20, in place: the revision note sat inside the first sentence; the closing section
+still said the two rules were unimplemented after the run that wrote this file had implemented them;
+and a null control was added, which turned the floor argument from an inference into a measurement.*
