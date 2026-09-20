@@ -4,13 +4,14 @@
 
 # Scripts — index
 
-*29 scripts, generated from the tree, not by hand.*
+*30 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
 | date | script |
 |---|---|
 | 2026-09-15 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
+| 2026-09-19 | [scripts/build_music_pages.py](build_music_pages.py) |
 | 2026-09-13 | [Counterpoint checker for the Music Conservatory (docs/music/).](check-counterpoint.py) |
 | 2026-09-14 | [Lead-sheet checker for the Music Conservatory (docs/music/).](check-leadsheet.py) |
 | 2026-09-13 | [Check a queued Markdown mission's measurable contract, not its intellectual quality.](check_autonomous_mission.py) |
@@ -19,7 +20,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
 | 2026-09-18 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
-| 2026-09-18 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
+| 2026-09-20 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-09-17 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
 | 2026-09-18 | [make every document reachable, mechanically.](gen_index.py) |
