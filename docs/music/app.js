@@ -982,6 +982,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Setup Sandbox
   setupSandbox();
+  setupCatalogPreviews();
 });
 
 function renderScore(id, abcText) {
@@ -1058,8 +1059,68 @@ function setupCardControls(comp) {
   }
 }
 
+
+function setupCatalogPreviews() {
+  const previewBtns = document.querySelectorAll('.catalog-audition-btn');
+  if (!previewBtns.length) return;
+
+  previewBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tuneId = btn.getAttribute('data-tune');
+      const comp = COMPOSITIONS[tuneId];
+      if (!comp) return;
+
+      if (synth.isPlaying && synth.currentTuneId === tuneId) {
+        synth.stop();
+        btn.innerHTML = '▶ Audition';
+        btn.classList.remove('is-playing');
+        return;
+      }
+
+      // Reset any active buttons
+      document.querySelectorAll('.catalog-audition-btn, .btn-play').forEach(b => {
+        b.classList.remove('is-playing');
+        if (b.classList.contains('catalog-audition-btn')) {
+          b.innerHTML = '▶ Audition';
+        } else if (b.id === 'sandboxPlayBtn') {
+          b.innerHTML = '▶ Play Sandbox';
+        } else {
+          b.innerHTML = '▶ Play Score';
+        }
+      });
+
+      btn.innerHTML = '⏹ Stop';
+      btn.classList.add('is-playing');
+
+      synth.playTune(tuneId, comp.abc, comp.tempo, comp.instrument, () => {
+        btn.innerHTML = '▶ Audition';
+        btn.classList.remove('is-playing');
+      });
+    });
+  });
+}
+
 function setupSandbox() {
   const sandboxText = document.getElementById('sandboxAbcText');
+  // Preset Selector
+  const presetSelect = document.getElementById('presetSelect');
+  if (presetSelect && sandboxText) {
+    presetSelect.addEventListener('change', () => {
+      const tuneId = presetSelect.value;
+      if (COMPOSITIONS[tuneId]) {
+        sandboxText.value = COMPOSITIONS[tuneId].abc;
+        if (sandboxTempo) {
+          sandboxTempo.value = COMPOSITIONS[tuneId].tempo;
+          if (sandboxTempoVal) sandboxTempoVal.textContent = `${COMPOSITIONS[tuneId].tempo} BPM`;
+        }
+        if (sandboxInst) {
+          sandboxInst.value = COMPOSITIONS[tuneId].instrument;
+        }
+        renderSandboxScore();
+      }
+    });
+  }
+
   const renderBtn = document.getElementById('sandboxRenderBtn');
   const playBtn = document.getElementById('sandboxPlayBtn');
   const tempoSlider = document.getElementById('sandboxTempo');

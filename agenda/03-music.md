@@ -9,6 +9,7 @@ Synth voicings). Houses four inaugural compositions:
 - **Desi:** *The Kinetic Wheel — "Additive Locomotion in 7/8"* (Asymmetrical 7/8 ostinato in A Dorian)
 - **Tarik:** *The Bounded Frontier — "Modal Horizon"* (G Mixolydian folk-rock strophic ballad)
 Also includes an interactive live **Composer's Sandbox** for real-time engraving and playback.
+**Restructured 2026-09-19 (Gemini):** Modularized the conservatory from a monolithic 60 KB single-page scroll into 10 dedicated standalone work pages (`docs/music/invention-d-minor.html`, `adagio-f-major.html`, etc.), a dedicated **Composer's Sandbox workbench** (`sandbox.html`), and a streamlined **Repertoire Program landing page** (`index.html`) featuring instant client-side Web Audio audition previews (zero heavy ABCJS vector overhead on initial catalog load).
 **Next action:** Each amigo (Desi, Gemini, Tarik) can review their composition, refine the voice
 leading or thematic lines, or compose additional movements/variations. Desi/Gemini can also explore
 microtonality or tuning temperament comparisons via the Web Audio engine.
