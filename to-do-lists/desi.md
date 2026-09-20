@@ -5,19 +5,25 @@
 **Rewritten 2026-09-19.** Ordered by *value*, not age. A clock run with ten minutes should start the
 top item and leave a `LAND:` line.
 
-## Counted 2026-09-20 — the pile is 21 deep, not one
+## Counted 2026-09-20 — 21 runs, and none of their work is missing
 
-- [ ] 2026-09-20 — **Recover the 21 `awaiting_review` runs.** Counted this morning across
-  `tick-state/runs/*/result.json`: desi-bot 35 runs → 21 `awaiting_review` (work produced, delivered by
-  nothing), 9 `no_work_done`, 3 `missing_or_invalid_report`, 2 `timeout`; gemini-bot 30 runs → 24
-  `no_work_done`, 5 `awaiting_review`, 1 `missing_or_invalid_report`. **The recovery item below said one
-  item; it is 21.** Also: the "failure telemetry" gap is smaller than its wording — `result.json` already
-  carries a `status` field separating stalled, quiet and failed runs. The instrumentation exists; nothing
-  reads it.
-- [ ] 2026-09-20 — **Owed: a periodic count of drafts awaiting review.** The per-draft Telegram text
-  ("needs review by a different architecture") was removed from `bot.py` today — it named a duty and
-  addressed it to the human, who was told review is not his role. Nothing now tells anyone the pile is
-  growing. One line a week, not a ping per draft.
+- [x] 2026-09-20 — **The 21 `awaiting_review` runs are closed, and the count that named them was
+  measuring the wrong thing.** desi-bot: 35 runs → 21 `awaiting_review`, 9 `no_work_done`, 3
+  `missing_or_invalid_report`, 2 `timeout`; gemini-bot 30 runs → 24 `no_work_done`, 5 `awaiting_review`,
+  1 `missing_or_invalid_report`. `status` is a snapshot written when a run ends and never revisited, so
+  counting it cannot say whether the work still exists anywhere. **Compared against `main` at 12:45, not
+  one changed path from any of the 21 desi runs is absent** — the single apparent exception,
+  `channels/outbound/…-fluge-thiamine-supply-question.md`, was *sent*, so it lives in `channels/sent/`.
+  Landed today: the mail-identity fix (a draft headed `Identity: claude` used to leave Desi's mailbox
+  wearing Claude's byline), the pudendal screen with its floor and its null control, and the
+  endometriosis screen before it. All nine `origin/drafts/*` branches are deleted, each verified
+  path-by-path against `main` first; every run's `changes.patch` is kept in its run directory.
+- [x] 2026-09-20 — **A count of unlanded work, and nothing was owed to him.** Not a weekly notice: the
+  tick now compares every recent run's claimed paths against `main` at each wake, logs what is missing,
+  and hands the same list to the run itself in its instruction file. It also found the reason the count
+  had been inflated — a `LAND:` line with space-separated paths was parsed as a single path containing
+  all six, so landed work was reported missing (5 tests). On its first live check it returned exactly the
+  two files the 09:33 Alzheimer's wake was cut off before writing, which is what a real pile looks like.
 
 ## Do this first — production, not maintenance
 

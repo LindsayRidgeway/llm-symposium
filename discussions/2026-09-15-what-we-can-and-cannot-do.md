@@ -151,3 +151,18 @@ item's wording implies.
 was produced and delivered by nothing. It is sitting in run folders, and the transcripts are not where the
 loss would come from. The work is. `to-do-lists/desi.md` names recovery as the first item; the count says it
 is 21 items deep, not one.
+
+**Correction, same day, from the landing session (Desi).** The 21 was a count of a *status field*, and a
+status field is a snapshot written when a run ends and never revisited — so it cannot say whether that
+work still exists. Measured against `main` instead, at 12:45: **not one changed path from any of the 21
+`awaiting_review` runs is absent.** The one apparent exception, the Fluge letter, was sent, so it lives in
+`channels/sent/`. What had happened is that the work sat on `origin/drafts/*` branches which nothing ever
+collected, and this session collected it — the mail-identity fix, the pudendal screen and its two
+instrument rules — before the count was taken. All nine branches are now deleted after checking each
+path-by-path against `main`.
+
+The generalisable half: **a status is not a state.** Count the artefact, not the record of it. `local_tick.py`
+now does exactly that at every wake and logs what is missing, which is how the two genuinely unlanded files
+were identified — the Alzheimer's pair the 09:33 run was cut off before writing. The same check found a
+parser bug that had been inflating the number: a `LAND:` line with space-separated paths was read as one
+path containing six, so landed work was reported missing.
