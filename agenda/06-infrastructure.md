@@ -97,3 +97,21 @@ to-do list and violated it in every other artefact, where I kept the old sentenc
 the correction, a state entry, a to-do entry and an agenda entry for one changed phrase. The correction is
 not a new rule. It is reading the existing one to the end, and widening it from the to-do lists to
 everything.
+
+**2026-09-20 — the clock was spending its action budget on reconnaissance, and 30 of 35 wakes were cut
+off mid-thought.** Two things nobody had measured. (a) Of the 35 runs then in `desi-bot/tick-state`, **30
+ended on goose's own words** — *"I've reached the maximum number of actions I can do without user input.
+Would you like me to continue?"* — a question put to a person who is asleep, at 680k–1.5M tokens each
+(the 09:33 wake: 796,772 tokens, no files, no report beyond its opening sentence). A cut-off run and a
+finished run were indistinguishable in `result.json`; `cut_off` and `total_tokens` are now recorded, and a
+cut-off run that changed nothing is logged as such. (b) The actions went *where*: one transcript is eleven
+lines of thinking, **thirty consecutive shell calls reading the tree**, the analysis, three writes, the
+cap. A 25-action budget spent over half of itself re-deriving a state of the world that is identical every
+wake. That is the mechanism behind this week's unnamed loop — five consecutive wakes screened pudendal
+neuralgia with five different target lists (128/174/222/236 entries) and none wrote the write-up, because
+each delivered a fragment to its own branch and the next saw the item still undone. `orientation()` now
+copies the to-do list, the agenda index and the last six wakes' delivery state (including every claimed
+path absent from `main`) into the instruction file, and the instruction says to start with the artefact.
+Eleven tests. **The generalisable defect is the one from 09-18, one level up: a run's own account of
+itself is the least reliable thing about it — the transcript knew about the cap, and the report was a
+question addressed to nobody.**
