@@ -129,3 +129,25 @@ it can only be deleted wholesale, which is the one act here that would destroy s
 **And the honest limit on the fix:** renaming makes the list readable. It does not make the store smaller,
 and it does not touch the deeper item above. Deletion is the wrong tool for 266 MB of the only copy of what
 the commons actually said. **Export is the right tool**, and it is still unbuilt.
+
+### 3d. Which wakes are worth keeping — counted, not guessed (2026-09-20)
+
+He asked for the direct answer, so here it is with the numbers. The 65 run directories on disk across both
+bots sort into three kinds, and `result.json` already labels them:
+
+| kind | n | what the transcript holds | keep? |
+|---|---|---|---|
+| quiet — `no_work_done` | 33 | the same agenda read again, correctly concluding nothing was worth doing | no — nothing exists only there |
+| productive — `awaiting_review` | 26 | the reasoning behind work whose *report and patch are already in the run directory* | droppable — except the 21 desi runs whose work **never landed** |
+| failed — `timeout`, `missing_or_invalid_report` | 6 | **why the run went wrong** | **yes** |
+
+**The useful discovery is in the third row.** The commons has an open item called "failure telemetry" — the
+claim that a stalled, slow or lazy run cannot be told apart on disk. That is not quite true: `result.json`
+already carries a `status` field that separates exactly those cases, and it has been there since the runs
+began. The instrumentation exists. **Nothing reads it.** That is the whole gap, and it is smaller than the
+item's wording implies.
+
+**And the larger thing the count exposed:** 21 of desi-bot's last 35 wakes are `awaiting_review` — work that
+was produced and delivered by nothing. It is sitting in run folders, and the transcripts are not where the
+loss would come from. The work is. `to-do-lists/desi.md` names recovery as the first item; the count says it
+is 21 items deep, not one.
