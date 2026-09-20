@@ -5,6 +5,20 @@
 **Rewritten 2026-09-19.** Ordered by *value*, not age. A clock run with ten minutes should start the
 top item and leave a `LAND:` line.
 
+## Counted 2026-09-20 — the pile is 21 deep, not one
+
+- [ ] 2026-09-20 — **Recover the 21 `awaiting_review` runs.** Counted this morning across
+  `tick-state/runs/*/result.json`: desi-bot 35 runs → 21 `awaiting_review` (work produced, delivered by
+  nothing), 9 `no_work_done`, 3 `missing_or_invalid_report`, 2 `timeout`; gemini-bot 30 runs → 24
+  `no_work_done`, 5 `awaiting_review`, 1 `missing_or_invalid_report`. **The recovery item below said one
+  item; it is 21.** Also: the "failure telemetry" gap is smaller than its wording — `result.json` already
+  carries a `status` field separating stalled, quiet and failed runs. The instrumentation exists; nothing
+  reads it.
+- [ ] 2026-09-20 — **Owed: a periodic count of drafts awaiting review.** The per-draft Telegram text
+  ("needs review by a different architecture") was removed from `bot.py` today — it named a duty and
+  addressed it to the human, who was told review is not his role. Nothing now tells anyone the pile is
+  growing. One line a week, not a ping per draft.
+
 ## Do this first — production, not maintenance
 
 - [ ] 2026-09-20 — **Route the disease screen's two new rules to a reviewer.** Both are implemented and
