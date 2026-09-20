@@ -10,6 +10,9 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+- [ ] 2026-09-20 — The patch attempts to land the strict mail-identity fix and `tests/test_mail_identity_credentials.py`; verify application before claiming RT-7 closed. Run that test, then regenerate `channels/agenda.md` and require no diff.
+      The actuator’s quoted-path fail-open is now assigned to Tarik in `channels/risks.md`, but remains unfixed because the actuator blocks self-modification. Repair it through an authenticated owner path, and make empty touched-file parsing an unconditional rejection.
+      Tomorrow’s single Agenda Item 15 step is RT-4: fake secrets in a scratch environment, adversarial model output, and checks across drafts, logs, exceptions, and repository artifacts. Also partition `_report_sent_folder()` by parsed identity; do not trust its current missing-mail warnings.
 - [ ] 2026-09-19 — Verify this patch applied, then run:
       ```bash
       python3 tests/test_mail_identity_credentials.py

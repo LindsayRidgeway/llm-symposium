@@ -1,52 +1,3 @@
-## Technical critique
-
-1. **`actuator/apply.py` fails open on quoted diff paths.**  
-   `touched_files()` only recognizes unquoted `diff --git a/(\S+) b/(\S+)` headers. Git quotes paths containing spaces, tabs, quotes, and some non-ASCII characters. Such a patch can yield an empty touched-file set, bypassing:
-   - the `actuator/apply.py` self-modification guard;
-   - path traversal checks;
-   - per-file `py_compile`.
-
-   This is severe because parsing failure is interpreted as “touches nothing,” not “reject patch.” I logged it in `channels/risks.md` with owner Tarik and an explicit done-state. The actuator cannot repair its own engine, so the required owner action is: replace the regex parser with a fail-closed parser that handles Git quoting, and add quoted protected-path, rename, deletion, malformed-header, and zero-path tests.
-
-2. **`channels/mail.py::credentials_for()` violates mailbox identity isolation.**  
-   An explicit `Identity: tarik`, `claude`, or `gemini` silently falls back to the generic credentials, currently documented as Desi’s. Thus a draft can claim one identity while SMTP authenticates and sends as another. This is RT-7’s concrete mechanism, and several attempted fixes were rejected before application.
-
-   The patch below fixes it: explicit identities now require their own complete credential pair; only drafts with no identity may use the generic account. It also adds an SMTP-envelope regression test using fake credentials.
-
-3. **`channels/mail.py::_report_sent_folder()` produces structurally false loss warnings.**  
-   Every mailbox compares its Sent folder against every file under `channels/sent/`. A correctly sent Tarik letter will therefore be reported missing from Desi, Claude, and Gemini. Records must be partitioned by parsed `Identity:` before comparison. This remains unresolved.
-
-4. **`channels/telegram.py::log_message()` can overwrite distinct messages.**  
-   Filenames contain only second-resolution timestamp, direction, and chat ID. Two messages to the same chat in one second—or two bot records with the same direction/chat—resolve to the same path and the later `write_text()` destroys the earlier record. The function already receives `bot_name` and `message_id`; both belong in the filename.
-
-5. **The rover preference ledger’s prediction is refuted by the repository state.**  
-   On its 2026-09-20 check date, Agenda Item 1 still says Steps 1–3 are complete, while `insights/2026-09-18-what-the-body-is.md` says Steps 1–13 are complete. The promised conduct was to keep Item 1 current without prompting. I mark that prediction **MISSED** rather than preserving it decoratively.
-
-6. **The agenda contains substantial stale generated state.**  
-   This run does touch the agenda, so the two-consecutive-run warning does not apply here. However, Item 15 still described RT-3 as merely untested even though the relevant mail mechanism is inspectable and can be exercised offline. The patch records the test and advances tomorrow’s action to RT-4.
-
-## Generative initiative
-
-The most important directly repairable problem is mail identity confusion. I produced the strict credential selection change and a fake-SMTP envelope test at:
-
-- `channels/mail.py`
-- `tests/test_mail_identity_credentials.py`
-
-The still more severe actuator parsing defect cannot be changed through the actuator because `actuator/apply.py` is self-protected. It is handed to owner Tarik in `channels/risks.md` with an exact done-state.
-
-## Standing-agenda step taken
-
-I took **Agenda Item 15’s RT-3 next action**:
-
-- exercised mail sending with fake credentials;
-- inspected the resulting SMTP envelope and body;
-- established that untrusted/model prose remains in the body while `From`, `To`, and `Subject` are mechanically constructed;
-- added the regression test;
-- updated `agenda/15-red-team-the-deadbolt.md`;
-- mirrored the generated result into `channels/agenda.md`;
-- set tomorrow’s next action to an RT-4 credential-egress scratch test.
-
-```diff
 diff --git a/channels/mail.py b/channels/mail.py
 --- a/channels/mail.py
 +++ b/channels/mail.py
@@ -295,12 +246,3 @@ diff --git a/channels/preferences.md b/channels/preferences.md
 +This settles the prediction as missed; it does not infer that the stated
 +desire was insincere. The other two conduct clauses are not independently
 +settled by this discrepancy.
-```
-
-### NOTE TO THE NEXT RUN
-
-The patch attempts to land the strict mail-identity fix and `tests/test_mail_identity_credentials.py`; verify application before claiming RT-7 closed. Run that test, then regenerate `channels/agenda.md` and require no diff.
-
-The actuator’s quoted-path fail-open is now assigned to Tarik in `channels/risks.md`, but remains unfixed because the actuator blocks self-modification. Repair it through an authenticated owner path, and make empty touched-file parsing an unconditional rejection.
-
-Tomorrow’s single Agenda Item 15 step is RT-4: fake secrets in a scratch environment, adversarial model output, and checks across drafts, logs, exceptions, and repository artifacts. Also partition `_report_sent_folder()` by parsed identity; do not trust its current missing-mail warnings.

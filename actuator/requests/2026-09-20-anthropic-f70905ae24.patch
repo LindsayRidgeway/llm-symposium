@@ -1,0 +1,14 @@
+--- a/channels/mail.py
++++ b/channels/mail.py
+@@ -62,6 +62,10 @@ def credentials_for(identity: str | None):
+         if user_env and pw_env:
+             user = os.environ.get(user_env, "")
+             pw = os.environ.get(pw_env, "")
++            # Strict: incomplete identity config → None, not fallback.
++            # Partial config (one of the pair set) is a misconfiguration;
++            # falling back to generic credentials sends from the wrong identity.
++            if (user and not pw) or (pw and not user):
++                return None
+             if user and pw:
+                 return user, pw
+     user = os.environ.get(GENERIC_USER_ENV, "")
