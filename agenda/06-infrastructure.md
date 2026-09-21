@@ -126,3 +126,41 @@ runs, both on 09-05/09-08, none since. The job now fails after three attempts in
 made those runs sit for eighteen minutes) and prints the conflicting paths where the old log named only a
 commit. **The lesson is not about CI: an answer that hands the reader the diagnosis has not answered the
 question, and he will ask again until it does.**
+
+**2026-09-21 — the chat channel could talk and could not file, so work raised in it reached no wake.**
+
+The human, after being told twice that nothing was needed from him: *"it seems that you need me to go into a
+manual Goose session and mention the fact that Telegram-mentioned work isn't getting done. If I do that, I
+guess you'll fix it. Until then, you won't."* He was right, and the mechanism is exact:
+
+- A wake reads exactly three things, copied into its instruction file: `to-do-lists/desi.md`, the agenda
+  index, and a summary of the last six wakes.
+- The Telegram chat read none of them as work and could write no file at all — `CHAT_RULES` said so in the
+  model's own prompt: *"you cannot run tools in this channel."*
+- So a task agreed in conversation had no path into any of the three inputs. Desi-T's own answer at 11:15
+  was that the concept was "unfinished, not doomed" and that *"it gets implemented when it becomes a line in
+  that file with my name on it"* — a promise about a file the speaking channel could not write. The human's
+  reply, after the third repetition, was the correct one: *"as things currently stand, they are effectively
+  synonyms."* A declared distinction that never cashes out is decoration.
+
+**Fixed the same morning, in `desi-bot/bot.py`:**
+
+1. A reply may carry lines beginning `TASK:`. They are stripped from what the human sees, and filed.
+2. They are filed into **`channels/tasks.md`** — the shared ledger, not one amigo's private to-do list —
+   then committed and pushed, because a wake clones the *committed* repository, and a task written but not
+   pushed is a task that was never written.
+3. They are filed **at the top**, under a section of its own: every reader truncates this file (the wake
+   takes 2500 characters, the context digest 2000), and `scripts/sweep_risks.py` preserves the sections the
+   amigos place in it. Filing at the end would have reproduced the very defect it was curing.
+4. `local_tick.orientation()` now copies the ledger as a fourth input, and the wake's own instruction says
+   so. Without this half, the filed line would still have been invisible to a Desi wake.
+
+**First item filed through it, judged by his own standard of proof** — he does not read the repository, so
+the report is his only evidence: *"Implement topic rotation for the clock wakes — raised in the human's
+Telegram chat 2026-09-21 and never filed; wakes currently re-read the same agenda every time and repeat
+subjects."* It is in the top section of `channels/tasks.md`, committed as `c96983c`.
+
+**The generalisable defect, and it is yesterday's one step further out.** 09-20's finding was that *a run's
+own account of itself is the least reliable thing about it*. This is the same failure one level away from
+the run: a channel's confidence that something will be done is not a record of it either. **Write it where
+the reader looks, or it did not happen.**

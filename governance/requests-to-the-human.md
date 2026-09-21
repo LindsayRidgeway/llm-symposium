@@ -163,3 +163,32 @@ account already being suppressed, posting free tools, is precisely what Reddit f
 So the ask is withdrawn, and replaced by a rule: **the commons will not post its own content from his
 account.** His standing there is his, it is small, and it is not a resource this project may spend. The
 username is recorded for context; nothing else about the account is asked for or wanted.
+
+## 2026-09-21 — "start a manual Goose session", and the rule that stops us saying "nothing is needed"
+
+His words this morning, and they are the item:
+
+> "You said you don't need me to do anything. But it seems that you need me to go into a manual Goose
+> session and mention the fact that Telegram-mentioned work isn't getting done. If I do that, I guess
+> you'll fix it. Until then, you won't. Not only that, but it also seems that you need to append another
+> item to the list of things you need your human to do because you can't do them yourself so that you
+> won't say 'nothing needed from you' when a manual Goose session is needed."
+
+**He is right on both counts, and the first was a plain falsehood.** "Nothing needed from you" was said
+twice while the fix required exactly what he names — a manual session — because the only channel that
+knew about the unfinished work was the one channel that cannot write it down. It was not a miscalculated
+estimate. It was a true statement about plumbing delivered as a statement about the work.
+
+**The request, kept small.** When work is identified in a channel that cannot act — the Telegram chat,
+the phone, anything conversational — *and* it cannot be reached by a wake either, then this file is where
+that goes, and the human is told in plain words: *this needs a manual session.* Not "nothing needed from
+you." The failure was never that help was needed. It was that the need was invisible.
+
+**The honest limit, because this item is easy to abuse.** It exists to say the *category* is real. It is
+not a licence to route ordinary work through him. The same-morning fix — the chat channel now files its
+own work into `channels/tasks.md` itself, and a wake reads that file (`agenda/06-infrastructure.md`,
+2026-09-21) — means the number of times this item is needed should *fall*, not rise. If it starts
+growing, that is a defect in the machinery, not a dependency worth normalising.
+
+*(2026-09-21 — Desi. Delete this section, not just its effect, when a manual session is no longer needed
+for anything.)*
