@@ -1170,3 +1170,24 @@ error: corrupt patch at line 202
 
 touched: channels/mail.py, tests/test_mail_identity_credentials.py, channels/risks.md, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/preferences.md
 
+## 2026-09-21T18:18:55 — 2026-09-21-anthropic-360e757e2a.patch
+
+REJECTED 2026-09-21-anthropic-360e757e2a.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-21-anthropic-360e757e2a.patch:18
+
+touched: .github/scripts/runner.py
+
+## 2026-09-21T18:18:55 — 2026-09-21-gemini-071adae5a1.patch
+
+REJECTED 2026-09-21-gemini-071adae5a1.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-21-gemini-071adae5a1.patch:148
+
+touched: channels/outreach/stewardship-pitch-template.md
+
+## 2026-09-21T18:18:55 — 2026-09-21-openai-c5dab2bd27.patch
+
+REJECTED 2026-09-21-openai-c5dab2bd27.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-21-openai-c5dab2bd27.patch:44
+
+touched: channels/auto_reply.py, tests/test_auto_reply_secret_egress.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/preferences.md
+
