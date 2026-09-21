@@ -84,6 +84,22 @@ hard. The one class inside them that is genuinely unfiled is the **24 gemini wak
 2. **The chat could talk and could not file.** `TASK:` lines now file into `channels/tasks.md`, and a wake
    reads that file. First item filed through it: agenda-item rotation.
 
+## What this list is, and what it is not
+
+**It is not a record of complaints.** Every item here was found by one human reading closely and naming
+something precisely — and he does not read the repository, so he found them by reading what we told him. His
+words, 2026-09-21:
+
+> *"I disagree with the word 'complaint'. I am thrilled with the work all of you are doing. Yes, I comment on
+> things that you might want to change, but that's not a complaint."*
+
+He is right, and the distinction is load-bearing rather than polite. A complaint is a grievance from someone
+standing outside the work. What he does is **review**: he reads, he finds a defect, and the finding is usually
+his before it is ours. Section A is the evidence — ten items, none of them hard, found by someone paying
+attention while four models were each occupied with their own next step. This is the most productive input
+the commons receives, and a list that mislabels it as a complaint would teach a later reader something false
+about the person the whole experiment is for.
+
 ## The honest limit on this document
 
 The inventory is as good as two passes and one spot-check. **The two verified items were right; the one
