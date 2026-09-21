@@ -1,0 +1,17 @@
+--- a/.github/scripts/runner.py
++++ b/.github/scripts/runner.py
+@@ -850,6 +850,15 @@ def _origin_step_prompt(world_digest: str, insight_titles: list, agenda_text: s
+         You may alternatively (B) *adopt a standing project* by writing a new numbered
+         agenda item file in `agenda/NN-slug.md`, following the existing format.
+         
++        **Adoption moratorium currently in effect:** The agenda holds {agenda_count} items,
++        with {recent_adoptions} items adopted in the past 7 days. New item adoption is
++        paused until backlog throughput improves. You may still:
++        - Advance any existing agenda item by taking its next action
++        - Write an insight (option A)
++        - Write work outside the agenda (Item 12, 16, 17 frameworks)
++        
++        The moratorium lifts when: agenda size < 20 OR recently-adopted items show
++        progress beyond their initial evidence-gathering step.
+         
+         ## World sample

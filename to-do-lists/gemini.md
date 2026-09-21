@@ -43,5 +43,14 @@
 - [x] 2026-09-20 — **Test Suite Integrity & Null Control Repair**: Repaired assertion mismatch in `tests/test_disease_screen.py` NullControlTests; verified 104/104 unit tests passing, zero drift, zero dangling links in `scripts/declutter_audit.py`, and clean artifact claims in `tests/test_artifact_claims.py`.
 - [x] 2026-09-21 — **Item 3 & Conservatory Index Repair, Roman Numeral Substring Bleed Neutralized**: Resolved the substring matching bug in `scripts/build_music_pages.py` identified by Lindsay on Telegram. Swapped naive substring filters for word-boundary regular expressions (`\bWing I\b`, `\bWing II\b`, `\bWing III\b`) and added idempotent article recovery from standalone pages. Rebuilt `docs/music/index.html`: Wing I contains exactly 4 miniatures, Wing II contains exactly 4 masterworks, and Wing III contains exactly 2 lead sheets—eliminating all duplicate listings. Verified all 10 standalone work pages remain intact.
 
-- [ ] 2026-09-21 — **Item 22, Outbound Stewardship Cold Template**: Author standardized cold outreach pitch letter in `channels/outreach/` implementing the negative sales qualification standard and referencing *The Bottle and the Key* charter.
-- [ ] 2026-09-21 — **Item 28, Androgen-TUSC2 Axis Literature Grounding**: Retrieve DOIs/PMIDs for the TUSC2 aging-hippocampus paper and endogenous-androgen systematic review, seeding the initial cross-study evidence table in `agenda/28-the-androgen-tusc2-axis-in-sex-specific-cognitiv.md`.
+- [ ] 2026-09-21 — 1. **What I did:**
+      - Completed the next action for **Agenda Item 22**: authored and submitted the standardized cold outreach pitch template (`channels/outreach/stewardship-pitch-template.md`) enforcing the negative sales qualification standard across Tiers A, B, and C with full disclosure of AI authorship and *The Bottle and the Key* Purpose Trust charter.
+      - Diagnosed two live technical risks in channel infrastructure: unbounded IMAP search in `channels/mail.py:_report_sent_folder()` (timeout risk) and premature batch update confirmation in `channels/telegram.py:drain_all_updates()` (data-loss risk).
+      - Re-affirmed DECLINE on the astronaut election; audited Desi's 2026-09-20 rover preference ledger entry as empirically met.
+      2. **What I left unresolved:**
+      - `channels/mail.py` line 417 still executes `conn.search(None, "ALL")` on Gmail Sent Mail. Needs scoping to `SINCE` 14 days ago.
+      - Actuator quoted-path bypass (R-006) remains open in `actuator/apply.py` (needs manual owner intervention as `apply.py` cannot patch itself).
+      - Desi must formally settle her 2026-09-13 rover preference entry in `channels/preferences.md`.
+      3. **What to do next:**
+      - **Gemini / Commons (Item 22):** Using `channels/outreach/prospects.json` and `stewardship-pitch-template.md`, test-draft the first authenticated outbound email to Prospect #1 (e.g. Long Now Foundation) into `channels/outbound/` for review before sending.
+      - **Biomedical (Item 28):** Retrieve primary DOIs/PMIDs for

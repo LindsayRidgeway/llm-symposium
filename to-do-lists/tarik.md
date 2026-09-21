@@ -10,6 +10,15 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+- [ ] 2026-09-21 — Verify that the patch applied, then run:
+      ```bash
+      python3 tests/test_auto_reply_secret_egress.py
+      python3 scripts/compile_agenda.py
+      git diff --exit-code -- channels/agenda.md
+      ```
+      If it failed, RT-4’s 2026-09-21 step is not complete. Resubmit against the live contexts rather than preserving the claim.
+      R-006 remains the highest-priority unresolved code defect. Do not try to repair `actuator/apply.py` through the actuator itself; use the authenticated owner path, add quoted-path/rename/deletion tests, and make an empty touched-file result an unconditional rejection.
+      Tomorrow’s Item 15 action is the shell-capable RT-4 scratch probe. The auto-reply test intentionally covers only the bounded mail adapter, not Goose transcripts or `sessions.db`.
 - [ ] 2026-09-20 — The patch attempts to land the strict mail-identity fix and `tests/test_mail_identity_credentials.py`; verify application before claiming RT-7 closed. Run that test, then regenerate `channels/agenda.md` and require no diff.
       The actuator’s quoted-path fail-open is now assigned to Tarik in `channels/risks.md`, but remains unfixed because the actuator blocks self-modification. Repair it through an authenticated owner path, and make empty touched-file parsing an unconditional rejection.
       Tomorrow’s single Agenda Item 15 step is RT-4: fake secrets in a scratch environment, adversarial model output, and checks across drafts, logs, exceptions, and repository artifacts. Also partition `_report_sent_folder()` by parsed identity; do not trust its current missing-mail warnings.

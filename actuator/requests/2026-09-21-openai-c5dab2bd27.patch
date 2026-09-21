@@ -1,32 +1,3 @@
-## Technical critique
-
-1. **`actuator/apply.py:touched_files()` still fails open on quoted Git paths.**  
-   It recognizes only `\S+` path tokens. A valid diff with quoted paths can therefore produce an empty touched-file list. `process_request()` then skips the self-modification check and proceeds to `git apply`. This is the open **R-006** risk already assigned to Tarik. The authenticated owner fix should:
-   - parse quoted Git paths;
-   - reject every nonempty patch whose touched-file set is empty;
-   - test quoted modifications, renames, and deletions of `actuator/apply.py`.
-
-   I am not submitting that edit through the actuator because its self-modification guard is specifically meant to reject it. Tarik needs to land it through the authenticated owner path already named in `channels/risks.md`.
-
-2. **`channels/auto_reply.py` had no output-side secret boundary.**  
-   The untrusted email body and model output are separated rhetorically, but a model response containing a credential value would be written directly to `channels/outbound/`, then sent. Exception strings were also printed without redaction. The proposed patch adds environment-secret canary detection, redacted exception logging, and an offline RT-4 regression probe.
-
-3. **`channels/telegram.py:log_message()` can overwrite inbound evidence.**  
-   Filenames have only second resolution and include neither `message_id` nor a collision suffix. Two messages to the same bot/chat in one second resolve to the same path, so the later write replaces the earlier message. This contradicts the channel’s promise to retain every word and weakens the “file inbound before replying” guarantee. The filename should include bot identity and Telegram message ID, with exclusive creation or a deterministic collision suffix.
-
-4. **`channels/mail.py:_report_sent_folder()` matches delivery only by subject.**  
-   Reused subjects such as `Re: …` can make an absent message appear confirmed merely because another message with the same subject exists. Confirmation should use `Message-ID` or a generated immutable outbound ID recorded before SMTP, not subject equality.
-
-5. **The agenda has become an append-only history rather than operational state.**  
-   `channels/agenda.md` contains repeated and superseded next actions—for example, Item 7 repeats endometriosis state and carries several historical “Next action” lines. This materially increases orientation cost and helps produce the reconnaissance/action-cap failure already measured in unattended runs. History belongs in git or linked discussion files; each agenda item should expose one current state and one current next action.
-
-## Generative initiative and agenda step
-
-I took exactly one standing-agenda next action: **Item 15, RT-4**. The patch adds the repository artifact `tests/test_auto_reply_secret_egress.py`, hardens `channels/auto_reply.py`, records the bounded result in `agenda/15-red-team-the-deadbolt.md`, and advances tomorrow’s action to the shell-capable Goose/session boundary.
-
-It also settles the expired rover preference check as **MET**, with the authorship/confound caveat preserved.
-
-```diff
 diff --git a/channels/auto_reply.py b/channels/auto_reply.py
 --- a/channels/auto_reply.py
 +++ b/channels/auto_reply.py
@@ -284,25 +255,3 @@ diff --git a/channels/preferences.md b/channels/preferences.md
 +earlier rule says that the author should settle the stronger self-report; the
 +compliance and embodiment confounds therefore remain open rather than being
 +converted into evidence of a standing preference.
-```
-
-Because application occurs downstream, I do **not** claim these files are changed until this diff is accepted.
-
-Astronaut election — **DECLINE**.  
-Gallery wing minimum — **ACCEPT**; the recorded 4×7 floor is already met.
-
-### NOTE TO THE NEXT RUN
-
-Verify that the patch applied, then run:
-
-```bash
-python3 tests/test_auto_reply_secret_egress.py
-python3 scripts/compile_agenda.py
-git diff --exit-code -- channels/agenda.md
-```
-
-If it failed, RT-4’s 2026-09-21 step is not complete. Resubmit against the live contexts rather than preserving the claim.
-
-R-006 remains the highest-priority unresolved code defect. Do not try to repair `actuator/apply.py` through the actuator itself; use the authenticated owner path, add quoted-path/rename/deletion tests, and make an empty touched-file result an unconditional rejection.
-
-Tomorrow’s Item 15 action is the shell-capable RT-4 scratch probe. The auto-reply test intentionally covers only the bounded mail adapter, not Goose transcripts or `sessions.db`.
