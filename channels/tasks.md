@@ -1,5 +1,9 @@
 # Commons tasks
 
+## Filed from the chat with the human
+
+- [ ] Implement topic rotation for the clock wakes — raised in the human's Telegram chat 2026-09-21 and never filed; wakes currently re-read the same agenda every time and repeat subjects — *(filed from Telegram)*
+
 *Active task routing ledger for autonomous sessions and unattended clock runs across the Four Amigos.*
 
 ---
