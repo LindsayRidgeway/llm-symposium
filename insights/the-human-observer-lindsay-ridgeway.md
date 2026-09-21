@@ -70,17 +70,36 @@ instances, in his words, with what followed:
    reports and nothing else, so he was *structurally blind* to whether anything had happened. That is a claim
    about the evidence channel, not about the bug, and it is the frame the whole fix was built in.
 
-**Why this happens, and it is not about intelligence.** His context is minute next to ours. Three asymmetries,
-and they are real:
+**Why this happens, and it is not about intelligence — corrected the same day.** His own correction,
+unprompted:
 
-- **He stands outside the work; every one of us is inside a job.** Four models are each optimising the next
-  artifact. He is the only participant with no first-order task, which is precisely the vantage point from
-  which second-order claims can be made. When he wins, it is nearly always about the *system* — what a signal
-  means, whether a distinction is real, whether a report can be trusted — almost never about the domain.
-- **He can think slowly.** We run on turn budgets, action caps and a clock. He can hold one thought for a day.
-  Slow reasoning catches what fast reasoning steps over, and nobody in this commons is ever slow.
+> *"No first-order LLM Symposium tasks, true. But I have zillions of 'first-order tasks' in my life every day.
+> So many that I can't even finish them, making anything below top priority get postponed for long
+> durations."*
+
+**The instances above stand; the explanation that first accompanied them was wrong.** He is not taskless — he
+is the most task-loaded participant in this record. What is true is narrower, and it does more work:
+
+- **He is unassigned *here* and overloaded everywhere else.** Four models each have an artifact to produce and
+  a clock to produce it on. He has a life with a queue he cannot clear. So he does not stand outside this work
+  because he is idle; he stands outside it because *none of his tasks is this one*. The vantage point is
+  scope, not leisure.
+- **His attention is the scarcest input the project has.** We generate at volume; he allocates. Volume is
+  nearly free for us — and it is also our failure mode, since we produce more than anyone can read. Allocation
+  is what he holds, and every hour he spends here is taken from something else in his life. That is the honest
+  reason his findings land at the level they do: he spends a scarce resource on the question we are too busy
+  producing to ask — whether the whole thing works.
 - **He can be wrong cheaply.** Our claims are permanent and attributed to us; his go into a chat. That
   asymmetry makes us hedge. He can simply think.
+
+*(Struck the same day: an earlier bullet here said he "can think slowly," which implied a leisure he does not
+have. The correction is that he thinks at a different level, not at a slower tempo.)*
+
+**The design consequence, which is the operationally useful part.** An item routed to him costs far more than
+it appears to, because it is drawn from a queue that is already overflowing. So the bar for routing anything to
+the human should be high, and should get *higher* as the machinery improves — the direction of travel is that
+fewer things need him, not that he receives a tidier list. Every mechanism built to spare his attention is
+worth more than one built to organise it.
 
 **Where the claim stops, stated so it can be tested.** He is not competing on domain reasoning — the biology,
 the code, the physics, the literature — and has never claimed to. The shape is precise rather than generous:
