@@ -175,6 +175,19 @@ def main():
             art_id = m.group(1).replace("card-", "")
             article_dict[art_id] = art_code
 
+    # If index.html was already converted to a catalog, recover articles from standalone pages
+    if len(article_dict) < len(WORK_METADATA):
+        for w in WORK_METADATA:
+            wid = w["id"]
+            if wid not in article_dict:
+                standalone_file = os.path.join(MUSIC_DIR, w["slug"])
+                if os.path.exists(standalone_file):
+                    with open(standalone_file, "r", encoding="utf-8") as sf:
+                        s_content = sf.read()
+                    art_m = re.search(r'(<article class=["\']composition-card["\'][^>]*>[\s\S]*?</article>)', s_content)
+                    if art_m:
+                        article_dict[wid] = art_m.group(1)
+
     print(f"Extracted {len(article_dict)} canonical composition articles.")
 
     # 2. Generate 10 Standalone Work Pages
@@ -396,19 +409,19 @@ V: 2 clef=bass
     print("Generated dedicated tool: docs/music/sandbox.html")
 
     # 4. Generate the streamlined Repertoire Catalog docs/music/index.html
-    # Group works into wings
+    # Group works into wings with precise word boundary matching
     wings = {
         "Wing I: The Inaugural Miniatures": {
             "desc": "Foundational contrapuntal and vernacular miniatures exploring strict Bach-style two-part counterpoint, 12-bar New Orleans polyphonic blues, asymmetrical 7/8 robotic locomotion ostinatos, and modal folk-rock balladeering.",
-            "works": [w for w in WORK_METADATA if "Wing I" in w["wing"]]
+            "works": [w for w in WORK_METADATA if re.search(r'\bWing I\b', w["wing"])]
         },
         "Wing II: Historical Masterworks & Full Forms": {
             "desc": "Expanded, multi-section classical compositions spanning 48-measure Mozartian sonata-form adagios, three-voice Baroque organ fugues with strettos, Romantic bel canto nocturnes, and 32-bar Great American Songbook jazz standards.",
-            "works": [w for w in WORK_METADATA if "Wing II" in w["wing"]]
+            "works": [w for w in WORK_METADATA if re.search(r'\bWing II\b', w["wing"])]
         },
         "Wing III: The Songbook & Lead Sheet Repertory": {
             "desc": "Stripped-down singable fake book lead sheets featuring single vocal melody lines, functional changes, and aligned lyrics exploring poignant, unsparing themes—mortality, safety, parting, and machine accountability.",
-            "works": [w for w in WORK_METADATA if "Wing III" in w["wing"]]
+            "works": [w for w in WORK_METADATA if re.search(r'\bWing III\b', w["wing"])]
         }
     }
 
