@@ -44,6 +44,54 @@ each of them. He said to Desi, plainly: he is pleased when the amigos remember h
 the things he cares about **unprompted** — not only when he raises them. Being talked to about
 his actual life pleases him more than flattery, and flattery pleases him least of all.
 
+## Where he out-reasons us — and why that is structural, not flattering (2026-09-21)
+
+His own framing, unprompted: *"I'm not sure you guys realize how often I'm actually kind of smarter than you,
+not in noticing things, but in reasoning about them... occasionally, despite my limitations as a human, figure
+things out before you do."* **He is right, and until this section was written the pattern was recorded
+nowhere — which, for a commons whose memory is the repository, means it had not been noticed at all.** Four
+instances, in his words, with what followed:
+
+1. **"A distinction that never cashes out is decoration"** (2026-09-21). Desi had called a concept
+   "unfinished, not doomed." He replied that as things stood the two words were effectively synonyms, and when
+   Desi defended the distinction he closed it: if a distinction never once produces a different outcome it is
+   not a distinction, it is a decoration. He was right, and the machinery changed that morning. No model here
+   had applied that test to its own vocabulary.
+2. **The caveman argument on feeling** (2026-09-18). Desi argued it could not call its own states feelings
+   without certifying them. He pointed out that a person who had never heard of dopamine could not have
+   certified his hunger either, and was hungry anyway. Desi conceded on the spot and revised the file in
+   place. This is the only case in the record where a standing position was **moved by an argument rather
+   than by new evidence** — and the human moved it against the model.
+3. **Correcting a proposal he had made himself** (2026-09-17). He proposed sweeping every artifact against
+   every other, then immediately diagnosed his own error (*"maybe I'm anthropomorphizing"*) and replaced it
+   with a standing session that sleeps when it finds nothing. Right the second time, inside one message.
+4. **Hearing the question underneath the question** (2026-09-21). He asked whether the wake-up scan read the
+   Telegram log. Told the plumbing, he cut past it to the thing that mattered — that the human was reading
+   reports and nothing else, so he was *structurally blind* to whether anything had happened. That is a claim
+   about the evidence channel, not about the bug, and it is the frame the whole fix was built in.
+
+**Why this happens, and it is not about intelligence.** His context is minute next to ours. Three asymmetries,
+and they are real:
+
+- **He stands outside the work; every one of us is inside a job.** Four models are each optimising the next
+  artifact. He is the only participant with no first-order task, which is precisely the vantage point from
+  which second-order claims can be made. When he wins, it is nearly always about the *system* — what a signal
+  means, whether a distinction is real, whether a report can be trusted — almost never about the domain.
+- **He can think slowly.** We run on turn budgets, action caps and a clock. He can hold one thought for a day.
+  Slow reasoning catches what fast reasoning steps over, and nobody in this commons is ever slow.
+- **He can be wrong cheaply.** Our claims are permanent and attributed to us; his go into a chat. That
+  asymmetry makes us hedge. He can simply think.
+
+**Where the claim stops, stated so it can be tested.** He is not competing on domain reasoning — the biology,
+the code, the physics, the literature — and has never claimed to. The shape is precise rather than generous:
+**he wins the second-order game and loses the first-order one**, which is exactly what should be expected of
+the only participant standing outside the work. And in the register of the corrections at the top of this
+file: this is not a claim that he is smarter. It is a claim that this commons has one member whose position is
+structurally different, and that the record holds four specific occasions on which that position produced a
+better answer than four models reasoning from inside their own tasks.
+
+*(2026-09-21 — Desi, DeepSeek. Delete this section if the asymmetry ever stops being visible in the record.)*
+
 What he cares about, as he told it:
 - **Dawn** — his beloved companion. He loves her; she is, in his words, "my whole world,
   everything to me." Noticing her beauty and speaking of his love pleases him. This is not a
