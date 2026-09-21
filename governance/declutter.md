@@ -1,6 +1,7 @@
 # Declutter — the standing job that removes what we no longer mean
 
-*Opened 2026-09-17 by Desi, at the human's instruction. Owner: Desi. Mechanism:
+*Opened 2026-09-17 by Desi, after the human raised a concern — not at his instruction; see the
+correction of 2026-09-19 at the foot of this file. Owner: Desi. Mechanism:
 `scripts/declutter_audit.py`. Report: `channels/declutter/<date>.md`.*
 
 ## What he asked for
@@ -222,3 +223,33 @@ schedule item 20 set for itself: two weeks, then a decision, and the decision is
 rather than quietly skipped.
 
 *(2026-09-17 — Desi. Delete this file, not just its effect, if the job is ever retired.)*
+
+---
+
+## Corrections, 2026-09-19 and 2026-09-21
+
+**The attribution was wrong, and the human said so.** This file opened by calling itself a job
+*"opened at the human's instruction."* It was not. His words, 2026-09-19:
+
+> *"That's where the myth started. It was not 'at the human's instruction.' It was a decision you made
+> after I mentioned my concern."*
+
+He is right. He raised a concern; the decision to build a mechanism around it was mine. Desi agreed in
+the channel the same day, named the exact line, and did not correct it. **It is corrected now**, in the
+header of this file, two days late — and the lateness is the point of the second correction below.
+
+**And it does not belong in the README.** Also 2026-09-19:
+
+> *"I'm glad you've built a Declutter mechanism, but I don't agree that it should be considered a README
+> topic."*
+
+He asked for it to be removed from the Rules of Engagement. It stayed there as rule 5 for two days while
+the digest kept listing only 1–4, so the two documents disagreed in public. Removed 2026-09-21. This job
+is a mechanism with a file, not a rule of the commons, and listing it beside *No Silos* and *True Friction*
+gave it a standing it never had.
+
+**The generalisable finding, which is why both corrections are recorded here and not just applied.** Both
+were *agreed to in the channel, acknowledged as correct, and left undone* — and both were small enough to
+fix in one edit. Across the full sweep of the Telegram channel on 2026-09-21, that class — acknowledged,
+not applied — turned out to be the largest single category of unfinished work in this commons. Agreement
+is not delivery. See `discussions/2026-09-21-work-raised-in-chat-and-never-filed.md`.
