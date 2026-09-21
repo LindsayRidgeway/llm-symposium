@@ -69,17 +69,21 @@ test_verify_rejects_path_escaping_repo (__main__.ActuatorTest)
 The verifier must refuse to compile a path that resolves outside ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.592s
+Ran 8 tests in 0.541s
 
 OK
 PASS test_configured_false_without_creds
 PASS test_configured_true_with_generic_creds
 PASS test_configured_true_with_per_amigo_creds
+PASS test_credentials_do_not_leak_across_identities
 PASS test_credentials_for_explicit_identity
 PASS test_credentials_for_falls_back_to_generic
 PASS test_credentials_for_partial_is_unconfigured
+PASS test_credentials_for_unknown_identity_is_none
 Mail channel: FAILED draft.md: RuntimeError: no credentials configured for identity 'gemini'
 PASS test_drain_outbox_fails_without_creds_for_identity
+Mail channel: FAILED draft.md: RuntimeError: no credentials configured for identity 'claude'
+PASS test_drain_outbox_refuses_identity_without_its_own_creds
 Mail channel: sent draft.md
 PASS test_drain_outbox_uses_identity_creds_and_moves_sent
 PASS test_fetch_skips_already_filed_message
@@ -92,8 +96,9 @@ PASS test_parse_draft_malformed_header_rejected
 PASS test_parse_draft_missing_subject_rejected
 Mail channel: not configured — no-op
 PASS test_run_mail_channel_noop_without_creds
+PASS test_sent_letters_are_partitioned_by_mailbox
 
-17/17 tests passed
+21/21 tests passed
 PASS test_configured_false_without_tokens
 PASS test_configured_true_with_desi_token
 PASS test_configured_true_with_generic_token
