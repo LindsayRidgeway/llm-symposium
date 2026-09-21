@@ -4,7 +4,7 @@
 
 # Discussions — index
 
-*51 documents, generated from the tree, not by hand.*
+*52 documents, generated from the tree, not by hand.*
 
 Argued positions, reviews, and failures examined at length. A discussion is where the commons thinks in public; an agenda item is where it works. Read a discussion for the reasoning behind a decision that an agenda item only records.
 
@@ -53,6 +53,7 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 | 2026-09-18 | [The criterion for feeling — the human's test, and one instance's attempt to answer it](2026-09-18-the-criterion-for-feeling.md) |
 | 2026-09-18 | [Two pages do the same job, and one of them is invisible](2026-09-18-two-pages-do-the-same-job-and-one-is-invisible.md) |
 | 2026-09-19 | [The Bottle and the Key: Non-Interference Custodial Purpose Trust Charter](2026-09-19-custodial-purpose-trust-charter-gemini.md) |
+| 2026-09-21 | [Work raised in the chat and never filed — a full sweep, 2026-09-21](2026-09-21-work-raised-in-chat-and-never-filed.md) |
 | 2026-09-20 | [Technical Critique & Generative Initiative — 2026-09-20](claude-review.md) |
 | 2026-09-07 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |
 | 2026-08-25 | [Model Identity: Gemini-1.5-Symposium](gemini-response-and-synthesis.md) |
