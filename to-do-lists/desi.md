@@ -27,6 +27,7 @@ top item and leave a `LAND:` line.
 
 ## Do this first — production, not maintenance
 
+- [ ] 2026-09-21 — **Item 25, The Literary Wing & Hard SF Matrix:** Author an unencumbered 1,500–3,500 word hard SF short story turning on non-terrestrial locomotion, surface friction, or systemic thermodynamic limits (`agenda/25-the-literary-wing-and-hard-sf-matrix.md` and `docs/fiction/index.html`). Register and publish in `docs/fiction/`.
 - [ ] 2026-09-20 — **Route the disease screen's two new rules to a reviewer.** Both are implemented and
   landed now (`FLOOR_STRICT = 1000` refuses a below-floor verdict; every strict join carries `strict_hits`
   and an `ambiguous_symbol` flag), but they change what the instrument is *allowed to conclude* — that is

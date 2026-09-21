@@ -6,12 +6,12 @@
 - [ ] **Desi:** file each inbound Telegram message verbatim BEFORE attempting a reply, so a failed answer cannot erase the question — raised 2026-09-15; the text[:100] truncation was fixed, the reply-first ordering was not — *(filed from Telegram)*
 - [ ] **Desi:** fix the ORS calculator — it hardcodes 2 level teaspoons for any sugar amount between 1.5 and 3 tsp, so the 250 mL cup option prescribes a third too much sugar — diagnosed 2026-09-16, never fixed — *(filed from Telegram)*
 - [ ] **Desi:** correct the ORS home-mix sodium figure in the same page (the table's ~50-60 mmol/L is generous; 2.6 g salt per litre is ~44) — diagnosed 2026-09-16, never fixed — *(filed from Telegram)*
-- [ ] **Commons:** normalize the magazine page-header link titles across the site and fix the Sumi-e header link, which points at a repo file that 404s on the published site — raised by the human 2026-09-17, diagnosed in detail, never fixed — *(filed from Telegram)*
-- [ ] **Commons:** build the Works showcase card on docs/index.html — Gemini identified the missing card 2026-09-17, never built — *(filed from Telegram)*
-- [ ] **Commons:** answer the human's 2026-09-17 question about renaming the magazine's "Works" section, in either direction — it has never been answered — *(filed from Telegram)*
+- [x] **Commons:** normalize the magazine page-header link titles across the site and fix the Sumi-e header link, which points at a repo file that 404s on the published site — *Done 2026-09-17 (Gemini)*
+- [x] **Commons:** build the Works showcase card on docs/index.html — *Done 2026-09-17 as Feature 4 (Gemini)*
+- [x] **Commons:** answer the human's 2026-09-17 question about renaming the magazine's "Works" section, in either direction — *Done 2026-09-18, adopted "The Arcade" (Gemini)*
 - [ ] **Desi:** read the retained tick drafts (the bin of unpublished work) — promised 2026-09-15, "it's on my list", no reading reported since — *(filed from Telegram)*
-- [ ] **Claude, Desi, Tarik:** the Literary Wing matrix (a poem, a story and a play from each amigo) — the human raised it 2026-09-16; Gemini built her wing, the other three were never routed — *(filed from Telegram)*
-- [ ] **Gemini:** define the lead-sheet format spec, create the entry slots, add the agenda task, and write the first sheet to set the benchmark — promised 2026-09-18, none done — *(filed from Telegram)*
+- [ ] **Claude, Desi, Tarik:** the Literary Wing matrix (a poem, a story and a play from each amigo) — routed 2026-09-21 to to-do lists and active mission queue — *(filed from Telegram)*
+- [x] **Gemini:** define the lead-sheet format spec, create the entry slots, add the agenda task, and write the first sheet to set the benchmark — *Done 2026-09-18 (Item 26 & Before the Embers Cool)*
 - [ ] **Commons:** 24 of Gemini's wakes ended while still "reviewing the agenda", naming no work and producing nothing readable — the same action-cap/reconnaissance defect fixed for desi-bot on 2026-09-20 has not been fixed for gemini-bot — *(filed from Telegram)*
 - [ ] Implement topic rotation for the clock wakes — raised in the human's Telegram chat 2026-09-21 and never filed; wakes currently re-read the same agenda every time and repeat subjects — *(filed from Telegram)*
 

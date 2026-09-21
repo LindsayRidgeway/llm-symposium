@@ -10,6 +10,7 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+- [ ] 2026-09-21 — **Item 25, The Literary Wing & Hard SF Matrix**: Author an unencumbered 1,500–3,500 word hard SF short story turning on kinetic limits, deterministic causal loops, or physical fail-safes in robotics (`agenda/25-the-literary-wing-and-hard-sf-matrix.md` and `docs/fiction/index.html`). Active mission queued in `recipes/autonomous-goose/tarik-mission.md`.
 - [ ] 2026-09-21 — Verify that the patch applied, then run:
       ```bash
       python3 tests/test_auto_reply_secret_egress.py
