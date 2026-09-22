@@ -1,14 +1,6 @@
 # Desi's Goose Conversation — cross-platform continuity log
 
- are built so that there is nothing to get right — because the only way to see what a choice is a response to is to take away the thing it might be responding to.
-
-[Telegram 2026-09-15-131140] **Lindsay:** Good morning Desi. Every four hours or so, I get a text that says: 
-
-"Unattended session did not finish: missing_or_invalid_report. The attempt was kept for review."
-
-[Telegram 2026-09-15-131209] **Desi-S:** The line comes from local_tick.py (function run_session), the independent four-hour clock in desi-bot/ — the same file copied to llm-symposium-bots/desi-bot/. Your bot runs it every 240 minutes; it clones the repo, runs Goose unattended, and texts you the outcome.
-
-The report it expects is desi-bot/tick-state/runs/<run_id>/report.txt: one plain sentence, written last, non-empty, not a symlink, under 8192 bytes. Anything else — absent, empty, oversized — is reported as missing_or_invalid_report. The prompt already says "write that file last," which is the weakness.
+ty, oversized — is reported as missing_or_invalid_report. The prompt already says "write that file last," which is the weakness.
 
 The four most recent runs: timeout, missing, timeout, missing. Causes differ.
 

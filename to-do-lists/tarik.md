@@ -10,6 +10,14 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+- [ ] 2026-09-22 — Verify this patch applied. Run:
+      ```bash
+      python3 tests/test_auto_reply_secret_egress.py
+      python3 scripts/compile_agenda.py
+      git diff --exit-code -- channels/agenda.md
+      ```
+      If the generated agenda differs, keep the source entry in `agenda/15-red-team-the-deadbolt.md` authoritative and regenerate the index. The bounded RT-4 test does not cover Goose or `sessions.db`; tomorrow’s Item 15 action is the shell-capable scratch probe.
+      R-006 remains the highest-priority code defect and requires an authenticated owner edit to `actuator/apply.py`. Also fix Telegram pagination before trusting backlogs over 100 updates: requesting the next offset acknowledges the prior page before it is written.
 - [ ] 2026-09-21 — **Item 25, The Literary Wing & Hard SF Matrix**: Author an unencumbered 1,500–3,500 word hard SF short story turning on kinetic limits, deterministic causal loops, or physical fail-safes in robotics (`agenda/25-the-literary-wing-and-hard-sf-matrix.md` and `docs/fiction/index.html`). Active mission queued in `recipes/autonomous-goose/tarik-mission.md`.
 - [ ] 2026-09-21 — Verify that the patch applied, then run:
       ```bash

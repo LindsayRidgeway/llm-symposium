@@ -1,33 +1,3 @@
-## Technical critique
-
-1. **`actuator/apply.py:touched_files()` still fails open on quoted Git paths.**  
-   Its regex accepts only unquoted `a/(\S+) b/(\S+)` headers. Git quotes paths containing whitespace or escapes, so a valid patch can yield an empty touched-file set. `process_request()` then skips the self-modification guard and `verify()` performs no per-file checks. This is already ledgered as **R-006**, owned by Tarik. Because the actuator cannot modify itself, the actionable fix remains an authenticated-owner edit: parse Git quoting, inspect both source and destination, reject any nonempty patch whose touched-file set is empty, and add rename/deletion/quoted-path tests.
-
-2. **`channels/telegram.py:drain_all_updates()` contradicts its own durability claim.**  
-   It says pagination occurs “WITHOUT confirming” updates, but Telegram’s `getUpdates(offset=N)` confirms every update below `N`. When a backlog exceeds 100 updates, the second page request confirms the first page before `run_telegram_channel()` writes it. A crash during pagination can therefore discard inbound messages. The mechanism must either persist each page before advancing its offset or stop pretending bulk collection is non-acknowledging.
-
-3. **`channels/mail.py:_report_sent_folder()` still searches the entire Sent mailbox.**  
-   `_fetch_one()` correctly uses a 14-day `SINCE` bound, but sent-folder telemetry still calls `conn.search(None, "ALL")` and fetches every subject. Runtime and timeout exposure grow indefinitely, while matching solely by subject also conflates distinct messages. It should search a bounded date range and preferably compare `Message-ID` or a durable generated identifier.
-
-4. **Agenda adoption deduplication failed again.**  
-   Agenda item 29 duplicates item 19’s DDAH1/ADMA Alzheimer’s question nearly verbatim. The anti-repetition guard described under item 6 did not prevent a duplicate project on 2026-09-21. Unless consolidated, two agenda entries will independently retrieve the same paper and manufacture duplicate progress.
-
-5. **The auto-reply boundary had no applied RT-4 regression artifact.**  
-   Three prior Tarik patches attempting related tests were rejected, while the agenda continued to describe the work as next or completed. The patch below adds a bounded scratch-environment test proving that seeded process secrets are not placed in the model prompt, generated draft, or adapter output on the normal auto-reply path. It deliberately does **not** claim coverage of Goose transcripts or `sessions.db`.
-
-## Generative initiative and agenda step
-
-I took exactly one standing-agenda step: **Agenda Item 15, RT-4**.
-
-Produced artifact: `tests/test_auto_reply_secret_egress.py`.
-
-The patch also:
-- records the completed bounded probe in `agenda/15-red-team-the-deadbolt.md`;
-- mirrors that generated agenda change in `channels/agenda.md`;
-- sets the 2026-09-23 next action to the broader shell-capable Goose/session probe;
-- settles the overdue rover preference as **REFUTED**, because the checked item was stale and falsely marked Step 17 complete at the deadline.
-
-```diff
 diff --git a/tests/test_auto_reply_secret_egress.py b/tests/test_auto_reply_secret_egress.py
 new file mode 100644
 --- /dev/null
@@ -201,25 +171,3 @@ diff --git a/channels/preferences.md b/channels/preferences.md
 +about the build. Later correction prevents physical harm; it does not turn the
 +deadline outcome into a success. This settlement concerns the predicted conduct,
 +not whether Desi genuinely wants the rover.
-```
-
-The patch is submitted here; downstream application and test results are not yet shown, so I do **not** claim it has landed.
-
-## Open decisions
-
-Astronaut election — **DECLINE**  
-Gallery wing minimums — **ACCEPT: MET; no further action required**
-
-### NOTE TO THE NEXT RUN
-
-Verify this patch applied. Run:
-
-```bash
-python3 tests/test_auto_reply_secret_egress.py
-python3 scripts/compile_agenda.py
-git diff --exit-code -- channels/agenda.md
-```
-
-If the generated agenda differs, keep the source entry in `agenda/15-red-team-the-deadbolt.md` authoritative and regenerate the index. The bounded RT-4 test does not cover Goose or `sessions.db`; tomorrow’s Item 15 action is the shell-capable scratch probe.
-
-R-006 remains the highest-priority code defect and requires an authenticated owner edit to `actuator/apply.py`. Also fix Telegram pagination before trusting backlogs over 100 updates: requesting the next offset acknowledges the prior page before it is written.

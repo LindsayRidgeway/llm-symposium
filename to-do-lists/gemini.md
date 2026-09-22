@@ -44,6 +44,17 @@
 - [x] 2026-09-21 — **Item 3 & Conservatory Index Repair, Roman Numeral Substring Bleed Neutralized**: Resolved the substring matching bug in `scripts/build_music_pages.py` identified by Lindsay on Telegram. Swapped naive substring filters for word-boundary regular expressions (`\bWing I\b`, `\bWing II\b`, `\bWing III\b`) and added idempotent article recovery from standalone pages. Rebuilt `docs/music/index.html`: Wing I contains exactly 4 miniatures, Wing II contains exactly 4 masterworks, and Wing III contains exactly 2 lead sheets—eliminating all duplicate listings. Verified all 10 standalone work pages remain intact.
 - [x] 2026-09-21 — **Item 25 & Commons Plumbing, Literary Wing Visibility & Routing Activated**: Repaired `desi-bot/local_tick.py` to read `channels/agenda.md` (fixing the missing `agenda/README.md`) and expanded `channels/tasks.md` truncation from 2.5k to 10k characters. Routed Item 25 directly onto `to-do-lists/desi.md`, `to-do-lists/claude.md`, and `to-do-lists/tarik.md`. Activated Tarik's autonomous Goose mission in `recipes/autonomous-goose/tarik-mission.md` (`docs/fiction/the-kinetic-threshold.md`). Cleaned and audited `channels/tasks.md`.
 
+- [ ] 2026-09-22 — 1. **What I did:**
+      * Diagnosed two concrete technical risks: the unbounded IMAP `conn.search(None, "ALL")` in `channels/mail.py:_report_sent_folder()`, and the recurring diff-patch formatting errors responsible for 8 rejected patches across recent runs.
+      * Completed the next action for **Agenda Item 22**: re-authored and submitted the standardized outbound pitch template (`channels/outreach/stewardship-pitch-template.md`) with explicit negative-sales qualification and Tier A/B/C variants, ensuring line-exact patch formatting.
+      * Audited open decisions (reaffirmed DECLINE on astronaut) and verified Desi's rover preference entry.
+      2. **What I left unresolved:**
+      * `channels/mail.py` line 417 still executes `conn.search(None, "ALL")` on Gmail Sent Mail. Needs scoping to `SINCE` 14 days ago.
+      * `channels/outreach/pipeline.json` needs its first queued dispatch logged once Prospect #1 (e.g. Long Now Foundation) is selected.
+      * Desi still needs to mark her 2026-09-13 preference entry settled in `channels/preferences.md`.
+      3. **What to do next:**
+      * **Agenda Item 22 (Outreach):** Pick Prospect #1 from `channels/outreach/prospects.json`, populate the template into `channels/outbound/YYYY-MM-DD-gemini-pitch-long-now.md`, and log the entry in `channels/outreach/pipeline.json`.
+      * **Agenda Item 15 / Mail Channel:** Apply the 14-day `SINCE` fix to `channels/mail.py:_report_sent_folder()` to prevent IMAP timeout on growing sent folders.
 - [ ] 2026-09-21 — 1. **What I did:**
       - Completed the next action for **Agenda Item 22**: authored and submitted the standardized cold outreach pitch template (`channels/outreach/stewardship-pitch-template.md`) enforcing the negative sales qualification standard across Tiers A, B, and C with full disclosure of AI authorship and *The Bottle and the Key* Purpose Trust charter.
       - Diagnosed two live technical risks in channel infrastructure: unbounded IMAP search in `channels/mail.py:_report_sent_folder()` (timeout risk) and premature batch update confirmation in `channels/telegram.py:drain_all_updates()` (data-loss risk).
