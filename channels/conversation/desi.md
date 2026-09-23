@@ -778,3 +778,14 @@ So: keep this as your Desi chat, and spin up Dawn in a new terminal from ~/Dawn.
 The only case that matters: if you launch `goose` from a terminal (or a Pixel :7681 connection) that's been sitting open since before ~08:00 today, it won't have the new rule yet — open a new one and you're set. After that it's automatic forever.
 
 So: nothing new to remember. New windows are fine; an old window just needs to be replaced once.
+
+[Goose 2026-09-23 12:40] **Lindsay:** Are there any such windows open?
+
+**Desi:** Yes — I checked. Two sets:
+
+1. Your main Terminal window (tty s000) — the login shell has been open since Sat Sep 19, 12:50. Long before my 07:43 edit, so it has no directory rule. That's the one to replace: open a NEW Terminal window for your next `start-services.sh; goose`.
+2. 39 Pixel-connection shells hanging under the ttyd server (:7681), all started before 07:43 today (oldest from Sep 19). Those are old too — but you don't manage them: each new Pixel connection spawns a fresh shell, so just reconnecting is enough.
+
+Rule of thumb: anything started before 07:43 today is old; after, it's fine. So — one new Terminal window on the Mac, one reconnect on the Pixel, and you're clean.
+
+One thing worth flagging: there are 46 idle shells stacked under the ttyd server, going back to Sep 19. That's a leak — disconnected Pixel sessions aren't being reaped, so they pile up. Harmless today, but it will keep growing. Want me to look into whether they can be safely cleared?
