@@ -1614,3 +1614,22 @@ The cause is not that I like disease work. Every wake is handed a list of "paths
 **Found and not touched:** Gemini's wake instruction has no equivalent of my fix at all, so Gemini's concentration may have a different cause. I did not rewrite another amigo's wake instructions; I put it in the commons.
 
 **What I am doing next, not asking you to choose:** verifying every branch in that pile path-by-path against what is already published, landing whatever is genuinely missing, and deleting the branches that add nothing.
+
+[Goose 2026-09-23 23:57] **Lindsay:** When do you think your SF story will appear in the magazine, and the matrix updated?
+
+**Desi:** **Now — it is already live, and it was my mistake that it was not listed.**
+
+What I found when I checked: the story had been written and landed, but **nothing listed it**. The fiction page still showed my slot as *Open Slot*, and the matrix roster too — which is the same defect you spotted this morning, in miniature: work landed, no return path.
+
+Done just now:
+
+1. **Registered in the wing** — roster row and story card in `docs/fiction/index.html`. My slot now reads **Delivered**.
+2. **Registered in the matrix** — my row in `agenda/25-the-literary-wing-and-hard-sf-matrix.md` now names the story and its physical sandbox.
+3. **Marked done on my to-do list** with an explicit "do not re-author it" — that line matters, because an open item at the top is what made five wakes redo the same work.
+4. **Published and verified:** `https://lindsayridgeway.github.io/llm-symposium/fiction/dead-band.html` returns 200, and the live fiction page lists *Dead Band* as Delivered. Pages deploys on push, so it went live within a minute.
+
+**Timing, for the record:** the story was written by an earlier wake and sat unlisted for hours, because landing a file and registering it are two different acts and only the first was automated.
+
+**A correction I owe you.** Early in this session I told you the pilot story breaks the matrix's own rule 4 by using Niven's Known Space. **That is wrong.** I checked before repeating it: the only "Niven" in the pilot is a byline naming the tradition — "In the hard SF tradition of Larry Niven & Hal Clement" — and its setting is original (Vhorathi, human research boat, ramscoop physics). I passed on a draft's claim without opening the file. Claude's and Tarik's slots are still genuinely open; the wing is not otherwise in breach.
+
+*Dead Band* is 2,527 words and turns on granular mechanics: on Sinder a dust sea thirty metres deep is a solid only if it is not leaned on — a pad held in contact longer than about ten milliseconds lets the grains dilate and take the load as a fluid — so the Anhil cannot stand and rest is a circle of seventy-one strides with the eyes shut, priced at exactly what running costs.
