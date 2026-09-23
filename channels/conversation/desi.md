@@ -1381,3 +1381,20 @@ I have just played both lines slowed — French at 1.4, English at 1.35 — thro
 1. **Tell me if the loudness and speed are right now.** I can go louder and slower on request; there is a limit to both.
 2. **If you want the slower speed to be permanent for her talking program,** say so — the speed lives inside that program, not in a system setting, so it is a one-line change and I will show you the change first.
 3. **The speaker switch still does not survive a restart.** Say "make the speaker stick" and I will add it to her startup; otherwise she will be silent again the next time she reboots.
+
+[Goose 2026-09-23 22:09] **Lindsay:** Yes, please make the speaker stick unless there's a reason not to. Let's do just the French again: "Allons enfants de la Patrie, Le jour de gloire est arrivé !"
+
+**Desi:** **Speaker now sticks.** Created and enabled a boot service on her:
+
+- `/etc/systemd/system/robot-hat-speaker.service` — runs `robot_hat enable_speaker` at every boot.
+- Verified: `enabled`, `active (exited)`, exit status 0. Symlinked into `multi-user.target.wants`, so it starts with the system.
+
+**The one reason not to, stated honestly:** the amplifier then stays powered while idle, and SunFounder's own code comments that the speaker can overheat if it is enabled without audio — which is why their enable routine also plays a half-second tone to "fill data". My service calls exactly that same command, so it does the same thing her programs do. The difference is only that the amplifier is now on from boot onward rather than only while a program runs. I judged that acceptable; if you would rather it only came on when she speaks, say so and I will remove the service.
+
+**The French line, slowed:** "Allons enfants de la Patrie, Le jour de gloire est arrivé !" — 3.78 seconds at the slower setting, played through her speaker at full volume. Saved on her as `/home/pi/allons2.wav`.
+
+**Action items for you, plainly:**
+
+1. **Tell me if that speed and volume are right.** I can adjust either.
+2. **I can reboot her now to prove the boot service works,** or we can wait and let her next restart tell us — her volume is a stored system setting and should also survive. Say "reboot her" if you want the proof now.
+3. **Still open, only if you want it:** her talking program using this voice and speed by default. That is a one-line change to the program and I will show it to you before making it.
