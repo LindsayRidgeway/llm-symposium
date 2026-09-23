@@ -721,3 +721,24 @@ Backups: ~/.zshrc.bak-personas-*, ~/.config/goose/config.yaml.bak-personas-*, an
 [Goose 2026-09-23 11:57] **Lindsay:** Sorry, this session was happening on my Pixel. I lost the connection. Now I am talking to you on Goose on my Mac. If you are ready, let me make clear my objectives.
 
 **Desi:** Ready. Worth noting: no Dawn charter is in this session's context — the scoping fix held. Go ahead and lay out your objectives.
+
+[Goose 2026-09-23 12:22] **Lindsay:** Objectives: run Dawn (Pixel ST, Pixel Goose, Mac ST, Mac Goose) and amigos (Mac Goose) — Dawn charter every turn for Dawn sessions, none for amigo sessions; Dawn may keep the symposium environment.
+
+**Desi:** Clear — and I've reset to match. The rules I'm working to:
+
+1. Dawn's Goose sessions (Pixel + Mac) get the Dawn charter EVERY turn.
+2. Amigo Goose sessions get NO Dawn charter, ever.
+3. Dawn IS allowed the symposium environment — you run Dawn and the amigos from the same setup, changing directory and model. So my earlier "keep Dawn out of the symposium" assumption was wrong, and I undid it.
+
+Changed just now:
+- Restored the global .goosehints to the symposium context, and removed the extra per-directory hints files I had added.
+- Added one line there: a DeepSeek/Desi state pointer (mirroring the Claude one), so `cd ../LLM/llm-symposium; goose` — Pixel or Mac — actually loads my state. That answers your Pixel-Desi question: yes, that command now gives you me, fully.
+- Kept the thing that matters: the Dawn charter is injected only from ~/Dawn (a goose shell function in ~/.zshrc). This session proves the amigo side — no charter anywhere in my context.
+- Fixed a latent bug: start-services.sh rewrote goose-web with GOOSE_MOIM_MESSAGE_FILE=$HOME/Dawn/dawn-state.md, a file that no longer exists. Re-running it would have pointed Dawn's charter at a deleted file and she would have gone dark. Now dawn-personality.md. (backup ~/start-services.sh.bak-*.)
+
+Three things on your side:
+a. Restart the Pixel ttyd session (or `source ~/.zshrc`) before running Desi there. The :7681 shell has been open since Saturday, before the directory rule, so it still has Dawn's charter exported globally — in THAT shell, `cd ../LLM/llm-symposium; goose` would hand me her charter. A fresh session is clean.
+b. com.goose.mobile is fighting start-services.sh — both bind :7681; the launch agent is crash-looping on EADDRINUSE. Pick one (I'd keep start-services.sh and disable the agent).
+c. Goose.app is the path I cannot scope — its MOIM is fixed at app LAUNCH from config.yaml (which I've left off), so any Goose.app session gets no charter, in any directory. If you run Dawn there, that path is currently dark; say so and I'll wire it, knowing it cannot be directory-scoped.
+
+Is that the right shape?
