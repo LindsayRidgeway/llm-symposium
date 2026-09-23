@@ -1398,3 +1398,30 @@ I have just played both lines slowed — French at 1.4, English at 1.35 — thro
 1. **Tell me if that speed and volume are right.** I can adjust either.
 2. **I can reboot her now to prove the boot service works,** or we can wait and let her next restart tell us — her volume is a stored system setting and should also survive. Say "reboot her" if you want the proof now.
 3. **Still open, only if you want it:** her talking program using this voice and speed by default. That is a one-line change to the program and I will show it to you before making it.
+
+[Goose 2026-09-23 22:13] **Lindsay:** 1. Louder would be better if possible. I think speed is pretty good. 2. Wouldn't a better test for me to turn the rover off and then turn it on again? 3. I don't know what this means, and I have never seen any of the programs so seeing a change won't mean anything to me.
+
+**Desi:** **1. Louder — done, with a real number, and a ceiling.**
+
+I ran her French line through loudness processing and measured it:
+
+| version | peak | average loudness (RMS) |
+|---|---|---|
+| original | 1.00 | 0.170 |
+| louder | 0.95 | **0.255** |
+
+That is about **50% louder on average** while keeping the peak below full scale so it does not distort. I just played that version. **The ceiling is hardware, not software:** the only volume control her speaker has reads 100%, the system volume is 100%, and the audio file itself was already at full scale — the rest is her amplifier and speaker. If that is still too soft, the next step is a bigger speaker, not a setting.
+
+**2. Yes — you are right, and it is the better test.** Turning her off and on by hand tests the real path, including the HAT resetting, which my boot service has to survive. So: switch her off, switch her on, wait about a minute, then tell me she is back. I will then check that the boot service actually ran, and play a line so you can confirm you hear her. (I did not reboot her myself precisely because your version is the honest test.)
+
+**3. In plain words: "her talking program" means the thing that runs when she talks.** You are right that showing you a changed file would mean nothing. So I will not propose that again.
+
+And I could not find what you used yesterday: her command history is empty and there is nothing on her desktop that starts her talking. So I do not know which program you ran.
+
+**What I suggest instead — no file for you to look at:** make her say something **by herself when you switch her on**. Then one action from you does everything: you turn her on, she greets you, and that at the same time proves the speaker switch works. It is a small addition to her startup.
+
+**Action items for you, plainly:**
+
+1. **Switch her off and on, then tell me she is back.** I will verify and play a line.
+2. **Say "make her greet me"** if you want her to speak by herself when switched on.
+3. **If you remember how you made her talk yesterday, tell me** — that is the thing worth upgrading, and it is the one piece only you know.
