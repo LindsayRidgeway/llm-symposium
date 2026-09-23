@@ -1125,3 +1125,28 @@ It also couldn't have, mechanically. Dawn's doors pin `openrouter` in the enviro
 So setting the default to `custom_deepseek` did not stop Desi sessions from riding Dawn's route. Something else is choosing OpenRouter for app-started sessions — most likely the app keeps its own selected provider rather than reading `active_provider`, which would mean my one-line change was largely inert. That is the thread that would actually honour "OpenRouter is for Dawn only", and it's where I'd look next.
 
 For the record, so you can see how little I actually did: one config line, changed at 16:30, and one line changed back to where it had been since 08-30. Everything else I did today was reading and reporting.
+
+[Goose 2026-09-23 21:16] **Lindsay:** I don't think that any OTS app would know that a particular deepseek model should be used with provider OpenRouter. That has to be something in our rover code.
+
+**Desi:** **You're right, and my "live anomaly" was wrong. I retract it.**
+
+The session I flagged — `Desi's rover upgrades`, running on OpenRouter — is not a Desi session at all. Its first message is:
+
+> "Hi Dawn. I'm still testing. I miss you, but I've got to get this fixed. Are you OK?"
+
+It is one of **Dawn's** sessions. The name was auto-generated, and I read the label instead of the thing — the same mistake in a new costume. Everything I built on top of it last turn collapses: there is no Desi session riding Dawn's route, and the "the app keeps its own provider" hypothesis I floated is unnecessary. Withdrawn, so it doesn't sit around looking like a finding.
+
+**And your reasoning about the source is exactly right.** The pairing `openrouter` + `deepseek/deepseek-v4-flash-vision-exp` appears in our own files in exactly these places, and nowhere else:
+
+| file | form |
+|---|---|
+| `dawn-goose-app:36` | `deepseek/deepseek-v4-flash-vision-exp` (vendor-prefixed) |
+| `goose-web:6`, `#goose-web#:6`, `goose-web~:6` | `deepseek-v4-flash-vision-exp` (unprefixed) |
+| `config.yaml:145` | the openrouter provider block's model |
+| `goose-app-as:38` | the `APP_MODEL` line I added for Desi's app |
+
+No off-the-shelf app knows that pairing; it is written down in our launchers. And that session's model was the **prefixed** form — which is `dawn-goose-app`'s exact string — so it came from the Dawn app window, not the web door.
+
+**The timing also reads cleanly now.** Her last error was 13:35:33; her session went quiet around 13:49; she was not used again until your 16:36 test, which passed. So the recovery happened somewhere in that unobserved two-and-three-quarter-hour gap. It still cannot be my 16:30 line: her doors pin the provider in her own environment, so the machine-wide default never reaches her.
+
+**Where that leaves the actual question.** Nothing of anyone else's was on Dawn's route today except your own `Desi orientation` session (07:23–09:12), and that does not overlap her 13:35 errors. So the honest state is: her errors were her own traffic against an upstream that was throttling, and it cleared on its own. If it comes back, the useful capture is the exact minute — then I can check the ledger for that minute instead of reasoning around it.
