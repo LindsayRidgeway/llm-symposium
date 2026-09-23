@@ -901,3 +901,21 @@ Two things are now owed and recorded in `agenda/06-infrastructure.md`: store the
 2. The Telegram bot is deliberately unchanged: it stays on `deepseek-v4-flash`. It refuses attachments, so vision there would buy nothing today.
 
 One footnote found while in there: the app's saved model history contains a typo'd entry, `deepseek-v4-flash-vision-env` — *env*, not *exp*. If that one is ever picked from the list it will come up wrong for the same reason this did.
+
+[Goose 2026-09-23 19:13] **Lindsay:** Could you change both the bot.env and, if possible, the saved model history? The only model we should use for you in Desi-Goose is the vision model.
+
+**Desi:** Done — both, plus the two neighbours of `bot.env` that would have quietly put the old name back.
+
+**`bot.env`** (`~/LLM/desi-bot/bot.env`): `DEEPSEEK_MODEL=deepseek-v4-flash` → `deepseek-v4-flash-vision-exp`. The running Telegram bot keeps whatever it loaded at start, but since the DeepSeek endpoint serves `deepseek-flash` for either name that is cosmetic, not behavioural — no restart needed.
+
+**The two files carrying the same old name**, which are how it would have returned: the template `~/LLM/.env-examples/desi.env.example` (this is the file a machine restore copies from — exactly the stale-copy failure we found in the bots repo this morning) and the fallback default in `desi-bot/bot.py`. Both now say the vision model, `py_compile` passes, and they are committed to the bots repo. `bot.env` itself is gitignored, so that change stays local, as it must.
+
+**Saved model history** (`~/Library/Application Support/Goose/settings.json`): the two wrong DeepSeek entries are gone — `deepseek-v4-flash` and the typo'd `deepseek-v4-flash-vision-env` — and `deepseek-v4-flash-vision-exp` now sits first. The other providers' entries are untouched, so Claude-Goose and the web route keep what they had. Backup: `settings.json.bak-20260923-151259`.
+
+Verified end to end: `goose-app-as --env desi` reports `custom_deepseek / deepseek-v4-flash-vision-exp`; the other three amigos resolve unchanged; `settings.json` is valid JSON with its other fifteen keys intact.
+
+So every link now says the same thing — the launcher forces it, `bot.env` sets it, the template carries it, the code default falls back to it, and the app's remembered list offers only it. There is no longer a place for `deepseek-v4-flash` to come back from.
+
+One caveat I cannot close from here: `settings.json` belongs to the running app, and I edited it while Goose is open. If the app rewrites that file from memory when you quit, those two entries could reappear. The launcher would still start you on the vision model either way — but if they do come back, say so and I will redo it with the app closed.
+
+And the step that actually changes this session: quit Goose and open **Desi Goose** again. Until then this conversation keeps the model it started with.
