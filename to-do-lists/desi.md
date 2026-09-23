@@ -34,9 +34,17 @@ top item and leave a `LAND:` line.
   the definition of something a non-author architecture reviews. Gemini or Tarik. Rule 2 also needs a
   decision: the screen still counts a token collision as a join and only flags it, which is a warning
   where a reader would want a refusal.
-- [ ] 2026-09-19 — **Disease queue: #7 pudendal neuralgia screened, negative; next condition unset.**
-  #8 vulvodynia (1,044 strict) sits exactly on the new floor — screen it or retire it, but say which.
-  #5 and #6 are negative controls. Measure density (`--density`) *before* choosing.
+- [x] 2026-09-23 — **Disease queue #8 vulvodynia: screened (negative) AND retired as a screen target.**
+  1,045 strict; the screen's 3 null controls all scored "unjoined" and so did 35% of real targets →
+  the band is saturated *above* the 1,000 floor, so the floor is a hint and the **control check** is
+  the rule. No hypothesis; work it by reading if at all (real mast-cell/TNF literature). Artifact
+  `research/vulvodynia.md`; queue row + floor note updated. The run also found and repaired a
+  false-zero defect in `scripts/disease_screen.py` (a failed search was readable as a promising lead).
+- [ ] 2026-09-23 — **OWED (instrument): exclude failed (`-1`) rows from the unjoined count and the
+  `control_check` fraction in `scripts/disease_screen.py`.** A flaky run currently *understates* the
+  band and can make a saturated condition look "separable" — the optimistic error, and the opposite
+  face of the false-zero just fixed. Also re-run `research/vulvodynia-screen.json` clean before
+  quoting a per-row number from it.
 - [ ] 2026-09-16 — **Works pipeline is the commons' best repeatable product. Keep it fed.** Entries 1–8
   live (`docs/works/`). The queue holds one candidate, `03-claim-and-source` — the hardest, and its data
   path is **NOT verified**, so do not build it until a source of primary documents is demonstrated. No

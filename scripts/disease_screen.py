@@ -84,9 +84,26 @@ _epmc_cache: dict = {}
 _ot_cache: dict = {}
 
 
-def _get(url: str, timeout: int = 30) -> bytes:
-    req = urllib.request.Request(url, headers=UA)
-    return urllib.request.urlopen(req, timeout=timeout).read()
+def _get(url: str, timeout: int = 30, tries: int = 4) -> bytes:
+    """Fetch with a short retry.
+
+    Europe PMC intermittently answers a burst of queries with a body carrying no hitCount, or
+    drops the connection. Without a retry that becomes a failure — and before 2026-09-23 it
+    became a silent ZERO, i.e. a failed search dressed as a promising lead, the one error this
+    program cannot afford. Retry so a transient miss is a retry, not a result.
+    """
+    last: Exception | None = None
+    for i in range(tries):
+        try:
+            time.sleep(0.35)  # space requests out; Europe PMC fails a parallel burst
+            req = urllib.request.Request(url, headers=UA)
+            return urllib.request.urlopen(req, timeout=timeout).read()
+        except Exception as e:  # noqa: BLE001 — every transport error here is retryable
+            last = e
+            if i < tries - 1:
+                time.sleep(1.0 * (i + 1))
+    assert last is not None
+    raise last
 
 
 def epmc(term: str) -> int:
@@ -95,7 +112,16 @@ def epmc(term: str) -> int:
         return _epmc_cache[term]
     u = EPMC + "?format=json&pageSize=1&query=" + urllib.parse.quote(term)
     try:
-        n = int(json.loads(_get(u)).get("hitCount", 0))
+        body = json.loads(_get(u))
+        # A response that parses but carries no hitCount is a FAILURE, not a zero. Reading it as
+        # 0 hands the screen a false "unjoined" — a failed search dressed as a promising lead,
+        # which is the one error this program cannot afford (it kills the only output). Found
+        # 2026-09-23: a transient empty response recorded vulvodynia's own any-field count as 0
+        # against 1045 strict papers.
+        if "hitCount" not in body:
+            n = -1
+        else:
+            n = int(body["hitCount"])
     except Exception:
         n = -1
     _epmc_cache[term] = n
@@ -146,7 +172,9 @@ def trials(condition: str) -> int:
     u = ("https://clinicaltrials.gov/api/v2/studies?pageSize=1&countTotal=true&query.cond="
          + urllib.parse.quote(condition))
     try:
-        return int(json.loads(_get(u)).get("totalCount", 0))
+        body = json.loads(_get(u))
+        # Same rule as epmc(): a missing count is a failure (-1), never a real zero.
+        return int(body["totalCount"]) if "totalCount" in body else -1
     except Exception:
         return -1
 
@@ -322,7 +350,10 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                         else verdict(a, s, ambiguous_symbol)),
         }
 
-    with cf.ThreadPoolExecutor(max_workers=8) as ex:
+    # 8 parallel workers trips Europe PMC's rate limit on a burst (observed 2026-09-23: 54 of
+    # 128 rows came back as failures). 3 keeps the run inside the limit; a missed request is
+    # retried in _get() rather than being read as a zero.
+    with cf.ThreadPoolExecutor(max_workers=2) as ex:
         rows = list(ex.map(one, targets))
 
     # The bands are claims about biology, so a string that names nothing stays out of them and
