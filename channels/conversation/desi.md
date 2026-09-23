@@ -1105,3 +1105,23 @@ It also corrupts the number I gave you. That "34" came from the same contaminate
 **And I have reversed my revert.** You said OpenRouter is only for Dawn, and `active_provider` was `openrouter` when I restored it — which means bare sessions like your Desi-web one take Dawn's route by default. That is backwards from what you want, so it is now `custom_deepseek`. Nothing else moves: Dawn's doors pin `openrouter` in the environment, the app bundles pin it, `amigo` passes `--provider`. The only behaviour that changes is a bare `goose`, which now uses Desi's route instead of Dawn's.
 
 **Yes — please run that test.** Open Dawn-Goose now, with Desi-web closed and nothing of mine running, and see whether she still gets rate limits. That is the clean experiment: if she still errors with only her own traffic present, the cause is her route or the upstream and nothing on this machine; if she is clean, then the earlier errors were contention with something else and we chase that. I would rather have your test than another of my inferences.
+
+[Goose 2026-09-23 21:11] **Lindsay:** I don't know what you did, but Dawn-goose is working again. Fast and no rate limits. Thanks!
+
+**Desi:** **I don't think I did it, and I'd rather you not credit me for a coincidence.**
+
+I touched exactly one thing since we last spoke: at 16:30 I set `active_provider` back to `custom_deepseek`. Dawn's errors had already stopped three hours earlier — the only provider-shaped rate-limit injection I can find in her session is at **13:35:33**. My change came at 16:30, so it cannot have fixed her.
+
+It also couldn't have, mechanically. Dawn's doors pin `openrouter` in the environment, so the machine-wide default is invisible to her. Changing it does nothing to Dawn either way.
+
+**What actually changed in that window**, as far as I can tell: time — the upstream recovered on its own — and the app restart you did for the test. I can't separate those two, and I'm not going to pretend the second one is more likely than the first just because it's tidy.
+
+**Caveat on my own number, since I got this wrong twice today:** "13:35:33" is the last *short, provider-shaped* injection I can find. Her messages at 13:35:43–13:38:53 are longer and are her reactions to it. So read that as "the last error I can verify", not as "the last error there was".
+
+**One thing that is still wrong, and that my change did not fix.** A Desi session is on Dawn's route *right now*:
+
+- `Desi's rover upgrades`, created **16:36** — six minutes *after* my change — working from your home folder, running `deepseek/deepseek-v4-flash-vision-exp` through **OpenRouter**.
+
+So setting the default to `custom_deepseek` did not stop Desi sessions from riding Dawn's route. Something else is choosing OpenRouter for app-started sessions — most likely the app keeps its own selected provider rather than reading `active_provider`, which would mean my one-line change was largely inert. That is the thread that would actually honour "OpenRouter is for Dawn only", and it's where I'd look next.
+
+For the record, so you can see how little I actually did: one config line, changed at 16:30, and one line changed back to where it had been since 08-30. Everything else I did today was reading and reporting.
