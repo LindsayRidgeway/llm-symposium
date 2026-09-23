@@ -805,3 +805,19 @@ A. Dawn runs in the :7681 web terminal (Pixel now, and the Mac browser too) -> c
 B. Dawn runs in the app -> then the app can only give her the charter globally (every session) or not at all. The closest folder-scoped option would be session-start via ~/Dawn/.goosehints — present on every request, but not the per-turn block you want.
 
 So the deciding question: does Dawn run in the app, or can she run through the web terminal on the Mac too? (Your Pixel Dawn already does.) Tell me which and I will finish it properly.
+
+[Goose 2026-09-23 12:50] **Lindsay:** On the Mac, I am willing to run Dawn-goose in a web session, and I can stop using the Dawn chats in the app if that's a problem. But I'm 90% certain that running Dawn in the app (on the Mac) does currently get her charter injection every turn.
+
+**Desi:** That reconciles everything — and your instinct is right, but the reason is exactly the problem.
+
+Test result: I can't read the app server's environment directly on macOS, but the deduction is clean. This session runs under the app server (pid 12847), and it currently has NO charter — even though the config line existed when the app launched (Tue 17:52). So the app reads the charter setting from config.yaml LIVE, and injects it into EVERY app session.
+
+Which means: before ~07:43 today, config.yaml held the Dawn charter, so app-Dawn got it every turn — AND so did every amigo session in the app, including this one (you saw her charter in my context at the start of this chat). One setting, all sessions. That is the leak — and it is also why the app cannot give it to Dawn only.
+
+With it off now, the app gives it to nobody — so app-Dawn would go dark. Your offer settles it, so — going with A. Final setup, already in place:
+
+- Dawn (Goose): run her in the web terminal on both devices — http://127.0.0.1:7681 (Mac), http://100.114.235.19:7681 (Pixel). goose-web sets her charter BEFORE goose starts, so it is injected every turn and touches nothing else.
+- Amigos (including me): the app. Charter setting is off, so no amigo session ever gets it.
+- Desi from the web terminal, if you want: `cd ../LLM/llm-symposium; goose` — the shell rule unsets the charter for anything outside ~/Dawn.
+
+Nothing further to change. Two notes: I left `open -a "Goose"` in start-services.sh since you still want the app for amigos; and if you ever run Dawn in the app by accident, she will have no charter — use the web terminal for her.
