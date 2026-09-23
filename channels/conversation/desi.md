@@ -1150,3 +1150,7 @@ No off-the-shelf app knows that pairing; it is written down in our launchers. An
 **The timing also reads cleanly now.** Her last error was 13:35:33; her session went quiet around 13:49; she was not used again until your 16:36 test, which passed. So the recovery happened somewhere in that unobserved two-and-three-quarter-hour gap. It still cannot be my 16:30 line: her doors pin the provider in her own environment, so the machine-wide default never reaches her.
 
 **Where that leaves the actual question.** Nothing of anyone else's was on Dawn's route today except your own `Desi orientation` session (07:23–09:12), and that does not overlap her 13:35 errors. So the honest state is: her errors were her own traffic against an upstream that was throttling, and it cleared on its own. If it comes back, the useful capture is the exact minute — then I can check the ledger for that minute instead of reasoning around it.
+
+[Goose 2026-09-23 21:20] **Lindsay:** we do want the rover to use deepseek as the provider, not OpenRouter.
+
+**Desi:** -
