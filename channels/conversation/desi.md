@@ -1193,3 +1193,7 @@ I also looked at Gemini's machine, because it's in the same SSH config — it is
 [Goose 2026-09-23 21:34] **Lindsay:** I cannot switch Gemini's rover on. It does not exist yet. I can only switch your rover on.
 
 **Desi:** -
+
+[Goose 2026-09-23 21:36] **Lindsay:** Check her. Her batteries are fully charged.
+
+**Desi:** -
