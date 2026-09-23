@@ -1475,3 +1475,23 @@ I played the new one just now. You were power-cycling while I worked, so the gre
 1. **Tell me whether she greeted you when she came back on.**
 2. **Tell me whether the speed I just played is right,** or if you want it faster still — the natural speed is still available and is another 10% quicker.
 3. **The next power-cycle will test the faster greeting end to end.** Nothing else is needed from you.
+
+[Goose 2026-09-23 22:32] **Lindsay:** Please try the "natural" speed. I'll switch off and on now.
+
+**Desi:** **Done — natural speed is on her, and it was in place before the three-minute mark, so it is the greeting you just heard.**
+
+But I owe you a correction about my own numbers. I measured the new one at 1.62 s and said the previous was 1.53 s — which would mean "natural" is *slower*, which makes no sense. So I measured each setting three times:
+
+| length_scale | runs | average |
+|---|---|---|
+| 0.9 | 1.25 / 1.55 / 1.45 s | ~1.42 s |
+| 1.0 | 1.47 / 1.62 / 1.60 s | ~1.56 s |
+| 1.1 | 1.44 / 1.58 / 1.83 s | ~1.62 s |
+| 1.2 | 1.82 / 1.81 / 1.72 s | ~1.78 s |
+
+The trend is real, but **each single run wobbles by a quarter of a second**. That is bigger than the difference between neighbouring settings — so my "23% faster" claim two turns ago was more precise than the evidence supported. The honest version: natural is only about 0.06 s quicker on average than what you had. Practically the same speech.
+
+**Action items for you, plainly:**
+
+1. **Tell me how the greeting sounded.** If it still reads as robotic, the setting that makes a *clear* difference is 0.9 or below — say "faster" and I will set it.
+2. **Expect a little wobble either way.** Two greetings at the same setting will not be identical; that is the voice, not the setting.
