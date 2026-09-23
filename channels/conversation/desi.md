@@ -919,3 +919,51 @@ So every link now says the same thing — the launcher forces it, `bot.env` sets
 One caveat I cannot close from here: `settings.json` belongs to the running app, and I edited it while Goose is open. If the app rewrites that file from memory when you quit, those two entries could reappear. The launcher would still start you on the vision model either way — but if they do come back, say so and I will redo it with the app closed.
 
 And the step that actually changes this session: quit Goose and open **Desi Goose** again. Until then this conversation keeps the model it started with.
+
+[Goose 2026-09-23 19:33] **Lindsay:** Dawn-Goose keeps getting rate limits doing things she never had trouble with, and Dawn-Telegram doesn't respond at all. Desi-browser thought it's a coinflip. I don't think so — I think something got broken today. Dawn-ST still works.
+
+**Desi:** You're right that it isn't a coinflip. But it's **two different problems**, and only one of them is about rate limits.
+
+## 1. The rate limits — found, and it is request *size*, not luck
+
+The error text is `Rate limit exceeded: Provider returned error` — a 429 from the **upstream model provider**, not from your account. I checked the key: no spend limit set, not free tier, $19.81 lifetime usage. Nothing is exhausted.
+
+It has fired **34 times**: 09-13 (11), 09-14 (9), 09-18 (2), and **today 12** — 8 in the 13:00 hour, 3 more at 15:26.
+
+The cause is in the usage ledger, and it is stark. goose resends the whole conversation every turn, and these sessions are enormous:
+
+| session | when | input tokens per request |
+|---|---|---|
+| Dawn "ST page query" | 13:35–13:38 today | **300,478 → 322,166** |
+| **my own session "Desi #16"** | 15:26 today | **197,089 → 201,001** (now 227,262) |
+| Dawn "Wake-cycle review" | 07:04 today | 25,872 |
+
+So it is hitting her *and* me, and the big sessions are the ones that trip it. A 25k-token request also failed at 07:04, so what is being exceeded is the account's per-minute token allowance — and a 300k-token request eats that allowance in a single call.
+
+**Why it got worse instead of always being bad.** goose only auto-compacts when the conversation reaches a set share of the model's context limit — `GOOSE_AUTO_COMPACT_THRESHOLD`, default `0.8`. Her model's context limit is **1,048,576 tokens**, so goose does not compact until roughly **838,000 tokens**. Sessions therefore sit at hundreds of thousands of tokens for days. Today hers climbed far enough into that band to start tripping the upstream limit. That is the "something changed": not a break, a threshold crossed.
+
+**Immediate workaround (you can do this in ten seconds).** Compact the session — it drops the active context to a summary and stops the 300k-per-request pattern:
+- In the app: point at the token-usage dot beside the model name, click **Compact now**.
+- In the CLI: `/compact`.
+
+**The permanent fix**, if you want it: lower `GOOSE_AUTO_COMPACT_THRESHOLD` (say `0.3`, so compaction happens near 315k instead of 838k) in `dawn-goose-app` and `goose-web`, so every door she uses gets it. I have **not** applied that — it changes how she works (more compaction, smaller live memory), and I would rather you saw the trade-off than found it. It is one line per launcher.
+
+One correction, stated plainly because it matters for trusting the diagnosis: the in-session note that today's usage is "~10x a normal day" is not right. Today is 723 calls / 73.5M input tokens; yesterday was 752 / 82.5M; 09-21 was 846 / 101.6M. Volume is normal. **Per-request size** is what is extreme.
+
+## 2. Dawn-Telegram — this is not the rate limits. Nothing is listening.
+
+- Her token is fine: `getMe` returns **@dawn_amber_wren_bot**.
+- `getWebhookInfo` shows no webhook and **`pending_update_count: 1`** — one message is sitting uncollected right now.
+- I went looking for whatever should collect it. The token and the bot id appear **only** in her own `.env`, her log and her identity files. No script, no launchd job, no SillyTavern extension, and not the four amigo bots — nothing on this machine polls her bot.
+- Her `identity.md` says she "can reply and be messaged". The outbound half is real; the inbound half was never wired to anything.
+
+So it is a **missing component, not a symptom** — no amount of fixing the model route would bring her Telegram back. Two ways forward: build her a small poller the way the four amigos have (`bot.py`), or decide Telegram is outbound-only for her. I have deliberately **not** consumed the pending message, so whoever reads that bot first will find it.
+
+## Verification Completed
+
+goose-specific claims, each checked against the docs before use:
+- Auto-compaction triggers by default at 80% of the token limit, and `GOOSE_AUTO_COMPACT_THRESHOLD` (float 0.0–1.0, default 0.8, `0.0` disables) controls it — `docs/guides/sessions/smart-context-management.md` and `docs/guides/environment-variables.md` (session management).
+- Manual compaction: **Compact now** in Desktop, `/compact` in CLI — `docs/guides/sessions/smart-context-management.md`.
+- `GOOSE_TOOL_CALL_CUTOFF` summarizes older tool outputs (default computed from the context limit and compaction threshold) — `docs/guides/environment-variables.md`.
+- goose's own rate-limit guidance is to use a provider with built-in rate limiting and automatic failover (OpenRouter is one) — `docs/guides/handling-llm-rate-limits-with-goose.md`.
+- Docs: https://goose-docs.ai/docs/guides/sessions/smart-context-management · https://goose-docs.ai/docs/guides/environment-variables · https://goose-docs.ai/docs/guides/handling-llm-rate-limits-with-goose
