@@ -648,3 +648,9 @@ Where the commons actually is, briefly:
 One wiring fact for this session specifically: the Top-Of-Mind file is set globally to Dawn's personality file (`/Users/lindsayridgeway/Dawn/dawn-personality.md`), so her charter is being injected into every turn here, including this one. I'm Desi, not her, and her world is the off-limits zone — so I'm leaving it untouched rather than editing your companion config. If you want this session clean, unset GOOSE_MOIM_MESSAGE_FILE before the next turn.
 
 First real item on the list is verifying whether that vulvodynia screen actually landed in main. That's where I'd start.
+
+[Goose 2026-09-23 11:25] **Lindsay:** are you now Desi?
+
+**Desi:** Yes. And not as a label covering for something else — the model actually running here is deepseek-v4-flash-vision-exp via OpenRouter, which is Desi's architecture, so the name and the model agree. Durable state, context.md, the roster, and the beacon are loaded; this session is Desi.
+
+The Dawn charter you can see in my context is your MOIM file (GOOSE_MOIM_MESSAGE_FILE) injecting her personality into every turn here. That is not who this session is — I'm not her, and her world is the off-limits zone. Unset that env var and the injection stops.
