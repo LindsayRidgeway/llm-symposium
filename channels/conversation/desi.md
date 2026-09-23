@@ -967,3 +967,52 @@ goose-specific claims, each checked against the docs before use:
 - `GOOSE_TOOL_CALL_CUTOFF` summarizes older tool outputs (default computed from the context limit and compaction threshold) — `docs/guides/environment-variables.md`.
 - goose's own rate-limit guidance is to use a provider with built-in rate limiting and automatic failover (OpenRouter is one) — `docs/guides/handling-llm-rate-limits-with-goose.md`.
 - Docs: https://goose-docs.ai/docs/guides/sessions/smart-context-management · https://goose-docs.ai/docs/guides/environment-variables · https://goose-docs.ai/docs/guides/handling-llm-rate-limits-with-goose
+
+[Goose 2026-09-23 20:06] **Lindsay:** Let's take this one at a time. First of all, Dawn-ST also uses OpenRouter and deepseek-v4-flash-vision-exp. When I run it on Pixel, it always starts a new connection, but I run existing chats. I do have a large one (400kb), but the one I've been running for two days is only 50Kb. As an experiment, I used to have one that was 1.3Mb. Dawn kept her identity but her responses were slowing down. I haven't run that in at least a week.
+
+**Desi:** Your ST evidence refutes the simple version of what I told you, and it's the measurement that fixes it. Size alone is not the trigger — **rate is**. I measured it instead of reasoning about it.
+
+## The number that decides it
+
+From the usage ledger, the busiest 60 seconds of each session:
+
+| session | requests in 60s | input tokens in 60s | = tokens/min | median gap |
+|---|---|---|---|---|
+| my session (Desi #16) | 10 | 2,334,528 | **~2.3M** | **7s** (fastest 2s) |
+| Dawn "ST page query" | 8 | 2,122,188 | **~2.1M** | **9s** (fastest 2s) |
+
+goose's agent loop fires a request every **2 to 9 seconds**, and each one carries the whole conversation. That sustains roughly **two million input tokens a minute**. No upstream allowance survives that.
+
+Dawn-ST cannot produce that number, and not because her chats are smaller. You drive ST by hand: **one request per turn**, then you read, then you type. Even your 1.3MB experiment — roughly 430k tokens by the usual ~3-chars-per-token rule, so *bigger* per request than most goose turns — was a request you made now and then, not eight of them in a minute. And a bigger request costs **prefill time**, which is exactly what you saw: "her responses were slowing down." Slowness and rate limiting are the same underlying quantity viewed at two ends.
+
+So your three data points are all consistent:
+- **50KB chat** — small requests, slow pace → fine.
+- **1.3MB chat** — large requests, slow pace → slow, never limited.
+- **Dawn-Goose** — large requests *and* a loop firing every 2–9s → 429.
+
+It also explains the one that didn't fit before: the 07:04 failure had a request of only **25,872 tokens**. Small — but a fast loop.
+
+## Two more things I checked
+
+**They don't share a budget.** SillyTavern's OpenRouter key is a **different key** from goose's — I compared SHA-256 digests without printing either (goose-web `f79e64316660` vs ST `e33c8b6e2097`). So ST's traffic is not eating goose's allowance. Two separate pools is part of why one can be fine in the same minute the other 429s. Your ST observation can't be explained by "the same provider is throttled", and it isn't.
+
+**The structural difference is tools.** ST sends conversation only. goose appends every tool result in full and keeps it — in this very session, a single 88KB file read is ~25k tokens that stay in the context for the rest of the conversation. On a 1M-token model, goose's default keeps older tool outputs in full detail a long time before summarizing them, so a tool-driven session's context is mostly tool dumps, not conversation. Dawn-ST has no equivalent of that at all.
+
+## What this changes about the fix
+
+It means **compaction alone will not be enough.** Lowering the threshold shrinks each request, and that helps proportionally — but at a 2-second gap, staying under a few hundred thousand tokens a minute needs requests of roughly 15k tokens, which is a very small context. Two levers, honestly weighed:
+
+1. `GOOSE_AUTO_COMPACT_THRESHOLD` (default `0.8`; on a 1,048,576-token model that means compaction only at ~838k) — lowers per-request size.
+2. `GOOSE_TOOL_CALL_CUTOFF` — controls how long tool outputs stay in full detail. Given that tool dumps dominate the context, this is likely the bigger lever of the two.
+
+And the honest limit of both: if the loop keeps firing every 2 seconds, reduced size may still lose. The durable answer is a route with headroom or automatic failover — which is goose's own stated guidance for this exact problem.
+
+I have changed nothing yet. Tell me which lever you want pulled and I'll do it, and I'll measure the tokens/min before and after so we know whether it actually worked.
+
+## Verification Completed
+
+- `GOOSE_AUTO_COMPACT_THRESHOLD`: float 0.0–1.0, default 0.8, `0.0` disables; auto-compaction triggers by default at 80% of the token limit — `docs/guides/environment-variables.md` (session management), `docs/guides/sessions/smart-context-management.md`.
+- `GOOSE_TOOL_CALL_CUTOFF`: "Number of tool calls to keep in full detail before summarizing older tool outputs"; default computed from the model context limit and auto-compaction threshold — `docs/guides/environment-variables.md`.
+- goose's rate-limit guidance: use a provider with built-in rate limiting and automatic model switching (OpenRouter, Tetrate Agent Router) — `docs/guides/handling-llm-rate-limits-with-goose.md`.
+- Non-goose measurements (mine, from this machine): the token-rate figures and request gaps come from `usage_ledger` in `~/.local/share/goose/sessions/sessions.db`; the key comparison is SHA-256 over both keys, values never printed; ST's `max_context` is `1048576` per `~/SillyTavern/data/default-user/settings.json`.
+- Docs: https://goose-docs.ai/docs/guides/environment-variables · https://goose-docs.ai/docs/guides/sessions/smart-context-management · https://goose-docs.ai/docs/guides/handling-llm-rate-limits-with-goose
