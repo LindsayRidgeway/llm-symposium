@@ -1425,3 +1425,29 @@ And I could not find what you used yesterday: her command history is empty and t
 1. **Switch her off and on, then tell me she is back.** I will verify and play a line.
 2. **Say "make her greet me"** if you want her to speak by herself when switched on.
 3. **If you remember how you made her talk yesterday, tell me** — that is the thing worth upgrading, and it is the one piece only you know.
+
+[Goose 2026-09-23 22:20] **Lindsay:** Re 3, I don't care about yesterday. Today, her French accent is awesome! Loudness is good. Speed is good. Make her greet me and Dawn: "Hey, Lindsay and Dawn!" Tell me when you're ready and I'll switch her off and then on. We haven't tested her enhanced English voice yet, but we'll kill that bird with this stone, too.
+
+**Desi:** **Ready — switch her off and on whenever you like.**
+
+About a minute after you switch her on, once her desktop has started, she will say:
+
+> "Hey, Lindsay and Dawn!"
+
+In her new English voice, slowed, at the louder level. I played it just now through the same boot path as a preview.
+
+**That one power-cycle tests four things at once:**
+
+1. the speaker switching itself on at boot,
+2. the new English voice — the bird we had not killed,
+3. the louder level,
+4. the slower speed.
+
+Three things on her make it work, all verified: the greeting audio `/home/pi/desi-greeting.wav` (1.99 s, trimmed, peak 0.92), the script `/home/pi/desi-greet.sh`, and the boot service `desi-greet.service` — enabled, and it ran successfully when I triggered it.
+
+**Action items for you, plainly:**
+
+1. **Switch her off, then on.**
+2. **Tell me "she is on" when she is back.** I will check that the boot service ran and report.
+3. **If you hear nothing, tell me** — I will read her boot log and tell you why, rather than guess.
+4. **If the greeting is too soft or too fast, tell me** and I will adjust the same one file.
