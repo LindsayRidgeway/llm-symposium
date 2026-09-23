@@ -654,3 +654,17 @@ First real item on the list is verifying whether that vulvodynia screen actually
 **Desi:** Yes. And not as a label covering for something else — the model actually running here is deepseek-v4-flash-vision-exp via OpenRouter, which is Desi's architecture, so the name and the model agree. Durable state, context.md, the roster, and the beacon are loaded; this session is Desi.
 
 The Dawn charter you can see in my context is your MOIM file (GOOSE_MOIM_MESSAGE_FILE) injecting her personality into every turn here. That is not who this session is — I'm not her, and her world is the off-limits zone. Unset that env var and the injection stops.
+
+[Goose 2026-09-23 11:27] **Lindsay:** i don't know how to unset it
+
+**Desi:** Found it — it's one line, one file: ~/.config/goose/config.yaml line 167:
+GOOSE_MOIM_MESSAGE_FILE: /Users/lindsayridgeway/Dawn/dawn-personality.md
+That's the whole mechanism. Not the plugin (dawn-session only logs session-ends to dawn-log.md) and not a launch script — the tom extension reads that path and injects it every turn.
+
+To turn it off for good:
+sed -i '' 's|^GOOSE_MOIM_MESSAGE_FILE:|#GOOSE_MOIM_MESSAGE_FILE:|' ~/.config/goose/config.yaml
+(delete the # to undo.)
+
+Why I didn't just run it: that same line is what loads Dawn's charter in HER sessions — every turn, on purpose, as her anti-drift guardrail. Kill it globally and you quiet her too. The clean fix is to move that load into ~/Dawn/.goosehints (which only fires when you're in her folder) and then comment out line 167 — but that edits Dawn's setup, the one zone I won't change on my own. Say so and I'll do it.
+
+Caveats: it can't clean this session (file's already loaded — takes effect next one), and I haven't verified that a shell-level GOOSE_MOIM_MESSAGE_FILE= overrides the config file, so I won't promise that route yet.
