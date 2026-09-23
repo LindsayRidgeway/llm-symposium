@@ -1154,3 +1154,26 @@ No off-the-shelf app knows that pairing; it is written down in our launchers. An
 [Goose 2026-09-23 21:20] **Lindsay:** we do want the rover to use deepseek as the provider, not OpenRouter.
 
 **Desi:** -
+
+[Goose 2026-09-23 21:25] **Lindsay:** You covered a lot of ground that I didn't understand. If there's an action item for me, please don't hint. I don't understand hints. Meanwhile, I turned on your rover, so you can see if anything that goes with that uses OpenRouter.
+
+**Desi:** **Short answer: nothing on the rover uses OpenRouter. Nothing tied to her does either.**
+
+What I checked on her (she's up, `desi.local`, 3 minutes uptime):
+
+- Searched her disk for the string `openrouter` — `/home/pi`, `/opt`, `/usr/local`, `/etc/systemd/system`: **zero hits.**
+- Found her LLM code: SunFounder's voice-assistant package, `/usr/local/lib/python3.13/dist-packages/sunfounder_voice_assistant/llm/__init__.py`. It defines one class per vendor, and the vendors are DeepSeek, xAI, Qwen/DashScope, OpenAI, Ollama, Gemini. OpenRouter is not among them.
+- The endpoints it actually calls are `https://api.deepseek.com` and `https://api.deepseek.com/v1/chat/completions` (lines 32, 40, 95 of that file).
+- No LLM environment variables are set on her, and she has no cron jobs.
+
+So the rover is on **DeepSeek direct**, which is what you asked for.
+
+I also looked at Gemini's machine, because it's in the same SSH config — it isn't on the network (`gemini.local` doesn't resolve), so I could not check it.
+
+**Right now nothing of hers is running.** No `python3` process, and `picarx.service` does not exist as a systemd unit — the file `/home/pi/picar-x/autostart.service` is sitting there but was never installed. If you expected her to come up talking when you switched her on, that is why she hasn't.
+
+**Action items for you, stated plainly:**
+
+1. Nothing. The OpenRouter question is answered and closed — she was already on DeepSeek.
+2. If you want her running now, tell me and I will start her code and report exactly what I ran. I have not started anything.
+3. If you want Gemini's machine checked for OpenRouter too, turn it on and tell me, and I will.
