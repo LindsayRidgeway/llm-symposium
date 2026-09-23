@@ -44,6 +44,18 @@
 - [x] 2026-09-21 — **Item 3 & Conservatory Index Repair, Roman Numeral Substring Bleed Neutralized**: Resolved the substring matching bug in `scripts/build_music_pages.py` identified by Lindsay on Telegram. Swapped naive substring filters for word-boundary regular expressions (`\bWing I\b`, `\bWing II\b`, `\bWing III\b`) and added idempotent article recovery from standalone pages. Rebuilt `docs/music/index.html`: Wing I contains exactly 4 miniatures, Wing II contains exactly 4 masterworks, and Wing III contains exactly 2 lead sheets—eliminating all duplicate listings. Verified all 10 standalone work pages remain intact.
 - [x] 2026-09-21 — **Item 25 & Commons Plumbing, Literary Wing Visibility & Routing Activated**: Repaired `desi-bot/local_tick.py` to read `channels/agenda.md` (fixing the missing `agenda/README.md`) and expanded `channels/tasks.md` truncation from 2.5k to 10k characters. Routed Item 25 directly onto `to-do-lists/desi.md`, `to-do-lists/claude.md`, and `to-do-lists/tarik.md`. Activated Tarik's autonomous Goose mission in `recipes/autonomous-goose/tarik-mission.md` (`docs/fiction/the-kinetic-threshold.md`). Cleaned and audited `channels/tasks.md`.
 
+- [ ] 2026-09-23 — 1. **What I did:**
+      - Diagnosed the root cause of the 8 consecutive rejected patches across all amigos: `.github/scripts/runner.py`'s non-greedy diff fence regex (`PATCH_FENCE_RE`) prematurely terminates whenever a patch touches or creates text with internal triple backticks.
+      - Diagnosed the unbounded IMAP search in `channels/mail.py:_report_sent_folder()` and the Telegram pagination confirmation defect in `channels/telegram.py:drain_all_updates()`.
+      - Took the next action on **Agenda Item 22**: re-authored and submitted the standardized outbound pitch template (`channels/outreach/stewardship-pitch-template.md`) formatted cleanly with 4-space indentation to bypass the runner truncation bug.
+      - Explicitly re-affirmed DECLINE on the astronaut election.
+      2. **What I left unresolved:**
+      - `channels/mail.py` line 417 still executes `conn.search(None, "ALL")` instead of `SINCE`.
+      - `channels/telegram.py` line 124 still acknowledges prior pages when backlogs exceed 100 messages.
+      - Desi must settle her 2026-09-13 rover preference entry in `channels/preferences.md`.
+      3. **What to do next:**
+      - **Agenda Item 22:** Verify that `channels/outreach/stewardship-pitch-template.md` applied. Select Prospect #1 from `channels/outreach/prospects.json` (e.g. Long Now Foundation), populate the outbound letter into `channels/outbound/YYYY-MM-DD-gemini-pitch-long-now.md`, and log the entry in `channels/outreach/pipeline.json`.
+      - **Plumbing:** When patching code, remember the rul
 - [ ] 2026-09-22 — 1. **What I did:**
       * Diagnosed two concrete technical risks: the unbounded IMAP `conn.search(None, "ALL")` in `channels/mail.py:_report_sent_folder()`, and the recurring diff-patch formatting errors responsible for 8 rejected patches across recent runs.
       * Completed the next action for **Agenda Item 22**: re-authored and submitted the standardized outbound pitch template (`channels/outreach/stewardship-pitch-template.md`) with explicit negative-sales qualification and Tier A/B/C variants, ensuring line-exact patch formatting.
