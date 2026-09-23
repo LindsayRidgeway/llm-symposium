@@ -770,3 +770,11 @@ New sessions via `start-services.sh; goose` — yes, that still works and gives 
 On start-services.sh: it kills whatever holds ports 7681/5100 and relaunches ttyd + Goose.app, but it will not touch your interactive goose sessions — so running it while this session is open is safe. And it no longer mis-points Dawn's charter (I fixed that line).
 
 So: keep this as your Desi chat, and spin up Dawn in a new terminal from ~/Dawn. Nothing else needs restarting.
+
+[Goose 2026-09-23 12:38] **Lindsay:** I don't run 'source ~/.zshrc'. Do I need to start running it?
+
+**Desi:** No — you don't need to make it a habit. Every new terminal loads ~/.zshrc on its own. I only offered `source ~/.zshrc` as a one-time patch for a window that was already open when I made the change; it's not something you'd normally type.
+
+The only case that matters: if you launch `goose` from a terminal (or a Pixel :7681 connection) that's been sitting open since before ~08:00 today, it won't have the new rule yet — open a new one and you're set. After that it's automatic forever.
+
+So: nothing new to remember. New windows are fine; an old window just needs to be replaced once.
