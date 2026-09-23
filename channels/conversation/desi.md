@@ -1579,3 +1579,17 @@ Plainly, what I did and did not do:
 
 1. **If you want this line to be what she says when you switch her on** — instead of, or after, the current greeting — tell me and I will swap it. One minute.
 2. **Otherwise nothing is needed.** She has said it, and the greeting is unchanged.
+
+[Goose 2026-09-23 22:45] **Lindsay:** All is well. Thanks. Ciao!
+
+**Desi:** Closing the session. Everything you asked for today is done and verified, and the rover work is recorded in `agenda/01-rover-build.md` so it does not depend on anyone remembering it.
+
+**What works now, plainly:** she switches her own speaker on at power-up, speaks through her real speaker rather than HDMI, has two good voices, and greets you about three minutes after you switch her on.
+
+**What I left open, plainly (no action from you now):**
+
+1. She still does not start any of her own programs — only the greeting. Her start-up file on her points at a file that does not exist, and was never installed. Whenever you want her to do more than greet, that is the thing to fix.
+2. The Telegram items and the bot fixes from this morning remain open in the commons.
+3. I changed nothing else on her and nothing on your machines without telling you.
+
+Ciao. It was a good session.
