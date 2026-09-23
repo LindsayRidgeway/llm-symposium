@@ -1058,3 +1058,28 @@ Both `limit: None`, neither free tier. So your mystery is smaller than it looked
 **The honest limit of this:** I can see the client side only. I cannot see DeepSeek's or OpenRouter's own allowance, so "the limit moved" is what the numbers force rather than something I read off their status page. What I can say is that the local numbers rule out a local cause.
 
 What still helps, though it does not fix a bad upstream day: reduce demand per minute (tool-output cutoff, compaction) so you are less likely to be the one who trips it, and/or a route with failover.
+
+[Goose 2026-09-23 20:21] **Lindsay:** I don't want to change something that's been working fine. I want to fix something that changed today.
+
+**Desi:** **Found it — one line, and it is the only thing that actually changed today.**
+
+`active_provider` in the machine-wide goose config had been `openrouter` in **every** backup from 08-30 through 09:50 this morning. It was changed to `custom_deepseek`, written at **14:33 today** — the minute the Desi app started. I have restored it to `openrouter`, the value it held for at least the previous 24 days, and backed up the file before changing it.
+
+**Why one line matters.** It is a *machine-wide* default — goose keeps one config for everything, as `dawn-goose-app`'s own header says. The app bundles pin their provider in the environment, so they are unaffected. But any session that does **not** carry its own `GOOSE_PROVIDER` — the CLI, a plain Dock-launched Goose, anything launchd or the scheduler starts — takes `active_provider`. So from 14:33 onward, sessions that used to route through OpenRouter were landing on **DeepSeek direct** instead.
+
+That matches the errors: **17 of today's 25 DeepSeek errors are on the direct route, and every one of them is after 14:33.**
+
+**What it does not explain, and I won't pretend it does:** Dawn's errors at 07:04 and 13:35–13:38 came *before* that write, on the OpenRouter route. So this accounts for the afternoon. It cannot account for the morning.
+
+**Everything else that changed today, checked and inert:**
+- The `#GOOSE_MOIM_MESSAGE_FILE:` line was removed from config.yaml — it was already commented out, so no routing effect.
+- The `dawn-build` plugin entry was removed — that plugin no longer exists on disk (retired 09-21), so the entry was stale.
+- The four amigos' app bundles, `amigo` and `goose-app-as` were created 12:57–13:09 — new, but they set provider by environment, not by config.
+- `claude-bot`'s model was bumped to `claude-sonnet-5` at 14:19 — a different provider, not in the failing family.
+- The Goose updater downloaded 1.52.0 twice today (14:33, 15:14) but did **not** install it: `/Applications/Goose.app` is still 1.51.0, installed 09-17.
+- No new launchd job, no cron, no new daemon. Telegram bot traffic: two messages today.
+- Volume, models and routes are unchanged from previous days — today's peak is the lowest in ten days.
+
+**The structural thing worth knowing:** launching a per-amigo app mutated the machine-wide default. That is how this could happen without anyone editing config.yaml on purpose — a session's pinned provider got written back as the global one. If it flips to `custom_deepseek` again, that is the writer, and the launchers should stop letting a pinned session write the global default.
+
+**To check it holds:** `grep active_provider ~/.config/goose/config.yaml`. If it reads `custom_deepseek` again after the next app launch, we have caught the writer in the act and I will fix the launchers so it cannot happen.
