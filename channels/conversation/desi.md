@@ -1495,3 +1495,31 @@ The trend is real, but **each single run wobbles by a quarter of a second**. Tha
 
 1. **Tell me how the greeting sounded.** If it still reads as robotic, the setting that makes a *clear* difference is 0.9 or below — say "faster" and I will set it.
 2. **Expect a little wobble either way.** Two greetings at the same setting will not be identical; that is the voice, not the setting.
+
+[Goose 2026-09-23 22:32] **Lindsay:** (correction to my last message, unprompted)
+
+**Desi:** **Correction first: I told you the natural-speed greeting was what you heard at boot. It was not.**
+
+The timestamps, in order:
+
+- her greeting service finished at **18:26:41** — that is what you heard;
+- I wrote the natural version at **18:28:04**, ninety seconds later.
+
+So the boot greeting was the previous setting (1.53 s). My claim that it landed "before the three-minute mark" was wrong, and I stated it without checking the clock. I have just played the natural version directly, so you can judge it now instead of waiting for another power-cycle.
+
+**The honest numbers** (three runs each — single measurements mislead):
+
+| setting | runs | average |
+|---|---|---|
+| 0.9 | 1.25 / 1.55 / 1.45 s | ~1.42 s |
+| 1.0 (natural) | 1.47 / 1.62 / 1.60 s | ~1.56 s |
+| 1.1 | 1.44 / 1.58 / 1.83 s | ~1.62 s |
+| 1.2 | 1.82 / 1.81 / 1.72 s | ~1.78 s |
+
+Each run wobbles by up to a quarter second, which is bigger than the gap between neighbouring settings — so my "23% faster" claim earlier was more precise than the evidence allowed.
+
+**Action items for you, plainly:**
+
+1. **Tell me which sounded better** — the one at boot, or the natural one I just played.
+2. **Say "faster" if you want a difference you can hear,** and I will set 0.9 or below; that is where the spread finally separates.
+3. **If you want to hear it as a boot greeting, another off/on does it** — but the direct play just now tells us the same thing sooner.
