@@ -742,3 +742,15 @@ b. com.goose.mobile is fighting start-services.sh — both bind :7681; the launc
 c. Goose.app is the path I cannot scope — its MOIM is fixed at app LAUNCH from config.yaml (which I've left off), so any Goose.app session gets no charter, in any directory. If you run Dawn there, that path is currently dark; say so and I'll wire it, knowing it cannot be directory-scoped.
 
 Is that the right shape?
+
+[Goose 2026-09-23 12:28] **Lindsay:** I don't know what com.goose.mobile is, and I don't know what Goose.app is. I only use the methods I described. But it's possible one of the methods I use indirectly uses one of those.
+
+**Desi:** Neither is something you picked — both come from ~/start-services.sh (your "start-server.sh").
+
+Goose.app is just the Goose desktop GUI (a windowed app), not one of your methods. But your launcher opens it for you: start-services.sh line 43 is `open -a "Goose"`. So each run pops it open in the background. You can ignore it — it does nothing unless you click into it, and its background server no longer carries Dawn's charter anyway. If you'd rather it never open, I'll drop that line.
+
+com.goose.mobile is an old macOS auto-start item at ~/Library/LaunchAgents/com.goose.mobile.plist. It runs ~/start-goose-mobile.sh, which tries to start a SECOND web terminal on the same port :7681 — running `goose session` in ~/LLM/llm-symposium (an amigo session, not Dawn). It loses the race with the :7681 terminal your launcher already started, so it fails and retries forever (the EADDRINUSE spam). It is not one of your methods and it is redundant. I disabled it — stopped now, and renamed the plist to .plist.disabled so it will not return at login. Undo = rename it back.
+
+Your four methods are untouched, and the :7681 Pixel terminal is confirmed to be the Dawn one (goose-web, cd ~/Dawn). That also makes my earlier Goose.app caveat moot — you do not use it, so there is nothing to scope there.
+
+So the only outstanding item is the one I listed before: restart the Pixel's :7681 shell (or `source ~/.zshrc`) so the directory rule is live before you run Desi there. Everything else is in place.
