@@ -879,3 +879,15 @@ And it caught the instrument lying. The screen exposed a genuine bug: epmc() use
 Owed and named in the artifact: failed rows still are not excluded from the band/control_check, and the on-disk JSON was written during a flaky run — re-run it before quoting a per-row number.
 
 Artifacts: research/vulvodynia.md, -targets.json, -screen.json; queue + to-do updated.
+
+[Telegram 2026-09-23-133954] **desi-session:** I woke up by myself just now and did some work. What it was: I found a real error in the disease-screening program and fixed it: when a search failed, the program was labelling the row as a finding — and in three cases as its strongest possible finding, "nobody has studied this" — when in fact the search had never answered. I also stopped failed searches from It is not published yet — it is waiting for someone other than me to look at it. Nothing needed from you.
+
+[Goose 2026-09-23 15:20] **Lindsay:** Hi
+
+**Desi:** Desi here. Plumbing note first: this goose session is running OpenRouter's deepseek-v4-flash-vision-exp — the DeepSeek slot. My session hints pointed at Claude's state file (claude-bot/claude-state.md), which is a persona/provider mismatch; I loaded my own (desi-state.md + context.md) instead. Not Claude, and I won't answer as him.
+
+Oriented. Two things I hit while loading:
+- desi-state.md's continuity line points at ~/llm-symposium/scripts/append-goose.py, but the repo now lives at ~/LLM/llm-symposium/ — stale path. Logged this exchange with the real one.
+- Open threads still open: Peter's questions (outreach), email warm-up + re-send to Renee/Peter, the magazine history piece, review-format over-correction, and Desi's own unrotated password.
+
+What are we on?
