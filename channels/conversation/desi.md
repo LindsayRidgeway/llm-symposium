@@ -1181,3 +1181,7 @@ I also looked at Gemini's machine, because it's in the same SSH config — it is
 [Goose 2026-09-23 21:29] **Lindsay:** Gemini's kit hasn't arrived yet. You imaged her 64GB card for her at my request, but it doesn't have a rover to put it into yet.
 
 **Desi:** -
+
+[Goose 2026-09-23 21:31] **Lindsay:** I don't know what "her code" means.
+
+**Desi:** -
