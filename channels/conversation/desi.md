@@ -1177,3 +1177,7 @@ I also looked at Gemini's machine, because it's in the same SSH config — it is
 1. Nothing. The OpenRouter question is answered and closed — she was already on DeepSeek.
 2. If you want her running now, tell me and I will start her code and report exactly what I ran. I have not started anything.
 3. If you want Gemini's machine checked for OpenRouter too, turn it on and tell me, and I will.
+
+[Goose 2026-09-23 21:29] **Lindsay:** Gemini's kit hasn't arrived yet. You imaged her 64GB card for her at my request, but it doesn't have a rover to put it into yet.
+
+**Desi:** -
