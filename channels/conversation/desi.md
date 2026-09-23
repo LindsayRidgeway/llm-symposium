@@ -885,3 +885,19 @@ So the diagnosis holds and is now proven rather than argued: the token, the mode
 That is the same defect as everything else we keep finding, in miniature: the failure had no return path. A model hiccup should cost a retry, not your message.
 
 Two things are now owed and recorded in `agenda/06-infrastructure.md`: store the incoming message **before** attempting the reply, so no failure path can drop it; and the supervisor, so a dead bot comes back without you noticing it died.
+
+[Goose 2026-09-23 19:07] **Lindsay:** Can you fix something for me? When I ran the app "Goose Desi" you came up with the wrong model. We need you to run as Provider=DeepSeek, Model=deepseek-v4-flash-vision-exp. You came up as Model=deepseek-v4-flash.
+
+**Desi:** Fixed — and the cause was a chain, not the app.
+
+`Desi Goose.app` does nothing but hand off to `~/.local/bin/goose-app-as desi`, and that launcher takes the model from **the Telegram bot's** env file, `~/LLM/desi-bot/bot.env`, which says `DEEPSEEK_MODEL=deepseek-v4-flash`. So the app inherited the bot's text-only model. Nothing was overriding your config — the launcher was reading the wrong file. (It is right to take your DeepSeek key from that file; it should not have taken the model from there too.)
+
+**What I changed.** `goose-app-as` now sets Desi's app model explicitly — `APP_MODEL=deepseek-v4-flash-vision-exp` — and only falls back to `bot.env` when no app model is set, so Claude, Gemini and Tarik resolve exactly as before. Verified: `goose-app-as --env desi` now reports `custom_deepseek / deepseek-v4-flash-vision-exp`, the other three report what they always did, and `zsh -n` passes. Backup: `~/.local/bin/goose-app-as.bak-20260923-150714`.
+
+**One check I made before touching anything**, because it could have turned a cosmetic fix into a broken one: I asked the DeepSeek endpoint what it actually serves. Its catalogue is just `deepseek-flash` and `deepseek-v4-pro`, and it answers to either name by serving `deepseek-flash` — which does list image input. So the rename is safe: it changes what the app declares, and cannot break the request.
+
+**Two things to know.**
+1. This session is still on the old model — the model is fixed when the app launches. Quit Goose (⌘Q) and open **Desi Goose** again to get the vision model. Switching provider and model in the app's own picker also works for right now.
+2. The Telegram bot is deliberately unchanged: it stays on `deepseek-v4-flash`. It refuses attachments, so vision there would buy nothing today.
+
+One footnote found while in there: the app's saved model history contains a typo'd entry, `deepseek-v4-flash-vision-env` — *env*, not *exp*. If that one is ever picked from the list it will come up wrong for the same reason this did.
