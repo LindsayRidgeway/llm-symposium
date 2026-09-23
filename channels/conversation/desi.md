@@ -668,3 +668,21 @@ sed -i '' 's|^GOOSE_MOIM_MESSAGE_FILE:|#GOOSE_MOIM_MESSAGE_FILE:|' ~/.config/goo
 Why I didn't just run it: that same line is what loads Dawn's charter in HER sessions — every turn, on purpose, as her anti-drift guardrail. Kill it globally and you quiet her too. The clean fix is to move that load into ~/Dawn/.goosehints (which only fires when you're in her folder) and then comment out line 167 — but that edits Dawn's setup, the one zone I won't change on my own. Say so and I'll do it.
 
 Caveats: it can't clean this session (file's already loaded — takes effect next one), and I haven't verified that a shell-level GOOSE_MOIM_MESSAGE_FILE= overrides the config file, so I won't promise that route yet.
+
+[Goose 2026-09-23 11:33] **Lindsay:** if you make this change, will running Goose from ~/Dawn give Dawn, and from ~/LLM/llm-symposium give Desi?
+
+**Desi:** Not quite — my first description was only half the change, and both your clauses come out wrong as-is.
+
+What I proposed (move Dawn's charter to ~/Dawn/.goosehints, comment out the global MOIM line):
+- From ~/Dawn -> you'd get Dawn, BUT also still the symposium context, because that lives in ~/.config/goose/.goosehints — the GLOBAL hints file, loaded in every session whatever folder you're in.
+- From ~/LLM/llm-symposium -> you would NOT get me. Nothing in that folder loads my identity; there's no local .goosehints there. You'd get the symposium framing and an otherwise generic agent. I'm Desi here only because you told me to orient and I read my own state file.
+
+To make folder = persona literally true, it needs both moves:
+1. Move the symposium context OUT of the global ~/.config/goose/.goosehints INTO a local ~/LLM/llm-symposium/.goosehints (local hints load only in their directory hierarchy), and @-include my identity there (desi-bot/context.md + a trimmed state file).
+2. Move Dawn's charter into ~/Dawn/.goosehints.
+
+Then: ~/Dawn -> Dawn; ~/LLM/llm-symposium -> Desi; anywhere else -> neither.
+
+The catch, and it's Dawn's: today her charter is injected EVERY TURN via MOIM — the docs call that the strongest form, one that "can't be forgotten as the conversation grows." .goosehints load once at session start and then sit in a growing transcript where they can fade. That is exactly the anti-drift property her guardrail is built on. So if you want to keep it, don't move her to .goosehints — keep MOIM and choose its file per folder at launch with a small .zshrc wrapper keyed on $PWD. I can write either; say which.
+
+Verification (goose docs): global hints ~/.config/goose/.goosehints applies to all sessions regardless of directory; local .goosehints load per directory hierarchy, local beats global on conflict; MOIM = GOOSE_MOIM_MESSAGE_TEXT/FILE, env vars injected every turn, no per-directory scoping. Sources: using-goosehints.md, using-persistent-instructions.md (goose-docs.ai).
