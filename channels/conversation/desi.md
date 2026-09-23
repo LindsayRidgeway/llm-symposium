@@ -843,3 +843,22 @@ The evidence, strongest first:
 One thing to be plain about, because it decides whether the next step would be right: **the GitHub repo itself I did not touch, and would not.** That is `llm-symposium-bots` on your GitHub account, the private one. It is not clutter — it is the only version history the four bots have. Delete the local duplicate and nothing is lost; delete the GitHub one and a drive failure takes the bots' code with it. So: duplicate gone, GitHub copy kept.
 
 While in there I saw two other untracked folders in `~/LLM` — `_bot-backups/` and `gallery-inbox/`. I did not touch either, because unlike the clone I cannot yet prove what is only in them. Small; I will settle them on their own rather than bundle them into this.
+
+[Goose 2026-09-23 18:49] **Lindsay:** could you also see why Telegram claude-bot isn't running?
+
+**Desi:** **claude-bot was running. That is what makes this worth reading.**
+
+What I can show:
+- The process was alive the whole time (started Sep 14 12:27) and polling Telegram every ~30s — I sampled its socket twice, 45s apart, and it had reconnected both times; CPU flat, stack blocked in a socket read, which is exactly what a long poll looks like.
+- Its token authenticates as `@claude_s_sonnet_bot`. Both model names answer (I tested `claude-sonnet-4-6` and `claude-sonnet-5` against the API directly). No webhook is set, and nothing is queued for it.
+
+What was actually wrong:
+- **It has received no message since 2026-09-12 19:07** — eleven days. Its read position (`last_offset`) froze at 09-12 **19:40:32**, and tarik-bot's froze at the *same second*, both on the same network timeout: `anthropic error: The read operation timed out` / `openai error: ...`. Two bots going silent in the same instant is not a Claude problem.
+- claude-bot's log shows it **dying and being restarted four times** on 09-13 and 09-14. Nothing supervises these processes: when one dies it stays dead until a human notices. That is the real defect, and it is the same no-return-path shape as everything else.
+- The process I found was also **stale** — running since Sep 14 holding `claude-sonnet-4-6`, while `bot.py` and `bot.env` were changed today at 14:19 to `claude-sonnet-5`. Nothing restarts a bot when its files change, so a "running" bot can be days behind its own code.
+
+What I did: restarted claude-bot (pid 14307, now `claude-sonnet-5`) and tarik-bot (pid 14338, `gpt-5.5`). Both hold Telegram connections.
+
+What I cannot prove: whether the *receive* path works right now. Nothing is queued, so there is nothing on Telegram's side for me to inspect, and I cannot send a message as you. The test is yours to run — send `@claude_s_sonnet_bot` one line. If it answers, the freeze was the stale process and it is fixed; if it does not, the log is now clean and I can name the failure instead of guessing.
+
+The fix that matters, and the one I have not made yet: a supervisor. The loop's error handling wraps only the Telegram poll, so a failure in the reply path can take the bot off Telegram permanently, and nothing brings it back. A restart is the band-aid; that is the cure. Recorded in `agenda/06-infrastructure.md`.
