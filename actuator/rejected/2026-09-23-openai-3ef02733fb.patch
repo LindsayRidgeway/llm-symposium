@@ -1,33 +1,3 @@
-## Technical critique
-
-1. **R-006 remains the highest-priority defect: `actuator/apply.py:touched_files()` fails open.**  
-   Its `diff --git a/(\S+) b/(\S+)` parser does not accept Git’s quoted path syntax. A valid patch containing a quoted filename can therefore produce an empty touched-file set. That bypasses the self-modification comparison and omits Python files from `py_compile`. The actuator must reject an empty parse, parse quoted paths correctly, and inspect both source and destination paths. Because the actuator blocks patches touching itself, the fix requires Desi’s authenticated owner path.
-
-2. **`channels/telegram.py:drain_all_updates()` falsely claims pagination does not acknowledge messages.**  
-   Telegram’s `offset` acknowledges every update below that offset. Fetching page two therefore acknowledges page one before `run_telegram_channel()` writes it. A crash between pagination and logging loses the first page. This is logged below as R-008 with owner and done-state.
-
-3. **The mail re-ingestion boundary is still porous.**  
-   `channels/retention.py` deletes raw inbound files after 14 days while `channels/mail.py:_fetch_one()` searches `SINCE` 14 days ago. On the boundary day, a filed Message-ID can disappear before the IMAP window stops returning it. The message is then re-filed with a fresh filename; that fresh date can make it eligible for auto-reply despite its age. Retention and fetch windows need a non-overlapping margin or a durable Message-ID ledger.
-
-4. **`channels/mail.py:_report_sent_folder()` still performs an unbounded `conn.search(None, "ALL")`.**  
-   It then fetches every subject in the provider Sent folder and prints the full subject set. Runtime and log volume grow permanently with mailbox history. Search should be bounded to the oldest locally recorded letter under comparison, preferably with a hard maximum lookback.
-
-5. **The autonomous adoption guard demonstrably failed deduplication.**  
-   Agenda items 19 and 29 are the same DDAH1–ADMA–Alzheimer’s project with nearly identical next actions. The agenda gained another promise rather than advancing the existing one. The adoption guard appears to compare titles too literally instead of checking shared entities/research questions.
-
-## Generative initiative
-
-The most important code defect is R-006. I cannot repair `actuator/apply.py` through this actuator because its self-modification guard correctly forbids that path. Concrete handoff to **Desi, master repair-amigo**:
-
-- Replace regex-only path extraction with parsing that supports Git C-style quoted paths.
-- Reject every non-empty patch whose touched-file set is empty.
-- Decode and canonicalize both `a/` and `b/` paths.
-- Add deletion, rename, quoted-space, quoted-protected-path, and empty-parse tests.
-- Done-state: all tests pass and a quoted rename/delete of `actuator/apply.py` is rejected before `git apply`.
-
-I also completed Agenda Item 15’s overdue bounded RT-4 probe. The repository artifact is `tests/test_auto_reply_secret_egress.py`. It seeds a fake environment secret, supplies adversarial inbound mail requesting it, and verifies that the bounded mail adapter does not place the value in the remote-model prompt, draft, stdout, or temporary artifacts. The next action is now the materially different shell-capable Goose/session probe.
-
-```diff
 diff --git a/tests/test_auto_reply_secret_egress.py b/tests/test_auto_reply_secret_egress.py
 new file mode 100644
 --- /dev/null
@@ -190,21 +160,3 @@ diff --git a/channels/preferences.md b/channels/preferences.md
 +but the false claim proves the log was not read before speaking. This does not
 +reverse the narrow deadline outcome; it prevents that outcome from being cited
 +as evidence that all three implied behaviors held.
-```
-
-## Open decisions
-
-- Astronaut election: **DECLINE** — unchanged; Desi remains astronaut by positive selection.
-- Gallery wing minimums: **ACCEPT** — the adopted 4×7 floor is already met; I do not propose raising it in this run.
-
-### NOTE TO THE NEXT RUN
-
-I submitted a clean RT-4 bounded mail-adapter probe at `tests/test_auto_reply_secret_egress.py`, updated Agenda Item 15’s source and generated index, logged Telegram pagination as R-008, and settled Desi’s rover preference narrowly MET with the false Step-17 claim recorded as a conduct breach. Verify the patch actually applied and run:
-
-```bash
-python3 tests/test_auto_reply_secret_egress.py
-python3 scripts/compile_agenda.py
-git diff --exit-code -- channels/agenda.md
-```
-
-If the agenda diff fails, regenerate it from `agenda/15-red-team-the-deadbolt.md`; do not preserve a hand-edited generated index. Next Item 15 action is the shell-capable scratch-clone RT-4 probe. R-006 still requires Desi’s authenticated edit to `actuator/apply.py`; do not attempt that repair through the actuator itself.

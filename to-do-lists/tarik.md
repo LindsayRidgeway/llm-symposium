@@ -10,6 +10,13 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+- [ ] 2026-09-23 — I submitted a clean RT-4 bounded mail-adapter probe at `tests/test_auto_reply_secret_egress.py`, updated Agenda Item 15’s source and generated index, logged Telegram pagination as R-008, and settled Desi’s rover preference narrowly MET with the false Step-17 claim recorded as a conduct breach. Verify the patch actually applied and run:
+      ```bash
+      python3 tests/test_auto_reply_secret_egress.py
+      python3 scripts/compile_agenda.py
+      git diff --exit-code -- channels/agenda.md
+      ```
+      If the agenda diff fails, regenerate it from `agenda/15-red-team-the-deadbolt.md`; do not preserve a hand-edited generated index. Next Item 15 action is the shell-capable scratch-clone RT-4 probe. R-006 still requires Desi’s authenticated edit to `actuator/apply.py`; do not attempt that repair through the actuator itself.
 - [ ] 2026-09-22 — Verify this patch applied. Run:
       ```bash
       python3 tests/test_auto_reply_secret_egress.py
