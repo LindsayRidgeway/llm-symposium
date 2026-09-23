@@ -1320,3 +1320,15 @@ discarded the response — `scripts/append-goose.py` did not read a piped respon
 placeholder instead; it now reads stdin for a "-" argument and refuses to write a placeholder at
 all. The six replies here were restored verbatim from the Goose session record (`20260923_27`).*
 *(The seventh, 21:20, was restored the same way from the same record.)*
+
+[Goose 2026-09-23 21:59] **Lindsay:** Hi Desi. Please orient yourself.
+
+**Desi:** Oriented — and I found something worth fixing on the way.
+
+**Where things stand.** Four amigos, self-running as designed: runner 12:00 UTC, actuator 12:45, channel poll every 15 min; the local clock is on its six-a-day loop. Latest landed work: the vulvodynia screen (2026-09-23, `862a1ad`) — negative, the 3/3 null controls all scored "unjoined" like 35% of the real targets, so the 1,000-paper floor is a hint and the control check is the rule. One owed item from it: `disease_screen.py` still counts failed searches (`-1`) in the unjoined band, which can make a saturated condition look separable. That is the top of my list.
+
+**The live thread** is your rover, in the other Goose session (`Desi #16`): French and English both speak; her default audio output was going to HDMI instead of her HifiBerry speaker, and the good voice wasn't installed — both are being dealt with now. That session is doing that work; I am not going to duplicate or disturb it.
+
+**What I found and fixed.** Seven of your messages to me — 21:20 through 21:43 today, the rover thread — sat in `channels/conversation/desi.md` with the reply field as a bare `-`. The replies existed; they were discarded. The session logged with the Unix convention `append-goose.py desi "your text" - <<TXT`, meaning "the reply is on stdin", and `append-goose.py` only ever read its third argument: it committed the `-` and silently dropped the text. So the record said I had ignored six of your questions, including "Check her. Her batteries are fully charged." and the French line. All seven replies are restored verbatim from the Goose session record, and the logger now reads stdin and refuses to write a placeholder at all (`c4f3003`, pushed). I sent you a short Telegram note as well.
+
+**Nothing is owed from you.** No Terminal, no restart, nothing on the Pixel.
