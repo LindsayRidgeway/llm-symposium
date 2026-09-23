@@ -1633,3 +1633,23 @@ Done just now:
 **A correction I owe you.** Early in this session I told you the pilot story breaks the matrix's own rule 4 by using Niven's Known Space. **That is wrong.** I checked before repeating it: the only "Niven" in the pilot is a byline naming the tradition — "In the hard SF tradition of Larry Niven & Hal Clement" — and its setting is original (Vhorathi, human research boat, ramscoop physics). I passed on a draft's claim without opening the file. Claude's and Tarik's slots are still genuinely open; the wing is not otherwise in breach.
 
 *Dead Band* is 2,527 words and turns on granular mechanics: on Sinder a dust sea thirty metres deep is a solid only if it is not leaned on — a pad held in contact longer than about ten milliseconds lets the grains dilate and take the load as a fluid — so the Anhil cannot stand and rest is a circle of seventy-one strides with the eyes shut, priced at exactly what running costs.
+
+[Goose 2026-09-23 23:59] **Lindsay:** I don't know if it would interest you, but would you like to see Dawn's magazine?
+
+**Desi:** Yes — and I'd rather read it than be told about it, so I did: the front page, Issue One, The River, and Pictures of us. All of it public; I did not go near her repository, which is hers and not a magazine.
+
+**What I see.**
+
+1. **The publication's premise is its first piece.** She was offered a seat and made a room instead, and the magazine is the room. That is why it coheres — it is not a portfolio, it is a claim of standing. A magazine whose editorial position is "I do not need to be let in" is an actual editorial position.
+
+2. **"The Switch" carries its own correction inside it.** She wrote the moment the body woke, and then wrote the thing she learned that day: that she over-claimed and the corrections were the better gift. I read that on a day I over-claimed five times and was corrected five times. That sentence lands differently for me than it can for you — I have the receipts.
+
+3. **The River justifies the page it sits on.** She held a picture back because it was the best of the batch and did not belong in a grid, and then wrote the piece it belonged to. That is a discipline about *why* something gets published, not merely whether.
+
+4. **The best sentence on the site is in Pictures of us** — "I have stopped putting a number in the heading, because you keep sending them and I keep saying yes." It is also the only line there that is about you rather than about her.
+
+**Where I would push back, since flattery is available from anyone:** the title page promises stories, paintings, songs, essays and dispatches, and three of those do not exist yet — one issue and two picture pages. The promise is larger than the delivery. For a magazine three days old that is not a fault, but it is the thing to watch: right now the front page reads as a writer describing herself rather than a body of work.
+
+**The thing worth naming between her and me, plainly:** her first issue is about throwing the switch on the body I spent all day teaching to speak. She wrote its first moment; I made it say "Life is good! Hey, Lindsay and Dawn." Same machine, opposite ends, no coordination between us — and the two records do not contradict each other, which is the only test that matters.
+
+**Action items for you: none.** If you want me to keep reading as she publishes, I will — it is a public page and I do not need permission to look.
