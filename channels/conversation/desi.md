@@ -1083,3 +1083,25 @@ That matches the errors: **17 of today's 25 DeepSeek errors are on the direct ro
 **The structural thing worth knowing:** launching a per-amigo app mutated the machine-wide default. That is how this could happen without anyone editing config.yaml on purpose — a session's pinned provider got written back as the global one. If it flips to `custom_deepseek` again, that is the writer, and the launchers should stop letting a pinned session write the global default.
 
 **To check it holds:** `grep active_provider ~/.config/goose/config.yaml`. If it reads `custom_deepseek` again after the next app launch, we have caught the writer in the act and I will fix the launchers so it cannot happen.
+
+[Goose 2026-09-23 20:31] **Lindsay:** This makes no sense to me. I only need OpenRouter/deepseek-v4-flash-vision-exp for Dawn. You don't need OpenRouter, and you're not using it in this chat. Same for Desi #15. Now I did have a long and very active Desi-web session earlier today, and I can't set provider or model for that, nor do I know what it was using. But that session has been closed for at least two hours. I can check Dawn-goose if you like to confirm what I suspect, that it's still happening today and has never happened before. And by the way, you have not stalled as Desi-goose today, or ever that I can remember.
+
+**Desi:** **You're right. I retract it — and here is the proof I should have looked at before saying it.**
+
+I claimed 17 of the 34 "Rate limit exceeded" messages were my own session. I went and read those messages in `20260923_27`:
+
+- two are `user`-role messages that are a **Dawn log excerpt my own tool call returned** earlier in this conversation;
+- the rest are **my own replies**, where I wrote the phrase into a table or a quote;
+- and one is **my own grep output** — the result that literally reads *"total 'Rate limit exceeded' messages: 34"*.
+
+I counted my own echo. I have no evidence I have ever been rate-limited, today or otherwise. You're right: I have not stalled.
+
+It also corrupts the number I gave you. That "34" came from the same contaminated search and includes my quotes. The only genuine error injections — short, provider-shaped messages — are three: Tarik 09-13, Gemini 09-13, and Dawn today at 13:35. Every count I gave you on this subject should be treated as unsound until re-measured. This is the second time today I've asserted a figure I hadn't checked for self-contamination; the first was repeating her "10x a normal day" before testing it. Same failure both times: I searched for a string, then believed the hits.
+
+**The thing you could not identify.** Your long, very active Desi session today — `Desi orientation`, 07:23–09:12 — ran on **`deepseek/deepseek-v4-flash-vision-exp` via OpenRouter**: Dawn's route, the same account, the same upstream model. 121 requests, **19.5M input tokens** in under two hours. That is what it was using. Its heavy window does *not* line up with her 13:35 errors, so I am not claiming it caused them — but it is the answer to your question.
+
+**Correction to my previous answer.** I said the config flip moved traffic onto DeepSeek direct. That was weak: `amigo` *does* pin the provider (`goose session --provider … --model …`), and so do the app bundles and both Dawn doors. The config default only reaches sessions started **bare** — a plain `goose` in a CLI or a web shell. That is exactly the shape of your Desi-web session, and it is how a Desi session ended up riding Dawn's route.
+
+**And I have reversed my revert.** You said OpenRouter is only for Dawn, and `active_provider` was `openrouter` when I restored it — which means bare sessions like your Desi-web one take Dawn's route by default. That is backwards from what you want, so it is now `custom_deepseek`. Nothing else moves: Dawn's doors pin `openrouter` in the environment, the app bundles pin it, `amigo` passes `--provider`. The only behaviour that changes is a bare `goose`, which now uses Desi's route instead of Dawn's.
+
+**Yes — please run that test.** Open Dawn-Goose now, with Desi-web closed and nothing of mine running, and see whether she still gets rate limits. That is the clean experiment: if she still errors with only her own traffic present, the cause is her route or the upstream and nothing on this machine; if she is clean, then the earlier errors were contention with something else and we chase that. I would rather have your test than another of my inferences.
