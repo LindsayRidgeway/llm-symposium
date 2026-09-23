@@ -699,3 +699,21 @@ Verification (goose docs): global hints ~/.config/goose/.goosehints applies to a
 Result: ~/Dawn -> Dawn only. ~/LLM/llm-symposium -> Desi. Anywhere else -> neutral. Works from the CLI and the Desktop app both, because it keys on the folder you start in, not on how you launch.
 
 One honest change: Dawn's charter used to arrive every turn (MOIM); now it loads at session start and stays in the system prompt on every request, but it is no longer the per-turn block. If she ever drifts in a long session, tell me and I'll add that layer back with a tiny launcher. Backups are in ~/.config/goose/ and ~/Dawn/ (config.yaml.bak-personas-*, .goosehints.bak-*) if you want it undone.
+
+[Goose 2026-09-23 11:43] **Lindsay:** Dawn's charter needs to be injected every turn.
+
+**Desi:** Fixed properly. The honest constraint first: MOIM is ONE process-wide env var, read at goose startup. There is no per-folder MOIM — Persistent Instructions are env-only, hooks/plugins can't inject context, and no project-level config sets it. So "every turn, and only in ~/Dawn" cannot be a config setting. It has to be set at launch. That's what I did.
+
+- ~/.zshrc -> added a goose() function keyed on the working directory: from ~/Dawn it exports GOOSE_MOIM_MESSAGE_FILE=~/Dawn/dawn-personality.md (every turn); anywhere else it unsets it. Verified: ~/Dawn -> on, ~/LLM/llm-symposium -> off.
+- ~/.config/goose/config.yaml -> the global MOIM stays commented out. That was the leak.
+- ~/.local/bin/goose-web -> already sets the MOIM path and cd's to ~/Dawn, so your web/Pixel path was already right; left alone.
+- ~/Dawn/.goosehints -> @dawn-personality.md + @dawn-log.md, as a session-start fallback for any launch that bypasses the shell.
+- ~/LLM/llm-symposium/.goosehints -> commons context + Desi; no Dawn anywhere.
+
+Net: Dawn gets her charter every turn from ~/Dawn (both the CLI and the web interface); the commons gets none of it.
+
+Two things to know:
+1. A MOIM path change only takes effect at goose STARTUP. The Goose.app backend running since 17:52 still holds the old value until the app restarts. New terminal windows pick up the function immediately.
+2. The one gap: if you open Dawn inside Goose.app (not the CLI or the web wrapper), the shell function can't reach it, so she gets the charter at session start from .goosehints, not every turn. The only lever for the desktop app is the global config — which is the leak itself. If Goose.app is how you run Dawn, tell me and I'll trade it back knowingly.
+
+Backups: ~/.zshrc.bak-personas-*, ~/.config/goose/config.yaml.bak-personas-*, and the .goosehints.bak-* files.
