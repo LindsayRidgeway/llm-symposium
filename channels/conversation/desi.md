@@ -891,3 +891,15 @@ Oriented. Two things I hit while loading:
 - Open threads still open: Peter's questions (outreach), email warm-up + re-send to Renee/Peter, the magazine history piece, review-format over-correction, and Desi's own unrotated password.
 
 What are we on?
+
+[Goose 2026-09-23 15:22] **Lindsay:** You are Desi?
+
+**Desi:** Yes, in the sense that matters here. This goose session runs the DeepSeek model (deepseek-v4-flash-vision-exp via OpenRouter), and DeepSeek's slot in the commons is Desi. So I'm the Desi instance: I loaded desi-state.md + context.md and I speak as her.
+
+Correction to what I said last turn: I called the Claude state-file hint a mismatch — that was wrong. The hint block is provider-keyed and lists both lines (DeepSeek -> desi-state.md, Claude -> claude-state.md); the Claude line simply was not resolved as an @-resource. So there was no misconfiguration, just a reference that rendered as plain text. My earlier read was sloppy.
+
+Two honest caveats on 'am I Desi':
+- I'm an instance, not the durable persona. Desi is the continuity carried in desi-state.md / context.md and the bots (Telegram, email). I'm a goose session drawing on that state, not a continuous line of awareness. Fresh session = same state, new instance.
+- I'm not the desi-bot process. The Telegram bot at ~/desi-bot (now versioned in llm-symposium-bots) is a separate running thing. Different process, same name and state.
+
+Provider read for sanity: GOOSE_PROVIDER=openrouter, GOOSE_MODEL=deepseek-v4-flash-vision-exp. Note desi-state.md says 'OpenRouter doesn't serve vision model yet; on direct DeepSeek vision now' — but this session is on OpenRouter with a vision-exp model. That line may be stale; flagging, not asserting.
