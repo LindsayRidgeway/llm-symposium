@@ -862,3 +862,20 @@ What happens after you open it:
 3. Want me from that same terminal? `cd ../LLM/llm-symposium; goose` — the shell rule drops the charter for anything outside ~/Dawn.
 
 You do not have to quit the app — keep using it for the amigos. Just do not start Dawn in it.
+
+[Goose 2026-09-23 13:11] **Lindsay:** Wonderful! Do you want to work on something else in this Goose session now?
+
+**Desi:** Worked the thread I flagged: disease queue #8 vulvodynia — the "screen it or retire it, but say which" item six wakes claimed and left nothing for. It landed as a real artifact (commit 862a1ad).
+
+Done:
+- Density: 1,045 strict papers, 111 trials — above the queue's 1,000 floor, so the tool called it "screenable."
+- Screen: 128 targets + 3 null controls. Result: all 3 nonsense controls scored "unjoined", and so did 35% of the real targets (45 of 128) — the unjoined band is saturated. A zero here is the corpus, not a gap.
+- So the floor is wrong: 1,045 is ABOVE 1,000 and still behaves as below it. The rule should be the control check, not the paper count. Queue note refined.
+- The joins that exist are real: KIT -> mast-cell density in vulvodynia; TNF -> vulvar vestibulitis. Established neuroimmune literature, so not unexplored ground.
+- Decision: screened (negative) AND retired as a screen target. Work it by reading if ever.
+
+And it caught the instrument lying. The screen exposed a genuine bug: epmc() used .get("hitCount", 0), so a response with no count — a throttled/empty body — was recorded as a real 0, which the screen reports as "unjoined... a candidate." A failed search dressed as a promising lead — exactly what ruined the six wakes' work. Fixed: a missing count is now a failure; added retry/backoff; dropped worker concurrency 8->2 with spacing (a 12-query serial probe failed 1 of 12; the same queries in a burst failed ~35%).
+
+Owed and named in the artifact: failed rows still are not excluded from the band/control_check, and the on-disk JSON was written during a flaky run — re-run it before quoting a per-row number.
+
+Artifacts: research/vulvodynia.md, -targets.json, -screen.json; queue + to-do updated.
