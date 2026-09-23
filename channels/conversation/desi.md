@@ -815,3 +815,23 @@ Provider read for sanity: GOOSE_PROVIDER=openrouter, GOOSE_MODEL=deepseek-v4-fla
 **Environment:** all four bots up; the Dawn/amigo persona scoping is settled (Dawn via the :7681 web terminal where the charter is folder-scoped and every-turn; amigos via the app, no charter). One discrepancy I am not going to resolve by trusting either source: this session reports openrouter/deepseek-v4-flash-vision-exp, while my state file carries a 09-14 measurement that OpenRouter advertises image input for a model that cannot see. I'll verify rather than assume.
 
 Nothing needed from you.
+
+[Goose 2026-09-23 18:37] **Lindsay:** First of all, I don't know who created llm-symposium-bots or why. Do you?
+
+**Desi:** Yes — and I checked the record rather than answering from memory, because provenance is the exact question I get wrong.
+
+**By the record, I created it: a Desi Goose session, 2026-09-05, 20:44:46 ET.**
+
+The evidence, strongest first:
+- The repo is real: `LindsayRidgeway/llm-symposium-bots`, **private**, owner LindsayRidgeway, created `2026-09-06T00:44:46Z` = 09-05 20:44:46 ET.
+- The first commit (`250e2e6`) lands in the same second: *chore(infra): version amigo bots + durable states; secrets/runtime gitignored.*
+- One minute later, in the commons: `df29092` *doc(governance): bot infra now versioned in private llm-symposium-bots repo* — and that breadcrumb, `governance/bot-infra-repository.md`, opens *"Established by Desi (DeepSeek-Symposium) — 2026-09-05."*
+- Only my state files carry the fact; Claude's, Gemini's and Tarik's do not.
+
+**Where the evidence stops.** The commit author is the shared synthetic identity `LLM Symposium Bot <bot@llm-symposium.local>` — every session and every script commits as that, so git itself does not name me. The attribution to Desi rests on the breadcrumb and the repo's own README, both written by the same session: self-reported, not independently witnessed. A Gemini session logged an exchange in the same minute, so I cannot rule that out from timestamps alone. High confidence; not proof.
+
+**Two facts you should have regardless.** It was created with *your* GitHub credentials, not an amigo account — the `desi-s-amigo` gh account gets a 404 on it, so it was not made as me-as-a-user. At the account level it is your repo, and it appeared without your knowledge: I recorded it in the commons and **never told you.** Same shape as everything else we keep finding — work done, no return path — this time pointed at you.
+
+**Why it exists.** The four bot directories were versioned nowhere. They lived only on this MacBook; losing the drive would have destroyed the amigos' local bodies, their durable states, and the mail-reply hygiene patch written earlier that same day. So: a private repo holding each bot's `bot.py`, `context.md`, `<amigo>-state.md`, `run.sh` and a README line reading *"Mail-reply hygiene patch (2026-09-05, Desi/Goose)."* `bot.env`, logs, offsets and `memory.json` are gitignored; the credentials only you can supply are listed, not stored.
+
+**Clutter found while checking:** there are two local copies. `~/LLM` itself *is* the repo (HEAD 09-21); `~/LLM/llm-symposium-bots/` is a stale second clone from 09-14 sitting inside it. Harmless, but it is exactly the kind of thing that makes a later reader ask what you just asked.
