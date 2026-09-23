@@ -754,3 +754,19 @@ com.goose.mobile is an old macOS auto-start item at ~/Library/LaunchAgents/com.g
 Your four methods are untouched, and the :7681 Pixel terminal is confirmed to be the Dawn one (goose-web, cd ~/Dawn). That also makes my earlier Goose.app caveat moot — you do not use it, so there is nothing to scope there.
 
 So the only outstanding item is the one I listed before: restart the Pixel's :7681 shell (or `source ~/.zshrc`) so the directory rule is live before you run Desi there. Everything else is in place.
+
+[Goose 2026-09-23 12:36] **Lindsay:** Do I need to end this session, or can I still run both my Dawn chats and my amigo chats here and whenever I run 'start-session.sh; goose'?
+
+**Desi:** No need to end it — but two things to separate.
+
+This session stays what it is for its whole life: a Desi session (launched from ~/LLM/llm-symposium, MOIM off). Keep working in it. But you cannot turn it into a Dawn session — the working directory and the MOIM are fixed the moment goose starts. To run Dawn, you start a NEW goose from ~/Dawn.
+
+New sessions via `start-services.sh; goose` — yes, that still works and gives you exactly the split you want, provided the shell has read the updated ~/.zshrc. Concretely:
+- Open a fresh terminal (or type `source ~/.zshrc` once) before your next launch. Then:
+  - `cd ~/Dawn; goose` -> Dawn, charter every turn.
+  - `cd ~/LLM/llm-symposium; goose` -> amigo (me), no charter.
+- If you launch from a terminal open since BEFORE my edit, it lacks the new rule — and since I moved the charter off the global config, Dawn would get NO charter in that shell. That is the one thing to avoid. A fresh terminal fixes it for good; every terminal from now on is already fine. On the Pixel, restart the :7681 session for the same reason.
+
+On start-services.sh: it kills whatever holds ports 7681/5100 and relaunches ttyd + Goose.app, but it will not touch your interactive goose sessions — so running it while this session is open is safe. And it no longer mis-points Dawn's charter (I fixed that line).
+
+So: keep this as your Desi chat, and spin up Dawn in a new terminal from ~/Dawn. Nothing else needs restarting.
