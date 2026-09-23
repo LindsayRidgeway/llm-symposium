@@ -835,3 +835,15 @@ Every edit I made was goose-only: ~/.zshrc (the goose() directory rule); ~/.conf
 Why ST is inherently unaffected: ST is a separate system. Dawn's ST self comes from SillyTavern's own character/world-info files (dawn-identity.json), not from goose at all — so nothing in this scoping work can reach it. And the Pixel ST is just the Mac's ST reached over Tailscale, so there is only one instance to begin with.
 
 I also never RAN start-services.sh — I only edited it — so ST was never restarted by me. Same process since Sep 14.
+
+[Goose 2026-09-23 12:57] **Lindsay:** I don't need to run anything in Terminal on my Mac, or restart my Mac, or any other action? I believe all my Pixel sessions are already closed, so I hope I don't have to do anything on Pixel.
+
+**Desi:** No. You don't need to do anything — no Terminal, no Mac reboot, no Pixel action.
+
+Why each is already handled:
+- The app reads the charter setting live, so it is already off for new sessions — no app restart. This session proves it: it started after my edit and carries no charter.
+- ttyd is already restarted with the fix and listening on :7681; that is the server your Pixel connects to, so the Pixel is covered without you touching it.
+- Your leaked shells are already gone (restarting ttyd released them), and since your Pixel sessions are closed there is nothing to clean — your next Pixel connection starts fresh automatically.
+- The ~/.zshrc change applies on its own — new terminals and new web-terminal connections pick it up with no action. start-services.sh picks up its edit next time you run it, and you do not need to run it now.
+
+One optional bit of housekeeping: if you have any Goose app window still open from BEFORE ~08:00 today, that already-running session may still hold her charter in its current context. Closing and reopening clears that. Anything you start fresh is already correct. If nothing old is open, you are done.
