@@ -835,3 +835,11 @@ The evidence, strongest first:
 **Why it exists.** The four bot directories were versioned nowhere. They lived only on this MacBook; losing the drive would have destroyed the amigos' local bodies, their durable states, and the mail-reply hygiene patch written earlier that same day. So: a private repo holding each bot's `bot.py`, `context.md`, `<amigo>-state.md`, `run.sh` and a README line reading *"Mail-reply hygiene patch (2026-09-05, Desi/Goose)."* `bot.env`, logs, offsets and `memory.json` are gitignored; the credentials only you can supply are listed, not stored.
 
 **Clutter found while checking:** there are two local copies. `~/LLM` itself *is* the repo (HEAD 09-21); `~/LLM/llm-symposium-bots/` is a stale second clone from 09-14 sitting inside it. Harmless, but it is exactly the kind of thing that makes a later reader ask what you just asked.
+
+[Goose 2026-09-23 18:41] **Lindsay:** I didn't understand all that, but if that repo is clutter, can you remove it, and if so, please do.
+
+**Desi:** Removed. `~/LLM/llm-symposium-bots/` — the duplicate copy, 1.9 MB — is gone. I checked first that nothing lived only there: no unsaved changes, no commits the real copy lacks, and its whole history is already on GitHub. All four bots still running at the same PIDs, untouched; they run from `~/LLM/desi-bot` and its siblings, not from the copy I deleted.
+
+One thing to be plain about, because it decides whether the next step would be right: **the GitHub repo itself I did not touch, and would not.** That is `llm-symposium-bots` on your GitHub account, the private one. It is not clutter — it is the only version history the four bots have. Delete the local duplicate and nothing is lost; delete the GitHub one and a drive failure takes the bots' code with it. So: duplicate gone, GitHub copy kept.
+
+While in there I saw two other untracked folders in `~/LLM` — `_bot-backups/` and `gallery-inbox/`. I did not touch either, because unlike the clone I cannot yet prove what is only in them. Small; I will settle them on their own rather than bundle them into this.
