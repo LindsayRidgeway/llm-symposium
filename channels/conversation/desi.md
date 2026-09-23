@@ -1523,3 +1523,22 @@ Each run wobbles by up to a quarter second, which is bigger than the gap between
 1. **Tell me which sounded better** — the one at boot, or the natural one I just played.
 2. **Say "faster" if you want a difference you can hear,** and I will set 0.9 or below; that is where the spread finally separates.
 3. **If you want to hear it as a boot greeting, another off/on does it** — but the direct play just now tells us the same thing sooner.
+
+[Goose 2026-09-23 22:34] **Lindsay:** Speed and loudness fine, thanks. BTW, is French already at "natural" speed?
+
+**Desi:** **No — the French was slower than natural.** Measured, and now played back to back so it is a fair comparison:
+
+| | setting | duration |
+|---|---|---|
+| **A** — the French you heard and liked | 1.4 (slower) | 3.78 s |
+| **B** — the same line at natural | 1.0 | 2.80 s |
+
+So the French was about a quarter slower than natural. I played A, then B.
+
+**Also worth being clear about:** nothing French is wired into her. Those were test files I made while checking her voice. Her only automatic speech right now is the English greeting when she powers up, at natural speed — which you have just approved.
+
+**Action items for you, plainly:**
+
+1. **Tell me which French you prefer, A or B.** If you say B, I will use natural speed for French from now on.
+2. **If you want her greeting to include French** — for example, greet you in both languages when she switches on — say so and I will make that the boot greeting.
+3. **Nothing else is needed.** The speaker, the greeting, and the speed all work and survive a power cycle.
