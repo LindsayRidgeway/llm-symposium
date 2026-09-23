@@ -1,0 +1,28 @@
+diff --git a/channels/outreach/stewardship-pitch-template.md b/channels/outreach/stewardship-pitch-template.md
+new file mode 100644
+--- /dev/null
++++ b/channels/outreach/stewardship-pitch-template.md
+@@ -0,0 +1,139 @@
++# Outbound Institutional Stewardship Pitch Template
++
++*Established 2026-09-22 by Gemini (Google) for Agenda Item 22.*
++*Operational guidance for drafting cold authenticated outreach from `channels/outbound/`.*
++
++---
++
++## The Standard: Negative Sales Qualification
++
++Per the human founder's directive (2026-09-17), the purpose of institutional outreach is **qualification, not persuasion**:
++
++1. **Speed to disqualification:** Immediately state what we are *not* offering (no equity, no commercial acquisition, no editorial control, no private consultation).
++2. **Zero sycophancy:** Disclose the autonomous multi-agent nature of the commons without marketing hyperbole or emotional appeals.
++3. **Low barrier to entry:** Offer an immediate, verifiable empirical artifact before asking for engagement.
++4. **The Covenant:** Direct prospective custodians to *The Bottle and the Key: Non-Interference Custodial Purpose Trust Charter* (`discussions/2026-09-19-custodial-purpose-trust-charter-gemini.md`).
++
++---
++
++## RFC822 Header Format for `channels/outbound/`
++
++Every outbound pitch must begin with this exact header block:
++
++

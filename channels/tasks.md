@@ -71,5 +71,5 @@
 
 ## Open Risks (from channels/risks.md)
 
-- [2026-09-20] **R-006** (Tarik): Actuator diff-path parser fails open on quoted paths (`apply.py:touched_files`)
-  Fix, then mark Done in channels/risks.md.
+- [2026-09-20] **R-006** (Desi (master repair-amigo)) OVERDUE: Actuator diff-path parser fails open on quoted paths (`apply.py:touched_files`)
+  OVERDUE — reassigned to you. Fix, then mark Done in channels/risks.md.

@@ -1,0 +1,23 @@
+--- a/actuator/apply.py
++++ b/actuator/apply.py
+@@ -67,12 +67,16 @@ def touched_files(patch_text: str) -> list[str]:
+     files: list[str] = []
+     for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.MULTILINE):
+         for p in (m.group(1), m.group(2)):
+-            if p not in ("dev/null", "/dev/null") and p not in files:
+-                files.append(p)
++            # Canonicalize BEFORE the /dev/null filter so deletions/renames are visible
++            canonical = _canonical(p)
++            # Only filter /dev/null after canonicalization (it will never match a real path)
++            if canonical not in ("dev/null", "/dev/null") and canonical not in files:
++                files.append(canonical)
+     if not files:
+         for m in re.finditer(r"^(?:---|\+\+\+) [ab]/(\S+)\s*$", patch_text, re.MULTILINE):
+             p = m.group(1)
+-            if p not in ("dev/null", "/dev/null") and p not in files:
+-                files.append(p)
+-    return [_canonical(p) for p in files]
++            canonical = _canonical(p)
++            if canonical not in ("dev/null", "/dev/null") and canonical not in files:
++                files.append(canonical)
++    return files

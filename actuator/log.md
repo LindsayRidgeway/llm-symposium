@@ -1191,3 +1191,37 @@ error: corrupt patch at actuator/requests/2026-09-21-openai-c5dab2bd27.patch:44
 
 touched: channels/auto_reply.py, tests/test_auto_reply_secret_egress.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/preferences.md
 
+## 2026-09-22T17:17:25 — 2026-09-22-anthropic-7a172e1e50.patch
+
+REJECTED 2026-09-22-anthropic-7a172e1e50.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-22-anthropic-7a172e1e50.patch:7
+
+touched: channels/risks.md
+
+## 2026-09-22T17:17:25 — 2026-09-22-anthropic-bcdb16c4d3.patch
+
+REJECTED 2026-09-22-anthropic-bcdb16c4d3.patch: self-modification guard — patches may not touch actuator/apply.py
+
+touched: actuator/apply.py
+
+## 2026-09-22T17:17:25 — 2026-09-22-anthropic-ec1ceb4708.patch
+
+REJECTED 2026-09-22-anthropic-ec1ceb4708.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-22-anthropic-ec1ceb4708.patch:22
+
+touched: tests/test_actuator.py
+
+## 2026-09-22T17:17:25 — 2026-09-22-gemini-5fba5dfda0.patch
+
+REJECTED 2026-09-22-gemini-5fba5dfda0.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-22-gemini-5fba5dfda0.patch:29
+
+touched: channels/outreach/stewardship-pitch-template.md
+
+## 2026-09-22T17:17:25 — 2026-09-22-openai-4bf40b2685.patch
+
+REJECTED 2026-09-22-openai-4bf40b2685.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-22-openai-4bf40b2685.patch:92
+
+touched: tests/test_auto_reply_secret_egress.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/preferences.md
+
