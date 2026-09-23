@@ -426,7 +426,9 @@ def _report_sent_folder() -> None:
                     status, _ = conn.select(folder)
                     if status != "OK":
                         continue
-                    status, data = conn.search(None, "ALL")
+                    # R-001: scope to ~14 days so retention-pruned mail isn't silently re-read
+                    since = (datetime.date.today() - datetime.timedelta(days=14)).strftime("%d-%b-%Y")
+                    status, data = conn.search(None, "SINCE", since)
                     if status != "OK":
                         continue
                     for num in data[0].split():

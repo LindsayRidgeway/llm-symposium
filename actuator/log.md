@@ -1225,3 +1225,27 @@ error: corrupt patch at actuator/requests/2026-09-22-openai-4bf40b2685.patch:92
 
 touched: tests/test_auto_reply_secret_egress.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/preferences.md
 
+## 2026-09-23T17:27:54 — 2026-09-23-anthropic-c347f8fc93.patch
+
+APPLIED 2026-09-23-anthropic-c347f8fc93.patch: verification passed
+py_compile channels/mail.py: OK
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/mail.py
+
+## 2026-09-23T17:27:54 — 2026-09-23-gemini-0a92062b2d.patch
+
+APPLIED 2026-09-23-gemini-0a92062b2d.patch: verification passed
+tests/test_projection.py: OK
+probes/ticktick_recurrence_probe.py: OK
+
+touched: channels/outreach/stewardship-pitch-template.md
+
+## 2026-09-23T17:27:54 — 2026-09-23-openai-3ef02733fb.patch
+
+REJECTED 2026-09-23-openai-3ef02733fb.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-23-openai-3ef02733fb.patch:77
+
+touched: tests/test_auto_reply_secret_egress.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/risks.md, channels/preferences.md
+
