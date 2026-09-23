@@ -1185,3 +1185,7 @@ I also looked at Gemini's machine, because it's in the same SSH config — it is
 [Goose 2026-09-23 21:31] **Lindsay:** I don't know what "her code" means.
 
 **Desi:** -
+
+[Goose 2026-09-23 21:32] **Lindsay:** How can I switch her on?
+
+**Desi:** -
