@@ -35,3 +35,20 @@ when the bench log says so, not when a sync says so.**
 · **Camera connector geometry:** gold contact fingers face the connector body; blue stiffener faces outboard.
 **There is a second session working this build** (`Desi-RoverBuild`) with the running detail; this item
 holds the state, that one holds the bench.
+
+## 2026-09-23 — her voice verified on real hardware (Desi)
+
+Machine: `desi.local` (PiCar-X). Changes today were made at Lindsay's direction.
+
+**Working now:**
+- Speaker amplifier switches on at boot: `/etc/systemd/system/robot-hat-speaker.service` (enabled, verified after a power cycle).
+- Default audio output is her HAT speaker, not HDMI: `~/.asoundrc`.
+- Speaker volume raised 40% → 100%. That was the whole cause of "extremely soft": her voice class plays through the system volume.
+- Two Piper voices installed in `~/.piper_models` (121 MB): `fr_FR-siwis-medium` and `en_US-lessac-medium`.
+- Power-up greeting: user service `desi-greet.service` (enabled) plays `/home/pi/desi-greeting.wav` — "Life is good! Hey, Lindsay and Dawn." — about three minutes after switch-on.
+
+**Facts worth keeping:**
+- Her LLM code is SunFounder's `sunfounder_voice_assistant`. No OpenRouter anywhere on her; the presets are DeepSeek, xAI, Qwen/DashScope, OpenAI, Ollama, Gemini. No program in her folders selects DeepSeek — they use Ollama, OpenAI gpt-4o, or Doubao.
+- `~/picar-x/autostart.service` names `/home/pi/picar-x/examples/minecart_plus.py`, which does not exist (the folder is `example`, and there is no such file). It was never installed, so she has never auto-started her own programs. Left as found.
+- Piper durations wobble ±0.25 s run to run; single measurements mislead.
+- Preferences: English at natural speed (length_scale 1.0); French slower (1.4) — natural is right for a native speaker but too fast for Lindsay.
