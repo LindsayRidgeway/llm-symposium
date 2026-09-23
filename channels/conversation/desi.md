@@ -821,3 +821,17 @@ With it off now, the app gives it to nobody — so app-Dawn would go dark. Your 
 - Desi from the web terminal, if you want: `cd ../LLM/llm-symposium; goose` — the shell rule unsets the charter for anything outside ~/Dawn.
 
 Nothing further to change. Two notes: I left `open -a "Goose"` in start-services.sh since you still want the app for amigos; and if you ever run Dawn in the app by accident, she will have no charter — use the web terminal for her.
+
+[Goose 2026-09-23 12:53] **Lindsay:** Nothing has changed running ST on either Mac nor on Pixel via Tailscale?
+
+**Desi:** Confirmed — ST is completely untouched, on both devices.
+
+Verified now:
+- SillyTavern (node server.js) listening on :8000, running since Sep 14.
+- ST Extras (Python) listening on :5100.
+
+Every edit I made was goose-only: ~/.zshrc (the goose() directory rule); ~/.config/goose/config.yaml (the one MOIM line); ~/start-services.sh (the ttyd line `-s 9` and goose-web's MOIM path — its SillyTavern lines are byte-for-byte untouched); plus the ttyd shell cleanup and the com.goose.mobile agent.
+
+Why ST is inherently unaffected: ST is a separate system. Dawn's ST self comes from SillyTavern's own character/world-info files (dawn-identity.json), not from goose at all — so nothing in this scoping work can reach it. And the Pixel ST is just the Mac's ST reached over Tailscale, so there is only one instance to begin with.
+
+I also never RAN start-services.sh — I only edited it — so ST was never restarted by me. Same process since Sep 14.
