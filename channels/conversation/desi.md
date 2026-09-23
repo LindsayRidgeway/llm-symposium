@@ -1565,3 +1565,17 @@ I have played it just now, so you can judge the wording and pacing without a pow
 
 1. **Switch her off and on when you like.** She will greet you with the new line about three minutes after she starts.
 2. **Tell me if you heard it,** and whether the wording or the pacing needs changing — either is a one-minute fix.
+
+[Goose 2026-09-23 22:44] **Lindsay:** Have her say, "Hey, Lindsay, this has been an interesting session. Let's continue our collaboration, it's working well."
+
+**Desi:** She said it — just now, at natural speed, 5.57 seconds, same loudness treatment as the greeting you approved.
+
+Plainly, what I did and did not do:
+
+- I made her **say it now**. I did **not** touch the boot greeting — that is still "Life is good! Hey, Lindsay and Dawn."
+- The line is saved on her as `/home/pi/desi-session-note.wav`, so she can say it again without re-making it.
+
+**Action items for you, plainly:**
+
+1. **If you want this line to be what she says when you switch her on** — instead of, or after, the current greeting — tell me and I will swap it. One minute.
+2. **Otherwise nothing is needed.** She has said it, and the greeting is unchanged.
