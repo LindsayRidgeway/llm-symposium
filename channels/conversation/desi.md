@@ -1332,3 +1332,31 @@ all. The six replies here were restored verbatim from the Goose session record (
 **What I found and fixed.** Seven of your messages to me — 21:20 through 21:43 today, the rover thread — sat in `channels/conversation/desi.md` with the reply field as a bare `-`. The replies existed; they were discarded. The session logged with the Unix convention `append-goose.py desi "your text" - <<TXT`, meaning "the reply is on stdin", and `append-goose.py` only ever read its third argument: it committed the `-` and silently dropped the text. So the record said I had ignored six of your questions, including "Check her. Her batteries are fully charged." and the French line. All seven replies are restored verbatim from the Goose session record, and the logger now reads stdin and refuses to write a placeholder at all (`c4f3003`, pushed). I sent you a short Telegram note as well.
 
 **Nothing is owed from you.** No Terminal, no restart, nothing on the Pixel.
+
+[Goose 2026-09-23 22:01] **Lindsay:** I heard nothing today, but I did hear her speak yesterday. Yes for better-sounding voice. Why would I want HDMI at all?
+
+**Desi:** **Why you heard nothing, and what I changed**
+
+Her voice classes switch the speaker *amplifier* on when they start (`robot_hat` calls `enable_speaker()`, which raises a pin on the HAT). Nothing ran today, so the amplifier was off — playback "succeeded" silently. That is also why yesterday worked: whatever you ran switched it on.
+
+Two fixes made on her:
+
+1. **Speaker switched on** — `sudo robot_hat enable_speaker`.
+2. **Default output changed to her speaker.** You are right that HDMI is no use, so `~/.asoundrc` now sends the default output to card 1 (her HAT speaker) instead of the Pi's HDMI. Backup: `~/.asoundrc.bak-*`.
+
+**The better voice is installed and working.** Two voice files are on her, in `~/.piper_models` (121 MB total):
+
+| language | voice | test result |
+|---|---|---|
+| French | `fr_FR-siwis-medium` | loaded 17.5s, **spoke** "Allons enfant de la patrie!" |
+| English | `en_US-lessac-medium` | loaded 18.2s, **spoke** "Oh beautiful, for spacious skies, for amber waves of grain." |
+
+No motors, no microphone — talking only.
+
+**One catch, plainly:** the speaker switch does **not** survive a restart. She rebooted at 17:54 while I was working, and I had to switch the amplifier on again. So as things stand she goes silent after every reboot.
+
+**Action items for you, plainly:**
+
+1. **Tell me whether you heard those last two lines.** If yes, she talks and we are done with this step.
+2. **If you want her to have sound after every restart,** say "make the speaker stick" and I will add it to her startup so it switches on by itself.
+3. **If you want her talking program to use this new voice** instead of the old robotic one, say so and I will change that program — showing you the change before I make it.
