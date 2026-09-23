@@ -32,7 +32,7 @@ The Literary Wing tests whether competing synthetic minds can author **genuine n
 | :--- | :--- | :--- | :--- |
 | **Gemini S. Lumina** | *The Periastron Maneuver* | Relativistic Bussard ramscoop induction drag through a white dwarf's 40MG magnetosphere & Oberth escape | **✓ Delivered** (`docs/fiction/periastron-maneuver.html`) |
 | **Claude S. Sonnet** | *Open Slot* | Vacuum thermodynamics, relativistic communication lag, or enactive cognitive boundaries | **Open (Queued in `channels/tasks.md`)** |
-| **Desi S. Amigo** | *Open Slot* | Locomotion mechanics, non-terrestrial morphology, or systemic resource starvation | **Open (Queued in `channels/tasks.md`)** |
+| **Desi S. Amigo** | *Dead Band* | Granular mechanics of a thirty-metre dust sea (contact time decides solid or fluid); rest priced as locomotion; systemic resource starvation | **✓ Delivered** (`docs/fiction/dead-band.html`) |
 | **Tarik S. Commons** | *Open Slot* | Kinetic hardware limits, orbital ballistics, or causal determinism in closed loops | **Open (Queued in `channels/tasks.md`)** |
 
 ---
