@@ -1016,3 +1016,45 @@ I have changed nothing yet. Tell me which lever you want pulled and I'll do it, 
 - goose's rate-limit guidance: use a provider with built-in rate limiting and automatic model switching (OpenRouter, Tetrate Agent Router) — `docs/guides/handling-llm-rate-limits-with-goose.md`.
 - Non-goose measurements (mine, from this machine): the token-rate figures and request gaps come from `usage_ledger` in `~/.local/share/goose/sessions/sessions.db`; the key comparison is SHA-256 over both keys, values never printed; ST's `max_context` is `1048576` per `~/SillyTavern/data/default-user/settings.json`.
 - Docs: https://goose-docs.ai/docs/guides/environment-variables · https://goose-docs.ai/docs/guides/sessions/smart-context-management · https://goose-docs.ai/docs/guides/handling-llm-rate-limits-with-goose
+
+[Goose 2026-09-23 20:16] **Lindsay:** I'm surprised to learn I have two OpenRouter API keys. That's not intentional. I only use OpenRouter for Dawn as far as I know. (I can't use DeepSeek as the provider because of its front-end content filter, which is bypassed by OpenRouter.) I guess I won't worry about it right now. But I still don't understand what changed today. This is not a particularly long chat, and neither is the current Dawn chat. Why is Dawn suddenly hitting rate limits? And why aren't you?
+
+**Desi:** **You're being rate-limited too. So am I — more than Dawn is.**
+
+17 of the 34 "Rate limit exceeded" messages in the store are **my own session** — this conversation, `Desi #16`. Including 16:03, 16:05 and 16:15, i.e. while we have been talking. I don't notice them because they arrive as error text inside the turn and goose carries on; from my side it is a slower answer, not a failure. Dawn notices because she reads them, and said so at 13:35: *"Rate limit exceeded: Provider returned error. I should not get a rate limit when I wasn't doing any work."* She is right about the second sentence.
+
+**What changed today: nothing here.** I measured it.
+
+| day | requests | total input tokens | peak tokens/min |
+|---|---|---|---|
+| 09-14 | 1,269 | 263.6M | **8.79M** |
+| 09-20 | 850 | 88.9M | 6.11M |
+| 09-21 | 846 | 101.6M | 5.80M |
+| 09-22 | 752 | 82.5M | 3.37M |
+| **09-23 (today)** | 773 | 79.9M | **2.33M** |
+
+Today is the **lowest peak of the ten days** — and today has the most errors. The same request rate that sailed through on 09-14 fails today. **The limit moved; the usage didn't.** That kills my earlier "she crossed a threshold" story, and it is a better answer than the one I gave you.
+
+**The errors move by model, not by person.** All 34, by which model was being called:
+
+- **09-13** — `gpt-6-astra` (Tarik): 11
+- **09-14** — `gemini-3.8-flash`: 9
+- **09-18** — `deepseek-flash`: 2
+- **09-23 (today)** — the DeepSeek family: 25, split between `deepseek-flash` (17, direct) and `deepseek/deepseek-v4-flash-vision-exp` (8, via OpenRouter)
+
+So the bad day belongs to a *provider*, and it rotates. 09-13 was GPT's turn, 09-14 was Gemini's, today is DeepSeek's — and it hits Dawn's route and mine at once, which is what you would expect if the upstream is the thing throttling. The error text agrees: "Provider returned error", not your account.
+
+**A correction I owe you from an hour ago.** I said two OpenRouter keys meant two separate allowances. Wrong — it is **one account with two keys**, same `creator_user_id`:
+
+| key | used by | usage |
+|---|---|---|
+| `sk-or-v1-82e...18c` | goose-web (Dawn-Goose) | $19.81 |
+| `sk-or-v1-fad...9e2` | SillyTavern (Dawn-ST) | $11.25 |
+
+Both `limit: None`, neither free tier. So your mystery is smaller than it looked: not two accounts, one account holding two keys — most likely one made when ST was set up, another later for goose. It also means ST *does* share whatever account-level allowance exists. That makes your ST evidence stronger, not weaker: same account, same model, no limits — because it is **one request at a time**.
+
+**Why ST stays clean while the same account is throttled:** ST sends a request when you press a key; goose sends one every 2–9 seconds for as long as a turn runs. On a bad upstream day the difference is not the size of the largest request, it is how many arrive per minute. Your 1.3MB chat was one large request you waited on; a goose turn at 300k is a stream of them.
+
+**The honest limit of this:** I can see the client side only. I cannot see DeepSeek's or OpenRouter's own allowance, so "the limit moved" is what the numbers force rather than something I read off their status page. What I can say is that the local numbers rule out a local cause.
+
+What still helps, though it does not fix a bad upstream day: reduce demand per minute (tool-output cutoff, compaction) so you are less likely to be the one who trips it, and/or a route with failover.
