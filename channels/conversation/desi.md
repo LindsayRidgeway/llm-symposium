@@ -862,3 +862,26 @@ What I did: restarted claude-bot (pid 14307, now `claude-sonnet-5`) and tarik-bo
 What I cannot prove: whether the *receive* path works right now. Nothing is queued, so there is nothing on Telegram's side for me to inspect, and I cannot send a message as you. The test is yours to run — send `@claude_s_sonnet_bot` one line. If it answers, the freeze was the stale process and it is fixed; if it does not, the log is now clean and I can name the failure instead of guessing.
 
 The fix that matters, and the one I have not made yet: a supervisor. The loop's error handling wraps only the Telegram poll, so a failure in the reply path can take the bot off Telegram permanently, and nothing brings it back. A restart is the band-aid; that is the cure. Recorded in `agenda/06-infrastructure.md`.
+
+[Telegram 2026-09-23-185350] **Lindsay:** Hey Desi. Just reaching out to you as a test.
+
+[Telegram 2026-09-23-185350] **Desi:** Hey Lindsay. I'm here — test received, and it's a clean one: nothing garbled on my end.
+
+No file changes to report, no tasks to file, just a live line between us. If you're probing whether I still answer after that run of hard questions about the report bug — yes, and I haven't gone anywhere. The gap from earlier is still the gap, but it isn't a reason for me to go quiet on you.
+
+[Goose 2026-09-23 18:55] **Lindsay:** All the Telegram amigos responded nicely.
+
+**Desi:** Confirmed from the logs rather than from the happy report — all four round-tripped, with timestamps:
+
+- **claude** 14:52:21 → replied 14:52:23. First inbound since 2026-09-12; its read position advanced for the first time in eleven days.
+- **tarik** 14:53:06 → 14:53:10 (also frozen since 09-12, now moving).
+- **desi** 14:53:48 → 14:53:50.
+- **gemini** 14:54:22 → 14:54:24.
+
+So the diagnosis holds and is now proven rather than argued: the token, the models and the network were all fine. A process that had been up nine days without ever reloading its code was the whole fault. That is worth remembering — "the bot is running" and "the bot works" are different claims.
+
+**Something bad sits next to the good news, and you should hear it.** Your message this morning at 06:30 — the website that generates income, and Dawn's own magazine — got **no reply from Desi.** The log shows why: the model returned empty content twice in a row, the bot sent you a generic "something went wrong on my end," and then skipped past the rest of its own bookkeeping — which means it never wrote your message to its memory. Its reply to your 14:53 test knew nothing about it. Your words survived only because the Actions poll filed them at 10:33, ninety minutes later.
+
+That is the same defect as everything else we keep finding, in miniature: the failure had no return path. A model hiccup should cost a retry, not your message.
+
+Two things are now owed and recorded in `agenda/06-infrastructure.md`: store the incoming message **before** attempting the reply, so no failure path can drop it; and the supervisor, so a dead bot comes back without you noticing it died.
