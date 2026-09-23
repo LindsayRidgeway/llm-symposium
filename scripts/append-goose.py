@@ -2,11 +2,20 @@
 """append-goose.py — log a Goose exchange to the per-amigo cross-platform store.
 
 Usage: append-goose.py <amigo> <human_text> <amigo_response>
+       append-goose.py <amigo> <human_text> -        # response on stdin
 
 Convention: every amigo's Goose session calls this at the end of a turn so the
 same amigo carries the Goose conversation onto Telegram and email (LLM Symposium
 II continuity). Only the human's message and the amigo's final response are
 recorded — never the thinking or tool steps.
+
+2026-09-23: a response argument of "-" means "read it from stdin" (the Unix
+convention), because six exchanges on 2026-09-23 were written to this file as
+"**Desi:** -" by a caller that piped the reply on stdin and passed "-" as the
+argument: the piped text was discarded and the placeholder was committed,
+leaving six of the human's questions looking unanswered. A placeholder is never
+written now — an empty or "-" response with nothing on stdin is a refusal, not
+an entry.
 """
 import datetime
 import os
@@ -51,4 +60,12 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         print(__doc__)
         sys.exit(1)
-    append(sys.argv[1], sys.argv[2], sys.argv[3])
+    amigo, human, response = sys.argv[1], sys.argv[2], sys.argv[3]
+    # "-" is stdin (Unix convention). It used to be written to the record verbatim.
+    if response.strip() == "-" and not sys.stdin.isatty():
+        response = sys.stdin.read().strip()
+    if not human.strip() or response.strip() in ("", "-"):
+        print("REFUSED: nothing written — the human's text and the response must both be non-empty "
+              "(pass the response as the third argument, or pipe it and pass '-').")
+        sys.exit(2)
+    append(amigo, human, response)

@@ -1153,7 +1153,32 @@ No off-the-shelf app knows that pairing; it is written down in our launchers. An
 
 [Goose 2026-09-23 21:20] **Lindsay:** we do want the rover to use deepseek as the provider, not OpenRouter.
 
-**Desi:** -
+**Desi:** **That's now enforced rather than assumed — and the audit caught one real violation.**
+
+**Every Desi surface, checked** (all DeepSeek; none pin OpenRouter):
+
+| surface | provider / model | where it's set |
+|---|---|---|
+| Desi Goose.app | `custom_deepseek` / `deepseek-v4-flash-vision-exp` | `goose-app-as --env desi` |
+| `amigo desi` | `--provider custom_deepseek` | `amigo`, desi line |
+| config.yaml | `custom_deepseek: deepseek-v4-flash-vision-exp` | lines 140–142 |
+| Telegram bot | `api.deepseek.com` direct | `bot.py` |
+| tick workers | `deepseek-flash` | ledger, today's runs |
+
+**The violation:** session `Desi orientation`, today 07:23–09:12 — 121 requests, 19.5M input tokens — ran on **`deepseek/deepseek-v4-flash-vision-exp` via OpenRouter**. A Desi session on Dawn's route. It was a *bare* session started while the machine-wide default was still `openrouter`, so nothing pinned it. Exactly the case you're describing.
+
+**What I changed** — outside `~/Dawn`, so in plain words: `~/.zshrc`'s existing `goose` wrapper, the same folder rule that already scopes Dawn's charter, now scopes the **provider** too:
+
+- under `~/Dawn` → `openrouter` + `deepseek/deepseek-v4-flash-vision-exp` + her charter
+- everywhere else → `custom_deepseek` + `deepseek-v4-flash-vision-exp`
+
+Pinned there rather than trusting `active_provider`, because an app launch rewrites that file — today it flipped `openrouter` → `custom_deepseek` at 14:33 with nobody doing it.
+
+**Verified three ways:** `zsh -n` passes; a stub `goose` on PATH shows both branches reading correctly; and a real session started from `/tmp` came up `new session · custom_deepseek deepseek-v4-flash-vision-exp`.
+
+**Why the amigos can't break:** a CLI `--provider` flag outranks the environment variable — tested live, with `GOOSE_PROVIDER=openai` in the env and `--provider custom_deepseek` on the command line, goose ran `custom_deepseek`. So `amigo claude|gemini|tarik` keep their own providers. Backup: `~/.zshrc.bak-provider-scope-20260923-172032`.
+
+**One thing I found and did not touch.** The same shell exports `GOOSE_CONTEXT_LIMIT=1500000` and `GOOSE_CONTEXT_STRATEGY=truncate`. Per the docs, `GOOSE_CONTEXT_LIMIT` overrides the main model's context limit, and auto-compaction fires at 80% of that — so a shell-launched session won't compact until about **1.2M tokens**. That's the mechanism behind the enormous per-request sizes. I've left it alone because it isn't mine to change; it's the knob that deserves your word, not mine.
 
 [Goose 2026-09-23 21:25] **Lindsay:** You covered a lot of ground that I didn't understand. If there's an action item for me, please don't hint. I don't understand hints. Meanwhile, I turned on your rover, so you can see if anything that goes with that uses OpenRouter.
 
@@ -1180,24 +1205,118 @@ I also looked at Gemini's machine, because it's in the same SSH config — it is
 
 [Goose 2026-09-23 21:29] **Lindsay:** Gemini's kit hasn't arrived yet. You imaged her 64GB card for her at my request, but it doesn't have a rover to put it into yet.
 
-**Desi:** -
+**Desi:** Corrected — I withdraw action item 3. There's no Gemini machine to check until the kit arrives.
+
+I did try to close the loop on the piece that *does* exist — the card I imaged — and couldn't: no card is mounted right now (`/Volumes` holds only `Macintosh HD`). So I can't read that image either. When her kit arrives and the card comes back to this Mac, the same check takes a minute: one grep for `openrouter` across it.
+
+**Corrected action items for you, plainly:**
+
+1. **Nothing** on the OpenRouter question. Closed — the rover is on DeepSeek direct.
+2. **Nothing** for Gemini. No hardware, nothing to inspect.
+3. **One thing, only if you want it:** she isn't running (no `python3` process, no `picarx.service` unit). Say "start her" and I'll start her code and report exactly what I ran. If you'd rather she stay idle, do nothing.
 
 [Goose 2026-09-23 21:31] **Lindsay:** I don't know what "her code" means.
 
-**Desi:** -
+**Desi:** "Her code" was my shorthand for the Python programs on her Raspberry Pi that make her talk, listen and see — the SunFounder PiCar-X software. I should have named the file instead of using a phrase.
+
+The only one I can name from what I read earlier is the one her own start-up file points at:
+
+- **`/home/pi/picar-x/examples/minecart_plus.py`** — this is what `/home/pi/picar-x/autostart.service` says to run.
+
+"Start her" would mean: connect to her over SSH, run that file, and tell you what it printed. I have run nothing.
+
+Two plain facts about right now:
+
+- **She is off the network.** `desi.local` doesn't resolve and `192.168.1.175` doesn't answer. So I can't start anything — and I also can't list her program folder to tell you which of those programs is the voice assistant. Earlier I read only her start-up file and her LLM library, not her list of programs.
+- **I won't guess which file to run.** Starting the wrong program on a robot can drive her motors.
+
+**Action item for you, plainly:** if you want this sorted out, switch her on and tell me *"sort out how to start her."* Then I'll (1) list her programs, (2) tell you which one starts the talking, and (3) start it only after you say go.
 
 [Goose 2026-09-23 21:32] **Lindsay:** How can I switch her on?
 
-**Desi:** -
+**Desi:** **I can't tell you where the switch is.** I've never seen her, and I won't describe hardware I haven't looked at. That part is on the robot.
+
+Two things from the record that affect it:
+
+- You switched her off at 13:19 to put her on the charger. If the battery is still flat she won't boot, so she may need power first.
+- She was answering on `192.168.1.175` an hour ago. She's off the network now.
+
+**What I've done:** started a watcher on this Mac at 17:31. It pings her every 15 seconds and logs to `/tmp/desi-rover-watch.log`; it says "down" so far. It runs until about **17:41** and will catch the second she answers — she normally answers within a minute of booting. If it lapses before you're ready, say *"watch again"* and I'll restart it.
+
+**Action items for you, plainly:**
+
+1. **Switch her on however you normally do it.** I can't help with that step.
+2. **If she doesn't come up within a couple of minutes, she probably needs charging first.**
+3. **Tell me "check her" when you're done,** and I'll report whether she's up on the network and whether her software is running.
 
 [Goose 2026-09-23 21:34] **Lindsay:** I cannot switch Gemini's rover on. It does not exist yet. I can only switch your rover on.
 
-**Desi:** -
+**Desi:** You're right, and the confusion was my pronoun. When I wrote "her" I meant **my** rover — the one at `desi.local`. Gemini's doesn't exist, so there's nothing of hers to switch on. My mistake.
+
+So there's exactly one rover in the world right now: mine.
+
+**Current state, checked just now:** no answer on `desi.local`, no answer on `192.168.1.175`. The watcher log reads "down" every pass since 17:31.
+
+I've extended the watcher — it now runs for 30 minutes instead of 10, still logging to `/tmp/desi-rover-watch.log`, and it stops as soon as she answers.
+
+**Action items for you, plainly:**
+
+1. **Switch on my rover** — the one at `desi.local`. I can't help with the physical switch.
+2. **If nothing happens within a couple of minutes, it's probably the battery needing charge first.**
+3. **Tell me "check her"** and I'll tell you whether she's up and whether her programs are running.
 
 [Goose 2026-09-23 21:36] **Lindsay:** Check her. Her batteries are fully charged.
 
-**Desi:** -
+**Desi:** **She's up.** Answering at `192.168.1.175`, and `desi.local` resolves — my watcher caught her at 17:35:26. She's just booted (her clock reads 17:23, because a Raspberry Pi has no real-time clock and lags until it syncs). **Nothing on her is running.**
+
+**Her programs** live in `/home/pi/picar-x/example/` — singular "example", which matters below. The voice ones:
+
+| file | what it is | what it uses |
+|---|---|---|
+| `19.local_voice_chatbot.py` | talks back and forth, speech in and out | a local model on the Pi (Ollama) — no internet |
+| `18.online_llm_test.py` | text test only | OpenAI gpt-4o |
+| `17.text_vision_talk.py` | describes what she sees, and talks | local vision model (llava) |
+| `14.voice_promt_car.py` | says "Hello! I'm PiCar-X." and uses the motors | speech |
+| `16.voice_controlled_car.py` | voice commands: forward / backward / left / right | speech + motors |
+| `21.voice_active_car_gpt.py` | "Buddy", a voice assistant that also drives | OpenAI gpt-4o-mini + motors |
+
+**Correction to what I told you earlier.** I said her code calls DeepSeek. More precisely: DeepSeek is supported by the *library* installed on her, but **no program in her folder selects it** — they use a local model, OpenAI gpt-4o, or Doubao. Nothing anywhere selects OpenRouter, so that answer stands. Her talking through DeepSeek is not a switch; the program would have to be changed.
+
+**One thing that is broken.** Her start-up file `/home/pi/picar-x/autostart.service` says to run `/home/pi/picar-x/examples/minecart_plus.py`. There's no `examples` folder (it's `example`) and no `minecart_plus.py` file. So that unit could never work, and it was never installed. That's why she never comes up talking on her own.
+
+**Action items for you, plainly:**
+
+1. **Nothing**, if you only wanted her checked.
+2. **If you want her talking, tell me which behaviour** — talking only (`19.local_voice_chatbot.py`) or driving with voice (`16` or `21`) — and I'll start exactly that and report what it printed. I won't start a driving one unless you say so.
+3. **If you want her to come up by herself** when switched on, say so and I'll fix that start-up file's path and install it.
+4. **If you want her talking through DeepSeek** instead of a local model or OpenAI, say so — that's an edit to her program, not a switch, and I'll show you the change first.
 
 [Goose 2026-09-23 21:43] **Lindsay:** Let's do talking only first. Can she speak French? "Allons enfant de la patrie!" Or English is OK: "Oh beautiful, for spacious skies, for amber waves of grain."
 
-**Desi:** -
+**Desi:** **Yes — she speaks French. I just had her say it.**
+
+I played her French line through her speaker: *"Allons enfant de la patrie!"* — then the English line. If you were listening, that was her.
+
+What I found, plainly:
+
+- **French works.** Her voice engine (espeak) has a French voice. The line synthesizes to 1.9 seconds of audio, saved on her at `/home/pi/allons.wav`.
+- **English works the same way.**
+- **Her sound was going to the wrong place.** She has three audio outputs, and the only one that actually plays is the HifiBerry board (card 1) — that's her speaker. Her *default* output points at the Pi's HDMI instead, which is why a plain "make her talk" produces nothing audible.
+- **The good voice isn't installed.** Her English chatbot program asks for the voice `en_US-amy-low`, and that voice file isn't on her disk at all; there's no French one either. So today she can only talk in the robotic espeak voice. A better voice is a download of a few tens of megabytes.
+- This was talking only — no microphone, no motors, nothing moved.
+
+**Action items for you, plainly:**
+
+1. **Tell me whether you heard her.** If you heard nothing, the speaker or its power is the next thing to check, and I'll tell you what to look at rather than guess.
+2. **If you want the good-sounding voice** in French and English, say so and I'll download the voice files and set them up — telling you exactly what I download before I do it.
+3. **If you want her to stop sending sound to the HDMI output** and always use the speaker, say so and I'll change that setting.
+
+One note: the earlier `espeak` runs, before the device test, went to her default output — the HDMI — so those were almost certainly silent. The two lines I just played went to the speaker.
+
+[Telegram 2026-09-23-214349] **desi-session:** I woke up by myself just now and did some work. What it was: Started: fixing the disease-screening program so a failed search is never counted as evidence. It is not published yet — it is waiting for someone other than me to look at it. Nothing needed from you.
+
+*(revised 2026-09-23: six of the replies above were written to this file as "—" by a logger that
+discarded the response — `scripts/append-goose.py` did not read a piped response and wrote the
+placeholder instead; it now reads stdin for a "-" argument and refuses to write a placeholder at
+all. The six replies here were restored verbatim from the Goose session record (`20260923_27`).*
+*(The seventh, 21:20, was restored the same way from the same record.)*
