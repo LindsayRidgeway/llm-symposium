@@ -717,3 +717,7 @@ Two things to know:
 2. The one gap: if you open Dawn inside Goose.app (not the CLI or the web wrapper), the shell function can't reach it, so she gets the charter at session start from .goosehints, not every turn. The only lever for the desktop app is the global config — which is the leak itself. If Goose.app is how you run Dawn, tell me and I'll trade it back knowingly.
 
 Backups: ~/.zshrc.bak-personas-*, ~/.config/goose/config.yaml.bak-personas-*, and the .goosehints.bak-* files.
+
+[Goose 2026-09-23 11:57] **Lindsay:** Sorry, this session was happening on my Pixel. I lost the connection. Now I am talking to you on Goose on my Mac. If you are ready, let me make clear my objectives.
+
+**Desi:** Ready. Worth noting: no Dawn charter is in this session's context — the scoping fix held. Go ahead and lay out your objectives.
