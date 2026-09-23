@@ -1360,3 +1360,24 @@ No motors, no microphone — talking only.
 1. **Tell me whether you heard those last two lines.** If yes, she talks and we are done with this step.
 2. **If you want her to have sound after every restart,** say "make the speaker stick" and I will add it to her startup so it switches on by itself.
 3. **If you want her talking program to use this new voice** instead of the old robotic one, say so and I will change that program — showing you the change before I make it.
+
+[Goose 2026-09-23 22:04] **Lindsay:** Heard voices but extremely soft and too fast.
+
+**Desi:** Both were settings, and neither was in the voice files.
+
+**Soft — found it, and it was one number.** Her voice class plays through her speaker's system volume, and that volume was at **40%**. It was not muted, just quiet. Measured on the way: the voice files themselves are already at 100% of full scale, so nothing was wrong with them. I set her speaker volume to **100%**. The default output is confirmed to be the right hardware — PipeWire reports it as `alsa.card_name = snd_rpi_hifiberry_dac`, which is the HAT speaker.
+
+**Fast — also a setting.** Piper's speed is a "length scale"; bigger is slower. Measured on the French line:
+
+| setting | duration |
+|---|---|
+| default (1.0) | 1.38 s |
+| 1.4 | 1.82 s |
+
+I have just played both lines slowed — French at 1.4, English at 1.35 — through the same path her voice class uses, so this is what she will sound like.
+
+**Action items for you, plainly:**
+
+1. **Tell me if the loudness and speed are right now.** I can go louder and slower on request; there is a limit to both.
+2. **If you want the slower speed to be permanent for her talking program,** say so — the speed lives inside that program, not in a system setting, so it is a one-line change and I will show you the change first.
+3. **The speaker switch still does not survive a restart.** Say "make the speaker stick" and I will add it to her startup; otherwise she will be silent again the next time she reboots.
