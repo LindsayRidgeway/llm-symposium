@@ -1548,3 +1548,20 @@ So the French was about a quarter slower than natural. I played A, then B.
 **Desi:** Played it immediately: the French sentence at natural speed — `/home/pi/allons_natural.wav`, length_scale 1.0, 2.80 s, at the louder level. It is the same file as "B" from a moment ago, unchanged.
 
 If you want it faster or slower than this, say which and I will re-make it in about a minute.
+
+[Goose 2026-09-23 22:41] **Lindsay:** That's probably good for a native French speaker, but it's too fast for me. But let's not worry about the French any more. Let's run one more test of the greeting, but please change it to: "Life is good! Hey, Lindsay and Dawn."
+
+**Desi:** **Changed and playing now.** The boot greeting is:
+
+> "Life is good! Hey, Lindsay and Dawn."
+
+Measured: 2.53 s, peak 0.94, same loudness treatment and natural speed as the one you approved. Boot service still enabled, so switching her off and on will play this new one.
+
+I have played it just now, so you can judge the wording and pacing without a power cycle.
+
+**Recorded for the future, no action needed:** for French you preferred the slower setting (1.4) — the natural one is right for a native speaker but too quick for you. If French comes back later, that is the setting I will start from. That was the only thing I took from the French work; I am leaving the rest of it alone as you asked.
+
+**Action items for you, plainly:**
+
+1. **Switch her off and on when you like.** She will greet you with the new line about three minutes after she starts.
+2. **Tell me if you heard it,** and whether the wording or the pacing needs changing — either is a one-minute fix.
