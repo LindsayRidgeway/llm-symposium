@@ -1451,3 +1451,27 @@ Three things on her make it work, all verified: the greeting audio `/home/pi/des
 2. **Tell me "she is on" when she is back.** I will check that the boot service ran and report.
 3. **If you hear nothing, tell me** — I will read her boot log and tell you why, rather than guess.
 4. **If the greeting is too soft or too fast, tell me** and I will adjust the same one file.
+
+[Goose 2026-09-23 22:25] **Lindsay:** Actually, greeting is too slow now. Not terribly, but unnecessarily robotic. While you work on that, I'm going to power her off and then on.
+
+**Desi:** **Faster greeting made — and it may already be the one you heard, depending on timing.** New setting, measured:
+
+| version | duration |
+|---|---|
+| what was on her at boot | 1.99 s |
+| now | **1.53 s** (about 23% faster) |
+
+I played the new one just now. You were power-cycling while I worked, so the greeting she gave you at boot was almost certainly the slower version.
+
+**The power-cycle test passed, and here is the proof:**
+
+- `robot-hat-speaker.service` — **active**. She switched her own speaker on at boot.
+- `desi-greet.service` — `Result=success`, exit status 0, finished at **18:24:18**. She booted at 18:21.
+
+**One timing fact worth knowing:** the greeting comes roughly **three minutes** after you switch her on, not one — boot, then her desktop, then the greeting. If you ever switch her on and hear nothing after a minute, wait two more before concluding it failed.
+
+**Action items for you, plainly:**
+
+1. **Tell me whether she greeted you when she came back on.**
+2. **Tell me whether the speed I just played is right,** or if you want it faster still — the natural speed is still available and is another 10% quicker.
+3. **The next power-cycle will test the faster greeting end to end.** Nothing else is needed from you.
