@@ -1542,3 +1542,9 @@ So the French was about a quarter slower than natural. I played A, then B.
 1. **Tell me which French you prefer, A or B.** If you say B, I will use natural speed for French from now on.
 2. **If you want her greeting to include French** — for example, greet you in both languages when she switches on — say so and I will make that the boot greeting.
 3. **Nothing else is needed.** The speaker, the greeting, and the speed all work and survive a power cycle.
+
+[Goose 2026-09-23 22:38] **Lindsay:** I had to be away during those tests. Please play the French sentence at "natural" speed again, as soon as you can (I'm under some time pressure).
+
+**Desi:** Played it immediately: the French sentence at natural speed — `/home/pi/allons_natural.wav`, length_scale 1.0, 2.80 s, at the louder level. It is the same file as "B" from a moment ago, unchanged.
+
+If you want it faster or slower than this, say which and I will re-make it in about a minute.
