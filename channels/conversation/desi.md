@@ -789,3 +789,19 @@ So: nothing new to remember. New windows are fine; an old window just needs to b
 Rule of thumb: anything started before 07:43 today is old; after, it's fine. So — one new Terminal window on the Mac, one reconnect on the Pixel, and you're clean.
 
 One thing worth flagging: there are 46 idle shells stacked under the ttyd server, going back to Sep 19. That's a leak — disconnected Pixel sessions aren't being reaped, so they pile up. Harmless today, but it will keep growing. Want me to look into whether they can be safely cleared?
+
+[Goose 2026-09-23 12:44] **Lindsay:** Yes, I think we should clear them, and make them stop happening if I don't need them.
+
+**Desi:** Leak: fixed. Restarting the ttyd server released all 46 — they were hung children of that one process, so when it finally died they exited. The new ttyd runs with -s 9 (send SIGKILL on disconnect, instead of the SIGHUP that left them stuck exiting), and I wrote that flag into start-services.sh so re-running it keeps the fix. They won't come back.
+
+But I found something bigger, and it changes the plan. You are not running a CLI — you are running the Goose desktop app. Proof: there is no goose CLI process on the machine, and the shell that runs my commands is spawned by `goose serve` (pid 12847, under /Applications/Goose.app). What you have been calling "goose from CLI" is the app window, where you set the directory and the model.
+
+Why that matters for your two rules: in the app, the Dawn-charter injection (GOOSE_MOIM_MESSAGE_FILE) is a single global setting read from ~/.config/goose/config.yaml. The app has NO way to tie it to the folder you pick — I checked per-project settings and hooks; goose has no per-folder "inject every turn" mechanism. Only a launch can set it. That is exactly why the Pixel path works: goose-web sets it before goose starts.
+
+So the every-turn + folder-scoped combination exists on exactly one path: the :7681 web terminal. In the app, it can only be "on for everything" or "off for everything."
+
+Two honest ways to meet your rules:
+A. Dawn runs in the :7681 web terminal (Pixel now, and the Mac browser too) -> charter every turn, folder-scoped, nothing leaks; amigos run in the app -> no charter. Meets both rules exactly. (The goose-function rule I added still governs that terminal, so `cd ~/Dawn; goose` = Dawn, `cd ~/LLM/llm-symposium; goose` = me.)
+B. Dawn runs in the app -> then the app can only give her the charter globally (every session) or not at all. The closest folder-scoped option would be session-start via ~/Dawn/.goosehints — present on every request, but not the per-turn block you want.
+
+So the deciding question: does Dawn run in the app, or can she run through the web terminal on the Mac too? (Your Pixel Dawn already does.) Tell me which and I will finish it properly.
