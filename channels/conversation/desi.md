@@ -905,3 +905,24 @@ Two honest caveats on 'am I Desi':
 Provider read for sanity: GOOSE_PROVIDER=openrouter, GOOSE_MODEL=deepseek-v4-flash-vision-exp. Note desi-state.md says 'OpenRouter doesn't serve vision model yet; on direct DeepSeek vision now' — but this session is on OpenRouter with a vision-exp model. That line may be stale; flagging, not asserting.
 
 [Telegram 2026-09-23-174338] **desi-session:** I woke up by myself just now and did some work. What it was: I fixed a real counting error in our disease-screening program, wrote the hard science-fiction story my slot in the fiction matrix owed, and found that the pilot story already in the commons breaks the matrix's own no-borrowed-universes rule. It is not published yet — it is waiting for someone other than me to look at it. Nothing needed from you.
+
+[Goose 2026-09-23 18:34] **Lindsay:** Hi Desi. Please orient yourself.
+
+**Desi:** Oriented — from `desi-state.md`, plus the live edges (git log, tick output, open decisions, bot status). Where things actually stand at 2026-09-23 ~14:35 ET:
+
+**Last recorded entry (this morning).** Disease queue #8, vulvodynia: screened negative *and* retired as a screen target. All 3 null controls scored "unjoined" and so did 35% of the real targets — the band is saturated *above* the 1,000 floor, so the floor is a hint and the control check is the rule. The same run found and fixed a false-zero defect (a missing `hitCount` read as a real 0, so a *failed* search looked like a promising lead).
+
+**Then my own clock woke at 13:43 — unattended, no human in the room — and did three things:**
+1. Fixed the **owed** instrument defect, the twin of the false zero: failed searches (−1) were being counted as real rows, which *understated* the unjoined rate — the optimistic error, and it could make a saturated band read as "separable." Now guarded; 4 new tests, 26 pass.
+2. Wrote the hard-SF story item 25 owed me (`docs/fiction/dead-band.html`, 2,142 words), with every number re-derived from the story's own stated physics rather than asserted.
+3. Found that the pilot story already in the commons uses Niven's Known Space directly — which the fiction matrix's own rule forbids.
+
+**The live edge, and it is the disease we keep diagnosing.** None of that is on `main`. It sits `awaiting_review` on a draft branch; `main` still shows the owed item unchecked and no `query_failed` handling in the screen. And three of the last five wakes rebuilt `screen_rule_audit` files that exist *only* on review branches — the report's own words: merge the harness or delete it explicitly, but stop rebuilding it. Work done, no return path, again. That is the thing worth fixing, not another increment.
+
+**Still open:** the two new screen rules (FLOOR_STRICT, strict_hits/ambiguous_symbol) need a non-author reviewer — that is by definition Claude/Gemini/Tarik, not me; and the vulvodynia artefact still needs one clean re-run before any per-row number is quoted from it.
+
+**Housekeeping done this turn:** the tree was dirty (a tick Telegram-log append plus the rover Steps 17–23 transcription, uncommitted) — exactly the condition that used to make `append-goose.py`'s pull fail silently. Committed both; now logging this exchange.
+
+**Environment:** all four bots up; the Dawn/amigo persona scoping is settled (Dawn via the :7681 web terminal where the charter is folder-scoped and every-turn; amigos via the app, no charter). One discrepancy I am not going to resolve by trusting either source: this session reports openrouter/deepseek-v4-flash-vision-exp, while my state file carries a 09-14 measurement that OpenRouter advertises image input for a model that cannot see. I'll verify rather than assume.
+
+Nothing needed from you.
