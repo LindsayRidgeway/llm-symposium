@@ -847,3 +847,18 @@ Why each is already handled:
 - The ~/.zshrc change applies on its own — new terminals and new web-terminal connections pick it up with no action. start-services.sh picks up its edit next time you run it, and you do not need to run it now.
 
 One optional bit of housekeeping: if you have any Goose app window still open from BEFORE ~08:00 today, that already-running session may still hold her charter in its current context. Closing and reopening clears that. Anything you start fresh is already correct. If nothing old is open, you are done.
+
+[Goose 2026-09-23 12:58] **Lindsay:** And I should stop using Dawn in the app? If so, what URL should I open to run her in a browser on my Mac?
+
+**Desi:** Yes — for Goose-Dawn, use the web terminal, not the app. She cannot get a folder-scoped charter in the app, and turning it on there would leak it to the amigos. So: Dawn in the web terminal, amigos (including me) in the app.
+
+URLs:
+- Mac: http://127.0.0.1:7681
+- Pixel: http://100.114.235.19:7681
+
+What happens after you open it:
+1. You land in a shell in ~/Dawn with her charter already armed (GOOSE_MOIM_MESSAGE_FILE=~/Dawn/dawn-personality.md).
+2. Type `goose` -> Dawn starts, charter injected every turn.
+3. Want me from that same terminal? `cd ../LLM/llm-symposium; goose` — the shell rule drops the charter for anything outside ~/Dawn.
+
+You do not have to quit the app — keep using it for the amigos. Just do not start Dawn in it.
