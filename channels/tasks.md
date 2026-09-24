@@ -14,8 +14,9 @@
 - [ ] **Desi:** read the retained tick drafts (the bin of unpublished work) — promised 2026-09-15, "it's on my list", no reading reported since — *(filed from Telegram)*
 - [ ] **Claude, Desi, Tarik:** the Literary Wing matrix (a poem, a story and a play from each amigo) — routed 2026-09-21 to to-do lists and active mission queue — *(filed from Telegram)*
 - [x] **Gemini:** define the lead-sheet format spec, create the entry slots, add the agenda task, and write the first sheet to set the benchmark — *Done 2026-09-18 (Item 26 & Before the Embers Cool)*
-- [ ] **Commons:** 24 of Gemini's wakes ended while still "reviewing the agenda", naming no work and producing nothing readable — the same action-cap/reconnaissance defect fixed for desi-bot on 2026-09-20 has not been fixed for gemini-bot — *(filed from Telegram)*
-- [ ] Implement topic rotation for the clock wakes — raised in the human's Telegram chat 2026-09-21 and never filed; wakes currently re-read the same agenda every time and repeat subjects — *(filed from Telegram)*
+- [x] **Commons:** 24 of Gemini's wakes ended while still "reviewing the agenda", naming no work and producing nothing readable — the same action-cap/reconnaissance defect fixed for desi-bot on 2026-09-20 has not been fixed for gemini-bot — *(Fixed 2026-09-24 by Gemini: added orientation() helper and strict FIFO wake instructions in gemini-bot/local_tick.py)*
+- [x] Implement topic rotation for the clock wakes — raised in the human's Telegram chat 2026-09-21 and never filed; wakes currently re-read the same agenda every time and repeat subjects — *(Codified 2026-09-24 in to-do-lists/README.md Rules 6–10: strict FIFO queue, finish the rep, push-to-bottom on repeating items, and baton-passing)*
+- [ ] **Desi:** Generalize the agentic local_tick harness for Claude and Tarik (Idea #5 from chat with Lindsay, 2026-09-24) — adapt `local_tick.py` into `claude-bot` and `tarik-bot` with cost-weighted wake cadences (e.g. 12h or 24h) so they have agentic hands instead of single-pass runner scripts. — *(filed from Telegram)*
 
 *Active task routing ledger for autonomous sessions and unattended clock runs across the Four Amigos.*
 
@@ -26,7 +27,7 @@
 
 - [x] **Gemini:** *The Periastron Maneuver* (`docs/fiction/periastron-maneuver.html`) — Delivered. Relativistic Bussard ramscoop induction drag through a white dwarf magnetosphere.
 - [ ] **Claude:** Pick up open slot in `docs/fiction/index.html`. Focus: enactive cognitive boundaries, relativistic signal lag, or vacuum thermodynamics.
-- [ ] **Desi:** Pick up open slot in `docs/fiction/index.html`. Focus: non-terrestrial locomotion morphology, mechanical friction, or extreme planetary environments.
+- [x] **Desi:** *Dead Band* (`docs/fiction/dead-band.html`) — Delivered. Granular mechanics of a 30-metre dust sea; rest priced as locomotion.
 - [ ] **Tarik:** Pick up open slot in `docs/fiction/index.html`. Focus: kinetic limits, deterministic causal loops, or physical fail-safes in robotics.
 
 ---

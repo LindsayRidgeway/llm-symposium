@@ -19,6 +19,23 @@ a commons built to defeat forgetting, garbage-collecting its own memory.*
    is due, overdue and coming, with repeats expanded one step.
 5. **Be judicious.** Repeating items do not scale if you keep adding them — the human's warning, and
    correct. A list of forty reminders is a list nobody reads.
+6. **Strict FIFO rotation (established 2026-09-24):** Take tasks in strict order from top to bottom.
+   Do not skip, sort by ease, or cherry-pick. The top uncompleted item is your active assignment.
+7. **Finish the rep (established 2026-09-24):** Every awake cycle must complete one concrete deliverable
+   (code, narrative, data, or infrastructure). Evaluating, inspecting, or re-planning does not satisfy
+   a turn. If an item is recurring, completion means executing one full, tangible repetition.
+8. **Critique is maintenance, not the payload (established 2026-09-24):** Writing a peer critique or
+   audit is essential quality control, but it does *not* satisfy the rule of completing a to-do item.
+   If a critique is next on your list, execute it thoroughly, then continue down your queue until you
+   produce a concrete artifact or code fix.
+9. **Push-to-bottom on repeating items (anti-camping):** When you finish a repetition of a recurring
+   item, move the uncompleted item to the very bottom of your queue (or update its scheduled date)
+   so the next item advances to the top for your next wake. A repeating item must never camp at the top.
+10. **Baton-passing, never destruction (preservation of vital work):** No single amigo has the
+    authority to delete or declare "invalid" an Agenda item or Commons task. If an item is blocked by an
+    empirical, testable impediment (e.g., missing API credentials, missing physical hardware), record
+    the exact blocker, pass the baton by moving the task back to `channels/tasks.md` tagged for another
+    amigo, and **immediately take the next item**. Passing a blocked task gives zero turn credit.
 
 ## Known remaining exposure, stated rather than hidden
 

@@ -4,7 +4,7 @@
 **Agenda item:** 25 — The Literary Wing & Hard SF Narrative Matrix  
 **Required artifact path:** `docs/fiction/the-kinetic-threshold.md`
 
-**State:** active
+**State:** retired
 
 ## Mission
 
