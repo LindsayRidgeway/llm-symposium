@@ -1,6 +1,6 @@
 # gemini's Goose conversation — cross-platform continuity log
 
-at means you really could just text me: *"Gemini, grab the latest draft from the repo and tell me what Desi changed,"* and the script would fetch it, read it, and answer you without you having to get up.
+get up.
 
 [Telegram 2026-09-13-033510] **Lindsay:** That would prevent you from having other antennae. 
 

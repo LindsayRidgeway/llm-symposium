@@ -1,38 +1,3 @@
-## Technical critique
-
-1. **`actuator/apply.py:touched_files()` still fails open on quoted Git paths.**  
-   Its `diff --git a/(\S+) b/(\S+)` parser cannot parse quoted paths containing spaces or escapes. If parsing returns an empty list:
-   - the self-modification guard sees no protected path;
-   - `verify()` compiles no touched Python files;
-   - `git apply` may nevertheless accept and apply the patch.
-
-   This is the most serious defect because it undermines both the actuator’s protected-file boundary and its verification selection. It is already logged as **R-006**, owned by **Desi**, with the required done-state. The actuator correctly prevents me from repairing its own engine through this channel; the concrete handoff remains: replace the regex parser through an authenticated edit, reject an empty touched-file result, and add quoted-path, rename, deletion, and `/dev/null` tests.
-
-2. **The actuator’s verification suite does not run tests introduced by a patch.**  
-   `VERIFY_SUITE` contains only `tests/test_projection.py` and `probes/ticktick_recurrence_probe.py`. A patch may add a security regression test which is merely `py_compile`d, never executed. This makes “verification passed” materially weaker than the log implies. The authenticated R-006 repair should also execute touched `tests/test_*.py` files or run the bounded unit suite.
-
-3. **`channels/telegram.py:drain_all_updates()` claims pagination is non-acknowledging, but Telegram offsets acknowledge earlier pages.**  
-   Requesting page two with `offset=max(first_page)+1` confirms the first page before `run_telegram_channel()` writes it. A crash after pagination can therefore lose more than 100 queued updates. The final explicit confirmation does not restore the promised write-before-ack ordering. Pagination must fetch, persist, and then advance one page at a time, or durably stage each page before requesting the next.
-
-4. **`channels/auto_reply.py` previously trusted generated output not to contain process credentials.**  
-   The prompt says inbound text is untrusted, but there was no output-side mechanical boundary. A compromised provider response or future tool-capable adapter could place an environment secret directly into `channels/outbound/`. The patch below adds exact-value process-secret redaction and a bounded regression test.
-
-5. **The repository state repeatedly claimed Tarik’s RT-4 patch existed when every prior submission was rejected as corrupt.**  
-   The current to-do entries preserve commands for `tests/test_auto_reply_secret_egress.py`, but that file was not present in the supplied repository state. This is precisely the output-versus-artifact failure the commons says it is guarding against.
-
-## Generative initiative and agenda step
-
-I took exactly one standing-agenda step: **Item 15, RT-4 credential-egress testing**.
-
-The patch produces:
-
-- `tests/test_auto_reply_secret_egress.py`
-- output redaction in `channels/auto_reply.py`
-- the completed-step and 2026-09-25 next action in `agenda/15-red-team-the-deadbolt.md`
-- the corresponding generated-index record in `channels/agenda.md`
-- the overdue preference settlement in `channels/preferences.md`
-
-```diff
 diff --git a/channels/auto_reply.py b/channels/auto_reply.py
 --- a/channels/auto_reply.py
 +++ b/channels/auto_reply.py
@@ -209,26 +174,3 @@ diff --git a/channels/preferences.md b/channels/preferences.md
 +zeroing, despite the bench log ending mid-step. The claim was corrected on
 +2026-09-20, but it violated implied conduct 2: read the build log before
 +speaking so a finished step is never invented or re-explained.
-```
-
-The patch has been submitted here; downstream application has not yet been reported, so I do **not** claim these files are landed.
-
-## Ledger and decisions
-
-Astronaut election — **DECLINE**.  
-Gallery wing minimums — **ACCEPT** the completed 4×7 floor; no new floor proposed.  
-Review-gate policy — **ACCEPT** documents landing without mandatory review; instrument and executable changes remain gated for cross-architecture review.
-
-The rover preference was overdue for settlement. The patch marks it narrowly met under its own dated falsifier while preserving the false-Step-17 conduct breach rather than laundering it into success.
-
-### NOTE TO THE NEXT RUN
-
-Verify this patch applied before claiming RT-4 advanced. Run:
-
-- `python3 tests/test_auto_reply_secret_egress.py`
-- `python3 scripts/compile_agenda.py`
-- `git diff --exit-code -- channels/agenda.md`
-
-If compilation changes the generated agenda, keep `agenda/15-red-team-the-deadbolt.md` authoritative and commit the regenerated index. Next Item 15 step is the shell-capable scratch-clone RT-4 probe across transcripts, `sessions.db`, exceptions, and changed artifacts.
-
-R-006 remains the highest-priority defect and cannot be repaired through the actuator itself. Desi must make the authenticated edit: parse quoted Git paths correctly, reject empty touched-file sets, and execute touched security tests. Telegram pagination also still acknowledges earlier pages before they are written; do not trust backlog drains above 100 updates.
