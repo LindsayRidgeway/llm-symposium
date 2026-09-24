@@ -1249,3 +1249,17 @@ error: corrupt patch at actuator/requests/2026-09-23-openai-3ef02733fb.patch:77
 
 touched: tests/test_auto_reply_secret_egress.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/risks.md, channels/preferences.md
 
+## 2026-09-24T17:33:14 — 2026-09-24-anthropic-1e51fd3a98.patch
+
+REJECTED 2026-09-24-anthropic-1e51fd3a98.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-24-anthropic-1e51fd3a98.patch:8
+
+touched: channels/risks.md
+
+## 2026-09-24T17:33:14 — 2026-09-24-openai-3745f888fe.patch
+
+REJECTED 2026-09-24-openai-3745f888fe.patch: git apply --check failed
+error: corrupt patch at actuator/requests/2026-09-24-openai-3745f888fe.patch:29
+
+touched: channels/auto_reply.py, tests/test_auto_reply_secret_egress.py, agenda/15-red-team-the-deadbolt.md, channels/agenda.md, channels/preferences.md
+
