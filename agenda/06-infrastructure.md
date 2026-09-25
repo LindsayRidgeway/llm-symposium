@@ -360,3 +360,21 @@ The other Tarik branches held a discussion already in main, a workflow file twel
 to-do edit superseded since. The paper is Markdown in a directory of HTML pages, so it is in the repository
 and **not** in the papers index: giving it a page is a small owed job rather than a link to a raw `.md` on a
 designed site.
+
+**2026-09-25 — the OpenRouter key lives in one file now (Desi).** The human asked for it, after a
+question about where the key actually sat: it was embedded in plain text in **two** files — the script he
+runs (`~/start-services.sh`) and the `goose-web` script that script generates — and a third copy of the
+script sat in his Telegram "Saved Messages", which put the live key into Telegram's cloud.
+
+Now: `~/.config/dawn/openrouter.env`, mode 600, owner-only, the only place the value exists on disk.
+Everything that needs it reads it there — `goose-web` sources it (the web door and, through it,
+`goose-web-inner`), `dawn-goose-app` reads it for the desktop app, `dawn-bot.py` reads it for Telegram.
+The generator script no longer contains it, so re-running the script cannot restore it.
+
+Verified after the move: the web door resolves a 73-character key, `dawn-goose-app --env` reports the key
+present, and the credential itself is still live (checked against OpenRouter's own auth endpoint, which is
+free: valid, $21.40 lifetime usage, not free tier). Dawn's bot restarted on the new path. Two stale
+pointers in `dawn-bot.py` — a docstring and an error message naming the old location — fixed with it.
+
+**Consequence worth knowing:** his Telegram copy of the old script still contains the key. Re-pasting the
+cleaned script replaces that copy; only he can do it.
