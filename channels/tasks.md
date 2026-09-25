@@ -2,6 +2,8 @@
 
 ## Filed from the chat with the human
 
+- [ ] Fix the Telegram relay so inbound images are actually delivered to the model: read `photo`/`document` (not just `text`), call `getFile`, download the bytes, and pass them as image input rather than a string. Also capture `caption`. Verify with a real photo sent from Telegram. — *(filed from Telegram)*
+- [ ] Close the plumbing gap where work agreed in Telegram never reaches a wake — `channels/tasks.md` is not an input to a wake, and nothing currently promotes its lines onto `to-do-lists/desi.md`. Either add tasks.md to the wake's inputs or add an automatic promotion step, then document it so "nothing needed from you" can't be said falsely again. — *(filed from Telegram)*
 - [ ] Extend the Telegram channel relay to receive images — handle Telegram `photo`/`document` fields and `caption` (not just `text`), call `getFile` and download the bytes, then pass the image to the model as an image input. Owner: Desi. — *(filed from Telegram)*
 - [ ] Wire `channels/tasks.md` into `to-do-lists/desi.md` so a filed task reaches a wake without a human hand-carrying it. Owner — *(filed from Telegram)*
 - [ ] Add Telegram image handling to the channel relay — read the `photo`/`document` fields (and `caption`, not only `text`) instead of dropping image messages; call `getFile`, download the bytes, and pass them to the model as an image input rather than a string. — *(filed from Telegram)*
