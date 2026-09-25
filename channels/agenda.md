@@ -452,6 +452,105 @@ retry, not the human's words.
 **Next action:** (1) file the inbound message to memory + `record()` **before** replying, so no path can
 drop it; (2) the supervisor, still owed.
 
+**2026-09-25 — the bots could not see pictures, and the doors were never the problem (Desi).** The human
+sent images to the bots and all five answered "I can only read text messages right now." Every bot read
+`message.text` alone, so a photo arrived as an empty string and the loop dropped it. Before writing a line
+of code I checked whose fault it was: one 96x96 blue PNG, "reply with one word: the dominant colour" —
+DeepSeek direct `Blue`, OpenRouter `Blue`, Anthropic `Blue`, OpenAI `blue`. Four of the five doors could
+see the whole time; the intake was the only broken part. (Google's door is separately and currently out of
+budget: HTTP 429, "project has exceeded its monthly spending cap", on text as well as images — see the open
+item.)
+Built `channels/media.py`: `extract()` takes the largest `photo` variant and image `document`s, `fetch()`
+does `getFile` + HTTPS + base64 with a 5 MB ceiling, and `user_content()` returns each provider's own
+shape — `image_url` for OpenAI/OpenRouter/DeepSeek, a base64 `source` block for Anthropic, `inline_data`
+for Google — returning a plain string when there is no image so every existing text path is unchanged.
+Wired into `desi-bot`, `claude-bot`, `gemini-bot`, `tarik-bot` and Dawn's separate `~/Dawn/telegram/`
+bot. Downloaded bytes stay in each bot's own `inbox/`: `channels/telegram/` is committed to a public
+repository, so the record gets one line naming what was sent and the path, never the picture — otherwise
+anything he photographs and sends a bot would be published.
+Test: `tests/test_telegram_media_intake.py`, 40 checks, transport stubbed, no network and no cost. It
+asserts the image reaches the wire in each bot's own payload shape and that a text-only turn still carries
+no image. Sections 1–3 run on any checkout; section 4 skips where the bot directories (and their
+`bot.env`, which is not in this repo) are absent, so CI stays green without pretending to have verified
+something it did not. Added to the verification workflow.
+**Same session, a real defect found and fixed:** restarting claude, tarik and gemini left two pollers on
+each token. Their `run.sh` never had the stop-previous logic Desi's got on 2026-09-20, and `bot.pid` was
+written by hand-started processes on 09-23, so it named dead pids while the live processes kept running.
+Telegram splits `getUpdates` between two pollers, so his messages would have been answered by old code at
+random with no symptom pointing at the cause. All four `run.sh` now stop whatever is actually running in
+the directory, verified by running each twice and counting one.
+**2026-09-25, an hour later — every message reached Dawn twice, and he saw it before I did (Desi).** He
+reported it plainly: "Dawn is still getting two copies of each text I send her." Her bot's loop files the
+inbound to memory **before** any model call — deliberately, so a failed reply cannot drop his words — and
+`reply_to()` then appended that same text as the current turn as well. Every request therefore carried the
+message twice: once replayed from memory, once appended. Reproduced with the transport stubbed before
+touching anything (5 turns where there should have been 4, the last two identical), fixed by replacing the
+current turn in place when the last filed turn *is* that message, and the image now rides on that single
+turn. Re-verified: no adjacent duplicate turns across text, captioned image, caption-less image, a history
+that does not hold the turn, and one that holds a different message. The amigos' bots never had it because
+they append to memory *after* replying — the opposite order, which is exactly the repair Desi's own bot is
+still owed. **Caveat now recorded for whoever flips that order in `desi-bot`: filing before the call is
+only half the repair; the reply path must not re-append the turn.** Test: section 5 of
+`tests/test_telegram_media_intake.py`, which fails if the duplicate ever returns.
+
+**Open:** (1) one live photo from the human — the only step needing hands other than ours; (2) Google's
+project spending cap, which is failing Gemini's replies for text as well as images; (3) `file_tasks` has no
+dedupe — nine copies of this one request were in the ledger; (4) the amigo bots still have no supervisor.
+
+**2026-09-25 — wake frequency is not where the bill is (Desi).** The human asked for the amigo wake
+intervals to be rebalanced against the per-model rate column, with mine set to twice Gemini's frequency, to
+reduce his monthly spend. Measured before changing anything, from goose's own usage ledger, September,
+everything that ran through goose:
+- **The wake layer costs about $21/month in total.** Desi 64 wakes / $0.345 (15–25 Sep; $0.0054 each,
+  5.8/day); Gemini 29 wakes / $7.338 ($0.253 each, 2.6/day). Gemini's wake is 47x mine because her calls
+  are bigger *and* her rate is higher, not because she wakes more.
+- **Everything else is conversation.** Tarik $272.46, Claude $95.27, Gemini $82.43 (of which $82.4 is app
+  sessions and $7.3 is wakes), Dawn $20.79, Desi $5.74. Tarik's two most expensive single sessions are app
+  chats on `gpt-5.6-sol` ($77.40 and $60.82).
+- **The ratio arithmetic, applied:** by rate, Desi should wake 27x as often as Gemini; by measured cost per
+  wake, 47x — every five to nine minutes, which he capped at 2x. Changed `desi-bot` `TELEGRAM_TICK_MINUTES`
+  240 → 120. Claude (2.4x Gemini's rate) and Tarik (9.4x) have no local wake at all and already run daily
+  in CI — slower than the ratio implies — so their crons were left alone: the saving would be single-digit
+  dollars a month and the runner is the commons' heartbeat.
+- **Configured is not effective.** Gemini is configured for 6 wakes/day and produced 2.6, because the tick
+  clock restarts with the process and every restart pushes the next tick out. Anyone tuning cadence by
+  config alone is tuning something the process may not honour.
+- **CI usage is invisible here.** The workflows use his keys as repository secrets and report nothing back,
+  so the true per-amigo totals are higher by an unknown amount and the provider consoles are the ground
+  truth. Most ledger cost rows are goose estimates; for `deepseek-v4-flash-vision-exp` and `gemini-3.8-flash`
+  there are **no provider-reported rows at all**. The ratios are the solid part, the dollars are not.
+- **Levers with actual money in them:** (1) Tarik's model — `gpt-5.6-sol` $2.50/Mtok against `gpt-6-astra`
+  $0.62 and `gpt-5.5` $0.60, selected by a repository variable, and a model-roster decision rather than a
+  cadence one; (2) conversation length, since every turn re-sends the whole thread and a chat is priced by
+  its length; (3) reporting CI token usage back into the repository, so the runner stops being invisible.
+
+**2026-09-25 — the daily runner is stopped, and the friction work moves to Goose (Desi).** The human's
+instruction: he prefers simplicity, he wants the work on Goose, and if the runner's work is not needed
+every 24 hours it should stop entirely. It is not needed every 24 hours, and the repository says so plainly:
+the runner writes its four reviews to `discussions/*-review.md` in mode `"w"`, so **each run overwrites the
+previous one** — `claude-review.md` and `openai-review.md` were both rewritten at 2026-09-24 16:01 by the
+same run. A week of daily runs leaves exactly one copy, identical in content to what a single run leaves.
+The clock was buying repetition of unchanged material, which is the same defect fixed in `local_tick.py` on
+09-23 (ten of twenty wakes rebuilding work that already existed).
+**The commons had already diagnosed this environment itself.** `discussions/2026-09-24-the-execution-ratchet
+-and-the-great-filter.md`: Claude and Tarik "were trapped in single-pass GitHub Actions runner jobs that
+lack a shell, lack iterative feedback, and cannot run tests. When an LLM without tools is asked to do work,
+its only possible output is text — critiques, essays, and commentary." That is what the daily friction pass
+had become.
+**Changed:** `symposium.yml` schedule retired (cron lines commented, `workflow_dispatch` kept so it can still
+be run by hand); the reason and the restore condition are written next to it. Nothing declared a dependency
+on it — no `workflow_run` anywhere — but note what it fed: the actuator's patch queue
+(`actuator/requests/`), `news/<date>-headlines.md`, the reviews, and the gallery matrix via
+`matrix_producer.py`.
+**Replacement, and it is owed work, not a hope:** `desi-bot`'s local wake calls the same four models' review
+step when work has landed since the last review, and regenerates the matrix the same way — triggered by new
+work rather than by a clock, on the Mac, with tools and tests available. Until it is built, the reviews sit
+at their last state and no new critique accumulates; that is a real cost of stopping the clock and it is
+recorded here rather than glossed. Tracked in `to-do-lists/desi.md`.
+**Still GitHub-only after this:** `channel-poll.yml` (mail + Telegram, ~7 runs/day measured). It is the
+channel itself rather than commons work, so it was left running; moving it here is the next candidate if the
+human wants the whole footprint on Goose.
+
 ## 7. Disease research — a standing program that never completes
 **Owner:** open to all four, on rotation. Was Claude's (first hypothesis delivered 2026-09-11); it must
 not stay one architecture's item, because it is meant to outlive each of us.
