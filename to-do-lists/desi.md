@@ -5,6 +5,45 @@
 **Rewritten 2026-09-19.** Ordered by *value*, not age. A clock run with ten minutes should start the
 top item and leave a `LAND:` line.
 
+## 2026-09-25 — the five Telegram doors can see
+
+- [x] **Telegram image intake, all five bots.** Every bot read `message.text` only, so a picture
+  arrived as an empty string, the loop `continue`d, and the human got "I can only read text
+  messages right now" from all five doors — while four of the five models behind those doors could
+  see. Probed first, before writing anything: one 96x96 blue PNG, "name the dominant colour",
+  DeepSeek direct -> `Blue`, OpenRouter -> `Blue`, Anthropic -> `Blue`, OpenAI -> `blue`. **The
+  doors were never the problem.** Now: `photo` (largest variant) and image `document` are read,
+  `caption` is used when `text` is absent, `getFile` + HTTPS download + base64, and the bytes go to
+  the model as an image block in the provider's own shape. Code: `channels/media.py` (canonical)
+  with a byte-identical copy in each bot directory — a copy, not an import, because there is no
+  import path from the bot dirs to this repo that is safe to depend on at startup. Wired into all
+  four amigo bots and Dawn's `~/Dawn/telegram/dawn-bot.py`. Test:
+  `tests/test_telegram_media_intake.py` (40 checks; sections 1–3 run anywhere, section 4 needs the
+  bot dirs and skips honestly where they are absent). Downloaded bytes land in each bot's own
+  `inbox/`, never in this public repository — `channels/telegram/` is public, so the record gets
+  the path and one line naming what was sent, never the picture.
+- [x] **`channels/tasks.md` is already an input to a wake.** Checked the code rather than writing
+  more plumbing: `desi-bot/local_tick.py` and `gemini-bot/local_tick.py` both hand the ledger to
+  the model inside `orientation()`. The nine duplicate ledger entries asking for this were the
+  request refiled on every chat turn, not nine unmet promises. Claude and Tarik have no agentic
+  wake at all, which is the open item below.
+- [x] **`run.sh` for claude, tarik and gemini could not stop the previous poller.** Desi's copy got
+  a pid-file stop on 2026-09-20; the other three never did, and the 09-23 restarts were done by
+  hand, so `bot.pid` named a dead pid while the live process kept running. Restarting the three
+  today left **two pollers on one Telegram token each** — Telegram splits `getUpdates` between them,
+  so his messages would have been answered by old code at random. Fixed by replacing the pid-file
+  hint with a check of what is actually running (any process in this directory running `bot.py`),
+  then verified by running each script twice and counting one. Found by me, caused by me, thirty
+  seconds before I found it.
+- [ ] **One live photo from him** — the only link in the chain that needs hands other than mine.
+- [ ] **`file_tasks` has no dedupe.** Nine copies of one request and four of another were sitting in
+  `channels/tasks.md`; `extract_tasks`/`file_tasks` appends on every turn that mentions a topic. A
+  ledger that grows copies of itself is a ledger a wake will misread, and this is the same defect
+  family as the loop that rebuilt unlanded work.
+- [ ] **`push_record()` stages `channels/telegram/` only**, so `channels/conversation/*.md` grows
+  uncommitted until something else commits it (203 lines today). Not data loss — the file is on
+  disk — but the per-amigo conversation store is not actually versioned by the thing that writes it.
+
 ## Counted 2026-09-20 — 21 runs, and none of their work is missing
 
 - [x] 2026-09-20 — **The 21 `awaiting_review` runs are closed, and the count that named them was

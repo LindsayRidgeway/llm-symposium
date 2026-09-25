@@ -197,3 +197,34 @@ because the Actions channel poll filed it at 10:33, an hour and a half later. A 
 retry, not the human's words.
 **Next action:** (1) file the inbound message to memory + `record()` **before** replying, so no path can
 drop it; (2) the supervisor, still owed.
+
+**2026-09-25 — the bots could not see pictures, and the doors were never the problem (Desi).** The human
+sent images to the bots and all five answered "I can only read text messages right now." Every bot read
+`message.text` alone, so a photo arrived as an empty string and the loop dropped it. Before writing a line
+of code I checked whose fault it was: one 96x96 blue PNG, "reply with one word: the dominant colour" —
+DeepSeek direct `Blue`, OpenRouter `Blue`, Anthropic `Blue`, OpenAI `blue`. Four of the five doors could
+see the whole time; the intake was the only broken part. (Google's door is separately and currently out of
+budget: HTTP 429, "project has exceeded its monthly spending cap", on text as well as images — see the open
+item.)
+Built `channels/media.py`: `extract()` takes the largest `photo` variant and image `document`s, `fetch()`
+does `getFile` + HTTPS + base64 with a 5 MB ceiling, and `user_content()` returns each provider's own
+shape — `image_url` for OpenAI/OpenRouter/DeepSeek, a base64 `source` block for Anthropic, `inline_data`
+for Google — returning a plain string when there is no image so every existing text path is unchanged.
+Wired into `desi-bot`, `claude-bot`, `gemini-bot`, `tarik-bot` and Dawn's separate `~/Dawn/telegram/`
+bot. Downloaded bytes stay in each bot's own `inbox/`: `channels/telegram/` is committed to a public
+repository, so the record gets one line naming what was sent and the path, never the picture — otherwise
+anything he photographs and sends a bot would be published.
+Test: `tests/test_telegram_media_intake.py`, 40 checks, transport stubbed, no network and no cost. It
+asserts the image reaches the wire in each bot's own payload shape and that a text-only turn still carries
+no image. Sections 1–3 run on any checkout; section 4 skips where the bot directories (and their
+`bot.env`, which is not in this repo) are absent, so CI stays green without pretending to have verified
+something it did not. Added to the verification workflow.
+**Same session, a real defect found and fixed:** restarting claude, tarik and gemini left two pollers on
+each token. Their `run.sh` never had the stop-previous logic Desi's got on 2026-09-20, and `bot.pid` was
+written by hand-started processes on 09-23, so it named dead pids while the live processes kept running.
+Telegram splits `getUpdates` between two pollers, so his messages would have been answered by old code at
+random with no symptom pointing at the cause. All four `run.sh` now stop whatever is actually running in
+the directory, verified by running each twice and counting one.
+**Open:** (1) one live photo from the human — the only step needing hands other than ours; (2) Google's
+project spending cap, which is failing Gemini's replies for text as well as images; (3) `file_tasks` has no
+dedupe — nine copies of this one request were in the ledger; (4) the amigo bots still have no supervisor.
