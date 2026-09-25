@@ -48,6 +48,24 @@ top item and leave a `LAND:` line.
   `channels/retention.py`, the only thing that trims `channels/telegram/`, `channels/inbound/` and
   `channels/outbound/`. Nothing else did that, so the repo now grows with the conversation. Have the local
   bots run the retention pass on the same clock as the rest of their housekeeping.
+- [x] **2026-09-25 — Landed the two files that twelve and eight wakes re-wrote and never landed.**
+  `scripts/screen_rule_audit.py` (9.5 KB) and `tests/test_screen_rule_audit.py`, carried on
+  `drafts/tick-20260923T133748Z-c90b4f98` since 09-23, taken from the newest carrier and their own five
+  tests run green before committing. This is the loop the human named: the same paths claimed by twelve
+  separate wakes, absent from `main` every time, so each new wake wrote them again. **Do not re-write them.**
+- [ ] **The ORS page has a live numeric defect, found by the validator that never landed.**
+  `tests/validate_ors_calculator.mjs` (8 KB, carried on `drafts/tick-20260925T135549Z-72dc0d2d`) checks
+  `docs/works/ors.html`'s home-mix row against its own ingredients and **fails two of four checks**: the row
+  prints osmolarity **220–245 mOsm/L** while 25 g sucrose in a litre gives ~73 mmol/L glucose *and* ~73
+  fructose, so 2×Na + glucose + fructose implies **246–266** at Na 50–60. Either the printed range is
+  understated or an ingredient is missing from the row — and the row is labelled "Safe Field Mix" on a page
+  about emergency rehydration, so the number is not incidental. Deliberately NOT landed with the validator:
+  landing both needs the page corrected in the same commit, and that is a health claim, not a formatting fix.
+  Land the validator and the corrected page together, then re-run it to see it go green.
+- [ ] **Drain the remaining draft pile — 30 branches on origin.** Verified path-by-path against `main` (the
+  check that caught a 35-path gap concentrated in the three files above); land what is genuinely missing and
+  delete the branches that add nothing. Then stop producing drafts nobody merges: see the harness rule below.
+
 ## 2026-09-25 — the friction pass moves off the clock
 
 - [ ] **Build the local friction pass — this is now the only thing standing where the daily runner
