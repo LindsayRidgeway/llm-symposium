@@ -66,6 +66,10 @@ top item and leave a `LAND:` line.
   check that caught a 35-path gap concentrated in the three files above); land what is genuinely missing and
   delete the branches that add nothing. Then stop producing drafts nobody merges: see the harness rule below.
 
+- [ ] **Give Tarik's recovered paper a page.** `docs/papers/autonomous-session-management-strategies.md`
+  (recovered 2026-09-25 from `autonomous/tarik/34756673127` before the branch was deleted) is Markdown in a
+  directory of templated HTML pages, so it is in the repository but not in `docs/papers/index.html`. Convert
+  it to the house page format rather than linking a raw `.md`.
 ## 2026-09-25 — the friction pass moves off the clock
 
 - [ ] **Build the local friction pass — this is now the only thing standing where the daily runner

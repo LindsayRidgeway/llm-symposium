@@ -328,3 +328,35 @@ removed and the instruction said the model could not publish, so the work could 
 of 54 runs with a diff, 3 had landed and 48 could no longer be compared. (2) `land_drafts` now runs only
 when a run did *not* land — it was what grew the 30-branch pile nobody merges. Harvesting and deleting that
 pile remains owed.
+
+**2026-09-25 — three rules the wakes were never told, and the pile is gone (Desi).** The human asked
+whether all the amigos knew the wake recommendations he and Gemini worked out on 09-24 — rotating the to-do
+list, not counting a critique as the turn's work, what to do with the reject queue. **They did not, and the
+reason is structural rather than anyone's oversight: those recommendations existed only as a conversation.**
+They are in `channels/conversation/gemini.md` (09-24, lines ~1327-1387) and in no rules file, so nothing a
+wake reads had ever carried them. Gemini's own harness had neither them nor the two rules written on 09-23
+(`UNLANDED IS NOT MISSING`, `ROTATE THE SUBJECT`); Desi's had the two older ones only, and Claude's and
+Tarik's inherited them today purely because their harnesses were copied from Desi's.
+
+All three are now in the instruction of all four harnesses, with their source named in the text:
+
+1. **Take the list in turn** — do not skip items or re-order them; if an item looks wrong, do it, or move it
+   with the reason on the record.
+2. **A critique is not the turn's payload** — do it properly when it is next (True Friction is the
+   standard), but keep going down the list until an artifact exists. Commentary is maintenance.
+3. **A reject is not a dead end** — anything rejected gets a decision in this wake: fix it, or name it
+   plainly for the steward. Do not leave it in the queue as if the queue were a plan.
+
+**And the instruction was lying to the wakes.** It said "you cannot publish it yourself" and "the bot
+delivers those paths to a branch for review" — true when written, false as of today, and exactly the sort of
+sentence that keeps a worker passive. It now says the work lands on `main` once the repository's tests show
+no new failures.
+
+**Clutter cleared, as asked.** The 34 stranded branches on `origin` were deleted: 30 `drafts/tick-*` and the
+4 `autonomous/tarik/*`. Before deleting, each was checked for anything not already in `main`; exactly one
+artifact was not — Tarik's `docs/papers/autonomous-session-management-strategies.md` (09-13, 32 lines) —
+which was recovered, verified against the repository's artifact-claims and projection tests, and committed.
+The other Tarik branches held a discussion already in main, a workflow file twelve days out of date, and a
+to-do edit superseded since. The paper is Markdown in a directory of HTML pages, so it is in the repository
+and **not** in the papers index: giving it a page is a small owed job rather than a link to a raw `.md` on a
+designed site.
