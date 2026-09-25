@@ -28,7 +28,8 @@ Choosing the targets is a judgement and stays with whoever runs the screen; the 
 measures how much literature already joins each one. This is the "candidate-generation so the
 queue feeds itself" half of agenda item 7, made mechanical.
 
-Two defects, found by two clock runs on 2026-09-19, and what the screen now does about each:
+Two defects, found by two clock runs on 2026-09-19, one more found on 2026-09-23, and what the
+screen now does about each:
 
 **1. Names, not just symbols (`names`), and disease forms (`--forms`).** A symbol-only query
 against a thin disease returned 39 of 41 targets as "no title/abstract join", which is a
@@ -47,6 +48,20 @@ alone cannot: *no count can tell "a paper about the pair" from a coincidence of 
 every strict join now fetches its top documents (title, PMID, year) into the artefact, and any
 symbol of three characters or fewer is flagged `ambiguous_symbol` — the reader is told to open
 the hit before a "prior work" verdict is allowed to close a lead.
+
+**3. A failed count (-1) is not a row, and it is not a zero.** Europe PMC drops a request now and
+then; the failure is recorded as -1 so it can never be read as a real 0. Until 2026-09-23 the -1
+was handled at the *verdict* and then forgotten at the *summary*: such a row vanished from every
+band, so the unjoined band shrank and `control_check` divided by rows it had never scored. Both
+are the optimistic direction — a saturated condition reads as separable. Measured on
+`research/vulvodynia-screen.json` as it then stood: 44 of 128 rows carried a failed count (23 with
+no strict join but an unknown any-field, 21 with a failed strict query), the null-control rate was
+17/128 = 13% where the same screen's prose recorded 45/128 = 35% from a clean run, and **3 rows
+(`P2RY12`, `MGLL`, `SORT1`) printed "unjoined — a candidate, NOT a finding" on a strict query that
+had failed outright** — a failed search dressed as a promising lead, the one error this program
+exists to avoid. So: a row is *scored* only if both counts are real; unscored rows are kept out of
+every band and named in `failed_queries`; the control check divides by what it actually scored; and
+`verdict(0, -1)` now says QUERY FAILED instead of offering a candidate.
 
 Usage:
     python3 scripts/disease_screen.py ENDOMETRIOSIS targets.json --out research/endo-screen.json
@@ -230,8 +245,26 @@ def ambiguous(symbol: str) -> bool:
     return len(symbol.strip()) <= AMBIGUOUS_MAX_LEN
 
 
+def scored(r: dict) -> bool:
+    """True only if BOTH counts are real. A -1 is a failed search, not a zero.
+
+    A row with one -1 was silently dropped from every band before 2026-09-23, which shrank the
+    unjoined band and let `control_check` divide by rows it had never scored — the optimistic
+    error, on the band the program's whole output rests on. Such rows are excluded and named.
+    """
+    return r["strict"] >= 0 and r["any_field"] >= 0
+
+
+def failed_scopes(r: dict) -> list:
+    """Which of the row's two counts came back -1, for `failed_queries`."""
+    return [k for k in ("strict", "any_field") if r[k] < 0]
+
+
 def verdict(any_n: int, strict_n: int, ambiguous_symbol: bool = False) -> str:
-    if any_n < 0:
+    # Either count failing makes the pair unreadable. `any_n == 0, strict_n == -1` used to fall
+    # through to "unjoined — a candidate, NOT a finding": a failed strict query printed as a
+    # promising lead. Found 2026-09-23 on P2RY12, MGLL and SORT1 in the vulvodynia screen.
+    if any_n < 0 or strict_n < 0:
         return "QUERY FAILED — re-run this pair; do not read the number"
     if strict_n > 0:
         if ambiguous_symbol:
@@ -264,30 +297,51 @@ def control_check(control_rows: list, rows: list) -> str | None:
     """
     if not control_rows:
         return None
-    n = len(control_rows)
-    ctrl_zero = sum(1 for r in control_rows if r["strict"] == 0 and r["any_field"] == 0)
+    # Only scorable rows. A control whose query failed is not a control that scored something:
+    # reading its -1 as "scored other than unjoined" raised the alarm against the instrument
+    # instead of against the run, and inflating the denominator did the same for the real rows.
+    ctrl_ok = [r for r in control_rows if scored(r)]
+    n_failed = len(control_rows) - len(ctrl_ok)
+    tail = ("" if not n_failed else
+            f" ({n_failed} control quer{'y' if n_failed == 1 else 'ies'} failed with no count; "
+            f"it is not evidence either way — re-run it.)")
+    if not ctrl_ok:
+        return (f"none of the {len(control_rows)} strings that name nothing could be scored "
+                f"(their queries failed), so this run has no null and no band to compare against. "
+                f"Re-run before reading any count here.")
+    n = len(ctrl_ok)
+    ctrl_zero = sum(1 for r in ctrl_ok if r["strict"] == 0 and r["any_field"] == 0)
     if ctrl_zero < n:
-        bad = ", ".join(r["symbol"] for r in control_rows
+        bad = ", ".join(r["symbol"] for r in ctrl_ok
                         if not (r["strict"] == 0 and r["any_field"] == 0))
         return (f"{n - ctrl_zero} of {n} strings that name nothing scored something other than "
                 f"'unjoined' ({bad}) — the matching is not behaving as a plain string search. "
-                f"Treat every number in this screen as suspect until that is explained.")
-    if not rows:
-        return f"{ctrl_zero} of {n} nonsense strings scored 'unjoined'."
-    real_zero = sum(1 for r in rows if r["strict"] == 0 and r["any_field"] == 0)
-    rate = 100.0 * real_zero / len(rows)
+                f"Treat every number in this screen as suspect until that is explained.{tail}")
+    rows_ok = [r for r in rows if scored(r)]
+    unscored = len(rows) - len(rows_ok)
+    # The fraction is over what was scored, and it says how much was not: a rate computed over
+    # rows whose queries failed is the optimistic direction of error this line exists to prevent.
+    us = ("" if not unscored else
+          f" ({unscored} of {len(rows)} real targets could not be scored and are NOT in that "
+          f"fraction; see `failed_queries`.)")
+    if not rows_ok:
+        return (f"{ctrl_zero} of {n} nonsense strings scored 'unjoined', and no real target "
+                f"could be scored at all.{us}{tail}")
+    real_zero = sum(1 for r in rows_ok if r["strict"] == 0 and r["any_field"] == 0)
+    rate = 100.0 * real_zero / len(rows_ok)
     if real_zero == 0:
-        return (f"{ctrl_zero} of {n} strings that name nothing scored 'unjoined', and no real "
-                f"target did — here the band separates a gene from a string that names nothing.")
+        return (f"{ctrl_zero} of {n} strings that name nothing scored 'unjoined', and no scorable "
+                f"real target did — here the band separates a gene from a string that names "
+                f"nothing.{us}{tail}")
     if rate >= 25.0:
         return (f"{ctrl_zero} of {n} strings that name nothing scored 'unjoined', and so did "
-                f"{real_zero} of {len(rows)} real targets ({rate:.0f}%). A string that names "
-                f"nothing scores exactly like a gene, so at this density the unjoined band "
-                f"measures the condition's literature, not the absence of a link.")
+                f"{real_zero} of {len(rows_ok)} scorable real targets ({rate:.0f}%). A string "
+                f"that names nothing scores exactly like a gene, so at this density the unjoined "
+                f"band measures the condition's literature, not the absence of a link.{us}{tail}")
     return (f"{ctrl_zero} of {n} strings that name nothing scored 'unjoined', and so did "
-            f"{real_zero} of {len(rows)} real targets ({rate:.0f}%). The two are separable at "
-            f"this density, but the band is not free of noise either — read every row before "
-            f"treating a zero as a gap.")
+            f"{real_zero} of {len(rows_ok)} scorable real targets ({rate:.0f}%). The two are "
+            f"separable at this density, but the band is not free of noise either — read every "
+            f"row before treating a zero as a gap.{us}{tail}")
 
 
 def floor_warning(strict_papers: int) -> str | None:
@@ -317,19 +371,24 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         sym = t["symbol"]
         # A target is a symbol AND the names a paper would actually use for it.
         names = [sym] + [n for n in t.get("names", []) if n]
-        best = None  # (strict, any_field, name, disease form)
+        best = None  # (both counts real, strict, any_field, name, disease form)
         for name in names:
             for form in forms:
-                cand = (strict(name, form), any_field(name, form), name, form)
-                if best is None or cand[:2] > best[:2]:
+                s, a = strict(name, form), any_field(name, form)
+                # A candidate whose counts BOTH came back is preferred over one that failed:
+                # ranking on (strict, any_field) alone let a failed any-field (-1) ride on a
+                # higher strict count and overwrite a real number with a -1.
+                cand = (s >= 0 and a >= 0, s, a, name, form)
+                if best is None or cand[:3] > best[:3]:
                     best = cand
-        s, a, name, form = best
+        _, s, a, name, form = best
         # What the plain symbol-only query would have reported, kept so a reader can see the
         # difference a name makes rather than trusting the maximum on its own.
         sym_s, sym_a = strict(sym, disease), any_field(sym, disease)
         ambiguous_symbol = ambiguous(sym)
         score = ot_score(sym, efo) if use_ot else None
         ctl = is_control(t)
+        fs = [k for k, v in (("strict", s), ("any_field", a)) if v < 0]
         return {
             "category": t.get("category", ""),
             "symbol": sym,
@@ -340,6 +399,8 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
             "symbol_only_any_field": sym_a,
             "matched_name": name,
             "matched_disease_form": form,
+            # Which of this row's two counts failed (-1). A scored row has an empty list.
+            "failed_scopes": fs,
             "naming_sensitive": (name != sym or form != disease),
             "ambiguous_symbol": ambiguous_symbol,
             # A join is only evidence if you can open it. Empty unless strict > 0.
@@ -360,7 +421,12 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
     # is reported on its own. It has already done its work by being scored at the same time.
     ctrl_rows = [r for r in rows if r["is_control"]]
     real_rows = [r for r in rows if not r["is_control"]]
-    false_gaps = [r["symbol"] for r in real_rows
+    # Bands are claims about the biology, so only rows with BOTH counts real may enter them.
+    # An unscored row (a -1) is a failed search, not a zero: letting one drop silently out of
+    # the bands is how the unjoined band shrinks and a saturated condition reads as separable.
+    scored_rows = [r for r in real_rows if scored(r)]
+    failed_rows = [r for r in real_rows if not scored(r)]
+    false_gaps = [r["symbol"] for r in scored_rows
                   if r["naming_sensitive"] and r["symbol_only_strict"] == 0 and r["strict"] > 0]
     return {
         "disease": disease,
@@ -381,25 +447,43 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                  "paper about the pair from a coincidence of English. A row marked "
                  "`\"control\": true` is a string that names nothing: it is scored, kept out of "
                  "every count and band, and reported in `controls` with a `control_check` line, "
-                 "so the reader can see whether the unjoined band separates a gene from noise."),
+                 "so the reader can see whether the unjoined band separates a gene from noise. "
+                 "`strict` or `any_field` of -1 means that query FAILED: the row is not a zero, "
+                 "is excluded from every band, and is listed in `failed_queries`; compare "
+                 "`n_scored` with `n_targets` before calling a band complete."),
         "n_targets": len(real_rows),
         "n_controls": len(ctrl_rows),
+        # How much of the list this screen actually measured, said plainly. Before 2026-09-23
+        # the artefact printed `n_targets` alone, so a run with 44 failed rows read as a
+        # complete screen of 128.
+        "n_scored": len(scored_rows),
+        "n_failed": len(failed_rows),
+        "failed_queries": [{"symbol": r["symbol"], "failed_scopes": r["failed_scopes"],
+                            "any_field": r["any_field"], "strict": r["strict"]}
+                           for r in failed_rows],
+        "failed_queries_note": (None if not failed_rows else
+                                f"{len(failed_rows)} of {len(real_rows)} real targets carry a "
+                                f"failed count (-1, listed in `failed_queries` with the scope "
+                                f"that failed) and are excluded from every band below: a failed "
+                                f"search is not a zero, and it is not an absence of a link. "
+                                f"Re-run those rows before quoting the bands as complete."),
         # Every band where strict == 0 is candidate territory, and the three bands are
         # different claims. The summary used to print only the first two, which hid the one
         # that matters most on a dense disease — nodes co-mentioned but never studied.
-        "unjoined": [r["symbol"] for r in real_rows if r["strict"] == 0 and r["any_field"] == 0],
-        "incidental_any_field_only": [r["symbol"] for r in real_rows
+        "unjoined": [r["symbol"] for r in scored_rows
+                     if r["strict"] == 0 and r["any_field"] == 0],
+        "incidental_any_field_only": [r["symbol"] for r in scored_rows
                                       if r["strict"] == 0 and 0 < r["any_field"] <= INCIDENTAL_MAX],
-        "no_title_abstract_join": [r["symbol"] for r in real_rows if r["strict"] == 0],
-        "no_strict_join_but_discussed": [r["symbol"] for r in real_rows
+        "no_title_abstract_join": [r["symbol"] for r in scored_rows if r["strict"] == 0],
+        "no_strict_join_but_discussed": [r["symbol"] for r in scored_rows
                                          if r["strict"] == 0 and r["any_field"] > INCIDENTAL_MAX],
-        "joined_in_title_or_abstract": [r["symbol"] for r in real_rows if r["strict"] > 0],
+        "joined_in_title_or_abstract": [r["symbol"] for r in scored_rows if r["strict"] > 0],
         # The rows a symbol-only screen would have called unjoined but which are joined under a
         # name the literature actually uses. This is the false-gap count, and it belongs in the
         # artefact: the whole defect is that a false gap is indistinguishable from a real one.
         "false_gaps_repaired_by_names": false_gaps,
         # The rows a short symbol would have closed as "prior work" without anyone reading them.
-        "ambiguous_joins_to_read": [r["symbol"] for r in real_rows
+        "ambiguous_joins_to_read": [r["symbol"] for r in scored_rows
                                     if r["strict"] > 0 and r["ambiguous_symbol"]],
         "density_floor": FLOOR_STRICT,
         "density_warning": floor_warning(dis_strict),
@@ -429,14 +513,16 @@ def density(conditions: list) -> list:
     rows = []
     for c in conditions:
         strict_n = epmc(f'(TITLE:"{c}" OR ABSTRACT:"{c}")')
+        any_n = epmc(f'"{c}"')
         rows.append({
             "condition": c,
-            "any_field": epmc(f'"{c}"'),
+            "any_field": any_n,
             "strict": strict_n,
             "trials": trials(c),
-            "band": ("below floor — the unjoined band saturates; work by reading, not by screen"
-                     if 0 <= strict_n < FLOOR_STRICT else
-                     "screenable" if strict_n >= 0 else "query failed"),
+            "band": ("query failed — no count; re-run before reading this condition"
+                     if (strict_n < 0 or any_n < 0) else
+                     "below floor — the unjoined band saturates; work by reading, not by screen"
+                     if strict_n < FLOOR_STRICT else "screenable"),
         })
     rows.sort(key=lambda r: r["strict"])
     return rows
@@ -516,9 +602,13 @@ def main() -> int:
         with open(out, "w") as fh:
             json.dump(res, fh, indent=1)
             fh.write("\n")
-    print(f"{disease}: {res['n_targets']} targets in {res['seconds']}s; "
+    print(f"{disease}: {res['n_scored']} of {res['n_targets']} targets scored in "
+          f"{res['seconds']}s; "
           f"disease papers any_field={res['disease_papers_any_field']}, "
           f"strict={res['disease_papers_strict']}, trials={res['registered_trials_for_disease']}\n")
+    if res["n_failed"]:
+        print(f"{res['n_failed']} real targets carry a FAILED count (-1) and are excluded from "
+              f"every band: {', '.join(r['symbol'] for r in res['failed_queries'])}\n")
     print("%-10s %-8s %-8s %s" % ("symbol", "any", "strict", "verdict"))
     for r in sorted(res["targets"], key=lambda r: (r["strict"], r["any_field"])):
         print("%-10s %-8s %-8s %s" % (r["symbol"] + ("*" if r.get("is_control") else ""),
@@ -541,7 +631,8 @@ def main() -> int:
               f"Open these before closing the lead:")
         for h in hits:
             print(f"  PMID {h['pmid']} ({h['year']}): {h['title']}")
-    print(f"\nno title/abstract join (all bands): {', '.join(res['no_title_abstract_join']) or '(none)'}")
+    print(f"\nno title/abstract join (all bands), over {res['n_scored']} scored rows: "
+          f"{', '.join(res['no_title_abstract_join']) or '(none)'}")
     print(f"  of those, fully unjoined (0/0): {', '.join(res['unjoined']) or '(none)'}")
     print(f"  of those, incidental only (1-5): {', '.join(res['incidental_any_field_only']) or '(none)'}")
     print(f"  of those, co-mentioned but never studied: "

@@ -277,5 +277,109 @@ class NullControlTests(unittest.TestCase):
         self.assertEqual(res["n_controls"], 0)
 
 
+class FailedCountTests(unittest.TestCase):
+    """A failed search (-1) is not a zero, and it is not a row.
+
+    Added 2026-09-23 from `research/vulvodynia-screen.json` as it then stood: 44 of 128 rows
+    carried a failed count. A -1 was already kept distinct from a 0 in `verdict`, but the
+    *summary* dropped those rows out of every band, so the unjoined band shrank and
+    `control_check` divided by rows it had never scored. Both errors point the same way — a
+    saturated condition reads as separable, and three rows (P2RY12, MGLL, SORT1) printed
+    "unjoined — a candidate, NOT a finding" on a strict query that had failed outright.
+    """
+
+    def _run(self, targets, counts):
+        def any_fn(sym, dis):
+            return counts[sym][0]
+
+        def strict_fn(sym, dis):
+            return counts[sym][1]
+
+        with _StubNet(any_fn=any_fn, strict_fn=strict_fn, epmc_fn=lambda t: 2000):
+            return ds.run("endometriosis", targets, use_ot=False)
+
+    def test_a_failed_strict_query_is_not_offered_as_a_candidate(self):
+        """`any_field == 0, strict == -1` used to read "unjoined ... NOT a finding"."""
+        v = ds.verdict(0, -1)
+        self.assertIn("QUERY FAILED", v)
+        self.assertNotIn("unjoined", v.lower())
+        self.assertNotIn("candidate", v.lower())
+
+    def test_a_row_with_a_failed_count_stays_out_of_every_band(self):
+        res = self._run([{"symbol": "GOOD"}, {"symbol": "HALF"}, {"symbol": "DEAD"}],
+                        {"GOOD": (0, 0), "HALF": (-1, 0), "DEAD": (-1, -1)})
+        self.assertEqual(res["unjoined"], ["GOOD"])
+        self.assertEqual(res["no_title_abstract_join"], ["GOOD"])
+        self.assertEqual(res["n_scored"], 1)
+        self.assertEqual(res["n_failed"], 2)
+        self.assertEqual(res["n_targets"], 3)          # submitted, not scored
+        self.assertEqual(res["failed_queries"],
+                         [{"symbol": "HALF", "failed_scopes": ["any_field"],
+                           "any_field": -1, "strict": 0},
+                          {"symbol": "DEAD", "failed_scopes": ["strict", "any_field"],
+                           "any_field": -1, "strict": -1}])
+        self.assertIn("Re-run those rows", res["failed_queries_note"])
+        # The rows are still visible, with their verdicts, rather than silently absent.
+        for sym in ("HALF", "DEAD"):
+            row = next(r for r in res["targets"] if r["symbol"] == sym)
+            self.assertIn("QUERY FAILED", row["verdict"])
+
+    def test_no_failed_rows_means_the_note_is_silent(self):
+        res = self._run([{"symbol": "GOOD"}], {"GOOD": (0, 0)})
+        self.assertEqual(res["n_scored"], 1)
+        self.assertEqual(res["n_failed"], 0)
+        self.assertEqual(res["failed_queries"], [])
+        self.assertIsNone(res["failed_queries_note"])
+
+    def test_the_control_fraction_divides_by_what_was_scored(self):
+        """3 scorable zeros + 1 unscorable row is 100% of 3, not 75% of 4."""
+        targets = [{"symbol": "G%d" % i} for i in range(3)]
+        targets += [{"symbol": "BAD"}, {"symbol": "XQZWKJ", "control": True}]
+        counts = {s: (0, 0) for s in ("G0", "G1", "G2", "XQZWKJ")}
+        counts["BAD"] = (-1, 0)
+        res = self._run(targets, counts)
+        self.assertIn("3 of 3 scorable real targets (100%)", res["control_check"])
+        self.assertIn("1 of 4 real targets could not be scored", res["control_check"])
+        self.assertIn("measures the condition's literature", res["control_check"])
+
+    def test_a_failed_control_is_not_an_alarm_about_the_matching(self):
+        """A -1 control is evidence about the run, not about the string search."""
+        res = self._run([{"symbol": "SCN9A"},
+                         {"symbol": "XQZWKJ", "control": True},
+                         {"symbol": "QQQQQQ", "control": True}],
+                        {"SCN9A": (3, 0), "XQZWKJ": (0, 0), "QQQQQQ": (-1, -1)})
+        self.assertNotIn("suspect", res["control_check"])
+        self.assertIn("control query failed", res["control_check"])
+        self.assertIn("not evidence either way", res["control_check"])
+
+    def test_no_scorable_control_means_no_null_and_no_claim(self):
+        res = self._run([{"symbol": "SCN9A"}, {"symbol": "XQZWKJ", "control": True}],
+                        {"SCN9A": (3, 0), "XQZWKJ": (-1, 0)})
+        self.assertIn("no null", res["control_check"])
+        self.assertNotIn("separates a gene", res["control_check"])
+
+    def test_a_failed_spelling_does_not_overwrite_a_real_count(self):
+        """Ranking on (strict, any_field) alone let a -1 ride in on a higher strict count."""
+        def strict_fn(name, form):
+            return 9 if name == "BAD NAME" else 5
+
+        def any_fn(name, form):
+            return -1 if name == "BAD NAME" else 100
+
+        with _StubNet(any_fn=any_fn, strict_fn=strict_fn, epmc_fn=lambda t: 2000):
+            res = ds.run("endometriosis",
+                         [{"symbol": "GOOD", "names": ["BAD NAME"]}], use_ot=False)
+        row = res["targets"][0]
+        self.assertEqual((row["strict"], row["any_field"], row["matched_name"]), (5, 100, "GOOD"))
+        self.assertEqual(row["failed_scopes"], [])
+        self.assertEqual(res["n_scored"], 1)
+
+    def test_density_says_a_failed_count_is_a_failed_count(self):
+        with _StubNet(epmc_fn=lambda t: -1, trials_fn=lambda c: 0):
+            rows = ds.density(["vulvodynia"])
+        self.assertEqual(rows[0]["band"], "query failed — no count; re-run before reading this "
+                                          "condition")
+
+
 if __name__ == "__main__":
     unittest.main()
