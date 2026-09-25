@@ -84,11 +84,20 @@ def retire_closed(rows: list[dict], open_ids: set[str]) -> list[str]:
     if not RISKS.exists():
         return retired
     lines = RISKS.read_text(encoding="utf-8").splitlines(keepends=False)
-    # What's already archived (by id) so we never duplicate.
-    arch_ids = set()
+    # What's already archived, keyed by (id, need) so we never duplicate — but
+    # also never silently drop. Keying on id alone loses a closed row whose id
+    # was recycled: on 2026-09-25 the live R-006 ("actuator diff-path parser
+    # fails open on quoted paths") collided with an archived R-006 from
+    # 2026-09-05 and vanished on retire. A reused id with different content is a
+    # different risk and must be filed.
+    arch_rows = set()
     if ARCHIVE_DIR.exists():
         for p in ARCHIVE_DIR.glob("*.md"):
-            arch_ids.update(re.findall(r"^\| (R-[^ ]+) \|", p.read_text(encoding="utf-8"), re.MULTILINE))
+            for line in p.read_text(encoding="utf-8").splitlines():
+                if line.startswith("| R-"):
+                    cells = [c.strip() for c in line.strip("|").split("|")]
+                    if cells:
+                        arch_rows.add((cells[0], cells[1] if len(cells) > 1 else ""))
 
     header_idx = find_header(lines)
     # preamble = everything before the table header (purpose, title).
@@ -132,7 +141,7 @@ def retire_closed(rows: list[dict], open_ids: set[str]) -> list[str]:
     # the archive is the institutional memory, and is kept indefinitely but
     # organized so old entries stay navigable (one readable file per year).
     if closed_rows:
-        new_arch = [r for r in closed_rows if r["id"] not in arch_ids]
+        new_arch = [r for r in closed_rows if (r["id"], r["risk"]) not in arch_rows]
         if new_arch:
             # Group by year from the fix date in Status, else the retire date.
             today = datetime.date.today()

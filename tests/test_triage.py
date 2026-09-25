@@ -90,6 +90,22 @@ def test_patch_allowed_blocks_workflow_path():
     assert "blocked channel-originated patch path" in reason
 
 
+def test_patch_allowed_blocks_quoted_workflow_path():
+    """Git applies a quoted header even when quoting was unnecessary, so a
+    quoted blocked path must still be blocked (R-006)."""
+    text = (
+        'diff --git "a/.github/workflows/channel-poll.yml" "b/.github/workflows/channel-poll.yml"\n'
+        '--- "a/.github/workflows/channel-poll.yml"\n'
+        '+++ "b/.github/workflows/channel-poll.yml"\n'
+        "@@ -1 +1 @@\n"
+        "-old\n"
+        "+new\n"
+    )
+    ok, reason = triage._patch_allowed(text)
+    assert not ok
+    assert "blocked channel-originated patch path" in reason
+
+
 def _run_all():
     import traceback
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

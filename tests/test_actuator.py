@@ -204,5 +204,52 @@ class ActuatorTest(unittest.TestCase):
         self.assertTrue((repo / "actuator" / "applied" / "b.patch").exists())
 
 
+    def test_self_modification_guard_catches_quoted_path(self):
+        """Git accepts and applies a C-quoted header even when quoting was not
+        required, so '"a/actuator/apply.py"' edits the real engine. The guard
+        must read the quoted spelling or it fails open (R-006, found by Tarik)."""
+        repo = make_repo()
+        body = (
+            'diff --git "a/actuator/apply.py" "b/actuator/apply.py"\n'
+            '--- "a/actuator/apply.py"\n'
+            '+++ "b/actuator/apply.py"\n'
+            "@@ -1,2 +1,3 @@\n"
+            " #!/usr/bin/env python3\n"
+            "+# tampered-by-quoted-path\n"
+            " import datetime\n"
+        )
+        drop_request(repo, "quoted-evil.patch", body)
+        r = run_actuator(repo)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("self-modification", r.stdout)
+        self.assertTrue((repo / "actuator" / "rejected" / "quoted-evil.patch").exists())
+        self.assertNotIn("tampered-by-quoted-path", (repo / "actuator" / "apply.py").read_text(encoding="utf-8"))
+
+    def test_touched_files_reads_quoted_spaced_and_escaped_paths(self):
+        """The header scanner unquotes git's C-style paths, so quoted spellings
+        and paths that legitimately contain spaces are attributed to the real
+        file (R-006)."""
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("symposium_apply", APPLY_PY)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        self.assertEqual(
+            mod.touched_files('diff --git "a/actuator/apply.py" "b/actuator/apply.py"\n'),
+            ["actuator/apply.py"],
+        )
+        self.assertEqual(
+            mod.touched_files('diff --git "a/docs/my file.md" "b/docs/my file.md"\n'),
+            ["docs/my file.md"],
+        )
+        # Non-ASCII bytes are octal-escaped under core.quotepath.
+        self.assertEqual(
+            mod.touched_files('diff --git "a/docs/caf\\303\\251.md" "b/docs/caf\\303\\251.md"\n'),
+            ["docs/caf\u00e9.md"],
+        )
+        # A removal line inside a hunk ('--- text') must not be read as a header.
+        self.assertEqual(mod.touched_files("--- old line\n+++ a/real.py\n"), ["real.py"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

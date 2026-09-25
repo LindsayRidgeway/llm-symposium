@@ -16,7 +16,6 @@
 
 | ID | Risk / need | Flags (finder) | Status | Owner (= finder, per self-assignment) |
 |----|-------------|-----------|--------|-------|
-| R-006 | Actuator diff-path parser fails open on quoted paths (`apply.py:touched_files`) | Tarik (2026-09-20) | Open | Desi (master repair-amigo) |
 
 **Working rule (assignment):**
 - A subsystem issue with a **known owner** → that amigo fixes it. The owner knows

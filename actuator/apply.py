@@ -78,6 +78,100 @@ def _canonical(path: str) -> str:
         return resolved.as_posix()
 
 
+_C_ESCAPES = {"a": 7, "b": 8, "f": 12, "n": 10, "r": 13, "t": 9, "v": 11, "\\": 92, '"': 34}
+
+
+def _unquote_git_path(token: str) -> str:
+    """Decode a git C-style quoted path token, e.g. '"a/file name.py"'.
+
+    Git writes a diff header path as a C-quoted string whenever the path holds
+    a space, a quote, a control byte or (under the default core.quotepath) a
+    non-ASCII byte — but it *accepts* the quoted spelling even when quoting was
+    not required. A submitted patch can therefore write the engine's path as
+    "a/actuator/apply.py" and have git apply it. The scanner must read the
+    quoted form too, or the self-modification guard fails open (R-006).
+    """
+    if len(token) < 2 or token[0] != '"' or token[-1] != '"':
+        return token
+    body = token[1:-1]
+    out = bytearray()
+    i = 0
+    while i < len(body):
+        c = body[i]
+        if c != "\\":
+            out.extend(c.encode("utf-8"))
+            i += 1
+            continue
+        i += 1
+        if i >= len(body):
+            break
+        esc = body[i]
+        i += 1
+        if esc in _C_ESCAPES:
+            out.append(_C_ESCAPES[esc])
+        elif esc in "01234567":
+            digits = esc
+            while i < len(body) and len(digits) < 3 and body[i] in "01234567":
+                digits += body[i]
+                i += 1
+            out.append(int(digits, 8) & 0xFF)
+        else:
+            out.extend(esc.encode("utf-8"))
+    return out.decode("utf-8", "surrogateescape")
+
+
+def _quote_end(text: str, start: int) -> int:
+    """Index just past the closing quote of the C-quoted string at ``start``."""
+    i = start + 1
+    while i < len(text):
+        if text[i] == "\\":
+            i += 2
+            continue
+        if text[i] == '"':
+            return i + 1
+        i += 1
+    return len(text)
+
+
+def _header_tokens(line: str) -> list[str]:
+    """The two path tokens of a 'diff --git <src> <dst>' line.
+
+    Each token is either a C-quoted string (which may contain spaces) or a run
+    of non-space bytes. Nothing after the second token is read.
+    """
+    tokens: list[str] = []
+    i = len("diff --git ")
+    while i < len(line) and len(tokens) < 2:
+        if line[i] == " ":
+            i += 1
+            continue
+        if line[i] == '"':
+            j = _quote_end(line, i)
+            tokens.append(line[i:j])
+            i = j
+        else:
+            j = i
+            while j < len(line) and line[j] != " ":
+                j += 1
+            tokens.append(line[i:j])
+            i = j
+    return tokens
+
+
+def _as_repo_path(token: str, *, require_ab: bool) -> str | None:
+    """Unquote a header token and strip its a/ or b/ prefix.
+
+    With ``require_ab`` (used for ---/+++ fallback lines, whose 'a/' or 'b/'
+    prefix is what distinguishes them from a removed line that merely begins
+    with '--'), a token without the prefix is rejected as None.
+    """
+    path = _unquote_git_path(token)
+    for prefix in ("a/", "b/"):
+        if path.startswith(prefix):
+            return path[len(prefix):]
+    return None if require_ab else path
+
+
 def touched_files(patch_text: str) -> list[str]:
     """Repo-relative paths of the files a patch touches (from diff headers).
 
@@ -85,18 +179,28 @@ def touched_files(patch_text: str) -> list[str]:
     collapse to 'actuator/apply.py', so the self-modification guard cannot be
     dodgeable by path tricks and the verifier never touches a path outside
     the repository. Both source and destination paths are inspected so deletion
-    or renaming of protected files cannot evade the guard.
+    or renaming of protected files cannot evade the guard. Git's C-quoted
+    spellings — including '"a/actuator/apply.py"', which git accepts and applies
+    even though it need not quote — are unquoted first, so quoting cannot hide a
+    touched path either (R-006).
     """
     files: list[str] = []
-    for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.MULTILINE):
-        for p in (m.group(1), m.group(2)):
-            if p not in ("dev/null", "/dev/null") and p not in files:
-                files.append(p)
+
+    def add(path: str | None) -> None:
+        if path and path not in ("dev/null", "/dev/null") and path not in files:
+            files.append(path)
+
+    for m in re.finditer(r"^diff --git (.*)$", patch_text, re.MULTILINE):
+        for token in _header_tokens(m.group(0)):
+            add(_as_repo_path(token, require_ab=False))
     if not files:
-        for m in re.finditer(r"^(?:---|\+\+\+) [ab]/(\S+)\s*$", patch_text, re.MULTILINE):
-            p = m.group(1)
-            if p not in ("dev/null", "/dev/null") and p not in files:
-                files.append(p)
+        for m in re.finditer(r"^(?:---|\+\+\+) (.*)$", patch_text, re.MULTILINE):
+            rest = m.group(1)
+            if rest.startswith('"'):
+                token = rest[: _quote_end(rest, 0)]
+            else:
+                token = re.split(r"[\t ]", rest, maxsplit=1)[0]
+            add(_as_repo_path(token, require_ab=True))
     return [_canonical(p) for p in files]
 
 

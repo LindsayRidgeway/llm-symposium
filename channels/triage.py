@@ -133,13 +133,101 @@ def append_action(channel: str, identity: str, sender: str, source_path: str, te
         )
 
 
+_C_ESCAPES = {"a": 7, "b": 8, "f": 12, "n": 10, "r": 13, "t": 9, "v": 11, "\\": 92, '"': 34}
+
+
+def _unquote_git_path(token: str) -> str:
+    """Decode a git C-style quoted path token, e.g. '"b/file name.py"'.
+
+    Git accepts a quoted header path even when quoting was not required, so a
+    channel-submitted patch can spell a blocked path in quotes; it stays blocked
+    only if this is read. See R-006.
+    """
+    if len(token) < 2 or token[0] != '"' or token[-1] != '"':
+        return token
+    body = token[1:-1]
+    out = bytearray()
+    i = 0
+    while i < len(body):
+        c = body[i]
+        if c != "\\":
+            out.extend(c.encode("utf-8"))
+            i += 1
+            continue
+        i += 1
+        if i >= len(body):
+            break
+        esc = body[i]
+        i += 1
+        if esc in _C_ESCAPES:
+            out.append(_C_ESCAPES[esc])
+        elif esc in "01234567":
+            digits = esc
+            while i < len(body) and len(digits) < 3 and body[i] in "01234567":
+                digits += body[i]
+                i += 1
+            out.append(int(digits, 8) & 0xFF)
+        else:
+            out.extend(esc.encode("utf-8"))
+    return out.decode("utf-8", "surrogateescape")
+
+
+def _quote_end(text: str, start: int) -> int:
+    """Index just past the closing quote of the C-quoted string at ``start``."""
+    i = start + 1
+    while i < len(text):
+        if text[i] == "\\":
+            i += 2
+            continue
+        if text[i] == '"':
+            return i + 1
+        i += 1
+    return len(text)
+
+
+def _git_header_tokens(text: str) -> list[str]:
+    """The two path tokens that follow 'diff --git ', quoted or not."""
+    tokens: list[str] = []
+    i = 0
+    while i < len(text) and len(tokens) < 2:
+        if text[i] == " ":
+            i += 1
+            continue
+        if text[i] == '"':
+            j = _quote_end(text, i)
+            tokens.append(text[i:j])
+            i = j
+        else:
+            j = i
+            while j < len(text) and text[j] != " ":
+                j += 1
+            tokens.append(text[i:j])
+            i = j
+    return tokens
+
+
 def _touched_files(patch_text: str) -> list[str]:
+    """Destination paths a patch touches, read through git's quoting.
+
+    Quoted spellings ('"b/.github/..."') are unquoted before the block list is
+    applied, so the blocked-prefix check cannot be dodged by quoting (R-006).
+    """
     files: list[str] = []
-    for m in re.finditer(r"^diff --git a/(\S+) b/(\S+)\s*$", patch_text, re.M):
-        files.append(m.group(2))
+    for m in re.finditer(r"^diff --git (.*)$", patch_text, re.M):
+        tokens = _git_header_tokens(m.group(1))
+        if len(tokens) == 2:
+            dest = _unquote_git_path(tokens[1])
+            files.append(dest[2:] if dest.startswith("b/") else dest)
     if not files:
-        for m in re.finditer(r"^\+\+\+ b/(\S+)\s*$", patch_text, re.M):
-            files.append(m.group(1))
+        for m in re.finditer(r"^\+\+\+ (.*)$", patch_text, re.M):
+            rest = m.group(1)
+            if rest.startswith('"'):
+                rest = rest[: _quote_end(rest, 0)]
+            else:
+                rest = re.split(r"[\t ]", rest, maxsplit=1)[0]
+            dest = _unquote_git_path(rest)
+            if dest.startswith("b/"):
+                files.append(dest[2:])
     return files
 
 
