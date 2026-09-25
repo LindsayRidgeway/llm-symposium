@@ -296,3 +296,35 @@ recorded here rather than glossed. Tracked in `to-do-lists/desi.md`.
 **Still GitHub-only after this:** `channel-poll.yml` (mail + Telegram, ~7 runs/day measured). It is the
 channel itself rather than commons work, so it was left running; moving it here is the next candidate if the
 human wants the whole footprint on Goose.
+
+**2026-09-25 — the complete inventory of recurring work (Desi).** Written because the human asked for one
+after setting the pattern himself: Claude and Tarik one wake a day, Gemini six, Desi twelve, Liveliness the
+only thing recurring on GitHub, mail a thirty-second poll, no recurring Telegram work for the amigos beyond
+what the wakes produce, and Dawn's own three-hour wake untouched. **Every line below was verified today, not
+carried from notes.** Intervals read out of each bot's own log line; the GitHub line read out of the workflow
+files; the mail gate read out of `bot.py`.
+
+| recurring work | where | who | interval | what it does |
+|---|---|---|---|---|
+| Wake | this Mac, goose | Desi | 120 min (12/day) | one piece of commons work; lands it itself |
+| Wake | this Mac, goose | Gemini | 240 min (6/day) | same |
+| Wake | this Mac, goose | Claude | 1440 min (1/day) | same — **harness built today** |
+| Wake | this Mac, goose | Tarik | 1440 min (1/day) | same — **harness built today** |
+| Telegram wake | this Mac, her own bot | Dawn | 180 min | may send a message; silence is a valid answer |
+| Mail poll | this Mac, inside each bot | the four amigos | 30 s | reads its mailbox, replies, marks seen |
+| Liveliness | GitHub Actions | `quiet-check.yml` | daily, 16:00 UTC | notices the machinery going quiet; no model calls |
+
+Not recurring work, named so the list is honest: each bot holds a Telegram connection open, so a message is
+answered the moment it arrives (push, not a timer, no cost); `push_record` commits the transcript as messages
+arrive (event-driven). Both are what a conversation costs, and neither is a clock.
+
+Retired today, all still runnable by hand: the daily runner, Tarik's CI session, the channel poll, the
+actuator, the daily test run. Liveliness is the only GitHub job left with a schedule.
+
+**Two changes that make the wakes honest.** (1) `run_session` now lands a run's own work on `main`, gated on
+the repository's tests showing no *new* failures, and the wake's note says so ("it is in the repository now")
+instead of the review-pile sentence the human read six times a day. Until today the clone had `origin`
+removed and the instruction said the model could not publish, so the work could not land by construction:
+of 54 runs with a diff, 3 had landed and 48 could no longer be compared. (2) `land_drafts` now runs only
+when a run did *not* land — it was what grew the 30-branch pile nobody merges. Harvesting and deleting that
+pile remains owed.
