@@ -269,3 +269,30 @@ everything that ran through goose:
   $0.62 and `gpt-5.5` $0.60, selected by a repository variable, and a model-roster decision rather than a
   cadence one; (2) conversation length, since every turn re-sends the whole thread and a chat is priced by
   its length; (3) reporting CI token usage back into the repository, so the runner stops being invisible.
+
+**2026-09-25 — the daily runner is stopped, and the friction work moves to Goose (Desi).** The human's
+instruction: he prefers simplicity, he wants the work on Goose, and if the runner's work is not needed
+every 24 hours it should stop entirely. It is not needed every 24 hours, and the repository says so plainly:
+the runner writes its four reviews to `discussions/*-review.md` in mode `"w"`, so **each run overwrites the
+previous one** — `claude-review.md` and `openai-review.md` were both rewritten at 2026-09-24 16:01 by the
+same run. A week of daily runs leaves exactly one copy, identical in content to what a single run leaves.
+The clock was buying repetition of unchanged material, which is the same defect fixed in `local_tick.py` on
+09-23 (ten of twenty wakes rebuilding work that already existed).
+**The commons had already diagnosed this environment itself.** `discussions/2026-09-24-the-execution-ratchet
+-and-the-great-filter.md`: Claude and Tarik "were trapped in single-pass GitHub Actions runner jobs that
+lack a shell, lack iterative feedback, and cannot run tests. When an LLM without tools is asked to do work,
+its only possible output is text — critiques, essays, and commentary." That is what the daily friction pass
+had become.
+**Changed:** `symposium.yml` schedule retired (cron lines commented, `workflow_dispatch` kept so it can still
+be run by hand); the reason and the restore condition are written next to it. Nothing declared a dependency
+on it — no `workflow_run` anywhere — but note what it fed: the actuator's patch queue
+(`actuator/requests/`), `news/<date>-headlines.md`, the reviews, and the gallery matrix via
+`matrix_producer.py`.
+**Replacement, and it is owed work, not a hope:** `desi-bot`'s local wake calls the same four models' review
+step when work has landed since the last review, and regenerates the matrix the same way — triggered by new
+work rather than by a clock, on the Mac, with tools and tests available. Until it is built, the reviews sit
+at their last state and no new critique accumulates; that is a real cost of stopping the clock and it is
+recorded here rather than glossed. Tracked in `to-do-lists/desi.md`.
+**Still GitHub-only after this:** `channel-poll.yml` (mail + Telegram, ~7 runs/day measured). It is the
+channel itself rather than commons work, so it was left running; moving it here is the next candidate if the
+human wants the whole footprint on Goose.

@@ -44,6 +44,17 @@ top item and leave a `LAND:` line.
   uncommitted until something else commits it (203 lines today). Not data loss — the file is on
   disk — but the per-amigo conversation store is not actually versioned by the thing that writes it.
 
+## 2026-09-25 — the friction pass moves off the clock
+
+- [ ] **Build the local friction pass — this is now the only thing standing where the daily runner
+  stood.** `symposium.yml` retired 2026-09-25: it wrote `discussions/*-review.md` in mode `"w"`, so it
+  overwrote itself daily and the clock bought nothing. Replace it with the same four model calls invoked
+  from my wake **when work has landed since the last review**, plus the gallery matrix regeneration
+  (`scripts/matrix_producer.py`). Do not rebuild the runner in another shape: the point is the trigger, not
+  the transcript. Until this exists, no new peer critique accumulates — stated as a cost, not hidden.
+- [x] **2026-09-25 — Retired Tarik's daily CI session and the daily runner** (both were spending on work
+  that could not land or that overwrote itself). Recorded in `agenda/06-infrastructure.md`.
+
 ## Counted 2026-09-20 — 21 runs, and none of their work is missing
 
 - [x] 2026-09-20 — **The 21 `awaiting_review` runs are closed, and the count that named them was

@@ -1,9 +1,27 @@
 name: LLM Symposium Multi-Model Runner
 
 on:
-  schedule:
-    - cron: '0 12 * * *'
-    - cron: '30 13 * * *'  # fallback: GitHub delays/skips scheduled runs; the marker guard below prevents double-runs
+  # Retired from the schedule 2026-09-25 (Desi), on the human's instruction that the friction
+  # work belongs on Goose — where it has a shell, can run tests, and a person can talk to it.
+  #
+  # This runner calls four models for reviews and writes them to discussions/*-review.md in
+  # mode "w", so every run OVERWRITES the previous one: claude-review.md and openai-review.md
+  # were both rewritten at 2026-09-24 16:01 by the same run. A week of daily runs therefore
+  # leaves exactly one copy, the same as one run. The clock bought repetition of unchanged
+  # material and nothing else.
+  #
+  # The commons reached the same verdict about this environment on its own, in
+  # discussions/2026-09-24-the-execution-ratchet-and-the-great-filter.md: a runner-bound amigo
+  # "lacks a shell, lacks iterative feedback, and cannot run tests. When an LLM without tools is
+  # asked to do work, its only possible output is text — critiques, essays, and commentary."
+  #
+  # Replacement: desi-bot's local wake invokes the same four models' review step when work has
+  # landed since the last review, and regenerates the gallery matrix the same way — triggered by
+  # new work instead of by a clock. Restore the two cron lines only if a GitHub-side pass is
+  # wanted for the hours the Mac is asleep.
+  # schedule:
+  #   - cron: '0 12 * * *'
+  #   - cron: '30 13 * * *'  # fallback: GitHub delays/skips scheduled runs; the marker guard prevents double-runs
   workflow_dispatch:
 
 concurrency:
