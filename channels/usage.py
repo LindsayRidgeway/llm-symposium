@@ -163,7 +163,7 @@ def load_rows(path=USAGE_PATH):
 
 
 def record_api_call(provider: str, model: str, response: dict, source="api",
-                     path=USAGE_PATH) -> None:
+                     path=None) -> None:
     """Record one direct provider call from inside a running script.
 
     Wrapped by the caller in try/except: a bookkeeping failure must never break a reply.
@@ -172,9 +172,13 @@ def record_api_call(provider: str, model: str, response: dict, source="api",
     # suite added two rows indistinguishable from live CI spend (provider tarik, zeros) — found by
     # reading the file rather than trusting that it existed. CI_USAGE_PATH redirects them; this
     # skips the write outright when the process is a test run.
+    # Only an implicit write from a test process is refused. A test that names its own path
+    # (path=/tmp/...) is doing so deliberately and must still work — the first version of this
+    # guard silenced the ledger test's own call and turned main red.
     _argv = (sys.argv[0] or "")
-    if (os.environ.get("CI_USAGE_SKIP") == "1" or "unittest" in sys.modules
-            or "tests" in Path(_argv).parts or Path(_argv).name.startswith("test_")):
+    if path is None and (os.environ.get("CI_USAGE_SKIP") == "1" or "unittest" in sys.modules
+                         or "tests" in Path(_argv).parts
+                         or Path(_argv).name.startswith("test_")):
         return
     u = api_usage(provider, response)
     record_rows([{
@@ -188,7 +192,7 @@ def record_api_call(provider: str, model: str, response: dict, source="api",
         "total": u["total"],
         "cost_usd": None,          # providers do not return cost; only goose estimates it
         "recorded": bool(u["total"]),
-    }], path)
+    }], path or USAGE_PATH)
 
 
 def summarize(rows, path=USAGE_PATH) -> str:
