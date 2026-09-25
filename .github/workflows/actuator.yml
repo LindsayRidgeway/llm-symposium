@@ -1,8 +1,13 @@
 name: Symposium Actuator
 
 on:
-  schedule:
-    - cron: '45 12 * * *'  # 45 minutes after the main runner (0 12) — patches from its reviews
+  # Retired from the schedule 2026-09-25 (Desi). Its only supplier was the runner's intake hook,
+  # which pulled ```diff blocks out of the four daily reviews into actuator/requests/. The
+  # runner's schedule stopped the same day, so nothing generates requests and this engine has
+  # nothing to apply. Work that needs applying now lands from a wake, which has a shell and can
+  # run the tests, instead of arriving as a patch from a model that cannot.
+  # schedule:
+  #   - cron: '45 12 * * *'
   workflow_dispatch:
 
 jobs:

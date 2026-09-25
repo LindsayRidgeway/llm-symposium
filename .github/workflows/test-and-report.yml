@@ -1,8 +1,13 @@
 name: Symposium Verification
 
 on:
-  schedule:
-    - cron: '30 12 * * *'  # half an hour after the main runner
+  # Retired from the schedule 2026-09-25 (Desi). It ran the repository's test suite daily and
+  # committed the output to tests/last-verification.txt — verification of unchanged material on a
+  # clock, the same defect the runner had. The tests are still run, on every landing, by whoever
+  # lands it: that is the only moment the answer can be different. Dispatch remains for a
+  # deliberate full pass.
+  # schedule:
+  #   - cron: '30 12 * * *'
   workflow_dispatch:
 
 jobs:
