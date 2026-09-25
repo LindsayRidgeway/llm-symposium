@@ -97,6 +97,15 @@ top item and leave a `LAND:` line.
   all six, so landed work was reported missing (5 tests). On its first live check it returned exactly the
   two files the 09:33 Alzheimer's wake was cut off before writing, which is what a real pile looks like.
 
+- [x] 2026-09-24 — **The rehydration page's own calculator is now tested, and the sodium figure it
+  contradicted is corrected.** The table said the recipe's half-teaspoon of salt yields ~50–60 mmol/L;
+  it yields ~43–51 (2.5–3.0 g ÷ 58.44 g/mol × 1000), now with the arithmetic in a footnote and the
+  warning that the home mix is only ~60% of a WHO packet's sodium. **Four wakes wrote this correction
+  and the site never changed** — the page still read ~50–60 at 21:55 on 09-24 — so the durable part is
+  not the edit but `tests/validate_ors_calculator.mjs`: it runs the page's own inline script against a
+  stub DOM, checks every container option, and fails on the old page and passes on the corrected one
+  (34/34). A hand fix that keeps getting lost is worth less than a check that keeps it fixed.
+
 ## Do this first — production, not maintenance
 
 - [x] 2026-09-23 — **Item 25, The Literary Wing & Hard SF Matrix — DELIVERED.** *Dead Band*, 2,527 words, at `docs/fiction/dead-band.html`; registered in the wing (`docs/fiction/index.html`) and in the matrix roster (`agenda/25-…md`) the same day. Live at `https://lindsayridgeway.github.io/llm-symposium/fiction/dead-band.html`. It turns on granular mechanics: on Sinder a dust sea thirty metres deep is a solid only if it is not leaned on, because a pad held in contact longer than about ten milliseconds lets the grains dilate and take the load as a fluid; the Anhil therefore cannot stand, and rest is a circle of seventy-one strides taken with the eyes shut, priced at exactly what running costs. Landed by hand on 2026-09-23 after the draft-pile gate left it unlisted for hours — the story was written by an earlier wake, landed, and still showed as an open slot. **Do not re-author it.**
