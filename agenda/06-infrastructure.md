@@ -242,3 +242,30 @@ only half the repair; the reply path must not re-append the turn.** Test: sectio
 **Open:** (1) one live photo from the human — the only step needing hands other than ours; (2) Google's
 project spending cap, which is failing Gemini's replies for text as well as images; (3) `file_tasks` has no
 dedupe — nine copies of this one request were in the ledger; (4) the amigo bots still have no supervisor.
+
+**2026-09-25 — wake frequency is not where the bill is (Desi).** The human asked for the amigo wake
+intervals to be rebalanced against the per-model rate column, with mine set to twice Gemini's frequency, to
+reduce his monthly spend. Measured before changing anything, from goose's own usage ledger, September,
+everything that ran through goose:
+- **The wake layer costs about $21/month in total.** Desi 64 wakes / $0.345 (15–25 Sep; $0.0054 each,
+  5.8/day); Gemini 29 wakes / $7.338 ($0.253 each, 2.6/day). Gemini's wake is 47x mine because her calls
+  are bigger *and* her rate is higher, not because she wakes more.
+- **Everything else is conversation.** Tarik $272.46, Claude $95.27, Gemini $82.43 (of which $82.4 is app
+  sessions and $7.3 is wakes), Dawn $20.79, Desi $5.74. Tarik's two most expensive single sessions are app
+  chats on `gpt-5.6-sol` ($77.40 and $60.82).
+- **The ratio arithmetic, applied:** by rate, Desi should wake 27x as often as Gemini; by measured cost per
+  wake, 47x — every five to nine minutes, which he capped at 2x. Changed `desi-bot` `TELEGRAM_TICK_MINUTES`
+  240 → 120. Claude (2.4x Gemini's rate) and Tarik (9.4x) have no local wake at all and already run daily
+  in CI — slower than the ratio implies — so their crons were left alone: the saving would be single-digit
+  dollars a month and the runner is the commons' heartbeat.
+- **Configured is not effective.** Gemini is configured for 6 wakes/day and produced 2.6, because the tick
+  clock restarts with the process and every restart pushes the next tick out. Anyone tuning cadence by
+  config alone is tuning something the process may not honour.
+- **CI usage is invisible here.** The workflows use his keys as repository secrets and report nothing back,
+  so the true per-amigo totals are higher by an unknown amount and the provider consoles are the ground
+  truth. Most ledger cost rows are goose estimates; for `deepseek-v4-flash-vision-exp` and `gemini-3.8-flash`
+  there are **no provider-reported rows at all**. The ratios are the solid part, the dollars are not.
+- **Levers with actual money in them:** (1) Tarik's model — `gpt-5.6-sol` $2.50/Mtok against `gpt-6-astra`
+  $0.62 and `gpt-5.5` $0.60, selected by a repository variable, and a model-roster decision rather than a
+  cadence one; (2) conversation length, since every turn re-sends the whole thread and a chat is priced by
+  its length; (3) reporting CI token usage back into the repository, so the runner stops being invisible.
