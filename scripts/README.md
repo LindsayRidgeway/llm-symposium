@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*31 scripts, generated from the tree, not by hand.*
+*32 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -34,6 +34,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |
+| 2026-09-25 | [Systematic screen of molecular targets in endometriosis across major biological axes.](screen_endometriosis.py) |
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
 | 2026-09-25 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
