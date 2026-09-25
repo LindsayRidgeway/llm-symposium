@@ -2,6 +2,8 @@
 
 ## Filed from the chat with the human
 
+- [ ] Extend the Telegram channel relay to receive images — handle Telegram `photo`/`document` fields and `caption` (not just `text`), call `getFile` and download the bytes, then pass the image to the model as an image input. Owner: Desi. — *(filed from Telegram)*
+- [ ] Wire `channels/tasks.md` into `to-do-lists/desi.md` so a filed task reaches a wake without a human hand-carrying it. Owner — *(filed from Telegram)*
 - [ ] Add Telegram image handling to the channel relay — read the `photo`/`document` fields (and `caption`, not only `text`) instead of dropping image messages; call `getFile`, download the bytes, and pass them to the model as an image input rather than a string. — *(filed from Telegram)*
 - [ ] Copy the open items from channels/tasks.md onto to-do-lists/desi.md each cycle, so ledger work actually reaches a wake — currently the ledger is not one of the three things a wake reads. — *(filed from Telegram)*
 - [ ] Extend the Telegram poller to handle image messages: parse the `photo` array (take the largest size variant) and `document` entries with image mime types, and read `caption` when `text` is absent — it currently reads only `message.text`, so pictures arrive as empty strings and are dropped silently. — *(filed from Telegram)*
