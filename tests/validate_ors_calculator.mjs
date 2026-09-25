@@ -12,11 +12,15 @@
 // recorded as a check and not a review.
 //
 // Run: node tests/validate_ors_calculator.mjs
+//      ORS_HTML=/path/to/candidate.html node tests/validate_ors_calculator.mjs   (to test a page
+//      that is not the one on disk — used on 2026-09-25 to prove section 6 fails on the pre-fix
+//      page, so the check has teeth rather than being written to agree with what it found)
 import fs from "node:fs";
 import path from "node:path";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
-const html = fs.readFileSync(path.join(root, "docs/works/ors.html"), "utf8");
+const htmlPath = process.env.ORS_HTML || path.join(root, "docs/works/ors.html");
+const html = fs.readFileSync(htmlPath, "utf8");
 
 let pass = 0, fail = 0;
 const ok = (cond, label, extra = "") => {
@@ -128,6 +132,76 @@ ok(g26 && g26[1] === "65.0", "a custom 2600 mL batch scales sugar to 65.0 g", el
 const naRow = html.match(/Canonical Home Recipe \(SSS\)<\/strong><\/td>\s*<td>([^<]+)<\/td>/);
 ok(naRow && /4[0-9]/.test(naRow[1]) && !/50/.test(naRow[1]),
    "home-mix sodium row is the corrected ~43-51, not ~50-60", naRow && naRow[1]);
+
+// --- 6. the osmolarity column, on one convention -----------------------------------------
+// The defect this catches (2026-09-25). The home-mix row printed its osmolarity AFTER
+// brush-border sucrase splits the sucrose — 220-245 first, then 230-250 — while every other row
+// printed the solutes as dissolved. The column therefore compared two different quantities, and
+// because nothing checked it, the number was hand-edited twice without the mismatch being named.
+// Every row is now summed from its own listed solutes and held to the page's own convention.
+const table = html.slice(html.indexOf("<table"), html.indexOf("</table>"));
+const rows = [...table.matchAll(/<tr>([\s\S]*?)<\/tr>/g)]
+  .map(m => [...m[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map(c => c[1].replace(/<[^>]+>/g, "").trim()))
+  .filter(cells => cells.length === 8);
+ok(rows.length === 6, "six solution rows each carry eight numbers", String(rows.length));
+
+// Midpoint of "~43–51" / "10 (Citrate)"; an unquantified cell ("Low") contributes nothing.
+// Units differ per column — the sugar column is mmol/L, its parenthetical grams must not be
+// added — so each column is parsed on its own terms rather than "all numbers in the cell",
+// which is the bug that made this check fail on the first run.
+const firstFigure = (cell) => {
+  const m = cell.match(/\d+(?:\.\d+)?/);
+  return m ? Number(m[0]) : 0;
+};
+const mid = (cell) => {
+  const r = cell.match(/(\d+(?:\.\d+)?)\s*[–-]\s*(\d+(?:\.\d+)?)/);
+  return r ? (Number(r[1]) + Number(r[2])) / 2 : firstFigure(cell);
+};
+const ions = (cell) => {        // "~43–51" -> [43,51]; "45" -> [45,45]; "Low" -> [0,0]
+  const r = cell.match(/(\d+(?:\.\d+)?)\s*[–-]\s*(\d+(?:\.\d+)?)/);
+  if (r) return [Number(r[1]), Number(r[2])];
+  const n = firstFigure(cell);
+  return [n, n];
+};
+// The sugar column: mmol/L as dissolved, so the range must come from it and not from "(25 g)".
+const sugarSpan = (cell) => {
+  const mmol = cell.match(/([\d.]+)(?:\s*[–-]\s*([\d.]+))?\s*mmol\/L/);
+  return mmol ? [Number(mmol[1]), Number(mmol[2] ?? mmol[1])] : [0, 0];
+};
+const totalSpan = (cell) => {
+  const m = cell.match(/([\d.]+)(?:\s*[–-]\s*([\d.]+))?\s*mOsm\/L/);
+  return m ? [Number(m[1]), Number(m[2] ?? m[1])] : [0, 0];
+};
+const span = totalSpan;
+
+const dissolved = rows.map(c => mid(c[1]) + mid(c[2]) + mid(c[3]) + mid(c[4]) + mid(c[5]));
+rows.forEach((c, i) => {
+  const sum = dissolved[i], printed = mid(c[6]);
+  const dev = Math.abs(printed - sum) / sum;
+  ok(dev <= 0.12, `${c[0]} prints ${printed} against ${sum} as dissolved`,
+     `${c[0]}: ${(dev * 100).toFixed(1)}% off`);
+});
+
+// The convention is provable here, not assumed: the two WHO rows sum exactly to their printed
+// totals, which is what fixes "as dissolved" as the column's unit.
+const row = (name) => rows.find(c => c[0].startsWith(name));
+ok(dissolved[rows.indexOf(row("WHO Original"))] === 311, "the 1975 WHO row sums exactly to 311");
+ok(dissolved[rows.indexOf(row("WHO Reduced"))] === 245, "the 2006 WHO row sums exactly to 245");
+
+const home = row("Canonical Home Recipe");
+const na = ions(home[1]), sucrose = sugarSpan(home[5]);
+const drunk = [2 * na[0] + sucrose[0], 2 * na[1] + sucrose[1]];
+const hydrolysed = [2 * na[0] + 2 * sucrose[0], 2 * na[1] + 2 * sucrose[1]];
+const shown = totalSpan(home[6]);
+ok(Math.abs(shown[0] - drunk[0]) <= 3 && Math.abs(shown[1] - drunk[1]) <= 3,
+   `the home-mix cell states the as-drunk figure (${drunk[0]}–${drunk[1]})`, home[6]);
+ok(/as drunk/i.test(home[6]), "the home-mix cell names its convention", home[6]);
+ok(!/2[3-6]\d/.test(home[6]), "no post-hydrolysis number is the column's headline", home[6]);
+ok(html.includes(`${hydrolysed[0]}–${hydrolysed[1]}`),
+   `the post-hydrolysis figure (${hydrolysed[0]}–${hydrolysed[1]}) is still stated in the footnote`);
+const footnote = html.slice(html.indexOf("</table>"), html.indexOf("</table>") + 3000);
+ok(/sucrase/i.test(footnote) && /fructose/i.test(footnote),
+   "the footnote explains where the post-hydrolysis figure comes from");
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);
