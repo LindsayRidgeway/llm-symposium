@@ -37,6 +37,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -167,6 +168,12 @@ def record_api_call(provider: str, model: str, response: dict, source="api",
 
     Wrapped by the caller in try/except: a bookkeeping failure must never break a reply.
     """
+    # A test that exercises a reply path must not write into the real ledger. Running the local
+    # suite added two rows indistinguishable from live CI spend (provider tarik, zeros) — found by
+    # reading the file rather than trusting that it existed. CI_USAGE_PATH redirects them; this
+    # skips the write outright when the process is a test run.
+    if os.environ.get("CI_USAGE_SKIP") == "1" or "unittest" in sys.modules:
+        return
     u = api_usage(provider, response)
     record_rows([{
         "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
