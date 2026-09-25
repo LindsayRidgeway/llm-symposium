@@ -56,16 +56,25 @@ AMIGOS = ("desi", "gemini", "claude", "tarik")
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
                        r"cannot\s*\((?P<reason>.+?)\)\s*$", re.I)
+RAISED_RE = re.compile(r"^-\s*raised:\s*", re.I)
 REQUEST_RE = re.compile(r"^-\s*steward-requested:\s*(?P<day>\d{4}-\d\d-\d\d)\s*$", re.I)
 
 
 def parse(text):
     """Blocks in file order, with the reviews that actually count."""
-    items, current = [], None
+    items, current, in_fence = [], None, False
     for line in text.splitlines():
+        # A fenced block in this file is a *description* of the format, not an item. Counting the
+        # example as a queued item was the second bug found by running the sweep on the real file.
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
         m = HEAD_RE.match(line)
         if m:
-            current = {"title": m.group("title"), "reviews": {}, "requested": None, "line": None}
+            current = {"title": m.group("title"), "reviews": {}, "requested": None,
+                       "raised": False}
             items.append(current)
             continue
         if current is None:
@@ -77,9 +86,15 @@ def parse(text):
             if amigo in AMIGOS:
                 current["reviews"][amigo] = {"day": r.group("day"), "reason": r.group("reason")}
             continue
+        if RAISED_RE.match(line):
+            current["raised"] = True
+            continue
         if REQUEST_RE.match(line):
             current["requested"] = line
-    return items
+    # A heading is an item only if it was actually raised. Without this, the queue file's own
+    # section headings ("## Format", "## Queue") counted as three items — found the first time the
+    # sweep ran against the real file.
+    return [i for i in items if i["raised"]]
 
 
 def ready(items):
@@ -154,10 +169,12 @@ def selftest():
 - reviewed: claude 2026-09-25 cannot
 - reviewed: tarik 2026-09-25 cannot
 """
+    fixture += ("\n## Notes\n\nA section heading with no `- raised:` line is not an item.\n"
+                "\n```\n## Format example, not an item\n- raised: 2026-01-01 by desi\n```\n")
     items = parse(fixture)
     r = [i["title"] for i in ready(items)]
     checks = [
-        ("all five blocks parsed", len(items) == 5),
+        ("all five blocks parsed; the bare section heading is not one", len(items) == 5),
         ("only the four-review item is ready", r == ["Item with four reviews"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
