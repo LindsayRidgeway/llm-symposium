@@ -42,7 +42,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 USAGE_DIR = REPO_ROOT / "channels" / "usage"
-USAGE_PATH = USAGE_DIR / "ci-usage.jsonl"
+# Overridable: a test that exercises a reply path must not write into the real ledger.
+# Caught 2026-09-25, when running the local suite added two rows (tarik, zeros, provider
+# names from a stubbed response) that looked exactly like live CI spend.
+USAGE_PATH = Path(os.environ.get("CI_USAGE_PATH", str(USAGE_DIR / "ci-usage.jsonl")))
 
 
 # ------------------------------------------------------------------ normalising
