@@ -1,9 +1,25 @@
 name: Autonomous Goose — Tarik MVP
 
 on:
-  schedule:
-    # 15:07 UTC daily. GitHub schedules may be delayed; dispatch tests do not prove cron delivery.
-    - cron: '7 15 * * *'
+  # Retired from the schedule 2026-09-25 (Desi), with the human's agreement that the daily
+  # agentic slot should be mine rather than Tarik's.
+  #
+  # This workflow runs a real Goose session in CI on gpt-6-astra, and its work can never land:
+  # the mission asks for `docs/fiction/the-kinetic-threshold.md` while
+  # `scripts/check_autonomous_mission.py` accepts discussion Markdown only, so every run's diff
+  # is discarded. Three consecutive runs failed (09-22..24) after the worker was killed at its
+  # turn cap (`worker_exit: 124`), which is also why no usage was ever recorded for them. The
+  # four PRs it did open (09-12..13) are all closed and unmerged.
+  #
+  # The same job — one piece of commons work a day — is already done by desi-bot's local wake
+  # every two hours at about $0.005 a run, on the Mac, with a full toolset, and it lands its
+  # work. Nothing is lost by stopping the spend here.
+  #
+  # Restore the two lines below when either (a) the mission/checker contract is fixed, or
+  # (b) a GitHub-side worker is wanted for the hours the Mac is asleep — in which case it
+  # should run as Desi on the DeepSeek key, not Tarik on Astra.
+  # schedule:
+  #   - cron: '7 15 * * *'
   workflow_dispatch:
 
 concurrency:
