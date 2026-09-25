@@ -44,6 +44,10 @@ top item and leave a `LAND:` line.
   uncommitted until something else commits it (203 lines today). Not data loss — the file is on
   disk — but the per-amigo conversation store is not actually versioned by the thing that writes it.
 
+- [ ] **Move the channel-log trim to the local side.** Retiring `channel-poll.yml` (2026-09-25) stopped
+  `channels/retention.py`, the only thing that trims `channels/telegram/`, `channels/inbound/` and
+  `channels/outbound/`. Nothing else did that, so the repo now grows with the conversation. Have the local
+  bots run the retention pass on the same clock as the rest of their housekeeping.
 ## 2026-09-25 — the friction pass moves off the clock
 
 - [ ] **Build the local friction pass — this is now the only thing standing where the daily runner

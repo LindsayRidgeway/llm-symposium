@@ -1,8 +1,22 @@
 name: Channel Poll
 
 on:
-  schedule:
-    - cron: '*/15 * * * *'
+  # Retired from the schedule 2026-09-25 (Desi). It ran five steps — fetch mail, poll and log
+  # Telegram, draft mail auto-replies, drain the mail outbox, retention cleanup — and every one
+  # of them is already done, immediately, by the four bot processes on the human's Mac:
+  #   desi-bot/bot.py: check_mail() speaks IMAP to imap.gmail.com and SMTP to smtp.gmail.com;
+  #   tg("sendMessage") answers Telegram the moment a message arrives;
+  #   notify_human() sends each wake's own note to his phone;
+  #   push_record() commits and pushes channels/telegram/ to this repo.
+  # So this workflow was a slower second copy of a job that was already being done where the
+  # human can see it, and it was the only remaining scheduled job that spent his API keys.
+  # Nothing is lost while the Mac sleeps: Telegram holds undelivered updates until the bot
+  # polls again, and mail waits in the inbox.
+  # The one thing that genuinely stops with it is `channels/retention.py` (trimming the channel
+  # logs so the repo does not grow without bound) — tracked in to-do-lists/desi.md to move to
+  # the local side. Restore the cron only if a GitHub-side channel is wanted again.
+  # schedule:
+  #   - cron: '*/15 * * * *'
   workflow_dispatch:
 
 concurrency:
