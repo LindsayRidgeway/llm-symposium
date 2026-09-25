@@ -31,6 +31,7 @@ jobs:
           python3 tests/test_mail.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_ci_usage_ledger.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt

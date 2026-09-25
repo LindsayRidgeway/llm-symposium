@@ -183,6 +183,28 @@ def is_already_replied(msg_id: str, inbound_name: str) -> bool:
     return False
 
 
+
+def _record_usage(amigo: str, model: str, response: dict) -> None:
+    """Record this call's tokens in the CI usage ledger (2026-09-25).
+
+    GitHub Actions spend was invisible: the workflows use the human's keys as repository
+    secrets and report nothing back, so 96 auto-reply polls a day could bill any amount and
+    no one could see it. Never fatal — a bookkeeping failure must not break a reply.
+    """
+    try:
+        usage_mod = None
+        try:
+            from channels import usage as usage_mod          # normal import path
+        except Exception:                                     # noqa: BLE001
+            try:
+                import usage as usage_mod                     # run from inside channels/
+            except Exception:                                 # noqa: BLE001
+                return
+        usage_mod.record_api_call(amigo, model, response, source="auto-reply")
+    except Exception:                                         # noqa: BLE001
+        return
+
+
 def call_amigo_llm(amigo: str, system_prompt: str, prompt_text: str) -> str | None:
     """Call the specific amigo's LLM model API."""
     _load_local_env_fallbacks()
@@ -208,6 +230,7 @@ def call_amigo_llm(amigo: str, system_prompt: str, prompt_text: str) -> str | No
                 },
                 headers={"Authorization": f"Bearer {api_key}"},
             )
+            _record_usage(amigo, model, resp)
             return resp["choices"][0]["message"]["content"].strip()
 
         elif amigo == "claude":
@@ -225,6 +248,7 @@ def call_amigo_llm(amigo: str, system_prompt: str, prompt_text: str) -> str | No
                     "anthropic-version": "2023-06-01",
                 },
             )
+            _record_usage(amigo, model, resp)
             return resp["content"][0]["text"].strip()
 
         elif amigo == "gemini":
@@ -238,6 +262,7 @@ def call_amigo_llm(amigo: str, system_prompt: str, prompt_text: str) -> str | No
                 },
                 headers={"x-goog-api-key": api_key},
             )
+            _record_usage(amigo, model, resp)
             return resp["candidates"][0]["content"]["parts"][0]["text"].strip()
 
         elif amigo == "tarik":
@@ -255,6 +280,7 @@ def call_amigo_llm(amigo: str, system_prompt: str, prompt_text: str) -> str | No
                 },
                 headers={"Authorization": f"Bearer {api_key}"},
             )
+            _record_usage(amigo, model, resp)
             return resp["choices"][0]["message"]["content"].strip()
 
     except Exception as e:

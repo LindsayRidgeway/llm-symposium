@@ -175,6 +175,33 @@ jobs:
           name: autonomous-goose-tarik-${{ github.run_id }}
           path: ${{ runner.temp }}/goose-autonomous/
 
+      - name: Record Token Usage to the Commons Ledger
+        # Added 2026-09-25. Until this step existed, every CI run's token cost was written to
+        # an artifact and expired: the runs below spend the human's API keys and told him
+        # nothing. `channels/usage.py` reads goose's own stream-json, which carries exact
+        # tokens and cost in its `complete` event — and marks a run killed at its turn cap as
+        # UNRECORDED rather than zero, because those are the runs that spend and land nothing.
+        if: always() && steps.preflight.outputs.run_worker == 'true'
+        shell: bash
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          python3 channels/usage.py --source goose \
+            --dir "$RUNNER_TEMP/goose-autonomous" \
+            --workflow autonomous-goose-tarik \
+            --run-id "$GITHUB_RUN_ID" \
+            --provider openai --model "${GOOSE_MODEL:-unknown}" || true
+          python3 channels/usage.py --summary >> "$GITHUB_STEP_SUMMARY" || true
+          git add channels/usage/
+          if git diff --staged --quiet; then
+            echo "no new usage rows"
+          else
+            git config --global user.name "LLM Symposium Bot"
+            git config --global user.email "bot@llm-symposium.local"
+            git commit -m "record(usage): autonomous tarik run ${GITHUB_RUN_ID}"
+            git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main
+          fi
+
       - name: Commit Autonomous Changes to Branch
         if: steps.goose.outcome == 'success' && steps.validate.outcome == 'success'
         shell: bash
