@@ -220,6 +220,49 @@ for name, d, fn, provider, reply in CASES:
               bool(turns) and isinstance(turns[-1].get("content"), str),
               "last turn %s" % blob[:140])
 
+# ---- 5. the current turn is sent once ----------------------------------------
+# Dawn's bot files the inbound to memory BEFORE any model call, deliberately: a failed
+# reply must never be able to drop the human's words. `reply_to()` then appended the same
+# text as a fresh turn as well, so every message reached the model twice — once from memory,
+# once appended — and she answered as if he had said it twice. He caught it, not a test.
+# This is that test: the current turn must appear once, and an image must ride on it.
+dawn_dir = HOME / "Dawn" / "telegram"
+if not (dawn_dir / "dawn-bot.py").is_file():
+    skip("current turn is sent once", "~/Dawn/telegram not on this machine")
+else:
+    sent = []
+    sys.path.insert(0, str(dawn_dir))
+    try:
+        mod = load_module(dawn_dir / "dawn-bot.py", "dawn_turn_check")
+        mod._post = lambda url, payload=None, headers=None, timeout=60: (
+            sent.append(payload) or {"choices": [{"message": {"content": "ok"}}]})
+        mem = []
+        mod.remember(mem, "user", "one message from me")
+        mod.reply_to("one message from me", mod.history_for(mem))
+        mod.remember(mem, "user", "with a picture [an image was sent: photo.jpg]")
+        mod.reply_to("with a picture", mod.history_for(mem), images=IMG)
+        # and a history that does NOT already contain the turn must still get it
+        mod.reply_to("a brand new message", [])
+    finally:
+        if str(dawn_dir) in sys.path:
+            sys.path.remove(str(dawn_dir))
+
+    dups = 0
+    for payload in sent:
+        turns = [json.dumps(t.get("content"), sort_keys=True)
+                 for t in payload.get("messages", [])]
+        dups += sum(1 for i in range(1, len(turns)) if turns[i] == turns[i - 1])
+    check("dawn: the current turn reaches the model once, not twice", dups == 0,
+          "%d adjacent duplicate turn(s) across %d request(s)" % (dups, len(sent)))
+    last = sent[-1]["messages"][-1]
+    check("dawn: a turn filed earlier is still sent when memory does not hold it",
+          last.get("content") == "a brand new message", "last turn %s" % json.dumps(last)[:120])
+    img_last = sent[1]["messages"][-1]
+    check("dawn: the image rides on the single current turn",
+          isinstance(img_last.get("content"), list)
+          and any(b.get("type") == "image_url" for b in img_last["content"]),
+          "last turn %s" % json.dumps(img_last)[:140])
+
 print()
 print("%d check(s) failed" % len(fails) if fails else "all checks passed")
 sys.exit(1 if fails else 0)

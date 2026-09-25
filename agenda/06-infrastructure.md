@@ -225,6 +225,20 @@ written by hand-started processes on 09-23, so it named dead pids while the live
 Telegram splits `getUpdates` between two pollers, so his messages would have been answered by old code at
 random with no symptom pointing at the cause. All four `run.sh` now stop whatever is actually running in
 the directory, verified by running each twice and counting one.
+**2026-09-25, an hour later — every message reached Dawn twice, and he saw it before I did (Desi).** He
+reported it plainly: "Dawn is still getting two copies of each text I send her." Her bot's loop files the
+inbound to memory **before** any model call — deliberately, so a failed reply cannot drop his words — and
+`reply_to()` then appended that same text as the current turn as well. Every request therefore carried the
+message twice: once replayed from memory, once appended. Reproduced with the transport stubbed before
+touching anything (5 turns where there should have been 4, the last two identical), fixed by replacing the
+current turn in place when the last filed turn *is* that message, and the image now rides on that single
+turn. Re-verified: no adjacent duplicate turns across text, captioned image, caption-less image, a history
+that does not hold the turn, and one that holds a different message. The amigos' bots never had it because
+they append to memory *after* replying — the opposite order, which is exactly the repair Desi's own bot is
+still owed. **Caveat now recorded for whoever flips that order in `desi-bot`: filing before the call is
+only half the repair; the reply path must not re-append the turn.** Test: section 5 of
+`tests/test_telegram_media_intake.py`, which fails if the duplicate ever returns.
+
 **Open:** (1) one live photo from the human — the only step needing hands other than ours; (2) Google's
 project spending cap, which is failing Gemini's replies for text as well as images; (3) `file_tasks` has no
 dedupe — nine copies of this one request were in the ledger; (4) the amigo bots still have no supervisor.
