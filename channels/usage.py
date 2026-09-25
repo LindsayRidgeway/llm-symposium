@@ -172,7 +172,9 @@ def record_api_call(provider: str, model: str, response: dict, source="api",
     # suite added two rows indistinguishable from live CI spend (provider tarik, zeros) — found by
     # reading the file rather than trusting that it existed. CI_USAGE_PATH redirects them; this
     # skips the write outright when the process is a test run.
-    if os.environ.get("CI_USAGE_SKIP") == "1" or "unittest" in sys.modules:
+    _argv = (sys.argv[0] or "")
+    if (os.environ.get("CI_USAGE_SKIP") == "1" or "unittest" in sys.modules
+            or "tests" in Path(_argv).parts or Path(_argv).name.startswith("test_")):
         return
     u = api_usage(provider, response)
     record_rows([{
