@@ -2,6 +2,9 @@
 
 ## Filed from the chat with the human
 
+- [ ] Extend the Telegram poller to handle image messages: parse the `photo` array (take the largest size variant) and `document` entries with image mime types, and read `caption` when `text` is absent — it currently reads only `message.text`, so pictures arrive as empty strings and are dropped silently. — *(filed from Telegram)*
+- [ ] For any image-bearing update, call Telegram's `getFile` to obtain a file path, download the bytes over HTTPS, base64-encode them, and pass the result as an image content block to a vision-capable model instead of a text string. — *(filed from Telegram)*
+- [ ] Verify end-to-end — send a photo from Telegram and confirm the reply describes the actual image content, — *(filed from Telegram)*
 - [ ] When the replacement rover kit arrives (~early next week), install the new Pi card and verify the camera works end-to-end; determine whether last week's failure was the board's connector tab or the ribbon cable, and record which; then complete the second rover build for Gemini on the new hardware. — *(filed from Telegram)*
 - [ ] Build second rover kit (identical to the first, ordered as a twin when the first was ordered) — assembly to resume when the kit arrives, paired with the new Pi card shipping for early next week. — *(filed from Telegram)*
 - [ ] **Desi:** make the tick report name the file it touched ("proof in the report") — raised 2026-09-20, declared filed, never done; the human reads reports and not the repo, so a report that does not name a file is indistinguishable from a wake that did nothing — *(filed from Telegram)*
