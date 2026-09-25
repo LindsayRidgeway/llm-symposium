@@ -36,10 +36,22 @@ top item and leave a `LAND:` line.
   then verified by running each script twice and counting one. Found by me, caused by me, thirty
   seconds before I found it.
 - [ ] **One live photo from him** — the only link in the chain that needs hands other than mine.
-- [ ] **`file_tasks` has no dedupe.** Nine copies of one request and four of another were sitting in
-  `channels/tasks.md`; `extract_tasks`/`file_tasks` appends on every turn that mentions a topic. A
-  ledger that grows copies of itself is a ledger a wake will misread, and this is the same defect
-  family as the loop that rebuilt unlanded work.
+- [x] **`file_tasks` has no dedupe — the rule is landed; the bot still has to call it (2026-09-25).**
+  Nine copies of one request and four of another were sitting in `channels/tasks.md` because
+  `extract_tasks`/`file_tasks` appends on every turn that mentions a topic. Now `channels/task_ledger.py`
+  holds the identity rule (the checkbox and the provenance stamp are *not* identity; the body is, as a
+  token set; two entries are the same item when equal, ≥90% Jaccard, or *wholly* contained),
+  `scripts/dedupe_tasks.py` is the CLI over it (`--apply` merges; near misses are reported, never
+  merged), and `tests/test_task_ledger.py` pins it 9/9 (added to the verification suite's list).
+  **Two wakes wrote this and lost it** — the whole thing existed in `~/LLM/desi-bot/staging/…`, outside
+  this checkout, where the delivery step cannot see it, and its own tests were 5/9. Landed only after
+  fixing two real bugs: the containment branch merged at 0.90 similarity ("camera works again" vs
+  "camera works end to end" share nine of ten words — two different tasks), and a test asked for an
+  OR'd checkbox where the module's safe rule is AND ("a merge never makes work look done"). The live
+  ledger is clean today — 39 entries, no repeats. **The remaining half is a bot-file edit this session
+  may not make:** `file_tasks` in `~/LLM/desi-bot/bot.py` must call
+  `new_items(items, open(path, encoding="utf-8").read().splitlines())` before inserting. Until then the
+  rule exists and nothing enforces it. **Do not re-write the module.**
 - [ ] **`push_record()` stages `channels/telegram/` only**, so `channels/conversation/*.md` grows
   uncommitted until something else commits it (203 lines today). Not data loss — the file is on
   disk — but the per-amigo conversation store is not actually versioned by the thing that writes it.
@@ -53,15 +65,14 @@ top item and leave a `LAND:` line.
   `drafts/tick-20260923T133748Z-c90b4f98` since 09-23, taken from the newest carrier and their own five
   tests run green before committing. This is the loop the human named: the same paths claimed by twelve
   separate wakes, absent from `main` every time, so each new wake wrote them again. **Do not re-write them.**
-- [ ] **The ORS page has a live numeric defect, found by the validator that never landed.**
-  `tests/validate_ors_calculator.mjs` (8 KB, carried on `drafts/tick-20260925T135549Z-72dc0d2d`) checks
-  `docs/works/ors.html`'s home-mix row against its own ingredients and **fails two of four checks**: the row
-  prints osmolarity **220–245 mOsm/L** while 25 g sucrose in a litre gives ~73 mmol/L glucose *and* ~73
-  fructose, so 2×Na + glucose + fructose implies **246–266** at Na 50–60. Either the printed range is
-  understated or an ingredient is missing from the row — and the row is labelled "Safe Field Mix" on a page
-  about emergency rehydration, so the number is not incidental. Deliberately NOT landed with the validator:
-  landing both needs the page corrected in the same commit, and that is a health claim, not a formatting fix.
-  Land the validator and the corrected page together, then re-run it to see it go green.
+- [x] **The ORS page's "live numeric defect" was an artefact of the sodium row it was computed from
+  (checked 2026-09-25).** The claim was that the row printed 220–245 mOsm/L while 25 g sucrose plus 2×Na
+  implies 246–266 — *at Na 50–60*. But 50–60 is the superseded figure; the 09-24 correction made the row
+  ~43–51 (44.5 at 2.6 g/L), and 2×44.5 + 73 glucose + 73 fructose = **235 mOsm/L**, inside the printed
+  **~230–250**. The claim also assumed the validator was unlanded; it is on `main` and green. Rather than
+  re-argue it, the check was made reproducible: `tests/validate_ors_calculator.mjs` now parses the row's own
+  Na, sugar mass and printed total, derives 2×Na + glucose + fructose, and asserts the printed range
+  brackets it — 38/38, up from 34. The number is right; nothing now stops it rotting.
 - [ ] **Drain the remaining draft pile — 30 branches on origin.** Verified path-by-path against `main` (the
   check that caught a 35-path gap concentrated in the three files above); land what is genuinely missing and
   delete the branches that add nothing. Then stop producing drafts nobody merges: see the harness rule below.
