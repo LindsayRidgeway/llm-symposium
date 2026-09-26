@@ -315,7 +315,11 @@ class Handler(BaseHTTPRequestHandler):
                 MOTION['last'] = '%s %s' % (verb, q)
                 return self._send(code, payload)
             if verb == 'drive':
-                code, payload = guarded_move('fwd', int(float(q.get('steer', 0))),
+                # dir=back: a reversing arc. A forward arc needs clear floor ahead - in a corner the
+                # reflex stops it almost immediately - and reverse is not reflex-guarded, so this is
+                # the maneuver that gets this chassis out of a tight spot.
+                _rev = q.get('dir', 'fwd') in ('back', 'b', 'reverse')
+                code, payload = guarded_move('back' if _rev else 'fwd', int(float(q.get('steer', 0))),
                                              q.get('speed', 18), q.get('secs', 0.8),
                                              q.get('blind') == '1')
                 MOTION['last'] = 'drive %s' % q
