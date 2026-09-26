@@ -146,6 +146,11 @@ try:
     st, body = get(port, 'fwd', speed=25, secs=0.4, blind=1)
     check('reflex leaves a clear move alone', st == 200 and not body.get('stopped_by'), body)
 
+    get(port, 'mock', distance=10)
+    st, body = get(port, 'back', speed=25, secs=0.5)
+    check('reverse is NOT cut short by the front reflex',
+          st == 200 and not body.get('stopped_by') and body.get('secs', 0) >= 0.4, body)
+
     st, body = get(port, 'photo', name='pilot-nav', size='nav')
     check('nav photo writes a file', st == 200 and body.get('bytes', 0) > 0, body)
 

@@ -130,8 +130,12 @@ class Body:
         secs = max(0.0, min(float(secs), MAX_MOVE))
         self.steer = steer
         self.moving = direction
-        reflex = Reflex()
-        reflex.start()
+        # FORWARD ONLY. On 2026-09-26 the reflex watched the front sensor and cut a REVERSE short:
+        # it stopped the robot backing away from the very obstacle it was guarding. There is no rear
+        # sensor, so reverse has to be trusted to the caller - who is the one who chose to reverse.
+        reflex = Reflex() if direction == 'fwd' else None
+        if reflex:
+            reflex.start()
         t0 = time.time()
         try:
             if not self.dry:
@@ -139,12 +143,13 @@ class Body:
                 time.sleep(0.2)
                 (self.px.forward if direction == 'fwd' else self.px.backward)(speed)
             deadline = t0 + secs
-            while time.time() < deadline and not reflex.tripped:
+            while time.time() < deadline and not (reflex and reflex.tripped):
                 time.sleep(0.05)
         finally:
             self.stop()
-            reflex.halt()
-        self.last_reflex = reflex.tripped
+            if reflex:
+                reflex.halt()
+        self.last_reflex = reflex.tripped if reflex else None
         return speed, round(time.time() - t0, 2)
 
     def stop(self):
