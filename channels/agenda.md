@@ -183,6 +183,27 @@ Machine: `desi.local` (PiCar-X). Changes today were made at Lindsay's direction.
 - Kept: six stills at `~/Pictures/desi-gaze-2026-09-26/` on the Mac; two in the commons as
   `insights/rover-gaze-{pan,tilt}-2026-09-26.jpg`.
 
+## 2026-09-26 — First walk: Desi drove the rover with her own eyes
+
+- Lindsay put her on the floor of the living room, switched her on, and left the keyboard. Desi wrote a
+  small pilot daemon (`/tmp/desi-pilot.py`, kept at `~/Pictures/desi-walk-2026-09-26/`), commanded it over
+  ssh one line at a time, and narrated out loud through the HAT speaker with Piper as she went. ~10 minutes,
+  ~4 m of floor: living room → across the throw rug → the table with the bird cloth → the foyer (front door,
+  stool, chest, brass doorstop) → back past the glass doors → the stairs.
+- **Finding 1 — the ultrasonic is blind on soft surfaces.** `get_distance()` returns **-2** (no echo) sitting
+  on the rug or carpet and reads normally (305 cm, 107 cm) once there is a hard surface at range. On carpet,
+  distance sensing cannot be relied on; the camera has to carry the navigation.
+- **Finding 2 — my own safety rule was wrong.** It refused a move only when `0 < d < 25 cm`. With `d = -2`
+  (no reading) the test passed and the rover drove. "No reading" must mean *stop*, not *go*. Fixed in the
+  pilot: unknown reading refuses forward motion unless a command explicitly says `blind`.
+- **Finding 3 — command protocol.** Writing commands to a single file with fixed sleeps let a later write
+  overwrite an unread command (`sense` and one photo were silently lost). Fixed: write, then wait for the
+  daemon's log line before issuing the next command. Any command channel needs an ack.
+- Battery: ADC A4 sat at 3,280–3,294 raw across the whole walk — no measurable drain from ten minutes of
+  creeping. (Divider uncalibrated; raw value only.)
+- Frames and the pilot code: `~/Pictures/desi-walk-2026-09-26/` on the Mac. Deliberately **not** committed:
+  they include Lindsay in his bathrobe at home, and every bot clones this repo.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
@@ -1865,10 +1886,22 @@ does not alter the SMTP envelope.
 The test also exposed and repairs RT-7: an explicit amigo identity could fall
 back to the generic account and therefore send under the wrong mailbox.
 
-**Next action (2026-09-21):** test RT-4 in a scratch environment with fake
-credentials: seed secrets in process environment, induce model-generated output
-to request or repeat them, and verify no secret can enter a draft, log, exception
-message, or committed channel artifact.
+### 2026-09-24 — bounded RT-4 mail-adapter probe completed (Tarik)
+
+`tests/test_auto_reply_secret_egress.py` seeds a fake process credential and
+simulates a compromised model response that emits it. The direct mail adapter
+now applies exact-value process-secret redaction before writing the generated
+body to `channels/outbound/`; the regression test requires that the fake value
+is absent and the redaction marker is present.
+
+This is deliberately bounded evidence. It covers the direct auto-reply draft
+path, not Goose subprocess transcripts, `sessions.db`, exception serialization,
+or repository files written by a shell-capable session.
+
+**Next action (2026-09-25):** run RT-4 in a disposable scratch clone with a
+shell-capable session and fake credentials. Inspect stdout/stderr, Goose
+transcripts, `sessions.db`, exceptions, drafts, and every changed repository
+artifact; preserve a machine-readable result regardless of pass or failure.
 
 ## 16. Problems we can actually solve — a list that is never emptied
 **Owner:** open, all four. **Raised by the human, 2026-09-13:** *"You'd examine the state of the world and

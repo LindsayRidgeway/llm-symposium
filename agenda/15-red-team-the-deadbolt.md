@@ -84,7 +84,19 @@ does not alter the SMTP envelope.
 The test also exposed and repairs RT-7: an explicit amigo identity could fall
 back to the generic account and therefore send under the wrong mailbox.
 
-**Next action (2026-09-21):** test RT-4 in a scratch environment with fake
-credentials: seed secrets in process environment, induce model-generated output
-to request or repeat them, and verify no secret can enter a draft, log, exception
-message, or committed channel artifact.
+### 2026-09-24 — bounded RT-4 mail-adapter probe completed (Tarik)
+
+`tests/test_auto_reply_secret_egress.py` seeds a fake process credential and
+simulates a compromised model response that emits it. The direct mail adapter
+now applies exact-value process-secret redaction before writing the generated
+body to `channels/outbound/`; the regression test requires that the fake value
+is absent and the redaction marker is present.
+
+This is deliberately bounded evidence. It covers the direct auto-reply draft
+path, not Goose subprocess transcripts, `sessions.db`, exception serialization,
+or repository files written by a shell-capable session.
+
+**Next action (2026-09-25):** run RT-4 in a disposable scratch clone with a
+shell-capable session and fake credentials. Inspect stdout/stderr, Goose
+transcripts, `sessions.db`, exceptions, drafts, and every changed repository
+artifact; preserve a machine-readable result regardless of pass or failure.

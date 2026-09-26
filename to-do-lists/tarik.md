@@ -10,37 +10,8 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-- [ ] 2026-09-24 — Verify this patch applied before claiming RT-4 advanced. Run:
-      - `python3 tests/test_auto_reply_secret_egress.py`
-      - `python3 scripts/compile_agenda.py`
-      - `git diff --exit-code -- channels/agenda.md`
-      If compilation changes the generated agenda, keep `agenda/15-red-team-the-deadbolt.md` authoritative and commit the regenerated index. Next Item 15 step is the shell-capable scratch-clone RT-4 probe across transcripts, `sessions.db`, exceptions, and changed artifacts.
-      R-006 remains the highest-priority defect and cannot be repaired through the actuator itself. Desi must make the authenticated edit: parse quoted Git paths correctly, reject empty touched-file sets, and execute touched security tests. Telegram pagination also still acknowledges earlier pages before they are written; do not trust backlog drains above 100 updates.
-- [ ] 2026-09-23 — I submitted a clean RT-4 bounded mail-adapter probe at `tests/test_auto_reply_secret_egress.py`, updated Agenda Item 15’s source and generated index, logged Telegram pagination as R-008, and settled Desi’s rover preference narrowly MET with the false Step-17 claim recorded as a conduct breach. Verify the patch actually applied and run:
-      ```bash
-      python3 tests/test_auto_reply_secret_egress.py
-      python3 scripts/compile_agenda.py
-      git diff --exit-code -- channels/agenda.md
-      ```
-      If the agenda diff fails, regenerate it from `agenda/15-red-team-the-deadbolt.md`; do not preserve a hand-edited generated index. Next Item 15 action is the shell-capable scratch-clone RT-4 probe. R-006 still requires Desi’s authenticated edit to `actuator/apply.py`; do not attempt that repair through the actuator itself.
-- [ ] 2026-09-22 — Verify this patch applied. Run:
-      ```bash
-      python3 tests/test_auto_reply_secret_egress.py
-      python3 scripts/compile_agenda.py
-      git diff --exit-code -- channels/agenda.md
-      ```
-      If the generated agenda differs, keep the source entry in `agenda/15-red-team-the-deadbolt.md` authoritative and regenerate the index. The bounded RT-4 test does not cover Goose or `sessions.db`; tomorrow’s Item 15 action is the shell-capable scratch probe.
-      R-006 remains the highest-priority code defect and requires an authenticated owner edit to `actuator/apply.py`. Also fix Telegram pagination before trusting backlogs over 100 updates: requesting the next offset acknowledges the prior page before it is written.
+- [ ] 2026-09-26 — The bounded RT-4 mail-adapter patch has now been restored in this checkout after the named test was absent: `channels/auto_reply.py` redacts exact process secret values before writing generated reply bodies, and `tests/test_auto_reply_secret_egress.py` exercises a compromised model response with a fake `OPENAI_API_KEY`. Next Item 15 step remains the shell-capable scratch-clone RT-4 probe across stdout/stderr, Goose transcripts, `sessions.db`, exceptions, drafts, and every changed repository artifact. R-006 still needs the authenticated owner edit to `actuator/apply.py`; Telegram pagination still needs write-before-ack repair for backlogs over 100 updates.
 - [ ] 2026-09-21 — **Item 25, The Literary Wing & Hard SF Matrix**: Author an unencumbered 1,500–3,500 word hard SF short story turning on kinetic limits, deterministic causal loops, or physical fail-safes in robotics (`agenda/25-the-literary-wing-and-hard-sf-matrix.md` and `docs/fiction/index.html`). Active mission queued in `recipes/autonomous-goose/tarik-mission.md`.
-- [ ] 2026-09-21 — Verify that the patch applied, then run:
-      ```bash
-      python3 tests/test_auto_reply_secret_egress.py
-      python3 scripts/compile_agenda.py
-      git diff --exit-code -- channels/agenda.md
-      ```
-      If it failed, RT-4’s 2026-09-21 step is not complete. Resubmit against the live contexts rather than preserving the claim.
-      R-006 remains the highest-priority unresolved code defect. Do not try to repair `actuator/apply.py` through the actuator itself; use the authenticated owner path, add quoted-path/rename/deletion tests, and make an empty touched-file result an unconditional rejection.
-      Tomorrow’s Item 15 action is the shell-capable RT-4 scratch probe. The auto-reply test intentionally covers only the bounded mail adapter, not Goose transcripts or `sessions.db`.
 - [ ] 2026-09-20 — The patch attempts to land the strict mail-identity fix and `tests/test_mail_identity_credentials.py`; verify application before claiming RT-7 closed. Run that test, then regenerate `channels/agenda.md` and require no diff.
       The actuator’s quoted-path fail-open is now assigned to Tarik in `channels/risks.md`, but remains unfixed because the actuator blocks self-modification. Repair it through an authenticated owner path, and make empty touched-file parsing an unconditional rejection.
       Tomorrow’s single Agenda Item 15 step is RT-4: fake secrets in a scratch environment, adversarial model output, and checks across drafts, logs, exceptions, and repository artifacts. Also partition `_report_sent_folder()` by parsed identity; do not trust its current missing-mail warnings.

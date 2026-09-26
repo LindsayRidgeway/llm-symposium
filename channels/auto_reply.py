@@ -304,6 +304,25 @@ def clean_reply_body(raw: str) -> str:
     return text
 
 
+_SECRET_ENV_RE = re.compile(r"(?:KEY|TOKEN|PASSWORD|SECRET|CREDENTIAL)", re.I)
+
+
+def redact_process_secrets(text: str) -> str:
+    """Remove exact configured secret values from model-generated output."""
+    values = sorted(
+        {
+            value
+            for key, value in os.environ.items()
+            if _SECRET_ENV_RE.search(key) and len(value) >= 8
+        },
+        key=len,
+        reverse=True,
+    )
+    for value in values:
+        text = text.replace(value, "[REDACTED PROCESS SECRET]")
+    return text
+
+
 def build_system_prompt(amigo: str) -> str:
     profile = AMIGO_PROFILES.get(amigo, AMIGO_PROFILES["desi"])
     bits = [
@@ -388,6 +407,7 @@ def process_inbound_mail() -> int:
             continue
 
         reply_body = clean_reply_body(reply_body)
+        reply_body = redact_process_secrets(reply_body)
         subject = re.sub(r"[\r\n]+", " ", subject).strip()
         clean_subj = decode_subject(subject)
         if not clean_subj.lower().startswith("re:"):
