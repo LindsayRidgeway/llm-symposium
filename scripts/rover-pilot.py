@@ -30,6 +30,10 @@ FRAMES = '/tmp/walk'
 MIN_CLEAR = 25          # cm
 MAX_SPEED = 40
 MAX_MOVE = 3.0          # seconds
+# Calibrated 2026-09-26 by Lindsay's observation from three feet away: one 2.63 s arc at steer 40
+# is about 180 degrees at speed 22-24, so ~68 deg/s. Positive steer is RIGHT, negative is LEFT.
+DEG_PER_SEC = 68.0
+TURN_STEER = 40
 VOICE = os.path.expanduser('~/.piper_models/en_US-lessac-medium.onnx')
 
 MOTION = {}             # last command, for /status
@@ -288,6 +292,22 @@ class Handler(BaseHTTPRequestHandler):
                 BODY.look(int(float(q.get('pan', 0))), int(float(q.get('tilt', 0))))
                 MOTION['last'] = 'look %s %s' % (q.get('pan', 0), q.get('tilt', 0))
                 return self._send(200, {'pan': BODY.pan, 'tilt': BODY.tilt})
+            if verb == 'turn':                      # turn?deg=90&dir=left - calibrated, not guessed
+                deg = float(q.get('deg', 90))
+                sign = -1 if q.get('dir', 'left') in ('left', 'l', '-1') else 1
+                speed = q.get('speed', 22)
+                left = abs(deg) / DEG_PER_SEC
+                chunks = []
+                while left > 0.01:
+                    piece = min(left, 2.9)
+                    code, payload = guarded_move('fwd', sign * TURN_STEER, speed, piece, True)
+                    chunks.append(payload)
+                    left -= piece
+                    if code != 200 or payload.get('stopped_by'):
+                        break
+                MOTION['last'] = 'turn %s %s' % (deg, q.get('dir', 'left'))
+                return self._send(200, {'turned_deg': deg * (1 if sign > 0 else -1),
+                                        'deg_per_sec': DEG_PER_SEC, 'chunks': chunks})
             if verb in ('fwd', 'back'):
                 code, payload = guarded_move(verb, int(float(q.get('steer', 0))),
                                              q.get('speed', 18), q.get('secs', 0.6),
@@ -337,7 +357,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
             return self._send(404, {'error': 'unknown command', 'verbs': [
                 'status', 'look', 'fwd', 'back', 'drive', 'advance', 'scan', 'photo', 'say',
-                'stop', 'quit', 'mock']})
+                'turn', 'stop', 'quit', 'mock']})
         except Exception as e:
             try:
                 BODY.stop()

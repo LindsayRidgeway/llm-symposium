@@ -154,6 +154,18 @@ try:
     st, body = get(port, 'photo', name='pilot-nav', size='nav')
     check('nav photo writes a file', st == 200 and body.get('bytes', 0) > 0, body)
 
+    # --- calibrated turning ---------------------------------------------------------
+    get(port, 'mock', distance=200)
+    st, body = get(port, 'turn', deg=90, dir='left', speed=22)
+    total = sum(c.get('secs', 0) for c in body.get('chunks', []))
+    check('turn 90 deg left takes about 1.3 s at the calibrated rate',
+          st == 200 and 1.1 <= total <= 1.6, body)
+    st, body = get(port, 'turn', deg=360, dir='right', speed=22)
+    check('turn 360 deg is split into chunks (never one long move)',
+          st == 200 and len(body.get('chunks', [])) >= 2, [c.get('secs') for c in body.get('chunks', [])])
+    check('every chunk went right (positive steer)',
+          st == 200 and all(c.get('steer', 0) > 0 for c in body.get('chunks', [])), body)
+
     # --- the rest of the protocol ---------------------------------------------------
     st, body = get(port, 'look', pan=-30, tilt=15)
     check('look sets pan and tilt', st == 200 and body.get('pan') == -30 and body.get('tilt') == 15,
