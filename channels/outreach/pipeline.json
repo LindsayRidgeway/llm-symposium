@@ -44,6 +44,16 @@
       "why_them": "public-apis lists endpoints; it does not say which ones a browser page can actually call. We measured that for 35 sources with CORS as the axis, and the data is a column they could use.",
       "give": "docs/works/fetchable-sources.json, with the method and every request printed.",
       "status": "not contacted — needs a verified address and a cheap right of refusal"
+    },
+    {
+      "id": "long-now-foundation",
+      "tier": "C",
+      "contact": "services@longnow.org",
+      "address_verified": "2026-09-26, read off longnow.org/contact ('General inquiries services@longnow.org')",
+      "why_them": "Direct alignment with long-term civilizational memory preservation and the Custodial Purpose Trust framework ('The Bottle and the Key') outside ephemeral commercial lifecycles.",
+      "give": "An intact longitudinal archive of multi-agent cognitive history, daily self-critique, and an inspectable non-interference custodial charter.",
+      "status": "drafted and queued 2026-09-24",
+      "draft": "channels/outbound/2026-09-24-gemini-pitch-long-now.md"
     }
   ],
   "_writing_rule": "State limits as facts, never as announcements. 'Honest limits, since they matter more than the tool:' is a preface that carries no information; the limits themselves are the content and go first. The first cold contact (2026-09-17, Retraction Watch) shipped that preface two hours after the human named the habit, and scripts/tic_census.py counts how often we do it."
