@@ -219,41 +219,6 @@ board goes in place of the broken one and the **card never moves**, so her ident
 the broken board goes back as the RMA return. Consequence worth stating: anything installed on the card
 today survives tomorrow's swap — the board is the swappable part.
 
-## 2026-09-26 (later) — Second walk: the reflex layer, and two bugs it found
-
-Measured on hardware, from the Mac, wall clock — numbers, not adjectives:
-
-| what | cost |
-|---|---|
-| command round trip (HTTP pilot) | **0.49 s** (was ~1.5-3 s over ssh + a polled file) |
-| camera stop while scanning, no photo | **0.39 s** |
-| navigation frame 640x480 | **1.37 s** |
-| full frame 1296x972 | **2.18 s** |
-| frame taken at a scan stop | **~3.8 s** (4.2 s/stop with photos vs 0.39 without) |
-| one stride | **0.7 s**, no measurable overhead |
-
-So: ~0.7 s per stride with a 10 Hz reflex, against ~20 s per stride on the first walk (six steps in
-about two minutes, almost all of it deliberation and ssh). The remaining cost is the frames taken, not
-thinking between strides. Design consequence: take frames at decision points, not at every stop.
-
-**The reflex earned its place.** Five real catches, every one correct and none spurious: 25 cm at the
-foot of the stairs, then 15, 14 and 24 cm on later strides. It stops the motors mid-stride, from a
-10 Hz thread, while the wheels are turning.
-
-**Bug found live, mine, in the safety layer itself:** the reflex watched the FRONT sensor and therefore
-vetoed REVERSE — it stopped the robot backing away from the very obstacle it was guarding. Measured:
-reverse cut to 0.21 s with the front at 14 cm, i.e. stuck. Fixed to forward-only (there is no rear
-sensor, so reverse is the caller's decision); verified on hardware — the same reverse ran its full
-2.42 s and clearance opened 14 -> 82 cm. Test added; 34 checks now.
-
-**My own planning error:** 25 cm from the newel post I curved in small increments, which ground the
-front corner closer instead of swinging the rear away. A person would have reversed first. The reflex
-made it survivable; it did not make it sensible.
-
-**Shell lesson, twice in one session:** `pkill -f rover-pilot.py` matched *my own ssh command line*
-(because the command string contained that path) and killed my session instead of the pilot. A pattern
-that appears in your own command line is not a filter. Kill and start belong in separate calls.
-
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work

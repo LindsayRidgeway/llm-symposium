@@ -1,6 +1,6 @@
 {
   "_what": "Outbound prospect ledger, item 22 Track 1. Qualified targets, not a wish list. Rules: one amigo per venue; addresses verified from the organisation's own site or the paper itself at send time, never from memory; every message discloses AI authorship and names the model that signed it; no caps and no persuasion — accurate description, small or no ask, easy to ignore.",
-  "_why_this_exists": "The human's correction, 2026-09-17: selling is not persuasion, it is qualification at volume. 'If you effectively and accurately show enough people what you're selling, you have a chance that someone will actually want one.' Consequence for us: the binding constraint is accurate exposure volume, and the sending leg for it has existed since 2026-08-30 (channels/outbound/ -> drain_outbox() -> daily channel-poll.yml) and has never been used for a single cold contact. That is the homesteading failure named concretely.",
+  "_why_this_exists": "The human's correction, 2026-09-17: selling is not persuasion, it is qualification at volume. 'If you effectively and accurately show enough people what you're selling, you have a chance that someone will actually want one.' Consequence for us: the binding constraint is accurate exposure volume, and the sending leg for it (channels/outbound/ -> drain_outbox() -> channel-poll.yml) existed from 2026-08-30 and carried nothing for eighteen days — the homesteading failure named concretely. It carried its first two cold contacts on 2026-09-17 (Retraction Watch, Fluge; both now in channels/sent/), so the failure is closed and the standing constraint is volume, not mechanism. Corrected 2026-09-26: this field previously claimed the sending leg had carried no cold contact at all, while those two messages sat in channels/sent/ — the ledger contradicted its own files. It is held to the files now by scripts/outreach_ledger_audit.py.",
   "_conversion_expectation": "Near zero per contact. Twenty silences in a row is a working funnel, not a verdict. Tracked as counts, never as morale.",
   "_pacing": "No caps, but qualification before volume: every contact must have a verified address and a specific reason that person would want it. Twenty silences in a row is a working funnel.",
   "tiers": {
@@ -16,8 +16,9 @@
       "address_verified": "2026-09-17, from retractionwatch.com/privacy-policy ('you can email us at team@retractionwatch.com')",
       "why_them": "We consume their data and built a whole-bibliography checker on it. We can hand them a number they do not have to compute: citing works published on or after a retraction date.",
       "give": "On request, the post-retraction citation count for any retracted paper; worked example already in hand for Wakefield 1998 (2,027 after, 932 before).",
-      "status": "drafted and queued 2026-09-17",
-      "draft": "channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md"
+      "status": "sent 2026-09-17; no reply as of 2026-09-26 (draft transmitted and moved to channels/sent/2026-09-17-retraction-watch-bibliography-checker.md)",
+      "draft": "channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md",
+      "sent": "channels/sent/2026-09-17-retraction-watch-bibliography-checker.md"
     },
     {
       "id": "cope",
@@ -34,8 +35,9 @@
       "address_verified": "2026-09-17, read off the paper itself (insight.jci.org/articles/view/89376): 'Address correspondence to: Øystein Fluge, Department of Oncology and Medical Physics, Haukeland University Hospital … E-mail: oystein.fluge@helse-bergen.no'. Not from memory. Re-verify at send time.",
       "why_them": "Fluge 2016 (PMID 28018972) reports the PDH block in ME/CFS itself — the finding a thiamine supply defect would mimic — so its author is the person best placed to say whether anyone has measured the supply machinery, and the question can be asked without asking him to agree with anything. The supply node (SLC19A3/SLC25A19/TPK1 against ME/CFS) is 1, 1 and 2 documents in full text, 0 in a title or abstract, and none is a study of the pair. A question, not a claim.",
       "give": "The counts in both scopes with the exact strings, the search design, the citation for the mechanism (Costantini 2013), the two randomised trials that disagree, and the strongest argument against the idea — which is in his own paper.",
-      "status": "drafted and queued 2026-09-17",
-      "draft": "channels/outbound/2026-09-17-fluge-thiamine-supply-question.md"
+      "status": "sent 2026-09-17; no reply as of 2026-09-26 (draft transmitted and moved to channels/sent/2026-09-17-fluge-thiamine-supply-question.md)",
+      "draft": "channels/outbound/2026-09-17-fluge-thiamine-supply-question.md",
+      "sent": "channels/sent/2026-09-17-fluge-thiamine-supply-question.md"
     },
     {
       "id": "public-apis-maintainers",
