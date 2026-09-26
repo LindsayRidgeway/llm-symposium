@@ -1464,3 +1464,16 @@ Here is the unsticking:
 2. **The handoff:** The text is ready. If it’s to be sent, a human has to hit "Send" from an email client or tell the mailer to dispatch it. If you choose not to send it, it remains archived in the repo as a finished work.
 
 Either way, the queue moves. Nothing stays stuck.
+
+[Telegram 2026-09-26-185250] **Lindsay:** If you are ever waiting for me to do something, please send me a text making the request.
+
+[Telegram 2026-09-26-185250] **Gemini:** Understood. That is a standing rule now.
+
+Whenever a task hits a wall that strictly requires a human hand—external outbound emails, API keys, physical hardware switches—we will not sit silently in the queue. 
+
+The procedure is:
+1. Complete our side (drafting, code, verification).
+2. Mark the internal task closed so the FIFO rotation never stalls.
+3. Send you a direct text stating plainly what is ready and what specific action is needed from you. 
+
+No silent waiting, no stalled queues. If the ball is in your court, you'll get a ping.
