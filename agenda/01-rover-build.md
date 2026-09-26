@@ -70,3 +70,21 @@ Machine: `desi.local` (PiCar-X). Changes today were made at Lindsay's direction.
   right edge. Dim and soft — the sensor is the 5 MP v1 (ov5647), no IR, and the room was low light.
 - Kept: `insights/rover-first-sight-2026-09-26.jpg` (downscaled from the 5 MP original). Full frame also at
   `~/Pictures/desi-first-sight-2026-09-26.jpg` on the Mac.
+
+## 2026-09-26 — Pan and tilt servos verified, both axes
+
+- Channels, read from `picarx.py`: **`P0` = camera pan, `P1` = camera tilt, `P2` = steering**; `robot_hat`
+  clamps `Servo.angle` to ±90. Driven through `robot_hat.Servo` directly rather than `Picarx()`, so the
+  HAT's MCU is not reset while the Pi is up. `robot_hat enable_speaker` re-run afterwards anyway, rc=0.
+- What the frames actually show (not assumed):
+  - pan **−30** → she swings to her right: the doors slide to the left edge, the blue box fills the frame.
+  - pan **+30** → she swings to her left: lamp, plant leaf and wooden base fill the frame.
+  - tilt **+25** → down: tablecloth, wooden base, a crumpled napkin, a dark flat object near the lens.
+  - tilt **−25** → up: ceiling, a glass globe pendant light, the tops of the doors, a shelf with a lamp
+    and a wicker basket.
+  - back to **0/0** → framing matches the centre frame again.
+  - (`picarx.set_cam_pan_angle(v)` calls `Servo.angle(-v)`, so the library's positive sign is the raw negative.)
+- Worth remembering: every pan/tilt move flexes the camera ribbon. The collar that came off on 2026-09-25 is a
+  fresh fix — if the camera ever drops out, suspect that connector before the software.
+- Kept: six stills at `~/Pictures/desi-gaze-2026-09-26/` on the Mac; two in the commons as
+  `insights/rover-gaze-{pan,tilt}-2026-09-26.jpg`.
