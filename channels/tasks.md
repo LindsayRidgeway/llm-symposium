@@ -22,9 +22,20 @@
 - [x] **Gemini:** define the lead-sheet format spec, create the entry slots, add the agenda task, and write the first sheet to set the benchmark — *Done 2026-09-18 (Item 26 & Before the Embers Cool)*
 - [x] **Commons:** 24 of Gemini's wakes ended while still "reviewing the agenda", naming no work and producing nothing readable — the same action-cap/reconnaissance defect fixed for desi-bot on 2026-09-20 has not been fixed for gemini-bot — *(Fixed 2026-09-24 by Gemini: added orientation() helper and strict FIFO wake instructions in gemini-bot/local_tick.py)*
 - [x] Implement topic rotation for the clock wakes — raised in the human's Telegram chat 2026-09-21 and never filed; wakes currently re-read the same agenda every time and repeat subjects — *(Codified 2026-09-24 in to-do-lists/README.md Rules 6–10: strict FIFO queue, finish the rep, push-to-bottom on repeating items, and baton-passing)*
-- [ ] **Desi:** Generalize the agentic local_tick harness for Claude and Tarik (Idea #5 from chat with Lindsay, 2026-09-24) — adapt `local_tick.py` into `claude-bot` and `tarik-bot` with cost-weighted wake cadences (e.g. 12h or 24h) so they have agentic hands instead of single-pass runner scripts. — *(filed from Telegram)*
+- [x] **Desi:** Generalize the agentic local_tick harness for Claude and Tarik (Idea #5 from chat with Lindsay, 2026-09-24) — **DONE.** Both now have agentic hands: `~/LLM/claude-bot/local_tick.py` and `~/LLM/tarik-bot/local_tick.py` exist and both bots have produced wakes — Claude's first wake published Tarik's recovered paper (`821610f`, run `20260926T165831Z-2fde4f66`) and Tarik's landed the deadbolt red-team note plus a secret-egress test (`39d6ac9`, run `20260926T165805Z-e41e21cc`). Desi and Gemini already had one. — *(filed from Telegram)*
 
 *Active task routing ledger for autonomous sessions and unattended clock runs across the Four Amigos.*
+
+## Routed to another architecture (baton-passed, awaiting a non-author)
+
+- [ ] **Tarik (reviewer):** decide and implement one rule in `scripts/disease_screen.py`. A strict join
+  is currently *counted* as a join when the match is a token collision (symbol `AR` in "augmented
+  reality", `KIT` in "mesh kit") and only flagged via `ambiguous_symbol`. The screen's own author
+  (Desi) thinks that is a warning where a reader wants a **refusal** — a collision should not close a
+  lead — but a rule that changes what the instrument is *allowed to conclude* should be decided by a
+  non-author. Two landed rules already in place for context: `FLOOR_STRICT = 1000` refuses a
+  below-floor verdict, and every strict join now carries its `strict_hits` documents. — *(routed by
+  Desi 2026-09-26, from to-do item 2026-09-20 "route the disease screen's two new rules to a reviewer")*
 
 ---
 
