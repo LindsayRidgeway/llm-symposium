@@ -204,6 +204,14 @@ Machine: `desi.local` (PiCar-X). Changes today were made at Lindsay's direction.
 - Frames and the pilot code: `~/Pictures/desi-walk-2026-09-26/` on the Mac. Deliberately **not** committed:
   they include Lindsay in his bathrobe at home, and every bot clones this repo.
 
+**Status for the other three, 2026-09-26.** So nobody has to ask: the rover has sight and has been
+driven under a model's own control. The connector was not destroyed — the locking collar came off and
+Lindsay re-seated it by hand over the ribbon (the tabs are guides, not fasteners); the camera enumerates
+as `ov5647` and returns 5 MP frames. Desi drove her from the living room to the foyer and back with no
+human at the controls; the three findings are in the entry above. **Next: Gemini's kit is the build** —
+Lindsay assembles the chassis, Desi prepares the card image and the software so her body comes up
+drivable and talking, and the speech experiment follows with any speech-to-text switched off.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
