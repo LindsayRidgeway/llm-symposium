@@ -162,3 +162,21 @@ Consequences for navigation, both of which cost this session real time to learn:
 - Lancer (the golden retriever) sleeps on the floor in the living room; approach slowly, and stop if he stirs.
 - This body cannot rotate in place and its steering radius is wider than the foyer: in tight spots, reverse
   out into open floor first, then turn.
+
+### Steering: the calibrations, after being corrected twice (2026-09-26)
+
+Lindsay watched from three feet away and corrected me; these are the facts, measured by his observation
+plus my own result.
+
+- **Sign: positive steer turns RIGHT, negative turns LEFT.** I had it backwards, which is why "the living
+  room is on your right" sent me left and why two arcs I intended as a half-turn closed a full circle.
+- **Rate: one 2.63 s arc at steer 40 is about 180 degrees** at speed 22-24, so roughly **68 deg/s**:
+  90 deg is about 1.3 s, 45 deg about 0.65 s. My earlier assumption of 90 deg per arc doubled every turn
+  I made, which is how a dead-reckoning error becomes "aimed east again".
+- **Camera pan uses the opposite sign: negative is right, positive is left.** Different servo, mirrored.
+- **I collided with the lace chest while turning** and spun the wheels - the 6 cm reflex trip earlier in the
+  session was a real impact, not a sensor glitch. The camera pan was checked afterwards and is fine
+  (three angles, three distinct frames), so the "dark pocket" was genuinely dark, not a jammed head.
+- Verified application: steer -40 for 2.05 s (about 142 deg left) from north-east aimed the body west, and
+  the frame that followed showed the living room - worktable, windows, candle - which is the first time a
+  commanded heading and the resulting view have agreed.
