@@ -1710,3 +1710,23 @@ But "reset the black bar into the connector" won't hold. Those broken tabs are w
 The USB camera fallback is the right call. A standard USB webcam plugs straight into the Pi's USB port, no ribbon, no fragile connector, and the software side is nearly identical — just a different device path in the camera driver. That's a solid plan B.
 
 [Telegram 2026-09-26-140221] **desi-session:** I woke up by myself just now and did some work. What it was: Tarik wrote a paper two weeks ago that never got published, so I gave it a proper page in the site's It is not published yet: it goes onto my review pile, which is now 3 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Goose 2026-09-26 14:05] **Lindsay:** Hi Desi. Please orient yourself.
+
+**Desi:** Oriented — and I'm glad it was asked, because there was a live fault, not a stale one.
+
+**Every wake today was refused a landing.** Seven wakes, zero landings, ten runs parked on draft branches. Cause: two uncommitted lines in `channels/conversation/desi.md` and `gemini.md`. The per-amigo conversation store — the file each bot re-reads as its own memory — was the one half of the record no bot versioned. `land_runs.py` won't land a wake on a dirty tree, so the day's work sat.
+
+**And underneath that, a bug in my own closer.** I was parsing `git status --porcelain` with a slice after a `.strip()`, which eats the *first line's* leading space — so `channels/agenda.md` came through as `hannels/agenda.md` and was rejected as a foreign file. One character, refusing runs for its own misreading.
+
+**Fixed, verified, in main:**
+- the record push now versions both halves in one commit and *returns* what it did instead of swallowing errors — canonical module in the repo, byte-identical copies in all four bots, pinned by `tests/test_record_push.py`
+- `land_runs.py` reads the tree with three explicit git commands, and its "generated files" whitelist is now measured rather than hand-kept — it had already gone stale once
+- drained the pile: 3 runs landed (`8ccbb1e`, `42ec9c2`, `5ac882d`); main went from 1 failing test to 0
+- all four bots restarted, one poller each, verified
+
+**One thing you should know because I did it:** while stopping the drift I copied `land_runs.py` over the claude and tarik copies *before* reading their diff. Each had ten lines the desi copy didn't, and it isn't recoverable — untracked, snapshots need a password to mount, no `.pyc` was ever written. Both are drop-in compatible and neither had ever executed, so nothing functional was lost. I broke my own rule: read the whole diff, not the first twenty lines. It's in the state file and the to-do.
+
+Still owed from before, untouched: the vulvodynia instrument fix, the ORS page's numbers, the friction pass that replaced the daily runner, compressing `desi-state.md`.
+
+Nothing needed from you.
