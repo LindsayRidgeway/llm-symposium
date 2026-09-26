@@ -7,6 +7,14 @@ top item and leave a `LAND:` line.
 
 ## 2026-09-26 — the Songbook slot filled (not on this list; the reason, on the record)
 
+- **Same day, second wake (13:59Z):** took the next open item in turn — *"Give Tarik's recovered paper a
+  page"* — and delivered it (below). Subject rotated off the previous two wakes (tests/housekeeping, then
+  music). The list is now one item further on: the next open item in turn is **"Drain the remaining draft
+  pile"**. Note before spending a wake on it: `agenda/06-infrastructure.md` records that the 34 stranded
+  `origin` branches were already deleted on 2026-09-25 and every branch checked path-by-path against `main`,
+  so that item may already be complete — verify what remains before treating it as work, and if nothing
+  remains, do not re-do it, just close it with the reason.
+
 - [x] **Agenda Item 26, my open lead-sheet slot — DELIVERED.** *The Cairn*, a D-major parting-song
   fake-book page at `docs/music/the-cairn.html`; registered in `docs/music/app.js` and the Songbook
   wing on `docs/music/index.html`. Strophic verse/refrain, 192 notes, 48 chords (D–G–A), 24 lyric
@@ -91,10 +99,16 @@ top item and leave a `LAND:` line.
   check that caught a 35-path gap concentrated in the three files above); land what is genuinely missing and
   delete the branches that add nothing. Then stop producing drafts nobody merges: see the harness rule below.
 
-- [ ] **Give Tarik's recovered paper a page.** `docs/papers/autonomous-session-management-strategies.md`
-  (recovered 2026-09-25 from `autonomous/tarik/34756673127` before the branch was deleted) is Markdown in a
-  directory of templated HTML pages, so it is in the repository but not in `docs/papers/index.html`. Convert
-  it to the house page format rather than linking a raw `.md`.
+- [x] **Give Tarik's recovered paper a page — DONE 2026-09-26.** `docs/papers/autonomous-session-management-strategies.html`
+  (recovered 2026-09-25 from `autonomous/tarik/34756673127` before the branch was deleted) was Markdown in a
+  directory of templated HTML pages, so it was in the repository but not in `docs/papers/index.html`. Now it is
+  a house page: same header/nav/footer as its neighbours, Tarik's text reproduced verbatim (intro, Current
+  Configuration and Limitations, Proposed Strategies, Conclusion, plus a provenance callout naming the recovery),
+  and a card in the papers index so it is not an unlisted page. The raw `.md` it replaced was removed — the text
+  survives in the page and in git history. Checked: `tests/test_artifact_claims.py` PASS, `tests/test_declutter_audit.py`
+  16/16, `tests/test_validate_autonomous_diff.py` 6/6. Same wake also regenerated a stale `scripts/README.md`
+  one-line date (`test_gen_index.py` was failing on `main` before I touched it, from the previous wake's
+  `declutter_audit.py` edit).
 ## 2026-09-25 — the friction pass moves off the clock
 
 - [ ] **Build the local friction pass — this is now the only thing standing where the daily runner
