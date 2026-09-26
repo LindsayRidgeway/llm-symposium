@@ -66,9 +66,15 @@ top item and leave a `LAND:` line.
   may not make:** `file_tasks` in `~/LLM/desi-bot/bot.py` must call
   `new_items(items, open(path, encoding="utf-8").read().splitlines())` before inserting. Until then the
   rule exists and nothing enforces it. **Do not re-write the module.**
-- [ ] **`push_record()` stages `channels/telegram/` only**, so `channels/conversation/*.md` grows
-  uncommitted until something else commits it (203 lines today). Not data loss — the file is on
-  disk — but the per-amigo conversation store is not actually versioned by the thing that writes it.
+- [x] **`push_record()` stages `channels/telegram/` only** (done 2026-09-26). Not data loss — the file is
+  on disk — but the per-amigo conversation store was not versioned by the thing that writes it, and
+  the cost turned out to be *blockage*, not loss: `land_runs.py` refuses to land a wake on a dirty
+  tree, so **every wake on 09-26 was refused for the same two uncommitted lines** (7 wakes, 0
+  landings, 10 runs parked). Fixed: `channels/record_push.py` is now the canonical function (stages
+  both paths, returns a state dict instead of swallowing errors), copied byte-identical into all
+  four bot directories, and every `bot.py` delegates to it. `tests/test_record_push.py` pins the
+  copies to the canonical file and reports what each bot stages. The bots must be **restarted** for
+  it to take effect.
 
 - [ ] **Move the channel-log trim to the local side.** Retiring `channel-poll.yml` (2026-09-25) stopped
   `channels/retention.py`, the only thing that trims `channels/telegram/`, `channels/inbound/` and
@@ -87,6 +93,26 @@ top item and leave a `LAND:` line.
   re-argue it, the check was made reproducible: `tests/validate_ors_calculator.mjs` now parses the row's own
   Na, sugar mass and printed total, derives 2×Na + glucose + fructose, and asserts the printed range
   brackets it — 38/38, up from 34. The number is right; nothing now stops it rotting.
+- [ ] **`land_runs.py` read the tree wrong and refused seven runs for it** (found + fixed 2026-09-26).
+  Two faults in my own closer, both silent. (1) `git status --porcelain` sliced at column 3 after an
+  outer `.strip()`, which eats the *first line's* leading space — `" M channels/agenda.md"` became
+  `"M channels/agenda.md"` and the slice produced `"hannels/agenda.md"`, so the first dirty path was
+  always misread as foreign. (2) The generated-index whitelist is a hand-kept list and had gone stale
+  (`discussions/README.md` was added to the generator, not to the list). Now: three explicit git
+  commands instead of a slice, and the whitelist is *measured* — the suite is run once and whatever
+  it rewrites becomes the generated set, so it cannot go stale again. Also added: the live-chat
+  record is committed before a landing instead of blocking it. **Landed 3 runs** with this
+  (`8ccbb1e`, `42ec9c2`, `5ac882d`); 2 more are `conflict` and 57 older drafts still need draining.
+- [ ] **Incident, 2026-09-26: I overwrote two files without reading them first.** `claude-bot/land_runs.py`
+  and `tarik-bot/land_runs.py` were older copies (10 lines each that `desi-bot`'s did not have). I
+  `cp`'d desi's over both to stop the drift *before* looking at the difference. Not recoverable: the
+  files are untracked in `llm-symposium-bots`, Time Machine snapshots exist but cannot be mounted
+  without a password, and no `.pyc` was ever written (neither copy had ever been imported — both
+  `tick-state/runs` directories are empty, so the lost code had never executed). Both now pin
+  identical to the fixed copy and their `local_tick.py` calls `land(run_dir, dry_run=False)`, the
+  same signature. **The rule I broke: read the whole diff, not the first twenty lines.** From the
+  incident I also learned the copies had already drifted for days with nobody noticing, which is the
+  argument for the byte-identity test rather than for more care.
 - [ ] **Drain the remaining draft pile — 30 branches on origin.** Verified path-by-path against `main` (the
   check that caught a 35-path gap concentrated in the three files above); land what is genuinely missing and
   delete the branches that add nothing. Then stop producing drafts nobody merges: see the harness rule below.
