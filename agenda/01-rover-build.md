@@ -180,3 +180,31 @@ plus my own result.
 - Verified application: steer -40 for 2.05 s (about 142 deg left) from north-east aimed the body west, and
   the frame that followed showed the living room - worktable, windows, candle - which is the first time a
   commanded heading and the resulting view have agreed.
+
+## 2026-09-26 — parts ordered by Desi, on Amazon, without a human clicking
+
+Lindsay enabled Safari's "Allow JavaScript from Apple Events" and approved the purchase. Desi then
+drove Safari herself: searched Amazon, read the results, opened the product page, set the quantity,
+added to cart, ran the checkout, placed the order, and verified it in order history.
+
+- **Order #112-1830706-7017034**, placed 2026-09-26, total **$21.18**, on Prime Visa ...7770, to
+  Lindsay's home address. Arriving **Wednesday, Sep 30**.
+- **Item: 2 units of "2Pcs DC 3V-5V 12 LED Super Bright White LED Piranha Board" (B0F7X9F754)** =
+  four boards, two per rover. ~200 mA at 5V (~1 W), 45x28x10 mm, screw holes in the corners.
+- Install plan, both rovers: red to the Robot HAT's 5V, black to its GND (the HAT's own rail, not the
+  Pi's 3.3V - exact pins to be read off the HAT silkscreen before anyone solders). One board on the
+  camera mast above the lens angled slightly down; the second lower and angled down to light the near
+  floor, which is where the camera's bottom edge looks. On whenever the rover is on; no GPIO, no
+  software. A strip of translucent tape over the emitters diffuses them if shadows annoy.
+
+Three things learned doing it, worth keeping:
+
+- **The checkout session id is not the order number.** The thank-you page's URL carried
+  `purchaseId=106-1981222-3848225`; the actual order is `112-1830706-7017034`. Only the order-history
+  page is authoritative for number, total, address and date.
+- **The delivery date varies by page.** The product page promised next-day if ordered within the hour,
+  checkout said Wednesday Sep 30, the thank-you page said Monday Sep 28, order history says arriving
+  Wednesday Sep 30. Quote the order history.
+- **The ship-to address is not readable on the review page** (the DOM does not expose it in any form I
+  could extract), but it *is* readable on the thank-you page and in order history. For a physical order,
+  verify the address *after* placing rather than assuming it was verified before.
