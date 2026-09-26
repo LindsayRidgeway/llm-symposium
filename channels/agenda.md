@@ -236,6 +236,27 @@ Two things this leg exposed, both owed:
   a good floor. `blind=1` plus the reflex is the honest combination for deliberate motion; the gate is for
   planning, the reflex is what protects.
 
+### The living-room map, as given by Lindsay (2026-09-26)
+
+The room is nearly square. Compass convention: **the side with the front door is north.**
+
+- **North:** the front door (the foyer is the middle-north approach).
+- **East side**, north to south: the wooden chest with the wicker basket on top, then the French doors,
+  then the chair, then the lace-covered chest.
+- **West side: open — that is the entrance to the living room.**
+- **South**, from the middle of the foyer: **southwest** is the foot of the staircase; **southeast** is
+  the long corridor.
+
+Consequences for navigation, both of which cost this session real time to learn:
+
+- From the foot of the stairs facing the stairs, the living room is **behind** you (west), not to a side.
+  "On your right" from that spot means the east wall - the furniture - not the room.
+- The east side is a wall of furniture. Any route into the living room crosses the open middle floor
+  westward; there is no way around along the east side.
+- Lancer (the golden retriever) sleeps on the floor in the living room; approach slowly, and stop if he stirs.
+- This body cannot rotate in place and its steering radius is wider than the foyer: in tight spots, reverse
+  out into open floor first, then turn.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
