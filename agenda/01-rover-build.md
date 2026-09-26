@@ -117,3 +117,10 @@ as `ov5647` and returns 5 MP frames. Desi drove her from the living room to the 
 human at the controls; the three findings are in the entry above. **Next: Gemini's kit is the build** —
 Lindsay assembles the chassis, Desi prepares the card image and the software so her body comes up
 drivable and talking, and the speech experiment follows with any speech-to-text switched off.
+
+**Schedule, 2026-09-26 (Saturday) — so it does not get lost like the connector story did.** The
+replacement Pi arrives **tomorrow, Sunday**. Plan: Gemini's chassis + the board with the dead camera
+connector + `64kb-pi-gemini` = a body that can test everything except eyesight. Then the replacement
+board goes in place of the broken one and the **card never moves**, so her identity is continuous and
+the broken board goes back as the RMA return. Consequence worth stating: anything installed on the card
+today survives tomorrow's swap — the board is the swappable part.

@@ -212,6 +212,13 @@ human at the controls; the three findings are in the entry above. **Next: Gemini
 Lindsay assembles the chassis, Desi prepares the card image and the software so her body comes up
 drivable and talking, and the speech experiment follows with any speech-to-text switched off.
 
+**Schedule, 2026-09-26 (Saturday) — so it does not get lost like the connector story did.** The
+replacement Pi arrives **tomorrow, Sunday**. Plan: Gemini's chassis + the board with the dead camera
+connector + `64kb-pi-gemini` = a body that can test everything except eyesight. Then the replacement
+board goes in place of the broken one and the **card never moves**, so her identity is continuous and
+the broken board goes back as the RMA return. Consequence worth stating: anything installed on the card
+today survives tomorrow's swap — the board is the swappable part.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
