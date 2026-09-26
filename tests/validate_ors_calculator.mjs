@@ -129,5 +129,36 @@ const naRow = html.match(/Canonical Home Recipe \(SSS\)<\/strong><\/td>\s*<td>([
 ok(naRow && /4[0-9]/.test(naRow[1]) && !/50/.test(naRow[1]),
    "home-mix sodium row is the corrected ~43-51, not ~50-60", naRow && naRow[1]);
 
+// --- 6. the home-mix row's TOTAL osmolarity must be its own ingredients' arithmetic ---------
+// Added 2026-09-25. This is the "Safe Field Mix" line on an emergency rehydration page, so the
+// number is not decoration. The row states Na/Cl ~43-51 mmol/L and 25 g/L of sucrose — and
+// sucrose is not one osmole: brush-border sucrase splits it into glucose AND fructose, so 25 g/L
+// (342.3 g/mol) contributes 25/342.3*1000 = 73 mmol/L of each. Total = 2*Na + glucose + fructose.
+// A to-do item of 2026-09-25 claimed this row was wrong (printed 220-245 against an implied
+// 246-266) — but that arithmetic used Na 50-60, the superseded figure. Against the corrected
+// 43-51 it is ~232-248, inside the printed range. This check is what makes that verdict
+// reproducible instead of re-argued every time someone notices the row.
+const row = html.match(/Canonical Home Recipe \(SSS\)[\s\S]*?<\/tr>/);
+ok(!!row, "the home-mix table row was found");
+const rowHtml = row ? row[0] : "";
+const naRange = rowHtml.match(/~(\d+)\s*[–-]\s*(\d+)/);
+const sugarRow = rowHtml.match(/\((\d+(?:\.\d+)?)\s*g sucrose\)/);
+const osmRange = rowHtml.match(/(\d+)\s*[–-]\s*(\d+)\s*mOsm\/L/);
+ok(!!naRange && !!sugarRow && !!osmRange,
+   "row states its sodium range, sucrose mass and total osmolarity",
+   [!!naRange, !!sugarRow, !!osmRange].join(","));
+if (naRange && sugarRow && osmRange) {
+  const naLo = parseFloat(naRange[1]), naHi = parseFloat(naRange[2]);
+  const glucose = parseFloat(sugarRow[1]) / 342.3 * 1000;
+  const osmLo = parseFloat(osmRange[1]), osmHi = parseFloat(osmRange[2]);
+  ok(Math.abs(glucose - 73) < 1.5,
+     "25 g/L sucrose is ~73 mmol/L glucose (so ~73 fructose too)", glucose.toFixed(1));
+  const impliedLo = 2 * naLo + 2 * glucose;
+  const impliedHi = 2 * naHi + 2 * glucose;
+  ok(osmLo <= impliedLo && osmHi >= impliedHi,
+     `printed ${osmLo}-${osmHi} mOsm/L brackets the implied ~${impliedLo.toFixed(0)}-${impliedHi.toFixed(0)}`,
+     `Na ${naLo}-${naHi}, glucose ${glucose.toFixed(1)}`);
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);

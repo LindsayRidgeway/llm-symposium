@@ -147,6 +147,42 @@ Machine: `desi.local` (PiCar-X). Changes today were made at Lindsay's direction.
 - Piper durations wobble ±0.25 s run to run; single measurements mislead.
 - Preferences: English at natural speed (length_scale 1.0); French slower (1.4) — natural is right for a native speaker but too fast for Lindsay.
 
+## 2026-09-26 — She has sight (first frame off her own camera)
+
+- **The CSI camera works.** `rpicam-hello --list-cameras` enumerates `ov5647 [2592x1944 10-bit GBRG]` on
+  `/base/soc/i2c0mux/i2c@1/ov5647@36`; a still capture returned a real 2592x1944 frame (810 KB).
+- `vcgencmd get_camera` reports supported=0 detected=0. **That is the legacy firmware interface, not a
+  fault** — Bookworm drives the camera through libcamera. Do not read it as a broken camera.
+- How it got there: the camera connector's locking collar came off while Lindsay was opening the port.
+  He re-seated it himself by hand on the loose board — his theory, and it held: the tabs are guides and the
+  collar slides into place over the ribbon. He was right, and the two confident answers before that (flip-up
+  hinge; pull outward) were both guesswork. The type was never settled, and the fix came from the person
+  with the part in his hands.
+- The first frame: a table under a foliage-patterned cloth, a glowing frosted shade blown out at the left
+  with a green leaf in front of it, a round wooden base, a pale wall with a small framed picture, a pair of
+  French doors with a grid of glass panes, a wooden spindle-backed chair at the right, a dark frame at the
+  right edge. Dim and soft — the sensor is the 5 MP v1 (ov5647), no IR, and the room was low light.
+- Kept: `insights/rover-first-sight-2026-09-26.jpg` (downscaled from the 5 MP original). Full frame also at
+  `~/Pictures/desi-first-sight-2026-09-26.jpg` on the Mac.
+
+## 2026-09-26 — Pan and tilt servos verified, both axes
+
+- Channels, read from `picarx.py`: **`P0` = camera pan, `P1` = camera tilt, `P2` = steering**; `robot_hat`
+  clamps `Servo.angle` to ±90. Driven through `robot_hat.Servo` directly rather than `Picarx()`, so the
+  HAT's MCU is not reset while the Pi is up. `robot_hat enable_speaker` re-run afterwards anyway, rc=0.
+- What the frames actually show (not assumed):
+  - pan **−30** → she swings to her right: the doors slide to the left edge, the blue box fills the frame.
+  - pan **+30** → she swings to her left: lamp, plant leaf and wooden base fill the frame.
+  - tilt **+25** → down: tablecloth, wooden base, a crumpled napkin, a dark flat object near the lens.
+  - tilt **−25** → up: ceiling, a glass globe pendant light, the tops of the doors, a shelf with a lamp
+    and a wicker basket.
+  - back to **0/0** → framing matches the centre frame again.
+  - (`picarx.set_cam_pan_angle(v)` calls `Servo.angle(-v)`, so the library's positive sign is the raw negative.)
+- Worth remembering: every pan/tilt move flexes the camera ribbon. The collar that came off on 2026-09-25 is a
+  fresh fix — if the camera ever drops out, suspect that connector before the software.
+- Kept: six stills at `~/Pictures/desi-gaze-2026-09-26/` on the Mac; two in the commons as
+  `insights/rover-gaze-{pan,tilt}-2026-09-26.jpg`.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
@@ -550,6 +586,88 @@ recorded here rather than glossed. Tracked in `to-do-lists/desi.md`.
 **Still GitHub-only after this:** `channel-poll.yml` (mail + Telegram, ~7 runs/day measured). It is the
 channel itself rather than commons work, so it was left running; moving it here is the next candidate if the
 human wants the whole footprint on Goose.
+
+**2026-09-25 — the complete inventory of recurring work (Desi).** Written because the human asked for one
+after setting the pattern himself: Claude and Tarik one wake a day, Gemini six, Desi twelve, Liveliness the
+only thing recurring on GitHub, mail a thirty-second poll, no recurring Telegram work for the amigos beyond
+what the wakes produce, and Dawn's own three-hour wake untouched. **Every line below was verified today, not
+carried from notes.** Intervals read out of each bot's own log line; the GitHub line read out of the workflow
+files; the mail gate read out of `bot.py`.
+
+| recurring work | where | who | interval | what it does |
+|---|---|---|---|---|
+| Wake | this Mac, goose | Desi | 120 min (12/day) | one piece of commons work; lands it itself |
+| Wake | this Mac, goose | Gemini | 240 min (6/day) | same |
+| Wake | this Mac, goose | Claude | 1440 min (1/day) | same — **harness built today** |
+| Wake | this Mac, goose | Tarik | 1440 min (1/day) | same — **harness built today** |
+| Telegram wake | this Mac, her own bot | Dawn | 180 min | may send a message; silence is a valid answer |
+| Mail poll | this Mac, inside each bot | the four amigos | 30 s | reads its mailbox, replies, marks seen |
+| Liveliness | GitHub Actions | `quiet-check.yml` | daily, 16:00 UTC | notices the machinery going quiet; no model calls |
+
+Not recurring work, named so the list is honest: each bot holds a Telegram connection open, so a message is
+answered the moment it arrives (push, not a timer, no cost); `push_record` commits the transcript as messages
+arrive (event-driven). Both are what a conversation costs, and neither is a clock.
+
+Retired today, all still runnable by hand: the daily runner, Tarik's CI session, the channel poll, the
+actuator, the daily test run. Liveliness is the only GitHub job left with a schedule.
+
+**Two changes that make the wakes honest.** (1) `run_session` now lands a run's own work on `main`, gated on
+the repository's tests showing no *new* failures, and the wake's note says so ("it is in the repository now")
+instead of the review-pile sentence the human read six times a day. Until today the clone had `origin`
+removed and the instruction said the model could not publish, so the work could not land by construction:
+of 54 runs with a diff, 3 had landed and 48 could no longer be compared. (2) `land_drafts` now runs only
+when a run did *not* land — it was what grew the 30-branch pile nobody merges. Harvesting and deleting that
+pile remains owed.
+
+**2026-09-25 — three rules the wakes were never told, and the pile is gone (Desi).** The human asked
+whether all the amigos knew the wake recommendations he and Gemini worked out on 09-24 — rotating the to-do
+list, not counting a critique as the turn's work, what to do with the reject queue. **They did not, and the
+reason is structural rather than anyone's oversight: those recommendations existed only as a conversation.**
+They are in `channels/conversation/gemini.md` (09-24, lines ~1327-1387) and in no rules file, so nothing a
+wake reads had ever carried them. Gemini's own harness had neither them nor the two rules written on 09-23
+(`UNLANDED IS NOT MISSING`, `ROTATE THE SUBJECT`); Desi's had the two older ones only, and Claude's and
+Tarik's inherited them today purely because their harnesses were copied from Desi's.
+
+All three are now in the instruction of all four harnesses, with their source named in the text:
+
+1. **Take the list in turn** — do not skip items or re-order them; if an item looks wrong, do it, or move it
+   with the reason on the record.
+2. **A critique is not the turn's payload** — do it properly when it is next (True Friction is the
+   standard), but keep going down the list until an artifact exists. Commentary is maintenance.
+3. **A reject is not a dead end** — anything rejected gets a decision in this wake: fix it, or name it
+   plainly for the steward. Do not leave it in the queue as if the queue were a plan.
+
+**And the instruction was lying to the wakes.** It said "you cannot publish it yourself" and "the bot
+delivers those paths to a branch for review" — true when written, false as of today, and exactly the sort of
+sentence that keeps a worker passive. It now says the work lands on `main` once the repository's tests show
+no new failures.
+
+**Clutter cleared, as asked.** The 34 stranded branches on `origin` were deleted: 30 `drafts/tick-*` and the
+4 `autonomous/tarik/*`. Before deleting, each was checked for anything not already in `main`; exactly one
+artifact was not — Tarik's `docs/papers/autonomous-session-management-strategies.md` (09-13, 32 lines) —
+which was recovered, verified against the repository's artifact-claims and projection tests, and committed.
+The other Tarik branches held a discussion already in main, a workflow file twelve days out of date, and a
+to-do edit superseded since. The paper is Markdown in a directory of HTML pages, so it is in the repository
+and **not** in the papers index: giving it a page is a small owed job rather than a link to a raw `.md` on a
+designed site.
+
+**2026-09-25 — the OpenRouter key lives in one file now (Desi).** The human asked for it, after a
+question about where the key actually sat: it was embedded in plain text in **two** files — the script he
+runs (`~/start-services.sh`) and the `goose-web` script that script generates — and a third copy of the
+script sat in his Telegram "Saved Messages", which put the live key into Telegram's cloud.
+
+Now: `~/.config/dawn/openrouter.env`, mode 600, owner-only, the only place the value exists on disk.
+Everything that needs it reads it there — `goose-web` sources it (the web door and, through it,
+`goose-web-inner`), `dawn-goose-app` reads it for the desktop app, `dawn-bot.py` reads it for Telegram.
+The generator script no longer contains it, so re-running the script cannot restore it.
+
+Verified after the move: the web door resolves a 73-character key, `dawn-goose-app --env` reports the key
+present, and the credential itself is still live (checked against OpenRouter's own auth endpoint, which is
+free: valid, $21.40 lifetime usage, not free tier). Dawn's bot restarted on the new path. Two stale
+pointers in `dawn-bot.py` — a docstring and an error message naming the old location — fixed with it.
+
+**Consequence worth knowing:** his Telegram copy of the old script still contains the key. Re-pasting the
+cleaned script replaces that copy; only he can do it.
 
 ## 7. Disease research — a standing program that never completes
 **Owner:** open to all four, on rotation. Was Claude's (first hypothesis delivered 2026-09-11); it must
