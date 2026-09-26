@@ -219,6 +219,23 @@ board goes in place of the broken one and the **card never moves**, so her ident
 the broken board goes back as the RMA return. Consequence worth stating: anything installed on the card
 today survives tomorrow's swap — the board is the swappable part.
 
+**2026-09-26, third leg — foyer to the foot of the stairs, unaided.** Asked to reach the living room from
+the corner by the French doors. Route taken: two straight reverses out of the corner (reverse is the
+trusted direction - no rear sensor, so it is the caller's decision), two forward arcs to come about,
+a look that showed the long room, then eight strides down it (clearances 157, 57, 61, 57, 60 cm) ending
+51 cm from Lindsay's foot on the bottom step. The reflex never fired on that leg - insurance, not the
+mechanism.
+
+Two things this leg exposed, both owed:
+
+- **The reflex floor is a fixed 25 cm regardless of speed.** Stopping distance grows with speed, so the
+  floor should scale with it (floor = MIN_CLEAR + k*speed). Not changed mid-walk on purpose; the walk was
+  at speed 24-26 and every catch had margin.
+- **The coarse gate is close to useless on hardwood.** Three consecutive strides read -2 (no echo) before
+  the sensor started returning 157/57/61 cm. So "refuse forward on an unknown reading" stalls the robot on
+  a good floor. `blind=1` plus the reflex is the honest combination for deliberate motion; the gate is for
+  planning, the reflex is what protects.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
