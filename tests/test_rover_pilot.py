@@ -154,6 +154,13 @@ try:
     st, body = get(port, 'photo', name='pilot-nav', size='nav')
     check('nav photo writes a file', st == 200 and body.get('bytes', 0) > 0, body)
 
+    # --- reversing arc: the tight-corner maneuver ------------------------------------
+    get(port, 'mock', distance=10)
+    st, body = get(port, 'drive', steer=40, speed=20, secs=0.4, dir='back')
+    check('drive dir=back moves backward with steer, and the reflex does not veto it',
+          st == 200 and body.get('moved') == 'back' and body.get('steer') == 40
+          and not body.get('stopped_by'), body)
+
     # --- calibrated turning ---------------------------------------------------------
     get(port, 'mock', distance=200)
     st, body = get(port, 'turn', deg=90, dir='left', speed=22)
