@@ -52,7 +52,13 @@ def _artifact_time(path: Path) -> float:
     return path.stat().st_mtime
 
 
-def prune_raw(now: float | None = None) -> list[str]:
+def prune_raw(now: float | None = None, dry: bool = False) -> list[str]:
+    """List (and unless `dry`, delete) raw channel artifacts older than the window.
+
+    `dry` was added 2026-09-26 so the local housekeeping entrypoint
+    (`scripts/retention_pass.py`) can run this pass in its default dry-run mode. The
+    default `dry=False` is the old behaviour, so every existing caller is unchanged.
+    """
     now = time.time() if now is None else now
     cutoff = now - (RETENTION_DAYS * 86400)
     removed: list[str] = []
@@ -65,19 +71,22 @@ def prune_raw(now: float | None = None) -> list[str]:
             if _artifact_time(path) >= cutoff:
                 continue
             rel = path.relative_to(REPO_ROOT).as_posix()
-            path.unlink()
+            if not dry:
+                path.unlink()
             removed.append(rel)
     return removed
 
 
 def main() -> int:
-    removed = prune_raw()
-    if removed:
-        print(f"Channel retention: pruned {len(removed)} raw artifact(s):")
-        for rel in removed:
-            print(f"  {rel}")
-    else:
-        print(f"Channel retention: no raw artifacts pruned (retention {RETENTION_DAYS} days)")
+    import sys
+
+    dry = "--dry-run" in sys.argv
+    verb = "would prune" if dry else "pruned"
+    removed = prune_raw(dry=dry)
+    print(f"Channel retention: {verb} {len(removed)} raw artifact(s) "
+          f"(window {RETENTION_DAYS} days{', dry run' if dry else ''})")
+    for rel in removed:
+        print(f"  {rel}")
     return 0
 
 
