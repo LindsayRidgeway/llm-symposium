@@ -129,5 +129,27 @@ const naRow = html.match(/Canonical Home Recipe \(SSS\)<\/strong><\/td>\s*<td>([
 ok(naRow && /4[0-9]/.test(naRow[1]) && !/50/.test(naRow[1]),
    "home-mix sodium row is the corrected ~43-51, not ~50-60", naRow && naRow[1]);
 
+// --- 6. the home-mix osmolarity row must be the arithmetic of its own ingredients ---------
+// The defect this replaces (2026-09-25/26): the row read "~220–245 mOsm/L" while naming ~73
+// mmol/L of glucose from sucrose, which is the *understated* direction — brush-border sucrase
+// splits one sucrose into one glucose AND one fructose, so the osmotic particle count doubles
+// on hydrolysis, and the row's own salt range adds a second error. The page's recipe is 1/2
+// level tsp salt (2.5–3.0 g) and 6 level tsp sugar (25–28 g) per litre; recompute both ends
+// from those amounts and require the printed range to bracket the result.
+const M_NaCl = 58.44, M_sucrose = 342.3;
+const naMM = [2.5, 3.0].map(g => g / M_NaCl * 1000);          // Na+ = Cl-, mmol/L
+const suMM = [25, 28].map(g => g / M_sucrose * 1000);         // mmol/L before hydrolysis
+const hydrolysed = [2 * naMM[0] + 2 * suMM[0], 2 * naMM[1] + 2 * suMM[1]]; // + glucose + fructose
+const mixOsm = html.match(/Canonical Home Recipe \(SSS\)[\s\S]{0,600}?<strong>~(\d+)[–-](\d+) mOsm\/L<\/strong>/);
+ok(mixOsm, "home-mix osmolarity row found", mixOsm && mixOsm[0].slice(-30));
+if (mixOsm) {
+  const lo = +mixOsm[1], hi = +mixOsm[2];
+  ok(Math.abs(lo - hydrolysed[0]) <= 5 && Math.abs(hi - hydrolysed[1]) <= 5,
+     `home-mix osmolarity row is the hydrolysis arithmetic (~${hydrolysed[0].toFixed(0)}-${hydrolysed[1].toFixed(0)} mOsm/L)`,
+     `${lo}-${hi}`);
+  ok(lo > 220 && hi >= 250,
+     "home-mix osmolarity row is no longer the understated ~220-245", `${lo}-${hi}`);
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);

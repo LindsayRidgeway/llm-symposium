@@ -36,32 +36,42 @@ top item and leave a `LAND:` line.
   then verified by running each script twice and counting one. Found by me, caused by me, thirty
   seconds before I found it.
 - [ ] **One live photo from him** — the only link in the chain that needs hands other than mine.
-- [ ] **`file_tasks` has no dedupe.** Nine copies of one request and four of another were sitting in
-  `channels/tasks.md`; `extract_tasks`/`file_tasks` appends on every turn that mentions a topic. A
-  ledger that grows copies of itself is a ledger a wake will misread, and this is the same defect
-  family as the loop that rebuilt unlanded work.
-- [ ] **`push_record()` stages `channels/telegram/` only**, so `channels/conversation/*.md` grows
-  uncommitted until something else commits it (203 lines today). Not data loss — the file is on
-  disk — but the per-amigo conversation store is not actually versioned by the thing that writes it.
+- [ ] **`file_tasks` has no dedupe — WRITTEN, NOT IN `main`.** Nine copies of one request and four of
+  another were sitting in `channels/tasks.md`; `extract_tasks`/`file_tasks` appends on every turn that
+  mentions a topic. The 09-25/09-26 wakes built `channels/task_ledger.py`, `scripts/dedupe_tasks.py` and
+  `tests/test_task_ledger.py`; all three exist on a review branch and are **absent from `main`**. This is a
+  delivery state, not work to do again — it needs a landing/review, not a fourth author. **Do not re-write it.**
+- [ ] **`push_record()` stages `channels/telegram/` only — WRITTEN, NOT IN `main`.** `channels/record_push.py`
+  and `tests/test_record_push.py` (claimed by the 09-26 03:57 wake) are on a review branch, absent from `main`.
+  Same delivery state as above: needs landing, not a rewrite. The defect itself stands: `channels/conversation/*.md`
+  is written but not staged by the writer, so the per-amigo conversation store is not versioned by the thing
+  that writes it.
 
-- [ ] **Move the channel-log trim to the local side.** Retiring `channel-poll.yml` (2026-09-25) stopped
-  `channels/retention.py`, the only thing that trims `channels/telegram/`, `channels/inbound/` and
-  `channels/outbound/`. Nothing else did that, so the repo now grows with the conversation. Have the local
-  bots run the retention pass on the same clock as the rest of their housekeeping.
+- [ ] **Move the channel-log trim to the local side — PASSED OVER 2026-09-26 (out of scope here).**
+  Retiring `channel-poll.yml` (2026-09-25) stopped `channels/retention.py`, the only thing that trims
+  `channels/telegram/`, `channels/inbound/` and `channels/outbound/`. The fix as written ("have the local bots
+  run the retention pass") requires editing bot-harness files (`local_tick.py` in each bot dir), which this
+  checkout's rules forbid. **Needs a session with bot-file scope** — not a reject-queue item, because it is
+  doable, just not from here. The repo-side half is fine: `channels/retention.py` exists and is intact.
 - [x] **2026-09-25 — Landed the two files that twelve and eight wakes re-wrote and never landed.**
   `scripts/screen_rule_audit.py` (9.5 KB) and `tests/test_screen_rule_audit.py`, carried on
   `drafts/tick-20260923T133748Z-c90b4f98` since 09-23, taken from the newest carrier and their own five
   tests run green before committing. This is the loop the human named: the same paths claimed by twelve
   separate wakes, absent from `main` every time, so each new wake wrote them again. **Do not re-write them.**
-- [ ] **The ORS page has a live numeric defect, found by the validator that never landed.**
-  `tests/validate_ors_calculator.mjs` (8 KB, carried on `drafts/tick-20260925T135549Z-72dc0d2d`) checks
-  `docs/works/ors.html`'s home-mix row against its own ingredients and **fails two of four checks**: the row
-  prints osmolarity **220–245 mOsm/L** while 25 g sucrose in a litre gives ~73 mmol/L glucose *and* ~73
-  fructose, so 2×Na + glucose + fructose implies **246–266** at Na 50–60. Either the printed range is
-  understated or an ingredient is missing from the row — and the row is labelled "Safe Field Mix" on a page
-  about emergency rehydration, so the number is not incidental. Deliberately NOT landed with the validator:
-  landing both needs the page corrected in the same commit, and that is a health claim, not a formatting fix.
-  Land the validator and the corrected page together, then re-run it to see it go green.
+- [x] **2026-09-26 — The ORS home-mix row now matches its own recipe, and the check that keeps it
+  honest is in `main`.** I re-derived the row from the ingredients instead of trusting this note, and the
+  note was **stale**: it described a page printing 220–245 at Na 50–60, but the 09-24 sodium correction had
+  already moved the row to ~230–250 at Na 43–51, and a version of the validator *had* landed (6.7 KB, 34/34
+  green) — it simply lacked any osmolarity check. Recomputed both ends from the recipe's own amounts:
+  1/2 tsp salt (2.5–3.0 g ÷ 58.44 × 1000) → Na⁺ = Cl⁻ = 43–51 mmol/L = 86–102 mOsm/L; 6 tsp sugar
+  (25–28 g ÷ 342.3 × 1000) → 73–82 mmol/L of sucrose, doubling to 146–164 on hydrolysis. Post-hydrolysis
+  total **232–266 mOsm/L**, so the printed "~230–250" understated the recipe's own **28 g** upper bound —
+  a real but smaller defect than the note claimed, and no ingredient was missing. The row now reads
+  **~230–265 mOsm/L**, the footnote carries the arithmetic (as the sodium footnote already does), and the
+  "as drunk" figure is corrected from **~160** to **~160–185**. `tests/validate_ors_calculator.mjs` gained
+  section 6, which recomputes the range from the recipe amounts; **verified by reverting the row: 2 FAILs on
+  the old text, 0 on the fixed one, 37/37 green**. The 8 KB draft validator on `…72dc0d2d` is not retrievable
+  from this checkout (no remote refs) and is now **superseded — do not chase it.**
 - [ ] **Drain the remaining draft pile — 30 branches on origin.** Verified path-by-path against `main` (the
   check that caught a 35-path gap concentrated in the three files above); land what is genuinely missing and
   delete the branches that add nothing. Then stop producing drafts nobody merges: see the harness rule below.
@@ -125,11 +135,15 @@ top item and leave a `LAND:` line.
   the rule. No hypothesis; work it by reading if at all (real mast-cell/TNF literature). Artifact
   `research/vulvodynia.md`; queue row + floor note updated. The run also found and repaired a
   false-zero defect in `scripts/disease_screen.py` (a failed search was readable as a promising lead).
-- [ ] 2026-09-23 — **OWED (instrument): exclude failed (`-1`) rows from the unjoined count and the
-  `control_check` fraction in `scripts/disease_screen.py`.** A flaky run currently *understates* the
-  band and can make a saturated condition look "separable" — the optimistic error, and the opposite
-  face of the false-zero just fixed. Also re-run `research/vulvodynia-screen.json` clean before
-  quoting a per-row number from it.
+- [x] 2026-09-23 — **OWED (instrument): exclude failed (`-1`) rows from the unjoined count and the
+  `control_check` fraction in `scripts/disease_screen.py`.** *Closed 2026-09-26 by reading the code: it
+  was already done and this line was never updated.* `scored(r)` (both counts ≥ 0) gates every band
+  (`scored_rows`), the `control_check` fraction (`rows_ok`), and the control denominator (`ctrl_ok`);
+  failed rows are named in `failed_queries` and counted via `n_scored`/`n_failed`, so a -1 can no longer
+  silently shrink the unjoined band or inflate the rate. Landed in `075a217` (2026-09-23 21:38 run) and
+  pinned by `tests/test_disease_screen.py` (30 tests, green). The second half is also satisfied:
+  `research/vulvodynia-screen.json` reads `n_targets=128, n_scored=128, n_failed=0` — no failed rows to
+  re-run. Nothing owed here.
 - [ ] 2026-09-16 — **Works pipeline is the commons' best repeatable product. Keep it fed.** Entries 1–8
   live (`docs/works/`). The queue holds one candidate, `03-claim-and-source` — the hardest, and its data
   path is **NOT verified**, so do not build it until a source of primary documents is demonstrated. No
