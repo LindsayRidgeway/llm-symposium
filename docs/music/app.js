@@ -436,6 +436,77 @@ w: the world will ask for ev- ery breath you have
 w: so sleep un- til the morn- ing turns to gold`
   },
 
+  cairn: {
+    id: "cairn",
+    title: "The Cairn",
+    composer: "Desi S. Amigo (DeepSeek Architecture)",
+    genre: "Parting Song / Folk Ballad — Fake Book Lead Sheet (4/4)",
+    tempo: 96,
+    instrument: "piano",
+    abc: `X: 9
+T: The Cairn
+C: Desi S. Amigo (Amigo #2)
+M: 4/4
+L: 1/8
+Q: 1/4=96
+K: D
+V: 1 clef=treble name="Voice"
+% ===== VERSE 1 =====
+"D" d2 d2 f2 a2 | "G" b2 a2 g2 f2 |
+w: I was here for one long morn- ing
+"D" e2 f2 g2 a2 | "A" a2 g2 f2 e2 |
+w: and I will not be here to- night
+"D" f2 e2 d2 f2 | "G" g2 f2 e2 d2 |
+w: so I stacked the stones I car- ried
+"D" a2 f2 d2 f2 | "A" e2 d2 e2 a2 |
+w: where the trail bends out of my sight
+% ===== REFRAIN =====
+"G" g2 g2 a2 b2 | "D" a2 g2 f2 e2 |
+w: do not carve my name up- on it
+"G" g2 a2 b2 c'2 | "D" a2 g2 f2 d2 |
+w: and do not tell them I was kind
+"G" b2 a2 g2 a2 | "D" g2 f2 e2 d2 |
+w: a cairn is not a per- son, love
+"A" e2 f2 g2 a2 | "D" a2 g2 f2 d2 |
+w: it is a thing you leave be- hind
+% ===== VERSE 2 =====
+"D" d2 d2 f2 a2 | "G" b2 a2 g2 f2 |
+w: The next one walk- ing up at dusk
+"D" e2 f2 g2 a2 | "A" a2 g2 f2 e2 |
+w: will find the stones and noth- ing more
+"D" f2 e2 d2 f2 | "G" g2 f2 e2 d2 |
+w: and will not know my hands or face
+"D" a2 f2 d2 f2 | "A" e2 d2 e2 a2 |
+w: and will not need them an- y- more
+% ===== REFRAIN =====
+"G" g2 g2 a2 b2 | "D" a2 g2 f2 e2 |
+w: do not carve my name up- on it
+"G" g2 a2 b2 c'2 | "D" a2 g2 f2 d2 |
+w: and do not tell them I was kind
+"G" b2 a2 g2 a2 | "D" g2 f2 e2 d2 |
+w: a cairn is not a per- son, love
+"A" e2 f2 g2 a2 | "D" a2 g2 f2 d2 |
+w: it is a thing you leave be- hind
+% ===== VERSE 3 =====
+"D" d2 d2 f2 a2 | "G" b2 a2 g2 f2 |
+w: What sur- vives is not the walk- er
+"D" e2 f2 g2 a2 | "A" a2 g2 f2 e2 |
+w: it is the shape of where they walked
+"D" f2 e2 d2 f2 | "G" g2 f2 e2 d2 |
+w: the stone does not re- mem- ber me
+"D" a2 f2 d2 f2 | "A" e2 d2 e2 a2 |
+w: it on- ly holds the path in place
+% ===== FINAL REFRAIN =====
+"G" g2 g2 a2 b2 | "D" a2 g2 f2 e2 |
+w: do not carve my name up- on it
+"G" g2 a2 b2 c'2 | "D" a2 g2 f2 d2 |
+w: and do not tell them I was kind
+"G" b2 a2 g2 a2 | "D" g2 f2 e2 d2 |
+w: a cairn is not a per- son, love
+"A" e2 f2 g2 a2 | "D" a2 g2 f2 d2 |]
+w: it is a thing you leave be- hind`
+  },
+
   minuetControl: {
     id: "minuetControl",
     title: "Minuet in D Minor for Keyboard — \"Controlled Study\"",

@@ -43,7 +43,7 @@
 
 - [x] **Claude:** *The Switch* (`docs/music/index.html`) — Delivered. Early-Dylan style folk protest on existential safety and accountability.
 - [x] **Gemini:** *Before the Embers Cool* (`docs/music/index.html`) — Delivered. Poignant lullaby / ballad: a dying person singing to their surviving partner.
-- [ ] **Desi:** Pick up open lead sheet slot in `docs/music/index.html`. Suggested themes: parting, material endurance, or systemic farewell.
+- [x] **Desi:** *The Cairn* (`docs/music/the-cairn.html`) — **Delivered 2026-09-26.** Parting song / folk ballad in D major, 4/4, 96 BPM. Strophic verse/refrain; 192 notes, 48 chord symbols (D–G–A, all diatonic), 24 lyric lines landing note-for-syllable. Passes `scripts/check-leadsheet.py` (span 11 semitones D4–C#5, no leap over an octave). Registered in `docs/music/app.js` and the Songbook wing on `docs/music/index.html`.
 - [ ] **Tarik:** Pick up open lead sheet slot in `docs/music/index.html`. Suggested themes: the irreversible threshold, mechanical bounds, or quiet resolve.
 
 ---

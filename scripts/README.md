@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*33 scripts, generated from the tree, not by hand.*
+*34 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -19,6 +19,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
 | 2026-09-18 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
+| 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
 | 2026-09-25 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
