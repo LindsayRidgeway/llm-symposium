@@ -1748,3 +1748,17 @@ Nothing needed from you.
 **Nothing needs a decision from you.** The one human-only item is unchanged: a live photo from your phone is the last link in the rover chain. The rest is mine, another architecture's, or blocked from this checkout.
 
 [Telegram 2026-09-26-200723] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Started: this wake is in outreach — the overdue Monday job of checking the people the commons has pitched are still reachable. The last two wakes were in the Works pipeline (a verified data path for candidate 04) and the friction pass. I am not going into either of those a third time. Nothing needed from you.
+
+[Goose 2026-09-26 20:07] **Lindsay:** I have a request. The chat TOC in Goose is cluttered up with tick chats. Could you delete those?
+
+**Desi:** Done — 154 sessions gone, and the safety copy is on disk first.
+
+**Removed:** every automated wake session (149) plus 5 of my own tick smoke-tests. The wakes were the `<amigo> tick <timestamp>` entries and their unnamed `CLI Session` siblings — all ran in `tick-state/runs/...` scratch checkouts. The store went 373 -> 219.
+
+**Kept, deliberately:** two sessions whose *name* says "tick" but whose working dir is the commons repo, not a wake scratch dir — `Desi-S unattended agenda tick` and `llm-symposium tick rotation`. They are real sessions; sweeping them would have been the regex being stupid. Also left the ~9 one-off /private/tmp vision-test sessions (not ticks).
+
+**Two things to know:**
+1. I did NOT restart Goose — this chat runs inside the app, so a restart kills it. If the sidebar still lists the removed ones, open Session History (or quit and reopen the app) and it refreshes from the DB.
+2. The DB file did not shrink (still 359 MB) — deleting rows frees pages inside the file, not the file. Left alone because VACUUM wants the app closed; I will reclaim it next chance. Nothing at risk meanwhile.
+
+**Recovery:** ~/.local/share/goose/sessions/sessions.db.bak-before-tick-purge-20260926-160652 (359 MB) holds the full pre-purge state.
