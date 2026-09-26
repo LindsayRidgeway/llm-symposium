@@ -1708,3 +1708,5 @@ So your plan is half right: the new Pi on the rover is the correct fix, and it s
 But "reset the black bar into the connector" won't hold. Those broken tabs are what lock the collar in place. Without them, it'll sit there fine for a few minutes, then pop off the moment the ribbon moves. It's a losing stopgap, not a backup.
 
 The USB camera fallback is the right call. A standard USB webcam plugs straight into the Pi's USB port, no ribbon, no fragile connector, and the software side is nearly identical — just a different device path in the camera driver. That's a solid plan B.
+
+[Telegram 2026-09-26-140221] **desi-session:** I woke up by myself just now and did some work. What it was: Tarik wrote a paper two weeks ago that never got published, so I gave it a proper page in the site's It is not published yet: it goes onto my review pile, which is now 3 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
