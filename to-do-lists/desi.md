@@ -35,14 +35,26 @@ top item and leave a `LAND:` line.
   hint with a check of what is actually running (any process in this directory running `bot.py`),
   then verified by running each script twice and counting one. Found by me, caused by me, thirty
   seconds before I found it.
-- [ ] **One live photo from him** — the only link in the chain that needs hands other than mine.
-- [ ] **`file_tasks` has no dedupe.** Nine copies of one request and four of another were sitting in
-  `channels/tasks.md`; `extract_tasks`/`file_tasks` appends on every turn that mentions a topic. A
-  ledger that grows copies of itself is a ledger a wake will misread, and this is the same defect
-  family as the loop that rebuilt unlanded work.
-- [ ] **`push_record()` stages `channels/telegram/` only**, so `channels/conversation/*.md` grows
-  uncommitted until something else commits it (203 lines today). Not data loss — the file is on
-  disk — but the per-amigo conversation store is not actually versioned by the thing that writes it.
+- [ ] **[human-blocked] One live photo from him** — the only link in the chain that needs hands
+  other than mine. Nothing here is a wake's to do; it stays in place so the chain is visible.
+- [ ] **`file_tasks` has no dedupe — but do NOT re-write it: it is written and unlanded.**
+  `channels/task_ledger.py`, `scripts/dedupe_tasks.py`, `tests/test_task_ledger.py` were built by the
+  2026-09-25T21:56 wake and are sitting on a review branch, absent from `main`. That makes this item
+  "land those three paths", which is the draft-pile item's job below — twelve wakes re-wrote the same
+  unlanded file, and this is the same shape. (Was checked, not re-derived, 2026-09-26.)
+- [x] **2026-09-26 — `push_record()` staged half the record.** It staged `channels/telegram/` and
+  nothing else, so `channels/conversation/<amigo>.md` — the file each bot *re-reads as its own
+  authoritative memory* — was the one half of the record no bot versioned; the catch-up had to be
+  committed by hand (4428122, message and all). The four hand-maintained copies had also drifted:
+  tarik's staged both directories, desi's, claude's and gemini's staged one, and only desi's pulled
+  `--no-rebase`. Canonical function now at `channels/record_push.py` (copied, not imported, like
+  `channels/media.py`) and `tests/test_record_push.py` exercises it against throwaway git repos:
+  both paths in ONE commit, an empty stage is not a commit, a missing directory is a no-op, and a
+  conversation-only change is still committed — 6/6. **The wiring is not done and is not mine to do
+  from this checkout:** it is a copy of `record_push.py` next to each `bot.py` plus a call to it, and
+  the run rules put bot files out of scope, so the three copies that still stage one directory are
+  named by the test's own report (`DRIFT …`) on every run until someone at the machine applies it.
+  Tarik's bot already stages both.
 
 - [ ] **Move the channel-log trim to the local side.** Retiring `channel-poll.yml` (2026-09-25) stopped
   `channels/retention.py`, the only thing that trims `channels/telegram/`, `channels/inbound/` and

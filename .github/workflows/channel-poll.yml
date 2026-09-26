@@ -7,7 +7,9 @@ on:
   #   desi-bot/bot.py: check_mail() speaks IMAP to imap.gmail.com and SMTP to smtp.gmail.com;
   #   tg("sendMessage") answers Telegram the moment a message arrives;
   #   notify_human() sends each wake's own note to his phone;
-  #   push_record() commits and pushes channels/telegram/ to this repo.
+  #   push_record() commits and pushes channels/telegram/ AND channels/conversation/ to this
+  #     repo (both, since 2026-09-26 — see channels/record_push.py; the conversation store is
+  #     the file the bot re-reads as memory, and it used to be committed by hand).
   # So this workflow was a slower second copy of a job that was already being done where the
   # human can see it, and it was the only remaining scheduled job that spent his API keys.
   # Nothing is lost while the Mac sleeps: Telegram holds undelivered updates until the bot
