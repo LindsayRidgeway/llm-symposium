@@ -36,6 +36,34 @@ MOTION = {}             # last command, for /status
 BIG = 1000.0            # a reading this large is "no return"
 
 
+class Reflex(threading.Thread):
+    """The fast layer: while the motors are turning, check the way ahead ten times a second and stop
+    them the moment it closes. The first walk only checked *between* steps, which is fine at a
+    creep and useless at speed. Unknown readings do not trip it (that is the coarser gate's job),
+    but a real obstacle does."""
+
+    def __init__(self, floor=MIN_CLEAR):
+        super().__init__(daemon=True)
+        self.floor = floor
+        self.tripped = None
+        self._on = True
+
+    def halt(self):
+        self._on = False
+
+    def run(self):
+        while self._on:
+            d = BODY.distance()
+            if d > 0 and d < BIG and d < self.floor:
+                self.tripped = d
+                try:
+                    BODY.stop()
+                except Exception:
+                    pass
+                return
+            time.sleep(0.1)
+
+
 class Body:
     """Hardware, or a stand-in that logs. The protocol is identical either way."""
 
@@ -43,6 +71,7 @@ class Body:
         self.dry = dry
         self.pan = self.tilt = self.steer = 0
         self.moving = None
+        self.last_reflex = None
         if not dry:
             from picarx import Picarx          # noqa: PLC0415
             from robot_hat import ADC          # noqa: PLC0415
@@ -101,15 +130,22 @@ class Body:
         secs = max(0.0, min(float(secs), MAX_MOVE))
         self.steer = steer
         self.moving = direction
+        reflex = Reflex()
+        reflex.start()
+        t0 = time.time()
         try:
             if not self.dry:
                 self.px.set_dir_servo_angle(steer)
                 time.sleep(0.2)
                 (self.px.forward if direction == 'fwd' else self.px.backward)(speed)
-            time.sleep(secs)
+            deadline = t0 + secs
+            while time.time() < deadline and not reflex.tripped:
+                time.sleep(0.05)
         finally:
             self.stop()
-        return speed, secs
+            reflex.halt()
+        self.last_reflex = reflex.tripped
+        return speed, round(time.time() - t0, 2)
 
     def stop(self):
         self.moving = None
@@ -118,15 +154,21 @@ class Body:
             self.px.set_dir_servo_angle(0)
         self.steer = 0
 
-    def photo(self, name):
+    def photo(self, name, size='full'):
+        """'nav' is for looking while moving: small and fast, ~1 s on a Zero 2 W instead of ~3 s."""
         os.makedirs(FRAMES, exist_ok=True)
         path = os.path.join(FRAMES, (name or 'frame') + '.jpg')
         if self.dry:
             with open(path, 'wb') as f:
                 f.write(b'\xff\xd8\xff\xd9')          # a minimal JPEG marker pair
             return path
-        subprocess.run(['rpicam-still', '-n', '--width', '1296', '--height', '972',
-                        '--timeout', '1200', '-o', path], capture_output=True, text=True)
+        if size == 'nav':
+            args = ['rpicam-still', '-n', '--width', '640', '--height', '480',
+                    '--timeout', '300', '-o', path]
+        else:
+            args = ['rpicam-still', '-n', '--width', '1296', '--height', '972',
+                    '--timeout', '1200', '-o', path]
+        subprocess.run(args, capture_output=True, text=True)
         return path if os.path.exists(path) else None
 
     def say(self, text):
@@ -149,15 +191,60 @@ BODY = None
 LOCK = threading.Lock()
 
 
-def guarded_move(direction, steer, speed, secs, blind):
+def behaviour_advance(speed, secs_per_step, steps, photos, tag, size, blind):
+    """One request, many actions. Creep forward in bounded steps, stopping early on an obstacle or
+    a lost reading, photographing each step. This is the fluidity fix: the slow part of the first
+    walk was never the wheels, it was me deliberating between every half-second of them."""
+    events = []
+    for i in range(steps):
+        ok, why = BODY.clear_ahead()
+        if not ok and not blind:
+            events.append({'step': i, 'refused': why})
+            break
+        with LOCK:
+            BODY.move('fwd', 0, speed, secs_per_step)
+        ev = {'step': i, 'secs': min(float(secs_per_step), MAX_MOVE), 'clearance': why}
+        if BODY.last_reflex:
+            ev['stopped_by'] = 'reflex %.0f cm' % BODY.last_reflex
+        if photos:
+            ev['photo'] = BODY.photo('%s-%02d' % (tag, i), size)
+        events.append(ev)
+        if BODY.last_reflex:
+            break
+    return events
+
+
+def behaviour_scan(pan_from, pan_to, step, tilt, photos, tag, size):
+    """Sweep the camera through a range, photographing each stop. One request for a whole look."""
+    events = []
+    angle = int(float(pan_from))
+    limit = int(float(pan_to))
+    tilt = int(float(tilt))
+    step = max(1, abs(int(float(step))))
+    sign = 1 if limit >= angle else -1
+    while (sign > 0 and angle <= limit) or (sign < 0 and angle >= limit):
+        BODY.look(angle, tilt)
+        time.sleep(0.35)
+        ev = {'pan': angle, 'tilt': tilt}
+        if photos:
+            ev['photo'] = BODY.photo('%s-p%+03d' % (tag, angle), size)
+        events.append(ev)
+        angle += sign * step
+    return events
+
+
+def guarded_move(direction, steer, speed, secs_raw, blind):
     """Refuse unknown clearance. Run the move under the lock with a hard stop at 2x duration."""
+    secs = secs_raw
     if direction == 'fwd' and not blind:
         ok, why = BODY.clear_ahead()
         if not ok:
             return 409, {'refused': 'forward', 'because': why}
     with LOCK:
-        speed, secs = BODY.move(direction, steer, speed, secs)
-    return 200, {'moved': direction, 'steer': steer, 'speed': speed, 'secs': secs,
+        speed, actual = BODY.move(direction, steer, speed, secs)
+    return 200, {'moved': direction, 'steer': steer, 'speed': speed, 'secs': actual,
+                 'secs_requested': min(float(secs_raw), MAX_MOVE),
+                 'stopped_by': 'reflex %.0f cm' % BODY.last_reflex if BODY.last_reflex else None,
                  'clearance_before': None if blind else BODY.clear_ahead()[1]}
 
 
@@ -208,8 +295,21 @@ class Handler(BaseHTTPRequestHandler):
                                              q.get('blind') == '1')
                 MOTION['last'] = 'drive %s' % q
                 return self._send(code, payload)
+            if verb == 'advance':
+                ev = behaviour_advance(q.get('speed', 28), q.get('secs', 0.8),
+                                       int(float(q.get('steps', 6))), q.get('photos', '1') == '1',
+                                       q.get('tag', 'adv'), q.get('size', 'nav'),
+                                       q.get('blind') == '1')
+                MOTION['last'] = 'advance %s step(s)' % len(ev)
+                return self._send(200, {'steps': ev, 'photos': [e['photo'] for e in ev if e.get('photo')]})
+            if verb == 'scan':
+                ev = behaviour_scan(q.get('from', -60), q.get('to', 60), q.get('step', 30),
+                                    q.get('tilt', 10), q.get('photos', '1') == '1',
+                                    q.get('tag', 'scan'), q.get('size', 'nav'))
+                MOTION['last'] = 'scan %d stop(s)' % len(ev)
+                return self._send(200, {'stops': ev, 'photos': [e['photo'] for e in ev if e.get('photo')]})
             if verb == 'photo':
-                p = BODY.photo(q.get('name'))
+                p = BODY.photo(q.get('name'), q.get('size', 'full'))
                 return self._send(200 if p else 500, {'path': p, 'bytes':
                                                       (os.path.getsize(p) if p else 0)})
             if verb == 'say':
@@ -231,7 +331,8 @@ class Handler(BaseHTTPRequestHandler):
                 threading.Thread(target=lambda: (time.sleep(0.4), os._exit(0)), daemon=True).start()
                 return
             return self._send(404, {'error': 'unknown command', 'verbs': [
-                'status', 'look', 'fwd', 'back', 'drive', 'photo', 'say', 'stop', 'quit']})
+                'status', 'look', 'fwd', 'back', 'drive', 'advance', 'scan', 'photo', 'say',
+                'stop', 'quit', 'mock']})
         except Exception as e:
             try:
                 BODY.stop()

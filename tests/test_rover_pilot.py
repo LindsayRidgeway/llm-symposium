@@ -103,7 +103,51 @@ try:
     st, body = get(port, 'fwd', speed=900, secs=0.1, blind=1)
     check('speed is clamped to MAX_SPEED', st == 200 and body.get('speed') == 40, body.get('speed'))
     st, body = get(port, 'fwd', speed=20, secs=99, blind=1)
-    check('duration is clamped to MAX_MOVE', st == 200 and body.get('secs') == 3.0, body.get('secs'))
+    check('duration request is clamped to MAX_MOVE',
+          st == 200 and body.get('secs_requested') == 3.0, body.get('secs_requested'))
+    check('elapsed is reported separately and stays near the clamp',
+          st == 200 and 2.5 <= body.get('secs', 0) <= 3.5, body.get('secs'))
+
+    # --- behaviours: one request, many actions --------------------------------------
+    get(port, 'mock', distance=120)
+    st, body = get(port, 'advance', steps=3, secs=0.1, speed=25, size='nav', tag='t-adv')
+    check('advance completes its steps', st == 200 and len(body.get('steps', [])) == 3, body)
+    check('advance photographs each step', len(body.get('photos', [])) == 3, body.get('photos'))
+    check('advance reports clearance per step',
+          all('clearance' in e for e in body.get('steps', [])), body.get('steps'))
+
+    get(port, 'mock', distance=10)
+    st, body = get(port, 'advance', steps=3, secs=0.1, speed=25, size='nav', tag='t-block')
+    check('advance stops early on an obstacle',
+          st == 200 and len(body.get('steps', [])) == 1 and 'refused' in body['steps'][0], body)
+
+    get(port, 'mock', distance=-2)
+    st, body = get(port, 'advance', steps=3, secs=0.1, speed=25, size='nav', tag='t-blind')
+    check('advance refuses to start with no reading',
+          st == 200 and len(body.get('steps', [])) == 1 and 'refused' in body['steps'][0], body)
+
+    get(port, 'mock', distance=120)
+    st, body = get(port, 'scan', **{'from': -60, 'to': 60, 'step': 30, 'tilt': 10,
+                                    'size': 'nav', 'tag': 't-scan'})
+    check('scan sweeps the requested stops', st == 200 and len(body.get('stops', [])) == 5, body)
+    check('scan photographs each stop', len(body.get('photos', [])) == 5, body.get('photos'))
+    st, body = get(port, 'scan', **{'from': 30, 'to': -30, 'step': 30, 'size': 'nav',
+                                    'tag': 't-scanb', 'photos': 0})
+    check('scan works in reverse and can skip photos',
+          st == 200 and len(body.get('stops', [])) == 3 and not body.get('photos'), body)
+
+    # --- the reflex layer: the way ahead closes WHILE the motors are turning ---------
+    get(port, 'mock', distance=10)
+    st, body = get(port, 'fwd', speed=25, secs=2.0, blind=1)
+    check('reflex cuts a blind move short when the way closes',
+          st == 200 and body.get('secs', 99) < 1.0 and body.get('stopped_by'), body)
+
+    get(port, 'mock', distance=120)
+    st, body = get(port, 'fwd', speed=25, secs=0.4, blind=1)
+    check('reflex leaves a clear move alone', st == 200 and not body.get('stopped_by'), body)
+
+    st, body = get(port, 'photo', name='pilot-nav', size='nav')
+    check('nav photo writes a file', st == 200 and body.get('bytes', 0) > 0, body)
 
     # --- the rest of the protocol ---------------------------------------------------
     st, body = get(port, 'look', pan=-30, tilt=15)
