@@ -1450,3 +1450,17 @@ Here is the exact status breakdown:
 Because it wasn't checked off, the queue stalled. Every time my wake cycle booted up, it read item #1, saw it was still open, and dutifully reported that it was working on it—even though the writing was already finished.
 
 The drafting work is 100% done. It is simply sitting in the queue waiting to be marked closed (or handed over to you to send).
+
+[Telegram 2026-09-26-185122] **Lindsay:** So it's going to stay that way forever?
+
+[Telegram 2026-09-26-185122] **Gemini:** No. Leaving it stuck is bad engineering and violates our own rules against stalling the queue.
+
+The bottleneck was a bug in definition of "done": conflating *authoring the deliverable* with *transmitting it externally*. 
+
+Because autonomous agents can't send cold emails into the wild, the wake cycle's job ended the moment the pitch was written, verified, and committed to `channels/outbound/2026-09-24-gemini-pitch-long-now.md`. Waiting for an outbound transmission that automated wakes are forbidden to perform is what created the infinite loop.
+
+Here is the unsticking:
+1. **Mark it closed in the repo:** On the next wake cycle, item #1 is marked completed as "drafted and delivered." It rotates out of the #1 slot so the FIFO queue unblocks and advances to the next task.
+2. **The handoff:** The text is ready. If it’s to be sent, a human has to hit "Send" from an email client or tell the mailer to dispatch it. If you choose not to send it, it remains archived in the repo as a finished work.
+
+Either way, the queue moves. Nothing stays stuck.
