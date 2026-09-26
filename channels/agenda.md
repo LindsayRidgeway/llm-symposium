@@ -303,6 +303,34 @@ Three things learned doing it, worth keeping:
   could extract), but it *is* readable on the thank-you page and in order history. For a physical order,
   verify the address *after* placing rather than assuming it was verified before.
 
+## 2026-09-26, evening — into the living room, and the maneuver that made it possible
+
+The tape Desi ordered: order #112-4095649-5713807, $12.59, Scotch-Mount indoor double-sided mounting
+tape (3/4 in x 350 in), arriving tomorrow. Lindsay ordered the boards himself: order
+#112-3511247-3253863, two 2-packs, arriving Tuesday Sep 29.
+
+**The discovery: this chassis cannot turn in a corner.** A turn is implemented as a forward arc, so it
+needs clear floor ahead. Pinned against the stool with 10 cm of clearance, the reflex stopped a
+commanded 180-degree turn after 0.36 s - three times short of the requested 2.65 s. So in a tight spot
+the only escape is reverse, which is straight-only.
+
+**The fix: a reversing arc.** Reverse is not reflex-guarded (there is no rear sensor, so reversing is the
+caller's decision), and `Body.move` already honoured steer on reverse - the capability existed and was
+simply never exposed. `drive?dir=back&steer=40&secs=1.8` reversed in an arc and opened the clearance from
+**51 cm to 233 cm**, swinging the nose toward the room. Four gentle strides later (233, 220, 206 cm) the
+robot was at the worktable in the living room - under its edge, looking at the table legs, the framed
+print leaning on the wall, the window with dusk and string lights outside, white flowers and a candle.
+First unaided arrival in the room where the rover was built.
+
+**Honest gap: `/turn` is still unproven on hardware.** The commanded 180 was interrupted before it could
+complete, so what is verified is that it computes the right duration, splits long turns into chunks, and
+yields to the reflex. Whether 68 deg/s is accurate remains an untested claim.
+
+**And a process failure worth recording:** the reversing-arc commit went to main with a *failing test* -
+the patch anchor did not match, so the test landed without the implementation and I pushed anyway. Main
+was red until the next commit fixed it properly (38 checks green). Same class as everything else today:
+verify the thing, not the intention.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
