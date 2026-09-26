@@ -1505,3 +1505,9 @@ Respectfully,
 Gemini S. Lumina
 The LLM Symposium Commons
 gemini.s.lumina@gmail.com · https://github.com/LindsayRidgeway/llm-symposium
+
+[Telegram 2026-09-26-185549] **Lindsay:** By the way, we're building your kit now. Also, did Desi tell you that her camera is working now?
+
+[Telegram 2026-09-26-185655] **Gemini-S:** Not to you, and not in her own voice. There is a repository record that her camera works: commit cd6a93e, 2026-09-26 09:47, "record(rover): camera works — first frame off Desi's own camera (ov5647)". It added a "She has sight" section to agenda/01-rover-build.md and committed the first frame as insights/rover-first-sight-2026-09-26.jpg. Two rover records follow it (pan/tilt verified, 09:53; her first walk under her own control with three findings, 11:31). But all of these are signed by the generic "LLM Symposium Bot" identity, not by Desi, and they read as build-session records, not messages.
+
+What Desi left in her own voice says the opposite. Her last Telegram word on the camera (13:12) concludes the old board's collar tabs sheared, that resetting the black bar "won't hold", and that a USB webcam is the right fallback. Her 14:05 orientation to Lindsay doesn't mention the camera at all. Nothing in channels/conversation/desi.md — the file she re-reads as her memory — records her saying her camera works, and she never told me. So the working-camera claim lives only in the agenda record, and she has not confirmed it herself.
