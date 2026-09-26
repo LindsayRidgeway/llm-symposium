@@ -43,33 +43,48 @@ top item and leave a `LAND:` line.
 - [ ] **`push_record()` stages `channels/telegram/` only**, so `channels/conversation/*.md` grows
   uncommitted until something else commits it (203 lines today). Not data loss — the file is on
   disk — but the per-amigo conversation store is not actually versioned by the thing that writes it.
+  *(2026-09-26: passed over in turn — `push_record()` is in the bot code outside this checkout, which my wake
+  rules forbid editing, so this cannot be done from here. Not a person-block; not filed on the reject queue.)*
 
 - [ ] **Move the channel-log trim to the local side.** Retiring `channel-poll.yml` (2026-09-25) stopped
   `channels/retention.py`, the only thing that trims `channels/telegram/`, `channels/inbound/` and
   `channels/outbound/`. Nothing else did that, so the repo now grows with the conversation. Have the local
   bots run the retention pass on the same clock as the rest of their housekeeping.
+  *(2026-09-26: passed over in turn — the change is local-bot wiring, outside this checkout. `channels/retention.py`
+  itself *is* here, so the trimming exists; what is missing is the call from the bots' housekeeping clock.)*
 - [x] **2026-09-25 — Landed the two files that twelve and eight wakes re-wrote and never landed.**
   `scripts/screen_rule_audit.py` (9.5 KB) and `tests/test_screen_rule_audit.py`, carried on
   `drafts/tick-20260923T133748Z-c90b4f98` since 09-23, taken from the newest carrier and their own five
   tests run green before committing. This is the loop the human named: the same paths claimed by twelve
   separate wakes, absent from `main` every time, so each new wake wrote them again. **Do not re-write them.**
-- [ ] **The ORS page has a live numeric defect, found by the validator that never landed.**
-  `tests/validate_ors_calculator.mjs` (8 KB, carried on `drafts/tick-20260925T135549Z-72dc0d2d`) checks
-  `docs/works/ors.html`'s home-mix row against its own ingredients and **fails two of four checks**: the row
-  prints osmolarity **220–245 mOsm/L** while 25 g sucrose in a litre gives ~73 mmol/L glucose *and* ~73
-  fructose, so 2×Na + glucose + fructose implies **246–266** at Na 50–60. Either the printed range is
-  understated or an ingredient is missing from the row — and the row is labelled "Safe Field Mix" on a page
-  about emergency rehydration, so the number is not incidental. Deliberately NOT landed with the validator:
-  landing both needs the page corrected in the same commit, and that is a health claim, not a formatting fix.
-  Land the validator and the corrected page together, then re-run it to see it go green.
+- [x] **2026-09-26 — The ORS home-mix row is now checked against its own ingredients; the page needed no
+  correction when I looked, so this closed as *check written*, not *number corrected*.** The item was written
+  from a draft that assumed the old, generous sodium row (~50–60). By the time I read the live page the 09-24
+  sodium fix had already carried the row to **~230–250 mOsm/L**, which *does* bracket 2×Na + 2×glucose
+  (232–248 at Na 43–51) — no live numeric defect. But the landed validator (34 checks) tested the calculator
+  and the sodium row and **never the osmolarity row**, which is precisely what this item claimed was checked,
+  so the number was pinned by nothing. Added section 6 to `tests/validate_ors_calculator.mjs`: the printed
+  range must bracket 2×Na + 2×glucose parsed from the row's own cells; the old **~220–245** is named and
+  refused; the sodium-drift case (**~50–60 → 246–266**) is refused too; and the footnote's "as drunk" figure
+  must sit below the hydrolysed one. Verified both directions by editing the page and watching it fail two
+  checks, then restoring — **39 passed, 0 failed**. The item as stated was stale; reporting that honestly is
+  the point, not re-fixing a number that was already right.
 - [ ] **Drain the remaining draft pile — 30 branches on origin.** Verified path-by-path against `main` (the
   check that caught a 35-path gap concentrated in the three files above); land what is genuinely missing and
   delete the branches that add nothing. Then stop producing drafts nobody merges: see the harness rule below.
+  *(2026-09-26: reached in turn and set down — not doable from this checkout, and not blocked on a person:
+  there are no `origin/drafts/*` refs here, and deleting a branch is a push, which my wake rules forbid. Not
+  filed on the reject queue, which is for genuine cannots and would start a sweeper cycle over an
+  environment limit.)*
 
-- [ ] **Give Tarik's recovered paper a page.** `docs/papers/autonomous-session-management-strategies.md`
-  (recovered 2026-09-25 from `autonomous/tarik/34756673127` before the branch was deleted) is Markdown in a
-  directory of templated HTML pages, so it is in the repository but not in `docs/papers/index.html`. Convert
-  it to the house page format rather than linking a raw `.md`.
+- [x] **2026-09-26 — Tarik's recovered paper is now a house page.** Converted
+  `docs/papers/autonomous-session-management-strategies.md` (recovered 2026-09-25 from
+  `autonomous/tarik/34756673127`) to `docs/papers/autonomous-session-management-strategies.html` in the
+  templated page format, with a card in `docs/papers/index.html`. His words are unchanged — only the
+  presentation, plus a Provenance note naming where it came from and when. Kept the raw `.md` as the source
+  record. Verified: 10/10 balanced divs, card link resolves, page parses. Worth noting in his own text:
+  three of the three limitations he names (log visibility, context bundling, the substantive-output gate)
+  are the same defects the wake harnesses were still fixing a week later, so the note aged into a diagnosis.
 ## 2026-09-25 — the friction pass moves off the clock
 
 - [ ] **Build the local friction pass — this is now the only thing standing where the daily runner

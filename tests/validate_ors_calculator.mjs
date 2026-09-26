@@ -129,5 +129,46 @@ const naRow = html.match(/Canonical Home Recipe \(SSS\)<\/strong><\/td>\s*<td>([
 ok(naRow && /4[0-9]/.test(naRow[1]) && !/50/.test(naRow[1]),
    "home-mix sodium row is the corrected ~43-51, not ~50-60", naRow && naRow[1]);
 
+// --- 6. the home-mix osmolarity row must be the arithmetic of its own ingredients --------
+// The row prints a total osmolarity next to the very columns it is made of, and it sits under
+// a "Safe Field Mix" badge on a page about emergency rehydration — so the number is not
+// decoration. Sodium and glucose/fructose are the only osmotically active things in the mix:
+// NaCl contributes Na+ and Cl- (2 x Na), and the 25 g/L of sucrose contributes ~73 mmol/L
+// glucose AND ~73 mmol/L fructose once brush-border sucrase splits it (2 x the glucose column).
+// If the printed range does not bracket 2*Na + 2*glucose, the number is not this recipe's.
+// This is the check the 2026-09-25 note asked for and the landed harness did not have: the row
+// read "~220-245" when the note was written, which 43-51 Na + 146 sugar cannot produce (232-248,
+// clipped at the top), and nothing stopped it drifting back.
+const rowMatch = html.match(/<tr>\s*<td><strong>Canonical Home Recipe \(SSS\)<\/strong><\/td>[\s\S]*?<\/tr>/);
+const strip = (s) => s.replace(/<[^>]+>/g, "").trim();
+const cells = rowMatch ? [...rowMatch[0].matchAll(/<td>([\s\S]*?)<\/td>/g)].map(m => strip(m[1])) : [];
+ok(cells.length === 8, "home-mix table row has its 8 columns (name + 7)", String(cells.length));
+
+const naRange  = cells[1] && cells[1].match(/([\d.]+)\s*[–-]\s*([\d.]+)/);
+const glMol    = cells[5] && cells[5].match(/([\d.]+)\s*mmol/);
+const osmRange = cells[6] && cells[6].match(/~?([\d.]+)\s*[–-]\s*([\d.]+)/);
+ok(naRange && glMol && osmRange, "home-mix row states Na, glucose and osmolarity together",
+   [cells[1], cells[5], cells[6]].join("  |  "));
+
+if (naRange && glMol && osmRange) {
+  const naLo = parseFloat(naRange[1]), naHi = parseFloat(naRange[2]);
+  const glucose = parseFloat(glMol[1]);
+  const expectedLo = 2 * naLo + 2 * glucose;   // 232 at Na 43, glucose 73
+  const expectedHi = 2 * naHi + 2 * glucose;   // 248 at Na 51
+  const printedLo = parseFloat(osmRange[1]), printedHi = parseFloat(osmRange[2]);
+  ok(printedLo <= expectedLo && printedHi >= expectedHi,
+     `home-mix osmolarity ~${printedLo}-${printedHi} brackets its ingredients (~${expectedLo}-${expectedHi})`,
+     `printed ${printedLo}-${printedHi} vs ingredients ${expectedLo}-${expectedHi}`);
+  // Name the exact understated value the row carried before this check existed.
+  ok(!(printedLo <= 220 && printedHi < 248),
+     "the old understated ~220-245 range is refused", `${printedLo}-${printedHi}`);
+  // A mixture cannot be osmotically tighter before digestion than after: the split sucrose
+  // doubles that column, so the "as drunk" figure must stay below the hydrolysed one.
+  ok(/as drunk it is ~([\d.]+)/.test(html) &&
+       parseFloat(html.match(/as drunk it is ~([\d.]+)/)[1]) < printedLo,
+     "the page states an 'as drunk' osmolarity below the hydrolysed figure",
+     (html.match(/as drunk it is ~([\d.]+)/) || [])[0]);
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);
