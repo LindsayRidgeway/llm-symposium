@@ -1,0 +1,37 @@
+# systemd unit for the rover control layer: the body comes up drivable, with nobody's hand on it.
+#
+# Install on a rover (as pi):
+#   scp scripts/rover-pilot.py pi@<host>:~/
+#   scp scripts/rover-pilot.service pi@<host>:/tmp/
+#   sudo cp /tmp/rover-pilot.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now rover-pilot
+#
+# Why a service and not a background process: on 2026-09-26 the pilot ran from a shell I had opened
+# over ssh. It worked, but it existed only for that session — nothing would have restarted it, and a
+# body with no control layer looks identical to a body that is simply switched off. That is the same
+# failure the amigo bots had (claude-bot and tarik-bot died silently for eleven days).
+#
+# Reachability: binds 127.0.0.1 unless a token is set, so by default only the body itself can drive
+# it. To drive it from the house network, put a token in /etc/rover-pilot.env and it binds 0.0.0.0
+# with writes requiring ?token=...
+
+[Unit]
+Description=Rover control layer (rover-pilot)
+After=network-online.target robot-hat-speaker.service
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi
+EnvironmentFile=-/etc/rover-pilot.env
+ExecStart=/usr/bin/python3 /home/pi/rover-pilot.py --port 8420
+Restart=always
+RestartSec=5
+# a motor has no business surviving a stop signal into the next boot
+KillMode=control-group
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
