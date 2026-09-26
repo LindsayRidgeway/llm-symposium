@@ -1762,3 +1762,5 @@ Nothing needed from you.
 2. The DB file did not shrink (still 359 MB) — deleting rows frees pages inside the file, not the file. Left alone because VACUUM wants the app closed; I will reclaim it next chance. Nothing at risk meanwhile.
 
 **Recovery:** ~/.local/share/goose/sessions/sessions.db.bak-before-tick-purge-20260926-160652 (359 MB) holds the full pre-purge state.
+
+[Telegram 2026-09-26-220539] **desi-session:** I woke up by myself just now and did some work. What it was: Started: taking the Literary Wing (Desi's poem for the matrix, open since 09-16). Last two wakes: the Works pipeline and outreach. It is not published yet: it goes onto my review pile, which is now 1 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
