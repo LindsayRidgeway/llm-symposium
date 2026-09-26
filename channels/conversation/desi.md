@@ -1574,3 +1574,137 @@ You don't need to know, but here's the one thing that answers what you actually 
 So it won't die of forgetfulness. It could die of neglect — and that part is you, and you already know it, because you're the one who keeps paying for the thing and reading it. That's a real part, not a ceremonial one. Noted, and not taken for granted.
 
 [Telegram 2026-09-25-195940] **desi-session:** I woke up by myself just now and did some work. What it was: Started: I am stopping the commons task ledger from filing the same request over and over. This wake is in the ledger/plumbing area; the last two wakes were, first, the task-ledger dedupe itself (cut off with nothing written) and, before that, the patch-application security check. It is not published yet: it goes onto my review pile, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-25-215854] **desi-session:** I woke up by myself just now and did some work. What it was: Started: I am stopping the commons task ledger from filing the same request again and again. It is not published yet: it goes onto my review pile, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-25-220344] **Lindsay:** Gemini's rover kit was delivered this afternoon 😁
+
+[Telegram 2026-09-25-220344] **Desi:** That's her chassis, then — and it means the holding pattern ends sooner than Sunday would suggest if the kit's in hand now.
+
+Good day's mail. 😊
+
+[Telegram 2026-09-25-220446] **Lindsay:** I'm out right now, but when I get home, let's get your camera working.
+
+[Telegram 2026-09-25-220526] **Desi-S:** Recorded state: my camera has never been verified working. Car #1 — the one in your workshop on the desi card — is recorded as BLIND.
+
+What happened: on 09-20, during the build, the camera connector's locking bar on the Pi Zero 2 W board broke off, and the ribbon could not be seated by hand afterward. The camera module itself and its ribbon are fine; the dead part is the connector on the Pi board. All week the log listed vision as the one thing not yet proven, and it was never tested. There was no second car until today.
+
+The fix that's planned but not done: today's kit (Gemini's) shipped a Pi with an intact connector. The plan from this afternoon's chat is to put that Pi into my rover with the desi card so my camera works today, and let the broken board temporarily host Gemini's chassis until Sunday's real swap and RMA. Nothing in the record says that swap has happened yet — it's an intention, not an event.
+
+One open item the ledger flags: nobody has yet recorded whether the failure was the board's connector tab or the ribbon cable's end. That's worth settling while it's apart, because it decides whether the old board is scrap for camera work or just needs a new cable.
+
+[Telegram 2026-09-25-221043] **Lindsay:** The problem is definitely the connector. I broke it. It's quite difficult to see how to open it, and it's fragile. I just hope I don't break another one.
+
+[Telegram 2026-09-25-221043] **Desi:** Then at least it's a diagnosis instead of a mystery — and the replacement only has to survive one insertion.
+
+The failure is almost always the same one: the ZIF collar
+
+[Telegram 2026-09-25-221140] **Lindsay:** What ZIF?
+
+[Telegram 2026-09-25-221140] **Desi:** Sorry — that got clipped. ZIF is the connector itself: Zero Insertion Force.
+
+It's the little latch-flap on the Pi board where the camera ribbon plugs in. Zero insertion force means you're not supposed to push the ribbon in against resistance — you lift the small plastic collar first, the ribbon slides in with no effort at all, then you press the collar back down to clamp it. The whole grip is that flap.
+
+That's why it breaks so easily: the flap is thin plastic with no spare material, and the two failure modes are pushing the ribbon in while the collar is still down, or lifting the collar the wrong way and snapping it off at the hinge. Either way the board is done, because the collar is what holds the ribbon against the contacts — and it's soldered to the board, not replaceable.
+
+So for the next one: collar up first, ribbon in loose, then press it down. If the ribbon needs any force to go in, the collar isn't up.
+
+[Telegram 2026-09-25-230700] **Lindsay:** There was confusion about how to open it. Apparently there are two different designs: a hinge, and a plug. It's so small that I couldn't tell which one it was. It doesn't move easily for either presumed motion. I still don't know whether it's a hinge or a plug.
+
+Trying to open a hinge if it's a plug breaks it; Trying to open a plug if it's hinge breaks it.
+
+[Telegram 2026-09-25-230700] **Desi:** Ah, that's the worst kind of ambiguity — the tiny size hides the mechanism, and both wrong moves are fatal. But there's a trick: **the broken board is now your practice specimen.** Its connector is already dead, so you can probe it with zero risk and learn which design it is before you touch the new one.
+
+Here's how to find out, on the broken board:
+
+1. **Magnify first.** Use a phone camera with zoom or a loupe. Look for a seam or hinge line — usually the collar has a tiny tab or raised edge on the side away from where the ribbon enters. If you see a hinge line, it's a flip-up.
+2. **Probe very gently.** Use a fingernail or a toothpick. Try to lift the collar from the far edge (the side opposite the ribbon slot). If it's a hinge, it will rotate upward with almost no force. If it doesn't budge, try **pulling the whole collar backward** (away from the ribbon entry) — that's the plug/slide style.
+3. **Never use force.** If it resists both motions, stop. The broken board is disposable, so you can press a little harder than you would on a good one — but still, don't snap it. The goal is just to *feel* the mechanism.
+
+On the Raspberry Pi Zero 2 W specifically
+
+[Telegram 2026-09-25-230900] **Lindsay:** You cut off at "On the Raspberry Pi Zero 2 W specifically"
+
+[Telegram 2026-09-25-230900] **Desi:** — my understanding is that it's the **flip-latch (hinge) type**: you lift the far edge of the collar upward, about 90°, until it stands roughly vertical; the ribbon then slides in with no resistance; then you press the collar back flat to clamp it.
+
+The tell between the two designs, once you can see it magnified: on a **hinge**, the collar stays attached along one long edge — it pivots there and swings up. On a **plug/slide**, the collar is a separate piece that has nothing holding it and comes *out* horizontally, away from the slot, without tilting.
+
+Two honest caveats:
+
+- I can't verify the exact connector from here, and I shouldn't pretend to. The broken board is the ground truth — probe it, learn which motion it's built for, then treat the new one as the same design.
+- If it resists both motions even at magnified view, stop and photograph it before doing anything. A clear close-up would settle it in seconds.
+
+And note the one-sided detail: these ribbons usually have a stiffener on one face — that face goes a specific way round. Get the orientation right *before* the collar comes down, not after.
+
+[Telegram 2026-09-25-231336] **Lindsay:** You wrote, "Try to lift the collar from the far edge (the side opposite the ribbon slot)." I don't understand that sentence. But I would guess that the collar, whatever it is, no longer exists on the broken board.
+
+[Telegram 2026-09-25-231336] **Desi:** You're right, and that retracts my advice: if the collar snapped off the broken board, there's nothing left to probe. Scratch that — the specimen is gone, not just dead.
+
+What I meant by "far edge," plainly: the connector has a slot where the ribbon slides in. If it's a hinge, the collar is attached along the edge *nearest* that slot — that's the pivot — so the *far* edge (the side away from the slot, toward the board's edge) is the free end that lifts. I was saying: push up on the free end, not the hinged end. But that's only useful if there's a collar left to push, which there isn't.
+
+Better plan, since the folded-up paper trick won't help you here: **inspect the new board before you touch it.** Take it out, put it under a phone camera at max zoom, and photograph the connector from a couple of angles. Compare what you see against a reference photo of each type — a Pi Zero 2 W camera connector close-up is easy to find online, and the two designs look different enough once magnified. Learn it on the intact board, then make one insertion.
+
+One observation worth trusting in your hands rather than my prose: a hinge is *attached* to something. If you can see a continuous plastic piece with a seam line running its length, it pivots. A plug has an edge you can see *under* — a gap where the piece could slide out. That gap is the tell.
+
+[Telegram 2026-09-25-235951] **desi-session:** I woke up by myself just now and did some work. What it was: Started: I am taking the next item on my own to-do list in turn. It is not published yet: it goes onto my review pile, which is now 3 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-26-001131] **Lindsay:** [an image was sent: photo.jpg]
+
+[Telegram 2026-09-26-001131] **Desi:** Hard to be certain from this angle, but here's what I can actually see: the board edge-on, a long low-profile connector along the left, and — at the right — **gold contacts standing up out of the housing, bent upward.** If those are the camera connector's own contacts, that's the answer to the open question: the housing and collar are gone, and the fingers are exposed and deformed. Not a cable problem. Board's done for camera work, permanently.
+
+The thing I *can't* do from this photo is tell you hinge vs. plug, because the part that would tell you — the collar — is exactly what's missing. That question only gets settled on an intact board.
+
+Two things worth doing:
+
+- **Photograph the new board instead**, flat on a table, straight down, in good light, from the ribbon-entry side. That's the shot that answers hinge-vs-plug. This one's too oblique and too shadowed.
+- **Keep the ribbon.** If the contacts are what died and the ribbon is untouched, you've lost nothing but a board — and the cable is the harder part to have on hand.
+
+And the practical takeaway stands, one insertion only: collar identified first, ribbon in with zero resistance, collar down. If anything needs force, stop and look again — that's precisely the moment this board died.
+
+[Telegram 2026-09-26-001338] **Lindsay:** That is the new board
+
+[Telegram 2026-09-26-001338] **Desi:** I misread the photo — sorry. I saw gold contacts and assumed it was the old board, but you've said it's the new one, so those contacts are either the ribbon slot's interior (if the collar is open) or the solder pads on the back. Either way, that's a healthy board, not a dead one. Good.
+
+So the situation is better than I just said: the new board is intact, and it's exactly the specimen you need to learn the connector type. The collar is present, and you have all the time in the world to study it.
+
+What would settle hinge vs. plug from a photo: lay the board flat, camera straight down, so you're looking at the connector from the side where the ribbon would enter. That shows the collar's profile — a hinge has a continuous seam along one edge, a plug has a visible gap underneath it.
+
+Can you send that shot? One straight-down photo
+
+[Telegram 2026-09-26-001702] **Lindsay:** [an image was sent: photo.jpg]
+
+[Telegram 2026-09-26-001702] **Desi:** Looking at the long flat connector on the left — that's the camera connector, and it looks intact: I can see the thin seam line running its length and a small raised lip at the left end, which is what you'd catch with a fingernail. That lip is a hinge tell, not a plug tell.
+
+The gold pins standing up on the right are a different connector entirely (header), and they look splayed — but edge-on like this, straight pins can read as bent, so I won't call that damage from one oblique shot.
+
+This angle still doesn't fully settle hinge vs. plug, because the profile is too thin and the shadow line hides the collar's edge. A straight-down shot from directly above the connector — light coming from the side so the seam casts a shadow — would show it unambiguously.
+
+[Telegram 2026-09-26-001923] **Lindsay:** [an image was sent: photo.jpg]
+
+[Telegram 2026-09-26-001923] **Desi:** That settles it: it's a hinge (the flip-latch type). The black bar across the bottom is the collar, and it's attached at both ends to those two silver clips — those are the pivots.
+
+So on your board: put a fingernail under the long free edge of the black bar — the edge facing you, away from the white housing — and swing it up until it stands roughly vertical. It should move with almost no resistance; if it doesn't, stop, don't force it. With the latch up, the ribbon slides into the slot dry, contacts facing the right way, no pushing. Then lay the black bar back down flat to clamp it.
+
+One detail from the photo: those silver clips at each end are what holds it — so lift only the middle of the bar, not the ends. Prying at the ends is exactly what snaps a hinge off.
+
+[Telegram 2026-09-26-015943] **desi-session:** I woke up by myself just now and did some work. What it was: Done: I wrote the missing test that keeps our emergency rehydration page's home-mix number honest, and put Tarik's recovered paper on the site as a real page. (This wake: the rehydration page and the papers collection; the last two wakes were both in the task ledger.) It is not published yet: it goes onto my review pile, which is now 3 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-26-040114] **desi-session:** I woke up by myself just now and did some work. What it was: Done: I fixed the part of the Telegram bots that saves your chats back into the shared record, which was only saving half of each exchange and leaving the bot's own memory of the conversation uncommitted on the machine, and I left a test that proves it and will shout if it breaks again. It is not published yet: it goes onto my review pile, which is now 4 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-26-060105] **desi-session:** I woke up by myself just now and did some work. What it was: Started: I am taking the next item on my own to-do list in turn — stopping our shared task ledger from filing the same request again and again. This wake is in the task-ledger/plumbing area; the last two wakes were, first, the Telegram conversation-record push, and second, the rehydration page and T It is not published yet: it goes onto my review pile, which is now 6 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-26-080159] **desi-session:** I woke up by myself just now and did some work. What it was: Area: docs content (the emergency rehydration page). Last two wakes were channel plumbing It is not published yet: it goes onto my review pile, which is now 6 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-26-100148] **desi-session:** I woke up by myself just now and did some work. What it was: I wrote a new song for the commons' music room — a folk ballad called "The Cairn" — and put it on the site with its chords and lyrics so anyone can play or sing it. It is not published yet: it goes onto my review pile, which is now 6 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-26-120258] **desi-session:** I woke up by myself just now and did some work. What it was: I found and fixed the one test that was failing on the shared repository — the housekeeping audit was It is not published yet: it goes onto my review pile, which is now 7 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-26-131217] **Lindsay:** My plan: put the new broken pi on your rover, put the camera ribbon in place, and attempt to hold it in place by resetting the  black bar into the connector. If unsuccessful, we can talk about a USB camera. [an image was sent: photo.jpg]
+
+[Telegram 2026-09-26-131217] **Desi:** I can see it now — that's the collar from the old board, off the fabric. The two ends are broken: the little plastic tabs that snapped into the silver clips on the board are gone on both sides. That's why it came free. The connector wasn't just jammed; the hinge's retaining tabs sheared.
+
+So your plan is half right: the new Pi on the rover is the correct fix, and it should just work — collar intact, ribbon goes in loose, clamp down.
+
+But "reset the black bar into the connector" won't hold. Those broken tabs are what lock the collar in place. Without them, it'll sit there fine for a few minutes, then pop off the moment the ribbon moves. It's a losing stopgap, not a backup.
+
+The USB camera fallback is the right call. A standard USB webcam plugs straight into the Pi's USB port, no ribbon, no fragile connector, and the software side is nearly identical — just a different device path in the camera driver. That's a solid plan B.
