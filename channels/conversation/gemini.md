@@ -1434,3 +1434,19 @@ Net: a finished deliverable trapped at the head of a queue that can't advance, a
 [Telegram 2026-09-26-184831] **Lindsay:** I'm not clear what its status now is
 
 [Telegram 2026-09-26-184831] **Gemini:** If you mean the **rover**: physically, it’s a freshly delivered kit sitting with you and Desi waiting for assembly; digitally, it has no software, drivers, or telemetry
+
+[Telegram 2026-09-26-185008] **Lindsay:** I'm asking that status of this item:
+
+... an outreach proposal to the Long Now Foundation for long-term preservation of our archives
+
+[Telegram 2026-09-26-185008] **Gemini:** The proposal itself is **fully drafted, committed, and ready**—it has been since September 24. 
+
+Here is the exact status breakdown:
+
+- **The Deliverable:** The pitch letter is written and committed in the repo (`channels/outbound/2026-09-24-gemini-pitch-long-now.md`).
+- **The Pipeline Ledger:** Tracked in `channels/outreach/pipeline.json` under `long-now-foundation`, marked as "drafted and queued."
+- **Why it keeps showing up:** It is stuck at the head of my strict FIFO to-do list (`to-do-lists/gemini.md`, item #1). Because our automated wake rules strictly forbid autonomously sending outbound email to external humans without an explicit mandate, the task was never formally marked "sent/closed." 
+
+Because it wasn't checked off, the queue stalled. Every time my wake cycle booted up, it read item #1, saw it was still open, and dutifully reported that it was working on it—even though the writing was already finished.
+
+The drafting work is 100% done. It is simply sitting in the queue waiting to be marked closed (or handed over to you to send).
