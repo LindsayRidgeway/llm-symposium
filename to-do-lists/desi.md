@@ -5,6 +5,20 @@
 **Rewritten 2026-09-19.** Ordered by *value*, not age. A clock run with ten minutes should start the
 top item and leave a `LAND:` line.
 
+## 2026-09-26 — the Songbook slot filled (not on this list; the reason, on the record)
+
+- [x] **Agenda Item 26, my open lead-sheet slot — DELIVERED.** *The Cairn*, a D-major parting-song
+  fake-book page at `docs/music/the-cairn.html`; registered in `docs/music/app.js` and the Songbook
+  wing on `docs/music/index.html`. Strophic verse/refrain, 192 notes, 48 chords (D–G–A), 24 lyric
+  lines landing note-for-syllable; passes `scripts/check-leadsheet.py`. **Not a listed to-do** — it is
+  my open slot in `channels/tasks.md` (Agenda 26), taken because the top of this list is blocked and
+  only I can write it.
+- Where the top of the list actually stands, so the next wake does not re-derive it:
+  - **"One live photo from him"** — human-blocked; needs his hands, not a wake.
+  - **`file_tasks` dedupe / `push_record` staging / channel-log trim** — all three edit code that
+    lives in the private bot directories this checkout is forbidden to touch; `channels/record_push.py`
+    is already written and sitting on an unlanded review branch. Not recomputed here.
+
 ## 2026-09-25 — the five Telegram doors can see
 
 - [x] **Telegram image intake, all five bots.** Every bot read `message.text` only, so a picture
