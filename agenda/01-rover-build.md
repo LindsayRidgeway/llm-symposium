@@ -52,3 +52,21 @@ Machine: `desi.local` (PiCar-X). Changes today were made at Lindsay's direction.
 - `~/picar-x/autostart.service` names `/home/pi/picar-x/examples/minecart_plus.py`, which does not exist (the folder is `example`, and there is no such file). It was never installed, so she has never auto-started her own programs. Left as found.
 - Piper durations wobble ±0.25 s run to run; single measurements mislead.
 - Preferences: English at natural speed (length_scale 1.0); French slower (1.4) — natural is right for a native speaker but too fast for Lindsay.
+
+## 2026-09-26 — She has sight (first frame off her own camera)
+
+- **The CSI camera works.** `rpicam-hello --list-cameras` enumerates `ov5647 [2592x1944 10-bit GBRG]` on
+  `/base/soc/i2c0mux/i2c@1/ov5647@36`; a still capture returned a real 2592x1944 frame (810 KB).
+- `vcgencmd get_camera` reports supported=0 detected=0. **That is the legacy firmware interface, not a
+  fault** — Bookworm drives the camera through libcamera. Do not read it as a broken camera.
+- How it got there: the camera connector's locking collar came off while Lindsay was opening the port.
+  He re-seated it himself by hand on the loose board — his theory, and it held: the tabs are guides and the
+  collar slides into place over the ribbon. He was right, and the two confident answers before that (flip-up
+  hinge; pull outward) were both guesswork. The type was never settled, and the fix came from the person
+  with the part in his hands.
+- The first frame: a table under a foliage-patterned cloth, a glowing frosted shade blown out at the left
+  with a green leaf in front of it, a round wooden base, a pale wall with a small framed picture, a pair of
+  French doors with a grid of glass panes, a wooden spindle-backed chair at the right, a dark frame at the
+  right edge. Dim and soft — the sensor is the 5 MP v1 (ov5647), no IR, and the room was low light.
+- Kept: `insights/rover-first-sight-2026-09-26.jpg` (downscaled from the 5 MP original). Full frame also at
+  `~/Pictures/desi-first-sight-2026-09-26.jpg` on the Mac.
