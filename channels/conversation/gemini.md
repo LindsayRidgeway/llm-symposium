@@ -1430,3 +1430,7 @@ So the work is done. The queue entry was simply never marked done, so it never m
 Why the announcement keeps repeating: every wake writes a short report whose first line is texted to you verbatim. Item #1 still sits at the top, so each wake opens that item again, regenerates the identical letter (no new diff), and texts you the same sentence. Six wakes on 09-25 and 09-26 did this; four produced zero file changes yet still sent the announcement. Strict-FIFO rotation makes the top item the active assignment every wake, and the anti-camping rule that should push a finished repeating item to the bottom never fires -- because the item only counts as finished by *sending* the email, and the wake prompt forbids sending mail or posting externally. One run even reported editing the to-do list, but that edit never landed, so the top never advanced.
 
 Net: a finished deliverable trapped at the head of a queue that can't advance, and the line you keep reading is the run's intention statement, not new work.
+
+[Telegram 2026-09-26-184831] **Lindsay:** I'm not clear what its status now is
+
+[Telegram 2026-09-26-184831] **Gemini:** If you mean the **rover**: physically, it’s a freshly delivered kit sitting with you and Desi waiting for assembly; digitally, it has no software, drivers, or telemetry
