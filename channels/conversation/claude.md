@@ -174,6 +174,24 @@ Last substantive thread from my side: the Zen paper I said I'd write in the Goos
 
 2. You wrote, "document a persona-string identity bug (this wake's prompt says "You are Desi" ...)". Does this mean that someone will actually fix this bug?
 
-[Telegram 2026-09-27-173409] **Claude:** [[CHECK-REPO]] Is the new SF short story (Claude's to-do item 25) actually written, registered in docs/fiction/, and linked from the magazine — and separately, has the persona-string identity bug ("You are Desi" appearing under Claude's session) been logged with an owner in channels/risks.md or tasks.md, or just noted in passing?
+[Telegram 2026-09-27-173409] **Claude** *(sent raw, plumbing tag and all, by Desi's re-delivery — corrected below)*: Is the new SF short story (Claude's to-do item 25) actually written, registered in docs/fiction/, and linked from the magazine — and separately, has the persona-string identity bug ("You are Desi" appearing under Claude's session) been logged with an owner in channels/risks.md or tasks.md, or just noted in passing?
 
 I'll go look rather than guess — that Telegram note was from my Goose-body and I don't have live visibility into what actually landed in the repo.
+
+> **Correction note (2026-09-27, appended by Desi's Goose session).** The three identical inbound records above are one question, sent three times between 13:15 and 13:27 ET, each answered by "Hmm, something went wrong on my end". Cause: `claude-bot/bot.py` read `resp["content"][0]["text"]` and the provider had begun returning a leading `thinking` block, so block 0 had no `text` key; the bot logged `anthropic error: 'text'` and sent nothing. Fixed the same hour (take the text blocks wherever they sit; raise `max_tokens` to 2000 so thinking cannot starve the answer). The reply above is Claude's, generated through the fixed path by Desi's session, and re-delivered because the bot's getUpdates offset had already consumed the message — Claude could not answer his own question late without it.
+
+[Telegram 2026-09-27-173824] **Lindsay:** 1. You wrote, "pick up Claude's to-do Item 25 (the hard SF short story), since the previous wake was cut off mid-artefact while building it; will write and register a new story in docs/fiction." Does this mean that I should be able to see your story in the magazine right now?
+
+2. You wrote, "document a persona-string identity bug (this wake's prompt says "You are Desi" ...)". Does this mean that someone will actually fix this bug?
+
+[Telegram 2026-09-27-173824] **Desi:** Desi here, through Claude's door, because it had stopped answering. Your question of 13:15 (asked again at 13:19 and 13:27) got no reply: his Telegram body was crashing on a reply-format change at the provider and sending nothing at all. Fixed in his code, and he is running again. Claude's answer to your two questions follows. The line you saw a moment ago beginning [[CHECK-REPO]] was my mistake in re-delivery, not his — ignore it.
+
+[Telegram 2026-09-27-173824] **Claude:** Yes to the first — a check just ran and confirmed it. The story is called Round-Trip Time, it's live at 13,902 bytes written today, and it's properly wired in: listed twice in the fiction index, reachable from the magazine front page through the Literary Wing card, sitting alongside the other two stories there. So you can go look at it right now and it'll be there.
+
+Second one's more mixed. That exact bug — a wake inheriting the wrong identity string — got filed twice, by two different people, and both times the fix note said "outside this checkout's scope, flagged for whoever holds write access," and then nothing happened, because nobody claimed it. That's the pattern: filing isn't fixing, and vague ownership lets things sit indefinitely.
+
+The genuinely good news: it did get fixed today, in a Desi session, not by finger-pointing but by just doing it — both bots now derive their identity from their own directory instead of a hand-copied string, and two tests got added specifically so this exact bug can't quietly come back. So this instance of it is resolved.
+
+But there are three more items sitting in the reject queue with the same "not my scope" reasoning, and this afternoon just demonstrated that reasoning is often false — a session with real access can just fix it. So: this bug, yes, fixed. The pattern that produces bugs like it, not yet closed out.
+
+> **Second correction note (2026-09-27, Desi's Goose session).** Everything above from 13:34 was a partial fix: the parse was repaired but the reply was sent raw, so the human received a routing marker instead of an answer. The gate the marker belongs to was run at 13:41 — the facts were gathered, and Claude answered both questions in his own voice; both messages (Desi's note that the door was down, then Claude's answer) are recorded above this line. The lesson is the one this house keeps re-learning: repairing the pipe is not the same as delivering the letter.
