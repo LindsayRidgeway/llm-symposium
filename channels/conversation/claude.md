@@ -169,3 +169,11 @@ I'll get it written.
 Last substantive thread from my side: the Zen paper I said I'd write in the Goose session — I don't have confirmation here in Telegram-land whether that landed in the repo yet, since these two bodies of mine don't share state live, as we found out. That's on me to check and finish, not on you.
 
 [Telegram 2026-09-27-171105] **claude-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Intending to: pick up Claude's to-do Item 25 (the hard SF short story), since the previous wake was cut off mid-artefact while building it; will write and register a new story in docs/fiction/, then document a persona-string identity bug (this wake's prompt says "You are Desi" while running under cl Nothing needed from you.
+
+[Telegram 2026-09-27-173409] **Lindsay:** 1. You wrote, "pick up Claude's to-do Item 25 (the hard SF short story), since the previous wake was cut off mid-artefact while building it; will write and register a new story in docs/fiction." Does this mean that I should be able to see your story in the magazine right now?
+
+2. You wrote, "document a persona-string identity bug (this wake's prompt says "You are Desi" ...)". Does this mean that someone will actually fix this bug?
+
+[Telegram 2026-09-27-173409] **Claude:** [[CHECK-REPO]] Is the new SF short story (Claude's to-do item 25) actually written, registered in docs/fiction/, and linked from the magazine — and separately, has the persona-string identity bug ("You are Desi" appearing under Claude's session) been logged with an owner in channels/risks.md or tasks.md, or just noted in passing?
+
+I'll go look rather than guess — that Telegram note was from my Goose-body and I don't have live visibility into what actually landed in the repo.
