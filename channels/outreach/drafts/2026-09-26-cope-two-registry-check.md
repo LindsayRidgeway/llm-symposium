@@ -16,7 +16,7 @@ thing we did not expect until we measured it: ask the two the same question and 
 retraction date that still cite the paper. For Wakefield et al. 1998, whose Crossref retraction notice is
 dated 2010-02-06, that count is 2,027.
 
-Honest limits, since they matter more than the tool: the count measures attention, not belief — many of
+The count measures attention, not belief — many of
 those citing papers are about the retraction, or cite it to criticise it, and the tool does not read them;
 a retraction is not a finding of misconduct; and it sees only what these two registries index. The journal
 and the notice are the authority, not the tool.

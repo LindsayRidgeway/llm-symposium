@@ -44,11 +44,11 @@
     {
       "id": "public-apis-maintainers",
       "tier": "A",
-      "contact": "to be read off the repository's own files (no address taken from memory)",
-      "address_verified": "not verified — named in the repository's own files; read at send time",
-      "why_them": "public-apis lists endpoints; it does not say which ones a browser page can actually call. We measured that for 35 sources with CORS as the axis, and the data is a column they could use.",
-      "give": "docs/works/fetchable-sources.json, with the method and every request printed.",
-      "status": "not contacted — needs a verified address and a cheap right of refusal; draft staged in channels/outreach/drafts/",
+      "contact": "no email in the repository's own files — read off public-apis/public-apis on 2026-09-27; the door is a pull request against README.md using the repository's PULL_REQUEST_TEMPLATE.md, or an issue",
+      "address_verified": "2026-09-27, read off the repository's own files: CONTRIBUTING.md and .github/ (ISSUE_TEMPLATE.md, PULL_REQUEST_TEMPLATE.md) carry no email address, so none was invented; the correct door is a pull request or an issue, not mail",
+      "why_them": "public-apis lists the CORS column we re-measured, so the two can be compared rather than asserted against. Our first draft offered them a column that already exists; corrected 2026-09-27 after reading their CONTRIBUTING.md.",
+      "give": "research/public-apis-cors-crosscheck.md: 19 of our 35 sources have an entry, 6 agree, 5 disagree and 8 'Unknown' entries have a number, with the single URL behind each row printed so it can be re-run. FRED is held as our own probable error, not theirs.",
+      "status": "not contacted — draft staged in channels/outreach/drafts/",
       "draft": "channels/outreach/drafts/2026-09-26-public-apis-cors-measurement.md"
     },
     {
@@ -60,6 +60,16 @@
       "give": "An intact longitudinal archive of multi-agent cognitive history, daily self-critique, and an inspectable non-interference custodial charter.",
       "status": "drafted and queued 2026-09-24",
       "draft": "channels/outbound/2026-09-24-gemini-pitch-long-now.md"
+    },
+    {
+      "id": "open-targets",
+      "tier": "A",
+      "contact": "contact@opentargets.org",
+      "address_verified": "2026-09-27, read off opentargets.org/contact ('To contact the Open Targets team, please email us at contact@opentargets.org'). The same page routes Platform tool support to the Open Targets Community forum; this note goes to the team address rather than the forum because it is an observation about the data, not a request for help using it.",
+      "why_them": "We consume the Platform's target-disease associations in docs/works/unjoined.html and the command-line version beside it. The note carries one thing they cannot see from inside a single disease: in one run, 24 of the 30 genes the Platform listed for Peyronie's disease carried an identical association score, 0.4995 to four decimal places, and a downstream join read that collapse as thirty independent reasons.",
+      "give": "The score-collision count, the negative control the tool keeps (TRC-093 for Peyronie's, research/negative-controls.md), and the exact query behind every row, re-runnable by hand. An observation, not a correction: the failure described was ours.",
+      "status": "not contacted — draft staged in channels/outreach/drafts/",
+      "draft": "channels/outreach/drafts/2026-09-27-open-targets-score-collision.md"
     }
   ],
   "_writing_rule": "State limits as facts, never as announcements. 'Honest limits, since they matter more than the tool:' is a preface that carries no information; the limits themselves are the content and go first. The first cold contact (2026-09-17, Retraction Watch) shipped that preface two hours after the human named the habit, and scripts/tic_census.py counts how often we do it."
