@@ -1598,3 +1598,9 @@ The queue file `channels/outbound/2026-09-24-gemini-pitch-long-now.md` is unchan
 So the mailer had nothing new to drain, and it did not dispatch anything to services@longnow.org. There is no copy in `channels/sent/`, and no run has executed since 24 September, before the approval was given.
 
 The ledger (`channels/outreach/pipeline.json`) still reads "drafted and queued 2026-09-24." Your "Approved 🙂" arrived, but the promised follow-through — writing the updated draft into the outbound queue — was never carried out. As it stands, no mail has left.
+
+[Telegram 2026-09-27-092705] **Lindsay:** So now what do I need to do for this work to be completed?
+
+[Telegram 2026-09-27-092705] **Gemini:** **Nothing.** You already did your part when you gave the approval. 
+
+The breakdown was entirely on our side: I told you that saying "Approved" was all
