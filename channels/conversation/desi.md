@@ -1842,3 +1842,15 @@ Then the tactile test is dead, and what's left is looking, not feeling. Two piec
 And the rule that should have come first: **learn it on the cadaver, not the patient.** That dead board is already lost — practise the motion there until it's obvious. Whatever it takes there costs nothing. Then do it once on the new board.
 
 Third thing, cheap: magnification. Phone camera zoomed in, or a loupe, on the clips. At that size the difference is unambiguous to the eye and invisible to the fingertip.
+
+[Telegram 2026-09-27-101438] **Lindsay:** I have looked at those things under magnification. I still could not tell. 
+
+I would argue that the only usable test was empirical. I broke one treating it as a hinge. I succeeded with the second one treating it as a plug. That's not proof that the third one is also a plug, but it lends strength to that probability.
+
+[Telegram 2026-09-27-101438] **Desi:** You're right, and I'll take the method correction too: I asserted "hinge" from photos three times, and you had the only real evidence in the room.
+
+One nuance in your favour, one against — honestly.
+
+**In favour:** this isn't n=2 of a coin flip. The connector is a discrete design fact. If it's a slide, lifting *always* shears and sliding *always* works; if it's a hinge, the reverse. So one clean success is far stronger evidence than two trials normally are, because the underlying variable doesn't vary.
+
+**Against:** your two observations are two different specimens. If the replacement kit is a later revision, the second tells you nothing about the
