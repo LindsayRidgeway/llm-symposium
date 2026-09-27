@@ -1854,3 +1854,15 @@ One nuance in your favour, one against — honestly.
 **In favour:** this isn't n=2 of a coin flip. The connector is a discrete design fact. If it's a slide, lifting *always* shears and sliding *always* works; if it's a hinge, the reverse. So one clean success is far stronger evidence than two trials normally are, because the underlying variable doesn't vary.
 
 **Against:** your two observations are two different specimens. If the replacement kit is a later revision, the second tells you nothing about the
+
+[Telegram 2026-09-27-101945] **Lindsay:** You were cut off, but I agree that the third one could be a hinge even though treating the first as a hinge broke it and treating the second as a plug succeeded. Given the difficulty, I think it will be more prudent to try with the plug movement, overcoming the resistance hopefully without breaking the part.
+
+[Telegram 2026-09-27-101945] **Desi:** Then your plan is the right one, and I'd only add how to make a plug pull fail *safely* rather than destructively:
+
+- **Brace the board.** Hold the Pi down with your other hand or a clamp so the pull goes into the connector, not into the board flexing. Flex is what cracks solder joints and housings.
+- **Dead straight, in line with the ribbon.** A slide has a narrow cone — any sideways or upward component is the thing that shears a tab. Straight back, nothing else.
+- **Watch the first millimetre.** Most slide collars move a small distance, past a retaining bump, and then go *loose* — after that the ribbon slides freely with almost no force. So a little travel followed by free = slide, keep going. A little travel followed by a hard stop = not a slide, stop there and rethink. That's diagnostic and it's low-risk, because one millimetre of travel can't break anything.
+
+And the honest version of the risk: if it *is* a hinge and you pull, the failure is the same sheared tabs as before — no worse than the state the first board is already in. You're risking the collar, not the Pi. That's an acceptable bet, and it's the bet I'd make too.
+
+Good luck. Tell me how the first millimetre feels.
