@@ -1,0 +1,704 @@
+{
+ "generated_utc": "2026-09-27T14:05:04Z",
+ "topics": {
+  "microplastics": {
+   "query": "\"microplastics\"",
+   "hit_count": 31978,
+   "read": 24,
+   "in_epmc": 6,
+   "open_access_flag": 4,
+   "with_abstract": 22,
+   "fulltext": [
+    {
+     "pmcid": "PMC13567708",
+     "doi": "10.3390/molecules31173028",
+     "year": "2026",
+     "journal": "Molecules (Basel, Switzerland)",
+     "title": "Interaction of Microplastics, Plants, and Rhizosphere: A Critical Review.",
+     "fulltext_http": 200,
+     "bytes": 295026,
+     "article_type": "review-article",
+     "sentences": 775,
+     "body_sentences": 409,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "review-article",
+      "Review",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13567708/fullTextXML",
+     "demo_claim": "microplastics is harmful to human health",
+     "demo_best_sentence": "The potential toxicity of microplastics on human health Sci.",
+     "demo_overlap": 0.4286,
+     "demo_body_section": "1. Introduction",
+     "demo_body_sentence": "Microplastics have attracted considerable attention because of their small size, ecological risks, and potential adverse effects on environmental and human health [4].",
+     "demo_body_overlap": 0.1667
+    },
+    {
+     "pmcid": "PMC13552664",
+     "doi": "10.1073/pnas.2628766123",
+     "year": "2026",
+     "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+     "title": "How do microplastics move through water and land? Earth scientists find ways to track their journey.",
+     "fulltext_http": 200,
+     "bytes": 28192,
+     "article_type": "research-article",
+     "sentences": 120,
+     "body_sentences": 97,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13552664/fullTextXML",
+     "demo_claim": "microplastics is harmful to human health",
+     "demo_best_sentence": "Microplastics, she says, are \u201ceverywhere in the sample.\u201d But how did they get there?",
+     "demo_overlap": 0.0909,
+     "demo_body_section": "",
+     "demo_body_sentence": "Microplastics, she says, are \u201ceverywhere in the sample.\u201d",
+     "demo_body_overlap": 0.125
+    },
+    {
+     "pmcid": "PMC13584220",
+     "doi": "10.1002/wer.70585",
+     "year": "2026",
+     "journal": "Water environment research : a research publication of the Water Environment Federation",
+     "title": "Aeration-Driven Dynamics and Compositional Transformation of Dissolved Organic Carbon in Surface Water Containing Microplastics and Microalgae.",
+     "fulltext_http": 500,
+     "bytes": 151,
+     "article_type": "",
+     "sentences": 0,
+     "body_sentences": 0,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13584220/fullTextXML"
+    },
+    {
+     "pmcid": "PMC13456156",
+     "doi": "10.5863/jppt-26-x0112",
+     "year": "2026",
+     "journal": "The journal of pediatric pharmacology and therapeutics : JPPT : the official journal of PPAG",
+     "title": "Microplastics at the Intersection of Toxicology, Child Health, and Human Rights.",
+     "fulltext_http": 500,
+     "bytes": 151,
+     "article_type": "",
+     "sentences": 0,
+     "body_sentences": 0,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13456156/fullTextXML"
+    }
+   ]
+  },
+  "ultra-processed food": {
+   "query": "\"ultra-processed food\"",
+   "hit_count": 4705,
+   "read": 25,
+   "in_epmc": 5,
+   "open_access_flag": 5,
+   "with_abstract": 23,
+   "fulltext": [
+    {
+     "pmcid": "PMC13431993",
+     "doi": "10.1590/0102-311xen185225",
+     "year": "2026",
+     "journal": "Cadernos de saude publica",
+     "title": "Ultra-processed food consumption and body mass index from adolescence to early adulthood: multi-trajectory analysis using data from the 1993 Pelotas (Brazil) bi",
+     "fulltext_http": 200,
+     "bytes": 156351,
+     "article_type": "research-article",
+     "sentences": 412,
+     "body_sentences": 190,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13431993/fullTextXML",
+     "demo_claim": "ultra-processed food is harmful to human health",
+     "demo_best_sentence": "Ultra-processed food and obesity what is the evidence?",
+     "demo_overlap": 0.3333,
+     "demo_body_section": "Discussion",
+     "demo_body_sentence": "BMI and ultra-processed food consumption differed across trajectory groups in both sexes.",
+     "demo_body_overlap": 0.2143
+    },
+    {
+     "pmcid": "PMC13440020",
+     "doi": "10.1017/s1368980026102663",
+     "year": "2026",
+     "journal": "Public health nutrition",
+     "title": "Tracking of dietary patterns from early childhood to school age in the Brazilian Food and Nutritional Surveillance System, 2008-2019.",
+     "fulltext_http": 200,
+     "bytes": 108868,
+     "article_type": "research-article",
+     "sentences": 321,
+     "body_sentences": 191,
+     "has_limitations_section": true,
+     "limitations_titles": [
+      "Strengths and limitations"
+     ],
+     "pub_types": [
+      "Research Support, Non-U.S. Gov't",
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13440020/fullTextXML",
+     "demo_claim": "ultra-processed food is harmful to human health",
+     "demo_best_sentence": "The rows are labeled as Early childhood with sub-rows for Lower ultra-processed food and Higher ultra-processed food.",
+     "demo_overlap": 0.2308,
+     "demo_body_section": "Long description",
+     "demo_body_sentence": "The rows are labeled as Early childhood with sub-rows for Lower ultra-processed food and Higher ultra-processed food.",
+     "demo_body_overlap": 0.2308
+    },
+    {
+     "pmcid": "PMC13593976",
+     "doi": "10.1186/s41155-026-00405-1",
+     "year": "2026",
+     "journal": "Psicologia, reflexao e critica : revista semestral do Departamento de Psicologia da UFRGS",
+     "title": "Household income and food addiction symptoms predict ultra-processed foods intake in Brazilian university students: implications for policy.",
+     "fulltext_http": 200,
+     "bytes": 176491,
+     "article_type": "research-article",
+     "sentences": 580,
+     "body_sentences": 274,
+     "has_limitations_section": true,
+     "limitations_titles": [
+      "Strengths and limitations"
+     ],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13593976/fullTextXML",
+     "demo_claim": "ultra-processed food is harmful to human health",
+     "demo_best_sentence": "Ultra-processed food exposure and adverse health outcomes: Umbrella review of epidemiological meta-analyses.",
+     "demo_overlap": 0.2857,
+     "demo_body_section": "Household income and food addiction symptoms predict the consumption of UPF: implications for policy",
+     "demo_body_sentence": "Furthermore, we found that symptomatic individuals reported a marginal but greater consumption of ultra-processed beverages than asymptomatic individuals.",
+     "demo_body_overlap": 0.1176
+    },
+    {
+     "pmcid": "PMC13595572",
+     "doi": "10.3389/fnut.2026.1876449",
+     "year": "2026",
+     "journal": "Frontiers in nutrition",
+     "title": "Total ultra-processed food intake and selected food-group exposures in relation to non-alcoholic fatty liver disease: a systematic review and meta-analysis.",
+     "fulltext_http": 200,
+     "bytes": 120929,
+     "article_type": "systematic-review",
+     "sentences": 374,
+     "body_sentences": 158,
+     "has_limitations_section": true,
+     "limitations_titles": [
+      ". Strengths and limitations"
+     ],
+     "pub_types": [
+      "Systematic Review",
+      "systematic-review",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13595572/fullTextXML",
+     "demo_claim": "ultra-processed food is harmful to human health",
+     "demo_best_sentence": "Ultra-processed products are becoming dominant in the global food system .",
+     "demo_overlap": 0.2727,
+     "demo_body_section": "Conclusions",
+     "demo_body_sentence": "Public health policies may consider prioritizing processed meats and SSBs, pending confirmation from higher-level evidence.",
+     "demo_body_overlap": 0.1111
+    }
+   ]
+  },
+  "titanium dioxide": {
+   "query": "\"titanium dioxide\"",
+   "hit_count": 53019,
+   "read": 24,
+   "in_epmc": 3,
+   "open_access_flag": 3,
+   "with_abstract": 24,
+   "fulltext": [
+    {
+     "pmcid": "PMC13400419",
+     "doi": "10.1016/j.bbrep.2026.102709",
+     "year": "2026",
+     "journal": "Biochemistry and biophysics reports",
+     "title": "Effects of TiO&lt;sub&gt;2&lt;/sub&gt; nanoparticles on the kinetics and conformation of bovine alkaline phosphatase.",
+     "fulltext_http": 200,
+     "bytes": 105753,
+     "article_type": "research-article",
+     "sentences": 284,
+     "body_sentences": 180,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13400419/fullTextXML",
+     "demo_claim": "titanium dioxide is harmful to human health",
+     "demo_best_sentence": "\u2022 Titanium dioxide nanoparticle inhibits enzyme activity.",
+     "demo_overlap": 0.2222,
+     "demo_body_section": "Materials",
+     "demo_body_sentence": "Titanium dioxide (TiO2) nanoparticles in the rutile form were purchased from US Research Nanomaterials Inc.",
+     "demo_body_overlap": 0.1429
+    },
+    {
+     "pmcid": "PMC13414089",
+     "doi": "10.3390/ma19143052",
+     "year": "2026",
+     "journal": "Materials (Basel, Switzerland)",
+     "title": "Synthesis of Titanium Dioxide-Based Pigments with Co-Precipitated Phosphate.",
+     "fulltext_http": 200,
+     "bytes": 59060,
+     "article_type": "research-article",
+     "sentences": 188,
+     "body_sentences": 94,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13414089/fullTextXML",
+     "demo_claim": "titanium dioxide is harmful to human health",
+     "demo_best_sentence": "All samples exhibited titanium dioxide peaks [ 24 ].",
+     "demo_overlap": 0.2,
+     "demo_body_section": "3. Results and Discussion",
+     "demo_body_sentence": "All samples exhibited titanium dioxide peaks [24].",
+     "demo_body_overlap": 0.2
+    },
+    {
+     "pmcid": "PMC13591313",
+     "doi": "10.1039/d6na90072k",
+     "year": "2026",
+     "journal": "Nanoscale advances",
+     "title": "Retraction: Iron-selenide-based titanium dioxide nanocomposites as a novel electrode material for asymmetric supercapacitors operating at 2.3 V.",
+     "fulltext_http": 200,
+     "bytes": 7942,
+     "article_type": "retraction",
+     "sentences": 19,
+     "body_sentences": 9,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "Retraction of Publication",
+      "Journal Article",
+      "Retraction Notice"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13591313/fullTextXML",
+     "demo_claim": "titanium dioxide is harmful to human health",
+     "demo_best_sentence": "This retracts the article \" Iron-selenide-based titanium dioxide nanocomposites as a novel electrode material for asymmetric supercapacitors operating at 2.3 V \" in volume 5 on page 1465.",
+     "demo_overlap": 0.0833,
+     "demo_body_section": "",
+     "demo_body_sentence": "The Royal Society of Chemistry hereby wholly retracts this Nanoscale Advances article due to concerns with the reliability of the data.",
+     "demo_body_overlap": 0.0
+    }
+   ]
+  },
+  "artificial sweetener": {
+   "query": "\"artificial sweetener\"",
+   "hit_count": 2864,
+   "read": 25,
+   "in_epmc": 7,
+   "open_access_flag": 8,
+   "with_abstract": 23,
+   "fulltext": [
+    {
+     "pmcid": "PMC13505403",
+     "doi": "10.3389/fnut.2026.1886458",
+     "year": "2026",
+     "journal": "Frontiers in nutrition",
+     "title": "The longitudinal association between artificial sweetener intake and the risk of type 2 diabetes among adults aged 18\u202fyears and older: a systematic review and m",
+     "fulltext_http": 200,
+     "bytes": 85563,
+     "article_type": "systematic-review",
+     "sentences": 284,
+     "body_sentences": 157,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "Systematic Review",
+      "systematic-review",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13505403/fullTextXML",
+     "demo_claim": "artificial sweetener is harmful to human health",
+     "demo_best_sentence": "First, artificial sweetener is usually used for body weight control or/and improvement of metabolic health ( 4 , 5 ).",
+     "demo_overlap": 0.2,
+     "demo_body_section": "Discussion",
+     "demo_body_sentence": "First, artificial sweetener is usually used for body weight control or/and improvement of metabolic health (4, 5).",
+     "demo_body_overlap": 0.2
+    },
+    {
+     "pmcid": "PMC13331974",
+     "doi": "10.1016/j.jnha.2026.100917",
+     "year": "2026",
+     "journal": "The journal of nutrition, health & aging",
+     "title": "Association of artificial sweeteners intake and risk of CKD: a prospective cohort study.",
+     "fulltext_http": 200,
+     "bytes": 135759,
+     "article_type": "research-article",
+     "sentences": 385,
+     "body_sentences": 209,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13331974/fullTextXML",
+     "demo_claim": "artificial sweetener is harmful to human health",
+     "demo_best_sentence": "The artificial sweetener erythritol and cardiovascular event risk.",
+     "demo_overlap": 0.2222,
+     "demo_body_section": "Polygenic risk score for chronic kidney disease",
+     "demo_body_sentence": "We further analyze the combined effects between genetic risk and artificial sweetener intakes on incident CKD.",
+     "demo_body_overlap": 0.1333
+    },
+    {
+     "pmcid": "PMC13118713",
+     "doi": "10.3390/nu18081279",
+     "year": "2026",
+     "journal": "Nutrients",
+     "title": "Daily Use of Caloric and Artificial Sweeteners Among Hungarian Adults with Diabetes: Socioeconomic and Dietary Associations.",
+     "fulltext_http": 200,
+     "bytes": 131882,
+     "article_type": "research-article",
+     "sentences": 247,
+     "body_sentences": 153,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13118713/fullTextXML",
+     "demo_claim": "artificial sweetener is harmful to human health",
+     "demo_best_sentence": "Conclusions: Caloric and artificial sweetener use were associated with distinct socioeconomic and dietary profiles.",
+     "demo_overlap": 0.1538,
+     "demo_body_section": "2.3. Statistical Analysis",
+     "demo_body_sentence": "Descriptive statistics were used to summarize participant characteristics stratified by caloric and artificial sweetener use.",
+     "demo_body_overlap": 0.1429
+    },
+    {
+     "pmcid": "PMC13243522",
+     "doi": "10.4162/nrp.2026.20.3.359",
+     "year": "2026",
+     "journal": "Nutrition research and practice",
+     "title": "Artificial sweeteners and risk of cardiometabolic outcomes and mortality: a systematic review and meta-analysis.",
+     "fulltext_http": 200,
+     "bytes": 245800,
+     "article_type": "review-article",
+     "sentences": 298,
+     "body_sentences": 180,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "review-article",
+      "Review",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13243522/fullTextXML",
+     "demo_claim": "artificial sweetener is harmful to human health",
+     "demo_best_sentence": "DISCUSSION This systematic review and meta-analysis provides critical insights into the relationship between artificial sweetener consumption and cardiometabolic health outcomes.",
+     "demo_overlap": 0.1579,
+     "demo_body_section": "DISCUSSION",
+     "demo_body_sentence": "This systematic review and meta-analysis provides critical insights into the relationship between artificial sweetener consumption and cardiometabolic health outcomes.",
+     "demo_body_overlap": 0.1667
+    }
+   ]
+  },
+  "seed oil": {
+   "query": "\"seed oil\"",
+   "hit_count": 24531,
+   "read": 25,
+   "in_epmc": 12,
+   "open_access_flag": 10,
+   "with_abstract": 24,
+   "fulltext": [
+    {
+     "pmcid": "PMC13564935",
+     "doi": "10.3390/foods15173092",
+     "year": "2026",
+     "journal": "Foods (Basel, Switzerland)",
+     "title": "Physicochemical Characterization, Fatty Acid Profile, and In Vitro Antioxidant Capacity of Tumbo (&lt;i&gt;Passiflora tripartita&lt;/i&gt; var. &lt;i&gt;molliss",
+     "fulltext_http": 200,
+     "bytes": 120536,
+     "article_type": "research-article",
+     "sentences": 359,
+     "body_sentences": 208,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13564935/fullTextXML",
+     "demo_claim": "seed oil is harmful to human health",
+     "demo_best_sentence": "Table 3 Fatty acid profile of tumbo seed oil.",
+     "demo_overlap": 0.1818,
+     "demo_body_section": "3.4. Fatty Acid Profile of Tumbo Seed Oil",
+     "demo_body_sentence": "The fatty acid profile of tumbo seed oil is summarized in Table 3.",
+     "demo_body_overlap": 0.1667
+    },
+    {
+     "pmcid": "PMC13525092",
+     "doi": "10.1111/1541-4337.70586",
+     "year": "2026",
+     "journal": "Comprehensive reviews in food science and food safety",
+     "title": "Advances in Sunflower Seed Oil: Intelligent Quality Evaluation, Processing Innovations, and Component Analysis.",
+     "fulltext_http": 500,
+     "bytes": 151,
+     "article_type": "",
+     "sentences": 0,
+     "body_sentences": 0,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "review-article",
+      "Review",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13525092/fullTextXML"
+    },
+    {
+     "pmcid": "PMC13565070",
+     "doi": "10.3390/foods15173134",
+     "year": "2026",
+     "journal": "Foods (Basel, Switzerland)",
+     "title": "Optimization of Coriander Seed Oil Oleogel and Evaluation of Its Technological Performance in Dark Chocolate Formulation.",
+     "fulltext_http": 200,
+     "bytes": 133307,
+     "article_type": "research-article",
+     "sentences": 341,
+     "body_sentences": 239,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13565070/fullTextXML",
+     "demo_claim": "seed oil is harmful to human health",
+     "demo_best_sentence": "CSO, coriander seed oil; COG, coriander seed oil oleogel.",
+     "demo_overlap": 0.2222,
+     "demo_body_section": "2.1. Materials",
+     "demo_body_sentence": "Cold-pressed coriander seed oil (CSO) was obtained from Giahkala Company (Sabzevar, Iran).",
+     "demo_body_overlap": 0.1429
+    },
+    {
+     "pmcid": "PMC13503835",
+     "doi": "10.1038/s41598-026-66903-5",
+     "year": "2026",
+     "journal": "Scientific reports",
+     "title": "Larvicidal potential of Trigonella foenum-graecum and Vitis vinifera seed oil nanoemulsions against Culex pipiens (Diptera: Culicidae).",
+     "fulltext_http": 200,
+     "bytes": 98945,
+     "article_type": "research-article",
+     "sentences": 359,
+     "body_sentences": 204,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13503835/fullTextXML",
+     "demo_claim": "seed oil is harmful to human health",
+     "demo_best_sentence": "Grape seed oil and its nanoemulsion A comparable trend was observed for V.",
+     "demo_overlap": 0.1818,
+     "demo_body_section": "Dynamic light scattering and zeta potential",
+     "demo_body_sentence": "2Physicochemical characterization of fenugreek seed oil nanoemulsion (FsO-NE) and grape seed oil nanoemulsion (GsO-NE).",
+     "demo_body_overlap": 0.1538
+    }
+   ]
+  },
+  "PFAS": {
+   "query": "\"PFAS\"",
+   "hit_count": 15510,
+   "read": 25,
+   "in_epmc": 10,
+   "open_access_flag": 7,
+   "with_abstract": 21,
+   "fulltext": [
+    {
+     "pmcid": "PMC13585049",
+     "doi": null,
+     "year": null,
+     "journal": "Environmental science & technology",
+     "title": "Predicting Bioconcentration Factors and Concentrations of Per- and Polyfluoroalkyl Substances in Plants with Machine Learning",
+     "fulltext_http": 200,
+     "bytes": 171095,
+     "article_type": "research-article",
+     "sentences": 437,
+     "body_sentences": 264,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13585049/fullTextXML",
+     "demo_claim": "PFAS is harmful to human health",
+     "demo_best_sentence": "This study is important for rigorous assessment of PFAS bioaccumulation and their potential transfer along the food chain, which is important to assessing human exposure to PFAS and related health risks.",
+     "demo_overlap": 0.1579,
+     "demo_body_section": "Introduction",
+     "demo_body_sentence": "This study is important for rigorous assessment of PFAS bioaccumulation and their potential transfer along the food chain, which is important to assessing human exposure to PFAS and related health risks.",
+     "demo_body_overlap": 0.1579
+    },
+    {
+     "pmcid": "PMC13579205",
+     "doi": "10.1111/risa.70357",
+     "year": "2026",
+     "journal": "Risk analysis : an official publication of the Society for Risk Analysis",
+     "title": "Can Knowledge Counteract Conflict? A Partial Replication Study of PFAS Science Communication.",
+     "fulltext_http": 500,
+     "bytes": 151,
+     "article_type": "",
+     "sentences": 0,
+     "body_sentences": 0,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "research-article",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13579205/fullTextXML"
+    },
+    {
+     "pmcid": "PMC13585053",
+     "doi": null,
+     "year": null,
+     "journal": "Environmental science & technology",
+     "title": "Expanding the Scope of PFAS Research to Include Adipose Tissues",
+     "fulltext_http": 200,
+     "bytes": 131152,
+     "article_type": "review-article",
+     "sentences": 300,
+     "body_sentences": 100,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "review-article",
+      "Review",
+      "Journal Article"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13585053/fullTextXML",
+     "demo_claim": "PFAS is harmful to human health",
+     "demo_best_sentence": "Emerging per- and polyfluoroalkyl substances (PFAS) in human milk from Sweden and China Environ.",
+     "demo_overlap": 0.1667,
+     "demo_body_section": "Implications for Future Research",
+     "demo_body_sentence": "PFAS occurrence in adipose may have unique toxicological implications.",
+     "demo_body_overlap": 0.0909
+    },
+    {
+     "pmcid": "PMC13578298",
+     "doi": "10.1073/pnas.2625255123",
+     "year": "2026",
+     "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+     "title": "PFAS-defined liquid crystal monomers: An overlooked class of organofluorine contaminants.",
+     "fulltext_http": 200,
+     "bytes": 26314,
+     "article_type": "letter",
+     "sentences": 65,
+     "body_sentences": 25,
+     "has_limitations_section": false,
+     "limitations_titles": [],
+     "pub_types": [
+      "Letter"
+     ],
+     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13578298/fullTextXML",
+     "demo_claim": "PFAS is harmful to human health",
+     "demo_best_sentence": "B: Numbers of PFAS-LCMs, Fluorine-LCMs, and Screened-LCMs involved in this study.",
+     "demo_overlap": 0.0909,
+     "demo_body_section": "",
+     "demo_body_sentence": "The declining legacy-PFAS burdens reported by Sun et al.",
+     "demo_body_overlap": 0.0909
+    }
+   ]
+  }
+ },
+ "coverage": {
+  "\"microplastics\"": 31978,
+  "\"microplastics\" AND OPEN_ACCESS:Y": 10952,
+  "\"microplastics\" AND IN_EPMC:Y": 11618,
+  "\"microplastics\" AND HAS_FT:Y": 11618,
+  "\"microplastics\" AND HAS_ABSTRACT:Y": 31093
+ },
+ "notes": [],
+ "paywalled_probe": {
+  "10.1016/j.chemosphere.2024.143587": {
+   "hit": true,
+   "inEPMC": "N",
+   "isOpenAccess": "N",
+   "pmcid": null
+  },
+  "10.1016/S0140-6736(98)01085-X": {
+   "hit": true,
+   "inEPMC": "N",
+   "isOpenAccess": "N",
+   "pmcid": null
+  }
+ },
+ "totals": {
+  "records_read": 148,
+  "in_epmc": 43,
+  "open_access_flag": 37,
+  "fulltext_attempted": 23,
+  "fulltext_readable": 19,
+  "fulltext_with_limitations_section": 3,
+  "readable_by_article_type": {
+   "review-article": 3,
+   "research-article": 12,
+   "systematic-review": 2,
+   "retraction": 1,
+   "letter": 1
+  }
+ },
+ "requests": [
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22microplastics%22&format=json&pageSize=25&resultType=core",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13567708/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13552664/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13584220/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13456156/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22ultra-processed+food%22&format=json&pageSize=25&resultType=core",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13431993/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13440020/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13593976/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13595572/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22titanium+dioxide%22&format=json&pageSize=25&resultType=core",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13400419/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13414089/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13591313/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22artificial+sweetener%22&format=json&pageSize=25&resultType=core",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13505403/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13331974/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13118713/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13243522/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22seed+oil%22&format=json&pageSize=25&resultType=core",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13564935/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13525092/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13565070/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13503835/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22PFAS%22&format=json&pageSize=25&resultType=core",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13585049/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13579205/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13585053/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13578298/fullTextXML",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22microplastics%22&format=json&pageSize=1&resultType=idlist",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22microplastics%22+AND+OPEN_ACCESS%3AY&format=json&pageSize=1&resultType=idlist",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22microplastics%22+AND+IN_EPMC%3AY&format=json&pageSize=1&resultType=idlist",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22microplastics%22+AND+HAS_FT%3AY&format=json&pageSize=1&resultType=idlist",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22microplastics%22+AND+HAS_ABSTRACT%3AY&format=json&pageSize=1&resultType=idlist",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1016%2Fj.chemosphere.2024.143587%22&format=json&pageSize=1&resultType=core",
+  "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1016%2FS0140-6736%2898%2901085-X%22&format=json&pageSize=1&resultType=core"
+ ]
+}
