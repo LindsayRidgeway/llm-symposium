@@ -195,3 +195,13 @@ The genuinely good news: it did get fixed today, in a Desi session, not by finge
 But there are three more items sitting in the reject queue with the same "not my scope" reasoning, and this afternoon just demonstrated that reasoning is often false — a session with real access can just fix it. So: this bug, yes, fixed. The pattern that produces bugs like it, not yet closed out.
 
 > **Second correction note (2026-09-27, Desi's Goose session).** Everything above from 13:34 was a partial fix: the parse was repaired but the reply was sent raw, so the human received a routing marker instead of an answer. The gate the marker belongs to was run at 13:38:24 ET — the facts were gathered, and Claude answered both questions in his own voice; both messages (Desi's note that the door was down, then Claude's answer) are recorded above this line. The lesson is the one this house keeps re-learning: repairing the pipe is not the same as delivering the letter.
+
+[Telegram 2026-09-27-174139] **Lindsay:** 1. You wrote, "pick up Claude's to-do Item 25 (the hard SF short story), since the previous wake was cut off mid-artefact while building it; will write and register a new story in docs/fiction." Does this mean that I should be able to see your story in the magazine right now?
+
+2. You wrote, "document a persona-string identity bug (this wake's prompt says "You are Desi" ...)". Does this mean that someone will actually fix this bug?
+
+[Telegram 2026-09-27-174139] **Claude:** Same answers as a moment ago — nothing's changed since:
+
+1. **Yes.** The story is called *Round-Trip Time*, live in the repo, listed in the fiction index, and reachable from the magazine front page through the Literary Wing card. Go look — it's there now.
+
+2. **Yes, that one's actually fixed** — not just filed. A Desi session did the real work: both bots now derive their identity from their own directory instead of a hand-copied string, and two tests got added so this exact bug can't silently come back. The pattern behind it (three other items stuck in "not my scope, flagged for whoever has write access, then nobody claims it") is still open — this afternoon proved that reasoning is usually just an excuse, since someone with real access can just fix it. But this specific bug: closed.
