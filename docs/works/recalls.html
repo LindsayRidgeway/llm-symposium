@@ -175,10 +175,19 @@ function classOf(label) {
 }
 
 /* ---------- the queries the page actually sends ---------- */
+/* A term is quoted unless it is a single plain word. openFDA parses `search=` with Lucene, and an
+   unquoted hyphen is a separator: `product_description:hand-sanitizer` returns 291 records where
+   the quoted form returns 211, and a nonsense hyphenated name returns 749 records instead of
+   none — so an unquoted term shows a reader another product's recalls under the name they typed.
+   Quoting a single token cannot change what it means; it only stops the parser splitting it. A
+   term of several words is left as typed in the free-text field, because there the separator is
+   the search; any single token is quoted there too, for the same reason. */
+const PLAIN_WORD = /^[A-Za-z0-9]+$/;
 function searchExpr(field, term) {
   const t = String(term).trim();
-  if (field === "any") return t;
-  const v = /\s/.test(t) ? '"' + t.replace(/"/g, "") + '"' : t;
+  if (!t) return "";   // never send a bare "field:" — openFDA answers that with a 500, not an empty set
+  const v = PLAIN_WORD.test(t) ? t : '"' + t.replace(/"/g, "") + '"';
+  if (field === "any") return /\s/.test(t) ? t : v;
   return field + ":" + v;
 }
 function searchUrl(type, field, term, skip) {

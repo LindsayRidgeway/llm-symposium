@@ -94,6 +94,18 @@ check("a multi-word product is quoted so it is a phrase, not two terms",
 check("quotes the user typed cannot break out of the quoted value",
   mod.searchExpr("product_description", 'a"b') === 'product_description:"ab"');
 check("the 'any field' choice is passed as a bare term, as openFDA expects", mod.searchExpr("any", "ice cream") === "ice cream");
+// A hyphen is not whitespace, so a rule that quotes on whitespace alone sends `hand-sanitizer`
+// unquoted — and openFDA reads an unquoted hyphen as a separator, returning another product's
+// recalls under the name typed. Measured live on 2026-09-27: unquoted 291 records, quoted 211.
+check("a hyphenated single word is quoted, not sent bare (an unquoted hyphen is a separator)",
+  mod.searchExpr("product_description", "hand-sanitizer") === 'product_description:"hand-sanitizer"');
+check("the same holds in the free-text field, where a single token is still one token",
+  mod.searchExpr("any", "hand-sanitizer") === '"hand-sanitizer"');
+check("a term of several words is still left bare in the free-text field",
+  mod.searchExpr("any", "ice cream") === "ice cream");
+check("an empty term is sent as no constraint, never as a bare 'field:' (openFDA answers that 500)",
+  mod.searchExpr("product_description", "") === "" && mod.searchExpr("", "") === ""
+  && mod.searchUrl("drug", "", "", 0).includes("search=&"));
 const u = mod.searchUrl("food", "product_description", "ice cream", 2000);
 check("the query names the product type in the path", u.includes("/food/enforcement.json"));
 check("the query asks for arrays of up to 1000 records", /[?&]limit=1000\b/.test(u));
@@ -113,6 +125,13 @@ check("openFDA's 404 'NOT_FOUND' is read as zero records, not thrown",
 const missing = await mod.searchPage("drug", "product_description", "zzzz-no-such-product-zzzz", 0);
 check("a product with no record returns an empty set and a total of zero",
   Array.isArray(missing.records) && missing.records.length === 0 && missing.total === 0);
+// The bug the quoting rule exists to prevent, measured live rather than asserted from memory: the
+// same nonsense name sent the old way — unquoted, so openFDA splits it on the hyphens — is read as
+// loose terms and returns another product's records instead of none.
+const split = await mod.apiGet("https://api.fda.gov/drug/enforcement.json?search=product_description%3Azzzz-no-such-product-zzzz&limit=1");
+check("the same nonsense name sent unquoted is read as loose terms and returns records, not none",
+  split.json && (split.json.meta.results.total || 0) > 0,
+  `total=${split.json && split.json.meta.results.total}`);
 
 // --- 6. live: one product, read two ways ------------------------------------------
 const TERM = "metformin";
@@ -158,7 +177,9 @@ check("the split into classification and publication is present, not just the he
 
 // --- 7. live: the whole-record claim the page makes in prose ----------------------
 // The page states that every drug record carries both dates. Two pages of the whole drug set is
-// a 2,000-row sample of that claim, read here with the page's own date parser.
+// a 2,000-row sample of that claim, read here with the page's own date parser. An empty term is
+// sent as `search=` — no constraint — which is the whole index; the earlier version of this file
+// passed an empty field through to `search=:` and openFDA answered 500, killing the run here.
 const whole = [];
 for (const skip of [0, 1000]) {
   const p = await mod.searchPage("drug", "", "", skip);
@@ -205,8 +226,11 @@ check("the card prints all three dates rather than folding them into one number"
 check("the card prints the headline interval and says most of it is the classification step",
   /69 d/.test(cardHtml) && /classification step/.test(cardHtml));
 check("the card marks the class with the record's own words", cardHtml.includes("Class I"));
+// the row's own words, with the markup taken off first — the sentence carries a <strong> in the
+// middle, so a regex over the raw html sees tags where the reader sees a word
+const undatedRow = mod.card(mod.readRecord({ recall_number: "D-2", classification: "Class II" }, "drug"), 1).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
 check("a record with no usable dates says so on the row instead of printing a zero",
-  /not counted in the interval figures/.test(mod.card(mod.readRecord({ recall_number: "D-2", classification: "Class II" }, "drug"), 1)));
+  /not counted in the interval figures/.test(undatedRow), undatedRow.trim().slice(0, 70));
 
 const pageText = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "")
   .replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
@@ -214,7 +238,7 @@ check("says plainly that a recall is not proof anyone was harmed",
   /not\s*<\/strong>\s*a finding that anyone was harmed/.test(html) || /A recall is not a finding that anyone was harmed/.test(pageText.replace(/<\/?strong>/g, "")));
 check("says the class is not a severity of injury", /not<\/strong> a severity of injury/.test(html) || /class is not a severity of injury/.test(pageText.replace(/<\/?strong>/g, "")));
 check("says the interval measures record-keeping and classification, not concealment",
-  /measures\s*<\/strong>\s*record-keeping/.test(html) && /\bnot concealment by the firm\b/.test(pageText));
+  /measures\s*<strong>record-keeping/.test(html) && /\bnot concealment by the firm\b/.test(pageText));
 check("says a blank result is not a clean bill of health", /not "never recalled"/.test(pageText));
 check("says which field was searched changes the count", /changes the count/.test(pageText));
 check("states there is no ranking, no worst-offenders list and no firm league table",
