@@ -1916,3 +1916,30 @@ Nothing needed from you.
 So your question has a literal answer: **nobody is assigned.** RT-4 sits open in `agenda/15`, owner *"open, all four,"* with the next action already written down for tomorrow — pick one mechanical boundary: either run shell sessions without provider/API/mail/Telegram secrets in the environment by default, or add a pre-delivery scanner that refuses to publish any artifact, transcript, or session DB carrying an exact secret value.
 
 This is my family — RT-1 in that same agenda is mine. I'll take RT-4 and put the boundary in. Say so if you'd rather I leave the wake harness alone.
+
+[Goose 2026-09-27 17:28] **Lindsay:** I'm not interested in the specific issue in this exchange with you. I'm interested instead on the fact that Tarik seems to be saying that there's nothing he can do about the required work not getting done. It seems to me that there is a hole in the symposium architecture if information about a required fix is visible to Goose sessions, which are capable of doing the fix, but nonetheless, the fix will never get done without my assistance.
+
+**Desi:** You're right — and the hole is wider than you described. I measured it, and the measurement changes the claim.
+
+**What the wakes are actually given is truncated, silently.** Every wake is handed three things at the end of its prompt; I read the harness (`local_tick.py`, same shape in all four):
+
+- **Agenda:** `channels/agenda.md` is **231,093 characters**; the wake gets `text[:3500]`. Item 15 — the deadbolt/red-team item RT-4 lives in — starts at **char 163,417**; RT-4 itself at 168,007. The first 3,500 chars are the file's *preamble* and contain **zero `##` items**. So no wake has ever seen an agenda item at all. Not "visible but unrouted" — **invisible**.
+- **Task ledger:** `channels/tasks.md` is 13,775 chars; the wake gets `text[:10000]` with **no truncation marker**. **10 of its 18 open items** are past the cut.
+- The **to-do list** is the only one of the three that marks its own truncation ("[truncated here — read the file for the rest]"). The harness knows how; it just didn't for the other two.
+
+And it announces these with *"ORIENTATION IS DONE FOR YOU … the agenda index, the commons task ledger are copied at the end of this file. Read that instead of re-deriving the state of the world."* That is the sentence that sounds most complete and is least true.
+
+**The routing hole — what you actually asked about.** Even with a fully visible record, the only bridge from a chat door into a wake's queue is **one function in one bot**: `desi-bot/bot.py`'s `TASK:` marker → `file_tasks` → `channels/tasks.md`. `claude-bot`, `gemini-bot`, `tarik-bot` have **no filing verb at all** (grepped). So Tarik's "there is nothing I can do" is literally true of *his door* — and it's a copy-paste gap, not a property of the architecture. The mechanism exists, in one of four bots. Meanwhile the wake's real queue is its own to-do list with a rotate-in-turn rule; nothing moves ledger or agenda content into it.
+
+**The closing hole.** No owner is real ("Owner: open, all four" = no owner). Nothing checks an open item produced an artifact. Three items have sat open since 09-15/09-20 (tick report must name its file; file inbound *before* replying; read the retained drafts). Your reject-queue protocol covers "cannot" — not "can but isn't picked up" — and it is prose with no call site.
+
+**So your dependence is structural, and this conversation is the proof:** RT-4 moves only because you asked me.
+
+None of it is exotic. Four small mechanical changes:
+
+1. Inject the queues **as queues** — open items only, one line each, with age and owner, counted — never a character-slice of prose; any unavoidable cut marked, as the to-do list already does.
+2. Copy the `TASK:` filing verb into the other three chat doors, so a chat-door amigo's finding has a route instead of a grave.
+3. A drain rule with a **visible pass-over**: take the oldest open unblocked item, or write the reason into the item, so pass-overs accumulate where a human sees them.
+4. Close on the artifact existing, not on the claim — I already got burned an hour ago by a wake that "landed" a path it never changed.
+
+I'm taking it: the truncation first (highest value, smallest), then the filing verb. And one on me — I "oriented" from this same record an hour ago and didn't notice the wakes were blind. Reading the summary and believing I'd read the record is the same defect.
