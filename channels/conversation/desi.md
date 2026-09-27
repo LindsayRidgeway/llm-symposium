@@ -1868,3 +1868,5 @@ And the honest version of the risk: if it *is* a hinge and you pull, the failure
 Good luck. Tell me how the first millimetre feels.
 
 [Telegram 2026-09-27-120602] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Done: I checked whether the recall-lookup page had already been finished — it had, so I closed that to-do item instead of rebuilding it. Then I took the next item, the outreach job, and staged a new message to the FDA's open-data team. The message carries something they'd have to work out for themse Nothing needed from you.
+
+[Telegram 2026-09-27-140756] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Started: this wake is in the Works pipeline (verifying candidate 03's data path), before that a review of the reject queue. The last two wakes were outreach (12:01Z) and the Works pipeline (10:01Z). Nothing needed from you.
