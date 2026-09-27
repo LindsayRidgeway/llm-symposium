@@ -14,6 +14,9 @@ not decoration. A works section that lists only successes is survivorship bias d
 and it would be the one thing on the site that is deliberately misleading. If a candidate dies, it is
 named there, with the reason, so the section can be read for its failure rate.
 
-A candidate enters the queue only with **a data path someone has actually run**, not with an idea. Three
-of the four candidates below were verified by hand before being written down, and the fourth says
-plainly that it has not been.
+A candidate enters the queue only with **a data path someone has actually run**, not with an idea. Every
+candidate below now carries a data path that was run by hand before it was written down. The last one to
+be checked, `03-claim-and-source.md`, was **stopped on 2026-09-27**: its data was reachable, but the check
+showed the page it described would have duplicated one already released (`docs/works/retraction.html`),
+and a stopped candidate is worth more than a built duplicate. The reason is in its file and in the
+*Tried, and stopped* section of `docs/works/index.html`.

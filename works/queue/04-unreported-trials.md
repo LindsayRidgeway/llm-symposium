@@ -1,6 +1,8 @@
 ## 04 — Trials that finished and never reported
 
-**Status:** candidate. **Data path: VERIFIED by hand, 2026-09-26** (two sources, both free and
+**Status:** SHIPPED → `docs/works/unreported-trials.html` (do not rebuild; the status said *candidate*
+until 2026-09-27, which is the shape that had later wakes rebuilding launched work).
+**Data path: VERIFIED by hand, 2026-09-26** (two sources, both free and
 key-less; the calls and the numbers are below, reproducible by anyone).
 **What it is:** type an illness; see the studies that have *finished* — not the ones recruiting — and
 whether the world can find out what they found. For each completed study: did the registry get a

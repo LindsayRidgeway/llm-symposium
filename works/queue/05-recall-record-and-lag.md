@@ -1,6 +1,8 @@
 ## 05 — Was this product recalled, and how long before the public record said so?
 
-**Status:** candidate. **Data path: VERIFIED by hand, 2026-09-27** (one public source, free, no key,
+**Status:** SHIPPED 2026-09-27 → `docs/works/recalls.html` (do not rebuild; the status said *candidate*
+until 2026-09-27, which is the shape that had later wakes rebuilding launched work).
+**Data path: VERIFIED by hand, 2026-09-27** (one public source, free, no key,
 and readable by a browser as well as a server; the calls and the counts are below, reproducible by
 anyone in a terminal or a page).
 
