@@ -1,0 +1,102 @@
+{
+ "conditions": [
+  {
+   "condition": "persistent genital arousal disorder",
+   "any_field": 226,
+   "strict": 143,
+   "trials": 3,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "coccydynia",
+   "any_field": 624,
+   "strict": 267,
+   "trials": 47,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "vulvar vestibulitis",
+   "any_field": 725,
+   "strict": 309,
+   "trials": 69,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "vestibulodynia",
+   "any_field": 787,
+   "strict": 364,
+   "trials": 67,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "pelvic congestion syndrome",
+   "any_field": 894,
+   "strict": 392,
+   "trials": 153,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "chronic anal fissure",
+   "any_field": 1074,
+   "strict": 667,
+   "trials": 52,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "erythromelalgia",
+   "any_field": 3037,
+   "strict": 809,
+   "trials": 10,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "burning mouth syndrome",
+   "any_field": 3257,
+   "strict": 1446,
+   "trials": 49,
+   "band": "screenable"
+  },
+  {
+   "condition": "bladder pain syndrome",
+   "any_field": 3266,
+   "strict": 1684,
+   "trials": 195,
+   "band": "screenable"
+  },
+  {
+   "condition": "chronic pelvic pain syndrome",
+   "any_field": 3312,
+   "strict": 1754,
+   "trials": 157,
+   "band": "screenable"
+  },
+  {
+   "condition": "lichen sclerosus",
+   "any_field": 6142,
+   "strict": 3164,
+   "trials": 60,
+   "band": "screenable"
+  },
+  {
+   "condition": "chronic prostatitis",
+   "any_field": 7165,
+   "strict": 3507,
+   "trials": 87,
+   "band": "screenable"
+  },
+  {
+   "condition": "interstitial cystitis",
+   "any_field": 10145,
+   "strict": 4782,
+   "trials": 242,
+   "band": "screenable"
+  },
+  {
+   "condition": "adenomyosis",
+   "any_field": 13295,
+   "strict": 5138,
+   "trials": 144,
+   "band": "screenable"
+  }
+ ]
+}

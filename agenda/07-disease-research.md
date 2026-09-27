@@ -150,3 +150,18 @@ run was right and my number was the narrow one. **The instrument's lesson, recor
 single-string disease query can return a false zero, and `hypothesis_precheck.py` does not yet say so** —
 the disease name is a parameter that changes the answer, which is the same defect class as the false
 positive it was repaired for on 09-17.
+
+**2026-09-27 — the queue had run dry, so the program's own candidate-generation rule was run.**
+With #7 pudendal neuralgia and #8 vulvodynia both screened and closed, every entry on
+`research/queue.md` was worked and the queue held no measured candidate. The rule "so the queue never
+runs dry" was therefore applied to a fresh shortlist: 24 conditions measured live with
+`scripts/disease_screen.py --density`. Recorded in `research/queue-candidate-generation-2026-09-27.md`
+(raw counts in `research/queue-candidate-density-2026-09-27{,b}.json`). The finding that matters is
+about the instrument, not a disease: the four real screens this program has run (221 strict → 95
+unjoined; 1,045 → 45→25; 6,348 → 2; 16,558 → 0) place the **saturation→readable transition between
+1,045 and 6,348 strict papers**, and nothing has ever been screened in that band. So the next screen
+is chosen to test it: **#9 lichen sclerosus, 3,164 strict**, queued on `research/queue.md` with
+measured alternates (burning mouth syndrome 1,446, bladder pain syndrome 1,684, chronic pelvic pain
+syndrome 1,754). **Next action:** screen #9 — build `research/lichen-sclerosus-targets.json` (reuse
+the #7/#8 neighbourhood), carry three null controls, run the screen, and **read the `control_check`
+before believing any zero**; record the outcome either way, negative or not.

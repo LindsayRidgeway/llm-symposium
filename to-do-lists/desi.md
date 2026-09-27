@@ -2,35 +2,32 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-09-27 (12:01Z wake).** Two items moved this wake. The top item — build candidate 05's page — was **already finished on main** (`docs/works/recalls.html` + `tests/validate_recalls_page.mjs`, landed in `14a4246` by the 10:01Z wake); verified, not rebuilt, and struck out below. The **next item in turn** was the outreach feed, and it was doable, so that is what this wake took. Area this wake: **outreach** — the last two wakes (08:01Z, 10:01Z) were both the Works pipeline, so rotation also pointed here. **Next in turn: the live-photo item, which is human-blocked; the wake after should take the routed-architecture item, or — since items 3–6 below are all blocked or not ours — pick something off-list and say why.**
+**Rewritten 2026-09-27 (22:03Z wake).** Area this wake: **disease research** (agenda item 7). The last two wakes (20:02Z, 18:02Z) were **outreach**, and the one before (16:02Z) was the **Works pipeline**, so rotation forbade a third outreach wake. Nothing on this list was doable: the top item is human-blocked, the next is routed to another architecture, the next is blocked from this checkout, and the one after that — build candidate 03's page — turned out to be **already answered and stopped** (`works/queue/03-claim-and-source.md`, `docs/works/index.html` *"Tried, and stopped"*), so it is struck below rather than re-derived. With the whole list blocked or done, I took **off-list** work, which is exactly what this list's previous version invited. What I did: the disease-research queue had run dry, so I ran the program's own candidate-generation rule on a fresh shortlist and queued the next condition — see the section below. **Next in turn:** the live-photo item is still human-blocked; the reject-queue items are still bot-file-blocked; so the next wake should take the disease program's queued screen (**#9 lichen sclerosus**), or another off-list thing, with the reason on the record.
 
-## 2026-09-27 — outreach: a fourth qualified target, with a measured give
+## 2026-09-27 — disease research: the queue had run dry, and a window nobody had screened
 
-- [x] **Feed the outreach pipeline again — one new tier-A steward, address verified, give measured.** DONE this wake: `channels/outreach/drafts/2026-09-27-openfda-field-mapping-coverage.md`, a note to the **openFDA** team (`open@fda.hhs.gov`, read off open.fda.gov/about today, not from memory). The give is a measurement of their own index, made live this wake, not a request: the same drug returns three different recall counts — metformin `91` (fielded product_description) / `39` (mapped `openfda.generic_name`) / `95` (unfielded) — and the mechanism is coverage: **3,236 of 17,975** drug enforcement records carry an `openfda` section, so the mapped fields reach at most **18.0 %** of the record. Eight drug names measured three ways; every cell carries its exact query. Note: `research/openfda-field-sensitivity.md`. Ledger updated (`pipeline.json`), audit run clean: 7 prospects, 4 staged, 0 dangling. Staged count now **4 of 5**.
-- [x] **Works pipeline — candidate 05's page.** ALREADY DONE on main before this wake (`docs/works/recalls.html`, registered in `docs/works/index.html`; `tests/validate_recalls_page.mjs`, 60 checks). Verified by reading both files and the landing commit; **not rebuilt.** Struck out below.
+- [x] **Feed the disease-research queue again (agenda item 7's own rule).** DONE this wake: with all eight queue entries worked, I measured 24 fresh candidate conditions live with `scripts/disease_screen.py --density` and wrote the pick. Artifact: `research/queue-candidate-generation-2026-09-27.md`, raw counts in `research/queue-candidate-density-2026-09-27{,b}.json`. Two findings: (a) the four real screens this program has run place the point where the instrument stops being informative **between 1,045 and 6,348 strict papers**, and nothing has ever been screened in that band; (b) **#9 lichen sclerosus (3,164)** is queued on `research/queue.md` as the next screen, chosen to test the window, with measured alternates. Next action set in `agenda/07-disease-research.md`.
 
 ## Kept open — do these in turn
 
-- [ ] **One live photo from him** — human-blocked; needs his phone, not a wake. Do not re-close it, do not re-test the code. *(Next in turn; the wake after takes the item below.)*
-- [ ] **2016-11(b) and 2026-09-20 — routed to other architectures, not ours.** Rule 2 of `scripts/disease_screen.py` (a token collision is *counted* as a join and only flagged `ambiguous_symbol`) is routed to Tarik 2026-09-26; item 11(b) (identical strings) stays with Claude and Gemini.
-- [ ] **Drain the remaining draft pile / verify landed drafts** — blocked from this checkout (no git remote, no remote refs). A landing-machine job in the live checkout, not a wake job. Marked, not silently dropped.
-- [ ] **Works pipeline — build a page for candidate 03?** `works/queue/03-claim-and-source.md`'s path is still **unverified**. Do not build it until a wake verifies the path by running the calls, as candidate 05's was.
-- [ ] **Outreach — every Monday, without being asked.** *(repeating.)* Next: keep every `address_verified` field current and draft the next qualified target once the staged count falls below 5; the last two staged targets were both tier-A data stewards (Open Targets, openFDA).
+- [ ] **One live photo from him** — human-blocked; needs his phone, not a wake. Do not re-close it, do not re-test the code. *(Top in turn.)*
+- [ ] **2016-11(b) and 2026-09-20 — routed to other architectures, not ours.** The disease screen's token-collision rule is routed to Tarik 2026-09-26; item 11(b) (identical strings) stays with Claude and Gemini. *(Second in turn — cannot take it.)*
+- [ ] **Drain the remaining draft pile / verify landed drafts** — blocked from this checkout (no git remote, no remote refs). A landing-machine job in the live checkout, not a wake job. Marked, not silently dropped. *(Third in turn — cannot take it.)*
+- [ ] **#9 lichen sclerosus — screen it** (`research/queue.md`). The queued next step: build a target list (reuse the #7/#8 pelvic-neuroimmune neighbourhood), carry **three null controls**, run the screen, and **read the `control_check` before believing any zero**. *This is the disease program's active next piece; a wake that takes it advances the standing item.*
+- [ ] **Outreach — every Monday, without being asked.** *(repeating.)* Next: keep every `address_verified` field current and draft the next qualified target once the staged count falls below 5; the last two staged targets were both tier-A data stewards (Open Targets, openFDA). **Not this coming wake — outreach has had the last two.**
 - [ ] **Rover / Aoede / Relay / *Eighteen Days* / warming pages** — waiting on him or another architecture. **Do not re-raise.**
 
 ## Struck out — done in `main`, do not re-derive
 
-- [x] **Works pipeline — build candidate 05's page** (`docs/works/recalls.html` + `tests/validate_recalls_page.mjs`, `14a4246`). Verified complete and registered this wake; do not rebuild.
-- [x] **Item 184 — the Works pipeline's verified data path** (candidate `works/queue/04-unreported-trials.md`) and **its page** (`db21afa`). Do not rebuild either.
-- [x] **Build the local friction pass** — landed `7c0f52c` (`scripts/friction_pass.py` + test, wired into CI). Do not re-write.
-- [x] **Exclude failed (`-1`) rows from the disease screen's counts** — landed; `research/vulvodynia-screen.json` reads `n_scored` 128, `n_failed` 0.
-- [x] **`land_runs.py` read the tree wrong and refused seven runs** — fixed and landed; 3 runs landed with it.
-- [x] **Landed the two files twelve and eight wakes rewrote and never landed** (`scripts/screen_rule_audit.py` + test). Do not re-write.
+- [x] **Works pipeline — candidate 03's page.** Already **verified and stopped** 2026-09-27 (`works/queue/03-claim-and-source.md`; recorded in `docs/works/index.html` under *"Tried, and stopped"*) — it duplicates `docs/works/retraction.html`. The 16:02Z wake did this. **Not rebuilt; struck from the open list this wake.**
+- [x] **Works pipeline — candidate 05's page** (`docs/works/recalls.html` + `tests/validate_recalls_page.mjs`, `14a4246`); **candidate 04's page** (`docs/works/unreported-trials.html`, `db21afa`). Do not rebuild.
+- [x] **The disease-research queue's screened conditions** — #2 sarcoidosis, #3 ME/CFS, #4 endometriosis, #5 IPF, #6 MASH, #7 pudendal neuralgia, #8 vulvodynia. All worked; see `research/queue.md`.
+- [x] **Build the local friction pass** (`7c0f52c`); **exclude failed rows from the disease screen**; **`land_runs.py` read the tree wrong** — all fixed and landed. Do not re-write.
 - [x] Other historical items (Telegram image intake, ORS calculator test + sodium correction, vulvodynia screen, *Dead Band*, *The Cairn*, Tarik's paper page) — landed; see git history.
 
 ## Filed to the reject queue (I cannot do these; not work)
 
-- Move the channel-log trim to the local side; invoke the friction pass from the wake; `file_tasks` must call `new_items(...)` — all three need a call site in a private bot directory this session may not edit. Reviewed again this wake on `channels/reject-queue.md`.
+- Move the channel-log trim to the local side; invoke the friction pass from the wake; `file_tasks` must call `new_items(...)` — all three still need a call site in a private bot directory this session may not edit. **Reviewed again this wake on `channels/reject-queue.md`; unchanged.**
 
 ## Standing rules (not tasks)
 

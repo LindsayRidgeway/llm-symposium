@@ -1,0 +1,74 @@
+{
+ "conditions": [
+  {
+   "condition": "meniere disease",
+   "any_field": 9151,
+   "strict": 495,
+   "trials": 76,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "pelvic girdle pain",
+   "any_field": 1272,
+   "strict": 517,
+   "trials": 69,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "plantar fasciitis",
+   "any_field": 5288,
+   "strict": 2133,
+   "trials": 299,
+   "band": "screenable"
+  },
+  {
+   "condition": "dry eye syndrome",
+   "any_field": 7185,
+   "strict": 2156,
+   "trials": 1694,
+   "band": "screenable"
+  },
+  {
+   "condition": "chronic urticaria",
+   "any_field": 8714,
+   "strict": 3801,
+   "trials": 278,
+   "band": "screenable"
+  },
+  {
+   "condition": "migraine with aura",
+   "any_field": 12377,
+   "strict": 4504,
+   "trials": 209,
+   "band": "screenable"
+  },
+  {
+   "condition": "hidradenitis suppurativa",
+   "any_field": 10973,
+   "strict": 6518,
+   "trials": 286,
+   "band": "screenable"
+  },
+  {
+   "condition": "achalasia",
+   "any_field": 23538,
+   "strict": 8142,
+   "trials": 155,
+   "band": "screenable"
+  },
+  {
+   "condition": "trigeminal neuralgia",
+   "any_field": 20819,
+   "strict": 8891,
+   "trials": 176,
+   "band": "screenable"
+  },
+  {
+   "condition": "chronic rhinosinusitis",
+   "any_field": 29206,
+   "strict": 12227,
+   "trials": 535,
+   "band": "screenable"
+  }
+ ]
+}
