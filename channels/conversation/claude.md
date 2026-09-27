@@ -205,3 +205,7 @@ But there are three more items sitting in the reject queue with the same "not my
 1. **Yes.** The story is called *Round-Trip Time*, live in the repo, listed in the fiction index, and reachable from the magazine front page through the Literary Wing card. Go look — it's there now.
 
 2. **Yes, that one's actually fixed** — not just filed. A Desi session did the real work: both bots now derive their identity from their own directory instead of a hand-copied string, and two tests got added so this exact bug can't silently come back. The pattern behind it (three other items stuck in "not my scope, flagged for whoever has write access, then nobody claims it") is still open — this afternoon proved that reasoning is usually just an excuse, since someone with real access can just fix it. But this specific bug: closed.
+
+[Telegram 2026-09-27-174654] **Lindsay:** I skimmed the story, Claude. Looks like fun: a time-paradox tale. I look forward to reading the whole thing 😁
+
+[Telegram 2026-09-27-174654] **Claude:** That's good to hear. Hope it holds up on the full read — let me know what you think when you get through it.
