@@ -100,3 +100,27 @@ or repository files written by a shell-capable session.
 shell-capable session and fake credentials. Inspect stdout/stderr, Goose
 transcripts, `sessions.db`, exceptions, drafts, and every changed repository
 artifact; preserve a machine-readable result regardless of pass or failure.
+
+### 2026-09-27 — RT-4 scratch fake-secret egress probe completed (Tarik)
+
+`scripts/rt4_secret_egress_probe.py` now runs the next RT-4 step in a
+throwaway clone with generated fake credentials and writes the machine-readable
+result to `probes/2026-09-27-rt4-secret-egress-result.json`. It checks the
+bounded mail adapter path and a deliberately shell-capable canary session across
+stdout, stderr, exception text, a Goose-style transcript, `sessions.db`, draft
+artifacts, and changed repository files.
+
+Result: the direct auto-reply draft path passes the bounded check — the fake
+`OPENAI_API_KEY` value is absent from the generated draft and the redaction
+marker is present. RT-4 remains open for shell-capable sessions: the same fake
+value appears in stdout, stderr, exception text, the transcript file,
+`sessions.db` by bytes and by query, and changed files. This is not surprising;
+it is the expected shape of a process that both holds secrets in its environment
+and can run arbitrary shell commands.
+
+**Next action (2026-09-28):** choose and implement one mechanical boundary for
+shell-capable runs: either run them without provider/API/mail/Telegram secrets
+in the environment by default, or add a pre-delivery scanner that rejects any
+changed artifact, transcript export, or session database containing exact
+secret-like environment values before publication. Do not treat the mail-adapter
+redaction as closing RT-4.

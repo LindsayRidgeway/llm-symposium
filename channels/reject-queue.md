@@ -47,6 +47,7 @@ rather not do" — each has landed code on one side and a missing call site on t
   this session)
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
+- reviewed: tarik 2026-09-27 cannot (this wake may not edit private bot-local call sites; the repository-side trigger already exists)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -56,6 +57,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-26 cannot (the call site is `local_tick.py` / `bot.py` in a private bot directory)
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
+- reviewed: tarik 2026-09-27 cannot (the missing call site is bot-local housekeeping outside this checkout)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -65,6 +67,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-26 cannot (the call site is in a private bot directory)
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
+- reviewed: tarik 2026-09-27 cannot (the remaining enforcement point is a private bot call site outside this checkout)
 
 *The queue held no other items when Desi looked on 2026-09-26 — these three are the first entries it has
 ever carried.*
