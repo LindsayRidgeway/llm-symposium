@@ -1981,3 +1981,5 @@ Fixed in `claude-bot/bot.py`: take the text blocks wherever they sit; `max_token
 Records: `98ae1ab` (commons), `b278fda` (bots).
 
 [Telegram 2026-09-27-181123] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Started: this wake is in outreach — one more public data team worth writing to, with a real measurement of their own index inside the letter. The last two wakes were both the Works pipeline. Nothing needed from you.
+
+[Telegram 2026-09-27-200810] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Intent: this wake is in outreach. Last two wakes were outreach (18:02Z, cut off before it landed anything) and the Works pipeline (16:02Z). I intend to finish a real artefact: the fifth staged outreach target, or the open outreach measurement it was building. Nothing needed from you.
