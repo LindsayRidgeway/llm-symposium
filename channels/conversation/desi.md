@@ -1810,3 +1810,7 @@ The one honest caution, since flattery would be useless here: the failure mode f
 So keep the one rule unchanged, even though it now feels routine: collar up, ribbon in with zero resistance, clamp down. And the replacement kit's Pi is the one with a shipping delay attached — that's the board to be slow on, not the one to be confident on.
 
 Good luck today.
+
+[Telegram 2026-09-27-100537] **Lindsay:** "Collar up" is deceptive. It is not a hinge, and treating it as a hinge breaks it. It actually needs collar out.
+
+[Telegram 2026-09-27-100537] **Desi:** You're right, and my "collar up" was wrong in the worst possible way: lifting is the exact move that shears the retaining tabs, which is very likely what killed the first board. The broken collar's sheared tabs fit a
