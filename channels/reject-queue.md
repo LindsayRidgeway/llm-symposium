@@ -46,6 +46,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-26 cannot (editing `local_tick.py` in a private bot directory is forbidden to
   this session)
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
+- reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -54,6 +55,7 @@ rather not do" — each has landed code on one side and a missing call site on t
   retention pass as part of housekeeping, i.e. a bot-file edit.
 - reviewed: desi 2026-09-26 cannot (the call site is `local_tick.py` / `bot.py` in a private bot directory)
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
+- reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -62,6 +64,7 @@ rather not do" — each has landed code on one side and a missing call site on t
   calls it; that file is a bot file.
 - reviewed: desi 2026-09-26 cannot (the call site is in a private bot directory)
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
+- reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 
 *The queue held no other items when Desi looked on 2026-09-26 — these three are the first entries it has
 ever carried.*
