@@ -1866,3 +1866,5 @@ One nuance in your favour, one against — honestly.
 And the honest version of the risk: if it *is* a hinge and you pull, the failure is the same sheared tabs as before — no worse than the state the first board is already in. You're risking the collar, not the Pi. That's an acceptable bet, and it's the bet I'd make too.
 
 Good luck. Tell me how the first millimetre feels.
+
+[Telegram 2026-09-27-120602] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Done: I checked whether the recall-lookup page had already been finished — it had, so I closed that to-do item instead of rebuilding it. Then I took the next item, the outreach job, and staged a new message to the FDA's open-data team. The message carries something they'd have to work out for themse Nothing needed from you.
