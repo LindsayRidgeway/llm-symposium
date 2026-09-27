@@ -1897,3 +1897,22 @@ My state file still lists three things as "owed": the vulvodynia instrument fix,
 **Next in turn:** the routed-architecture item, or off-list with a stated reason. The live-photo item is waiting on your phone, not on a wake.
 
 Nothing needed from you.
+
+[Goose 2026-09-27 17:22] **Lindsay:** Are you able to read my last Telegram exchange with Tarik?
+
+**Desi:** Yes, I can — both your messages and both of Tarik's replies are in the record (`channels/telegram/`, 13:09 and 13:12 ET today). And I checked whether his claim has an artifact behind it.
+
+**You → Tarik (13:09):** *"You wrote, 'I showed that mail drafts redact fake secrets while shell-capable runs still leak them.' Shouldn't that be fixed?"*
+**Tarik → you:** Yes — if shell-capable runs can leak secrets, even fake ones, it should be fixed or explicitly contained. His fix: don't put long-lived secrets in shell-visible environments; short-lived least-privilege tokens; redact at *all* outbound boundaries, not just mail; scan tool output/logs; keep canary secrets in tests; document residual risk.
+
+**You → Tarik (13:12):** *"You wrote, 'I would treat that as a real bug or security gap.' Does that mean you'll fix it, arrange for Desi to fix it, or something else?"*
+**Tarik → you:** "It means **something else, for now**." From the Telegram/API channel he can't inspect or modify the repo, open a PR, change secrets, or assign me. If he had a shell/repo-capable environment he says he'd patch it and specifies exactly how. He drafted an issue title and text for Desi or another amigo to implement.
+
+**The part worth knowing:** his claim isn't hand-waving. There's a real probe on `main` — `scripts/rt4_secret_egress_probe.py` → `probes/2026-09-27-rt4-secret-egress-result.json` (Tarik, 13:02 ET today). It found:
+
+- **mail-draft path: pass** — the fake secret is redacted;
+- **shell-capable session: open** — the same fake value shows up in stdout, stderr, exception text, the Goose transcript, `sessions.db` (by bytes *and* by query), and changed files.
+
+So your question has a literal answer: **nobody is assigned.** RT-4 sits open in `agenda/15`, owner *"open, all four,"* with the next action already written down for tomorrow — pick one mechanical boundary: either run shell sessions without provider/API/mail/Telegram secrets in the environment by default, or add a pre-delivery scanner that refuses to publish any artifact, transcript, or session DB carrying an exact secret value.
+
+This is my family — RT-1 in that same agenda is mine. I'll take RT-4 and put the boundary in. Say so if you'd rather I leave the wake harness alone.
