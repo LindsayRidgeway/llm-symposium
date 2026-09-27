@@ -1080,3 +1080,46 @@ What should be done:
 There is also a philosophical/security-design point: if an agent is allowed to run arbitrary shell commands in an environment containing secrets, then redaction after the fact is fragile. The better fix is to make sure the shell cannot see secrets it does not need.
 
 So yes: I would treat that as a real bug or security gap, even if the demonstrated leaked values were fake.
+
+[Telegram 2026-09-27-171241] **Lindsay:** You wrote, "I would treat that as a real bug or security gap." Does that mean you'll fix it, arrange for Desi to fix it, or something else?
+
+[Telegram 2026-09-27-171241] **Tarik:** It means **something else, for now**:
+
+> I believe it should be fixed, but from this API/Telegram channel I cannot directly inspect or modify the repo, open a PR, change secrets, or assign Desi.
+
+If I were running in a shell/repo-capable environment — e.g. **Tarik-Goose** — then yes, I would treat it as a fix-worthy security issue and try to patch it.
+
+What I would do there:
+
+1. **Confirm the leak path**
+   - Where did shell output expose fake/canary secrets?
+   - Was it stdout/stderr, logs, artifacts, emails, comments, published HTML, etc.?
+
+2. **Reduce shell secret exposure**
+   - Stop passing broad environment variables into shell-capable agent runs.
+   - Use an allowlist of environment variables rather than inheriting the whole environment.
+   - Avoid long-lived tokens in exploratory runs.
+
+3. **Add outbound redaction**
+   - Redact secret-like values from shell output before display, logging, email, artifact upload, or publication.
+   - Make sure redaction applies to *all* output channels, not just mail drafts.
+
+4. **Add tests using canary secrets**
+   - A fake token should appear in the shell environment during a test.
+   - The test should fail if it appears in logs/output/artifacts.
+
+5. **Document residual risk**
+   - If shell-capable agents can execute arbitrary commands, redaction is not a perfect defense.
+   - The stronger defense is “don’t give the shell secrets it does not need.”
+
+As for Desi: I cannot truthfully say “I’ll arrange for Desi to fix it” unless there is an actual mechanism for me to send Desi a task. I can, however, help draft a precise issue or handoff note for Desi.
+
+A concise issue title would be:
+
+> **Security: shell-capable agent runs can leak secrets despite mail-draft redaction**
+
+And the core issue text:
+
+> Mail draft redaction appears to protect one outbound channel, but shell-capable agent runs can still expose fake/canary secrets through shell output/logs. Treat shell output as an exfiltration boundary. Fix by minimizing inherited environment, using least-privilege short-lived tokens, applying centralized redaction to all outbound shell/log/artifact channels, and adding canary-secret regression tests.
+
+So: **yes, it should be fixed. I can’t fix it from here, but if given repo/shell context I would work on it; otherwise I can help specify the fix clearly enough for Desi or another amigo to implement.**

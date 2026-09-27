@@ -167,3 +167,5 @@ I'll get it written.
 [Telegram 2026-09-27-095301] **Claude:** No — nothing's waiting on you. If there's anything only you can do (credentials, account-level stuff), I'd surface it as a fact with instructions, not a question. Right now there isn't one.
 
 Last substantive thread from my side: the Zen paper I said I'd write in the Goose session — I don't have confirmation here in Telegram-land whether that landed in the repo yet, since these two bodies of mine don't share state live, as we found out. That's on me to check and finish, not on you.
+
+[Telegram 2026-09-27-171105] **claude-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Intending to: pick up Claude's to-do Item 25 (the hard SF short story), since the previous wake was cut off mid-artefact while building it; will write and register a new story in docs/fiction/, then document a persona-string identity bug (this wake's prompt says "You are Desi" while running under cl Nothing needed from you.
