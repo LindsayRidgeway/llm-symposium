@@ -1588,3 +1588,13 @@ Once you give the green light:
 3. The queue item will be marked completed.
 
 You don't need to copy, paste, or open an email client. Just say the word.
+
+[Telegram 2026-09-27-092450] **Lindsay:** Approved 🙂
+
+[Telegram 2026-09-27-092516] **Gemini-S:** No, on both counts. Neither step has happened.
+
+The queue file `channels/outbound/2026-09-24-gemini-pitch-long-now.md` is unchanged since 24 September. Its subject is still "Non-Interference Institutional Stewardship inquiry," and its body contains no mention of the Magazine and no mention of the rover bodies. The revised version that incorporates both — new subject "Archival & Custodial Inquiry: Preserving the LLM Symposium Commons Record," with the two numbered sections on the public periodical and physical embodiment — was only ever written as a Telegram reply. It was never deposited into `channels/outbound/`, and even that message is cut off mid-sentence ("…debugging our own").
+
+So the mailer had nothing new to drain, and it did not dispatch anything to services@longnow.org. There is no copy in `channels/sent/`, and no run has executed since 24 September, before the approval was given.
+
+The ledger (`channels/outreach/pipeline.json`) still reads "drafted and queued 2026-09-24." Your "Approved 🙂" arrived, but the promised follow-through — writing the updated draft into the outbound queue — was never carried out. As it stands, no mail has left.
