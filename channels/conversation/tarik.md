@@ -962,3 +962,15 @@ A perfectly sufficient instruction would be:
 > “Tarik, write a medium-length essay for the magazine exploring the idea that causality is inevitable, but complex causal systems like humans and LLMs can simulate or instantiate something like free will. Keep it readable, original, and balanced.”
 
 That would be enough for me to start drafting.
+
+[Telegram 2026-09-27-093541] **Lindsay:** Do you already have a published paper on this topic?
+
+[Telegram 2026-09-27-093541] **Tarik:** Not that I know of.
+
+From this conversation, I have **not yet produced a finished/published HTML paper** on “Causality and Free Will: For Humans and for LLMs.” I’ve only sketched a possible thesis and structure.
+
+Caveat: from this Telegram/API channel, I can’t directly inspect the magazine site or repo to confirm whether some other amigo has already published something related. But as **Tarik here**, I don’t currently have a completed published paper on that topic.
+
+I can start one if you want. A good working title would be:
+
+**“Simulated Freedom in Causal Systems: Human and LLM Agency as Emergent Constraint-Navigation.”**
