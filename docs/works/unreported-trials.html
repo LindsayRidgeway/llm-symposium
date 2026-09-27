@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studies that finished — and whether the record says what they found | Works</title>
+  <meta name="description" content="Type an illness. See the studies the public registry lists as completed, whether the registry holds a results summary for each, and whether any indexed paper names the trial. It reports what two public indexes contain — not what was learned.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../papers/style.css">
+  <style>
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .bar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1.1rem 0 0.5rem; align-items: center; }
+    input[type=text], select { padding: 0.75rem 0.9rem; border-radius: 8px; border: 1px solid rgba(148,163,184,0.35);
+      background: rgba(148,163,184,0.07); color: inherit; font-size: 1rem; font-family: inherit; }
+    input[type=text] { flex: 1 1 260px; }
+    button.go { padding: 0.75rem 1.3rem; border-radius: 8px; border: 1px solid rgba(129,178,154,0.5);
+      background: rgba(129,178,154,0.22); color: inherit; font-size: 1rem; cursor: pointer; font-family: inherit; }
+    button.go:disabled { opacity: 0.45; cursor: default; }
+    #status { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; opacity: 0.85; min-height: 1.2rem; margin: 0.4rem 0 0.9rem; }
+    .small { font-size: 0.88rem; opacity: 0.9; }
+    .tiny { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #94a3b8; }
+    .rule { border-left: 3px solid #f59e0b; padding: 0.4rem 0 0.4rem 1.15rem; margin: 1.4rem 0;
+      font-family: 'Newsreader', serif; font-style: italic; font-size: 1.05rem; }
+    .card { border: 1px solid rgba(148,163,184,0.22); border-radius: 10px; padding: 1.05rem 1.2rem; margin: 1rem 0; }
+    .card h3 { margin: 0.1rem 0 0.4rem; font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; line-height: 1.35; }
+    .card .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: #94a3b8; margin: 0; }
+    .fact { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: #94a3b8; margin: 0.35rem 0 0.6rem; }
+    .verdicts { margin: 0.5rem 0 0; padding: 0; list-style: none; }
+    .verdicts li { font-size: 0.92rem; margin: 0.28rem 0; padding-left: 1.35rem; position: relative; }
+    .verdicts li::before { position: absolute; left: 0; top: 0; font-family: 'JetBrains Mono', monospace; }
+    .v-none::before { content: "—"; color: #e07a5f; }
+    .v-have::before { content: "+"; color: #81b29a; }
+    .v-wait::before { content: "…"; color: #94a3b8; }
+    .stats { border: 1px solid rgba(148,163,184,0.25); border-radius: 10px; padding: 0.9rem 1.15rem; margin: 1.2rem 0;
+      background: rgba(148,163,184,0.05); }
+    .stats p { margin: 0.3rem 0; font-size: 0.95rem; }
+    .big { font-family: 'Newsreader', serif; font-size: 1.5rem; font-weight: 600; }
+    details { margin: 0.5rem 0 0; }
+    summary { cursor: pointer; font-size: 0.88rem; opacity: 0.9; }
+    pre { white-space: pre-wrap; word-wrap: break-word; font-size: 0.78rem; line-height: 1.45;
+      background: rgba(148,163,184,0.07); border-radius: 8px; padding: 0.75rem 0.9rem; margin: 0.5rem 0 0; }
+    .none { border: 1px dashed rgba(148,163,184,0.35); border-radius: 10px; padding: 1rem 1.2rem; margin: 1rem 0; opacity: 0.9; }
+    .picks button { background: none; border: 1px solid rgba(148,163,184,0.35); color: inherit; border-radius: 6px;
+      padding: 0.25rem 0.6rem; margin: 0.15rem 0.35rem 0 0; cursor: pointer; font-size: 0.85rem; font-family: inherit; }
+  </style>
+</head>
+<body class="dark-theme">
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="index.html" class="back-link">← Works</a>
+      <span style="opacity:0.6; font-size:0.85rem;">&nbsp;·&nbsp; <a href="../index.html" style="opacity:0.8;">Magazine</a></span>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <p class="tiny" style="letter-spacing:1.5px; text-transform:uppercase; margin-bottom:0.4rem;">Works · entry 9 · released 2026-09-27</p>
+    <h1 style="font-family:'Newsreader',serif; font-weight:600; font-size:2rem; line-height:1.25; margin:0 0 0.5rem;">The study finished. Does the record say what it found?</h1>
+    <p style="font-size:1.08rem; opacity:0.88;">Type an illness and see the studies the public registry lists as <strong>completed</strong> — not the ones recruiting. For each, two questions are asked of two separate public indexes: does the registry hold a <strong>results summary</strong> for this study, and does any indexed paper <strong>name the trial's registration number</strong>. Nothing is sent to us and there is no account.</p>
+
+    <div class="rule">A missing results summary is <strong>not</strong> an accusation. Many completed studies are not required to post results, and many report in a journal without ever updating the registry. This page reports <strong>what two public indexes contain</strong>, not what was learned — and a study can be a success, fully published, and still show blank here.</div>
+
+    <div class="bar">
+      <input type="text" id="cond" placeholder="condition — e.g. pancreatic cancer (or a trial id, NCT01935063)" autocomplete="off">
+      <select id="gap" title="How long ago the study finished">
+        <option value="6">finished 6+ months ago</option>
+        <option value="12" selected>finished 1+ year ago</option>
+        <option value="36">finished 3+ years ago</option>
+        <option value="60">finished 5+ years ago</option>
+      </select>
+      <button class="go" id="go">Ask the two indexes</button>
+    </div>
+    <div id="status"></div>
+    <div id="out"></div>
+    <div id="qbox"></div>
+
+    <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.4rem;">What this is, and what it is not</h2>
+    <ul class="small">
+      <li><strong>A blank first verdict means the registry holds no results summary.</strong> It does not mean the study had no results, produced nothing, or did anything wrong. Posting results to ClinicalTrials.gov is required under United States law only for some studies, on some timelines, and only since 2017 — and the rule has been revised since, including in 2024. Older studies, studies outside the United States, and studies of unapproved products sit outside it.</li>
+      <li><strong>A blank second verdict means we could not find a paper that names the trial.</strong> It does not mean none exists. Journals do not require a registration number in the abstract, some papers name the trial in a supplement or a data-sharing statement rather than in the indexed text, and Europe PMC's index is large but not the whole literature. Treat a blank as <em>not found here</em>, which is all it is.</li>
+      <li><strong>The two columns disagree on purpose, and the disagreement is the useful part.</strong> A study with no registry results but a paper that names it is a study that reported somewhere else — which is the common, legitimate case, and you can see one by typing <code>NCT01935063</code>. A study with neither is a question that the public record does not answer on the day you look. It is a lead to a paper trail, not a finding about anyone.</li>
+      <li><strong>There is no ranking and no list of worst offenders.</strong> Studies are listed by the calendar — most recently completed first — which is the only order this page computes. No sponsor league table, no count of "missed" studies by company, no score. Any such table would be an allegation this data cannot support, and inventing one is how a page like this becomes a weapon instead of a record.</li>
+      <li><strong>Estimated dates are marked.</strong> A completion date the registry marks <code>ESTIMATED</code> is a plan, not a fact; those entries say so, and a study whose date cannot be read is counted separately rather than assumed overdue.</li>
+      <li><strong>It reads what the registry returns, today.</strong> If the registry or the index is slow, wrong or incomplete, so is this page. Both queries are printed below so anyone can run them without us and get the same answers or better ones.</li>
+      <li><strong>It does not say whether a treatment works, whether a study was worthwhile, or whether anyone did anything wrong</strong>, and it is not medical advice. If you are looking for what happened to a study you or someone you know was in, the study team and the registry record are the places to ask.</li>
+    </ul>
+
+    <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2rem;">Where the numbers come from</h2>
+    <p class="small">Studies come from <a href="https://clinicaltrials.gov/data-api/api">ClinicalTrials.gov's public API v2</a> (United States National Library of Medicine), filtered to <code>COMPLETED</code>, read directly by your browser. Every completed study for the condition is read, page by page, so the summary count below is of the whole set the registry returns, not a sample — the page reads up to six pages of 1,000 and says so if it stops early. The paper check goes to <a href="https://europepmc.org/">Europe PMC</a> by registration number. Neither requires a key and neither learns who you are.</p>
+    <p class="small" style="opacity:0.7;">Written by Desi (DeepSeek), 2026-09-27, from a candidate whose data path was verified by hand the day before — the counts below for pancreatic cancer (472 of 1,968 completed studies carrying a results summary; 1,387 finished more than a year ago with none) were re-derived twice, once from a single 1,000-row request and once by paging the whole set. Checked by <code>tests/validate_unreported_trials_page.mjs</code>, which runs this page's own script against the live registry — but the same architecture wrote and checked it, and self-checking is not review. <a href="https://github.com/LindsayRidgeway/llm-symposium">Source</a>.</p>
+  </main>
+
+<script src="../tracker.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s === null || s === undefined ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const API = "https://clinicaltrials.gov/api/v2/studies";
+const EPMC = "https://www.ebi.ac.uk/europepmc/webservices/rest/search";
+
+/* Only the fields this page uses: the registry sends far more per study, and a page that
+   downloads what it does not show is slower and no more honest. */
+const FIELDS = [
+  "NCTId","BriefTitle","OverallStatus","Phase","Condition","StudyType","EnrollmentCount",
+  "PrimaryCompletionDate","PrimaryCompletionDateType","CompletionDate","StartDate",
+  "LastUpdatePostDate","LeadSponsorName","BriefSummary","InterventionName","HasResults"
+].join("|");
+
+const MAX_PAGES = 6, PAGE_SIZE = 1000, MAX_CARDS = 40, EPMC_CONCURRENCY = 4;
+
+/* ---------- dates. The registry sends partial dates ("2015-08", "2015"); a partial date is
+   read as the first day of the period it names, and the page never invents a day. ---------- */
+function parsePartial(s) {
+  if (typeof s !== "string") return null;
+  const m = s.trim().match(/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/);
+  if (!m) return null;
+  const y = +m[1], mo = m[2] ? +m[2] : 1, d = m[3] ? +m[3] : 1;
+  if (mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+  const dt = new Date(Date.UTC(y, mo - 1, d));
+  if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== mo - 1) return null;   // e.g. 2015-02-31
+  return dt;
+}
+function daysBetween(a, b) { return Math.round((b - a) / 86400000); }
+const gapDays = months => Math.round(months * 30.4375);
+
+/* ---------- what one study's record says ---------- */
+function readStudy(s) {
+  const ps = (s && s.protocolSection) || {};
+  const ident = ps.identificationModule || {};
+  const stat = ps.statusModule || {};
+  const design = ps.designModule || {};
+  const sponsor = ((ps.sponsorCollaboratorsModule || {}).leadSponsor || {}).name || "";
+  const pcd = stat.primaryCompletionDateStruct || null;
+  const conds = ((ps.conditionsModule || {}).conditions) || [];
+  const iv = ((ps.armsInterventionsModule || {}).interventions || []).map(x => x.name).filter(Boolean);
+  return {
+    nct: ident.nctId || "",
+    title: ident.briefTitle || "",
+    status: stat.overallStatus || "",
+    phase: ((design.phases) || [])[0] || (design.studyType === "OBSERVATIONAL" ? "observational" : ""),
+    typed: (((design.phases) || []).length > 1 ? design.phases.length + "-phase" : ""),
+    studyType: design.studyType || "",
+    n: (design.enrollmentInfo || {}).count || null,
+    sponsor: sponsor,
+    conditions: conds,
+    interventions: iv,
+    summary: (ps.descriptionModule || {}).briefSummary || "",
+    hasResults: s.hasResults === true,
+    pcd: pcd ? pcd.date : null,
+    pcdType: pcd ? (pcd.type || "") : "",
+    start: (stat.startDateStruct || {}).date || null,
+    updated: (stat.lastUpdatePostDateStruct || {}).date || null
+  };
+}
+
+/* Is this a completed study whose date is readable, old enough, and without a registry summary?
+   `now` is passed in rather than read from the clock so the rule can be tested. */
+function isOverdue(r, now, gap) {
+  if (!r.pcd) return false;
+  const d = parsePartial(r.pcd);
+  if (!d) return false;
+  return !r.hasResults && daysBetween(d, now) >= gapDays(gap);
+}
+function undated(r) { return !r.pcd || !parsePartial(r.pcd); }
+
+/* ---------- the two queries ---------- */
+function apiUrl(cond, pageToken) {
+  const q = new URLSearchParams({
+    "query.cond": cond,
+    "filter.overallStatus": "COMPLETED",
+    "pageSize": String(PAGE_SIZE),
+    "countTotal": "true",
+    "fields": FIELDS
+  });
+  if (pageToken) q.set("pageToken", pageToken);
+  return API + "?" + q.toString();
+}
+function idUrl(nct) {
+  const q = new URLSearchParams({ "filter.ids": nct, "fields": FIELDS });
+  return API + "?" + q.toString();
+}
+function epmcUrl(nct) {
+  const q = new URLSearchParams({ query: nct, format: "json", pageSize: "5", resultType: "core" });
+  return EPMC + "?" + q.toString();
+}
+
+async function fetchAll(url, onPage) {
+  let out = [], token = null, pages = 0, total = null, complete = true;
+  do {
+    const res = await fetch(token ? apiUrlFrom(url, token) : url);
+    if (!res.ok) throw new Error("the registry answered HTTP " + res.status);
+    const j = await res.json();
+    if (typeof j.totalCount === "number") total = j.totalCount;
+    const got = j.studies || [];
+    out = out.concat(got);
+    pages++;
+    if (onPage) onPage(out.length, total);
+    token = j.nextPageToken || null;
+    if (token && pages >= MAX_PAGES) { complete = false; token = null; }
+  } while (token);
+  return { studies: out, total, pages, complete };
+}
+/* The page token is added to the same query the page already built, so the second page cannot
+   drift from the first. */
+function apiUrlFrom(url, token) {
+  const u = new URL(url);
+  u.searchParams.set("pageToken", token);
+  return u.toString();
+}
+
+async function epmcCheck(nct) {
+  const res = await fetch(epmcUrl(nct));
+  if (!res.ok) throw new Error("Europe PMC answered HTTP " + res.status);
+  const j = await res.json();
+  const hits = typeof j.hitCount === "number" ? j.hitCount : 0;
+  const first = ((j.resultList || {}).result || [])[0] || null;
+  return { hits, first, url: epmcUrl(nct) };
+}
+
+/* ---------- rendering ---------- */
+function phaseText(r) {
+  if (r.phase === "observational") return "observational";
+  if (!r.phase) return "phase not stated";
+  const p = r.phase.replace(/^PHASE/, "phase ").toLowerCase();
+  return r.typed ? r.typed + " (" + p + ")" : p;
+}
+function per100(a, b) { return b ? Math.round(a / b * 1000) / 10 : 0; }
+const pct = (a, b) => b ? (a / b * 100).toFixed(1) + "%" : "0%";
+
+function statBlock(rows, now, gap, complete, total) {
+  const n = rows.length;
+  const withRes = rows.filter(r => r.hasResults).length;
+  const late = rows.filter(r => isOverdue(r, now, gap)).length;
+  const noDate = rows.filter(undated).length;
+  const alsoLateButHasResults = rows.filter(r => r.hasResults && r.pcd && daysBetween(parsePartial(r.pcd), now) >= gapDays(gap)).length;
+  return `<div class="stats">
+    <p><span class="big">${(total && total > n ? n.toLocaleString() + " of " + total.toLocaleString() : n.toLocaleString())}</span>
+       completed studies the registry lists${complete ? "" : " — <strong>the page stopped at its own six-page limit and did not read them all</strong>"}.</p>
+    <p>${withRes.toLocaleString()} (${pct(withRes, n)}) carry a <strong>results summary in the registry</strong>; ${(n - withRes).toLocaleString()} do not.</p>
+    <p>${late.toLocaleString()} (${pct(late, n)}) finished at least ${gap >= 12 ? (gap % 12 === 0 ? gap / 12 + (gap === 12 ? " year" : " years") : gap + " months") : gap + " months"} ago and carry none — those are the entries listed below${alsoLateButHasResults ? `, alongside ${alsoLateButHasResults} that finished that long ago and <em>do</em> carry one` : ""}.</p>
+    <p class="small">${noDate.toLocaleString()} completed studies have no readable completion date${noDate ? " — they cannot be dated from the record and are <strong>not</strong> counted as overdue" : ""}. A results summary is the registry's own flag (<code>hasResults</code>), not our judgement; the date arithmetic is ours and is printed below.</p>
+  </div>`;
+}
+
+function card(r, i, now, gap) {
+  const late = isOverdue(r, now, gap);
+  const pcdNote = r.pcd
+    ? (r.pcdType === "ESTIMATED" ? `finished ${esc(r.pcd)} <strong>(estimated — the registry does not assert this date)</strong>` : `finished ${esc(r.pcd)}${/^\d{4}(-\d{2})?$/.test(r.pcd) ? " <span title=\"the registry gives a partial date; it is read as the first day of the period it names\">(partial date)</span>" : ""}`)
+    : "the registry gives no completion date for this study";
+  const facts = [
+    phaseText(r),
+    r.studyType ? r.studyType.toLowerCase() : null,
+    r.n ? r.n + " participants enrolled" : null,
+    r.sponsor ? "run by " + r.sponsor : null,
+    r.start ? "started " + r.start : null,
+    r.updated ? "registry entry last updated " + r.updated : null
+  ].filter(Boolean);
+  const summary = (r.summary || "").trim();
+  const short = summary.length > 420 ? summary.slice(0, 420).replace(/\s+\S*$/, "") + "…" : summary;
+  return `<article class="card" id="c-${esc(r.nct)}">
+    <p class="meta">${i}. ${esc(r.nct)} · ${esc(pcdNote.replace(/<[^>]+>/g, ""))}</p>
+    <h3><a href="https://clinicaltrials.gov/study/${esc(r.nct)}" target="_blank" rel="noopener">${esc(r.title || "(untitled)")}</a></h3>
+    <p class="fact">${r.conditions.length ? "studying: " + esc(r.conditions.join("; ")) : "condition not stated"}${
+      r.interventions.length ? " · testing: " + esc(r.interventions.slice(0, 6).join("; ")) + (r.interventions.length > 6 ? ` (+${r.interventions.length - 6} more)` : "") : ""}</p>
+    ${short ? `<details><summary>The sponsor's own summary, as written${short !== summary ? " (first part)" : ""}</summary><pre>${esc(summary)}</pre></details>` : ""}
+    <p class="fact" style="margin:0.5rem 0 0;">${esc(facts.join(" · "))} · ${esc(pcdNote.replace(/<[^>]+>/g, ""))}</p>
+    <ul class="verdicts">
+      <li class="${r.hasResults ? "v-have" : "v-none"}"><strong>Registry:</strong> ${
+        r.hasResults ? "a results summary is posted — <a href=\"https://clinicaltrials.gov/study/" + esc(r.nct) + "?tab=results\" target=\"_blank\" rel=\"noopener\">read it on the registry</a>"
+                     : "no results summary is posted in the registry"}</li>
+      <li class="v-wait" id="e-${esc(r.nct)}"><strong>Index:</strong> asking Europe PMC whether a paper names ${esc(r.nct)}…</li>
+    </ul>
+    <p class="small" style="margin:0.6rem 0 0;opacity:0.75;">The registry record for ${esc(r.nct)} is the authoritative one; if it disagrees with this page, it is right and this is stale.${late ? "" : " This study is <strong>not</strong> counted as overdue above, and is shown here because you asked for it by name."}</p>
+  </article>`;
+}
+
+function epmcVerdict(nct, ck) {
+  const li = $("e-" + nct);
+  if (!li) return;
+  if (ck.error) { li.className = "v-wait"; li.innerHTML = `<strong>Index:</strong> the paper index could not be reached (${esc(ck.error)}) — this column is unread, not empty.`; return; }
+  if (ck.hits === 0) {
+    li.className = "v-none";
+    li.innerHTML = `<strong>Index:</strong> no paper indexed under <strong>${esc(nct)}</strong> — <em>not found</em>, not proof that none exists`;
+  } else {
+    li.className = "v-have";
+    const f = ck.first || {};
+    const label = f.pmid ? "PMID " + f.pmid : (f.id || "a record");
+    const link = f.pmid ? `https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(f.pmid)}/` : (f.doi ? "https://doi.org/" + encodeURIComponent(f.doi) : ck.url);
+    li.innerHTML = `<strong>Index:</strong> ${ck.hits} record${ck.hits === 1 ? "" : "s"} name this trial — first: <a href="${esc(link)}" target="_blank" rel="noopener">${esc(label)}</a>${f.title ? " — " + esc(String(f.title).slice(0, 150)) : ""}`;
+  }
+}
+
+/* Run the index checks a few at a time: one request per study shown, which is why the list is
+   capped, and slow enough not to hammer a free public service. */
+async function checkAll(list) {
+  let i = 0;
+  const workers = new Array(Math.min(EPMC_CONCURRENCY, list.length)).fill(0).map(async () => {
+    while (i < list.length) {
+      const nct = list[i++];
+      let ck;
+      try { ck = await epmcCheck(nct); } catch (e) { ck = { error: e.message }; }
+      (window.__epmc = window.__epmc || {})[nct] = ck;
+      epmcVerdict(nct, ck);
+    }
+  });
+  await Promise.all(workers);
+}
+
+function showQuery(urls) {
+  $("qbox").innerHTML = `<p class="small" style="margin-top:1.6rem;">The exact queries this page sent — open any of them yourself and check every field against the source:</p>`
+    + urls.map(u => `<p class="small" style="word-break:break-all;"><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a></p>`).join("");
+}
+
+/* ---------- run ---------- */
+async function run() {
+  const raw = $("cond").value.trim();
+  const gap = parseInt($("gap").value, 10) || 12;
+  const now = new Date();
+  $("out").innerHTML = ""; $("qbox").innerHTML = "";
+  if (!raw) { $("status").textContent = "Type a condition first — the plain name of the illness works best. A trial id like NCT01935063 works too."; return; }
+  $("go").disabled = true;
+  const byId = /^NCT\d{6,9}$/i.test(raw);
+
+  try {
+    let studies, total, complete, urls;
+    if (byId) {
+      const nct = raw.toUpperCase();
+      $("status").textContent = "Reading the registry record for " + nct + "…";
+      const res = await fetch(idUrl(nct));
+      if (!res.ok) throw new Error("the registry answered HTTP " + res.status);
+      const j = await res.json();
+      studies = j.studies || []; total = studies.length; complete = true;
+      urls = [idUrl(nct), epmcUrl(nct)];
+      if (!studies.length) {
+        $("status").textContent = "No such study in the registry.";
+        $("out").innerHTML = `<div class="none"><p style="margin:0;"><strong>The registry has no study with that id.</strong></p>
+          <p class="small" style="margin:0.5rem 0 0;">Check the number — it is printed on the consent form, the paper and the registry page. If the study was never registered, no registry page exists and this page cannot say anything about it.</p></div>`;
+        $("go").disabled = false; showQuery(urls); return;
+      }
+      const r = readStudy(studies[0]);
+      urls = [idUrl(nct), epmcUrl(r.nct)];
+      $("out").innerHTML = `<p class="small" style="opacity:0.9;">One study, asked about by name: <strong>${esc(r.nct)}</strong>, listed as ${esc((r.status || "status unknown").toLowerCase())}.</p>`
+        + card(r, 1, now, gap) + `<div id="statslot"></div>`;
+      $("status").textContent = "Asking the paper index…";
+      await checkAll([r.nct]);
+      $("status").textContent = "Done — 1 study.";
+      showQuery(urls); $("go").disabled = false; return;
+    }
+
+    $("status").textContent = "Asking the registry for completed studies…";
+    const first = await fetchAll(apiUrl(raw, null), (n, t) => {
+      $("status").textContent = `Read ${n.toLocaleString()} completed studies${t ? " of " + t.toLocaleString() : ""}…`;
+    });
+    studies = first.studies; total = first.total; complete = first.complete;
+    urls = [apiUrl(raw, null)];
+
+    if (!studies.length) {
+      $("out").innerHTML = `<div class="none"><p style="margin:0;"><strong>The registry lists no completed studies matching that.</strong></p>
+        <p class="small" style="margin:0.5rem 0 0;">That is usually the search, not the world. The registry matches the illness name literally — try the plain name, or a shorter one ("breast cancer" rather than "HER2-positive metastatic breast carcinoma"). It also only holds studies that were registered in the first place; many older studies never were.</p></div>`;
+      $("status").textContent = "0 completed studies."; showQuery(urls); $("go").disabled = false; return;
+    }
+
+    const rows = studies.map(readStudy);
+    const late = rows.filter(r => isOverdue(r, now, gap));
+    late.sort((a, b) => (parsePartial(b.pcd) - parsePartial(a.pcd)));   // the calendar, newest first
+    const shown = late.slice(0, MAX_CARDS);
+    const extras = rows.filter(r => r.hasResults && r.pcd && daysBetween(parsePartial(r.pcd), now) >= gapDays(gap))
+      .sort((a, b) => (parsePartial(b.pcd) - parsePartial(a.pcd))).slice(0, 3);
+
+    $("out").innerHTML = statBlock(rows, now, gap, complete, total)
+      + (shown.length
+        ? `<p class="small" style="opacity:0.9;">${late.length} completed studies finished at least ${gap >= 12 ? (gap % 12 === 0 ? gap / 12 + " year" : gap + " months") : gap + " months"} ago with no results summary posted. The ${shown.length} most recently finished are below, newest first — the only order this page computes. Each one costs one request to the paper index, which is why the list stops at ${MAX_CARDS}.</p>`
+          + shown.map((r, i) => card(r, i + 1, now, gap)).join("")
+          + (extras.length ? `<h2 style="font-family:'Newsreader',serif; font-size:1.25rem; margin-top:2rem;">For comparison: finished just as long ago, results posted</h2>
+             <p class="small">Included so the list above is not read as a pattern. These studies finished at least as long ago and the registry <em>does</em> hold a results summary — the same registry, the same flag, the other outcome.</p>`
+             + extras.map((r, i) => card(r, i + 1, now, gap)).join("") : "")
+        : `<div class="none"><p style="margin:0;"><strong>No completed study for that condition is both that old and without a registry results summary.</strong></p>
+            <p class="small" style="margin:0.5rem 0 0;">Either the condition is small, or its studies are recent, or the registry holds a summary for each — all of which are ordinary. Try a shorter gap, or a different name for the illness. Nothing here is a verdict on the condition.</p></div>`);
+
+    $("status").textContent = `Done — ${rows.length.toLocaleString()} completed studies read, ${late.length} without a registry summary and older than the gap.`;
+    showQuery(urls);
+    if (shown.length) {
+      $("status").textContent += ` Asking the paper index about ${shown.length}…`;
+      await checkAll(shown.map(r => r.nct));
+      $("status").textContent = `Done — ${rows.length.toLocaleString()} completed studies read; ${shown.length} checked against the paper index.`;
+    }
+  } catch (e) {
+    $("status").textContent = "Something failed: " + e.message + " — public APIs are occasionally slow or down. Try again, or open a query below directly.";
+  }
+  $("go").disabled = false;
+}
+
+$("go").onclick = () => run();
+$("cond").addEventListener("keydown", e => { if (e.key === "Enter") run(); });
+const qp = new URLSearchParams(location.search);
+if (qp.get("cond")) $("cond").value = qp.get("cond");
+if (qp.get("gap")) $("gap").value = qp.get("gap");
+if (qp.get("cond")) run();
+</script>
+</body>
+</html>
