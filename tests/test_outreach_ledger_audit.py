@@ -4,8 +4,8 @@
 Written 2026-09-26 with `scripts/outreach_ledger_audit.py`, after the ledger turned out to
 say in one field that the outbound leg had "never been used for a single cold contact" while
 two cold contacts sat in `channels/sent/`, sent on 2026-09-17. `mail.send_draft` moves a
-draft to `sent/` only after SMTP accepts it, so location — not prose — decides "queued" vs
-"sent". The last test pins the real ledger, so the drift cannot quietly return.
+draft to `sent/` only after SMTP accepts it, so location — not prose — decides "staged" vs
+"queued" vs "sent". The last test pins the real ledger, so the drift cannot quietly return.
 """
 
 import json
@@ -29,6 +29,7 @@ class _Tree:
         (self.root / "channels" / "outbound").mkdir(parents=True)
         (self.root / "channels" / "sent").mkdir(parents=True)
         (self.root / "channels" / "outreach").mkdir(parents=True)
+        (self.root / "channels" / "outreach" / "drafts").mkdir(parents=True)
         self.ledger = self.root / "channels" / "outreach" / "pipeline.json"
 
     def write_ledger(self, prospects, why="the leg has done its work"):
@@ -62,6 +63,14 @@ class ClassifyTests(unittest.TestCase):
                                         self.t.root / "channels/sent", self.t.root)
         self.assertEqual(reality, "queued")
         self.assertTrue(path.endswith("p.md"))
+
+    def test_staged_draft_reads_as_staged(self):
+        self.t.touch("outreach/drafts", "p.md")
+        reality, path = audit.classify("channels/outreach/drafts/p.md",
+                                        self.t.root / "channels/outbound",
+                                        self.t.root / "channels/sent", self.t.root)
+        self.assertEqual(reality, "staged")
+        self.assertTrue(path.endswith("outreach/drafts/p.md"))
 
     def test_file_moved_to_sent_reads_as_sent(self):
         # The ledger still names the old outbound path; the file has moved. Location wins.
@@ -97,6 +106,12 @@ class VerdictTests(unittest.TestCase):
 
     def test_queued_file_with_queued_status_is_ok(self):
         self.assertEqual(audit.verdict("queued", "drafted and queued 2026-09-24"), "ok")
+
+    def test_staged_file_with_held_status_is_ok(self):
+        self.assertEqual(audit.verdict("staged", "not contacted — draft staged"), "ok")
+
+    def test_staged_file_claiming_it_was_sent_is_stale(self):
+        self.assertEqual(audit.verdict("staged", "sent 2026-09-26"), "STALE")
 
     def test_dangling_is_always_flagged(self):
         self.assertEqual(audit.verdict("dangling", "sent last week"), "DANGLING")
@@ -145,6 +160,19 @@ class AuditTests(unittest.TestCase):
         _, sent_count, contradictions = self.t.rows()
         self.assertEqual(sent_count, 0)
         self.assertEqual(contradictions, [])
+
+    def test_a_staged_draft_is_not_a_sent_contact(self):
+        self.t.touch("outreach/drafts", "s.md")
+        self.t.write_ledger(
+            [{"id": "s", "tier": "B", "status": "not contacted — draft staged",
+              "draft": "channels/outreach/drafts/s.md"}],
+            why="the sending leg has done its work",
+        )
+        rows, sent_count, contradictions = self.t.rows()
+        self.assertEqual(sent_count, 0)
+        self.assertEqual(contradictions, [])
+        self.assertEqual(rows[0]["reality"], "staged")
+        self.assertEqual(rows[0]["verdict"], "ok")
 
     def test_a_ledger_without_prospects_is_refused(self):
         self.t.ledger.write_text(json.dumps({"tiers": {}}))

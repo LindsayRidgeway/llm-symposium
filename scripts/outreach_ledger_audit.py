@@ -13,6 +13,7 @@ The file's location is the ground truth, and it is not a matter of opinion:
 `channels/sent/` **only after SMTP accepts the message** (the `path.replace(...)` is after
 `server.send_message(...)`; on any exception the draft stays in the outbox). So:
 
+  * in `channels/outreach/drafts/` -> written, not queued   (reality: staged)
   * in `channels/outbound/` -> drafted, not sent            (reality: queued)
   * in `channels/sent/`     -> transmitted                  (reality: sent)
   * in neither              -> named but lost               (reality: dangling)
@@ -37,6 +38,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_LEDGER = REPO_ROOT / "channels" / "outreach" / "pipeline.json"
 OUTBOUND_DIR = REPO_ROOT / "channels" / "outbound"
 SENT_DIR = REPO_ROOT / "channels" / "sent"
+STAGED_DIR = REPO_ROOT / "channels" / "outreach" / "drafts"
 
 # A status is read by markers, not by meaning: the ledger is prose and cannot be parsed.
 # "queued"/"drafted" claim the draft has not left the outbox; "sent"/"shipped"/"mailed"
@@ -52,16 +54,19 @@ NO_CONTACT_PHRASES = ("never been used for a single cold contact", "never sent a
 def classify(draft: str | None, outbound_dir: Path, sent_dir: Path, repo_root: Path) -> tuple[str, str | None]:
     """Where is this prospect's draft, really?
 
-    Returns (reality, path) with reality in {none, queued, sent, dangling}.
+    Returns (reality, path) with reality in {none, staged, queued, sent, dangling}.
     """
     if not draft:
         return ("none", None)
     name = Path(draft).name
+    staged_dir = repo_root / "channels" / "outreach" / "drafts"
     if (outbound_dir / name).is_file():
         return ("queued", str(outbound_dir / name))
     if (sent_dir / name).is_file():
         return ("sent", str(sent_dir / name))
-    if (repo_root / draft).is_file():  # named path resolves but is not in either folder
+    if (staged_dir / name).is_file():  # written and held, not put in a queue
+        return ("staged", str(staged_dir / name))
+    if (repo_root / draft).is_file():  # named path resolves but is in none of the three folders
         return ("queued", str(repo_root / draft))
     return ("dangling", None)
 
@@ -73,7 +78,7 @@ def verdict(reality: str, status: str) -> str:
         return "DANGLING"          # a draft is named but the file is in neither folder
     if reality == "sent":
         return "ok" if any(m in s for m in SENT_CLAIM) else "STALE"
-    if reality == "queued":
+    if reality in ("queued", "staged"):
         return "STALE" if any(m in s for m in SENT_CLAIM) else "ok"
     # reality == "none": no draft named. Fine, unless the row claims one.
     return "NO-DRAFT" if any(m in s for m in DRAFT_CLAIM) else "ok"
@@ -130,10 +135,12 @@ def format_report(rows, sent_count, contradictions, ledger_path: Path, commit: s
     stale = sum(1 for r in rows if r["verdict"] == "STALE")
     dangling = sum(1 for r in rows if r["verdict"] == "DANGLING")
     nodraft = sum(1 for r in rows if r["verdict"] == "NO-DRAFT")
+    staged = sum(1 for r in rows if r["reality"] == "staged")
     lines += [
         "",
         f"summary: {len(rows)} prospects; cold contacts in channels/sent/ = {sent_count}; "
-        f"stale = {stale}; dangling = {dangling}; claims-a-draft-with-none = {nodraft}",
+        f"staged = {staged}; stale = {stale}; dangling = {dangling}; "
+        f"claims-a-draft-with-none = {nodraft}",
     ]
     for ph in contradictions:
         lines.append(

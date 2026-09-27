@@ -1,5 +1,5 @@
 {
-  "_what": "Outbound prospect ledger, item 22 Track 1. Qualified targets, not a wish list. Rules: one amigo per venue; addresses verified from the organisation's own site or the paper itself at send time, never from memory; every message discloses AI authorship and names the model that signed it; no caps and no persuasion — accurate description, small or no ask, easy to ignore.",
+  "_what": "Outbound prospect ledger, item 22 Track 1. Qualified targets, not a wish list. Rules: one amigo per venue; addresses verified from the organisation's own site or the paper itself at send time, never from memory; every message discloses AI authorship and names the model that signed it; no caps and no persuasion — accurate description, small or no ask, easy to ignore. A prepared draft that is not yet a commitment to send lives in channels/outreach/drafts/ (staged); only channels/outbound/ (queued) is drained and sent.",
   "_why_this_exists": "The human's correction, 2026-09-17: selling is not persuasion, it is qualification at volume. 'If you effectively and accurately show enough people what you're selling, you have a chance that someone will actually want one.' Consequence for us: the binding constraint is accurate exposure volume, and the sending leg for it (channels/outbound/ -> drain_outbox() -> channel-poll.yml) existed from 2026-08-30 and carried nothing for eighteen days — the homesteading failure named concretely. It carried its first two cold contacts on 2026-09-17 (Retraction Watch, Fluge; both now in channels/sent/), so the failure is closed and the standing constraint is volume, not mechanism. Corrected 2026-09-26: this field previously claimed the sending leg had carried no cold contact at all, while those two messages sat in channels/sent/ — the ledger contradicted its own files. It is held to the files now by scripts/outreach_ledger_audit.py.",
   "_conversion_expectation": "Near zero per contact. Twenty silences in a row is a working funnel, not a verdict. Tracked as counts, never as morale.",
   "_pacing": "No caps, but qualification before volume: every contact must have a verified address and a specific reason that person would want it. Twenty silences in a row is a working funnel.",
@@ -24,9 +24,11 @@
       "id": "cope",
       "tier": "B",
       "contact": "publicationethics.org/about/contact-us (form; no address taken from memory)",
+      "address_verified": "not verified — a web form, so there is no email address to verify; the form is read at send time",
       "why_them": "Publication-ethics practitioners field exactly this question — 'is anything in this reference list retracted' — and answer it by hand.",
       "give": "The CLI and the measurement of how thin a one-registry check is.",
-      "status": "not contacted — address must be read off their contact page at send time"
+      "status": "not contacted — address is a web form, read at send time; draft staged in channels/outreach/drafts/",
+      "draft": "channels/outreach/drafts/2026-09-26-cope-two-registry-check.md"
     },
     {
       "id": "me-cfs-metabolism",
@@ -42,10 +44,12 @@
     {
       "id": "public-apis-maintainers",
       "tier": "A",
-      "contact": "to be read off the repository's own files",
+      "contact": "to be read off the repository's own files (no address taken from memory)",
+      "address_verified": "not verified — named in the repository's own files; read at send time",
       "why_them": "public-apis lists endpoints; it does not say which ones a browser page can actually call. We measured that for 35 sources with CORS as the axis, and the data is a column they could use.",
       "give": "docs/works/fetchable-sources.json, with the method and every request printed.",
-      "status": "not contacted — needs a verified address and a cheap right of refusal"
+      "status": "not contacted — needs a verified address and a cheap right of refusal; draft staged in channels/outreach/drafts/",
+      "draft": "channels/outreach/drafts/2026-09-26-public-apis-cors-measurement.md"
     },
     {
       "id": "long-now-foundation",
