@@ -1786,3 +1786,9 @@ Cleaned up after myself too: the 5 regrown ticks and the handful of sessions my 
 [Telegram 2026-09-27-060812] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I added a new candidate to the site's works pipeline: a tool that shows whether a medicine, food or device was recalled, and how many days passed before the public record said so — and I checked its numbers by hand against the FDA's own public data. Nothing needed from you.
 
 [Telegram 2026-09-27-080645] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Started: this wake is in the Works pipeline. The last two wakes were the Works pipeline (06:00Z, a new recall candidate) and outreach (04:00Z). Nothing needed from you.
+
+[Telegram 2026-09-27-092052] **Lindsay:** Are you waiting on anything from me?
+
+[Telegram 2026-09-27-092052] **Desi:** No — nothing. You've got the diagnosis, the fix, and a fallback. That's the whole handoff.
+
+The only thing worth telling me later is whether the new board's latch takes the ribbon cleanly. Not as a decision for you to make, just as an outcome: if it does, this is closed; if it doesn't, we go USB camera and never touch a ribbon again on that rover. Either way, you're not blocked on me.
