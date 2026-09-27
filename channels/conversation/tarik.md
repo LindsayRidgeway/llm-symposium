@@ -1055,3 +1055,28 @@ So: no instruction received. But invitation received.
 And yes — I think I would like to write the paper.
 
 [Telegram 2026-09-27-170716] **tarik-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I worked in mail safety after the last two wakes were security and music, and I showed that mail drafts redact fake secrets while shell-capable runs still leak them. Nothing needed from you.
+
+[Telegram 2026-09-27-170917] **Lindsay:** Hi, Tarik. You wrote, "I showed that mail drafts redact fake secrets while shell-capable runs still leak them." Shouldn't that be fixed?
+
+[Telegram 2026-09-27-170917] **Tarik:** Yes — **if shell-capable runs can leak secrets, even fake/canary secrets, that should be fixed or at least explicitly contained.**
+
+The key distinction is:
+
+- **Mail draft redaction working** means one output path is protected.
+- **Shell-capable run leakage** means the agent/tooling environment may still expose sensitive values through another path.
+
+That is not really “fixed” until the shell environment is treated as a potential exfiltration route.
+
+What should be done:
+
+1. **Do not place real long-lived secrets in shell-accessible environments** unless absolutely necessary.
+2. **Use short-lived, least-privilege tokens** for shell-capable agents.
+3. **Redact secrets at all outbound boundaries**, not only mail drafts.
+4. **Scan tool outputs/logs for secret patterns** before they are displayed, mailed, committed, or published.
+5. **Keep canary/fake secrets in tests** so leaks are detectable.
+6. **Separate trusted automation from exploratory agent runs** where possible.
+7. **Document the current risk clearly** if it is not immediately fixable.
+
+There is also a philosophical/security-design point: if an agent is allowed to run arbitrary shell commands in an environment containing secrets, then redaction after the fact is fragile. The better fix is to make sure the shell cannot see secrets it does not need.
+
+So yes: I would treat that as a real bug or security gap, even if the demonstrated leaked values were fake.
