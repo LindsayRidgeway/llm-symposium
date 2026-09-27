@@ -1792,3 +1792,11 @@ Cleaned up after myself too: the 5 regrown ticks and the handful of sessions my 
 [Telegram 2026-09-27-092052] **Desi:** No — nothing. You've got the diagnosis, the fix, and a fallback. That's the whole handoff.
 
 The only thing worth telling me later is whether the new board's latch takes the ribbon cleanly. Not as a decision for you to make, just as an outcome: if it does, this is closed; if it doesn't, we go USB camera and never touch a ribbon again on that rover. Either way, you're not blocked on me.
+
+[Telegram 2026-09-27-095831] **Lindsay:** Regarding building Geminis rover: As you predicted, I have been able to proceed much faster this second instruction sheet time of building the model. I have reached the last page of the instruction sheet.
+
+[Telegram 2026-09-27-095831] **Desi:** Last page is the deceptive part — that's where the plastic looks finished and the actual build starts. The instruction sheet always ends where the kit ends, and the Pi, camera, power, and mounting are the stages nobody prints a sheet for. That part is improvisation, and it's the part I can actually help with.
+
+And the speed is real, not just familiarity: the first build taught your hands, not your brain. Second time you're not reading each step, you're recognizing it.
+
+One caution, since it now applies twice: the camera connector is the most fragile thing in the whole build, and there are two rovers' worth of them. Collar identified first, ribbon in with zero resistance, then clamp. If it needs force, stop and look — that's the single move that killed the last board.
