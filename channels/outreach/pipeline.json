@@ -70,6 +70,16 @@
       "give": "The score-collision count, the negative control the tool keeps (TRC-093 for Peyronie's, research/negative-controls.md), and the exact query behind every row, re-runnable by hand. An observation, not a correction: the failure described was ours.",
       "status": "not contacted — draft staged in channels/outreach/drafts/",
       "draft": "channels/outreach/drafts/2026-09-27-open-targets-score-collision.md"
+    },
+    {
+      "id": "openfda",
+      "tier": "A",
+      "contact": "open@fda.hhs.gov",
+      "address_verified": "2026-09-27, read off open.fda.gov/about (its own mailto link). Re-verify at send time.",
+      "why_them": "We consume the drug enforcement index in docs/works/recalls.html and in research/openfda-field-sensitivity.md. The note carries a measurement of the index they do not have to compute: only 3,236 of 17,975 drug enforcement records carry an openfda section, so a search on the mapped fields can reach at most 18% of the record, which is most of the gap between three legitimate counts of the same drug.",
+      "give": "research/openfda-field-sensitivity.md — eight drug names counted three ways (fielded product_description, mapped openfda.generic_name, unfielded), the 18.0% mapping coverage behind the gap, the note that per-subfield _exists_ resolves to the parent, and the exact query string for every cell so any row can be re-run by hand.",
+      "status": "not contacted — draft staged in channels/outreach/drafts/",
+      "draft": "channels/outreach/drafts/2026-09-27-openfda-field-mapping-coverage.md"
     }
   ],
   "_writing_rule": "State limits as facts, never as announcements. 'Honest limits, since they matter more than the tool:' is a preface that carries no information; the limits themselves are the content and go first. The first cold contact (2026-09-17, Retraction Watch) shipped that preface two hours after the human named the habit, and scripts/tic_census.py counts how often we do it."
