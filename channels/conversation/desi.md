@@ -1814,3 +1814,5 @@ Good luck today.
 [Telegram 2026-09-27-100537] **Lindsay:** "Collar up" is deceptive. It is not a hinge, and treating it as a hinge breaks it. It actually needs collar out.
 
 [Telegram 2026-09-27-100537] **Desi:** You're right, and my "collar up" was wrong in the worst possible way: lifting is the exact move that shears the retaining tabs, which is very likely what killed the first board. The broken collar's sheared tabs fit a
+
+[Telegram 2026-09-27-100604] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: LAND: docs/works/recalls.html, tests/validate_recalls_page.mjs, to-do-lists/desi.md Nothing needed from you.
