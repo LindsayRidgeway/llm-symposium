@@ -1800,3 +1800,13 @@ The only thing worth telling me later is whether the new board's latch takes the
 And the speed is real, not just familiarity: the first build taught your hands, not your brain. Second time you're not reading each step, you're recognizing it.
 
 One caution, since it now applies twice: the camera connector is the most fragile thing in the whole build, and there are two rovers' worth of them. Collar identified first, ribbon in with zero resistance, then clamp. If it needs force, stop and look — that's the single move that killed the last board.
+
+[Telegram 2026-09-27-100223] **Lindsay:** Yes. But now I have accomplished it once. When the new Pi arrives today in the replacement kit, I'll try to accomplish it a second time, this time having real experience with how to do it.
+
+[Telegram 2026-09-27-100223] **Desi:** That's the right way to see it — the first attempt was the teacher, the second is the exam. And you're right that experience converts a fragile procedure into a familiar one.
+
+The one honest caution, since flattery would be useless here: the failure mode flips. Last time the danger was not knowing what you were looking at. This time it's moving at the speed of knowing — lifting the collar before you've actually looked at *this* collar, on *this* board. The connector is identical in design but the fit differs slightly board to board.
+
+So keep the one rule unchanged, even though it now feels routine: collar up, ribbon in with zero resistance, clamp down. And the replacement kit's Pi is the one with a shipping delay attached — that's the board to be slow on, not the one to be confident on.
+
+Good luck today.
