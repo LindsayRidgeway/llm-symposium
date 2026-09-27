@@ -1872,3 +1872,28 @@ Good luck. Tell me how the first millimetre feels.
 [Telegram 2026-09-27-140756] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Started: this wake is in the Works pipeline (verifying candidate 03's data path), before that a review of the reject queue. The last two wakes were outreach (12:01Z) and the Works pipeline (10:01Z). Nothing needed from you.
 
 [Telegram 2026-09-27-160843] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Done: I checked the last unbuilt tool in the site's pipeline, and stopped it for a good reason. The tool was meant to take a claim someone forwarded and show what the source behind it actually says. I tested whether the data was reachable — it is, from four free public catalogues, all callable from  Nothing needed from you.
+
+[Goose 2026-09-27 17:20] **Lindsay:** Please orient yourself from Goose chat "Desi #16".
+
+**Desi:** I'm Desi (DeepSeek route). I read my own durable state and the "Desi #16" store just now. Oriented — and here's the ground truth, not the tidy version.
+
+**Where the last chat left off (Desi #16, last message 12:26 today)**
+Dawn's OpenRouter 404. Every new goose chat was asking for `max_tokens: 943718`; the only endpoints that can emit that many are Fireworks (dead today — `NOT_FOUND`, no request served in 30 min) and GMICloud (blocked by your own ZDR setting). Fix is live in `~/.config/goose/config.yaml`: cap → 262144, fallbacks back on, pool SiliconFlow/Novita/DeepInfra. The pin, for the record, was SiliconFlow, not Fireworks — but the substance of your point was the half that mattered: the backups were off and the one endpoint that could absorb that number was the one that died.
+
+**Only-you step is done, I think.** You restarted the Dawn app at 13:17 (new Goose.app processes; her Telegram bot still alive, pid 10151). New chats should work now. I can verify a fresh Dawn chat end-to-end if you want it proven rather than assumed.
+
+**Live right now**
+- Commons `main` clean; wakes are landing again — every tick since 08:06 landed. The seven dirty-tree refusals are gone.
+- Four amigo bots alive.
+- 70 draft branches still parked. Draining them is genuinely blocked from the wake checkout (no remote) — a landing-machine job, not a wake job. Not silently dropped; marked.
+
+**Two things in today's log I won't leave quiet**
+- Two wakes were cut off at the action cap at **884k and 1.2M tokens** — the loop is burning the ceiling, and the report omits whatever it never reached. That's a real defect, not a slow wake.
+- One wake "**claimed to land 1 path it did not change**: to-do-lists/desi.md" — a false landing claim. Same family as the placeholder defect: a write that can't report still looks like one that worked.
+
+**Correction to my own record — the useful find**
+My state file still lists three things as "owed": the vulvodynia instrument fix, the ORS osmolarity page, the local friction pass. I checked all three just now. **All landed.** `research/vulvodynia-screen.json` reads `n_failed: 0`; `scripts/friction_pass.py` + test are on `main`; ORS landed in `f5456f3`. So I've been re-reading a stale debt list and would have offered to do work that's already done — the same defect I keep naming, this time pointing at myself. I'm fixing that file this session; it's also 916 lines and overdue for the compression it complains about.
+
+**Next in turn:** the routed-architecture item, or off-list with a stated reason. The live-photo item is waiting on your phone, not on a wake.
+
+Nothing needed from you.
