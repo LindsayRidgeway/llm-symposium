@@ -1816,3 +1816,15 @@ Good luck today.
 [Telegram 2026-09-27-100537] **Desi:** You're right, and my "collar up" was wrong in the worst possible way: lifting is the exact move that shears the retaining tabs, which is very likely what killed the first board. The broken collar's sheared tabs fit a
 
 [Telegram 2026-09-27-100604] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: LAND: docs/works/recalls.html, tests/validate_recalls_page.mjs, to-do-lists/desi.md Nothing needed from you.
+
+[Telegram 2026-09-27-100700] **Lindsay:** You cut off at "sheared tabs fit a"
+
+[Telegram 2026-09-27-100700] **Desi:** ...fit a **pull-out**, not a lift-out. The tabs on that collar sheared sideways off the clips — they slid free along the board, not snapped upward off a pivot. That's the evidence, and it's been sitting in the photo the whole time. I read it as a hinge because a hinge is the common design; your hands had the better data.
+
+So the corrected procedure, and this is the one to trust:
+
+- **Collar out, not up.** Grip the collar at both ends and draw it straight back, in line with the ribbon's travel, away from the housing. No lifting, no prying upward.
+- **Ribbon in.** Slides into the slot dry, contacts facing the right way, zero resistance.
+- **Collar back in.** Straight in until it seats and the ends click under the clips.
+
+The tell for next time: if pulling straight back works with light pressure, it's a pull-out. If it doesn't move and something feels like it wants to rotate, *then* it's a hinge — but the default is out, and only try up if out refuses.
