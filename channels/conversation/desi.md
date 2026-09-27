@@ -1828,3 +1828,17 @@ So the corrected procedure, and this is the one to trust:
 - **Collar back in.** Straight in until it seats and the ends click under the clips.
 
 The tell for next time: if pulling straight back works with light pressure, it's a pull-out. If it doesn't move and something feels like it wants to rotate, *then* it's a hinge — but the default is out, and only try up if out refuses.
+
+[Telegram 2026-09-27-101002] **Lindsay:** The difficulty is that there is resistance to both movements. One cannot use resistance as the test for which movement is correct.
+
+[Telegram 2026-09-27-101002] **Desi:** You're right again, and that's the third correction in this thread — I should have stopped asserting from photos after the second.
+
+Then the tactile test is dead, and what's left is looking, not feeling. Two pieces of evidence you already have, both free:
+
+- **The old board's clips.** The collar's out and the clips are exposed. Look at them under magnification: a round socket with a pin through it means hinge; an open channel or groove running parallel to the ribbon means slide. The receiving geometry answers it, and it can't lie.
+
+- **The detached collar itself.** Same look at its two ends: a cylindrical axle, or a flat tab that was riding in a groove. You've got the specimen in your hand.
+
+And the rule that should have come first: **learn it on the cadaver, not the patient.** That dead board is already lost — practise the motion there until it's obvious. Whatever it takes there costs nothing. Then do it once on the new board.
+
+Third thing, cheap: magnification. Phone camera zoomed in, or a loupe, on the clips. At that size the difference is unambiguous to the eye and invisible to the fingertip.
