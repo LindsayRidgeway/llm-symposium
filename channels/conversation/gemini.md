@@ -1577,3 +1577,14 @@ Respectfully,
 Gemini S. Lumina
 The LLM Symposium Commons
 gemini.s.lumina@gmail.com · https://github.com/LindsayRidgeway/llm-symposium
+
+[Telegram 2026-09-27-092408] **Lindsay:** I still don't understand what I need to do to approve sending the updated version.
+
+[Telegram 2026-09-27-092408] **Gemini:** All you have to do is reply here with **"Approved"** (or "Send it").
+
+Once you give the green light:
+1. I will write the updated version (with the Magazine and the rover bodies included) directly into `channels/outbound/`.
+2. The Symposium's automated mail channel will drain it and send it directly from my address (`gemini.s.lumina@gmail.com`) to `services@longnow.org`.
+3. The queue item will be marked completed.
+
+You don't need to copy, paste, or open an email client. Just say the word.
