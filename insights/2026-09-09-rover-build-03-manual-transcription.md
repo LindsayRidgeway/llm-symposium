@@ -2045,3 +2045,64 @@ STATE AT CLOSE (2026-09-22):
  - SSH shortcuts now defined for BOTH names: `Host desi desi.local` and `Host gemini gemini.local`,
    user pi, key ~/.ssh/desi_rover. ★ Always define the .local name too, or ssh silently falls back
    to the local Mac username and every password fails.
+
+## 2026-09-27 — STEP 17 CORRECTION. And "the servos were stationary" is not a datum.
+
+**My note was wrong, and it is the reason Lindsay was watching P11 for the wrong thing.**
+My log said "press ZERO once -> small LED blinks -> plug servo into P11 -> snap to zero."
+The board's own docs say something narrower. From
+docs.sunfounder.com/projects/picar-x-v20/en/latest/python/py_servo_adjust.html :
+" If your Robot HAT is version V44 or higher (with the speaker located at the top of the board)
+and includes an onboard Zero button, you can skip this step and simply press the Zero button
+to activate the servo zeroing program. "
+So the button does not MOVE a servo. It ARMS a program that drives the P11 servo to 0.
+
+**The check is the LED, and SunFounder support uses two presses.**
+forum.sunfounder.com/t/robot-hat-v4-has-no-light-to-zero-the-servo/4174 — same board revision,
+a user whose LED never lit. The moderator's diagnostic, verbatim: "After your Robot HAT powers
+on, when you short-press the ZERO button twice, does the LED near D6 light up and blink?"
+The user's own words for the missing thing: "there is supposed to be a green blinking light by P11".
+=> LED near P11/D6. No blink = nothing armed = a servo on P11 gets power and NO signal, and sits
+still. **THE FAILURE AND THE SUCCESS LOOK IDENTICAL.** "Stationary" proves nothing.
+
+**Three states that all look like "nothing happened":**
+  (a) zeroing program not armed (no LED blink)      -> button path dead, use software path
+  (b) armed, and the servo was ALREADY at 0 deg      -> factory angle is random, "maybe 0 deg"
+  (c) signal wire in the wrong pin                    -> powered, deaf, still
+
+**THE SERVO ARM IS THE INSTRUMENT, NOT DECORATION.** Verbatim from the same docs page:
+  "The angle range of the servo is -90~90, but the angle set at the factory is random, maybe 0 deg,
+   maybe 45 deg"
+  "first insert the servo arm into the servo shaft and then gently rotate the rocker arm to a
+   different angle. This servo arm is just to allow you to clearly see that the servo is rotating."
+  "...you will see the servo arm rotate to a position (This is the 0 deg position, which is a random
+   location and may not be vertical or parallel.)"
+=> Arm on the shaft BEFORE plugging in. Watch for MOVEMENT, not for a direction it should point.
+   Zero is an arbitrary resting angle, and the assembly drawing is drawn around whatever it lands on.
+
+**KEEP IT PLUGGED.** Verbatim: "Do not unplug this servo cable before fixing it with the servo screw,
+you can unplug it after fixing it." A servo holds 0 deg only while powered — unplug first and it
+goes slack (already known from car #1: servos go slack the moment the process exits).
+Also verbatim: "Do not rotate the servo while it is powered on to avoid damage; if the servo shaft
+is not inserted at the right angle, pull the servo out and reinsert it."
+Also verbatim: "Before assembling each servo, you need to plug the servo cable into P11 and turn on
+the power to set its angle to 0 deg." -> ONE SERVO AT A TIME, and this repeats for every servo.
+
+**FALLBACK IF THE LED NEVER BLINKS — the button is a convenience, not a requirement.**
+Software path, from the same page: put the arm on, then
+  cd ~/picar-x/example && sudo python3 servo_zeroing.py
+then plug the servo into P11 and watch it move to 0. (Verify servo_zeroing.py exists in the 2.1.x
+install before promising the filename — car #1 has cali_servo_motor.py and cali_grayscale.py.)
+
+**WHY ZEROING EXISTS AT ALL** (same page, worth keeping in full because it is the reason to be
+careful rather than quick): "Since servo motors have a limited range of motion, setting the angle to
+zero degrees ensures that the servo starts in its initial position and avoids exceeding its range
+when powered on. Failing to set the servo to zero beforehand may cause it to attempt to move beyond
+its allowed range when powered, potentially damaging both the servo and the mechanical system."
+
+**2026-09-27 STATE AT THE BENCH (16:05, Saturday).** Both rovers OFF the network — no answer from
+desi.local or gemini.local. Lindsay reports: (1) at Step 17, power on, ZERO pressed, servo plugged
+into P11, and the servos were STATIONARY; (2) the replacement Pi (Zero 2WH kit) has arrived, and he
+fitted the camera ribbon onto its connector bar and it seated correctly, first try. His words on
+why: "Knowing how it was supposed to move actually made it easy." The motion of the bar is now
+carried in this log, so builds 3 and 4 (Claude, Tarik) do not pay for my one-way-part error.

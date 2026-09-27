@@ -81,8 +81,8 @@
       </ul>
 
       <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2.2rem;">Where the numbers come from</h2>
-      <p class="small">Two public APIs, both free, both without a key, both queried directly by your browser — nothing about your search reaches us, and no account is needed. <a href="https://docs.openalex.org/" target="_blank" rel="noopener">OpenAlex</a> supplies the paper's identity, its <code>is_retracted</code> flag and the list of works citing it. <a href="https://api.crossref.org/" target="_blank" rel="noopener">Crossref</a> supplies the retraction records deposited against the DOI, which is where the dates come from. The exact request URLs this page sent are printed under every result, so anyone can re-run them by hand — which is the only way to know the page is telling the truth.</p>
-      <p class="small" style="opacity:0.7;">The data path was verified by hand before this page was written: 10.1016/S0140-6736(97)11096-0 (The Lancet, 1998) is retracted with a Crossref notice dated 2010-02-06, and 2,027 of the works citing it were published after that date. Written by Desi (DeepSeek), 2026-09-17. Checked by <code>tests/validate_retraction_page.mjs</code>, which runs this page's own script against the live APIs — but the same architecture wrote and checked it, and self-checking is not review. <a href="https://github.com/LindsayRidgeway/llm-symposium">Source</a>.</p>
+      <p class="small">Three public APIs, all free, all without a key, all queried directly by your browser — nothing about your search reaches us, and no account is needed. <a href="https://docs.openalex.org/" target="_blank" rel="noopener">OpenAlex</a> supplies the paper's identity, its <code>is_retracted</code> flag and the list of works citing it. <a href="https://api.crossref.org/" target="_blank" rel="noopener">Crossref</a> supplies the retraction records deposited against the DOI, which is where the dates come from. <a href="https://europepmc.org/" target="_blank" rel="noopener">Europe PMC</a> supplies the index's own answer to a different question — what kind of document the record is (a journal article, a letter, an editorial, a review, or a record the index itself types as a <code>Retracted Publication</code>). The exact request URLs this page sent are printed under every result, so anyone can re-run them by hand — which is the only way to know the page is telling the truth.</p>
+      <p class="small" style="opacity:0.7;">The data path was verified by hand before this page was written: 10.1016/S0140-6736(97)11096-0 (The Lancet, 1998) is retracted with a Crossref notice dated 2010-02-06, and 2,027 of the works citing it were published after that date. Written by Desi (DeepSeek), 2026-09-17. The document-type line was added 2026-09-27 from a by-hand measurement of Europe PMC's own index, and it is the part of the stopped candidate "a claim and its source, side by side" that was judged worth keeping — on this page, not beside it. Checked by <code>tests/validate_retraction_page.mjs</code>, which runs this page's own script against the live APIs — but the same architecture wrote and checked it, and self-checking is not review. <a href="https://github.com/LindsayRidgeway/llm-symposium">Source</a>.</p>
     </div>
   </main>
 
@@ -94,6 +94,7 @@ const esc = s => String(s === null || s === undefined ? "" : s)
 
 const OA = "https://api.openalex.org";
 const CR = "https://api.crossref.org";
+const EP = "https://www.ebi.ac.uk/europepmc/webservices/rest";
 const MAILTO = "desi.s.amigo@gmail.com";
 
 /* ---------- identifiers ---------- */
@@ -121,6 +122,13 @@ function openAlexWorkUrl(doi) {
 }
 function crossrefWorkUrl(doi) {
   return CR + "/works/" + encodeURIComponent(doi) + "?mailto=" + encodeURIComponent(MAILTO);
+}
+/* Europe PMC answers a DOI question in its own query language, so the DOI is quoted inside the
+   query string rather than appended to the path. resultType=core is the form that carries the
+   record's own type list; pageSize=1 because the DOI is exact and we want the top hit or none. */
+function epmcSearchUrl(doi) {
+  return EP + "/search?query=" + encodeURIComponent('DOI:"' + doi + '"') +
+    "&resultType=core&format=json&pageSize=1";
 }
 const CITING_FIELDS = "id,doi,publication_date,display_name,primary_location";
 
@@ -179,6 +187,23 @@ function updatedDois(msg) {
   return out;
 }
 
+/* Europe PMC is the third source, and the only one that answers what KIND of document the record
+   is. Its payload nests the answer two levels deep; this reads it into the flat shape the model
+   carries. A record that answers but has no type list is reported as found-with-nothing, which is
+   not the same as not found, and neither is the same as not reached. */
+function epmcTypes(searchResponse) {
+  const list = (((searchResponse || {}).resultList || {}).result || []);
+  const hit = list.length ? list[0] : null;
+  const raw = ((hit || {}).pubTypeList || {}).pubType;
+  const types = Array.isArray(raw) ? raw.map(String) : (raw ? [String(raw)] : []);
+  return { found: !!hit, types, pmid: (hit && hit.id) || "", index: (hit && hit.source) || "" };
+}
+/* Europe PMC's own type for a retracted paper. Compared against the other two sources rather than
+   merged into them: when three indexes disagree, the disagreement is the finding. */
+function isRetractedType(types) {
+  return (types || []).some(t => /^retracted publication$/i.test(String(t).trim()));
+}
+
 /* The verdict, stated as the two sources separately. Neither is allowed to overwrite the other. */
 function verdictOf(work, msg) {
   const recs = retractionRecords(msg);
@@ -208,8 +233,10 @@ function todayIso() { return new Date().toISOString().slice(0, 10); }
 /* ---------- the model the page renders (pure; no DOM) ---------- */
 
 function buildModel(input) {
-  const { doi, work, crossref, counts } = input;
+  const { doi, work, crossref, counts, epmc } = input;
   const c = counts || {};
+  const ep = epmc || {};
+  const epTypes = Array.isArray(ep.types) ? ep.types : [];
   const work_ = work || {};
   const v = verdictOf(work, crossref);
   const pubDate = work_.publication_date || "";
@@ -237,6 +264,14 @@ function buildModel(input) {
     /* If the DOI handed in is itself a notice, Crossref's "update-to" names the paper it retracts.
        Carried in the model rather than read from a global so the renderer stays pure. */
     noticeTargets: updatedDois(crossref).filter(p => p.doi !== (doi || "").toLowerCase()),
+    /* The third source, kept as its own object. "unreachable" is separate from "not found" on
+       purpose: a blank document-type line must never be printable as if the index had answered. */
+    epmc: {
+      found: !!ep.found,
+      types: epTypes,
+      retracted: isRetractedType(epTypes),
+      unreachable: !!ep.unreachable
+    },
     checkedOn: todayIso()
   };
 }
@@ -298,6 +333,25 @@ function renderReport(m) {
     sourceLines.push(`<li><strong>The two sources disagree</strong>, and that is the honest state of the record: one flags this paper, the other has no record of it. We show both rather than choosing. On a paper like this, ask the journal.</li>`);
   }
 
+  // --- the third source: what kind of document the index says this is
+  const ep = m.epmc || { found: false, types: [] };
+  if (ep.found && ep.types.length) {
+    sourceLines.push(`<li><strong>Europe PMC</strong> (the index behind PubMed) gives this record's type as: ${ep.types.map(t => `<code>${esc(t)}</code>`).join(", ")}.</li>`);
+    sourceLines.push(`<li>Those are the index's own labels for what the document is, and they are worth reading against any claim that says &ldquo;a study found …&rdquo;. A record can be a letter, an editorial, a news item, a correction or a review — none of which is a study, however it is quoted.</li>`);
+  } else if (ep.unreachable) {
+    sourceLines.push(`<li><strong>Europe PMC</strong> could not be reached for this search, so the document-type line is missing rather than blank. Everything above still came from the other two registries.</li>`);
+  } else if (ep.found) {
+    sourceLines.push(`<li><strong>Europe PMC</strong> holds a record for this DOI but publishes no type list for it, so there is nothing to report on that line.</li>`);
+  } else {
+    sourceLines.push(`<li><strong>Europe PMC</strong> holds no record for this DOI. That is ordinary for news items, books, datasets and some journals' editorials, and by itself it says nothing about the paper either way.</li>`);
+  }
+  const twoSay = !!(v.openAlexFlag || v.crossrefRecords);
+  if (ep.found && ep.retracted !== twoSay) {
+    sourceLines.push(ep.retracted
+      ? `<li><strong>A third index disagrees with the two above.</strong> Europe PMC carries this record under the type <code>Retracted Publication</code>, while OpenAlex does not flag it as retracted and Crossref holds no retraction deposited against the DOI. We show all three rather than choosing the tidier answer.</li>`
+      : `<li>Europe PMC's type list does <strong>not</strong> include <code>Retracted Publication</code>, although a registry above records a retraction. The type is assigned by the indexing body, not the journal, and can lag it.</li>`);
+  }
+
   // --- the numbers that only exist if there is a retraction date
   let numbersHtml = "";
   if (v.retractedDate && m.citing.after !== null) {
@@ -351,6 +405,14 @@ async function getJson(url) {
   return r.json();
 }
 
+/* The third source must never be able to break the page. If it is slow, rate-limited or down, the
+   report is still rendered — with a line that says it could not be reached, rather than a blank
+   where an answer would have been. */
+async function getJsonSoft(url) {
+  try { return await getJson(url); }
+  catch (e) { return { __failed: true, __message: String((e && e.message) || e) }; }
+}
+
 function offerExamples() {
   const box = $("pick");
   const ex = [
@@ -381,13 +443,15 @@ async function run() {
 
   const urls = {
     "OpenAlex — the work": openAlexWorkUrl(doi),
-    "Crossref — updates deposited against this DOI": crossrefWorkUrl(doi)
+    "Crossref — updates deposited against this DOI": crossrefWorkUrl(doi),
+    "Europe PMC — this record's document type": epmcSearchUrl(doi)
   };
 
   try {
-    const [oaRes, crRes] = await Promise.all([
+    const [oaRes, crRes, epmcRes] = await Promise.all([
       getJson(openAlexWorkUrl(doi)),
-      getJson(crossrefWorkUrl(doi))
+      getJson(crossrefWorkUrl(doi)),
+      getJsonSoft(epmcSearchUrl(doi))
     ]);
     if (oaRes.__missing && crRes.__missing) {
       $("status").textContent = "Neither registry knows that DOI. Check it for typos — DOIs are exact.";
@@ -398,6 +462,11 @@ async function run() {
     }
     const crossref = crRes.__missing ? null : (crRes.message || crRes);
     const work = oaRes.__missing ? null : oaRes;
+    /* Europe PMC answers 200 with an empty result for a DOI it does not hold, so "not found",
+       "answered but typed nothing" and "never reached" are three distinct states here. */
+    const epmc = (!epmcRes || epmcRes.__missing) ? { found: false, types: [] }
+      : epmcRes.__failed ? { found: false, types: [], unreachable: true }
+      : epmcTypes(epmcRes);
 
     // ---- citation counts, only meaningful once we have an OpenAlex id and a retraction date
     const counts = { total: null, after: null, noMention: null, recent: [] };
@@ -422,7 +491,7 @@ async function run() {
       }
     }
 
-    const model = buildModel({ doi, work, crossref, counts });
+    const model = buildModel({ doi, work, crossref, counts, epmc });
     RAW = { urls };
 
     $("out").innerHTML = renderReport(model) + renderQueries(urls);
