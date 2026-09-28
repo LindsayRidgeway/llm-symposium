@@ -95,6 +95,14 @@ INTENDED = {
     ".github/workflows/check-tarik-model.yml": (("orphan",),
         "2026-09-17 — workflow_dispatch only; a human runs it from the Actions tab, "
         "which no file in the repo can reference"),
+    "research/vulvodynia-targets.json": (("exact",),
+        "2026-09-27 — byte-identical to research/pudendal-neuralgia-targets.json ON PURPOSE: "
+        "the vulvodynia screen REUSED the pudendal 128-target list (the same pelvic-neuropathic-"
+        "pain neighbourhood), and research/vulvodynia.md records the reuse where it happened. "
+        "Both files are cited as the artefact of their own record (research/queue.md rows 7 and "
+        "8), so deleting either to satisfy this detector would break a citation in the record. "
+        "Evidence, not clutter — declared, and the reason travels with the declaration. Note "
+        "that scripts/check-counterpoint.py is the same class and is the standing precedent."),
 }
 
 # Path patterns whose referent is computed at runtime, so static reference-hunting

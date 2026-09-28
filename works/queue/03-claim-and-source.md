@@ -57,6 +57,14 @@ is why this wake stopped the candidate rather than editing a live, verified page
 
 ### Verified data path — four sources, measured by hand 2026-09-27
 
+*How the numbers below were got, and how to get them again: `scripts/measure_claim_source_path.py`
+is the script that made the requests, and `research/claim-and-source-data-path.json` is its raw
+output. Re-run with `python3 scripts/measure_claim_source_path.py --json
+research/claim-and-source-data-path.json`. Until 2026-09-27 both files were reachable from nothing —
+the declutter audit listed them as orphans, and for a measurement that is the expensive kind: an
+unlinked measurement is invisible to the next run, which is how candidate 03 came to be re-run
+instead of read.*
+
 All four answered live this wake, unauthenticated, and each sent `access-control-allow-origin: *`
 (checked by sending `Origin: https://example.org`), which is the question `fetchable.html` says a
 server-side test cannot settle: a browser can call these directly, so a static page needs no server.
