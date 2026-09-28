@@ -207,7 +207,67 @@ check("the renderer tells the reader they gave the notice, not the paper",
 check("the notice's own DOI is not offered as its own target",
   !(mNotice.noticeTargets || []).some(t => t.doi === WAKEFIELD_NOTICE));
 
-// --- 8. the honesty requirements, checked in the shipped HTML ---------------const pageText = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "")
+// --- 8. the third source: what KIND of document the record says it is ---------
+// Europe PMC answers a different question from the other two — not whether the paper was
+// retracted, but what the index types the document as. That line was added to the page on
+// 2026-09-27 and is the part of the stopped candidate "a claim and its source, side by side"
+// judged worth keeping — which is exactly why it needs a check rather than a promise. This
+// section exists because the helpers below were exported and never called: the shipped page
+// promised a harness, and a harness that does not run is worse than none.
+const epmcUrl = mod.epmcSearchUrl(WAKEFIELD.toLowerCase());
+check("the Europe PMC query quotes the DOI inside the index's own query language, and asks for the core record",
+  epmcUrl.includes(encodeURIComponent('DOI:"' + WAKEFIELD.toLowerCase() + '"')) &&
+  epmcUrl.includes("resultType=core") && epmcUrl.includes("pageSize=1"), epmcUrl);
+
+// the pure reader, on the three shapes Europe PMC actually returns
+const epmcFound = mod.epmcTypes({ resultList: { result: [{ id: "9500320", source: "MED",
+  pubTypeList: { pubType: ["Retracted Publication", "Journal Article"] } }] } });
+check("epmcTypes lifts a found record's type list out of the nested payload",
+  epmcFound.found === true && epmcFound.types.join("|") === "Retracted Publication|Journal Article",
+  JSON.stringify(epmcFound));
+check("a single type delivered as a bare string, not an array, is still read as one",
+  mod.epmcTypes({ resultList: { result: [{ pubTypeList: { pubType: "Letter" } }] } }).types.join("|") === "Letter");
+check("'the index holds it but typed nothing' is distinct from 'the index holds no record'",
+  (() => { const held = mod.epmcTypes({ resultList: { result: [{ id: "1" }] } });
+           const none = mod.epmcTypes({ resultList: { result: [] } });
+           return held.found === true && held.types.length === 0 && none.found === false; })());
+check("a record the index types 'Retracted Publication' is recognised by that exact label",
+  mod.isRetractedType(epmcFound.types) === true);
+check("an ordinary research article is not mistaken for a retracted-record type",
+  mod.isRetractedType(["Journal Article", "Research Support, Non-U.S. Gov't"]) === false);
+
+// the same call, live, for the paper the rest of this harness uses
+const epmcRes = await fetch(epmcUrl);
+check("live Europe PMC answers the page's exact document-type query", epmcRes.ok, "HTTP " + epmcRes.status);
+const liveEpmc = mod.epmcTypes(await epmcRes.json());
+check("Europe PMC holds the Wakefield paper and types it as a retracted publication",
+  liveEpmc.found === true && mod.isRetractedType(liveEpmc.types), "types=" + JSON.stringify(liveEpmc.types));
+const mTyped = mod.buildModel({ doi: WAKEFIELD.toLowerCase(), work, crossref, counts, epmc: liveEpmc });
+check("the live type list is carried into the model, with the retracted flag set",
+  mTyped.epmc.found === true && mTyped.epmc.retracted === true &&
+  mTyped.epmc.types.join("|") === liveEpmc.types.join("|"), JSON.stringify(mTyped.epmc));
+const rTyped = mod.renderReport(mTyped);
+check("the rendered report names the index's own document type",
+  rTyped.includes("Europe PMC") && rTyped.includes("Retracted Publication"));
+check("the rendered report warns that none of those labels is a study",
+  /none of which is a study/.test(rTyped));
+
+// the three states that are NOT 'typed with an answer' must each say so, not print blank
+const epmcModel = ep => mod.buildModel({ doi: WAKEFIELD.toLowerCase(), work, crossref, counts, epmc: ep });
+check("an index that could not be reached is reported as missing, not as an empty answer",
+  /could not be reached/.test(mod.renderReport(epmcModel({ found: false, types: [], unreachable: true }))));
+check("a record the index holds but does not type says so, in its own words",
+  /publishes no type list/.test(mod.renderReport(epmcModel({ found: true, types: [] }))));
+check("an index with no record for the DOI says so, and says that is ordinary",
+  /holds no record for this DOI/.test(mod.renderReport(epmcModel({ found: false, types: [] }))));
+
+// the index's labels are strings from outside; they must be escaped like any other
+check("document-type labels are HTML-escaped before being rendered",
+  mod.renderReport({ ...model, epmc: { found: true, types: ["<img src=x onerror=alert(1)>"], retracted: false, unreachable: false } })
+    .includes("&lt;img src=x onerror=alert(1)&gt;"));
+
+// --- 9. the honesty requirements, checked in the shipped HTML ---------------
+const pageText = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "")
   .replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
 check("states that a citation after retraction is not an endorsement",
   /A citation after a retraction is not an endorsement of the paper/.test(pageText));
