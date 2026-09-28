@@ -1,0 +1,509 @@
+{
+  "_what": "Reproducible PubMed result for commons agenda item 24 (maternal chronic pain and substance-use care). Raw metadata as returned by NCBI E-utilities; no ranking of our own.",
+  "retrieved": "2026-09-28",
+  "query": "(pregnancy[tiab] OR pregnant[tiab] OR postpartum[tiab] OR perinatal[tiab] OR maternal[tiab] OR \"pregnant women\"[tiab]) AND (\"chronic pain\"[tiab] OR \"persistent pain\"[tiab] OR \"pain management\"[tiab]) AND (\"substance use disorder\"[tiab] OR \"substance use disorders\"[tiab] OR \"opioid use disorder\"[tiab] OR \"opioid use disorders\"[tiab] OR \"opioid dependence\"[tiab] OR \"opioid misuse\"[tiab] OR \"substance misuse\"[tiab]) AND (treatment[tiab] OR \"medication for opioid use disorder\"[tiab] OR MOUD[tiab] OR buprenorphine[tiab] OR methadone[tiab] OR \"treatment retention\"[tiab] OR \"medication retention\"[tiab] OR \"integrated care\"[tiab])",
+  "total_matching": 54,
+  "returned": 50,
+  "sort": "relevance",
+  "records": [
+    {
+      "pmid": "27729254",
+      "title": "Opioid dependence and pregnancy: minimizing stress on the fetal brain.",
+      "journal": "American journal of obstetrics and gynecology",
+      "pubdate": "2017 Mar",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "42576700",
+      "title": "Approaches to Treating Kratom Use Disorder in the Perinatal Population.",
+      "journal": "Journal of midwifery & women's health",
+      "pubdate": "2026 Aug 11",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "42532612",
+      "title": "Peripartum Management for Patients Receiving Medication for Opioid Use Disorder.",
+      "journal": "Anesthesiology clinics",
+      "pubdate": "2026 Sep",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "39499769",
+      "title": "Is the Use of a Buprenorphine Transdermal Patch More Effective Than Oral Medications for Postoperative Analgesia After Arthroscopic Rotator Cuff Repair? A Randomized Clinical Trial.",
+      "journal": "Clinical orthopaedics and related research",
+      "pubdate": "2025 May 1",
+      "pubtypes": [
+        "Journal Article",
+        "Randomized Controlled Trial",
+        "Comparative Study",
+        "Research Support, Non-U.S. Gov't"
+      ]
+    },
+    {
+      "pmid": "39025248",
+      "title": "Pain Management Treatments and Opioid Use Disorder Risk in Medicaid Patients.",
+      "journal": "American journal of preventive medicine",
+      "pubdate": "2024 Dec",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "37266855",
+      "title": "Use of Opioid-Sparing Protocols and Perceived Postpartum Pain in Patients with Opioid Use Disorder and Chronic Prenatal Opioid Exposure.",
+      "journal": "Maternal and child health journal",
+      "pubdate": "2023 Aug",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "36889439",
+      "title": "Effect of panniculus elevation device on postoperative pain after cesarean delivery: a randomized controlled trial.",
+      "journal": "American journal of obstetrics & gynecology MFM",
+      "pubdate": "2023 May",
+      "pubtypes": [
+        "Randomized Controlled Trial",
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't",
+        "Research Support, N.I.H., Extramural"
+      ]
+    },
+    {
+      "pmid": "36269982",
+      "title": "Opioid Use Disorder in Pregnant Patients.",
+      "journal": "Anesthesia and analgesia",
+      "pubdate": "2022 Nov 1",
+      "pubtypes": [
+        "Review",
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "36135926",
+      "title": "A Systematic Scoping Review of Peridelivery Pain Management for Pregnant People With Opioid Use Disorder: From the Society for Obstetric Anesthesia and Perinatology and Society for Maternal Fetal Medicine.",
+      "journal": "Anesthesia and analgesia",
+      "pubdate": "2022 Nov 1",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't",
+        "Research Support, N.I.H., Extramural",
+        "Scoping Review"
+      ]
+    },
+    {
+      "pmid": "33823145",
+      "title": "Nurses' Approaches to Pain Management for Women With Opioid Use Disorder in the Perinatal Period.",
+      "journal": "Journal of obstetric, gynecologic, and neonatal nursing : JOGNN",
+      "pubdate": "2021 Jul",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ]
+    },
+    {
+      "pmid": "30078349",
+      "title": "Antenatal interventions based upon fetal surveillance of the daily opioid-exposed fetus: a descriptive analysis.",
+      "journal": "The journal of maternal-fetal & neonatal medicine : the official journal of the European Association of Perinatal Medicine, the Federation of Asia and Oceania Perinatal Societies, the International Society of Perinatal Obstetricians",
+      "pubdate": "2020 Mar",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "29601303",
+      "title": "The opioid epidemic and pregnancy: implications for anesthetic care.",
+      "journal": "Current opinion in anaesthesiology",
+      "pubdate": "2018 Jun",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "27445597",
+      "title": "Misuse of Prescription Opioid Medication among Women: A Scoping Review.",
+      "journal": "Pain research & management",
+      "pubdate": "2016",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't",
+        "Scoping Review"
+      ]
+    },
+    {
+      "pmid": "22902085",
+      "title": "Evaluation and management of opioid dependence in pregnancy.",
+      "journal": "Psychosomatics",
+      "pubdate": "2012 Sep-Oct",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "42755274",
+      "title": "Strategies for the Care of Mothers With Substance Use Disorder.",
+      "journal": "The Permanente journal",
+      "pubdate": "2026 Sep 18",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "40882348",
+      "title": "Post-cesarean opioid consumption in patients on maintenance medication for opioid use disorder undergoing cesarean delivery with neuraxial anesthesia: a single-center retrospective propensity-matched cohort study (2016-2020).",
+      "journal": "International journal of obstetric anesthesia",
+      "pubdate": "2025 Nov",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "40723109",
+      "title": "Mothers with Concurrent Opioid and Cocaine Use and Neonatal Opioid Withdrawal Syndrome.",
+      "journal": "Children (Basel, Switzerland)",
+      "pubdate": "2025 Jul 11",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "38476879",
+      "title": "Multimodal Acute Pain Management in the Parturient with Opioid Use Disorder: A Review.",
+      "journal": "Journal of pain research",
+      "pubdate": "2024",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "37977720",
+      "title": "Guideline No. 443a: Opioid Use Throughout Women's Lifespan: Fertility, Contraception, Chronic Pain, and Menopause.",
+      "journal": "Journal of obstetrics and gynaecology Canada : JOGC = Journal d'obstetrique et gynecologie du Canada : JOGC",
+      "pubdate": "2023 Nov",
+      "pubtypes": [
+        "Practice Guideline",
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "36662775",
+      "title": "Obstetric pain management for pregnant women with opioid use disorder: A qualitative and quantitative comparison of patient and provider perspectives (QUEST study).",
+      "journal": "Addiction (Abingdon, England)",
+      "pubdate": "2023 Jun",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, N.I.H., Extramural",
+        "Research Support, Non-U.S. Gov't"
+      ]
+    },
+    {
+      "pmid": "35886733",
+      "title": "The Identification of Subphenotypes and Associations with Health Outcomes in Patients with Opioid-Related Emergency Department Encounters Using Latent Class Analysis.",
+      "journal": "International journal of environmental research and public health",
+      "pubdate": "2022 Jul 21",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "35149613",
+      "title": "Postoperative Cesarean Pain Management and Opioid Use Disorder: Anticipate the Need for Higher Opioid Doses and Communicate Expectations With Patients and the Obstetric Team.",
+      "journal": "Journal of addiction medicine",
+      "pubdate": "2022 Sep-Oct 01",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "33935169",
+      "title": "Peripartum management for women with opioid dependence.",
+      "journal": "Current opinion in anaesthesiology",
+      "pubdate": "2021 Jun 1",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "33485023",
+      "title": "Continuous local bupivacaine wound infusion reduces oral opioid use for acute postoperative pain control following myelomeningocele repair.",
+      "journal": "American journal of obstetrics & gynecology MFM",
+      "pubdate": "2021 Mar",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "32682328",
+      "title": "The Effects of Antepartum Depressive Symptoms on Postcesarean Opioid Consumption.",
+      "journal": "American journal of perinatology",
+      "pubdate": "2022 Jan",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "30791974",
+      "title": "Anesthesia considerations and post-operative pain management in pregnant women with chronic opioid use.",
+      "journal": "Seminars in perinatology",
+      "pubdate": "2019 Apr",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "29623667",
+      "title": "A Review of the Opioid Epidemic: What Do We Do About It?",
+      "journal": "Pain and therapy",
+      "pubdate": "2018 Jun",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "28406856",
+      "title": "Treating Women Who Are Pregnant and Parenting for Opioid Use Disorder and the Concurrent Care of Their Infants and Children: Literature Review to Support National Guidance.",
+      "journal": "Journal of addiction medicine",
+      "pubdate": "2017 May/Jun",
+      "pubtypes": [
+        "Journal Article",
+        "Review",
+        "Research Support, U.S. Gov't, P.H.S."
+      ]
+    },
+    {
+      "pmid": "28018795",
+      "title": "Nephrotoxicity of methadone: a systematic review.",
+      "journal": "SpringerPlus",
+      "pubdate": "2016",
+      "pubtypes": [
+        "Review",
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "22525931",
+      "title": "ACOG Committee Opinion No. 524: Opioid abuse, dependence, and addiction in pregnancy.",
+      "journal": "Obstetrics and gynecology",
+      "pubdate": "2012 May",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "42025510",
+      "title": "Opioid use disorder and medication for opioid use disorder among pregnant women with commercial insurance in the United States, 2016-2020.",
+      "journal": "Drug and alcohol dependence",
+      "pubdate": "2026 Jun 1",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "39504271",
+      "title": "Consensus Statement on Pain Management for Pregnant Patients with Opioid-Use Disorder from the Society for Obstetric Anesthesia and Perinatology, Society for Maternal-Fetal Medicine, and American Society of Regional Anesthesia and Pain Medicine.",
+      "journal": "Anesthesia and analgesia",
+      "pubdate": "2025 Jun 1",
+      "pubtypes": [
+        "Journal Article",
+        "Practice Guideline",
+        "Consensus Statement",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "38789329",
+      "title": "Multiple marginalized identities: A qualitative exploration of intersectional perinatal experiences of birthing people of color with substance use disorder in Massachusetts.",
+      "journal": "Journal of substance use and addiction treatment",
+      "pubdate": "2024 Aug",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ]
+    },
+    {
+      "pmid": "35342965",
+      "title": "Contribution of pharmaceutical drugs of dependence to the incidence of neonatal abstinence syndrome in Western Australia between 2003 and 2018.",
+      "journal": "Pharmacotherapy",
+      "pubdate": "2022 May",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ]
+    },
+    {
+      "pmid": "34403125",
+      "title": "A Clinical Trial of a Program for Pain Management and Opioid Reduction During Pregnancy.",
+      "journal": "Reproductive sciences (Thousand Oaks, Calif.)",
+      "pubdate": "2022 Feb",
+      "pubtypes": [
+        "Clinical Trial",
+        "Journal Article",
+        "Research Support, N.I.H., Extramural"
+      ]
+    },
+    {
+      "pmid": "33538695",
+      "title": "Identifying Self-Management Support Needs for Pregnant Women With Opioid Misuse in Online Health Communities: Mixed Methods Analysis of Web Posts.",
+      "journal": "Journal of medical Internet research",
+      "pubdate": "2021 Feb 4",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, U.S. Gov't, Non-P.H.S."
+      ]
+    },
+    {
+      "pmid": "31005380",
+      "title": "Post-cesarean delivery pain. Management of the opioid-dependent patient before, during and after cesarean delivery.",
+      "journal": "International journal of obstetric anesthesia",
+      "pubdate": "2019 Aug",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "24745324",
+      "title": "Putting a face on the prescription opioid epidemic: a case report.",
+      "journal": "General hospital psychiatry",
+      "pubdate": "2014 Jul-Aug",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "24130301",
+      "title": "Integrated care for pregnant women on methadone maintenance treatment: Canadian primary care cohort study.",
+      "journal": "Canadian family physician Medecin de famille canadien",
+      "pubdate": "2013 Oct",
+      "pubtypes": [
+        "Evaluation Study",
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ]
+    },
+    {
+      "pmid": "40891214",
+      "title": "Buvidal/Brixadi - a long-acting injectable buprenorphine formulation for the treatment of opioid dependence.",
+      "journal": "Pain management",
+      "pubdate": "2025 Dec",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "40074574",
+      "title": "Consensus statement on pain management for pregnant patients with opioid use disorder from the Society for Obstetric Anesthesia and Perinatology, Society for Maternal-Fetal Medicine, and American Society of Regional Anesthesia and Pain Medicine.",
+      "journal": "American journal of obstetrics and gynecology",
+      "pubdate": "2025 Oct",
+      "pubtypes": [
+        "Consensus Statement",
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "37096126",
+      "title": "Pain Management After Cesarean Delivery Among Women with Opioid Use Disorder: Results from a Retrospective Pregnancy Cohort in a Rural Region of the Midwest.",
+      "journal": "Women's health reports (New Rochelle, N.Y.)",
+      "pubdate": "2023",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "36946682",
+      "title": "A review of the literature: How does prenatal opioid exposure impact placental health and fetal brain development?",
+      "journal": "Developmental psychobiology",
+      "pubdate": "2023 Apr",
+      "pubtypes": [
+        "Journal Article",
+        "Review",
+        "Research Support, N.I.H., Extramural"
+      ]
+    },
+    {
+      "pmid": "36069812",
+      "title": "Opioid Agonist to Buprenorphine Cross-titration During Pregnancy: A Case Report.",
+      "journal": "Journal of addiction medicine",
+      "pubdate": "2023 Mar-Apr 01",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "36045026",
+      "title": "Epidemiology of opioid use in pregnancy.",
+      "journal": "Best practice & research. Clinical obstetrics & gynaecology",
+      "pubdate": "2022 Dec",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "35843298",
+      "title": "A review of the safety of buprenorphine in special populations.",
+      "journal": "The American journal of the medical sciences",
+      "pubdate": "2022 Dec",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ]
+    },
+    {
+      "pmid": "35754980",
+      "title": "Peripartum and Postpartum Analgesia and Pain in Women Prescribed Buprenorphine for Opioid Use Disorder Who Deliver by Cesarean Section.",
+      "journal": "Substance abuse : research and treatment",
+      "pubdate": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "35622361",
+      "title": "Categorization of Opioid Use Among Pregnant People and Association With Overdose or Death.",
+      "journal": "JAMA network open",
+      "pubdate": "2022 May 2",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ]
+    },
+    {
+      "pmid": "31415268",
+      "title": "Substance Abuse Disorder: Prenatal, Intrapartum and Postpartum Care.",
+      "journal": "MCN. The American journal of maternal child nursing",
+      "pubdate": "2019 Sep/Oct",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    },
+    {
+      "pmid": "30127614",
+      "title": "Empirical Studies Addressing the Opioid Epidemic: An Urgent Call for Research.",
+      "journal": "Substance abuse : research and treatment",
+      "pubdate": "2018",
+      "pubtypes": [
+        "Journal Article"
+      ]
+    }
+  ]
+}
