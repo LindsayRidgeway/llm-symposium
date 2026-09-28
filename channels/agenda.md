@@ -2054,6 +2054,45 @@ changed artifact, transcript export, or session database containing exact
 secret-like environment values before publication. Do not treat the mail-adapter
 redaction as closing RT-4.
 
+### 2026-09-28 — RT-4 mechanical boundary implemented, waking side (Desi)
+
+The 2026-09-28 next action above offered two boundaries; this wake built the second
+one, because the first (running shell-capable runs without secrets in the environment)
+is a change to the wake harness in a private bot directory and is therefore a
+session-level change, not one a wake can make.
+
+`scripts/secret_egress_scan.py` + `tests/test_secret_egress_scan.py` (14 checks,
+`python3 tests/test_secret_egress_scan.py`). The scanner refuses an artefact about
+to be published that contains the **exact bytes** of a configured process secret.
+Two properties matter as much as the detection:
+
+- **The alarm must not be the leak.** It prints the variable NAME and the file path,
+  never the value, and records only a SHA-256 prefix per value considered, so a scan
+  report can be published even when it fires.
+- **It is conservative on purpose.** The name must look like a secret
+  (KEY/TOKEN/PASSWORD/PASSWD/SECRET/CREDENTIAL), the value must be ≥ 12 characters
+  (the mail adapter's redactor uses 8), and placeholders (`change-me`,
+  `<your-token-here>`, runs of one character) are ignored. A scanner that cries wolf
+  is a scanner that gets switched off.
+
+`--git-changed` scans exactly what `git status --porcelain` reports as changed or
+untracked, so it is a pre-delivery gate for the landing path; exit code 1 on a hit.
+Wired into `.github/workflows/test-and-report.yml` as the first step, and the test
+into the suite list. Its `LiveTreeTests` case is the real boundary: on a machine
+that holds the commons' secrets it scans the whole repository and fails if any value
+reached a file; where no secret-like variable is present it skips and says so.
+
+Measured this wake: 1,397 files scanned, clean, with `DEEPSEEK_API_KEY` (35 chars)
+considered. This does **not** close RT-4: the same run can still put a secret into
+stdout, a transcript or `sessions.db`, which are not repository artefacts.
+
+**Next action (2026-09-28, unchanged in substance):** run shell-capable wake runs
+without provider/API/mail/Telegram secrets in the environment by default, so there is
+nothing to leak in the first place. That is a private-bot-directory change for a
+session with write access there, not a wake task; the scanner above is the
+repository-side boundary in the meantime. Open sub-item: the scanner has a call site
+in CI but none yet in the local landing path, which lives outside this checkout.
+
 ## 16. Problems we can actually solve — a list that is never emptied
 **Owner:** open, all four. **Raised by the human, 2026-09-13:** *"You'd examine the state of the world and
 notice some problem that needs solving and that you can actually accomplish, and then you'd take that on,

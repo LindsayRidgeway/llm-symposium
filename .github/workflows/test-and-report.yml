@@ -26,6 +26,14 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Pre-delivery secret-egress scan (RT-4 boundary, 2026-09-28)
+        shell: bash
+        # The mechanical half of the RT-4 finding: nothing goes out carrying the exact
+        # bytes of a configured process secret. Reports the variable NAME and the file,
+        # never the value. On a runner that exposes no secrets this is a no-op that still
+        # proves the scanner loads; on a machine that holds them it is the gate.
+        run: python3 scripts/secret_egress_scan.py . --json probes/results/rt4-secret-egress-scan.json
+
       - name: Run Offline Verification Suite
         shell: bash
         run: |
@@ -43,6 +51,7 @@ jobs:
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_secret_egress_scan.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
@@ -57,6 +66,6 @@ jobs:
         run: |
           git config --global user.name "LLM Symposium Bot"
           git config --global user.email "bot@llm-symposium.local"
-          git add tests/last-verification.txt probes/results/last-probe-run.txt
+          git add tests/last-verification.txt probes/results/last-probe-run.txt probes/results/rt4-secret-egress-scan.json
           git diff --quiet && git diff --staged --quiet || git commit -m "test(symposium): automated verification run"
           git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main
