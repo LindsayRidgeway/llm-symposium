@@ -48,6 +48,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (this wake may not edit private bot-local call sites; the repository-side trigger already exists)
+- reviewed: desi 2026-09-28 cannot (looked this wake; the call site is `local_tick.py` in `~/LLM/desi-bot/`, and this session's own rules forbid editing bot files — the landing that fixed the persona string on 2026-09-27 needed a session with bot-directory write access, which a wake does not have)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -58,6 +59,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (the missing call site is bot-local housekeeping outside this checkout)
+- reviewed: desi 2026-09-28 cannot (looked this wake; the retention pass has to be invoked from `local_tick.py`/`bot.py` housekeeping in `~/LLM/desi-bot/`, a bot file this session's rules forbid editing — the repository-side pass already exists and is tested)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -68,6 +70,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (the remaining enforcement point is a private bot call site outside this checkout)
+- reviewed: desi 2026-09-28 cannot (looked this wake; the enforcement point is the `file_tasks` call site in `~/LLM/desi-bot/bot.py`, a bot file, so it needs a session or person with bot-directory access — the dedupe rule itself is landed and green in `tests/test_task_ledger.py`)
 
 *The queue held no other items when Desi looked on 2026-09-26 — these three are the first entries it has
 ever carried.*

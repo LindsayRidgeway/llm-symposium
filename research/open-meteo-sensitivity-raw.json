@@ -1,0 +1,488 @@
+{
+ "measured_utc": "2026-09-28",
+ "geocoding": [
+  {
+   "query": "Springfield",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Springfield",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Missouri",
+     "pop": 170188,
+     "lat": 37.21533,
+     "lon": -93.29824
+    },
+    {
+     "name": "Springfield",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Illinois",
+     "pop": 114394,
+     "lat": 39.80172,
+     "lon": -89.64371
+    },
+    {
+     "name": "Springfield",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Massachusetts",
+     "pop": 154341,
+     "lat": 42.10148,
+     "lon": -72.58981
+    }
+   ]
+  },
+  {
+   "query": "Cambridge",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Cambridge",
+     "country": "United Kingdom",
+     "cc": "GB",
+     "admin1": "England",
+     "pop": 145674,
+     "lat": 52.2,
+     "lon": 0.11667
+    },
+    {
+     "name": "Cambridge",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Massachusetts",
+     "pop": 110402,
+     "lat": 42.3751,
+     "lon": -71.10561
+    },
+    {
+     "name": "Cambridge",
+     "country": "Canada",
+     "cc": "CA",
+     "admin1": "Ontario",
+     "pop": 129920,
+     "lat": 43.3601,
+     "lon": -80.31269
+    }
+   ]
+  },
+  {
+   "query": "Burlington",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Burlington",
+     "country": "Canada",
+     "cc": "CA",
+     "admin1": "Ontario",
+     "pop": 186948,
+     "lat": 43.38621,
+     "lon": -79.83713
+    },
+    {
+     "name": "Burlington",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Vermont",
+     "pop": 42452,
+     "lat": 44.47588,
+     "lon": -73.21207
+    },
+    {
+     "name": "Burlington",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Iowa",
+     "pop": 25410,
+     "lat": 40.80754,
+     "lon": -91.11292
+    }
+   ]
+  },
+  {
+   "query": "Portland",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Portland",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Oregon",
+     "pop": 652503,
+     "lat": 45.52345,
+     "lon": -122.67621
+    },
+    {
+     "name": "Portland",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Maine",
+     "pop": 66881,
+     "lat": 43.65737,
+     "lon": -70.2589
+    },
+    {
+     "name": "Portland",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Indiana",
+     "pop": 6186,
+     "lat": 40.43449,
+     "lon": -84.97775
+    }
+   ]
+  },
+  {
+   "query": "Salem",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Salem",
+     "country": "India",
+     "cc": "IN",
+     "admin1": "Tamil Nadu",
+     "pop": 917414,
+     "lat": 11.65376,
+     "lon": 78.15538
+    },
+    {
+     "name": "Salem",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Oregon",
+     "pop": 175535,
+     "lat": 44.9429,
+     "lon": -123.0351
+    },
+    {
+     "name": "Salem",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Virginia",
+     "pop": 25432,
+     "lat": 37.29347,
+     "lon": -80.05476
+    }
+   ]
+  },
+  {
+   "query": "Richmond",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Richmond",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Virginia",
+     "pop": 226610,
+     "lat": 37.55376,
+     "lon": -77.46026
+    },
+    {
+     "name": "Richmond",
+     "country": "Canada",
+     "cc": "CA",
+     "admin1": "British Columbia",
+     "pop": 209937,
+     "lat": 49.17003,
+     "lon": -123.13683
+    },
+    {
+     "name": "Richmond",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "California",
+     "pop": 109708,
+     "lat": 37.93576,
+     "lon": -122.34775
+    }
+   ]
+  },
+  {
+   "query": "Madison",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Madison",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Wisconsin",
+     "pop": 280305,
+     "lat": 43.07305,
+     "lon": -89.40123
+    },
+    {
+     "name": "Orange",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Texas",
+     "pop": 19347,
+     "lat": 30.09299,
+     "lon": -93.73655
+    },
+    {
+     "name": "Madison",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Indiana",
+     "pop": 12040,
+     "lat": 38.73589,
+     "lon": -85.37996
+    }
+   ]
+  },
+  {
+   "query": "Kingston",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Kingston",
+     "country": "Jamaica",
+     "cc": "JM",
+     "admin1": "Kingston",
+     "pop": 937700,
+     "lat": 17.99702,
+     "lon": -76.79358
+    },
+    {
+     "name": "Kingston",
+     "country": "Canada",
+     "cc": "CA",
+     "admin1": "Ontario",
+     "pop": 132485,
+     "lat": 44.22976,
+     "lon": -76.48098
+    },
+    {
+     "name": "Kingston",
+     "country": null,
+     "cc": "NF",
+     "admin1": null,
+     "pop": 880,
+     "lat": -29.05459,
+     "lon": 167.96628
+    }
+   ]
+  },
+  {
+   "query": "Victoria",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Vit\u00f3ria",
+     "country": "Brazil",
+     "cc": "BR",
+     "admin1": "Esp\u00edrito Santo",
+     "pop": 312656,
+     "lat": -20.31944,
+     "lon": -40.33778
+    },
+    {
+     "name": "Victoria",
+     "country": "Canada",
+     "cc": "CA",
+     "admin1": "British Columbia",
+     "pop": 289625,
+     "lat": 48.4359,
+     "lon": -123.35155
+    },
+    {
+     "name": "Victoria",
+     "country": null,
+     "cc": "HK",
+     "admin1": "Central and Western",
+     "pop": 956800,
+     "lat": 22.2875,
+     "lon": 114.14417
+    }
+   ]
+  },
+  {
+   "query": "Newcastle",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Newcastle",
+     "country": "Australia",
+     "cc": "AU",
+     "admin1": "New South Wales",
+     "pop": 508437,
+     "lat": -32.92953,
+     "lon": 151.7801
+    },
+    {
+     "name": "Newcastle",
+     "country": "South Africa",
+     "cc": "ZA",
+     "admin1": "KwaZulu-Natal",
+     "pop": 404838,
+     "lat": -27.75796,
+     "lon": 29.9318
+    },
+    {
+     "name": "New Castle",
+     "country": "United States",
+     "cc": "US",
+     "admin1": "Pennsylvania",
+     "pop": 22375,
+     "lat": 41.00367,
+     "lon": -80.34701
+    }
+   ]
+  },
+  {
+   "query": "Santiago",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Santiago",
+     "country": "Chile",
+     "cc": "CL",
+     "admin1": "Santiago Metropolitan",
+     "pop": 4837295,
+     "lat": -33.45694,
+     "lon": -70.64827
+    },
+    {
+     "name": "Santiago de Cuba",
+     "country": "Cuba",
+     "cc": "CU",
+     "admin1": "Santiago de Cuba Province",
+     "pop": 555865,
+     "lat": 20.02287,
+     "lon": -75.82171
+    },
+    {
+     "name": "Santiago de Compostela",
+     "country": "Spain",
+     "cc": "ES",
+     "admin1": "Galicia",
+     "pop": 99536,
+     "lat": 42.88052,
+     "lon": -8.54569
+    }
+   ]
+  },
+  {
+   "query": "Valencia",
+   "n_results": 3,
+   "hits": [
+    {
+     "name": "Valencia",
+     "country": "Spain",
+     "cc": "ES",
+     "admin1": "Valencia",
+     "pop": 824340,
+     "lat": 39.47391,
+     "lon": -0.37966
+    },
+    {
+     "name": "Valencia",
+     "country": "Venezuela",
+     "cc": "VE",
+     "admin1": "Carabobo",
+     "pop": 1619470,
+     "lat": 10.16153,
+     "lon": -68.00044
+    },
+    {
+     "name": "NIA Valencia",
+     "country": "Philippines",
+     "cc": "PH",
+     "admin1": "Northern Mindanao",
+     "pop": 223620,
+     "lat": 7.90639,
+     "lon": 125.09417
+    }
+   ]
+  }
+ ],
+ "archive": [
+  {
+   "city": "Boston",
+   "lat": 42.3601,
+   "lon": -71.0589,
+   "models": {
+    "era5": {
+     "n_days": 366,
+     "annual_mean_c": 11.54,
+     "y1940_nonnull": 3
+    },
+    "era5_land": {
+     "n_days": 366,
+     "annual_mean_c": 11.29,
+     "y1940_nonnull": 0
+    }
+   }
+  },
+  {
+   "city": "Phoenix",
+   "lat": 33.4484,
+   "lon": -112.074,
+   "models": {
+    "era5": {
+     "n_days": 366,
+     "annual_mean_c": 24.49,
+     "y1940_nonnull": 3
+    },
+    "era5_land": {
+     "n_days": 366,
+     "annual_mean_c": 24.19,
+     "y1940_nonnull": 0
+    }
+   }
+  },
+  {
+   "city": "London",
+   "lat": 51.5072,
+   "lon": -0.1276,
+   "models": {
+    "era5": {
+     "n_days": 366,
+     "annual_mean_c": 11.92,
+     "y1940_nonnull": 3
+    },
+    "era5_land": {
+     "n_days": 366,
+     "annual_mean_c": 11.64,
+     "y1940_nonnull": 0
+    }
+   }
+  },
+  {
+   "city": "Nairobi",
+   "lat": -1.2921,
+   "lon": 36.8219,
+   "models": {
+    "era5": {
+     "n_days": 366,
+     "annual_mean_c": 19.93,
+     "y1940_nonnull": 3
+    },
+    "era5_land": {
+     "n_days": 366,
+     "annual_mean_c": 19.83,
+     "y1940_nonnull": 0
+    }
+   }
+  },
+  {
+   "city": "Reykjavik",
+   "lat": 64.1466,
+   "lon": -21.9426,
+   "models": {
+    "era5": {
+     "n_days": 366,
+     "annual_mean_c": 4.7,
+     "y1940_nonnull": 3
+    },
+    "era5_land": {
+     "n_days": 366,
+     "annual_mean_c": 3.69,
+     "y1940_nonnull": 0
+    }
+   }
+  }
+ ]
+}

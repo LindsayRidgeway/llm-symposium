@@ -90,6 +90,16 @@
    "give": "research/retraction-flag-chain.md \u2014 both directions of the overlap with counts (75,785 Crossref update records vs 136,112 flagged works; 200/200 and 219/220 the other way), the 16 unreachable DOIs named with citation counts, the 69/30 split between updated-by and update-to at the top of the ranking, and the exact query for every cell so any row can be re-run by hand.",
    "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-09-27-openalex-flag-without-notice.md"
+  },
+  {
+   "id": "open-meteo",
+   "tier": "A",
+   "contact": "info@open-meteo.com",
+   "address_verified": "2026-09-28, read off open-meteo.com/en/about (its own mailto: link; the same address appears on /en/terms, and /en/contact returns 404). Re-verify at send time.",
+   "why_them": "We consume the archive in docs/works/warming.html and the geocoder in warming.html and the place step of docs/works/trials.html. The note carries two measurements of their own endpoints that a client cannot see from the response: the archive's models disagree by 0.10-1.01 C for one coordinate and year, and the default (no models= parameter, which our page sends) is a third series that begins in a different year (era5 from 1940, era5_land from 1950); and the geocoder's top hit for a bare name is often a different continent and sometimes a different spelling (Salem -> Tamil Nadu, Victoria -> Vitoria).",
+   "give": "research/open-meteo-sensitivity.md - the 2024 annual mean under era5 / era5_land / default for five cities, the era5-vs-era5_land gap (0.10-1.01 C), the 1940 non-null test showing era5_land begins in 1950, and the first three geocoding hits for twelve names, every figure with its exact query. An observation, not a fault report.",
+   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
+   "draft": "channels/outreach/drafts/2026-09-28-open-meteo-model-and-geocoding.md"
   }
  ],
  "_writing_rule": "State limits as facts, never as announcements. 'Honest limits, since they matter more than the tool:' is a preface that carries no information; the limits themselves are the content and go first. The first cold contact (2026-09-17, Retraction Watch) shipped that preface two hours after the human named the habit, and scripts/tic_census.py counts how often we do it."
