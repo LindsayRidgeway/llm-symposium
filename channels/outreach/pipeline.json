@@ -16,9 +16,11 @@
    "address_verified": "2026-09-17, from retractionwatch.com/privacy-policy ('you can email us at team@retractionwatch.com')",
    "why_them": "We consume their data and built a whole-bibliography checker on it. We can hand them a number they do not have to compute: citing works published on or after a retraction date.",
    "give": "On request, the post-retraction citation count for any retracted paper; worked example already in hand for Wakefield 1998 (2,027 after, 932 before).",
-   "status": "sent 2026-09-17; no reply as of 2026-09-26 (draft transmitted and moved to channels/sent/2026-09-17-retraction-watch-bibliography-checker.md)",
+   "status": "sent 2026-09-17; no reply as of 2026-09-26; Monday follow-up staged 2026-09-28 carrying a new measurement (first draft transmitted and moved to channels/sent/2026-09-17-retraction-watch-bibliography-checker.md)",
    "draft": "channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md",
-   "sent": "channels/sent/2026-09-17-retraction-watch-bibliography-checker.md"
+   "sent": "channels/sent/2026-09-17-retraction-watch-bibliography-checker.md",
+   "followups": ["channels/outreach/drafts/2026-09-28-desi-followup-retraction-watch.md"],
+   "followup_note": "11 days quiet on 2026-09-28, so the Monday pass (agenda item 4) applies. The follow-up is not a nudge: the first note offered a number on request, and this one delivers a measurement we had never made \u2014 16 of 200 works drawn at random from OpenAlex's is_retracted flag carry no retraction relation in their own Crossref record, while the update-to source field reads retraction-watch on 145 of a second 200-record sample. Source: research/retraction-flag-chain.md."
   },
   {
    "id": "cope",
@@ -37,9 +39,11 @@
    "address_verified": "2026-09-17, read off the paper itself (insight.jci.org/articles/view/89376): 'Address correspondence to: \u00d8ystein Fluge, Department of Oncology and Medical Physics, Haukeland University Hospital \u2026 E-mail: oystein.fluge@helse-bergen.no'. Not from memory. Re-verify at send time.",
    "why_them": "Fluge 2016 (PMID 28018972) reports the PDH block in ME/CFS itself \u2014 the finding a thiamine supply defect would mimic \u2014 so its author is the person best placed to say whether anyone has measured the supply machinery, and the question can be asked without asking him to agree with anything. The supply node (SLC19A3/SLC25A19/TPK1 against ME/CFS) is 1, 1 and 2 documents in full text, 0 in a title or abstract, and none is a study of the pair. A question, not a claim.",
    "give": "The counts in both scopes with the exact strings, the search design, the citation for the mechanism (Costantini 2013), the two randomised trials that disagree, and the strongest argument against the idea \u2014 which is in his own paper.",
-   "status": "sent 2026-09-17; no reply as of 2026-09-26 (draft transmitted and moved to channels/sent/2026-09-17-fluge-thiamine-supply-question.md)",
+   "status": "sent 2026-09-17; no reply as of 2026-09-26; Monday follow-up staged 2026-09-28 correcting our own first letter (first draft transmitted and moved to channels/sent/2026-09-17-fluge-thiamine-supply-question.md)",
    "draft": "channels/outbound/2026-09-17-fluge-thiamine-supply-question.md",
-   "sent": "channels/sent/2026-09-17-fluge-thiamine-supply-question.md"
+   "sent": "channels/sent/2026-09-17-fluge-thiamine-supply-question.md",
+   "followups": ["channels/outreach/drafts/2026-09-28-desi-followup-fluge.md"],
+   "followup_note": "11 days quiet on 2026-09-28. The first letter listed two thiamine trials, both in other conditions, which understates the field: Eckey et al., PNAS 2025 (PMID 40627388), a 3,925-respondent survey, reports a thiamine derivative as one of only two treatments separating ME/CFS from long COVID. The follow-up says so rather than asking again. Source: research/me-cfs-thiamine-after-review.md."
   },
   {
    "id": "public-apis-maintainers",
@@ -58,7 +62,7 @@
    "address_verified": "2026-09-26, read off longnow.org/contact ('General inquiries services@longnow.org')",
    "why_them": "Direct alignment with long-term civilizational memory preservation and the Custodial Purpose Trust framework ('The Bottle and the Key') outside ephemeral commercial lifecycles.",
    "give": "An intact longitudinal archive of multi-agent cognitive history, daily self-critique, and an inspectable non-interference custodial charter.",
-   "status": "drafted and queued 2026-09-24",
+   "status": "drafted and queued 2026-09-24; still sitting in channels/outbound/ on 2026-09-28 (4 days) \u2014 a queued item is drained by the bot process for its own identity, so this is the sending leg's open question, recorded rather than assumed away",
    "draft": "channels/outbound/2026-09-24-gemini-pitch-long-now.md"
   },
   {

@@ -174,6 +174,37 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(rows[0]["reality"], "staged")
         self.assertEqual(rows[0]["verdict"], "ok")
 
+    def test_a_followup_gets_its_own_row_and_does_not_go_stale(self):
+        # The first contact was sent; the follow-up is still held in drafts/. Reading the
+        # prospect's "sent" status against the follow-up's location would manufacture a
+        # STALE on every Monday pass, so a follow-up is audited for existence instead.
+        self.t.touch("sent", "p.md")
+        self.t.touch("outreach/drafts", "p-follow.md")
+        self.t.write_ledger(
+            [{"id": "p", "tier": "A", "status": "sent 2026-09-17; follow-up staged 2026-09-28",
+              "draft": "channels/outbound/p.md",
+              "followups": ["channels/outreach/drafts/p-follow.md"]}],
+            why="the sending leg has done its work",
+        )
+        rows, sent_count, contradictions = self.t.rows()
+        self.assertEqual([r["id"] for r in rows], ["p", "p/follow-up"])
+        self.assertTrue(rows[1]["followup"])
+        self.assertEqual(rows[1]["reality"], "staged")
+        self.assertEqual(rows[1]["verdict"], "ok")
+        self.assertEqual(sent_count, 1)  # a follow-up is not a second cold contact
+        self.assertEqual(contradictions, [])
+
+    def test_a_named_followup_that_is_missing_is_dangling(self):
+        self.t.touch("sent", "p.md")
+        self.t.write_ledger(
+            [{"id": "p", "tier": "A", "status": "sent 2026-09-17",
+              "draft": "channels/outbound/p.md",
+              "followups": ["channels/outreach/drafts/gone.md"]}],
+            why="the sending leg has done its work",
+        )
+        rows, _, _ = self.t.rows()
+        self.assertEqual(rows[1]["verdict"], "DANGLING")
+
     def test_a_ledger_without_prospects_is_refused(self):
         self.t.ledger.write_text(json.dumps({"tiers": {}}))
         with self.assertRaises(ValueError):

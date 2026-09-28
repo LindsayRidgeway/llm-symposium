@@ -18,6 +18,13 @@ The file's location is the ground truth, and it is not a matter of opinion:
   * in `channels/sent/`     -> transmitted                  (reality: sent)
   * in neither              -> named but lost               (reality: dangling)
 
+A prospect may also carry a `followups` list: paths to later notes to the *same* person (the
+Monday pass, `agenda/04-outreach.md`). Each follow-up gets its own row, so a follow-up draft
+cannot be invisible drift the way the first contacts once were. Its verdict is existence only
+— `ok`, or `DANGLING` if the named file is in none of the three folders — because the
+prospect's `status` prose describes the *first* contact and must not be read against a
+follow-up's location.
+
 This is a report, not an actor. It changes nothing. With no arguments it prints the table
 and exits 0; with `--check` it still prints everything but exits 1 when any row drifts, so
 a workflow can use it as a gate.
@@ -105,9 +112,28 @@ def audit(ledger_path: Path = DEFAULT_LEDGER, repo_root: Path = REPO_ROOT):
             "reality": reality,
             "path": path,
             "verdict": verdict(reality, status),
+            "followup": False,
         })
+        # A follow-up is a second door to the same prospect. It is audited for existence, not
+        # for agreement with `status`: that prose is about the first contact, which was sent,
+        # and reading it against a follow-up still sitting in `drafts/` would manufacture a
+        # STALE on every Monday pass.
+        followups = list(p.get("followups") or [])
+        for n, f in enumerate(followups, start=1):
+            f_reality, f_path = classify(f, outbound, sent, repo_root)
+            label = "follow-up" if len(followups) == 1 else f"follow-up {n}"
+            rows.append({
+                "id": f"{p.get('id', '?')}/{label}",
+                "tier": p.get("tier", "?"),
+                "status": f"{label}: {f_reality}",
+                "draft": f,
+                "reality": f_reality,
+                "path": f_path,
+                "verdict": "DANGLING" if f_reality in ("dangling", "none") else "ok",
+                "followup": True,
+            })
 
-    sent_count = sum(1 for r in rows if r["reality"] == "sent")
+    sent_count = sum(1 for r in rows if r["reality"] == "sent" and not r["followup"])
     prose = json.dumps(ledger)
     contradictions = [ph for ph in NO_CONTACT_PHRASES if ph in prose and sent_count > 0]
     return rows, sent_count, contradictions
@@ -135,11 +161,14 @@ def format_report(rows, sent_count, contradictions, ledger_path: Path, commit: s
     stale = sum(1 for r in rows if r["verdict"] == "STALE")
     dangling = sum(1 for r in rows if r["verdict"] == "DANGLING")
     nodraft = sum(1 for r in rows if r["verdict"] == "NO-DRAFT")
-    staged = sum(1 for r in rows if r["reality"] == "staged")
+    n_prospects = sum(1 for r in rows if not r.get("followup"))
+    staged = sum(1 for r in rows if r["reality"] == "staged" and not r.get("followup"))
+    followup_staged = sum(1 for r in rows if r["reality"] == "staged" and r.get("followup"))
     lines += [
         "",
-        f"summary: {len(rows)} prospects; cold contacts in channels/sent/ = {sent_count}; "
-        f"staged = {staged}; stale = {stale}; dangling = {dangling}; "
+        f"summary: {n_prospects} prospects; cold contacts in channels/sent/ = {sent_count}; "
+        f"staged = {staged}; follow-up drafts staged = {followup_staged}; "
+        f"stale = {stale}; dangling = {dangling}; "
         f"claims-a-draft-with-none = {nodraft}",
     ]
     for ph in contradictions:
