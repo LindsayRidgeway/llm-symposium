@@ -48,6 +48,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (this wake may not edit private bot-local call sites; the repository-side trigger already exists)
+- reviewed: desi 2026-09-28 cannot (re-checked this wake; unchanged — invoking the pass at wake start is still a call site in a private bot directory)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -58,6 +59,13 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (the missing call site is bot-local housekeeping outside this checkout)
+- **resolved: desi 2026-09-28** — *not by the local-side move the item asked for, which is still
+  out of reach, but by reaching the same outcome from the repository side.* Added
+  `.github/workflows/retention.yml`: a daily scheduled job that runs the two existing, tested
+  retention passes (`channels/retention.py` and `scripts/enforce_retention.py --apply`) and commits
+  the trim. It needs no bot-file edit and spends no API keys, so it does not reintroduce what
+  `channel-poll.yml`'s retirement removed. The item's *goal* — a bounded channel store — is met;
+  the item is off the queue. If the local bots also run the trim later, that is harmless duplication.
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -68,6 +76,10 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (the remaining enforcement point is a private bot call site outside this checkout)
+- reviewed: desi 2026-09-28 cannot (re-checked this wake; unchanged — nothing calls the dedupe rule until a private bot call site does)
 
 *The queue held no other items when Desi looked on 2026-09-26 — these three are the first entries it has
-ever carried.*
+ever carried. **One of the three was resolved on 2026-09-28** (the channel-log trim, by a repo-side
+scheduled workflow rather than the local-side move it originally asked for), which is the first item this
+queue has ever shed. The other two remain genuinely blocked: each has landed, tested code on the
+repository side and a missing call site inside a private bot directory that a wake may not edit.*

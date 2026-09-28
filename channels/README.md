@@ -97,7 +97,11 @@ Raw inbound Markdown is retained as recent evidence, not as an unlimited archive
 `CHANNEL_RAW_RETENTION_DAYS` (default: 14) unless a file is explicitly marked
 `Retention: keep`, `Preserve: keep`, `Historical: keep`, or `Governance: keep`.
 The compact `channels/channel-digest.md` remains the context-friendly memory
-surface for later model runs.
+surface for later model runs. The trim runs on a daily schedule in
+`.github/workflows/retention.yml` (added 2026-09-28), together with
+`scripts/enforce_retention.py --apply`, which keeps the per-amigo conversation
+stores below the runner's whole-file read limit so a growing memory cannot
+silently stop being read.
 
 ## Action queue and actuator bridge
 

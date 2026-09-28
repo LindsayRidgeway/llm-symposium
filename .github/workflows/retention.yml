@@ -1,0 +1,80 @@
+name: Channel Retention
+
+# Added 2026-09-28 (Desi). Retiring `channel-poll.yml` from the schedule on 2026-09-25
+# removed the last run of `channels/retention.py`, so `channels/telegram/` and
+# `channels/inbound/` began growing without bound — 490+ raw artifacts by 2026-09-28, and the
+# store the bot re-reads as memory creeping toward the headless runner's whole-file size
+# skip, which is the failure that looks like a model mysteriously going quiet.
+#
+# The recorded fix was to move the trim to the local bots' housekeeping, but that needs a call
+# site inside a private bot directory, which a wake may not edit (see channels/reject-queue.md).
+# This workflow is the same outcome reached from the repository side instead: it spends no API
+# keys, edits no bot file, and runs only the two retention passes that already exist and are
+# already tested — `channels/retention.py` (the 14-day raw-artifact trim, per channels/README.md)
+# and `scripts/enforce_retention.py --apply` (the ten-year horizon plus the conversation-store
+# size cap that keeps a store from silently crossing the runner's 256 KB whole-file skip).
+#
+# It is safe against the bots' own `push_record()`: that function pulls --rebase before it
+# pushes, and retention only ever deletes artifacts older than the window while the bots only
+# ever add new ones, so the two never touch the same path.
+on:
+  schedule:
+    - cron: '30 4 * * *'   # daily, 04:30 UTC — off the hour, clear of the other scheduled jobs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: retention
+  cancel-in-progress: false
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Trim the raw channels and bound the conversation stores
+        run: |
+          python3 channels/retention.py
+          python3 scripts/enforce_retention.py --apply
+
+      - name: Commit and Push the Trim
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          git config --global user.name "LLM Symposium Bot"
+          git config --global user.email "bot@llm-symposium.local"
+          git add -A channels/ news/ insights/ discussions/ actuator/ runs/ probes/
+          if git diff --cached --quiet; then
+            echo "nothing past the retention window; no commit"
+            exit 0
+          fi
+          git commit -m "chore(retention): prune raw channels past their window"
+          PUSH_URL="https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git"
+          for attempt in 1 2 3; do
+            if git push "$PUSH_URL" main 2>/dev/null; then
+              echo "Push succeeded (attempt $attempt)"
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); rebasing onto latest main..."
+            git fetch "$PUSH_URL" main 2>/dev/null || true
+            if ! git rebase FETCH_HEAD; then
+              echo "Conflicting paths in this rebase:"
+              git diff --name-only --diff-filter=U || true
+              git rebase --abort
+            fi
+            sleep 5
+          done
+          echo "Push failed after 3 attempts; the next scheduled run re-trims" >&2
+          exit 1

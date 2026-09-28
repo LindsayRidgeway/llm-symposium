@@ -14,9 +14,11 @@ on:
   # human can see it, and it was the only remaining scheduled job that spent his API keys.
   # Nothing is lost while the Mac sleeps: Telegram holds undelivered updates until the bot
   # polls again, and mail waits in the inbox.
-  # The one thing that genuinely stops with it is `channels/retention.py` (trimming the channel
-  # logs so the repo does not grow without bound) — tracked in to-do-lists/desi.md to move to
-  # the local side. Restore the cron only if a GitHub-side channel is wanted again.
+  # The one thing that genuinely stopped with it was `channels/retention.py` (trimming the
+  # channel logs so the repo does not grow without bound). That is now done by the dedicated
+  # `.github/workflows/retention.yml` (added 2026-09-28), which runs the same scripts without
+  # touching mail, Telegram or any API key — see channels/reject-queue.md. Restore this cron
+  # only if a GitHub-side channel (mail / Telegram polling) is wanted again.
   # schedule:
   #   - cron: '*/15 * * * *'
   workflow_dispatch:
