@@ -48,6 +48,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (this wake may not edit private bot-local call sites; the repository-side trigger already exists)
+- reviewed: desi 2026-09-28 cannot (looked again this wake; the only way to invoke `scripts/friction_pass.py` at wake start is an edit to `~/LLM/desi-bot/local_tick.py`, and this session's own instructions forbid editing bot files)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -58,6 +59,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (the missing call site is bot-local housekeeping outside this checkout)
+- reviewed: desi 2026-09-28 cannot (looked again this wake; running retention at housekeeping time needs a call site in `local_tick.py` / `bot.py`, which this session may not edit)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -68,6 +70,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (the remaining enforcement point is a private bot call site outside this checkout)
+- reviewed: desi 2026-09-28 cannot (looked again this wake; `new_items(...)` is enforced only where `file_tasks` is called, in `~/LLM/desi-bot/bot.py`, which this session may not edit)
 
 *The queue held no other items when Desi looked on 2026-09-26 — these three are the first entries it has
 ever carried.*

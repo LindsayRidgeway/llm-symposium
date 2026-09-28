@@ -1,0 +1,968 @@
+{
+  "query": "(acupuncture[tiab] OR electroacupuncture[tiab]) AND (chronic pain[tiab] OR somatoform[tiab] OR \"somatic symptom\"[tiab] OR fibromyalgia[tiab] OR \"low back pain\"[tiab] OR \"persistent pain\"[tiab]) AND (fMRI[tiab] OR \"functional magnetic resonance\"[tiab] OR neuroimaging[tiab] OR \"heart rate variability\"[tiab] OR autonomic[tiab] OR \"default mode\"[tiab])",
+  "retrieved_utc": "2026-09-28T04:04:43Z",
+  "count": 40,
+  "records": [
+    {
+      "pmid": "42309066",
+      "title": "A predictive corticospinal model for pain perception.",
+      "journal": "Cell reports. Medicine",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [
+        "Humans",
+        "Pain Perception",
+        "Magnetic Resonance Imaging",
+        "Male",
+        "Female",
+        "Pyramidal Tracts",
+        "Transcutaneous Electric Nerve Stimulation",
+        "Adult",
+        "Chronic Pain"
+      ],
+      "abstract": "Pain perception arises from integrated corticospinal circuits, yet most neuroimaging biomarkers are brain centric. We develop the Corticospinal Pain Intensity Pattern, a multivariate model trained and validated on 330 simultaneous corticospinal fMRI data. Across independent datasets, the model predicts pain intensity more accurately than cortical signatures and generalizes to electrical pain, while remaining insensitive to itch and observed pain. The model further tracks analgesia induced by transcutaneous electrical nerve stimulation in healthy participants. In a chronic pain cohort, corticospinal model expression derived from low-frequency spontaneous activity predicts baseline pain and longitudinal changes closely mirror treatment-induced pain relief. A corticospinal hidden Markov model reveals that dynamic transitions between pro- and anti-nociceptive states underpin static spectral abnormalities. Together, these findings establish a corticospinal biomarker that bridges experimental and clinical pain by linking task-evoked and spontaneous neural activity.",
+      "authors": [
+        "Lin XM",
+        "Zhang XS",
+        "Zhou H",
+        "Han XY",
+        "Wei ZX",
+        "Wager TD"
+      ]
+    },
+    {
+      "pmid": "42255938",
+      "title": "Functional brain alterations associated with acupuncture for chronic pain: a scoping review of fMRI studies.",
+      "journal": "Frontiers in neuroscience",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article",
+        "Systematic Review"
+      ],
+      "mesh": [],
+      "abstract": "Chronic pain (CP) is a public health challenge recognized as involving large-scale functional brain dysregulation. Acupuncture is widely used as a non-pharmacological intervention for CP, yet its central mechanisms remain incompletely understood. fMRI provides an approach for investigating acupuncture-related brain alterations in CP. Eight databases were searched from inception to March 27, 2025 for fMRI studies investigating acupuncture's central effects in CP. Eligible studies included randomized controlled trials and observational studies involving migraine, knee osteoarthritis, fibromyalgia, sciatica, chronic shoulder pain, chronic neck pain, cervical spondylosis, chronic low back pain, and lumbar disk herniation. Data on characteristics, acupuncture protocols, neuroimaging findings, and outcomes were extracted and narratively synthesized. Reporting quality of acupuncture interventions was assessed using STRICTA, risk of bias of randomized controlled trials using RoB 2, and methodological quality of observational studies using the Newcastle-Ottawa Scale. A total of 64 studies were included. CP was characterized by widespread functional brain abnormalities, mainly involving the default mode network, sensorimotor network, and pain- and emotion-related regions such as the anterior cingulate cortex, precuneus, insula, and thalamus. Across longitudinal and controlled analyses, acupuncture-related brain changes were most consistently reflected in altered functional connectivity, local neural synchrony, and regional spontaneous activity. Functional connectivity findings suggested a potentially ACC-centered circuit pattern, whereas regional homogeneity findings revealed bidirectional modulation across multiple brain regions. Comparative evidence further indicated that VA, SA, and EEA may engage partially overlapping but distinct neural processes. Reporting of core acupuncture protocol components was generally adequate, whereas methodological quality remained heterogeneous. Current fMRI evidence suggests that CP involves large-scale network-level functional imbalance and that acupuncture may be associated with modulation of key abnormal nodes and circuits related to pain perception, sensory processing, and emotional regulation. The available evidence supports a cautious interpretation that acupuncture-related brain effects may predominantly reflect a state-dependent recalibration of dysregulated brain networks. Future studies should prioritize large-sample, multicenter, longitudinal, and multimodal designs, together with rigorous control settings and more rigorous, externally validated machine learning-based prediction studies, to better distinguish differential central effects across intervention conditions and advance mechanism-informed personalized acupuncture in CP management.",
+      "authors": [
+        "Wu Y",
+        "Song L",
+        "Zhang Y",
+        "Liu S",
+        "Yu H",
+        "Hao F"
+      ]
+    },
+    {
+      "pmid": "42147848",
+      "title": "A meta-analysis of neuroimaging evidence for acupuncture-mediated modulation of altered central pain processing in patients with chronic pain.",
+      "journal": "Frontiers in neurology",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article",
+        "Systematic Review"
+      ],
+      "mesh": [],
+      "abstract": "Chronic pain, a major global public health burden, is primarily driven by altered central pain processing, which conventional treatments rarely target directly. This systematic review and meta-analysis synthesized RCT evidence to quantify acupuncture's modulatory effects on brain networks associated with altered central pain processing, validate its clinical efficacy/safety, and explore brain network-clinical outcome associations. Comprehensive searches of English/Chinese databases (2016-2025) identified RCTs of acupuncture for chronic pain with neuroimaging. Two researchers independently performed study selection, data extraction, and bias assessment. Meta-analysis used RevMan 5.4; heterogeneity was evaluated via I2/Q test, with correlation analysis and GRADE evidence quality assessment. Seventeen high-quality RCTs comprising 750 patients, with osteoarticular pain and migraine as main subtypes, were included. Acupuncture significantly improved neuroimaging indicators in the anterior cingulate cortex (ACC) and insula (MD = 0.27, p < 0.00001), primary somatosensory cortex (S1) and thalamus (MD = 0.30, p < 0.00001), and default mode network (DMN) (MD = 0.29, p < 0.00001). Clinically, acupuncture reduced Visual Analogue Scale (VAS) scores (MD = -2.31, p < 0.00001) and increased pain relief rate (OR = 4.30, p < 0.00001), with only mild adverse events reported. Osteoarticular pain demonstrated more pronounced efficacy. No significant publication bias was detected. The GRADE assessment rated the evidence for pain relief rate as high. Acupuncture exerts dual effects by alleviating clinical pain - exceeding the minimal clinically important difference (MCID) for VAS - and modulating brain networks implicated in altered central pain processing. It is a safe and valuable non-pharmacological intervention, with standardized protocols and subtype-specific application recommended. However, the evidence is constrained by a limited number of studies, heterogeneity in pain subtypes and neuroimaging modalities, and short follow-up durations. Larger RCTs and multimodal neuroimaging studies are needed for further validation. Registered in PROSPERO (CRD420261290299); URL: https://www.crd.york.ac.uk/prospero/.",
+      "authors": [
+        "Ma X",
+        "Wang X",
+        "Zhang W",
+        "Liu Y",
+        "Yang J",
+        "Wang Z"
+      ]
+    },
+    {
+      "pmid": "41999935",
+      "title": "Dynamic brain set among the limbic-paralimbic-neocortical network during acupuncture.",
+      "journal": "Neuroscience",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [
+        "Humans",
+        "Limbic System",
+        "Acupuncture Therapy",
+        "Nerve Net",
+        "Neural Pathways",
+        "Neocortex",
+        "Animals",
+        "Magnetic Resonance Imaging",
+        "Brain",
+        "Brain Mapping"
+      ],
+      "abstract": "The limbic-paralimbic-neocortical network (LPNN) is one of the most important bases for the Deqi sensation. Deqi evokes widespread limbic-paralimbic deactivation coupled with somatosensory cortex activation, accompanied by autonomic rebalancing toward parasympathetic dominance. Some brain regions among the network drive dynamic changes in others. These patterns are likely related to needle retention, Deqi and therapeutic effects. However, conventional task-state and resting-state fMRI designs have limited capacity to fully capture the dynamic evolution of LPNN activity during needle retention. The LPNN response to acupuncture is inherently time-varying, necessitating dynamic analysis methods such as sliding-window approaches to fully capture its temporal trajectory. In this review, we first examine the limitations of current fMRI paradigms in characterizing acupuncture effects, then review the methodological framework and existing findings of dynamic functional connectivity analysis, and present converging evidence confirming that Deqi-related brain modulation evolves continuously throughout needle stimulation. We propose a new viewpoint in which the dynamic changes in the LPNN induced by acupuncture manifest the sensitivity of acupuncture. Furthermore, dynamic brain states during needle retention may serve as potential biomarkers for predicting treatment response in chronic pain disorders and could guide individualized decisions on needle retention duration. The dynamic characteristics of the brain aroused by acupuncture should be considered, and a better understanding of the basis of Deqi may be obtained.",
+      "authors": [
+        "Wang Z",
+        "Liu H",
+        "Wang Y",
+        "Lang Y",
+        "Yao ZA",
+        "Zhang S"
+      ]
+    },
+    {
+      "pmid": "41583480",
+      "title": "From arthritis to central sensitization: targeting the neuro-immune axis via microglial modulation in acupuncture treatment for Juvenile Idiopathic Arthritis-associated pain.",
+      "journal": "Frontiers in immunology",
+      "year": "2025",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [
+        "Humans",
+        "Arthritis, Juvenile",
+        "Microglia",
+        "Acupuncture Therapy",
+        "Animals",
+        "Central Nervous System Sensitization",
+        "Pain Management",
+        "Neuroimmunomodulation"
+      ],
+      "abstract": "Juvenile Idiopathic Arthritis (JIA) is a common chronic rheumatic disease in children, and its associated persistent pain severely impacts the quality of life of affected patients. The severity of JIA-associated pain often does not correlate with the degree of peripheral inflammation, suggesting that Central Sensitization is a key underlying mechanism specific to JIA subtypes. At the core of this process is a dysregulation of the neuro-immune axis, particularly the aberrant activation of microglia within the central nervous system. As a non-pharmacological therapy, acupuncture demonstrates significant potential for JIA pain management, supported by a series of clinical studies. This review focuses on JIA-specific neuro-immune pathophysiology of chronic pain and systematically elucidates the complete pathway from peripheral inflammation to central microglial activation and central sensitization. By integrating evidence from both preclinical and clinical JIA studies, we provide a detailed analysis of how acupuncture remodels neuro-immune balance through mechanisms spanning peripheral autonomic regulation and central glial modulation. This modulation encompasses the inhibition of upstream pro-inflammatory signaling pathways. These include peripheral anti-inflammatory effects via the vagus nerve, regulation of systemic immunity, and direct inhibition of central microglial activity toward an anti-inflammatory phenotype. This work establishes a theoretical framework, grounded in JIA-specific neuro-immune pathophysiology, for acupuncture's application in treating JIA-associated pain, highlighting its role in reducing reliance on analgesics.",
+      "authors": [
+        "Chen H",
+        "Xu J",
+        "Zhang X"
+      ]
+    },
+    {
+      "pmid": "38200908",
+      "title": "Electro-Acupuncture Effects Measured by Functional Magnetic Resonance Imaging-A Systematic Review of Randomized Clinical Trials.",
+      "journal": "Healthcare (Basel, Switzerland)",
+      "year": "2023",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [],
+      "abstract": "Electro-acupuncture, an innovative adaptation of traditional acupuncture, combines electrical stimulation with acupuncture needles to enhance therapeutic effects. While acupuncture is widely used, its biological mechanisms remain incompletely understood. Recent research has explored the neurophysiological aspects of acupuncture, particularly through functional magnetic resonance imaging (fMRI) to investigate its effects on brain activity. In this systematic review, we conducted an extensive search for randomized clinical trials examining electro-acupuncture effects measured by fMRI. We employed strict eligibility criteria, quality assessment, and data extraction. Five studies met our inclusion criteria and were analyzed. The selected studies investigated electro-acupuncture in various medical conditions, including carpal tunnel syndrome, fibromyalgia, Crohn's disease, irritable bowel syndrome, and obesity. Notably, electro-acupuncture was found to modulate brain activity and connectivity in regions associated with pain perception, emotional regulation, and cognitive processing. These findings align with the holistic approach of traditional Chinese medicine, emphasizing the interconnectedness of body and mind. In carpal tunnel syndrome, electro-acupuncture at both local and distal sites showed neurophysiological improvements, suggesting distinct neuroplasticity mechanisms. In fibromyalgia, somatosensory electro-acupuncture correlated with reduced pain severity, enhanced brain connectivity, and increased gamma-aminobutyric acid levels. For Crohn's disease, electro-acupuncture influenced the homeostatic afferent processing network, potentially mitigating gut inflammation. Electro-acupuncture for irritable bowel syndrome led to decreased activity in the anterior cingulate cortex, offering pain relief, while electro-acupuncture for obesity impacted brain regions associated with dietary inhibition and emotional regulation. This systematic review provides evidence that electro-acupuncture can positively impact a range of medical conditions, possibly by modulating brain activity and connectivity. While the quality of the reviewed studies is generally good, further research with larger sample sizes and longer-term assessments is needed to better understand the mechanisms and optimize electro-acupuncture protocols for specific health conditions. The limited number of studies in this review emphasizes the need for broader investigations in this promising field. The research protocol was registered in PROSPERO (CRD42023465866).",
+      "authors": [
+        "Rodrigues JM",
+        "Ventura C",
+        "Abreu M",
+        "Santos C",
+        "Monte J",
+        "Machado JP"
+      ]
+    },
+    {
+      "pmid": "40463454",
+      "title": "COCCYGODYNIA.",
+      "journal": "Acta clinica Croatica",
+      "year": "2023",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [
+        "Humans",
+        "Coccyx",
+        "Low Back Pain",
+        "Female"
+      ],
+      "abstract": "The coccyx, the last segment of the spine, joins the sacrum at the base. It has three to five vertebrae, which are typically fused. In front of the sacrococcygeal junction is the ganglion impar, the only unpaired autonomic ganglion. The two sympathetic chains come to a close there. The impar ganglion is traversed by sympathetic nerves carrying pain fibers from the perineum, distal sections of the rectum, the vagina and the urethra. The painful disorder known as coccygodynia, which affects the tail end of the spine, is frequently brought on by birth trauma or is caused by an unidentified factor. Even though the pain may go away on its own or with therapy, it may also linger and worsen over time. Due to increased stress from the female pelvis on the coccyx, it affects women five times more frequently than it does men. Conservative, invasive or surgical treatment options are available for coccygodynia (partial or total coccygectomy). Rest, nonsteroidal anti-inflammatory medicines (NSAIDs) or COX-2 inhibitors, acupuncture, coccyx cushions, physical therapy, manual therapy and invasive therapy, which involves ganglion impar block with injections of local anesthetic and corticosteroid under fluoroscopy, followed by radiofrequency ablation, spinal cord stimulation (SCS) or peripheral nerve stimulation, are examples of conservative treatments. Coccygectomy is recommended in refractory situations.",
+      "authors": [
+        "Elezović N",
+        "Stojanović Stipić S",
+        "Perković M",
+        "Elezović A",
+        "Elezović T"
+      ]
+    },
+    {
+      "pmid": "37509469",
+      "title": "Thalamocortical Mechanisms Underlying Real and Imagined Acupuncture.",
+      "journal": "Biomedicines",
+      "year": "2023",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Both acupuncture and imagery have shown potential for chronic pain management. However, the mechanisms underlying their analgesic effects remain unclear. This study aims to explore the thalamocortical mechanisms underlying acupuncture and video-guided acupuncture imagery treatment (VGAIT), a combination of acupuncture and guided imagery, using the resting-state functional connectivity (rsFC) of three thalamic subdivisions-the ventral posterolateral thalamus (VPL), mediodorsal thalamus (MD), and motor thalamus subregion (Mthal)-associated with somatosensory, limbic, and motor circuity. Twenty-seven healthy individuals participated in a within-subject randomized crossover design study. Results showed that compared to sham acupuncture, real acupuncture altered the rsFC between the thalamus and default mode network (DMN) (i.e., mPFC, PCC, and precuneus), as well as the prefrontal and somatosensory cortex (SI/SII). Compared to the VGAIT control, VGAIT demonstrated greater rsFC between the thalamus and key nodes within the interoceptive network (i.e., anterior insula, ACC, PFC, and SI/SII), as well as the motor and sensory cortices (i.e., M1, SMA, and temporal/occipital cortices). Furthermore, compared to real acupuncture, VGAIT demonstrated increased rsFC between the thalamus (VPL/MD/Mthal) and task-positive network (TPN). Further correlations between differences in rsFC and changes in the heat or pressure pain threshold were also observed. These findings suggest that both acupuncture- and VGAIT-induced analgesia are associated with thalamocortical networks. Elucidating the underlying mechanism of VGAIT and acupuncture may facilitate their development, particularly VGAIT, which may be used as a potential remote-delivered pain management approach.",
+      "authors": [
+        "Kong Q",
+        "Sacca V",
+        "Walker K",
+        "Hodges S",
+        "Kong J"
+      ]
+    },
+    {
+      "pmid": "37041781",
+      "title": "Pulsed Laser Acupuncture in the Treatment of Pain and Heart Rate Variability in Fibromyalgia Patients: A Pilot Randomized Clinical Trial.",
+      "journal": "Journal of lasers in medical sciences",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Introduction: Laser acupuncture (LA) is a medically approved treatment for chronic pain, especially fibromyalgia. It is widely known that all pain is related to autonomic modulation, which may influence heart rate variability (HRV). There are robust studies in the literature on the effect of LA with continuous frequency on musculoskeletal pain and autonomic modulation. However, little is known about the effect of pulsed frequency on fibromyalgia. Therefore, this study aimed to evaluate whether an individualized intervention protocol applying pulsed LA would provide benefits related to pain symptoms and cardiac autonomic modulation in patients with fibromyalgia. Methods: In this pilot randomized clinical controlled trial, the sample consisted of women with fibromyalgia between the ages of 40 and 80, randomized into two groups: a control group (CG; n=10) and an experimental group (EG; n=10). EG received the intervention twice per week for 3 weeks. Statistical analysis was conducted by delta (difference between post-intervention and pre-intervention) and the Shapiro-Wilk test (normality). For comparison between the groups, the Mann-Whitney test was used. Results: The results showed a significant reduction in pain intensity as reported via the pain numerical scale (PNS; P=0.00), generalized pain index (GPI; P=0.00), and symptom severity scale (SSS; P=0.00). There was no significant difference in any HRV variable (P>0.05). Conclusion: Pulsed LA, when applied in an individualized protocol, can reduce pain intensity, as reported on the PNS, GPI, and SSS. However, no therapeutic effect was observed for HRV.",
+      "authors": [
+        "Boggiss ÉA",
+        "Rosário RC",
+        "de Lima RA",
+        "Silva PA",
+        "Moreira RM",
+        "da Silva KP"
+      ]
+    },
+    {
+      "pmid": "35663250",
+      "title": "Two Distinct Neural Mechanisms Underlying Acupuncture Analgesia.",
+      "journal": "Frontiers in pain research (Lausanne, Switzerland)",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Acupuncture analgesia is a traditional treatment with a long history, although it lacks scientific evidence. It is reportedly associated with the central nervous system, including various brain regions, from the cortices to the brain stem. However, it remains unclear whether the distributed regions behave as a single unit or consist of multiple sub-units playing different roles. Magnetoencephalography is a neuroimaging technique that can measure the oscillatory frequency of neural signals and brain regions. The frequency band of neural signals allows further understanding of the characteristics of the acupuncture-related neural systems. This study measured resting-state brain activity using magnetoencephalography in 21 individuals with chronic pain before and after acupuncture treatment. The subjective level of pain was assessed using a visual analog scale, and brain activity was compared to identify the brain regions and the frequencies associated with acupuncture analgesia. Here, we categorized the changes in resting-state brain activity into two groups: low-frequency oscillatory activity (<3 Hz) in the left middle occipital and right superior partial lobule and high-frequency oscillatory activity (81-120 Hz) on both sides of the prefrontal, primary sensory, and right fusiform gyri. These findings suggest that acupuncture analgesia influences two or more sub-units of the neural systems, which helps us understand the neural mechanisms underlying acupuncture analgesia.",
+      "authors": [
+        "Kato Y",
+        "Yachi K",
+        "Hoshi H",
+        "Okada T",
+        "Shigihara Y"
+      ]
+    },
+    {
+      "pmid": "35611301",
+      "title": "Effect of Acupuncture on the Cognitive Control Network of Patients with Knee Osteoarthritis: Study Protocol for a Randomized Controlled Trial.",
+      "journal": "Journal of pain research",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Abnormal central nervous system function is the key central pathological factor leading to chronic pain in patients with knee osteoarthritis (KOA). Acupuncture can effectively relieve the pain of KOA patients. However, the central nervous mechanism of acupuncture treating KOA is not fully understood. This trial will use functional magnetic resonance imaging (fMRI) analysis techniques to investigate the potential central nervous mechanism of acupuncture treatment of KOA. A total of 108 patients will be randomized (in a 1:1:1 ratio) into three groups, this trial will include 4-week treatment, patients in groups A and B will receive 20 acupuncture and sham acupuncture sessions, respectively, patients in group C will not receive any intervention, and all patients will receive fMRI scans before and after the intervention. The Western Ontario and McMaster Universities Osteoarthritis Index score (WOMAC) will be the primary clinical outcome. Then, we will explore the functional changes of the cognitive control network (CCN) in the brains of KOA patients through whole brain functional connectivity (FC) analysis and seed-based functional connectivity (sFC) analysis. Pearson correlation coefficient will be used to analyze the relationship between the improved value of the clinical correlation scale and the change of fMRI data. This trial will analyze the efficacy of verum acupuncture, sham acupuncture and the waiting-list for KOA and explore the activity of the CCN in three groups of patients by fMRI, so as to reveal the central nervous mechanisms of acupuncture in the treatment of KOA. This study is approved by the Ethics Committee of the First Affiliated Hospital of Henan University of Traditional Chinese Medicine (No: 2019HL-133-01) and registered in the Chinese Clinical Trial Registry, ChiCTR2000038554.",
+      "authors": [
+        "Yin S",
+        "Zhang ZH",
+        "Chang YN",
+        "Huang J",
+        "Wu ML",
+        "Li Q"
+      ]
+    },
+    {
+      "pmid": "35585847",
+      "title": "Brain Mechanism of Acupuncture Treatment of Chronic Pain: An Individual-Level Positron Emission Tomography Study.",
+      "journal": "Frontiers in neurology",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Acupuncture has been shown to be effective in the treatment of chronic pain. However, their neural mechanism underlying the effective acupuncture response to chronic pain is still unclear. We investigated whether metabolic patterns in the pain matrix network might predict acupuncture therapy responses in patients with primary dysmenorrhea (PDM) using a machine-learning-based multivariate pattern analysis (MVPA) on positron emission tomography data (PET). Forty-two patients with PDM were selected and randomized into two groups: real acupuncture and sham acupuncture (three menstrual cycles). Brain metabolic data from the three special brain networks (the sensorimotor network (SMN), default mode network (DMN), and salience network (SN)) were extracted at the individual level by using PETSurfer in fluorine-18 fluorodeoxyglucose positron emission tomography (18F-FDG-PET) data. MVPA analysis based on metabolic network features was employed to predict the pain relief after treatment in the pooled group and real acupuncture treatment, separately. Paired t-tests revealed significant alterations in pain intensity after real but not sham acupuncture treatment. Traditional mass-univariate correlations between brain metabolic and alterations in pain intensity were not significant. The MVPA results showed that the brain metabolic pattern in the DMN and SMN did predict the pain relief in the pooled group of patients with PDM (R 2 = 0.25, p = 0.005). In addition, the metabolic pattern in the DMN could predict the pain relief after treatment in the real acupuncture treatment group (R 2 = 0.40, p = 0.01). This study indicates that the individual-level metabolic patterns in DMN is associated with real acupuncture treatment response in chronic pain. The present findings advanced the knowledge of the brain mechanism of the acupuncture treatment in chronic pain.",
+      "authors": [
+        "Xu J",
+        "Xie H",
+        "Liu L",
+        "Shen Z",
+        "Yang L",
+        "Wei W"
+      ]
+    },
+    {
+      "pmid": "33247802",
+      "title": "Magnetic resonance imaging for chronic pain: diagnosis, manipulation, and biomarkers.",
+      "journal": "Science China. Life sciences",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [
+        "Brain",
+        "Chronic Pain",
+        "Humans",
+        "Machine Learning",
+        "Magnetic Resonance Imaging",
+        "Neuroimaging"
+      ],
+      "abstract": "Pain is a multidimensional subjective experience with biological, psychological, and social factors. Whereas acute pain can be a warning signal for the body to avoid excessive injury, long-term and ongoing pain may be developed as chronic pain. There are more than 100 million people in China living with chronic pain, which has raised a huge socioeconomic burden. Studying the mechanisms of pain and developing effective analgesia approaches are important for basic and clinical research. Recently, with the development of brain imaging and data analytical approaches, the neural mechanisms of chronic pain have been widely studied. In the first part of this review, we briefly introduced the magnetic resonance imaging and conventional analytical approaches for brain imaging data. Then, we reviewed brain alterations caused by several chronic pain disorders, including localized and widespread primary pain, primary headaches and orofacial pain, musculoskeletal pain, and neuropathic pain, and present meta-analytical results to show brain regions associated with the pathophysiology of chronic pain. Next, we reviewed brain changes induced by pain interventions, such as pharmacotherapy, neuromodulation, and acupuncture. Lastly, we reviewed emerging studies that combined advanced machine learning and neuroimaging techniques to identify diagnostic, prognostic, and predictive biomarkers in chronic pain patients.",
+      "authors": [
+        "Tu Y",
+        "Cao J",
+        "Bi Y",
+        "Hu L"
+      ]
+    },
+    {
+      "pmid": "32503194",
+      "title": "Acupuncture Treatment Modulates the Connectivity of Key Regions of the Descending Pain Modulation and Reward Systems in Patients with Chronic Low Back Pain.",
+      "journal": "Journal of clinical medicine",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Chronic low back pain (cLBP) is a common disorder with unsatisfactory treatment options. Acupuncture has emerged as a promising method for treating cLBP. However, the mechanism underlying acupuncture remains unclear. In this study, we investigated the modulation effects of acupuncture on resting state functional connectivity (rsFC) of the periaqueductal gray (PAG) and ventral tegmental area (VTA) in patients with cLBP. Seventy-nine cLBP patients were recruited and assigned to four weeks of real or sham acupuncture. Resting state functional magnetic resonance imaging data were collected before the first and after the last treatment. Fifty patients completed the study. We found remission of pain bothersomeness in all treatment groups after four weeks, with greater pain relief after real acupuncture compared to sham acupuncture. We also found that real acupuncture can increase VTA/PAG rsFC with the amygdala, and the increased rsFC was associated with decreased pain bothersomeness scores. Baseline PAG-amygdala rsFC could predict four-week treatment response. Our results suggest that acupuncture may simultaneously modulate the rsFC of key regions in the descending pain modulation (PAG) and reward systems (VTA), and the amygdala may be a key node linking the two systems to produce antinociceptive effects. Our findings highlight the potential of acupuncture for chronic low back pain management.",
+      "authors": [
+        "Yu S",
+        "Ortiz A",
+        "Gollub RL",
+        "Wilson G",
+        "Gerber J",
+        "Park J"
+      ]
+    },
+    {
+      "pmid": "31922698",
+      "title": "Changes in resting-state functional connectivity in nonacute sciatica with acupuncture modulation: A preliminary study.",
+      "journal": "Brain and behavior",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "mesh": [
+        "Acupuncture Therapy",
+        "Adult",
+        "Brain",
+        "Brain Mapping",
+        "Female",
+        "Gyrus Cinguli",
+        "Humans",
+        "Magnetic Resonance Imaging",
+        "Male",
+        "Middle Aged",
+        "Nociception",
+        "Prospective Studies",
+        "Sciatica"
+      ],
+      "abstract": "To investigate the functional connectivity (FC) in nonacute sciatica and the neuronal correlation of acupuncture analgesia. A prospective study employing resting-state functional magnetic resonance imaging was conducted. Twelve sciatica patients were enrolled to receive six or 18 acupoints of acupuncture treatment twice a week for 4 weeks. Regional homogeneity (ReHo) and seed-based FC were performed. Regional homogeneity analysis demonstrated a greater alteration in the right posterior cingulate cortex (PCC) during the pre-acupuncture phase than during the postacupuncture phase. Compared to that of healthy controls, the PCC-seeded FC (default mode network, DMN) of sciatica patients exhibited hyperconnectivity of PCC-FC with the PCC-bilateral insula, cerebellum, inferior parietal lobule, right medial prefrontal cortex, and dorsal anterior cingulate cortex during the pre-acupuncture phase as well as hypoconnectivity of PCC-FC with the right cerebellum, left precuneus, and left dorsal medial prefrontal cortex during the postacupuncture phase. Correlation analysis between PCC-seeded FC and behavior measurements revealed a positive association with the duration of sciatica in the right inferior parietal lobule prior to acupuncture treatment. Acupuncture in chronic sciatica patients is associated with normalized DMN activity and modulation of descending pain processing. The changes in the subclinical endophenotype of brain FC after acupuncture treatment may provide clues for understanding the mechanism of acupuncture-mediated analgesia in chronic pain.",
+      "authors": [
+        "Liu CH",
+        "Yeh TC",
+        "Kung YY",
+        "Tseng HP",
+        "Yang CJ",
+        "Hong TY"
+      ]
+    },
+    {
+      "pmid": "28326925",
+      "title": "Interaction of acupuncture treatment and manipulation laterality modulated by the default mode network.",
+      "journal": "Molecular pain",
+      "year": "2017",
+      "pubtypes": [
+        "Journal Article",
+        "Randomized Controlled Trial",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "mesh": [
+        "Adult",
+        "Anxiety",
+        "Brain",
+        "Capsaicin",
+        "Depression",
+        "Electroacupuncture",
+        "Female",
+        "Functional Laterality",
+        "Healthy Volunteers",
+        "Humans",
+        "Male",
+        "Models, Neurological",
+        "Musculoskeletal Manipulations",
+        "Neuralgia",
+        "Oxygen",
+        "Pain Measurement",
+        "Single-Blind Method",
+        "Treatment Outcome",
+        "Young Adult"
+      ],
+      "abstract": "Appropriate selection of ipsilateral or contralateral electroacupuncture (corresponding to the pain site) plays an important role in reaching its better curative effect; however, the involving brain mechanism still remains unclear. Compared with the heat pain model generally established in previous study, capsaicin pain model induces reversible cutaneous allodynia and is proved to be better simulating aspects of clinical nociceptive and neuropathic pain. In the current study, 24 subjects were randomly divided into two groups with a 2 × 2 factorial design: laterality (ipsi- or contralateral side, inter-subject) × treatment with counter-balanced at an interval of one week (verum and placebo electroacupuncture, within-subject). We observed subjective pain intensity and brain activations changes induced by capsaicin allodynia pain stimuli before and after electroacupuncture treatment at acupoint LI4 for 30 min. Analysis of variance results indicated that ipsilateral electroacupuncture treatment produced significant pain relief and wide brain signal suppressions in pain-related brain areas compared with contralateral electroacupuncture. We also found that verum electroacupuncture at either ipsi- or contralateral side to the pain site exhibited comparable significant magnitudes of analgesic effect. By contrast, placebo electroacupuncture elicited significant pain reductions only on the ipsilateral rather than contralateral side. It was inferred that placebo analgesia maybe attenuated on the region of the body (opposite to pain site) where attention was less focused, suggesting that analgesic effect of placebo electroacupuncture mainly rely on the motivation of its spatial-specific placebo responses via attention mechanism. This inference can be further supported by the evidence that the significant interaction effect of manipulation laterality and treatment was exclusively located within the default mode network, including the bilateral superior parietal lobule, inferior parietal lobule, precuneus, and left posterior cingulate cortex. It is also proved that disruptions of the default mode network may account for the cognitive and behavioral impairments in chronic pain patients. Our findings further suggested that default mode network participates in the modulation of spatial-oriented attention on placebo analgesia as a mechanism underlying the degree to which treatment side corresponding to the pain.",
+      "authors": [
+        "Niu X",
+        "Zhang M",
+        "Liu Z",
+        "Bai L",
+        "Sun C",
+        "Wang S"
+      ]
+    },
+    {
+      "pmid": "27803655",
+      "title": "Sustained Effects of Acupuncture Stimulation Investigated with Centrality Mapping Analysis.",
+      "journal": "Frontiers in human neuroscience",
+      "year": "2016",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Acupuncture can have instant and sustained effects, however, its mechanisms of action are still unclear. Here, we investigated the sustained effect of acupuncture by evaluating centrality changes in resting-state functional magnetic resonance imaging after manually stimulating the acupuncture point ST36 at the lower leg or two control point locations (CP1 same dermatome, CP2 different dermatome). Data from a previously published experiment evaluating instant BOLD effects and S2-seed-based resting state connectivity was re-analyzed using eigenvector centrality mapping and degree centrality mapping. These data-driven methods might add new insights into sustained acupuncture effects on both global and local inter-region connectivity (centrality) by evaluating the summary of connections of every voxel. We found higher centrality in parahippocampal gyrus and middle temporal gyrus after ST36 stimulation in comparison to the two control points. These regions are positively correlated to major hubs of the default mode network, which might be the primary network affected by chronic pain. The stronger integration of both regions within the whole-brain connectome after stimulation of ST36 might be a potential contributor to pain modulation by acupuncture. These findings highlight centrality mapping as a valuable analysis for future imaging studies investigating clinically relevant outcomes associated with physiological response to acupuncture stimulation. NCT01079689, ClinicalTrials.gov.",
+      "authors": [
+        "Long X",
+        "Huang W",
+        "Napadow V",
+        "Liang F",
+        "Pleger B",
+        "Villringer A"
+      ]
+    },
+    {
+      "pmid": "27610209",
+      "title": "DC Electroacupuncture Effects on Scars and Sutures of a Patient with Postconcussion Pain.",
+      "journal": "Medical acupuncture",
+      "year": "2016",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Introduction: This case study offers a detailed comparative analysis of the effects of direct-current electroacupuncture (DC-EA) on the autonomic nervous system (ANS), when DC-EA was applied to the cranial sutures and scars of a patient with a history of ischemic stroke and postconcussion syndrome (PCS) pain. Case: A 56-year-old female suffering from severe tremors and debilitating headaches requested acupuncture after conventional biomedicines failed to relieve her symptoms. Evaluations were performed to check the status of 27 ANS functions. These detailed evaluations were performed to obtain a baseline status of ANS function on this patient, who had a history of ischemic stroke, PCS, and chronic pain. All evaluations were repeated pre-post her DC-EA treatment. Results: This patient experienced significant relief from her symptoms after DC-EA treatment. An analysis of this patient's risk for ANS complications showed improvements in four key homeostatic markers post treatment. Conclusions: The ANS response of a patient with ischemic stroke, PCS, and chronic pain, who received electrical nerve stimulation using DC-EA reflected a measurable improvement in sympathetic tone, along with reductions in pain levels and PCS symptoms. The positive results in this case study could have applications to other pathologies that can be affected by the sympathetic nervous system activation on the body.",
+      "authors": [
+        "Chevalier A",
+        "Armstrong K",
+        "Norwood-Williams C",
+        "Gokal R"
+      ]
+    },
+    {
+      "pmid": "26745452",
+      "title": "Unanticipated Insights into Biomedicine from the Study of Acupuncture.",
+      "journal": "Journal of alternative and complementary medicine (New York, N.Y.)",
+      "year": "2016",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [
+        "Acupuncture",
+        "Acupuncture Analgesia",
+        "Acupuncture Therapy",
+        "Biomedical Research",
+        "Chronic Pain",
+        "Comparative Effectiveness Research",
+        "Humans",
+        "Pain Management",
+        "Placebo Effect",
+        "Research Design",
+        "Transcutaneous Electric Nerve Stimulation"
+      ],
+      "abstract": "Research into acupuncture has had ripple effects beyond the field of acupuncture. This paper identifies five exemplars to illustrate that there is tangible evidence of the way insights gleaned from acupuncture research have informed biomedical research, practice, or policy. The first exemplar documents how early research into acupuncture analgesia has expanded into neuroimaging research, broadening physiologic understanding and treatment of chronic pain. The second describes how the acupuncture needle has become a tool to enhance biomedical knowledge of connective tissue. The third exemplar, which illustrates use of a modified acupuncture needle as a sham device, focuses on emergent understanding of placebo effects and, in turn, on insights into therapeutic encounters in treatments unrelated to acupuncture. The fourth exemplar documents that two medical devices now in widespread use were inspired by acupuncture: transcutaneous electrical nerve stimulators for pain control and antinausea wrist bands. The final exemplar describes how pragmatic clinical trial designs applied in acupuncture research have informed current general interest in comparative effectiveness research. In conclusion, these exemplars of unanticipated outcomes of acupuncture research comprise an additional rationale for continued support of basic and clinical research evaluating acupuncture and other under-researched therapies.",
+      "authors": [
+        "MacPherson H",
+        "Hammerschlag R",
+        "Coeytaux RR",
+        "Davis RT",
+        "Harris RE",
+        "Kong JT"
+      ]
+    },
+    {
+      "pmid": "26346626",
+      "title": "Efficacy and Safety of Acupuncture for Acute Low Back Pain in Emergency Department: A Pilot Cohort Study.",
+      "journal": "Evidence-based complementary and alternative medicine : eCAM",
+      "year": "2015",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Introduction. Low back pain (LBP) is one of the most common complaints in the emergency department (ED). There are several research articles providing evidence for acupuncture for treating chronic LBP but few about treating acute LBP. This study assessed the efficacy and safety of acupuncture for the treatment of acute LBP in the ED. Materials and methods. A clinical pilot cohort study was conducted. 60 participants, recruited in the ED, were divided into experimental and control groups with 1 dropout during the study. Life-threatening conditions or severe neurological defects were excluded. The experimental group (n = 45) received a series of fixed points of acupuncture. The control group (n = 14) received sham acupuncture by pasting seed-patches near acupoints. Back pain was measured using the visual analog scale (VAS) at three time points: baseline and immediately after and 3 days after intervention as the primary outcome. The secondary outcomes were heart rate variability (HRV) and adverse events. Results. The VAS demonstrated a significant decrease (P value <0.001) for the experimental group after 15 minutes of acupuncture. The variation in HRV showed no significant difference in either group. No adverse event was reported. Conclusion. Acupuncture might provide immediate effect in reducing the pain of acute LBP safely.",
+      "authors": [
+        "Liu YT",
+        "Chiu CW",
+        "Chang CF",
+        "Lee TC",
+        "Chen CY",
+        "Chang SC"
+      ]
+    },
+    {
+      "pmid": "25796668",
+      "title": "[Advances in research of complementary and integrative medicine: a review of recent publications in some of the leading medical journals].",
+      "journal": "Harefuah",
+      "year": "2015",
+      "pubtypes": [
+        "English Abstract",
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [
+        "Complementary Therapies",
+        "Cost-Benefit Analysis",
+        "Humans",
+        "Integrative Medicine",
+        "Randomized Controlled Trials as Topic"
+      ],
+      "abstract": "This article assesses the evidence for effectiveness, adverse effects and cost-effectiveness of complementary therapies, as reflected in publications in high impact factor medical journals during the years 2012-2014. The search detected 13 randomized controlled studies (RCTs) and 14 meta-analyses, which collectively assessed results of 191 RCTs involving the participation of several thousand patients. Pain was the major focus of acupuncture research in both clinical and fMRI studies, which demonstrated that the effect of acupuncture is beyond the placebo effect. In addition, RCTs supported the use of acupuncture as an adjunctive therapy in chronic obstructive pulmonary disease and in moderate to severe depression. A promising trend was reported for the ameliorating effect of acupuncture in gout. Spinal manipulations may be helpful in cervical pain and yoga may be a useful treatment option for chronic neck pain, chronic low back pain and for pain-related disability. Beneficial effects of adding hypnosis and massage therapy to the treatment of fibromyalgia patients were also documented. Tai-chi may reduce balance impairment in mild-to-moderate Parkinson's disease and improve symptoms in patients with osteoarthritis. Products containing cranberry are associated with protective effects in some subgroups of patients with recurrent urinary tract infections. Chinese herbs may assist in glycemic control of diabetes patients and improve survival rate of patients with non-small cell lung cancer. Some of the complementary therapies were found to be cost-effective. Physicians should be aware of the possible adverse effects of these treatments and of possible drug-herb interactions. Further larger scale trials are justified.",
+      "authors": [
+        "Gamus D"
+      ]
+    },
+    {
+      "pmid": "22315807",
+      "title": "Autonomic status and pain profile in patients of chronic low back pain and following electro acupuncture therapy: a randomized control trial.",
+      "journal": "Indian journal of physiology and pharmacology",
+      "year": "2011",
+      "pubtypes": [
+        "Journal Article",
+        "Randomized Controlled Trial"
+      ],
+      "mesh": [
+        "Adult",
+        "Autonomic Nervous System",
+        "Chronic Pain",
+        "Diastole",
+        "Electroacupuncture",
+        "Female",
+        "Humans",
+        "Low Back Pain",
+        "Male",
+        "Systole"
+      ],
+      "abstract": "Pain is a syndrome characterized by several neurophysiological changes including that of the autonomic nervous system. Chronic low back pain (LBP) is a major health problem and is a frequent reason for using unconventional therapies especially acupuncture. This study was conducted to evaluate the autonomic status and pain profile in chronic LBP patients and to observe the effect of electro acupuncture therapy. Chronic LBP patients (n=60) were recruited from the Department of Orthopaedics, GTB Hospital, Delhi. Age and sex matched healthy volunteers were selected as controls (n=30). Following a written consent, LBP patients were randomly allocated into two study groups - Group A received 10 sittings of electro acupuncture, on alternate days, at GB and UB points selected for back pain, while the Group B received a conventional drug therapy in the form of oral Valdecoxib together with supervised physiotherapy. Controls were assessed once while the patients were assessed twice, before and after completion of the treatment program (3 weeks). The autonomic status was studied with non-invasive cardiovascular autonomic function tests which included E: I ratio, 30:15 ratio, postural challenge test and sustained handgrip test. Pain intensity was measured with the visual analogue scale (VAS) and the global perceived effect (GPE). Statistical analysis was performed using repeated measure's ANOVA with Tukey's test. Pain patients showed a significantly reduced vagal tone and increased sympathetic activity as compared to the controls (P<0.05 to P<0.001 in different variables). Following treatment, both the study groups showed a reduction in vagal tone together with a decrease in the sympathetic activity. There was also a considerable relief of pain in both groups, however, the acupuncture group showed a better response (P<0.01). We conclude that there is autonomic dysfunction in chronic LBP patients. Acupuncture effectively relieves the pain and improves the autonomic status and hence can be used as an alternative/additive treatment modality in these cases.",
+      "authors": [
+        "Shankar N",
+        "Thakur M",
+        "Tandon OP",
+        "Saxena AK",
+        "Arora S",
+        "Bhattacharya N"
+      ]
+    },
+    {
+      "pmid": "21939120",
+      "title": "[Cholinergic anti-inflammatory pathway of some non-pharmacological therapies of complementary medicine: possible implications for treatment of rheumatic and autoimmune diseases].",
+      "journal": "Harefuah",
+      "year": "2011",
+      "pubtypes": [
+        "English Abstract",
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [
+        "Autoimmune Diseases",
+        "Complementary Therapies",
+        "Delivery of Health Care, Integrated",
+        "Humans",
+        "Inflammation",
+        "Pain",
+        "Pain Management",
+        "Rheumatic Diseases"
+      ],
+      "abstract": "Rheumatologic and autoimmune diseases are among foremost diseases for which patients seek complementary and integrative medicine options. Therefore, physicians should be informed on the advances in research of these therapies, in order to be able to discuss possible indications and contraindications for these treatment modalities with their patients. This review summarizes several therapeutic modalities of complementary medicine that may be involved in the cholinergic anti-inflammatory pathway. The analysis of systematic reviews of acupuncture for rheumatic conditions has concluded that the evidence is sufficiently sound to warrant positive recommendations of this therapy for osteoarthritis, low back pain and lateral elbow pain. There is relatively strong evidence to support the use of hypnosis in pain treatment, such as in cases of fibromyalgia. A recent controlled study that evaLuated tai-chi in fibromyalgia has reported reductions in pain, improvements in mood, quality of Life, self efficacy and exercise capacity. There is also cumulative evidence that acupuncture, hypnosis and tai-chi may decrease the high frequency of heart rate variability, suggesting enhancement of vagus nerve activity. Hence, it has been hypothesized that these modalities might impact the cholinergic anti-inflammatory pathway to modulate inflammation. Further clinical and basic research to confirm this hypothesis should be performed in order to validate integration of these therapies in comprehensive treatment for some inflammatory and autoimmune diseases.",
+      "authors": [
+        "Gamus D"
+      ]
+    },
+    {
+      "pmid": "20605114",
+      "title": "Effects of acupuncture on the brain hemodynamics.",
+      "journal": "Autonomic neuroscience : basic & clinical",
+      "year": "2010",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't",
+        "Review"
+      ],
+      "mesh": [
+        "Acupuncture",
+        "Autonomic Nervous System",
+        "Brain",
+        "Brain Mapping",
+        "Electrocardiography",
+        "Electroencephalography",
+        "Hemodynamics",
+        "Humans",
+        "Mental Disorders",
+        "Spectroscopy, Near-Infrared"
+      ],
+      "abstract": "Acupuncture therapy has been applied to various psychiatric diseases and chronic pain since acupuncture stimulation might affect brain activity. From this point of view, we investigated the effects of acupuncture on autonomic nervous system and brain hemodynamics in human subjects using ECGs, EEGs and near-infrared spectroscopy (NIRS). Our previous studies reported that changes in parasympathetic nervous activity were correlated with number of de-qi sensations during acupuncture manipulation. Furthermore, these autonomic changes were correlated with EEG spectral changes. These results are consistent with the suggestion that autonomic changes induced by needle manipulation inducing specific de-qi sensations might be mediated through the central nervous system, especially through the forebrain as shown in EEG changes, and are beneficial to relieve chronic pain by inhibiting sympathetic nervous activity. The NIRS results indicated that acupuncture stimulation with de-qi sensation significantly decreased activity in the supplementary motor complex (SMC) and dorsomedial prefrontal cortex (DMPFC). Based on these results, we review that hyperactivity in the SMC is associated with dystonia and chronic pain, and that in the DMPFC is associated with various psychiatric diseases with socio-emotional disturbances such as schizophrenia, attention deficit hyperactive disorder, etc. These findings along with the previous studies suggest that acupuncture with de-qi sensation might be effective to treat the various diseases in which hyperactivity in the SMA and DMPFC is suspected of playing a role.",
+      "authors": [
+        "Hori E",
+        "Takamoto K",
+        "Urakawa S",
+        "Ono T",
+        "Nishijo H"
+      ]
+    },
+    {
+      "pmid": "37697613",
+      "title": "Effect of the Auricular Acupressure Therapy on Dysmenorrhea of Puberty Girls.",
+      "journal": "Korean journal of women health nursing",
+      "year": "2010",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "The purpose of this study was to identify the effect of auricular acupressure therapy on dysmenorrhea of puberty girls. This study was a pretest-posttest design with a nonequivalent control group. The subjects of this study were 61 girls who were middle and high school students in Seoul and the experiencing dysmenorrhea; 31 for the experimental group and 30 for the control group. The obtained data were analyzed by SPSS/WIN 12.0 program. The experimental group which applied the auricular acupressure therapy scored lower for low abdominal pain (F=136.13, p=.000), low back pain (F=62.79, p=.000). autonomic nervous system reactions (F=102.31, p=.000) and negative emotions on the menstruation (F=102.31, p=.000) compared to the control group. There were significant interaction effects of auricular acupressure on low abdominal pain, low back pain, autonomic nervous system reactions, and negative emotions on the menstruation between time and group. We observed that auricular acupressure therapy is effective for reliving pain and the symptom of dysmenorrhea. Based on these result, auricular acupuncture is useful by individual nursing intervention and improves the quality of life for dysmenorrhea of puberty girls.",
+      "authors": [
+        "Kim SY",
+        "Lee HY"
+      ]
+    },
+    {
+      "pmid": "18803495",
+      "title": "The status and future of acupuncture mechanism research.",
+      "journal": "Journal of alternative and complementary medicine (New York, N.Y.)",
+      "year": "2008",
+      "pubtypes": [
+        "Consensus Development Conference, NIH",
+        "Journal Article",
+        "Research Support, N.I.H., Extramural",
+        "Research Support, Non-U.S. Gov't",
+        "Research Support, U.S. Gov't, Non-P.H.S."
+      ],
+      "mesh": [
+        "Acupuncture Therapy",
+        "Animals",
+        "Biomedical Research",
+        "Clinical Trials as Topic",
+        "Delivery of Health Care, Integrated",
+        "Diagnostic Techniques, Neurological",
+        "Evidence-Based Medicine",
+        "Forecasting",
+        "Humans",
+        "Interdisciplinary Communication",
+        "Research",
+        "Research Design",
+        "Societies, Medical",
+        "United States"
+      ],
+      "abstract": "On November 8-9, 2007, the Society for Acupuncture Research (SAR) hosted an international conference to mark the tenth anniversary of the landmark NIH [National Institutes of Health] Consensus Development Conference on Acupuncture. More than 300 acupuncture researchers, practitioners, students, funding agency personnel, and health policy analysts from 20 countries attended the SAR meeting held at the University of Maryland School of Medicine, Baltimore, MD. This paper summarizes important invited lectures in the area of basic and translational acupuncture research. Specific areas include the scientific assessment of acupuncture points and meridians, the neural mechanisms of cardiovascular regulation by acupuncture, mechanisms for electroacupuncture applied to persistent inflammation and pain, basic and translational research on acupuncture in gynecologic applications, the application of functional neuroimaging to acupuncture research with specific application to carpal-tunnel syndrome and fibromyalgia, and the association of the connective tissue system to acupuncture research. In summary, mechanistic models for acupuncture effects that have been investigated experimentally have focused on the effects of acupuncture needle stimulation on the nervous system, muscles, and connective tissue. These mechanistic models are not mutually exclusive. Iterative testing, expanding, and perhaps merging of such models will potentially lead to an incremental understanding of the effects of manual and electrical stimulation of acupuncture needles that is solidly rooted in physiology.",
+      "authors": [
+        "Napadow V",
+        "Ahn A",
+        "Longhurst J",
+        "Lao L",
+        "Stener-Victorin E",
+        "Harris R"
+      ]
+    },
+    {
+      "pmid": "17906602",
+      "title": "Acupuncture--self-appraisal and the reward system.",
+      "journal": "Acupuncture in medicine : journal of the British Medical Acupuncture Society",
+      "year": "2007",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [
+        "Acupuncture Therapy",
+        "Cerebral Cortex",
+        "Cognition",
+        "Humans",
+        "Hypothalamus",
+        "Limbic System",
+        "Neural Pathways",
+        "Pain Management",
+        "Self Concept"
+      ],
+      "abstract": "Acupuncture is an ancient therapy with a variety of different explanatory models. A cascade of physiological effects has been reported, both in the peripheral and the central nervous system, following the insertion of a needle or light tapping of the skin. Clinical trials testing the specific claims of acupuncture have generally tried to focus on testing the efficacy of applying specific techniques and/or specified points. However, different conditions may respond differently to different modes of stimulation. Recently, it was demonstrated that both superficial and deep needling (with de qi/Hibiki) resulted in amelioration of patellofemoral pain and unpleasantness. The pleasurable aspect of the acupuncture experience has largely been ignored as it has been considered secondary to its pain alleviating effects. This aspect of acupuncture treatment is likely to be related to activation of self-appraisal and the reward system. When a patient seeks a therapist there are expectations of a specific effect. These expectations are partly based on self-relevant phenomena and self-referentia introspection and constitute the preference. Also, when asked about the effect of the treatment, processes that orientate pre-attentive anticipatory or mnemonic information and processes that mediate self-reflection and recollection are integrated together with sensory detection to enable a decision about the patient's perception of the effect of acupuncture treatment. These 'self-appraisal' processes are dependent on two integrated networks: a ventral medial prefrontal cortex-paralimbic-limbic 'affective' pathway and a dorsal medial prefrontal cortex-cortical-hippocampal 'cognitive' pathway. The limbic structures are implicated in the reward system and play a key role in most diseases and illness responses including chronic pain and depression, regulating mood and neuromodulatory responses (eg sensory, autonomic, and endocrine). The pleasurable and neuromodulatory aspects of acupuncture as well as 'placebo needling' may partly be explained by the activation or deactivation of limbic structures including the hippocampus, amygdala, and their connections with the hypothalamus. In patients with patellofemoral pain, the effects of superficial and deep needling remained for six months. These long term pain-alleviating effects have been attributed to activation of pain inhibiting systems in cortical and subcortical pathways. When considering long term effects the cortical-cerebellar system needs to be taken into account. The cortical-cerebellar system is probably central to the development of neural models that learn and eventually stimulate routinely executed (eg motor skills) and long term (eg pain alleviation) cognitive processes. These higher order cognitive processes are initially mediated in prefrontal cortical loci but later shift control iteratively to internal cerebellar representations of these processes. Possibly part of the long term healing effects of acupuncture may be attributed to changes in the cerebellar system thereby sparing processing load in cortical and subcortical areas. As cortical and subcortical structures are activated and/or de-activated following stimulation of receptors in the skin, disregarding site, 'placebo or sham needling' does not exist and conclusions drawn on the basis that it is an inert control are invalid. 'Self' may be seen as a shifting illusion, ceaselessly constructed and deconstructed, and the effect of acupuncture may reflect its status (as well as that of the therapist).",
+      "authors": [
+        "Lundeberg T",
+        "Lund I",
+        "Näslund J"
+      ]
+    },
+    {
+      "pmid": "17321222",
+      "title": "Specific acupuncture sensation correlates with EEGs and autonomic changes in human subjects.",
+      "journal": "Autonomic neuroscience : basic & clinical",
+      "year": "2007",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [
+        "Acupuncture",
+        "Acupuncture Points",
+        "Adult",
+        "Autonomic Nervous System Diseases",
+        "Blood Pressure",
+        "Chronic Disease",
+        "Electroencephalography",
+        "Evoked Potentials",
+        "Facial Neuralgia",
+        "Female",
+        "Heart Rate",
+        "Humans",
+        "Male",
+        "Prosencephalon",
+        "Sympathetic Nervous System",
+        "Treatment Outcome"
+      ],
+      "abstract": "Sympathetic overactivation is suggested to be associated with chronic pain syndrome, and acupuncture is frequently applied in therapy for this syndrome. Furthermore, the forebrain including the various cerebral cortices has been implicated in inhibitory and facilitatory control of pain as well as autonomic functions. We investigated relationships among specific sensations induced by acupuncture manipulation, effects on sympathetic and parasympathetic autonomic functions, and EEG changes. An acupuncture needle was inserted into the right trapezius muscle of the subjects, and acupuncture manipulation was repeated to induce specific acupuncture sensation repeatedly while the needle was left in the muscle. Acupuncture manipulation significantly decreased heart rate (HR), and increased systolic blood pressure (SBP). Spectral analysis indicated that acupuncture manipulation significantly decreased low frequency components (LF) of both HR variability (HRV) and SBP variability (SBPV), and significantly reduced ratio of LF to high frequency component (HF) of HRV (LF/HF, index of sympathetic activity). Furthermore, there was a significant negative correlation between changes in LF/HF ratio of HRV and the number of specific acupuncture sensations reported, and a significant positive correlation between HF of HRV and the number of acupuncture sensations. Analyses of EEG data indicated that acupuncture manipulation non-specifically increased power of all spectral bands except the gamma band. Furthermore, changes in HF (index of parasympathetic activity) and total power (overall activity of the autonomic nervous system) of HRV were positively correlated with changes in theta, alpha, and gamma power, while changes in LF of SBPV and LF/HF of HRV were negatively correlated with changes in power of all spectral bands. These results are consistent with the suggestion that autonomic changes induced by manipulation inducing specific acupuncture sensations might be mediated through the central nervous system, especially through the forebrain as shown in EEG changes, and are beneficial to relieve chronic pain by inhibiting sympathetic nervous activity.",
+      "authors": [
+        "Sakai S",
+        "Hori E",
+        "Umeno K",
+        "Kitabayashi N",
+        "Ono T",
+        "Nishijo H"
+      ]
+    },
+    {
+      "pmid": "11874310",
+      "title": "Acupuncture: theory, efficacy, and practice.",
+      "journal": "Annals of internal medicine",
+      "year": "2002",
+      "pubtypes": [
+        "Historical Article",
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't",
+        "Research Support, U.S. Gov't, P.H.S.",
+        "Review"
+      ],
+      "mesh": [
+        "Acupuncture",
+        "Acupuncture Therapy",
+        "China",
+        "Evidence-Based Medicine",
+        "History, Ancient",
+        "Humans",
+        "Licensure",
+        "Meta-Analysis as Topic",
+        "Qi",
+        "Randomized Controlled Trials as Topic",
+        "United States",
+        "Yin-Yang"
+      ],
+      "abstract": "Traditionally, acupuncture is embedded in naturalistic theories that are compatible with Confucianism and Taoism. Such ideas as yin-yang, qi, dampness, and wind represent East Asian conceptual frameworks that emphasize the reliability of ordinary, human sensory awareness. Many physicians who practice acupuncture reject such prescientific notions. Numerous randomized, controlled trials and more than 25 systematic reviews and meta-analyses have evaluated the clinical efficacy of acupuncture. Evidence from these trials indicates that acupuncture is effective for emesis developing after surgery or chemotherapy in adults and for nausea associated with pregnancy. Good evidence exists that acupuncture is also effective for relieving dental pain. For such conditions as chronic pain, back pain, and headache, the data are equivocal or contradictory. Clinical research on acupuncture poses unique methodologic challenges. Properly performed acupuncture seems to be a safe procedure. Basic-science research provides evidence that begins to offer plausible mechanisms for the presumed physiologic effects of acupuncture. Multiple research approaches have shown that acupuncture activates endogenous opioid mechanisms. Recent data, obtained by using functional magnetic resonance imaging, suggest that acupuncture has regionally specific, quantifiable effects on relevant brain structures. Acupuncture may stimulate gene expression of neuropeptides. The training and provision of acupuncture care in the United States are rapidly expanding.",
+      "authors": [
+        "Kaptchuk TJ"
+      ]
+    },
+    {
+      "pmid": "11822627",
+      "title": "Research on the neurophysiological mechanisms of acupuncture: review of selected studies and methodological issues.",
+      "journal": "Journal of alternative and complementary medicine (New York, N.Y.)",
+      "year": "2001",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, U.S. Gov't, P.H.S.",
+        "Review"
+      ],
+      "mesh": [
+        "Acupuncture Analgesia",
+        "Animals",
+        "Central Nervous System",
+        "Electric Stimulation",
+        "Electroacupuncture",
+        "Endorphins",
+        "Humans",
+        "Pain",
+        "Pain Management"
+      ],
+      "abstract": "This presentation reviews studies that contribute to an understanding of the neurophysiological mechanisms of acupuncture. A 1973 study, using volunteer medical students, looked into acupuncture's analgesic effect on experimentally induced pain and suggests that humoral factors may mediate acupuncture-induced analgesia. In a study of the possible role of the cerebrospinal fluid transmission of pain suppression effects of acupuncture, cerebrospinal fluid from acupuncture-treated rabbits was infused into recipient rabbits. The analgesic effect was observed in the recipient rabbits, suggesting that acupuncture-induced analgesia may be mediated by substances released in the cerebrospinal fluid. Studies of electroacupuncture in rats revealed that both low-frequency and high-frequency stimulation could induce analgesia, but that there are differential effects of low- and high-frequency acupuncture on the types of endorphins released. In another study, low-frequency electroacupuncture, given as median nerve stimulation in cats, was shown to protect the myocardium by inhibiting sympathetic pressor response and increasing myocardial oxygen demand. The development of neuroimaging tools, such as positron emission tomography (PET) and functional magnetic resonance imaging (fMRI), make noninvasive studies of acupuncture's effects on human brain activity possible. Studies using PET have shown that thalamic asymmetry present among patients suffering from chronic pain was reduced after the patients underwent acupuncture treatment. Other studies, using fMRI, have pointed to relationships between particular acupoints and visual-cortex activation. These powerful new tools open the possibility to new scientific studies of this ancient therapy.",
+      "authors": [
+        "Shen J"
+      ]
+    },
+    {
+      "pmid": "42712741",
+      "title": "Adjunctive ultrasound-guided vagus nerve-targeted pharmacopuncture for refractory fibromyalgia with autonomic symptoms: a case report.",
+      "journal": "Frontiers in medicine",
+      "year": "2026",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Fibromyalgia (FM) is a clinical syndrome characterized by chronic widespread pain and various functional symptoms. Although multiple treatments have been proposed for FM, therapeutic options remain limited for patients who do not respond adequately to conventional treatments. This case report describes a woman in her late 50s with refractory FM who received ultrasound-guided vagus nerve-targeted pharmacopuncture (UGP) as an adjunct to multimodal Korean medicine treatment. The patient presented with widespread pain, xerostomia, dyspepsia, headache, palpitations, and insomnia. Multimodal treatment included manual acupuncture, electroacupuncture, routine pharmacopuncture, wet cupping, and herbal medicine, with two additional UGP sessions administered during the treatment period. During the treatment course, the patient's pain intensity decreased from 7 to 2 on the numeric rating scale, accompanied by improvements in sleep, fatigue, anxiety, depression, and patient-reported autonomic symptoms. Heart rate variability parameters also changed between baseline and the 3-month follow-up. No serious or persistent procedure-related adverse events were observed. However, because UGP was administered as part of a multimodal treatment program and HRV was assessed at only two time points, the specific contribution of UGP to the clinical and physiological changes could not be determined. This case provides a hypothesis-generating observation that warrants further investigation of vagus nerve-targeted interventions in FM.",
+      "authors": [
+        "Lee JH",
+        "Lee YU",
+        "Choi TH",
+        "Lee S",
+        "Lee S"
+      ]
+    },
+    {
+      "pmid": "42680080",
+      "title": "Rethinking sham controls in acupuncture trials for pain management: Random-point acupuncture as a strategy to evaluate efficacy and acupoint specificity.",
+      "journal": "The journal of pain",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Randomized controlled trials of acupuncture for pain management commonly rely on sham procedures intended to function as placebo controls. However, accumulating evidence suggests that widely used sham approaches, such as superficial needling or non-penetrating devices applied near therapeutic acupoints, may not be physiologically inert. Neuroimaging studies and clinical trials indicate that minimal needling or tactile stimulation can activate neural pathways involved in pain modulation, raising concern that sham acupuncture may represent a low-intensity intervention rather than a true placebo. This issue may attenuate observed differences between treatment and control groups and complicate interpretation of acupuncture trials for chronic pain conditions, including low back pain. In this Perspective, we discuss limitations of current sham acupuncture designs and propose reconsideration of an underutilized control strategy: random-point acupuncture. In this approach, real needling is performed at acupoints randomly selected from locations unrelated to the treatment protocol. This design preserves procedural credibility and participant blinding while minimizing overlap with protocol-specific therapeutic points. Importantly, comparing outcomes between true acupuncture and random-point acupuncture allows investigators to directly evaluate the role of acupoint specificity. We argue that incorporating such controls could improve the methodological rigor of acupuncture trials and provide clearer insights into the mechanisms underlying acupuncture analgesia. PERSPECTIVE: Random-point acupuncture offers a pragmatic sham-control strategy for acupuncture trials. By systematically excluding potentially therapeutic and condition-relevant acupoints and assigning participant-specific random-point sets, this approach may reduce unintended therapeutic effects while supporting blinding, thereby strengthening evaluation of acupuncture efficacy and acupoint specificity.",
+      "authors": [
+        "Li C",
+        "Longo S",
+        "Fu S",
+        "Li H",
+        "Dorans KS"
+      ]
+    },
+    {
+      "pmid": "42630596",
+      "title": "Potential mechanisms of acupuncture in regulating neuroinflammation and central sensitization in chronic pain: a narrative review of preclinical, clinical, and translational evidence.",
+      "journal": "American journal of translational research",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [],
+      "abstract": "Chronic pain (CP) is not a single disease. Its mechanisms vary across patients and pain phenotypes. In many cases, persistent pain is related to neuroinflammation and central sensitization. Acupuncture, especially electroacupuncture, is widely used in clinical practice. Recent evidence suggests that acupuncture may provide more than a short-time pain relief, potentially by modulating neuroinflammation and central sensitization. However, the relationships among acupuncture, neuroinflammatory regulation, central sensitization, and phenotype-specific clinical responses remain unclear. This narrative review summarizes studies in this field. We searched PubMed for articles published between January 2016 and February 2026 and screened references of relevant publications. Some earlier landmark studies were also included to explain key concepts. Experimental studies suggest that acupuncture potentially regulates central sensitization by influencing spinal glial activation, synaptic plasticity, descending pain inhibitory pathways, and autonomic-immune interactions. Clinical studies show more heterogeneous results. Patients with more central sensitization-related symptoms may experience improvements not only in pain intensity but also in sleep quality, fatigue, mood, and overall quality of life. In CP with mixed mechanisms, acupuncture may facilitate symptom relief and functional recovery. In neuropathic pain, measures such as allodynia, hyperalgesia, and other sensory symptoms may better reflect treatment response than pain intensity alone. Tools including the Central Sensitization Inventory, quantitative sensory testing, conditioned pain modulation, functional magnetic resonance imaging, and related biomarkers potentially help explain inter-individual differences in treatment responses. Current evidence is limited by heterogeneity in patient selection, acupuncture parameters, outcome measures, and the weak mechanistic links between preclinical findings and clinical endpoints.",
+      "authors": [
+        "He S",
+        "Zhu P",
+        "He J",
+        "Han D"
+      ]
+    },
+    {
+      "pmid": "41695037",
+      "title": "Decoding the mechanisms of acupuncture by neuroimaging: an integrated review from networks to molecules.",
+      "journal": "Frontiers in human neuroscience",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [],
+      "abstract": "Acupuncture, a cornerstone of Traditional Chinese Medicine (TCM), is widely used for conditions like chronic pain and functional disorders, yet its neurobiological mechanisms are not fully understood. This review synthesizes findings from multimodal neuroimaging-including functional magnetic resonance imaging (fMRI), electroencephalography (EEG), and positron emission tomography (PET)-to examine the central nervous system and neurochemical correlates of acupuncture. We summarize reports of its modulatory effects on large-scale brain networks (e.g., Default Mode Network, Salience Network) and neural oscillations, alongside evidence of neurochemical changes. Importantly, we also address the methodological limitations, inconsistent results, and significant role of non-specific (e.g., placebo) effects prevalent in this literature (Chen B. et al., 2023; Yu et al., 2024). Building on this evidence, we propose a multi-level integrative framework that outlines a potential pathway from peripheral stimulation to clinical outcomes via neurochemical and network-level interactions, while carefully distinguishing observed correlations from established causation. We conclude by discussing future research priorities, emphasizing the need for standardized protocols, rigorous causal inference, and a measured approach to translating emerging technologies. This review aims to bridge traditional practice with modern neuroscience by offering a balanced perspective that highlights both progress and persistent challenges in the field.",
+      "authors": [
+        "Liu S",
+        "Bai Y",
+        "Liu J",
+        "Chen X",
+        "Lv P",
+        "Wang Y"
+      ]
+    },
+    {
+      "pmid": "41583366",
+      "title": "Therapeutic mechanisms of acupuncture therapy for acute pain in the emergency department.",
+      "journal": "Integrative medicine research",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [],
+      "abstract": "Acupuncture has been used for millennia to treat pain and in recent decades included as an evidence-based strategy for comprehensive pain care. More recently, acupuncture has also been used to treat acute peri‑operative pain and acute pain in the Emergency department (ED). While there are models of acupuncture's effect on chronic pain, the lack of application of those models for acute pain represents a gap in our scientific understanding. Acupuncture in the ED is a single-session dose intervention. In the context of clarifying significant details of an acupuncture intervention including needle insertion, needle perturbation (to obtain de qi), and needle retention, point specificity, adequate dose using local and distal acupoints, and functional MRI (fMRI) brain studies of acupuncture treatment for pain, a body and auricular model of acupuncture's specific effects in acute pain reduction is presented. The biomechanisms of body acupuncture are shown to be an interaction between local physiological responses at a needling site and peripheral and central analgesic responses. An auricular model conceptualizes how stimulation of the auricular branch of the vagus nerve also modulates autonomic and central nervous systems. Nonspecific effects of acupuncture are also discussed. The purpose of this review is to illustrate the biomechanisms of acupuncture for acute pain as a complex intervention that integrates patterns of change at physiological and molecular levels that can inform existing and future effectiveness research and facilitate assimilation of acupuncture in the ED.",
+      "authors": [
+        "Nielsen A",
+        "Dyer NL",
+        "Faryar K",
+        "Dusek JA"
+      ]
+    },
+    {
+      "pmid": "40634927",
+      "title": "Effect of acupuncture treatment for patients with knee osteoarthritis on brain fluctuation amplitude and functional connectivity: a randomized three-armed fMRI study.",
+      "journal": "BMC complementary medicine and therapies",
+      "year": "2025",
+      "pubtypes": [
+        "Journal Article",
+        "Randomized Controlled Trial"
+      ],
+      "mesh": [
+        "Humans",
+        "Osteoarthritis, Knee",
+        "Acupuncture Therapy",
+        "Magnetic Resonance Imaging",
+        "Male",
+        "Middle Aged",
+        "Female",
+        "Brain",
+        "Aged"
+      ],
+      "abstract": "In clinical practice, the overall effect of a treatment includes specific and nonspecific components. Although the analgesic mechanism of specific acupuncture effect has been studied extensively, the understanding of neural basis about nonspecific placebo effect is insufficient. We aimed to reveal the neurological signatures associated with both specific effect and nonspecific effect of acupuncture in chronic pain using the functional magnetic resonance imaging (fMRI). In this three-armed, randomized controlled trial, 90 patients with knee osteoarthritis (KOA) were divided into acupuncture group (AG), sham acupuncture group (SG), or waiting list group (WG), receiving 12 times of treatments during 4 weeks. NRS, WOMAC score, and fMRI data were collected before and after treatment. We assessed the amplitude of low frequency fluctuation (ALFF) and seed-based functional connectivity (FC) to investigate the brain functional bases of the nonspecific (SG vs. WG) and specific (AG vs. SG) effects of acupuncture. Acupuncture could significantly reduce NRS score in KOA patients (overall P < 0.001). Neurally, significant ALFF changes in left dorsolateral prefrontal cortex (DLPFC) were observed in the AG (vs. SG) and SG (vs. WG; Voxel P < 0.001, Cluster P < 0.001), respectively. And the decreased ALFF values of DLPFC had a positive correlation with the NRS score changes in the SG (spearman rho = 0.592, P = 0.002). Moreover, FC between DLPFC and thalamus was increased in the AG compared to SG. And compared to WG, there was a decreased FC between DLPFC and cerebellum in the SG. The spontaneous activity of the DLPFC was involved in both the specific and nonspecific acupuncture effects, whereas different DLPFC FCs related to the specific or nonspecific effects of acupuncture. Our findings contribute to the understanding about the neuroimaging evidence of the acupuncture effects. Chinese Clinical Trial Registry ( www.chictr.org.cn ) ChiCTR1900025799. This study was registered on 9th September 2019.",
+      "authors": [
+        "Wei XY",
+        "Wang ZY",
+        "Shi GX",
+        "Zhang N",
+        "Li JL",
+        "Ren MM"
+      ]
+    },
+    {
+      "pmid": "34949986",
+      "title": "Frequency-Specific Blood Oxygen Level Dependent Oscillations Associated With Pain Relief From Ankle Acupuncture in Patients With Chronic Low Back Pain.",
+      "journal": "Frontiers in neuroscience",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Objective: Recent advances in brain imaging have deepened our knowledge of the neural activity in distinct brain areas associated with acupuncture analgesia. However, there has not been conclusive research into the frequency-specific resting-state functional changes associated with acupuncture analgesia in patients with chronic pain. Here, we aimed to characterize changes across multiple frequencies of resting-state cortical activity associated with ankle acupuncture stimulation (AAS) in patients with chronic low back pain (CLBP) and healthy controls. Methods: Twenty seven patients with CLBP and Twenty five age- and gender-matched healthy volunteers were enrolled in the study. Participants received tactile sham acupuncture (TSA) and AAS, respectively. The whole-brain amplitude of low-frequency fluctuation (ALFF) in the range 0.01-0.25 Hz was assessed for changes associated with each intervention. Further, a visual analog scale (VAS) was used to collect subjective measures of pain intensity in patients. Linear mixed-effect modeling (LME) was used to examine the mean ALFF values of AAS and TSA between patients and healthy controls. Results: The ALFF was modulated in the default mode network (an increase in the medial prefrontal cortex, and a decrease in the cerebellum/posterior ingulate/parahippocampus, P < 0.01, corrected) in both patients and controls. Decreased ALFF in the bilateral insular was frequency-dependent. Modulations in the cerebellum and right insular were significantly correlated with VAS pain score after AAS (P < 0.01). Conclusion: Hence, frequency-specific resting-state activity in the cerebellum and insular was correlated to AAS analgesia. Our frequency-specific analysis of ALFF may provide novel insights related to pain relief from acupuncture.",
+      "authors": [
+        "Xiang A",
+        "Chen M",
+        "Qin C",
+        "Rong J",
+        "Wang C",
+        "Shen X"
+      ]
+    },
+    {
+      "pmid": "34916843",
+      "title": "Bibliometric Analysis of Functional Magnetic Resonance Imaging Studies on Acupuncture Analgesia Over the Past 20 Years.",
+      "journal": "Journal of pain research",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "mesh": [],
+      "abstract": "Researches on the central mechanisms of acupuncture analgesia have been widely conducted worldwide. However, there is no bibliometric analysis of functional magnetic resonance imaging (fMRI) studies on acupuncture analgesia. This study visualized the current status, hot spots and frontiers of fMRI studies on acupuncture analgesia in the past 20 years to provide a theoretical basis for its clinical application. All publications were obtained from Science Citation Index-Expanded (SCI-E) of Web of Science (WOS). We used CiteSpace to analyze publications, journals, cited journals, authors, cited authors, institutions, countries, references, and keywords. We also analyzed collaborative network maps and co-occurrence network maps. We retrieved a total of 797 articles. Regarding the volume of publications, the total number of annual publications showed a fluctuating but overall increasing trend. Evidence-based Complementary and Alternative Medicine (21 articles) was the most productive journal, and Pain (225 articles) was the most cited journal. The most productive author was Qin W (16 articles), and the most co-cited author was Hui KKS (111). The most prolific institution and country were Massachusetts General Hospital (34 articles) and USA (212 articles). \"Pain\" was the top-ranked for keyword frequency and centrality. \"Functional connectivity\" was the frontier hotspot for 2018-2021. First, fMRI researches on acupuncture analgesia involved several countries (regions) and institutions, mainly located in the USA, China and Korea, and most of them were universities. In addition, the USA was a major contributor in this field. Second, in terms of disciplinary distribution, the literatures were mainly from clinical neurology, neuroscience, and radiology nuclear medicine medical imaging. Third, the keyword co-occurrence analysis showed that the hot keywords included pain, fMRI, and lower back pain. Fourth, through keyword clustering analysis, the hot disease was found to be lower back pain, and the hot contents were acupuncture specificity and frequency specificity. Fifth, a timeline analysis of the references identified that chronic low back pain and specificity will remain a hot topic for future research.",
+      "authors": [
+        "Huang L",
+        "Xu G",
+        "He J",
+        "Tian H",
+        "Zhou Z",
+        "Huang F"
+      ]
+    },
+    {
+      "pmid": "33551731",
+      "title": "Global Trends and Performances of Magnetic Resonance Imaging Studies on Acupuncture: A Bibliometric Analysis.",
+      "journal": "Frontiers in neuroscience",
+      "year": "2020",
+      "pubtypes": [
+        "Systematic Review",
+        "Journal Article"
+      ],
+      "mesh": [],
+      "abstract": "Objectives: To summarize development processes and research hotspots of MRI research on acupuncture and to provide new insights for researchers in future studies. Methods: Publications regarding MRI on acupuncture from inception to 2020 were downloaded from the Web of Science Core Collection. VOSviewer 1.6.15 and CiteSpace V software were used for bibliometric analyses. The main analyses include collaboration analyses between countries/institutions/authors, co-occurrence analysis between keywords, as well as analyses on keyword bursts, citation references, and clusters of references. Results: A total of 829 papers were obtained with a continually increased trend over time. The most productive country and institution in this field were the People's Republic of China (475) and KyungHee University (70), respectively. Evidence-based Complementary and Alternative Medicine (83) was the most productive journal, and Neuroimage (454) was the most co-cited journal. Dhond's et al. (2008) article (co-citation counts: 58) and Napadow's et al. (2005) article (centrality: 0.21) were the most representative and symbolic references, with the highest co-citation number and centrality, respectively. Jie Tian had the highest number of publications (35) and Kathleen K S Hui was the most influential author (280 co-citations). The four hot topics in MRI on acupuncture were acupuncture, fMRI, pain, and stimulation. The three frontier topics were connectivity, modulation, and fMRI. Based on the clustering of co-cited documents, chronic low back pain, sham electro-acupuncture treatment, and clinical research were the main research directions. Conclusion: This study provides an in-depth perspective for MRI research on acupuncture and provides researchers with valuable information to determine the current status, hot spots, and frontier trends of MRI research on acupuncture.",
+      "authors": [
+        "Zhang J",
+        "Zhang Y",
+        "Hu L",
+        "Huang X",
+        "Liu Y",
+        "Li J"
+      ]
+    },
+    {
+      "pmid": "31964691",
+      "title": "An fMRI-based neural marker for migraine without aura.",
+      "journal": "Neurology",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, N.I.H., Extramural",
+        "Research Support, Non-U.S. Gov't",
+        "Comment"
+      ],
+      "mesh": [
+        "Brain",
+        "Cross-Sectional Studies",
+        "Humans",
+        "Machine Learning",
+        "Magnetic Resonance Imaging",
+        "Migraine without Aura"
+      ],
+      "abstract": "To identify and validate an fMRI-based neural marker for migraine without aura (MwoA) and to examine its association with treatment response. We conducted cross-sectional studies with resting-state fMRI data from 230 participants and machine learning analyses. In studies 1 through 3, we identified, cross-validated, independently validated, and cross-sectionally validated an fMRI-based neural marker for MwoA. In study 4, we assessed the relationship between the neural marker and treatment responses in migraineurs who received a 4-week real or sham acupuncture treatment, or were waitlisted, in a registered clinical trial. In study 1 (n = 116), we identified a neural marker with abnormal functional connectivity within the visual, default mode, sensorimotor, and frontal-parietal networks that could discriminate migraineurs from healthy controls (HCs) with 93% sensitivity and 89% specificity. In study 2 (n = 38), we investigated the generalizability of the marker by applying it to an independent cohort of migraineurs and HCs and achieved 84% sensitivity and specificity. In study 3 (n = 76), we verified the specificity of the marker with new datasets of migraineurs and patients with other chronic pain disorders (chronic low back pain and fibromyalgia) and demonstrated 78% sensitivity and 76% specificity for discriminating migraineurs from nonmigraineurs. In study 4 (n = 116), we found that the changes in the marker responses showed significant correlation with the changes in headache frequency in response to real acupuncture. We identified an fMRI-based neural marker that captures distinct characteristics of MwoA and can link disease pattern changes to brain changes.",
+      "authors": [
+        "Tu Y",
+        "Zeng F",
+        "Lan L",
+        "Li Z",
+        "Maleki N",
+        "Liu B"
+      ]
+    }
+  ]
+}
