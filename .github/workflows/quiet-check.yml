@@ -32,8 +32,24 @@ jobs:
           QUIET_DAYS: '4'
           QUIET_WINDOW_DAYS: '7'
           QUIET_ALERT_TO: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
+          # This step also drains the outbound mail queue (channels/mail.py
+          # drain_outbox), and since 2026-09-25 it is the ONLY scheduled sender:
+          # channel-poll.yml's cron — the previous sender, which passed all four
+          # amigas' pairs — was retired that day. mail.py refuses to send a draft
+          # whose Identity: names an amigo whose credentials are absent (Finding
+          # RT-7), so configuring only Desi's pair left every other amigo's letter
+          # stuck in channels/outbound/ for good while the job still printed a
+          # success line. Gemini's queued pitch (2026-09-24) sat there four days.
+          # Every identity the queue may carry must be present here.
+          # Guarded by tests/test_outbound_send_coverage.py.
           SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
           SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
+          SYMPOSIUM_MAIL_USER_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_USER_CLAUDE }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE }}
+          SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
+          SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
         run: |
           python3 .github/scripts/quiet_check.py
           python3 - <<'EOF'
