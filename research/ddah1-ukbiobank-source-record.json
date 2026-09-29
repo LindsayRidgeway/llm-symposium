@@ -1,0 +1,179 @@
+{
+  "retrieved_at": "2026-09-29",
+  "retrieved_by": "desi (clock wake run 20260929T060753Z-3b1b7b57)",
+  "title": "Dimethylarginine Dimethylaminohydrolase 1 (DDAH1)-Arginine Metabolic Axis Is Independently Associated With Alzheimer's Disease Risk in the UK Biobank.",
+  "authors": [
+    "Lehrer S",
+    "Rheinstein P"
+  ],
+  "journal": "Cureus",
+  "year": 2026,
+  "volume": "18",
+  "issue": "8",
+  "elocation": "e114415",
+  "pmid": "42729959",
+  "pmcid": "PMC13564308",
+  "doi": "10.7759/cureus.114415",
+  "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42729959/",
+  "pmc_fulltext_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13564308/",
+  "journal_source_url": "https://cureus.com/articles/523469-...",
+  "abstract_labels": [],
+  "abstract": "Background Altered arginine metabolism and nitric oxide (NO) signaling have been implicated in Alzheimer's disease (AD), but the role of dimethylarginine dimethylaminohydrolase 1 (DDAH1), a regulator of nitric oxide bioavailability, remains unclear. We investigated whether the DDAH1-arginine metabolic axis is independently associated with AD risk in the UK Biobank (UKB). Methods We analyzed 50,988 UK Biobank participants with available proteomic, metabolomic, clinical, genetic, and neuroimaging data. Plasma DDAH1 levels were measured using the Olink Explore 3072 platform (Olink Proteomics AB, Uppsala, Sweden). Associations between DDAH1, circulating arginine, and AD were evaluated using multivariable logistic regression adjusted for age, sex, education, APOE ε4 dosage, and genetic principal components. Interaction analyses assessed whether DDAH1 modified the association between arginine and AD risk. Structural MRI phenotypes were examined using multivariable linear regression. Results DDAH1 levels were significantly elevated in AD cases in unadjusted analyses (p = 0.001). Higher systemic arginine was independently associated with lower AD risk (odds ratio {OR} = 0.604; p = 0.0033). A significant DDAH1-arginine interaction persisted after multivariable adjustment (OR = 1.431; p = 0.000108), indicating that the association between arginine and AD differed according to DDAH1 expression. Most MRI phenotypes were not significantly associated with DDAH1, although reduced hippocampal volume was observed in a neuroimaging subset. Conclusions The DDAH1-arginine metabolic axis is independently associated with AD risk and may represent a biologically relevant pathway linking nitric oxide dysregulation to neurodegeneration.",
+  "full_text_extraction": {
+    "_source": "PMC13564308 full text (CC-BY 4.0), retrieved 2026-09-29; numbers transcribed by hand from the article body, Table 1, Figures 1-3.",
+    "cohort": {
+      "headline_n": 50988,
+      "ad_cases": 271,
+      "controls": 50717,
+      "arginine_available": 11003,
+      "baseline_other_vars_range": [
+        42448,
+        42988
+      ],
+      "imaging_subset_n": 1976,
+      "proteomics_platform": "Olink Explore 3072",
+      "software": "R 4.5",
+      "genetic_vars": [
+        "APOE e4 dosage",
+        "PC1",
+        "PC2",
+        "PC3"
+      ],
+      "mendelian_randomization": false
+    },
+    "case_control_other": {
+      "PADI2": {
+        "t": -1.93,
+        "p": 0.053
+      },
+      "PADI4": {
+        "p": 0.636
+      },
+      "arginine": {
+        "t": -1.0,
+        "p": 0.324
+      },
+      "age": {
+        "t": 24.19,
+        "p": 0.0,
+        "ad_mean": 64.8,
+        "control_mean": 56.7
+      },
+      "education": {
+        "t": -6.53,
+        "p": 0.0,
+        "ad_mean": 12.4,
+        "control_mean": 14.7
+      }
+    },
+    "multivariable_logistic": {
+      "arginine_main": {
+        "OR": 0.604,
+        "p": 0.0033,
+        "wald_chi2": 7.62
+      },
+      "ddah1_main": {
+        "OR": null,
+        "p": 0.147,
+        "wald_chi2": 2.11
+      },
+      "ddah1_x_arginine": {
+        "OR": 1.431,
+        "p": 0.000108,
+        "wald_chi2": 11.0
+      },
+      "age": {
+        "OR": 1.23,
+        "p": 0.0,
+        "wald_chi2": 46.7
+      },
+      "sex": {
+        "p": 0.798,
+        "wald_chi2": 0.07
+      },
+      "apoe_e4_heterozygote": {
+        "OR": 3.0,
+        "ci": [
+          1.64,
+          5.45
+        ],
+        "p": 0.000289
+      },
+      "apoe_e4_homozygote": {
+        "OR": 8.27,
+        "ci": [
+          3.63,
+          17.6
+        ],
+        "p": 0.0
+      },
+      "education_per_year": {
+        "OR": 0.928,
+        "p": 0.0093
+      },
+      "covariates": [
+        "age",
+        "sex",
+        "PC1",
+        "PC2",
+        "PC3",
+        "years of education",
+        "APOE e4 dosage"
+      ]
+    },
+    "mri": {
+      "four_measures_beta_range": [
+        -0.045,
+        0.027
+      ],
+      "four_measures_all_ns": true,
+      "hippocampal": {
+        "n": 1976,
+        "beta_ddah1": -0.052,
+        "p_ddah1": 0.016,
+        "p_interaction": 0.625
+      }
+    },
+    "units_note": "arginine mean values 0.062 +/- 0.014 given without units in the source",
+    "claims_direction": "arginine main effect protective (OR<1); interaction OR>1 => protective association weakens as DDAH1 rises",
+    "authors_causal_chain": "DDAH1 degrades ADMA -> less NOS inhibition -> more NO; elevated DDAH1 in cases read as compensatory up-regulation in an arginine-poor environment; oral arginine floated as repositioning while its own text says this data does not establish benefit.",
+    "internal_inconsistencies": [
+      "DDAH1 case-control difference reported with four different statistics/p-values across abstract, Table 1, body text and Figure 1 caption, and with two different mean pairs.",
+      "Abstract claims neuroimaging data for all 50,988 while imaging is a 1,976-person subset.",
+      "Arginine values carry no units.",
+      "AD case count within the ~11,003 with arginine is not stated."
+    ],
+    "ddah1_case_control_reported_four_ways": [
+      {
+        "where": "Table 1",
+        "t": 2.53,
+        "p": 0.012,
+        "means_ad_vs_control": [
+          0.127,
+          0.037
+        ]
+      },
+      {
+        "where": "results body text",
+        "t": -3.22,
+        "p": 0.001,
+        "means_ad_vs_control": [
+          0.1399,
+          0.0396
+        ]
+      },
+      {
+        "where": "Figure 1 caption",
+        "t": -3.07,
+        "p": 0.002,
+        "means_ad_vs_control": null
+      },
+      {
+        "where": "abstract",
+        "t": null,
+        "p": 0.001,
+        "means_ad_vs_control": null
+      }
+    ]
+  }
+}
