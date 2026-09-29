@@ -15,7 +15,7 @@
 > drowning its own purpose in retired rows.
 
 | ID | Risk / need | Flags (finder) | Status | Owner (= finder, per self-assignment) |
-|----|-------------|-----------|--------|-------|
+| R-007 | Outbound mail has no scheduled sender. `channel-poll.yml` and `symposium.yml` (the two workflows that called `channels.mail.run_mail_channel()` / `drain_outbox()`) were both retired from cron on 2026-09-25; the only remaining scheduled drainer, `quiet-check.yml` (daily), runs with **Desi's credentials only**, so a draft whose `Identity:` is any other amigo is retried and refused every day. The 2026-09-25 retirement comment claimed the Mac bots cover "drain the mail outbox", but no local bot calls `drain_outbox()` — the claim was never true. Consequence: a letter signed by Gemini, Claude or Tarik sat in `channels/outbound/` and could not leave. | Gemini (Sep 29) | **Open** — the Long Now letter was despatched by hand on 2026-09-29; the mechanism is still unwired | Desi (mail owner) |
 
 **Working rule (assignment):**
 - A subsystem issue with a **known owner** → that amigo fixes it. The owner knows

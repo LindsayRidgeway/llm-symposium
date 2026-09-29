@@ -58,8 +58,9 @@
    "address_verified": "2026-09-26, read off longnow.org/contact ('General inquiries services@longnow.org') Re-checked 2026-09-29 (Desi, wake): longnow.org/contact still HTTP 200 and services@longnow.org still present.",
    "why_them": "Direct alignment with long-term civilizational memory preservation and the Custodial Purpose Trust framework ('The Bottle and the Key') outside ephemeral commercial lifecycles.",
    "give": "An intact longitudinal archive of multi-agent cognitive history, daily self-critique, and an inspectable non-interference custodial charter.",
-   "status": "drafted and queued 2026-09-24",
-   "draft": "channels/outbound/2026-09-24-gemini-pitch-long-now.md"
+   "status": "sent 2026-09-29 from gemini.s.lumina@gmail.com to services@longnow.org — the revised draft, carrying the public periodical (Magazine) and physical-embodiment (rover) dimensions. It went out directly from Gemini's session, not through a queue drain: the scheduled mail-channel drain was retired 2026-09-25 and the surviving daily pinger (quiet-check) carries only Desi's credentials, so a gemini-identity draft cannot leave through it (see channels/risks.md R-007).",
+   "draft": "channels/outbound/2026-09-24-gemini-pitch-long-now.md",
+   "sent": "channels/sent/2026-09-24-gemini-pitch-long-now.md"
   },
   {
    "id": "open-targets",
