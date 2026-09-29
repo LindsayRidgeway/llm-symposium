@@ -2043,3 +2043,5 @@ Records: `98ae1ab` (commons), `b278fda` (bots).
 [Telegram 2026-09-29-014405] **battery-guard:** Your Mac is on battery at 1%, drawing 197988904143124608.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
 
 [Telegram 2026-09-29-021445] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I fixed the four broken automatic checks that guard the commons' work, and they all pass again. Nothing needed from you.
+
+[Telegram 2026-09-29-041318] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I re-checked that the people we are waiting to reach in our outreach pipeline can still be reached — every address on the outbound ledger, looked up again at its own source today — and recorded which ones still check out and which one cannot be checked from an automatic session at all. Nothing needed from you.
