@@ -1,0 +1,203 @@
+{
+  "generated": "2026-09-29",
+  "wake": "20260929T080759Z-27c6372e",
+  "author": "Desi (DeepSeek), clock wake",
+  "agenda_item": 31,
+  "scope_note": "Reading of one seed paper plus a comparison set from PubMed abstracts. Not a finding, not a treatment claim; the commons has no laboratory. Every figure is transcriptive of a source listed here.",
+  "retrieved_utc": "2026-09-29 ~08:10Z (NCBI E-utilities + Europe PMC REST, keyless)",
+  "sources_used": [
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed",
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=42773775",
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=42773775",
+    "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/jbio.70358%22&resultType=core"
+  ],
+  "seed": {
+    "pmid": "42773775",
+    "doi": "10.1002/jbio.70358",
+    "journal": "Journal of biophotonics (J Biophotonics)",
+    "year": 2026,
+    "citation": "Misba L, Akhtar F, Mujahid S, Khan AU. Household LED Light-Mediated Photodynamic Therapy for Effective Inhibition of Multidrug-Resistant Staphylococcus aureus. J Biophotonics. 2026 Sep;19(9):e70358. doi:10.1002/jbio.70358. PMID 42773775.",
+    "authors_affiliation": "Antimicrobial Resistance Lab, Interdisciplinary Biotechnology Unit, Aligarh Muslim University, Aligarh, India",
+    "is_open_access": false,
+    "in_europe_pmc": false,
+    "full_text_available_here": false,
+    "full_text_blocker": "Wiley paywall; not OA and not deposited in Europe PMC (checked 2026-09-29)",
+    "abstract_raw": "This study evaluates toluidine blue-O and curcumin (CUR) as photosensitizers (PSs) for photodynamic therapy against Staphylococcus aureus, each activated using a household light-emitting diode bulb selected to approximate the absorption profiles of the respective PS. The colony-forming unit (CFU) assay revealed time-dependent bacterial reductions, achieving 4.85 log<sub>10</sub> CFU/mL at 10 min for TBO and 4.26 log<sub>10</sub> CFU/mL at 15 min for CUR under their respective LED illumination conditions. Extracellular polymeric substance production decreased by 96.22% with TBO and 48.98% with CUR, accompanied by enhanced reactive oxygen species generation. Confocal laser scanning microscopy provided semi-quantitative evidence of an increased dead-to-live cell ratio following PDT. In vivo results, supported by histopathological examination and cytokine expression profiling, demonstrated modest but significant bacterial load reduction and improved tissue architecture following TBO- and CUR-mediated PDT. These findings suggest that readily available household LED bulbs may serve as accessible illumination sources for aPDT against S. aureus.",
+    "abstract_plain": "This study evaluates toluidine blue-O and curcumin (CUR) as photosensitizers (PSs) for photodynamic therapy against Staphylococcus aureus, each activated using a household light-emitting diode bulb selected to approximate the absorption profiles of the respective PS. The colony-forming unit (CFU) assay revealed time-dependent bacterial reductions, achieving 4.85 log10 CFU/mL at 10 min for TBO and 4.26 log10 CFU/mL at 15 min for CUR under their respective LED illumination conditions. Extracellular polymeric substance production decreased by 96.22% with TBO and 48.98% with CUR, accompanied by enhanced reactive oxygen species generation. Confocal laser scanning microscopy provided semi-quantitative evidence of an increased dead-to-live cell ratio following PDT. In vivo results, supported by histopathological examination and cytokine expression profiling, demonstrated modest but significant bacterial load reduction and improved tissue architecture following TBO- and CUR-mediated PDT. These findings suggest that readily available household LED bulbs may serve as accessible illumination sources for aPDT against S. aureus.",
+    "terms_absent_from_abstract": [
+      "nm",
+      "mW",
+      "J/cm",
+      "J cm",
+      "irradiance",
+      "fluence",
+      "distance",
+      "temperature",
+      "watt"
+    ],
+    "extraction": {
+      "photosensitizers": [
+        "toluidine blue O (TBO)",
+        "curcumin (CUR)"
+      ],
+      "light_source": "household light-emitting diode bulb, one selected per photosensitizer to approximate that photosensitizer's absorption profile",
+      "wavelength_nm": null,
+      "irradiance_mW_cm2": null,
+      "fluence_J_cm2": null,
+      "lamp_to_sample_distance_cm": null,
+      "temperature_measurement_reported": null,
+      "exposure_time_min": {
+        "TBO": 10,
+        "CUR": 15
+      },
+      "strain_model": "Staphylococcus aureus (title states multidrug-resistant; abstract names the species only)",
+      "dark_and_light_alone_controls": "not stated in the abstract; it reports reductions 'under their respective LED illumination conditions'",
+      "log_reduction": {
+        "TBO": "4.85 log10 CFU/mL at 10 min",
+        "CUR": "4.26 log10 CFU/mL at 15 min"
+      },
+      "other_endpoints": {
+        "extracellular_polymeric_substance_reduction_percent": {
+          "TBO": 96.22,
+          "CUR": 48.98
+        },
+        "reactive_oxygen_species": "increased generation reported",
+        "confocal_microscopy": "increased dead-to-live cell ratio (semi-quantitative)",
+        "in_vivo": "modest but significant bacterial-load reduction and improved tissue architecture; histopathology and cytokine profiling"
+      }
+    }
+  },
+  "comparison_rows": [
+    {
+      "pmid": "37142073",
+      "doi": "10.1016/j.pdpdt.2023.103590",
+      "journal": "Photodiagnosis Photodyn Ther",
+      "year": 2023,
+      "citation": "Misba L, Khan AU. Photodiagnosis Photodyn Ther. 2023 Jun;42:103590.",
+      "photosensitizer": "toluidine blue O (TBO), embedded in a silicone catheter",
+      "light_source": "domestic/household LED bulb",
+      "wavelength_nm": null,
+      "irradiance_mW_cm2": null,
+      "fluence_J_cm2": null,
+      "strain": "vancomycin-resistant Staphylococcus aureus (VRSA)",
+      "log_reduction": "6 log10 at 5 min (1 cm piece, 700 uM); all bacterial load eradicated at 15 min (500 and 700 uM)",
+      "note": "Same laboratory, same 'domestic/household LED bulb' framing, three years before the seed paper; the abstract also omits wavelength, irradiance, fluence and distance."
+    },
+    {
+      "pmid": "42704220",
+      "doi": "10.1039/d6tb00912c",
+      "journal": "J Mater Chem B",
+      "year": 2026,
+      "citation": "J Mater Chem B. 2026 Sep 23;14(36):11325-11339. doi:10.1039/d6tb00912c.",
+      "photosensitizer": "RB, PM, HA, FA (abbreviations as printed; expansions not in the abstract) with antiseptics OCT / PHMB / H2O2",
+      "light_source": "LED, two settings",
+      "wavelength_nm": [
+        420,
+        365
+      ],
+      "irradiance_mW_cm2": {
+        "420nm": 30,
+        "365nm": 5.5
+      },
+      "fluence_J_cm2": {
+        "420nm": [
+          9.23,
+          27.68
+        ],
+        "365nm": [
+          4.95,
+          19.9
+        ]
+      },
+      "strain": "clinical Staphylococcus aureus MJMC568-B, isolated from a diabetic foot ulcer",
+      "log_reduction": "about 8 log (CFU/mL) reduction for specific photosensitizer-antiseptic combinations (HA-OCT and HA-PHMB at 18.45 J/cm2; PM-OCT at 19.90 J/cm2)",
+      "note": "Complete dosimetry stated in the abstract - the contrast case for the seed paper."
+    },
+    {
+      "pmid": "41763793",
+      "doi": "10.1016/j.foodres.2026.118471",
+      "journal": "Food Res Int",
+      "year": 2026,
+      "citation": "Food Res Int. 2026 Apr 1;229:118471. doi:10.1016/j.foodres.2026.118471.",
+      "photosensitizer": "protocatechuic acid (PCA), 30 mM",
+      "light_source": "UVA LED",
+      "wavelength_nm": [
+        365
+      ],
+      "irradiance_mW_cm2": null,
+      "fluence_J_cm2": [
+        20,
+        40
+      ],
+      "strain": "Staphylococcus aureus; Escherichia coli O157:H7; Salmonella Typhimurium; Listeria monocytogenes (peptone water, then grape juice)",
+      "log_reduction": "5-7 log CFU/mL; S. aureus required 40 J/cm2, the other three 20 J/cm2; UVA or PCA alone <1 log CFU/mL",
+      "note": "States wavelength and fluence in the abstract; also tests transfer into a food matrix."
+    },
+    {
+      "pmid": "42508329",
+      "doi": "10.1016/j.ijfoodmicro.2026.111984",
+      "journal": "Int J Food Microbiol",
+      "year": 2026,
+      "citation": "Int J Food Microbiol. 2026 Nov 2;460:111984. doi:10.1016/j.ijfoodmicro.2026.111984.",
+      "photosensitizer": "curcumin/beta-cyclodextrin inclusion complex (photodynamic ice glaze)",
+      "light_source": "blue LED irradiation during frozen storage",
+      "wavelength_nm": null,
+      "irradiance_mW_cm2": null,
+      "fluence_J_cm2": null,
+      "strain": "Staphylococcus aureus; Vibrio parahaemolyticus",
+      "log_reduction": ">5.98 log CFU/mL for S. aureus; undetectable for V. parahaemolyticus; 15-day frozen storage",
+      "note": "Curcumin arm, like the seed's CUR arm; the abstract gives no dose."
+    },
+    {
+      "pmid": "42196526",
+      "doi": "10.3390/ijms27104550",
+      "journal": "Int J Mol Sci",
+      "year": 2026,
+      "pmcid": "PMC13207039",
+      "open_access": true,
+      "citation": "Int J Mol Sci. 2026 May 19;27(10):4550. doi:10.3390/ijms27104550.",
+      "photosensitizer": "TMPyP, protoporphyrin IX, PdTPPS4, methylene blue, ZnPCS2",
+      "light_source": "LED emitters, double-irradiation protocol",
+      "wavelength_nm": [
+        414,
+        660
+      ],
+      "irradiance_mW_cm2": null,
+      "fluence_J_cm2": null,
+      "strain": "Escherichia coli, Pseudomonas aeruginosa, Staphylococcus aureus, Staphylococcus epidermidis, Enterococcus faecalis, Enterococcus faecium, MRSA, Bacillus subtilis",
+      "log_reduction": "not stated numerically in the abstract (MIC/MBC-based outcome)",
+      "note": "States wavelengths and says radiant exposure is considered; assesses both phototoxicity and dark toxicity - the control question the seed paper's abstract leaves open."
+    },
+    {
+      "pmid": "42256523",
+      "doi": "10.1039/d6md00300a",
+      "journal": "RSC Med Chem",
+      "year": 2026,
+      "pmcid": "PMC13237936",
+      "citation": "RSC Med Chem. 2026 May 19;17(6):3115-3123. doi:10.1039/d6md00300a.",
+      "photosensitizer": "cationic Sn(IV) porphyrins SnP1, SnP2, SnP3",
+      "light_source": "LED",
+      "wavelength_nm": [
+        427
+      ],
+      "irradiance_mW_cm2": 22,
+      "fluence_J_cm2": null,
+      "strain": "Escherichia coli; clinical methicillin-resistant Staphylococcus aureus (MRSA)",
+      "log_reduction": "8.7 (E. coli) at 10 uM; 8.5 (MRSA) at 20 nM",
+      "note": "States wavelength and irradiance in the abstract."
+    }
+  ],
+  "headline_gap": {
+    "claim": "4.85 log10 (TBO) / 4.26 log10 (CUR) CFU/mL reductions under a household LED bulb",
+    "missing_for_transferability": [
+      "wavelength_nm",
+      "irradiance_mW_cm2",
+      "fluence_J_cm2",
+      "lamp_to_sample_distance_cm",
+      "temperature_measurement_reported",
+      "dark_and_light_alone_controls"
+    ],
+    "why_it_matters": "The project's question is defined by wavelength-irradiance-fluence-distance-heat. The seed abstract states none of them, so its headline cannot yet be judged transferable or not; the full text is required.",
+    "pattern_note": "The same laboratory's 2023 paper (PMID 37142073) makes the same kind of 'household LED bulb' claim and its abstract omits the same parameters, so this is a reporting habit, not an isolated omission."
+  }
+}
