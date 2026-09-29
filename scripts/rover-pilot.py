@@ -68,6 +68,28 @@ class Reflex(threading.Thread):
             time.sleep(0.1)
 
 
+def _resolve_gpiochip():
+    """The gpiochip number that owns the 40-pin header, verified against /dev.
+
+    robot_hat's own resolution trusts a sysfs label and returns 512 on this board; lgpio then
+    fails because /dev/gpiochip512 does not exist. Prefer the device-tree driver, and accept only
+    a number with a real /dev/gpiochipN character device behind it. Falls back to 0.
+    """
+    import glob
+    for dev in sorted(glob.glob('/sys/bus/gpio/devices/gpiochip*')):
+        try:
+            drivers = set(open(os.path.join(dev, 'of_node', 'compatible'))  # noqa: SIM115
+                          .read().split('\0'))
+        except OSError:
+            continue
+        if not any(d.endswith('-gpio') for d in drivers):
+            continue
+        num = int(os.path.basename(dev)[len('gpiochip'):])
+        if os.path.exists('/dev/gpiochip%d' % num):
+            return num
+    return 0
+
+
 class Body:
     """Hardware, or a stand-in that logs. The protocol is identical either way."""
 
@@ -77,6 +99,21 @@ class Body:
         self.moving = None
         self.last_reflex = None
         if not dry:
+            # picarx asks os.getlogin() for the name on its calibration file. Under systemd there
+            # is no controlling terminal, getlogin() raises ENOTTY (reported as "Errno -25") and
+            # the whole control layer dies at import — which is exactly how a body with no hand on
+            # it ends up looking switched off. Fall back to this uid's passwd entry.
+            try:
+                os.getlogin()
+            except OSError:
+                import pwd                     # noqa: PLC0415
+                os.getlogin = lambda: pwd.getpwuid(os.getuid()).pw_name
+            # robot_hat resolves the gpiochip by sysfs label, which on this board names the header's
+            # chip 512 — and /dev/gpiochip512 does not exist, so lgpio refuses with "can not open
+            # gpiochip". It only worked by hand because /etc/environment exports
+            # ROBOT_HAT_GPIOCHIP=0, and a systemd service does not read /etc/environment. Resolve
+            # it here, from the driver, and only to a chip that actually has a /dev node.
+            os.environ['ROBOT_HAT_GPIOCHIP'] = str(_resolve_gpiochip())
             from picarx import Picarx          # noqa: PLC0415
             from robot_hat import ADC          # noqa: PLC0415
             self.px = Picarx()

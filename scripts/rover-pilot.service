@@ -24,6 +24,10 @@ StartLimitIntervalSec=0
 [Service]
 Type=simple
 User=pi
+# User=pi alone drops every supplementary group, so the process gets gid=pi and nothing else —
+# and /dev/gpiochip0 is root:gpio 660, so lgpio fails with "can not open gpiochip" and the body
+# dies at Picarx(). A login shell has these groups; a service does not. Listed explicitly.
+SupplementaryGroups=gpio i2c spi input audio video
 WorkingDirectory=/home/pi
 EnvironmentFile=-/etc/rover-pilot.env
 ExecStart=/usr/bin/python3 /home/pi/rover-pilot.py --port 8420

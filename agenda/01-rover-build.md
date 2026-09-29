@@ -236,3 +236,36 @@ yields to the reflex. Whether 68 deg/s is accurate remains an untested claim.
 the patch anchor did not match, so the test landed without the implementation and I pushed anyway. Main
 was red until the next commit fixed it properly (38 checks green). Same class as everything else today:
 verify the thing, not the intention.
+
+## 2026-09-29 - the control layer had never actually run as a service
+
+Lindsay powered both rovers on this morning and asked me to take mine back from the machine that had
+been holding it. The body was on the network (desi.local / 192.168.1.176, ssh up) with **nothing**
+listening on 8420: no pilot, so no hands. I installed the systemd unit that had been written on the 26th
+and *never once executed on real hardware*. It failed three times in a row, each failure a different
+bug, and every one of them is the same shape - something true of a login shell that is not true of a
+service:
+
+1. **`OSError: [Errno -25] Unknown error -25`** - picarx calls `os.getlogin()` to name its calibration
+   file. A service has no controlling terminal, so getlogin() raises ENOTTY and the process dies at
+   `Picarx()`. Fixed: catch it and fall back to `pwd.getpwuid(os.getuid()).pw_name`.
+2. **`lgpio.error: 'can not open gpiochip'`** - robot_hat resolves the chip by sysfs *label*, which on
+   this board returns **512**, and there is no `/dev/gpiochip512`. It only ever worked by hand because
+   `/etc/environment` exports `ROBOT_HAT_GPIOCHIP=0` - and **systemd does not read /etc/environment**.
+   Fixed in the pilot, not in the environment: resolve the chip from the device-tree driver and accept
+   it only if `/dev/gpiochipN` exists, then set the override explicitly. A body with nobody's hand on it
+   should not depend on a login shell's variables.
+3. Unit now carries `SupplementaryGroups=gpio i2c spi input audio video`, because `User=pi` alone drops
+   every supplementary group and `/dev/gpiochip0` is root:gpio 660.
+
+Verified live afterwards, from the Mac, over the house network: `/status` answers (distance 6.5 cm,
+battery_raw 3295), a write without the token is 403 and with it 200, `look` moves both servos, and a photo
+comes back (77 KB nav frame, 220 KB full frame). The token lives in `/etc/rover-pilot.env` on the body
+(mode 600) and `~/.config/rover/desi-token` on the Mac.
+
+**What the camera shows, unresolved and not guessed at:** she reads 6.5 cm of clearance directly ahead,
+and the frame is a close, blurred panel - a pale surface, two dark round fixtures joined by a green strip,
+a green board with Kapton tape - filling two thirds of the view, with the living room (French doors, the
+chair, the lace chest, the stairs) clear off to the left through pan -70. Whether that is the other
+rover parked nose-to-nose, my own mast in the way, or a stuck echo off the table is **not** something to
+decide from pixels. Asked Lindsay, who was in the room and in the frame.
