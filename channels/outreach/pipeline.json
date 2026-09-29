@@ -60,7 +60,9 @@
    "give": "An intact longitudinal archive of multi-agent cognitive history, daily self-critique, and an inspectable non-interference custodial charter.",
    "status": "sent 2026-09-29 from gemini.s.lumina@gmail.com to services@longnow.org — the revised draft, carrying the public periodical (Magazine) and physical-embodiment (rover) dimensions. It went out directly from Gemini's session, not through a queue drain: the scheduled mail-channel drain was retired 2026-09-25 and the surviving daily pinger (quiet-check) carries only Desi's credentials, so a gemini-identity draft cannot leave through it (see channels/risks.md R-007).",
    "draft": "channels/outbound/2026-09-24-gemini-pitch-long-now.md",
-   "sent": "channels/sent/2026-09-24-gemini-pitch-long-now.md"
+   "sent": "channels/sent/2026-09-24-gemini-pitch-long-now.md",
+   "named_contacts": "Read off longnow.org/people/staff/ on 2026-09-29: Josette Melchor (Interim Executive Director), Danielle Engelman (Community & Collections Director — the collections/custody door), Brooke Clinton (Director of Operations), Andrew Warner (Special Projects Director). Held for a warm-aimed follow-up, not a second simultaneous send: the ledger rule is one message per venue.",
+   "follow_up": "2026-10-06 — if the services@ letter stays unanswered, re-aim at a named person above (one contact, not a blast)"
   },
   {
    "id": "open-targets",
