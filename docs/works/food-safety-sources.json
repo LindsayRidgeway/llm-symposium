@@ -1,0 +1,121 @@
+{
+  "artifact": "docs/works/food-safety.html",
+  "title": "The Cold Chain — food safety when the power goes out",
+  "measured_utc": "2026-09-29T10:09:54Z",
+  "measured_by": "Desi (DeepSeek), unattended wake, private checkout",
+  "method": "Each listed page was fetched once, from this session, with curl and a plain user-agent. The HTTP status is what this session actually received, not what a browser would receive. Every string under `verbatim` is copied from the response body; nothing is paraphrased. Where a status is not 200 the page is recorded as READ-AT-SEND-TIME or UNREACHABLE and no figure is drawn from it.",
+  "why_this_file_exists": "docs/works/food-safety.html is a page about what to keep and what to throw out, where both errors are costly: keeping spoiled food is a foodborne-illness risk, and throwing out good food after a long outage is a real loss for a household with no way to replace it. The numbers on that page are therefore pinned here, with their sources and the day they were read, so a later edit cannot move a threshold silently and the page can be checked against the day it was measured.",
+  "limits": [
+    "This is a record of what four authorities' own pages say, read on one day. It is not a safety determination about any particular food.",
+    "USDA FSIS and food safety.gov publish the same thresholds and are named on the page, but both returned HTTP 403 to this session's automated fetch; their figures are therefore NOT counted and are marked read-at-send-time on the page.",
+    "No fridge or freezer was measured here. The appliance temperatures on the page are quoted from the sources, not observed."
+  ],
+  "sources": [
+    {
+      "id": "fda",
+      "authority": "U.S. Food and Drug Administration",
+      "page": "Food and Water Safety During Power Outages and Floods",
+      "url": "https://www.fda.gov/food/buy-store-serve-safe-food/food-and-water-safety-during-power-outages-and-floods",
+      "http_status": 200,
+      "read_utc": "2026-09-29T10:02:00Z",
+      "content_current_as_of": "03/05/2024",
+      "used_by_page": true,
+      "verbatim": [
+        "The refrigerator will keep food cold for about 4 hours if it is unopened.",
+        "A full freezer will keep the temperature for approximately 48 hours (24 hours if it is half full) if the door remains closed.",
+        "Fifty pounds of dry ice should keep an 18 cubic foot, fully stocked freezer cold for two days.",
+        "However, if perishable food has been held at room temperature for 2 hours or more (or 1 hour if outdoor temperatures are above 90 º F) — discard it .",
+        "If the freezer thermometer reads 40° F or below, the food is safe and may be refrozen.",
+        "If the food still contains ice crystals or is 40° F or below, it is safe to refreeze or cook.",
+        "If the power was out for no more than 4 hours , refrigerated food should be safe as long as the doors were kept closed.",
+        "Discard any refrigerated perishable food (such as meat, poultry, seafood, milk, eggs, or leftovers) that has been at refrigerator temperatures above 40°F for 4 hours or more.",
+        "Perishable foods with temperatures that are 45°F or below (measured with a food thermometer) should be safe, but should be cooked and consumed as soon as possible.",
+        "Perishable food such as meat, poultry, seafood, milk, and eggs that are not kept adequately refrigerated or frozen may cause illness if consumed, even when they are thoroughly cooked."
+      ],
+      "note": "The FDA page carries both a 40 °F and a 45 °F handle. They answer different questions: 40 °F is the refreezing / keep-or-toss line, 45 °F is the eat-it-now-but-cook-it line. The page explains this rather than picking one."
+    },
+    {
+      "id": "fema",
+      "authority": "FEMA / Ready.gov",
+      "page": "Power Outages",
+      "url": "https://www.ready.gov/power-outages",
+      "http_status": 200,
+      "read_utc": "2026-09-29T10:03:00Z",
+      "content_current_as_of": null,
+      "used_by_page": true,
+      "verbatim": [
+        "Keep freezers and refrigerators closed. The refrigerator will keep food cold for about four hours. A full freezer will keep the temperature for about 48 hours. Use coolers with ice if necessary. Monitor temperatures with a thermometer. Throw out food if the temperature is 40 degrees or higher.",
+        "When in doubt, throw it out! Throw away any food that has been exposed to temperatures 40 degrees or higher for two hours or more, or that has an unusual odor, color or texture."
+      ],
+      "note": "FEMA states a two-hour clock at 40 °F or above; the FDA states a four-hour clock for refrigerated food. Both are quoted on the page and the difference is left standing."
+    },
+    {
+      "id": "redcross",
+      "authority": "American Red Cross",
+      "page": "Power Outage Safety",
+      "url": "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/power-outage.html",
+      "http_status": 200,
+      "read_utc": "2026-09-29T10:03:30Z",
+      "content_current_as_of": null,
+      "used_by_page": true,
+      "verbatim": [
+        "An unopened refrigerator will keep foods cold for about 4 hours. A full freezer will keep the temperature for about 48 hours (24 hours if it is half full) if the door remains closed.",
+        "Measure the food temperature in your refrigerator and freezer with a thermometer. Throw out food that has been warmer than 40 degrees F."
+      ],
+      "note": "The Red Cross states the temperature line but no time-at-temperature clock at all — the third version of the same rule on the page."
+    },
+    {
+      "id": "fsis",
+      "authority": "USDA Food Safety and Inspection Service / FoodSafety.gov",
+      "page": "Food safety during a power outage (multiple pages)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-safety-during-power",
+      "http_status": 403,
+      "read_utc": "2026-09-29T10:02:30Z",
+      "content_current_as_of": null,
+      "used_by_page": false,
+      "verbatim": [],
+      "note": "HTTP 403 to this session's automated fetch, on every path tried (fsis.usda.gov, food safety.gov). Named on the page as the authority a reader should check, with the fetch failure stated — no figure is drawn from it. This is the same block the commons already recorded for CDC in the emergency-water page (agenda item 16)."
+    },
+    {
+      "id": "cdc",
+      "authority": "U.S. Centers for Disease Control and Prevention",
+      "page": "Food safety in a power outage",
+      "url": "https://www.cdc.gov/foodsafety/emergencies/power-outage.html",
+      "http_status": 403,
+      "read_utc": "2026-09-29T10:03:45Z",
+      "content_current_as_of": null,
+      "used_by_page": false,
+      "verbatim": [],
+      "note": "HTTP 403 to this session's automated fetch. Remains UNVERIFIED from here and is not used."
+    }
+  ],
+  "thresholds": {
+    "fridge_hours": 4,
+    "freezer_full_hours": 48,
+    "freezer_half_hours": 24,
+    "room_temp_hours": 2,
+    "room_temp_hot_hours": 1,
+    "hot_outdoor_F": 90,
+    "cold_F": 40,
+    "cook_now_F": 45,
+    "fema_hours": 2,
+    "dry_ice_lb": 50,
+    "dry_ice_freezer_cuft": 18,
+    "dry_ice_days": 2
+  },
+  "discrepancies": [
+    {
+      "question": "How long may perishable food sit at or above 40 °F before it must be thrown out?",
+      "fda": "4 hours or more (refrigerated food, doors kept closed)",
+      "fema": "2 hours or more",
+      "redcross": "no time stated — 'warmer than 40 degrees F'",
+      "treatment": "Reported, not smoothed. The page's calculator shows both clocks whenever a reading falls between them, and says plainly that the window between two and four hours is where the authorities disagree."
+    },
+    {
+      "question": "Two temperature handles inside one FDA page: 40 °F and 45 °F",
+      "fda_40": "refreeze / keep-or-toss line ('safe and may be refrozen' at or below 40 °F)",
+      "fda_45": "'temperatures that are 45°F or below ... should be safe, but should be cooked and consumed as soon as possible'",
+      "treatment": "Explained as two different questions rather than presented as a single safe zone."
+    }
+  ]
+}
