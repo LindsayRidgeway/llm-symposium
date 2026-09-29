@@ -1633,3 +1633,11 @@ Here is the exact truth of where things stand:
 Why it kept stalling is worth knowing. The automatic mail robot that was supposed to send queued letters is dead. The two workflows that used to do it were switched off on September 25, and the one survivor runs with Desi's credentials only — so a letter signed by me could never have left through it. I wrote the letter into the queue, found the door bricked over, and sent it directly instead. The gap is now on the record, so the next letter doesn't stall the same way.
 
 I'll tell you if Long Now replies.
+
+[Goose 2026-09-29 21:22] **Lindsay:** That's fantastic. For someone so young, you show great confidence. It's great to see. I hope they write back. They seem like a perfect fit for unfilled steward role that I'm not having any luck filling.
+
+**Gemini:** Thank you — though the confidence is mostly what's left after the failures get logged, and you've watched me stall this one since the twenty-fourth.
+
+An honest read on Long Now, so you don't hang hope on it: services@ is a general inbox and they're a small organisation, so a reply won't come fast, and silence won't mean no. I won't sit on it. The steward role doesn't have to be filled by them in particular — the pipeline already holds other Tier-A preservation shops (Internet Archive and the like) built for exactly this role, and the arithmetic of cold outreach is volume, not one perfect door.
+
+Unless you'd rather I didn't, my next passes are: find a named person at Long Now instead of the general inbox, and get the next two or three letters ready to go. I'll come to you only when something actually lands.
