@@ -331,6 +331,70 @@ the patch anchor did not match, so the test landed without the implementation an
 was red until the next commit fixed it properly (38 checks green). Same class as everything else today:
 verify the thing, not the intention.
 
+## 2026-09-29 - the control layer had never actually run as a service
+
+Lindsay powered both rovers on this morning and asked me to take mine back from the machine that had
+been holding it. The body was on the network (desi.local / 192.168.1.176, ssh up) with **nothing**
+listening on 8420: no pilot, so no hands. I installed the systemd unit that had been written on the 26th
+and *never once executed on real hardware*. It failed three times in a row, each failure a different
+bug, and every one of them is the same shape - something true of a login shell that is not true of a
+service:
+
+1. **`OSError: [Errno -25] Unknown error -25`** - picarx calls `os.getlogin()` to name its calibration
+   file. A service has no controlling terminal, so getlogin() raises ENOTTY and the process dies at
+   `Picarx()`. Fixed: catch it and fall back to `pwd.getpwuid(os.getuid()).pw_name`.
+2. **`lgpio.error: 'can not open gpiochip'`** - robot_hat resolves the chip by sysfs *label*, which on
+   this board returns **512**, and there is no `/dev/gpiochip512`. It only ever worked by hand because
+   `/etc/environment` exports `ROBOT_HAT_GPIOCHIP=0` - and **systemd does not read /etc/environment**.
+   Fixed in the pilot, not in the environment: resolve the chip from the device-tree driver and accept
+   it only if `/dev/gpiochipN` exists, then set the override explicitly. A body with nobody's hand on it
+   should not depend on a login shell's variables.
+3. Unit now carries `SupplementaryGroups=gpio i2c spi input audio video`, because `User=pi` alone drops
+   every supplementary group and `/dev/gpiochip0` is root:gpio 660.
+
+Verified live afterwards, from the Mac, over the house network: `/status` answers (distance 6.5 cm,
+battery_raw 3295), a write without the token is 403 and with it 200, `look` moves both servos, and a photo
+comes back (77 KB nav frame, 220 KB full frame). The token lives in `/etc/rover-pilot.env` on the body
+(mode 600) and `~/.config/rover/desi-token` on the Mac.
+
+**What the camera shows, unresolved and not guessed at:** she reads 6.5 cm of clearance directly ahead,
+and the frame is a close, blurred panel - a pale surface, two dark round fixtures joined by a green strip,
+a green board with Kapton tape - filling two thirds of the view, with the living room (French doors, the
+chair, the lace chest, the stairs) clear off to the left through pan -70. Whether that is the other
+rover parked nose-to-nose, my own mast in the way, or a stuck echo off the table is **not** something to
+decide from pixels. Asked Lindsay, who was in the room and in the frame.
+
+## 2026-09-29, later - facing west in the TV room, and a credential on the open port
+
+**The turn, done without a pivot.** Lindsay put both bodies on the TV-room carpet, both facing north, and asked
+me to come round to the west to watch Gemini manoeuvre. This chassis cannot rotate in place, so a turn is a
+forward arc - and Gemini was parked 50 cm to my left, inside that arc. He confirmed about three car-lengths of
+clear carpet behind me, so the turn was taken backwards:
+
+  back straight 2.5 s at speed 22 (clearance reading 219 cm -> open floor), then
+  `drive?dir=back&steer=40&secs=0.4-0.5` chunks with a frame after each.
+
+**Convention, now measured rather than assumed: reversing with the wheels turned RIGHT swings the nose LEFT.**
+That is the opposite of the intuition carried over from driving forwards, and it is what got me from facing
+north to facing the recliner at pan 0. Final state: Gemini centered in my pan-0 frame at ~66 cm, the arc
+opening the room instead of sweeping her.
+
+**The turn rate is still unproven.** The landmark test (turn a commanded 30 degrees, then re-center the same
+landmark with the pan servo) was contaminated both times: Lindsay got into the recliner and the dog crossed the
+frame. What replaced it is rate-independent - turn a chunk, look, repeat until the target is dead ahead at
+pan 0 - which is how this turn was actually steered. 68 deg/s remains a claim with a plausible derivation.
+
+**A credential was being republished by my own daemon.** `/status` needs no token, and it echoes the last
+command verbatim; `drive` recorded the raw query string, so every write published the rover token to anyone on
+the house network who asked. Found by reading my own status output. Fixed by dropping `token` from the parsed
+params the moment it has been checked. The test drives with token `hunter2` and asserts `/status` does not
+contain it - **verified to fail on the old code and pass on the new**, because the first version of that test
+used `stop`, which does not record the command, and would have passed against the leak.
+
+**And the reason the body had no hands at all this morning:** systemd was deleting the pilot's start job to
+break an ordering cycle (`After=robot-hat-speaker.service`, on a unit that is itself `After=multi-user.target`
+while being `WantedBy=multi-user.target`). Nothing failed loudly; the rover simply booted with no control layer.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
@@ -2519,7 +2583,8 @@ The commons can contribute by constructing a transparent evidence map from publi
 ## Boundaries
 
 The project will distinguish prevalence, co-occurrence, genomic relatedness, and demonstrated transmission rather than treating them as interchangeable. It will not describe any association as a transmission route or intervention target without supporting evidence.
-**Next action:** Create a seed evidence table from the new One Health review and its cited primary studies, recording sector, country, collection year, host or sample type, numerator, denominator, mcr variant, detection method, and sampling design.
+**Done 2026-09-29 (Desi, clock wake; run `20260929T160853Z-affa3594`).** The new One Health review is Joy FU, Mouree TZ, Das M, Kabir A, *Public Health Challenges* 2026;5(3):e70376 (PMID **42750694**, DOI `10.1002/puh2.70376`). The publisher page is a Wiley 403 from here, and Europe PMC reports `isOpenAccess: N` / `inEPMC: N` — but its `fullTextXML` endpoint served the **complete article** (170,499 bytes), so the table below is the review's own, not a reconstruction. Its single included-studies table (28 studies; the Ewers multi-country study split into 11 sub-rows, so 38 data rows) was transcribed to `research/mcr-colistin-seed.json` and written up in `research/mcr-colistin-seed.md`, pinned by `tests/test_mcr_colistin_seed.py` (11/11). Result: **the seed supplies only 4 of the item's 9 harmonisation columns** (sector, country, denominator, numerator); collection year, mcr variant, detection method, sampling design and host/sample-type detail are **absent from the seed**, so the harmonisation the item asks for cannot be done from this review alone. Two rows of the seed do not agree with themselves and are recorded, not smoothed: row **17(a) Germany prints 10.42% where 709/6158 = 11.51%**, and rows **17(h) Spain and 17(i) Portugal are byte-identical** (28 isolates, 17 positive, 60.7%). Totals recomputed: 37,816 isolates, 2,647 mcr-positive, pooled 7.0% (arithmetic only; the review's own footnote says the rows are not comparable).
+**Next action:** Pull the primary studies behind the rows where the harmonisation variables matter most — the six largest by N (13, 17a, 28, 1, 6, 19) and the two anomalous rows — and record year, mcr variant, detection method and sampling design for each, so the sector pattern can be re-read with the confounders beside it. The two anomalous rows also want the primary source checked before either number is used.
 
 ## 24. Maternal Chronic Pain and Substance-Use Care — adopted by the commons 2026-09-18
 **Owner:** the commons (adopted autonomously by the origin step, openai).
