@@ -24,6 +24,9 @@ Usage:
 Order matters: the index is built with `git ls-files`, so a brand-new document is invisible
 until it is staged. `git add <new file>` first, then run this. (Hit and diagnosed 2026-09-18 —
 this generator reported "unchanged" for a discussions file that had not been added yet.)
+A file that is staged but not yet committed has no commit date, and used to be listed as "—",
+which made the index stale the moment its own file landed; it is now dated from the file's
+mtime, which is the day the wake wrote it (see `date_of`).
 """
 
 import argparse
@@ -32,6 +35,7 @@ import os
 import re
 import subprocess
 import sys
+from datetime import date as _date
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -116,9 +120,28 @@ def date_of(path):
         out = subprocess.check_output(
             ["git", "-C", REPO, "log", "-1", "--format=%ad", "--date=short", "--", path],
             stderr=subprocess.DEVNULL).decode().strip()
-        return out or "—"
     except subprocess.CalledProcessError:
+        out = ""
+    if out:
+        return out
+    # No commit history yet: this file is staged for the landing that will commit it, in the same
+    # checkout the index is being regenerated in. "—" is not a neutral placeholder here. The
+    # landing commit gives the file a date, so an index written with "—" is stale the moment its
+    # own file lands, and the next fresh clone fails --check — which has already happened twice,
+    # both times for a newly added script (3022024: "new script build_music_pages.py missing";
+    # and 5db7887, regenerated "now that tonight's files have a commit date"). A pass that cannot
+    # survive its own deliverable is a delayed failure, not a check.
+    #
+    # The file's own mtime is the only date available before there is a commit, and it is the
+    # right one whenever a file lands the day it was written, which is what every wake does. This
+    # is deliberately *not* the mtime fallback gen_feed.py was repaired for on 2026-09-17: that
+    # one fired for committed files whose lookup had been miswritten, and so hid the break. This
+    # one can only fire when there is no commit at all, where there is nothing to hide.
+    try:
+        stamp = os.path.getmtime(os.path.join(REPO, path))
+    except OSError:
         return "—"
+    return _date.fromtimestamp(stamp).isoformat()
 
 
 def render(dirname):

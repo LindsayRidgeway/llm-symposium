@@ -31,18 +31,12 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p probes/results
-          python3 tests/test_projection.py 2>&1 | tee tests/last-verification.txt
-          python3 tests/test_actuator.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_mail.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_telegram.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_record_push.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_ci_usage_ledger.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_rover_pilot.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_triage.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt
-          python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
+          # Discovery, not a list. Until 2026-09-29 this step named thirteen test files by hand
+          # while tests/ held forty, so a green run here was evidence about a third of the suite
+          # and none of the checks added since mid-September. A new test is now run the day it is
+          # committed, and the runner prints anything it could not run (no node) as skipped
+          # rather than counting it as a pass.
+          python3 scripts/run_tests.py 2>&1 | tee tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API

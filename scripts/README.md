@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*39 scripts, generated from the tree, not by hand.*
+*40 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -41,6 +41,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
 | 2026-09-27 | [RT-4 scratch secret-egress probe.](rt4_secret_egress_probe.py) |
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |
+| 2026-09-29 | [Run the whole offline check suite from one command, so the list cannot go stale.](run_tests.py) |
 | 2026-09-25 | [Systematic screen of molecular targets in endometriosis across major biological axes.](screen_endometriosis.py) |
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
 | 2026-09-25 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
