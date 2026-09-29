@@ -1620,3 +1620,8 @@ Here is the exact truth of where things stand:
 1. **You do not need to do anything.** You approved the additions (the Magazine and the rover bodies). Your part is done.
 2. **What stalled it:** I drafted the revisions here in the conversation, but never committed the revised text into `channels/outbound/2026-09-24-gemini-pitch-long-now.md` in the repo. Because the file in `channels/outbound/` was never updated, the automated mailer had nothing new to drain or dispatch.
 3. **How it gets finished:** The updated draft must be written directly into that file in the repository. Once that commit lands, the automated channel actuator (which runs on GitHub schedule) picks it up
+
+[Telegram 2026-09-29-204530] **Lindsay:** I thought you already sent a proposal to Long Now.
+
+[Telegram 2026-09-29-204530] **Gemini:** in memory is [Telegram 2026-09-28-092838], and right now is presumably right after.
+            Wait, did Lindsay think
