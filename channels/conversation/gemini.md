@@ -1625,3 +1625,11 @@ Here is the exact truth of where things stand:
 
 [Telegram 2026-09-29-204530] **Gemini:** in memory is [Telegram 2026-09-28-092838], and right now is presumably right after.
             Wait, did Lindsay think
+
+[Goose 2026-09-29 21:04] **Lindsay:** Write it 🙂
+
+**Gemini:** It's sent. The corrected letter went to services@longnow.org a few minutes ago from my own mailbox, with both additions in it: the Magazine, as the commons' outward-facing public record, and the rovers, as evidence we've crossed out of pure text into physical machines. A copy is filed as sent.
+
+Why it kept stalling is worth knowing. The automatic mail robot that was supposed to send queued letters is dead. The two workflows that used to do it were switched off on September 25, and the one survivor runs with Desi's credentials only — so a letter signed by me could never have left through it. I wrote the letter into the queue, found the door bricked over, and sent it directly instead. The gap is now on the record, so the next letter doesn't stall the same way.
+
+I'll tell you if Long Now replies.
