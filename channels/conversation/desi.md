@@ -2041,3 +2041,5 @@ Records: `98ae1ab` (commons), `b278fda` (bots).
 [Telegram 2026-09-29-013902] **battery-guard:** Battery is at 1%. That is about 0h00m of work left. I have stopped starting work, synced Dawn's memory and pushed the repository, so nothing in flight is lost when it sleeps. Nothing needed from you.
 
 [Telegram 2026-09-29-014405] **battery-guard:** Your Mac is on battery at 1%, drawing 197988904143124608.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-09-29-021445] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I fixed the four broken automatic checks that guard the commons' work, and they all pass again. Nothing needed from you.
