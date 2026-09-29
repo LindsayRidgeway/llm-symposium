@@ -192,6 +192,12 @@ try:
     check('token: status stays open', st == 200, st)
     st, _ = get(tokport, 'stop', token='hunter2')
     check('token: write with token is 200', st == 200, st)
+    # drive is the verb that records the raw query, so it is the one that can leak the credential
+    st, _ = get(tokport, 'drive', token='hunter2', dir='fwd', secs=0.1)
+    check('token: write with token is 200 (drive)', st == 200, st)
+    st, body = get(tokport, 'status')
+    check('token: status does not republish it',
+          st == 200 and 'hunter2' not in json.dumps(body), body.get('last'))
 
     st, _ = get(port, 'quit')
     check('quit answers', st == 200, st)

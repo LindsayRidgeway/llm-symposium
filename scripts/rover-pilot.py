@@ -316,6 +316,10 @@ class Handler(BaseHTTPRequestHandler):
 
         if write and TOKEN and q.get('token') != TOKEN:
             return self._send(403, {'error': 'token required for write commands'})
+        # and then forget it. /status needs no token and echoes the last command verbatim, so a
+        # token left in the parsed query is republished to anyone who asks - which is how a
+        # credential on this body got printed into a transcript twice today.
+        q.pop('token', None)
 
         try:
             if verb == 'status':

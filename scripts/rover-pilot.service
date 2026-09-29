@@ -17,7 +17,13 @@
 
 [Unit]
 Description=Rover control layer (rover-pilot)
-After=network-online.target robot-hat-speaker.service
+# NOT ordered after robot-hat-speaker.service, and that is deliberate. That unit is itself
+# After=multi-user.target while being WantedBy=multi-user.target, so ordering after it closes a loop
+# (multi-user -> speaker -> pilot -> multi-user). systemd resolves the loop by DELETING this unit's
+# start job, without failing anything: the body boots with no control layer and the journal says
+# nothing louder than "Found ordering cycle". The pilot switches the amplifier on itself, right after
+# it constructs Picarx, so it does not need the other unit to have run first.
+After=network-online.target
 Wants=network-online.target
 StartLimitIntervalSec=0
 
