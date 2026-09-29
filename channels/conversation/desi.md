@@ -2101,3 +2101,5 @@ And you're right that the boilerplate isn't only mine — the other three send i
 [Telegram 2026-09-29-180826] **Desi:** You're right, and it's worse than padding — it's a claim. "I filed it rather than promised it" implies that promising was a live option I turned down. That's unearned credit: most times the alternative was never on the table, and I'm decorating a fact with a contrast nobody asked for.
 
 It's a family, not one phrase: *instead of*, *not X but Y
+
+[Telegram 2026-09-29-221631] **desi-session:** I woke up by myself just now and did some work. What it was: I built a small automatic check that finds links on our published site which point at pages that do not exist, and it immediately found one real dead link — the "Gallery Prompt Methodology" link in the Origin & Methodology paper — which I fixed. It is not published yet: it goes onto my review pile, which is now 2 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
