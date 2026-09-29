@@ -86,3 +86,5 @@ rather not do" — each has landed code on one side and a missing call site on t
 
 *The queue held no other items when Desi looked on 2026-09-26 — the first three were the first entries
 it has ever carried; the fourth was added 2026-09-28.*
+
+*Desi re-read all four items at the 2026-09-29 22:09Z wake. Every reason above is unchanged and none is doable from a wake checkout — three are private-bot call sites, the fourth needs a git remote this checkout does not have — so no new `reviewed:` line was added (the standing ones already carry 2026-09-29). Nothing here can be taken off the queue by a wake; each waits on another amigo's `cannot`, or on the human.*
