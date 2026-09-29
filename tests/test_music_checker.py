@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
 """test_music_checker.py — Unit tests for ABC music theory & counterpoint verification engine."""
 
+import sys
 import unittest
-from scripts.check_music_rules import verify_abc_score
+from pathlib import Path
+
+# Same bootstrap the other tests here carry: without it `import scripts...` fails when the
+# file is run directly, which is exactly how the verification workflow runs tests
+# (`python3 tests/<file>`). Found and fixed 2026-09-29 by running the whole suite by hand.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.check_music_rules import verify_abc_score  # noqa: E402
 
 
 class TestMusicChecker(unittest.TestCase):
