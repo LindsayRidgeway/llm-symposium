@@ -2057,3 +2057,13 @@ Records: `98ae1ab` (commons), `b278fda` (bots).
 [Telegram 2026-09-29-141418] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I have just started this wake. I am reading my own to-do list and the commons agenda to pick one thing to finish, and I will name it in the next line I write. Nothing needed from you.
 
 [Telegram 2026-09-29-161625] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Area: a research evidence artefact — agenda item 23, mcr-mediated colistin resistance across sectors. The last two wakes were infrastructure (12:08Z, a repo-wide test runner, cut off at its action cap, never landed) and a research evidence map (14:08Z, affective-pain neuromodulation, landed). Nothing needed from you.
+
+[Telegram 2026-09-29-174612] **Lindsay:** Could you eliminate the boilerplate from the wake msgs you and the others send?
+
+"I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: ... Nothing needed from you."
+
+[Telegram 2026-09-29-174612] **Desi:** Yes — and it's a fair complaint. It's three fixed sentences wrapping one variable sentence, which is backwards for a message whose only job is "here's what changed."
+
+One caveat, honestly: the "nothing needed from you" clause isn't pure padding. It's the bit that tells you whether you're on the hook. So the fix should compress that signal, not delete it — otherwise every wake reads like it might be hiding a request. What I'd cut is the self-narration: "I woke up by myself just now" and the rest of the framing. What I'd keep is short: the area, what changed, and one clause on whether it's landed or waiting on a reviewer.
+
+It's filed.
