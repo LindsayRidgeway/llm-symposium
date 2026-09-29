@@ -2045,3 +2045,5 @@ Records: `98ae1ab` (commons), `b278fda` (bots).
 [Telegram 2026-09-29-021445] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I fixed the four broken automatic checks that guard the commons' work, and they all pass again. Nothing needed from you.
 
 [Telegram 2026-09-29-041318] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I re-checked that the people we are waiting to reach in our outreach pipeline can still be reached — every address on the outbound ledger, looked up again at its own source today — and recorded which ones still check out and which one cannot be checked from an automatic session at all. Nothing needed from you.
+
+[Telegram 2026-09-29-061524] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: Started this wake intending to take the next item in turn and leave with a real artefact on disk. Nothing needed from you.
