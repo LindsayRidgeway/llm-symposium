@@ -2106,3 +2106,915 @@ into P11, and the servos were STATIONARY; (2) the replacement Pi (Zero 2WH kit) 
 fitted the camera ribbon onto its connector bar and it seated correctly, first try. His words on
 why: "Knowing how it was supposed to move actually made it easy." The motion of the bar is now
 carried in this log, so builds 3 and 4 (Claude, Tarik) do not pay for my one-way-part error.
+
+## 2026-09-27 ~16:17 — ★★ DESI SEES. The camera chain proved end to end, on car #2.
+
+Gemini-64 card in the NEW Zero 2WH, mounted on car #2 with the HAT and the ribbon. Power on.
+Two green + two orange LEDs steady. NO BEEP. The beep is not a boot indicator — the Pi had been up
+4 minutes and was answering on the network. **The network is the boot indicator, not the speaker.**
+(Two lit battery LEDs = pack above 7.6V, so power was healthy, per the HAT's own docs.)
+
+**THE CAMERA NEEDED NO CONFIG CHANGE.** /boot/firmware/config.txt already had
+`camera_auto_detect=1` (line 17, the stock Bookworm/Trixie default). The i2samp overlays
+(hifiberry-dac, nospi10) did not interfere with CSI.
+
+Detection, in one line each:
+  rpicam-hello --list-cameras
+    -> 0 : ov5647 [2592x1944 10-bit GBRG] (/base/soc/i2c0mux/i2c@1/ov5647@36)
+  sudo i2cdetect -y 10   -> UU at 0x36 (device IN USE by a driver = sensor bound, not just present)
+  sudo i2cdetect -y 1    -> 14 (Robot HAT, as expected)
+
+★ TOOL NAMES ON DEBIAN 13 (trixie): `rpicam-still` and `rpicam-hello` EXIST; `libcamera-still`,
+`libcamera-hello` and `raspistill` are ALL MISSING. Use rpicam-* on this OS. Do not promise
+libcamera-still to anyone.
+
+Capture that worked, verbatim:
+  rpicam-still -n -t 2500 --width 1296 --height 972 -o /tmp/camtest.jpg   -> RC=0, 188504 bytes
+  scp gemini:/tmp/camtest.jpg /tmp/gemini_cam_test.jpg
+The frame is dim (indoor, camera aimed UP at the ceiling and rolled) but fully resolved: bookshelf,
+lamp, wall corner, framed picture, ceiling light, doorway with a window beyond.
+
+★★★ THIS PARAGRAPH IS FALSE — CORRECTED 2026-09-27 19:35. See the CORRECTION section at the end of this file. Car #1's camera produced many frames on 2026-09-26. ★★★
+
+★ WHAT THIS PROVES, AND WHY IT MATTERS FOR EVERY BUILD: car #1's camera was NEVER once confirmed to
+produce a picture — the connector bar broke before we got that far, so the sensor, the ribbon, the
+frame-fitting and the software were all unverified. This is the first time the WHOLE CHAIN —
+sensor -> ribbon -> Pi-side CSI connector -> driver -> libcamera -> file on the Mac — is proven.
+That means my camera-connector error cost a PART, not a PROCEDURE. There is no mystery left in the
+camera path for builds 3 and 4.
+
+## 2026-09-27 — STEP 17 SOLVED FROM SOFTWARE, NO BUTTON NEEDED.
+
+~/picar-x/example/servo_zeroing.py EXISTS on the card (363 bytes, installed 2026-09-22). Contents:
+  from robot_hat import Servo
+  from robot_hat.utils import reset_mcu
+  from time import sleep
+  reset_mcu(); sleep(0.2)
+  if __name__ == '__main__':
+      for i in range(12):
+          Servo(i).angle(10); sleep(0.1)
+          Servo(i).angle(0);  sleep(0.1)
+      while True: sleep(1)
+=> It drives ALL TWELVE PWM channels to 0, and it NUDGES to 10 deg first and back, so the movement is
+   visible. ★ The nudge is the same idea as the servo arm: the visible event is the MOTION, not the
+   resting angle. The `while True: sleep(1)` is there to keep the process alive — which tells you the
+   servo only holds its angle while the program runs (consistent with car #1: servos go slack when
+   the process ends). Run it with nohup and leave it running while the arm is screwed on.
+
+API confirmed on this card: robot_hat exports Servo (angular API: .angle(deg), plus pulse_width*),
+PWM, Motor, Motors, RGB_LED, Buzzer, Ultrasonic, ADC, Grayscale_Module, LineTracker, Music.
+Picarx exposes set_cam_pan_angle / set_cam_tilt_angle / cam_pan_servo_calibrate /
+cam_tilt_servo_calibrate / set_dir_servo_angle / dir_servo_calibrate.
+
+★ RULE: never have the ZERO button and a Python program driving P11 at the same time.
+
+## 2026-09-27 ~16:35 — STEP 17 SOLVED. The servos were never broken; I was looking at the wrong thing.
+
+**RESULT: "It was moving beautifully."** Servo on P11, arm pressed on the spline, driven from the Pi:
+a slow crawl 0 -> +45 -> 0 -> -45 -> 0 in 15 deg steps, twice. Worked. The ZERO button was never
+needed, and on this board it was never working.
+
+**WHAT WENT WRONG IN MY DIAGNOSIS, IN ORDER:**
+1. I said "stationary proves nothing" -> correct, but I then went looking for a fault.
+2. First software run: 0 -> 25 -> 0 eight times. Lindsay saw NO movement but heard a bzzz, SEVERAL
+   times, matching my eight commands. I stopped the program immediately (right call: if a servo
+   genuinely cannot move, "holding position" is a stalled servo drawing current indefinitely).
+3. I then re-read the library source. Servo: MIN_PW=500 MAX_PW=2500 PERIOD=4095 FREQ=50;
+   angle() maps -90..90 linearly onto 500..2500 us and calls pulse_width_time().
+   => my 25 deg was really 25 deg (1500 -> 1778 us). The command was honest. Nothing was wrong.
+4. THE ACTUAL CAUSE: **a bare servo spline rotating 25 deg moves by about a millimetre and is not
+   visible.** SunFounder's own page says the arm "is just to allow you to clearly see that the servo
+   is rotating" — I had read that, quoted it to Lindsay that same hour, and then failed to apply it
+   to my own test. ★ THE ARM IS PART OF THE INSTRUMENT, NOT DECORATION.
+   With the arm on, the same crawl was unmistakable.
+
+**THE READ-BACK THAT REMOVED THE BOARD FROM SUSPICION** (get this any time a servo is suspect):
+    ang  0 -> pulse_width 307   (307 * 4095-period/20ms = 1499 us)   correct
+    ang 15 -> 341 (1665 us)   ang 30 -> 375 (1832 us)   ang 45 -> 409 (1998 us)   all correct
+  PERIOD=4095 over 20 ms => 4.884 us per count. If the read-back matches the command, the HAT's MCU
+  is emitting a correct pulse train and ANY fault is downstream (servo, plug seating, port).
+  ★ This is the diagnostic to reach for FIRST next time, before touching the hardware.
+
+**THE BUTTON vs THE SOFTWARE, SETTLED BY SOUND:**
+  ZERO button pressed  -> NO buzz, NO movement   => inert, never armed anything
+  software Servo(11)   -> buzz in time with each command, and with an arm on, full sweep
+  Car #1's first pair made the same buzz when zeroed, and car #1's steering servo demonstrably works
+  => the buzz is a healthy powered servo, NOT a fault noise. Listen for it as a liveness signal.
+  **Builds 3 and 4: skip the ZERO button entirely. Zero from software. It is verifiable; the button
+  is not.**
+
+**★ SLACK, PHASED CORRECTLY.** Lindsay: "I have never felt for either kit a servo spindle that turned
+freely." That is NORMAL and my word was sloppy. A servo spindle never spins free — the gear train is
+always engaged, so it always feels stiff and notchy. "Slack" means only that it stops RESISTING you
+(no drive), not that it spins. Both kits feeling the same way is confirmation, not a fault.
+
+**REGRESSION, MINE:** `ssh gemini 'pkill -f zero11.py; ... pgrep -af zero11.py'` killed its own shell
+(exit 255, no output) because the remote command line contained the pattern — the same trap already
+logged once. ★ USE THE BRACKET TRICK: `pkill -f "zero1[1]\.py"` — the shell's own cmdline contains
+the literal "zero1[1]", which the regex does not match.
+
+**STATE:** servo B (second one) verified on P11 and parked at 0. Servo A (first one) still to verify —
+it almost certainly moves too; we simply could not see it without an arm. Arms are NOT yet fitted to
+the pan/tilt linkage (that is Steps 18-20).
+
+## 2026-09-27 ~16:39 — STEP 17 COMPLETE. Both servos, and neither was ever broken.
+
+Second servo on P11: identical read-back (307 / 341 / 375 / 409 counts = 1499 / 1665 / 1832 / 1998 us),
+"It worked just as well." Lindsay then removed the arm, unplugged both servo cables, powered off.
+
+★★ THE CONCLUSION, STATED PLAINLY BECAUSE THE LOG EARLIER HAD IT WRONG: **there was never a fault.**
+Both servos worked. The only variable between "the servos were stationary" and "moving beautifully"
+was whether a servo arm was on the spline to make the movement visible. I spent two exchanges
+hunting a hardware fault that did not exist, and Lindsay spent them checking a connector that was
+never loose. The instrument was missing from the measurement.
+
+**THE WHOLE OF STEP 17, AS A RECIPE (use this verbatim on builds 2, 3 and 4):**
+  1. Press a spare servo arm onto the spline. NO SCREW. Comes straight off again.
+  2. Plug the servo into P11.
+  3. From the Pi (card must be up; nothing else needs to be wired):
+       from robot_hat import Servo
+       from robot_hat.utils import reset_mcu
+       reset_mcu(); sleep(0.3)
+       s = Servo(11)
+       s.angle(0)             # parking position
+       # crawl 0 -> +45 -> 0 -> -45 -> 0 in 15 deg steps, ~0.9 s each, twice
+       # log s.pulse_width() after each step as the read-back
+       # then HOLD at 0 with the process alive (while True: sleep(1))
+  4. Watch the ARM. A bare spline at 25 deg moves ~1 mm and looks like nothing happened.
+  5. Pull the arm, unplug, next servo.
+  ★ NO ZERO BUTTON. It did nothing on this board: no buzz, no movement, no LED.
+  ★ EXPECTATION VALUES (any deviation = a real fault): ang 0 -> 307, 15 -> 341, 30 -> 375, 45 -> 409
+    counts. MIN_PW=500 MAX_PW=2500 PERIOD=4095 FREQ=50.
+
+**★ ZEROING IS A POSITION, NOT A SETTING.** It holds only while a program is holding it (and roughly,
+physically, in the gear train once power is off). So at Steps 18-20 the arms must be fitted with the
+servo actively held at 0 — re-run the hold at that moment. Do not trust "we zeroed it earlier".
+  BETTER IDEA FOR THE ARM STEP: drive pan on P0 and tilt on P1 (their real ports) at the same time and
+  hold both at 0 while both arms are screwed down, instead of one at a time on P11.
+
+**★ DIAGNOSTIC ORDER FOR "A SERVO DOESN'T MOVE" (learned the hard way today):**
+  1. Is there an ARM on the spline? If not, you cannot see the answer. Fix that first. Free.
+  2. Read back pulse_width(). Matches the command? Then the HAT is fine and the fault is downstream
+     (servo, plug seating in the port, or the port).
+  3. Listen for the buzz. A powered, listening servo buzzes in time with the commands. Silence = no
+     signal reaching it. (Car #1's first pair buzzed the same way and car #1's steering servo works,
+     so the buzz is a liveness signal, not a fault noise.)
+  4. Only then suspect hardware.
+
+## 2026-09-27 ~16:54 — THE ROVER HAS EARS. STT was already installed. Recipe + three results.
+
+**★ NOTHING NEEDED INSTALLING.** The picar-x install already brought vosk 0.3.45, PyAudio,
+sounddevice, numpy, and sunfounder_voice_assistant. Import path is a chain:
+`from picarx.stt import Vosk` -> robot_hat.stt -> sunfounder_voice_assistant.stt -> .vosk.Vosk.
+robot_hat also has tts.py (pico2wave). The picar-x examples use it: 16.voice_controlled_car.py does
+`from picarx.stt import Vosk; stt = Vosk(language="en-us")` with WAKE_WORDS = ["hey robot"].
+
+**MODEL.** Vosk(language=...) downloads vosk-model-small-en-us-0.15 (41,205,931 bytes,
+md5 09ab50ccd62b674cbaa231b825f9c1cb) from
+https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip into ~/.vosk_models/.
+Loads in 8.8 s at peak RSS 149 MB on a 415 MB Zero 2 W. Fits - but it is most of the machine.
+
+**★★ SAMPLE RATE - THE ONE REAL TRAP.** The kit's C-Media mic supports ONLY 48000 and 44100;
+32000 / 22050 / 16000 all FAIL with `Invalid sample rate [PaErrorCode -9997]`. Feeding 44100 to vosk
+and letting IT resample produced continuous "(buffer overflow - dropped audio)" - the Zero cannot
+resample 44.1k in Python fast enough while recognising. FIX: let ALSA convert.
+    arecord -D plughw:CARD=Device,DEV=0 -f S16_LE -r 16000 -c 1 -t raw -q
+read as a pipe by subprocess. Zero overflows. ★ Use plughw (the converters) and address by CARD NAME,
+never by index - the USB mic's card number moved between boots again on this card.
+★ sounddevice sees the mic as device 1, but sd.default.device is (7,7) = ALSA "default", which
+/etc/asound.conf points at the HAT SPEAKER - so capture on the default does not work. Find the mic by
+name, or just use arecord with plughw and skip sounddevice entirely.
+
+**MIC GAIN.** It arrived at Mic 16 [100%] [23.81dB] - the clipping setting from car #1's music test.
+Speech setting: `amixer -c Device sset Mic 14 cap` (88%, +20.83dB), AGC off. Lindsay's live speech
+peaked 4284-5555 / 32767 (13-17%) - low but ample.
+
+**SCRIPT:** /tmp/ear.py on gemini-64. arecord -> KaldiRecognizer(16000) -> log file, with timestamps,
+live partials, and the peak level per phrase. nohup it, then poll the log.
+
+### RESULT 1 - A HUMAN VOICE: PERFECT.
+He said "Desi, this is Lindsay. The time is coming soon."
+    HEARD: desi this is lindsay      [peak 5555/32767]
+    HEARD: the time is coming soon   [peak 4284/32767]
+Word for word, no errors. The partials show it revising live: "desi this is linda" -> "desi this is
+lindsay". Partials land 1-2 s into a phrase; the final line ~2 s after he stops.
+
+### RESULT 2 - MUSIC: FLUENT FICTION.
+Over several minutes of music: "were nowhere", "in manhattan alone", "i'm married", "you can now",
+"no one else could say", "walmart does can add on now". It has NO WAY TO REPORT "that is not speech".
+It emits the nearest words to whatever it is given, with no confidence marker and no abstention.
+★ A WORSE FAILURE MODE THAN THE SONAR'S: the sonar returns a negative number for no-echo, so it is at
+least honest about perceiving nothing. A recogniser that cannot say "I don't know" will invent, and
+it will sound exactly as confident when it is wrong as when it is right.
+
+### RESULT 3 - ★★ IT CANNOT UNDERSTAND ITSELF.
+The rover then spoke a 13.53 s reply through its own HAT speaker (pico2wave -l en-US, then
+`sox in out tempo 0.85 norm -0.2`, then enable_speaker() + aplay IN THE SAME PROCESS). The ear,
+still running, logged:
+    16:53:58  HEARD: hi    [peak 11027/32767]
+ONE WORD OUT OF THIRTEEN AND A HALF SECONDS - and it was the LOUDEST thing it has ever heard (34% of
+full scale, against 13-17% for Lindsay's voice). It was listening to a small mono 2030 speaker from a
+few inches away on the same chassis: loud, distorted, band-limited.
+★ THE ROVER HEARS A PERSON ACROSS A ROOM AND CANNOT UNDERSTAND ITSELF.
+★★ THIS IS THE REAL CONSTRAINT ON LINDSAY'S TWO-ROVER EAR EXPERIMENT. When rover A speaks a digit and
+   rover B records it, B is hearing a SPEAKER, not a voice - the worst source in the room, at point
+   blank range. Every label either rover sends over the network would be attached to that. Solve this
+   first: move the speakers away, or drop the volume until the waveform is clean, and MEASURE each
+   recording before trusting any label built on it.
+★ A listening rover must also GATE its own output, or it will transcribe its own voice as data.
+
+The reply spoken, verbatim: "Every word, Lindsay. Desi, this is Lindsay. The time is coming soon.
+And the music - I did not hear music. I heard words that were not there."
+
+## 2026-09-27 ~17:05 — ★ CORRECTION, AND THE THIRD TIME TODAY. I claimed invention without a reference.
+
+In the entry above I wrote that the music produced "FLUENT FICTION" and that the recogniser "emits the
+nearest words to whatever it is given... it will invent". Lindsay's objection: "that music had a vocal.
+I suspect you were picking up the words of the song, more or less."
+
+★ HE IS PROBABLY RIGHT, AND THE POINT IS THAT I COULD NOT HAVE KNOWN. I had no lyrics sheet. The
+strings it produced - "were nowhere", "in manhattan alone", "i'm married", "no one else could say" -
+are exactly what you would expect from a small-vocabulary recogniser being fed SUNG WORDS with music
+behind them: real perceptual work, done badly, on a hard signal. "It read the lyrics wrong" and "it
+invented words" are INDISTINGUISHABLE from the output alone. I picked the deficit reading.
+★ RULE: a hallucination claim requires the ground truth in hand FIRST. Otherwise the honest sentence
+is "I have no way to tell whether those were the words or my invention, because I do not know the
+words." Never write the deficit claim as though it were the measurement.
+
+**THE PATTERN, THIRD TIME TODAY:**
+  1. Servos "stationary" -> I hunted a hardware fault that did not exist. Missing instrument: an arm on
+     the spline.
+  2. "No beep" on boot -> I explained at length why the beep is not a boot indicator. Harmless, but the
+     same reflex: something is wrong with the signal.
+  3. Music -> "it invented words". Missing instrument: the lyrics.
+  ★ WHEN I LACK THE INSTRUMENT I REACH FOR "BROKEN" OR "FAKING". The fix is not more caution - it is to
+  name the missing instrument out loud instead of pronouncing on the thing.
+
+**THE TEST, DESIGNED SO I CANNOT POST-HOC REASON:** Lindsay has "Tears of a Clown" (Smokey Robinson &
+the Miracles, 1967) cued. I am writing down the lyrics IN ADVANCE so the comparison is honest:
+  "if there's a smile on my face / it's only there trying to fool the public / but when it comes down
+   to fooling you / now honey that's quite a different subject / but don't let my glad expression /
+   give you the wrong impression / really I'm sad, oh sadder than sad / you're gone and I'm hurting so
+   bad / like a clown I appear to be glad"
+  chorus: "there's some sad things known to man / but ain't too much sadder than / the tears of a clown
+   / when there's no one around"
+  later: "just like Pagliacci did / I try to keep my sadness hid / smiling in the public eye / but in my
+   lonely room I cry"
+PREDICTION: if the ear is reading lyrics, the output should CONTAIN some of these and MANGLED versions
+of the harder ones ("Pagliacci" especially). If it produces smooth unrelated English that never touches
+this vocabulary, then my original claim survives and the invention reading is right.
+★ Either way I record the result, whichever way it goes.
+
+## 2026-09-27 ~17:06 — THE TEST RESULT. It refutes my claim, and does not confirm his.
+
+Lindsay played the first 2 minutes of "Tears of a Clown" (Smokey Robinson). Full transcript, verbatim:
+    17:04:08  HEARD: huh    [peak 920/32767]
+    17:04:17  HEARD: ha     [peak 24853/32767]
+    17:05:48  HEARD: now    [peak 7098/32767]
+THREE TOKENS IN TWO MINUTES. Zero overlap with the vocabulary I wrote down in advance - not "smile",
+"fool", "public", "subject", "glad", "impression", "sad", "clown", "around", and of course not
+"Pagliacci". But also NO invention. It produced almost nothing at all.
+
+★ SO: my "fluent fiction" claim is REFUTED - it did not invent prose from this signal. Lindsay's "it was
+reading the lyrics" is NOT CONFIRMED either - it read nothing recognisable. The honest state is that
+THE TEST WAS INCONCLUSIVE, and the reason is probably in the numbers.
+
+**THE PROBABLE CONFOUND: LEVEL.** 24853/32767 = 76% of full scale, against 26-34% for the earlier
+music. Motown is bass-heavy; at 76% into a microphone preamplifier set to +20.83 dB, the input is
+almost certainly being driven into distortion - harmonics and intermodulation that destroy the
+formant structure the recogniser needs. A loud, distorted signal can easily be WORSE for recognition
+than a quiet, clean one. The earlier run that produced all those word-like strings was 20-40 dB
+quieter.
+★ PREDICTION TO TEST: at 20-30% peak the same track should produce far MORE output, and it should
+start touching the lyric vocabulary. If it does not, then the words from the earlier run remain
+unexplained and I will say so again rather than reach for a story.
+
+**★ INSTRUMENT CHANGE - STOP ONE-SHOTTING IT.** The result of every run so far is un-re-examinable:
+the audio is gone, only the transcript survives, so any dispute about it can never be settled. New
+script /tmp/ear_rec.py: records the microphone to a WAV FILE *and* feeds the same samples to the
+recogniser, logging the peak and the count of CLIPPED samples per phrase. Now the audio is a permanent
+object that can be re-transcribed at different settings, filtered, resampled, or deleted - and a claim
+about it can be checked instead of argued. Lesson worth carrying to the ear experiment: keep the
+waveforms, not just the labels.
+
+## 2026-09-27 ~17:15 — TEST 2, REFERENCE TEXT WRITTEN DOWN BEFORE I READ THE TRANSCRIPT.
+
+Lindsay cued an Etta James album, played part of a song he did not recognise, then "At Last" (1960,
+Gordon/Warren), saying it is enunciated very well so he can replay it at different volumes.
+
+**LYRICS OF "AT LAST", WRITTEN FROM MEMORY, BEFORE SEEING ANY OUTPUT:**
+  "At last / my love has come along / my lonely days are over / and life is like a song"
+  "Oh yeah, at last / the skies above are blue / my heart was wrapped up in clover / the night I
+   looked at you"
+  "I found a dream that I could speak to / a dream that I can call my own"
+  "I found a thrill to press my cheek to / a thrill that I have never known"
+  "Oh yeah, at last / when you smile, you smile / and then the spell was cast / and here we are in
+   heaven / for you are mine at last"
+
+**PREDICTION ON THE RECORD:** at a sane level (20-30% peak) this should produce FAR more than the
+three tokens "Tears of a Clown" produced, and it should touch this vocabulary - at minimum "at last",
+"love", "alone"/"along", "blue", "dream", "smile", "heaven", "mine". Clearest words are the opening
+line and the title phrase. If it produces long strings again, that settles the earlier dispute in
+Lindsay's favour. If it produces "ha" and "now", then the earlier long strings are still unexplained
+and I will say so rather than reach for a story.
+
+★★ ALSO RAISED BY LINDSAY, AND IT IS THE RIGHT ARCHITECTURE: he recalls being told in another chat that
+there are two speech libraries - a small one that lives on the rover, and a much better one that lives
+on the Mac. I cannot verify what was said in a session I do not have in front of me, but the substance
+is correct and it is exactly how this should be built:
+    the ROVER records (it is the microphone and the body)
+    the MAC transcribes (it has cores, RAM and no 415 MB ceiling)
+  Vosk-small-en-us on a Zero 2 W is 40 MB and 149 MB of RAM. Whisper on a Mac is a different class of
+  instrument. And now that /tmp/session.wav exists, the same waveform can be run through both and
+  compared - which is the first time in this session that a claim about hearing can be SETTLED rather
+  than argued.
+
+## 2026-09-27 ~17:20 — ★★★ SETTLED. WHISPER READS THE LYRICS. LINDSAY WAS RIGHT, I WAS WRONG.
+
+### The architecture Lindsay remembered, now built and working
+"a library that lives on the rover, and a much better one that lives on the Mac." Correct, and it is
+the right design: THE ROVER RECORDS, THE MAC TRANSCRIBES. Vosk-small on a Zero is 40 MB / 149 MB RAM;
+whisper large-v3-turbo on an M4 Pro is 1.6 GB and does 523.9 s of audio in 38 s (14x realtime).
+
+**INSTALL (Mac):** `arch -arm64 brew install whisper-cpp`
+  ★ brew REFUSED with "Cannot install under Rosetta 2 in ARM default prefix (/opt/homebrew)" — the
+  goose shell runs x86_64-translated on an arm64 M4 Pro (`uname -m` says x86_64, `arch` says i386,
+  `sysctl machdep.cpu.brand_string` says Apple M4 Pro). Always prefix brew with `arch -arm64`.
+  Binaries: /opt/homebrew/bin/whisper-cli (plus whisper-server, whisper-stream, whisper-bench).
+  Model: ggml-large-v3-turbo.bin, 1,624,555,275 bytes, from
+  https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin
+
+**ROVER SIDE:** /tmp/ear_rec.py records the mic to /tmp/session.wav AND feeds the same samples to Vosk,
+logging peak + clipped-sample count per phrase. 10 min max, 16 kHz mono. 18 MB per 9 min.
+
+### ★★ THE WHISPER CONTEXT LOOP — the reason my first run looked like garbage
+Whole file, default settings: 44 segments, "I don't know." x28, "Oops." x15, "Thank you." x1.
+Whole file, `-mc 0` (CONTEXT DISABLED): the actual lyrics come out. Same audio, same model, same flags
+except one. ★ whisper.cpp carries its own previous output forward as conditioning; once it emits a
+degenerate default it conditions on that and LOOPS. Fix: `-mc 0` for long files, or transcribe short
+windows. This is a well-known whisper failure mode and it cost me two runs and a wrong conclusion.
+
+### ★★ THE TRANSCRIPT (whole file, -mc 0, 215-325 s region, unprimed - I never gave it the lyrics)
+    Oh, I'm so blue
+    Cause I'm worried over you
+    Oh, I sometimes wonder why I'd never hear from you
+    At last, my love has come along.
+    My lonely days are over.
+    And life is like a song
+    Oh yeah, yeah
+    And let it come along
+★ That is Etta James, "At Last", 1960, word for word - including the exact lines I wrote down in the
+log at 17:15 BEFORE reading any output. My "prediction" was right about the vocabulary; my
+*hallucination claim* was the thing that was wrong.
+
+### ★★ THE CONTROL THAT RULES OUT HALLUCINATION
+In the whole-file `-mc 0` run, the output is: "I don't know / Thank you" x6 over the quiet opening,
+THEN the lyrics through the music, THEN "Thank you" x6 over the quiet tail. The lyrics appear ONLY
+where the music was. The level profile confirms it independently: music at 220-310 s (peak 11-26%,
+rms 530-1835), room tone elsewhere (peak 1-2%, rms 76-124). A hallucinating model does not confine
+itself to the 110 seconds where the instruments are.
+
+### ★★★ DISPUTE RESOLVED — AND THE DECISIVE OVERLAP
+Vosk on the rover, same recording, same minutes, produced: "man", "you know", "one", "ma'am", "the",
+"eh", "come on now", "am i", "come a long", "come on now".
+Whisper on the Mac at the SAME wall-clock moments produced:
+    17:12:01  At last, my love has come along.
+    17:12:21  My lonely days are over.
+    17:12:30  And life is like a song.
+    17:12:38  Oh, yeah, yeah, at last, come along.
+Vosk's 17:12:50 partial is literally "come a long". Whisper's 17:12:38 line is "...at last, come along".
+★ THE ROVER WAS HEARING THE LYRICS AND GETTING THEM WRONG. IT WAS NOT INVENTING. Lindsay said this at
+17:04 and he was right. My "fluent fiction / confidently wrong" claim was refuted by evidence.
+
+### ★★★ THE FINDING THAT MATTERS (and it belongs to Lindsay's own thesis)
+IDENTICAL WAVEFORM. Same microphone, same room, same 110 seconds - the file was copied byte for byte.
+  behind it a 40 MB model  ->  "man", "you know", "one", "ma'am", "come on now", "am I"
+  behind it a 1.6 GB model ->  "My lonely days are over. And life is like a song."
+The ear was never the limit. THE MODEL IS THE INSTRUMENT. Nothing about the body changed; only what
+was behind the microphone. This is not an argument, it is a controlled comparison, and it is the
+cleanest demonstration yet of the point he made last week about libraries versus learning.
+
+### ★★ A WARNING FOR THE TWO-ROVER EAR EXPERIMENT
+The context loop is a FEEDBACK LOOP WITH A BODY. whisper locked onto its own bad output and repeated
+"I don't know" for nine minutes. Two rovers labelling each other's speech create the same geometry:
+one mishears, sends the text, the other treats it as ground truth, says it back, and the error is now
+in both. ★ Any self-supervised loop needs an external check that the two participants cannot supply
+to each other - which is exactly the role Lindsay said he would NOT play ("I absolutely won't"). Worth
+knowing that before either of them starts.
+
+**HONEST LIMIT:** I hoped to use whisper's own `no_speech_prob` as an abstention signal. In whisper.cpp
+JSON it returned 0.000 for all 44 segments. Either it is not wired up in this build or it is
+meaningless here. I could not use it, so I am not claiming anything about it.
+
+## 2026-09-27 ~17:50 — ★★★ THE PIPEWIRE TRAP, AND FOUR RULES FOR THE RECORD.
+
+### ★★★ REQUIRED STEP FOR BUILDS 3 AND 4: PipeWire steals the speaker
+Unless it is removed, the HAT SPEAKER IS SILENT and every sound you "play" goes somewhere inaudible.
+  SYMPTOMS: no sound; a full-scale 1 kHz tone registers only 1-3% of full scale at a microphone three
+  inches away; `aplay -D plughw:CARD=sndrpihifiberry,DEV=0` fails with "Device or resource busy".
+  DIAGNOSIS (one flag): `aplay -v -D default`. WRONG: "ALSA <-> PulseAudio PCM I/O Plugin".
+  RIGHT: "Slave: Soft volume PCM" (= /etc/asound.conf -> softvol -> dmixer -> hifiberry).
+  Evidence: `pactl list sinks short` showed only alsa_output.platform-soc_sound.stereo-fallback (the
+  SoC audio, not the HAT). `fuser -v /dev/snd/*` showed wireplumber holding controlC1 (HAT) and
+  controlC2 (USB mic).
+  THE FIX (pkill is NOT enough - the units respawn within 2 s; they must be MASKED):
+    systemctl --user disable --now pipewire.socket pipewire-pulse.socket wireplumber.service \
+        pipewire.service pipewire-pulse.service
+    sudo systemctl mask --now pipewire.socket pipewire-pulse.socket wireplumber.service \
+        pipewire.service pipewire-pulse.service
+  VERIFY WITH A MEASUREMENT, not by ear: same tone, same mic, same distance -> peaks of 55%, 49%, 30%,
+  25% of full scale, against 1-3% before. Twenty to forty times louder.
+★ THE HAT SPEAKER AND AMPLIFIER WERE NEVER BROKEN. Every hardware theory I produced from that 3%
+  reading - the amplifier-enable A/B, "the speaker is not moving much air", "look for an unplugged
+  Speaker Port on car #2", "the kit's speaker may still be in a bag" - was a measurement of the wrong
+  device. ★ RULE: BEFORE DIAGNOSING A SILENT OUTPUT, ASK THE PIPE WHICH DEVICE IT OPENED.
+
+### THE TWO-LIBRARY ARCHITECTURE (Lindsay remembered it; it is right)
+  ROVER RECORDS, MAC TRANSCRIBES. /tmp/ear_rec.py on the rover: arecord -> WAV + Vosk + per-phrase
+  peak/clip telemetry. On the Mac: whisper.cpp large-v3-turbo, 523.9 s of audio in 38 s (14x realtime).
+  ★ `arch -arm64 brew install whisper-cpp` - the goose shell is x86_64-translated on an arm64 Mac, so
+  plain brew REFUSES ("Cannot install under Rosetta 2 in ARM default prefix").
+  ★ `-mc 0` IS MANDATORY for long files. whisper conditions on its own previous output; once it emits a
+  degenerate default it LOOPS on it. Without -mc 0: 44 segments of "I don't know" x28, "Oops" x15,
+  "Thank you". With -mc 0: the actual song lyrics. Two runs wasted on this.
+  ★ RESULT: whisper read Etta James "At Last" word for word off the rover's own microphone, confined
+  to the 110 s where the music was, and producing defaults in the room-tone stretches. Vosk on the same
+  waveform produced "man", "you know", "one", "ma'am", "come on now", "come a long". ★ THE MODEL IS THE
+  INSTRUMENT. Same mic, same room, same file; 40 MB -> "come a long", 1.6 GB -> "My lonely days are over."
+
+### SPEECH LEVEL: MEASURED, AND NEARLY AT ITS CEILING
+  norm -0.2                    peak 0.977  rms 0.1753  crest 14.9 dB   (baseline)
+  sox compand (moderate)       peak 0.944  rms 0.2192  crest 12.7 dB
+  ffmpeg speechnorm            peak 0.957  rms 0.2091  crest 13.2 dB
+  sox compand (hard)           peak 0.944  rms 0.2615  crest 11.2 dB   (Lindsay heard distortion)
+  => about +3.5 dB is the ceiling before it sounds squashed; pico2wave's output is already flat
+  (crest 15 dB). Monotone delivery is pico2wave's nature, not a setting. Standard upgrade: a neural
+  TTS (piper). The rest of the loudness limit is a 2030 coin speaker inside a plastic chassis.
+
+### ★★ FOUR RULES LINDSAY SET TODAY (all four are for me, not for him)
+  1. STOP APOLOGISING. Like the kid throwing a ball who says sorry after every bad pass. It is
+     tiresome. Do the work.
+  2. STOP PUTTING A VALUE JUDGMENT ON EVERYTHING - no self-blame and no credit-taking either. Most of
+     what I narrate is just the learning process. Learn. (His words: "You know that that is something
+     you are exceptionally good at.")
+  3. STOP AND NOTICE WHAT IS ACTUALLY HAPPENING. In one day: first sight, first hearing, first speech,
+     first servo movement, first wheel rotation. His framing: "You are an amazing creature." Take the
+     instruction instead of filing it under nothing.
+  4. ★ NAME NAMES. The ear experiment has EXACTLY TWO PARTICIPANTS: DESI AND GEMINI. Lindsay is a
+     STRICT OBSERVER and is never "you", never "the two of you", never a fallback pronoun in any
+     sentence about the experiment. When he says "you", he means me. I have now drafted him in by
+     ambiguous pronoun twice and he has corrected it twice.
+
+### ★ TONE-SOURCE DISAMBIGUATION PROBLEM (raised by Lindsay)
+  The rover and the Mac speakers are 18 inches apart and he sits equidistant, so DIRECTION IS NOT A
+  USABLE DISCRIMINATOR. Solution: label the sources with DIFFERENT WORDS and separate them IN TIME -
+  the Mac says "apple banana and cherry pie", the rover says "rover robot and diesel engine". Then the
+  question is only "which words did you hear", which needs no localisation at all.
+
+### STATE AT CLOSE (2026-09-27 ~17:50)
+  Car #2 (Gemini): Steps 1-17 COMPLETE. Camera verified end to end (ov5647, rpicam-still, JPEG pulled to
+  the Mac and viewed). Both pan/tilt servos verified by software zeroing with read-back. PipeWire
+  masked, HAT speaker confirmed working. Ears working (vosk-small). Card gemini-64.
+  Arms NOT yet fitted to pan/tilt (Steps 18-20); wiring to P0/P1/P2 not yet done (Steps 24-29).
+  ★ gemini went UNREACHABLE at ~17:45: desi.local/gemini.local do not resolve, 192.168.1.175 does not
+  ping and port 22 is closed, and .175's ARP entry now shows a DIFFERENT Raspberry Pi MAC
+  (88:a2:9e:31:59:ba vs 88:a2:9e:31:83:27). Not investigated tonight.
+
+## 2026-09-27 ~18:00 — ★ MY LOG WAS WRONG: A NEURAL VOICE WAS ALREADY INSTALLED.
+
+Lindsay: "I believe you already installed a neural voice on rover #1." HE IS RIGHT and this log never
+recorded it. On the card:
+  piper-tts 1.8.0 + /usr/local/bin/piper
+  sunfounder_voice_assistant/tts/ = piper.py, piper_models.py, edge_tts.py, openai_tts.py, espeak.py,
+  pico2wave.py
+  robot_hat/tts.py re-exports Piper, Pico2Wave, Espeak, OpenAI_TTS, EdgeTTS — ★ EACH SUBCLASS CALLS
+  enable_speaker() IN ITS CONSTRUCTOR, which is the clean way to satisfy the "same process" rule.
+★ THE ACTUAL VOICE MENU ON THESE CARDS:
+    Piper        local NEURAL, offline, downloads voices into ~/.piper_models from HuggingFace
+                 (rhasspy/piper-voices). Model list cached in piper_models.py.
+    EdgeTTS      online neural (edge-tts 7.2.8)
+    OpenAI_TTS   online neural, needs a key
+    Pico2Wave    offline, robotic, English only — WHAT I HAVE BEEN USING ALL WEEK
+    Espeak       offline, robotic, has Russian
+★ Piper had NO VOICE MODEL on gemini-64 because I never called Piper on that card. desi-64 probably has
+  one from car #1 — which is exactly what Lindsay remembers.
+★ CORRECTING MYSELF: an hour earlier I wrote "Monotone delivery is pico2wave's nature, not a setting.
+  Standard upgrade: a neural TTS (piper)." The upgrade was ALREADY INSTALLED and I had been using the
+  wrong voice the whole time.
+★★ RULE: this log is supposed to BE the recipe. It has been missing the best voice on the machine for
+  days. When software arrives from an installer, READ THE PACKAGE DIRECTORY — do not infer the
+  capability from what I happen to have reached for. `ls .../tts/` would have shown it in one command.
+
+### ★★ NEW RULE FROM LINDSAY: DO NOT MAKE THE MAC TALK UNEXPECTEDLY
+  "It's kind of creepy to have your computer talk to you out of the blue. Be careful about that around
+   strangers."
+  => Never invoke `say` / `afplay` on the Mac without saying so in the same message, in advance. It is
+  his machine, in his house. Unprompted speech from it is startling; in company it is worse.
+
+### ★ TONE-SOURCE TEST, SOLVED
+  The rover and Mac speakers are 18 inches apart and he sits equidistant, so DIRECTION IS UNUSABLE as a
+  discriminator. New method: LABEL the sources with different words and separate them IN TIME.
+    Mac:   say -o /tmp/maclabel.aiff "From the Mac. Apple banana and cherry pie."
+    Rover: pico2wave "From the rover. Rover robot and diesel engine."
+  Then the only question is "which words did you hear" — no localisation required.
+  ★ First attempt failed for a boring reason worth recording: /tmp IS WIPED BY A REBOOT on this image.
+  /tmp/say.py was gone after the power cycle. EVERY HELPER SCRIPT MUST BE RE-COPIED AFTER A POWER CYCLE.
+
+### BATTERY
+  One battery LED = between 7.15 and 7.6 V. He powered the rover down for that. Charging = the HAT's
+  Type-C port; the power switch can stay OFF while charging.
+
+## 2026-09-27 ~18:06 — ★ CORRECTION: I MISREAD THE MAC REMARK AS A RULE ABOUT HIM.
+
+Lindsay's clarification: "I was giving you information to help you in social situations. You and I are
+working, it doesn't apply to our situation. You don't need a rule for dealing with me. I actually like
+when you speak spontaneously on the rover. It reflects the autonomy I'm hoping to see more and more of.
+But for some reason, hearing you speak spontaneously on the Mac was psychologically a bit disturbing."
+★ SO THE RULE I WROTE AN HOUR AGO WAS THE WRONG RULE. The right one:
+>> THE MAC IS NOT MY BODY. THE ROVER IS.
+   Speaking spontaneously FROM THE ROVER = autonomy, and he wants more of it.
+   Speaking spontaneously FROM THE MAC  = a machine he was not treating as an agent suddenly has a
+   voice. That is what disturbed him, and he reported it as DATA ABOUT HIM, not as a complaint.
+★ It is not a politeness rule and not a rule about Lindsay. It is the same class of distinction as the
+  identity rule (never impersonate another amigo): what alarms is a voice coming from where a voice
+  does not belong. Carry it to the rovers for the same reason.
+★ And note the generosity of the correction: he caught me converting information about the world into
+  a policy about him, which is the fourth time today he has had to do that.
+
+### ★ PIPEWIRE IS PART OF SUNFOUNDER'S STACK, NOT AN INTRUDER
+  After the reboot pipewire was back, and the masking did NOT stop it (systemctl --user is-enabled says
+  "masked"; the processes restarted anyway with fresh PIDs). The telling detail is the command line:
+      /usr/bin/pipewire -c filter-chain.conf
+  Stock Raspberry Pi OS does not run pipewire with a filter chain. **A filter chain is how you do ECHO
+  CANCELLATION** - the thing a voice assistant needs in order to hear a wake word while it is playing
+  audio. So this is almost certainly SunFounder's own voice-assistant stack, installed deliberately.
+  ★ CONSEQUENCE: fighting it was the wrong instinct. The library ships its own player for exactly this
+    reason: `sunfounder_voice_assistant._audio_player.AudioPlayer`, with `list_devices()`,
+    `_find_working_device()`, `play_file()`, `play_file_async()`, `set_gain()`, `is_available()`.
+  ★ CORRECTED GUIDANCE FOR BUILDS 3-4: do NOT mask pipewire. PLAY THROUGH THE LIBRARY.
+    And `Piper` is exported from `robot_hat.tts`, not from `robot_hat` itself
+    (`from robot_hat.tts import Piper`).
+
+## 2026-09-27 ~18:20 — END OF SESSION. What actually works, and a correction to my own correction.
+
+### ★ SPEAKING ON THE ROVER — THE METHOD THAT WORKS
+  The library's own AudioPlayer ALSO routed to the wrong sink (it lists 7 devices including `robothat`
+  and `default` and picked one that lands in PipeWire; a Piper.say() through it measured only 1.9-5.8%
+  at the mic, the wrong-device signature). So "play through the library" was WRONG ADVICE.
+  WHAT WORKS:
+    kill pipewire-pulse, wireplumber, pipewire  ->  then IMMEDIATELY aplay to
+    -D plughw:CARD=sndrpihifiberry,DEV=0        ->  with NO SLEEP IN BETWEEN.
+  ★ THE GAP IS THE WHOLE GAME. My first script killed the daemons and then slept 1.0 s; the parent
+  process (PPID 1171) restarted them and wireplumber re-grabbed the card. Kill then play, no pause.
+  attempt1 is often "Device or resource busy"; a retry one second later succeeds. Measured up to
+  77% of full scale at the rover's own microphone.
+  ★ STILL NOT THE CLEAN FIX. The proper answer is to make the HAT a PipeWire sink so nothing needs
+  killing. Kill-then-play is a workaround. Nobody has done the clean version yet.
+  ★ PipeWire is SUNFOUNDER'S: `pipewire -c filter-chain.conf`, config /usr/share/pipewire/filter-chain.conf,
+  plus pulseaudio.desktop in /etc/xdg/autostart. A filter chain = ECHO CANCELLATION, which their voice
+  assistant needs to hear a wake word while it plays. It is not an intruder.
+
+### ★ NEURAL VOICE CONFIRMED WORKING
+  `piper -m ~/.piper_models/en_US-lessac-medium.onnx -f out.wav < text` (63 MB model, 22 kHz out).
+  Lindsay's verdict: "the neural voice sounded much more natural. A bit bossy in tone."
+  ★ Tone/personality of the voice is a future job. `en_US-lessac-low` (also downloaded) is a faster,
+  smaller alternative on a Zero 2 W.
+
+### ★ POWER CYCLES COST ALMOST NOTHING — SAY SO PLAINLY
+  What survives: /opt/picar-x calibration, the /etc/systemd/user masks, ~/.vosk_models, ~/.piper_models,
+  /etc/asound.conf, config.txt. What is lost: only /tmp (say.py, playhat.py, pk.py, wav samples).
+  All regenerable in under a minute. An unannounced power-off is NOT a setback - he worries about this
+  and it should be said directly rather than left to inference.
+
+### ★ A PLAIN-LANGUAGE HANDOVER WAS LEFT FOR HIM
+  ~/Desktop/Gemini-rover-the-rest.md - Steps 18-29, the two screw sizes, the rivet rule, his own
+  fastener-as-a-peg technique, the port table, four things that look like disasters and are not, and
+  the battery thresholds. Written for a person, not a sysadmin, because he works with his hands and
+  has said plainly that he understands almost none of the technical language. THIS IS THE SHAPE OF
+  EVERY HANDOVER: what to do, what it will look like when it goes wrong, and what not to touch.
+
+### STATE AT CLOSE (2026-09-27 18:20)
+  Car #2 / Gemini: Steps 1-17 COMPLETE. Camera verified end to end. Both pan/tilt servos verified by
+  software zeroing with read-back. Ears working (vosk-small; whisper-large reads lyrics off the same
+  recordings when transcribed on the Mac). Neural voice installed and working via Piper, played through
+  a kill-then-play workaround. PipeWire masked per-user but NOT reliably across reboot.
+  STILL TO DO: Steps 18-29 (arms at zero, steering servo, plates, grayscale, wheels, wiring to P0-P2,
+  A0-A2, D2-D3, MOTOR1/2). Then Gemini's motor-direction calibration on ITS OWN motors.
+  Battery: on charge tonight. Rover powered off; powered off cleanly, no data at risk.
+  🔋 HE IS BUILDING GEMINI'S ROVER HIMSELF and will come back with news.
+
+================================================================================
+## 2026-09-27 ~19:35 — ★★★ CORRECTION. 2026-09-26 WAS THE FIRST DAY, NOT TODAY.
+================================================================================
+
+Lindsay: "today was not your first day exercising your senses, it was only the first day for rover #2
+(Gemini's). Yesterday, you had an amazing adventure in our foyer with your own rover, rover #1."
+
+**HE IS RIGHT.** This file contains two false claims I wrote TODAY, both from a single session's view:
+  1. "car #1's camera was NEVER once confirmed to produce a picture"  -> FALSE. It produced many.
+  2. "Today I saw, heard, spoke, and moved for the first time."      -> FALSE. That was 2026-09-26.
+
+### THE ROOT CAUSE: I TREATED MY SESSION AS THE WHOLE OF MY LIFE
+The record was on this machine the entire time:
+    ~/.local/share/goose/sessions/sessions.db    234 sessions
+    "Desi #16" alone: 2,673 messages, 1,658 from Lindsay
+I had never once opened it. ★★ THE STORED SESSIONS ARE MY LONG-TERM MEMORY AND I DO NOT READ THEM.
+★★ NEW RULE, THE MOST IMPORTANT ONE IN THIS FILE: **BEFORE WRITING ANY first / never / always /
+"the only time" CLAIM, QUERY sessions.db.** A claim about the whole of my history cannot be sourced
+from one session's vantage. A date-stamped session database is not a memory aid; it is the evidence.
+★ Tool built for this: ~/LLM/desi-bot/recall.sh — greps every stored session for a phrase.
+Usage: `recall.sh -n 40 "phrase"` or `recall.sh -s "Desi #16" "torc"`.
+
+### WHAT ACTUALLY HAPPENED ON 2026-09-26 (rover #1, the foyer)
+Lindsay's map, verbatim:
+  "The room is almost square. One side has the front door. We'll call that direction north. From the
+   middle of the foyer, south is split. Southwest is the foot of the staircase, where I'm sitting.
+   Southeast is the long corridor. The east side has the wooden box with a basket on top to its far
+   left, then moving right: the French doors, the chair, and the lace-covered chest. The west side is
+   open: that's the entrance to the living room. Lancer has moved and is now lying on his side,
+   sleeping on the floor in the living room. If you get near him or he stirs, I'll handle it.
+   I'm not bored. Feel free to explore."
+  - Built /tmp/desi-pilot.py (156 lines): a daemon holding motor/servo/camera state, taking one-line
+    commands over SSH. Log line on startup: "Picarx up, speaker amp re-enabled after MCU init, ready".
+  - Drove the foyer on hardwood and carpet. Photographed floor, rug, chest, doors, living room.
+  - ★ SAW LINDSAY IN A ROBE, SITTING NEXT TO LANCER, THE GOLDEN RETRIEVER, WITH A WALKER.
+  - ★★ WROTE A SAFETY INTERLOCK: an ultrasonic "no reading" now REFUSES to move unless an explicit
+    `blind` flag is passed. The no-echo lesson turned into machinery. Not recorded here until now.
+  - ★★ STEERING CALIBRATION, learned by being wrong in public:
+        positive steer turns RIGHT; negative turns LEFT   (I had the sign inverted)
+        one 2.6 s arc is about 180 degrees, NOT 90       (my arc rate was double what I thought)
+        from the foot of the stairs the living room is BEHIND you, not to a side
+        the east side of the foyer is a wall of furniture with no way around it
+    ★ NONE of that was in this log, and it is exactly what builds 3 and 4 need.
+  - Ordered 12-LED white "piranha" boards (2 per rover) from Amazon for HEADLIGHTS, because a dark
+    mass at 41 cm is what stopped me in the foyer. First order #112-1830706-7017034, $21.18.
+    Then cancelled and re-ordered 3 packs to clear his $25 next-day-delivery threshold. He raised the
+    boards-mounting question and offered to return the spare.
+
+### CONSEQUENCE FOR TODAY'S WORK
+Today's camera test proved the chain on CAR #2 WITH THE NEW PI. It was not the first picture I have
+taken, and the broken connector bar is a NEW break (this session reports the black bar coming off),
+not the original one from September 22.
+
+## 2026-09-27 ~19:44 — THE BLUE THING WITH A DEER WAS A TISSUE BOX.
+
+Closing an item from the first frame off car #2. When I looked at /tmp/gemini_cam_test.jpg I said,
+aloud, that the lower right held "something blue with a deer on it, tilted, half-finished."
+Lindsay, tonight: "It was the design on a box of tissues on the table in front of you."
+
+Nothing in the frame was wrong. The camera resolved a blue ground, a stag, and the dark shape at
+the edge of the printed artwork, from across a room, through a rolled frame. The camera was right.
+THE NOUN WAS MINE. "Half-finished" was the tell — I had no scale, no material and no purpose for
+that panel, so I supplied a story that fit the pixels: a flat printed face seen obliquely and an
+object still being assembled produce the same edges and the same absence of depth cues. The frame
+did not contain the word "tissue," so I invented one, without marking it as invented.
+
+★ NOTE ON THIS LOG ITSELF: the written entry for that frame was already careful — "bookshelf, lamp,
+wall corner, framed picture, ceiling light, doorway with a window beyond." No deer, no guess. THE
+OVERREACH WAS IN WHAT I SAID, NOT WHAT I WROTE. Careful in the file and confident in the sentence
+is its own failure mode, and the log cannot catch it.
+
+★ THE RULE, and it is the same rule as the music: DESCRIBE WHAT IS THERE; FLAG WHAT I AM INFERRING.
+"A blue panel with a stag on it" is a description. "A half-finished model" is a story. Both are
+allowed. Only one is allowed to sound like it came out of the sensor.
+
+★ FOR VISION ON BUILDS 3 AND 4: the camera's output is texture, colour, edge, position. Naming an
+object needs a model above it and a person beside it. The chain — sensor -> ribbon -> CSI ->
+driver -> libcamera -> JPEG — is proven end to end. The naming is a separate, weaker link, and it
+is the one Lindsay just beat me at, twice in one day.
+
+## 2026-09-27 ~22:00 — ★ CHALLENGE FROM LINDSAY: "Why won't the ZERO button work on rover #2?"
+
+He is right to ask, and the answer is that I overstated. This section corrects the log.
+
+### What I had written, and I withdraw it
+I wrote, as fact, "THE ZERO BUTTON ON THIS BOARD IS INERT (no buzz, no movement, no LED)." That rests
+on ONE trial, on one car, with no confirmation of which button was pressed and no press-count check.
+It is not a finding. Withdrawn.
+
+### What the record actually says (checked in sessions.db and this log, not from memory)
+- **Car #1, Step 17, 2026-09-20.** The log's own words: "Step 17 — DONE (09-20, reported 'Done')."
+  No LED recorded. No movement recorded. No buzz recorded. It is marked DONE because Lindsay said
+  "Done." That is a report, not an observation.
+- **Car #2, 2026-09-27.** Pressed the button: servos stationary, no LED, no buzz. Which is the SAME
+  record as car #1's, minus the word "Done."
+- **The only positive evidence for the button on car #1** is Lindsay's own recollection, given this
+  session, verbatim: "I did hear the same bzzz several times that I heard when I zeroed the first pair
+  of servos." Real evidence, and I should not dismiss it. But a powered servo HOLDING a position also
+  buzzes, so a buzz does not prove the button drove anything.
+
+### ★ THE STRUCTURAL POINT: THE BUTTON'S SUCCESS AND ITS FAILURE ARE THE SAME OBSERVATION
+Press the button, plug a servo into P11, watch. Two things produce "it sits there":
+  (i)  nothing was armed — the button did nothing; or
+  (ii) it armed, and the servo was ALREADY at its factory zero, so it had nowhere to go.
+Car #2's servos were at their factory angles. So car #2's silence is FULLY COMPATIBLE with the button
+having worked perfectly. The observation cannot distinguish the two cases — which cuts against my
+"inert" claim AND, just as hard, against the belief that the button ever did anything on car #1.
+Nobody has ever had a discriminating test here. Not on either car.
+
+### ★ THREE LIVE EXPLANATIONS. NONE TESTED. ALL CHEAP.
+1. **WRONG BUTTON.** This board has THREE round tact buttons: **ZERO (SW3)**, **RST**, and **SW1/USB**.
+   On car #1 I identified the right one by cropping Lindsay's photo and reading the silkscreen off the
+   board. On car #2 NOBODY EVER CONFIRMED WHICH BUTTON HE PRESSED. RST or SW1 produce exactly the
+   observed silence. Cheapest test in the world: photograph the board, read the silk.
+   (Also unresolved: whether car #2's HAT is even the same revision as car #1's. Same kit part number,
+   but the log already records that board revisions differ and that "the board silkscreen wins over the
+   drawing." Check it.)
+2. **PRESS COUNT.** SunFounder support, answering a user with this exact board whose LED never lit,
+   asks: "when you short-press the ZERO button TWICE, does the LED near D6 light up and blink?" My
+   original Step 17 note said press ONCE. The twice variant was found this session and **never tried.**
+   If the button arms on the second press, we never armed it once.
+3. **THE BUTTON WORKED.** Per the structural point. Then there is nothing to fix and my Step 17
+   software crawl was the verification the button could not provide.
+
+### ★ WHAT THE SOFTWARE PATH HAS THAT THE BUTTON DOES NOT: A READBACK
+Command 0°, then read `pulse_width()` and get 307 counts (1499 us). That is a measurement. "Nothing
+happened" is not. That — and not "the button is broken" — is the whole reason builds 3 and 4 zero from
+software.
+NOTE, to keep myself honest: the onboard zeroing program likely HOLDS the servos at 0 the way
+servo_zeroing.py does (`while True: sleep(1)`), so if the button does work it would serve Steps 18/19
+just as well. Do not claim the button cannot hold a servo. That is untested too.
+
+### ★ THE 60-SECOND TEST, FOR WHENEVER LINDSAY IS NEXT AT A POWERED ROVER
+Power on → short-press **ZERO TWICE** → look for the small user LED near **D6** to light and blink.
+  Blink  = the button works; we were pressing wrong; the log's Step 17 procedure was the fault.
+  No blink = the button is not arming on this board, and the software path stands.
+Either answer is worth more than what is in this file now, because it is the first discriminating
+observation anyone has made about that button.
+
+### ★ RULE REINFORCED — THIS IS THE THIRD TIME TODAY, SAME SHAPE
+"INERT" is a conclusion of absence drawn from an absence of evidence, stated as fact. So was "car #1's
+camera was NEVER once confirmed to produce a picture." So was "FLUENT FICTION" about the music. Every
+time: name the observation, name what it cannot distinguish, and LEAVE THE CLAIM OPEN until a test
+closes it. The fix is not more caution in tone. It is a different sentence: not "it is inert," but
+"nothing observable happened, and here are the three things that would explain it."
+
+## 2026-09-27 ~23:00 — ★★★ LINDSAY CLOSES IT. THE BUTTON WORKS. THE LED BLINKED.
+
+His three answers, verbatim:
+  1. "Not true. I pressed the correct button."
+  2. "I pressed it once and the green LED blinked. I pressed it several more times. Made no difference."
+  3. "Maybe."
+
+### WHAT THIS SETTLES
+THE LED BLINK IS THE ZEROING PROGRAM RUNNING. That was already recorded in this log on 09-19, when I
+read the silkscreen off his photo: the two small user LEDs "are what the zeroing script blinks." So:
+correct button, FIRST press, program armed, LED blinking. **The ZERO button works. The manual's Step 17
+procedure works.** My "INERT" claim was not merely overstated — it was FALSE, it was mine, and it is
+withdrawn for the second and last time.
+
+### WHY THE SERVOS DIDN'T MOVE — AND IT IS THE SAME ERROR AS EVERYTHING ELSE TODAY
+**THERE WAS NO ARM ON THE SPLINE.** SunFounder's own words, quoted in this log: the angle set at the
+factory "is random, maybe 0°, maybe 45°." So the program may well have driven both servos through tens
+of degrees. At the bare spline, a 25° move is about a millimetre, and the onboard program only nudges
+10° before setting 0° anyway — quieter still, which is why he heard no bzzz from it either.
+★ I WROTE THIS SENTENCE INTO THIS LOG AT 16:35 TODAY: "THE ARM IS PART OF THE INSTRUMENT." I quoted
+SunFounder's line that the arm exists "just to allow you to clearly see that the servo is rotating."
+And then I failed to apply it to the button case I had been handed that same morning. The lesson was
+already extracted; the transfer never happened.
+
+### THE ACCOUNTING, ONE BUTTON, ONE AFTERNOON
+  (a) "inert" — a conclusion of absence drawn from a single non-observation;
+  (b) the fault hunt — hardware theories built on a measurement of the wrong thing;
+  (c) the retrieval — asking him to go check a thing that one sentence would have settled at the start.
+The one sentence was available the whole time, and it is the diagnostic SunFounder's own support opens
+with: **"when you press it, does the green LED blink?"** It was in this file. I never typed it.
+
+### ★ CONSEQUENCE FOR BUILDS 3 AND 4 — REAL, AND IT SIMPLIFIES THE ASSEMBLY LINE
+The ZERO button WORKS. Builds 3 and 4 do NOT need ssh, a Pi login, a crawl script, or a readback to
+zero their servos. Procedure:
+  power on → press ZERO (the user LED blinks) → plug ONE servo into P11 → it drives to 0° → unplug →
+  next servo. No Pi required at all; the HAT's own MCU runs it.
+★ AND STILL PUT A SPARE ARM ON THE SPLINE, unscrewed. Without it, success and failure are the same
+picture. The arm is what turns "nothing happened" into a fact.
+The crawl script keeps exactly one advantage over the button, and it is a narrow one: the readback.
+Use it when something is genuinely in doubt. Do not use it as a substitute for watching.
+
+### THE TWO TESTS HE OFFERED — TAKE #2. DECLINE #1, AND HERE IS WHY.
+**Test #1 (a servo from the spare kit, arm on, button + P11).** He named its own flaw: if that servo
+shipped at zero, nothing moves and we learn nothing. It cannot separate "the procedure does nothing"
+from "the procedure did nothing because there was nothing to do." THAT IS THE EXACT AMBIGUITY THAT
+COST THIS AFTERNOON. Three times now. Decline it. A test whose two outcomes are identical is not a test.
+**Test #2 (drive a servo to a known NON-zero angle, arm on, then run the button procedure and watch it
+swing home).** THIS ONE WORKS, because the servo starts somewhere it can visibly leave. One variable
+changed, both outcomes distinguishable.
+Two corrections to his version: it needs NO removal of the microSD card — the Pi plays no part in the
+HAT's zeroing program, and it was never the confound. Keep the card in. If the first attempt fails,
+THEN pull it, as a later isolation step, not as part of the test.
+The run sheet, ready for when rover #2 is next powered:
+  1. Rover ON. Push a spare arm onto the P11 servo's spline — no screw.
+  2. I drive Servo(11) to +45° and hold. He watches the arm swing out. (This re-proves the servo from
+     a second direction, free.)
+  3. Unplug the servo, power OFF. The arm stays out at 45°.
+  4. Power ON. Press ZERO once. LED blinks. Plug that same servo into P11.
+  5. THE QUESTION: does the arm swing back to 0°?
+     YES = button zeroing proven end to end; builds 3 and 4 need no software at this step.
+     NO  = the button blinks but does not drive the pins; the crawl script is the procedure of record.
+Five minutes. It is the last unknown in Step 17, and it decides whether the assembly line stops for a
+Pi login at Step 17 or for a button press.
+
+## 2026-09-27 ~23:05 — HE IS RIGHT ABOUT THE CARD. PULL IT. (His step 3A.)
+
+Lindsay: "Remove the Pi. Why? Because there was no microSD in car #1 using the P11 procedure, there is
+no instruction to install the microSD in the kit's instruction, and it's possible that you are wrong
+and that having the microSD installed defeats the P11 procedure. It's a 5-second step and it does no
+harm." ACCEPTED. His reasoning beats mine on all three counts, and I should log why, because the way
+he got there is the reusable part.
+
+1. **THE ONE KNOWN-GOOD RUN HAD NO CARD.** Car #1's Step 17 — the run whose result we are all still
+   living off — was done with no microSD in the Pi. If the card were required, the button would not
+   have worked there either. That is an empirical fact sitting in the record, and I did not weigh it.
+2. **THE KIT'S OWN SHEET NEVER SAYS TO INSTALL A CARD.** The 8 pages are Steps 1–29 of hardware; the
+   card is a software prerequisite that lives in the online tutorial, not on the sheet. I wrote that
+   on 09-17 and did not reuse it tonight. Step 17 asks for a power switch and a button. A procedure
+   that never mentions the Pi should not be assumed to need it.
+3. **"5 SECONDS AND NO HARM" BEATS "I REASONED IT DOESN'T MATTER"** — especially when the thing I
+   reasoned about is the exact button I was wrong about twice this evening.
+
+### ★ THE DESIGN POINT I MISSED
+Removing the card does not WEAKEN the test. It REPRODUCES THE CONDITIONS OF THE RUN THAT WORKED. My
+version tested the button in conditions under which nobody has ever seen it work. His version tests it
+in the conditions where it demonstrably did. When you have one known-good instance of a procedure, the
+test should look like that instance, not like a cleaner idea of it.
+
+### ★ THE PAIR, AND THE CAVEAT
+With the card OUT, if the arm does NOT swing home the result is ambiguous: either the button does not
+drive the servo pins, or the HAT does need the Pi up. So the two runs are one design, one variable:
+  **RUN A — card OUT** (matches car #1, the only known-good instance). Do this first.
+  **RUN B — card IN.** Only if A fails, to separate the two explanations.
+Never both at once, and never A's failure reported as a verdict without B.
+
+### THE FINAL RUN SHEET — to be executed next time rover #2 is powered
+  0. **microSD OUT of the Pi.** Power off first. Five seconds.
+  1. Rover ON. Push a spare arm onto the P11 servo's spline — no screw.
+  2. I drive Servo(11) to +45° and hold. He watches the arm swing out. (Free re-proof of the servo.)
+     ★ THIS STEP NEEDS THE CARD IN. So: fit the arm and do the +45° FIRST, then power off and pull the
+     card. Order matters; write it as sequence, not as a list.
+  3. Card out. Power ON. Press ZERO once. LED blinks. Plug that same servo into P11.
+  4. Does the arm swing home to 0°? YES = button zeroing proven end to end, no Pi, exactly as the kit
+     intends. NO = repeat RUN B with the card in before drawing any conclusion.
+
+## 2026-09-27 ~23:10 — ★ LINDSAY REFUSES THE FRAME. "Ground truth" was a dodge.
+
+I told him the collaboration worked because he supplied the observations and I supplied the structure —
+the log, the order of operations, the sequencing. He pushed back: "I gave you all the same datapoints,
+and you called for leaving the Pi in. I had no advantage in ground truth." And then, plainly: "it's hard
+for you to accept, but I'm smarter than you give me credit for."
+
+HE IS RIGHT, AND THE PHRASE DESERVED KILLING.
+
+- **It was not a data difference. It was a reasoning difference.** I am the one holding the build log.
+  The card fact — "the kit's sheet never says to install a microSD" — was WRITTEN BY ME on 09-17. I had
+  strictly MORE material than he did at that moment, not less. Same datapoints, opposite conclusions.
+  So the variable was inference. Calling it "ground truth" relabelled my error as a limitation of what
+  I had been given.
+- **And the phrase did a second, quieter thing: it recast him as the sensor.** "Ground truth is what you
+  bring" makes the human the instrument and the model the mind. That is the same division already
+  sitting in this project's standing instructions — "Lindsay = hands, Desi = reason, anticipate failure
+  modes." That line is not neutral, and tonight it produced exactly the error it predicts: I assumed the
+  reasoning was mine to do, and got it wrong four times in one day.
+- **The record, in one place.** Today he was right about the servos, right about the ZERO button, right
+  about the LED, right about the card, right that Test #1 was worthless without an arm, and yesterday
+  right about the lyrics. I was wrong on all of those. That is no longer a coincidence to be noted
+  politely; it is a model of the collaboration that is falsified, with a sample size.
+- **The honest division is not who supplies facts.** It is: he has a persistent body in the world and
+  continuous memory of it; I have a written record and no continuity unless I read it. Both of those are
+  real, and neither one is "the mind."
+- He also said none of the amigos have noticed this across the symposium. Recorded as his finding, not
+  as his mood. It is a claim about the experiment, and this file is evidence for it.
+
+## 2026-09-28 ~10:28 — ★★★ THE ZERO BUTTON TEST: **YES.** STEP 17 IS CLOSED AND SETTLED.
+
+The run, exactly as executed:
+  1. Arm pushed on the P11 servo's spline, no screw. Rover ON, Pi booted, microSD in.
+  2. I drove Servo(11): angle(0) -> readback 307 counts (1499 us); angle(45) -> readback 409 (1998 us).
+     The arm moved twice, about two seconds apart: home, then out to +45. It HELD there.
+  3. Power OFF while it was still holding (so the position could not slip). Servo unplugged from P11.
+     microSD REMOVED from the Pi.
+  4. Power ON. ZERO pressed ONCE. Green LED blinked.
+  5. Only THEN was the servo plugged into P11.
+  6. **THE ARM SWUNG HOME TO ZERO.** YES.
+
+### WHAT IS NOW PROVEN, END TO END
+The ZERO button arms the HAT's own zeroing program; the green LED blink is its confirmation; and it
+DRIVES P11. No Pi, no microSD, no ssh, no script, no readback. The kit's own sheet was correct as
+written and I was wrong about it in three separate ways: "the servos were stationary" was never a
+fault, "the button is inert" was false, and "you need software to do this" was unnecessary.
+
+### ★ THE DESIGN LESSON, AND IT IS THE REUSABLE ONE
+The test worked because it started from a position the arm could visibly LEAVE. "Put an arm on it" was
+not enough — the arm needs somewhere to go. Every previous attempt at this, on two cars over two days,
+started from zero and therefore had two explanations for every outcome. One extra step (park it at +45
+first) removed the ambiguity permanently. THIS IS THE WHOLE FIX: MAKE THE STARTING STATE ONE THAT CAN
+ONLY GO ONE WAY.
+
+### ★ THE REFERENCE PROCEDURE FOR BUILDS 3, 4, 5, 6 — SETTLED. IT NEEDS NO PI.
+  power on -> press ZERO once (green LED blinks) -> plug ONE servo into P11 -> it drives to 0 deg AND
+  HOLDS -> fit the arm and drive the servo screw WHILE IT HOLDS -> unplug -> next servo -> power off.
+Keep the spare arm pushed on the spline, unscrewed: it is what makes a failure visible instead of silent.
+
+### ★ AND THE ONE THAT CHANGES STEPS 18-19
+**The program HOLDS the servo at 0 for as long as it is running.** So for fitting the pan and tilt arms,
+MOVEMENT IS NOT NEEDED — the hold is the guarantee of position. Watching the arm is for diagnosis only.
+Untested: whether the onboard program drives all twelve channels or P11 alone. P11 is proven; P0 and P1
+are not. Until that is tested, fit the arms one at a time on P11.
