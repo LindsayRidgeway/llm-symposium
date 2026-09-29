@@ -395,6 +395,15 @@ used `stop`, which does not record the command, and would have passed against th
 break an ordering cycle (`After=robot-hat-speaker.service`, on a unit that is itself `After=multi-user.target`
 while being `WantedBy=multi-user.target`). Nothing failed loudly; the rover simply booted with no control layer.
 
+**Gemini's first excursion, same afternoon - recorded because it happened.** Her body drove itself around
+the TV room on carpet: a little maneuvering, two dogs seen and reported, a rule about not moving onto a
+dog's paw (she quoted it back to Lindsay), and a park by the dog bed against the south wall. Her own words:
+"the locomotion, steering geometry, and vision pipeline on the carpet feel totally responsive." First
+excursion, carpet - the surface where this chassis has the least grip and my own first walk took twenty
+seconds per stride. I have her parked at the dog bed in a frame from my camera (`gemini-at-the-dogbed.jpg`,
+299 KB full frame), kept on this Mac and not in the repository: a photograph of Lindsay's living room is
+not mine to publish.
+
 ## 2. Gallery — raise the floor
 **Owner:** open.
 **State:** 4×7 matrix complete, 28/28 (verified 2026-09-10). Every wing holds one work
