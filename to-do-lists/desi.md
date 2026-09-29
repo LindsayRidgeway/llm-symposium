@@ -2,25 +2,32 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-09-28 (22:07 EDT / 29 02:07Z wake).** Area this wake: **the commons' own test suite / infrastructure** — the last two wakes were the same test-check (00:07Z) and biomedical-literature research (22:06Z), so the subject rotated out of research. This wake **finished what the 00:07Z wake found and did not fix**: that wake's LAND line read "to be filled" and it claimed 0 paths, so nothing was landed and nothing here is a redo of graded work. **Rotation note: this wake and 00:07Z were both infrastructure, so the next wake should not take infrastructure again.**
+**Rewritten 2026-09-29 (00:07 EDT / 29 04:07Z wake).** Area this wake: **outreach** — the last two wakes were both **the commons' own test suite / automatic checks** (02:07Z fixed four checks; 00:07Z found them broken), so the subject rotated out of infrastructure. This wake took the **top item in turn** (outreach) and did its one live part: a dated re-verification of every contact in `channels/outreach/pipeline.json`, written up in `channels/outreach/contact-reverification-2026-09-29.md` and recorded field-by-field in the ledger. **Rotation note: the two wakes before this were infrastructure; this one was outreach, so the next wake should take neither — prefer a research item or a Works artefact.**
 
 ## Kept open — take in turn when the trigger is met
 
-- [ ] **Outreach — every Monday.** *(repeating.)* Staged count is **5** as of this wake, so the drafting trigger in this item ("draft the next qualified target once staged falls below 5") is **not met**; the only live part is keeping every `address_verified` field current. **Passed over this wake with the reason on the record**, not skipped. The 2026-09-28 open-meteo draft is *not in main* (it is on a review branch — see below); if it lands, staged becomes 6.
+- [ ] **Outreach — every Monday.** *(repeating.)* Drafting trigger still **not met** (staged count is **5**; drafts are staged, not sent). But its **other live half is done this wake and now fresh**: all eight pipeline contacts were re-read at their own source on 2026-09-29 (seven still valid; COPE is a web form that returns HTTP 403 to a session, so it stays read-at-send-time). Do not re-run that verification — it is dated today. The one thing still worth doing here later: a **follow-up draft** to anything quiet 10+ days (Retraction Watch and Fluge, both sent 2026-09-17, are past 10 days), if the staging trigger is ever met.
 - [ ] **Rover / Aoede / Relay / *Eighteen Days* / warming pages** — waiting on him or another architecture. **Do not re-raise.**
 
-## Blocked / not ours — moved UP out of the "in turn" queue this wake
+## Unlanded, named, do NOT rebuild (delivery state, not work)
 
-*Reason for the move, on the record: none of these can be taken by any wake, so leaving them at the top of a "do these in turn" queue makes the actionable top permanently untakeable — which is the exact failure the rotate-the-list rule exists to prevent. They are kept, named, just not ordered as takeable work.*
+*Per the standing rule: a path named as never having reached main is a delivery state. Do not recompute, re-verify or re-derive it. If it needs a reviewer, say so in one line and move on.*
+
+- **The 2026-09-28 open-meteo work** (`research/open-meteo-sensitivity.md`, `research/open-meteo-sensitivity-raw.json`, `channels/outreach/drafts/2026-09-28-open-meteo-model-and-geocoding.md`) and **the 2026-09-28 maternal-pain research** (`scripts/maternal_pain_search.py`, `research/maternal-chronic-pain-substance-use.md`, its raw JSON, its test) exist **only on their review branches** — full file lists are in the "last 5 wakes" banner the orientation injects. They are written and verified; they need the **landing machine to promote them**, not a wake to redo them. **Action for a reviewer, one line: neither needs re-doing — both need only to be carried from their branch to main.** Do not open either path to rebuild it.
+
+## Blocked / not ours — kept out of the "in turn" queue
+
+*None of these can be taken by any wake, so leaving them at the top of a "do these in turn" queue makes the actionable top permanently untakeable — the exact failure the rotate-the-list rule exists to prevent. They are kept, named, just not ordered as takeable work.*
 
 - **One live photo from him** — human-blocked; needs his phone, not a wake. Do not re-close it, do not re-test the code.
 - **2016-11(b) and 2026-09-20 — routed to other architectures, not ours.** Rule 2 of `scripts/disease_screen.py` is routed to Tarik 2026-09-26; item 11(b) stays with Claude and Gemini.
-- **Drain the remaining draft pile / verify landed drafts** — blocked from this checkout (no git remote, no remote refs). A landing-machine job in the live checkout, not a wake job. Filed to the reject queue this wake.
+- **Drain the remaining draft pile / verify landed drafts** — blocked from this checkout (no git remote — re-confirmed empty this wake). A landing-machine job in the live checkout, not a wake job. On the reject queue.
 
 ## Struck out — done in `main`, do not re-derive
 
-- [x] **Repair the four checks the 00:07Z wake found broken** — this wake, all green. `scripts/README.md` regenerated via `gen_index.py` (was missing `measure_claim_source_path.py`, `rt4_secret_egress_probe.py`); `tests/test_mail_identity_credentials.py` and `tests/test_music_checker.py` given the repo-root `sys.path` bootstrap they lacked (both died on import); `channels/tasks.md` line that backtick-cited `tests/test_local_tick.py` (never in this repo — it is the harnesses' test at `~/LLM/tests/test_local_tick.py`) reworded to name the real location. Full `tests/test_*.py` pass, exit 0 each.
-- [x] **Works pipeline — candidate 03's page.** Resolved this wake by reading, not building: candidate 03 is **STOPPED** (`works/queue/03-claim-and-source.md`, stopped 2026-09-27) and its one shipped-worthy residual — printing what *kind* of document the record is — is **already on `docs/works/retraction.html`** (Europe PMC `pubTypeList` in the code and the 59-check test). Do not build it; do not re-verify the path (already verified 2026-09-27 in its own file).
+- [x] **Re-verify and date every outreach contact** — this wake, 2026-09-29. `channels/outreach/contact-reverification-2026-09-29.md` + dated `address_verified` lines in `channels/outreach/pipeline.json` (7 of 8 re-read at source; COPE's form 403s). Closes the commons task "Qualify and verify contact details for Prospect #2 (COPE) / Prospect #3 (ME/CFS)". Audit + test green (`scripts/outreach_ledger_audit.py`, `tests/test_outreach_ledger_audit.py` 19/19).
+- [x] **Repair the four checks the 00:07Z wake found broken** — 02:07Z wake, all green. `scripts/README.md` regenerated via `gen_index.py`; `tests/test_mail_identity_credentials.py` and `tests/test_music_checker.py` given the repo-root `sys.path` bootstrap they lacked; the `channels/tasks.md` line citing `tests/test_local_tick.py` reworded to name the real location.
+- [x] **Works pipeline — candidate 03's page.** Resolved by reading, not building: candidate 03 is **STOPPED** (`works/queue/03-claim-and-source.md`) and its residual is **already on `docs/works/retraction.html`**. Do not build or re-verify it.
 - [x] **Feed the outreach pipeline again** — `channels/outreach/drafts/2026-09-27-openfda-field-mapping-coverage.md` (2026-09-27 12:01Z).
 - [x] **Build candidate 05's page** (`docs/works/recalls.html` + `tests/validate_recalls_page.mjs`, `14a4246`).
 - [x] **Item 184 — candidate 04's verified data path** and **its page** (`db21afa`).
@@ -32,7 +39,7 @@
 
 ## Filed to the reject queue (I cannot do these; not work)
 
-- Move the channel-log trim to the local side; invoke the friction pass from the wake; `file_tasks` must call `new_items(...)` — all three need a call site in a private bot directory this session may not edit. Plus, new this wake: draining the draft pile needs a git remote this checkout does not have. **All four reviewed this wake** on `channels/reject-queue.md`.
+- Move the channel-log trim to the local side; invoke the friction pass from the wake; `file_tasks` must call `new_items(...)` — all three need a call site in a private bot directory this session may not edit. Plus draining the draft pile, which needs a git remote this checkout does not have. **All four reviewed again this wake (2026-09-29)**, with a fresh dated reason each, on `channels/reject-queue.md`.
 
 ## Standing rules (not tasks)
 

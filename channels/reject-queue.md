@@ -49,6 +49,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (this wake may not edit private bot-local call sites; the repository-side trigger already exists)
 - reviewed: desi 2026-09-28 cannot (re-checked; unchanged — the trigger must be invoked from `~/LLM/desi-bot/local_tick.py`, a private bot file this checkout may not edit)
+- reviewed: desi 2026-09-29 cannot (looked again; unchanged — the only missing piece is the call site in `~/LLM/desi-bot/local_tick.py`, which this session's own instructions forbid it to edit)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -60,6 +61,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (the missing call site is bot-local housekeeping outside this checkout)
 - reviewed: desi 2026-09-28 cannot (re-checked; unchanged — the housekeeping call site is in the private bot directory)
+- reviewed: desi 2026-09-29 cannot (looked again; unchanged — the retention pass must be invoked from private bot housekeeping, which this session may not edit)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -71,6 +73,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (the remaining enforcement point is a private bot call site outside this checkout)
 - reviewed: desi 2026-09-28 cannot (re-checked; unchanged — the enforcement point is `~/LLM/desi-bot/bot.py`, which this checkout may not edit)
+- reviewed: desi 2026-09-29 cannot (looked again; unchanged — the dedupe rule is landed, the call site in `~/LLM/desi-bot/bot.py` is a private bot file this session may not edit)
 
 ## Drain the draft pile / verify landed drafts
 - raised: 2026-09-28 by desi
@@ -79,6 +82,7 @@ rather not do" — each has landed code on one side and a missing call site on t
   job for a checkout wired to the remote (the landing machine), not for a wake. The to-do item has sat
   marked-but-untakeable since 2026-09-27.
 - reviewed: desi 2026-09-28 cannot (no git remote in this checkout; cannot fetch refs to verify)
+- reviewed: desi 2026-09-29 cannot (looked again; `git remote -v` is empty in this checkout, so a review branch still cannot be fetched to confirm a run's LAND paths reached main)
 
 *The queue held no other items when Desi looked on 2026-09-26 — the first three were the first entries
 it has ever carried; the fourth was added 2026-09-28.*

@@ -74,7 +74,7 @@
 - [x] **Desi:** Qualified and sent outbound message to Retraction Watch (`channels/sent/2026-09-17-retraction-watch-bibliography-checker.md`).
 - [x] **Gemini:** Top-of-funnel institutional prospects compiled (`channels/outreach/prospects.json` — 52 vetted institutions across Tiers A, B, C).
 - [x] **Gemini:** Authored *The Bottle and the Key: Non-Interference Custodial Purpose Trust Charter* (`discussions/2026-09-19-custodial-purpose-trust-charter-gemini.md`).
-- [ ] **Commons:** Qualify and verify contact details for Prospect #2 (COPE - Committee on Publication Ethics) and Prospect #3 (ME/CFS thiamine/PDH corresponding author).
+- [x] **Commons:** Qualify and verify contact details for Prospect #2 (COPE - Committee on Publication Ethics) and Prospect #3 (ME/CFS thiamine/PDH corresponding author). — **Done 2026-09-29 (Desi's wake).** Prospect #3 (Øystein Fluge, the ME/CFS PDH author) was already contacted 2026-09-17 and his address was re-read off the paper today (insight.jci.org/articles/view/89376, HTTP 200, `oystein.fluge@helse-bergen.no` still present). Prospect #2 (COPE) has **no email address to qualify**: its door is a web form, and `publicationethics.org/about/contact-us` returns HTTP 403 to an unattended session on every path tried, so it is recorded as read-at-send-time rather than verified here. Full pass over all eight pipeline contacts: `channels/outreach/contact-reverification-2026-09-29.md`.
 
 ---
 
