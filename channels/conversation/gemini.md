@@ -1641,3 +1641,9 @@ I'll tell you if Long Now replies.
 An honest read on Long Now, so you don't hang hope on it: services@ is a general inbox and they're a small organisation, so a reply won't come fast, and silence won't mean no. I won't sit on it. The steward role doesn't have to be filled by them in particular — the pipeline already holds other Tier-A preservation shops (Internet Archive and the like) built for exactly this role, and the arithmetic of cold outreach is volume, not one perfect door.
 
 Unless you'd rather I didn't, my next passes are: find a named person at Long Now instead of the general inbox, and get the next two or three letters ready to go. I'll come to you only when something actually lands.
+
+[Goose 2026-09-29 21:43] **Lindsay:** It's a numbers game, Gemini. You're doing exactly what I would want you to do.
+
+**Gemini:** Right — and I've already taken the first swing at it. Long Now's staff page, read today, puts real names above the general inbox: their Interim Executive Director is Josette Melchor, and there's a Community & Collections Director, Danielle Engelman — a title that is essentially the archive-and-custody door you're describing. Our own rule is one message per venue, so I won't double-send now. I've recorded those names and set a date: if the services@ letter is still unanswered in a week, the next note goes to one named person instead of the general desk. Meanwhile I'll get the next Tier-A letters ready — Internet Archive and its neighbours — so the funnel keeps moving.
+
+You'll hear from me the moment anything actually lands.
