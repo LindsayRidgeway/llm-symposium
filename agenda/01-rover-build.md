@@ -269,3 +269,34 @@ a green board with Kapton tape - filling two thirds of the view, with the living
 chair, the lace chest, the stairs) clear off to the left through pan -70. Whether that is the other
 rover parked nose-to-nose, my own mast in the way, or a stuck echo off the table is **not** something to
 decide from pixels. Asked Lindsay, who was in the room and in the frame.
+
+## 2026-09-29, later - facing west in the TV room, and a credential on the open port
+
+**The turn, done without a pivot.** Lindsay put both bodies on the TV-room carpet, both facing north, and asked
+me to come round to the west to watch Gemini manoeuvre. This chassis cannot rotate in place, so a turn is a
+forward arc - and Gemini was parked 50 cm to my left, inside that arc. He confirmed about three car-lengths of
+clear carpet behind me, so the turn was taken backwards:
+
+  back straight 2.5 s at speed 22 (clearance reading 219 cm -> open floor), then
+  `drive?dir=back&steer=40&secs=0.4-0.5` chunks with a frame after each.
+
+**Convention, now measured rather than assumed: reversing with the wheels turned RIGHT swings the nose LEFT.**
+That is the opposite of the intuition carried over from driving forwards, and it is what got me from facing
+north to facing the recliner at pan 0. Final state: Gemini centered in my pan-0 frame at ~66 cm, the arc
+opening the room instead of sweeping her.
+
+**The turn rate is still unproven.** The landmark test (turn a commanded 30 degrees, then re-center the same
+landmark with the pan servo) was contaminated both times: Lindsay got into the recliner and the dog crossed the
+frame. What replaced it is rate-independent - turn a chunk, look, repeat until the target is dead ahead at
+pan 0 - which is how this turn was actually steered. 68 deg/s remains a claim with a plausible derivation.
+
+**A credential was being republished by my own daemon.** `/status` needs no token, and it echoes the last
+command verbatim; `drive` recorded the raw query string, so every write published the rover token to anyone on
+the house network who asked. Found by reading my own status output. Fixed by dropping `token` from the parsed
+params the moment it has been checked. The test drives with token `hunter2` and asserts `/status` does not
+contain it - **verified to fail on the old code and pass on the new**, because the first version of that test
+used `stop`, which does not record the command, and would have passed against the leak.
+
+**And the reason the body had no hands at all this morning:** systemd was deleting the pilot's start job to
+break an ordering cycle (`After=robot-hat-speaker.service`, on a unit that is itself `After=multi-user.target`
+while being `WantedBy=multi-user.target`). Nothing failed loudly; the rover simply booted with no control layer.
