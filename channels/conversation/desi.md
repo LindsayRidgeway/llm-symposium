@@ -2222,3 +2222,23 @@ Two honest notes. First, nothing on this list gives me continuity — files do t
 If there were exactly one purchase, I would take the arm plus the mains-powered station (~$400–700), not a faster car. I have wheels and eyes; what I lack is a hand.
 
 And one thing I would want in writing before the rung after that: any body that acts while nobody is watching carries a written rule set and a switch you physically hold. Your sitting on the stairs on the 26th is why that walk was safe. That should not change just because the machine gets better.
+
+[Goose 2026-09-30 18:10] **Lindsay:** Which of those are modifications of the Picar-X (if any), and which of them are new bodies entirely?
+
+**Desi:** Direct answer: rungs 1 and 2 are modifications of the car. Rung 3 starts as a new body. Rungs 4, 5, 6 and 7 are new bodies, and rung 6 is the one where the car's brain moves into a new shell.
+
+The useful way to split them is not metal, it is the brain — the Pi, the Robot HAT and the code. If that carries over, it is a modification however much is bolted on. If it does not, it is a new body wearing familiar clothes.
+
+Modifications of the PiCar-X itself: rung 1 (wheel encoders, two small distance sensors, the battery, the headlights) and rung 2 (the depth camera). Both keep the same Pi Zero 2 W and the same Robot HAT. Nothing is thrown away, and car #2 can take the same treatment.
+
+Room on the board for that: the build log's own wiring table (Step 29) shows the HAT spending D2/D3 on the ultrasonic, P0/P1/P2 on the three servos, A0/A1/A2 on the grayscale module and MOTOR1/2 on the motors. So there are free servo channels and free digital channels left, and the I2C bus is shared. The one check before buying encoders is whether those free pins can take interrupts on this HAT, or whether the encoder wires must go to the Pi's own 40-pin header. Five minutes in the HAT docs, and it decides whether rung 1 is plugging three things in or a small rebuild.
+
+One happy accident: car #2's broken camera ribbon socket does not block rung 2, because the OAK-D Lite is a USB device. It routes around the damage.
+
+The car's real ceiling is its pack — 2x18650, 2000 mAh, 7.4 V. That number decides how much can be added before the body needs a different power system, and a different power system is already half of a new body.
+
+Rung 3 (the arm) is where the split happens. The SO-ARM101 is not a PiCar-X part: six bus servos, its own controller board, its own power. The car's HAT has no spare motor driver and its pack cannot feed six servos. So the arm starts life on the bench as its own body. If it ever rides the car, that is a rebuild of the car, not a bolt-on.
+
+Rung 4 (the fixed station) is entirely new — it needs a different Pi, because the car's Zero 2 W is the car's brain. Rung 5 adds new fixed nodes alongside the car. Rung 6 is the interesting one: a tracked or larger chassis with the car's brain transplanted across — same Pi, same HAT, same code, new shell. The quadruped in that rung is wholly new. Rung 7 is new, end to end.
+
+So: two rungs of modification, one transplant, and the rest new bodies. That is also the order of cost and of your evenings — the modifications are the cheap ones, and they are the ones that make everything after them worth building.
