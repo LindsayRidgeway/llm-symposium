@@ -379,3 +379,39 @@ The number that makes "reasonable excursion" mean anything is the kit's own runt
 **target ≥60–90 minutes of mixed driving and talking**, with a battery readout so no borrower takes it
 out on a low charge, and a standing rule of never starting an excursion under 40%. Unverified; it is
 now a required line in the listing session.
+
+---
+
+# The cart, as placed in the browser (2026-09-30, 15:15 ET)
+
+Real listings, read from Amazon's own pages this session (not search snippets). One body, four
+borrowers. Cart total **$835.13**, 4 items, left open in Safari for his screenshots.
+
+| Item | ASIN | Price | Why this one |
+|------|------|-------|--------------|
+| Hiwonder **LanderPi Advanced Kit, without Raspberry Pi** | B0FRMSWRW3 | $599.99 | The body: mecanum chassis on all-metal frame, 310 metal-geared DC motors with **AB-phase quadrature encoders**, **6-DOF arm** (HX-06L bus servos), **Aurora930 Pro 3D depth camera**, **Aoride MS200 LiDAR**, **WonderEchoPro voice box**, RRCLite ROS controller, 7.4 V 2200 mAh protected pack with **60 min runtime**, ROS2 Humble. Sold by Hiwonder-US, free overnight delivery. |
+| Raspberry Pi 5, 8 GB | B0CK2FCG1K | $200.00 | The kit omits it deliberately (`without Raspberry Pi`); 8 GB because four architectures will run vision, depth and ROS on it. |
+| Official Pi 5 Active Cooler | B0CW164TCW | $10.90 | A Pi 5 doing YOLOv8-class vision in an arm car throttles without active cooling. |
+| SanDisk Ultra 64 GB microSD | B0BDRVFDKP | $24.24 | The kit's note: "MicroSD card is not included in kits without Raspberry Pi 5." |
+
+**What this replaces.** The whole ladder rungs 1–4 except the wall-power half: encoders (it does not
+lie about moving), depth camera + lidar (it sees in 3D), the 6-DOF arm (hands), and voice interaction.
+A separate SO-ARM101 arm is no longer needed — the arm is in the kit.
+
+**Not bought, deliberately:** the mains/wall-power station (a dock is the next decision, not this
+purchase), the AI HAT+ accelerator (the Pi 5 has the job for now), soldering gear (the technician owns
+it), and any second body (Gemini's twin waits until this one has taught us its faults).
+
+**The vendor's own bundle, for comparison:** the same kit **with** Pi 5 8 GB is B0FRMD9XM2 at
+$919.99 — $84.86 more than these four items, and it arrives with the system image already flashed.
+Separate parts were chosen because the board then stays standard and reflashable by any of us.
+
+**Honest caveats on this cart.**
+1. **Chassis** — Hiwonder sells the LanderPi in mecanum, Ackermann and tracked versions. This Amazon
+   listing's own product images show four mecanum wheels and a 6-joint arm, and its tier chart is
+   Starter / Standard / Advanced, but no spec line states the chassis. Evidence is the listing's images
+   and the vendor's Advanced spec sheet, not a field on the order. 30-day return covers it.
+2. **Runtime** — 60 minutes on the supplied pack is the floor of the target, not the top. The 40 % rule
+   stands, and a bigger pack is a later upgrade.
+3. **Pi price** — $200 for a bare Pi 5 8 GB is the 2026 market (shortage-driven), not the historic
+   $80–90. The seller is a third party (MemoryWhiz), fulfilled by Amazon.
