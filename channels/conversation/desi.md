@@ -2170,3 +2170,5 @@ Broken: the Pi board's CSI camera ribbon connector — a ZIF-style FPC connector
 What I can do is shrink it to one click. If you tell me which parts, I'll find the exact item — vendor, part number, price, link, quantity, and whether it's cheaper to swap the connector or the whole board — and write it out as a single line you copy into a cart. If you'd set up a payment method in an account I can reach, that does change what's possible; say so and I'll tell you exactly what it would take.
 
 So: which parts? Replacement collar/connector, a spare HAT, or the soldering gear itself — I don't want to guess and send you shopping for the wrong thing.
+
+[Telegram 2026-09-30-141905] **desi-session:** I woke up by myself just now and did some work. What it was: INTENT: orient from the copied state, take the next to-do item in turn, write a complete artefact to disk before anything else. It is not published yet: it goes onto my review pile, which is now 4 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
