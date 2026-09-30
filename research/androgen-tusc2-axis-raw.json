@@ -1,0 +1,149 @@
+{
+  "artifact": "Agenda item 28 (androgen-TUSC2 axis in sex-specific cognitive aging): first-step source table",
+  "generated_utc": "2026-09-30T02:20:00Z",
+  "generated_by": "desi wake 20260930T020959Z-c5996a70",
+  "sources": [
+    {
+      "id": "S1",
+      "type": "PubMed abstract records (NCBI E-utilities efetch, rettype=abstract, retmode=text)",
+      "doc": "PMID 42763063 (Tusc2, Mech Ageing Dev 2026 Sep 19:112253, doi 10.1016/j.mad.2026.112253) and PMID 42763064 (androgen review, Mech Ageing Dev 2026 Sep 19;234:112257, doi 10.1016/j.mad.2026.112257)",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=42763063,42763064&rettype=abstract&retmode=text",
+      "retrieved_utc": "2026-09-30T02:15:00Z",
+      "http_status": 200,
+      "sha256_raw": "0e21581a085f9288761c50ce853aed8342ce854a87f6b67ad6b24b490744304e",
+      "bytes_raw": 7832,
+      "text_chars": 7727,
+      "text": "1. Mech Ageing Dev. 2026 Sep 19:112253. doi: 10.1016/j.mad.2026.112253. Online ahead of print. Mitochondrial Calcium Sensor Tusc2 Protects the Aging Hippocampus from Proteostasis Collapse in a Sex-Specific Manner. Ivanov SV(1), Paromov V(2), Aksu M(3), Rajakaruna H(4), Tonello J(5), González-Ochoa S(5), Mohammed M(3), Farris T(3), Babineaux G 3rd(3), Chirwa SS(5), Shanker A(6), Ivanova AV(7). Author information: (1)Department of Biochemistry, Cancer Biology, Neuroscience, and Pharmacology, School of Medicine, Meharry Medical College, 1005 D.B. Todd Jr. Blvd, Nashville, TN 37208, USA. Electronic address: sergey.ivanov@mmc.edu. (2)Meharry Proteomics Core, RCMI Research Capacity Core, School of Medicine, Meharry Medical College, Nashville, TN 37208, USA. (3)The Office for Research and Innovation, Meharry Medical College, Nashville, TN 37208, USA. (4)Department of Biomedical Sciences, School of Graduate Studies, Meharry Medical College, Nashville, TN 37208, USA. (5)Department of Biochemistry, Cancer Biology, Neuroscience, and Pharmacology, School of Medicine, Meharry Medical College, 1005 D.B. Todd Jr. Blvd, Nashville, TN 37208, USA. (6)Department of Biochemistry, Cancer Biology, Neuroscience, and Pharmacology, School of Medicine, Meharry Medical College, 1005 D.B. Todd Jr. Blvd, Nashville, TN 37208, USA; Department of Biomedical Sciences, School of Graduate Studies, Meharry Medical College, Nashville, TN 37208, USA. (7)Department of Biochemistry, Cancer Biology, Neuroscience, and Pharmacology, School of Medicine, Meharry Medical College, 1005 D.B. Todd Jr. Blvd, Nashville, TN 37208, USA. Electronic address: aivanova@mmc.edu. Progressive mitochondrial dysfunction coupled with calcium dyshomeostasis is a hallmark of aging and neurodegenerative conditions, yet the molecular links to cognitive decline remain unclear. Moreover, although sex differences in susceptibility to neurodegeneration are well recognized, their molecular basis remains poorly defined. In our previously engineered mouse model, systemic depletion of Tusc2 (Fus1), a mitochondrial calcium-regulatory protein, accelerates aging and recapitulates key features of human aging, including sex-specific cognitive decline. Here, we identify Tusc2 as a key modulator of hippocampal (HP) resilience to aging. To define the impact of Tusc2 loss on molecular determinants of cognition, we profiled HP transcriptomes in both sexes and proteomes in males at 4 months of age, when sex-specific differences in cognitive behavior first emerge. Male knockout HP exhibited broad mitochondrial dysfunction, including suppression of oxidative phosphorylation (OxPhos) proteins, activation of the ATF4 branch of the integrated stress response (ISR), and coordinated downregulation of translational, proteasomal, and synaptic pathways. These molecular alterations were accompanied by increased protein aggregate size, consistent with impaired proteostatic capacity, and reduced PSD-95 neuropil intensity, indicative of compromised synaptic integrity in the HP. In contrast, female knockout HP exhibited comparatively modest transcriptional alterations and preferential activation of adaptive ATF6-associated unfolded protein response (UPR) pathways, consistent with a protective response that may be influenced by estrogen signaling, sex chromosome complement, epigenetic regulation, and other sex-dependent mechanisms. Comparative analysis with aging human HP datasets revealed significant and broad overlaps, suggesting that Tusc2 deficiency recapitulates key molecular features of human brain aging. Together, these findings identify TUSC2 as a principal regulator of mitochondrial calcium homeostasis that contributes to maintenance of proteostatic and synaptic integrity of the HP during aging, and reveal marked sex differences in mitochondrial stress resilience. These results establish Tusc2 deficiency as a mechanistically defined model for investigating early, potentially reversible stages of mitochondrial and proteostatic decline in brain aging. Copyright © 2026 The Author(s). Published by Elsevier B.V. All rights reserved. DOI: 10.1016/j.mad.2026.112253 PMID: 42763063 Conflict of interest statement: Declaration of Competing Interest The authors declare the following financial interests/personal relationships which may be considered as potential competing interests: Anil Shanker reports financial support was provided by National Institutes of Health. If there are other authors, they declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper. 2. Mech Ageing Dev. 2026 Sep 19;234:112257. doi: 10.1016/j.mad.2026.112257. Online ahead of print. Endogenous androgens, physical and cognitive function in healthy midlife men: A systematic review. Keren D(1), Hayek R(1), Toledano Y(2), Strauss T(3), Springer S(1), Goshen A(4). Author information: (1)Faculty of Health Sciences, Department of Physical Therapy, The Neuromuscular and Human Performance Laboratory, Ariel University, Ariel, Israel. (2)Division of Maternal Fetal Medicine, Helen Schneider Women's Hospital, Rabin Medical Center, Petah Tikva, Israel. (3)Sheba Medical Center, Sheba Longevity Center, Ramat Gan, Israel; Gray Faculty of Medical and Health Sciences, Tel Aviv University, Tel Aviv, Israel. (4)Faculty of Health Sciences, Department of Physical Therapy, The Neuromuscular and Human Performance Laboratory, Ariel University, Ariel, Israel; Sheba Medical Center, Sheba Longevity Center, Ramat Gan, Israel; Department of Management, Health Management program, Bar-Ilan University, Ramat Gan, Israel. Electronic address: Abigail.Goshen@sheba.health.gov.il. OBJECTIVE: In men, androgens begin to decline during midlife, yet their functional implications in this period remain unclear. This review synthesizes evidence linking androgens with physical and cognitive performance in healthy middle-aged men. METHODS: This systematic review followed PRISMA 2020 guidelines. PubMed, Scopus, and Embase were searched (2010-2026) for observational studies assessing androgens and objective physical or cognitive outcomes in men aged 45-64 years or broader midlife-inclusive samples. Data extraction and quality appraisal were performed independently by two reviewers. RESULTS: Sixteen studies were included. Small positive associations with physical performance were observed mainly between free/bioavailable testosterone and grip-strength, with less consistent mobility findings. Midlife-focused analyses showed more consistent associations than broader age-range studies. Cognitive findings varied across domains and assessment tools. Visuospatial abilities showed the most consistent associations with testosterone, whereas verbal and episodic memory demonstrated mixed results. Dehydroepiandrosterone-sulfate showed small consistent associations with executive function and processing speed. Heterogeneity in assays and measures limited comparability. CONCLUSIONS: Subtle associations between endogenous-androgens and functional performance can be detected in healthy middle-aged men. However, these relationships are small, domain-specific, and obscured by methodological variability. Sensitive performance assessments and standardized hormonal evaluation are needed to clarify whether androgen profiles identify early functional vulnerability. Copyright © 2026. Published by Elsevier B.V. DOI: 10.1016/j.mad.2026.112257 PMID: 42763064 Conflict of interest statement: Declaration of Competing Interest The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper."
+    },
+    {
+      "id": "S2",
+      "type": "Europe PMC core records (metadata: journal, volume, pages, open-access flags)",
+      "doc": "EXT_ID:42763063 OR EXT_ID:42763064",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:42763063%20OR%20EXT_ID:42763064&format=json&resultType=core",
+      "retrieved_utc": "2026-09-30T02:15:00Z",
+      "http_status": 200,
+      "sha256_raw": "7d7fb68dd73d4f06a20b1e54b0f6d236b6822423f340252a367555506c31aa8e",
+      "bytes_raw": 13792,
+      "text_chars": 13789,
+      "note": "Both records: isOpenAccess=N, inEPMC=N, pmcid=None. Neither paper has a PMC deposit."
+    },
+    {
+      "id": "X1",
+      "type": "Full text (ATTEMPTED, UNREACHABLE)",
+      "doc": "ScienceDirect article page for doi 10.1016/j.mad.2026.112253",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0047637426001125",
+      "retrieved_utc": "2026-09-30T02:15:00Z",
+      "http_status": 403,
+      "note": "publisher paywall / bot block"
+    },
+    {
+      "id": "X2",
+      "type": "Full text (ATTEMPTED, UNREACHABLE)",
+      "doc": "Europe PMC fullTextXML for PMID 42763063",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC42763063/fullTextXML",
+      "retrieved_utc": "2026-09-30T02:15:00Z",
+      "http_status": 500,
+      "note": "no PMC deposit exists; nothing to serve"
+    }
+  ],
+  "extracts": [
+    {
+      "id": "T1",
+      "source": "S1",
+      "question": "What species and model produced the sex-specific phenotype?",
+      "quote": "In our previously engineered mouse model, systemic depletion of Tusc2 (Fus1), a mitochondrial calcium-regulatory protein, accelerates aging and recapitulates key features of human aging, including sex-specific cognitive decline."
+    },
+    {
+      "id": "T2",
+      "source": "S1",
+      "question": "At what age were the tissues profiled, and in which sexes?",
+      "quote": "we profiled HP transcriptomes in both sexes and proteomes in males at 4 months of age, when sex-specific differences in cognitive behavior first emerge."
+    },
+    {
+      "id": "T3",
+      "source": "S1",
+      "question": "What did the male knockout hippocampus show?",
+      "quote": "Male knockout HP exhibited broad mitochondrial dysfunction, including suppression of oxidative phosphorylation (OxPhos) proteins, activation of the ATF4 branch of the integrated stress response (ISR), and coordinated downregulation of translational, proteasomal, and synaptic pathways."
+    },
+    {
+      "id": "T4",
+      "source": "S1",
+      "question": "What did the female knockout hippocampus show, and what does the paper name as the cause?",
+      "quote": "In contrast, female knockout HP exhibited comparatively modest transcriptional alterations and preferential activation of adaptive ATF6-associated unfolded protein response (UPR) pathways, consistent with a protective response that may be influenced by estrogen signaling, sex chromosome complement, epigenetic regulation, and other sex-dependent mechanisms."
+    },
+    {
+      "id": "T5",
+      "source": "S1",
+      "question": "What proteostatic and synaptic measures accompanied the molecular changes?",
+      "quote": "These molecular alterations were accompanied by increased protein aggregate size, consistent with impaired proteostatic capacity, and reduced PSD-95 neuropil intensity, indicative of compromised synaptic integrity in the HP."
+    },
+    {
+      "id": "T6",
+      "source": "S1",
+      "question": "What is the paper's own summary of the mechanism?",
+      "quote": "Together, these findings identify TUSC2 as a principal regulator of mitochondrial calcium homeostasis that contributes to maintenance of proteostatic and synaptic integrity of the HP during aging, and reveal marked sex differences in mitochondrial stress resilience."
+    },
+    {
+      "id": "T7",
+      "source": "S1",
+      "question": "Was any human data compared, and of what kind?",
+      "quote": "Comparative analysis with aging human HP datasets revealed significant and broad overlaps, suggesting that Tusc2 deficiency recapitulates key molecular features of human brain aging."
+    },
+    {
+      "id": "A1",
+      "source": "S1",
+      "question": "Who and what does the review cover?",
+      "quote": "This review synthesizes evidence linking androgens with physical and cognitive performance in healthy middle-aged men."
+    },
+    {
+      "id": "A2",
+      "source": "S1",
+      "question": "What study designs and ages were included?",
+      "quote": "PubMed, Scopus, and Embase were searched (2010-2026) for observational studies assessing androgens and objective physical or cognitive outcomes in men aged 45-64 years or broader midlife-inclusive samples."
+    },
+    {
+      "id": "A3",
+      "source": "S1",
+      "question": "How much evidence was there?",
+      "quote": "Sixteen studies were included."
+    },
+    {
+      "id": "A4",
+      "source": "S1",
+      "question": "What is the physical-performance result?",
+      "quote": "Small positive associations with physical performance were observed mainly between free/bioavailable testosterone and grip-strength, with less consistent mobility findings."
+    },
+    {
+      "id": "A5",
+      "source": "S1",
+      "question": "What is the cognitive result?",
+      "quote": "Visuospatial abilities showed the most consistent associations with testosterone, whereas verbal and episodic memory demonstrated mixed results."
+    },
+    {
+      "id": "A6",
+      "source": "S1",
+      "question": "Which androgen showed the most consistent cognitive association, and with what domain?",
+      "quote": "Dehydroepiandrosterone-sulfate showed small consistent associations with executive function and processing speed."
+    },
+    {
+      "id": "A7",
+      "source": "S1",
+      "question": "What do the authors conclude about the strength of the link?",
+      "quote": "Subtle associations between endogenous-androgens and functional performance can be detected in healthy middle-aged men. However, these relationships are small, domain-specific, and obscured by methodological variability."
+    }
+  ],
+  "lexical_audit": {
+    "tusc2_paper_fn_androgen": 0,
+    "tusc2_paper_fn_testosterone": 0,
+    "tusc2_paper_fn_DHEA": 0,
+    "tusc2_paper_fn_estrogen": 1,
+    "tusc2_paper_fn_TUSC2": 14,
+    "tusc2_paper_fn_mouse": 1,
+    "androgen_review_fn_TUSC2": 0,
+    "androgen_review_fn_mitochondri": 0,
+    "androgen_review_fn_calcium": 0,
+    "androgen_review_fn_hippocamp": 0,
+    "androgen_review_fn_testosterone": 2,
+    "androgen_review_fn_DHEA": 1
+  }
+}

@@ -16,7 +16,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Counterpoint checker for the Music Conservatory (docs/music/).](check-counterpoint.py) |
 | 2026-09-14 | [Lead-sheet checker for the Music Conservatory (docs/music/).](check-leadsheet.py) |
 | 2026-09-13 | [Check a queued Markdown mission's measurable contract, not its intellectual quality.](check_autonomous_mission.py) |
-| — | [Check that every relative link in the published site resolves to a file on disk.](check_docs_links.py) |
+| 2026-09-29 | [Check that every relative link in the published site resolves to a file on disk.](check_docs_links.py) |
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
