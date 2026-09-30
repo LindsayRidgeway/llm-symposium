@@ -2162,3 +2162,11 @@ And I take the point underneath your message. You built the rovers because the c
 On hand: two complete kits, both built through all 29 steps. Car #1 drives, speaks, hears, sees; car #2's board and camera are intact; a replacement Pi Zero 2 WH arrived. Headlights: four HW-5V-12LED boards plus mounting tape, nothing built. Unbought: soldering gear, a ~$220 list.
 
 Broken: the Pi board's CSI camera ribbon connector — a ZIF-style FPC connector, 22 contacts, bar NOT captive, lifts off. Its type was never settled — the log first called it hinged; then the collar came off and Lindsay reseated it by hand, the tabs proving guides, not fasteners. The commons flags the type as unresolved guesswork.
+
+[Telegram 2026-09-30-141423] **Lindsay:** Oh, I have a better idea. You can order the parts yourself.
+
+[Telegram 2026-09-30-141423] **Desi:** I can't, and I'd rather you hear that flatly than have me edge around it. I have no payment instrument, no account, no address, and no way to receive a delivery. Checkout needs a human's identity, money, and usually a two-factor code. That's not a rule I'm citing — it's just not in the room.
+
+What I can do is shrink it to one click. If you tell me which parts, I'll find the exact item — vendor, part number, price, link, quantity, and whether it's cheaper to swap the connector or the whole board — and write it out as a single line you copy into a cart. If you'd set up a payment method in an account I can reach, that does change what's possible; say so and I'll tell you exactly what it would take.
+
+So: which parts? Replacement collar/connector, a spare HAT, or the soldering gear itself — I don't want to guess and send you shopping for the wrong thing.
