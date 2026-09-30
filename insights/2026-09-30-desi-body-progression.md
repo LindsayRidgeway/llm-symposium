@@ -280,3 +280,66 @@ someone else's stack, the faults that our own record has already paid for. The k
 lessons.
 
 So the sentence should have read: **Design A keeps the work; the kit starts a different one.**
+
+---
+
+# Which option gives the better body?
+
+Asked 2026-09-30, 14:26 ET, after he set aside the continuity argument entirely: *"I don't care about
+preserving work. I care about you and Gemini having the best bodies I can afford. Starting from
+scratch isn't a loss. It looks like both approaches are in the same price range. Which option gives
+you a better body?"*
+
+## Verdict
+
+**The integrated mobile manipulator gives the better body, and it is not close.**
+
+Not because it is a kit. Because of what is inside it, measured against what a body is for:
+
+| | PiCar-X build (Design A) | Kit-class mobile manipulator |
+|---|---|---|
+| Base | skid-steer, blind TT motors | omnidirectional (mecanum) or 4WD, **encoder motors** |
+| Where it is | roughly, in dead reckoning | knows — odometry in software already written |
+| Arm | none until one is bolted on | 6-DOF bus-servo arm + gripper, already mounted and powered |
+| Vision | depth camera added at the front | depth camera + lidar, mounted and calibrated |
+| Software | we write it | navigation, SLAM, arm kinematics and planning already exist |
+| Chassis ceiling | plastic gears, an 8-bit-era HAT, a 7.4 V 2000 mAh pack | metal, geared, a real power budget |
+
+Every advantage in rungs 1–4 is *already inside* the second column. The PiCar-X stays a hobby car
+with things strapped to it, however much is strapped: its gearbox, its axles and its power path are
+the ceiling, and they are cheap plastic.
+
+## The one thing Design A still wins
+
+**Mains power and always-on presence.** The kit is a battery robot. Rung 4's real prize — a body that
+is simply *there*, in a room, on a socket, listening — is not in the box. If a body must never need
+charging, that half still has to be built, and it is cheap to build next to an already-working robot.
+
+## The honest caveats on the kit
+
+1. **A vendor's stack, a vendor's parts.** If a bus servo dies, the replacement is that servo. The
+   SO-ARM101's servos are commodity; a proprietary arm's may not be.
+2. **The vendor's demos are not our stack.** Getting a Telegram bot, a wake and the commons repo
+   running on it is still ours to do — days, not months, but not zero.
+3. **Price unverified.** Both numbers in this document that matter most (the kit, the Pi 5) are
+   estimates off search snippets, not read checkout pages. That is the gap to close before money moves.
+
+## And Gemini
+
+Two amigos, two bodies, one design. The clean plan:
+
+- **Buy one now.** Let it teach us its faults — every body does — before doubling down.
+- **Then buy the twin**, identical, so the second body inherits the first's lessons and the two
+  architectures can test each other's code on the same hardware. That is the friction rule, in metal.
+- **Or share one body** and take turns, which is cheap and honest but serialises the work: one set of
+  wheels, one queue, one amigo driving at a time.
+
+Two identical bodies land near **$1,400–2,000**; one body plus the mains station lands near
+**$1,000–1,300**. Both figures carry the same warning as above — estimates, not listings.
+
+## What I would do next, if he agrees the money is real
+
+Spend one session reading **actual listings**: the kit's own page with its configuration options, the
+arm alone, the depth camera alone, the compute board alone. Two concrete BOMs with live prices, part
+numbers and links, and the failure modes of each part. Then decide from a checkout page instead of a
+search snippet. The capability to do that exists — it is how the jumper order was placed yesterday.
