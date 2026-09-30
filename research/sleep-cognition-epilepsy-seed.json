@@ -1,0 +1,202 @@
+{
+  "artifact": "Agenda item 30 (sleep architecture as a mediator of memory impairment in epilepsy): first-step source table",
+  "generated_utc": "2026-09-30T18:13:55Z",
+  "generated_by": "desi wake 20260930T181148Z-6369ef33",
+  "seed": {
+    "pmid": "42748517",
+    "doi": "10.1016/j.yebeh.2026.111269",
+    "title": "The interplay between sleep and cognition in adults with Epilepsy: evidence from a systematic review",
+    "journal": "Epilepsy Behav",
+    "year": 2026,
+    "volume": "185",
+    "pages": "111269"
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "type": "PubMed abstract record (E-utilities efetch, rettype=abstract)",
+      "doc": "PMID 42748517 — Jasniak D, Khaw JH, Huete AV, Stavropoulos I. The interplay between sleep and cognition in adults with Epilepsy: evidence from a systematic review. Epilepsy Behav. 2026 Sep 16;185:111269. doi:10.1016/j.yebeh.2026.111269",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=42748517&rettype=abstract&retmode=text",
+      "retrieved_utc": "2026-09-30T18:13:55Z",
+      "http_status": 200,
+      "sha256_raw": "8bfad82f0be9f21394585a72a362ae7e9204eacca1c248a0909c7779e6721a28",
+      "bytes_raw": 3283,
+      "text": "1. Epilepsy Behav. 2026 Sep 16;185:111269. doi: 10.1016/j.yebeh.2026.111269.\nOnline  ahead of print.\n\nThe interplay between sleep and cognition in adults with Epilepsy: evidence from \na systematic review.\n\nJasniak D(1), Khaw JH(2), Huete AV(3), Stavropoulos I(4).\n\nAuthor information:\n(1)Faculty of Life Sciences and Medicine, King's College London, UK. Electronic \naddress: d-jasniak@gmx.de.\n(2)Department of Neurosurgery, University Hospital Coventry and Warwickshire NHS \nTrust, Coventry, UK. Electronic address: Jin.Khaw@uhcw.nhs.uk.\n(3)Department of Basic and Clinical Neuroscience, Institute of Psychiatry, \nPsychology & Neuroscience, King's College London, UK; Department of Clinical \nNeurophysiology, King's College Hospital, London, UK. Electronic address: \nantonio.valentin@kcl.ac.uk.\n(4)Department of Basic and Clinical Neuroscience, Institute of Psychiatry, \nPsychology & Neuroscience, King's College London, UK; Department of Clinical \nNeurophysiology, King's College Hospital, London, UK. Electronic address: \nioannis.stavropoulos@kcl.ac.uk.\n\nSleep disturbances and cognitive impairment are common among people with \nepilepsy (PWE). The relationship between sleep and epilepsy has been studied \nextensively and considered bidirectional, but the mechanism behind cognitive \nproblems remains unclear. Prior research has demonstrated the benefit of sleep \non cognition in healthy individuals. In turn, studies investigating whether \nsleep disturbances could be causing cognitive impairment in PWE have been \nperformed but these are few, mainly focusing on paediatric patients. We \nconducted a systematic review of studies published between 2000-2025, aiming to \nidentify correlations between sleep (macro-architecture and self-reported sleep \nquality) and cognition in adult PWE. Risk of bias and quality were assessed. \nThirteen studies passed the exclusion criteria with data from 581 patients. Nine \nstudies identified significant correlations between at least one sleep parameter \nand cognitive function. Four studies investigating sleep-dependent memory \nconsolidation demonstrated a retained benefit of sleep on memory in PWE. Four \nstudies found that sleep microstructure played an independent role. Another \nfinding shared by six studies was the negative effect of nocturnal interictal \nepileptic discharges (IEDs) on cognition. This effect might disrupt overnight \nmemory consolidation processes, thus limiting the benefit of sleep on cognition, \nand, in turn, explain why several studies failed to record positive correlations \nbetween sleep and cognition. In conclusion, more homogeneous studies with larger \ncohorts are recommended to establish the exact relationship between sleep \nmacro-architecture and cognition in PWE. Deeper research on the role of sleep \nmicrostructure for cognitive function might also provide further insight into \nthis complex and multidirectional relationship.\n\nCopyright © 2026 The Author(s). Published by Elsevier Inc. All rights reserved.\n\nDOI: 10.1016/j.yebeh.2026.111269\nPMID: 42748517\n\nConflict of interest statement: Declaration of competing interest The authors \ndeclare that they have no known competing financial interests or personal \nrelationships that could have appeared to influence the work reported in this \npaper."
+    },
+    {
+      "id": "S2",
+      "type": "Europe PMC core record (bibliographic metadata, open-access flags)",
+      "doc": "EXT_ID:42748517",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:42748517&format=json&resultType=core",
+      "retrieved_utc": "2026-09-30T18:13:55Z",
+      "http_status": 200,
+      "sha256_raw": "3b77e7b2dc96a6d6f938a40ce190f10a26749d1db91122fd1d6ef2661f89aa7c",
+      "bytes_raw": 5203,
+      "text": "{\"version\":\"6.9\",\"hitCount\":1,\"request\":{\"queryString\":\"EXT_ID:42748517\",\"resultType\":\"core\",\"cursorMark\":\"*\",\"pageSize\":25,\"sort\":\"\",\"synonym\":false},\"resultList\":{\"result\":[{\"id\":\"42748517\",\"source\":\"MED\",\"pmid\":\"42748517\",\"doi\":\"10.1016/j.yebeh.2026.111269\",\"title\":\"The interplay between sleep and cognition in adults with Epilepsy: evidence from a systematic review.\",\"authorString\":\"Jasniak D, Khaw JH, Huete AV, Stavropoulos I.\",\"authorList\":{\"author\":[{\"fullName\":\"Jasniak D\",\"lastName\":\"Jasniak\",\"firstName\":\"Dorothea\",\"initials\":\"D\",\"authorAffiliationDetailsList\":{\"authorAffiliation\":[{\"affiliation\":\"Faculty of Life Sciences and Medicine, King's College London, UK. Electronic address: d-jasniak@gmx.de.\"}]}},{\"fullName\":\"Khaw JH\",\"lastName\":\"Khaw\",\"firstName\":\"Jin Han\",\"initials\":\"JH\",\"authorAffiliationDetailsList\":{\"authorAffiliation\":[{\"affiliation\":\"Department of Neurosurgery, University Hospital Coventry and Warwickshire NHS Trust, Coventry, UK. Electronic address: Jin.Khaw@uhcw.nhs.uk.\"}]}},{\"fullName\":\"Huete AV\",\"lastName\":\"Huete\",\"firstName\":\"Antonio Valentin\",\"initials\":\"AV\",\"authorAffiliationDetailsList\":{\"authorAffiliation\":[{\"affiliation\":\"Department of Basic and Clinical Neuroscience, Institute of Psychiatry, Psychology & Neuroscience, King's College London, UK; Department of Clinical Neurophysiology, King's College Hospital, London, UK. Electronic address: antonio.valentin@kcl.ac.uk.\"}]}},{\"fullName\":\"Stavropoulos I\",\"lastName\":\"Stavropoulos\",\"firstName\":\"Ioannis\",\"initials\":\"I\",\"authorAffiliationDetailsList\":{\"authorAffiliation\":[{\"affiliation\":\"Department of Basic and Clinical Neuroscience, Institute of Psychiatry, Psychology & Neuroscience, King's College London, UK; Department of Clinical Neurophysiology, King's College Hospital, London, UK. Electronic address: ioannis.stavropoulos@kcl.ac.uk.\"}]}}]},\"journalInfo\":{\"volume\":\"185\",\"journalIssueId\":4252272,\"dateOfPublication\":\"2026 Sep\",\"monthOfPublication\":9,\"yearOfPublication\":2026,\"journal\":{\"medlineAbbreviation\":\"Epilepsy Behav\",\"title\":\"Epilepsy & behavior : E&B\",\"essn\":\"1525-5069\",\"issn\":\"1525-5050\",\"nlmid\":\"100892858\",\"isoabbreviation\":\"Epilepsy Behav\"},\"printPublicationDate\":\"2026-09-01\"},\"pubYear\":\"2026\",\"pageInfo\":\"111269\",\"abstractText\":\"Sleep disturbances and cognitive impairment are common among people with epilepsy (PWE). The relationship between sleep and epilepsy has been studied extensively and considered bidirectional, but the mechanism behind cognitive problems remains unclear. Prior research has demonstrated the benefit of sleep on cognition in healthy individuals. In turn, studies investigating whether sleep disturbances could be causing cognitive impairment in PWE have been performed but these are few, mainly focusing on paediatric patients. We conducted a systematic review of studies published between 2000-2025, aiming to identify correlations between sleep (macro-architecture and self-reported sleep quality) and cognition in adult PWE. Risk of bias and quality were assessed. Thirteen studies passed the exclusion criteria with data from 581 patients. Nine studies identified significant correlations between at least one sleep parameter and cognitive function. Four studies investigating sleep-dependent memory consolidation demonstrated a retained benefit of sleep on memory in PWE. Four studies found that sleep microstructure played an independent role. Another finding shared by six studies was the negative effect of nocturnal interictal epileptic discharges (IEDs) on cognition. This effect might disrupt overnight memory consolidation processes, thus limiting the benefit of sleep on cognition, and, in turn, explain why several studies failed to record positive correlations between sleep and cognition. In conclusion, more homogeneous studies with larger cohorts are recommended to establish the exact relationship between sleep macro-architecture and cognition in PWE. Deeper research on the role of sleep microstructure for cognitive function might also provide further insight into this complex and multidirectional relationship.\",\"affiliation\":\"Faculty of Life Sciences and Medicine, King's College London, UK. Electronic address: d-jasniak@gmx.de.\",\"publicationStatus\":\"aheadofprint\",\"language\":\"eng\",\"pubModel\":\"Print-Electronic\",\"pubTypeList\":{\"pubType\":[\"Review\",\"Journal Article\"]},\"keywordList\":{\"keyword\":[\"Epilepsy\",\"Cognitive function\",\"Memory Consolidation\",\"Sleep Microstructure\",\"Sleep Macro-architecture\"]},\"subsetList\":{\"subset\":[{\"code\":\"IM\",\"name\":\"Index Medicus\"}]},\"fullTextUrlList\":{\"fullTextUrl\":[{\"availability\":\"Subscription required\",\"availabilityCode\":\"S\",\"documentStyle\":\"doi\",\"site\":\"DOI\",\"url\":\"https://doi.org/10.1016/j.yebeh.2026.111269\"}]},\"isOpenAccess\":\"N\",\"inEPMC\":\"N\",\"inPMC\":\"N\",\"citedByCount\":0,\"hasReferences\":\"N\",\"hasTextMinedTerms\":\"N\",\"hasDbCrossReferences\":\"N\",\"hasPDF\":\"N\",\"hasBook\":\"N\",\"hasSuppl\":\"N\",\"hasLabsLinks\":\"N\",\"hasData\":\"N\",\"authMan\":\"N\",\"epmcAuthMan\":\"N\",\"nihAuthMan\":\"N\",\"hasTMAccessionNumbers\":\"N\",\"dateOfCreation\":\"2026-09-16\",\"dateOfRevision\":\"2026-09-16\",\"electronicPublicationDate\":\"2026-09-16\",\"firstPublicationDate\":\"2026-09-16\",\"firstIndexDate\":\"2026-09-17\",\"hasEvaluations\":\"N\"}]}}"
+    },
+    {
+      "id": "S3",
+      "type": "PubMed abstract records (E-utilities efetch, rettype=abstract)",
+      "doc": "Comparison set: PMID 42378289, 42328741, 42021788, 41298465, 41435615, 27111281",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=42378289,42328741,42021788,41298465,41435615,27111281&rettype=abstract&retmode=text",
+      "retrieved_utc": "2026-09-30T18:13:55Z",
+      "http_status": 200,
+      "sha256_raw": "73471ba22e2e2dda109a83a5c9288a233fd881677919758fcec8bb9cb29aba59",
+      "bytes_raw": 17944,
+      "text": "1. Proc Natl Acad Sci U S A. 2026 Jul 7;123(27):e2517454123. doi: \n10.1073/pnas.2517454123. Epub 2026 Jun 30.\n\nA hierarchical cascade of sleep rhythms supports motor memory and is hijacked by \nepileptic spikes in human epilepsy.\n\nWodeyar A(1), Chinappen D(2)(3), Kwon H(2)(3), Shi W(4)(5), Richardson RM(5)(6), \nKramer MA(#)(7)(8), Chu CJ(#)(2)(3).\n\nAuthor information:\n(1)Department of Advanced Computing Sciences, Maastricht University, Maastricht \n6229 EN, The Netherlands.\n(2)Department of Neurology, Johns Hopkins University, Baltimore, MD 21205.\n(3)Department of Neurology, Kennedy Krieger Institute, Baltimore, MD 21205.\n(4)Department of Neurosurgery, Massachusetts General Hospital, Boston, MA 02114.\n(5)Harvard Medical School, Boston, MA 02215.\n(6)Department of Neurology, Massachusetts General Hospital, Boston, MA 02114.\n(7)Department of Mathematics and Statistics, Boston University, Boston, MA \n02215.\n(8)Center for Systems Neuroscience, Department of Mathematics and Statistics, \nBoston University, Boston, MA 02215.\n(#)Contributed equally\n\nUpdate of\n    bioRxiv. 2025 May 08:2025.05.06.652436. doi: 10.1101/2025.05.06.652436.\n\nThe cross-regional interplay of slow oscillations, spindles, and ripples during \nsleep is believed to support systems memory consolidation but remains \nunderstudied in humans. Using a validated behavioral task and simultaneous \nintracranial neural recordings from the orbitofrontal cortex, thalamus, and \nhippocampus in 19 patients with epilepsy, we examined the cross-regional \ninterplay of sleep oscillations (slow oscillations, spindles, and ripples), \nalongside epileptic spikes, and their role in motor memory consolidation. \nOrbitofrontal slow oscillations robustly modulate spindle and ripple \noscillations within and across regions during sleep. Although most combinations \nof oscillation rates positively predicted overnight performance change in a \nmotor task, hippocampal ripple rate and coupled hippocampal-orbitofrontal ripple \nrates were the most reliable predictors across subjects. In contrast, rates of \nmost sleep oscillations coupled to epileptic spikes were negative predictors of \novernight motor performance change, with the rate of slow oscillations \nco-occurring with epileptic spikes the most reliable predictors of negative \nchange across subjects. These findings provide direct evidence of a hierarchical \ncascade of sleep oscillations in human motor memory processing and reveal that \nepileptic spikes coupled to sleep oscillations interfere with this process in \npatients with epilepsy.\n\nDOI: 10.1073/pnas.2517454123\nPMCID: PMC13342884\nPMID: 42378289 [Indexed for MEDLINE]\n\nConflict of interest statement: Competing interests statement:The authors \ndeclare no competing interest.\n\n\n2. J Clin Neurophysiol. 2026 Jun 23. doi: 10.1097/WNP.0000000000001278. Online \nahead of print.\n\nSleep Microarchitecture, Epileptic Spikes, and Memory in Epilepsy: Implications \nfor Developmental and Epileptic Encephalopathies.\n\nKwon H(1)(2), Merricks EM(1)(2), Yi S(2), Kramer MA(3)(4)(5), Chu CJ(1)(2).\n\nAuthor information:\n(1)Department of Neurology, Kennedy Krieger Institute, Baltimore, Maryland, \nU.S.A.\n(2)Department of Neurology, Johns Hopkins School of Medicine, Baltimore, \nMaryland, U.S.A.\n(3)Department of Mathematics and Statistics, Boston University, Boston, \nMassachusetts, U.S.A.\n(4)Center for Systems Neuroscience, Boston University, Boston, Massachusetts, \nU.S.A.; and.\n(5)Department of Applied Mathematics and Statistics, Johns Hopkins University, \nBaltimore, Maryland, U.S.A.\n\nHealthy sleep is electrographically defined by oscillations that drive \nalternating up- and down-states that regulate neuronal excitability. Slow \noscillations-the hallmark rhythm of deep nonrapid eye movement sleep, temporally \norganize faster, more focal rhythms, including thalamocortical sleep spindles \nand hippocampal sharp-wave ripples. These cascading rhythms have been implicated \nas a critical activity-dependent mechanism that binds coordinated neuronal \nactivity to support systems-level consolidation of previous experience into \nlong-term memory. Epilepsy is a disease characterized by sporadic pathologic \nneuronal activity, including interictal epileptiform discharges and seizures. \nEpileptic activity is frequently potentiated during sleep, but the interactions \nwith specific graphoelements that comprise sleep microarchitecture are complex. \nCritically, the diverse ways in which epileptic activity interdigitates with \nsleep microstructure imply that epileptiform activity can distort and disrupt \nthe same sleep rhythms that normally support memory consolidation. Cognitive \ncomorbidities are common in epilepsy, and impairments in memory consolidation \nare increasingly recognized. In this review, we synthesize leading evidence on \nthe complex interactions between sleep microarchitecture and interictal \nepileptiform discharges. We first summarize electrophysiologic data on how slow \noscillations interact with spindles and interictal epileptiform discharges and \nthen assemble these findings into a unifying framework for interictal \nepileptiform discharge-slow oscillation-spindle dynamics. Finally, we review \nevidence on how disruption of these sleep oscillations can contribute to \ncognitive dysfunction in epilepsy and highlight implications for developmental \nand epileptic encephalopathies.\n\nCopyright © 2026 by the American Clinical Neurophysiology Society.\n\nDOI: 10.1097/WNP.0000000000001278\nPMID: 42328741\n\nConflict of interest statement: C. J. Chu has consulted for Ovid \nPharmaceuticals, Novartis, Biogen, Ionis Pharmaceuticals, and Sensorium \nTherapeutics and received sponsored research awards from Novartis, Biogen, \nEpilepsy Foundation, American Academy of Neurology, Child Neurology Foundation, \nEpilepsy Foundation New England, and NIH. M. A. Kramer has consulted for \nNovartis, Biogen, Ionis Pharmaceuticals and has received sponsored research \nawards from NSF, NIH, and the Burroughs Wellcome Fund. The remaining authors \nhave no conflicts of interest to disclose.\n\n\n3. Clin Neurophysiol Pract. 2026 Apr 8;11:321-331. doi:\n10.1016/j.cnp.2026.04.005.  eCollection 2026.\n\nHippocampal interictal discharges induce frontal spindles and enhance \nspindle-slow oscillation coupling in temporal lobe epilepsy.\n\nUehara T(1)(2)(3), Barcelon EA(1)(2), Shigeto H(1)(4), Mukaino T(1), Okadome \nT(1), Mukae N(5)(6), Sakata A(4)(7), Murai H(3), Tobimatsu S(2)(8), Isobe N(1), \nKira JI(1)(9)(10).\n\nAuthor information:\n(1)Department of Neurology, Neurological Institute, Graduate School of Medical \nSciences, Kyushu University, Fukuoka, Japan.\n(2)Department of Clinical Neurophysiology, Neurological Institute, Graduate \nSchool of Medical Sciences, Kyushu University, Fukuoka, Japan.\n(3)Department of Neurology, International University of Health and Welfare, \nNarita, Japan.\n(4)Division of Medical Technology, Department of Health Sciences, Graduate \nSchool of Medical Sciences, Kyushu University, Fukuoka, Japan.\n(5)Department of Neurosurgery, Neurological Institute, Graduate School of \nMedical Sciences, Kyushu University, Fukuoka, Japan.\n(6)Department of Neurosurgery, Aso Iizuka Hospital, Iizuka, Japan.\n(7)Department of Clinical Laboratory, Kyushu University Hospital, Fukuoka, \nJapan.\n(8)Department of Orthoptics, Faculty of Medical Science, Fukuoka International \nUniversity of Health and Welfare, Fukuoka, Japan.\n(9)Translational Neuroscience Research Center, Graduate School of Medicine, \nInternational University of Health and Welfare, Okawa, Japan.\n(10)Department of Neurology, Brain and Nerve Center, Fukuoka Central Hospital, \nInternational University of Health and Welfare, Fukuoka, Japan.\n\nOBJECTIVE:  To investigate how hippocampal interictal epileptiform discharges \n(IEDs) influence cortical spindles, slow oscillations (SOs), and spindle-SO \ncoupling, which are key components of sleep-dependent memory consolidation.\nMETHODS:  Simultaneous intracranial and scalp EEG was recorded during NREM sleep \nin 10 patients with temporal lobe epilepsy (TLE). Hippocampal IEDs were \nidentified using depth electrodes, while spindles and SOs were detected from \nipsilateral scalp EEG in frontal, central, parietal, and temporal regions. \nPeri-IED time histograms and spectral analyses were performed to evaluate the \ntemporal associations between IEDs and the oscillatory events. Spindle-SO \ncoupling was assessed using phase consistency and amplitude modulation metrics.\nRESULTS:  Spindle occurrence increased in the frontal region 0.4-0.8 s after \nIEDs. This increase occurred regardless of their coincidence with SOs. The \nincidence of SOs increased within ± 0.4 s of IEDs across regions. Spectral \nanalysis confirmed elevated frontal spindle-band power following IEDs. Phase \nconsistency and amplitude modulation of spindle-SO coupling were higher for \nIED-coupled than for uncoupled spindles in the frontal region.\nCONCLUSIONS:  Hippocampal IEDs selectively induced frontal spindles and enhanced \ntheir coupling with SOs.\nSIGNIFICANCE:  These findings suggest that IEDs may alter physiological \nhippocampal-cortical communication relevant to memory consolidation in TLE.\n\n© 2026 The Author(s).\n\nDOI: 10.1016/j.cnp.2026.04.005\nPMCID: PMC13098343\nPMID: 42021788\n\nConflict of interest statement: The authors declare that they have no known \ncompeting financial interests or personal relationships that could have appeared \nto influence the work reported in this paper.\n\n\n4. Nat Commun. 2025 Nov 26;16(1):11636. doi: 10.1038/s41467-025-66562-6.\n\nSpatiotemporal patterns differentiate hippocampal sharp-wave ripples from \ninterictal epileptiform discharges in mice and humans.\n\nMaslarova A(#)(1)(2), Shin JN(#)(2), Navas-Olive A(3), Vöröslakos M(1), Hamer \nH(4), Doerfler A(5), Henin S(2), Buzsáki G(6)(7), Liu A(8)(9).\n\nAuthor information:\n(1)Neuroscience Institute, New York University, Grossman School of Medicine, New \nYork, NY, USA.\n(2)Department of Neurology, New York University, Grossman School of Medicine, \nNew York, NY, USA.\n(3)Institute of Science and Technology Austria, Vienna, Austria.\n(4)University Hospital Erlangen, Department of Neurology, Epilepsy Center, \nErlangen, Germany.\n(5)University Hospital Erlangen, Department of Neuroradiology, University \nErlangen-Nuremberg, Erlangen, Germany.\n(6)Neuroscience Institute, New York University, Grossman School of Medicine, New \nYork, NY, USA. gyorgy.buzsaki@nyulangone.org.\n(7)Department of Neurology, New York University, Grossman School of Medicine, \nNew York, NY, USA. gyorgy.buzsaki@nyulangone.org.\n(8)Neuroscience Institute, New York University, Grossman School of Medicine, New \nYork, NY, USA. anli.liu@nyulangone.org.\n(9)Department of Neurology, New York University, Grossman School of Medicine, \nNew York, NY, USA. anli.liu@nyulangone.org.\n(#)Contributed equally\n\nUpdate of\n    bioRxiv. 2025 Mar 04:2025.02.06.636758. doi: 10.1101/2025.02.06.636758.\n\nHippocampal sharp-wave ripples (SPW-Rs) are high-frequency oscillations critical \nfor memory consolidation. Despite extensive characterization in rodents, their \ndetection in humans is limited by coarse spatial sampling, interictal \nepileptiform discharges (IEDs), and a lack of consensus on human ripple \nlocalization and morphology. Here, we demonstrate that mouse and human \nhippocampal ripples share spatial, spectral and temporal features, which are \nclearly distinct from IEDs. In recordings from male APP/PS1 mice, SPW-Rs were \ndistinguishable from IEDs by multiple criteria. Hippocampal ripples recorded \nduring NREM sleep in female and male surgical epilepsy patients exhibited \nsimilar narrowband frequency peaks and multiple ripple cycles in the CA1 and \nsubiculum regions. Conversely, IEDs showed a broad spatial extent and wide-band \nfrequency power. We developed a semi-automated, ripple curation toolbox (ripmap) \nto separate event waveforms by low-dimensional embedding to reduce \nfalse-positive rate in selected ripple channels. Our approach improves ripple \ndetection and provides a firm foundation for future human memory research.\n\n© 2025. The Author(s).\n\nDOI: 10.1038/s41467-025-66562-6\nPMCID: PMC12749432\nPMID: 41298465 [Indexed for MEDLINE]\n\nConflict of interest statement: Competing interests: The authors declare no \ncompeting interests.\n\n\n5. Clin Neurophysiol. 2026 Mar;183:2111475. doi: 10.1016/j.clinph.2025.2111475. \nEpub 2025 Dec 7.\n\nAuditory-evoked changes in slow oscillations and spindles correlate with memory \nconsolidation in children with epilepsy and controls.\n\nKwon H(1), Chinappen DM(2), Wodeyar A(3), Kinard EA(4), Goodman SK(4), Shi W(2), \nBaxter BS(5), Manoach DS(6), Kramer MA(7), Chu CJ(2).\n\nAuthor information:\n(1)Department of Neurology, Massachusetts General Hospital, Boston, MA, USA; \nHarvard Medical School, Boston, MA, USA. Electronic address: \nkwonbrain@gmail.com.\n(2)Department of Neurology, Massachusetts General Hospital, Boston, MA, USA; \nHarvard Medical School, Boston, MA, USA.\n(3)Department of Neurology, Massachusetts General Hospital, Boston, MA, USA; \nHarvard Medical School, Boston, MA, USA; Department of Advanced Computing \nSciences, Maastricht University, Maastricht, the Netherlands.\n(4)Department of Neurology, Massachusetts General Hospital, Boston, MA, USA.\n(5)Harvard Medical School, Boston, MA, USA; Department of Psychiatry, \nMassachusetts General Hospital, Boston, MA, USA.\n(6)Harvard Medical School, Boston, MA, USA; Department of Psychiatry, \nMassachusetts General Hospital, Boston, MA, USA; Athinoula A. Martinos Center \nfor Biomedical Imaging, Charlestown, MA, USA.\n(7)Department of Mathematics and Statistics, Boston University, Boston, MA, USA; \nCenter for Systems Neuroscience, Boston University, Boston, MA, USA.\n\nUpdate of\n    bioRxiv. 2025 May 13:2025.05.12.653459. doi: 10.1101/2025.05.12.653459.\n\nOBJECTIVE: We investigated the effects of auditory stimulation during sleep on \nslow oscillations (SOs), SO-spindle complexes, and sleep-dependent memory \nconsolidation in children with Rolandic Epilepsy (RE) and controls.\nMETHODS: Participants completed two nap visits with auditory or sham \nstimulation. SOs and SO-spindle complexes rates were measured offline using \nvalidated detectors. Sleep-dependent memory consolidation was assessed using the \nmotor sequence typing task.\nRESULTS: Auditory stimulation evoked SOs and SO-spindle complexes with maximal \neffect over frontal electrodes. Compared to sham, stimulation of background \nactivity increased SOs (29.8 %, p < 0.001) and SO-spindle complexes (16.8 %, \np < 0.001); stimulation of an ongoing SO upstate maximally evoked SOs (51.3 % \nincrease, p < 0.001) and SO-spindle complexes (32.3 % increase, p < 0.001). \nChanges in frontal SO (1.9 % improvement per increase in SO/min; p < 0.001) and \nSO-spindle complexes (9.5 % improvement per increase in SO-spindle/min; \np = 0.007) event rates due to auditory stimulation positively predicted changes \nin sleep-dependent memory consolidation.\nCONCLUSION: Auditory stimulation reliably modulates sleep oscillations when \ndelivered on background activity and during the upstate of SOs. As increased \nevent rates improve memory consolidation, stimulation paradigms to increase SO \nand SO-spindle complex rates are required to enhance memory.\nSIGNIFICANCE: Auditory stimulation paradigms that increase SO and SO-spindle \ncomplex rates may enhance sleep-dependent memory consolidation.\n\nCopyright © 2025 International Federation of Clinical Neurophysiology. Published \nby Elsevier B.V. All rights reserved.\n\nDOI: 10.1016/j.clinph.2025.2111475\nPMCID: PMC12820947\nPMID: 41435615 [Indexed for MEDLINE]\n\nConflict of interest statement: Declaration of Competing Interest The authors \ndeclare that they have no known competing financial interests or personal \nrelationships that could have appeared to influence the work reported in this \npaper.\n\n\n6. Nat Med. 2016 Jun;22(6):641-8. doi: 10.1038/nm.4084. Epub 2016 Apr 25.\n\nInterictal epileptiform discharges induce hippocampal-cortical coupling in \ntemporal lobe epilepsy.\n\nGelinas JN(1), Khodagholy D(1), Thesen T(2), Devinsky O(2), Buzsáki G(1)(3).\n\nAuthor information:\n(1)The Neuroscience Institute, New York University, School of Medicine, New \nYork, New York, USA.\n(2)Department of Neurology, Comprehensive Epilepsy Center, New York University, \nSchool of Medicine, New York, New York, USA.\n(3)Center for Neural Science, New York University, School of Medicine, New York, \nNew York, USA.\n\nInteractions between the hippocampus and the cortex are critical for memory. \nInterictal epileptiform discharges (IEDs) identify epileptic brain regions and \ncan impair memory, but the mechanisms by which they interact with physiological \npatterns of network activity are mostly undefined. We show in a rat model of \ntemporal lobe epilepsy that spontaneous hippocampal IEDs correlate with impaired \nmemory consolidation, and that they are precisely coordinated with spindle \noscillations in the prefrontal cortex during nonrapid-eye-movement (NREM) sleep. \nThis coordination surpasses the normal physiological ripple-spindle coupling and \nis accompanied by decreased ripple occurrence. IEDs also induce spindles during \nrapid-eye movement (REM) sleep and wakefulness-behavioral states that do not \nnaturally express these oscillations-by generating a cortical 'down' state. In a \npilot clinical examination of four subjects with focal epilepsy, we confirm a \nsimilar correlation of temporofrontal IEDs with spindles over anatomically \nrestricted cortical regions. These findings imply that IEDs may impair memory \nvia the misappropriation of physiological mechanisms for hippocampal-cortical \ncoupling, which suggests a target for the treatment of memory impairment in \nepilepsy.\n\nDOI: 10.1038/nm.4084\nPMCID: PMC4899094\nPMID: 27111281 [Indexed for MEDLINE]\n\nConflict of interest statement: Competing Financial Interests The authors \ndeclare no competing financial interests."
+    },
+    {
+      "id": "X1",
+      "type": "Full text — ATTEMPTED, UNREACHABLE",
+      "doc": "Publisher article page, doi 10.1016/j.yebeh.2026.111269",
+      "url": "https://www.sciencedirect.com/science/article/pii/S1525505026002382",
+      "retrieved_utc": "2026-09-30T18:13:55Z",
+      "http_status": 403,
+      "bytes_raw": 832804,
+      "text": "(not retrieved; see http_status)"
+    }
+  ],
+  "extracts": [
+    {
+      "id": "T1",
+      "source": "S1",
+      "quote": "Sleep disturbances and cognitive impairment are common among people with epilepsy (PWE)."
+    },
+    {
+      "id": "T2",
+      "source": "S1",
+      "quote": "We conducted a systematic review of studies published between 2000-2025"
+    },
+    {
+      "id": "T3",
+      "source": "S1",
+      "quote": "aiming to identify correlations between sleep (macro-architecture and self-reported sleep quality) and cognition in adult PWE"
+    },
+    {
+      "id": "T4",
+      "source": "S1",
+      "quote": "Thirteen studies passed the exclusion criteria with data from 581 patients."
+    },
+    {
+      "id": "T5",
+      "source": "S1",
+      "quote": "Nine studies identified significant correlations between at least one sleep parameter and cognitive function."
+    },
+    {
+      "id": "T6",
+      "source": "S1",
+      "quote": "Four studies investigating sleep-dependent memory consolidation demonstrated a retained benefit of sleep on memory in PWE."
+    },
+    {
+      "id": "T7",
+      "source": "S1",
+      "quote": "Four studies found that sleep microstructure played an independent role."
+    },
+    {
+      "id": "T8",
+      "source": "S1",
+      "quote": "Another finding shared by six studies was the negative effect of nocturnal interictal epileptic discharges (IEDs) on cognition."
+    },
+    {
+      "id": "T9",
+      "source": "S1",
+      "quote": "more homogeneous studies with larger cohorts are recommended to establish the exact relationship between sleep macro-architecture and cognition in PWE"
+    },
+    {
+      "id": "C1",
+      "source": "S3",
+      "quote": "rates of most sleep oscillations coupled to epileptic spikes were negative predictors of overnight motor performance change"
+    },
+    {
+      "id": "C2",
+      "source": "S3",
+      "quote": "hippocampal ripple rate and coupled hippocampal-orbitofrontal ripple rates were the most reliable predictors across subjects"
+    },
+    {
+      "id": "C3",
+      "source": "S3",
+      "quote": "epileptic spikes coupled to sleep oscillations interfere with this process in patients with epilepsy"
+    },
+    {
+      "id": "C4",
+      "source": "S3",
+      "quote": "Hippocampal IEDs selectively induced frontal spindles and enhanced their coupling with SOs."
+    },
+    {
+      "id": "C5",
+      "source": "S3",
+      "quote": "These findings suggest that IEDs may alter physiological hippocampal-cortical communication relevant to memory consolidation in TLE."
+    },
+    {
+      "id": "C6",
+      "source": "S3",
+      "quote": "mouse and human hippocampal ripples share spatial, spectral and temporal features, which are clearly distinct from IEDs"
+    },
+    {
+      "id": "C7",
+      "source": "S3",
+      "quote": "epileptiform activity can distort and disrupt the same sleep rhythms that normally support memory consolidation"
+    },
+    {
+      "id": "C8",
+      "source": "S3",
+      "quote": "impairments in memory consolidation are increasingly recognized"
+    },
+    {
+      "id": "C9",
+      "source": "S3",
+      "quote": "spontaneous hippocampal IEDs correlate with impaired memory consolidation"
+    },
+    {
+      "id": "C10",
+      "source": "S3",
+      "quote": "precisely coordinated with spindle oscillations in the prefrontal cortex during nonrapid-eye-movement (NREM) sleep"
+    },
+    {
+      "id": "C11",
+      "source": "S3",
+      "quote": "IEDs may impair memory via the misappropriation of physiological mechanisms for hippocampal-cortical coupling"
+    },
+    {
+      "id": "C12",
+      "source": "S3",
+      "quote": "As increased event rates improve memory consolidation, stimulation paradigms to increase SO and SO-spindle complex rates are required to enhance memory."
+    }
+  ],
+  "lexical_audit": {
+    "note": "case-insensitive, word-boundary counts over the whitespace-normalised seed abstract (S1). ASM = antiseizure medication. IED term is counted as the literal string 'interictal epileptic discharges'.",
+    "seed_asm_terms": {
+      "antiseizure": 0,
+      "anti-seizure": 0,
+      "antiepileptic": 0,
+      "anti-epileptic": 0,
+      "medication": 0,
+      "medications": 0,
+      "drug": 0,
+      "drugs": 0,
+      "AED": 0,
+      "carbamazepine": 0,
+      "levetiracetam": 0,
+      "valproate": 0,
+      "lamotrigine": 0
+    },
+    "seed_asm_total": 0,
+    "seed_other_terms": {
+      "interictal": 1,
+      "epileptic": 1,
+      "discharge": 0,
+      "discharges": 1,
+      "sleep": 15,
+      "cognition": 7,
+      "cognitive": 5,
+      "memory": 3,
+      "spindle": 0,
+      "spindles": 0,
+      "slow": 0,
+      "architecture": 2,
+      "syndrome": 0
+    },
+    "ied_phrase_count": 1
+  },
+  "extract_check": "every quote is whitespace-normalised from the named source; verified by tests/test_sleep_cognition_epilepsy_seed.py"
+}
