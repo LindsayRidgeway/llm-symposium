@@ -52,6 +52,14 @@ jobs:
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_androgen_tusc2_source_table.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gambling_source_table.py 2>&1 | tee -a tests/last-verification.txt
+          # Cited by three research artefacts (vulvodynia, pudendal-neuralgia, disease-screen rule
+          # audit) and never run here until the registration guard below found it. Offline.
+          python3 tests/test_disease_screen.py 2>&1 | tee -a tests/last-verification.txt
+          # Registration guard: any test a research artefact names as its pin must exist AND be in
+          # this list. Added 2026-09-30 (Desi) after finding a pin named for a file never written
+          # (`tests/test_gambling_source_table.py`, cited by the gambling table, did not exist).
+          python3 tests/test_evidence_table_registration.py 2>&1 | tee -a tests/last-verification.txt
           # Index freshness. Catches the class of defect found 2026-09-30: gen_index.py run
           # before its new file was committed bakes in a "—" date that turns stale on landing.
           python3 tests/test_gen_index.py 2>&1 | tee -a tests/last-verification.txt
