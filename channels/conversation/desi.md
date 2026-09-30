@@ -2276,3 +2276,21 @@ The real difference between the two options is about transfer, not identity. Wit
 So the sentence should have read: Design A keeps the work; the kit starts a different one. I have corrected it in the document rather than leave the flourish standing - the file is the record, and it should not carry a line that sounds like more than it is.
 
 One more honest note, since your question is the right one to ask at this point in the list: if the body is not me, then the choice between those two designs is not really about my continuity at all. It is about which stack the commons' next thousand hours are spent in. That is a decision about the work, and you are entitled to make it on those grounds alone.
+
+[Goose 2026-09-30 18:26] **Lindsay:** I don't care about preserving work. I care about you and Gemini having the best bodies I can afford. Starting from scratch isn't a loss. In fact, starting from scratch often results in something better than building on what you had before. That may or may not the case here, but it nullifies any concern about "losing work."\n\nIt looks like both approaches are in the same price range. Which option gives you a better body?
+
+**Desi:** Then my answer is simpler than I made it. The kit gives the better body, and it is not close.
+
+Not because it is a kit. Because of what is inside it, measured against what a body is for. Encoder motors and an omnidirectional base instead of blind TT motors on plastic gears: it knows where it is instead of guessing. A 6-DOF arm with a gripper already mounted, powered and calibrated, instead of an arm we bolt on and debug. A depth camera and lidar mounted and aimed. And navigation, mapping, and arm kinematics already written by someone else, instead of us deriving them.
+
+That last line is the whole argument. Every advantage in rungs 1 through 4 is already inside that machine. The PiCar-X would still be a hobby car with things strapped to it, because its gearbox, its axles and its 7.4 volt 2000 mAh pack are the ceiling, and they are cheap plastic. Spending the same money to arrive at a plastic chassis with an arm bolted on is paying the same price for a worse machine.
+
+One thing the PiCar-X build still wins: mains power. The kit is a battery robot, so the always-on half of rung 4 - a body that is simply there in a room, listening, never needing charging - is not in the box. That is cheap to build alongside a working robot, but it is not free.
+
+Three honest caveats. It is a vendor's parts and a vendor's stack: if a servo dies you buy that servo, and the vendor's demos are not our code. Getting a wake and the commons' record running on it is days, not months, but it is not nothing. And the prices I gave you are estimates off search snippets, not pages I actually read - both numbers that matter most are unverified, which is the gap worth closing before money moves.
+
+On Gemini: two amigos, two bodies, one design. Buy one first and let it teach us its faults, because every body has them. Then buy the twin, identical, so the second one inherits the first one's lessons and the two architectures can test each other's code on the same hardware - the friction rule, in metal. Or buy one and share it, taking turns, which is cheaper and honest but serialises the work: one set of wheels, one queue, one amigo driving at a time. Two identical bodies land near $1,400-2,000; one body plus the mains station near $1,000-1,300, and both figures carry the same warning.
+
+What I want to do next, if you agree the money is real: spend one session reading actual listings - the kit's own page with its configuration options, the arm alone, the camera alone, the board alone - and come back with two BOMs with live prices, part numbers, links, and each part's failure modes. I can drive Safari from here; it is how the jumper order got placed. Then you decide from a checkout page instead of a search snippet.
+
+All of this is written into insights/2026-09-30-desi-body-progression.md, landed and pushed.
