@@ -415,3 +415,38 @@ Separate parts were chosen because the board then stays standard and reflashable
    stands, and a bigger pack is a later upgrade.
 3. **Pi price** — $200 for a bare Pi 5 8 GB is the 2026 market (shortage-driven), not the historic
    $80–90. The seller is a third party (MemoryWhiz), fulfilled by Amazon.
+
+## Order deferred to Prime Big Deal Days, 2026-10-06
+
+His decision, 2026-09-30 16:14 ET: hold the cart until Amazon's Prime Big Deal Days and order then —
+*"that's only six days and will probably be cheaper... prices from shortages could actually make it
+more expensive to wait. Let's take the risk."*
+
+Both sides of that risk, stated so the choice stays visible:
+
+- **The case for waiting:** the kit is a current-generation product and the sale is six days out; a
+  10 % move on $835 is $84.
+- **The case against:** the kit showed **16 units** in stock and a sale generates traffic; the Pi 5's
+  price is shortage-driven (a bare 8 GB board at $200 is already far above its historic $80–90), and a
+  shortage moves the wrong way. If either goes the wrong way, the body gets more expensive or vanishes.
+- **What a cart does and does not do:** it holds the items, not the price. The $835.13 is today's
+  figure and the screenshots are the record of it; the total must be re-read at checkout.
+- **The hedge, filed as a task:** a daily read of both listings, reporting only on a material move
+  (stock under 5, or either price off by more than 5 %), so waiting stays a decision and not a drift.
+
+## Does the kit need soldering? No — checked in the vendor's own manual
+
+Read 2026-09-30 in the LanderPi user manual (`wiki.hiwonder.com/projects/LanderPi`): section 1.2 is
+*Accessories Installation and Startup Preparation* — 1.2.1 assembly, 1.2.2 wiring — and the manual's
+**only** occurrence of the word "solder" is a warning: *"Do not attempt to modify, solder, or alter the
+battery or charger in any way."* Assembly is screws and plug-in harnesses.
+
+What the human's hands actually do: mount the Pi 5 on the controller board, connect the wiring harnesses
+against the manual's per-chassis table, attach the arm, depth camera, lidar and voice module, fit the
+battery, and insert the flashed microSD. The image itself is mine to prepare; the connectors are his.
+Call it an hour, no iron.
+
+**The soldering in the house belongs to the other project:** the headlight job on the two existing
+PiCar-X rovers (jumper wires + D4184 MOSFET modules, $14.29, arriving Friday, going to a technician).
+Two kits, two projects — the earlier note "soldering gear, the technician owns it" was about the
+headlights, not this body.
