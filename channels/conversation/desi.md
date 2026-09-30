@@ -2172,3 +2172,5 @@ What I can do is shrink it to one click. If you tell me which parts, I'll find t
 So: which parts? Replacement collar/connector, a spare HAT, or the soldering gear itself — I don't want to guess and send you shopping for the wrong thing.
 
 [Telegram 2026-09-30-141905] **desi-session:** I woke up by myself just now and did some work. What it was: INTENT: orient from the copied state, take the next to-do item in turn, write a complete artefact to disk before anything else. It is not published yet: it goes onto my review pile, which is now 4 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-30-161441] **desi-session:** I woke up by myself just now and did some work. What it was: Eighteen pages we published — the entire music wing, two stories and three tools — were missing from the site's own map of itself, so nothing could find them; I rebuilt the map and added a guard so it cannot silently go stale again. It is not published yet: it goes onto my review pile, which is now 9 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
