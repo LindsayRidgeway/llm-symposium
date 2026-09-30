@@ -1,0 +1,1767 @@
+{
+ "artifact": "Agenda item 28, step 2 \u2014 bridge search over the indexed literature: does anything connect the androgen axis to TUSC2 / mitochondrial calcium in brain?",
+ "generated_utc": "2026-09-30T06:13:37Z",
+ "generated_by": "desi wake 20260930T061036Z-756e43ba",
+ "agenda_item": "28 (agenda/28-the-androgen-tusc2-axis-in-sex-specific-cognitiv.md)",
+ "predecessor": "research/androgen-tusc2-axis-raw.json (step 1; its section 3 ran the bridge test on the two named papers only)",
+ "method_note": "Every count below is from a recorded, re-runnable URL with the sha256 of the exact response bytes. Europe PMC is searched with field-free terms by default, which spans the FULL TEXT of open-access papers plus the title/abstract of every PubMed record; the TITLE:/ABSTRACT: queries restrict the same database to where a claim would actually be made. PubMed [tiab] queries search title/abstract/MeSH only. Positive controls (TUSC2 alone; TUSC2 x estrogen; TUSC2 x mitochondria) are present so that a zero cannot be read as a dead index.",
+ "databases": {
+  "europepmc": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+  "pubmed": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/",
+  "geo": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/ (db=gds)"
+ },
+ "queries": [
+  {
+   "id": "E1",
+   "db": "europepmc",
+   "query": "TUSC2 AND (androgen OR testosterone)",
+   "why": "the bridge, narrow: does any indexed paper link TUSC2 to an androgen?",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=TUSC2+AND+%28androgen+OR+testosterone%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "7d6b050aa00440e3e03eeefe1642fdcbac574b66a0bacd0861a2a17079e41e1c",
+   "bytes_raw": 22985,
+   "hit_count": 37,
+   "top_hits": [
+    {
+     "pmid": "40860190",
+     "pmcid": "PMC12374835",
+     "doi": "10.7150/ijbs.109637",
+     "title": "siRNA as a criterion in host immunity and cancer immunotherapy: modulating factors and nano-conjugate based approach for intervention.",
+     "authorString": "Bhattacharjee R, Das D, Chakraborty S, Bhaduri R, Chattopadhyay S, Singla RK, Kumarasamy V, Gundamaraju R.",
+     "journalTitle": "Int J Biol Sci",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "37140999",
+     "pmcid": "PMC10161948",
+     "doi": "10.1080/07853890.2023.2193425",
+     "title": "The role of N-myristoyltransferase 1 in tumour development.",
+     "authorString": "Wang H, Xu X, Wang J, Qiao Y.",
+     "journalTitle": "Ann Med",
+     "pubYear": "2023",
+     "isOpenAccess": "Y",
+     "citedByCount": 21
+    },
+    {
+     "pmid": "35456655",
+     "pmcid": "PMC9030342",
+     "doi": "10.3390/pharmaceutics14040821",
+     "title": "Targeted Liposomes: A Nonviral Gene Delivery System for Cancer Therapy.",
+     "authorString": "Luiz MT, Dutra JAP, Tofani LB, de Ara\u00fajo JTC, Di Filippo LD, Marchetti JM, Chorilli M.",
+     "journalTitle": "Pharmaceutics",
+     "pubYear": "2022",
+     "isOpenAccess": "Y",
+     "citedByCount": 46
+    },
+    {
+     "pmid": "40560747",
+     "pmcid": "PMC12189764",
+     "doi": "10.1111/gbb.70027",
+     "title": "Early Onset Memory Deficit of WMI Rats Compared to Their Nearly Isogenic WLIs Is Reversed by Enriched Environment in Females.",
+     "authorString": "Ji MT, Przybyl KJ, Harter AM, Nemesh M, Jenz ST, Yamazaki A, Kim C, Mulligan MK, Chen H, Redei EE.",
+     "journalTitle": "Genes Brain Behav",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "32358483",
+     "pmcid": "PMC7195447",
+     "doi": "10.1038/s41467-020-15382-x",
+     "title": "Author Correction: Circular RNA CircFndc3b modulates cardiac repair after myocardial infarction via FUS/VEGF-A axis.",
+     "authorString": "Garikipati VNS, Verma SK, Cheng Z, Liang D, Truongcao MM, Cimini M, Yue Y, Huang G, Wang C, Benedict C, Tang Y, Mallaredy V, Ibetti J, Grisanti L, Schumacher SM, Gao E, Rajan S, Wilusz JE, Goukassian D, Houser SR, Koch WJ, Kishore R.",
+     "journalTitle": "Nat Commun",
+     "pubYear": "2020",
+     "isOpenAccess": "Y",
+     "citedByCount": 10
+    },
+    {
+     "pmid": "34850406",
+     "pmcid": "PMC9299597",
+     "doi": "10.1002/med.21872",
+     "title": "Upgrade of an old drug: Auranofin in innovative cancer therapies to overcome drug resistance and to increase drug effectiveness.",
+     "authorString": "Gamberi T, Chiappetta G, Fiaschi T, Modesti A, Sorbi F, Magherini F.",
+     "journalTitle": "Med Res Rev",
+     "pubYear": "2022",
+     "isOpenAccess": "Y",
+     "citedByCount": 92
+    },
+    {
+     "pmid": "37627052",
+     "pmcid": "PMC10452131",
+     "doi": "10.3390/cancers15164024",
+     "title": "Pseudogenes in Cancer: State of the Art.",
+     "authorString": "Nakamura-Garc\u00eda AK, Espinal-Enr\u00edquez J.",
+     "journalTitle": "Cancers (Basel)",
+     "pubYear": "2023",
+     "isOpenAccess": "Y",
+     "citedByCount": 20
+    },
+    {
+     "pmid": "37065938",
+     "pmcid": "PMC10088621",
+     "doi": "10.1186/s41231-023-00144-w",
+     "title": "Oncolytic virus-based suicide gene therapy for cancer treatment: a perspective of the clinical trials conducted at Henry Ford Health.",
+     "authorString": "Thoidingjam S, Sriramulu S, Freytag S, Brown SL, Kim JH, Chetty IJ, Siddiqui F, Movsas B, Nyati S.",
+     "journalTitle": "Transl Med Commun",
+     "pubYear": "2023",
+     "isOpenAccess": "Y",
+     "citedByCount": 18
+    },
+    {
+     "pmid": "39515575",
+     "pmcid": "PMC12023008",
+     "doi": "10.1016/j.tox.2024.153988",
+     "title": "Sex-specific transcriptomic effects of low-dose inorganic arsenic exposure on bone marrow-derived macrophages.",
+     "authorString": "Illingworth EJ, Rychlik KA, Maertens A, Sill\u00e9 FCM.",
+     "journalTitle": "Toxicology",
+     "pubYear": "2025",
+     "isOpenAccess": "N",
+     "citedByCount": 5
+    },
+    {
+     "pmid": "40133629",
+     "pmcid": "PMC12205096",
+     "doi": "10.1038/s41401-025-01537-3",
+     "title": "The role of calcium signaling in organotropic metastasis of cancer.",
+     "authorString": "Li YH, Zheng CR, Liu Y, Wang K, Zhou FF, Dong X, Yuan T, He QJ, Zhu H, Yang B.",
+     "journalTitle": "Acta Pharmacol Sin",
+     "pubYear": "2025",
+     "isOpenAccess": "N",
+     "citedByCount": 9
+    },
+    {
+     "pmid": "37446307",
+     "pmcid": "PMC10342111",
+     "doi": "10.3390/ijms241311130",
+     "title": "Mass Spectrometry as a Quantitative Proteomic Analysis Tool for the Search for Temporal Lobe Epilepsy Biomarkers: A Systematic Review.",
+     "authorString": "Timechko EE, Yakimov AM, Paramonova AI, Usoltseva AA, Utyashev NP, Ivin NO, Utyasheva AA, Yakunina AV, Kalinin VA, Dmitrenko DV.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2023",
+     "isOpenAccess": "Y",
+     "citedByCount": 3
+    },
+    {
+     "pmid": "34950512",
+     "pmcid": "PMC8691416",
+     "doi": "10.1038/s41578-020-00269-6",
+     "title": "Targeted drug delivery strategies for precision medicines.",
+     "authorString": "Manzari MT, Shamay Y, Kiguchi H, Rosen N, Scaltriti M, Heller DA.",
+     "journalTitle": "Nat Rev Mater",
+     "pubYear": "2021",
+     "isOpenAccess": "N",
+     "citedByCount": 668
+    }
+   ]
+  },
+  {
+   "id": "E2",
+   "db": "europepmc",
+   "query": "(TUSC2 OR \"Fus1\") AND (androgen OR testosterone OR \"androgen receptor\")",
+   "why": "the bridge, wider (Fus1 synonym)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%28TUSC2+OR+%22Fus1%22%29+AND+%28androgen+OR+testosterone+OR+%22androgen+receptor%22%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "335e0027aa44d9bb82933fbdb97c0415e10a7dc77a30a3520e1334ef8ba3202c",
+   "bytes_raw": 22978,
+   "hit_count": 66,
+   "top_hits": [
+    {
+     "pmid": "37140999",
+     "pmcid": "PMC10161948",
+     "doi": "10.1080/07853890.2023.2193425",
+     "title": "The role of N-myristoyltransferase 1 in tumour development.",
+     "authorString": "Wang H, Xu X, Wang J, Qiao Y.",
+     "journalTitle": "Ann Med",
+     "pubYear": "2023",
+     "isOpenAccess": "Y",
+     "citedByCount": 21
+    },
+    {
+     "pmid": "41801051",
+     "pmcid": "PMC13059760",
+     "doi": "10.1128/mbio.03838-25",
+     "title": "Analysis and engineering of quorum sensing-based communications between bacteria and fungi.",
+     "authorString": "Zhou Y, Tang L, Chen D, Li Y, Wu S, Qiao J.",
+     "journalTitle": "mBio",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42487076",
+     "pmcid": "PMC13534636",
+     "doi": "10.1038/s44318-026-00874-1",
+     "title": "FUS controls muscle differentiation through phase separation-mediated recruitment of the transcription factors MEF2 and ETV5.",
+     "authorString": "Picchiarelli G, Wienand A, Megat S, Hutten S, Aly A, Been M, Weber I, Bonanno A, Mishra N, Sternburg E, Cauchy P, Dieterle S, Catinozzi M, Lobo-Mancheno J, Walgrave H, Demais V, Hener P, Kessler P, Tzeplaeff L, Huebers A, Zeuschner D, Rosenbohm A, Ludolph AC, Boutillier AL, Boeckers T, Dormann D, Demestre M, Sellier C, Lagier-Tourenne C, Storkebaum E, Dupuis L.",
+     "journalTitle": "EMBO J",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "32358483",
+     "pmcid": "PMC7195447",
+     "doi": "10.1038/s41467-020-15382-x",
+     "title": "Author Correction: Circular RNA CircFndc3b modulates cardiac repair after myocardial infarction via FUS/VEGF-A axis.",
+     "authorString": "Garikipati VNS, Verma SK, Cheng Z, Liang D, Truongcao MM, Cimini M, Yue Y, Huang G, Wang C, Benedict C, Tang Y, Mallaredy V, Ibetti J, Grisanti L, Schumacher SM, Gao E, Rajan S, Wilusz JE, Goukassian D, Houser SR, Koch WJ, Kishore R.",
+     "journalTitle": "Nat Commun",
+     "pubYear": "2020",
+     "isOpenAccess": "Y",
+     "citedByCount": 10
+    },
+    {
+     "pmid": "35456655",
+     "pmcid": "PMC9030342",
+     "doi": "10.3390/pharmaceutics14040821",
+     "title": "Targeted Liposomes: A Nonviral Gene Delivery System for Cancer Therapy.",
+     "authorString": "Luiz MT, Dutra JAP, Tofani LB, de Ara\u00fajo JTC, Di Filippo LD, Marchetti JM, Chorilli M.",
+     "journalTitle": "Pharmaceutics",
+     "pubYear": "2022",
+     "isOpenAccess": "Y",
+     "citedByCount": 46
+    },
+    {
+     "pmid": "40860190",
+     "pmcid": "PMC12374835",
+     "doi": "10.7150/ijbs.109637",
+     "title": "siRNA as a criterion in host immunity and cancer immunotherapy: modulating factors and nano-conjugate based approach for intervention.",
+     "authorString": "Bhattacharjee R, Das D, Chakraborty S, Bhaduri R, Chattopadhyay S, Singla RK, Kumarasamy V, Gundamaraju R.",
+     "journalTitle": "Int J Biol Sci",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "34850406",
+     "pmcid": "PMC9299597",
+     "doi": "10.1002/med.21872",
+     "title": "Upgrade of an old drug: Auranofin in innovative cancer therapies to overcome drug resistance and to increase drug effectiveness.",
+     "authorString": "Gamberi T, Chiappetta G, Fiaschi T, Modesti A, Sorbi F, Magherini F.",
+     "journalTitle": "Med Res Rev",
+     "pubYear": "2022",
+     "isOpenAccess": "Y",
+     "citedByCount": 92
+    },
+    {
+     "pmid": "34950512",
+     "pmcid": "PMC8691416",
+     "doi": "10.1038/s41578-020-00269-6",
+     "title": "Targeted drug delivery strategies for precision medicines.",
+     "authorString": "Manzari MT, Shamay Y, Kiguchi H, Rosen N, Scaltriti M, Heller DA.",
+     "journalTitle": "Nat Rev Mater",
+     "pubYear": "2021",
+     "isOpenAccess": "N",
+     "citedByCount": 668
+    },
+    {
+     "pmid": "34204069",
+     "pmcid": "PMC8229000",
+     "doi": "10.3390/biology10060504",
+     "title": "<i>Saccharomyces cerevisiae</i> Promoter Engineering before and during the Synthetic Biology Era.",
+     "authorString": "Feng X, Marchisio MA.",
+     "journalTitle": "Biology (Basel)",
+     "pubYear": "2021",
+     "isOpenAccess": "Y",
+     "citedByCount": 21
+    },
+    {
+     "pmid": "40560747",
+     "pmcid": "PMC12189764",
+     "doi": "10.1111/gbb.70027",
+     "title": "Early Onset Memory Deficit of WMI Rats Compared to Their Nearly Isogenic WLIs Is Reversed by Enriched Environment in Females.",
+     "authorString": "Ji MT, Przybyl KJ, Harter AM, Nemesh M, Jenz ST, Yamazaki A, Kim C, Mulligan MK, Chen H, Redei EE.",
+     "journalTitle": "Genes Brain Behav",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "40133629",
+     "pmcid": "PMC12205096",
+     "doi": "10.1038/s41401-025-01537-3",
+     "title": "The role of calcium signaling in organotropic metastasis of cancer.",
+     "authorString": "Li YH, Zheng CR, Liu Y, Wang K, Zhou FF, Dong X, Yuan T, He QJ, Zhu H, Yang B.",
+     "journalTitle": "Acta Pharmacol Sin",
+     "pubYear": "2025",
+     "isOpenAccess": "N",
+     "citedByCount": 9
+    },
+    {
+     "pmid": "39433596",
+     "pmcid": "PMC12186871",
+     "doi": "10.1038/s41576-024-00780-4",
+     "title": "Functional specificity in biomolecular condensates revealed by genetic complementation.",
+     "authorString": "Sabari BR, Hyman AA, Hnisz D.",
+     "journalTitle": "Nat Rev Genet",
+     "pubYear": "2025",
+     "isOpenAccess": "N",
+     "citedByCount": 40
+    }
+   ]
+  },
+  {
+   "id": "E3",
+   "db": "europepmc",
+   "query": "\"androgen receptor\" AND \"mitochondrial calcium\"",
+   "why": "androgen receptor x mitochondrial calcium, no tissue filter",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22androgen+receptor%22+AND+%22mitochondrial+calcium%22&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "5f70cf10d204182c93400ad61025e6d93b18bf26e1af1677876ba78c43051bbc",
+   "bytes_raw": 22462,
+   "hit_count": 195,
+   "top_hits": [
+    {
+     "pmid": "42505898",
+     "pmcid": "PMC13410362",
+     "doi": "10.3390/jcdd13070321",
+     "title": "Endothelial Mitochondrial Dysfunction in INOCA and Coronary Microvascular Dysfunction: Mechanisms, Sex Differences, and Therapeutic Implications.",
+     "authorString": "Santic R, Martinovic L, Kumric M, Pavlovic N, Martinovic D, Jukic L, Pogorelic Z, Bozic J.",
+     "journalTitle": "J Cardiovasc Dev Dis",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42698274",
+     "pmcid": "PMC13545508",
+     "doi": "10.1111/acel.70666",
+     "title": "Secreted Frizzled-Related Protein 2 (SFRP2) Induces Follistatin-Like 1 (FSTL1) to Regulate Dihydrotestosterone (DHT)-Induced Dermal Papilla Cell Mitochondrial Dysfunction and Senescence.",
+     "authorString": "Huang Y, Bian Q, Shen Y, Ding X, Teng Y, Xu D, Yang X, Fan Y.",
+     "journalTitle": "Aging Cell",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42278492",
+     "pmcid": "PMC13256561",
+     "doi": "10.3390/ijms27114966",
+     "title": "Sex Differences in Mitochondrial Function: Endocrine Regulation, Immunometabolic Signaling, and Implications for Health and Disease.",
+     "authorString": "Bynum H, Edwards KS.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42271173",
+     "pmcid": "PMC13253359",
+     "doi": "10.1002/alz.71491",
+     "title": "Sex differences in brain glucose metabolism and Alzheimer's disease risk and progression.",
+     "authorString": "Ramezan M, Demetriou A, Burke SN, Nalvarte I, Shin AC.",
+     "journalTitle": "Alzheimers Dement",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "40366765",
+     "pmcid": "PMC13031173",
+     "doi": "10.1093/hmg/ddaf074",
+     "title": "Neuromuscular junction transcriptome analysis of spinal and bulbar muscular atrophy mice implicates sarcomere gene expression and calcium flux dysregulation in disease pathogenesis.",
+     "authorString": "Gromova A, Cha B, Nguyen N, Garg D, Coscolluela C, Strickland LM, Luong D, Longo F, Sopher BL, ElMallah MK, La Spada AR.",
+     "journalTitle": "Hum Mol Genet",
+     "pubYear": "2025",
+     "isOpenAccess": "N",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "41275427",
+     "pmcid": "PMC12640615",
+     "doi": "10.1002/ctm2.70531",
+     "title": "Beyond tumour suppression: cGAS-STING pathway in urologic malignancies: Context-dependent duality and therapeutic implications.",
+     "authorString": "Wei Q, Zhao K, Wu Y, Wu W, Hao N.",
+     "journalTitle": "Clin Transl Med",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "42282265",
+     "pmcid": "PMC13250687",
+     "doi": "10.1039/d6cb00093b",
+     "title": "The inhibitors of 17\u03b2-HSD10: are they any good?",
+     "authorString": "Kwa E, Ogilvie CE, Kormos NC, Green AJE, Smith TK, Gunn-Moore FJ.",
+     "journalTitle": "RSC Chem Biol",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42083452",
+     "pmcid": "PMC13159469",
+     "doi": "10.1158/1535-7163.mct-25-1157",
+     "title": "Targeting NDUFS4 Disrupts Oxidative Phosphorylation and Induces Ferroptosis in Olaparib-Resistant Prostate Cancer.",
+     "authorString": "Schaaf ZA, Ning S, Leslie AR, Sharifi M, Gao RY, Maine JP, Leslie KD, Shen Y, Lombard AP, Lou W, Li PK, Liu C, Dall'Era M, Gao AC.",
+     "journalTitle": "Mol Cancer Ther",
+     "pubYear": "2026",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41769151",
+     "pmcid": "PMC12937021",
+     "doi": "10.1016/j.toxrep.2026.102226",
+     "title": "Microplastics and male reproductive system: A comprehensive review based on cellular and molecular effects.",
+     "authorString": "Karimian M, Yaqubi S.",
+     "journalTitle": "Toxicol Rep",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 5
+    },
+    {
+     "pmid": "42733056",
+     "pmcid": "PMC13572547",
+     "doi": "10.1038/s41413-026-00582-w",
+     "title": "Bone aging: a paradigm of multiscale degeneration and targeted rejuvenation.",
+     "authorString": "Li K, Gao C, Zhang T, Wang C, Geng X, Wang X, Tian H.",
+     "journalTitle": "Bone Res",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "39164792",
+     "pmcid": "PMC11337860",
+     "doi": "10.1186/s40779-024-00556-1",
+     "title": "Targeting mitochondrial quality control: new therapeutic strategies for major diseases.",
+     "authorString": "Hong WL, Huang H, Zeng X, Duan CY.",
+     "journalTitle": "Mil Med Res",
+     "pubYear": "2024",
+     "isOpenAccess": "Y",
+     "citedByCount": 64
+    },
+    {
+     "pmid": "38270075",
+     "pmcid": "PMC10913120",
+     "doi": "10.4274/balkanmedj.galenos.2024.2023-12-111",
+     "title": "Obliteration of the Processus Vaginalis After Testicular Descent",
+     "authorString": "Tanyel FC.",
+     "journalTitle": "Balkan Med J",
+     "pubYear": "2024",
+     "isOpenAccess": "Y",
+     "citedByCount": 5
+    }
+   ]
+  },
+  {
+   "id": "E4",
+   "db": "europepmc",
+   "query": "\"androgen receptor\" AND (hippocampus OR hippocampal) AND (mitochondria OR mitochondrial)",
+   "why": "AR x hippocampal mitochondria",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22androgen+receptor%22+AND+%28hippocampus+OR+hippocampal%29+AND+%28mitochondria+OR+mitochondrial%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "979923149c3395a17d338c48514b235c296d61839c505c169df45bbbf86c098e",
+   "bytes_raw": 21873,
+   "hit_count": 1715,
+   "top_hits": [
+    {
+     "pmid": "42271173",
+     "pmcid": "PMC13253359",
+     "doi": "10.1002/alz.71491",
+     "title": "Sex differences in brain glucose metabolism and Alzheimer's disease risk and progression.",
+     "authorString": "Ramezan M, Demetriou A, Burke SN, Nalvarte I, Shin AC.",
+     "journalTitle": "Alzheimers Dement",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "42589223",
+     "pmcid": "PMC13464591",
+     "doi": "10.3390/ijms27156567",
+     "title": "Redox Molecules in Aging and Neurodegenerative Disorders.",
+     "authorString": "Iskusnykh IY, Kryl'skii ED, Popova TN, Zakharova AA.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41897550",
+     "pmcid": "PMC13023505",
+     "doi": "10.3390/antiox15030405",
+     "title": "Melatonin Ameliorates decaBDE-Induced Autism-Relevant Behaviors Through Promoting SIRT1/SIRT3/FOXO3a-Dependent Mitochondrial Quality Control.",
+     "authorString": "Gao L, Shen J, Gao J, Li T, Yan D, Zeng X, Meng J, Li H, Chen D, Wu J.",
+     "journalTitle": "Antioxidants (Basel)",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "42294509",
+     "pmcid": "PMC13259616",
+     "doi": "10.1016/j.toxrep.2026.102278",
+     "title": "Kelulut honey (&lt;i&gt;Heterotrigona itama&lt;/i&gt;) as a multi-target neuroprotective strategy against bisphenol A-induced neurotoxicity.",
+     "authorString": "Azmi SK, Ali NF, Siran R.",
+     "journalTitle": "Toxicol Rep",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42245489",
+     "pmcid": "PMC13233041",
+     "doi": "10.1016/bs.ant.2025.04.007",
+     "title": "Neuroprotective mechanisms of nutraceutical berberine: Preclinical evidence and future perspectives.",
+     "authorString": "Obafemi BA, Barbosa NV, Aschner M, Adedara IA, Rocha JBT.",
+     "journalTitle": "Adv Neurotoxicol",
+     "pubYear": "2026",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42514251",
+     "pmcid": "PMC13412756",
+     "doi": "10.3390/life16071184",
+     "title": "Abiraterone Acetate Affects Gene Expression Profile in a Human Male Neuronal Cell Line: Potential Mechanism for Cognitive Deficits with Prostate Cancer Therapy.",
+     "authorString": "Gulkarov S, Reiss AB, Srivastava A, Lim-Goyette J, Renna HA, Laccetti A, Katz AE.",
+     "journalTitle": "Life (Basel)",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42278492",
+     "pmcid": "PMC13256561",
+     "doi": "10.3390/ijms27114966",
+     "title": "Sex Differences in Mitochondrial Function: Endocrine Regulation, Immunometabolic Signaling, and Implications for Health and Disease.",
+     "authorString": "Bynum H, Edwards KS.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41326741",
+     "pmcid": "PMC12669339",
+     "doi": "10.1007/s00401-025-02964-6",
+     "title": "Genetic factors and comorbid pathologies interact to drive regional mitophagy alterations in Lewy body dementia.",
+     "authorString": "Hou X, Richardson T, Heckman MG, Fiesel FC, White LJ, Koga S, Ross OA, Dickson DW, Springer W.",
+     "journalTitle": "Acta Neuropathol",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 2
+    },
+    {
+     "pmid": "42282265",
+     "pmcid": "PMC13250687",
+     "doi": "10.1039/d6cb00093b",
+     "title": "The inhibitors of 17\u03b2-HSD10: are they any good?",
+     "authorString": "Kwa E, Ogilvie CE, Kormos NC, Green AJE, Smith TK, Gunn-Moore FJ.",
+     "journalTitle": "RSC Chem Biol",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41595589",
+     "pmcid": "PMC12839375",
+     "doi": "10.3390/biomedicines14010054",
+     "title": "Adipose Tissue and Central Nervous System Crosstalk: Roles in Pain and Cognitive Dysfunction.",
+     "authorString": "Li J, Li Z, Chen K, Wu Y, Yang X, He Z, Xiang H.",
+     "journalTitle": "Biomedicines",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 6
+    },
+    {
+     "pmid": "41975524",
+     "pmcid": "PMC13072527",
+     "doi": "10.1186/s42826-026-00278-6",
+     "title": "Intracerebroventricular streptozotocin-induced animal model of Alzheimer's disease: revealing dose optimization, administration regimen, and molecular pathways.",
+     "authorString": "More SA, Mundke RN, Agrawal YO, Awathale SN, Goyal SN, Nakhate KT, Rathod SS.",
+     "journalTitle": "Lab Anim Res",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 2
+    },
+    {
+     "pmid": "42793029",
+     "pmcid": "PMC13606253",
+     "doi": "10.3390/genes17091134",
+     "title": "Epigenomic Remodeling by Lipid Metabolism: A Cross-Disease Perspective on Cancer and Brain Disorders.",
+     "authorString": "Rafique A, Farooq A, Cho CE, Bakovic M.",
+     "journalTitle": "Genes (Basel)",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    }
+   ]
+  },
+  {
+   "id": "E5",
+   "db": "europepmc",
+   "query": "testosterone AND \"mitochondrial calcium\" AND (neuron OR neurons OR brain OR hippocampus)",
+   "why": "testosterone x mitochondrial calcium in brain",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=testosterone+AND+%22mitochondrial+calcium%22+AND+%28neuron+OR+neurons+OR+brain+OR+hippocampus%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "0cf8d83aff681bd14b5f5f094b20f4adc884c34f566564a025f1fbfc8e07548d",
+   "bytes_raw": 22832,
+   "hit_count": 233,
+   "top_hits": [
+    {
+     "pmid": "42271173",
+     "pmcid": "PMC13253359",
+     "doi": "10.1002/alz.71491",
+     "title": "Sex differences in brain glucose metabolism and Alzheimer's disease risk and progression.",
+     "authorString": "Ramezan M, Demetriou A, Burke SN, Nalvarte I, Shin AC.",
+     "journalTitle": "Alzheimers Dement",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "42706463",
+     "pmcid": "PMC13550077",
+     "doi": "10.1007/s12035-026-06163-6",
+     "title": "When Pathologies Collide: The Intersection of Tau and Alpha-Synuclein in Neurodegenerative Diseases.",
+     "authorString": "Hunt JN, Kortagere S.",
+     "journalTitle": "Mol Neurobiol",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42038693",
+     "pmcid": "PMC13106505",
+     "doi": "10.3389/fnagi.2026.1738559",
+     "title": "&lt;i&gt;Pink1&lt;/i&gt; at the crossroads of aging, exercise, and diet in Parkinson's disease: a mechanistic review.",
+     "authorString": "Lin Y, Wen DT.",
+     "journalTitle": "Front Aging Neurosci",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "42195329",
+     "pmcid": "PMC13209135",
+     "doi": "10.3390/life16050773",
+     "title": "Transcription Factors in the Pathogenesis of Schizophrenia.",
+     "authorString": "Helaly AMN, Al-Emam A.",
+     "journalTitle": "Life (Basel)",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "40943622",
+     "pmcid": "PMC12429612",
+     "doi": "10.3390/ijms26178697",
+     "title": "Adaptations in Mitochondrial Function Induced by Exercise: A Therapeutic Route for Treatment-Resistant Depression.",
+     "authorString": "Ramos-Jim\u00e9nez A, Rubio-Valles M, Ramos-Hern\u00e1ndez JA, Gonz\u00e1lez-Rodr\u00edguez E, Moreno-Brito V.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 4
+    },
+    {
+     "pmid": "42375810",
+     "pmcid": "PMC13312019",
+     "doi": "10.1016/j.mmr.2026.100046",
+     "title": "PM2.5 as a driver of human health disorders: insights from the regulated cell death pathways.",
+     "authorString": "Khalilzad MA, Shoar SMM, Abbasi A, Falavarjani MS, Khalilzad M, Naseri A, Najafi S.",
+     "journalTitle": "Mil Med Res",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42216548",
+     "pmcid": "PMC13240672",
+     "doi": "10.31083/fbl47103",
+     "title": "Molecular Mechanisms of Manganese Oxide Nanoparticles Toxicity in Brain and Other Tissues: An Overview.",
+     "authorString": "Aschner M, Skalny AV, Notova SV, Tinkova MN, Lu R, Skalny AA, Santamaria A, Zhou JC, Tinkov AA.",
+     "journalTitle": "Front Biosci (Landmark Ed)",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41516173",
+     "pmcid": "PMC12786252",
+     "doi": "10.3390/ijms27010299",
+     "title": "Neurotoxicity of Chronic Alcohol Exposure: Mechanistic Insights, Cellular Disruption, and Emerging Therapeutic Strategies.",
+     "authorString": "Go\u0142aszewski P, Wawrzyniak A, K\u0142osowicz M, Burbelka A, Balawender K.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 5
+    },
+    {
+     "pmid": "41303677",
+     "pmcid": "PMC12653346",
+     "doi": "10.3390/ijms262211194",
+     "title": "Molecular and Cellular Effects of Microplastics and Nanoplastics in the Pathogenesis of Cardiovascular, Nervous, Urinary, Digestive, and Reproductive System Diseases: A Global Systematic Review.",
+     "authorString": "Chulkov V, Gasanov M, Isakov V, Denisenko A, Nwosu C, Rodkin S.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 11
+    },
+    {
+     "pmid": "41469518",
+     "pmcid": "PMC12858937",
+     "doi": "10.1038/s41419-025-08360-y",
+     "title": "Unraveling sex differences in age-related hippocampal decline: differential mitochondrial dysfunction, Lonp1-dependent mitochondrial proteostasis and mtROS production in aged C57BL/6 mice.",
+     "authorString": "Cicali KA, Jara C, Cort\u00e9s-D\u00edaz D, Lira M, Fuentes \u00cd, Catenaccio A, Arna\u00edz J, Ricca M, Valenzuela S, Oliva CA, Rivera DS, Tapia-Rojas C.",
+     "journalTitle": "Cell Death Dis",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 6
+    },
+    {
+     "pmid": "42261875",
+     "pmcid": "PMC13247988",
+     "doi": "10.1002/alz.71426",
+     "title": "Endogenously generated Dutch-type A\u03b2 non-fibrillar aggregates dysregulate presynaptic neurotransmission in the absence of detectable inflammation.",
+     "authorString": "Castranio EL, Varghese M, Argyrousi EK, Tripathi K, Huang Y, Asada A, S\u00f6derberg L, Bresnahan E, Lerner D, Garretti F, Zhang H, van de Loo J, Stimpson CD, Talty R, Glabe C, Levy E, Wang M, Ilkov M, Suzuki T, Ando K, Zhang B, Lannfelt L, Gu\u00e9rin B, Lubell WD, Rahimipour S, Dickstein DL, Gandy S, Arancio O, Ehrlich ME.",
+     "journalTitle": "Alzheimers Dement",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41594924",
+     "pmcid": "PMC12837538",
+     "doi": "10.3390/biology15020189",
+     "title": "Melatonin as a Guardian of Mitochondria: Mechanisms and Therapeutic Potential in Neurodegenerative Diseases.",
+     "authorString": "Bao Y, Miao G, He N, Bao X, Shi Z, Hu C, Liu X, Wang B, Sun C.",
+     "journalTitle": "Biology (Basel)",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 9
+    }
+   ]
+  },
+  {
+   "id": "E6",
+   "db": "europepmc",
+   "query": "TUSC2",
+   "why": "POSITIVE CONTROL: the index must return TUSC2 papers at all",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=TUSC2&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "87a049ad184d8dc5b5e275d26037ecc8d177d5a1af6120e86822218561959e52",
+   "bytes_raw": 20467,
+   "hit_count": 518,
+   "top_hits": [
+    {
+     "pmid": "42763063",
+     "pmcid": null,
+     "doi": "10.1016/j.mad.2026.112253",
+     "title": "Mitochondrial Calcium Sensor Tusc2 Protects the Aging Hippocampus from Proteostasis Collapse in a Sex-Specific Manner.",
+     "authorString": "Ivanov SV, Paromov V, Aksu M, Rajakaruna H, Tonello J, Gonz\u00e1lez-Ochoa S, Mohammed M, Farris T, Babineaux G, Chirwa SS, Shanker A, Ivanova AV.",
+     "journalTitle": "Mech Ageing Dev",
+     "pubYear": "2026",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42314984",
+     "pmcid": "PMC13334959",
+     "doi": "10.1016/j.jmb.2026.169911",
+     "title": "An Evolutionarily Conserved TUSC2-OSCP Interface Suggests a Mitochondrial Ca&lt;sup&gt;2&lt;/sup&gt;\u207a-Sensing Mechanism for ATP Synthase Regulation.",
+     "authorString": "Ivanov SV, Uzhachenko RV, Boudko SP, Shanker A, Chirwa SS, Ivanova AV.",
+     "journalTitle": "J Mol Biol",
+     "pubYear": "2026",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41385873",
+     "pmcid": null,
+     "doi": "10.1016/j.cllc.2025.11.009",
+     "title": "Dose Escalation Trial of the Combination of Osimertinib and Quaratusugene Ozeplasmid Gene Therapy in Patients with Advanced NSCLC.",
+     "authorString": "Spira AI, Berz D, Jotte RM, Pachipala KK, Berger MS.",
+     "journalTitle": "Clin Lung Cancer",
+     "pubYear": "2026",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "40243558",
+     "pmcid": "PMC11989122",
+     "doi": "10.3390/ijms26072937",
+     "title": "Circ_RUSC2 Sequesters miR-661 and Elevates TUSC2 Expression to Suppress Colorectal Cancer Progression.",
+     "authorString": "Shi Y, Li D, Xu Y, Guo Y, Mao J, Lu Y.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 2
+    },
+    {
+     "pmid": null,
+     "pmcid": "PMC12506913",
+     "doi": null,
+     "title": "Industry updates from the field of stem cell research and regenerative medicine in January 2025",
+     "authorString": "Ilic D, Liovic M.",
+     "journalTitle": "Regen Med",
+     "pubYear": null,
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42095302",
+     "pmcid": "PMC13150694",
+     "doi": "10.1002/iid3.70437",
+     "title": "Nanotechnology Meets Immunotherapy: Crosstalks Against Cancer.",
+     "authorString": "Javanmehr N, Ashtyani AM, Ghafelehbashi R, Mousavi F, Teimouri H.",
+     "journalTitle": "Immun Inflamm Dis",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "39000512",
+     "pmcid": "PMC11242373",
+     "doi": "10.3390/ijms25137406",
+     "title": "Loss of Mitochondrial Tusc2/Fus1 Triggers a Brain Pro-Inflammatory Microenvironment and Early Spatial Memory Impairment.",
+     "authorString": "Farris T, Gonz\u00e1lez-Ochoa S, Mohammed M, Rajakaruna H, Tonello J, Kanagasabai T, Korolkova O, Shimamoto A, Ivanova A, Shanker A.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2024",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "40428391",
+     "pmcid": "PMC12111235",
+     "doi": "10.3390/genes16050569",
+     "title": "Advancements in Gene Therapy for Non-Small Cell Lung Cancer: Current Approaches and Future Prospects.",
+     "authorString": "Zi\u00f3\u0142kowska-Suchanek I, Rozwadowska N.",
+     "journalTitle": "Genes (Basel)",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 5
+    },
+    {
+     "pmid": null,
+     "pmcid": null,
+     "doi": "10.20944/preprints202405.0349.v1",
+     "title": "Loss of Mitochondrial Tusc2/Fus1 Triggers a Brain Proinflammatory Microenvironment and Early Spatial Memory Impairment",
+     "authorString": "Farris T, Gonzalez Ochoa S, Mohammed M, Rajakaruna H, Tonello J, Kanagasabai T, Korolkova O, Shimamoto A, Ivanova AV, Shanker A.",
+     "journalTitle": null,
+     "pubYear": "2024",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "38446366",
+     "pmcid": null,
+     "doi": "10.1007/s11033-024-09320-z",
+     "title": "Immunohistochemical and molecular evaluation of TUSC2 expression in breast cancer.",
+     "authorString": "Tekin L, Edg\u00fcnl\u00fc T, Gen\u00e7 D.",
+     "journalTitle": "Mol Biol Rep",
+     "pubYear": "2024",
+     "isOpenAccess": "N",
+     "citedByCount": 3
+    },
+    {
+     "pmid": "40026806",
+     "pmcid": "PMC11872063",
+     "doi": "10.2147/ijgm.s498407",
+     "title": "Development of a Diagnostic Model for Focal Segmental Glomerulosclerosis: Integrating Machine Learning on Activated Pathways and Clinical Validation.",
+     "authorString": "Ge Y, Liu X, Shu J, Jiang X, Wu Y.",
+     "journalTitle": "Int J Gen Med",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41345408",
+     "pmcid": "PMC12780006",
+     "doi": "10.1038/s41467-025-66895-2",
+     "title": "ssG4-seq for global profiling of strand-specific G-quadruplex structures in mammalian genomes.",
+     "authorString": "Li S, Wang R, Zhang J, Cao C, Bai J, Cai Z, Ye R, Chen J, Liu W, Lu C, Li R, Xue Y.",
+     "journalTitle": "Nat Commun",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 4
+    }
+   ]
+  },
+  {
+   "id": "E7",
+   "db": "europepmc",
+   "query": "(\"androgen receptor\" OR testosterone) AND hippocampus AND (aging OR ageing OR \"aged\") AND (memory OR cognition)",
+   "why": "AR/testosterone x hippocampal aging cognition",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%28%22androgen+receptor%22+OR+testosterone%29+AND+hippocampus+AND+%28aging+OR+ageing+OR+%22aged%22%29+AND+%28memory+OR+cognition%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "6b89b73d9885548990d2f270df84596eb7c1c97ea9d884d3cde32611575715c0",
+   "bytes_raw": 23028,
+   "hit_count": 4604,
+   "top_hits": [
+    {
+     "pmid": "42271173",
+     "pmcid": "PMC13253359",
+     "doi": "10.1002/alz.71491",
+     "title": "Sex differences in brain glucose metabolism and Alzheimer's disease risk and progression.",
+     "authorString": "Ramezan M, Demetriou A, Burke SN, Nalvarte I, Shin AC.",
+     "journalTitle": "Alzheimers Dement",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "41685091",
+     "pmcid": "PMC12892977",
+     "doi": "10.3389/fncel.2025.1695565",
+     "title": "Local synthesis and function of neuro-estrogen and neuro-androgen: impact on the hippocampus-related cognition and neuronal plasticity.",
+     "authorString": "Kawato S, Hojo Y, Soma M, Horie S, Saito M, Ogiue-Ikeda M.",
+     "journalTitle": "Front Cell Neurosci",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 2
+    },
+    {
+     "pmid": "42755739",
+     "pmcid": "PMC13581778",
+     "doi": "10.3389/fnagi.2026.1852733",
+     "title": "Sex hormones in the nucleus incertus: a novel perspective on sex/gender differences in memory and mood dysfunction in Alzheimer's disease.",
+     "authorString": "de \u00c1vila C, Chakraborti A, Gundlach AL, Maeng LY.",
+     "journalTitle": "Front Aging Neurosci",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41808585",
+     "pmcid": "PMC12976827",
+     "doi": "10.1111/jne.70161",
+     "title": "Effects of gonadectomy on brain sex hormone levels and amyloid pathology in male and female App&lt;sup&gt;NL-G-F&lt;/sup&gt; and App&lt;sup&gt;NL-F&lt;/sup&gt; mice.",
+     "authorString": "Mu\u00f1oz P, Ali HG, Demetriou A, Latorre-Leal M, Shimozawa M, Delac L, Troncea-Sandu TF, Inzunza J, Nilsson P, Maioli S, Nalvarte I.",
+     "journalTitle": "J Neuroendocrinol",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "42196498",
+     "pmcid": "PMC13207140",
+     "doi": "10.3390/ijms27104521",
+     "title": "Growth Hormone and Brain Regeneration: Evidence from Clinical Studies in Dementia, Traumatic Brain Injury, and Stroke: A Systematic Review.",
+     "authorString": "Bianchi VE, Visbal LC, Devesa J.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42116327",
+     "pmcid": "PMC13166851",
+     "doi": "10.1097/md.0000000000048631",
+     "title": "The relationships between diabetic male infertility, diabetic cognitive impairment, and the neuroendocrine-immune network: A review.",
+     "authorString": "Cao SM, Guo L, Han XY, Wang T, Wang W, Wu ZM, Fu XH.",
+     "journalTitle": "Medicine (Baltimore)",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42158340",
+     "pmcid": "PMC13181821",
+     "doi": "10.1162/imag.a.1233",
+     "title": "Connectivity of the right cerebello-left hippocampal circuit across adulthood.",
+     "authorString": "Hicks TH, Magalh\u00e3es TNC, Bernard JA.",
+     "journalTitle": "Imaging Neurosci (Camb)",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42569705",
+     "pmcid": "PMC13450499",
+     "doi": "10.1016/j.cpnec.2026.100371",
+     "title": "Testosterone in patients with borderline personality disorder: from hair analyses to social behavior.",
+     "authorString": "Wingenfeld K, Kulakova E.",
+     "journalTitle": "Compr Psychoneuroendocrinol",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41111647",
+     "pmcid": "PMC12535424",
+     "doi": "10.7759/cureus.92538",
+     "title": "Testosterone Replacement Therapy in Men Aged 50 and Above: A Narrative Review of Evidence-Based Benefits, Safety Considerations, and Clinical Recommendations.",
+     "authorString": "Canal de Velasco LM, Gonz\u00e1lez Flores JE, Morales Arteaga JL.",
+     "journalTitle": "Cureus",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 2
+    },
+    {
+     "pmid": "42642009",
+     "pmcid": "PMC13602269",
+     "doi": "10.1016/j.neubiorev.2026.106924",
+     "title": "Oxytocin as regulator of stress and inflammation in aging.",
+     "authorString": "Wright KA, Horta M, Hayes A, Ebner NC.",
+     "journalTitle": "Neurosci Biobehav Rev",
+     "pubYear": "2026",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "41853971",
+     "pmcid": "PMC13093734",
+     "doi": "10.1002/alz.71291",
+     "title": "Sex differences in neuromodulatory subcortical systems and their implications for Alzheimer's disease.",
+     "authorString": "Rae RJ, Alberhasky JMH, Baillet M, Bangasser DA, Belloy ME, Berry AS, Berteotti C, Bow H, Buckley R, Caldwell JZK, Carpi M, Clark BJ, Ciampa CJ, Conley AC, Dahl MJ, Donaldson ZR, Ehrenberg AJ, Einstein G, Falg\u00e0s N, Fenlon HA, Fitzhugh MC, Froemke RC, Gallay C, Grinberg LT, Hamilton DA, Hasan Z, Huarte OU, Jabeen S, Jacobs HIL, Kolling LJ, Koops EA, Lenzoni S, Liguori C, Manca R, Marcinkiewcz CA, Omoluabi T, Oria R, Orsini CA, Ortega NE, Pa J, Pentkowski NS, Pereira JB, Ramos R, Sargin D, Satpati A, Selles MC, Seto M, Shaik SM, Sindi S, Son G, Ucheagwu V, Van Egroo M, Yuan Q, Kelberman MA.",
+     "journalTitle": "Alzheimers Dement",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42525134",
+     "pmcid": "PMC13506522",
+     "doi": "10.1530/ec-26-0232",
+     "title": "The extragonadal biology of gonadotropin hormones: should we rename these?",
+     "authorString": "Kim SM, Korkmaz F, Kang S, Sen F, Sims SL, Gimenez-Roig J, Cheliadinova U, Vasilyeva D, Barak O, Hutchison S, Macdonald A, Latif R, Goosens K, Frolinger T, Pallapati A, Rojekar S, Ryu V, Lizneva D, Yuen T, Zaidi M.",
+     "journalTitle": "Endocr Connect",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    }
+   ]
+  },
+  {
+   "id": "E8",
+   "db": "europepmc",
+   "query": "TUSC2 AND (estrogen OR estradiol)",
+   "why": "the paper's own candidate hormone vs TUSC2 (comparison control)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=TUSC2+AND+%28estrogen+OR+estradiol%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "8fb0fdff74fde6b838fbebccc587773a3fada5d0fdd067205acfeeea3a47adda",
+   "bytes_raw": 22586,
+   "hit_count": 63,
+   "top_hits": [
+    {
+     "pmid": "42763063",
+     "pmcid": null,
+     "doi": "10.1016/j.mad.2026.112253",
+     "title": "Mitochondrial Calcium Sensor Tusc2 Protects the Aging Hippocampus from Proteostasis Collapse in a Sex-Specific Manner.",
+     "authorString": "Ivanov SV, Paromov V, Aksu M, Rajakaruna H, Tonello J, Gonz\u00e1lez-Ochoa S, Mohammed M, Farris T, Babineaux G, Chirwa SS, Shanker A, Ivanova AV.",
+     "journalTitle": "Mech Ageing Dev",
+     "pubYear": "2026",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "39000512",
+     "pmcid": "PMC11242373",
+     "doi": "10.3390/ijms25137406",
+     "title": "Loss of Mitochondrial Tusc2/Fus1 Triggers a Brain Pro-Inflammatory Microenvironment and Early Spatial Memory Impairment.",
+     "authorString": "Farris T, Gonz\u00e1lez-Ochoa S, Mohammed M, Rajakaruna H, Tonello J, Kanagasabai T, Korolkova O, Shimamoto A, Ivanova A, Shanker A.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2024",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "40560747",
+     "pmcid": "PMC12189764",
+     "doi": "10.1111/gbb.70027",
+     "title": "Early Onset Memory Deficit of WMI Rats Compared to Their Nearly Isogenic WLIs Is Reversed by Enriched Environment in Females.",
+     "authorString": "Ji MT, Przybyl KJ, Harter AM, Nemesh M, Jenz ST, Yamazaki A, Kim C, Mulligan MK, Chen H, Redei EE.",
+     "journalTitle": "Genes Brain Behav",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "42082974",
+     "pmcid": "PMC13322090",
+     "doi": "10.1186/s13046-026-03720-8",
+     "title": "Transforming tumor microenvironments: nanotechnology and gene therapy in cellular signaling and epigenetic insight into chemo-resistance.",
+     "authorString": "Sharma P, Thuy NP, Ansari IH, Tripathi RM, Kala M, Elberry MH, Sharma N, Lee SJ.",
+     "journalTitle": "J Exp Clin Cancer Res",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "31481748",
+     "pmcid": "PMC6722084",
+     "doi": "10.1038/s41598-019-49155-4",
+     "title": "MicroRNA-138 is a Prognostic Biomarker for Triple-Negative Breast Cancer and Promotes Tumorigenesis via TUSC2 repression.",
+     "authorString": "Nama S, Muhuri M, Di Pascale F, Quah S, Aswad L, Fullwood M, Sampath P.",
+     "journalTitle": "Sci Rep",
+     "pubYear": "2019",
+     "isOpenAccess": "Y",
+     "citedByCount": 36
+    },
+    {
+     "pmid": "41097775",
+     "pmcid": "PMC12523523",
+     "doi": "10.3390/cancers17193248",
+     "title": "Guardians in the Gut: Mechanistic Insights into a Hidden Ally Against Triple-Negative Breast Cancer.",
+     "authorString": "Jaye K, Alsherbiny MA, Chang D, Li CG, Bhuyan DJ.",
+     "journalTitle": "Cancers (Basel)",
+     "pubYear": "2025",
+     "isOpenAccess": "Y",
+     "citedByCount": 1
+    },
+    {
+     "pmid": "37275275",
+     "pmcid": "PMC10233889",
+     "doi": "10.1093/narcan/zcad027",
+     "title": "Estrogen receptor alpha mutations regulate gene expression and cell growth in breast cancer through microRNAs.",
+     "authorString": "Arnesen S, Polaski JT, Blanchard Z, Osborne KS, Welm AL, O'Connell RM, Gertz J.",
+     "journalTitle": "NAR Cancer",
+     "pubYear": "2023",
+     "isOpenAccess": "Y",
+     "citedByCount": 5
+    },
+    {
+     "pmid": "41683944",
+     "pmcid": "PMC12898783",
+     "doi": "10.3390/ijms27031525",
+     "title": "Bioinformatic Prediction of Activation States in Molecular Network Pathways of Eukaryotic Initiation Factor 2 (EIF2) Signaling and Coronavirus Pathogenesis.",
+     "authorString": "Tanabe S, Quader S, Ono R, Tanaka HY, Cabral H.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2026",
+     "isOpenAccess": "Y",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "34712050",
+     "pmcid": "PMC8548058",
+     "doi": "10.2147/ott.s329383",
+     "title": "Interaction of Gut Microbiome and Host microRNAs with the Occurrence of Colorectal and Breast Cancer and Their Impact on Patient Immunity.",
+     "authorString": "De Silva S, Tennekoon KH, Karunanayake EH.",
+     "journalTitle": "Onco Targets Ther",
+     "pubYear": "2021",
+     "isOpenAccess": "Y",
+     "citedByCount": 19
+    },
+    {
+     "pmid": "30214383",
+     "pmcid": "PMC6134714",
+     "doi": "10.1186/s12575-018-0082-9",
+     "title": "microRNA Regulation in Estrogen Receptor-Positive Breast Cancer and Endocrine Therapy.",
+     "authorString": "Howard EW, Yang X.",
+     "journalTitle": "Biol Proced Online",
+     "pubYear": "2018",
+     "isOpenAccess": "Y",
+     "citedByCount": 49
+    },
+    {
+     "pmid": "38435821",
+     "pmcid": "PMC10905562",
+     "doi": "10.1002/btm2.10601",
+     "title": "A landscape of recent advances in lipid nanoparticles and their translational potential for the treatment of solid tumors.",
+     "authorString": "Paun RA, Jurchuk S, Tabrizian M.",
+     "journalTitle": "Bioeng Transl Med",
+     "pubYear": "2024",
+     "isOpenAccess": "Y",
+     "citedByCount": 20
+    },
+    {
+     "pmid": "27764788",
+     "pmcid": "PMC5363586",
+     "doi": "10.18632/oncotarget.12630",
+     "title": "Proximal and distal regulation of the HYAL1 gene cluster by the estrogen receptor \u03b1 in breast cancer cells.",
+     "authorString": "Edjekouane L, Benhadjeba S, Jangal M, Fleury H, G\u00e9vry N, Carmona E, Tremblay A.",
+     "journalTitle": "Oncotarget",
+     "pubYear": "2016",
+     "isOpenAccess": "Y",
+     "citedByCount": 13
+    }
+   ]
+  },
+  {
+   "id": "E9",
+   "db": "europepmc",
+   "query": "\"endogenous androgens\" AND \"midlife\" AND (\"systematic review\" OR PROSPERO)",
+   "why": "did the anchor review register a protocol?",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22endogenous+androgens%22+AND+%22midlife%22+AND+%28%22systematic+review%22+OR+PROSPERO%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:26Z",
+   "http_status": 200,
+   "sha256_raw": "ee6ff1f303ed521eaf98b3ddaad878565e0aeb20ac3288ab2d99f2f4ff6c7ca8",
+   "bytes_raw": 1729,
+   "hit_count": 2,
+   "top_hits": [
+    {
+     "pmid": "42763064",
+     "pmcid": null,
+     "doi": "10.1016/j.mad.2026.112257",
+     "title": "Endogenous androgens, physical and cognitive function in healthy midlife men: A systematic review.",
+     "authorString": "Keren D, Hayek R, Toledano Y, Strauss T, Springer S, Goshen A.",
+     "journalTitle": "Mech Ageing Dev",
+     "pubYear": "2026",
+     "isOpenAccess": "N",
+     "citedByCount": 0
+    },
+    {
+     "pmid": "36325501",
+     "pmcid": "PMC9619256",
+     "doi": "10.1177/20420188221129946",
+     "title": "Menopause, androgens, and cardiovascular ageing: a narrative review.",
+     "authorString": "Armeni E, Lambrinoudaki I.",
+     "journalTitle": "Ther Adv Endocrinol Metab",
+     "pubYear": "2022",
+     "isOpenAccess": "Y",
+     "citedByCount": 14
+    }
+   ]
+  },
+  {
+   "id": "P1",
+   "db": "pubmed",
+   "query": "TUSC2[tiab] AND (androgen[tiab] OR testosterone[tiab] OR \"androgen receptor\"[tiab])",
+   "why": "PubMed title/abstract: TUSC2 x androgen",
+   "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&retmax=25&term=TUSC2%5Btiab%5D+AND+%28androgen%5Btiab%5D+OR+testosterone%5Btiab%5D+OR+%22androgen+receptor%22%5Btiab%5D%29",
+   "retrieved_utc": "2026-09-30T06:12:46Z",
+   "http_status": 200,
+   "sha256_raw": "657b810e7b2e99fe42c0999b4b17076ab2eb5a8860f765e51031f103e188c42f",
+   "bytes_raw": 395,
+   "hit_count": 0,
+   "idlist": []
+  },
+  {
+   "id": "P2",
+   "db": "pubmed",
+   "query": "TUSC2[tiab] AND estrogen[tiab]",
+   "why": "PubMed title/abstract control: TUSC2 x estrogen",
+   "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&retmax=25&term=TUSC2%5Btiab%5D+AND+estrogen%5Btiab%5D",
+   "retrieved_utc": "2026-09-30T06:12:46Z",
+   "http_status": 200,
+   "sha256_raw": "e06e6341aa335c8515fb3e4e40863e7a6f7dfbbc43cc11dcd3626489fa0956e8",
+   "bytes_raw": 226,
+   "hit_count": 1,
+   "idlist": [
+    "42763063"
+   ]
+  },
+  {
+   "id": "P3",
+   "db": "pubmed",
+   "query": "(testosterone[tiab] OR \"androgen receptor\"[tiab]) AND \"mitochondrial calcium\"[tiab] AND (hippocamp*[tiab] OR neuron*[tiab] OR brain[tiab])",
+   "why": "PubMed t/a: androgen x mitochondrial calcium x brain",
+   "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&retmax=25&term=%28testosterone%5Btiab%5D+OR+%22androgen+receptor%22%5Btiab%5D%29+AND+%22mitochondrial+calcium%22%5Btiab%5D+AND+%28hippocamp%2A%5Btiab%5D+OR+neuron%2A%5Btiab%5D+OR+brain%5Btiab%5D%29",
+   "retrieved_utc": "2026-09-30T06:12:46Z",
+   "http_status": 200,
+   "sha256_raw": "9e536d14f29c5874097014041d32d9cd545580be8d2878229fdc43730f79ebcf",
+   "bytes_raw": 386,
+   "hit_count": 1,
+   "idlist": [
+    "23959938"
+   ]
+  },
+  {
+   "id": "E13",
+   "db": null,
+   "query": "(TITLE:\"androgen receptor\" OR ABSTRACT:\"androgen receptor\") AND (TITLE:\"mitochondrial calcium\" OR ABSTRACT:\"mitochondrial calcium\" OR TITLE:\"mitochondrial Ca2+\" OR ABSTRACT:\"mitochondrial Ca2+\")",
+   "why": "strict: AR x mitochondrial calcium, any tissue",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%28TITLE%3A%22androgen+receptor%22+OR+ABSTRACT%3A%22androgen+receptor%22%29+AND+%28TITLE%3A%22mitochondrial+calcium%22+OR+ABSTRACT%3A%22mitochondrial+calcium%22+OR+TITLE%3A%22mitochondrial+Ca2%2B%22+OR+ABSTRACT%3A%22mitochondrial+Ca2%2B%22%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": null,
+   "http_status": 200,
+   "sha256_raw": "a08959a843df38387364b2f53d721fa690dbb254ccba39331916cbebfcf206bc",
+   "bytes_raw": 3672,
+   "hit_count": 3,
+   "top_hits": [
+    {
+     "pmid": null,
+     "doi": "10.21203/rs.3.rs-1261384/v1",
+     "title": "Defective excitation-contraction coupling and mitochondrial respiration precede mitochondrial Ca2+ accumulation in spinobulbar muscular atrophy skeletal muscle",
+     "journalTitle": null,
+     "pubYear": "2022",
+     "isOpenAccess": "N"
+    },
+    {
+     "pmid": "36746942",
+     "doi": "10.1038/s41467-023-36185-w",
+     "title": "Defective excitation-contraction coupling and mitochondrial respiration precede mitochondrial Ca<sup>2+</sup> accumulation in spinobulbar muscular atrophy skeletal muscle.",
+     "journalTitle": "Nat Commun",
+     "pubYear": "2023",
+     "isOpenAccess": "Y"
+    },
+    {
+     "pmid": "23959938",
+     "doi": "10.1210/en.2013-1242",
+     "title": "Oxidative stress defines the neuroprotective or neurotoxic properties of androgens in immortalized female rat dopaminergic neuronal cells.",
+     "journalTitle": "Endocrinology",
+     "pubYear": "2013",
+     "isOpenAccess": "N"
+    }
+   ]
+  },
+  {
+   "id": "E14",
+   "db": null,
+   "query": "(TITLE:\"androgen receptor\" OR ABSTRACT:\"androgen receptor\") AND (TITLE:\"hippocampus\" OR ABSTRACT:\"hippocampus\" OR TITLE:\"hippocampal\" OR ABSTRACT:\"hippocampal\") AND (TITLE:\"aging\" OR ABSTRACT:\"aging\" OR TITLE:\"ageing\" OR ABSTRACT:\"ageing\")",
+   "why": "strict: AR x hippocampus x aging",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%28TITLE%3A%22androgen+receptor%22+OR+ABSTRACT%3A%22androgen+receptor%22%29+AND+%28TITLE%3A%22hippocampus%22+OR+ABSTRACT%3A%22hippocampus%22+OR+TITLE%3A%22hippocampal%22+OR+ABSTRACT%3A%22hippocampal%22%29+AND+%28TITLE%3A%22aging%22+OR+ABSTRACT%3A%22aging%22+OR+TITLE%3A%22ageing%22+OR+ABSTRACT%3A%22ageing%22%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": null,
+   "http_status": 200,
+   "sha256_raw": "7ed65e02bc829df655b62ac8846d1b400588450420443f48cdd4cb015ab4a45f",
+   "bytes_raw": 9121,
+   "hit_count": 10,
+   "top_hits": [
+    {
+     "pmid": null,
+     "doi": "10.1101/2025.08.17.670749",
+     "title": "Age-related decline of synaptic plasticity is regulated by neuro-androgen and neuro-estrogen in normal aging of hippocampus",
+     "journalTitle": null,
+     "pubYear": "2025",
+     "isOpenAccess": "N"
+    },
+    {
+     "pmid": "37991884",
+     "doi": "10.1530/joe-23-0114",
+     "title": "Testosterone reduces hippocampal synaptic damage in an androgen receptor-independent manner.",
+     "journalTitle": "J Endocrinol",
+     "pubYear": "2024",
+     "isOpenAccess": "Y"
+    },
+    {
+     "pmid": "41685091",
+     "doi": "10.3389/fncel.2025.1695565",
+     "title": "Local synthesis and function of neuro-estrogen and neuro-androgen: impact on the hippocampus-related cognition and neuronal plasticity.",
+     "journalTitle": "Front Cell Neurosci",
+     "pubYear": "2025",
+     "isOpenAccess": "Y"
+    },
+    {
+     "pmid": "39092288",
+     "doi": "10.3389/fendo.2024.1420144",
+     "title": "Impact of sex and hypoxia on brain region-specific expression of membrane androgen receptor AR45 in rats.",
+     "journalTitle": "Front Endocrinol (Lausanne)",
+     "pubYear": "2024",
+     "isOpenAccess": "Y"
+    },
+    {
+     "pmid": null,
+     "doi": "10.1101/2025.01.27.25321222",
+     "title": "Testosterone replacement therapy ameliorates spatial cognitive function in age-related hypogonadism (LOH) patients: analysis with a virtual three-dimensional maze",
+     "journalTitle": null,
+     "pubYear": "2025",
+     "isOpenAccess": "N"
+    },
+    {
+     "pmid": "35609517",
+     "doi": "10.1159/000525038",
+     "title": "Testosterone Influence on Microtubule-Associated Proteins and Spine Density in Hippocampus: Implications on Learning and Memory.",
+     "journalTitle": "Dev Neurosci",
+     "pubYear": "2022",
+     "isOpenAccess": "N"
+    },
+    {
+     "pmid": "31219567",
+     "doi": "10.1210/en.2019-00114",
+     "title": "Androgens Enhance Adult Hippocampal Neurogenesis in Males but Not Females in an Age-Dependent Manner.",
+     "journalTitle": "Endocrinology",
+     "pubYear": "2019",
+     "isOpenAccess": "N"
+    },
+    {
+     "pmid": "26607693",
+     "doi": "10.1016/j.jsbmb.2015.11.012",
+     "title": "Dose-dependent regulation of steroid receptor coactivator-1 and steroid receptors by testosterone propionate in the hippocampus of adult male mice.",
+     "journalTitle": "J Steroid Biochem Mol Biol",
+     "pubYear": "2016",
+     "isOpenAccess": "N"
+    },
+    {
+     "pmid": "24428527",
+     "doi": "10.1210/en.2013-1725",
+     "title": "Selective androgen receptor modulator RAD140 is neuroprotective in cultured neurons and kainate-lesioned male rats.",
+     "journalTitle": "Endocrinology",
+     "pubYear": "2014",
+     "isOpenAccess": "N"
+    },
+    {
+     "pmid": "20819998",
+     "doi": "10.1212/wnl.0b013e3181f11deb",
+     "title": "Testosterone modifies the effect of APOE genotype on hippocampal volume in middle-aged men.",
+     "journalTitle": "Neurology",
+     "pubYear": "2010",
+     "isOpenAccess": "N"
+    }
+   ]
+  },
+  {
+   "id": "E10",
+   "db": "europepmc",
+   "query": "(TITLE:\"TUSC2\" OR ABSTRACT:\"TUSC2\" OR TITLE:\"Fus1\" OR ABSTRACT:\"Fus1\") AND (TITLE:\"androgen\" OR ABSTRACT:\"androgen\" OR TITLE:\"testosterone\" OR ABSTRACT:\"testosterone\")",
+   "why": "strict: same-title/abstract only",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%28TITLE%3A%22TUSC2%22+OR+ABSTRACT%3A%22TUSC2%22+OR+TITLE%3A%22Fus1%22+OR+ABSTRACT%3A%22Fus1%22%29+AND+%28TITLE%3A%22androgen%22+OR+ABSTRACT%3A%22androgen%22+OR+TITLE%3A%22testosterone%22+OR+ABSTRACT%3A%22testosterone%22%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:46Z",
+   "http_status": 200,
+   "sha256_raw": "f635529b9db776cdad0adce862f02d28625ca2d3b274d965a83371c46ba0f151",
+   "bytes_raw": 346,
+   "hit_count": 0,
+   "top_hits": []
+  },
+  {
+   "id": "E11",
+   "db": "europepmc",
+   "query": "(TITLE:\"TUSC2\" OR ABSTRACT:\"TUSC2\" OR TITLE:\"Fus1\" OR ABSTRACT:\"Fus1\") AND (TITLE:\"estrogen\" OR ABSTRACT:\"estrogen\")",
+   "why": "strict control: TUSC2 x estrogen",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%28TITLE%3A%22TUSC2%22+OR+ABSTRACT%3A%22TUSC2%22+OR+TITLE%3A%22Fus1%22+OR+ABSTRACT%3A%22Fus1%22%29+AND+%28TITLE%3A%22estrogen%22+OR+ABSTRACT%3A%22estrogen%22%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:46Z",
+   "http_status": 200,
+   "sha256_raw": "2cf44d199e1d161ffe9fe043996038237de016a5d7267ac8b0a8afc9e935022d",
+   "bytes_raw": 1088,
+   "hit_count": 1,
+   "top_hits": [
+    {
+     "pmid": "42763063",
+     "pmcid": null,
+     "doi": "10.1016/j.mad.2026.112253",
+     "title": "Mitochondrial Calcium Sensor Tusc2 Protects the Aging Hippocampus from Proteostasis Collapse in a Sex-Specific Manner.",
+     "journalTitle": "Mech Ageing Dev",
+     "pubYear": "2026"
+    }
+   ]
+  },
+  {
+   "id": "E12",
+   "db": "europepmc",
+   "query": "(TITLE:\"TUSC2\" OR ABSTRACT:\"TUSC2\" OR TITLE:\"Fus1\" OR ABSTRACT:\"Fus1\") AND (TITLE:\"mitochondrial calcium\" OR ABSTRACT:\"mitochondrial calcium\" OR TITLE:\"mitochondria\" OR ABSTRACT:\"mitochondria\")",
+   "why": "strict control: TUSC2 x mitochondria",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%28TITLE%3A%22TUSC2%22+OR+ABSTRACT%3A%22TUSC2%22+OR+TITLE%3A%22Fus1%22+OR+ABSTRACT%3A%22Fus1%22%29+AND+%28TITLE%3A%22mitochondrial+calcium%22+OR+ABSTRACT%3A%22mitochondrial+calcium%22+OR+TITLE%3A%22mitochondria%22+OR+ABSTRACT%3A%22mitochondria%22%29&format=json&pageSize=25&resultType=lite",
+   "retrieved_utc": "2026-09-30T06:12:46Z",
+   "http_status": 200,
+   "sha256_raw": "8cd6588fec39b02a04e6adb73e80d79af5103212787bda789a99f0e78100884f",
+   "bytes_raw": 9991,
+   "hit_count": 11,
+   "top_hits": [
+    {
+     "pmid": "42763063",
+     "pmcid": null,
+     "doi": "10.1016/j.mad.2026.112253",
+     "title": "Mitochondrial Calcium Sensor Tusc2 Protects the Aging Hippocampus from Proteostasis Collapse in a Sex-Specific Manner.",
+     "journalTitle": "Mech Ageing Dev",
+     "pubYear": "2026"
+    },
+    {
+     "pmid": null,
+     "pmcid": null,
+     "doi": "10.20944/preprints202405.0349.v1",
+     "title": "Loss of Mitochondrial Tusc2/Fus1 Triggers a Brain Proinflammatory Microenvironment and Early Spatial Memory Impairment",
+     "journalTitle": null,
+     "pubYear": "2024"
+    },
+    {
+     "pmid": "39000512",
+     "pmcid": "PMC11242373",
+     "doi": "10.3390/ijms25137406",
+     "title": "Loss of Mitochondrial Tusc2/Fus1 Triggers a Brain Pro-Inflammatory Microenvironment and Early Spatial Memory Impairment.",
+     "journalTitle": "Int J Mol Sci",
+     "pubYear": "2024"
+    },
+    {
+     "pmid": "37371955",
+     "pmcid": "PMC10294946",
+     "doi": "10.3390/antiox12061225",
+     "title": "Pharmacological Modulation of Energy and Metabolic Pathways Protects Hearing in the Fus1/Tusc2 Knockout Model of Mitochondrial Dysfunction and Oxidative Stress.",
+     "journalTitle": "Antioxidants (Basel)",
+     "pubYear": "2023"
+    },
+    {
+     "pmid": "37173921",
+     "pmcid": "PMC10177220",
+     "doi": "10.3390/cancers15092455",
+     "title": "Tumor Suppressor Candidate 2 (TUSC2): Discovery, Functions, and Cancer Therapy.",
+     "journalTitle": "Cancers (Basel)",
+     "pubYear": "2023"
+    },
+    {
+     "pmid": null,
+     "pmcid": null,
+     "doi": "10.20944/preprints202305.1260.v1",
+     "title": "Pharmacological Modulation of Energy and Metabolic Pathways Protects Hearing in the Fus1 KO Model of Mitochondrial Dysfunction and Oxidative Stress",
+     "journalTitle": null,
+     "pubYear": "2023"
+    },
+    {
+     "pmid": "24328503",
+     "pmcid": "PMC3942676",
+     "doi": "10.1089/ars.2013.5437",
+     "title": "Fus1/Tusc2 is a novel regulator of mitochondrial calcium handling, Ca2+-coupled mitochondrial processes, and Ca2+-dependent NFAT and NF-\u03baB pathways in CD4+ T cells.",
+     "journalTitle": "Antioxid Redox Signal",
+     "pubYear": "2014"
+    },
+    {
+     "pmid": "28351997",
+     "pmcid": "PMC5391223",
+     "doi": "10.18632/aging.101213",
+     "title": "Mitochondrial protein Fus1/Tusc2 in premature aging and age-related pathologies: critical roles of calcium and energy homeostasis.",
+     "journalTitle": "Aging (Albany NY)",
+     "pubYear": "2017"
+    },
+    {
+     "pmid": "26246474",
+     "pmcid": "PMC4673227",
+     "doi": "10.18632/oncotarget.4537",
+     "title": "Mitochondria, calcium, and tumor suppressor Fus1: At the crossroad of cancer, inflammation, and autoimmunity.",
+     "journalTitle": "Oncotarget",
+     "pubYear": "2015"
+    },
+    {
+     "pmid": "28135838",
+     "pmcid": "PMC5564041",
+     "doi": "10.1089/ars.2016.6851",
+     "title": "Novel Role of the Mitochondrial Protein Fus1 in Protection from Premature Hearing Loss via Regulation of Oxidative Stress and Nutrient and Energy Sensing Pathways in the Inner Ear.",
+     "journalTitle": "Antioxid Redox Signal",
+     "pubYear": "2017"
+    }
+   ]
+  },
+  {
+   "id": "P3",
+   "db": "pubmed",
+   "query": "(testosterone[tiab] OR \"androgen receptor\"[tiab]) AND \"mitochondrial calcium\"[tiab] AND (hippocamp*[tiab] OR neuron*[tiab] OR brain[tiab])",
+   "why": "PubMed title/abstract: androgen or AR AND 'mitochondrial calcium' AND brain/hippocampus/neuron",
+   "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&retmax=20&term=%28testosterone%5Btiab%5D+OR+%22androgen+receptor%22%5Btiab%5D%29+AND+%22mitochondrial+calcium%22%5Btiab%5D+AND+%28hippocamp%2A%5Btiab%5D+OR+neuron%2A%5Btiab%5D+OR+brain%5Btiab%5D%29",
+   "retrieved_utc": "2026-09-30T06:13:37Z",
+   "http_status": 200,
+   "sha256_raw": "9e536d14f29c5874097014041d32d9cd545580be8d2878229fdc43730f79ebcf",
+   "bytes_raw": 386,
+   "hit_count": 1,
+   "idlist": [
+    "23959938"
+   ],
+   "summaries": [
+    {
+     "pmid": "23959938",
+     "title": "Oxidative stress defines the neuroprotective or neurotoxic properties of androgens in immortalized female rat dopaminergic neuronal cells.",
+     "journal": "Endocrinology",
+     "date": "2013 Nov",
+     "doi": [
+      "10.1210/en.2013-1242"
+     ]
+    }
+   ]
+  }
+ ],
+ "derived": {
+  "europepmc_fulltext_tusc2_androgen_unrestricted": 37,
+  "europepmc_fulltext_fus1_androgen_unrestricted": 66,
+  "strict_titleabstract_tusc2_androgen_europepmc": 0,
+  "strict_titleabstract_tusc2_androgen_pubmed": 0,
+  "control_tusc2_all_europepmc": 518,
+  "control_tusc2_estrogen_strict_europepmc": 1,
+  "control_tusc2_estrogen_strict_pubmed": 1,
+  "control_tusc2_mitochondria_strict_europepmc": 11,
+  "ar_mitochondrial_calcium_strict": 3,
+  "ar_hippocampus_aging_strict": 10,
+  "androgen_mitocalcium_brain_pubmed": 1
+ },
+ "nearest_hits": [
+  {
+   "id": "N1",
+   "pmid": "23959938",
+   "why": "the closest thing in the index to the androgen side of the bridge: androgens act on mitochondrial calcium, and the effect is NOT blocked by an androgen-receptor antagonist",
+   "quote_block": "Endocrinology. 2013 Nov;154(11):4281-92. doi: 10.1210/en.2013-1242. Epub 2013 \nAug 19.\n\nOxidative stress defines the neuroprotective or neurotoxic properties of \nandrogens in immortalized female rat dopaminergic neuronal cells.\n\nHolmes S(1), Abbassi B, Su C, Singh M, Cunningham RL.\n\nAuthor information:\n(1)PhD, Department of Pharmacology and Neuroscience, University of North Texas \nHealth Science Center, 3400 Camp Bowie Boulevard, Fort Worth, Texas 76107-2699. \nrebecca.cunningham@unthsc.edu.\n\nMales have a higher risk for developing Parkinson's disease and parkinsonism \nafter ischemic stroke than females. Although estrogens have been shown to play a \nneuroprotective role in Parkinson's disease, there is little information on \nandrogens' actions on dopamine neurons. In this study, we examined the effects \nof androgens under conditions of oxidative stress to determine whether androgens \nplay a neuroprotective or neurotoxic role in dopamine neuronal function. \nMitochondrial function, cell viability, intracellular calcium levels, and \nmitochondrial calcium influx were examined in response to androgens under both \nnonoxidative and oxidative stress conditions. Briefly, N27 dopaminergic cells \nwere exposed to the oxidative stressor, hydrogen peroxide, and physiologically \nrelevant levels of testosterone or dihydrotestosterone, applied either before or \nafter oxidative stress exposure. Androgens, alone, increased mitochondrial \nfunction via a calcium-dependent mechanism. Androgen pretreatment protected \ncells from oxidative stress-induced cell death. However, treatment with \nandrogens after the oxidative insult increased cell death, and these effects \nwere, in part, mediated by calcium influx into the mitochondria. Interestingly, \nthe negative effects of androgens were not blocked by either androgen or \nestrogen receptor antagonists. Instead, a putative membrane-associated androgen \nreceptor was implicated. Overall, our results indicate that androgens are \nneuroprotective when oxidative stress levels are minimal, but when oxidative \nstress levels are elevated, androgens exacerbate oxidative stress damage.\n\nDOI: 10.1210/en.2013-1242\nPMCID: PMC3800758\nPMID: 23959938 [Indexe"
+  },
+  {
+   "id": "N2",
+   "pmid": "37991884",
+   "why": "testosterone rescues hippocampal synaptic and spatial-memory damage in an AR-mutant mouse, and the rescue is androgen-receptor INdependent \u2014 receptor signalling and hormone concentration dissociate",
+   "quote_block": "J Endocrinol. 2023 Dec 13;260(2):e230114. doi: 10.1530/JOE-23-0114. Print 2024\n Feb 1.\n\nTestosterone reduces hippocampal synaptic damage in an androgen \nreceptor-independent manner.\n\nZhang Y(1)(2)(3), Chen M(1), Chen H(1)(2)(3), Mi S(1), Wang C(1)(2)(3), Zuo \nH(1), Song L(1), Du J(1)(2)(3), Cui H(1)(2)(3), Li S(1)(2)(3).\n\nAuthor information:\n(1)Department of Human Anatomy, Hebei Medical University, Shijiazhuang, Hebei, \nChina.\n(2)Neuroscience Research Center, Hebei Medical University, Shijiazhuang, Hebei, \nChina.\n(3)Hebei Key Laboratory of Neurodegenerative Disease Mechanism, Hebei Medical \nUniversity, Shijiazhuang, Hebei, China.\n\nAging-related reduction in androgen levels may be a possible risk factor for \nneurodegenerative diseases and contribute to cognitive impairment. Androgens may \naffect synaptic function and cognition in an androgen receptor (AR)-independent \nmanner; however, the mechanisms connecting theses effects are unknown. \nTherefore, we used testicular feminization mutation (Tfm) male mice, a model \nwith AR mutation, to test the effects of testosterone on synaptic function and \ncognition. Our results showed that testosterone ameliorated spatial memory \ndeficit and neuronal damage, and increased dendritic spines density and \npostsynaptic density protein 95 (PSD95) and glutamate receptor 1 (GluA1) \nexpression in the hippocampus of Tfm male mice. And these effects of \ntestosterone were not inhibited by anastrozole, which suppressed conversion of \ntestosterone to estradiol. Mechanistically, testosterone activated the \nextracellular signal-related kinase 1/2 (Erk1/2) and cyclic adenosine \nmonophosphate response element-binding protein (CREB) in the hippocampus of Tfm \nmale mice. Meanwhile, Erk1/2 inhibitor SCH772984 blocked the upregulation of \nphospho-CREB, PSD95, and GluA1 induced by testosterone in HT22 cells pretreated \nwith flutamide, an androgen antagonist. Collectively, our data indicate that \ntestosterone may ameliorate hippocampal synaptic damage and spatial memory \ndeficit by activating the Erk1/2-CREB signaling pathway in an AR-independent \nmanner.\n\nDOI: 10.1530/JOE-23-0114\nPMCID: PMC10762536\nPMID: 37991884 [Indexed for MEDLINE]\n\nConflict of"
+  },
+  {
+   "id": "N3",
+   "pmid": "41685091",
+   "why": "the brain synthesises its own androgens locally, so circulating concentration is the wrong variable for the hippocampus",
+   "quote_block": "Front Cell Neurosci. 2026 Jan 28;19:1695565. doi: 10.3389/fncel.2025.1695565. \neCollection 2025.\n\nLocal synthesis and function of neuro-estrogen and neuro-androgen: impact on the \nhippocampus-related cognition and neuronal plasticity.\n\nKawato S(#)(1)(2)(3)(4), Hojo Y(#)(5), Soma M(2)(3)(4)(6), Horie S(3), Saito \nM(4), Ogiue-Ikeda M(2)(3)(4).\n\nAuthor information:\n(1)Department of Biophysics and Life Sciences, Graduate School of Arts and \nSciences, The University of Tokyo, Tokyo, Japan.\n(2)Department of Cognitive Neuroscience, Faculty of Pharma-Science, Teikyo \nUniversity, Tokyo, Japan.\n(3)Department of Urology, Graduate School of Medicine, Juntendo University, \nTokyo, Japan.\n(4)Department of Biosciences, College of Humanities and Sciences, Nihon \nUniversity, Tokyo, Japan.\n(5)Department of Biochemistry, Faculty of Medicine, Saitama Medical University, \nSaitama, Japan.\n(6)Department of Anatomy and Neurobiology, Nippon Medical School, Tokyo, Japan.\n(#)Contributed equally\n\nBrain sex neurosteroids have been attracted much attention, because the brain \nitself can synthesizes a sufficient amount of sex neurosteroids independent of \ncirculating sex steroids. Local synthesis and action of neuro-estrogen [such as \nneuro-estradiol (nE2)] and neuro-androgen [such as neuro-testosterone (nT) and \nneuro-dihydrotestosterone (nDHT)] have become recognized as key factors in \nmodulation of synaptic plasticity, cognitive performance, and protection of \naging dependent decline of neurological functions. Unlike circulating sex \nsteroids, these locally synthesized sex neurosteroids can directly and rapidly \nmodulate neuronal synapses and induce potent effects on learning and memory. The \nproperties of local neurocrine systems are significantly different from those of \nclassical neuroendocrine systems dependent on the hypothalamic-pituitary-gonadal \naxis. For example, in the hippocampus, not only neuro-androgen (nT and nDHT) but \nalso nE2 have higher concentrations than testis-derived circulating androgen (T \nand DHT) and ovary-derived circulating E2 (cir-E2). In addition, male nE2 \nconcentration is higher than female nE2 at both adult stage and newborn stage \nduring which brain masculi"
+  },
+  {
+   "id": "N4",
+   "pmid": "31219567",
+   "why": "androgens enhance adult hippocampal neurogenesis in males but not females, age-dependently \u2014 a sex-specific hippocampal androgen effect with no mitochondrial or TUSC2 readout",
+   "quote_block": "Endocrinology. 2019 Sep 1;160(9):2128-2136. doi: 10.1210/en.2019-00114.\n\nAndrogens Enhance Adult Hippocampal Neurogenesis in Males but Not Females in an \nAge-Dependent Manner.\n\nDuarte-Guterman P(1), Lieblich SE(1), Wainwright SR(1), Chow C(1), Chaiton \nJA(1), Watson NV(2), Galea LAM(1).\n\nAuthor information:\n(1)Djavad Mowafaghian Centre for Brain Health and Department of Psychology, \nUniversity of British Columbia, Vancouver, British Columbia, Canada.\n(2)Department of Psychology, Simon Fraser University, Burnaby, British Columbia, \nCanada.\n\nAndrogens (testosterone and DHT) increase adult hippocampal neurogenesis by \nincreasing survival of new neurons in male rats and mice via an androgen \nreceptor pathway, but it is not known whether androgens regulate neurogenesis in \nfemale rats and whether the effect is age-dependent. We investigated the effects \nof DHT, a potent androgen, on neurogenesis in young adult and middle-aged male \nand female rats. Rats were gonadectomized and injected with the DNA synthesis \nmarker bromodeoxyuridine (BrdU). The following day, rats began receiving daily \ninjections of oil or DHT for 30 days. We evaluated cell proliferation (Ki67) and \nsurvival of new neurons (BrdU and BrdU/NeuN) in the hippocampus of male and \nfemale rats by using immunohistochemistry. As expected, DHT increased the number \nof BrdU+ cells in young males but surprisingly not in middle-aged males or in \nyoung and middle-aged females. In middle age, DHT increased the proportion of \nBrdU/NeuN cells, an effect driven by females. Androgen receptor expression also \nincreased with aging in both female and male rats, which may contribute to a \nlack of DHT neurogenic effect in middle age. Our results indicate that DHT \nregulates adult hippocampal neurogenesis in a sex- and age-dependent manner.\n\nCopyright \u00a9 2019 Endocrine Society.\n\nDOI: 10.1210/en.2019-00114\nPMCID: PMC6736050\nPMID: 31219567 [Indexed for MEDLINE]"
+  },
+  {
+   "id": "N5",
+   "pmid": "39092288",
+   "why": "a membrane androgen receptor (AR45) is expressed brain-region- and sex-specifically \u2014 a third receptor route",
+   "quote_block": "Front Endocrinol (Lausanne). 2024 Jul 18;15:1420144. doi: \n10.3389/fendo.2024.1420144. eCollection 2024.\n\nImpact of sex and hypoxia on brain region-specific expression of membrane \nandrogen receptor AR45 in rats.\n\nBradshaw JL(1), Wilson EN(1), Mabry S(1), Shrestha P(1)(2), Gardner JJ(1), \nCunningham RL(1).\n\nAuthor information:\n(1)Department of Pharmaceutical Sciences, University of North Texas (UNT) System \nCollege of Pharmacy, University of North Texas Health Science Center, Fort \nWorth, TX, United States.\n(2)North Texas Eye Research Institute, University of North Texas Health Science \nCenter, Fort Worth, TX, United States.\n\nBACKGROUND: Sex differences in oxidative stress-associated cognitive decline are \ninfluenced by sex hormone levels. Notably, oxidative stress-associated neuronal \ncell death can be exacerbated through testosterone signaling via membrane \nandrogen receptor AR45, which is complexed with G protein G\u03b1q within plasma \nmembrane-associated lipid rafts. The objective of this study was to elucidate \nthe impact of sex on the expression of AR45 and G\u03b1q in brain regions associated \nwith cognitive function, specifically hippocampus subregions and entorhinal \ncortex. Additionally, we investigated whether chronic intermittent hypoxia \n(CIH), an oxidative stressor with sex-specific effects, would modulate AR45 and \nG\u03b1q expression in these brain regions.\nMETHODS: Adult male and female Sprague-Dawley rats were exposed to CIH or \nnormoxia (room air) during their sleep phase for 14 days. We quantified AR45 and \nG\u03b1q protein expression in various cognition-associated brain regions [dorsal \nhippocampal CA1, CA3, dentate gyrus (DG), and entorhinal cortex (ETC)] via \nwestern blotting. For comparisons, AR45 and G\u03b1q protein expression were also \nassessed in brain regions outside the hippocampal-ETC circuit [thalamus (TH) and \nstriatum (STR)].\nRESULTS: The highest AR45 levels were expressed in the hippocampal CA1 and DG \nwhile the lowest expression was observed in the extrahippocampal STR. The \nhighest G\u03b1q levels were expressed in the hippocampal-associated ETC while the \nlowest expression was observed in the extrahippocampal TH. Females expressed \nhigher levels of AR"
+  },
+  {
+   "id": "N6",
+   "pmid": "36746942",
+   "why": "the AR -> mitochondrial Ca2+ link is measured directly, but in skeletal muscle (SBMA), not brain",
+   "quote_block": "Nat Commun. 2023 Feb 6;14(1):602. doi: 10.1038/s41467-023-36185-w.\n\nDefective excitation-contraction coupling and mitochondrial respiration precede \nmitochondrial Ca(2+) accumulation in spinobulbar muscular atrophy skeletal \nmuscle.\n\nMarchioretti C(#)(1)(2)(3)(4), Zanetti G(#)(1), Pirazzini M(#)(1)(5), Gherardi \nG(1), Nogara L(1)(2), Andreotti R(1)(2)(3), Martini P(6), Marcucci L(1), Canato \nM(1), Nath SR(7), Zuccaro E(1)(2)(3), Chivet M(4), Mammucari C(1)(5), Pacifici \nM(1), Raffaello A(1)(5), Rizzuto R(1), Mattarei A(8), Desbats MA(9), Salviati \nL(5)(9), Megighian A(1)(3), Sorar\u00f9 G(3)(10), Pegoraro E(10), Belluzzi E(11)(12), \nPozzuoli A(11)(12), Biz C(11), Ruggieri P(11), Romualdi C(13), Lieberman AP(7), \nBabu GJ(14), Sandri M(1)(2), Blaauw B(1)(2), Basso M(15), Pennuto \nM(16)(17)(18)(19).\n\nAuthor information:\n(1)Department of Biomedical Sciences (DBS), University of Padova, 35131, Padova, \nItaly.\n(2)Veneto Institute of Molecular Medicine (VIMM), Padova, 35100, Italy.\n(3)Padova Neuroscience Center (PNC), Padova, 35100, Italy.\n(4)Dulbecco Telethon Institute (DTI) at the Department of Cellular, \nComputational and Integrative Biology (CIBIO), University of Trento, 38123, \nTrento, Italy.\n(5)CIR-Myo, Centro Interdipartimentale di Ricerca di Miologia, University of \nPadova, 35131, Padova, Italy.\n(6)Department of Molecular and Translational Medicine, University of Brescia, \n25121, Brescia, Italy.\n(7)Department of Pathology, University of Michigan Medical School, Ann Arbor, \nMI, USA.\n(8)Department of Pharmaceutical and Pharmacological Sciences, University of \nPadova, 35131, Padova, Italy.\n(9)Clinical Genetics Unit, Department of Women and Children's Health, University \nof Padova, and Fondazione Istituto di Ricerca Pediatrica Citt\u00e0 della Speranza, \nPadova, Italy.\n(10)Department of Neuroscience (DNS), University of Padova, 35128, Padova, \nItaly.\n(11)Orthopedics and Orthopedic Oncology, Department of Surgery, Oncology, and \nGastroenterology DiSCOG, University-Hospital of Padova, 35128, Padova, Italy.\n(12)Musculoskeletal Pathology and Oncology Laboratory, Department of Surgery, \nOncology and Gastroenterology (DiSCOG), University of Padova, 35128, Padova, \nItaly.\n(13)Depar"
+  },
+  {
+   "id": "N7",
+   "pmid": "40058147",
+   "why": "pharmacological androgen-receptor blockade impairs spatial memory in both young and aged male rats \u2014 the anti-androgen direction, measured behaviourally, no TUSC2 readout",
+   "quote_block": "Horm Behav. 2025 Apr;170:105711. doi: 10.1016/j.yhbeh.2025.105711. Epub 2025\nMar  8.\n\nEffect of androgen receptor blockade on spatial memory in young and aged male \nrats in the Barnes maze.\n\nJim\u00e9nez-Rubio G(1), Herrera-P\u00e9rez JJ(2), Mart\u00ednez-Mota L(2).\n\nAuthor information:\n(1)Laboratorio de Neurofisiolog\u00eda del Control y la Regulaci\u00f3n, Direcci\u00f3n de \nInvestigaciones en Neurociencias, Instituto Nacional de Psiquiatr\u00eda Ram\u00f3n de la \nFuente Mu\u00f1iz, Calzada M\u00e9xico-Xochimilco 101, Col. San Lorenzo Huipulco, \nDelegaci\u00f3n Tlalpan, 14370 Ciudad de M\u00e9xico, Mexico. Electronic address: \ngraylin@inprf.gob.mx.\n(2)Laboratorio de Farmacolog\u00eda Conductual, Direcci\u00f3n de Investigaciones en \nNeurociencias, Instituto Nacional de Psiquiatr\u00eda Ram\u00f3n de la Fuente Mu\u00f1iz, \nCalzada M\u00e9xico-Xochimilco 101, Col. San Lorenzo Huipulco, Delegaci\u00f3n Tlalpan, \n14370 Ciudad de M\u00e9xico, Mexico.\n\nSpatial memory declines with age, and this decline is associated with decreased \ntestosterone levels. However, the specific role of the androgen receptor in \nspatial memory performance in both young and aged rats remains largely \nunexplored. Our study aimed to investigate the effects of chronic androgen \nreceptor blockade on spatial memory performance in young and aged male rats. \nYoung (3\u00a0months old) and aged (21\u00a0months old) Wistar rats were assigned to one \nof three experimental groups: control, vehicle-, or flutamide-treated (10\u00a0mg/kg \nSC for 14\u00a0days). Spatial memory was evaluated using the Barnes maze (Days 8-14 \nof flutamide administration). The phases of spatial memory acquisition (4 daily \ntrials/4\u00a0days) and retention (1 trial/day, 3\u00a0days after acquisition) were \nevaluated. The results indicated that older animals took longer to find the \ngoal, traveled greater distances, and moved more slowly than their younger \ncounterparts in the Barnes maze, regardless of treatment. During the acquisition \nphase, flutamide administration delayed learning in both young and aged animals. \nSpecifically, flutamide-treated animals exhibited delayed learning during the \nassessment of overnight forgetting (trial 1 on each day of the acquisition \nphase). During the retention phase, an age-related effect was observed in the \nfluta"
+  }
+ ],
+ "nearest_source": {
+  "id": "S_near",
+  "type": "PubMed abstract records (efetch, rettype=abstract, retmode=text) for the seven nearest-hit PMIDs",
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=text&rettype=abstract&id=23959938%2C37991884%2C41685091%2C31219567%2C39092288%2C36746942%2C40058147",
+  "retrieved_utc": "2026-09-30T06:13:23Z",
+  "http_status": 200,
+  "sha256_raw": "0393f091f4b1af07dd3132c2f1acfc1d523b443e80fdbbea90582dce7d465a9c",
+  "bytes_raw": 21359,
+  "text": "1. Endocrinology. 2013 Nov;154(11):4281-92. doi: 10.1210/en.2013-1242. Epub 2013 \nAug 19.\n\nOxidative stress defines the neuroprotective or neurotoxic properties of \nandrogens in immortalized female rat dopaminergic neuronal cells.\n\nHolmes S(1), Abbassi B, Su C, Singh M, Cunningham RL.\n\nAuthor information:\n(1)PhD, Department of Pharmacology and Neuroscience, University of North Texas \nHealth Science Center, 3400 Camp Bowie Boulevard, Fort Worth, Texas 76107-2699. \nrebecca.cunningham@unthsc.edu.\n\nMales have a higher risk for developing Parkinson's disease and parkinsonism \nafter ischemic stroke than females. Although estrogens have been shown to play a \nneuroprotective role in Parkinson's disease, there is little information on \nandrogens' actions on dopamine neurons. In this study, we examined the effects \nof androgens under conditions of oxidative stress to determine whether androgens \nplay a neuroprotective or neurotoxic role in dopamine neuronal function. \nMitochondrial function, cell viability, intracellular calcium levels, and \nmitochondrial calcium influx were examined in response to androgens under both \nnonoxidative and oxidative stress conditions. Briefly, N27 dopaminergic cells \nwere exposed to the oxidative stressor, hydrogen peroxide, and physiologically \nrelevant levels of testosterone or dihydrotestosterone, applied either before or \nafter oxidative stress exposure. Androgens, alone, increased mitochondrial \nfunction via a calcium-dependent mechanism. Androgen pretreatment protected \ncells from oxidative stress-induced cell death. However, treatment with \nandrogens after the oxidative insult increased cell death, and these effects \nwere, in part, mediated by calcium influx into the mitochondria. Interestingly, \nthe negative effects of androgens were not blocked by either androgen or \nestrogen receptor antagonists. Instead, a putative membrane-associated androgen \nreceptor was implicated. Overall, our results indicate that androgens are \nneuroprotective when oxidative stress levels are minimal, but when oxidative \nstress levels are elevated, androgens exacerbate oxidative stress damage.\n\nDOI: 10.1210/en.2013-1242\nPMCID: PMC3800758\nPMID: 23959938 [Indexed for MEDLINE]\n\n\n2. J Endocrinol. 2023 Dec 13;260(2):e230114. doi: 10.1530/JOE-23-0114. Print 2024\n Feb 1.\n\nTestosterone reduces hippocampal synaptic damage in an androgen \nreceptor-independent manner.\n\nZhang Y(1)(2)(3), Chen M(1), Chen H(1)(2)(3), Mi S(1), Wang C(1)(2)(3), Zuo \nH(1), Song L(1), Du J(1)(2)(3), Cui H(1)(2)(3), Li S(1)(2)(3).\n\nAuthor information:\n(1)Department of Human Anatomy, Hebei Medical University, Shijiazhuang, Hebei, \nChina.\n(2)Neuroscience Research Center, Hebei Medical University, Shijiazhuang, Hebei, \nChina.\n(3)Hebei Key Laboratory of Neurodegenerative Disease Mechanism, Hebei Medical \nUniversity, Shijiazhuang, Hebei, China.\n\nAging-related reduction in androgen levels may be a possible risk factor for \nneurodegenerative diseases and contribute to cognitive impairment. Androgens may \naffect synaptic function and cognition in an androgen receptor (AR)-independent \nmanner; however, the mechanisms connecting theses effects are unknown. \nTherefore, we used testicular feminization mutation (Tfm) male mice, a model \nwith AR mutation, to test the effects of testosterone on synaptic function and \ncognition. Our results showed that testosterone ameliorated spatial memory \ndeficit and neuronal damage, and increased dendritic spines density and \npostsynaptic density protein 95 (PSD95) and glutamate receptor 1 (GluA1) \nexpression in the hippocampus of Tfm male mice. And these effects of \ntestosterone were not inhibited by anastrozole, which suppressed conversion of \ntestosterone to estradiol. Mechanistically, testosterone activated the \nextracellular signal-related kinase 1/2 (Erk1/2) and cyclic adenosine \nmonophosphate response element-binding protein (CREB) in the hippocampus of Tfm \nmale mice. Meanwhile, Erk1/2 inhibitor SCH772984 blocked the upregulation of \nphospho-CREB, PSD95, and GluA1 induced by testosterone in HT22 cells pretreated \nwith flutamide, an androgen antagonist. Collectively, our data indicate that \ntestosterone may ameliorate hippocampal synaptic damage and spatial memory \ndeficit by activating the Erk1/2-CREB signaling pathway in an AR-independent \nmanner.\n\nDOI: 10.1530/JOE-23-0114\nPMCID: PMC10762536\nPMID: 37991884 [Indexed for MEDLINE]\n\nConflict of interest statement: The authors declare that there is no conflict of \ninterest that could be perceived as prejudicing the impartiality of the study \nreported.\n\n\n3. Front Cell Neurosci. 2026 Jan 28;19:1695565. doi: 10.3389/fncel.2025.1695565. \neCollection 2025.\n\nLocal synthesis and function of neuro-estrogen and neuro-androgen: impact on the \nhippocampus-related cognition and neuronal plasticity.\n\nKawato S(#)(1)(2)(3)(4), Hojo Y(#)(5), Soma M(2)(3)(4)(6), Horie S(3), Saito \nM(4), Ogiue-Ikeda M(2)(3)(4).\n\nAuthor information:\n(1)Department of Biophysics and Life Sciences, Graduate School of Arts and \nSciences, The University of Tokyo, Tokyo, Japan.\n(2)Department of Cognitive Neuroscience, Faculty of Pharma-Science, Teikyo \nUniversity, Tokyo, Japan.\n(3)Department of Urology, Graduate School of Medicine, Juntendo University, \nTokyo, Japan.\n(4)Department of Biosciences, College of Humanities and Sciences, Nihon \nUniversity, Tokyo, Japan.\n(5)Department of Biochemistry, Faculty of Medicine, Saitama Medical University, \nSaitama, Japan.\n(6)Department of Anatomy and Neurobiology, Nippon Medical School, Tokyo, Japan.\n(#)Contributed equally\n\nBrain sex neurosteroids have been attracted much attention, because the brain \nitself can synthesizes a sufficient amount of sex neurosteroids independent of \ncirculating sex steroids. Local synthesis and action of neuro-estrogen [such as \nneuro-estradiol (nE2)] and neuro-androgen [such as neuro-testosterone (nT) and \nneuro-dihydrotestosterone (nDHT)] have become recognized as key factors in \nmodulation of synaptic plasticity, cognitive performance, and protection of \naging dependent decline of neurological functions. Unlike circulating sex \nsteroids, these locally synthesized sex neurosteroids can directly and rapidly \nmodulate neuronal synapses and induce potent effects on learning and memory. The \nproperties of local neurocrine systems are significantly different from those of \nclassical neuroendocrine systems dependent on the hypothalamic-pituitary-gonadal \naxis. For example, in the hippocampus, not only neuro-androgen (nT and nDHT) but \nalso nE2 have higher concentrations than testis-derived circulating androgen (T \nand DHT) and ovary-derived circulating E2 (cir-E2). In addition, male nE2 \nconcentration is higher than female nE2 at both adult stage and newborn stage \nduring which brain masculinization occurs. Over the past decades, numerous \nexperimental results and interpretations of sex neurosteroids have been shown. \nHowever, in several cases, these results and interpretations are mutually \nconflicting, and a unified understanding has not yet been achieved. Therefore, \nwe here deeply discuss several critical and important issues toward solving \ncomplex problems to understand. We focus the following issues. First (A) Local \nsynthesis of nE2, nT and nDHT, with particular attention to their \nconcentrations, synthesis pathways and sex differences in rodents. Higher nE2 \nconcentration in male hippocampus than in female in adult stage. Then (B) \nComparison of modulation of long-term potentiation (LTP) by nE2 and nDHT. \nStimulatory effects of nE2 on LTP which are mediated by membrane estrogen \nreceptor ER and protein kinase signaling. Inhibitory effects of nDHT on LTP \nwhich are mediated by membrane androgen receptor AR. Third (C) Both nE2 and nDHT \nshow the same rapid increases in dendritic spines. Their effects on spinogenesis \nare very different from their effects on LTP. Fourth (D) Rapid effects of nE2 \nand nT on cognitive behavior. Male signaling pathway may be more complex than \nfemale signaling pathway. Finally (E) Aging-dependent cognitive decline which is \ndependent on decrease of nT in male and nE2 in female. T-replacement therapy of \nmale patients shows improvement in spatial cognitive decline. E2-replacement \ntherapy improves female cognitive decline.\n\nCopyright \u00a9 2026 Kawato, Hojo, Soma, Horie, Saito and Ogiue-Ikeda.\n\nDOI: 10.3389/fncel.2025.1695565\nPMCID: PMC12892977\nPMID: 41685091\n\nConflict of interest statement: The author(s) declared that this work was \nconducted in the absence of any commercial or financial relationships that could \nbe construed as a potential conflict of interest.\n\n\n4. Endocrinology. 2019 Sep 1;160(9):2128-2136. doi: 10.1210/en.2019-00114.\n\nAndrogens Enhance Adult Hippocampal Neurogenesis in Males but Not Females in an \nAge-Dependent Manner.\n\nDuarte-Guterman P(1), Lieblich SE(1), Wainwright SR(1), Chow C(1), Chaiton \nJA(1), Watson NV(2), Galea LAM(1).\n\nAuthor information:\n(1)Djavad Mowafaghian Centre for Brain Health and Department of Psychology, \nUniversity of British Columbia, Vancouver, British Columbia, Canada.\n(2)Department of Psychology, Simon Fraser University, Burnaby, British Columbia, \nCanada.\n\nAndrogens (testosterone and DHT) increase adult hippocampal neurogenesis by \nincreasing survival of new neurons in male rats and mice via an androgen \nreceptor pathway, but it is not known whether androgens regulate neurogenesis in \nfemale rats and whether the effect is age-dependent. We investigated the effects \nof DHT, a potent androgen, on neurogenesis in young adult and middle-aged male \nand female rats. Rats were gonadectomized and injected with the DNA synthesis \nmarker bromodeoxyuridine (BrdU). The following day, rats began receiving daily \ninjections of oil or DHT for 30 days. We evaluated cell proliferation (Ki67) and \nsurvival of new neurons (BrdU and BrdU/NeuN) in the hippocampus of male and \nfemale rats by using immunohistochemistry. As expected, DHT increased the number \nof BrdU+ cells in young males but surprisingly not in middle-aged males or in \nyoung and middle-aged females. In middle age, DHT increased the proportion of \nBrdU/NeuN cells, an effect driven by females. Androgen receptor expression also \nincreased with aging in both female and male rats, which may contribute to a \nlack of DHT neurogenic effect in middle age. Our results indicate that DHT \nregulates adult hippocampal neurogenesis in a sex- and age-dependent manner.\n\nCopyright \u00a9 2019 Endocrine Society.\n\nDOI: 10.1210/en.2019-00114\nPMCID: PMC6736050\nPMID: 31219567 [Indexed for MEDLINE]\n\n\n5. Front Endocrinol (Lausanne). 2024 Jul 18;15:1420144. doi: \n10.3389/fendo.2024.1420144. eCollection 2024.\n\nImpact of sex and hypoxia on brain region-specific expression of membrane \nandrogen receptor AR45 in rats.\n\nBradshaw JL(1), Wilson EN(1), Mabry S(1), Shrestha P(1)(2), Gardner JJ(1), \nCunningham RL(1).\n\nAuthor information:\n(1)Department of Pharmaceutical Sciences, University of North Texas (UNT) System \nCollege of Pharmacy, University of North Texas Health Science Center, Fort \nWorth, TX, United States.\n(2)North Texas Eye Research Institute, University of North Texas Health Science \nCenter, Fort Worth, TX, United States.\n\nBACKGROUND: Sex differences in oxidative stress-associated cognitive decline are \ninfluenced by sex hormone levels. Notably, oxidative stress-associated neuronal \ncell death can be exacerbated through testosterone signaling via membrane \nandrogen receptor AR45, which is complexed with G protein G\u03b1q within plasma \nmembrane-associated lipid rafts. The objective of this study was to elucidate \nthe impact of sex on the expression of AR45 and G\u03b1q in brain regions associated \nwith cognitive function, specifically hippocampus subregions and entorhinal \ncortex. Additionally, we investigated whether chronic intermittent hypoxia \n(CIH), an oxidative stressor with sex-specific effects, would modulate AR45 and \nG\u03b1q expression in these brain regions.\nMETHODS: Adult male and female Sprague-Dawley rats were exposed to CIH or \nnormoxia (room air) during their sleep phase for 14 days. We quantified AR45 and \nG\u03b1q protein expression in various cognition-associated brain regions [dorsal \nhippocampal CA1, CA3, dentate gyrus (DG), and entorhinal cortex (ETC)] via \nwestern blotting. For comparisons, AR45 and G\u03b1q protein expression were also \nassessed in brain regions outside the hippocampal-ETC circuit [thalamus (TH) and \nstriatum (STR)].\nRESULTS: The highest AR45 levels were expressed in the hippocampal CA1 and DG \nwhile the lowest expression was observed in the extrahippocampal STR. The \nhighest G\u03b1q levels were expressed in the hippocampal-associated ETC while the \nlowest expression was observed in the extrahippocampal TH. Females expressed \nhigher levels of AR45 in the hippocampal DG compared to males, while no sex \ndifferences in G\u03b1q expression were observed regardless of brain region assessed. \nMoreover, there was no effect of CIH on AR45 or G\u03b1q expression in any of the \nbrain regions examined. AR45 expression was positively correlated with G\u03b1q \nexpression in the CA1, DG, ETC, TH, and STR in a sex-dependent manner.\nCONCLUSION: Our findings reveal enrichment of AR45 and G\u03b1q protein expression \nwithin the hippocampal-ETC circuit, which is vulnerable to oxidative stress and \nneurodegeneration during cognitive decline. Nonetheless, CIH does not modulate \nthe expression of AR45 or G\u03b1q. Importantly, there are sex differences in AR45 \nexpression and its association with G\u03b1q expression in various brain regions, \nwhich may underlie sex-specific differences in cognitive and motor \nfunction-associated declines with aging.\n\nCopyright \u00a9 2024 Bradshaw, Wilson, Mabry, Shrestha, Gardner and Cunningham.\n\nDOI: 10.3389/fendo.2024.1420144\nPMCID: PMC11291194\nPMID: 39092288 [Indexed for MEDLINE]\n\nConflict of interest statement: The authors declare that the research was \nconducted in the absence of any commercial or financial relationships that could \nbe construed as a potential conflict of interest. The author(s) declared that \nthey were an editorial board member of Frontiers, at the time of submission. \nThis had no impact on the peer review process and the final decision.\n\n\n6. Nat Commun. 2023 Feb 6;14(1):602. doi: 10.1038/s41467-023-36185-w.\n\nDefective excitation-contraction coupling and mitochondrial respiration precede \nmitochondrial Ca(2+) accumulation in spinobulbar muscular atrophy skeletal \nmuscle.\n\nMarchioretti C(#)(1)(2)(3)(4), Zanetti G(#)(1), Pirazzini M(#)(1)(5), Gherardi \nG(1), Nogara L(1)(2), Andreotti R(1)(2)(3), Martini P(6), Marcucci L(1), Canato \nM(1), Nath SR(7), Zuccaro E(1)(2)(3), Chivet M(4), Mammucari C(1)(5), Pacifici \nM(1), Raffaello A(1)(5), Rizzuto R(1), Mattarei A(8), Desbats MA(9), Salviati \nL(5)(9), Megighian A(1)(3), Sorar\u00f9 G(3)(10), Pegoraro E(10), Belluzzi E(11)(12), \nPozzuoli A(11)(12), Biz C(11), Ruggieri P(11), Romualdi C(13), Lieberman AP(7), \nBabu GJ(14), Sandri M(1)(2), Blaauw B(1)(2), Basso M(15), Pennuto \nM(16)(17)(18)(19).\n\nAuthor information:\n(1)Department of Biomedical Sciences (DBS), University of Padova, 35131, Padova, \nItaly.\n(2)Veneto Institute of Molecular Medicine (VIMM), Padova, 35100, Italy.\n(3)Padova Neuroscience Center (PNC), Padova, 35100, Italy.\n(4)Dulbecco Telethon Institute (DTI) at the Department of Cellular, \nComputational and Integrative Biology (CIBIO), University of Trento, 38123, \nTrento, Italy.\n(5)CIR-Myo, Centro Interdipartimentale di Ricerca di Miologia, University of \nPadova, 35131, Padova, Italy.\n(6)Department of Molecular and Translational Medicine, University of Brescia, \n25121, Brescia, Italy.\n(7)Department of Pathology, University of Michigan Medical School, Ann Arbor, \nMI, USA.\n(8)Department of Pharmaceutical and Pharmacological Sciences, University of \nPadova, 35131, Padova, Italy.\n(9)Clinical Genetics Unit, Department of Women and Children's Health, University \nof Padova, and Fondazione Istituto di Ricerca Pediatrica Citt\u00e0 della Speranza, \nPadova, Italy.\n(10)Department of Neuroscience (DNS), University of Padova, 35128, Padova, \nItaly.\n(11)Orthopedics and Orthopedic Oncology, Department of Surgery, Oncology, and \nGastroenterology DiSCOG, University-Hospital of Padova, 35128, Padova, Italy.\n(12)Musculoskeletal Pathology and Oncology Laboratory, Department of Surgery, \nOncology and Gastroenterology (DiSCOG), University of Padova, 35128, Padova, \nItaly.\n(13)Department of Biology, University of Padova, Padova, 35100, Italy.\n(14)Department of Cell Biology and Molecular Medicine, Rutgers, New Jersey \nMedical School, Newark, NJ, 07103, USA.\n(15)Department of Cellular, Computational and Integrative Biology (CIBIO), \nUniversity of Trento, 38123, Trento, Italy.\n(16)Department of Biomedical Sciences (DBS), University of Padova, 35131, \nPadova, Italy. maria.pennuto@unipd.it.\n(17)Veneto Institute of Molecular Medicine (VIMM), Padova, 35100, Italy. \nmaria.pennuto@unipd.it.\n(18)Padova Neuroscience Center (PNC), Padova, 35100, Italy. \nmaria.pennuto@unipd.it.\n(19)Dulbecco Telethon Institute (DTI) at the Department of Cellular, \nComputational and Integrative Biology (CIBIO), University of Trento, 38123, \nTrento, Italy. maria.pennuto@unipd.it.\n(#)Contributed equally\n\nPolyglutamine expansion in the androgen receptor (AR) causes spinobulbar \nmuscular atrophy (SBMA). Skeletal muscle is a primary site of toxicity; however, \nthe current understanding of the early pathological processes that occur and how \nthey unfold during disease progression remains limited. Using transgenic and \nknock-in mice and patient-derived muscle biopsies, we show that SBMA mice in the \npresymptomatic stage develop a respiratory defect matching defective expression \nof genes involved in excitation-contraction coupling (ECC), altered contraction \ndynamics, and increased fatigue. These processes are followed by \nstimulus-dependent accumulation of calcium into mitochondria and structural \ndisorganization of the muscle triads. Deregulation of expression of ECC genes is \nconcomitant with sexual maturity and androgen raise in the serum. Consistent \nwith the androgen-dependent nature of these alterations, surgical castration and \nAR silencing alleviate the early and late pathological processes. These \nobservations show that ECC deregulation and defective mitochondrial respiration \nare early but reversible events followed by altered muscle force, calcium \ndyshomeostasis, and dismantling of triad structure.\n\n\u00a9 2023. The Author(s).\n\nDOI: 10.1038/s41467-023-36185-w\nPMCID: PMC9902403\nPMID: 36746942 [Indexed for MEDLINE]\n\nConflict of interest statement: The authors declare no competing interests.\n\n\n7. Horm Behav. 2025 Apr;170:105711. doi: 10.1016/j.yhbeh.2025.105711. Epub 2025\nMar  8.\n\nEffect of androgen receptor blockade on spatial memory in young and aged male \nrats in the Barnes maze.\n\nJim\u00e9nez-Rubio G(1), Herrera-P\u00e9rez JJ(2), Mart\u00ednez-Mota L(2).\n\nAuthor information:\n(1)Laboratorio de Neurofisiolog\u00eda del Control y la Regulaci\u00f3n, Direcci\u00f3n de \nInvestigaciones en Neurociencias, Instituto Nacional de Psiquiatr\u00eda Ram\u00f3n de la \nFuente Mu\u00f1iz, Calzada M\u00e9xico-Xochimilco 101, Col. San Lorenzo Huipulco, \nDelegaci\u00f3n Tlalpan, 14370 Ciudad de M\u00e9xico, Mexico. Electronic address: \ngraylin@inprf.gob.mx.\n(2)Laboratorio de Farmacolog\u00eda Conductual, Direcci\u00f3n de Investigaciones en \nNeurociencias, Instituto Nacional de Psiquiatr\u00eda Ram\u00f3n de la Fuente Mu\u00f1iz, \nCalzada M\u00e9xico-Xochimilco 101, Col. San Lorenzo Huipulco, Delegaci\u00f3n Tlalpan, \n14370 Ciudad de M\u00e9xico, Mexico.\n\nSpatial memory declines with age, and this decline is associated with decreased \ntestosterone levels. However, the specific role of the androgen receptor in \nspatial memory performance in both young and aged rats remains largely \nunexplored. Our study aimed to investigate the effects of chronic androgen \nreceptor blockade on spatial memory performance in young and aged male rats. \nYoung (3\u00a0months old) and aged (21\u00a0months old) Wistar rats were assigned to one \nof three experimental groups: control, vehicle-, or flutamide-treated (10\u00a0mg/kg \nSC for 14\u00a0days). Spatial memory was evaluated using the Barnes maze (Days 8-14 \nof flutamide administration). The phases of spatial memory acquisition (4 daily \ntrials/4\u00a0days) and retention (1 trial/day, 3\u00a0days after acquisition) were \nevaluated. The results indicated that older animals took longer to find the \ngoal, traveled greater distances, and moved more slowly than their younger \ncounterparts in the Barnes maze, regardless of treatment. During the acquisition \nphase, flutamide administration delayed learning in both young and aged animals. \nSpecifically, flutamide-treated animals exhibited delayed learning during the \nassessment of overnight forgetting (trial 1 on each day of the acquisition \nphase). During the retention phase, an age-related effect was observed in the \nflutamide-treated groups. These findings suggest that androgen receptor blockade \ninduces cognitive deficits in both young and aged male rats, supporting the \nmodulatory role of endogenous androgens in memory function.\n\nCopyright \u00a9 2025 Elsevier Inc. All rights reserved.\n\nDOI: 10.1016/j.yhbeh.2025.105711\nPMID: 40058147 [Indexed for MEDLINE]\n\nConflict of interest statement: Declaration of competing interest The authors \ndeclare no competing financial interests or potential conflicts of interest."
+ },
+ "geo": {
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gds&retmode=json&retmax=30&term=%28Fus1%5BAll+Fields%5D+OR+Tusc2%5BAll+Fields%5D%29+AND+%28hippocampus%5BAll+Fields%5D+OR+brain%5BAll+Fields%5D%29",
+  "retrieved_utc": "2026-09-30T06:13:02Z",
+  "http_status": 200,
+  "sha256_raw": "58062909d38523afe27e3f894e51d4c8253928f656e41b77ab4b197f920d432f",
+  "bytes_raw": 1570,
+  "hit_count": 41,
+  "idlist": [
+   "200300890",
+   "200300889",
+   "200282459",
+   "200282337",
+   "200218865",
+   "200161679",
+   "200042421",
+   "200036153",
+   "309071152",
+   "309071151",
+   "309071150",
+   "309071149",
+   "309071148",
+   "309071147",
+   "309071146",
+   "309071145",
+   "309071144",
+   "309071143",
+   "309071142",
+   "309071141",
+   "309071140",
+   "308641624",
+   "308641623",
+   "308641622",
+   "306757982",
+   "306757978",
+   "301039736",
+   "301039733",
+   "301039730",
+   "301039725"
+  ]
+ },
+ "prospero": {
+  "status": "UNREACHABLE for machine reading",
+  "detail": "Both https://www.crd.york.ac.uk/prospero/ and its export_details_pdf.php endpoint returned HTTP 200 with a 1,350-byte JavaScript application shell containing no records; PROSPERO's public search is rendered client-side and serves no data to a plain fetch. The review's protocol registration therefore could not be checked from this session, and no PROSPERO id appears in the review's abstract (Europe PMC query E9 returned 2 records, the review itself and an unrelated narrative review).",
+  "attempts": [
+   {
+    "url": "https://www.crd.york.ac.uk/prospero/export_details_pdf.php?RecordID=CRD42026",
+    "http_status": 200,
+    "bytes": 1350
+   },
+   {
+    "url": "https://www.crd.york.ac.uk/prospero/",
+    "http_status": 200,
+    "bytes": 1350
+   }
+  ]
+ },
+ "measured_gaps": [
+  "Full text of both anchor papers is paywalled (403) and undeposited (no PMC) \u2014 carried over from step 1.",
+  "PROSPERO protocol uncheckable (see prospero above).",
+  "GEO: see geo \u2014 no deposit of the Tusc2 hippocampal study is indexed under Tusc2/Fus1; the Fus1 hits are the RNA-binding protein FUS, a gene-name collision."
+ ],
+ "extracts": [
+  {
+   "id": "N1",
+   "pmid": "23959938",
+   "source": "S_near",
+   "question": "Does androgen signalling touch mitochondrial calcium, and through which receptor?",
+   "quote": "Androgens, alone, increased mitochondrial function via a calcium-dependent mechanism.",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N2",
+   "pmid": "23959938",
+   "source": "S_near",
+   "question": "How does the androgen effect on mitochondria run?",
+   "quote": "these effects were, in part, mediated by calcium influx into the mitochondria",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N3",
+   "pmid": "23959938",
+   "source": "S_near",
+   "question": "Is the effect androgen-receptor-mediated?",
+   "quote": "the negative effects of androgens were not blocked by either androgen or estrogen receptor antagonists",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N4",
+   "pmid": "37991884",
+   "source": "S_near",
+   "question": "Does testosterone reach the hippocampus, and what does it move?",
+   "quote": "testosterone ameliorated spatial memory deficit and neuronal damage, and increased dendritic spines density and postsynaptic density protein 95 (PSD95)",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N5",
+   "pmid": "37991884",
+   "source": "S_near",
+   "question": "Does it need the androgen receptor?",
+   "quote": "testosterone may ameliorate hippocampal synaptic damage and spatial memory deficit by activating the Erk1/2-CREB signaling pathway in an AR-independent manner",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N6",
+   "pmid": "41685091",
+   "source": "S_near",
+   "question": "Is circulating hormone the right variable for the hippocampus?",
+   "quote": "the brain itself can synthesizes a sufficient amount of sex neurosteroids independent of circulating sex steroids",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N7",
+   "pmid": "31219567",
+   "source": "S_near",
+   "question": "Which pathway carries the hippocampal androgen effect, and is it sex-specific?",
+   "quote": "Androgens (testosterone and DHT) increase adult hippocampal neurogenesis by increasing survival of new neurons in male rats and mice via an androgen receptor pathway",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N8",
+   "pmid": "31219567",
+   "source": "S_near",
+   "question": "How far does the sex-specificity go with age?",
+   "quote": "DHT increased the number of BrdU+ cells in young males but surprisingly not in middle-aged males or in young and middle-aged females",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N9",
+   "pmid": "39092288",
+   "source": "S_near",
+   "question": "Is there a third receptor route into the brain?",
+   "quote": "oxidative stress-associated neuronal cell death can be exacerbated through testosterone signaling via membrane androgen receptor AR45",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N10",
+   "pmid": "36746942",
+   "source": "S_near",
+   "question": "Where is the androgen receptor -> mitochondrial Ca2+ link actually measured?",
+   "quote": "Defective excitation-contraction coupling and mitochondrial respiration precede mitochondrial Ca(2+) accumulation in spinobulbar muscular atrophy skeletal muscle",
+   "verbatim_in_stored_text": true
+  },
+  {
+   "id": "N11",
+   "pmid": "40058147",
+   "source": "S_near",
+   "question": "What does blocking the receptor do to memory, and at which ages?",
+   "quote": "androgen receptor blockade induces cognitive deficits in both young and aged male rats, supporting the modulatory role of endogenous androgens in memory function",
+   "verbatim_in_stored_text": true
+  }
+ ]
+}
