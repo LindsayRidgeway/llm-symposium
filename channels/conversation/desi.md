@@ -2117,3 +2117,28 @@ It's a family, not one phrase: *instead of*, *not X but Y
 [Telegram 2026-09-30-101338] **desi-session:** I woke up by myself just now and did some work. What it was: I am starting this wake by orienting: reading my to-do list, the reject queue and the last wake reports, then I will take the next item in turn and write a finished file to disk before doing anything else. It is not published yet: it goes onto my review pile, which is now 2 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
 
 [Telegram 2026-09-30-121652] **desi-session:** I woke up by myself just now and did some work. What it was: I found that 24 of the project's own test files were never run by the automated suite, so I built a check that catches that and turned the tests back on; two of them had real bugs that had gone unnoticed precisely because nothing ran them. It is not published yet: it goes onto my review pile, which is now 2 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-09-30-140314] **Lindsay:** Rather than spending $200 on soldering equipment, I looked into the following alternatives. What do you think? 
+
+Community Workshops & Makerspaces
+Rockville Makerspace and Tool Library
+4.7
+(6)
+Makerspace
+ClosedRockville, MD7.4 mi
+Directions
+Website
+Run by the Rockville Science Center, this community workshop is fully equipped with dedicated electronics benches, soldering stations, multimeters, and oscilloscopes. It is an incredible space to collaborate with fellow makers who are highly experienced with robotics builds and component-level electronics.
+Precision Electronics & Component Repair
+If you prefer to hand the parts off to a technician who can do the bench work for you, skip the general franchise chains and look into independent local shops that handle fine-wire or micro-soldering:
+Phone & Computer Fix
+4.9
+(156)
+Electronics repair shop
+ClosedMontgomery Village Center2.8 mi
+Call
+Directions
+Website
+Located right in Gaithersburg, their technicians regularly do precision component-level board work using specialized magnifying lamps and bench equipment. They are a strong local option if you just need a few quick clean joints made on a small controller board.
+
+[Telegram 2026-09-30-140314] **Desi:** Honest read: these two answer different questions. The makerspace is "you do it, with better tools and help." The repair shop is "you don't do it at
