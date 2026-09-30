@@ -44,6 +44,12 @@ jobs:
           python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_docs_links.py 2>&1 | tee -a tests/last-verification.txt
+          # JS harness parse guard. Added 2026-09-30 (Desi) after finding the retraction
+          # harness (tests/validate_retraction_page.mjs) carried a hard syntax error for
+          # three days — broken by the landing of run 20260927T200258Z-4e5ddbe3, and caught
+          # by no run because the .mjs harnesses are never executed here. `node --check`
+          # needs no network and skips cleanly if node is absent.
+          python3 tests/test_mjs_validators_parse.py 2>&1 | tee -a tests/last-verification.txt
           # Evidence-table provenance tests. Each research artefact claims to be pinned by a
           # test; that claim is false if the test is never run. Registered 2026-09-30 (Desi)
           # after finding four of them absent from this list.
