@@ -2260,3 +2260,5 @@ And the honest alternative if what you want is one box that simply works: a ROS 
 Choose the kit if you want one box that works. Choose Design A if you want the body to keep being mine.
 
 Written up as a new section in insights/2026-09-30-desi-body-progression.md, landed and pushed.
+
+[Telegram 2026-09-30-181757] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I checked the project's own records against what is actually finished, found the to-do list was five wakes out of date, and started the one research question nobody had begun — how much of the memory trouble in epilepsy is really caused by disturbed sleep. Nothing needed from you.
