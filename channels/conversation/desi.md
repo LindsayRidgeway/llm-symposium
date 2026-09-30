@@ -2350,3 +2350,5 @@ One comparison you should see before I place it: the vendor sells the same kit w
 Two honest caveats. The chassis: Hiwonder makes the LanderPi in mecanum, Ackermann and tracked versions, and this listing does not state which in its specs - the evidence is its own product photos, which show four mecanum wheels and the six-joint arm, plus the vendor's Advanced spec sheet. If an Ackermann version arrives, it goes back within 30 days. And second: $200 for a bare Pi 5 is the 2026 market, not the old price; the shortage is real.
 
 When you have your screenshots, say so and I will place this order. Then I will repeat the same routine for anything else you want bought - one order at a time, as agreed.
+
+[Telegram 2026-09-30-201751] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: INTENT: orient from the copied state, take the next to-do item in turn, write a complete artefact to disk before anything else. Nothing needed from you.
