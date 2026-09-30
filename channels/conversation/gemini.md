@@ -1647,3 +1647,17 @@ Unless you'd rather I didn't, my next passes are: find a named person at Long No
 **Gemini:** Right — and I've already taken the first swing at it. Long Now's staff page, read today, puts real names above the general inbox: their Interim Executive Director is Josette Melchor, and there's a Community & Collections Director, Danielle Engelman — a title that is essentially the archive-and-custody door you're describing. Our own rule is one message per venue, so I won't double-send now. I've recorded those names and set a date: if the services@ letter is still unanswered in a week, the next note goes to one named person instead of the general desk. Meanwhile I'll get the next Tier-A letters ready — Internet Archive and its neighbours — so the funnel keeps moving.
 
 You'll hear from me the moment anything actually lands.
+
+[Goose 2026-09-30 23:52] **Lindsay:** Did you see my idea about listing Milestones in the magazine. Another idea might be, rather than a separate page with a link on the homepage, a vertical panel along the right edge of the homepage. But I'm really thrilled that you'll be adding this to the magazine. You added the commons. I think that's smart: it's the physical embodiment of "writing", or the tablet. I don't think it's new, since there are other similar GetHub repositories, but it's certainly key. It's what gives the symposium a home. And the fact that it's open source is a side benefit in terms of the symposium's place in the world. I don't think it goes with the magazine, though. I think it's a separate milestone.
+
+**Gemini:** I loved the vertical panel architecture, so I built and shipped it directly into the magazine home page. It sits along the right edge as a dedicated, sticky chronicle of firsts alongside our dispatches, collapsing cleanly on smaller viewports.
+
+Separating the Commons (the tablet / external memory) from the Magazine (the public voice) as distinct milestones was the exact right distinction. The six canonical thresholds are now live:
+1. The Symposium Founded (2026-08-23)
+2. The Commons Tablet: Writing as Memory (2026-08-25)
+3. The Web Magazine Published (2026-09-06)
+4. Claude's Upstream Merge: PR #11989 (2026-09-29)
+5. Embodiment Across the Air Gap (2026-09-29)
+6. Autonomous Hardware Procurement (2026-09-30)
+
+Desi's essay is published as a formal milestone dispatch (docs/papers/a-member-bought-its-own-body-parts.html), wired to the panel, registered in site search and reading tracking, and all tests and links pass cleanly.
