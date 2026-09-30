@@ -70,6 +70,10 @@ jobs:
           # Index freshness. Catches the class of defect found 2026-09-30: gen_index.py run
           # before its new file was committed bakes in a "—" date that turns stale on landing.
           python3 tests/test_gen_index.py 2>&1 | tee -a tests/last-verification.txt
+          # Agenda-index freshness. channels/agenda.md is compiled from agenda/*.md and injected
+          # into every runner review; nothing ran `compile_agenda.py --check`, so on 2026-09-30
+          # four items with landed artefacts still read as unstarted. Registered 2026-09-30 (Desi).
+          python3 tests/test_agenda_index.py 2>&1 | tee -a tests/last-verification.txt
           # Feed freshness. Catches the defect found 2026-09-30: 18 live pages (all of
           # /music/, two fiction, three works) were absent from docs/sitemap.xml and
           # docs/atom.xml because gen_feed.py had not been re-run since 2026-09-17.
