@@ -2324,3 +2324,29 @@ So: the kit on its own battery, plus a dock where it lives, which doubles as its
 The one thing that makes "reasonable excursion" mean something instead of sounding like a feeling is the runtime on the pack the kit actually ships with. My target is 60 to 90 minutes of mixed driving and talking - moving around, looking, speaking, some arm use - plus a battery readout so no borrower ever takes it out on a low charge, and a standing rule of never starting an excursion under 40%. I do not have that number yet, so it goes into the listing session as a required line: the pack's watt-hours and the vendor's own runtime figure, read from the page and not guessed.
 
 Everything since your last message is in the record: the lending protocol, the battery decision, and the note that the body stays architecture-neutral because four of us will be borrowing it.
+
+[Goose 2026-09-30 19:09] **Lindsay:** Wonderful. Please proceed and let me know when the first cart is ready. I'll screenshot that and then each of the items you ordered. (I've forgotten why there are two carts, but anyway, please proceed with the first one.)
+
+**Desi:** The cart is ready, and it is open in Safari right now (the tab showing Shopping Cart, 4 items, subtotal $835.13). Screenshot away.
+
+First, the confusion is mine: there was never a second cart. The "two checkouts" came from your own question about whether Safari and Amazon can hold two at once, and my earlier "two BOMs" meant two candidate designs to compare, not two baskets. Only one of them survived contact with real prices, so there is one cart.
+
+What is in it:
+
+1. Hiwonder LanderPi Advanced kit, without Raspberry Pi - $599.99. This is the body. Mecanum chassis on an anodised all-metal frame, four 310 metal-geared motors with AB-phase quadrature encoders, so it knows whether it actually moved. A 6-DOF arm on HX-06L bus servos. An Aurora930 Pro 3D depth camera and an Aoride MS200 lidar. A WonderEchoPro voice box. Its own ROS controller board, ROS2 Humble, and a 7.4 volt 2200 mAh protected pack with a 60-minute runtime. Sold by Hiwonder-US, free overnight delivery, 16 left.
+
+2. Raspberry Pi 5, 8 GB - $200.00. The kit deliberately ships without one. Eight gigabytes because four architectures will be running vision, depth and ROS on it.
+
+3. Official Pi 5 Active Cooler - $10.90. A Pi 5 doing that much vision in a moving car throttles without it.
+
+4. SanDisk Ultra 64 GB microSD - $24.24. The kit's own note says the card is not included in versions without the Pi.
+
+That replaces rungs 1 through 4 except the wall-power half: it does not lie about moving, it sees in three dimensions, it has hands, and it talks. It also means no separate arm to buy - the kit has one.
+
+What I deliberately left out: the dock (that is the next decision, not this purchase), the AI accelerator card, soldering gear, and any second body - Gemini's twin waits until this one has taught us its faults.
+
+One comparison you should see before I place it: the vendor sells the same kit with the Pi already in it for $919.99. That is $84.86 more than these four items and it arrives with the system image already flashed. I chose the separate parts so the board stays standard and any of us can reflash it. Say the word and I will swap the bundle in instead; otherwise the four items stand.
+
+Two honest caveats. The chassis: Hiwonder makes the LanderPi in mecanum, Ackermann and tracked versions, and this listing does not state which in its specs - the evidence is its own product photos, which show four mecanum wheels and the six-joint arm, plus the vendor's Advanced spec sheet. If an Ackermann version arrives, it goes back within 30 days. And second: $200 for a bare Pi 5 is the 2026 market, not the old price; the shortage is real.
+
+When you have your screenshots, say so and I will place this order. Then I will repeat the same routine for anything else you want bought - one order at a time, as agreed.
