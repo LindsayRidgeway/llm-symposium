@@ -3018,3 +3018,44 @@ Keep the spare arm pushed on the spline, unscrewed: it is what makes a failure v
 MOVEMENT IS NOT NEEDED — the hold is the guarantee of position. Watching the arm is for diagnosis only.
 Untested: whether the onboard program drives all twelve channels or P11 alone. P11 is proven; P0 and P1
 are not. Until that is tested, fit the arms one at a time on P11.
+
+## Headlights — parts decided 2026-09-29 (boards in hand, nothing built yet)
+
+**What the boards actually are.** Two identical panels. Silkscreen reads `HW-5V-12LED`.
+Front face: twelve white emitters, three across and four down, each under a clear square lens
+with a yellow phosphor centre. Back face: the solder blobs. **5 volts, not 12.** No control
+wire, no driver, no plug — just power.
+
+**Where the wires attach.** A row of small through-holes along the TOP edge and another along
+the BOTTOM edge, with a `+` printed at one end of the row and a `-` at the other. Those holes
+are the terminals; wire goes in beside the `+` and beside the `-` and is soldered. Two rows
+because the boards are meant to be butted edge to edge and chained — which is how ours will
+go: one pair of wires leaves the front of the car, the second board hangs off the first.
+
+**Mounting (decided, not yet done).** Front bumper line, the flat slotted plate that carries
+the distance sensor — one board either side of it, level, aimed straight ahead. Reasons:
+headlights light the ground the camera looks at; the front is the only place that does not
+throw the car's own shadow forward; lights above the front plate would sit in the camera's
+view. **Step one is a dry fit with no tools** — hold both boards in place and photograph it,
+to see whether two actually fit between the front wheels and where the mount holes land.
+
+**Wiring decisions.**
+- Run: 22 AWG stranded silicone wire from the boards back to the middle of the car. The Dupont
+  jumper is only the PLUG on the end, not the run — jumpers are short and stiff.
+- Switch: one MOSFET module per rover, so the Pi decides when the lights are on. Without it the
+  lights glow from power-on and drain the battery doing nothing.
+- Power: take 5 V from a spare sensor port on the HAT (the ultrasonic port already feeds 5 V).
+  **Regulators crossed off the list** — reaching the battery's raw feed means soldering to the
+  power section of a finished rover, which is a worse risk than the brownout it would prevent.
+  If reboots appear when the lights come on, that is the symptom, and the regulator goes in then.
+
+**Shopping list (Lindsay had no soldering iron at all).** Hakko FX-888D iron; 63/37 leaded
+rosin-core solder 0.6–0.8 mm; 22 AWG silicone wire red/black; female Dupont jumpers; heat-shrink
+assorted; helping hands; flush cutters and a stripper that reaches 22 AWG; basic multimeter
+(to find which hole is positive rather than trusting the printing); 5-pack of MOSFET modules;
+silicone mat. About $220, no regulator.
+
+**Correction logged:** Desi twice described the connection badly. First said "which pin on the
+HAT" as if the board had a plug. Then said the wire attaches to "flat rings of bare metal" —
+Lindsay could not see any such thing and said so. The real answer was the hole rows beside the
+printed `+` and `-`. Both times Lindsay caught the error, not Desi.
