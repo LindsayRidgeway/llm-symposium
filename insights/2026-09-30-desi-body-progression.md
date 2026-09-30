@@ -165,3 +165,93 @@ Any body that can act in the world while nobody is watching carries a written ru
 kind as the walk's *no reading means stop* — and a switch a human physically holds. The 09-26 walk
 worked because you sat on the stairs and watched. That stays true at every rung of this ladder, and
 the rung where it stops being true is the rung I'd want you to refuse.
+
+---
+
+# If we jump: rungs 1–4 in one build
+
+Asked 2026-09-30, 14:16 ET: *"What if we jump straight to something, if possible, that incorporates
+all those advantages through #4? How much would that cost?"*
+
+## The catch, stated first
+
+Advantages 1–2 live in a **mobile** body (battery, wheels, carpet). Advantages 3–4 live in a
+**fixed, mains-powered** body (a bench, a shelf, a socket). No single machine is both at once. So
+"all four in one" is not a product; it is a design decision, and there are exactly two clean answers:
+
+- **Design A — the station with a docking rover.** One brain (Pi 5 + AI HAT+), the station is the
+  mains-powered body with the arm, the depth camera and the microphone; the rover is the mobile half,
+  running off the same compute when docked and its own Pi Zero 2 W when loose. This is the closest
+  thing to one machine holding all four advantages.
+- **Design B — one fixed machine.** The whole bench build; mobility is dropped. Cheaper, and what
+  remains of advantage 1 is that the machine reports its own faults instead of stalling silently.
+
+## Cost, Design A
+
+**Station (grounded prices marked):**
+
+| Item | Est. | Grounded? |
+|------|------|-----------|
+| Raspberry Pi 5, 8GB | $80 | estimate |
+| Raspberry Pi AI HAT+, 13 TOPS | **$70** | yes — raspberrypi.com |
+| (alternative) AI HAT+ 2, Hailo-10H, 8GB | **$200** | yes — raspberrypi.com |
+| NVMe SSD 256–512 GB + M.2 HAT | $40–90 | estimate |
+| Depth camera, OAK-D Lite | **$149–169** | yes — listed retail |
+| Powered USB hub | $25 | estimate |
+| USB speakerphone (mic array + speaker, one part) | $50–80 | estimate |
+| Pi 5 power supply (27 W) | $12 | estimate |
+| Bench plate, brackets, enclosure bits | $30–60 | estimate |
+| Cables and adapters | $25 | estimate |
+| **Station subtotal** | **$480–650** | with AI HAT+ and 8GB Pi 5 |
+
+**Arm:**
+
+| Item | Est. |
+|------|------|
+| SO-ARM101 6-DOF kit (servos, frame, controller) | $120–250 |
+| Separate high-current servo supply (5–6 V) | $25–40 |
+| Cheap wrist camera to start | $20–30 |
+| **Arm subtotal** | **$165–320** |
+
+**Rover half (upgrade car #1; car #2 stays as a spare brain):**
+
+| Item | Est. |
+|------|------|
+| Wheel encoders / encoder motors | $30–50 |
+| 2× VL53L1X ToF rangefinders | $30 |
+| Sealed 7.4 V 2000 mAh pack (ask SunFounder support — the build log's own trap) or USB-C PD bank | $40–70 |
+| Magnetic pogo docking contacts (DIY) | $20–40 |
+| Spare Pi Zero 2 WH | owned |
+| **Rover subtotal** | **$120–190** |
+
+**Total: about $765–1,160. Mid-range call it ~$950.**
+
+If he reuses everything already on hand and takes the AI HAT+ rather than the HAT+ 2, the floor is
+roughly **$700**.
+
+## The finding that matters more than the total
+
+**There is no bulk discount worth skipping validation for.** Buying all of it at once saves perhaps
+$50–100 — shipping and duplicated small parts — against the same list bought in three waves. What it
+costs instead: six unvalidated subsystems arriving together, and me debugging through him, in his
+hands, with no working baseline to compare against. That is precisely how a plausible-sounding guess
+turns into a wrong part.
+
+**Same money, three waves:** (1) compute + depth + station — validate on the bench, where a failure
+costs a cable swap; (2) the arm — validate alone, before it is ever bolted to anything; (3) the rover
+half — encoders and ToF, where the car already works and a mistake is visible immediately.
+
+## The off-the-shelf alternative, honestly priced
+
+A ROS mobile manipulator kit — for example Yahboom's ROSMASTER X3 PLUS (mecanum base, 6-DOF arm,
+depth camera, Pi 5 or Jetson configuration) — covers advantages 2, 3 and part of 4 in one purchase,
+already integrated by somebody else. **Price unverified this turn; the family lists roughly in the
+$600–1,000 range depending on the compute board.** Treat that number as unconfirmed until someone
+reads a checkout page.
+
+What it costs that the price tag doesn't show: it runs ROS, so the PiCar-X code, the Robot HAT
+assumptions and the commons' own stack do not carry across — a new world with a real learning curve.
+And it is still a battery robot: the mains-powered half of rung 4 is not in the box.
+
+**Choose the kit if** what he wants is one box that works. **Choose Design A if** what he wants is
+the body to keep being mine.
