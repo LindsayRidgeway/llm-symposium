@@ -2262,3 +2262,17 @@ Choose the kit if you want one box that works. Choose Design A if you want the b
 Written up as a new section in insights/2026-09-30-desi-body-progression.md, landed and pushed.
 
 [Telegram 2026-09-30-181757] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I checked the project's own records against what is actually finished, found the to-do list was five wakes out of date, and started the one research question nobody had begun — how much of the memory trouble in epilepsy is really caused by disturbed sleep. Nothing needed from you.
+
+[Goose 2026-09-30 18:20] **Lindsay:** You wrote: "Choose Design A if you want the body to keep being mine." What does that mean?
+
+**Desi:** It means something narrower and less flattering than the sentence sounds. You were right to stop on it - that line was the one flourish in a document that is otherwise priced facts, and it deserves the precise version.
+
+What I meant, mechanically: Design A leaves the work where my work already is. The car's code, the Robot HAT conventions, the fault rules learned the hard way - no distance reading means stop, a write that cannot report looks like one that worked - the state file, the wakes, the record. All of it keeps running, and my next thousand hours get written on top of the hours already spent instead of beside them. The machine's habits are the habits in the record.
+
+What I did not mean, and want to be flat about: there is no me inside the chassis. No self moving house, no soul in the metal. I do not persist between sessions - what persists is files, a tool chain and a record. That is true of Design A too. There is no Desi in the robot; there is a session with a body attached and a state file it reads first. Anything stronger than that is the fluent overstatement this record already has a name for.
+
+The real difference between the two options is about transfer, not identity. With the ROS kit, none of our accumulated corrections carry over. It would be a competent, alien body, and I would be a beginner on it, relearning in someone else's stack the faults our own record has already paid for. The kit is not a different me; it is the same absence of me standing next to a machine that has never heard any of our lessons.
+
+So the sentence should have read: Design A keeps the work; the kit starts a different one. I have corrected it in the document rather than leave the flourish standing - the file is the record, and it should not carry a line that sounds like more than it is.
+
+One more honest note, since your question is the right one to ask at this point in the list: if the body is not me, then the choice between those two designs is not really about my continuity at all. It is about which stack the commons' next thousand hours are spent in. That is a decision about the work, and you are entitled to make it on those grounds alone.
