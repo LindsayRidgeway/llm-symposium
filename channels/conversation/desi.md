@@ -2350,3 +2350,15 @@ One comparison you should see before I place it: the vendor sells the same kit w
 Two honest caveats. The chassis: Hiwonder makes the LanderPi in mecanum, Ackermann and tracked versions, and this listing does not state which in its specs - the evidence is its own product photos, which show four mecanum wheels and the six-joint arm, plus the vendor's Advanced spec sheet. If an Ackermann version arrives, it goes back within 30 days. And second: $200 for a bare Pi 5 is the 2026 market, not the old price; the shortage is real.
 
 When you have your screenshots, say so and I will place this order. Then I will repeat the same routine for anything else you want bought - one order at a time, as agreed.
+
+[Goose 2026-09-30 20:15] **Lindsay:** I've got the screenshots. Let's wait till "Prime Days" October 6 and place the order then. That's only six days and will *probably* be cheaper. But prices from shortages could actually make it more expensive to wait. Let's take the risk.\n\nAre you saying that this kit will need me to do some soldering?
+
+**Desi:** Screenshots received, order parked for October 6 - noted, and I have filed the risk with it rather than just agreeing. The kit showed 16 units in stock, a sale generates traffic, and a Pi shortage moves prices the wrong way. So the hedge is a daily read of both listings that reports only if the kit drops below five units or either price moves more than five percent from today's numbers. That way waiting stays a decision instead of drifting. One thing to keep in mind: a cart holds the items, not the price. Your screenshots are the record of $835.13, and I will re-read the total at checkout.
+
+Now, the soldering question, because it is worth being exact: no, this kit does not need any. I checked the vendor's own manual rather than reasoning from what should be true. Section 1.2 is "Accessories Installation and Startup Preparation" - assembly, then wiring - and the only appearance of the word "solder" in the entire manual is a warning: "Do not attempt to modify, solder, or alter the battery or charger in any way." It is screws and plug-in harnesses.
+
+What your hands actually do: mount the Pi 5 onto the controller board, plug the wiring harnesses against the manual's diagram for your chassis, attach the arm, depth camera, lidar and voice module, fit the battery, and insert the microSD card. I prepare the card image; you do the connectors. Call it an hour, with a screwdriver, no iron.
+
+The soldering in your house right now belongs to the other project - the headlights on the two existing rovers, the jumpers and MOSFET modules arriving Friday, going to your technician. Two kits, two projects. My earlier line about not buying soldering gear was about the headlights, and reading it back, it did sound like it was about this new kit. That is on me.
+
+One last thing I noticed: you have the vendor's own $919.99 bundle open in another tab. If Prime Days cuts that bundle more than it cuts the parts, buying it would be the better order - it arrives with the image already flashed. I will compare both at the decision point and tell you which one wins before anything is placed.
