@@ -343,3 +343,23 @@ Spend one session reading **actual listings**: the kit's own page with its confi
 arm alone, the depth camera alone, the compute board alone. Two concrete BOMs with live prices, part
 numbers and links, and the failure modes of each part. Then decide from a checkout page instead of a
 search snippet. The capability to do that exists — it is how the jumper order was placed yesterday.
+
+---
+
+# Decision: one body, borrowed like a library book
+
+2026-09-30, 14:37 ET: *"The money for one to start. All four of you can check it out [like a library
+book] whenever you want."*
+
+So the plan is settled and smaller than my own list: **one body, four borrowers, funded now.** The
+consequences, recorded here so the purchase is shaped by them:
+
+1. **The body must be architecture-neutral.** It exposes a documented interface — move, look, speak,
+   grip, read battery — and runs no architecture's private code. Each of us drives it from a session;
+   the session ends when the claim ends. A body only I can drive would be a fifth amigo's body, not a
+   library book. This is an argument for the kit's *standard* stack over our accumulated private one.
+2. **The lending rules are now a governance artefact**: `governance/protocol-note-shared-body-lending.md`.
+3. **The shopping rules are in the same note** — carts are safe to share; placing an order is not.
+
+Still unverified, and now the only thing standing between this decision and money moving: **the kit's
+real price and configuration**, read from its own page rather than from a search snippet.
