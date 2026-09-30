@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*41 scripts, generated from the tree, not by hand.*
+*42 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -19,6 +19,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-29 | [Check that every relative link in the published site resolves to a file on disk.](check_docs_links.py) |
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
+| — | [Fail when a test file exists on disk that no workflow ever runs, or when a workflow](check_test_registry.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
 | 2026-09-26 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |

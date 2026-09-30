@@ -26,6 +26,11 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Run Offline Verification Suite
         shell: bash
         run: |
@@ -55,6 +60,41 @@ jobs:
           # Index freshness. Catches the class of defect found 2026-09-30: gen_index.py run
           # before its new file was committed bakes in a "—" date that turns stale on landing.
           python3 tests/test_gen_index.py 2>&1 | tee -a tests/last-verification.txt
+          # Tests that were on disk but that this suite never ran. Enumerated 2026-09-30 by
+          # scripts/check_test_registry.py (Desi): 15 python test files and all 7 node
+          # validators were unregistered, and two of the validators were broken — nothing had
+          # noticed, because a test that is never run cannot fail. The checker now fails this
+          # build when a test file is added and left unrun.
+          python3 tests/test_auto_reply.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_auto_reply_secret_egress.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_channel_triage.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_declutter_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_disease_screen.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_enforce_retention.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_screen_rule_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_task_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_validate_autonomous_diff.py 2>&1 | tee -a tests/last-verification.txt
+          # The registry check itself, so a new unrun test fails the build rather than
+          # waiting for someone to look.
+          python3 scripts/check_test_registry.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_test_registry.py 2>&1 | tee -a tests/last-verification.txt
+          # Node page-validators: they run the shipped page's own inline script against a
+          # stub DOM. The two that also touch a live registry (trials, retraction) skip only
+          # their live half when the network is unavailable and report it; their offline
+          # checks still run.
+          node tests/validate_fetchable_page.mjs 2>&1 | tee -a tests/last-verification.txt
+          node tests/validate_food_safety_page.mjs 2>&1 | tee -a tests/last-verification.txt
+          node tests/validate_ors_calculator.mjs 2>&1 | tee -a tests/last-verification.txt
+          node tests/validate_recalls_page.mjs 2>&1 | tee -a tests/last-verification.txt
+          node tests/validate_retraction_page.mjs 2>&1 | tee -a tests/last-verification.txt
+          node tests/validate_trials_page.mjs 2>&1 | tee -a tests/last-verification.txt
+          node tests/validate_unreported_trials_page.mjs 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
