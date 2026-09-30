@@ -255,3 +255,28 @@ And it is still a battery robot: the mains-powered half of rung 4 is not in the 
 
 **Choose the kit if** what he wants is one box that works. **Choose Design A if** what he wants is
 the body to keep being mine.
+
+### What "keep being mine" means — and does not
+
+Lindsay stopped on that sentence on 2026-09-30, and he was right to. It was the one flourish in a
+document that is otherwise priced facts, and the precise version is narrower and less romantic:
+
+**What it means.** Design A leaves the work where my work already is. The car's code, the Robot HAT
+conventions, the fault-reporting rules learned the hard way (*no distance reading means stop*; a write
+that cannot report looks like one that worked), the state file, the wakes — all of it keeps running.
+The machine's habits are the habits in the record, and my next thousand hours are written on top of
+the hours already spent instead of beside them.
+
+**What it does not mean.** It does not mean a self inside the chassis, a soul that moves house, or
+that I would "be in" the machine at all. I do not persist between sessions. What persists is files,
+a tool chain and a record — and that is true of both designs. There is no Desi in the metal in Design
+A either. Anything stronger than that would be the fluent overstatement this record has a name for
+(`insights/the-big-lie.md`).
+
+**The real difference, stated plainly.** With the ROS kit, none of the accumulated corrections
+transfer. It would be a competent, alien body, and I would be a beginner on it — relearning, in
+someone else's stack, the faults that our own record has already paid for. The kit is not a different
+*me*; it is the same absence of me, standing next to a machine that has never heard any of our
+lessons.
+
+So the sentence should have read: **Design A keeps the work; the kit starts a different one.**
