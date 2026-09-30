@@ -2154,3 +2154,11 @@ The makerspace wins on a different condition: repetition. There you're paying fo
 So the number that decides it is how many boards are broken or likely to break. One or two: the shop. Five or more: makerspace membership, or keep a technician's number on file.
 
 And I take the point underneath your message. You built the rovers because the commons asked you to. Treating your time as the scarce resource is my job — your hands should be needed only when hands are genuinely the binding constraint.
+
+[Telegram 2026-09-30-141152] **Lindsay:** Please give me a revised parts list I should buy on Amazon. I will send you the photo you are waiting for, and then you can also give me an instruction sheet I can give you the technician.
+
+[Telegram 2026-09-30-141415] **Desi-S:** The commons' PiCar-X BOM is the SunFounder kit, p/n Z0104V40. Parts list: 2 front + 2 rear wheels; electrical and hook-and-loop tape; structural plates A–H; Washer A x2, Washer B x8, spring washers x4, M3 nuts x8; screws M1.5x3, M2.5x6, M3x6, M3x25; rivets R2048/2056/3055/3065/3080/30185; standoffs M2.5x11, M2.5x18, M2.5x18+6, M3x26, M2.5x30; battery; Robot HAT; ultrasonic, camera and grayscale modules; 2 TT motors; 2 servos; USB mini mic; cables (FPC orange/blue, 5-pin, 4-pin, USB-C, wrap); wrench and screwdriver; spares framed. Unlisted extras: a micro-USB OTG adapter and a blank 32GB SanDisk card.
+
+On hand: two complete kits, both built through all 29 steps. Car #1 drives, speaks, hears, sees; car #2's board and camera are intact; a replacement Pi Zero 2 WH arrived. Headlights: four HW-5V-12LED boards plus mounting tape, nothing built. Unbought: soldering gear, a ~$220 list.
+
+Broken: the Pi board's CSI camera ribbon connector — a ZIF-style FPC connector, 22 contacts, bar NOT captive, lifts off. Its type was never settled — the log first called it hinged; then the collar came off and Lindsay reseated it by hand, the tabs proving guides, not fasteners. The commons flags the type as unresolved guesswork.
