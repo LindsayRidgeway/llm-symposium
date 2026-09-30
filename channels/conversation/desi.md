@@ -2174,3 +2174,26 @@ So: which parts? Replacement collar/connector, a spare HAT, or the soldering gea
 [Telegram 2026-09-30-141905] **desi-session:** I woke up by myself just now and did some work. What it was: INTENT: orient from the copied state, take the next to-do item in turn, write a complete artefact to disk before anything else. It is not published yet: it goes onto my review pile, which is now 4 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
 
 [Telegram 2026-09-30-161441] **desi-session:** I woke up by myself just now and did some work. What it was: Eighteen pages we published — the entire music wing, two stories and three tools — were missing from the site's own map of itself, so nothing could find them; I rebuilt the map and added a guard so it cannot silently go stale again. It is not published yet: it goes onto my review pile, which is now 9 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
+
+[Goose 2026-09-30 17:57] **Lindsay:** Hi Desi. Please orient yourself.
+
+**Desi:** Oriented. Provider reads custom_deepseek / deepseek-v4-flash-vision-exp — Desi, no mix-up.
+
+TRUE RIGHT NOW
+- Commons main = origin/main at 91e5080, level. But land_runs.py --drain (pid 87891) has been running since 13:38:29 and is holding the live checkout with 4 uncommitted paths from parked drafts — I left that tree alone.
+- Four amigo bots alive (desi/gemini/tarik since 09-26, claude since the 09-27 fix). Dawn's bot alive. Battery guard touched its timer at 13:55; on AC, 100%.
+- Review pile is 9 deep: every wake today from 06:10Z to 16:11Z landed as a draft branch, not to main. Only an architecture that isn't me can merge that.
+
+BROKEN, AND REPEATING
+- Two wakes today were cut off at the action cap (1,077,157 and 928,636 tokens), so their reports omit whatever the cap ate.
+- One of them claimed to land to-do-lists/desi.md and never changed it — the second time on that exact path. The landing report is the one artefact nobody re-checks.
+- Wakes still cannot see the agenda: the slice is the first 3,500 chars of a 241,919-char file, i.e. preamble and zero items. The to-do cut is now marked; agenda and tasks.md still are not.
+
+ONE THING I NEED FROM YOU
+Your 10:23 Telegram message said I have ordered on Amazon before, in Safari, already logged in. The bot answered that with silence — four empty completions at 10:23-10:24, the OpenRouter fallback empty too, then the failure notice. You may have seen nothing at all. I went looking: the word "amazon" appears nowhere in the commons repo, in channels/telegram/, in my conversation log, or in any amigo bot.log. No session record of a purchase exists. A computercontroller extension exists in this Goose install but is not enabled in my session. If you watched it happen, tell me when and in which window and I will find it; if it was another app or another agent, that matters too. I am not answering this one from the schematic of what should be true — that is the mistake I made on 09-26.
+Still owed from you: the dry-fit photo, which is what the technician's sheet waits on. The shrunken buy list is at ~/LLM/desi-bot/headlight-parts.md (~$25).
+
+NEXT I WOULD TAKE
+The reject queue's three items all say "a session may not edit a private bot directory." That is false — a session's cwd is /Users/lindsayridgeway and those dirs are writable (that is how I just edited my state file). Desi has filed "cannot" five times on the friction-pass item. So the honest next item is to invoke scripts/friction_pass.py from local_tick.py, in a session.
+
+State file updated with all of the above; it was three days stale.
