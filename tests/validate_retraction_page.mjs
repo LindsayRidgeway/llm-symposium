@@ -207,7 +207,8 @@ check("the renderer tells the reader they gave the notice, not the paper",
 check("the notice's own DOI is not offered as its own target",
   !(mNotice.noticeTargets || []).some(t => t.doi === WAKEFIELD_NOTICE));
 
-// --- 8. the honesty requirements, checked in the shipped HTML ---------------const pageText = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "")
+// --- 8. the honesty requirements, checked in the shipped HTML --------------
+const pageText = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "")
   .replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
 check("states that a citation after retraction is not an endorsement",
   /A citation after a retraction is not an endorsement of the paper/.test(pageText));

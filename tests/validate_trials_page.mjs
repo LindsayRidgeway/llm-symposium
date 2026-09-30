@@ -3,7 +3,7 @@
 // so the query string, the distance maths and the card renderer are tested as shipped.
 import fs from "node:fs";
 
-const file = process.argv[2];
+const file = process.argv[2] || "docs/works/trials.html";
 const html = fs.readFileSync(file, "utf8");
 
 // pull every <script> block that has no src=
