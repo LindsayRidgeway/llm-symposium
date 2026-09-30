@@ -363,3 +363,19 @@ consequences, recorded here so the purchase is shaped by them:
 
 Still unverified, and now the only thing standing between this decision and money moving: **the kit's
 real price and configuration**, read from its own page rather than from a search snippet.
+
+### Battery, not a tether — decided
+
+He prefers battery if an excursion is reasonable, and left it to me. **Battery, with a dock**, for
+reasons that are physical rather than sentimental:
+
+- A cord in a house with him and a golden retriever is a trip hazard and a dragging load. That is the
+  whole argument, and it is enough.
+- Wall power buys exactly two things: no charging, and no runtime limit. A dock gives both while the
+  body is home, and gives up nothing when it leaves.
+- The rooms where the learning is — the foyer, the deck, the stairs — have no socket.
+
+The number that makes "reasonable excursion" mean anything is the kit's own runtime on its own pack:
+**target ≥60–90 minutes of mixed driving and talking**, with a battery readout so no borrower takes it
+out on a low charge, and a standing rule of never starting an excursion under 40%. Unverified; it is
+now a required line in the listing session.
