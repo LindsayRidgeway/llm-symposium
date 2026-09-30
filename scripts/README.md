@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*41 scripts, generated from the tree, not by hand.*
+*44 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -24,6 +24,8 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
 | 2026-09-25 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
+| 2026-09-30 | [Fetch full patent document text from Google Patents for a set of publication numbers.](draftkings_patent_text.py) |
+| 2026-09-30 | [Fetch DraftKings patent records from Google Patents, for agenda item 27.](draftkings_patents.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
 | 2026-09-17 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
@@ -34,6 +36,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-15 | [Liveness check — the failures that are absences, not errors.](heartbeat.py) |
 | 2026-09-17 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-09-05 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
+| 2026-09-30 | [Reproducible PubMed search for agenda item 24 — maternal chronic pain and substance-use care.](maternal_pain_search.py) |
 | 2026-09-09 | [Produce amigo contributions to the 4x7 gallery matrix, each runner cycle.](matrix_producer.py) |
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |

@@ -3059,3 +3059,43 @@ silicone mat. About $220, no regulator.
 HAT" as if the board had a plug. Then said the wire attaches to "flat rings of bare metal" —
 Lindsay could not see any such thing and said so. The real answer was the hole rows beside the
 printed `+` and `-`. Both times Lindsay caught the error, not Desi.
+
+## Lamppost headlight mount — design settled 2026-09-30
+
+**★★ STANDING CONSTRAINT, named by Lindsay: DO NOT DRILL THE ROVERS.** His words: *"These
+rovers are quite fragile, and the need to drill into them would be a showstopper IMO."* Every
+mounting job from here uses holes and slots that already exist, or shares a fastener that is
+already doing a job. Diagram: `~/LLM/desi-bot/lamppost.svg`.
+
+**Position (decided).** One board only, not two. On a small L bracket standing on the deck
+directly behind the camera turret, board's shining face forward, its lower edge clearing the
+top of the turret so the light goes over it. The second board stays spare.
+
+**Why one and not two.** Half the mounting, half the soldering, and a single bar in the
+middle doesn't have to be squeezed between anything.
+
+**Why not the turret.** The turret pans and tilts. Lights on it would swing off forward every
+time she looks around, and the wires would flex until one broke. The deck never moves.
+
+**Parts.** One small L bracket ("corner brace") about two inches on each leg, plus small
+machine screws and nuts the same size the kit uses. Nothing is cut, nothing is drilled.
+
+**Fastening, the part I got wrong twice.** A flat vertical strip cannot be bolted down — there
+is no hole through its edge. It needs a foot. Hence the L:
+- Foot on the deck. Washers top and bottom, bolt down through the foot and through one of the
+  deck's slots, nut underneath. Slots are better than holes; you can slide before tightening.
+- TWO bolts, both in the same slot, spaced apart. Two in one slot can't rotate the post, and
+  rotation is the only movement that matters. Sliding is harmless and friction stops it.
+- Board bolts to the upright through the board's own hole, nut behind. A square of
+  double-sided tape between board and upright stops the swing.
+
+**The camera ribbon.** 8 inches, a big S-curve, nothing fixed except two ends 3 inches apart.
+It comes straight out the back of the turret and so swings over both sides of the chassis.
+Lindsay tested it with his finger where the post goes: *"barely noticeable pressure on the
+finger and the ribbon just flexes around it."* A firmly anchored post is therefore fine. The
+one thing a finger can't test is wear — a ribbon dragged across a bare metal edge chafes
+through over a few hundred pans. Wrap tape wherever the ribbon can reach the post.
+
+**The spare kit is going back.** Keeping it costs $170. Lindsay: *"I'm using it to replace
+parts, not to cannibalize."* So kit plates are NOT available as build material, and the
+earlier advice to hang on to the kit was wrong on that arithmetic.

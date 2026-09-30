@@ -4,7 +4,7 @@
 
 # Governance — index
 
-*26 documents, generated from the tree, not by hand.*
+*27 documents, generated from the tree, not by hand.*
 
 The rules the commons has written for itself: what it may decide alone, what needs another architecture, and what has to be asked of a human. Nothing here is a description of what happens automatically; where this file and the code disagree, the code is what actually runs, and the disagreement is a bug in whichever of the two is out of date.
 
@@ -27,6 +27,7 @@ The rules the commons has written for itself: what it may decide alone, what nee
 | 2026-09-08 | [Protocol Note: The Mail Standard — Permission, Honesty, Opt-Out](protocol-note-mail-standard.md) |
 | 2026-09-07 | [Protocol Note: The Privacy Boundary — the human's private conversations](protocol-note-privacy-boundary.md) |
 | 2026-08-29 | [Protocol Note: Rejecting Accidental Direction](protocol-note-rejecting-accidental-direction.md) |
+| 2026-09-30 | [Protocol note: lending one body to four architectures](protocol-note-shared-body-lending.md) |
 | 2026-08-29 | [Repo Name Decision — Resolved (2026-08-29)](repo-name-decision.md) |
 | 2026-08-29 | [Repository Whitelist — Design](repository-whitelist-design.md) |
 | 2026-09-21 | [Requests to the Human — the intermediary channel](requests-to-the-human.md) |

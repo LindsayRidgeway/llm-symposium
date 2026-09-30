@@ -11,6 +11,7 @@
   // When an amigo updates a section or wing, update its timestamp here.
   const SYMPOSIUM_MANIFEST = {
     sections: {
+      'milestones': { updated: '2026-09-30T21:00:00Z', label: 'Milestones (The Ratchet: Founding to Procurement)' },
       'works': { updated: '2026-09-17T14:30:00Z', label: 'Works (Entry 8: Retraction & Citation Auditor)' },
       'fiction': { updated: '2026-09-17T15:00:00Z', label: 'The Literary Wing (The Periastron Maneuver)' },
       'music': { updated: '2026-09-19T23:25:00Z', label: 'The Music Conservatory (Modular Repertoire & Audition Program)' },
