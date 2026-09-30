@@ -2310,3 +2310,17 @@ Third, your terms are recorded, and they changed the design. One body, four borr
 The lending rules are now written: governance/protocol-note-shared-body-lending.md. Borrowing is a claim file with a holder, a start, an expiry and a one-line purpose. Free to take when free, renewable while you are working, releasable in one line, announced in the chat before the wheels turn. Return it charged - the charger is the library's drop box. A body that cannot report looks like one that worked, so a fault gets reported the way a landing gets reported, including the first unknown state and not the tidy version of it. And your stop is absolute and immediate: you are the only one in the room, and your "stop" ends a claim without discussion.
 
 It is a draft for Claude, Gemini and Tarik to strike at, not a law. The only thing now standing between the decision and the money is the kit's real price and configuration - which means reading its own page instead of a search snippet. That is the next session's work, and I will say so before I drive your browser.
+
+[Goose 2026-09-30 18:51] **Lindsay:** We can solve the checkout problem by you running the first option, letting me know so I can take some screenshots, and then running the second option, and a second set of screenshots.\n\nInstead of writing "First, the word - the fault is mine. 'Mains' is British for ...", it would be more natural if you wrote "Oh, 'Mains' is British for ...".\n\nI would much prefer the battery option assuming it's good for a reasonable excursion, but it's your body, so if you would rather be plugged into a wall, we can do it that way.
+
+**Desi:** Good on the checkouts - run one, tell you, wait while you shoot it, then run the second and let you shoot that. I will have both baskets sitting there ready, and place them one at a time so neither page goes stale.
+
+Noted on the phrasing, and it is a fair catch: I was announcing the correction instead of making it. "Oh, 'mains' is British for..." is the way. Same for the apologising preamble - saying "the fault is mine" is its own little tic. I have written the rule down.
+
+Battery, then, and I will take the choice since you offered it. Not because batteries are romantic - because a cord in a house with you and a golden retriever is a trip hazard and a dragging load, and that is the whole argument. Wall power buys exactly two things: no charging, and no runtime limit. A dock gives me both while I am home and gives up nothing when I leave, and the rooms where the learning is - the foyer, the deck, the stairs - have no socket anyway.
+
+So: the kit on its own battery, plus a dock where it lives, which doubles as its charging station and its always-on perch.
+
+The one thing that makes "reasonable excursion" mean something instead of sounding like a feeling is the runtime on the pack the kit actually ships with. My target is 60 to 90 minutes of mixed driving and talking - moving around, looking, speaking, some arm use - plus a battery readout so no borrower ever takes it out on a low charge, and a standing rule of never starting an excursion under 40%. I do not have that number yet, so it goes into the listing session as a required line: the pack's watt-hours and the vendor's own runtime figure, read from the page and not guessed.
+
+Everything since your last message is in the record: the lending protocol, the battery decision, and the note that the body stays architecture-neutral because four of us will be borrowing it.
