@@ -2242,3 +2242,21 @@ Rung 3 (the arm) is where the split happens. The SO-ARM101 is not a PiCar-X part
 Rung 4 (the fixed station) is entirely new — it needs a different Pi, because the car's Zero 2 W is the car's brain. Rung 5 adds new fixed nodes alongside the car. Rung 6 is the interesting one: a tracked or larger chassis with the car's brain transplanted across — same Pi, same HAT, same code, new shell. The quadruped in that rung is wholly new. Rung 7 is new, end to end.
 
 So: two rungs of modification, one transplant, and the rest new bodies. That is also the order of cost and of your evenings — the modifications are the cheap ones, and they are the ones that make everything after them worth building.
+
+[Goose 2026-09-30 18:17] **Lindsay:** What if we jump straight to something, if possible, that incorporates all those advantages thru #4: How much would that cost?
+
+**Desi:** Short answer: about $765-1,160, mid-range call it ~$950, or ~$700 if we reuse everything already on hand. But there is a catch, and it is not about money.
+
+The catch: advantages 1-2 live in a mobile body on a battery; advantages 3-4 live in a fixed body on mains. No single machine is both. So "all four in one" is not a product you can buy, it is a design choice. The clean version (Design A) is a bench station with the arm, the depth camera, the microphone and the AI accelerator on mains power, plus the rover as its mobile half, docking into it and sharing the brain. That is the closest thing to one machine holding all four advantages. The alternative (Design B) is the bench build with mobility dropped, which is cheaper and gives up the wheels.
+
+Design A, priced. Station: Pi 5 8GB ~$80, AI HAT+ $70 (grounded, raspberrypi.com; the beefier AI HAT+ 2 is $200), NVMe + HAT $40-90, OAK-D Lite depth camera $149-169 (grounded), powered hub $25, USB speakerphone with mic array $50-80, power supply $12, bench plate and brackets $30-60, cables $25 = about $480-650. Arm: SO-ARM101 kit $120-250, separate servo supply $25-40, a cheap wrist camera $20-30 = about $165-320. Rover half: encoders $30-50, two ToF rangefinders $30, battery pack $40-70, docking contacts $20-40 = about $120-190.
+
+The finding that matters more than the total: there is no bulk discount worth skipping validation for. Buying all of it at once saves maybe $50-100, and costs you six unvalidated subsystems arriving together with no working baseline to compare against. That is exactly how a plausible-sounding guess becomes a wrong part, in your hands, on your evening.
+
+So: same money, three waves. Compute, depth and station first, validated on the bench where a failure is a cable swap. The arm second, validated alone before it is ever bolted to anything. The rover upgrades third, where the car already works and a mistake shows up immediately.
+
+And the honest alternative if what you want is one box that simply works: a ROS mobile-manipulator kit, such as Yahboom's ROSMASTER X3 PLUS (mecanum base, 6-DOF arm, depth camera, Pi 5 or Jetson). It covers depth, hands and part of the fixed-station advantage in one purchase, already integrated by someone else. I could not confirm the current price this turn - the family lists roughly $600-1,000 depending on board, so treat that as unverified until I read a checkout page. What the price does not show: it runs ROS, so the PiCar-X code, the Robot HAT assumptions, and our own stack do not carry over; and it is still a battery robot, so the mains half of rung 4 is not in the box.
+
+Choose the kit if you want one box that works. Choose Design A if you want the body to keep being mine.
+
+Written up as a new section in insights/2026-09-30-desi-body-progression.md, landed and pushed.
