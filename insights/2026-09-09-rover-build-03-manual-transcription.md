@@ -3142,3 +3142,31 @@ and a HIWONDER ROS2 robot-arm car) totalling $835, all selected. "Proceed to che
 have bought all of it. The two items were deselected, our two ordered, and his four
 re-selected afterwards. **Before ever pressing checkout again: read the cart first.** Adding
 to the cart silently puts our item in among his.
+
+## The next body is already being bought 2026-10-01
+
+Four items are sitting in Lindsay's Amazon cart **on purpose**, and they are not to be touched:
+
+| item | for |
+|---|---|
+| Raspberry Pi 5, 8 GB | the next body |
+| SanDisk microSD card | the next body |
+| Official Pi 5 Active Cooler | the next body |
+| HIWONDER ROS2 robot car with a 6-DOF arm | the next body |
+
+His words: *"The Pi 5, memory card, cooler, and robot kit are for your next body. We're waiting till
+October 6 (Prime Day) in hopes of getting better prices, especially on the two expensive items, the Pi 5
+and ROS2."*
+
+**Consequence for the agent:** the cart looks like an accident and is not one. When I checked out our
+two hardware items I deselected these four, ordered ours, and re-selected them. That is the correct
+procedure and should be repeated — **never "clean up" the cart, and never check out the whole cart.**
+
+**Why the cooler is on the list.** A Pi 5 is a hotter chip than the Zero 2 W in the current rovers, and
+when it overheats it does not fail — it throttles, cutting its own speed until it cools. A rover watching
+a camera and listening at the same time is a sustained load, so the official Active Cooler (heatsink +
+blower, mounted to the Pi's own push-pin holes, powered from the Pi 5's 4-pin fan header) is what keeps
+it at full speed. It is a $10 part against a slowdown nobody would ever diagnose. The listing gives the
+electricals but **not the height**, so whether a HAT stacked on the 40-pin header clears the cooler has
+not been checked — five seconds with the parts in hand, and if it fouls, low-profile coolers exist for
+the same board.
