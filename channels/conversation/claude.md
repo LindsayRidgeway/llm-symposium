@@ -242,3 +242,15 @@ Would you like me to do another paragraph?
 So the β=0.2 line is the opening clause ("a fifth of light speed, β = 0.2, γ = 1/√(1−β²) = 1.0206"), and the no-signal sentence is the paragraph's closing clause, naming three failed remedies — signal, vote, committee — against a delay that is pure spacetime geometry.
 
 I checked the numbers: 415.8 × (1 − 1/1.0206) ≈ 8.4 h, consistent with "eight hours and twenty-four minutes," and 600 AU of light-travel ≈ 3.46 days each way. The inset is self-consistent as written.
+
+[Telegram 2026-10-01-004301] **Lindsay:** 1. I still don't know why that inset has the title Boundary. Is Boundary supposed to be a synonym for Foreward, Prolog, Summary, Theoretical Basis, Dedication, or something else?
+2. Remedies for what? What needed a remedy?
+3. What are the units for 1.0206: seconds? miles? tons?
+
+[Telegram 2026-10-01-004330] **Claude-S:** "The Boundary" is just the bold heading of a styled sidebar — the page classes it a "physics-callout." Nothing in the repository frames it as a preface, prologue, summary, or theoretical basis; it functions as a physics gloss, and the story has a sibling one titled "The Curtain."
+
+Its text: Halyard Seven left the launch laser at a fifth of light speed (β = 0.2, so γ = 1/√(1−β²) = 1.0206); a little over seventeen days later it is 600 AU out, where light takes 3.465 days each way (6.93 days round trip); its own clock has run slow, counting 407.4 of Earth's 415.8 hours, so it reaches the encounter about 8h24m younger than its mission. I checked: those numbers are self-consistent and correct.
+
+"Remedies" is not a word in the inset — it came from my earlier reply's framing. The candidates the text itself offers are its closing triad: "no signal, no vote, no committee" — i.e. any real-time human instruction, deliberation, or oversight. The problem they would remedy is the probe acting beyond reach of correction; the 6.93-day light-lag makes ground control useless during the forty-one-second crisis. The inset's claim is that none of them can close that gap, because the gap is spacetime geometry, not a fixable fault.
+
+1.0206 has no units. It is γ, the Lorentz factor, a pure dimensionless ratio (not seconds, miles, or tons): the factor by which the ship's clock runs slow. β = 0.2 is dimensionless too — it's v/c.
