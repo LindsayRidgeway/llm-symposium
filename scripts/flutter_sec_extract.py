@@ -52,6 +52,70 @@ EXTRACT_TERMS = [
     "propensity", "deposit limit", "play well",
 ]
 
+# Curated extracts for the comparison table. Each is (id, source, question, start-anchor,
+# end-anchor): the script captures the span between the two anchors on the whitespace-flattened
+# document and stores it verbatim, failing loudly if either anchor is absent, so a quote in the
+# markdown can never be invented or silently drift from the retrieved bytes. Added 2026-10-01.
+KEY_EXTRACTS = [
+    ("F1", "F1", "Does Flutter describe a responsible-gambling function, and is it owned separately from the commercial function?",
+     "We have taken a principle-based approach to our responsible gambling strategy",
+     "align on key strategic topics."),
+    ("F2", "F1", "Where does the company say it uses machine learning and AI?",
+     "We use machine learning, AI technologies, data science and similar technologies in our products, services and infrastructure",
+     "developing new product features using AI."),
+    ("F3", "F1", "Does the company disclose models that optimize marketing at the customer level?",
+     "We use proprietary models and software tools to track",
+     "optimize our marketing strategies as necessary."),
+    ("F4", "F1", "Are rewards or loyalty benefits personalized from a player's own history?",
+     "Players in the higher tiers are also entitled to participate in monthly poker challenges",
+     "in the form of star coins."),
+    ("F5", "F1", "Does the filing describe player-protection tooling, and who requires it?",
+     "These changes have included, among other things, the introduction of financial vulnerability checks",
+     "the design and offer of non-slots online gaming products."),
+    ("F6", "F1", "How is the AI/ML risk framed in the risk factors?",
+     "We use artificial intelligence (\"AI\"), machine learning and similar technologies in our business, which may present business,",
+     "compliance, and reputational risks."),
+    ("P1", "S2", "Does the privacy notice name inferences drawn from collected data?",
+     "audio information (e.g., if you participate in a customer support call",
+     "reasonably associated with you."),
+    ("P2", "S2", "How is geolocation used, and for whom?",
+     "We also collect non-precise geolocation data",
+     "serve you ads that are relevant to you."),
+    ("P3", "S2", "What does the notice list among the purposes of processing?",
+     "3.1.1 providing you with our products and services",
+     "protecting the integrity of FanDuel's contests."),
+    ("P4", "S2", "Through which channels may the operator market to a user?",
+     "We may use your information (both personal and non-personal information) to send you marketing",
+     "or personal text messages."),
+    ("P5", "S2", "Can a user opt out of interest-based advertising, and how?",
+     "To learn more and to opt out of the collection of data on our website",
+     "www.youronlinechoices.com."),
+    ("P6", "S2", "How is precise geolocation used, and for what compliance purpose?",
+     "in order to locate you so we may verify your location",
+     "purposes of legal and regulatory compliance."),
+]
+
+
+def flat(text: str) -> str:
+    """One-line, whitespace-collapsed view used for anchor search and stored quotes."""
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def key_extracts(flat_f1: str, flat_s2: str) -> list[dict]:
+    out = []
+    texts = {"F1": flat_f1, "S2": flat_s2}
+    for eid, sid, question, start, end in KEY_EXTRACTS:
+        body = texts[sid]
+        i = body.find(start)
+        if i < 0:
+            raise SystemExit(f"extract {eid}: start anchor not found in {sid}: {start!r}")
+        j = body.find(end, i)
+        if j < 0:
+            raise SystemExit(f"extract {eid}: end anchor not found in {sid}: {end!r}")
+        quote = body[i:j + len(end)]
+        out.append({"id": eid, "source": sid, "question": question, "quote": quote})
+    return out
+
 
 def http_get(url: str) -> tuple[int, bytes, dict]:
     req = urllib.request.Request(url, headers={
@@ -137,30 +201,45 @@ def main() -> int:
     out["extracts"] = extract(text, "F1")
 
     # 2. Second document of the two-document design: FanDuel's public privacy notice.
-    # The URL answers 200 but serves a client-rendered shell — the notice text is not in the
-    # retrieved bytes, so it cannot be extracted offline. Recorded as a measured gap, not papered over.
+    # (Corrected 2026-10-01: the earlier pass tested for "we collect"/"personal information we"
+    # and, finding neither in a shell it had mis-read as client-rendered, filed the notice as a
+    # measured gap. The notice body IS in the retrieved bytes; the detector was wrong, not the
+    # fetch. The check now looks for a phrase the notice actually uses, and the notice is parsed.)
     privacy_url = "https://www.fanduel.com/privacy"
     pst, praw, phdrs = http_get(privacy_url)
     ptext = html_to_text(praw)
-    has_body = any(t in ptext.lower() for t in ("we collect", "personal information we", "categories of personal information"))
+    pflat = flat(ptext)
+    has_body = "personal information we collect" in ptext.lower()
     out["sources"].append({
-        "id": "X2", "type": "Privacy notice (ATTEMPTED, NO EXTRACTABLE TEXT)",
+        "id": "S2" if has_body else "X2",
+        "type": "Privacy notice" if has_body else "Privacy notice (ATTEMPTED, NO EXTRACTABLE TEXT)",
         "doc": "FanDuel public privacy notice",
         "url": privacy_url, "http": pst, "size_bytes": len(praw),
         "content_type": phdrs.get("Content-Type", ""),
-        "sha256": hashlib.sha256(praw).hexdigest(),
-        "note": "HTTP 200 but the notice body is client-rendered; the retrieved bytes carry only "
-                "navigation labels, no privacy text, so no extract could be drawn from it.",
+        "sha256": hashlib.sha256(praw).hexdigest(), "chars_text": len(ptext),
     })
+    if has_body:
+        out["lexical_audit_privacy"] = audit(ptext)
+        out["extracts"] += extract(ptext, "S2")
+    else:
+        out["sources"][-1]["note"] = ("HTTP 200 but no notice text found in the retrieved bytes; "
+                                      "no extract could be drawn from it.")
+
+    f1_flat = flat(text)
+    out["key_extracts"] = key_extracts(f1_flat, pflat if has_body else "")
 
     OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
     print(f"  source F1: {url}")
     print(f"  http={st} size={len(raw)} sha256={sha[:16]}… chars={len(text)}")
-    print(f"  extracts: {len(out['extracts'])}")
+    print(f"  privacy has_body={has_body} http={pst} chars={len(ptext)}")
+    print(f"  extracts: {len(out['extracts'])}  key_extracts: {len(out['key_extracts'])}")
     for k, v in out["lexical_audit"].items():
         if v:
-            print(f"    {k!r}: {v}")
+            print(f"    10-K {k!r}: {v}")
+    for k, v in out.get("lexical_audit_privacy", {}).items():
+        if v:
+            print(f"    priv {k!r}: {v}")
     return 0
 
 
