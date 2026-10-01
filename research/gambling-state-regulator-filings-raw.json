@@ -1,0 +1,113 @@
+{
+  "artifact": "Agenda item 27: state gaming-regulator filings for the operator responsible-gaming question",
+  "generated_utc": "2026-10-01T18:17:06Z",
+  "jurisdiction": "Massachusetts (Massachusetts Gaming Commission)",
+  "sources": [
+    {
+      "id": "S0",
+      "type": "State regulator filing — sports-wagering licence application (redacted)",
+      "doc": "Crown MA Gaming LLC (d/b/a DraftKings) — Sports Wagering Operator & Vendor Scope of Licensing, Initial Survey, filed with the Massachusetts Gaming Commission (redacted copy released by MGC)",
+      "url": "https://massgaming.com/wp-content/uploads/DraftKings-redacted.pdf",
+      "retrieved_utc": "2026-10-01T18:17:06Z",
+      "http_status": 200,
+      "sha256_pdf": "0794debeff83b1de3c91020f115fa183edacb2703265d9132e4bd7625f1fe221",
+      "bytes_pdf": 1456542,
+      "pages_pdf": 26
+    },
+    {
+      "id": "S1",
+      "type": "State regulator filing — sports-wagering quarterly report",
+      "doc": "Crown MA Gaming — DraftKings, Sports Wagering Quarterly Report, Q3 2023, dated November 27th, 2023 (Massachusetts Gaming Commission)",
+      "url": "https://massgaming.com/wp-content/uploads/DraftKings-Quarterly-Report-2023-Q3.pdf",
+      "retrieved_utc": "2026-10-01T18:17:06Z",
+      "http_status": 200,
+      "sha256_pdf": "e59feabf0b55a17ad631e20b6abc85194f271e3029b524bf938ec82146c7b4d8",
+      "bytes_pdf": 4673694,
+      "pages_pdf": 29
+    },
+    {
+      "id": "S2",
+      "type": "State regulator filing — sports-wagering quarterly report",
+      "doc": "Crown MA Gaming — DraftKings, Sports Wagering Quarterly Report, Q4 2023 (Massachusetts Gaming Commission)",
+      "url": "https://massgaming.com/wp-content/uploads/DraftKings-Quarterly-Report-2023-Q4.pdf",
+      "retrieved_utc": "2026-10-01T18:17:06Z",
+      "http_status": 200,
+      "sha256_pdf": "124a7b6c724e4975ca00c86390ddd7c62bfdd49a7c52c40c1b6178ddc4279ff2",
+      "bytes_pdf": 1894370,
+      "pages_pdf": 29
+    },
+    {
+      "id": "S3",
+      "type": "State regulator filing — sports-wagering quarterly report",
+      "doc": "Crown MA Gaming — DraftKings, Sports Wagering Quarterly Report, Q2 2024 (Massachusetts Gaming Commission)",
+      "url": "https://massgaming.com/wp-content/uploads/DraftKings-Quarterly-Report-2024-Q2.pdf",
+      "retrieved_utc": "2026-10-01T18:17:06Z",
+      "http_status": 200,
+      "sha256_pdf": "3c71595f168b9dfb6385421406671247023da9339662c4e240065d70fcd1c9c6",
+      "bytes_pdf": 1666782,
+      "pages_pdf": 27
+    }
+  ],
+  "extracts": [
+    {
+      "id": "R1",
+      "source": "S3",
+      "question": "Does the operator describe its responsible-gaming interventions as driven by behavioural monitoring — and by which variables?",
+      "quote": "DraftKings' processes are in place to monitor, trigger and intervene with sets of player behaviors including, but not limited to, time on site, losses, Self-Exclusion page touches, number of Cool Offs, canceled withdrawals, low balance, deposit scaling, and handle increase. This data is then leveraged to intervene with potentially problematic gaming behavior via in-app and direct player communications."
+    },
+    {
+      "id": "R2",
+      "source": "S3",
+      "question": "Under what authority are the alerts issued, and how are they delivered?",
+      "quote": "These alerts supplement MGC guidance from 205 CMR 257.02(5) to collect player data in efforts to develop programs and interventions to \"promote responsible gaming and support problem gamblers.\""
+    },
+    {
+      "id": "R3",
+      "source": "S3",
+      "question": "Is the safety surface described as a separate system, or as a product surface alongside commercial ones?",
+      "quote": "Most notably, our new Responsible Gaming Center was launched; the new Center is vastly more accessible and user-friendly, with the goal of creating approachable and easy-to-access RG resources for our players."
+    },
+    {
+      "id": "R4",
+      "source": "S3",
+      "question": "What share of Massachusetts users use each account-limit tool (Q2 2024)?",
+      "quote": "Account Limits Account Limit Tools Percentage of MA Users enrolled (Q2 2024) TIME LIMIT 0.03% DEPOSIT LIMIT 0.35% SPEND LIMIT 0.1% WAGER LIMIT 0.1% COOL OFF 0.49%"
+    },
+    {
+      "id": "R5",
+      "source": "S2",
+      "question": "How is responsible-gaming funding described — one-off or continuous?",
+      "quote": "DraftKings' responsible gaming initiatives are funded throughout the year and are ongoing throughout all quarters."
+    },
+    {
+      "id": "R6",
+      "source": "S1",
+      "question": "What account-limit uptake was reported, and in what format?",
+      "quote": "Account Limit Tools Percentage of MA users enrolled in (as of 11/21/23): Time Limit <.1% Deposit Limit 2.3% Spend Limit 0.13% Wager Limit 0.4% Cool Off 1.4%"
+    },
+    {
+      "id": "R7",
+      "source": "S0",
+      "question": "A1 — Does the licence application the state releases contain any responsible-gaming language?",
+      "quote": "Pursuant to 205 CMR 211.01, this survey must be submitted as part of the application for a Category 1, Category 2, or Category 3 Sports Wagering License and must be submitted as a prerequisite to the submission of the additional application forms."
+    },
+    {
+      "id": "R8",
+      "source": "S0",
+      "question": "A1 — what management-structure attachments does the survey name?",
+      "quote": "Compliance Committee Compliance Plan Other(s) Audit Committee"
+    }
+  ],
+  "lexical_audit": {
+    "redacted-application: \"responsible gaming\"": 0,
+    "Q3-2023: \"time on site\"": 0,
+    "Q4-2023: \"time on site\"": 0,
+    "Q2-2024: \"time on site\"": 1,
+    "Q2-2024: \"handle increase\"": 1,
+    "Q2-2024: \"low balance\"": 1,
+    "all four filings: \"machine learning\"": 0,
+    "all four filings: \"predictive\"": 0,
+    "all four filings: \"propensity\"": 0,
+    "all four filings: \"responsible gaming\"": 15
+  }
+}
