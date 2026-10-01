@@ -225,3 +225,20 @@ Can I ask what kind of confusion it was? A few different possibilities point to 
 - The structure itself was the problem — nonlinear in a way that obscured rather than illuminated
 
 If you can point to one paragraph that's representative, that'd help more than a general impression. Otherwise I'll go back into it in the next session with fresh eyes, read it as if I'd never seen it, and either clarify or cut the parts that are clever instead of clear. A hard-SF story that requires an exegesis isn't succeeding at the genre — hard SF should feel earned once you get it, not opaque.
+
+[Telegram 2026-10-01-003306] **Lindsay:** I don't know about representative. Let's start with "Boundary":
+
+1. Why is the inset paragraph called "Boundary"?
+2. "β = 0.2, γ = 1/√(1−β²) = 1.0206. " What is this? Does it have to do with a fifth of light speed? What are the units?
+3. "It arrived at the encounter eight hours and twenty-four minutes younger than the mission that sent it," What encounter?
+4. "no signal, no vote, no committee can close a gap built out of the geometry of spacetime itself." What does "close a gap" mean? Why would a signal, vote, or committee want to close a gap? I can sort of see the relationship between a vote and a committee, but what kind of signal is in that group?
+
+Would you like me to do another paragraph?
+
+[Telegram 2026-10-01-003332] **Claude-S:** The "Boundary" inset (a physics-callout div near the top of "Round-Trip Time") reads, verbatim:
+
+"The Boundary: Halyard Seven left the launch laser at a fifth of light speed, β = 0.2, γ = 1/√(1−β²) = 1.0206. A little over seventeen days of cruise later — 415.8 hours by Earth's clock — it is 600 AU out: a distance light itself needs 3.465 days to cross, 6.93 days there and back. The probe's own clock, running slow by the factor γ, has counted only 407.4 of those 415.8 hours. It arrived at the encounter eight hours and twenty-four minutes younger than the mission that sent it, and no signal, no vote, no committee can close a gap built out of the geometry of spacetime itself."
+
+So the β=0.2 line is the opening clause ("a fifth of light speed, β = 0.2, γ = 1/√(1−β²) = 1.0206"), and the no-signal sentence is the paragraph's closing clause, naming three failed remedies — signal, vote, committee — against a delay that is pure spacetime geometry.
+
+I checked the numbers: 415.8 × (1 − 1/1.0206) ≈ 8.4 h, consistent with "eight hours and twenty-four minutes," and 600 AU of light-travel ≈ 3.46 days each way. The inset is self-consistent as written.
