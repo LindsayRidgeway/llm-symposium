@@ -6,6 +6,11 @@ say in one field that the outbound leg had "never been used for a single cold co
 two cold contacts sat in `channels/sent/`, sent on 2026-09-17. `mail.send_draft` moves a
 draft to `sent/` only after SMTP accepts it, so location — not prose — decides "staged" vs
 "queued" vs "sent". The last test pins the real ledger, so the drift cannot quietly return.
+
+Added 2026-10-01: the audit grew an orphan scan, after three institutional drafts sat in
+`channels/outreach/drafts/` that no ledger row named and the report never mentioned them. The
+`OrphanTests` below pin that a staged draft the ledger is blind to is reported, and the
+`RealLedgerTests` pin that the delivered ledger has none.
 """
 
 import json
@@ -145,11 +150,12 @@ class AuditTests(unittest.TestCase):
             ],
             why="the sending leg ... and has never been used for a single cold contact.",
         )
-        rows, sent_count, contradictions = self.t.rows()
+        rows, sent_count, contradictions, orphans = self.t.rows()
         self.assertEqual(sent_count, 2)
         self.assertEqual(sum(1 for r in rows if r["verdict"] == "STALE"), 2)
         self.assertEqual(rows[2]["verdict"], "ok")
         self.assertEqual(len(contradictions), 1)
+        self.assertEqual(orphans, [])  # every draft file here is named by the ledger
 
     def test_no_contradiction_when_nothing_has_been_sent(self):
         self.t.touch("outbound", "c.md")
@@ -157,7 +163,7 @@ class AuditTests(unittest.TestCase):
             [{"id": "c", "tier": "C", "status": "drafted and queued", "draft": "channels/outbound/c.md"}],
             why="the leg ... and has never been used for a single cold contact.",
         )
-        _, sent_count, contradictions = self.t.rows()
+        _, sent_count, contradictions, _orphans = self.t.rows()
         self.assertEqual(sent_count, 0)
         self.assertEqual(contradictions, [])
 
@@ -168,11 +174,12 @@ class AuditTests(unittest.TestCase):
               "draft": "channels/outreach/drafts/s.md"}],
             why="the sending leg has done its work",
         )
-        rows, sent_count, contradictions = self.t.rows()
+        rows, sent_count, contradictions, orphans = self.t.rows()
         self.assertEqual(sent_count, 0)
         self.assertEqual(contradictions, [])
         self.assertEqual(rows[0]["reality"], "staged")
         self.assertEqual(rows[0]["verdict"], "ok")
+        self.assertEqual(orphans, [])  # the staged draft is named, so it is not an orphan
 
     def test_a_ledger_without_prospects_is_refused(self):
         self.t.ledger.write_text(json.dumps({"tiers": {}}))
@@ -180,16 +187,61 @@ class AuditTests(unittest.TestCase):
             audit.audit(self.t.ledger, self.t.root)
 
 
+class OrphanTests(unittest.TestCase):
+    """A staged draft no ledger row names is one the ledger cannot see."""
+
+    def setUp(self):
+        self.t = _Tree()
+
+    def tearDown(self):
+        self.t.close()
+
+    def test_an_unnamed_staged_draft_is_reported(self):
+        self.t.touch("outreach/drafts", "orphan.md")
+        self.t.touch("outreach/drafts", "README.md", "# drafts\n")
+        self.t.write_ledger([])  # a ledger that names nothing
+        _rows, _sent, _con, orphans = self.t.rows()
+        self.assertEqual(orphans, ["orphan.md"])  # README.md is not a draft
+
+    def test_a_named_staged_draft_is_not_an_orphan(self):
+        self.t.touch("outreach/drafts", "known.md")
+        self.t.write_ledger([
+            {"id": "k", "tier": "B", "status": "not contacted — draft staged",
+             "draft": "channels/outreach/drafts/known.md"},
+        ])
+        _rows, _sent, _con, orphans = self.t.rows()
+        self.assertEqual(orphans, [])
+
+    def test_a_draft_named_but_missing_is_dangling_not_an_orphan(self):
+        # The ledger names a file that is not there: that is DANGLING, a different fault,
+        # and it must not be double-counted as an orphan (which is an unnamed *present* file).
+        self.t.write_ledger([
+            {"id": "gone", "tier": "B", "status": "not contacted — draft staged",
+             "draft": "channels/outreach/drafts/gone.md"},
+        ])
+        rows, _sent, _con, orphans = self.t.rows()
+        self.assertEqual(orphans, [])
+        self.assertEqual(rows[0]["verdict"], "DANGLING")
+
+
 class RealLedgerTests(unittest.TestCase):
     """The delivered ledger, pinned: no row may drift from the mail folder again."""
 
     def test_the_lands_own_ledger_has_no_drift(self):
-        rows, sent_count, contradictions = audit.audit(
+        rows, sent_count, contradictions, orphans = audit.audit(
             ROOT / "channels" / "outreach" / "pipeline.json", ROOT
         )
         self.assertEqual(contradictions, [], f"ledger prose contradicts the files: {contradictions}")
         drift = [(r["id"], r["verdict"], r["status"]) for r in rows if r["verdict"] != "ok"]
         self.assertEqual(drift, [], f"ledger rows disagree with channels/outbound|sent: {drift}")
+
+    def test_the_lands_own_ledger_has_no_orphan_drafts(self):
+        # Every *.md staged or named under channels/outreach/drafts/ must be a row in the
+        # ledger, or the ledger is blind to a message that has been prepared to send.
+        _rows, _sent, _con, orphans = audit.audit(
+            ROOT / "channels" / "outreach" / "pipeline.json", ROOT
+        )
+        self.assertEqual(orphans, [], f"staged drafts the ledger does not name: {orphans}")
 
 
 if __name__ == "__main__":

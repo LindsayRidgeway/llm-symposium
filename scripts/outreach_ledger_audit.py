@@ -18,9 +18,18 @@ The file's location is the ground truth, and it is not a matter of opinion:
   * in `channels/sent/`     -> transmitted                  (reality: sent)
   * in neither              -> named but lost               (reality: dangling)
 
+The four realities above are keyed off the drafts the *ledger names*. That left the other
+half of the honest-ledger promise unguarded: `channels/outreach/drafts/README.md` says the
+ledger "names each prepared draft in its draft field", but nothing checked it, so a draft
+staged by a run that never touched the ledger was invisible to this audit. That happened on
+2026-10-01 — three institutional drafts (Internet Archive, Software Heritage, and a duplicate
+Long Now) sat in the staged directory and this report still read "staged = 5". So the audit
+now also scans the staged directory and reports every `*.md` no ledger row names as an
+**orphan draft**: a prepared message the ledger is blind to. `README.md` is excluded.
+
 This is a report, not an actor. It changes nothing. With no arguments it prints the table
-and exits 0; with `--check` it still prints everything but exits 1 when any row drifts, so
-a workflow can use it as a gate.
+and exits 0; with `--check` it still prints everything but exits 1 when any row drifts or an
+orphan draft exists, so a workflow can use it as a gate.
 
 Usage:
     python3 scripts/outreach_ledger_audit.py [--check] [--ledger PATH]
@@ -85,7 +94,11 @@ def verdict(reality: str, status: str) -> str:
 
 
 def audit(ledger_path: Path = DEFAULT_LEDGER, repo_root: Path = REPO_ROOT):
-    """Return (rows, sent_count, contradictions). Raises ValueError on a malformed ledger."""
+    """Return (rows, sent_count, contradictions, orphans). Raise ValueError on a malformed ledger.
+
+    `orphans` is the list of staged-draft filenames (`channels/outreach/drafts/*.md`, README
+    excluded) that no ledger row names — prepared messages the ledger is blind to.
+    """
     ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
     if not isinstance(ledger.get("prospects"), list):
         raise ValueError(f"{ledger_path}: no `prospects` list — is this the outreach ledger?")
@@ -110,7 +123,19 @@ def audit(ledger_path: Path = DEFAULT_LEDGER, repo_root: Path = REPO_ROOT):
     sent_count = sum(1 for r in rows if r["reality"] == "sent")
     prose = json.dumps(ledger)
     contradictions = [ph for ph in NO_CONTACT_PHRASES if ph in prose and sent_count > 0]
-    return rows, sent_count, contradictions
+
+    # A staged draft the ledger does not name is one the ledger is blind to. This is the
+    # other half of "the ledger names each prepared draft": the rows above only cover drafts
+    # that are *named*, so a file dropped in the staged directory by a run that never edited
+    # the ledger would otherwise leave no trace here.
+    named = {Path(r["draft"]).name for r in rows if r["draft"]}
+    staged_dir = repo_root / "channels" / "outreach" / "drafts"
+    orphans = sorted(
+        p.name for p in staged_dir.glob("*.md")
+        if p.name != "README.md" and p.name not in named
+    ) if staged_dir.is_dir() else []
+
+    return rows, sent_count, contradictions, orphans
 
 
 def _commit(repo_root: Path) -> str:
@@ -123,7 +148,7 @@ def _commit(repo_root: Path) -> str:
         return "unknown"
 
 
-def format_report(rows, sent_count, contradictions, ledger_path: Path, commit: str, now: str) -> str:
+def format_report(rows, sent_count, contradictions, orphans, ledger_path: Path, commit: str, now: str) -> str:
     lines = [
         f"Outreach ledger audit — {now} — commit {commit}",
         f"ledger: {ledger_path}",
@@ -140,12 +165,17 @@ def format_report(rows, sent_count, contradictions, ledger_path: Path, commit: s
         "",
         f"summary: {len(rows)} prospects; cold contacts in channels/sent/ = {sent_count}; "
         f"staged = {staged}; stale = {stale}; dangling = {dangling}; "
-        f"claims-a-draft-with-none = {nodraft}",
+        f"claims-a-draft-with-none = {nodraft}; orphan drafts = {len(orphans)}",
     ]
     for ph in contradictions:
         lines.append(
             f"CONTRADICTION: ledger prose says {ph!r} but {sent_count} prospect draft(s) "
             f"sit in channels/sent/ — the leg is not unused."
+        )
+    for name in orphans:
+        lines.append(
+            f"ORPHAN DRAFT: channels/outreach/drafts/{name} exists but no ledger row names it — "
+            f"register it in channels/outreach/pipeline.json or withdraw it. The ledger is blind to it."
         )
     return "\n".join(lines)
 
@@ -158,16 +188,18 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
 
     try:
-        rows, sent_count, contradictions = audit(args.ledger)
+        rows, sent_count, contradictions, orphans = audit(args.ledger)
     except (OSError, ValueError, json.JSONDecodeError) as e:
         print(f"outreach_ledger_audit: {e}", file=sys.stderr)
         return 2
 
     now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    print(format_report(rows, sent_count, contradictions, args.ledger,
+    print(format_report(rows, sent_count, contradictions, orphans, args.ledger,
                         _commit(REPO_ROOT), now))
 
-    drift = any(r["verdict"] != "ok" for r in rows) or bool(contradictions)
+    drift = (any(r["verdict"] != "ok" for r in rows)
+             or bool(contradictions)
+             or bool(orphans))
     return 1 if (args.check and drift) else 0
 
 
