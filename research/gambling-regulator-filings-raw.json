@@ -1,0 +1,170 @@
+{
+ "artifact": "Agenda item 27, step 2 - state gaming-regulator filings for the operator's responsible-gaming plan",
+ "generated_utc": "2026-10-01T04:15:47Z",
+ "sources": [
+  {
+   "id": "R1",
+   "type": "regulator",
+   "doc": "Massachusetts Gaming Commission - DraftKings Category 3 License Decision (Final)",
+   "url": "https://massgaming.com/wp-content/uploads/DraftKings-License-Decision-Final.pdf",
+   "retrieved_utc": "2026-10-01T04:15:47Z",
+   "http_status": 200,
+   "sha256": "2f4721713f2c941394280da810c9f8c5be49b868bcdc1a4939ac33e62934b850",
+   "bytes": 293318,
+   "pages": 13,
+   "text_chars": 28310
+  },
+  {
+   "id": "R2",
+   "type": "operator",
+   "doc": "DraftKings Tri-Annual Presentation, October 2025 - April 2026 (filed with MGC)",
+   "url": "https://massgaming.com/wp-content/uploads/DraftKings-2026-1st-TriAnnual-Report.pdf",
+   "retrieved_utc": "2026-10-01T04:15:47Z",
+   "http_status": 200,
+   "sha256": "c0f5da3cf4b7bb78579185b712c9a174ae8c48d0b3d8f9d04eca679fb291571d",
+   "bytes": 7729735,
+   "pages": 33,
+   "text_chars": 17919
+  },
+  {
+   "id": "R3",
+   "type": "operator",
+   "doc": "DraftKings Quarterly Report 2025 Q3 (filed with MGC)",
+   "url": "https://massgaming.com/wp-content/uploads/DraftKings-Quarterly-Report-2025-Q3.pdf",
+   "retrieved_utc": "2026-10-01T04:15:47Z",
+   "http_status": 200,
+   "sha256": "6556e8462b01bd70ec0041b5b780b8502f121efa792e76f8dbfe87eae93ac6bd",
+   "bytes": 2041142,
+   "pages": 28,
+   "text_chars": 12141
+  },
+  {
+   "id": "R4",
+   "type": "regulator",
+   "doc": "Massachusetts Gaming Commission - Responsible Gaming Framework, Version 2.0",
+   "url": "https://massgaming.com/wp-content/uploads/MGC-Responsible-Gaming-Framework-2.0.pdf",
+   "retrieved_utc": "2026-10-01T04:15:47Z",
+   "http_status": 200,
+   "sha256": "cb4bd7309c753723c11b9e112b70b8554b667046c4f68e89a03d890b909f3f40",
+   "bytes": 1900160,
+   "pages": 35,
+   "text_chars": 51741
+  },
+  {
+   "id": "R5",
+   "type": "operator",
+   "doc": "DraftKings - Sports Wagering Operator & Vendor Scope of Licensing, Initial Survey (redacted application, as published)",
+   "url": "https://massgaming.com/wp-content/uploads/DraftKings-redacted.pdf",
+   "retrieved_utc": "2026-10-01T04:15:47Z",
+   "http_status": 200,
+   "sha256": "0794debeff83b1de3c91020f115fa183edacb2703265d9132e4bd7625f1fe221",
+   "bytes": 1456542,
+   "pages": 26,
+   "text_chars": 27992
+  }
+ ],
+ "unreachable": [
+  {
+   "id": "X1",
+   "doc": "DraftKings Responsible Gaming Center (rg.draftkings.com)",
+   "url": "https://rg.draftkings.com/",
+   "http_status": 200,
+   "note": "HTTP 403 to this fetcher; the operator's own RG front door is not machine-readable here. Named because item 27's step 2 seeks the responsible-gaming plan and this is where the operator points players for its tools."
+  }
+ ],
+ "extracts": [
+  {
+   "id": "E1",
+   "source": "R1",
+   "question": "plan",
+   "quote": "DraftKings reported that it employs a five-pillar approach to responsible gaming: (1) training and education; (2) detection and intervention; (3) external engagements and research; (4) marketing and advertising; and (5) platform tools and resources.",
+   "full": "6 of its Application and the Commission found it satisfactory. C. Responsible Gaming DraftKings stated responsible gaming is its top priority. To that end, it utilizes a system-based public health approach and has partnered with the Cambridge Health Alliance. DraftKings reported that it employs a five-pillar approach to responsible gaming: (1) training and education; (2) detection and intervention; (3) external engagements and research; (4) marketing and advertising; and (5) platform tools and resources. This approach includes training all employees from their first day at DraftKings; maintaining responsible gaming resources for employees on DraftKings' intranet; providing an education hub on the DraftKings platform that players can access even if they do not"
+  },
+  {
+   "id": "E2",
+   "source": "R1",
+   "question": "plan",
+   "quote": "Responsible gaming policies DraftKings described its responsible gaming polices on pages 443-459 of its Application and the Commission found it satisfactory.",
+   "full": "ings' ability to offer Sports Wagering in accordance with responsible gaming principles. Overall, there is substantial evidence that DraftKings' proposal in the responsible gaming category meets expectations. SUMMARY OF EVALUATION BY CRITERIA Criteria Finding Responsible gaming policies DraftKings described its responsible gaming polices on pages 443-459 of its Application and the Commission found it satisfactory. Advertising and promotional plans DraftKings abides by the American Gaming Association's marketing code. DraftKings stated if any of its third-party marketing and advertising partners violated its marketing code, DraftKings would take enforcement action up to"
+  },
+  {
+   "id": "E3",
+   "source": "R1",
+   "question": "separation",
+   "quote": "DraftKings's platform is fully vertically integrated, meaning DraftKings owns the entirety of it sports betting platform, from the software to the sportsbook.",
+   "full": "as Black) and 3 identified as women. DraftKings further described its corporate structure on pages 438-440 of its Application and the Commission was satisfied by DraftKings' corporate structure. E. Technology As explained during the January 11, 2023, hearing, DraftKings's platform is fully vertically integrated, meaning DraftKings owns the entirety of it sports betting platform, from the software to the sportsbook. DraftKings represented that is platform is GLI-certified and incorporates Know-Your-Customer and geofencing measures. DraftKings demonstrated its product to the Commission, including account creation, log in, deposits, withdrawal, setting responsible gaming l"
+  },
+  {
+   "id": "E4",
+   "source": "R1",
+   "question": "separation",
+   "quote": "it utilizes a system-based public health approach and has partnered with the Cambridge Health Alliance",
+   "full": "tisfactory. Community engagement DraftKings described its plans for community engagement on pages 406-416 of its Application and the Commission found it satisfactory. C. Responsible Gaming DraftKings stated responsible gaming is its top priority. To that end, it utilizes a system-based public health approach and has partnered with the Cambridge Health Alliance. DraftKings reported that it employs a five-pillar approach to responsible gaming: (1) training and education; (2) detection and intervention; (3) external engagements and research; (4) marketing and advertising; and (5) platform tools and resources. This app"
+  },
+  {
+   "id": "E5",
+   "source": "R4",
+   "question": "separation",
+   "quote": "Each licensee's Responsible Gaming Committee is responsible for continually improving their responsible gaming programs, maintaining compliance to the practices and policies described in their Responsible Gaming Plan, and reporting their findings to MGC.",
+   "full": "SIBLE GAMING FRAMEWORK VERSION 2.0 | MAY 2018 MASSACHUSETTS GAMING COMMISSION | RESPONSIBLE GAMING FRAMEWORK 15 1.1 RESPONSIBLE GAMING COMMITTEE Each gaming licensee should establish a Responsible Gaming Committee comprising members from leadership positions. Each licensee's Responsible Gaming Committee is responsible for continually improving their responsible gaming programs, maintaining compliance to the practices and policies described in their Responsible Gaming Plan, and reporting their findings to MGC. 1.2 RESPONSIBLE GAMING PLAN Each gaming licensee's Responsible Gaming Plan should reflect the strategies outlined in the MGC Responsible Gaming Framework and include detailed practices and procedures for assuring effective implementation by conducting interna"
+  },
+  {
+   "id": "E6",
+   "source": "R4",
+   "question": "separation",
+   "quote": "Each gaming licensee's Responsible Gaming Plan should reflect the strategies outlined in the MGC Responsible Gaming Framework and include detailed practices and procedures for assuring effective implementation by conducting internal audits, surveying employees, and reviewing relevant data on a regular basis.",
+   "full": "ible Gaming Committee is responsible for continually improving their responsible gaming programs, maintaining compliance to the practices and policies described in their Responsible Gaming Plan, and reporting their findings to MGC. 1.2 RESPONSIBLE GAMING PLAN Each gaming licensee's Responsible Gaming Plan should reflect the strategies outlined in the MGC Responsible Gaming Framework and include detailed practices and procedures for assuring effective implementation by conducting internal audits, surveying employees, and reviewing relevant data on a regular basis. Gaming licensee Responsible Gaming Plans should include commitments specific to licensee operations in order to: Provide ongoing education to employees about responsible gaming and their role in promoting a responsible gaming environment, inclusive of the req"
+  },
+  {
+   "id": "E7",
+   "source": "R4",
+   "question": "plan",
+   "quote": "Submit an annual Responsible Gaming Plan progress report according to MGC standards",
+   "full": "ctices and reporting on their accomplishments. To meet these objectives, gaming licensees will: Maintain appropriate records relating to the practices in the Responsible Gaming Framework Provide responsible gaming-related updates to MGC partners, as requested Submit an annual Responsible Gaming Plan progress report according to MGC standards Participate in and cooperate with MGC-sponsored responsible gaming program evaluation research Fully engage in responsible gaming program reviews conducted or sponsored by MGC Utilize evaluation and review findings to strengthen responsible gaming practices M"
+  },
+  {
+   "id": "E8",
+   "source": "R2",
+   "question": "separation",
+   "quote": "All DraftKings players are routed from our platform Self-Exclusion page to Massachusetts state self-exclusion resources.",
+   "full": "S, LIMITS & COOL-OFF UTILIZATION - MA ACTIVE USERS \"PAD\" = \"Paid active days\" : Limits includes active customers (those who had a limit set at any point during the period and also had a paid action during that period. MGC VSE APP EXCLUSIONS ACTIVE LIMIT USAGE All DraftKings players are routed from our platform Self-Exclusion page to Massachusetts state self-exclusion resources. 200 VSEs Oct 2025 - Apr 2026 EVIVE PARTNERSHIP Evive Digital Health gives free access to personalized tools and educational resources so users can be more informed, manage your play, and set their own goals. In October 2025, DraftKings finalized a partnership"
+  },
+  {
+   "id": "E9",
+   "source": "R2",
+   "question": "separation",
+   "quote": "In October 2025, DraftKings finalized a partnership with Evive Digital Health to share Evive resources within its Responsible Gaming Center suite of resources.",
+   "full": "ge to Massachusetts state self-exclusion resources. 200 VSEs Oct 2025 - Apr 2026 EVIVE PARTNERSHIP Evive Digital Health gives free access to personalized tools and educational resources so users can be more informed, manage your play, and set their own goals. In October 2025, DraftKings finalized a partnership with Evive Digital Health to share Evive resources within its Responsible Gaming Center suite of resources. DraftKings Inc., \u00a9 2026 privileged & confidential /10 GAMALYZE x DRAFTKINGS Gamalyze is a quick, card-based game meant to help players discover their decision-making style. Built using science-based insights, Gamalyze tracks how people make decisions during t"
+  },
+  {
+   "id": "E10",
+   "source": "R2",
+   "question": "separation",
+   "quote": "Gamalyze is a quick, card-based game meant to help players discover their decision-making style.",
+   "full": "nd set their own goals. In October 2025, DraftKings finalized a partnership with Evive Digital Health to share Evive resources within its Responsible Gaming Center suite of resources. DraftKings Inc., \u00a9 2026 privileged & confidential /10 GAMALYZE x DRAFTKINGS Gamalyze is a quick, card-based game meant to help players discover their decision-making style. Built using science-based insights, Gamalyze tracks how people make decisions during their play and provides a personalized report on gaming tendencies and helpful tips. O\ufb00ering Gamalyze is yet another tool within the Responsible Gaming Center to promote info"
+  },
+  {
+   "id": "E11",
+   "source": "R3",
+   "question": "separation",
+   "quote": "In celebration of the first-ever HBCU Classic held in Boston, DraftKings' Belonging and Responsible Gaming teams sponsored the inaugural Welcome Reception at the View Boston Rooftop, bringing together 400 guests for an evening of connection and purpose.",
+   "full": "rsations on empowerment and inclusive leadership, marking a powerful step forward in fostering equity and community across the organization. DRAFTKINGS GLOBAL WOMEN'S SUMMIT / 9 DraftKings Inc., \u00a9 2025 privileged & confidential BELONGING & RG IN THE COMMUNITY In celebration of the first-ever HBCU Classic held in Boston, DraftKings' Belonging and Responsible Gaming teams sponsored the inaugural Welcome Reception at the View Boston Rooftop, bringing together 400 guests for an evening of connection and purpose. Set against panoramic city views, the event featured top Boston DJs, hors d'oeuvres, and engaging Responsible Gaming forums. The evening represented DraftKings' commitment to community engagement and Responsible Gaming education, with remarks from Lori Kalani"
+  },
+  {
+   "id": "E12",
+   "source": "R5",
+   "question": "pipeline",
+   "quote": "Sports Wagering Operator & Vendor Scope of Licensing - Initial Survey",
+   "full": "Sports Wagering Operator & Vendor Scope of Licensing - Initial Survey SPORTS WAGERING LICENSE INFORMATION Seeking to apply as: APPLICANT INFORMATION & DESCRIPTION Company Name: D/B/A or Trade Name(s): Corporate HQ Address: (Also include the address of any operation/s in Massachusetts) Point-of-Contact for Licensing Process: (In"
+  }
+ ],
+ "lexical_audit": {
+  "operator filings: responsible gaming": 10,
+  "operator filings: machine learning": 0,
+  "operator filings: algorithm": 0,
+  "operator filings: predictive": 0,
+  "operator filings: risk model": 0,
+  "operator filings: profiling": 0,
+  "MGC framework: risk model": 0
+ }
+}
