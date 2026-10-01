@@ -1,6 +1,6 @@
 {
   "artifact": "Agenda item 27 step (c): second-operator (Flutter/FanDuel) SEC extract",
-  "generated_utc": "2026-10-01T06:15:45Z",
+  "generated_utc": "2026-10-01T12:15:07Z",
   "sources": [
     {
       "id": "F1",
@@ -15,15 +15,15 @@
       "chars_text": 690631
     },
     {
-      "id": "X2",
-      "type": "Privacy notice (ATTEMPTED, NO EXTRACTABLE TEXT)",
+      "id": "S2",
+      "type": "Privacy notice",
       "doc": "FanDuel public privacy notice",
       "url": "https://www.fanduel.com/privacy",
       "http": 200,
       "size_bytes": 41094,
       "content_type": "text/html",
       "sha256": "b48daa833954c10a3ee302d01c130fdcd39f1fc8b8b2696b6ac743e3cc8857b0",
-      "note": "HTTP 200 but the notice body is client-rendered; the retrieved bytes carry only navigation labels, no privacy text, so no extract could be drawn from it."
+      "chars_text": 36644
     }
   ],
   "lexical_audit": {
@@ -936,6 +936,119 @@
         "predict"
       ],
       "text": "Based on this investigation and information currently known at this time, the Group cannot determine or predict the ultimate outcome of this matter or any related claims or reasonably provide an estimate or range of the possible outcome or loss, if any, though the Group does not expect that this incident will have a material impact on our operations or financial results."
+    },
+    {
+      "source": "S2",
+      "terms": [
+        "personaliz"
+      ],
+      "text": "The Way FanDuel Uses Your Personal Information 3.1 We use your personal information to operate, maintain, and provide to you the features and functionality of the Services, including but not limited to the following: 3.1.1 providing you with our products and services, including our games; 3.1.2 processing and responding to enquiries; 3.1.3 personalizing your use of the Services, 3.1.4 alerting you to new features, special events, products and services, or certain third-party products or services in which we think you will be interested; 3.1.5 enforcing the legal terms that govern your use of the Service; and 3.1.6 investigating and protecting the integrity of FanDuel's contests. 3.2 We may use your information (both personal and non-personal information) to send you marketing and advertising content, including sending you advertising through multiple channels, such as direct mail, email, push notifications display media, and personal text messages."
+    },
+    {
+      "source": "S2",
+      "terms": [
+        "personaliz"
+      ],
+      "text": "We may send you advertising or content regarding our products and services, or products and services that we market on behalf of another company, such as a sports team, a sports venue, or other entity. 3.3 We may use your information to communicate with you about: 3.3.1 our products and services in which you may be interested provided that you have not requested otherwise; 3.3.2 newsletters and information for which you have signed up; and 3.3.3 non-marketing or administrative purposes (such as notifying you of major changes to the Service or for customer service purposes). 3.3 We use your information to improve the quality and design of our Service and to create new features, promotions, functionality, and services such as by storing, tracking, and analyzing user preferences and trends. 3.4 We also use cookies, clear gifs, log file information, and mobile app information such as device identifiers for purposes such as (a) remembering information so that you will not have to re-enter it during your visit or the next time you visit our Service; (b) providing custom, personalized content and information; (c) monitoring the effectiveness of our marketing campaigns; (d) monitoring aggregate metrics such as total number of visitors, pages viewed, etc.; and (e) tracking your entries, submissions, and status in promotions, sweepstakes, and contests."
+    }
+  ],
+  "lexical_audit_privacy": {
+    "responsible gaming": 0,
+    "responsible gambling": 0,
+    "problem gaming": 0,
+    "problem gambling": 0,
+    "self-exclusion": 0,
+    "self exclusion": 0,
+    "deposit limit": 0,
+    "reality check": 0,
+    "affordability": 0,
+    "safer gambling": 0,
+    "player safety": 0,
+    "machine learning": 0,
+    "artificial intelligence": 0,
+    "personaliz": 2,
+    "vip": 0,
+    "algorithm": 0,
+    "predictive model": 0,
+    "risk model": 0,
+    "retention": 0,
+    "reactivation": 0,
+    "monetization": 0,
+    "monetisation": 0,
+    "player protection": 0
+  },
+  "key_extracts": [
+    {
+      "id": "F1",
+      "source": "F1",
+      "question": "Does Flutter describe a responsible-gambling function, and is it owned separately from the commercial function?",
+      "quote": "We have taken a principle-based approach to our responsible gambling strategy (“Play Well”), which we launched in March 2021. Similar to our commercial strategy, each segment has ownership of their responsible gambling strategy (including policy and process) that aligns with their regulatory obligations and our Play Well principles. The Board Risk and Sustainability Committee holds specific meetings dedicated to responsible gambling at regular intervals throughout the year. We also have a global Play Well working group who also meet regularly to share best practice and align on key strategic topics."
+    },
+    {
+      "id": "F2",
+      "source": "F1",
+      "question": "Where does the company say it uses machine learning and AI?",
+      "quote": "We use machine learning, AI technologies, data science and similar technologies in our products, services and infrastructure, and we are making investments in expanding our AI capabilities, including ongoing deployment and improvement of existing machine learning and AI technologies, as well as developing new product features using AI."
+    },
+    {
+      "id": "F3",
+      "source": "F1",
+      "question": "Does the company disclose models that optimize marketing at the customer level?",
+      "quote": "We use proprietary models and software tools to track the efficacy of these marketing campaigns in real-time, giving us the ability to constantly evaluate and optimize our marketing strategies as necessary."
+    },
+    {
+      "id": "F4",
+      "source": "F1",
+      "question": "Are rewards or loyalty benefits personalized from a player's own history?",
+      "quote": "Players in the higher tiers are also entitled to participate in monthly poker challenges with the points targets and rewards personalized based on the players playing history in the form of star coins."
+    },
+    {
+      "id": "F5",
+      "source": "F1",
+      "question": "Does the filing describe player-protection tooling, and who requires it?",
+      "quote": "These changes have included, among other things, the introduction of financial vulnerability checks, mandatory customer prompts for deposit limits, restrictions on promotional incentives, changes to direct marketing consents and modifications to the design and offer of non-slots online gaming products."
+    },
+    {
+      "id": "F6",
+      "source": "F1",
+      "question": "How is the AI/ML risk framed in the risk factors?",
+      "quote": "We use artificial intelligence (“AI”), machine learning and similar technologies in our business, which may present business, compliance, and reputational risks."
+    },
+    {
+      "id": "P1",
+      "source": "S2",
+      "question": "Does the privacy notice name inferences drawn from collected data?",
+      "quote": "audio information (e.g., if you participate in a customer support call and do not opt out of call recording); in certain circumstances, information used to manage potential fraud or legal risk (such as employment status and criminal history); inference data about you; and other information that identifies or can be reasonably associated with you."
+    },
+    {
+      "id": "P2",
+      "source": "S2",
+      "question": "How is geolocation used, and for whom?",
+      "quote": "We also collect non-precise geolocation data (i.e., the city and state in which your device is located based on its IP address). This non-precise geolocation data allows us to customize your experience, give you access to content that varies based on your general location, and serve you ads that are relevant to you."
+    },
+    {
+      "id": "P3",
+      "source": "S2",
+      "question": "What does the notice list among the purposes of processing?",
+      "quote": "3.1.1 providing you with our products and services, including our games; 3.1.2 processing and responding to enquiries; 3.1.3 personalizing your use of the Services, 3.1.4 alerting you to new features, special events, products and services, or certain third-party products or services in which we think you will be interested; 3.1.5 enforcing the legal terms that govern your use of the Service; and 3.1.6 investigating and protecting the integrity of FanDuel's contests."
+    },
+    {
+      "id": "P4",
+      "source": "S2",
+      "question": "Through which channels may the operator market to a user?",
+      "quote": "We may use your information (both personal and non-personal information) to send you marketing and advertising content, including sending you advertising through multiple channels, such as direct mail, email, push notifications display media, and personal text messages."
+    },
+    {
+      "id": "P5",
+      "source": "S2",
+      "question": "Can a user opt out of interest-based advertising, and how?",
+      "quote": "To learn more and to opt out of the collection of data on our website by third parties (including those described above) for interest-based advertising purposes, please visit www.aboutads.info/choices or www.youronlinechoices.com"
+    },
+    {
+      "id": "P6",
+      "source": "S2",
+      "question": "How is precise geolocation used, and for what compliance purpose?",
+      "quote": "in order to locate you so we may verify your location, process payments, perform analytics, deliver you relevant content and ads based on your location, share your location with our vendors as part of the location-based services we offer, and for purposes of legal and regulatory compliance."
     }
   ]
 }
