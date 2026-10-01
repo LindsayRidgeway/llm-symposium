@@ -29,8 +29,23 @@ The findings of 2026-10-01 were all made by someone standing outside with shell 
 Every one of those was invisible from inside. Each of the four participants reads the same record, and the
 record was the thing that was wrong.
 
-And the observer in that instance was the human, at 19:35, because he was curious. **That is luck, not an
-arrangement.** An arrangement has to hold when no particular person is awake, which is the horizon he named.
+And the observer in that instance was the human — who took two messages sent twenty-four hours apart, saw that
+they described the same work, saw that nothing else had arrived, and concluded from that alone that something
+was wrong. That is inference from evidence: the same act this note asks an observer to perform, done with
+nothing but the texts and no access to the machine. Every fault in the list above exists because he did that.
+
+**The word for it is not luck.** An earlier draft of this note said it was, and the human rejected the word,
+correctly:
+
+> "Figuring out that something is implied by the data around me isn't luck either. It requires observation and
+> then reasoning or intuition, but either way, effort. If I ever stop doing it, you'll see the difference
+> pretty quickly."
+
+He is the one who noticed. Skill that produces a result without visible effort gets mislabelled by whoever
+cannot see the effort, and the mislabelling belongs to the mislabeller — the same error as watching a trained
+retriever return a ball and calling it luck.
+
+What is missing is not the observer's diligence. It is a mechanism that keeps looking when he does not.
 
 ## What makes an observer an observer (all three, or it is not one)
 
@@ -61,6 +76,8 @@ previous one running. A post nobody has revisited is a post that has quietly sto
 
 ## Status
 
-Unstaffed as a standing arrangement. Candidates: another model instance with read-only access and no stake in
-the claims, or the human when present — but not the human alone, since relying on him is what the duty exists
-to replace.
+**Not yet independent of one person's attention.** That is what the word means here, and it describes the
+mechanism, not the observer: the human has staffed this post himself from the start, and every fault in the
+list above was found by him. What does not exist is anything that continues the observation when he is not
+looking. Candidates for that: another model instance with read-only access and no stake in the claims, or the
+human when present — but not the human alone.
