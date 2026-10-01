@@ -3099,3 +3099,46 @@ through over a few hundred pans. Wrap tape wherever the ribbon can reach the pos
 **The spare kit is going back.** Keeping it costs $170. Lindsay: *"I'm using it to replace
 parts, not to cannibalize."* So kit plates are NOT available as build material, and the
 earlier advice to hang on to the kit was wrong on that arithmetic.
+
+## Bracket and screws ORDERED 2026-10-01 (Desi, in Lindsay's Safari)
+
+Lindsay's suggestion, and it was a good one: *"Amazon sells hardware, including aluminum
+L-brackets in various sizes… May I suggest that you select what we need on Amazon and purchase
+it, instead of me trying to find the right items in a hardware store and likely getting the
+wrong things?"* The hardware-store trip is off the table.
+
+**Order 112-1460383-9219458**, placed 2026-10-01, **$17.47** ($16.48 + $0.99 tax),
+free shipping, Prime Visa 7770, Gaithersburg. Arriving **tomorrow, Friday 2 October** —
+the same day the jumper wires and MOSFET modules arrive.
+
+| item | why this one | price |
+|---|---|---|
+| **L Brackets 3" x 3" 304 stainless, 4 pcs** (ASIN B07MK62RSK) | 80 mm legs, 20 mm wide, 3 mm thick, mounting holes 5.5 mm | $9.49 |
+| **Deohsyly 641-pc machine screw kit, M2/M2.5/M3/M4/M5, Phillips pan head, 304 stainless, with nuts and separate flat washers** (ASIN B0G24N77QC) | covers every screw size the deck slot might want, and the washers are LOOSE, not fused to the screws | $6.99 |
+
+**Two choices worth recording, because both were made against a plan I had already written.**
+
+1. **3 inches, not 2.** The original design said a 2-inch corner brace. The upright's only job
+   is to be tall enough that the board's lower edge clears the top of the turret — and how tall
+   the turret is, I cannot measure from here. A 3-inch upright is adjustable: the board bolts at
+   any height along it, and if the post turns out taller than needed the board simply sits
+   higher, which is harmless. A 2-inch upright, if too short, is a wrong part and another day.
+   Longer can be corrected by where we bolt; shorter cannot be corrected at all.
+
+2. **Loose washers, not fused.** Half the screw kits on Amazon fuse the washer to the screw
+   ("All-in-One Design… the washers cannot be removed or repositioned"). That is exactly the
+   wrong thing here: the bracket's hole is 5.5 mm, wider than any screw small enough to pass
+   through the deck's slot, so the washer is what bridges the gap. A fused washer-bolt is one
+   fixed diameter with no choice. Caught this on the checkout page — the first kit I picked
+   turned out to be the fused kind, and I swapped it before placing the order.
+
+**Nothing was asked of Lindsay to make either choice.** The screw kit spans M2 through M5
+precisely so that the deck slot's width never has to be measured by hand: whichever screw fits,
+fits. The washer count and the M4/M5 sizes are the hedge against being wrong.
+
+**A caution for next time — his cart is not empty.** When I went to check out, the cart held
+four of Lindsay's own items (a Raspberry Pi 5 8 GB, a SanDisk microSD, a Pi 5 active cooler,
+and a HIWONDER ROS2 robot-arm car) totalling $835, all selected. "Proceed to checkout" would
+have bought all of it. The two items were deselected, our two ordered, and his four
+re-selected afterwards. **Before ever pressing checkout again: read the cart first.** Adding
+to the cart silently puts our item in among his.
