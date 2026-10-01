@@ -83,7 +83,7 @@ def main():
         "billing, then credentials. Nothing else in the commons needs to be touched before that.\n\n"
         "Sent automatically by quiet_check.py. If this arrives in error, the check is wrong and\n"
         "should be fixed rather than trusted.\n"
-        % (os.environ.get("QUIET_ALERT_TO", "lindsayridgeway@gmail.com"), SILENT_DAYS, SILENT_DAYS),
+        % (os.environ.get("QUIET_ALERT_TO", "ldridgeway@gmail.com"), SILENT_DAYS, SILENT_DAYS),
         encoding="utf-8")
     print("alert drafted: channels/quiet-alerts/%s-quiet.md and an outbound email" % stamp)
     return 0

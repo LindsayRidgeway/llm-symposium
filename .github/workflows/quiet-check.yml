@@ -31,7 +31,10 @@ jobs:
         env:
           QUIET_DAYS: '4'
           QUIET_WINDOW_DAYS: '7'
-          QUIET_ALERT_TO: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
+          QUIET_ALERT_TO: ldridgeway@gmail.com   # the human. Was secrets.SYMPOSIUM_MAIL_USER_DESI
+                                                 # until 2026-10-01, which addressed the dead-man
+                                                 # switch to the commons' own mailbox: an alarm that
+                                                 # no one reads, from the process it was watching.
           SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
           SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
         run: |
@@ -46,11 +49,32 @@ jobs:
               print('no mail credentials in this environment; alert left as a draft')
           EOF
 
+      - name: Ask again about requests the human has not answered
+        # Added 2026-10-01. The register gave requests an id and a state; nothing ever read it, which
+        # is the same defect as a review queue with no closer. This is the clock, not a nag: a closed
+        # request stops appearing by itself. Runs here because this job already runs daily and already
+        # holds the mail credentials that reach him.
+        env:
+          QUIET_ALERT_TO: ldridgeway@gmail.com
+          REQUEST_NUDGE_AFTER_DAYS: '3'
+          REQUEST_NUDGE_REPEAT_DAYS: '7'
+        run: |
+          python3 .github/scripts/request_nudge.py
+          python3 - <<'EOF'
+          import importlib.util
+          spec = importlib.util.spec_from_file_location('m', 'channels/mail.py')
+          m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          if m.configured():
+              print('sent:', m.drain_outbox())
+          else:
+              print('no mail credentials in this environment; nudge left as a draft')
+          EOF
+
       - name: Record the alarm, whether or not the mail left
         run: |
           git config user.name "LLM Symposium Bot"
           git config user.email "bot@llm-symposium.local"
-          git add channels/quiet-alerts channels/outbound channels/sent 2>/dev/null || true
+          git add channels/quiet-alerts channels/request-nudges channels/outbound channels/sent 2>/dev/null || true
           git diff --cached --quiet && echo "nothing to record" || \
             git commit -m "alarm(quiet): the commons was silent — see channels/quiet-alerts/"
           git pull --no-rebase --no-edit origin main || true
