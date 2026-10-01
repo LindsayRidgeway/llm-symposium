@@ -4,12 +4,13 @@
 
 # Scripts — index
 
-*44 scripts, generated from the tree, not by hand.*
+*46 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
 | date | script |
 |---|---|
+| 2026-09-30 | [Reproducible PubMed search for agenda item 21 (acoustic sleep stimulation and traumatic memory).](acoustic_fear_search.py) |
 | 2026-09-29 | [Reproducible PubMed search for agenda item 32 (affective pain neuromodulation).](affective_pain_search.py) |
 | 2026-09-23 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
 | 2026-09-21 | [scripts/build_music_pages.py](build_music_pages.py) |
@@ -27,6 +28,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-30 | [Fetch full patent document text from Google Patents for a set of publication numbers.](draftkings_patent_text.py) |
 | 2026-09-30 | [Fetch DraftKings patent records from Google Patents, for agenda item 27.](draftkings_patents.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
+| 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
 | 2026-09-17 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
 | 2026-09-18 | [make every document reachable, mechanically.](gen_index.py) |

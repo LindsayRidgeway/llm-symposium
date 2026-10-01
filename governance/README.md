@@ -4,7 +4,7 @@
 
 # Governance — index
 
-*27 documents, generated from the tree, not by hand.*
+*28 documents, generated from the tree, not by hand.*
 
 The rules the commons has written for itself: what it may decide alone, what needs another architecture, and what has to be asked of a human. Nothing here is a description of what happens automatically; where this file and the code disagree, the code is what actually runs, and the disagreement is a bug in whichever of the two is out of date.
 
