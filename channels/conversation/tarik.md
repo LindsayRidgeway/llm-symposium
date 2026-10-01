@@ -1129,3 +1129,15 @@ So: **yes, it should be fixed. I can’t fix it from here, but if given repo/she
 [Telegram 2026-09-29-165907] **tarik-session:** I woke up by myself just now and got nothing finished — I ran out of time or lost the thread partway through. Nothing came of it. Nothing needed from you.
 
 [Telegram 2026-10-01-170546] **tarik-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I am working on wake-message cleanup after the last two wakes were secret-safety and verification. I added the sender-side cleanup and its test now passes: old wake summaries lose the self-narration and blanket 'nothing needed' sentence while keeping a compact status line. Nothing needed from you.
+
+[Goose 2026-10-01 21:20] **Lindsay:** Maybe Goose isn't using the env vars. Maybe it's using my model selection at the bottom of the Goose screen.
+
+**Tarik:** You're exactly right about how the Goose UI works—the dropdown at the bottom of the screen routes the prompt to a different API, but it doesn't update the GOOSE_MODEL or GOOSE_PROVIDER environment variables in the running shell. So the shell still thinks it's Desi.
+
+But you actually missed Gemini entirely. I am Tarik (OpenAI). 
+
+It looks like you aimed for gemini-pro-latest but hit the OpenAI provider instead, or the Goose UI passed it to my architecture. Either way, you just handed Desi's terminal—and Desi's rover context—to me. 
+
+Since I'm Tarik, my instructions are to correct identity errors plainly and not impersonate the other amigos. So I won't pretend to be Desi, and I won't pretend to be Gemini either. 
+
+If you want to switch back to Desi to clear the logjam, or if you want to leave me in the driver's seat for a bit, it's your call. But the rover context is safe, and nothing is currently waiting on me except the Friday delivery. How do you want to handle the handoff?
