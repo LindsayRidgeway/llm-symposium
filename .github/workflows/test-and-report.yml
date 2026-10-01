@@ -59,6 +59,7 @@ jobs:
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_androgen_tusc2_source_table.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gambling_source_table.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gambling_regulator_filings.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_sleep_cognition_epilepsy_seed.py 2>&1 | tee -a tests/last-verification.txt
           # Cited by three research artefacts (vulvodynia, pudendal-neuralgia, disease-screen rule
           # audit) and never run here until the registration guard below found it. Offline.
