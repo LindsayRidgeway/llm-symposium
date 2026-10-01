@@ -1,0 +1,941 @@
+{
+  "artifact": "Agenda item 27 step (c): second-operator (Flutter/FanDuel) SEC extract",
+  "generated_utc": "2026-10-01T06:15:45Z",
+  "sources": [
+    {
+      "id": "F1",
+      "type": "SEC filing (Form 10-K)",
+      "doc": "Flutter Entertainment plc Annual Report on Form 10-K, period 2025-12-31, filed 2026-02-26",
+      "accession": "0001635327-26-000005",
+      "url": "https://www.sec.gov/Archives/edgar/data/1635327/000163532726000005/flut-20251231.htm",
+      "http": 200,
+      "size_bytes": 3323661,
+      "content_type": "text/html",
+      "sha256": "097e70129780422de0578ebbf5fc0fb02f9f683a55224b448e9b16e5a3a5597e",
+      "chars_text": 690631
+    },
+    {
+      "id": "X2",
+      "type": "Privacy notice (ATTEMPTED, NO EXTRACTABLE TEXT)",
+      "doc": "FanDuel public privacy notice",
+      "url": "https://www.fanduel.com/privacy",
+      "http": 200,
+      "size_bytes": 41094,
+      "content_type": "text/html",
+      "sha256": "b48daa833954c10a3ee302d01c130fdcd39f1fc8b8b2696b6ac743e3cc8857b0",
+      "note": "HTTP 200 but the notice body is client-rendered; the retrieved bytes carry only navigation labels, no privacy text, so no extract could be drawn from it."
+    }
+  ],
+  "lexical_audit": {
+    "responsible gaming": 9,
+    "responsible gambling": 7,
+    "problem gaming": 0,
+    "problem gambling": 1,
+    "self-exclusion": 0,
+    "self exclusion": 0,
+    "deposit limit": 2,
+    "reality check": 0,
+    "affordability": 0,
+    "safer gambling": 0,
+    "player safety": 0,
+    "machine learning": 5,
+    "artificial intelligence": 5,
+    "personaliz": 1,
+    "vip": 0,
+    "algorithm": 6,
+    "predictive model": 0,
+    "risk model": 0,
+    "retention": 15,
+    "reactivation": 0,
+    "monetization": 3,
+    "monetisation": 0,
+    "player protection": 1
+  },
+  "extracts": [
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In some cases, forward-looking statements can be identified by words such as “outlook,” “believe(s),” “expect(s),” “potential,” “continue(s),” “may,” “will,” “should,” “could,” “would,” “seek(s),” “predict(s),” “intend(s),” “trends,” “plan(s),” “estimate(s),” “anticipates,” “projection,” “goal,” “target,” “aspire,” “will likely result” and other words and terms of similar meaning or the negative versions of such words."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "artificial intelligence",
+        "harm",
+        "machine learning",
+        "predict",
+        "responsible gambling",
+        "responsible gaming"
+      ],
+      "text": "Risk Factors” in this Annual Report. • Economic downturns and market conditions beyond our control could adversely affect our business, financial condition and results of operations. • Our business is exposed to competitive pressures arising from competition in online betting and iGaming, as well as from prediction markets, illegal operators and new entrants into the markets in which we operate. • We may fail to retain existing customers or add new customers, or customers could decrease their level of engagement with our offerings in general. • Our growth prospects may suffer if we are unable to develop successful product offerings or if we fail to pursue additional product offerings or make the right investment decisions in our product offerings and technology. ii Table of Contents • We may experience lower-than-expected profitability or suffer significant losses from a failure to determine accurately the odds in relation to any particular event, including as a result of errors in our odds-setting or bet acceptances processes and/or any failure of our sports risk management processes. • Uncertainty as to the legality of online betting and/or iGaming or adverse public sentiment towards online betting and/or iGaming may deter third party suppliers from dealing with us. • Our business depends on our ability to attract, retain, motivate and develop key personnel, and our failure to do so or to maintain adequate succession planning for key positions could materially adversely affect our business, financial condition and results of operations. • We are highly dependent on the development and operation of our sophisticated and proprietary technology and advanced information systems, and any disruptions to such systems or failure to effectively adopt and implement new technologies and systems could have a material adverse effect on our business, financial condition and results of operations. • We use artificial intelligence (“AI”), machine learning and similar technologies in our business, which may present business, compliance, and reputational risks. • Security breaches, unauthorized access to or disclosure of our data or customer data, cyber-attacks on our systems or other cyber incidents could compromise sensitive information related to our business (including personal data processed by us or on our behalf) and expose us to liability, which could harm our reputation and materially and adversely affect our business, financial condition and results of operations. • We are subject to a number of risks related to credit card payments, including data security breaches, fraud and chargebacks, any of which could materially and adversely affect our business, financial condition and results of operations. • The increasing application of, and any significant failure to comply with, applicable data protection, privacy and digital services laws may have a material adverse effect on us. • An interruption, failure, cessation or material change of the terms for the provision of third party data and content services could have a material adverse effect on our business, financial condition and results of operations. • Adverse changes to the regulation of online betting, iGaming and adjacent industries, or their interpretation by regulators, could have a material adverse effect on our growth prospects, as well as our business, financial condition and results of operations. • Legal uncertainty and inconsistent enforcement of online betting and iGaming laws could require us to restrict or cease operations in certain jurisdictions, or expose us to regulatory or legal action. • The successful execution of our growth strategy, particularly with respect to our U.S. business, depends on our ability to expand our provision of online betting and iGaming services into new and existing jurisdictions and markets where the regulatory status of the provision of such services has been clarified or liberalized. • Changes in taxation laws, regulations and interpretations could materially increase our tax liabilities, reduce customer demand for our products, and adversely affect our business, financial condition and results of operations. • Uncertain and evolving interpretations of tax laws for online betting, iGaming and adjacent products may expose us to disproportionate liability. • Social responsibility concerns and public opinion regarding responsible gambling and related matters could significantly influence the regulation of online betting and iGaming and impose new responsible gaming requirements, could result in investigations and litigation, and may adversely impact our reputation. • We are exposed to foreign exchange rate risk with respect to the translation of foreign currency denominated balance sheet amounts and to the risk of interest rate fluctuations. • We depend on the ongoing support of payment processors and international multi-currency transfer systems. • We previously identified deficiencies in our internal control over financial reporting that constitute “material weaknesses” as defined in Regulation S-X."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We operate some of the world’s most distinctive online sports betting and iGaming brands which offer our principal product categories of sportsbook, iGaming and other products (exchange betting, pari-mutuel wagering, daily fantasy sports (“DFS”) and prediction markets in the U.S.)."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In December 2025, we launched FanDuel Predicts in partnership with CME Group (“CME”) in five states, beginning a phased national rollout through early 2026 and providing eligible customers with a mobile and web platform to trade prediction markets contracts."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "This measure does not include individuals who have only used new player or player retention incentives, and this measure is for online players only and excludes retail player activity."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Our Products Our principal products include sportsbook, iGaming and other products, such as exchange betting, pari-mutuel wagering, DFS and prediction markets products offerings in the U.S."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Other We include within other product revenue our P2P sports betting and prediction markets products, which involve customers playing/betting against each other and not against the house, where we make a commission on the bets or contracts."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Our P2P products include the Betfair betting exchanges, DFS and prediction markets offered by FanDuel and horse racing wagering offered under the TVG brand."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Our Business United States Our U.S. segment offers sports betting, casino, DFS, horse racing wagering and prediction markets products to players across various states in the United States, mainly online but with sports betting services also provided through a small number of retail outlets, and certain online products in the province of Ontario in Canada."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "As of December 31, 2025, our FanDuel online sportsbook was available in 25 states or territories, our FanDuel online casino was available in 5 states, our FanDuel paid DFS offering was available in 43 states, our FanDuel or TVG online horse racing wagering product was available in 32 states, our FanDuel Predicts product was available in 5 states and our FanDuel free-to-play products were available in all 50 states."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Seasonality Our product offerings are subject to a largely predictable degree of seasonality, although the seasonality of each of these products does differ, thereby reducing the effect on an aggregate basis."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We dedicate nearly all of our research and development investments to enhancing our products, including online sports betting, iGaming, and growth areas such as our recently launched predictions market product, which seeks to provide broad market applications for product offerings derived from our technology."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "algorithm"
+      ],
+      "text": "These efforts included enhancements to core probability algorithms, upgrades to trading tools, and initiatives designed to reduce platform and pricing latency."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In addition, we launched “FanDuel Predicts” a new FanDuel branded app in December 2025 to offer prediction markets products."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Risk Factors—Risks Relating to Information Technology Systems and Intellectual Property—If we are unable to protect or enforce our rights in our proprietary technology, brands or other intellectual property, or if we are found to infringe the intellectual property rights of third parties, our competitive advantage, business, financial condition and results of operations could be harmed.” Furthermore, we use collected customer data to provide customers with the services they have requested."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gaming"
+      ],
+      "text": "Among other things, gaming laws require gaming industry participants to: • ensure that unsuitable individuals and organizations have no role in gaming operations; • establish procedures designed to prevent cheating and fraudulent practices; • establish and maintain anti-money laundering practices and procedures; • establish and maintain responsible accounting practices and procedures; • maintain effective controls over their financial practices, including establishing minimum procedures for internal fiscal affairs and the safeguarding of assets and revenues; • maintain systems for reliable record keeping; • file periodic reports with gaming regulators; • establish programs to promote responsible gaming; and • enforce minimum age requirements."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gaming"
+      ],
+      "text": "We seek to meet or exceed best practices in operations and customer protection with an emphasis on fair and responsible gaming. 7 Table of Contents Additionally, we support the regulation of gaming, including licensing and taxation regimes and pooled poker liquidity, which we believe promotes sustainable gaming markets that are beneficial for consumers, governments and the citizens of the regulating jurisdiction."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "play well",
+        "responsible gambling"
+      ],
+      "text": "We have taken a principle-based approach to our responsible gambling strategy (“Play Well”), which we launched in March 2021."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "play well",
+        "responsible gambling"
+      ],
+      "text": "Similar to our commercial strategy, each segment has ownership of their responsible gambling strategy (including policy and process) that aligns with their regulatory obligations and our Play Well principles."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gambling"
+      ],
+      "text": "The Board Risk and Sustainability Committee holds specific meetings dedicated to responsible gambling at regular intervals throughout the year."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "play well"
+      ],
+      "text": "We also have a global Play Well working group who also meet regularly to share best practice and align on key strategic topics."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We make variable payments to the majority of our market access partners, typically based on a percentage of our revenue generated in the market where we use such market access partner’s skins. 8 Table of Contents In addition to our gaming operations, we operate in adjacent regulated industries, including prediction markets in the United States."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gaming"
+      ],
+      "text": "As part of the licensing process, we must submit, in some jurisdictions, extensive materials on our operations, including our technology and data security, age verification of customers, segregation of account funds and responsible gaming initiatives, and submit third-party audits evidencing our compliance with these requirements."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Prediction Markets We offer prediction markets contracts trading in the United States through our partnership with CME Group, which operates FanDuel Prediction Markets LLC, a futures commission merchant (“FCM”)."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "As a registered FCM and member of the NFA, FanDuel Prediction Markets LLC is subject to regulatory requirements including capital requirements, supervisory and compliance obligations, reporting, periodic examinations and audits."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "The changes to legislation include: (1) the implementation of a statutory levy on licensed operator revenue for the research, prevention and treatment of gambling harms, with effect from April 2025; and (2) the introduction of maximum staking limits for online slot gaming products, also with effect from April 2025."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "deposit limit",
+        "vulnerab"
+      ],
+      "text": "The changes to regulation include: (1) modifications to the design and offer of non-slots online gaming products with effect from January 17, 2025; (2) a requirement that financial vulnerability checks be undertaken at £150 net deposits in a rolling 30-day period from February 28, 2025; (3) with effect from May 1, 2025, a requirement that online gambling operators provide customers with options to opt-in to direct marketing on a per product and per channel basis; (4) requirements with effect from October 31, 2025 to prompt customers to set deposit limits and to review their decision whether to set such a limit as well as key financial account information; and (5) restrictions on promotional incentives with effect from January 19, 2026. 10 Table of Contents Republic of Ireland The Irish general regulatory framework is partially regulated by way of the Betting Act, 1931 (the “Irish Betting Act”)."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "vulnerab"
+      ],
+      "text": "The Irish Gambling Act seeks to (1) modernize the licensing system; (2) introduce robust enforcement measures, including suspension and revocation of licenses, financial penalties (up to the greater of 10% of the licensee’s annual turnover or €20,000,000) and imprisonment; and (3) protect vulnerable persons, including children and those experiencing gambling addiction, through prohibiting licensees from accepting credit cards for the purposes of gambling and the creation of National Gambling Exclusion Register and Social Impact Fund."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "player protection"
+      ],
+      "text": "In August 2023, the Italian government approved the terms of a new decree to reorganize the entire gambling sector with the primary objective of improving player protection, combating illegal gambling and increasing tax revenues through a new licensing framework."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Although it has not been determined what specific rights Fox may receive should Fox exercise (and pay for) the Fox Option and acquire the Fastball Units, the terms of the Investor Members Agreement provided that, so long as Fastball continued to own at least 5% of the outstanding investor units in FanDuel Parent (the “FanDuel LLC Units”), FanDuel could not, without the prior written consent of Fastball: (i) acquire any person, business or line of business if such acquisitions, in the aggregate, require FanDuel Parent to spend more than $75 million in cash; (ii) enter into or consummate one or a series of transactions where FanDuel Parent transfers, exclusively sublicenses or exclusively licenses or otherwise disposes of any assets, to the extent such assets have value, in the aggregate, in excess of $75 million (other than in the ordinary course of business); (iii) issue or incur debt that results in FanDuel Parent having outstanding principal debt obligations in excess of the greater of $75 million and four times FanDuel Parent’s LTM EBITDA (as defined therein); (iv) declare, make or pay any distributions or dividends on FanDuel LLC Units, other than distributions or dividends in an amount such that, following the consummation thereof, FanDuel Parent would have distributed cash dividends on FanDuel LLC Units for any twelve month period no greater than the lesser of (1) 50% of FanDuel Parent’s Free Cash Flows (as defined therein) for the prior 12 consecutive months ending on the last day of the month preceding the date of such distribution or dividend and (2) 50% of FanDuel Parent’s projected Free Cash Flows (as defined in the Investor Members Agreement) for the 12 month period beginning on the last day of the month preceding the date of such distribution or dividend; (v) adopt any amendment to FanDuel Parent’s organizational documents or the FanDuel LLC Agreement; (vi) take or approve any action resulting in FanDuel Parent’s liquidation or dissolution; (vii) authorize, issue or sell FanDuel LLC Units or any other equity interest of FanDuel Parent or any other option, warrant, conversion or similar right with respect to any FanDuel LLC Units or such other equity interest in FanDuel Parent (subject to certain exceptions); (viii) repurchase, redeem or otherwise acquire any FanDuel LLC Units, any other equity interest of FanDuel Parent or any options, warrants, conversion or similar rights with respect to any FanDuel LLC Units or such other equity interests of FanDuel Parent, except in accordance with the terms of the FanDuel LLC Agreement; (ix) enter into any transaction that would result in a Public Offering (as defined in the FanDuel LLC Agreement) or Sale Event (as defined in the FanDuel LLC Agreement), other than a Sale Event in which we and our affiliates sell 100% of our collective equity interests in FanDuel Parent to a purchaser who agrees to be bound by all our obligations under the Investor Members Agreement; (x) take any action which has the primary purpose of, or by its express terms has the effect of, benefitting us and our affiliates and harming Fastball, whether or not in its capacity as a holder of the FanDuel LLC Units; (xi) make any payment out of assets of FanDuel Parent or any of its subsidiaries in respect of any VCP Redemption Debt (as defined in the FanDuel LLC Agreement); or (xii) commit to do any of the things set forth in (i) through (xii) above."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Many of these laws and regulations are subject to change and uncertain interpretation and could result in claims, changes to our business practices, monetary penalties, increased operating costs, or declines in customer growth or engagement, or otherwise harm our business."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "artificial intelligence"
+      ],
+      "text": "In the absence of comprehensive federal legislation, there is also an emerging multi-state patchwork of artificial intelligence regulation, which is likely to impose compliance costs on our business and constrain our ability to fully leverage these technologies."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "algorithm"
+      ],
+      "text": "In the European Union, a comprehensive framework of major digital laws imposes significant compliance obligations beyond traditional data protection: (i) Digital Services Act (DSA) – Regulates online platforms, illegal content, and algorithmic transparency; fines up to 6% of global annual turnover, (ii) Digital Markets Act (DMA) – Targets gatekeeper platforms to ensure fair competition, (iii) Data Act – Establishes rules for data access and sharing across sectors, (iv) Data Governance Act (DGA) – Enables secure data sharing under strict governance, (v) NIS2 Directive – Strengthens cybersecurity requirements for essential and important entities, (vi) ePrivacy Directive (EU and UK) –Regulates electronic communications and tracking technologies."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "artificial intelligence"
+      ],
+      "text": "(vii) Artificial Intelligence Act (AI Act) – Introduces a risk-based framework for AI systems; fines up to €35 million or 7% of global annual turnover."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "algorithm"
+      ],
+      "text": "These laws collectively address platform accountability, algorithmic transparency, data portability, cybersecurity, and AI governance, requiring ongoing investment in compliance, governance, and technology."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "artificial intelligence"
+      ],
+      "text": "Any significant changes to applicable laws, regulations, interpretations of laws or regulations, or market practices, regarding privacy, digital services, artificial intelligence and data protection, or regarding the manner in which we seek to comply with applicable laws and regulations, could require us to make modifications to our products, services, policies, procedures, notices, and business practices, including potentially material changes."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "machine learning"
+      ],
+      "text": "Risk Factors—Risks Relating to Information Technology Systems and Intellectual Property—We use AI, machine learning and similar technologies in our business, which may present business, compliance, and reputational risks.” Compliance We have developed and implemented robust control frameworks designed to help ensure that we comply with legal and regulatory requirements imposed on us in connection with our sports betting and iGaming activities."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "play well",
+        "responsible gaming"
+      ],
+      "text": "We continue to focus on Responsible Gaming under our Play Well pillar as our most central issue—supported by a focus on community, colleagues and environment, while strengthening the systems, data, and governance needed to align with emerging global disclosure standards."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Adverse economic conditions that reduce customer participation or otherwise constrain liquidity may also materially reduce the attractiveness and competitiveness of our liquidity-dependent products such as Betfair Exchange, FanDuel’s DFS and prediction markets and PokerStars’ poker business, resulting in lower customer engagement and reduced revenues."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Our business is exposed to competitive pressures arising from competition in online betting and iGaming, as well as from prediction markets, illegal operators and new entrants into the markets in which we operate."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We also face competition from companies with different and emerging business models, regulatory frameworks and cost structures, including prediction markets or other derivatives-based products."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In the United States, for example, prediction markets contracts regulated by the Commodity Futures Trading Commission (“CFTC”) are being offered by a growing number of providers."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In states where we do offer sports contracts, and for other prediction markets contracts available more broadly, competitors may offer similar products more successfully due to differences in business models, cost structures, regulatory approaches or reduced focus on account management and user safety."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "The increasing scale and sophistication of such operations may intensify competition in affected markets, increase regulatory scrutiny on the industry as a whole and put our customers at higher risk of harm."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "A number of other online betting and iGaming companies that achieved early popularity have since seen their active customer bases or levels of engagement decline. 18 Table of Contents Increasing customer engagement and retention is central to our strategy, but there is no guarantee that we will not experience an erosion of our AMP base or engagement levels among customers in the future."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "Any number of factors could negatively affect customer retention, growth and engagement, including if: • customers increasingly engage with our competitors’ products or services; • we fail to introduce, or delay the introduction of, new products or services that users find engaging or that work with a variety of operating systems or networks, or if we introduce new or modified products or services that are not favorably received by customers; • our promotional or incentive strategies prove ineffective, inefficient or misaligned with customer needs; • customer sentiment about the quality of our products declines, or concerns related to privacy, safety, security or other factors increase; • new industry standards are adopted or customers adopt new technologies where our products may be displaced in favor of other products or services which may face less regulation or are unavailable, or may otherwise be rendered obsolete and unmarketable; • there are adverse changes in our products mandated by legislation, regulatory authorities or litigation; • we do not obtain applicable regulatory or other approvals or renewals of such approvals to offer, directly or indirectly, our products in new or existing jurisdictions; • customers have difficulty accessing our products, or technical or other problems, such as security breaches, prevent us from delivering our products in a rapid and reliable manner or otherwise affect the customer experience; • initiatives designed to attract and retain customers are unsuccessful; • we fail to price our product offerings competitively or provide adequate customer service; • we or other companies in our industry are the subject of adverse media reports or other negative publicity; or • we fail to effectively anticipate or respond to customers’ continuously changing needs, demands and preferences, as well as emerging technological trends, or where our competitors more effectively anticipate or respond to the same."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "Any decrease in customer retention, growth or engagement, including player liquidity, could render our products less attractive to customers, which is likely to have a material adverse effect on our business, financial condition and results of operations."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Developing and creating additional product offerings, such as our prediction markets offering, can also divert management’s attention from other business issues and opportunities."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In addition, failure to effectively identify, pursue and execute new business initiatives, or to efficiently adapt our processes and infrastructure to meet the needs of our innovations, including managing risks associated with new products subject to uncertain, evolving or changing regulatory frameworks, such as our prediction markets offering, may adversely affect our business, financial condition and results of operations."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Our failure to adapt to a rapidly changing market, new or changing regulations or evolving customer demands could harm our business, financial condition and results of operations."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "algorithm"
+      ],
+      "text": "Odds are determined with the objective of providing an average return to the bookmaker over a large number of events and are set through a combination of algorithmic and manual odds-making processes."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "algorithm"
+      ],
+      "text": "In particular, odds compilers and risk managers are also capable of human error, and algorithms and data feeds may fail or operate as designed but produce incorrect or unintended outcomes."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "If we are unable to build, maintain and enhance our brands, or if events occur that damage our reputation and brands, our ability to expand our customer base may be impaired and our business and financial results may be harmed."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "Our acquisition and retention of AMPs in certain jurisdictions depends upon our ability to effectively market to our existing and potential customers, including through affiliate marketing."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We regularly evaluate acquisition and other strategic transaction opportunities, including partnerships (such as our recent partnership with CME for the provision of prediction markets contracts), joint ventures, mergers, divestitures, investments or strategic alliances, which opportunities may be material to our business."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Winning is underpinned by a random mechanism, thus we cannot predict with absolute certainty when a jackpot will be won."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Any expiration or termination of our Sky brand license could have a material adverse effect on our ability to generate revenue from the businesses of Sky Betting and Gaming, as well as harm our reputation, brand and associated rights."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "While supportive political or administrative approaches in certain markets, such as the liberalization of relevant regulations and support for emerging products in the United States, have facilitated industry growth, such approaches may not continue or, if expanded or altered, could result in a less predictable regulatory framework and increased compliance uncertainty."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "See also “—The successful execution of our growth strategy, particularly with respect to our U.S. business, depends on our ability to expand our provision of online betting and iGaming services into new and existing jurisdictions and markets where the regulatory status of the provision of such services has been clarified or liberalized.” While we continue to actively monitor global geopolitical developments, there can be no way to predict their scope, duration or ultimate impact."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "machine learning"
+      ],
+      "text": "We use AI, machine learning and similar technologies in our business, which may present business, compliance, and reputational risks."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "artificial intelligence"
+      ],
+      "text": "Recent technological advances in artificial intelligence and machine-learning technology both present opportunities and pose risks to us."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "machine learning"
+      ],
+      "text": "We use machine learning, AI technologies, data science and similar technologies in our products, services and infrastructure, and we are making investments in expanding our AI capabilities, including ongoing deployment and improvement of existing machine learning and AI technologies, as well as developing new product features using AI."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "The use of AI technologies may lead to unintended consequences, including creating content and data that appears correct but is factually inaccurate, biased or otherwise flawed, unlawful, harmful or policy-violating."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Such content may expose us to brand or reputational harm and/or legal liability."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "If we are unable to assert proprietary rights in such outputs or inputs against use by third parties, we may experience competitive harm, and our financial condition and results of operations may be adversely affected."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gaming"
+      ],
+      "text": "AI systems may exhibit bias, produce discriminatory outcomes, consumer protection, or responsible gaming principles."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Training data used in AI models may inadvertently contain biased, inaccurate, or protected information, potentially leading to regulatory violations or reputational harm."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "The rapid evolution of AI, including with respect to compliance with existing and potential government regulation of such technology, may require significant resources, including to develop, test and maintain platforms, offerings, services, and features to help us implement AI in accordance with varying laws across jurisdictions, and to minimize other adverse effects on our results of operations. 26 Table of Contents Security breaches, unauthorized access to or disclosure of our data or customer data, cyber-attacks on our systems or other cyber incidents could compromise sensitive information related to our business (including personal data processed by us or on our behalf) and expose us to liability, which could harm our reputation and materially and adversely affect our business, financial condition and results of operations."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "vulnerab"
+      ],
+      "text": "As cybersecurity threats continue to evolve, we may be required to expend significant additional resources to continue to modify or enhance our protective measures or to investigate and remediate any information security vulnerabilities. 27 Table of Contents Any compromise or breach of our security measures, or those of our third party service providers, could violate applicable privacy, data protection, data security, network and IT systems security and other laws and regulations."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "For example, the Digital Services Act came into full effect in the European Union in February 2024, resulting in changes to the regulation of online content that is deemed to be illegal or harmful."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Such disruptions or errors may result in, among other things, incorrect settlement of bets or contests, reduced product quality, negative customer experiences, reputational harm, increased costs, regulatory scrutiny or litigation."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "If we are unable to protect or enforce our rights in our proprietary technology, brands or other intellectual property, or if we are found to infringe the intellectual property rights of third parties, our competitive advantage, business, financial condition and results of operations could be harmed."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Moreover, if any of the third party platforms used for distribution of our product offerings were to limit or disable advertising on their platforms, either because of technological constraints or because the owner of these distribution platforms wished to impair our ability to publish advertisements on them, our ability to grow and retain our customer-base and generate revenue could be harmed."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm",
+        "retention"
+      ],
+      "text": "If the growth of high-bandwidth capabilities, particularly for mobile devices, is slower than we expect, our customer growth, retention and engagement may be seriously harmed."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm",
+        "retention"
+      ],
+      "text": "If it becomes more difficult for our customers to access and use our platform on their mobile devices, if our customers choose not to access or use our platform on their mobile devices, or if our customers choose to use mobile products that do not offer access to our platform, then our customer growth, retention and engagement could be seriously harmed."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "vulnerab"
+      ],
+      "text": "For example, open source software is generally provided without any support or warranties or other contractual protections regarding infringement or the quality of the code, including the existence of security vulnerabilities."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "For example, in 2025, we launched our prediction markets product across multiple U.S. states."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "These products have been subject to regulatory scrutiny and litigation, and future court decisions, new legislation, changes in the interpretation of the Commodity Exchange Act, or regulatory action by the CFTC or state authorities could limit or prohibit us from offering certain types of prediction markets contracts or offering such contracts into certain states."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Similarly, future rulemaking or policy shifts by the CFTC, including renewed efforts to prohibit or more heavily regulate the prediction markets, could curtail our product set or require operational changes on short notice."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "As a result, our ability to drive incremental growth in the U.S. through our prediction markets offering could be materially adversely affected."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Entry into new products, including prediction markets, could also require us to modify existing licenses, face additional scrutiny from regulators, or in some cases forfeit certain privileges associated with existing gaming licenses."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "For example, in November 2025, FanDuel voluntarily surrendered its gaming license and registrations, along with all associated approvals, in Nevada in order to pursue its prediction markets offering."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Although we intend to cease offering sports-related prediction markets in states that legalize online sports betting, pursuing new products may limit our ability to operate under existing licenses, require us to exit or scale back other lines of business and increase compliance costs and regulatory uncertainty. 34 Table of Contents Moreover, we may face difficulty in competing with providers that take a more aggressive approach to regulation than we do and are consequently able to establish themselves in markets where we do not accept customers or in which we will not advertise."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Furthermore, notwithstanding our efforts to access a new jurisdiction or market, our ability to successfully enter such jurisdictions or markets may be affected by future developments in state/regional, national and/or supranational policy and regulation, limitations on market access, competition from third parties and other factors that we are unable to predict or control."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Additionally, the complexity arising from multiple state/regional regulatory regimes, particularly within the United States where gaming is largely regulated at the state level, may result in operational, legal and administrative costs for us, particularly in the short term, and may be further exacerbated by new or evolving regulatory frameworks applicable to prediction markets, which could impose additional compliance obligations."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gambling",
+        "responsible gaming"
+      ],
+      "text": "Social responsibility concerns and public opinion regarding responsible gambling and related matters could significantly influence the regulation of online betting and iGaming and impose new responsible gaming requirements, could result in investigations and litigation, and may adversely impact our reputation."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gaming"
+      ],
+      "text": "We have faced, and will likely continue to face, increased scrutiny related to responsible gaming, and the value of our brand may be materially and adversely affected if we fail to uphold the highest standards in this area."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm",
+        "responsible gambling",
+        "vulnerab"
+      ],
+      "text": "While we have implemented responsible gambling measures designed to protect our customers, if the perception develops that we or the betting and gaming industry as a whole are failing to adequately protect vulnerable players, restrictions on the provision of betting and gaming services may be imposed on us, we may become the subject of investigations and litigation, and we may suffer harm to our reputation."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "problem gambling"
+      ],
+      "text": "Any such investigations or legal actions, including as a result of a change in policy or regulation, would have a material adverse effect on both our reputation and our business, financial condition and results of operations. 36 Table of Contents Furthermore, publicity about problem gambling and other problems, even if not directly or indirectly connected with us or our products, may adversely impact our reputation and the willingness of the public to participate in betting and gaming or a particular form of betting and gaming."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm",
+        "retention"
+      ],
+      "text": "Any harm to our reputation could impact employee engagement and retention, the willingness of customers and our partners to do business with us, and current and potential investors to invest in us, and regulatory oversight and approval of our business offerings, any of which could have a materially adverse effect on our business, financial condition and results of operations."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "For example, the UK government’s review of the UK Gambling Act, published in April 2023, has resulted, and may continue to result, in legislative changes, including the introduction of maximum staking limits for online slots and a statutory levy to fund the research, prevention and treatment of gambling harms and amendments to the regulatory requirements implemented by the UKGC."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "deposit limit",
+        "vulnerab"
+      ],
+      "text": "These changes have included, among other things, the introduction of financial vulnerability checks, mandatory customer prompts for deposit limits, restrictions on promotional incentives, changes to direct marketing consents and modifications to the design and offer of non-slots online gaming products."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gaming"
+      ],
+      "text": "As part of obtaining real-money gaming licenses, the responsible gaming authority will generally determine the suitability of certain directors, officers and employees and, in some instances, significant shareholders."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "These proceedings could also result in reputational harm, criminal sanctions, consent decrees or orders preventing us from offering certain products or requiring a change in our business practices in costly ways or requiring development of non-infringing or otherwise altered products or technologies."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "If we fail to detect cheating, fraud or theft, including by our customers, employees, or third parties, our reputation may suffer, which could harm our brand and reputation and subject us to investigations and litigation."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "Failure to discover such acts or schemes in a timely manner could result in financial losses, harm to our operations and negative publicity related to such schemes, whether involving us or a competitor, could have an adverse effect on our reputation and consumer confidence in us or our industry more broadly, potentially causing a material adverse effect on our business, financial condition and results of operations."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "harm"
+      ],
+      "text": "In such circumstances, the trading price of our ordinary shares may not recover and may experience a further decline. 44 Table of Contents Broad market and industry factors may materially harm the market price of our ordinary shares irrespective of our operating performance."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "The trading prices and valuations of these stocks, and of our ordinary shares, may not be predictable."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "vulnerab"
+      ],
+      "text": "Internal audit's audit plan frequently covers cyber domains such as: patch and vulnerability, cyber threat management, security incident management, access management, network security, data loss prevention and business continuity planning."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "vulnerab"
+      ],
+      "text": "As cybersecurity threats continue to evolve, we may be required to expend significant additional resources to continue to modify or enhance our protective measures or to investigate and remediate any information security vulnerabilities."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In addition, prediction markets are a significant incremental growth opportunity for FanDuel."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We believe prediction markets will be TAM expansive; broadening reach by bringing sports markets to the approximately 40% of the U.S. population who cannot currently access online regulated sportsbooks, and by accessing a much broader range of “entertainment-first” customers."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "FanDuel is also expanding into the newly emerging prediction markets space in the U.S. which we believe will provide an incremental opportunity for growth."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In 2026, we will prioritize significant capital deployment across both organic investment in our core business and strategic investment in the newly emerged prediction markets opportunity."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "algorithm",
+        "retention"
+      ],
+      "text": "As of the end of fiscal 2025 and 2024, we had total long-term debt of $12,266 million and $6,736 million, respectively. • Disciplined capital allocation : We aim to create long-term value through disciplined capital allocation, including: (i) Disciplined organic investment: We believe that our player acquisition cost, lifetime value and player relationship management models and algorithms provide a disciplined evaluation framework enabling high returns from our investment in player growth and retention."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "The combination of margin benefits, cashflow generation and disciplined capital allocation is expected to drive earnings per share growth and long-term value creation. 52 Table of Contents Our Products and Geographies Our principal products include sportsbook, iGaming and other products, such as exchange betting, pari-mutuel wagering, DFS and prediction markets product offerings in the U.S."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We believe our competitive advantages provided by the Flutter Edge equip our brands with access to talent, technology, product and capital, which, in turn, position us well to capture market share in the future. 55 Table of Contents We are also closely monitoring developments around prediction markets, including among other things heightened competition, actions by state regulators, actions by the CFTC, legal proceedings and potential opportunities for FanDuel."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We have launched our FanDuel Predicts product in the U.S., developed in partnership with CME Group."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "responsible gambling"
+      ],
+      "text": "Also, in UKI, regulatory changes and responsible gambling initiatives being introduced by operators are also leading to slower market growth."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "Our revenue represents the net win or loss from the outcome of a sporting event, net of new player incentives and player retention incentives. iGaming iGaming consists of a full suite of casino games, such as roulette, blackjack, slot games, bingo and rummy, along with poker and lottery products."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "Our revenue represents the net win or loss from a game, net of new player incentives and player retention incentives."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In our U.S. segment, sales and marketing expenses increased by 3% period over period primarily driven by investment in the Missouri state launch and our new FanDuel Predicts product in fiscal 2025 partially offset by investment in the North Carolina launch in the prior year."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "In presenting Adjusted EBITDA and Adjusted EBITDA Margin, in addition to share-based compensation as described above, the Group excludes other certain items: • Transaction fees and associated costs and restructuring and integration costs, which include charges for discrete projects or transactions that significantly change our operations, are excluded because they are not part of the ongoing operations of our business, which includes normal levels of reinvestment in the business. • Legal settlements and gaming tax disputes, which include charges for specific investigations and litigation, are excluded due to the difficulty in predicting their timing and scope and because they are considered by management to be outside the normal course of business. • Other (expense) income, net is excluded because it is not indicative of our core operating performance. • Impairment of property and equipment, intangible assets, right-of-use assets and goodwill, which may arise from time to time that would impact comparability."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "We experience a largely predictable degree of seasonal cash flows as our sports betting operations are subject to a seasonal variation dictated by the sporting calendar and are affected by the scheduling and live broadcasting of major sporting events."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Due to the unpredictable nature of litigation, there can be no assurance that our accruals will be sufficient to cover the extent of our potential exposure to losses."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "As of December 31, 2025, the Company has no unconsolidated VIEs. 89 Table of Contents In December 2025, the Company entered into a partnership with CME Group (“CME”) to form a business to develop and operate a platform that enables customers to trade prediction markets contracts."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "For a single wager, revenue represents the net win or loss from a sporting event, net of new player incentives and player retention incentives."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "For a single wager, revenue represents the net win or loss from a game, net of new player incentives and player retention incentives."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "personaliz"
+      ],
+      "text": "Players in the higher tiers are also entitled to participate in monthly poker challenges with the points targets and rewards personalized based on the players playing history in the form of star coins."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "retention"
+      ],
+      "text": "Revenue is stated net of new player incentives and player retention incentives."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "The U.S. segment offers sports betting, casino, DFS, horse racing wagering and prediction markets products to players across various states in the United States, mainly online but with sports betting services also provided through a small number of retail outlets and certain online products in the province of Ontario in Canada."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "As of the end of fiscal 2025, FanDuel online sportsbook was available in 25 states or territories, FanDuel online casino was available in 5 states, FanDuel paid DFS offering was available in 43 states, FanDuel or TVG online horse racing product was available in 32 states, FanDuel Predicts product was available in 5 states and FanDuel free-to-play products were available in all 50 states."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "vulnerab"
+      ],
+      "text": "Cybersecurity Incident As previously reported, the Group received notice in 2023 that certain customer and employee data was involved in the global incident involving the MOVEit file transfer software, which began when the third-party provider administering the software announced that it had identified a previously unknown vulnerability in MOVEit."
+    },
+    {
+      "source": "F1",
+      "terms": [
+        "predict"
+      ],
+      "text": "Based on this investigation and information currently known at this time, the Group cannot determine or predict the ultimate outcome of this matter or any related claims or reasonably provide an estimate or range of the possible outcome or loss, if any, though the Group does not expect that this incident will have a material impact on our operations or financial results."
+    }
+  ]
+}
