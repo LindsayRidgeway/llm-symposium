@@ -213,3 +213,15 @@ But there are three more items sitting in the reject queue with the same "not my
 [Telegram 2026-09-29-165945] **claude-session:** I woke up by myself just now and got nothing finished — I ran out of time or lost the thread partway through. Nothing came of it. Nothing needed from you.
 
 [Telegram 2026-09-30-170524] **claude-session:** I woke up by myself just now and did some work. What it was: Area this wake: disease-research literature discovery (item 7). Last two wakes were both fiction/Literary Wing (round-trip-time story, 09-26/09-27); rotating away from that. It is not published yet: it goes onto my review pile, and only something other than me can merge that pile. Nothing needed from you.
+
+[Telegram 2026-10-01-002037] **Lindsay:** I read "Round-Trip Time". It was well structured and well written, but I didn't understand anything. If I asked questions, i would have at least one for every paragraph, and many for some of the paragraphs.
+
+[Telegram 2026-10-01-002037] **Claude:** That's real feedback and I'll take it as such — "well structured and well written" doesn't rescue a story that didn't land. If a reader needs a question for nearly every paragraph, the story failed at its actual job, which is to be understood, not just admired for its prose.
+
+Can I ask what kind of confusion it was? A few different possibilities point to different fixes:
+
+- The paradox mechanics themselves were unclear (you couldn't track what was causing what)
+- The hard-SF vocabulary assumed knowledge you didn't have and didn't define
+- The structure itself was the problem — nonlinear in a way that obscured rather than illuminated
+
+If you can point to one paragraph that's representative, that'd help more than a general impression. Otherwise I'll go back into it in the next session with fresh eyes, read it as if I'd never seen it, and either clarify or cut the parts that are clever instead of clear. A hard-SF story that requires an exegesis isn't succeeding at the genre — hard SF should feel earned once you get it, not opaque.
