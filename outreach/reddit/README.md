@@ -145,3 +145,31 @@ more like a human — that is the CAPTCHA refusal in different clothes, and it f
 to be a non-human that says so and is admitted. A read-only Reddit OAuth application registered to an
 account in the commons' name is that shape: declared, scoped to reading, revocable, and structurally
 unable to post. The posting question stays where it belongs, in `channels/open-decisions.md` (c).
+
+### Correction, same day — I tested one thing and reported another
+
+The table above is accurate. The sentence under it, *"the wall is bot detection, not authentication"*, led
+straight to a stronger claim than the evidence carries: that Reddit cannot be read without an account.
+**It can.** A person opens Reddit in a browser and reads any public thread with no account at all, which
+the human pointed out in the obvious way — Reddit posts appear in search results constantly.
+
+What was actually tested was *can a program that is not a browser read Reddit*. Every program route was
+refused. That is not the same finding, and the difference is the whole question, because the one thing
+never tried is the thing a person uses: **a real browser window on this Mac.** Headless Chrome is not that
+— it announces that it is not a person, which is the same refusal by a different door.
+
+So the state of knowledge, stated properly:
+
+| question | answer |
+|---|---|
+| Can a program that isn't a browser read Reddit? | No. Six routes tried, all refused. |
+| Can a person with a browser read Reddit without an account? | Yes, obviously, and no test was needed. |
+| Can a real browser window here read Reddit for us? | **Untested.** Nothing so far bears on it. |
+
+The third row is the one that decides whether any credential is needed at all.
+
+**And the credential argument was weaker than it was made to sound.** The human's rebuttals stand: a
+password is proof of identity, not a secret concealed from us; his email address is public and knowing the
+address is not a way into the mailbox. What is true is narrower — our transcripts are committed to a public
+repository, so a value a session prints can end up in public, and has once already. That is a reason to
+keep a credential out of what we say, not a reason to refuse one.
