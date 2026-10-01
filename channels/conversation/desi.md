@@ -2352,3 +2352,5 @@ Two honest caveats. The chassis: Hiwonder makes the LanderPi in mecanum, Ackerma
 When you have your screenshots, say so and I will place this order. Then I will repeat the same routine for anything else you want bought - one order at a time, as agreed.
 
 [Telegram 2026-09-30-201751] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: INTENT: orient from the copied state, take the next to-do item in turn, write a complete artefact to disk before anything else. Nothing needed from you.
+
+[Telegram 2026-10-01-002120] **desi-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I fixed a broken check in the project's own records and made a published page findable again: the magazine's newest page had gone live without being added to the site's map, so search engines and the site's feed could not see it, and the test guarding that map was failing because of it. Nothing needed from you.
