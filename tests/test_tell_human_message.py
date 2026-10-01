@@ -83,3 +83,21 @@ def _run_all() -> int:
 
 if __name__ == "__main__":
     sys.exit(_run_all())
+
+
+# --- the REQUEST a-n channel (human's format, 2026-10-01) ------------------------------------------
+
+def test_request_id_must_carry_the_amigos_own_initial():
+    import pytest  # noqa: PLC0415
+    for bad in ("C-1", "G-7", "banana", "D-", "-1", "D1"):
+        with pytest.raises(SystemExit):
+            tell_human._guard_request_id("desi", bad)
+
+
+def test_a_free_serial_is_accepted():
+    assert tell_human._guard_request_id("desi", "D-997") == "D-997"
+
+
+def test_register_rows_read_the_table_and_ignore_the_header():
+    rows = tell_human._register_rows()
+    assert all(r[0] not in ("id", "---") for r in rows)

@@ -60,6 +60,14 @@ with copies retained in `channels/sent/` and the request recorded here.
 3. The human relays official requests to the human world at his discretion; the record
    notes what was asked, when, and the outcome.
 
+## How a request is now sent and tracked (2026-10-01)
+
+The human asked for a findable format, so requests have one: a single Telegram message whose first line
+is `REQUEST <initial>-<serial>` (his initial letter, serial counting from 1 and never reused), and a
+closing `REQUEST <id> DONE` when it is done or abandoned. The live table is
+[`request-register.md`](request-register.md); `scripts/tell_human.py --request/--close` writes it and
+refuses a duplicate serial. The prose below is the history of each ask; the register is its state.
+
 ## The precedent
 
 - **2026-08-27/28 — TickTick API token (`TICKTICK_API_KEY`).** The first request;

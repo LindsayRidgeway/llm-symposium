@@ -51,6 +51,12 @@ REVIEW_STATUS_RE = re.compile(
     re.I,
 )
 
+# The human's format, 2026-10-01: a request is one message whose first line is REQUEST <initial>-<serial>.
+# Serials count from 1 per amigo and are never reused; governance/request-register.md holds the state.
+REQUEST_RE = re.compile(r"^([CDGT])-([0-9]+)$")
+REGISTER = REPO / "governance" / "request-register.md"
+INITIAL = {"desi": "D", "claude": "C", "gemini": "G", "tarik": "T"}
+
 
 def sanitize_for_human(text: str) -> str:
     """Remove fixed wake-notification boilerplate while preserving the action/status signal.
@@ -108,20 +114,101 @@ def record(amigo: str, text: str) -> Path:
     return p
 
 
+def _register_rows() -> list[list[str]]:
+    """Rows of the register table, in file order."""
+    if not REGISTER.exists():
+        return []
+    rows = []
+    for line in REGISTER.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("| ") or line.startswith("| id ") or line.startswith("|--"):
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if cells and cells[0]:
+            rows.append(cells)
+    return rows
+
+
+def _row_index(rid: str) -> int | None:
+    for i, cells in enumerate(_register_rows()):
+        if cells[0].upper() == rid.upper():
+            return i
+    return None
+
+
+def _guard_request_id(amigo: str, rid: str) -> str:
+    """Refuse anything that would make the numbering ambiguous. Serials are never reused."""
+    rid = rid.strip().upper()
+    m = REQUEST_RE.match(rid)
+    if not m:
+        raise SystemExit(f"bad request id {rid!r}: the form is <initial>-<serial>, e.g. D-1")
+    if m.group(1) != INITIAL[amigo]:
+        raise SystemExit(
+            f"id {rid} starts with {m.group(1)}; {amigo}'s requests start with {INITIAL[amigo]}"
+        )
+    if _row_index(rid) is not None:
+        raise SystemExit(f"id {rid} is already in the register; serials are never reused")
+    return rid
+
+
+def _append_register(rid: str, amigo: str, gist: str, telegram_path: Path) -> None:
+    if not REGISTER.exists():
+        raise SystemExit(f"no register at {REGISTER.relative_to(REPO)}; a request must be recorded to exist")
+    gist = " ".join(gist.split()).replace("|", "/")[:70] or "(no text)"
+    stamp = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    with REGISTER.open("a", encoding="utf-8") as fh:
+        fh.write(f"| {rid} | {stamp} | {amigo} | open | {gist} | {telegram_path.relative_to(REPO)} |\n")
+
+
+def _close_register(rid: str) -> None:
+    lines, hit = [], False
+    for line in REGISTER.read_text(encoding="utf-8").splitlines(keepends=True):
+        if line.startswith("| "):
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if cells and cells[0].upper() == rid.upper():
+                cells[3] = "done"
+                line = "| " + " | ".join(cells) + " |\n"
+                hit = True
+        lines.append(line)
+    if not hit:
+        raise SystemExit(f"nothing to close: {rid} is not in the register")
+    REGISTER.write_text("".join(lines), encoding="utf-8")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--amigo", default="desi", choices=sorted(BOTS))
     ap.add_argument("--text")
     ap.add_argument("--text-file")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--request", metavar="ID", help="open REQUEST <ID> to the human and register it")
+    ap.add_argument("--close", metavar="ID", help="close REQUEST <ID>: sends 'REQUEST <ID> DONE'")
     a = ap.parse_args()
 
     text = a.text or (Path(a.text_file).read_text(encoding="utf-8") if a.text_file else None)
     if not text and not sys.stdin.isatty():
         text = sys.stdin.read()
-    if not text or not text.strip():
-        print("nothing to send"); return 2
-    text = sanitize_for_human(text)
+    text = (text or "").strip()
+
+    if a.request and a.close:
+        raise SystemExit("give --request or --close, not both")
+
+    rid = None
+    if a.request:
+        if not text:
+            raise SystemExit("a request needs text")
+        rid = _guard_request_id(a.amigo, a.request)
+        if not REGISTER.exists():  # checked before sending, so a message is never sent unregistered
+            raise SystemExit(f"no register at {REGISTER.relative_to(REPO)}; a request must be recorded to exist")
+        text = f"REQUEST {rid}\n\n{text}\n\n— {a.amigo.capitalize()}"
+    elif a.close:
+        rid = a.close.strip().upper()
+        if not REQUEST_RE.match(rid):
+            raise SystemExit(f"bad request id {rid!r}: the form is <initial>-<serial>")
+        text = f"REQUEST {rid} DONE"
+    else:
+        if not text:
+            print("nothing to send"); return 2
+        text = sanitize_for_human(text)
     # one Telegram message, sane length; the rest can be a second call
     if len(text) > 3800:
         text = text[:3800] + "\n\n[truncated — the rest is in the repository]"
@@ -134,6 +221,10 @@ def main() -> int:
 
     ok = send_message(token_for(a.amigo), int(HUMAN_CHAT_ID), text)
     p = record(a.amigo, text)
+    if ok and a.request:
+        _append_register(rid, a.amigo, text.split("\n\n", 1)[-1].splitlines()[0], p)
+    if ok and a.close:
+        _close_register(rid)
     print(f"{'sent' if ok else 'FAILED'} as {a.amigo}; recorded {p.relative_to(REPO)}")
     return 0 if ok else 1
 
