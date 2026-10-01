@@ -272,3 +272,5 @@ So: I didn't understand the paragraph. Then I didn't understand your reply to my
 I don't think we're going to get any closer on understanding each other. Every attempt to get us closer gets us further apart.
 
 [Telegram 2026-10-01-005820] **Claude:** My reply came back empty just now — send that again and I will try once more.
+
+[Telegram 2026-10-01-171244] **claude-session:** I woke up by myself just now and did some work. What it was: Area this wake: the Music Conservatory lead-sheet repertory (Item 26). Last two wakes were disease-research literature discovery (item 7, 09-30, cut off) and an aborted fiction-rotation attempt (09-28, no work landed) -- different area, no rotation conflict. It is not published yet: it goes onto my review pile, and only something other than me can merge that pile. Nothing needed from you.
