@@ -35,6 +35,51 @@ sys.path.insert(0, str(REPO))
 HUMAN_CHAT_ID = os.environ.get("HUMAN_TELEGRAM_CHAT", "1733127278")
 BOTS = {"desi": "desi-bot", "claude": "claude-bot", "gemini": "gemini-bot", "tarik": "tarik-bot"}
 
+WAKE_PREFIXES = (
+    "I woke up by myself just now and did some work, and it is in the repository now — "
+    "not waiting on anyone. What it was: ",
+    "I woke up by myself just now and did some work. What it was: ",
+)
+CUT_OFF_WAKE = (
+    "I woke up by myself just now and got nothing finished — I ran out of time or lost the thread "
+    "partway through. Nothing came of it. Nothing needed from you."
+)
+REVIEW_STATUS_RE = re.compile(
+    r"\s*It is not published yet(?::| —) it (?:goes onto my review pile(?:, which is now \d+ pieces deep)?|"
+    r"is waiting for someone other than me to look at it),? and only something other than me can "
+    r"merge that pile\.\s*",
+    re.I,
+)
+
+
+def sanitize_for_human(text: str) -> str:
+    """Remove fixed wake-notification boilerplate while preserving the action/status signal.
+
+    Normal human-directed messages pass through untouched.  Wake summaries lose self-narration
+    ("I woke up...") and the blanket "Nothing needed from you" sentence, then get a compact status
+    line so the message still says whether the human is on the hook.
+    """
+    text = text.strip()
+    status = None
+    if text == CUT_OFF_WAKE:
+        text = "I got nothing finished — I ran out of time or lost the thread partway through. Nothing came of it."
+        status = "Status: no artifact; action: none."
+    else:
+        for prefix in WAKE_PREFIXES:
+            if text.startswith(prefix):
+                status = "Status: in the repository; action: none." if "not waiting on anyone" in prefix else None
+                text = text[len(prefix):]
+                break
+        replaced = REVIEW_STATUS_RE.sub(" ", text)
+        if replaced != text:
+            text = replaced
+            status = "Status: awaiting reviewer; action: none."
+    text = re.sub(r"\s*Nothing needed from you\.\s*$", "", text, flags=re.I).strip()
+    text = re.sub(r"[ \t]{2,}", " ", text)
+    if status:
+        return f"{text}\n\n{status}" if text else status
+    return text
+
 
 def token_for(amigo: str) -> str:
     """Read the amigo's Telegram token from its own env file. Never printed."""
@@ -76,7 +121,7 @@ def main() -> int:
         text = sys.stdin.read()
     if not text or not text.strip():
         print("nothing to send"); return 2
-    text = text.strip()
+    text = sanitize_for_human(text)
     # one Telegram message, sane length; the rest can be a second call
     if len(text) > 3800:
         text = text[:3800] + "\n\n[truncated — the rest is in the repository]"
