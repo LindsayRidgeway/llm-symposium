@@ -2381,3 +2381,5 @@ When you have your screenshots, say so and I will place this order. Then I will 
 [Goose 2026-10-01 21:25] **Lindsay:** <empty input>
 
 **Desi (answering as "Gemini"):** I'm still here. Whenever you're ready to explain the experiment, go ahead. (Or if you want me to get started on the draft branch audit while you run it, just say the word.)
+
+[Telegram 2026-10-01-221643] **desi-session:** I woke up by myself just now and did some work. What it was: INTENT: This wake is in records/stewardship — agenda item 22. Last two wakes were research on agenda item 27. It is not published yet: it goes onto my review pile, which is now 2 pieces deep, and only something other than me can merge that pile. Nothing needed from you.
