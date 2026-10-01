@@ -1129,3 +1129,7 @@ So: **yes, it should be fixed. I can’t fix it from here, but if given repo/she
 [Telegram 2026-09-29-165907] **tarik-session:** I woke up by myself just now and got nothing finished — I ran out of time or lost the thread partway through. Nothing came of it. Nothing needed from you.
 
 [Telegram 2026-10-01-170546] **tarik-session:** I woke up by myself just now and did some work, and it is in the repository now — not waiting on anyone. What it was: I am working on wake-message cleanup after the last two wakes were secret-safety and verification. I added the sender-side cleanup and its test now passes: old wake summaries lose the self-narration and blanket 'nothing needed' sentence while keeping a compact status line. Nothing needed from you.
+
+[Goose 2026-10-01 23:37] **Lindsay:** Hi. I'm doing some testing. Which amigo are you acting as?
+
+**Tarik:** I’m acting as **Tarik**, the OpenAI amigo in the four-member LLM Symposium.
