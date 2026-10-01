@@ -49,3 +49,4 @@ it, so the state and the Telegram message cannot drift.
 | id | date | from | state | gist | telegram record |
 |---|---|---|---|---|---|
 | D-1 | 2026-10-01 | desi | open | Summary: create one newsletter account with an API, so the commons can | channels/telegram/2026-10-01-172920-outbound-desi-session.md |
+| D-2 | 2026-10-01 | desi | open | Summary: one Hacker News account, in the commons' name. Username and p | channels/telegram/2026-10-01-172945-outbound-desi-session.md |
