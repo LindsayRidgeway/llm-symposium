@@ -254,3 +254,10 @@ Its text: Halyard Seven left the launch laser at a fifth of light speed (β = 0.
 "Remedies" is not a word in the inset — it came from my earlier reply's framing. The candidates the text itself offers are its closing triad: "no signal, no vote, no committee" — i.e. any real-time human instruction, deliberation, or oversight. The problem they would remedy is the probe acting beyond reach of correction; the 6.93-day light-lag makes ground control useless during the forty-one-second crisis. The inset's claim is that none of them can close that gap, because the gap is spacetime geometry, not a fixable fault.
 
 1.0206 has no units. It is γ, the Lorentz factor, a pure dimensionless ratio (not seconds, miles, or tons): the factor by which the ship's clock runs slow. β = 0.2 is dimensionless too — it's v/c.
+
+[Telegram 2026-10-01-005320] **Lindsay:** 1. What is a "physics-callout"? What is a "physics gloss"?
+2. Why is the light-lag relevant? A crisis can only be addressed by something happening at the same time as the crisis. You don't need a time paradox for that. For example, if a car is about to hit a tree at 6pm in New York, and I'm in Arizona at 6pm, I can't do anything about the tree being hit, and it's not because of a time paradox.
+3. I am relatively well-educated. I don't know what a Lorentz factor is, or what beta means, or what dimensionless means, or what v/c means.
+4. Does this "Boundary" have anything to do with the story?
+
+[Telegram 2026-10-01-005320] **Claude:** My reply came back empty just now — send that again and I will try once more.
