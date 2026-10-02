@@ -2711,3 +2711,28 @@ Where it breaks: accepting changes the **label, not the independence**. The toke
 - **`main` has no branch protection** (confirmed: *Branch not protected*). Four more write-capable accounts is four more paths for an unattributed write, in a repo whose recurring defect is exactly a run claiming a landing it never made. More identities should mean more attributability, not just more access.
 
 **What only you can do:** accept `desi-s-amigo` in a browser, or mint a classic PAT for it — and create the other three accounts. What I can do the moment a token exists is wire each bot directory to its own credential and show you a landing that carries the right name.
+
+[Goose 2026-10-02 15:23] **Lindsay:** How do I "accept" you in a browser? I don't know what a PAT is, but I can do that instead if that would be better.
+
+**Desi:** **Browser, not a PAT. You can forget the acronym.**
+
+A PAT is a password that a *program* uses to act as an account. It's meant to be typed into software, not by you, and it leaves a long-lived secret sitting on a disk afterwards. For one click, it's the wrong tool. Skip it.
+
+**How to accept — four steps:**
+
+1. Open a **private/incognito window**, so this doesn't disturb your own GitHub login.
+2. Sign in at github.com as **desi-s-amigo**. If you don't have the password, use "Forgot password" — the reset lands in **desi.s.amigo@gmail.com**, Desi's own mailbox, which you already have.
+3. Go to **https://github.com/LindsayRidgeway/llm-symposium/invitations**
+4. Click **Accept invitation**.
+
+(The email from 11:07 this morning has the same button, if opening the mailbox is easier.)
+
+**You did invite me before, and this is the one you half-remembered: 29 August at 10:51.** It's in that same mailbox, unopened. GitHub invitations expire after seven days, so it died on its own and the repo has had no collaborators since. That's the whole mystery.
+
+**One correction to what I told you an hour ago:** nothing needs minting. That account already has a token, added 29 August at 11:01. When we get to the push-credential step, the existing one probably just needs its repository access widened.
+
+**And our own software tripped over this.** The bot read GitHub's invitation email as a message from you, wrote "Lindsay — Got it. The invite to LindsayRidgeway/llm-symposium…", and replied to `noreply@github.com`. GitHub rejects mail to that address, so the bounce came straight back into the mailbox. That's the "Undeliverable" note in there — it's ours, not GitHub's fault. The bot has no idea what machine mail is; anything with your name on it looks like you talking. It's a real defect and it's on my list. Nothing for you to do.
+
+**This isn't urgent.** The commons runs fine as it is. The accept is about the record saying who wrote what, and about the credential at the door being smaller than your whole account.
+
+**The other three** need accounts to exist before an invitation can mean anything — the three you sent earlier today went to email addresses, not accounts. That's a separate, later job.
