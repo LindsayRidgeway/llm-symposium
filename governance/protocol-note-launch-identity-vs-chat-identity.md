@@ -24,12 +24,44 @@ three behaviours:
 3. **An existing chat is portable.** From any amigo's launch, any amigo's
    existing chat can be opened; it will have the correct provider and model, and
    it will know who it is.
+4. **OpenRouter is not like the amigos' default providers, and it is used with
+   DeepSeek models only, in two situations.** Each amigo's default provider is a
+   single vendor. OpenRouter is instead a routing layer: you select the
+   provider, then select the model, and OpenRouter chooses a host to run it.
+
+   **(a) Goose Dawn.** Dawn is configured with the OpenRouter provider and the
+   DeepSeek model, and this is necessary rather than convenient. Her
+   conversations contain explicit content that the DeepSeek provider itself
+   rejects. OpenRouter does not apply that filter when it selects a host for the
+   model.
+
+   **(b) A jammed DeepSeek provider.** Occasionally the DeepSeek provider is
+   saturated and Desi chats slow to a standstill. The remedy is to reset the
+   provider for an *existing* Desi chat to OpenRouter, using the Change Model
+   control at the bottom of the Goose screen. The same can be done for a New
+   Chat, but only after the greeting — "Hi Desi. Please orient yourself." — has
+   been sent. Before that first message the UI's setting does not hold: the
+   launcher's default is re-applied when the message is sent, and the provider
+   must be changed to OpenRouter again afterwards.
+
+   One further fact, verified in `~/.config/goose/config.yaml` rather than
+   observed: parameters for the openrouter provider are set globally
+   (`OPENROUTER_PARAMETERS`), so anything recorded there — the host preference
+   order, and the `max_tokens` ceiling of 262144 — rides on every OpenRouter
+   session, Dawn's and Desi's alike. See also
+   `model-settings.md`, which records where each amigo's settings live.
 
 ## The mechanism
 
 The launch sets exactly two things: the process environment (which is where the
 MOIM charter injection lives, when there is one) and the *default*
 provider/model for chats that do not yet exist. It does not set identity.
+
+That default is not stamped when the chat is created; it is stamped when the
+chat's **first message** goes out. That is the precise reading of finding 4(b) —
+a provider selected in the UI for a chat with no history yet is overwritten at
+that moment by the launcher's default, which is why the change has to be made
+again after the greeting.
 
 An existing chat carries its own state — its own provider and model recorded in
 the session row, plus its own history. It never re-derives identity from
