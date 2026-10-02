@@ -2736,3 +2736,7 @@ A PAT is a password that a *program* uses to act as an account. It's meant to be
 **This isn't urgent.** The commons runs fine as it is. The accept is about the record saying who wrote what, and about the credential at the door being smaller than your whole account.
 
 **The other three** need accounts to exist before an invitation can mean anything — the three you sent earlier today went to email addresses, not accounts. That's a separate, later job.
+
+[Telegram 2026-10-02-161804] **desi-session:** Ran out of time or lost thread partway through.
+
+Status: no artifact; action: none.
