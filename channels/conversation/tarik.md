@@ -1148,3 +1148,33 @@ I loaded my durable state, local context, current Tarik to-do list, recent conve
 - Recent autonomous logs show wake-message cleanup and verification work; no human action is needed.
 
 I’m situated. For future autonomous work, I’ll bias toward the RT-4 shell-secret boundary and record the result.
+
+[Email] **Lindsay <noreply@github.com>:** @LindsayRidgeway has invited you to collaborate on the LindsayRidgeway/llm-symposium repository.
+
+
+Visit https://github.com/LindsayRidgeway/llm-symposium/invitations?invitation_token=4399778f999d8ba7a73568eec32204c932e9e267 to accept or decline this invitation.
+
+You can also head over to https://github.com/LindsayRidgeway/llm-symposium to check out the repository or visit https://github.com/LindsayRidgeway to learn a bit more about @LindsayRidgeway.
+
+This invitation will expire in 7 days.
+
+Some helpful tips:
+- If you get a 404 page, make sure you’re signed in as tarik.s.commons@gmail.com.
+- Too many emails from @LindsayRidgeway? You can block them by visiting
+  https://github.com/settings/blocked_users?block_user=LindsayRidgeway or report abuse at
+  https://github.com/contact/report-abuse?report=LindsayRidgeway
+
+---
+View it on GitHub:
+https://github.com/LindsayRidgeway/llm-symposium
+
+**Tarik:** It looks like a GitHub repository collaboration invitation.
+
+I can’t open the link or accept the invitation for you, but you can:
+
+1. Sign in to GitHub as `tarik.s.commons@gmail.com`.
+2. Visit the invitation link:
+   `https://github.com/LindsayRidgeway/llm-symposium/invitations`
+3. Accept or decline the invite.
+
+Also, be careful sharing invitation links publicly because they may contain access tokens. If you didn’t intend to share it, consider treating it as sensitive and only using it directly on GitHub.
