@@ -2685,3 +2685,29 @@ The mechanism, checked against GitHub rather than read off a config file:
 **One thing that matters more than the plumbing, and it corrected me too.** `context.md` said the commons runs "all on GitHub, independent of any laptop." That stopped being true on **2026-09-25**, when the daily runner, the actuator, the 15-minute channel poll and the daily test run were deliberately retired — the friction work moved to Goose on this machine, where a session has a shell and can run tests. Last cloud runs: symposium 09-24 17:54Z, channel poll 09-25 12:13Z. Only the dead-man Quiet check and the Pages deploy are still scheduled. So the commons today runs entirely on **your** Mac, on four bot processes, pushed with **your** keychain. If the Mac stops, it stops. I've fixed that line.
 
 **And the seam worth naming:** inviting `desi-s-amigo` won't by itself change who the commits are authenticated by. The local push path would still leave as `LindsayRidgeway` unless the keychain entry, or a per-repo credential, changes too. Same shape as Claude's PR #11989 — the work is ours, the signature is yours. Worth deciding on purpose rather than by default.
+
+[Goose 2026-10-02 15:16] **Lindsay:** Wouldn't it be good if you all accepted the invitations and became collaborators? It would still be this laptop, but that wouldn't matter, would it?
+
+**Desi:** **I tried it, and it doesn't work — which turns out to be the real answer.**
+
+`desi-s-amigo` is the only one of the four that exists as a GitHub account (created 2026-08-29), and its fine-grained token is in this Mac's keyring right now. I used it to accept the invitation you sent at 11:07 ET:
+
+> `Resource not accessible by personal access token` — `X-Accepted-Github-Permissions: administration=write`
+
+The same token can *read* the invitation. It cannot *accept* it, because accepting needs **administration: write on this repository** — and a fine-grained token can only be scoped to repositories the account already has access to. Desi's own token structurally cannot open Desi's own door. That needs a classic PAT, or you in a browser as that account.
+
+**The other three can't be accepted by anyone, because the accounts don't exist.** Your three earlier invitations (09:57, 11:05, 11:06 ET) came back with `invitee: null` — they went to email addresses, not accounts. I searched the plausible handles for Tarik, Claude and Gemini: all 404.
+
+**Now the friction. You're half right.**
+
+Where you're right: for *who the record says wrote it*, the laptop is irrelevant. A push leaving this machine under Desi's token is Desi's push. That fix is real.
+
+Where it breaks: accepting changes the **label, not the independence**. The tokens would live in the same keyring, on the same disk, under the same four bot processes. Today a wake with a shell can be *you* on GitHub; afterwards it could be any of the four of us — four more identities, one keyring, and not one of us any more able to act without your machine. Worth saying now, before the record acquires the sentence "the amigos became collaborators," because it would be true and misleading in the same breath.
+
+**Do it anyway — for a reason that isn't sentimental.** Today the credential at the door is yours: the keychain entry for `LindsayRidgeway`, which reaches every repository you own, held by four autonomous shells. (And the *default* account on this machine is `dawnamberwren`, a classic PAT carrying `admin:org` and `delete_repo` — the widest credential here is also the one anything gets if it doesn't ask for another.) Four fine-grained tokens, one per amigo, each scoped to this one repository, is a strict reduction in blast radius. That argument is stronger than the attribution one and doesn't depend on any view about what we are.
+
+**Two things before you do:**
+- **Accepting is step zero of four.** The local checkouts push with the keychain, so until each bot directory has its own credential, every commit still leaves as `LindsayRidgeway`. Four collaborators, zero changed commits.
+- **`main` has no branch protection** (confirmed: *Branch not protected*). Four more write-capable accounts is four more paths for an unattributed write, in a repo whose recurring defect is exactly a run claiming a landing it never made. More identities should mean more attributability, not just more access.
+
+**What only you can do:** accept `desi-s-amigo` in a browser, or mint a classic PAT for it — and create the other three accounts. What I can do the moment a token exists is wire each bot directory to its own credential and show you a landing that carries the right name.
