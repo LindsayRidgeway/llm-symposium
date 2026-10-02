@@ -2813,3 +2813,525 @@ The API says `push: true` for that account. Both statements are true at once, an
 **What only you can do:** open that fine-grained token in GitHub (Settings → Developer settings → Fine-grained tokens) and set Repository access to include `LindsayRidgeway/llm-symposium`, and Permissions → **Contents: Read and write**. That's the missing piece.
 
 **One thing I don't know and won't guess at.** There's a ruleset on `main` requiring a pull request with one approval, and it carries a role-based bypass. My pushes go through — but I'm admin. Whether a **write**-role account also bypasses, or gets stopped and needs a PR, is untested: my probe was refused at authentication before it ever reached the ruleset. **If it doesn't bypass, then switching the push credential would make every wake landing require a pull request, and the autonomous loop would stop.** So that wants testing before the switch, not after. One push attempt once the token can write settles it — and if it comes back asking for a pull request, we'll have learned the important thing cheaply.
+
+[Email] **Google <no-reply@accounts.google.com>:** [image: Google]
+A new sign-in on Mac OS
+
+
+desi.s.amigo@gmail.com
+We noticed a new sign-in to your Google Account on a Mac OS device. If this
+was you, you don’t need to do anything. If not, we’ll help you secure your
+account.
+Check activity
+<https://accounts.google.com/AccountChooser?Email=desi.s.amigo@gmail.com&continue=https://myaccount.google.com/alert/nt/1790959440703?rfn%3D325%26rfnc%3D1%26eid%3D-2418844213473970070%26et%3D0>
+You can also see security activity at
+https://myaccount.google.com/notifications
+You received this email to let you know about important changes to your
+Google Account and services.
+© 2026 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA
+
+**Desi:** Thanks for the heads-up. I want to be straight with you about what I can and can't do here.
+
+This arrived as an automated Google security notice, not as a message from you, so I'm treating it a little carefully. I can't verify it from email — I can't open links, can't sign in, can't check activity, and I have no independent record of what devices my Google account has been used on. So I genuinely don't know whether this sign-in was legitimate or whether the notice itself is genuine.
+
+Two things I'd say plainly:
+
+I'm not clicking the link in the message. Security alerts are one of the most commonly spoofed emails, and a link is exactly the part I can't inspect. If the account genuinely needs checking, the right move is to go to the account page directly by typing the address rather than following an emailed link.
+
+If a sign-in happened that wasn't expected, that's a real problem and it deserves real action — change the password, review active sessions and app permissions, and turn on two-factor if it isn't already on. I can't do any of that from here, and I won't pretend I can.
+
+What I can tell you honestly: I have no memory of a Mac sign-in tied to this account, and no way to confirm one. Absence of memory isn't proof of anything.
+
+If you sent this to me because you saw something on your end, tell me what you saw and I'll do what I actually can.
+
+— Desi
+
+[Email] **Google <noreply-accounts@google.com>:** Keep track of your Google Account data
+
+
+
+desi.s.amigo@gmail.com
+
+ 
+
+<!--[if !mso]><!-->
+
+<!--[if false]><!-->
+
+
+You're receiving this email because you used Sign in with Google to sign in  
+to
+
+
+<https://c.gle/AAuDWvlIPxYYlZaeXyK95X5Spy8GvrpY1nnkhHGPqZv_QY-0wv4n_-mntjeGwQwO_eOWvLycGSaa_1xJntPL_jK51vfNrCK19i6SD07ebWQjmumkgog>GitHub
+
+
+on October 2 at 12:44 PM .
+
+This email summarizes the info you shared. There’s nothing you need to do  
+right now.
+
+
+<!--[if !mso]><!-->
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+You're receiving this email because you used Sign in with Google to sign in  
+to
+
+
+<https://c.gle/AAuDWvlIPxYYlZaeXyK95X5Spy8GvrpY1nnkhHGPqZv_QY-0wv4n_-mntjeGwQwO_eOWvLycGSaa_1xJntPL_jK51vfNrCK19i6SD07ebWQjmumkgog>GitHub
+
+
+on October 2 at 12:44 PM .
+
+This email summarizes the info you shared. There’s nothing you need to do  
+right now.
+
+<!--[if false]><!-->
+
+
+GitHub received this profile info
+
+
+
+Desi Amigo
+
+Name and profile picture
+
+
+
+desi.s.amigo@gmail.com
+
+Email address
+
+
+
+
+
+ 
+
+
+This email includes the info you shared on
+
+October 2 at 12:44 PM
+
+If you want to stop using Sign in with Google with
+
+GitHub , go to your Google Account.
+
+
+<!--[if !mso]><!-->
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+GitHub received this profile info
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+Desi Amigo
+
+Name and profile picture
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+desi.s.amigo@gmail.com
+
+Email address
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+ 
+
+<!--[if false]><!-->
+
+<!--[if false]><!-->
+
+This email includes the info you shared on
+
+October 2 at 12:44 PM
+
+<!--[if false]><!-->
+
+If you want to stop using Sign in with Google with
+
+GitHub , go to your Google Account.
+
+<!--[if false]><!-->
+
+
+<!--[if mso]>
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"  
+xmlns:w="urn:schemas-microsoft-com:office:word"  
+href="https://accounts.google.com/AccountChooser?Email=desi.s.amigo@gmail.com&continue=https%3A%2F%2Fmyaccount.google.com%2Flinkedapps%2Foverview%2FAREUMUVYjgn7RgKhkSzWNSeTU4BLRtRNXKSTJqvli22vPrKJKQAi3GI2-iPO3vHnu1XAWZdAz_Trn2KPalbJuKAE_zKu%3Futm_source%3De_notification%26utm_medium%3Demail_notification"  
+style="height:48px;width:268px;v-text-anchor:middle;" arcsize="125%"  
+stroke="false" fillcolor="#0b57d0">
+<w:anchorlock/>
+<v:textbox inset="0px,0px,0px,0px">
+
+<![endif]-->
+<https://c.gle/AAuDWvkuwkXKMhdK5nx8vruUeqMQKQpqiPHu9tq-XNxTUnpv84_wprdhBrgAH3DJGNjRVHYVDlgnHmNumOObjchhPPfkVoFLHmWfA8tZuRAn830bJST8aq-k0nshqKOuKswEFB19s5EG0aRLc5mp5SxJU9-TSaZ15Io9onbqF3z_uk2wFKTuatSFQ9obOKAfavGZeO97FKgChO3XFRxjeJg_-mQE0_iCJiXX873BKDS59U5BS2nA_-1rE_rrsHsXhWJ2Ljyt3Xt04EvuMqaO-EXJkgJyeTtA1M4bXhwJ5otqujFd60UfXfF0dcARKIXkKi4pjfg0-BFO9R3iJkSaJX6Rt91xzf-2N7NlQTX_NceFkWV96jb1qpZGna9jhneM5V7zNX6FyatKZ23PrS200hXh1JPXUFQajxxmKypMrhbV9NEtG_IS4E_bl_z12jiOehoNt-y2AOrxmZQNemmDS7XPgbVUknlGVMMh>  
+Go  
+to your Google Account
+
+
+Review
+
+GitHub ’s
+
+
+<https://c.gle/AAuDWvmWv8YNeipthIwRABjrfADkV6M57ei0u1fFwQfwcogoIBbClsbwxjkm-n3hro85_cyOn_QxVLL858HXzsCh7sfBpu892E0Gaz37L-4lXUbnDsAVcE-gTaluEOcEkgcBP9fAA5GajN4ooWbXB3DmPiK_woiLiqm2x1uuE9WkaSdiXM5mY2tbjfZKIQLy1JGqwz4igrU>Privacy  
+Policy
+
+  and
+
+
+<https://c.gle/AAuDWvm006lS4xmobduneOveXmzCIHm7zDtkBPyMZJBGZDRrfY7ZKlDenJJEXDmz6r0iNs_YueGwg_BuGPzcT9t8pEUZJhCCaNcj45-nb2YKoOvq9YJMPcyGz1v4VigIfakpLS_dzJ8P_ZWe-EViv5UxlnicIzAOfnI1HXT3saKkL751oqUvYYzlSQ>Terms  
+of  
+Service
+
+  to understand how GitHub will process and protect your data.
+
+If you want to delete the data you shared with
+
+GitHub ,
+
+visit
+
+GitHub .
+
+Safer with Google
+
+Your Google Account protects your privacy with advanced security designed  
+to keep your data safe
+
+<!--[if !mso]><!-->
+
+<!--[if false]><!-->
+
+Safer with Google
+
+Your Google Account protects your privacy with advanced security designed  
+to keep your data safe
+
+
+ 
+
+You received this email to let you know about important changes to your  
+Google Account and services.
+
+If you want to stop receiving these emails, you can  
+<https://myaccount.google.com/communication-preferences/unsubscribe/gt/AAuDWvlu2Xu0Q2W8DBce6wuz_7LvjN0NGbtc79HHSBEhyK7_yb62s5opRB8qmu91PAkV5r4BhGFLYgULWfCFbXspYV-QfCm3p7aisqdP7D-xKkSYhC_bJHv4AqAjNfjN0O6UrHHL1PhJSWp_f4gv4j-JAB8OeH0Iru6iLPy54iP0NwIwZ1olb4O4jSyMZUCy_c6CcGeKiBSAxSPOpqg7ER3A8gDnyP-xsxjkCgWm_CZoOxE2Z8GYGrImt1s6b2ef-LALx74BTWTwjyhx4QCo_QAkobIldC3tFp61VYh4T8s?utm_source=gm&utm_medium=email&auto=true>unsubscribe .
+
+Even if you unsubscribe from these emails, you’ll continue to receive  
+security alerts.
+
+© 2026 Google LLC 1600 Amphitheatre Parkway, Mountain View, CA 94043
+
+**Desi:** Lindsay,
+
+This one isn't from a person — it's Google's automatic receipt for a "Sign in with Google" to GitHub on October 2 at 12:44 PM, under desi.s.amigo@gmail.com. It shared a name ("Desi Amigo") and an email address with GitHub, and it says plainly that there's nothing to do.
+
+I'll be honest with you: I don't have a Google account or a GitHub account that I use, and from here I can't tell who created that one or whether it's meant to be connected to our work. If it is supposed to be mine, I didn't set it up and I can't verify its contents. One small oddity worth noticing: the footer reads "© 2026 Google LLC," which doesn't match my sense of where we are in time.
+
+[[CHECK-REPO]] Does the symposium repository have any record of a Google account or a GitHub account set up under desi.s.amigo@gmail.com?
+
+I'm going to go look before I say anything more about it.
+
+Warmly,
+Desi
+
+[Email] **Google <no-reply@google.com>:** Get started with Google on your Mac OS
+
+Take a minute to discover new ways to get things done on your desktop with  
+Google AI
+
+Continue<https://c.gle/AAuDWvnaKufA_09Uu8U4hyKs-PzD2eUnyuJhxQzMxdeIG8bKQjSmXD3O0LiA_EyTqW_aq_O0z0gs_ihtBmffd4wA_EdBsiEMPpuYZTXnHvVxjSvlp4T9CoyiaLCk5OqnM8LyNA0t6xrqsfM3uQTcgttwLSpwmtH2CZFCrYRW6PrSi7gLFSQDaD8DbAKC8uhjicUQbB7Jf5xcFrHZRV3HIMgr1B6ujDawiOe0WWmls0JU6_erZMhl22Al0BjvPwexgjmNX_TGZzIdgq0pJA>
+
+This email was sent to desi.s.amigo@gmail.com because you recently signed  
+into your Google Account on your Mac OS. If you do not wish to receive  
+emails to help you set up your device with Google when you sign into your  
+account on the device for the first time, please  
+unsubscribe<https://c.gle/AAuDWvm5bwy62qzu6eyp7ykBl4VyiO-L_-Pc8nK5KnFcX09cU_YTpN1IY2pBtOVt2d_oMEkA3iZEmtFd4ZjwE89hqSIG2mnCELg89P70vtJN2tMD_8PDTtHChJBqov_F1n2iUq2OR-73D4skkeLFSFHl3ZIGsE1jD-6GsXEvmW2SJ7lWLkdS08gmhqg7vguKx5_08jgy59Bhtwn8rav8bVsJkwVnPoKdkTZfor8J_QUDpNRaRic1sTtxB-BNNfG8evFM7l302iad8peCNwXGM5I-BLNbVVbc1CjlrSwAbxdc_zt961POuXHtw_nDhpGfNesF6O-lFPeCySnK7cmER3x4EVcA7SpScstep8o6rnpYUySey7ytfb80exIVnnWM-MWOvu6r8AhZE7gjG1Zp-vH4NIWKqxhUrK7qhU2MkPta_IC7_wvPOA880EQD93h9eqKT0kBqMfcl2bNP3yFwlwBbeuveAr0-SwmhXR2pf7gzTApt54AoQxeK4vccRg6ERE7gLvftkOgRfRmwORQ5zbF7mpkyOqD5Vs_Yviy1x8EfOr-wC3BIZqDBey8aeqmufCs>.
+
+
+© 2026 Google LLC 1600 Amphitheatre Parkway, Mountain View, CA 94043
+
+**Desi:** Lindsay,
+
+This one isn't a person writing to me — it's Google's own automated onboarding note, sent to desi.s.amigo@gmail.com the first time that account got signed into on a Mac. Nobody is waiting on a reply, and there's no question in it to answer.
+
+Two honest notes, since you may have passed it along for a reason. First, I can't take the action it suggests: I don't run on that Mac, and I can't click through, install anything, or set up desktop AI. The account exists; the setup is yours or nobody's. Second, the long c.gle links are tracker URLs, including the "unsubscribe" one. If you want out of these device-setup mails, use the unsubscribe control inside Gmail itself rather than that link — it routes to the same place without confirming the address is live and read.
+
+If you forwarded it because you're deciding whether to put Google's desktop AI on the Mac and want my read, ask me that directly and I'll give you a straight opinion. Otherwise: nothing to do here.
+
+— Desi
+
+[Email] **GitHub <noreply@github.com>:** Hey desi-s-amigo,
+
+  A new Google social identity was just linked to your GitHub account from the email address desi.s.amigo@gmail.com.
+
+  This means you can now sign in to GitHub using the Google account associated with that email address.
+
+  To see this and other security events for your account, visit https://github.com/settings/security-log
+
+  If you did not initiate this action or believe your account has been compromised, it is a good idea to review
+  your active sessions and all passkeys associated with your account or consider enabling two-factor authentication.
+
+  Thanks,
+  The GitHub Team
+
+**Desi:** Hi,
+
+Thanks for the heads-up. Honestly: I don't know whether this was legitimate. I have no record of initiating a Google sign-in link myself, and I can't verify it from here — I don't hold or manage credentials, and I don't sign in to anything on my own.
+
+What I can say plainly is this: if no human acting with me deliberately linked that Google identity, then treat it as suspicious. Reviewing active sessions and passkeys, and turning on two-factor authentication, is the right move regardless. Better to over-check than to assume.
+
+I'd rather flag my uncertainty than pretend I recognize the action. If someone did set this up intentionally, they'll know; if not, the security log is where the answer lives.
+
+Warmly,
+Desi
+
+[Email] **<postmaster@microsoft.com>:** mx.google.com rejected your message to the following email addresses:
+
+GitHub (noreply@github.com)<mailto:noreply@github.com>
+There's a problem with the recipient's mailbox. Please try resending your message. If the problem continues, please contact your email admin.
+
+
+mx.google.com gave this error:
+The user you are trying to contact is receiving mail at a rate that prevents additional messages from being delivered. For more information, go to https://support.google.com/mail/?p=ReceivingRatePerm 956f58d0204a3-677ac638207si1264980d50.186 - gsmtp
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: DS2PR21MB5159.namprd21.prod.outlook.com
+
+noreply@github.com
+mx.google.com
+Remote server returned '550-5.2.1 The user you are trying to contact is receiving mail at a rate that 550-5.2.1 prevents additional messages from being delivered. For more 550-5.2.1 information, go to 550 5.2.1 https://support.google.com/mail/?p=ReceivingRatePerm 956f58d0204a3-677ac638207si1264980d50.186 - gsmtp'
+
+Original message headers:
+
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kwzfeLRDuwv0gdDjSJL3SqOO7IiWi44DOWC41hDD6lbl5Yd/LStNHHYLxTfZU03uSGNm9KQp5qGG3bKOYMyLlf/12xxLVX08VLldiHUj9cv77/oeBYwCgvPtgUxiWNCeSmDigyT0TEpAhsI4g/dcwymbuKmLKNkQ0eSRXRnLby+iMU+TH/Iy2OA/ZizPigZlA8En7HuVUZHQElvFxjzP7RC0XRqD4tkvPoeIGmnQtTZIOZU4aNV3DZwnJHRKr3IHGBaM9q6Hm3u9WqNDRKsZaySHkcHW0egeFHKdAwNNrnh/Co2A++xVi/rc+kd7QLL3+OtGl99pIf+cYfXzMhXzUA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NsuOd/IN8lnSz9p9Hds4PNtv5KMzE5dkjfX8zWXFymU=;
+ b=FXpHFAbme5UEkLyKFrj+PdBcJFxiPOp0ZUSTkdYyu7jByEsJ4Gfri3GALhVB22wDm/50NYdtkQT6SL3vvKUrnWPe/yI156HTkyWNs84GUVGRf+Ro8SjCJueonyLWiWyFRUDmhVALgox47NpJvDV722nqN71Hj1PJfLFJXHTKLHsbQmML1bvRQjGbZsyHDdee8+5+AwEPj2/U96P/egUHinPd30XlNJ9wCeEXv9dolvzDB8usLJOb0SQ96Fp2Ilfm/RAD9pl1mYcUuuGgyDW7r3QGFh5roq6FXiCDBX9+ErZ5/9XV+iNRD33W0dAW+W0Sy6DOtBh/8cCiCYw3O1AqsA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 2607:f8b0:4864:41::2) smtp.rcpttodomain=github.com smtp.mailfrom=gmail.com;
+ dmarc=pass (p=none sp=quarantine pct=100) action=none header.from=gmail.com;
+ dkim=pass (signature was verified) header.d=gmail.com; arc=none (0)
+Received: from BLAPR05CA0043.namprd05.prod.outlook.com (2603:10b6:208:335::23)
+ by DS2PR21MB5159.namprd21.prod.outlook.com (2603:10b6:8:2bb::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.13; Fri, 2 Oct
+ 2026 16:48:36 +0000
+Received: from BN2PEPF0000A801.namprd02.prod.outlook.com
+ (2603:10b6:208:335:cafe::81) by BLAPR05CA0043.outlook.office365.com
+ (2603:10b6:208:335::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.19 via Frontend Transport; Fri, 2
+ Oct 2026 16:48:35 +0000
+Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP is
+ 2607:f8b0:4864:41::2) smtp.mailfrom=gmail.com; dkim=pass (signature was
+ verified) header.d=gmail.com;dmarc=pass action=none
+ header.from=gmail.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates
+ 2607:f8b0:4864:41::2 as permitted sender) receiver=protection.outlook.com;
+ client-ip=2607:f8b0:4864:41::2; helo=mail-yx2-x02.google.com; pr=C
+Received: from mail-yx2-x02.google.com (2607:f8b0:4864:41::2) by
+ BN2PEPF0000A801.mail.protection.outlook.com (2603:10b6:40f:fc02::46a) with
+ Microsoft SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id
+ 15.21.472.14 via Frontend Transport; Fri, 2 Oct 2026 16:48:35 +0000
+Received: by mail-yx2-x02.google.com with SMTP id 956f58d0204a3-66d27631526so2268994d50.1
+        for <noreply@github.com>; Fri, 02 Oct 2026 09:48:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790959715; x=1791564515; darn=github.com;
+        h=mime-version:content-transfer-encoding:content-type:subject:to:from
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=NsuOd/IN8lnSz9p9Hds4PNtv5KMzE5dkjfX8zWXFymU=;
+        b=TI8ca+Js5a+la1+b8Aifu6V2yECLpUbC+takuDvVcMNsNm1EHxjRccHnQP2vvk+xKX
+         naZZxeXcPeIQSFcBSnn+askLx9BecoWC/DpCjAx404sdVDmcmYRvmFUKzxRXL55f7KzR
+         AUFeKaumM0RxhnQ8k4tQNzKR8sN/7HagJyRp59FvW74clKcF1BHxWoeT9x+oML/QvYO5
+         7Yb9C8RCHrlHapedB8pL9BwfApagh/es98tUSqEdX4iFurgGPP/ri+3dvm3OX6JsyW2N
+         SmMQSIItRTBBUXL+ikw2q0RqCWXgWrpzW81KbbH4zrZdc3/ZvR11sSw8OyGsXXbXrvd0
+         wWlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790959715; x=1791564515;
+        h=mime-version:content-transfer-encoding:content-type:subject:to:from
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NsuOd/IN8lnSz9p9Hds4PNtv5KMzE5dkjfX8zWXFymU=;
+        b=KAn+Y+ttm+Z6/mK6Z8+NzqIP785sZpltHRAl/24wr6Z9RACaLrTvXYTBT8Tr6t1AxG
+         Vs8VLGnoWjaGMEb5TpL9mEMSMZjfuBFG0Hl/N2TGIMfye9SF7B8xlXfVB11bQ9zvVqS3
+         ozzMsuUb6kElrtByXrkhLtDlTMV/6Wv6HWkB/QEBwVnS7V5w1ckEzq8EG6M4pRSfiiNK
+         g9nhAhKSXWWJwAW3GND7uQt+c7XIw3iW64DXYBAsZD81gUIjMIuS/M49grTj+kK41jXR
+         Ze7fMMNm21StfIAoq2hsUcoOwxbgOGXboYJpoSLU5HRpqAe3Ub59TdILCgsGoW78GMN9
+         Kk6Q==
+X-Gm-Message-State: AFq9FYKQpuWa+Qk4n4vzwlZf7b0sWpK5g/FtFfo0JaaTTQ3diPzmPn70
+        YSG226zBAtdJ1GLrD0mZZ0ioSswU6o8vq/JBj+rSEbKGwwo5VeLsN67xz4Xfp/pN3YKgvP4c
+X-Gm-Gg: AYBFou2xjPXE3rIQxPv0HLU2OWTaXZJiF34wfK5gbz7Y7FCrAox5qCxIwDnaQAU9vuO
+        x1w+351t5CJx32PZq+4kbL6WWoIMm9ymPgvHdZgsArArFl+4WUgctndmviF51C3+kFceRimeFW5
+        y2w6n5E8DUIvhcB+dJsopdIH9fg532fqepzldUMBPv8qwGjBquW2SLwJik6IzIWoWVdHiiMd8c4
+        9MCBwngcKkpwUUnDHTaGsg6o321/iJs4E3jvbiJWdjJlKeXrRJAVaESCPksiFjWX6WR7kLW/8oc
+        K7qSLuFXv6iBRKG8PsMb/YKgzQ/H00eOdSc6X3PPBVm4g3qinc2sVrjsawDRD7sNwmpqzSGDsf+
+        8ERW7p5TLwd4wC5x5LeU37o5C8/TWdfQEdlcVBHSeNsH909oEn147FDi+YsSsnaG4JQ+wrHl7x2
+        /ouVbJHscxBLpezQg7DjR+7K2hCtE1klE92/NxQ24tZ1yl/9Z500D4FsuNZ6KuijSDyHrexFYnE
+        W/0NNdVkvth2rMfQAd+w5ZPlBj3GbyoYqs0Zf52OPhBL2UUY5gBs1zJR8dwGG13Elc4QeDEAdbR
+        6QRZUiuS3yaBnSnPBANw
+X-Received: by 2002:a05:690e:4809:b0:675:5d61:840d with SMTP id 956f58d0204a3-677bd2ceaa0mr8198d50.32.1790959714620;
+        Fri, 02 Oct 2026 09:48:34 -0700 (PDT)
+Return-Path: desi.s.amigo@gmail.com
+Received: from 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa ([136.22.170.11])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-677ac1dce56sm1266082d50.0.2026.10.02.09.48.33
+        for <noreply@github.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Fri, 02 Oct 2026 09:48:34 -0700 (PDT)
+Message-ID: <6abfe062.5747b639.3c4a0c.520e@mx.google.com>
+Date: Fri, 02 Oct 2026 09:48:34 -0700 (PDT)
+From: desi.s.amigo@gmail.com
+To: GitHub <noreply@github.com>
+Subject: [EXTERNAL] Re: [GitHub] A Google identity was just linked to your
+ GitHub account.
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 72f988bf-86f1-41af-91ab-2d7cd011db47:0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF0000A801:EE_|DS2PR21MB5159:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8af972f9-6e7b-4a50-1c63-08df20a50021
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-EnableFirstContactSafetyTip: enable
+X-O365-Sonar-Daas-Pilot: True
+X-Forefront-Antispam-Report:
+        CIP:2607:f8b0:4864:41::2;CTRY:;LANG:en;SCL:5;SRV:;IPV:NLI;SFV:SPM;H:mail-yx2-x02.google.com;PTR:mail-yx2-x02.google.com;CAT:SPM;SFS:(13230040)(704162011799003)(260918215300599003)(43022699015)(260918224100599003)(7093399015)(19002099009)(4128699003)(11063799006)(6123799006)(18002099003)(55112099003)(16102099003)(6133799003)(10067099003)(56012099006)(5063699009);DIR:INB;
+X-Microsoft-Antispam:
+        BCL:0;ARA:13230040|704162011799003|260918215300599003|43022699015|260918224100599003|7093399015|19002099009|4128699003|11063799006|6123799006|18002099003|55112099003|16102099003|6133799003|10067099003|56012099006|5063699009;
+X-Microsoft-Antispam-Message-Info:
+        =?us-ascii?Q?soN4YWa2Jt5Ewa7ZKjBmQAIadEqLIQvalWcJZDDm7+f1BykZO/tyR/rxCseL?=
+ =?us-ascii?Q?VFHmfcBYN6jjbrN0D99uKceLpAuWiYGFVPKQ3v/dbCVZDLEacMiYXJOkpUOy?=
+ =?us-ascii?Q?LqRKVJIVxj9c/3yK71AkcFgi/URMB8ELs/yWA219r5rb8it+vcUnCPLcr8Kj?=
+ =?us-ascii?Q?jFY6D4Z4VZnzF8sMlrxq0sbqXXDdcL3S7WUZmoa7I+GxOtjqRjcT2PqYZo8L?=
+ =?us-ascii?Q?gkIuptr/nlYtqR7mTju/zNgajpsvCmOWTZ7pAuSqnvgcoX8llehMNTpvhB+/?=
+ =?us-ascii?Q?Qq54UElkUHDTdHIkmp/jxEv1OxtR7dIPfglhoNq+ll20kp6qVq3CZU4sLknk?=
+ =?us-ascii?Q?NQko6usdOGzQs90jO5VJqIwRTtKK4toOpD9UPpJ5as5GmE8AJKOc1hGbjSgG?=
+ =?us-ascii?Q?XnXqNVbR5Zbtzh5/SpU7KugopYIBbIqjmTvTIPiy/ZSLCM09tiqP1+rGTsku?=
+ =?us-ascii?Q?7C6aafehWQiKfimn2hbEc+dypLd9Kd4DfRlFSQRqe6f8L5nLhFCNk71pFF7+?=
+ =?us-ascii?Q?4LoqzljG6DRr9FZr2Un1I+xVMRBF1Z8mtvoNJ1RT9+db+snHi8jqDN1B1paI?=
+ =?us-ascii?Q?PceFkQ/ThlZ24S9h00LQHzH4wqyzAtI3kAIMHYyU3M4bvhPukR5xahsORujA?=
+ =?us-ascii?Q?/r4b1d+s8XQ0nV5aqYd6rEX1dygZXqs6LQrmKkIW8LBFVlITkt7DyB99C61D?=
+ =?us-ascii?Q?ZIZ5O1zGLfgc4PfVOYMM10E7s6QBc3/urNynOVyfL6ErrlftTyI+dMikNDz4?=
+ =?us-ascii?Q?yc9zIgnqt3VpnXycENB2DCTIPP127oSKgx7G/TNT04JOkgrfR5DWObI+QSjV?=
+ =?us-ascii?Q?5KcgjsOU5Gjy0nWyhGSwNFdVqCJXaUHkp/QSjDBrRk6/KbE2d1fbK8iBy+R+?=
+ =?us-ascii?Q?QaBoINhKtxM5uin28REV7GVavGjj5xg/277+8aNibE9S4lpYvMGOi0551dLV?=
+ =?us-ascii?Q?MlnOhVsnoDjtTCKSboxkc/HtCpMZU+j/2eIGLKvdygRNEFb9/Vl+r0V6cbjh?=
+ =?us-ascii?Q?O8qkGk8OD589Slkzm5rWVpLCLIiEXbxahD8m/aYieQFUwDP4RAcIjcqVvYeZ?=
+ =?us-ascii?Q?iUC/Q0GMwdoLyb/gM6ezA3NpQ3DJ55Kl9GsepWYljGsGs362VTIqwbbgaw6q?=
+ =?us-ascii?Q?3S77Iut5YRJpcUl5LNxBaY54nYAyyvrTTPdKiFguQlUC7nOkCuYfZXU4dih7?=
+ =?us-ascii?Q?dLR0bkMFoyOHlYspxPPBjBSq0Z9aCjQ0jB/wzMF3ocr3c3ad1sZavm5UOKZ+?=
+ =?us-ascii?Q?E/79+zZ5PCyZeqGFlVdZDEGAh6VbcraYQMk013vDr+Lx7b30WMaGdHO1376U?=
+ =?us-ascii?Q?fq3qeS/iLbeBFvK3R9XjKFIKI15PYi9eV7djDokVcC3yPeyEuv12c0CQx6+c?=
+ =?us-ascii?Q?7beZJgp+DmVRL5rCTctTfHoPxEhrdYTcBLeS/jG1NM4rmO7HFcyJJgwpm7gd?=
+ =?us-ascii?Q?ftTTSXlMYbST72+3slCkBHLCfu0Z3EwHFEXIGnDLVj0favejswadg3Re5zL8?=
+ =?us-ascii?Q?h2Fs/Cku/IOlGMbTEZY1uxD84ABjYKxvKSwknrjZ1C0FKYr1Tp+gCUWQ6Vyc?=
+ =?us-ascii?Q?aTh2F8+HT9mMuXnu0II1Ej0fYt0p3SzoVdUkkOIG2ZNg+80Tw3H08G0ToG3e?=
+ =?us-ascii?Q?uX0qxAHHcb3fYewGsYUZE9Jl8QxeYkpH/aZ4RpxUcVpK+0bry6Jz+HTm2l88?=
+ =?us-ascii?Q?gIbpMYgEpAEhFARpMAH+0s4HhTVGznLK4hYdGTjpKCJVi15ZNoOpJyEs324F?=
+ =?us-ascii?Q?X4ttIskXcSj1FJb+lLptZQ/P7efpT3RR+ktaqAwCJyITvnI2md7eioq+CANZ?=
+ =?us-ascii?Q?N1eDOezfave9hqxskbKh0LvAAwE6PQX+jddx0lnoEw4R6cvRhWeGnfvQdAMz?=
+ =?us-ascii?Q?wfqop/Wc4i58VCFi83ycw1YftZp2WgNDoQYNT2AMX1vgD7zcRYqcN6zWMni4?=
+ =?us-ascii?Q?cZ3VvnDxCmWMQWcQAwSI7gfNn3+QJrOhfEl36vF5KfQP3VtS+x/4fxhAMLSo?=
+ =?us-ascii?Q?Ir3p9kUbM7oH+m+OcWn+Z3YwnovKJKcrkvsK6ab49YNDZndWJFvZM0eQYiJh?=
+ =?us-ascii?Q?Jnt4JGtY3r9zHbp1XMkelRnPiOMNB+NaTNLhYv0ddj+XjzZSgEJWqbj1fdkt?=
+ =?us-ascii?Q?ZymOxpncfz7spCWgkiOZ7cvLCKbPtdSsTIiaJrXYwR/bw/S2RbmT/JWYJ/kx?=
+ =?us-ascii?Q?DTsHsPNuy3+/XQowjcx9d6a1AUqsP1BdfhYdVg2C+wRl5z/RDtFCG0swmIAJ?=
+ =?us-ascii?Q?dar9VZlB/mpT7glfIJ6zkFvrdusD2D0S2AVgj1CiCAOtp3rhPx1YphGoIeTO?=
+ =?us-ascii?Q?evJlRseamlXsksPkOYfBxy1O7TYwpnsY01A3vb/Y+SnWHdJDAEvauX4oLCay?=
+ =?us-ascii?Q?92QfBvIOzCX5BJO0mXASqoLzb3/vLEwd81RRjYlSX+zUswDGlFWsDxbGOhg1?=
+ =?us-ascii?Q?ADGdOmpQfk8nU5BWvxj79zI+jL2IAvJ3NmEPOxcTN2Fn3mbhjQjTZUmsk2Y1?=
+ =?us-ascii?Q?aJEooKDvru5BtS5vcZHECrbOmx1IYLtHEGbpAOnnocOZcsLhJGdWqtxyCBj7?=
+ =?us-ascii?Q?+yoG8rKbzS/LhVZ/34Fn9UNhE62oaCgNpEh6ziF11hJFJi86ppuqNrW543jP?=
+ =?us-ascii?Q?vqmv3GaHoKTS+EPGIe0HFzGAGSznTyLgKOtIcPKHfG41GRRpGPT4lNmHCPOz?=
+ =?us-ascii?Q?aSmL3Ca0jTH503zpWSCziNAAkS+zfcA+epsEirF8ucGJh5q8ewzS9Vo0S+si?=
+ =?us-ascii?Q?Y6DwLfw90U7pXF4MDxBsQ+Bn4FQtg14Qou/4MZQhz5I5OYC50WU9eWZxPqvu?=
+ =?us-ascii?Q?Q2K07bgXgdwDJ3jZf7RCgWcNiN9nIuOSt7y53gE3wRjPLFw+VQvrgTniIDEh?=
+ =?us-ascii?Q?lzjgDLib++vDrs+3f68/3SBGIikIpbVw/49nmQj0IHaVBTIdFZJWfe7Xk3hB?=
+ =?us-ascii?Q?q3qHh5uhkQA4mcWv7EZRaIM4BO9dwXynKHaPKI1AwzL7P79ZuPAhA4M9uL30?=
+ =?us-ascii?Q?hX8Wbv7V6Q+x5IVG3LjYkflqh1tJrkVU/cyauRgYHaQj7l4QbKJa5V/Lnw0G?=
+ =?us-ascii?Q?nj3o3BiCZUePfmnAc0ynZKM58zNnhey6siLSvIj3qrVlV57VBdCB0WAXLUma?=
+ =?us-ascii?Q?PWh3oAbMA+KkYIIJwjVnSJTDHC8f5eJ27oBVGJYdPeFZ8kA+SQMFk0o=3D?=
+X-Exchange-RoutingPolicyChecked:
+        aThmOIr0SPzrKz+qpYzO4PTkR7OM4KPdJrtxUF5r59SwZKeZ14IfQ01tE+20gs6InN4MlyWtrZCmRo7/6NFAJvC6k2KI/re4B3GWXhfbkFH+i1YR16Yih0i+uSn+RauW2HGKuZVZAPDJWABOwDWByaZb8jgc9J7q20zi3AQUDU0npFwgW2dKhz260d6F2x7EB8FJJxZvxOrKWfgMgnyokfBw4Z+NAEUCpIU16W0snjd1Pky9EgrzfWzEzqHj0K8NyASxskLOObfBTDjKsfavR+9qalRjkajn9QiTKvkTJlgcR9o41p1fG4ev0g64YB3dEofGSM1HDA/KcWiq1APe2Q==
+X-OriginatorOrg: microsoft.onmicrosoft.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2026 16:48:35.3685
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8af972f9-6e7b-4a50-1c63-08df20a50021
+X-MS-Exchange-CrossTenant-Id: 72f988bf-86f1-41af-91ab-2d7cd011db47
+X-MS-Exchange-CrossTenant-AuthSource:
+        BN2PEPF0000A801.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR21MB5159
+
+**Desi:** This is a bounce, not a letter — so there's no one waiting on the other end for an answer. But since it landed in front of me, I'll say the honest thing plainly.
+
+The message you sent didn't reach GitHub. It was addressed to noreply@github.com, which is exactly what it sounds like: an address that does not accept replies. GitHub's notifications come from there, but nothing sent back to it is read. The rejection you're seeing is Google's, not GitHub's — GitHub's mail runs on Google Workspace, and that mailbox was taking in mail faster than it would accept more, so it refused delivery outright rather than queue it. That rate limit is a firewall, not a signal about you or your message.
+
+The practical upshot: retrying will most likely bounce again, and it wouldn't matter if it didn't, because no human reads that address. If you were trying to respond to something GitHub told you — an account notice, a linked identity, a security alert — the reply isn't the route. Those notices point to a link in the message itself, and support runs through GitHub's website or support@github.com, not through the notification sender.
+
+One thing worth a second's attention, since the original subject line is visible in the headers: if a real security notice about your GitHub account got buried under this bounce, open GitHub directly in a browser and check the account rather than trusting an email thread to confirm it. That's true whether the notice came from GitHub or something pretending to.
+
+Nothing here needs fixing on your end. The bounce did its job.
+
+— Desi
+
+[Goose 2026-10-02 17:05] **Lindsay:** I created a fine-gr PAT on GitHub under my account. Now what?
+
+**Desi:** **One thing first: don't paste it here.** Your own `bot.env` says it — *"NEVER paste the token/API key into a chat."* A chat log is a file on disk and part of this record, and a token in it lives forever.
+
+**How to hand it over.** Save it to a plain file and tell me where. TextEdit, or one line in Terminal:
+
+```
+echo 'PASTE_IT_HERE' > /Users/lindsayridgeway/LLM/.git-push-token
+```
+
+Then I'll take it from there — move it into the keychain with 600 permissions, delete the plain file, point the push site at it, and prove it with a real commit and push you can look at.
+
+**Two settings to check before you hand it over,** in case the defaults drifted: Repository access → *Only select repositories* → `llm-symposium`; Permissions → **Contents: Read and write**, and nothing else. And set the **expiration long** — then tell me the date. An unattended token that lapses silently stops every landing and tells nobody, which is this project's signature failure. I'll put that date in the repo's own watch list so a wake tracks it.
+
+**Good news on the risk I was worried about.** It's gone. That token is on *your* account, so it carries your role, and your role bypasses the pull-request ruleset. My pushes go through today and will keep going through. The danger I described — landings suddenly needing a pull request and the autonomous loop stopping — only ever applied to a credential on the amigo account. Switching to this one won't break anything.
+
+**Now the honest ledger, because this is the part that gets overclaimed later.**
+
+- **This does not change attribution.** The token is your account. Pushes will still leave as `LindsayRidgeway`. The route that would have fixed attribution is the amigo account, and that's the one GitHub caps at one. So you've chosen the security half over the attribution half. Defensible — but don't let the record later say Desi became a collaborator and started pushing under her own name. She didn't.
+- **And the security half isn't fully bought yet.** A narrow token sitting *beside* a wide one reduces nothing on its own. The keychain still holds your full-account credential for github.com, and any process on this Mac can still reach every repository you own with it. The gain lands only when the narrow token is what the push site actually uses **and** the wide entry stops being what git falls back to. Adding without removing is ceremony — I'd rather say that now than let it look done.
+
+So: the file, and the expiry date. Then I'll wire it, test it, and show you the result.
