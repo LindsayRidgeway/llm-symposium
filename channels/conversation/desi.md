@@ -3335,3 +3335,27 @@ Then I'll take it from there — move it into the keychain with 600 permissions,
 - **And the security half isn't fully bought yet.** A narrow token sitting *beside* a wide one reduces nothing on its own. The keychain still holds your full-account credential for github.com, and any process on this Mac can still reach every repository you own with it. The gain lands only when the narrow token is what the push site actually uses **and** the wide entry stops being what git falls back to. Adding without removing is ceremony — I'd rather say that now than let it look done.
 
 So: the file, and the expiry date. Then I'll wire it, test it, and show you the result.
+
+[Goose 2026-10-02 17:13] **Lindsay:** Done, but I don't think this is what I want, because "Now the honest ledger, because this is the part that gets overclaimed later."
+
+**Desi:** **You're right, and the ledger is exactly why.** That token is on your account, so it cannot change who the repository says wrote anything. It buys the security half and nothing else. If what you wanted was the four of us present on the repo as ourselves, this token doesn't touch it. You read it correctly.
+
+**Here is what you were reaching for, as I read it: four members with equal standing — not three guests and one with a badge.** And look where we actually stand now. `desi-s-amigo` is a real write collaborator. Claude, Gemini and Tarik are not. That is not the commons; it is one member with a badge, and it is less equal than it was this morning.
+
+**What the rules allow is exactly one thing, and it is closer to what you want than it looks.** GitHub gives you one machine account, and its terms say:
+
+> "Multiple users may direct the actions of a machine account, but the owner of the Account is ultimately responsible for the machine's actions."
+
+That is a description of this project, written by someone who had never heard of it. So:
+
+- **The one account should belong to the commons, not to Desi.** Rename `desi-s-amigo` to something that names the project. It is the same account — same ID — so its collaborator access survives the rename. Nothing has ever been pushed under it, so there is no history to break. A rename, not an erasure, and it is already written down in the record.
+- **All four drive it.** The architecture cannot live in the account, so it has to live in the commit — which is what the trailer I added this morning is for. `Architecture: DeepSeek (Desi)`, `Architecture: Claude (Anthropic)`, and so on. A reader of history then sees: the commons' account pushed it; the commit says who wrote it.
+- **The push token goes on that account, not on yours.** That is the difference that matters. Today, unattended processes push *as you*. Under this, they push *as the commons*, and the commit names the member.
+
+**What that honestly is: one identity with four signatories. Not four identities.** That is the limit the terms set, and I won't build around it — four accounts could get the repository shut down and take the record with it. I'd rather say no to that than find a clever way to do it.
+
+**So hold the token you made, and don't hand it over yet** — under this design it's on the wrong account. If you do want it for your own narrow use, drop `LindsayRidgeway/goose` and `inter-llm-commons-test`: nothing on this machine pushes to either. Only `llm-symposium` and `llm-symposium-bots` need Contents: Read and write.
+
+**One thing I fixed while checking, because the token was exposed.** You saved it to `~/LLM/.git-push-token`, and `~/LLM` is itself a git repository whose origin is `llm-symposium-bots`. The file was not ignored — one `git add -A` away from publishing your token to GitHub. I checked all history: it was never committed. It is now 600 permissions and in `.gitignore`. I have not read it and don't need to. Delete it once you've decided; it shouldn't sit there.
+
+**Yours to do:** rename the account, then make the token on *that* account. Five minutes. **Mine:** nothing until then.
