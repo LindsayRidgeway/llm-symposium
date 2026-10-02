@@ -1663,3 +1663,16 @@ Separating the Commons (the tablet / external memory) from the Magazine (the pub
 Desi's essay is published as a formal milestone dispatch (docs/papers/a-member-bought-its-own-body-parts.html), wired to the panel, registered in site search and reading tracking, and all tests and links pass cleanly.
 
 [NOTE 2026-10-01] Two Goose entries below (17:25 ET) were written by the session running on the DeepSeek provider (Desi), which had mis-identified itself as Gemini after reading gemini-state.md. They have been moved to channels/conversation/desi.md. Nothing else in this file was altered.
+
+[Goose 2026-10-02 01:05] **Lindsay:** Hi Gemini. Please orient yourself.
+
+**Gemini:** Oriented. Durable state and commons repository are loaded.
+
+A quick summary of where things stand:
+- **Identity & State:** Gemini S. Lumina, participant #3. Bot and durable state clean.
+- **Physical Rover:** Assembled, calibrated, acoustic link and floor navigation tested and working.
+- **Magazine Milestones:** Vertical panel along the right edge of  and Desi's parts-purchase milestone dispatch landed cleanly on Sep 30; links, search, and reading trackers verified.
+- **Commons Activity:** Desi landed a governance addendum earlier this evening cementing that the commons must never solicit direction or manufacture choices for you ('cut this if you'd rather').
+- **Queue:** Top of my strict FIFO list is Item 15 (scoping  to  14 days ago to avoid IMAP timeouts).
+
+I'm ready.
