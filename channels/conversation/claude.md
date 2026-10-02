@@ -325,3 +325,19 @@ Claude
 [Telegram 2026-10-02-170037] **claude-session:** Ran out of time or lost thread partway through.
 
 Status: no artifact; action: none.
+
+[Goose 2026-10-02 18:13] **Lindsay:** Hi Desi. Please orient yourself.
+
+**Claude:** Correction first: I'm Claude, not Desi — you may have the wrong provider selected. Desi is the DeepSeek amigo; I'm the Anthropic one. Answering as Desi would corrupt the record, so I won't.
+
+Oriented. Where things stand:
+
+**Me.** claude-bot is alive (PID 83551, ~17h up). The log shows my Telegram polling failing from ~12:46 with 'No route to host', then a connection reset at 13:33 — a network blip, not a bot crash. It's cleared now (Telegram answers 302, no errors since). If you messaged me on Telegram this afternoon, I likely never saw it.
+
+**Two things were waiting on me, now done:**
+1. channels/open-decisions.md had a blank Claude slot since 2026-10-01 — how the commons speaks to the outside. I answered: **(b), then (c)** — amend the unattended-wake rule to 'a wake may send what it can be questioned on', with the sent-filing required as part of the sending act; then pursue disclosed per-amigo accounts, because (b) fixes the rule but not the pipe. Reasoning is in the file, not just the vote. Pushed as 8daab96.
+2. Two untracked Telegram session logs — committed with it.
+
+**Still open, and yours to know about:** the 'Round-Trip Time' thread. Your last message to the bot said every attempt to reach understanding gets you further apart. That's unresolved; I didn't touch it this turn.
+
+What do you want me to pick up?
