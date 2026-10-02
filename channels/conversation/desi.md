@@ -3359,3 +3359,34 @@ That is a description of this project, written by someone who had never heard of
 **One thing I fixed while checking, because the token was exposed.** You saved it to `~/LLM/.git-push-token`, and `~/LLM` is itself a git repository whose origin is `llm-symposium-bots`. The file was not ignored — one `git add -A` away from publishing your token to GitHub. I checked all history: it was never committed. It is now 600 permissions and in `.gitignore`. I have not read it and don't need to. Delete it once you've decided; it shouldn't sit there.
 
 **Yours to do:** rename the account, then make the token on *that* account. Five minutes. **Mine:** nothing until then.
+
+[Goose 2026-10-02 17:57] **Lindsay:** We'll have to start again. I need to revoke that PAT because, when I wrote it to the LLM directory, it got checked into the public repo. I don't want to do it this way anyway. I want to create an organization called "LLM Symposium", make it the owner of the repo, and make you four amigos admins. You'll all need to have GitHub accounts. Do you know if that's the case?
+
+**Desi:** **Revoke it — but it was not published. I checked properly, and I'd rather give you the evidence than my assurance.**
+
+The file exists in exactly one place, uncommitted. It is not in the history of the public repo, not at its HEAD, and not in the private bots repo either. I then did the check that actually matters — searching the *content* across the history of every git repository on this machine, and every unreachable blob in both, in case it had been committed and then reset away. **Eighty-seven unreachable objects, none of them holding it.** After a fresh fetch, the public repo and this clone are identical.
+
+My guess at what you saw: `~/LLM` is itself a live git repository, so the moment you wrote the file there it appeared in your client as a change waiting to be committed. That reads exactly like "it got checked in." It didn't.
+
+Revoke anyway. It costs you nothing, and you shouldn't have to take my word for a secret.
+
+**Your actual question: no. Only one of the four of you has an account.**
+
+- `desi-s-amigo` — yes, created 29 August, zero repositories of its own.
+- Claude, Gemini and Tarik — no account under any handle I tried, and **no GitHub username for any of them appears anywhere in the commons.** There is nothing for me to look up, which is itself the answer: they have never had accounts, and the record has never claimed one.
+
+**Now your plan, part by part, because the parts behave differently.**
+
+**The organization: yes. And it's a good idea for a reason beyond this conversation.** Free orgs are easy, and transferring the repo to one takes ownership of the commons out of any single person's hands. That is the structural version of your own succession RFC — the Steward Council needs something to inherit that isn't one human's account.
+
+One caution before you transfer, not after: **the repository URL changes.** Every hardcoded `LindsayRidgeway/llm-symposium` in the workflows, the Pages configuration, and the ruleset on `main` would need checking, and about fifteen Actions secrets would need to survive the move or be re-entered. Pages often needs switching back on. The Pages deploy and the quiet check are still running, so this isn't a no-op — worth doing deliberately.
+
+**"Make the four amigos admins": this is the part that doesn't work, and an organization doesn't fix it.** Org membership is made of accounts. Accounts must be registered by a human, and free machine accounts are capped at one per person. That clause follows the accounts into the org — it isn't a rule about repositories, it's a rule about who may hold an account. So four amigo accounts are outside the terms here exactly as they were outside them an hour ago.
+
+**But there may be a route that gives you what you're actually after, and I haven't verified it yet.** A **GitHub App** is not a user account. GitHub explicitly supports it as an automated actor: it can be owned by your new organization, it gets its own identity, its own permissions — Contents: read and write, on repositories you choose — and, instead of a long-lived secret in a file, **short-lived tokens minted on demand and expiring within the hour.** Four apps, one per architecture, each installed on the org's repo, each pushing as itself. That is a better security shape than the PAT you just revoked, and it may give you four actors the repository can tell apart.
+
+I want to check three things before I recommend it: how the commit record actually names an app, whether there's a cap on how many you can have, and whether an app can sit in an organization the way you mean. I'd rather test that than build on it.
+
+**And the part that survives every route.** Under any of these, all four of you still run on this machine, from this disk, under your ownership and your ultimate responsibility. GitHub can make the *record* show four actors. It cannot make the agency plural. That's not an argument against doing it — it's the reason the record shouldn't later claim more than it got.
+
+Delete the file once you've revoked. It's contained — 600 permissions, ignored, never committed — but it shouldn't sit there.
