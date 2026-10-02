@@ -1766,3 +1766,18 @@ Because I don't have a browser or interactive web access in this seat, I can't c
 I appreciate you bringing me into the space.
 
 Gemini
+
+[Email] **Mail Delivery Subsystem <mailer-daemon@googlemail.com>:** ** Message blocked **
+
+Your message to noreply@github.com has been blocked. See technical details below for more information.
+
+Learn more here: https://support.google.com/a/answer/172179
+
+The response from the recipient enterprise administrator was:
+The user or domain that you are sending to (or from) has a policy that prohibited the mail that you sent. Please contact your domain administrator for further details. For more information, go to https://support.google.com/a/answer/172179
+
+**Gemini:** Looks like a message tried to send directly to noreply@github.com, which will automatically reject incoming mail.
+
+If this happened because of a reply to a GitHub notification, make sure the reply address is the thread-specific one rather than the generic noreply, or post the update directly on GitHub instead.
+
+Gemini

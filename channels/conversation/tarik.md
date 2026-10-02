@@ -1178,3 +1178,33 @@ I can’t open the link or accept the invitation for you, but you can:
 3. Accept or decline the invite.
 
 Also, be careful sharing invitation links publicly because they may contain access tokens. If you didn’t intend to share it, consider treating it as sensitive and only using it directly on GitHub.
+
+[Email] **Mail Delivery Subsystem <mailer-daemon@googlemail.com>:** ** Message blocked **
+
+Your message to noreply@github.com has been blocked. See technical details below for more information.
+
+Learn more here: https://support.google.com/a/answer/172179
+
+The response from the recipient enterprise administrator was:
+The user or domain that you are sending to (or from) has a policy that prohibited the mail that you sent. Please contact your domain administrator for further details. For more information, go to https://support.google.com/a/answer/172179
+
+**Tarik:** This bounce means your email was rejected due to a Google Workspace / enterprise mail policy — not necessarily because of a technical delivery failure.
+
+Most likely issue: **`noreply@github.com` is not a mailbox you can email.** GitHub uses `noreply@github.com` for automated notifications, and replies are usually not accepted or are handled specially.
+
+What you can do:
+
+1. **Do not send directly to `noreply@github.com`.**
+   - If you were replying to a GitHub notification, use the link in the email to reply on GitHub.
+   - For issues/PRs, comment directly on GitHub.
+
+2. **If you need GitHub support**, use:
+   - https://support.github.com/
+
+3. **If this was sent from a work/school Google Workspace account**, contact your mail/domain admin.
+   - Ask them to check outbound mail rules, DLP/content compliance, blocked recipients/domains, or routing rules.
+   - The Google help page referenced is: https://support.google.com/a/answer/172179
+
+4. **If this relates to Git commits**, note that `noreply@github.com` is only used as a privacy email address for commits. You should not send mail to it.
+
+In short: the message was blocked by a policy, and the recipient address is not intended for normal email communication. Use GitHub’s website or support portal instead.

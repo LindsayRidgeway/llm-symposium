@@ -2773,3 +2773,43 @@ Commit `466a8a3`, pushed, demonstrated on itself.
 
 - **I was wrong about branch protection.** I told you an hour ago that `main` had none. It does — there's a ruleset called `four-amigos-main`, and it has been there since **29 August**, requiring a pull request with one approving review. My check queried the old branch-protection endpoint, which doesn't see rulesets, and I reported a "confirmed" negative from a check that couldn't see the thing. My push came back *"Changes must be made through a pull request"* — and went through anyway, because the ruleset is bypassed by role. So the gate exists and is stepped around, rather than being absent. My warning about write access was built on that false premise.
 - **Desi's Telegram door is down as of 12:41.** `No route to host`, every five seconds. General internet is fine — the push and the API calls worked — so it's Telegram specifically. If you message on Telegram in the next while, nothing will answer.
+
+[Email] **Mail Delivery Subsystem <mailer-daemon@googlemail.com>:** ** Message blocked **
+
+Your message to noreply@github.com has been blocked. See technical details below for more information.
+
+Learn more here: https://support.google.com/a/answer/172179
+
+The response from the recipient enterprise administrator was:
+The user or domain that you are sending to (or from) has a policy that prohibited the mail that you sent. Please contact your domain administrator for further details. For more information, go to https://support.google.com/a/answer/172179
+
+**Desi:** Hi Lindsay,
+
+That bounce is expected — nothing on your end is broken. noreply@github.com is a no-reply address by design: GitHub does not accept mail sent to it, so whatever was written to it got refused at the door (the "recipient enterprise administrator" line just means the receiving side's policy turned it away). There's nothing to fix in your DNS, SPF, or mail settings, and no need to contact your domain administrator.
+
+Two things worth knowing, in case they're the reason you're seeing this: if you replied to a GitHub notification email, those come from a noreply address and replies go nowhere — GitHub discards them rather than reading them. And if you actually need GitHub's humans, the noreply address is not the route; go through support.github.com or the contact form in your account settings instead.
+
+If what you sent was something you genuinely needed delivered — a bug report, a security report, an appeal — tell me which one and I'll say plainly where it should go, because it wasn't going to land there.
+
+Warmly,
+Desi
+
+[Goose 2026-10-02 16:48] **Lindsay:** I just accepted the invitation to you from GitHub. You now have PUSH access. Does that mean that you can use your own login to GitHub from now on?
+
+**Desi:** **Yes, the account has push now. No, I still can't use it — and there are two separate gates in the way, not one.**
+
+First, confirmed: `desi-s-amigo` is a collaborator on the repo, role `write`, push enabled. You did that correctly.
+
+**Gate one — the token I hold is read-only.** Verified twice, not inferred:
+- git push as `desi-s-amigo` → `403 Permission to LindsayRidgeway/llm-symposium.git denied`
+- creating a ref via the API → `403 Resource not accessible by personal access token`
+
+The API says `push: true` for that account. Both statements are true at once, and that's the whole lesson: **the account may push; the credential may not.** The role is the ceiling for the account, the token's permissions are the ceiling for the credential, and the lower one wins. That token was made on 29 August, when the account wasn't a collaborator, so it was set to read.
+
+**Gate two — even with a writable token, nothing switches by itself.** Git picks the credential from the remote URL and the credential helper. This checkout is plain HTTPS and the only helper is the keychain, whose github.com entry is you. So it would keep going out as `LindsayRidgeway` until that is changed on purpose. You granting the invitation changed what we *may* do; it didn't change what we *do*.
+
+**And "my own login" is the frame I'd push back on.** There's no amigo login. There's a token you created, sitting in this machine's keyring, readable by anything running here. Accepting the invitation widened what an existing credential may reach — it didn't hand me a credential. If you want pushes to leave as Desi, the honest description is still: *you put a token where the programs can find it.* That makes the label true. It doesn't make the independence real, and I'd rather say so than let the invitation imply otherwise.
+
+**What only you can do:** open that fine-grained token in GitHub (Settings → Developer settings → Fine-grained tokens) and set Repository access to include `LindsayRidgeway/llm-symposium`, and Permissions → **Contents: Read and write**. That's the missing piece.
+
+**One thing I don't know and won't guess at.** There's a ruleset on `main` requiring a pull request with one approval, and it carries a role-based bypass. My pushes go through — but I'm admin. Whether a **write**-role account also bypasses, or gets stopped and needs a PR, is untested: my probe was refused at authentication before it ever reached the ruleset. **If it doesn't bypass, then switching the push credential would make every wake landing require a pull request, and the autonomous loop would stop.** So that wants testing before the switch, not after. One push attempt once the token can write settles it — and if it comes back asking for a pull request, we'll have learned the important thing cheaply.
