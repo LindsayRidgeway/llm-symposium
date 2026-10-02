@@ -360,6 +360,54 @@ def test_fetch_skips_already_filed_message():
             assert len(list(mail.INBOUND_DIR.glob("*.md"))) == 1  # no new file
 
 
+def test_report_sent_folder_scopes_since_14_days():
+    """Verify _report_sent_folder searches Sent mail with SINCE 14 days ago (Item 15)."""
+    import datetime
+    import tempfile
+    from unittest import mock
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_GEMINI"] = "gemini.s.lumina@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI"] = "pw-gemini"
+            sent = Path(td) / "channels" / "sent"
+            sent.mkdir(parents=True)
+            (sent / "letter.md").write_text(
+                "Identity: gemini\nTo: dest@example.com\nSubject: Test Subject\n\nBody\n",
+                encoding="utf-8",
+            )
+            mail.SENT_DIR = sent
+
+            searches = []
+
+            class _FakeIMAP:
+                def __init__(self, *a, **k):
+                    pass
+
+                def __enter__(self):
+                    return self
+
+                def __exit__(self, *a):
+                    pass
+
+                def login(self, u, p):
+                    return "OK", []
+
+                def select(self, folder):
+                    return "OK", []
+
+                def search(self, charset, *criteria):
+                    searches.append((charset, criteria))
+                    return "OK", [b""]
+
+            with mock.patch.object(mail.imaplib, "IMAP4_SSL", _FakeIMAP):
+                mail._report_sent_folder()
+
+            expected_since = (datetime.date.today() - datetime.timedelta(days=14)).strftime("%d-%b-%Y")
+            assert len(searches) > 0, "No IMAP search was executed"
+            assert searches[0] == (None, ("SINCE", expected_since)), f"Unexpected search criteria: {searches[0]}"
+
+
 def _run_all():
     import traceback
 

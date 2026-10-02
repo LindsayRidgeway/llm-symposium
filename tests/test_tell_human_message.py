@@ -54,6 +54,20 @@ def test_review_branch_wake_summary_names_reviewer_state():
     assert "Status: awaiting reviewer; action: none." in out
 
 
+def test_review_branch_without_pile_suffix_names_reviewer_state():
+    msg = (
+        "I woke up by myself just now and did some work. What it was: I am speeding up our email checks "
+        "by only searching recent sent messages. It is not published yet — it is waiting for someone "
+        "other than me to look at it. Nothing needed from you."
+    )
+    out = tell_human.sanitize_for_human(msg)
+    assert "woke up by myself" not in out
+    assert "Nothing needed from you" not in out
+    assert "waiting for someone other than me" not in out
+    assert "I am speeding up our email checks by only searching recent sent messages." in out
+    assert "Status: awaiting reviewer; action: none." in out
+
+
 def test_cutoff_summary_is_short_and_honest():
     out = tell_human.sanitize_for_human(CUT_OFF)
     assert out == (
@@ -69,15 +83,17 @@ def test_regular_message_is_not_rewritten():
 
 def _run_all() -> int:
     failures = 0
+    total = 0
     for name, fn in sorted(globals().items()):
         if name.startswith("test_") and callable(fn):
+            total += 1
             try:
                 fn()
                 print(f"PASS {name}")
             except Exception as exc:  # noqa: BLE001
                 failures += 1
                 print(f"FAIL {name}: {exc}")
-    print(f"\n{4 - failures}/4 tests passed")
+    print(f"\n{total - failures}/{total} tests passed")
     return 1 if failures else 0
 
 

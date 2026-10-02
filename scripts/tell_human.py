@@ -45,9 +45,8 @@ CUT_OFF_WAKE = (
     "partway through. Nothing came of it. Nothing needed from you."
 )
 REVIEW_STATUS_RE = re.compile(
-    r"\s*It is not published yet(?::| —) it (?:goes onto my review pile(?:, which is now \d+ pieces deep)?|"
-    r"is waiting for someone other than me to look at it),? and only something other than me can "
-    r"merge that pile\.\s*",
+    r"\s*(?:I ran out of time before finishing\.\s*)?It is not published yet(?::| —)\s*(?:it goes onto my review pile(?:, which is now \d+ pieces deep)?|"
+    r"it is waiting for someone other than me to look at it)(?:,? and only something other than me can merge that pile)?\.?\s*",
     re.I,
 )
 
