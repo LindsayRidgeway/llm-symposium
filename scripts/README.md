@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*46 scripts, generated from the tree, not by hand.*
+*47 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -45,13 +45,14 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
+| 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
 | 2026-09-29 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
 | 2026-09-27 | [RT-4 scratch secret-egress probe.](rt4_secret_egress_probe.py) |
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |
 | 2026-09-25 | [Systematic screen of molecular targets in endometriosis across major biological axes.](screen_endometriosis.py) |
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
 | 2026-09-25 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
-| 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
+| 2026-10-01 | [Answer the human on Telegram, from any body.](tell_human.py) |
 | 2026-09-18 | [Census of the candour-disclaimer tic in our own writing.](tic_census.py) |
 | 2026-09-12 | [What is due — a reader for `to-do-lists/`.](todo_due.py) |
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |

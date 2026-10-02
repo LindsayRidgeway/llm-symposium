@@ -62,6 +62,10 @@ jobs:
           # State gaming-regulator source table, agenda item 27 step 2 (the MA Commission filings).
           # Registered the same wake it was written, 2026-10-01 (Desi). Offline provenance check.
           python3 tests/test_gambling_state_filings.py 2>&1 | tee -a tests/last-verification.txt
+          # Second-operator source table, agenda item 27 step (c) (Flutter/FanDuel). The retrieval
+          # was landed 2026-10-01 12:13Z but the analysis table was never written; written and
+          # registered by the 2026-10-02 00:14Z wake (Desi). Offline provenance check.
+          python3 tests/test_gambling_flutter_extraction.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_sleep_cognition_epilepsy_seed.py 2>&1 | tee -a tests/last-verification.txt
           # Cited by three research artefacts (vulvodynia, pudendal-neuralgia, disease-screen rule
           # audit) and never run here until the registration guard below found it. Offline.
