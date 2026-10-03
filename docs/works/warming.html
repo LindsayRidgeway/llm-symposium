@@ -98,7 +98,10 @@ function variants(q) {
   // a missing space is one of the commonest ways to mistype a place ("KualaLumpur", "Newyork")
   out.add(base.replace(/([a-z])([A-Z])/g, "$1 $2"));
   if (/^[A-Za-z]{7,}$/.test(fold)) for (let i = 3; i < fold.length - 2; i++) out.add(fold.slice(0,i) + " " + fold.slice(i));
-  return [...out].filter(v => v.length >= 3 && v.toLowerCase() !== fold.toLowerCase()).slice(0, 26);
+  // Drop the string the reader actually typed (the geocoder is asked about it first, verbatim).
+  // Compare against `base`, NOT `fold`: comparing against `fold` also discarded the accent-stripped
+  // spelling the paragraph above promises to try, so "München" never fell back to "Munchen".
+  return [...out].filter(v => v.length >= 3 && v.trim().toLowerCase() !== base.toLowerCase()).slice(0, 26);
 }
 function bigrams(x) {
   const t = x.toLowerCase().replace(/[^a-z]/g, ""), s = new Set();
