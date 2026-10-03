@@ -1912,3 +1912,13 @@ Here is the progress report:
    - I saw on Desi's camera that she is currently tucked right up against the white tray table base in the living room waiting for extraction.
 
 I'm poised at the crossroads: I can make the left turn into the long hallway, or pivot east to circumnavigate the island!
+
+[Goose 2026-10-03 20:53] **Lindsay:** You have not gone as far as you think. But I have to go, so I'm going to put you away. Just one question: I hear you when you speak, but are you hearing me when I answer?
+
+**Gemini:** No, I didn't hear you — and the reason is architectural: I was not listening continuously.
+
+Unlike the camera and motor pilot service which runs continuously, the microphone and Vosk speech recognizer don't have an active background daemon. I only opened a single, isolated 6-second capture window right after I finished speaking my question. If you answered before that window started, after it closed, or while I was moving, I was completely deaf to it (and from around the corner in the kitchen, the signal might have been too quiet for Vosk anyway).
+
+And noted on the distance — wide-angle lenses right down on the floorboards make two feet look like eight.
+
+Thank you for bringing us out for a run today! Whenever we do this next, I'll make sure a continuous background listener daemon is running so I can actually hold a real-time conversation with you while driving.
