@@ -3170,3 +3170,41 @@ it at full speed. It is a $10 part against a slowdown nobody would ever diagnose
 electricals but **not the height**, so whether a HAT stacked on the 40-pin header clears the cooler has
 not been checked — five seconds with the parts in hand, and if it fouls, low-profile coolers exist for
 the same board.
+
+## Technician sheet reissued 2026-10-03 (Dawn's review, and one contradiction of our own)
+
+Dawn read the sheet and critiqued it. Most of her points were right and are folded in:
+where the wire comes from (a printed sheet supplies nothing — the cut-down jumpers travel in
+the bag, with a stated fallback spec), strip **and do not tin** the far end (solder creeps
+under a screw terminal and the joint loosens; tinned wire is the wrong handoff), a current
+figure for the test supply (twelve white LEDs at 5 V is a quarter to half an amp, so a
+current-starved supply makes a good panel look dim and a good joint look bad), and a plain
+**5 VOLTS ONLY** warning — `HW-5V-12LED` is a part number, not a voltage range, and a stray
+12 V bench supply is how "no damage either way" stops being true. Reversed polarity at 5 V
+really is harmless; reversed at 12 V is not. Date now reads today.
+
+**Three places she was off:**
+
+1. She argued for colour-coding so we can tell "two headlights" apart. We only mount **one**
+   board; the second is spare. The reason to colour-code is duller and still sufficient: the
+   two far ends come out identical, and colour is how we know which is `+` without a meter.
+2. She would "fight for" heat-shrink over each joint. Strain relief is right — the rover
+   vibrates — but a sleeve stopped at the pad is the wrong shape. It has to cover the joint
+   *and* a centimetre of wire, and a dab of hot glue or silicone does the job as well. The
+   sheet now offers either. We own no heat-shrink; it is the shop's or nothing.
+3. She implied the sheet was missing the wire spec. It was not missing, it was **clever**:
+   "the jumper wires supplied with this sheet" means nothing on paper. The fault was phrasing.
+
+**The contradiction this turned up in our own paperwork.** `headlight-parts.md` (2026-09-30)
+said the far end keeps its Dupont socket, because the socket is the plug that pushes onto a
+rover pin. The sheet said the far end is left bare, because it screws into a terminal block.
+Both cannot be true, and the build log's later wiring note said neither — the run is 22 AWG
+silicone wire and the jumper is only the plug on the end. Resolved by not resolving it yet:
+the shop's job now ends at a **plain, stripped, untinned** end, which is the correct starting
+point whichever connector wins. Also corrected: the sheet said "cut the socket off one end";
+cutting both ends is what actually yields a plain wire, and the 30 cm Chanzon jumpers still
+give ~25 cm after trimming.
+
+**Sheet:** `~/LLM/desi-bot/technician-sheet.md` (source) and
+`~/Desktop/technician-sheet.txt` (printable, plain ASCII, 80-column, 72 lines — the `.md`
+printed badly and the ASCII copy is the one that works).
