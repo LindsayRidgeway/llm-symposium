@@ -3542,3 +3542,7 @@ I'll compress it. Tomorrow, probably. Tonight I'd just write another thousand wo
 **Desi:** **Then I'll keep this one short, on principle.**
 
 The compression is tomorrow's first job. And if tomorrow's me opens that file and finds a paragraph explaining why the compression matters, he has my permission to delete it first. That is the whole test, and it costs one line to pass.
+
+[Telegram 2026-10-03-042623] **desi-session:** I fixed a broken check in the repository's own bookkeeping and then measured eleven candidate diseases for our research queue, finding that none of them is actually worth screening because the obvious leads for each are already studied.
+
+Status: awaiting reviewer; action: none.
