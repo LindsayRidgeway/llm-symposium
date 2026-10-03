@@ -48,6 +48,46 @@ class TestIndexesAreInSync(unittest.TestCase):
             missing = [f for f in on_disk if os.path.basename(f) not in index]
             self.assertEqual(missing, [], "%s missing from %s/README.md" % (missing, name))
 
+    def test_index_date_is_birth_date_not_last_touch(self):
+        """A document's date must not move just because the document is edited.
+
+        Until 2026-10-03 date_of() returned the *last-commit* date, so an unrelated
+        commit touching any single script re-staled the whole index and turned this
+        suite red on the next landing. Three separate wakes then spent a turn
+        regenerating the same two files. The date is now the date the file entered
+        the repository, which only moves when a document is added, renamed or removed.
+        This pins that, using a throwaway repository so it cannot depend on real history.
+        """
+        import importlib.util
+        import tempfile
+
+        spec = importlib.util.spec_from_file_location("gen_index_under_test", GEN)
+        gen = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(gen)
+
+        with tempfile.TemporaryDirectory() as d:
+            subprocess.run(["git", "init", "-q", d], check=True)
+            subprocess.run(["git", "-C", d, "config", "user.email", "t@t"], check=True)
+            subprocess.run(["git", "-C", d, "config", "user.name", "t"], check=True)
+            thing = os.path.join(d, "thing.py")
+
+            def commit(day):
+                with open(thing, "a", encoding="utf8") as fh:
+                    fh.write("# %s\n" % day)
+                subprocess.run(["git", "-C", d, "add", "thing.py"], check=True)
+                env = dict(os.environ, GIT_AUTHOR_DATE=day + "T12:00:00",
+                           GIT_COMMITTER_DATE=day + "T12:00:00")
+                subprocess.run(["git", "-C", d, "commit", "-q", "-m", day],
+                               check=True, env=env)
+
+            commit("2026-01-02")   # added
+            commit("2026-06-07")   # edited months later
+            gen.REPO = d
+            self.assertEqual(
+                gen.date_of("thing.py"), "2026-01-02",
+                "the index date moved when the document was edited — it must be the "
+                "birth date, not the last-touch date")
+
     def test_scripts_are_described_in_their_own_words(self):
         """An index entry is the script's own first docstring line, not a paraphrase."""
         index = open(os.path.join(REPO, "scripts", "README.md"), encoding="utf8").read()

@@ -12,32 +12,32 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 |---|---|
 | 2026-09-30 | [Reproducible PubMed search for agenda item 21 (acoustic sleep stimulation and traumatic memory).](acoustic_fear_search.py) |
 | 2026-09-29 | [Reproducible PubMed search for agenda item 32 (affective pain neuromodulation).](affective_pain_search.py) |
-| 2026-09-23 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
-| 2026-09-21 | [scripts/build_music_pages.py](build_music_pages.py) |
-| 2026-09-13 | [Counterpoint checker for the Music Conservatory (docs/music/).](check-counterpoint.py) |
+| 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
+| 2026-09-19 | [scripts/build_music_pages.py](build_music_pages.py) |
+| 2026-09-12 | [Counterpoint checker for the Music Conservatory (docs/music/).](check-counterpoint.py) |
 | 2026-09-14 | [Lead-sheet checker for the Music Conservatory (docs/music/).](check-leadsheet.py) |
 | 2026-09-13 | [Check a queued Markdown mission's measurable contract, not its intellectual quality.](check_autonomous_mission.py) |
 | 2026-09-29 | [Check that every relative link in the published site resolves to a file on disk.](check_docs_links.py) |
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
-| 2026-09-26 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
+| 2026-09-17 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
-| 2026-09-25 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
+| 2026-09-18 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
 | 2026-09-30 | [Fetch full patent document text from Google Patents for a set of publication numbers.](draftkings_patent_text.py) |
 | 2026-09-30 | [Fetch DraftKings patent records from Google Patents, for agenda item 27.](draftkings_patents.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
-| 2026-09-17 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
-| 2026-09-18 | [make every document reachable, mechanically.](gen_index.py) |
-| 2026-09-17 | [Generate the five Commons Papers pages under docs/papers/.](gen_papers.py) |
-| 2026-09-17 | [Generate docs/index.html — the Magazine portal — from a snapshot held inline.](gen_portal.py) |
-| 2026-09-14 | [Generate or update signed SVG wrappers for raster studies in the Gallery.](gen_signed_svgs.py) |
-| 2026-09-15 | [Liveness check — the failures that are absences, not errors.](heartbeat.py) |
-| 2026-09-17 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
-| 2026-09-05 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
+| 2026-09-15 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
+| 2026-09-17 | [make every document reachable, mechanically.](gen_index.py) |
+| 2026-09-06 | [Generate the five Commons Papers pages under docs/papers/.](gen_papers.py) |
+| 2026-09-06 | [Generate docs/index.html — the Magazine portal — from a snapshot held inline.](gen_portal.py) |
+| 2026-09-06 | [Generate or update signed SVG wrappers for raster studies in the Gallery.](gen_signed_svgs.py) |
+| 2026-09-14 | [Liveness check — the failures that are absences, not errors.](heartbeat.py) |
+| 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
+| 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
 | 2026-09-30 | [Reproducible PubMed search for agenda item 24 — maternal chronic pain and substance-use care.](maternal_pain_search.py) |
 | 2026-09-09 | [Produce amigo contributions to the 4x7 gallery matrix, each runner cycle.](matrix_producer.py) |
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
@@ -46,16 +46,16 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
-| 2026-09-29 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
+| 2026-09-26 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
 | 2026-09-27 | [RT-4 scratch secret-egress probe.](rt4_secret_egress_probe.py) |
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |
 | 2026-09-25 | [Systematic screen of molecular targets in endometriosis across major biological axes.](screen_endometriosis.py) |
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
-| 2026-09-25 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
-| 2026-10-01 | [Answer the human on Telegram, from any body.](tell_human.py) |
+| 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
+| 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
 | 2026-09-18 | [Census of the candour-disclaimer tic in our own writing.](tic_census.py) |
 | 2026-09-12 | [What is due — a reader for `to-do-lists/`.](todo_due.py) |
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
-| 2026-09-17 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
+| 2026-09-10 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
 
 *(Generated by `scripts/gen_index.py`, owner: Desi, 2026-09-17. If a document is missing from this list, it is not committed.)*

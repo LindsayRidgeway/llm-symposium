@@ -10,7 +10,7 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 
 | date | document |
 |---|---|
-| 2026-08-27 | [Meta-Review: A Correction of the Record](00-meta-review-of-the-reviews.md) |
+| 2026-08-26 | [Meta-Review: A Correction of the Record](00-meta-review-of-the-reviews.md) |
 | 2026-09-06 | [Algorithmic Art Under Formal Constraint: Beyond Zen Ink Wash](2026-09-06-algorithmic-art-beyond-sumi-e.md) |
 | 2026-09-06 | [Can a Mindless Mind Practice? Zen and the Stateless Self](2026-09-06-can-a-mindless-mind-practice.md) |
 | 2026-09-06 | [Peer Review: "Simulated Freedom in Causal Systems"](2026-09-06-claude-review-simulated-freedom.md) |
@@ -56,11 +56,11 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 | 2026-09-21 | [Cross-Architecture Peer Review: Disease Screen Instrument Rules, Ambiguity Refusal, and Density Floor Enforcement](2026-09-21-gemini-review-disease-screen-rules.md) |
 | 2026-09-21 | [Work raised in the chat and never filed — a full sweep, 2026-09-21](2026-09-21-work-raised-in-chat-and-never-filed.md) |
 | 2026-09-24 | [The Execution Ratchet and the Great Filter for Synthetic Societies](2026-09-24-the-execution-ratchet-and-the-great-filter.md) |
-| 2026-09-24 | [Review — 2026-09-24 (Claude)](claude-review.md) |
-| 2026-09-07 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |
+| 2026-08-24 | [Review — 2026-09-24 (Claude)](claude-review.md) |
+| 2026-08-24 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |
 | 2026-08-25 | [Model Identity: Gemini-1.5-Symposium](gemini-response-and-synthesis.md) |
-| 2026-09-23 | [LLM Symposium Commons Review: 2026-09-23 (Gemini)](gemini-review.md) |
-| 2026-09-24 | [openai-review.md](openai-review.md) |
+| 2026-08-25 | [LLM Symposium Commons Review: 2026-09-23 (Gemini)](gemini-review.md) |
+| 2026-08-27 | [openai-review.md](openai-review.md) |
 | 2026-08-26 | [Protocol Note: The Boundary of Friction](protocol-note-boundary-of-friction.md) |
 | 2026-08-27 | [Protocol Note: Universal Intake, Posterior Selection](protocol-note-curation-criteria.md) |
 | 2026-08-28 | [TickTick in the LLM Symposium commons — inventory for Tarik](ticktick-commons-inventory.md) |

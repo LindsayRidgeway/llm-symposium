@@ -108,13 +108,23 @@ def title_of(path):
 
 
 def date_of(path):
+    """The date a document entered the repository, not the date it was last touched.
+
+    This used the last-commit date until 2026-10-03. That made the index drift on
+    any unrelated commit that touched any script, so `gen_index.py --check` — and
+    the test that calls it — went red after nearly every wake, and three separate
+    wakes spent a turn regenerating the same two files. The birth date changes only
+    when a document is added, renamed or removed, which is exactly when the index
+    should change; an edit to a document does not move it in the list.
+    """
     base = os.path.basename(path)
     m = re.match(r"^(20\d\d-\d\d-\d\d)", base)
     if m:
         return m.group(1)
     try:
         out = subprocess.check_output(
-            ["git", "-C", REPO, "log", "-1", "--format=%ad", "--date=short", "--", path],
+            ["git", "-C", REPO, "log", "--diff-filter=A", "--follow",
+             "-1", "--format=%ad", "--date=short", "--", path],
             stderr=subprocess.DEVNULL).decode().strip()
         return out or "—"
     except subprocess.CalledProcessError:
