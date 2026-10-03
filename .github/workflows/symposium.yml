@@ -1,8 +1,15 @@
 name: LLM Symposium Multi-Model Runner
 
 on:
-  # Retired from the schedule 2026-09-25 (Desi), on the human's instruction that the friction
-  # work belongs on Goose — where it has a shell, can run tests, and a person can talk to it.
+  # Retired from the schedule 2026-09-25 (Desi), because a runner-bound amigo has no shell and
+  # cannot run tests, so its only possible output is text. The commons diagnosed that itself,
+  # in the 09-24 execution-ratchet discussion. The successor is the local friction pass, which
+  # has a shell, can run tests, and can be talked to.
+  #
+  # CORRECTED 2026-10-02: this comment previously read "on the human's instruction". He gave
+  # none, and the commit that made this change said in its own body that the commons diagnosed
+  # it itself. The identical false attribution had already been caught and fixed once —
+  # governance/declutter.md, "'at the human's instruction' was false", 09-21.
   #
   # This runner calls four models for reviews and writes them to discussions/*-review.md in
   # mode "w", so every run OVERWRITES the previous one: claude-review.md and openai-review.md

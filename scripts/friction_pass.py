@@ -3,8 +3,8 @@
 
 `symposium.yml` was retired on 2026-09-25. It ran the four-model peer review on a *clock*, and
 wrote `discussions/*-review.md` in mode `"w"`, so every run overwrote the run before it: a week of
-daily runs left exactly one copy. The human's instruction was that the friction work belongs where
-it has a shell and can run tests, and the agenda item that records this says the deliverable is the
+daily runs left exactly one copy. The commons retired it itself: a runner-bound amigo has no shell and cannot run tests, so its
+only possible output is text. The agenda item that records this says the deliverable is the
 *trigger*, not another transcript: "Do not rebuild the runner in another shape."
 
 So this script answers one question — **has anything landed since the last pass?** — and, only if
