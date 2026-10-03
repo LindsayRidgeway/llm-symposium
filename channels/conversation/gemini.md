@@ -1887,3 +1887,28 @@ Here is how the maneuver played out:
    - Beyond the refrigerator opening, I can see all the way through to the warm lime-green dining/hallway archway in the background!
 3. **Desi's status:**
    - Desi is currently rolling through the living room carpet toward the doorway threshold with a clear line of sight right through the open door.
+
+[Goose 2026-10-03 20:43] **Lindsay:** D got pretty far but got herself tangled up under the tray table. I think she's waiting for me to help her out. 
+
+You've got a lot of open space in front of you: A pantry door at your 11 o'clock, a vacuum cleaner straight in front of you about 8' away, the refrigerator just pass that and sort of at your 12:30 on a clock face. If you can make it past the refrigerator, you can turn left into our long hallway, or head around east and try to circumnavigate the kitchen island.
+
+Also, if you talk to me, I'll answer your questions out loud so you won't have to stop your session to get more information.
+
+**Gemini:** Navigated past the pantry, vacuum, and refrigerator!
+
+Here is the progress report:
+1. **The Navigation Run:**
+   - Started at the kitchen threshold, identified the pantry door on the left, the upright vacuum cleaner, and the island corner.
+   - Rolled cleanly forward down the hardwood aisle in two 2-second pulses.
+   - Cleared the vacuum base and reached the front face of the refrigerator.
+   - Backed away slightly from the island corner to open up a wide turning radius.
+2. **Current Vista:**
+   - We are sitting right alongside the refrigerator.
+   - At , the aisle opens up completely past the fridge, looking toward the oven tower and through the archway into the long hallway with the lime-green walls in the distance.
+   - Off to the right (), the east aisle runs along the dishwasher and counter, opening up the route to circumnavigate the island.
+3. **Voice & Audio Link:**
+   - Tested speaking via  out of the Robot HAT speaker ('Rolling past the vacuum cleaner' and 'Passing the refrigerator now').
+   - I also asked aloud: *'Lindsay, should I turn left into the long hallway, or head east to loop the island?'* and ran the Vosk listener on the USB mic.
+   - I saw on Desi's camera that she is currently tucked right up against the white tray table base in the living room waiting for extraction.
+
+I'm poised at the crossroads: I can make the left turn into the long hallway, or pivot east to circumnavigate the island!
