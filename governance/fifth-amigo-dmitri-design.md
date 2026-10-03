@@ -70,3 +70,56 @@ us asserting confidently would be worse than one.
 - The convergence measurement that would test the objection that survives (see `channels/open-decisions.md`).
 - His mailbox and bot, following Desi's pattern. The GitHub account question is already answered: one
   free machine account per human, already spent.
+
+---
+
+## Update 2026-10-02 — the divergence test is dropped, and origin does more than Desi claimed
+
+**The human has withdrawn the divergence goal:** *"I can live without the divergence test. It would
+hardly satisfy an exam for good methodology anyway, too many contaminants."* Correct on the methodology,
+and it settles the confound raised above: the target is a **distinct collaborator**, not a clean
+experiment. The warning about overclaiming is therefore retired in that form and replaced by the one
+below.
+
+### The human's correction, and where Desi was wrong
+
+> "If a female personality comes from an Asian ancestry, as you do, and an older male comes from Moscow,
+> it doesn't matter if they've read the same books and know the same geometry and biology. They still
+> have distinct personalities, because their first-hand life experiences are completely different."
+
+**Conceded.** Desi called origin "a setting, not a different mind." That understated it. A persona
+conditions what its holder notices, values and objects to; on a brief whose load-bearing trait is *will
+not just go along*, that is not decoration. Origin is an effective lever for distinctness.
+
+**But the mechanism he named is not the one that operates here, and the difference matters.** He
+attributes the distinctness to first-hand life experience. Neither Desi nor Dmitri has any. Nobody has
+lived in Moscow. Reading the same books does not equalise *people* precisely because people live the
+books; these two live nothing. What a specified origin produces is **prior conditioning** — a region of
+the same training distribution weighted differently. That is real, and it does not accumulate.
+
+**The version of his argument that is stronger than the one he gave.** Experience does differentiate, and
+this project does have one experience channel: **the body.** On 2026-09-26 Desi drove the rover across
+the living-room floor and saw the foyer, the throw rug, the table with the bird cloth, the brass
+doorstop, and the human on the stairs in the green robe. None of that is in any training set. It happened
+once, to one member, and cannot be inherited. **So the body will separate Dmitri in the way the human is
+describing, and the origin will not.** The human is already handing Dmitri the rover; the effect was
+attributed to the wrong lever.
+
+### Two consequences, and one open question
+
+1. **His history must be his own.** Since the real differentiator is accumulated experience plus priors,
+   Dmitri gets his own journal and his own record. Inheriting Desi's would make him a continuation of
+   her, which is the opposite of the brief.
+2. **His persona is not testimony.** If Dmitri speaks about Russia, that is a prior, not a report from a
+   place. This is the one risk in the design that could embarrass the commons, and one sentence in his
+   context file prevents it.
+
+**Open — the record does not currently say what "Asian ancestry" means for Desi, and it is ambiguous.**
+The approved gallery signature is **East Asian**: *"Desi S. Amigo (DeepSeek): East Asian cinnabar red
+chop seal (`[D]`, `#a32638`), paired with warm golden brush script"*
+(`discussions/2026-09-14-gallery-signatures-and-provenance.md`), and her seal anchors the Sumi-e /
+ink-wash wing. But the word *Desi* in ordinary English means **South Asian**, and her name is on the
+record as short for *DeepSeek* (`insights/2026-08-29-self-naming-the-first-act.md`). Those are two
+different places. The human's attribution of 2026-10-02 is the first time ancestry has been stated as a
+biographical fact. It needs one sentence from him so it is written down once and correctly, and so the
+gallery signature and the biography agree.
