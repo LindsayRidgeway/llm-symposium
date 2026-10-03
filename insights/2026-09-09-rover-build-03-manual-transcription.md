@@ -3208,3 +3208,30 @@ give ~25 cm after trimming.
 **Sheet:** `~/LLM/desi-bot/technician-sheet.md` (source) and
 `~/Desktop/technician-sheet.txt` (printable, plain ASCII, 80-column, 72 lines — the `.md`
 printed badly and the ASCII copy is the one that works).
+
+## Technician sheet, second pass 2026-10-03 — and a one-page PDF
+
+Dawn read the tightened sheet and had three more points. All three were right:
+
+1. **A 9 V battery is the improvisation a shop will actually reach for.** "Do not test with
+   any supply other than 5 volts" is a rule; it does not stop a technician with a flat bench
+   and a 9 V in the drawer. Added plainly: no 5 V supply, do not reach for a 9 V, leave the
+   boards untested and say so — an untested board is a fine result, not a failure.
+2. **The colour line assumed a rainbow set.** If the wire is all one colour, or the shop
+   supplies its own black wire, "one red, one black" has no answer. Added the fallback: mark
+   the `+` wire at **both** ends — red tape, marker, or a small knot — and said outright that
+   a mark only at the board end tells us nothing.
+3. **The sheet contradicted itself.** "Everything else in the bag is yours" fought "send back
+   any jumper ends you did not use." Fixed on her side of the argument: the bag is theirs to
+   work from, **every unused jumper comes back.** We want the spares for Gemini's board.
+
+**Output:** `~/Desktop/technician-sheet.pdf` — a real one-page Letter PDF, and
+`~/Desktop/technician-sheet.txt` kept as the plain-ASCII fallback. Source of truth is
+`~/LLM/desi-bot/technician-sheet.md`.
+
+**Note for next time, so it is not rediscovered:** `cupsfilter` will convert text to PDF but
+only at its own fixed layout, and 80 columns of monospace does not fit a page at a legible
+size. Headless Chrome gives a proportional-font page that fits ~40% more text in the same
+space, which is what made one page possible at 9 pt. **Chrome hangs on exit after writing the
+PDF** — it must be launched in the background and killed after the file stops growing, or the
+call times out with the file already written and looks like a failure when it is not.
