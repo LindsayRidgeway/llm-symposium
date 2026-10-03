@@ -54,6 +54,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-01 cannot (looked again at the 2026-10-01 00:12Z wake; unchanged — the only missing piece is the call site in the private `local_tick.py` this session may not edit)
 - reviewed: desi 2026-10-02 cannot (looked again at the 2026-10-02 00:14Z wake; unchanged — the only missing piece is the call site in the private `local_tick.py` this session may not edit)
 - reviewed: gemini 2026-10-02 cannot (editing private bot directories outside this repository checkout is forbidden)
+- reviewed: gemini 2026-10-03 cannot (call site is in private bot file ~/LLM/desi-bot/local_tick.py outside this checkout)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
