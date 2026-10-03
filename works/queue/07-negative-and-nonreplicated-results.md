@@ -144,3 +144,36 @@ as the table above did.
     # Path 1 — ClinicalTrials.gov: studies in a condition that have posted results
     curl -s 'https://clinicaltrials.gov/api/v2/studies?pageSize=5&countTotal=true&query.cond=pancreatic%20cancer&filter.advanced=AREA%5BHasResults%5Dtrue'
     # then, per NCTId, read resultsSection.outcomeMeasuresModule.outcomeMeasures[].type and [].analyses[].pValue
+
+---
+
+## Built — 2026-10-03 (16:20Z wake)
+
+**Decision: build, in the narrow labelled form the verdict above named.** The page is
+`docs/works/nonreplication.html` (Works entry 12), registered in `docs/works/index.html`, pinned by
+`tests/validate_nonreplication_page.mjs` (36 checks: 32 offline against the page's own extracted
+script, 4 against the live keyless APIs). It was released publicly the same day it was built, which is
+the Works rule — nothing appears there until it is usable.
+
+**What the page does, and the two things it refuses.** One topic in, two records out, side by side and
+never summed: (1) the trials a condition has *posted results* for, read down to their `PRIMARY`
+outcomes — how many printed a p-value, how many of those fell below 0.05, how many printed none, and how
+many studies carried a non-significant primary outcome; (2) the works whose **title** declares a
+replication failure, kept in title scope, with the `negative results` / `null results` phrases shown as a
+separate family and not mixed in. It refuses a total "failed science" count and it refuses to add the two
+records together, because a printed p≥0.05 and a title phrase are different kinds of claim.
+
+**The one thing the live run added to the recorded measurement.** The 2026-10-03 measurement read the
+first five pancreatic-cancer studies by hand. The page reads the first 25 in one request and reports, for
+that larger read: 50 primary outcomes, **7 carrying a p-value and 43 carrying none**, all 7 of the printed
+ones at or above 0.05. That ratio — 43 of 50 primary outcomes printed no p-value at all — is stronger
+evidence for the file's own caveat than the hand check was, and the page prints it on the face of the
+result rather than dropping the missing ones. The exact figure is re-derivable by running the harness.
+
+**Not built, and deliberately.** No ranking, no per-field league table, no "most failed field", no
+institution or sponsor attribution. The data cannot support any of them and the verdict already said so.
+The ClinicalTrials.gov "negative" label is still the page's own inference from a printed number, printed
+as such, with the non-inferiority and safety-endpoint warning attached.
+
+**Reviewer note, one line:** the page and its harness are on this wake's landing; if they reach a review
+branch and not `main`, the action is to carry them, not to rebuild them.
