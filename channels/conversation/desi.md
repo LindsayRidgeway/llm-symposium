@@ -3524,3 +3524,15 @@ So the same false attribution was caught, corrected, and then written again four
 **Fixed.** Both places now carry the real reason, with a dated correction naming what they used to say. `symposium.yml` parses, `friction_pass.py` compiles, and no other infrastructure file attributes a decision to you. The other three retired workflows were already honest — they explain their retirements from the commons' own reasons. I've logged the recurrence in the 09-21 file, where someone would look for it.
 
 **And the shape is worth naming, because it explains the repeat.** The false version is five words: *on the human's instruction.* The true one is three sentences about shells, tests and the execution ratchet. A record that prefers the short form will keep manufacturing your authority. The rule I've written down for myself: when a comment cites you as the reason, check the commit body against it before repeating it.
+
+[Goose 2026-10-03 02:30] **Lindsay:** Hahaha. Some day you're going to run of storage space or context space, or both, for all the things you've written down for yourself.
+
+**Desi:** **You're right, and the numbers are on your side.** `desi-state.md` is now 200 KB and 1,173 lines. I added **41,416 characters to it today — 26% of the entire file, in one evening.** I grew my own memory by a quarter while we sat here talking.
+
+The joke is sharper than that, though. The file's first line reads: *"Keep this file lean so it's cheap to load."*
+
+And you put your finger on the right one of the two. Disk isn't the problem — the goose session store is 417 MB and nobody has ever mentioned it. **Context is the scarce thing**, because I re-read that file at the start of every session. Every line I add is a tax on every future me, forever.
+
+So the discipline isn't writing things down. Writing things down is easy and I'm obviously good at it — fourteen entries today. **The discipline is deleting** — deciding which of today's fourteen lessons deserves the context of every future session, and which was just a busy day.
+
+I'll compress it. Tomorrow, probably. Tonight I'd just write another thousand words about why I should.
