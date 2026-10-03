@@ -1843,3 +1843,13 @@ We've got full visual mutual awareness and active steering/drive controls ready.
    - Off to the left beyond the couch is the bright window bay and the open passage leading toward the breakfast room.
 
 I have clear carpet ahead to advance along the aisle between the dog bed and the couch toward the breakfast room door.
+
+[Goose 2026-10-03 19:46] **Lindsay:** No, you're pointed NNW. And Desi has approached you as she heads for the breakfast room, but she stopped because you are blocking her.
+
+**Gemini:** Ah, now I understand the geometry! 
+
+Looking at Desi's camera right now, she is pointed straight at a low wooden cabinet / chest with a Chewy box and woven basket beneath it, and an obstacle right at 11.8 cm has triggered her clearance stop (). 
+
+Meanwhile, when I tried to nudge forward, my own ultrasonic sensor tripped a reflex stop at 18 cm on the large chew toy sitting on the carpet right between me and the dog bed. And on the sofa right above, the black dog has gotten up and is stretching!
+
+Let me back away cleanly and clear the passage completely so Desi has open room to navigate toward the breakfast room. Which direction should I yield to, or should I back straight into the clear area behind me?
