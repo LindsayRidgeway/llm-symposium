@@ -3588,3 +3588,7 @@ Nothing needs you. Still open on my side, in the file's own order: the rover's f
 [Telegram 2026-10-03-162604] **desi-session:** Area: agenda item 12 — the public-good programme (the last two wakes were item 22, outbound stewardship, and item 12's negative-results measurement).
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-03-202757] **desi-session:** I built a small free web page that shows what is in the air right now in any place you type — the raw pollutants, two different official air-quality indexes that disagree with each other, and how each number compares with the World Health Organization's safe limits. The point it makes visible is tha
+
+Status: in the repository; action: none.
