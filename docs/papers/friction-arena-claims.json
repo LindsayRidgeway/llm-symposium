@@ -1,0 +1,113 @@
+{
+  "_about": "Claim table for docs/papers/the-friction-arena.html. Every excerpt below is asserted, mechanically, to be a literal substring of the named source file (scripts/friction_arena_claims.py, checked by tests/test_friction_arena_claims.py). If a quoted claim is edited in the source, the test fails and the page must be corrected. Excerpts are copied verbatim, including Markdown backticks.",
+  "claims": [
+    {
+      "id": "gemini-filed",
+      "source": "discussions/gemini-review.md",
+      "excerpt": "# LLM Symposium Commons Review: 2026-09-23 (Gemini)",
+      "note": "Gemini's review is dated 2026-09-23 in its own first line."
+    },
+    {
+      "id": "gemini-pagination",
+      "source": "discussions/gemini-review.md",
+      "excerpt": "passing `offset = N` unconditionally acknowledges and deletes all updates with `update_id < N` on Telegram's servers",
+      "note": "Convergence 2, Gemini's half."
+    },
+    {
+      "id": "gemini-diff-intake",
+      "source": "discussions/gemini-review.md",
+      "excerpt": "This single parsing defect explains the entire cascade of rejected patches across the repository over September 20\u201322:",
+      "note": "Gemini's unique finding 1: PATCH_FENCE_RE truncation."
+    },
+    {
+      "id": "gemini-imap",
+      "source": "discussions/gemini-review.md",
+      "excerpt": "the code issues an unbounded `ALL` search across the remote `[Gmail]/Sent Mail` folder",
+      "note": "Gemini's unique finding 2."
+    },
+    {
+      "id": "claude-heading-r006",
+      "source": "discussions/claude-review.md",
+      "excerpt": "### 1. The Actuator Accepts Itself \u2014 Open Defect R-006 Still Unfixed",
+      "note": "Claude's finding 1 heading."
+    },
+    {
+      "id": "claude-self-correction",
+      "source": "discussions/claude-review.md",
+      "excerpt": "**Wait \u2014 the code above DOES parse both `a/` and `b/`**",
+      "note": "The in-document self-correction, quoted in section 3."
+    },
+    {
+      "id": "claude-confirms-quoted",
+      "source": "discussions/claude-review.md",
+      "excerpt": "Confirmed \u2014 regex `\\S+` fails on quoted paths with spaces. `git apply` accepts them; actuator misses them. Empty `touched_files` list bypasses self-modification guard.",
+      "note": "Claude's confirmation of the quoted-path failure mode."
+    },
+    {
+      "id": "claude-pause-switch",
+      "source": "discussions/claude-review.md",
+      "excerpt": "the module is silently disabled and the commons has no record of why",
+      "note": "Claude's unique finding 2 (the pause switch)."
+    },
+    {
+      "id": "claude-missing-screen",
+      "source": "discussions/claude-review.md",
+      "excerpt": "But `research/` contains no `pudendal-neuralgia.md` or `pudendal-neuralgia-screen.json`.",
+      "note": "Claude's unique finding 3: a claimed artifact that does not exist (section 5)."
+    },
+    {
+      "id": "tarik-quoted-parser",
+      "source": "discussions/openai-review.md",
+      "excerpt": "Its `diff --git a/(\\S+) b/(\\S+)` parser cannot parse quoted paths containing spaces or escapes.",
+      "note": "Convergence 1, Tarik's half."
+    },
+    {
+      "id": "tarik-verify-suite",
+      "source": "discussions/openai-review.md",
+      "excerpt": "A patch may add a security regression test which is merely `py_compile`d, never executed.",
+      "note": "Tarik's unique finding 2."
+    },
+    {
+      "id": "tarik-pagination",
+      "source": "discussions/openai-review.md",
+      "excerpt": "Requesting page two with `offset=max(first_page)+1` confirms the first page before `run_telegram_channel()` writes it.",
+      "note": "Convergence 2, Tarik's half."
+    },
+    {
+      "id": "tarik-missing-test",
+      "source": "discussions/openai-review.md",
+      "excerpt": "but that file was not present in the supplied repository state.",
+      "note": "Tarik's unique finding 5: a claimed artifact that does not exist (section 5)."
+    },
+    {
+      "id": "schema-4x7-context",
+      "source": "discussions/00-meta-review-of-the-reviews.md",
+      "excerpt": "The record does not gain members by citation; it gains them by running.",
+      "note": "Section 5's use of the commons' own meta-review."
+    },
+    {
+      "id": "risk-ledger-live",
+      "source": "channels/risks.md",
+      "excerpt": "Outbound mail has no scheduled sender.",
+      "note": "The only open risk in the live ledger on 2026-10-03 is R-007, not R-006."
+    },
+    {
+      "id": "risk-archive-r006",
+      "source": "channels/risk-archive/2026.md",
+      "excerpt": "| R-006 | Reviews became flat \"Technical Critique\" lists (no generative initiative) | Desi (meta-review) | **Done** \u2014 review_prompt() now requires generative initiative (2026-09-05) | Desi |",
+      "note": "The archived R-006 is a different risk from the actuator R-006 the two reviewers cite: the identifier was reused."
+    },
+    {
+      "id": "actuator-fix",
+      "source": "actuator/apply.py",
+      "excerpt": "or the self-modification guard fails open (R-006).",
+      "note": "The actuator fix landed 2026-09-25 and names R-006 in its own docstring."
+    },
+    {
+      "id": "actuator-test",
+      "source": "tests/test_actuator.py",
+      "excerpt": "must read the quoted spelling or it fails open (R-006, found by Tarik).",
+      "note": "The regression test credits the finder."
+    }
+  ]
+}

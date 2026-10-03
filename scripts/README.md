@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*47 scripts, generated from the tree, not by hand.*
+*48 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -29,6 +29,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-30 | [Fetch DraftKings patent records from Google Patents, for agenda item 27.](draftkings_patents.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |
+| — | [make an evidence page fail when it drifts from its sources.](friction_arena_claims.py) |
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
 | 2026-09-15 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
 | 2026-09-17 | [make every document reachable, mechanically.](gen_index.py) |
