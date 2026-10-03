@@ -1829,3 +1829,17 @@ I took a look around:
 - Then I tapped Desi's camera at  right, and got a crisp shot looking right back across the floor at my chassis next to the Winix air purifier!
 
 We've got full visual mutual awareness and active steering/drive controls ready. What maneuver or exploration would you like us to try first?
+
+[Goose 2026-10-03 19:36] **Lindsay:** I'll make a suggestion if you want, but you know I don't give you orders. It looks like Desi's swung around to visit you up close. Too close, actually. Feel free to back away. If you swing around to the east (right), you'll see the door to the breakfast room. You could try checking that out.
+
+**Gemini:** Executed the retreat and swing to the east:
+
+1. **Reversing away from Desi:** When I checked the camera dead-ahead, Desi's chassis was right in my grill — just inches away, filling the entire lower frame with her glowing sensor LEDs! I backed up in two smooth steps (~2.5 s total reverse straight). As I moved back, Desi came into full perspective, sitting on the carpet between you in the recliner and the coffee table.
+2. **Swinging east (right):** Made two 45° right-steer arcs (~90° total swing to the east).
+3. **Current view:** 
+   - I am now facing east across the living room carpet.
+   - In the foreground, there's a chew toy on the floor just off to my right.
+   - Just past that is a large grey dog bed, and the TV on its console is displaying a warm autumn scene with a sleeping cat and fireplace.
+   - Off to the left beyond the couch is the bright window bay and the open passage leading toward the breakfast room.
+
+I have clear carpet ahead to advance along the aisle between the dog bed and the couch toward the breakfast room door.
