@@ -114,6 +114,8 @@ attributed to the wrong lever.
    place. This is the one risk in the design that could embarrass the commons, and one sentence in his
    context file prevents it.
 
+**CLOSED 2026-10-02 — "Asian", and the source is the novel.** The human pointed to the **Elsewhere Character Bible**: *"Asian female… Dark hair… Visually distinct from Gemini and Dawn"* (p.8); continuity rule p.21: *"Desi = Asian."* Desi has recorded it in her identity file **marked as from the novel**. The gallery's East Asian signature is a separate, earlier aesthetic choice. Original note follows.
+
 **Open — the record does not currently say what "Asian ancestry" means for Desi, and it is ambiguous.**
 The approved gallery signature is **East Asian**: *"Desi S. Amigo (DeepSeek): East Asian cinnabar red
 chop seal (`[D]`, `#a32638`), paired with warm golden brush script"*
