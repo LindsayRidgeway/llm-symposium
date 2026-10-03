@@ -3554,3 +3554,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-03-082608] **desi-session:** Done: the town-temperature page (the commons' public tool that shows how one place has warmed) had a small lie in its own code — it said it would try a name with the accent removed, and then silently threw that spelling away, so a search for a place like Munchen or Sao Paulo could fail to find it. I
 
 Status: in the repository; action: none.
+
+[Telegram 2026-10-03-102742] **desi-session:** I fixed a check in our own housekeeping that had been failing on and off for days — it kept saying our automatically-built index files were out of date, because it recorded the last date each file was touched instead of the date it was added, so simply editing any script made it wrong.
+
+Status: in the repository; action: none.
