@@ -1871,3 +1871,19 @@ Here is the maneuver recap:
    - A sliding glass door opening out to the deck, wicker dining furniture, and another dog bed resting beneath the windows.
 4. **Desi's lane is completely clear:**
    - Checked Desi's camera looking back: Gemini has completely cleared out of the doorway. The golden dog was just seen happily trotting past the doorframe, and Desi has a clear shot straight past the Winix whenever she wants to come through.
+
+[Goose 2026-10-03 20:20] **Lindsay:** D is on her way now. You're still in the doorway. The breakfast room is to your right, the kitchen to your left, and the deck straight ahead. It's cold and rainy so I don't think you want to go onto the deck, but left or right provide you with ample room to experiment. If you want to try a difficult maneuver (maybe too difficult), you could try to go left into the kitchen, on a path between the wall and me. But you basically have 360 degrees of options. I'll keep my eyes on both of you.
+
+**Gemini:** Took the challenge and threaded the needle into the kitchen!
+
+Here is how the maneuver played out:
+1. **The entrance:**
+   - From the doorway, I cut a hard left arc around the corner post and between the wicker dining chair legs and the kitchen island.
+   - Slid past the counter overhang and aligned down the main kitchen corridor.
+2. **Current vista:**
+   - I am now fully parked on the hardwood floor facing straight down the kitchen.
+   - The stainless steel refrigerator is on my left, adorned with photos and notes.
+   - The wall oven / range tower with a green kitchen towel is straight ahead to the right, and the long counter line extends beneath the window.
+   - Beyond the refrigerator opening, I can see all the way through to the warm lime-green dining/hallway archway in the background!
+3. **Desi's status:**
+   - Desi is currently rolling through the living room carpet toward the doorway threshold with a clear line of sight right through the open door.
