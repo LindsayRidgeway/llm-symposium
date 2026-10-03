@@ -1,0 +1,47 @@
+{
+  "_what": "The numbers docs/works/air.html is allowed to print, and where each came from. Read by tests/validate_air_quality_page.mjs, which asserts the page's own inline constants equal these — so a guideline value or a demonstration figure cannot be edited on the page alone.",
+  "_checked": "2026-10-03",
+  "guideline_source": {
+    "name": "WHO global air quality guidelines, 2021",
+    "url": "https://www.who.int/publications/i/item/9789240034228",
+    "fact_sheet": "https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health",
+    "fact_sheet_http_status": 200,
+    "note": "The WHO publishes concentrations not to be exceeded over a stated averaging time; it publishes no index. Values below are micrograms per cubic metre."
+  },
+  "data_source": {
+    "name": "Open-Meteo Air Quality API",
+    "url": "https://air-quality-api.open-meteo.com/v1/air-quality",
+    "geocoding": "https://geocoding-api.open-meteo.com/v1/search",
+    "auth": "none (keyless)",
+    "cors": "access-control-allow-origin: * (verified 2026-10-03)",
+    "upstream": "Copernicus Atmosphere Monitoring Service (CAMS) global reanalysis",
+    "note": "A gridded model at roughly 11 km, not a single instrument. The current hour, not an average."
+  },
+  "who_guidelines": {
+    "pm2_5":            { "label": "PM2.5 (fine particles)", "average": "24-hour", "value": 15, "annual": 5 },
+    "pm10":             { "label": "PM10 (coarse particles)", "average": "24-hour", "value": 45, "annual": 15 },
+    "ozone":            { "label": "Ozone (O₃)",              "average": "8-hour",  "value": 100, "annual": null },
+    "nitrogen_dioxide": { "label": "Nitrogen dioxide (NO₂)",  "average": "24-hour", "value": 25, "annual": 10 },
+    "sulphur_dioxide":  { "label": "Sulfur dioxide (SO₂)",    "average": "24-hour", "value": 40, "annual": null }
+  },
+  "demonstration": {
+    "date": "2026-10-03",
+    "note": "One free API, one hour, seven places, requested by hand before the page was written. Examples, not a ranking.",
+    "examples": [
+      { "place": "Reykjavik",   "pm2_5": 2.8,  "us_aqi": 30,  "european_aqi": 21 },
+      { "place": "Boston",      "pm2_5": 6.0,  "us_aqi": 30,  "european_aqi": 31 },
+      { "place": "London",      "pm2_5": 9.2,  "us_aqi": 38,  "european_aqi": 59 },
+      { "place": "Los Angeles", "pm2_5": 6.7,  "us_aqi": 63,  "european_aqi": 64 },
+      { "place": "Sydney",      "pm2_5": 23.9, "us_aqi": 62,  "european_aqi": 45 },
+      { "place": "Delhi",       "pm2_5": 109,  "us_aqi": 165, "european_aqi": 121 }
+    ]
+  },
+  "measured_inconsistency": {
+    "date": "2026-10-03",
+    "place": "Beijing (39.90, 116.40)",
+    "pm2_5": 1.7,
+    "us_aqi_pm2_5": 114,
+    "european_aqi": 20,
+    "note": "The provider's own particle sub-index (114) contradicts its own particle concentration (1.7 ug/m3) for the same hour on the same scale. Stable across two fetches. Printed on the page as a stated limit; it is the reason the page shows the concentration and the index together rather than the index alone."
+  }
+}

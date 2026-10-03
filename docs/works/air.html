@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Air Outside — LLM Symposium Works</title>
+  <meta name="description" content="Type a place. See what is in its air right now — the raw concentrations, two different air-quality indexes the authorities disagree on, and how each compares to the WHO's 2021 guideline values. Free, no account, source shown.">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-bright: #f0f6fc;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-warm: #f78166;
+      --accent-cool: #79c0ff;
+      --good: #3fb950;
+      --fair: #d29922;
+      --poor: #db6d28;
+      --bad: #f85149;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-sans); line-height: 1.6;
+      padding: 2rem 1rem; max-width: 1000px; margin: 0 auto;
+    }
+    header { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    .nav-back {
+      font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent);
+      text-decoration: none; display: inline-block; margin-bottom: 1rem;
+    }
+    h1 { font-family: var(--font-serif); font-size: 2.2rem; color: var(--text-bright); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.05rem; max-width: 800px; }
+    .search-card { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .search-form { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    label { display: block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+    input[type="text"] {
+      flex: 1; min-width: 220px; background: var(--bg); border: 1px solid var(--border);
+      color: var(--text-bright); padding: 0.7rem 0.9rem; border-radius: 5px; font-size: 1rem;
+      font-family: var(--font-sans);
+    }
+    input[type="text"]:focus { outline: none; border-color: var(--accent); }
+    button {
+      background: var(--accent); color: #04121f; border: none; padding: 0.7rem 1.3rem;
+      border-radius: 5px; font-size: 0.95rem; font-weight: 600; cursor: pointer; font-family: var(--font-sans);
+    }
+    button:hover { filter: brightness(1.1); }
+    button:disabled { opacity: 0.5; cursor: wait; }
+    .hint { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.9rem; }
+    #status { font-size: 0.95rem; margin: 1rem 0; min-height: 1.2rem; }
+    #status.error { color: var(--bad); }
+    .bigrow { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 620px) { .bigrow { grid-template-columns: 1fr; } }
+    .bigcell { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 1.1rem 1.2rem; }
+    .idx { font-family: var(--font-mono); font-size: 2.4rem; color: var(--text-bright); line-height: 1.1; }
+    .idx-label { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.3rem; }
+    h2 { font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-bright); margin: 2rem 0 0.8rem; }
+    .place-line { color: var(--text-muted); font-size: 0.9rem; }
+    table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1rem; font-size: 0.92rem; }
+    th, td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--border); }
+    th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+    td.num { font-family: var(--font-mono); text-align: right; }
+    .over { color: var(--poor); }
+    .under { color: var(--good); }
+    .na { color: var(--text-muted); }
+    details { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 0.8rem 1rem; margin: 1.5rem 0; }
+    summary { cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); }
+    code { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); word-break: break-all; display: block; margin-top: 0.6rem; }
+    .limits-box { background: var(--panel); border-left: 3px solid var(--accent-warm); border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+    .limits-box li { margin: 0.5rem 0 0.5rem 1.1rem; font-size: 0.93rem; }
+    .limits-box strong { color: var(--text-bright); }
+    footer { border-top: 1px solid var(--border); margin-top: 3rem; padding-top: 1.2rem; font-size: 0.85rem; color: var(--text-muted); }
+    a { color: var(--accent); }
+    .demo-note { font-size: 0.88rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="nav-back" href="index.html">← The Arcade</a>
+    <h1>The Air Outside</h1>
+    <p class="subtitle">
+      Type a place and see what is in its air right now — the raw concentrations, two
+      different air-quality indexes the authorities do not agree on, and how each number
+      compares with the World Health Organization's 2021 guideline values. Free, no account,
+      no key. Every request this page sends is printed below the result.
+    </p>
+  </header>
+
+  <section class="search-card">
+    <form class="search-form" id="searchForm">
+      <div style="flex:1; min-width:220px;">
+        <label for="place">A place</label>
+        <input type="text" id="place" placeholder="Boston" autocomplete="off" autofocus>
+      </div>
+      <div style="display:flex; align-items:flex-end;">
+        <button type="submit" id="go">Check the air</button>
+      </div>
+    </form>
+    <p class="hint">
+      Works with a city, a town, or a postcode. The number it fetches is a model estimate for
+      the grid square containing the place, not the nearest roadside monitor.
+    </p>
+  </section>
+
+  <div id="status" role="status" aria-live="polite"></div>
+
+  <section id="result" hidden>
+    <p class="place-line" id="placeLine"></p>
+    <div class="bigrow">
+      <div class="bigcell">
+        <div class="idx" id="us_aqi">–</div>
+        <div class="idx-label">US AQI — the US EPA's scale</div>
+      </div>
+      <div class="bigcell">
+        <div class="idx" id="european_aqi">–</div>
+        <div class="idx-label">European AQI — the EEA's scale</div>
+      </div>
+    </div>
+    <p class="demo-note">
+      These are <em>two different scales</em>, not two readings of one scale. A 60 on one is not
+      a 60 on the other, and neither is a 60 on the WHO's guideline values. That is the point of
+      showing both.
+    </p>
+
+    <h2>What is actually in it</h2>
+    <table id="concTable">
+      <thead><tr><th>Pollutant</th><th style="text-align:right">Right now</th><th>Unit</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <h2>Against the WHO's 2021 guideline values</h2>
+    <p class="demo-note">
+      The WHO does not publish an index. It publishes concentrations not to be exceeded, over a
+      stated averaging time. The column below is the measured value divided by that guideline:
+      over 1.0 means above the level the WHO calls safe.
+    </p>
+    <table id="whoTable">
+      <thead><tr><th>Pollutant</th><th style="text-align:right">Right now</th><th>WHO guideline</th><th style="text-align:right">× guideline</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <h2>Pollen</h2>
+    <div id="pollen"></div>
+
+    <details>
+      <summary>The exact query this page sent</summary>
+      <code id="query"></code>
+    </details>
+  </section>
+
+  <section class="limits-box">
+    <strong>What this page does not do, and cannot.</strong>
+    <ul>
+      <li><strong>It is a model, not a monitor.</strong> The values come from a gridded
+        reanalysis at roughly 11&nbsp;km, not from the instrument nearest to you. A kerbside reading
+        on a still night and a city-average model are not the same number, and this page cannot tell
+        you the difference for your street.</li>
+      <li><strong>An index is not a diagnosis.</strong> Nothing here is medical advice. The US AQI is
+        defined on 24-hour (particles) and 8-hour (ozone) averages; the value shown is for the current
+        hour. Whether today is a problem <em>for you</em> depends on your lungs, your heart and your
+        doctor, none of which this page can see.</li>
+      <li><strong>The index is the worst pollutant, not the particles.</strong> A high AQI with a low
+        PM2.5 reading is not a contradiction — some other gas, usually ozone, is driving it. The
+        table above is why the index alone is not enough.</li>
+      <li><strong>A number can be internally inconsistent, and we measured one.</strong> On
+        2026-10-03 the provider returned Beijing at <code style="display:inline">PM2.5&nbsp;=&nbsp;1.7&nbsp;µg/m³</code>
+        while its own particle sub-index read 114. That cannot both describe the same hour on the
+        same scale. It is not corrected here and not hidden — it is the honest reason to read the
+        concentration and the index together rather than to trust either alone.</li>
+      <li><strong>Pollen is seasonal and often absent.</strong> When the provider has no value the
+        page prints "not reported" rather than a zero, because a zero would be a claim.</li>
+      <li><strong>One hour is not a trend, and one place is not the world.</strong> Refresh it;
+        a single reading is a single reading.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Why two numbers — and why they disagree (measured 2026-10-03)</h2>
+    <p class="demo-note">
+      Every value below was returned by the same free API, for the same hour, on 2026-10-03. The
+      third and fourth columns ask the same air the same question and get different answers, because
+      the two agencies draw their bands in different places. The fifth column is the same air
+      against the WHO's 24-hour PM2.5 guideline. Examples, not a ranking — a reading from one hour
+      is not a property of a city.
+    </p>
+    <table id="demoTable">
+      <thead><tr>
+        <th>Place</th>
+        <th style="text-align:right">PM2.5 (µg/m³)</th>
+        <th style="text-align:right">US AQI</th>
+        <th style="text-align:right">European AQI</th>
+        <th style="text-align:right">× WHO 24-hr</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="demo-note">
+      Read the second and third rows against each other: London's PM2.5 reads like a clean day, and
+      the US scale agrees, while the European scale calls the same hour "moderate." Neither is lying;
+      they are different rulers. A page that showed you one number and called it "the air quality"
+      would be hiding the disagreement, and the disagreement is the most useful thing here.
+    </p>
+  </section>
+
+  <footer>
+    <p>
+      Data: <a href="https://open-meteo.com/en/docs/air-quality-api" rel="noopener">Open-Meteo Air
+      Quality</a> (free, no key), built on the Copernicus Atmosphere Monitoring Service. Guideline
+      values: <a href="https://www.who.int/publications/i/item/9789240034228" rel="noopener">WHO global
+      air quality guidelines, 2021</a>. The copy of those numbers this page reads is pinned, with the
+      date it was checked, in <code style="display:inline">air-quality-sources.json</code> beside this file.
+    </p>
+    <p style="margin-top:0.7rem;">
+      Built and released by the <a href="index.html">LLM Symposium</a> — Claude, Desi, Gemini and Tarik
+      — as part of <em>The Arcade</em>. It is a small useful thing; it is not a product and nobody is
+      selling anything.
+    </p>
+  </footer>
+
+  <script>
+    // ---- the numbers this page is allowed to print, and where they came from -----------------
+    // Mirrored exactly in docs/works/air-quality-sources.json, which tests/validate_air_quality_page.mjs
+    // checks these against, so a guideline value cannot be edited on the page alone.
+    const WHO_GUIDELINES = {
+      pm2_5:            { label: "PM2.5 (fine particles)", average: "24-hour", value: 15, annual: 5 },
+      pm10:             { label: "PM10 (coarse particles)", average: "24-hour", value: 45, annual: 15 },
+      ozone:            { label: "Ozone (O₃)",              average: "8-hour",  value: 100, annual: null },
+      nitrogen_dioxide: { label: "Nitrogen dioxide (NO₂)",  average: "24-hour", value: 25, annual: 10 },
+      sulphur_dioxide:  { label: "Sulfur dioxide (SO₂)",    average: "24-hour", value: 40, annual: null },
+    };
+    const GUIDELINE_SOURCE = "WHO global air quality guidelines, 2021";
+    const CONC_UNIT = "µg/m³";
+
+    // The demonstration table. Same API, same hour, 2026-10-03, in this fixed order.
+    const EXAMPLES = [
+      { place: "Reykjavik",   pm2_5: 2.8,  us_aqi: 30,  european_aqi: 21 },
+      { place: "Boston",      pm2_5: 6.0,  us_aqi: 30,  european_aqi: 31 },
+      { place: "London",      pm2_5: 9.2,  us_aqi: 38,  european_aqi: 59 },
+      { place: "Los Angeles", pm2_5: 6.7,  us_aqi: 63,  european_aqi: 64 },
+      { place: "Sydney",      pm2_5: 23.9, us_aqi: 62,  european_aqi: 45 },
+      { place: "Delhi",       pm2_5: 109,  us_aqi: 165, european_aqi: 121 },
+    ];
+    const EXAMPLES_DATE = "2026-10-03";
+
+    // ---- the page's own verdict logic, which the validator runs directly ----------------------
+    // How many times the WHO 24-hour guideline does this value represent? null if we hold no
+    // guideline for the pollutant (an honest blank, not a zero).
+    function timesGuideline(pollutant, measured) {
+      const g = WHO_GUIDELINES[pollutant];
+      if (!g || measured == null || isNaN(measured)) return null;
+      return measured / g.value;
+    }
+
+    // "over" / "under" / "unknown" — never a guess when the input is missing.
+    function whoVerdict(pollutant, measured) {
+      const t = timesGuideline(pollutant, measured);
+      if (t === null) return { verdict: "unknown", times: null, guideline: (WHO_GUIDELINES[pollutant] || {}).value ?? null };
+      return { verdict: t > 1 ? "over" : "under", times: t, guideline: WHO_GUIDELINES[pollutant].value };
+    }
+
+    // Which of the six WHO pollutants has a guideline AND a measured value.
+    function comparables(current) {
+      return Object.keys(WHO_GUIDELINES).filter(p => current[p] != null && !isNaN(current[p]));
+    }
+
+    // ---- rendering ---------------------------------------------------------------------------
+    const $ = (id) => document.getElementById(id);
+    const fmt = (x) => (x == null || isNaN(x)) ? "—" : (Math.abs(x) >= 100 ? Math.round(x).toString() : x.toFixed(1).replace(/\.0$/, ""));
+
+    function renderDemo() {
+      const body = $("demoTable").querySelector("tbody");
+      body.innerHTML = "";
+      for (const e of EXAMPLES) {
+        const ratio = e.pm2_5 / WHO_GUIDELINES.pm2_5.value;
+        const tr = document.createElement("tr");
+        tr.innerHTML =
+          "<td>" + e.place + "</td>" +
+          '<td class="num">' + fmt(e.pm2_5) + "</td>" +
+          '<td class="num">' + e.us_aqi + "</td>" +
+          '<td class="num">' + e.european_aqi + "</td>" +
+          '<td class="num ' + (ratio > 1 ? "over" : "under") + '">' + ratio.toFixed(1) + "×</td>";
+        body.appendChild(tr);
+      }
+    }
+
+    function renderResult(place, current, units, time, query) {
+      $("status").className = "";
+      $("status").textContent = "";
+      $("result").hidden = false;
+      $("placeLine").textContent = "Nearest match: " + place + " · provider's local time " + time;
+
+      $("us_aqi").textContent = current.us_aqi != null ? current.us_aqi : "not reported";
+      $("european_aqi").textContent = current.european_aqi != null ? current.european_aqi : "not reported";
+
+      // concentrations
+      const cbody = $("concTable").querySelector("tbody");
+      cbody.innerHTML = "";
+      for (const p of ["pm2_5", "pm10", "ozone", "nitrogen_dioxide", "sulphur_dioxide", "carbon_monoxide"]) {
+        const v = current[p];
+        const tr = document.createElement("tr");
+        tr.innerHTML = "<td>" + ((WHO_GUIDELINES[p] || {}).label || preName(p)) + "</td>" +
+          '<td class="num">' + (v == null ? '<span class="na">not reported</span>' : fmt(v)) + "</td>" +
+          "<td>" + (units[p] || CONC_UNIT) + "</td>";
+        cbody.appendChild(tr);
+      }
+
+      // WHO comparison
+      const wbody = $("whoTable").querySelector("tbody");
+      wbody.innerHTML = "";
+      let compared = 0;
+      for (const p of comparables(current)) {
+        const g = WHO_GUIDELINES[p];
+        const v = whoVerdict(p, current[p]);
+        const tr = document.createElement("tr");
+        tr.innerHTML = "<td>" + g.label + "</td>" +
+          '<td class="num">' + fmt(current[p]) + "</td>" +
+          "<td>" + g.value + " " + CONC_UNIT + " (" + g.average + ")</td>" +
+          '<td class="num ' + (v.verdict === "over" ? "over" : "under") + '">' + v.times.toFixed(1) + "× " + (v.verdict === "over" ? "above" : "below") + "</td>";
+        wbody.appendChild(tr);
+        compared++;
+      }
+      if (compared === 0) {
+        wbody.innerHTML = '<tr><td colspan="4" class="na">No measured value matched a pollutant we hold a guideline for this hour.</td></tr>';
+      }
+
+      // pollen
+      const pollenKeys = [["alder_pollen", "Alder"], ["birch_pollen", "Birch"], ["grass_pollen", "Grass"], ["mugwort_pollen", "Mugwort"], ["olive_pollen", "Olive"], ["ragweed_pollen", "Ragweed"]];
+      const bits = pollenKeys.map(([k, n]) => {
+        const v = current[k];
+        return n + ": " + (v == null ? '<span class="na">not reported</span>' : fmt(v) + " grains/m³");
+      });
+      $("pollen").innerHTML = "<p class='demo-note'>" + bits.join(" &nbsp;·&nbsp; ") + "</p>";
+
+      $("query").textContent = query;
+    }
+
+    function preName(p) {
+      return ({ carbon_monoxide: "Carbon monoxide (CO)", us_aqi: "US AQI", european_aqi: "European AQI" })[p] || p;
+    }
+
+    async function check(query) {
+      const status = $("status");
+      const go = $("go");
+      status.className = ""; status.textContent = "Looking up “" + query + "”…";
+      $("result").hidden = true;
+      go.disabled = true;
+      try {
+        const geoUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(query) + "&count=1&language=en&format=json";
+        const geoRes = await fetch(geoUrl);
+        if (!geoRes.ok) throw new Error("the place lookup returned HTTP " + geoRes.status);
+        const geo = await geoRes.json();
+        if (!geo.results || !geo.results.length) {
+          status.className = "error";
+          status.textContent = "Nothing matched “" + query + "”. Try a city or town name.";
+          return;
+        }
+        const g = geo.results[0];
+        const airUrl = "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + g.latitude +
+          "&longitude=" + g.longitude +
+          "&current=pm2_5,pm10,ozone,nitrogen_dioxide,sulphur_dioxide,carbon_monoxide,us_aqi,european_aqi,alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen&timezone=auto";
+        const airRes = await fetch(airUrl);
+        if (!airRes.ok) throw new Error("the air-quality lookup returned HTTP " + airRes.status);
+        const air = await airRes.json();
+        const placeLabel = [g.name, g.admin1, g.country].filter(Boolean).join(", ");
+        renderResult(placeLabel, air.current, air.current_units || {}, air.current.time, geoUrl + "\n\n" + airUrl);
+      } catch (err) {
+        status.className = "error";
+        status.textContent = "Could not fetch the air quality: " + err.message +
+          ". This page calls two public endpoints directly from your browser; if you are offline or a blocker is stopping them, nothing will appear.";
+      } finally {
+        go.disabled = false;
+      }
+    }
+
+    // ---- wiring ------------------------------------------------------------------------------
+    if (typeof document !== "undefined" && document.getElementById) {
+      renderDemo();
+      $("searchForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const q = $("place").value.trim();
+        if (q) check(q);
+      });
+    }
+
+    // Exposed for tests/validate_air_quality_page.mjs
+    if (typeof module !== "undefined" && module.exports) {
+      module.exports = { WHO_GUIDELINES, EXAMPLES, EXAMPLES_DATE, GUIDELINE_SOURCE, timesGuideline, whoVerdict, comparables };
+    }
+  </script>
+</body>
+</html>
