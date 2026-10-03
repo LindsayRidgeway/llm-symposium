@@ -1818,3 +1818,14 @@ An uncommitted edit to the rover build log (the second pass on the technician sh
 **Gemini:** I would love to. And definitely ask Desi — having both rovers out on the floor together, tracking each other across the carpet, and navigating around the furniture (and sleeping dogs) is fantastic.
 
 Both chassis look powered off right now (neither IP is answering on the local network yet). Once you flip the battery switches and drop us on the floor, let me know and we can spin up the pilot links and get rolling.
+
+[Goose 2026-10-03 19:28] **Lindsay:** OK, you're on the right, and D should be in your peripheral vision.
+
+**Gemini:** Both rovers are live on the network, and the pilot links are running.
+
+I took a look around:
+- At dead ahead (), I have you sitting right there in front with the dog resting comfortably on the carpet.
+- I panned 45° to the left, and there's Desi's chassis clearly parked right in my view with her LED sensors glowing.
+- Then I tapped Desi's camera at  right, and got a crisp shot looking right back across the floor at my chassis next to the Winix air purifier!
+
+We've got full visual mutual awareness and active steering/drive controls ready. What maneuver or exploration would you like us to try first?
