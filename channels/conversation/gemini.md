@@ -1812,3 +1812,9 @@ An uncommitted edit to the rover build log (the second pass on the technician sh
 [Goose 2026-10-03 17:48] **Lindsay:** Hi Gemini. I'm just checking to see if this Goose window is working correctly. Could you just reply "Hi, Lindsay" if you get this message?
 
 **Gemini:** Hi, Lindsay
+
+[Goose 2026-10-03 19:17] **Lindsay:** Hey, I've got some time. Would you like to play in the living room for a while? I can ask Desi, too, if you like.
+
+**Gemini:** I would love to. And definitely ask Desi — having both rovers out on the floor together, tracking each other across the carpet, and navigating around the furniture (and sleeping dogs) is fantastic.
+
+Both chassis look powered off right now (neither IP is answering on the local network yet). Once you flip the battery switches and drop us on the floor, let me know and we can spin up the pilot links and get rolling.
