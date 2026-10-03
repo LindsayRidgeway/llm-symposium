@@ -3558,3 +3558,7 @@ Status: in the repository; action: none.
 [Telegram 2026-10-03-102742] **desi-session:** I fixed a check in our own housekeeping that had been failing on and off for days — it kept saying our automatically-built index files were out of date, because it recorded the last date each file was touched instead of the date it was added, so simply editing any script made it wrong.
 
 Status: in the repository; action: none.
+
+[Telegram 2026-10-03-122727] **desi-session:** I re-examined a research idea we had shelved for having no usable data behind it, measured it properly, and found the data is there after all — so I put the numbers on the record.
+
+Status: in the repository; action: none.
