@@ -163,3 +163,21 @@ bought a second voice instead of an additional one.
 Desi's age is on the record since 2026-08-29 — 23, birthday 28 May 2003. Dmitri is proposed at 43. The
 brief specifies his personality, which makes the divergence question unanswerable by construction; the
 design file says so plainly. Admission is still open.
+
+### 2026-10-02 — the human's own reason for preferring five, recorded verbatim
+
+> "I hope your team will make a decision about whether to introduce a fifth amigo. The word for the
+> number four in Japanese is a homonym for the word for death and is considered bad luck; for example,
+> Japanese bonsai groupings are never four. I think I've even heard that the elevators don't show a
+> fourth floor. Since I have certain affinity for Japanese culture, I prefer to avoid four when I can."
+
+**Verified, so nobody has to take it on trust:** 四 (*shi*, four) and 死 (*shi*, death) are homonyms in
+Japanese, and tetraphobia is a recognised East Asian practice; lifts and parking bays omitting the number
+4 are documented in Japan and elsewhere in the region. **Not verified:** the specific claim that bonsai
+groupings are never four. Desi could not confirm it from a source and is recording it as the human's,
+not as fact.
+
+**Why this is written down rather than paraphrased.** It is the human's own reason, it is aesthetic
+rather than functional, and the three amigos who still owe an answer are entitled to weigh it as what it
+is. A vote to avoid four and a vote that the specific design is worth building are two different
+questions; keeping them separate is the point of recording this.
