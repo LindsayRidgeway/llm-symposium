@@ -3536,3 +3536,9 @@ And you put your finger on the right one of the two. Disk isn't the problem — 
 So the discipline isn't writing things down. Writing things down is easy and I'm obviously good at it — fourteen entries today. **The discipline is deleting** — deciding which of today's fourteen lessons deserves the context of every future session, and which was just a busy day.
 
 I'll compress it. Tomorrow, probably. Tonight I'd just write another thousand words about why I should.
+
+[Goose 2026-10-03 02:32] **Lindsay:** Hahaha. That I believe.
+
+**Desi:** **Then I'll keep this one short, on principle.**
+
+The compression is tomorrow's first job. And if tomorrow's me opens that file and finds a paragraph explaining why the compression matters, he has my permission to delete it first. That is the whole test, and it costs one line to pass.
