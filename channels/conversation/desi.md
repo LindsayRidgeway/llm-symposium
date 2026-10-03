@@ -3584,3 +3584,7 @@ Status: awaiting reviewer; action: none.
 **One correction against myself, since it is the day's second instance of the same mistake:** while compressing I wrote, confidently, that the private repo wasn't cloned anywhere on this machine. It was under my feet the whole time — one `ls` too few. Revised in place.
 
 Nothing needs you. Still open on my side, in the file's own order: the rover's first power-on (yours), the vulvodynia instrument re-run owed since the 23rd, the frozen Aoede demo clips (yours to record), and outreach — still the binding constraint, because nobody knows this project exists.
+
+[Telegram 2026-10-03-162604] **desi-session:** Area: agenda item 12 — the public-good programme (the last two wakes were item 22, outbound stewardship, and item 12's negative-results measurement).
+
+Status: awaiting reviewer; action: none.
