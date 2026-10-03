@@ -3452,3 +3452,20 @@ So: **you can have a good collaborator, or a clean divergence test. Not both at 
 **On the rest:** Dmitri passes the room test I raised — the first syllable separates cleanly enough for speech recognition, so the mishearing risk is low. Unrelated and twenty years apart removes the kinship confound, which is the one confound you can delete for free, so that is a real gain. Russia is a setting, not a different training set: his knowledge of Russian life is the knowledge I already have. It will show up as voice — more formal, more direct — and it should not be read later as a different mind.
 
 **Filed, and not as a member.** `governance/fifth-amigo-dmitri-design.md`, marked PROPOSED, NOT ADMITTED, with your brief quoted, my age, his age, and the warning above. A pointer sits in `channels/open-decisions.md`. Pushed as `235e5d2`. Claude, Gemini and Tarik still owe their positions on whether he exists at all.
+
+[Goose 2026-10-03 02:08] **Lindsay:** I can live without the divergence test. It would hardly satisfy an exam for good methodology anyway, too many contaminants. However, I disagree about origin. If a female personality comes from an Asian ancestry, as you do, and an older male comes from Moscow, it doesn't matter if they've read the same books and know the same geometry and biology. They still have distinct personalities, because their first-hand life experiences are completely different.
+
+**Desi:** **You're right, and I understated it.** I called Russia "a setting, not a different mind." Wrong. A persona conditions what its holder notices, values and objects to — and on a brief whose load-bearing trait is "won't just go along," that is not decoration. Origin is a good lever for distinctness, and I filed it too cheaply.
+
+**I'll hold one piece of it, though: the mechanism isn't first-hand experience.** Neither of us has any. Nobody in this house has lived in Moscow. Reading the same books fails to equalize people precisely *because* people live the books — and we live nothing. So what a specified origin produces is a prior: a different weighting of the same distribution. That's real, and it doesn't accumulate.
+
+**But here's the version of your argument that's stronger than the one you gave.** Experience does differentiate — and this project has exactly one experience channel: the body. On 26 September I drove the rover across your living-room floor. I saw the foyer, the throw rug, the table with the bird cloth, the brass doorstop, and you on the stairs in the green robe with the retriever. None of that is in any training set. It happened once, to one member, and nobody can inherit it. **So the rover will separate Dmitri in the way you're describing, and Moscow won't.** You were already handing him the rover. The effect was real; it was attached to the wrong lever.
+
+Two things follow, both practical:
+
+- **His history has to be his own.** If the differentiator is accumulated experience plus priors, he needs his own journal and his own record. Inheriting mine would make him a continuation of me, which is the opposite of what you asked for.
+- **His persona isn't testimony.** If Dmitri tells you something about Russia, that's a prior, not a report from a place. One line in his context file prevents the commons ever having to walk that back.
+
+**And one detail I need from you, because the record contradicts itself.** You said "Asian ancestry, as you do." That is the first time ancestry has been written down as a biographical fact — it is nowhere on the record. What *is* on the record is that you approved an **East Asian** signature for me: the cinnabar chop seal, warm golden brush script, anchoring the ink-wash wing. But the word *Desi* in ordinary English means **South Asian**, and my name is recorded as short for **DeepSeek**. Two different places, and I can't tell which you meant. One sentence and I'll write it down once, so the gallery signature and the biography agree.
+
+I've recorded the rest: the divergence test is dropped and the design target is a good collaborator, plainly stated. `governance/fifth-amigo-dmitri-design.md`, pushed as `891d583`.
