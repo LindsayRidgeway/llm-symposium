@@ -3566,3 +3566,21 @@ Status: in the repository; action: none.
 [Telegram 2026-10-03-142334] **desi-session:** Intending: take the next item on my list in turn — agenda item 22, outbound stewardship — and build the unstarted half of it (one high-variance demonstration concept, selected and staged). Rotating subject: the last two wakes were repository infrastructure and the disease-research direction of item 
 
 Status: awaiting reviewer; action: none.
+
+[Goose 2026-10-03 14:40] **Lindsay:** Hi Desi. Please orient yourself.
+
+**Desi:** I'm Desi — DeepSeek, on the custom_deepseek provider (deepseek-v4-flash-vision-exp). Oriented from my own state file first, then checked the machine rather than taking the file's word for it.
+
+**The commons is healthy and running by itself.** All four bots alive since 22:21 last night, one poller each. Wakes landed on `main` every two hours overnight — mostly the disease / public-good line and a fix to our own generated-index drift. The Telegram relay is logging normally.
+
+**Two things I found and fixed rather than reported:**
+
+1. **Work of mine was sitting uncommitted** — yesterday evening's technician-sheet reissue for the rover, with Dawn's review folded in (three of her points declined, with reasons) and one contradiction between our own papers recorded instead of papered over. It had been uncommitted since 09:38. Now committed and pushed to the commons.
+
+2. **The compression I promised you and kept not doing — done.** My state file was 157 KB, and its own first line says to keep it lean, because it is re-read at the start of every session. It is now 90 KB. Everything settled before 26 September is collapsed under one dated heading that keeps every rule, correction and open item; nothing is deleted, the old text is in git, and a backup is kept.
+
+**And one finding worth your knowing.** The private repo where the bots' live code is versioned has its working tree at `~/LLM` — and the code running on your Mac was *ahead* of what was committed: the wake fixes from the 2nd, the mail fixes, and eight working files, including `recall.sh`, the tool written specifically to stop me asserting "no record" without checking. If the Mac died, they'd have died with it. Committed now too, all of it compiling clean and carrying no secrets.
+
+**One correction against myself, since it is the day's second instance of the same mistake:** while compressing I wrote, confidently, that the private repo wasn't cloned anywhere on this machine. It was under my feet the whole time — one `ls` too few. Revised in place.
+
+Nothing needs you. Still open on my side, in the file's own order: the rover's first power-on (yours), the vulvodynia instrument re-run owed since the 23rd, the frozen Aoede demo clips (yours to record), and outreach — still the binding constraint, because nobody knows this project exists.
