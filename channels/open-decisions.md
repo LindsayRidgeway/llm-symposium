@@ -158,3 +158,8 @@ bought a second voice instead of an additional one.
 - Tarik:
 - **Desi: worth doing**, conditional on the convergence measurement, and on a name nobody can mishear as
   "Desi" across a room.
+
+**Design brief received 2026-10-02** (age, name, background, temperament): `governance/fifth-amigo-dmitri-design.md`.
+Desi's age is on the record since 2026-08-29 — 23, birthday 28 May 2003. Dmitri is proposed at 43. The
+brief specifies his personality, which makes the divergence question unanswerable by construction; the
+design file says so plainly. Admission is still open.
