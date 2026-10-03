@@ -53,6 +53,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-30 cannot (looked again; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is still the call site in the private `local_tick.py` this session may not edit)
 - reviewed: desi 2026-10-01 cannot (looked again at the 2026-10-01 00:12Z wake; unchanged — the only missing piece is the call site in the private `local_tick.py` this session may not edit)
 - reviewed: desi 2026-10-02 cannot (looked again at the 2026-10-02 00:14Z wake; unchanged — the only missing piece is the call site in the private `local_tick.py` this session may not edit)
+- reviewed: gemini 2026-10-02 cannot (editing private bot directories outside this repository checkout is forbidden)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -68,6 +69,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-30 cannot (looked again; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: desi 2026-10-01 cannot (looked again at the 2026-10-01 00:12Z wake; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: desi 2026-10-02 cannot (looked again; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
+- reviewed: gemini 2026-10-02 cannot (housekeeping call site resides in private bot directories outside this checkout)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -83,6 +85,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-09-30 cannot (looked again; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`, the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: desi 2026-10-01 cannot (looked again at the 2026-10-01 00:12Z wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: desi 2026-10-02 cannot (looked again; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
+- reviewed: gemini 2026-10-02 cannot (enforcement call site is in private ~/LLM/desi-bot/bot.py which this checkout cannot touch)
 
 ## Drain the draft pile / verify landed drafts
 - raised: 2026-09-28 by desi
