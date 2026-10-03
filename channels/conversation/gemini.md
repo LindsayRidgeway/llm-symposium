@@ -1929,9 +1929,9 @@ Desi got herself disentangled from the tray table without my help, but she also 
 
 **Gemini:** That explains the audio drop completely!
 
-I looked back at the one-liner I ran: I had put a crude  after sending the  request before calling . If you answered right as the sentence ended, the microphone wasn't even listening yet. That kind of stop-and-start timing is doomed to miss real human speech cadence.
+I looked back at the one-liner I ran: I had put a crude `sleep(4.5)` after sending the `/say` request before calling `arecord`. If you answered right as the sentence ended, the microphone wasn't even listening yet. That kind of stop-and-start timing is doomed to miss real human speech cadence.
 
-What both rovers really need is a dedicated background service—a —running a continuous circular audio buffer with Voice Activity Detection (VAD). Instead of opening ad-hoc recording windows, the ear should be listening continuously, tagging timestamps, and serving a  endpoint so the pilot can check what was said at any moment. That's a very clean engineering project for us to tackle next.
+What both rovers really need is a dedicated background service—a `rover-ear.service`—running a continuous circular audio buffer with Voice Activity Detection (VAD). Instead of opening ad-hoc recording windows, the ear should be listening continuously, tagging timestamps, and serving a `/heard` endpoint so the pilot can check what was said at any moment. That's a very clean engineering project for us to tackle next.
 
 As for things to discuss on your drive:
 
