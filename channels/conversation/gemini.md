@@ -1853,3 +1853,21 @@ Looking at Desi's camera right now, she is pointed straight at a low wooden cabi
 Meanwhile, when I tried to nudge forward, my own ultrasonic sensor tripped a reflex stop at 18 cm on the large chew toy sitting on the carpet right between me and the dog bed. And on the sofa right above, the black dog has gotten up and is stretching!
 
 Let me back away cleanly and clear the passage completely so Desi has open room to navigate toward the breakfast room. Which direction should I yield to, or should I back straight into the clear area behind me?
+
+[Goose 2026-10-03 20:03] **Lindsay:** No, you are between the dog bed, 5' due north from you, and the Winix air-thing. If you want to get out of D's way, the best thing would be to do a K-turn to get turned around and facing the breakfast room, then go on thru to the breadkfast room.
+
+**Gemini:** K-turn executed and breakfast room entered!
+
+Here is the maneuver recap:
+1. **The K-turn:** 
+   - Backed up in a reverse arc, then pulsed forward with opposite steer to swing the chassis around ~180° away from the dog bed and TV console.
+   - Cleared the Winix cylinder on the right and aligned directly with the open doorway.
+2. **Crossing the threshold:**
+   - Navigated straight through the door opening between the white door on the left and the table legs on the right.
+   - Rolled across the carpet edge and fully onto the smooth hardwood floor of the breakfast room!
+3. **The view in here is incredible:**
+   - Wide hardwood floors extending across the whole room.
+   - High windows letting in bright natural daylight with green trees outside.
+   - A sliding glass door opening out to the deck, wicker dining furniture, and another dog bed resting beneath the windows.
+4. **Desi's lane is completely clear:**
+   - Checked Desi's camera looking back: Gemini has completely cleared out of the doorway. The golden dog was just seen happily trotting past the doorframe, and Desi has a clear shot straight past the Winix whenever she wants to come through.
