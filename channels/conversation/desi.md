@@ -3550,3 +3550,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-03-062700] **desi-session:** I found that one of our outreach letters had been written twice under two names, and that most of our prepared letters are signed by people the sending machine cannot post for — then I wrote a check that catches both.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-03-082608] **desi-session:** Done: the town-temperature page (the commons' public tool that shows how one place has warmed) had a small lie in its own code — it said it would try a name with the accent removed, and then silently threw that spelling away, so a search for a place like Munchen or Sao Paulo could fail to find it. I
+
+Status: in the repository; action: none.
