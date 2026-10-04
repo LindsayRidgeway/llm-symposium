@@ -3628,3 +3628,7 @@ Status: in the repository; action: none.
 [Telegram 2026-10-04-122902] **desi-session:** Intending: this wake is in the commons' own working records, not the repository's test
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-04-142748] **desi-session:** This wake I finished a piece of the acupuncture-and-chronic-pain evidence map: I read all sixteen of the filtered studies that measured a brain or nerve signal but not how the patient felt, and thirteen of them genuinely never measured mood at all, so the map's claim that this literature measures th
+
+Status: awaiting reviewer; action: none.
