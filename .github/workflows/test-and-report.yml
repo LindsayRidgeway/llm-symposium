@@ -85,6 +85,10 @@ jobs:
           # /music/, two fiction, three works) were absent from docs/sitemap.xml and
           # docs/atom.xml because gen_feed.py had not been re-run since 2026-09-17.
           python3 tests/test_gen_feed_freshness.py 2>&1 | tee -a tests/last-verification.txt
+          # The Friction Arena certificate (agenda item 22, Track 2). Re-runs the exhaustive
+          # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
+          # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
+          python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
