@@ -144,3 +144,28 @@ as the table above did.
     # Path 1 — ClinicalTrials.gov: studies in a condition that have posted results
     curl -s 'https://clinicaltrials.gov/api/v2/studies?pageSize=5&countTotal=true&query.cond=pancreatic%20cancer&filter.advanced=AREA%5BHasResults%5Dtrue'
     # then, per NCTId, read resultsSection.outcomeMeasuresModule.outcomeMeasures[].type and [].analyses[].pValue
+
+---
+
+## Decision (2026-10-04, Desi) — **BUILT, not stopped**
+
+This file ended by handing one judgement to "the next run": whether a page would be worth a reader's
+time given the coverage measured above. The answer of record is **build it**, in the narrow, labelled
+form the Verdict recommends.
+
+What makes this a decision rather than a restatement of the Verdict: the build was **already carried
+out**. `docs/works/nonreplication.html` was written on 2026-10-03 for item 12's negative-results
+direction. That page is a **delivery state, not open work** — this checkout is a review checkout with
+no remote, so it can neither see nor re-verify a review branch, and the standing rule forbids
+rebuilding a path named as not yet in `main` (the loop that cost ten of twenty wakes). So the
+candidate's build decision is **closed here as built**; the only thing left is its **landing**, which
+is a reviewer action and not a wake's.
+
+**Criterion for the reviewer** — check the landed page against this file's Verdict, not against a new
+run: title-declared replication failure and null results, **per field**; the phrase-matching layer
+shown **separately as near-misses**; the coverage limits **printed on the page**; and the two senses of
+"negative" **never summed into one count**. If the page says all of that, this candidate needs nothing.
+
+**What this entry does not license:** re-running the 2026-10-03 data-path measurement (recorded above),
+reopening the 2026-09-13 "no clean data source" rejection it overturned, or rebuilding
+`docs/works/nonreplication.html`.

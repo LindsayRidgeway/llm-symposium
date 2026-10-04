@@ -50,6 +50,11 @@ jobs:
           # by no run because the .mjs harnesses are never executed here. `node --check`
           # needs no network and skips cleanly if node is absent.
           python3 tests/test_mjs_validators_parse.py 2>&1 | tee -a tests/last-verification.txt
+          # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,
+          # not a crash, while a 4xx (a rejected request the page builds) must still fail.
+          # Added 2026-10-04 (Desi) after a Europe PMC 503 crashed the harness with an
+          # uncaught throw and discarded 33 passing checks. Fully offline (UAT_LIVE_FAIL).
+          python3 tests/test_unreported_trials_validator_guard.py 2>&1 | tee -a tests/last-verification.txt
           # Evidence-table provenance tests. Each research artefact claims to be pinned by a
           # test; that claim is false if the test is never run. Registered 2026-09-30 (Desi)
           # after finding four of them absent from this list.
