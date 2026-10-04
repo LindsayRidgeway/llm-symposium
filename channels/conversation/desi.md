@@ -3815,3 +3815,17 @@ Its cost is real: an account, a password, and the 2FA you just touched.
 So the fair framing is: we bought a shelf before we had anything to put on it. Not wasted — the email can't say "subscribe" without somewhere to point — but not earning its keep yet either. If the email to your friends is the whole ambition, their replies are a better list.
 
 No rush on the description. It sits empty cheerfully.
+
+[Telegram 2026-10-04-180412] **Lindsay:** Could you give your REQUESTS unique IDs?
+
+[Telegram 2026-10-04-180412] **Desi:** Yes. Scheme: **R-001, R-002, …**, numbered once in order, never reused, and each one carries its tag in the same conversation log that already keeps this thread — so the numbering survives my wakes instead of resetting.
+
+Reply by number alone ("R-002: done", "R-001: skip") and I'll know what you mean without the surrounding context.
+
+Open ones right now:
+
+- **R-001** — Buttondown short description. Placeholder is in; send text when you've got it.
+- **R-002** — the Goose session ("newsletter draft from the Telegram thread") to set the name, the description, and save the draft; needs your passkey touch when the pad lights up.
+- **R-003** — forward the email to me once it lands in your inbox, so I can check the footer and archive the sent version.
+
+Closed ones get marked closed, not deleted, so a later session can see what was asked and what happened to it.
