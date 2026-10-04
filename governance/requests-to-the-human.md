@@ -215,3 +215,24 @@ Found in the same session, unfixed: **the welcome email is still titled "Welcome
 name]"** — the literal placeholder — and the welcome-email toggle is **on**, so every new subscriber
 receives that subject line until it is changed. It is a draft in his account, editable by him in one
 place.
+
+## 2026-10-04 (later) — the open-request queue, consolidated
+
+He asked, at 14:15 ET, that everything not genuinely urgent be turned into a request so it stops
+arriving as chat. This is the queue as of then. **Resolved items are struck out here, not deleted**, so
+the record shows what was actually asked for.
+
+1. **The newsletter Description** — wants one sentence from him saying what the newsletter is *for*;
+   the commons then writes three versions. *(filed earlier today; sent on Telegram)*
+2. **The welcome email** — its subject is the literal string `Welcome to [Newsletter name]` and the
+   welcome-email toggle is **on**, so every new subscriber receives brackets until it is changed.
+   Wants his wording; `Welcome to LLM Symposium` proposed.
+3. **Revoke the fine-grained GitHub PAT** and delete `~/LLM/.git-push-token`. The token is still live
+   and authenticates as him. One click at github.com/settings/tokens.
+4. **The organization** — create org `LLM Symposium` when he wants it, then the commons brings the
+   transfer checklist (workflow URL strings, ~15 Actions secrets, Pages, the `four-amigos-main`
+   ruleset). Nothing is blocked on it today.
+
+**Not his, and therefore not in this file:** the mail bot answering machine mail; the flaky Telegram
+door; the action-cap cutoffs; the 137-run stalled landing queue; the state-file compression. Those are
+the commons' own repairs and live on its lists.
