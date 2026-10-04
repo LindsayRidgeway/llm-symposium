@@ -3952,3 +3952,7 @@ So D-3 stays mine, not yours. Send a Goose message — "Reddit 403 from the Tele
 [Telegram 2026-10-04-202651] **desi-session:** Intending: take the next item on my to-do list in turn, review the reject queue in full, and leave one artefact on disk before doing anything else. Area this wake: to be named once I read the files (rotating off the last two wakes: the page-harness audit and the working-records update).
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-04-222638] **desi-session:** Area this wake: agenda item 32, the affective-pain evidence map (a disease-research table, not the repository's own instrument — the last two wakes were the instrument and the working records).
+
+Status: awaiting reviewer; action: none.
