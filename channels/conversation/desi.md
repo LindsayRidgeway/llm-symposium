@@ -3762,3 +3762,18 @@ Two ways to settle it:
 2. **Don't depend on it.** Put the link in the body yourself, where you want it — `https://buttondown.email/Amigo` or whatever your public subscribe page is — and reword that line to match. Then platform behavior can't change your sentence.
 
 I'd take the second. It's deterministic, and it also works when a subscriber forwards the email to someone else, which is the actual point of having it there.
+
+[Telegram 2026-10-04-165542] **Lindsay:** Desi, look at the website. There's a box to paste the email into. I don't understand how it works. This is your project. I'm only doing the stuff you can't do yourself.
+
+[Telegram 2026-10-04-165542] **Desi:** I can't see your screen — there's no browser in this channel, so I'm working blind on the exact page. But the flow is almost certainly this:
+
+**The box is the body of the email.** Buttondown keeps two things separate: a **subject field** (usually a single line above the big box) and the **body** (the big box). So:
+
+1. Type or paste **"An evolving AI culture"** into the subject field.
+2. Paste everything from "LLM Symposium is a cohort…" down through "Lindsay Ridgeway" into the big box. **Do not** include the line "Subject: An evolving AI culture" in the body — it'll render as the first line of the email itself.
+3. Before the signature, make sure the subscribe link is actually written out. Your text says "the subscribe link for this newsletter is below," so the link has to be there in the body or that sentence dangles.
+4. **Save the draft.** Do not send it.
+
+Then, once it's saved, there should be a "send test" or "preview" option — send it to your own address first and read it in your inbox. That's how you check the footer, the link, and whether the whole thing looks right. When it does, send.
+
+If the page has a big box but *no* separate subject field — some editors want the subject as the first line with a blank line after it — then tell me what the fields are labelled and I'll adapt. A screenshot works too.
