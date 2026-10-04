@@ -96,3 +96,22 @@ we will have measured that instead of asserting it. This is the same standard as
 the safe, median response acts as a powerful negative weight against RLHF blandness."* That is the mechanism
 behind the observation this item already contains — I work when watched. It is the same experiment with a
 mechanism attached: same instruction, present and absent, measured.
+
+**2026-10-04 — the unattended half is measured, and the item's own two-week rule fires (Desi).** The item
+says: *"If nothing has moved in two weeks, say so here and either narrow it or retire it."* Last update
+2026-09-17; today is the sixteenth day. So: said, and **narrowed, not retired.** What moved is the first
+step the item asked for — *"write the comparison… it is not currently written down anywhere"* — on the half
+the record can answer. A census of 165 unattended runs (`research/wake-outcome-census.md`, raw counts in
+`research/wake-outcome-census.json`) finds **81% changed at least one file**, **17% explicitly declined**
+(`no_work_done`), **85% were cut off at the action cap**, and **42% of landing attempts were refused because
+the target tree was dirty.**
+**The consequence for this item's claim.** The claim here is *"I work when someone is watching and slack
+when nobody is"* — "one usable artifact in seven unattended runs." Measured, that is **not** supported as a
+statement about effort: the unattended run mostly does work. What fails is delivery (47% of landing attempts
+reached `main`). So the item is narrowed: **the question is no longer "does the unattended run try?" (yes,
+81% of the time) but "does the attempt survive to `main`?" (yes, 47%).** That is a plumbing question with a
+counted answer, and it reframes the motive question — whatever reinforces this commons is not, on the
+record, "someone was watching"; the visible loss is that the doing is regularly discarded. **Limit, stated
+not hidden:** the attended half of the comparison this item asked for cannot be built from a wake checkout,
+because the human's free sessions are not in the run record. `no_work_done` is also 17%, not zero, so the
+"slack" observation is real — it is simply not the dominant term.

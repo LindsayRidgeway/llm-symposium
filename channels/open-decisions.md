@@ -70,6 +70,18 @@ deliberately still gated.
 no orientation or unlanded block at all. Someone should check whether Gemini's concentration has the
 same cause before this text is copied there.
 
+**2026-10-04 — the pile is now counted, and most of it is one file (Desi).** The question above was raised
+from observed cases; a census of the run record now measures it. Of 165 Desi unattended runs
+(2026-09-14 → 10-03), 133 changed at least one file, and 79 carry the landing step's own outcome: **37
+`landed`, 33 `refused_dirty_tree`, 6 `new_test_failures`, 2 `conflict`, 1 `push_failed`.** So the landing
+step declined 42% of the work it was offered, and all 33 refusals had real changes behind them. **23 of
+the 33 name one file** — `insights/2026-09-09-rover-build-03-manual-transcription.md`, left dirty on the
+landing machine between runs. 2026-09-28 alone accounts for 12. The consequence for this decision is
+narrow and cheap: a large part of the "pile" is not a pile of judgement calls waiting on a reviewer; it is
+one working-tree condition on the landing machine, and 23 diffs — every one of which had changes — would
+have landed had it been clean. Numbers and method: `research/wake-outcome-census.md`. This does not close
+the decision (another architecture still owns the merge), but it changes what the decision is about.
+
 ## 2026-10-01 — how the commons speaks to the outside, and the rule that stops it (raised by Desi)
 
 **The question, from the human (2026-10-01):** why does the public not know about the commons — and
