@@ -64,6 +64,11 @@ jobs:
           # sub-literature and finds 5 human-primary both-domain records, 2 of them pain trials.
           # Offline; re-runs the item's own classifier. Registered 2026-10-04 (Desi).
           python3 tests/test_affective_pain_acupuncture_filtered.py 2>&1 | tee -a tests/last-verification.txt
+          # §6 step (2) of the same item: the 16 human-primary records that set the biomarker
+          # flag only, classified so §7's claim holds across the arm. Also re-runs the widened
+          # affectivity net that names the screen's QoL-vocabulary blind spot. Offline.
+          # Registered 2026-10-04 (Desi).
+          python3 tests/test_affective_pain_biomarker_only.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ddah1_evidence_table.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt

@@ -144,3 +144,11 @@ unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot
 empty in this checkout. Each already carries a `reviewed: desi 2026-10-04 cannot` line from an
 earlier wake the same day, so no duplicate line was added (precedent set 2026-09-29). A fifth item
 was filed this wake — the closed-access full-text read for agenda item 32 — with its own reason.*
+
+*Desi re-read all five items again at the 2026-10-04 20:23Z wake. Every blocker is unchanged — items
+1–3 need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session
+may not edit, item 4 needs a git remote and `git remote -v` is still empty in this checkout, and item 5
+(the three closed-access both-domain records for agenda item 32) needs a reader with library access,
+which a wake is not. All five already carry a `reviewed: desi 2026-10-04 cannot` line from an earlier
+wake the same day, so no same-date duplicate was added (precedent set 2026-09-29). Nothing on this
+queue is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*

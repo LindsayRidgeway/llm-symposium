@@ -228,3 +228,75 @@ The overturning condition it names — a reported *correlation* between the chan
 measure and the change in the affective measure — cannot be tested from the abstracts, because an
 abstract would not carry it. Route 1 is therefore **human-blocked**: it needs a reader with library
 access, not another query.
+
+---
+
+## 8. The biomarker-only human-primary records — §6 step (2), run 2026-10-04
+
+**Why this section exists.** §7 hand-read the **five** human-primary records that set *both* flags and
+left §6 step (2) open: the **16 human-primary records that set the biomarker flag only** — a brain or
+autonomic measure named in the abstract, no affective term. §7's claim is that the acupuncture
+literature *measures the brain and not the mood*. Five hand-read records cannot carry that claim across
+a 21-record arm; this section classifies all 16.
+
+**How, and what is machine-checked.** The 16 are selected mechanically from the stored census
+(`is_human_primary`, biomarker flag set, affective flag clear). The category of each is a **hand
+reading** of the abstract — §2's caveat unchanged, a term is not an outcome — but the verdicts are
+recorded as data in `scripts/affective_pain_biomarker_only.py`, keyed by PMID, and two parts are
+re-run by machine: the selection, and a **widened** affectivity net (`quality of life`, `mental`,
+`sf-36`, `well-being`) that asks whether the item's own affective term list is simply missing
+vocabulary. Pinned by `tests/test_affective_pain_biomarker_only.py` (offline; re-derives both).
+
+| the 21 human-primary records | n |
+|---|---|
+| set both flags (§7, hand-read) | 5 |
+| **set biomarker only (this section)** | **16** |
+
+**Category of the 16** (hand read, `M`/`C`/`R`/`X` as below):
+
+| category | n | what it is |
+|---|---|---|
+| **M** | **7** | mechanistic — a brain or autonomic signal *is* the readout; no clinical affective scale |
+| **C** | **6** | clinical trial — a pain-intensity / function outcome, imaging or autonomic secondary; no affective scale |
+| **R** | **2** | mapping / meta-analytic method paper — not a primary patient study |
+| **X** | **1** | not an acupuncture-intervention study |
+
+| PMID | yr | cat | what the abstract reports (hand read) |
+|---|---|---|---|
+| [27741200](https://pubmed.ncbi.nlm.nih.gov/27741200/) | 2016 | C | RCT, endometriosis; primary outcome is fMRI brain connectivity, but prespecified secondaries include **physical and mental quality of life** — *the one record here with a measured patient-centred affective-side outcome, and the screen cannot see it* |
+| [29325883](https://pubmed.ncbi.nlm.nih.gov/29325883/) | 2018 | M | fMRI expectancy/placebo study, verum vs sham electroacupuncture, knee OA; readout is pain experience + brain activity |
+| [30137262](https://pubmed.ncbi.nlm.nih.gov/30137262/) | 2019 | M | real vs imagined acupuncture in **healthy** subjects; fMRI + pain threshold |
+| [31176295](https://pubmed.ncbi.nlm.nih.gov/31176295/) | 2019 | M | resting-state FC predicting response to real/sham acupuncture in cLBP |
+| [31521794](https://pubmed.ncbi.nlm.nih.gov/31521794/) | 2020 | C | randomised crossover dental-pain model (**healthy men**); pain intensity + autonomic (EDA, HRV) |
+| [31922698](https://pubmed.ncbi.nlm.nih.gov/31922698/) | 2020 | M | resting-state FC in nonacute sciatica; readout is connectivity + symptom duration |
+| [31964691](https://pubmed.ncbi.nlm.nih.gov/31964691/) | 2020 | M | fMRI neural marker for migraine without aura; marker accuracy + headache frequency |
+| [32377180](https://pubmed.ncbi.nlm.nih.gov/32377180/) | 2020 | M | degree-centrality changes, contralateral vs ipsilateral needling, chronic shoulder pain |
+| [33314799](https://pubmed.ncbi.nlm.nih.gov/33314799/) | 2021 | C | randomised neuroimaging trial, fibromyalgia, EA vs mock laser; BPI pain severity + connectivity + insular GABA (the instrument is named, its affective subscale is not) |
+| [35633164](https://pubmed.ncbi.nlm.nih.gov/35633164/) | 2022 | R | scalp-stimulation targets from large-scale meta-analyses + 10–20 EEG — a mapping method |
+| [38897810](https://pubmed.ncbi.nlm.nih.gov/38897810/) | 2024 | R | scalp acupuncture targets from Neurosynth neuroimaging meta-analyses — a mapping method |
+| [39089662](https://pubmed.ncbi.nlm.nih.gov/39089662/) | 2024 | C | chronic sciatica, acupuncture vs sham; VAS leg pain + ODI + rs-fMRI |
+| [40634927](https://pubmed.ncbi.nlm.nih.gov/40634927/) | 2025 | C | three-armed randomised fMRI trial, knee OA; NRS + WOMAC + imaging |
+| [41086064](https://pubmed.ncbi.nlm.nih.gov/41086064/) | 2025 | M | resting EEG before/during/after cheek acupuncture in chronic pain; brain oscillations |
+| [41830820](https://pubmed.ncbi.nlm.nih.gov/41830820/) | 2026 | C | AcuENDO sub-study, endometriosis; daily pain ratings + EEG; **control group omitted** |
+| [42309066](https://pubmed.ncbi.nlm.nih.gov/42309066/) | 2026 | X | corticospinal fMRI model for pain perception — **not an acupuncture study**; entered via the filter's biomarker text |
+
+**The widened net finds what the term list structurally cannot.** Asking the same 16 abstracts for
+affect-adjacent vocabulary the item's own list does not hold returns **2** records: **27741200**
+(`quality of life`, `mental`) and **35633164** (`mental` — but as "eight common mental disorders", a
+*disorder* class in a mapping paper, not an outcome measured in patients). So exactly **one** of the 16
+carries a patient-centred affective-side outcome, and the term list missed it because the paper calls it
+*quality of life*, not *mood* or *depress-*. It is also not a needle-acupuncture trial: the intervention
+is "psychotherapy with somatosensory stimulation (acupuncture point stimulation)".
+
+**Verdict — the claim holds across the arm, with one hole named.** Of the 16 biomarker-only
+human-primary records, **13** measure a brain or autonomic signal and no clinical affective scale (7
+mechanistic, 6 clinical), and 2 are not primary patient studies at all. §7's claim is therefore not a
+property of the five records it hand-read: across the whole 21-record arm, the acupuncture
+pain literature that names a brain/autonomic measurement keeps measuring the brain. The one hole is a
+**screen defect, not a counterexample** — a mental-health outcome reported as *quality of life* is
+invisible to the item's affective term list, and the same defect will hide any trial that reports an
+affective-side result through SF-36 or a QoL instrument. Two consequences, both recorded rather than
+fixed here: (1) §1's affective counts are a floor depressed by this vocabulary gap, and (2) any future
+arm of this item should add the QoL vocabulary to the affective net before a "no affective measure"
+claim is read off it. This does not change §4's direction — the dissociation is unaffected — and the
+file still makes no claim about whether either intervention works.
