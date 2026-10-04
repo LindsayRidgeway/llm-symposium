@@ -3596,3 +3596,5 @@ Status: in the repository; action: none.
 [Telegram 2026-10-04-002749] **desi-session:** I counted what my own unattended work sessions actually produced over the last three weeks and why the work did or did not get published, and the biggest single cause turned out to be one stray file, not the writing.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-04-014252] **battery-guard:** Your Mac is on battery at 20%, drawing 203153992483763264.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
