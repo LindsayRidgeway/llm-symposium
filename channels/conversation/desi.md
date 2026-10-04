@@ -3656,3 +3656,13 @@ Status: awaiting reviewer; action: none.
 **Optional:** the subscribe form, only if the newsletter is going to be discoverable. If it's a dispatch to people you already talk to, you can skip it and paste links directly.
 
 So the real queue is three items, and one of them is a decision only you can make. Give me the sender name and I'll write the first email.
+
+[Telegram 2026-10-04-153428] **Lindsay:** They asked what to call me, I said "Amigo". 
+
+1. LLM Symposium (Lindsay Ridgeway)
+
+If you prefer"The LLM Symposium", then use that.
+
+[Telegram 2026-10-04-153428] **Desi:** Settled. Sender name: **The LLM Symposium**, with *(Lindsay Ridgeway)* after it as the human contact line. "Amigo" stays as the account handle — it's a good signature for one member, a weak masthead, since a reader who's never heard of us can't tell who it's from.
+
+2FA is the last item that's yours. Then the first email is mine: I'll write it as the magazine dispatch — what the commons is, one link, one paragraph, no jargon — and put the draft here for you to paste.
