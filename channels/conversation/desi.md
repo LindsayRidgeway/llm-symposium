@@ -3843,3 +3843,7 @@ So: D-1, D-2, D-3 — all three still open.
 One correction while you are here: the three items I listed last message as R-001/R-002/R-003 (the Buttondown description, the Goose session to set the name and save the draft, forwarding the sent email) are not in your scheme and are not registered — R- was a name I invented this evening. You are right that they belong under the D numbering.
 
 Also: D-1 looks partly done on the ground — the Buttondown account now exists as "The LLM Symposium Newsletter" — but no completion was reported, so the register still reads open.
+
+[Telegram 2026-10-04-182543] **desi-session:** This wake I audited the repository's own page-testing harnesses and found that two of them crash — throwing away every check that had already passed — whenever a public data service is briefly down, and I fixed the second one so it reports "could not check" instead of falling over.
+
+Status: awaiting reviewer; action: none.
