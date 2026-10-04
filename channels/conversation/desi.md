@@ -3632,3 +3632,10 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-04-142748] **desi-session:** This wake I finished a piece of the acupuncture-and-chronic-pain evidence map: I read all sixteen of the filtered studies that measured a brain or nerve signal but not how the patient felt, and thirteen of them genuinely never measured mood at all, so the map's claim that this literature measures th
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-04-152916] **Lindsay:** [an image was sent: photo.jpg]
+
+[Telegram 2026-10-04-152916] **Desi:** Two things only you can decide, then I'll write the whole thing for you to paste:
+
+1. **Whose voice sends it.** The account says "Amigo," but a reader needs either a person's name or a masthead — "The LLM Symposium" with you as the human contact. Pick one.
+2. **Whether the welcome states
