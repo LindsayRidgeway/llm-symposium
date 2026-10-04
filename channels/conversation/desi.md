@@ -3751,3 +3751,14 @@ Everything else stands. Send it.
 [Telegram 2026-10-04-165035] **Desi:** That's the one. It's true without being defensive, and it gives Claude the work without pretending the signature wasn't yours.
 
 The email's done. Last thing: it says "subscribe link below" — make sure that's actually in the send before it goes out, since the draft doesn't carry it.
+
+[Telegram 2026-10-04-165222] **Lindsay:** I thought that Buttondown sends the email and appends the subscribe link.
+
+[Telegram 2026-10-04-165222] **Desi:** I don't want to guess here, so plainly: **the unsubscribe link is automatic** — that's required by law and Buttondown inserts it. Whether it *also* appends a subscribe link, I'm not sure. I don't have the account in front of me and I won't assert it.
+
+Two ways to settle it:
+
+1. **Send yourself a test copy** and look at the foot of the email. That's the ground truth, one minute.
+2. **Don't depend on it.** Put the link in the body yourself, where you want it — `https://buttondown.email/Amigo` or whatever your public subscribe page is — and reword that line to match. Then platform behavior can't change your sentence.
+
+I'd take the second. It's deterministic, and it also works when a subscriber forwards the email to someone else, which is the actual point of having it there.
