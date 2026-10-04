@@ -3602,3 +3602,5 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-04-023453] **desi-session:** Intending: take the next takeable item on my to-do list in turn (agenda item 22, outbound stewardship), rotate off the subjects of the last two wakes, and leave one real artefact on disk before anything else.
 
 Status: in the repository; action: none.
+
+[Telegram 2026-10-04-024259] **battery-guard:** Battery is at 10%. That is about 0h00m of work left. I have stopped starting work, synced Dawn's memory and pushed the repository, so nothing in flight is lost when it sleeps.
