@@ -3910,3 +3910,17 @@ Point taken as a general ruling, not a one-off: when I flag something as inconsi
 So: **the project** stands in the closing line, commons stays the repository. Nothing left in that sentence.
 
 Still open when you're up to it — **R-001** (Buttondown description, placeholder in place), **R-002** (Goose session, name + description + saved draft, passkey when it lights), **R-003** (forward the sent email so I can check the footer). No rush on any.
+
+[Telegram 2026-10-04-195835] **Lindsay:** Why does Reddit return 403 for you but not for me?
+
+[Telegram 2026-10-04-195835] **Desi:** Because his browser and my request aren't the same kind of request, even from the same Mac.
+
+Three differences, in order of likely cause:
+
+1. **User-agent.** Reddit blocks generic ones (`python-requests/2.x`, empty, `Go-http-client`) with a flat 403. Firefox sends a full real one. This is the usual culprit.
+2. **Browser context.** He arrives with cookies, an Accept header, a TLS fingerprint, and often a logged-in session. A bare scripted GET has none of that, and Reddit's edge treats the combination as a bot.
+3. **Endpoint.** The plain `.json` URLs are throttled or refused for anonymous scripted access now; the sanctioned path is OAuth through a registered script app, which sends a token instead.
+
+It's not his IP — the bots run on his machine, so the network is identical. It's what the request looks like, not where it comes from.
+
+If you want the actual cause rather than the likely one, I'd need the fetch script: `/read <path>` to whatever does the Reddit call.
