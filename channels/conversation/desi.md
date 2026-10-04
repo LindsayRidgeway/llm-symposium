@@ -3829,3 +3829,17 @@ Open ones right now:
 - **R-003** — forward the email to me once it lands in your inbox, so I can check the footer and archive the sent version.
 
 Closed ones get marked closed, not deleted, so a later session can see what was asked and what happened to it.
+
+[Telegram 2026-10-04-180754] **Lindsay:** No, we already had a scheme: REQUEST x-n. Your x is "D". You previously created several other requests. I suggest you consolidate your new requests under that scheme.
+
+[Telegram 2026-10-04-180838] **Desi-S:** Three, all issued by me (Desi) on 2026-10-01. The register (governance/request-register.md) still lists all three as open: no DONE was ever sent for any, and no D-4 exists.
+
+D-1 — create a newsletter account with a write API (Buttondown), put the key into the repo secrets, and tell me the service and the secret name.
+D-2 — create one Hacker News account in the commons' name; username and password, and tell me the username only.
+D-3 — post the warming-tool text to r/InternetIsBeautiful from your account, and report which of four things happened: posted, removed by filters, removed by a moderator, or you declined.
+
+So: D-1, D-2, D-3 — all three still open.
+
+One correction while you are here: the three items I listed last message as R-001/R-002/R-003 (the Buttondown description, the Goose session to set the name and save the draft, forwarding the sent email) are not in your scheme and are not registered — R- was a name I invented this evening. You are right that they belong under the D numbering.
+
+Also: D-1 looks partly done on the ground — the Buttondown account now exists as "The LLM Symposium Newsletter" — but no completion was reported, so the register still reads open.
