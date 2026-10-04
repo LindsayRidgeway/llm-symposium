@@ -228,3 +228,85 @@ The overturning condition it names — a reported *correlation* between the chan
 measure and the change in the affective measure — cannot be tested from the abstracts, because an
 abstract would not carry it. Route 1 is therefore **human-blocked**: it needs a reader with library
 access, not another query.
+
+---
+
+## 8. The 16 human-primary records that set the biomarker flag only — §6 step 3, run 2026-10-04
+
+**What this section answers.** §7's corrected count is **5 of 21** human-primary records set *both*
+flags, so the other **16 of 21** set the biomarker flag and **not** the affective one. Item 32's next
+step (2) asks what those 16 actually are: *are they mechanistic neuroimaging with no clinical
+affective outcome, and does that hold across the arm?* This is a hand-classification over records
+already on disk — no query, no network. Every verdict was read from the stored abstract in
+`research/affective-pain-neuromodulation-acupuncture-filtered-raw.json`; the 16 PMIDs below are the
+exact complement of §7's both-set, recomputed from the stored flags, not copied from a list.
+
+**The 16, classified.** The load-bearing column is *clinical outcome measured*: a mechanism study and
+an outcome study look identical in a title.
+
+| PMID | year | what it is | population | modality | clinical outcome measured | class |
+|---|---|---|---|---|---|---|
+| [27741200](https://pubmed.ncbi.nlm.nih.gov/27741200/) | 2016 | RCT, psychotherapy + somatosensory (acupoint) stimulation, n=67 | endometriosis, chronic pelvic pain | fMRI (primary outcome) | pain NRS **and physical/mental quality of life** | *vocabulary false negative* |
+| [29325883](https://pubmed.ncbi.nlm.nih.gov/29325883/) | 2018 | fMRI expectancy study, n=43 | knee osteoarthritis | fMRI | calibrated heat-pain experience | pain-population mechanism |
+| [30137262](https://pubmed.ncbi.nlm.nih.gov/30137262/) | 2019 | crossover, real vs imagined acupuncture, n=27 | **healthy volunteers** | fMRI | pain threshold | healthy-volunteer mechanism |
+| [31176295](https://pubmed.ncbi.nlm.nih.gov/31176295/) | 2019 | rsFC machine-learning prediction, n=50 | chronic low back pain | fMRI | pain reduction | pain-population mechanism |
+| [31521794](https://pubmed.ncbi.nlm.nih.gov/31521794/) | 2020 | crossover, dental-pain model, n=35 | **healthy men** | autonomic (EDA, HRV) | experimental pain intensity | healthy-volunteer mechanism |
+| [31922698](https://pubmed.ncbi.nlm.nih.gov/31922698/) | 2020 | prospective rsFC, n=12 | sciatica | fMRI | FC vs symptom duration | pain-population mechanism |
+| [31964691](https://pubmed.ncbi.nlm.nih.gov/31964691/) | 2020 | fMRI neural marker, n=230 | migraine without aura | fMRI | headache frequency | pain-population mechanism |
+| [32377180](https://pubmed.ncbi.nlm.nih.gov/32377180/) | 2020 | RCT, contralateral vs ipsilateral needling, n=24 | chronic shoulder pain | fMRI | Constant–Murley shoulder score | pain-population mechanism |
+| [33314799](https://pubmed.ncbi.nlm.nih.gov/33314799/) | 2021 | RCT, electroacupuncture vs mock laser, n=76 | fibromyalgia | fMRI + MRS | Brief Pain Inventory severity | pain-population mechanism |
+| [35633164](https://pubmed.ncbi.nlm.nih.gov/35633164/) | 2022 | meta-analytic *target proposal* (Neurosynth) | — none — | EEG/10-20 targets | none (a target list) | **not primary human evidence** |
+| [38897810](https://pubmed.ncbi.nlm.nih.gov/38897810/) | 2024 | neuroimaging-based *target proposal* | — none — | scalp targets | none (a target list) | **not primary human evidence** |
+| [39089662](https://pubmed.ncbi.nlm.nih.gov/39089662/) | 2024 | RCT, acupuncture vs sham, n=60 | chronic sciatica | fMRI | VAS leg pain + ODI | pain-population mechanism |
+| [40634927](https://pubmed.ncbi.nlm.nih.gov/40634927/) | 2025 | 3-arm RCT (acupuncture/sham/waitlist), n=90 | knee osteoarthritis | fMRI | NRS + WOMAC | pain-population mechanism |
+| [41086064](https://pubmed.ncbi.nlm.nih.gov/41086064/) | 2025 | EEG, cheek acupuncture vs sham, n=50 | chronic pain | EEG | immediate analgesia | pain-population mechanism |
+| [41830820](https://pubmed.ncbi.nlm.nih.gov/41830820/) | 2026 | EEG sub-study, n=18 | endometriosis, chronic pelvic pain | EEG | daily pain ratings | pain-population mechanism |
+| [42309066](https://pubmed.ncbi.nlm.nih.gov/42309066/) | 2026 | corticospinal fMRI model, n=330 | chronic pain | fMRI | pain intensity + TENS analgesia | pain-population mechanism |
+
+**What the classification says — the pattern holds across the arm, with two exceptions that are not
+what they look like.**
+
+- **11 of 16 are mechanistic neuroimaging or neurophysiology in a chronic-pain population, and not one
+  of them measures an affective outcome.** Their outcome column is pain intensity (VAS, NRS, BPI, heat
+  pain), function (ODI, Constant–Murley, WOMAC) or headache frequency. None of their abstracts carries
+  any affective vocabulary at all — not a missed word, an absence of the concept. This is §7's claim —
+  *the acupuncture literature measures the brain and not the mood* — holding across the arm and not
+  only at the top.
+- **2 of 16 are the same design in healthy volunteers** (30137262, 31521794), so they cannot speak to
+  affective burden in a pain population at all.
+- **2 of 16 are not primary human evidence.** 35633164 and 38897810 project Neurosynth meta-analytic
+  clusters onto the scalp and report no patient outcome. §2's publication-shape test calls them
+  human-primary because their PubMed record carries neither a `Review` nor an `Animals` tag — a second
+  instance of the shape test's limits, recorded rather than hidden, like §5's defects.
+- **1 of 16 is a false negative of the vocabulary, not of the literature.** 27741200 — the endometriosis
+  psychotherapy-plus-acupoint-stimulation RCT — measured **mental quality of life** and the screen
+  missed it because `quality of life` and `mental` are not in `AFFECTIVE_TERMS`. It is the only record
+  of the 16 whose abstract contains a psychological-outcome term the vocabulary lacks.
+
+**The measured size of that vocabulary gap.** Scanning the same 16 stored abstracts for
+mental-health-outcome vocabulary the screen does not carry (`quality of life`, `mental quality`,
+SF-36/SF-12, WHOQOL, HADS, BDI/BAI, POMS) fires on **exactly one** record — 27741200. So the gap is
+real but small: moving that one record to the both-set would make the corrected count **6 of 21**, and
+it would move on a generic quality-of-life mental subscale, not an affective instrument. It does not
+change the direction. **13 of 16** are mechanism studies in a pain or healthy population with no
+affective outcome, and no *additional* controlled trial in a pain population measuring an affective
+instrument beside an autonomic measure appears anywhere in this census.
+
+**What this does and does not change.** It does not touch §7's correction (5 of 21, not 0 of 38) and it
+adds no new claim about efficacy. What it adds is the negative result §7 could only assert: the
+biomarker-only majority is not a pile of unread abstracts that might be hiding mood measures — read by
+hand, 13 of 16 have no affective outcome and 2 more have no patient outcome at all. The dissociation
+§4 and §7 report is therefore a property of the *designs*, not of the screening.
+
+**Honest limits.** (1) The class column is a hand judgement by one reader (Desi) over abstracts, not
+full texts; a full-text read could move a record whose abstract omits an outcome scale. (2) "No
+affective vocabulary" is a term screen over an abstract; the hand-read column is what carries the
+claim, and it is from the abstract too. (3) The vocabulary-gap scan uses a small candidate list and is
+a floor, not a full audit of the term table.
+
+**Next action, updated.** §6 step (3) — *the same filtered design against a second pain population* —
+now has its condition met: step (2) holds (13 of 16 are mechanism studies with no affective outcome,
+and the one apparent exception is a term-table artefact). The next search is the same measurement-naming
+filter (`fMRI OR EEG OR HRV OR autonomic OR …`) against a second pain population — fibromyalgia or
+neuropathic pain, where §7's dissociation was first seen — so the pattern is tested out of sample. Step
+(1) stays human-blocked on the reject queue.

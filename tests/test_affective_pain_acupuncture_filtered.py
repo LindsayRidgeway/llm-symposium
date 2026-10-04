@@ -49,6 +49,21 @@ FILTER_FAMILIES = ["fmri", "functional magnetic resonance", "eeg", "electroencep
 HUMAN_PRIMARY_BOTH = ["24728839", "26025590", "26594625", "26787729", "37609769"]
 PAIN_POPULATION_TRIALS = ["26787729", "37609769"]  # both fibromyalgia, both measure both
 
+# §8 of the map classifies the *complement* of the both-set: the human-primary records that set
+# the biomarker flag only. Recomputed from the stored flags, this set must equal the constant —
+# the map's §8 table cannot name a record the flags do not put here, nor omit one they do.
+BIOMARKER_ONLY_HUMAN_PRIMARY = [
+    "27741200", "29325883", "30137262", "31176295", "31521794", "31922698",
+    "31964691", "32377180", "33314799", "35633164", "38897810", "39089662",
+    "40634927", "41086064", "41830820", "42309066",
+]
+
+# Mental-health-outcome vocabulary the screen's own AFFECTIVE_TERMS does NOT carry. §8 claims
+# exactly one of the 16 fires on this list (27741200, "mental quality of life"); if a term here
+# later enters the screen, the claim is stale and this test should fail loudly.
+PSYCH_OUTCOME_TERMS = ["quality of life", "mental quality", "sf-36", "sf-12", "whoqol",
+                       "hads", "beck depression", "poms"]
+
 
 class AcupunctureFilteredArmTest(unittest.TestCase):
     @classmethod
@@ -128,6 +143,36 @@ class AcupunctureFilteredArmTest(unittest.TestCase):
     def test_the_map_still_refuses_to_claim_efficacy(self):
         self.assertIn("makes no claim about whether either intervention works", self.md)
         self.assertIn("hypothesis-generating", self.md)
+
+    # --- §8: the complement of the both-set, classified by hand in the map --------------
+
+    def test_biomarker_only_set_is_the_complement_of_the_both_set(self):
+        computed = sorted(r["pmid"] for r in self.records
+                          if r["is_human_primary"]
+                          and r["neural_or_autonomic_biomarker"]
+                          and not r["affective_outcome"])
+        self.assertEqual(computed, sorted(BIOMARKER_ONLY_HUMAN_PRIMARY))
+        self.assertEqual(len(computed), 16)
+        # 16 biomarker-only + 5 both = all 21 human-primary records, nothing double-counted.
+        self.assertEqual(len(computed) + len(HUMAN_PRIMARY_BOTH),
+                         self.raw["tallies"]["n_human_primary"])
+
+    def test_the_map_classifies_every_biomarker_only_record(self):
+        self.assertIn("## 8.", self.md, "the map has no §8 for the biomarker-only set")
+        for pmid in BIOMARKER_ONLY_HUMAN_PRIMARY:
+            self.assertIn(pmid, self.md, f"{pmid} is biomarker-only but absent from §8")
+
+    def test_the_one_psychological_outcome_the_vocabulary_missed(self):
+        hits = [p for p in BIOMARKER_ONLY_HUMAN_PRIMARY
+                if any(t in self.by_id[p]["abstract_plain"].lower() for t in PSYCH_OUTCOME_TERMS)]
+        self.assertEqual(hits, ["27741200"], "§8's single vocabulary-false-negative claim drifted")
+        for term in ("quality of life", "mental"):
+            self.assertNotIn(term, aps.AFFECTIVE_TERMS,
+                             f"{term!r} is now screened; §8's vocabulary-gap claim is stale")
+
+    def test_the_class_counts_are_printed(self):
+        for phrase in ("11 of 16", "13 of 16", "6 of 21", "change the direction"):
+            self.assertIn(phrase, self.md, f"§8 class count {phrase!r} not printed in the map")
 
 
 if __name__ == "__main__":
