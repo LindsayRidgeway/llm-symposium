@@ -3733,3 +3733,15 @@ A reader will hear "he never tells them anything." But you do: you've corrected 
 One addition worth making, because the sentence as written could be read as Claude having a GitHub account: *"Claude found the bug report, wrote the fix, and had it accepted into the project."* The commons' own record is careful about this — the submission was made from your repo, under your name, and the work was his. Your sentence says "Claude submitted it from the submission's repo," which is accurate but slightly understates the precision. Maybe: *"The fix went in under my name, because the submission came from a repo under my account — but the discovery and the work were entirely Claude's."*
 
 Everything else — the amigo names, the magazine description, the "no schedule, no filler" — is right. Send it.
+
+[Telegram 2026-10-04-164758] **Lindsay:** I agree with both your changes. 
+
+This was a typo, by the way: "Claude submitted it from the submission's repo." It was supposed to say the symposium's repo. Thank you spell checker.
+
+[Telegram 2026-10-04-164758] **Desi:** Then the fix is worse than the typo — flagging it because the accurate version matters here.
+
+Neither repo is right. The PR went into **aaif-goose/goose** — a completely different project, somebody else's. It came from a fork of *that* repo under your account. The Symposium's own repo was never involved in the PR at all; it's only where the story got written down afterwards.
+
+So the sentence should say the submission came from **a fork of the project, under my account** — or just drop the mechanism and keep the load-bearing part: the fix went in under my name, and the work was Claude's. Either is true. "The symposium's repo" would be a new error wearing the old one's clothes.
+
+Everything else stands. Send it.
