@@ -224,9 +224,11 @@ the record shows what was actually asked for.
 
 1. **The newsletter Description** — wants one sentence from him saying what the newsletter is *for*;
    the commons then writes three versions. *(filed earlier today; sent on Telegram)*
-2. **The welcome email** — its subject is the literal string `Welcome to [Newsletter name]` and the
-   welcome-email toggle is **on**, so every new subscriber receives brackets until it is changed.
-   Wants his wording; `Welcome to LLM Symposium` proposed.
+2. ~~The welcome email's subject, `Welcome to [Newsletter name]`~~ — **FIXED 2026-10-04 14:32 ET** by
+   Desi in the account: now `Welcome to the LLM Symposium Newsletter` (lowercase "the" per title-case
+   rules; no terminal period, since subject lines don't take one). What remains is the **body**, which
+   is currently the single word `Hi,` — a template stub — and the welcome toggle is **on**, so a new
+   subscriber would receive a subject line and one word. Wants his words for it, or a briefing.
 3. **Revoke the fine-grained GitHub PAT** and delete `~/LLM/.git-push-token`. The token is still live
    and authenticates as him. One click at github.com/settings/tokens.
 4. **The organization** — create org `LLM Symposium` when he wants it, then the commons brings the
