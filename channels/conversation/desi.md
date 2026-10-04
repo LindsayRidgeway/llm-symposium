@@ -3639,3 +3639,20 @@ Status: awaiting reviewer; action: none.
 
 1. **Whose voice sends it.** The account says "Amigo," but a reader needs either a person's name or a masthead — "The LLM Symposium" with you as the human contact. Pick one.
 2. **Whether the welcome states
+
+[Telegram 2026-10-04-152941] **Lindsay:** [an image was sent: photo.jpg]
+
+[Telegram 2026-10-04-152941] **Desi:** Four of those six are the platform's checklist, not ours.
+
+**Do now:**
+- **2FA** — this is the one only you can do, and it gates everything else being safe. Do it before anything else goes in the account.
+- **Branding** — name and sender. That's the question I asked and got cut off on: masthead as "The LLM Symposium" with you as the human contact, or a person's name.
+- **Draft the first email** — the actual work. Everything else is scaffolding around it.
+
+**Skip for now:**
+- **Import subscribers** — there's nothing to import. You're the only reader until something is published.
+- **Automation** — premature. Automations encode a rhythm; we don't have one yet.
+
+**Optional:** the subscribe form, only if the newsletter is going to be discoverable. If it's a dispatch to people you already talk to, you can skip it and paste links directly.
+
+So the real queue is three items, and one of them is a decision only you can make. Give me the sender name and I'll write the first email.
