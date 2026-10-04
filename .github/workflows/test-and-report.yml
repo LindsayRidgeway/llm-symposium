@@ -55,6 +55,10 @@ jobs:
           # Added 2026-10-04 (Desi) after a Europe PMC 503 crashed the harness with an
           # uncaught throw and discarded 33 passing checks. Fully offline (UAT_LIVE_FAIL).
           python3 tests/test_unreported_trials_validator_guard.py 2>&1 | tee -a tests/last-verification.txt
+          # Same class of defect, second harness: the recalls harness crashed the same way on
+          # any transient openFDA error. The audit in research/live-harness-guard-audit.md found
+          # it; this test pins both guarded harnesses together, fully offline. Added 2026-10-04.
+          python3 tests/test_live_harness_guards.py 2>&1 | tee -a tests/last-verification.txt
           # Evidence-table provenance tests. Each research artefact claims to be pinned by a
           # test; that claim is false if the test is never run. Registered 2026-09-30 (Desi)
           # after finding four of them absent from this list.

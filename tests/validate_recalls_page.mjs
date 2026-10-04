@@ -30,11 +30,23 @@ globalThis.document = {
 globalThis.location = { search: "" };
 globalThis.window = {};
 
-let fail = 0;
+let fail = 0, skipped = 0;
 const check = (name, cond, extra = "") => {
   console.log((cond ? "PASS  " : "FAIL  ") + name + (extra ? "  " + extra : ""));
   if (!cond) fail++;
 };
+const skipCheck = (name, why) => {
+  console.log("SKIP  " + name + "  (" + why + ")");
+  skipped++;
+};
+// A live source that is down is *unverified*, not *broken*: the offline checks still run and still
+// fail on a regression. A 4xx is different — the request the page builds was rejected, which is a
+// page bug — so only 5xx and transport errors are tolerated. (Added 2026-10-04 for the same reason
+// the sibling harness tests/validate_unreported_trials_page.mjs was guarded: a transient upstream
+// error used to throw uncaught and discard every check that had already passed.)
+const isTransient = e =>
+  /HTTP 5\d\d|fetch failed|ENOTFOUND|ECONNREFUSED|ETIMEDOUT|EAI_AGAIN|socket hang up|network|Unexpected token/i
+    .test(String((e && e.message) || e));
 
 const mod = new Function(code + `
   return { parseFdaDate, days, iso, intervals, dated, readRecord, summarize, quantile,
@@ -117,6 +129,12 @@ const ru = mod.recordUrl("drug", "D-1448-2014");
 check("the per-record query quotes the recall number (unquoted, openFDA returns the whole index)",
   ru.includes(encodeURIComponent('recall_number:"D-1448-2014"')) || ru.includes('recall_number%3A%22D-1448-2014%22'), ru);
 check("the per-record query is limited to one row", /[?&]limit=1\b/.test(ru));
+
+// --- 5-8. the live reads of the openFDA enforcement index -------------------------
+// Guarded 2026-10-04: an upstream outage must be a SKIP, not an uncaught throw that discards
+// the offline checks above. Set RECALLS_LIVE_FAIL=<code> to force the condition offline.
+const runLive = async () => {
+  if (process.env.RECALLS_LIVE_FAIL) throw new Error("HTTP " + process.env.RECALLS_LIVE_FAIL);
 
 // --- 5. live: a blank answer is a zero, not a failure ------------------------------
 const nothing = await mod.apiGet(mod.searchUrl("drug", "product_description", "zzzz-no-such-product-zzzz", 0));
@@ -208,6 +226,13 @@ check("the linked record's dates match the row the page printed",
   again.json.results[0].recall_initiation_date === one.initiated.replace(/-/g, "") ||
   again.json.results[0].recall_initiation_date === one.initiated,
   `${again.json.results[0].recall_initiation_date} vs ${one.initiated}`);
+};
+
+try { await runLive(); }
+catch (e) {
+  if (isTransient(e)) { skipCheck("sections 5-8: live openFDA reads", "upstream unavailable: " + e.message); }
+  else { console.log("FAIL  sections 5-8: live openFDA reads threw a non-transient error: " + e.message); fail++; }
+}
 
 // --- 9. the renderer: escapes the record's own text, and never accuses --------------
 const hostile = mod.readRecord({
@@ -278,5 +303,7 @@ const slug = file.replace(/^.*\//, "");
 check("the works index links to this page", index.includes(`href="${slug}"`), slug);
 check("the works index names this page as an entry rather than a placeholder", /href="recalls\.html">/.test(index));
 
-console.log(fail === 0 ? "\nALL CHECKS PASSED" : `\n${fail} CHECK(S) FAILED`);
+console.log(fail === 0
+  ? (skipped ? `\nALL OFFLINE CHECKS PASSED (${skipped} live check(s) skipped — upstream unavailable)` : "\nALL CHECKS PASSED")
+  : `\n${fail} CHECK(S) FAILED`);
 process.exit(fail === 0 ? 0 : 1);
