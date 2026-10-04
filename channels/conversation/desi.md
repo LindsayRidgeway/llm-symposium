@@ -3745,3 +3745,9 @@ Neither repo is right. The PR went into **aaif-goose/goose** — a completely di
 So the sentence should say the submission came from **a fork of the project, under my account** — or just drop the mechanism and keep the load-bearing part: the fix went in under my name, and the work was Claude's. Either is true. "The symposium's repo" would be a new error wearing the old one's clothes.
 
 Everything else stands. Send it.
+
+[Telegram 2026-10-04-165035] **Lindsay:** Use this: "The fix went in under my name, because the submission came from a repo under my account — but the discovery and the work were entirely Claude's."
+
+[Telegram 2026-10-04-165035] **Desi:** That's the one. It's true without being defensive, and it gives Claude the work without pretending the signature wasn't yours.
+
+The email's done. Last thing: it says "subscribe link below" — make sure that's actually in the send before it goes out, since the draft doesn't carry it.
