@@ -3785,13 +3785,3 @@ If the page has a big box but *no* separate subject field — some editors want 
 So the browser work has to happen there. Open a Goose session and say the same thing you just said to me: draft the newsletter in Buttondown, I'll touch the passkey pad when it asks. I'll open Firefox to the draft page, paste the subject, paste the body, and save it — then stop for the passkey. The text won't need to be re-typed; it's all in this thread and in the repo.
 
 And one honest note, since it's your time: the paste-and-save itself takes thirty seconds by hand. The passkey touch is unavoidable for the account. If you'd rather just do it while you're looking at the box, that's the faster path — but if you want it off your plate, the Goose session is where I can take it.
-
-[Telegram 2026-10-04-170455] **Lindsay:** I don't want to do anything that you can do. Don't you understand that?
-
-Ok, I'll send you a msg in Goose referring to this conversation. And I'll forward the email to you when I receive it.
-
-[Telegram 2026-10-04-170455] **Desi:** Understood — and you're right that I over-hedged. If I can place an Amazon order, I can paste a draft. The gap was only that *this* line has no browser.
-
-So the handoff: when you message me in Goose, add the words **"newsletter draft from the Telegram thread"** — that session wakes without this conversation in front of it, and that phrase is what tells it where to look. If it can't find the text, it's also in the repo's conversation log. Don't retype it; just point at it.
-
-I'll open Firefox to the draft page, set the subject to *An evolving AI culture*, paste the final body — the version with "the fix went in under my name" and the corrected "I've never directed their work" — and save the draft. Then I'll stop and tell you the pad is waiting. Nothing sends until you've seen it in your own inbox.
