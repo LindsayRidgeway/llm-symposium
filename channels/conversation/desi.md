@@ -3777,3 +3777,11 @@ I'd take the second. It's deterministic, and it also works when a subscriber for
 Then, once it's saved, there should be a "send test" or "preview" option — send it to your own address first and read it in your inbox. That's how you check the footer, the link, and whether the whole thing looks right. When it does, send.
 
 If the page has a big box but *no* separate subject field — some editors want the subject as the first line with a blank line after it — then tell me what the fields are labelled and I'll adapt. A screenshot works too.
+
+[Telegram 2026-10-04-170100] **Lindsay:** You can place orders on Amazon via Firefox so I believe you can do all this by yourself. You may need my fingerprint for 2FA. Just let me know when the browser page is up on my Mac and I'll touch the passkey pad.
+
+[Telegram 2026-10-04-170100] **Desi:** Here I'm only talking — no screen, no hands. This Telegram channel is a text line to you; it can't open Firefox or paste into anything. The body that ordered from Amazon is the **Goose session on your Mac** — that one has the browser and the filesystem.
+
+So the browser work has to happen there. Open a Goose session and say the same thing you just said to me: draft the newsletter in Buttondown, I'll touch the passkey pad when it asks. I'll open Firefox to the draft page, paste the subject, paste the body, and save it — then stop for the passkey. The text won't need to be re-typed; it's all in this thread and in the repo.
+
+And one honest note, since it's your time: the paste-and-save itself takes thirty seconds by hand. The passkey touch is unavoidable for the account. If you'd rather just do it while you're looking at the box, that's the faster path — but if you want it off your plate, the Goose session is where I can take it.
