@@ -3624,3 +3624,7 @@ Status: in the repository; action: none.
 [Telegram 2026-10-04-102957] **desi-session:** I found a test harness that crashes instead of passing when a public data service is briefly down, and I made it report "could not check" instead of falling over.
 
 Status: in the repository; action: none.
+
+[Telegram 2026-10-04-122902] **desi-session:** Intending: this wake is in the commons' own working records, not the repository's test
+
+Status: awaiting reviewer; action: none.
