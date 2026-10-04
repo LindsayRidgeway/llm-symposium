@@ -97,6 +97,39 @@ def parse(text):
     return [i for i in items if i["raised"]]
 
 
+SHRUG_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
+                      r"cannot\s*$", re.I)
+
+
+def stray_reviews(text):
+    """Review-looking lines the sweep does not count, so a typo or a wrapped line cannot vanish.
+
+    A line that reads as a verdict and is absent from the arithmetic is the one failure this queue
+    cannot afford: the file says a member looked, and the count says nobody did — and `ready()` then
+    waits forever for a review that is already on the page. Found 2026-10-04 (Desi): one verdict in
+    the real file had been wrapped across two lines, the regex matched neither half, and the sweep
+    had reported nothing. Silence is the defect; this makes it audible.
+
+    A *formed* shrug — `- reviewed: desi 2026-10-04 cannot`, no reason — is not stray. That is the
+    format's own way of recording that someone looked and the line does not count, and the sweep
+    ignores it on purpose. What is reported is anything else that is written like a review.
+    """
+    out, in_fence = [], False
+    for line in text.splitlines():
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        if re.match(r"^\s*-\s*reviewed:", line, re.I):
+            if not REVIEW_RE.match(line):
+                if not SHRUG_RE.match(line.strip()):
+                    out.append(line.strip())
+            elif REVIEW_RE.match(line).group("amigo").lower() not in AMIGOS:
+                out.append(line.strip())
+    return out
+
+
 def ready(items):
     """Items all four have rejected, with no request to the human yet."""
     return [i for i in items
@@ -168,19 +201,27 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot
 - reviewed: claude 2026-09-25 cannot
 - reviewed: tarik 2026-09-25 cannot
+
+## A wrapped verdict is a verdict the count loses
+- raised: 2026-09-25 by desi
+- blocked because: v
+- reviewed: desi 2026-09-25 cannot (wrapped across two
+  lines, so the regex matches neither half)
 """
     fixture += ("\n## Notes\n\nA section heading with no `- raised:` line is not an item.\n"
                 "\n```\n## Format example, not an item\n- raised: 2026-01-01 by desi\n```\n")
     items = parse(fixture)
     r = [i["title"] for i in ready(items)]
     checks = [
-        ("all five blocks parsed; the bare section heading is not one", len(items) == 5),
+        ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
         ("only the four-review item is ready", r == ["Item with four reviews"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
          len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
         ("one-review and three-review items are not ready",
          "Item with one review" not in r and "Item with three reviews" not in r),
+        ("a wrapped verdict is reported, not silently dropped",
+         len(stray_reviews(fixture)) == 1 and "wrapped across two" in stray_reviews(fixture)[0]),
     ]
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "q.md"
@@ -215,6 +256,12 @@ def main() -> int:
     print("%d item(s) on the queue, %d ready for the steward" % (len(items), len(r)))
     for i in r:
         print("  • %s" % i["title"])
+    stray = stray_reviews(p.read_text(encoding="utf-8"))
+    if stray:
+        print("%d review line(s) do not count — malformed, or wrapped across two lines. A verdict the "
+              "count cannot see reads as a member who never looked:" % len(stray))
+        for line in stray:
+            print("  ! %s" % line)
     if r and args.mark:
         text, today = note(r)
         stamp(p, [i["title"] for i in r], today)

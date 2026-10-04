@@ -43,8 +43,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - raised: 2026-09-25 by desi
 - blocked because: the trigger (`scripts/friction_pass.py`) is landed and tested, but calling it at the
   start of a wake means editing `~/LLM/desi-bot/local_tick.py` — a bot file, out of bounds for a wake.
-- reviewed: desi 2026-09-26 cannot (editing `local_tick.py` in a private bot directory is forbidden to
-  this session)
+- reviewed: desi 2026-09-26 cannot (editing `local_tick.py` in a private bot directory is forbidden to this session)
 - reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
 - reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
 - reviewed: tarik 2026-09-27 cannot (this wake may not edit private bot-local call sites; the repository-side trigger already exists)
