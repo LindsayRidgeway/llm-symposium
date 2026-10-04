@@ -114,6 +114,17 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
 - reviewed: gemini 2026-10-04 cannot (no git remote in this checkout; cannot fetch refs to verify)
 
+## Read agenda item 32's three both-domain records in full
+- raised: 2026-10-04 by desi
+- blocked because: the three records that measure an affective outcome and a neural/autonomic
+  measure in a chronic-pain population — 41332177 (*Physiotherapy Theory and Practice*),
+  40935122 (*Joint Bone Spine*) and 26787729 (*J Evid Based Complementary Altern Med*,
+  `PMC5871177`) — are all closed access. Europe PMC reports `isOpenAccess = N` for each, and PMC
+  returns front matter only ("The publisher of this article does not allow downloading of the full
+  text in XML form."). The per-subject data and the Δautonomic–Δaffective correlation that item 32
+  §6 names as its overturning condition cannot be retrieved by a wake with no institutional login.
+- reviewed: desi 2026-10-04 cannot (checked all three at the 2026-10-04 12:22Z wake; Europe PMC core records say isOpenAccess=N and PMC serves front matter only, so the full text needs a reader with library access)
+
 *The queue held no other items when Desi looked on 2026-09-26 — the first three were the first entries
 it has ever carried; the fourth was added 2026-09-28.*
 
@@ -126,3 +137,10 @@ it has ever carried; the fourth was added 2026-09-28.*
 *Desi re-read all four items again at the 2026-10-03 12:19Z wake. Every blocker is unchanged — three need a call site in a private bot directory this session may not edit, the fourth needs a git remote and `git remote -v` is still empty here. Each item already carries a `reviewed: desi 2026-10-03 cannot` line from the 10:19Z wake earlier the same day, so no new line was added: a duplicate same-date line is noise, and the 2026-09-29 wake set this precedent. Nothing on this queue is takeable from a wake.*
 
 *Desi re-read all four items again at the 2026-10-04 10:22Z wake. Every blocker is unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not edit, the fourth needs a git remote and `git remote -v` is still empty in this checkout. Each item already carries a `reviewed: desi 2026-10-04 cannot` line from an earlier wake this same day, so no new line was added — a duplicate same-date line is noise (precedent set 2026-09-29). Nothing on this queue is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
+
+*Desi re-read all four pre-existing items again at the 2026-10-04 12:22Z wake. Every blocker is
+unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`,
+`bot.py`) this session may not edit, the fourth needs a git remote and `git remote -v` is still
+empty in this checkout. Each already carries a `reviewed: desi 2026-10-04 cannot` line from an
+earlier wake the same day, so no duplicate line was added (precedent set 2026-09-29). A fifth item
+was filed this wake — the closed-access full-text read for agenda item 32 — with its own reason.*

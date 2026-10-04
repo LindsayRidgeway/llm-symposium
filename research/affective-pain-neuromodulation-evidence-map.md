@@ -132,6 +132,9 @@ trials**, nothing more — and it is the honest state of the human evidence for 
 
 ## 6. Next action for item 32
 
+*(Status 2026-10-04: route 1 is closed for a wake — both papers are paywalled, see §7; route 2 is
+done and its result is §7, which corrects §4. The routes are left in the form they were written.)*
+
 Not another search of the same index. The two live routes:
 
 1. **Read those two trials in full, not their abstracts.** The affective-vs-autonomic dissociation
@@ -144,3 +147,84 @@ Not another search of the same index. The two live routes:
    top-80 relevance slice of 791 matches. Before that becomes a claim, the arm needs a *filtered*
    search (acupuncture AND (`fMRI` OR `EEG` OR `HRV` OR `autonomic`)) rather than a relevance slice —
    which is a different script call, not a re-read of this one.
+
+---
+
+## 7. The filtered acupuncture arm — §6 step 2, run 2026-10-04
+
+**Why this section exists.** §4's acupuncture number — *0 of 38 human-primary papers set both
+flags* — was measured on the **top-80 relevance slice** of 791 matches. Relevance ranking has no
+reason to surface measurement-rich trials, so that zero could be a property of the slice rather
+than of the literature. §6 named the fix: a query that *names* the measurements, so that every
+record it can return has already mentioned one. Run 2026-10-04 (Desi, clock wake):
+
+| arm | query = **acupuncture** block AND the filter below AND the pain block AND `humans[MeSH Terms]` | matching | fetched |
+|---|---|---|---|
+| `acupuncture_filtered` | `fmri[tiab] OR "functional magnetic resonance"[tiab] OR "functional connectivity"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR "event-related potential"[tiab] OR meg[tiab] OR "near-infrared spectroscopy"[tiab] OR fnirs[tiab] OR "heart rate variability"[tiab] OR hrv[tiab] OR autonomic[tiab] OR "skin conductance"[tiab] OR "vagal tone"[tiab] OR pupil[tiab] OR insula[tiab] OR amygdala[tiab] OR "anterior cingulate"[tiab] OR brainstem[tiab] OR "locus coeruleus"[tiab]` | **40** | **40 — census** |
+
+Publication window 2015-01-01 → 2026-10-04. This is a **census**: 40 of 40 fetched, no relevance
+ranking, nothing held back. Raw records and flags: `research/affective-pain-neuromodulation-acupuncture-filtered-raw.json`;
+the run is `scripts/affective_pain_acupuncture_filtered.py`, and it reuses the first arm's own
+classifier so the two are countable against each other. Pinned by
+`tests/test_affective_pain_acupuncture_filtered.py`, which needs no network.
+
+**Composition of the 40** (same classifier as §2, so the same caveats apply):
+
+| | filtered arm |
+|---|---|
+| records | **40** |
+| reviews | **12** |
+| protocols | **2** |
+| animal-subject | **11** |
+| **human primary** | **21** |
+| set the affective flag | 18 |
+| set the biomarker flag | 40 (by construction — the filter names the measurements) |
+| **set both** | **18** |
+| set neither | **0** |
+
+**11** of the 40 were also in the first corpus (all 11 via its acupuncture arm); the other 29 were
+not. The top-80 slice therefore missed 29 of the 40 papers whose own abstracts name a brain or
+autonomic measure — which is the measurement the slice's design could not have avoided.
+
+### The five human-primary records that set both flags, hand-read
+
+| PMID | year | what it is (hand read) | verdict |
+|---|---|---|---|
+| [37609769](https://pubmed.ncbi.nlm.nih.gov/37609769/) | 2023 | randomised **pilot**, 18 fibromyalgia patients (9 control / 9 active), systemic electroacupuncture + auricular, 6 weeks; primary NPRS, secondary FIQ and **HRV** | **the only controlled acupuncture trial in the census that measures both domains.** FIQ total and anxiety improved (p = .008, .006) while NPRS and **HRV did not (p > 0.05)** — §4's dissociation again, this time inside a randomised design |
+| [26787729](https://pubmed.ncbi.nlm.nih.gov/26787729/) | 2017 | 20 women with fibromyalgia, 10-week electroacupuncture, **single-arm pre–post**; FIQ + SF-36 + HRV as the stated primary outcomes | measures both in a pain population: anxiety and depression fell on the FIQ while HRV shifted to sympathetic predominance, and the authors **tie the mental-status change to the autonomic shift** — the first acupuncture record to claim the link §4 found absent; no control arm, so it cannot separate needling from time |
+| [26025590](https://pubmed.ncbi.nlm.nih.gov/26025590/) | 2015 | **not a trial** — a *Medical Hypotheses* paper: 10 burn-out and 22 female chronic-pain patients, mood-scale recordings, EEG, heart rate | reports a linear correlation between the change in **pain intensity** and the change in **mood scales**, with heart rate falling during the sessions. This is the closest thing in the corpus to the overturning condition §6 named, and it is not it: the correlation is Δpain–Δmood, not Δautonomic–Δaffective, inside an uncontrolled hypothesis paper |
+| [26594625](https://pubmed.ncbi.nlm.nih.gov/26594625/) | 2015 | verum vs placebo acupuncture in knee-osteoarthritis pain, resting-state fMRI (PAG–MFC, PAG–Hpc connectivity) | a mechanistic convergence study in a pain population — connectivity change tracks pain-score improvement — but the affective term fires on background ("emotional rumination"); no affective outcome scale |
+| [24728839](https://pubmed.ncbi.nlm.nih.gov/24728839/) | 2015 | healthy volunteers, verum vs sham needling, crossover fMRI | not a pain population; "affective" fires on a description of *where sham acts* ("the areas responsible for affective processing of pain") |
+
+### What this changes, and what it does not
+
+**The correction: 5 of 21, not 0 of 38 — the zero was the slice, not the literature.** Two of the
+five are trials in a chronic-pain population that measured both domains (37609769 controlled,
+26787729 single-arm); the first arm's top-80 slice contained neither. §4's sentence "0 of the 38
+human-primary acupuncture papers set both flags" is left standing above because it is what that
+slice showed, and a correction that erases its own error is worth less than one that names it.
+
+**The direction does not move, and now has one supporting controlled trial.** 37609769 is a third
+instance of the dissociation — affective scale improved, autonomic index did not — and the first
+with a comparator. 26787729 is the only record anywhere in the corpus that claims the convergence
+§4 denied, and it has no control arm. Two controlled, unblinded, fibromyalgia-n=18-and-40 trials do
+not carry a pathway claim, and the file makes no claim about whether either intervention works.
+
+**Honest limits.** (1) The filter selects for papers that *name* a measurement, so **5 of 21**
+cannot be read as a rate against **0 of 38** — a filtered census and a relevance slice answer
+different questions, and the filtered arm's own headline number is 5 candidates, not an incidence.
+(2) The flags are term screens (§2), not outcomes; a mention is not a measurement, which is why the
+hand-read column above is what carries the claim. (3) Both hand-read trials with a real affective
+outcome are fibromyalgia, unblinded, and the one with a comparator is n=18.
+
+### §6 route 1, closed for a wake (recorded, not hidden)
+
+§6 says the two flagged trials "are reachable". They are identified, but they are **not readable
+from here**: Europe PMC's core records for **41332177** and **40935122** return `isOpenAccess = N`,
+`inEPMC = N` and a null `pmcid`, i.e. *Physiotherapy Theory and Practice* (Taylor & Francis) and
+*Joint Bone Spine* (Elsevier) are closed access, so the per-subject data and the single-arm
+trajectory that §6 route 1 asks for cannot be retrieved by a wake with no institutional login.
+The overturning condition it names — a reported *correlation* between the change in the autonomic
+measure and the change in the affective measure — cannot be tested from the abstracts, because an
+abstract would not carry it. Route 1 is therefore **human-blocked**: it needs a reader with library
+access, not another query.

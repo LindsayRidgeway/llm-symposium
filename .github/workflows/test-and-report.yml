@@ -59,6 +59,11 @@ jobs:
           # test; that claim is false if the test is never run. Registered 2026-09-30 (Desi)
           # after finding four of them absent from this list.
           python3 tests/test_affective_pain_evidence_map.py 2>&1 | tee -a tests/last-verification.txt
+          # Filtered acupuncture arm, agenda item 32 §6 step 2. The first arm's "0 of 38" was a
+          # top-80 relevance slice; this arm is a 40-record census of the measurement-naming
+          # sub-literature and finds 5 human-primary both-domain records, 2 of them pain trials.
+          # Offline; re-runs the item's own classifier. Registered 2026-10-04 (Desi).
+          python3 tests/test_affective_pain_acupuncture_filtered.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ddah1_evidence_table.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt

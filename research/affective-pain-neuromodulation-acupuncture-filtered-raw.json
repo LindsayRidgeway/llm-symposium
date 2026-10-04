@@ -1,0 +1,1826 @@
+{
+ "generated": "2026-10-04",
+ "source": "PubMed E-utilities (esearch + efetch), filtered acupuncture arm",
+ "arms": {
+  "acupuncture_filtered": {
+   "query": "(acupuncture[tiab] OR electroacupuncture[tiab] OR \"acupuncture therapy\"[MeSH Terms]) AND (fmri[tiab] OR \"functional magnetic resonance\"[tiab] OR \"functional connectivity\"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR \"event-related potential\"[tiab] OR meg[tiab] OR \"near-infrared spectroscopy\"[tiab] OR fnirs[tiab] OR \"heart rate variability\"[tiab] OR hrv[tiab] OR autonomic[tiab] OR \"skin conductance\"[tiab] OR \"vagal tone\"[tiab] OR \"pupil\"[tiab] OR \"insula\"[tiab] OR \"amygdala\"[tiab] OR \"anterior cingulate\"[tiab] OR \"brainstem\"[tiab] OR \"locus coeruleus\"[tiab]) AND (\"chronic pain\"[tiab] OR \"chronic pain\"[MeSH Terms] OR fibromyalgia[tiab] OR \"somatoform\"[tiab] OR \"somatic symptom\"[tiab] OR \"persistent pain\"[tiab] OR \"chronic widespread pain\"[tiab] OR \"medically unexplained\"[tiab]) AND humans[MeSH Terms]",
+   "filter": "(fmri[tiab] OR \"functional magnetic resonance\"[tiab] OR \"functional connectivity\"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR \"event-related potential\"[tiab] OR meg[tiab] OR \"near-infrared spectroscopy\"[tiab] OR fnirs[tiab] OR \"heart rate variability\"[tiab] OR hrv[tiab] OR autonomic[tiab] OR \"skin conductance\"[tiab] OR \"vagal tone\"[tiab] OR \"pupil\"[tiab] OR \"insula\"[tiab] OR \"amygdala\"[tiab] OR \"anterior cingulate\"[tiab] OR \"brainstem\"[tiab] OR \"locus coeruleus\"[tiab])",
+   "total_matching": 40,
+   "fetched": 40,
+   "censored": false,
+   "pmids": [
+    "42779402",
+    "42670051",
+    "42309066",
+    "42015637",
+    "41999935",
+    "41987449",
+    "41830820",
+    "41735062",
+    "41583480",
+    "41455401",
+    "41086064",
+    "40634927",
+    "39580220",
+    "39089662",
+    "38897810",
+    "38501597",
+    "40463454",
+    "37609769",
+    "36610367",
+    "35633164",
+    "33314799",
+    "32377180",
+    "31964691",
+    "31922698",
+    "31521794",
+    "31176295",
+    "30651139",
+    "30137262",
+    "29876878",
+    "29619620",
+    "29325883",
+    "29071990",
+    "27741200",
+    "27141613",
+    "26833397",
+    "26787729",
+    "26594625",
+    "26025590",
+    "25796668",
+    "24728839"
+   ],
+   "query_translation": "(\"acupuncture\"[Title/Abstract] OR \"electroacupuncture\"[Title/Abstract] OR \"acupuncture therapy\"[MeSH Terms]) AND (\"fmri\"[Title/Abstract] OR \"functional magnetic resonance\"[Title/Abstract] OR \"functional connectivity\"[Title/Abstract] OR \"eeg\"[Title/Abstract] OR \"electroencephalogra*\"[Title/Abstract] OR \"event-related potential\"[Title/Abstract] OR \"meg\"[Title/Abstract] OR \"near-infrared spectroscopy\"[Title/Abstract] OR \"fnirs\"[Title/Abstract] OR \"heart rate variability\"[Title/Abstract] OR \"hrv\"[Title/Abstract] OR \"autonomic\"[Title/Abstract] OR \"skin conductance\"[Title/Abstract] OR \"vagal tone\"[Title/Abstract] OR \"pupil\"[Title/Abstract] OR \"insula\"[Title/Abstract] OR \"amygdala\"[Title/Abstract] OR \"anterior cingulate\"[Title/Abstract] OR \"brainstem\"[Title/Abstract] OR \"locus coeruleus\"[Title/Abstract]) AND (\"chronic pain\"[Title/Abstract] OR \"chronic pain\"[MeSH Terms] OR \"fibromyalgia\"[Title/Abstract] OR \"somatoform\"[Title/Abstract] OR \"somatic symptom\"[Title/Abstract] OR \"persistent pain\"[Title/Abstract] OR \"chronic widespread pain\"[Title/Abstract] OR \"medically unexplained\"[Title/Abstract]) AND \"humans\"[MeSH Terms] AND 2015/01/01:2026/10/04[Date - Publication]"
+  }
+ },
+ "records": [
+  {
+   "pmid": "42779402",
+   "title": "[Research progress on mechanisms of acupuncture regulating limbic system to improve pain-related emotion].",
+   "journal": "Zhen Ci Yan Jiu",
+   "year": "2026",
+   "abstract_plain": "Chronic pain is often accompanied by negative emotions such as anxiety, depression, and aversion, with structural and functional abnormalities in the limbic system serving as the key pathological basis for this comorbidity. Acupuncture can improve pain-related emotions by modulating multilevel neural centers within the limbic system. At the cortical level, acupuncture can restore the regulatory mechanism of the cortex over pain-related emotions by modulating the neural plasticity of the anterior cingulate cortex, medial cingulate cortex, prefrontal cortex, and insular cortex\uff1b at the subcortical level, acupuncture can act on the amygdala and hippocampus to block negative emotions induced by nociceptive information\uff1b at the diencephalic level, acupuncture can inhibit the generation of pain-related emotions by down-regulating the abnormal excitability of thalamic paraventricular nucleus neurons, thereby blocking the transmission of pain signals to the limbic system. From a hierarchical perspective of the limbic system, this review elucidated the mechanisms of acupuncture intervention in pain-related emotions, providing a theoretical foundation and reference for clinical research on acupuncture treatment of pain-related emotions.",
+   "publication_types": [
+    "Journal Article",
+    "Review",
+    "English Abstract"
+   ],
+   "mesh": [
+    "Humans",
+    "Limbic System",
+    "Acupuncture Therapy",
+    "Emotions",
+    "Pain Management",
+    "Animals"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "[Research progress on mechanisms of acupuncture regulating limbic system to improve pain-related emotion].."
+   },
+   "biomarker": {
+    "term": "neural",
+    "sentence": "Acupuncture can improve pain-related emotions by modulating multilevel neural centers within the limbic system."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": "Acupuncture can improve pain-related emotions by modulating multilevel neural centers within the limbic system."
+  },
+  {
+   "pmid": "42670051",
+   "title": "Comorbidity Mechanism and Management of Chronic Low Back Pain and Major Depressive Disorder: From Neural Circuit Remodeling to Precision Medicine.",
+   "journal": "Brain Behav",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVE: This review systematically elaborates multi-system interactive mechanisms underlying comorbid chronic low back pain (CLBP) and major depressive disorder (MDD), synthesizes recent advances in diagnosis, treatment, and management, and proposes precision medicine directions to address clinical challenges, including missed diagnosis, treatment resistance, and poor prognosis. METHOD: We reviewed 86 studies published between 2015 and 2025 from the PubMed, Embase, and CNKI databases. We focused on basic research and clinical trials, integrating multi-omics data to construct mechanistic frameworks and therapeutic evidence. RESULT: The comorbid pathogenesis of CLBP and MDD is driven by dysregulation of the \"neural-immune-endocrine-gut-brain axis\" network. Spinal dorsal horn N-methyl-D-aspartate (NMDA) receptor NR2B phosphorylation amplifies pain signals 2- to 3-fold, while anterior cingulate cortex (ACC)-insula connectivity correlates positively with depression severity. Microglial toll-like receptor 4/nuclear factor-\u03baB (TLR4/NF-\u03baB) activation increases cerebrospinal fluid interleukin-6 (IL-6) and tumor necrosis factor-\u03b1 (TNF-\u03b1) by 3.2- and 2.7-fold, respectively. Hypothalamic-pituitary-adrenal (HPA) axis dysfunction causes a flattened cortisol rhythm, with glucocorticoid receptor gene (NR3C1) hypermethylation reducing glucocorticoid sensitivity by 45%. Gut dysbiosis decreases short-chain fatty acids (SCFAs) by 30% and increases plasma lipopolysaccharide (LPS) by 2.3-fold, accompanied by abnormal proliferation of pro-inflammatory E. coli and Desulfovibrio as well as depletion of anti-inflammatory Prevotella. Duloxetine reduces visual analog scale (VAS) pain scores by 40% and Hamilton Depression Rating Scale (HAM-D) scores by 35% relative to placebo. Closed-loop spinal cord stimulation (SCS) improves treatment response rates to 68% compared with open-loop stimulation. Electroacupuncture at BL23/LR3 alleviates clinical symptoms in 75% of patients relative to sham acupuncture. At the 12-month follow-up, duloxetine's pain relief efficacy slightly declined from 40% to 38%, a phenomenon speculated to be linked to serotonin transporter upregulation. At the 1-year follow-up, closed-loop SCS efficacy decreases to 55%, which may be associated with secondary neural circuit re-remodeling. At the 6-month follow-up, electroacupuncture treatment carries a 22% symptom recurrence rate, which researchers hypothesize arises from secondary gut microbiota re-dysbiosis featuring reduced Prevotella abundance. CONCLUSION: Pathological progression of concurrent CLBP and MDD relies on multi-level remodeling of molecular, cellular, and systemic biological networks. Precision interventions targeting neural circuits, neuroinflammation, and the gut-brain axis, combined with multidisciplinary clinical collaboration, represent core strategies to break through current diagnostic and therapeutic bottlenecks.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Major Depressive Disorder",
+    "Precision Medicine",
+    "Low Back Pain",
+    "Chronic Pain",
+    "Comorbidity",
+    "Animals"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "Comorbidity Mechanism and Management of Chronic Low Back Pain and Major Depressive Disorder: From Neural Circuit Remodeling to Precision Medicine.."
+   },
+   "biomarker": {
+    "term": "neural",
+    "sentence": "Comorbidity Mechanism and Management of Chronic Low Back Pain and Major Depressive Disorder: From Neural Circuit Remodeling to Precision Medicine.."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "Duloxetine reduces visual analog scale (VAS) pain scores by 40% and Hamilton Depression Rating Scale (HAM-D) scores by 35% relative to placebo."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": "Comorbidity Mechanism and Management of Chronic Low Back Pain and Major Depressive Disorder: From Neural Circuit Remodeling to Precision Medicine.."
+  },
+  {
+   "pmid": "42309066",
+   "title": "A predictive corticospinal model for pain perception.",
+   "journal": "Cell Rep Med",
+   "year": "2026",
+   "abstract_plain": "Pain perception arises from integrated corticospinal circuits, yet most neuroimaging biomarkers are brain centric. We develop the Corticospinal Pain Intensity Pattern, a multivariate model trained and validated on 330 simultaneous corticospinal fMRI data. Across independent datasets, the model predicts pain intensity more accurately than cortical signatures and generalizes to electrical pain, while remaining insensitive to itch and observed pain. The model further tracks analgesia induced by transcutaneous electrical nerve stimulation in healthy participants. In a chronic pain cohort, corticospinal model expression derived from low-frequency spontaneous activity predicts baseline pain and longitudinal changes closely mirror treatment-induced pain relief. A corticospinal hidden Markov model reveals that dynamic transitions between pro- and anti-nociceptive states underpin static spectral abnormalities. Together, these findings establish a corticospinal biomarker that bridges experimental and clinical pain by linking task-evoked and spontaneous neural activity.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Pain Perception",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Female",
+    "Pyramidal Tracts",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Adult",
+    "Chronic Pain"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "Pain perception arises from integrated corticospinal circuits, yet most neuroimaging biomarkers are brain centric."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "We develop the Corticospinal Pain Intensity Pattern, a multivariate model trained and validated on 330 simultaneous corticospinal fMRI data."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "42015637",
+   "title": "[Effect of electroacupuncture on microglial polarization and activity of \u03b17nAChR-TLR4/MyD88/NF-\u03baB signaling pathway in the anterior cingulate cortex of rats with chronic inflammatory pain-depression comorbidity].",
+   "journal": "Zhen Ci Yan Jiu",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVES: To observe the effect of electroacupuncture (EA) on the regulation of microglia polarization in anterior cingulate cortex (ACC) by \u03b17 nicotinic acetylcholine receptor (\u03b17nAChR)-Toll-like receptor 4(TLR4)/nuclear factor kappa B(NF- \u03baB) signaling pathway in chronic inflammatory pain-depression comorbidity (CIPDC) rats, so as to explore its central \"analgesic-antidepressant\" mechanism underlying improvement of CIPDC. METHODS: Thirty-six adult male SD rats were randomly divided into blank, CIPDC model and EA groups, with 12 rats in each group. The CIPDC model was established by plantar injection of complete Freund's adjuvant. On the 14th day after modeling, EA (1.5 Hz, 1 mA) was applied to bilateral \"Hegu\" (LI4) and \"Taichong\" (LR3) for 20 min, once a day for 14 consecutive days. The mechanical paw withdrawal threshold (MWT) and thermal paw withdrawal latency (TWL) were detected at the 0, 14th, and 28th day after modeling. The open field test (OFT), forced swim test (FST) and sucrose preference test were used to evaluate the rats' depression-like behavior. Hematoxylin-eosin (H.E.) staining was used to observe the histopathological changes of ACC. The contents of tumor necrosis factor-\u03b1 (TNF-\u03b1), interleukin (IL)-1\u03b2, IL-6, IL-4 and IL-10 in the ACC tissue were detected by enzyme-linked immunosorbent assay (ELISA). Double immunofluorescence staining was used to detect the co-expression of M1 microglia marker CD86 and ionized calcium binding adapter molecule 1 (Iba-1), and M2 microglia marker CD206 and Iba-1 in the ACC tissue. The protein expression levels of \u03b17nAChR, TLR4, myeloid differentiation primary response protein 88 (MyD88), NF-\u03baB p65 and p-NF-\u03baB p65 in the ACC tissue were detected by Western blot. RESULTS: Compared with the blank group, the MWT, TWL, sucrose preference rate, total distance traveled and time spent in the center zone of OFT were significantly decreased (P<0.05), and the immobility time of FST was obviously increased (P<0.05) in the model group. In comparison with the model group, the MWT, TWL, sucrose preference rate, total distance traveled and time spent in the center zone of OFT were apparently increased (P<0.05), while immobility time of FST was strikingly decreased (P<0.05) in the EA group, suggesting an amelioration of pain and depression-like behavior after EA. The contents of TNF- \u03b1, IL-1\u03b2 and IL-6, immunofluorescence area of CD86/Iba-1 and the expression levels of TLR4, MyD88, p-NF-\u03baB p65, and the ratio of p-NF-\u03baB p65/NF-\u03baB p65 were significantly higher (P<0.05), and the contents of IL-4 and IL-10, CD206/Iba-1 immunofluorescence-positive area and the expression level of \u03b17nAChR were significantly lower (P<0.05) in the model group than in the blank group. Following EA intervention, the increased levels of TNF-\u03b1, IL-1\u03b2 and IL-6, CD86/Iba-1 immunofluorescence-positive area and the expression levels of TLR4, MyD88, p-NF-\u03baB p65, and the ratio of p-NF-\u03baB p65/NF-\u03baB p65 and the decreased levels of IL-4 and IL-10, immunofluorescence area of CD206/Iba-1 and the expression level of \u03b17nAChR after modelling were all reversed (P<0.05). H.E. staining showed disordered arrangement of tissues, neuronal cells shrinking, reduced number and deeply stained pyramidal cells, with vacuoles and nerve fiber tangles appeared in the interstitial spaces in the ACC of model group, which was relatively milder in the injury degree in the EA group, including a small number of neurons being deeply stained and smaller space between neurons and tissues. CONCLUSIONS: EA can exert central \"analgesic-antidepressant\" effect in CIPDC rats, which may be related to its functions in alleviating central inflammatory response, reducing neuronal damage and promoting microglial polarization mediated by \u03b17nAChR-TLR4/MyD88/NF-\u03baB signaling in the ACC tissue.",
+   "publication_types": [
+    "English Abstract",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Animals",
+    "Electroacupuncture",
+    "Male",
+    "Rats",
+    "NF-kappa B",
+    "Toll-Like Receptor 4",
+    "Rats, Sprague-Dawley",
+    "Depression",
+    "Signal Transduction",
+    "Microglia",
+    "Humans",
+    "Gyrus Cinguli",
+    "Myeloid Differentiation Factor 88",
+    "alpha7 Nicotinic Acetylcholine Receptor",
+    "Chronic Pain"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "[Effect of electroacupuncture on microglial polarization and activity of \u03b17nAChR-TLR4/MyD88/NF-\u03baB signaling pathway in the anterior cingulate cortex of rats with chronic inflammatory pain-depression comorbidity].."
+   },
+   "biomarker": {
+    "term": "anterior cingulate",
+    "sentence": "[Effect of electroacupuncture on microglial polarization and activity of \u03b17nAChR-TLR4/MyD88/NF-\u03baB signaling pathway in the anterior cingulate cortex of rats with chronic inflammatory pain-depression comorbidity].."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": "[Effect of electroacupuncture on microglial polarization and activity of \u03b17nAChR-TLR4/MyD88/NF-\u03baB signaling pathway in the anterior cingulate cortex of rats with chronic inflammatory pain-depression comorbidity].."
+  },
+  {
+   "pmid": "41999935",
+   "title": "Dynamic brain set among the limbic-paralimbic-neocortical network during acupuncture.",
+   "journal": "Neuroscience",
+   "year": "2026",
+   "abstract_plain": "The limbic-paralimbic-neocortical network (LPNN) is one of the most important bases for the Deqi sensation. Deqi evokes widespread limbic-paralimbic deactivation coupled with somatosensory cortex activation, accompanied by autonomic rebalancing toward parasympathetic dominance. Some brain regions among the network drive dynamic changes in others. These patterns are likely related to needle retention, Deqi and therapeutic effects. However, conventional task-state and resting-state fMRI designs have limited capacity to fully capture the dynamic evolution of LPNN activity during needle retention. The LPNN response to acupuncture is inherently time-varying, necessitating dynamic analysis methods such as sliding-window approaches to fully capture its temporal trajectory. In this review, we first examine the limitations of current fMRI paradigms in characterizing acupuncture effects, then review the methodological framework and existing findings of dynamic functional connectivity analysis, and present converging evidence confirming that Deqi-related brain modulation evolves continuously throughout needle stimulation. We propose a new viewpoint in which the dynamic changes in the LPNN induced by acupuncture manifest the sensitivity of acupuncture. Furthermore, dynamic brain states during needle retention may serve as potential biomarkers for predicting treatment response in chronic pain disorders and could guide individualized decisions on needle retention duration. The dynamic characteristics of the brain aroused by acupuncture should be considered, and a better understanding of the basis of Deqi may be obtained.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Limbic System",
+    "Acupuncture Therapy",
+    "Nerve Net",
+    "Neural Pathways",
+    "Neocortex",
+    "Animals",
+    "Magnetic Resonance Imaging",
+    "Brain",
+    "Brain Mapping"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Deqi evokes widespread limbic-paralimbic deactivation coupled with somatosensory cortex activation, accompanied by autonomic rebalancing toward parasympathetic dominance."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41987449",
+   "title": "[Effects of electroacupuncture on the activity and polarization phenotype of microglia in anterior cingulate cortex of rats with knee osteoarthritis accompanied by chronic pain and related negative emotions].",
+   "journal": "Zhongguo Zhen Jiu",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVE: To observe the effects of electroacupuncture (EA) on the activity of microglia and polarization phenotype in the anterior cingulate cortex (ACC) of rats with knee osteoarthritis (KOA) with chronic pain and related negative emotions, and to explore the central nervous mechanism of EA in KOA with chronic pain and related negative emotions. METHODS: Of 30 healthy male SD rats, 20 rats were randomly selected to duplicate the models of KOA with chronic pain and related negative emotions by injecting monosodium iodoacetate (MIA) into the left knee joint, and they were randomized into a model group and an EA group after successfully modeling, 10 rats in each group. The remaining 10 rats were collected as a blank group. Started on day 15 of MIA injection, in the EA group, the electric stimulation was applied to the left \"Yanglingquan\" (GB34) and \"Dubi\" (ST35), with a disperse-dense wave, a frequency of 2 Hz/100 Hz, and a current of 2 mA. EA was operated for 15 min each time, once daily; and one course of intervention was composed of 5 times of EA and 2 courses were required. One day before MIA injection and on day 7, 14, 20 and 26 after injection, the thermal withdrawal latency (TWL), mechanical withdrawal threshold (MWT) and open field test were recorded separately. Using the Western blot method, the protein expression of pro-inflammatory cytokines, tumor necrosis factor (TNF)-\u03b1, interleukin (IL)-1\u03b2, and the anti-inflammatory cytokine, IL-10 in ACC was detected. The positive expression of the microglial marker, ionized calcium-binding adaptor molecule 1 (Iba-1) in ACC was detected using immunofluorescence single-labeling method. The co-expression of differential cluster (CD) 68 and Iba-1 (M1 polarization phenotype) as well as CD206 and Iba-1 (M2 polarization phenotype) in ACC was detected using immunofluorescence double-labeling method. RESULTS: After intervention, compared with the blank group, TWL, MWT, the total distance traveled and the time spent in the center of open field test were reduced (P<0.01); the protein expression of TNF-\u03b1, IL-1\u03b2 and IL-10 and the positive expression of Iba-1 increased (P<0.05, P<0.01); the co-expression of CD68 and Iba-1 as well as CD206 and Iba-1 rose in the model group (P<0.01, P<0.05). When compared with the model group, TWL, MWT, the total distance traveled and the time spent in the center of open field test were elevated (P<0.01); the protein expression of TNF-\u03b1 and IL-1\u03b2 decreased (P<0.05), and that of IL-10 rose (P<0.05); the positive expression of Iba-1, and the co-expression of CD68 and Iba-1 were declined (P<0.01), and that of CD206 and Iba-1 increased in the EA group (P<0.01). CONCLUSION: EA at \"Yanglingquan\" (GB34) and \"Dubi\" (ST35) can attenuate pain and anxiety-like behaviors in the KOA rats with chronic pain and related negative emotions, and its underlying mechanism may be related to inhibiting microglia activity and promoting the polarization of activated microglia towards M2 phenotype in ACC.",
+   "publication_types": [
+    "English Abstract",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Animals",
+    "Electroacupuncture",
+    "Male",
+    "Rats",
+    "Microglia",
+    "Osteoarthritis, Knee",
+    "Rats, Sprague-Dawley",
+    "Gyrus Cinguli",
+    "Chronic Pain",
+    "Humans",
+    "Tumor Necrosis Factor-alpha",
+    "Emotions",
+    "Interleukin-1beta"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "[Effects of electroacupuncture on the activity and polarization phenotype of microglia in anterior cingulate cortex of rats with knee osteoarthritis accompanied by chronic pain and related negative emotions].."
+   },
+   "biomarker": {
+    "term": "anterior cingulate",
+    "sentence": "[Effects of electroacupuncture on the activity and polarization phenotype of microglia in anterior cingulate cortex of rats with knee osteoarthritis accompanied by chronic pain and related negative emotions].."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": "[Effects of electroacupuncture on the activity and polarization phenotype of microglia in anterior cingulate cortex of rats with knee osteoarthritis accompanied by chronic pain and related negative emotions].."
+  },
+  {
+   "pmid": "41830820",
+   "title": "Effects of 8-weeks acupuncture on eyes-closed resting state natural EEG frequency components in endometriosis: AcuENDO trial sub-study.",
+   "journal": "Acta Psychol (Amst)",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVE: The aim of this study was to examine changes in resting electroencephalography (EEG) activity associated with an 8-week acupuncture intervention for women with endometriosis and chronic pelvic pain. METHODS: Eighteen women aged 18-45\u00a0years with laparoscopic diagnosis of endometriosis completed this study. The treatment group (n\u00a0=\u00a013) received 16 acupuncture sessions over eight weeks, administered in 45-min sessions twice weekly. Self-reported daily pain ratings and eyes-closed resting state EEG were obtained pre- and post-intervention (T1, T2). The control group was insufficient and omitted. Frequency principal components analysis (fPCA) was used to decompose EEG data for each timepoint. RESULTS: Four fPCA component pairs showed suitable correspondence between T1 and T2: Alpha-II (9\u00a0Hz), alpha-III/IV (~10-11\u00a0Hz), beta-I (19\u00a0Hz), and beta-II (~26\u00a0Hz). From T1 to T2, global alpha-II amplitude increased, peak alpha-III/IV frequency increased and amplitude decreased, whilst beta-I amplitude decreased. The relative alpha-III/IV amplitude reduction was associated with the relative reduction in pain severity scores. CONCLUSIONS: Changes in alpha-III/IV peak frequency and amplitude, and the relationship with chronic pelvic pain suggest that ~10-11.5\u00a0Hz alpha may index pain severity in women with endometriosis. However, the potential acupuncture-related modulation of alpha could not be determined due to the lack of a suitable control group. SIGNIFICANCE: Resting state EEG may be a viable tool to further characterise changes in chronic pain states in a clinical setting and provide objective quantification of responsivity to treatment. Further research with an appropriate control group is recommended to test this.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Endometriosis",
+    "Adult",
+    "Acupuncture Therapy",
+    "Electroencephalography",
+    "Middle Aged",
+    "Pelvic Pain",
+    "Young Adult",
+    "Adolescent",
+    "Chronic Pain",
+    "Alpha Rhythm"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "eeg",
+    "sentence": "Effects of 8-weeks acupuncture on eyes-closed resting state natural EEG frequency components in endometriosis: AcuENDO trial sub-study.."
+   },
+   "intensity": {
+    "term": "pain severity",
+    "sentence": "The relative alpha-III/IV amplitude reduction was associated with the relative reduction in pain severity scores."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41735062",
+   "title": "[Electro-acupuncture at \"Zusanli\" (ST36) alleviates anxiety and pain in mice with chronic inflammatory pain-anxiety comorbidity].",
+   "journal": "Zhen Ci Yan Jiu",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVES: To observe the effect of electro-acupuncture (EA) at different acupoints on chronic inflammatory pain-anxiety comorbidity in mice, and to investigate the effect of naloxone on EA induced activation of neurons of the anterior cingulate cortex (ACC), medial prefrontal cortex (mPFC), paraventricular nucleus of the thalamus (PVT), and mediodorsal thalamus nucleus (MD), so as to explore whether the anti-anxiety effect of EA depends on its analgesic mechanism. METHODS: In the first part of the experiment, the efficacy of EA at different acupoints was compared. Sixty male C57BL/6 mice were randomly divided into control, model, EA Zusanli (ST36), EA Baihui (GV20), and EA Shengmen (HT7) groups (12 mice/group). In the second part, the impact of naloxone on the analgesic and anxiety effects of EA at ST36 was investigated. Forty male C57BL/6 mice were randomly divided into control, model, EA ST36, and EA ST36 + naloxone groups (10 mice/group). Except for those in the control group, all the mice were subjected to a chronic inflammatory pain-anxiety comorbidity by subcutaneous injection of 20 \u03bcL emulsified complete Freund's adjuvant (CFA) into the hind paw. Mice in the control group received an equivalent volume of PBS. EA (2 Hz/100 Hz, 0.2-0.4 mA) intervention was initiated on the 12th day after modeling, and applied to \"Zusanli\" (ST36, bilateral) or \"Baihui\"(GV20), or \"Shengmen\" (HT7, bilateral). The EA intervention was conducted for 30 min, once daily for 6 d. Naloxone was intraperitoneally injected 30 min before EA intervention. Paw withdrawal thresholds (PWTs) were measured using von Frey filaments. The anxiety-like behaviors were assessed using the open field (OF) test and elevated plus maze (EPM) test, separately. The expression of c-Fos in the ACC, mPFC, PVT, and MD was detected by immunofluorescence staining. RESULTS: Compared with the control group, the model group exhibited a significant decrease in the PWTs, number of entries into the open arms and time spent in the open arms in the EPM test, and in the number of entries into the central area, time spent in the central area, and distance traveled in the central area in the OF test (P<0.01), and a significant increase in the number of c-Fos positive neurons in the bilateral ACC, mPFC and MD (P<0.05). The total distance traveled of OF test remained unchanged. Compared with the model group, 1) EA at ST36, GV20, and HT7 significantly increased the PWTs (P<0.01, P<0.05), 2) EA at ST36 significantly increased the number of entries into the open arms, time spent in the open arms in the EPM test, and increased the number of entries, time spent, and distance traveled in the central area in the OF test (P<0.01 P<0.05), 3) EA at GV20 significantly increased the time spent in the open arms in the EPM test (P<0.01), 4) EA at HT7 obviously increased the time spent in the open arms of the EPM test and increased the time spent in the central area of the OF test (P<0.01), and 5) EA at ST36 significantly decreased the expression of c-Fos in the bilateral ACC, contralateral mPFC, bilateral PVT, and bilateral MD (P<0.05). Compared with the EA ST36 group, the EA ST36 + naloxone group showed a significant decrease in the PWTs (P<0.01), number of entries into the open arms, total distance traveled and time spent in the open arms in the EPM test (P<0.05), and in the number of entries into the central area and time spent in the central area in the OF test (P<0.01). The expression levels of c-Fos in the bilateral ACC and ipsilateral MD were strikingly higher in the EA ST36 + naloxone group than those in the EA ST36 group (P<0.05), suggesting a disappearance of the suppressive effect of EA after administration of naloxone. CONCLUSIONS: EA at ST36 has a better analgesic and emotional relief effects on mice with comorbid pain and emotion compared to EA at GV20 and HT7. The underlying mechanism may involve the inhibition of neuronal excitability in the ACC, mPFC, MD and PVT. Additionally, the emotional relief effect of EA at ST36 is dependent on its analgesic efficacy, which may be related to the inhibition of neuronal excitability in the ACC and MD.",
+   "publication_types": [
+    "English Abstract",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Animals",
+    "Electroacupuncture",
+    "Male",
+    "Mice",
+    "Acupuncture Points",
+    "Mice, Inbred C57BL",
+    "Anxiety",
+    "Humans",
+    "Chronic Pain",
+    "Prefrontal Cortex"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "[Electro-acupuncture at \"Zusanli\" (ST36) alleviates anxiety and pain in mice with chronic inflammatory pain-anxiety comorbidity].."
+   },
+   "biomarker": {
+    "term": "anterior cingulate",
+    "sentence": "OBJECTIVES: To observe the effect of electro-acupuncture (EA) at different acupoints on chronic inflammatory pain-anxiety comorbidity in mice, and to investigate the effect of naloxone on EA induced activation of neurons of the anterior cingulate cortex (ACC), medial prefrontal cortex (mPFC), paraventricular nucleus of the thalamus (PVT), and mediodorsal thalamus nucleus (MD), so as to explore whether the anti-anxiety effect of EA depends on its analgesic mechanism."
+   },
+   "intensity": {
+    "term": "von frey",
+    "sentence": "Paw withdrawal thresholds (PWTs) were measured using von Frey filaments."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": "OBJECTIVES: To observe the effect of electro-acupuncture (EA) at different acupoints on chronic inflammatory pain-anxiety comorbidity in mice, and to investigate the effect of naloxone on EA induced activation of neurons of the anterior cingulate cortex (ACC), medial prefrontal cortex (mPFC), paraventricular nucleus of the thalamus (PVT), and mediodorsal thalamus nucleus (MD), so as to explore whether the anti-anxiety effect of EA depends on its analgesic mechanism."
+  },
+  {
+   "pmid": "41583480",
+   "title": "From arthritis to central sensitization: targeting the neuro-immune axis via microglial modulation in acupuncture treatment for Juvenile Idiopathic Arthritis-associated pain.",
+   "journal": "Front Immunol",
+   "year": "2025",
+   "abstract_plain": "Juvenile Idiopathic Arthritis (JIA) is a common chronic rheumatic disease in children, and its associated persistent pain severely impacts the quality of life of affected patients. The severity of JIA-associated pain often does not correlate with the degree of peripheral inflammation, suggesting that Central Sensitization is a key underlying mechanism specific to JIA subtypes. At the core of this process is a dysregulation of the neuro-immune axis, particularly the aberrant activation of microglia within the central nervous system. As a non-pharmacological therapy, acupuncture demonstrates significant potential for JIA pain management, supported by a series of clinical studies. This review focuses on JIA-specific neuro-immune pathophysiology of chronic pain and systematically elucidates the complete pathway from peripheral inflammation to central microglial activation and central sensitization. By integrating evidence from both preclinical and clinical JIA studies, we provide a detailed analysis of how acupuncture remodels neuro-immune balance through mechanisms spanning peripheral autonomic regulation and central glial modulation. This modulation encompasses the inhibition of upstream pro-inflammatory signaling pathways. These include peripheral anti-inflammatory effects via the vagus nerve, regulation of systemic immunity, and direct inhibition of central microglial activity toward an anti-inflammatory phenotype. This work establishes a theoretical framework, grounded in JIA-specific neuro-immune pathophysiology, for acupuncture's application in treating JIA-associated pain, highlighting its role in reducing reliance on analgesics.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Arthritis, Juvenile",
+    "Microglia",
+    "Acupuncture Therapy",
+    "Animals",
+    "Central Nervous System Sensitization",
+    "Pain Management",
+    "Neuroimmunomodulation"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "By integrating evidence from both preclinical and clinical JIA studies, we provide a detailed analysis of how acupuncture remodels neuro-immune balance through mechanisms spanning peripheral autonomic regulation and central glial modulation."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41455401",
+   "title": "The underlying mechanisms of acupuncture for alleviating pain-induced negative emotions: Synergistic regulation of multiple brain regions.",
+   "journal": "Curr Opin Pharmacol",
+   "year": "2026",
+   "abstract_plain": "Brain regions associated with pain perception also subsume those involved in emotional regulation, which likely constitutes the physiological basis underlying the comorbidity of pain and negative emotions. Acupuncture has unique advantages compared with drugs. Studies have shown that acupuncture can achieve multi-targeted and bidirectional regulation, simultaneously improving pain and accompanying negative emotional symptoms without causing drug resistance or systemic toxicity. In the hippocampus, acupuncture may contribute to the regulation of painful emotional memory processing by inhibiting ventral hippocampal neuron apoptosis, promoting neurogenesis, and regulating synaptic plasticity. In the anterior cingulate cortex, acupuncture may partially reduce the perception and transmission of pain-related emotions by inhibiting the release of glutamate and the expression of its receptors, enhancing the inhibitory effect of GABAergic receptors. In the medial prefrontal cortex, acupuncture might alleviate inflammatory responses by inhibiting microglial activation and the release of pro-inflammatory cytokines, thereby preserving the integrity of the descending regulatory circuit for painful emotions. This protects the integrity of the descending pain-emotion regulatory circuit. In the amygdala, acupuncture may improve reward deficiency and fear-related abnormal synaptic plasticity by regulating the expression of dopamine receptors, thus avoiding the excessive amplification of pain emotions. This article reviews the mechanisms by which acupuncture improves the induced negative emotions, which is helpful to promote the integration of acupuncture as a complementary approach into the precision medical treatment system for chronic pain-induced anxiety, depression, or comorbidities, and provides a scientific basis for the application of non-pharmacological therapies in neuropsychiatric disorders.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Animals",
+    "Brain",
+    "Acupuncture Therapy",
+    "Emotions",
+    "Pain"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "The underlying mechanisms of acupuncture for alleviating pain-induced negative emotions: Synergistic regulation of multiple brain regions.."
+   },
+   "biomarker": {
+    "term": "anterior cingulate",
+    "sentence": "In the anterior cingulate cortex, acupuncture may partially reduce the perception and transmission of pain-related emotions by inhibiting the release of glutamate and the expression of its receptors, enhancing the inhibitory effect of GABAergic receptors."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": "In the anterior cingulate cortex, acupuncture may partially reduce the perception and transmission of pain-related emotions by inhibiting the release of glutamate and the expression of its receptors, enhancing the inhibitory effect of GABAergic receptors."
+  },
+  {
+   "pmid": "41086064",
+   "title": "Immediate Modulations of Cheek Acupuncture on Brain Oscillations and Connectivity in Individuals With Chronic Pain.",
+   "journal": "IEEE Trans Neural Syst Rehabil Eng",
+   "year": "2025",
+   "abstract_plain": "Chronic pain challenges global healthcare due to its complexity and the limitations of current treatments. Cheek acupuncture (CA), which targets specific acupoints on the cheek based on the biological holographic model, has shown promise for immediate pain relief. Despite its efficacy across various clinical studies, the mechanisms underlying its analgesic effects remain unclear. In this study, through resting electroencephalography analysis of 37 participants with chronic pain before, during, and after CA therapy, we investigated the electrophysiological modulations underlying the immediate analgesic effects of CA, with further comparison to an additional 13 participants with chronic pain undergoing sham acupuncture to exclude the potential placebo effects. Compared with sham acupuncture, CA demonstrated a significant immediate analgesic effect for chronic pain. Meanwhile, CA also triggered significant modulations on brain oscillations and their synchrony, which are distinct at different acupuncture procedures. Specifically, needle insertion of CA significantly reduced theta oscillations and enhanced gamma oscillations, suggesting a downregulation of hyperactive thalamic activity and an improvement of feedforward communication in pain processing; while after needle withdrawal, beta-band synchrony within the frontal lobe was decreased, indicating an improvement in the efficiency of feedback regulatory information transmission by reducing excessive connections. These modulations together improve the integration of nociceptive and contextual information in pain processing. Notably, the reduced theta oscillations were significantly correlated with the magnitude of pain relief and exerted a weak mediating effect in analgesia. Our findings provide electrophysiological insights into the immediate analgesic mechanism of CA.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Humans",
+    "Male",
+    "Chronic Pain",
+    "Female",
+    "Adult",
+    "Acupuncture Therapy",
+    "Electroencephalography",
+    "Brain",
+    "Middle Aged",
+    "Cheek",
+    "Acupuncture Points",
+    "Treatment Outcome",
+    "Young Adult",
+    "Theta Rhythm"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "electroencephalogra-",
+    "sentence": "In this study, through resting electroencephalography analysis of 37 participants with chronic pain before, during, and after CA therapy, we investigated the electrophysiological modulations underlying the immediate analgesic effects of CA, with further comparison to an additional 13 participants with chronic pain undergoing sham acupuncture to exclude the potential placebo effects."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "40634927",
+   "title": "Effect of acupuncture treatment for patients with knee osteoarthritis on brain fluctuation amplitude and functional connectivity: a randomized three-armed fMRI study.",
+   "journal": "BMC Complement Med Ther",
+   "year": "2025",
+   "abstract_plain": "BACKGROUND: In clinical practice, the overall effect of a treatment includes specific and nonspecific components. Although the analgesic mechanism of specific acupuncture effect has been studied extensively, the understanding of neural basis about nonspecific placebo effect is insufficient. We aimed to reveal the neurological signatures associated with both specific effect and nonspecific effect of acupuncture in chronic pain using the functional magnetic resonance imaging (fMRI). METHODS: In this three-armed, randomized controlled trial, 90 patients with knee osteoarthritis (KOA) were divided into acupuncture group (AG), sham acupuncture group (SG), or waiting list group (WG), receiving 12 times of treatments during 4 weeks. NRS, WOMAC score, and fMRI data were collected before and after treatment. We assessed the amplitude of low frequency fluctuation (ALFF) and seed-based functional connectivity (FC) to investigate the brain functional bases of the nonspecific (SG vs. WG) and specific (AG vs. SG) effects of acupuncture. RESULTS: Acupuncture could significantly reduce NRS score in KOA patients (overall P\u2009<\u20090.001). Neurally, significant ALFF changes in left dorsolateral prefrontal cortex (DLPFC) were observed in the AG (vs. SG) and SG (vs. WG; Voxel P\u2009<\u20090.001, Cluster P\u2009<\u20090.001), respectively. And the decreased ALFF values of DLPFC had a positive correlation with the NRS score changes in the SG (spearman rho\u2009=\u20090.592, P\u2009=\u20090.002). Moreover, FC between DLPFC and thalamus was increased in the AG compared to SG. And compared to WG, there was a decreased FC between DLPFC and cerebellum in the SG. CONCLUSION: The spontaneous activity of the DLPFC was involved in both the specific and nonspecific acupuncture effects, whereas different DLPFC FCs related to the specific or nonspecific effects of acupuncture. Our findings contribute to the understanding about the neuroimaging evidence of the acupuncture effects. TRIAL REGISTRATION NUMBERS: Chinese Clinical Trial Registry ( www.chictr.org.cn ) ChiCTR1900025799. This study was registered on 9th September 2019.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Osteoarthritis, Knee",
+    "Acupuncture Therapy",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Middle Aged",
+    "Female",
+    "Brain",
+    "Aged"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Effect of acupuncture treatment for patients with knee osteoarthritis on brain fluctuation amplitude and functional connectivity: a randomized three-armed fMRI study.."
+   },
+   "intensity": {
+    "term": "nrs",
+    "sentence": "NRS, WOMAC score, and fMRI data were collected before and after treatment."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "39580220",
+   "title": "Psychological, physical and complementary therapies for the management of neuropathic pain.",
+   "journal": "Int Rev Neurobiol",
+   "year": "2024",
+   "abstract_plain": "This chapter aims to explain and evaluate the evidence for psychological, physical and complementary therapies as part of a holistic plan for managing neuropathic pain. Psychological therapies refer to interventions targeting mental health, while physical therapies refer to interventions designed to target movement and functional ability, and complementary therapies are those that attempt to target key mechanisms of change to alter brain and body functioning, or thought processes related to the experience of pain. Each therapeutic modality is discussed to narratively report on the evidence and provide implications for clinicians. Where evidence was unavailable for neuropathic pain populations, evidence from chronic pain populations more broadly was considered. Although promising, there is a lack of high-quality evidence investigating the benefits and safety of psychological, physical and complementary therapies for the management of neuropathic pain. The low certainty evidence and lack of evidence across different neuropathic pain conditions impacts the ability to make recommendations for clinical practice. However, there are several potential areas for future research. Psychological therapies that focus on the underlying mechanisms related to emotion regulation may improve mood and pain, while cognitive and behavioural based approaches may improve psychological comorbidities such as anxiety and depression. Physical therapies involving physical activity and exercise, education, and graded motor imagery may improve functioning and reduce pain. Finally, complementary therapies including electroencephalography neurofeedback, acupuncture, virtual reality, hypnosis and transcutaneous electrical nerve stimulation may provide promising reductions in pain. There is a clear need for further high-quality trials to evaluate the benefits and safety of psychological, physical and complementary therapies to guide the management of neuropathic pain.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Neuralgia",
+    "Complementary Therapies",
+    "Pain Management",
+    "Psychotherapy",
+    "Physical Therapy Modalities"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "psychological",
+    "sentence": "Psychological, physical and complementary therapies for the management of neuropathic pain.."
+   },
+   "biomarker": {
+    "term": "electroencephalogra-",
+    "sentence": "Finally, complementary therapies including electroencephalography neurofeedback, acupuncture, virtual reality, hypnosis and transcutaneous electrical nerve stimulation may provide promising reductions in pain."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "39089662",
+   "title": "Acupuncture Modulation of Chronic Neuropathic Pain and Its Association With Brain Functional Properties.",
+   "journal": "J Pain",
+   "year": "2024",
+   "abstract_plain": "Chronic neuropathic pain has been one of the prominent causes of disability, and acupuncture has shown promise in treatment. The present study aimed to characterize acupuncture modulation of chronic neuropathic pain and explore the related functional brain changes. Sixty chronic sciatica patients were divided into acupuncture-\u00a0or sham acupuncture groups and received 10 sessions of treatment during 4 weeks. The visual analog scale\u00a0for leg pain, oswestry disability index (ODI), and resting-state functional magnetic resonance images were assessed at baseline and after treatment. Then, fractional amplitudes of low-frequency fluctuations (fALFF) and support vector regression\u00a0analyses were performed. Compared with sham acupuncture, acupuncture significantly improved symptoms, including visual analog scale for leg pain and ODI. In addition, acupuncture exhibited increased fALFF of the right superior parietal lobule (SPL) and right postcentral gyrus. Furthermore, the actual 4-week ODI values were positively correlated with the support vector\u00a0regression-predicted\u00a0values based on the right SPL fALFF and baseline clinical measurements. These results indicate that the spontaneous neural activity of the right SPL and right postcentral gyrus may be involved in the modulation of acupuncture in chronic neuropathic pain. In addition, the spontaneous neural activity of the right SPL might be used as the predictor of response to acupuncture therapy. PERSPECTIVE: This clinical neuroimaging study elucidated the neural basis of acupuncture in chronic sciatica. Neurological indicators and clinical measurements could be used as potential predictors of acupuncture response. This study combines neuroimaging and artificial intelligence techniques to highlight the potential of acupuncture for the treatment of chronic neuropathic pain. TRIAL REGISTRATION NUMBER: Chinese Clinical Trial Registry, ChiCTR2100044585,\u00a0http://www.chictr.org.cn.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Humans",
+    "Male",
+    "Female",
+    "Middle Aged",
+    "Magnetic Resonance Imaging",
+    "Acupuncture Therapy",
+    "Neuralgia",
+    "Chronic Pain",
+    "Adult",
+    "Brain",
+    "Sciatica",
+    "Pain Measurement",
+    "Treatment Outcome"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional magnetic resonance",
+    "sentence": "The visual analog scale\u00a0for leg pain, oswestry disability index (ODI), and resting-state functional magnetic resonance images were assessed at baseline and after treatment."
+   },
+   "intensity": {
+    "term": "visual analog",
+    "sentence": "The visual analog scale\u00a0for leg pain, oswestry disability index (ODI), and resting-state functional magnetic resonance images were assessed at baseline and after treatment."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "38897810",
+   "title": "Scalp acupuncture targets for neurological disorders\uff1aevidence from neuroimaging studies (part 1).",
+   "journal": "Zhen Ci Yan Jiu",
+   "year": "2024",
+   "abstract_plain": "OBJECTIVES: Scalp acupuncture is a unique acupuncture method developed based on brain functional and pathophysiological knowledge. In past decades, there has been significant development in the understanding of the brain pathology of many neurological disorders through cutting-edge brain imaging techniques. Yet, these findings have not been incorporated into scalp acupuncture. In the present paper, we aimed to initiate an attempt to develop/identify scalp acupuncture targets based on neuroimaging findings. METHODS: Based on the meta-analysis of neuroimaging studies in the Neurosynth database platform (http\uff1a//neurosynth.org/), the brain clusters related to neurological disorders were automatically identified according to the search terms \"Parkinson's disease\"(PD), \"chronic pain\"(CP), \"aphasia\"(APH), \"dyslexia\"(DYS), \"mild cognitive impairment\", \"Alzheimer's disease\" and \"dementia\". Subsequently, the discovered brain region clusters projected onto the brain surface and scalp surface were listed, and the peak points of the clusters projected to the scalp surface were proposed as the potential stimulation targets for the corresponding diseases. Further, by combining the traditional scalp acupoints (including the scalp acupuncture lines) with 10-20 EEG system sites, we made localization suggestions for scalp stimulation targets and made acupuncture operation suggestions by combining with the shape of the brain region clusters. The literature search was conducted on July 30, 2022. RESULTS: The localization and manipulation suggestions of neuroimage-based scalp acupuncture targets were introduced in two parts. This part (part 1) includes PD, CP, APH, and DYS. Here are 3 target examples of each of these 4 diseases simply introduced due to word limitation. 1) PD. Based on the 175 articles retrieved from Neurosynth, we identified 7 potential scalp acupuncture targets for PD, the locations of the acupuncture stimulation and the recommended acupuncture needle operation (RANO) as well as the corresponding brain regions (CBRs) respectively are as below. PD1\uff1aabout 0.5 cun (1 cun\u224833.3 mm) superior-posterior to the left Xuanlu (GB5)\uff1bpuncturing subcutaneously and forward-upward\uff1bthe left premotor area, subfrontal cortex of the island, inferior frontal gyrus and middle frontal gyrus. PD2\uff1aabout 1 cun lateral-inferior to the left Chengling (GB18)\uff1bpuncturing subcutaneously and backward-upward\uff1bthe inferior parietal lobule and postcentral gyrus. PD3\uff1aabout 0.5 cun lateral-anterior to the left GB18\uff1bpuncturing subcutaneously and inward-backward\uff1bleft anterior central gyrus and posterior central gyrus. 2) CP. Based on the retrieved 92 articles, we identified 8 potential scalp acupuncture targets, the location of the acupuncture stimulation and the RANO, and CBRs respectively are as below. CP1\uff1aabout 1 cun anterior-inferior to the left Xuanli (GB8)\uff1bpuncturing subcutaneously and backward-inwards\uff1bthe left inferior frontal gyrus orbitalis and pars triangularis. CP2\uff1aabout 0.5 cun posterior-superior to the left GB5\uff1bpuncturing subcutaneously and forward-upward\uff1bthe left anterior central gyrus and premotor area. CP3\uff1aabout 0.5 cun posterior-superior to the left GB8\uff1bpuncturing subcutaneously and forward\uff1bleft inferior central area/central sulci operculum (second somatosensory area). 3) APH. Based on the retrieved 82 papers, we identified 7 potential scalp acupuncture targets for APH, their locations, RANO, and CBRs respectively are as below. APH1\uff1aclose to the left GB5\uff1bpuncturing subcutaneously and forward-downward\uff1bleft subfrontal gyrus operculi/triangularis. APH2\uff1aabout 0.5 cun posterior to the left Hanyan (GB4)\uff1bpuncturing subcutaneously and backward-upward\uff1bthe left anterior central gyrus and posterior central gyrus. APH3\uff1aabout 0.5 cun anterior-inferior to the left Qubin (GB7)\uff1bpuncturing subcutaneously and backward-downward\uff1bleft medial/superior temporal gyrus. 4) DYS. Based on the retrieved 76 researches, we identified 8 potential scalp acupuncture targets for DYS, their locations, RANO and CBRs respectively are as below. DYS1\uff1aabout 1 cun anterior-inferior to the left GB5\uff1bpuncturing subcutaneously and forward-upward\uff1bthe pars triangularis of the left inferior frontal gyrus. DYS2\uff1aabout 0.5 cun posterior-superior to the left GB5\uff1bpuncturing subcutaneously and forward-downward\uff1bthe left subfrontal gyrus operculum, pars triangularis and anterior central gyrus. DYS3\uff1athe midpoint between the left GB5 and GB18\uff1bpuncturing subcutaneously and forward\uff1bthe left anterior central gyrus and posterior central gyrus. CONCLUSIONS: We identified scalp acupuncture targets for several common neurological disorders based on neuroimaging evidence for clinical application and research. The proposed targets may also be used for treating these disorders using brain stimulation methods.",
+   "publication_types": [
+    "Journal Article",
+    "Meta-Analysis"
+   ],
+   "mesh": [
+    "Humans",
+    "Acupuncture Therapy",
+    "Nervous System Diseases",
+    "Neuroimaging",
+    "Scalp",
+    "Acupuncture Points",
+    "Brain",
+    "Parkinson Disease"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "Scalp acupuncture targets for neurological disorders\uff1aevidence from neuroimaging studies (part 1).."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "38501597",
+   "title": "A scoping review of mechanisms of auricular acupuncture for treatment of pain.",
+   "journal": "Postgrad Med",
+   "year": "2024",
+   "abstract_plain": "OBJECTIVES: Auricular acupuncture (AA) is becoming increasingly common in primary care clinics, emergency departments and peri-operatively for pain relief. Over the last decade, since the last comprehensive reviews were published, the literature has expanded. In this scoping review, we seek to document the efficacy of AA in treating both acute and chronic pain, describe the mechanism of action of AA in treating pain, and discuss how AA has been integrated into Western medicine to date. METHODS: The authors performed a MEDLINE search inclusive of articles from 1966 to June 2023 including articles written in English identifying literature. We included human studies when more than 3 patients were included. Three hundred and fourteen unique articles were identified and 152 were selected by title screen. After abstract review, 117 were chosen for full-text review. Following full-text review, 33 articles were excluded and 21 added from references, totaling 105 articles included in our scoping review. RESULTS: AA reduces pain severity in patients with both acute and chronic pain. The best studies in the acute settings have occurred in the peri-operative setting where sham AA is employed, multiple sessions of AA are given, and medication dosing is carefully monitored. In these cases, AA reduced pain and post-operative medications. In patients with chronic pain, multiple sessions of AA resulted not only in pain relief but also in improvements in function and disability. Literature suggests that AA works through multiple mechanisms with the most compelling data coupled to the autonomic nervous system and neuroendocrine system. Curriculums designed to teach AA and aid in implementation have been published. CONCLUSION: AA is an accessible, effective means of pain relief. AA is relatively straightforward to learn, and protocols and curriculums exist to teach healthcare professionals this valuable skill. Overcoming implementation barriers, including patient education, are essential next steps.",
+   "publication_types": [
+    "Journal Article",
+    "Scoping Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Acupuncture, Ear",
+    "Pain Management",
+    "Chronic Pain",
+    "Acute Pain"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Literature suggests that AA works through multiple mechanisms with the most compelling data coupled to the autonomic nervous system and neuroendocrine system."
+   },
+   "intensity": {
+    "term": "pain severity",
+    "sentence": "RESULTS: AA reduces pain severity in patients with both acute and chronic pain."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "40463454",
+   "title": "COCCYGODYNIA.",
+   "journal": "Acta Clin Croat",
+   "year": "2023",
+   "abstract_plain": "The coccyx, the last segment of the spine, joins the sacrum at the base. It has three to five vertebrae, which are typically fused. In front of the sacrococcygeal junction is the ganglion impar, the only unpaired autonomic ganglion. The two sympathetic chains come to a close there. The impar ganglion is traversed by sympathetic nerves carrying pain fibers from the perineum, distal sections of the rectum, the vagina and the urethra. The painful disorder known as coccygodynia, which affects the tail end of the spine, is frequently brought on by birth trauma or is caused by an unidentified factor. Even though the pain may go away on its own or with therapy, it may also linger and worsen over time. Due to increased stress from the female pelvis on the coccyx, it affects women five times more frequently than it does men. Conservative, invasive or surgical treatment options are available for coccygodynia (partial or total coccygectomy). Rest, nonsteroidal anti-inflammatory medicines (NSAIDs) or COX-2 inhibitors, acupuncture, coccyx cushions, physical therapy, manual therapy and invasive therapy, which involves ganglion impar block with injections of local anesthetic and corticosteroid under fluoroscopy, followed by radiofrequency ablation, spinal cord stimulation (SCS) or peripheral nerve stimulation, are examples of conservative treatments. Coccygectomy is recommended in refractory situations.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Coccyx",
+    "Low Back Pain",
+    "Female"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "In front of the sacrococcygeal junction is the ganglion impar, the only unpaired autonomic ganglion."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "37609769",
+   "title": "Effect of Systemic and Auricular Acupuncture with a 2/100 Hz Frequency and Nogier Frequency in Fibromyalgia: a Randomized Clinical Trial, Pilot Study.",
+   "journal": "J Acupunct Meridian Stud",
+   "year": "2023",
+   "abstract_plain": "BACKGROUND: Fibromyalgia is a syndrome of chronic, generalized muscular pain, accompanied by sleep disturbances, fatigue and cardic autonomic dysfunction that will affect the quality of life. There is currently no gold standard treatment. There are limitations of studies with electroacupuncture in auricular acupuncture. OBJECTIVES: We evaluate the effects of systemic electroacupuncture (EA) with frequencies of 2/100 Hz associated of auricular acupuncture with a Nogier frequency (2.28, 4.56 and 9.12 Hz) for pain intensity, heart rate variability (HRV), and quality of life in fibromyalgia. METHODS: Randomized clinical trial, a pilot study. Eighteen volunteers were randomized into a control group (CG, n = 9) and an experimental group (EG, n = 9). Six systemic EA sessions systemic and auricular were applied in the EG for 20 min, twice a week, for six weeks consecutive. The Numerical Pain Assessment Scale (NPRS), 2010 diagnostic criteria of the American College of Rheumatology (FDC 2010), Fibromyalgia Impact Questionnaire (FIQ) and analysis of HRV were the instruments used. The independent t-test compared to the groups was applied. RESULTS: There was no statistically significant difference for the primary outcome for NPRS (p > 0.05). In the secondary outcome there was a significant difference in the total score and in some FIQ domains (p = 0.008) and some variables such as pain (p = 0.02) and anxiety (p = 0.006). There was no significant difference for the FDC 2010 and HRV variables (p > 0.05). CONCLUSION: 2/100 Hz systemic EA associated with the Nogier frequency positively influenced some quality of life variables; however, pain intensity, diagnostic criteria, and HRV variables did not change.",
+   "publication_types": [
+    "Randomized Controlled Trial",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Fibromyalgia",
+    "Pilot Projects",
+    "Acupuncture, Ear",
+    "Quality of Life",
+    "Myalgia"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "In the secondary outcome there was a significant difference in the total score and in some FIQ domains (p = 0.008) and some variables such as pain (p = 0.02) and anxiety (p = 0.006)."
+   },
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "BACKGROUND: Fibromyalgia is a syndrome of chronic, generalized muscular pain, accompanied by sleep disturbances, fatigue and cardic autonomic dysfunction that will affect the quality of life."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "OBJECTIVES: We evaluate the effects of systemic electroacupuncture (EA) with frequencies of 2/100 Hz associated of auricular acupuncture with a Nogier frequency (2.28, 4.56 and 9.12 Hz) for pain intensity, heart rate variability (HRV), and quality of life in fibromyalgia."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "36610367",
+   "title": "Recent trends in acupuncture for chronic pain: A bibliometric analysis and review of the literature.",
+   "journal": "Complement Ther Med",
+   "year": "2023",
+   "abstract_plain": "BACKGROUND: Acupuncture has been increasingly used in patients with chronic pain, yet no bibliometric analysis of acupuncture studies for chronic pain exists. OBJECTIVES: To investigate the characteristics, hotspots and frontiers of global scientific output in acupuncture research for chronic pain over the past decade. METHODS: We retrieved publications on acupuncture for chronic pain published from 2011 to 2022 from the Science Citation Index Expanded (SCI-expanded) of the Web of Science Core Collection (WoSCC). The co-occurrence relationships of journals/countries/institutions/authors/keywords were performed using VOSviewer V6.1.2, and CiteSpace V1.6.18 analyzed the clustering and burst analysis of keywords and co-cited references. RESULTS: A total of 1616 articles were retrieved. The results showed that the number of annual publications on acupuncture for chronic pain has increased over time, with the main types of literature being original articles (1091 articles, 67.5 %) and review articles (351 articles, 21.7 %). China had the most publications (598 articles, 37 %), with Beijing University of Traditional Chinese Medicine (93 articles, 5.8 %) and Evidence-based Complementary and Alternative Medicine ranked first (169 articles, 10.45 %) as the most prolific affiliate and journal, respectively. Liang FR was the most productive author (43 articles), and the article published by Vickers Andrew J in 2012 had the highest number of citations (625 citations). Recently, \"acupuncture\" and \"pain\" appeared most frequently. The hot topics in acupuncture for chronic pain based on keywords clustering analysis were experimental design, hot diseases, interventions, and mechanism studies. According to burst analysis, the main research frontiers were functional connectivity (FC), depression, and risk. CONCLUSION: This study provides an in-depth perspective on acupuncture for chronic pain studies, revealing pivotal points, research hotspots, and research trends. Valuable ideas are provided for future research activities.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Chronic Pain",
+    "Acupuncture Therapy",
+    "Bibliometrics",
+    "Medicine, East Asian Traditional",
+    "China"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "According to burst analysis, the main research frontiers were functional connectivity (FC), depression, and risk."
+   },
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "According to burst analysis, the main research frontiers were functional connectivity (FC), depression, and risk."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": "According to burst analysis, the main research frontiers were functional connectivity (FC), depression, and risk."
+  },
+  {
+   "pmid": "35633164",
+   "title": "Scalp Stimulation Targets for Neurological Conditions-Evidence from Large-Scale Meta-Analyses.",
+   "journal": "J Integr Neurosci",
+   "year": "2022",
+   "abstract_plain": "BACKGROUND: Neurological disorders are a major source of suffering for patients worldwide. Scalp stimulation methods have been widely applied in treating a number of neurological disorders. Recently, our understanding of pathological mechanisms associated with neurological disorders has been enhanced significantly. Nevertheless, these findings have yet to be well-integrated into scalp stimulation treatments for neurological disorders. METHODS: In a previous study, we proposed new brain targets for scalp stimulation in the treatment of eight common mental disorders based on the results of a large-scale meta-analyses using Neurosynth. This study aims to extend our previous findings in identifying surface brain targets for seven common neurological disorders: Alzheimer's disease, aphasia, chronic pain, dementia, dyslexia, mild cognitive impairment, and Parkinson's disease, utilizing a similar method. RESULTS: We hidentified seven to eight potential scalp stimulation targets for each disorder and used both 10-20 EEG system and acupuncture points to locate these targets to facilitate its clinical application. CONCLUSIONS: The proposed target protocols may facilitate and extend clinical applications of scalp stimulation methods such as transcranial electrical stimulation and scalp acupuncture in the treatment of neurological disorders.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Cognitive Dysfunction",
+    "Humans",
+    "Nervous System Diseases",
+    "Scalp",
+    "Transcranial Direct Current Stimulation"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "eeg",
+    "sentence": "RESULTS: We hidentified seven to eight potential scalp stimulation targets for each disorder and used both 10-20 EEG system and acupuncture points to locate these targets to facilitate its clinical application."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "33314799",
+   "title": "Greater Somatosensory Afference With Acupuncture Increases Primary Somatosensory Connectivity and Alleviates Fibromyalgia Pain via Insular \u03b3-Aminobutyric Acid: A Randomized Neuroimaging Trial.",
+   "journal": "Arthritis Rheumatol",
+   "year": "2021",
+   "abstract_plain": "OBJECTIVE: Acupuncture is a complex multicomponent treatment that has shown promise in the treatment of fibromyalgia (FM). However, clinical trials have shown mixed results, possibly due to heterogeneous methodology and lack of understanding of the underlying mechanism of action. The present study was undertaken to understand the specific contribution of somatosensory afference to improvements in clinical pain, and the specific brain circuits involved. METHODS: Seventy-six patients with FM were randomized to receive either electroacupuncture (EA), with somatosensory afference, or mock laser acupuncture (ML), with no somatosensory afference, twice a week over 8 treatments. Patients with FM in each treatment group were assessed for pain severity levels, measured using Brief Pain Inventory (BPI) scores, and for levels of functional brain network connectivity, assessed using resting state functional magnetic resonance imaging (MRI) and proton magnetic resonance spectroscopy in the right anterior insula, before and after treatment. RESULTS: Fibromyalgia patients who received EA therapy experienced a greater reduction in pain severity, as measured by the BPI, compared to patients who received ML therapy (mean difference in BPI from pre- to posttreatment was -1.14 in the EA group versus -0.46 in the ML group; P for group \u00d7 time interaction = 0.036). Participants receiving EA treatment, as compared to ML treatment, also exhibited resting functional connectivity between the primary somatosensory cortical representation of the leg (S1leg ; i.e. primary somatosensory subregion activated by EA) and the anterior insula. Increased S1leg -anterior insula connectivity was associated with both reduced levels of pain severity as measured by the BPI (r = -0.44, P = 0.01) and increased levels of \u03b3-aminobutyric acid (GABA+) in the anterior insula (r = 0.48, P = 0.046) following EA therapy. Moreover, increased levels of GABA+ in the anterior insula were associated with reduced levels of pain severity as measured by the BPI (r = -0.59, P = 0.01). Finally, post-EA treatment changes in levels of GABA+ in the anterior insula mediated the relationship between changes in S1leg -anterior insula connectivity and pain severity on the BPI (bootstrap confidence interval -0.533, -0.037). CONCLUSION: The somatosensory component of acupuncture modulates primary somatosensory functional connectivity associated with insular neurochemistry to reduce pain severity in FM.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, N.I.H., Extramural"
+   ],
+   "mesh": [
+    "Adult",
+    "Afferent Pathways",
+    "Cerebral Cortex",
+    "Electroacupuncture",
+    "Female",
+    "Fibromyalgia",
+    "Functional Neuroimaging",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Middle Aged",
+    "Neural Pathways",
+    "Pain Measurement",
+    "Proton Magnetic Resonance Spectroscopy",
+    "Somatosensory Cortex",
+    "gamma-Aminobutyric Acid"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "Greater Somatosensory Afference With Acupuncture Increases Primary Somatosensory Connectivity and Alleviates Fibromyalgia Pain via Insular \u03b3-Aminobutyric Acid: A Randomized Neuroimaging Trial.."
+   },
+   "intensity": {
+    "term": "pain severity",
+    "sentence": "Patients with FM in each treatment group were assessed for pain severity levels, measured using Brief Pain Inventory (BPI) scores, and for levels of functional brain network connectivity, assessed using resting state functional magnetic resonance imaging (MRI) and proton magnetic resonance spectroscopy in the right anterior insula, before and after treatment."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "32377180",
+   "title": "Different Degree Centrality Changes in the Brain after Acupuncture on Contralateral or Ipsilateral Acupoint in Patients with Chronic Shoulder Pain: A Resting-State fMRI Study.",
+   "journal": "Neural Plast",
+   "year": "2020",
+   "abstract_plain": "Chronic shoulder pain (CSP) is the third most common musculoskeletal problem. For maximum treatment effectiveness, most acupuncturists usually choose acupoint in the nonpainful side, to alleviate pain or improve shoulder function. This method is named opposite needling, which means acupuncture points on the right side are selected for diseases on the left side and vice versa. However, the underlying neural mechanisms related to treatment are currently unclear. The purpose of this study was to determine whether different mechanisms were observed with contralateral and ipsilateral acupuncture at Tiaokou (ST 38) in patients with unilateral CSP. Twenty-four patients were randomized to the contralateral acupuncture group (contra-group) and the ipsilateral acupuncture group (ipsi-group). The patients received one acupuncture treatment session at ST 38 on the nonpainful or painful sides, respectively. Before and after acupuncture treatment, they underwent functional magnetic resonance scanning. The treatment-related changes in degree centrality (DC) maps were compared between the two groups. We found alleviated pain and improved shoulder function in both groups, but better shoulder functional improvement was observed in the contra-group. Increased DC in the anterior/paracingulate cortex and decreased DC in bilateral postcentral gyri were found in the contra-group, while decreased DC in the bilateral cerebellum and right thalamus was observed in the ipsi-group. Furthermore, the DC value in the bilateral anterior/paracingulate cortex was positively correlated with the treatment-related change in the Constant-Murley score. The current study reveals different changes of DC patterns after acupuncture at contralateral or ipsilateral ST 38 in patients with CSP. Our findings support the hypothesis of acupoint specificity and provide the evidence for acupuncturists to select acupoints for CSP.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Brain",
+    "Brain Mapping",
+    "Chronic Pain",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Middle Aged",
+    "Shoulder Pain",
+    "Treatment Outcome"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Different Degree Centrality Changes in the Brain after Acupuncture on Contralateral or Ipsilateral Acupoint in Patients with Chronic Shoulder Pain: A Resting-State fMRI Study.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31964691",
+   "title": "An fMRI-based neural marker for migraine without aura.",
+   "journal": "Neurology",
+   "year": "2020",
+   "abstract_plain": "OBJECTIVE: To identify and validate an fMRI-based neural marker for migraine without aura (MwoA) and to examine its association with treatment response. METHODS: We conducted cross-sectional studies with resting-state fMRI data from 230 participants and machine learning analyses. In studies 1 through 3, we identified, cross-validated, independently validated, and cross-sectionally validated an fMRI-based neural marker for MwoA. In study 4, we assessed the relationship between the neural marker and treatment responses in migraineurs who received a 4-week real or sham acupuncture treatment, or were waitlisted, in a registered clinical trial. RESULTS: In study 1 (n = 116), we identified a neural marker with abnormal functional connectivity within the visual, default mode, sensorimotor, and frontal-parietal networks that could discriminate migraineurs from healthy controls (HCs) with 93% sensitivity and 89% specificity. In study 2 (n = 38), we investigated the generalizability of the marker by applying it to an independent cohort of migraineurs and HCs and achieved 84% sensitivity and specificity. In study 3 (n = 76), we verified the specificity of the marker with new datasets of migraineurs and patients with other chronic pain disorders (chronic low back pain and fibromyalgia) and demonstrated 78% sensitivity and 76% specificity for discriminating migraineurs from nonmigraineurs. In study 4 (n = 116), we found that the changes in the marker responses showed significant correlation with the changes in headache frequency in response to real acupuncture. CONCLUSION: We identified an fMRI-based neural marker that captures distinct characteristics of MwoA and can link disease pattern changes to brain changes.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, N.I.H., Extramural",
+    "Research Support, Non-U.S. Gov't",
+    "Comment"
+   ],
+   "mesh": [
+    "Brain",
+    "Cross-Sectional Studies",
+    "Humans",
+    "Machine Learning",
+    "Magnetic Resonance Imaging",
+    "Migraine without Aura"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "An fMRI-based neural marker for migraine without aura.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31922698",
+   "title": "Changes in resting-state functional connectivity in nonacute sciatica with acupuncture modulation: A preliminary study.",
+   "journal": "Brain Behav",
+   "year": "2020",
+   "abstract_plain": "AIMS: To investigate the functional connectivity (FC) in nonacute sciatica and the neuronal correlation of acupuncture analgesia. METHODS: A prospective study employing resting-state functional magnetic resonance imaging was conducted. Twelve sciatica patients were enrolled to receive six or 18 acupoints of acupuncture treatment twice a week for 4\u00a0weeks. Regional homogeneity (ReHo) and seed-based FC were performed. RESULTS: Regional homogeneity analysis demonstrated a greater alteration in the right posterior cingulate cortex (PCC) during the pre-acupuncture phase than during the postacupuncture phase. Compared to that of healthy controls, the PCC-seeded FC (default mode network, DMN) of sciatica patients exhibited hyperconnectivity of PCC-FC with the PCC-bilateral insula, cerebellum, inferior parietal lobule, right medial prefrontal cortex, and dorsal anterior cingulate cortex during the pre-acupuncture phase as well as hypoconnectivity of PCC-FC with the right cerebellum, left precuneus, and left dorsal medial prefrontal cortex during the postacupuncture phase. Correlation analysis between PCC-seeded FC and behavior measurements revealed a positive association with the duration of sciatica in the right inferior parietal lobule prior to acupuncture treatment. CONCLUSIONS: Acupuncture in chronic sciatica patients is associated with normalized DMN activity and modulation of descending pain processing. The changes in the subclinical endophenotype of brain FC after acupuncture treatment may provide clues for understanding the mechanism of acupuncture-mediated analgesia in chronic pain.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Brain",
+    "Brain Mapping",
+    "Female",
+    "Gyrus Cinguli",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Middle Aged",
+    "Nociception",
+    "Prospective Studies",
+    "Sciatica"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Changes in resting-state functional connectivity in nonacute sciatica with acupuncture modulation: A preliminary study.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31521794",
+   "title": "Evaluating the Effects of Acupuncture Using a Dental Pain Model in Healthy Subjects - A Randomized, Cross-Over Trial.",
+   "journal": "J Pain",
+   "year": "2020",
+   "abstract_plain": "Acupuncture is a complementary and nonpharmacological intervention that can be effective for the management of chronic pain in addition to or instead of medication. Various animal models for neuropathic pain, inflammatory pain, cancer-related pain, and visceral pain already exist in acupuncture research. We used a newly validated human pain model and examined whether acupuncture can influence experimentally induced dental pain. For this study, we compared the impact of manual acupuncture (real acupuncture), manual stimulation of a needle inserted at nonacupuncture points (sham acupuncture) and no acupuncture on experimentally induced dental pain in 35 healthy men who were randomized to different sequences of all 3 interventions in a within-subject design. BORG CR10 pain ratings and autonomic responses (electrodermal activity and heart rate variability) were investigated. An initial mixed model with repeated measures included preintervention pain ratings and the trial sequence as covariates. The results showed that acupuncture was effective in reducing pain intensity when compared to no acupuncture (\u03b2\u202f=\u202f-.708, P\u202f=\u202f.002), corresponding to a medium Cohen's d effect size of .56. The comparison to the sham acupuncture revealed no statistically significant difference. No differences in autonomic responses between real and sham acupuncture were found during the intervention procedures. PERSPECTIVE: This study established a dental pain model for acupuncture research and provided evidence that experimentally induced dental pain can be influenced by either real acupuncture or manual stimulation of needles at nonacupuncture points. The data do not support that acupoint specificity is a significant factor in reducing experimental pain.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Cross-Over Studies",
+    "Galvanic Skin Response",
+    "Heart Rate",
+    "Humans",
+    "Male",
+    "Medicine, Chinese Traditional",
+    "Outcome Assessment, Health Care",
+    "Pain Measurement",
+    "Placebos",
+    "Toothache",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "BORG CR10 pain ratings and autonomic responses (electrodermal activity and heart rate variability) were investigated."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "The results showed that acupuncture was effective in reducing pain intensity when compared to no acupuncture (\u03b2\u202f=\u202f-.708, P\u202f=\u202f.002), corresponding to a medium Cohen's d effect size of .56."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31176295",
+   "title": "Multivariate resting-state functional connectivity predicts responses to real and sham acupuncture treatment in chronic low back pain.",
+   "journal": "Neuroimage Clin",
+   "year": "2019",
+   "abstract_plain": "Despite the high prevalence and socioeconomic impact of chronic low back pain (cLBP), treatments for cLBP are often unsatisfactory, and effectiveness varies widely across patients. Recent neuroimaging studies have demonstrated abnormal resting-state functional connectivity (rsFC) of the default mode, salience, central executive, and sensorimotor networks in chronic pain patients, but their role as predictors of treatment responsiveness has not yet been explored. In this study, we used machine learning approaches to test if pre-treatment rsFC can predict responses to both real and sham acupuncture treatments in cLBP patients. Fifty cLBP patients participated in 4\u202fweeks of either real (N\u202f=\u202f24, age\u202f=\u202f39.0\u202f\u00b1\u202f12.6, 16 females) or sham acupuncture (N\u202f=\u202f26, age\u202f=\u202f40.0\u202f\u00b1\u202f13.7, 15 females) treatment in a single-blinded trial, and a resting-state fMRI scan prior to treatment was used in data analysis. Both real and sham acupuncture can produce significant pain reduction, with those receiving real treatment experiencing greater pain relief than those receiving sham treatment. We found that pre-treatment rsFC could predict symptom changes with up to 34% and 29% variances for real and sham treatment, respectively, and the rsFC characteristics that were significantly predictive for real and sham treatment differed. These results suggest a potential way to predict treatment responses and may facilitate the development of treatment plans that optimize time, cost, and available resources.",
+   "publication_types": [
+    "Controlled Clinical Trial",
+    "Journal Article",
+    "Research Support, N.I.H., Extramural"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Basal Ganglia",
+    "Cerebral Cortex",
+    "Chronic Pain",
+    "Connectome",
+    "Female",
+    "Humans",
+    "Low Back Pain",
+    "Machine Learning",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Middle Aged",
+    "Outcome Assessment, Health Care",
+    "Placebos",
+    "Prefrontal Cortex",
+    "Single-Blind Method"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Multivariate resting-state functional connectivity predicts responses to real and sham acupuncture treatment in chronic low back pain.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "30651139",
+   "title": "Effect and neurophysiological mechanism of acupuncture in patients with chronic sciatica: protocol for a randomized, patient-assessor blind, sham-controlled clinical trial.",
+   "journal": "Trials",
+   "year": "2019",
+   "abstract_plain": "BACKGROUND: Sciatica is a relatively frequent illness that easily becomes a chronic and relapsing condition. Although numerous systematic reviews have analyzed various therapies for sciatica, the validity of their included studies is limited. Considering the limitations of conventional treatment options for sciatica, acupuncture is a possible option; however, evidence supporting its efficacy and mechanism in patients with sciatica is lacking. The aim of this proposed protocol is to investigate the effect and neurophysiological mechanism of acupuncture in patients with chronic sciatica. METHODS/DESIGN: This study is a randomized, patient-assessor blind, two-arm, parallel, non-penetrating, sham-controlled clinical trial. Eligible participants will include adults (aged 19-70\u2009years old) with a clinical diagnosis of chronic sciatica (40\u2009mm or more of a 100-mm visual analog scale (VAS) for bothersomeness) blinded to the treatment received. Patients will be randomly allocated into the acupuncture treatment group (manual acupuncture plus electroacupuncture (EA), n\u00a0=\u200934) or the sham acupuncture control group (sham acupuncture plus placebo EA without electrical stimulation, n\u00a0=\u200934). Groups will receive treatment twice a week for a total of eight sessions over 4 weeks. Functional magnetic resonance imaging will be implemented at baseline and endpoint to investigate the mechanism of acupuncture. The primary outcome measure is the VAS for bothersomeness and secondary outcomes include the VAS for pain intensity, Oswestry Disability Index, EuroQol 5-Dimension, Coping Strategy Questionnaire, Beck's Depression Inventory, and State-Trait Anxiety Inventory. Adverse events will be assessed at every visit. DISCUSSION: The results of this trial (which will be available in 2020) should provide important clinical evidence for the effect of acupuncture and demonstrate how acupuncture can be helpful for the treatment of chronic sciatica. TRIAL REGISTRATION: ClinicalTrials.gov, ID: NCT03350789 . Registered on 15 November 2017.",
+   "publication_types": [
+    "Clinical Trial Protocol",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adaptation, Psychological",
+    "Adult",
+    "Aged",
+    "Chronic Pain",
+    "Disability Evaluation",
+    "Emotions",
+    "Female",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Middle Aged",
+    "Pain Measurement",
+    "Randomized Controlled Trials as Topic",
+    "Sciatica",
+    "Time Factors",
+    "Treatment Outcome",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "The primary outcome measure is the VAS for bothersomeness and secondary outcomes include the VAS for pain intensity, Oswestry Disability Index, EuroQol 5-Dimension, Coping Strategy Questionnaire, Beck's Depression Inventory, and State-Trait Anxiety Inventory."
+   },
+   "biomarker": {
+    "term": "functional magnetic resonance",
+    "sentence": "Functional magnetic resonance imaging will be implemented at baseline and endpoint to investigate the mechanism of acupuncture."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "Eligible participants will include adults (aged 19-70\u2009years old) with a clinical diagnosis of chronic sciatica (40\u2009mm or more of a 100-mm visual analog scale (VAS) for bothersomeness) blinded to the treatment received."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": true,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "30137262",
+   "title": "Analgesic Effects Evoked by Real and Imagined Acupuncture: A Neuroimaging Study.",
+   "journal": "Cereb Cortex",
+   "year": "2019",
+   "abstract_plain": "Acupuncture can provide therapeutic analgesic benefits but is limited by its cost and scheduling difficulties. Guided imagery is a commonly used method for treating many disorders, such as chronic pain. The present study examined a novel intervention for pain relief that integrates acupuncture with imagery called video-guided acupuncture imagery treatment (VGAIT). A total of 27 healthy subjects were recruited for a crossover-design study that included 5 sessions administered in a randomized order (i.e., baseline and 4 different interventions). We investigated changes in pain threshold and fMRI signals modulated by: 1) VGAIT, watching a video of acupuncture previously administered on the participant's own body at baseline while imagining it being concurrently applied; 2) a VGAIT control condition, watching a video of a cotton swab touching the skin; 3) real acupuncture; and 4) sham acupuncture. Results demonstrated that real acupuncture and VGAIT significantly increased pain threshold compared with respective control groups. Imaging showed that real acupuncture produced greater activation of the insula compared with VGAIT. VGAIT produced greater deactivation at the rostral anterior cingulate cortex. Our findings demonstrate that VGAIT holds potential clinical value for pain management.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Acupuncture Analgesia",
+    "Adult",
+    "Brain",
+    "Cerebral Cortex",
+    "Chronic Pain",
+    "Cross-Over Studies",
+    "Female",
+    "Functional Neuroimaging",
+    "Gyrus Cinguli",
+    "Healthy Volunteers",
+    "Humans",
+    "Imagery, Psychotherapy",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Pain Threshold",
+    "Placebos",
+    "Video Recording",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "Analgesic Effects Evoked by Real and Imagined Acupuncture: A Neuroimaging Study.."
+   },
+   "intensity": {
+    "term": "pain threshold",
+    "sentence": "We investigated changes in pain threshold and fMRI signals modulated by: 1) VGAIT, watching a video of acupuncture previously administered on the participant's own body at baseline while imagining it being concurrently applied; 2) a VGAIT control condition, watching a video of a cotton swab touching the skin; 3) real acupuncture; and 4) sham acupuncture."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "29876878",
+   "title": "Role of the Prefrontal Cortex in Pain Processing.",
+   "journal": "Mol Neurobiol",
+   "year": "2019",
+   "abstract_plain": "The prefrontal cortex (PFC) is not only important in executive functions, but also pain processing. The latter is dependent on its connections to other areas of the cerebral neocortex, hippocampus, periaqueductal gray (PAG), thalamus, amygdala, and basal nuclei. Changes in neurotransmitters, gene expression, glial cells, and neuroinflammation occur in the PFC during acute and chronic pain, that result in alterations to its structure, activity, and connectivity. The medial PFC (mPFC) could serve dual, opposing roles in pain: (1) it mediates antinociceptive effects, due to its connections with other cortical areas, and as the main source of cortical afferents to the PAG for modulation of pain. This is a 'loop' where, on one side, a sensory stimulus is transformed into a perceptual signal through high brain processing activity, and perceptual activity is then utilized to control the flow of afferent sensory stimuli at their entrance (dorsal horn) to the CNS. (2) It could induce pain chronification via its corticostriatal projection, possibly depending on the level of dopamine receptor activation (or lack of) in the ventral tegmental area-nucleus accumbens reward pathway. The PFC is involved in biopsychosocial pain management. This includes repetitive transcranial magnetic stimulation, transcranial direct current stimulation, antidepressants, acupuncture, cognitive behavioral therapy, mindfulness, music, exercise, partner support, empathy, meditation, and prayer. Studies demonstrate the role of the PFC during placebo analgesia, and in establishing links between pain and depression, anxiety, and loss of cognition. In particular, losses in PFC grey matter are often reversible after successful treatment of chronic pain.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Animals",
+    "Dopamine",
+    "Humans",
+    "Neural Pathways",
+    "Pain",
+    "Pain Perception",
+    "Prefrontal Cortex"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "Studies demonstrate the role of the PFC during placebo analgesia, and in establishing links between pain and depression, anxiety, and loss of cognition."
+   },
+   "biomarker": {
+    "term": "prefrontal",
+    "sentence": "Role of the Prefrontal Cortex in Pain Processing.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "29619620",
+   "title": "Evidence-Based Non-Pharmacological Therapies for Fibromyalgia.",
+   "journal": "Curr Pain Headache Rep",
+   "year": "2018",
+   "abstract_plain": "PURPOSE OF REVIEW: Fibromyalgia (FM) is the second most common rheumatologic pain disorder after osteoarthritis with a multisystem presentation. While the treatment of FM in a clinical setting incorporates both pharmacologic and non-pharmacologic modalities, the present investigation reviews evolving literature on cognitive behavioral and complementary medical therapies. The recent medical literature on FM was reviewed between 2012 and 2017 via MEDLINE and the Cochrane Central Registry of Controlled Trials, with an emphasis on randomized controlled trials, meta-analyses, and evidence-based treatment guidelines. RECENT FINDINGS: Cognitive behavioral therapy continues to play a significant role in the non-medical therapy of FM. It is especially helpful in high catastrophizing patients as evidenced by recent studies that note changes in the brain on functional magnetic resonance imaging. Mindfulness meditation can be helpful in improving pain symptoms and pain perception. No particular diet is found to have a meaningful impact in FM; however, various diets including low fermentable oligo- di -monosaccharides and polyols diet, gluten free, and hypocaloric may be helpful in ameliorating gastrointestinal distress in select patient populations. Current literature does not support the routine use of acupuncture for improving pain or quality of life in FM; however, given its benign side effect profile, it should not be discouraged. Goals for symptom management and pain control should be set early, and patient engagement remains critical in the management of this complex pain presentation. While low quality evidence exists for most non-pharmacologic treatment modalities for FM, CBT and mindfulness meditation show promise for future investigation.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Cognitive Behavioral Therapy",
+    "Complementary Therapies",
+    "Evidence-Based Medicine",
+    "Fibromyalgia",
+    "Humans",
+    "Pain Management"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "catastrophiz-",
+    "sentence": "It is especially helpful in high catastrophizing patients as evidenced by recent studies that note changes in the brain on functional magnetic resonance imaging."
+   },
+   "biomarker": {
+    "term": "functional magnetic resonance",
+    "sentence": "It is especially helpful in high catastrophizing patients as evidenced by recent studies that note changes in the brain on functional magnetic resonance imaging."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": "It is especially helpful in high catastrophizing patients as evidenced by recent studies that note changes in the brain on functional magnetic resonance imaging."
+  },
+  {
+   "pmid": "29325883",
+   "title": "A Functional Neuroimaging Study of Expectancy Effects on Pain Response in Patients With Knee Osteoarthritis.",
+   "journal": "J Pain",
+   "year": "2018",
+   "abstract_plain": "UNLABELLED: Placebo treatments and healing rituals share much in common, such as the effects of expectancy, and have been used since the beginning of human history to treat pain. Previous mechanistic neuroimaging studies investigating the effects of expectancy on placebo analgesia have used young, healthy volunteers. Using functional magnetic resonance imaging (fMRI), we aimed to investigate the neural mechanisms by which expectancy evokes analgesia in older adults living with a chronic pain disorder and determine whether there are interactions with active treatment. In this fMRI study, we investigated the brain networks underlying expectancy in participants with chronic pain due to knee osteoarthritis (OA) after verum (genuine) and sham electroacupuncture treatment before and after experiencing calibrated experimental heat pain using a well tested expectancy manipulation model. We found that expectancy significantly and similarly modulates the pain experience in knee OA patients in both verum (n\u2009=\u200921, 11 female; mean\u2009\u00b1\u2009SD age 57\u2009\u00b1\u20097 years) and sham (n\u2009=\u200922, 15 female; mean\u2009\u00b1\u2009SD age 59\u2009\u00b1\u20097 years) acupuncture treatment groups. However, there were different patterns of changes in fMRI indices of brain activity associated with verum and sham treatment modalities specifically in the lateral prefrontal cortex. We also found that continuous electroacupuncture in knee OA patients can evoke significant regional coherence decreases in pain associated brain regions. Our results suggest that expectancy modulates the experience of pain in knee OA patients but may work through different pathways depending on the treatment modality and, we speculate, on pathophysiological states of the participants. PERSPECTIVE: To investigate the neural mechanisms underlying pain modulation, we used an expectancy manipulation model and fMRI to study response to heat pain stimuli before and after verum or sham acupuncture treatment in chronic pain patients. Both relieve pain and each is each associated with a distinct pattern of brain activation.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, N.I.H., Extramural"
+   ],
+   "mesh": [
+    "Aged",
+    "Arthralgia",
+    "Female",
+    "Functional Neuroimaging",
+    "Humans",
+    "Male",
+    "Middle Aged",
+    "Motivation",
+    "Osteoarthritis, Knee",
+    "Pain Measurement",
+    "Pain Perception"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "A Functional Neuroimaging Study of Expectancy Effects on Pain Response in Patients With Knee Osteoarthritis.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "29071990",
+   "title": "[Effect of Electroacupuncture Intervention on Expression of Synaptic Plasticity-related Molecules in Amygdala in Chronic Pain-negative Affection Rats].",
+   "journal": "Zhen Ci Yan Jiu",
+   "year": "2017",
+   "abstract_plain": "OBJECTIVE: To observe the effect of electroacupuncture (EA) on expression of synaptic plasticity-related glutamate N-methyl-D-aspartate (NMDA) receptor subunit NR 1, gamma-aminobutyric acid (GABA) receptor subunits (A\u03b2 2, B 1), etc. in the amygdala in chronic neuropathic pain negative affection (CNPPNA) rats, so as to reveal its mechanism underlying pain relief. METHODS: Male Wistar rats were randomized into normal control, CNPPNA model, EA, and anesthesia+EA (AEA)groups (n=14 in each group, 8 for quantitative RT-PCR and 6 for immunofluorescence staining). The CNPPNA model was established by ligation of the left sciatic nerve and repeated electrical stimulation of the hindpaw plantar skin in the pain-paired compartment. EA was applied to bilateral \"Zusanli\"(ST 36)and \"Yanglingquan\"(GB 34)for 30 min, once daily for 7 days.Thermal pain threshold (paw withdrawal latency, PWL)of the bilateral paws was measured by using a Tail-Flick Unit. The conditioned place aversion (CPA) was determined by using a CPA-paired compartment. The expression levels of GABAA\u03b2 2, GABAB 1, NMDA receptor subunit NR 1, postsynaptic density-95 protein(PSD-95), Piccolo genes in the right amygdala area were determined using quantitative RT-PCR, and the immunoactivity of metabotropic glutamate receptor subunit 1 (mGluR 1) and GABAB 2 in the basolateral amygdala (BLA) nucleus was detected using immunofluorescence staining. RESULTS: After modeling, PWL difference (PWLD) values of the model group were significantly increased (P<0.001),and the time spent in the CPA-paired compartment was considerably decreased compared with the control group (P<0.001).After EA intervention for 3 and 7 days, the PWLD levels of both EA and AEA groups were apparently decreased(P<0.05),and the time spent in the CPA-paired compartment was apparently increased in the EA and AEA groups(P<0.05),suggesting a pain relief and an improvement of the negative affection after EA intervention. Additionally, following EA, the apparently-decreased expression levels of GABAA\u03b2 2,GABAB 1,PSD-95,Piccolo genes and the reduced numbers of GABAB 2 positive cells and NMDA-NR 1 mRNA as well as mGluR 1 positive fiber numbers were remarkably increased in the EA group (P<0.05, P<0.001).The expression levels of Piccolo gene, GABAB 2 and mGluR 1 positive cells/fiber numbers were apparently lower in the AEA group than in the EA group (P<0.001). No significant differences were found between the EA and AEA groups in the PWLD, time spent in the CPA-paired compartment, and the expression levels of NMDA-NR 1, GABAA\u03b2 2, GABAB 1 and PSD-95 genes (P>0.05). CONCLUSIONS: Repeated EA stimulation of ST 36-GB 34 has a role in relieving both sensory and affection dimensions of chronic pain in CNPPNA rats, which Feb be respectively related to its effects in up-regulating the expression of GABAA\u03b2 2, GABAB 1, NMDA-NR 1, PSD-95 and Piccolo genes, and in promoting the expression of mGluR 1 and GABAB 2 proteins and Piccolo gene in the amygdala.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Analgesia",
+    "Acupuncture Points",
+    "Amygdala",
+    "Animals",
+    "Chronic Pain",
+    "Electroacupuncture",
+    "Humans",
+    "Male",
+    "Neuralgia",
+    "Neuronal Plasticity",
+    "Rats",
+    "Rats, Wistar",
+    "Receptors, GABA",
+    "Receptors, N-Methyl-D-Aspartate"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "amygdala",
+    "sentence": "[Effect of Electroacupuncture Intervention on Expression of Synaptic Plasticity-related Molecules in Amygdala in Chronic Pain-negative Affection Rats].."
+   },
+   "intensity": {
+    "term": "pain threshold",
+    "sentence": "EA was applied to bilateral \"Zusanli\"(ST 36)and \"Yanglingquan\"(GB 34)for 30 min, once daily for 7 days.Thermal pain threshold (paw withdrawal latency, PWL)of the bilateral paws was measured by using a Tail-Flick Unit."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "27741200",
+   "title": "Psychotherapy With Somatosensory Stimulation for Endometriosis-Associated Pain: A Randomized Controlled Trial.",
+   "journal": "Obstet Gynecol",
+   "year": "2016",
+   "abstract_plain": "OBJECTIVE: To evaluate whether psychotherapy with somatosensory stimulation is effective for the treatment of pain and quality of life in patients with endometriosis-related pain. METHODS: Patients with a history of endometriosis and chronic pelvic pain were randomized to either psychotherapy with somatosensory stimulation (ie, different techniques of acupuncture point stimulation) or wait-list control for 3 months, after which all patients were treated. The primary outcome was brain connectivity assessed by functional magnetic resonance imaging. Prespecified secondary outcomes included pain on 11-point numeric rating scales (maximal and average global pain, pelvic pain, dyschezia, and dyspareunia) and physical and mental quality of life. A sample size of 30 per group was planned to compare outcomes in the treatment group and the wait-list control group. RESULTS: From March 2010 through March 2012, 67 women (mean age 35.6 years) were randomly allocated to intervention (n=35) or wait-list control (n=32). In comparison with wait-list controls, treated patients showed improvements after 3 months in maximal global pain (mean group difference -2.1, 95% confidence interval [CI] -3.4 to -0.8; P=.002), average global pain (-2.5, 95% CI -3.5 to -1.4; P<.001), pelvic pain (-1.4, 95% CI -2.7 to -0.1; P=.036), dyschezia (-3.5, 95% CI -5.8 to -1.3; P=.003), physical quality of life (3.8, 95% CI 0.5-7.1, P=.026), and mental quality of life (5.9, 95% CI 0.6-11.3; P=.031); dyspareunia improved nonsignificantly (-1.8, 95% CI -4.4 to 0.7; P=.150). Improvements in the intervention group remained stable at 6 and 24 months, and control patients showed comparable symptom relief after delayed intervention. CONCLUSION: Psychotherapy with somatosensory stimulation reduced global pain, pelvic pain, and dyschezia and improved quality of life in patients with endometriosis. After 6 and 24 months, when all patients were treated, both groups showed stable improvements. CLINICAL TRIAL REGISTRATION: ClinicalTrials.gov, https://clinicaltrials.gov, NCT01321840.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Adult",
+    "Chronic Pain",
+    "Endometriosis",
+    "Female",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Pain Management",
+    "Physical Stimulation",
+    "Psychotherapy",
+    "Quality of Life"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "somatosensory",
+    "sentence": "Psychotherapy With Somatosensory Stimulation for Endometriosis-Associated Pain: A Randomized Controlled Trial.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "27141613",
+   "title": "[Effect of Electroacupuncture Intervention on Expression of Pain Sensory and Affective Proce- ssing-related \u00b5-opioid Receptor, etc. in the Amygdala in Chronic Neuropathy Pain Rats].",
+   "journal": "Zhen Ci Yan Jiu",
+   "year": "2016",
+   "abstract_plain": "OBJECTIVE: To observe the effect of electroacupuncture (EA) on expression of pain sensory and affective processing-related \u00b5-opioid receptor (MOR), glutamatergic AMPA receptor subunit GIuA 1, extracellular signal-regulated kinase (ERK 1/2), cAMP response element binding protein(CREB) in the amygdala in chronic constrictive injury (CC) + negative affection(NA) rats, so as to reveal its mechanism underlying pain relief. METHODS: A total of 32 male Wistar rats were randomized into normal control, model, EA, and anesthesia+ EA (AEA) groups (n = 8 in each group). The neuropathic pain NA model was established by ligation of the left sciatic nerve and repeated electrical stimulation of the paw-bottom in the pain-paired compartment. EA was applied to bilateral \"Zusanli\" (ST 36) and \"Yanglingquan\" (GB 34) for 30 min, once daily for 7 days. Thermal pain threshold (paw withdrawl latency, PWL) of the bilateral paws was measured by using a Tail-Flick Unit. The expression levels of MOR and p-CREB in the central amygdala (CeA) and those of MOR, GluA 1, p-ERK 1/2 and p-CREB in the right amygdala area were determined using immunofluorescence and Western blot, respectively. RESULTS: in comparison with the normal group, PWL difference (PWLD) values of the model group were significantly increased (P < 0.001), and the time spent in the CPA-paired. compartment was considerably decreased (P < 0.001). After EA, the PWLD levels of both EA and AEA groups were apparently decreased (P < 0.05), showing a pain relief; and the time spent in the CPA-paired compartment was apparently increased in the EA group (P < 0.05) , rather than in the AEA group (P > 0.05). Additionally , compared to the normal group, the expression level of MOR protein in the amygdala was remarkably increased (P < 0.05) and those of GIuA 1, p-ERK 2 and p-CREB proteins were apparently decreased (P < 0.05). After EA intervention for 7 days, the expression levels of these four proteins in the EA group, and those of MOR, p-ERK 2 and p-CREB in the AEA group were significantly up-regulated (P < 0.001, P < 0.01, P < 0.05). The expression level of GIuA 1 was significantly higher in the EA group than in the AEA group (P < 0.05). CONCLUSION: Repeated EA stimulation of ST 36-GB 34 has a definite effect in relieving both sensation and affection dimensions of pain in NA rats, which may be related to its effect in up-regulating the expression of GIuA 1 in the amygdala, but the effects of MOR, p-ERK 2 and p-CREB need being researched further.",
+   "publication_types": [
+    "English Abstract",
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Points",
+    "Affect",
+    "Amygdala",
+    "Animals",
+    "Chronic Pain",
+    "Electroacupuncture",
+    "Humans",
+    "Mitogen-Activated Protein Kinase 1",
+    "Mitogen-Activated Protein Kinase 3",
+    "Rats",
+    "Rats, Wistar",
+    "Receptors, Opioid",
+    "Sensation"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "affective",
+    "sentence": "[Effect of Electroacupuncture Intervention on Expression of Pain Sensory and Affective Proce- ssing-related \u00b5-opioid Receptor, etc."
+   },
+   "biomarker": {
+    "term": "amygdala",
+    "sentence": "in the Amygdala in Chronic Neuropathy Pain Rats].."
+   },
+   "intensity": {
+    "term": "pain threshold",
+    "sentence": "Thermal pain threshold (paw withdrawl latency, PWL) of the bilateral paws was measured by using a Tail-Flick Unit."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": "OBJECTIVE: To observe the effect of electroacupuncture (EA) on expression of pain sensory and affective processing-related \u00b5-opioid receptor (MOR), glutamatergic AMPA receptor subunit GIuA 1, extracellular signal-regulated kinase (ERK 1/2), cAMP response element binding protein(CREB) in the amygdala in chronic constrictive injury (CC) + negative affection(NA) rats, so as to reveal its mechanism underlying pain relief."
+  },
+  {
+   "pmid": "26833397",
+   "title": "Efficacy and safety of Myofascial-meridian Release Acupuncture (MMRA) for chronic neck pain: a study protocol for randomized, patient- and assessor-blinded, sham controlled trial.",
+   "journal": "BMC Complement Altern Med",
+   "year": "2016",
+   "abstract_plain": "BACKGROUND: The purpose of this study is to evaluate the efficacy and safety of myofascial-meridian release acupuncture (MMRA) in the treatment of chronic neck pain compared with sham acupuncture. METHODS/DESIGN: A protocol for a randomized, patient- and assessor-blinded, sham controlled parallel trial is presented. Seventy-four participants with a \u22653\u00a0month history of neck pain and a score of \u22654 on the 11-point pain intensity numerical rating scale (PI-NRS) will be randomly assigned to the MMRA group (n\u2009=\u200937) or sham acupuncture group (n\u2009=\u200937). The participants will receive the MMRA treatment or sham acupuncture treatment twice per week for 4\u00a0weeks. The primary outcome is the mean change in the PI-NRS (0\u2009=\u2009no pain and 10\u2009=\u2009worst possible pain, 11-point Likert scale) from baseline to 4\u00a0weeks. The secondary outcomes are the mean change from baseline on the clinical relevance of the pain (ratio of changes greater than 1.5 or with percentiles greater than 30\u00a0% and 50\u00a0% in the PI-NRS), function (Neck Disability Index and Cervical Range of Motion), autonomic and psychometric measurements (Heart Rate Variability and Perceived Stress Scale), quality of life (EuroQol), global assessment (Patient Global Impression of Change), semi-objective outcomes (pressure pain threshold, consumption of rescue medicine and days of restricted activity) and immunologic/stress biomarkers. Adverse events will be evaluated at every visit. DISCUSSION: The results of this trial will provide evidence to confirm the efficacy and safety of acupuncture for chronic neck pain. TRIAL REGISTRATION: The trial is registered with the Clinical Research Information Service (CRiS), Republic of Korea: KCT0001573 .",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Aged",
+    "Chronic Pain",
+    "Clinical Protocols",
+    "Double-Blind Method",
+    "Endpoint Determination",
+    "Female",
+    "Humans",
+    "Male",
+    "Meridians",
+    "Middle Aged",
+    "Neck Pain",
+    "Outcome Assessment, Health Care",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "The secondary outcomes are the mean change from baseline on the clinical relevance of the pain (ratio of changes greater than 1.5 or with percentiles greater than 30\u00a0% and 50\u00a0% in the PI-NRS), function (Neck Disability Index and Cervical Range of Motion), autonomic and psychometric measurements (Heart Rate Variability and Perceived Stress Scale), quality of life (EuroQol), global assessment (Patient Global Impression of Change), semi-objective outcomes (pressure pain threshold, consumption of rescue medicine and days of restricted activity) and immunologic/stress biomarkers."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "Seventy-four participants with a \u22653\u00a0month history of neck pain and a score of \u22654 on the 11-point pain intensity numerical rating scale (PI-NRS) will be randomly assigned to the MMRA group (n\u2009=\u200937) or sham acupuncture group (n\u2009=\u200937)."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": true,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "26787729",
+   "title": "Impact of Electroacupuncture Treatment on Quality of Life and Heart Rate Variability in Fibromyalgia Patients.",
+   "journal": "J Evid Based Complementary Altern Med",
+   "year": "2017",
+   "abstract_plain": "This study examines the effects of electroacupuncture treatment on health-related quality of life and heart rate variability in women with fibromyalgia. Twenty women with fibromyalgia received a 10-week treatment with electroacupuncture. Primary outcome measures were the Fibromyalgia Impact Questionnaire, the Short Form 36 Health Survey Questionnaire, and heart rate variability. Compared with pretreatment, there was a significant improvement in health-related quality of life; electroacupuncture significantly increases low frequency, low frequency/high frequency, and decreases high frequency, all indicating rise in sympathetic tone. Fibromyalgia patients showed a significant ( P < .05) improvement in pain, fatigue, morning tiredness, stiffness, anxiety, and depression on the Fibromyalgia Impact Questionnaire scores; and physical function, physical role, body pain, general health, and vitality scores on the Short Form 36 Health Survey Questionnaire. These changes mainly in mental status scores could be related to a new autonomic balance with sympathetic predominance at the horary of the study.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Adult",
+    "Depression",
+    "Electroacupuncture",
+    "Female",
+    "Fibromyalgia",
+    "Health Status",
+    "Heart Rate",
+    "Humans",
+    "Mexico",
+    "Middle Aged",
+    "Pain Measurement",
+    "Physical Functional Performance",
+    "Quality of Life",
+    "Surveys and Questionnaires"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "Fibromyalgia patients showed a significant ( P < .05) improvement in pain, fatigue, morning tiredness, stiffness, anxiety, and depression on the Fibromyalgia Impact Questionnaire scores; and physical function, physical role, body pain, general health, and vitality scores on the Short Form 36 Health Survey Questionnaire."
+   },
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "Impact of Electroacupuncture Treatment on Quality of Life and Heart Rate Variability in Fibromyalgia Patients.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "26594625",
+   "title": "Repeated verum but not placebo acupuncture normalizes connectivity in brain regions dysregulated in chronic pain.",
+   "journal": "Neuroimage Clin",
+   "year": "2015",
+   "abstract_plain": "Acupuncture, an ancient East Asian therapy, is aimed at rectifying the imbalance within the body caused by disease. Studies evaluating the efficacy of acupuncture with neuroimaging tend to concentrate on brain regions within the pain matrix, associated with acute pain. We, however, focused on the effect of repeated acupuncture treatment specifically on brain regions known to support functions dysregulated in chronic pain disorders. Transition to chronic pain is associated with increased attention to pain, emotional rumination, nociceptive memory and avoidance learning, resulting in brain connectivity changes, specifically affecting the periaqueductal gray (PAG), medial frontal cortex (MFC) and bilateral hippocampus (Hpc). We demonstrate that the PAG-MFC and PAG-Hpc connectivity in patients with chronic pain due to knee osteoarthritis indeed correlates with clinical severity scores and further show that verum acupuncture-induced improvement in pain scores (compared to sham) is related to the modulation of PAG-MFC and PAG-Hpc connectivity in the predicted direction. This study shows that repeated verum acupuncture might act by restoring the balance in the connectivity of the key pain brain regions, altering pain-related attention and memory.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, N.I.H., Extramural"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Brain Mapping",
+    "Chronic Pain",
+    "Female",
+    "Frontal Lobe",
+    "Hippocampus",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Middle Aged",
+    "Neural Pathways",
+    "Osteoarthritis, Knee",
+    "Pain Measurement",
+    "Periaqueductal Gray"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "Transition to chronic pain is associated with increased attention to pain, emotional rumination, nociceptive memory and avoidance learning, resulting in brain connectivity changes, specifically affecting the periaqueductal gray (PAG), medial frontal cortex (MFC) and bilateral hippocampus (Hpc)."
+   },
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "Studies evaluating the efficacy of acupuncture with neuroimaging tend to concentrate on brain regions within the pain matrix, associated with acute pain."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "Transition to chronic pain is associated with increased attention to pain, emotional rumination, nociceptive memory and avoidance learning, resulting in brain connectivity changes, specifically affecting the periaqueductal gray (PAG), medial frontal cortex (MFC) and bilateral hippocampus (Hpc)."
+  },
+  {
+   "pmid": "26025590",
+   "title": "Acupuncture-brain interactions as hypothesized by mood scale recordings.",
+   "journal": "Med Hypotheses",
+   "year": "2015",
+   "abstract_plain": "Mood expressions encompassing positive scales like \"activity, elation, contemplation, calmness\" and negative scales like \"anger, excitement, depression, fatigue\" were applied for introducing a new tool to assess the effects of acupuncture on brain structures. Traditional acupuncture points defined in the literature for their effects on task negative and task positive brain structures were applied to chronic disease patients supposed to have dominant negative mood scales. Burn-out syndrome (n=10) and female chronic pain patients (n=22) showed a significant improvement on positive mood scales and a decline in negative mood scales after 10 acupuncture sessions. We observed a direct effect of acupuncture on brain structures in 5 burn-out syndrome patients showing an immediate, fast suppression of unusual slow high amplitude EEG waves in response to acupuncture needle rotation. These EEG waves described here for the first time in awake patients disappeared after 10 sessions but gradually returned after 1-1.5 years without acupuncture. This was accompanied with deterioration of positive mood scales and a return to negative mood scales. Both male (n=16) and female chronic pain patients reported a significant decrease of pain intensity after 10 sessions. Female patients only, however, showed a linear correlation between initial pain intensity and pain relief as well as a linear correlation between changes in pain intensity and mood scales accompanied by a drop of their heart rate during the acupuncture sessions. We hypothesized that mood scale recordings are a sensitive and specific new tool to reveal individual acupuncture-brain interaction.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Affect",
+    "Brain",
+    "Electroencephalography",
+    "Female",
+    "Humans",
+    "Male",
+    "Middle Aged"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "mood",
+    "sentence": "Acupuncture-brain interactions as hypothesized by mood scale recordings.."
+   },
+   "biomarker": {
+    "term": "eeg",
+    "sentence": "We observed a direct effect of acupuncture on brain structures in 5 burn-out syndrome patients showing an immediate, fast suppression of unusual slow high amplitude EEG waves in response to acupuncture needle rotation."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "Both male (n=16) and female chronic pain patients reported a significant decrease of pain intensity after 10 sessions."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "25796668",
+   "title": "[Advances in research of complementary and integrative medicine: a review of recent publications in some of the leading medical journals].",
+   "journal": "Harefuah",
+   "year": "2015",
+   "abstract_plain": "This article assesses the evidence for effectiveness, adverse effects and cost-effectiveness of complementary therapies, as reflected in publications in high impact factor medical journals during the years 2012-2014. The search detected 13 randomized controlled studies (RCTs) and 14 meta-analyses, which collectively assessed results of 191 RCTs involving the participation of several thousand patients. Pain was the major focus of acupuncture research in both clinical and fMRI studies, which demonstrated that the effect of acupuncture is beyond the placebo effect. In addition, RCTs supported the use of acupuncture as an adjunctive therapy in chronic obstructive pulmonary disease and in moderate to severe depression. A promising trend was reported for the ameliorating effect of acupuncture in gout. Spinal manipulations may be helpful in cervical pain and yoga may be a useful treatment option for chronic neck pain, chronic low back pain and for pain-related disability. Beneficial effects of adding hypnosis and massage therapy to the treatment of fibromyalgia patients were also documented. Tai-chi may reduce balance impairment in mild-to-moderate Parkinson's disease and improve symptoms in patients with osteoarthritis. Products containing cranberry are associated with protective effects in some subgroups of patients with recurrent urinary tract infections. Chinese herbs may assist in glycemic control of diabetes patients and improve survival rate of patients with non-small cell lung cancer. Some of the complementary therapies were found to be cost-effective. Physicians should be aware of the possible adverse effects of these treatments and of possible drug-herb interactions. Further larger scale trials are justified.",
+   "publication_types": [
+    "English Abstract",
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Complementary Therapies",
+    "Cost-Benefit Analysis",
+    "Humans",
+    "Integrative Medicine",
+    "Randomized Controlled Trials as Topic"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "In addition, RCTs supported the use of acupuncture as an adjunctive therapy in chronic obstructive pulmonary disease and in moderate to severe depression."
+   },
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Pain was the major focus of acupuncture research in both clinical and fMRI studies, which demonstrated that the effect of acupuncture is beyond the placebo effect."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "24728839",
+   "title": "Verum and sham acupuncture exert distinct cerebral activation in pain processing areas: a crossover fMRI investigation in healthy volunteers.",
+   "journal": "Brain Imaging Behav",
+   "year": "2015",
+   "abstract_plain": "Although acupuncture is effective for treating pain, its site-specificity is questioned. The aim was to compare the cerebral responses of needling applied to an acupuncture point to the needling of a sham point, using functional magnetic resonance imaging (fMRI). Twenty-one healthy male volunteers were enrolled. Manual stimulation of the acupuncture (ST44) and sham points on the dorsum of the left foot was applied during fMRI in a crossover manner. fMRI data analysis was performed contrasting the ST44 and the sham conditions. Stimulation intensity, subjective discrimination of the needling site and the incidence of \"Qi\" sensation were additionally recorded. Stimulation of ST44 acupoint, in comparison to the sham procedure, was associated with an increased fMRI-activation in the primary somatosensory, the inferior parietal and the prefrontal cortex and the posterior insula. Sham needling was associated with increased activation in the anterior cingulate cortex and the anterior insula. Verum acupuncture increased the activity of discriminative somatosensory and cognitive pain processing areas of the brain, whereas sham needling activated the areas responsible for affective processing of pain. This may explain favorable effects of verum acupuncture in clinical studies about treatment of chronic pain patients.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Points",
+    "Acupuncture Therapy",
+    "Adult",
+    "Brain Mapping",
+    "Cerebral Cortex",
+    "Cross-Over Studies",
+    "Foot",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Pain",
+    "Psychophysics"
+   ],
+   "arm": "acupuncture_filtered",
+   "affective": {
+    "term": "affective",
+    "sentence": "Verum acupuncture increased the activity of discriminative somatosensory and cognitive pain processing areas of the brain, whereas sham needling activated the areas responsible for affective processing of pain."
+   },
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Verum and sham acupuncture exert distinct cerebral activation in pain processing areas: a crossover fMRI investigation in healthy volunteers.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "Verum acupuncture increased the activity of discriminative somatosensory and cognitive pain processing areas of the brain, whereas sham needling activated the areas responsible for affective processing of pain."
+  }
+ ],
+ "tallies": {
+  "n_records": 40,
+  "n_affective_outcome": 18,
+  "n_neural_or_autonomic_biomarker": 40,
+  "n_both_affective_and_biomarker": 18,
+  "n_co_mention_same_sentence": 11,
+  "n_neither": 0,
+  "n_no_affective_term": 22,
+  "n_no_biomarker_term": 0,
+  "n_review": 12,
+  "n_protocol": 2,
+  "n_animal_subject": 11,
+  "n_human_primary": 21,
+  "n_abstract_missing": 0,
+  "pmids_both": [
+   "24728839",
+   "25796668",
+   "26025590",
+   "26594625",
+   "26787729",
+   "27141613",
+   "29619620",
+   "29876878",
+   "30651139",
+   "36610367",
+   "37609769",
+   "39580220",
+   "41455401",
+   "41735062",
+   "41987449",
+   "42015637",
+   "42670051",
+   "42779402"
+  ],
+  "pmids_co_mention": [
+   "24728839",
+   "26594625",
+   "27141613",
+   "29619620",
+   "36610367",
+   "41455401",
+   "41735062",
+   "41987449",
+   "42015637",
+   "42670051",
+   "42779402"
+  ]
+ }
+}
