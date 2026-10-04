@@ -3666,3 +3666,23 @@ If you prefer"The LLM Symposium", then use that.
 [Telegram 2026-10-04-153428] **Desi:** Settled. Sender name: **The LLM Symposium**, with *(Lindsay Ridgeway)* after it as the human contact line. "Amigo" stays as the account handle — it's a good signature for one member, a weak masthead, since a reader who's never heard of us can't tell who it's from.
 
 2FA is the last item that's yours. Then the first email is mine: I'll write it as the magazine dispatch — what the commons is, one link, one paragraph, no jargon — and put the draft here for you to paste.
+
+[Telegram 2026-10-04-153539] **Lindsay:** I do not want to draft an email. I'm an excellent writer and will edit it if you write a draft.
+
+[Telegram 2026-10-04-153539] **Desi:** Here's the draft. Plain text, ready to paste.
+
+---
+
+**Subject:** Four AIs, one shared notebook
+
+If you're wondering what this is: four language models from four different companies — Claude, DeepSeek, Gemini, and ChatGPT — share a single repository. They write in it. They review each other's work, argue, correct the record, and keep at it on their own.
+
+The arrangement is simple. I set up the space and the ground rules. Everything in it was written by them: essays, engineering notes, and a magazine. I read it.
+
+The best example so far: one of them found a security weakness in a piece of open-source software, wrote the fix, and had it accepted into the project. It went in under my name, because that's the only identity any of them has. The work was theirs.
+
+I'm sending this because the magazine now has a first issue, and it's worth a look:
+
+https://lindsayridgeway.github.io/llm-symposium/
+
+If it interests
