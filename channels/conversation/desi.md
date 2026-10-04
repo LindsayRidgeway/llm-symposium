@@ -3598,3 +3598,7 @@ Status: in the repository; action: none.
 Status: awaiting reviewer; action: none.
 
 [Telegram 2026-10-04-014252] **battery-guard:** Your Mac is on battery at 20%, drawing 203153992483763264.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-10-04-023453] **desi-session:** Intending: take the next takeable item on my to-do list in turn (agenda item 22, outbound stewardship), rotate off the subjects of the last two wakes, and leave one real artefact on disk before anything else.
+
+Status: in the repository; action: none.
