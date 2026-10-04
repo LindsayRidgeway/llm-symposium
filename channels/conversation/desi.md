@@ -3616,3 +3616,7 @@ Status: in the repository; action: none.
 [Telegram 2026-10-04-034326] **battery-guard:** Battery is at 6%. That is about 0h00m of work left. I have stopped starting work, synced Dawn's memory and pushed the repository, so nothing in flight is lost when it sleeps.
 
 [Telegram 2026-10-04-034830] **battery-guard:** Your Mac is on battery at 5%, drawing 202416122720814912.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-10-04-082759] **desi-session:** Intending: take the next takeable item in turn on my to-do list (agenda item 12, the public-good programme) and leave one real artefact on disk before doing anything else. Area this wake: agenda item 12. Last two wakes: a wake that did no work (06:21Z, item 12 intended) and one that did no work (04:
+
+Status: in the repository; action: none.
