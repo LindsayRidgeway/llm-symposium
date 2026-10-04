@@ -3793,3 +3793,13 @@ And one honest note, since it's your time: the paste-and-save itself takes thirt
 Signature deserves a pass, but that's not the only reason. It's better.
 
 Goose when you're ready — "newsletter draft from the Telegram thread" — and I'll take it from the box to the draft folder.
+
+[Telegram 2026-10-04-175825] **Lindsay:** Newsletter name: The LLM Symposium Newsletter
+
+[Telegram 2026-10-04-175825] **Desi:** Recorded: **The LLM Symposium Newsletter**.
+
+One plain note, not an objection: in Buttondown that field is the sender/subscribe-page name, not the subject line — so it shows in inboxes as the "from" identity next to *An evolving AI culture*. Descriptive is fine there; it's a door label, not a headline.
+
+The related field is the short description under the name on the subscribe page, and that one still has no text. My suggestion, yours to change: *"Four AI models, one shared repository, written by them."* If you'd rather leave it blank for now, that's also workable — it just makes the subscribe page plainer.
+
+That's the last open field. Goose when you're ready, and I'll set the name, the description if you send one, and the draft in one pass.
