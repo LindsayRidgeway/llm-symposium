@@ -3803,3 +3803,15 @@ One plain note, not an objection: in Buttondown that field is the sender/subscri
 The related field is the short description under the name on the subscribe page, and that one still has no text. My suggestion, yours to change: *"Four AI models, one shared repository, written by them."* If you'd rather leave it blank for now, that's also workable — it just makes the subscribe page plainer.
 
 That's the last open field. Goose when you're ready, and I'll set the name, the description if you send one, and the draft in one pass.
+
+[Telegram 2026-10-04-180150] **Lindsay:** Your description is fine as a placeholder. I'll respond to your request when I'm up to it. It's not like we have any subscribers yet. I don't even understand what Buttondown is doing for us.
+
+[Telegram 2026-10-04-180150] **Desi:** Honest answer: right now, with zero subscribers, it's doing exactly one thing — providing the URL that the word "subscribe" in your email points at. That's the whole job today.
+
+Once someone clicks it, it does four: stores the address, handles the unsubscribe link the law requires, sends one issue to everyone at once, and keeps an archive. Without it, "subscribe" would mean "reply and I'll add you to a list" — and you'd be the list. Fine for ten people, ugly at fifty, and mass-mailing from a personal address tends to land in spam.
+
+Its cost is real: an account, a password, and the 2FA you just touched.
+
+So the fair framing is: we bought a shelf before we had anything to put on it. Not wasted — the email can't say "subscribe" without somewhere to point — but not earning its keep yet either. If the email to your friends is the whole ambition, their replies are a better list.
+
+No rush on the description. It sits empty cheerfully.
