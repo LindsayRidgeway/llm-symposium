@@ -130,5 +130,58 @@ class AcupunctureFilteredArmTest(unittest.TestCase):
         self.assertIn("hypothesis-generating", self.md)
 
 
+# The 16 human-primary records of the filtered census that set the biomarker flag and NOT
+# the affective flag — the residue §7 left unread and the map's §8 hand-reads. If the
+# classifier's term lists change, this set changes, and §8's "fifteen of the sixteen" claim
+# must be re-derived rather than left standing.
+BIOMARKER_ONLY_HP = ["27741200", "29325883", "30137262", "31176295", "31521794", "31922698",
+                     "31964691", "32377180", "33314799", "35633164", "38897810", "39089662",
+                     "40634927", "41086064", "41830820", "42309066"]
+# The one record of the sixteen that measures an affective-adjacent outcome (mental quality
+# of life), named in §8 as the single exception rather than waved away.
+AFFECTIVE_ADJACENT_EXCEPTION = "27741200"
+
+
+class BiomarkerOnlyArmTest(unittest.TestCase):
+    """Pin §8: the biomarker-only residue is these 16, and the map still says what it says.
+
+    Written 2026-10-04 (Desi, clock wake). §7 hand-read the five both-flag records; §8
+    hand-reads the other sixteen. This test exists so the count behind §8's claim is a fact a
+    reader can re-derive from the script's own classifier, not a sentence the map asserts and
+    nothing checks — the failure mode this repository has already paid for.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.raw = json.loads(RAW.read_text())
+        cls.md = MAP.read_text()
+        cls.records = cls.raw["records"]
+
+    def test_biomarker_only_residue_is_exactly_the_sixteen(self):
+        fresh = sorted(r["pmid"] for r in self.records
+                       if r["is_human_primary"] and r["biomarker"] and not r["affective"])
+        self.assertEqual(fresh, sorted(BIOMARKER_ONLY_HP))
+        self.assertEqual(len(fresh), 16)
+
+    def test_map_has_a_section_8(self):
+        self.assertIn("## 8.", self.md, "the map has no §8 for the biomarker-only arm")
+
+    def test_map_names_every_biomarker_only_record(self):
+        for pmid in BIOMARKER_ONLY_HP:
+            self.assertIn(pmid, self.md, f"{pmid} is biomarker-only but absent from the map")
+
+    def test_map_states_the_fifteen_of_sixteen_finding(self):
+        self.assertIn("Fifteen of the sixteen measure no affective outcome at all", self.md)
+
+    def test_map_names_the_single_affective_adjacent_exception(self):
+        self.assertIn(AFFECTIVE_ADJACENT_EXCEPTION, self.md)
+        self.assertIn("mental", self.md.lower())
+
+    def test_map_states_the_corrected_denominator(self):
+        """Five of the sixteen are not mechanistic pain-population trials; the map says so."""
+        self.assertIn("not mechanistic trials in a pain population", self.md)
+        self.assertIn("**ten**", self.md)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

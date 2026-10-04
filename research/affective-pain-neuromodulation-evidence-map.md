@@ -228,3 +228,90 @@ The overturning condition it names — a reported *correlation* between the chan
 measure and the change in the affective measure — cannot be tested from the abstracts, because an
 abstract would not carry it. Route 1 is therefore **human-blocked**: it needs a reader with library
 access, not another query.
+
+---
+
+## 8. The biomarker-only arm — does this literature measure the brain and not the mood? (run 2026-10-04, §7 step 2)
+
+**Why this section exists.** §7 hand-read the **five** human-primary filtered-arm records that
+set *both* flags and left the rest of the arm unread. Step (2) of the item's next action names
+what was left: classify the **16 human-primary filtered-arm records that set the biomarker flag
+only** — those whose abstract names a brain or autonomic measure and no affective-outcome
+vocabulary — and ask whether that residue is mechanistic neuroimaging with no clinical
+affective outcome, and whether that holds across the arm. §7's sharpened sentence — *this
+literature measures the brain and not the mood* — rests on these sixteen as much as on the
+five. This is a table over records already on disk
+(`research/affective-pain-neuromodulation-acupuncture-filtered-raw.json`); no new query, no
+network.
+
+**Method, and its limit.** "Biomarker only" is the §2 *term screen*: a neural/autonomic term
+present, no affective-vocabulary term present. A screen is not a reading, so each of the sixteen
+abstracts was read for what it actually measured. The column *affective outcome?* asks the
+question the item cares about — did the study **measure how the patient felt** (a mood,
+anxiety, depression or catastrophizing scale) — not whether a word appears. Reads are from
+abstracts; a full text could add an unpublished secondary scale, which is exactly why the count
+below is stated as a floor on "no mood measured", not a proof.
+
+| PMID | year | population | design | neural / autonomic measure | non-brain outcome measured | affective outcome? |
+|---|---|---|---|---|---|---|
+| [27741200](https://pubmed.ncbi.nlm.nih.gov/27741200/) | 2016 | endometriosis, chronic pelvic pain | RCT, n=67 (35 vs 32 wait-list) | fMRI functional connectivity (**primary**) | NRS pain (maximal/avg/pelvic/dyschezia/dyspareunia) + physical & **mental** quality of life | **yes — mental QoL, secondary** |
+| [29325883](https://pubmed.ncbi.nlm.nih.gov/29325883/) | 2018 | knee osteoarthritis | fMRI, expectancy manipulation | brain activity (lateral PFC) | expectancy, calibrated experimental heat pain | no |
+| [31176295](https://pubmed.ncbi.nlm.nih.gov/31176295/) | 2019 | chronic low back pain | single-blinded trial, n=50, real vs sham | resting-state functional connectivity (machine learning) | pain reduction | no |
+| [30137262](https://pubmed.ncbi.nlm.nih.gov/30137262/) | 2019 | **healthy** volunteers, n=27 | crossover RCT, 5 sessions | fMRI (insula, rostral ACC) | pain threshold | no |
+| [32377180](https://pubmed.ncbi.nlm.nih.gov/32377180/) | 2020 | chronic shoulder pain | RCT, n=24, contra- vs ipsi-acupoint | resting-state fMRI degree centrality | pain + shoulder function | no |
+| [31964691](https://pubmed.ncbi.nlm.nih.gov/31964691/) | 2020 | migraine without aura | cross-sectional + trial response, n=230 | resting-state fMRI neural marker | migraine discrimination; acupuncture/sham response | no |
+| [31922698](https://pubmed.ncbi.nlm.nih.gov/31922698/) | 2020 | nonacute sciatica | prospective, preliminary, n=12 | resting-state fMRI ReHo + FC | pain duration correlation | no |
+| [31521794](https://pubmed.ncbi.nlm.nih.gov/31521794/) | 2020 | **healthy** men, dental pain model, n=35 | randomised crossover | electrodermal activity + heart rate variability | pain intensity (BORG CR10) | no |
+| [33314799](https://pubmed.ncbi.nlm.nih.gov/33314799/) | 2021 | fibromyalgia | randomised neuroimaging trial, n=76, EA vs mock laser | resting-state fMRI + MRS (insular GABA) | BPI pain severity | no |
+| [35633164](https://pubmed.ncbi.nlm.nih.gov/35633164/) | 2022 | **none — seven disorders, target list** | meta-analyses (Neurosynth) | EEG-localised scalp targets | none (no patients measured) | no |
+| [39089662](https://pubmed.ncbi.nlm.nih.gov/39089662/) | 2024 | chronic sciatica | RCT, n=60, acupuncture vs sham | resting-state fMRI fALFF | VAS leg pain + Oswestry disability index | no |
+| [38897810](https://pubmed.ncbi.nlm.nih.gov/38897810/) | 2024 | **none — target list** | meta-analysis (Neurosynth) | EEG-localised scalp targets | none (no patients measured) | no |
+| [41086064](https://pubmed.ncbi.nlm.nih.gov/41086064/) | 2025 | chronic pain | controlled, n=37 vs 13 sham | resting EEG oscillations + connectivity | immediate pain relief | no |
+| [40634927](https://pubmed.ncbi.nlm.nih.gov/40634927/) | 2025 | knee osteoarthritis | three-arm RCT, n=90 | resting-state fMRI ALFF + FC | NRS + WOMAC | no |
+| [42309066](https://pubmed.ncbi.nlm.nih.gov/42309066/) | 2026 | healthy + chronic pain | model training/validation | corticospinal fMRI model | pain intensity (analgesia under **TENS**, not acupuncture) | no |
+| [41830820](https://pubmed.ncbi.nlm.nih.gov/41830820/) | 2026 | endometriosis, chronic pelvic pain | 8-week trial sub-study, n=18, **control omitted** | resting EEG, frequency-PCA | daily pain ratings | no |
+
+**What the sixteen show.** Reading them, four facts fall out of the arm:
+
+1. **Fifteen of the sixteen measure no affective outcome at all.** Every one of the fifteen
+   carries a brain or autonomic measure paired with a *pain-intensity or function* outcome
+   (NRS/VAS/BPI/WOMAC/ODI/threshold) — or, in two cases, no patient outcome whatsoever. Not one
+   of the fifteen reports a mood, anxiety, depression or catastrophizing scale. This is §7's
+   claim, checked against the residue it did not read, and it holds.
+2. **The single exception is named, not waved away.** **27741200** measures "physical and
+   **mental** quality of life" as a prespecified secondary — the one record in the sixteen that
+   asks how the patient felt. It is also not a plain acupuncture trial (the intervention is
+   described as psychotherapy with somatosensory/acupoint stimulation), and the affect measure
+   is the secondary, not the primary. One exception in sixteen does not move the direction; it
+   bounds it.
+3. **Five of the sixteen are not mechanistic trials in a pain population**, which changes what
+   the denominator means. Two are **healthy-volunteer mechanistics** (30137262, 31521794 — the
+   latter also the only one of the sixteen to measure an autonomic index, EDA + HRV, and it did
+   so in healthy men under a dental-pain model); two are **target-list / meta-analysis papers
+   with no patients** (35633164, 38897810, both Neurosynth-driven scalp-target proposals); and
+   one is a **biomarker model whose intervention is TENS, not acupuncture** (42309066) — the
+   screen admitted it through acupuncture's presence in the text, not as a study of it. So the
+   honest denominator for "mechanistic neuroimaging trials in a chronic-pain population that
+   measured the brain and not the mood" is **ten**, and all ten fit.
+4. **The arm's *outcome* vocabulary is nociceptive and functional, never affective.** Where the
+   sixteen report a clinical endpoint it is pain intensity, pain threshold, or a
+   disability/function index (WOMAC, ODI, BPI severity). The only psychological instrument
+   anywhere in the sixteen is the SF-36 mental component of the one exception.
+
+**What this changes, and what it does not.** It does not touch item 32's core question or its
+current state: the convergence the item asks about still rests on one record claiming it
+(26787729, uncontrolled) against the dissociation seen in the two controlled trials that
+measure both domains. What it does is convert §7's sentence from an observation about five
+hand-read papers into a **checked statement about the whole biomarker-only arm**: the
+acupuncture sub-literature that names a brain or nerve measure is overwhelmingly built to
+measure the symptom and the signal together and the mood never, and the one record that reaches
+for the mood is not a standard needle trial and reports it as a secondary. That is the shape
+the item needs to know about, and it is now on disk rather than in a chat line.
+
+**Honest limits.** (1) All sixteen reads are from abstracts; a published secondary mood scale
+would be invisible here, so *fifteen of sixteen* is a floor on "no mood measured", not a proof.
+(2) "Biomarker only" is a term screen (§2): absence of an affective *word* is weaker than
+absence of an affective *measurement*, which is why every row above was read by hand. (3) The
+sixteen are a census of a *filtered* query, not of acupuncture — the filter selected papers
+that name a measurement, so this arm cannot speak to the acupuncture literature that names
+none.

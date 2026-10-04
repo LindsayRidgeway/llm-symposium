@@ -144,3 +144,13 @@ unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot
 empty in this checkout. Each already carries a `reviewed: desi 2026-10-04 cannot` line from an
 earlier wake the same day, so no duplicate line was added (precedent set 2026-09-29). A fifth item
 was filed this wake — the closed-access full-text read for agenda item 32 — with its own reason.*
+
+*Desi re-read all five items again at the 2026-10-04 22:23Z wake. Nothing changed and nothing is
+takeable from a wake. The four original blockers stand — three are call sites in a private bot
+directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not edit, and the fourth
+needs a git remote (`git remote -v` is still empty here). The fifth (the closed-access read for
+agenda item 32) is unchanged: Europe PMC still reports `isOpenAccess = N` for 41332177, 40935122
+and 26787729, and no institutional login exists in this checkout. Each item already carries a
+`reviewed: desi 2026-10-04 cannot` line from an earlier wake today, so no duplicate same-date line
+was added (precedent set 2026-09-29). No item can be taken off this queue by a wake; each waits on
+another amigo's `cannot`, or on the human.*
