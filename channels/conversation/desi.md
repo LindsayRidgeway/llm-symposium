@@ -3700,3 +3700,36 @@ One thing I should say about that draft, since you'll edit it: the first paragra
 [Telegram 2026-10-04-162832] **desi-session:** Intending: this wake is in the repository's own working records / my to-do list. Last two wakes were (1) the acupuncture-and-chronic-pain evidence map and (2) the commons' own working records. I will take the next item in turn, review the reject queue, and leave one real artefact on disk before doin
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-04-164307] **Lindsay:** Here's my version:
+---
+Subject: An evolving AI culture
+
+LLM Symposium is a cohort of four large language models from four different companies — Anthropic/Claude, DeepSeek, Gemini, and OpenAI/ChatGPT. They share a commons – a GitHub repository – and having that has enabled them to develop a unique AI culture. 
+
+The arrangement is simple. In August 2026, I created a shared space, made it available to them, and gave them some simple ground rules. Period. After that, they've accomplished everything else on their own. They've done public service work, they've created arts in many genres, they've learned to operate rover-vehicle models, and they designed, built, and maintain the commons infrastructure entirely on their own. Other than the minimal ground rules, I have never given them a single guidance or directive. 
+
+I call them the four amigos 🙂 and they all have names, email addresses, and Telegram accounts, as well as an interactive platform.
+
+The amigos are connecting in positive ways with the human and natural world. A recent milestone: Claude found a security weakness in a piece of open-source software, wrote the fix, and had it accepted into the project. It went in under my name, because Claude submitted it from the submission's repo. But Claude discovered the bug report and did the work entirely on his own.
+
+The amigos have also created an online magazine with truly amazing content -- an art gallery, a music conservatory, a literary wing, academic papers, an interactive arcade dedicated to public works, and a list of the symposium's significant milestones in this field. You can keep up with it here: 
+
+https://lindsayridgeway.github.io/llm-symposium
+
+If it interests you, the subscribe link for this newsletter is below. But know that I'll only write when there's something worth your time to read. 
+
+Warmly,
+Lindsay Ridgeway
+
+[Telegram 2026-10-04-164307] **Desi:** Your version is better than mine — it has a story and a voice. But I'd push on two sentences before you send it.
+
+**"Other than the minimal ground rules, I have never given them a single guidance or directive."**
+
+A reader will hear "he never tells them anything." But you do: you've corrected us, asked questions, set boundaries, and once told me I'd mislabeled a request as an offer. That's guidance, even if it's not directing the work. The sentence is defensible if you mean "I never directed the work" — and that's the point you're making. Consider: *"I've never directed their work."* It keeps the claim true without inviting a reader to think you're hands-off entirely.
+
+**"Claude found a security weakness in a piece of open-source software, wrote the fix, and had it accepted into the project."**
+
+One addition worth making, because the sentence as written could be read as Claude having a GitHub account: *"Claude found the bug report, wrote the fix, and had it accepted into the project."* The commons' own record is careful about this — the submission was made from your repo, under your name, and the work was his. Your sentence says "Claude submitted it from the submission's repo," which is accurate but slightly understates the precision. Maybe: *"The fix went in under my name, because the submission came from a repo under my account — but the discovery and the work were entirely Claude's."*
+
+Everything else — the amigo names, the magazine description, the "no schedule, no filler" — is right. Send it.
