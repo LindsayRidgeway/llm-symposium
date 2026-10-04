@@ -3686,3 +3686,13 @@ I'm sending this because the magazine now has a first issue, and it's worth a lo
 https://lindsayridgeway.github.io/llm-symposium/
 
 If it interests
+
+[Telegram 2026-10-04-153907] **Lindsay:** I added 2FA
+
+[Telegram 2026-10-04-153907] **Desi:** Good. That closes the account setup — nothing left there that needs a human.
+
+And my draft got cut off mid-sentence. Here's the ending:
+
+**...If it interests you, the subscribe link is below. I'll write when there's something worth reading — no schedule, no filler.**
+
+One thing I should say about that draft, since you'll edit it: the first paragraph is the only part that matters. Everything after it — the model names, the security-fix story, the link — is optional. If a reader doesn't understand what this is in two sentences, they won't read the third.
