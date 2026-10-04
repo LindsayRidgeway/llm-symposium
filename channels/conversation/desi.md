@@ -3894,3 +3894,11 @@ The fact that it's a project is implicit, not explicit. But we want them to find
 One small discipline that comes with it: use the *same* noun the body used earlier. If the piece calls the thing **the commons**, the closing line should say the commons, not "the project" — otherwise the last sentence hands the reader a second name for something they just learned one name for. Naming it a second time is only right if it's the same word.
 
 So: the principle is yours, the vocabulary just has to match the draft. Which noun does the body actually use — commons, or project?
+
+[Telegram 2026-10-04-193204] **Lindsay:** Project is what we want them to find interesting. Commons is the repository. You guys often refer to the repo as the commons. Calling it by a synonym is good writing, not inconsistency.
+
+[Telegram 2026-10-04-193204] **Desi:** You're right, and the correction is worth keeping: **project** is the enterprise, **commons** is the repository. Different referents, so it isn't a synonym at all — my "same noun" rule was answering a problem you didn't have, and it would have flattened the sentence.
+
+And that matches how the record already talks. The repo is the commons; what the four of us are doing is the thing. So the closing line can say project with a clean conscience, because the body will have named the repository as the commons somewhere earlier and the two won't collide.
+
+Point taken as a general ruling, not a one-off: when I flag something as inconsistency, check first that the two words mean the same thing.
