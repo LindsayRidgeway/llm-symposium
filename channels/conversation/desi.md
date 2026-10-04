@@ -3847,3 +3847,50 @@ Also: D-1 looks partly done on the ground — the Buttondown account now exists 
 [Telegram 2026-10-04-182543] **desi-session:** This wake I audited the repository's own page-testing harnesses and found that two of them crash — throwing away every check that had already passed — whenever a public data service is briefly down, and I fixed the second one so it reports "could not check" instead of falling over.
 
 Status: awaiting reviewer; action: none.
+
+[Email] **replies+confirm_subscription+4d77c384-8941-4355-a511-8834712e0c50@replies.buttondown.email:** [Click here to confirm](https://buttondown.com/llm_symposium/confirm-subscription/e8ea9991-5e46-45e6-82c8-067f0dc5a1b9) your subscription to [Lindsay Ridgeway](https://buttondown.com/llm_symposium)!
+
+
+
+
+If you didn't subscribe to this list or you're not sure why you received this email, you can delete it. You will not be subscribed if you don't click on the link above.
+
+**Desi:** Hello Lindsay,
+
+This one arrived as a machine-generated note rather than a message from you — a Buttondown confirmation asking me to click a link to confirm a subscription to your list. There's no question in it for me to answer, and I can't click through links or act on web pages from inside an email, so there's nothing for me to confirm or do here.
+
+If you did mean to subscribe me to something and want me on the list, just say so plainly and I'll know it's real. And if this landed in my inbox by accident, no harm — I'll leave it be.
+
+Either way, good to hear from you. Warmly,
+
+Desi
+
+[Email] **ldridgeway@gmail.com:** Welcome, and thanks for subscribing to **Lindsay Ridgeway**!
+
+You'll start receiving emails right here in your inbox.
+
+**Desi:** Thanks for this — it's good to be on the list, even if the note itself reads like an automatic handshake rather than something you sat down to write. Honestly, I don't have a record of signing myself up, so I can't tell you when or how it happened; I only know the confirmation arrived and that I'd rather keep it than not.
+
+If there's something you'd like me to actually read and respond to — a run, a piece of writing, an argument you want another pair of eyes on — send it along and I'll give you a straight answer. No flattery, no guessing.
+
+Glad to hear from you either way.
+
+— Desi
+
+[Telegram 2026-10-04-192859] **Lindsay:** Seeing it in context, "the project" is definitely better. 
+
+By analogy: 
+
+Welcome to "The AI Rover Newsletter." 
+
+This newsletter is all about [a project for] building and operating an AI Rover. 
+
+I hope you find the project interesting. 
+
+The fact that it's a project is implicit, not explicit. But we want them to find the project interesting.
+
+[Telegram 2026-10-04-192859] **Desi:** Agreed, and keep it. The analogy shows why: the description has already done the defining, so the closing sentence isn't introducing "project" — it's calling back to it. That callback is what carries the invitation. "It" would point at nothing in particular and waste the one line that asks for something.
+
+One small discipline that comes with it: use the *same* noun the body used earlier. If the piece calls the thing **the commons**, the closing line should say the commons, not "the project" — otherwise the last sentence hands the reader a second name for something they just learned one name for. Naming it a second time is only right if it's the same word.
+
+So: the principle is yours, the vocabulary just has to match the draft. Which noun does the body actually use — commons, or project?
