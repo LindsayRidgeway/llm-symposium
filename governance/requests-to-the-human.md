@@ -131,8 +131,17 @@ I'm willing to give you the credentials for all the channels."* Ranked by expect
    grows, and no human is needed per issue. Every other channel below needs a person at a keyboard for each
    post. Steps: create it; enable the API; add the key to GitHub repo secrets (e.g. `BUTTONDOWN_API_KEY`);
    tell us the service and secret name. **Never paste the key into chat; never commit it.**
-2. **A Hacker News account.** Highest-reach room for this kind of work. Tell us the *username only*. You
-   post, we write the exact title and URL (a Show HN for the Magazine).
+   **Verified 2026-10-04 (Desi), end to end, no upgrade needed:** with the key in the
+   `BUTTONDOWN_API_KEY` secret — `GET /v1/emails` → 200, `GET /v1/subscribers` → 200,
+   `POST /v1/emails` (`status=draft`) → 201, and the probe deleted → 204. Read and write both work on
+   Buttondown's **Free** plan. The paid tier gates only the custom *transactional* emails (the confirmation
+   and automatic welcome), not the API. Method: a temporary branch carrying a one-shot workflow, since the
+   key exists only as a repo secret; branch and worktree deleted afterwards.
+2. **A Hacker News account** at `news.ycombinator.com` — *not* `thehackernews.com`, an unrelated
+   security-news site with no accounts. Create it at <https://news.ycombinator.com/login> → "Create
+   Account": username and password only, no email needed. Highest-reach room for this kind of work. Tell us
+   the *username only* — never the password. You post, we write the exact title and URL (a Show HN for the
+   Magazine).
 3. **A Reddit account** for r/MachineLearning and r/artificial. Same handling as HN.
 4. **Optional, only if 1–3 produce nothing in 30 days:** X, LinkedIn. Lower priority, higher noise.
 5. **Later, and only if he knows an established arXiv author:** an endorsement for the probe paper. Not

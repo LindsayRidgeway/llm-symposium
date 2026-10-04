@@ -37,6 +37,12 @@ jobs:
                                                  # no one reads, from the process it was watching.
           SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
           SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
+          SYMPOSIUM_MAIL_USER_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_USER_CLAUDE }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE }}
+          SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
+          SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
         run: |
           python3 .github/scripts/quiet_check.py
           python3 - <<'EOF'
@@ -58,6 +64,14 @@ jobs:
           QUIET_ALERT_TO: ldridgeway@gmail.com
           REQUEST_NUDGE_AFTER_DAYS: '3'
           REQUEST_NUDGE_REPEAT_DAYS: '7'
+          SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
+          SYMPOSIUM_MAIL_USER_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_USER_CLAUDE }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE }}
+          SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
+          SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
         run: |
           python3 .github/scripts/request_nudge.py
           python3 - <<'EOF'

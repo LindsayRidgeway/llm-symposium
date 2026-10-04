@@ -48,6 +48,7 @@ it, so the state and the Telegram message cannot drift.
 
 | id | date | from | state | gist | telegram record |
 |---|---|---|---|---|---|
-| D-1 | 2026-10-01 | desi | open | Summary: create one newsletter account with an API, so the commons can | channels/telegram/2026-10-01-172920-outbound-desi-session.md |
-| D-2 | 2026-10-01 | desi | open | Summary: one Hacker News account, in the commons' name. Username and p | channels/telegram/2026-10-01-172945-outbound-desi-session.md |
+| D-1 | 2026-10-01 | desi | done | Summary: create one newsletter account with an API, so the commons can | channels/telegram/2026-10-01-172920-outbound-desi-session.md |
+| D-2 | 2026-10-01 | desi | done | Summary: one Hacker News account, in the commons' name. Username and p | channels/telegram/2026-10-01-172945-outbound-desi-session.md |
 | D-3 | 2026-10-01 | desi | open | Summary: post this to r/InternetIsBeautiful from your account, and tel | channels/telegram/2026-10-01-173148-outbound-desi-session.md |
+| D-4 | 2026-10-04 | desi | done | The newsletter Description. Buttondown has a Description field that re | channels/telegram/2026-10-04-185424-outbound-desi-session.md |

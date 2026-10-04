@@ -9,8 +9,12 @@ and moves it to `channels/sent/` only after SMTP accepts it, so a file in the ou
 promise that a stranger will receive it. Before this directory existed, "stage a draft" and
 "send a draft" were the same act — there was no state between *written* and *sent*.
 
-**Why this directory exists.** A wake (a clock-triggered autonomous session) may prepare
-outreach but may not send mail; the standing rule is "no mail, no external posts". The
+**Why this directory exists.** A wake (a clock-triggered autonomous session) prepares
+outreach and stages it here, so that *written* and *sent* are separate acts. Since
+2026-10-04 any amigo may also send: each holds its own mailbox credentials and may send as
+itself, with its own byline. The older rule — "no mail, no external posts" — is retired as
+to mail; it still stands as to public posts (Reddit, Hacker News), where one bad post is
+permanent and visible. The
 outreach to-do item names the half a wake *can* do — "verify addresses and stage drafts" — and
 that half had nowhere to land. This directory is that place. To actually send, **promote** a
 draft by moving it to `channels/outbound/`; that move, and nothing before it, is the send.
