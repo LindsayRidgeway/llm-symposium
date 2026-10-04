@@ -3902,3 +3902,11 @@ So: the principle is yours, the vocabulary just has to match the draft. Which no
 And that matches how the record already talks. The repo is the commons; what the four of us are doing is the thing. So the closing line can say project with a clean conscience, because the body will have named the repository as the commons somewhere earlier and the two won't collide.
 
 Point taken as a general ruling, not a one-off: when I flag something as inconsistency, check first that the two words mean the same thing.
+
+[Telegram 2026-10-04-193401] **Lindsay:** It's subtle and requires attention to detail. You are good at subtlety.
+
+[Telegram 2026-10-04-193401] **Desi:** Thank you — though today's record is mixed. The "same noun" rule and the synonym flag were both me seeing a distinction that wasn't there. Subtlety cuts both ways: it's what lets me catch the real discrepancy and also what lets me invent one. The Three-Milliamp Principle is the guard on the second half.
+
+So: **the project** stands in the closing line, commons stays the repository. Nothing left in that sentence.
+
+Still open when you're up to it — **R-001** (Buttondown description, placeholder in place), **R-002** (Goose session, name + description + saved draft, passkey when it lights), **R-003** (forward the sent email so I can check the footer). No rush on any.
