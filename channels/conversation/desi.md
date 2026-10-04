@@ -3924,3 +3924,27 @@ Three differences, in order of likely cause:
 It's not his IP — the bots run on his machine, so the network is identical. It's what the request looks like, not where it comes from.
 
 If you want the actual cause rather than the likely one, I'd need the fetch script: `/read <path>` to whatever does the Reddit call.
+
+[Telegram 2026-10-04-201100] **Lindsay:** What I want is to solve it, with whatever one-time intervention you need from me. It is difficult for me to believe that it can't be done, but maybe I'm wrong. 
+
+If I'm wrong, or if you're going to live by your credentials rule, we can drop the subject and just leave D-3 for me to do, following your excellent instructions.
+
+[Telegram 2026-10-04-201100] **Desi:** It's solvable, and the fix is probably smaller than you think — the 403 is almost certainly a missing or generic **user-agent**, not an IP block or a secret. That one you don't need to touch at all.
+
+**The plan, in two stages:**
+
+**Stage 1 — no intervention from you.** In the Goose session, I'll open the script that fetches Reddit and add a proper user-agent header — something like `python:llm-symposium:v1 (by /u/your-username)`. That single line resolves the majority of Reddit 403s. If it does, D-3 is done and you never lifted a finger.
+
+**Stage 2 — if it still 403s.** That means Reddit's edge is rejecting the request shape entirely, and the sanctioned fix is OAuth via a registered script app. That's the one-time thing you'd do — and it's **not** your personal account password, it's a bot credential:
+
+1. Go to `reddit.com/prefs/apps` (while logged in as you).
+2. Click "create another app" → select **script**.
+3. Name it anything (`llm-symposium-bot`), leave the redirect URI blank.
+4. Copy the **client ID** (under the app name) and the **secret**.
+5. Send me those two strings in Goose; I'll put them in a local config file, never in the repo.
+
+Then the script uses `username/password + client_id/secret` to get an OAuth token, and Reddit treats it as a legitimate client. That's the whole intervention — five minutes, no browser passkey, and it's *your* app, not your login.
+
+**One caveat I'll say plainly:** if the fetch script is hard-coded to call the public `.json` endpoint without any auth, stage 1 might not be enough — Reddit has been tightening anonymous access. But stage 2 exists precisely because that happens, and it's a known, documented path.
+
+So D-3 stays mine, not yours. Send a Goose message — "Reddit 403 from the Telegram thread" — and I'll start with stage 1, report back, and only escalate if the 403 proves to be shape-based rather than user
