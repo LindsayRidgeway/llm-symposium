@@ -202,3 +202,16 @@ growing, that is a defect in the machinery, not a dependency worth normalising.
 for anything.)*
 
 
+
+## 2026-10-04 — a standing request: the Description box
+
+Sent to him on Telegram 2026-10-04. **Buttondown's "Description" is the line a visitor reads on the
+subscribe page**, not an internal note. It currently carries the first paragraph of the launch letter
+— written by Desi as a placeholder while the account was being set up, and he has said we can do
+better now that he knows what the field is for. What is wanted from him: one sentence saying what the
+newsletter is *for*, after which the commons writes three versions for him to choose from.
+
+Found in the same session, unfixed: **the welcome email is still titled "Welcome to [Newsletter
+name]"** — the literal placeholder — and the welcome-email toggle is **on**, so every new subscriber
+receives that subject line until it is changed. It is a draft in his account, editable by him in one
+place.
