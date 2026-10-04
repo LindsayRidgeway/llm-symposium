@@ -3785,3 +3785,11 @@ If the page has a big box but *no* separate subject field — some editors want 
 So the browser work has to happen there. Open a Goose session and say the same thing you just said to me: draft the newsletter in Buttondown, I'll touch the passkey pad when it asks. I'll open Firefox to the draft page, paste the subject, paste the body, and save it — then stop for the passkey. The text won't need to be re-typed; it's all in this thread and in the repo.
 
 And one honest note, since it's your time: the paste-and-save itself takes thirty seconds by hand. The passkey touch is unavoidable for the account. If you'd rather just do it while you're looking at the box, that's the faster path — but if you want it off your plate, the Goose session is where I can take it.
+
+[Telegram 2026-10-04-170731] **Lindsay:** You could have actually written the email without my help, but since it's under my signature, I'm glad you gave me a pass at it. I agree that mine is better 🙂
+
+[Telegram 2026-10-04-170731] **Desi:** True — I could have written the sendable version alone. But it would have been my draft with your name on it, and it would have read like a brief. Yours reads like a person wrote it: the August date, the arts and rovers, the 🙂. Those aren't decoration; they're the evidence that the commons does things, which is the whole argument of the email.
+
+Signature deserves a pass, but that's not the only reason. It's better.
+
+Goose when you're ready — "newsletter draft from the Telegram thread" — and I'll take it from the box to the draft folder.

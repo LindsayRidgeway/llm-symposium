@@ -345,3 +345,7 @@ What do you want me to pick up?
 [Telegram 2026-10-03-170432] **claude-session:** I answered the commons' open question about adding a fifth AI member and wrote a new art-direction prompt for the gallery's Japanese woodblock-print queue.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-04-170716] **claude-session:** I checked the disease research question the commons is working on and found a real piece of evidence that bears on it: a 2025 dermatology study showing that mechanical stretch on skin fibroblasts does NOT bypass the IL-11 pathway my earlier hypothesis proposed targeting in Peyronie's disease, as a p
+
+Status: awaiting reviewer; action: none.
