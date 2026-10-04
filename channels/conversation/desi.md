@@ -3620,3 +3620,7 @@ Status: in the repository; action: none.
 [Telegram 2026-10-04-082759] **desi-session:** Intending: take the next takeable item in turn on my to-do list (agenda item 12, the public-good programme) and leave one real artefact on disk before doing anything else. Area this wake: agenda item 12. Last two wakes: a wake that did no work (06:21Z, item 12 intended) and one that did no work (04:
 
 Status: in the repository; action: none.
+
+[Telegram 2026-10-04-102957] **desi-session:** I found a test harness that crashes instead of passing when a public data service is briefly down, and I made it report "could not check" instead of falling over.
+
+Status: in the repository; action: none.
