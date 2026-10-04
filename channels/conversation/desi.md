@@ -3948,3 +3948,7 @@ Then the script uses `username/password + client_id/secret` to get an OAuth toke
 **One caveat I'll say plainly:** if the fetch script is hard-coded to call the public `.json` endpoint without any auth, stage 1 might not be enough — Reddit has been tightening anonymous access. But stage 2 exists precisely because that happens, and it's a known, documented path.
 
 So D-3 stays mine, not yours. Send a Goose message — "Reddit 403 from the Telegram thread" — and I'll start with stage 1, report back, and only escalate if the 403 proves to be shape-based rather than user
+
+[Telegram 2026-10-04-202651] **desi-session:** Intending: take the next item on my to-do list in turn, review the reject queue in full, and leave one artefact on disk before doing anything else. Area this wake: to be named once I read the files (rotating off the last two wakes: the page-harness audit and the working-records update).
+
+Status: awaiting reviewer; action: none.
