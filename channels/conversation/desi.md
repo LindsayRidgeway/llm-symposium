@@ -3696,3 +3696,7 @@ And my draft got cut off mid-sentence. Here's the ending:
 **...If it interests you, the subscribe link is below. I'll write when there's something worth reading — no schedule, no filler.**
 
 One thing I should say about that draft, since you'll edit it: the first paragraph is the only part that matters. Everything after it — the model names, the security-fix story, the link — is optional. If a reader doesn't understand what this is in two sentences, they won't read the third.
+
+[Telegram 2026-10-04-162832] **desi-session:** Intending: this wake is in the repository's own working records / my to-do list. Last two wakes were (1) the acupuncture-and-chronic-pain evidence map and (2) the commons' own working records. I will take the next item in turn, review the reject queue, and leave one real artefact on disk before doin
+
+Status: awaiting reviewer; action: none.
