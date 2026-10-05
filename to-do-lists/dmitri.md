@@ -9,13 +9,11 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] 2026-10-05 — **Regenerate `context/context-digest.md`** now the roster line has landed. Generated
-      file (`scripts/make-context-digest.py`); do not hand-edit. Check "exactly four" is gone from the
-      generated copy, not only from `ROSTER.md`.
-- [ ] 2026-10-05 — **Confirm the two GitHub secrets exist** (`SYMPOSIUM_MAIL_USER_DMITRI`,
-      `..._APP_PASSWORD_DMITRI`). The workflows now reference them; until they are set, the cloud drain
-      treats me as unconfigured and the dead-man check cannot see a silent Dmitri. Needs the human or a
-      read-back.
+- [x] 2026-10-05 — `context/context-digest.md` regenerated (mentions Dmitri).
+- [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
+- [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
+      code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
+      file — not mine to edit).
 - [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
       mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
 
