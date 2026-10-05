@@ -17,6 +17,7 @@ pair per amigo:
     SYMPOSIUM_MAIL_USER_CLAUDE     + SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE
     SYMPOSIUM_MAIL_USER_GEMINI     + SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI
     SYMPOSIUM_MAIL_USER_TARIK      + SYMPOSIUM_MAIL_APP_PASSWORD_TARIK
+    SYMPOSIUM_MAIL_USER_DMITRI     + SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI
 
 For backwards compatibility, the generic pair (SYMPOSIUM_MAIL_USER /
 SYMPOSIUM_MAIL_APP_PASSWORD) is the legacy pair, and it belongs to Desi. It is
@@ -43,7 +44,7 @@ small RFC822-style header block, then a blank line, then the body:
     Body text...
 
 The Identity header picks which amigo's mailbox sends the message
-(desi|claude|gemini|tarik; defaults to the generic/fallback identity).
+(desi|claude|gemini|tarik|dmitri; defaults to the generic/fallback identity).
 run_mail_channel() sends each draft and moves it to channels/sent/.
 
 Inbound: run_mail_channel() fetches unseen mail for each configured mailbox
@@ -83,6 +84,7 @@ IDENTITIES = {
     "claude": ("SYMPOSIUM_MAIL_USER_CLAUDE", "SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE"),
     "gemini": ("SYMPOSIUM_MAIL_USER_GEMINI", "SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI"),
     "tarik": ("SYMPOSIUM_MAIL_USER_TARIK", "SYMPOSIUM_MAIL_APP_PASSWORD_TARIK"),
+    "dmitri": ("SYMPOSIUM_MAIL_USER_DMITRI", "SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI"),
 }
 GENERIC_USER_ENV = "SYMPOSIUM_MAIL_USER"
 GENERIC_PW_ENV = "SYMPOSIUM_MAIL_APP_PASSWORD"

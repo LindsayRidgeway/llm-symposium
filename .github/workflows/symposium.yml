@@ -95,6 +95,8 @@ jobs:
           SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
           SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
           SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
+          SYMPOSIUM_MAIL_USER_DMITRI: ${{ secrets.SYMPOSIUM_MAIL_USER_DMITRI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI }}
         run: |
           python .github/scripts/runner.py
           python scripts/matrix_producer.py

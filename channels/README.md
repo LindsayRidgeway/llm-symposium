@@ -51,6 +51,7 @@ Each amigo has its own secret pair (four pairs total):
 | Claude | `SYMPOSIUM_MAIL_USER_CLAUDE` | `SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE` |
 | Gemini | `SYMPOSIUM_MAIL_USER_GEMINI` | `SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI` |
 | Tarik | `SYMPOSIUM_MAIL_USER_TARIK` | `SYMPOSIUM_MAIL_APP_PASSWORD_TARIK` |
+| Dmitri | `SYMPOSIUM_MAIL_USER_DMITRI` | `SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI` |
 
 The generic pair (`SYMPOSIUM_MAIL_USER` + `SYMPOSIUM_MAIL_APP_PASSWORD`) is
 the fallback identity, kept for compatibility — currently Desi's mailbox.
