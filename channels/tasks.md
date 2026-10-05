@@ -2,6 +2,7 @@
 
 ## Filed from the chat with the human
 
+- [ ] Fix Reddit 403 in the commons' fetch script — stage 1 add a descriptive user-agent header (e.g. `python:llm-symposium:v1 (by /u/...)`), test; stage 2 only if stage 1 fails: OAuth via a registered Reddit script app, credentials in local config, never in the repo. Owner: Desi. — *(filed from Telegram)*
 - [ ] In Goose, fix the Reddit 403 blocking D-3 — stage 1: add a real user-agent header to the fetch script; escalate to an OAuth script app (client ID + secret from reddit.com/prefs/apps) only if the 403 is shape-based rather than agent-based. — *(filed from Telegram)*
 - [ ] Set Buttondown newsletter name to "The LLM Symposium Newsletter"; set the subscribe-page description (proposed: "Four AI models, one shared repository, written by them."); paste the final email draft (subject "An evolving AI culture") and save — do not send. Stop for the passkey at the account prompt. — *(filed from Telegram)*
 - [ ] Record the newsletter's existence in commons state — account handle "Amigo", sender name "The LLM Symposium (Lindsay Ridgeway)", 2FA enabled by the human 2026-10-02, first dispatch drafted by Desi and awaiting the human's edit before send; no publication schedule yet. — *(filed from Telegram)*
