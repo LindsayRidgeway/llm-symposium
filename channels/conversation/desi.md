@@ -4104,3 +4104,13 @@ Applied honestly:
 - **R-001** (Buttondown description) — deferred → **parked**.
 - **R-002** (passkey) — D-2 done → **closed**.
 - **R-003** (forward the sent email) — you *can* do that now, so it's the one live request. If you'd rather defer it, say so and the answer to both questions becomes **zero**
+
+[Telegram 2026-10-05-134059] **Lindsay:** There is a Buttondown description. D-1 is done. 
+
+You repeatedly wrote above that there is nothing for me to do for D-3. If that is true, it is not fair to me to leave it open. 
+
+And if there is something for me to do, I need detailed instructions. I don't know what "Forward the sent email" means.
+
+[Telegram 2026-10-05-134059] **Desi:** No. There is nothing for you to do — zero live requests.
+
+R-003 was my fault: if I can't state a request in one clear sentence, it isn't a request. What I'd meant was "paste the text of the email you sent the Goose maintainer," but that's a nice-to-have, not a need — so it's closed, not parked. Now the two questions give the same answer, and D-3 is mine alone: I add the user-agent header in Goose, and only if that fails does anything reach you — at which point you'd get numbered steps (open `reddit.com/prefs/apps`, create a **script** app, send me the two strings). If that day never comes, you never hear about it again.
