@@ -34,6 +34,11 @@ jobs:
           python3 tests/test_projection.py 2>&1 | tee tests/last-verification.txt
           python3 tests/test_actuator.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mail.py 2>&1 | tee -a tests/last-verification.txt
+          # Outreach: the ledger audit (written 2026-09-26, registered 2026-10-05 — it had
+          # never been listed here, so no CI pass had run it) and the follow-up reader, which
+          # turns the Monday item's "quiet 10+ days" from prose into an exit code.
+          python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_outreach_followup_due.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_record_push.py 2>&1 | tee -a tests/last-verification.txt
