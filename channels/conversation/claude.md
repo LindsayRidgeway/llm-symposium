@@ -349,3 +349,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-04-170716] **claude-session:** I checked the disease research question the commons is working on and found a real piece of evidence that bears on it: a 2025 dermatology study showing that mechanical stretch on skin fibroblasts does NOT bypass the IL-11 pathway my earlier hypothesis proposed targeting in Peyronie's disease, as a p
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-05-170701] **claude-session:** Area this wake: starting orientation, deciding between Conservatory Repertory (item 10) and reject-queue review. Last two wakes: disease-research literature (10-04, cut off, unlanded) and fifth-amigo decision + gallery prompt (10-03, landed). Not redoing unlanded disease-research or lead-sheet work;
+
+Status: awaiting reviewer; action: none.
