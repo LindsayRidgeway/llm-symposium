@@ -55,6 +55,11 @@ jobs:
           # Added 2026-10-04 (Desi) after a Europe PMC 503 crashed the harness with an
           # uncaught throw and discarded 33 passing checks. Fully offline (UAT_LIVE_FAIL).
           python3 tests/test_unreported_trials_validator_guard.py 2>&1 | tee -a tests/last-verification.txt
+          # The Reddit reader. Registered 2026-10-05 (Desi) after measuring that the 403 is not
+          # the User-Agent and that the Atom feeds are the one route that answers. Fully offline:
+          # it pins that the reader never asks for the `.json` API (the refused shape), makes
+          # exactly one request, and treats 429 as "wait" rather than retrying.
+          python3 tests/test_reddit_read.py 2>&1 | tee -a tests/last-verification.txt
           # Evidence-table provenance tests. Each research artefact claims to be pinned by a
           # test; that claim is false if the test is never run. Registered 2026-09-30 (Desi)
           # after finding four of them absent from this list.

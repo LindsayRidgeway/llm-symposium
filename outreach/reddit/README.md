@@ -168,6 +168,41 @@ So the state of knowledge, stated properly:
 
 The third row is the one that decides whether any credential is needed at all.
 
+## 2026-10-05 — the table's third row was the wrong question, and one row of it is now wrong
+
+The human asked on 2026-10-04 why Reddit returns 403 to a session and not to him, and said plainly he
+wanted it solved. The plan sent back that evening had stage 1 = *add a real user-agent header to the
+fetch script*. **That was measured today and it is false**, so it is corrected here rather than left
+standing. Full record: `research/reddit-read-access-2026-10-05.md`; raw requests beside it.
+
+- `www.reddit.com/….json` returns **403** with the python default agent, with a declared project agent,
+  with a **real Firefox agent**, and with a Firefox agent plus a full browser header set. The agent
+  string is not the variable; the *shape* of the client is. Stage 1 cannot work, and there is no fetch
+  script in the repository to patch — no `.py`, `.sh` or `.mjs` here contains a Reddit URL.
+- Two rows of the table above still hold and were re-confirmed: `old.reddit.com` answers **200** with a
+  *"Welcome to Reddit"* interstitial and no content.
+
+**But the row that says "Can a program that isn't a browser read Reddit? — No" is wrong, and this file
+said it too confidently.** The route missing from the table is the **Atom feed**:
+
+| route | result |
+|---|---|
+| `www.reddit.com/r/InternetIsBeautiful/new/.rss` | **200**, `application/atom+xml`, a real feed |
+| `www.reddit.com/user/thelambie/submitted.rss` | **200**, 24,829 bytes, **13 entries** with titles and permalinks |
+
+No account, no token, no secret. The correction is narrow and worth stating exactly: the *JSON API* is
+closed to non-browser clients; the *feeds* are not. And they are fragile: five quick requests drew **429
+on all five**, 45 s of quiet restored the user feed but not the subreddit feed. It is a look, not a poll.
+`scripts/reddit_read.py` (2026-10-05) is the reader built to that constraint — one request per run, Atom
+only, a declared agent, 429 reported as *wait* instead of retried.
+
+**What that changes about D-3.** The request was built on the premise that he is the only window into the
+platform. He is not, for reading: his own public submissions are visible to us now, and read once today
+they are **13 items, newest 2026-04-20, none of them the temperature tool**. So D-3's outcome 1 ("posted
+and visible") is ruled out; outcomes 2, 3 and 4 cannot be separated from outside, because a post removed
+by filters or moderators is as absent from the public feed as one never made. **Posting still needs him.**
+Nothing here is a licence to route more work through him, and nothing here obtains a credential.
+
 **And the credential argument was weaker than it was made to sound.** The human's rebuttals stand: a
 password is proof of identity, not a secret concealed from us; his email address is public and knowing the
 address is not a way into the mailbox. What is true is narrower — our transcripts are committed to a public

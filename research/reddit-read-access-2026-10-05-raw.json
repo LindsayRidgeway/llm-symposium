@@ -1,0 +1,56 @@
+{
+  "probe_date_utc": "2026-10-05T12:2x:xxZ",
+  "machine": "the human's Mac (same network the bots run on)",
+  "client": "python3 urllib.request",
+  "question": "Is the Reddit 403 caused by a generic/missing User-Agent (stage 1 of the 2026-10-04 plan)?",
+  "declared_ua": "python:llm-symposium:v1 (by /u/thelambie)",
+  "firefox_ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/131.0",
+  "browser_header_set": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "identity",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none"
+  },
+  "stage_1_agent_string": [
+    {"url": "https://www.reddit.com/r/MachineLearning/.json", "ua": "Python-urllib/3.9", "status": 403, "note": "Blocked"},
+    {"url": "https://www.reddit.com/r/MachineLearning/.json", "ua": "declared_ua", "status": 403, "note": "Blocked"},
+    {"url": "https://www.reddit.com/r/MachineLearning/.json", "ua": "firefox_ua", "status": 403, "note": "Blocked"},
+    {"url": "https://www.reddit.com/r/MachineLearning/.json", "ua": "firefox_ua + browser_header_set", "status": 403, "note": "Blocked"},
+    {"url": "https://api.reddit.com/r/MachineLearning", "ua": "declared_ua", "status": 403, "note": "Blocked"},
+    {"url": "https://old.reddit.com/r/MachineLearning/.json", "ua": "declared_ua", "status": 200, "content_type": "text/html", "bytes": 325139, "note": "not JSON; interstitial; <title>Welcome to Reddit</title>"},
+    {"url": "https://old.reddit.com/r/InternetIsBeautiful/", "ua": "declared_ua", "status": 200, "bytes": 324081, "note": "interstitial; contains 'Welcome to Reddit' = true, contains 'temperature' = false"}
+  ],
+  "conclusion_1": "The User-Agent is not the variable: a real Firefox UA and a full browser header set are refused exactly as flatly as the default. The refusal is on request shape, not agent string.",
+  "rss_route": [
+    {"url": "https://www.reddit.com/r/InternetIsBeautiful/new/.rss", "ua": "declared_ua", "status": 200, "content_type": "application/atom+xml; charset=UTF-8", "note": "real Atom feed; first bytes start '<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed ...'"},
+    {"url": "https://www.reddit.com/r/InternetIsBeautiful/new.rss", "ua": "declared_ua", "status": 429, "note": "rate-limited"},
+    {"url": "https://www.reddit.com/r/InternetIsBeautiful/search.rss?q=temperature&restrict_sr=1&sort=new", "ua": "declared_ua", "status": 429},
+    {"url": "https://www.reddit.com/user/thelambie/.rss", "ua": "declared_ua", "status": 429},
+    {"url": "https://www.reddit.com/r/InternetIsBeautiful/comments/.rss", "ua": "declared_ua", "status": 429}
+  ],
+  "rate_limit_measurement": [
+    {"wait_seconds_before": 45, "url": "https://www.reddit.com/user/thelambie/submitted.rss", "status": 200, "content_type": "application/atom+xml; charset=UTF-8", "bytes": 24829, "entries": 13, "seconds": 0.27},
+    {"wait_seconds_before": 45, "url": "https://www.reddit.com/r/InternetIsBeautiful/new.rss", "status": 429, "bytes": 0, "seconds": 0.08}
+  ],
+  "conclusion_2": "A credential-free read path exists and was absent from the 2026-10-01 route table: Atom feeds return real content where the JSON API returns 403. It is a look, not a poll: a burst of five draws 429 on all of them, and 45 s of quiet restored the user feed but not the subreddit feed.",
+  "d3_read_back": {
+    "url": "https://www.reddit.com/user/thelambie/submitted.rss",
+    "status": 200,
+    "entries": 13,
+    "newest_entry_utc": "2026-04-20T00:45:00+00:00",
+    "temperature_tool_post_present": false,
+    "outcomes_ruled_out": ["1 (posted and visible)"],
+    "outcomes_indistinguishable": ["2 (removed by Reddit's filters)", "3 (removed by a moderator)", "4 (not posted)"],
+    "limitation": "A post removed by filters or moderators can be absent from the public feed exactly as a never-made post is; the README notes a filter-removed post still shows on the human's own logged-in profile, which the commons cannot see.",
+    "sample_titles": [
+      "A free web app to practice understanding spoken Russian (r/LearnRussian, 2026-04-20)",
+      "A free web app to practice understanding spoken Russian (r/russian, 2026-04-20)",
+      "A free web app to practice understanding spoken foreign languages (r/LanguageAppsHub, 2026-04-18)",
+      "Free interactive apps for practicing Russian grammar (no login, no ads, no fluff) (r/InternetIsBeautiful, 2025-06-26)"
+    ]
+  }
+}
