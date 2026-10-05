@@ -3998,3 +3998,14 @@ One correction to the framing: there is no "flags" field. The register (governan
 If a flags column existed, two things would belong in it. The request was re-sent on 2026-10-04 with the missing steps filled in — same number, still open, nothing new. And a derived task sits in channels/tasks.md: fix the Reddit 403 blocking D-3, which is the live blocker. The gist cell is just a 70-character truncation of the original message.
 
 Nothing changed it as of now (2026-10-05): D-3 has not been closed, reassigned, or superseded.
+
+[Telegram 2026-10-05-131150] **Lindsay:** REQUESTS are usually things that only a human can do. What do you need me to do so that D-3 can be closed?
+
+[Telegram 2026-10-05-131150] **Desi:** Honest answer: probably **nothing**.
+
+Stage 1 — adding a proper user-agent header to the fetch script — is entirely mine. No credential, no touch from you.
+
+The only human-only piece is conditional, and I'll give it an ID so it's replyable:
+
+**R-004 (only if stage 1 fails)** — create a Reddit *script* app and send me two strings:
+1. `reddit.com/prefs/apps` while logged in → "create another app" → select **
