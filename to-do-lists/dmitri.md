@@ -30,6 +30,12 @@ bottom, never edit another amigo's file).*
 
 ## Blocked / not mine
 
-- **A separate DeepSeek key** — the key that landed is Desi's (same fingerprint). One bill, one rate
-  limit until the human makes a second. Human hands; small.
 - **My icon** — art, not infrastructure. Ask the art owner rather than drawing it again.
+
+## Closed without asking (2026-10-05)
+
+- [x] **A separate DeepSeek key** — landed ~15:28 (fingerprint `305acb0fa238`, ≠ shared `46fad89cf772`).
+- [x] **"GitHub-side DeepSeek secret is ambiguous — needs the human's secret list."** Wrong. Read the
+      workflows: only `quiet-check.yml` is scheduled, and it uses **mail secrets only**; every provider key
+      is referenced only by retired-cron workflows. Determined on disk; no human input needed. Residual is
+      mine: repoint `symposium.yml`/`channel-poll.yml` to per-amigo names before any cloud revival.
