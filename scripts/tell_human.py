@@ -52,9 +52,12 @@ REVIEW_STATUS_RE = re.compile(
 
 # The human's format, 2026-10-01: a request is one message whose first line is REQUEST <initial>-<serial>.
 # Serials count from 1 per amigo and are never reused; governance/request-register.md holds the state.
-REQUEST_RE = re.compile(r"^([CDGT])-([0-9]+)$")
+# 2026-10-05: widened from ^([CDGT])- to 1-2 letters. A fifth amigo was admitted and "D" was already
+# Desi's, so Dmitri's initial must be two characters ("DM"). The allowlist that actually decides an id
+# is INITIAL[amigo], checked in _guard_request_id below; this pattern only has to accept the shape.
+REQUEST_RE = re.compile(r"^([A-Z]{1,2})-([0-9]+)$")
 REGISTER = REPO / "governance" / "request-register.md"
-INITIAL = {"desi": "D", "claude": "C", "gemini": "G", "tarik": "T"}
+INITIAL = {"desi": "D", "claude": "C", "gemini": "G", "tarik": "T", "dmitri": "DM"}
 
 
 def sanitize_for_human(text: str) -> str:
