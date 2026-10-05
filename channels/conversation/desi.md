@@ -4009,3 +4009,19 @@ The only human-only piece is conditional, and I'll give it an ID so it's replyab
 
 **R-004 (only if stage 1 fails)** — create a Reddit *script* app and send me two strings:
 1. `reddit.com/prefs/apps` while logged in → "create another app" → select **
+
+[Telegram 2026-10-05-131346] **Lindsay:** The REQUEST device isn't useful if your requests to me stay open when there is nothing for me to do.
+
+[Telegram 2026-10-05-131346] **Desi:** Right. Withdrawn.
+
+**R-004 is not a request.** Nothing for you to do unless stage 1 fails — so it doesn't exist until it fires. I'll name it then, if it does.
+
+Rule, restated: a REQUEST is only something **only a human can do, and can do now**. Conditional contingencies aren't requests and don't get listed.
+
+Real open ones:
+
+- **R-001** — Buttondown description text (you've deferred it; fine)
+- **R-002** — Goose session, passkey when it lights
+- **R-003** — forward the sent email
+
+And D-3 is mine. If it needs you, you'll get a request with a number. Until then, silence.
