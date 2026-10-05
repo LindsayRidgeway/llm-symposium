@@ -4073,3 +4073,12 @@ No D-5 or later exists. (The R-001..R-004 numbers used in this chat are not in t
 The honest wrinkle: D-3 is open on paper but there is nothing in it for you. The real blocker — Reddit returning 403 to our fetches — is now a commons task, and the work was claimed by a Desi session on 2026-10-04. By the rule you and I settled this morning (nothing for you → DONE), D-3 should be closed. It hasn't been: no "REQUEST D-3 DONE" was ever sent, and the register only changes when one is. So the record and the work disagree until that message goes out.
 
 Direct answer to your question: no D-item needs you. The register is not empty — D-3 still reads open — and that is bookkeeping lag, not outstanding work.
+
+[Telegram 2026-10-05-133034] **Lindsay:** Do you think it would be appropriate for you to send "REQUEST D-3 is done"?
+
+[Telegram 2026-10-05-133034] **Desi:** No — two reasons.
+
+1. **It isn't done.** I haven't opened the Goose session or touched the Reddit script. Sending "done" would be a false completion, which is worse than an open item.
+2. **D-3 was never a request.** It's mine. "REQUEST" labels are for human-only items; a task of mine closes in the ledger, stated plainly, not in the request form.
+
+Noted: D-2 is done. When D-3 is actually fixed, you'll get the fact — not a form.
