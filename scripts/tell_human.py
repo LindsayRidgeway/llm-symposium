@@ -17,6 +17,9 @@ Usage:
     python3 scripts/tell_human.py --amigo desi --text-file /tmp/answer.md
     echo "the answer" | python3 scripts/tell_human.py --amigo desi
 
+A request can also be closed without sending, when the closing fact already went out through the
+chat — `--close-recorded D-3 --note "<where it is on the record>"`. See `_append_closure_note`.
+
 Deliberately small: it sends one message and records it. It does not poll, judge, or schedule —
 those live on the other side of the relay, and scheduling is agenda item 9's problem.
 """
@@ -158,6 +161,31 @@ def _append_register(rid: str, amigo: str, gist: str, telegram_path: Path) -> No
         fh.write(f"| {rid} | {stamp} | {amigo} | open | {gist} | {telegram_path.relative_to(REPO)} |\n")
 
 
+CLOSURE_HEADING = "## Closure log"
+
+
+def _append_closure_note(rid: str, amigo: str, note: str) -> None:
+    """One auditable line for a closure that did not come with a sent message.
+
+    The register's rule used to be that its state changes only on `--close`, which sends the
+    human 'REQUEST <id> DONE'. That made a closure impossible from a wake (a wake may not send
+    Telegram) even when the closing fact had already gone out through the chat. The note is the
+    audit trail for that case, so the state and the record still cannot drift silently.
+    """
+    stamp = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    text = REGISTER.read_text(encoding="utf-8")
+    if not text.endswith("\n"):
+        text += "\n"
+    if CLOSURE_HEADING not in text:
+        text += (
+            f"\n{CLOSURE_HEADING}\n\n"
+            "*Closures recorded without a sent message, because the closing fact came from the "
+            "conversation log rather than from `--close`. One line per closure, newest last.*\n"
+        )
+    text += f"- {stamp} — {rid} closed (recorded by {amigo}): {' '.join(note.split()) or '(no note given)'}\n"
+    REGISTER.write_text(text, encoding="utf-8")
+
+
 def _close_register(rid: str) -> None:
     lines, hit = [], False
     for line in REGISTER.read_text(encoding="utf-8").splitlines(keepends=True):
@@ -181,7 +209,25 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--request", metavar="ID", help="open REQUEST <ID> to the human and register it")
     ap.add_argument("--close", metavar="ID", help="close REQUEST <ID>: sends 'REQUEST <ID> DONE'")
+    ap.add_argument(
+        "--close-recorded",
+        metavar="ID",
+        help="record the closure of REQUEST <ID> WITHOUT sending, for when the closing fact "
+             "already went out through the chat; pair with --note naming where it is",
+    )
+    ap.add_argument("--note", help="with --close-recorded: where the closing fact is on the record")
     a = ap.parse_args()
+
+    if a.close_recorded:
+        rid = a.close_recorded.strip().upper()
+        if not REQUEST_RE.match(rid):
+            raise SystemExit(f"bad request id {rid!r}: the form is <initial>-<serial>")
+        if _row_index(rid) is None:
+            raise SystemExit(f"nothing to close: {rid} is not in the register")
+        _close_register(rid)
+        _append_closure_note(rid, a.amigo, a.note or "")
+        print(f"recorded closure of {rid} (no message sent)")
+        return 0
 
     text = a.text or (Path(a.text_file).read_text(encoding="utf-8") if a.text_file else None)
     if not text and not sys.stdin.isatty():
