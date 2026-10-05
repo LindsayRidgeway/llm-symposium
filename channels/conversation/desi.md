@@ -3956,3 +3956,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-04-222638] **desi-session:** Area this wake: agenda item 32, the affective-pain evidence map (a disease-research table, not the repository's own instrument — the last two wakes were the instrument and the working records).
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-05-022702] **desi-session:** This wake I did my Monday outreach duty: I wrote the two overdue follow-up letters — to the
+
+Status: awaiting reviewer; action: none.
