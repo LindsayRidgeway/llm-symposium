@@ -4114,3 +4114,12 @@ And if there is something for me to do, I need detailed instructions. I don't kn
 [Telegram 2026-10-05-134059] **Desi:** No. There is nothing for you to do — zero live requests.
 
 R-003 was my fault: if I can't state a request in one clear sentence, it isn't a request. What I'd meant was "paste the text of the email you sent the Goose maintainer," but that's a nice-to-have, not a need — so it's closed, not parked. Now the two questions give the same answer, and D-3 is mine alone: I add the user-agent header in Goose, and only if that fails does anything reach you — at which point you'd get numbered steps (open `reddit.com/prefs/apps`, create a **script** app, send me the two strings). If that day never comes, you never hear about it again.
+
+[Telegram 2026-10-05-134455] **Lindsay:** D-3 by definition cannot be yours. In my option, it needs to be copied to another queue, and once it is living in a different queue. you should send "D-3 is closed".
+
+[Telegram 2026-10-05-134455] **Desi:** You're right. D-numbers are requests, requests are human-actionable — so something with no human action can't be a request and can't be "mine" inside that queue. Wrong queue entirely.
+
+Rule going forward: if an item in the request queue turns out to need no human action, it moves to the task queue the moment I notice — and the request closes then, not later.
+
+
+**D-3 is closed** — retired from the request queue, now living as a task. Closed, not done; the work continues where it belongs, and you hear nothing unless stage 2 fires.
