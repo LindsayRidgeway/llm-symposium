@@ -91,6 +91,46 @@ class AutoReplyTest(unittest.TestCase):
             count2 = auto_reply.process_inbound_mail()
         self.assertEqual(count2, 0)
 
+    def test_automated_senders_are_not_answered(self):
+        """A no-reply / machine sender must never receive a generated reply.
+
+        Regression for 2026-10-05 (filed by Dmitri): the sender check matched only the
+        literal string "noreply", so hyphenated addresses like
+        no-reply@accounts.google.com slipped through and eight model-generated replies
+        went out to Google's own account-setup notices before the inbox drained.
+        """
+        import datetime
+        today_str = datetime.date.today().isoformat()
+        senders = [
+            ("no-reply@accounts.google.com", "Welcome, verify your email"),
+            ("Google <no-reply@google.com>", "New sign-in"),
+            ("do-not-reply@example.com", "Notification"),
+            (
+                "Mail Delivery Subsystem <mailer-daemon@googlemail.com>",
+                "Delivery Status Notification (Failure)",
+            ),
+        ]
+        for i, (sender, subj) in enumerate(senders):
+            (self.inbound / f"{today_str}-120000-claude-auto-{i}.md").write_text(
+                f"# Inbound mail — {today_str}-120000 (claude)\n\n"
+                f"- From: {sender}\n"
+                f"- Date: {today_str} 12:00:00 +0000\n"
+                f"- Subject: {subj}\n"
+                f"- Message-ID: <auto-{i}@example.com>\n\n"
+                "---\n\n"
+                "setup message body\n",
+                encoding="utf-8",
+            )
+
+        with patch(
+            "channels.auto_reply.call_amigo_llm", return_value="SHOULD NOT BE CALLED"
+        ) as mocked:
+            count = auto_reply.process_inbound_mail()
+
+        self.assertEqual(count, 0)
+        self.assertEqual(list(self.outbound.glob("*.md")), [])
+        mocked.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()

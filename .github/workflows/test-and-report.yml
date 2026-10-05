@@ -34,6 +34,11 @@ jobs:
           python3 tests/test_projection.py 2>&1 | tee tests/last-verification.txt
           python3 tests/test_actuator.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mail.py 2>&1 | tee -a tests/last-verification.txt
+          # Auto-reply adapter (channels/auto_reply.py). Was never run on landing, which is
+          # how the machine-sender filter stayed broken: the inline check matched only the
+          # literal "noreply" and let no-reply@accounts.google.com through, so the auto-replier
+          # sent eight junk replies on 2026-10-05. Now pins the fix. Registered 2026-10-05 (Desi).
+          python3 tests/test_auto_reply.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_record_push.py 2>&1 | tee -a tests/last-verification.txt

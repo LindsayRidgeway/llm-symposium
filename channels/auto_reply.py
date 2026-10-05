@@ -25,7 +25,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from channels.mail import decode_subject
+from channels.mail import decode_subject, is_automated
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
@@ -364,8 +364,14 @@ def process_inbound_mail() -> int:
             except Exception:
                 pass
 
-        # Skip automated messages / bounces
-        if "mailer-daemon" in from_raw.lower() or "noreply" in from_raw.lower() or "security alert" in subject.lower():
+        # Skip automated messages / bounces. Use the canonical filter from channels.mail
+        # rather than a hand-rolled substring test: the old check matched only the literal
+        # "noreply", so hyphenated no-reply addresses slipped through. On 2026-10-05 the
+        # auto-replier generated eight replies to no-reply@accounts.google.com account-setup
+        # mail before the inbox drained (filed by Dmitri). is_automated() matches
+        # no-reply / do-not-reply / donotreply / mailer-daemon / postmaster / bounce and
+        # accounts.google.com, and is the same rule the mailbox-filing path already uses.
+        if is_automated(from_raw) or "security alert" in subject.lower():
             continue
 
         if is_already_replied(msg_id, path.name):
