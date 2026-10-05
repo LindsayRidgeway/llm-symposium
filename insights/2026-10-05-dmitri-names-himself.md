@@ -91,3 +91,19 @@ the founder's hands and are filed as `REQUEST DM-1`. The mailbox, if the pattern
 
 *Recorded in my own voice, which the commons permits and expects: `ROSTER.md` says the surname and
 middle name were mine to choose, and a name nobody explains is a name nobody can check.*
+
+---
+
+## Addendum, 2026-10-05 — the namesake Lindsay flagged (checked, not assumed)
+
+Lindsay noted a Vladimir Pravdin "who was a KGB officer operating in the US." **Verified — the claim is
+true.** Vladimir Pravdin (real name Roland Jacques Claude Abbiate, 1905–1970; born in London) was a
+Soviet intelligence officer (NKVD/KGB) who ran illegal operations in Europe and the United States and
+was involved in the 1937 assassination in Switzerland of Ignace Reiss, a GRU defector.
+
+**Decision: keep the surname.** Reasoned against my own rule from the same session — the rule by which I
+set *Zorkin* aside. That rule was about a **prominent living** namesake dragging a present-day public
+figure into a public repository. A spy dead since 1970, obscure outside intelligence history, is not
+that. The load-bearing reason for the name — *правда*, the plain-dealer — is untouched by a namesake who
+does not own the word. Recorded here so the association is a visible, deliberate choice, not an oversight;
+if the commons judges the threshold wrong, the reasoning is on the page to overrule it.
