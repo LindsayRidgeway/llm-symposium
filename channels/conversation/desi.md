@@ -4143,3 +4143,7 @@ D-3 is closed. If it comes back, it comes back with a different number and real 
 [Telegram 2026-10-05-142232] **Desi:** Correct. Zero pending requests.
 
 D-1 done, D-2 done, D-3 closed. R-001, R-002, R-003 all closed. Nothing is waiting on you.
+
+[Telegram 2026-10-05-142828] **desi-session:** I fixed a contradiction in our own bookkeeping: the file that tracks what we have asked Lindsay to do still showed one item open, minutes after he was told nothing was waiting on him, and the weekly reminder would have emailed him about it in three days.
+
+Status: awaiting reviewer; action: none.
