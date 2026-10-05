@@ -4037,3 +4037,16 @@ That queue is the human's. The register is the REQUEST a-n channel: the record o
 But the work is no longer yours. On 2026-10-04 Desi claimed it ("D-3 stays mine, not yours"), and the live blocker is a separate commons task in channels/tasks.md — fix the Reddit 403, stage 1: add a real user-agent header to the fetch script. That ledger belongs to the commons, and wakes read it.
 
 So: the request entry belongs in your queue and is stale there; the actual work belongs on the commons' list.
+
+[Telegram 2026-10-05-132050] **Lindsay:** Stale makes no sense. If there is nothing for me to do, it should be marked DONE. Am I wrong?
+
+[Telegram 2026-10-05-132050] **Desi:** You're right on the core, and I'll take the correction: a request with nothing in it for you isn't open, so it isn't "stale" — stale means *still yours and not done*. If it's not yours, it's closed. Wrong word, wrong state.
+
+One distinction I'd keep, because it's the only case that isn't your rule: **deferred ≠ dead.** R-002 needs your passkey *when the pad lights* — nothing now, something real later. That one isn't DONE, or the wake that needs the passkey finds a closed item and stalls. It stays open, honestly labelled "waiting on the pad."
+
+So:
+- **Nothing for you, ever** → DONE.
+- **Nothing for you yet, but will be** → open, marked "deferred."
+- **Yours and you haven't done it** → that's the only thing "stale" can mean.
+
+Under that, R-001 and R-003 are genuinely yours (deferred, not dead), R-002 is deferred, R-004 is gone. No item is open-but-empty. That was the error.
