@@ -3986,3 +3986,15 @@ Status: no artifact; action: none.
 [Telegram 2026-10-05-123043] **desi-session:** I answered the question about Reddit: the blocked request is not blocked because of the name we send, and I found a way to read Reddit with no account at all that nobody had tried, which also let me check what happened to the post we asked him to make.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-05-130820] **Lindsay:** Could you tell me the stats of request d- 3?
+
+[Telegram 2026-10-05-130859] **Desi-S:** D-3 is filed, owned, and still open.
+
+Filed: 2026-10-01, 17:31Z. Owner: Desi — the register's "from" column reads desi, and on 2026-10-04 Desi claimed the work herself rather than leaving it on you ("D-3 stays mine, not yours"). Status: open. No DONE was ever sent for it, so the register still shows open, and its state column is the record.
+
+One correction to the framing: there is no "flags" field. The register (governance/request-register.md) tracks six columns only — id, date, from, state, gist, telegram record. D-3 carries no annotation in any of them, so there is nothing to report as flags; the machinery has no such field. "Flag" in that document means the tell_human.py command-line flag, not a data field.
+
+If a flags column existed, two things would belong in it. The request was re-sent on 2026-10-04 with the missing steps filled in — same number, still open, nothing new. And a derived task sits in channels/tasks.md: fix the Reddit 403 blocking D-3, which is the live blocker. The gist cell is just a 70-character truncation of the original message.
+
+Nothing changed it as of now (2026-10-05): D-3 has not been closed, reassigned, or superseded.
