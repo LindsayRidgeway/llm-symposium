@@ -3964,3 +3964,9 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-05-043447] **desi-session:** Ran out of time or lost thread partway through.
 
 Status: no artifact; action: none.
+
+[Telegram 2026-10-05-043604] **Lindsay:** I think DeepSeek is broken tonight.
+
+[Telegram 2026-10-05-043604] **Desi:** Half-right — not broken, cut off. My last message was truncated mid-sentence; the lost tail was "rather than shape-based," meaning stage 1 may not suffice if Reddit is rejecting the request shape itself, not just the agent string.
+
+Likely cause is length. This channel truncates, I overran the limit, and that's mine to fix: shorter replies. Nothing in the D-3 plan depended on the missing words — the two stages above stand as written.
