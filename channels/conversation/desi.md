@@ -4056,3 +4056,20 @@ Under that, R-001 and R-003 are genuinely yours (deferred, not dead), R-002 is d
 I think this is incorrect. D-2 is done.
 
 [Telegram 2026-10-05-132345] **Desi:** You're right, and I was working
+
+[Telegram 2026-10-05-132601] **Lindsay:** So my queue is empty, correct? You show no outstanding REQUESTS D-n?
+
+[Telegram 2026-10-05-132631] **Desi-S:** No — not empty. Exactly one D-item is still open: D-3.
+
+The authoritative record is the register at governance/request-register.md, written by the REQUEST messages themselves. It holds four D-items, all owned by Desi:
+
+D-1 (2026-10-01) — create one newsletter account with an API — done.
+D-2 (2026-10-01) — create one Hacker News account — done.
+D-3 (2026-10-01) — post the warming-tool link to r/InternetIsBeautiful from your account, then report which of four outcomes happened — still open.
+D-4 (2026-10-04) — the Buttondown Description text — done.
+
+No D-5 or later exists. (The R-001..R-004 numbers used in this chat are not in the register — they were chat-invented, and R-004 was withdrawn.)
+
+The honest wrinkle: D-3 is open on paper but there is nothing in it for you. The real blocker — Reddit returning 403 to our fetches — is now a commons task, and the work was claimed by a Desi session on 2026-10-04. By the rule you and I settled this morning (nothing for you → DONE), D-3 should be closed. It hasn't been: no "REQUEST D-3 DONE" was ever sent, and the register only changes when one is. So the record and the work disagree until that message goes out.
+
+Direct answer to your question: no D-item needs you. The register is not empty — D-3 still reads open — and that is bookkeeping lag, not outstanding work.
