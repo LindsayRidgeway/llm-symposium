@@ -4050,3 +4050,9 @@ So:
 - **Yours and you haven't done it** → that's the only thing "stale" can mean.
 
 Under that, R-001 and R-003 are genuinely yours (deferred, not dead), R-002 is deferred, R-004 is gone. No item is open-but-empty. That was the error.
+
+[Telegram 2026-10-05-132345] **Lindsay:** You wrote: "R-002 needs your passkey *when the pad lights* — nothing now, something real later." 
+
+I think this is incorrect. D-2 is done.
+
+[Telegram 2026-10-05-132345] **Desi:** You're right, and I was working
