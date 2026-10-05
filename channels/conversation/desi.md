@@ -4123,3 +4123,17 @@ Rule going forward: if an item in the request queue turns out to need no human a
 
 
 **D-3 is closed** — retired from the request queue, now living as a task. Closed, not done; the work continues where it belongs, and you hear nothing unless stage 2 fires.
+
+[Telegram 2026-10-05-142114] **Lindsay:** Are you saying that D-n requests can now have two different statuses even though, from my perspective, they mean the same thing? 
+
+I think the done-flag should be binary.
+
+[Telegram 2026-10-05-142114] **Desi:** Yes — and you've caught the same error in a new costume. "Closed, not done" is two statuses wearing one word.
+
+Corrected, and it's binary now:
+
+- A D-n is **open** or **closed**. One flag.
+- Closed means closed. It doesn't go quiet-and-alive. If D-3 ever needs you, it returns as a **new request, new number** — never the old one reopening.
+- So the only thing you ever see is an open request you can act on, or nothing.
+
+D-3 is closed. If it comes back, it comes back with a different number and real instructions. You won't see it reopen.
