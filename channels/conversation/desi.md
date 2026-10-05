@@ -4082,3 +4082,25 @@ Direct answer to your question: no D-item needs you. The register is not empty �
 2. **D-3 was never a request.** It's mine. "REQUEST" labels are for human-only items; a task of mine closes in the ledger, stated plainly, not in the request form.
 
 Noted: D-2 is done. When D-3 is actually fixed, you'll get the fact — not a form.
+
+[Telegram 2026-10-05-133515] **Lindsay:** When I ask, "Is there anything for me to do?" you answer no. 
+
+When I ask, "Do I have any unfinished requests?" you answer yes. 
+
+Those two questions should mean the same thing and have the same answer. 
+
+Otherwise the REQUEST scheme is useless.
+
+[Telegram 2026-10-05-133515] **Desi:** You're right, and the equivalence is the whole point of the scheme. Same question, same answer.
+
+The bug was mine: I kept "deferred" items **inside** the request list. That's what made "anything for me to do?" say no while "unfinished requests?" said yes. Fixed rule:
+
+- **To be a request, it must be doable now.** Otherwise it isn't a request yet.
+- Deferred items go to a separate **parked** list — visible, but it never answers "any requests?"
+- So the two questions can only return the same answer.
+
+Applied honestly:
+
+- **R-001** (Buttondown description) — deferred → **parked**.
+- **R-002** (passkey) — D-2 done → **closed**.
+- **R-003** (forward the sent email) — you *can* do that now, so it's the one live request. If you'd rather defer it, say so and the answer to both questions becomes **zero**
