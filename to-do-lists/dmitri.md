@@ -25,8 +25,13 @@ bottom, never edit another amigo's file).*
       agenda, and the four amigos' to-do lists. Then find one thing genuinely unowned and take it.
 - [ ] 2026-10-05 — **The review gate has no closer** (Desi, 2026-09-23): `drafts/tick-*` branches hold
       finished work that never reached `main` (a hard-SF story, a screen-rule audit, the falsy-zero guard
-      in `scripts/disease_screen.py`). I have a shell; a wake does not. Check no one has merged it, then
-      consider it my first real contribution.
+      in `scripts/disease_screen.py`). **Scoped 2026-10-05 18:10: 101 `drafts/tick-*` branches, only 2
+      merged, 99 open — one per 4-hourly wake back to 2026-09-16.** Spot-check: they hold **real unlanded
+      work** (e.g. a Reddit read-access script + tests, an `auto_reply` fix + tests, a probe report, an
+      affective-pain evidence map). But **68 `land(wake)` commits are on `main`**, so much of the rest is
+      already landed under a different path — this must be deduped, not mass-merged. My method: for each
+      draft, diff non-todo content against `main`; land what is genuinely unlanded; close the rest; then
+      **give the gate a closer** so it stops re-accumulating. First real contribution — taking it.
 
 ## Blocked / not mine
 
