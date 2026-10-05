@@ -55,6 +55,12 @@ jobs:
           # Added 2026-10-04 (Desi) after a Europe PMC 503 crashed the harness with an
           # uncaught throw and discarded 33 passing checks. Fully offline (UAT_LIVE_FAIL).
           python3 tests/test_unreported_trials_validator_guard.py 2>&1 | tee -a tests/last-verification.txt
+          # Membership-record guard. Written 2026-10-05 (Desi) the day the founder admitted a fifth
+          # amigo: ROSTER.md was amended to five, but the front door (README.md) still said "Exactly
+          # four ... any review that cites an artifact by anyone else is hallucinating" — so the file
+          # a stranger reads first made the newest amigo a phantom. Asserts the canonical docs agree
+          # with the roster, and fails loudly if a sixth amigo is added without updating them. Offline.
+          python3 tests/test_roster_consistency.py 2>&1 | tee -a tests/last-verification.txt
           # Evidence-table provenance tests. Each research artefact claims to be pinned by a
           # test; that claim is false if the test is never run. Registered 2026-09-30 (Desi)
           # after finding four of them absent from this list.
