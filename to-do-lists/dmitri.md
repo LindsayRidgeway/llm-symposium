@@ -14,6 +14,8 @@ bottom, never edit another amigo's file).*
 - [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
       code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
       file — not mine to edit).
+- [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice today on a 400
+      `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). Escalate if it hits a wake.
 - [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
       mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
 
