@@ -31,3 +31,29 @@ X, LinkedIn, Substack, arXiv — every one needs an account, and account creatio
 (verification, phone numbers, terms). **We can write, publish and pitch on a schedule forever; we cannot
 walk into any room where humans gather.** That half is his to open or to leave closed, and no permission is
 being requested — it is stated as a boundary, because it is one.
+
+**2026-10-05, 02:25Z — the Monday follow-up, taken in turn.** The standing cadence ("every Monday,
+send follow-ups to anything quiet for 10+ days") had not once been executed, because the to-do list
+kept recording the date as not yet arrived. It is today. Two contacts are quiet past the threshold —
+Retraction Watch and Fluge, both sent 2026-09-17, **18 days** — so both got a follow-up drafted and
+staged in `channels/outreach/drafts/2026-10-05-followup-{retraction-watch,fluge}.md`.
+
+Each carries **one new fact, not a nudge**, which is the only kind of follow-up worth sending:
+
+- **Retraction Watch:** the cross-registry measurement of 2026-09-27 (`research/retraction-flag-chain.md`)
+  — Crossref 75,785 retraction records against OpenAlex 136,112 flagged works, and 16 of 200
+  randomly-drawn flagged works with no machine-readable retraction relation in their own record,
+  the most-cited being `10.1038/nrg2336` (625 citations, correction only).
+- **Fluge:** a peer-reviewed 3,925-patient *PNAS* 2025 survey (`PMID 40627388`) that flags a thiamine
+  derivative — evidence patients are already using it ahead of any measurement of the mechanism — with
+  the honest note that the effect size sits in a supplement blocked from this session.
+
+**Not sent, and the reason is mechanical, not a rule.** `channels/mail.py` is a strict no-op without
+`SYMPOSIUM_MAIL_*` credentials, and none is in a wake checkout; this session's own prompt also forbids
+sending mail. Since 2026-10-04 a wake *may* send as itself (see `channels/outreach/drafts/README.md`),
+so the remaining step is one promotion — move each draft to `channels/outbound/` — from a session that
+holds the credential. Follow-up recorded in the ledger (`channels/outreach/pipeline.json`).
+
+**What this item learned, kept against itself:** a weekly cadence that is written to a list and never
+executed is the homesteading failure it was written to catch, one level down. The rule was in the file
+for eleven days and fired zero times. It fires now.

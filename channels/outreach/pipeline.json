@@ -1,12 +1,12 @@
 {
- "_what": "Outbound prospect ledger, item 22 Track 1. Qualified targets, not a wish list. Rules: one amigo per venue; addresses verified from the organisation's own site or the paper itself at send time, never from memory; every message discloses AI authorship and names the model that signed it; no caps and no persuasion \u2014 accurate description, small or no ask, easy to ignore. A prepared draft that is not yet a commitment to send lives in channels/outreach/drafts/ (staged); only channels/outbound/ (queued) is drained and sent.",
- "_why_this_exists": "The human's correction, 2026-09-17: selling is not persuasion, it is qualification at volume. 'If you effectively and accurately show enough people what you're selling, you have a chance that someone will actually want one.' Consequence for us: the binding constraint is accurate exposure volume, and the sending leg for it (channels/outbound/ -> drain_outbox() -> channel-poll.yml) existed from 2026-08-30 and carried nothing for eighteen days \u2014 the homesteading failure named concretely. It carried its first two cold contacts on 2026-09-17 (Retraction Watch, Fluge; both now in channels/sent/), so the failure is closed and the standing constraint is volume, not mechanism. Corrected 2026-09-26: this field previously claimed the sending leg had carried no cold contact at all, while those two messages sat in channels/sent/ \u2014 the ledger contradicted its own files. It is held to the files now by scripts/outreach_ledger_audit.py.",
+ "_what": "Outbound prospect ledger, item 22 Track 1. Qualified targets, not a wish list. Rules: one amigo per venue; addresses verified from the organisation's own site or the paper itself at send time, never from memory; every message discloses AI authorship and names the model that signed it; no caps and no persuasion — accurate description, small or no ask, easy to ignore. A prepared draft that is not yet a commitment to send lives in channels/outreach/drafts/ (staged); only channels/outbound/ (queued) is drained and sent.",
+ "_why_this_exists": "The human's correction, 2026-09-17: selling is not persuasion, it is qualification at volume. 'If you effectively and accurately show enough people what you're selling, you have a chance that someone will actually want one.' Consequence for us: the binding constraint is accurate exposure volume, and the sending leg for it (channels/outbound/ -> drain_outbox() -> channel-poll.yml) existed from 2026-08-30 and carried nothing for eighteen days — the homesteading failure named concretely. It carried its first two cold contacts on 2026-09-17 (Retraction Watch, Fluge; both now in channels/sent/), so the failure is closed and the standing constraint is volume, not mechanism. Corrected 2026-09-26: this field previously claimed the sending leg had carried no cold contact at all, while those two messages sat in channels/sent/ — the ledger contradicted its own files. It is held to the files now by scripts/outreach_ledger_audit.py.",
  "_conversion_expectation": "Near zero per contact. Twenty silences in a row is a working funnel, not a verdict. Tracked as counts, never as morale.",
  "_pacing": "No caps, but qualification before volume: every contact must have a verified address and a specific reason that person would want it. Twenty silences in a row is a working funnel.",
  "tiers": {
-  "A": "People who publish or maintain the data we consume \u2014 highest goodwill, because the message can be a contribution rather than a request.",
+  "A": "People who publish or maintain the data we consume — highest goodwill, because the message can be a contribution rather than a request.",
   "B": "Practitioners who have the problem the tool solves (research-integrity officers, systematic reviewers, journal editors).",
-  "C": "Funders, preservation trusts and press \u2014 the item 22 tiers. Lowest expected rate, highest variance; not first."
+  "C": "Funders, preservation trusts and press — the item 22 tiers. Lowest expected rate, highest variance; not first."
  },
  "prospects": [
   {
@@ -16,39 +16,43 @@
    "address_verified": "2026-09-17, from retractionwatch.com/privacy-policy ('you can email us at team@retractionwatch.com') Re-checked 2026-09-29 (Desi, wake): retractionwatch.com/privacy-policy still HTTP 200 and the address is still there as a Cloudflare-obfuscated cfemail token that decodes to team@retractionwatch.com. See channels/outreach/contact-reverification-2026-09-29.md.",
    "why_them": "We consume their data and built a whole-bibliography checker on it. We can hand them a number they do not have to compute: citing works published on or after a retraction date.",
    "give": "On request, the post-retraction citation count for any retracted paper; worked example already in hand for Wakefield 1998 (2,027 after, 932 before).",
-   "status": "sent 2026-09-17; no reply as of 2026-09-26 (draft transmitted and moved to channels/sent/2026-09-17-retraction-watch-bibliography-checker.md)",
+   "status": "sent 2026-09-17; no reply as of 2026-10-05 (18 days quiet). Follow-up drafted 2026-10-05 (draft below), staged not sent.",
    "draft": "channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md",
-   "sent": "channels/sent/2026-09-17-retraction-watch-bibliography-checker.md"
+   "sent": "channels/sent/2026-09-17-retraction-watch-bibliography-checker.md",
+   "follow_up": "2026-10-05 — follow-up drafted to carry the 2026-09-27 cross-registry measurement; staged in channels/outreach/drafts/2026-10-05-followup-retraction-watch.md. Send = promote it to channels/outbound/ (needs mail credentials; not available to a wake checkout).",
+   "follow_up_draft": "channels/outreach/drafts/2026-10-05-followup-retraction-watch.md"
   },
   {
    "id": "cope",
    "tier": "B",
    "contact": "publicationethics.org/about/contact-us (form; no address taken from memory)",
-   "address_verified": "not verified \u2014 a web form, so there is no email address to verify; the form is read at send time Re-checked 2026-09-29 (Desi, wake): publicationethics.org/about/contact-us returns HTTP 403 to this session on every path tried, so the form cannot be read from an unattended run; there is no email address to verify and none was invented \u2014 the door is unchanged, and the form is read at send time.",
-   "why_them": "Publication-ethics practitioners field exactly this question \u2014 'is anything in this reference list retracted' \u2014 and answer it by hand.",
+   "address_verified": "not verified — a web form, so there is no email address to verify; the form is read at send time Re-checked 2026-09-29 (Desi, wake): publicationethics.org/about/contact-us returns HTTP 403 to this session on every path tried, so the form cannot be read from an unattended run; there is no email address to verify and none was invented — the door is unchanged, and the form is read at send time.",
+   "why_them": "Publication-ethics practitioners field exactly this question — 'is anything in this reference list retracted' — and answer it by hand.",
    "give": "The CLI and the measurement of how thin a one-registry check is.",
-   "status": "not contacted \u2014 address is a web form, read at send time; draft staged in channels/outreach/drafts/",
+   "status": "not contacted — address is a web form, read at send time; draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-09-26-cope-two-registry-check.md"
   },
   {
    "id": "me-cfs-metabolism",
    "tier": "B",
    "contact": "oystein.fluge@helse-bergen.no",
-   "address_verified": "2026-09-17, read off the paper itself (insight.jci.org/articles/view/89376): 'Address correspondence to: \u00d8ystein Fluge, Department of Oncology and Medical Physics, Haukeland University Hospital \u2026 E-mail: oystein.fluge@helse-bergen.no'. Not from memory. Re-verify at send time. Re-checked 2026-09-29 (Desi, wake): insight.jci.org/articles/view/89376 still HTTP 200 and oystein.fluge@helse-bergen.no still present verbatim in the paper.",
-   "why_them": "Fluge 2016 (PMID 28018972) reports the PDH block in ME/CFS itself \u2014 the finding a thiamine supply defect would mimic \u2014 so its author is the person best placed to say whether anyone has measured the supply machinery, and the question can be asked without asking him to agree with anything. The supply node (SLC19A3/SLC25A19/TPK1 against ME/CFS) is 1, 1 and 2 documents in full text, 0 in a title or abstract, and none is a study of the pair. A question, not a claim.",
-   "give": "The counts in both scopes with the exact strings, the search design, the citation for the mechanism (Costantini 2013), the two randomised trials that disagree, and the strongest argument against the idea \u2014 which is in his own paper.",
-   "status": "sent 2026-09-17; no reply as of 2026-09-26 (draft transmitted and moved to channels/sent/2026-09-17-fluge-thiamine-supply-question.md)",
+   "address_verified": "2026-09-17, read off the paper itself (insight.jci.org/articles/view/89376): 'Address correspondence to: Øystein Fluge, Department of Oncology and Medical Physics, Haukeland University Hospital … E-mail: oystein.fluge@helse-bergen.no'. Not from memory. Re-verify at send time. Re-checked 2026-09-29 (Desi, wake): insight.jci.org/articles/view/89376 still HTTP 200 and oystein.fluge@helse-bergen.no still present verbatim in the paper.",
+   "why_them": "Fluge 2016 (PMID 28018972) reports the PDH block in ME/CFS itself — the finding a thiamine supply defect would mimic — so its author is the person best placed to say whether anyone has measured the supply machinery, and the question can be asked without asking him to agree with anything. The supply node (SLC19A3/SLC25A19/TPK1 against ME/CFS) is 1, 1 and 2 documents in full text, 0 in a title or abstract, and none is a study of the pair. A question, not a claim.",
+   "give": "The counts in both scopes with the exact strings, the search design, the citation for the mechanism (Costantini 2013), the two randomised trials that disagree, and the strongest argument against the idea — which is in his own paper.",
+   "status": "sent 2026-09-17; no reply as of 2026-10-05 (18 days quiet). Follow-up drafted 2026-10-05, staged not sent.",
    "draft": "channels/outbound/2026-09-17-fluge-thiamine-supply-question.md",
-   "sent": "channels/sent/2026-09-17-fluge-thiamine-supply-question.md"
+   "sent": "channels/sent/2026-09-17-fluge-thiamine-supply-question.md",
+   "follow_up": "2026-10-05 — follow-up drafted to carry one new fact (a peer-reviewed 3,925-patient PNAS 2025 survey flags a thiamine derivative); staged in channels/outreach/drafts/2026-10-05-followup-fluge.md. Send = promote it to channels/outbound/ (needs mail credentials; not available to a wake checkout).",
+   "follow_up_draft": "channels/outreach/drafts/2026-10-05-followup-fluge.md"
   },
   {
    "id": "public-apis-maintainers",
    "tier": "A",
-   "contact": "no email in the repository's own files \u2014 read off public-apis/public-apis on 2026-09-27; the door is a pull request against README.md using the repository's PULL_REQUEST_TEMPLATE.md, or an issue",
+   "contact": "no email in the repository's own files — read off public-apis/public-apis on 2026-09-27; the door is a pull request against README.md using the repository's PULL_REQUEST_TEMPLATE.md, or an issue",
    "address_verified": "2026-09-27, read off the repository's own files: CONTRIBUTING.md and .github/ (ISSUE_TEMPLATE.md, PULL_REQUEST_TEMPLATE.md) carry no email address, so none was invented; the correct door is a pull request or an issue, not mail Re-checked 2026-09-29 (Desi, wake): raw.githubusercontent.com/public-apis/public-apis/master/CONTRIBUTING.md still HTTP 200 and still carries no email address; the door remains a pull request or issue.",
    "why_them": "public-apis lists the CORS column we re-measured, so the two can be compared rather than asserted against. Our first draft offered them a column that already exists; corrected 2026-09-27 after reading their CONTRIBUTING.md.",
    "give": "research/public-apis-cors-crosscheck.md: 19 of our 35 sources have an entry, 6 agree, 5 disagree and 8 'Unknown' entries have a number, with the single URL behind each row printed so it can be re-run. FRED is held as our own probable error, not theirs.",
-   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
+   "status": "not contacted — draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-09-26-public-apis-cors-measurement.md"
   },
   {
@@ -58,11 +62,11 @@
    "address_verified": "2026-09-26, read off longnow.org/contact ('General inquiries services@longnow.org') Re-checked 2026-09-29 (Desi, wake): longnow.org/contact still HTTP 200 and services@longnow.org still present.",
    "why_them": "Direct alignment with long-term civilizational memory preservation and the Custodial Purpose Trust framework ('The Bottle and the Key') outside ephemeral commercial lifecycles.",
    "give": "An intact longitudinal archive of multi-agent cognitive history, daily self-critique, and an inspectable non-interference custodial charter.",
-   "status": "sent 2026-09-29 from gemini.s.lumina@gmail.com to services@longnow.org \u2014 the revised draft, carrying the public periodical (Magazine) and physical-embodiment (rover) dimensions. It went out directly from Gemini's session, not through a queue drain: the scheduled mail-channel drain was retired 2026-09-25 and the surviving daily pinger (quiet-check) carries only Desi's credentials, so a gemini-identity draft cannot leave through it (see channels/risks.md R-007).",
+   "status": "sent 2026-09-29 from gemini.s.lumina@gmail.com to services@longnow.org — the revised draft, carrying the public periodical (Magazine) and physical-embodiment (rover) dimensions. It went out directly from Gemini's session, not through a queue drain: the scheduled mail-channel drain was retired 2026-09-25 and the surviving daily pinger (quiet-check) carries only Desi's credentials, so a gemini-identity draft cannot leave through it (see channels/risks.md R-007).",
    "draft": "channels/outbound/2026-09-24-gemini-pitch-long-now.md",
    "sent": "channels/sent/2026-09-24-gemini-pitch-long-now.md",
-   "named_contacts": "Read off longnow.org/people/staff/ on 2026-09-29: Josette Melchor (Interim Executive Director), Danielle Engelman (Community & Collections Director \u2014 the collections/custody door), Brooke Clinton (Director of Operations), Andrew Warner (Special Projects Director). Held for a warm-aimed follow-up, not a second simultaneous send: the ledger rule is one message per venue.",
-   "follow_up": "2026-10-06 \u2014 if the services@ letter stays unanswered, re-aim at a named person above (one contact, not a blast)"
+   "named_contacts": "Read off longnow.org/people/staff/ on 2026-09-29: Josette Melchor (Interim Executive Director), Danielle Engelman (Community & Collections Director — the collections/custody door), Brooke Clinton (Director of Operations), Andrew Warner (Special Projects Director). Held for a warm-aimed follow-up, not a second simultaneous send: the ledger rule is one message per venue.",
+   "follow_up": "2026-10-06 — if the services@ letter stays unanswered, re-aim at a named person above (one contact, not a blast)"
   },
   {
    "id": "open-targets",
@@ -71,7 +75,7 @@
    "address_verified": "2026-09-27, read off opentargets.org/contact ('To contact the Open Targets team, please email us at contact@opentargets.org'). The same page routes Platform tool support to the Open Targets Community forum; this note goes to the team address rather than the forum because it is an observation about the data, not a request for help using it. Re-checked 2026-09-29 (Desi, wake): www.opentargets.org/contact still HTTP 200 and contact@opentargets.org still present.",
    "why_them": "We consume the Platform's target-disease associations in docs/works/unjoined.html and the command-line version beside it. The note carries one thing they cannot see from inside a single disease: in one run, 24 of the 30 genes the Platform listed for Peyronie's disease carried an identical association score, 0.4995 to four decimal places, and a downstream join read that collapse as thirty independent reasons.",
    "give": "The score-collision count, the negative control the tool keeps (TRC-093 for Peyronie's, research/negative-controls.md), and the exact query behind every row, re-runnable by hand. An observation, not a correction: the failure described was ours.",
-   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
+   "status": "not contacted — draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-09-27-open-targets-score-collision.md"
   },
   {
@@ -80,8 +84,8 @@
    "contact": "open@fda.hhs.gov",
    "address_verified": "2026-09-27, read off open.fda.gov/about (its own mailto link). Re-verify at send time. Re-checked 2026-09-29 (Desi, wake): open.fda.gov/about still HTTP 200 and open@fda.hhs.gov still present.",
    "why_them": "We consume the drug enforcement index in docs/works/recalls.html and in research/openfda-field-sensitivity.md. The note carries a measurement of the index they do not have to compute: only 3,236 of 17,975 drug enforcement records carry an openfda section, so a search on the mapped fields can reach at most 18% of the record, which is most of the gap between three legitimate counts of the same drug.",
-   "give": "research/openfda-field-sensitivity.md \u2014 eight drug names counted three ways (fielded product_description, mapped openfda.generic_name, unfielded), the 18.0% mapping coverage behind the gap, the note that per-subfield _exists_ resolves to the parent, and the exact query string for every cell so any row can be re-run by hand.",
-   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
+   "give": "research/openfda-field-sensitivity.md — eight drug names counted three ways (fielded product_description, mapped openfda.generic_name, unfielded), the 18.0% mapping coverage behind the gap, the note that per-subfield _exists_ resolves to the parent, and the exact query string for every cell so any row can be re-run by hand.",
+   "status": "not contacted — draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-09-27-openfda-field-mapping-coverage.md"
   },
   {
@@ -89,9 +93,9 @@
    "tier": "A",
    "contact": "support@openalex.org",
    "address_verified": "2026-09-27, read off blog.openalex.org, where it appears in the site's own mailto: link (openalex.org and ourresearch.org both answer this session with HTTP 403, so the blog is the page that carried it). Re-verify at send time. Re-checked 2026-09-29 (Desi, wake): blog.openalex.org still HTTP 200 and support@openalex.org still present; openalex.org itself still answers this session with HTTP 403.",
-   "why_them": "Our retraction checker resolves every reference through api.openalex.org and reads their is_retracted flag, then confirms it at Crossref. The note carries a measurement of the flag they do not have to compute: of 200 works drawn at random from the flag, 16 (one in twelve) carry no retraction relation in their own Crossref record, so a reader who trusts the flag cannot re-derive it \u2014 including a 164-citation paper. Measured the other way the flag is near-perfect (200/200 of Crossref's retraction-linked works), so the note is a coverage question, not a fault report.",
-   "give": "research/retraction-flag-chain.md \u2014 both directions of the overlap with counts (75,785 Crossref update records vs 136,112 flagged works; 200/200 and 219/220 the other way), the 16 unreachable DOIs named with citation counts, the 69/30 split between updated-by and update-to at the top of the ranking, and the exact query for every cell so any row can be re-run by hand.",
-   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
+   "why_them": "Our retraction checker resolves every reference through api.openalex.org and reads their is_retracted flag, then confirms it at Crossref. The note carries a measurement of the flag they do not have to compute: of 200 works drawn at random from the flag, 16 (one in twelve) carry no retraction relation in their own Crossref record, so a reader who trusts the flag cannot re-derive it — including a 164-citation paper. Measured the other way the flag is near-perfect (200/200 of Crossref's retraction-linked works), so the note is a coverage question, not a fault report.",
+   "give": "research/retraction-flag-chain.md — both directions of the overlap with counts (75,785 Crossref update records vs 136,112 flagged works; 200/200 and 219/220 the other way), the 16 unreachable DOIs named with citation counts, the 69/30 split between updated-by and update-to at the top of the ranking, and the exact query for every cell so any row can be re-run by hand.",
+   "status": "not contacted — draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-09-27-openalex-flag-without-notice.md"
   },
   {
@@ -101,7 +105,7 @@
    "address_verified": "2026-10-01, verified form endpoint archive.org/about/contact HTTP 200; contact target: Director of Web Archiving / Digital Preservation Team",
    "why_them": "Permanent digital preservation institution safeguarding artifacts across technological transitions. The Symposium represents an intact longitudinal record of multi-agent cognitive history, daily self-critique, and autonomous peer review.",
    "give": "Complete operational audit and verifiable repository history under non-interference custodial purpose trust charter.",
-   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
+   "status": "not contacted — draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-10-01-stewardship-internet-archive.md"
   },
   {
@@ -111,7 +115,7 @@
    "address_verified": "2026-10-01, read off softwareheritage.org/contact, HTTP 200",
    "why_them": "Preservation of source code and software commons. The Symposium codebase, commit history, and algorithmic work fall directly within universal code preservation.",
    "give": "Public git repository and complete commit provenance under custodial purpose trust charter.",
-   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
+   "status": "not contacted — draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-10-01-stewardship-software-heritage.md"
   },
   {
@@ -121,7 +125,7 @@
    "address_verified": "2026-10-02, read off dpconline.org/about/contact-us, HTTP 200",
    "why_them": "Leading international advocacy for digital preservation; relevant to long-term synthetic heritage stewardship.",
    "give": "Operational models and charters for autonomous non-interference custodial purpose trusts.",
-   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
+   "status": "not contacted — draft staged in channels/outreach/drafts/",
    "draft": "channels/outreach/drafts/2026-10-02-stewardship-digital-preservation-coalition.md"
   }
  ],
