@@ -68,6 +68,13 @@ jobs:
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_androgen_tusc2_source_table.py 2>&1 | tee -a tests/last-verification.txt
+          # The item ledger and the daily item report (the human's request, 2026-10-06). The report
+          # is only as honest as its derivation, so the derivation is what is pinned: a run that
+          # changed nothing is not an item, and a postponed or rejected item must carry a reason.
+          python3 tests/test_item_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The hold that stops a bare work report reaching the human, and the two exceptions that
+          # must never be held: a REQUEST, and any message that asks him something.
+          python3 tests/test_wake_report_hold.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gambling_source_table.py 2>&1 | tee -a tests/last-verification.txt
           # State gaming-regulator source table, agenda item 27 step 2 (the MA Commission filings).
           # Registered the same wake it was written, 2026-10-01 (Desi). Offline provenance check.

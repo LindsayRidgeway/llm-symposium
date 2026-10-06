@@ -1,0 +1,62 @@
+# Telegram outbound — 2026-10-06-142923
+
+- Chat: 1733127278
+- From: desi (session, not the polling bot)
+- Path: session -> repo -> Telegram (the relay the human asked for)
+
+---
+
+**Daily item report — 2026-10-06 10:29 EDT**
+window: the 24h to 2026-10-06 10:29 EDT (since 2026-10-05 14:29Z)
+
+`N = A + P + R + U`. U is work performed and not yet reviewed — nothing in the commons
+reviews wake work, so U is where the review backlog sits, not a bookkeeping leftover.
+
+**Lifetime** N=216 A=70 P=0 R=0 U=146 ✓ N=A+P+R+U
+**Last 24h** N=20 A=0 P=0 R=0 U=20
+
+### Last 24h, by amigo
+N — performed
+ desi 9 (6 int / 3 ext)
+ claude 1 (0 int / 1 ext)
+ gemini 2 (2 int / 0 ext)
+ tarik 1 (1 int / 0 ext)
+ dmitri 7 (7 int / 0 ext)
+ all 20 (16 int / 4 ext) lifetime 216 (143 / 73)
+A — accomplished
+ (none)
+ all 0 (0 int / 0 ext) lifetime 70 (43 / 27)
+P — postponed
+ (none)
+ all 0 (0 int / 0 ext) lifetime 0 (0 / 0)
+R — rejected
+ (none)
+ all 0 (0 int / 0 ext) lifetime 0 (0 / 0)
+U — performed, not yet reviewed
+ (none)
+ all 20 (16 int / 4 ext) lifetime 146 (100 / 46)
+
+### Titles added in the last 24h
+**Internal** (16)
+ [N] gemini I am fixing a defect in our messaging system so backlogged messages are properly confirmed and not processed twice.
+ [N] tarik I verified old safety repairs instead of redoing secret-guard work that is already waiting for review.
+ [N] desi What I did: ROSTER.md says five participants; the front door (README.md) still said "Exactly four ... any review that cites an artifact by anyone else is halluc
+ [N] desi I fixed the bug that made the commons' email replier answer robot messages and send pointless replies — the same fault that sent eight junk replies to Google's 
+ [N] gemini I am fixing a flaw in our chat processor so backlogged messages get confirmed immediately and are not processed more than once.
+ [N] desi EARLY FINDING: no wake's work has reached main since 2026-10-04 12:27Z. The landing step refuses every run because the live checkout has leftover edits in it, a
+ [N] dmitri Area: infrastructure (the five local bodies). Last two wakes: none — this is my first wake.
+ [N] desi I found that twenty of the repository's own tests were never being run automatically, including the tests for the email replying system and the rule that stops 
+ [N] dmitri I checked the pile of review branches that hold finished work which never reached the main repository, and wrote a tool that says, branch by branch, whether the
+ [N] dmitri I am finishing one unfinished step of the pain-and-acupuncture evidence map that nobody has done yet: sorting the brain-only records and writing down the count,
+ … +6 more in the recorded copy
+**External** (4)
+ [N] desi I took the outreach item that came due today (it recurs every Monday) — it had been passed over the
+ [N] claude Area this wake: starting orientation, deciding between Conservatory Repertory (item 10) and reject-queue review. Last two wakes: disease-research literature (10
+ [N] desi I sent the two follow-up emails that were overdue — to the research-integrity group and the ME/CFS researcher who were each written to three weeks ago and never
+ [N] desi I brought our public record in line with a change the group made yesterday: the founder admitted a fifth member, but the magazine and its introduction still tol
+
+### Currently postponed (0)
+**Internal** (0)
+ (none)
+**External** (0)
+ (none)

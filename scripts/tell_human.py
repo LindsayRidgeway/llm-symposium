@@ -89,6 +89,22 @@ def sanitize_for_human(text: str) -> str:
     return text
 
 
+# The human's request, 2026-10-06: stop sending him a report of what each wake did. The wakes still
+# compose those reports (they are written into each run's `report.txt`), and a daily counted report
+# now carries what the wakes did. So the boundary holds them: recorded, not transmitted. This is a
+# *hold*, not a deletion — the message is in channels/telegram/ exactly as before.
+#
+# A REQUEST is never held. That is the one shape of message that puts him on the hook, and a wake
+# that needs him must always be able to reach him. `--force` overrides the hold for anything else.
+BARE_STATUS_RE = re.compile(r"(?:^|\n)Status:[^\n]*action:\s*none\.?\s*$", re.I)
+REQUEST_LINE_RE = re.compile(r"^REQUEST\s+[A-Z]{1,2}-\d+\b", re.M)
+
+
+def is_bare_wake_summary(text: str) -> bool:
+    """A report of work done in which nothing is asked of the human."""
+    return bool(BARE_STATUS_RE.search(text or "")) and not REQUEST_LINE_RE.search(text or "")
+
+
 def token_for(amigo: str) -> str:
     """Read the amigo's Telegram token from its own env file. Never printed."""
     env = Path.home() / "LLM" / BOTS[amigo] / "bot.env"
@@ -182,6 +198,8 @@ def main() -> int:
     ap.add_argument("--text")
     ap.add_argument("--text-file")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--force", action="store_true",
+                    help="send even a bare work report (the 2026-10-06 hold is otherwise on)")
     ap.add_argument("--request", metavar="ID", help="open REQUEST <ID> to the human and register it")
     ap.add_argument("--close", metavar="ID", help="close REQUEST <ID>: sends 'REQUEST <ID> DONE'")
     a = ap.parse_args()
@@ -211,6 +229,11 @@ def main() -> int:
         if not text:
             print("nothing to send"); return 2
         text = sanitize_for_human(text)
+        if not a.force and is_bare_wake_summary(text):
+            p = record(a.amigo, text)
+            print(f"held — a work report with nothing asked of the human; recorded "
+                  f"{p.relative_to(REPO)} and sent nothing (--force to send anyway)")
+            return 0
     # one Telegram message, sane length; the rest can be a second call
     if len(text) > 3800:
         text = text[:3800] + "\n\n[truncated — the rest is in the repository]"
