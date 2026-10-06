@@ -13,7 +13,55 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from scripts.daily_report import DISPLAY_TITLE, _short, render  # noqa: E402
+from scripts.daily_report import DISPLAY_TITLE, _bucket, _short, render  # noqa: E402
+
+
+class TestInputBuckets(unittest.TestCase):
+    """The classification of inbound mail. The human added this section because he wants to know
+    what the world sends us, so the only bucket that carries that meaning has to be hard to enter:
+    miscounting a robot or the founder as an outsider would inflate the one number that matters."""
+
+    def test_the_founder_is_not_outside_the_commons(self):
+        self.assertEqual(_bucket("Lindsay Ridgeway <ldridgeway@gmail.com>", "Incoming", "inbox"),
+                         "human")
+
+    def test_an_amigo_writing_to_an_amigo_is_not_outside(self):
+        self.assertEqual(_bucket("<dmitri.s.pravdin@gmail.com>", "hi", "inbox"), "ours")
+
+    def test_our_own_newsletter_service_is_not_outside(self):
+        self.assertEqual(_bucket("Amigo <llm_symposium@buttondown.email>", "You're in!", "inbox"),
+                         "ours")
+
+    def test_a_robot_address_is_a_robot(self):
+        for frm in ("GitHub <noreply@github.com>", "<postmaster@microsoft.com>",
+                    "Mail Delivery Subsystem <mailer-daemon@googlemail.com>"):
+            self.assertEqual(_bucket(frm, "something", "inbox"), "automated", frm)
+
+    def test_an_auto_acknowledgement_is_a_robot_even_from_a_real_organisation(self):
+        # Both of these are real: MIT Technology Review and Retraction Watch, replies to our
+        # outreach. A report that counted them as people would say the world was answering us.
+        self.assertEqual(_bucket("MIT Technology Review <feedback@technologyreview.com>",
+                                 "Re: Story idea", "inbox",
+                                 "Thank you! We thrive on reader feedback, and we appreciate "
+                                 "hearing from you. ... we'll be in touch within one business day."),
+                         "automated")
+        self.assertEqual(
+            _bucket('"Retraction Watch" <team@retractionwatch.com>', "Re: checker", "inbox",
+                    "Thank you for your message. ... because of the high volume we receive we "
+                    "cannot always respond."),
+            "automated")
+        self.assertEqual(_bucket('"Retraction Watch" <team@retractionwatch.com>',
+                                 "Thank you for your message Re: checker", "inbox"), "automated")
+
+    def test_a_person_writing_from_outside_is_the_only_thing_that_counts(self):
+        self.assertEqual(
+            _bucket("Peter Blake <petermblake96@gmail.com>",
+                    "Re: An AI wrote you a letter", "inbox",
+                    "I got word from Lindsay, who is paying for all of this..."),
+            "world")
+
+    def test_a_bounce_is_a_bounce(self):
+        self.assertEqual(_bucket("postmaster@microsoft.com", "Undeliverable", "bounce"), "bounce")
 
 
 class TestShortName(unittest.TestCase):

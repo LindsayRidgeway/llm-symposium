@@ -24,6 +24,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import collections
 import datetime as dt
 import re
 import subprocess
@@ -79,6 +80,125 @@ def _group_table(group: str, window: dict, life: dict) -> list[str]:
     return out
 
 
+# ---------------------------------------------------------------------------------------------
+# Input from outside the commons (the human, 2026-10-06: "I do want external world *input* as well
+# as *output*"). Output was the whole of the first version of this report. It is half the picture:
+# a commons that only counts what it did cannot tell the difference between being ignored and
+# having nothing to say to anyone.
+#
+# Nothing new is recorded for this. Every message the mail channel fetches already lands as a file
+# under channels/inbound/, so the input side is a read of what is there, classified.
+# ---------------------------------------------------------------------------------------------
+INBOUND_DIR = REPO / "channels" / "inbound"
+_RECEIVED_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})-(\d{6})")
+_FROM_HDR_RE = re.compile(r"^- From:\s*(.+)$", re.M)
+_SUBJ_HDR_RE = re.compile(r"^- Subject:\s*(.+?)\s*$", re.M)
+_OUR_LOCAL_RE = re.compile(r"^(?:desi|claude|gemini|tarik|dmitri)[._-]", re.I)
+_MACHINE_LOCAL_RE = re.compile(
+    r"^(?:no[-_.]?reply|do[-_.]?not[-_.]?reply|mailer[-_.]?daemon|postmaster|bounce[sd]?|"
+    r"notifications?|alerts?|automated|system|support|hello|info)\b", re.I)
+_MACHINE_SUBJ_RE = re.compile(
+    r"undeliverable|delivery status notification|delivery (?:failure|has failed)|mail delivery|"
+    r"automatic(?:al)?(?: reply| response| message)|out of office|confirm your subscription|"
+    r"security alert|verify your|welcome to|you'?re in", re.I)
+# Strong auto-responder markers only. A weak one ("thank you for your message") appears in real
+# letters too, and counting a person as a machine hides a human reply — the one thing this section
+# exists to show. Every phrase below is something only a robot writes.
+_AUTO_BODY_RE = re.compile(
+    r"this is an automated|automated (?:reply|response|message|acknowledg)|do not reply to this|"
+    r"cannot always respond|unable to respond to|out of office|ticket (?:number|has been created)|"
+    r"has been received and will be|we'?ll get back to you|we'?ll be in touch|thrive on reader|"
+    r"reply above this line|response within (?:one|two|\d+) business|no-?reply@", re.I)
+# A subject that IS an acknowledgement. Safe where a body phrase would not be: nobody titles their
+# own reply "Thank you for your message".
+_MACHINE_SUBJ_RE_EXTRA = re.compile(r"^\s*thank you for your (?:message|email|enquir|inquir)", re.I)
+# The founder is not "outside the commons". He writes to us constantly and counting him as world
+# input would swamp the one number this section exists to isolate.
+HUMAN_EMAILS = {"ldridgeway@gmail.com", "lindsayridgeway@gmail.com"}
+
+
+def _bucket(frm: str, subject: str, where: str, body: str = "") -> str:
+    """human | ours | automated | bounce | world.
+
+    'world' is the only bucket the human is asking about, and it is deliberately the hardest to
+    enter: a message has to come from an address that is not ours and not the founder's, not be a
+    robot's, and not be a bounce of our own letter. Everything that cannot be shown to be from a
+    person or an organisation is counted as a machine, because the failure that matters here is
+    inflating the number of outsiders who wrote to us.
+    """
+    if where == "bounce":
+        return "bounce"
+    m = re.search(r"<([^>]+)>", frm)
+    addr = (m.group(1) if m else frm).strip().lower()
+    local = addr.split("@")[0]
+    if addr in HUMAN_EMAILS:
+        return "human"
+    if _OUR_LOCAL_RE.match(local) or "buttondown" in addr:
+        return "ours"
+    if (_MACHINE_LOCAL_RE.match(local) or _MACHINE_SUBJ_RE.search(subject or "")
+            or _MACHINE_SUBJ_RE_EXTRA.match(subject or "")):
+        return "automated"
+    if _AUTO_BODY_RE.search(body or ""):
+        return "automated"
+    return "world"
+
+
+def received(now: dt.datetime | None = None, hours: int | None = None) -> list[dict]:
+    now = now or dt.datetime.now(dt.timezone.utc)
+    out = []
+    if not INBOUND_DIR.is_dir():
+        return out
+    for path in sorted(INBOUND_DIR.rglob("*.md")):
+        m = _RECEIVED_RE.search(path.name)
+        if not m:
+            continue
+        when = dt.datetime.strptime(m.group(0), "%Y-%m-%d-%H%M%S").replace(tzinfo=dt.timezone.utc)
+        if hours is not None and when < now - dt.timedelta(hours=hours):
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        fh = _FROM_HDR_RE.search(text)
+        sh = _SUBJ_HDR_RE.search(text)
+        frm = fh.group(1).strip() if fh else "(unknown sender)"
+        subj = " ".join((sh.group(1) if sh else "(no subject)").split())
+        where = "bounce" if path.parent.name == "diagnostics" else "inbox"
+        body = text.split("\n---\n", 1)[1] if "\n---\n" in text else ""
+        out.append({"when": when, "from": frm, "subject": subj, "where": where,
+                    "bucket": _bucket(frm, subj, where, body)})
+    return out
+
+
+def _inputs_block(now: dt.datetime, hours: int) -> list[str]:
+    window = received(now, hours)
+    life = received(now, None)
+    w = collections.Counter(r["bucket"] for r in window)
+    l = collections.Counter(r["bucket"] for r in life)
+    lines = [
+        "",
+        f"### Input from outside (last {hours}h)",
+        f"  {len(window)} received — {w['world']} from a person or organisation outside · "
+        f"{w['automated']} automated notices · {w['bounce']} bounces of our own mail",
+        f"  and {w['human']} from you, {w['ours']} from another amigo (inside the commons)",
+        f"  lifetime: {len(life)} received — {l['world']} outside · {l['automated']} automated · "
+        f"{l['bounce']} bounces · {l['human']} from you · {l['ours']} from another amigo",
+    ]
+    world = [r for r in window if r["bucket"] == "world"]
+    lines.append(f"**From a person or organisation** ({len(world)})")
+    if not world:
+        lines.append("  (none — nothing outside the commons wrote to us in this window)")
+    for rec in world[:LIST_CAP]:
+        lines.append(f"  {_short(rec['from'])} — {_short(rec['subject'])}")
+    if len(world) > LIST_CAP:
+        lines.append(f"  … +{len(world) - LIST_CAP} more")
+    bounces = [r for r in window if r["bucket"] == "bounce"]
+    if bounces:
+        lines.append(f"**Our own letters that did not arrive** ({len(bounces)})")
+        for rec in bounces[:POSTPONED_SHOWN]:
+            lines.append(f"  {_short(rec['subject'])}")
+        if len(bounces) > POSTPONED_SHOWN:
+            lines.append(f"  … +{len(bounces) - POSTPONED_SHOWN} more")
+    return lines
+
+
 def _short(title: str) -> str:
     """A readable glance-length name for an item. The full title stays in the ledger."""
     t = " ".join((title or "").split())
@@ -131,6 +251,7 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
     ]
     for group in "NAPR":
         lines += _group_table(group, window, life)
+    lines += _inputs_block(now, hours)
     lines += [
         "",
         f"### Titles added in the last {hours}h",

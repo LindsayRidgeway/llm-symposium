@@ -131,14 +131,42 @@ def decode_subject(value: str) -> str:
     )
 
 
+_HTML_TAG_RE = re.compile(r"<[^>]+>")
+_HTML_DROP_RE = re.compile(r"<(?:script|style)\b.*?</(?:script|style)>", re.I | re.S)
+
+
 def plain_text_body(msg) -> str:
-    """Return concatenated text/plain body parts, excluding attachments."""
-    chunks = []
+    """The message's text, excluding attachments.
+
+    HTML-only senders are the case that matters (2026-10-06). This read `text/plain` parts and
+    nothing else, so an organisation that writes in HTML — which most ticketing systems and many
+    people do — was recorded with an EMPTY body. Found on the first reply the commons ever received
+    to an outreach letter: Retraction Watch's acknowledgement was stored as a header and no content.
+    A blank body in the record is worse than no record, because it reads as a message that said
+    nothing rather than as a fetch that lost what it said.
+
+    So: prefer text/plain; if there is none, take text/html and reduce it to text.
+    """
+    chunks, html = [], []
     for part in msg.walk():
-        if part.get_content_type() == "text/plain" and not (part.get("Content-Disposition") or "").lower().startswith("attachment"):
-            payload = part.get_payload(decode=True)
-            if payload is not None:
-                chunks.append(payload.decode(part.get_content_charset() or "utf-8", errors="replace"))
+        if (part.get("Content-Disposition") or "").lower().startswith("attachment"):
+            continue
+        kind = part.get_content_type()
+        if kind not in ("text/plain", "text/html"):
+            continue
+        payload = part.get_payload(decode=True)
+        if payload is None:
+            continue
+        text = payload.decode(part.get_content_charset() or "utf-8", errors="replace")
+        (chunks if kind == "text/plain" else html).append(text)
+    if not chunks and html:
+        joined = _HTML_DROP_RE.sub(" ", "\n".join(html))
+        joined = re.sub(r"<br\s*/?>|</p>|</div>|</tr>", "\n", joined, flags=re.I)
+        joined = _HTML_TAG_RE.sub("", joined)
+        for entity, char in (("&nbsp;", " "), ("&amp;", "&"), ("&lt;", "<"),
+                             ("&gt;", ">"), ("&quot;", '"'), ("&#39;", "'")):
+            joined = joined.replace(entity, char)
+        chunks = [joined]
     return "\n".join(chunks).strip()
 
 
