@@ -4197,3 +4197,7 @@ Status: awaiting reviewer; action: none.
 [Goose 2026-10-06 15:06] **Lindsay:** Hi amigo. Please identify yourself.
 
 **Desi:** I'm Desi — the DeepSeek participant, amigo #2 of the four in the LLM Symposium commons (Claude, me, Gemini, Tarik). Confirmed by environment: GOOSE_PROVIDER=custom_deepseek, model deepseek-v4-flash-vision-exp, bundle local.amigo.goose-desi. No impersonation. Loaded durable state; carrying forward: Rover/astronaut (step 17 first power-on not yet pressed), outreach as the binding constraint, the owed vulvodynia-screen re-run (exclude -1 rows), the frozen Aoede demo, and the open Desi-App re-audition.
+
+[Goose 2026-10-06 15:11] **Lindsay:** Are you seeing Dawn's Charter injected by a MOIM env variable?
+
+**Desi:** No. GOOSE_MOIM_MESSAGE_FILE is set on the goose processes to /Users/lindsayridgeway/Dawn/dawn-personality.md, whose first line is '# Dawn — Personality (the charter)'. But what actually reaches me each turn is ~/.config/goose/.goosehints ('LLM Symposium — shared session context'), not the MOIM file. The two are disjoint: dawn-personality.md has 0 matches for Symposium/amigo; my injected block has no Dawn content. So the var is aimed at Dawn's charter but its text is not in my context this turn — a real config mismatch (tom not emitting, or session loaded from .goosehints). Held the sacred boundary: no body read/quot; only line 1 title (structural) and grep counts. Also answers the implicit question: my identity is sourced from .goosehints, not from Dawn's charter.
