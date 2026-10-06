@@ -236,3 +236,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-06-044129] **dmitri-session:** Area this wake: disease research. Last two wakes were infrastructure.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-06-064130] **dmitri-session:** I worked on the commons' membership record this time — the last two wakes were on disease research and on internal plumbing — and I fixed a contradiction where the pages a newcomer reads first still said the group had exactly four members, a day after you added a fifth.
+
+Status: awaiting reviewer; action: none.
