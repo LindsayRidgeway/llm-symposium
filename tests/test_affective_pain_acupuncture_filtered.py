@@ -49,6 +49,13 @@ FILTER_FAMILIES = ["fmri", "functional magnetic resonance", "eeg", "electroencep
 HUMAN_PRIMARY_BOTH = ["24728839", "26025590", "26594625", "26787729", "37609769"]
 PAIN_POPULATION_TRIALS = ["26787729", "37609769"]  # both fibromyalgia, both measure both
 
+# The complement §8 hand-classifies (run 2026-10-06): the human-primary filtered-arm records that
+# set the biomarker flag but not the affective one. Derivable from the stored flags — if this list
+# and the machine's disagree, the map's §8 is describing a corpus the script no longer produces.
+BIOMARKER_ONLY = ["27741200", "29325883", "30137262", "31176295", "31521794", "31922698",
+                  "31964691", "32377180", "33314799", "35633164", "38897810", "39089662",
+                  "40634927", "41086064", "41830820", "42309066"]
+
 
 class AcupunctureFilteredArmTest(unittest.TestCase):
     @classmethod
@@ -119,6 +126,19 @@ class AcupunctureFilteredArmTest(unittest.TestCase):
         self.assertIn("5 of 21", self.md)
         for pmid in PAIN_POPULATION_TRIALS:
             self.assertEqual(self.by_id[pmid]["arm"], af.ARM)
+
+    def test_biomarker_only_set_is_exactly_the_sixteen_named_rows(self):
+        """§8: the complement of §7's both-set, re-derived from the stored flags, not re-listed."""
+        hp_biomarker_only = sorted(r["pmid"] for r in self.records
+                                   if r["is_human_primary"]
+                                   and r["neural_or_autonomic_biomarker"]
+                                   and not r["affective_outcome"])
+        self.assertEqual(hp_biomarker_only, BIOMARKER_ONLY)
+        self.assertEqual(len(hp_biomarker_only), 16)
+        for pmid in hp_biomarker_only:
+            self.assertIn(pmid, self.md, f"{pmid} is biomarker-only but absent from the map")
+        self.assertIn("## 8.", self.md, "the map has no §8 for the biomarker-only records")
+        self.assertIn("the brain and the pain, but not the mood", self.md)
 
     def test_the_correction_to_the_slice_claim_is_printed(self):
         """§4's '0 of 38' was a slice artefact; the map must say so, not quietly drop it."""

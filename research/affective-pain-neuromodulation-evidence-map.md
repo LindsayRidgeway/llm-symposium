@@ -228,3 +228,69 @@ The overturning condition it names — a reported *correlation* between the chan
 measure and the change in the affective measure — cannot be tested from the abstracts, because an
 abstract would not carry it. Route 1 is therefore **human-blocked**: it needs a reader with library
 access, not another query.
+
+## 8. The sixteen biomarker-only records — §7's open question, run 2026-10-06
+
+**The question §7 left.** §7 hand-read the five human-primary records of the filtered census that set
+*both* flags, and corrected §4's zero. The item's own next action (step 2) is the complement:
+classify the **16 human-primary records of the filtered arm that set the biomarker flag only**, and ask
+whether they are mechanistic neuroimaging with no clinical affective outcome — and whether that holds
+across the arm. This section is that classification, hand-read from the stored abstracts.
+
+**How the 16 were selected, with nothing hand-picked.** All 40 records of the filtered census set the
+biomarker flag *by construction* — the filter names a brain or autonomic measurement, so a record
+cannot be returned without one. Of the 40, **21 are human-primary**; **18 of those set the affective
+flag too** (§7), leaving **16**. The 16 are exactly the records a reader can re-derive from the stored
+flags, and they are the rows below.
+
+| PMID | yr | design & population | measures — clinical | measures — brain / autonomic | class |
+|---|---|---|---|---|---|
+| [42309066](https://pubmed.ncbi.nlm.nih.gov/42309066/) | 2026 | model study; TENS analgesia + chronic-pain cohort | pain intensity (VAS-type) | corticospinal fMRI | **not an acupuncture study** |
+| [41830820](https://pubmed.ncbi.nlm.nih.gov/41830820/) | 2026 | AcuENDO trial sub-study; 18 women, endometriosis / chronic pelvic pain (control arm omitted) | daily pain ratings | resting-state EEG (fPCA) | pain-population trial |
+| [41086064](https://pubmed.ncbi.nlm.nih.gov/41086064/) | 2025 | cheek acupuncture vs sham; 37 + 13 chronic-pain patients | immediate analgesia | resting-state EEG | pain-population trial |
+| [40634927](https://pubmed.ncbi.nlm.nih.gov/40634927/) | 2025 | three-arm RCT; 90 knee osteoarthritis | NRS, WOMAC | fMRI (ALFF, FC) | pain-population RCT |
+| [39089662](https://pubmed.ncbi.nlm.nih.gov/39089662/) | 2024 | RCT; 60 chronic sciatica | VAS, ODI | fMRI (fALFF) | pain-population RCT |
+| [38897810](https://pubmed.ncbi.nlm.nih.gov/38897810/) | 2024 | Neurosynth meta-analysis; scalp-acupuncture targets | — | neuroimaging clusters | secondary / method |
+| [35633164](https://pubmed.ncbi.nlm.nih.gov/35633164/) | 2022 | Neurosynth meta-analysis; scalp-stimulation targets | — | EEG 10-20 mapping | secondary / method |
+| [33314799](https://pubmed.ncbi.nlm.nih.gov/33314799/) | 2021 | RCT; 76 fibromyalgia, electroacupuncture vs mock laser | Brief Pain Inventory | rs-fMRI + insular GABA MRS | pain-population RCT |
+| [32377180](https://pubmed.ncbi.nlm.nih.gov/32377180/) | 2020 | RCT; 24 chronic shoulder pain, contralateral vs ipsilateral needling | shoulder pain / function | rs-fMRI degree centrality | pain-population RCT |
+| [31964691](https://pubmed.ncbi.nlm.nih.gov/31964691/) | 2020 | cross-sectional + trial substudy; 230 participants | trial treatment response | rs-fMRI marker (machine learning) | marker study |
+| [31922698](https://pubmed.ncbi.nlm.nih.gov/31922698/) | 2020 | preliminary; 12 nonacute sciatica | analgesia | rs-fMRI (ReHo, FC) | pain-population study |
+| [31521794](https://pubmed.ncbi.nlm.nih.gov/31521794/) | 2020 | crossover RCT; 35 healthy men, dental-pain model | BORG CR10 | electrodermal activity + HRV | healthy-volunteer experimental pain |
+| [31176295](https://pubmed.ncbi.nlm.nih.gov/31176295/) | 2019 | single-blind trial; 50 chronic low back pain | treatment response | rs-fMRI predictor | pain-population study |
+| [30137262](https://pubmed.ncbi.nlm.nih.gov/30137262/) | 2019 | crossover; 27 healthy subjects | pain threshold | fMRI | healthy-volunteer experimental pain |
+| [29325883](https://pubmed.ncbi.nlm.nih.gov/29325883/) | 2018 | fMRI expectancy study; 43 knee osteoarthritis | calibrated heat-pain response | fMRI | pain-population study |
+| [27741200](https://pubmed.ncbi.nlm.nih.gov/27741200/) | 2016 | RCT; 67 endometriosis pelvic pain, psychotherapy + somatosensory stimulation vs wait-list | NRS pain, quality of life | fMRI (primary outcome) | pain-population RCT |
+
+**The counts, read off the table.** Eleven of the 16 are acupuncture studies in a patient pain
+population; a twelfth (42309066) is in a pain population but is not an acupuncture study. Two
+(38897810, 35633164) are secondary/method papers with no primary patient and no outcome. Two
+(31521794, 30137262) are healthy-volunteer experimental-pain studies. Twelve of the 16 name a
+pain instrument or the word *analgesia* in the stored abstract (NRS, VAS, WOMAC, BPI, ODI, BORG-CR10).
+
+**What this changes: the omission is affective, not clinical.** §7's summary sentence reads "the
+acupuncture literature measures the brain and not the mood." Read against these 16, the second half
+is right and the first half is too strong. **The corpus is not blind to the patient's pain** — it
+measures it with an instrument, often against a sham or mock-laser comparator, in trials with 24–90
+patients. **It is blind to the patient's mood:** 15 of the 16 name no affect term at all in the stored
+abstract, and the sixteenth (27741200) names "quality of life" while its primary outcome is brain
+connectivity. The sharpened claim is therefore *the brain and the pain, but not the mood* — the
+affective outcome is the missing column, and it is missing even in the trials that measure everything
+else. That is a narrower and harder finding than §7's wording, and it is the one these records support.
+
+**One record that should not be in the arm.** 42309066 (*Cell Rep Med* 2026, "A predictive
+corticospinal model for pain perception") is a corticospinal fMRI model validated on TENS analgesia,
+and it is not an acupuncture study: neither its stored abstract nor its stored MeSH mentions
+acupuncture, and its MeSH carries *Transcutaneous Electric Nerve Stimulation*. It is left in the table
+rather than deleted, because a record the query surfaced and the flags counted should not be edited
+out of a census by hand; but the arm's headline "40" should not be read as "40 acupuncture papers"
+until this one is explained. Recorded, not hidden.
+
+**Honest limits.** (1) The class column is a hand-read of the abstract, not of the paper: an abstract
+that omits an outcome can hide one. (2) The affect scan is a keyword list, so "names no affect term"
+means those words are absent, not that no mood was measured. (3) This sharpens §7's phrasing; it does
+not move §7's direction, which still rests on the five both-flag records and the two controlled
+dissociations.
+
+**Pinned by** `tests/test_affective_pain_acupuncture_filtered.py`, which re-derives the 16 from the
+stored flags and fails if the map names a different set.
