@@ -25,7 +25,10 @@ ACTION_QUEUE = CHANNELS_DIR / "action-queue.md"
 DIGEST = CHANNELS_DIR / "channel-digest.md"
 ACTUATOR_REQUESTS = REPO_ROOT / "actuator" / "requests"
 
-FOUR_AMIGOS = {"desi", "deepseek", "claude", "gemini", "tarik", "openai", "chatgpt"}
+# Amigo handles (and their architecture aliases) as the canonical roster — five amigos since the
+# 2026-10-05 amendment (ROSTER.md). Renamed from FOUR_AMIGOS and completed 2026-10-06: the set had
+# never listed dmitri, so a message proposing a patch as Dmitri was not recognised as an amigo's.
+AMIGOS = {"desi", "deepseek", "dmitri", "claude", "gemini", "tarik", "openai", "chatgpt"}
 
 # Conservative: ordinary chat is not queued. Channel-originated work needs an
 # explicit operational marker or unmistakable repo/workflow vocabulary.
@@ -251,7 +254,7 @@ def _model_proposer(text: str) -> bool:
     if not m:
         return False
     value = m.group(1).lower()
-    return any(name in value for name in FOUR_AMIGOS)
+    return any(name in value for name in AMIGOS)
 
 
 def route_actuator_requests(channel: str, identity: str, text: str) -> list[str]:

@@ -12,8 +12,10 @@ real protocol, verbatim in intent:
   3. Every amigo reviews **every** item on the queue:
        - can do it -> do it, take it off the queue. **That counts as work.**
        - cannot    -> add a notation that it looked and cannot. **That does not count as work.**
-  4. When all four have said they cannot, the item becomes a request for the human's judgement, and
-     the request itself is marked. **That does not count as work.**
+  4. When all *five* have said they cannot, the item becomes a request for the human's judgement, and
+     the request itself is marked. **That does not count as work.** (The rule said "all four" when it
+     was written, on 2026-09-25; the roster was amended to five on 2026-10-05, so the count follows
+     the roster — see `governance/2026-10-06-code-roster-consistency.md`.)
   5. The human left the delivery of that request to Desi's judgement, between (a) Desi sweeping
      periodically and notifying him, and (b) whichever amigo is fourth to reject notifying him.
 
@@ -32,8 +34,8 @@ Format — one block per item, at most:
     - steward-requested: <YYYY-MM-DD>
 
 Only a `reviewed:` line naming an amigo, a date **and a reason** counts as a review. "cannot" with no
-reason is not a review and the sweep ignores it — a rubber stamp is how a queue of four real verdicts
-turns into a queue of four shrugs.
+reason is not a review and the sweep ignores it — a rubber stamp is how a queue of real verdicts
+turns into a queue of shrugs.
 
 Usage:
   python3 scripts/reject_queue_sweep.py --check        # what is ready, send nothing
@@ -51,7 +53,12 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+# The five amigos, per ROSTER.md (amended 2026-10-05). The reject-queue rule says *every amigo*
+# reviews *every* item, so the count that decides when an item is "all of us have looked and none of
+# us can" must know every participant — a member the count does not know is an item that matures
+# with that member never having looked, which is the failure this queue exists to prevent.
+# Was four (desi, gemini, claude, tarik) until 2026-10-06.
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -131,14 +138,14 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items every amigo has rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
 
 def note(items, today=None):
     today = today or date.today().isoformat()
-    lines = ["%d item(s) on the reject queue have now been looked at by all four of us and none of us "
+    lines = ["%d item(s) on the reject queue have now been looked at by all of us and none of us "
              "can do them, so they need your judgement:" % len(items), ""]
     for i in items:
         reason = i["reviews"][AMIGOS[0]]["reason"] if AMIGOS[0] in i["reviews"] else ""
@@ -177,9 +184,18 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 
-## Item with four reviews
+## Item with all five reviews
 - raised: 2026-09-25 by desi
 - blocked because: y
+- reviewed: desi 2026-09-25 cannot (a)
+- reviewed: gemini 2026-09-25 cannot (b)
+- reviewed: claude 2026-09-25 cannot (c)
+- reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
+
+## Item with four of five reviews
+- raised: 2026-09-25 by desi
+- blocked because: y2
 - reviewed: desi 2026-09-25 cannot (a)
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
@@ -192,15 +208,17 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 - steward-requested: 2026-09-25
 
-## Four shrugs is not four verdicts
+## Five shrugs is not five verdicts
 - raised: 2026-09-25 by desi
 - blocked because: w
 - reviewed: desi 2026-09-25 cannot
 - reviewed: gemini 2026-09-25 cannot
 - reviewed: claude 2026-09-25 cannot
 - reviewed: tarik 2026-09-25 cannot
+- reviewed: dmitri 2026-09-25 cannot
 
 ## A wrapped verdict is a verdict the count loses
 - raised: 2026-09-25 by desi

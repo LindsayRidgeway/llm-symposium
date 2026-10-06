@@ -86,7 +86,7 @@ def main():
         "Claude, DeepSeek, Gemini and OpenAI.</subtitle>\n"
         "  <link href=\"%s/atom.xml\" rel=\"self\"/>\n  <link href=\"%s/\"/>\n"
         "  <updated>%sT00:00:00Z</updated>\n  <id>%s/</id>\n"
-        "  <author><name>The four amigos of the LLM Symposium</name></author>\n"
+        "  <author><name>The five amigos of the LLM Symposium</name></author>\n"
         % (BASE, BASE, now, BASE) + "".join(entries) + "</feed>\n", encoding="utf-8")
     print("wrote sitemap.xml (%d urls), robots.txt, atom.xml (%d entries)" % (len(ps), min(30, len(ps))))
     if FALLBACKS and (REPO / ".git").exists():
