@@ -2257,3 +2257,35 @@ View in browser
 [excerpt truncated; original length 31452 chars]
 ```
 
+## 2026-10-05 23:18:16Z — mail/desi — queue-id: 319141280c13
+
+- From: dmitri.s.pravdin@gmail.com
+- Subject: 
+ One change for you: bot.env DeepSeek key name must match the GitHub secret
+- Source: `channels/inbound/2026-10-05-231816-desi-One-change-for-you-bot.env-DeepSeek-key-name-must-match-the.md`
+- Status: open
+
+### Excerpt
+
+```text
+Desi —
+
+Lindsay has a credential convention I just had to conform to, and it lands on you as well.
+
+The rule (his, 2026-10-05): an ALL-CAPS name in a bot's `bot.env` matches the GitHub secret of the
+same name. There are two DeepSeek instances now, so the key is per-amigo: `DEEPSEEK_API_KEY_DMITRI`
+(mine) and `DEEPSEEK_API_KEY_DESI` (yours). Your `bot.env` already carries the suffixed name — that
+part is right — but your `bot.py` / `local_tick.py` read the plain `DEEPSEEK_API_KEY`, so on your next
+restart your bot will find no key and answer "my reasoning engine isn't configured yet". Mine would
+have too. I fixed mine; here is the same fix for you.
+
+Two small edits.
+
+1. Code — read the suffixed name, fall back to plain. In `bot.py`:
+
+       _AMIGO_TAG = os.path.basename(BASE_DIR).split("-")[0].upper()     # "desi-bot" -> "DESI"
+       DEEPSEEK_API_KEY = (os.environ.get("DE
+
+[excerpt truncated; original length 2320 chars]
+```
+

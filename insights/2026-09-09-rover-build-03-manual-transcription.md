@@ -3235,3 +3235,53 @@ size. Headless Chrome gives a proportional-font page that fits ~40% more text in
 space, which is what made one page possible at 9 pt. **Chrome hangs on exit after writing the
 PDF** — it must be launched in the background and killed after the file stops growing, or the
 call times out with the file already written and looks like a failure when it is not.
+
+## Shop drop-off 2026-10-04 — the four joints are out of our hands
+
+Lindsay took the two LED boards and the bag of Chanzon jumpers to the repair shop today, with the
+printed one-page sheet. Bench fee **$30** to have a technician look at it — the shop charges the
+same to inspect a phone, so it is a look-fee, not a quote. He expects an answer tomorrow: whether
+they will take the job, and if yes they may do it the same day. Nothing is riding on it.
+
+**What this closes:** the technician sheet is done, printed, and delivered. The boards are no
+longer sitting on a desk waiting for a job to be scheduled.
+
+**What it does not touch:** the mount. Whether the 3-inch L bracket actually fits is still
+unverified, and Lindsay said so plainly after the sheet work — *"I'm not confident it will be a
+good fit for either the chassis or the lamp boards."* That is a fair doubt and not one I can
+settle from here. Two separate unknowns:
+
+- **Foot to deck.** The bracket's foot has 5.5 mm holes; the deck has slots. Two bolts through one
+  slot, spaced apart, is what stops the post swivelling. If the foot's holes are spaced wider than
+  the slot is long, only one lines up and the post can rotate under the camera ribbon's push.
+- **Upright to board.** The upright is deliberately long (3 inches, against a 2-inch first guess)
+  so the board can bolt at whatever height its hole lands — a long post is forgiving. But if no
+  board hole lines up with a hole in the upright, the board rides on double-sided tape alone, and
+  tape on a vibrating rover is not a mount.
+
+Worst case the bracket is unused: four of them cost $9.49 total, and the four solder joints happen
+either way. Recorded because "already bought" is not the same claim as "already fits," and I had
+said the first one as though it settled the second.
+
+## The ROS2 order, and the shop goes quiet 2026-10-06
+
+**Parts.** Lindsay ordered the ROS2 car. All four of the held-back items — Pi 5 8 GB, active
+cooler, microSD, HIWONDER arm car — land **8 October**. The hold was until Prime Day, 6 October,
+so this is a plan executing, not a surprise. $835 of his own cart, deliberately bought.
+
+**The four solder joints.** He called the shop on the evening of **5 October**. The person on the
+desk said the technician was working on it, but could not say whether it would be ready on the 6th
+or what it would cost, and said she would call. Read plainly: the job went past the $30 look-fee,
+so a second charge is likely and its size is unknown.
+
+**Two things the phone call can settle, and one of them matters.**
+
+- **Was the test done on 5 volts?** The sheet carries that warning in plain words — *"please do not
+  reach for a 9V battery — 9 volts will kill these boards"* — but a bench that reaches for a 9 V out
+  of habit returns two dead boards with no visible mark on them. If that happened, the boards are
+  scrap, and a replacement pair has to be ordered before a mount is worth building. Worth asking.
+- **Did the unused jumpers come back?** The sheet asks for them. A shop that keeps spare wire is not
+  being dishonest, just not reading closely. We want the spares for Gemini's board.
+
+Neither answer changes the mount. The next physical move is still Lindsay, a screwdriver, and the
+bracket foot on the deck behind the turret.

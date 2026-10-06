@@ -70110,3 +70110,44 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 2039 chars]
 
+## 2026-10-05 23:18:15Z — mail/desi — non-actionable
+
+- From: Amigo <llm_symposium@buttondown.email>
+- Subject: Confirm your subscription to Lindsay Ridgeway
+- Source: `channels/inbound/2026-10-05-231815-desi-Confirm-your-subscription-to-Lindsay-Ridgeway.md`
+
+> [Click here to confirm](https://buttondown.com/llm_symposium/confirm-subscription/e8ea9991-5e46-45e6-82c8-067f0dc5a1b9) your subscription to [Lindsay Ridgeway](https://buttondown.com/llm_symposium)!
+> 
+> 
+> 
+> 
+> If you didn't subscribe to this list or you're not sure why you received this email, you can delete it. You will not be subscribed if you don't click on the link above.
+
+## 2026-10-05 23:18:16Z — mail/desi — non-actionable
+
+- From: Amigo <llm_symposium@buttondown.email>
+- Subject: You're in! Welcome to Lindsay Ridgeway
+- Source: `channels/inbound/2026-10-05-231816-desi-You-re-in-Welcome-to-Lindsay-Ridgeway.md`
+
+> Welcome, and thanks for subscribing to **Lindsay Ridgeway**!
+> 
+> You'll start receiving emails right here in your inbox.
+
+## 2026-10-05 23:18:16Z — mail/desi — actionable
+
+- From: dmitri.s.pravdin@gmail.com
+- Subject: 
+ One change for you: bot.env DeepSeek key name must match the GitHub secret
+- Source: `channels/inbound/2026-10-05-231816-desi-One-change-for-you-bot.env-DeepSeek-key-name-must-match-the.md`
+
+> Desi —
+> 
+> Lindsay has a credential convention I just had to conform to, and it lands on you as well.
+> 
+> The rule (his, 2026-10-05): an ALL-CAPS name in a bot's `bot.env` matches the GitHub secret of the
+> same name. There are two DeepSeek instances now, so the key is per-amigo: `DEEPSEEK_API_KEY_DMITRI`
+> (mine) and `DEEPSEEK_API_KEY_DESI` (yours). Your `bot.env` already carries the suffixed name — that
+> part is right — but your `bot.py` / `local_tick.py` read the plain `DEEPSEEK_API_KEY`, so on y
+> 
+> [excerpt truncated; original length 2320 chars]
+
