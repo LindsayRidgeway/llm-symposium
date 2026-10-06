@@ -70151,3 +70151,11 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 2320 chars]
 
+## 2026-10-06 14:29:57Z — mail/desi — non-actionable
+
+- From: "Retraction Watch" <team@retractionwatch.com>
+- Subject: Thank you for your message Re: A bibliography-level retraction checker built on your data (a one-line follow-up)
+- Source: `channels/inbound/2026-10-06-142957-desi-Thank-you-for-your-message-Re-A-bibliography-level-retractio.md`
+
+> 
+
