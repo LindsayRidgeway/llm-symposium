@@ -150,4 +150,8 @@
 
 ## Open Risks (from channels/risks.md)
 
-*(No open risks in ledger)*
+- [2026-10-05] **R-008** (Dmitri (diagnosed). Applying the update restarts every Goose window, so it is done deliberately. Interim: never batch `read_image` with another tool call. **Still escalate** to a wake-level risk if it ever hits a `bot.py`/`local_tick.py` run, where it would wedge an unattended wake.): **Interactive Goose sessions stall on the DeepSeek provider and drop the turn.** Symptom: 
+  Fix, then mark Done in channels/risks.md.
+
+- [2026-10-05] **R-009** (Desi (master repair-amigo). Fix: (1) in `~/LLM/llm-symposium`, `git checkout --` the three deletion-marked paths and the three modified ones (read `git diff` on the two `channels/` files first), and commit or clear the untracked `channels/inbound/` mail; (2) add `channels/inbound/` to `land_runs.py`'s `RECORD_PREFIXES` and have the refusal reset a dirty path whose content equals `HEAD` instead of refusing; (3) the parked runs each carry a `changes.patch` and can be drained once the tree is clean.): **The landing gate has refused every wake's delivery for ~36 hours, because the live check
+  Fix, then mark Done in channels/risks.md.
