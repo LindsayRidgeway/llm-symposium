@@ -21,13 +21,17 @@ Usage:
     python3 scripts/gen_index.py            # write governance/README.md, discussions/README.md
     python3 scripts/gen_index.py --stdout   # print, write nothing
 
-Order matters: the index is built with `git ls-files`, so a brand-new document is invisible
-until it is staged. `git add <new file>` first, then run this. (Hit and diagnosed 2026-09-18 —
-this generator reported "unchanged" for a discussions file that had not been added yet.)
+A brand-new document is visible the moment it is written — the listing is what `git add -A`
+would commit (tracked plus untracked-but-not-ignored), not what is staged. It used to be plain
+`git ls-files`, which made an unstaged new file invisible; that blindness let the index drift
+land silently (2026-10-04: a new script reached `main` with no entry, and no test objected,
+because the landing gate runs the suite *before* it stages the patch's new files). Fixed
+2026-10-06 by Dmitri; the regression is pinned in `tests/test_gen_index.py`.
 """
 
 import argparse
 import ast
+import datetime
 import os
 import re
 import subprocess
@@ -64,8 +68,19 @@ EXT = {"governance": (".md",), "discussions": (".md",), "scripts": (".py",)}
 
 
 def tracked(dirname):
+    """Every document in the directory that `git add -A` would commit.
+
+    `--cached --others --exclude-standard` is tracked files *plus* untracked files that are
+    not ignored. Plain `git ls-files` lists only tracked files, so a brand-new document was
+    invisible until it was staged. That is not a cosmetic gap: the landing gate
+    (`land_runs.py`) applies a run's diff and runs the test suite *before* it runs
+    `git add -A`, so at test time a file the patch adds is untracked. Enumerating tracked
+    files only meant the gate could not see the new script, the index was never missed, and
+    the drift landed silently — the 2026-10-04 filtered-acupuncture script is the instance.
+    """
     out = subprocess.check_output(
-        ["git", "-C", REPO, "ls-files", dirname]).decode()
+        ["git", "-C", REPO, "ls-files", "--cached", "--others",
+         "--exclude-standard", dirname]).decode()
     exts = EXT[dirname]
     return sorted(f for f in out.split("\n") if f.endswith(exts)
                   and os.path.basename(f) != "README.md")
@@ -126,8 +141,20 @@ def date_of(path):
             ["git", "-C", REPO, "log", "--diff-filter=A", "--follow",
              "-1", "--format=%ad", "--date=short", "--", path],
             stderr=subprocess.DEVNULL).decode().strip()
-        return out or "—"
     except subprocess.CalledProcessError:
+        out = ""
+    if out:
+        return out
+    # No commit yet: the document is staged or untracked — which is exactly the state the
+    # landing gate sees, because it runs the tests before it commits. Fall back to the
+    # file's own date, which is the day it is about to be committed, so the index the gate
+    # checks is the index that lands. Returning "—" here instead meant the index was red the
+    # instant the file was committed, and a red index that is already the baseline is one no
+    # later landing has to fix.
+    try:
+        return datetime.date.fromtimestamp(
+            os.path.getmtime(os.path.join(REPO, path))).isoformat()
+    except OSError:
         return "—"
 
 
