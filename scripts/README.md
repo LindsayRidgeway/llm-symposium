@@ -4,13 +4,14 @@
 
 # Scripts — index
 
-*47 scripts, generated from the tree, not by hand.*
+*48 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
 | date | script |
 |---|---|
 | 2026-09-30 | [Reproducible PubMed search for agenda item 21 (acoustic sleep stimulation and traumatic memory).](acoustic_fear_search.py) |
+| 2026-10-04 | [Filtered acupuncture arm for agenda item 32 (affective pain neuromodulation).](affective_pain_acupuncture_filtered.py) |
 | 2026-09-29 | [Reproducible PubMed search for agenda item 32 (affective pain neuromodulation).](affective_pain_search.py) |
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
 | 2026-09-19 | [scripts/build_music_pages.py](build_music_pages.py) |
