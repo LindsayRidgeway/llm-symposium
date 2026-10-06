@@ -189,6 +189,43 @@ def landed_run_ids(repo: Path = REPO) -> set[str]:
     return set(ANY_RUN_ID_RE.findall(out))
 
 
+LANDING_STAMP = "land(wake)"
+
+
+def last_landing(repo: Path = REPO) -> str | None:
+    """ISO-8601 UTC timestamp of the newest `land(wake)` commit on main, or None if there is none.
+
+    This is the *delivery* clock, and it is not the same question as `landed_run_ids`. That function
+    says which runs reached main; this says whether the landing pipeline is running at all. It has
+    to be asked separately because the two failures look identical in the item states: an item that
+    was reviewed and put off and an item whose whole wake was refused by land_runs.py are both
+    simply "not accomplished". Measured 2026-10-06: the pipeline had been silent for 2.7 days while
+    22 items were filed, and the daily report presented that as a review backlog — "nobody has
+    looked" — when the true cause was that no work was being landed. One cheap git call.
+    """
+    try:
+        out = subprocess.run(
+            ["git", "-C", str(repo), "log", "-1", "--format=%cI", "--grep", LANDING_STAMP],
+            capture_output=True, text=True, timeout=60, check=True,
+        ).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if not out:
+        return None
+    try:
+        when = dt.datetime.fromisoformat(out)
+    except ValueError:
+        return None
+    return when.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def landing_gap(items: dict[str, dict], last: str | None) -> int:
+    """How many items were filed after the last landing. Non-zero with an old `last` is a stall."""
+    if not last:
+        return sum(1 for r in items.values() if r.get("filed_utc"))
+    return sum(1 for r in items.values() if (r.get("filed_utc") or "") > last)
+
+
 def load(path: Path = LEDGER) -> dict[str, dict]:
     """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly."""
     items: dict[str, dict] = {}

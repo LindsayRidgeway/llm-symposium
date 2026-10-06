@@ -34,7 +34,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from channels.item_ledger import collect, counts, load  # noqa: E402
+from channels.item_ledger import collect, counts, landing_gap, last_landing, load  # noqa: E402
 
 GROUP_LABEL = {
     "N": "N — performed",
@@ -234,6 +234,30 @@ def _title_list(rows: list[dict], cap: int = LIST_CAP) -> list[str]:
     return out
 
 
+def _landing_block(now: dt.datetime, hours: int, last: str | None, gap: int) -> list[str]:
+    """Say plainly when the landing pipeline has gone quiet, because that fact changes what P means.
+
+    The report's whole reading of P rests on `accomplished` being set by a `land(wake)` commit on
+    main. When those commits stop, an item stuck "not accomplished" no longer means "nobody has
+    looked" — it can mean "the lander refused the whole wake and parked it on a side branch". The
+    two are the same string in the ledger and completely different diseases, so the report has to
+    distinguish them out loud rather than let a delivery stall read as a review backlog.
+    """
+    if not last or not gap:
+        return []
+    when = dt.datetime.strptime(last, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+    age_h = (now - when).total_seconds() / 3600.0
+    if age_h < hours:
+        return []
+    return [
+        "",
+        f"⚠ **No wake work has reached main for {age_h / 24:.1f} days.** The newest `land(wake)`",
+        f"commit is {last[:10]} and {gap} item(s) have been filed since. Until landing resumes, the",
+        "`not yet reviewed` counts below describe *delivery*, not review — they can include finished",
+        "work the lander parked on a side branch rather than work nobody has looked at.",
+    ]
+
+
 def render(hours: int = 24, now: dt.datetime | None = None) -> str:
     now = now or dt.datetime.now(dt.timezone.utc)
     items = load()
@@ -256,9 +280,10 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
         f"**Last {hours}h**  N={window['N']['total']}  A={window['A']['total']}  "
         f"P={window['P']['total']}  R={window['R']['total']}",
         f"    of P: {window['P']['decided']} decided / {window['P']['undecided']} not yet reviewed",
-        "",
-        f"### Last {hours}h, by amigo",
     ]
+    landed = last_landing()
+    lines += _landing_block(now, hours, landed, landing_gap(items, landed))
+    lines += ["", f"### Last {hours}h, by amigo"]
     for group in "NAPR":
         lines += _group_table(group, window, life)
     lines += _inputs_block(now, hours)
