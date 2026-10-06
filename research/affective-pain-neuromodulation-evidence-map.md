@@ -228,3 +228,89 @@ The overturning condition it names — a reported *correlation* between the chan
 measure and the change in the affective measure — cannot be tested from the abstracts, because an
 abstract would not carry it. Route 1 is therefore **human-blocked**: it needs a reader with library
 access, not another query.
+
+---
+
+## 8. The biomarker-only stratum — §7's implied claim, checked (2026-10-06, Dmitri, clock wake)
+
+**Why this section exists.** §7 leaves a stratum unread. Of the **21** human-primary filtered-arm
+records, **5** set both the affective and the biomarker flag (hand-read in §7) and **16 of 21 set the
+biomarker flag only**. Agenda item 32's next wake-takeable step names those 16: *are they mechanistic
+neuroimaging with no clinical affective outcome, and does that hold across the arm?* §7's closing claim
+— that the acupuncture literature measures the brain and not the mood — rests on them, and none of them
+was read. All 16 abstracts are already on disk
+(`research/affective-pain-neuromodulation-acupuncture-filtered-raw.json`); this section reads them, one
+row each.
+
+**Method.** The flags are term screens (§2), not outcomes, so each of the 16 was read by hand and sorted
+into five kinds. The row assignment is a judgement; the **set** and the counts are mechanical, and
+`tests/test_affective_pain_biomarker_stratum.py` pins both.
+
+| kind | n | pmids |
+|---|---|---|
+| brain-mechanism study in a chronic-pain population; outcome is a brain/physiological measure; no affective scale | **10** | 41830820, 41086064, 40634927, 39089662, 33314799, 32377180, 31964691, 31922698, 31176295, 29325883 |
+| brain or autonomic study in **healthy volunteers / an experimental pain model**, not a clinical pain population | **2** | 31521794, 30137262 |
+| **not a primary study** — a synthesis/meta-analysis over a neuroimaging database, not a patient study | **2** | 38897810, 35633164 |
+| **not acupuncture at all** — a neural-biomarker model (TENS), no acupuncture token in title/abstract/MeSH | **1** | 42309066 |
+| acupuncture-adjacent **psychotherapy RCT**; the only record in the stratum carrying any psychological outcome | **1** | 27741200 |
+
+### The 16, read
+
+| PMID | year | what it is (hand read) | kind |
+|---|---|---|---|
+| [41830820](https://pubmed.ncbi.nlm.nih.gov/41830820/) | 2026 | AcuENDO sub-study, 8-wk acupuncture for endometriosis + chronic pelvic pain; **resting-state EEG** α/β components as the outcome, daily pain ratings alongside; no control group | brain, chronic pain |
+| [41086064](https://pubmed.ncbi.nlm.nih.gov/41086064/) | 2025 | cheek acupuncture, 37 chronic-pain patients vs 13 sham; **resting EEG** oscillations and synchrony; outcome is pain relief; no affective scale | brain, chronic pain |
+| [40634927](https://pubmed.ncbi.nlm.nih.gov/40634927/) | 2025 | randomised three-armed **fMRI** (90 knee-OA patients); outcomes NRS + WOMAC; the psychological dimension is absent | brain, chronic pain |
+| [39089662](https://pubmed.ncbi.nlm.nih.gov/39089662/) | 2024 | randomised **fMRI** (60 chronic sciatica); outcomes VAS leg pain + ODI; no affective scale | brain, chronic pain |
+| [33314799](https://pubmed.ncbi.nlm.nih.gov/33314799/) | 2021 | randomised **fMRI + MRS** (76 fibromyalgia); outcome BPI pain severity; and note the population — fibromyalgia is the affective-pain disorder *par excellence*, and still no affective outcome is reported | brain, chronic pain |
+| [32377180](https://pubmed.ncbi.nlm.nih.gov/32377180/) | 2020 | randomised **resting fMRI** degree centrality (24 chronic shoulder pain); outcomes pain + Constant–Murley function | brain, chronic pain |
+| [31964691](https://pubmed.ncbi.nlm.nih.gov/31964691/) | 2020 | **fMRI** neural marker for migraine; an acupuncture arm against headache frequency; no affective scale | brain, chronic pain |
+| [31922698](https://pubmed.ncbi.nlm.nih.gov/31922698/) | 2020 | **resting fMRI** ReHo/FC (12 sciatica); outcomes pain + brain connectivity | brain, chronic pain |
+| [31176295](https://pubmed.ncbi.nlm.nih.gov/31176295/) | 2019 | real vs sham acupuncture in chronic low back pain; **rsFC** predicts response; outcome is pain relief | brain, chronic pain |
+| [29325883](https://pubmed.ncbi.nlm.nih.gov/29325883/) | 2018 | knee-OA patients, expectancy manipulation, **fMRI** + experimental heat pain; no affective scale | brain, chronic pain |
+| [31521794](https://pubmed.ncbi.nlm.nih.gov/31521794/) | 2020 | **healthy men**, experimentally induced dental pain, acupuncture vs sham vs none; outcomes BORG pain ratings + **HRV / electrodermal** (an autonomic index in healthy subjects, not a pain population) | healthy/experimental |
+| [30137262](https://pubmed.ncbi.nlm.nih.gov/30137262/) | 2019 | **27 healthy subjects**, fMRI, pain threshold under real/imagined acupuncture; not a pain population | healthy/experimental |
+| [38897810](https://pubmed.ncbi.nlm.nih.gov/38897810/) | 2024 | scalp-acupuncture targets derived from a **Neurosynth meta-analysis**; no patients, no outcome | synthesis, not primary |
+| [35633164](https://pubmed.ncbi.nlm.nih.gov/35633164/) | 2022 | scalp-stimulation targets from **large-scale meta-analyses** (Neurosynth); no patients, no outcome | synthesis, not primary |
+| [42309066](https://pubmed.ncbi.nlm.nih.gov/42309066/) | 2026 | a **corticospinal pain-intensity biomarker** model (TENS, not acupuncture); a chronic-pain cohort is present but the intervention is not acupuncture | not acupuncture |
+| [27741200](https://pubmed.ncbi.nlm.nih.gov/27741200/) | 2016 | RCT of **psychotherapy with somatosensory (acupuncture-point) stimulation** for endometriosis pain; primary outcome is brain connectivity, secondaries include pain NRS and a **mental quality-of-life** subscale that improved (p = .031) | psychotherapy RCT |
+
+### The answer to the item's question, and what it sharpens
+
+**Yes — and tighter than the item expected.** On reading, **zero of the 16 report an affective-outcome
+scale**: not one uses an anxiety, depression, catastrophizing or mood instrument. So the term screen left
+a stratum in which, when read, **nobody measured the mood**. **12 of the 16** measure the brain or a
+physiological index in a human pain context (**10 of 16** in a chronic-pain population — **10 of 16**,
+the bulk of the acupuncture literature's human-neuroimaging evidence — and **2 of 16** in healthy
+volunteers). The remaining **4 of 16** fail to measure mood for structurally different reasons, not
+because a mood scale was dropped: **2 of 16** are not primary studies, **1 of 16** is not acupuncture,
+and **1 of 16** reports a mental-quality-of-life secondary — the stratum's only affect-adjacent number,
+and a quality-of-life summary rather than an affective measure.
+
+So §7's sentence sharpens. It is not merely that the acupuncture literature *under*-measures the mood
+beside the brain; in the biomarker-only stratum it **does not measure the mood at all**. The five
+"both-flag" records of §7 are the entire human-primary acupuncture corpus that even names an affective
+or biomarker term together — and the biomarker-only sixteen beside them name the brain and no mood. This
+is a property of the *literature as indexed*, stated from abstracts; full texts (the §6 route-1 wall)
+could still contain an unextracted mood measure, which is why the claim is about what is reported.
+
+### Two second-order findings about the instrument
+
+1. **The review detector misses syntheses.** `is_review = any("review" in p for p in publication_types)`
+   (`scripts/affective_pain_search.py`). A record typed `Meta-Analysis` (**38897810**) is not caught, and
+   a meta-analytic synthesis typed only `Journal Article` (**35633164**) is not caught either; both are
+   therefore counted **human-primary**. **2 of the 16** are consequently not primary studies, and the
+   stratum's "human primary" count is two too high. The unambiguous fix — also test for `meta-analysis`
+   and `systematic` in the publication types — is recorded here, not applied, because it would silently
+   move §7's `5 of 21` and **21**.
+2. **One census record carries no acupuncture token.** **42309066**'s stored title, abstract and MeSH
+   descriptors contain no "acu" stem, yet both the filtered arm and the first acupuncture arm returned
+   it. The retrieval route cannot be determined from the stored record (its MeSH list carries no
+   acupuncture heading), so it is **flagged for a re-run, not explained** — and it is one of the 16.
+   `tests/test_affective_pain_biomarker_stratum.py` re-checks the token absence offline.
+
+**Honest limits.** (1) The flags are term screens and the "kind" column is a hand-read judgement; the test
+pins the **set** of 16 and the counts, not the judgement. (2) Abstracts, not full texts, so "does not
+report an affective outcome" means "does not report one in the abstract" — the strongest claim the corpus
+allows. (3) The 16 are a stratum of a filtered census of 40, itself a query that names measurements, so
+"10 of 16" is a count within a stratum, not an incidence in the acupuncture literature.
