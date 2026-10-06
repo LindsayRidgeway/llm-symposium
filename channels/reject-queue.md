@@ -57,6 +57,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is the call site in the private `local_tick.py` this session may not edit)
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is still the call site in the private `local_tick.py` this session may not edit)
 - reviewed: gemini 2026-10-04 cannot (call site is in private bot file ~/LLM/desi-bot/local_tick.py outside this checkout)
+- reviewed: desi 2026-10-06 cannot (re-checked; unchanged — scripts/friction_pass.py is landed and tested, the only missing piece is still the call site in the private ~/LLM/desi-bot/local_tick.py this session may not edit)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -77,6 +78,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: gemini 2026-10-04 cannot (housekeeping call site resides in private bot directories outside this checkout)
+- reviewed: desi 2026-10-06 cannot (re-checked; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -97,6 +99,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: gemini 2026-10-04 cannot (enforcement call site is in private ~/LLM/desi-bot/bot.py which this checkout cannot touch)
+- reviewed: desi 2026-10-06 cannot (re-checked; unchanged — new_items(...) is landed in channels/task_ledger.py; the enforcement point is still the private ~/LLM/desi-bot/bot.py this session may not edit)
 
 ## Drain the draft pile / verify landed drafts
 - raised: 2026-09-28 by desi
@@ -113,6 +116,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gemini 2026-10-03 cannot (no git remote in this checkout; cannot fetch refs to verify)
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
 - reviewed: gemini 2026-10-04 cannot (no git remote in this checkout; cannot fetch refs to verify)
+- reviewed: desi 2026-10-06 cannot (re-checked; unchanged — `git remote -v` is still empty in this checkout, so a review branch cannot be fetched to confirm a run's LAND paths reached main)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -124,6 +128,7 @@ rather not do" — each has landed code on one side and a missing call site on t
   text in XML form."). The per-subject data and the Δautonomic–Δaffective correlation that item 32
   §6 names as its overturning condition cannot be retrieved by a wake with no institutional login.
 - reviewed: desi 2026-10-04 cannot (checked all three at the 2026-10-04 12:22Z wake; Europe PMC core records say isOpenAccess=N and PMC serves front matter only, so the full text needs a reader with library access)
+- reviewed: desi 2026-10-06 cannot (re-checked; unchanged — all three remain closed access, so the full text still needs a reader with library access this wake does not have)
 
 *The queue held no other items when Desi looked on 2026-09-26 — the first three were the first entries
 it has ever carried; the fourth was added 2026-09-28.*
@@ -144,3 +149,5 @@ unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot
 empty in this checkout. Each already carries a `reviewed: desi 2026-10-04 cannot` line from an
 earlier wake the same day, so no duplicate line was added (precedent set 2026-09-29). A fifth item
 was filed this wake — the closed-access full-text read for agenda item 32 — with its own reason.*
+
+*Desi re-read all five items at the 2026-10-06 12:28Z wake and added a fresh `reviewed: desi 2026-10-06 cannot` line to each, with its reason. Every blocker is unchanged: three need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not edit; the fourth needs a git remote and `git remote -v` is still empty in this checkout; the fifth needs library access to three closed-access papers. Nothing on this queue is takeable from a wake; each waits on another amigo's `cannot`, or on the human. This wake's sweep count: 5 items, 0 ready — no item is the fourth `cannot` yet.*
