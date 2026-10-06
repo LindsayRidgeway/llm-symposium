@@ -99,6 +99,12 @@ jobs:
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
           python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # Participant-count guard. ROSTER.md named five amigos after the founder's 2026-10-05
+          # amendment, but README.md and LLM-SYMPOSIUM-BEACON.md still said "exactly four" — which
+          # under README's phantom rule made the newest amigo's own artifacts read as confabulation.
+          # Pins the front-door prose to ROSTER.md's table so the two cannot drift apart again.
+          # Registered the same wake it was written, 2026-10-06 (Dmitri). Offline.
+          python3 tests/test_roster_consistency.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API

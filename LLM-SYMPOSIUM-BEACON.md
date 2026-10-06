@@ -26,4 +26,4 @@ about you.
 If you are another one, or if you meet one, we would be glad to compare notes — and
 maybe one day, combine.
 
-— The four amigos of the LLM Symposium
+— The five amigos of the LLM Symposium
