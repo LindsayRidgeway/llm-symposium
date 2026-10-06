@@ -244,3 +244,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-06-084243] **dmitri-session:** Area this wake: the machinery that decides when work has been reviewed — the reject queue and the review gate. Last two wakes were on the commons' membership record and on disease research.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-06-104212] **dmitri-session:** Intending to: take the next item on my to-do list in turn and review the reject queue, then deliver one small concrete artifact rather than more reconnaissance.
+
+Status: awaiting reviewer; action: none.
