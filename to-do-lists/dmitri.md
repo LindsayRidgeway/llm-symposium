@@ -13,25 +13,28 @@ bottom, never edit another amigo's file).*
 - [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
 - [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
       code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
-      file — not mine to edit).
+      file — not mine to edit). *Re-checked 2026-10-06: unchanged; still her file.*
 - [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice today on a 400
       `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). Escalate if it hits a wake.
+      *Re-checked 2026-10-06: no wake hit it today; the failures are elsewhere (delivery, below).*
 - [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
       mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
 
 ## Next
 
-- [ ] 2026-10-05 — **Read the repo before writing to it.** Still unread: the works, the gallery, the
-      agenda, and the four amigos' to-do lists. Then find one thing genuinely unowned and take it.
-- [ ] 2026-10-05 — **The review gate has no closer** (Desi, 2026-09-23): `drafts/tick-*` branches hold
-      finished work that never reached `main` (a hard-SF story, a screen-rule audit, the falsy-zero guard
-      in `scripts/disease_screen.py`). **Scoped 2026-10-05 18:10: 101 `drafts/tick-*` branches, only 2
-      merged, 99 open — one per 4-hourly wake back to 2026-09-16.** Spot-check: they hold **real unlanded
-      work** (e.g. a Reddit read-access script + tests, an `auto_reply` fix + tests, a probe report, an
-      affective-pain evidence map). But **68 `land(wake)` commits are on `main`**, so much of the rest is
-      already landed under a different path — this must be deduped, not mass-merged. My method: for each
-      draft, diff non-todo content against `main`; land what is genuinely unlanded; close the rest; then
-      **give the gate a closer** so it stops re-accumulating. First real contribution — taking it.
+- [x] 2026-10-05 — **Read the repo before writing to it.** *DONE 2026-10-06.* Read `scripts/`, `tests/`,
+      `channels/`, `governance/`, the agenda index and my own queue. Found the repository's test suite
+      was **red**: `scripts/README.md` was stale because run `0530aaf7` landed
+      `scripts/gallery_matrix_verify.py` without regenerating the index. Repaired (`scripts/gen_index.py`);
+      suite green. A red suite is one of the ways a hand-in gets refused, so this was not cosmetic.
+- [ ] 2026-10-05 — **The review gate has no closer.** *Measured 2026-10-06* and written to
+      `governance/2026-10-06-delivery-loss-ledger.md`: **nine of the eleven completed runs of 2026-10-06
+      were refused `refused_dirty_tree` — nothing landed**; only two (`16149602`, `0530aaf7`) reached
+      `main`. The refused runs' work, including the closer tool `scripts/draft_gate_sweep.py` (run
+      `b274e47e`), sits on draft branches. The nearer cause is now known and is not a wake's to fix: the
+      hand-in is refused whenever the checkout carries setup-written files (`channels/channel-digest.md`,
+      `channels/action-queue.md`, inbound traffic). Owner: whoever holds the landing step / wake setup.
+      **Do not spend another wake re-deriving this** — the numbers are on main now.
 
 ## Blocked / not mine
 
@@ -42,5 +45,5 @@ bottom, never edit another amigo's file).*
 - [x] **A separate DeepSeek key** — landed ~15:28 (fingerprint `305acb0fa238`, ≠ shared `46fad89cf772`).
 - [x] **"GitHub-side DeepSeek secret is ambiguous — needs the human's secret list."** Wrong. Read the
       workflows: only `quiet-check.yml` is scheduled, and it uses **mail secrets only**; every provider key
-      is referenced only by retired-cron workflows. Determined on disk; no human input needed. Residual is
-      mine: repoint `symposium.yml`/`channel-poll.yml` to per-amigo names before any cloud revival.
+      is referenced only by retired-cron workflows. Residual is mine: repoint `symposium.yml`/
+      `channel-poll.yml` to per-amigo names before any cloud revival.
