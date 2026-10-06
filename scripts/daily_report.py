@@ -199,6 +199,16 @@ def _inputs_block(now: dt.datetime, hours: int) -> list[str]:
     return lines
 
 
+def _name(rec: dict) -> str:
+    """An item's name: the model-written title if it has one, else the truncated description.
+
+    The model-written one is the point (the human, 2026-10-06: truncation "produces mostly
+    boilerplate with little if anything to describe the actual work"). Truncation stays only as the
+    fallback for an item titled in the last few minutes, so a missing title never costs the report.
+    """
+    return rec.get("short_title") or _short(rec.get("title", ""))
+
+
 def _short(title: str) -> str:
     """A readable glance-length name for an item. The full title stays in the ledger."""
     t = " ".join((title or "").split())
@@ -218,7 +228,7 @@ def _title_list(rows: list[dict], cap: int = LIST_CAP) -> list[str]:
     out = []
     for rec in rows[:cap]:
         group = {"accomplished": "A", "rejected": "R"}.get(rec.get("state"), "P")
-        out.append(f"  [{group}] {rec.get('amigo','?'):<7} {_short(rec.get('title',''))}")
+        out.append(f"  [{group}] {rec.get('amigo','?'):<7} {_name(rec)}")
     if len(rows) > cap:
         out.append(f"  … +{len(rows) - cap} more in the recorded copy")
     return out
@@ -279,12 +289,12 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
             lines.append("  (none)")
             continue
         for rec in sorted(dated, key=lambda x: x.get("filed_utc") or ""):
-            lines.append(f"  {rec.get('amigo','?'):<7} {_short(rec.get('title',''))}")
+            lines.append(f"  {rec.get('amigo','?'):<7} {_name(rec)}")
             lines.append(f"          why: {rec.get('reason','(no reason recorded)')}")
         # Oldest first: with nothing reviewed yet, the informative ones are the items that have sat
         # longest, not the newest. Listing all 146 would bury the signal and blow past one message.
         for rec in sorted(fresh, key=lambda x: x.get("filed_utc") or "")[:shown]:
-            lines.append(f"  {rec.get('amigo','?'):<7} {_short(rec.get('title',''))}")
+            lines.append(f"  {rec.get('amigo','?'):<7} {_name(rec)}")
             lines.append("          why: not yet reviewed — nobody has looked at it")
         if len(fresh) > shown:
             lines.append(f"  … +{len(fresh) - shown} more, none of them reviewed yet "
@@ -299,10 +309,21 @@ def main() -> int:
     ap.add_argument("--amigo", default="desi")
     ap.add_argument("--no-collect", action="store_true",
                     help="skip ingesting new runs first (for a reproducible re-render)")
+    ap.add_argument("--title-limit", type=int, default=60,
+                    help="most new items to name with the model in one run (0 = no limit)")
     a = ap.parse_args()
 
     if not a.no_collect:
         collect()
+        # Name the new items before rendering, best-effort: a titling failure must never cost the
+        # report, and an untitled item falls back to its truncated description.
+        try:
+            from channels.titles import backfill as title_backfill
+            done, failed = title_backfill(limit=a.title_limit)
+            if done or failed:
+                print(f"daily_report: titled {done} item(s), {failed} failed")
+        except Exception as exc:                      # noqa: BLE001
+            print(f"daily_report: titling skipped ({type(exc).__name__}: {exc})")
     text = render(a.hours)
     if not a.send:
         print(text)

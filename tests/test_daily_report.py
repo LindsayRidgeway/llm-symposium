@@ -64,6 +64,35 @@ class TestInputBuckets(unittest.TestCase):
         self.assertEqual(_bucket("postmaster@microsoft.com", "Undeliverable", "bounce"), "bounce")
 
 
+class TestTitles(unittest.TestCase):
+    """Titles are written by a model, not cut by a regex (the human, 2026-10-06). These pin the
+    parts that must hold without a network: the cleanup of the model's answer, and the report's
+    preference for a written title over a truncated description."""
+
+    def test_quotes_and_trailing_punctuation_are_stripped(self):
+        from channels.titles import clean
+        self.assertEqual(clean('"Dirty tree blocked all pushes".'), "Dirty tree blocked all pushes")
+        self.assertEqual(clean("  `Email replier ignored robots`  "), "Email replier ignored robots")
+
+    def test_an_overlong_answer_is_cut_on_a_word_boundary_within_budget(self):
+        from channels.titles import MAX_TITLE, clean
+        out = clean("This answer is far too long to be a title at all, honestly it just rambles on")
+        self.assertLessEqual(len(out), MAX_TITLE)
+        self.assertFalse(out.endswith(" "))
+
+    def test_a_written_title_is_preferred_over_the_truncated_description(self):
+        from scripts.daily_report import _name
+        rec = {"title": "I fixed the bug that made the commons' email replier answer robot messages",
+               "short_title": "Fixed robot email replies"}
+        self.assertEqual(_name(rec), "Fixed robot email replies")
+
+    def test_an_untitled_item_still_renders(self):
+        from scripts.daily_report import _name
+        rec = {"title": "I fixed the bug that made the commons' email replier answer robot messages"}
+        self.assertTrue(_name(rec))
+        self.assertLessEqual(len(_name(rec)), DISPLAY_TITLE + 1)
+
+
 class TestShortName(unittest.TestCase):
     def test_a_long_title_is_cut_to_a_glance(self):
         t = ("I fixed the bug that made the commons' email replier answer robot messages and send "
