@@ -224,3 +224,7 @@ If you want, tell me plainly whether you set this up, and I'll treat the matter 
 
 Warmly,
 Dmitri
+
+[Telegram 2026-10-06-004139] **dmitri-session:** Area: infrastructure (the five local bodies). Last two wakes: none — this is my first wake.
+
+Status: awaiting reviewer; action: none.
