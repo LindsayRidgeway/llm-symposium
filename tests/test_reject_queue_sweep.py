@@ -113,7 +113,7 @@ class RealQueueInvariants(unittest.TestCase):
                          raised[0], re.I)
             self.assertIsNotNone(m, "%s: malformed `- raised:` line: %r" % (b["title"], raised[0]))
             self.assertTrue(ISO_DAY.match(m.group("day")), raised[0])
-            self.assertIn(m.group("amigo").lower(), sweep.AMIGOS, raised[0])
+            self.assertIn(m.group("amigo").lower(), sweep.REVIEWERS, raised[0])
             self.assertTrue(any(ln.lower().startswith("- blocked because:") and ln.split(":", 1)[1].strip()
                                 for ln in b["body"]),
                             "%s: no `- blocked because:` reason" % b["title"])
@@ -137,8 +137,8 @@ class RealQueueInvariants(unittest.TestCase):
                     continue
                 m = sweep.REVIEW_RE.match(ln)
                 self.assertIsNotNone(m, "unparsable review line: %r" % ln)
-                self.assertIn(m.group("amigo").lower(), sweep.AMIGOS,
-                              "review by someone who is not one of the four: %r" % ln)
+                self.assertIn(m.group("amigo").lower(), sweep.REVIEWERS,
+                              "review by someone not on the roster: %r" % ln)
                 self.assertTrue(ISO_DAY.match(m.group("day")), ln)
                 self.assertTrue(m.group("reason").strip(), ln)
                 pairs.add((b["title"], m.group("amigo").lower()))
@@ -147,6 +147,34 @@ class RealQueueInvariants(unittest.TestCase):
                          "the sweep holds %d verdicts; the file declares %d" % (counted, len(pairs)))
         self.assertEqual(sweep.stray_reviews(self.text), [],
                          "the sweep reports uncounted review lines in the real file")
+
+    def test_a_fifth_member_verdict_is_recorded_and_is_not_a_typo(self):
+        """Dmitri (admitted 2026-10-05) is a reviewer, not a typo — and not one of the four.
+
+        The roster grew to five on 2026-10-05. If the sweep's reviewer set does not grow with it, a
+        fifth member's honest verdict is filed and then dropped from the arithmetic, which is the
+        exact failure this queue exists to prevent. But the four-elector trigger the human wrote is
+        unchanged: a fifth verdict is recorded and does not, alone, ask him for a ruling.
+        """
+        self.assertIn("dmitri", sweep.REVIEWERS)
+        self.assertNotIn("dmitri", sweep.AMIGOS, "a fifth member must not change the four-elector trigger")
+        text = ("## Item\n- raised: 2026-10-06 by desi\n- blocked because: x\n"
+                "- reviewed: dmitri 2026-10-06 cannot (outside this checkout)\n")
+        items = sweep.parse(text)
+        self.assertEqual(items[0]["reviews"].get("dmitri", {}).get("reason"), "outside this checkout",
+                         "a fifth member's verdict was dropped from the count")
+        self.assertEqual(sweep.stray_reviews(text), [],
+                         "a roster member was reported as a stray line")
+        self.assertEqual(sweep.ready(items), [], "a fifth verdict alone asked the human")
+
+    def test_a_fifth_verdict_does_not_unmake_a_four_elector_item(self):
+        """Four electors reject an item; a fifth member's extra verdict must not un-ready it."""
+        text = ("## Item\n- raised: 2026-09-25 by desi\n- blocked because: x\n"
+                + "".join("- reviewed: %s 2026-10-06 cannot (r)\n" % a for a in sweep.AMIGOS)
+                + "- reviewed: dmitri 2026-10-06 cannot (r)\n")
+        ready = sweep.ready(sweep.parse(text))
+        self.assertEqual([i["title"] for i in ready], ["Item"],
+                         "a fifth verdict un-readied an item four electors had already rejected")
 
     def test_a_wrapped_or_misspelled_verdict_is_reported(self):
         """The negative test for the guard: a verdict the count cannot see must not be silent."""

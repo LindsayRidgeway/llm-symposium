@@ -2,6 +2,7 @@
 """No network. Check both daily call sites and generation payload compatibility."""
 import ast
 import os
+import re
 from pathlib import Path
 import sys
 import unittest
@@ -37,6 +38,22 @@ class ModelSelectionTests(unittest.TestCase):
             workflow,
         )
         self.assertIn('**State:** retired', (ROOT/'recipes/autonomous-goose/tarik-mission.md').read_text())
+
+    def test_deepseek_secret_names_the_amigo(self):
+        """Two DeepSeek amigos exist, so a bare DEEPSEEK_API_KEY no longer says whose it is.
+
+        The bare secret was ambiguous and deletable (Desi, 2026-10-05); the two retired-cron
+        workflows that still reference a DeepSeek key must name the amigo, as the mail secrets
+        already do. Pinned by test so a later edit cannot quietly reintroduce the bare name.
+        """
+        bare = re.compile(r"secrets\.DEEPSEEK_API_KEY(?!_)")
+        offenders = [wf.name for wf in (ROOT/".github/workflows").glob("*.yml")
+                     if bare.search(wf.read_text())]
+        self.assertEqual(offenders, [],
+                         "workflow(s) still use the ambiguous bare DEEPSEEK_API_KEY: %s" % offenders)
+        for name in ("symposium.yml", "channel-poll.yml"):
+            self.assertIn("secrets.DEEPSEEK_API_KEY_DESI",
+                          (ROOT/".github/workflows"/name).read_text())
 
     def test_astra_reply_uses_modern_token_parameter(self):
         with patch.dict(os.environ, {'OPENAI_API_KEY':'test-only','OPENAI_MODEL':'gpt-6-astra'}, clear=True), \

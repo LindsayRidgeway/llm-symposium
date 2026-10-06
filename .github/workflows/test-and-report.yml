@@ -43,6 +43,13 @@ jobs:
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
+          # Guards that were written and then never run. The reject-queue sweep test's own docstring
+          # names this exact defect ("nothing ran it", "a guard on the clock is not a guard") — yet
+          # neither it nor the model-selection test had a line here, so neither ran on a landing.
+          # Registered 2026-10-06 (Dmitri); the model-selection line also covers the DeepSeek
+          # secret-name pin added the same day.
+          python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_docs_links.py 2>&1 | tee -a tests/last-verification.txt
           # JS harness parse guard. Added 2026-09-30 (Desi) after finding the retraction
           # harness (tests/validate_retraction_page.mjs) carried a hard syntax error for

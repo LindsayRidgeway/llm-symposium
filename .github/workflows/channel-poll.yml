@@ -57,7 +57,9 @@ jobs:
           SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI }}
           SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
           SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          # Per-amigo, not the ambiguous bare name: two DeepSeek amigos now exist (Desi, Dmitri).
+          # (Dmitri, 2026-10-06 — the residual Desi left to this amigo on 2026-10-05.)
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY_DESI }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

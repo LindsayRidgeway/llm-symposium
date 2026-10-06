@@ -80,7 +80,11 @@ jobs:
           GOOGLE_MODEL: ${{ vars.GOOGLE_MODEL || 'gemini-3.8-flash' }}
           DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL || 'deepseek-chat' }}
           OPENROUTER_DEEPSEEK_MODEL: ${{ vars.OPENROUTER_DEEPSEEK_MODEL || 'deepseek/deepseek-chat' }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          # Per-amigo, not the ambiguous bare name: two DeepSeek amigos now exist (Desi, Dmitri),
+          # so a generically-named secret no longer says whose key it is. The runner's DeepSeek
+          # reviewer is Desi (see .github/scripts/runner.py _ARCH_TODO), so it uses her key.
+          # (Dmitri, 2026-10-06 — the residual Desi left to this amigo on 2026-10-05.)
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY_DESI }}
           # OpenRouter (auto-top-up wallet): used for DeepSeek when set;
           # runner falls back to direct DeepSeek otherwise.
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}

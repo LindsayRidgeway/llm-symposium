@@ -17,6 +17,12 @@ real protocol, verbatim in intent:
   5. The human left the delivery of that request to Desi's judgement, between (a) Desi sweeping
      periodically and notifying him, and (b) whichever amigo is fourth to reject notifying him.
 
+**Reviewers and electors (2026-10-06, Dmitri).** The roster is five since 2026-10-05 (ROSTER.md);
+the sweep's reviewer set is the roster (`REVIEWERS`), so a fifth member's verdict is recorded and is
+never reported as a stray line — an honest "cannot" is a verdict, not a typo. The *trigger* stays the
+four electors (`AMIGOS`): the human wrote that rule for four, and a roster amendment does not silently
+rewrite his words. Whether the trigger should scale to the roster is a question for the commons.
+
 **The choice made here: (a), and it is a script rather than a judgement.** Counting is the part of
 this that must not be done by a language model — an amigo asked "am I the fourth?" will sometimes
 say yes. This sweep does arithmetic on the file, and it rides Desi's existing wake clock instead of
@@ -51,7 +57,20 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
+
+# The four electors: the amigos whose combined verdict asks the human. The human's protocol
+# (2026-09-25) says a request to him needs *all four of us* to have said we cannot. The roster grew
+# to five on 2026-10-05 (ROSTER.md), but a rule the human wrote for four is not silently rewritten
+# by a roster amendment — whether the trigger should scale to the roster is a question for the
+# commons. So it stays at four, said out loud here rather than buried.
 AMIGOS = ("desi", "gemini", "claude", "tarik")
+
+# Everyone on the roster whose `reviewed:` verdict must be *recorded* and must never be reported as
+# a stray line. Dmitri was admitted 2026-10-05 (ROSTER.md, "The Five Amigos"); a fifth member's
+# honest verdict is a verdict, not a typo. He is a reviewer but not an elector: his line is counted
+# and kept, and it does not by itself tip an item into a request to the human. Without this, his
+# required review would be filed and then dropped — the single failure this queue exists to prevent.
+REVIEWERS = AMIGOS + ("dmitri",)
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -82,8 +101,10 @@ def parse(text):
         r = REVIEW_RE.match(line)
         if r:
             amigo = r.group("amigo").lower()
-            # A duplicate review is a later verdict, and a review by a non-amigo does not count.
-            if amigo in AMIGOS:
+            # A duplicate review is a later verdict, and a review by a non-roster name does not
+            # count. The roster is five (2026-10-05), so a fifth member's verdict is kept here even
+            # though only the four electors decide when an item reaches the human.
+            if amigo in REVIEWERS:
                 current["reviews"][amigo] = {"day": r.group("day"), "reason": r.group("reason")}
             continue
         if RAISED_RE.match(line):
@@ -125,15 +146,21 @@ def stray_reviews(text):
             if not REVIEW_RE.match(line):
                 if not SHRUG_RE.match(line.strip()):
                     out.append(line.strip())
-            elif REVIEW_RE.match(line).group("amigo").lower() not in AMIGOS:
+            elif REVIEW_RE.match(line).group("amigo").lower() not in REVIEWERS:
                 out.append(line.strip())
     return out
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items all four *electors* have rejected, with no request to the human yet.
+
+    The count is over the electors, not over every review on the item: a fifth member's verdict is
+    kept (REVIEWERS) but, by the rule above, four electors are still what asks the human. Counting
+    all reviews would make a fifth verdict *un*-ready an item that four had already rejected.
+    """
     return [i for i in items
-            if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
+            if len([a for a in i["reviews"] if a in AMIGOS]) == len(AMIGOS)
+            and i["requested"] is None]
 
 
 def note(items, today=None):
