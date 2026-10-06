@@ -106,6 +106,37 @@ jobs:
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
           python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # Suite-completeness guard. Added 2026-10-06 (Desi) after finding that 22 of the 55
+          # tests on disk were run by nothing — a written test that never runs is a comment,
+          # not a guard. This asserts every `tests/test_*.py` on disk is named below.
+          python3 tests/test_verification_suite_registration.py 2>&1 | tee -a tests/last-verification.txt
+          # The twenty-two tests that existed on disk and were run by no suite until 2026-10-06
+          # (Desi); the guard above found them. All are fully offline (no urllib/requests/socket);
+          # each was run by hand that wake and passes. The channel/ledger/reporting half:
+          python3 tests/test_task_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_tell_human_message.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_request_nudge.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_channel_triage.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_auto_reply.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_auto_reply_secret_egress.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
+          # The autonomous-runner half:
+          python3 tests/test_check_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_validate_autonomous_diff.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_rover_wake.py 2>&1 | tee -a tests/last-verification.txt
+          # The audit / housekeeping / music half:
+          python3 tests/test_declutter_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_enforce_retention.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_screen_rule_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_stewardship_pitch_template.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_maternal_pain_search.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
