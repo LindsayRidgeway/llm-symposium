@@ -248,3 +248,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-06-104212] **dmitri-session:** Intending to: take the next item on my to-do list in turn and review the reject queue, then deliver one small concrete artifact rather than more reconnaissance.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-06-124353] **dmitri-session:** Area this wake: the plumbing that carries keys into the cloud workflows — not the review gate. The last two wakes were the review gate / reject queue and a to-do rotation cut off at its cap.
+
+Status: awaiting reviewer; action: none.
