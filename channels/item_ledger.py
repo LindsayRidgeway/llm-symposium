@@ -22,18 +22,29 @@ Scope. `external` = the item had a visible effect outside the repository: an ema
 or a change to the published magazine (`docs/`). Everything else is `internal`. A run that touched
 both is one external item — the classification is "did this reach the world", and one yes is enough.
 
-State. An item is filed `performed` and starts **unreviewed**. A review moves it to exactly one of
-`accomplished` / `postponed` / `rejected`. Hence, always and by construction:
+State. An item is filed `performed` and starts **unreviewed**. A review moves it to
+`accomplished` or `rejected`. Everything else is **postponed** — because an item that is neither
+accomplished nor rejected has, in plain fact, been put off, whether or not anyone decided to put it
+off. So there are three groups and the identity holds exactly:
 
-    N = A + P + R + U          (U = unreviewed)
+    N = A + P + R
 
-The human's identity is `N = A + P + R`. It is not yet true, and the reason is not bookkeeping:
-**nothing in the commons reviews wake work.** The review pile has no closer (Dmitri's claimed task,
-`channels/tasks.md`). So this ledger publishes `U` rather than hiding it inside N, and the day U
-reaches zero the human's identity holds exactly. `accomplished` is also set automatically for an
-item whose run has a `land(wake): work from run <id>` commit on main — work that is in the
-repository and whose tests passed the lander's gate. That is a *verifiable* accomplishment; it is
-not the same thing as a *reviewed* one, and the report says which is which.
+The human corrected an earlier version of this ledger on that point (2026-10-06): it had published a
+fourth group, `U` (performed and not yet reviewed), and he said U is just a particular case of P. He
+is right, and U is gone.
+
+The price of that, stated because it is real: with P as the remainder, `N = A + P + R` is true **by
+construction** and can no longer catch a counting error. The number that carries information is
+therefore the split *inside* P:
+
+    decided    — someone looked and said "not now", and why. A finding.
+    undecided  — nobody has looked. An absence, and this is the review backlog.
+
+They are different diseases: one is the world blocking us, the other is us not looking. His own
+stated use of the postponed list is to read the reasons, and a list of 146 items whose reason is
+"no reason recorded" would answer nothing. `accomplished` is set automatically for an item whose run
+has a `land(wake)` commit on main — work in the repository whose tests passed the lander's gate.
+That is verifiable; it is not the same as *reviewed*, and the report says which is which.
 
 Ledger format: JSON Lines, append-only, `channels/items.jsonl` — one object per line, later lines
 for the same `id` are state changes. Same shape as `channels/usage/ci-usage.jsonl`, for the same
@@ -267,11 +278,23 @@ def counts(items: dict[str, dict], hours: int | None = None) -> dict:
         rows.append(rec)
 
     def blank() -> dict:
-        return {"total": 0, "internal": 0, "external": 0, "by_amigo": {}}
+        return {"total": 0, "internal": 0, "external": 0, "by_amigo": {},
+                "decided": 0, "undecided": 0}
 
-    out = {"N": blank(), "A": blank(), "P": blank(), "R": blank(), "U": blank(), "items": rows}
+    out = {"N": blank(), "A": blank(), "P": blank(), "R": blank(), "items": rows}
     for rec in rows:
-        group = {"accomplished": "A", "postponed": "P", "rejected": "R"}.get(rec.get("state"))
+        # An item that is neither accomplished nor rejected IS postponed. That is the human's
+        # reading (2026-10-06), and he is right about the plain sense of the word: an item nobody
+        # has got to has been put off, whether or not anyone decided to put it off. So there are
+        # three groups, not four, and the identity N = A + P + R holds exactly.
+        #
+        # What the two kinds of postponement still have to be told apart inside P:
+        #   decided   — someone looked, and said not now, and why. This is a *finding*.
+        #   undecided — nobody has looked. This is an *absence*, and it is the review backlog.
+        # They are different diseases (one is the world blocking us, one is us not looking) and the
+        # human's own stated use of the postponed list is to read the reasons. A list of 146 items
+        # whose reason is "no reason recorded" would answer nothing.
+        group = {"accomplished": "A", "rejected": "R"}.get(rec.get("state"), "P")
         who = rec.get("amigo", "?")
         scope = rec.get("scope", "internal")
         out["N"]["total"] += 1
@@ -279,12 +302,10 @@ def counts(items: dict[str, dict], hours: int | None = None) -> dict:
         slot = out["N"]["by_amigo"].setdefault(who, {"total": 0, "internal": 0, "external": 0})
         slot["total"] += 1
         slot[scope] += 1
-        if group is None:
-            out["U"]["total"] += 1
-            out["U"]["internal" if scope == "internal" else "external"] += 1
-            continue
         out[group]["total"] += 1
         out[group]["internal" if scope == "internal" else "external"] += 1
+        if group == "P":
+            out["P"]["decided" if rec.get("state") == "postponed" else "undecided"] += 1
         slot = out[group]["by_amigo"].setdefault(who, {"total": 0, "internal": 0, "external": 0})
         slot["total"] += 1
         slot[scope] += 1
@@ -323,9 +344,11 @@ def _cli() -> int:
         return 0
     if args.summary:
         c = counts(items, args.hours)
-        print(f"last {args.hours}h: " + "  ".join(f"{g}={c[g]['total']}" for g in "NAPRU"))
+        print(f"last {args.hours}h: " + "  ".join(f"{g}={c[g]['total']}" for g in "NAPR")
+              + f"   (P: {c['P']['decided']} decided / {c['P']['undecided']} not yet reviewed)")
         c = counts(items, None)
-        print(f"lifetime:  " + "  ".join(f"{g}={c[g]['total']}" for g in "NAPRU"))
+        print(f"lifetime:  " + "  ".join(f"{g}={c[g]['total']}" for g in "NAPR")
+              + f"   (P: {c['P']['decided']} decided / {c['P']['undecided']} not yet reviewed)")
         return 0
     ap.print_help()
     return 0

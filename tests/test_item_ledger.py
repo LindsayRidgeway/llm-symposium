@@ -111,30 +111,35 @@ class TestCounts(unittest.TestCase):
             rec("e", "tarik", "internal", "rejected", old),
         ]}
 
-    def test_the_identity_holds(self):
+    def test_the_identity_holds_exactly(self):
+        # The human's correction, 2026-10-06: U is a case of P, so there are three groups and the
+        # identity is exact rather than a target.
         c = il.counts(self.rows(), None)
         self.assertEqual(c["N"]["total"], 5)
-        self.assertEqual(c["N"]["total"],
-                         c["A"]["total"] + c["P"]["total"] + c["R"]["total"] + c["U"]["total"])
+        self.assertEqual(c["N"]["total"], c["A"]["total"] + c["P"]["total"] + c["R"]["total"])
+        self.assertNotIn("U", c)
 
-    def test_unreviewed_is_its_own_group_and_not_dropped(self):
+    def test_an_unreviewed_item_is_postponed_and_counted_as_undecided(self):
         c = il.counts(self.rows(), None)
-        self.assertEqual(c["U"]["total"], 2)      # a and b
+        self.assertEqual(c["P"]["total"], 3)          # a and b unreviewed, d decided
+        self.assertEqual(c["P"]["decided"], 1)        # d
+        self.assertEqual(c["P"]["undecided"], 2)      # a, b — nobody has looked
         self.assertEqual(c["A"]["total"], 1)
-        self.assertEqual(c["P"]["total"], 1)
         self.assertEqual(c["R"]["total"], 1)
 
     def test_internal_and_external_are_split_per_group_and_per_amigo(self):
         c = il.counts(self.rows(), None)
         self.assertEqual((c["N"]["internal"], c["N"]["external"]), (3, 2))
         self.assertEqual(c["N"]["by_amigo"]["desi"], {"total": 2, "internal": 1, "external": 1})
-        self.assertEqual((c["P"]["internal"], c["P"]["external"]), (0, 1))
+        self.assertEqual((c["P"]["internal"], c["P"]["external"]), (1, 2))   # a | b, d
+        self.assertEqual(c["P"]["by_amigo"]["gemini"]["total"], 1)           # d — c was accomplished
 
     def test_the_window_excludes_old_items(self):
         c = il.counts(self.rows(), 24)
-        self.assertEqual(c["N"]["total"], 3)      # only the three filed "now"
-        self.assertEqual(c["P"]["total"], 0)
-        self.assertEqual(c["R"]["total"], 0)
+        self.assertEqual(c["N"]["total"], 3)          # only the three filed "now"
+        self.assertEqual(c["A"]["total"], 1)          # c
+        self.assertEqual(c["P"]["total"], 2)          # a, b — unreviewed and in-window
+        self.assertEqual(c["R"]["total"], 0)          # e is old
 
 
 class TestReview(unittest.TestCase):

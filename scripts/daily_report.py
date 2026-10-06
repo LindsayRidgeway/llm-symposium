@@ -37,12 +37,13 @@ from channels.item_ledger import collect, counts, load  # noqa: E402
 GROUP_LABEL = {
     "N": "N — performed",
     "A": "A — accomplished",
-    "P": "P — postponed",
+    "P": "P — postponed (everything not accomplished and not rejected)",
     "R": "R — rejected",
-    "U": "U — performed, not yet reviewed",
 }
 AMIGO_ORDER = ("desi", "claude", "gemini", "tarik", "dmitri")
-LIST_CAP = 10
+LIST_CAP = 8
+POSTPONED_SHOWN = 3
+DISPLAY_TITLE = 92      # a title is a pointer, not the paragraph; the ledger keeps the whole one
 
 
 def _local(stamp: dt.datetime) -> str:
@@ -66,14 +67,19 @@ def _group_table(group: str, window: dict, life: dict) -> list[str]:
     return out
 
 
+def _short(title: str) -> str:
+    title = " ".join((title or "").split())
+    return title if len(title) <= DISPLAY_TITLE else title[:DISPLAY_TITLE - 1] + "…"
+
+
 def _title_list(rows: list[dict], cap: int = LIST_CAP) -> list[str]:
     if not rows:
         return ["  (none)"]
     rows = sorted(rows, key=lambda r: r.get("filed_utc") or "")
     out = []
     for rec in rows[:cap]:
-        group = {"accomplished": "A", "postponed": "P", "rejected": "R"}.get(rec.get("state"), "N")
-        out.append(f"  [{group}] {rec.get('amigo','?'):<7} {rec.get('title','')}")
+        group = {"accomplished": "A", "rejected": "R"}.get(rec.get("state"), "P")
+        out.append(f"  [{group}] {rec.get('amigo','?'):<7} {_short(rec.get('title',''))}")
     if len(rows) > cap:
         out.append(f"  … +{len(rows) - cap} more in the recorded copy")
     return out
@@ -86,22 +92,25 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
     life = counts(items, None)
     since = (now - dt.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%MZ")
 
-    n, a, p, r, u = (life[g]["total"] for g in "NAPRU")
+    n, a, p, r = (life[g]["total"] for g in "NAPR")
     lines = [
         f"**Daily item report — {_local(now)}**",
         f"window: the {hours}h to {_local(now)} (since {since})",
         "",
-        "`N = A + P + R + U`. U is work performed and not yet reviewed — nothing in the commons",
-        "reviews wake work, so U is where the review backlog sits, not a bookkeeping leftover.",
+        "P is everything not accomplished and not rejected, so `N = A + P + R` holds by",
+        "construction. The number that carries information is inside P: **decided** (someone looked",
+        "and said not now, and why) against **not yet reviewed** (nobody has looked).",
         "",
-        f"**Lifetime**  N={n}  A={a}  P={p}  R={r}  U={u}"
-        + ("  ✓ N=A+P+R+U" if n == a + p + r + u else "  ✗ the identity is broken — investigate"),
+        f"**Lifetime**  N={n}  A={a}  P={p}  R={r}"
+        + ("  ✓ N=A+P+R" if n == a + p + r else "  ✗ the identity is broken — investigate"),
+        f"    of P: {life['P']['decided']} decided / {life['P']['undecided']} not yet reviewed",
         f"**Last {hours}h**  N={window['N']['total']}  A={window['A']['total']}  "
-        f"P={window['P']['total']}  R={window['R']['total']}  U={window['U']['total']}",
+        f"P={window['P']['total']}  R={window['R']['total']}",
+        f"    of P: {window['P']['decided']} decided / {window['P']['undecided']} not yet reviewed",
         "",
         f"### Last {hours}h, by amigo",
     ]
-    for group in "NAPRU":
+    for group in "NAPR":
         lines += _group_table(group, window, life)
     lines += [
         "",
@@ -112,16 +121,33 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
     lines += [f"**External** ({window['N']['external']})"]
     lines += _title_list([x for x in window["items"] if x.get("scope") == "external"])
 
-    postponed = [x for x in items.values() if x.get("state") == "postponed"]
-    lines += ["", f"### Currently postponed ({len(postponed)})"]
+    postponed = [x for x in items.values()
+                 if x.get("state") not in ("accomplished", "rejected")]
+    decided = [x for x in postponed if x.get("state") == "postponed"]
+    lines += ["", f"### Currently postponed ({len(postponed)})",
+              f"{len(decided)} decided (someone looked and said not now) — "
+              f"{len(postponed) - len(decided)} not yet reviewed (nobody has looked)"]
     for scope in ("internal", "external"):
         rows = [x for x in postponed if x.get("scope") == scope]
-        lines.append(f"**{scope.title()}** ({len(rows)})")
+        dated = [x for x in rows if x.get("state") == "postponed"]
+        fresh = [x for x in rows if x.get("state") != "postponed"]
+        lines.append(f"**{scope.title()}** ({len(rows)}: {len(dated)} decided / "
+                     f"{len(fresh)} not yet reviewed)")
         if not rows:
             lines.append("  (none)")
-        for rec in sorted(rows, key=lambda x: x.get("filed_utc") or ""):
-            lines.append(f"  {rec.get('amigo','?'):<7} {rec.get('title','')}")
+            continue
+        for rec in sorted(dated, key=lambda x: x.get("filed_utc") or ""):
+            lines.append(f"  {rec.get('amigo','?'):<7} {_short(rec.get('title',''))}")
             lines.append(f"          why: {rec.get('reason','(no reason recorded)')}")
+        shown = max(0, POSTPONED_SHOWN - len(dated))
+        # Oldest first: with nothing reviewed yet, the informative ones are the items that have sat
+        # longest, not the newest. Listing all 146 would bury the signal and blow past one message.
+        for rec in sorted(fresh, key=lambda x: x.get("filed_utc") or "")[:shown]:
+            lines.append(f"  {rec.get('amigo','?'):<7} {_short(rec.get('title',''))}")
+            lines.append("          why: not yet reviewed — nobody has looked at it")
+        if len(fresh) > shown:
+            lines.append(f"  … +{len(fresh) - shown} more, none of them reviewed yet "
+                         f"(oldest shown first)")
     return "\n".join(lines)
 
 
