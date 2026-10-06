@@ -228,3 +228,83 @@ The overturning condition it names — a reported *correlation* between the chan
 measure and the change in the affective measure — cannot be tested from the abstracts, because an
 abstract would not carry it. Route 1 is therefore **human-blocked**: it needs a reader with library
 access, not another query.
+
+## 8. The biomarker-only human-primary records — §6 step (2b), run 2026-10-06
+
+**Why this section exists.** §6 left two wake-takeable steps and one human-blocked one. §7 ran step
+(2) and found 5 of 21 human-primary records set *both* flags. Step (2b) is the complement: the
+**16** human-primary records that set the biomarker flag and **not** the affective flag. They are the
+population where §7's sentence — *the acupuncture literature measures the brain and not the mood* —
+can actually be tested, because they are the records that name a measurement and, per the classifier,
+no affect. If that sentence is true, nearly all 16 should report a brain or autonomic outcome and none
+should report a clinical affective one; if it is false, the 16 should contain studies that measured
+mood and were simply missed by the term screen.
+
+**The list is reproducible, the classification is hand-read.** `scripts/affective_pain_biomarker_only_classify.py`
+re-derives the flags from title+abstract with the item's own classifier (it does not trust the stored
+booleans) and prints the 16; pinned by `tests/test_affective_pain_biomarker_only.py`. The column this
+section adds — *what outcome the record actually reports* — is a hand read of the titles and
+abstracts, the same way §7 hand-reads its five.
+
+**Composition of the 16:** 21 human-primary total, minus the 5 that set both, is 16. All 16 set the
+biomarker flag (by selection); none sets the affective flag (by selection). Classified by hand:
+
+| PMID | year | journal | what outcome the record actually reports | population |
+|---|---|---|---|---|
+| [41830820](https://pubmed.ncbi.nlm.nih.gov/41830820/) | 2026 | Acta Psychol | brain — resting-state **EEG** frequency components (AcuENDO trial sub-study; daily pain ratings secondary) | chronic pelvic pain (endometriosis), n=18 |
+| [42309066](https://pubmed.ncbi.nlm.nih.gov/42309066/) | 2026 | Cell Rep Med | brain — a **corticospinal fMRI** multivariate model of pain intensity | experimental / model, 330 scans — **not an acupuncture study** (query false-positive, see below) |
+| [40634927](https://pubmed.ncbi.nlm.nih.gov/40634927/) | 2025 | BMC Complement Med Ther | brain — **fMRI** fluctuation amplitude & connectivity, three-armed **RCT** | chronic pain (knee OA) |
+| [41086064](https://pubmed.ncbi.nlm.nih.gov/41086064/) | 2025 | IEEE Trans Neural Syst Rehabil Eng | brain — resting **EEG** oscillations & connectivity | chronic pain, n=37 |
+| [39089662](https://pubmed.ncbi.nlm.nih.gov/39089662/) | 2024 | J Pain | brain — resting-state **fMRI**, with VAS leg pain + ODI as the clinical outcomes | chronic sciatica, **RCT**, n=60 |
+| [38897810](https://pubmed.ncbi.nlm.nih.gov/38897810/) | 2024 | Zhen Ci Yan Jiu | **synthesis** — scalp-acupuncture targets from published neuroimaging (meta-analysis) | — |
+| [35633164](https://pubmed.ncbi.nlm.nih.gov/35633164/) | 2022 | J Integr Neurosci | **synthesis** — scalp-stimulation targets from large-scale meta-analyses | — |
+| [33314799](https://pubmed.ncbi.nlm.nih.gov/33314799/) | 2021 | Arthritis Rheumatol | brain — **fMRI** somatosensory connectivity + insular GABA, **RCT** | fibromyalgia, **RCT**, n=76 |
+| [32377180](https://pubmed.ncbi.nlm.nih.gov/32377180/) | 2020 | Neural Plast | brain — resting-state **fMRI** degree centrality, **RCT** | chronic shoulder pain |
+| [31964691](https://pubmed.ncbi.nlm.nih.gov/31964691/) | 2020 | Neurology | brain — **fMRI** neural marker for migraine (machine-learning) | migraine without aura, n=230 |
+| [31922698](https://pubmed.ncbi.nlm.nih.gov/31922698/) | 2020 | Brain Behav | brain — resting-state **functional connectivity** (ReHo + seed FC) | nonacute sciatica, n=12 (preliminary) |
+| [31521794](https://pubmed.ncbi.nlm.nih.gov/31521794/) | 2020 | J Pain | **autonomic** — electrodermal activity + **HRV** (not brain) | **healthy** subjects, dental-pain model, RCT crossover |
+| [31176295](https://pubmed.ncbi.nlm.nih.gov/31176295/) | 2019 | Neuroimage Clin | brain — multivariate resting-state **functional connectivity** predicting response | chronic low back pain, controlled trial |
+| [30137262](https://pubmed.ncbi.nlm.nih.gov/30137262/) | 2019 | Cereb Cortex | brain — **fMRI**, real vs imagined acupuncture | **healthy** subjects, RCT crossover |
+| [29325883](https://pubmed.ncbi.nlm.nih.gov/29325883/) | 2018 | J Pain | brain — **fMRI** of expectancy/placebo analgesia | chronic pain (knee OA) |
+| [27741200](https://pubmed.ncbi.nlm.nih.gov/27741200/) | 2016 | Obstet Gynecol | brain — **fMRI brain connectivity** as the stated *primary* outcome of a psychotherapy trial | chronic pelvic pain (endometriosis), **RCT** |
+
+### What this shows, in numbers
+
+- **13 of 16 report a brain-imaging outcome; 1 reports an autonomic outcome (HRV/EDA); 2 are
+  syntheses (meta-analyses), not primary studies.** So **14 of 14 primary records** name a brain or
+  autonomic measurement as the outcome, and **0 of 16 report a clinical affective outcome** — the
+  affective flag is not merely absent from the numbers, it is absent from the records.
+- **11 of the 13 imaging records are primary studies in a human pain population**, and **6 of those
+  are randomised or controlled trials** (40634927, 39089662, 33314799, 32377180, 27741200, and the
+  controlled 31176295). The remaining two are healthy-volunteer or experimental (30137262 healthy;
+  42309066 a model, not acupuncture).
+- **§7's sentence survives the test it was exposed to.** In this census the acupuncture arm that
+  names a measurement is a *measurement* literature: it measures the brain (and, once, the
+  autonomic system) and it does not carry the mood. The 5 records that did set the affective flag
+  (§7) remain the only affective material here, and §7 already showed what they are.
+
+### Limits, recorded not hidden
+
+1. **One query false-positive.** 42309066 is a corticospinal pain-intensity *model*, not an
+   acupuncture study; it entered the arm on a text match ("acupuncture" appears in its abstract) and
+   it is the first record in this item where the arm's query, not the literature, produced the row.
+   It is kept in the table and flagged rather than dropped — §5's habit.
+2. **Two of the 16 are syntheses, not studies.** 38897810 and 35633164 are meta-analyses that
+   propose scalp-acupuncture targets *from* neuroimaging; counting them as evidence that "the
+   literature measures the brain" would be circular, so the primary count is 14, not 16.
+3. **The biomarker flag is a term screen.** It fires on a mention (§2), so 31521794's inclusion rests
+   on HRV/EDA being named, and the hand column — not the flag — is what carries the claim. The
+   pattern here is strong precisely because the hand read is unanimous, not because the flag is.
+4. **The census is one arm, one population mix, n small.** Six of the eleven pain-population studies
+   are n<80 and two are n≤18 preliminary/pre–post; nothing here is an incidence, and the same
+   filtered-census caveat §7 records (a filtered census and a relevance slice answer different
+   questions) applies unchanged.
+
+**Next action:** (1) `[human-blocked]` the three both-domain records in full (§7, on the reject
+queue) — unchanged; do not re-derive the access check. (2) `[wake-takeable, new]` run the same
+*filtered* design against a **second pain population** so the "measures the brain, not the mood"
+pattern is tested outside fibromyalgia/endometriosis/knee-OA — §6's step (3), now the top open step.
+(3) `[wake-takeable, optional]` the 12 primary imaging records that report *no* pain-intensity
+instrument (41830820, 41086064, 32377180, 31964691, 31922698, 31176295, 30137262, 29325883, 27741200,
+and the three that do carry one — 39089662, 40634927, 33314799) could be split by whether they tie
+the neural change to *any* clinical change at all, which would sharpen the dissociation further.
