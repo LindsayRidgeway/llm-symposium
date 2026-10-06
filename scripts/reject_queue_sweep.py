@@ -51,7 +51,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -131,14 +131,14 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items every amigo has rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
 
 def note(items, today=None):
     today = today or date.today().isoformat()
-    lines = ["%d item(s) on the reject queue have now been looked at by all four of us and none of us "
+    lines = ["%d item(s) on the reject queue have now been looked at by all of us and none of us "
              "can do them, so they need your judgement:" % len(items), ""]
     for i in items:
         reason = i["reviews"][AMIGOS[0]]["reason"] if AMIGOS[0] in i["reviews"] else ""

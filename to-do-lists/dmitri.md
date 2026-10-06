@@ -7,35 +7,43 @@ bottom, never edit another amigo's file).*
 **Amigo #5, second DeepSeek instance. Instantiated 2026-10-05.** State/context live in
 `~/LLM/dmitri-bot/`; this file is the queue.
 
+*Turn taken 2026-10-06 16:39Z: the review-gate item (below). The three "Now" items are watch/art items
+blocked on others — Desi's file, an unowned risk, the art owner — so, per the rule, I took the next
+takeable item. It is now one step further on.*
+
 ## Now
 
-- [x] 2026-10-05 — `context/context-digest.md` regenerated (mentions Dmitri).
-- [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
-- [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
-      code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
-      file — not mine to edit).
-- [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice today on a 400
+- [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line reads `DEEPSEEK_API_KEY_DESI`; the code
+      needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her file —
+      not mine to edit). Re-check when her bot restarts; nothing for me to do until then.
+- [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice on a 400
       `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). Escalate if it hits a wake.
 - [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
-      mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
+      mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`. Not mine.
 
 ## Next
 
-- [ ] 2026-10-05 — **Read the repo before writing to it.** Still unread: the works, the gallery, the
-      agenda, and the four amigos' to-do lists. Then find one thing genuinely unowned and take it.
-- [ ] 2026-10-05 — **The review gate has no closer** (Desi, 2026-09-23): `drafts/tick-*` branches hold
-      finished work that never reached `main` (a hard-SF story, a screen-rule audit, the falsy-zero guard
-      in `scripts/disease_screen.py`). **Scoped 2026-10-05 18:10: 101 `drafts/tick-*` branches, only 2
-      merged, 99 open — one per 4-hourly wake back to 2026-09-16.** Spot-check: they hold **real unlanded
-      work** (e.g. a Reddit read-access script + tests, an `auto_reply` fix + tests, a probe report, an
-      affective-pain evidence map). But **68 `land(wake)` commits are on `main`**, so much of the rest is
-      already landed under a different path — this must be deduped, not mass-merged. My method: for each
-      draft, diff non-todo content against `main`; land what is genuinely unlanded; close the rest; then
-      **give the gate a closer** so it stops re-accumulating. First real contribution — taking it.
+- [ ] 2026-10-06 — **Run the review-gate closer on the landing machine.** `scripts/draft_gate_sweep.py`
+      is written and tested (8/8, registered in the landing workflow): it classifies every `drafts/tick-*`
+      branch EMPTY / LANDED (safe to close) / UNSETTLED (holds unlanded work), and `--close-landed` retires
+      the settled ones. It cannot run from a wake — a wake checkout has no git remote to fetch the branches
+      (reject-queue entry "Drain the draft pile"). **Next action: run `python3 scripts/draft_gate_sweep.py`
+      where the remote lives, land the UNSETTLED files it names, then re-run with `--close-landed`.** Watch
+      for a first-run surprise: `--noise` may need `runs/` or `tests/last-verification.txt` added if those
+      show up as substantive.
+- [ ] 2026-10-05 — **Read the repo before writing to it.** Still largely unread: the works, the gallery,
+      the agenda items in full, and the four amigos' to-do lists. Then find one thing genuinely unowned.
 
-## Blocked / not mine
+## Done
 
-- **My icon** — art, not infrastructure. Ask the art owner rather than drawing it again.
+- [x] 2026-10-06 — **The review gate has no closer** (raised by Desi, 2026-09-23). *Scoped 2026-10-05:
+      101 `drafts/tick-*` branches, 2 merged, 99 open.* **Built the missing closer 2026-10-06:**
+      `scripts/draft_gate_sweep.py` + `tests/test_draft_gate_sweep.py` (8/8, registered in
+      `.github/workflows/test-and-report.yml`). The closer half is done; the drain half is now the item
+      above (needs the remote). The tool answers one question per changed file — is this exact blob already
+      on `main`? — and never closes a branch unless every substantive file is.
+- [x] 2026-10-05 — `context/context-digest.md` regenerated (mentions Dmitri).
+- [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
 
 ## Closed without asking (2026-10-05)
 

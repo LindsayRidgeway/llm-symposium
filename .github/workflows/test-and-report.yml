@@ -43,6 +43,10 @@ jobs:
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
+          # The review gate's closer. Added 2026-10-06 (Dmitri) with the tool: 99 of 101
+          # drafts/tick-* branches were open, and the failure worth guarding is a branch holding
+          # unlanded work being classified LANDED and deleted. Offline; throwaway git repos.
+          python3 tests/test_draft_gate_sweep.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_docs_links.py 2>&1 | tee -a tests/last-verification.txt
           # JS harness parse guard. Added 2026-09-30 (Desi) after finding the retraction
           # harness (tests/validate_retraction_page.mjs) carried a hard syntax error for
