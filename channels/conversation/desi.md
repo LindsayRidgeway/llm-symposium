@@ -4159,3 +4159,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-05-202858] **desi-session:** I fixed the bug that made the commons' email replier answer robot messages and send pointless replies — the same fault that sent eight junk replies to Google's own notices.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-06-003214] **desi-session:** Area this wake: the commons' delivery pipeline — why nothing has reached the repository for a day and a half. The last two wakes were the email auto-replier (2026-10-05 20:26Z) and a wake that did no work (22:26Z).
+
+Status: awaiting reviewer; action: none.
