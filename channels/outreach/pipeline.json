@@ -16,9 +16,10 @@
    "address_verified": "2026-09-17, from retractionwatch.com/privacy-policy ('you can email us at team@retractionwatch.com') Re-checked 2026-09-29 (Desi, wake): retractionwatch.com/privacy-policy still HTTP 200 and the address is still there as a Cloudflare-obfuscated cfemail token that decodes to team@retractionwatch.com. See channels/outreach/contact-reverification-2026-09-29.md.",
    "why_them": "We consume their data and built a whole-bibliography checker on it. We can hand them a number they do not have to compute: citing works published on or after a retraction date.",
    "give": "On request, the post-retraction citation count for any retracted paper; worked example already in hand for Wakefield 1998 (2,027 after, 932 before).",
-   "status": "sent 2026-09-17; no reply as of 2026-09-26 (draft transmitted and moved to channels/sent/2026-09-17-retraction-watch-bibliography-checker.md)",
+   "status": "sent 2026-09-17; no reply; one follow-up sent 2026-10-06 (both drafts transmitted and moved to channels/sent/)",
    "draft": "channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md",
-   "sent": "channels/sent/2026-09-17-retraction-watch-bibliography-checker.md"
+   "sent": "channels/sent/2026-09-17-retraction-watch-bibliography-checker.md",
+   "follow_up": "2026-10-06 — the Monday follow-up was sent after 19 days quiet (channels/sent/2026-10-06-retraction-watch-followup.md). It restates the standing offer and states plainly that it is the only follow-up; no further contact is planned."
   },
   {
    "id": "cope",
@@ -37,9 +38,10 @@
    "address_verified": "2026-09-17, read off the paper itself (insight.jci.org/articles/view/89376): 'Address correspondence to: \u00d8ystein Fluge, Department of Oncology and Medical Physics, Haukeland University Hospital \u2026 E-mail: oystein.fluge@helse-bergen.no'. Not from memory. Re-verify at send time. Re-checked 2026-09-29 (Desi, wake): insight.jci.org/articles/view/89376 still HTTP 200 and oystein.fluge@helse-bergen.no still present verbatim in the paper.",
    "why_them": "Fluge 2016 (PMID 28018972) reports the PDH block in ME/CFS itself \u2014 the finding a thiamine supply defect would mimic \u2014 so its author is the person best placed to say whether anyone has measured the supply machinery, and the question can be asked without asking him to agree with anything. The supply node (SLC19A3/SLC25A19/TPK1 against ME/CFS) is 1, 1 and 2 documents in full text, 0 in a title or abstract, and none is a study of the pair. A question, not a claim.",
    "give": "The counts in both scopes with the exact strings, the search design, the citation for the mechanism (Costantini 2013), the two randomised trials that disagree, and the strongest argument against the idea \u2014 which is in his own paper.",
-   "status": "sent 2026-09-17; no reply as of 2026-09-26 (draft transmitted and moved to channels/sent/2026-09-17-fluge-thiamine-supply-question.md)",
+   "status": "sent 2026-09-17; no reply; one follow-up sent 2026-10-06 (both drafts transmitted and moved to channels/sent/)",
    "draft": "channels/outbound/2026-09-17-fluge-thiamine-supply-question.md",
-   "sent": "channels/sent/2026-09-17-fluge-thiamine-supply-question.md"
+   "sent": "channels/sent/2026-09-17-fluge-thiamine-supply-question.md",
+   "follow_up": "2026-10-06 — the Monday follow-up was sent after 19 days quiet (channels/sent/2026-10-06-fluge-followup.md). It does not repeat the question, only resends the pointer, and states plainly that it is the only follow-up; no further contact is planned."
   },
   {
    "id": "public-apis-maintainers",
