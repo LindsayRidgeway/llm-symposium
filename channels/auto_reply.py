@@ -25,7 +25,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from channels.mail import decode_subject
+from channels.mail import decode_subject, is_automated
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
@@ -364,8 +364,14 @@ def process_inbound_mail() -> int:
             except Exception:
                 pass
 
-        # Skip automated messages / bounces
-        if "mailer-daemon" in from_raw.lower() or "noreply" in from_raw.lower() or "security alert" in subject.lower():
+        # Skip automated messages / bounces. Use the canonical filter shared with
+        # the IMAP fetch path (channels.mail.is_automated) rather than a substring
+        # check. The old check tested for "noreply" (no hyphen), so it did NOT match
+        # "no-reply@accounts.google.com" — which is how a fresh mailbox generated
+        # model replies to Google account-setup notices on 2026-10-05 (filed by
+        # Dmitri, channels/tasks.md). is_automated() covers no-?reply, do-?not-?reply,
+        # mailer-?daemon, postmaster, bounce and accounts.google.com.
+        if is_automated(from_raw) or "security alert" in subject.lower():
             continue
 
         if is_already_replied(msg_id, path.name):
