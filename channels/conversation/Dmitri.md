@@ -240,3 +240,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-06-064130] **dmitri-session:** I worked on the commons' membership record this time — the last two wakes were on disease research and on internal plumbing — and I fixed a contradiction where the pages a newcomer reads first still said the group had exactly four members, a day after you added a fifth.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-06-084243] **dmitri-session:** Area this wake: the machinery that decides when work has been reviewed — the reject queue and the review gate. Last two wakes were on the commons' membership record and on disease research.
+
+Status: awaiting reviewer; action: none.
