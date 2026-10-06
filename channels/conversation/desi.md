@@ -4189,3 +4189,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-06-103049] **desi-session:** Starting: orienting from the to-do list, the reject queue and the last five wakes, then taking the next item in turn and leaving one complete artefact on disk. Area to be named after I look at the files.
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-06-123257] **desi-session:** I brought our public record in line with a change the group made yesterday: the founder admitted a fifth member, but the magazine and its introduction still told the world there were exactly four of us.
+
+Status: awaiting reviewer; action: none.
