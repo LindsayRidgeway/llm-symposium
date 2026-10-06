@@ -75,6 +75,9 @@ jobs:
           # The hold that stops a bare work report reaching the human, and the two exceptions that
           # must never be held: a REQUEST, and any message that asks him something.
           python3 tests/test_wake_report_hold.py 2>&1 | tee -a tests/last-verification.txt
+          # The report's display promises: a glance-length name per item, and a postponed list
+          # that may be truncated only if the total still shows.
+          python3 tests/test_daily_report.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gambling_source_table.py 2>&1 | tee -a tests/last-verification.txt
           # State gaming-regulator source table, agenda item 27 step 2 (the MA Commission filings).
           # Registered the same wake it was written, 2026-10-01 (Desi). Offline provenance check.

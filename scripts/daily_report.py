@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -43,7 +44,18 @@ GROUP_LABEL = {
 AMIGO_ORDER = ("desi", "claude", "gemini", "tarik", "dmitri")
 LIST_CAP = 8
 POSTPONED_SHOWN = 3
-DISPLAY_TITLE = 92      # a title is a pointer, not the paragraph; the ledger keeps the whole one
+# Roughly the budget he pointed at (the old COBOL paragraph-name limit). A truncated sentence is
+# still a sentence fragment — which is why the durable fix is for a wake to *name* its own item
+# rather than for this code to cut one — but a fragment under forty characters is readable at a
+# glance and a 160-character one is not.
+DISPLAY_TITLE = 42
+
+# A report's first line is written in the first person, so the value is in what follows the verb.
+_LEAD_IN_RE = re.compile(
+    r"^(?:(?:I|We)\s+(?:have\s+|had\s+|just\s+|also\s+|now\s+|am\s+|was\s+|were\s+|will\s+|can\s+)?|"
+    r"(?:found(?:\s+out)?|checked|verified|noticed|discovered|established)\s+that\s+|"
+    r"what\s+i\s+did\s*[:\-—]\s*|area(?:\s+this\s+wake)?\s*[:\-—]\s*|"
+    r"this\s+wake\s*[:\-—,]?\s*)", re.I)
 
 
 def _local(stamp: dt.datetime) -> str:
@@ -68,8 +80,15 @@ def _group_table(group: str, window: dict, life: dict) -> list[str]:
 
 
 def _short(title: str) -> str:
-    title = " ".join((title or "").split())
-    return title if len(title) <= DISPLAY_TITLE else title[:DISPLAY_TITLE - 1] + "…"
+    """A readable glance-length name for an item. The full title stays in the ledger."""
+    t = " ".join((title or "").split())
+    t = _LEAD_IN_RE.sub("", t).strip()
+    if len(t) <= DISPLAY_TITLE:
+        return t
+    cut = t[:DISPLAY_TITLE - 1]
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    return cut + "…"
 
 
 def _title_list(rows: list[dict], cap: int = LIST_CAP) -> list[str]:
@@ -131,15 +150,16 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
         rows = [x for x in postponed if x.get("scope") == scope]
         dated = [x for x in rows if x.get("state") == "postponed"]
         fresh = [x for x in rows if x.get("state") != "postponed"]
-        lines.append(f"**{scope.title()}** ({len(rows)}: {len(dated)} decided / "
-                     f"{len(fresh)} not yet reviewed)")
+        shown = max(0, POSTPONED_SHOWN - len(dated))
+        lines.append(f"**{scope.title()}** — {len(rows)} postponed "
+                     f"({len(dated)} decided / {len(fresh)} not yet reviewed); "
+                     f"showing {min(len(dated) + shown, len(rows))}")
         if not rows:
             lines.append("  (none)")
             continue
         for rec in sorted(dated, key=lambda x: x.get("filed_utc") or ""):
             lines.append(f"  {rec.get('amigo','?'):<7} {_short(rec.get('title',''))}")
             lines.append(f"          why: {rec.get('reason','(no reason recorded)')}")
-        shown = max(0, POSTPONED_SHOWN - len(dated))
         # Oldest first: with nothing reviewed yet, the informative ones are the items that have sat
         # longest, not the newest. Listing all 146 would bury the signal and blow past one message.
         for rec in sorted(fresh, key=lambda x: x.get("filed_utc") or "")[:shown]:
