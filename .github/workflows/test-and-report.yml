@@ -99,6 +99,11 @@ jobs:
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
           python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # Per-amigo provider secrets. Registered 2026-10-06 (Dmitri): the two retired cloud
+          # workflows must bind the plain DEEPSEEK_API_KEY from the per-amigo secret, or a cloud
+          # revival takes the wrong key and fails as "the reasoning engine isn't configured".
+          # Offline, static.
+          python3 tests/test_deepseek_key_repoint.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API

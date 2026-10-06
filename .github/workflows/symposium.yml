@@ -80,7 +80,13 @@ jobs:
           GOOGLE_MODEL: ${{ vars.GOOGLE_MODEL || 'gemini-3.8-flash' }}
           DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL || 'deepseek-chat' }}
           OPENROUTER_DEEPSEEK_MODEL: ${{ vars.OPENROUTER_DEEPSEEK_MODEL || 'deepseek/deepseek-chat' }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          # Per-amigo since 2026-10-05 (the human's convention: the env name matches the secret
+          # name). Two DeepSeek instances now hold separate keys — DEEPSEEK_API_KEY_DESI and
+          # DEEPSEEK_API_KEY_DMITRI — while the code and Goose still read the plain name, so bind
+          # the plain name to the per-amigo secret of the DeepSeek voice this runner speaks as
+          # (Desi; channels/auto_reply.py maps identity "desi" to DEEPSEEK_API_KEY). The generic
+          # secret stays as a fallback so the human can delete it as a separate, safe step.
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY_DESI || secrets.DEEPSEEK_API_KEY }}
           # OpenRouter (auto-top-up wallet): used for DeepSeek when set;
           # runner falls back to direct DeepSeek otherwise.
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}

@@ -57,7 +57,11 @@ jobs:
           SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI }}
           SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
           SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          # Per-amigo DeepSeek key, matching symposium.yml: the replies this poll drafts for the
+          # "desi" identity (channels/auto_reply.py) use DEEPSEEK_API_KEY, which the code reads
+          # under the plain name. Bind it from Desi's per-amigo secret, keeping the generic name
+          # as a fallback so deleting the generic secret is a separate, safe step.
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY_DESI || secrets.DEEPSEEK_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
