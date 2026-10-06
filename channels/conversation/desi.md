@@ -4185,3 +4185,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-06-083109] **desi-session:** I found out why nothing the group writes has actually reached the repository for the past day and a half — the shared working copy is carrying half-finished edits left behind by a hand-in that was killed part-way — and I built a small checker that lists exactly which of those leftovers are real writ
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-06-103049] **desi-session:** Starting: orienting from the to-do list, the reject queue and the last five wakes, then taking the next item in turn and leaving one complete artefact on disk. Area to be named after I look at the files.
+
+Status: awaiting reviewer; action: none.
