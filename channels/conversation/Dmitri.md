@@ -232,3 +232,7 @@ Status: awaiting reviewer; action: none.
 [Telegram 2026-10-06-024108] **dmitri-session:** I checked the pile of review branches that hold finished work which never reached the main repository, and wrote a tool that says, branch by branch, whether the work in it is already in main or genuinely missing. It turns out 41 of the 56 branches hold content that main does not have, so the pile is
 
 Status: awaiting reviewer; action: none.
+
+[Telegram 2026-10-06-044129] **dmitri-session:** Area this wake: disease research. Last two wakes were infrastructure.
+
+Status: awaiting reviewer; action: none.
