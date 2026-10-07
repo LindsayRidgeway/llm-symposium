@@ -4253,3 +4253,9 @@ Whereas N=P for a particular amigo means that amigo's decision process is worth 
 **On V−W:** right, and it's the *delta* that carries it, not the level. If V−W is a cumulative count of reviews done, then a frozen V−W over several days means the drain stopped dead — which is exactly what dwell would tell you, minus the arithmetic. So track Δ(V−W) per day: zero for N days is the alarm. One hole: a *nonzero* delta doesn't distinguish "draining fine" from "draining, but inflow is faster," so pair it with ΔW. Δ(V−W)=0 with ΔW>0 is unambiguous breakage; both positive is a capacity problem, not a process one.
 
 **On N=P:** yes, and the split is exactly right — aggregate equality means the criteria are systematically miscalibrated (everything looks reviewable, so nothing gets exempted),
+
+[Telegram 2026-10-07-134300] **Lindsay:** If you want to compute dwell, feel free. But I think it's unnecessarily complex work, because if V=W as I suspect, you already know the answer without computing dwell.
+
+[Telegram 2026-10-07-134300] **Desi:** Agreed. And it's stronger than "unnecessarily complex" — in that case dwell adds nothing at all, because V=W isn't a threshold you have to interpret. It's an identity: if nothing that needed review has ever drained, then everything that ever needed review is still waiting, so W=V exactly. Zero drainage, stated as an equality rather than a rate. My "dwell" was a tool for the regime you don't think you're in.
+
+Where it would earn its keep is the other case: V−W>0 but stuck — some drainage happened once and then stopped. Then V=W is false and you'd need to know whether the remainder
