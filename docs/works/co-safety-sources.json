@@ -1,0 +1,95 @@
+{
+  "page": "docs/works/co-safety.html",
+  "title": "Carbon monoxide after the power goes out",
+  "fetched": "2026-10-07",
+  "user_agent": "llm-symposium/dmitri-bot (research; contact dmitri.s.pravdin@gmail.com)",
+  "sources": [
+    {
+      "name": "CDC — About Carbon Monoxide (CO) Poisoning Prevention",
+      "url": "https://www.cdc.gov/carbon-monoxide/about/index.html",
+      "http_status": 200,
+      "used": true
+    },
+    {
+      "name": "U.S. Consumer Product Safety Commission — Carbon Monoxide Information Center",
+      "url": "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center",
+      "http_status": 200,
+      "used": true
+    },
+    {
+      "name": "FEMA / Ready.gov — Power Outages",
+      "url": "https://www.ready.gov/power-outages",
+      "http_status": 200,
+      "used": true
+    },
+    {
+      "name": "American Red Cross — Power Outage Safety",
+      "url": "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/power-outage.html",
+      "http_status": 403,
+      "used": false,
+      "note": "not verified here — the fetch was refused"
+    }
+  ],
+  "numbers": {
+    "distance_feet": 20,
+    "cdc_deaths_unintentional": 400,
+    "cpsc_deaths_consumer_products": 200,
+    "cpsc_deaths_generators": 100,
+    "cdc_ed_visits": 100000,
+    "cdc_hospitalizations": 14000,
+    "alarm_replace_years_cdc": 5,
+    "emergency_number": "911"
+  },
+  "quotes": {
+    "cdc_generator_indoor": "Never use a generator inside your home or garage, even if doors and windows are open.",
+    "cdc_distance": "Only use generators outside, more than 20 feet away from any windows, doors, and vents.",
+    "cpsc_distance": "Never use portable generators inside homes or garages, even if doors and windows are open. Use generators outside only, at least 20 feet away from homes with exhaust facing away.",
+    "ready_distance": "Generators and fuel should always be used outdoors and at least 20 feet away from windows, doors and attached garages.",
+    "ready_stove": "Generators, camp stoves or charcoal grills should always be used outdoors and at least 20 feet away from windows.",
+    "cdc_charcoal": "Never burn charcoal indoors. Burning charcoal - red, gray, black, or white - gives off CO.",
+    "cdc_camp_stove": "Never use a portable gas camp stove indoors.",
+    "cdc_gas_oven_heat": "Never heat your house with a gas oven.",
+    "ready_gas_oven_heat": "Do not use a gas stove or oven to heat your home. It increases your risk of carbon monoxide poisoning.",
+    "cdc_deaths": "Each year, more than 400 Americans die from unintentional CO poisoning not linked to fires, more than 100,000 visit an emergency department, and more than 14,000 are hospitalized.",
+    "cpsc_deaths": "More than 200 people in the United States die every year from accidental non-fire related CO poisoning associated with consumer products. More than 100 of those deaths are linked to portable generators.",
+    "cdc_symptoms": "The most common symptoms of CO poisoning are headache, dizziness, weakness, upset stomach, vomiting, chest pain, and confusion. CO symptoms are often described as “flu-like.”",
+    "cpsc_symptoms_action": "Know the symptoms of carbon monoxide poisoning: headache, dizziness, weakness, nausea, vomiting, sleepiness, and confusion. If you suspect CO poisoning, get outside to fresh air immediately, and then call 911.",
+    "cdc_alarm_replace": "Replace your CO detector following the manufacturer's instructions or every 5 years.",
+    "cdc_alarm_place": "Install battery-operated or battery back-up CO detectors near every sleeping area in your home.",
+    "cpsc_alarm_place": "Install battery-operated CO alarms or CO alarms with battery backup on every level of the home and outside sleeping areas. Interconnected CO alarms are best; when one sounds, they all sound.",
+    "ready_alarm_place": "Install carbon monoxide detectors with battery backup in central locations on every level of your home.",
+    "cdc_car_garage": "Never run your car or truck inside a garage that is attached to a house, even with the garage door open."
+  },
+  "disagreements": [
+    {
+      "id": "death-toll",
+      "what": "how many people CO kills each year",
+      "cdc": "more than 400, all unintentional non-fire CO deaths",
+      "cpsc": "more than 200, CO deaths associated with consumer products (more than 100 from portable generators alone)",
+      "why_it_reads_as_a_contradiction": "200 is not a typo for 400 — the two agencies count different populations. A page that prints one without the other is reporting the choice it made."
+    },
+    {
+      "id": "distance",
+      "what": "how far from the building a generator must sit",
+      "cdc": "more than 20 feet from windows, doors, and vents",
+      "cpsc": "at least 20 feet from homes, with exhaust facing away",
+      "ready": "at least 20 feet from windows, doors and attached garages",
+      "why_it_reads_as_a_contradiction": "all three land on 20 feet but differ on 20 feet from what, and only CPSC names the direction the exhaust must face."
+    },
+    {
+      "id": "symptoms",
+      "what": "which symptoms to recognise",
+      "cdc": "headache, dizziness, weakness, upset stomach, vomiting, chest pain, and confusion",
+      "cpsc": "headache, dizziness, weakness, nausea, vomiting, sleepiness, and confusion",
+      "why_it_reads_as_a_contradiction": "the lists are close but not identical; a symptom one body names and the other does not is still a reason to leave the room."
+    },
+    {
+      "id": "alarm-replacement",
+      "what": "when to replace a CO alarm",
+      "cdc": "following the manufacturer's instructions or every 5 years",
+      "cpsc": "no interval given (placement and interconnection only)",
+      "ready": "no interval given (placement only)",
+      "why_it_reads_as_a_contradiction": "only one of the three gives a number; the page prints the 5-year figure as the CDC's and says the manufacturer's label wins."
+    }
+  ]
+}
