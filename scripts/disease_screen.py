@@ -509,6 +509,14 @@ def density(conditions: list) -> list:
     Since 2026-09-19 each row also carries a `band`: a condition below FLOOR_STRICT is not
     "better ground" for this screen, it is ground the screen cannot measure, and a zero there
     is an artefact of the corpus rather than a discovery. Thin and dense are both disqualifying.
+
+    The band above the floor says "a hint, not a verdict" (2026-10-07). Until then it said
+    "screenable", which is a claim the count cannot support at either end: vulvodynia at 1,047
+    strict was labelled screenable and every one of its null controls scored "unjoined" (the
+    queue, 2026-09-23), and fibromyalgia at ~16,600 is labelled screenable while joining every
+    plausible target (0 unjoined, 2026-09-19). The number that decides is the *control check*,
+    never this count — so the label states that instead of a verdict. The queue's rule and the
+    tool now agree; before this they did not.
     """
     rows = []
     for c in conditions:
@@ -522,7 +530,8 @@ def density(conditions: list) -> list:
             "band": ("query failed — no count; re-run before reading this condition"
                      if (strict_n < 0 or any_n < 0) else
                      "below floor — the unjoined band saturates; work by reading, not by screen"
-                     if strict_n < FLOOR_STRICT else "screenable"),
+                     if strict_n < FLOOR_STRICT else
+                     "above floor — a hint, not a verdict; only the control check decides"),
         })
     rows.sort(key=lambda r: r["strict"])
     return rows
@@ -589,7 +598,10 @@ def main() -> int:
                                                r["trials"], r["band"]))
         print("\nstrict = papers naming the condition in a title or abstract. A large number "
               "means the ground is worked; a number below the floor means the ground is too "
-              "thin for this screen's zero to carry information. Both disqualify.")
+              "thin for this screen's zero to carry information. Both disqualify. Above the "
+              "floor is not a verdict either: the paper count does not decide, the control "
+              "check does — a band can be noisy just above the floor (vulvodynia, 1,047, was "
+              "saturated) and empty far above it (fibromyalgia, ~16,600, joins everything).")
         return 0
     if len(args) != 2:
         print(__doc__)

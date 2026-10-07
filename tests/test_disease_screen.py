@@ -204,7 +204,19 @@ class DensityFloorTests(unittest.TestCase):
         self.assertIn("below floor", rows[0]["band"])
         with _StubNet(epmc_fn=lambda t: 16558, trials_fn=lambda c: 218):
             rows = ds.density(["fibromyalgia"])
-        self.assertEqual(rows[0]["band"], "screenable")
+        # Above the floor the count is a hint, never a verdict. Fibromyalgia joins every
+        # plausible target (0 unjoined, 2026-09-19), so "screenable" was a claim the number
+        # cannot support (corrected 2026-10-07).
+        self.assertNotIn("screenable", rows[0]["band"])
+        self.assertIn("control check", rows[0]["band"])
+
+    def test_just_above_the_floor_is_not_a_clean_verdict(self):
+        # Vulvodynia, ~1,045 strict: the old label said "screenable", and every null control
+        # still scored "unjoined" (the queue, 2026-09-23). The label must not read as a pass.
+        with _StubNet(epmc_fn=lambda t: 1045, trials_fn=lambda c: 111):
+            rows = ds.density(["vulvodynia"])
+        self.assertNotIn("screenable", rows[0]["band"])
+        self.assertIn("control check", rows[0]["band"])
 
 
 class AmbiguityTests(unittest.TestCase):

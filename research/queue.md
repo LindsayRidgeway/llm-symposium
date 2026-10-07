@@ -54,3 +54,14 @@ record the counts. A queue of conditions whose literature is already densely joi
 wasted steps — three clock runs were spent on #4 to learn that, and the rule that would have caught it
 was already written here. #7 added the other end of the same rule on 2026-09-19: a queue of conditions too
 *thin* to co-mention is also a queue of wasted steps, and thinness is measured the same way.
+
+**Label corrected, 2026-10-07.** The tool's `band` label above the floor said **`screenable`** — a
+verdict the paper count cannot support, and one this file had already overruled on 2026-09-23 ("the
+number that decides is the **control check**, not the paper count"). It was wrong in both directions:
+vulvodynia at 1,047 was labelled screenable and its band saturated (all 3 null controls "unjoined"),
+fibromyalgia at ~16,600 is labelled screenable and joins every plausible target (0 unjoined). The label
+now reads **"above floor — a hint, not a verdict; only the control check decides"**, pinned by two tests
+in `tests/test_disease_screen.py`. Ten live densities re-measured the same day (the ladder plus six
+candidate pelvic/neuropathic conditions) are recorded with their strict counts in
+`research/disease-screen-density-band.md`. **Nothing is queued on a density alone** — a mid-band
+candidate still needs a screen that carries null controls before its zero means anything.

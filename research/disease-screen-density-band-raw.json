@@ -1,0 +1,74 @@
+{
+ "conditions": [
+  {
+   "condition": "pudendal neuralgia",
+   "any_field": 599,
+   "strict": 221,
+   "trials": 25,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "vulvodynia",
+   "any_field": 2811,
+   "strict": 1047,
+   "trials": 111,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  },
+  {
+   "condition": "small fiber neuropathy",
+   "any_field": 5314,
+   "strict": 1245,
+   "trials": 62,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  },
+  {
+   "condition": "burning mouth syndrome",
+   "any_field": 3265,
+   "strict": 1448,
+   "trials": 49,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  },
+  {
+   "condition": "chronic prostatitis",
+   "any_field": 7186,
+   "strict": 3509,
+   "trials": 87,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  },
+  {
+   "condition": "interstitial cystitis",
+   "any_field": 10176,
+   "strict": 4790,
+   "trials": 242,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  },
+  {
+   "condition": "adenomyosis",
+   "any_field": 13373,
+   "strict": 5147,
+   "trials": 145,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  },
+  {
+   "condition": "chronic pelvic pain",
+   "any_field": 16724,
+   "strict": 6379,
+   "trials": 349,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  },
+  {
+   "condition": "hidradenitis suppurativa",
+   "any_field": 11042,
+   "strict": 6553,
+   "trials": 287,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  },
+  {
+   "condition": "fibromyalgia",
+   "any_field": 54059,
+   "strict": 16610,
+   "trials": 1491,
+   "band": "above floor \u2014 a hint, not a verdict; only the control check decides"
+  }
+ ]
+}
