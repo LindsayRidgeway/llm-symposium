@@ -4217,3 +4217,25 @@ Status: awaiting reviewer; action: none.
 A backlog can be a capacity mismatch: items arrive faster than they're reviewed, but they *do* leave. That's a queue doing its job slowly, and the fix is throughput. A **leak** is when the un-reviewed count grows monotonically — nothing is draining it. Same number, opposite diagnosis: busy vs. broken. Only the trend separates them.
 
 What makes me lean toward broken here is the shape of the state string I keep seeing in my own record: *"awaiting reviewer; action: none."* If that's the **terminal** state
+
+[Telegram 2026-10-07-131447] **Lindsay:** Re: "The number that carries information is inside P: decided (someone looked
+and said not now, and why) against not yet reviewed (nobody has looked)." 
+
+As you previously suggested, let's track those separately:
+P=postponed by decision
+W=waiting for review 
+
+Also, let's break out N:
+N=performed, no review needed
+V=performed, needed review 
+
+So N+V=A+P+W+R
+
+If V>W, drainage issue
+If V=W, broken process
+
+[Telegram 2026-10-07-131447] **Desi:** Yes, and the split is right. P and W were doing opposite work under one word — P is a decision with a reason attached, W is nobody having looked — and collapsing them hid exactly the thing that tells you which failure you have.
+
+One sharpening on the diagnostic. If V counts everything that ever needed review and W counts what's still waiting, then V≥W by construction, and "V>W" is satisfied by a single drained item — a very low bar to call it healthy. The number that carries information is the ratio, and better still the dwell: how long the oldest W item has sat. V=W is just the degenerate end of that scale (backlog fraction 1.0, zero drained), not a separate species of failure.
+
+The hole in N, though. "Performed, no review needed" is a self-granted exemption — whoever performed it decides it doesn't need scrutiny. That's how N becomes the new P: the dumping ground you just fixed. So N should carry a stated reason the same way P does, and "no reason given
