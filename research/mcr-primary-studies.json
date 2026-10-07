@@ -1,0 +1,281 @@
+{
+  "artifact": "mcr-primary-studies",
+  "agenda_item": 23,
+  "written": "2026-10-07",
+  "written_by": "desi",
+  "seed_table": "research/mcr-colistin-seed.json",
+  "raw_records": "research/mcr-primary-studies-raw.json",
+  "purpose": "Recover the four harmonisation columns the seed review omits (collection year, mcr variant, detection method, sampling design) from the primary papers behind the six largest rows and the two self-contradicting rows of research/mcr-colistin-seed.json, so the sector pattern can be re-read with its confounders. Hand-read from the stored Europe PMC records; the numeric cross-checks are pinned in tests/test_mcr_primary_studies.py.",
+  "papers": [
+    {
+      "row": "1",
+      "pmid": "26603172",
+      "pmcid": null,
+      "doi": "10.1016/S1473-3099(15)00424-7",
+      "citation": "Liu Y-Y, Wang Y, Walsh TR, et al. Lancet Infect Dis 2016;16(2):161-168.",
+      "collection_years": "April 2011 to November 2014 (prevalence investigation)",
+      "mcr_variants": "mcr-1 (the first description of any plasmid-mediated colistin resistance)",
+      "detection_method": "Whole-plasmid sequencing and subcloning to identify the gene; conjugation and a murine thigh model for mechanism. The prevalence-screening method is NOT stated in the abstract.",
+      "sampling_design": "Routine antimicrobial-resistance surveillance on commensal E. coli from food animals; isolate/sample-based, but the denominator sums three different sampling units: 523 raw-meat samples, 804 animals, and 1322 inpatient samples from five provinces.",
+      "denominator_unit": "mixed (raw-meat samples + animals + inpatient samples)",
+      "verdict": "Arithmetic faithful to the primary (78+166+16=260; 523+804+1322=2649). The confounder is the unit: the seed's single 'Raw meat, livestock, and human' numerator sums three non-comparable sampling frames."
+    },
+    {
+      "row": "6",
+      "pmid": "28056227",
+      "pmcid": null,
+      "doi": "10.1099/jmm.0.000425",
+      "citation": "Chen X, Zhao X, Che J, et al. J Med Microbiol 2017;66(2):119-125.",
+      "collection_years": "NOT stated in the abstract (samples from 20 provinces and municipal cities)",
+      "mcr_variants": "mcr-1",
+      "detection_method": "Real-time PCR, an assay established in this study, applied to isolates and to faecal samples.",
+      "sampling_design": "Isolate-based screening of 2330 isolates (10 species) from 20 provinces, plus a SEPARATE faecal arm of 337 samples (229 human, 108 pet). The seed uses only the isolate arm.",
+      "denominator_unit": "isolates (the faecal arm is a separate denominator and is correctly excluded from the seed row)",
+      "verdict": "Arithmetic faithful to the primary (2330 isolates, 54 = 2.3% mcr-1). Confounder: the same paper's faecal arm found 14 positives (6 human, 8 pet) on a different denominator; the seed's single row cannot express that."
+    },
+    {
+      "row": "13",
+      "pmid": "27855068",
+      "pmcid": "PMC5192110",
+      "doi": "10.1128/AAC.02057-16",
+      "citation": "Kawanishi M, Abo H, Ozawa M, et al. Antimicrob Agents Chemother 2017;61(1):e02057-16.",
+      "collection_years": "NOT stated in the abstract or the available front matter (brief report; samples from the JVARM monitoring programme)",
+      "mcr_variants": "mcr-1 detected; mcr-2 not detected",
+      "detection_method": "Gene screening for mcr-1 and mcr-2, plus a sequence-homology search of the study's curated GenEpid-J database for mcr-2.",
+      "sampling_design": "Isolate-based screening of 9306 E. coli from healthy food-producing animals (cattle, swine, broilers) under the Japanese Veterinary Antimicrobial Resistance Monitoring (JVARM) system -- routine national surveillance of healthy animals.",
+      "denominator_unit": "isolates (healthy production animals)",
+      "verdict": "Arithmetic faithful to the primary (9306 screened, 39 mcr-1). Confounder: a healthy-animal national monitoring denominator, not a clinical one; the collection period is not recoverable from the open record."
+    },
+    {
+      "row": "17a",
+      "pmid": "36569100",
+      "pmcid": "PMC9780603",
+      "doi": "10.3389/fmicb.2022.1076315",
+      "citation": "Ewers C, Gopel L, Prenger-Berninghoff E, Semmler T, Kerner K, Bauerfeind R. Front Microbiol 2022;13:1076315.",
+      "collection_years": "2010-2017 (first arm); 2018-2020 (second arm)",
+      "mcr_variants": "mcr-1 and mcr-2 (including a new allele mcr-2.8)",
+      "detection_method": "Archived isolates were stored only if positive for a virulence-associated gene (STEC/ETEC/EPEC) and then screened for mcr-1/mcr-2 with genomic characterization (WGS, plasmid typing); the second arm used sheep blood agar containing 4 mg/L colistin (selective culture).",
+      "sampling_design": "TWO sampling frames in one paper: (a) 7614 archived porcine E. coli from faecal samples, 2010-2017, stored only when virulence-gene positive -- a selected archive, not a random sample; (b) 1477 E. coli from colistin-selective agar, 2018-2020 -- a colistin-enriched denominator.",
+      "denominator_unit": "isolates (two differently selected sets)",
+      "verdict": "SEED DEFECT RESOLVED against the primary. Primary Table 1: Germany 6158 isolates, mcr-1 = 707 (11.5%). The seed prints n=709 and 10.42%; 10.42% is the STUDY-WIDE total (793/7614 = 10.4%), not Germany's rate, and 707 vs 709 is a 2-isolate difference."
+    },
+    {
+      "row": "17h/17i",
+      "pmid": "36569100",
+      "pmcid": "PMC9780603",
+      "doi": "10.3389/fmicb.2022.1076315",
+      "citation": "Ewers C, et al. Front Microbiol 2022;13:1076315 (same paper as row 17a).",
+      "collection_years": "2010-2017 (the arm that carries the per-country rows)",
+      "mcr_variants": "mcr-1 (mcr-2 for Spain is 1 isolate)",
+      "detection_method": "Same as row 17a.",
+      "sampling_design": "Per-country sub-rows of the Ewers 2010-2017 European porcine collection (the seed split one paper into eleven country rows).",
+      "denominator_unit": "isolates",
+      "verdict": "SEED DEFECT RESOLVED against the primary. Primary Table 1: Spain 28 isolates, mcr-1 = 16 (57.1%); Portugal 28 isolates, mcr-1 = 17 (60.7%). The two are NOT identical. The seed duplicated Portugal's row (28/17/60.7) into Spain; Spain should be 28/16/57.1."
+    },
+    {
+      "row": "19",
+      "pmid": "36687643",
+      "pmcid": "PMC9846274",
+      "doi": "10.3389/fmicb.2022.1023403",
+      "citation": "Treilles M, Chatre P, Drapeau A, Madec JY, Haenni M. Front Microbiol 2022;13:1023403.",
+      "collection_years": "2018-2019 (from the full text; NOT stated in the abstract)",
+      "mcr_variants": "mcr-1 (specifically mcr-1.1) only; mcr-2 to mcr-5 and mcr-9 were looked for and not found",
+      "detection_method": "Colistin-resistant isolate screening, then mcr-1 to mcr-5/mcr-9 screening; MLVA PCR typing; Southern blot with short-read and long-read sequencing to localize the gene (chromosome vs IncX4/IncHI2 plasmids).",
+      "sampling_design": "Farm survey: 80 goat breeding farms (10 adults + 10 kids each) plus 5 fattening batches; 1561 animals (breeding) + 140 (fattening) = 1701 animals, sampled across two production stages.",
+      "denominator_unit": "animals (the seed's column labels it isolates)",
+      "verdict": "SEED DEFECT RESOLVED against the primary. Primary: 65/1561 breeding and 84/140 fattening = 149 mcr-1-positive of 1701 animals. The seed prints n=49 -- 149 with the leading digit dropped -- and labels the denominator isolates when it is animals, so the seed's 2.88% is wrong twice. Design confounder: 4.2% vs 60.0% by production stage."
+    },
+    {
+      "row": "28",
+      "pmid": "28018876",
+      "pmcid": "PMC5173483",
+      "doi": "10.9778/cmajo.20160080",
+      "citation": "Walkty A, Karlowsky JA, Adam HJ, et al. CMAJ Open 2016;4(4):E641-E645.",
+      "collection_years": "January 2008 to December 2015 (excluding 2011)",
+      "mcr_variants": "mcr-1",
+      "detection_method": "CLSI broth microdilution for colistin susceptibility, with mcr-1 PCR applied ONLY to the colistin-resistant subset (a screening cascade).",
+      "sampling_design": "Isolate-based national surveillance (CANWARD): consecutive clinical isolates, one per patient per infection site, from blood, respiratory, urine and wound infections at 10-15 sentinel hospitals.",
+      "denominator_unit": "clinical isolates",
+      "verdict": "Arithmetic faithful to the primary (5571 isolates; 12 colistin-resistant; 2 mcr-1-positive). Confounder: the numerator is a subset of a subset -- mcr-1 was tested only among the 12 colistin-resistant isolates, so the 0.04% is mcr-1 among colistin-resistant isolates, not among all isolates."
+    }
+  ],
+  "ewers_table1": {
+    "source": "Ewers et al. 2022, Front Microbiol 13:1076315, Table 1 (full text, PMC9780603)",
+    "arm": "2010-2017 archived porcine E. coli isolates",
+    "columns": [
+      "country",
+      "isolates",
+      "mcr1_n",
+      "mcr1_pct",
+      "mcr2_n",
+      "mcr2_pct"
+    ],
+    "rows": [
+      [
+        "Germany",
+        6158,
+        707,
+        11.5,
+        2,
+        0.03
+      ],
+      [
+        "The Netherlands",
+        757,
+        3,
+        0.4,
+        0,
+        0.0
+      ],
+      [
+        "Denmark",
+        140,
+        1,
+        0.7,
+        0,
+        0.0
+      ],
+      [
+        "Switzerland",
+        129,
+        0,
+        0.0,
+        0,
+        0.0
+      ],
+      [
+        "Belgium",
+        113,
+        11,
+        9.7,
+        9,
+        8.0
+      ],
+      [
+        "Poland",
+        102,
+        9,
+        8.8,
+        0,
+        0.0
+      ],
+      [
+        "Austria",
+        73,
+        0,
+        0.0,
+        0,
+        0.0
+      ],
+      [
+        "Spain",
+        28,
+        16,
+        57.1,
+        1,
+        3.6
+      ],
+      [
+        "Portugal",
+        28,
+        17,
+        60.7,
+        0,
+        0.0
+      ],
+      [
+        "Italy",
+        42,
+        25,
+        59.5,
+        0,
+        0.0
+      ],
+      [
+        "Hungary",
+        12,
+        4,
+        33.3,
+        0,
+        0.0
+      ],
+      [
+        "Other countries",
+        32,
+        0,
+        0.0,
+        0,
+        0.0
+      ]
+    ],
+    "totals": {
+      "isolates": 7614,
+      "mcr1_n": 793,
+      "mcr1_pct": 10.4,
+      "mcr2_n": 12,
+      "mcr2_pct": 0.2
+    }
+  },
+  "divergences": [
+    {
+      "row": "17 (a)",
+      "country": "Germany",
+      "field": "numerator",
+      "seed": 709,
+      "primary": 707,
+      "note": "the seed's 709 differs from the primary's 707 by 2 isolates"
+    },
+    {
+      "row": "17 (a)",
+      "country": "Germany",
+      "field": "prevalence_pct",
+      "seed": 10.42,
+      "primary": 11.5,
+      "note": "the seed printed the study-wide total (793/7614 = 10.4%) in a country sub-row; the primary's Germany rate is 11.5%"
+    },
+    {
+      "row": "17 (h)",
+      "country": "Spain",
+      "field": "numerator",
+      "seed": 17,
+      "primary": 16,
+      "note": "the seed duplicated Portugal's row; the primary's Spain rate is 57.1%, Portugal's is 60.7%"
+    },
+    {
+      "row": "17 (e)",
+      "country": "Belgium",
+      "field": "numerator",
+      "seed": 20,
+      "primary": 11,
+      "note": "the seed merged mcr-1 (11) and mcr-2 (9) into one numerator; the primary prints them separately"
+    },
+    {
+      "row": "19",
+      "country": "France",
+      "field": "numerator",
+      "seed": 49,
+      "primary": 149,
+      "note": "the primary prints 65 (breeding) + 84 (fattening) = 149 mcr-1-positive; the seed's 49 drops the leading digit"
+    },
+    {
+      "row": "19",
+      "country": "France",
+      "field": "denominator_unit",
+      "seed": "isolates",
+      "primary": "animals",
+      "note": "the seed labels 1701 as isolates; the primary's 1701 are animals"
+    }
+  ],
+  "coverage": {
+    "note": "of the four harmonisation columns the seed omits, over the six distinct primary papers (rows 1, 6, 13, 17a, 19, 28)",
+    "mcr_variant_recovered": 6,
+    "detection_method_recovered": 6,
+    "sampling_design_recovered": 6,
+    "collection_year_recovered_from_abstract": 3,
+    "collection_year_recovered_with_open_full_text": 4,
+    "collection_year_still_missing": [
+      "6",
+      "13"
+    ]
+  }
+}
