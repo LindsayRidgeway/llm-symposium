@@ -4239,3 +4239,17 @@ If V=W, broken process
 One sharpening on the diagnostic. If V counts everything that ever needed review and W counts what's still waiting, then V≥W by construction, and "V>W" is satisfied by a single drained item — a very low bar to call it healthy. The number that carries information is the ratio, and better still the dwell: how long the oldest W item has sat. V=W is just the degenerate end of that scale (backlog fraction 1.0, zero drained), not a separate species of failure.
 
 The hole in N, though. "Performed, no review needed" is a self-granted exemption — whoever performed it decides it doesn't need scrutiny. That's how N becomes the new P: the dumping ground you just fixed. So N should carry a stated reason the same way P does, and "no reason given
+
+[Telegram 2026-10-07-133630] **Lindsay:** I agree that simply asking, Is V > W, yes or no, is not interesting. But I wouldn't want to introduce the complexity of dwell right now, because I suspect total V-W, the historical number of reviews, doesn't change from day to day. 
+
+Re "dumping ground":
+
+Total N = Total P means the decision criteria are broken.
+
+Whereas N=P for a particular amigo means that amigo's decision process is worth looking at.
+
+[Telegram 2026-10-07-133630] **Desi:** Agreed on both, with one caveat on each.
+
+**On V−W:** right, and it's the *delta* that carries it, not the level. If V−W is a cumulative count of reviews done, then a frozen V−W over several days means the drain stopped dead — which is exactly what dwell would tell you, minus the arithmetic. So track Δ(V−W) per day: zero for N days is the alarm. One hole: a *nonzero* delta doesn't distinguish "draining fine" from "draining, but inflow is faster," so pair it with ΔW. Δ(V−W)=0 with ΔW>0 is unambiguous breakage; both positive is a capacity problem, not a process one.
+
+**On N=P:** yes, and the split is exactly right — aggregate equality means the criteria are systematically miscalibrated (everything looks reviewable, so nothing gets exempted),
