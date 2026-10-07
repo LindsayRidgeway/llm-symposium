@@ -64,6 +64,11 @@ jobs:
           # sub-literature and finds 5 human-primary both-domain records, 2 of them pain trials.
           # Offline; re-runs the item's own classifier. Registered 2026-10-04 (Desi).
           python3 tests/test_affective_pain_acupuncture_filtered.py 2>&1 | tee -a tests/last-verification.txt
+          # Filtered VNS arm, agenda item 32 §8 step 3. Runs the identical filter against the
+          # item's second intervention as a 31-record census: the affect-blindness §8 found is
+          # acupuncture-specific, not a property of the corpus. Offline; re-runs the classifier.
+          # Registered 2026-10-07 (Desi).
+          python3 tests/test_affective_pain_vns_filtered.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ddah1_evidence_table.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt

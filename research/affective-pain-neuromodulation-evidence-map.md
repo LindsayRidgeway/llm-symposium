@@ -294,3 +294,104 @@ dissociations.
 
 **Pinned by** `tests/test_affective_pain_acupuncture_filtered.py`, which re-derives the 16 from the
 stored flags and fails if the map names a different set.
+
+## 9. The filtered VNS arm — §8 step 3, run 2026-10-07
+
+**The question step 3 left.** §8 sharpened §7's wording to *the brain and the pain, but not the mood*:
+the acupuncture arm measures a pain instrument and a brain/autonomic index and, in 15 of its 16
+biomarker-only records, names no affect term at all. Step 3 asks whether that affect-blindness
+generalises beyond acupuncture — the same *filtered* design run against the second intervention the
+item itself names, vagus-nerve stimulation. If the VNS records are equally blind to the mood, the
+omission is a property of the corpus; if they are not, it is a property of the acupuncture records.
+
+**Why VNS, and not a second patient group.** Item 32's research question names *two* interventions —
+acupuncture and VNS — and asks whether they act through a shared brainstem–limbic pathway; the honest
+test of "beyond acupuncture" is the item's own second intervention. Read literally, step 3 says "a
+second pain population"; the VNS studies in chronic pain are a distinct population *and* the item's
+second intervention, so this run answers both readings at once. Recorded here rather than left implicit.
+
+**The query, exactly.** Identical to §7's except for the intervention block: the same `PAIN` block and
+the same measurement filter, the filter imported from `affective_pain_acupuncture_filtered` so the two
+arms cannot drift apart. A difference between the arms is then a difference in the papers, not the query.
+
+| arm | query = **vns** block AND (identical §7 filter) AND `PAIN` block AND `humans[MeSH Terms]` | matching | fetched |
+|---|---|---|---|
+| `vns_filtered` | `"vagus nerve stimulation"[tiab] OR "vagal nerve stimulation"[tiab] OR "transcutaneous auricular vagus"[tiab] OR "transcutaneous vagus"[tiab] OR "auricular vagus"[tiab] OR "vagus nerve stimulation"[MeSH Terms]` | **31** | **31 — census** |
+
+Publication window 2015-01-01 → 2026-10-07. This is a **census**: 31 of 31 fetched, no relevance
+ranking. Raw records and flags: `research/affective-pain-neuromodulation-vns-filtered-raw.json`; the
+run is `scripts/affective_pain_vns_filtered.py`; pinned by `tests/test_affective_pain_vns_filtered.py`
+(offline). Same classifier and caveats as §2, so the two arms are countable against each other.
+
+**The two arms side by side, human-primary only** (re-derived from the stored flags, not hand-listed):
+
+| | acupuncture filtered (§7) | VNS filtered (§9) |
+|---|---|---|
+| records in the census | 40 | 31 |
+| human-primary | 21 | 20 |
+| human-primary setting **both** flags | **5** | **8** |
+| human-primary **biomarker only** | 16 | 10 |
+| human-primary **affective only** | 0 | 1 |
+| human-primary setting **neither** flag | 0 | 1 |
+| affective term, all records | 18 | 16 |
+| biomarker term, all records | 40 (by construction) | 28 |
+
+**The finding: the affect-blindness is acupuncture-specific, not a property of the corpus.** §8's
+sentence — *the brain and the pain, but not the mood* — was measured on the acupuncture records, and it
+does not survive the change of intervention. Sixteen of the 21 human-primary acupuncture records set the
+biomarker flag with no affect term; the VNS arm inverts that ratio — **8 of 20** set both flags and only
+**10 of 20** are biomarker-only. Sixteen of the 31 VNS records name an affect term somewhere. So the
+second intervention the item names is *not* affect-blind the way acupuncture is, and the specific
+pattern §8 found is a property of the acupuncture literature, not of pain neuromodulation as a whole.
+That is a narrower and harder statement than either §7 or §8 could make alone, and it is the one a census
+of both arms supports.
+
+**But the VNS arm's higher flag rate is vocabulary, not more evidence — and §4 already showed where it
+thins.** The 8 both-flag VNS records are *exactly* the 8 that §4 hand-read from the first corpus
+(41332177, 40935122, 26450637, 34509623, 34634682, 38963558, 41044114, 40576705): the filtered census
+reproduces that set with a complete denominator behind it. §4's hand-read of those 8 leaves **2** trials
+in a chronic-pain population that measure both domains (41332177, 40935122 — both fibromyalgia taVNS,
+both 2026, neither controlled for nonspecific effect), and **both dissociate**: the affective scale moved
+while the autonomic index did not. The remaining 6 are healthy-volunteer studies, a dystonia case report,
+a POTS method paper and one record whose "mood" is a serum BDNF. So the VNS arm names the mood more often
+than acupuncture, but the evidence behind the vocabulary is as thin.
+
+**The 10 VNS biomarker-only records, hand-read from the stored abstracts** (the §9 analogue of §8's 16).
+These name a brain or autonomic measure and no affect term:
+
+| PMID | yr | design & population | measures — brain / autonomic |
+|---|---|---|---|
+| [26728182](https://pubmed.ncbi.nlm.nih.gov/26728182/) | 2016 | transcutaneous vagal modulation, gastroduodenal motility + somatic pain sensitivity | vagal tone |
+| [33262253](https://pubmed.ncbi.nlm.nih.gov/33262253/) | 2021 | **70 migraine patients**, 4 weeks taVNS | thalamocortical fMRI |
+| [33548494](https://pubmed.ncbi.nlm.nih.gov/33548494/) | 2021 | *Joint Bone Spine*; title reads as a review, PubMed types it **Randomized Controlled Trial** (rheumatoid arthritis/fatigue) | autonomic (background sentence) |
+| [33635894](https://pubmed.ncbi.nlm.nih.gov/33635894/) | 2021 | **randomised sham-controlled trial**, chronic-pancreatitis pain | cardiac vagal tone, heart rate |
+| [38469939](https://pubmed.ncbi.nlm.nih.gov/38469939/) | 2024 | experimental pain (nociceptive withdrawal reflex) | heart-rate variability |
+| [40461351](https://pubmed.ncbi.nlm.nih.gov/40461351/) | 2025 | **70 chronic low-back-pain patients**, randomised taVNS vs tGANS | descending-pain-modulation connectivity |
+| [41091086](https://pubmed.ncbi.nlm.nih.gov/41091086/) | 2026 | **chronic low-back-pain patients**, taVNS vs tGANS | brainstem NTS, LC, raphe functional + structural connectivity |
+| [41454683](https://pubmed.ncbi.nlm.nih.gov/41454683/) | 2025 | feasibility/safety, single session (tCMS, taVNS, iTBS) | heart-rate variability |
+| [42334392](https://pubmed.ncbi.nlm.nih.gov/42334392/) | 2026 | **randomised trial**, functional constipation + myofascial pain | heart-rate variability |
+| [42361949](https://pubmed.ncbi.nlm.nih.gov/42361949/) | 2026 | **randomised brain-imaging study**, 70 chronic low-back-pain patients | thalamic relay (resting-state fMRI) |
+
+Seven of the ten are studies in a patient pain population. **41091086 is the sharpest case in the whole
+item:** it names the exact brainstem hubs the research question names — the nucleus tractus solitarius,
+the locus coeruleus and the raphe nucleus — in chronic low-back-pain patients, and measures **no
+affective outcome at all**. The pathway the item asks about is measured, in a pain population, without
+the affective column beside it. So even in the arm that is *not* affect-blind overall, the one
+convergence test the item actually asks for — does the affective change track the brainstem change? — is
+not run.
+
+**What this does to item 32.** Run as two censuses on an identical filter, the item's two interventions
+fail its "shared pathway" question for **different** reasons: the acupuncture records mostly do not name
+an affective outcome at all, and the VNS records do name it but, in the only two pain-population trials
+that measure both, move it apart from the autonomic index. The asymmetry is now a measured property of
+the corpus rather than an impression, and it is the first statement in this item that is symmetric across
+both of its intervention arms.
+
+**Honest limits.** (1) The flags are the §2 term screen, and the two arms' vocabularies differ by field
+convention as much as by design — a "mood" term in a taVNS abstract and an "affective" term in an
+acupuncture abstract need not mean the same thing, which is why the hand-reads, not the rates, carry the
+claims. (2) 8 of 20 is not a rate to read against 5 of 21 as though both were samples of one population:
+the two arms are different literatures of different size, so only the *direction* of the asymmetry is
+claimed, not its magnitude. (3) The 8-record hand-read is §4's and is not re-derived here; §9 adds the
+census denominators and the second-arm comparison. (4) One record (33548494) is left where the flags
+placed it though its title reads as a review — recorded, not hidden.
