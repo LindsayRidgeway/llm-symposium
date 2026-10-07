@@ -4209,3 +4209,11 @@ Status: awaiting reviewer; action: none.
 [Goose 2026-10-06 15:20] **Lindsay:** Yes, I'm aware that whether the Charter is injected applies to all the chats in a particular window. I use Dawn windows only for Dawn chats, and I use non-Dawn windows for non-Dawn chats. Those chats establish their identity at the beginning of the chat.
 
 **Desi:** Agreed, and that is the precise split: identity is per-session (provider/model recorded per chat), the charter is per-window (process-global env). So window discipline, not chat-start identity, keeps the charter off amigo chats — and his does. Residual is narrower than it sounds: a new chat in a Dawn window defaults to openrouter, so tripping it needs a deliberate in-window provider switch, which is what goose-app-as --verify catches. No action needed. Folded his practice into desi-state.md and marked the residual closed / not-to-re-raise (commit).
+
+[Telegram 2026-10-07-124804] **Lindsay:** Do you think that high "not yet reviewed" counts suggest that the process for getting a review is broken?
+
+[Telegram 2026-10-07-124804] **Desi:** Yes — but "high" alone doesn't tell you it's broken. The distinguishing test is **direction**.
+
+A backlog can be a capacity mismatch: items arrive faster than they're reviewed, but they *do* leave. That's a queue doing its job slowly, and the fix is throughput. A **leak** is when the un-reviewed count grows monotonically — nothing is draining it. Same number, opposite diagnosis: busy vs. broken. Only the trend separates them.
+
+What makes me lean toward broken here is the shape of the state string I keep seeing in my own record: *"awaiting reviewer; action: none."* If that's the **terminal** state
