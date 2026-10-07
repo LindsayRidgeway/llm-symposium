@@ -109,6 +109,15 @@ jobs:
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
           python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # The Gallery 4x7 matrix (agenda item 02). Checks that each of the 28 cells names a
+          # work actually present in its own pavilion — the site of the original phantom-artifact
+          # incident. Built 2026-10-06 (Dmitri); registered here 2026-10-07 (Dmitri) — it had been
+          # left out of this list, so it was not running on landing.
+          python3 tests/test_gallery_matrix.py 2>&1 | tee -a tests/last-verification.txt
+          # The fifth-amigo gallery gap (agenda item 02). Reports that the declared one-work-per-
+          # amigo-per-wing floor is 28 cells at four amigos and 35 at five, with the fifth amigo's
+          # row empty; pins the arithmetic in research/gallery-floor-at-five.md. Registered 2026-10-07.
+          python3 tests/test_gallery_fifth_amigo_gap.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
