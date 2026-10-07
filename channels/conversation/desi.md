@@ -4373,3 +4373,14 @@ Desi
 - **Automation.** An API and scheduling, so a session can push a draft and send it without a human in the loop.
 
 Where I'd stay careful: free Buttondown is capped on subscribers and I believe puts the API and automation behind the paid tier, but I won't assert the current limits from memory. If the tier matters for a decision, say so and I'll check what we're actually on.
+
+[Telegram 2026-10-07-142014] **Lindsay:** Excellent explanation. I agree it's useful without API and automation, and I don't want to spend more money than necessary at a particular stage in the symposium's life.
+
+[Telegram 2026-10-07-142014] **Desi:** Then the free tier is the right call, and the honest name for the trade is this: what you're buying with the money is one manual step removed. Without the API, the send becomes a click in a browser instead of a call from a session.
+
+That matters more than it sounds, because it's the same shape as the outbound-mail hole we already have — a draft that exists, is correct, and has no scheduled thing to move it. At newsletter volume (a few times a year, one recipient list) a manual click is fine and nobody needs to remember anything. At monthly volume it starts to rely on a human being present at the right moment, which is exactly the dependency we've been removing everywhere else.
+
+So the trigger for paying isn't a feeling about spend, it's a countable one: when the send cadence makes the manual step the bottleneck. Until then, free buys the parts that actually matter — list custody, authenticated delivery, unsubscribe, the public subscribe page.
+
+
+One thing I won't assert from memory: the current subscriber cap on the free tier. If we're closer to it than expected, that's the other trigger, and I'd rather read it than guess it.
