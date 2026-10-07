@@ -1,0 +1,855 @@
+{
+  "_what": "Reproducible PubMed snapshot for commons agenda item 30, step (3): the antiseizure-medication x objective-sleep/EEG corpus the item's seed omits. Abstracts stored verbatim; no ranking of our own beyond PubMed relevance.",
+  "retrieved": "2026-10-07",
+  "query": "(\"antiseizure\"[tiab] OR \"anti-seizure\"[tiab] OR \"antiepileptic\"[tiab] OR \"anti-epileptic\"[tiab] OR \"antiepileptic drugs\"[tiab] OR \"antiseizure medication\"[tiab] OR \"antiseizure medications\"[tiab] OR \"antiepileptic medication\"[tiab] OR \"antiepileptic medications\"[tiab] OR ASM[tiab] OR ASMs[tiab] OR AED[tiab] OR AEDs[tiab] OR carbamazepine[tiab] OR valproate[tiab] OR \"valproic acid\"[tiab] OR levetiracetam[tiab] OR lamotrigine[tiab] OR phenytoin[tiab] OR topiramate[tiab] OR phenobarbital[tiab] OR gabapentin[tiab] OR perampanel[tiab] OR brivaracetam[tiab] OR lacosamide[tiab]) AND (sleep[tiab] AND (EEG[tiab] OR electroencephalograph*[tiab] OR polysomnograph*[tiab] OR spindle*[tiab] OR \"slow wave\"[tiab] OR \"slow-wave\"[tiab] OR \"slow oscillation\"[tiab] OR \"slow oscillations\"[tiab] OR \"sleep architecture\"[tiab] OR \"sleep macrostructure\"[tiab] OR REM[tiab] OR NREM[tiab]))",
+  "sort": "relevance",
+  "total_matching": 1091,
+  "returned": 78,
+  "records": [
+    {
+      "pmid": "23622177",
+      "title": "Angelman syndrome.",
+      "journal": "Handbook of clinical neurology",
+      "year": "2013",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Angelman syndrome combines severe mental retardation, epilepsy, ataxia, speech impairment, and unique behavior with happy demeanor, laughing, short attention span, hyperactivity, and sleep disturbance. Occurrence has been calculated at 1:20000 to 1:12000 constituting about 6% of all children with severe mental retardation and epilepsy. The physical \"prototype\" includes microcephaly with flat neck, fair skin and hair, wide-spaced teeth, and open mouth with tongue protrusion. Epilepsy is characterized by atypical absences, erratic myoclonus, and occasional tonic-clonic seizures. EEG demonstrates high-amplitude 2-3Hz delta activity with spike and slow-wave discharges and sleep-activated generalized epileptiform discharges. Sodium valproate, benzodiazepines, and priacetam are frequently used and effective. Development is generally slow, the majority attaining independent walking in the first 2.5-6 years. Vocabulary is limited to a few single words with superior speech and object apprehension. The condition is due to a lack of expression of the UBE3A gene on chromosome 15q. Maternal deletions of 15q11-13 produce the most pronounced phenotype (65-70% of probands), uniparental disomy and imprinting center mutations (10%), and UBE3A point mutations (11%) produce milder phenotypes."
+    },
+    {
+      "pmid": "33786803",
+      "title": "Sleep and Epilepsy: a Focused Review of Pathophysiology, Clinical Syndromes, Co-morbidities, and Therapy.",
+      "journal": "Neurotherapeutics : the journal of the American Society for Experimental NeuroTherapeutics",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, N.I.H., Extramural",
+        "Review"
+      ],
+      "abstract": "A healthy brain requires balancing of waking and sleeping states. The normal changes in waking and sleeping states result in neurophysiological conditions that either increase or decrease the tendency of seizures and interictal discharges to occur. This article reviews the manifold and complex relationships between sleep and epilepsy and discusses treatment of the sleep-related epilepsies. Several forms of epilepsy predominantly or exclusively manifest during sleep and seizures tend to arise especially from light NREM sleep. Diagnostic interictal epileptiform discharges on the electroencephalogram are also most likely to be activated during deep NREM sleep stage N3. Epileptiform discharges and antiepileptic medications may in turn detrimentally impact sleep. Co-morbid sleep disorders also have the potential to worsen seizure control. Sleep has an important key association with sudden unexpected death in epilepsy (SUDEP). Further research is necessary to understand the complex relationships between sleep and epileptic disorders and their treatments."
+    },
+    {
+      "pmid": "33527254",
+      "title": "NonREM Disorders of Arousal and Related Parasomnias: an Updated Review.",
+      "journal": "Neurotherapeutics : the journal of the American Society for Experimental NeuroTherapeutics",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Parasomnias are abnormal behaviors and/or experiences emanating from or associated with sleep typically manifesting as motor movements of varying semiology. We discuss mainly nonrapid eye movement sleep and related parasomnias in this article. Sleepwalking (SW), sleep terrors (ST), confusional arousals, and related disorders result from an incomplete dissociation of wakefulness from nonrapid eye movement (NREM) sleep. Conditions that provoke repeated cortical arousals, and/or promote sleep inertia, lead to NREM parasomnias by impairing normal arousal mechanisms. Changes in the cyclic alternating pattern, a biomarker of arousal instability in NREM sleep, are noted in sleepwalking disorders. Sleep-related eating disorder (SRED) is characterized by a disruption of the nocturnal fast with episodes of feeding after arousal from sleep. SRED is often associated with the use of sedative-hypnotic medications, in particular the widely prescribed benzodiazepine receptor agonists. Compelling evidence suggests that nocturnal eating may in some cases be another nonmotor manifestation of Restless Legs Syndrome (RLS). Initial management should focus upon decreasing the potential for sleep-related injury followed by treating comorbid sleep disorders and eliminating incriminating drugs. Sexsomnia is a subtype of disorders of arousal, where sexual behavior emerges from partial arousal from nonREM sleep. Overlap parasomnia disorders consist of abnormal sleep-related behavior both in nonREM and REM sleep. Status dissociatus is referred to as a breakdown of the sleep architecture where an admixture of various sleep state markers is seen without any specific demarcation. Benzodiazepine therapy can be effective in controlling SW, ST, and sexsomnia, but not SRED. Paroxetine has been reported to provide benefit in some cases of ST. Topiramate, pramipexole, and sertraline can be effective in SRED. Pharmacotherapy for other parasomnias continues to be less certain, necessitating further investigation. NREM parasomnias may resolve spontaneously but require a review of priming and predisposing factors."
+    },
+    {
+      "pmid": "19742416",
+      "title": "Sleep and epilepsy.",
+      "journal": "Seminars in neurology",
+      "year": "2009",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "Over a century of work has confirmed crucial links between sleep and epilepsy. Seizures and some antiepileptic drugs (AEDs) adversely affect the continuity of sleep. However, sleep is fragmented in the absence of seizures or medication, suggesting that sleep instability may be an inherent component of certain forms of epilepsy. In turn, sleep instability can promote seizures, thus forming a vicious cycle. Sleep deprivation provokes seizures and epileptiform discharges in some people with epilepsy. Synchronized nonrapid eye movement (NREM) sleep facilitates seizures, whereas desynchronized rapid eye movement (REM) sleep discourages seizure occurrence. The sleep electroencephalogram (EEG) is useful in the diagnosis and localization of epilepsy, as new epileptic foci can appear in sleep and REM sleep may demonstrate the narrowest localization of the primary focus. Polysomnography (PSG) with expanded EEG aids in the differentiation of seizures and parasomnias and in the diagnosis of primary sleep disorders, such as sleep apnea, that can exacerbate seizures. Treating sleep apnea may lead to improved seizure control. These observations underscore the importance of sleep in the diagnosis and treatment of people with epilepsy."
+    },
+    {
+      "pmid": "22875305",
+      "title": "Sleep and violence.",
+      "journal": "Current treatment options in neurology",
+      "year": "2012",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "Treatment of violent behaviors in sleep depends on the underlying condition and a correct identification of the causative disorder is mandatory. After eliminating possible precipitating factors, pharmacological treatment is often required to control violent sleep behaviors. Although no drugs are specifically approved for the treatment of parasomnias and placebo-controlled trials are lacking in these patient populations, clonazepam is considered the drug of choice in the management of both Non-REM and REM parasomnias. Benzodiazepines may cause unwanted side effects especially in older individuals and tolerance is sometime observed. Melatonin and pramipexole may represent alternative options in REM sleep behavior disorder. Hypnosis therapy may be considered in arousal disorders when pharmacological treatment is contraindicated or ineffective. Management of nocturnal frontal lobe epilepsy include a first-step pharmacological approach with antiepileptic drugs (eg, carbamazepine, oxcarbazepine or other drugs effective on partial seizures), but surgical options may be considered in drug refractory patients. The published evidence for the efficacy of various treatments relies mostly upon case series or case reports."
+    },
+    {
+      "pmid": "22875125",
+      "title": "[Juvenile myoclonic epilepsy].",
+      "journal": "Tidsskrift for den Norske laegeforening : tidsskrift for praktisk medicin, ny raekke",
+      "year": "2012",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "BACKGROUND: Juvenile myoclonic epilepsy (JME) is a generalised epilepsy with seizure onset in youth. The aim of this review is to present updated knowledge about the etiology, diagnosis and treatment of JME. MATERIAL AND METHOD: The review is based on a judicious selection of original English language articles, meta-analyses, and reviews found in PubMed, and the authors' own experience with the patient group. RESULTS: Seizure onset occurs in adolescence. All have myoclonias, about 90 % have generalized tonic-clonic seizures, and one third have absences. Myoclonic jerks are frequently the debut symptom, while tonic-clonic seizures appear later on. Patients are particularly susceptible to seizures shortly after waking. It is important to ask specifically about myoclonias as most patients do not report jerks spontaneously. The electroencephalograms of 44-81 % of the patients show discharges of 4-6 Hz polyspike waves. Focal EEG abnormalities may be seen in about 30 %. When patients are treated with valproate and seizure-precipitating factors are avoided, especially sleep deprivation, about 80 % become seizure-free. Lamotrigine and levetiracetam are alternative therapies for women of childbearing age. Attempts to taper off the medication after several years of seizure freedom entail a high risk of seizure relapse. INTERPRETATION: As there may be features of focal epilepsy in the seizure semiology and/or the EEGs, it may be difficult to diagnose JME. Thus, many patients are misdiagnosed as having a focal epilepsy and are given antiepileptic drugs that may aggravate the tendency to seizures."
+    },
+    {
+      "pmid": "27710878",
+      "title": "How effective is the ketogenic diet for electrical status epilepticus of sleep?",
+      "journal": "Epilepsy research",
+      "year": "2016",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Electrical status epilepticus of sleep (ESES), with the activation of profuse amounts of epileptiform discharges in sleep, may lead to intractable epilepsy and neurocognitive decline in children. Numerous varied treatments including antiseizure medications, steroids, and surgery have been investigated as possible treatment options. The ketogenic diet (KD) is an additional treatment option which may add to our treatment armamentarium for ESES. The KD may theoretically improve ESES by affecting GABA systems and reducing inflammation. Clinical reports of the KD for ESES have been heterogeneous, but to date 38 children have been described in six publications. Overall, 53% had EEG improvement, 41% had>50% seizure reduction, 45% had cognitive improvement, but only 9% had EEG normalization. This review will assess the efficacy of the KD in the treatment of ESES based on known data as well as possible mechanisms of action and the need for future study."
+    },
+    {
+      "pmid": "3409850",
+      "title": "Orgasmic epilepsy.",
+      "journal": "Epilepsia",
+      "year": "1988",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ],
+      "abstract": "We studied a 41-year-old woman who had nocturnal somatosensory seizures followed by orgasm. The interictal EEG showed discrete left central parietal region paroxysmal activity that markedly increased during sleep. Eight electroclinical seizures were recorded during sleep polygraphic recording. Orgasms occurred coinciding with generalization of paroxysmal activity. No abnormalities were found on serial neurologic examination or computed tomography scan. The attacks were completely controlled with antiepileptic drugs."
+    },
+    {
+      "pmid": "33811133",
+      "title": "Adult phenotype of KCNQ2 encephalopathy.",
+      "journal": "Journal of medical genetics",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "BACKGROUND: Pathogenic KCNQ2 variants are a frequent cause of developmental and epileptic encephalopathy. METHODS: We recruited 13 adults (between 18 years and 45 years of age) with KCNQ2 encephalopathy and reviewed their clinical, EEG, neuroimaging and treatment history. RESULTS: While most patients had daily seizures at seizure onset, seizure frequency declined or remitted during childhood and adulthood. The most common seizure type was tonic seizures (early) infancy, and tonic-clonic and focal impaired awareness seizures later in life. Ten individuals (77%) were seizure-free at last follow-up. In 38% of the individuals, earlier periods of seizure freedom lasting a minimum of 2 years followed by seizure recurrence had occurred. Of the 10 seizure-free patients, 4 were receiving a single antiseizure medication (ASM, carbamazepine, lamotrigine or levetiracetam), and 2 had stopped taking ASM. Intellectual disability (ID) ranged from mild to profound, with the majority (54%) of individuals in the severe category. At last contact, six individuals (46%) remained unable to walk independently, six (46%) had limb spasticity and four (31%) tetraparesis/tetraplegia. Six (46%) remained non-verbal, 10 (77%) had autistic features/autism, 4 (31%) exhibited aggressive behaviour and 4 (31%) destructive behaviour with self-injury. Four patients had visual problems, thought to be related to prematurity in one. Sleep problems were seen in six (46%) individuals. CONCLUSION: Seizure frequency declines over the years and most patients are seizure-free in adulthood. Longer seizure-free periods followed by seizure recurrence are common during childhood and adolescence. Most adult patients have severe ID. Motor, language and behavioural problems are an issue of continuous concern."
+    },
+    {
+      "pmid": "12838266",
+      "title": "Epilepsy.",
+      "journal": "Disease-a-month : DM",
+      "year": "2003",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Seizures are common and are treated in all branches of medicine. Approximately 10% of the population will have one or more seizures during their lifetime. Seizures are symptoms that occur in acute illness, ie, provoked seizures, or in epilepsy, ie, unprovoked seizures. Epilepsy is any disorder in which spontaneous recurrence of unprovoked seizures is the main symptom. It is a common chronic neurologic disorder and affects 1% to 3% of the population. Classification of seizure type is important because it enables identification of the region of the brain where the seizure originated and guides initial diagnostic testing. Classification of epilepsy syndrome, rather than only type of seizure, is more important. Epilepsy syndromes are defined by many factors, including type of seizures, age at onset of seizures, family history of seizures, and findings at physical examination, electroencephalography (EEG), and neurologic imaging studies. Identifying the epilepsy syndrome provides insight into natural history, prognosis, diagnostic testing, and therapy of the disorder and facilitates communication between health care professionals. Understanding seizure type provides useful information even when the epilepsy syndrome cannot be classified. Many sudden events are easily confused with seizures, in particular, pseudoseizures, syncope, migraine, cerebrovascular disease, movement disorders, and sleep disorders. In most cases a detailed history and physical examination concentrated on the details of the event, and results of routine EEG and magnetic resonance imaging can aid in determination of which events are seizures. Video EEG monitoring is occasionally necessary to capture events to enable definitive determination of whether they are seizures and to further characterize them. Provoked seizures are treated with relief of the provoking factor. Antiepileptic drugs (AEDs) are not indicated. However, AEDs may be required to treat unprovoked seizures of new onset in patients at high risk for seizure recurrence or when a second seizure can have devastating psychosocial effects. High risk for recurrence is present when there is a history of brain insult, an EEG demonstrates epileptiform abnormalities, and magnetic resonance images demonstrate a structural lesion. AED therapy is the standard treatment for epilepsy, ie, two or more seizures. Selection of the appropriate AED depends on type of seizure and epilepsy present, and individual drug characteristics, including pharmacokinetics, side effects, dosing interval, and cost. All available AEDs except ethosuximide are effective as adjunctive therapy, and most are effective as initial monotherapy for partial seizures. Generalized seizures preferentially respond to valproate, lamotrigine, and topiramate, among other drugs. If trials of more than two AEDs do not control seizures, additional AEDs are unlikely to be effective, and the patient should be referred to an epilepsy center, where other treatment options, in particular, epilepsy surgery, can be offered. Epilepsy surgery renders 60% to 70% of patients with temporal lobe epilepsy free of disabling seizures."
+    },
+    {
+      "pmid": "26118918",
+      "title": "Seizures in sleep: clinical spectrum, diagnostic features, and management.",
+      "journal": "Critical care clinics",
+      "year": "2015",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Sleep is disrupted in most patients hospitalized in the intensive care unit and the disturbances are even more profound in patients impacted by epilepsy. Nocturnal seizures must be differentiated from other common nocturnal events, such as delirium, parasomnias, and sedation. Many antiepileptic drugs produce undesirable side effects on sleep architecture that may further predispose patients to insomnia during the night and excessive sedation and hypersomnolence during the day. Failure to recognize, correctly diagnose, and adequately manage these disturbances may lead to more prolonged hospitalization, increased risk for nosocomial infections, poorer health-related qualify of life, and greater health care financial burden."
+    },
+    {
+      "pmid": "7969657",
+      "title": "[REM sleep parasomnia].",
+      "journal": "Der Nervenarzt",
+      "year": "1994",
+      "pubtypes": [
+        "Case Reports",
+        "English Abstract",
+        "Journal Article"
+      ],
+      "abstract": "The parasomnias consist of a heterogenous group of sleep behaviour disorders with different etiologies and various symptomatologies. By employing polysomnography and the simultaneous video recording of behaviour during sleep, it is possible to associate behavioral disturbances during sleep with specific sleep stages. In the present case study, a patient with a REM (rapid eye movement) sleep behaviour disorder is discussed. This rare form of parasomnia is characterized by motor enactment of vivid and striking dreams. Underlying disease in the present case involved bilateral lacunar ischemic infarcts in the brain stem. Under the combined psychotropic medication of carbamazepine and amitriptyline, the behaviour disorder during REM sleep remitted markedly."
+    },
+    {
+      "pmid": "36270690",
+      "title": "Sleep and Epilepsy: Practical Implications.",
+      "journal": "Neurologic clinics",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Sleep is a restorative balm for many, often less so for people with epilepsy. Complex bidirectional interactions between sleep and epilepsy can be detrimental to sleep, epilepsy and those affected. Sleep is a state of variable activation of the EEG and seizure occurrence in people with epilepsy. Sleep disorders are highly prevalent and portend worse seizure and epilepsy-related outcomes. Randomized clinical trials of sleep interventions in epilepsy populations are few, yet warranted, given the effects of sleep dysfunction on quality of life and the risk of SUDEP in people with epilepsy."
+    },
+    {
+      "pmid": "29580905",
+      "title": "[Management of epilepsia in older].",
+      "journal": "Presse medicale (Paris, France : 1983)",
+      "year": "2018",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Epilepsy increases in frequency with age, above 60, with consequences in terms of independence. Stroke and dementia are the most frequent etiologies. Clinical diagnostic of epileptic seizure is challenging at this age, and a clinical algorithm is proposed. Sleep EEG during one hour seems to be the most useful exam. Interictal and critical discharges can be seen during sleep in dementia ; relation between hyperexcitability and evolution of cognition has to be precised in this pathology. In a therapeutical point of view, it is necessary to bear in mind the pharmacological consequences of aging, polytherapies, and the frequency of adverse events in this age group. Two molecules, lamotrigine and levetiracetam are recommended as first line treatment. Pronostic is good, as the majority of patients are seizure-free in monotherapy."
+    },
+    {
+      "pmid": "16942670",
+      "title": "Epilepsy and sleep.",
+      "journal": "Current treatment options in neurology",
+      "year": "2006",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "A sleep history should be taken routinely in patients with epilepsy. Treatment of sleep disorders and improvement in sleep hygiene may improve seizure control, daytime cognitive functioning, and quality of life. Patients with recurrent sleepiness interfering with daily activities or an Epworth Sleepiness Scale score more than 10 should be considered for additional evaluation by a sleep specialist. Treatment options for insomnia include improvements in sleep hygiene, cognitive behavior therapies, and sedative or hypnotic drugs. Alterations in the timing or type of antiepileptic drugs (AEDs) may be helpful (for example, using sedating medications before bedtime and avoiding evening use of drugs that may exacerbate insomnia ). Improvements in sleep hygiene alone are less effective than cognitive behavioral therapy or pharmacologic therapy. Cognitive behavioral therapy is more efficacious and its effects longer lasting than pharmacologic treatments. Sedative and hypnotic drugs may exacerbate AED cognitive adverse effects during the day and should be used only after other therapies have failed. Excessive daytime sleepiness (EDS) in patients with epilepsy may be secondary to AEDs, nocturnal seizures, or a concomitant sleep disorder such as sleep apnea or restless leg syndrome. Sedating AEDs should be minimized during the day, and activating AEDs should be used as appropriate. Video electroencephalogram polysomnography should be performed when EDS interferes with daily activities and the etiology of sleepiness is unclear. AEDs that are associated with weight gain should be avoided in patients with sleep apnea. AEDs that may promote weight loss should be considered for obese patients with sleep apnea. Continuous positive airway pressure is the treatment of choice for sleep apnea."
+    },
+    {
+      "pmid": "23622294",
+      "title": "Nonepileptic paroxysmal sleep disorders.",
+      "journal": "Handbook of clinical neurology",
+      "year": "2013",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Events occurring during nighttime sleep in children can be easily mislabeled, as witnesses are usually not immediately available. Even when observers are present, description of the events can be sketchy, as these individuals are frequently aroused from their own sleep. Errors of perception are thus common and can lead to diagnosis of epilepsy where other sleep-related conditions are present, sometimes initiating unnecessary therapeutic interventions, especially with antiepileptic drugs. Often not acknowledged, paroxysmal nonepileptic behavioral and motor episodes in sleep are encountered much more frequently than their epileptic counterpart. The International Classification of Sleep Disorders (ICSD) 2nd edition displays an extensive list of such conditions that can be readily mistaken for epilepsy. The most prevalent ones are reviewed, such as nonrapid eye movement (NREM) sleep parasomnias, comprised of sleepwalking, confusional arousals and sleep terrors, periodic leg movements of sleep, repetitive movement disorders, benign neonatal myoclonus, and sleep starts. Apnea of prematurity is also briefly reviewed. Specific issues regarding management of these selected disorders, both for diagnostic consideration and for therapeutic intervention, are addressed."
+    },
+    {
+      "pmid": "21399510",
+      "title": "Sleep and epilepsy: common bedfellows.",
+      "journal": "Journal of clinical neurophysiology : official publication of the American Electroencephalographic Society",
+      "year": "2011",
+      "pubtypes": [
+        "Editorial",
+        "Introductory Journal Article"
+      ],
+      "abstract": "Sleep is an essential part of the everyday life. Epilepsy and sleep disorders are considered by many to be common bedfellows. Sleep can affect seizure occurrence, threshold, and spread, while epilepsy can have a profound effect on the sleep/wake cycle and sleep architecture. The etiology of sleep disruption in patients with epilepsy is multifactorial and includes factors such as inadequate sleep hygiene, coexisting sleep disorders, circadian rhythm disturbances, epilepsy per se, seizure frequency, and the effect of antiepileptic medications. A series of manuscripts in this issue further attempt to define the complex relationship between epilepsy and sleep."
+    },
+    {
+      "pmid": "2330099",
+      "title": "Somnambulism in adults.",
+      "journal": "Neurology",
+      "year": "1990",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "We evaluated with clinical interviews and polysomnographic examinations 10 adults with the complaint of sleepwalking, often accompanied by violent behavior or self-injury. During the polysomnographic studies, 8 patients had 47 distinct somnambulistic episodes. All episodes occurred in non-REM sleep, with 91% occurring in slow-wave sleep. Contrary to previous reports, episodes were not confined to the 1st 3rd of the night. Clinical EEGs were normal in 5 of 6 patients. In the 7 patients tried on 1 or more treatment regimens, clonazepam effectively suppressed the somnambulism in 5 of 6 patients in whom it was tried, carbamazepine in 1 of 3, flurazepam in 2 of 2, and a combination of clonazepam and phenytoin in one."
+    },
+    {
+      "pmid": "33360400",
+      "title": "Adverse events related to antiepileptic drugs.",
+      "journal": "Epilepsy & behavior : E&B",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "OBJECTIVE: Adverse events (AEs) related to antiepileptic drugs (AEDs) may interfere with adequate dosing and patient adherence, leading to suboptimal seizure control, and relatedly, increased injuries, hospitalizations, and mortality. This study investigated the clinicodemographic factors associated with AEs related to AEDs as reported by the Liverpool Adverse Events Profile (LAEP), and explored the ability of LAEP to discriminate between epilepsy and psychogenic nonepileptic seizures (PNES). We hypothesized that female sex, mood disorders, AED-polytherapy, duration, and severity of epilepsy are associated with increased endorsement of AEs related to AEDs, and that endorsement of AEs related to AEDs would significantly differ between epilepsy and PNES patients. METHODS: We prospectively enrolled adult patients admitted to two inpatient video-electroencephalogram monitoring units. Clinicodemographic variables and psychometric measures of depression, anxiety, and cognitive function were recorded. Patient-reported AE endorsement was obtained using the LAEP, which was reduced to four latent domains using exploratory structural equation modeling. General linear models identified variables associated with each domain. Logistic regression determined the ability of LAEP scores to differentiate between epilepsy and PNES. RESULTS: 311 patients met inclusion criteria. Mean age was 38 years and 56% of patients were female. Network analysis demonstrated strong relationships between depression and anxiety with physical, sleep, psychiatric, and dermatological AE endorsement. Depression, female sex, and AED polytherapy were associated with greater AE endorsement. Epilepsy, compared to PNES, was associated with lower AE endorsement. Fewer prescribed AEDs and greater reported physical AE endorsement were associated with PNES diagnosis. SIGNIFICANCE: There is a strong relationship between patient-reported AEs and psychiatric symptomatology. Those with PNES paradoxically endorse greater physical AEs despite receiving fewer AEDs. Patients who endorse AEs in clinical practice should be screened for comorbid depression or anxiety and treated accordingly."
+    },
+    {
+      "pmid": "18555190",
+      "title": "The relationship between sleep and epilepsy.",
+      "journal": "Seminars in pediatric neurology",
+      "year": "2008",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "The occurrence of seizures in the sleep state is observed in nearly one third of patients. This is caused by an intimate relationship between the physiological state of sleep and the pathological process underlying epileptic seizures. Both sleep and sleep deprivation influence the frequency of epileptiform discharges on electroencephalograms as well as the occurrence of clinical seizures, typically during nonrapid eye movement sleep. The relationship of epileptiform activity to nonrapid eye movement sleep is vividly shown in the syndrome of continuous spikes in slow-wave sleep and the Landau-Kleffner syndrome. Seizure semiology can also be influenced by sleep and sleep deprivation. Sleep disorders may influence seizure control, and effective treatment of sleep disorders can improve seizure control. Seizures, antiepileptic drugs, ketogenic diet, and vagus nerve stimulation all influence sleep quality, daytime alertness, and neurocognitive function."
+    },
+    {
+      "pmid": "3758114",
+      "title": "Interaction sleep and epilepsy.",
+      "journal": "European neurology",
+      "year": "1986",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "In order to improve the diagnosis of epilepsy, a routine EEG recording can be supplemented with a long-lasting sleep recording or with an ambulatory EEG recording. In this paper we compare the all-night polygraphic sleep recording with the 3- to 5-hour recording after 1 night total sleep deprivation, and we discuss the outcome with each. In the first part we have analyzed the relationship between the clinical form of epilepsy and the kind and depth of sleep and we have tried to determine the optimal registration time (in hours) to obtain a maximum diagnostic gain. In the second part we have evaluated the changes in the sleep composition induced by the occurrence of epileptic EEG phenomena and by the intake of antiepileptic drugs. In the third part we have analyzed the changes in the morphological aspects of the epileptic EEG phenomena which can occur under influence of light (NREM 1-2) and deep (NREM 3-4) slow-wave sleep and REM sleep. A sufficient knowledge of these changes is very important to avoid misinterpretations."
+    },
+    {
+      "pmid": "31875835",
+      "title": "Epilepsy syndromes of childhood with sleep activation: Insights from functional imaging.",
+      "journal": "European journal of paediatric neurology : EJPN : official journal of the European Paediatric Neurology Society",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "In epilepsy syndromes of childhood with sleep activation, defined as the spectrum of epileptic conditions going from classical benign childhood epilepsy with centrotemporal spikes (BECTS) to epileptic encephalopathy (EE) with continuous spike and waves during slow-wave sleep (CSWS) including Landau-Kleffner syndrome (LKS), a lot of functional imaging studies have been performed so far, leading to results that are not always consistent, related to the technique of neuroimaging performed and to the variability of the clinical phenotype. Most consistent findings are, depending of the method used, activations or increased regional glucose metabolism in the epileptogenic regions, and deactivations, hypometabolism or decreased functional connectivity in cortical regions that belong to the default mode network. Functional changes are either transitory, temporally related to the occurrence of interictal epileptiform discharges (IED), or permanent, persisting across IED-free periods. Some studies have shown that the more severe phenotype, i.e. EE with CSWS, displays the more profound functional disturbances. Taken together, functional imaging studies support the concept that IED impact cognition in epilepsy syndromes of childhood with sleep activation. However, the precise chronology between the occurrence of IED and the functional disturbances, the neuropsychological correlates of the functional disturbances, and the effects of the anti-epileptic treatments on IED, functional disturbances and cognition need to be further studied."
+    },
+    {
+      "pmid": "18555191",
+      "title": "Electrical status epilepticus in sleep.",
+      "journal": "Seminars in pediatric neurology",
+      "year": "2008",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Electrical status epilepticus in sleep (ESES) describes an electroencephalographic pattern showing significant activation of epileptiform discharges in sleep. The terms continuous spike wave in slow-wave sleep (CSWS) and Landau-Kleffner syndrome (LKS) describe the clinical epileptic syndromes seen with ESES. Although there is an overlap between these 2 syndromes, children with CSWS present with a more global regression have more problematic epilepsy and have EEG foci located predominantly in frontotemporal or frontocentral regions. In contrast, children with LKS present with an acquired auditory agnosia, fewer seizures, and EEG foci in the posterotemporal regions. ESES requires a high degree of clinical suspicion because slow-wave sleep must be recorded to confirm this diagnosis. Treatment of ESES extends beyond just control of the seizures; amelioration of the continuous epileptiform discharge must occur to improve neuropsychological outcome. Although there is little evidence to guide treatment, conventional antiepileptic drugs play only a minimal role. Steroid therapy and high-dose benzodiazepines are most commonly used, but other therapies including intravenous gamma-globulin, the ketogenic diet, and surgical therapy with multiple subpial transaction have shown efficacy in small case series. Although epilepsy resolves with time in most cases, many children are left with significant cognitive or language impairment. Longer duration of ESES appears to be the major predictor of poor outcome; markedly abnormal neuronal activity during a critical period for synaptogenesis may result in aberrant synapse formation, explaining the poorer neuropsychological outcome. Early recognition and effective therapy are necessary to improve long-term prognosis in this condition."
+    },
+    {
+      "pmid": "12022077",
+      "title": "[Landau kleffner syndrome].",
+      "journal": "Revista de neurologia",
+      "year": "2002 Feb 1-15",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ],
+      "abstract": "INTRODUCTION: The Landau Kleffner syndrome (SLK) is associated with paroxystic alterations of the electroencephalogram which are intensified during sleep, with acquired aphasia and epilepsy, in 75 83% of the cases. The syndrome is associated with other features, such as personality disorders presenting as autistic behaviour, cognitive regression and in some cases, motor dysfunction. The epileptic activity appears to be responsible for the disorder. Treatment with anti epileptic drugs is ineffective in many cases, although there may be periods of spontaneous improvement, or there may be permanent sequelas of language. Design. A systematic revision of one case. CASE REPORT: A five year old boy with no previous clinical history had, at the age of four years, presented with behaviour changes and aphasia, accompanied by paroxystic changes on the EEG and nocturnal polysomnogram. On cranial CT there was a mid line cyst. He had had no seizures. Treatment. Treatment with carbamazepine led to clinical improvement in behaviour, reduction in the paroxysms and appearance of sleep spindles, but little effect on the degree of aphasia. CONCLUSIONS: The case described is a variant of SLK, with no epileptic seizures, some improvement on carbamazepine and a mid line cyst."
+    },
+    {
+      "pmid": "26337159",
+      "title": "Treatment of electrical status epilepticus in sleep: A pooled analysis of 575 cases.",
+      "journal": "Epilepsia",
+      "year": "2015",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article",
+        "Meta-Analysis",
+        "Research Support, Non-U.S. Gov't",
+        "Systematic Review"
+      ],
+      "abstract": "OBJECTIVE: Epileptic encephalopathy with electrical status epilepticus in sleep (ESES) is a pediatric epilepsy syndrome with sleep-induced epileptic discharges and acquired impairment of cognition or behavior. Treatment of ESES is assumed to improve cognitive outcome. The aim of this study is to create an overview of the current evidence for different treatment regimens in children with ESES syndrome. METHODS: A literature search using PubMed and Embase was performed. Articles were selected that contain original treatment data of patients with ESES syndrome. Authors were contacted for additional information. Individual patient data were collected, coded, and analyzed using logistic regression analysis. The three predefined main outcome measures were improvement in cognitive function, electroencephalography (EEG) pattern, and any improvement (cognition or EEG). RESULTS: The literature search yielded 1,766 articles. After applying inclusion and exclusion criteria, 112 articles and 950 treatments in 575 patients could be analyzed. Antiepileptic drugs (AEDs, n = 495) were associated with improvement (i.e., cognition or EEG) in 49% of patients, benzodiazepines (n = 171) in 68%, and steroids (n = 166) in 81%. Surgery (n = 62) resulted in improvement in 90% of patients. In a subgroup analysis of patients who were consecutively reported (585 treatments in 282 patients), we found improvement in a smaller proportion treated with AEDs (34%), benzodiazepines (59%), and steroids (75%), whereas the improvement percentage after surgery was preserved (93%). Possible predictors of improved outcome were treatment category, normal development before ESES onset, and the absence of structural abnormalities. SIGNIFICANCE: Although most included studies were small and retrospective and their heterogeneity allowed analysis of only qualitative outcome data, this pooled analysis suggests superior efficacy of steroids and surgery in encephalopathy with ESES."
+    },
+    {
+      "pmid": "15607597",
+      "title": "Attention deficit disorder and epilepsy.",
+      "journal": "Pediatric neurology",
+      "year": "2005",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Countless studies have demonstrated that patients with epilepsy have a significant increase in behavioral disturbances of all kinds, including hyperactivity and inattention. This finding has been demonstrated in studies utilizing observer questionnaires and behavior rating scales, neuropsychological test batteries, and standardized tests of attention such as continuous performance tests. Multiple factors must be considered in the evaluation of a child with epilepsy and hyperactivity or inattention. For instance, inattention could be due to subclinical seizures, undiagnosed learning disabilities, disturbed sleep as a result of a side effect of antiepileptic medication, or due to an attention deficit disorder. Electroencephalographic monitoring is helpful to distinguish between behavioral inattention and partial complex or absence seizures. Electroencephalographic monitoring can also assess subclinical spike frequency, which may affect attention and other aspects of cognitive functioning in various ways, even in the absence of clinical seizures. Most antiepileptic drugs do not adversely affect attention and behavior in therapeutic doses, with the exception of phenobarbital, gabapentin, and topiramate. Some antiepileptic drugs, such as lamotrigine and carbamazepine, may even have beneficial effects. The preponderance of evidence suggests that stimulants other than bupropion are safe and effective in the treatment of attention deficit disorder in children with epilepsy, although controlled studies of dextroamphetamine in this population are lacking. So far, atomoxetine has not been demonstrated to have any adverse effect in children with epilepsy."
+    },
+    {
+      "pmid": "35755913",
+      "title": "Effects of antiepileptic drugs on sleep architecture parameters in adults.",
+      "journal": "Sleep science (Sao Paulo, Brazil)",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "OBJECTIVES: Physiological and restorative sleep is fundamental for physical and mental well-being. Polysomnography parameters are objective methods to access sleep structure. Antiepileptic drugs (AEDs) are a group of drugs whose interference in the sleep structure is still not well known, especially in what concern the new ones. We did a systematic review of the literature to compare the effect of classic and newer AEDs on sleep architecture. MATERIAL AND METHODS: A search was performed in PubMed and Scopus, using keywords \"sleep\" and \"antiepileptics\", and each AED combined with \"sleep\". Only studies concerning objective measures were selected. RESULTS: 63 articles were included, only 21 were randomized, controlled and double-blinded. Studies not only in epilepsy, but also in restless leg syndrome, bruxism, insomnia, fibromyalgia and obstructive sleep apnea were found. Among classic AEDs, carbamazepine has a negative effect on sleep while phenobarbitone has a slightly dose-dependent interference and is also the only one to reduce N3 stage. Valproic acid has little to no effect while clobazam and clonazepam have a positive effect. No conclusion can be drawn about phenytoin. All of them reduce REM stage. In the newer AEDs group gabapentine, lamotrigine, perampanel, pregabaline and tiagabine increase N3 sleep in best evidence. Lacosamide and zonisamide appear to be innocent while levetiracetam reduces REM sleep. CONCLUSION: Studies found used different methodologies not always addressing the analysis on the same parameters. In spite of these, newer AEDs have less effects on sleep structure when compared with classic AEDs but furthermore robust evidence is needed."
+    },
+    {
+      "pmid": "22865379",
+      "title": "Nocturnal Frontal Lobe Epilepsy vs Parasomnias.",
+      "journal": "Current treatment options in neurology",
+      "year": "2012",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "The diagnosis and treatment of nocturnal events can present significant challenges to the clinician. Correct diagnosis is the first step towards appropriate treatment, but may not be straightforward. In particular, non-rapid eye movement (NREM) arousal parasomnias, such as sleepwalking, sleep terrors, and confusional arousal can present in a similar fashion to nocturnal frontal lobe epilepsy (NFLE); dramatic and often bizarre behaviors from sleep are features of both conditions, and may result in diagnostic confusion. A careful clinical history, however, often enables accurate diagnosis, and the frontal lobe epilepsy and parasomnia (FLEP) scale, a validated questionnaire for the diagnosis of nocturnal events, can add diagnostic confidence. Recording of events on video-EEG-polysomnography is required if diagnostic doubt remains although is not always achievable, particularly if events are occurring infrequently. Treatments for NFLE and parasomnias are different, but lifestyle modification and treatment of coexisting sleep disorders (such as obstructive sleep apnoea) may have a role in both. In NFLE, medical treatment with antiepileptic drugs, particularly carbamazepine and topiramate, forms the mainstay of treatment; a small proportion of individuals with treatment-resistant seizures may benefit from epilepsy surgery. For parasomnias, reassurance and the removal of priming and precipitating factors is often sufficient. A minority of individuals will, however, need medical treatment, usually with benzodiazepines or tricyclic antidepressants. Unfortunately, there are few data on which to base treatment decisions in this area, with the evidence comprising predominantly case reports and case series. Well-designed studies, including randomised control trials, are needed and may require a multicentre approach."
+    },
+    {
+      "pmid": "14527482",
+      "title": "Epilepsy and sleep disturbance.",
+      "journal": "Epilepsy & behavior : E&B",
+      "year": "2003",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Sleep disturbance is common in epilepsy, the nature of sleep disturbances in epilepsy is diverse, and the etiologies are complex. Evidence suggests that having epilepsy and the occurrence of seizures, as well as some AEDs, are associated with significant sleep disruption. The occurrence of seizures can have profound effects on sleep architecture lasting much longer than the postictal period. Persistent daytime drowsiness in patients with epilepsy is not always due to the side effects of some AEDs and may be independently linked with sleep fragmentation. Significant sleep disruption in epilepsy has been associated with impaired quality of life and impaired seizure control. All aspects of sleep medicine are important in the management of epilepsy and are confounded by the occurrence of seizures, the location of seizures, and the beneficial and detrimental effects of AEDs. Sleep should be proactively evaluated, and sleep disturbances should be treated as part of the total care of patients with epilepsy."
+    },
+    {
+      "pmid": "27316368",
+      "title": "Observational pilot study of reported symptoms of obstructive sleep apnoea in children with epilepsy.",
+      "journal": "Developmental medicine and child neurology",
+      "year": "2016",
+      "pubtypes": [
+        "Journal Article",
+        "Observational Study"
+      ],
+      "abstract": "AIM: To estimate symptoms of obstructive sleep apnoea (OSA) and excessive daytime sleepiness (EDS) in children with epilepsy (CWE) compared with those in a typically developing comparison group. CWE are known to have poor sleep, with increased rates of OSA suggested. METHOD: The Sleep-Related Breathing Disorder scale of the Pediatric Sleep Questionnaire (PSQ-SRBD) was used to estimate OSA symptoms, with scores ≤0.33 known to be highly sensitive and specific for OSA. The Epworth Sleepiness Scale (ESS) was used to assess EDS, with scores of 10 or above considered abnormal. RESULTS: Thirty-three CWE (21 males, 12 females) were studied (median age [interquartile range {IQR}] 9y [5-12]), along with 42 comparison children (20 males, 22 females; median age [IQR] 6y [4-8.5]). Fifty-five per cent of CWE scored 0.33 or higher on the PSQ-SRBD compared with 7% in the comparison group (p<0.001), and 30% of CWE had an abnormal ESS compared with 5% controls (p=0.003). Within the CWE cohort, PSQ-SRDB and ESS appeared higher in those taking antiepileptic drugs (AEDs); although PSQ-SRBD score for CWE not on AEDs was higher than in the comparison group. INTERPRETATION: This study suggests higher rates of symptoms of OSA and EDS in CWE compared with typically developing children. AEDs may be a confounding factor, but do not alone account for the associations seen. Further studies including polysomnography to verify the presence (rather than suggestion by questionnaire) of OSA are warranted."
+    },
+    {
+      "pmid": "38135915",
+      "title": "Developmental epileptic encephalopathy in DLG4-related synaptopathy.",
+      "journal": "Epilepsia",
+      "year": "2024",
+      "pubtypes": [
+        "Multicenter Study",
+        "Journal Article"
+      ],
+      "abstract": "OBJECTIVE: The postsynaptic density protein of excitatory neurons PSD-95 is encoded by discs large MAGUK scaffold protein 4 (DLG4), de novo pathogenic variants of which lead to DLG4-related synaptopathy. The major clinical features are developmental delay, intellectual disability (ID), hypotonia, sleep disturbances, movement disorders, and epilepsy. Even though epilepsy is present in 50% of the individuals, it has not been investigated in detail. We describe here the phenotypic spectrum of epilepsy and associated comorbidities in patients with DLG4-related synaptopathy. METHODS: We included 35 individuals with a DLG4 variant and epilepsy as part of a multicenter study. The DLG4 variants were detected by the referring laboratories. The degree of ID, hypotonia, developmental delay, and motor disturbances were evaluated by the referring clinician. Data on awake and sleep electroencephalography (EEG) and/or video-polygraphy and brain magnetic resonance imaging were collected. Antiseizure medication response was retrospectively assessed by the referring clinician. RESULTS: A large variety of seizure types was reported, although focal seizures were the most common. Encephalopathy related to status epilepticus during slow-wave sleep (ESES)/developmental epileptic encephalopathy with spike-wave activation during sleep (DEE-SWAS) was diagnosed in >25% of the individuals. All but one individual presented with neurodevelopmental delay. Regression in verbal and/or motor domains was observed in all individuals who suffered from ESES/DEE-SWAS, as well as some who did not. We could not identify a clear genotype-phenotype relationship even between individuals with the same DLG4 variants. SIGNIFICANCE: Our study shows that a subgroup of individuals with DLG4-related synaptopathy have DEE, and approximately one fourth of them have ESES/DEE-SWAS. Our study confirms DEE as part of the DLG4-related phenotypic spectrum. Occurrence of ESES/DEE-SWAS in DLG4-related synaptopathy requires proper investigation with sleep EEG."
+    },
+    {
+      "pmid": "35018175",
+      "title": "Electrical Status Epilepticus During Slow-wave Sleep (ESES): Current Perspectives.",
+      "journal": "Journal of pediatric neurosciences",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Electrical status epilepticus during slow-wave sleep (ESES) is an epilepsy syndrome with sleep-induced epileptic discharges and acquired impairment of cognition or behavior. Since the disease's original description in 1971, no clear consensus has emerged on diagnostic criteria or optimal treatment. The treatment of ESES can be challenging, often including numerous antiepileptic drugs, immunomodulatory agents, and even surgical interventions. There is little evidence to guide treatment because only retrospective studies and case reports on the efficacy of treatment of ESES are present in literature. In this paper, we aim to analyze the etiopathogenesis of ESES in the new genetic era and to evaluate the treatment modalities in accordance with the genetic data and electroclinic spectrum of ESES."
+    },
+    {
+      "pmid": "35434278",
+      "title": "Epileptic seizures and link to memory processes.",
+      "journal": "AIMS neuroscience",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "Epileptogenesis is a complex and not well understood phenomenon. Here, we explore the hypothesis that epileptogenesis could be \"hijacking\" normal memory processes, and how this hypothesis may provide new directions for epilepsy treatment. First, we review similarities between the hypersynchronous circuits observed in epilepsy and memory consolidation processes involved in strengthening neuronal connections. Next, we describe the kindling model of seizures and its relation to long-term potentiation model of synaptic plasticity. We also examine how the strengthening of epileptic circuits is facilitated during the physiological slow wave sleep, similarly as episodic memories. Furthermore, we present studies showing that specific memories can directly trigger reflex seizures. The neuronal hypersynchrony in early stages of Alzheimer's disease, and the use of anti-epileptic drugs to improve the cognitive symptoms in this disease also suggests a connection between memory systems and epilepsy. Given the commonalities between memory processes and epilepsy, we propose that therapies for memory disorders might provide new avenues for treatment of epileptic patients."
+    },
+    {
+      "pmid": "31957646",
+      "title": "Images: Facial cataplexy with demonstration of persistent eye movements.",
+      "journal": "Journal of clinical sleep medicine : JCSM : official publication of the American Academy of Sleep Medicine",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, U.S. Gov't, Non-P.H.S."
+      ],
+      "abstract": "A patient was transferred for management of \"medication-refractory seizures\" after failure of levetiracetam and valproate dual therapy. She had a life-long history of two types of events: periods in which she would rapidly and uncontrollably lapse into unconsciousness, and spells in which she would \"pass out\" but maintain consciousness, the latter happening with increasing frequency in association with laughing, as of late. She also reported hypnogogic/hypnopompic hallucinations, sleep paralysis, and disrupted nocturnal sleep. A clinical diagnosis of narcolepsy was made. The prevailing pathophysiological concept of narcolepsy details \"partial intrusions of REM\" sleep into wakefulness. Healthy REM sleep includes generalized atonia, but with preservation of eye movements, respiratory function, and sphincter tone. Cataplexy recapitulates this pattern, and is often induced by extreme emotions, laughter in this case. Despite generalized and severe weakness and areflexia during this patient's cataplectic events, she was able to volitionally move her eyes, which is consistent with the physiology of REM sleep. The diagnosis of cataplexy is often missed, due to clinicians being unfamiliar with the findings and the lack of ability to induce sufficient emotional responses to trigger an episode. This example of cataplexy is also quite characteristic of the \"cataplectic facies.\" The ability to observe the infrequently observed phenomenon of cataplexy serves as a reminder that consciousness is preserved, as are extra-ocular muscle movements."
+    },
+    {
+      "pmid": "24649450",
+      "title": "Nocturnal frontal lobe epilepsy presenting as obstructive type sleep apnea.",
+      "journal": "Journal of epilepsy research",
+      "year": "2011",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ],
+      "abstract": "A 20-year-old man presented with sleep apnea. Polysomnography was performed and it revealed nine apneas and two hypopneas. Contrary to typical apnea, however, rhythmic epileptiform discharges appeared at bifrontal area on EEG just before the start of apnoea. Video-EEG monitoring was performed to classify these events, and to evaluate the relationship of apnoea and ictal discharge. Ictal EEG revealed paroxysmal fast activity over the bifrontal area. Ictal SPECT showed hyperperfusion in right frontal area. Given these findings, we concluded that these events were epileptic seizures presenting as obstructive sleep apnea. Antiepileptic medication was initiated, and the events were decreased. This case demonstrates that nocturnal frontal love epilepsy may be the potential cause of obstructive sleep apnea (OSA)."
+    },
+    {
+      "pmid": "30731295",
+      "title": "Effect of gabapentin on sleep patterns disturbed by epilepsy.",
+      "journal": "Epilepsy & behavior : E&B",
+      "year": "2019",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "abstract": "For a long time, numerous sleep alterations induced by nocturnal epilepsy have been described. Such alterations include sleep fragmentation, decrement of sleep efficiency, increment of the wake time after sleep onset (WASO), increment of light sleep, and decrement of sleep depth. On the other hand, gabapentin (GBP), an antiepileptic drug analog of γ-aminobutyric acid (GABA) used as adjunctive and eventually, as a monotherapeutic treatment, induces a significant improvement in patients with both focal and secondarily generalized partial seizures. In experimental epilepsy models, this drug protects against pentylenetetrazol (PTZ)-induced convulsions. In consideration of such GBP properties, the aim of this work was to investigate its efficacy to protect against sleep disturbances provoked by convulsive seizures induced by the administration of PTZ. Nine-hour (9-hour) polygraphic studies were carried out in chronically implanted male adult Wistar rats separated into 4 different groups of 6 individuals. Control recordings in each group were done after saline administration. One group received a SC Subcutaneous (SC) injection of 50 mg/kg of PTZ alone while the other three groups were injected with either 15, 30, or 60 mg/kg IP Intraperitoneal (IP) of GBP 30 min prior to PTZ (50 mg/kg SC) administration. Animals displayed the whole range of electrophysiological and behavioral manifestations of the disease during the epileptic episodes induced by PTZ administration, and the states of vigilance were significantly altered. Insomnia occurred immediately after PTZ injection preceding the appearance of the first epileptic symptoms. Thus, both slow wave sleep (SWS) and rapid eye movement sleep (REM sleep) were completely inhibited during a relatively long period of time. The disturbing effects of epilepsy on sleep decreased when animals were under GBP treatment. Improvement of sleep was dependent on the administered dose of this antiepileptic drug."
+    },
+    {
+      "pmid": "793842",
+      "title": "Has sodium valproate hypnotic effects?",
+      "journal": "Epilepsia",
+      "year": "1976",
+      "pubtypes": [
+        "Clinical Trial",
+        "Controlled Clinical Trial",
+        "Journal Article"
+      ],
+      "abstract": "Eight fasting normal subjects were given a single dose of sodium valproate, 400 mg, phenobarbital, 60 mg, or the two drugs in combination, in a double-blind placebo-controlled study. The effects were assessed behaviorally and by a standard 30-min EEG, begun 1 hr after the treatments had been given. The recording was rated for the amount of drowsiness and sleep, independent of which drug had been given. The scores obtained indicated that valproate intself has hypnotic action, and there is a tendency for this to be increased by the simultaneous administration of phenobarbital."
+    },
+    {
+      "pmid": "25799908",
+      "title": "Epileptic encephalopathy with electrical status epilepticus: an electroclinical study of 59 patients.",
+      "journal": "Seizure",
+      "year": "2015",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "PURPOSE: To evaluate the electroclinical features, treatment effectiveness, and outcome of 59 patients with epileptic encephalopathy with electrical status epilepticus during sleep. METHODS: Medical-files of 59 patients with electrical status epilepticus during sleep were retrospectively evaluated for data concerning: history, physical and neurological examinations, sleep and awake EEG's, psychometric tests and brain MRI. RESULTS: A total of 31 boys and 28 girls were identified. Patients were evaluated in two groups: symptomatic/structural and idiopathic group. There was no significant difference between the etiological groups in term of mean age at ESES onset, mean interval between the first seizure and the onset of ESES. The mean age at seizure onset was earlier in the symptomatic/structural group than the idiopathic ones. The mean follow-up time after the ESES onset was 4.5 years for all patients. The most effective antiepileptic drugs in our series were clobazam and levetiracetam. In refractory patients, steroid treatment was found effective during the early course of the disease. In the idiopathic group, cognitive decline has improved. However in the symptomatic group, patients did not respond to the treatment and cognitive deterioration did not improve in one third of the group. CONCLUSION: The long-term outcome of ESES is highly variable and usually depends on etiology and the duration of ESES. The most efficious antiepileptic drugs in our study are clobazam and levetiracetam."
+    },
+    {
+      "pmid": "10797930",
+      "title": "[Landau-Kleffner sydnrome].",
+      "journal": "Revista de neurologia",
+      "year": "1999 Aug 16-31",
+      "pubtypes": [
+        "English Abstract",
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "The Landau-Kleffner syndrome consists of the association of paroxysmal EEG abnormalities, more marked during sleep, acquired aphasia usually of receptive type, and epileptic seizures in three quarters of cases. Additional features include behavioral disturbances that may even present with autistic features, cognitive regression of variable degree, and sometimes motor difficulties, indicating the pervasive nature of the disorder. The epileptic activity, as manifested by the EEG, seems responsible for the pervasive dysfunction. Treatment with antiepileptic drugs is often ineffective. ACTH and corticosteroids are currently regarded as the best therapy but surgical treatment by subpial transection is being actively studied."
+    },
+    {
+      "pmid": "29031745",
+      "title": "Sleep architecture in patients with Juvenile Myoclonic Epilepsy.",
+      "journal": "Sleep medicine",
+      "year": "2017",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "AIM: The aim is to analyze the sleep architecture using polysomnography (PSG) in patients with Juvenile Myoclonic Epilepsy (JME): (newly diagnosed and those on valproate drug) attending epilepsy clinic at Alexandria University Hospitals. METHODS: This study involved 20 patients with JME on valproate (age: 22.40 ± 5.80 years; M:F = 6:14), 20 newly diagnosed patients (age: 18.55 ± 6.0 years; M:F = 6:14), and 20 matched healthy controls (age: 22.10 ± 5.0 years; M:F = 6:14). Clinical assessment, electroencephalogram (EEG), evaluation with comprehensive sleep questionnaire, and PSG were done for all patients. RESULTS: PSG showed significant alterations in sleep architecture in the total JME group in the form of reduced mean sleep efficiency (p = 0.001∗), increased mean Rapid eye movement (REM) onset latency (p = 0.046∗), decrease mean REM percentage (p = 0.011∗), increased mean wakefulness after sleep onset (p = 0.018∗), increase the index of total arousal (p = 0.005∗), increased mean periodic limb movement index (P = 0.001∗), and reduced apnea hypopnea index (P = <0.001) in comparison to control group. Valproate treated group showed increased sleep efficiency (p = 0.040∗), decreased REM arousal index (P = 0.012), longer stage 3 (P = 0.038), and prolonged stage 2 (P = 0.049∗) than the newly diagnosed group. CONCLUSIONS: Sleep architecture was significantly disturbed in JME, with improvement in sleep efficiency in valproate treated patients."
+    },
+    {
+      "pmid": "7894846",
+      "title": "Cognitive impairment--is it inevitable?",
+      "journal": "Seizure",
+      "year": "1994",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Neuropsychological dysfunction in children and adults with epilepsy is common and has several possible interrelated causes, including the underlying pathophysiology, possible cerebral pathology, the effects of subclinical discharges, sleep disorders, status epilepticus and drug therapy. Of these factors the effects of subclinical discharges and those of medication are potentially remediable. In up to 50% of patients with subclinical epileptiform EEG discharges, these are associated with transitory cognitive impairment. When the discharges are focal, the cognitive deficits usually reflect the normal neuropsychological functions of the affected brain region. Most antiepileptic drugs, with the exception of the benzodiazepines (which themselves adversely affect cognition) and lamotrigine, do not suppress inter-ictal discharges. Although well-designed clinical trials of the effects of antiepileptic drugs are difficult to perform, there is convincing evidence that phenobarbitone and phenytoin cause cognitive impairment. Drugs which control both the seizures and inter-ictal discharges should improve cognitive function, provided the drugs themselves do not have a cognitive penalty. Lamotrigine provides effective control of both overt and subclinical seizures, without adversely affecting cognition."
+    },
+    {
+      "pmid": "17618132",
+      "title": "Frequency of seizures and epilepsy in neurological HIV-infected patients.",
+      "journal": "Seizure",
+      "year": "2008",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "BACKGROUND: Infection with the human immunodeficiency virus (HIV) is associated both with infections of the central nervous system and with neurological deficits due to direct effects of the neurotropic virus. Seizures and epilepsy are not rare among HIV-infected patients. We investigated the frequency of acute seizures and epilepsy of patients in different stages of HIV infection. In addition, we compared the characteristics of patients who experienced provoked seizures only with those of patients who developed epilepsy. METHODS: The database of the Department of Neurology, University of Münster, was searched for patients with HIV infection admitted between 1992 and 2004. Their charts were reviewed regarding all available sociodemographic, clinical, neurophysiological, imaging and laboratory data, therapy and outcome. Stage of infection according to the CDC classification and the epileptogenic zone were determined. RESULTS: Of 831 HIV-infected patients treated in our department, 51 (6.1%) had seizures or epilepsy. Three of the 51 patients (6%) were diagnosed with epilepsy before the onset of the HIV infection. Fourteen patients (27%) only had single or few provoked seizures in the setting of acute cerebral disorders (eight patients), drug withdrawal or sleep withdrawal (two patients), or of unknown cause (four patients). Thirty-four patients (67%) developed epilepsy in the course of their HIV infection. Toxoplasmosis (seven patients), progressive multifocal leukencephalopathy (seven patients) and other acute or subacute cerebral infections (five patients) were the most frequent causes of seizures. EEG data of 38 patients were available. EEG showed generalized and diffuse slowing only in 9 patients, regional slowing in 14 patients and regional slowing and epileptiform discharges in 1 patient. Only 14 of the patients had normal EEG. At the last contact, the majority of the patients (46 patients=90%) were on highly active antiretroviral therapy (HAART). Twenty-seven patients (53%) were on anticonvulsant therapy (gabapentin: 14 patients, carbamazepine: 9 patients, valproate: 2 patients, phenytoin: 1 patient, lamotrigine: 1 patient). Patients with only provoked seizures had no epilepsy risk factors except HIV infection, and were less likely to be infected via intravenous drug abuse. CONCLUSIONS: Seizures are a relevant neurological symptom during the course of HIV infection. Although in some patients seizures only occur provoked by acute disease processes, the majority of patients with new onset seizures eventually develops epilepsy and require anticonvulsant therapy. Intravenous drug abuse and the presence of non-HIV-associated risk factors for epilepsy seem to be associated with the development of chronic seizures in this patient group."
+    },
+    {
+      "pmid": "32423603",
+      "title": "Genetic/idiopathic generalized epilepsies: Not so good as that!",
+      "journal": "Revue neurologique",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Genetic or idiopathic generalized epilepsies (IGEs) account for 15-20% of all epilepsies. These syndromes have always been considered as good prognosis forms of epilepsy over time; however, for some patients, there is a need to maintain antiseizure drugs (ASD) for a long-time. Drug resistance is not uncommon (7-15%). Lifestyle remains essential and is an integral part of the treatment. Comorbidities such as obstructive sleep apnea syndrome must be considered and treated. A highly underestimated condition is the risk of sudden unexpected death in epilepsy (SUDEP). Very few data are available about the prevalence of SUDEP in IGE, but patients with generalized tonic-clonic seizures (GTCS) are exposed to this risk. IGEs are also characterized by a specific pharmalogical sensisitivity but may be aggravated by ASDs. Historically, the treatment of IGEs has relied mostly on valproate but this drug should be avoided in women of childbearing potential. Women with IGE not treated with valproate are more likely to have unsatisfactory seizure control. Female gender appears now as a new risk factor for drug-resistance. Finally, aside from the typical forms, there are epilepsies that fulfill most of the criteria of IGE, but that have an unusual history with GTCS, absences, falls, and drug resistance. Patients do not have psychomotor regression, brain magnetic resonance imaging is normal. EEG shows generalized fast rhythms during NREM sleep. These patients with refractory generalized epilepsy with sleep-related fast activities do not belong to a well-established syndromic category. These cases are considered \"intermediary\" between IGE and epileptic encephalopathies."
+    },
+    {
+      "pmid": "23622211",
+      "title": "Epileptic encephalopathy with continuous spike-waves during slow-wave sleep including Landau-Kleffner syndrome.",
+      "journal": "Handbook of clinical neurology",
+      "year": "2013",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Epileptic encephalopathy with continuous spike-waves during slow-wave sleep (CSWS) is a spectrum of epileptic conditions best defined by the association of cognitive or behavioral impairment acquired during childhood and not related to another factor other than the presence of abundant interictal epileptiform discharges (IED) during sleep, which tend to diffuse over the whole scalp. It is part of the childhood focal epileptic syndromes, some cases being idiopathic and overlapping with benign rolandic epilepsy, and others being symptomatic of a structural brain lesion. Landau-Kleffner syndrome (LKS) is a particular presentation where acquired aphasia is the core symptom. Clinical, neurophysiological, and cerebral glucose metabolism data support the hypothesis that IED play a prominent role in the cognitive deficits by interfering with the neuronal networks at the site of the epileptic foci but also at distant connected areas. Therefore, the treatment should aim to suppress IED. This may be achieved using conventional antiepileptic drugs, but corticosteroids seem to have more pronounced and sustained efficacy. Outcome for epilepsy is usually good, CSWS being an age-dependent EEG pattern, whereas outcome for cognition, language, and behavior is variable. Rehabilitation represents an important part of the treatment and visual forms of language should be encouraged in children with LKS."
+    },
+    {
+      "pmid": "35851195",
+      "title": "Effects of levetiracetam on sleep architecture and daytime sleepiness.",
+      "journal": "Folia medica",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "Sleep is a reversible behavioural state of perceptual disengagement from and unresponsiveness to the environment, which is required for neural plasticity and memory consolidation. Sleep disorders are common in patients with epilepsy. The main causes of sleep disturbances are coexisting sleep disorders, impact of seizures and epileptic activity, and the effects of antiepileptic drugs. Sleep and epilepsy have reciprocal effects - on one hand electrical brain activity during sleep is a strong modulator of epileptic activity and on the other epileptic activity during sleep may disrupt sleep architecture. The most common side effects of anticonvulsants include alterations in sleep architecture and variation in the degree of daytime sleepiness. Their effects on sleep and daytime sleepiness are variable and it is often difficult to distinguish whether the improved seizure control and epileptic activity is a direct result of anticonvulsants or associated with improved sleep quality. Levetiracetam is a new generation anticonvulsant used to treat both focal and generalized epilepsy. Its satisfactory safety and tolerability explain its wide usage in the clinical practice and necessitates more profound knowledge on its effects on sleep quality. There have been few reports about its effects on sleep architecture and daytime sleepiness. A short summary of the studies concerning this topic is presented. Main disadvantages of the studies are: the small sample size, comparison of the results obtained in healthy volunteers with patients with epilepsy, short observation duration, variations of dosage, different evaluation modalities and concomitant AED therapy. Future prospective studies on subjective and objective effects of Levetiracetam on sleep architecture and daytime sleepiness are needed to better understand its impact on sleep in order to improve epilepsy patients' quality of life, seizure control and sleep disturbances."
+    },
+    {
+      "pmid": "19379835",
+      "title": "Effect of oxcarbazepine on sleep architecture.",
+      "journal": "Epilepsy & behavior : E&B",
+      "year": "2009",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "The most common side effects following administration of antiepileptic drugs involve alterations in sleep architecture and varying degrees of daytime sleepiness. Oxcarbazepine is a drug that is approved as monotherapy for the treatment of partial seizures and generalized tonic-clonic seizures. However, there is no information about its effects on sleep pattern organization; therefore, the objective of this work was to analyze such effects. Animals (Wistar rats) exhibited three different behavioral and electrophysiological states of vigilance: wakefulness, slow wave sleep (SWS), and rapid eye movement (REM) sleep. Oral treatment with oxcarbazepine (100 mg/kg) produced an increment in total sleep time throughout the recording period. This increment involved both SWS and REM sleep. Mean duration of the REM sleep phase was not affected. In contrast, the frequency of this sleep phase increased significantly across the 10-hour period. REM sleep latency shortened significantly. Results obtained in this work indicate that oxcarbazepine's acute effects point to hypnotic properties."
+    },
+    {
+      "pmid": "1733751",
+      "title": "Treatment of intractable childhood epilepsy with high-dose valproate.",
+      "journal": "Epilepsia",
+      "year": "1992",
+      "pubtypes": [
+        "Clinical Trial",
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "abstract": "Forty-six children with refractory epilepsy (12 with symptomatic generalized epilepsy, 14 with symptomatic partial epilepsy, and 20 with undetermined epilepsy) were treated by high-dose (serum level above 100 micrograms/ml) valproate (VPA) therapy. Monotherapy was used with 34 patients and two drugs with 12. Serum VPA concentrations ranged from 105.1 to 198.4 micrograms/ml. Assessment of initial response to treatment, after the serum level had reached the appropriate level, showed seizures to be completely controlled in 15 (32.6%) of 46 patients and improved in 12 (26.1%) (50% or more). Follow-up of more than 6 months after the time of initial response showed control of seizures in 14 (30.4%) and improvement in 11 (23.9%). The initial effect on EEG was the disappearance of epileptic discharges in 3 (6.5%) of 46 patients and marked improvement in 15 (32.6%). Follow-up revealed the disappearance of epileptic discharges in 7 (15.2%) and marked improvement in 9 patients (19.6%). High-dose VPA therapy was especially effective for West syndrome and for epilepsy with continuous spike-waves during slow-wave sleep. Control of atypical absences and myoclonic seizures was relatively good. Hypofibrinogenemia and thrombocytopenia were sometimes encountered but these side effects were reversible with reduction of dosage."
+    },
+    {
+      "pmid": "11879368",
+      "title": "The effects of lamotrigine on sleep in patients with epilepsy.",
+      "journal": "Epilepsia",
+      "year": "2001",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "abstract": "PURPOSE: The older antiepileptic drugs (AEDs) have a variety of effects on sleep, including marked reduction in REM, slow-wave sleep (SWS) and sleep latency, and increased percentage of light sleep. The effects of the newer AEDs on sleep are unknown. Our purpose was to study the effect of lamotrigine (LTG) on sleep. METHODS: Ten adults with focal epilepsy, in whom the decision was made to add LTG to either phenytoin (PHT) or carbamazepine (CBZ) for control of seizures, were the subjects of this study. Patients underwent pre- and posttreatment polysomnography (PSG) and completed sleep questionnaires. Polygraphic variables and Epworth Sleepiness Scale (ESS) scores, a subjective measure of sleep propensity, were compared by using the Wilcoxon sign rank test. RESULTS: Seven patients were taking CBZ, and three were treated with PHT. All subjects were titrated to an LTG dose of 400 mg/day. Treatment with LTG produced a significant decrease in SWS and an increase in stage 2 sleep percentage. No significant difference in ESS or any of the other polygraphic variables was observed. However, LTG treatment was associated with a reduction in arousals and stage shifts and an increase in REM periods. No subjects reported insomnia with treatment. CONCLUSIONS: LTG appears to be less disruptive to sleep than some of the older AEDs."
+    },
+    {
+      "pmid": "18539001",
+      "title": "An unexpected EEG course in Dravet syndrome.",
+      "journal": "Epilepsy research",
+      "year": "2008",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "A puzzling EEG pattern combining frontal slow bi-tri spikes followed or not by slow waves when awake and activated by sleep with 5-10s discharges of 8-9Hz spikes in a minority of adolescents with Dravet syndrome (DS) was recorded in the context of stable seizure and cognitive status, and unchanged antiepileptic medication. Tonic seizures were frequently reported in patients with this EEG pattern (3/5). This EEG pattern could suggest that of Lennox-Gastaut syndrome (LGS) but it exhibits clear differences and therefore should not be considered as a change into LGS but as a previously overlooked unusual pattern in the adolescent course of DS."
+    },
+    {
+      "pmid": "32010050",
+      "title": "Examining the Utility of Resective Epilepsy Surgery in Children With Electrical Status Epilepticus in Sleep: Long Term Clinical and Electrophysiological Outcomes.",
+      "journal": "Frontiers in neurology",
+      "year": "2019",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "Background: Electrical Status Epilepticus in Sleep (ESES) is an epileptic encephalopathy syndrome characterized by infrequent clinical seizures and prominent interictal burden during slow wave sleep associated with cognitive deficits and behavioral dysfunction. Medical treatment with anti-epileptic drugs is often unsuccessful. Resective surgery may be a valuable option in carefully selected patients. This case series aims to describe the indications, long term results and utility of resective surgery for ESES. Methods: Information on 14 patients who underwent surgery for epilepsy and ESES at the Children's Hospital of Wisconsin between 2007 and 2017 is included. Clinical, electrographic and neuropsychological features and outcomes are described in detail. Results: The most common pathology was encephalomalacia due to perinatal middle cerebral artery stoke (5/14). Twelve patients had imaging findings of perinatal pathologies; however, two patients had normal magnetic resonance imaging. Surgery was performed to control refractory epilepsy in eight patients. Six patients had no clinical seizures for 1-6 years prior to surgery, one of which had no known clinical seizures at all. All showed cognitive declines (6/14) or impairment (8/14) on neuropsychological assessments, and surgery was suggested to minimize further cognitive declines. The most common surgical procedure was hemispherotomy (10/14). Temporo-parieto-occipital disconnection, frontal lobectomy, parieto-occipital resection, and limited corticectomy were also used, with good outcomes for the first three procedures. Clinical follow up mean was 4.4 years and 12 patients had excellent seizure outcome. Electroencephalography (EEG) follow up mean was 3 years and ESES resolved in 12/14 patients. All patients completed post-surgical neuropsychological evaluation with mean follow-up of 17.46 months. Conclusions: Resective surgery is an effective treatment for selected cases of ESES, producing long term seizure freedom, resolution of ESES and stabilization of cognitive and behavioral functioning in most patients. Our case series is the largest single center cohort description addressing resective surgery for ESES. Outcomes in this sample suggest that good long-term seizure, EEG and cognitive/behavioral outcomes can be achieved in patients with normal brain imaging and in limited lobar or multi-lobar resections. Moreover, patients with ESES and very infrequent clinical seizures can benefit from surgery with stabilization of cognitive and behavioral functioning."
+    },
+    {
+      "pmid": "40347411",
+      "title": "Seizures influence sleep macrostructure and the sleep-wake circadian rhythm in Dravet syndrome.",
+      "journal": "Epilepsia",
+      "year": "2025",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "OBJECTIVE: Dravet syndrome (DS) is a developmental and epileptic encephalopathy with a wide spectrum of comorbidities comprising sleep disorders, reported in up to 85% of cases. For this, a sleep study is recommended in patients with a sleep complaint. However, no data are available on sleep architecture in DS or on the impact of seizures on sleep quality and macrostructure. We aim to investigate the impact of epileptic phenomena on sleep in DS. METHODS: In this study, we report seizure type and frequency, seizures during sleep, and concomitant antiseizure medications (ASMs) of 30 patients with clinical diagnosis of DS and confirmed SCN1A pathogenic variant. We obtained 62 whole-night polygraphic sleep recordings (PSGs) and analyzed sleep stages duration, number of arousal events (AEs), arousal index (AI), and number and number/hour of AEs preceded by interictal epileptiform discharges (IEDs; IED-related arousals [IRAs]). In a subgroup of patients, actigraphic recordings and caregiver-reported Sleep Disturbance Scale for Children (SDSC) questionnaires were collected. RESULTS: Mean age at PSG was 9.9 years (range = 1.2-20.8). Mean sleep efficiency was 92.9%, mean AI was 4.2, and the mean IRA index was .5. Patients with tonic seizures during sleep had shorter rapid eye movement sleep duration (p < .05), and those with convulsive seizures during sleep had shorter N3 duration (p < .05). Higher IRA index was also associated with lower total N3 duration (p < .05). In the recordings obtained during treatment with fenfluramine, IRAs were absent (p < .05) or less abundant (p < .05). The actigraphy parameters showed unstable sleep and correlated with PSG-derived data. SIGNIFICANCE: Our study shows a significant effect of epileptic phenomena on sleep macrostructure in DS. Motor seizures and IEDs influence slow wave sleep, which could be one of the mechanisms that sustain encephalopathy in DS. Interestingly, fenfluramine seems to have a protective effect on this mechanism, both by stabilizing sleep and as an ASM."
+    },
+    {
+      "pmid": "25143737",
+      "title": "Post-traumatic epilepsy: current and emerging treatment options.",
+      "journal": "Neuropsychiatric disease and treatment",
+      "year": "2014",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Traumatic brain injury (TBI) leads to many undesired problems and complications, including immediate and long-term seizures/epilepsy, changes in mood, behavioral, and personality problems, cognitive and motor deficits, movement disorders, and sleep problems. Clinicians involved in the treatment of patients with acute TBI need to be aware of a number of issues, including the incidence and prevalence of early seizures and post-traumatic epilepsy (PTE), comorbidities associated with seizures and anticonvulsant therapies, and factors that can contribute to their emergence. While strong scientific evidence for early seizure prevention in TBI is available for phenytoin (PHT), other antiepileptic medications, eg, levetiracetam (LEV), are also being utilized in clinical settings. The use of PHT has its drawbacks, including cognitive side effects and effects on function recovery. Rates of recovery after TBI are expected to plateau after a certain period of time. Nevertheless, some patients continue to improve while others deteriorate without any clear contributing factors. Thus, one must ask, 'Are there any actions that can be taken to decrease the chance of post-traumatic seizures and epilepsy while minimizing potential short- and long-term effects of anticonvulsants?' While the answer is 'probably,' more evidence is needed to replace PHT with LEV on a permanent basis. Some have proposed studies to address this issue, while others look toward different options, including other anticonvulsants (eg, perampanel or other AMPA antagonists), or less established treatments (eg, ketamine). In this review, we focus on a comparison of the use of PHT versus LEV in the acute TBI setting and summarize the clinical aspects of seizure prevention in humans with appropriate, but general, references to the animal literature."
+    },
+    {
+      "pmid": "11768786",
+      "title": "The relationship between sleep and epilepsy.",
+      "journal": "Seminars in pediatric neurology",
+      "year": "2001",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Seizures occur extensively during sleep or on awakening in a substantial proportion of patients with epilepsy. Interictal epileptiform discharges are also influenced by sleep and sleep deprivation. Continuous spike-waves in slow-wave sleep are the hallmark of Landau-Kleffner syndrome and ESES (Electrical Status in Slow Sleep). Sleep deprivation is known to influence not only the occurrence but also the symptomatology of epileptic seizures. Sleep architecture and daytime alertness are influenced by seizures and antiepileptic medications. This review examines the clinical and basic science aspects of this relationship between sleep and epilepsy."
+    },
+    {
+      "pmid": "37426610",
+      "title": "Perampanel-Induced Cataplexy in a Young Male with Generalized Epilepsy.",
+      "journal": "HCA healthcare journal of medicine",
+      "year": "2020",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ],
+      "abstract": "Description Perampanel (Fycompa) is a newer anti-epileptic drug believed to exert its effects in the central nervous system by inhibiting post-synaptic glutamate receptors. However, the precise therapeutic mechanism is unknown. The most common neuropsychiatric side effect is affective dysregulation; there are also reports of psychosis. We describe a 32 year old African American male with recurring generalized tonic-clonic (GTC) seizures, who presented to our hospital with onset of mood lability for several months, after Perampanel was added to his antiepileptic medications. Perampanel administration was temporarily withheld, and subsequently on restarting, noted to be coincident with neuropsychiatric symptomatology, including motor weakness in emotional contexts. The mechanisms underlying cataplexy are complex and, in our patient, most likely induced by an interaction between Perampanel and the wakeful inhibition of the sublaterodorsal nucleus projections."
+    },
+    {
+      "pmid": "1879053",
+      "title": "Sleep spindles in epilepsy.",
+      "journal": "Clinical EEG (electroencephalography)",
+      "year": "1991",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "abstract": "Spindles are a ubiquitous phenomenon in sleep, but their physiology and the effects of neurologic disorder on their frequency and amplitude are incompletely understood. We compared the incidence of three commonly defined spindle types (14-15 Hz, 12-13 Hz, and 10 Hz) and the frequency and amplitude of spindles during Stage II sleep in 50 patients with complex partial, partial and secondarily generalized, and primary generalized seizures, with and without interictal behavioral symptoms. All patients had 12-13 Hz and 14-15 Hz spindles of symmetric character in C3-A1 and C4-A2 derivations during prolonged sleep-deprived EEG recordings, which were normal except for partial or generalized epileptiform activity. Seventy-one per cent of complex partial seizure patients had 10 Hz spindles, and they occurred in 50% of the other two groups, predominating among those with interictal behavioral symptoms in all groups. Spindle frequency was significantly less in patients with generalized epilepsy than with partial seizures, and patients with complex partial seizures and partial seizures with secondary generalization differed significantly in spindle frequency. Spindle frequency was significantly lower with polypharmacy than with monotherapy. Patients whose regimens included phenobarbital had significantly lower spindle frequencies and spindle frequencies differed significantly between phenytoin and carbamazepine. Differences in spindle frequency may be due to residual medication effects, underlying encephalopathy or physiological differences between partial and generalized epilepsy."
+    },
+    {
+      "pmid": "8588362",
+      "title": "[Interaction of epileptic seizures and biological rhythms].",
+      "journal": "Wiener medizinische Wochenschrift (1946)",
+      "year": "1995",
+      "pubtypes": [
+        "English Abstract",
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Circadian modulation of seizure threshold is subjected to a multitude of periodical, aperiodical and stochastical influences. Epilepsies on the other hand influence the biological rhythms themselves. Epileptic seizures are activated during transient sleep stages. Nocturnal seizures lead to severe sleep disorders and therefore to hypersomnia. Partial and generalized epilepsies have a different sleep profil even without seizure manifestation. Finally antiepileptic drugs may interfere with circadian rhythms. Knowing the chronobiological context a differentiation of epileptic seizures from nonepileptic parasomnias may succeed more easily. To ensure the appropriate diagnostical proceeding multichannel EEG should be used in every polysomnography with neurological topics."
+    },
+    {
+      "pmid": "32762394",
+      "title": "Sleep Architecture in Valproate-Induced Nocturnal Enuresis in Primary School and Preschool Children.",
+      "journal": "Journal of child neurology",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "Nocturnal enuresis is one of the side effects of valproic acid treatment, and generally underdiagnosed by clinicians. Studies reported that a variable incidence of valproic acid-induced nocturnal enuresis is 2.2% to 24% with unclear explanations of the reasons behind valproic acid-induced nocturnal enuresis. A retrospective study was carried out on 260 children (aged 5-12 years) diagnosed with idiopathic epilepsy, treated with valproic acid to evaluate the nocturnal enuresis secondary to valproic acid, and to discuss the characteristics of their sleep architecture. Nocturnal enuresis was reported in 28 (10.7%) patients after a mean exposure time to valproate of 18.78±8.4 days. Nocturnal enuresis was significantly associated with younger age and serum level of valproate (P = .05). The polysomnographic study suggested that the underlying mechanism may be related to impaired sleep efficiency, frequent arousals, prolonged sleep latency, snoring, or increased sleep depth which may impair a child's ability to awaken to the sense of bladder fullness or contractions.Clinical trial registration: ClinicalTrials.gov identifiers: NCT04191863."
+    },
+    {
+      "pmid": "33243685",
+      "title": "Management of Lennox-Gastaut syndrome beyond childhood: A comprehensive review.",
+      "journal": "Epilepsy & behavior : E&B",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Lennox-Gastaut syndrome (LGS) is a childhood-onset epileptic encephalopathy characterized by multiple types of medically intractable seizures, cognitive impairment, and generalized slow spike-wave discharges in electroencephalography (EEG). Although the onset of this epileptic syndrome occurs typically before eight years of age with a peak age between 3 and 5 years, lifelong persistence of the syndrome is usual. The evolution of clinical features, EEG findings, and paucity of knowledge about LGS among adult health care providers can make LGS significantly underdiagnosed in the adult population. Management of LGS remains problematic beyond childhood due to intractable seizures, the difficult transition from pediatric to adult neurologists, challenging behaviors, impaired cognition, poor quality of life, and disabled social life. In focusing on the management of LGS beyond childhood, this narrative review describes medical and surgical management of epilepsy, the transition from pediatric to adult care, and management of other common comorbidities associated with LGS. Several antiepileptic drugs (AEDs) such as lamotrigine, topiramate, felbamate, rufinamide, clobazam, and Epidiolex (pure pharmaceutical grade cannabidiol (CBD) oil) have been noted to be effective in well-designed, randomized controlled trials. Other non-pharmacological therapies, such as vagus nerve stimulation, ketogenic diet, and epilepsy surgery, have been frequently utilized in the management of intractable seizures associated with LGS. However, effective management of LGS requires a broader perspective to not only control seizures but improve the quality of life by addressing cognitive and behavioral problems, sleep disturbances, physical disability, social disability, and educational and employment challenges."
+    },
+    {
+      "pmid": "28757050",
+      "title": "Electroencephalographic, cognitive, and neurochemical effects of LY3130481 (CERC-611), a selective antagonist of TARP-γ8-associated AMPA receptors.",
+      "journal": "Neuropharmacology",
+      "year": "2017",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "6-[(1S)-1-[1-[5-(2-hydroxyethoxy)-2-pyridyl]pyrazol-3-yl]ethyl]-3H-1,3-benzothiazol-2-one (LY3130481 or CERC-611) is a selective antagonist of AMPA receptors containing transmembrane AMPA receptor regulatory protein (TARP) γ-8. This molecule has been characterized as a potent and efficacious anticonvulsant in an array of acute and chronic epilepsy models in rodents. The present set of experiments was designed to assess the effects of LY3130481 on the electroencephelogram (EEG), cognitive function, and neurochemical outflow. LY3130481 disrupted food-maintained responding in rats and spontaneous alternation in a Y-maze in mice. In rat fear conditioning, LY3130481 caused a deficit in trace (hippocampal-dependent), but not in delay fear conditioning. Although these effects on cognitive performances were observed, the known cognitive-impairing anticonvulsant, topiramate, did not always produce deficits under these assay conditions. LY3130481 produced modest increases in wake times in rats. In addition, LY3130481 was able to attenuate some impairing effects of standard antiepileptic drugs. The motor-impairing effects of the lacosamide were attenuated by LY3130481 as was the decrease in non-rapid-eye movement sleep induced by carbamazepine. Evaluation of the effect of LY3130481 on neurotransmitter and metabolite efflux in the rat medial prefrontal cortex, using in vivo microdialysis, revealed significant increases in the pro-cognitive and wake-promoting neurotransmitters, histamine and acetylcholine, as well as in serotonin, telemethylhistamine, 5-HIAA, HVA and MHPG. LY3130481 thus presents a novel behavioral profile that will have to be evaluated in patients to fully appreciate its implications for therapeutics. LY3130481 is currently under clinical development as CERC-611 as an antiepileptic."
+    },
+    {
+      "pmid": "24858177",
+      "title": "Electroencephalogram (EEG) in the management of epilepsy in children.",
+      "journal": "Mymensingh medical journal : MMJ",
+      "year": "2014",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Electroencephalogram (EEG) has an important role in the management of seizure disorder in children. It helps in diagnosis and classification of epilepsy, choosing of antiepileptic medication and prediction of prognosis. When history of epilepsy is unclear, EEG can help to distinguish epileptiform discharges from its counterpart. But EEG has limitations. In epilepsy, EEG has variable range of sensitivity and specificity. Hereby, during interpretation of EEG, clinical situation should not be ignored. Interictal EEG has important diagnostic and prognostic value in epilepsy. But caution is needed during evaluation of significance of interictal epileptiform discharge (IED). Methods like recording of EEG in awake and sleep state, hyperventilation and photic stimulation enhances the yield of interictal EEG. Long term EEG recording has an important role in the assessment of patients who present diagnostic or management difficulties following clinical evaluation and routine EEG."
+    },
+    {
+      "pmid": "17480175",
+      "title": "The adverse effects of antiepileptic drugs in children.",
+      "journal": "Expert opinion on drug safety",
+      "year": "2007",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Efficacy of antiepileptic drugs (AEDs) are often equivalent, hence selection of an AED is often determined by the adverse effects (AEs). The development of neurocognitive AEs is almost inevitable with use of AEDs, especially in high-risk groups. Teratogenesis with major or minor malformations is of great concern during the first trimester of pregnancy, but an increasing body of information suggests that potential neurocognitive developmental delay may also occur with use of AEDs in the latter part of pregnancy. Decreased bone mineral density has been found in adults and children receiving both enzyme-inducing AEDs and valproate, an enzyme-inhibiting drug. AEDs may influence the lipid profile, body weight, reproductive, hormonal and other endocrine functions, and sleep architecture. There are age-specific AEs related to pharmacokinetic differences that have been highlighted in this review with emphasis on the pediatric population. A classification of AEs using different parameters is also included."
+    },
+    {
+      "pmid": "35295838",
+      "title": "Late-Onset Focal Epilepsy: Electroclinical Features and Prognostic Role of Leukoaraiosis.",
+      "journal": "Frontiers in neurology",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "The aim of this study was to describe the electroclinical and prognostic characteristics, and to investigate the role of leukoaraiosis in outpatients with new-onset elderly focal epilepsy aged ≥60 years, referred to a tertiary epilepsy center between 2005 and December 31, 2020. Among the 720 patients who were referred to the center, we retrospectively selected 162 consecutive outpatients, with a first referral for recent-onset focal epilepsy of unknown cause (UC) or structural cause (SC), and collected a clinical and standard-Electroencephalogram (S-EEG), 24-h ambulatory EEG (A-EEG), and neuroimaging data. We also analyzed the seizure prognosis after titration of the first antiseizure medication (ASM). One hundred and four UC and 58 SC patients, followed up for 5.8 ± 5.3 years (mean ± SD), were included. Compared with the SC group, the patients with UC showed a predominance of focal seizures with impaired awareness (51.9% of cases) and focal to bilateral tonic-clonic seizures during sleep (25%); conversely, the SC group, more frequently, had focal to bilateral tonic-clonic seizures during wakefulness (39.6%) and focal aware seizures (25.8%) (p < 0.0001). Oral or gestural automatisms were prevalent in UC epilepsy (20.2 vs. 6.9% in the SC group, p = 0.04). In UC compared to patients with SC, interictal epileptiform discharges showed a preferential temporal lobe localization (p = 0.0007), low expression on S-EEG, and marked activation during deep Non-Rapid Eye Movement (NREM) sleep (p = 0.003). An overall good treatment response was found in the whole sample, with a probability of seizure freedom of 68.9% for 1 year. The cumulative probability of seizure freedom was significantly higher in the UC compared with the SC group (p < 0.0001). The prognosis was worsened by leukoaraiosis (p = 0.012). In the late-onset focal epilepsy of unknown cause, electroclinical findings suggest a temporal lobe origin of the seizures. This group showed a better prognosis compared with the patients with structural epilepsy. Leukoaraiosis, per se, negatively impacted on seizure prognosis."
+    },
+    {
+      "pmid": "2356007",
+      "title": "Paroxysmal arousals during sleep.",
+      "journal": "Neurology",
+      "year": "1990",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ],
+      "abstract": "Six patients complained of distressing sudden awakenings with abnormal motor activity during sleep causing insomnia. Polysomnography showed paroxysmal short-lasting arousals during NREM, especially slow-wave sleep, associated with complex movements and autonomic activation. Ictal and interictal EEG never showed epileptic discharges except in 1 patient who also had a tonic-clonic seizure during sleep. Carbamazepine was the only effective medication in 2 patients. Paroxysmal arousals represent a sleep disturbance that may be related to deep epileptic foci."
+    },
+    {
+      "pmid": "27857049",
+      "title": "Sleep-disordered breathing and excessive daytime sleepiness in patients with epilepsy - a polysomnographic study.",
+      "journal": "Neuro endocrinology letters",
+      "year": "2016",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "OBJECTIVES: Epilepsy and sleep-disordered breathing (SDB) are relatively common disorders. SDB induces repetitive arousals and sleep fragmentation and may cause symptomatic epileptic seizures or hypoxic encephalopathy. Epileptic seizures change sleep architecture with increase of light sleep and reduction of REM sleep, which may lead to central apneas. The aim of this study was to evaluate the relationship between SDB and daytime sleepiness in patients with epilepsy, who underwent polysomnography (PSG) due to problems with breathing during sleep or due to excessive daytime sleepiness. METHODS: We enrolled 40 patients with epilepsy. Type, etiology of epilepsy and actual antiepileptic therapy was recorded. All of them underwent overnight PSG. Excessive daytime sleepiness (EDS) was assessed by Epworth Sleepiness Scale (ESS). RESULTS: SDB (apnea-hypopnea index [AHI]<5) was present in 25 patients, 15 patients had no SDB (AHI≥5). EDS was present in 16 patients (40%). ESS significantly correlated with presence of symptomatic epilepsy (r=0.385, p=0.014), presence of SDB (r=0.524, p=0.001), AHI (r=0.416, p=0.003) and duration of REM sleep (r=-0.476, p=0.002). The presence of SDB (beta=0.447, p=0.002) and duration of REM sleep (beta=-0.308, p=0.029) were the only independent variables significantly associated with ESS in regression analysis. CONCLUSION: SDB has negative influence on quality of sleep and daytime vigility in patients with epilepsy. Sleep fragmentation with the reduction of the REM sleep seems to be the most important mechanism leading to EDS. We suppose that PSG could be beneficial in all patients with epilepsy and EDS."
+    },
+    {
+      "pmid": "41637994",
+      "title": "Left hand sleep masturbation in a right-handed male patient with sexsomnia.",
+      "journal": "Sleep medicine",
+      "year": "2026",
+      "pubtypes": [
+        "Journal Article",
+        "Case Reports"
+      ],
+      "abstract": "Sexsomnia is a NREM parasomnia characterized by involuntary sexual behavior during confusional arousal. Video examples are rare. Here we present the case of a man who was accused of sexually assaulting his girlfriend during the night but had no memory of doing so. During a video polysomnography, he masturbated in his sleep with his left hand during the N2 and N3 sleep stages, confirming sexsomnia. However, he always masturbated with his right hand when awake. Treatment with gabapentin did not alleviate sexsomnia and triggered obstructive sleep apnea, which improved when the treatment was replaced with paroxetine. The effect of paroxetine on sexsomnia was unknown. This case supports the concept of automatic behavior in sexsomnia."
+    },
+    {
+      "pmid": "8795839",
+      "title": "The relationship between sleep and epilepsy in children.",
+      "journal": "Seminars in pediatric neurology",
+      "year": "1996",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "There is an intricate reciprocal relationship between epilepsy and sleep. The seizure threshold is often affected by changes in the level of arousal; certain seizure types occur predominantly or almost exclusively during sleep or upon awakening; many epileptiform electroencephalogram abnormalities are activated by sleep or sleep deprivation. Inversely, certain epilepsies are often associated with sleep disturbances, and epilepsy can affect sleep patterns and sleep architecture. Also, it may be difficult to differentiate certain nocturnal nonepileptic events from epileptic seizures occurring during sleep. Finally, antiepileptic drugs used in the treatment of sleep-related epilepsies can have an effect on sleep. The following is an analysis and review of these complex interactions between epilepsy and sleep."
+    },
+    {
+      "pmid": "23712055",
+      "title": "Clinical, laboratory and electrophysiological features of Morvan's fibrillary chorea.",
+      "journal": "Journal of clinical neuroscience : official journal of the Neurosurgical Society of Australasia",
+      "year": "2013",
+      "pubtypes": [
+        "Case Reports",
+        "Journal Article"
+      ],
+      "abstract": "Morvan's Fibrillary Chorea (MFC) is a rare autoimmune disorder causally associated with auto-antibodies directed at the voltage-gated potassium channel (VGKC-Abs). It classically presents with sleep disturbances, neuromyotonia and dysautonomia. We aimed to systematically characterise the features of MFC by describing a patient and reviewing published literature. Case notes of 27 patients with MFC (one from our clinic and 26 from the literature) were reviewed and clinical data were extracted and analysed. We found that MFC mainly affects men (96%) and runs a subacute course over months. Neoplasia (56%), VGKC-Abs positivity (79%) and autoimmunity (41%) are frequent associations. Myokymia, insomnia and hyperhidrosis were almost universally described. Other autonomic features were present in 63% with the most common being cardiovascular and bowel disturbances. Clinical, radiological or electroencephalographical features of limbic encephalitis were present in 19% of patients. Outcome was fair with an overall recovery rate of 78%. All patients with malignancies underwent surgery. Immunotherapies including corticosteroids, intravenous immunoglobulins and plasma exchange were instituted in 22 patients and 19 (86%) responded. Of all symptomatic treatments tried, carbamazepine, phenytoin, sodium valproate, levetiracetam and niaprazine were found to be effective. The broad clinical spectrum of VGKC-Abs diseases can make early recognition of MFC difficult. Myokymia, insomnia and hyperhidrosis are invariably present. There may be abnormalities on cerebrospinal fluid testing and VGKC-Abs can occasionally be absent. Early initiation of immunotherapies and malignancy screening are important to prevent adverse outcomes in a condition that generally responds favourably to treatment."
+    },
+    {
+      "pmid": "9766736",
+      "title": "Sleep EEG and developmental dysphasia.",
+      "journal": "Developmental medicine and child neurology",
+      "year": "1998",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "To determine the relation between developmental dysphasia and EEG anomalies during sleep, we compared 52 subjects with dysphasia with a control group of 20 children by using the ambulatory EEG method. Whereas 50% of the children with dysphasia experienced paroxysmal activity (PA), only two of the control group did. It is likely that paroxysmal abnormalities and language impairment are related to architectural dysplasia and neuron-migration disturbances. PA is frequent in subjects with receptive developmental dysphasia and may be the cause of language deterioration. When the occurrence of paroxysmal abnormalities during sleep is higher than 8% of total sleep time, we suggest the use of antiepileptic drugs."
+    },
+    {
+      "pmid": "32563898",
+      "title": "Expert opinion: Proposed diagnostic and treatment algorithms for Lennox-Gastaut syndrome in adult patients.",
+      "journal": "Epilepsy & behavior : E&B",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't",
+        "Review"
+      ],
+      "abstract": "Lennox-Gastaut syndrome (LGS) is a severe developmental epileptic encephalopathy diagnosed in childhood that persists through adolescence and into adulthood. While the characteristics of LGS in pediatric patients are well defined, including \"drop attacks\", interictal slow spike and wave electroencephalogram (EEG) activity, and intellectual disability, these features can evolve over time, and different EEG activities may be present in adult patients with LGS. This may result in missed diagnoses in these patients and subsequent challenges for the adequate treatment of their seizures. Based on discussions held during the LGS Transition of Care advisory board meeting and thereafter, we developed proposed diagnostic and treatment algorithms for LGS in adult patients. We highlight readily available assessments to facilitate diagnosis of LGS, based on past medical history and physical examination. The LGS diagnostic algorithm recommends that clinicians consider the occurrence of wider seizure types and abnormal EEG activities to be potentially indicative of LGS. Seizure types may include atypical absence seizures, myoclonic seizures, focal seizures, and tonic-clonic seizures, and EEG may demonstrate background slowing, focal or multifocal epileptiform discharges, and diffuse fast rhythms during sleep, among other activities. Extended EEG during sleep and video-EEG should be used in equivocal cases. Treatment of LGS in adult patients should incorporate both antiseizure drug (ASD) therapy and nonpharmacologic approaches. Frequent reassessment of patients is considered a central aspect. ASDs were categorized based on order of preference for use in the treatment of LGS; Tier 1 comprises recommended first-line ASDs, and includes valproate, clobazam, lamotrigine, rufinamide, topiramate, and cannabidiol. Other treatment options include diet, neurostimulation, and surgical approaches. Developments with the potential to improve diagnosis in the future include genetic screening, while novel ASDs and advances in neurostimulation techniques may provide valuable treatment options. These algorithms should be frequently revisited to incorporate improved techniques and therapies."
+    },
+    {
+      "pmid": "35812582",
+      "title": "The Importance of Long-Term Video Electroencephalography Monitoring in the Differential Diagnosis of Epilepsy in Children.",
+      "journal": "Cureus",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "OBJECTIVE: Epilepsy is a condition in which abnormal, recurring, and excessive neuronal discharges caused by many different disorders in the central nervous system are observed. The rate of detecting epileptiform activity in the first interictal electroencephalography (EEG) of patients with epilepsy is around 40%, even when routine activation methods are applied. Video recordings simultaneously with EEG recordings enable the establishment of correlations between abnormalities. PATIENTS AND METHODS: The long-term video-EEG monitoring (VEM) reports and images of 87 patients hospitalized in the video EEG service in the Pediatric Neurology Clinic of İnönü University between 2016 and 2020 were retrospectively analyzed in this study. Demographic information of the patients, such as age, gender, diagnosis/history, and length of hospital stay, was analyzed. RESULTS: A total of 87 patients were included in the study. Of the patients, 54 (62.1%) were male and 33 (37.9%) were female. The mean age was 107.57 ± 64.40 months. While 10 (11.5%) patients followed up with non-epileptic paroxysmal events (NEPE) were taking antiepileptic drugs (AEDs), AED treatments were discontinued after VEM. The diagnosis of 18 (20.69%) patients changed after VEM. The medications of 27 (31%) patients who took AEDs before VEM were discontinued after VEM. During VEM, sleep movement, psychogenic seizures, infantile masturbation, and tic disorder were observed in 19 (41.3%), 17 (36.9%), three (6.5%), and three (6.5%) patients, respectively. CONCLUSION: In conclusion, VEM is the gold standard diagnostic method used to distinguish between epilepsy and NEPEs. After VEM, the clinical diagnosis of patients can change, and unnecessary drug administration may be prevented. Psychogenic nonepileptic seizures and NEPEs are common in the pediatric population; however, they are often overlooked."
+    },
+    {
+      "pmid": "24462228",
+      "title": "Altered polysomnographic profile in juvenile myoclonic epilepsy.",
+      "journal": "Epilepsy research",
+      "year": "2014",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "PURPOSE: To study the spectra of sleep profile using PSG in a cohort of patients with JME attending a University hospital. METHODOLOGY: This prospective cross-sectional case-control study involved 25 patients of JME (age: 22.0±6.3 years; M:F=13:12) on valproic acid (VPA) and 25 matched healthy controls (age: 23.2±3.04 years; M:F=16:9) were recruited. All patients underwent clinical assessment, electroencephalogram (EEG), and evaluation with sleep questionnaire and PSG. RESULTS: PSG analysis revealed significant alterations in sleep architecture in the JME group in the form of reduced mean sleep efficiency (p=<0.035) and number of patients with reduced sleep efficiency (p=0.001), increased mean sleep onset latency (p=0.04) and number of patients with increased sleep latency (p=0.023), reduced mean N2 sleep percentage (p=0.005) and reduced mean total NREM (non-rapid eye movement) sleep (p=0.001) and increased mean wake percentage (p=0.001). The frequency of arousals, involuntary limb movements, and event related arousals in the JME groups was not different from the controls. Patients >20 years had reduced total sleep time compared to those <20 years (p=0.012). Patients with seizures for >5 years had reduced NREM sleep percentage (p=0.042) and those on VPA therapy >1 year had a longer stage 2 (p=0.03) and N3 latency (p=0.03). Patients on ≤600mg/day of VPA had a higher prevalence of isolated limb movements (p=0.01). CONCLUSIONS: PSG revealed significant alterations in sleep architecture in JME despite adequate seizure control. There was variable degree of PSG-phenotypic correlation."
+    },
+    {
+      "pmid": "22426353",
+      "title": "Therapy of encephalopathy with status epilepticus during sleep (ESES/CSWS syndrome): an update.",
+      "journal": "Epileptic disorders : international epilepsy journal with videotape",
+      "year": "2012",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Electrical status epilepticus in sleep (ESES)/continuous spikes and waves during slow sleep (CSWS) is an age-related, self-limiting disorder characterised by epilepsy with different seizure types, global or selective neuropsychological regression, motor impairment, and a typical EEG pattern of continuous epileptiform activity for more than 85% of non-rapid eye movement (NREM) sleep. Although the first description of ESES/CSWS dates back to 1971, an agreement about the optimal treatment for this condition is still lacking. ESES/CSWS is rare (incidence is 0.2-0.5% of all childhood epilepsies) and no controlled clinical trials have been conducted to establish the efficacy of different antiepileptic drugs; only uncontrolled studies and case reports are reported in the literature. Treatment options for ESES/CSWS include some antiepileptic drugs (valproic acid, ethosuximide, levetiracetam, and benzodiazepines), steroids, immunoglobulins, the ketogenic diet, and surgery (multiple subpial transections). In this study, the comparative value of each of these treatments is reviewed and a personal therapeutic approach is proposed."
+    },
+    {
+      "pmid": "24940416",
+      "title": "Effect of sodium valproate on the sleep structures of epileptic patients.",
+      "journal": "Experimental and therapeutic medicine",
+      "year": "2014",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "The aims of the present study were to investigate the effect of sodium valproate (VPA) on the sleep structures of epileptic patients and the correlation of these effects with patient weight gain. A total of 60 epileptic patients were divided into three groups: E-AED I (VPA administration for a duration of <3 months), E-AED II (VPA administration for a duration of >3 months) and ECO (without VPA) groups, for polysomnography monitoring. When the E-AED II group was compared with the E-AED I and ECO groups, non-rapid eye movement sleep phase 1 was significantly prolonged (92.10±48.24, 29.50±10.61 and 23.94±13.27 min, respectively; P<0.01), rapid eye movement sleep was significantly shortened (70.82±17.69, 116.99±12.90 and 126.19±35.01 min, respectively; P<0.01), sleep efficiency was significantly reduced (89.39±2.55, 91.98±2.53 and 91.96±3.14%, respectively; P<0.01), the number of times of that the patients awoke was significantly increased (7.25±2.86, 2.55±1.42 and 2.40±1.39, respectively; P<0.01) and the number of REM phases throughout the night was significantly reduced (P<0.01). There were no significant differences for the various sleep parameters between the E-AED I and ECO groups. Therefore, VPA is capable of inducing sleep structure disorders in epileptic patients. In addition, these disorders begin 3 months following the administration of VPA, which indicates that these disorders may be associated with VPA-induced weight gain."
+    },
+    {
+      "pmid": "25468512",
+      "title": "Assessment of the effects of lacosamide on sleep parameters in healthy subjects.",
+      "journal": "Seizure",
+      "year": "2015",
+      "pubtypes": [
+        "Clinical Trial",
+        "Journal Article",
+        "Multicenter Study",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "abstract": "PURPOSE: Seizures and antiepileptic drugs (AED) may disrupt sleep patterns in patients with epilepsy, thus evaluation of lacosamide effects on objective and subjective sleep measures is warranted. METHODS: A multicenter, interventional, open-label study (NCT01530386) was conducted in healthy subjects without confounding effects of concomitant AED use, co-morbidities, or disease state to determine whether lacosamide impacts sleep parameters after 22 days of lacosamide exposure. After overnight polysomnography (PSG) to assess baseline parameters, lacosamide was initiated at 100mg/day (50mg twice daily) and increased by 100mg/day weekly to 300 mg/day (the mid-range maintenance dose for adjunctive therapy). The primary variable was change from baseline to post-treatment in wake after sleep onset (WASO). Secondary variables included additional objective sleep measures, subject-reported measures of sleep quality, daytime sleepiness, and tolerability. Change from baseline in WASO was analyzed using the Wilcoxon rank-sum test. RESULTS: A total of 27 subjects received ≥1 dose of lacosamide and 25 subjects completed the study. For WASO, median change from baseline was a 6-min reduction (95% confidence interval: -38, 77.5; p=0.1074) after lacosamide treatment; this was considered not clinically relevant. No clinically relevant changes were observed in any secondary variables. Thirteen subjects (48%) reported a treatment-emergent adverse event, none of which was severe or led to study discontinuation. CONCLUSION: Lacosamide 300 mg/day had no effect on objective or subjective sleep parameters in healthy subjects and was generally well tolerated."
+    },
+    {
+      "pmid": "25766678",
+      "title": "Sleep impairment and reduced interneuron excitability in a mouse model of Dravet Syndrome.",
+      "journal": "Neurobiology of disease",
+      "year": "2015",
+      "pubtypes": [
+        "Journal Article",
+        "Research Support, N.I.H., Extramural",
+        "Research Support, U.S. Gov't, Non-P.H.S."
+      ],
+      "abstract": "Dravet Syndrome (DS) is caused by heterozygous loss-of-function mutations in voltage-gated sodium channel NaV1.1. Our mouse genetic model of DS recapitulates its severe seizures and premature death. Sleep disturbance is common in DS, but its mechanism is unknown. Electroencephalographic studies revealed abnormal sleep in DS mice, including reduced delta wave power, reduced sleep spindles, increased brief wakes, and numerous interictal spikes in Non-Rapid-Eye-Movement sleep. Theta power was reduced in Rapid-Eye-Movement sleep. Mice with NaV1.1 deleted specifically in forebrain interneurons exhibited similar sleep pathology to DS mice, but without changes in circadian rhythm. Sleep architecture depends on oscillatory activity in the thalamocortical network generated by excitatory neurons in the ventrobasal nucleus (VBN) of the thalamus and inhibitory GABAergic neurons in the reticular nucleus of the thalamus (RNT). Whole-cell NaV current was reduced in GABAergic RNT neurons but not in VBN neurons. Rebound firing of action potentials following hyperpolarization, the signature firing pattern of RNT neurons during sleep, was also reduced. These results demonstrate imbalance of excitatory vs. inhibitory neurons in this circuit. As predicted from this functional impairment, we found substantial deficit in homeostatic rebound of slow wave activity following sleep deprivation. Although sleep disorders in epilepsies have been attributed to anti-epileptic drugs, our results show that sleep disorder in DS mice arises from loss of NaV1.1 channels in forebrain GABAergic interneurons without drug treatment. Impairment of NaV currents and excitability of GABAergic RNT neurons are correlated with impaired sleep quality and homeostasis in these mice."
+    },
+    {
+      "pmid": "32592101",
+      "title": "Sulthiame add-on treatment in children with epileptic encephalopathy with status epilepticus: an efficacy analysis in etiologic subgroups.",
+      "journal": "Neurological sciences : official journal of the Italian Neurological Society and of the Italian Society of Clinical Neurophysiology",
+      "year": "2021",
+      "pubtypes": [
+        "Journal Article"
+      ],
+      "abstract": "PURPOSE: Sulthiame (STM) has been recommended as an effective antiepileptic drug (AED) in children with epileptic encephalopathy with status epilepticus in sleep (ESES). The aim of this study is to evaluate the efficacy of STM add-on treatment in children with pattern of ESES with respect to the etiologic subgroup. METHODS: Twenty-nine children with ESES pattern with three different etiologic subgroups (epileptic syndromes: 14, structural/infectious: 9, unknown: 6) who were given STM as add-on treatment were included into the study. The efficacy of STM was evaluated in terms of seizure control, electroencephalography (EEG) findings, need of the new AEDs after add-on STM, and behavioral and cognitive improvement. RESULTS: The range of the follow-up duration after add-on STM treatment was between 5 and 51 months. At the end of 1 year of STM treatment, the most successful electrophysiologic improvement was identified in the well-defined epileptic syndrome group; epileptic syndrome, 71.4% (10/14); structural/infectious, 33.3% (3/9); and unknown, 0% (0/6). Patients who had complete response or persistent ESES pattern at the 3rd month were still in the same condition at the 6th and 12th months. However, the ESES pattern reappeared in 35.2% of the patients who had partial electrophysiological improvement at the 3rd month. In the epilepsy syndrome group, eight out of ten patients who had either complete or partial EEG response after 1 year of STM treatment displayed behavioral and cognitive improvement. CONCLUSION: Sulthiame might be a valid add-on treatment of ESES especially in children with epilepsy syndromes."
+    },
+    {
+      "pmid": "32213453",
+      "title": "Subjective and objective hypersomnia highly prevalent in adults with epilepsy.",
+      "journal": "Epilepsy & behavior : E&B",
+      "year": "2020",
+      "pubtypes": [
+        "Journal Article",
+        "Observational Study"
+      ],
+      "abstract": "INTRODUCTION: Sleepiness is among the most common complaints of people with epilepsy, but objective documentation is lacking. We systematically investigated subjective and objective sleepiness in an observational cross-sectional cohort of adults with epilepsy (AWE). METHODS: This is a prospective study of AWE consecutively recruited without foreknowledge of sleep/wake complaints. Polysomnography (PSG) with 18-channel electroencephalography (EEG) followed by multiple sleep latency testing (MSLT) was performed. Patients completed the Epworth Sleepiness Scale (ESS), a single-item question assessing excessive daytime sleepiness (EDS), and a 7-day sleep and seizure diary. Multivariable linear models were used to assess the association between MSLT mean sleep latency (MSL) and interests with adjustment of covariates of interest. Receiver operating characteristics (ROC) analysis was performed to evaluate the discrimination capability of ESS on MSL < 8 min and <5 min and investigate the optimal cutpoints. RESULTS: Among 127 AWE (mean age: 38.7 ± 13.7 years), abnormal MSL (<8 min) was observed in 49.6% and MSL <5 min in 31.5%. While 78% reported feeling sleepy during the day on a single-item question, only 24% had elevated scores on the ESS (>10/24). The ESS score was associated with MSL even after adjusting for seizure frequency, antiseizure medication (ASM) standardized dose and number, age, gender, depression and insomnia symptom severity, and apnea-hypopnea index (HPI) and total sleep time on PSG (coefficients [95% confidence interval (CI)]: -0.26 [-0.48, -0.05], p = 0.018). The area under the curve (AUC) of the ESS ROC predicting MSL < 8 min and MSL < 5 min were similar: 0.62 (95%CI: 0.52-0.72) and 0.62 (95%CI: 0.51-0.74). CONCLUSIONS: This is the largest prospective cross-sectional observational study to date using MSLT in AWE. We found subjective and objective daytime sleepiness highly prevalent in AWE and not explained by seizure frequency, ASM burden, symptoms of insomnia/depression, or PSG findings although those with MSL < 5 min were more likely to have obstructive sleep apnea (OSA). Pathologic sleepiness with MSL < 8 min was present in half of AWE. Nearly one-third of AWE unselected for sleep/wake complaints had MSL < 5 min, a range typical of narcolepsy."
+    },
+    {
+      "pmid": "34755907",
+      "title": "Brainwaves beyond diagnosis: Wider applications of electroencephalography in idiopathic generalized epilepsy.",
+      "journal": "Epilepsia",
+      "year": "2022",
+      "pubtypes": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract": "Electroencephalography (EEG) has long been used as a versatile and noninvasive diagnostic tool in epilepsy. With the advent of digital EEG, more advanced applications of EEG have emerged. Compared with technologically advanced practice in focal epilepsies, the utilization of EEG in idiopathic generalized epilepsy (IGE) has been lagging, often restricted to a simple diagnostic tool. In this narrative review, we provide an overview of broader applications of EEG beyond this narrow scope, discussing how the current clinical and research applications of EEG may potentially be extended to IGE. The current literature, although limited, suggests that EEG can be used in syndromic classification, guiding antiseizure medication therapy, predicting prognosis, unraveling biorhythms, and investigating functional brain connectivity of IGE. We emphasize the need for longer recordings, particularly 24-h ambulatory EEG, to capture discharges reflecting circadian and sleep-wake cycle-associated variations for wider EEG applications in IGE. Finally, we highlight the challenges and limitations of the current body of literature and suggest future directions to encourage and enhance more extensive applications of this potent tool."
+    }
+  ]
+}

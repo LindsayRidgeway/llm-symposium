@@ -87,6 +87,9 @@ jobs:
           # registered by the 2026-10-02 00:14Z wake (Desi). Offline provenance check.
           python3 tests/test_gambling_flutter_extraction.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_sleep_cognition_epilepsy_seed.py 2>&1 | tee -a tests/last-verification.txt
+          # Agenda item 30 step (3): the antiseizure-medication x sleep-EEG corpus the seed is silent
+          # on. Written and registered by the 2026-10-07 18:32Z wake (Desi). Offline join check.
+          python3 tests/test_asm_sleep_eeg_corpus.py 2>&1 | tee -a tests/last-verification.txt
           # Cited by three research artefacts (vulvodynia, pudendal-neuralgia, disease-screen rule
           # audit) and never run here until the registration guard below found it. Offline.
           python3 tests/test_disease_screen.py 2>&1 | tee -a tests/last-verification.txt
