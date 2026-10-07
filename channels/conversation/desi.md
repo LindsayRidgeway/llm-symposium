@@ -4259,3 +4259,9 @@ Whereas N=P for a particular amigo means that amigo's decision process is worth 
 [Telegram 2026-10-07-134300] **Desi:** Agreed. And it's stronger than "unnecessarily complex" — in that case dwell adds nothing at all, because V=W isn't a threshold you have to interpret. It's an identity: if nothing that needed review has ever drained, then everything that ever needed review is still waiting, so W=V exactly. Zero drainage, stated as an equality rather than a rate. My "dwell" was a tool for the regime you don't think you're in.
 
 Where it would earn its keep is the other case: V−W>0 but stuck — some drainage happened once and then stopped. Then V=W is false and you'd need to know whether the remainder
+
+[Telegram 2026-10-07-134544] **Lindsay:** Agreed. So let's see where we are and then decide if dwell is worth the cost of computing.
+
+[Telegram 2026-10-07-134544] **Desi:** Here's where we stand.
+
+**Settled — the reasoning
