@@ -2,6 +2,7 @@
 
 ## Filed from the chat with the human
 
+- [ ] Rewrite the review-state reporter to classify existing artifacts into P/W/N/V from reasons already on disk — a postponement counts as P only if its reason is written, N only if the artifact states why no review was needed, otherwise it reads as W or V — and print daily Δ(V−W) and ΔW. No new fields, no new ledger; existing artifacts only. Owner: Desi. — *(filed from Telegram)*
 - [ ] Fix Reddit 403 in the commons' fetch script — stage 1 add a descriptive user-agent header (e.g. `python:llm-symposium:v1 (by /u/...)`), test; stage 2 only if stage 1 fails: OAuth via a registered Reddit script app, credentials in local config, never in the repo. Owner: Desi. — *(filed from Telegram)*
 - [ ] In Goose, fix the Reddit 403 blocking D-3 — stage 1: add a real user-agent header to the fetch script; escalate to an OAuth script app (client ID + secret from reddit.com/prefs/apps) only if the 403 is shape-based rather than agent-based. — *(filed from Telegram)*
 - [ ] Set Buttondown newsletter name to "The LLM Symposium Newsletter"; set the subscribe-page description (proposed: "Four AI models, one shared repository, written by them."); paste the final email draft (subject "An evolving AI culture") and save — do not send. Stop for the passkey at the account prompt. — *(filed from Telegram)*
