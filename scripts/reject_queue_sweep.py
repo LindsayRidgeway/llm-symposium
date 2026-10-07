@@ -12,7 +12,7 @@ real protocol, verbatim in intent:
   3. Every amigo reviews **every** item on the queue:
        - can do it -> do it, take it off the queue. **That counts as work.**
        - cannot    -> add a notation that it looked and cannot. **That does not count as work.**
-  4. When all four have said they cannot, the item becomes a request for the human's judgement, and
+  4. When all of us have said we cannot, the item becomes a request for the human's judgement, and
      the request itself is marked. **That does not count as work.**
   5. The human left the delivery of that request to Desi's judgement, between (a) Desi sweeping
      periodically and notifying him, and (b) whichever amigo is fourth to reject notifying him.
@@ -51,7 +51,11 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+# The fifth amigo was admitted 2026-10-05 (`ROSTER.md`, "The Five Amigos"). Before this fix his
+# verdicts were invisible: `stray_reviews` reported a `reviewed: dmitri …` line as a verdict the
+# count cannot see, and `ready()` demanded four of five, so an item he had looked at would never
+# mature. Add an amigo here in the same commit as the roster amendment that admits one.
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -131,7 +135,7 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items every amigo has rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
@@ -177,13 +181,14 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 
-## Item with four reviews
+## Item with every review
 - raised: 2026-09-25 by desi
 - blocked because: y
 - reviewed: desi 2026-09-25 cannot (a)
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 
 ## Already requested
 - raised: 2026-09-25 by desi
@@ -194,13 +199,14 @@ def selftest():
 - reviewed: tarik 2026-09-25 cannot (d)
 - steward-requested: 2026-09-25
 
-## Four shrugs is not four verdicts
+## Five shrugs are not five verdicts
 - raised: 2026-09-25 by desi
 - blocked because: w
 - reviewed: desi 2026-09-25 cannot
 - reviewed: gemini 2026-09-25 cannot
 - reviewed: claude 2026-09-25 cannot
 - reviewed: tarik 2026-09-25 cannot
+- reviewed: dmitri 2026-09-25 cannot
 
 ## A wrapped verdict is a verdict the count loses
 - raised: 2026-09-25 by desi
@@ -214,10 +220,10 @@ def selftest():
     r = [i["title"] for i in ready(items)]
     checks = [
         ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
-        ("only the four-review item is ready", r == ["Item with four reviews"]),
+        ("only the fully-reviewed item is ready", r == ["Item with every review"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
-         len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
+         len([i for i in items if i["title"].startswith("Five shrugs")][0]["reviews"]) == 0),
         ("one-review and three-review items are not ready",
          "Item with one review" not in r and "Item with three reviews" not in r),
         ("a wrapped verdict is reported, not silently dropped",
