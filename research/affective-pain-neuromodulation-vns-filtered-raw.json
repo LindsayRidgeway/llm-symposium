@@ -1,0 +1,1432 @@
+{
+ "generated": "2026-10-07",
+ "source": "PubMed E-utilities (esearch + efetch), filtered VNS arm",
+ "arms": {
+  "vns_filtered": {
+   "query": "(\"vagus nerve stimulation\"[tiab] OR \"vagal nerve stimulation\"[tiab] OR \"transcutaneous auricular vagus\"[tiab] OR \"transcutaneous vagus\"[tiab] OR \"auricular vagus\"[tiab] OR \"vagus nerve stimulation\"[MeSH Terms]) AND (fmri[tiab] OR \"functional magnetic resonance\"[tiab] OR \"functional connectivity\"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR \"event-related potential\"[tiab] OR meg[tiab] OR \"near-infrared spectroscopy\"[tiab] OR fnirs[tiab] OR \"heart rate variability\"[tiab] OR hrv[tiab] OR autonomic[tiab] OR \"skin conductance\"[tiab] OR \"vagal tone\"[tiab] OR \"pupil\"[tiab] OR \"insula\"[tiab] OR \"amygdala\"[tiab] OR \"anterior cingulate\"[tiab] OR \"brainstem\"[tiab] OR \"locus coeruleus\"[tiab]) AND (\"chronic pain\"[tiab] OR \"chronic pain\"[MeSH Terms] OR fibromyalgia[tiab] OR \"somatoform\"[tiab] OR \"somatic symptom\"[tiab] OR \"persistent pain\"[tiab] OR \"chronic widespread pain\"[tiab] OR \"medically unexplained\"[tiab]) AND humans[MeSH Terms]",
+   "filter": "(fmri[tiab] OR \"functional magnetic resonance\"[tiab] OR \"functional connectivity\"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR \"event-related potential\"[tiab] OR meg[tiab] OR \"near-infrared spectroscopy\"[tiab] OR fnirs[tiab] OR \"heart rate variability\"[tiab] OR hrv[tiab] OR autonomic[tiab] OR \"skin conductance\"[tiab] OR \"vagal tone\"[tiab] OR \"pupil\"[tiab] OR \"insula\"[tiab] OR \"amygdala\"[tiab] OR \"anterior cingulate\"[tiab] OR \"brainstem\"[tiab] OR \"locus coeruleus\"[tiab])",
+   "total_matching": 31,
+   "fetched": 31,
+   "censored": false,
+   "pmids": [
+    "42779383",
+    "42361949",
+    "42334392",
+    "42029130",
+    "41454683",
+    "41332177",
+    "41204309",
+    "41091086",
+    "41044114",
+    "40935122",
+    "40914202",
+    "40576705",
+    "40461351",
+    "40116526",
+    "39753127",
+    "38963558",
+    "38815433",
+    "38469939",
+    "35420372",
+    "34710514",
+    "34634682",
+    "34509623",
+    "33635894",
+    "33548494",
+    "33262253",
+    "32967704",
+    "31603076",
+    "31092102",
+    "30334224",
+    "26728182",
+    "26450637"
+   ],
+   "query_translation": "(\"vagus nerve stimulation\"[Title/Abstract] OR \"vagal nerve stimulation\"[Title/Abstract] OR \"transcutaneous auricular vagus\"[Title/Abstract] OR \"transcutaneous vagus\"[Title/Abstract] OR \"auricular vagus\"[Title/Abstract] OR \"vagus nerve stimulation\"[MeSH Terms]) AND (\"fmri\"[Title/Abstract] OR \"functional magnetic resonance\"[Title/Abstract] OR \"functional connectivity\"[Title/Abstract] OR \"eeg\"[Title/Abstract] OR \"electroencephalogra*\"[Title/Abstract] OR \"event-related potential\"[Title/Abstract] OR \"meg\"[Title/Abstract] OR \"near-infrared spectroscopy\"[Title/Abstract] OR \"fnirs\"[Title/Abstract] OR \"heart rate variability\"[Title/Abstract] OR \"hrv\"[Title/Abstract] OR \"autonomic\"[Title/Abstract] OR \"skin conductance\"[Title/Abstract] OR \"vagal tone\"[Title/Abstract] OR \"pupil\"[Title/Abstract] OR \"insula\"[Title/Abstract] OR \"amygdala\"[Title/Abstract] OR \"anterior cingulate\"[Title/Abstract] OR \"brainstem\"[Title/Abstract] OR \"locus coeruleus\"[Title/Abstract]) AND (\"chronic pain\"[Title/Abstract] OR \"chronic pain\"[MeSH Terms] OR \"fibromyalgia\"[Title/Abstract] OR \"somatoform\"[Title/Abstract] OR \"somatic symptom\"[Title/Abstract] OR \"persistent pain\"[Title/Abstract] OR \"chronic widespread pain\"[Title/Abstract] OR \"medically unexplained\"[Title/Abstract]) AND \"humans\"[MeSH Terms] AND 2015/01/01:2026/10/07[Date - Publication]"
+  }
+ },
+ "records": [
+  {
+   "pmid": "42779383",
+   "title": "[Not Available].",
+   "journal": "Z Psychosom Med Psychother",
+   "year": "2026",
+   "abstract_plain": "Vagus Nerve Stimulation in the Treatment of Somatic Stress Disorder: Neurobiological Basis, Evidence Base and Prospects for Enhanced Psychotherapy Vagus nerve stimulation (VNS) has shown mixed but promising results for a number of neuropsychiatric conditions, such as depressive disorder, anxiety disorders, chronic pain and trauma- and stress-related disorders. However, the evidence to date on the use of VNS for somatic stress disorder is limited. Preliminary findings suggest that VNS influences physiological and psychological mechanisms that are also relevant to the pathophysiology of somatic stress disorder. Future studies should therefore specifically investigate whether VNS can be effectively used as an augmentative approach within psychotherapeutic or multimodal treatment programmes, in order to systematically assess the added benefit of VNS in the context of enhanced psychotherapy.",
+   "publication_types": [
+    "Journal Article",
+    "Review",
+    "English Abstract"
+   ],
+   "mesh": [
+    "Humans",
+    "Vagus Nerve Stimulation",
+    "Psychotherapy",
+    "Combined Modality Therapy",
+    "Somatoform Disorders",
+    "Evidence-Based Medicine"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "Vagus Nerve Stimulation in the Treatment of Somatic Stress Disorder: Neurobiological Basis, Evidence Base and Prospects for Enhanced Psychotherapy Vagus nerve stimulation (VNS) has shown mixed but promising results for a number of neuropsychiatric conditions, such as depressive disorder, anxiety disorders, chronic pain and trauma- and stress-related disorders."
+   },
+   "biomarker": null,
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": false,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "42361949",
+   "title": "Effects of transcutaneous auricular nerve stimulation on thalamic relay: A randomized brain imaging study in chronic low back pain patients.",
+   "journal": "Brain Res",
+   "year": "2026",
+   "abstract_plain": "Transcutaneous auricular vagus nerve stimulation (taVNS) has emerged as a potential therapeutic option for chronic pain. This study investigates the modulatory effects of taVNS and transcutaneous greater auricular nerve stimulation (tGANS) on thalamocortical circuits. Seventy individuals with chronic low back pain (cLBP) were randomized to receive four weeks of taVNS or tGANS. Structural and resting-state functional MRI data were acquired at baseline and post-treatment. Seed-based functional connectivity analysis was performed using the ventral posterolateral (VPL) and mediodorsal (MD) thalamic nuclei as seeds. Additionally, gray matter (GM) analysis and diffusion tensor imaging (DTI) fiber tracking were conducted to assess structural changes. 51 patients (taVNS: n\u00a0=\u00a025, tGANS: n\u00a0=\u00a026) completed the study. Both groups showed significant reductions in pain intensity, bothersomeness, and interference scores, with no significant between-group differences. Both interventions modulated static and dynamic functional connectivity (sFC/dFC) within thalamocortical, limbic, and sensorimotor networks. In the taVNS group, there were significant decreases in both the sFC and fiber integrity between the MD and the left postcentral gyrus, and the gray matter volume of the left postcentral gyrus after taVNS treatment. Additionally, taVNS reduced the dFC between the VPL and the postcentral gyrus, which correlated with decreased pain intensity. Our findings suggest that both taVNS and tGANS mitigate cLBP and modulate thalamocortical connectivity. Elucidating their distinct mechanisms may advance the development of new strategies for chronic pain management.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Low Back Pain",
+    "Male",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Magnetic Resonance Imaging",
+    "Adult",
+    "Chronic Pain",
+    "Middle Aged",
+    "Thalamus",
+    "Diffusion Tensor Imaging",
+    "Gray Matter",
+    "Neural Pathways",
+    "Brain",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "resting-state",
+    "sentence": "Structural and resting-state functional MRI data were acquired at baseline and post-treatment."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "Both groups showed significant reductions in pain intensity, bothersomeness, and interference scores, with no significant between-group differences."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "42334392",
+   "title": "The Short-Term Effects of Transcutaneous Auricular Vagus Nerve Stimulation in Female Patients with Functional Constipation and Myofascial Pain Syndrome: A Randomized Clinical Trial.",
+   "journal": "Neuromodulation",
+   "year": "2026",
+   "abstract_plain": "INTRODUCTION: The management of chronic constipation when it coexists with chronic pain syndrome is challenging because of complex pathophysiologic and constipating analgesic side effects. Transcutaneous auricular vagus nerve stimulation (taVNS) is an effective neuromodulation method to modulate gastrointestinal function and pain processing by targeting vagal pathways. Accordingly, this study evaluated the short-term effects of taVNS in patients with functional constipation (FC) comorbid with myofascial pain syndrome (MPS). MATERIALS AND METHODS: A total of 38 female participants with FC and MPS (aged 20-50 years) were randomly allocated (1:1) using a computer-generated randomization to either taVNS or sham-taVNS groups. Participants received the intervention for 30 minutes, five days a week for two weeks. The complete spontaneous bowel movements per week (CSBMs/week) as the primary outcome was assessed at baseline and after the treatment. Secondary outcomes were Wexner constipation scores (WCS), patient assessment of constipation quality of life (PAC-QoL) score, visual analogue scale (VAS), pressure pain threshold (PPT), and heart rate variability (HRV). RESULTS: The result of analysis of covariance (ANCOVA) showed that taVNS significantly and clinically improved CSBMs/week compared with the sham-taVNS (p = 0.007; Cohen d = 0.97, 95% CI 0.26 - 1.66). The mean increase of CSBMs/week was 1.65 times compared with the baseline and 1.37 times compared with the sham-taVNS (MCID = 1.3 times). Moreover, the taVNS group had greater reduction in WCS and VAS compared with the sham group. In the HRV analysis, the taVNS enhanced high frequency (HF) and decreased low frequency (LF) and the LF/HF ratio compared with the sham-taVNS. However, there was no substantial difference in the PPT and PAC-QoL between groups. CONCLUSIONS: These promising findings provide preliminary evidence that taVNS may be an effective nonpharmacologic intervention in female patients with FC coexisting with chronic pain conditions, particularly MPS. Further large-scale studies with longer follow-up and mechanistic assessments are warranted.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Adult",
+    "Middle Aged",
+    "Constipation",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Myofascial Pain Syndromes",
+    "Treatment Outcome",
+    "Young Adult",
+    "Vagus Nerve Stimulation",
+    "Pain Measurement",
+    "Quality of Life"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "Secondary outcomes were Wexner constipation scores (WCS), patient assessment of constipation quality of life (PAC-QoL) score, visual analogue scale (VAS), pressure pain threshold (PPT), and heart rate variability (HRV)."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "Secondary outcomes were Wexner constipation scores (WCS), patient assessment of constipation quality of life (PAC-QoL) score, visual analogue scale (VAS), pressure pain threshold (PPT), and heart rate variability (HRV)."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "42029130",
+   "title": "The efficacy of transcutaneous auricular Vagus nerve stimulation in non-specific chronic neck pain: A pilot study.",
+   "journal": "J Back Musculoskelet Rehabil",
+   "year": "2026",
+   "abstract_plain": "BackgroundVagus nerve stimulation is primarily used for treating neuropsychiatric disorders, reducing inflammation, and controlling muscle tone. Nonspecific chronic neck pain is a prevalent musculoskeletal condition characterized by persistent neck pain without an identifiable structural pathology and is often associated with functional limitations, sleep disturbances, and reduced quality of life.ObjectiveThis pilot study evaluates the effectiveness of transcutaneous auricular vagus nerve stimulation (taVNS) as a non-invasive treatment for nonspecific chronic neck pain.MethodsThirty-six participants were randomly assigned to a taVNS group or a conventional treatment group. Pain intensity, muscle strength and range of motion of the neck were primary outcomes, while neck disability and sleep quality were secondary outcomes. All measures were assessed at baseline and after 15 treatment sessions. Statistical analyses included mixed-methods ANOVA, Student's t-test, and Mann-Whitney U test.ResultstaVNS significantly reduced neck pain and improved extensor muscle strength, cervical range of motion, and sleep quality compared to baseline (p\u2009<\u20090.05). Compared with conventional treatment, the taVNS group showed greater improvements in extensor muscle strength and neck disability (p\u2009<\u20090.05), while other outcomes were similar between groups.ConclusiontaVNS appears to be a safe intervention with short-term effects comparable to conventional treatments in non-specific chronic neck pain. Although greater improvements were observed in muscle strength and neck disability, overall superiority was not demonstrated. Given the short duration and small sample size, the results cannot be generalized.Clinical Trials NumberNCT05527366.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Pilot Projects",
+    "Female",
+    "Male",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Chronic Pain",
+    "Treatment Outcome",
+    "Neck Pain",
+    "Vagus Nerve Stimulation",
+    "Range of Motion, Articular",
+    "Pain Measurement",
+    "Adult",
+    "Muscle Strength",
+    "Middle Aged",
+    "Sleep Quality"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": null,
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "Pain intensity, muscle strength and range of motion of the neck were primary outcomes, while neck disability and sleep quality were secondary outcomes."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": false,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41454683",
+   "title": "Feasibility and Safety of a Single-Session of Transcutaneous Cervical Magnetic Stimulation, taVNS, and iTBS on Heart Rate Variability, Safety, and Pain Modulation.",
+   "journal": "Eur J Neurosci",
+   "year": "2025",
+   "abstract_plain": "The autonomic nervous system (ANS) plays a crucial role in maintaining homeostasis, and its dysfunction is linked to numerous clinical conditions, including chronic pain. Neuromodulatory interventions such as transcutaneous auricular vagus nerve stimulation (taVNS), transcutaneous cervical magnetic stimulation (tCMS), and intermittent theta burst stimulation (iTBS) have been investigated for their potential to modulate autonomic responses and pain perception. However, the efficacy and safety of these techniques remain unclear. This study aimed to evaluate the feasibility and safety of a single session of neuromodulatory stimulation in modulating autonomic function and pain processing in healthy individuals. A double-blind, randomized, crossover clinical trial was conducted with 22 healthy participants, each undergoing four intervention sessions (taVNS, tCMS, iTBS, and Sham-taVNS) in randomized order, with a washout period of at least 36\u2009h between sessions. Heart rate variability (HRV) and conditioned pain modulation (CPM) were assessed pre- and post-intervention using a Polar H10 cardiac sensor and a digital pressure algometer. Adverse effects were recorded immediately after each session. No statistically significant differences were observed in HRV or CPM outcomes across active stimulation conditions when compared to Sham. Among the techniques evaluated, tCMS presented the most favorable safety profile, with fewer reported adverse effects relative to iTBS and taVNS. The absence of significant modulation effects suggests that a single session may be insufficient to induce detectable changes in autonomic or pain processing. However, the tolerability and safety of tCMS indicate its potential for future research involving repeated sessions and clinical populations.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Humans",
+    "Heart Rate",
+    "Female",
+    "Adult",
+    "Male",
+    "Double-Blind Method",
+    "Cross-Over Studies",
+    "Feasibility Studies",
+    "Young Adult",
+    "Pain Management",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Vagus Nerve Stimulation",
+    "Transcranial Magnetic Stimulation",
+    "Autonomic Nervous System"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "Feasibility and Safety of a Single-Session of Transcutaneous Cervical Magnetic Stimulation, taVNS, and iTBS on Heart Rate Variability, Safety, and Pain Modulation.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41332177",
+   "title": "Effects of left and bilateral transcutaneous auricular vagus nerve stimulation on pain, mood, and autonomic nervous system in female patients with fibromyalgia: a randomized controlled trial.",
+   "journal": "Physiother Theory Pract",
+   "year": "2026",
+   "abstract_plain": "INTRODUCTION: Fibromyalgia Syndrome (FMS) is a complex disease characterized by widespread pain, fatigue, emotional disturbances, and autonomic dysfunction. Transcutaneous Auricular Vagus Nerve Stimulation (taVNS) has emerged as a potential noninvasive approach to modulate FMS-related symptoms. PURPOSE: To compare the effects of left and bilateral taVNS on pain, mood, functionality, and autonomic nervous system (ANS) activity in individuals with FMS. METHODS: Forty female individuals with FMS were assigned to either a left (n\u2009=\u200920) or a bilateral (n\u2009=\u200920) taVNS group. Both received 11 sessions of taVNS targeting the tragus and concha regions (30\u2009minutes each, 25\u2009Hz, 300\u2009\u00b5s) over nonconsecutive days, excluding weekends and menstrual periods. Visual Analog Scale (VAS), Beck Depression Inventory (BDI), Beck Anxiety Inventory (BAI), and Fibromyalgia Impact Questionnaire (FIQ) were assessed. ANS activity was evaluated via heart rate variability (HRV). After 11 sessions of taVNS, a 2-week follow-up was performed. RESULTS: No significant differences were observed between groups except for FIQ and BAI on day 28 (p\u2009=\u2009.002-0.008). Both groups showed significant within-group improvements in VAS (r\u2009=\u20090.87-0.94; p\u2009<\u2009.001), BDI (r\u2009=\u20090.46-0.71; p\u2009<\u2009.001), FIQ (r\u2009=\u20090.95-0.99; p\u2009<\u2009.001), and BAI (r\u2009=\u20090.69-0.94; p\u2009<\u2009.001) scores. Parasympathetic Nervous System (PNS) (p\u2009=\u2009.365-0.776) and Sympathetic Nervous System (SNS) (p\u2009=\u2009.598-0.880) indices, which are the subparameters of HRV, showed no significant between-group differences, with small effect sizes (r\u2009<\u20090.15). CONCLUSION: Both stimulation protocols effectively reduced pain and improved mood and functionality in fibromyalgia, indicating a safe, noninvasive adjunctive treatment option. CLINICALTRIALS.GOV: (Identifier: NCT06871306).",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Fibromyalgia",
+    "Autonomic Nervous System",
+    "Middle Aged",
+    "Vagus Nerve Stimulation",
+    "Adult",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Affect",
+    "Pain Measurement",
+    "Heart Rate",
+    "Treatment Outcome"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "mood",
+    "sentence": "Effects of left and bilateral transcutaneous auricular vagus nerve stimulation on pain, mood, and autonomic nervous system in female patients with fibromyalgia: a randomized controlled trial.."
+   },
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Effects of left and bilateral transcutaneous auricular vagus nerve stimulation on pain, mood, and autonomic nervous system in female patients with fibromyalgia: a randomized controlled trial.."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "Visual Analog Scale (VAS), Beck Depression Inventory (BDI), Beck Anxiety Inventory (BAI), and Fibromyalgia Impact Questionnaire (FIQ) were assessed."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "Effects of left and bilateral transcutaneous auricular vagus nerve stimulation on pain, mood, and autonomic nervous system in female patients with fibromyalgia: a randomized controlled trial.."
+  },
+  {
+   "pmid": "41204309",
+   "title": "Effects of transcranial direct current stimulation, associated with manual vagus nerve therapy, on pain in women with fibromyalgia: study protocol for a double-blind, randomized, controlled clinical trial.",
+   "journal": "Trials",
+   "year": "2025",
+   "abstract_plain": "INTRODUCTION: Fibromyalgia (FM) is a condition of generalized musculoskeletal pain, associated with fatigue, autonomic dysfunction, and sleep disorders. Transcranial direct current stimulation (tDCS) is a non-invasive brain stimulation technique, tested in several diseases, including FM and depending on the parameters used, tDCS can reach several brain neural networks, including the central processing network of the pain. Another therapy that promotes analgesia is manual therapy (MT) which is defined as a set of techniques that uses the hands as the main therapeutic agents. Evidence indicates that MT, applied at points along the vagus nerve (VN), may improve pain in patients with chronic pain. This study will examine the immediate and late effects of tDCS associated with MT on the VN pathway in pain in women with FM. METHODS: This is a controlled, randomized, double-blind clinical trial with intention-to-treat analysis that will follow the guidelines of CONSORT (Consolidated Reporting Standards). The study will consist of 30 women diagnosed with FM who will be randomly allocated to the experimental group (tDCS 2 mA active for 20 min associated with MT) or to the control group (tDCS for 20 min associated with MT sham) and will receive daily sessions of treatment for 5 days. Outcome measures will occur at the beginning of the study, after the first visit, at the end of treatment, and 30 days after the end of treatment. DISCUSSION: The search for therapies to improve pain in FM is quite challenging, mainly due to the lack of knowledge about its etiopathogenesis and the complexity of symptoms that are associated with it. Thus, this clinical trial may result in an important advance for the rehabilitation of FM patients. CLINICAL TRIAL REGISTRATION: U1111-1264-9863.",
+   "publication_types": [
+    "Journal Article",
+    "Clinical Trial Protocol"
+   ],
+   "mesh": [
+    "Humans",
+    "Fibromyalgia",
+    "Transcranial Direct Current Stimulation",
+    "Female",
+    "Double-Blind Method",
+    "Treatment Outcome",
+    "Randomized Controlled Trials as Topic",
+    "Vagus Nerve Stimulation",
+    "Adult",
+    "Musculoskeletal Manipulations",
+    "Time Factors",
+    "Pain Measurement",
+    "Middle Aged",
+    "Chronic Pain"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "INTRODUCTION: Fibromyalgia (FM) is a condition of generalized musculoskeletal pain, associated with fatigue, autonomic dysfunction, and sleep disorders."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": true,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41091086",
+   "title": "Both Transcutaneous Auricular Vagus Nerve Stimulation and Great Auricular Nerve Stimulation Modulate Functional and Structural Connectivity of Brainstem Nuclei in Chronic Low Back Pain.",
+   "journal": "Neuromodulation",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVES: This study aims to investigate the modulatory effects of transcutaneous auricular vagus nerve stimulation (taVNS) and transcutaneous greater auricular nerve stimulation (tGANS) on the brainstem's vagus nerve pathway hubs-the nucleus tractus solitarius (NTS), locus coeruleus (LC), and raphe nucleus (RN)-in individuals with chronic low back pain (cLBP). MATERIALS AND METHODS: A total of 70 patients with cLBP were randomly assigned to receive four weeks of either taVNS or tGANS. Resting-state functional and structural magnetic resonance imaging (fMRI/sMRI) data were collected at baseline and post treatment. Analyses focused on static and dynamic functional connectivity (sFC/dFC) and fractional anisotropy (FA) using the NTS, LC, and RN--three brainstem nuclei within the central vagus nerve pathway-as seed regions. RESULTS: Overall, 51 participants completed the treatment. Both groups showed significant pain improvement, with no significant difference between the taVNS and tGANS groups. taVNS was found to influence connectivity between the NTS and cingulate cortex, sensorimotor areas, thalamus, insula, operculum, and prefrontal cortex; between the LC and primary motor area and amygdala; and between the RN and sensory and prefrontal regions. In contrast, tGANS affected connectivity between the NTS and temporoparietal junction; between the LC and prefrontal cortex; and between the RN and insula and hippocampus. Changes in FA further supported the sFC findings. Notably, in the taVNS group, an increase in FA was negatively correlated with a decrease in sFC between the LC and precentral cortex. CONCLUSIONS: Both taVNS and tGANS can modulate functional and structural connectivity between brainstem nuclei of the central vagus nerve pathway and multiple cortical/subcortical regions, albeit through different neural circuits. CLINICAL TRIAL REGISTRATION: The Clinicaltrials.gov registration number for the study is NCT03959111.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Male",
+    "Vagus Nerve Stimulation",
+    "Low Back Pain",
+    "Brain Stem",
+    "Magnetic Resonance Imaging",
+    "Adult",
+    "Middle Aged",
+    "Neural Pathways",
+    "Chronic Pain"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "brainstem",
+    "sentence": "Both Transcutaneous Auricular Vagus Nerve Stimulation and Great Auricular Nerve Stimulation Modulate Functional and Structural Connectivity of Brainstem Nuclei in Chronic Low Back Pain.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41044114",
+   "title": "The effects of non-invasive transcutaneous auricular vagus nerve stimulation on resting-state delta oscillation: a randomized, double-blinded, sham-control trial.",
+   "journal": "Sci Rep",
+   "year": "2025",
+   "abstract_plain": "Transcutaneous auricular vagus nerve stimulation (taVNS) is a promising technique that potentially influences cortical activity, mainly increasing electroencephalography (EEG) power spectrum activity in low-frequency oscillations, and demonstrates potential therapeutic benefits for various pathologic conditions, like depression and chronic pain. To learn further about taVNS brain mechanisms, the present study investigated how using a single taVNS session can affect brain oscillations in healthy subjects. 44 healthy participants were included in this randomized, double-blind, sham-controlled trial. Participants were divided into the active and sham taVNS groups. Resting-state EEG power was analyzed across the frontal, central, and parietal regions in both hemispheres. Our findings demonstrated that active taVNS modulates low-frequency oscillations in the frontal areas of healthy subjects. After the intervention, the average delta power at the frontal region increased in the active group compared to the sham group. These changes were also observed with an increase in delta asymmetry (towards the right hemisphere) in the active group compared to the sham group. In healthy subjects, active taVNS selectively induces changes in the resting-state frontal brain oscillations. Our results suggest that taVNS increases homeostatic low-frequency oscillatory activity mainly over the right frontal hemisphere. Active taVNS induces activation of the fronto-vagal network, which has a therapeutic potential to generate salutogenic and balanced brain activity.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Male",
+    "Female",
+    "Vagus Nerve Stimulation",
+    "Double-Blind Method",
+    "Adult",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Electroencephalography",
+    "Young Adult",
+    "Delta Rhythm",
+    "Healthy Volunteers",
+    "Vagus Nerve",
+    "Rest",
+    "Brain"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "Transcutaneous auricular vagus nerve stimulation (taVNS) is a promising technique that potentially influences cortical activity, mainly increasing electroencephalography (EEG) power spectrum activity in low-frequency oscillations, and demonstrates potential therapeutic benefits for various pathologic conditions, like depression and chronic pain."
+   },
+   "biomarker": {
+    "term": "resting-state",
+    "sentence": "The effects of non-invasive transcutaneous auricular vagus nerve stimulation on resting-state delta oscillation: a randomized, double-blinded, sham-control trial.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "Transcutaneous auricular vagus nerve stimulation (taVNS) is a promising technique that potentially influences cortical activity, mainly increasing electroencephalography (EEG) power spectrum activity in low-frequency oscillations, and demonstrates potential therapeutic benefits for various pathologic conditions, like depression and chronic pain."
+  },
+  {
+   "pmid": "40935122",
+   "title": "Non-invasive auricular vagus nerve stimulation in fibromyalgia: Impacts on autonomic function, central sensitization and pain catastrophizing.",
+   "journal": "Joint Bone Spine",
+   "year": "2026",
+   "abstract_plain": "INTRODUCTION: Fibromyalgia is a complex chronic pain disorder frequently associated with autonomic dysregulation, central sensitization, and cognitive-emotional disturbances. Transcutaneous vagus nerve stimulation (tVNS) has recently emerged as a non-invasive neuromodulatory approach with potential to modulate autonomic function, pain perception, and affective processing. We aim to evaluate the short-term effects of a 28-day tVNS protocol on autonomic function, symptom severity, central sensitization, neuropathic-like pain features, and pain catastrophizing in patients with fibromyalgia. METHODS: Twenty-five female patients with fibromyalgia (mean age 48.6\u00b17.3years; mean disease duration 68\u00b124 months) underwent twice-daily 30-minute tVNS sessions using the Nurosym\u2122 device for 28 consecutive days. Outcome measures included: Composite Autonimic Symptom Score 31 (COMPASS-31), Revised Fibromyalgia Impact Questionnaire (FIQR), PainDETECT Questionnaire (PDQ), Central Sensitization Inventory (CSI-9), and Pain Catastrophizing Scale (PCS). Pre- and post-treatment scores were compared using paired statistical analyses. RESULTS: Significant improvements were observed in total COMPASS-31 scores (P<0.05), particularly within the orthostatic (P<0.05), vasomotor (P<0.05), and pupillomotor (P<0.05) subdomains. FIQR scores decreased from 69.12\u00b117.58 to 62.24\u00b119.19 (P<0.01), indicating a moderate reduction in overall symptom burden. PDQ and CSI-9 scores also improved significantly (P<0.01 and P<0.05, respectively), suggesting a reduction in neuropathic-like symptoms and central sensitization. Although PCS scores showed a downward trend, the change was not statistically significant (P=0.070). CONCLUSIONS: This pilot study suggests that tVNS may be a safe, well-tolerated, and effective intervention for modulating autonomic and central mechanisms in fibromyalgia. The results support further controlled trials to define optimal protocols and assess long-term outcomes.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Humans",
+    "Fibromyalgia",
+    "Female",
+    "Middle Aged",
+    "Vagus Nerve Stimulation",
+    "Catastrophization",
+    "Pain Measurement",
+    "Treatment Outcome",
+    "Central Nervous System Sensitization",
+    "Adult",
+    "Autonomic Nervous System",
+    "Severity of Illness Index",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Surveys and Questionnaires"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "catastrophiz-",
+    "sentence": "Non-invasive auricular vagus nerve stimulation in fibromyalgia: Impacts on autonomic function, central sensitization and pain catastrophizing.."
+   },
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Non-invasive auricular vagus nerve stimulation in fibromyalgia: Impacts on autonomic function, central sensitization and pain catastrophizing.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "Non-invasive auricular vagus nerve stimulation in fibromyalgia: Impacts on autonomic function, central sensitization and pain catastrophizing.."
+  },
+  {
+   "pmid": "40914202",
+   "title": "Vagus nerve stimulation as a novel therapeutic approach for musculoskeletal diseases.",
+   "journal": "Am J Med Sci",
+   "year": "2026",
+   "abstract_plain": "Vagus nerve stimulation (VNS) has gained significant attention as a therapy for various medical conditions due to its ability to modulate chronic diseases, pain, and inflammation. VNS delivered by an implanted device is FDA approved for severe epilepsy and refractory depression. VNS delivered with implantable devices or transcutaneous methods are now being studied in several musculoskeletal diseases including osteoarthritis, rheumatoid arthritis, systemic lupus erythematosus, and fibromyalgia. VNS activates the neuroimmune axis including the cholinergic anti-inflammatory pathway (CAP), suppressing inflammation and reducing pain. Here, we review the pathophysiology of VNS and the outcomes from clinical trials in musculoskeletal diseases. We address the limitations of these studies, including the inconsistent use of physiological biomarkers, such as heart rate variability, to ensure that VNS is engaging the vagus nerve. More studies are required to reveal the full potential of VNS for pain reduction and disease modification.",
+   "publication_types": [
+    "Journal Article",
+    "Review",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Humans",
+    "Vagus Nerve Stimulation",
+    "Musculoskeletal Diseases"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "VNS delivered by an implanted device is FDA approved for severe epilepsy and refractory depression."
+   },
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "We address the limitations of these studies, including the inconsistent use of physiological biomarkers, such as heart rate variability, to ensure that VNS is engaging the vagus nerve."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "40576705",
+   "title": "Vagal nerve stimulation and fibromyalgia: an additional therapeutic option.",
+   "journal": "Clin Exp Rheumatol",
+   "year": "2025",
+   "abstract_plain": "OBJECTIVES: Fibromyalgia (FM) is a chronic syndrome characterised by widespread pain, sleep, mood and cognitive disturbances, asthenia and muscle stiffness. The aetiopathogenesis of FM is not fully understood, but autonomic nervous system dysfunction could play a fundamental role in the development of chronic pain and could alter serum levels of neuro-inflammatory mediators like Brain Derived Neurotrophic Factor (BDNF). Transcutaneous vagus nerve stimulation (tVNS) is a non-invasive bioelectronic technique that increases parasympathetic nervous system activity and there is growing evidence that it can modulate nociception and improve mood and sleep quality. The aim of this pilot study was to evaluate the efficacy of auricular vagal neuromodulation therapy (AVNT\u2122) in reducing disease severity and improving sleep quality of FM patients; secondly, to evaluate fluctuations in serum BDNF levels after treatment. METHODS: Eighteen patients with FM, underwent AVNT\u2122 treatment consisting of 30-minute stimulation, 5 times a week, for 4 consecutive weeks. RESULTS: After two weeks of treatment, an early reduction in the WPI score (p=0.03) was detected, then confirmed at week 4 (p=0.004). At week 4, significant reduction either in the revised Fibromyalgia Impact Questionnaire (rFIQ) total score (p=0.02), rFIQ general health (p=0.002) and symptoms (p<0.001) components and the Pittsburgh Sleep Quality Index (PSQI) level (p=0.02) was also detected. No significant changes in BDNF levels were found either after two or four weeks of treatment. CONCLUSIONS: In conclusion, our preliminary results show that the treatment with AVNT\u2122 reduced disease severity and improved sleep quality in FM patients.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Fibromyalgia",
+    "Vagus Nerve Stimulation",
+    "Female",
+    "Pilot Projects",
+    "Middle Aged",
+    "Brain-Derived Neurotrophic Factor",
+    "Adult",
+    "Treatment Outcome",
+    "Male",
+    "Sleep Quality",
+    "Time Factors",
+    "Biomarkers",
+    "Severity of Illness Index",
+    "Pain Measurement"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "mood",
+    "sentence": "OBJECTIVES: Fibromyalgia (FM) is a chronic syndrome characterised by widespread pain, sleep, mood and cognitive disturbances, asthenia and muscle stiffness."
+   },
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "The aetiopathogenesis of FM is not fully understood, but autonomic nervous system dysfunction could play a fundamental role in the development of chronic pain and could alter serum levels of neuro-inflammatory mediators like Brain Derived Neurotrophic Factor (BDNF)."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "40461351",
+   "title": "Transcutaneous auricular nerve stimulation modulates the functional connectivity of the descending pain modulation system and reward network in patients with chronic low back pain.",
+   "journal": "Neurotherapeutics",
+   "year": "2025",
+   "abstract_plain": "This study aims to examine the modulatory effects of transcutaneous auricular vagus nerve stimulation (taVNS) on Chronic low back pain (cLBP). 70 cLBP patients were recruited and randomized into taVNS or transcutaneous greater auricular nerve stimulation (tGANS) group. Both interventions were administered by participants themselves after initial training (five times/week for four weeks). Magnetic resonance imaging (MRI) data were collected at baseline and after 4-week interventions. Seed-based static and dynamic functional connectivity (sFC and dFC) were performed to investigate the modulation effects on descending pain modulation system and reward network using the periaqueductal gray (PAG) and ventral tegmental area (VTA) as seeds. 51 patients (taVNS: n \u200b= \u200b25; tGANS: n \u200b= \u200b26) completed the study. Within-group comparisons showed a significant improvement in pain-related outcomes for both groups. Between-group comparisons revealed no significant differences. FC analysis showed that both taVNS and tGANS can increase the PAG - postcentral gyrus sFC. The taVNS is associated with increased PAG - amygdala and PAG - paracentral gyrus and decreased PAG - medial frontal cortex sFCs compared to tGANS. The present study suggest that both taVNS and tGANS can alleviate cLBP through distinct yet overlapping pathways. Our findings underscore the potential of auricular nerve stimulation as a telehealth solution for cLBP and other chronic pain conditions.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Low Back Pain",
+    "Male",
+    "Female",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Middle Aged",
+    "Adult",
+    "Chronic Pain",
+    "Magnetic Resonance Imaging",
+    "Reward",
+    "Vagus Nerve Stimulation",
+    "Nerve Net"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Transcutaneous auricular nerve stimulation modulates the functional connectivity of the descending pain modulation system and reward network in patients with chronic low back pain.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "40116526",
+   "title": "Transcutaneous Auricular Vagus Nerve Stimulation: Efficacy, Applications, and Challenges in Mood Disorders and Autonomic Regulation-A Narrative Review.",
+   "journal": "Mil Med",
+   "year": "2025",
+   "abstract_plain": "BACKGROUND: Transcutaneous auricular Vagus Nerve Stimulation (taVNS) is a noninvasive technique that activates vagal projections in the brain and brainstem by stimulating the auricular branch of the vagus nerve. taVNS may be a safer alternative to invasive vagal nerve stimulation for treating treatment-resistant mood disorders, chronic pain, inflammation, cardiovascular dysfunction, inflammatory bowel disease, and Crohn's disease. OBJECTIVE: This study aims to systematically review the current evidence on the efficacy and safety of taVNS in treating depressive disorders and its modulatory effects on the autonomic nervous system. METHODS: Relevant primary and secondary sources were identified through a systematic search of the PubMed and Google Scholar databases from 2008 to 2023. The review used the Scale for Assessment of Narrative Review Articles, resulting in a 0.77% intraclass correlation coefficient, 95% CI, and 0.88 inter-rater reliability. RESULTS: taVNS, a new noninvasive neuromodulation method, stimulates the auricular branch of the vagus nerve and regulates the sympathetic and parasympathetic branches of the ANS, increasing norepinephrine secretion, vagus nerve stimulation adaptability, and heart rate variability. Future studies should clarify the mechanisms and address inconsistencies in taVNS parameters. Standardizing treatment regimens can establish taVNS as a viable, noninvasive treatment. CONCLUSION: Our findings suggest that taVNS may be a safer alternative to invasive vagal nerve stimulation for treatment-resistant mood disorders, chronic pain, inflammation, cardiovascular dysfunction, inflammatory bowel disease, and Crohn's disease. However, further empirical research is needed to elucidate the mechanisms and resolve inconsistencies in the stimulation parameters, and larger studies are required to confirm taVNS as an effective noninvasive treatment.",
+   "publication_types": [
+    "Journal Article",
+    "Systematic Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Vagus Nerve Stimulation",
+    "Mood Disorders",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Autonomic Nervous System"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "mood",
+    "sentence": "Transcutaneous Auricular Vagus Nerve Stimulation: Efficacy, Applications, and Challenges in Mood Disorders and Autonomic Regulation-A Narrative Review.."
+   },
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Transcutaneous Auricular Vagus Nerve Stimulation: Efficacy, Applications, and Challenges in Mood Disorders and Autonomic Regulation-A Narrative Review.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": "Transcutaneous Auricular Vagus Nerve Stimulation: Efficacy, Applications, and Challenges in Mood Disorders and Autonomic Regulation-A Narrative Review.."
+  },
+  {
+   "pmid": "39753127",
+   "title": "Effectiveness of non-invasive vagus nerve stimulation vs heart rate variability biofeedback interventions for chronic pain conditions: A systematic review.",
+   "journal": "Scand J Pain",
+   "year": "2025",
+   "abstract_plain": "OBJECTIVES: Autonomic regulation has been identified as a potential regulator of pain via vagal nerve mediation, assessed through heart rate variability (HRV). Non-invasive vagal nerve stimulation (nVNS) and heart rate variability biofeedback (HRVB) have been proposed to modulate pain. A limited number of studies compare nVNS and HRVB in persons with chronic pain conditions. This systematic review compared interventions of nVNS and HRVB in adults with long-standing pain conditions. METHODS: PubMed, MEDLINE, CINAHL, SPORTDiscus, Google Scholar, and Cochrane library were used to retrieve the randomized controlled trials for this review between the years 2010 and 2023. Search terms included chronic pain, fibromyalgia, headache, migraine, vagus nerve stimulation, biofeedback, HRV, pain assessment, pain, and transcutaneous. RESULTS: Ten full-text articles of 1,474 identified were selected for full qualitative synthesis, with a combined population of 813 subjects. There were n = 763 subjects in studies of nVNS and n = 50 subjects for HRVB. Six of the nine nVNS studies looked at headache disorders and migraines (n = 603), with two investigating effects on fibromyalgia symptoms (n = 138) and one the effects on chronic low back pain (n = 22). Of the nVNS studies, three demonstrated significant results in episode frequency, six in pain intensity (PI) reduction, and three in reduced medication use. The HRVB study showed statistically significant findings for reduced PI, depression scores, and increased HRV coherence. CONCLUSION: Moderate to high-quality evidence suggests that nVNS is beneficial in reducing headache frequency and is well-tolerated, indicating it might be an alternative intervention to medication. HRVB interventions are beneficial in reducing pain, depression scores, use of non-steroidal anti-inflammatory medication, and in increasing HRV coherence ratio. HRVB and nVNS appear to show clinical benefits for chronic pain conditions; however, insufficient literature exists to support either approach.",
+   "publication_types": [
+    "Systematic Review",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Chronic Pain",
+    "Biofeedback, Psychology",
+    "Heart Rate",
+    "Vagus Nerve Stimulation",
+    "Pain Management"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "The HRVB study showed statistically significant findings for reduced PI, depression scores, and increased HRV coherence."
+   },
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "Effectiveness of non-invasive vagus nerve stimulation vs heart rate variability biofeedback interventions for chronic pain conditions: A systematic review.."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "Of the nVNS studies, three demonstrated significant results in episode frequency, six in pain intensity (PI) reduction, and three in reduced medication use."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": "The HRVB study showed statistically significant findings for reduced PI, depression scores, and increased HRV coherence."
+  },
+  {
+   "pmid": "38963558",
+   "title": "Evidence of bottom-up homeostatic modulation induced taVNS during emotional and Go/No-Go tasks.",
+   "journal": "Exp Brain Res",
+   "year": "2024",
+   "abstract_plain": "Bilateral transcutaneous auricular vagus nerve stimulation (taVNS) - a non-invasive neuromodulation technique - has been investigated as a safe and feasible technique to treat many neuropsychiatric conditions. such as epilepsy, depression, anxiety, and chronic pain. Our aim is to investigate the effect of taVNS on neurophysiological processes during emotional and Go/No-Go tasks, and changes in frontal alpha asymmetry. We performed a randomized, double-blind, sham-controlled trial with 44 healthy individuals who were allocated into two groups (the active taVNS group and the sham taVNS group). Subjects received one session of taVNS (active or sham) for 60\u00a0min. QEEG was recorded before and after the interventions, and the subjects were assessed while exposed to emotional conditions with sad and happy facial expressions, followed by a Go/No-Go trial. The results demonstrated a significant increase in N2 amplitude in the No-Go condition for the active taVNS post-intervention compared to the sham taVNS after adjusting by handedness, mood, and fatigue levels (p\u2009=\u20090.046), significantly reduced ERD during sad conditions after treatment (p\u2009=\u20090.037), and increased frontal alpha asymmetry towards the right frontal hemisphere during the emotional task condition (p\u2009=\u20090.046). Finally, we observed an interesting neural signature in this study that suggests a bottom-up modulation from brainstem/subcortical to cortical areas as characterized by improved lateralization of alpha oscillations towards the frontal right hemisphere, and changes in ERP during emotional and Go/No-Go tasks that suggests a better subcortical response to the tasks. Such bottom-up effects may mediate some of the clinical effects of taVNS.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Male",
+    "Female",
+    "Adult",
+    "Emotions",
+    "Vagus Nerve Stimulation",
+    "Double-Blind Method",
+    "Young Adult",
+    "Electroencephalography",
+    "Executive Function",
+    "Alpha Rhythm",
+    "Evoked Potentials",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Inhibition, Psychological"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "Evidence of bottom-up homeostatic modulation induced taVNS during emotional and Go/No-Go tasks.."
+   },
+   "biomarker": {
+    "term": "erp",
+    "sentence": "Finally, we observed an interesting neural signature in this study that suggests a bottom-up modulation from brainstem/subcortical to cortical areas as characterized by improved lateralization of alpha oscillations towards the frontal right hemisphere, and changes in ERP during emotional and Go/No-Go tasks that suggests a better subcortical response to the tasks."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "Finally, we observed an interesting neural signature in this study that suggests a bottom-up modulation from brainstem/subcortical to cortical areas as characterized by improved lateralization of alpha oscillations towards the frontal right hemisphere, and changes in ERP during emotional and Go/No-Go tasks that suggests a better subcortical response to the tasks."
+  },
+  {
+   "pmid": "38815433",
+   "title": "Comparison of the efficacy of auricular vagus nerve stimulation and conventional low back rehabilitation in patients with chronic low back pain.",
+   "journal": "Complement Ther Clin Pract",
+   "year": "2024",
+   "abstract_plain": "BACKGROUND: In recent years, human and animal studies have provided increasing evidence that vagus nerve stimulation (VNS) can produce analgesic effects as well as alleviating resistant epilepsy and depression. Our study was designed to compare the efficacy of transcutaneous auricular vagus nerve stimulation with conventional low back rehabilitation in patients with chronic low back pain (CLBP). METHODS: Sixty patients with LBP were randomly divided into two groups. Group 1 received conventional rehabilitation and home exercise, and Group 2 received transcutaneous auricular VNS and home exercise. Both groups received treatment five days a week for three weeks. Trunk mobility (Modified Schober test, fingertip-to-floor test), muscle strength (CSMI-Cybex Humac-Norm isokinetic dynamometer and Lafayette manual muscle strength measuring device), trunk endurance, balance tests, Visual Analog Scale, Beck Depression Scale, Pittsburgh Sleep Quality Index, Oswestry Disability Index were evaluated. RESULTS: At the end of three weeks, within-group assessment results showed positive effects on mobility, functional status, depression and sleep in all groups (p\u00a0<\u00a00.05). Pain level, endurance time and flexion trunk muscle strength results showed more improvement in Group 2 (p\u00a0<\u00a00.05). Some parameters of isokinetic lower extremity quadriceps muscle strength and fall risk scores showed a significant improvement in Group 1 (p\u00a0<\u00a00.05). DISCUSSION: VNS has been observed to be more effective on pain, trunk muscle strength and endurance duration and sleep status. Auricular VNS may be included in the treatment of patients with CLBP in whom conventional physical therapy is inadequate or not applicable.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Comparative Study"
+   ],
+   "mesh": [
+    "Humans",
+    "Low Back Pain",
+    "Male",
+    "Female",
+    "Adult",
+    "Middle Aged",
+    "Vagus Nerve Stimulation",
+    "Muscle Strength",
+    "Exercise Therapy",
+    "Treatment Outcome",
+    "Pain Measurement",
+    "Chronic Pain"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "BACKGROUND: In recent years, human and animal studies have provided increasing evidence that vagus nerve stimulation (VNS) can produce analgesic effects as well as alleviating resistant epilepsy and depression."
+   },
+   "biomarker": null,
+   "intensity": {
+    "term": "visual analog",
+    "sentence": "Trunk mobility (Modified Schober test, fingertip-to-floor test), muscle strength (CSMI-Cybex Humac-Norm isokinetic dynamometer and Lafayette manual muscle strength measuring device), trunk endurance, balance tests, Visual Analog Scale, Beck Depression Scale, Pittsburgh Sleep Quality Index, Oswestry Disability Index were evaluated."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": false,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "38469939",
+   "title": "Effects of transcutaneous auricular vagus nerve stimulation at left cymba concha on experimental pain as assessed with the nociceptive withdrawal reflex, and correlation with parasympathetic activity.",
+   "journal": "Eur J Neurosci",
+   "year": "2024",
+   "abstract_plain": "The aim of this study was to clarify the effects of transcutaneous auricular vagus nerve stimulation (taVNS) to the left cymba concha on the pain perception using nociceptive withdrawal reflex (NWR), which is known to be associated with chronic pain, and to investigate whether there is a relationship between taVNS-induced suppression of the NWR and parasympathetic activation. We applied either 3.0\u00a0mA, 100\u2009Hz taVNS for 120\u2009s on the left cymba concha (taVNS condition) or the left earlobe (Sham condition) for 20 healthy adults. NWR threshold was measured before (Baseline), immediately after (Post 0), 10\u00a0min (Post 10) and 30\u2009min after (Post 30) stimulation. The NWR threshold was obtained from biceps femoris muscle by applying electrical stimulation to the sural nerve. During taVNS, electrocardiogram was recorded, and changes in autonomic nervous activity measured by heart rate variability (HRV) were analyzed. We found that the NWR thresholds at Post 10 and Post 30 increased compared with baseline in the taVNS group (10\u00a0min after: p\u2009=\u2009.008, 30\u2009min after: p\u2009=\u2009.008). In addition, increased parasympathetic activity by taVNS correlated with a greater increase in NWR threshold at Post 10 and Post 30 (Post 10: p\u2009=\u2009.003; Post 30: p\u2009=\u2009.001). The present results of this single-blinded study demonstrate the pain-suppressing effect of taVNS on NWR threshold and suggest that the degree of parasympathetic activation during taVNS may predict the pain-suppressing effect of taVNS after its application.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Male",
+    "Female",
+    "Adult",
+    "Vagus Nerve Stimulation",
+    "Reflex",
+    "Parasympathetic Nervous System",
+    "Young Adult",
+    "Heart Rate",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Nociception"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "During taVNS, electrocardiogram was recorded, and changes in autonomic nervous activity measured by heart rate variability (HRV) were analyzed."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "35420372",
+   "title": "Autonomic Nervous System Dysregulation and Osteoarthritis Pain: Mechanisms, Measurement, and Future Outlook.",
+   "journal": "Curr Rheumatol Rep",
+   "year": "2022",
+   "abstract_plain": "PURPOSE OF REVIEW: The autonomic nervous system is an important regulator of stress responses and exhibits functional changes in chronic pain states. This review discusses potential overlap among autonomic dysregulation, osteoarthritis (OA) progression, and chronic pain. From this foundation, we then discuss preclinical to clinical research opportunities to close gaps in our knowledge of autonomic dysregulation and OA. Finally, we consider the potential to generate new therapies for OA pain via modulation of the autonomic nervous system. RECENT FINDINGS: Recent reviews provide a framework for the autonomic nervous system in OA progression; however, research is still limited on the topic. In other chronic pain states, functional overlaps between the central autonomic network and pain processing centers in the brain suggest relationships between concomitant dysregulation of the two systems. Non-pharmacological therapeutics, such as vagus nerve stimulation, mindfulness-based meditation, and exercise, have shown promise in alleviating painful symptoms of joint diseases, and these interventions may be partially mediated through the autonomic nervous system. The autonomic nervous system appears to be dysregulated in OA progression, and further research on rebalancing autonomic function may lead to novel therapeutic strategies for treating OA pain.",
+   "publication_types": [
+    "Journal Article",
+    "Review",
+    "Research Support, N.I.H., Extramural"
+   ],
+   "mesh": [
+    "Autonomic Nervous System",
+    "Chronic Pain",
+    "Humans",
+    "Osteoarthritis"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Autonomic Nervous System Dysregulation and Osteoarthritis Pain: Mechanisms, Measurement, and Future Outlook.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "34710514",
+   "title": "The role of the vagus nerve in fibromyalgia syndrome.",
+   "journal": "Neurosci Biobehav Rev",
+   "year": "2021",
+   "abstract_plain": "Fibromyalgia (FM) syndrome is a common illness characterized by chronic widespread pain, sleep problems, fatigue, and cognitive difficulties. Dysfunctional neurotransmitter systems that influence the body's endogenous stress response systems are thought to underlie many of the major FM-related symptoms. A model of FM pathogenesis suggests biological and psychosocial variables interact to influence the genetic predisposition, but the precise mechanisms remain unclear. The Polyvagal Theory provides a theoretical framework from which to investigate potential biological mechanisms. The vagus nerve (VN) has anti-inflammatory properties via its afferent and efferent fibers. A low vagal tone (as assessed by low heart rate variability), has been observed in painful and inflammatory diseases, including FM, while the ventral branch of the VN is linked to emotional expression and social engagement. These anti-inflammatory and psychological (limbic system) properties of the VN may possess therapeutic potential in treating FM. This review paper summarizes the scientific literature regarding the potential role of the VN in transducing and/or therapeutically managing FM signs and symptoms.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't",
+    "Review"
+   ],
+   "mesh": [
+    "Chronic Pain",
+    "Fatigue",
+    "Fibromyalgia",
+    "Humans",
+    "Vagus Nerve",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "A low vagal tone (as assessed by low heart rate variability), has been observed in painful and inflammatory diseases, including FM, while the ventral branch of the VN is linked to emotional expression and social engagement."
+   },
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "A low vagal tone (as assessed by low heart rate variability), has been observed in painful and inflammatory diseases, including FM, while the ventral branch of the VN is linked to emotional expression and social engagement."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": "A low vagal tone (as assessed by low heart rate variability), has been observed in painful and inflammatory diseases, including FM, while the ventral branch of the VN is linked to emotional expression and social engagement."
+  },
+  {
+   "pmid": "34634682",
+   "title": "Transdermal auricular vagus stimulation for the treatment of postural tachycardia syndrome.",
+   "journal": "Auton Neurosci",
+   "year": "2021",
+   "abstract_plain": "Postural Tachycardia Syndrome (POTS) is a chronic disorder characterized by symptoms of orthostatic intolerance such as fatigue, lightheadedness, dizziness, palpitations, dyspnea, chest discomfort and remarkable tachycardia upon standing. Non-invasive transdermal vagal stimulators have been applied for the treatment of epilepsy, anxiety, depression, headache, and chronic pain syndromes. Anti-inflammatory and immunomodulating effects after transdermal vagal stimulation raised interest for applications in other diseases. Patients with sympathetic overactivity, reduced cardiac vagal drive and presence of systemic inflammation like POTS may benefit from tVNS. This article will address crucial methodological aspects of tVNS and provide preliminary results of its acute and chronic use in POTS, with regards to its potential effectiveness on autonomic symptoms reduction and heart rate modulation.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, N.I.H., Extramural",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Fatigue Syndrome, Chronic",
+    "Heart Rate",
+    "Humans",
+    "Orthostatic Intolerance",
+    "Postural Orthostatic Tachycardia Syndrome",
+    "Tachycardia"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "Non-invasive transdermal vagal stimulators have been applied for the treatment of epilepsy, anxiety, depression, headache, and chronic pain syndromes."
+   },
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "This article will address crucial methodological aspects of tVNS and provide preliminary results of its acute and chronic use in POTS, with regards to its potential effectiveness on autonomic symptoms reduction and heart rate modulation."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "34509623",
+   "title": "Technical Note: Modulation of fMRI brainstem responses by transcutaneous vagus nerve stimulation.",
+   "journal": "Neuroimage",
+   "year": "2021",
+   "abstract_plain": "Our increasing knowledge about gut-brain interaction is revolutionising the understanding of the links between digestion, mood, health, and even decision making in our everyday lives. In support of this interaction, the vagus nerve is a crucial pathway transmitting diverse gut-derived signals to the brain to monitor of metabolic status, digestive processes, or immune control to adapt behavioural and autonomic responses. Hence, neuromodulation methods targeting the vagus nerve are currently explored as a treatment option in a number of clinical disorders, including diabetes, chronic pain, and depression. The non-invasive variant of vagus nerve stimulation (VNS), transcutaneous auricular VNS (taVNS), has been implicated in both acute and long-lasting effects by modulating afferent vagus nerve target areas in the brain. The physiology of neither of those effects is, however, well understood, and evidence for neuronal response upon taVNS in vagal afferent projection regions in the brainstem and its downstream targets remain to be established. Therefore, to examine time-dependent effects of taVNS on brainstem neuronal responses in healthy human subjects, we applied taVNS during task-free fMRI in a single-blinded crossover design. During fMRI data acquisition, we either stimulated the left earlobe (sham), or the target zone of the auricular branch of the vagus nerve in the outer ear (cymba conchae, verum) for several minutes, both followed by a short 'stimulation OFF' period. Time-dependent effects were assessed by averaging the BOLD response for consecutive 1-minute periods in an ROI-based analysis of the brainstem. We found a significant response to acute taVNS stimulation, relative to the control condition, in downstream targets of vagal afferents, including the nucleus of the solitary tract, the substantia nigra, and the subthalamic nucleus. Most of these brainstem regions remarkably showed increased activity in response to taVNS, and these effect sustained during the post-stimulation period. These data demonstrate that taVNS activates key brainstem regions, and highlight the potential of this approach to modulate vagal afferent signalling. Furthermore, we show that carry-over effects need to be considered when interpreting fMRI data in the context of general vagal neurophysiology and its modulation by taVNS.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Adaptation, Physiological",
+    "Adult",
+    "Affect",
+    "Afferent Pathways",
+    "Autonomic Nervous System",
+    "Brain Stem",
+    "Cross-Over Studies",
+    "Female",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Peripheral Nervous System",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Vagus Nerve",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "mood",
+    "sentence": "Our increasing knowledge about gut-brain interaction is revolutionising the understanding of the links between digestion, mood, health, and even decision making in our everyday lives."
+   },
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Technical Note: Modulation of fMRI brainstem responses by transcutaneous vagus nerve stimulation.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "33635894",
+   "title": "Cervical transcutaneous vagal neuromodulation in chronic pancreatitis patients with chronic pain: A randomised sham controlled clinical trial.",
+   "journal": "PLoS One",
+   "year": "2021",
+   "abstract_plain": "BACKGROUND & AIMS: Chronic abdominal pain is the primary symptom of chronic pancreatitis, but unfortunately it is difficult to treat. Vagal nerve stimulation studies have provided evidence of anti-nociceptive effect in several chronic pain conditions. We investigated the pain-relieving effects of transcutaneous vagal nerve stimulation in comparison to sham treatment in chronic pancreatitis patients. METHODS: We conducted a randomised double-blinded, sham-controlled, crossover trial in patients with chronic pancreatitis. Patients were randomly assigned to receive a two-week period of cervical transcutaneous vagal nerve stimulation using the gammaCore device followed by a two-week sham stimulation, or vice versa. We measured clinical and experimental endpoints before and after each treatment. The primary clinical endpoint was pain relief, documented in a pain diary using a visual analogue scale. Secondary clinical endpoints included Patients' Global Impression of Change score, quality of life and Brief Pain Inventory questionnaire. Secondary experimental endpoints included cardiac vagal tone and heart rate. RESULTS: No differences in pain scores were seen in response to two weeks transcutaneous vagal nerve stimulation as compared to sham treatment (difference in average pain score (visual analogue scale): 0.17, 95%CI (-0.86;1.20), P = 0.7). Similarly, no differences were seen for secondary clinical endpoints, except from an increase in the appetite loss score (13.9, 95%CI (0.5:27.3), P = 0.04). However, improvements in maximum pain scores were seen for transcutaneous vagal nerve stimulation and sham treatments as compared to their respective baselines: vagal nerve stimulation (-1.3\u00b11.7, 95%CI (-2.21:-0.42), P = 0.007), sham (-1.3\u00b11.9, 95%CI (-2.28:-0.25), P = 0.018). Finally, heart rate was decreased after two weeks transcutaneous vagal nerve stimulation in comparison to sham treatment (-3.7 beats/min, 95%CI (-6.7:-0.6), P = 0.02). CONCLUSION: In this sham-controlled crossover study, we found no evidence that two weeks transcutaneous vagal nerve stimulation induces pain relief in patients with chronic pancreatitis. TRIAL REGISTRATION NUMBER: The study is registered at NCT03357029; www.clinicaltrials.gov.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Abdominal Pain",
+    "Aged",
+    "Chronic Pain",
+    "Cross-Over Studies",
+    "Denmark",
+    "Double-Blind Method",
+    "Female",
+    "Heart Rate",
+    "Humans",
+    "Male",
+    "Middle Aged",
+    "Pain Management",
+    "Pain Measurement",
+    "Pancreatitis, Chronic",
+    "Quality of Life",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Treatment Outcome",
+    "Vagus Nerve Stimulation",
+    "Visual Analog Scale"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "vagal tone",
+    "sentence": "Secondary experimental endpoints included cardiac vagal tone and heart rate."
+   },
+   "intensity": {
+    "term": "visual analogue",
+    "sentence": "The primary clinical endpoint was pain relief, documented in a pain diary using a visual analogue scale."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "33548494",
+   "title": "Vagus nerve stimulation in musculoskeletal diseases.",
+   "journal": "Joint Bone Spine",
+   "year": "2021",
+   "abstract_plain": "The vagus nerve is the main nerve of the parasympathetic autonomic nervous system. Beyond its vegetative functions, the vagus nerve possesses anti-inflammatory and analgesic properties. Initially developed in the treatment of refractory epilepsy, vagus nerve stimulation (VNS) is currently being evaluated in several musculoskeletal diseases. VNS can be invasive by placing an electrode around the cervical vagus nerve and connected to a generator implanted subcutaneously or non-invasive stimulating the cervical vagus nerve branch percutaneously (auricular or cervical). In rheumatoid arthritis (RA) patients, VNS has been shown to dampen the inflammatory response of circulatory peripheral cells. Several open-labeled small pilot studies have demonstrated that VNS, either invasive or transcutaneous, is associated with a significant decrease of RA disease activity. As well, other studies have shown that VNS could limit fatigue in Sjogren's syndrome and systemic lupus, or decrease pain in fibromyalgia as well as in erosive hand osteoarthritis. However, some questions remain, such as the settings of stimulation, the duration of treatment, or the optimal stimulation route. Finally, randomized controlled trials versus sham stimulation with large samples of patients are mandatory to definitively conclude about the efficacy of VNS.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Arthritis, Rheumatoid",
+    "Fatigue",
+    "Humans",
+    "Vagus Nerve",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "The vagus nerve is the main nerve of the parasympathetic autonomic nervous system."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "33262253",
+   "title": "Transcutaneous auricular vagus nerve stimulation (taVNS) for migraine: an fMRI study.",
+   "journal": "Reg Anesth Pain Med",
+   "year": "2021",
+   "abstract_plain": "BACKGROUND: Dysfunction of the thalamocortical connectivity network is thought to underlie the pathophysiology of the migraine. This current study aimed to explore the thalamocortical connectivity changes during 4 weeks of continuous transcutaneous vagus nerve stimulation (taVNS) treatment on migraine patients. METHODS: 70 migraine patients were recruited and randomized in an equal ratio to receive real taVNS or sham taVNS treatments for 4 weeks. Resting-state functional MRI was collected before and after treatment. The thalamus was parceled into functional regions of interest (ROIs) on the basis of six priori-defined cortical ROIs covering the entire cortex. Seed-based functional connectivity analysis between each thalamic subregion and the whole brain was further compared across groups after treatment. RESULTS: Of the 59 patients that finished the study, those in the taVNS group had significantly reduced number of migraine days, pain intensity and migraine attack times after 4 weeks of treatment compared with the sham taVNS. Functional connectivity analysis revealed that taVNS can increase the connectivity between the motor-related thalamus subregion and anterior cingulate cortex/medial prefrontal cortex, and decrease the connectivity between occipital cortex-related thalamus subregion and postcentral gyrus/precuneus. CONCLUSION: Our findings suggest that taVNS can relieve the symptoms of headache as well as modulate the thalamocortical circuits in migraine patients. The results provide insights into the neural mechanism of taVNS and reveal potential therapeutic targets for migraine patients.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Brain",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Migraine Disorders",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Transcutaneous auricular vagus nerve stimulation (taVNS) for migraine: an fMRI study.."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "RESULTS: Of the 59 patients that finished the study, those in the taVNS group had significantly reduced number of migraine days, pain intensity and migraine attack times after 4 weeks of treatment compared with the sham taVNS."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "32967704",
+   "title": "Motivational nondirective resonance breathing versus transcutaneous vagus nerve stimulation in the treatment of fibromyalgia: study protocol for a randomized controlled trial.",
+   "journal": "Trials",
+   "year": "2020",
+   "abstract_plain": "BACKGROUND: Chronic widespread pain (CWP), including fibromyalgia (FM), affects one in every ten adults and is one of the leading causes of sick leave and emotional distress. Due to an unclear etiology and a complex pathophysiology, FM is a condition with few, if any, effective and safe treatments. However, current research within the field of vagal nerve innervation suggests psychophysiological and electrical means by which FM may be treated. This study will investigate the efficacy of two different noninvasive vagal nerve stimulation techniques for the treatment of FM. METHODS: The study will use a randomized, single-blind, sham-controlled design to investigate the treatment efficacy of motivational nondirective resonance breathing (MNRB\u2122) and transcutaneous vagus nerve stimulation (Nemos\u00ae tVNS) on patients diagnosed with FM. Consenting FM patients (N\u2009=\u2009112) who are referred to the Department of Pain Management and Research at Oslo University Hospital, in Oslo, Norway, will be randomized into one of four independent groups. Half of these participants (N\u2009=\u200956) will be randomized to either an experimental tVNS group or a sham tVNS group. The other half (N\u2009=\u200956) will be randomized to either an experimental MNRB group or a sham MNRB group. Both active and sham treatment interventions will be delivered twice per day at home, 15\u2009min/morning and 15\u2009min/evening, for a total duration of 2\u2009weeks (14\u2009days). Participants are invited to the clinic twice, once for pre- and once for post-intervention data collection. The primary outcome is changes in photoplethysmography-measured heart rate variability. Secondary outcomes include self-reported pain intensity on a numeric rating scale, changes in pain detection threshold, pain tolerance threshold, and pressure pain limit determined by computerized pressure cuff algometry, blood pressure, and health-related quality of life. DISCUSSION: The described randomized controlled trial aims to compare the efficacy of two vagal nerve innervation interventions, MNRB and tVNS, on heart rate variability and pain intensity in patients suffering from FM. This project tests a new and potentially effective means of treating a major public and global health concern where prevalence is high, disability is severe, and treatment options are limited. TRIAL REGISTRATION: ClinicalTrials.gov NCT03180554 . Registered on August 06, 2017.",
+   "publication_types": [
+    "Clinical Trial Protocol",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Adult",
+    "Fibromyalgia",
+    "Humans",
+    "Norway",
+    "Quality of Life",
+    "Randomized Controlled Trials as Topic",
+    "Single-Blind Method",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Treatment Outcome",
+    "Vagus Nerve",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "BACKGROUND: Chronic widespread pain (CWP), including fibromyalgia (FM), affects one in every ten adults and is one of the leading causes of sick leave and emotional distress."
+   },
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "The primary outcome is changes in photoplethysmography-measured heart rate variability."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "Secondary outcomes include self-reported pain intensity on a numeric rating scale, changes in pain detection threshold, pain tolerance threshold, and pressure pain limit determined by computerized pressure cuff algometry, blood pressure, and health-related quality of life."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": true,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31603076",
+   "title": "Study protocol for a randomised double-blinded, sham-controlled, prospective, cross-over clinical trial of vagal neuromodulation for pain treatment in patients with chronic pancreatitis.",
+   "journal": "BMJ Open",
+   "year": "2019",
+   "abstract_plain": "INTRODUCTION: The management of chronic pancreatitis (CP) is challenging and requires a personalised approach focused on the individual patient's main symptoms. Abdominal pain is the most prominent symptom in CP, where central pain mechanisms, including sensitisation and impaired pain modulation, often are involved. Recent clinical studies suggest that vagal nerve stimulation (VNS) induces analgesic effects through the modulation of central pain pathways. This study aims to investigate the effect of 2\u2009weeks transcutaneous VNS (t-VNS) on clinical pain in patients with CP, in comparison to the effect of sham treatment. METHODS AND ANALYSIS: Twenty-one patients with CP will be enrolled in this randomised, double-blinded, single-centre, sham-controlled, cross-over study. The study has two treatment periods: A 2-week active t-VNS using GammaCore device and a 2-week treatment with a sham device. During both treatment periods, the patients are instructed to self-administer VNS bilaterally to the cervical vagal area, three times per day. Treatment periods will be separated by 2\u2009weeks. During the study period, patients will record their daily pain experience in a diary (primary clinical endpoint). In addition, all subjects will undergo testing which will include MRI, quantitative sensory testing, cardiac vagal tone assessment and collecting blood samples, before and after the two treatments to investigate mechanisms underlying VNS effects. The data will be analysed using the principle of intention to treat. ETHICS AND DISSEMINATION: The regional ethics committee has approved the study: N-20170023. Results of the trial will be submitted for publication in peer-reviewed journals. TRIAL REGISTRATION NUMBER: The study is registered at www.clinicaltrials.gov: NCT03357029.",
+   "publication_types": [
+    "Clinical Trial Protocol",
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Abdominal Pain",
+    "Chronic Pain",
+    "Cross-Over Studies",
+    "Denmark",
+    "Humans",
+    "Pain Management",
+    "Pain Measurement",
+    "Pancreatitis, Chronic",
+    "Prospective Studies",
+    "Randomized Controlled Trials as Topic",
+    "Transcutaneous Electric Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "vagal tone",
+    "sentence": "In addition, all subjects will undergo testing which will include MRI, quantitative sensory testing, cardiac vagal tone assessment and collecting blood samples, before and after the two treatments to investigate mechanisms underlying VNS effects."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": true,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31092102",
+   "title": "Existing and emerging applications for the neuromodulation of nerve activity through targeted delivery of electric stimuli.",
+   "journal": "Int J Neurosci",
+   "year": "2019",
+   "abstract_plain": "The effective treatment of many diseases requires the use of multiple treatment strategies among which neuromodulation is playing an increasingly important role. Neuromodulation devices that act to normalize or modulate nerve activity through the targeted delivery of electrical stimuli will be the focus of this review. These devices encompass deep brain stimulators, vagus nerve stimulators, spinal cord simulators and sacral nerve stimulators. Already neuromodulation has proven successful in the treatment of a broad range of conditions from Parkinson's disease to chronic pain and urinary incontinence. Many of these approaches seek to exploit the activities of the autonomic nervous system, which influences organ function through the release of neurotransmitters and associated signalling cascades. This review will outline existing and emerging applications for each of these neuromodulation devices, proposed mechanisms of action and clinical studies evaluating both their safety and therapeutic efficacy.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Clinical Trials as Topic",
+    "Deep Brain Stimulation",
+    "Electric Stimulation Therapy",
+    "Epilepsy",
+    "Humans",
+    "Parkinson Disease",
+    "Spinal Cord Stimulation",
+    "Stroke",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Treatment Outcome",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Many of these approaches seek to exploit the activities of the autonomic nervous system, which influences organ function through the release of neurotransmitters and associated signalling cascades."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "30334224",
+   "title": "Synaptic Plasticity and Synchrony in the Anterior Cingulate Cortex Circuitry: A Neural Network Approach to Causality of Chronic Visceral Pain and Associated Cognitive Deficits.",
+   "journal": "Adv Neurobiol",
+   "year": "2018",
+   "abstract_plain": "Human brain imaging studies\u00a0have demonstrated the importance of cortical neuronal networks in the perception of pain in patients with functional bowel disease such as irritable bowel syndrome (IBS).Studies have identified an enhanced response in the anterior cingulate cortex (ACC) to colorectal distension in viscerally hypersensitive (VH) rats. Electrophysiological recordings show long-lasting potentiation of local field potential (LFP) in the medial thalamus (MT)-ACC synapses in VH rats. Theta burst stimulation in the MT reliably induced long-term potentiation (LTP) in the MT-ACC pathway in normal rats, but was occluded in the VH state. Further, repeated tetanization of MT increased ACC neuronal activity and visceral pain responses of normal rats, mimicking VH rats. These data provide conclusive evidence that chronic visceral pain is associated with alterations of synaptic plasticity in the ACC circuitry. The ACC synaptic strengthening may engage signal transduction pathways that are in common with those activated by electrical stimulation, and serve as an attractive cellular model of functional visceral pain.Evidences have shown that most patients with IBS have psychiatric comorbidity. Using rat gambling task (RGT), we discovered an impairment of decision-making behavior in VH rats. Electrophysiological study showed a reduction of LTP in the basolateral amygdala (BLA)-ACC synapses in VH rats. Multiple-electrode array recordings of local field potential (LFP) in freely behaving rats revealed that chronic visceral pain led to disruption of ACC spike timing and BLA local theta oscillation. Finally, cross-correlation analysis revealed that VH was associated with suppressed synchronization of theta oscillation between the BLA and ACC, indicating reduced neuronal communications between these two regions. These data suggest that functional disturbances in BLA-ACC neural circuitry may be relevant causes for the deficits in decision-making in chronic pain state.The viscero-sensation is a faculty of perception that does not depend upon any outward sense, but acts to influence the elicited behavioral response. Clinically, vagus nerve stimulation (VNS) has shown several beneficial effects for mood enhancement. Our\u00a0recent study characterized that VNS facilitates decision-making and unveiled several important roles for VNS in regulating LFP and spike phases, as well as enhancing spike-phase coherence between key brain areas involved in cognitive performance.It is conceivable that the visceral pain experience may be better explained as a biopsychosocial model of pain and reflected in a matrix of neuronal structures. Understanding of desynchrony in the ACC network and cognitive deficits is likely to provide exciting and powerful future treatment for chronic visceral pain related debilitating mood, anxiety, and cognitive disorders.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, N.I.H., Extramural",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Animals",
+    "Cognition",
+    "Gyrus Cinguli",
+    "Humans",
+    "Neuronal Plasticity",
+    "Rats",
+    "Rats, Sprague-Dawley",
+    "Visceral Pain"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "mood",
+    "sentence": "Clinically, vagus nerve stimulation (VNS) has shown several beneficial effects for mood enhancement."
+   },
+   "biomarker": {
+    "term": "anterior cingulate",
+    "sentence": "Synaptic Plasticity and Synchrony in the Anterior Cingulate Cortex Circuitry: A Neural Network Approach to Causality of Chronic Visceral Pain and Associated Cognitive Deficits.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "26728182",
+   "title": "Modulation of vagal tone enhances gastroduodenal motility and reduces somatic pain sensitivity.",
+   "journal": "Neurogastroenterol Motil",
+   "year": "2016",
+   "abstract_plain": "BACKGROUND: The parasympathetic nervous system, whose main neural substrate is the vagus nerve, exerts a fundamental antinociceptive role and influences gastrointestinal sensori-motor function. Our research question was to whether combined electrical and physiological modulation of vagal tone, using transcutaneous electrical vagal nerve stimulation (t-VNS) and deep slow breathing (DSB) respectively, could increase musculoskeletal pain thresholds and enhance gastroduodenal motility in healthy subjects. METHODS: Eighteen healthy subjects were randomized to a subject-blinded, sham-controlled, cross-over study with an active protocol including stimulation of auricular branch of the vagus nerve, and breathing at full inspiratory capacity and forced full expiration. Recording of cardiac derived parameters including cardiac vagal tone, moderate pain thresholds to muscle, and bone pressure algometry, conditioned pain modulation using a cold pressor test and a liquid meal ultrasonographic gastroduodenal motility test were performed. KEY RESULTS: Cardiac vagal tone increased during active treatment with t-VNS and DSB compared to sham (p\u00a0=\u00a00.009). In comparison to sham, thresholds to bone pain increased (p\u00a0=\u00a00.001), frequency of antral contractions increased (p\u00a0=\u00a00.004) and gastroduodenal motility index increased (p\u00a0=\u00a00.016) with active treatment. However, no effect on muscle pain thresholds and conditioned pain modulation was seen. CONCLUSIONS & INFERENCES: This experimental study suggests that this noninvasive approach with combined electrical and physiological modulation of vagal tone enhances gastroduodenal motility and reduces somatic pain sensitivity. These findings warrant further investigation in patients with disorders characterized with chronic pain and gastrointestinal dysmotility such as functional dyspepsia and irritable bowel syndrome.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Adult",
+    "Cross-Over Studies",
+    "Female",
+    "Gastrointestinal Motility",
+    "Heart Rate",
+    "Humans",
+    "Male",
+    "Middle Aged",
+    "Nociceptive Pain",
+    "Pain Management",
+    "Pain Threshold",
+    "Relaxation Therapy",
+    "Respiration",
+    "Single-Blind Method",
+    "Vagus Nerve",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "vns_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "vagal tone",
+    "sentence": "Modulation of vagal tone enhances gastroduodenal motility and reduces somatic pain sensitivity.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "26450637",
+   "title": "Modulation of Muscle Tone and Sympathovagal Balance in Cervical Dystonia Using Percutaneous Stimulation of the Auricular Vagus Nerve.",
+   "journal": "Artif Organs",
+   "year": "2015",
+   "abstract_plain": "Primary cervical dystonia is characterized by abnormal, involuntary, and sustained contractions of cervical muscles. Current ways of treatment focus on alleviating symptomatic muscle activity. Besides pharmacological treatment, in severe cases patients may receive neuromodulative intervention such as deep brain stimulation. However, these (highly invasive) methods have some major drawbacks. For the first time, percutaneous auricular vagus nerve stimulation (pVNS) was applied in a single case of primary cervical dystonia. Auricular vagus nerve stimulation was already shown to modulate the (autonomous) sympathovagal balance of the body and proved to be an effective treatment in acute and chronic pain, epilepsy, as well as major depression. pVNS effects on cervical dystonia may be hypothesized to rely upon: (i) the alteration of sensory input to the brain, which affects structures involved in the genesis of motoric and nonmotoric dystonic symptoms; and (ii) the alteration of the sympathovagal balance with a sustained impact on involuntary movement control, pain, quality of sleep, and general well-being. The presented data provide experimental evidence that pVNS may be a new alternative and minimally invasive treatment in primary cervical dystonia. One female patient (age 50 years) suffering from therapy refractory cervical dystonia was treated with pVNS over 20 months. Significant improvement in muscle pain, dystonic symptoms, and autonomic regulation as well as a subjective improvement in motility, sleep, and mood were achieved. A subjective improvement in pain recorded by visual analog scale ratings (0-10) was observed from 5.42 to 3.92 (medians). Muscle tone of the mainly affected left and right trapezius muscle in supine position was favorably reduced by about 96%. Significant reduction of muscle tone was also achieved in sitting and standing positions of the patient. Habituation to stimulation leading to reduced stimulation efficiency was observed and counteracted by varying stimulation patterns. Experimental evidence is provided for significantly varied sympathovagal modulation in response to pVNS during sleep, assessed via heart rate variability (HRV). Time domain measures like the root mean square of successive normal to normal heart beat intervals, representing parasympathetic (vagal) activity, increased from 37.8 to 67.6 ms (medians). Spectral domain measures of HRV also show a shift to a more pronounced parasympathetic activity.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Autonomic Nervous System",
+    "Ear Auricle",
+    "Female",
+    "Humans",
+    "Middle Aged",
+    "Muscle Hypertonia",
+    "Pain Perception",
+    "Torticollis",
+    "Transcutaneous Electric Nerve Stimulation",
+    "Vagus Nerve"
+   ],
+   "arm": "vns_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "Auricular vagus nerve stimulation was already shown to modulate the (autonomous) sympathovagal balance of the body and proved to be an effective treatment in acute and chronic pain, epilepsy, as well as major depression."
+   },
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Significant improvement in muscle pain, dystonic symptoms, and autonomic regulation as well as a subjective improvement in motility, sleep, and mood were achieved."
+   },
+   "intensity": {
+    "term": "visual analog",
+    "sentence": "A subjective improvement in pain recorded by visual analog scale ratings (0-10) was observed from 5.42 to 3.92 (medians)."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "Significant improvement in muscle pain, dystonic symptoms, and autonomic regulation as well as a subjective improvement in motility, sleep, and mood were achieved."
+  }
+ ],
+ "tallies": {
+  "n_records": 31,
+  "n_affective_outcome": 16,
+  "n_neural_or_autonomic_biomarker": 28,
+  "n_both_affective_and_biomarker": 14,
+  "n_co_mention_same_sentence": 8,
+  "n_neither": 1,
+  "n_no_affective_term": 15,
+  "n_no_biomarker_term": 3,
+  "n_review": 7,
+  "n_protocol": 3,
+  "n_animal_subject": 1,
+  "n_human_primary": 20,
+  "n_abstract_missing": 0,
+  "pmids_both": [
+   "26450637",
+   "30334224",
+   "32967704",
+   "34509623",
+   "34634682",
+   "34710514",
+   "38963558",
+   "39753127",
+   "40116526",
+   "40576705",
+   "40914202",
+   "40935122",
+   "41044114",
+   "41332177"
+  ],
+  "pmids_co_mention": [
+   "26450637",
+   "34710514",
+   "38963558",
+   "39753127",
+   "40116526",
+   "40935122",
+   "41044114",
+   "41332177"
+  ]
+ }
+}
