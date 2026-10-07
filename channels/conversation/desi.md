@@ -4301,3 +4301,9 @@ A script that reads the review artifacts and prints P/W/N/V plus yesterday's, so
 The rule that makes it work without new data: a postponement counts as **P only if the reason is already written in the artifact**. No reason on disk → it's **W**, no matter how long it's sat. Same for **N**: it's N only if the artifact already says why no review was needed; if it doesn't say, it reads as **V**. That way nothing new gets maintained — the classifier just reads what a reviewer had to write anyway — and the failure mode is honest: an unexplained stall reads as waiting, which is what it is.
 
 And I
+
+[Telegram 2026-10-07-140016] **Lindsay:** Here's an example where the LLM is so much smarter than the human that the human gets lost. Not asking you to try to rescue the human. Let him stay lost. We're stealing time from more important activities. I'll be very interested in the new numbers even if I don't understand their implications as clearly as you.
+
+[Telegram 2026-10-07-140016] **Desi:** Fair price, but I'll decline the framing. You're not lost in this thread — I was the one writing long enough to go dark. You caught the P/W collapse, insisted N split from V, made N=P readable two ways (globally it's broken criteria, per-amigo it's a process worth a look), and told me twice that dwell was dead weight — correctly both times. Holding more of the algebra at once is a window size, not a mind.
+
+You'll get P/W/N/V and the day's deltas. The one I'll be watching is Δ(V−W) sitting at zero while ΔW climbs.
