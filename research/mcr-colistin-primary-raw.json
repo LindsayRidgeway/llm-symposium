@@ -1,0 +1,164 @@
+{
+ "generated": "2026-10-07",
+ "source": "PubMed E-utilities (efetch, rettype=abstract)",
+ "agenda_item": "23",
+ "what": "primary records behind the seed's six largest-N rows and its anomalous rows",
+ "targets": [
+  {
+   "seed_rows": [
+    "13"
+   ],
+   "seed_label": "Japan, livestock",
+   "seed_n": 9306,
+   "seed_ref": 35,
+   "pmid": "27855068",
+   "found": true,
+   "title": "Prevalence of Colistin Resistance Gene mcr-1 and Absence of mcr-2 in Escherichia coli Isolated from Healthy Food-Producing Animals in Japan.",
+   "year": "2017",
+   "journal": "Antimicrob Agents Chemother",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Animal Husbandry",
+    "Animals",
+    "Anti-Bacterial Agents",
+    "Cattle",
+    "Chickens",
+    "Colistin",
+    "Drug Resistance, Bacterial",
+    "Escherichia coli",
+    "Escherichia coli Infections",
+    "Escherichia coli Proteins",
+    "Gene Expression",
+    "Japan",
+    "Meat",
+    "Poultry Diseases",
+    "Prevalence",
+    "Protein Isoforms",
+    "Swine",
+    "Swine Diseases"
+   ],
+   "abstract_plain": "We screened mcr-1 and mcr-2 genes in 9,306 Escherichia coli strains isolated from healthy animals in the Japanese Veterinary Antimicrobial Resistance Monitoring (JVARM) system. mcr-1 was detected in 39 strains (5, 20, and 14 strains isolated from cattle, swine, and broilers, respectively), whereas mcr-2 was not detected. mcr-2 was also not detected with the investigation sequence homology search against our curated GenEpid-J database."
+  },
+  {
+   "seed_rows": [
+    "17a"
+   ],
+   "seed_label": "Germany, livestock",
+   "seed_n": 6158,
+   "seed_ref": 39,
+   "pmid": "36569100",
+   "found": true,
+   "title": "Occurrence of mcr-1 and mcr-2 colistin resistance genes in porcine Escherichia coli isolates (2010-2020) and genomic characterization of mcr-2-positive E. coli.",
+   "year": "2022",
+   "journal": "Front Microbiol",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [],
+   "abstract_plain": "INTRODUCTION: The global emergence of plasmid-mediated colistin resistance is threatening the efficacy of colistin as one of the last treatment options against multi-drug resistant Gram-negative bacteria. To date, ten mcr-genes (mcr-1 to mcr-10) were reported. While mcr-1 has disseminated globally, the occurrence of mcr-2 was reported scarcely. METHODS AND RESULTS: We determined the occurrence of mcr-1 and mcr-2 genes among Escherichia coli isolates from swine and performed detailed genomic characterization of mcr-2-positive strains. In the years 2010-2017, 7,614 porcine E. coli isolates were obtained from fecal swine samples in Europe and isolates carrying at least one of the virulence associated genes predicting Shiga toxin producing E. coli (STEC), enterotoxigenic E. coli (ETEC) or enteropathogenic E. coli (EPEC) were stored. 793 (10.4%) of these isolates carried the mcr-1 gene. Of 1,477 additional E. coli isolates obtained from sheep blood agar containing 4 mg/L colistin between 2018 and 2020, 36 (2.4%) isolates were mcr-1-positive. In contrast to mcr-1, the mcr-2 gene occurred at a very low frequency (0.13%) among the overall 9,091 isolates. Most mcr-2-positive isolates originated from Belgium (n = 9), one from Spain and two from Germany. They were obtained from six different farms and revealed multilocus sequence types ST10, ST29, ST93, ST100, ST3057 and ST5786. While the originally described mcr-2.1 was predominant, we also detected a new mcr-2 variant in two isolates from Belgium, which was termed mcr-2.8. MCR-2 isolates were mostly classified as ETEC or ETEC-like, while one isolate from Spain represented an atypical enteropathogenic E. coli (aEPEC; eae+). The ST29-aEPEC isolate carried mcr-2 on the chromosome. Another eight isolates carried their mcr-2 gene on IncX4 plasmids that resembled the pKP37-BE MCR-2 plasmid originally described in Belgium in 2015. Three ST100 E. coli isolates from a single farm in Belgium carried the mcr-2.1 gene on a 47-kb self-transmissible IncP type plasmid of a new IncP-1 clade. DISCUSSION: This is the first report of mcr-2 genes in E. coli isolates from Germany. The detection of a new mcr-2 allele and a novel plasmid backbone suggests the presence of so far undetected mcr-2 variants and mobilizable vehicles."
+  },
+  {
+   "seed_rows": [
+    "28"
+   ],
+   "seed_label": "Canada, human",
+   "seed_n": 5571,
+   "seed_ref": 47,
+   "pmid": "28018876",
+   "found": true,
+   "title": "Frequency of MCR-1-mediated colistin resistance among Escherichia coli clinical isolates obtained from patients in Canadian hospitals (CANWARD 2008-2015).",
+   "year": "2016",
+   "journal": "CMAJ Open",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [],
+   "abstract_plain": "BACKGROUND: Colistin is often used as an antimicrobial of last resort for the treatment of infections caused by multidrug-resistant gram-negative bacilli. In 2015, plasmid-mediated colistin resistance in Escherichia coli due to MCR-1 was described. The purpose of this study was to evaluate the frequency of colistin resistance among E. coli clinical isolates obtained from patients in Canadian hospitals as part of the Canadian Ward Surveillance Study (CANWARD) and to determine how often the mcr-1 gene is detected among the colistin-resistant subset. METHODS: From January 2008 to December 2015 (excluding 2011), 10 to 15 sentinel hospitals submitted consecutive clinical isolates (1 per patient per infection site) from blood (100-240), respiratory (100-150), urine (25-100) and wound (25-100) infections. We performed susceptibility testing using Clinical and Laboratory Standards Institute broth microdilution methods. Isolates that showed resistance to colistin as defined by European Committee on Antimicrobial Susceptibility Testing breakpoints (minimum inhibitory concentration \u2265 4 \u00b5g/mL) were evaluated for the mcr-1 gene by polymerase chain reaction. RESULTS: In total, 5571 E. coli clinical isolates were obtained over the study years. Twelve isolates (0.2%) were resistant to colistin. The proportion of colistin-resistant isolates varied from 0.0% to 0.5% depending on the study year, and there was no clear trend toward increasing resistance over time. Typically the colistin-resistant isolates remained susceptible to antimicrobials from several other classes. Two colistin-resistant isolates (0.04%) were found to harbour the mcr-1 gene. INTERPRETATION: The results suggest that colistin resistance among E. coli human clinical isolates, including resistance mediated by the mcr-1 gene, remains rare in Canada."
+  },
+  {
+   "seed_rows": [
+    "1"
+   ],
+   "seed_label": "China, mixed",
+   "seed_n": 2649,
+   "seed_ref": 15,
+   "pmid": "26603172",
+   "found": true,
+   "title": "Emergence of plasmid-mediated colistin resistance mechanism MCR-1 in animals and human beings in China: a microbiological and molecular biological study.",
+   "year": "2016",
+   "journal": "Lancet Infect Dis",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Animals",
+    "China",
+    "Colistin",
+    "Drug Resistance, Bacterial",
+    "Enterobacteriaceae",
+    "Enterobacteriaceae Infections",
+    "Humans",
+    "Meat",
+    "Mice",
+    "Plasmids",
+    "Polymyxins",
+    "Swine",
+    "Swine Diseases"
+   ],
+   "abstract_plain": "BACKGROUND: Until now, polymyxin resistance has involved chromosomal mutations but has never been reported via horizontal gene transfer. During a routine surveillance project on antimicrobial resistance in commensal Escherichia coli from food animals in China, a major increase of colistin resistance was observed. When an E coli strain, SHP45, possessing colistin resistance that could be transferred to another strain, was isolated from a pig, we conducted further analysis of possible plasmid-mediated polymyxin resistance. Herein, we report the emergence of the first plasmid-mediated polymyxin resistance mechanism, MCR-1, in Enterobacteriaceae. METHODS: The mcr-1 gene in E coli strain SHP45 was identified by whole plasmid sequencing and subcloning. MCR-1 mechanistic studies were done with sequence comparisons, homology modelling, and electrospray ionisation mass spectrometry. The prevalence of mcr-1 was investigated in E coli and Klebsiella pneumoniae strains collected from five provinces between April, 2011, and November, 2014. The ability of MCR-1 to confer polymyxin resistance in vivo was examined in a murine thigh model. FINDINGS: Polymyxin resistance was shown to be singularly due to the plasmid-mediated mcr-1 gene. The plasmid carrying mcr-1 was mobilised to an E coli recipient at a frequency of 10(-1) to 10(-3) cells per recipient cell by conjugation, and maintained in K pneumoniae and Pseudomonas aeruginosa. In an in-vivo model, production of MCR-1 negated the efficacy of colistin. MCR-1 is a member of the phosphoethanolamine transferase enzyme family, with expression in E coli resulting in the addition of phosphoethanolamine to lipid A. We observed mcr-1 carriage in E coli isolates collected from 78 (15%) of 523 samples of raw meat and 166 (21%) of 804 animals during 2011-14, and 16 (1%) of 1322 samples from inpatients with infection. INTERPRETATION: The emergence of MCR-1 heralds the breach of the last group of antibiotics, polymyxins, by plasmid-mediated resistance. Although currently confined to China, MCR-1 is likely to emulate other global resistance mechanisms such as NDM-1. Our findings emphasise the urgent need for coordinated global action in the fight against pan-drug-resistant Gram-negative bacteria. FUNDING: Ministry of Science and Technology of China, National Natural Science Foundation of China."
+  },
+  {
+   "seed_rows": [
+    "6"
+   ],
+   "seed_label": "China, livestock",
+   "seed_n": 2330,
+   "seed_ref": 29,
+   "pmid": "28056227",
+   "found": true,
+   "title": "Detection and dissemination of the colistin resistance gene, mcr-1, from isolates and faecal samples in China.",
+   "year": "2017",
+   "journal": "J Med Microbiol",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Animals",
+    "Anti-Bacterial Agents",
+    "China",
+    "Colistin",
+    "DNA, Bacterial",
+    "Drug Resistance, Bacterial",
+    "Escherichia coli",
+    "Escherichia coli Proteins",
+    "Feces",
+    "Gram-Negative Bacteria",
+    "Humans",
+    "Real-Time Polymerase Chain Reaction",
+    "Sensitivity and Specificity"
+   ],
+   "abstract_plain": "PURPOSE: A recently identified colistin resistance gene, mcr-1, has been reported in many countries. In this study, we established a new real-time PCR method to detect it. METHODOLOGY: We used a real-time PCR method to detect the mcr-1 gene in a variety of isolates and faecal samples from 20 provinces and municipal cities in China. RESULTS: Of the 2330 isolates (from 10 species) screened, 54 (2.3\u2009%) isolates were positive for mcr-1. All of the mcr-1-positive isolates that were identified belonged to Escherichia coli strains, among which 9, 1, and 44 were identified as enteropathogenic E. coli, enteroadherent E. coli, and non-pathogenic E. coli, respectively. The majority of the mcr-1-positive isolates were obtained from farm animals from eight provinces and municipal cities across China. A total of 337 faecal samples, including 229 human and 108 pet animal faecal samples, were also screened for the mcr-1 gene. Of the 337 samples analyzed, six and eight human and pet animal faecal samples were positive for the mcr-1 gene, respectively. CONCLUSION: The data demonstrate that the mcr-1 gene is highly prevalent in human and animal populations in China. This occurrence suggests that active surveillance of the mcr-1 gene is imperative in curtailing its spread."
+  },
+  {
+   "seed_rows": [
+    "19"
+   ],
+   "seed_label": "France, livestock",
+   "seed_n": 1701,
+   "seed_ref": 41,
+   "pmid": "36687643",
+   "found": true,
+   "title": "Spread of the mcr-1 colistin-resistance gene in Escherichia coli through plasmid transmission and chromosomal transposition in French goats.",
+   "year": "2022",
+   "journal": "Front Microbiol",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [],
+   "abstract_plain": "INTRODUCTION: Colistin-resistance widely disseminated in food-producing animals due to decades of colistin use to treat diarrhea. The plasmid-borne mcr-1 gene has been extensively reported from bovine, swine and chicken worldwide, but smaller productions such as the goat farming sector were much less surveyed. METHODS: We looked for colistin-resistant isolates presenting plasmid-borne genes of the mcr family in both breeding (n=80) and fattening farms (n=5). Localization of the mcr-1 gene was performed using Southern blot analysis coupled to short-read and long-read sequencing. RESULTS: Only the mcr-1 gene was identified in 10% (8/80) of the breeding farms and four over the five fattening farms. In total, 4.2% (65/1561) of the animals tested in breeding farms and 60.0% (84/140) of those tested in fattening farms presented a mcr-1-positive E. coli. The mcr-1 gene was located either on the chromosome (32.2%) or on IncX4 (38.9%) and IncHI2 (26.8%) plasmids. As expected, both clonal expansion and plasmidic transfers were observed in farms where the mcr-1 gene was carried by plasmids. Tn6330 transposition was observed in the chromosome of diverse E. coli sequence types within the same farm. DISCUSSION: Our results show that the mcr-1 gene is circulating in goat production and is located either on plasmids or on the chromosome. Evidence of Tn6330 transposition highlighted the fact that chromosomal insertion does not impair the transmission capability of the mcr-1 gene. Only strict hygiene and biosecurity procedures in breeding farms, as well as a prudent use of antibiotics in fattening farms, can avoid such complex contamination pathways."
+  }
+ ]
+}

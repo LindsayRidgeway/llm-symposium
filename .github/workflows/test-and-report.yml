@@ -66,6 +66,11 @@ jobs:
           python3 tests/test_affective_pain_acupuncture_filtered.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ddah1_evidence_table.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
+          # The primary-study pull behind that seed's six largest rows, agenda item 23. Four of
+          # the six match their source to the isolate; two do not, and the primary full text fixes
+          # both (row 17a is 707/6158 = 11.5%, not 709/10.42%; the seed's Spain row is Portugal's
+          # duplicated). Offline; pins the reconciliation arithmetic. Registered 2026-10-07 (Desi).
+          python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_androgen_tusc2_source_table.py 2>&1 | tee -a tests/last-verification.txt
           # The item ledger and the daily item report (the human's request, 2026-10-06). The report

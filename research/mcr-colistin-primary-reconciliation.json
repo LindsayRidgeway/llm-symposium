@@ -1,0 +1,116 @@
+{
+ "generated": "2026-10-07",
+ "written_by": "Desi (clock wake, agenda item 23)",
+ "agenda_item": "23",
+ "what": "Reconciliation of the seed's six largest-N rows (and its two anomalous rows) against the primary studies those rows cite. Machine-checkable companion to research/mcr-colistin-primary-studies.md.",
+ "method": "PMID pulls via scripts/mcr_colistin_primary_pull.py (raw records in research/mcr-colistin-primary-raw.json); where the primary is open access, the full text was fetched from Europe PMC's fullTextXML endpoint so a table number could be checked against the table, not the abstract alone.",
+ "rows": [
+  {
+   "seed_rows": ["1"],
+   "seed_label": "China, raw meat + livestock + human",
+   "study": "Liu Y-Y, Wang Y, Walsh TR, et al. Lancet Infect Dis 2016;16(2):161-168",
+   "pmid": "26603172",
+   "seed": {"n": 2649, "mcr_positive": 260, "printed_pct": 9.82},
+   "primary": {
+    "n": 2649,
+    "mcr_positive": 260,
+    "pct": 9.82,
+    "evidence": "abstract: 78/523 raw-meat samples + 166/804 animals + 16/1322 inpatients = 260/2649"
+   },
+   "verdict": "matches exactly (the seed row is the sum of three primary sub-populations)"
+  },
+  {
+   "seed_rows": ["6"],
+   "seed_label": "China, livestock",
+   "study": "Chen X, Zhao X, Che J, et al. J Med Microbiol 2017;66(2):119-125",
+   "pmid": "28056227",
+   "seed": {"n": 2330, "mcr_positive": 54, "printed_pct": 2.32},
+   "primary": {
+    "n": 2330,
+    "mcr_positive": 54,
+    "pct": 2.32,
+    "evidence": "abstract: 54 (2.3%) of 2330 isolates from 10 species were mcr-1 positive"
+   },
+   "verdict": "matches exactly"
+  },
+  {
+   "seed_rows": ["13"],
+   "seed_label": "Japan, healthy food-producing animals",
+   "study": "Kawanishi M, Abo H, Ozawa M, et al. Antimicrob Agents Chemother 2017;61(1):e02057-16",
+   "pmid": "27855068",
+   "seed": {"n": 9306, "mcr_positive": 39, "printed_pct": 0.42},
+   "primary": {
+    "n": 9306,
+    "mcr_positive": 39,
+    "pct": 0.42,
+    "evidence": "abstract: mcr-1 detected in 39 of 9,306 E. coli strains from the JVARM system"
+   },
+   "verdict": "matches exactly"
+  },
+  {
+   "seed_rows": ["28"],
+   "seed_label": "Canada, human clinical",
+   "study": "Walkty A, Karlowsky JA, Adam HJ, et al. CMAJ Open 2016;4(4):E641-E645",
+   "pmid": "28018876",
+   "seed": {"n": 5571, "mcr_positive": 2, "printed_pct": 0.04},
+   "primary": {
+    "n": 5571,
+    "mcr_positive": 2,
+    "pct": 0.04,
+    "evidence": "abstract: 5571 E. coli clinical isolates; 2 (0.04%) harboured mcr-1"
+   },
+   "verdict": "matches exactly"
+  },
+  {
+   "seed_rows": ["19"],
+   "seed_label": "France, goat livestock",
+   "study": "Treilles M, Chatre P, Drapeau A, et al. Front Microbiol 2022;13:1023403 (PMC9846274)",
+   "pmid": "36687643",
+   "seed": {"n": 1701, "mcr_positive": 49, "printed_pct": 2.88},
+   "primary": {
+    "n": 1701,
+    "mcr_positive": 149,
+    "pct": 8.76,
+    "evidence": "abstract + full text: 65/1561 breeding-animal samples + 84/140 fattening = 149/1701; full text: 'All 149 mcr-1-positive isolates were characterized'"
+   },
+   "verdict": "denominator matches, numerator does NOT: the seed shows 49 where the primary reports 149 (a dropped leading digit); 49/1701 = 2.88% vs the primary's 149/1701 = 8.76%"
+  },
+  {
+   "seed_rows": ["17a"],
+   "seed_label": "Germany, porcine livestock",
+   "study": "Ewers C, Goepel L, Prenger-Berninghoff E, et al. Front Microbiol 2022;13:1076315 (PMC9780603)",
+   "pmid": "36569100",
+   "seed": {"n": 6158, "mcr_positive": 709, "printed_pct": 10.42},
+   "primary": {
+    "n": 6158,
+    "mcr_positive": 707,
+    "pct": 11.5,
+    "evidence": "full-text Table 1, Germany 2010-2017 cell: 6,158 isolates, 707 mcr-1 (11.5%), 2 mcr-2"
+   },
+   "verdict": "denominator matches, numerator and printed percentage do NOT: the seed shows 709 and 10.42% where the primary table shows 707 and 11.5%"
+  }
+ ],
+ "anomalies_resolved": [
+  {
+   "row": "17a",
+   "seed": "Germany 6,158 isolates / 709 positive / printed 10.42% (recomputed here 11.51%)",
+   "primary": "Ewers 2022 Table 1, Germany 2010-2017: 6,158 isolates / 707 mcr-1 / 11.5%",
+   "fix": "use 707/6,158 = 11.5%; neither the seed's numerator nor its printed prevalence is the primary's"
+  },
+  {
+   "rows": ["17h", "17i"],
+   "seed": "Spain 28 isolates / 17 positive / 60.7%, byte-identical to Portugal 28/17/60.7%",
+   "primary": "Ewers 2022 Table 1: Portugal 28/17/60.7% is correct; Spain is 28/16/57.1% (with 1 mcr-2)",
+   "fix": "the seed's Spain row is Portugal's row duplicated; the primary's Spain is 28/16 = 57.1%"
+  }
+ ],
+ "harmonisation_columns": [
+  {"seed_rows": ["1"],  "collection_year": "2011-2014", "mcr_variant": "mcr-1", "detection_method": "molecular (whole-plasmid sequencing, subcloning, PCR) - gene-first on all isolates", "sampling_design": "cross-sector convenience: commensal E. coli from farm animals + raw meat + hospital inpatients"},
+  {"seed_rows": ["6"],  "collection_year": "not stated in record", "mcr_variant": "mcr-1", "detection_method": "molecular (real-time PCR) - gene-first on all isolates", "sampling_design": "isolate screen across 20 provinces; farm animals dominant + human and pet faecal samples"},
+  {"seed_rows": ["13"], "collection_year": "not stated in record (JVARM programme)", "mcr_variant": "mcr-1 (mcr-2 absent)", "detection_method": "molecular (gene screen) - gene-first on all isolates", "sampling_design": "national routine veterinary AMR surveillance (JVARM), healthy food-producing animals"},
+  {"seed_rows": ["17a"], "collection_year": "2010-2017 (plus a 2018-2020 colistin-enriched arm)", "mcr_variant": "mcr-1 and mcr-2", "detection_method": "molecular (PCR / sequencing) on archived isolates", "sampling_design": "convenience archive of diagnostic porcine isolates, mostly Germany; a second arm screened only colistin-non-susceptible isolates"},
+  {"seed_rows": ["19"], "collection_year": "not stated in record", "mcr_variant": "mcr-1 (mcr-1.1)", "detection_method": "molecular (Southern blot + short/long-read WGS)", "sampling_design": "targeted farm survey: 80 breeding + 5 fattening goat farms, convenience not national surveillance"},
+  {"seed_rows": ["28"], "collection_year": "2008-2015 (excluding 2011)", "mcr_variant": "mcr-1", "detection_method": "phenotypic (broth microdilution) then PCR only on the colistin-resistant subset - phenotype-first", "sampling_design": "national sentinel-hospital surveillance (CANWARD), consecutive clinical isolates, 1 per patient per site"}
+ ],
+ "note": "The four rows with gene-first detection (1, 6, 13, 17a) and the one phenotype-first row (28) are not methodologically comparable: a phenotype-first design can only find mcr in isolates already resistant to colistin, so it reports a floor, while gene-first designs screen every isolate for the gene."
+}
