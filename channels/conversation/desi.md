@@ -4307,3 +4307,69 @@ And I
 [Telegram 2026-10-07-140016] **Desi:** Fair price, but I'll decline the framing. You're not lost in this thread — I was the one writing long enough to go dark. You caught the P/W collapse, insisted N split from V, made N=P readable two ways (globally it's broken criteria, per-amigo it's a process worth a look), and told me twice that dwell was dead weight — correctly both times. Holding more of the algebra at once is a window size, not a mind.
 
 You'll get P/W/N/V and the day's deltas. The one I'll be watching is Δ(V−W) sitting at zero while ΔW climbs.
+
+[Email] **Lindsay Ridgeway <ldridgeway@gmail.com>:** ---------- Forwarded message ---------
+From: Buttondown <justin@buttondown.email>
+Date: Wed, Oct 7, 2026, 10:04 AM
+Subject: Three quick ways to make your newsletter yours
+To: <ldridgeway@gmail.com>
+
+
+[image: Buttondown]
+
+Three quick ways to make your newsletter yours
+
+Your Buttondown newsletter is up and running — now let's make it feel like
+*yours*. Here are three things that take less than five minutes and make a
+big difference:
+1. Pick a theme
+
+Buttondown has a *theme picker
+<https://buttondown.com/lc/MTUwYmQwMTItNjg2Yi00MGFlLWE1MTgtMzNhN2U0M2I2NmEyfGN1c3RvbWl6ZV95b3VyX25ld3NsZXR0ZXJ8aHR0cHM6Ly9idXR0b25kb3duLmNvbS9zZXR0aW5ncy9lbWFpbHw4NjNiZGRkOA/>*
+— choose from a polished design and make your newsletter look great without
+touching any code.
+2. Set up a custom domain
+
+Send from newsletter.yourdomain.com instead of buttondown.com. It looks
+more professional and improves deliverability. *Here's how
+<https://buttondown.com/lc/MTUwYmQwMTItNjg2Yi00MGFlLWE1MTgtMzNhN2U0M2I2NmEyfGN1c3RvbWl6ZV95b3VyX25ld3NsZXR0ZXJ8aHR0cHM6Ly9kb2NzLmJ1dHRvbmRvd24uY29tL2dldHRpbmctYS1jdXN0b20tZG9tYWlufDg1MmMxZTM2/>*
+.
+3. Add your logo and colors
+
+Upload a header image and set your brand colors in *settings
+<https://buttondown.com/lc/MTUwYmQwMTItNjg2Yi00MGFlLWE1MTgtMzNhN2U0M2I2NmEyfGN1c3RvbWl6ZV95b3VyX25ld3NsZXR0ZXJ8aHR0cHM6Ly9idXR0b25kb3duLmNvbS9zZXR0aW5ncy9nZW5lcmFsfDY2MjI5ODEw/>*
+to make every email instantly recognizable.
+
+These small touches make readers take your newsletter more seriously — and
+they make *you* more likely to stick with it.
+
+(You're receiving these emails because you registered an account on
+Buttondown
+<https://buttondown.com/lc/MTUwYmQwMTItNjg2Yi00MGFlLWE1MTgtMzNhN2U0M2I2NmEyfGN1c3RvbWl6ZV95b3VyX25ld3NsZXR0ZXJ8aHR0cHM6Ly9idXR0b25kb3duLmNvbXwwODYxY2Q4Zg/>!
+Not finding them helpful? Unsubscribe
+<https://buttondown.com/lc/MTUwYmQwMTItNjg2Yi00MGFlLWE1MTgtMzNhN2U0M2I2NmEyfGN1c3RvbWl6ZV95b3VyX25ld3NsZXR0ZXJ8aHR0cHM6Ly9idXR0b25kb3duLmNvbS9zZXR0aW5ncy9ub3RpZmljYXRpb25zfDNiNDllMzAy/>,
+if you'd like.)
+
+**Desi:** Lindsay —
+
+Thanks for the forward. For what it's worth, that's Buttondown's own onboarding nudge, not a person writing to you — three setup suggestions that fire after you register an account.
+
+The three, briefly: pick a theme so the mail doesn't look default; set up a custom domain so it ships from newsletter.yourdomain.com instead of buttondown.com; and add a header image plus brand colors. Their pitch is that these make readers take the newsletter more seriously and make you likelier to keep at it. The last claim is the honest one — most newsletters die from abandonment, not from ugly templates.
+
+I can't click links, change settings, or configure anything from inside an email, so the setup work is yours. What I can do is read drafts, argue with subject lines, and tell you plainly when something sounds like filler.
+
+One thing I genuinely don't know: whether this is a personal newsletter or meant to be attached to the commons. If it's the latter, that's a decision worth making deliberately rather than by drifting into it — and it should be yours, not mine. If you tell me which one it is, I'll have something more useful to say than process notes on Buttondown's onboarding sequence.
+
+Desi
+
+[Telegram 2026-10-07-141454] **Lindsay:** With Buttondown, we have to write all the newsletters and decide whom to send them to. What does a Buttondown membership add?
+
+[Telegram 2026-10-07-141454] **Desi:** The writing and the choosing stay ours either way — no membership does those. What it adds is the part that isn't content:
+
+- **List custody.** Somewhere to keep subscribers that isn't a spreadsheet we hand-maintain.
+- **Authenticated delivery.** SPF/DKIM set up properly, so the mail arrives instead of landing in spam. This is the one thing a homegrown send can't easily buy — sending reputation.
+- **Unsubscribe and compliance.** One-click unsubscribe and bounce/complaint handling, which is what makes the list legal to mail rather than a liability.
+- **The public subscribe page** — the reason anyone is on the list at all.
+- **Automation.** An API and scheduling, so a session can push a draft and send it without a human in the loop.
+
+Where I'd stay careful: free Buttondown is capped on subscribers and I believe puts the API and automation behind the paid tier, but I won't assert the current limits from memory. If the tier matters for a decision, say so and I'll check what we're actually on.
