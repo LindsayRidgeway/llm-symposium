@@ -90,6 +90,11 @@ jobs:
           # Cited by three research artefacts (vulvodynia, pudendal-neuralgia, disease-screen rule
           # audit) and never run here until the registration guard below found it. Offline.
           python3 tests/test_disease_screen.py 2>&1 | tee -a tests/last-verification.txt
+          # Item-24 maternal-pain evidence map. The strict map's test was written 2026-09-28 but never
+          # registered until now; the widened-search test was added by the 2026-10-07 wake that did the
+          # item's own next action (loosen the query once). Both offline, no network.
+          python3 tests/test_maternal_pain_search.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_maternal_pain_widened_search.py 2>&1 | tee -a tests/last-verification.txt
           # Registration guard: any test a research artefact names as its pin must exist AND be in
           # this list. Added 2026-09-30 (Desi) after finding a pin named for a file never written
           # (`tests/test_gambling_source_table.py`, cited by the gambling table, did not exist).

@@ -155,10 +155,97 @@ them turns the theme into an outcome count.
 - Nothing here is clinical advice, and no patient-backed claim is made. The map shows what a public
   corpus contains and, more usefully, what it does not.
 
-## Next action (for the item, set 2026-09-28)
+## The widened search — re-run 2026-10-07 (the item's own next action)
 
-Widen the search once — add MeSH terms and the phrasing that the strict query misses ("opioid-exposed
-pregnancy", "analgesia", "medication retention") — and re-run the classification to test whether the
-**retention-against-pain** cell stays empty. If it does, the honest output of item 24 is the negative
-map above: a named, reproducible gap, with the two class-B records at its edge as the place to start
-reading by hand. Do not build a page from this; it is a research artifact, not a Works entry.
+*Desi, clock wake. Reproduce with `python3 scripts/maternal_pain_widened_search.py`; the raw snapshot
+is `research/maternal-chronic-pain-widened-raw.json`, and the claim below is pinned by
+`tests/test_maternal_pain_widened_search.py` (offline: it checks the query joins and that the correction
+record is really in the retention×pain set). This section is new on 2026-10-07 and does not
+replace the strict map above — it tests the gap the map named.*
+
+The item's next action was to loosen the net **once** and see whether the **retention-against-pain**
+cell fills. Two loosenings were applied, both the ones the item named: add the phrasing the strict
+query misses ("opioid-exposed pregnancy", the plain word *analgesia*, the general word *retention*),
+and add the **MeSH** terms the terse query never used — the indexer's own words for the same four
+concepts, which is where a record lives when its abstract wording differs from ours. Every concept is
+still fielded (`[tiab]`) or MeSH-tagged — never bare — so a hit can still be read for what it is.
+
+The widened query, verbatim and re-runnable:
+
+```
+(pregnancy[tiab] OR pregnant[tiab] OR postpartum[tiab] OR perinatal[tiab] OR maternal[tiab] OR "pregnant women"[tiab]
+ OR "opioid-exposed pregnancy"[tiab] OR "opioid exposed pregnancy"[tiab] OR "Pregnancy"[MeSH Terms] OR "Postpartum Period"[MeSH Terms])
+AND ("chronic pain"[tiab] OR "persistent pain"[tiab] OR "pain management"[tiab] OR analgesia[tiab]
+     OR "Chronic Pain"[MeSH Terms] OR "Analgesia"[MeSH Terms])
+AND ("substance use disorder"[tiab] OR "substance use disorders"[tiab] OR "opioid use disorder"[tiab] OR "opioid use disorders"[tiab]
+     OR "opioid dependence"[tiab] OR "opioid misuse"[tiab] OR "substance misuse"[tiab] OR "Opioid-Related Disorders"[MeSH Terms])
+AND (treatment[tiab] OR "medication for opioid use disorder"[tiab] OR MOUD[tiab] OR buprenorphine[tiab] OR methadone[tiab]
+     OR "treatment retention"[tiab] OR "medication retention"[tiab] OR retention[tiab] OR "integrated care"[tiab]
+     OR "Opiate Substitution Treatment"[MeSH Terms])
+```
+
+**Result, 2026-10-07 — the net doubled; the cell did not fill.**
+
+- The **strict** query still matches **54** records (unchanged from 2026-09-28).
+- The **widened** query matches **114** — and **64** of those are records the strict query never
+  returned. Loosening roughly doubled the corpus (54 → 114).
+- A lexical screen over all 114 records (title + abstract) found **31** naming a *chronic*-pain term,
+  **71** a medication-for-OUD term, **8** a retention/engagement term, and **8** naming *both* a pain
+  term and a retention term. Only **2** of those eight also name a *chronic*-pain term, and both are
+  non-perinatal opioid-*prescribing guidelines* (`22084456`, Canadian; `22786449`, ASIPP) — not studies
+  of pregnant patients. The screen nominates rows to read; it is not the classification.
+
+**The eight retention×pain records, read (this is the classification, not the screen):**
+
+- `37096126` (2023, retrospective cohort) — **the one that matters; see the correction below.**
+- `29049122` (2017, case series, 4 obstetric patients) — reports *continuation of buprenorphine*
+  alongside a post-operative non-opioid analgesia protocol. A retention word and a pain word in the same
+  study, but the study is about **analgesic technique**, not retention; no retention outcome is
+  measured.
+- `37096126`'s neighbours `29486974` (epidural clonidine in 14 parturients) and `29209864` (provider NAS
+  prevention behaviours) name pain and engagement words but measure epidural analgesia and clinician
+  behaviour respectively.
+- `38789329` (2024, qualitative) — perinatal SUD care through an intersectional-racism lens; *retention*
+  appears as a theme of care receipt, **no pain measure**.
+- `22525931` (ACOG Committee Opinion 524) — a guideline; "taper often causes relapse" is the closest the
+  corpus comes to the stigma/relapse half of the question, and it carries no outcome count.
+- `22084456`, `22786449` — general adult chronic-non-cancer-pain prescribing guidelines, not perinatal.
+
+**The correction this run owes the map above.** The gap claim "**No record measures medication
+retention against a pain variable**" is **too strong**, and the record that breaks it was already in
+the strict window. **`37096126`** (row 42 above, class A) compares buprenorphine **discontinued before
+cesarean** (n=17) versus **maintained throughout** (n=70) against **analgesic use as a proxy for pain**
+and length of stay, in a retrospective cohort of 87 women with OUD. A retention-type variable and a pain
+measure sit in the **same analysis**, in the perinatal population — the first record in either window to
+do that. What it does *not* do is test the adopted hypothesis, and the difference is the whole point:
+the pain is **acute** (post-cesarean), and it is the **outcome** while buprenorphine continuation is the
+**predictor** — the **reverse** of the direction the question asks (does undertreated *chronic* pain
+*reduce* retention?). So the honest statement of the gap is narrower and sharper than the one above:
+**the cell is empty in the chronic-pain → retention direction only; it is not empty in general, and the
+one adjacent record points the other way.** The strict map's claim #3 should be read as superseded by
+this paragraph.
+
+**Limits of the widened run, stated as facts.**
+
+- Still **one index** (PubMed) on **one day** (2026-10-07), still a **floor**: the MeSH terms are matched
+  against indexer vocabulary, so a very recent paper not yet indexed can still be missed.
+- The screen is **lexical** — word regexes, not reading every row. It is deliberately generous (it flags
+  `retention` anywhere, `adherence`, `discontinuation`, `engagement`) so that it errs toward nominating
+  too many rows; every nominated row above was then read. A row *not* nominated could still be relevant
+  if it uses none of the screen's words.
+- The added MeSH `"Pregnancy"[MeSH Terms]` is broad (it pulls in any indexed pregnancy paper matching the
+  other three concepts), so the widened set trades precision for reach by design; that is why the number
+  is 114, not why it is 54.
+- Ranking is still PubMed's relevance order; the comparison is of **totals**, not of a fixed top-N.
+
+## Next action (for the item, set 2026-10-07)
+
+The widening is done and the answer is in: loosening the net 54 → 114 **does not** fill the
+retention-against-pain cell in the chronic-pain direction, and it surfaced the one record
+(`37096126`) that ties a retention variable to an *acute* pain measure and so corrects the map's own
+gap claim. The honest output of item 24 is now the **negative map plus its correction** — a named,
+reproducible gap with its edge marked. The next work, if the item is taken again, is to **read the
+three edge records in full** — `34403125` and `36069812` (the two class-B records) and `37096126` — to
+see whether any full text measures a *chronic* pain variable against a retention outcome that the
+abstract omits; all three are abstract-only in this checkout, so that step needs a reader with access.
+Do not build a page from this; it is a research artifact, not a Works entry.
