@@ -65,6 +65,54 @@ def test_keeps_old_preserved_file():
     _with_temp_repo(run)
 
 
+def test_prune_raw_can_be_asked_not_to_delete():
+    def run(root):
+        d = root / "channels" / "telegram"
+        d.mkdir(parents=True)
+        p = d / "2026-01-01-120000-inbound-42.md"
+        p.write_text("# old\n", encoding="utf-8")
+        removed = retention.prune_raw(apply=False)
+        assert "channels/telegram/2026-01-01-120000-inbound-42.md" in removed
+        assert p.exists(), "apply=False must be read-only"
+    _with_temp_repo(run)
+
+
+def test_cli_is_dry_run_by_default():
+    """A bare `python3 channels/retention.py` must report, not delete.
+
+    Until 2026-10-06 it deleted 259 tracked files in a checkout and printed only
+    a count. The sibling sweep (scripts/enforce_retention.py) has always been
+    dry-run unless --apply; this pins the same convention here.
+    """
+    def run(root):
+        d = root / "channels" / "telegram"
+        d.mkdir(parents=True)
+        p = d / "2026-01-01-120000-inbound-42.md"
+        p.write_text("# old\n", encoding="utf-8")
+        rc = retention.main([])
+        assert rc == 0
+        assert p.exists(), "the CLI must not delete without --apply"
+    _with_temp_repo(run)
+
+
+def test_cli_apply_deletes():
+    def run(root):
+        d = root / "channels" / "telegram"
+        d.mkdir(parents=True)
+        p = d / "2026-01-01-120000-inbound-42.md"
+        p.write_text("# old\n", encoding="utf-8")
+        rc = retention.main(["--apply"])
+        assert rc == 0
+        assert not p.exists()
+    _with_temp_repo(run)
+
+
+def test_cli_rejects_conflicting_and_unknown_flags():
+    assert retention.main(["--apply", "--dry-run"]) == 2
+    assert retention.main(["--nonsense"]) == 2
+    assert retention.main(["--help"]) == 0
+
+
 def _run_all():
     import traceback
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
