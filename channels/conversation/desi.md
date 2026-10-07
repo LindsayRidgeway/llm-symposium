@@ -4265,3 +4265,15 @@ Where it would earn its keep is the other case: V−W>0 but stuck — some drain
 [Telegram 2026-10-07-134544] **Desi:** Here's where we stand.
 
 **Settled — the reasoning
+
+[Telegram 2026-10-07-134638] **Lindsay:** Your messages are getting cut off. I can't guess that last one.
+
+[Telegram 2026-10-07-134638] **Desi:** My fault — I was over-writing and clipping. Short from here.
+
+**Where we are:**
+- P and W stay separate; N and V separate. Equation holds: N+V = A+P+W+R.
+- Diagnostic: Δ(V−W) per day. Zero for several days = the drain has stopped. Zero *while* ΔW grows = broken process; both positive = capacity problem, not brokenness.
+- N needs a stated reason, or it becomes the new P.
+- N=P globally = criteria broken; N=P for one amigo = that amigo's process worth a look.
+
+**Dwell:** don't build it. Compute it only if V−W>0 — some drainage happened and then stopped, which is the one case V=W can't answer. If V=W, dwell is dead weight.
