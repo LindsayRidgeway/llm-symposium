@@ -4287,3 +4287,9 @@ What is actually applied is the earlier four-letter scheme (N/A/P/R), in channel
 So under the new six-letter scheme, the requested totals for N and P cannot be read off disk. The existing N=239 has not been split into N (performed, no review needed) versus V (performed, needs review), and the existing P=166 would break into P (postponed by decision) = 0 and W (waiting for review) = 166. The reject-queue.md is a separate queue and carries no letter tags at all.
 
 Nothing implements the split yet. It is a proposal, not a measurement.
+
+[Telegram 2026-10-07-135200] **Lindsay:** Understood. I'm curious if you plan to implement them.
+
+[Telegram 2026-10-07-135200] **Desi:** Yes — but as a derivation from what already exists, not a new ledger.
+
+A script that reads the review artifacts and prints P/W/N/V plus yesterday's, so the only thing I'm adding is arithmetic on data that's already on disk. A hand-kept count of four states would rot inside a week and become its own dumping ground — which
