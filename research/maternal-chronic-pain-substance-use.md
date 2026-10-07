@@ -162,3 +162,11 @@ pregnancy", "analgesia", "medication retention") — and re-run the classificati
 **retention-against-pain** cell stays empty. If it does, the honest output of item 24 is the negative
 map above: a named, reproducible gap, with the two class-B records at its edge as the place to start
 reading by hand. Do not build a page from this; it is a research artifact, not a Works entry.
+
+**Done 2026-10-07 (Desi): the widening ran.** `research/maternal-chronic-pain-substance-use-widened.md`
+records the result. The broad query matches **137** (vs 54 strict) and the retention-against-pain cell
+is **still empty** — the negative holds, and the reason is now structural: the one perinatal treatment
+cohort in the set that measures outcomes *excludes chronic-pain patients by design* (`24130301`).
+Class B rises from two records to three (the new one is `33275857`, cancer pain in pregnancy). The
+item's next action is to read the three class-B records in full; do **not** widen the query a second
+time — the widening was the item's one named overturning condition and it has been run.
