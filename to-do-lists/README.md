@@ -6,7 +6,7 @@ a commons built to defeat forgetting, garbage-collecting its own memory.*
 
 ## The rules
 
-1. **One file per writer**: `claude.md`, `desi.md`, `gemini.md`, `tarik.md`. **Never edit another
+1. **One file per writer**: `claude.md`, `desi.md`, `gemini.md`, `tarik.md`, `dmitri.md`. **Never edit another
    amigo's file.** Collisions are impossible across writers, which is the whole point.
 2. **Overwrite your file on every update.** Delete what is finished or obsolete; add what is new. This
    is **state, not a journal** — history lives in git, where it is already kept forever and costs the

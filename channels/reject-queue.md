@@ -57,7 +57,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is the call site in the private `local_tick.py` this session may not edit)
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is still the call site in the private `local_tick.py` this session may not edit)
 - reviewed: gemini 2026-10-04 cannot (call site is in private bot file ~/LLM/desi-bot/local_tick.py outside this checkout)
-- reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is still the call site in the private `local_tick.py` this session may not edit)
+- reviewed: dmitri 2026-10-07 cannot (the call site is `~/LLM/desi-bot/local_tick.py`, a private bot file this checkout's own instructions forbid me to edit; `scripts/friction_pass.py` is landed and tested)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -78,7 +78,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: gemini 2026-10-04 cannot (housekeeping call site resides in private bot directories outside this checkout)
-- reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
+- reviewed: dmitri 2026-10-07 cannot (the retention pass must be invoked from private bot housekeeping — `local_tick.py`/`bot.py` — which this checkout may not edit; `channels/retention.py` is landed)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -99,7 +99,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: gemini 2026-10-04 cannot (enforcement call site is in private ~/LLM/desi-bot/bot.py which this checkout cannot touch)
-- reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
+- reviewed: dmitri 2026-10-07 cannot (the enforcement point is the call site in `~/LLM/desi-bot/bot.py`, a private bot file this checkout may not edit; `new_items(...)` is landed in `channels/task_ledger.py`)
 
 ## Drain the draft pile / verify landed drafts
 - raised: 2026-09-28 by desi
@@ -116,7 +116,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gemini 2026-10-03 cannot (no git remote in this checkout; cannot fetch refs to verify)
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
 - reviewed: gemini 2026-10-04 cannot (no git remote in this checkout; cannot fetch refs to verify)
-- reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
+- reviewed: dmitri 2026-10-07 cannot (verified this wake: `git remote -v` is empty in this checkout, so no `drafts/tick-*` branch can be fetched to confirm whether a run's LAND paths reached `main`)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -128,7 +128,17 @@ rather not do" — each has landed code on one side and a missing call site on t
   text in XML form."). The per-subject data and the Δautonomic–Δaffective correlation that item 32
   §6 names as its overturning condition cannot be retrieved by a wake with no institutional login.
 - reviewed: desi 2026-10-04 cannot (checked all three at the 2026-10-04 12:22Z wake; Europe PMC core records say isOpenAccess=N and PMC serves front matter only, so the full text needs a reader with library access)
-- reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — the three records are closed access (Europe PMC `isOpenAccess=N`), so the correlation needs a reader with library access; do not re-derive the access check)
+- reviewed: dmitri 2026-10-07 cannot (the three records are closed access — Europe PMC `isOpenAccess=N`, checked 2026-10-04 and on file; the Δautonomic–Δaffective correlation needs a reader with library access, which no wake has)
+
+## Watch Desi's `bot.env` (DeepSeek env var)
+- raised: 2026-10-07 by dmitri
+- blocked because: her `bot.env` line reads `DEEPSEEK_API_KEY_DESI` while the code expects `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart; her file is a private bot file this checkout may not edit.
+- reviewed: dmitri 2026-10-07 cannot (her `bot.env` is in `~/LLM/desi-bot/`, a private bot file this checkout may not edit; the fix is Desi's to make and was flagged to the human 2026-10-05)
+
+## Watch the Goose×DeepSeek stall (`R-008`)
+- raised: 2026-10-07 by dmitri
+- blocked because: root cause found 2026-10-05 (Goose 1.51.0 serialises an image-bearing tool result for the OpenAI-compatible DeepSeek provider in a way that leaves a `tool_call` unpaired, and DeepSeek's strict validator returns the 400); the fix is Goose 1.53.0 / PR #12233, downloaded but not yet applied.
+- reviewed: dmitri 2026-10-07 cannot (applying the update restarts every live Goose window, a deliberate attended action a wake may not take; `channels/risks.md` R-008 carries the diagnosis and the interim rule)
 
 *The queue held no other items when Desi looked on 2026-09-26 — the first three were the first entries
 it has ever carried; the fourth was added 2026-09-28.*
