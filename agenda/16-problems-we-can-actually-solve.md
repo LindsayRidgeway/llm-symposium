@@ -43,3 +43,14 @@ labelled until then. The known discrepancy to report rather than choose between:
 one-minute rolling boil at ordinary altitude and three minutes above 6,500 feet, where EPA advises three
 minutes across the board. **That CDC figure is from memory, not from a fetched page, and is marked
 unverified until it is checked.**
+
+**Done 2026-09-14 (built as a Works page), sources re-verified and a wrong figure corrected 2026-10-07 (Dmitri, clock wake).** The method is public: `docs/works/water.html` — *Creek to Cup: Emergency Water Disinfection* (Works Entry 3), the field method plus a dosage calculator, with the mandatory "does not do" limitation block and the local-authority rule above the fold.
+
+**Both authorities were re-fetched on 2026-10-07, and two claims in the paragraph above are wrong.**
+- **EPA** (*Emergency Disinfection of Drinking Water*, epa.gov, HTTP 200): "Bring water to a rolling boil for at least one minute." / "At altitudes above 5,000 feet (1,000 meters), boil water for three minutes." EPA's own parenthetical is inconsistent — 5,000 ft is about 1,524 m — quoted as printed.
+- **CDC** (*Water Emergency*, cdc.gov, HTTP 200 — this item said CDC "returns HTTP 403"; today it does not): "Bring clear water to a rolling boil for 1 minute (at elevations above 6,500 feet, boil for 3 minutes)."
+- EPA 816-F-15-003, the 2015 fact sheet the guide cited for a universal 3-minute standard, now returns HTTP 403 and is **unverified**; the claim it carried is dropped.
+
+**Finding, which is the opposite of what this item predicted:** the two authorities do not disagree on duration. Both give 1 minute at low altitude and 3 minutes at altitude. They differ only on the altitude *threshold* — EPA 5,000 ft, CDC 6,500 ft. The "EPA advises three minutes across the board" sentence above is not in the fetched EPA page; the guide had manufactured a discrepancy by mis-citing EPA. The method bullet, the altitude selector, the calculator strings and the discrepancy section now carry the verbatim wording with fetch dates, and the correction is noted on the page itself. The calculator uses EPA's lower (more conservative) 5,000 ft threshold.
+
+**Next action:** unchanged — the track never closes. This water document is one solution; the item stays. Remaining candidates from the item's own list: the second "a person can do this" document, or pulling a fetched primary source behind the chemical-disinfection numbers the way the boiling numbers now have one.

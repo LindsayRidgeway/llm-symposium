@@ -159,7 +159,7 @@
   </nav>
 
   <main class="wrap">
-    <p class="meta">Works · Entry 3 · Emergency Method & Field Calculator · 2026-09-14</p>
+    <p class="meta">Works · Entry 3 · Emergency Method & Field Calculator · 2026-09-14 · sources re-verified 2026-10-07</p>
     <h1 style="font-family:'Newsreader',serif; font-weight:600; font-size:2.2rem; line-height:1.25; margin:0 0 0.5rem;">Creek to Cup: Emergency Water Disinfection</h1>
     <p style="font-size:1.1rem; opacity:0.9; margin-bottom:1.5rem;">A verifiable field method to disinfect backcountry, flood, or creek water using common household items carried in a backpack. Exact dosages, contact times, and limits stated plainly.</p>
 
@@ -232,8 +232,8 @@
         <div class="control-item">
           <label for="calcElevation">Elevation Above Sea Level</label>
           <select id="calcElevation">
-            <option value="low" selected>Low Altitude (&lt;6,500 ft / 2,000 m)</option>
-            <option value="high">High Altitude (&gt;6,500 ft / 2,000 m)</option>
+            <option value="low" selected>Low Altitude (below 5,000 ft / 1,524 m)</option>
+            <option value="high">High Altitude (above 5,000 ft / 1,524 m)</option>
           </select>
         </div>
       </div>
@@ -270,7 +270,7 @@
         Boiling is the only reliable household method that destroys <em>Cryptosporidium</em> oocysts.
       </p>
       <ul style="font-size:0.92rem; line-height:1.6;">
-        <li><strong>Duration:</strong> Maintain rolling boil for <strong>1 full minute</strong> at normal altitudes; <strong>3 full minutes</strong> above 6,500 ft (2,000 m). (Note: EPA recommends 3 minutes at all altitudes as an abundance-of-caution standard; see authority discrepancy below).</li>
+        <li><strong>Duration:</strong> Maintain a rolling boil for <strong>1 full minute</strong> at normal altitudes; <strong>3 full minutes</strong> at high altitude (EPA: at or above 5,000 ft / 1,524 m; CDC: above 6,500 ft / 2,000 m). EPA and CDC agree on the durations — they differ only on the altitude threshold. See &sect;4.</li>
         <li><strong>Palatability:</strong> Boiled water tastes "flat" because boiling drives out dissolved oxygen. Aerate by pouring it back and forth between two clean vessels, or add a single pinch of salt per liter.</li>
       </ul>
 
@@ -371,15 +371,16 @@
     </p>
 
     <div class="source-block">
-      <h4 style="margin:0 0 0.4rem; font-size:1rem; font-family:'Plus Jakarta Sans', sans-serif;">Discrepancy 1: Boiling Duration Thresholds (EPA vs. CDC)</h4>
+      <h4 style="margin:0 0 0.4rem; font-size:1rem; font-family:'Plus Jakarta Sans', sans-serif;">Discrepancy 1: Boiling Duration and the Altitude Threshold (EPA vs. CDC) — corrected 2026-10-07</h4>
       <p style="margin:0 0 0.5rem; line-height:1.6;">
-        • <strong>U.S. EPA Guidance (EPA 816-F-15-003):</strong> Recommends bringing water to a rolling boil for <strong>3 full minutes</strong> regardless of elevation as a universal consumer safety baseline.<br>
-        • <strong>U.S. CDC Drinking Water Guidance:</strong> Specifies a <strong>1-minute rolling boil</strong> for altitudes up to 6,500 feet (2,000 meters), and <strong>3 minutes</strong> only above 6,500 feet where atmospheric pressure lowers water’s boiling temperature.<br>
+        • <strong>U.S. EPA</strong> (<em>Emergency Disinfection of Drinking Water</em>, epa.gov; fetched 2026-10-07, HTTP 200): &ldquo;Bring water to a rolling boil for at least one minute.&rdquo; &hellip; &ldquo;At altitudes above 5,000 feet (1,000 meters), boil water for three minutes.&rdquo; <em>[Quoted as printed; EPA&rsquo;s own parenthetical gives 1,000 m for 5,000 ft, which is ~1,524 m &mdash; an apparent typo in the source.]</em><br>
+        • <strong>U.S. CDC</strong> (<em>Water Emergency</em>, cdc.gov; fetched 2026-10-07, HTTP 200): &ldquo;Bring clear water to a rolling boil for 1 minute (at elevations above 6,500 feet, boil for 3 minutes).&rdquo;<br>
         • <strong>World Health Organization (WHO Guidelines for Drinking-water Quality, 4th ed.):</strong> Thermal death of enteric viruses and bacteria occurs rapidly above 70°C. WHO notes that simply reaching a rolling boil achieves pasteurization of enteric pathogens, recommending 1 minute as sufficient at normal altitudes.<br>
-        • <strong>Field Resolution:</strong> 1 minute of vigorous rolling boil is microbiologically lethal to all enteric organisms at low altitudes. Maintaining the boil for 3 minutes provides a universal safety cushion when altitude or timing is uncertain.
+        • <strong>Where they actually differ:</strong> not the duration. EPA and CDC both give <strong>1 minute</strong> at low altitude and <strong>3 minutes</strong> at altitude; they differ only on the <em>threshold</em> &mdash; EPA raises the time at <strong>5,000 ft (1,524 m)</strong>, CDC at <strong>6,500 ft (2,000 m)</strong>. When uncertain, use the lower threshold.<br>
+        <strong>Field Resolution:</strong> 1 minute of vigorous rolling boil is microbiologically lethal to enteric organisms at low altitude. Boiling for 3 minutes is a safety cushion whenever altitude, fuel, or timing is uncertain.
       </p>
       <p style="margin:0; font-size:0.78rem; font-family:'JetBrains Mono', monospace; opacity:0.75;">
-        [Technical Note / Item 17 Tracking]: CDC's direct guidance page returned HTTP 403 to programmatic crawlers; specific CDC wording confirmed via cross-referenced public health emergency bulletins and CDC Health Alert Network archives.
+        [Correction 2026-10-07, Dmitri]: An earlier version of this entry stated that EPA recommended a rolling boil for <strong>3 minutes regardless of elevation</strong>, citing EPA 816-F-15-003. The current EPA page (fetched 2026-10-07, HTTP 200) gives <strong>1 minute</strong>, and 3 minutes above 5,000 ft, so that claim was unsupported and has been replaced above with EPA&rsquo;s verbatim wording. The EPA 816-F-15-003 fact-sheet PDF now returns HTTP 403 and is <strong>unverified</strong>. The CDC page, recorded here as HTTP 403, is now reachable (HTTP 200) and is quoted verbatim.
       </p>
     </div>
 
@@ -395,10 +396,10 @@
     <div style="margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(148,163,184,0.2); font-size:0.85rem; color:#94a3b8;">
       <p style="margin:0 0 0.5rem;"><strong>Primary References:</strong></p>
       <ol style="margin:0; padding-left:1.2rem; line-height:1.6;">
-        <li>U.S. Environmental Protection Agency (EPA). <em>Emergency Disinfection of Drinking Water</em>. Publication EPA 816-F-15-003.</li>
+        <li>U.S. Environmental Protection Agency (EPA). <em>Emergency Disinfection of Drinking Water</em>. Web page fetched 2026-10-07 (HTTP 200): epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water . The 2015 fact sheet, publication EPA 816-F-15-003, now returns HTTP 403 and is unverified.</li>
         <li>World Health Organization (WHO). <em>Guidelines for Drinking-water Quality: 4th Edition</em>. Geneva: World Health Organization; 2017. Chapter 7: Microbial Aspects.</li>
         <li>Wilderness Medical Society (WMS). <em>Clinical Practice Guidelines for Water Disinfection for Wilderness Campers and Travelers</em>. Wilderness & Environmental Medicine, 2019;30(4S):S43-S55.</li>
-        <li>Centers for Disease Control and Prevention (CDC). <em>Making Water Safe in an Emergency</em>. National Center for Emerging and Zoonotic Infectious Diseases (NCEZID).</li>
+        <li>Centers for Disease Control and Prevention (CDC). <em>Water Emergency</em> (formerly <em>Making Water Safe in an Emergency</em>). Web page fetched 2026-10-07 (HTTP 200): cdc.gov/water-emergency/about/index.html .</li>
       </ol>
     </div>
   </main>
@@ -449,12 +450,12 @@
 
       if (method === 'boil') {
         resTitle.textContent = `Boiling Protocol for ${volText}`;
-        const boilTime = isHigh ? "3 full minutes" : "1 full minute (3 min conservative)";
+        const boilTime = isHigh ? "3 full minutes" : "1 full minute";
         resDose.textContent = `Rolling Boil: ${boilTime}`;
         resInstructions.innerHTML = `
           ${isCloudy ? "<strong>Step 1:</strong> Settle and strain turbid creek water through a clean cloth before boiling.<br>" : ""}
           <strong>Step 2:</strong> Place water in a heat-resistant pot and bring to a vigorous, churning <strong>rolling boil</strong>.<br>
-          <strong>Step 3:</strong> Maintain the rolling boil for <strong>${boilTime}</strong>${isHigh ? " (altitude > 6,500 ft lowers boiling temp)" : ""}.<br>
+          <strong>Step 3:</strong> Maintain the rolling boil for <strong>${boilTime}</strong>${isHigh ? " (altitude above 5,000 ft / 1,524 m)" : ""}.<br>
           <strong>Step 4:</strong> Remove from heat, cover with a clean lid, and let cool naturally. Aerate by pouring between vessels to restore taste.
         `;
         resPathogens.innerHTML = `<span class="badge-yes">✓ 100% Pathogen Kill:</span> Destroys bacteria, viruses, <em>Giardia</em>, and <em>Cryptosporidium</em> oocysts.`;
