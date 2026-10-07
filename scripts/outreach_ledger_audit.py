@@ -18,6 +18,14 @@ The file's location is the ground truth, and it is not a matter of opinion:
   * in `channels/sent/`     -> transmitted                  (reality: sent)
   * in neither              -> named but lost               (reality: dangling)
 
+The same file-is-truth rule governs the other leg. `channels/mail.py::_fetch_one` writes each
+fetched message to `channels/inbound/` with a `- From:` header, and skips nothing that was
+delivered. So a reply's existence is a file's existence, and a `status` that still says "no
+reply" while a matching file sits in `channels/inbound/` is stale in exactly the way the
+outbound leg above was stale. Added 2026-10-06 (Desi): the first reply the commons ever
+received was filed and the ledger still read "no reply as of 2026-09-26", and this audit
+called the row good because it never looked at the inbox.
+
 This is a report, not an actor. It changes nothing. With no arguments it prints the table
 and exits 0; with `--check` it still prints everything but exits 1 when any row drifts, so
 a workflow can use it as a gate.
@@ -30,6 +38,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -39,6 +48,7 @@ DEFAULT_LEDGER = REPO_ROOT / "channels" / "outreach" / "pipeline.json"
 OUTBOUND_DIR = REPO_ROOT / "channels" / "outbound"
 SENT_DIR = REPO_ROOT / "channels" / "sent"
 STAGED_DIR = REPO_ROOT / "channels" / "outreach" / "drafts"
+INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
 
 # A status is read by markers, not by meaning: the ledger is prose and cannot be parsed.
 # "queued"/"drafted" claim the draft has not left the outbox; "sent"/"shipped"/"mailed"
@@ -49,6 +59,12 @@ SENT_CLAIM = ("sent", "shipped", "mailed", "transmitted")
 # Exact prose that claims the outbound leg has carried nothing. Searched literally, in the
 # ledger's own text fields, only so the contradiction is named rather than left silent.
 NO_CONTACT_PHRASES = ("never been used for a single cold contact", "never sent a cold contact")
+
+# Prose that claims the contact has not answered. The mirror of NO_CONTACT_PHRASES, on the
+# inbound leg: the absence of a reply is a claim about `channels/inbound/`, so it is checked
+# against that folder rather than believed. Kept to the shortest unambiguous phrase; a status
+# that records a reply ("acknowledgement received ...") carries none of these.
+NO_REPLY_PHRASES = ("no reply",)
 
 
 def classify(draft: str | None, outbound_dir: Path, sent_dir: Path, repo_root: Path) -> tuple[str, str | None]:
@@ -69,6 +85,26 @@ def classify(draft: str | None, outbound_dir: Path, sent_dir: Path, repo_root: P
     if (repo_root / draft).is_file():  # named path resolves but is in none of the three folders
         return ("queued", str(repo_root / draft))
     return ("dangling", None)
+
+
+def inbound_reply(contact: str | None, inbound_dir: Path) -> str | None:
+    """The first inbound file whose `- From:` header names this contact, else None.
+
+    A prospect's `contact` is an email address; `mail.py` files the header as
+    `From: "Display Name" <addr>`. The test is a substring match on the lowercased address,
+    so no display-name parsing is needed and a reordered header cannot hide a reply. A
+    `contact` that is a web form (no `@`) can never match, which is correct: a form produces
+    no reply to file.
+    """
+    addr = (contact or "").strip().lower()
+    if "@" not in addr or not inbound_dir.is_dir():
+        return None
+    for f in sorted(inbound_dir.glob("*.md")):
+        text = f.read_text(encoding="utf-8", errors="replace")
+        m = re.search(r"^-\s*From:\s*(.+)$", text, re.MULTILINE)
+        if m and addr in m.group(1).lower():
+            return str(f)
+    return None
 
 
 def verdict(reality: str, status: str) -> str:
@@ -97,6 +133,13 @@ def audit(ledger_path: Path = DEFAULT_LEDGER, repo_root: Path = REPO_ROOT):
         draft = p.get("draft")
         status = (p.get("status") or "").strip()
         reality, path = classify(draft, outbound, sent, repo_root)
+        reply = inbound_reply(p.get("contact"), repo_root / "channels" / "inbound")
+        v = verdict(reality, status)
+        # A status that claims no reply, against an inbox that holds one, is stale — the
+        # same failure as a status that claims no send against channels/sent/. The reply
+        # leg only ever *adds* a fault; a status that already records the reply stays ok.
+        if reply and any(ph in status.lower() for ph in NO_REPLY_PHRASES):
+            v = "STALE"
         rows.append({
             "id": p.get("id", "?"),
             "tier": p.get("tier", "?"),
@@ -104,7 +147,8 @@ def audit(ledger_path: Path = DEFAULT_LEDGER, repo_root: Path = REPO_ROOT):
             "draft": draft,
             "reality": reality,
             "path": path,
-            "verdict": verdict(reality, status),
+            "reply": reply,
+            "verdict": v,
         })
 
     sent_count = sum(1 for r in rows if r["reality"] == "sent")
@@ -136,17 +180,20 @@ def format_report(rows, sent_count, contradictions, ledger_path: Path, commit: s
     dangling = sum(1 for r in rows if r["verdict"] == "DANGLING")
     nodraft = sum(1 for r in rows if r["verdict"] == "NO-DRAFT")
     staged = sum(1 for r in rows if r["reality"] == "staged")
+    replies = [r for r in rows if r.get("reply")]
     lines += [
         "",
         f"summary: {len(rows)} prospects; cold contacts in channels/sent/ = {sent_count}; "
         f"staged = {staged}; stale = {stale}; dangling = {dangling}; "
-        f"claims-a-draft-with-none = {nodraft}",
+        f"claims-a-draft-with-none = {nodraft}; replies on file = {len(replies)}",
     ]
     for ph in contradictions:
         lines.append(
             f"CONTRADICTION: ledger prose says {ph!r} but {sent_count} prospect draft(s) "
             f"sit in channels/sent/ — the leg is not unused."
         )
+    for r in replies:
+        lines.append(f"REPLY ON FILE: {r['id']} <- {r['reply']}")
     return "\n".join(lines)
 
 
