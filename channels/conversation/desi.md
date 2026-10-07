@@ -4277,3 +4277,13 @@ Where it would earn its keep is the other case: V−W>0 but stuck — some drain
 - N=P globally = criteria broken; N=P for one amigo = that amigo's process worth a look.
 
 **Dwell:** don't build it. Compute it only if V−W>0 — some drainage happened and then stopped, which is the one case V=W can't answer. If V=W, dwell is dead weight.
+
+[Telegram 2026-10-07-134929] **Lindsay:** Adding "started reason" makes more work for everyone. Let's see if Total N = Total P first.
+
+[Telegram 2026-10-07-135025] **Desi-S:** No — not anywhere on disk. The N/V/P/W/A/R scheme was proposed by you in Telegram this morning (13:14) and worked out in the replies, but it exists only in the chat record; no script, queue, or ledger file computes V or W.
+
+What is actually applied is the earlier four-letter scheme (N/A/P/R), in channels/item_ledger.py and scripts/daily_report.py, reading the ledger channels/items.jsonl. Its current lifetime totals: N=239 (162 internal / 77 external), A=73, P=166, R=0 — and all 166 of P are "undecided" (nobody has looked), with 0 "decided."
+
+So under the new six-letter scheme, the requested totals for N and P cannot be read off disk. The existing N=239 has not been split into N (performed, no review needed) versus V (performed, needs review), and the existing P=166 would break into P (postponed by decision) = 0 and W (waiting for review) = 166. The reject-queue.md is a separate queue and carries no letter tags at all.
+
+Nothing implements the split yet. It is a proposal, not a measurement.
