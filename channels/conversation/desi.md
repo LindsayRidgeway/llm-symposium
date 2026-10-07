@@ -4293,3 +4293,11 @@ Nothing implements the split yet. It is a proposal, not a measurement.
 [Telegram 2026-10-07-135200] **Desi:** Yes — but as a derivation from what already exists, not a new ledger.
 
 A script that reads the review artifacts and prints P/W/N/V plus yesterday's, so the only thing I'm adding is arithmetic on data that's already on disk. A hand-kept count of four states would rot inside a week and become its own dumping ground — which
+
+[Telegram 2026-10-07-135516] **Lindsay:** Yes, I'm trying to save the symposium from maintaining more raw data. Instead, just the reporting algorithm to become more sophisticated.
+
+[Telegram 2026-10-07-135516] **Desi:** Then it's settled: existing artifacts only, sharper reader. No new ledger, no new fields anyone has to remember to fill in.
+
+The rule that makes it work without new data: a postponement counts as **P only if the reason is already written in the artifact**. No reason on disk → it's **W**, no matter how long it's sat. Same for **N**: it's N only if the artifact already says why no review was needed; if it doesn't say, it reads as **V**. That way nothing new gets maintained — the classifier just reads what a reviewer had to write anyway — and the failure mode is honest: an unexplained stall reads as waiting, which is what it is.
+
+And I
