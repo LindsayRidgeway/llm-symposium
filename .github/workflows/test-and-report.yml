@@ -78,6 +78,10 @@ jobs:
           # The report's display promises: a glance-length name per item, and a postponed list
           # that may be truncated only if the total still shows.
           python3 tests/test_daily_report.py 2>&1 | tee -a tests/last-verification.txt
+          # The review-state reporter (the human's request, 2026-10-07): the six letters N/V/A/P/W/R
+          # read from reasons already on disk, and the Δ(V−W)/ΔW diagnostic. Pins the rule that an
+          # item with no reason reads as W, not P, and that the two partitions cover every item once.
+          python3 tests/test_review_state.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gambling_source_table.py 2>&1 | tee -a tests/last-verification.txt
           # State gaming-regulator source table, agenda item 27 step 2 (the MA Commission filings).
           # Registered the same wake it was written, 2026-10-01 (Desi). Offline provenance check.
