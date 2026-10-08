@@ -6,13 +6,19 @@ budget of ~30 characters, and for the postponed list to stay truncated *provided
 shown*. Both are display promises about a report he reads on a phone, so both are pinned here —
 along with the one thing that must never be cut, which is the count.
 """
+import contextlib
+import io
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
+import scripts.daily_report as dr_mod  # noqa: E402
 from scripts.daily_report import DISPLAY_TITLE, _bucket, _short, render  # noqa: E402
 
 
@@ -131,6 +137,72 @@ class TestReportShape(unittest.TestCase):
         self.assertIn("postponed", out)
         self.assertIn("not yet reviewed", out)
         self.assertIn("showing", out)
+
+
+class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
+    """The lander refuses a dirty shared checkout, so output left uncommitted here is an outage,
+    not untidiness: nothing landed between 2026-10-06 and 2026-10-08 for exactly this reason, and
+    for 1.5 days before that. Pin that the report commits its own paths — only its own — and that
+    a git failure is reported and survived."""
+
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.dir.cleanup)
+        from scripts.daily_report import REPO
+        self.repo = REPO
+        self.ledger = Path(self.dir.name) / "items.jsonl"
+        self.ledger.write_text("{}\n", encoding="utf-8")
+        self.calls = []
+
+    def _commit(self, run, *paths, message="report(daily): the day's counts, sent"):
+        from scripts.daily_report import _commit_own_outputs
+        real = dr_mod.subprocess.run
+        dr_mod.subprocess.run = run
+        try:
+            with contextlib.redirect_stdout(io.StringIO()) as buf:
+                _commit_own_outputs(list(paths), message)
+            return buf.getvalue()
+        finally:
+            dr_mod.subprocess.run = real
+
+    def test_it_stages_and_commits_the_paths_it_is_given(self):
+        def run(argv, **kw):
+            self.calls.append(argv)
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+        self._commit(run, self.ledger)
+        self.assertEqual(self.calls[0], ["git", "add", "--", str(self.ledger)])
+        self.assertEqual(self.calls[1][:4], ["git", "commit", "-q", "-m"])
+
+    def test_it_never_stages_a_path_it_was_not_given(self):
+        # A session's uncommitted writing must never be swept into the report's commit.
+        def run(argv, **kw):
+            self.calls.append(argv)
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+        self._commit(run, self.ledger)
+        for argv in self.calls:
+            if argv[1] == "add":
+                self.assertEqual(argv[3:], [str(self.ledger)])
+
+    def test_a_path_that_does_not_exist_is_not_staged(self):
+        def run(argv, **kw):
+            self.calls.append(argv)
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+        self._commit(run, Path(self.dir.name) / "not-written.md")
+        self.assertEqual(self.calls, [])
+
+    def test_a_git_failure_is_reported_and_survived(self):
+        def run(argv, **kw):
+            raise subprocess.CalledProcessError(1, argv, stderr="index.lock exists")
+        out = self._commit(run, self.ledger)
+        self.assertIn("WARNING", out)
+        self.assertIn("landing is blocked", out)
+
+    def test_nothing_to_commit_is_not_a_warning(self):
+        def run(argv, **kw):
+            return SimpleNamespace(returncode=1, stdout="nothing to commit, working tree clean",
+                                   stderr="")
+        out = self._commit(run, self.ledger)
+        self.assertNotIn("WARNING", out)
 
 
 if __name__ == "__main__":

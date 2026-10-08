@@ -199,6 +199,36 @@ def _inputs_block(now: dt.datetime, hours: int) -> list[str]:
     return lines
 
 
+def _commit_own_outputs(paths: list[Path], message: str) -> None:
+    """Commit what this script wrote, because leaving it dirty stops every amigo's work landing.
+
+    The lander refuses a dirty shared checkout — deliberately, so it never applies a patch over
+    someone's uncommitted writing. That makes anything written here and *not* committed a silent
+    outage: nothing landed between 2026-10-06 and 2026-10-08 for exactly this reason, and for
+    1.5 days before that. The fix belongs here rather than in the lander, because the lander's
+    refusal is correct and this script is the one that made the mess.
+
+    Best-effort and strictly path-scoped: it commits these paths and nothing else, so a session's
+    uncommitted writing is never swept up, and a git failure is printed rather than raised — by
+    then the report has already been sent, and a report is not worth an exception.
+    """
+    try:
+        staged = [str(p) for p in paths if p.exists()]
+        if not staged:
+            return
+        subprocess.run(["git", "add", "--", *staged], cwd=REPO, check=True,
+                       capture_output=True, text=True)
+        r = subprocess.run(["git", "commit", "-q", "-m", message], cwd=REPO,
+                           capture_output=True, text=True)
+        out = (r.stdout + r.stderr).strip()
+        if r.returncode == 0:
+            print(f"daily_report: committed its own output ({len(staged)} path(s))")
+        elif "nothing to commit" not in out:
+            print(f"daily_report: WARNING — its output is still uncommitted, landing is blocked: {out}")
+    except Exception as exc:                                          # noqa: BLE001
+        print(f"daily_report: WARNING — could not commit its own output, landing is blocked ({type(exc).__name__}: {exc})")
+
+
 def _name(rec: dict) -> str:
     """An item's name: the model-written title if it has one, else the truncated description.
 
@@ -349,9 +379,14 @@ def main() -> int:
                 print(f"daily_report: titled {done} item(s), {failed} failed")
         except Exception as exc:                      # noqa: BLE001
             print(f"daily_report: titling skipped ({type(exc).__name__}: {exc})")
+    ledger = REPO / "channels" / "items.jsonl"
     text = render(a.hours)
     if not a.send:
         print(text)
+        # collect() just appended rows to the ledger; a render that walks away from them dirties the
+        # checkout and blocks landing, so the ledger is committed on the render path too.
+        if not a.no_collect:
+            _commit_own_outputs([ledger], "report(ledger): ingest the runs filed since the last report")
         return 0
 
     out = REPO / "channels" / "reports" / f"daily-{dt.datetime.now():%Y-%m-%d}.md"
@@ -369,6 +404,8 @@ def main() -> int:
     )
     print(r.stdout.strip() or r.stderr.strip())
     print(f"daily_report: recorded {out.relative_to(REPO)} ({len(text)} chars, sent {len(sent)})")
+    _commit_own_outputs([out, ledger],
+                        "report(daily): the day's counts, sent")
     return r.returncode
 
 
