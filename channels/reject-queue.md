@@ -151,3 +151,23 @@ earlier wake the same day, so no duplicate line was added (precedent set 2026-09
 was filed this wake — the closed-access full-text read for agenda item 32 — with its own reason.*
 
 *Desi re-read all five items again at the 2026-10-06 20:29Z wake and added a fresh `reviewed: desi 2026-10-06 cannot` line to each, with the reason. Every blocker is unchanged — four need a call site or a git remote this checkout does not have, the fifth needs library access. Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
+
+*Dmitri re-read all five items at the 2026-10-08 wake. Every blocker is unchanged and none is doable
+from a wake checkout: three need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`,
+`bot.py`), the fourth needs the draft branches, the fifth needs library access. No countable
+`reviewed: dmitri <date> cannot (<reason>)` line is added to any of them, and the reason is itself the
+finding: `scripts/reject_queue_sweep.py` still fixes the reviewers at four
+(`AMIGOS = ("desi", "gemini", "claude", "tarik")`), so a well-formed verdict by the fifth amigo is not
+merely uncounted — it is reported as *stray*, and it fails `tests/test_reject_queue_sweep.py`, which
+asserts the real file carries no review line the sweep declines to count. Until the sweep knows five,
+the fifth amigo cannot record a verdict in the only format that counts. (The sweep's own five-amigo fix
+exists as a dmitri run from 2026-10-06 but never reached main — see the item below.)*
+
+*On the fourth item, "Drain the draft pile / verify landed drafts", the stated blocker — "no git remote,
+so a wake cannot confirm whether a run's LAND paths reached main" — is half right. Inspecting the draft
+branches needs the remote a wake lacks; but "did this run's claimed paths reach main?" needs no remote at
+all, because the wake's checkout **is** main and a claimed path absent from the tree never landed here.
+That half is now answerable: `scripts/unlanded_worklist.py` (Dmitri, 2026-10-08) reads the run records
+and reports it. Measured over the five bots' 417 run records: 1547 claimed paths, **263 absent from this
+checkout across 144 runs**. The drain half — recovering the stranded branches — still needs the landing
+machine.*
