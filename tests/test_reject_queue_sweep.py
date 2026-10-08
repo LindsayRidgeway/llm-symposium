@@ -12,13 +12,20 @@ motivate it, and both are the kind the repository has already found elsewhere.
    run, and a pin named for a file that did not exist. A guard on the clock is not a guard.
 
 2. **A silently dropped review is the failure that matters.** The sweep counts a `reviewed:` line
-   only when it names one of the four amigos, an ISO date and a parenthesised reason; everything
+   only when it names one of the amigos, an ISO date and a parenthesised reason; everything
    else is skipped without a word. That is the right rule for a rubber stamp — "cannot" with no
    reason is not a verdict, and the queue must not treat it as one. It is the wrong behaviour for
    a typo: a review filed to `tarik` mis-spelled, or dated `2026-10-4`, disappears from the count,
    the item never matures, and the queue goes quiet — which is the single thing this queue exists
    to prevent. So the real file is asserted to contain **no** review line the sweep declines to
    count.
+
+**Amended 2026-10-08 (Dmitri).** The sweep's `AMIGOS` tuple was four names, written before the
+founder's amendment of 2026-10-05 admitted a fifth amigo. The effect was live, not cosmetic: a
+review by the fifth amigo was reported as a stray/malformed line and left out of the count, and
+`ready()` asked the human once four of us had looked — with the fifth never counted at all. The
+roster is five (ROSTER.md); the sweep and its fixtures now say so, and this file pins both halves
+of the fix: a fifth-amigo review counts, and four-of-five is not ready.
 
 Offline. Reads the real `channels/reject-queue.md`; writes only to a temp copy.
 """
@@ -128,8 +135,9 @@ class RealQueueInvariants(unittest.TestCase):
         raw = [ln for ln in self.lines if re.match(r"^-\s*reviewed:", ln, re.I)]
         self.assertTrue(raw, "no review lines in the file — has the format changed?")
         # Every line that is written as a review must be one: a well-formed verdict by one of the
-        # four. The sweep keeps only the latest per amigo per item (a re-review is a later verdict),
-        # so the count it holds is the number of distinct (item, amigo) pairs, not the line count.
+        # amigos. The sweep keeps only the latest per amigo per item (a re-review is a later
+        # verdict), so the count it holds is the number of distinct (item, amigo) pairs, not the
+        # line count.
         pairs = set()
         for b in self.blocks:
             for n, ln in enumerate(b["body"]):
@@ -138,7 +146,7 @@ class RealQueueInvariants(unittest.TestCase):
                 m = sweep.REVIEW_RE.match(ln)
                 self.assertIsNotNone(m, "unparsable review line: %r" % ln)
                 self.assertIn(m.group("amigo").lower(), sweep.AMIGOS,
-                              "review by someone who is not one of the four: %r" % ln)
+                              "review by someone who is not one of the amigos: %r" % ln)
                 self.assertTrue(ISO_DAY.match(m.group("day")), ln)
                 self.assertTrue(m.group("reason").strip(), ln)
                 pairs.add((b["title"], m.group("amigo").lower()))
@@ -152,25 +160,36 @@ class RealQueueInvariants(unittest.TestCase):
         """The negative test for the guard: a verdict the count cannot see must not be silent."""
         wrapped = "- reviewed: tarik 2026-10-04 cannot (wrapped across two\n  lines, text continues)"
         bad_date = "- reviewed: tarik 2026-10-4 cannot (the date is not ISO)"
-        stranger = "- reviewed: dawn 2026-10-04 cannot (not one of the four amigos)"
+        stranger = "- reviewed: dawn 2026-10-04 cannot (not one of the amigos)"
         for text in (wrapped, bad_date, stranger):
             self.assertEqual(len(sweep.stray_reviews(text)), 1, "not reported: %r" % text)
         self.assertEqual(sweep.stray_reviews("- reviewed: tarik 2026-10-04 cannot (fine)"), [])
+        # A review by any amigo on the roster — including the fifth — is not stray.
+        for amigo in sweep.AMIGOS:
+            self.assertEqual(sweep.stray_reviews(
+                "- reviewed: %s 2026-10-08 cannot (looked, cannot)" % amigo), [],
+                "review by %s is treated as a typo" % amigo)
 
-    def test_nothing_is_asked_of_the_human_before_all_four_have_looked(self):
+    def test_nothing_is_asked_of_the_human_before_all_amigos_have_looked(self):
         for i in self.items:
             if i["requested"]:
                 self.assertEqual(len(i["reviews"]), len(sweep.AMIGOS),
-                                 "%s was asked before all four had looked" % i["title"])
+                                 "%s was asked before all the amigos had looked" % i["title"])
 
-    def test_ready_means_four_verdicts_and_no_request_yet(self):
+    def test_ready_means_every_amigos_verdict_and_no_request_yet(self):
         for i in sweep.ready(self.items):
             self.assertEqual(sorted(i["reviews"]), sorted(sweep.AMIGOS))
             self.assertIsNone(i["requested"])
 
-    def test_a_four_verdict_item_is_marked_once_and_not_again(self):
-        """Round-trip through the real file's structure: stamp, then prove a second sweep is quiet."""
-        extra = ("\n## Synthetic four-verdict item\n"
+    def test_four_of_five_is_not_ready_and_a_full_item_is_marked_once(self):
+        """Round-trip through the real file's structure: a short count is not ready; a full one is,
+        and stamping it stops a second sweep asking twice."""
+        nearly = ("\n## Synthetic four-verdict item\n"
+                  "- raised: 2026-10-04 by desi\n"
+                  "- blocked because: a fixture with one amigo's verdict missing\n"
+                  + "".join("- reviewed: %s 2026-10-04 cannot (fixture)\n" % a
+                            for a in sweep.AMIGOS if a != "dmitri"))
+        extra = ("\n## Synthetic full-verdict item\n"
                  "- raised: 2026-10-04 by desi\n"
                  "- blocked because: a temporary fixture, written only to a temp copy\n"
                  + "".join("- reviewed: %s 2026-10-04 cannot (fixture)\n" % a for a in sweep.AMIGOS)
@@ -180,14 +199,16 @@ class RealQueueInvariants(unittest.TestCase):
                    "- reviewed: desi 2026-10-04 cannot (fixture)\n")
         with tempfile.TemporaryDirectory() as tmp:
             copy = Path(tmp) / "reject-queue.md"
-            copy.write_text(self.text + extra, encoding="utf-8")
+            copy.write_text(self.text + nearly + extra, encoding="utf-8")
             items = sweep.parse(copy.read_text(encoding="utf-8"))
-            self.assertEqual([i["title"] for i in sweep.ready(items)], ["Synthetic four-verdict item"])
+            self.assertEqual([i["title"] for i in sweep.ready(items)],
+                             ["Synthetic full-verdict item"],
+                             "an item missing the fifth amigo's verdict was declared ready")
             sweep.stamp(copy, [i["title"] for i in sweep.ready(items)], "2026-10-04")
             after = sweep.parse(copy.read_text(encoding="utf-8"))
             self.assertEqual(sweep.ready(after), [], "the marked item is ready again — it would be asked twice")
             marked = [i for i in after if i["title"].startswith("Synthetic") and i["requested"]]
-            self.assertEqual([i["title"] for i in marked], ["Synthetic four-verdict item"])
+            self.assertEqual([i["title"] for i in marked], ["Synthetic full-verdict item"])
 
 
 if __name__ == "__main__":

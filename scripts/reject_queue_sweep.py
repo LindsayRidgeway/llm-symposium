@@ -12,8 +12,8 @@ real protocol, verbatim in intent:
   3. Every amigo reviews **every** item on the queue:
        - can do it -> do it, take it off the queue. **That counts as work.**
        - cannot    -> add a notation that it looked and cannot. **That does not count as work.**
-  4. When all four have said they cannot, the item becomes a request for the human's judgement, and
-     the request itself is marked. **That does not count as work.**
+  4. When all of the amigos have said they cannot, the item becomes a request for the human's
+     judgement, and the request itself is marked. **That does not count as work.**
   5. The human left the delivery of that request to Desi's judgement, between (a) Desi sweeping
      periodically and notifying him, and (b) whichever amigo is fourth to reject notifying him.
 
@@ -23,6 +23,10 @@ say yes. This sweep does arithmetic on the file, and it rides Desi's existing wa
 adding one. Cost of (a): latency, up to the sweep interval. Cost of (b): every amigo has to count
 correctly, and a missed count leaves an item silent forever, which is the failure this queue exists
 to prevent.
+
+The count is all of the roster (AMIGOS below), which is five since 2026-10-05 — the founder's
+amendment admitting the second DeepSeek instance. The queue originally said "all four" because there
+were four; it means every amigo, and the sweep now reads it that way.
 
 Format — one block per item, at most:
     ## <short title>
@@ -51,7 +55,13 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+# The roster, in the record's own slug form. Five since the founder's amendment of 2026-10-05, which
+# admitted the second DeepSeek instance (Dmitri); see ROSTER.md. This tuple was four
+# ("desi", "gemini", "claude", "tarik") and the sweep silently treated a review by the fifth amigo as
+# a malformed line — reported as stray, absent from the count — so the queue could have been declared
+# ready for the human after four of us had looked, with the fifth never counted. Fixed 2026-10-08
+# (Dmitri). Keep this list in step with ROSTER.md; a name missing here is a member the count cannot see.
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -177,13 +187,14 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 
-## Item with four reviews
+## Item with five reviews
 - raised: 2026-09-25 by desi
 - blocked because: y
 - reviewed: desi 2026-09-25 cannot (a)
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 
 ## Already requested
 - raised: 2026-09-25 by desi
@@ -192,15 +203,17 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 - steward-requested: 2026-09-25
 
-## Four shrugs is not four verdicts
+## Five shrugs is not five verdicts
 - raised: 2026-09-25 by desi
 - blocked because: w
 - reviewed: desi 2026-09-25 cannot
 - reviewed: gemini 2026-09-25 cannot
 - reviewed: claude 2026-09-25 cannot
 - reviewed: tarik 2026-09-25 cannot
+- reviewed: dmitri 2026-09-25 cannot
 
 ## A wrapped verdict is a verdict the count loses
 - raised: 2026-09-25 by desi
@@ -214,22 +227,32 @@ def selftest():
     r = [i["title"] for i in ready(items)]
     checks = [
         ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
-        ("only the four-review item is ready", r == ["Item with four reviews"]),
+        ("only the five-review item is ready", r == ["Item with five reviews"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
-         len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
+         len([i for i in items if i["title"].startswith("Five shrugs")][0]["reviews"]) == 0),
         ("one-review and three-review items are not ready",
          "Item with one review" not in r and "Item with three reviews" not in r),
+        # The fifth amigo's review must count, not read as a typo. Four of the five are not enough:
+        # an item reviewed by everyone but the newest member is not ready for the human.
+        ("a review by the fifth amigo is counted, not stray",
+         stray_reviews("- reviewed: dmitri 2026-10-08 cannot (a reason)") == []
+         and "dmitri" in AMIGOS),
+        ("four of five reviews is not ready",
+         [i["title"] for i in ready(parse(
+             "## Nearly there\n- raised: 2026-10-08 by desi\n- blocked because: r\n"
+             + "".join("- reviewed: %s 2026-10-08 cannot (r)\n" % a for a in AMIGOS if a != "dmitri")
+         ))] == []),
         ("a wrapped verdict is reported, not silently dropped",
          len(stray_reviews(fixture)) == 1 and "wrapped across two" in stray_reviews(fixture)[0]),
     ]
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "q.md"
         f.write_text(fixture, encoding="utf-8")
-        stamp(f, ["Item with four reviews"], "2026-09-25")
+        stamp(f, ["Item with five reviews"], "2026-09-25")
         after = parse(f.read_text(encoding="utf-8"))
         checks.append(("stamping marks it, so the note cannot repeat",
-                       not ready(after) and any(i["title"] == "Item with four reviews" and i["requested"]
+                       not ready(after) and any(i["title"] == "Item with five reviews" and i["requested"]
                                                 for i in after)))
     bad = [n for n, ok in checks if not ok]
     for n, ok in checks:
