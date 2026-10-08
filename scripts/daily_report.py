@@ -1,17 +1,31 @@
 #!/usr/bin/env python3
 # Owner: Desi
-"""The daily item report — the human's request of 2026-10-06.
+"""The daily item report — the human's request of 2026-10-06, revised by him on 2026-10-07.
 
-His words: stop sending a report of what each wake did; once a day, send counts for the last 24
-hours and for life, for N (items performed during wakes), A (reviewed and accomplished), P
-(reviewed and postponed) and R (rejected and never to be accomplished), each split by amigo and by
-internal/external, plus the titles added in the last 24 hours and the titles still postponed with
-the reason each is postponed.
+His first words: stop sending a report of what each wake did; once a day, send counts for the last
+24 hours and for life, for items performed (N), accomplished (A), postponed (P) and rejected (R),
+each split by amigo and by internal/external, plus the titles added in the last 24 hours and the
+titles still postponed with the reason each is postponed.
 
-He reads this to answer three questions: is each amigo doing more or less than before (N and A),
-is the work reaching the world or only the repository (external vs internal), and is the pile of
-postponed work growing. So the report leads with the counts and never buries the external/internal
-split, because that split is the one he says is about the symposium's survival.
+Then he took the vocabulary apart, in Telegram, over one morning, and the second version is his:
+
+    N  performed, no review needed      V  performed, needs review
+    A  accomplished                      P  postponed **by a decision** (reason on disk)
+    W  waiting for review (nobody has looked)          R  rejected
+    N + V = A + P + W + R
+
+His reasons, in his words: P and W "were doing opposite work under one word — P is a decision with a
+reason attached, W is nobody having looked — and collapsing them hid exactly the thing that tells
+you which failure you have." And N — "performed, no review needed" — is a claim, so it needs a
+written reason like P, or it becomes the new dumping ground. His test for the whole thing: N = P in
+the lifetime totals means the criteria are broken; Δ(V−W) stuck at zero while ΔW grows means the
+drain has stopped. He explicitly did not want dwell unless V−W > 0, and did not want any new ledger
+or new field: "just the reporting algorithm to become more sophisticated."
+
+He reads this to answer three questions: is each amigo doing more or less than before, is the work
+reaching the world or only the repository (external vs internal), and is the pile of undecided work
+growing. So the report leads with the counts and never buries the external/internal split, because
+that split is the one he says is about the symposium's survival.
 
 It is written to be read on a phone: one line per amigo, no table that wraps, and the detail lists
 trimmed with an honest "+k more" rather than silently truncated.
@@ -36,12 +50,18 @@ sys.path.insert(0, str(REPO))
 
 from channels.item_ledger import collect, counts, landing_gap, last_landing, load  # noqa: E402
 
+# The six letters, in the order the human reasoned them out (Telegram, 2026-10-07): the
+# review-needed axis first (N/V), then the outcome axis (A/P/W/R). His labels, near enough verbatim.
 GROUP_LABEL = {
-    "N": "N — performed",
+    "N": "N — performed, no review needed (only where the record says why)",
+    "V": "V — performed, needs review",
     "A": "A — accomplished",
-    "P": "P — postponed (everything not accomplished and not rejected)",
+    "P": "P — postponed by a decision (reason on disk)",
+    "W": "W — waiting for review (nobody has looked)",
     "R": "R — rejected",
 }
+LETTERS = ("N", "V", "A", "P", "W", "R")
+GROUPS = LETTERS
 AMIGO_ORDER = ("desi", "claude", "gemini", "tarik", "dmitri")
 LIST_CAP = 8
 POSTPONED_SHOWN = 3
@@ -61,23 +81,6 @@ _LEAD_IN_RE = re.compile(
 
 def _local(stamp: dt.datetime) -> str:
     return stamp.astimezone().strftime("%Y-%m-%d %H:%M %Z")
-
-
-def _group_table(group: str, window: dict, life: dict) -> list[str]:
-    """One line per amigo, for one group. Compact enough not to wrap on a phone."""
-    out = [GROUP_LABEL[group]]
-    names = [n for n in AMIGO_ORDER if n in window[group]["by_amigo"]]
-    names += [n for n in sorted(window[group]["by_amigo"]) if n not in names]
-    if not names:
-        out.append("  (none)")
-    for who in names:
-        s = window[group]["by_amigo"][who]
-        out.append(f"  {who:<8} {s['total']:>4}  ({s['internal']} int / {s['external']} ext)")
-    life_s = life[group]
-    out.append(f"  {'all':<8} {window[group]['total']:>4}  "
-               f"({window[group]['internal']} int / {window[group]['external']} ext)"
-               f"   lifetime {life_s['total']} ({life_s['internal']} / {life_s['external']})")
-    return out
 
 
 # ---------------------------------------------------------------------------------------------
@@ -257,21 +260,20 @@ def _title_list(rows: list[dict], cap: int = LIST_CAP) -> list[str]:
     rows = sorted(rows, key=lambda r: r.get("filed_utc") or "")
     out = []
     for rec in rows[:cap]:
-        group = {"accomplished": "A", "rejected": "R"}.get(rec.get("state"), "P")
-        out.append(f"  [{group}] {rec.get('amigo','?'):<7} {_name(rec)}")
+        out.append(f"  [{_letter(rec)}] {rec.get('amigo','?'):<7} {_name(rec)}")
     if len(rows) > cap:
         out.append(f"  … +{len(rows) - cap} more in the recorded copy")
     return out
 
 
 def _landing_block(now: dt.datetime, hours: int, last: str | None, gap: int) -> list[str]:
-    """Say plainly when the landing pipeline has gone quiet, because that fact changes what P means.
+    """Say plainly when the landing pipeline has gone quiet, because that fact changes what W means.
 
-    The report's whole reading of P rests on `accomplished` being set by a `land(wake)` commit on
-    main. When those commits stop, an item stuck "not accomplished" no longer means "nobody has
-    looked" — it can mean "the lander refused the whole wake and parked it on a side branch". The
-    two are the same string in the ledger and completely different diseases, so the report has to
-    distinguish them out loud rather than let a delivery stall read as a review backlog.
+    The report's reading of W rests on `accomplished` being set by a `land(wake)` commit on main.
+    When those commits stop, an item sitting in W no longer means only "nobody has looked" — it can
+    also mean "the lander refused the whole wake and parked it on a side branch". The two are the
+    same string in the ledger and completely different diseases, so the report has to distinguish
+    them out loud rather than let a delivery stall read as a review backlog.
     """
     if not last or not gap:
         return []
@@ -283,9 +285,119 @@ def _landing_block(now: dt.datetime, hours: int, last: str | None, gap: int) -> 
         "",
         f"⚠ **No wake work has reached main for {age_h / 24:.1f} days.** The newest `land(wake)`",
         f"commit is {last[:10]} and {gap} item(s) have been filed since. Until landing resumes, the",
-        "`not yet reviewed` counts below describe *delivery*, not review — they can include finished",
-        "work the lander parked on a side branch rather than work nobody has looked at.",
+        "`waiting for review` counts below describe *delivery*, not review — they can include",
+        "finished work the lander parked on a side branch rather than work nobody has looked at.",
     ]
+
+
+def _letter_block(window: dict, life: dict, hours: int) -> list[str]:
+    """The six letters as six lines, each split by amigo, plus the lifetime total.
+
+    Six one-letter rows rather than a table: a table of six columns wraps on a phone, and this is
+    read on a phone. The per-amigo and internal/external detail the human asked for in his original
+    request (2026-10-06) is kept — it is a row per amigo per letter, which is longer but readable.
+    """
+    out = []
+    for letter in LETTERS:
+        names = [n for n in AMIGO_ORDER if n in window[letter]["by_amigo"]]
+        names += [n for n in sorted(window[letter]["by_amigo"]) if n not in names]
+        total = window[letter]["total"]
+        life_s = life[letter]
+        if not total and not life_s["total"]:
+            out.append(f"{letter} — {window[letter]['total']} this window; lifetime 0")
+            continue
+        out.append(f"**{letter}** — {total} this window "
+                   f"({window[letter]['internal']} int / {window[letter]['external']} ext); "
+                   f"lifetime {life_s['total']} ({life_s['internal']} / {life_s['external']})")
+        if not names:
+            out.append("  (none this window)")
+            continue
+        for who in names:
+            s = window[letter]["by_amigo"][who]
+            out.append(f"  {who:<8} {s['total']:>3}  ({s['internal']} int / {s['external']} ext)")
+    return out
+
+
+def _diagnosis(window: dict, life: dict, hours: int, items: dict[str, dict],
+               now: dt.datetime) -> list[str]:
+    """The two readings the human asked for — is the drain running, and is N = P — stated plainly.
+
+    His instructions (2026-10-07): track Δ(V−W) per day; zero for several days is the alarm, and
+    zero *while* ΔW grows is unambiguous breakage. And N = P in the lifetime totals means the
+    criteria are broken — globally, or for one amigo whose process is then worth a look. Dwell only
+    when V−W > 0, which is the one regime where V=W cannot answer the question by itself.
+    """
+    filed = window["N"]["total"] + window["V"]["total"]
+    decided = window["decisions"]
+    out = ["", "### Is the drain running?", 
+           f"  {filed} filed · {decided} decided · ΔW {filed - decided:+d} · Δ(V−W) {decided:+d}"
+           f"  (over {hours}h)"]
+    if decided == 0 and filed > 0:
+        out.append("  → STOPPED: items kept arriving and nothing was decided. Broken process.")
+    elif decided == 0:
+        out.append("  → nothing arrived and nothing was decided — uninformative either way.")
+    elif decided < filed:
+        out.append("  → draining, but slower than the inflow — a capacity problem, not a broken "
+                   "process.")
+    else:
+        out.append("  → draining at least as fast as the inflow.")
+
+    out += ["", "### Is N = P?  (your test: equal totals mean the criteria are broken)"]
+    for label, c in ((f"last {hours}h", window), ("lifetime", life)):
+        n, p = c["N"]["total"], c["P"]["total"]
+        if n == p and n:
+            verdict = "EQUAL — the criteria are broken"
+        elif n == p:
+            verdict = ("equal, but vacuously: neither letter has ever been used — nothing has ever "
+                       "declared itself exempt, nothing has ever been postponed by a decision")
+        else:
+            verdict = "different, so the criteria are doing work"
+        out.append(f"  {label}: N={n} P={p} — {verdict}")
+    worse = [who for who, s in life["N"]["by_amigo"].items()
+             if life["P"]["by_amigo"].get(who, {}).get("total") == s["total"] and s["total"]]
+    if worse:
+        out.append(f"  per amigo (lifetime), N = P for: {', '.join(sorted(worse))} — worth a look")
+
+    # Dwell, computed only in the regime he said earns it: some drainage happened, so V=W is false
+    # and the age of the oldest waiting item is the thing V−W alone cannot tell you.
+    v, w = life["V"]["total"], life["W"]["total"]
+    if v > w:
+        waiting = [r for r in items.values() if _letter(r) == "W" and r.get("filed_utc")]
+        if waiting:
+            oldest = min(waiting, key=lambda r: r["filed_utc"])
+            try:
+                when = dt.datetime.strptime(oldest["filed_utc"], "%Y-%m-%dT%H:%M:%SZ").replace(
+                    tzinfo=dt.timezone.utc)
+                days = (now - when).days
+                out.append(f"  dwell: the oldest item still waiting has sat {days}d "
+                           f"(filed {oldest['filed_utc'][:10]}, {oldest.get('amigo','?')})")
+            except ValueError:
+                pass
+    else:
+        out.append("  dwell: not computed — V = W, so the question has no content.")
+    return out
+
+
+def _letter(rec: dict) -> str:
+    from channels.item_ledger import letter_for
+    return letter_for(rec)
+
+
+def _sections(items: dict[str, dict], hours: int) -> tuple[list[dict], list[dict]]:
+    """The two lists of undecided work: postponed by a decision, and waiting for review.
+
+    They are different things and the second is the one that grows. He asked for the postponed list
+    with reasons (2026-10-06); after the 2026-10-07 split that list is P, and it will usually be
+    short, because a reason on disk is what makes something P.
+    """
+    postponed, waiting = [], []
+    for rec in items.values():
+        letter = _letter(rec)
+        if letter == "P":
+            postponed.append(rec)
+        elif letter == "W":
+            waiting.append(rec)
+    return postponed, waiting
 
 
 def render(hours: int = 24, now: dt.datetime | None = None) -> str:
@@ -295,65 +407,76 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
     life = counts(items, None)
     since = (now - dt.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%MZ")
 
-    n, a, p, r = (life[g]["total"] for g in "NAPR")
     lines = [
         f"**Daily item report — {_local(now)}**",
         f"window: the {hours}h to {_local(now)} (since {since})",
         "",
-        "P is everything not accomplished and not rejected, so `N = A + P + R` holds by",
-        "construction. The number that carries information is inside P: **decided** (someone looked",
-        "and said not now, and why) against **not yet reviewed** (nobody has looked).",
+        "Letters (your scheme of 2026-10-07; the split you insisted on):",
+    ] + [f"  {GROUP_LABEL[g]}" for g in LETTERS] + [
+        "`N+V = A+P+W+R` holds by construction. What carries information is the split inside A",
+        "(reviewed vs the lander's gate) and whether W is draining.",
         "",
-        f"**Lifetime**  N={n}  A={a}  P={p}  R={r}"
-        + ("  ✓ N=A+P+R" if n == a + p + r else "  ✗ the identity is broken — investigate"),
-        f"    of P: {life['P']['decided']} decided / {life['P']['undecided']} not yet reviewed",
-        f"**Last {hours}h**  N={window['N']['total']}  A={window['A']['total']}  "
-        f"P={window['P']['total']}  R={window['R']['total']}",
-        f"    of P: {window['P']['decided']} decided / {window['P']['undecided']} not yet reviewed",
+        f"**Lifetime**  " + "  ".join(f"{g}={life[g]['total']}" for g in LETTERS)
+        + ("  ✓ N+V=A+P+W+R" if life["N"]["total"] + life["V"]["total"]
+           == sum(life[g]["total"] for g in "APWR") else "  ✗ the identity is broken — investigate"),
+        f"    A: {life['A']['by_review']} by a review / {life['A']['by_gate']} by the lander's "
+        f"test gate.  P: {life['P']['total']} decided.  W: {life['W']['total']} never looked at.",
+        f"**Last {hours}h**  " + "  ".join(f"{g}={window[g]['total']}" for g in LETTERS)
+        + ("  ✓" if window["N"]["total"] + window["V"]["total"]
+           == sum(window[g]["total"] for g in "APWR") else "  ✗"),
+        f"    A: {window['A']['by_review']} by a review / {window['A']['by_gate']} by the gate.  "
+        f"P: {window['P']['total']} decided.  W: {window['W']['total']} never looked at.",
     ]
     landed = last_landing()
     lines += _landing_block(now, hours, landed, landing_gap(items, landed))
+    lines += _diagnosis(window, life, hours, items, now)
     lines += ["", f"### Last {hours}h, by amigo"]
-    for group in "NAPR":
-        lines += _group_table(group, window, life)
+    lines += _letter_block(window, life, hours)
     lines += _inputs_block(now, hours)
     lines += [
         "",
         f"### Titles added in the last {hours}h",
-        f"**Internal** ({window['N']['internal']})",
+        f"**Internal** ({window['V']['internal'] + window['N']['internal']})",
     ]
     lines += _title_list([x for x in window["items"] if x.get("scope") == "internal"])
-    lines += [f"**External** ({window['N']['external']})"]
+    lines += [f"**External** ({window['V']['external'] + window['N']['external']})"]
     lines += _title_list([x for x in window["items"] if x.get("scope") == "external"])
 
-    postponed = [x for x in items.values()
-                 if x.get("state") not in ("accomplished", "rejected")]
-    decided = [x for x in postponed if x.get("state") == "postponed"]
-    lines += ["", f"### Currently postponed ({len(postponed)})",
-              f"{len(decided)} decided (someone looked and said not now) — "
-              f"{len(postponed) - len(decided)} not yet reviewed (nobody has looked)"]
+    postponed, waiting = _sections(items, hours)
+    lines += ["", f"### Postponed by a decision ({len(postponed)})",
+              "A postponed item carries its reason on disk. This should grow slowly, and every line"
+              " here should have been a choice:"]
     for scope in ("internal", "external"):
-        rows = [x for x in postponed if x.get("scope") == scope]
-        dated = [x for x in rows if x.get("state") == "postponed"]
-        fresh = [x for x in rows if x.get("state") != "postponed"]
-        shown = max(0, POSTPONED_SHOWN - len(dated))
-        lines.append(f"**{scope.title()}** — {len(rows)} postponed "
-                     f"({len(dated)} decided / {len(fresh)} not yet reviewed); "
-                     f"showing {min(len(dated) + shown, len(rows))}")
+        rows = sorted([x for x in postponed if x.get("scope") == scope],
+                      key=lambda x: x.get("filed_utc") or "")
+        lines.append(f"**{scope.title()}** — {len(rows)}")
+        if not rows:
+            lines.append("  (none — nothing has ever been postponed by a decision)")
+            continue
+        for rec in rows[:POSTPONED_SHOWN]:
+            lines.append(f"  {rec.get('amigo','?'):<7} {_name(rec)}")
+            lines.append(f"          why: {rec.get('reason','(no reason recorded)')}")
+        if len(rows) > POSTPONED_SHOWN:
+            lines.append(f"  … +{len(rows) - POSTPONED_SHOWN} more")
+
+    # W is the review backlog, and the total always survives truncation — he accepted a cut list
+    # only on that condition (2026-10-06). Oldest first: with nothing reviewed, the informative
+    # items are the ones that have sat longest.
+    lines += ["", f"### Waiting for review ({len(waiting)})",
+              "Nobody has looked at these. No reason is printed because there is none to print — "
+              "that is the finding."]
+    for scope in ("internal", "external"):
+        rows = sorted([x for x in waiting if x.get("scope") == scope],
+                      key=lambda x: x.get("filed_utc") or "")
+        lines.append(f"**{scope.title()}** — {len(rows)} waiting; showing "
+                     f"{min(POSTPONED_SHOWN, len(rows))}")
         if not rows:
             lines.append("  (none)")
             continue
-        for rec in sorted(dated, key=lambda x: x.get("filed_utc") or ""):
+        for rec in rows[:POSTPONED_SHOWN]:
             lines.append(f"  {rec.get('amigo','?'):<7} {_name(rec)}")
-            lines.append(f"          why: {rec.get('reason','(no reason recorded)')}")
-        # Oldest first: with nothing reviewed yet, the informative ones are the items that have sat
-        # longest, not the newest. Listing all 146 would bury the signal and blow past one message.
-        for rec in sorted(fresh, key=lambda x: x.get("filed_utc") or "")[:shown]:
-            lines.append(f"  {rec.get('amigo','?'):<7} {_name(rec)}")
-            lines.append("          why: not yet reviewed — nobody has looked at it")
-        if len(fresh) > shown:
-            lines.append(f"  … +{len(fresh) - shown} more, none of them reviewed yet "
-                         f"(oldest shown first)")
+        if len(rows) > POSTPONED_SHOWN:
+            lines.append(f"  … +{len(rows) - POSTPONED_SHOWN} more, oldest shown first")
     return "\n".join(lines)
 
 

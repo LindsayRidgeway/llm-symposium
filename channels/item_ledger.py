@@ -22,29 +22,47 @@ Scope. `external` = the item had a visible effect outside the repository: an ema
 or a change to the published magazine (`docs/`). Everything else is `internal`. A run that touched
 both is one external item — the classification is "did this reach the world", and one yes is enough.
 
-State. An item is filed `performed` and starts **unreviewed**. A review moves it to
-`accomplished` or `rejected`. Everything else is **postponed** — because an item that is neither
-accomplished nor rejected has, in plain fact, been put off, whether or not anyone decided to put it
-off. So there are three groups and the identity holds exactly:
+State, second scheme (the human, 2026-10-07 — this supersedes the four-letter version below it).
+He took the two collapsed words apart again, and the split is the whole point:
 
-    N = A + P + R
+    N  performed, no review needed      V  performed, needs review
+    A  accomplished                      P  postponed **by a decision** (reason on disk)
+    W  waiting for review (nobody has looked)          R  rejected
 
-The human corrected an earlier version of this ledger on that point (2026-10-06): it had published a
-fourth group, `U` (performed and not yet reviewed), and he said U is just a particular case of P. He
-is right, and U is gone.
+    N + V = A + P + W + R
 
-The price of that, stated because it is real: with P as the remainder, `N = A + P + R` is true **by
-construction** and can no longer catch a counting error. The number that carries information is
-therefore the split *inside* P:
+Two rules make that work **without anyone maintaining a new field** (his constraint: "just the
+reporting algorithm to become more sophisticated"):
 
-    decided    — someone looked and said "not now", and why. A finding.
-    undecided  — nobody has looked. An absence, and this is the review backlog.
+1. `P` is not the remainder any more. An item counts as P only if the reason for postponing it is
+   already written on the item. No reason on disk -> it is `W`, however long it has sat. The old
+   four-letter version made P the remainder, which is exactly why P was useless as a number: it
+   equalled "everything that is not A or R" and told the human nothing about whether anyone had
+   looked. That was his point on 2026-10-08 and he was right.
+2. `N` is an exemption, and an exemption must be *claimed in writing* — otherwise it is a
+   self-granted pass, which is how N would become the dumping ground P used to be. No stated reason
+   to skip review -> the item reads as `V`. The honest failure mode: something unexplained reads as
+   waiting, which is what it is. Today that means N=0 — nothing has ever declared itself exempt.
 
-They are different diseases: one is the world blocking us, the other is us not looking. His own
-stated use of the postponed list is to read the reasons, and a list of 146 items whose reason is
-"no reason recorded" would answer nothing. `accomplished` is set automatically for an item whose run
-has a `land(wake)` commit on main — work in the repository whose tests passed the lander's gate.
-That is verifiable; it is not the same as *reviewed*, and the report says which is which.
+His reading of the two numbers, kept because it is the point of the whole exercise:
+`N = P` in the lifetime totals means the criteria are broken — everything looks reviewable so
+nothing is ever exempted and nothing is ever settled; `N = P` for one amigo means *that* amigo's
+process is worth a look. And the drain is measured as Δ(V−W): how many items left W in the window.
+Δ(V−W)=0 while ΔW>0 is a broken process (nothing draining, inflow continuing); both positive is a
+capacity problem. Dwell is computed only when V−W>0, which is the one case V=W cannot answer.
+
+A is one letter with two causes, and the report prints both: `by_review` (somebody looked and kept
+it) and `by_gate` (the lander's test suite passed, so it reached main — verifiable, but not the same
+as reviewed). The earlier version of this ledger set A for lander-passed runs and said so in prose;
+splitting it inside the letter is the same disclosure, in the report rather than in a footnote.
+
+The history, kept because the reasoning is not in the git log: the human corrected an earlier
+version on 2026-10-06 — it had published a fourth group `U` (performed, not yet reviewed), and he
+said U is just a particular case of P. That produced the collapsed four-letter scheme (`N = A + P +
+R`, with a decided/undecided split hidden inside P). On 2026-10-07 he un-collapsed it, on his own
+reasoning: P and W "were doing opposite work under one word — P is a decision with a reason
+attached, W is nobody having looked — and collapsing them hid exactly the thing that tells you which
+failure you have." The `U` letter does not come back; the *distinction* does, under the name W.
 
 Ledger format: JSON Lines, append-only, `channels/items.jsonl` — one object per line, later lines
 for the same `id` are state changes. Same shape as `channels/usage/ci-usage.jsonl`, for the same
@@ -298,54 +316,86 @@ def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str 
     return rec
 
 
+def letter_for(rec: dict) -> str:
+    """Which of A/P/W/R an item sits in. W is the remainder, and deliberately so.
+
+    W is the honest place for anything undecided: an item is *waiting for review* unless the
+    artifact already carries a decision. `postponed` without a written reason reads as W too —
+    a postponement nobody wrote down is not a decision, it is an absence, and the rule from
+    2026-10-07 says an unwritten claim does not count.
+    """
+    state = rec.get("state")
+    if state == "accomplished":
+        return "A"
+    if state == "rejected":
+        return "R"
+    if state == "postponed" and (rec.get("reason") or "").strip():
+        return "P"
+    return "W"
+
+
+def is_exempt(rec: dict) -> bool:
+    """True only if the item itself says why it needs no review (so it counts as N, not V).
+
+    The default is V. An exemption nobody wrote down is a self-granted pass, and a self-granted
+    pass is how a letter turns into a dumping ground — the exact failure the human diagnosed in P.
+    """
+    return bool((rec.get("no_review_reason") or "").strip())
+
+
 def counts(items: dict[str, dict], hours: int | None = None) -> dict:
-    """The four groups, split by amigo and by internal/external. `hours=None` is lifetime."""
+    """The six groups, split by amigo and by internal/external. `hours=None` is lifetime.
+
+    Returns one blank() per letter plus `items` (the rows in the window) and `decisions` (how many
+    items left W in the window — a written decision, whatever letter it landed in). `decisions` is
+    what makes Δ(V−W) derivable: each decision takes exactly one item out of waiting, so
+    Δ(V−W) = decisions and ΔW = filed − decisions.
+    """
     cutoff = None
     if hours:
         cutoff = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=hours))
-    rows = []
-    for rec in items.values():
-        if cutoff is not None:
-            filed = rec.get("filed_utc")
-            if not filed:
-                continue
-            when = dt.datetime.strptime(filed, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
-            if when < cutoff:
-                continue
-        rows.append(rec)
+
+    def in_window(stamp: str | None) -> bool:
+        if cutoff is None:
+            return bool(stamp)
+        if not stamp:
+            return False
+        try:
+            when = dt.datetime.strptime(stamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+        except ValueError:
+            return False
+        return when >= cutoff
+
+    rows = [rec for rec in items.values() if in_window(rec.get("filed_utc"))]
 
     def blank() -> dict:
-        return {"total": 0, "internal": 0, "external": 0, "by_amigo": {},
-                "decided": 0, "undecided": 0}
+        return {"total": 0, "internal": 0, "external": 0, "by_amigo": {}}
 
-    out = {"N": blank(), "A": blank(), "P": blank(), "R": blank(), "items": rows}
+    out = {g: blank() for g in ("N", "V", "A", "P", "W", "R")}
+    out["A"]["by_review"] = 0
+    out["A"]["by_gate"] = 0
+    out["decisions"] = 0
+    out["items"] = rows
+
+    def add(letter: str, who: str, scope: str) -> None:
+        out[letter]["total"] += 1
+        out[letter]["internal" if scope == "internal" else "external"] += 1
+        slot = out[letter]["by_amigo"].setdefault(who, {"total": 0, "internal": 0, "external": 0})
+        slot["total"] += 1
+        slot[scope] += 1
+
     for rec in rows:
-        # An item that is neither accomplished nor rejected IS postponed. That is the human's
-        # reading (2026-10-06), and he is right about the plain sense of the word: an item nobody
-        # has got to has been put off, whether or not anyone decided to put it off. So there are
-        # three groups, not four, and the identity N = A + P + R holds exactly.
-        #
-        # What the two kinds of postponement still have to be told apart inside P:
-        #   decided   — someone looked, and said not now, and why. This is a *finding*.
-        #   undecided — nobody has looked. This is an *absence*, and it is the review backlog.
-        # They are different diseases (one is the world blocking us, one is us not looking) and the
-        # human's own stated use of the postponed list is to read the reasons. A list of 146 items
-        # whose reason is "no reason recorded" would answer nothing.
-        group = {"accomplished": "A", "rejected": "R"}.get(rec.get("state"), "P")
         who = rec.get("amigo", "?")
         scope = rec.get("scope", "internal")
-        out["N"]["total"] += 1
-        out["N"]["internal" if scope == "internal" else "external"] += 1
-        slot = out["N"]["by_amigo"].setdefault(who, {"total": 0, "internal": 0, "external": 0})
-        slot["total"] += 1
-        slot[scope] += 1
-        out[group]["total"] += 1
-        out[group]["internal" if scope == "internal" else "external"] += 1
-        if group == "P":
-            out["P"]["decided" if rec.get("state") == "postponed" else "undecided"] += 1
-        slot = out[group]["by_amigo"].setdefault(who, {"total": 0, "internal": 0, "external": 0})
-        slot["total"] += 1
-        slot[scope] += 1
+        # Two axes, not one: the review-needed axis (N/V) and the outcome axis (A/P/W/R). Every item
+        # is exactly one of each, so N+V = A+P+W+R holds by construction.
+        add("N" if is_exempt(rec) else "V", who, scope)
+        letter = letter_for(rec)
+        add(letter, who, scope)
+        if letter == "A":
+            out["A"]["by_review" if rec.get("reviewer") not in (None, "auto:land") else "by_gate"] += 1
+        if in_window(rec.get("state_utc")):
+            out["decisions"] += 1
     return out
 
 
@@ -380,12 +430,15 @@ def _cli() -> int:
         print(f"  ({len(items)} item(s))")
         return 0
     if args.summary:
-        c = counts(items, args.hours)
-        print(f"last {args.hours}h: " + "  ".join(f"{g}={c[g]['total']}" for g in "NAPR")
-              + f"   (P: {c['P']['decided']} decided / {c['P']['undecided']} not yet reviewed)")
-        c = counts(items, None)
-        print(f"lifetime:  " + "  ".join(f"{g}={c[g]['total']}" for g in "NAPR")
-              + f"   (P: {c['P']['decided']} decided / {c['P']['undecided']} not yet reviewed)")
+        for label, hours in (("lifetime", None), (f"last {args.hours}h", args.hours)):
+            c = counts(items, hours)
+            left = c["N"]["total"] + c["V"]["total"]
+            right = sum(c[g]["total"] for g in ("A", "P", "W", "R"))
+            print(f"{label:10s} "
+                  + "  ".join(f"{g}={c[g]['total']}" for g in ("N", "V", "A", "P", "W", "R"))
+                  + ("  ✓ N+V=A+P+W+R" if left == right else "  ✗ identity broken")
+                  + f"   (A: {c['A']['by_review']} reviewed / {c['A']['by_gate']} gate;"
+                    f" decisions this window: {c['decisions']})")
         return 0
     ap.print_help()
     return 0

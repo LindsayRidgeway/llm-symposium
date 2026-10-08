@@ -96,50 +96,110 @@ class TestTitle(unittest.TestCase):
         self.assertEqual(il.best_title(report), report.strip())
 
 
+class TestLetters(unittest.TestCase):
+    """The classifier of the human's second scheme (2026-10-07). Two rules, both his, both pinned:
+    an unwritten postponement is *waiting*, not postponed; and an exemption from review must be
+    claimed in writing or the item reads as needing review."""
+
+    def test_the_letters_follow_the_decision_on_disk(self):
+        self.assertEqual(il.letter_for({"state": "accomplished"}), "A")
+        self.assertEqual(il.letter_for({"state": "rejected"}), "R")
+        self.assertEqual(il.letter_for({"state": "postponed", "reason": "no access"}), "P")
+
+    def test_a_postponement_with_no_written_reason_is_waiting(self):
+        # The point of the split: a decision nobody recorded is not a decision. W, not P.
+        self.assertEqual(il.letter_for({"state": "postponed"}), "W")
+        self.assertEqual(il.letter_for({"state": "postponed", "reason": "   "}), "W")
+
+    def test_no_decision_at_all_is_waiting(self):
+        self.assertEqual(il.letter_for({"state": None}), "W")
+
+    def test_an_exemption_must_be_written_down(self):
+        self.assertFalse(il.is_exempt({}))
+        self.assertFalse(il.is_exempt({"no_review_reason": "  "}))
+        self.assertTrue(il.is_exempt({"no_review_reason": "a ledger row, nothing to review"}))
+
+
 class TestCounts(unittest.TestCase):
     def rows(self):
         now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         old = "2026-01-01T00:00:00Z"
-        def rec(i, amigo, scope, state, when):
+
+        def rec(i, amigo, scope, state=None, when=now, **kw):
             return {"id": i, "amigo": amigo, "scope": scope, "state": state,
-                    "filed_utc": when, "title": i}
+                    "filed_utc": when, "title": i, **kw}
+
         return {r["id"]: r for r in [
-            rec("a", "desi", "internal", None, now),
-            rec("b", "desi", "external", None, now),
-            rec("c", "gemini", "internal", "accomplished", now),
-            rec("d", "gemini", "external", "postponed", old),
-            rec("e", "tarik", "internal", "rejected", old),
+            rec("a", "desi", "internal"),                                     # filed, nobody looked
+            rec("b", "desi", "external"),                                     # ditto
+            rec("c", "gemini", "internal", "accomplished", now, state_utc=now,
+                reviewer="auto:land", reason="landed on main (lander's test gate passed)"),
+            rec("d", "gemini", "external", "postponed", old),                 # put off, no reason
+            rec("e", "tarik", "internal", "rejected", old, state_utc=old,
+                reviewer="desi", reason="the source does not exist"),
+            rec("f", "tarik", "internal", "postponed", old, state_utc=old,
+                reviewer="desi", reason="needs library access"),              # a real decision
         ]}
 
-    def test_the_identity_holds_exactly(self):
-        # The human's correction, 2026-10-06: U is a case of P, so there are three groups and the
-        # identity is exact rather than a target.
+    def test_the_identity_is_the_two_axes_added_up(self):
+        # N+V = A+P+W+R, his equation of 2026-10-07. It holds because each item gets exactly one
+        # letter from each axis, which is what makes it a check rather than a tautology.
         c = il.counts(self.rows(), None)
-        self.assertEqual(c["N"]["total"], 5)
-        self.assertEqual(c["N"]["total"], c["A"]["total"] + c["P"]["total"] + c["R"]["total"])
-        self.assertNotIn("U", c)
+        self.assertEqual(c["N"]["total"] + c["V"]["total"],
+                         c["A"]["total"] + c["P"]["total"] + c["W"]["total"] + c["R"]["total"])
+        self.assertEqual(c["N"]["total"] + c["V"]["total"], 6)
+        self.assertNotIn("U", c)          # the letter he retired, 2026-10-06
 
-    def test_an_unreviewed_item_is_postponed_and_counted_as_undecided(self):
+    def test_nothing_is_exempt_without_saying_so(self):
         c = il.counts(self.rows(), None)
-        self.assertEqual(c["P"]["total"], 3)          # a and b unreviewed, d decided
-        self.assertEqual(c["P"]["decided"], 1)        # d
-        self.assertEqual(c["P"]["undecided"], 2)      # a, b — nobody has looked
+        self.assertEqual(c["N"]["total"], 0)     # nobody has ever claimed an exemption
+        self.assertEqual(c["V"]["total"], 6)
+        rows = self.rows()
+        rows["g"] = {"id": "g", "amigo": "desi", "scope": "internal", "state": None,
+                     "filed_utc": "2026-01-01T00:00:00Z", "title": "g",
+                     "no_review_reason": "a ledger row; nothing in it to review"}
+        c = il.counts(rows, None)
+        self.assertEqual(c["N"]["total"], 1)
+        self.assertEqual(c["V"]["total"], 6)
+
+    def test_the_postponed_letter_is_only_written_decisions(self):
+        c = il.counts(self.rows(), None)
+        self.assertEqual(c["P"]["total"], 1)     # f, the one with a reason on disk
+        self.assertEqual(c["W"]["total"], 3)     # a, b, d — nobody has looked, or nobody wrote it
+        self.assertNotIn("undecided", c["P"])    # that split is now the W letter itself
+
+    def test_accomplished_says_whether_a_review_or_the_lander_did_it(self):
+        c = il.counts(self.rows(), None)
         self.assertEqual(c["A"]["total"], 1)
-        self.assertEqual(c["R"]["total"], 1)
+        self.assertEqual(c["A"]["by_gate"], 1)
+        self.assertEqual(c["A"]["by_review"], 0)
+        rows = self.rows()
+        rows["h"] = {"id": "h", "amigo": "desi", "scope": "internal", "state": "accomplished",
+                     "filed_utc": "2026-01-01T00:00:00Z", "reviewer": "gemini",
+                     "reason": "reviewed, kept"}
+        c = il.counts(rows, None)
+        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (1, 1))
 
-    def test_internal_and_external_are_split_per_group_and_per_amigo(self):
+    def test_decisions_counts_what_left_waiting(self):
+        # Δ(V−W) is derived, not stored: every written decision takes exactly one item out of W.
         c = il.counts(self.rows(), None)
-        self.assertEqual((c["N"]["internal"], c["N"]["external"]), (3, 2))
-        self.assertEqual(c["N"]["by_amigo"]["desi"], {"total": 2, "internal": 1, "external": 1})
-        self.assertEqual((c["P"]["internal"], c["P"]["external"]), (1, 2))   # a | b, d
-        self.assertEqual(c["P"]["by_amigo"]["gemini"]["total"], 1)           # d — c was accomplished
+        self.assertEqual(c["decisions"], 3)      # c, e, f — old ones still carry a state_utc
+
+    def test_internal_and_external_are_split_per_letter_and_per_amigo(self):
+        c = il.counts(self.rows(), None)
+        self.assertEqual((c["V"]["internal"], c["V"]["external"]), (4, 2))
+        self.assertEqual(c["V"]["by_amigo"]["desi"], {"total": 2, "internal": 1, "external": 1})
+        self.assertEqual((c["W"]["internal"], c["W"]["external"]), (1, 2))
+        self.assertEqual(c["W"]["by_amigo"]["gemini"]["total"], 1)     # d, not c
 
     def test_the_window_excludes_old_items(self):
         c = il.counts(self.rows(), 24)
-        self.assertEqual(c["N"]["total"], 3)          # only the three filed "now"
-        self.assertEqual(c["A"]["total"], 1)          # c
-        self.assertEqual(c["P"]["total"], 2)          # a, b — unreviewed and in-window
-        self.assertEqual(c["R"]["total"], 0)          # e is old
+        self.assertEqual(c["N"]["total"] + c["V"]["total"], 3)   # a, b, c — filed today
+        self.assertEqual(c["A"]["total"], 1)                     # c
+        self.assertEqual(c["W"]["total"], 2)                     # a, b
+        self.assertEqual(c["P"]["total"], 0)                     # f is old
+        self.assertEqual(c["R"]["total"], 0)                     # e is old
+        self.assertEqual(c["decisions"], 1)                      # c, decided today
 
 
 class TestReview(unittest.TestCase):

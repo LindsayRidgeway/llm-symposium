@@ -7,6 +7,7 @@ shown*. Both are display promises about a report he reads on a phone, so both ar
 along with the one thing that must never be cut, which is the count.
 """
 import contextlib
+import datetime as dt
 import io
 import subprocess
 import sys
@@ -19,6 +20,7 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
 import scripts.daily_report as dr_mod  # noqa: E402
+from channels import item_ledger as il  # noqa: E402
 from scripts.daily_report import DISPLAY_TITLE, _bucket, _short, render  # noqa: E402
 
 
@@ -124,19 +126,90 @@ class TestShortName(unittest.TestCase):
 
 
 class TestReportShape(unittest.TestCase):
-    def test_the_three_groups_are_reported_and_the_identity_is_printed(self):
+    def test_the_six_letters_are_reported_and_the_identity_is_printed(self):
         out = render(hours=24)
-        for group in ("N=", "A=", "P=", "R="):
-            self.assertIn(group, out, group)
-        self.assertIn("N=A+P+R", out)
-        self.assertNotIn("U=", out)          # the human replaced U with P, 2026-10-06
+        for letter in ("N", "V", "A", "P", "W", "R"):
+            self.assertIn(f"{letter}=", out, letter)
+        self.assertIn("N+V=A+P+W+R", out)
+        self.assertNotIn("U=", out)          # the human retired U on 2026-10-06
 
-    def test_the_postponed_total_survives_truncation(self):
-        # He asked for a truncated list *as long as the total is still shown*.
+    def test_the_waiting_total_survives_truncation(self):
+        # He accepted a truncated list *as long as the total is still shown* (2026-10-06), and the
+        # waiting list is now the one that grows.
         out = render(hours=24)
-        self.assertIn("postponed", out)
-        self.assertIn("not yet reviewed", out)
+        self.assertIn("Waiting for review", out)
         self.assertIn("showing", out)
+        self.assertIn("oldest shown first", out)
+
+    def test_the_accomplished_split_is_never_hidden(self):
+        # A is one letter with two causes: a review, or the lander's test gate. The human's whole
+        # complaint on 2026-10-08 was reading A=0 as "nothing accomplished".
+        out = render(hours=24)
+        self.assertIn("by a review", out)
+        self.assertIn("by the lander's test gate", out)
+
+    def test_the_postponed_and_waiting_sections_are_separate(self):
+        out = render(hours=24)
+        self.assertIn("### Postponed by a decision", out)
+        self.assertIn("### Waiting for review", out)
+
+
+class TestDiagnosis(unittest.TestCase):
+    """The two readings he asked for by name: is the drain running, and is N = P. Both are read
+    off the same counts, so both are pinned here rather than left to the number looking right."""
+
+    def _diag(self, rows, hours=24, now=None):
+        from scripts.daily_report import _diagnosis
+        window = il.counts(rows, hours)
+        life = il.counts(rows, None)
+        return "\n".join(_diagnosis(window, life, hours, rows,
+                                    now or dt.datetime.now(dt.timezone.utc)))
+
+    def _row(self, i, filed, state=None, **kw):
+        return {"id": i, "amigo": "desi", "scope": "internal", "state": state,
+                "filed_utc": filed, "title": i, **kw}
+
+    def test_arrivals_with_no_decisions_reads_as_a_broken_drain(self):
+        now = dt.datetime.now(dt.timezone.utc)
+        filed = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        rows = {f"r{i}": self._row(f"r{i}", filed) for i in range(3)}
+        out = self._diag(rows, now=now)
+        self.assertIn("STOPPED", out)
+        self.assertIn("Δ(V−W) +0", out)
+        self.assertIn("ΔW +3", out)
+
+    def test_a_decision_taken_makes_the_drain_nonzero(self):
+        now = dt.datetime.now(dt.timezone.utc)
+        filed = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        rows = {"a": self._row("a", filed, "accomplished", state_utc=filed, reviewer="gemini"),
+                "b": self._row("b", filed)}
+        out = self._diag(rows, now=now)
+        self.assertIn("Δ(V−W) +1", out)
+        self.assertNotIn("STOPPED", out)
+
+    def test_equal_nonzero_totals_say_the_criteria_are_broken(self):
+        rows = {"a": self._row("a", "2026-01-01T00:00:00Z", None,
+                               no_review_reason="a ledger row"),
+                "b": self._row("b", "2026-01-01T00:00:00Z", "postponed",
+                               reason="needs access")}
+        out = self._diag(rows)
+        self.assertIn("N=1 P=1 — EQUAL — the criteria are broken", out)
+
+    def test_two_zeros_are_called_vacuous_rather_than_broken(self):
+        rows = {"a": self._row("a", "2026-01-01T00:00:00Z")}
+        out = self._diag(rows)
+        self.assertIn("vacuously", out)
+        self.assertNotIn("EQUAL — the criteria are broken", out)
+
+    def test_dwell_is_computed_only_when_something_has_drained(self):
+        # His instruction (2026-10-07): compute dwell only if V−W > 0, because if V=W the answer is
+        # already an identity and dwell is dead weight.
+        drained = {"a": self._row("a", "2026-09-01T00:00:00Z", "accomplished",
+                                  state_utc="2026-09-01T00:00:00Z", reviewer="gemini"),
+                   "b": self._row("b", "2026-09-15T00:00:00Z")}
+        self.assertIn("dwell:", self._diag(drained))
+        nothing_drained = {"b": self._row("b", "2026-09-15T00:00:00Z")}
+        self.assertIn("dwell: not computed", self._diag(nothing_drained))
 
 
 class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
