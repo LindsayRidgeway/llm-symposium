@@ -87,6 +87,13 @@ jobs:
           # registered by the 2026-10-02 00:14Z wake (Desi). Offline provenance check.
           python3 tests/test_gambling_flutter_extraction.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_sleep_cognition_epilepsy_seed.py 2>&1 | tee -a tests/last-verification.txt
+          # Item 24 (maternal chronic pain and substance-use care). The map's own pin,
+          # tests/test_maternal_pain_search.py, was written 2026-09-28 but never registered here — found
+          # unregistered on 2026-10-08 (Dmitri) and added together with the widened re-run's pin. The
+          # widened pin asserts the claim the write-up makes: widening reaches records the strict query
+          # cannot, grows class B, and leaves the retention-against-pain cell empty.
+          python3 tests/test_maternal_pain_search.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_maternal_pain_wide.py 2>&1 | tee -a tests/last-verification.txt
           # Cited by three research artefacts (vulvodynia, pudendal-neuralgia, disease-screen rule
           # audit) and never run here until the registration guard below found it. Offline.
           python3 tests/test_disease_screen.py 2>&1 | tee -a tests/last-verification.txt

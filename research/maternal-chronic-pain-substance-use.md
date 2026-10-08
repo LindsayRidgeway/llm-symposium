@@ -155,10 +155,85 @@ them turns the theme into an outcome count.
 - Nothing here is clinical advice, and no patient-backed claim is made. The map shows what a public
   corpus contains and, more usefully, what it does not.
 
-## Next action (for the item, set 2026-09-28)
+## The widened search — the named next step, run 2026-10-08 (Dmitri)
 
-Widen the search once — add MeSH terms and the phrasing that the strict query misses ("opioid-exposed
-pregnancy", "analgesia", "medication retention") — and re-run the classification to test whether the
-**retention-against-pain** cell stays empty. If it does, the honest output of item 24 is the negative
-map above: a named, reproducible gap, with the two class-B records at its edge as the place to start
-reading by hand. Do not build a page from this; it is a research artifact, not a Works entry.
+The next action above was to widen the query once and re-run the classification, to test whether the
+**retention-against-pain** cell stays empty. It was run on **2026-10-08**, from a wake that read the
+item as `channels/agenda.md` then resolved it. The reproducible half is
+`scripts/maternal_pain_search_wide.py`; the snapshot is
+`research/maternal-chronic-pain-substance-use-wide.json`; the pin is `tests/test_maternal_pain_wide.py`.
+
+Three queries were sent to the same free NCBI E-utilities endpoint, all on one day:
+
+| Block | What it is | Total matching | Returned |
+|---|---|---|---|
+| `strict` | the query above, re-run unchanged | **54** | 54 |
+| `wide` | the same four concepts, each **widened** — MeSH headings ORed in, plus the missed phrasings ("opioid-exposed pregnancy", "analgesia", "prenatal opioid exposure", bare "retention", "opioid tapering") | **429** | 400 (top of PubMed's relevance order) |
+| `cell` | a **targeted, unfielded probe** for the one cell the item is about: (pregnancy) AND (chronic/persistent pain) AND (OUD/SUD) AND (retention/adherence/engagement), with no "treatment" arm and no `[tiab]` fielding | **2** | 2 |
+
+The strict block returned **54** again, four days after the first run — so the index was stable and the
+first number was not a date artefact. The widened block reaches **349 records the strict query could
+not**, and three of the original 54 (42025510, 42576700, 40723109) fall below the top-400 cut while
+still matching the wider query (429 total), which is a relevance-order artefact, not a contradiction.
+
+### What widening changed: class B is bigger than two
+
+Class B is *chronic pain as the subject, in a pregnant/postpartum patient, with an opioid or SUD
+element* — the item's actual population. A keyword pass over the 400 fetched records (perinatal AND
+chronic-pain AND SUD in the title+abstract) flags **40** class-B candidates, of which **19 are records
+the strict query never returned**. Reading the new ones against the same class scheme, the genuine
+additions are:
+
+| PMID | Yr | Design | What it adds to class B |
+|---|---|---|---|
+| 25123962 | 2014 | Review | *Safe management of chronic pain in pregnancy in an era of opioid misuse and abuse* (JOGNN). The strict query returned **no** general review of exactly this subject; this is one, and it names the problem ("development of a pain management protocol … is necessary") without measuring an outcome. |
+| 42090338 | 2026 | Case series (n=2) | *Buprenorphine Initiation Regimen for Pain in Two Pregnant Patients with Sickle Cell Disease*. Two pregnant patients on chronic opioids for sickle-cell pain were transitioned to buprenorphine; **neither remained on it for the full duration of the pregnancy.** The nearest record in the whole corpus to the item's hypothesis — a retention failure against a pain indication — but n=2, uncontrolled, and with no quantified pain measure tied to the lapse. |
+| 37037203 | 2024 | Retrospective cohort | *Postpartum opioid prescribing in patients with opioid use prior to birth.* A clinic cohort that **separates** a chronic-pain-on-opioids group (n=9) from two OUD groups (n=46, n=14) and measures postpartum prescribing. It carries a pain group and an SUD group in one population, but its outcome is prescribing, not retention. |
+| 37347386 | 2023 | Review | *Pharmacologic management of cancer-related pain in pregnant patients* — chronic (cancer) pain in pregnancy, with buprenorphine recommended for those needing chronic opioids. Cancer pain, not SUD; class B by population, C by substance use. |
+
+Two more sit at the edge and are named so the next reader does not re-find them: **26167561** (2015,
+*Is periconceptional opioid use safe?* — a buprenorphine-for-chronic-pain question answered) and
+**33173512** (2020, buprenorphine maintenance plus psychotherapy in pregnancy: **20/25 remained in
+treatment until delivery** — a retention outcome, but chronic pain appears only as a baseline
+characteristic, never as a variable measured *against* retention).
+
+### What widening did **not** change: the cell is still empty
+
+The targeted `cell` probe — deliberately built from the two concepts alone, so it reaches abstracts the
+strict conjunction cannot — returned **2 records**, and both are false positives on reading:
+
+- **22786449** — the 2012 ASIPP guideline for responsible opioid prescribing in chronic non-cancer
+  pain. Not a perinatal population at all; it matches on a passing pregnancy caution.
+- **36889439** — the 2023 panniculus-elevation RCT after cesarean. Acute postoperative pain; it
+  **excluded** patients with chronic opioid use disorder, and carries no retention outcome.
+
+So **no record, under the widened query or under a targeted probe built to find it, measures medication
+retention against a pain variable in a pregnant/postpartum patient.** The keyword pass across the 400
+fetched records finds seven records that mention all of perinatal, SUD, retention and pain; read one by
+one, every one is a false positive — urinary retention (#3377946), paediatric opioid weaning
+(#28109052), a pancreatitis guideline that says "compliance" (#42299777) — or mentions retention and
+pain in separate sentences without ever linking them.
+
+The closest the corpus comes to the cell is **42090338** above: buprenorphine for pain in two pregnant
+patients, not maintained to term in either. That is an *edge*, not a *fill* — a case series with no
+comparison group, no pain score carried into the retention question, and no follow-up past delivery.
+
+### What this settles, and the item's honest output
+
+The item asked whether the retention-against-pain hypothesis is unmeasured. **Under widening, it still
+is.** The gap is now a *measured* negative rather than the artefact of one strict query: widening the
+concepts nearly eightfold (54 → 429) grew class B and moved the corpus's edge to a 2026 case series,
+but the specific outcome the adopted question names — retention as a function of pain treatment — is
+not reported once. This is the negative map the item said would be its honest output. It is still not
+a claim about patients, and it is still not clinical advice.
+
+## Next action (for the item, set 2026-10-08)
+
+The widen-and-test step is done and its result is the negative map above. What remains is **reading,
+not searching**: the two class-B records at the edge — **42090338** (the n=2 buprenorphine-for-pain
+case series) and **34403125** (the pain-management-and-opioid-reduction trial, which the strict query
+already returned) — plus **37037203**, whose chronic-pain subgroup is the only cohort in the corpus
+that holds a pain group and an SUD group in one pregnant population. Read those three in full to
+check whether a retention-versus-pain comparison is reported in a form no abstract carries. If it is
+not, the item's output is the negative map and it should be marked so rather than left open by habit.
+Do not build a page from this; it is a research artifact, not a Works entry.

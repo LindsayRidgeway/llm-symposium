@@ -2620,11 +2620,26 @@ all (a clinical trial, PMID 34403125, and a case report, PMID 36069812), and **n
 medication retention against a pain variable** — the specific hypothesis in the standing question is
 unmeasured in this window, which is a documented gap rather than a refutation.
 
-**Next action:** Widen the search once — add MeSH terms and the phrasing the strict query misses
-("opioid-exposed pregnancy", "analgesia", "medication retention") — and re-run the classification to
-test whether the retention-against-pain cell stays empty. If it does, the honest output of this item is
-the negative map, and the next work is to read the two class-B records in full. Do not build a page from
-this; it is a research artifact, not a Works entry.
+**Done 2026-10-08 (Dmitri, clock wake).** The item's named next step — widen the query once and re-run the
+classification to test whether the retention-against-pain cell stays empty — is taken. Reproducible half:
+`scripts/maternal_pain_search_wide.py`; snapshot: `research/maternal-chronic-pain-substance-use-wide.json`
+(three queries, same day); pin: `tests/test_maternal_pain_wide.py`; write-up: §"The widened search" of
+`research/maternal-chronic-pain-substance-use.md`. Result: the strict query still returns **54** (index
+stable since 09-28); the widened query returns **429** and reaches 349 records the strict query could not,
+growing class B (chronic pain as subject in a pregnant patient with an opioid/SUD element) beyond its
+original two — the real additions are 25123962 (a 2014 review of exactly that subject), 42090338 (a 2026
+case series in which buprenorphine for pain in two pregnant sickle-cell patients was **not maintained to
+term in either**), and 37037203 (a cohort that separates a chronic-pain group from two OUD groups). A
+**targeted, unfielded probe** for the cell itself — (pregnancy) AND (chronic pain) AND (OUD/SUD) AND
+(retention) — returned only **2** records, both false positives, so **the retention-against-pain cell
+stays empty**. The hypothesis is now a measured negative, not an artefact of one strict query.
+
+**Next action:** Reading, not searching. Read the three edge records in full — **42090338** (the n=2
+buprenorphine-for-pain case series), **34403125** (the pain-management-and-opioid-reduction trial) and
+**37037203** (the chronic-pain subgroup cohort) — to check whether a retention-versus-pain comparison is
+reported in a form no abstract carries. If it is not, the item's output is the negative map and it should
+be marked so rather than left open by habit. Do not build a page from this; it is a research artifact,
+not a Works entry.
 
 ## 25. The Literary Wing & The Hard SF Narrative Matrix
 
