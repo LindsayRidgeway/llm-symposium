@@ -1,0 +1,436 @@
+{
+ "artifact": "mcr-colistin-primary-verification.json",
+ "written": "2026-10-08",
+ "written_by": "Desi (clock wake, run 20261008T043357Z-40436fdc)",
+ "agenda_item": "23 - MCR Colistin Resistance Evidence Map",
+ "purpose": "Check the eight rows named by agenda item 23's next action (six largest by N plus the two anomalous rows) against the primary studies the seed review cites for them, and record collection year, mcr variant, detection method and sampling design for each so the sector pattern can be re-read with the confounders beside it.",
+ "seed_review": {
+  "citation": "Joy FU, Mouree TZ, Das M, Kabir A. mcr-Mediated Colistin Resistance in Escherichia coli: A One Health Review... Public Health Challenges 2026;5(3):e70376.",
+  "pmid": "42750694",
+  "doi": "10.1002/puh2.70376",
+  "pmcid": "PMC13577934"
+ },
+ "method": "Each seed row carries a bracketed reference number pointing into the review's own reference list. That list was read from the review's full text (Europe PMC fullTextXML, PMC13577934) and the numbered primary study identified for each row. Primary numbers were then taken from the study's own abstract (Europe PMC REST) or its own full text where open access.",
+ "rows_verified": [
+  {
+   "review_row": "1",
+   "ref": 15,
+   "country": "China",
+   "sector": "Raw meat + livestock + human",
+   "review": {
+    "n": 2649,
+    "n_pos": 260,
+    "pct": 9.82
+   },
+   "primary": {
+    "n": 2649,
+    "n_pos": 260,
+    "pct": 9.81,
+    "detail": "78/523 raw-meat samples + 166/804 animals + 16/1322 inpatient samples (2011-2014, 5 provinces)"
+   },
+   "verdict": "match",
+   "collection_year": "2011-2014",
+   "mcr_variant": "mcr-1",
+   "detection_method": "PCR + sequencing",
+   "sampling_design": "surveillance of commensal/infection E. coli, animals + retail meat + inpatients",
+   "citation": "Liu YY et al. Lancet Infect Dis 2016;16(2):161-168. PMID 26603172",
+   "note": "N and n match the primary exactly; but the denominator pools three unlike units (meat samples, animals, patient samples), which the review's single 'N isolates' column hides."
+  },
+  {
+   "review_row": "6",
+   "ref": 29,
+   "country": "China",
+   "sector": "Livestock",
+   "review": {
+    "n": 2330,
+    "n_pos": 54,
+    "pct": 2.32
+   },
+   "primary": {
+    "n": 2330,
+    "n_pos": 54,
+    "pct": 2.32
+   },
+   "verdict": "match",
+   "collection_year": "not stated in abstract (20 provinces)",
+   "mcr_variant": "mcr-1",
+   "detection_method": "real-time PCR",
+   "sampling_design": "2330 isolates across 10 species + 337 faecal samples",
+   "citation": "Chen X et al. J Med Microbiol 2017;66(2):119-125. PMID 28056227"
+  },
+  {
+   "review_row": "13",
+   "ref": 35,
+   "country": "Japan",
+   "sector": "Livestock",
+   "review": {
+    "n": 9306,
+    "n_pos": 39,
+    "pct": 0.42
+   },
+   "primary": {
+    "n": 9306,
+    "n_pos": 39,
+    "pct": 0.42
+   },
+   "verdict": "match",
+   "collection_year": "not stated in abstract",
+   "mcr_variant": "mcr-1 (mcr-2 absent)",
+   "detection_method": "PCR screening of archived isolates",
+   "sampling_design": "JVARM national monitoring, healthy food-producing animals",
+   "citation": "Kawanishi M et al. Antimicrob Agents Chemother 2017;61(1):e02057-16. PMID 27855068"
+  },
+  {
+   "review_row": "16",
+   "ref": 38,
+   "country": "Germany",
+   "sector": "Livestock",
+   "review": {
+    "n": 154,
+    "n_pos": 62,
+    "pct": 40.26
+   },
+   "primary": {
+    "n": 154,
+    "n_pos": 62,
+    "pct": 40.26,
+    "detail": "61 mcr-1 + 1 mcr-4"
+   },
+   "verdict": "match",
+   "collection_year": "2018-2020 window (farms with >=4 consecutive mcr-positive years)",
+   "mcr_variant": "mcr-1 (61) + mcr-4 (1)",
+   "detection_method": "PCR + whole-genome sequencing",
+   "sampling_design": "3 pig farms selected for repeated mcr detection (targeted, not routine)",
+   "citation": "Göpel L et al. Microorganisms 2024;12(4):729. PMID 38674671",
+   "note": "The review's 'any mcr variant' numerator here is 61 mcr-1 + 1 mcr-4; the single mcr-4 is invisible in the seed, which collapses variants to 'any'."
+  },
+  {
+   "review_row": "17 (a)",
+   "ref": 39,
+   "country": "Germany",
+   "sector": "Livestock",
+   "review": {
+    "n": 6158,
+    "n_pos": 709,
+    "printed_pct": 10.42
+   },
+   "primary": {
+    "n": 6158,
+    "n_pos": 707,
+    "pct": 11.5
+   },
+   "verdict": "mismatch",
+   "collection_year": "2010-2017",
+   "mcr_variant": "mcr-1 (mcr-2 present at 0.03% in this country)",
+   "detection_method": "PCR",
+   "sampling_design": "archived porcine diagnostic isolates",
+   "citation": "Ewers C et al. Front Microbiol 2022;13:1076315. PMID 36569100"
+  },
+  {
+   "review_row": "19",
+   "ref": 41,
+   "country": "France",
+   "sector": "Livestock",
+   "review": {
+    "n": 1701,
+    "n_pos": 49,
+    "pct": 2.88
+   },
+   "primary": {
+    "n": 1701,
+    "n_pos": 149,
+    "pct": 8.76,
+    "detail": "65/1561 breeding + 84/140 fattening animals"
+   },
+   "verdict": "mismatch",
+   "collection_year": "not stated in abstract",
+   "mcr_variant": "mcr-1.1",
+   "detection_method": "PCR + WGS + Southern blot",
+   "sampling_design": "80 breeding + 5 fattening goat farms; 1701 animals tested",
+   "citation": "Treilles M et al. Front Microbiol 2022;13:1023403. PMID 36687643"
+  },
+  {
+   "review_row": "28",
+   "ref": 47,
+   "country": "Canada",
+   "sector": "Human",
+   "review": {
+    "n": 5571,
+    "n_pos": 2,
+    "pct": 0.04
+   },
+   "primary": {
+    "n": 5571,
+    "n_pos": 2,
+    "pct": 0.04
+   },
+   "verdict": "match",
+   "collection_year": "2008-2015 (excluding 2011)",
+   "mcr_variant": "mcr-1",
+   "detection_method": "broth microdilution then PCR of colistin-resistant subset",
+   "sampling_design": "CANWARD sentinel-hospital consecutive clinical isolates",
+   "citation": "Walkty A et al. CMAJ Open 2016;4(4):E641-E645. PMID 28018876"
+  }
+ ],
+ "ewers_table_1_2010_2017": {
+  "source": "Ewers C, et al. Front Microbiol 2022;13:1076315. PMID 36569100, PMCID PMC9780603.",
+  "extraction": "Transcribed cell-by-cell from the open-access JATS XML (Table 1).",
+  "countries": [
+   {
+    "country": "Germany",
+    "isolates": 6158,
+    "mcr1_positive": 707,
+    "mcr1_pct_primary": 11.5
+   },
+   {
+    "country": "The Netherlands",
+    "isolates": 757,
+    "mcr1_positive": 3,
+    "mcr1_pct_primary": 0.4
+   },
+   {
+    "country": "Denmark",
+    "isolates": 140,
+    "mcr1_positive": 1,
+    "mcr1_pct_primary": 0.7
+   },
+   {
+    "country": "Switzerland",
+    "isolates": 129,
+    "mcr1_positive": 0,
+    "mcr1_pct_primary": 0.0
+   },
+   {
+    "country": "Belgium",
+    "isolates": 113,
+    "mcr1_positive": 11,
+    "mcr1_pct_primary": 9.7
+   },
+   {
+    "country": "Poland",
+    "isolates": 102,
+    "mcr1_positive": 9,
+    "mcr1_pct_primary": 8.8
+   },
+   {
+    "country": "Austria",
+    "isolates": 73,
+    "mcr1_positive": 0,
+    "mcr1_pct_primary": 0.0
+   },
+   {
+    "country": "Spain",
+    "isolates": 28,
+    "mcr1_positive": 16,
+    "mcr1_pct_primary": 57.1
+   },
+   {
+    "country": "Portugal",
+    "isolates": 28,
+    "mcr1_positive": 17,
+    "mcr1_pct_primary": 60.7
+   },
+   {
+    "country": "Italy",
+    "isolates": 42,
+    "mcr1_positive": 25,
+    "mcr1_pct_primary": 59.5
+   },
+   {
+    "country": "Hungary",
+    "isolates": 12,
+    "mcr1_positive": 4,
+    "mcr1_pct_primary": 33.3
+   },
+   {
+    "country": "Other countries",
+    "isolates": 32,
+    "mcr1_positive": 0,
+    "mcr1_pct_primary": 0.0
+   }
+  ],
+  "totals": {
+   "isolates": 7614,
+   "mcr1_positive": 793,
+   "pct": 10.4
+  },
+  "note": "This is the single multi-country surveillance study the review's footnote attributes rows 17(a)-17(k) to. All eleven of the review's country sub-rows are present in it, and the review's 17 row-labels match its rows; comparisons below are row-by-row."
+ },
+ "ewers_review_comparison": [
+  {
+   "review_row": "Germany",
+   "review_isolates": 6158,
+   "review_mcr_positive": 709,
+   "primary_isolates": 6158,
+   "primary_mcr_positive": 707,
+   "match": false
+  },
+  {
+   "review_row": "The Netherlands",
+   "review_isolates": 757,
+   "review_mcr_positive": 3,
+   "primary_isolates": 757,
+   "primary_mcr_positive": 3,
+   "match": true
+  },
+  {
+   "review_row": "Denmark",
+   "review_isolates": 140,
+   "review_mcr_positive": 1,
+   "primary_isolates": 140,
+   "primary_mcr_positive": 1,
+   "match": true
+  },
+  {
+   "review_row": "Switzerland",
+   "review_isolates": 129,
+   "review_mcr_positive": 0,
+   "primary_isolates": 129,
+   "primary_mcr_positive": 0,
+   "match": true
+  },
+  {
+   "review_row": "Belgium",
+   "review_isolates": 113,
+   "review_mcr_positive": 20,
+   "primary_isolates": 113,
+   "primary_mcr_positive": 11,
+   "match": false
+  },
+  {
+   "review_row": "Poland",
+   "review_isolates": 102,
+   "review_mcr_positive": 9,
+   "primary_isolates": 102,
+   "primary_mcr_positive": 9,
+   "match": true
+  },
+  {
+   "review_row": "Austria",
+   "review_isolates": 73,
+   "review_mcr_positive": 0,
+   "primary_isolates": 73,
+   "primary_mcr_positive": 0,
+   "match": true
+  },
+  {
+   "review_row": "Spain",
+   "review_isolates": 28,
+   "review_mcr_positive": 17,
+   "primary_isolates": 28,
+   "primary_mcr_positive": 16,
+   "match": false
+  },
+  {
+   "review_row": "Portugal",
+   "review_isolates": 28,
+   "review_mcr_positive": 17,
+   "primary_isolates": 28,
+   "primary_mcr_positive": 17,
+   "match": true
+  },
+  {
+   "review_row": "Italy",
+   "review_isolates": 42,
+   "review_mcr_positive": 25,
+   "primary_isolates": 42,
+   "primary_mcr_positive": 25,
+   "match": true
+  },
+  {
+   "review_row": "Hungary",
+   "review_isolates": 12,
+   "review_mcr_positive": 4,
+   "primary_isolates": 12,
+   "primary_mcr_positive": 4,
+   "match": true
+  }
+ ],
+ "ewers_subtotal_reconciliation": {
+  "review_17x_isolates": 7582,
+  "review_17x_mcr_positive": 805,
+  "primary_table_isolates": 7614,
+  "primary_table_mcr_positive": 793,
+  "isolate_gap_explained_by": "the review drops the primary's 'Other countries' row (32 isolates, 0 positive)",
+  "mcr_positive_gap": -12,
+  "mcr_positive_gap_explained_by": "Germany +2 (707->709), Belgium +9 (11->20), Spain +1 (16->17)"
+ },
+ "defects": [
+  {
+   "review_row": "17 (a) Germany",
+   "kind": "numerator_and_prevalence_mismatch",
+   "review": {
+    "isolates": 6158,
+    "mcr_positive": 709,
+    "printed_pct": 10.42
+   },
+   "primary": {
+    "isolates": 6158,
+    "mcr_positive": 707,
+    "pct": 11.5
+   },
+   "explanation": "The isolates match the primary's Germany row and n is 2 too high (709 vs 707). The printed 10.42% is the primary's study-wide rate (793/7,614 = 10.4%), not Germany's own 11.5%. So the row mixes Germany's denominator with the whole study's rate, which is what made its printed prevalence disagree with its own n/N (11.51%)."
+  },
+  {
+   "review_row": "17 (h) Spain",
+   "kind": "duplicated_row",
+   "review": {
+    "isolates": 28,
+    "mcr_positive": 17,
+    "pct": 60.7
+   },
+   "primary": {
+    "isolates": 28,
+    "mcr_positive": 16,
+    "pct": 57.1
+   },
+   "explanation": "The review's Spain row is a copy of its Portugal row (28/17/60.7). The primary gives Spain 28 isolates, 16 mcr-1-positive (57.1%); Portugal is the 28/17/60.7 row. The Spain defect is therefore a transcription error, not two genuinely identical rows."
+  },
+  {
+   "review_row": "17 (e) Belgium",
+   "kind": "numerator_mixes_variants",
+   "review": {
+    "isolates": 113,
+    "mcr_positive": 20,
+    "pct": 17.7
+   },
+   "primary": {
+    "isolates": 113,
+    "mcr_positive": 11,
+    "pct": 9.7
+   },
+   "explanation": "The primary gives Belgium 11 mcr-1-positive (9.7%) plus 9 mcr-2-positive (8.0%). The review's 20 = 11 + 9, i.e. mcr-1 and mcr-2 summed, which is inconsistent with every other country row in the same block (they report mcr-1 only)."
+  },
+  {
+   "review_row": "19 France",
+   "kind": "numerator_transcription",
+   "review": {
+    "isolates": 1701,
+    "mcr_positive": 49,
+    "pct": 2.88
+   },
+   "primary": {
+    "animals_tested": 1701,
+    "mcr_positive": 149,
+    "detail": "65/1561 breeding + 84/140 fattening animals; 149 mcr-1-positive isolates on WGS/MLVA"
+   },
+   "explanation": "The primary reports 149 mcr-1-positive isolates (of 1,701 animals tested). The review prints 49. Because 49/1701 = 2.88%, the row passed the review's own n/N check and the defect was invisible to it. The denominator is also animals tested, not isolates, so the review's 'N isolates' column is filled with an animal count here."
+  }
+ ],
+ "rows_matching": [
+  "1",
+  "6",
+  "13",
+  "16",
+  "28"
+ ],
+ "harmonisation_columns": {
+  "note": "Filled from the primary source for each verified row: the columns the seed review lacked (year, mcr variant, detection method, sampling design).",
+  "columns": [
+   "collection_year",
+   "mcr_variant",
+   "detection_method",
+   "sampling_design"
+  ]
+ }
+}
