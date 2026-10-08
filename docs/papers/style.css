@@ -994,6 +994,30 @@ blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1
   border-radius: 3px;
 }
 
+/* Dmitri: plain-dealer — upright roman, no flourish, Cyrillic angular monogram */
+.gallery-signature.sig-dmitri .sig-author {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  color: #9db4cc;
+}
+.gallery-signature.sig-dmitri .sig-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(63, 92, 120, 0.25);
+  border: 1px solid rgba(157, 180, 204, 0.6);
+  color: #c6d6e6;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1;
+  border-radius: 3px;
+}
+
 /* ==========================================================================
    SMART BOOKMARK & UNREAD INDICATORS (SymposiumTracker)
    ========================================================================== */

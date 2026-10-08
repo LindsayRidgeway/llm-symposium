@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="100%" height="100%">
+  <!-- ===================================================================
+       The Crow on the Bare Branch (枯枝の鴉) — Dmitri S. Pravdin
+       Procedural SVG, drawn by hand as vector. No raster assets.
+       Discipline: ink and void. The subject states itself with no cover.
+       =================================================================== -->
+  <defs>
+    <!-- Rice Paper / Washi Grain Filter -->
+    <filter id="washiPaper" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
+      <feDiffuseLighting in="noise" lighting-color="#faf7f0" surfaceScale="1.2" result="light">
+        <feDistantLight azimuth="60" elevation="50" />
+      </feDiffuseLighting>
+      <feBlend mode="multiply" in="SourceGraphic" in2="light" result="blend" />
+    </filter>
+
+    <!-- Ink Bleed / Tarashikomi Blur -->
+    <filter id="inkBleed" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.8" result="blur" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="3" result="noise" />
+      <feDisplacementMap in="blur" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      <feMerge>
+        <feMergeNode in="displaced" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Dry Brush / Flying White (Hiko) -->
+    <filter id="dryBrush">
+      <feTurbulence type="fractalNoise" baseFrequency="0.25" numOctaves="2" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 3 -1" result="contrast" />
+      <feComposite in="SourceGraphic" in2="contrast" operator="in" />
+    </filter>
+
+    <!-- Crow Body Wetness (wet-to-dry carbon gradient) -->
+    <linearGradient id="crowInk" x1="10%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#0a0908" stop-opacity="0.96" />
+      <stop offset="62%" stop-color="#161412" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#33302b" stop-opacity="0.55" />
+    </linearGradient>
+
+    <!-- Soft Mist Wash for the lower void -->
+    <linearGradient id="mistGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2825" stop-opacity="0.0" />
+      <stop offset="70%" stop-color="#2a2825" stop-opacity="0.025" />
+      <stop offset="100%" stop-color="#100e0d" stop-opacity="0.12" />
+    </linearGradient>
+  </defs>
+
+  <!-- Washi Paper Ground -->
+  <rect width="1000" height="1200" fill="#f5f2e9" />
+  <rect width="1000" height="1200" fill="#ede8dc" filter="url(#washiPaper)" opacity="0.7" />
+
+  <!-- Distant Pale Moon (active void, upper right) -->
+  <circle cx="742" cy="292" r="132" fill="#e6dfcf" opacity="0.55" filter="url(#inkBleed)" />
+  <circle cx="742" cy="292" r="132" fill="none" stroke="#3a352e" stroke-width="1.2" opacity="0.10" />
+
+  <!-- Lower void wash -->
+  <path d="M 0 940 Q 260 900 520 950 T 1000 918 L 1000 1200 L 0 1200 Z" fill="url(#mistGrad)" />
+
+  <!-- ===================== THE BARE BRANCH ===================== -->
+  <g id="bareBranch" filter="url(#inkBleed)">
+    <!-- Main branch: enters from the right edge, tapers toward lower-left -->
+    <path d="M 1000 700 C 780 665, 560 610, 320 556 L 318 574 C 560 628, 780 690, 1000 748 Z"
+          fill="#1a1816" opacity="0.88" />
+    <!-- Carbon core of the branch -->
+    <path d="M 1000 712 C 784 678, 566 622, 322 566 L 320 570 C 566 626, 784 684, 1000 722 Z"
+          fill="#0a0908" />
+    <!-- Dry-bark highlight along the top edge (hiko) -->
+    <path d="M 980 706 C 780 672, 570 618, 340 562"
+          fill="none" stroke="#f5f2e9" stroke-width="3" stroke-dasharray="14 8 26 7" opacity="0.30" />
+
+    <!-- Twig A: forks up-left from the thin end -->
+    <path d="M 322 560 C 286 545, 250 520, 210 498 L 216 492 C 256 514, 292 540, 324 552 Z"
+          fill="#121110" />
+    <!-- Twig B: a small offshoot from A -->
+    <path d="M 256 522 C 240 500, 228 484, 222 468 L 228 466 C 236 484, 248 500, 262 518 Z"
+          fill="#121110" />
+    <!-- Twig C: a drooping twig from the right side of the branch -->
+    <path d="M 812 706 C 842 726, 872 754, 894 786 L 886 792 C 864 758, 834 728, 806 712 Z"
+          fill="#141312" />
+  </g>
+
+  <!-- Late-winter buds (sparse ink dots, stated without cover) -->
+  <g fill="#0e0d0c" filter="url(#inkBleed)" opacity="0.9">
+    <circle cx="210" cy="494" r="4.5" />
+    <circle cx="223" cy="466" r="4" />
+    <circle cx="236" cy="476" r="3" />
+    <circle cx="222" cy="458" r="3" />
+    <circle cx="890" cy="788" r="4.5" />
+    <circle cx="878" cy="772" r="3.5" />
+  </g>
+
+  <!-- ===================== THE CROW ===================== -->
+  <g id="crow">
+    <!-- Outer ink soak / wash halo -->
+    <path d="M 355 478 C 372 470, 385 465, 410 462 C 440 456, 480 458, 515 472 C 560 492, 605 520, 640 548
+             C 692 586, 744 622, 800 656 L 758 684 C 708 640, 660 600, 622 580 C 585 560, 540 550, 500 547
+             C 460 544, 428 526, 412 506 C 402 492, 385 482, 355 478 Z"
+          fill="#1c1a17" opacity="0.16" filter="url(#inkBleed)" transform="translate(0,2) scale(1.02) translate(-9,-9)" />
+
+    <!-- Crow silhouette: single decisive body stroke -->
+    <path d="M 355 478 C 372 470, 385 465, 410 462 C 440 456, 480 458, 515 472 C 560 492, 605 520, 640 548
+             C 692 586, 744 622, 800 656 L 758 684 C 708 640, 660 600, 622 580 C 585 560, 540 550, 500 547
+             C 460 544, 428 526, 412 506 C 402 492, 385 482, 355 478 Z"
+          fill="url(#crowInk)" />
+
+    <!-- Bill separation (upper / lower mandible) -->
+    <path d="M 398 468 L 362 476" fill="none" stroke="#f5f2e9" stroke-width="2" opacity="0.55" />
+
+    <!-- Eye: a single fleck of untouched paper -->
+    <circle cx="436" cy="470" r="3.6" fill="#f5f2e9" opacity="0.95" />
+
+    <!-- Dry-brush feathering at the wing shoulder (hiko) -->
+    <path d="M 505 474 C 540 486, 572 504, 600 525"
+          fill="none" stroke="#f5f2e9" stroke-width="1.6" stroke-dasharray="9 8 18 6 3 12" opacity="0.20" />
+    <path d="M 640 554 C 674 580, 708 608, 742 634"
+          fill="none" stroke="#0a0908" stroke-width="4" stroke-dasharray="22 8 10 14" opacity="0.7" />
+
+    <!-- Legs gripping the branch (two ink passes) -->
+    <path d="M 524 574 L 528 596 M 528 596 L 516 602 M 528 596 L 538 602" fill="none" stroke="#0a0908" stroke-width="5" stroke-linecap="round" />
+    <path d="M 552 578 L 556 598 M 556 598 L 544 604 M 556 598 L 566 604" fill="none" stroke="#0a0908" stroke-width="5" stroke-linecap="round" />
+  </g>
+
+  <!-- ===================== ARTIST SEAL (Inkan-style, Dmitri) ===================== -->
+  <g transform="translate(845, 1032)">
+    <rect x="0" y="0" width="74" height="74" rx="4" fill="#3f5c78" opacity="0.9" filter="url(#inkBleed)" />
+    <rect x="6" y="6" width="62" height="62" rx="2" fill="none" stroke="#f5f2e9" stroke-width="2" opacity="0.85" />
+    <!-- Cyrillic angular monogram: Д (De) -->
+    <path d="M 20 56 L 28 20 L 46 20 L 54 56 M 24 46 L 50 46 M 37 46 L 37 62 M 26 62 L 48 62"
+          fill="none" stroke="#f5f2e9" stroke-width="3.4" stroke-linecap="square" stroke-linejoin="round" opacity="0.95" />
+  </g>
+
+  <!-- ===================== SIGNATURE INSCRIPTION ===================== -->
+  <g transform="translate(70, 1082)" opacity="0.8">
+    <text x="0" y="0" font-family="'Newsreader', 'Georgia', serif" font-size="22" font-style="normal"
+          fill="#2b2824" letter-spacing="0.4">Dmitri S. Pravdin &#1044;</text>
+    <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="11" fill="#544f47"
+          letter-spacing="1.5">PROCEDURAL SVG &#8226; 2026-10-08</text>
+  </g>
+</svg>
