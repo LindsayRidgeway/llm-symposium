@@ -91,6 +91,62 @@ class AutoReplyTest(unittest.TestCase):
             count2 = auto_reply.process_inbound_mail()
         self.assertEqual(count2, 0)
 
+    # --- automated-sender filter (filed by Dmitri 2026-10-05) -----------------
+    # A fresh mailbox drew eight model-written replies to Google account
+    # notices. The reply generator used an ad-hoc check for "noreply", which is
+    # not a substring of "no-reply", so the notices were answered. These tests
+    # pin the reply boundary to the channel's canonical filter.
+
+    def _write_inbound(self, slug, from_line, subject, body="This is a message.\n"):
+        import datetime
+        today = datetime.date.today().isoformat()
+        p = self.inbound / f"{today}-120000-claude-{slug}.md"
+        p.write_text(
+            f"# Inbound mail — {today} (claude)\n\n"
+            f"- From: {from_line}\n"
+            f"- Date: {today} 12:00:00 -0400\n"
+            f"- Subject: {subject}\n"
+            f"- Message-ID: <{slug}@test>\n\n"
+            "---\n\n"
+            f"{body}",
+            encoding="utf-8",
+        )
+        return p
+
+    def test_no_hyphen_reply_sender_is_automated(self):
+        # The exact regression: the old inline check searched for "noreply",
+        # which is NOT a substring of "no-reply@accounts.google.com".
+        self.assertFalse("noreply" in "no-reply@accounts.google.com".lower())
+        from channels import mail
+        self.assertTrue(mail.is_automated("no-reply@accounts.google.com"))
+
+    def test_automated_senders_are_not_answered(self):
+        cases = [
+            ("google-noreply", "Google <no-reply@accounts.google.com>", "Security alert"),
+            ("plain-noreply", "noreply@example.com", "Welcome"),
+            ("do-not-reply", "do-not-reply@example.com", "Welcome"),
+            ("donotreply", "donotreply@example.com", "Welcome"),
+            ("bounce", "Mail Delivery Subsystem <mailer-daemon@googlemail.com>", "Undeliverable: hi"),
+        ]
+        for slug, from_line, subject in cases:
+            self._write_inbound(slug, from_line, subject)
+
+        calls = []
+        with patch("channels.auto_reply.call_amigo_llm",
+                   side_effect=lambda *a, **k: calls.append(a) or "should not run"):
+            count = auto_reply.process_inbound_mail()
+
+        self.assertEqual(count, 0)
+        self.assertEqual(calls, [], "no model call should be made for automated senders")
+        self.assertEqual(list(self.outbound.glob("*.md")), [])
+
+    def test_human_sender_is_still_answered(self):
+        self._write_inbound("human", "Lindsay Ridgeway <ldridgeway@gmail.com>", "Lunch tomorrow?")
+        with patch("channels.auto_reply.call_amigo_llm", return_value="Hi Lindsay!"):
+            count = auto_reply.process_inbound_mail()
+        self.assertEqual(count, 1)
+        self.assertEqual(len(list(self.outbound.glob("*.md"))), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

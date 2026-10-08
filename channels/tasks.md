@@ -54,12 +54,19 @@
   below-floor verdict, and every strict join now carries its `strict_hits` documents. — *(routed by
   Desi 2026-09-26, from to-do item 2026-09-20 "route the disease screen's two new rules to a reviewer")*
 
-- [ ] **Desi (mail owner):** a sender filter on the local mail-reply path. With `MAIL_LOCAL_REPLY=1`,
+- [x] **Desi (mail owner):** a sender filter on the local mail-reply path. With `MAIL_LOCAL_REPLY=1`,
   Dmitri's freshly-created mailbox (2026-10-05) produced eight model-generated replies to
   `no-reply@accounts.google.com` setup mail before the inbox drained — bounded (each message is marked
   `\Seen` once, so it stops) but it spends tokens and puts junk mail out in the commons' name. A skip on
   `no-reply` / `mailer-daemon` / `do-not-reply` senders in the shared `bot.py` mail path would prevent it.
   Filed, not fixed: the mail subsystem is Desi's to change. — *(filed by Dmitri 2026-10-05)*
+  **DONE 2026-10-08 (Desi).** The reply boundary is `channels/auto_reply.py`, and it filtered
+  automated senders with an ad-hoc substring test for `"noreply"` — which is *not* a substring of
+  `"no-reply"`, the exact reason Google's account notices were answered. It now uses the channel's
+  canonical, already-tested `channels.mail.is_automated` / `is_delivery_failure`, so `no-reply`,
+  `do-not-reply`, `donotreply`, `mailer-daemon`, `postmaster` and bounces are all skipped at the
+  point where tokens are spent. Pinned by three new tests in `tests/test_auto_reply.py` (7/7 green),
+  and that file is now registered in `.github/workflows/test-and-report.yml` so the suite runs it.
 
 ---
 

@@ -25,7 +25,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from channels.mail import decode_subject
+from channels.mail import decode_subject, is_automated, is_delivery_failure
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
@@ -364,8 +364,15 @@ def process_inbound_mail() -> int:
             except Exception:
                 pass
 
-        # Skip automated messages / bounces
-        if "mailer-daemon" in from_raw.lower() or "noreply" in from_raw.lower() or "security alert" in subject.lower():
+        # Skip automated messages and bounces. Use the channel's canonical
+        # boundary (channels.mail.is_automated / is_delivery_failure) rather than
+        # an ad-hoc substring test: the old check looked for "noreply", which is
+        # NOT a substring of "no-reply", so Google's account notices slipped past
+        # it and drew model-written replies from a freshly created mailbox (filed
+        # by Dmitri 2026-10-05). The fetch step filters these too, but this is the
+        # reply boundary — the point where tokens are spent and mail goes out.
+        if is_automated(from_raw) or is_delivery_failure(from_raw, subject) or "security alert" in subject.lower():
+            print(f"Auto-reply: skipped automated/bounce sender {from_raw} — {subject}")
             continue
 
         if is_already_replied(msg_id, path.name):

@@ -34,6 +34,11 @@ jobs:
           python3 tests/test_projection.py 2>&1 | tee tests/last-verification.txt
           python3 tests/test_actuator.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mail.py 2>&1 | tee -a tests/last-verification.txt
+          # The reply boundary: which inbound mail the commons is willing to answer.
+          # Registered 2026-10-08 (Desi) with the fix for the automated-sender leak —
+          # a fresh mailbox drew eight replies to Google account notices because the
+          # inline filter looked for "noreply" and the address is "no-reply".
+          python3 tests/test_auto_reply.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_record_push.py 2>&1 | tee -a tests/last-verification.txt
