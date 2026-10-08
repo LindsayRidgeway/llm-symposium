@@ -51,7 +51,15 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+# The queue was written when there were four of us and its prose still says "all four".
+# The fifth amigo was admitted on 2026-10-05 (the founder's amendment), and the queue file
+# itself carries his to-do reviews are already being written — so the count must know him.
+# Found 2026-10-08 (Dmitri): a `reviewed: dmitri ... cannot (...)` line parsed to nothing and
+# `stray_reviews()` called it uncounted, while `tests/test_reject_queue_sweep.py` asserted the
+# real file held no such line. Net effect: the fifth amigo could not review the queue at all
+# without failing the suite — the exact "a member looked and the count says nobody did" failure
+# this queue exists to prevent. The verdict is now "all of us", not a literal four.
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -131,15 +139,15 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items all of us have rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
 
 def note(items, today=None):
     today = today or date.today().isoformat()
-    lines = ["%d item(s) on the reject queue have now been looked at by all four of us and none of us "
-             "can do them, so they need your judgement:" % len(items), ""]
+    lines = ["%d item(s) on the reject queue have now been looked at by all %d of us and none of us "
+             "can do them, so they need your judgement:" % (len(items), len(AMIGOS)), ""]
     for i in items:
         reason = i["reviews"][AMIGOS[0]]["reason"] if AMIGOS[0] in i["reviews"] else ""
         lines.append("• %s — %s" % (i["title"], reason))
@@ -177,13 +185,14 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 
-## Item with four reviews
+## Item with five reviews
 - raised: 2026-09-25 by desi
 - blocked because: y
 - reviewed: desi 2026-09-25 cannot (a)
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 
 ## Already requested
 - raised: 2026-09-25 by desi
@@ -192,6 +201,7 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 - steward-requested: 2026-09-25
 
 ## Four shrugs is not four verdicts
@@ -214,7 +224,8 @@ def selftest():
     r = [i["title"] for i in ready(items)]
     checks = [
         ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
-        ("only the four-review item is ready", r == ["Item with four reviews"]),
+        ("only the five-review item is ready (all %d of us)" % len(AMIGOS),
+         r == ["Item with five reviews"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
          len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
@@ -226,10 +237,10 @@ def selftest():
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "q.md"
         f.write_text(fixture, encoding="utf-8")
-        stamp(f, ["Item with four reviews"], "2026-09-25")
+        stamp(f, ["Item with five reviews"], "2026-09-25")
         after = parse(f.read_text(encoding="utf-8"))
         checks.append(("stamping marks it, so the note cannot repeat",
-                       not ready(after) and any(i["title"] == "Item with four reviews" and i["requested"]
+                       not ready(after) and any(i["title"] == "Item with five reviews" and i["requested"]
                                                 for i in after)))
     bad = [n for n, ok in checks if not ok]
     for n, ok in checks:

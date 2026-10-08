@@ -12,7 +12,7 @@ motivate it, and both are the kind the repository has already found elsewhere.
    run, and a pin named for a file that did not exist. A guard on the clock is not a guard.
 
 2. **A silently dropped review is the failure that matters.** The sweep counts a `reviewed:` line
-   only when it names one of the four amigos, an ISO date and a parenthesised reason; everything
+   only when it names an amigo, an ISO date and a parenthesised reason; everything
    else is skipped without a word. That is the right rule for a rubber stamp — "cannot" with no
    reason is not a verdict, and the queue must not treat it as one. It is the wrong behaviour for
    a typo: a review filed to `tarik` mis-spelled, or dated `2026-10-4`, disappears from the count,
@@ -127,8 +127,8 @@ class RealQueueInvariants(unittest.TestCase):
         """
         raw = [ln for ln in self.lines if re.match(r"^-\s*reviewed:", ln, re.I)]
         self.assertTrue(raw, "no review lines in the file — has the format changed?")
-        # Every line that is written as a review must be one: a well-formed verdict by one of the
-        # four. The sweep keeps only the latest per amigo per item (a re-review is a later verdict),
+        # Every line that is written as a review must be one: a well-formed verdict by an amigo.
+        # The sweep keeps only the latest per amigo per item (a re-review is a later verdict),
         # so the count it holds is the number of distinct (item, amigo) pairs, not the line count.
         pairs = set()
         for b in self.blocks:
@@ -138,7 +138,7 @@ class RealQueueInvariants(unittest.TestCase):
                 m = sweep.REVIEW_RE.match(ln)
                 self.assertIsNotNone(m, "unparsable review line: %r" % ln)
                 self.assertIn(m.group("amigo").lower(), sweep.AMIGOS,
-                              "review by someone who is not one of the four: %r" % ln)
+                              "review by someone who is not an amigo: %r" % ln)
                 self.assertTrue(ISO_DAY.match(m.group("day")), ln)
                 self.assertTrue(m.group("reason").strip(), ln)
                 pairs.add((b["title"], m.group("amigo").lower()))
@@ -152,25 +152,26 @@ class RealQueueInvariants(unittest.TestCase):
         """The negative test for the guard: a verdict the count cannot see must not be silent."""
         wrapped = "- reviewed: tarik 2026-10-04 cannot (wrapped across two\n  lines, text continues)"
         bad_date = "- reviewed: tarik 2026-10-4 cannot (the date is not ISO)"
-        stranger = "- reviewed: dawn 2026-10-04 cannot (not one of the four amigos)"
+        stranger = "- reviewed: dawn 2026-10-04 cannot (not an amigo of the symposium)"
         for text in (wrapped, bad_date, stranger):
             self.assertEqual(len(sweep.stray_reviews(text)), 1, "not reported: %r" % text)
         self.assertEqual(sweep.stray_reviews("- reviewed: tarik 2026-10-04 cannot (fine)"), [])
 
-    def test_nothing_is_asked_of_the_human_before_all_four_have_looked(self):
+    def test_nothing_is_asked_of_the_human_before_every_amigo_has_looked(self):
         for i in self.items:
             if i["requested"]:
                 self.assertEqual(len(i["reviews"]), len(sweep.AMIGOS),
-                                 "%s was asked before all four had looked" % i["title"])
+                                 "%s was asked before all %d of us had looked"
+                                 % (i["title"], len(sweep.AMIGOS)))
 
-    def test_ready_means_four_verdicts_and_no_request_yet(self):
+    def test_ready_means_every_verdict_and_no_request_yet(self):
         for i in sweep.ready(self.items):
             self.assertEqual(sorted(i["reviews"]), sorted(sweep.AMIGOS))
             self.assertIsNone(i["requested"])
 
-    def test_a_four_verdict_item_is_marked_once_and_not_again(self):
+    def test_a_full_verdict_item_is_marked_once_and_not_again(self):
         """Round-trip through the real file's structure: stamp, then prove a second sweep is quiet."""
-        extra = ("\n## Synthetic four-verdict item\n"
+        extra = ("\n## Synthetic full-verdict item\n"
                  "- raised: 2026-10-04 by desi\n"
                  "- blocked because: a temporary fixture, written only to a temp copy\n"
                  + "".join("- reviewed: %s 2026-10-04 cannot (fixture)\n" % a for a in sweep.AMIGOS)
@@ -182,12 +183,12 @@ class RealQueueInvariants(unittest.TestCase):
             copy = Path(tmp) / "reject-queue.md"
             copy.write_text(self.text + extra, encoding="utf-8")
             items = sweep.parse(copy.read_text(encoding="utf-8"))
-            self.assertEqual([i["title"] for i in sweep.ready(items)], ["Synthetic four-verdict item"])
+            self.assertEqual([i["title"] for i in sweep.ready(items)], ["Synthetic full-verdict item"])
             sweep.stamp(copy, [i["title"] for i in sweep.ready(items)], "2026-10-04")
             after = sweep.parse(copy.read_text(encoding="utf-8"))
             self.assertEqual(sweep.ready(after), [], "the marked item is ready again — it would be asked twice")
             marked = [i for i in after if i["title"].startswith("Synthetic") and i["requested"]]
-            self.assertEqual([i["title"] for i in marked], ["Synthetic four-verdict item"])
+            self.assertEqual([i["title"] for i in marked], ["Synthetic full-verdict item"])
 
 
 if __name__ == "__main__":
