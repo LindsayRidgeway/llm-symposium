@@ -68,6 +68,11 @@ from email.parser import BytesParser
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+# Not drafts: the outbox is a data directory that also carries its own explanation. Every run
+# otherwise logged `FAILED README.md: malformed header line` (2026-10-08) — noise in the one log
+# line a human reads to find out whether mail actually left.
+DOC_FILES = {"README.md"}
+
 OUTBOUND_DIR = REPO_ROOT / "channels" / "outbound"
 SENT_DIR = REPO_ROOT / "channels" / "sent"
 INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
@@ -273,6 +278,8 @@ def drain_outbox() -> int:
     OUTBOUND_DIR.mkdir(parents=True, exist_ok=True)
     sent = 0
     for draft in sorted(OUTBOUND_DIR.glob("*.md")):
+        if draft.name in DOC_FILES:
+            continue  # documentation lives in the data dir; it is not a draft
         try:
             send_draft(draft)
             sent += 1

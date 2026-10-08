@@ -275,6 +275,32 @@ def test_drain_outbox_uses_identity_creds_and_moves_sent():
             assert (sent / "draft.md").exists()  # into sent/
 
 
+def test_the_outbox_readme_is_not_treated_as_a_draft():
+    """2026-10-08: every run logged `FAILED README.md: malformed header line`."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
+            mail.REPO_ROOT = Path(td)
+            outbox = Path(td) / "channels" / "outbound"
+            sent = Path(td) / "channels" / "sent"
+            outbox.mkdir(parents=True)
+            (outbox / "README.md").write_text(
+                "# channels/outbound/ — the queue the mail channel drains\n", encoding="utf-8"
+            )
+            mail.OUTBOUND_DIR = outbox
+            mail.SENT_DIR = sent
+            mail.INBOUND_DIR = Path(td) / "channels" / "inbound"
+
+            with mock.patch.object(mail.smtplib, "SMTP") as smtp:
+                n = mail.drain_outbox()
+            assert n == 0
+            smtp.assert_not_called()  # nothing was even attempted
+            assert (outbox / "README.md").exists()  # and it was not moved to sent/
+
+
 def test_drain_outbox_fails_without_creds_for_identity():
     import tempfile
 
