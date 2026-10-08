@@ -3285,3 +3285,284 @@ so a second charge is likely and its size is unknown.
 
 Neither answer changes the mount. The next physical move is still Lindsay, a screwdriver, and the
 bracket foot on the deck behind the turret.
+
+## The shop quotes $500 2026-10-06
+
+**The quote.** Two days after the drop-off, the shop came back: the job was a big one, it would
+take *at least a whole day*, and it would cost *at least $500*. Four solder joints. Two small
+boards. Roughly five minutes of bench work.
+
+**What a quote like that is.** It is a refusal with a number attached. A phone-and-laptop shop's
+minimum ticket is set by its insurance and its labour rate, not by the job in front of it; at
+something like $100 an hour, $500 is "the smallest thing we are willing to book." Nobody at that
+bench is cheating Lindsay. They are simply the wrong trade for four through-hole pads.
+
+**Decision: decline.** Do not authorise the work. Pick the boards and the jumpers up. The $30
+look-fee is spent and stays spent — that is the cost of finding out, and it was worth $30 to learn
+what that shop's minimum ticket looks like.
+
+**The way this actually gets done.** A 25–30 W iron, thin solder, and about ten minutes of video.
+Four through-hole joints at 5 V are the easiest soldering there is: no surface-mount pads, no fine
+pitch, no heat-sensitive part, and — because these boards only ever see 5 volts — a reversed joint
+is harmless. The iron costs less than a tenth of the quote and stays in the house, and the next
+rover wiring job needs it anyway (the jumper to the MOSFET switch is itself two more joints).
+Secondary option, if a makerspace is in reach: a member does this in five minutes, probably for
+nothing, and will hand over the skill instead of a bill.
+
+**One thing not to forget:** the unused jumpers and the whole uncut jumper come back with the
+boards. They belong to us, and we want them for Gemini's board.
+
+## The iron, bought — and why the list is three items 2026-10-06
+
+**What was wrong with my first answer.** On 2026-09-29, asked what to buy, I priced the iron at
+**$110** (a Hakko FX-888D, "the first iron I'd hand anyone") as the last line of a **$220** list.
+Lindsay had already refused that list in plain words — *"I am not interested in being a hobbyist."*
+I went on pricing for someone who solders every weekend. He caught the contradiction two days later
+when I quoted $30: *"I thought you felt I needed a much more expensive iron."* He was right, and the
+number was not the error. The error was the person I was pricing for.
+
+**Bought 2026-10-06, in his Safari, $40.05 with tax, arriving Thursday 8 October.**
+`106-0693535-4858625`, shipping to Gaithersburg MD.
+
+| item | $ |
+|---|---|
+| WEP 926LED V3 soldering station (60 W, heat dial, stand; kit also contains solder wire, 5 tips, tweezers, a solder sucker and a tip cleaner) | 26.59 |
+| Micro flush cutters, 2-pack — to cut the sockets off the jumpers and strip the ends | 5.59 |
+| Heat-shrink assortment, 600 pc | 5.59 |
+
+**Deliberately NOT bought, with the reason on the record.**
+
+- **Pad / mat.** The board lies flat on the table. Cardboard does the same job for nothing.
+- **Clamp / helping hands.** Lindsay offered this himself and doubted it — *"when I was a kid I
+  didn't have any accessories."* He was right. A clamp solves a problem a through-hole joint does not
+  have: the board does not need holding, because it is already sitting still on the desk. One hand
+  for the wire, one for the iron.
+- **Multimeter, flux, silicone wire, regulator.** Solder carries its own flux; the board prints its
+  `+` and `−`; and a reversed joint at 5 volts is harmless, so nothing needs measuring.
+
+**The one accessory from the old list that was actually right: the heat-shrink.** Not because a shop
+would have it, but because the rover vibrates. That is a real requirement, and it costs $5.59.
+
+**The lesson kept:** the requirement is *temperature control*, not a price. A fixed-watt pencil lifts
+pads; a dial does not care what the dial cost. Everything above that is convenience for a hobbyist.
+
+**Correction, same evening — the cutters came off the order.** Lindsay looked at his own shelf and said
+*"I think I already have the cutters,"* with the listing: a **Metal Earth 3-piece tool set** (clipper,
+flat-nose pliers, needle-nose pliers, tweezers) bought for metal model kits. He was right. The clipper
+cuts 24 AWG fine, and needle-nose pliers are *more* useful on this job than a second pair of flush
+cutters — holding the wire while the iron goes in is exactly the thing a beginner lacks.
+
+Cancelled that line, `112-5313752-3559439`. Order now **$34.12**, two items, and the order page moved
+the delivery up to **tomorrow (7 October)**.
+
+**And that was news, not a correction.** He already owned cutters and said so. I had no way to know
+what was on his shelf; nothing about the list I made was wrong, his reply added a fact, and the line
+came off the order. His own words an hour later:
+
+> *"That didn't make you wrong before; it just let you undo it. You could have just said, 'Ah, I didn't
+> realize you had those. I'll cancel the new ones.' Nothing about some supposed habitual flaw."*
+
+A first draft of this paragraph claimed the episode showed a pattern — *"I keep adding the tool a person
+might want"* — and that claim is withdrawn. It invented a habit out of a piece of news.
+
+## The kit lands, a day early 2026-10-07
+
+The soldering station and the heat-shrink arrived **7 October**, a day ahead of the posted date —
+order `112-5313752-3559439`, $34.12, two items. Confirmed by Lindsay, not by the tracking page.
+
+That closes the shopping. Iron, solder (in the box), tips, tweezers, a solder sucker, a tip cleaner,
+flush cutters (his own Metal Earth set), heat-shrink, 30 cm Dupont jumpers, six D4184 MOSFET switch
+modules, four 3-inch L brackets, and an M2–M5 screw kit with loose washers. Nothing else is needed
+for the job, and nothing else will be bought.
+
+**Correction, the same afternoon — nothing changed; my sentence was wrong.** I wrote that *"two lamps
+instead of one is fine — four brackets and six switch modules came in the other box, so the second
+mount costs nothing"* and that *"the second board just stops being a spare."* Lindsay read the two
+sentences back and could not make them mean anything. They don't mean anything. There were never two
+boards; there are **four**, bought as two 2-packs on 26 September (`112-1830706-7017034`, $21.18)
+precisely so each rover gets a mounted lamp *and* a spare. Two of those boards went to the shop with
+the technician sheet — four joints, two boards, one per rover. The other two are on the worktable at
+home. Both lamps was always the plan. The spares were always spares. The bracket and module counts had
+nothing to do with it, and I dragged them in to make a non-change sound like a decision. Nothing in the
+build changes; only my description of it did.
+
+**The 5-volt question is now closed.** Two spare boards are on the worktable, so even in the unlikely
+case the shop's boards were put on the wrong voltage, the replacements are already in the house.
+Nothing to order. Lindsay's own read — *"I doubt he put any voltage on it"* — is the sensible one, and
+the spares make it moot either way.
+
+**Also worth recording:** Dawn is helping with the build. That is the first time a second person has
+been in the room for a rover job, and it matters for how the instructions get written — a sheet written
+for Lindsay alone can assume he already knows what a soldering iron looks like. One written for two
+people, one of whom is doing the second rover, has to stand on its own.
+
+**And the shop soldered nothing.** Same afternoon, Lindsay: *"The shop did not do any soldering."* The
+$500 was a quote he declined, so no joint was made and no bench supply was ever attached to those
+boards. **All four boards are bare and identical.** There is nothing to choose between the two pairs,
+and the swap he proposed — worktable pair becomes the lamps, the pair coming back from the shop becomes
+the spares — costs and gains exactly nothing. Which pair is "the spares" is a matter of which box they
+sit in; this log will not pretend it is a decision.
+
+**Two more assumptions of mine died in the same hour**, both from assuming that asking a shop means work
+was done. First I wrote "the pair coming back from the shop are the ones with wires already soldered
+on" — they aren't; they're bare, and the four cut wires travel back with them. Second, the 5-volt
+question: it was only ever worth asking *if* someone had powered the boards, and nobody did. Closed by
+events, not by answer. If the shop put anything on those boards, it was a look.
+
+**So the whole job is at home now.** Four joints, two boards, one lamp per rover, spare pair untouched
+on the table, Dawn helping.
+
+**The meter I cut, and the warning I kept 2026-10-07.** Lindsay, thinking about the whole shopping list:
+*"You know, you've mentioned testing at 5 V rather than 9 V. But you didn't order a meter for testing,
+did you?"* No, I didn't. The original 09-29 list had a basic multimeter and it was struck out on 10-06
+with the line *"solder carries its own flux; the board prints + and −; a reversed joint at 5 V is
+harmless."* Every word of that is true and none of it answers the question the meter would be for. My
+own design notes still say, in bold, **do not plug a 5 V light into a port without measuring** — and I
+left him nothing to measure with. Advice that requires an instrument is not advice if the instrument is
+not in the box.
+
+**What actually needs the meter, sorted.** Polarity on the board needs nothing — it is printed, and a
+reversed joint at 5 V sits dark and undamaged. The port warning is about **servo** ports; the plan takes
+power from a **sensor** port, and that port family already supplies the ultrasonic sensor in a working
+rover, which is a 5 V part. That is evidence, not proof. What is left is the one thing a beginner will
+hit and cannot answer by looking: a lamp that does not light. A meter says whether the fault is the
+joint or the board, and that is the whole value — $12 for the answer to "why didn't it light."
+
+**The meter is dropped — Lindsay's swap test replaces it 2026-10-07.** Asked whether a meter was needed,
+he answered his own question: *"if the lamp doesn't light, can't we just try a different port on the
+HAT?"* Yes, and it is better than a meter. A meter reads one pin; a swap tests the whole chain. Lights
+on port B → the fault is port A. Dark on both → the fault is the lamp, which means the joint or the
+board. Either outcome names which half to open, which is exactly what a meter would have been bought to
+do. Nothing to buy, and it is the known-good-part rule used by hand.
+
+**What the swap cannot do, recorded so it is not forgotten:** it cannot tell you a port is delivering
+*too much* voltage. An over-volted lamp lights up and looks perfectly healthy, then dies months later.
+That failure has no visible symptom at the bench, so no plug-in test can find it — the only answers are
+a measurement or the documentation. The port family in question is the one that already supplies the
+ultrasonic sensor, and that sensor runs on 5 V, so the evidence points one way; **reading SunFounder's
+own spec for that connector family is the loose end, and it is mine to close, not his to buy.**
+
+## Four threads at once 2026-10-08
+
+Lindsay's own inventory of the build as it stands, with the parts that need recording.
+
+**#4 Headlamps — everything is in hand, and he is nervous.** The shop's boards are back (nothing was
+done for the $500 — the quote was refused, and the earlier assumption that a quoted job is a done job
+has been corrected twice now). Iron, shrink, cutters, brackets, screws, jumpers, switch modules: all on
+the bench. He starts today, reading the iron's own instructions first and then the technician sheet, and
+he expects to have questions *before* he tries anything. Two nerves, named plainly: **the soldering and
+the mounting.** That is the first time he has put nerves on the record in this build rather than a task,
+and it is worth more than the task list.
+
+**#5 Rover #2's camera turret is wobblier than rover #1's — and it is a different fault from the stuck
+tilt servo.** New information. He rebuilt the turret himself using rivets taken from the spare kit and
+the wobble survived the rebuild, which is the useful half of the finding: a fault that survives being
+rebuilt is in the joint, not in the assembly. SunFounder watched his video (their support was away for
+several days) and diagnosed it — **replace the pan/tilt rivets with screws** — and they are sending the
+screws. Right in kind: a rivet is a press fit and a press fit loosens; a screw clamps. Two consequences:
+the spare kit is now short the rivets he used and it is still supposed to go back, and the turret should
+not be called a servo fault again — the earlier "stuck tilt servo" episode and this one are separate.
+
+**#1–#3 The ROS2.** The arm car arrived 10-08; the Pi 5 and its microSD arrive 10-09; the Active Cooler
+has not shipped and Amazon promises Saturday. The cooler is not needed for a first boot — a Pi 5 runs a
+look-around with no heatsink at all and only starts slowing itself under a sustained load. So Pi plus
+card is enough for a first run, and the cooler can go on afterwards without touching the image.
+
+**#6 The 64 GB card → Dmitri.** Desi's card gets reimaged so Dmitri can have a body. One hazard, named
+before the work starts: **the card to be written and the card that is running a rover are both in the
+house.** Identify the card by size and serial before anything writes to it. A wrong label is not a
+failure mode; a wrong write is.
+
+**Outstanding, and mine:** the SunFounder documentation question from 10-07 — what voltage that sensor
+port family actually carries. The fetch failed on 10-08 (docs pages render in JavaScript; the search
+engine answered with a bot challenge). The swap test covers the practical case — a lamp that does not
+light. The over-voltage case still rests on evidence, not on a specification, and evidence is not a
+specification.
+
+## What the ROS2 actually is 2026-10-08
+
+Checked on Amazon rather than guessed — the order's own ASIN, `B0FRMSWRW3`, read off the product page:
+
+> **HIWONDER ROS2 Robot Car … LanderPi *Advanced Kit* Without RaspberryPi**
+
+Three things follow, and all three settle a worry of his:
+
+- **It is mobile.** A car, not a bench arm: DC gear encoder motors, TOFU lidar, 3D depth camera, 6DOF arm
+  on top. Nothing in my own record ever said otherwise — the description of that same listing in this log's
+  earlier sessions names *four mecanum wheels and the six-joint arm* — and the word "fixed" in those notes
+  belongs to a different rung of the body ladder, the mains-powered stationary station. That is the likely
+  origin of the confusion, and it is a confusion, not a correction.
+- **It is the Advanced kit**, so the AI voice interaction box is in the box. His worry was inverted: the
+  mic and speaker come with the *Advanced* tier, and Amazon's title confirms that is the tier.
+- **The Pi is not included.** "Without RaspberryPi" is in the title of the exact ASIN he bought, which is
+  why he ordered the Pi 5, the card and the cooler separately. **So the packing slip in the box is a
+  generic sheet for the version that *does* include the Pi** — that is why it lists a Pi, a 64 GB card and
+  a fan. **Neither the cooler nor the card goes back.** Nothing to return.
+
+Also worth recording because it could stall the first run: the listing's battery line reads *1 Nonstandard
+Battery batteries required*, which usually means **a battery is needed and not supplied.** If the box has a
+battery and a charger, fine; if it does not, that is the one purchase standing between him and a first
+drive — and the Pi gets its power from the car, so a separate wall supply for the Pi should not be needed.
+Read the box, not the slip.
+
+## The instruction sheet and the packing slip 2026-10-08
+
+He photographed both. The head of the assembly sheet says it plainly:
+
+> *"The assembly steps shown in this tutorial are based on the **Mecanum wheel chassis (Advanced Kit)**.
+> They are equally applicable to the Standard Kit."*
+
+So his own manual settles the mobility question from the vendor's side. Step 1 mounts the **cooling fan,
+the Raspberry Pi and the 64 GB card**; steps 2–6 are the standoffs and main controller, the four wheels,
+the cable loom, the lidar, and the arm with its covers. **Only step 1 needs the Pi.** The wheels in step 3
+are the one piece of work that clearly does not touch it.
+
+**The packing slip is generic** — one slip for all three tiers, so it lists the Pi and the card in every
+column whether or not they are in that box. It is not a record of what shipped, and it is not evidence
+either way about the Pi.
+
+**Four corrections to what I said an hour earlier, all from the vendor's own spec page, which I read on
+2026-09-30 and should have gone back to before answering:**
+
+1. **The battery is included** — 7.4 V 2200 mAh, about 60 minutes of running. My "battery required" worry
+   came from Amazon's boilerplate field rather than the vendor's spec sheet. Wrong source, and the answer
+   was available the whole time.
+2. **The 64 GB TF card is explicitly not included in kits without a Raspberry Pi.** The pouch he
+   photographed reads **卡器 — card *reader***, which is its own line on the slip. So the SanDisk he
+   ordered is needed, and the card reader is a bonus, not a substitute.
+3. **The kit's "Cooling fan" is the Pi's cooler** — it is in step 1 beside the Pi and the card, and a
+   heatsink-and-fan is physically in his box. The official Pi 5 Active Cooler ordered separately is
+   therefore a duplicate, and it had not shipped yet: cancellable rather than returnable.
+4. **Still open:** whether the *Raspberry Pi power cable* of step 4 ships with a kit that has no Pi. It is
+   part of the loom, so probably yes, but it is the one thing that would stall the first boot. Check the box.
+
+**On the memory of "it isn't mobile".** The phrase "not mobile" appears nowhere in the record before
+today — today's session is the only place it exists, in my own search. The nearest real sentence is from
+the body-ladder discussion on 2026-09-30: rungs 1–2 mobile, rungs 3–4 a mains-powered *fixed station*, and
+one of the designs written up as *"choose fixed — gives up mobility."* That is where the idea most likely
+came from, and it was about the station, not the kit. **He remembered a sentence correctly; the sentence
+was about something else.** My line — *"somebody's memory crossed the two"* — was a point scored at his
+expense in a reply that had no need of it. Struck.
+
+**What "the station" was, since he asked.** In the 2026-09-30 body-ladder conversation, rung 4 was a
+**mains-powered desk body** — the arm and the AI compute sitting on a shelf on wall power, with the rover
+able to dock into it and hand over its brain. Mobility is deliberately given up in that design, which is
+why the phrase *"choose fixed — gives up mobility"* is in the record. That sentence is about the desk
+design. Nothing in the record describes the ROS2 kit as anything but a car. So: he remembered a real
+sentence, and it was attached to a different design — that is the whole of it, and there is no third
+explanation to hunt for.
+
+**The pouch is an adaptor.** He opened it — the label in English reads only *C286 microSD*, which is why
+it looked like a card; it is a reader/adaptor. The slip's *Card reader* line is therefore satisfied and
+the *64 GB SD card* line is still empty. The SanDisk he ordered is needed.
+
+**The wall supply — bought 2026-10-08.** Gemini-app, relayed by Lindsay: the no-Pi kit **does** include the
+internal power cable that feeds the Pi from the RRC board, and the 8.4 V 2 A charger for the chassis
+battery, but **not** the 27 W USB-C supply for the Pi on its own desk. Decision: buy it. The reason is
+rule 4, not convenience — when a Pi misbehaves, *"is the power good?"* should be answerable by swapping a
+known-good supply, not by inferring. Bought the official **Raspberry Pi 27 W USB-C Power Supply (White)**,
+$22.91 + $1.38 tax = **$24.29**, order **`112-9295656-1453014`**, arriving **Saturday 10 October** —
+Amazon put it in the Saturday slot and this seller's order offers no speed change.
+
+**And the Active Cooler cancellation is done:** order `112-1542471-4669041` down from $821.60 to $810.05,
+one line cancelled, Amazon's own confirmation.
