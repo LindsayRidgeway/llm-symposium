@@ -294,3 +294,119 @@ dissociations.
 
 **Pinned by** `tests/test_affective_pain_acupuncture_filtered.py`, which re-derives the 16 from the
 stored flags and fails if the map names a different set.
+
+## 9. The filtered vagus-nerve arm — does §8 generalise? run 2026-10-08
+
+**The question §7 left open.** §8 found the filtered acupuncture arm measures the brain and the
+pain but not the mood. Item 32's step 3 asks whether that is a property of the acupuncture
+literature or of pain neuromodulation generally, and names the test plainly: the same filtered
+design, one arm over. The arm that was never asked the affect question is the item's *other
+intervention* — vagus-nerve stimulation (VNS) — so this section runs the **identical** filter
+against `aps.ARMS['vns']`, so that the only clause that changes between the two censuses is the
+intervention clause. If the affect-blindness were a property of pain neuromodulation at large, it
+would appear here too.
+
+| arm | query = **intervention** block AND the §7 filter AND the pain block AND `humans[MeSH Terms]` | matching | fetched |
+|---|---|---|---|
+| `vns_filtered` | the §7 filter list, byte-for-byte, with the VNS block in place of acupuncture | **31** | **31 — census** |
+
+Publication window 2015-01-01 → 2026-10-08. This is a **census**: 31 of 31 fetched, no relevance
+ranking, nothing held back. Raw records and flags:
+`research/affective-pain-neuromodulation-vns-filtered-raw.json`; the run is
+`scripts/affective_pain_vns_filtered.py`, and it reuses the first arm's own classifier so the two
+arms are countable against each other. Pinned by `tests/test_affective_pain_vns_filtered.py`, which
+needs no network.
+
+**Composition of the 31** (same classifier as §2, so the same caveats apply):
+
+| | VNS filtered arm |
+|---|---|
+| records | **31** |
+| reviews | **7** |
+| protocols | **3** |
+| animal-subject | **1** |
+| **human primary** | **20** |
+| set the affective flag | 16 |
+| set the biomarker flag | 28 |
+| **set both** | **14** |
+| set neither | 1 |
+
+**30 of the 31 were also in the first corpus.** The first corpus's VNS arm was a top-80 relevance
+slice of 75 matches, and it had already seen almost all of these records — so what was missing from
+the map was not the records but the *comparison*: §4 and §7 measured only the acupuncture arm, and
+the VNS arm had never been asked the affect question. That is what §9 adds.
+
+### The eight human-primary records that set both flags, hand-read
+
+| PMID | year | what it is (hand read) | verdict |
+|---|---|---|---|
+| [41332177](https://pubmed.ncbi.nlm.nih.gov/41332177/) | 2026 | randomised trial; **female fibromyalgia** patients, left vs bilateral transcutaneous auricular VNS | title names *pain, mood and autonomic nervous system* together — a pain-population trial measuring both domains by design. This is one of the two **closed-access** records §6 already filed (see below) |
+| [40935122](https://pubmed.ncbi.nlm.nih.gov/40935122/) | 2026 | **fibromyalgia**; non-invasive auricular VNS | autonomic function, central sensitization and **pain catastrophizing** — pain-population study measuring both. Also one of §6's two closed-access records |
+| [40576705](https://pubmed.ncbi.nlm.nih.gov/40576705/) | 2025 | **fibromyalgia** pilot; VNS | BDNF, sleep quality, severity; *mood* named in the background sentence, not as an outcome scale |
+| [26450637](https://pubmed.ncbi.nlm.nih.gov/26450637/) | 2015 | cervical **dystonia**, percutaneous auricular VNS | muscle tone and sympathovagal balance measured; *mood* fires on a secondary sentence. Not a pain population |
+| [34634682](https://pubmed.ncbi.nlm.nih.gov/34634682/) | 2021 | postural tachycardia syndrome (POTS) | heart rate and autonomic symptoms measured; anxiety/depression fire on a background list. Not a pain population |
+| [38963558](https://pubmed.ncbi.nlm.nih.gov/38963558/) | 2024 | **healthy volunteers**; taVNS during emotional and Go/No-Go tasks | EEG alpha lateralization; affect fires on the task name. Not a pain population |
+| [41044114](https://pubmed.ncbi.nlm.nih.gov/41044114/) | 2025 | **healthy volunteers**; sham-controlled taVNS resting-state EEG | EEG delta power; affect fires on background. Not a pain population |
+| [34509623](https://pubmed.ncbi.nlm.nih.gov/34509623/) | 2021 | **technical note**; taVNS fMRI brainstem responses | brainstem fMRI; *mood* fires on a gut-brain background sentence. Not a primary pain study |
+
+**Pain population: 3 of the 8**, all fibromyalgia (41332177, 40935122, 40576705). The other five are
+healthy-volunteer, task, POTS, dystonia or technical-note records that the keyword screen let
+through — the same inflation §8 had to hand-read out of its sixteen.
+
+### The comparison §7 could not make
+
+| | acupuncture (§7–§8) | VNS (§9) |
+|---|---|---|
+| human-primary records | **21** | **20** |
+| set both flags | **5 of 21** (24%) | **8 of 20** (40%) |
+| both flags, in a patient pain population (hand-read) | **2** | **3** |
+| biomarker-only — the "affect-blind" set | **16 of 21** (76%) | **10 of 20** (50%) |
+| patient pain-population records (hand-read) | **13** | **10** |
+
+**What generalises, and what does not.**
+
+1. **The blindness is at least partly specific to the acupuncture arm.** On the identical filter
+   the VNS arm sets both flags on **8 of 20** human-primary records (40%) against **5 of 21** (24%)
+   for acupuncture, and its biomarker-only set is 10 of 20 against 16 of 21. So §8's sharpened
+   sentence — *the brain and the pain, but not the mood* — is true of the acupuncture census and
+   only half true of the VNS one: half the VNS human-primary records do name an affective outcome.
+   The item's step 3 posed exactly this, and the answer is negative — the affect-blindness does
+   **not** cleanly generalise.
+
+2. **But the difference is small and carried by one condition.** Hand-read, 3 of the 8 VNS
+   both-flag records are in a patient pain population and **all three are fibromyalgia**; the
+   other five are healthy-volunteer, task, dystonia or POTS studies. In the acupuncture arm the two
+   pain-population both-flag records (§7: 26787729, 37609769) are also both fibromyalgia. So
+   **every record in either census that measures both domains in a patient pain population is a
+   fibromyalgia trial** — 2 acupuncture, 3 VNS, five studies in total. A contrast of the two
+   interventions resting on three fibromyalgia studies is a hypothesis, not a finding about VNS.
+
+3. **The asymmetry §8 found is what actually generalises.** In both arms the corpus names a pain
+   instrument or an autonomic/neural measure far more often than an affective one, and the
+   nociceptive-pain trials that dominate the affect-blind shelves measure the brain and the pain
+   and not the mood: on the VNS side chronic low back pain (40461351, 41091086, 42361949), migraine
+   (33262253) and chronic pancreatitis (33635894); on the acupuncture side knee osteoarthritis,
+   sciatica and endometriosis pain (§8). The affective column appears where the condition's own
+   label already carries it — fibromyalgia — and is absent from the populations where the affective
+   burden is the open question. That is a stronger statement than §8 could make alone, because it
+   now holds across two independent intervention censuses.
+
+4. **Consequence for item 32.** The convergence question the item adopted — do acupuncture and VNS
+   reach the same pathway, and is any affective change separable from the analgesia? — still cannot
+   be answered from these abstracts on either arm. The joint measurement the question needs exists
+   in **five** trials in total (2 acupuncture + 3 VNS), all fibromyalgia, and two of the three VNS
+   ones (40935122, 41332177) are the closed-access records §6 already routed to the human-blocked
+   route. The second arm strengthens §8's *finding* (the missing column is affective) and weakens
+   §7's *attribution* (it is not acupuncture's alone).
+
+**Honest limits.** (1) The screen is a keyword list, not a reading: "the corpus names no affect
+term" is weaker than "the corpus did not measure affect". (2) The subject screen still keeps two
+records that read as secondary — 33548494 (a review of VNS in musculoskeletal disease) and 34509623
+(a technical note) — so "20 human-primary" is an upper bound, exactly as the "21" and "16" of §7–§8
+are. (3) The two censuses differ in size (40 vs 31) and were run four days apart; the rate
+comparison in point 1 is honest only as an order of magnitude, which is how it is stated. (4) This
+section adds a comparison, not a verdict: the file still makes no claim about whether either
+intervention works, and the absence of a measurement is not evidence of an absent effect.
+
+**Pinned by** `tests/test_affective_pain_vns_filtered.py`, which re-derives the 8 and the 10 from
+the stored flags and fails if the map names a different set or a different count.
