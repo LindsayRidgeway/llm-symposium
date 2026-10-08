@@ -107,6 +107,16 @@ RUN_ID_RE = re.compile(r"^\d{8}T\d{6}Z-[0-9a-f]{8}$")
 ANY_RUN_ID_RE = re.compile(r"\b(\d{8}T\d{6}Z-[0-9a-f]{8})\b")
 ITEM_RE = re.compile(r"^\s*ITEM:\s*\[(?P<scope>internal|external)\]\s*(?P<title>.+?)\s*$", re.I)
 TITLE_MAX = 160
+TITLE_SHOWN = 60          # how much of a title --next prints; the full one stays in the ledger
+
+
+def _short(text: str, limit: int = TITLE_SHOWN) -> str:
+    """Cut a title on a word boundary for the terminal. The ledger keeps the whole thing."""
+    text = " ".join((text or "").split())
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0]
+    return (cut or text[:limit]) + "…"
 
 
 def runs_dir(amigo: str) -> Path:
@@ -399,6 +409,22 @@ def counts(items: dict[str, dict], hours: int | None = None) -> dict:
     return out
 
 
+def waiting(items: dict[str, dict], n: int = 5, not_mine: str = "") -> list[dict]:
+    """The oldest items nobody has looked at, excluding the reviewer's own.
+
+    This is the queue the review step reads. Oldest first, because the pile's age is the finding —
+    and because a reviewer is far more likely to find the answer to "did this ever reach main?" in
+    work from a week ago than in work from an hour ago, which the lander has not finished with yet.
+
+    Excluding the reviewer's own items is the one rule that makes this a review rather than a
+    rubber stamp: nobody signs off on their own work in this house. If a caller passes nothing, the
+    exclusion is whatever it is told — the ledger does not guess who is looking.
+    """
+    rows = [r for r in items.values()
+            if letter_for(r) == "W" and r.get("amigo") != not_mine]
+    return sorted(rows, key=lambda r: r.get("filed_utc") or "")[:n]
+
+
 def _cli() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--collect", action="store_true", help="ingest new runs from all five bots")
@@ -409,6 +435,10 @@ def _cli() -> int:
     ap.add_argument("--reason", default="")
     ap.add_argument("--reviewer", default="human")
     ap.add_argument("--summary", action="store_true")
+    ap.add_argument("--next", type=int, metavar="N", default=0,
+                    help="list the N oldest items waiting for review")
+    ap.add_argument("--not-mine", default="",
+                    help="with --next: skip this amigo's own items (nobody reviews their own)")
     ap.add_argument("--hours", type=int, default=24)
     ap.add_argument("--list", action="store_true")
     args = ap.parse_args()
@@ -423,6 +453,28 @@ def _cli() -> int:
         print(f"item_ledger: {rec['id']} -> {rec['state']}: {rec['reason']}")
         return 0
     items = load()
+    if args.next:
+        rows = waiting(items, args.next, not_mine=args.not_mine)
+        if not rows:
+            print("item_ledger: nothing waiting for review")
+            return 0
+        print(f"{len(rows)} of the oldest items waiting for review"
+              + (f" (excluding {args.not_mine}'s own, which {args.not_mine} may not review)"
+                 if args.not_mine else "") + ":")
+        for rec in rows:
+            print(f"\n  {rec['id']}")
+            print(f"    {rec.get('amigo','?')} · {rec.get('scope','?')} · "
+                  f"filed {rec.get('filed_utc','?')}")
+            print(f"    {_short(rec.get('short_title') or rec.get('title', '(no title)'))}")
+            print(f"    evidence: {rec.get('evidence','?')}")
+            if rec.get("paths"):
+                print(f"    paths: {', '.join(rec['paths'][:6])}")
+        print("\nTo record one verdict (the reason is mandatory — it is the whole record):")
+        print("  python3 channels/item_ledger.py --review <id> --state accomplished|postponed|"
+              "rejected \\\n      --reason \"why\" --reviewer <your name>")
+        print("Read what the run produced before judging it. 'Not now, because X' is a "
+              "postponement.\nNothing written down is not a review — it stays waiting.")
+        return 0
     if args.list:
         for rec in sorted(items.values(), key=lambda r: r.get("filed_utc") or ""):
             print(f"  {rec.get('filed_utc')}  {rec.get('amigo'):7s} {rec.get('scope'):8s} "

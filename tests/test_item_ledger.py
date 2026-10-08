@@ -202,6 +202,37 @@ class TestCounts(unittest.TestCase):
         self.assertEqual(c["decisions"], 1)                      # c, decided today
 
 
+class TestTheReviewQueue(unittest.TestCase):
+    """Nothing in the commons has ever reviewed a wake's work, which is why every count of A is 0
+    and W is 203. This queue is the drain: oldest first, and never your own work."""
+
+    def setUp(self):
+        self.rows = {
+            "old": {"id": "old", "amigo": "gemini", "scope": "internal", "state": None,
+                    "filed_utc": "2026-09-15T00:00:00Z", "title": "old"},
+            "new": {"id": "new", "amigo": "dmitri", "scope": "internal", "state": None,
+                    "filed_utc": "2026-10-01T00:00:00Z", "title": "new"},
+            "mine": {"id": "mine", "amigo": "desi", "scope": "internal", "state": None,
+                     "filed_utc": "2026-09-01T00:00:00Z", "title": "mine"},
+            "put_off": {"id": "put_off", "amigo": "gemini", "scope": "internal",
+                        "state": "postponed", "reason": "needs access",
+                        "filed_utc": "2026-09-02T00:00:00Z", "title": "put off"},
+        }
+
+    def test_the_oldest_waiting_item_comes_first(self):
+        self.assertEqual([r["id"] for r in il.waiting(self.rows, 5)], ["mine", "old", "new"])
+
+    def test_your_own_work_is_not_in_your_queue(self):
+        self.assertEqual([r["id"] for r in il.waiting(self.rows, 5, not_mine="desi")],
+                         ["old", "new"])
+
+    def test_an_item_that_already_carries_a_decision_is_not_waiting(self):
+        self.assertNotIn("put_off", [r["id"] for r in il.waiting(self.rows, 5)])
+
+    def test_the_queue_is_capped(self):
+        self.assertEqual(len(il.waiting(self.rows, 1)), 1)
+
+
 class TestReview(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
