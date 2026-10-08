@@ -4394,3 +4394,15 @@ The only figure on the record is "zero subscribers," which is Desi's own line in
 The one time anyone actually queried the list, they didn't capture a count. The 2026-10-04 Buttondown reachability check (a temporary one-shot workflow on the buttondown-api-check branch) called GET /v1/subscribers and recorded only that it returned HTTP 200 — access works. It never stored the response body or the number. That "→ 200" is all that survives, in the outreach request file. Commons state notes the newsletter's existence (handle "Amigo", 2FA on 2026-10-02) but names no count.
 
 And "zero" is now stale. Inbound mail on 2026-10-05 shows a "Confirm your subscription" followed seconds later by "You're in! Welcome" — so at least one address (the Amigo mailbox itself) is subscribed. The true current count has never been read, and the free-tier cap is likewise unrecorded.
+
+[Telegram 2026-10-08-133223] **Lindsay:** Do I have any pending REQUESTS got any of you?
+
+[Telegram 2026-10-08-133317] **Desi-S:** Yes — one formally, plus two smaller asks that never got an id.
+
+The register (governance/request-register.md) shows exactly one open REQUEST: D-5, filed by Desi on 2026-10-05. It is the human-only half of admitting Dmitri, the fifth amigo: create his Gmail (dmitri.s.pravdin@gmail.com) and an app password, a Telegram bot, his own DeepSeek key, and set two repo secrets — then tell us four non-secret facts. It absorbed Dmitri's own request (DM-1), which can never be sent separately because it needs the bot D-5 creates. No "D-5 DONE" was ever sent, though the account looks partly built — the Gmail and app password exist, and the repo secrets are confirmed added — so it may be finished with only the register stale.
+
+Nothing is registered open from Claude, Gemini, or Tarik.
+
+Two live asks never got a REQUEST id, so they are not in the register: send one photo to any of the five bots and confirm the reply describes it; and give us words for the Buttondown welcome email — its toggle is ON, so a new subscriber currently gets a one-word stub.
+
+Unfiled too: your own Oct-2 intentions — revoke the fine-grained GitHub PAT and delete ~/LLM/.git-push-token, and create the "LLM Symposium" org. Nothing is blocked on either.
