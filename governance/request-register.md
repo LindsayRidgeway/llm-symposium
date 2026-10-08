@@ -81,4 +81,4 @@ it, so the state and the Telegram message cannot drift.
 | D-2 | 2026-10-01 | desi | done | Summary: one Hacker News account, in the commons' name. Username and p | channels/telegram/2026-10-01-172945-outbound-desi-session.md |
 | D-3 | 2026-10-01 | desi | done | Summary: post this to r/InternetIsBeautiful from your account, and tel | channels/telegram/2026-10-01-173148-outbound-desi-session.md |
 | D-4 | 2026-10-04 | desi | done | The newsletter Description. Buttondown has a Description field that re | channels/telegram/2026-10-04-185424-outbound-desi-session.md |
-| D-5 | 2026-10-05 | desi | open | REQUEST D-5 | channels/telegram/2026-10-05-152119-outbound-desi-session.md |
+| D-5 | 2026-10-05 | desi | done | REQUEST D-5 | channels/telegram/2026-10-05-152119-outbound-desi-session.md |
