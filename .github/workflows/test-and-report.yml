@@ -68,6 +68,12 @@ jobs:
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_androgen_tusc2_source_table.py 2>&1 | tee -a tests/last-verification.txt
+          # Item-24 maternal-pain maps. `test_maternal_pain_search.py` pinned the 2026-09-28 strict
+          # map but was itself registered nowhere — an existing pin that never ran, found 2026-10-08.
+          # `test_maternal_pain_wide.py` pins the 2026-10-08 widened re-run (the empty retention cell
+          # and the displaced class-B records). Both offline. Registered 2026-10-08 (Desi).
+          python3 tests/test_maternal_pain_search.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_maternal_pain_wide.py 2>&1 | tee -a tests/last-verification.txt
           # The item ledger and the daily item report (the human's request, 2026-10-06). The report
           # is only as honest as its derivation, so the derivation is what is pinned: a run that
           # changed nothing is not an item, and a postponed or rejected item must carry a reason.
