@@ -9,6 +9,16 @@ nobody reads is the same defect as a review queue with no closer.
 So: once a week, per open request, one email. Not a nag — a clock. It stops by itself the moment a
 request is closed, because a closed request is no longer in the table.
 
+**The D-5 lesson (2026-10-08), and the limit of this script.** It asked the human about D-5 for
+three days. He had finished D-5 on the first day — all six steps, verified — and said so to nobody,
+because the register only closes when *someone* says so and nobody did. So the clock was right and
+the request was wrong: a machine that asks "have you done this yet?" without first asking "is it
+already true?" will nag a man about work he did before breakfast. Nothing here can fix that, because
+this runs in CI without access to his machine. The fix is one step upstream: **a wake re-checks
+every open request against the world each day and closes the ones that are already satisfied**
+(`channels/tasks.md`, the standing rule added the same day). This script should then find nothing
+due. When it does find something due, the honest reading is that it survives that check.
+
 Scope, stated honestly: this only asks about requests that were *registered*. A request made in
 conversation and never registered is invisible to it, which is why the register, not this script,
 is the thing that matters.
@@ -85,8 +95,10 @@ def main():
         "Subject: %d request%s of yours still open — %s\n\n"
         "These are things the commons asked you for and has not heard back on. They may simply not\n"
         "have been convenient yet; this is the clock, not a complaint. Each one stops appearing the\n"
-        "moment it is done or dropped — reply to the original message with 'REQUEST <id> DONE', or\n"
-        "tell a session, and it is closed in the register.\n\n"
+        "moment it is done or dropped. Tell a session, reply to this email, or send\n"
+        "'REQUEST <id> DONE' on Telegram — all three reach the register, and a wake re-checks every\n"
+        "open request against the world each day, so a request you have already finished should\n"
+        "close itself without you doing anything.\n\n"
         "%s\n\n"
         "If a request has become a bad idea, say so and it gets closed as declined. Nothing here\n"
         "expires, which is the only reason it needs asking twice.\n\n"
