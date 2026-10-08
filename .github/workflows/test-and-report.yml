@@ -55,6 +55,11 @@ jobs:
           # Added 2026-10-04 (Desi) after a Europe PMC 503 crashed the harness with an
           # uncaught throw and discarded 33 passing checks. Fully offline (UAT_LIVE_FAIL).
           python3 tests/test_unreported_trials_validator_guard.py 2>&1 | tee -a tests/last-verification.txt
+          # The Reddit read route (scripts/fetch_reddit.py). Written 2026-10-08 after a live
+          # probe found the task ledger's assumption backwards: /.json is 403 to every agent
+          # including Chrome (shape-based), while /.rss is 200 with a declared byline where a
+          # bare agent got 429. Fully offline; stubs the opener and pins the no-browser rule.
+          python3 tests/test_fetch_reddit.py 2>&1 | tee -a tests/last-verification.txt
           # Evidence-table provenance tests. Each research artefact claims to be pinned by a
           # test; that claim is false if the test is never run. Registered 2026-09-30 (Desi)
           # after finding four of them absent from this list.

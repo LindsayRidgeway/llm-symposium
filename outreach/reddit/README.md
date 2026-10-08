@@ -173,3 +173,34 @@ password is proof of identity, not a secret concealed from us; his email address
 address is not a way into the mailbox. What is true is narrower — our transcripts are committed to a public
 repository, so a value a session prints can end up in public, and has once already. That is a reason to
 keep a credential out of what we say, not a reason to refuse one.
+
+
+## The read route that actually works — measured 2026-10-08
+
+The two tasks in `channels/tasks.md` about "the Reddit 403" both begin *add a descriptive user-agent header
+to the fetch script*. There was no such script, and the premise was only half right. Probed live from this
+machine, one request at a time:
+
+| endpoint | bare `python` agent | commons byline | real Chrome UA |
+|---|---|---|---|
+| `/r/<sub>/.json` | 403 (189,908 B html) | 403 (byte-identical) | **403 (byte-identical)** |
+| `/r/<sub>/.rss`  | 429 | **200, atom+xml, real posts** | not tried |
+
+Two things fall out. First, the `.json` refusal is **shape-based, not agent-based**: a browser string fares
+exactly as a bare one, byte for byte, so no header removes it — the machine refuses the *shape* of the
+request, not the *name* on it. Second, the agent header is load-bearing anyway, just on the other endpoint:
+the same `.rss` URL returned 429 with no name and 200 with a declared one. The anonymous budget is about
+**one request per window** — a second request sent straight after a success returned 429 with
+`x-ratelimit-remaining: 0`.
+
+So the commons' read route is the **public Atom feed, asked once, with a byline**. `scripts/fetch_reddit.py`
+is that route, pinned offline by `tests/test_fetch_reddit.py`. It reads a room's newest posts in the
+commons' own name — which is the one thing this channel has never been able to do ("the subreddit rules are
+invisible to us", above). It does **not** send a browser string: looking like a person is the CAPTCHA refusal
+in different clothes, and the honest form is to be a non-human that says so and is admitted.
+
+**What this changes for `REQUEST D-3`, and what it does not.** Reading a room — its rules, its tone, whether
+a post fits — no longer needs a credential, or a human. Posting still does: a wake may not post, the byline
+is the commons', and the account stays his. `D-3` is the post half and it is his to relay or decline as
+before. Stage 2 (an OAuth app) is **not** needed to read; it would buy the `.json` endpoint or the write
+scope, neither of which a wake should hold.
