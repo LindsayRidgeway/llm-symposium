@@ -1,0 +1,602 @@
+{
+  "_what": "Widened re-run of the commons agenda item 24 PubMed search (maternal chronic pain and substance-use care). Two queries: the strict search widened with MeSH and missed phrasing, and a probe of the empty retention-against-pain cell. Raw metadata and abstracts as returned by NCBI E-utilities; no ranking of our own.",
+  "retrieved": "2026-10-08",
+  "sort": "relevance",
+  "wide": {
+    "query": "(pregnancy[tiab] OR pregnant[tiab] OR postpartum[tiab] OR perinatal[tiab] OR maternal[tiab] OR antenatal[tiab] OR prenatal[tiab] OR \"pregnant women\"[tiab] OR \"opioid-exposed pregnancy\"[tiab] OR \"Pregnancy\"[MeSH] OR \"Pregnancy Complications\"[MeSH] OR \"Postpartum Period\"[MeSH]) AND (\"chronic pain\"[tiab] OR \"persistent pain\"[tiab] OR \"pain management\"[tiab] OR analgesia[tiab] OR analgesic[tiab] OR \"opioid-sparing\"[tiab] OR \"pain severity\"[tiab] OR \"Chronic Pain\"[MeSH] OR \"Analgesia\"[MeSH] OR \"Pain Management\"[MeSH]) AND (\"substance use disorder\"[tiab] OR \"substance use disorders\"[tiab] OR \"opioid use disorder\"[tiab] OR \"opioid use disorders\"[tiab] OR \"opioid dependence\"[tiab] OR \"opioid misuse\"[tiab] OR \"substance misuse\"[tiab] OR \"opioid-exposed\"[tiab] OR \"Opioid-Related Disorders\"[MeSH] OR \"Substance-Related Disorders\"[MeSH]) AND (treatment[tiab] OR \"medication for opioid use disorder\"[tiab] OR MOUD[tiab] OR buprenorphine[tiab] OR methadone[tiab] OR \"treatment retention\"[tiab] OR \"medication retention\"[tiab] OR \"integrated care\"[tiab] OR retention[tiab] OR adherence[tiab] OR \"opioid agonist\"[tiab] OR \"agonist therapy\"[tiab] OR \"Opioid Substitution Treatment\"[MeSH] OR \"Buprenorphine\"[MeSH] OR \"Methadone\"[MeSH] OR \"Medication Adherence\"[MeSH])",
+    "total_matching": 164,
+    "returned": 50,
+    "records": [
+      {
+        "pmid": "29664446",
+        "title": "Opioids for pain.",
+        "journal": "The Medical letter on drugs and therapeutics",
+        "pubdate": "2018Apr09",
+        "pubtypes": [
+          "Journal Article"
+        ],
+        "abstract": ""
+      },
+      {
+        "pmid": "16431829",
+        "title": "Pharmacokinetics of methadone.",
+        "journal": "Journal of pain & palliative care pharmacotherapy",
+        "pubdate": "2005",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, N.I.H., Extramural",
+          "Review"
+        ],
+        "abstract": "Methadone is a synthetic opioid that is effective for the relief of moderate-to-severe pain and for the treatment of opioid dependence. The pharmacokinetics of methadone differ from those of morphine in that methadone has a higher bioavailability, a much longer half-life, and is hepatically metabolized by cytochrome P450 enzymes. The pharmacokinetics of methadone are variable and an understanding of the factors that impact the onset, magnitude, and duration of analgesia is required to optimize therapy. Drug interactions are common and patients receiving methadone should be monitored closely for toxicity or therapeutic failure. Special populations in whom a change from the usual dosage regimen may be necessary include pediatric patients, patients with renal failure, the elderly, and pregnant women. To achieve an optimal dosage regimen, the clinician must have an understanding of the pharmacokinetics and pharmacodynamics of methadone in addition to the relationship between these variables and their patients' demographic and pathophysiologic characteristics. AMEDLINE search was performed to identify literature published between 1966 and May 2005 relevant to the pharmacokinetics of methadone. These publications were reviewed and the literature summarized regarding unique and clinically important elements of methadone disposition including its absorption profile, distribution, and metabolism/excretion. General dosing guidelines, dosage conversions from other opioids and pharmacokinetic issues in special populations are discussed."
+      },
+      {
+        "pmid": "187095",
+        "title": "Naloxone.",
+        "journal": "Annals of internal medicine",
+        "pubdate": "1976Dec",
+        "pubtypes": [
+          "Journal Article"
+        ],
+        "abstract": "Narcotic analgesics and related drugs act as agonists on several receptors that are responsible for their effects on pain perception, mood and feeling state, and respiration, as well as other pharmacologic actions. Naloxone is the first discovered antagonist that is devoid of agonistic activity and appears to be a competitive antagonist at several receptors. The ability of naloxone to displace or prevent the binding of agonistic narcotics is partly responsible for its antagonistic effects. The ability of naloxone to rectify narcotic-depressed homeostats and precipitate abstinence is also related to its antagonistic activity. Certain cautions and principles apply in the use of naloxone in treating narcotic overdose, reversing surgical analgesia, and the treatment of neonates and children. Unapproved uses of naloxine include reversing the psychotomimetic effects of certain agonists-antagonists, terminating narcotic-induced convulsions and coma, reversing non-narcotic depression, diagnosing physical dependence, and treating narcotic addicts."
+      },
+      {
+        "pmid": "22291123",
+        "title": "Neonatal drug withdrawal.",
+        "journal": "Pediatrics",
+        "pubdate": "2012Feb",
+        "pubtypes": [
+          "Journal Article",
+          "Practice Guideline"
+        ],
+        "abstract": "Maternal use of certain drugs during pregnancy can result in transient neonatal signs consistent with withdrawal or acute toxicity or cause sustained signs consistent with a lasting drug effect. In addition, hospitalized infants who are treated with opioids or benzodiazepines to provide analgesia or sedation may be at risk for manifesting signs of withdrawal. This statement updates information about the clinical presentation of infants exposed to intrauterine drugs and the therapeutic options for treatment of withdrawal and is expanded to include evidence-based approaches to the management of the hospitalized infant who requires weaning from analgesics or sedatives."
+      },
+      {
+        "pmid": "23233054",
+        "title": "Opioid addiction in pregnancy.",
+        "journal": "Obstetrical & gynecological survey",
+        "pubdate": "2012Dec",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "UNLABELLED: The purpose of this review is to discuss the incidence, risks, pregnancy complications, and maintenance options for treatment of opioid addiction in pregnancy. SUMMARY: Opioid dependence in pregnancy carries clear identifiable maternal and fetal risk. Providing care for patients with dependence is best done in a multidisciplinary care model addressing the particular needs of this population. There are limited data on maternal detoxification, with data still emerging surrounding the safety profile of this practice. Historically, methadone has been the recommended maintenance treatment; however, recent data on buprenorphine identify this as a safe and effective option. The majority of births from women with opioid dependence result in neonatal abstinence syndrome requiring prolonged neonatal hospitalization. Intrapartum pain management should not differ from the general obstetric population. Postpartum pain is magnified in this population, and particular attention should be focused on this issue. Breast-feeding is recommended regardless of maintenance dose, unless other conditions restricting breast-feeding are present. Comprehensive postpartum care and transition of care to addiction specialists are highly recommended. TARGET AUDIENCE: Obstetricians and gynecologists, family physicians, addiction specialists. LEARNING OBJECTIVES: After completing this CME activity, physicians should be better able to assess the treatment options available to patients with opioid addiction during pregnancy, compare the risk/safety profiles of methadone and buprenorphine, and evaluate the recommendations and current data surrounding breast-feeding while on opioid maintenance treatment."
+      },
+      {
+        "pmid": "40891214",
+        "title": "Buvidal/Brixadi - a long-acting injectable buprenorphine formulation for the treatment of opioid dependence.",
+        "journal": "Pain management",
+        "pubdate": "2025Dec",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Long acting (or extended release) injectable buprenorphine formulations for the treatment of opioid dependence have been introduced in a number of countries in recent years. One such product, Buvidal, available as Weekly or Monthly subcutaneous injections, has been increasingly used in many European countries and Australia for several years, and has recently been registered under the brand name Brixadi in the United States. This review provides an overview of opioid dependence, examines the rationale for the development of Buvidal, its pharmacological properties, evidence of efficacy and safety, and key principles of clinical care in the treatment of opioid dependence. Particular attention is given to issues of pain management, pregnancy, and treatment in custodial settings. This long-acting injectable buprenorphine product is an important addition to the available options for the treatment of opioid dependence, providing a safe and effective alternative to treatment with medications requiring daily dosing. Buvidal (known as Brixadi in the USA) is available in a number of countries for the treatment of opioid dependence. Buvidal contains the opioid medication buprenorphine, taken either once-a-week or once-a-month as an injection under the skin. Compared to daily dosing with buprenorphine or methadone taken under the tongue (known as sublingual), the less frequent dosing makes treatment much more convenient for many patients (and service providers). Buprenorphine reduces opioid withdrawal symptoms, cravings, and the effects of additional opioid use. Buvidal has similar side effects and treatment outcomes to sublingual buprenorphine (e.g. on outcomes, such as reduced illicit opioid use and improved general health). Many patients report less stigma and higher satisfaction ratings with Buvidal, whereas others prefer daily dosing with either sublingual buprenorphine or methadone. Patients should have a range of treatment options available to them. Most patients can start treatment directly with Buvidal, or transfer from sublingual buprenorphine without difficulty. However, greater care is required for patients transferring from methadone in order to prevent precipitated withdrawal symptoms. Buvidal can be safely used by patients who also have other health conditions in addition to opioid dependence, such as chronic pain and in pregnancy. It is also being increasingly used in prison settings due to its simpler dosing requirements and reduced risk of diversion to others."
+      },
+      {
+        "pmid": "32762927",
+        "title": "Opioid Management in Pregnancy and Postpartum.",
+        "journal": "Obstetrics and gynecology clinics of North America",
+        "pubdate": "2020Sep",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Pregnant and postpartum women with opiate use disorder present a challenge in perinatal care. It is important for health care teams to provide sensitive and compassionate evidence-based care for these women, who often are stigmatized during the prenatal, delivery, and postpartum periods. Women with opiate use disorder are at risk for inadequate prenatal and postpartum care and for complications. Infants are at risk for neonatal abstinence syndrome and are expected to require neonatal intensive care. Pain management during labor and for cesarean delivery requires consultation and collaboration with providers who have expertise in management of addiction. Postpartum follow-up is essential."
+      },
+      {
+        "pmid": "28018795",
+        "title": "Nephrotoxicity of methadone: a systematic review.",
+        "journal": "SpringerPlus",
+        "pubdate": "2016",
+        "pubtypes": [
+          "Review",
+          "Journal Article"
+        ],
+        "abstract": "BACKGROUND: Methadone is commonly administered for chronic pain relief and treatment of opioid dependence. Concurrent with its increased consumption, toxicities and fatalities have increased. One of the adverse effects of opioid analgesics, including methadone, is that of nephrotoxicity. Opioids can have an effect on renal function through several different mechanisms. METHODS: We searched common bibliographical databases for the terms methadone, toxicity, poisoning, kidney, renal, and nephrotoxicity and summarize our findings in this review. RESULTS: Methadone can have both direct and indirect effects on the kidney. These effects include rhabdomyolysis (leading to acute kidney injury), volumetric changes, renal lipidosis and amyloidosis, kidney growth during pregnancy, and kidney transplant rejection. CONCLUSION: Improved understanding of the effects of methadone on kidney function can promote safer and more confident use of the drug."
+      },
+      {
+        "pmid": "30311212",
+        "title": "Naloxone for opioid-exposed newborn infants.",
+        "journal": "The Cochrane database of systematic reviews",
+        "pubdate": "2018Oct12",
+        "pubtypes": [
+          "Journal Article",
+          "Meta-Analysis",
+          "Research Support, Non-U.S. Gov't",
+          "Systematic Review"
+        ],
+        "abstract": "BACKGROUND: Naloxone, a specific opioid antagonist, is available for the treatment of newborn infants with cardiorespiratory or neurological depression that may be due to intrauterine exposure to opioid. It is unclear whether newborn infants may benefit from this therapy and whether naloxone has any harmful effects. OBJECTIVES: To determine the effect of naloxone on the need for and duration of neonatal unit stay in infants of mothers who received opioid analgesia prior to delivery or of mothers who have used a prescribed or non-prescribed opioid during pregnancy. SEARCH METHODS: We searched the following databases in February 2018: the Cochrane Central Register of Controlled Trials (the Cochrane Library 2018, Issue 1), MEDLINE (OvidSP), MEDLINE In process & Other Non-Indexed Citations (OvidSP), Embase (OvidSP), CINAHL (EBSCO), Maternity and Infant Care (OvidSP), and PubMed. We searched for ongoing and completed trials in the WHO International Clinical Trials Registry Platform and the EU Clinical Trials Register. We checked the reference lists of relevant articles to identify further potentially relevant studies. SELECTION CRITERIA: Randomised controlled trials comparing the administration of naloxone versus placebo, or no drug, or another dose of naloxone to newborn infants with suspected or confirmed in utero exposure to opioid. DATA COLLECTION AND ANALYSIS: We extracted data using the standard methods of Cochrane Neonatal with separate evaluation of trial quality and data extraction by two review authors and synthesis of data using risk ratio, risk difference, and mean difference. MAIN RESULTS: We included nine trials, with 316 participants in total, that compared the effects of naloxone versus placebo or no drug in newborn infants exposed to maternal opioid analgesia prior to delivery. None of the included trials investigated infants born to mothers who had used a prescribed or non-prescribed opioid during pregnancy. None of these trials specifically recruited infants with cardiorespiratory or neurological depression. The main outcomes reported were measures of respiratory function in the first six hours after birth. There is some evidence that naloxone increases alveolar ventilation. The trials did not assess the effect on the primary outcomes of this review (admission to a neonatal unit and failure to establish breastfeeding). AUTHORS' CONCLUSIONS: The existing evidence from randomised controlled trials is insufficient to determine whether naloxone confers any important benefits to newborn infants with cardiorespiratory or neurological depression that may be due to intrauterine exposure to opioid. Given concerns about the safety of naloxone in this context, it may be appropriate to limit its use to randomised controlled trials that aim to resolve these uncertainties."
+      },
+      {
+        "pmid": "39504271",
+        "title": "Consensus Statement on Pain Management for Pregnant Patients with Opioid-Use Disorder from the Society for Obstetric Anesthesia and Perinatology, Society for Maternal-Fetal Medicine, and American Society of Regional Anesthesia and Pain Medicine.",
+        "journal": "Anesthesia and analgesia",
+        "pubdate": "2025Jun01",
+        "pubtypes": [
+          "Journal Article",
+          "Practice Guideline",
+          "Consensus Statement",
+          "Review"
+        ],
+        "abstract": "Pain management in pregnant and postpartum people with an opioid-use disorder (OUD) requires a balance between risks associated with opioid tolerance, including withdrawal or return to opioid use, considerations around social needs of the maternal-infant dyad, and the provision of adequate pain relief for the birth episode that is often characterized as the worst pain a person will experience in their lifetime. This multidisciplinary consensus statement between the Society for Obstetric Anesthesia and Perinatology (SOAP), Society for Maternal-Fetal Medicine (SMFM), and American Society of Regional Anesthesia and Pain Medicine (ASRA) provides a framework for pain management in obstetric patients with OUD. The purpose of this consensus statement is to provide practical and evidence-based recommendations and is targeted to health care providers in obstetrics and anesthesiology. The statement is focused on prenatal optimization of pain management, labor analgesia, and postvaginal delivery pain management, and postcesarean delivery pain management. Topics include a discussion of nonpharmacologic and pharmacologic options for pain management, medication management for OUD (eg, buprenorphine, methadone), considerations regarding urine drug testing, and other social aspects of care for maternal-infant dyads, as well as a review of current practices. The authors provide evidence-based recommendations to optimize pain management while reducing risks and complications associated with OUD in the peripartum period. Ultimately, this multidisciplinary consensus statement provides practical and concise clinical guidance to optimize pain management for people with OUD in the context of pregnancy to improve maternal and perinatal outcomes."
+      },
+      {
+        "pmid": "22432983",
+        "title": "Management of opioid substitution therapy during medical intervention.",
+        "journal": "Internal medicine journal",
+        "pubdate": "2012Mar",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Opioid substitution therapy (OST) for opioid dependence is common, and injection drug users have significant medical and psychiatric comorbidity. Many physicians will encounter OST patients in their usual practice. This article provides guidance on management of common clinical problems in this population, including OST management in hepatic failure, respiratory disease, pain management and potential drug interactions."
+      },
+      {
+        "pmid": "35843298",
+        "title": "A review of the safety of buprenorphine in special populations.",
+        "journal": "The American journal of the medical sciences",
+        "pubdate": "2022Dec",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Rates of opioid misuse and opioid use disorder have been increasing in recent years. Buprenorphine has emerged as an appealing medication for its use not only as treatment for opioid use disorder, but also as an opioid for chronic pain that has a ceiling effect on risks associated with opioid therapy. As other opioid prescribing decreases, buprenorphine prescribing continues to increase. As a result, it is imperative to understand the safety and efficacy of its use in special populations. This review article will explore the safety and efficacy of buprenorphine when used in subjects with hepatic and renal impairment, the elderly, and pregnant women. While manufacturer labeling for buprenorphine products may caution against their use in these populations, further examination of available data indicates that buprenorphine can be used safely and effectively for both chronic pain and/or opioid use disorder in all four of these populations."
+      },
+      {
+        "pmid": "27445597",
+        "title": "Misuse of Prescription Opioid Medication among Women: A Scoping Review.",
+        "journal": "Pain research & management",
+        "pubdate": "2016",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, Non-U.S. Gov't",
+          "Scoping Review"
+        ],
+        "abstract": "Background. National data from Canada and the United States identify women to be at greater risk than men for the misuse of prescription opioid medications. Various sex- and gender-based factors and patient and physician practices may affect women's use and misuse of prescription opioid drugs. Objectives. To explore the particular risks, issues, and treatment considerations for prescription opioid misuse among women who experience chronic noncancer pain and trauma. Methods. A scoping review for articles published between January 1990 and May 2014 was conducted on sex- and gender-based risks and treatment considerations among women who experience chronic noncancer pain and trauma. Results. A total of 57 articles were identified. The present narrative review summarizes the specific risks for the misuse of prescription opioid medication among women who have experienced violence and trauma, Aboriginal women, adolescents and young women, older women, pregnant women, women of a sexual minority, and transwomen. Discussion. The majority of the literature is descriptive, with few studies that evaluate approaches and interventions to respond to the issue of chronic pain, trauma, and misuse of prescription opioids among women, particularly vulnerable subgroups of women. Conclusions. Trauma-informed and women-centred approaches that address women's vulnerabilities and complex needs require further attention."
+      },
+      {
+        "pmid": "36269982",
+        "title": "Opioid Use Disorder in Pregnant Patients.",
+        "journal": "Anesthesia and analgesia",
+        "pubdate": "2022Nov01",
+        "pubtypes": [
+          "Review",
+          "Journal Article"
+        ],
+        "abstract": "In this issue of Anesthesia & Analgesia, Lim and colleagues offer a scoping review of the available literature encompassing opioid use disorder (OUD) in pregnant patients. As discussed in their review, opioid use and abuse in pregnant patients have increased four-fold in the past decade. As such, these patients can present significant challenges with respect to pain management during labor and delivery. A baseline habituation to opioids can render patients resistant to conventional pain management plans. Those who are additionally prescribed opioid agonist-antagonists or other maintenance medications for OUD such as buprenorphine or methadone have even more complex pharmacologic considerations that make pain management unpredictable. As detailed in their analysis, there is a paucity of literature surrounding optimal management strategies in this population of patients. Reports are increasing over time, however, most publications are of lower tier evidence, with very few randomized trials and systematic reviews to inform practitioners. It becomes plainly evident that this is an area of clinical science that demands greater attention. Specific areas of focus elaborated by the authors include: better characterization of opioid selection and dosing in managing labor analgesia, effectiveness of different regional anesthetic techniques, non-pharmacologic management, and psycho-social support for these patients. The reader is strongly encouraged to review the cited article for an in-depth understanding of the concepts summarized in this infographic."
+      },
+      {
+        "pmid": "19535889",
+        "title": "[Methadone treatment and its dangers].",
+        "journal": "Medicina (Kaunas, Lithuania)",
+        "pubdate": "2009",
+        "pubtypes": [
+          "Comparative Study",
+          "English Abstract",
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Methadone is a long-acting synthetic opioid with high affinity for various opioid receptors, especially for m-opioid receptors. Methadone has been used as a successful pharmacologic intervention for the treatment of heroin dependence and acute and chronic pain. This treatment is effective for opiate addiction, reducing morbidity and mortality associated with heroin use. However, overdosing with methadone has become a growing phenomenon because of the increased availability of this drug. Patients enrolled in a methadone maintenance treatment program may become physically dependent and may experience methadone withdrawal symptoms. In this review article, there are discussed about pharmacokinetic and pharmacodynamic properties of methadone, clinical symptoms of its overdose, dosage problems, detection of methadone in biological samples, treatment, and causes of methadone overdose-related deaths."
+      },
+      {
+        "pmid": "21501542",
+        "title": "Substance use in pregnancy.",
+        "journal": "Journal of obstetrics and gynaecology Canada : JOGC = Journal d'obstetrique et gynecologie du Canada : JOGC",
+        "pubdate": "2011Apr",
+        "pubtypes": [
+          "Journal Article",
+          "Practice Guideline",
+          "Research Support, N.I.H., Extramural",
+          "Research Support, Non-U.S. Gov't"
+        ],
+        "abstract": "OBJECTIVE: To improve awareness and knowledge of problematic substance use in pregnancy and to provide evidence-based recommendations for the management of this challenging clinical issue for all health care providers. OPTIONS: This guideline reviews the use of screening tools, general approach to care, and recommendations for clinical management of problematic substance use in pregnancy. OUTCOMES: Evidence-based recommendations for screening and management of problematic substance use during pregnancy and lactation. EVIDENCE: Medline, PubMed, CINAHL, and The Cochrane Library were searched for articles published from 1950 using the following key words: substance-related disorders, mass screening, pregnancy complications, pregnancy, prenatal care, cocaine, cannabis, methadone, opioid, tobacco, nicotine, solvents, hallucinogens, and amphetamines. Results were initially restricted to systematic reviews and randomized control trials/controlled clinical trials. A subsequent search for observational studies was also conducted because there are few RCTs in this field of study. Articles were restricted to human studies published in English. Additional articles were located by hand searching through article reference lists. Searches were updated on a regular basis and incorporated in the guideline up to December 2009. Grey (unpublished) literature was also identified through searching the websites of health technology assessment and health technology assessment-related agencies, clinical practice guideline collections, clinical trial registries, and national and international medical specialty societies. VALUES: The quality of evidence was rated using the criteria described in the Report of the Canadian Task Force on the Preventive Health Care. Recommendations for practice were ranked according to the method described in that report (Table 1). BENEFITS, HARMS, AND COSTS: This guideline is intended to increase the knowledge and comfort level of health care providers caring for pregnant women who have substance use disorders. Improved access to health care and assistance with appropriate addiction care leads to reduced health care costs and decreased maternal and neonatal morbidity and mortality. RECOMMENDATIONS: 1. All pregnant women and women of childbearing age should be screened periodically for alcohol, tobacco, and prescription and illicit drug use. (III-A) 2. When testing for substance use is clinically indicated, urine drug screening is the preferred method. (II-2A) Informed consent should be obtained from the woman before maternal drug toxicology testing is ordered. (III-B) 3. Policies and legal requirements with respect to drug testing of newborns may vary by jurisdiction, and caregivers should be familiar with the regulations in their region. (III-A) 4. Health care providers should employ a flexible approach to the care of women who have substance use problems, and they should encourage the use of all available community resources. (II-2B) 5. Women should be counselled about the risks of periconception, antepartum, and postpartum drug use. (III-B) 6. Smoking cessation counselling should be considered as a first-line intervention for pregnant smokers. (I-A) Nicotine replacement therapy and/or pharmacotherapy can be considered if counselling is not successful. (I-A) 7. Methadone maintenance treatment should be standard of care for opioid-dependent women during pregnancy. (II-IA) Other slow-release opioid preparations may be considered if methadone is not available. (II-2B) 8. Opioid detoxification should be reserved for selected women because of the high risk of relapse to opioids. (II-2B) 9. Opiate-dependent women should be informed that neonates exposed to heroin, prescription opioids, methadone, or buprenorphine during pregnancy are monitored closely for symptoms and signs of neonatal withdrawal (neonatal abstinence syndrome). (II-2B) Hospitals providing obstetric care should develop a protocol for assessment and management of neonates exposed to opiates during pregnancy. (III-B) 10. Antenatal planning for intrapartum and postpartum analgesia may be offered for all women in consultation with appropriate health care providers. (III-B) 11. The risks and benefits of breastfeeding should be weighed on an individual basis because methadone maintenance therapy is not a contraindication to breastfeeding. (II-3B)."
+      },
+      {
+        "pmid": "33275857",
+        "title": "Rapid Buprenorphine Induction for Cancer Pain in Pregnancy.",
+        "journal": "Journal of palliative medicine",
+        "pubdate": "2021Aug",
+        "pubtypes": [
+          "Journal Article"
+        ],
+        "abstract": "Most patients with cancer-related pain are managed using opioids; cancer-related pain in the setting of pregnancy can be challenging to address owing to risk to the fetus associated with in utero opioid exposure. Buprenorphine is a unique opioid with potential benefits over other opioids for use in pregnancy and is often used for management of cancer-related pain in nonpregnant adults. There are limited data on cancer-related pain management in pregnant patients and no data supporting the use of buprenorphine for cancer-related pain in pregnant patients. This case describes a rapid buprenorphine induction using a microdosing regimen in a pregnant patient and highlights the potential of buprenorphine for cancer-related pain in this population."
+      },
+      {
+        "pmid": "34776108",
+        "title": "Caring for Parturients with Substance Use Disorders.",
+        "journal": "Anesthesiology clinics",
+        "pubdate": "2021Dec",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Parturients with substance use disorder require expertise to manage the complexity of intoxication, withdrawal, and chronic use as well as ensure adequate analgesia throughout labor. Opioid use disorder in pregnancy has increased more than 4-fold in the past decade, with a 50-fold geographic variability that now dwarfs other substance use in this population. Understanding not only the medical but also the public health and criminal justice implications of substance use disorder is essential to providing optimal care to this at-risk population."
+      },
+      {
+        "pmid": "30180008",
+        "title": "Caught in the Crossfire of the Syndemic.",
+        "journal": "Journal of addictions nursing",
+        "pubdate": "2018Jul/Sep",
+        "pubtypes": [
+          "Case Reports",
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "The worsening opioid epidemic ignites infectious disease development and transmission as opioids abused by insufflation and/or injection establish a pathway for infection to the user and propagate vulnerability to diseases. The phenomenon of the synergistic collision of epidemics intensifying the load of disease constitutes a syndemic. Merrill Signer (1994) voiced the term \"syndemic\" to characterize the complex nexus of politics, economics, psychosocial/environmental factors, and health disparities resulting in the inner-city AIDS crisis of the 1990s. Today, the surge of opioid use puts individuals at risk for disease transmission and living the catastrophic clash wrought by the epidemics. By following a case study caught in the crossfire of epidemics, this article prompts to underscore recognition of the at-risk patient for HIV infection and to embolden care integration of prevention and treatment strategies nurses are qualified to execute."
+      },
+      {
+        "pmid": "29601303",
+        "title": "The opioid epidemic and pregnancy: implications for anesthetic care.",
+        "journal": "Current opinion in anaesthesiology",
+        "pubdate": "2018Jun",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "PURPOSE OF REVIEW: This review summarizes evolving knowledge regarding adverse maternal, fetal, and neonatal effects of opioid exposure during pregnancy, and current treatment options for opioid use disorder (OUD). Maternal and fetal implications of maternal opioid maintenance with methadone and buprenorphine are described. Finally, acute and chronic pain management strategies in opioid-tolerant parturients are reviewed. RECENT FINDINGS: Opioid use among parturients has risen dramatically, with opioid use during pregnancy as high as 20%. Of women with chronic pain, most continue to take opioids during pregnancy. Medication-assisted therapy with methadone or buprenorphine is currently the standard for treatment of opiate use disorder. Buprenorphine has unique pharmacologic properties that account for its preference over methadone. It has also been shown to produce more favorable neonatal outcomes compared with methadone. Increased clearance and volume of distribution associated with pregnancy require adjustment of dosing regimens of both medications. Multimodal adjuncts can be important alternatives for treatment of pain in opioid-tolerant parturients. SUMMARY: The dramatic rise in OUD in pregnancy has had staggering socioeconomic consequences, carrying with it profound maternal and fetal health problems. Medication-assisted treatment utilizing either methadone, or more commonly buprenorphine, is considered the standard of care for OUD during pregnancy. Peripartum pain management for opioid-tolerant patients is challenging and requires consideration for regional anesthesia along with multimodal pharmacotherapy."
+      },
+      {
+        "pmid": "28437302",
+        "title": "Pain Management in the Opioid-Dependent Pregnant Woman.",
+        "journal": "The Journal of perinatal & neonatal nursing",
+        "pubdate": "2017Apr/Jun",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Opioid dependence is an epidemic in the United States, and the percentage of pregnant women who are opioid dependent has increased dramatically in the last decade. Pain management, already a concern for intrapartum and postpartum care, is complicated in the context of opioid dependence. This clinical review surveys the literature on pain management in opioid-dependent pregnant women to summarize current consensus and evidence to guide clinical practice. Points of consensus for pain management in opioid-dependent pregnant women include continual opioid maintenance therapy throughout the pregnancy and the postpartum period; adequate management of acute pain; the contraindication of opioid agonist-antagonists for pain management; and the need for interdisciplinary teams using a multimodal approach to provide optimal care to opioid-dependent pregnant women."
+      },
+      {
+        "pmid": "11064492",
+        "title": "Treatment of pain in methadone-maintained patients.",
+        "journal": "The Mount Sinai journal of medicine, New York",
+        "pubdate": "2000Oct-Nov",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Patients with opioid dependency experience trauma, acute medical illness and chronic diseases, and may have to undergo surgery to the same extent as other individuals. They need to be treated for relief of symptoms, including pain. Undertreatment or inadequate treatment of pain for these individuals is a particular problem because of opioid dependency and/or methadone maintenance treatment. The guiding principles governing treatment of these patients are to maintain the methadone treatment and to use short-acting narcotics administered at higher doses, and to do so as often as necessary, preferably on a fixed schedule, to relieve the pain. Supplemental analgesic medication may also be employed, except that opiate antagonists must be avoided."
+      },
+      {
+        "pmid": "33935169",
+        "title": "Peripartum management for women with opioid dependence.",
+        "journal": "Current opinion in anaesthesiology",
+        "pubdate": "2021Jun01",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "PURPOSE OF REVIEW: Opioid use disorder (OUD) in pregnancy has more than quadrupled in prevalence over the past two decades and continues to increase steadily every year. With no defined standard of care for the management of pain during the peripartum period, variability in treatment plans potentially leaves room for interrupted patient care, decreased patient satisfaction, and poorer outcomes. The impact of OUD and its management during the peripartum period has become more widely discussed over the past several years and is the focus of this review. RECENT FINDINGS: Current recommendations including developing a detailed institutional plan for the management of pain for women with OUD during the intrapartum and postpartum periods. There is tremendous value in exploring partnerships with other specialties, including addiction medicine, and behavioral health and obstetrics in development of policies and procedures. Consistency within institutions is critical to improve patient outcomes. SUMMARY: This review will address both pain management recommendations and best clinical practices regarding management of the parturient during the transition periods of the peripartum, intrapartum, and postpartum period. Novel approaches and perspectives from case reports and narrative experience will also be discussed. There are many opportunities in this field for further studies, research, and evidence-based guidelines that promote an established standard of care."
+      },
+      {
+        "pmid": "18248941",
+        "title": "Treatment of opioid-dependent pregnant women: clinical and research issues.",
+        "journal": "Journal of substance abuse treatment",
+        "pubdate": "2008Oct",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, N.I.H., Extramural",
+          "Research Support, Non-U.S. Gov't",
+          "Review"
+        ],
+        "abstract": "This article addresses common questions that clinicians face when treating pregnant women with opioid dependence. Guidance, based on both research evidence and the collective clinical experience of the authors, which include investigators in the Maternal Opioid Treatment: Human Experimental Research (MOTHER) project, is provided to aid clinical decision making. The MOTHER project is a double-blind, double-dummy, flexible-dosing, parallel-group clinical trial examining the comparative safety and efficacy of methadone and buprenorphine for the treatment of opioid dependence in pregnant women and their neonates. The article begins with a discussion of appropriate assessment during pregnancy and then addresses clinical management stages including maintenance medication selection, induction, and stabilization; opioid agonist medication management before, during, and after delivery; pain management; breast-feeding; and transfer to aftercare. Lastly, other important clinical issues including managing co-occurring psychiatric disorders and medication interactions are discussed."
+      },
+      {
+        "pmid": "22564314",
+        "title": "Buprenorphine: a newer drug for treating neonatal abstinence syndrome.",
+        "journal": "Neonatal network : NN",
+        "pubdate": "2012May-Jun",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Neonates may be exposed to various legal and illicit substances during gestation, including cigarettes, alcohol, narcotics, benzodiazepines, antidepressants, and stimulants. Many of these substances can result in varying degrees of drug withdrawal after delivery. Polysubstance use can complicate the clinical evaluation of a newborn both in terms of assessment of withdrawal and treatment of symptoms. For the purpose of this column, the focus is on those infants with in utero narcotic exposure. The primary circumstances under which pregnant women use narcotics are illicit drug abuse, prescribed narcotic maintenance as treatment for abuse, and treatment of chronic pain conditions."
+      },
+      {
+        "pmid": "31010564",
+        "title": "Analgesia, Opioids, and Other Drug Use During Pregnancy and Neonatal Abstinence Syndrome.",
+        "journal": "Clinics in perinatology",
+        "pubdate": "2019Jun",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "When opioid misuse rises in the United States, pregnant women and their neonates are affected. This article summarizes the use of Food and Drug Administration-approved products, including methadone, buprenorphine, and the combination formulation of buprenorphine and naloxone to treat adult opioid use disorder during the perinatal period. All labels include pregnancy, neonatal, and lactation information and note the accepted use of these medications during the perinatal period if the benefits outweigh the risks. A summary of the neonatal abstinence syndrome definition, its assessment tools, treatment approaches, and future genetic directions are provided."
+      },
+      {
+        "pmid": "36045026",
+        "title": "Epidemiology of opioid use in pregnancy.",
+        "journal": "Best practice & research. Clinical obstetrics & gynaecology",
+        "pubdate": "2022Dec",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "The world has been experiencing an opioid epidemic for over 20 years, and rates of use and overdose among women, including during pregnancy, have risen markedly. Women receive more prescriptions for opioids compared to men. Data suggest that 20% of women filled at least one prescription for an opioid during their pregnancy, and the prevalence of prenatal exposure averaged 14%. Opioid use by women, especially during pregnancy and while breastfeeding, and management and treatment is complex for healthcare providers, especially related to methadone treatment, pain management during labour, neonatal opioid withdrawal syndrome, nutritional issues and maternal withdrawal. Opioid use during pregnancy has been associated with maternal, foetal and infant complications, and overdose has become a leading cause of death in post-partum women in some countries. Universal screening for opioid use disorder (OUD) is recommended in pregnancy, and prevention and treatment programs that meet the specific needs of women are important to understand and consider as the world continues to try to anticipate and respond to the realities of the opioid epidemic."
+      },
+      {
+        "pmid": "23370170",
+        "title": "Management of the patient in labor who has abused substances.",
+        "journal": "Clinical obstetrics and gynecology",
+        "pubdate": "2013Mar",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "The drug abusing patient can provide a management dilemma for health care providers including nurses, obstetrician, anesthesiologist, and pediatrician. Certain illicit drugs may mimic other diseases of pregnancy and result in inappropriate treatment for the mother and child. Pain management may be challenging in such patients because of increasing drug tolerance and increased sensitivity to pain. This article highlights the clinical presentation in a pregnant patient who may have recently used some of the more commonly abused drugs. The ability to identify such a patient is crucial so that the appropriate screening and treatment can occur."
+      },
+      {
+        "pmid": "33650271",
+        "title": "The Effects of opioids on female fertility, pregnancy and the breastfeeding mother-infant dyad: A Review.",
+        "journal": "Basic & clinical pharmacology & toxicology",
+        "pubdate": "2021May",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Opioids cover a broad class of natural, synthetic and semi-synthetic drugs that act on opioid receptors to produce powerful analgesic effects. Rates of opioid use and opioid agonist maintenance treatment have increased substantially in recent years, particularly among women. Trends and outcomes of opioids use on fertility, pregnancy and breastfeeding, and longer-term child developmental outcomes have not been well-described. Here, we review the existing literature on the health effects of opioid use on female fertility, pregnancy, breastmilk and the exposed infant. We find that the current literature is primarily concentrated on the impact of opioid use in pregnancy and neonatal outcomes, with little exploration of effects on fertility. Studies are limited in number, some with small sample sizes, and many are hampered by methodological challenges related to confounding and other potential biases. Opioid use is becoming more prevalent due to environmental pressures such as COVID-19. More research is needed to better elucidate its effects on reproductive health among younger women and support the development of evidence-based recommendations for safe prescription practices and public health messaging."
+      },
+      {
+        "pmid": "27729254",
+        "title": "Opioid dependence and pregnancy: minimizing stress on the fetal brain.",
+        "journal": "American journal of obstetrics and gynecology",
+        "pubdate": "2017Mar",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Increase in the number of opioid-dependent pregnant women delivering babies at risk for neonatal abstinence syndrome prompted a US Government Accountability Office report documenting deficits in research and provider knowledge about care of the maternal/fetal unit and the neonate. There are 3 general sources of dependence: untreated opioid use disorder, pain management, and medication-assisted treatment with methadone or buprenorphine. A survey of methadone patients' experiences when telling a physician of their pregnancy and opioid dependence demonstrated physician confusion about proper care, frequent negative interactions with the mother, and failures to provide appropriate referral. Patients in pain management were discharged without referral when the physician was told of the pregnancy. Methadone and buprenorphine were frequently seen negatively because they \"caused\" neonatal abstinence syndrome. Most mothers surveyed had to find opioid treatment on their own. How dependence is managed medically is a critical determinant of the level of stress on both mother and fetus, and therefore another determinant of neonatal health. The effects of both opioid withdrawal stress and maternal emotional stress on neonatal and developmental outcomes are reviewed. Currently, there have been efforts to criminalize maternal opioid dependence and to encourage or coerce pregnant women to undergo withdrawal. This practice poses both acute risks of fetal hypoxia and long-term risks of adverse epigenetic programming related to catecholamine and corticosteroid surges during withdrawal. Contemporary studies of the effects of withdrawal stress on the developing fetal brain are urgently needed to elucidate and quantify the risks of such practices. At birth, inconsistencies in the hospital management of neonates at risk for neonatal abstinence syndrome have been observed. Neglect of the critical role of maternal comforting in neonatal abstinence syndrome management is an iatrogenic and preventable cause of poor outcomes and long hospitalizations. Rooming-in allows for continuous care of the baby and maternal/neonatal attachment, often unwittingly disrupted by the neonatal intensive care unit environment. Recommendations are made for further research into physician/patient interactions and into optimal dosing of methadone and buprenorphine to minimize maternal/fetal withdrawal."
+      },
+      {
+        "pmid": "26879874",
+        "title": "New Pain Management Options for the Surgical Patient on Methadone and Buprenorphine.",
+        "journal": "Current pain and headache reports",
+        "pubdate": "2016Mar",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Perioperative management of patients receiving opioid addiction therapy presents a unique challenge for the anesthesiologist. The goal of pain management in this patient population is to effectively manage postoperative pain, to improve patient satisfaction and outcomes, and to reduce the cost of health care. Multimodal analgesics, including nonsteroid anti-inflammatory drugs, intravenous acetaminophen, gabapentanoid agents, and low-dose ketamine infusions, have been used to improve postoperative pain and to reduce postoperative opioid use. Patients on long-term opioid management therapy with methadone and buprenorphine require special considerations. Recommendations and options for treating postoperative pain in patients on methadone and buprenorphine are outlined below. Other postoperative pain management options include patient-controlled analgesia, intravenous, and transdermal, in addition to neuraxial and regional anesthesia techniques. Special patient populations include the parturient on long-term opioid therapy. Recommendations for use of opioids in these patients during labor and delivery and in the postpartum period are discussed."
+      },
+      {
+        "pmid": "32769649",
+        "title": "Opioid Prescription and Persistent Opioid Use After Ectopic Pregnancy.",
+        "journal": "Obstetrics and gynecology",
+        "pubdate": "2020Sep",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, N.I.H., Extramural",
+          "Research Support, Non-U.S. Gov't"
+        ],
+        "abstract": "OBJECTIVE: To evaluate outpatient opioid dispensing and the incidence of persistent opioid use after ectopic pregnancy. METHODS: This cohort study used U.S. employer-based claims data to identify opioid-naïve individuals experiencing ectopic pregnancy from November 1, 2008, to September 30, 2015. Treatment was categorized as surgical, medical (using methotrexate), or unknown. New opioid prescriptions were defined as prescriptions filled from 1 week before to 1 week after an ectopic pregnancy treatment. For those who filled a new opioid prescription, we calculated the incidence and risk factors for persistent opioid use, defined as having filled at least one opioid prescription both from 8 to 90 days after treatment and from 91 to 365 days after treatment. RESULTS: Of the 15,338 individuals in our study, 7,047 (45.9%, 95% CI 45.2-46.7%) filled an opioid prescription at the time of treatment, of whom 4.1% (95% CI 3.6-4.6%) developed persistent opioid use. The risk of persistent opioid use was lower among those who had surgical compared with medical treatment (3.7% and 6.8%, respectively; relative risk [RR] 0.54, 95% CI 0.38-0.77). Variables most strongly associated with persistent opioid use were a history of benzodiazepine use (RR 1.99; 95% CI 1.43-2.78; adjusted relative risk [aRR] 1.57, 95% CI 1.11-2.22), antidepressant use (RR 1.91, 95% CI 1.45-2.53; aRR 1.53, 95% CI 1.08-2.18), and a pre-existing pain disorder (RR 1.58, 95% CI 1.26-1.99; aRR 1.47, 95% CI 1.16-1.85) in the year before treatment. CONCLUSION: New opioid use is common after an ectopic pregnancy; approximately 4% of those with new opioid use develop persistent opioid use, with the rate higher in those treated medically. New pain-management guidelines need to be developed to prevent persistent opioid use after ectopic pregnancy."
+      },
+      {
+        "pmid": "22902085",
+        "title": "Evaluation and management of opioid dependence in pregnancy.",
+        "journal": "Psychosomatics",
+        "pubdate": "2012Sep-Oct",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "BACKGROUND: Opioid use disorders are a growing public health problem in the United States. Most women who are opioid-dependent are of childbearing age, and management of opioid dependence during pregnancy poses unique challenges. Assessment includes evaluation for addiction, withdrawal syndromes, and comorbid psychiatric diagnoses. Consultation-liaison (C-L) psychiatrists may also be involved in acute pain management, perinatal medication management, buprenorphine induction, and stabilization. For the past four decades, the standard of care has included methadone maintenance, but the increasing use of buprenorphine creates new treatment issues and opportunities. OBJECTIVE: To educate C-L psychiatrists in emergency and obstetrical settings about the appropriate approach toward the evaluation and basic management of women with opioid dependence in pregnancy. METHOD: The authors reviewed the consensus literature and all new treatment options on opioid dependence during pregnancy. DISCUSSION: In this review, the authors summarize known and emerging management strategies for opioid dependence in pregnancy pertinent to C-L psychiatrists."
+      },
+      {
+        "pmid": "28426507",
+        "title": "Peripartum Anesthetic Management of the Opioid-tolerant or Buprenorphine/Suboxone-dependent Patient.",
+        "journal": "Clinical obstetrics and gynecology",
+        "pubdate": "2017Jun",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Opioid abuse and dependence continues to rise in both the general population and pregnancy, with opioid overdose deaths having quadrupled in the last 15 years. Illicit drug use in last 30 days of pregnancy was over 4% with almost 0.6% documented maternal opiate use at time of birth. The management of the opioid-tolerant, buprenorphine-dependent or methadone-dependent patient in the peripartum period is reviewed. Options for treatment of opioid dependence, acute pain management, and perioperative multimodal analgesia are discussed. The effects of maternal management on neonatal abstinence syndrome are also reviewed."
+      },
+      {
+        "pmid": "31262692",
+        "title": "Use and Misuse of Opioid Pain Medications by Pregnant and Nonpregnant Women.",
+        "journal": "Pain management nursing : official journal of the American Society of Pain Management Nurses",
+        "pubdate": "2020Feb",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, N.I.H., Extramural",
+          "Research Support, Non-U.S. Gov't"
+        ],
+        "abstract": "BACKGROUND: The use and misuse of opioid pain medication is a public health problem that has extended to pregnant women. Assessing both the use and misuse of opioid pain medication had been limited. AIMS: The aim of the present study was to disseminate data from a national sample of pregnant and nonpregnant women, tracking the rate and predictors of opioid use and misuse. METHODS: In 2015 the National Survey on Drug Use and Health expanded the assessment of opioid pain reliever use and misuse. Here, a secondary analysis of 2 years of National Survey on Drug Use and Health expanded data assesses the use and misuse of opioids in pregnant and nonpregnant women ranging in age from 18 to 44 years (N = 46,229). RESULTS: Opioid medication use was reported by 31.89% of pregnant women and 38.87% of nonpregnant women. Race and pregnancy status were associated with risk, with pregnancy being protective and White women having significantly higher risk. CONCLUSIONS: The high rates of use and misuse of opioids in pregnant women underscores a critical need for screening for opioid use and misuse, particularly among White women. Pregnancy provides a unique window of opportunity to educate, screen, and provide treatment."
+      },
+      {
+        "pmid": "34016836",
+        "title": "A Quality Improvement Project to Reduce Postcesarean Opioid Consumption.",
+        "journal": "MCN. The American journal of maternal child nursing",
+        "pubdate": "2021 Jul-Aug 01",
+        "pubtypes": [
+          "Journal Article"
+        ],
+        "abstract": "BACKGROUND: The opioid epidemic is a public health emergency in the United States, stemming in part from widespread misuse and overprescribing of opioids following surgery. Approximately 1 in 300 women with no prior exposure to opioids develops an opioid use disorder following cesarean birth. Effective management of postcesarean pain requires individualized treatment and a balance of the woman's goals for optimal recovery and ability to safely care for her newborn. The American College of Obstetricians and Gynecologists recommends a multimodal approach to pain management after cesarean birth. METHODS: In April 2019, a multidisciplinary team was formed at New York University Langone Health to study opioid use postcesarean. The team used the Plan, Do, Study, Act process model for continuous quality improvement to launch a postcesarean pathway called \"Your Plan After Cesarean,\" a standardized visual tool with quantifiable milestones. It facilitates integration of women's preferences in their postcesarean care, and emphasizes providers' routine use of nonpharmacological interventions to manage pain. RESULTS: During the pilot period of the project, postcesarean high consumption of 55 to 120 mg of opioids was reduced from 25% to 8%. By January 2020, 75% of women postoperative cesarean took little-to-no opioids during their hospital stay. By February 2021, the total number of opioids consumed by women after cesarean birth in-hospital was reduced by 79%. Satisfaction among women with pain management after cesarean continued to be high. CLINICAL IMPLICATIONS: Reduction in postcesarean opioid administration and the number of opioids prescribed at hospital discharge can be accomplished without having a negative effect on women's perceptions of post-op pain relief. These changes can potentially be a factor in helping to avoid an opioid-naive woman who has a cesarean birth from developing an opioid use disorder."
+      },
+      {
+        "pmid": "32524214",
+        "title": "Considerations and Implications of Cannabidiol Use During Pregnancy.",
+        "journal": "Current pain and headache reports",
+        "pubdate": "2020Jun10",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "PURPOSE OF REVIEW: Cannabis is a naturally occurring plant that is composed of over sixty phytocannabinoids, of which cannabidiol (CBD) has been recently identified as having therapeutic potential. RECENT FINDINGS: Although not clearly understood in its mechanism of action, CBD contains potent anti-inflammatory, anti-hyperalgesia, and analgesic qualities now being further analyzed for its use in the treatment of a plethora of diseases. Related to its large safety profile and lack of psychoactive effects typically associated with cannabis and tetrahydrocannabinol (THC), CBD is being used more frequently for self-treatment of chronic pain, anxiety, and depression. With the help of broad marketing, CBD is being used by numerous people, including pregnant women who use CBD as an anti-emetic. Since marijuana is legalized in many states in the USA, the use of CBD has increased not only in the general population but also in specific groups such as pregnant women with chronic pain. Despite CBD's accessibility, there are limited studies showing its safety during pregnancy. While the use of cannabis has been well explored in terms of the effects on pregnancy, the use of CBD during pregnancy thus far has limited literature. The goal of this investigation is to impart the current understanding of CBD and its effects of pregnancy."
+      },
+      {
+        "pmid": "29623667",
+        "title": "A Review of the Opioid Epidemic: What Do We Do About It?",
+        "journal": "Pain and therapy",
+        "pubdate": "2018Jun",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "The opioid epidemic, with its noticeable increase in opioid prescriptions and related misuse, abuse and resultant deaths in the previous 12 years, is a particularly North American phenomenon. Europe, and particularly low- and middle-income countries, appear to be less influenced by this problem. There is undisputable value in using opioids not only in the treatment of acute pain, but in cancer pain as well. However, opioids are progressively being prescribed more and more for chronic non-cancer pain, despite inadequate data on their efficacy. In this paper, we describe the current prevalence of opioid misuse in a number of countries and the rationale for the commencement of opioid therapy. The safe initiation and monitoring of opioid therapy as well as the need for concurrent use of interdisciplinary multimodal therapy is discussed. The possible consequences of long-term use and predictors of high opioid use and overdose are presented. In particular, the management of opioid use disorders and the prevention of opioid abuse and dependence in the young, the old and the pregnant are discussed. Measures to prevent overprescribing and to alleviate risk are described, including the tapering of opioids and the use of opioid deterrents. Finally, the paper looks at the future development of pioneering medications and technologies to potentially treat abuse. In those parts of the world with an opioid epidemic, coroners and medical examiners, private and public health agencies, and agencies that enforce the law need to cooperate in an effort to slow down and reverse the indiscriminate use of prescribing opioids in the long-term for chronic non-cancer pain. Ongoing research is needed to create ways to minimise risks of opioid use, and to provide evidence for effective strategies for treating chronic pain."
+      },
+      {
+        "pmid": "30039154",
+        "title": "Risks and Benefits of Marijuana Use: A National Survey of U.S. Adults.",
+        "journal": "Annals of internal medicine",
+        "pubdate": "2018Sep04",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, N.I.H., Extramural",
+          "Research Support, Non-U.S. Gov't"
+        ],
+        "abstract": "BACKGROUND: Despite insufficient evidence regarding its risks and benefits, marijuana is increasingly available and is aggressively marketed to the public. OBJECTIVE: To understand the public's views on the risks and benefits of marijuana use. DESIGN: Probability-based online survey. SETTING: United States, 2017. PARTICIPANTS: 16 280 U.S. adults. MEASUREMENTS: Proportion of U.S. adults who agreed with a statement. RESULTS: The response rate was 55.3% (n = 9003). Approximately 14.6% of U.S. adults reported using marijuana in the past year. About 81% of U.S. adults believe marijuana has at least 1 benefit, whereas 17% believe it has no benefit. The most common benefit cited was pain management (66%), followed by treatment of diseases, such as epilepsy and multiple sclerosis (48%), and relief from anxiety, stress, and depression (47%). About 91% of U.S. adults believe marijuana has at least 1 risk, whereas 9% believe it has no risks. The most common risk identified by the public was legal problems (51.8%), followed by addiction (50%) and impaired memory (42%). Among U.S. adults, 29.2% agree that smoking marijuana prevents health problems. About 18% believe exposure to secondhand marijuana smoke is somewhat or completely safe for adults, whereas 7.6% indicated that it is somewhat or completely safe for children. Of the respondents, 7.3% agree that marijuana use is somewhat or completely safe during pregnancy. About 22.4% of U.S. adults believe that marijuana is not at all addictive. LIMITATION: Wording of the questions may have affected interpretation. CONCLUSION: Americans' view of marijuana use is more favorable than existing evidence supports. PRIMARY FUNDING SOURCE: National Heart, Lung, and Blood Institute."
+      },
+      {
+        "pmid": "21640969",
+        "title": "Management of women treated with buprenorphine during pregnancy.",
+        "journal": "American journal of obstetrics and gynecology",
+        "pubdate": "2011Oct",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "The management of pregnancy and delivery of a woman on opiate-substitution therapy with buprenorphine requires a coordinated team approach by social services, addiction medicine, obstetrics, and pediatrics. Her obstetrical care is further complicated by the unique pharmacology of buprenorphine and the issues of pain management. Obstetrical providers should be familiar with the complex issues surrounding the optimal care of these women."
+      },
+      {
+        "pmid": "38561393",
+        "title": "Trends in prenatal prescription opioid use among Medicaid beneficiaries in Wisconsin, 2010-2019.",
+        "journal": "Journal of perinatology : official journal of the California Perinatal Association",
+        "pubdate": "2024Aug",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, Non-U.S. Gov't",
+          "Research Support, N.I.H., Extramural"
+        ],
+        "abstract": "OBJECTIVE: To examine changes in prenatal opioid prescription exposure following new guidelines and policies. STUDY DESIGN: Cohort study of all (262,284) Wisconsin Medicaid-insured live births 2010-2019. Prenatal exposures were classified as analgesic, short term, and chronic (90+ days), and medications used to treat opioid use disorder (MOUD). We describe overall and stratified temporal trends and used linear probability models with interaction terms to test their significance. RESULT: We found 42,437 (16.2%) infants with prenatal exposure; most (90.5%) reflected analgesic opioids. From 2010 to 2019, overall exposure declined 12.8 percentage points (95% CI = 12.1-13.1). Reductions were observed across maternal demographic groups and in both rural and urban settings, though the extent varied. There was a small reduction in chronic analgesic exposure and a concurrent increase in MOUD. CONCLUSION: Broad and sustained declines in prenatal prescription opioid exposure occurred over the decade, with little change in the percentage of infants chronically exposed."
+      },
+      {
+        "pmid": "23106923",
+        "title": "Buprenorphine treatment of opioid-dependent pregnant women: a comprehensive review.",
+        "journal": "Addiction (Abingdon, England)",
+        "pubdate": "2012Nov",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, N.I.H., Extramural",
+          "Review"
+        ],
+        "abstract": "AIMS: This paper reviews the published literature regarding outcomes following maternal treatment with buprenorphine in five areas: maternal efficacy, fetal effects, neonatal effects, effects on breast milk and longer-term developmental effects. METHODS: Within each outcome area, findings are summarized first for the three randomized clinical trials and then for the 44 non-randomized studies (i.e. prospective studies, case reports and series and retrospective chart reviews), only 28 of which involve independent samples. RESULTS: Results indicate that maternal treatment with buprenorphine has comparable efficacy to methadone, although difficulties may exist with current buprenorphine induction methods. The available fetal data suggest buprenorphine results in less physiological suppression of fetal heart rate and movements than methadone. Regarding neonatal effects, perhaps the single definitive conclusion is that prenatal buprenorphine treatment results in a clinically significant less severe neonatal abstinence syndrome (NAS) than treatment with methadone. The limited research suggests that, like methadone, buprenorphine is compatible with breastfeeding. Data available thus far suggest that there are no deleterious effects of in utero buprenorphine exposure on infant development. CONCLUSIONS: While buprenorphine produces a less severe neonatal abstinence syndrome than methadone, both methadone and buprenorphine are important parts of a complete comprehensive treatment approach for opioid-dependent pregnant women."
+      },
+      {
+        "pmid": "21480827",
+        "title": "Drugs and medicines in pregnancy: the placental disposition of opioids.",
+        "journal": "Current pharmaceutical biotechnology",
+        "pubdate": "2011May",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, N.I.H., Extramural",
+          "Review"
+        ],
+        "abstract": "Over the past decade therapeutic interventions during pregnancy, including the use of drugs, has increased; for example, the prescription use of opioids and nonopioid analgesics for pain management during pregnancy has increased by about 40%. Additionally, women also self-medicate during pregnancy with opioids, and are treated with methadone and buprenorphine which are used as substitution therapy for substance dependence during pregnancy. A nationally representative survey noted that ~74% of women of reproductive age reported substance use during the previous year, decreasing to ~63% amongst those who were pregnant. Substance dependence was reported by ~20% of women who were not pregnant, and ~15% of those who were pregnant. Understanding the consequences of opioid treatment or dependence during pregnancy requires an investigation of the placental disposition (metabolism and transfer), as well as of the impact of the drugs on the placental function. This review summarizes the research on the placental disposition of opioids and their impact on the placental function."
+      },
+      {
+        "pmid": "31274509",
+        "title": "A Quality Improvement Initiative to Reduce Opioid Consumption after Cesarean Birth.",
+        "journal": "MCN. The American journal of maternal child nursing",
+        "pubdate": "2019Sep/Oct",
+        "pubtypes": [
+          "Journal Article"
+        ],
+        "abstract": "BACKGROUND: One in 300 opioid naïve women become addicted to opiates after cesarean birth. After cesarean, women are often prescribed more opiates at discharge than necessary, resulting in increased opportunity for diversion. PURPOSE: To improve use of comfort strategies and nonopioid medications to decrease the amount of opioids required postoperatively and prescribed at discharge, in women who gave birth via cesarean. METHODS: An interdisciplinary workgroup was convened to assess data on opioid use, prescribing practices at discharge, and nurses' use of alternative comfort strategies from January to March 2018. A comfort bundle was designed to include standardized use of preoperative acetaminophen, postoperative comfort education, simethicone, postoperative gum chewing, and abdominal binders. Nurses and healthcare providers were educated on the initiative. Data were reevaluated and compared with preintervention data assessing for improvement and adherence to the bundle components. RESULTS: There was a 61% reduction in morphine milliequivalents given to women after cesarean birth between the first quarter in 2018 and the fourth quarter in 2018. Comparing March with December, 2018 data, adherence to each bundle component improved. The percentage of women receiving less than 20 tabs of oxycodone at discharge increased from 26.3% to 96.7%. IMPLICATIONS FOR NURSING PRACTICE: Nurses should evaluate comfort options provided after cesarean birth and educate women about use of nonopioid pain relief strategies. A standardized process to address pain and comfort after cesarean birth may decrease exposure to opioids while maintaining comfort."
+      },
+      {
+        "pmid": "39025248",
+        "title": "Pain Management Treatments and Opioid Use Disorder Risk in Medicaid Patients.",
+        "journal": "American journal of preventive medicine",
+        "pubdate": "2024Dec",
+        "pubtypes": [
+          "Journal Article"
+        ],
+        "abstract": "INTRODUCTION: People with chronic pain are at increased risk of opioid misuse. Less is known about the unique risk conferred by each pain management treatment, as treatments are typically implemented together, confounding their independent effects. This study estimated the extent to which pain management treatments were associated with risk of opioid use disorder (OUD) for those with chronic pain, controlling for baseline demographic and clinical confounding variables and holding other pain management treatments at their observed levels. METHODS: Data were analyzed in 2024 from 2 chronic pain subgroups within a cohort of non-pregnant Medicaid patients aged 35-64 years, 2016-2019, from 25 states: those with (1) chronic pain and physical disability (CPPD) (N=6,133) or (2) chronic pain without disability (CP) (N=67,438). Nine pain management treatments were considered: prescription opioid (1) dose and (2) duration; (3) number of opioid prescribers; opioid co-prescription with (4) benzo- diazepines, (5) muscle relaxants, and (6) gabapentinoids; (7) nonopioid pain prescription, (8) physical therapy, and (9) other pain treatment modality. The outcome was OUD risk. RESULTS: Having opioids co-prescribed with gabapentin or benzodiazepine was statistically significantly associated with a 37-45% increased OUD risk for the CP subgroup. Opioid dose and duration also were significantly associated with increased OUD risk in this subgroup. Physical therapy was significantly associated with an 18% decreased risk of OUD in the CP subgroup. CONCLUSIONS: Coprescription of opioids with either gabapentin or benzodiazepines may substantially increase OUD risk. More positively, physical therapy may be a relatively accessible and safe pain management strategy."
+      },
+      {
+        "pmid": "21199135",
+        "title": "Tolerance and addiction; the patient, the parent or the clinician?",
+        "journal": "Paediatric anaesthesia",
+        "pubdate": "2011Jul",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "Tolerance has been recognized for some time where chronic exposure to certain drugs, particularly benzodiazepines and opioids, is associated with apparent tachyphylaxis. When these drugs are stopped or progressively reduced as in 'tapering', withdrawal symptoms may result. Tolerance and the flip side of the coin, withdrawal, are the determinants of addiction. It is increasingly apparent that tolerance can occur acutely, even within the time span of a single anesthetic for a surgical procedure. Addiction is caused by agents, foreign to the body, that provoke adaptation by homeostatic biological processes. When these agents are withdrawn, the adaptive mechanisms, devoid of substrate, take time to diminish and produce symptoms recognizable under the term of 'withdrawal'. Children may be exposed to these agents in different ways; in utero, as a result of substances that the mother ingests by enteral, parenteral or inhalational means that are transmitted to the infant via the placenta; as a result of an anesthetic for surgery; or as a result of sedation and analgesia administered to offset the stresses and trauma inherent from intensive care treatment in the neonatal intensive care unit or pediatric intensive care unit. Additionally, anesthetic and intensive care staff are exposed to powerful and addictive drugs as part of everyday practice, not simply by overt access, but also by subliminal environmental exposure."
+      },
+      {
+        "pmid": "26530179",
+        "title": "[Breast-feeding (part IV): Therapeutic uses, dietetic and addictions--guidelines for clinical practice].",
+        "journal": "Journal de gynecologie, obstetrique et biologie de la reproduction",
+        "pubdate": "2015Dec",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "OBJECTIVE: To describe the practical aspects of the use of the most commonly prescribed drugs during the postpartum period, the dietetic measures and the management of breast-feeding in case of addictive behaviors. METHODS: Review of the literature between 1972 and May 2015 from the databases Medline, Google Scholar, Cochrane Library, and international recommendations of learned societies. RESULTS: The precaution to stop breast-feeding when drugs are necessary is not justified in many situations (professional consensus). Aspirin at antiaggregant dose is allowed during breast-feeding while high doses are not recommended; NSAIDs with short half-life can be used (professional consensus). Precautions are needed in cases of use of morphonics (professional consensus). There is no justification to delay the initiation of breast-feeding in case of locoregional or general analgesia or for caesarean section. Antibiotic treatment does not justify discontinuing breast-feeding (professional consensus). Anxiolytics of the class of antihistaminic sedating H1 such as hydroxyzine (Atarax®) should not be prescribed in case of breast-feeding (professional consensus). Imaging does not justify to stop breast-feeding (professional consensus). Tobacco consumption is discouraged but is not a contraindication to breast-feed (professional consensus). It is recommended to avoid the consumption of alcohol (professional consensus). In case of occasional and moderate consumption of alcohol, delaying breast-feeding for a minimum of two hours is recommended (professional consensus). Cocaine consumption is a contraindication of breast-feeding (professional agreement), and breast-feeding is not recommended in case of cannabis use (professional consensus). CONCLUSION: Few drug treatments are not compatible with breast-feeding that can be continued in most of the cases."
+      },
+      {
+        "pmid": "15675209",
+        "title": "Challenges that opioid-dependent women present to the obstetric anaesthetist.",
+        "journal": "Anaesthesia and intensive care",
+        "pubdate": "2004Aug",
+        "pubtypes": [
+          "Journal Article"
+        ],
+        "abstract": "A retrospective casenote review was performed to identify anaesthetic challenges relevant to the opioid-dependent obstetric population. Medical records showed that of the 7,449 deliveries during a 24 month period, 85 women (1.1%) were taking regular opioids such as methadone and/or heroin. Of these 67 (79%) received anaesthetic services, ten of whom (11.7%) were referred antenatally. Forty opioid-dependent women (47%) received epidural analgesia in labour compared with the overall hospital rate of 38%. Twenty-three women (27%) delivered by caesarean section: five received general anaesthesia, five combined spinal anaesthesia, five spinal anaesthesia and eight epidural anaesthesia. Twenty opioid-dependent women (23.5%) had documented problems related to labour analgesia and 17 (74%) had problems with analgesia after caesarean section. A variety of postoperative analgesia methods were administered in addition to maintenance methadone. Fourteen patients (16.5%) had difficult intravenous access and seven \"arrest\" calls were documented. One anaesthetist was exposed to hepatitis C. This review demonstrates the demands placed on obstetric anaesthetic services by opioid-dependent women. Early antenatal referral for anaesthetic review is recommended."
+      },
+      {
+        "pmid": "31005380",
+        "title": "Post-cesarean delivery pain. Management of the opioid-dependent patient before, during and after cesarean delivery.",
+        "journal": "International journal of obstetric anesthesia",
+        "pubdate": "2019Aug",
+        "pubtypes": [
+          "Journal Article",
+          "Review"
+        ],
+        "abstract": "The opioid crisis has reached an unprecedented magnitude in the United States and worldwide, and data on opioid use and misuse in the obstetric population are extremely concerning. Despite an abundant number of studies evaluating strategies to prevent neonatal opioid withdrawal syndrome in babies born to mothers who are chronic opioid users, in babies born to mothers using chronic opioids, numerous questions remain unanswered, including (1) how to optimally manage postpartum pain in opioid-dependent patients (2) how to reconcile buprenorphine and methadone use with intrapartum and post-partum analgesia, so as to avoid opioid withdrawal during and after delivery (3) how to safely and effectively provide a stepwise multimodal approach that incorporates systemic opioid-sparing approaches, such as neuraxial opioids, clonidine, ketamine, gabapentin, and regional anesthetic blocks, to ensure adequate pain relief while avoiding opioid withdrawal (4) how to optimally manage post-partum recovery and (5) how to avoid excessive opioid prescription and possibly leftover opioids that may promote persistent use, misuse and diversion. With the recognition that an increasing number of pregnant women are taking chronic opioids, the goals of this review article are to summarize the existing literature on post-cesarean pain management in the obstetric patient with an opioid-use disorder; and to provide clinicians with a stepwise approach for management before, as well as during and after, cesarean delivery of women who have been chronically using opioids during their pregnancy."
+      },
+      {
+        "pmid": "28245688",
+        "title": "Treatment of Prescription Opioid Use Disorder in Pregnant Women.",
+        "journal": "The American journal of psychiatry",
+        "pubdate": "2017Mar01",
+        "pubtypes": [
+          "Journal Article",
+          "Research Support, N.I.H., Extramural"
+        ],
+        "abstract": ""
+      }
+    ]
+  },
+  "cell": {
+    "query": "(pregnancy[tiab] OR pregnant[tiab] OR postpartum[tiab] OR perinatal[tiab] OR maternal[tiab] OR prenatal[tiab] OR \"opioid-exposed pregnancy\"[tiab] OR \"Pregnancy\"[MeSH] OR \"Postpartum Period\"[MeSH] OR \"Pregnancy Complications\"[MeSH]) AND (\"chronic pain\"[tiab] OR \"persistent pain\"[tiab] OR \"pain management\"[tiab] OR analgesia[tiab] OR \"pain severity\"[tiab] OR \"Chronic Pain\"[MeSH] OR \"Analgesia\"[MeSH] OR \"Pain Management\"[MeSH]) AND (\"opioid use disorder\"[tiab] OR \"substance use disorder\"[tiab] OR \"opioid dependence\"[tiab] OR \"opioid misuse\"[tiab] OR \"substance misuse\"[tiab] OR \"Opioid-Related Disorders\"[MeSH] OR \"Substance-Related Disorders\"[MeSH]) AND (retention[tiab] OR adherence[tiab] OR \"treatment retention\"[tiab] OR \"medication retention\"[tiab] OR \"retention in care\"[tiab] OR \"Medication Adherence\"[MeSH] OR \"Retention in Care\"[MeSH])",
+    "total_matching": 2,
+    "returned": 2,
+    "records": [
+      {
+        "pmid": "31274509",
+        "title": "A Quality Improvement Initiative to Reduce Opioid Consumption after Cesarean Birth.",
+        "journal": "MCN. The American journal of maternal child nursing",
+        "pubdate": "2019Sep/Oct",
+        "pubtypes": [
+          "Journal Article"
+        ],
+        "abstract": "BACKGROUND: One in 300 opioid naïve women become addicted to opiates after cesarean birth. After cesarean, women are often prescribed more opiates at discharge than necessary, resulting in increased opportunity for diversion. PURPOSE: To improve use of comfort strategies and nonopioid medications to decrease the amount of opioids required postoperatively and prescribed at discharge, in women who gave birth via cesarean. METHODS: An interdisciplinary workgroup was convened to assess data on opioid use, prescribing practices at discharge, and nurses' use of alternative comfort strategies from January to March 2018. A comfort bundle was designed to include standardized use of preoperative acetaminophen, postoperative comfort education, simethicone, postoperative gum chewing, and abdominal binders. Nurses and healthcare providers were educated on the initiative. Data were reevaluated and compared with preintervention data assessing for improvement and adherence to the bundle components. RESULTS: There was a 61% reduction in morphine milliequivalents given to women after cesarean birth between the first quarter in 2018 and the fourth quarter in 2018. Comparing March with December, 2018 data, adherence to each bundle component improved. The percentage of women receiving less than 20 tabs of oxycodone at discharge increased from 26.3% to 96.7%. IMPLICATIONS FOR NURSING PRACTICE: Nurses should evaluate comfort options provided after cesarean birth and educate women about use of nonopioid pain relief strategies. A standardized process to address pain and comfort after cesarean birth may decrease exposure to opioids while maintaining comfort."
+      },
+      {
+        "pmid": "22786449",
+        "title": "American Society of Interventional Pain Physicians (ASIPP) guidelines for responsible opioid prescribing in chronic non-cancer pain: Part 2--guidance.",
+        "journal": "Pain physician",
+        "pubdate": "2012Jul",
+        "pubtypes": [
+          "Journal Article",
+          "Practice Guideline"
+        ],
+        "abstract": "RESULTS: Part 2 of the guidelines on responsible opioid prescribing provides the following recommendations for initiating and maintaining chronic opioid therapy of 90 days or longer. 1. A) Comprehensive assessment and documentation is recommended before initiating opioid therapy, including documentation of comprehensive history, general medical condition, psychosocial history, psychiatric status, and substance use history. ( EVIDENCE: good) B) Despite limited evidence for reliability and accuracy, screening for opioid use is recommended, as it will identify opioid abusers and reduce opioid abuse. ( EVIDENCE: limited) C) Prescription monitoring programs must be implemented, as they provide data on patterns of prescription usage, reduce prescription drug abuse or doctor shopping. ( EVIDENCE: good to fair) D) Urine drug testing (UDT) must be implemented from initiation along with subsequent adherence monitoring to decrease prescription drug abuse or illicit drug use when patients are in chronic pain management therapy. ( EVIDENCE: good) 2. A) Establish appropriate physical diagnosis and psychological diagnosis if available prior to initiating opioid therapy. ( EVIDENCE: good) B) Caution must be exercised in ordering various imaging and other evaluations, interpretation and communication with the patient, to avoid increased fear, activity restriction, requests for increased opioids, and maladaptive behaviors. ( EVIDENCE: good) C) Stratify patients into one of the 3 risk categories - low, medium, or high risk. D) A pain management consultation, may assist non-pain physicians, if high-dose opioid therapy is utilized. ( EVIDENCE: fair) 3. Essential to establish medical necessity prior to initiation or maintenance of opioid therapy. ( EVIDENCE: good) 4. Establish treatment goals of opioid therapy with regard to pain relief and improvement in function. ( EVIDENCE: good) 5. A) Long-acting opioids in high doses are recommended only in specific circumstances with severe intractable pain that is not amenable to short-acting or moderate doses of long-acting opioids, as there is no significant difference between long-acting and short-acting opioids for their effectiveness or adverse effects. ( EVIDENCE: fair) B) The relative and absolute contraindications to opioid use in chronic non-cancer pain must be evaluated including respiratory instability, acute psychiatric instability, uncontrolled suicide risk, active or history of alcohol or substance abuse, confirmed allergy to opioid agents, coadministration of drugs capable of inducing life-limiting drug interaction, concomitant use of benzodiazepines, active diversion of controlled substances, and concomitant use of heavy doses of central nervous system depressants. ( EVIDENCE: fair to limited) 6. A robust agreement which is followed by all parties is essential in initiating and maintaining opioid therapy as such agreements reduce overuse, misuse, abuse, and diversion. ( EVIDENCE: fair) 7. A) Once medical necessity is established, opioid therapy may be initiated with low doses and short-acting drugs with appropriate monitoring to provide effective relief and avoid side effects. ( EVIDENCE: fair for short-term effectiveness, limited for long-term effectiveness) B) Up to 40 mg of morphine equivalent is considered as low dose, 41 to 90 mg of morphine equivalent as a moderate dose, and greater than 91 mg of morphine equivalence as high dose. ( EVIDENCE: fair) C) In reference to long-acting opioids, titration must be carried out with caution and overdose and misuse must be avoided. ( EVIDENCE: good) 8. A) Methadone is recommended for use in late stages after failure of other opioid therapy and only by clinicians with specific training in the risks and uses. ( EVIDENCE: limited) B) Monitoring recommendation for methadone prescription is that an electrocardiogram should be obtained prior to initiation, at 30 days and yearly thereafter. ( EVIDENCE: fair) 9. In order to reduce prescription drug abuse and doctor shopping, adherence monitoring by UDT and PMDPs provide evidence that is essential to the identification of those patients who are non-compliant or abusing prescription drugs or illicit drugs. ( EVIDENCE: fair) 10. Constipation must be closely monitored and a bowel regimen be initiated as soon as deemed necessary. ( EVIDENCE: good) 11. Chronic opioid therapy may be continued, with continuous adherence monitoring, in well-selected populations, in conjunction with or after failure of other modalities of treatments with improvement in physical and functional status and minimal adverse effects. ( EVIDENCE: fair). DISCLAIMER: The guidelines are based on the best available evidence and do not constitute inflexible treatment recommendations. Due to the changing body of evidence, this document is not intended to be a \"standard of care.\""
+      }
+    ]
+  }
+}
