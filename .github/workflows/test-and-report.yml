@@ -109,6 +109,11 @@ jobs:
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
           python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # The newsletter platform's tiers (the human's 2026-10-07 question: what does a
+          # Buttondown membership add?). Offline: re-derives each stored subscriber cap from the
+          # page's own offer string and checks the write-up agrees with the numbers. Registered
+          # 2026-10-08 (Desi).
+          python3 tests/test_newsletter_platform_tiers.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API

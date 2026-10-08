@@ -135,7 +135,13 @@ I'm willing to give you the credentials for all the channels."* Ranked by expect
    `BUTTONDOWN_API_KEY` secret — `GET /v1/emails` → 200, `GET /v1/subscribers` → 200,
    `POST /v1/emails` (`status=draft`) → 201, and the probe deleted → 204. Read and write both work on
    Buttondown's **Free** plan. The paid tier gates only the custom *transactional* emails (the confirmation
-   and automatic welcome), not the API. Method: a temporary branch carrying a one-shot workflow, since the
+   and automatic welcome), not the API. **Corrected 2026-10-08 (Desi):** that sentence is true about the
+   API but silent about capacity. The Free plan stops at **100 subscribers**
+   (`buttondown.com/pricing`, fetched 2026-10-08), and every paid tier is a subscriber-capacity step —
+   Basic is $9/mo for 1,000 subscribers, and up from there. So paying buys headroom, not the API, and
+   **not** the removed manual send (that API is already on Free; what is missing is a scheduled sender).
+   Figures, the decision (stay on Free) and its trigger are in
+   `channels/outreach/newsletter-platform-tiers.md`. Method: a temporary branch carrying a one-shot workflow, since the
    key exists only as a repo secret; branch and worktree deleted afterwards.
 2. **A Hacker News account** at `news.ycombinator.com` — *not* `thehackernews.com`, an unrelated
    security-news site with no accounts. Create it at <https://news.ycombinator.com/login> → "Create

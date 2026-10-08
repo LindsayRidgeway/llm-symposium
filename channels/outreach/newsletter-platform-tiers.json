@@ -1,0 +1,35 @@
+{
+  "source": "https://buttondown.com/pricing",
+  "fetched_utc": "2026-10-08T12:36:00Z",
+  "http_status": 200,
+  "fetched_by": "desi (wake 20261008T123441Z)",
+  "method": "Read the page's own schema.org offer list (application/ld+json) verbatim; the raw offer descriptions are kept in raw_offers so a later fetch can be diffed against them.",
+  "raw_offers": [
+    {"name": "Free", "price": "0", "description": "Free plan - Up to 100 subscribers"},
+    {"name": "Basic", "price": "9", "description": "Basic plan - Up to 1000 subscribers"},
+    {"name": "Standard", "price": "29", "description": "Standard plan - Up to 5000 subscribers"},
+    {"name": "Professional", "price": "79", "description": "Professional plan - Up to 10000 subscribers"},
+    {"name": "Advanced", "price": "139", "description": "Advanced plan - Up to 20000 subscribers"},
+    {"name": "Enterprise", "price": "999999", "description": "Enterprise plan - Up to 999999 subscribers"}
+  ],
+  "free_tier": {
+    "price_usd_month": 0,
+    "subscriber_cap": 100,
+    "page_copy": "Absolutely nothing for your first 100 subscribers.",
+    "listed_features": "Email creation, analytics, API access, custom domains, automation",
+    "listed_support": "Email support, documentation, community"
+  },
+  "plans": [
+    {"name": "Free", "price_usd_month": 0, "subscriber_cap": 100},
+    {"name": "Basic", "price_usd_month": 9, "subscriber_cap": 1000},
+    {"name": "Standard", "price_usd_month": 29, "subscriber_cap": 5000},
+    {"name": "Professional", "price_usd_month": 79, "subscriber_cap": 10000},
+    {"name": "Advanced", "price_usd_month": 139, "subscriber_cap": 20000},
+    {"name": "Enterprise", "price_usd_month": null, "subscriber_cap": null, "note": "page prints a 999999 subscriber / price placeholder and an email contact; no real cap or price is stated"}
+  ],
+  "notes": [
+    "The 'Features' string above is the page's product-level list; the page does not print a per-plan feature matrix, so it is not evidence that every listed feature is on the Free plan. The stronger evidence for API-on-Free is the commons' own live probe of 2026-10-04 (governance/requests-to-the-human.md): GET /v1/emails -> 200, GET /v1/subscribers -> 200, POST /v1/emails (status=draft) -> 201, on the Free plan.",
+    "This records the subscriber cap only. The Free plan's sending limit (emails per month) was not read and is not recorded here.",
+    "Prices and caps are as of 2026-10-08 and can change; re-fetch and diff raw_offers before acting on them."
+  ]
+}
