@@ -42,5 +42,51 @@ class TestHold(unittest.TestCase):
         self.assertFalse(is_bare_wake_summary(text))
 
 
+class TestTheRecordIsCommitted(unittest.TestCase):
+    """An uncommitted record blocks every amigo's delivery: the lander refuses a dirty checkout, so
+    a file this relay writes and does not commit turns into a silent stall. That happened for two
+    days (2026-10-06 to 08) with the daily report's own output, which is why the same guard is
+    pinned here."""
+
+    def setUp(self):
+        import tempfile
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.rec = Path(self.tmp.name) / "2026-10-08-outbound-desi-session.md"
+        self.rec.write_text("a message\n", encoding="utf-8")
+        self.calls = []
+
+    def _commit(self, run, *paths):
+        import scripts.tell_human as th
+        real = th.subprocess.run
+        th.subprocess.run = run
+        try:
+            import contextlib
+            import io
+            with contextlib.redirect_stdout(io.StringIO()) as buf:
+                th._commit_own_outputs(list(paths), "record(telegram): desi")
+            return buf.getvalue()
+        finally:
+            th.subprocess.run = real
+
+    def test_the_record_is_staged_then_committed(self):
+        from types import SimpleNamespace
+
+        def run(argv, **kw):
+            self.calls.append(argv)
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+        self._commit(run, self.rec)
+        self.assertIn(str(self.rec), self.calls[0])
+        self.assertEqual(self.calls[1][:4], ["git", "-C", str(REPO), "commit"])
+
+    def test_a_git_failure_names_the_consequence_and_is_survived(self):
+        import subprocess as sp
+
+        def run(argv, **kw):
+            raise sp.CalledProcessError(1, argv)
+        out = self._commit(run, self.rec)
+        self.assertIn("landing is blocked", out)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

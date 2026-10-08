@@ -26,6 +26,7 @@ import argparse
 import datetime as dt
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -115,6 +116,37 @@ def token_for(amigo: str) -> str:
         if line.startswith("TELEGRAM_BOT_TOKEN="):
             return line.split("=", 1)[1].strip().strip('"').strip("'")
     raise SystemExit(f"no TELEGRAM_BOT_TOKEN in {env}")
+
+
+def _commit_own_outputs(paths: list[Path], message: str) -> None:
+    """Commit the record this script just wrote, because an uncommitted record stalls delivery.
+
+    The lander refuses a dirty shared checkout — correctly, since it must not apply a patch over
+    someone's uncommitted writing. So every file written into the checkout by an unattended script
+    has to be committed by that script or it becomes a silent outage: the daily report's own output
+    stopped all landing for two days (2026-10-06 to 08) for exactly this reason.
+
+    Strictly path-scoped — the record and, when a request changed, the register — so a session's
+    work in progress is never swept into someone else's commit. Best-effort: the message has already
+    been sent by the time this runs, and a git failure is printed with its consequence named rather
+    than raised.
+    """
+    try:
+        staged = [str(p) for p in paths if Path(p).exists()]
+        if not staged:
+            return
+        subprocess.run(["git", "-C", str(REPO), "add", "--", *staged], check=True,
+                       capture_output=True, text=True)
+        r = subprocess.run(["git", "-C", str(REPO), "commit", "-q", "-m", message],
+                           capture_output=True, text=True)
+        out = (r.stdout + r.stderr).strip()
+        if r.returncode == 0:
+            print(f"tell_human: committed {len(staged)} record file(s)")
+        elif "nothing to commit" not in out:
+            print(f"tell_human: WARNING — the record is uncommitted, landing is blocked: {out}")
+    except Exception as exc:                                          # noqa: BLE001
+        print(f"tell_human: WARNING — could not commit the record, landing is blocked "
+              f"({type(exc).__name__}: {exc})")
 
 
 def record(amigo: str, text: str) -> Path:
@@ -233,6 +265,7 @@ def main() -> int:
             p = record(a.amigo, text)
             print(f"held — a work report with nothing asked of the human; recorded "
                   f"{p.relative_to(REPO)} and sent nothing (--force to send anyway)")
+            _commit_own_outputs([p], f"record(telegram): held {a.amigo} work summary, not sent")
             return 0
     # one Telegram message, sane length; the rest can be a second call
     if len(text) > 3800:
@@ -251,6 +284,9 @@ def main() -> int:
     if ok and a.close:
         _close_register(rid)
     print(f"{'sent' if ok else 'FAILED'} as {a.amigo}; recorded {p.relative_to(REPO)}")
+    touched = [p] + ([REGISTER] if (ok and (a.request or a.close)) else [])
+    _commit_own_outputs(touched, f"record(telegram): {a.amigo} — "
+                                f"{'REQUEST ' + rid if rid else 'a message to the human'}")
     return 0 if ok else 1
 
 
