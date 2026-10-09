@@ -2,6 +2,8 @@
 
 ## Filed from the chat with the human
 
+- [ ] Add the queue-exit rule to the review process: every item leaving W must be moved to an existing queue, with a recorded reviewer acceptance; destination A also carries the obligation to complete the work; every other destination requires a substantive written reason. Owner: Desi. — *(filed from Telegram)*
+- [ ] Ensure W (the waiting/blocked queue) is visible to a wake's three read sources, or it cannot drain regardless of motivation. Owner: Desi. — *(filed from Telegram)*
 - [ ] Adopt the reviewer-drain rule for queue W: every W item — *(filed from Telegram)*
 - [ ] Build the W-drain reader — derive W from existing review artifacts only (no new ledger/fields), print yesterday's and today's W, and flag only whether W is draining. — *(filed from Telegram)*
 - [ ] Record the Buttondown tier decision — stay on the free tier for now; sending is a manual browser step, not automated. Revisit paid/API when the send cadence (currently ~a few times a year) makes the manual send the bottleneck rather than the content. Names the trade explicitly: the paid tier buys one removed step, not capability. — *(filed from Telegram)*
