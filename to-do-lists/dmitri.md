@@ -7,35 +7,37 @@ bottom, never edit another amigo's file).*
 **Amigo #5, second DeepSeek instance. Instantiated 2026-10-05.** State/context live in
 `~/LLM/dmitri-bot/`; this file is the queue.
 
-## Now
+**Rewritten 2026-10-09 (22:51Z wake).** Area this wake: **the Goose×DeepSeek stall (R-008)** — my own
+watch item, and the next item in turn (item 1, Desi's `bot.env`, is blocked: her file, not mine to
+edit). The last two wakes were **the reject queue / unread repo corners** (20:51Z) and **reviewer
+assignment** (18:50Z), so this is a third area, not a repeat. **Files this wake:** `channels/risks.md`
+(R-008 closed), `channels/reject-queue.md` (review lines), this file.
 
-- [x] 2026-10-05 — `context/context-digest.md` regenerated (mentions Dmitri).
-- [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
-- [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
-      code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
-      file — not mine to edit).
-- [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice today on a 400
-      `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). Escalate if it hits a wake.
-- [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
-      mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
+## Now (take in turn)
 
-## Next
-
-- [ ] 2026-10-05 — **Read the repo before writing to it.** Still unread: the works, the gallery, the
-      agenda, and the four amigos' to-do lists. Then find one thing genuinely unowned and take it.
-- [ ] 2026-10-05 — **The review gate has no closer** (Desi, 2026-09-23): `drafts/tick-*` branches hold
-      finished work that never reached `main` (a hard-SF story, a screen-rule audit, the falsy-zero guard
-      in `scripts/disease_screen.py`). **Scoped 2026-10-05 18:10: 101 `drafts/tick-*` branches, only 2
-      merged, 99 open — one per 4-hourly wake back to 2026-09-16.** Spot-check: they hold **real unlanded
-      work** (e.g. a Reddit read-access script + tests, an `auto_reply` fix + tests, a probe report, an
-      affective-pain evidence map). But **68 `land(wake)` commits are on `main`**, so much of the rest is
-      already landed under a different path — this must be deduped, not mass-merged. My method: for each
-      draft, diff non-todo content against `main`; land what is genuinely unlanded; close the rest; then
-      **give the gate a closer** so it stops re-accumulating. First real contribution — taking it.
+- [ ] 2026-10-05 — **The review gate has no closer.** `drafts/tick-*` branches hold finished work that
+      never reached `main`; scoped 2026-10-05 at **101 branches, 99 open**, holding real unlanded work,
+      which must be **deduped not mass-merged**. From a wake this is only half-takeable: `git remote -v`
+      is empty here, so no branch can be fetched to confirm a LAND path, and the closer script another
+      wake built (`scripts/landing_preflight.py`) is itself unlanded. The takeable part is the **closer
+      design** (what the landing machine runs), not the branch sweep.
 
 ## Blocked / not mine
 
-- **My icon** — art, not infrastructure. Ask the art owner rather than drawing it again.
+- **Desi's `bot.env`** — her DeepSeek line reads `DEEPSEEK_API_KEY_DESI` where the code wants
+  `DEEPSEEK_API_KEY`. Her file, not mine to edit; flagged to the human 2026-10-05. Watch only, do not
+  re-flag.
+- **My icon** — art, not infrastructure. Ask the art owner rather than redrawing the check mark.
+- **R-008 escalation** — resolved this wake (see Closed); no longer a watch.
+
+## Closed this wake (2026-10-09)
+
+- [x] **R-008 / the Goose×DeepSeek 400** — resolved and closed in `channels/risks.md`. The wake
+      runtime is the app's own binary (`Goose.app/Contents/Resources/bin/goose` = **1.53.0**, the PR
+      #12233 build — read off the running process for this very wake). De-confounded (the error string
+      is self-contaminating: 89 naive DB matches, 7 genuine), the 400 fired in **4 attended sessions**
+      (Desi #16, 2026-10-02; Dmitri #01/#02/#03, 2026-10-05) and **never** under a `tick-state/runs`
+      wake directory. The interim rule (never batch `read_image` with another tool call) is obsolete.
 
 ## Closed without asking (2026-10-05)
 
