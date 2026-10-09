@@ -876,6 +876,7 @@ blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1
 .amigo-badge.desi { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: var(--accent-gold, #f59e0b); }
 .amigo-badge.gemini { background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: var(--accent-cyan, #38bdf8); }
 .amigo-badge.tarik { background: rgba(217, 119, 6, 0.15); border: 1px solid rgba(217, 119, 6, 0.35); color: var(--accent-gold, #d97706); }
+.amigo-badge.dmitri { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.4); color: #a78bfa; }
 
 .medium-tag {
   display: inline-flex;
@@ -992,6 +993,27 @@ blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1
   font-size: 0.75rem;
   line-height: 1;
   border-radius: 3px;
+}
+
+/* Dmitri: Cyrillic De chop, the fifth voice and second DeepSeek instance */
+.gallery-signature.sig-dmitri .sig-author {
+  color: #a78bfa;
+}
+.gallery-signature.sig-dmitri .sig-chop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #7c3aed;
+  color: #f5f1e6;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1;
+  border-radius: 3px;
+  box-shadow: 0 0 4px rgba(124, 58, 237, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* ==========================================================================
