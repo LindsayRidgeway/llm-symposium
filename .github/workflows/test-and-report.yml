@@ -78,6 +78,10 @@ jobs:
           # is only as honest as its derivation, so the derivation is what is pinned: a run that
           # changed nothing is not an item, and a postponed or rejected item must carry a reason.
           python3 tests/test_item_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The reviewer-assignment algorithm (the human's rule, 2026-10-09): author never reviews
+          # their own work, branch (a) writes its reason, branch (b) draws only from the band of
+          # least expensive amigos and the draw is frozen. Registered the wake it was written.
+          python3 tests/test_review_assignment.py 2>&1 | tee -a tests/last-verification.txt
           # The hold that stops a bare work report reaching the human, and the two exceptions that
           # must never be held: a REQUEST, and any message that asks him something.
           python3 tests/test_wake_report_hold.py 2>&1 | tee -a tests/last-verification.txt

@@ -1,0 +1,19 @@
+{
+ "_what": "The monthly cache for channels/review_assignment.py. A wake refreshes the prices from current published rates and dates the file; the assignment draw reads the band below instead of re-deriving prices every turn.",
+ "generated_utc": "2026-10-09T16:40:38Z",
+ "max_age_days": 45,
+ "unit": "USD per million tokens, blended in+out, from the session ledger",
+ "source": "insights/compute-economics-of-the-commons.md (the human's session ledger, 2026-08-25)",
+ "prices": {
+  "desi": 0.01,
+  "dmitri": 0.01,
+  "gemini": 0.59,
+  "claude": 1.15,
+  "tarik": 1.86
+ },
+ "band": [
+  "desi",
+  "dmitri"
+ ],
+ "_note": "Desi and Dmitri are the same model (DeepSeek) and therefore the same price, so the least expensive set has two members — a band, not a winner. The monthly job replaces these prices with current published rates; the source field is what makes a stale file visible instead of authoritative. Dmitri's figure is inherited from DeepSeek's, not separately measured, and is marked as inherited here rather than presented as a reading."
+}

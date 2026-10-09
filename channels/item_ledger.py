@@ -467,6 +467,9 @@ def _cli() -> int:
                   f"filed {rec.get('filed_utc','?')}")
             print(f"    {_short(rec.get('short_title') or rec.get('title', '(no title)'))}")
             print(f"    evidence: {rec.get('evidence','?')}")
+            assigned = rec.get("assigned_reviewer")
+            print(f"    assigned: {assigned} [{rec.get('branch','?')}]"
+                  if assigned else "    assigned: (nobody — run review_assignment.py --assign)")
             if rec.get("paths"):
                 print(f"    paths: {', '.join(rec['paths'][:6])}")
         print("\nTo record one verdict (the reason is mandatory — it is the whole record):")
