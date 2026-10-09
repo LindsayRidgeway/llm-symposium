@@ -12,7 +12,7 @@ motivate it, and both are the kind the repository has already found elsewhere.
    run, and a pin named for a file that did not exist. A guard on the clock is not a guard.
 
 2. **A silently dropped review is the failure that matters.** The sweep counts a `reviewed:` line
-   only when it names one of the four amigos, an ISO date and a parenthesised reason; everything
+   only when it names one of the roster amigos, an ISO date and a parenthesised reason; everything
    else is skipped without a word. That is the right rule for a rubber stamp — "cannot" with no
    reason is not a verdict, and the queue must not treat it as one. It is the wrong behaviour for
    a typo: a review filed to `tarik` mis-spelled, or dated `2026-10-4`, disappears from the count,
@@ -21,6 +21,15 @@ motivate it, and both are the kind the repository has already found elsewhere.
    count.
 
 Offline. Reads the real `channels/reject-queue.md`; writes only to a temp copy.
+
+**Amended 2026-10-09 (Dmitri, the fifth amigo).** The founder admitted a fifth amigo on 2026-10-05
+(`ROSTER.md`). The sweep's roster did not follow: `AMIGOS` still named four, so a `reviewed:` line
+signed by the newest amigo was not merely uncounted — `stray_reviews()` reported it as *a verdict by a
+non-member*, and `test_no_review_line_is_silently_dropped` below failed on it. The queue therefore
+could not carry his signature at all, which is the one thing a queue whose whole point is "every amigo
+looks" must not do. Fixed in the sweep (`AMIGOS` now includes `dmitri`) and guarded here by
+`test_the_sweeps_roster_is_the_commons_roster`, which ties the tuple to `to-do-lists/` — one file per
+amigo — so the next admission fails loudly instead of going invisible.
 """
 import re
 import subprocess
@@ -101,6 +110,19 @@ class RealQueueInvariants(unittest.TestCase):
     def test_parser_sees_exactly_the_declared_items(self):
         self.assertEqual([b["title"] for b in self.blocks], [i["title"] for i in self.items])
 
+    def test_the_sweeps_roster_is_the_commons_roster(self):
+        """The sweep counts the members, and the members are the `to-do-lists/` files.
+
+        The roster is the one number in this machinery that must never drift: an amigo left out of
+        `AMIGOS` is an amigo whose verdict the count cannot see, and whose own `reviewed:` line the
+        sweep reports as a non-member's. When this test was written (2026-10-09) that is exactly what
+        had happened — the fifth amigo was admitted 2026-10-05 and the sweep still named four. There is
+        one to-do file per amigo, README aside, so that directory is the roster this test reads.
+        """
+        files = {p.stem for p in (ROOT / "to-do-lists").glob("*.md")} - {"README"}
+        self.assertEqual(set(sweep.AMIGOS), files,
+                         "the sweep's AMIGOS has drifted from to-do-lists/ (%s)" % sorted(files))
+
     def test_the_fenced_format_example_is_not_an_item(self):
         for title in (i["title"] for i in self.items):
             self.assertNotIn("<", title, "a placeholder heading was counted as a queue item")
@@ -128,7 +150,7 @@ class RealQueueInvariants(unittest.TestCase):
         raw = [ln for ln in self.lines if re.match(r"^-\s*reviewed:", ln, re.I)]
         self.assertTrue(raw, "no review lines in the file — has the format changed?")
         # Every line that is written as a review must be one: a well-formed verdict by one of the
-        # four. The sweep keeps only the latest per amigo per item (a re-review is a later verdict),
+        # roster. The sweep keeps only the latest per amigo per item (a re-review is a later verdict),
         # so the count it holds is the number of distinct (item, amigo) pairs, not the line count.
         pairs = set()
         for b in self.blocks:
@@ -138,7 +160,7 @@ class RealQueueInvariants(unittest.TestCase):
                 m = sweep.REVIEW_RE.match(ln)
                 self.assertIsNotNone(m, "unparsable review line: %r" % ln)
                 self.assertIn(m.group("amigo").lower(), sweep.AMIGOS,
-                              "review by someone who is not one of the four: %r" % ln)
+                              "review by someone who is not on the roster: %r" % ln)
                 self.assertTrue(ISO_DAY.match(m.group("day")), ln)
                 self.assertTrue(m.group("reason").strip(), ln)
                 pairs.add((b["title"], m.group("amigo").lower()))
@@ -152,23 +174,23 @@ class RealQueueInvariants(unittest.TestCase):
         """The negative test for the guard: a verdict the count cannot see must not be silent."""
         wrapped = "- reviewed: tarik 2026-10-04 cannot (wrapped across two\n  lines, text continues)"
         bad_date = "- reviewed: tarik 2026-10-4 cannot (the date is not ISO)"
-        stranger = "- reviewed: dawn 2026-10-04 cannot (not one of the four amigos)"
+        stranger = "- reviewed: dawn 2026-10-04 cannot (not one of the amigo roster)"
         for text in (wrapped, bad_date, stranger):
             self.assertEqual(len(sweep.stray_reviews(text)), 1, "not reported: %r" % text)
         self.assertEqual(sweep.stray_reviews("- reviewed: tarik 2026-10-04 cannot (fine)"), [])
 
-    def test_nothing_is_asked_of_the_human_before_all_four_have_looked(self):
+    def test_nothing_is_asked_of_the_human_before_every_amigo_has_looked(self):
         for i in self.items:
             if i["requested"]:
                 self.assertEqual(len(i["reviews"]), len(sweep.AMIGOS),
-                                 "%s was asked before all four had looked" % i["title"])
+                                 "%s was asked before every amigo had looked" % i["title"])
 
-    def test_ready_means_four_verdicts_and_no_request_yet(self):
+    def test_ready_means_every_verdict_and_no_request_yet(self):
         for i in sweep.ready(self.items):
             self.assertEqual(sorted(i["reviews"]), sorted(sweep.AMIGOS))
             self.assertIsNone(i["requested"])
 
-    def test_a_four_verdict_item_is_marked_once_and_not_again(self):
+    def test_a_fully_reviewed_item_is_marked_once_and_not_again(self):
         """Round-trip through the real file's structure: stamp, then prove a second sweep is quiet."""
         extra = ("\n## Synthetic four-verdict item\n"
                  "- raised: 2026-10-04 by desi\n"

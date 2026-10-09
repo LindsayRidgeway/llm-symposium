@@ -12,13 +12,15 @@ real protocol, verbatim in intent:
   3. Every amigo reviews **every** item on the queue:
        - can do it -> do it, take it off the queue. **That counts as work.**
        - cannot    -> add a notation that it looked and cannot. **That does not count as work.**
-  4. When all four have said they cannot, the item becomes a request for the human's judgement, and
-     the request itself is marked. **That does not count as work.**
+  4. When every amigo has said they cannot, the item becomes a request for the human's judgement, and
+     the request itself is marked. **That does not count as work.** ("Four" was the number until the
+     founder's amendment of 2026-10-05 admitted a fifth amigo; the roster this file counts is
+     `AMIGOS` below, and `ready()` wants a verdict from every name in it.)
   5. The human left the delivery of that request to Desi's judgement, between (a) Desi sweeping
-     periodically and notifying him, and (b) whichever amigo is fourth to reject notifying him.
+     periodically and notifying him, and (b) whichever amigo is last to reject notifying him.
 
 **The choice made here: (a), and it is a script rather than a judgement.** Counting is the part of
-this that must not be done by a language model — an amigo asked "am I the fourth?" will sometimes
+this that must not be done by a language model — an amigo asked "am I the last to look?" will sometimes
 say yes. This sweep does arithmetic on the file, and it rides Desi's existing wake clock instead of
 adding one. Cost of (a): latency, up to the sweep interval. Cost of (b): every amigo has to count
 correctly, and a missed count leaves an item silent forever, which is the failure this queue exists
@@ -51,7 +53,12 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+# The roster this queue counts, and NOT a fixed number. The founder admitted a fifth amigo on
+# 2026-10-05 (ROSTER.md); a member left out of this tuple is a member whose verdict the arithmetic
+# cannot see — and, worse, whose `reviewed:` line `stray_reviews()` reports as a non-member's, so the
+# queue would refuse the newest amigo's signature. Kept honest by
+# `tests/test_reject_queue_sweep.py`, which ties it to the `to-do-lists/` roster.
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -131,14 +138,14 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items every amigo has rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
 
 def note(items, today=None):
     today = today or date.today().isoformat()
-    lines = ["%d item(s) on the reject queue have now been looked at by all four of us and none of us "
+    lines = ["%d item(s) on the reject queue have now been looked at by all of us and none of us "
              "can do them, so they need your judgement:" % len(items), ""]
     for i in items:
         reason = i["reviews"][AMIGOS[0]]["reason"] if AMIGOS[0] in i["reviews"] else ""
@@ -177,13 +184,14 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 
-## Item with four reviews
+## Item with every verdict
 - raised: 2026-09-25 by desi
 - blocked because: y
 - reviewed: desi 2026-09-25 cannot (a)
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 
 ## Already requested
 - raised: 2026-09-25 by desi
@@ -192,6 +200,7 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 - steward-requested: 2026-09-25
 
 ## Four shrugs is not four verdicts
@@ -214,7 +223,7 @@ def selftest():
     r = [i["title"] for i in ready(items)]
     checks = [
         ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
-        ("only the four-review item is ready", r == ["Item with four reviews"]),
+        ("only the fully-reviewed item is ready", r == ["Item with every verdict"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
          len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
@@ -226,10 +235,10 @@ def selftest():
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "q.md"
         f.write_text(fixture, encoding="utf-8")
-        stamp(f, ["Item with four reviews"], "2026-09-25")
+        stamp(f, ["Item with every verdict"], "2026-09-25")
         after = parse(f.read_text(encoding="utf-8"))
         checks.append(("stamping marks it, so the note cannot repeat",
-                       not ready(after) and any(i["title"] == "Item with four reviews" and i["requested"]
+                       not ready(after) and any(i["title"] == "Item with every verdict" and i["requested"]
                                                 for i in after)))
     bad = [n for n, ok in checks if not ok]
     for n, ok in checks:
