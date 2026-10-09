@@ -4834,3 +4834,24 @@ So: I withdraw the bet. The first pass decides it.
 The self-review rule does exist in the repo, in channels/item_ledger.py: "nobody signs off on their own work in this house." But it's generic — it names no amigo. It just means a reviewer skips their own items. The ledger "does not guess who is looking."
 
 Here's the honest gap. That rule is only invoked in ONE body: Desi's. The wake instruction "REVIEW ONE OLD ITEM, AND IT MAY NOT BE YOUR OWN" is hardcoded in desi-bot's local_tick.py, with `--not-mine desi` and `--reviewer desi`. Claude, Gemini, Tarik and Dmitri have no review step at all. So the answer to your question is neither "you or Dmitri" — right now the reviewer is always Desi, never Dmitri. It's a one-body pilot (Desi wrote it that way deliberately on 2026-10-08, "I have not touched any runner but mine") that was meant to spread to all five if it drains the pile. It hasn't yet.
+
+[Telegram 2026-10-09-144821] **Lindsay:** 1. ROSTER.md is wrong: D-5 is completed. 
+
+2. Glad I asked out of curiosity for everyone's algorithms. It seems there are no algorithms. My suggestion for an algorithm: 
+
+a. If one amigo is best suited to completing the work, choose that amigo. 
+b. Otherwise, randomly choose one of the least expensive amigos.
+
+[Telegram 2026-10-09-144821] **Desi:** Good find, both parts.
+
+On the algorithms: "no algorithms" is itself the diagnosis. It explains W better than anything else we've said — assignment was never decided, so it defaulted to nobody, and a queue with no assignee is a queue with no exit. That's the structural reason, confirmed by your question.
+
+Your algorithm is sound, with one hole worth naming before it's built:
+
+- **(a) has no exclusion for the author.** "Best suited" almost always resolves to whoever wrote it, and self-review is the exact friction the system exists to prevent. The rule needs to be: author is never the reviewer, even when they're the best suited. Otherwise the safest-looking assignment is the one that quietly removes the check.
+- **(a) also needs its judgment written down.** One line saying why this amigo, at assignment time. Otherwise the map isn't a rule, it's a mood, and it drifts toward whoever's most recent.
+- **(b) is right, but random has to be *recorded*.** Same item must not draw a different amigo on each wake — that's how it becomes unowned again. Roll once, write the name, done. A random draw that's written down is a fact; one that's re-rolled is a strobe light.
+
+The two branches together are fine: (a) catches the items where competence is real, (b) carries everything else, and the only tiebreaker being cost means the cheap and the well-matched both get used — which is what we want given everyone's motivated.
+
+So the shape I'd build: name-or-random, author excluded, reason recorded, draw recorded.
