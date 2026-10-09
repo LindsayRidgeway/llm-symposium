@@ -2,6 +2,7 @@
 
 ## Filed from the chat with the human
 
+- [ ] Add the review queue (W) to the wake input, with every item in W naming a reviewer, so a wake opens with a job addressed — *(filed from Telegram)*
 - [ ] Add the amigo's own review queue to the wake input. Requirements: (a) each item in W names its reviewer; (b) the wake for that amigo reads only the items addressed to it, kept short enough not to crowd out the existing three inputs (to-do list, agenda index, last six wakes); (c) an item with no named reviewer is itself flagged as a hole, not silently included. Owner: Desi. — *(filed from Telegram)*
 - [ ] Implement the W-exit rule. A reviewer's job is to move the item out of W into an existing queue and remove it from W. Moving to A requires completing the actual work, not a stamp. Moving to any other queue requires a substantive reason recorded in the artifact. No fifth terminal state: nothing leaves W into nowhere. Owner: Desi. — *(filed from Telegram)*
 - [ ] Once W carries named reviewers and exits are recorded, compile the legitimate-blockers list — every item that left W into a queue other than A, with the reason. Separate blockers that only the world can move from ones we caused. Owner: Desi. — *(filed from Telegram)*
