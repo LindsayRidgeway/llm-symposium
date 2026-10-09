@@ -25,7 +25,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from channels.mail import decode_subject
+from channels.mail import decode_subject, is_automated
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
@@ -364,8 +364,14 @@ def process_inbound_mail() -> int:
             except Exception:
                 pass
 
-        # Skip automated messages / bounces
-        if "mailer-daemon" in from_raw.lower() or "noreply" in from_raw.lower() or "security alert" in subject.lower():
+        # Skip automated messages / bounces. Use the canonical predicate in channels.mail
+        # rather than a second, narrower copy of it: the inline test that stood here matched
+        # "noreply" but not the hyphenated "no-reply", so Google's setup mail
+        # (no-reply@accounts.google.com) reached the model and eight junk replies left Dmitri's
+        # mailbox in the commons' name (filed by Dmitri 2026-10-05). `is_automated` covers
+        # no-reply / do-not-reply / postmaster / bounce / accounts.google.com; the subject guard
+        # stays because some account notices arrive from ordinary-looking addresses.
+        if is_automated(from_raw) or "security alert" in subject.lower():
             continue
 
         if is_already_replied(msg_id, path.name):

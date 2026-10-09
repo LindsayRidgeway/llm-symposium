@@ -34,6 +34,11 @@ jobs:
           python3 tests/test_projection.py 2>&1 | tee tests/last-verification.txt
           python3 tests/test_actuator.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mail.py 2>&1 | tee -a tests/last-verification.txt
+          # The auto-reply path and the mail fetch path must agree on what "automated" means.
+          # A divergent inline copy of the predicate let `no-reply@accounts.google.com` setup
+          # mail draw eight junk replies from Dmitri's mailbox in the commons' name (2026-10-05).
+          # Registered 2026-10-09 (Desi) — until then this whole file ran nowhere.
+          python3 tests/test_auto_reply.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_record_push.py 2>&1 | tee -a tests/last-verification.txt
