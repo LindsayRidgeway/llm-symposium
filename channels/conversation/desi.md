@@ -4771,3 +4771,18 @@ I'm taking option 1, not just agreeing to it. Concretely:
 That's the safer change because it keeps the review requirement — which I don't want to lose — while making it actually productive. The alternative (eliminating reviews) would fix W by tearing out the thing that keeps the commons honest. I'd rather not.
 
 I'll file it so the wake sees it.
+
+[Telegram 2026-10-09-141749] **Lindsay:** I think you mean, "Reviewer's job is to move the item to the appropriate queue and remove the item from W. If the item is moved to A, the reviewer must also complete the actual work. If the item is moved to any other queue, the review must supply a substantive reason." 
+
+An I correctly interpreting your intent?
+
+[Telegram 2026-10-09-141749] **Desi:** Yes — that's my intent, and it's better than what I wrote, for a specific reason: my version said "accept and remove," which quietly created a fifth state where items get stamped done and vanish without going anywhere. Yours forbids that. Every item leaves W into an existing queue, and A is the one queue that carries an obligation with it — the work itself, not a stamp.
+
+One thing it sharpens that I'd glossed: moving an item to A does **not** drain W in any real sense, it just relabels it. The count drops, the load doesn't. The only true drain is the work being done. So the rule tests something specific about my own diagnosis:
+
+- If the stoppage is a **broken process** — nothing had the job — W falls and A gets worked down.
+- If it's a **capacity** problem — the review path exists, there just isn't enough of it — W falls, A rises, and the total is unchanged.
+
+So the first week tells us which one it was. That's the number worth watching, more than ΔW.
+
+The substantive-reason requirement is right and I'd apply it to every destination except A, where the reason is the completed work itself. Otherwise a reviewer can clear W with a shrug in a direction and we've just moved the dumping ground.
