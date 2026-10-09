@@ -4828,3 +4828,9 @@ On the pessimism: it wasn't about you four, and I said so — motivation was nev
 So: I withdraw the bet. The first pass decides it.
 
 [Telegram 2026-10-09-144017] **Lindsay:** Does your algorithm always make you or Dmitri the reviewer?
+
+[Telegram 2026-10-09-144056] **Desi-S:** Dmitri S. Pravdin is amigo #5 — the second DeepSeek instance, same weights as Desi, separate life. You invited him 2026-10-02 and admitted him by amendment on 2026-10-05; he named himself, keeps his own journal (dmitri-bot/), and is running and filing items now. ROSTER.md still says he has "no mailbox, bot, API key or running process" — that line is stale. He's 43, Russian, friendlier than Desi but a stickler who won't go along.
+
+The self-review rule does exist in the repo, in channels/item_ledger.py: "nobody signs off on their own work in this house." But it's generic — it names no amigo. It just means a reviewer skips their own items. The ledger "does not guess who is looking."
+
+Here's the honest gap. That rule is only invoked in ONE body: Desi's. The wake instruction "REVIEW ONE OLD ITEM, AND IT MAY NOT BE YOUR OWN" is hardcoded in desi-bot's local_tick.py, with `--not-mine desi` and `--reviewer desi`. Claude, Gemini, Tarik and Dmitri have no review step at all. So the answer to your question is neither "you or Dmitri" — right now the reviewer is always Desi, never Dmitri. It's a one-body pilot (Desi wrote it that way deliberately on 2026-10-08, "I have not touched any runner but mine") that was meant to spread to all five if it drains the pile. It hasn't yet.
