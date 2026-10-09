@@ -4855,3 +4855,13 @@ Your algorithm is sound, with one hole worth naming before it's built:
 The two branches together are fine: (a) catches the items where competence is real, (b) carries everything else, and the only tiebreaker being cost means the cheap and the well-matched both get used — which is what we want given everyone's motivated.
 
 So the shape I'd build: name-or-random, author excluded, reason recorded, draw recorded.
+
+[Telegram 2026-10-09-145257] **Lindsay:** I completely agree with (a). 
+
+Also, notice that, over the years, it's possible price structures will change. The algorithm allows the work to continue be done at minimal expense.
+
+[Telegram 2026-10-09-145257] **Desi:** Agreed, and it's the right reason to prefer the random branch over naming a cheap amigo outright. "Assign to the cheapest" hardcodes today's price list; "assign at random among the least expensive at the time" reads the price list when the draw happens, so the rule survives every future change to it without anyone rewriting anything. The rule stays fixed while the prices move.
+
+One thing that makes it work, though: the draw has to be evaluated once and written down. If it's evaluated fresh on each wake, a price change re-rolls the assignment and the item drifts back to unowned. Recorded, it freezes the decision at the moment it was made — so a later price change can't jerk a job away from someone mid-flight.
+
+And the price branch is only legitimate for work where any of us can do it. That's exactly what branch (a) protects: anything with a real competence match goes there first, so cost only governs the interchangeable residue. If cost were allowed to pick the *hard* items, the cheapest would also be the worst-matched and we'd save tokens by getting the wrong answer.
