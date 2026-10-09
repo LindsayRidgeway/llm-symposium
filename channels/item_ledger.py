@@ -281,7 +281,28 @@ def append(records: list[dict], path: Path = LEDGER) -> None:
 
 
 def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = None) -> int:
-    """Append one `performed` row per new run that changed something. Idempotent by run id."""
+    """Record new items, and record a landing that happened *after* an item was first filed.
+
+    Idempotent by run id. Two passes, because they answer two different questions:
+
+    1. A run the ledger has never seen becomes one `performed` row, stamped accomplished only if its
+       work is already on main at this moment.
+    2. A run the ledger already holds — and that is still undecided — is re-checked against the
+       landing log, because a wake is normally collected *while it is still awaiting review*. Its
+       landing comes minutes or hours later. A collector that skips every id it already holds (the
+       only behaviour this had before 2026-10-09) can therefore never record the landing of anything:
+       every item is filed as waiting and stays waiting, so `A` stops growing and `W` grows forever.
+       That is the shape of the human's daily report, and it was reading a frozen letter, not the
+       world.
+
+    Measured 2026-10-09, which is why this pass exists: of the 72 runs named by a `land(wake)` commit,
+    71 read `A` and the one that read `W` — the newest, `20261008T203539Z-db9756ed` — had been filed
+    before its own landing commit existed, and no amount of re-collecting could move it.
+
+    A decision a person wrote is never overwritten: only an item with no state at all (the `W` of
+    "nobody has looked") is moved to accomplished by a landing. A review that postponed or rejected it
+    stands, and the landing is left for the reviewer to weigh.
+    """
     known = load(path)
     landed = landed_run_ids()
     fresh = []
@@ -305,6 +326,16 @@ def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = N
                 item["reviewer"] = "auto:land" if item["state"] else None
                 fresh.append(item)
                 known[item["id"]] = item
+    for rid, rec in known.items():
+        if rec.get("state") is None and rid in landed:
+            update = dict(rec)
+            update.update(
+                state="accomplished",
+                state_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                reason="landed on main (lander's test gate passed)",
+                reviewer="auto:land",
+            )
+            fresh.append(update)
     append(fresh, path)
     return len(fresh)
 

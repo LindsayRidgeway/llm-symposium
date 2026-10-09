@@ -265,5 +265,66 @@ class TestReview(unittest.TestCase):
         self.assertEqual(il.load(self.path)["a"]["state"], "accomplished")
 
 
+class TestCollectRecordsALandingAfterTheFact(unittest.TestCase):
+    """A run is filed *before* it lands; the collector must record the landing later.
+
+    The defect measured on 2026-10-09: `collect` skipped every id it already held, so an item's letter
+    was frozen at its first sighting. Every wake is first seen while it is still `awaiting_review`, so
+    every landing was invisible — `A` could only count runs collected after they had already landed,
+    and `W` could only grow. That is the "broken process" the daily report was printing. The two rules
+    that make the repair safe are pinned here: a landing does move a waiting item to accomplished, and
+    a landing does *not* overwrite a decision a person wrote.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name) / "runs"
+        self.root.mkdir()
+        self.ledger = Path(self.tmp.name) / "items.jsonl"
+        self._runs_dir = il.runs_dir
+        self._landed = il.landed_run_ids
+        il.runs_dir = lambda amigo: self.root            # every amigo sees the same fixture runs
+        self.landed = set()
+        il.landed_run_ids = lambda repo=None: set(self.landed)
+
+    def tearDown(self):
+        il.runs_dir = self._runs_dir
+        il.landed_run_ids = self._landed
+        self.tmp.cleanup()
+
+    def test_a_landing_after_collection_moves_a_waiting_item_to_accomplished(self):
+        rid = "20261009T000000Z-aaaaaaaa"
+        make_run(self.root, rid, ["docs/thing.html"], "Authored a small page that is worth keeping.")
+        il.collect(path=self.ledger)
+        self.assertIsNone(il.load(self.ledger)[rid]["state"])          # filed while awaiting review
+        self.landed = {rid}                                            # minutes later, the wake lands
+        il.collect(path=self.ledger)
+        rec = il.load(self.ledger)[rid]
+        self.assertEqual(rec["state"], "accomplished")
+        self.assertEqual(rec["reviewer"], "auto:land")
+        self.assertEqual(il.letter_for(rec), "A")
+
+    def test_a_human_decision_is_not_overwritten_by_a_later_landing(self):
+        rid = "20261009T000000Z-bbbbbbbb"
+        make_run(self.root, rid, ["docs/other.html"], "Another page, held back on purpose by a review.")
+        il.collect(path=self.ledger)
+        il.review(path=self.ledger, item_id=rid, state="postponed", reason="waiting on a reader")
+        self.landed = {rid}
+        il.collect(path=self.ledger)
+        rec = il.load(self.ledger)[rid]
+        self.assertEqual(rec["state"], "postponed")
+        self.assertEqual(rec["reason"], "waiting on a reader")
+
+    def test_recording_a_landing_twice_adds_nothing(self):
+        rid = "20261009T000000Z-cccccccc"
+        make_run(self.root, rid, ["docs/third.html"], "A third page, landed and then seen again later.")
+        il.collect(path=self.ledger)
+        self.landed = {rid}
+        il.collect(path=self.ledger)
+        il.collect(path=self.ledger)
+        lines = [ln for ln in self.ledger.read_text(encoding="utf-8").strip().splitlines() if ln]
+        self.assertEqual(len(lines), 2)                                # one filing, one landing
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
