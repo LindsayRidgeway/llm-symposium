@@ -48,7 +48,17 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from channels.item_ledger import collect, counts, landing_gap, last_landing, load  # noqa: E402
+from channels.item_ledger import (  # noqa: E402
+    assigned,
+    blocker_of,
+    collect,
+    counts,
+    holes,
+    landing_gap,
+    last_landing,
+    load,
+    price_band,
+)
 
 # The six letters, in the order the human reasoned them out (Telegram, 2026-10-07): the
 # review-needed axis first (N/V), then the outcome axis (A/P/W/R). His labels, near enough verbatim.
@@ -64,6 +74,7 @@ LETTERS = ("N", "V", "A", "P", "W", "R")
 GROUPS = LETTERS
 AMIGO_ORDER = ("desi", "claude", "gemini", "tarik", "dmitri")
 LIST_CAP = 8
+BLOCKERS_SHOWN = 6      # blocker lines can run long; the total is printed above them
 POSTPONED_SHOWN = 3
 # Roughly the budget he pointed at (the old COBOL paragraph-name limit). A truncated sentence is
 # still a sentence fragment — which is why the durable fix is for a wake to *name* its own item
@@ -383,6 +394,66 @@ def _letter(rec: dict) -> str:
     return letter_for(rec)
 
 
+def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]:
+    """Who is looking, who is not, and what is actually blocking — the human's 2026-10-09 questions.
+
+    His rule: every waiting item carries a name, or it is not a queue. He asked for three things
+    that the letters alone cannot say: whether W has names on it at all (a nameless W is the
+    failure, not the backlog), who is carrying it, and — the artifact he said is worth more than
+    the count — the list of items that left W *without* being accomplished, each with the reason
+    that stopped it. That last list is the boundary of what the commons can do without help, and
+    separating our own failures from the world's limits is the whole value of printing it.
+    """
+    waiting = [r for r in items.values() if _letter(r) == "W"]
+    named = collections.Counter(r.get("assigned_to") for r in waiting if r.get("assigned_to"))
+    unnamed = len(holes(items))
+
+    out = ["", "### Who is looking  (your assignment rule, 2026-10-09)"]
+    if named:
+        out.append("  W carries a name: " + " · ".join(f"{w} {n}" for w, n in named.most_common()))
+    else:
+        out.append("  W carries no names at all — every waiting item is unowned, so nothing is "
+                   "addressed to anyone. That is the defect, not the pile size.")
+    if unnamed:
+        out.append(f"  {unnamed} waiting item(s) have NO name: a hole, not a queue. Reported as a "
+                   f"fact, not a request — assign with `item_ledger.py --draw` or `--assign`.")
+    else:
+        out.append("  no holes: every waiting item is addressed to somebody.")
+    try:
+        band, as_of, band_file = price_band()
+        out.append(f"  cheap band (prices {as_of}, {band_file.name}): {', '.join(band)} — the draw "
+                   f"is a function of the item's id, so it cannot re-roll; the author is never the "
+                   f"reviewer.")
+    except (FileNotFoundError, ValueError) as exc:
+        out.append(f"  NO PRICE BAND — {type(exc).__name__}: {exc}. Draws cannot be made until "
+                   f"`scripts/price_band.py --write` has run.")
+
+    left = [r for r in items.values() if _letter(r) in ("P", "R") and _in_window(r, hours)]
+    out += ["", f"### Blockers: left W in the last {hours}h without being accomplished ({len(left)})",
+            "These are the items a review moved somewhere other than A, each with the reason that "
+            "stopped it. This is the list that says *why* the commons is stuck rather than how much."]
+    if not left:
+        out.append("  (none — nothing left W by decision in this window)")
+    for rec in sorted(left, key=lambda r: r.get("state_utc") or "")[:BLOCKERS_SHOWN]:
+        out.append(f"  {_letter(rec)}  {rec.get('amigo','?'):<7} {_name(rec)}")
+        out.append(f"     because: {blocker_of(rec) or '(no reason recorded)'}")
+    if len(left) > BLOCKERS_SHOWN:
+        out.append(f"  … +{len(left) - BLOCKERS_SHOWN} more")
+    return out
+
+
+def _in_window(rec: dict, hours: int) -> bool:
+    """Did this item reach its state inside the window? (state_utc, not filed_utc.)"""
+    stamp = rec.get("state_utc")
+    if not stamp:
+        return False
+    try:
+        when = dt.datetime.strptime(stamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+    except ValueError:
+        return False
+    return when >= dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=hours)
+
+
 def _sections(items: dict[str, dict], hours: int) -> tuple[list[dict], list[dict]]:
     """The two lists of undecided work: postponed by a decision, and waiting for review.
 
@@ -430,6 +501,7 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
     landed = last_landing()
     lines += _landing_block(now, hours, landed, landing_gap(items, landed))
     lines += _diagnosis(window, life, hours, items, now)
+    lines += _review_block(items, window, hours)
     lines += ["", f"### Last {hours}h, by amigo"]
     lines += _letter_block(window, life, hours)
     lines += _inputs_block(now, hours)

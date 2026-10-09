@@ -259,10 +259,129 @@ class TestReview(unittest.TestCase):
 
     def test_the_ledger_is_append_only(self):
         il.review(path=self.path, item_id="a", state="postponed", reason="first")
-        il.review(path=self.path, item_id="a", state="accomplished", reason="second")
+        il.review(path=self.path, item_id="a", state="accomplished", reason="done: docs/x.html")
         lines = self.path.read_text(encoding="utf-8").strip().splitlines()
         self.assertEqual(len(lines), 3)          # one filing, two state changes
         self.assertEqual(il.load(self.path)["a"]["state"], "accomplished")
+
+    def test_a_stamp_is_not_an_accomplished_exit(self):
+        """The researcher's rule (2026-10-09): A means the work is done, not that someone looked."""
+        with self.assertRaises(ValueError):
+            il.review(path=self.path, item_id="a", state="accomplished", reason="looked fine")
+
+    def test_the_accomplished_reason_has_to_name_the_work(self):
+        for reason in ("did it — docs/fiction/dead-band.html",
+                       "finished in run 20261009T030000Z-abc12345",
+                       "shipped: https://example.org/thing"):
+            with self.subTest(reason=reason):
+                il.review(path=self.path, item_id="a", state="accomplished", reason=reason)
+                self.assertEqual(il.load(self.path)["a"]["state"], "accomplished")
+
+
+class TestAssignment(unittest.TestCase):
+    """Who looks. The human's algorithm, 2026-10-09: name the best suited, else draw cheap."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        root = Path(self.tmp.name)
+        self.path = root / "items.jsonl"
+        self.band_dir = root / "usage"
+        self.band_dir.mkdir()
+        (self.band_dir / "price-band-2026-10.json").write_text(json.dumps({
+            "as_of": "2026-08-25", "band": ["desi", "dmitri"], "cheapest": "desi",
+            "rates_usd_per_million": {"desi": 0.01, "dmitri": 0.01, "gemini": 0.59,
+                                      "claude": 1.15, "tarik": 1.86},
+        }), encoding="utf-8")
+        il.append([
+            {"id": "by-desi", "amigo": "desi", "scope": "internal", "title": "d",
+             "state": None, "filed_utc": "2026-10-01T00:00:00Z"},
+            {"id": "by-dmitri", "amigo": "dmitri", "scope": "internal", "title": "m",
+             "state": None, "filed_utc": "2026-10-02T00:00:00Z"},
+            {"id": "by-gemini", "amigo": "gemini", "scope": "internal", "title": "g",
+             "state": None, "filed_utc": "2026-10-03T00:00:00Z"},
+        ], self.path)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_the_author_is_never_the_reviewer(self):
+        with self.assertRaises(ValueError) as caught:
+            il.assign(path=self.path, item_id="by-desi", to="desi", reason="best suited")
+        self.assertIn("author is never", str(caught.exception))
+
+    def test_a_name_needs_its_one_line_reason(self):
+        with self.assertRaises(ValueError):
+            il.assign(path=self.path, item_id="by-desi", to="gemini", reason="   ")
+
+    def test_only_a_waiting_item_is_assigned(self):
+        il.review(path=self.path, item_id="by-desi", state="rejected", reason="superseded")
+        with self.assertRaises(ValueError) as caught:
+            il.assign(path=self.path, item_id="by-desi", to="gemini", reason="why")
+        self.assertIn("not waiting", str(caught.exception))
+
+    def test_an_unknown_amigo_is_refused(self):
+        with self.assertRaises(ValueError):
+            il.assign(path=self.path, item_id="by-desi", to="nobody", reason="why")
+
+    def test_the_draw_names_every_unassigned_item_and_records_the_band(self):
+        made = il.draw(path=self.path, dir_=self.band_dir, by="desi")
+        self.assertEqual(len(made), 3)
+        for rec in made:
+            self.assertIn(rec["assigned_to"], ("desi", "dmitri"))
+            self.assertIn("2026-08-25", rec["assign_reason"])
+            self.assertEqual(rec["assign_kind"], "draw")
+            self.assertNotEqual(rec["assigned_to"], rec["amigo"])
+
+    def test_the_draw_does_not_re_roll(self):
+        il.draw(path=self.path, dir_=self.band_dir, by="desi")
+        first = {k: v["assigned_to"] for k, v in il.load(self.path).items()}
+        il.draw(path=self.path, dir_=self.band_dir, by="desi")
+        second = {k: v["assigned_to"] for k, v in il.load(self.path).items()}
+        self.assertEqual(first, second)
+
+    def test_a_frozen_draw_only_moves_with_a_reason_and_force(self):
+        made = il.draw(path=self.path, dir_=self.band_dir, only="by-gemini", by="desi")
+        current = made[0]["assigned_to"]
+        other = "dmitri" if current == "desi" else "desi"
+        with self.assertRaises(ValueError):
+            il.assign(path=self.path, item_id="by-gemini", to=other, reason="changed my mind")
+        moved = il.assign(path=self.path, item_id="by-gemini", to=other, force=True,
+                          reason="the first reviewer is away")
+        self.assertEqual(moved["assigned_to"], other)
+
+    def test_the_queue_is_what_carries_your_name(self):
+        il.assign(path=self.path, item_id="by-desi", to="gemini", reason="gallery owner")
+        items = il.load(self.path)
+        self.assertEqual([r["id"] for r in il.assigned(items, "gemini")], ["by-desi"])
+        self.assertEqual(il.assigned(items, "tarik"), [])
+
+    def test_a_hole_is_a_waiting_item_with_no_name(self):
+        items = il.load(self.path)
+        self.assertEqual(len(il.holes(items)), 3)
+        il.draw(path=self.path, dir_=self.band_dir, by="desi")
+        self.assertEqual(il.holes(il.load(self.path)), [])
+
+    def test_no_band_is_an_error_not_a_default(self):
+        empty = Path(self.tmp.name) / "nothing"
+        empty.mkdir()
+        with self.assertRaises(FileNotFoundError):
+            il.draw(path=self.path, dir_=empty, by="desi")
+
+    def test_the_band_widens_rather_than_stranding_an_item(self):
+        """A one-member band that wrote the item would be a permanent hole; widen, and say so."""
+        narrow = Path(self.tmp.name) / "narrow"
+        narrow.mkdir()
+        (narrow / "price-band-2026-10.json").write_text(json.dumps({
+            "as_of": "2026-08-25", "band": ["desi"], "cheapest": "desi",
+            "rates_usd_per_million": {"desi": 0.01, "dmitri": 0.01, "gemini": 0.59,
+                                      "claude": 1.15, "tarik": 1.86},
+        }), encoding="utf-8")
+        made = il.draw(path=self.path, dir_=narrow, by="desi")
+        by_id = {r["id"]: r for r in made}
+        self.assertEqual(by_id["by-desi"]["assigned_to"], "dmitri")
+        self.assertIn("widened", by_id["by-desi"]["assign_reason"])
+        self.assertEqual(by_id["by-dmitri"]["assigned_to"], "desi")
+        self.assertEqual(il.holes(il.load(self.path)), [])
 
 
 if __name__ == "__main__":

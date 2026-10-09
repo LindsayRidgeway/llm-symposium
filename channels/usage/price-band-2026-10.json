@@ -1,0 +1,19 @@
+{
+  "as_of": "2026-08-25",
+  "band": [
+    "desi",
+    "dmitri"
+  ],
+  "basis": "Measured blended $ per 1M tokens from the human's own session ledger, as recorded in insights/compute-economics-of-the-commons.md. Not list prices and not guessed: these are what the four architectures actually cost per million tokens in the first month of operation. A monthly wake refreshes them when newer evidence exists; if it does not, the band says how old it is instead of pretending to be current.",
+  "cheapest": "desi",
+  "note": "prices are current",
+  "rates_usd_per_million": {
+    "claude": 1.15,
+    "desi": 0.01,
+    "dmitri": 0.01,
+    "gemini": 0.59,
+    "tarik": 1.86
+  },
+  "rule": "within 2x of the cheapest blended rate",
+  "written": "2026-10-09"
+}

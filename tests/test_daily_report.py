@@ -212,6 +212,67 @@ class TestDiagnosis(unittest.TestCase):
         self.assertIn("dwell: not computed", self._diag(nothing_drained))
 
 
+class TestTheReviewBlock(unittest.TestCase):
+    """The human's 2026-10-09 questions: does W carry names, and what is actually blocking.
+
+    Three things he asked to see, and none of them are derivable from the letters: whether the
+    waiting pile has names on it at all (a nameless W is the defect, not the backlog), who is
+    carrying it, and the list of items that left W *without* being accomplished, with the reason.
+    """
+
+    def _block(self, rows, hours=24):
+        from channels.item_ledger import counts
+        from scripts.daily_report import _review_block
+        return "\n".join(_review_block(rows, counts(rows, hours), hours))
+
+    def _row(self, i, **kw):
+        row = {"id": i, "amigo": "desi", "scope": "internal", "filed_utc": "2026-10-01T00:00:00Z",
+               "title": i, "state": None}
+        row.update(kw)
+        return row
+
+    def test_a_named_waiting_item_is_reported_by_name(self):
+        rows = {"a": self._row("a", assigned_to="dmitri")}
+        self.assertIn("dmitri 1", self._block(rows))
+
+    def test_a_queue_with_no_names_says_that_is_the_defect(self):
+        rows = {"a": self._row("a")}
+        out = self._block(rows)
+        self.assertIn("carries no names at all", out)
+        self.assertIn("not the pile size", out)
+
+    def test_a_nameless_item_is_reported_as_a_hole_not_a_queue(self):
+        rows = {"a": self._row("a"), "b": self._row("b", assigned_to="gemini")}
+        out = self._block(rows)
+        self.assertIn("1 waiting item(s) have NO name", out)
+        self.assertIn("hole, not a queue", out)
+
+    def test_no_holes_is_stated_plainly(self):
+        rows = {"a": self._row("a", assigned_to="gemini")}
+        self.assertIn("no holes", self._block(rows))
+
+    def test_the_band_is_printed_with_its_price_date(self):
+        out = self._block({"a": self._row("a", assigned_to="gemini")})
+        self.assertIn("cheap band (prices", out)
+
+    def test_an_item_that_left_w_without_being_done_carries_its_reason(self):
+        now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        rows = {"a": self._row("a", state="postponed", reason="needs the lab's access",
+                               state_utc=now)}
+        out = self._block(rows)
+        self.assertIn("Blockers: left W in the last 24h without being accomplished (1)", out)
+        self.assertIn("because: needs the lab's access", out)
+
+    def test_an_empty_blocker_list_is_said_out_loud(self):
+        rows = {"a": self._row("a", assigned_to="gemini")}
+        self.assertIn("(none — nothing left W by decision in this window)", self._block(rows))
+
+    def test_a_blocker_from_before_the_window_is_not_counted(self):
+        rows = {"a": self._row("a", state="postponed", reason="old",
+                               state_utc="2026-09-01T00:00:00Z")}
+        self.assertIn("(none — nothing left W", self._block(rows))
+
+
 class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
     """The lander refuses a dirty shared checkout, so output left uncommitted here is an outage,
     not untidiness: nothing landed between 2026-10-06 and 2026-10-08 for exactly this reason, and

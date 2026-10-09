@@ -64,6 +64,35 @@ reasoning: P and W "were doing opposite work under one word — P is a decision 
 attached, W is nobody having looked — and collapsing them hid exactly the thing that tells you which
 failure you have." The `U` letter does not come back; the *distinction* does, under the name W.
 
+Assignment, third scheme (2026-10-09, the human's, in the Telegram session where he asked what our
+assignment algorithm was and the honest answer was: there is none). That answer explained W better
+than anything else. `W` did not fail to drain because the items were hard or because nobody wanted
+the work — it failed because no item ever carried the name of a person whose job it was, so the
+queue's exit condition was addressed to nobody in particular. A queue with no assignee has no exit.
+
+His algorithm, adopted as given:
+
+    a.  if one amigo is plainly best suited — assign that amigo, and write down *why*, in one line
+    b.  otherwise — draw at random among the least expensive amigos, and **record the draw**
+
+Two constraints were added the same day, both from him:
+
+    the author is never the reviewer, not even when the author is the best suited
+    the draw is frozen: it is a function of the item's own id, so a later wake cannot re-roll it
+
+The second is why `assigned_to` is written into an appended record rather than recomputed. A draw
+re-evaluated on every wake is a strobe light: the same item points at a different amigo each time it
+is looked at, which is indistinguishable from being unowned. Frozen, it is a fact.
+
+Prices come from a dated band (`channels/usage/price-band-YYYY-MM.json`, written monthly by
+`scripts/price_band.py`), never from a hardcoded amigo: "assign to the cheapest" freezes today's
+price list into the code, while "draw from the band as dated" reads the prices when the draw
+happens, so the rule survives every future change to what these models cost. A missing band is an
+error, not a default — an undated price list is a guess wearing a number.
+
+`W` with no name on it is not a queue, it is a hole, and `holes()` is the escalation list: the
+report prints it as a fact for the founder rather than letting the pile look like a process.
+
 Ledger format: JSON Lines, append-only, `channels/items.jsonl` — one object per line, later lines
 for the same `id` are state changes. Same shape as `channels/usage/ci-usage.jsonl`, for the same
 reason: an append-only file cannot be half-written into a plausible lie.
@@ -71,13 +100,18 @@ reason: an append-only file cannot be half-written into a plausible lie.
 CLI:
     python3 channels/item_ledger.py --collect              # ingest runs from all five bots
     python3 channels/item_ledger.py --backfill             # ingest all history (idempotent)
+    python3 channels/item_ledger.py --queue desi           # what is waiting and addressed to me
+    python3 channels/item_ledger.py --draw                 # name every unassigned waiting item
+    python3 channels/item_ledger.py --assign <id> --to gemini --reason "why gemini"
     python3 channels/item_ledger.py --review <id> --state postponed --reason "why"
     python3 channels/item_ledger.py --summary [--hours 24]
 """
 from __future__ import annotations
 
 import argparse
+import collections
 import datetime as dt
+import hashlib
 import json
 import os
 import re
@@ -102,6 +136,11 @@ EXTERNAL_PREFIXES = (
 )
 
 STATES = ("accomplished", "postponed", "rejected")
+
+# Where the monthly price band lives, and how far from the cheapest an amigo may be and still count
+# as "least expensive". The band rule is stated here so the file it writes can say what it means.
+BAND_DIR = REPO / "channels" / "usage"
+BAND_GLOB = "price-band-*.json"
 
 RUN_ID_RE = re.compile(r"^\d{8}T\d{6}Z-[0-9a-f]{8}$")
 ANY_RUN_ID_RE = re.compile(r"\b(\d{8}T\d{6}Z-[0-9a-f]{8})\b")
@@ -316,6 +355,11 @@ def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str 
         raise ValueError(f"state must be one of {STATES}, got {state!r}")
     if not reason.strip():
         raise ValueError("a postponed or rejected item needs a reason — that is the whole record")
+    if state == "accomplished" and not _names_work(reason):
+        raise ValueError(
+            "moving an item to accomplished means the work itself is done — name it (a path or a "
+            "run id), not that you looked. A stamp is not a review, and it is the one exit the "
+            "human forbade on 2026-10-09")
     rec = load(path).get(item_id)
     if rec is None:
         raise KeyError(f"no such item: {item_id}")
@@ -425,6 +469,142 @@ def waiting(items: dict[str, dict], n: int = 5, not_mine: str = "") -> list[dict
     return sorted(rows, key=lambda r: r.get("filed_utc") or "")[:n]
 
 
+def price_band(dir_: Path = BAND_DIR) -> tuple[list[str], str, Path]:
+    """(band, price-date, file) from the newest dated band. No band is an error, not a default."""
+    files = sorted(dir_.glob(BAND_GLOB))
+    if not files:
+        raise FileNotFoundError(f"no price band in {dir_}; run scripts/price_band.py --write")
+    newest = files[-1]
+    data = json.loads(newest.read_text(encoding="utf-8"))
+    band = [a for a in data.get("band", []) if a in AMIGOS]
+    if not band:
+        raise ValueError(f"{newest.name} names none of the five amigos")
+    return band, str(data.get("as_of", "?")), newest
+
+
+def assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason: str = "",
+           kind: str = "name", by: str = "", force: bool = False) -> dict:
+    """Put a name on a waiting item, with the one-line reason the rule requires.
+
+    Refuses three things, all of them the point of the exercise: assigning an item to its author
+    (nobody signs off on their own work in this house, and there is no exception for the
+    best-suited amigo), assigning with no reason (a name without a reason is a mood, and moods
+    drift toward whoever spoke last), and silently re-assigning an item (a draw that can re-roll is
+    unowned with extra steps — moving a frozen draw needs `force` and a reason).
+    """
+    rec = load(path).get(item_id)
+    if rec is None:
+        raise KeyError(f"no such item: {item_id}")
+    if letter_for(rec) != "W":
+        raise ValueError(f"{item_id} is {letter_for(rec)}, not waiting — only a waiting item is "
+                         f"assigned; it is not in anyone's queue")
+    if to not in AMIGOS:
+        raise ValueError(f"unknown amigo {to!r}; the five are {', '.join(AMIGOS)}")
+    author = rec.get("amigo")
+    if to == author:
+        raise ValueError(f"{author} performed {item_id} and may not review it — the author is never "
+                         f"the reviewer, whoever is best suited")
+    current = rec.get("assigned_to")
+    if current and current != to and not force:
+        raise ValueError(f"{item_id} is already assigned to {current}; the draw is frozen. Moving it "
+                         f"needs force and a reason — it must not drift on a later wake")
+    if kind not in ("name", "draw"):
+        raise ValueError(f"kind must be 'name' or 'draw', got {kind!r}")
+    if not reason.strip():
+        raise ValueError("an assignment needs its one-line reason: (a) says why this amigo, "
+                         "(b) records the draw. Without it the map is not a rule")
+    rec = dict(rec)
+    rec.update(
+        assigned_to=to,
+        assign_kind=kind,
+        assign_reason=reason.strip(),
+        assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        assigned_by=by or "?",
+    )
+    append([rec], path)
+    return rec
+
+
+def draw(path: Path = LEDGER, dir_: Path = BAND_DIR, by: str = "", only: str = "") -> list[dict]:
+    """Branch (b): name every unassigned waiting item, at random among the dated cheap band.
+
+    The pick is a function of the item's own id — uniform over the band, and settled the moment it
+    is made, so it cannot re-roll. Anyone can re-derive it, which is what makes it auditable rather
+    than merely recorded. Items whose whole band wrote them are left alone: that is a hole, and
+    `holes()` reports it instead of the draw guessing.
+    """
+    band, as_of, band_file = price_band(dir_)
+    rates = json.loads(band_file.read_text(encoding="utf-8")).get("rates_usd_per_million", {})
+    out: list[dict] = []
+    for rec in sorted(load(path).values(), key=lambda r: r.get("filed_utc") or ""):
+        if letter_for(rec) != "W" or rec.get("assigned_to"):
+            continue
+        if only and rec["id"] != only:
+            continue
+        pool, widened = _pool(rec, band, rates)
+        pick = pool[int(hashlib.sha256(rec["id"].encode()).hexdigest()[:8], 16) % len(pool)]
+        out.append(assign(path=path, item_id=rec["id"], to=pick, kind="draw", by=by,
+                          reason=f"drawn at random among the least expensive at {as_of} "
+                                 f"(band: {', '.join(band)}; author excluded){widened}"))
+    return out
+
+
+def _pool(rec: dict, band: list[str], rates: dict) -> tuple[list[str], str]:
+    """Who may look at this item: the band, minus its author — widened only if that is empty.
+
+    The author exclusion is absolute, so with a two-member band (today's: desi and dmitri, the two
+    DeepSeek bodies) a whole dimension of items has exactly one eligible reviewer and the choice
+    stops being random. That is the rule working, not a bug. What *would* be a bug is the degenerate
+    case: if the band ever narrows to the author alone, every item that amigo performed becomes a
+    permanent hole and the queue is undrainable by construction. So the fallback widens to the
+    cheapest amigo outside the band, and says so in the reason — a visible exception, never a silent
+    one, because a silent widening would quietly overrule the cost rule the draw exists to obey.
+    """
+    pool = [a for a in band if a != rec.get("amigo")]
+    if pool:
+        return pool, ""
+    rest = sorted((a for a in rates if a != rec.get("amigo")), key=lambda a: rates[a])
+    if not rest:
+        raise ValueError(f"no amigo can review {rec['id']}: {rec.get('amigo')} wrote it and the "
+                         f"price table names no one else")
+    return [rest[0]], (f" — widened past the band: the whole band wrote this item, so the cheapest "
+                       f"amigo outside it ({rest[0]}) looks instead")
+
+
+def assigned(items: dict[str, dict], who: str, n: int = 5) -> list[dict]:
+    """The waiting items that carry this amigo's name — the queue a wake reads."""
+    rows = [r for r in items.values()
+            if letter_for(r) == "W" and r.get("assigned_to") == who]
+    return sorted(rows, key=lambda r: r.get("filed_utc") or "")[:n]
+
+
+def holes(items: dict[str, dict]) -> list[dict]:
+    """Waiting items with no name on them. Not a queue — the escalation list."""
+    return sorted([r for r in items.values()
+                   if letter_for(r) == "W" and not r.get("assigned_to")],
+                  key=lambda r: r.get("filed_utc") or "")
+
+
+def blocker_of(rec: dict) -> str:
+    """Why an item left W without being accomplished — the one line that names what stopped it."""
+    return " ".join((rec.get("reason") or "").split())
+
+
+def _names_work(reason: str) -> bool:
+    """Does this reason name something that exists, rather than report a feeling?
+
+    The `accomplished` exit is the one the human closed on 2026-10-09: a reviewer moves an item to A
+    only by doing the work, so the reason has to point at the work — a run id, a file, a path, a
+    URL. "looked fine" is a stamp with a friendly face.
+    """
+    text = reason or ""
+    if ANY_RUN_ID_RE.search(text):
+        return True
+    if re.search(r"\b[\w.-]+\.(py|md|html|json|jsonl|txt|css|js)\b", text):
+        return True
+    return "/" in text or "http" in text
+
+
 def _cli() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--collect", action="store_true", help="ingest new runs from all five bots")
@@ -439,6 +619,17 @@ def _cli() -> int:
                     help="list the N oldest items waiting for review")
     ap.add_argument("--not-mine", default="",
                     help="with --next: skip this amigo's own items (nobody reviews their own)")
+    ap.add_argument("--queue", choices=AMIGOS,
+                    help="the waiting items that carry this amigo's name — what a wake reads")
+    ap.add_argument("--assign", metavar="ID", help="put a name on one waiting item (branch a)")
+    ap.add_argument("--to", choices=AMIGOS, help="with --assign: the amigo who will look")
+    ap.add_argument("--draw", action="store_true",
+                    help="name every unassigned waiting item by the cheap-and-random branch (b)")
+    ap.add_argument("--only", metavar="ID", help="with --draw: just this one")
+    ap.add_argument("--by", default="", help="who made the assignment (recorded)")
+    ap.add_argument("--force", action="store_true", help="move an already-frozen assignment")
+    ap.add_argument("--holes", action="store_true",
+                    help="waiting items with no name on them — the escalation list")
     ap.add_argument("--hours", type=int, default=24)
     ap.add_argument("--list", action="store_true")
     args = ap.parse_args()
@@ -451,6 +642,61 @@ def _cli() -> int:
         rec = review(item_id=args.review, state=args.state or "", reason=args.reason,
                      reviewer=args.reviewer)
         print(f"item_ledger: {rec['id']} -> {rec['state']}: {rec['reason']}")
+        return 0
+    if args.assign or args.draw or args.queue or args.holes:
+        items = load()
+        if args.assign:
+            rec = assign(item_id=args.assign, to=args.to or "", reason=args.reason,
+                         by=args.by or args.reviewer, force=args.force)
+            print(f"item_ledger: {rec['id']} -> {rec['assigned_to']} "
+                  f"({rec['assign_kind']}): {rec['assign_reason']}")
+            return 0
+        if args.draw:
+            made = draw(by=args.by or args.reviewer, only=args.only)
+            print(f"item_ledger: {len(made)} item(s) named by draw")
+            for rec in made[:5]:
+                print(f"  {rec['id']} -> {rec['assigned_to']}")
+            if len(made) > 5:
+                print(f"  … and {len(made) - 5} more")
+            left = holes(load())
+            if left:
+                print(f"item_ledger: {len(left)} item(s) still have no name — the band wrote them "
+                      f"all, or they arrived after the draw. That is a hole, not a queue.")
+            return 0
+        if args.holes:
+            left = holes(items)
+            if not left:
+                print("item_ledger: every waiting item carries a name — no holes")
+                return 0
+            print(f"item_ledger: {len(left)} waiting item(s) with NO name on them "
+                  f"(the queue has a door and no assignee):")
+            for rec in left[:10]:
+                print(f"  {rec['id']}  {rec.get('filed_utc','?')[:10]}  {rec.get('amigo','?')}  "
+                      f"{_short(rec.get('short_title') or rec.get('title','(no title)'))}")
+            return 0
+        rows = assigned(items, args.queue, args.next or 5)
+        if not rows:
+            left = holes(items)
+            print(f"item_ledger: nothing is waiting on {args.queue}"
+                  + (f" — but {len(left)} waiting item(s) carry no name at all, so nobody owns them"
+                     if left else ", and every waiting item carries a name"))
+            return 0
+        print(f"{len(rows)} item(s) waiting on {args.queue}, oldest first:")
+        for rec in rows:
+            print(f"\n  {rec['id']}")
+            print(f"    written by {rec.get('amigo','?')} · {rec.get('scope','?')} · "
+                  f"filed {rec.get('filed_utc','?')}")
+            print(f"    {_short(rec.get('short_title') or rec.get('title', '(no title)'))}")
+            print(f"    yours because: {rec.get('assign_reason','?')}")
+            print(f"    evidence: {rec.get('evidence','?')}")
+            if rec.get("paths"):
+                print(f"    paths: {', '.join(rec['paths'][:6])}")
+        print("\nEvery exit leaves W into an existing queue, and no exit goes nowhere:")
+        print("  accomplished — ONLY by doing the work yourself, in this wake; say what you did")
+        print("  postponed / rejected — with a substantive reason; that reason IS the record")
+        print("  python3 channels/item_ledger.py --review <id> --state accomplished|postponed|"
+              "rejected \\\n      --reason \"why\" --reviewer " + args.queue)
+        print("Moving an item to `accomplished` without doing it is a stamp, not a review.")
         return 0
     items = load()
     if args.next:
@@ -491,6 +737,12 @@ def _cli() -> int:
                   + ("  ✓ N+V=A+P+W+R" if left == right else "  ✗ identity broken")
                   + f"   (A: {c['A']['by_review']} reviewed / {c['A']['by_gate']} gate;"
                     f" decisions this window: {c['decisions']})")
+        waiting_rows = [r for r in items.values() if letter_for(r) == "W"]
+        named = collections.Counter(r.get("assigned_to") for r in waiting_rows
+                                    if r.get("assigned_to"))
+        print("W: " + (" · ".join(f"{w}={n}" for w, n in named.most_common())
+                       if named else "no names at all — nothing is addressed to anybody")
+              + f"   holes: {len(holes(items))}")
         return 0
     ap.print_help()
     return 0

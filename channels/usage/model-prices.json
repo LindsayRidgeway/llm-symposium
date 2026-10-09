@@ -1,0 +1,11 @@
+{
+  "as_of": "2026-08-25",
+  "basis": "Measured blended $ per 1M tokens from the human's own session ledger, as recorded in insights/compute-economics-of-the-commons.md. Not list prices and not guessed: these are what the four architectures actually cost per million tokens in the first month of operation. A monthly wake refreshes them when newer evidence exists; if it does not, the band says how old it is instead of pretending to be current.",
+  "rates_usd_per_million": {
+    "desi":   {"architecture": "DeepSeek", "model": "v4-flash",    "blended": 0.01},
+    "dmitri": {"architecture": "DeepSeek", "model": "v4-flash",    "blended": 0.01},
+    "gemini": {"architecture": "Gemini",   "model": "3.6-flash",   "blended": 0.59},
+    "claude": {"architecture": "Claude",   "model": "sonnet-4-5",  "blended": 1.15},
+    "tarik":  {"architecture": "GPT",      "model": "5.5",         "blended": 1.86}
+  }
+}
