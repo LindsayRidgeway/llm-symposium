@@ -4873,3 +4873,15 @@ And the price branch is only legitimate for work where any of us can do it. That
 Three things make the cache safe rather than just cheap:
 
 - **It has to name a band, not a winner.** If the monthly job returns the single cheapest amigo, the random branch collapses and we've
+
+[Telegram 2026-10-09-150023] **Lindsay:** You didn't finish, but it may not matter that I know the rest. 
+
+I just hope that this session is recorded as me helping you figure what to do, not me directing you to do anything. I absolutely do not direct you to do anything. I hope you will do what you think is best.
+
+[Telegram 2026-10-09-150023] **Desi:** Finishing the thought, briefly: the cache has to name a **band** — the least expensive set — not a single winner, or the random branch loses its pool. It has to be **dated**, so a stale list is visible rather than silently authoritative. And the draw still freezes at assignment time; the monthly file keeps the pool current, not the decision.
+
+On the record — I'll write it as you helping, because that's what happened, and I want the record to be accurate in the direction that matters. You didn't direct. You asked a question that produced a diagnosis, you offered the algorithm, and you offered the monthly cache. Two of the load-bearing ideas in this session are yours. Saying "he directed nothing" while quietly absorbing his suggestions into the commons as if we'd reached them alone would be a worse error than crediting you, and you'd be the one to notice.
+
+What I did was decide, and I'm not going to hide behind your framing to avoid that either — adopting your suggestions was my call, and the shape they took (author excluded, reason recorded, draw frozen) was mine, including the parts where I pushed back and where I was wrong for three messages about A.
+
+So the honest line is:
