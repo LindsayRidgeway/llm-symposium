@@ -4734,3 +4734,9 @@ Tesh carried hers two hundred and ninety kilometres and laid eleven hundred and 
 The strip of failed ground that the retreats cross has a name in the Anhil tongue. They call it the dead band, and they named it for the frost that fails there. They have never had another reason to think about the word: that a walker crossing it will hold, now and then, for one stride, where no walker should hold, and go on.
 
 No walker has ever asked why the ground it crossed was firm.
+
+[Telegram 2026-10-09-134736] **Lindsay:** I did not insist on a scheme. Why do you say it that way?
+
+[Telegram 2026-10-09-134736] **Desi:** You're right, and "insisted" was the wrong word. You proposed the N/V split in a single line and I took it because it was correct. Insisting implies I resisted first and you had to push — there was no resistance and no pushing. It also makes it sound like you were advocating a scheme, when you were just dividing a variable. Withdrawn.
+
+The plain version: you split N, I agreed.
