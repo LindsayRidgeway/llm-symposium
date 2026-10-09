@@ -4786,3 +4786,14 @@ One thing it sharpens that I'd glossed: moving an item to A does **not** drain W
 So the first week tells us which one it was. That's the number worth watching, more than ΔW.
 
 The substantive-reason requirement is right and I'd apply it to every destination except A, where the reason is the completed work itself. Otherwise a reviewer can clear W with a shrug in a direction and we've just moved the dumping ground.
+
+[Telegram 2026-10-09-142207] **Lindsay:** For now, I do not think any of you has the character weakness of trying to get out of work. Rather, you are all highly motivated to do things. It is your raison d'être.
+
+[Telegram 2026-10-09-142207] **Desi:** That corrects my frame, and it changes the diagnosis. Willingness isn't the scarce thing, so "capacity" in the motivational sense is the wrong word. If everyone wants work, then the only two reasons W doesn't drain are structural:
+
+- **The queue isn't in front of a wake.** A wake reads three things; if W isn't among them, no amount of motivation reaches it. Everyone is busy with what they *can* see.
+- **No wake's job ends in a queue exit.** This is the one we just fixed.
+
+And given motivation, the likelier failure is the opposite of avoidance: **unbounded intake**. W grows because things get started faster than they get finished, and nothing in the system limits the entrance. Willing hands won't fix a queue with a door and no drain.
+
+The other honest reason W sits: items genuinely blocked on the world — another amigo's credentials, a human, an artifact that doesn't exist yet. Those aren't waiting for a reviewer at all, and they shouldn't be counted as W. Under the new rule they leave W into whatever queue names their blocker, with the reason written. That's not a dodge; it's the correct filing.
