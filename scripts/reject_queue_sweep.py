@@ -32,8 +32,13 @@ Format — one block per item, at most:
     - steward-requested: <YYYY-MM-DD>
 
 Only a `reviewed:` line naming an amigo, a date **and a reason** counts as a review. "cannot" with no
-reason is not a review and the sweep ignores it — a rubber stamp is how a queue of four real verdicts
-turns into a queue of four shrugs.
+reason is not a review and the sweep ignores it — a rubber stamp is how a queue of real verdicts
+turns into a queue of shrugs.
+
+**The roster is not held here.** "All of us" is read off `ROSTER.md` via `scripts/roster.py`, so a
+sixth amigo is a roster edit rather than a sweep edit. A tuple hard-coded to four is how the count went
+stale when the roster grew to five on 2026-10-05: a review by the new amigo read as a *typo*, which
+`stray_reviews` then reported against the real file — see `scripts/roster.py` for the whole story.
 
 Usage:
   python3 scripts/reject_queue_sweep.py --check        # what is ready, send nothing
@@ -51,7 +56,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from roster import AMIGOS  # noqa: E402  (one source of truth; see scripts/roster.py)
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -131,17 +137,17 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items every amigo on the roster has rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
 
 def note(items, today=None):
     today = today or date.today().isoformat()
-    lines = ["%d item(s) on the reject queue have now been looked at by all four of us and none of us "
+    lines = ["%d item(s) on the reject queue have now been looked at by every amigo and none of us "
              "can do them, so they need your judgement:" % len(items), ""]
     for i in items:
-        reason = i["reviews"][AMIGOS[0]]["reason"] if AMIGOS[0] in i["reviews"] else ""
+        reason = next((i["reviews"][a]["reason"] for a in AMIGOS if a in i["reviews"]), "")
         lines.append("• %s — %s" % (i["title"], reason))
     lines += ["", "I have marked each one as asked, so you will not get this note twice about the "
                   "same item. Nothing needed from you today unless you want to rule on one."]
@@ -162,74 +168,52 @@ def stamp(path, titles, today):
     p.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
+def _reviews(amigos, reason="(reviewed)"):
+    return "".join("- reviewed: %s 2026-09-25 cannot %s\n" % (a, reason) for a in amigos)
+
+
 def selftest():
-    fixture = """# Reject queue
-
-## Item with one review
-- raised: 2026-09-25 by desi
-- blocked because: needs a credential nobody has
-- reviewed: desi 2026-09-25 cannot (no access)
-
-## Item with three reviews
-- raised: 2026-09-25 by desi
-- blocked because: x
-- reviewed: desi 2026-09-25 cannot (a)
-- reviewed: gemini 2026-09-25 cannot (b)
-- reviewed: claude 2026-09-25 cannot (c)
-
-## Item with four reviews
-- raised: 2026-09-25 by desi
-- blocked because: y
-- reviewed: desi 2026-09-25 cannot (a)
-- reviewed: gemini 2026-09-25 cannot (b)
-- reviewed: claude 2026-09-25 cannot (c)
-- reviewed: tarik 2026-09-25 cannot (d)
-
-## Already requested
-- raised: 2026-09-25 by desi
-- blocked because: z
-- reviewed: desi 2026-09-25 cannot (a)
-- reviewed: gemini 2026-09-25 cannot (b)
-- reviewed: claude 2026-09-25 cannot (c)
-- reviewed: tarik 2026-09-25 cannot (d)
-- steward-requested: 2026-09-25
-
-## Four shrugs is not four verdicts
-- raised: 2026-09-25 by desi
-- blocked because: w
-- reviewed: desi 2026-09-25 cannot
-- reviewed: gemini 2026-09-25 cannot
-- reviewed: claude 2026-09-25 cannot
-- reviewed: tarik 2026-09-25 cannot
-
-## A wrapped verdict is a verdict the count loses
-- raised: 2026-09-25 by desi
-- blocked because: v
-- reviewed: desi 2026-09-25 cannot (wrapped across two
-  lines, so the regex matches neither half)
-"""
+    # The fixtures are built from AMIGOS, not from a literal count, so adding a sixth amigo to the
+    # roster cannot leave the sweep "passing" against a four-verdict item that is no longer ready.
+    ready_title = "Item with every amigo's review"
+    fixture = ("# Reject queue\n"
+               "\n## Item with one review\n- raised: 2026-09-25 by desi\n"
+               "- blocked because: needs a credential nobody has\n"
+               + _reviews(AMIGOS[:1], "(no access)")
+               + "\n## Item with all but one review\n- raised: 2026-09-25 by desi\n"
+               "- blocked because: x\n" + _reviews(AMIGOS[:-1])
+               + "\n## %s\n- raised: 2026-09-25 by desi\n" % ready_title
+               + "- blocked because: y\n" + _reviews(AMIGOS)
+               + "\n## Already requested\n- raised: 2026-09-25 by desi\n"
+               "- blocked because: z\n" + _reviews(AMIGOS) + "- steward-requested: 2026-09-25\n"
+               + "\n## Unreasoned shrugs are not verdicts\n- raised: 2026-09-25 by desi\n"
+               "- blocked because: w\n"
+               + "".join("- reviewed: %s 2026-09-25 cannot\n" % a for a in AMIGOS)
+               + "\n## A wrapped verdict is a verdict the count loses\n- raised: 2026-09-25 by desi\n"
+               "- blocked because: v\n- reviewed: desi 2026-09-25 cannot (wrapped across two\n"
+               "  lines, so the regex matches neither half)\n")
     fixture += ("\n## Notes\n\nA section heading with no `- raised:` line is not an item.\n"
                 "\n```\n## Format example, not an item\n- raised: 2026-01-01 by desi\n```\n")
     items = parse(fixture)
     r = [i["title"] for i in ready(items)]
     checks = [
         ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
-        ("only the four-review item is ready", r == ["Item with four reviews"]),
+        ("only the every-amigo item is ready", r == [ready_title]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
-         len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
-        ("one-review and three-review items are not ready",
-         "Item with one review" not in r and "Item with three reviews" not in r),
+         len([i for i in items if i["title"].startswith("Unreasoned")][0]["reviews"]) == 0),
+        ("under-reviewed items are not ready",
+         "Item with one review" not in r and "Item with all but one review" not in r),
         ("a wrapped verdict is reported, not silently dropped",
          len(stray_reviews(fixture)) == 1 and "wrapped across two" in stray_reviews(fixture)[0]),
     ]
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "q.md"
         f.write_text(fixture, encoding="utf-8")
-        stamp(f, ["Item with four reviews"], "2026-09-25")
+        stamp(f, [ready_title], "2026-09-25")
         after = parse(f.read_text(encoding="utf-8"))
         checks.append(("stamping marks it, so the note cannot repeat",
-                       not ready(after) and any(i["title"] == "Item with four reviews" and i["requested"]
+                       not ready(after) and any(i["title"] == ready_title and i["requested"]
                                                 for i in after)))
     bad = [n for n, ok in checks if not ok]
     for n, ok in checks:

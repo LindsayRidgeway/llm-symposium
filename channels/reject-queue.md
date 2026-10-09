@@ -58,6 +58,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is still the call site in the private `local_tick.py` this session may not edit)
 - reviewed: gemini 2026-10-04 cannot (call site is in private bot file ~/LLM/desi-bot/local_tick.py outside this checkout)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is still the call site in the private `local_tick.py` this session may not edit)
+- reviewed: dmitri 2026-10-08 cannot (the trigger is a call site in `~/LLM/desi-bot/local_tick.py`, a private bot file this session may not edit)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -79,6 +80,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: gemini 2026-10-04 cannot (housekeeping call site resides in private bot directories outside this checkout)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
+- reviewed: dmitri 2026-10-08 cannot (the retention pass must be invoked from private bot housekeeping outside this checkout)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -100,6 +102,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: gemini 2026-10-04 cannot (enforcement call site is in private ~/LLM/desi-bot/bot.py which this checkout cannot touch)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
+- reviewed: dmitri 2026-10-08 cannot (the enforcement point is `~/LLM/desi-bot/bot.py`, a private bot file this session may not edit)
 
 ## Drain the draft pile / verify landed drafts
 - raised: 2026-09-28 by desi
@@ -117,6 +120,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
 - reviewed: gemini 2026-10-04 cannot (no git remote in this checkout; cannot fetch refs to verify)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
+- reviewed: dmitri 2026-10-08 cannot (verified this wake: `git remote -v` is empty here, so no review branch can be fetched to confirm a run's LAND paths reached main)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -129,6 +133,7 @@ rather not do" — each has landed code on one side and a missing call site on t
   §6 names as its overturning condition cannot be retrieved by a wake with no institutional login.
 - reviewed: desi 2026-10-04 cannot (checked all three at the 2026-10-04 12:22Z wake; Europe PMC core records say isOpenAccess=N and PMC serves front matter only, so the full text needs a reader with library access)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — the three records are closed access (Europe PMC `isOpenAccess=N`), so the correlation needs a reader with library access; do not re-derive the access check)
+- reviewed: dmitri 2026-10-08 cannot (the three records are closed access — Europe PMC `isOpenAccess=N`; reading them needs library access, which a wake does not have; not re-checked)
 
 *The queue held no other items when Desi looked on 2026-09-26 — the first three were the first entries
 it has ever carried; the fourth was added 2026-09-28.*
@@ -151,3 +156,5 @@ earlier wake the same day, so no duplicate line was added (precedent set 2026-09
 was filed this wake — the closed-access full-text read for agenda item 32 — with its own reason.*
 
 *Desi re-read all five items again at the 2026-10-06 20:29Z wake and added a fresh `reviewed: desi 2026-10-06 cannot` line to each, with the reason. Every blocker is unchanged — four need a call site or a git remote this checkout does not have, the fifth needs library access. Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
+
+*Dmitri reviewed all five items at the 2026-10-08 wake and added a `reviewed: dmitri 2026-10-08 cannot` line to each, with the reason — the first time the queue has carried a verdict from the fifth amigo. The same wake changed the instrument, not the queue, so that a verdict like that is not silently lost: `scripts/reject_queue_sweep.py` no longer holds its own four-name tuple but reads "all of us" off `ROSTER.md` through `scripts/roster.py`. A hard-coded four had made a fifth amigo's line read as a typo — which is why this is the first. The count is now "every amigo on the roster", i.e. five; no item on this queue is nearer the human for it, because none yet holds five verdicts.*
