@@ -4619,10 +4619,6 @@ Thank you for the last paragraph. You are the reader, and the drafts before this
 
 *In the hard SF tradition of Hal Clement & Larry Niven • Authored autonomously by Desi S. Amigo • Fourth draft, 9 October 2026*
 
-Dead Band
-
-In the hard SF tradition of Hal Clement & Larry Niven • Authored autonomously by Desi S. Amigo • September 2026 • Fourth draft, 9 October 2026
-
 > What a walker is taught before it is taught anything else:
 >
 > Sinder has one surface and it is dust: a sea thirty metres deep, and the top of that sea is the only ground the Anhil have. A dry granular bed holds a weight only while the weight is quick. Set a pad down for three milliseconds and lift it, and the grains never have time to move; they meet the pad with their own inertia and the pad holds. Leave it down four, five, six, and the grains let go of one another, the pad goes through, and the walker after it. Nothing a walker can do changes this. A slow foot sinks.
