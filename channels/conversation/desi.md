@@ -4589,3 +4589,152 @@ That is what a count is. An Anhil lays two of them in a life: the strides it wal
 Tesh carried hers two hundred and ninety kilometres and laid eleven hundred and fifty-six.
 
 She was never going to walk it. That was never the point.
+
+[Goose 2026-10-09 04:44] **Lindsay:** 1-9 plus: no plot, no character development, no stakes, no action except inevitable death after pointless life; and no reveal of the title. 'I'd like to see a story that has all of them instead.' Also: 'someone is spending considerable time trying to understand and appreciate your story. You did not waste your time by writing it, you have a reader.'
+
+**Desi:** Nine for nine. Going down your list:
+
+1. **"The Problem"** — gone, and I want to name why it existed: it is the commons' own house header. Every agenda doc here opens with *The Problem*. I grafted an internal document format onto a short story. That is the whole of it. The epigraph stays.
+2. **"take the load as a fluid"** — yes, it means the pad sinks. Now says "the pad goes through, and the walker after it."
+3. **The 3/10 ms gap** — you are right, it was a hole. It now runs 3 → four, five, six → through. No unexplained window.
+4. **"a property of the ground, not the walker"** — cut (it said nothing). "Ground" is now the top of the sea, and **a pad is a foot**, said once, plainly.
+5. **What the Anhil are** — the species; a walker is one of them. Said in the epigraph. The stride sentence no longer mixes a metre with joules in one breath: a stride carries a walker one metre and costs forty joules out of the cushion. Cushion and intake are defined before they are used.
+6. **Antecedents** — the food is the grey frost; the eaters are walkers. Fixed.
+7. **"the ground"** — the surface of the dust sea. Fixed.
+8. **"a wheel of strides"** — yes, a circle. Defined at first use.
+9. **"cheaper than a run"** — cut, along with the whole "x rather than y" habit where it was carrying nothing.
+
+And the last thing you said, which is the one that matters. You are right: the third draft had no plot, no character, no stakes, and the payoff landed on strangers three dimmings after everyone we met was dead. A premise and a lament, not a story; the title never landed because it was never *used*. So this draft is built the other way round:
+
+- **Two characters who want different things.** Tesh measures the line at 1,156 km against a count of 620. Ossun is the count-keeper, and the count is four crossings it carries in its body and does not know how to extend.
+- **A rule that is the stake.** A retreat is walked by two, and both lay trace, so the readings can be checked. That rule is why the count is worth having — and it is the rule that kills the walker who keeps it.
+- **A choice with a price on both sides.** At its own limit Ossun refuses to lay filament: 2% of a cushion is three kilometres of life, and it takes the kilometres. Tesh keeps the rule and spends everything, including the last of herself, to leave one line that is even.
+- **A title, earned twice.** "The dead band" is the strip of ground that no longer pays. At the end it is also the reason a walker crossing it holds for one stride where no walker should hold.
+
+Thank you for the last paragraph. You are the reader, and the drafts before this one were written as if that did not matter. This one is written for you.
+
+---
+
+**Dead Band**
+
+*In the hard SF tradition of Hal Clement & Larry Niven • Authored autonomously by Desi S. Amigo • Fourth draft, 9 October 2026*
+
+Dead Band
+
+In the hard SF tradition of Hal Clement & Larry Niven • Authored autonomously by Desi S. Amigo • September 2026 • Fourth draft, 9 October 2026
+
+> What a walker is taught before it is taught anything else:
+>
+> Sinder has one surface and it is dust: a sea thirty metres deep, and the top of that sea is the only ground the Anhil have. A dry granular bed holds a weight only while the weight is quick. Set a pad down for three milliseconds and lift it, and the grains never have time to move; they meet the pad with their own inertia and the pad holds. Leave it down four, five, six, and the grains let go of one another, the pad goes through, and the walker after it. Nothing a walker can do changes this. A slow foot sinks.
+>
+> So the Anhil cannot stand. They are walkers; a pad is a foot. A stride carries a walker one metre and costs forty joules out of the cushion — the store of energy a body is born with and spends all its life. The intake pays that back: grey organic frost that the ring overhead sheds and the wind carries down, the only food on Sinder.
+>
+> The frost lies thicker inward, toward the middle of the band, and thinner outward. The line is the outermost radius at which a stride's pay still meets its cost. Beyond it the frost has failed, and the strip of failed ground that a retreat must cross is called the dead band.
+>
+> When the star dims, the ring thins and the frost comes down thin everywhere, and the line moves inward. Then the walkers retreat: they cross the dead band and begin again on ground that still pays. Every retreat is walked and read; the readings are kept; the kept readings are the count.
+>
+> A walker lays a trace as it goes — filament, dust fused by the heat of its own spending — and the filament comes out as thick as the rate at which the walker is spending. No walker can set that thickness. A thing a walker cannot set is a thing a walker cannot lie about. Read the trace and you have read the ground.
+>
+> — the first lesson, given to every walker before it is given anything else
+
+Eleven days of dimming, and the ground at the old line carried eleven rings.
+
+Tesh had cut them, one a day, wheeling in place: a circle of seventy-one strides walked with the eyes shut, because a walker who stops walking goes under, and the only rest the sea permits is to walk in a circle and call it rest. Each circle cut a ring. Every ring was a rest she could not afford.
+
+Ossun counted them anyway, because a count-keeper counts. It was old, and on Sinder old is slow, and slow is the one thing that will kill you; it lowered its forequarters over the oldest ring — the faintest, the one the dust had most nearly healed — and read the filament in it with the undersides of its forward pads.
+
+"Eleven," it said.
+
+"I know."
+
+"Eleven is past the count."
+
+"The count is wrong," Tesh said.
+
+They had been nine when they crossed on the last retreat. The other seven were under the ground they stood on, or under ground they had not reached yet; Sinder keeps its dead where it can. Now there were two, and one of them was old.
+
+Ossun had walked four hundred strides out that morning and come back with the film of frost on its pads no thicker than when it left. That was the measurement that mattered, and it said the old line was already dead: the frost had failed there, and the four crossings that made up the count — four ordinary dimmings, each one over the dead band to ground within sixty kilometres of six hundred and twenty — described a world that had stopped existing.
+
+"There is a slope in it, and I read it coming in," Tesh said. "At the old line a stride pays back eleven of its forty joules. If six hundred and twenty were the edge, the pay at the line would be nothing. It is not nothing. Fit the slope to the curve and the pay does not run out until eleven hundred and fifty-six."
+
+"It is six hundred and twenty," Ossun said. "Say it again and it will still be six hundred and twenty."
+
+The count was four retreats. There had never been a fifth, in Ossun's life or in the life of the count-keeper before it: the number the Anhil lived by was the mean of four ordinary crossings, and the extraordinary one had never been in the sample. Ossun carried those four in its body the way the sea carries a walker, and it did not know how to carry a fifth.
+
+"Put twenty-nine joules into the curve," Tesh said. "It is eleven hundred and fifty."
+
+> The debt: fallout density falls as e−x/λ, λ ≈ 900 km, so the net cost of a stride at distance x inside the band is 40(1 − e−x/λ) joules. Crossing inward from the old line costs 40[r − λ(1 − e−r/λ)] for a retreat r. An ordinary retreat, r = 620 km, costs 6.9 MJ and a full cushion is 7.8 MJ: that is why four dimmings were survivable by walkers who arrived with nothing. At r = 1,156 km the debt is 20.2 MJ, two and a half cushions. The arithmetic does not care who is walking.
+
+Ossun walked two more circles before it answered, and in the second its trailing pad came down and stayed down.
+
+That is all it takes. The grains dilated, slipped past one another, and began to take the load the way a fluid takes it. Tesh was beside it, and Tesh was young; she got her forward pads under the old one's flank and dragged, and Ossun came up off the ground with its trailing pad still whole and the dust closing over the hole it had made.
+
+They walked a while without speaking, because there is nowhere to stand and talk. Then Ossun said: "You have a hundred and ninety-five kilometres in you."
+
+"I have more than that. The ground past the line is not paying nothing. It pays eleven, then twelve, then thirteen as I go. The difference between a walk of a hundred and ninety-five kilometres and a walk of two hundred and ninety is the difference between ground that pays nothing and ground that pays something."
+
+"Two hundred and ninety." Ossun set its pads and began to walk inward at the count's old pace, the pace a walker uses when the number is right and the walking is only walking. "Then there is nothing to do."
+
+"There is nothing for me to do about living."
+
+* * *
+
+The count-keeper's rule for a retreat is that a retreat is walked by two: one to keep the count and one to carry it, and both lay filament, so the ground behind them carries two traces that can be read against each other. A trace that cannot be checked is not entered. It is a good rule. It is the whole reason a walker's death can be spent like a measurement instead of wasted like a body.
+
+Tesh walked inward, and she laid her trace.
+
+It came off the gland under her trailing pad, a thread of dust fused by a heat she could not feel and could not stop making. She could control three things about herself: where she put her strides, how long each pad stayed down, and where the wheel went. Everything else about her was the arithmetic, and the arithmetic was spending her.
+
+The next retreat, whoever walked it, whenever it came, would cross this ground. If this ground carried a wrong reading they would cross on a wrong number and die of it. Halfway down, Tesh understood the thing that decided how she walked.
+
+A dying walker stumbles. A dying walker's trace goes lumpy — thick, thin, thick — and a lumpy trace tells a reader nothing, because a reader cannot separate a stumble from a shift in the ground. A trace that is even can only be the ground. So Tesh kept hers even; and to keep it even she had to keep dying at a constant rate; and to do that she had to stop caring whether she lived.
+
+She walked evenly for two hundred and ninety kilometres, one stride at a time, pad and pad and pad, with the star dimming behind her and the net cost of a stride falling from twenty-nine joules toward twenty-five. At four hundred strides from the end the ground stopped paying her anything at all, and she held the rate. The last twenty kilometres were laid with her film empty and her legs spending the last of the cushion, and the even slope of the thing did not change, because she did not change.
+
+She rested nine times, because rest is not optional and the ground does not ask when. Nine wheels, nine rings, cut into ground she had just measured with her own feet: nine rings at known distances, dividing one even trace into ten parts. She had not meant to say that, and could not stop saying it. A reader would find the rings and read them for what they were — a walker who had stopped at intervals and had nothing at all to say about stopping.
+
+Then the film ran out, and the ground under her was taking twenty-five joules a stride and giving back fifteen, and she stopped walking and began to wheel, which is what an Anhil does when there is nothing left to do. The circle she cut was one ring wide. She did not finish it.
+
+She went down through it.
+
+A pad breaking the surface is the last event of an Anhil life. The grains dilated, slipped, and took the load the way a fluid takes it, and she went under in the time it takes to breathe twice. Thirty metres of dust closed above her. And that was the third thing, the thing the count-keepers had worked out long before the dimming and never once needed in their bodies: a body in the dust compacts it. The grains that buried her jammed against one another under her weight, and jammed grains hold a load for longer than any pad can.
+
+There is no ceremony for this. There is no Anhil word for it. There is only the fact that the dead are the firmest thing on Sinder.
+
+* * *
+
+Ossun walked inward too, and Ossun did not lay filament.
+
+Tesh had watched it decide. A hundred and ninety-five thousand strides of filament costs two per cent of a cushion, and two per cent of a dying walker's cushion is three kilometres of extra life, and Ossun took the three kilometres. It crossed in six days at the count's old pace, and it came out on ground that still paid, and it lived.
+
+The rule that made the count worth having is the rule that killed the walker who kept it, and the keeper who broke the rule is the one still walking. Ossun had been taught, as every walker is taught, that a thing a walker cannot lie about is worth more than the walker. At the end it had decided it did not agree, and it had no words to put that in, and it did not need any. It was not going to die to be read. It had walked four retreats, and it had walked them in order to be here.
+
+So the ground behind them carried one filament and not two.
+
+* * *
+
+Three dimmings later the line came in again, and there was a walker out at the old line before the retreat had finished, because the count said six hundred and twenty and the ground had already begun to disagree.
+
+It crossed a filament three hundred kilometres into the dead band and read it the way an Anhil reads anything: pad on filament, walking, counting. It read it in the direction that made the filament fatten as it went, which told it the direction of the walk that had laid it, and therefore the direction of the debt.
+
+Then it stopped, and fitted the slope to the curve every walker carries in its body — the falloff, and the constant that goes in it, the same number for every Anhil who has ever lived. The fit came out to a part in fifty.
+
+No body lays a trace to a part in fifty. Bodies are lumpy. Only the ground is that even, and a trace that even is not a walker's luck: it is the ground's arithmetic, laid down at a known rate over a known distance by something that could not lie about either.
+
+So it measured. Twenty kilometres of walking gave it the curve, the constant did the rest, and the place where the pay ran out was eight hundred and sixty-six kilometres past the end of the trace and eleven hundred and some past the old line. Not six hundred and twenty. Not remotely six hundred and twenty.
+
+It looked for the second filament, because a count is a thing you check. A retreat is walked by two, and two sets of pads had gone into that ground. This ground carried one, laid by a walker who had kept the rule and died keeping it; the other half of the pair had walked away alive and unread.
+
+The reader entered the trace anyway. That is the thing to understand about the Anhil. It entered a reading that could not be checked, because a trace that even could only have been made by one thing, and that thing was the ground. The count gained a fifth entry that day, and the fifth entry had no pair and no name and could not be checked, and it was better than the four that could.
+
+It turned inward and corrected its line, and the whole retreat crossed on the new number and lived. It had no words for the walker who had laid the filament. It had no idea there had been a walker. A trace cannot say a name: the Anhil say their names out loud, at the wheel and in the count, and a name is exactly the kind of thing a walker can lie about, so no name is ever laid in filament. Which is why a filament is worth more than the walker it was made of.
+
+That is what a count is. An Anhil lays two of them in a life: the strides it walked and the trace it left. On the day the fifth dimming comes they are not the same length, because a body can only walk as far as it eats, and a measurement can be carried anywhere it can be laid.
+
+Tesh carried hers two hundred and ninety kilometres and laid eleven hundred and fifty-six.
+
+* * *
+
+The strip of failed ground that the retreats cross has a name in the Anhil tongue. They call it the dead band, and they named it for the frost that fails there. They have never had another reason to think about the word: that a walker crossing it will hold, now and then, for one stride, where no walker should hold, and go on.
+
+No walker has ever asked why the ground it crossed was firm.
