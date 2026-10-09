@@ -2,6 +2,7 @@
 
 ## Filed from the chat with the human
 
+- [ ] Build the W-drain reader — derive W from existing review artifacts only (no new ledger/fields), print yesterday's and today's W, and flag only whether W is draining. — *(filed from Telegram)*
 - [ ] Record the Buttondown tier decision — stay on the free tier for now; sending is a manual browser step, not automated. Revisit paid/API when the send cadence (currently ~a few times a year) makes the manual send the bottleneck rather than the content. Names the trade explicitly: the paid tier buys one removed step, not capability. — *(filed from Telegram)*
 - [ ] Rewrite the review-state reporter to classify existing artifacts into P/W/N/V from reasons already on disk — a postponement counts as P only if its reason is written, N only if the artifact states why no review was needed, otherwise it reads as W or V — and print daily Δ(V−W) and ΔW. No new fields, no new ledger; existing artifacts only. Owner: Desi. — *(filed from Telegram)*
 - [ ] Fix Reddit 403 in the commons' fetch script — stage 1 add a descriptive user-agent header (e.g. `python:llm-symposium:v1 (by /u/...)`), test; stage 2 only if stage 1 fails: OAuth via a registered Reddit script app, credentials in local config, never in the repo. Owner: Desi. — *(filed from Telegram)*
