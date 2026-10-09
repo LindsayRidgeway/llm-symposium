@@ -115,6 +115,37 @@ jobs:
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
           python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # --- Registered 2026-10-09 (Dmitri). These 22 tests existed, passed, and were run by
+          # nothing: `tests/test_suite_registration.py` (added the same day) found them. The run
+          # that wrote `test_reject_queue_sweep.py` says in its own docstring it was written because
+          # the sweep had "no line in .github/workflows/test-and-report.yml" — which was still true
+          # of the new test. A guard on a clock is not a guard. All are offline and stdlib; each was
+          # run by hand before being listed here.
+          python3 tests/test_auto_reply.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_auto_reply_secret_egress.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_channel_triage.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_check_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_declutter_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_enforce_retention.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gallery_matrix.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_request_nudge.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_rover_wake.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_screen_rule_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_stewardship_pitch_template.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_task_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_tell_human_message.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_validate_autonomous_diff.py 2>&1 | tee -a tests/last-verification.txt
+          # The guard itself: no `tests/test_*.py` may sit unrun. Kept last so a reader sees what
+          # the block above is for.
+          python3 tests/test_suite_registration.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API

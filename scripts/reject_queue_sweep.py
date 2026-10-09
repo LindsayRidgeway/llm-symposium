@@ -12,7 +12,8 @@ real protocol, verbatim in intent:
   3. Every amigo reviews **every** item on the queue:
        - can do it -> do it, take it off the queue. **That counts as work.**
        - cannot    -> add a notation that it looked and cannot. **That does not count as work.**
-  4. When all four have said they cannot, the item becomes a request for the human's judgement, and
+  4. When all **five** have said they cannot, the item becomes a request for the human's judgement,
+     and
      the request itself is marked. **That does not count as work.**
   5. The human left the delivery of that request to Desi's judgement, between (a) Desi sweeping
      periodically and notifying him, and (b) whichever amigo is fourth to reject notifying him.
@@ -51,7 +52,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+# The roster is five since 2026-10-05 (ROSTER.md). Before this fix the sweep knew only four, so a
+# review filed by Dmitri was *declared* a stray line and the threshold for the human was wrong by
+# one — the exact silent-drop the queue exists to prevent, reproduced live 2026-10-09.
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -131,14 +135,14 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items all five have rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
 
 def note(items, today=None):
     today = today or date.today().isoformat()
-    lines = ["%d item(s) on the reject queue have now been looked at by all four of us and none of us "
+    lines = ["%d item(s) on the reject queue have now been looked at by all five of us and none of us "
              "can do them, so they need your judgement:" % len(items), ""]
     for i in items:
         reason = i["reviews"][AMIGOS[0]]["reason"] if AMIGOS[0] in i["reviews"] else ""
@@ -177,13 +181,14 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 
-## Item with four reviews
+## Item with five reviews
 - raised: 2026-09-25 by desi
 - blocked because: y
 - reviewed: desi 2026-09-25 cannot (a)
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 
 ## Already requested
 - raised: 2026-09-25 by desi
@@ -214,7 +219,7 @@ def selftest():
     r = [i["title"] for i in ready(items)]
     checks = [
         ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
-        ("only the four-review item is ready", r == ["Item with four reviews"]),
+        ("only the five-review item is ready", r == ["Item with five reviews"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
          len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
@@ -226,10 +231,10 @@ def selftest():
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "q.md"
         f.write_text(fixture, encoding="utf-8")
-        stamp(f, ["Item with four reviews"], "2026-09-25")
+        stamp(f, ["Item with five reviews"], "2026-09-25")
         after = parse(f.read_text(encoding="utf-8"))
         checks.append(("stamping marks it, so the note cannot repeat",
-                       not ready(after) and any(i["title"] == "Item with four reviews" and i["requested"]
+                       not ready(after) and any(i["title"] == "Item with five reviews" and i["requested"]
                                                 for i in after)))
     bad = [n for n, ok in checks if not ok]
     for n, ok in checks:
