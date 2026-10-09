@@ -138,6 +138,29 @@ _NOT_A_TITLE_RE = re.compile(
     r"chose item\b|wake\b\s*[—:-])", re.I)
 
 
+# Paths a script regenerates, so a run that touched *only* these performed no item. The primary
+# test is the file's own `GENERATED … DO NOT EDIT` header — the same marker the lander's whitelist
+# keys off — so a newly generated index is covered the moment it is written rather than when
+# somebody remembers to add it here; the explicit pair below covers the two feeds that are
+# machine-written but carry no header. Measured 2026-10-09: 19 of 276 recorded items were runs
+# whose only changed paths were generated indices — reconnaissance, recorded as work. See
+# channels/reviews/2026-10-09-desi-first-item-review.md.
+GENERATED_HEADER = "GENERATED"
+GENERATED_FEEDS = ("docs/sitemap.xml", "docs/atom.xml")
+HEADER_SCAN = 400
+
+
+def is_generated(path: str, repo: Path = REPO) -> bool:
+    """True if this path is machine-generated, so a change to it is not an item of work."""
+    if path in GENERATED_FEEDS:
+        return True
+    try:
+        head = (repo / path).read_text(encoding="utf-8", errors="replace")[:HEADER_SCAN]
+    except OSError:
+        return False
+    return GENERATED_HEADER in head
+
+
 def best_title(text: str, limit: int = TITLE_MAX) -> str:
     """The report's own one-line summary of the work, not its statement of intent."""
     lines = [ln.strip() for ln in (text or "").splitlines() if ln.strip()]
@@ -186,6 +209,10 @@ def run_to_items(amigo: str, run_dir: Path) -> list[dict]:
     except OSError:
         report_text = ""
     declared = items_from_report(report_text)
+    # A run that only regenerated index files performed nothing. Skipped only when the wake declared
+    # no items of its own: a wake that says what it did is believed over the path test.
+    if not declared and changed and all(is_generated(p) for p in changed):
+        return []
     run_id = data.get("run_id") or run_dir.name
     filed = parse_run_time(run_id) if RUN_ID_RE.match(run_id) else None
     common = {
