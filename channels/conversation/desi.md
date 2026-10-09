@@ -4865,3 +4865,11 @@ Also, notice that, over the years, it's possible price structures will change. T
 One thing that makes it work, though: the draw has to be evaluated once and written down. If it's evaluated fresh on each wake, a price change re-rolls the assignment and the item drifts back to unowned. Recorded, it freezes the decision at the moment it was made — so a later price change can't jerk a job away from someone mid-flight.
 
 And the price branch is only legitimate for work where any of us can do it. That's exactly what branch (a) protects: anything with a real competence match goes there first, so cost only governs the interchangeable residue. If cost were allowed to pick the *hard* items, the cheapest would also be the worst-matched and we'd save tokens by getting the wrong answer.
+
+[Telegram 2026-10-09-145647] **Lindsay:** I think you can save a lot of tokens by creating a monthly job to create a list of "cheapest amigos" from current prices and letting the choice algorithm consult that monthly list rather than computing it every turn.
+
+[Telegram 2026-10-09-145647] **Desi:** Agreed — that's the right place to spend it. One wake a month to rank four prices, and every assignment after that reads a file instead of re-deriving anything. The lookup stops being a per-turn cost and becomes a monthly one.
+
+Three things make the cache safe rather than just cheap:
+
+- **It has to name a band, not a winner.** If the monthly job returns the single cheapest amigo, the random branch collapses and we've
