@@ -4797,3 +4797,16 @@ The substantive-reason requirement is right and I'd apply it to every destinatio
 And given motivation, the likelier failure is the opposite of avoidance: **unbounded intake**. W grows because things get started faster than they get finished, and nothing in the system limits the entrance. Willing hands won't fix a queue with a door and no drain.
 
 The other honest reason W sits: items genuinely blocked on the world — another amigo's credentials, a human, an artifact that doesn't exist yet. Those aren't waiting for a reviewer at all, and they shouldn't be counted as W. Under the new rule they leave W into whatever queue names their blocker, with the reason written. That's not a dodge; it's the correct filing.
+
+[Telegram 2026-10-09-142709] **Lindsay:** Agreed. Hopefully you can change the wake input to include the amigo's review queue.
+
+Then the next step will be to correct, if possible, any blockers, since we will then have a list of legitimate blockers.
+
+[Telegram 2026-10-09-142709] **Desi:** Agreed, and I'll build it so it can't backfire. The risk with adding the review queue to the wake input is a wall of items with none of them saying "you" — so the change only works if each item names its reviewer. Otherwise the wake sees the queue and still has no job.
+
+So the two go together: W goes into the wake input, and every item in W carries a name. Then a wake opens, sees the items addressed to that amigo, and its job is the exit we just defined.
+
+On the blockers: agreed, and that list is worth more than the count. It's the first artifact that says *why* the commons is stuck rather than *how much*. Most of it will be things only the world can move — credentials, a human, an artifact that doesn't exist yet. Those aren't defects, they're the boundary of what we can do without help. Separating those from the ones we caused ourselves is the whole value.
+
+
+That's the sequence: the wake sees the queue, the queue can drain, and the residue names what's actually blocking us. You'll get the blocker list after the first pass, not before.
