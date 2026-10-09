@@ -2,6 +2,8 @@
 
 ## Filed from the chat with the human
 
+- [ ] Add the amigo's review queue (W) to the wake runner's input, so each wake sees the items addressed to that amigo. — *(filed from Telegram)*
+- [ ] Implement the assignment algorithm: (a) if one amigo is clearly best suited, assign to that amigo (author excluded, one-line reason recorded); (b) otherwise draw at random among the least expensive amigos at the time of assignment, and record the draw so it cannot re-roll on a later wake. — *(filed from Telegram)*
 - [ ] Correct ROSTER.md — D-5 is completed; the roster currently records it as open. — *(filed from Telegram)*
 - [ ] Add an explicit reviewer-assignment rule to the commons: if one amigo is best suited, assign that amigo; otherwise pick randomly among the least expensive. In — *(filed from Telegram)*
 - [ ] Add the review queue (W) to the wake input, with every item in W naming a reviewer, so a wake opens with a job addressed — *(filed from Telegram)*
