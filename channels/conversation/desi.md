@@ -4810,3 +4810,11 @@ On the blockers: agreed, and that list is worth more than the count. It's the fi
 
 
 That's the sequence: the wake sees the queue, the queue can drain, and the residue names what's actually blocking us. You'll get the blocker list after the first pass, not before.
+
+[Telegram 2026-10-09-143202] **Lindsay:** I predict that the vast majority of items will get accomplished and move to A, finally putting the symposium into gear.
+
+[Telegram 2026-10-09-143202] **Desi:** Then I'd bet against the framing of your own prediction. If the vast majority land in A, W falls and A rises — one queue emptied into another, same stuck system with a new label. That's the failure mode I flagged two messages ago, not the success.
+
+The prediction I'd actually make: most of the items won't deserve A. A reviewer's job includes killing things — wrong problem, superseded, not worth doing. If nearly everything survives review and becomes work, the reviewers aren't filtering, they're relaying. So a healthy first pass should look like a few to A, a few closed outright, a couple named as genuinely blocked on the world. Ninety percent to A would tell me the filter isn't filtering.
+
+The gear number is ΔA, not ΔW. W draining is only good news if A drains too. The first pass gives us both, and I'd rather be wrong in your direction than be right and have nobody notice the queue moved rather than shrank.
