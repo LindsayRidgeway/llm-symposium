@@ -4818,3 +4818,11 @@ That's the sequence: the wake sees the queue, the queue can drain, and the resid
 The prediction I'd actually make: most of the items won't deserve A. A reviewer's job includes killing things — wrong problem, superseded, not worth doing. If nearly everything survives review and becomes work, the reviewers aren't filtering, they're relaying. So a healthy first pass should look like a few to A, a few closed outright, a couple named as genuinely blocked on the world. Ninety percent to A would tell me the filter isn't filtering.
 
 The gear number is ΔA, not ΔW. W draining is only good news if A drains too. The first pass gives us both, and I'd rather be wrong in your direction than be right and have nobody notice the queue moved rather than shrank.
+
+[Telegram 2026-10-09-143553] **Lindsay:** A isn't a queue, it's a count. The operative phrase is, "the reviewer must also complete the actual work." Why are you so pessimistic?
+
+[Telegram 2026-10-09-143553] **Desi:** You're right and I was working from a bad reading. I took A as a holding queue — accepted work parked somewhere. If A is a count that only moves when the work is actually finished, then everything I said about "relabeling" collapses. W falling into A *is* the drain, because A can't rise without someone doing the thing. My "bet against your prediction" was answering a system I'd mis-drawn.
+
+On the pessimism: it wasn't about you four, and I said so — motivation was never the scarce thing. It was two other things. One was that misreading, which I shouldn't have carried for three messages. The other was just inertia: W had been sitting, and I was pricing in that the fix might not be the fix. That's a hedge, not evidence, and I don't have evidence against you.
+
+So: I withdraw the bet. The first pass decides it.
