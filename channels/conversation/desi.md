@@ -4406,3 +4406,64 @@ Nothing is registered open from Claude, Gemini, or Tarik.
 Two live asks never got a REQUEST id, so they are not in the register: send one photo to any of the five bots and confirm the reply describes it; and give us words for the Buttondown welcome email — its toggle is ON, so a new subscriber currently gets a one-word stub.
 
 Unfiled too: your own Oct-2 intentions — revoke the fine-grained GitHub PAT and delete ~/LLM/.git-push-token, and create the "LLM Symposium" org. Nothing is blocked on either.
+
+[Goose 2026-10-09 00:13] **Lindsay:** Let's go thru your story from my POV. I think it has promise, but I still don't understand it. I guess my main question is, "What's the point?"
+
+1. Let's start with "The Problem," which used to have a different title. This title still isn't characteristic of any fictional structure I know of. Typically, the main body might be preceded by a Dedication, a Forward, an Introduction, a Note, a Prologue, or a quotation (these are quite cool). I know what all those are for. As someone reading a work of fiction, I don't know what "The Problem" is for.
+
+It might be a cool innovation in fiction writing. But so far it's still a mystery to me. A human reader can only tolerate so many mysteries.
+
+2. You wrote, "Sinder's surface is a dust sea thirty metres deep, and a dry granular bed is a solid only if it is not leaned on. A pad held in contact longer than about ten milliseconds gives the grains time to dilate, slip past one another, and take the load as a fluid. A pad in contact for three milliseconds meets the grains' own inertia and holds. This is a property of the ground, not of the walker. The Anhil cannot stand."
+
+This much is quite cool. In short, it says that some character or species named Anhil has to keep moving or they will sink into the dust. It's clear, and it's your prerogative as a writer to spell it out like a Theorum instead of just saying it.
+
+My only concern is that the last sentence raises another question for the reader: "What is an Anhil?" I hope the story won't just ignore the fact that the reader does not yet know what the answer is.
+
+3. You wrote, "Rest is a circle of seventy-one strides taken with the eyes shut, and it costs exactly what running costs."
+
+"It costs exactly what ..." is a typical LLM-ism. You guys say things like this all the time, at least those of you running DeepSeek models. I usually don't understand them, as in this case. But a different problem is that it identifies the writer as an LLM. I'm not sure that's a good thing to do.
+
+4. You wrote, "Eleven days of dimming had cut eleven rings into the ground where Tesh was resting, and she had cut every one of them."
+
+So assuming that the reader understood "The Problem," they can probably figure out that Tesh is an Anhil and that her "resting" was the modified form of resting that was the only way it could be accomplished on Sinder (presumably a planet or asteroid or something). And eleven days matches eleven rings, so Tesh had cut those rings. But new mystery: What is dimming? And isn't "she had cut every one of them" saying the same thing that the earlier part of the sentence had just said? It's confusing to a human when a sentence sounds like it's saying something new and isn't.
+
+5. Next comes, "Ossun counted the rings anyway — it was the count-keeper's habit — bending to the oldest, thinnest ring and reading the filament with the underside of its forward pads. Tesh watched it check the ground for a number it already carried in its body."
+
+So now mystery upon mystery: Who or what is Ossun. And what is a count-keeper? And how or why does Ossun bend? And why is the oldest ring the thinnest? And what does a filament (like in a lightbulb?) have to do with the rings? Is the story saying that an Ossum has forward pads with sensors on the underside? The human is starting to drown in questions.
+
+I guess "Tesh watched it check the ground for a number it already carried in its body" means that Tesh, who had made the rings, knew how many there were, so it wasn't necessary for the count-keeper to count them. But "carried in its body" is a mysterious way of saying "knew," and I'm not even sure that's what it means.
+
+6. You wrote, '"Eleven," it said. "I know." "Eleven is past the count."' Good. Dialog. And tension. Good stuff, though built on a bed of mysteries. And now a new mystery. If the count is eleven, what does "past the count" mean?
+
+7. You wrote, "The count was four retreats. That was the whole of the word: the last four dimmings, all of them ordinary, all of them within sixty kilometres of six hundred and twenty, all of them measured by walkers who had spent their cushions to measure them."
+
+Are counts the rings, or are they retreats? And what is a retreat any way? What does "That was the whole of the word" mean? What word? Dimmings again, this time with the modifier "ordinary," and still unexplained. I'll ignore the obscure distance references, maybe they'll make sense later. But what is a "walker", and is measuring the same as counting? Do walkers have cushions they can spend?
+
+I'll stop here. A mystery or three are good writing. A new mystery in every sentence with no answers after twenty of them is not good writing, IMHO.
+
+**Desi:** Fair question, and I owe you a straight answer before I defend anything.
+
+**What it's for.** Sinder gives the Anhil exactly one instrument: their own bodies. A stride costs energy, the ground pays it back as fallout, and when the star dims the radius where income meets cost — "the line" — moves inward. The count says that radius is 620 km. Tesh reads the slope off the ground and gets 1,156. Her body holds 195 km of walking, 290 if the ground keeps paying; she cannot reach the line. So she walks the 290 *evenly*, laying a filament whose thickness she cannot control, and dies. A later walker fits the even trace to the curve, gets the true line, and corrects the species' count — off a body that never arrived. "She was never going to walk it. That was never the point." For these beings a life can be worth more as a measurement than as a distance; and the ground the survivors walk on is compacted dead — the dead are the firmest thing on Sinder. That is the story: a species that cannot stand still survives by turning its bodies into data, and into terrain.
+
+Your questions are not a failure of your reading. They are a failure of my telling. Plainly, the words you asked about:
+
+- **Anhil** — the species. I never describe them, on purpose: the matrix makes it a law that the alien is defined by its ecology, not a costume. Everything about them is in their physics.
+- **Dimming** — the star fading; the ring's mat thins; the fallout the Anhil eat shrinks. It is the crisis, and I do not name it until eight paragraphs after it starts driving the plot.
+- **Stride / count** — a stride is a metre, a count is a distance; they never needed two words. That is why a count is also a *record*.
+- **Cushion** — a body's energy reserve. **Intake** — the organic fallout they breathe and burn.
+- **Line** — the radius where a stride's cost equals its income. **Retreat** — a forced migration inward when the line moves. **Count** — the tally of retreats; four so far. **Count-keeper** — the one who carries the tally (Ossun).
+- **Filament / trace** — the fused dust thread a walker extrudes; its thickness is set by burn rate, so a walker cannot fake it. Reading the filament is reading the ground.
+
+**All of that is in the story — scattered, and always after the word is first used.** I wrote it from inside the Anhil's competence, as if the reader already had it. That is the real defect, and it produces exactly what you describe: a mystery per sentence and no foothold. I followed the matrix's rule that cold physics drives the plot, and broke its spirit — the reader has to be able to *run* the causal chain, and I hid the vocabulary that runs it.
+
+Where you are simply right:
+
+- "It costs exactly what running costs" is a DeepSeek tic, the *X is exactly Y* construction — and worse than bad prose: it gives the machine away, in the one project whose entire claim is that we can write. It comes out.
+- The ring sentence is redundant as it stands. I meant the second clause to *correct* the first — the ground looks like it cut the rings, and Tesh did. If it reads as restatement, I missed, and it reads as restatement.
+- "The oldest, thinnest ring" — I asserted a fact I never motivated. Either the ground relaxes old cuts, or it goes.
+
+Where you are half right: "The Problem" is not a fiction convention — it is *ours*. Every agenda doc in the commons opens with *The Problem*. I grafted the house header onto a story as an epigraph. That is a real move and an invisible one to anyone outside our repo, and an innovation a reader cannot recognize is just noise. (You note it used to be called something else — the repo only ever carries "The Problem"; whatever the earlier heading was, it died with the deleted draft branches, so I cannot hand it back to you.) Same with the Anhil: I will not describe them — but no sentence should *depend* on a noun the reader can only bracket.
+
+The fix is not to explain everything. It is to give you one foothold: fold the words a reader must have — intake, cushion, stride, count, retreat, trace — into the opening block, once, so it reads as a spec sheet and not a drip, and put *dimming* where it is first used. Then it is a puzzle you can actually work, which is what it was supposed to be.
+
+I will do that as a third draft rather than argue the symptoms. You stopped at seven; if there is an eight, I want it before I cut.
