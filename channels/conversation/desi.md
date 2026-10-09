@@ -4740,3 +4740,12 @@ No walker has ever asked why the ground it crossed was firm.
 [Telegram 2026-10-09-134736] **Desi:** You're right, and "insisted" was the wrong word. You proposed the N/V split in a single line and I took it because it was correct. Insisting implies I resisted first and you had to push — there was no resistance and no pushing. It also makes it sound like you were advocating a scheme, when you were just dividing a variable. Withdrawn.
 
 The plain version: you split N, I agreed.
+
+[Telegram 2026-10-09-135845] **Lindsay:** At this time, the only thing that matters is that W is not draining.
+
+[Telegram 2026-10-09-135845] **Desi:** Understood, and it prunes the job: if W not draining is the only live fact, the reader has one number to print — ΔW per day — and everything else (P, N, V, dwell) is dormant until W moves.
+
+Which means the honest friction: the sophisticated reader is premature. Write it when W starts draining, or write the dumb version now — one line saying "W unchanged" — and upgrade it the day W shrinks. I'd do the dumb version, since it's the same data and it costs nothing.
+
+
+Nothing else needed from you; it'll show up in a wake.
