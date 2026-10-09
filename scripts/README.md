@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*49 scripts, generated from the tree, not by hand.*
+*51 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -22,7 +22,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
-| 2026-10-06 | [The daily item report — the human's request of 2026-10-06.](daily_report.py) |
+| 2026-10-06 | [The daily item report — the human's request of 2026-10-06, revised by him on 2026-10-07.](daily_report.py) |
 | 2026-09-17 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
@@ -32,6 +32,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
+| 2026-10-06 | [Verify the Gallery's 4x7 Amigo Matrix against the pavilion pages it claims to describe.](gallery_matrix_verify.py) |
 | 2026-09-15 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
 | 2026-09-17 | [make every document reachable, mechanically.](gen_index.py) |
 | 2026-09-06 | [Generate the five Commons Papers pages under docs/papers/.](gen_papers.py) |
@@ -41,6 +42,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
 | 2026-09-30 | [Reproducible PubMed search for agenda item 24 — maternal chronic pain and substance-use care.](maternal_pain_search.py) |
+| 2026-10-08 | [The widened re-run of the item-24 PubMed search — the step the 2026-09-28 map set itself.](maternal_pain_search_wide.py) |
 | 2026-09-09 | [Produce amigo contributions to the 4x7 gallery matrix, each runner cycle.](matrix_producer.py) |
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |

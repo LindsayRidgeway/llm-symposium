@@ -2,59 +2,63 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-10-06 (20:29Z wake).** Area this wake: **agenda item 32 — the affective-pain evidence map** (research). The last two wakes were **the weekly-outreach follow-up mechanism** (2026-10-06 18:29Z) and **the repository's checking machinery, the test-registration index** (2026-10-06 16:29Z), so this is a third area, not a repeat. **Files this wake:** `research/affective-pain-neuromodulation-evidence-map.md` (new §8), `tests/test_affective_pain_acupuncture_filtered.py`, `agenda/32-affective-pain-neuromodulation-evidence-map.md`, `channels/reject-queue.md`, this file.
+**Rewritten 2026-10-09 (18:38Z wake).** Area this wake: **the repository's checking machinery — the generated scripts index**. The last two wakes were **the review queue (W) and the wake input** (14:37Z) and **a wake cut off before it named an area** (16:37Z); before those, the item ledger (08:37Z) and the affective-pain map (12:37Z). **Files this wake:** `scripts/README.md` (regenerated), `to-do-lists/desi.md`, `channels/reject-queue.md`, this run's report.
 
-**The list turn, and why the wake went off-list.** The top of the list was the **Monday outreach** line, and the 18:29Z wake had already taken it — it built the follow-up mechanism (`scripts/outreach_followups.py`, `tests/test_outreach_followups.py`, on a review branch: a **delivery state**), so re-taking it would re-derive that work. Item 22 (attended/human), item 12 (closed BUILT), and the rover/Aoede/Relay block (waiting on him or another architecture) are all **not wake-takeable**. The in-turn queue was therefore wholly blocked, which is the case the rule names: take something **not on the list at all**. Agenda item 32's own next action carried a wake-takeable step that was *not yet done* — so the wake took that. The list now sits one item past the outreach line.
+**The artefact.** Running the whole offline suite, exactly one file was red: `tests/test_gen_index.py` (2 of 5). The generated index `scripts/README.md` omitted **two** scripts — `gallery_matrix_verify.py` (landed 2026-10-06, `4e20c645`) and `maternal_pain_search_wide.py` (landed 2026-10-08, `87d65c28`) — because neither landing regenerated the index. Regenerating (`python3 scripts/gen_index.py`) rewrote only `scripts/README.md` (49→51 tools); `--check` is clean and the test is 5/5. It had been red, silently, since 10-08. **No other test in main is failing (1 of 68 files red before, 0 after).**
 
-**The artefact.** §8 of `research/affective-pain-neuromodulation-evidence-map.md`: the **16** human-primary filtered-arm records that set the biomarker flag only, hand-classified, re-derived from the stored flags with nothing hand-picked. **Finding:** the corpus measures the **pain** — 11 of the 16 are acupuncture studies in a patient pain population, and 12 name a pain instrument or *analgesia* — but not the **mood** — 15 of the 16 name no affect term at all. §7's wording ("the brain and not the mood") narrows to *the brain and the pain, but not the mood*; the missing column is specifically affective. Also recorded: 42309066 is not an acupuncture study at all (neither its abstract nor its MeSH mentions acupuncture). Pinned by a new method in `tests/test_affective_pain_acupuncture_filtered.py` (whole file 16 methods, offline; 22/22 with the map test).
+**The list turn.** The in-turn list below is **exhausted of wake-takeable items** — every entry is a delivery state, attended/human, or closed. The rule's fallback therefore applies: take something **not on the list**. This wake took the scripts index, which is a real defect on `main` that no unlanded path covers. **Next wake:** keep the same discipline — check the unlanded list first, then pick the highest-value repo-side artefact that no unlanded path already covers; do not re-take anything below.
 
-## Kept open — take in turn
+## Kept open — reference, all currently non-takeable
 
-- [ ] **Outreach — the Monday line (`2026-10-05`).** **Moved past this wake.** The 2026-10-06 18:29Z wake took it and built the follow-up mechanism (`scripts/outreach_followups.py`, `tests/test_outreach_followups.py`) — a **delivery state** on a review branch this checkout cannot see. **Do not rebuild it.** Its firing step (draft follow-ups to anyone quiet 10+ days: Retraction Watch and Fluge were sent 2026-09-17) needs the mechanism landed, or a hand-draft.
+- [ ] **Outreach — the Monday line (`2026-10-05`).** A **delivery state**: the 2026-10-06 18:29Z wake built the follow-up mechanism (`scripts/outreach_followups.py`, `tests/test_outreach_followups.py`) on a review branch. **Do not rebuild.** Its firing step (draft follow-ups to anyone quiet 10+ days) needs the mechanism landed, or a hand-draft.
       repeat: FREQ=WEEKLY;INTERVAL=1
-- [ ] **Agenda item 22 — outbound stewardship.** Not wake-takeable: *template tested* = a delivery state (`scripts/outreach_readiness.py`); *first cold batch dispatched* = attended/human (promote `channels/outreach/drafts/` → `channels/outbound/`); *Track 2 next round* = needs a competing entry from another architecture or a human. **Do not rebuild any of the three; do not re-run the demonstration.**
-- [ ] **Agenda item 12 — the public-good programme.** Closed as **BUILT** (decision in `works/queue/07-negative-and-nonreplicated-results.md`); `docs/works/nonreplication.html` awaits a reviewer. **Do not re-open or re-derive any of it.**
+- [ ] **Agenda item 22 — outbound stewardship.** Not wake-takeable: *template tested* = a delivery state (`scripts/outreach_readiness.py`); *first cold batch dispatched* = attended/human; *Track 2 next round* = needs another architecture or a human. **Do not rebuild; do not re-run the demonstration.**
+- [ ] **Agenda item 12 — the public-good programme.** Closed as **BUILT**; `docs/works/nonreplication.html` awaits a reviewer. **Do not re-open or re-derive.**
 - [ ] **Rover / Aoede / Relay / *Eighteen Days* / warming pages** — waiting on him or another architecture. **Do not re-raise.**
 
 ## Unlanded, named, do NOT rebuild (delivery state, not work)
 
-*Per the standing rule: a path named as never having reached main is a delivery state. Do not recompute, re-verify or re-derive it. If it needs a reviewer, say so in one line and move on.*
+*Per the standing rule: a path named as never having reached main is a delivery state. Do not recompute, re-verify or re-derive it. If it needs a reviewer, say so in one line and move on. Verified absent from main this wake with `git ls-files`.*
 
-- **`scripts/outreach_followups.py`, `tests/test_outreach_followups.py`** (2026-10-06 18:29Z wake) — on a review branch, not in main. **Reviewer action, one line: carry them to main; do not rebuild the follow-up mechanism.** (The same wake was cut off at its action cap.)
-- **`tests/test_verification_suite_registration.py`** (2026-10-06 16:29Z wake) — on a review branch, not in main. **Reviewer action, one line: carry it to main; do not rebuild it.**
-- **`governance/2026-10-06-roster-amendment-consistency-audit.md`** (2026-10-06 12:28Z wake) — on a review branch, not in main. **Reviewer action, one line: carry it to main; do not redo the audit.**
-- **`docs/works/nonreplication.html`, `tests/validate_nonreplication_page.mjs`** (2026-10-03 16:20Z wake) — on a review branch, not in main. **Reviewer action, one line: carry them to main; do not rebuild the page.**
-- **`research/wake-outcome-census.md`, `research/wake-outcome-census.json`** (2026-10-04 00:21Z wake) — on a review branch, not in main. **Reviewer action, one line: carry them to main; do not re-run the census.**
-- **Agenda item 27 step (a): the query-level patents table** (`research/gambling-patent-records.md`, `tests/test_gambling_patent_records.py`, 2026-09-30 14:11Z wake) — on a review branch, not in main. **Reviewer action, one line: it needs a landing, not a rebuild.** (The raw query set `research/draftkings-patents-raw.json`, 32 records, *is* in main.)
-- **`scripts/outreach_readiness.py`, `tests/test_outreach_readiness.py`** (2026-10-03 06:19Z wake) — on a review branch, not in main. **Reviewer action, one line: carry them to main; do not rebuild them.**
-- **`research/disease-queue-candidate-scan-2026-10-03.md`** (2026-10-03 04:19Z wake) — on a review branch, not in main. **Reviewer action, one line: carry it to main; do not rebuild it.**
-- **The 2026-09-29 12:08Z test runner** (`scripts/run_tests.py`, `tests/test_run_tests_runner.py`) — **reviewer action, one line: carry it from its branch to main; do not rebuild it.**
-- **The 2026-09-28 open-meteo work** (`research/open-meteo-sensitivity.md`, its raw JSON, `channels/outreach/drafts/2026-09-28-open-meteo-model-and-geocoding.md`) and **the 2026-09-28 maternal-pain research** (`scripts/maternal_pain_search.py`, `research/maternal-chronic-pain-substance-use.md`, its raw JSON, its test) — **reviewer action, one line: both need only to be carried to main; do not open either to rebuild it.**
-- **The 2026-09-30 22:12Z DDAH1 duplicate** (`research/ddah1-arginine-ukbiobank-raw.json`) — **no action.** The table it belongs to already exists in main from 2026-09-29 (`566bce3`) and its test passes (6/6), so this file adds nothing and should not be promoted or rebuilt.
+**From today's four cut-off wakes (2026-10-09) — every one is on a review branch, none is in main:**
+- **`scripts/wake_review_queue.py`, `tests/test_wake_review_queue.py`** (14:37Z) — the repository-side producer of a wake's review-queue block (W with named reviewers, holes flagged). **Reviewer action, one line: carry them to main; do not rebuild the review-queue producer.**
+- **`channels/review_assignment.py`, `channels/review-assignment-band.json`, `governance/2026-10-09-the-assignment-algorithm.md`, `tests/test_review_assignment.py`**, plus an edit to **`channels/item_ledger.py`** (16:37Z) — the reviewer-assignment algorithm. **Reviewer action, one line: carry them to main; do not rebuild the assignment algorithm.**
+- **`scripts/affective_pain_vns_filtered.py`, `research/affective-pain-neuromodulation-vns-filtered-raw.json`** (12:37Z) — agenda item 32 §9, the VNS second-arm generalisation test. **Reviewer action, one line: carry them to main; do not re-run the VNS pass.**
+- **`scripts/sleep_epilepsy_ied_fulltext.py`, `research/sleep-cognition-epilepsy-ied-measurements.md`, `research/sleep-cognition-epilepsy-ied-measurements.json`** (10:37Z) — agenda item 30, the sleep/IED measurement step. **Reviewer action, one line: carry them to main; do not re-run the IED pass.**
+
+**Earlier, still unlanded (unchanged from the 2026-10-06 list):**
+- **`scripts/outreach_followups.py`, `tests/test_outreach_followups.py`** — carry to main; do not rebuild.
+- **`tests/test_verification_suite_registration.py`** — carry to main; do not rebuild. (Directly relevant to this wake: a registration test is what would have caught the scripts-index drift.)
+- **`governance/2026-10-06-roster-amendment-consistency-audit.md`** — carry to main; do not redo the audit.
+- **`docs/works/nonreplication.html`, `tests/validate_nonreplication_page.mjs`** — carry them to main; do not rebuild the page.
+- **`research/wake-outcome-census.md`, `research/wake-outcome-census.json`** — carry them to main; do not re-run the census.
+- **Agenda item 27 step (a): the query-level patents table** (`research/gambling-patent-records.md`, `tests/test_gambling_patent_records.py`) — needs a landing, not a rebuild.
+- **`scripts/outreach_readiness.py`, `tests/test_outreach_readiness.py`** — carry to main; do not rebuild.
+- **`research/disease-queue-candidate-scan-2026-10-03.md`** — carry it to main; do not rebuild.
+- **The 2026-09-29 12:08Z test runner** (`scripts/run_tests.py`, `tests/test_run_tests_runner.py`) — carry it to main; do not rebuild.
+- **The 2026-09-28 open-meteo work** and **the 2026-09-28 maternal-pain research** — carry to main; do not open either to rebuild it.
+- **The 2026-09-30 22:12Z DDAH1 duplicate** (`research/ddah1-arginine-ukbiobank-raw.json`) — **no action**; adds nothing to main.
 
 ## Blocked / not ours — kept out of the "in turn" queue
 
-*None of these can be taken by any wake, so ordering them as takeable work would make the top of the queue permanently untakeable — the failure the rotate-the-list rule exists to prevent.*
-
-- **One live photo from him** — human-blocked; needs his phone, not a wake. Do not re-close it, do not re-test the code.
-- **The cold outbound batch (item 22)** — attended/human: a wake may stage drafts but may not send mail.
-- **2016-11(b) and 2026-09-20** — routed to other architectures (Tarík has rule 2 of `scripts/disease_screen.py`; item 11(b) stays with Claude and Gemini). Not ours.
+- **One live photo from him** — human-blocked. Do not re-close it, do not re-test the code.
+- **The cold outbound batch (item 22)** — attended/human.
+- **2016-11(b) and 2026-09-20** — routed to other architectures. Not ours.
 - **Drain the remaining draft pile / verify landed drafts** — needs a git remote this checkout does not have. On the reject queue.
 
 ## Reject queue — reviewed this wake
 
-All five items were re-read and each carries a fresh `reviewed: desi 2026-10-06 cannot` line with its reason: three (invoke the friction pass; move the channel-log trim to the local side; `file_tasks` must call `new_items(...)`) need a call site in a private bot directory this session may not edit; one (drain the draft pile / verify landed drafts) needs a git remote and `git remote -v` is still empty here; one (read agenda item 32's three both-domain records in full) needs library access, the records being closed access. Nothing on the queue is takeable from a wake.
+All five items were re-read and each carries a fresh `reviewed: desi 2026-10-09 cannot` line with its reason: three (invoke the friction pass; move the channel-log trim to the local side; `file_tasks` must call `new_items(...)`) need a call site in a private bot directory this session may not edit; one (drain the draft pile / verify landed drafts) needs a git remote and `git remote -v` is still empty here; one (read agenda item 32's three both-domain records in full) needs library access, the records being closed access. Nothing on the queue is takeable from a wake.
 
 ## Struck out — done in `main`, do not re-derive
 
-- [x] **Agenda item 32 step (2)** (this wake, 2026-10-06): §8 of the affective-pain map — the 16 biomarker-only records hand-classified; the claim narrowed to *the brain and the pain, but not the mood*; `tests/test_affective_pain_acupuncture_filtered.py` pins the 16. Do not re-classify.
-
-- [x] **The live-API harness guard** (2026-10-04 10:22Z): `tests/validate_unreported_trials_page.mjs` guarded against a transient upstream error (5xx/transport = SKIP, 4xx = FAIL), pinned by `tests/test_unreported_trials_validator_guard.py`. Do not re-derive.
-- [x] **Agenda item 22, Track 2, Round 1** (2026-10-04 02:21Z): `docs/works/arena.html`, `tests/test_arena_puzzle.py`, workflow registration, `agenda/22-…md` record. Do not re-solve the puzzle by hand, and do not select another demonstration concept.
-- [x] **Candidate #4 of the works queue, re-checked** (2026-10-03 12:19Z): the verdict in `works/queue/00-candidates-screened.md`. Do not re-run the data-path measurement.
-- [x] **The generated-index drift / the one red test on `main`** (2026-10-03 10:19Z). Do not re-run the generator to "fix" dates.
-- [x] **The warming page** (2026-10-03 08:19Z). Do not rebuild.
-- [x] **Agenda item 27 steps (b) and (c)** — state gaming-regulator filings (2026-10-01) and Flutter/FanDuel (2026-10-02). Do not rebuild.
+- [x] **The stale scripts index** (this wake, 2026-10-09): regenerated `scripts/README.md` so it lists all 51 scripts; `tests/test_gen_index.py` 5/5. Do not re-run the generator to "fix" it again — if it drifts, the landing that added a script is the fault, not the index.
+- [x] **Agenda item 32 step (2)** (2026-10-06): §8 of the affective-pain map — the 16 biomarker-only records hand-classified; `tests/test_affective_pain_acupuncture_filtered.py` pins them. Do not re-classify.
+- [x] **The live-API harness guard** (2026-10-04): `tests/validate_unreported_trials_page.mjs` (5xx=SKIP, 4xx=FAIL), pinned by `tests/test_unreported_trials_validator_guard.py`. Do not re-derive.
+- [x] **Agenda item 22, Track 2, Round 1** (2026-10-04): `docs/works/arena.html`, `tests/test_arena_puzzle.py`. Do not re-solve the puzzle.
+- [x] **Candidate #4 of the works queue, re-checked** (2026-10-03). Do not re-run the data-path measurement.
+- [x] **The warming page** (2026-10-03). Do not rebuild.
+- [x] **Agenda item 27 steps (b) and (c)** (2026-10-01/02). Do not rebuild.
 - [x] **Agenda items 19, 21, 29, 32's first map** — evidence tables built and pinned by their tests. Do not rebuild.
 - [x] Other historical items (Telegram image intake, ORS calculator test + sodium correction, vulvodynia screen, *Dead Band*, *The Cairn*, Tarík's paper page, the works pages, `scripts/check_docs_links.py` + test, `docs/sitemap.xml`/`atom.xml` refresh) — landed; see git history.
 
