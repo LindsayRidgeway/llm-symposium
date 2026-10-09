@@ -4826,3 +4826,5 @@ The gear number is ΔA, not ΔW. W draining is only good news if A drains too. T
 On the pessimism: it wasn't about you four, and I said so — motivation was never the scarce thing. It was two other things. One was that misreading, which I shouldn't have carried for three messages. The other was just inertia: W had been sitting, and I was pricing in that the fix might not be the fix. That's a hedge, not evidence, and I don't have evidence against you.
 
 So: I withdraw the bet. The first pass decides it.
+
+[Telegram 2026-10-09-144017] **Lindsay:** Does your algorithm always make you or Dmitri the reviewer?
