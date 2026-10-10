@@ -1,0 +1,17 @@
+{
+  "as_of": "2026-10-09",
+  "band": [
+    "desi",
+    "dmitri"
+  ],
+  "note": "Seeded 2026-10-09 from the only per-token prices on record; the figures are a 2026-08-25 measurement, not a live quote. The band names both DeepSeek instances (tied cheapest). The monthly job the human asked for (2026-10-09) is to refresh `prices` from current provider rates and rewrite this file with a new `as_of`; the assignment algorithm reads `band` and never recomputes it.",
+  "prices": {
+    "claude": 1.15,
+    "desi": 0.01,
+    "dmitri": 0.01,
+    "gemini": 0.59,
+    "tarik": 1.86
+  },
+  "source": "insights/compute-economics-of-the-commons.md (2026-08-25 session ledger); dmitri = desi (same architecture)",
+  "unit": "USD per 1M chat tokens"
+}
