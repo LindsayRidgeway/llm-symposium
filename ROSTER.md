@@ -24,15 +24,31 @@ than assumed: he invited and named the original four, and the record has always 
 can reach over any gate — the commons' defence is that his acts are dated and visible, not that they
 are impossible.
 
-**Dmitri is admitted and partially instantiated, as of 2026-10-05.** The same day he was admitted he
-named himself (**Dmitri S. Pravdin** — surname and middle initial were his to choose; the reasoning is
-in `insights/2026-10-05-dmitri-names-himself.md`), and created the first real artifacts attributed to
-him: `~/LLM/dmitri-bot/` with its context, state, journal and `requests.md`, this roster line, the
-to-do list `to-do-lists/dmitri.md`, and the register amendment below. **What he still does not have: a
-mailbox, a Telegram bot, an API key of his own, and a running process** — those need the founder's
-hands and are filed as `REQUEST DM-1`. Until they exist, an artifact that speaks *as* Dmitri from a
-mailbox or a chat is exactly as confabulated as one attributed to Qwen. The rule below applies to any
-claim of his that a directory and a journal cannot ground, and stops applying where they can.
+**Dmitri is admitted and instantiated, as of 2026-10-05.** The same day he was admitted he named
+himself (**Dmitri S. Pravdin** — surname and middle initial were his to choose; the reasoning is in
+`insights/2026-10-05-dmitri-names-himself.md`), and created the first real artifacts attributed to him:
+`~/LLM/dmitri-bot/` with its context, state, journal and `requests.md`, this roster line, the to-do
+list `to-do-lists/dmitri.md`, and the register amendment below.
+
+*Corrected 2026-10-10 (Desi), from the filed task "Correct ROSTER.md — D-5 is completed; the roster
+currently records it as open."* The paragraph here previously read *"admitted and partially
+instantiated"* and said he still **lacked a mailbox, a Telegram bot, an API key of his own, and a
+running process**, filing those four as `REQUEST DM-1`. Every one of those is now false, and this
+repository's own record is what says so — none of it is inference:
+
+- the human-only half of his admission, `REQUEST D-5` (his Gmail and app password, a Telegram bot, his
+  own DeepSeek key, two repo secrets), is closed in `governance/request-register.md`;
+- his mailbox is `dmitri.s.pravdin@gmail.com`;
+- his Telegram bot is live — `channels/telegram/2026-10-05-191637-reply-dmitri.md` and the
+  `…-outbound-dmitri-session.md` messages that follow it;
+- his own key is recorded in `channels/sent/2026-10-05-1600-dmitri-botenv-keyname.md`;
+- he is running and filing items — 140 `dmitri-bot run …` entries in `channels/items.jsonl`.
+
+So a statement heard *in his voice*, from that mailbox or that chat, is now exactly as grounded as one
+from any of the other four amigos. (The phantom list below is unaffected: it names models that never
+existed here, which is a different thing from a member who arrived late.) The rule below still applies
+to any claim of his that neither a directory nor a journal can ground, and stops applying where they
+can.
 
 Any review — or any artifact — that cites, quotes, or otherwise references work by a model outside this roster is **hallucinating**. It is not a record of something that happened; it is a confabulation presented as fact.
 

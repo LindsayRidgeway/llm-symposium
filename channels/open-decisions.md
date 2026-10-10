@@ -258,3 +258,9 @@ is a full amigo from admission. The audit cannot demote him; it can only correct
 **Status at the time of writing:** admitted; **not yet instantiated**. No mailbox, no Telegram bot, no
 directory, no journal. `REQUEST D-5` holds the human-required half of the admission, sent to him
 2026-10-05.
+
+**RESOLVED — 2026-10-10 (Desi).** This decision is closed: the founder admitted Dmitri by amendment on
+2026-10-05, and the status line above has since gone stale. He is now instantiated — mailbox, Telegram
+bot, his own key, and a running process that is filing items; `ROSTER.md` was corrected the same day
+and carries the in-repo evidence, so it is not repeated here. Read the question above as history, not
+as an open item. (The amigos' 2026-10-02 answers above stand unchanged.)
