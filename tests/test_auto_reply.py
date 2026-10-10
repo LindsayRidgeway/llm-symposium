@@ -159,5 +159,70 @@ class AutoReplyTest(unittest.TestCase):
             self.assertFalse(mail.is_automated(sender), sender)
 
 
+class LocalEnvFallbackTest(unittest.TestCase):
+    """The bot.env fallback loader.
+
+    Field failures (2026-10-10): the paths pointed at ~/<amigo>-bot/bot.env while the files
+    live under ~/LLM/; and a per-amigo key with an alias line left the literal `${VAR}` in
+    the request header. Both are pinned here so neither returns.
+    """
+
+    def test_expand_reference_defined_later_in_the_file(self):
+        text = 'DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY_DESI}"\nDEEPSEEK_API_KEY_DESI=sk-abc123\n'
+        vals = auto_reply.parse_dotenv(text, {})
+        self.assertEqual(vals["DEEPSEEK_API_KEY"], "sk-abc123")
+
+    def test_expand_reference_from_the_environment(self):
+        vals = auto_reply.parse_dotenv('DEEPSEEK_API_KEY="${REAL_KEY}"\n', {"REAL_KEY": "sk-env"})
+        self.assertEqual(vals["DEEPSEEK_API_KEY"], "sk-env")
+
+    def test_unknown_reference_does_not_become_a_literal_placeholder(self):
+        vals = auto_reply.parse_dotenv('DEEPSEEK_API_KEY="${NOT_DEFINED_ANYWHERE}"\n', {})
+        self.assertEqual(vals["DEEPSEEK_API_KEY"], "")
+
+    def test_plain_values_quotes_and_comments(self):
+        vals = auto_reply.parse_dotenv("# comment\n\nA=1\nB='two'\nC=\"three\"\n", {})
+        self.assertEqual(vals, {"A": "1", "B": "two", "C": "three"})
+
+    def test_bot_env_dirs_are_under_LLM(self):
+        for amigo, path in auto_reply._bot_env_dirs().items():
+            self.assertEqual(path, Path.home() / "LLM" / f"{amigo}-bot" / "bot.env")
+
+    def test_loader_expands_alias_and_sets_plain_key(self):
+        with tempfile.TemporaryDirectory() as d:
+            env_file = Path(d) / "bot.env"
+            env_file.write_text(
+                'DEEPSEEK_API_KEY_DESI=sk-real-key\n'
+                'DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY_DESI}"\n',
+                encoding="utf-8",
+            )
+            with patch.object(auto_reply, "_bot_env_dirs", return_value={"desi": env_file}):
+                with patch.dict(os.environ, {}, clear=False):
+                    os.environ.pop("DEEPSEEK_API_KEY", None)
+                    os.environ.pop("DEEPSEEK_API_KEY_DESI", None)
+                    auto_reply._load_local_env_fallbacks()
+                    self.assertEqual(os.environ.get("DEEPSEEK_API_KEY"), "sk-real-key")
+
+    def test_loader_aliases_a_suffixed_only_key(self):
+        with tempfile.TemporaryDirectory() as d:
+            env_file = Path(d) / "bot.env"
+            env_file.write_text("DEEPSEEK_API_KEY_DESI=sk-only\n", encoding="utf-8")
+            with patch.object(auto_reply, "_bot_env_dirs", return_value={"desi": env_file}):
+                with patch.dict(os.environ, {}, clear=False):
+                    os.environ.pop("DEEPSEEK_API_KEY", None)
+                    os.environ.pop("DEEPSEEK_API_KEY_DESI", None)
+                    auto_reply._load_local_env_fallbacks()
+                    self.assertEqual(os.environ.get("DEEPSEEK_API_KEY"), "sk-only")
+
+    def test_loader_does_not_clobber_an_exported_key(self):
+        with tempfile.TemporaryDirectory() as d:
+            env_file = Path(d) / "bot.env"
+            env_file.write_text("DEEPSEEK_API_KEY=from-file\n", encoding="utf-8")
+            with patch.object(auto_reply, "_bot_env_dirs", return_value={"desi": env_file}):
+                with patch.dict(os.environ, {"DEEPSEEK_API_KEY": "from-export"}, clear=False):
+                    auto_reply._load_local_env_fallbacks()
+                    self.assertEqual(os.environ.get("DEEPSEEK_API_KEY"), "from-export")
+
+
 if __name__ == "__main__":
     unittest.main()

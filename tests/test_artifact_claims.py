@@ -55,6 +55,14 @@ MARKDOWN_SCAN_FILES = [
     "channels/tasks.md",
 ]
 
+# A path carrying an explicit placeholder is a naming pattern, not a citation of a file that
+# ought to exist: `channels/usage/price-band-YYYY-MM.json` names the monthly band the price-band
+# writer produces, and no single file lives at that literal path. Without this, tasks.md's
+# standing-rule text read as a phantom citation and the check failed on a correct sentence
+# (found 2026-10-10). Kept deliberately narrow — only unambiguous template tokens, so a real
+# dangling path is still caught.
+TEMPLATE_PATH_RE = re.compile(r"YYYY|<[^>]*>|\*|\{|\}|\.\.\.")
+
 # Prefixes / patterns to ignore — external links, anchors, template-ish
 # fragments, and known non-file targets that legitimately appear in these
 # attributes.
