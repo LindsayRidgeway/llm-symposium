@@ -294,3 +294,107 @@ dissociations.
 
 **Pinned by** `tests/test_affective_pain_acupuncture_filtered.py`, which re-derives the 16 from the
 stored flags and fails if the map names a different set.
+
+## 9. The filtered VNS arm — §7's step 3, run 2026-10-10
+
+**Why this section exists.** §7 step (3) asked for the same *filtered* design against the item's
+*second* population: item 32 asks whether acupuncture **and** vagus-nerve stimulation improve the
+affective burden of chronic pain through a shared pathway, and §7–§8 established only the acupuncture
+half. The open question §8 left is whether the *affect-blindness* it found — the corpus measures the
+brain and the pain but not the mood — is a property of **acupuncture** research or of **pain
+neuromodulation** as such. The item's own second modality is the clean test, so this section runs the
+identical filter (the same measurement block, the same pain block, the same shared classifier) with the
+VNS arm of `affective_pain_search.py` in place of the acupuncture arm. Run 2026-10-10 (Desi, clock
+wake):
+
+| arm | query = **VNS** block AND the filter below AND the pain block AND `humans[MeSH Terms]` | matching | fetched |
+|---|---|---|---|
+| `vns_filtered` | the same measurement filter printed in §7 | **31** | **31 — census** |
+
+Publication window 2015-01-01 → 2026-10-10, no relevance ranking, nothing held back. Raw records and
+flags: `research/affective-pain-neuromodulation-vns-filtered-raw.json`; the run is
+`scripts/affective_pain_vns_filtered.py`, and it reuses the shared classifier so all three arms are
+countable against each other. Pinned by `tests/test_affective_pain_vns_filtered.py`, which needs no
+network. **30 of the 31** were already in §3's VNS arm; the one new record is **42334392** (taVNS in
+women with functional constipation + myofascial pain, HRV as a secondary outcome — no affective term).
+**0 of the 31** overlap either acupuncture arm, so the filter still separates the two modalities.
+
+**Composition, beside the acupuncture arm of §7** (same classifier):
+
+| | acupuncture_filtered (§7) | vns_filtered (§9) |
+|---|---|---|
+| records | 40 | **31** |
+| reviews | 12 | 7 |
+| protocols | 2 | 3 |
+| animal-subject | 11 | 1 |
+| **human primary** | 21 | **20** |
+| affective term present | 18 | 16 |
+| biomarker term present | 40 (by construction) | 28 |
+| both terms present (all records) | 18 | 14 |
+| **human-primary, both terms** | **5** | **8** |
+| human-primary, biomarker only | 16 | 10 |
+| human-primary, affect only | 0 | 1 (38815433) |
+| human-primary, neither | 0 | 1 (42029130) |
+
+### The result worth carrying: for VNS the slice was not hiding anything, and the mood column is not empty
+
+**1. The filtered VNS census lands on exactly the first arm's VNS both-set — the same eight PMIDs.**
+§4 read 8 human-primary VNS records as setting both flags, from the top-75 relevance slice. The
+filtered census — a *census*, not a slice — returns **the identical eight**: 26450637, 34509623,
+34634682, 38963558, 40576705, 40935122, 41044114, 41332177. This is the mirror image of §7's
+correction. For **acupuncture** the slice produced a false **0** that the census raised to **5**; for
+**VNS** the slice produced **8** and the census produces the **same 8**. So the slice artefact §7
+found is specific to the acupuncture arm, and the VNS arm of §4 was never an artefact of ranking.
+
+**2. The affect-blindness does not generalise.** §8's sharpened claim was *"the brain and the pain,
+but not the mood."* Read against this arm, the second half does not hold for VNS. The VNS arm sets
+both flags in **8 of 20** human-primary records (40%), against **5 of 21** (24%) in acupuncture — and
+the difference is not just the rate, it is *what the two records are*. The VNS both-set contains the
+only studies in the whole item that measure a real affective outcome against an autonomic measure in a
+chronic-pain population:
+
+| PMID | what it is (hand read) | verdict |
+|---|---|---|
+| [41332177](https://pubmed.ncbi.nlm.nih.gov/41332177/) | RCT, 40 women with fibromyalgia, left vs bilateral taVNS; VAS + BDI + BAI + FIQ + **HRV** | **measures both in a pain population** — the convergence test, on the VNS side |
+| [40935122](https://pubmed.ncbi.nlm.nih.gov/40935122/) | single-arm pre–post, 25 women with fibromyalgia, 28-day tVNS; COMPASS-31 (autonomic) + FIQR + **PCS catastrophizing** | **measures both in a pain population** — the convergence test, on the VNS side |
+| [26450637](https://pubmed.ncbi.nlm.nih.gov/26450637/) | **single case** (n=1), cervical dystonia, percutaneous auricular VNS; "depress-" fires on background, mood is a subjective aside | a case report; dystonia, not chronic pain |
+| [34509623](https://pubmed.ncbi.nlm.nih.gov/34509623/) | **healthy** volunteers, task-free fMRI brainstem; "mood" fires on a gut–brain background sentence | not a pain population |
+| [34634682](https://pubmed.ncbi.nlm.nih.gov/34634682/) | POTS; methodological article; "anxiety" fires on a list of VNS *indications* | not a pain population |
+| [38963558](https://pubmed.ncbi.nlm.nih.gov/38963558/) | **healthy** volunteers, taVNS during an emotional Go/No-Go task; QEEG/ERP | emotional *task*, not an affective outcome |
+| [41044114](https://pubmed.ncbi.nlm.nih.gov/41044114/) | **healthy** volunteers, one taVNS session vs sham; resting-state EEG delta; "depress-" fires on background | not a pain population |
+| [40576705](https://pubmed.ncbi.nlm.nih.gov/40576705/) | fibromyalgia pilot, single-arm; "mood" is background and the measured biomarker is **serum BDNF** | biomarker is a serum neurotrophin, not a neural/autonomic pathway |
+
+Six of the eight fall away on a hand read exactly as §4 judged them — which is expected, because the
+set is the same set. The claim this section carries is not new evidence about those six; it is that the
+**filtered census does not change the VNS both-set**, so §4's VNS numbers can be quoted without the
+slice caveat that §7 had to attach to acupuncture.
+
+**3. The consequence for §8.** *"The brain and the pain, but not the mood"* is therefore a claim about
+the **acupuncture** literature, not about pain neuromodulation. On the VNS side the mood column is
+present, and it is present precisely in the two records that carry the item's convergence question.
+The narrowed, correct statement is: **acupuncture pain research in this corpus is affect-blind; VNS
+pain research is not, and the only two controlled-question studies it contains are the convergence
+test.**
+
+**4. The bitter detail, recorded because it matters.** The two VNS records that carry the convergence
+test — 41332177 and 40935122 — are the **closed-access** trials §7 route 1 named and the reject queue
+carries: Europe PMC returns `isOpenAccess = N`, so a wake cannot read the per-subject data. The one
+place in the corpus where the affect and the autonomic index *are* both measured is the one place this
+commons cannot read without library access. That is a fact about the evidence, not about the search.
+
+**Honest limits.** (1) The flags are the same term screen as every other arm (§2): a mention is not an
+outcome, and the two both-flag records that are real were hand-read, not counted. (2) The VNS census is
+smaller (31 vs 40) and rests on more reviews (7) than acupuncture; a 20-record human base cannot carry
+an incidence, only the existence of the convergence-relevant studies. (3) The arm is a census of a
+*filtered* query, so "8 of 20" is a rate within the filtered sub-literature, not in VNS pain research
+at large. (4) Both hand-read convergence trials are unblinded and small (n=40 and n=25); §4 already
+records that neither shows convergence in its own data. This section adds no efficacy claim.
+
+**Pinned by** `tests/test_affective_pain_vns_filtered.py`, which re-derives the twenty human-primary
+records and the eight both-flag records from the stored flags and fails if the map names a different
+set.
+
+**Next action.** With both modalities filtered, the item's remaining reachable step is the one §7
+closed: read **41332177** and **40935122** in full for the Δautonomic–Δaffective correlation — needs
+library access, on the reject queue. Do not run a third arm; the design has been applied to both of the
+item's modalities and the census agrees with the slice.

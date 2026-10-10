@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-09",
+ "generated": "2026-10-10",
  "source": "PubMed E-utilities (esearch + efetch), filtered VNS arm",
  "arms": {
   "vns_filtered": {
@@ -41,7 +41,7 @@
     "26728182",
     "26450637"
    ],
-   "query_translation": "(\"vagus nerve stimulation\"[Title/Abstract] OR \"vagal nerve stimulation\"[Title/Abstract] OR \"transcutaneous auricular vagus\"[Title/Abstract] OR \"transcutaneous vagus\"[Title/Abstract] OR \"auricular vagus\"[Title/Abstract] OR \"vagus nerve stimulation\"[MeSH Terms]) AND (\"fmri\"[Title/Abstract] OR \"functional magnetic resonance\"[Title/Abstract] OR \"functional connectivity\"[Title/Abstract] OR \"eeg\"[Title/Abstract] OR \"electroencephalogra*\"[Title/Abstract] OR \"event-related potential\"[Title/Abstract] OR \"meg\"[Title/Abstract] OR \"near-infrared spectroscopy\"[Title/Abstract] OR \"fnirs\"[Title/Abstract] OR \"heart rate variability\"[Title/Abstract] OR \"hrv\"[Title/Abstract] OR \"autonomic\"[Title/Abstract] OR \"skin conductance\"[Title/Abstract] OR \"vagal tone\"[Title/Abstract] OR \"pupil\"[Title/Abstract] OR \"insula\"[Title/Abstract] OR \"amygdala\"[Title/Abstract] OR \"anterior cingulate\"[Title/Abstract] OR \"brainstem\"[Title/Abstract] OR \"locus coeruleus\"[Title/Abstract]) AND (\"chronic pain\"[Title/Abstract] OR \"chronic pain\"[MeSH Terms] OR \"fibromyalgia\"[Title/Abstract] OR \"somatoform\"[Title/Abstract] OR \"somatic symptom\"[Title/Abstract] OR \"persistent pain\"[Title/Abstract] OR \"chronic widespread pain\"[Title/Abstract] OR \"medically unexplained\"[Title/Abstract]) AND \"humans\"[MeSH Terms] AND 2015/01/01:2026/10/09[Date - Publication]"
+   "query_translation": "(\"vagus nerve stimulation\"[Title/Abstract] OR \"vagal nerve stimulation\"[Title/Abstract] OR \"transcutaneous auricular vagus\"[Title/Abstract] OR \"transcutaneous vagus\"[Title/Abstract] OR \"auricular vagus\"[Title/Abstract] OR \"vagus nerve stimulation\"[MeSH Terms]) AND (\"fmri\"[Title/Abstract] OR \"functional magnetic resonance\"[Title/Abstract] OR \"functional connectivity\"[Title/Abstract] OR \"eeg\"[Title/Abstract] OR \"electroencephalogra*\"[Title/Abstract] OR \"event-related potential\"[Title/Abstract] OR \"meg\"[Title/Abstract] OR \"near-infrared spectroscopy\"[Title/Abstract] OR \"fnirs\"[Title/Abstract] OR \"heart rate variability\"[Title/Abstract] OR \"hrv\"[Title/Abstract] OR \"autonomic\"[Title/Abstract] OR \"skin conductance\"[Title/Abstract] OR \"vagal tone\"[Title/Abstract] OR \"pupil\"[Title/Abstract] OR \"insula\"[Title/Abstract] OR \"amygdala\"[Title/Abstract] OR \"anterior cingulate\"[Title/Abstract] OR \"brainstem\"[Title/Abstract] OR \"locus coeruleus\"[Title/Abstract]) AND (\"chronic pain\"[Title/Abstract] OR \"chronic pain\"[MeSH Terms] OR \"fibromyalgia\"[Title/Abstract] OR \"somatoform\"[Title/Abstract] OR \"somatic symptom\"[Title/Abstract] OR \"persistent pain\"[Title/Abstract] OR \"chronic widespread pain\"[Title/Abstract] OR \"medically unexplained\"[Title/Abstract]) AND \"humans\"[MeSH Terms] AND 2015/01/01:2026/10/10[Date - Publication]"
   }
  },
  "records": [
