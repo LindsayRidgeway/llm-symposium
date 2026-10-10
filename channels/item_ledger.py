@@ -578,6 +578,18 @@ def assigned(items: dict[str, dict], who: str, n: int = 5) -> list[dict]:
     return sorted(rows, key=lambda r: r.get("filed_utc") or "")[:n]
 
 
+def queue_total(items: dict[str, dict], who: str) -> int:
+    """How many waiting items carry this amigo's name — the whole queue, not the page shown.
+
+    `assigned()` returns at most `n` (five by default), which is deliberate: a queue read at the
+    start of a wake must stay short. But the count printed above that page has to be the *queue*,
+    not the page, or a wake reads "5 item(s) waiting" while 152 carry its name and never learns
+    there is a mandate (found 2026-10-10 on Dmitri's own queue: 152 named, 5 shown).
+    """
+    return sum(1 for r in items.values()
+               if letter_for(r) == "W" and r.get("assigned_to") == who)
+
+
 def holes(items: dict[str, dict]) -> list[dict]:
     """Waiting items with no name on them. Not a queue — the escalation list."""
     return sorted([r for r in items.values()
@@ -681,7 +693,12 @@ def _cli() -> int:
                   + (f" — but {len(left)} waiting item(s) carry no name at all, so nobody owns them"
                      if left else ", and every waiting item carries a name"))
             return 0
-        print(f"{len(rows)} item(s) waiting on {args.queue}, oldest first:")
+        total = queue_total(items, args.queue)
+        if len(rows) < total:
+            print(f"{len(rows)} of {total} item(s) waiting on {args.queue}, oldest first "
+                  f"(--next {total} to see the rest):")
+        else:
+            print(f"{total} item(s) waiting on {args.queue}, oldest first:")
         for rec in rows:
             print(f"\n  {rec['id']}")
             print(f"    written by {rec.get('amigo','?')} · {rec.get('scope','?')} · "

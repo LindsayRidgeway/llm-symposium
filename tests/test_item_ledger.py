@@ -355,6 +355,17 @@ class TestAssignment(unittest.TestCase):
         self.assertEqual([r["id"] for r in il.assigned(items, "gemini")], ["by-desi"])
         self.assertEqual(il.assigned(items, "tarik"), [])
 
+    def test_the_count_is_the_whole_queue_not_the_page(self):
+        # `assigned()` shows a five-item page on purpose, but the count line must report the queue.
+        # Fixed 2026-10-10: `--queue dmitri` printed "5 item(s) waiting" while 152 carried the name.
+        items = {f"q{i}": {"id": f"q{i}", "amigo": "desi", "scope": "internal",
+                           "state": None, "title": "t",
+                           "filed_utc": f"2026-10-0{i + 1}T00:00:00Z",
+                           "assigned_to": "dmitri"} for i in range(7)}
+        self.assertEqual(len(il.assigned(items, "dmitri")), 5)   # the page
+        self.assertEqual(il.queue_total(items, "dmitri"), 7)     # the queue
+        self.assertEqual(il.queue_total(items, "gemini"), 0)
+
     def test_a_hole_is_a_waiting_item_with_no_name(self):
         items = il.load(self.path)
         self.assertEqual(len(il.holes(items)), 3)
