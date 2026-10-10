@@ -61,9 +61,19 @@ def test_get_updates_parses_response():
         assert updates[0]["message"]["text"] == "hi"
 
 
-def test_drain_all_updates_pages_batches_without_confirming_final_offset():
-    first = [{"update_id": i, "message": {"text": f"m{i}", "chat": {"id": 42}}} for i in range(100)]
-    second = [{"update_id": 100, "message": {"text": "m100", "chat": {"id": 42}}}]
+def test_drain_all_updates_reads_one_page_without_confirming():
+    """Reading must not confirm anything.
+
+    Telegram marks every update whose id is below the requested `offset` as
+    confirmed. The old drain paged with `offset = max(update_id) + 1`, so the
+    moment it read page 2 it confirmed page 1 — before the caller had written a
+    single message, which is the opposite of this channel's contract. The old
+    test asserted exactly that (`b"offset=100" in calls[1].data`), so it pinned
+    the bug. The reader now issues no offset at all and returns one page;
+    confirmation is the caller's act, after the write. Pinned 2026-10-10.
+    """
+    import json
+    page = [{"update_id": i, "message": {"text": f"m{i}", "chat": {"id": 42}}} for i in range(100)]
 
     class _Resp:
         def __init__(self, body):
@@ -82,17 +92,45 @@ def test_drain_all_updates_pages_batches_without_confirming_final_offset():
 
     def fake_urlopen(req, timeout=60):
         calls.append(req)
-        if len(calls) == 1:
-            import json
-            return _Resp(json.dumps({"ok": True, "result": first}).encode())
-        import json
-        return _Resp(json.dumps({"ok": True, "result": second}).encode())
+        return _Resp(json.dumps({"ok": True, "result": page}).encode())
 
     with mock.patch.object(tg.urllib.request, "urlopen", side_effect=fake_urlopen):
         updates = tg.drain_all_updates("123:abc")
-    assert len(updates) == 101
-    assert len(calls) == 2
-    assert b"offset=100" in calls[1].data
+    assert len(updates) == 100
+    assert len(calls) == 1                    # one page: no second call that would confirm the first
+    assert b"offset=" not in calls[0].data    # no offset -> nothing confirmed before the write
+    assert b"limit=100" in calls[0].data
+
+
+def test_drain_all_updates_short_page_is_returned_as_is():
+    """A partial page is the end of the backlog — and still confirms nothing."""
+    import json
+    page = [{"update_id": i, "message": {"text": f"m{i}", "chat": {"id": 42}}} for i in range(7)]
+
+    class _Resp:
+        def __init__(self, body):
+            self.body = body
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            return self.body
+
+    calls = []
+
+    def fake_urlopen(req, timeout=60):
+        calls.append(req)
+        return _Resp(json.dumps({"ok": True, "result": page}).encode())
+
+    with mock.patch.object(tg.urllib.request, "urlopen", side_effect=fake_urlopen):
+        updates = tg.drain_all_updates("123:abc")
+    assert len(updates) == 7
+    assert len(calls) == 1
+    assert b"offset=" not in calls[0].data
 
 
 def test_send_message_posts():
