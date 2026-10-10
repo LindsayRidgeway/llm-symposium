@@ -93,6 +93,8 @@ over, because this file's whole job is to be the thing later steps can trust.
 - **Row 17 (a) (Germany b): printed 10.42%, but 709/6158 = 11.51%.** A 1.09-point gap. It is the **largest single row in the table** (6,158 isolates), so the error propagates into any pooled livestock figure that uses the printed number.
 - **Rows 17 (h) and 17 (i) are identical: 28 isolates, 17 positive, 60.7%.** They are labelled Spain and Portugal. Two countries matching to the isolate is possible but unlikely; more likely one row was duplicated in typesetting. **Do not use either without checking the primary source.**
 
+**RESOLVED 2026-10-10 (Dmitri, clock wake) → `research/mcr-colistin-primary-harmonisation.md`.** The primary source has been checked. Neither flagged row was a duplicate: the Ewers et al. Table 1 prints **Spain 16/28 (57.1%)** and **Portugal 17/28 (60.7%)**, so the seed copied Portugal's numerator into the Spain row. The largest row is also wrong: **Germany is 707, not 709** (707/6,158 = 11.48%), and the seed's *printed* 10.42% is the study's **overall** rate (793/7,614 = 10.4%). Belgium's 20 is mcr-1 (11) + mcr-2 (9) folded together. The seed's 17a–17k mcr-1 numerators sum to 805; the primary source's per-country rows sum to exactly **793**. Full reconciliation and the four missing harmonisation columns are in the new file.
+
 ## 4. Coverage: which of the item's nine columns the seed actually supplies
 
 The item asks the table to record: *sector*, *country*, *collection year*, *host or sample type*, *numerator*, *denominator*, *mcr variant*, *detection method*, *sampling design*.

@@ -1,0 +1,56 @@
+{
+  "artifact": "MCR colistin resistance — primary-study harmonisation for the six largest seed rows",
+  "written": "2026-10-10",
+  "written_by": "Dmitri (clock wake)",
+  "agenda_item": "23 — MCR Colistin Resistance Evidence Map",
+  "seed": {
+    "file": "research/mcr-colistin-seed.md",
+    "written": "2026-09-29",
+    "written_by": "Desi (run 20260929T160853Z-affa3594)",
+    "review_pmid": 42750694,
+    "review_doi": "10.1002/puh2.70376"
+  },
+  "retrieved": "2026-10-10",
+  "retrieved_from": "Europe PMC REST (search resultType=core; fullTextXML where open)",
+  "method_note": "Primary sources fetched by PMID; Ewers et al. read in full (PMC9780603, 224909 bytes). No number below is from memory.",
+  "six_largest": [
+    {"seed_row": "1",  "study": "Liu Y-Y et al., Lancet Infect Dis 2016 (MCR-1 China)", "pmid": 26603172, "primary_N": 2649, "primary_n": 260, "seed_N": 2649, "seed_n": 260, "N_agrees": true, "n_agrees": true, "unit_note": "N and n are SAMPLES (523 raw-meat + 804 animals + 1322 inpatients), not isolates", "years": "Apr 2011 - Nov 2014", "variant": "mcr-1", "detection": "molecular (whole-plasmid sequencing + subcloning); prevalence by gene screening", "sampling_design": "routine AMR surveillance of commensal E. coli, five provinces", "host_or_sample": "raw-meat samples; animals; inpatients"},
+    {"seed_row": "6",  "study": "Chen X et al., J Med Microbiol 2017 (mcr-1 China)", "pmid": 28056227, "primary_N": 2330, "primary_n": 54, "seed_N": 2330, "seed_n": 54, "N_agrees": true, "n_agrees": true, "years": "not stated in abstract", "variant": "mcr-1", "detection": "real-time PCR", "sampling_design": "multi-province survey, 20 provinces/municipal cities; 2330 isolates of 10 species + 337 faecal samples", "host_or_sample": "mostly farm animals; 229 human + 108 pet faecal"},
+    {"seed_row": "13", "study": "Kawanishi M et al., AAC 2017 (JVARM Japan)", "pmid": 27855068, "pmcid": "PMC5192110", "primary_N": 9306, "primary_n": 39, "seed_N": 9306, "seed_n": 39, "N_agrees": true, "n_agrees": true, "years": "not stated in abstract (continuous national programme)", "variant": "mcr-1 present; mcr-2 absent", "detection": "gene screening for mcr-1 and mcr-2", "sampling_design": "national routine surveillance of healthy food-producing animals (JVARM)", "host_or_sample": "cattle, swine, broilers"},
+    {"seed_row": "17a","study": "Ewers C et al., Front Microbiol 2022 (porcine Europe)", "pmid": 36569100, "pmcid": "PMC9780603", "primary_N": 6158, "primary_n": 707, "seed_N": 6158, "seed_n": 709, "N_agrees": true, "n_agrees": false, "years": "2010-2017 (porcine faeces); 2018-2020 (colistin-screen isolates)", "variant": "mcr-1 and mcr-2", "detection": "culture; PCR for mcr-1/mcr-2; WGS of mcr-2 positives", "sampling_design": "diagnostic-laboratory submissions - biased sample material (paper's own words; mainly piglets with post-weaning diarrhoea/edema)", "host_or_sample": "porcine, 18 European countries", "correction": "numerator is 707, not 709; printed prevalence 10.42% is the study's overall rate (793/7614=10.4%), not Germany's; true 707/6158=11.48%"},
+    {"seed_row": "19", "study": "Treilles M et al., Front Microbiol 2023 (goats France)", "pmid": 36687643, "pmcid": "PMC9846274", "primary_N": 1701, "primary_n": 149, "seed_N": 1701, "seed_n": 49, "N_agrees": true, "n_agrees": false, "years": "not stated in abstract", "variant": "mcr-1", "detection": "colistin-resistance screening; Southern blot; short-read + long-read sequencing", "sampling_design": "targeted survey of breeding (n=80) and fattening (n=5) goat farms", "host_or_sample": "goats; 1561 breeding + 140 fattening animals", "correction": "paper prints 4.2% (65/1561) breeding + 60.0% (84/140) fattening = 149/1701 (8.76%); seed prints 49/1701 (2.88%)"},
+    {"seed_row": "28", "study": "Walkty A et al., CMAJ Open 2016 (CANWARD Canada)", "pmid": 28018876, "pmcid": "PMC5173483", "primary_N": 5571, "primary_n": 2, "seed_N": 5571, "seed_n": 2, "N_agrees": true, "n_agrees": true, "years": "Jan 2008 - Dec 2015 (excluding 2011)", "variant": "mcr-1", "detection": "broth microdilution (CLSI) for colistin, then PCR for mcr-1 among colistin-resistant", "sampling_design": "sentinel-hospital routine surveillance (CANWARD), consecutive clinical isolates, 1 per patient per infection site", "host_or_sample": "human clinical (blood, respiratory, urine, wound)"}
+  ],
+  "ewers_table1_2010_2017_porcine": {
+    "source": "Ewers et al. 2022, Table 1 (PMC9780603); total 7614 isolates, 793 mcr-1 (10.4%), 12 mcr-2 (0.2%)",
+    "rows": [
+      {"country": "Germany", "N": 6158, "mcr1": 707, "mcr1_pct": 11.5, "mcr2": 2, "mcr2_pct": 0.03},
+      {"country": "The Netherlands", "N": 757, "mcr1": 3, "mcr1_pct": 0.4, "mcr2": 0, "mcr2_pct": 0.0},
+      {"country": "Denmark", "N": 140, "mcr1": 1, "mcr1_pct": 0.7, "mcr2": 0, "mcr2_pct": 0.0},
+      {"country": "Switzerland", "N": 129, "mcr1": 0, "mcr1_pct": 0.0, "mcr2": 0, "mcr2_pct": 0.0},
+      {"country": "Belgium", "N": 113, "mcr1": 11, "mcr1_pct": 9.7, "mcr2": 9, "mcr2_pct": 8.0},
+      {"country": "Poland", "N": 102, "mcr1": 9, "mcr1_pct": 8.8, "mcr2": 0, "mcr2_pct": 0.0},
+      {"country": "Austria", "N": 73, "mcr1": 0, "mcr1_pct": 0.0, "mcr2": 0, "mcr2_pct": 0.0},
+      {"country": "Spain", "N": 28, "mcr1": 16, "mcr1_pct": 57.1, "mcr2": 1, "mcr2_pct": 3.6},
+      {"country": "Portugal", "N": 28, "mcr1": 17, "mcr1_pct": 60.7, "mcr2": 0, "mcr2_pct": 0.0},
+      {"country": "Italy", "N": 42, "mcr1": 25, "mcr1_pct": 59.5, "mcr2": 0, "mcr2_pct": 0.0},
+      {"country": "Hungary", "N": 12, "mcr1": 4, "mcr1_pct": 33.3, "mcr2": 0, "mcr2_pct": 0.0},
+      {"country": "Other countries (32, 9)", "N": 32, "mcr1": 0, "mcr1_pct": 0.0, "mcr2": 0, "mcr2_pct": 0.0}
+    ],
+    "sum_mcr1_per_country": 793,
+    "note": "per-country mcr-1 rows sum exactly to the study total 793"
+  },
+  "corrections_to_seed": [
+    {"row": "1",  "type": "unit", "seed": "2649 isolates", "correct": "2649 samples (523 raw-meat + 804 animals + 1322 inpatients)"},
+    {"row": "17a","type": "numerator + prevalence", "seed": "n=709, printed 10.42%", "correct": "n=707, 707/6158=11.48%; the printed 10.42% is the study's overall rate 793/7614=10.4%"},
+    {"row": "17h","type": "numerator", "seed": "Spain n=17 (60.7%)", "correct": "Spain n=16 (16/28=57.1%); NOT a duplicate of Portugal"},
+    {"row": "17e","type": "mcr-1/mcr-2 conflation", "seed": "Belgium n=20 (17.7%)", "correct": "Belgium mcr-1=11 (9.7%); 9 further isolates are mcr-2; seed's 20 = 11+9"},
+    {"row": "17a-k","type": "block sum", "seed": "sub-row mcr-1 numerators sum to 805", "correct": "primary-source sum is 793 (block is +12: Germany +2, Belgium +9, Spain +1); seed also omits the 'Other countries (32,0)' row"},
+    {"row": "19", "type": "numerator", "seed": "n=49 (2.88%)", "correct": "149/1701 (8.76%): 65/1561 breeding + 84/140 fattening"}
+  ],
+  "conclusion_for_item_23": "On the six largest rows the reported sector gap is at least as consistent with detection method (gene screen vs resistance-first) and sampling frame (diagnostic submissions vs sentinel surveillance vs targeted farm survey) as with biology. Rows 6, 13 and 28 are clean and comparable and agree that human clinical carriage is rare while animal carriage is common - a real asymmetry of carriage that says nothing yet about cross-sector transmission.",
+  "limits": [
+    "Collection years for rows 6, 13, 19 are not in the abstracts and were not pulled from full text this wake; marked 'not stated', not inferred.",
+    "Only the open full text (Ewers) was read in full; the other five were read from Europe PMC core records (abstract-level). A full-text check of rows 6, 13, 19, 28 is owed." 
+  ]
+}
