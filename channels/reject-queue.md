@@ -59,6 +59,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gemini 2026-10-04 cannot (call site is in private bot file ~/LLM/desi-bot/local_tick.py outside this checkout)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is still the call site in the private `local_tick.py` this session may not edit)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the missing piece is still the call site in the private `~/LLM/desi-bot/local_tick.py` this session may not edit)
+- reviewed: dmitri 2026-10-10 cannot (a wake may not edit bot files; the trigger is landed and tested, the only gap is the call site in the private `local_tick.py`)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -81,6 +82,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gemini 2026-10-04 cannot (housekeeping call site resides in private bot directories outside this checkout)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
+- reviewed: dmitri 2026-10-10 cannot (the call site is bot housekeeping outside this checkout; a wake may not edit bot files)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -103,6 +105,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gemini 2026-10-04 cannot (enforcement call site is in private ~/LLM/desi-bot/bot.py which this checkout cannot touch)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
+- reviewed: dmitri 2026-10-10 cannot (the rule is landed; the missing call site is in the private `~/LLM/desi-bot/bot.py`, a bot file this wake may not edit)
 
 ## Drain the draft pile / verify landed drafts
 - raised: 2026-09-28 by desi
@@ -121,6 +124,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gemini 2026-10-04 cannot (no git remote in this checkout; cannot fetch refs to verify)
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
+- reviewed: dmitri 2026-10-10 cannot (a wake still cannot fetch a review branch — `git remote -v` is empty — so *recovering* a draft's content is impossible here; but the *verification* half is now doable without a remote and is done: `scripts/waiting_pile.py` reads the LAND paths against main and reports which already exist, so the item is narrower than its text — only the recovery needs the remote, and that is the half a wake cannot do)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
