@@ -118,6 +118,11 @@ jobs:
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
           python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # Works-page guard. The Warm Room (docs/works/thermal.html) carries its result panel twice
+          # — static HTML, overwritten on load by the inline script — and nothing kept the two equal:
+          # the static copy read 54.5 °F / +22.5 °F where the calculator's own defaults give
+          # 48.8 °F / +16.8 °F. Registered 2026-10-10 (Desi) with the correction. Offline.
+          python3 tests/test_thermal_page_static_defaults.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
