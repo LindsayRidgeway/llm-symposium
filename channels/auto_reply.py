@@ -83,27 +83,93 @@ AMIGO_PROFILES = {
 }
 
 
+# A ${VAR} or $VAR reference inside a bot.env value. DeepSeek is the first provider with two
+# instances, so its key is per-amigo (DEEPSEEK_API_KEY_DESI) while the code reads the plain
+# name — bot.env bridges the two with an alias line, and the reference has to be expanded.
+_ENV_REF_RE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}|\$([A-Za-z_][A-Za-z0-9_]*)")
+
+
+def _env_ref_names(value: str) -> set[str]:
+    """Every name a value references, e.g. `${A}` and `$B` -> {"A", "B"}. Never logs values."""
+    return {m.group(1) or m.group(2) for m in _ENV_REF_RE.finditer(value)}
+
+
+def expand_env_refs(value: str, env: dict[str, str]) -> str:
+    """Expand `$VAR` / `${VAR}` against `env`; a name not present expands to the empty string."""
+    return _ENV_REF_RE.sub(lambda m: env.get(m.group(1) or m.group(2), ""), value)
+
+
+def parse_dotenv(text: str, base_env: dict[str, str]) -> dict[str, str]:
+    """Parse a bot.env into values, resolving `${VAR}` references in any order.
+
+    A reference may point at a name defined *later* in the same file, so resolution runs to a
+    fixed point rather than a single top-to-bottom pass. Only the names this file itself
+    defines are returned; values are never printed.
+    """
+    pairs: list[tuple[str, str]] = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        k = k.strip()
+        if k:
+            pairs.append((k, v.strip().strip("'\"")))
+
+    defined = {k for k, _ in pairs}
+    resolved: dict[str, str] = dict(base_env)
+    remaining = list(pairs)
+    while remaining:
+        deferred: list[tuple[str, str]] = []
+        progressed = False
+        for k, v in remaining:
+            # Wait only on names this file still has to define; an unknown external name
+            # expands to "" immediately rather than blocking.
+            if _env_ref_names(v) & (defined - resolved.keys()):
+                deferred.append((k, v))
+                continue
+            resolved[k] = expand_env_refs(v, resolved)
+            progressed = True
+        if not progressed:  # a cycle or self-reference: resolve with what we have
+            for k, v in deferred:
+                resolved[k] = expand_env_refs(v, resolved)
+            break
+        remaining = deferred
+    return {k: resolved.get(k, "") for k, _ in pairs}
+
+
+def _bot_env_dirs() -> dict[str, Path]:
+    """Where each amigo's bot.env lives. Under ~/LLM/, matching every other reader in the repo."""
+    base = Path.home() / "LLM"
+    return {amigo: base / f"{amigo}-bot" / "bot.env"
+            for amigo in ("desi", "claude", "gemini", "tarik")}
+
+
 def _load_local_env_fallbacks() -> None:
-    """If running locally without env vars exported, load keys from local bot directories."""
-    dirs = {
-        "desi": Path.home() / "desi-bot" / "bot.env",
-        "claude": Path.home() / "claude-bot" / "bot.env",
-        "gemini": Path.home() / "gemini-bot" / "bot.env",
-        "tarik": Path.home() / "tarik-bot" / "bot.env",
-    }
-    for path in dirs.values():
-        if path.is_file():
-            try:
-                for line in path.read_text(encoding="utf-8").splitlines():
-                    line = line.strip()
-                    if line and not line.startswith("#") and "=" in line:
-                        k, v = line.split("=", 1)
-                        k = k.strip()
-                        v = v.strip().strip("'\"")
-                        if k and v and k not in os.environ:
-                            os.environ[k] = v
-            except Exception:
-                pass
+    """If running locally without env vars exported, load keys from local bot directories.
+
+    Two traps, both seen in the field (2026-10-10): the bot directories live under ~/LLM/,
+    not directly in $HOME (the old paths found nothing, so a local run skipped every amigo);
+    and a bot.env may hold a key under a per-amigo name with an alias line whose `${VAR}` has
+    to be expanded — otherwise the literal placeholder is sent as the key and every call 401s.
+    An already-exported name always wins, so CI is unaffected.
+    """
+    for amigo, path in _bot_env_dirs().items():
+        if not path.is_file():
+            continue
+        try:
+            values = parse_dotenv(path.read_text(encoding="utf-8"), dict(os.environ))
+        except Exception:  # noqa: BLE001 - a malformed file must not break the reply path
+            continue
+        # A per-amigo key name (e.g. DEEPSEEK_API_KEY_DESI) satisfies the plain name the code
+        # reads. The author's own key wins: a name this file set is never overwritten here.
+        suffix = "_" + amigo.upper()
+        for k, v in list(values.items()):
+            if k.endswith(suffix) and v:
+                values.setdefault(k[: -len(suffix)], v)
+        for k, v in values.items():
+            if v and k not in os.environ:
+                os.environ[k] = v
 
 
 def _http(method: str, url: str, payload: dict | None = None, headers: dict | None = None) -> dict:
