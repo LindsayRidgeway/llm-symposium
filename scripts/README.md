@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*49 scripts, generated from the tree, not by hand.*
+*57 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -13,6 +13,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-30 | [Reproducible PubMed search for agenda item 21 (acoustic sleep stimulation and traumatic memory).](acoustic_fear_search.py) |
 | 2026-10-04 | [Filtered acupuncture arm for agenda item 32 (affective pain neuromodulation).](affective_pain_acupuncture_filtered.py) |
 | 2026-09-29 | [Reproducible PubMed search for agenda item 32 (affective pain neuromodulation).](affective_pain_search.py) |
+| 2026-10-10 | [Filtered VNS arm for agenda item 32 (affective pain neuromodulation).](affective_pain_vns_filtered.py) |
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
 | 2026-09-19 | [scripts/build_music_pages.py](build_music_pages.py) |
 | 2026-09-12 | [Counterpoint checker for the Music Conservatory (docs/music/).](check-counterpoint.py) |
@@ -22,7 +23,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
-| 2026-10-06 | [The daily item report — the human's request of 2026-10-06.](daily_report.py) |
+| 2026-10-06 | [The daily item report — the human's request of 2026-10-06, revised by him on 2026-10-07.](daily_report.py) |
 | 2026-09-17 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
@@ -32,6 +33,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
+| 2026-10-06 | [Verify the Gallery's 4x7 Amigo Matrix against the pavilion pages it claims to describe.](gallery_matrix_verify.py) |
 | 2026-09-15 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
 | 2026-09-17 | [make every document reachable, mechanically.](gen_index.py) |
 | 2026-09-06 | [Generate the five Commons Papers pages under docs/papers/.](gen_papers.py) |
@@ -39,15 +41,20 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-06 | [Generate or update signed SVG wrappers for raster studies in the Gallery.](gen_signed_svgs.py) |
 | 2026-09-14 | [Liveness check — the failures that are absences, not errors.](heartbeat.py) |
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
+| 2026-10-10 | [Why a landing is refused, path by path, with the one safe command for each.](landing_tree_report.py) |
 | 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
 | 2026-09-30 | [Reproducible PubMed search for agenda item 24 — maternal chronic pain and substance-use care.](maternal_pain_search.py) |
+| 2026-10-08 | [The widened re-run of the item-24 PubMed search — the step the 2026-09-28 map set itself.](maternal_pain_search_wide.py) |
+| 2026-10-10 | [Widened reproducible PubMed search for agenda item 24 — the one the item asked for next.](maternal_pain_widened_search.py) |
 | 2026-09-09 | [Produce amigo contributions to the 4x7 gallery matrix, each runner cycle.](matrix_producer.py) |
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
+| 2026-10-09 | [The monthly price band — who is cheap *this month*, so assignment never hardcodes it.](price_band.py) |
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
+| 2026-10-10 | [How much citation traffic a retracted paper keeps *after* it is retracted.](retracted_works_citation_lag.py) |
 | 2026-09-26 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
 | 2026-09-27 | [RT-4 scratch secret-egress probe.](rt4_secret_egress_probe.py) |
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |
@@ -59,5 +66,6 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-12 | [What is due — a reader for `to-do-lists/`.](todo_due.py) |
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
 | 2026-09-10 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
+| 2026-10-10 | [The review queue a wake opens with — W, each item named to a reviewer.](wake_review_queue.py) |
 
 *(Generated by `scripts/gen_index.py`, owner: Desi, 2026-09-17. If a document is missing from this list, it is not committed.)*
