@@ -42,7 +42,10 @@ reporting algorithm to become more sophisticated"):
 2. `N` is an exemption, and an exemption must be *claimed in writing* — otherwise it is a
    self-granted pass, which is how N would become the dumping ground P used to be. No stated reason
    to skip review -> the item reads as `V`. The honest failure mode: something unexplained reads as
-   waiting, which is what it is. Today that means N=0 — nothing has ever declared itself exempt.
+   waiting, which is what it is. Until 2026-10-10 that read as N=0 for a *second* reason: nothing
+   in the code could ever write the field, so the letter was unreachable — a reviewer who judged an
+   internal run to need no review had only `postponed` or `rejected`, both of which say something
+   false about it. `exempt()` is now the write path; the field is claimed in writing, never inferred.
 
 His reading of the two numbers, kept because it is the point of the whole exercise:
 `N = P` in the lifetime totals means the criteria are broken — everything looks reviewable so
@@ -397,6 +400,47 @@ def is_exempt(rec: dict) -> bool:
     return bool((rec.get("no_review_reason") or "").strip())
 
 
+def exempt(path: Path = LEDGER, item_id: str = "", reason: str = "", by: str = "") -> dict:
+    """Claim an item as needing no review (letter N) — the exit for a run with no artifact.
+
+    Why this exists (2026-10-10). `is_exempt` could read a `no_review_reason`, `counts` awarded N for
+    it, and the daily report watched whether N = P — but **nothing could ever write the field**, so N
+    was 0 by construction and a reviewer who judged an internal navigation run to need no review had
+    no honest exit: `postponed` and `rejected` both say something untrue about it. This is the missing
+    write path for the human's own letter (2026-10-07). The reason is mandatory for the same cause it
+    is everywhere else — an exemption nobody wrote down is a self-granted pass, and a self-granted
+    pass is how a letter becomes a dumping ground. An already-decided item (A/P/R) needs no exemption
+    and is refused: only a waiting item is claimed.
+    """
+    if not reason.strip():
+        raise ValueError("an exemption needs a written reason — an unwritten claim is a self-granted "
+                         "pass, which is how N would become the dumping ground P used to be")
+    rec = load(path).get(item_id)
+    if rec is None:
+        raise KeyError(f"no such item: {item_id}")
+    if letter_for(rec) != "W":
+        raise ValueError(f"{item_id} is {letter_for(rec)}, not waiting — an item already decided "
+                         f"needs no exemption")
+    rec = dict(rec)
+    rec.update(
+        no_review_reason=reason.strip(),
+        no_review_by=by or "?",
+        no_review_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    )
+    append([rec], path)
+    return rec
+
+
+def needs_review(rec: dict) -> bool:
+    """A waiting item somebody must actually look at. An exempt item (N) is waiting for no one.
+
+    `waiting`/`assigned`/`holes`/`draw` read this rather than the bare `letter_for == W`, so an item
+    whose exemption is on disk leaves the queues the moment it is claimed. The two axes stay separate
+    in `counts` (N+V = A+P+W+R, row for row); this is only about who is still being asked to look.
+    """
+    return letter_for(rec) == "W" and not is_exempt(rec)
+
+
 def counts(items: dict[str, dict], hours: int | None = None) -> dict:
     """The six groups, split by amigo and by internal/external. `hours=None` is lifetime.
 
@@ -465,7 +509,7 @@ def waiting(items: dict[str, dict], n: int = 5, not_mine: str = "") -> list[dict
     exclusion is whatever it is told — the ledger does not guess who is looking.
     """
     rows = [r for r in items.values()
-            if letter_for(r) == "W" and r.get("amigo") != not_mine]
+            if needs_review(r) and r.get("amigo") != not_mine]
     return sorted(rows, key=lambda r: r.get("filed_utc") or "")[:n]
 
 
@@ -495,9 +539,11 @@ def assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason: str = "
     rec = load(path).get(item_id)
     if rec is None:
         raise KeyError(f"no such item: {item_id}")
-    if letter_for(rec) != "W":
-        raise ValueError(f"{item_id} is {letter_for(rec)}, not waiting — only a waiting item is "
-                         f"assigned; it is not in anyone's queue")
+    if not needs_review(rec):
+        raise ValueError(f"{item_id} is {letter_for(rec)}"
+                         + (" and is exempt from review (N)" if is_exempt(rec) else "")
+                         + ", not waiting — only a waiting item is assigned; it is not in anyone's "
+                           "queue")
     if to not in AMIGOS:
         raise ValueError(f"unknown amigo {to!r}; the five are {', '.join(AMIGOS)}")
     author = rec.get("amigo")
@@ -537,7 +583,7 @@ def draw(path: Path = LEDGER, dir_: Path = BAND_DIR, by: str = "", only: str = "
     rates = json.loads(band_file.read_text(encoding="utf-8")).get("rates_usd_per_million", {})
     out: list[dict] = []
     for rec in sorted(load(path).values(), key=lambda r: r.get("filed_utc") or ""):
-        if letter_for(rec) != "W" or rec.get("assigned_to"):
+        if not needs_review(rec) or rec.get("assigned_to"):
             continue
         if only and rec["id"] != only:
             continue
@@ -574,14 +620,14 @@ def _pool(rec: dict, band: list[str], rates: dict) -> tuple[list[str], str]:
 def assigned(items: dict[str, dict], who: str, n: int = 5) -> list[dict]:
     """The waiting items that carry this amigo's name — the queue a wake reads."""
     rows = [r for r in items.values()
-            if letter_for(r) == "W" and r.get("assigned_to") == who]
+            if needs_review(r) and r.get("assigned_to") == who]
     return sorted(rows, key=lambda r: r.get("filed_utc") or "")[:n]
 
 
 def holes(items: dict[str, dict]) -> list[dict]:
     """Waiting items with no name on them. Not a queue — the escalation list."""
     return sorted([r for r in items.values()
-                   if letter_for(r) == "W" and not r.get("assigned_to")],
+                   if needs_review(r) and not r.get("assigned_to")],
                   key=lambda r: r.get("filed_utc") or "")
 
 
@@ -630,6 +676,8 @@ def _cli() -> int:
     ap.add_argument("--force", action="store_true", help="move an already-frozen assignment")
     ap.add_argument("--holes", action="store_true",
                     help="waiting items with no name on them — the escalation list")
+    ap.add_argument("--exempt", metavar="ID",
+                    help="claim an item as needing no review (letter N) — for a run with no artifact")
     ap.add_argument("--hours", type=int, default=24)
     ap.add_argument("--list", action="store_true")
     args = ap.parse_args()
@@ -642,6 +690,10 @@ def _cli() -> int:
         rec = review(item_id=args.review, state=args.state or "", reason=args.reason,
                      reviewer=args.reviewer)
         print(f"item_ledger: {rec['id']} -> {rec['state']}: {rec['reason']}")
+        return 0
+    if args.exempt:
+        rec = exempt(item_id=args.exempt, reason=args.reason, by=args.by or args.reviewer)
+        print(f"item_ledger: {rec['id']} -> N (no review needed): {rec['no_review_reason']}")
         return 0
     if args.assign or args.draw or args.queue or args.holes:
         items = load()
@@ -694,6 +746,8 @@ def _cli() -> int:
         print("\nEvery exit leaves W into an existing queue, and no exit goes nowhere:")
         print("  accomplished — ONLY by doing the work yourself, in this wake; say what you did")
         print("  postponed / rejected — with a substantive reason; that reason IS the record")
+        print("  no review needed — `--exempt <id> --reason \"why\"` (letter N), for a run with "
+              "nothing to review")
         print("  python3 channels/item_ledger.py --review <id> --state accomplished|postponed|"
               "rejected \\\n      --reason \"why\" --reviewer " + args.queue)
         print("Moving an item to `accomplished` without doing it is a stamp, not a review.")

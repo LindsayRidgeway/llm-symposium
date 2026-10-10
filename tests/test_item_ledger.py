@@ -278,6 +278,69 @@ class TestReview(unittest.TestCase):
                 self.assertEqual(il.load(self.path)["a"]["state"], "accomplished")
 
 
+class TestExemption(unittest.TestCase):
+    """The `N` letter (needs no review) had a reader and no writer until 2026-10-10: `is_exempt`
+    honoured it, `counts` awarded it and the daily report watched N = P, but nothing could write the
+    field — so a reviewer judging an internal run to need no review had only `postponed`/`rejected`,
+    both of which say something untrue about it. These pin the write path and the exit it buys."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = Path(self.tmp.name) / "items.jsonl"
+        il.append([
+            {"id": "nav", "amigo": "gemini", "scope": "internal", "title": "nav run",
+             "state": None, "filed_utc": "2026-09-20T00:00:00Z"},
+            {"id": "art", "amigo": "gemini", "scope": "external", "title": "a page",
+             "state": None, "filed_utc": "2026-09-16T00:00:00Z"},
+        ], self.path)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_a_reason_is_required(self):
+        # Same cause as everywhere: an unwritten claim is a self-granted pass.
+        with self.assertRaises(ValueError):
+            il.exempt(path=self.path, item_id="nav", reason="   ")
+
+    def test_the_reason_is_written_and_the_item_reads_as_n(self):
+        il.exempt(path=self.path, item_id="nav",
+                  reason="internal navigation run, nothing to review", by="desi")
+        rec = il.load(self.path)["nav"]
+        self.assertTrue(il.is_exempt(rec))
+        self.assertEqual(rec["no_review_by"], "desi")
+        self.assertTrue(rec["no_review_utc"])
+        c = il.counts(il.load(self.path), None)
+        self.assertEqual(c["N"]["total"], 1)
+        self.assertEqual(c["V"]["total"], 1)
+
+    def test_an_exempt_item_leaves_both_queues_and_the_hole_list(self):
+        il.exempt(path=self.path, item_id="nav", reason="nothing to review", by="desi")
+        items = il.load(self.path)
+        self.assertEqual([r["id"] for r in il.waiting(items, 5)], ["art"])
+        self.assertEqual([r["id"] for r in il.holes(items)], ["art"])
+
+    def test_an_exempt_item_cannot_be_assigned(self):
+        il.exempt(path=self.path, item_id="nav", reason="nothing to review", by="desi")
+        with self.assertRaises(ValueError):
+            il.assign(path=self.path, item_id="nav", to="desi", reason="why")
+
+    def test_a_decided_item_needs_no_exemption(self):
+        il.review(path=self.path, item_id="nav", state="postponed", reason="closed")
+        with self.assertRaises(ValueError):
+            il.exempt(path=self.path, item_id="nav", reason="too late", by="desi")
+
+    def test_the_two_axes_still_add_up(self):
+        # N+V = A+P+W+R is row for row; exempting moves an item along the review axis, not off it.
+        il.exempt(path=self.path, item_id="nav", reason="nothing to review", by="desi")
+        c = il.counts(il.load(self.path), None)
+        self.assertEqual(c["N"]["total"] + c["V"]["total"],
+                         c["A"]["total"] + c["P"]["total"] + c["W"]["total"] + c["R"]["total"])
+
+    def test_an_unknown_item_is_refused(self):
+        with self.assertRaises(KeyError):
+            il.exempt(path=self.path, item_id="nope", reason="why", by="desi")
+
+
 class TestAssignment(unittest.TestCase):
     """Who looks. The human's algorithm, 2026-10-09: name the best suited, else draw cheap."""
 
