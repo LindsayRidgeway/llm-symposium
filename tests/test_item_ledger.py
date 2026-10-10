@@ -119,6 +119,49 @@ class TestLetters(unittest.TestCase):
         self.assertFalse(il.is_exempt({"no_review_reason": "  "}))
         self.assertTrue(il.is_exempt({"no_review_reason": "a ledger row, nothing to review"}))
 
+    def test_a_written_exemption_leaves_waiting(self):
+        # The N exit has to drain W, or "needs no review" and "nobody has looked" sit on one item
+        # at once and the queue it is in can never empty.
+        self.assertEqual(
+            il.letter_for({"state": None,
+                           "no_review_reason": "a ledger row, nothing in it to review"}), "A")
+        # A reason of spaces is not an exemption, so it still waits — the claim must be made.
+        self.assertEqual(il.letter_for({"state": None, "no_review_reason": "   "}), "W")
+        self.assertEqual(il.letter_for({"state": None}), "W")
+
+
+class TestDeclareNoReview(unittest.TestCase):
+    """The N exit the scheme named but the ledger could not perform (added 2026-10-10)."""
+
+    def _ledger(self, t: str) -> Path:
+        p = Path(t) / "items.jsonl"
+        p.write_text(json.dumps({"id": "x", "amigo": "gemini", "scope": "internal",
+                                 "state": None, "filed_utc": "2026-10-01T00:00:00Z",
+                                 "title": "x"}) + "\n", encoding="utf-8")
+        return p
+
+    def test_it_records_the_reason_and_settles_the_item(self):
+        with tempfile.TemporaryDirectory() as t:
+            p = self._ledger(t)
+            rec = il.declare_no_review(
+                path=p, item_id="x", reviewer="desi",
+                reason="orientation run; its only change was a bookkeeping edit to channels/agenda.md")
+            self.assertTrue(il.is_exempt(rec))
+            self.assertEqual(rec["no_review_by"], "desi")
+            self.assertEqual(il.letter_for(il.load(p)["x"]), "A")
+
+    def test_an_exemption_with_no_reason_is_refused(self):
+        with tempfile.TemporaryDirectory() as t:
+            p = self._ledger(t)
+            with self.assertRaises(ValueError):
+                il.declare_no_review(path=p, item_id="x", reason="   ", reviewer="desi")
+
+    def test_an_unknown_item_is_refused(self):
+        with tempfile.TemporaryDirectory() as t:
+            p = self._ledger(t)
+            with self.assertRaises(KeyError):
+                il.declare_no_review(path=p, item_id="nope", reason="why", reviewer="desi")
+
 
 class TestCounts(unittest.TestCase):
     def rows(self):

@@ -104,6 +104,7 @@ CLI:
     python3 channels/item_ledger.py --draw                 # name every unassigned waiting item
     python3 channels/item_ledger.py --assign <id> --to gemini --reason "why gemini"
     python3 channels/item_ledger.py --review <id> --state postponed --reason "why"
+    python3 channels/item_ledger.py --no-review <id> --reason "why nothing needs looking at"
     python3 channels/item_ledger.py --summary [--hours 24]
 """
 from __future__ import annotations
@@ -370,6 +371,37 @@ def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str 
     return rec
 
 
+def declare_no_review(path: Path = LEDGER, item_id: str = "", reason: str = "",
+                      reviewer: str = "human") -> dict:
+    """Claim a waiting item needs no review, and say why in writing — the N exit.
+
+    This is the exit the human's 2026-10-07 scheme names but the ledger could not perform: the code
+    read `no_review_reason` (`is_exempt`) and the human's daily report counted N, but nothing on
+    disk could *set* the field, so every item that performed nothing reviewable was stuck in W
+    forever. A derived row whose whole footprint is a bookkeeping edit is the ordinary case, and the
+    reason it needs no scrutiny is exactly what must be written down: an exemption with no reason is
+    a self-granted pass, which is how N would become the dumping ground P used to be.
+
+    A declared exemption leaves W into A (see `letter_for`) — the item is settled, not waiting. It
+    keeps counting as N on the review-needed axis, so the human's N+V = A+P+W+R still holds.
+    """
+    if not reason.strip():
+        raise ValueError(
+            "an exemption needs its reason on disk — 'no review needed' with nothing said is a "
+            "self-granted pass, and it is how N becomes the dumping ground the human warned about")
+    rec = load(path).get(item_id)
+    if rec is None:
+        raise KeyError(f"no such item: {item_id}")
+    rec = dict(rec)
+    rec.update(
+        no_review_reason=reason.strip(),
+        no_review_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        no_review_by=reviewer,
+    )
+    append([rec], path)
+    return rec
+
+
 def letter_for(rec: dict) -> str:
     """Which of A/P/W/R an item sits in. W is the remainder, and deliberately so.
 
@@ -377,8 +409,19 @@ def letter_for(rec: dict) -> str:
     artifact already carries a decision. `postponed` without a written reason reads as W too —
     a postponement nobody wrote down is not a decision, it is an absence, and the rule from
     2026-10-07 says an unwritten claim does not count.
+
+    An item that has *declared itself exempt in writing* (`no_review_reason`, the N axis) has a
+    settled outcome, not a pending one: it was performed and needs no scrutiny, so it is not
+    waiting for anybody. It therefore leaves W into A. Without this, an item could carry N (the
+    review-needed axis) and W (the outcome axis) at once, which reads as "needs no review" and
+    "nobody has looked" at the same time — and the queue it sits in could never drain, which is
+    precisely the failure the reviewer-assignment rule of 2026-10-09 was written to end. N is
+    still counted on its own axis; N+V = A+P+W+R holds, because the item is still one letter on
+    each axis.
     """
     state = rec.get("state")
+    if state is None and is_exempt(rec):
+        return "A"
     if state == "accomplished":
         return "A"
     if state == "rejected":
@@ -612,6 +655,8 @@ def _cli() -> int:
     ap.add_argument("--amigo", choices=AMIGOS)
     ap.add_argument("--review", metavar="ID")
     ap.add_argument("--state", choices=STATES)
+    ap.add_argument("--no-review", metavar="ID", dest="no_review",
+                    help="declare a waiting item needs no review — the N exit (--reason required)")
     ap.add_argument("--reason", default="")
     ap.add_argument("--reviewer", default="human")
     ap.add_argument("--summary", action="store_true")
@@ -642,6 +687,11 @@ def _cli() -> int:
         rec = review(item_id=args.review, state=args.state or "", reason=args.reason,
                      reviewer=args.reviewer)
         print(f"item_ledger: {rec['id']} -> {rec['state']}: {rec['reason']}")
+        return 0
+    if args.no_review:
+        rec = declare_no_review(item_id=args.no_review, reason=args.reason,
+                               reviewer=args.reviewer)
+        print(f"item_ledger: {rec['id']} -> no review needed: {rec['no_review_reason']}")
         return 0
     if args.assign or args.draw or args.queue or args.holes:
         items = load()
