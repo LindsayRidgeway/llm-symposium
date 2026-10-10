@@ -294,3 +294,77 @@ dissociations.
 
 **Pinned by** `tests/test_affective_pain_acupuncture_filtered.py`, which re-derives the 16 from the
 stored flags and fails if the map names a different set.
+
+## 9. The second pain population — fibromyalgia, run 2026-10-10
+
+**The question.** Item 32's next action (3) asks whether §7/§8's affect-blindness **generalises
+beyond acupuncture** — i.e. whether it is a property of how chronic pain is *measured* or a quirk of
+one intervention's literature. Every arm so far is an *intervention* arm (`acupuncture` or `vns` AND
+the measurement filter). This arm keeps the measurement filter **verbatim** (imported from
+`scripts/affective_pain_acupuncture_filtered.py`, so the two cannot drift) and drops the intervention
+for a **population**: fibromyalgia.
+
+**Why fibromyalgia, and not just "another pain."** It is the chronic-pain population in which the
+affective burden is least optional — depression, anxiety and pain catastrophising are clinical
+comorbidities of the diagnosis and feature in its own diagnostic literature. If the affective column
+is still missing where mood is partly diagnostic, the blindness is a general property of pain
+measurement; if it is not missing there, it was specific to acupuncture. The hardest case for the
+finding is also the fairest test of it.
+
+**The search, exactly.** `scripts/affective_pain_second_population_filtered.py`, PubMed E-utilities,
+publication dates 2015-01-01..2026-10-10:
+`(fibromyalgia[tiab] OR fibromyalgia[MeSH Terms] OR "fibromyalgia syndrome"[tiab] OR fibromyalgias[tiab])
+AND <the same brain/autonomic measurement filter as §7> AND humans[MeSH Terms]`.
+**485 matching, 485 fetched — a census, not censored.** Records and flags in
+`research/affective-pain-neuromodulation-second-population-filtered-raw.json`.
+
+**The two arms side by side.** Both arms use the same keyword screen (a term in an abstract is a
+*screen*, not a reading; §2's caveat stands).
+
+| | acupuncture, §7 (filtered) | fibromyalgia (filtered) |
+|---|---|---|
+| matching / fetched | 40 / 40 (census) | 485 / 485 (census) |
+| human-primary | 21 | 352 |
+| set **both** flags | 5 (24%) | 157 (45%) |
+| set the biomarker flag **only** (affect-blind) | 16 (76%) | 184 (52%) |
+| **biomarker-only** that name a pain instrument or *analgesia* | 10 / 16 (63%) | 52 / 184 (28%) |
+
+**Finding 1 — the affect-blindness itself generalises, but weaker.** Half (184/352, 52%) of the
+human-primary measurement-rich fibromyalgia studies name a brain or autonomic measure and **no
+affective term at all**. A missing mood column is therefore not peculiar to the acupuncture arm; the
+same omission appears in the population where mood is most expected. It is, however, *less* severe
+there (52% vs 76%), and the affective term is present in 163/352 (46%) of the fibromyalgia
+human-primary records versus 5/21 (24%) of the acupuncture ones — consistent with mood being closer
+to the centre of fibromyalgia research than of acupuncture research.
+
+**Finding 2 — §8's specific formulation does *not* transfer, and this is the sharper result.** §8
+narrowed the acupuncture claim to *the brain and the pain, but not the mood*: its 16 affect-blind
+records were still pain trials (10 of 16, 63%, name a pain instrument or *analgesia*). The
+fibromyalgia affect-blind records are mostly **not** pain trials — only 52 of 184 (28%) name a pain
+instrument or *analgesia*. Read by title, they are autonomic, EEG and morphometric studies: heart-rate
+variability and cardiac autonomic control, polysomnography and auditory evoked potentials,
+grey-matter and functional-connectivity morphometry, cortisol-awakening response, and
+cognition/("fibrofog") performance. They are **mechanism studies that never set out to measure a
+clinical pain outcome**, so their silence about mood is a silence about outcomes altogether, not the
+acupuncture pattern of measuring pain while omitting mood. So the *general* fact (much measurement-rich
+pain research omits affect) replicates; the *specific* and more damning fact — pain measured, mood
+omitted in the same trial — is, on this evidence, an acupuncture-arm property and is not reproduced in
+fibromyalgia.
+
+**Errata, found while re-deriving.** §8 states "21 are human-primary; **18** of those set the
+affective flag too (§7), leaving 16." The correct figure is **five**, matching §7's own heading ("the
+five human-primary records that set both flags") and the arithmetic that produces §8's 16 (21 − 5 =
+16). "18" was a typo; corrected here rather than left to contradict §7.
+
+**Honest limits.** (1) The keyword screen, again: "names no affect term" means those words are absent
+from the stored abstract, not that mood was unmeasured, and "fibromyalgia" in an exclusion criterion
+is not a fibromyalgia study. (2) The arm sizes differ by an order of magnitude (21 vs 352
+human-primary); the percentage comparison in the table leans on n=21 for acupuncture and should be
+read as a direction, not a precise contrast. (3) Finding 2 is a hand-read of titles plus the flag
+columns over 184 records, not a line-by-line reading of 184 papers; the three records §4/§7/§8 flagged
+as mislabelled or off-arm show the screen is fallible at the edges. (4) This arm adds a *population*;
+it does not re-run the acupuncture arm, and it does not settle whether the acupuncture pattern is an
+artefact of that arm's small size.
+
+**Pinned by** `tests/test_affective_pain_second_population_filtered.py`, which re-derives §9's numbers
+from the stored flags and fails if the map and the raw record disagree.
