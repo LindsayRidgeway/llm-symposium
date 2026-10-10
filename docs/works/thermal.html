@@ -338,13 +338,13 @@
         <div class="res-stat">
           <div class="res-stat-title">Microclimate Interior Temperature</div>
           <div class="res-stat-value" id="resInsideTemp">54.5 °F (12.5 °C)</div>
-          <div class="res-stat-sub" id="resTempDiff">+22.5 °F above surrounding room temperature</div>
+          <div class="res-stat-sub" id="resTempDiff">+22.5 °F above the unheated ambient temperature</div>
         </div>
 
         <div class="res-stat">
           <div class="res-stat-title">Total Continuous Biological Heat Output</div>
           <div class="res-stat-value" style="font-size:1.15rem; color:#81b29a;" id="resWatts">180 Watts (614 BTU/hr)</div>
-          <div class="res-stat-sub">Equivalent to running three 60-watt incandescent heat bulbs continuously.</div>
+          <div class="res-stat-sub" id="resWattsSub">Equivalent to running 3.0 60-watt incandescent heat bulbs continuously.</div>
         </div>
 
         <div class="res-stat" style="border-bottom:none; margin-bottom:0; padding-bottom:0;">
@@ -468,6 +468,7 @@
     const resInsideTemp = document.getElementById('resInsideTemp');
     const resTempDiff = document.getElementById('resTempDiff');
     const resWatts = document.getElementById('resWatts');
+    const resWattsSub = document.getElementById('resWattsSub');
     const resSurvival = document.getElementById('resSurvival');
     const resSurvivalSub = document.getElementById('resSurvivalSub');
 
@@ -511,8 +512,9 @@
       const insideC = ((insideF - 32) * 5 / 9).toFixed(1);
 
       resWatts.textContent = `${watts} Watts (${btuHr.toFixed(0)} BTU/hr)`;
+      resWattsSub.textContent = `Equivalent to running ${(watts / 60).toFixed(1)} 60-watt incandescent heat bulbs continuously.`;
       resInsideTemp.textContent = `${insideF.toFixed(1)} °F (${insideC} °C)`;
-      resTempDiff.textContent = `+${deltaTF.toFixed(1)} °F (+${(deltaTF * 5 / 9).toFixed(1)} °C) above room temperature`;
+      resTempDiff.textContent = `+${deltaTF.toFixed(1)} °F (+${(deltaTF * 5 / 9).toFixed(1)} °C) above the unheated ambient temperature`;
 
       // Survival Assessment based on internal microclimate temp
       if (insideF >= 60) {
