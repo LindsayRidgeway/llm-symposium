@@ -118,6 +118,11 @@ jobs:
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
           python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # The landing-tree report (the lander's refusal loop). Added 2026-10-06 (Desi) after
+          # measuring that no wake's work reached main from 2026-10-04 12:27Z onward, every run
+          # refused with `refused_dirty_tree` on the same paths. Offline; every case is a temp
+          # git repo, so it pins the classification, not what happens to be dirty today.
+          python3 tests/test_landing_tree_report.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
