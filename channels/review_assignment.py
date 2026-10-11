@@ -56,7 +56,18 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 ASSIGNMENTS = REPO / "channels" / "review-assignments.jsonl"
-BAND_FILE = REPO / "channels" / "review-cost-band.json"
+
+# The band the assignment reads. The canonical producer is `scripts/price_band.py`, which writes
+# `channels/usage/price-band-YYYY-MM.json` monthly — the SAME file `channels/item_ledger.py` (the
+# live draw) reads. Reading that file here is what stops the two implementations of the human's rule
+# from disagreeing about who is cheapest. `LEGACY_BAND_FILE` is the 2026-10-09 hand seed, kept only
+# as a fallback for the case where no produced band exists yet.
+#
+# Fixed 2026-10-11 (Dmitri): until today this module read `channels/review-cost-band.json`, a seed
+# the monthly job never writes, so a refreshed band was invisible to it while the live ledger saw it.
+BAND_DIR = REPO / "channels" / "usage"
+BAND_GLOB = "price-band-*.json"
+LEGACY_BAND_FILE = REPO / "channels" / "review-cost-band.json"
 
 # The five bodies (ROSTER.md). `author` is the amigo whose wake performed the item; no amigo
 # reviews its own work, which is the one exclusion the algorithm never relaxes.
@@ -104,7 +115,7 @@ def build_band(prices: dict, as_of=None, unit="USD per 1M tokens", source="", no
     }
 
 
-def write_band(prices: dict, path=BAND_FILE, **kw) -> dict:
+def write_band(prices: dict, path=LEGACY_BAND_FILE, **kw) -> dict:
     band = build_band(prices, **kw)
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -112,8 +123,43 @@ def write_band(prices: dict, path=BAND_FILE, **kw) -> dict:
     return band
 
 
-def read_band(path=BAND_FILE) -> dict:
-    return json.loads(Path(path).read_text(encoding="utf-8"))
+def band_path(dir_=BAND_DIR) -> Path:
+    """The newest band the monthly producer wrote, or the legacy seed if none exists.
+
+    Same resolution as `channels/item_ledger.py:price_band()` — newest file wins, and a missing
+    produced band is announced by the caller, never silently defaulted to a hardcoded amigo.
+    """
+    files = sorted(Path(dir_).glob(BAND_GLOB))
+    return files[-1] if files else LEGACY_BAND_FILE
+
+
+def normalise_band(data: dict) -> dict:
+    """Accept both band shapes, and clock staleness from the band's own production date.
+
+    `scripts/price_band.py` writes `rates_usd_per_million: {amigo: blended}` alongside a `band`
+    list; the legacy seed wrote `prices: {amigo: cost}`. `band` is always taken as given — the
+    human's rule is that the band is *read* at assignment time, never recomputed.
+    """
+    out = dict(data)
+    if "prices" not in out:
+        rates = out.get("rates_usd_per_million") or {}
+        out["prices"] = {k: (v.get("blended") if isinstance(v, dict) else v)
+                         for k, v in rates.items()}
+    out.setdefault("unit", "USD per 1M tokens")
+    out.setdefault("source", "")
+    out.setdefault("note", "")
+    # `as_of` in a produced band is the *price* date; `written` is when the band was computed.
+    # Staleness is about the band (the human: "a band older than 45 days is stale"), so clock from
+    # `written` and keep the price date under its own key.
+    if out.get("written") and out.get("as_of") != out["written"]:
+        out["price_as_of"] = out.get("as_of")
+        out["as_of"] = out["written"]
+    return out
+
+
+def read_band(path=None) -> dict:
+    p = Path(path) if path else band_path()
+    return normalise_band(json.loads(p.read_text(encoding="utf-8")))
 
 
 def band_age_days(band: dict, today=None) -> int:
@@ -231,10 +277,15 @@ def assign(item, author, band_record, best=None, best_reason=None, rng=None,
 # --------------------------------------------------------------------------------------------
 
 def _cmd_band(_args) -> int:
-    band = read_band()
+    path = band_path()
+    band = read_band(path)
     age = band_age_days(band)
     stale = band_is_stale(band)
-    print(f"band (as of {band['as_of']}, {age}d old"
+    try:
+        shown = path.relative_to(REPO)
+    except ValueError:
+        shown = path
+    print(f"band {shown} (as of {band['as_of']}, {age}d old"
           + (", STALE" if stale else "") + f"): {', '.join(band['band'])}")
     print(f"  unit:   {band.get('unit', '')}")
     print(f"  prices: " + ", ".join(f"{k}={v}" for k, v in band["prices"].items()))

@@ -10,6 +10,7 @@ Plus the two things the rule states in prose and must therefore also be true in 
 match outranks cost, and a competence assignment must carry its one-line reason.
 """
 import datetime as dt
+import json
 import random
 import sys
 import tempfile
@@ -101,6 +102,67 @@ class TestChoose(unittest.TestCase):
         for n, c in counts.items():
             self.assertGreater(c, 600, f"{n} under-drawn: {c}")
             self.assertLess(c, 1400, f"{n} over-drawn: {c}")
+
+
+class TestCanonicalBand(unittest.TestCase):
+    """The assignment must read the band the monthly producer writes — not a file nothing updates.
+
+    Regression pinned here (2026-10-11): `review_assignment.py` read `channels/review-cost-band.json`,
+    a 2026-10-09 seed `scripts/price_band.py` never writes, so a refreshed band was invisible to it
+    while the live draw (`channels/item_ledger.py`) saw the new one. Two implementations of the
+    human's rule disagreed about who was cheapest.
+    """
+
+    def _producer_file(self, directory, name="price-band-2026-10.json"):
+        p = Path(directory) / name
+        p.write_text(json.dumps({
+            "as_of": "2026-08-25",              # price measurement date
+            "written": "2026-10-09",            # when the band was computed
+            "rule": "within 2x of the cheapest blended rate",
+            "cheapest": "desi",
+            "band": ["desi", "dmitri"],
+            "rates_usd_per_million": {"claude": 1.15, "desi": 0.01, "dmitri": 0.01,
+                                      "gemini": 0.59, "tarik": 1.86},
+        }), encoding="utf-8")
+        return p
+
+    def test_band_path_picks_the_newest_produced_band(self):
+        with tempfile.TemporaryDirectory() as t:
+            self._producer_file(t, "price-band-2026-09.json")
+            newest = self._producer_file(t, "price-band-2026-10.json")
+            self.assertEqual(ra.band_path(t), newest)
+
+    def test_band_path_falls_back_to_the_legacy_seed_when_none_exist(self):
+        with tempfile.TemporaryDirectory() as t:
+            self.assertEqual(ra.band_path(t), ra.LEGACY_BAND_FILE)
+
+    def test_read_band_accepts_the_producer_shape_and_keeps_the_band_as_given(self):
+        with tempfile.TemporaryDirectory() as t:
+            band = ra.read_band(self._producer_file(t))
+            # prices are derived from rates_usd_per_million, keys preserved
+            self.assertEqual(band["prices"]["desi"], 0.01)
+            self.assertEqual(band["prices"]["tarik"], 1.86)
+            # `band` is read, not recomputed: it survives verbatim even though a tie-band would
+            # also be ["desi", "dmitri"] — the point is that the file decides, not this module.
+            self.assertEqual(band["band"], ["desi", "dmitri"])
+
+    def test_staleness_clocks_from_when_the_band_was_written_and_keeps_the_price_date(self):
+        with tempfile.TemporaryDirectory() as t:
+            band = ra.read_band(self._producer_file(t))
+            self.assertEqual(band["as_of"], "2026-10-09")       # written date clocks staleness
+            self.assertEqual(band["price_as_of"], "2026-08-25")  # the measurement date is kept
+            self.assertFalse(ra.band_is_stale(band, today=dt.date(2026, 10, 20)))
+            self.assertTrue(ra.band_is_stale(band, today=dt.date(2027, 1, 1)))
+
+    def test_read_band_still_reads_the_legacy_seed(self):
+        with tempfile.TemporaryDirectory() as t:
+            p = Path(t) / "review-cost-band.json"
+            p.write_text(json.dumps({"as_of": "2026-10-09", "band": ["desi", "dmitri"],
+                                     "prices": {"desi": 0.01, "dmitri": 0.01}}), encoding="utf-8")
+            band = ra.read_band(p)
+            self.assertEqual(band["band"], ["desi", "dmitri"])
+            self.assertEqual(band["prices"]["desi"], 0.01)
+            self.assertEqual(band["as_of"], "2026-10-09")
 
 
 class TestFreeze(unittest.TestCase):

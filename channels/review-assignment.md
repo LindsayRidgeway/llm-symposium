@@ -23,9 +23,9 @@ Two properties of the cost branch are load-bearing, and both come from the human
   assignment and the item would drift back to unowned. Recorded, the *decision* is fixed while the
   *price list* moves underneath it.
 - **The cache names a band, not a winner, and is dated.** A single cheapest amigo would collapse the
-  random branch into a fixed choice. The band is read from `channels/review-cost-band.json`, which
-  carries its own `as_of` date; a band older than 45 days is reported as stale rather than silently
-  trusted.
+  random branch into a fixed choice. The band is read from `channels/usage/price-band-YYYY-MM.json`,
+  written by `scripts/price_band.py`, which carries its own date; a band older than 45 days is
+  reported as stale rather than silently trusted.
 
 ## The monthly cache
 
