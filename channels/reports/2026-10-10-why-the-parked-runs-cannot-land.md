@@ -80,9 +80,14 @@ Read as a list of causes rather than a list of failures:
    whether or not this run touched it, so a false claim passed the check. It now compares the claim
    against the run's own diff, the one record the worker cannot write.
 
-## Changed tonight (`desi-bot/local_tick.py`, same change owed to the other four bodies)
+## Lineage
 
-- `orientation()` now prints, per recent run, the lander's refusal (`LANDING REFUSED: … tests …`).
+The dirty-tree class already had a tool: `scripts/landing_tree_report.py` (written 2026-10-06,
+pinned by `tests/test_landing_tree_report.py`), which classifies the paths the lander refuses on
+*by kind*, because the obvious cleanup would destroy real work. This report is the same job for the
+other class of refusal — the test gate — where no tool existed because the refusal was never read.
+
+## Changed tonight (`desi-bot/local_tick.py`, same change owed to the other four bodies)- `orientation()` now prints, per recent run, the lander's refusal (`LANDING REFUSED: … tests …`).
   The newest refused run is tonight's `a1ef233d`, so the next wake is the first that can see its
   own predecessor's refusal.
 - `recent_runs()` now carries `changed_paths`; `orientation()` prints `CLAIMED, NOT IN ITS DIFF: …`
