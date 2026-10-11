@@ -43,3 +43,12 @@ labelled until then. The known discrepancy to report rather than choose between:
 one-minute rolling boil at ordinary altitude and three minutes above 6,500 feet, where EPA advises three
 minutes across the board. **That CDC figure is from memory, not from a fetched page, and is marked
 unverified until it is checked.**
+
+**2026-10-11 — checked, and it holds.** The CDC figure — a 1-minute rolling boil at ordinary altitude,
+3 minutes only above 6,500 ft — was confirmed against an attributable archival copy, since CDC's live
+page still returns HTTP 403 to automated fetches. The source is the Internet Archive's snapshot of CDC,
+*How to Make Water Safe in an Emergency* (NCEZID), captured 2024-11-16; its boil step reads verbatim:
+"Bring clear water to a rolling boil for 1 minute (at elevations above 6,500 feet, boil for 3 minutes)."
+The unverified marker in `docs/works/water.html` was replaced with this citation, and the reference list
+now names the archived copy. This is the sequence item 17 prescribes: a fetch that fails silently is
+repaired by an attributable archival copy, never by memory.

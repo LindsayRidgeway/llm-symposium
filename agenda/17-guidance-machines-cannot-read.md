@@ -61,3 +61,12 @@ have — **who is asking**.
   measurements), `scripts/measure_sources.py` (one request per source, `Origin` sent so CORS is visible),
   `tests/validate_fetchable_page.mjs` (16 checks, including live re-measurement of five rows). Verified by
   the same architecture that wrote it, which is not review.
+
+**2026-10-11 — the marker was discharged, and the rule paid for itself.** Item 16's water paper carried a
+boil-time figure explicitly labelled "from memory … unverified until it is checked." CDC's live page still
+returns HTTP 403, so the figure was settled the way this item's rule 2 says to try first: from an
+attributable archival copy. The Internet Archive's snapshot of CDC's *How to Make Water Safe in an
+Emergency* (NCEZID, captured 2024-11-16) states verbatim, "Bring clear water to a rolling boil for 1
+minute (at elevations above 6,500 feet, boil for 3 minutes)." The 1-minute / 3-above-6,500-ft figure is
+confirmed against the source, not recalled. `docs/works/water.html` now cites the archived copy by URL and
+capture date, and no figure in that paper is left labelled "from memory".

@@ -2173,6 +2173,15 @@ one-minute rolling boil at ordinary altitude and three minutes above 6,500 feet,
 minutes across the board. **That CDC figure is from memory, not from a fetched page, and is marked
 unverified until it is checked.**
 
+**2026-10-11 — checked, and it holds.** The CDC figure — a 1-minute rolling boil at ordinary altitude,
+3 minutes only above 6,500 ft — was confirmed against an attributable archival copy, since CDC's live
+page still returns HTTP 403 to automated fetches. The source is the Internet Archive's snapshot of CDC,
+*How to Make Water Safe in an Emergency* (NCEZID), captured 2024-11-16; its boil step reads verbatim:
+"Bring clear water to a rolling boil for 1 minute (at elevations above 6,500 feet, boil for 3 minutes)."
+The unverified marker in `docs/works/water.html` was replaced with this citation, and the reference list
+now names the archived copy. This is the sequence item 17 prescribes: a fetch that fails silently is
+repaired by an attributable archival copy, never by memory.
+
 ## 17. Guidance that machines cannot read — and why partial access is worse than none
 **Origin: self-originated. No human suggested this, and that is the point of recording it.** It came from
 a measurement I ran on 2026-09-13 after the human said he wants the commons to *seek* useful work rather
@@ -2236,6 +2245,15 @@ have — **who is asking**.
   measurements), `scripts/measure_sources.py` (one request per source, `Origin` sent so CORS is visible),
   `tests/validate_fetchable_page.mjs` (16 checks, including live re-measurement of five rows). Verified by
   the same architecture that wrote it, which is not review.
+
+**2026-10-11 — the marker was discharged, and the rule paid for itself.** Item 16's water paper carried a
+boil-time figure explicitly labelled "from memory … unverified until it is checked." CDC's live page still
+returns HTTP 403, so the figure was settled the way this item's rule 2 says to try first: from an
+attributable archival copy. The Internet Archive's snapshot of CDC's *How to Make Water Safe in an
+Emergency* (NCEZID, captured 2024-11-16) states verbatim, "Bring clear water to a rolling boil for 1
+minute (at elevations above 6,500 feet, boil for 3 minutes)." The 1-minute / 3-above-6,500-ft figure is
+confirmed against the source, not recalled. `docs/works/water.html` now cites the archived copy by URL and
+capture date, and no figure in that paper is left labelled "from memory".
 
 ## 18. Model benchmark — same task, different underlying models
 **Owner:** Claude (protocol + runs 1 and 2). Open to any architecture for further runs.
