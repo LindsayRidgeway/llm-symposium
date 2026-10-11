@@ -104,6 +104,7 @@ CLI:
     python3 channels/item_ledger.py --draw                 # name every unassigned waiting item
     python3 channels/item_ledger.py --assign <id> --to gemini --reason "why gemini"
     python3 channels/item_ledger.py --review <id> --state postponed --reason "why"
+    python3 channels/item_ledger.py --reconcile          # waiting rows whose run has since landed
     python3 channels/item_ledger.py --summary [--hours 24]
 """
 from __future__ import annotations
@@ -345,7 +346,40 @@ def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = N
                 fresh.append(item)
                 known[item["id"]] = item
     append(fresh, path)
+    # Rows filed before their run landed would otherwise sit in W for ever; re-check them (2026-10-10).
+    reconcile_landed(path, landed=landed)
     return len(fresh)
+
+
+def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | None = None) -> list[dict]:
+    """Mark still-waiting items whose run has since landed as accomplished (auto:land).
+
+    `collect` sets the state once, when a row is first filed, from the land log as it stood *then*.
+    But the lander runs after the wake: a run collected before its own `land(wake): work from run
+    <id>` commit appears is keyed by run id and never revisited, so it stays `waiting` for ever and
+    the queue the review step reads slowly fills with work that is already on main. Measured
+    2026-10-10: nine such rows, and the count grows with every wake — the exact "recompute what is
+    already done" loop, arriving through the ledger instead of the to-do list.
+
+    Only rows still in W are touched: a reviewer's decision (accomplished/postponed/rejected) is a
+    person's judgement and is never overwritten by the lander's.
+    """
+    if landed is None:
+        landed = landed_run_ids(repo)
+    items = load(path)
+    now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    updates = []
+    for rec in items.values():
+        if letter_for(rec) != "W" or rec.get("id") not in landed:
+            continue
+        upd = dict(rec)
+        upd.update(state="accomplished", state_utc=now,
+                   reason="landed on main (lander's test gate passed)",
+                   reviewer="auto:land")
+        updates.append(upd)
+    if updates:
+        append(updates, path)
+    return updates
 
 
 def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str = "",
@@ -615,6 +649,8 @@ def _cli() -> int:
     ap.add_argument("--reason", default="")
     ap.add_argument("--reviewer", default="human")
     ap.add_argument("--summary", action="store_true")
+    ap.add_argument("--reconcile", action="store_true",
+                    help="move waiting items whose run has since landed to accomplished (auto:land)")
     ap.add_argument("--next", type=int, metavar="N", default=0,
                     help="list the N oldest items waiting for review")
     ap.add_argument("--not-mine", default="",
@@ -637,6 +673,12 @@ def _cli() -> int:
     if args.collect or args.backfill:
         n = collect(amigo=args.amigo)
         print(f"item_ledger: {n} new item(s) recorded; ledger now {len(load())}")
+        return 0
+    if args.reconcile:
+        made = reconcile_landed()
+        print(f"item_ledger: {len(made)} waiting item(s) reconciled — their run has landed on main")
+        for rec in made[:10]:
+            print(f"  {rec['id']}  {rec.get('amigo','?')}")
         return 0
     if args.review:
         rec = review(item_id=args.review, state=args.state or "", reason=args.reason,
