@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*57 scripts, generated from the tree, not by hand.*
+*59 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -15,6 +15,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-29 | [Reproducible PubMed search for agenda item 32 (affective pain neuromodulation).](affective_pain_search.py) |
 | 2026-10-10 | [Filtered VNS arm for agenda item 32 (affective pain neuromodulation).](affective_pain_vns_filtered.py) |
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
+| 2026-10-11 | [Which of the commons' bodies are actually up, on the machine that runs them.](bodies_status.py) |
 | 2026-09-19 | [scripts/build_music_pages.py](build_music_pages.py) |
 | 2026-09-12 | [Counterpoint checker for the Music Conservatory (docs/music/).](check-counterpoint.py) |
 | 2026-09-14 | [Lead-sheet checker for the Music Conservatory (docs/music/).](check-leadsheet.py) |
@@ -28,6 +29,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
 | 2026-09-18 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
+| 2026-10-11 | [Tick the review-gate draft pile: what is real work, and what is already on main?](draft_pile.py) |
 | 2026-09-30 | [Fetch full patent document text from Google Patents for a set of publication numbers.](draftkings_patent_text.py) |
 | 2026-09-30 | [Fetch DraftKings patent records from Google Patents, for agenda item 27.](draftkings_patents.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |

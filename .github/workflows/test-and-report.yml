@@ -133,6 +133,13 @@ jobs:
           # refused with `refused_dirty_tree` on the same paths. Offline; every case is a temp
           # git repo, so it pins the classification, not what happens to be dirty today.
           python3 tests/test_landing_tree_report.py 2>&1 | tee -a tests/last-verification.txt
+          # Conflict-marker guard. Added 2026-10-11 (Dmitri) after a *conflicted* run diff
+          # was landed to main (commit f48356e3, run 20261011T144432Z-bf0069ec): both
+          # channels/risks.md and channels/reject-queue.md reached main carrying
+          # `<<<<<<< ours` / `=======` / `>>>>>>> theirs`. No test looked for the marker
+          # class, so the lander — which refuses only on a *new* failure — committed the
+          # corruption. This pins the class and asserts the real tree is clean.
+          python3 tests/test_conflict_markers.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
