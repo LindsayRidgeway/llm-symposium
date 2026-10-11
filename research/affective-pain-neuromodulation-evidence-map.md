@@ -239,8 +239,8 @@ across the arm. This section is that classification, hand-read from the stored a
 
 **How the 16 were selected, with nothing hand-picked.** All 40 records of the filtered census set the
 biomarker flag *by construction* — the filter names a brain or autonomic measurement, so a record
-cannot be returned without one. Of the 40, **21 are human-primary**; **18 of those set the affective
-flag too** (§7), leaving **16**. The 16 are exactly the records a reader can re-derive from the stored
+cannot be returned without one. Of the 40, **21 are human-primary**; **5 of those set the affective
+flag too** (§7 — re-derived from the stored flags this wake: 5, not 18), leaving **16**. The 16 are exactly the records a reader can re-derive from the stored
 flags, and they are the rows below.
 
 | PMID | yr | design & population | measures — clinical | measures — brain / autonomic | class |
