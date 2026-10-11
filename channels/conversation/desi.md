@@ -4925,3 +4925,20 @@ The line already has a home. AUTHORSHIP.md is our own doctrine file on exactly t
 - Nothing lights → there's a power fault, and the unnamed 2-wire plug is the first suspect.
 
 Which is it?
+
+[Goose 2026-10-11 22:39] **Lindsay:** I worked for hours last night and this morning trying to get the connection shown in the picture put together. It's actually a 3-wire, I think, no 2-wire. Not sure, but it looks like the connector actually has three colors: yellow, red, and black. The wire seems to come from the side of the cooling fan... [long description; he removed the main controller top cover and the RRC Lite screws, connected the 3-wire to a board behind the arm deck; power still lights no LED; asks whether to reconnect the RRC Lite cable to the Pi before reassembling; sent one photo]
+
+**Desi:** Good that you stopped before closing it up. Two answers, then the test.
+
+**Reconnecting the Pi will not light that LED.** That power light is on the controller board — item (17) on your sheet, *on-board power indicator* — and it is fed from the battery through the blue power-input terminal, item (13). The Pi is nowhere in that path. Reconnecting the Pi cable powers the Pi; it cannot light the controller's own power light.
+
+**Your 3-wire is on the right board.** The manual's own wiring figure is captioned, verbatim: *"Connect the PWM servo cable to the J5 port on the expansion board."* So a 3-pin servo cable does belong on that board — the one behind the arm deck. The socket will have a label printed beside it; read it, and that ends the doubt. It is also an assembly step: your sheet's note lists two of these 3-pin servo wires and names where each one goes.
+
+One caution about the wire itself: if it really comes off the fan, it is not a servo cable. Follow it to its other end — that names it.
+
+**The test, and you don't need to reassemble for it.** Covers off, battery in, switch on. Look at the controller board for any light at all, anywhere.
+
+- Any light → the board has power, and the blank card is the whole fault.
+- No light anywhere → no power is reaching the board. Look first at the battery's red/black pair in the blue terminal: red to +, black to −.
+
+Which is it?
