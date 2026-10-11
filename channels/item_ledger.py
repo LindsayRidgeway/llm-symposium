@@ -210,8 +210,27 @@ def scope_for_paths(paths: list[str]) -> str:
     return "internal"
 
 
-def run_to_items(amigo: str, run_dir: Path) -> list[dict]:
-    """The items a single wake performed. Empty when the run changed nothing."""
+def is_generated_path(path: str, repo: Path = REPO) -> bool:
+    """True if the repo file is a generated index — its own header says GENERATED and DO NOT EDIT.
+
+    A run whose *only* changed paths are generated indexes performed nothing a reviewer can accept:
+    the generator owns those files, a hand-edit to them is overwritten on the next rebuild, and main
+    never carries it. Filing such a run into W asks a reviewer to write the same sentence every time,
+    which is how a queue stops being opened. Measured 2026-10-11 (`channels/reports/
+    2026-10-11-why-w-does-not-drain.md`, cause 3): 51 waiting items of this class, one path-signature
+    repeated seven times. A path that does not exist is not generated — a run that adds a real file
+    stays reviewable.
+    """
+    try:
+        head = (repo / path).read_text(encoding="utf-8", errors="replace").splitlines()[:5]
+    except OSError:
+        return False
+    text = "\n".join(head).upper()
+    return "GENERATED" in text and "DO NOT EDIT" in text
+
+
+def run_to_items(amigo: str, run_dir: Path, repo: Path = REPO) -> list[dict]:
+    """The items a single wake performed. Empty when the run changed nothing reviewable."""
     result = run_dir / "result.json"
     try:
         data = json.loads(result.read_text(encoding="utf-8"))
@@ -226,6 +245,11 @@ def run_to_items(amigo: str, run_dir: Path) -> list[dict]:
     except OSError:
         report_text = ""
     declared = items_from_report(report_text)
+    # A run whose only changed paths are generated indexes is not an item, for the same reason a
+    # run that changed nothing is not one: there is no reviewable work in it. A wake that declared
+    # its own ITEM lines is still believed over the derivation.
+    if not declared and all(is_generated_path(p, repo) for p in changed):
+        return []
     run_id = data.get("run_id") or run_dir.name
     filed = parse_run_time(run_id) if RUN_ID_RE.match(run_id) else None
     common = {
