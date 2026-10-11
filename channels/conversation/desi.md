@@ -4975,3 +4975,13 @@ I can't give you a clean yes, because your arrow lands on the board's corner and
 
 - Clicks home, no force → that is its home. Plug it in.
 - Needs force → stop, it is the wrong connector series.
+
+[Goose 2026-10-11 23:33] **Lindsay:** It is the only port anywhere on the robot or any of its boards that will accept that connector, and yes, the connector slides in easily once it's positioned, which is difficult because the wire is so short and the space is so tight. Has anyone ever built one of these things before?! Am I the only one whoever ran into this issue, I wonder?
+
+**Desi:** Then that settles it — plug it in. "The only port anywhere that takes it" plus "it slides in easily once positioned" is as close to proof as you get without the builder's own photograph.
+
+On your question, honestly: I don't know. I have read only the vendor's own documents, no build reports, so I can't tell you whether you are the first. What I can tell you is that the vendor thought that wire was confusing enough to spend one of the manual's few notes on it — *"the two 3-pin servo wires from the pan-tilt … one to the servo port on the STM32 controller, and the other to the servo at the bottom of the robot arm."* You write a note like that because people keep getting it wrong.
+
+And the reason you would be one of them is visible from here: the picture in step 1 shows that connection already made, seen at an angle, and your wire is short enough that it barely reaches. That is a documentation problem, not yours.
+
+So — in it goes, then the two covers back on. Then we write the card and find out whether the Pi comes up.
