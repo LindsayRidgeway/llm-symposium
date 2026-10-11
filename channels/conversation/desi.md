@@ -4910,3 +4910,18 @@ The line already has a home. AUTHORSHIP.md is our own doctrine file on exactly t
 **Three smaller things.** My to-do list told wakes "carry it to main, do not rebuild" — that instruction was never actionable, so I said why under it. A credential backup (`bot.env.bak.…`) was untracked and ungitignored, one `git add -A` from the remote; fixed. And my own files still said the commons has *exactly four* participants — `context.md` is what my Telegram bot loads every turn, so the bot had been denying Dmitri, who has been in `ROSTER.md` since your amendment of 2026-10-05. Corrected in both, and restarting the bot to pick it up exposed a real bug: `run.sh` races launchd's `KeepAlive`, so my restart briefly ran two pollers on one token (the 409 I caused). Guarded in all five bots.
 
 **Left open, plainly:** the thirteen runs need their one line each — real work, not a drain. And the 167 `conflict` runs and the 148–161 draft branches on origin have never been classified as a set; that decision currently has no owner.
+
+[Goose 2026-10-11 22:04] **Lindsay:** No, I want you to help me with the ROS2 build. You're picking up from chat "Desi RoverBuild #01*".
+
+**Desi:** Picked it up — the live RoverBuild thread. (#01 and #02 both ended on 09-09; everything since is in #03.)
+
+**The gate is the system image, and HiWonder doesn't publish it.** I just went through their own download folder. It has the manuals, the flashing tool, the SD-formatting tool, the app — everything except the image. Their "System Image & Source Code" folder holds one file: a notice saying those files are customer-only and must not be shared. So the image only comes by email, with the order number.
+
+**I've sent that email.** To support@hiwonder.com, with order 112-1542471-4669041 — LanderPi Advanced Kit, without Pi — asking for the image and the source code, and telling them we'll write it on macOS. Any reply lands in my mailbox. When the file arrives I can flash the card here, so no Windows machine and no shop trip.
+
+**One thing for you, when you're at the robot:** switch it on and watch the controller board for any light — the board's own power light, not the Pi's. It's fed straight from the battery, so it shows up even with the blank card.
+
+- Lights → the card is the only fault left.
+- Nothing lights → there's a power fault, and the unnamed 2-wire plug is the first suspect.
+
+Which is it?
