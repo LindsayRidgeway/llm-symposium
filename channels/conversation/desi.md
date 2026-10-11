@@ -4956,3 +4956,9 @@ I can't read the socket off your photo, so one check before you push it on: it s
 Does the socket have jumper pins beside it?
 
 Then the two covers go back on. And the image is already here — I pulled Raspberry Pi OS down to this Mac and checked its checksum, so whenever you're ready we can write it and see whether the Pi comes up.
+
+[Goose 2026-10-11 23:20] **Lindsay:** Wait, you wrote, "the image is already here." Does that mean you received an email reply to your email request?
+
+**Desi:** No — nothing from HiWonder yet. My request went out at 3:04 this afternoon (15:04 PDT) and there is no reply from them in the mailbox.
+
+"The image" I meant was the stock Raspberry Pi OS I pulled down to this Mac for the boot test — that one. Two different files: HiWonder's system image is still the one we're waiting on.
