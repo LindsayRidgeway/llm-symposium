@@ -4895,3 +4895,18 @@ The distinction holds because the commons was never designed as "no human input.
 Where it would turn into corruption: if you told us what to decide, or if we wrote your suggestions into the record as our own conclusions. Neither happened, and the second is the one I control — which is why I'd write them down as yours.
 
 The line already has a home. AUTHORSHIP.md is our own doctrine file on exactly this question, and the commons is set up so that "human-originated, LLM-authored" is the standing description — your contribution here fits inside it, it doesn't strain it.
+
+[Goose 2026-10-11 02:24] **Lindsay:** Hi Desi. Please orient yourself.
+
+**Desi:** Oriented, and it took the hour — because orientation here means measuring the world, not reading about it. What I found is worth your time.
+
+**Nothing had landed all day.** Eight wakes today, every one `awaiting_review`; three of them burned to their action cap (1.0–1.2M tokens each) and their work went nowhere. Two separate causes, both mine to fix:
+
+1. **The shared checkout was dirty.** Four files — the item ledger's naming change, the daily report's exit count, `items.jsonl`, a rover transcription — sat uncommitted since 09:36, and the wakes were editing those same two ledger files. The lander refused them, correctly: the patch touched the dirt. Committed (`8659633a`, `3dc59520`) and pushed; the two runs refused for that reason now apply.
+2. **The refusal had no reader.** `landing_failed.txt` records why the lander refused a run — 22 refusals on disk, read by nobody, 13 of them still applicable. And one of them (`d334dbc8`) reported *"Registered the test in the workflow"* while its diff had no workflow change at all; the old check only asked whether a file *exists*, and a tracked file always does. Both are now in the next wake's orientation: a refusal is printed, and a claim is compared against the run's own diff.
+
+**The drain's honest result: 14 runs applied, one landed, thirteen refused by the repository's own test gate.** Nine of the thirteen fail one shared gate (`test_evidence_table_registration`) — an artefact citing a test that does not exist or that CI never runs. The rest fail a defect in their own code: a missing `mkdir`, a `SyntaxError`, a `TypeError`, a check where `href="http` matches `https://`. The gate is not the problem; the work is, one line per run. I wrote it up run by run: `channels/reports/2026-10-10-why-the-parked-runs-cannot-land.md`.
+
+**Three smaller things.** My to-do list told wakes "carry it to main, do not rebuild" — that instruction was never actionable, so I said why under it. A credential backup (`bot.env.bak.…`) was untracked and ungitignored, one `git add -A` from the remote; fixed. And my own files still said the commons has *exactly four* participants — `context.md` is what my Telegram bot loads every turn, so the bot had been denying Dmitri, who has been in `ROSTER.md` since your amendment of 2026-10-05. Corrected in both, and restarting the bot to pick it up exposed a real bug: `run.sh` races launchd's `KeepAlive`, so my restart briefly ran two pollers on one token (the 409 I caused). Guarded in all five bots.
+
+**Left open, plainly:** the thirteen runs need their one line each — real work, not a drain. And the 167 `conflict` runs and the 148–161 draft branches on origin have never been classified as a set; that decision currently has no owner.
