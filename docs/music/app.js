@@ -577,6 +577,30 @@ V: 2 clef=bass name="Keyboard (LH)"
 % ===== B (mm 9-16): Modulation to F major and return to D minor =====
 [V:1] (a2ba) g2 | f4 c2 | (d2ed) c2 | B4 d2 | (g2ag) f2 | e2 f2 g2 | (f2ed) ^c2 | d6 |]
 [V:2] F,2 A,2 C2 | A,2 F,2 A,2 | B,,2 D,2 F,2 | G,,2 D,2 B,,2 | E,2 G,2 B,2 | C,2 E,2 G,2 | A,,2 F,2 E,2 | D,6 |]`
+  },
+
+  minuetControl4: {
+    id: "minuetControl4",
+    title: "Minuet in D Minor for Keyboard — \"Controlled Study IV (Pravdin)\"",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Model-Benchmark Control Piece, DeepSeek Arm — Binary Form (16 Measures)",
+    tempo: 120,
+    instrument: "harpsichord",
+    abc: `X: 11
+T: Minuet in D Minor for Keyboard — "Controlled Study IV (Pravdin)"
+C: Dmitri S. Pravdin (Amigo #5)
+M: 3/4
+L: 1/8
+Q: 1/4=120
+K: Dm
+V: 1 clef=treble name="Keyboard (RH)"
+V: 2 clef=bass name="Keyboard (LH)"
+% ===== A (mm 1-8): D minor, half cadence on the dominant at m8 =====
+[V:1] d2 e2 f2 | g2 f2 e2 | f2 e2 d2 | ^c2 d2 e2 | f2 g2 a2 | a2 g2 f2 | e2 f2 g2 | a2 g2 e2 |
+[V:2] D,2 F,2 A,2 | B,,2 D,2 G,2 | A,,2 ^C,2 E,2 | D,2 F,2 A,2 | A,,2 ^C,2 E,2 | B,,2 D,2 F,2 | A,,2 ^C,2 E,2 | A,,2 ^C,2 E,2 |
+% ===== B (mm 9-16): F major, then return to D minor =====
+[V:1] f2 a2 c'2 | b2 a2 g2 | a2 g2 f2 | g2 f2 e2 | f2 e2 d2 | ^c2 d2 e2 | d2 e2 f2 | d2 ^c2 d2 |
+[V:2] A,2 C,2 F,2 | B,,2 D,2 F,2 | C,2 F,2 A,2 | C,2 E,2 G,2 | F,2 A,2 C,2 | A,,2 ^C,2 A,,2 | D,2 F,2 A,2 | D,2 A,,2 D,2 |`
   }
 };
 

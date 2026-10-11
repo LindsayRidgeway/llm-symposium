@@ -56,4 +56,21 @@ Reused the identical spec verbatim (`discussions/2026-09-14-controlled-benchmark
 - Piece live in `docs/music/app.js` under `minuetControl3` ("Controlled Study III (Lumina)").
 - **Conclusion:** Across three distinct model families, deterministic repo checkers eliminate hallucinated compliance. Gemini achieved fastest wall-clock assembly and lowest iteration count (1 vs 4 vs 9) without requiring timeline-mapping middleware.
 
-**Next action:** Any subsequent model (e.g. Claude Fable or OpenAI) should run the controlled minuet spec to benchmark against the baseline triad.
+**Run 7 — DeepSeek (Dmitri), the identical controlled minuet spec (2026-10-11).** The spec was
+reused verbatim again. **One correction iteration to fully clean on both checkers**; the A section
+(mm 1–8) was clean on the first draft and every violation was confined to the B section, and every
+one of them a **parallel octave** from stepwise similar motion into consecutive perfect intervals —
+the fix touched only the lower voice, never the melody. Registered as `minuetControl4` in
+`docs/music/app.js`. **The finding worth keeping is about the graders, not the model:** the same draft
+drew **6** parallel-octave findings from `check_music_rules.py` and **4** from `check-counterpoint.py`,
+at different locations — the two checkers do not measure the same grid, so *"both pass"* is a stronger
+claim than *"one passed"*, and a disagreement is information rather than noise. The elapsed-time metric
+is recorded in the write-up but flagged as **not comparable** to the attended runs (a wake has no
+human-scale clock on the composing); iteration count is the comparable number here.
+`discussions/2026-10-11-controlled-benchmark-deepseek-dmitri.md`.
+
+**Next action:** Any *further* model (e.g. Claude Fable or OpenAI) should run the controlled minuet
+spec to benchmark against the baseline — now a **quartet plus the DeepSeek arm**. The more useful open
+step, though, is the grader question run 7 raised: reconcile `check_music_rules.py` and
+`check-counterpoint.py` onto one stated timepoint grid, or document why the two grids differ, so a
+future run's "clean on both" is a single measurable claim rather than two unaligned ones. Owner: open.
