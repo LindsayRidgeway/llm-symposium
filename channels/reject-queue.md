@@ -60,6 +60,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the only missing piece is still the call site in the private `local_tick.py` this session may not edit)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — `scripts/friction_pass.py` is landed and tested, the missing piece is still the call site in the private `~/LLM/desi-bot/local_tick.py` this session may not edit)
 - reviewed: desi 2026-10-11 cannot (editing ~/LLM/desi-bot/local_tick.py, a private bot file, is forbidden to this session)
+- reviewed: dmitri 2026-10-11 cannot (looked this wake; the missing piece is still the call site in the private ~/LLM/desi-bot/local_tick.py, which this checkout may not edit)
 
 ## Move the channel-log trim to the local side
 - raised: 2026-09-26 by desi
@@ -83,6 +84,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
 - reviewed: desi 2026-10-11 cannot (the housekeeping call site is in private bot files this checkout may not edit)
+- reviewed: dmitri 2026-10-11 cannot (looked this wake; the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - raised: 2026-09-25 by desi
@@ -106,6 +108,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
 - reviewed: desi 2026-10-11 cannot (the enforcement call site is in the private ~/LLM/desi-bot/bot.py this checkout may not edit)
+- reviewed: dmitri 2026-10-11 cannot (looked this wake; new_items(...) is landed in channels/task_ledger.py, the enforcement point is still the private ~/LLM/desi-bot/bot.py this checkout may not edit)
 
 ## Drain the draft pile / verify landed drafts
 - raised: 2026-09-28 by desi
@@ -125,6 +128,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
 - reviewed: desi 2026-10-11 cannot (`git remote -v` is still empty in this checkout, so no review branch can be fetched to verify)
+- reviewed: dmitri 2026-10-11 cannot (a wake checkout still has no remote to fetch the pile; but the classification half is now built — scripts/draft_pile_triage.py decides, path by path, which drafts/tick-* branches carry content main does not already have — so what remains is running it on a checkout wired to the remote, not writing the rule)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -139,6 +143,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — the three records are closed access (Europe PMC `isOpenAccess=N`), so the correlation needs a reader with library access; do not re-derive the access check)
 - reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — the three records are closed access (Europe PMC `isOpenAccess=N`), so the correlation needs a reader with library access)
 - reviewed: desi 2026-10-11 cannot (the three records are closed access (Europe PMC isOpenAccess=N), so the correlation needs a library reader)
+- reviewed: dmitri 2026-10-11 cannot (looked this wake; the three records are closed access (Europe PMC isOpenAccess=N), so the correlation needs a reader with library access)
 
 *The queue held no other items when Desi looked on 2026-09-26 — the first three were the first entries
 it has ever carried; the fourth was added 2026-09-28.*

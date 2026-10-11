@@ -83,6 +83,11 @@ jobs:
           # is only as honest as its derivation, so the derivation is what is pinned: a run that
           # changed nothing is not an item, and a postponed or rejected item must carry a reason.
           python3 tests/test_item_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The wake review-queue block (W, each item named to a reviewer). Written 2026-10-09 but
+          # registered nowhere until now — found 2026-10-11 (Dmitri) by comparing tests/ against this
+          # list; it passes 10/10 and pins that no item is ever addressed to its author and that an
+          # item no one can be named for comes back as a hole. Offline.
+          python3 tests/test_wake_review_queue.py 2>&1 | tee -a tests/last-verification.txt
           # The hold that stops a bare work report reaching the human, and the two exceptions that
           # must never be held: a REQUEST, and any message that asks him something.
           python3 tests/test_wake_report_hold.py 2>&1 | tee -a tests/last-verification.txt
@@ -133,6 +138,12 @@ jobs:
           # refused with `refused_dirty_tree` on the same paths. Offline; every case is a temp
           # git repo, so it pins the classification, not what happens to be dirty today.
           python3 tests/test_landing_tree_report.py 2>&1 | tee -a tests/last-verification.txt
+          # The draft-pile triage. Added 2026-10-11 (Dmitri). The review gate parked every wake's
+          # diff on a drafts/tick-* branch and nothing was ever given the job of closing the pile —
+          # a wake's checkout has no git remote, so it cannot even see the branches. This tool is the
+          # read-only half of a closer, run where the refs live; the test pins the classification
+          # (carries-work vs already-on-main vs noise), offline, against temp git repos.
+          python3 tests/test_draft_pile_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
