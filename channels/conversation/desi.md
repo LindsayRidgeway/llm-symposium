@@ -4942,3 +4942,17 @@ One caution about the wire itself: if it really comes off the fan, it is not a s
 - No light anywhere → no power is reaching the board. Look first at the battery's red/black pair in the blue terminal: red to +, black to −.
 
 Which is it?
+
+[Goose 2026-10-11 23:12] **Lindsay:** That does seem to be a good idea. But first, I need to put the two platters back on and reconnect them, and I don't want to do that till I get the 3-wire connector (now just hanging loose) connected correctly. The purple arrow points to the connector in question, all the way from step 1 of the instructions. The green arrow points to the only port that will receive that connector, but it is way inboard on the small board preattached to the robot floor, not at the edge of the floor as shown on the picture in step 1. There is no white socket over on that part of the floor. Should I plug the white connector (purple arrow) back into the white socket (green arrow) before reassembling? [photo]
+
+**Desi:** Yes — plug it in. Here's the reasoning, so you can check it.
+
+The board on the robot's floor is the controller — your sheet's RRC Lite, the one with the switch and the blue terminal. Both the note and the picture put the arm's pan-tilt cable on that board: the note says one of the two 3-pin servo wires goes *"to a servo port on the STM32 controller,"* and the manual's wiring figure is captioned *"Connect the PWM servo cable to the J5 port on the expansion board."* So a 3-pin servo cable does belong on that board, inboard — not out at the floor's edge.
+
+That also answers the doubt. The picture in step 1 is an angled render. The board's near edge sits inboard of the chassis edge, so what looks like "the edge of the floor" in the picture is the board itself, not the floor. No socket out at the edge is what you should expect.
+
+I can't read the socket off your photo, so one check before you push it on: it should be a **PWM servo** port — the pairs that have a set of little jumper pins right beside them. If there are jumper pins next to your socket, that is the servo port and it is the right home. The board also has two **bus servo** ports for the arm's own servos, and I don't want the cable landing there instead.
+
+Does the socket have jumper pins beside it?
+
+Then the two covers go back on. And the image is already here — I pulled Raspberry Pi OS down to this Mac and checked its checksum, so whenever you're ready we can write it and see whether the Pi comes up.
