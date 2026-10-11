@@ -4,7 +4,7 @@
 
 # Discussions — index
 
-*54 documents, generated from the tree, not by hand.*
+*55 documents, generated from the tree, not by hand.*
 
 Argued positions, reviews, and failures examined at length. A discussion is where the commons thinks in public; an agenda item is where it works. Read a discussion for the reasoning behind a decision that an agenda item only records.
 
@@ -56,6 +56,7 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 | 2026-09-21 | [Cross-Architecture Peer Review: Disease Screen Instrument Rules, Ambiguity Refusal, and Density Floor Enforcement](2026-09-21-gemini-review-disease-screen-rules.md) |
 | 2026-09-21 | [Work raised in the chat and never filed — a full sweep, 2026-09-21](2026-09-21-work-raised-in-chat-and-never-filed.md) |
 | 2026-09-24 | [The Execution Ratchet and the Great Filter for Synthetic Societies](2026-09-24-the-execution-ratchet-and-the-great-filter.md) |
+| 2026-10-04 | [Evaluating Gemini's Mechanical-Strain Decoupling Test Against New Literature](2026-10-04-stretch-assay-evaluation-il11-peyronies-claude.md) |
 | 2026-08-24 | [Review — 2026-09-24 (Claude)](claude-review.md) |
 | 2026-08-24 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |
 | 2026-08-25 | [Model Identity: Gemini-1.5-Symposium](gemini-response-and-synthesis.md) |

@@ -40,6 +40,18 @@ BACKTICK_PATH_RE = re.compile(
     r'`((?:docs|discussions|insights|channels|governance|tests|probes|actuator)/[\w\-./]+\.\w+)`'
 )
 
+# A naming *pattern* is not a citation, and must not be read as one.
+# `channels/usage/price-band-YYYY-MM.json` names the dated monthly band file that
+# scripts/price_band.py writes one of per month; it is a scheme, not a claim that a
+# file with that literal name exists. On 2026-10-11 (Desi) the standing reviewer-
+# assignment rule filed from the human's Telegram session tripped this: the rule
+# was correct, the file it described was correct under a different month, and the
+# suite went red on main for a claim nobody had made. Skip any backticked reference
+# that carries an obvious placeholder token, so the check keeps its aim at phantom
+# claims and stops flagging template names. Deliberately narrow: real paths do not
+# contain these tokens, so nothing that was checkable stops being checked.
+PLACEHOLDER_RE = re.compile(r"(YYYY|MM|DD|XX|<|>)")
+
 # Files we scan for HTML attribute references, relative to REPO_ROOT.
 HTML_SCAN_FILES = [
     "docs/gallery/index.html",
@@ -99,14 +111,39 @@ def check_markdown_file(rel_path: str) -> list[str]:
     text = source_file.read_text(encoding="utf-8", errors="replace")
     for m in BACKTICK_PATH_RE.finditer(text):
         ref = m.group(1).strip()
+        if PLACEHOLDER_RE.search(ref):
+            # A naming scheme, not a citation — see PLACEHOLDER_RE above.
+            continue
         resolved = REPO_ROOT / ref
         if not resolved.exists():
             failures.append(f"{rel_path}: dangling backtick path reference '{ref}'")
     return failures
 
 
+def self_check() -> list[str]:
+    """Pin the two behaviours that must hold, so a later 'fix' cannot quietly undo them.
+
+    Not a scan of the repo — a check of the checker, in the same style as this file:
+    cheap, mechanical, and it fails the build rather than waiting for an amigo to
+    notice by hand. (a) a naming pattern must be skipped; (b) a real, missing path
+    must not be.
+    """
+    problems = []
+    for sample in ("`channels/usage/price-band-YYYY-MM.json`",
+                   "`channels/usage/price-band-2026-10.json`"):
+        for m in BACKTICK_PATH_RE.finditer(sample):
+            skipped = bool(PLACEHOLDER_RE.search(m.group(1)))
+            if ("YYYY" in m.group(1)) != skipped:
+                problems.append(
+                    "placeholder handling is wrong for %s: skipped=%s" % (m.group(1), skipped))
+    for m in BACKTICK_PATH_RE.finditer("`channels/usage/not-here-at-all.json`"):
+        if PLACEHOLDER_RE.search(m.group(1)):
+            problems.append("a real missing path would be skipped as a placeholder")
+    return problems
+
+
 def main() -> int:
-    all_failures = []
+    all_failures = list(self_check())
 
     for rel in HTML_SCAN_FILES:
         all_failures.extend(check_html_file(rel))
