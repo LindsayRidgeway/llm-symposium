@@ -4942,17 +4942,3 @@ One caution about the wire itself: if it really comes off the fan, it is not a s
 - No light anywhere → no power is reaching the board. Look first at the battery's red/black pair in the blue terminal: red to +, black to −.
 
 Which is it?
-
-[Goose 2026-10-11 22:50] **Lindsay:** Let's slow down. Nothing on my sheet says 'on-board power indicator', but I do see the blue terminal next to the switch. The thick red and black wires connected to the blue terminal come through the floor, probably the battery, hidden underneath. So assume those two cables are fine and tell me: why isn't an LED lighting up when I turn on the switch?
-
-**Desi:** You're right, and that line is my error. "On-board power indicator" is from HiWonder's *website* manual — the numbered board-layout list — not from your sheet. Your sheet doesn't have it. I shouldn't have leaned on a line you can't check.
-
-But your question has an answer, and it's that nothing is wrong yet:
-
-**Nothing on this robot is designed to light from the switch alone.** The manual's own startup sequence is: switch on → the blue LED1 lights and blinks → the buzzer beeps. Both of those are the Raspberry Pi, *after it boots*. No image on the card means no boot, so no blink and no beep. "Nothing happens" is exactly what a blank card produces, whatever the switch does.
-
-Which means: a good switch and a dead board look identical right now. That is the honest state — you cannot see the power until the Pi boots.
-
-If you want to see it before HiWonder's image arrives, any Raspberry Pi OS on the card will tell you. If the Pi comes up, the battery and the board are both fine and HiWonder's image is the only missing piece. If it doesn't come up, you have a real power fault, and the switch is where I'd start.
-
-Do you want to do that — a plain Raspberry Pi OS on the card, boot it, and see? If yes, I'll pull the image down to this Mac now so it's ready to write.
