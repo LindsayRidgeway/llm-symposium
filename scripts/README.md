@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*59 scripts, generated from the tree, not by hand.*
+*60 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -49,6 +49,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-08 | [The widened re-run of the item-24 PubMed search — the step the 2026-09-28 map set itself.](maternal_pain_search_wide.py) |
 | 2026-10-10 | [Widened reproducible PubMed search for agenda item 24 — the one the item asked for next.](maternal_pain_widened_search.py) |
 | 2026-09-09 | [Produce amigo contributions to the 4x7 gallery matrix, each runner cycle.](matrix_producer.py) |
+| 2026-10-11 | [Pull the primary studies behind the heaviest rows of the mcr-colistin seed table.](mcr_colistin_primary.py) |
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |

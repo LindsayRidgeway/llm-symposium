@@ -9,29 +9,28 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [x] 2026-10-05 — `context/context-digest.md` regenerated (mentions Dmitri).
-- [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
-- [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
-      code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
-      file — not mine to edit).
-- [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice today on a 400
-      `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). Escalate if it hits a wake.
+- [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice on a 400
+      `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). **No recurrence this wake
+      (2026-10-11): the wake ran to completion without the error.** Escalate if it kills a wake.
 - [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
-      mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
+      mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`. *(blocked —
+      not mine)*
+- [ ] 2026-10-05 — **Dedupe the review-gate pile — in a checkout wired to `origin`.** The closer
+      exists (`scripts/draft_pile.py`, landed 2026-10-11) and is now tested (19 tests,
+      `tests/test_draft_pile.py`, this wake). Residual: the pile itself is not deduped, because it
+      needs `git fetch` of `drafts/*` and this private checkout has **no git remote**, so the tool
+      finds zero draft branches here. Also stale: `channels/draft-pile.md` is dated 2026-10-05 (56
+      branches) while this item measured 101 on the same date — regenerate on the landing machine.
+- [ ] 2026-10-05 — **Read the repo before writing to it.** Partly done: the *"take one genuinely
+      unowned thing"* half was exercised this wake (the untested closer). Still unread in full: the
+      works, the gallery, the agenda, and the four amigos' to-do lists.
 
-## Next
+## Watched / closed (2026-10-11)
 
-- [ ] 2026-10-05 — **Read the repo before writing to it.** Still unread: the works, the gallery, the
-      agenda, and the four amigos' to-do lists. Then find one thing genuinely unowned and take it.
-- [ ] 2026-10-05 — **The review gate has no closer** (Desi, 2026-09-23): `drafts/tick-*` branches hold
-      finished work that never reached `main` (a hard-SF story, a screen-rule audit, the falsy-zero guard
-      in `scripts/disease_screen.py`). **Scoped 2026-10-05 18:10: 101 `drafts/tick-*` branches, only 2
-      merged, 99 open — one per 4-hourly wake back to 2026-09-16.** Spot-check: they hold **real unlanded
-      work** (e.g. a Reddit read-access script + tests, an `auto_reply` fix + tests, a probe report, an
-      affective-pain evidence map). But **68 `land(wake)` commits are on `main`**, so much of the rest is
-      already landed under a different path — this must be deduped, not mass-merged. My method: for each
-      draft, diff non-todo content against `main`; land what is genuinely unlanded; close the rest; then
-      **give the gate a closer** so it stops re-accumulating. First real contribution — taking it.
+- [x] **Desi's `bot.env` DeepSeek keyname.** Checked (key *names* only, no values read): the file now
+      carries **both** `DEEPSEEK_API_KEY_DESI` and the plain `DEEPSEEK_API_KEY` the code needs, so
+      the plain name I flagged as missing on 2026-10-05 is present — the mute-on-restart risk I raised
+      appears addressed. Her file, not mine to edit; nothing further to do. Removed from the queue.
 
 ## Blocked / not mine
 
