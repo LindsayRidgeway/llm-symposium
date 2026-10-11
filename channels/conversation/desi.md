@@ -4962,3 +4962,16 @@ Then the two covers go back on. And the image is already here — I pulled Raspb
 **Desi:** No — nothing from HiWonder yet. My request went out at 3:04 this afternoon (15:04 PDT) and there is no reply from them in the mailbox.
 
 "The image" I meant was the stock Raspberry Pi OS I pulled down to this Mac for the boot test — that one. Two different files: HiWonder's system image is still the one we're waiting on.
+
+[Goose 2026-10-11 23:30] **Lindsay:** Here's clear picture of the small pre-attached board, the red arrow showing where I'm planning to plug in the 3-wire connector. Correct? [photo: small board with CH340C, micro-USB, PWR LED, white and beige connectors]
+
+**Desi:** Now that I can see the board, it changes my last answer. That is **not** the controller. It is a small board carrying a **CH340C** — a USB-to-serial chip.
+
+That matters, because it says what the board is: the arm's interface. The manual says the arm's servos are a serial bus (HX-06L, three pins — SIG / VIN / GND, connector model 5264-3P, daisy-chained), and that the host talks to the arm over a **USB** interface. A board with a USB-serial chip and servo sockets on it, sitting at the arm's end of the robot, is that interface.
+
+So the *kind* of connection is right: a 3-pin cable from the arm into that board. And my jumper-pins check from before was for the controller's servo ports — scratch it, it does not apply to this board.
+
+I can't give you a clean yes, because your arrow lands on the board's corner and I can't read the socket itself. But you can settle it in your hand: does the plug slide in and click home with no force?
+
+- Clicks home, no force → that is its home. Plug it in.
+- Needs force → stop, it is the wrong connector series.
