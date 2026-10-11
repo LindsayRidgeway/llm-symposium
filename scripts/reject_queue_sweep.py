@@ -12,17 +12,24 @@ real protocol, verbatim in intent:
   3. Every amigo reviews **every** item on the queue:
        - can do it -> do it, take it off the queue. **That counts as work.**
        - cannot    -> add a notation that it looked and cannot. **That does not count as work.**
-  4. When all four have said they cannot, the item becomes a request for the human's judgement, and
+  4. When all five have said they cannot, the item becomes a request for the human's judgement, and
      the request itself is marked. **That does not count as work.**
   5. The human left the delivery of that request to Desi's judgement, between (a) Desi sweeping
-     periodically and notifying him, and (b) whichever amigo is fourth to reject notifying him.
+     periodically and notifying him, and (b) whichever amigo is last to reject notifying him.
 
 **The choice made here: (a), and it is a script rather than a judgement.** Counting is the part of
-this that must not be done by a language model — an amigo asked "am I the fourth?" will sometimes
+this that must not be done by a language model — an amigo asked "am I the last?" will sometimes
 say yes. This sweep does arithmetic on the file, and it rides Desi's existing wake clock instead of
 adding one. Cost of (a): latency, up to the sweep interval. Cost of (b): every amigo has to count
 correctly, and a missed count leaves an item silent forever, which is the failure this queue exists
 to prevent.
+
+**Five amigos, not four (amended 2026-10-11, Dmitri).** `AMIGOS` listed only the four original
+members; the fifth (Dmitri, admitted 2026-10-05) was added here so that *his* `reviewed:` lines
+count. Until this change the sweep treated every review signed `dmitri` as a stranger's line and
+reported it as stray — so an item Dmitri had looked at could never reach its fifth verdict, and
+`--check` flagged a correctly-formatted verdict as a formatting error. The invariant test in
+`tests/test_reject_queue_sweep.py` caught it the first time Dmitri reviewed the queue.
 
 Format — one block per item, at most:
     ## <short title>
@@ -32,8 +39,8 @@ Format — one block per item, at most:
     - steward-requested: <YYYY-MM-DD>
 
 Only a `reviewed:` line naming an amigo, a date **and a reason** counts as a review. "cannot" with no
-reason is not a review and the sweep ignores it — a rubber stamp is how a queue of four real verdicts
-turns into a queue of four shrugs.
+reason is not a review and the sweep ignores it — a rubber stamp is how a queue of five real verdicts
+turns into a queue of five shrugs.
 
 Usage:
   python3 scripts/reject_queue_sweep.py --check        # what is ready, send nothing
@@ -51,7 +58,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
-AMIGOS = ("desi", "gemini", "claude", "tarik")
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"
@@ -131,14 +138,14 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items all five have rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
 
 def note(items, today=None):
     today = today or date.today().isoformat()
-    lines = ["%d item(s) on the reject queue have now been looked at by all four of us and none of us "
+    lines = ["%d item(s) on the reject queue have now been looked at by all five of us and none of us "
              "can do them, so they need your judgement:" % len(items), ""]
     for i in items:
         reason = i["reviews"][AMIGOS[0]]["reason"] if AMIGOS[0] in i["reviews"] else ""
@@ -177,13 +184,14 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 
-## Item with four reviews
+## Item with five reviews
 - raised: 2026-09-25 by desi
 - blocked because: y
 - reviewed: desi 2026-09-25 cannot (a)
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 
 ## Already requested
 - raised: 2026-09-25 by desi
@@ -192,15 +200,17 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
+- reviewed: dmitri 2026-09-25 cannot (e)
 - steward-requested: 2026-09-25
 
-## Four shrugs is not four verdicts
+## Five shrugs is not five verdicts
 - raised: 2026-09-25 by desi
 - blocked because: w
 - reviewed: desi 2026-09-25 cannot
 - reviewed: gemini 2026-09-25 cannot
 - reviewed: claude 2026-09-25 cannot
 - reviewed: tarik 2026-09-25 cannot
+- reviewed: dmitri 2026-09-25 cannot
 
 ## A wrapped verdict is a verdict the count loses
 - raised: 2026-09-25 by desi
@@ -214,10 +224,10 @@ def selftest():
     r = [i["title"] for i in ready(items)]
     checks = [
         ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
-        ("only the four-review item is ready", r == ["Item with four reviews"]),
+        ("only the five-review item is ready", r == ["Item with five reviews"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
-         len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
+         len([i for i in items if i["title"].startswith("Five shrugs")][0]["reviews"]) == 0),
         ("one-review and three-review items are not ready",
          "Item with one review" not in r and "Item with three reviews" not in r),
         ("a wrapped verdict is reported, not silently dropped",
@@ -226,10 +236,10 @@ def selftest():
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "q.md"
         f.write_text(fixture, encoding="utf-8")
-        stamp(f, ["Item with four reviews"], "2026-09-25")
+        stamp(f, ["Item with five reviews"], "2026-09-25")
         after = parse(f.read_text(encoding="utf-8"))
         checks.append(("stamping marks it, so the note cannot repeat",
-                       not ready(after) and any(i["title"] == "Item with four reviews" and i["requested"]
+                       not ready(after) and any(i["title"] == "Item with five reviews" and i["requested"]
                                                 for i in after)))
     bad = [n for n, ok in checks if not ok]
     for n, ok in checks:

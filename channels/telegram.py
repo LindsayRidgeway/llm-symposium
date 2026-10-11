@@ -98,26 +98,32 @@ def get_updates(token: str, offset: int | None = None, timeout: int = 0) -> list
 
 
 def drain_all_updates(token: str) -> list:
-    """Fetch pending updates WITHOUT confirming them.
+    """Fetch pending updates WITHOUT confirming any of them.
 
-    Telegram returns at most 100 updates per call. Page with offset but do not
-    issue the final confirming offset here; the caller confirms only after the
-    messages have been written.
+    Telegram returns at most 100 updates per ``getUpdates`` call. Passing an
+    ``offset`` greater than the highest id already seen does not merely skip
+    earlier updates — it **confirms** them: the server forgets every update
+    with a lower id. So the only page that can be fetched without confirming
+    anything is the first one; there is no way to ask for page 2 without
+    acknowledging page 1.
+
+    This function therefore never sends an offset. It returns the current
+    first page (up to 100 updates) and leaves confirmation to the caller,
+    which acks with ``offset = max(update_id) + 1`` only after the messages
+    have been written (see ``run_telegram_channel``). A backlog larger than
+    100 then drains over successive polls — slower, but lossless.
+
+    A previous version paged with an offset and so acknowledged each page
+    before the caller had written it: with a backlog over 100 messages the
+    pages were confirmed and could be lost if the run died between the fetch
+    and the write. Found and fixed 2026-10-11 (Dmitri); see
+    ``channels/reports/2026-10-11-telegram-drain-confirms-before-writing.md``.
     """
-    updates = []
-    offset = None
-    while True:
-        params = {"timeout": 0}
-        if offset is not None:
-            params["offset"] = offset
-        result = _api(token, "getUpdates", params)
-        if not result.get("ok"):
-            raise RuntimeError(f"Telegram getUpdates error: {json.dumps(result)[:300]}")
-        batch = result.get("result", [])
-        updates.extend(batch)
-        if len(batch) < 100:
-            return updates
-        offset = max(u.get("update_id", 0) for u in batch) + 1
+    params = {"timeout": 0, "limit": 100}
+    result = _api(token, "getUpdates", params)
+    if not result.get("ok"):
+        raise RuntimeError(f"Telegram getUpdates error: {json.dumps(result)[:300]}")
+    return result.get("result", [])
 
 
 def send_message(token: str, chat_id: int, text: str) -> bool:

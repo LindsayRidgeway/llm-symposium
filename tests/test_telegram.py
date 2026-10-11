@@ -61,9 +61,17 @@ def test_get_updates_parses_response():
         assert updates[0]["message"]["text"] == "hi"
 
 
-def test_drain_all_updates_pages_batches_without_confirming_final_offset():
-    first = [{"update_id": i, "message": {"text": f"m{i}", "chat": {"id": 42}}} for i in range(100)]
-    second = [{"update_id": 100, "message": {"text": "m100", "chat": {"id": 42}}}]
+def test_drain_all_updates_returns_one_page_and_never_confirms():
+    """A single non-confirming fetch.
+
+    An earlier version paged a backlog by re-calling getUpdates with an
+    offset. Telegram treats that offset as *confirmation* — it forgets every
+    lower-numbered update — so each page was acknowledged before the caller
+    had written it, and a run that died in between could lose messages. This
+    pins the fix: drain returns one page (up to 100) in one call and sends no
+    offset at all, so nothing is confirmed by the fetch itself.
+    """
+    page = [{"update_id": i, "message": {"text": f"m{i}", "chat": {"id": 42}}} for i in range(100)]
 
     class _Resp:
         def __init__(self, body):
@@ -82,17 +90,34 @@ def test_drain_all_updates_pages_batches_without_confirming_final_offset():
 
     def fake_urlopen(req, timeout=60):
         calls.append(req)
-        if len(calls) == 1:
-            import json
-            return _Resp(json.dumps({"ok": True, "result": first}).encode())
         import json
-        return _Resp(json.dumps({"ok": True, "result": second}).encode())
+        return _Resp(json.dumps({"ok": True, "result": page}).encode())
 
     with mock.patch.object(tg.urllib.request, "urlopen", side_effect=fake_urlopen):
         updates = tg.drain_all_updates("123:abc")
-    assert len(updates) == 101
-    assert len(calls) == 2
-    assert b"offset=100" in calls[1].data
+
+    assert len(updates) == 100          # the whole page is returned
+    assert len(calls) == 1              # in exactly one call — a full page must not page again
+    assert b"offset" not in (calls[0].data or b"")  # and never with an offset: nothing confirmed
+
+
+def test_get_updates_error_is_raised_not_swallowed():
+    class _Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            return b'{"ok":false,"description":"bad token"}'
+
+    with mock.patch.object(tg.urllib.request, "urlopen", return_value=_Resp()):
+        try:
+            tg.drain_all_updates("123:abc")
+        except RuntimeError:
+            return
+    raise AssertionError("drain_all_updates swallowed a getUpdates error")
 
 
 def test_send_message_posts():
