@@ -278,6 +278,49 @@ class TestReview(unittest.TestCase):
                 self.assertEqual(il.load(self.path)["a"]["state"], "accomplished")
 
 
+class TestReconcile(unittest.TestCase):
+    """A row filed before its run landed must not sit in W for ever (measured 2026-10-10: nine)."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = Path(self.tmp.name) / "items.jsonl"
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _row(self, rid, state=None, reviewer=None, reason=None):
+        return {"id": rid, "amigo": "gemini", "scope": "internal", "title": "t",
+                "state": state, "reviewer": reviewer, "reason": reason,
+                "filed_utc": "2026-10-06T00:00:00Z"}
+
+    def test_a_waiting_run_that_landed_is_marked_accomplished_by_the_lander(self):
+        il.append([self._row("20261010T000000Z-aaaaaaaa"),
+                   self._row("20261010T000000Z-bbbbbbbb")], self.path)
+        made = il.reconcile_landed(self.path, landed={"20261010T000000Z-aaaaaaaa"})
+        self.assertEqual([r["id"] for r in made], ["20261010T000000Z-aaaaaaaa"])
+        rec = il.load(self.path)["20261010T000000Z-aaaaaaaa"]
+        self.assertEqual(rec["state"], "accomplished")
+        self.assertEqual(rec["reviewer"], "auto:land")
+        self.assertIn("landed on main", rec["reason"])
+        # the other row is untouched
+        self.assertIsNone(il.load(self.path)["20261010T000000Z-bbbbbbbb"]["state"])
+
+    def test_a_reviewers_decision_is_not_overwritten_by_the_lander(self):
+        il.append([self._row("20261010T000000Z-cccccccc", state="postponed",
+                             reviewer="desi", reason="needs the human's key")], self.path)
+        self.assertEqual(il.reconcile_landed(self.path, landed={"20261010T000000Z-cccccccc"}), [])
+        rec = il.load(self.path)["20261010T000000Z-cccccccc"]
+        self.assertEqual(rec["state"], "postponed")
+        self.assertEqual(rec["reason"], "needs the human's key")
+
+    def test_reconciling_twice_appends_once(self):
+        il.append([self._row("20261010T000000Z-dddddddd")], self.path)
+        landed = {"20261010T000000Z-dddddddd"}
+        self.assertEqual(len(il.reconcile_landed(self.path, landed=landed)), 1)
+        self.assertEqual(il.reconcile_landed(self.path, landed=landed), [])
+        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "A")
+
+
 class TestAssignment(unittest.TestCase):
     """Who looks. The human's algorithm, 2026-10-09: name the best suited, else draw cheap."""
 
