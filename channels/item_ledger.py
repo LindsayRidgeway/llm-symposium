@@ -345,6 +345,19 @@ def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = N
                 fresh.append(item)
                 known[item["id"]] = item
     append(fresh, path)
+    # 2026-10-10: a new item arrives with nobody's name on it, and an unowned item is a hole the
+    # moment it is filed — 26 accumulated overnight before anyone noticed. Naming happens here,
+    # once, at the moment of filing: the draw's branch (b), deterministic by item id, so re-running
+    # collect never re-rolls it. A wake can still move it with force and a reason when one amigo is
+    # plainly best suited; that is branch (a), and it is a judgement, so it is not made here.
+    if fresh:
+        try:
+            named = draw(path=path, by="collect")
+            if named:
+                print(f"item_ledger: {len(named)} new item(s) named by the draw as they were filed")
+        except (FileNotFoundError, ValueError) as exc:
+            print(f"item_ledger: WARNING — {len(fresh)} new item(s) filed with no name ({exc}); "
+                  f"they are holes until `--draw` runs")
     return len(fresh)
 
 

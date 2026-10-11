@@ -428,6 +428,21 @@ def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]
         out.append(f"  NO PRICE BAND — {type(exc).__name__}: {exc}. Draws cannot be made until "
                    f"`scripts/price_band.py --write` has run.")
 
+    # 2026-10-10: what the *window* A count cannot show. An item filed in September and reviewed
+    # today is an accomplishment today, but the letters count items filed in the window, so it never
+    # appears in the A line above — and the human reads A=0 in the window as "no reviews are being
+    # done" when the review happened. Exits are counted by their own state_utc, which is the fact.
+    exits = [r for r in items.values() if _in_window(r, hours) and _letter(r) in ("A", "P", "R")]
+    if exits:
+        tally = collections.Counter(_letter(r) for r in exits)
+        reviewed = sum(1 for r in exits if _letter(r) == "A"
+                       and r.get("reviewer") not in (None, "auto:land"))
+        parts = [f"A {tally['A']}" + (f" ({reviewed} by a review)" if tally["A"] else "")]
+        parts += [f"{letter} {tally[letter]}" for letter in ("P", "R") if tally[letter]]
+        out.append(f"  exits recorded in the last {hours}h: " + " · ".join(parts))
+    else:
+        out.append(f"  exits recorded in the last {hours}h: none — nothing left W by any route.")
+
     left = [r for r in items.values() if _letter(r) in ("P", "R") and _in_window(r, hours)]
     out += ["", f"### Blockers: left W in the last {hours}h without being accomplished ({len(left)})",
             "These are the items a review moved somewhere other than A, each with the reason that "
