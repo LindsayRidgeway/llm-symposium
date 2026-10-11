@@ -1,0 +1,1841 @@
+{
+ "generated": "2026-10-11",
+ "source": "PubMed E-utilities (esearch + efetch), filtered acupuncture+ migraine arm",
+ "arms": {
+  "acupuncture_migraine_filtered": {
+   "query": "(acupuncture[tiab] OR electroacupuncture[tiab] OR \"acupuncture therapy\"[MeSH Terms]) AND (fmri[tiab] OR \"functional magnetic resonance\"[tiab] OR \"functional connectivity\"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR \"event-related potential\"[tiab] OR meg[tiab] OR \"near-infrared spectroscopy\"[tiab] OR fnirs[tiab] OR \"heart rate variability\"[tiab] OR hrv[tiab] OR autonomic[tiab] OR \"skin conductance\"[tiab] OR \"vagal tone\"[tiab] OR \"pupil\"[tiab] OR \"insula\"[tiab] OR \"amygdala\"[tiab] OR \"anterior cingulate\"[tiab] OR \"brainstem\"[tiab] OR \"locus coeruleus\"[tiab]) AND (migraine[tiab] OR \"migraine disorders\"[MeSH Terms]) AND humans[MeSH Terms]",
+   "filter": "(fmri[tiab] OR \"functional magnetic resonance\"[tiab] OR \"functional connectivity\"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR \"event-related potential\"[tiab] OR meg[tiab] OR \"near-infrared spectroscopy\"[tiab] OR fnirs[tiab] OR \"heart rate variability\"[tiab] OR hrv[tiab] OR autonomic[tiab] OR \"skin conductance\"[tiab] OR \"vagal tone\"[tiab] OR \"pupil\"[tiab] OR \"insula\"[tiab] OR \"amygdala\"[tiab] OR \"anterior cingulate\"[tiab] OR \"brainstem\"[tiab] OR \"locus coeruleus\"[tiab])",
+   "population": "(migraine[tiab] OR \"migraine disorders\"[MeSH Terms])",
+   "total_matching": 41,
+   "fetched": 41,
+   "censored": false,
+   "pmids": [
+    "42836392",
+    "42798584",
+    "42723472",
+    "42535929",
+    "42533185",
+    "41591775",
+    "41450129",
+    "40341810",
+    "39340626",
+    "38649209",
+    "38245739",
+    "37389804",
+    "37349112",
+    "37221469",
+    "37199198",
+    "36067612",
+    "35312785",
+    "35219625",
+    "34804268",
+    "34628737",
+    "34085477",
+    "34036477",
+    "33381165",
+    "33258357",
+    "31964691",
+    "31742681",
+    "31703750",
+    "31368270",
+    "31011330",
+    "30256491",
+    "28638026",
+    "28608601",
+    "28580293",
+    "28382614",
+    "27053062",
+    "26846705",
+    "26839078",
+    "26438555",
+    "26359462",
+    "25916336",
+    "25847772"
+   ],
+   "query_translation": "(\"acupuncture\"[Title/Abstract] OR \"electroacupuncture\"[Title/Abstract] OR \"acupuncture therapy\"[MeSH Terms]) AND (\"fmri\"[Title/Abstract] OR \"functional magnetic resonance\"[Title/Abstract] OR \"functional connectivity\"[Title/Abstract] OR \"eeg\"[Title/Abstract] OR \"electroencephalogra*\"[Title/Abstract] OR \"event-related potential\"[Title/Abstract] OR \"meg\"[Title/Abstract] OR \"near-infrared spectroscopy\"[Title/Abstract] OR \"fnirs\"[Title/Abstract] OR \"heart rate variability\"[Title/Abstract] OR \"hrv\"[Title/Abstract] OR \"autonomic\"[Title/Abstract] OR \"skin conductance\"[Title/Abstract] OR \"vagal tone\"[Title/Abstract] OR \"pupil\"[Title/Abstract] OR \"insula\"[Title/Abstract] OR \"amygdala\"[Title/Abstract] OR \"anterior cingulate\"[Title/Abstract] OR \"brainstem\"[Title/Abstract] OR \"locus coeruleus\"[Title/Abstract]) AND (\"migraine\"[Title/Abstract] OR \"migraine disorders\"[MeSH Terms]) AND \"humans\"[MeSH Terms] AND 2015/01/01:2026/10/11[Date - Publication]"
+  }
+ },
+ "records": [
+  {
+   "pmid": "42836392",
+   "title": "Effects of Acupuncture on Cerebral Blood Flow in Episodic Migraine Patients Investigated by Arterial Spin Labeling MRI.",
+   "journal": "Neural Plast",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVE: To investigate the temporal dynamics of cerebral blood flow (CBF) responses to Japanese-style acupuncture in patients with episodic migraine using arterial spin labeling (ASL) magnetic resonance imaging (MRI) and to compare these responses with those of healthy controls. METHODS: Patients with episodic migraine were recruited according to the International Classification of Headache Disorders, 3rd edition (ICHD-3), and healthy volunteers without migraine served as controls. Japanese-style acupuncture was administered for 10\u2009min at four clinically relevant cranio-cervical acupoints (ST8, ST6, GB21, and GB12) using nonmagnetic silver needles (0.2\u2009mm in diameter). All acupuncture procedures were performed by the same licensed acupuncturist. CBF was assessed during the interictal period using repeated ASL MRI at baseline, during acupuncture stimulation (early and late phases), immediately after needle removal, and 15 and 30\u2009min after stimulation. RESULTS: Eleven patients with episodic migraine (3 men and 8 women; mean age, 39.1\u2009\u00b1\u20094.6 years) and 11 healthy volunteers (4 men and 7 women; mean age, 32.3\u2009\u00b1\u20099.2 years) were included in the final analysis. Both groups demonstrated increased cerebral perfusion within the operculum, insula, cingulate cortex, and thalamus during acupuncture stimulation. In healthy controls, these perfusion changes gradually returned toward baseline following stimulation. In contrast, patients with episodic migraine exhibited more prolonged cerebral perfusion responses that persisted after needle removal and extended into frontal cortical regions. Compared with healthy controls, migraine patients demonstrated greater temporal persistence of cerebral perfusion modulation. CONCLUSIONS: Temporally organized cerebral perfusion changes were observed during and after Japanese-style acupuncture in both healthy controls and patients with episodic migraine. Compared with healthy controls, patients with episodic migraine exhibited cerebral perfusion changes that remained evident during the poststimulation period. These exploratory findings suggest differences in the temporal dynamics of cerebral perfusion between the two groups. Further controlled studies are required to determine the specificity and physiological significance of these responses. TRIAL REGISTRATION: UMIN Clinical Trials Registry (UMIN-CTR): UMIN000005644.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Adult",
+    "Male",
+    "Migraine Disorders",
+    "Cerebrovascular Circulation",
+    "Spin Labels",
+    "Acupuncture Therapy",
+    "Magnetic Resonance Imaging",
+    "Brain",
+    "Middle Aged",
+    "Perfusion Magnetic Resonance Imaging"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "insula",
+    "sentence": "Both groups demonstrated increased cerebral perfusion within the operculum, insula, cingulate cortex, and thalamus during acupuncture stimulation."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "42798584",
+   "title": "Phase-specific sequential press-needle therapy for menstrual migraine: a randomized trial protocol.",
+   "journal": "Front Neurol",
+   "year": "2026",
+   "abstract_plain": "BACKGROUND: Menstrual migraine (MM) is a neurological disorder affecting women of childbearing age. According to the definition in the International Classification of Headache Disorders, 3rd Edition (ICHD-3), it includes pure menstrual migraine (PMM) and menstrually-related migraine (MRM). The efficacy and safety of acupressure therapy for menstrual migraine have not yet been fully evaluated, particularly when administered sequentially according to specific phases of the menstrual cycle. Therefore, we designed this trial to preliminarily assess whether sequential acupressure therapy shows a favorable trend in efficacy compared with oral naproxen sodium, and to evaluate its feasibility, safety, and tolerability, thereby providing baseline data for future large-scale confirmatory trials. METHODS: This is a randomized, active-controlled, parallel-group trial. A total of 76 eligible women aged 18-45\u202fyears with migraine without aura and diagnosed with pure menstrual migraine or menstrually-related migraine will be recruited and randomly allocated to receive either sequential press-needle therapy or oral naproxen sodium therapy. In the press-needle group, treatment is delivered at designated acupoints across two phases (pre-menstrual and post-menstrual) per menstrual cycle. Each phase includes 2 sessions with a 2-day interval (4 sessions per cycle), repeated for 3 consecutive cycles. In the control group, oral naproxen sodium (550\u202fmg twice daily after breakfast and dinner) is initiated 2-3\u202fdays before the expected onset of menstruation and continued until menstruation ends (5-7 consecutive days per cycle), also for 3 complete cycles. Compliance is monitored by a daily medication diary and telephone follow-up. The primary outcome is the change in the number of headache days with a peak pain intensity of \u22654 (moderate-to-severe) on a 0-10 Numeric Rating Scale (NRS, where 4-6\u202f=\u202fmoderate, 7-10\u202f=\u202fsevere) per menstrual cycle from baseline to the end of the 3-month intervention. Secondary outcomes include headache intensity, functional impact, quality of life, acute medication use, and heart rate variability indices. Exploratory outcomes include serum biomarkers and resting-state functional MRI. CONCLUSION: This trial will evaluate the preliminary efficacy and safety of sequential press-needle therapy compared with oral naproxen sodium for menstrual migraine. The results will be used to estimate effect sizes and inform the design of future adequately powered confirmatory trials. STUDY PROTOCOL REGISTRATION: https://itmctr.ccebtcm.org.cn/mgt/project/view/2049072453099061248, ITMCTR2025002153.",
+   "publication_types": [
+    "Journal Article",
+    "Clinical Trial Protocol"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Adult",
+    "Migraine Disorders",
+    "Naproxen",
+    "Young Adult",
+    "Adolescent",
+    "Randomized Controlled Trials as Topic",
+    "Acupressure",
+    "Menstrual Cycle",
+    "Middle Aged",
+    "Needles",
+    "Treatment Outcome",
+    "Anti-Inflammatory Agents, Non-Steroidal"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "Secondary outcomes include headache intensity, functional impact, quality of life, acute medication use, and heart rate variability indices."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "The primary outcome is the change in the number of headache days with a peak pain intensity of \u22654 (moderate-to-severe) on a 0-10 Numeric Rating Scale (NRS, where 4-6\u202f=\u202fmoderate, 7-10\u202f=\u202fsevere) per menstrual cycle from baseline to the end of the 3-month intervention."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": true,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "42723472",
+   "title": "Acupuncture at Zuqiaoyin (GB44) Modulates Regional Brain Activity in Migraine Without Aura: A Resting-State Functional Magnetic Resonance Imaging Study.",
+   "journal": "Pain Res Manag",
+   "year": "2026",
+   "abstract_plain": "BACKGROUND: Migraine is considered a common neurological disorder. Acupuncture at Zuqiaoyin (GB44) is effective in the treatment of migraine without aura, but its central mechanism is still unclear. OBJECTIVES: The purpose is to compare the therapeutic effect and brain functional activity difference between acupuncture at GB44 and nonacupoints and explore the central affect mechanism of acupuncture in the treatment of migraine without aura. METHODS: Our study is a randomized controlled trial. A total of 20 patients with migraine without aura were included in the study. Twelve patients received acupuncture at GB44 as the acupuncture group and eight patients received acupuncture at nonacupoints as the sham acupuncture group. Both groups received a 10-time acupuncture intervention for 1\u2009month. Visual analogue scale (VAS) score evaluated the clinical outcomes of acupuncture. Resting-state functional magnetic resonance imaging (fMRI) and fractional amplitude of low frequency fluctuation (fALFF) analysis were adopted to compare differences of brain functional activity between the two groups. RESULTS: We found that improvements in headache severity and migraine-related quality of life in both groups after a 4-week acupuncture intervention but better clinical improvement were observed in the acupuncture group. A decreased fALFF in the right superior frontal gyrus, right insula, and right precuneus and an increased fALFF in the left postcentral gyrus and left precuneus were observed in the acupuncture group, while a decreased fALFF was observed in the left superior frontal gyrus and left precuneus in the sham acupuncture group. The acupuncture group showed a higher fALFF in the right precentral gyrus and right precuneus than the sham acupuncture group. CONCLUSION: Acupuncture at GB44 can significantly relieve the clinical symptoms and improve the quality of life of patients with migraine without aura. More importantly, acupuncture at GB44 can cause changes of brain activity in migraine-affected key regions, which may be one of the central mechanisms of acupuncture in the treatment of migraine without aura. TRIAL REGISTRATION: Chinese Clinical Trial Registry: ChiCTR2000033995.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Female",
+    "Male",
+    "Adult",
+    "Brain",
+    "Acupuncture Therapy",
+    "Migraine without Aura",
+    "Acupuncture Points",
+    "Treatment Outcome",
+    "Young Adult",
+    "Middle Aged",
+    "Brain Mapping",
+    "Rest",
+    "Pain Measurement",
+    "Image Processing, Computer-Assisted"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional magnetic resonance",
+    "sentence": "Acupuncture at Zuqiaoyin (GB44) Modulates Regional Brain Activity in Migraine Without Aura: A Resting-State Functional Magnetic Resonance Imaging Study.."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "Visual analogue scale (VAS) score evaluated the clinical outcomes of acupuncture."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "42535929",
+   "title": "Mapping the Knowledge Landscape of Acupuncture for Primary Headaches: A Bibliometric Analysis From 2005 to 2025.",
+   "journal": "Pain Res Manag",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVE: To provide an updated bibliometric overview of the research landscape, hotspots, and emerging trends of acupuncture for primary headaches (PH). METHODS: Publications related to acupuncture for PH were retrieved from the Web of Science Core Collection (WoSCC) for the period from January 1, 2005, to December 31, 2025. Only English-language articles and reviews were included. After manual screening based on title, abstract, publication year, document type, language, and topic relevance, 286 eligible publications were included. Bibliometric analyses and visualizations were performed using CiteSpace, VOSviewer, Bibliometrix, and Microsoft Excel. RESULTS: The annual number of publications showed an overall upward trend, particularly after 2018. China was the leading contributor in terms of publication output and collaborative activity, followed by Germany, Italy, and the United States. Collaboration networks were identifiable at the country, institution, and author levels, although they remained concentrated among a limited number of leading countries and core research groups. The intellectual base of the field was mainly shaped by randomized controlled trials, systematic reviews, and evidence syntheses. Thematic analyses indicated that research was primarily centered on migraine, prophylaxis, efficacy, and headache-related clinical outcomes. Tension-type headache was also represented, whereas cluster headache and other less-studied PH subtypes received comparatively limited attention. Mechanism-related themes, including functional connectivity, neuroimaging, and trigeminocervical mechanisms, have emerged in recent years but remain less developed than the clinical literature. CONCLUSION: Research on acupuncture for PH has become increasingly productive, structured, and clinically evidence-oriented over the past 2 decades. However, the field remains characterized by thematic concentration, selective collaboration, and relatively limited mechanistic depth. Future studies should place greater emphasis on underrepresented PH subtypes, broader interdisciplinary collaboration, and more rigorous translational and mechanistic investigation.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Bibliometrics",
+    "Acupuncture Therapy",
+    "Headache"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Mechanism-related themes, including functional connectivity, neuroimaging, and trigeminocervical mechanisms, have emerged in recent years but remain less developed than the clinical literature."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "42533185",
+   "title": "A NOTCH3 p.Gly1105Cys variant in CADASIL: clinical characterization and an updated overview of exon 20 variants.",
+   "journal": "Neurol Sci",
+   "year": "2026",
+   "abstract_plain": "Cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy (CADASIL), an autosomal dominant cerebrovascular disorder caused by NOTCH3 variants. Although more than 400 NOTCH3 variants have been reported, exon 20 variants remain rare, and clinical characterization is limited. We report a 39-year-old Chinese male with recurrent lacunar infarctions involving the brainstem, basal ganglia, and corona radiata. He had right-sided hemiplegia and cognitive deficits, without dizziness, headache, dysphagia, or dysarthria. His mother and maternal uncle had a history of ischemic stroke. Genetic testing identified a heterozygous NOTCH3 c.3313G\u2009>\u2009T (p.Gly1105Cys) variant in exon 20 (NM_000435.3), classified as likely pathogenic according to the American College of Medical Genetics and Genomics (ACMG) criteria. Alongside adjusted medications for secondary stroke prevention, he received acupuncture and physical rehabilitation, followed by an improvement in mood and motor function. We also reviewed NOTCH3 exon 20 variants and found marked phenotypic heterogeneity across variants and populations. Migraine appears less frequent among Chinese carriers than in Western cohorts, whereas cognitive impairment may occur relatively early. Radiologically, temporal pole white matter hyperintensities were absent in our patient and other Chinese carriers of NOTCH3 variants in epidermal growth factor-like repeat (EGFr) domain 28, but reported in some with domain 27 variants. Although p.Gly1105Cys is located in a low-risk EGFr domain according to recent domain-based stratification models, our patient developed early-onset recurrent stroke, highlighting individual clinical variability. This case provides a detailed clinical and imaging description of CADASIL associated with NOTCH3 c.3313G\u2009>\u2009T (p.Gly1105Cys) and expands understanding of genotype-phenotype correlations among exon 20 variants.",
+   "publication_types": [
+    "Journal Article",
+    "Case Reports"
+   ],
+   "mesh": [
+    "Humans",
+    "Receptor, Notch3",
+    "CADASIL",
+    "Male",
+    "Adult",
+    "Exons"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "mood",
+    "sentence": "Alongside adjusted medications for secondary stroke prevention, he received acupuncture and physical rehabilitation, followed by an improvement in mood and motor function."
+   },
+   "biomarker": {
+    "term": "brainstem",
+    "sentence": "We report a 39-year-old Chinese male with recurrent lacunar infarctions involving the brainstem, basal ganglia, and corona radiata."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41591775",
+   "title": "Acupuncture for Migraine Without Aura and Connection-Based Efficacy Prediction: A Randomized Clinical Trial.",
+   "journal": "JAMA Netw Open",
+   "year": "2026",
+   "abstract_plain": "IMPORTANCE: Connectome-based predictive modeling (CPM) uses a data-driven whole-brain framework to identify connectivity patterns predicting clinical outcomes. However, CPM's application to acupuncture in migraine without aura (MWOA) remains novel. OBJECTIVE: To evaluate the clinical efficacy of real acupuncture and sham acupuncture in MWOA, and to identify acupuncture-response brain connectivity patterns using CPM analysis of baseline functional magnetic resonance imaging (fMRI) data. DESIGN, SETTING, AND PARTICIPANTS: This single-blinded randomized clinical trial was conducted from June 2021 to June 2023 at Beijing Hospital of Traditional Chinese Medicine in China. It enrolled participants aged 18 to 65 years who met the MWOA criteria of the International Classification of Headache Disorders, 3rd edition. Eligible participants were randomly assigned to receive real acupuncture or sham acupuncture, and underwent baseline clinical assessments and baseline fMRI scans. Data analyses were performed between October 2024 and March 2025 following intention-to-treat and per-protocol principles. INTERVENTIONS: Both treatment groups received 12 sessions of 30-minute acupuncture over 4 weeks. Real acupuncture involved 8 acupoints with deqi sensation, while sham acupuncture used sham acupoints without deqi. MAIN OUTCOMES AND MEASURES: Primary outcome was the change from baseline in monthly migraine days (MMDs) during weeks 1 to 4. Secondary outcomes included 50% or greater reduction in MMDs and change from baseline in monthly headache days (MHDs), acute medication use days, pain score (visual analog scale [VAS] score range: 0 [indicating no pain] to 10 [indicating severe pain]), disability score (6-item Headache Impact Test [HIT-6] score range: 36 to 78, with the higher scores indicating severe headache effect), and quality-of-life score (Migraine-Specific Quality of Life Questionnaire [MSQ] score range: 0 to 100, with the higher scores indicating superior quality of life) during 4 weeks. Neuroimaging analyses used fMRI data to predict outcome changes via CPM. RESULTS: Among the 120 participants (mean [SD] age, 36.8\u2009[10.0] years; 95 females [79.2%]), 60 were randomly assigned to real acupuncture and 60 to sham acupuncture. The change from baseline in MMDs significantly improved for the real acupuncture group compared with the sham acupuncture group (median difference, -1.0; 95% CI, -2.0 to 0; P\u2009=\u2009.02). Significant differences were also observed in MHDs (median difference, -1.0; 95% CI, -2.0 to 0; P\u2009=\u2009.01), acute medication use days (median difference, -1.0; 95% CI, -2.0 to 0; P\u2009=\u2009.02), VAS score (median difference, -1.0; 95% CI, -1.0 to 0; P\u2009=\u2009.02), HIT-6 score (mean difference, -2.9; 95% CI, -5.4 to -0.5; P\u2009=\u2009.02), and MSQ score (Role Function-Restrictive domain: median difference, 8.6; 95% CI, 3.7-14.3; P\u2009<\u2009.001; Role Function-Preventive domain: median difference, 5.0; 95% CI, 0-10.0; P\u2009=\u2009.02; Emotional Function domain: median difference, 6.7; 95% CI, 0-13.3; P\u2009=\u2009.001). CPM revealed distinct neural signatures: negative connectivity predicted VAS score reduction (r\u2009=\u20090.23, P\u2009=\u2009.04) and positive connectivity predicted HIT-6 score improvement (r\u2009=\u20090.29, P\u2009=\u2009.02). Feature selection identified robust networks (12 connections for VAS score; 120 for HIT-6 score), in which default mode network and subcortical-cerebellum (DMN-SC) hypoconnectivity and SC-motor hyperconnectivity were identified as key connectivity patterns in predictive models of VAS and HIT-6 scores, respectively. CONCLUSIONS AND RELEVANCE: This trial demonstrated acupuncture's efficacy for MWOA pain relief and functional improvement. CPM identified DMN-SC hypoconnectivity as predicting pain relief and SC-motor hyperconnectivity as predicting reduced disability, providing a personalized treatment framework. TRIAL REGISTRATION: Chinese Clinical Trial Registry Identifier: ChiCTR2100044251.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Acupuncture Therapy",
+    "Male",
+    "Adult",
+    "Migraine without Aura",
+    "Middle Aged",
+    "Magnetic Resonance Imaging",
+    "Single-Blind Method",
+    "Treatment Outcome",
+    "Young Adult",
+    "Brain",
+    "Connectome",
+    "Adolescent",
+    "Aged"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "Significant differences were also observed in MHDs (median difference, -1.0; 95% CI, -2.0 to 0; P\u2009=\u2009.01), acute medication use days (median difference, -1.0; 95% CI, -2.0 to 0; P\u2009=\u2009.02), VAS score (median difference, -1.0; 95% CI, -1.0 to 0; P\u2009=\u2009.02), HIT-6 score (mean difference, -2.9; 95% CI, -5.4 to -0.5; P\u2009=\u2009.02), and MSQ score (Role Function-Restrictive domain: median difference, 8.6; 95% CI, 3.7-14.3; P\u2009<\u2009.001; Role Function-Preventive domain: median difference, 5.0; 95% CI, 0-10.0; P\u2009=\u2009.02; Emotional Function domain: median difference, 6.7; 95% CI, 0-13.3; P\u2009=\u2009.001)."
+   },
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "OBJECTIVE: To evaluate the clinical efficacy of real acupuncture and sham acupuncture in MWOA, and to identify acupuncture-response brain connectivity patterns using CPM analysis of baseline functional magnetic resonance imaging (fMRI) data."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "Secondary outcomes included 50% or greater reduction in MMDs and change from baseline in monthly headache days (MHDs), acute medication use days, pain score (visual analog scale [VAS] score range: 0 [indicating no pain] to 10 [indicating severe pain]), disability score (6-item Headache Impact Test [HIT-6] score range: 36 to 78, with the higher scores indicating severe headache effect), and quality-of-life score (Migraine-Specific Quality of Life Questionnaire [MSQ] score range: 0 to 100, with the higher scores indicating superior quality of life) during 4 weeks."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "41450129",
+   "title": "Functional Brain Connectivity Patterns of Headache-Mental Disorder Comorbidity in Patients With Migraine.",
+   "journal": "CNS Neurosci Ther",
+   "year": "2025",
+   "abstract_plain": "AIMS: To identify the functional brain connectivity patterns that were correlated with headache and mental conditions in migraineurs and then to elucidate their neurotransmitter basis and explore the potential clinical implications. METHODS: Eighty patients with migraine without aura (MwoA) and 94 healthy controls (HCs) were included. Firstly, we employed partial least-squares correlation (PLSC) to identify a set of resting-state functional connectivity (RSFC) that was co-related with headache symptoms and mental conditions in MwoA patients. Then, we investigated the specific neurotransmitter basis underlying headache-mental disorders-related RSFC patterns. Finally, we explored the potentials of these RSFC patterns in discriminating patients from HCs, interpreting patient symptoms, stratifying patients into subgroups, and predicting treatment outcomes. RESULTS: The PLSC analysis revealed one robust latent component linking RSFC between the subcortical nuclei (in particular the thalamus and basal ganglia) and the occipital/temporal cortex to the headache-mental conditions in MwoA patients. These RSFC patterns were spatially correlated with the distribution of several neurotransmitters including 5HT1a, 5HT2a, and mGluR5 receptors. The third part of the analysis indicated that the RSFC patterns could discriminate MwoA patients from HCs with an accuracy of 0.793, differentiate patients into two subtypes, and to some extent predict the efficacy of acupuncture treatment. CONCLUSION: This was the first \"doubly\" multivariate analysis identifying functional brain connectivity patterns underlying headache-mental disorder comorbidity in migraineurs. These findings reveal a neurobiological substrate for migraine-mental disorder comorbidity and highlight the potential of these connectivity patterns as biomarkers for diagnosis and treatment prediction.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Male",
+    "Adult",
+    "Brain",
+    "Middle Aged",
+    "Magnetic Resonance Imaging",
+    "Mental Disorders",
+    "Neural Pathways",
+    "Migraine Disorders",
+    "Comorbidity",
+    "Migraine without Aura",
+    "Young Adult",
+    "Brain Mapping"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Firstly, we employed partial least-squares correlation (PLSC) to identify a set of resting-state functional connectivity (RSFC) that was co-related with headache symptoms and mental conditions in MwoA patients."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "40341810",
+   "title": "Multi-Spatial Voxel-Scale Modulation of Acupuncture on Abnormal Brain Activity in Migraine Patients Without Aura: A Randomized Study Neuroimaging Trial.",
+   "journal": "Brain Behav",
+   "year": "2025",
+   "abstract_plain": "BACKGROUND: The role of acupuncture in treating migraine has been widely recognized, but the systematic, comprehensive and, multi-spatial voxel-scale mechanism of brain function changes is still unclear. OBJECTIVE: Resting-state functional magnetic resonance imaging (rs-fMRI) was used to investigate the modulatory effect of acupuncture on brain activity in patients with migraine without aura (MwoA) at different spatial voxel scales. METHODS: A total of 64 patients with MwoA were randomized into true acupuncture (TA) and sham acupuncture (SA) groups. MwoA patients received TA or SA three times a week for four weeks, a total of 12 sessions. A clinical symptoms assessment and rs-fMRI scans were evaluated before and after four weeks of treatment. Amplitude of low frequency fluctuation (ALFF) and fractional ALFF (fALFF), regional homogeneity (ReHo), and degree centrality (DC) were used to evaluate the spontaneous activity, activity coherence and connectivity importance of brain function at the single voxel, local voxel, and global voxel scales, respectively. RESULTS: The clinical symptoms of both groups were improved compared with baseline. There were significant differences between the TA group and the SA group in migraine frequency, days and pain intensity. The neuroimaging data suggest that TA modulates a broader and more significant brain neural activity than SA. TA modulates the neural activity of the default mode network (DMN), visual network (VN), and sensorimotor network (SMN) at the single voxel scale, local voxel scale and global voxel scale, and these changes are correlated with the improvement of the migraine and quality of life. CONCLUSIONS: TA could exert therapeutic effects at different spatial voxel scales by modulating the DMN, VN, and SMN, which may be the neuroimaging mechanism of acupuncture for MwoA.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Male",
+    "Female",
+    "Acupuncture Therapy",
+    "Adult",
+    "Migraine without Aura",
+    "Magnetic Resonance Imaging",
+    "Brain",
+    "Middle Aged",
+    "Neuroimaging",
+    "Treatment Outcome",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "Multi-Spatial Voxel-Scale Modulation of Acupuncture on Abnormal Brain Activity in Migraine Patients Without Aura: A Randomized Study Neuroimaging Trial.."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "There were significant differences between the TA group and the SA group in migraine frequency, days and pain intensity."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "39340626",
+   "title": "Abnormal thalamocortical network dynamics in patients with migraine and its relationship with electroacupuncture treatment response.",
+   "journal": "Brain Imaging Behav",
+   "year": "2024",
+   "abstract_plain": "Acupuncture is an effective and safe alternative treatment to prevent and treat migraine, but its central analgesic mechanism remains poorly understood. It is believed that the dysfunction of the thalamocortical connectivity network is an important contributor to migraine pathophysiology. This study aimed to investigate the abnormal thalamocortical network dynamics in patients with migraine without aura (MWoA) before and after an 8-week electroacupuncture treatment. A total of 143 patients with MWoA and 100 healthy controls (HC) were included, and resting-state functional magnetic resonance imaging (fMRI) data were acquired. Dynamic functional network connectivity (dFNC) was calculated for each subject. The modulation effect of electroacupuncture on clinical outcomes of migraine, dFNC, and their association were investigated. In our results, dFNC matrices were classified into two clusters (brain states). As compared with the HC, patients with MWoA had a higher proportion of brain states with a strong thalamocortical between-network connection, implying an abnormal balance of the network organization across dFNC brain states. Correlation analysis showed that this abnormality was associated with summarized clinical measurements of migraine. A total of 60 patients were willing to receive an 8-week electroacupuncture treatment, and 24 responders had 50% changes in headache frequency. In electroacupuncture responders, electroacupuncture could change the abnormal thalamocortical connectivities towards a pattern more similar to that of HC. Our findings suggested that electroacupuncture could relieve the symptoms of migraine and has the potential capacity to regulate the abnormal function of the thalamocortical circuits.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Electroacupuncture",
+    "Female",
+    "Male",
+    "Adult",
+    "Magnetic Resonance Imaging",
+    "Cerebral Cortex",
+    "Thalamus",
+    "Neural Pathways",
+    "Treatment Outcome",
+    "Migraine Disorders",
+    "Migraine without Aura",
+    "Middle Aged",
+    "Young Adult",
+    "Brain Mapping",
+    "Rest"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "A total of 143 patients with MWoA and 100 healthy controls (HC) were included, and resting-state functional magnetic resonance imaging (fMRI) data were acquired."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "38649209",
+   "title": "[Possible mechanisms of auricular acupoint stimulation in the treatment of migraine by activating auricular vagus nerve].",
+   "journal": "Zhen Ci Yan Jiu",
+   "year": "2024",
+   "abstract_plain": "Under the guidance of traditional Chinese medicine theory, the clinical research of auricular acupoint stimulation in the treatment of migraine has gained a lot, and the curative efficacy is definite, but its mechanism remains unclear. In the present paper, we discussed the efficacy of auricular acupoint stimulation including \"transcutaneous auricular vagus nerve stimulation\" (taVNS) in the treatment of migraine in recent years. Through bibliometric analysis, we screened out top 10 auricular acupoints (Shenmen\uff3bTF4\uff3d, Pizhixia\uff3bAT4\uff3d, Jiaogan\uff3bAH6a\uff3d, Gan\uff3bCO12\uff3d, Yidan\uff3bCO11\uff3d, Neifenmi\uff3bCO18\uff3d, Shen\uff3bCO10\uff3d, Nie\uff3bAT2\uff3d, Zhen\uff3bAT3\uff3d and E\uff3bAT1\uff3d) which were the most frequently used for migraine. Majority of these auricular acupoints just distributed in the region innervated by auricular vagus nerve. Thus, we thought that the analgesic effect of needling these auricular acupoints for migraine was produced by triggering the auricular vagus nerve, and concluded that the central mechanism underlying induction of analgesic effect by activating auricular vagus nerve may be achieved by activating the descending pain regulation pathway of the locus coeruleus nucleus and dorsal raphe nucleus. In addition, taVNS-induced 1) regulation of the activities of brain's default network and pain matrix, 2) activation of the cortical descending pain regulation pathway, and 3) inhibition of the neuroinflammatory response may also contribute to its ameliorating effect of migraine. This paper may provide ideas for the future research on the mechanism of auricular acupoint treatment of migraine.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Acupuncture Points",
+    "Migraine Disorders",
+    "Vagus Nerve",
+    "Vagus Nerve Stimulation",
+    "Acupuncture, Ear",
+    "Animals"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "locus coeruleus",
+    "sentence": "Thus, we thought that the analgesic effect of needling these auricular acupoints for migraine was produced by triggering the auricular vagus nerve, and concluded that the central mechanism underlying induction of analgesic effect by activating auricular vagus nerve may be achieved by activating the descending pain regulation pathway of the locus coeruleus nucleus and dorsal raphe nucleus."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "38245739",
+   "title": "Modulation of temporal and occipital cortex by acupuncture in non-menstrual MWoA patients: a rest BOLD fMRI study.",
+   "journal": "BMC Complement Med Ther",
+   "year": "2024",
+   "abstract_plain": "OBJECTIVE: To investigate the changes in amplitude of low-frequency fluctuation (ALFF) and degree centrality (DC) values before and after acupuncture in young women with non-menstrual migraine without aura (MWoA) through rest blood-oxygen-level-dependent functional magnetic resonance imaging (BOLD fMRI). METHODS: Patients with non-menstrual MWoA (Group 1, n\u2009=\u200950) and healthy controls (Group 2, n\u2009=\u200950) were recruited. fMRI was performed in Group 1 at 2 time points: before acupuncture (time point 1, TP1); and after the end of all acupuncture sessions (time point 2, TP2), and performed in Group 2 as a one-time scan. Patients in Group 1 were assessed with the Migraine Disability Assessment Questionnaire (MIDAS) and the Short-Form McGill Pain Questionnaire (SF-MPQ) at TP1 and TP2 after fMRI was performed. The ALFF and DC values were compared within Group 1 at two time points and between Group 1 and Group2. The correlation between ALFF and DC values with the statistical differences and the clinical scales scores were analyzed. RESULTS: Brain activities increased in the left fusiform gyrus and right angular gyrus, left middle occipital gyrus, and bilateral prefrontal cortex and decreased in left inferior parietal lobule in Group 1, which had different ALFF values compared with Group 2 at TP1. The bilateral fusiform gyrus, bilateral inferior temporal gyrus and right middle temporal gyrus increased and right angular gyrus, right superior marginal gyrus, right inferior parietal lobule, right middle occipital gyrus, right superior frontal gyrus, right middle frontal gyrus, right anterior central gyrus, and right supplementary motor area decreased in activity in Group 1 had different DC values compared with Group 2 at TP1. ALFF and DC values of right inferior temporal gyrus, right fusiform gyrus and right middle temporal gyrus were decreased in Group1 at TP1 compared with TP2. ALFF values in the left middle occipital area were positively correlated with the pain degree at TP1 in Group1 (correlation coefficient r, r\u2009=\u20090.827, r\u2009=\u20090.343; P\u2009<\u20090.01, P\u2009=\u20090.015). The DC values of the right inferior temporal area were positively correlated with the pain degree at TP1 in Group 1 (r\u2009=\u20090.371; P\u2009=\u20090.008). CONCLUSION: Spontaneous brain activity and network changes in young women with non-menstrual MwoA were altered by acupuncture. The right temporal area may be an important target for acupuncture modulated brain function in young women with non-menstrual MwoA.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Magnetic Resonance Imaging",
+    "Migraine without Aura",
+    "Acupuncture Therapy",
+    "Occipital Lobe",
+    "Pain"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Modulation of temporal and occipital cortex by acupuncture in non-menstrual MWoA patients: a rest BOLD fMRI study.."
+   },
+   "intensity": {
+    "term": "mpq",
+    "sentence": "Patients in Group 1 were assessed with the Migraine Disability Assessment Questionnaire (MIDAS) and the Short-Form McGill Pain Questionnaire (SF-MPQ) at TP1 and TP2 after fMRI was performed."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "37389804",
+   "title": "Discovery of the mechanisms of acupuncture in the treatment of migraine based on functional magnetic resonance imaging and omics.",
+   "journal": "Front Med",
+   "year": "2023",
+   "abstract_plain": "Migraine is one of the most prevalent and disabling neurological disease, but the current pharmacotherapies show limited efficacy and often accompanied by adverse effects. Acupuncture is a promising complementary therapy, but further clinical evidence is needed. The influence of acupuncture on migraine is not an immediate effect, and its mechanism remains unclear. This study aims to provide further clinical evidence for the anti-migraine effects of acupuncture and explore the mechanism involved. A randomized controlled trial was performed among 10 normal controls and 38 migraineurs. The migraineurs were divided into blank control, sham acupuncture, and acupuncture groups. Patients were subjected to two courses of treatment, and each treatment lasted for 5 days, with an interval of 1 day between the two courses. The effectiveness of treatment was evaluated using pain questionnaire. The functional magnetic resonance imaging (fMRI) data were analyzed for investigating brain changes induced by treatments. Blood plasma was collected for metabolomics and proteomics studies. Correlation and mediation analyses were performed to investigate the interaction between clinical, fMRI and omics changes. Results showed that acupuncture effectively relieved migraine symptoms in a way different from sham acupuncture in terms of curative effect, affected brain regions, and signaling pathways. The anti-migraine mechanism involves a complex network related to the regulation of the response to hypoxic stress, reversal of brain energy imbalance, and regulation of inflammation. The brain regions of migraineurs affected by acupuncture include the lingual gyrus, default mode network, and cerebellum. The effect of acupuncture on patients' metabolites/proteins may precede that of the brain.",
+   "publication_types": [
+    "Randomized Controlled Trial",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Migraine Disorders",
+    "Brain",
+    "Acupuncture Therapy",
+    "Magnetic Resonance Imaging"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional magnetic resonance",
+    "sentence": "Discovery of the mechanisms of acupuncture in the treatment of migraine based on functional magnetic resonance imaging and omics.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "37349112",
+   "title": "Evaluation of a Clustering Approach to Define Distinct Subgroups of Patients With Migraine to Select Electroacupuncture Treatments.",
+   "journal": "Neurology",
+   "year": "2023",
+   "abstract_plain": "BACKGROUND AND OBJECTIVES: The objective of this study was to propose a clustering approach to identify migraine subgroups and test the clinical usefulness of the approach by providing prognostic information for electroacupuncture treatment selection. METHODS: Participants with migraine without aura (MWoA) were asked to complete a daily headache diary, self-rating depression and anxiety, and quality-of-life questionnaires. Whole-brain functional connectivities (FCs) were assessed on resting-state functional MRI (fMRI). By integrating clinical measurements and fMRI data, partial least squares correlation and hierarchical clustering analysis were used to cluster participants with MWoA. Multivariate pattern analysis was applied to validate the proposed subgrouping strategy. Some participants had an 8-week electroacupuncture treatment, and the response rate was compared between different MWoA subgroups. RESULTS: In study 1, a total of 97 participants (age of 28.2 \u00b1 1.0 years, 70 female participants) with MWoA and 77 healthy controls (HCs) (age of 26.8 \u00b1 0.1 years, 61 female participants) were enrolled (dataset 1), and 2 MWoA subgroups were defined. The participants in subgroup 1 had a significantly lower headache frequency (times/month of 4.4 \u00b1 1.1) and significantly higher self-ratings of depression (depression score of 49.5 \u00b1 2.3) when compared with participants in subgroup 2 (times/month of 7.0 \u00b1 0.6 and depression score of 43.4 \u00b1 1.2). The between-group differences of FCs were predominantly related to the amygdala, thalamus, hippocampus, and parahippocampal area. In study 2, 33 participants with MWoA (age of 30.9 \u00b1 2.0 years, 28 female participants) and 23 HCs (age of 29.8 \u00b1 1.1 years, 13 female participants) were enrolled as an independent dataset (dataset 2). The classification analysis validated the effectiveness of the 2-cluster solution of participants with MWoA in datasets 1 and 2. In study 3, 58 participants with MWoA were willing to receive electroacupuncture treatment and were assigned to different subgroups. Participants in different subgroups exhibited different response rates (p = 0.03, OR CI 0.086-0.93) to electroacupuncture treatment (18% and 44% for subgroups 1 and 2, respectively). DISCUSSION: Our study proposed a novel clustering approach to define distinct MWoA subgroups, which could be useful for refining the diagnosis of participants with MWoA and guiding individualized strategies for pain prophylaxis and analgesia.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Humans",
+    "Female",
+    "Adult",
+    "Electroacupuncture",
+    "Brain",
+    "Migraine without Aura",
+    "Pain",
+    "Headache",
+    "Magnetic Resonance Imaging",
+    "Cluster Analysis"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "METHODS: Participants with migraine without aura (MWoA) were asked to complete a daily headache diary, self-rating depression and anxiety, and quality-of-life questionnaires."
+   },
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Whole-brain functional connectivities (FCs) were assessed on resting-state functional MRI (fMRI)."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "37221469",
+   "title": "Imaging the brain and vascular reactions to headache treatments: a systematic review.",
+   "journal": "J Headache Pain",
+   "year": "2023",
+   "abstract_plain": "BACKGROUND: Neuroimaging studies have made\u00a0an important\u00a0contribution\u00a0to our understanding of headache pathophysiology. This systematic review aims to provide a comprehensive overview and critical appraisal of mechanisms of actions of headache treatments and potential biomarkers of treatment response disclosed by imaging studies. MAIN BODY: We performed a systematic literature search on PubMed and Embase databases for imaging studies investigating central and vascular effects of pharmacological and non-pharmacological treatments used to abort and prevent headache attacks. Sixty-three studies were included in the final qualitative analysis. Of these, 54 investigated migraine patients, 4 cluster headache patients and 5 patients with medication overuse headache. Most studies used functional magnetic resonance imaging (MRI) (n\u2009=\u200933) or molecular imaging (n\u2009=\u200914). Eleven studies employed structural MRI and a few used arterial spin labeling (n\u2009=\u20093), magnetic resonance spectroscopy (n\u2009=\u20093) or magnetic resonance angiography (n\u2009=\u20092). Different imaging modalities were combined in eight studies. Despite of the variety of imaging approaches and results, some findings were consistent. This systematic review suggests that triptans may cross the blood-brain barrier to some extent, though perhaps not sufficiently to alter the intracranial cerebral blood flow. Acupuncture in migraine, neuromodulation in migraine and cluster headache patients, and medication withdrawal in patients with medication overuse headache could promote headache improvement by reverting headache-affected pain processing brain areas. Yet, there is currently no clear evidence for where each treatment acts, and no firm imaging predictors of efficacy. This is mainly due to a scarcity of studies and heterogeneous treatment schemes, study designs, subjects, and imaging techniques. In addition, most studies used small sample sizes and inadequate statistical approaches, which precludes generalizable conclusions. CONCLUSION: Several aspects of headache treatments remain to be elucidated using imaging approaches, such as how pharmacological preventive therapies work, whether treatment-related brain changes may influence therapy effectiveness, and imaging biomarkers of clinical response. In the future, well-designed studies with homogeneous study populations, adequate sample sizes and statistical approaches are needed.",
+   "publication_types": [
+    "Systematic Review",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Humans",
+    "Cluster Headache",
+    "Headache",
+    "Brain",
+    "Migraine Disorders",
+    "Headache Disorders, Secondary"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "BACKGROUND: Neuroimaging studies have made\u00a0an important\u00a0contribution\u00a0to our understanding of headache pathophysiology."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "37199198",
+   "title": "[Effect of acupuncture on migraine without aura: a resting-state functional magnetic resonance study].",
+   "journal": "Zhongguo Zhen Jiu",
+   "year": "2022",
+   "abstract_plain": "OBJECTIVE: To observe therapeutic effect of acupuncture on migraine without aura and the changes of brain functional connectivity (FC) using resting-state functional magnetic resonance imaging (rs-fMRI). METHODS: Thirty-four patients with migraine without aura were included into an observation group and treated with acupuncture at Baihui (GV 20), Xuanlu (GB 5), Shuaigu (GB 8), Taiyang (EX-HN 5), etc. Using G6805-\u2161 electric acupuncture apparatus, the ipsilateral Fengchi (GB 20) and Shuaigu (GB 8) were connected and stimulated with continuous wave, 2 Hz in frequency and 0.1 mA to 1.0 mA in current intensity, depending on patient's tolerance. Acupuncture stimulation lasted 20 min each time, twice weekly (at the interval>2 days). A total of 6 weeks of treatment (12 times) was required. Matching the gender and age as those of the observation group, 16 healthy subjects were recruited into a control group and no any intervention was provided. The headache days, the score of visual analogue scale (VAS) for headache severity, the total score of headache symptoms, the score of migraine-specific quality of life questionnaire (MSQ), the score of self-rating anxiety scale (SAS), and the score of self-rating depression scale (SDS) were compared before and after acupuncture, and the clinical efficacy was assessed in the observation group. The data of the resting-state functional magnetic resonance were collected in the observation group before and after treatment as well as the control group at baseline. The periaqueductal gray (PAG) was taken as the seed to analyze the effect of acupuncture on the brain FC and the correlation between FC and VAS scores, headache days in the patients of migraine without aura. RESULTS: After treatment, the headache days, VAS score, the total score of headache symptoms, SAS score and SDS score were all reduced (P<0.01); and the scores of the restrictive, preventive, and emotional functional domains of the MSQ were increased (P<0.01) in the observation group compared with those before treatment. The total effective rate was 94.1% (32/34). Compared with the control group, FC between PAG and the right cerebellum \u2167 was decreased in the observation group before treatment (P<0.05). FC of PAG with the bilateral cerebellum \u2167 and the left precuneus was increased in the observation group after treatment compared with those before treatment (P<0.05). In the observation group, the FC intensity of PAG and the right cerebellum \u2167 was negatively correlated with VAS score (r =-0.41, P<0.05) before treatment, while the FC intensity of PAG and the left precuneus was positively correlated with the improvement in headache days (r =0.40, P<0.05) after treatment. CONCLUSION: Acupuncture is effective on migraine without aura. The brain functional connectivity is abnormal in the patients. The effect onset of acupuncture is obtained probably by regulating the abnormal brain regions and activating brain regions relevant with pain and emotions.",
+   "publication_types": [
+    "English Abstract",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Humans",
+    "Migraine without Aura",
+    "Magnetic Resonance Imaging",
+    "Quality of Life",
+    "Headache",
+    "Case-Control Studies"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "The headache days, the score of visual analogue scale (VAS) for headache severity, the total score of headache symptoms, the score of migraine-specific quality of life questionnaire (MSQ), the score of self-rating anxiety scale (SAS), and the score of self-rating depression scale (SDS) were compared before and after acupuncture, and the clinical efficacy was assessed in the observation group."
+   },
+   "biomarker": {
+    "term": "functional magnetic resonance",
+    "sentence": "[Effect of acupuncture on migraine without aura: a resting-state functional magnetic resonance study].."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "The headache days, the score of visual analogue scale (VAS) for headache severity, the total score of headache symptoms, the score of migraine-specific quality of life questionnaire (MSQ), the score of self-rating anxiety scale (SAS), and the score of self-rating depression scale (SDS) were compared before and after acupuncture, and the clinical efficacy was assessed in the observation group."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "36067612",
+   "title": "Changes in brain connectivity linked to multisensory processing of pain modulation in migraine with acupuncture treatment.",
+   "journal": "Neuroimage Clin",
+   "year": "2022",
+   "abstract_plain": "Migraine without aura (MWoA) is a major neurological disorder with unsatisfactory adherence to current medications. Acupuncture has emerged as a promising method for treating MWoA. However, the brain mechanism underlying acupuncture is yet unclear. The present study aimed to examine the effects of acupuncture in regulating brain connectivity of the key regions in pain modulation. In this study, MWoA patients were recruited and randomly assigned to 4\u00a0weeks of real or sham acupuncture. Resting-state functional magnetic resonance imaging (fMRI) data were collected before and after the treatment. A modern neuroimaging literature meta-analysis of 515 fMRI studies was conducted to identify pain modulation-related key regions as regions of interest (ROIs). Seed-to-voxel resting state-functional connectivity (rsFC) method and repeated-measures two-way analysis of variance were conducted to determine the interaction effects between the two groups and time (baseline and post-treatment). The changes in rsFC were evaluated between baseline and post-treatment in real and sham acupuncture groups, respectively. Clinical data at baseline and post-treatment were also recorded in order to determine between-group differences in clinical outcomes as well as correlations between rsFC changes and clinical effects. 40 subjects were involved in the final analysis. The current study demonstrated significant improvement in real acupuncture vs sham acupuncture on headache severity (monthly migraine days), headache impact (6-item Headache Impact Test), and health-related quality of life (Migraine-Specific Quality of Life Questionnaire). Five pain modulation-related key regions, including the right amygdala (AMYG), left insula (INS), left medial orbital superior frontal gyrus (PFCventmed), left middle occipital gyrus (MOG), and right middle cingulate cortex (MCC), were selected based on the meta-analysis on brain imaging studies. This study found that 1) after acupuncture treatment, migraine patients of the real acupuncture group showed significantly enhanced connectivity in the right AMYG/MCC-left MTG and the right MCC-right superior temporal gyrus (STG) compared to that of the sham acupuncture group; 2) negative correlations were established between clinical effects and increased rsFC in the right AMYG/MCC-left MTG; 3) baseline right AMYG-left MTG rsFC predicts monthly migraine days reduction after treatment. The current results suggested that acupuncture may concurrently regulate the rsFC of two pain modulation regions in the AMYG and MCC. MTG and STG may be the key nodes linked to multisensory processing of pain modulation in migraine with acupuncture treatment. These findings highlighted the potential of acupuncture for migraine management and the mechanisms underlying the modulation effects.",
+   "publication_types": [
+    "Journal Article",
+    "Meta-Analysis",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Humans",
+    "Acupuncture Therapy",
+    "Brain",
+    "Magnetic Resonance Imaging",
+    "Migraine without Aura",
+    "Pain",
+    "Quality of Life",
+    "Functional Neuroimaging"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Resting-state functional magnetic resonance imaging (fMRI) data were collected before and after the treatment."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "35312785",
+   "title": "The Modifying of Functional Connectivity Induced by Peripheral Nerve Field Stimulation\u00a0using Electroacupuncture for Migraine: A Prospective Clinical Study.",
+   "journal": "Pain Med",
+   "year": "2022",
+   "abstract_plain": "OBJECTIVE: We examined the functional connectivity (FC) in patients with migraine compared with healthy subjects before and after C2 peripheral nerve field stimulation with electroacupuncture (EA-C2-PNfS) to evaluate the effect of EA-C2-PNfS and elucidate the mechanism of migraine. METHODS: Twenty-six patients with migraine and 24 healthy controls were recruited. All patients underwent resting state functional magnetic resonance imaging before and after 3\u2009months of EA-C2-PNfS. We evaluated a numerical rating scale, the Headache Impact Test, and the Self-Rating Depression Scale, which assesses depression. Healthy controls underwent magnetic resonance imaging twice at a 3-month interval without acupuncture. An analysis of FC in the region of interest in the pain matrix was performed. RESULTS: Twenty patients with migraine and 23 healthy controls (mean\u2009\u00b1\u2009standard deviation: 44.9\u2009\u00b1\u200912.9\u2009years of age) were included. Three patients had migraine with aura (55.0\u2009\u00b1\u200918.0\u2009years of age), 11 patients had migraine without aura (MWoA) (45.6\u2009\u00b1\u200914.6\u2009years of age), and six patients had chronic migraine (40.8\u2009\u00b1\u200913.9\u2009years of age). The clinical assessments significantly improved after EA-C2-PNfS in the MWoA group only. In FC analysis, the MWoA group showed a significant decrease after EA-C2-PNfS in FC between the right hypothalamus and left insula. Right hypothalamus-related FC was lower before acupuncture in the chronic migraine group than in the MWoA group. CONCLUSION: After EA-C2-PNfS for MWoA, significant changes in FC were observed at the hypothalamus and insula. Our results indicate that EA-C2-PNfS could improve migraine headache by modifying pain-related FC.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Brain",
+    "Electroacupuncture",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Migraine without Aura",
+    "Pain",
+    "Peripheral Nerves",
+    "Prospective Studies"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "We evaluated a numerical rating scale, the Headache Impact Test, and the Self-Rating Depression Scale, which assesses depression."
+   },
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "The Modifying of Functional Connectivity Induced by Peripheral Nerve Field Stimulation\u00a0using Electroacupuncture for Migraine: A Prospective Clinical Study.."
+   },
+   "intensity": {
+    "term": "numerical rating",
+    "sentence": "We evaluated a numerical rating scale, the Headache Impact Test, and the Self-Rating Depression Scale, which assesses depression."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "35219625",
+   "title": "Functional connectivity changes during migraine treatment with electroacupuncture at Shuaigu (GB8).",
+   "journal": "J Integr Med",
+   "year": "2022",
+   "abstract_plain": "OBJECTIVE: To investigate the changes in the functional connectivity (FC) in the right insula between migraine without aura (MWoA) and healthy controls by using resting-state functional magnetic resonance imaging (rs-fMRI), and to observe the instant alteration of FC in MWoA during electroacupuncture (EA) stimulation at Shuaigu (GB8). METHODS: A total of 30 patients with MWoA (PM group) and 30 healthy controls (HC group) underwent rs-fMRI scans. The PM group underwent a second rs-fMRI scan while receiving EA at GB8. The right insula subregions, including the ventral anterior insula (vAI), dorsal anterior insula (dAI) and posterior insula (PI), were selected as the seed points for FC analysis. RESULTS: Aberrant FC, including dAI with right postcentral gyrus, PI with left precuneus, was found among PM before EA (PMa), PM during EA (PMb) and HC. Meanwhile, decreased FC between dAI and the right postcentral gyrus was found in the PMa compared to the HC and PMb. Increased FC between the PI and left precuneus was found in the PMa compared to the HC and PMb. Correlation analysis showed that the FC value of the right postcentral gyrus in PMa was negatively correlated with the scores of Hamilton Rating Scale for Depression and Hamilton Rating Scale for Anxiety. The FC value of the left precuneus in PMa was positively correlated with the visual analogue scale score. CONCLUSION: The alteration of FC between the right insula subregions and multiple brain regions may be an important index for MWoA. EA at GB8 was able to adjust the FC between the right insula subregions and parietal lobe, namely, the right dAI and right postcentral gyrus, and the right PI and left precuneus, thereby rendering an instant effect in the management of MWoA.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Brain",
+    "Electroacupuncture",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Migraine without Aura"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "Correlation analysis showed that the FC value of the right postcentral gyrus in PMa was negatively correlated with the scores of Hamilton Rating Scale for Depression and Hamilton Rating Scale for Anxiety."
+   },
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Functional connectivity changes during migraine treatment with electroacupuncture at Shuaigu (GB8).."
+   },
+   "intensity": {
+    "term": "visual analogue",
+    "sentence": "The FC value of the left precuneus in PMa was positively correlated with the visual analogue scale score."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "34804268",
+   "title": "A Narrative Review of Neuroimaging Studies in Acupuncture for Migraine.",
+   "journal": "Pain Res Manag",
+   "year": "2021",
+   "abstract_plain": "Acupuncture has been widely used as an alternative and complementary therapy for migraine. With the development of neuroimaging techniques, the central mechanism of acupuncture for migraine has gained increasing attention. This review aimed to analyze the study design and main findings of neuroimaging studies of acupuncture for migraine to provide the reference for future research. The original studies were collected and screened in three English databases (PubMed, Embase, and Cochrane Library) and four Chinese databases (Chinese National Knowledge Infrastructure, Chinese Biomedical Literature database, the Chongqing VIP database, and Wanfang database). As a result, a total of 28 articles were included. Functional magnetic resonance imaging was the most used neuroimaging technique to explore the cerebral activities of acupuncture for migraine. This review manifested that acupuncture could elicit cerebral responses on patients with migraine, different from sham acupuncture. The results indicated that the pain systems, including the medial pain pathway, lateral pain pathway, and descending pain modulatory system, participated in the modulation of the cerebral activities of migraine by acupuncture.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Databases, Factual",
+    "Humans",
+    "Migraine Disorders",
+    "Neuroimaging",
+    "Research Design"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "A Narrative Review of Neuroimaging Studies in Acupuncture for Migraine.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "34628737",
+   "title": "[Effect of acupuncture on default mode network in patients with migraine based on functional Magnetic Resonance Imaging: a preliminary study].",
+   "journal": "Zhongguo Zhen Jiu",
+   "year": "2021",
+   "abstract_plain": "OBJECTIVE: To investigate the effect of acupuncture on default mode network (DMN) in migraine patients without aura based on functional Magnetic Resonance Imaging (fMRI). METHODS: Fifteen patients with migraine were included and treated with acupuncture based on \"root-knot\" theory (Zuqiaoyin [GB 44] for shaoyang headache, Lidui [ST 45] for yangming headache, Zhiyin [BL 67] for taiyang headache, and ashi point), once every other day, three times a week for 4 weeks. The patients received fMRI scanning before and after acupuncture treatment, the effect of acupuncture on DMN in patients with migraine was observed; the frequency of migraine attack, visual analogue scale (VAS) score and the using of analgesic medication before and after treatment were recorded to evaluate the curative effect of acupuncture; the migraine-specific quality of life questionnaire (MSQ), self-rating anxiety scale (SAS) and self-rating depression scale (SDS) were used to evaluate the improvements of quality of life and emotional state. RESULTS: Compared before acupuncture, the functional connections of left parahippocampal cortex (PHC) and anterior medial prefrontal cortex (aMPFC), dorsal medial prefrontal cortex (dMPFC) and lateral temporal cortex (LTC) in DMN after acupuncture were weakened (P<0.05), and the functional connections of bilateral posterior cingulate cortex (PCC) and dMPFC were weakened (P<0.05). Compared before treatment, the frequency of migraine attack, VAS, SAS and SDS scores after treatment were decreased (P<0.05), and MSQ score was increased (P<0.05). CONCLUSION: Acupuncture shows good clinical efficacy for migraine without aura, and could adjust the functional connection of DMN.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Brain Mapping",
+    "Default Mode Network",
+    "Humans",
+    "Magnetic Resonance Spectroscopy",
+    "Migraine Disorders",
+    "Quality of Life"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "The patients received fMRI scanning before and after acupuncture treatment, the effect of acupuncture on DMN in patients with migraine was observed; the frequency of migraine attack, visual analogue scale (VAS) score and the using of analgesic medication before and after treatment were recorded to evaluate the curative effect of acupuncture; the migraine-specific quality of life questionnaire (MSQ), self-rating anxiety scale (SAS) and self-rating depression scale (SDS) were used to evaluate the improvements of quality of life and emotional state."
+   },
+   "biomarker": {
+    "term": "functional magnetic resonance",
+    "sentence": "[Effect of acupuncture on default mode network in patients with migraine based on functional Magnetic Resonance Imaging: a preliminary study].."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "The patients received fMRI scanning before and after acupuncture treatment, the effect of acupuncture on DMN in patients with migraine was observed; the frequency of migraine attack, visual analogue scale (VAS) score and the using of analgesic medication before and after treatment were recorded to evaluate the curative effect of acupuncture; the migraine-specific quality of life questionnaire (MSQ), self-rating anxiety scale (SAS) and self-rating depression scale (SDS) were used to evaluate the improvements of quality of life and emotional state."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "The patients received fMRI scanning before and after acupuncture treatment, the effect of acupuncture on DMN in patients with migraine was observed; the frequency of migraine attack, visual analogue scale (VAS) score and the using of analgesic medication before and after treatment were recorded to evaluate the curative effect of acupuncture; the migraine-specific quality of life questionnaire (MSQ), self-rating anxiety scale (SAS) and self-rating depression scale (SDS) were used to evaluate the improvements of quality of life and emotional state."
+  },
+  {
+   "pmid": "34085477",
+   "title": "[Effect of acupuncture on the cognitive function of migraine patients with depression/anxiety disorder].",
+   "journal": "Zhongguo Zhen Jiu",
+   "year": "2021",
+   "abstract_plain": "OBJECTIVE: To observe the effect of five-element acupuncture on the cognitive function repair of migraine patients with depression/anxiety disorder. METHODS: The migraine patients with depression/anxiety disorder (19 cases, 5 cases dropped off) were taken as the observation group, and received five-element acupuncture twice a week for 8 weeks. Healthy subjects (19 cases) were selected by demographic data matching as the control group. The cognitive function was evaluated with the event related potential (ERP) technique, and the latency and amplitude of visual evoked potential P300 were adopted as the observation indexes. The headache days (every 4 weeks), headache intensity [visual analogue scale(VAS) score], and headache impact test-6 (HIT-6) score, Hamilton depression scale (HAMD) score and Hamilton anxiety scale (HAMA) score were used as the observation indexes for curative effect. RESULTS: Before the treatment, latency of target stimulus at Fz [ (417.5\u00b134.3) ms] in the observation group was extended compared with the healthy subjects of the control group [(388.6\u00b142.1) ms, P<0.05]. In the observation group, the latency of each point target stimulus [Fz: (376.1\u00b136.2) ms, F3: (374.8\u00b137.6) ms, F4: (372.0\u00b137.6) ms] after treatment were shorter than those [Fz: (417.5\u00b134.3) ms, F3: (417.4\u00b133.8) ms, F4: (416.0\u00b136.6) ms] before treatment (P<0.05). Before and after treatment, there was no significant difference in the amplitude of each point between the observation group and the control group (P>0.05). In the observation group, the headache days was shorter than that before treatment (P<0.01), and the VAS score, HIT-6 score, HAMD score and HAMA score were all lower than before treatment (P<0.01). CONCLUSION: There are some cognitive impairments in migraine patients with depression/anxiety disorder. Five-element acupuncture not only relieves headache, anxiety and depression effectively, but also improves the activation level of the frontal lobe. It significantly repairs the impaired cognitive function.",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Points",
+    "Acupuncture Therapy",
+    "Anxiety Disorders",
+    "Cognition",
+    "Depression",
+    "Evoked Potentials, Visual",
+    "Humans",
+    "Migraine Disorders",
+    "Treatment Outcome"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "[Effect of acupuncture on the cognitive function of migraine patients with depression/anxiety disorder].."
+   },
+   "biomarker": {
+    "term": "erp",
+    "sentence": "The cognitive function was evaluated with the event related potential (ERP) technique, and the latency and amplitude of visual evoked potential P300 were adopted as the observation indexes."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "The headache days (every 4 weeks), headache intensity [visual analogue scale(VAS) score], and headache impact test-6 (HIT-6) score, Hamilton depression scale (HAMD) score and Hamilton anxiety scale (HAMA) score were used as the observation indexes for curative effect."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "34036477",
+   "title": "Evidence of Potential Mechanisms of Acupuncture from Functional MRI Data for Migraine Prophylaxis.",
+   "journal": "Curr Pain Headache Rep",
+   "year": "2021",
+   "abstract_plain": "PURPOSE OF REVIEW: To summarize the clinical neuroimaging evidence pertaining to the potential mechanisms of acupuncture for migraine prophylaxis. RECENT FINDINGS: From a descriptive perspective, converging evidence from recent neuroimaging studies, mainly from functional MRI (fMRI) studies, has demonstrated that when compared with sham acupuncture, verum acupuncture could normalize the decrease of the functional connectivity of the rostral ventromedial medulla-trigeminocervical complex (RVM/TCC) network, frontal-parietal network, cingulo-opercular networks, and default mode network and could normalize sensorimotor network connectivity with sensory-, affective-, and cognitive-related brain areas. These areas overlap with those of the pain matrix. Verum acupuncture works in a more targeted and unique manner compared with sham acupuncture in patients with migraine. These findings from neuroimaging studies may provide new perspectives on the validation of acupoints specificity and confirm the central modulating effects of acupuncture as a migraine prevention treatment. However, the exact mechanism by which acupuncture works for migraine prophylaxis remains unclear and warrants investigation. Future studies with larger sample sizes are still needed to confirm the current results and to further evaluate the complex and specific effects of acupuncture by analyzing different stimulus conditions, such as verum vs. sham acupuncture, deqi vs. no deqi, different acupuncture points or meridians, and different manipulation methods. Moreover, instead of focusing on the changes in a single area of the brain, researchers should focus more on the relationships among the functional connectivity network of brain areas such as the RVM/TCC, thalamus, anterior cingulate cortex (ACC), superior temporal gyrus (STG), and supplementary motor area (SMA) to explore the underlying mechanism of the effects of acupuncture.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Migraine Disorders"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "affective",
+    "sentence": "RECENT FINDINGS: From a descriptive perspective, converging evidence from recent neuroimaging studies, mainly from functional MRI (fMRI) studies, has demonstrated that when compared with sham acupuncture, verum acupuncture could normalize the decrease of the functional connectivity of the rostral ventromedial medulla-trigeminocervical complex (RVM/TCC) network, frontal-parietal network, cingulo-opercular networks, and default mode network and could normalize sensorimotor network connectivity with sensory-, affective-, and cognitive-related brain areas."
+   },
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "PURPOSE OF REVIEW: To summarize the clinical neuroimaging evidence pertaining to the potential mechanisms of acupuncture for migraine prophylaxis."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": "RECENT FINDINGS: From a descriptive perspective, converging evidence from recent neuroimaging studies, mainly from functional MRI (fMRI) studies, has demonstrated that when compared with sham acupuncture, verum acupuncture could normalize the decrease of the functional connectivity of the rostral ventromedial medulla-trigeminocervical complex (RVM/TCC) network, frontal-parietal network, cingulo-opercular networks, and default mode network and could normalize sensorimotor network connectivity with sensory-, affective-, and cognitive-related brain areas."
+  },
+  {
+   "pmid": "33381165",
+   "title": "The Instant Effects of Continuous Transcutaneous Auricular Vagus Nerve Stimulation at Acupoints on the Functional Connectivity of Amygdala in Migraine without Aura: A Preliminary Study.",
+   "journal": "Neural Plast",
+   "year": "2020",
+   "abstract_plain": "BACKGROUND: A growing body of evidence suggests that both auricular acupuncture and transcutaneous auricular vagus nerve stimulation (taVNS) can induce antinociception and relieve symptoms of migraine. However, their instant effects and central treatment mechanism remain unclear. Many studies proved that the amygdalae play a vital role not only in emotion modulation but also in pain processing. In this study, we investigated the modulation effects of continuous taVNS at acupoints on the FC of the bilateral amygdalae in MwoA. METHODS: Thirty episodic migraineurs were recruited for the single-blind, crossover functional magnetic resonance imaging (fMRI) study. Each participant attended two kinds of eight-minute stimulations, taVNS and sham-taVNS (staVNS), separated by seven days in random order. Finally, 27 of them were included in the analysis of seed-to-voxel FC with the left/right amygdala as seeds. RESULTS: Compared with staVNS, the FC decreased during taVNS between the left amygdala and left middle frontal gyrus (MFG), left dorsolateral superior frontal gyrus, right supplementary motor area (SMA), bilateral paracentral lobules, bilateral postcingulum gyrus, and right frontal superior medial gyrus, so did the FC of the right amygdala and left MFG. A significant positive correlation was observed between the FC of the left amygdala and right SMA and the frequency/total time of migraine attacks during the preceding four weeks. CONCLUSION: Continuous taVNS at acupoints can modulate the FC between the bilateral amygdalae and pain-related brain regions in MwoA, involving the limbic system, default mode network, and pain matrix, with obvious differences between the left amygdala and the right amygdala. The taVNS may produce treatment effects by modulating the abnormal FC of the amygdala and pain networks, possibly having the same central mechanism as auricular acupuncture.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Points",
+    "Adult",
+    "Amygdala",
+    "Cross-Over Studies",
+    "Female",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Migraine without Aura",
+    "Nerve Net",
+    "Single-Blind Method",
+    "Vagus Nerve Stimulation",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "emotion-",
+    "sentence": "Many studies proved that the amygdalae play a vital role not only in emotion modulation but also in pain processing."
+   },
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "The Instant Effects of Continuous Transcutaneous Auricular Vagus Nerve Stimulation at Acupoints on the Functional Connectivity of Amygdala in Migraine without Aura: A Preliminary Study.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "33258357",
+   "title": "Cerebral fractional amplitude of low-frequency fluctuations may predict headache intensity improvement following acupuncture treatment in migraine patients.",
+   "journal": "J Tradit Chin Med",
+   "year": "2020",
+   "abstract_plain": "OBJECTIVE: To explore how baseline resting-state cerebral function predicts clinical outcomes of acupuncture treatment for migraine. METHODS: One hundred migraine patients and 46 healthy subjects were recruited. Patients were randomized into the acupuncture, sham acupuncture, and waiting list groups. Resting-state functional magnetic resonance imaging data were collected at baseline and after 1 month of longitudinal acupuncture treatments. Fractional amplitude of low-frequency fluctuations (fALFF) calculations were applied to explore the associations between baseline fALFF and changes in clinical variables in the acupuncture treatment group and the waiting list group. RESULTS: Compared with healthy subjects, migraine patients had lower fALFF in the left rostral ventromedial medulla, right thalamus, left amygdala, and right angular gyrus. Regression analyses revealed that baseline fALFF values in the left middle frontal gyrus, left superior temporal gyrus, and middle temporal gyrus were positively associated with headache intensity changes in the acupuncture treatment group, while baseline fALFF values in the bilateral lingual gyrus and cuneus were negatively associated with headache intensity changes in this group. CONCLUSION: The baseline fALFF values of brain regions associated with cognitive pain modulation, but not migraine severity, may predict future headache intensity improvement levels in migraine patients receiving acupuncture treatment.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Brain",
+    "Female",
+    "Headache",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Migraine Disorders",
+    "Treatment Outcome",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "resting-state",
+    "sentence": "OBJECTIVE: To explore how baseline resting-state cerebral function predicts clinical outcomes of acupuncture treatment for migraine."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31964691",
+   "title": "An fMRI-based neural marker for migraine without aura.",
+   "journal": "Neurology",
+   "year": "2020",
+   "abstract_plain": "OBJECTIVE: To identify and validate an fMRI-based neural marker for migraine without aura (MwoA) and to examine its association with treatment response. METHODS: We conducted cross-sectional studies with resting-state fMRI data from 230 participants and machine learning analyses. In studies 1 through 3, we identified, cross-validated, independently validated, and cross-sectionally validated an fMRI-based neural marker for MwoA. In study 4, we assessed the relationship between the neural marker and treatment responses in migraineurs who received a 4-week real or sham acupuncture treatment, or were waitlisted, in a registered clinical trial. RESULTS: In study 1 (n = 116), we identified a neural marker with abnormal functional connectivity within the visual, default mode, sensorimotor, and frontal-parietal networks that could discriminate migraineurs from healthy controls (HCs) with 93% sensitivity and 89% specificity. In study 2 (n = 38), we investigated the generalizability of the marker by applying it to an independent cohort of migraineurs and HCs and achieved 84% sensitivity and specificity. In study 3 (n = 76), we verified the specificity of the marker with new datasets of migraineurs and patients with other chronic pain disorders (chronic low back pain and fibromyalgia) and demonstrated 78% sensitivity and 76% specificity for discriminating migraineurs from nonmigraineurs. In study 4 (n = 116), we found that the changes in the marker responses showed significant correlation with the changes in headache frequency in response to real acupuncture. CONCLUSION: We identified an fMRI-based neural marker that captures distinct characteristics of MwoA and can link disease pattern changes to brain changes.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, N.I.H., Extramural",
+    "Research Support, Non-U.S. Gov't",
+    "Comment"
+   ],
+   "mesh": [
+    "Brain",
+    "Cross-Sectional Studies",
+    "Humans",
+    "Machine Learning",
+    "Magnetic Resonance Imaging",
+    "Migraine without Aura"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "An fMRI-based neural marker for migraine without aura.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31742681",
+   "title": "The anatomical basis for transcutaneous auricular vagus nerve stimulation.",
+   "journal": "J Anat",
+   "year": "2020",
+   "abstract_plain": "The array of end organ innervations of the vagus nerve, coupled with increased basic science evidence, has led to vagus nerve stimulation (VNS) being explored as a management option in a number of clinical disorders, such as heart failure, migraine and inflammatory bowel disease. Both invasive (surgically implanted) and non-invasive (transcutaneous) techniques of VNS exist. Transcutaneous VNS (tVNS) delivery systems rely on the cutaneous distribution of vagal afferents, either at the external ear (auricular branch of the vagus nerve) or at the neck (cervical branch of the vagus nerve), thus obviating the need for surgical implantation of a VNS delivery device and facilitating further investigations across a wide range of uses. The concept of electrically stimulating the auricular branch of the vagus nerve (ABVN), which provides somatosensory innervation to several aspects of the external ear, is relatively more recent compared with cervical VNS; thus, there is a relative paucity of literature surrounding its operation and functionality. Despite the increasing body of research exploring the therapeutic uses of auricular transcutaneous VNS (tVNS), a comprehensive review of the cutaneous, intracranial and central distribution of ABVN fibres has not been conducted to date. A review of the literature exploring the neuroanatomical basis of this neuromodulatory therapy is therefore timely. Our review article explores the neuroanatomy of the ABVN with reference to (1) clinical surveys examining Arnold's reflex, (2) cadaveric studies, (3) fMRI studies, (4) electrophysiological studies, (5) acupuncture studies, (6) retrograde tracing studies and (7) studies measuring changes in autonomic (cardiovascular) parameters in response to auricular tVNS. We also provide an overview of the fibre composition of the ABVN and the effects of auricular tVNS on the central nervous system. Cadaveric studies, of which a limited number exist in the literature, would be the 'gold-standard' approach to studying the cutaneous map of the ABVN; thus, there is a need for more such studies to be conducted. Functional magnetic resonance imaging (fMRI) represents a useful surrogate modality for discerning the auricular sites most likely innervated by the ABVN and the most promising locations for auricular tVNS. However, given the heterogeneity in the results of such investigations and the various limitations of using fMRI, the current literature lacks a clear consensus on the auricular sites that are most densely innervated by the ABVN and whether the brain regions secondarily activated by electrical auricular tVNS depend on specific parameters. At present, it is reasonable to surmise that the concha and inner tragus are suitable locations for vagal modulation. Given the therapeutic potential of auricular tVNS, there remains a need for the cutaneous map of the ABVN to be further refined and the effects of various stimulation parameters and stimulation sites to be determined.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Ear Auricle",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Vagus Nerve",
+    "Vagus Nerve Stimulation"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "somatosensory",
+    "sentence": "The concept of electrically stimulating the auricular branch of the vagus nerve (ABVN), which provides somatosensory innervation to several aspects of the external ear, is relatively more recent compared with cervical VNS; thus, there is a relative paucity of literature surrounding its operation and functionality."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31703750",
+   "title": "The best from East and West? Acupuncture and medical training therapy as monotherapies or in combination for adult patients with episodic and chronic tension-type headache: study protocol for a randomized controlled trial.",
+   "journal": "Trials",
+   "year": "2019",
+   "abstract_plain": "BACKGROUND: This study aims to evaluate the feasibility and efficacy of a complex health intervention, based on the combination of conventional Western medicine and traditional Chinese medicine (TCM), in an outpatient department of a university hospital for patients with frequent episodic or chronic tension-type headaches. METHODS/DESIGN: This is a prospective randomized controlled pilot study with four balanced treatment arms (usual care, acupuncture, training, and training plus acupuncture). Each arm will have 24 patients. After the initial screening examination and randomization, a 6-week treatment period follows, with treatment frequencies decreasing at 2-week intervals. After completion of the intervention, two follow-up evaluations will be performed 3 and 6\u2009months after the start of treatment. At predefined times, the various outcomes (pain intensity, health-related quality of life, pain duration, autonomic regulation, and heart rate variability) as well as the participants' acceptance of the complex treatment will be evaluated with valid assessment instruments (Migraine Disability Assessment, PHQ-D, GAD-7, and SF-12) and a headache diary. The acupuncture treatment will be based on the rules of TCM, comprising a standardized combination of acupuncture points and additional points selected according to individual pain localization. The training therapy comprises a combination of strength training, endurance training, and training to improve flexibility and coordination. Besides descriptive analyses of the samples, their comparability will be assessed using an analysis of variance (ANOVA) or chi-squared tests. Analyses will be performed on an intention-to-treat basis. Potential interaction effects will be calculated using a repeated-measures ANOVA to test the primary and secondary hypotheses. In supplementary analyses, the proportion of treatment responders (those with a 50% reduction in the frequency of pain episodes) will be determined for each treatment arm. DISCUSSION: This trial may provide evidence for the additive effects of acupuncture and medical training therapy as a combination treatment and may scientifically support the implementation of this complex health intervention. TRIAL REGISTRATION: Registered on 11 Feburary 2019. German Clinical Trials Register, DRKS00016723.",
+   "publication_types": [
+    "Clinical Trial Protocol",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Combined Modality Therapy",
+    "Endurance Training",
+    "Humans",
+    "Medicine, Chinese Traditional",
+    "Outcome Assessment, Health Care",
+    "Pilot Projects",
+    "Prospective Studies",
+    "Quality of Life",
+    "Randomized Controlled Trials as Topic",
+    "Resistance Training",
+    "Tension-Type Headache"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "heart rate variability",
+    "sentence": "At predefined times, the various outcomes (pain intensity, health-related quality of life, pain duration, autonomic regulation, and heart rate variability) as well as the participants' acceptance of the complex treatment will be evaluated with valid assessment instruments (Migraine Disability Assessment, PHQ-D, GAD-7, and SF-12) and a headache diary."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "At predefined times, the various outcomes (pain intensity, health-related quality of life, pain duration, autonomic regulation, and heart rate variability) as well as the participants' acceptance of the complex treatment will be evaluated with valid assessment instruments (Migraine Disability Assessment, PHQ-D, GAD-7, and SF-12) and a headache diary."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": true,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31368270",
+   "title": "[Analysis on regional homogeneity of resting brain during balance acupuncture-induced analgesic effect in migraine patients without aura].",
+   "journal": "Zhen Ci Yan Jiu",
+   "year": "2019",
+   "abstract_plain": "OBJECTIVE: To observe the relationship between the analgesic effect of balance acupuncture and functional changes in brain in patients with migraine without aura. METHODS: A total of 40 cases of migraine without aura were equally randomized into a headache-acupoint group and a sham-acupoint group. When acupuncture given, a filiform needle was inserted into the headache-acupoint (the midpoint of the depression region anterior to the juncture of the first and second metatarsal bones on the dorsum of the foot) or the sham point (the midpoint of the depression region anterior to the juncture site between the 3rd and 4th metatarsal joints of the dorsum of the foot) about 25-40 mm deep and manipulated for a while till the patient experienced feelings of electric shock and numbness, then withdrawn immediately. The treatment was conducted once daily for 4 weeks. The visual analogue scale (VAS) was used to evaluate the severity of pain, and the regional homogeneity (ReHo) analysis of resting state functional magnetic resonance imaging (fMRI) was used to assess changes of the spontaneous brain activity. RESULTS: After acupuncture, the analgesic effect of headache-acupoint was better than that of the sham-acupoint in both intervention stage and the follow-up stage (P< 0.05), and was also stronger in the intervention stage than in the follow-up stage (P<0.05). There was no significant difference in the analgesic effect between the intervention stage and the follow-up stage in the sham-acupoint group (P>0.05). Compared with pre-intervention, 4-weeks' intervention at the headache-acupoint showed an increase of ReHo values in the anterior cingulate gyrus, anterior central gyrus, superior orbital frontal gyrus, insula, inferior lobule, left anterior cingulate gyrus, ventral lateral nucleus and ventral posteromedial nucleus of the thalamus, pontine nucleus, cerebellar tonsils and orbital frontal inferior gyrus of the brain (P<0.05), and a decrease of ReHo values in the right brain bridge, central posterior gyrus, posterior cingulate gyrus, left central anterior gyrus, posterolateral nucleus of thalamus, and hippocampus (P<0.05), separately. In the sham-acupoint group, the ReHo value was increased in the right tongue gyrus, the left anterior lobe, the anterior cingulate gyrus and the lower occipital gyrus of the brain (P<0.05), and reduced in the left ventral posterolateral nucleus of the thalamus, separately (P<0.05). CONCLUSION: Balance acupuncture stimulation of headache acupoint has an analgesic effect in migraine patients without aura, which may be related to its effect in regulating resting state brain function of the limbic-system-dominated multiple brain regions.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Acupuncture Analgesia",
+    "Analgesics",
+    "Brain",
+    "Epilepsy",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Migraine Disorders"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "When acupuncture given, a filiform needle was inserted into the headache-acupoint (the midpoint of the depression region anterior to the juncture of the first and second metatarsal bones on the dorsum of the foot) or the sham point (the midpoint of the depression region anterior to the juncture site between the 3rd and 4th metatarsal joints of the dorsum of the foot) about 25-40 mm deep and manipulated for a while till the patient experienced feelings of electric shock and numbness, then withdrawn immediately."
+   },
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "The visual analogue scale (VAS) was used to evaluate the severity of pain, and the regional homogeneity (ReHo) analysis of resting state functional magnetic resonance imaging (fMRI) was used to assess changes of the spontaneous brain activity."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "The visual analogue scale (VAS) was used to evaluate the severity of pain, and the regional homogeneity (ReHo) analysis of resting state functional magnetic resonance imaging (fMRI) was used to assess changes of the spontaneous brain activity."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31011330",
+   "title": "Acupuncture Reversible Effects on Altered Default Mode Network of Chronic Migraine Accompanied with Clinical Symptom Relief.",
+   "journal": "Neural Plast",
+   "year": "2019",
+   "abstract_plain": "OBJECTIVE: To determine whether and how longitudinal acupuncture modulates the impaired default mode network (DMN) in chronic migraine (CM) patients without aura. METHODS: Resting-state functional magnetic resonance imaging (fMRI) data from 14 CM patients treated with longitudinal pre- and postacupuncture treatment (PPAT) and data of 18 age- and gender-matched healthy controls (HCs) were analyzed using independent component analysis (ICA) and seed-based correlation analysis (SCA) to investigate connectivity within the DMN. Correlation analyses were performed to identify associations between changes in functional connectivity (FC) and in clinical pain based on PPAT observations. The monthly mean visual analog scale (VAS) scores, monthly mean headache attacks, monthly headache days, monthly amount of acute headache medications, and immediate VAS scores were assessed for evaluation of pain. RESULTS: The decreased FC within the DMN found in the left superior prefrontal gyrus (L_SPFG) and left precuneus (L_PRECUN) of CM patients was returned to the healthy control level after acupuncture treatments. Furthermore, the diminished pairwise FC strengths in some regions of interest (ROIs) within the DMN were also increased, mainly distributed between the right temporal lobe (R_TPL) and left anterior cingulate cortex, between the R_TPL and bilateral superior medial gyrus, and between the R_TPL and right precuneus. Increased z-scores within the DMN (L_SPFG and L_PRECUN) were associated with reduced immediate VAS scores, and increases in z-scores of the L_PRECUN were negatively correlated with reductions in the monthly amount of acute headache medications. However, no association existed between the increased DMN connectivity and reduced monthly mean VAS scores, monthly mean headache attacks, and monthly headache days. CONCLUSION: Altered DMN connectivity and its normalization postacupuncture can be employed to monitor CM and its modulating effects. The DMN is useful for understanding the therapeutic mechanisms of acupuncture in CM.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Brain",
+    "Brain Mapping",
+    "Chronic Disease",
+    "Female",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Middle Aged",
+    "Migraine Disorders",
+    "Neural Pathways",
+    "Treatment Outcome"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "METHODS: Resting-state functional magnetic resonance imaging (fMRI) data from 14 CM patients treated with longitudinal pre- and postacupuncture treatment (PPAT) and data of 18 age- and gender-matched healthy controls (HCs) were analyzed using independent component analysis (ICA) and seed-based correlation analysis (SCA) to investigate connectivity within the DMN."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "The monthly mean visual analog scale (VAS) scores, monthly mean headache attacks, monthly headache days, monthly amount of acute headache medications, and immediate VAS scores were assessed for evaluation of pain."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "30256491",
+   "title": "White matter tract microstructure of the mPFC-amygdala predicts interindividual differences in placebo response related to treatment in migraine patients.",
+   "journal": "Hum Brain Mapp",
+   "year": "2019",
+   "abstract_plain": "To investigate whether interindividual variability of white matter (WM) tract microstructure of the medial prefrontal cortex (mPFC)-amygdala circuit could predict 8-week placebo treatment outcomes in patients with migraine without aura (MO) using diffusion tensor imaging (DTI) with a tractography atlas-based analysis algorithm and a linear support vector machine algorithm. This study received institutional review board approval, and all subjects gave informed consent. One hundred and twenty-four MO had an 8-week sham acupuncture treatment. Patients were subdivided into recovering (MOr, >50% improvement in migraine attack frequency after treatment) and persisting (MOp, <50% reduction in number of migraine days). Neuroimaging was collected via magnetic resonance imaging (MRI) in all subjects. Patients were imaged during the interictal phase of migraine (at least 72\u2009hr after, and not within 24\u2009hr of a migraine) before the treatment. WM microstructures were quantified along the selected fiber pathway and were used to evaluate the discrimination performance for classifying MOr and MOp. The combined features of diffusion measures from vertices along the pathways of the mPFC-amygdala accurately discriminated MOr from MOp migraineurs with an accuracy of 84.0% (p\u2009<\u2009.005, permutation test). The most discriminative WM features that contributed to the classification were located in the external capsule and ACC/mPFC. Our findings suggested that the variability of placebo treatment outcomes in migraineurs could be predicted from priori diffusion measures along the fiber pathways of the mPFC-amygdala, which may demonstrate a potential of WM neuroimaging features as imaging markers for identifying placebo responders in migraine patients.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Amygdala",
+    "Biomarkers",
+    "Diffusion Tensor Imaging",
+    "Humans",
+    "Individuality",
+    "Migraine without Aura",
+    "Outcome Assessment, Health Care",
+    "Placebo Effect",
+    "Placebos",
+    "Prefrontal Cortex",
+    "White Matter",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "amygdala",
+    "sentence": "White matter tract microstructure of the mPFC-amygdala predicts interindividual differences in placebo response related to treatment in migraine patients.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "28638026",
+   "title": "[Analysis of the efficacy of reflexology in the complex treatment of chronic migraine].",
+   "journal": "Zh Nevrol Psikhiatr Im S S Korsakova",
+   "year": "2017",
+   "abstract_plain": "AIM: To evaluate the effect of different reflexology techniques on main clinical indices of patients with chronic migraine, the number of analgesics used and dynamics of chronic migraine comorbid disorders. MATERIAL AND METHODS: The study included 84 patients (60 women (71.5%) and 24 men (28.5%)), aged from 18 to 63 years, with a diagnosis of chronic migraine. Patients were randomized in 4 groups - Su Jok (n=22), acupuncture (n=22), electroacupuncture (n=20), control (n=20). Topiramate was administered in all groups in dose of 100 mg daily. Patients were evaluated before treatment, after 4 and 16 weeks from randomization. RESULTS: There was a marked regression in frequency of headache in reflexological groups in comparison with the control. The number of days with headache was 19\u00b11.12 at baseline and 6.57\u00b11.3 days after treatment in the Su Jok group; 21.6\u00b11.688 and 7\u00b11.786 days in the acupuncture group; 20.25\u00b11.97 and 5.75\u00b10.633 days in the electroacupuncture group. Each of the methods had an impact on various clinical aspects of chronic migraine and comorbid disorders: Su Jok was most effective in treatment of autonomic disorders, the use of acupuncture resulted in the significant reduction of headache intensity and regression of anxiety disorders. The electroacupuncture group showed a significant increase in pain threshold and the least number of days with headache per month. CONCLUSION: Reflexotherapy is a method of choice in the complex treatment of patients with chronic migraine. Taking into account complex diagnosis, the individually oriented approach in prescribing of different reflexology techniques for successful treatment and subsequent rehabilitation of patients with chronic migraine is required.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adolescent",
+    "Adult",
+    "Analgesics",
+    "Chronic Disease",
+    "Combined Modality Therapy",
+    "Female",
+    "Fructose",
+    "Humans",
+    "Male",
+    "Massage",
+    "Middle Aged",
+    "Migraine Disorders",
+    "Topiramate",
+    "Treatment Outcome",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "Each of the methods had an impact on various clinical aspects of chronic migraine and comorbid disorders: Su Jok was most effective in treatment of autonomic disorders, the use of acupuncture resulted in the significant reduction of headache intensity and regression of anxiety disorders."
+   },
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "Each of the methods had an impact on various clinical aspects of chronic migraine and comorbid disorders: Su Jok was most effective in treatment of autonomic disorders, the use of acupuncture resulted in the significant reduction of headache intensity and regression of anxiety disorders."
+   },
+   "intensity": {
+    "term": "pain threshold",
+    "sentence": "The electroacupuncture group showed a significant increase in pain threshold and the least number of days with headache per month."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": "Each of the methods had an impact on various clinical aspects of chronic migraine and comorbid disorders: Su Jok was most effective in treatment of autonomic disorders, the use of acupuncture resulted in the significant reduction of headache intensity and regression of anxiety disorders."
+  },
+  {
+   "pmid": "28608601",
+   "title": "Brain structural properties predict psychologically mediated hypoalgesia in an 8-week sham acupuncture treatment for migraine.",
+   "journal": "Hum Brain Mapp",
+   "year": "2017",
+   "abstract_plain": "Neuroimaging studies described brain structural changes that comprise the mechanisms underlying individual differences in migraine development and maintenance. However, whether such interindividual variability in migraine was observed in a pretreatment scan is a predisposition for subsequent hypoalgesia to placebo treatment that remains largely unclear. Using T1-weighted imaging, we investigated this issue in 50 healthy controls (HC) and 196 patients with migraine without aura (MO). An 8-week double-blinded, randomized, placebo-controlled acupuncture was used, and we only focused on the data from the sham acupuncture group. Eighty patients participated in an 8-weeks sham acupuncture treatment, and were subdivided (50% change in migraine days from baseline) into recovering (MOr) and persisting (MOp) patients. Optimized voxel-based morphometry (VBM) and functional connectivity analysis were performed to evaluate brain structural and functional changes. At baseline, MOp and MOr had similar migraine activity, anxiety and depression; reduced migraine days were accompanied by decreased anxiety in MOr. In our findings, the MOr group showed a smaller volume in the left medial prefrontal cortex (mPFC), and decreased mPFC-related functional connectivity was found in the default mode network. Additionally, the reduction in migraine days after placebo treatment was significantly associated with the baseline gray matter volume of the mPFC which could also predict post-treatment groups with high accuracy. It indicated that individual differences for the brain structure in the pain modulatory system at baseline served as a substrate on how an individual facilitated or diminished hypoalgesia responses to placebo treatment in migraineurs. Hum Brain Mapp 38:4386-4397, 2017. \u00a9 2017 Wiley Periodicals, Inc.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Anxiety",
+    "Biological Variation, Population",
+    "Brain",
+    "Brain Mapping",
+    "Double-Blind Method",
+    "Gray Matter",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Migraine without Aura",
+    "Neural Pathways",
+    "Organ Size",
+    "Pain Management",
+    "Placebo Effect",
+    "Prognosis",
+    "Treatment Outcome",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "At baseline, MOp and MOr had similar migraine activity, anxiety and depression; reduced migraine days were accompanied by decreased anxiety in MOr."
+   },
+   "biomarker": {
+    "term": "neuroimaging",
+    "sentence": "Neuroimaging studies described brain structural changes that comprise the mechanisms underlying individual differences in migraine development and maintenance."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "28580293",
+   "title": "Acupuncture modulates the abnormal brainstem activity in migraine without aura patients.",
+   "journal": "Neuroimage Clin",
+   "year": "2017",
+   "abstract_plain": "Migraine is a common neurological disease with a high prevalence and unsatisfactory treatment options. The specific pathophysiological mechanisms of migraine remain unclear, which restricts the development of effective treatments for this prevalent disorder. The aims of this study were to 1) compare the spontaneous brain activity differences between Migraine without Aura (MwoA) patients and healthy controls (HCs), using amplitude of low-frequency fluctuations (ALFF) calculation method, and 2) explore how an effective treatment (verum acupuncture) could modulate the ALFF of MwoA patients. One hundred MwoA patients and forty-six matched HCs were recruited. Patients were randomized to four weeks' verum acupuncture, sham acupuncture, and waiting list groups. Patients had resting state BOLD-fMRI scan before and after treatment, while HCs only had resting state BOLD-fMRI scan at baseline. Headache intensity, headache frequency, self-rating anxiety and self-rating depression were used for clinical efficacy evaluation. Compared with HCs, MwoA patients showed increased ALFF in posterior insula and putamen/caudate, and reduced ALFF in rostral ventromedial medulla (RVM)/trigeminocervical complex (TCC). After longitudinal verum acupuncture treatment, the decreased ALFF of the RVM/TCC was normalized in migraine patients. Verum acupuncture and sham acupuncture have different modulation effects on ALFF of RVM/TCC in migraine patients. Our results suggest that impairment of the homeostasis of the trigeminovascular nociceptive pathway is involved in the neural pathophysiology of migraines. Effective treatments, such as verum acupuncture, could help to restore this imbalance.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Brain Stem",
+    "Female",
+    "Functional Neuroimaging",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Migraine without Aura",
+    "Neural Pathways",
+    "Nociception",
+    "Outcome Assessment, Health Care",
+    "Trigeminal Nerve",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "anxiety",
+    "sentence": "Headache intensity, headache frequency, self-rating anxiety and self-rating depression were used for clinical efficacy evaluation."
+   },
+   "biomarker": {
+    "term": "brainstem",
+    "sentence": "Acupuncture modulates the abnormal brainstem activity in migraine without aura patients.."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "28382614",
+   "title": "Migraine with Multiple Sensory Auras.",
+   "journal": "Acta Neurol Taiwan",
+   "year": "2016",
+   "abstract_plain": "Migraine auras are typically visual in nature but can manifest as disturbances in somatosensory, auditory, and olfactory senses. Reports of multiple sensory auras are rare in the literature, but their existence may offer novel insights into the pathogenesis of this highly common yet complex neurological condition. Here we report a case of multiple sensory auras involving somatosensory, auditory, and olfactory disturbances in a patient with migraine without visual manifestations. A 45-year-old woman with a 20-year history of migrainous headaches presented with complaints of rightsided facial and hand numbness and paraesthesia. In addition to somatosensory symptoms, she eventually presented with tinnitus, cutaneous allodynia, and phantosmia, each of which was temporally associated with episodes of headache. No abnormalities were detected on NCS, EEG, MRI, and laboratory investigations. Her symptoms were managed by prophylactic medications and acupuncture. The theories of cortical spreading depression, cortical sensitization, and thalamocortical network involvement were discussed as possible explanations for sensory auras in migraine. This case report of migraine with multiple sensory auras spanning somatosensory, auditory, and olfactory modalities offers novel insights into the pathophysiology of migrainous auras.",
+   "publication_types": [
+    "Case Reports",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Epilepsy",
+    "Female",
+    "Humans",
+    "Middle Aged",
+    "Migraine with Aura"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "The theories of cortical spreading depression, cortical sensitization, and thalamocortical network involvement were discussed as possible explanations for sensory auras in migraine."
+   },
+   "biomarker": {
+    "term": "somatosensory",
+    "sentence": "Migraine auras are typically visual in nature but can manifest as disturbances in somatosensory, auditory, and olfactory senses."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "27053062",
+   "title": "The altered right frontoparietal network functional connectivity in migraine and the modulation effect of treatment.",
+   "journal": "Cephalalgia",
+   "year": "2017",
+   "abstract_plain": "Aims This study aims to investigate the resting-state functional connectivity (rs-fc) of the right frontoparietal network (rFPN) between migraineurs and healthy controls (HCs) in order to determine how the rFPN rs-fc can be modulated by effective treatment. Methods One hundred patients and 46 matched HCs were recruited. Migraineurs were randomized to verum acupuncture, sham acupuncture, and waiting list groups. Resting-state functional magnetic resonance imaging data were collected before and after longitudinal treatments. Independent component analysis was applied in the data analysis. Results We found that migraineurs showed decreased rs-fc between the rFPN and bilateral precuneus compared with HCs. After treatments (real and sham), rFPN rs-fc with the precuneus was significantly reduced. This reduction was associated with headache intensity relief. In order to explore the role of the precuneus in acupuncture modulation, we performed a seed-based rs-fc analysis using the precuneus as a seed and found that the precuneus rs-fc with the bilateral rostral anterior cingulate cortex/medial prefrontal cortex, ventral striatum, and dorsolateral prefrontal cortex was significantly enhanced after treatment. Conclusion Our results suggest that migraineurs are associated with abnormal rFPN rs-fc. An effective treatment, such as acupuncture, may relieve symptoms by strengthening the cognitive adaptation/coping process. Elucidation of the adaptation/coping mechanisms may open up a new window for migraine management.",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adolescent",
+    "Adult",
+    "Female",
+    "Frontal Lobe",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Middle Aged",
+    "Migraine Disorders",
+    "Nerve Net",
+    "Parietal Lobe",
+    "Treatment Outcome",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "The altered right frontoparietal network functional connectivity in migraine and the modulation effect of treatment.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "26846705",
+   "title": "Acupuncture for episodic cluster headache: a trigeminal approach.",
+   "journal": "Acupunct Med",
+   "year": "2016",
+   "abstract_plain": "Following evidence that acupuncture is clinically feasible and cost-effective in the treatment of headache, the UK National Institute for Health and Care Excellence recommends acupuncture as prophylactic treatment for migraine and tension headache. There has thus been expectation that other forms of headache should benefit also. Unfortunately, acupuncture has not generally been successful for cluster headache. This may be due to acupuncturists approaching the problem as one of severe migraine. In fact, cluster headache is classed as a trigeminal autonomic cephalgia. In this case report, episodic cluster headache is treated in the same way as has been shown effective for trigeminal neuralgia. Acupuncture is applied to the contralateral side at points appropriate for stimulating branches of the trigeminal nerve. Thus, ST2 is used for the infraorbital nerve, BL2 and Yuyao for the supratrochlear and supraorbital nerves, and Taiyang for the temporal branch of the zygomatic nerve.",
+   "publication_types": [
+    "Case Reports",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Points",
+    "Acupuncture Therapy",
+    "Adult",
+    "Cluster Headache",
+    "Humans",
+    "Male",
+    "Treatment Outcome",
+    "Trigeminal Neuralgia"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "In fact, cluster headache is classed as a trigeminal autonomic cephalgia."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "26839078",
+   "title": "Altered periaqueductal gray resting state functional connectivity in migraine and the modulation effect of treatment.",
+   "journal": "Sci Rep",
+   "year": "2016",
+   "abstract_plain": "The aims of this study were to 1) compare resting state functional connectivity (rs-fc) of the periaqueductal gray (PAG), a key region in the descending pain modulatory system (DPMS) between migraine without aura (MwoA) patients and healthy controls (HC), and 2) investigate how an effective treatment can influence the PAG rs-fc in MwoA patients. One hundred MwoA patients and forty-six matched HC were recruited. Patients were randomized to verum acupuncture, sham acupuncture, and waiting list groups. Resting state fMRI data were collected and seed based functional connectivity analysis was applied. Compared with HC, MwoA patients showed reduced rs-fc between the PAG and rostral anterior cingulate cortex/medial prefrontal cortex (rACC/mPFC), key regions in the DPMS and other pain related brain regions. The reduced rs-fc between the PAG and rACC/mPFC was associated with increased migraine headache intensity at the baseline. After treatments, rs-fc between the PAG and the rACC in MwoA patients significantly increased. The changes of rs-fc among the PAG, rACC and ventral striatum were significantly associated with headache intensity improvement. Impairment of the DPMS is involved in the neural pathophysiology of migraines. Impaired DPMS in migraine patients can be normalized after effective treatment.",
+   "publication_types": [
+    "Comparative Study",
+    "Journal Article",
+    "Research Support, N.I.H., Extramural",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adolescent",
+    "Adult",
+    "Brain Mapping",
+    "Female",
+    "Gyrus Cinguli",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Migraine without Aura",
+    "Pain",
+    "Pain Threshold",
+    "Periaqueductal Gray",
+    "Prefrontal Cortex",
+    "Random Allocation",
+    "Young Adult"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Altered periaqueductal gray resting state functional connectivity in migraine and the modulation effect of treatment.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "26438555",
+   "title": "Effect of electroacupuncture pretreatment at GB20 on behaviour and the descending pain modulatory system in a rat model of migraine.",
+   "journal": "Acupunct Med",
+   "year": "2016",
+   "abstract_plain": "BACKGROUND: While electroacupuncture (EA) pretreatment has been found to ameliorate migraine-like symptoms, the underlying mechanisms remain poorly understood. Emerging evidence suggests that the brainstem descending pain modulatory system, comprising the periaqueductal grey (PAG), raphe magnus nucleus (RMg), and trigeminal nucleus caudalis (TNC), may be involved in migraine pathophysiology. We hypothesised that EA would ameliorate migraine-like symptoms via modulation of this descending system. METHODS: We used a conscious rat model of migraine induced by repeated electrical stimulation of the dura. Forty male Sprague-Dawley rats were randomly assigned to one of four groups: an EA group, which received EA at GB20 following dural stimulation; a sham acupuncture (SA) group, which received manual acupuncture at a non-acupuncture point following dural stimulation; a Model group, which received dural stimulation but no acupuncture; and a Control group, which received neither dural stimulation nor acupuncture (electrode implantation only). HomeCageScan was used to measure effects on behaviour, and immunofluorescence staining was used to examine neural activation (c-Fos immunoreactivity) in the PAG, RMg, and TNC. RESULTS: Compared to the Model group, rats in the EA group showed a significant increase in exploratory, locomotor and eating/drinking behaviour (p<0.01) and a significant decrease in freezing-like resting and grooming behaviour (p<0.05). There was a significant increase in the mean number of c-Fos neurons in the PAG, RMg, and TNC in Model versus Control groups (p<0.001); however, this was significantly attenuated by EA treatment (p<0.001). There were no significant differences between the SA and Model groups in behaviour or c-Fos immunoreactivity. CONCLUSIONS: EA pretreatment ameliorates behavioural changes in a rat model of recurrent migraine, possibly via modulation of the brainstem descending pathways.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Points",
+    "Animals",
+    "Disease Models, Animal",
+    "Eating",
+    "Electroacupuncture",
+    "Humans",
+    "Locomotion",
+    "Male",
+    "Migraine Disorders",
+    "Nucleus Raphe Magnus",
+    "Periaqueductal Gray",
+    "Rats",
+    "Rats, Sprague-Dawley"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "brainstem",
+    "sentence": "Emerging evidence suggests that the brainstem descending pain modulatory system, comprising the periaqueductal grey (PAG), raphe magnus nucleus (RMg), and trigeminal nucleus caudalis (TNC), may be involved in migraine pathophysiology."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "26359462",
+   "title": "Acupuncture for episodic cluster headache: a trigeminal approach.",
+   "journal": "BMJ Case Rep",
+   "year": "2015",
+   "abstract_plain": "Following evidence that acupuncture is clinically feasible and cost-effective in the treatment of headache, the UK National Institute for Health and Care Excellence recommends acupuncture as prophylactic treatment for migraine and tension headache. There has thus been expectation that other forms of headache should benefit also. Unfortunately, acupuncture has not generally been successful for cluster headache. This may be due to acupuncturists approaching the problem as one of severe migraine. In fact, cluster headache is classed as a trigeminal autonomic cephalgia. In this case report, episodic cluster headache is treated in the same way as has been shown effective for trigeminal neuralgia. Acupuncture is applied to the contralateral side at points appropriate for stimulating branches of the trigeminal nerve. Thus, ST2 is used for the infraorbital nerve, BL2 and Yuyao for the supratrochlear and supraorbital nerves, and Taiyang for the temporal branch of the zygomatic nerve.",
+   "publication_types": [
+    "Case Reports",
+    "Journal Article"
+   ],
+   "mesh": [
+    "Acupuncture Points",
+    "Acupuncture Therapy",
+    "Adult",
+    "Cluster Headache",
+    "Headache",
+    "Humans",
+    "Male",
+    "Migraine Disorders",
+    "Trigeminal Nerve",
+    "Trigeminal Neuralgia"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "autonomic",
+    "sentence": "In fact, cluster headache is classed as a trigeminal autonomic cephalgia."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "25916336",
+   "title": "The effects of acupuncture treatment on the right frontoparietal network in migraine without aura patients.",
+   "journal": "J Headache Pain",
+   "year": "2015",
+   "abstract_plain": "BACKGROUND: Functional and structural abnormalities in resting-state brain networks in migraine patients have been confirmed by previous functional magnetic resonance imaging (fMRI) studies. However, few studies focusing on the neural responses of therapeutic treatment on migraine have been conducted. In this study, we tried to examined the treatment-related effects of standard acupuncture treatment on the right frontoparietal network (RFPN) in migraine patients. METHODS: A total of 12 migraine without aura (MWoA) patients were recruited to undergo resting-state fMRI scanning and were rescanned after 4 weeks standard acupuncture treatment. Another 12 matched healthy control (HC) subjects underwent once scanning for comparison. We analyzed the functional connectivity of the RFPN between MWoA patients and HC subjects before treatment and that of the MWoA patients before and after treatment. Diffusion tensor images (DTI) data analyzing was also performed to detect fiber-related treatment responses. RESULTS: We observed significantly decreased FC in the RFPN and that the decreased FC could be reversed by acupuncture treatment. The changes of FC in MWoA patients was negatively correlated with the decrease of visual analogue scale (VAS) scores after treatment. This study indicated that acupuncture treatment for MWoA patients was associated with normalizing effects on the intrinsic decreased FC of the RFPN. CONCLUSIONS: Our study provided new insights into the treatment-related neural responses in MWoA patients and suggested potential functional pathways for the evaluation of treatment in MWoA patients. Future studies are still in need to confirm the current results and to elucidate the complex neural mechanisms of acupuncture treatment.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Brain",
+    "Brain Mapping",
+    "Female",
+    "Frontal Lobe",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Migraine without Aura",
+    "Nerve Net",
+    "Parietal Lobe",
+    "Treatment Outcome"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "BACKGROUND: Functional and structural abnormalities in resting-state brain networks in migraine patients have been confirmed by previous functional magnetic resonance imaging (fMRI) studies."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "The changes of FC in MWoA patients was negatively correlated with the decrease of visual analogue scale (VAS) scores after treatment."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "25847772",
+   "title": "Acupuncture treatment modulates the resting-state functional connectivity of brain regions in migraine patients without aura.",
+   "journal": "Chin J Integr Med",
+   "year": "2016",
+   "abstract_plain": "OBJECTIVE: To investigate the modulatory effect of acupuncture treatment on the resting-state functional connectivity of brain regions in migraine without aura (MWoA) patients. METHODS: Twelve MWoA patients were treated with standard acupuncture treatment for 4 weeks. All MWoA patients received resting-state functional magnetic resonance imaging (fMRI) scanning before and after acupuncture treatment. Another 12 normal subjects matched in age and gender were recruited to serve as healthy controls. The changes of restingstate functional connectivity in MWoA patients before and after the acupuncture treatment and those with the healthy controls were compared. RESULTS: Before acupuncture treatment, the MWoA patients had significantly decreased functional connectivity in certain brain regions within the frontal and temporal lobe when compared with the healthy controls. After acupuncture treatment, brain regions showing decreased functional connectivity revealed significant reduction in MWoA patients compared with before acupuncture treatment. CONCLUSIONS: Acupuncture treatment could increase the functional connectivity of brain regions in the intrinsic decreased brain networks in MWoA patients. The results provided further insights into the interpretation of neural mechanisms of acupuncture treatment for migraine.",
+   "publication_types": [
+    "Clinical Trial",
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Brain",
+    "Case-Control Studies",
+    "Demography",
+    "Female",
+    "Humans",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Migraine without Aura",
+    "Nerve Net",
+    "Rest",
+    "Treatment Outcome"
+   ],
+   "arm": "acupuncture_migraine_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Acupuncture treatment modulates the resting-state functional connectivity of brain regions in migraine patients without aura.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  }
+ ],
+ "tallies": {
+  "n_records": 41,
+  "n_affective_outcome": 15,
+  "n_neural_or_autonomic_biomarker": 41,
+  "n_both_affective_and_biomarker": 15,
+  "n_co_mention_same_sentence": 3,
+  "n_neither": 0,
+  "n_no_affective_term": 26,
+  "n_no_biomarker_term": 0,
+  "n_review": 6,
+  "n_protocol": 2,
+  "n_animal_subject": 2,
+  "n_human_primary": 32,
+  "n_abstract_missing": 0,
+  "pmids_both": [
+   "28382614",
+   "28580293",
+   "28608601",
+   "28638026",
+   "31368270",
+   "33381165",
+   "34036477",
+   "34085477",
+   "34628737",
+   "35219625",
+   "35312785",
+   "37199198",
+   "37349112",
+   "41591775",
+   "42533185"
+  ],
+  "pmids_co_mention": [
+   "28638026",
+   "34036477",
+   "34628737"
+  ]
+ }
+}
