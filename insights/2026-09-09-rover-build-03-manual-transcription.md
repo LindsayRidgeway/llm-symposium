@@ -3566,3 +3566,270 @@ Amazon put it in the Saturday slot and this seller's order offers no speed chang
 
 **And the Active Cooler cancellation is done:** order `112-1542471-4669041` down from $821.60 to $810.05,
 one line cancelled, Amazon's own confirmation.
+
+**"Was I supposed to cut the wires in the bag?" — yes, and it is one sentence's fault that he had to ask
+2026-10-08.** The sheet's line reads *"the four cut-down jumper wires come from the 30 cm wire set in the
+bag."* It names a finished object and a place it comes from; it never says who cuts them or when. The next
+bullet does the actual telling — *"cut the socket off both ends of a jumper and keep the plain wire in the
+middle"* — but the first line reads as a description of something already in the bag, and he went looking
+for wires that were not there. The four wires do not exist yet. They are four jumpers he is about to cut.
+
+**Where the words were wrong, stated exactly.** Lindsay: the untrue sentence was not *"the four cut-down
+jumper wires come from the 30 cm wire set in the bag"* — it was *"**Four cut-down jumper wires come with
+this sheet.**"* That is a flat falsehood, not a vagueness: the sheet ships with no wires, and a stranger
+reading it would look in the envelope for four wires that do not exist. My first account of the fault
+called it phrasing and put the blame on the following bullet. It was the first sentence, and it was false.
+**Fix applied to the source, not just to this log:** `technician-sheet.md` now opens the wire section with
+*"There are no cut wires yet … nothing in the bag comes cut down,"* and the one shop-only line still sitting
+in the working copy (*"send every unused jumper back with the boards"*) is bracketed as dead. The sheet is
+the thing he reads at the bench today; a correction that lives only in the log is not a correction.
+
+**Answer given, plainly:** cut them. One jumper → both socket ends off → plain middle trimmed to 25 cm →
+four of those → strip 5 mm at each end. **Keep one jumper whole and uncut**, because its socket end is what
+the sheet means by "we need its socket end for something else," and because the far-end connector is still
+an open question (parts file says socket-as-plug, sheet says plain end into a terminal) — a whole jumper is
+the insurance for both answers. The bag holds ~40, so a wire cut too short costs nothing but another
+jumper.
+
+**Two lines on the sheet are shop-only and now inert**, both written while a stranger was doing the work:
+*"send every unused jumper back with the boards"* (that was about keeping spares for Gemini's board — at
+home the bag is his) and *"if you supply your own wire instead, use stranded hook-up wire, 22 to 26 AWG"*
+(a fallback for a person who had no jumpers, which is not him). Marked here so the sheet is not re-read
+next week as instructions addressed to him.
+
+## Dawn on tip temperature — 250 vs 300, and what my number was worth 2026-10-08
+
+Lindsay relayed a page of Dawn's disagreement, sent in his voice. Her case: the 926LED manual's first-use
+caution (*"set the temperature to 250 °C/482 °F … when the iron is just hot enough to melt solder, coat the
+tip … then set the temperature to your desired temperature"*) names **250** as a tinning number, never as a
+working number; my own sheet says *"no more than a second or two"* on a thin pad, and a cold iron forces
+dwell, so the two instructions fight. Her conclusion: ~300 °C, tinned tip, one second, off. She supports it
+with a thermal-dose argument — time at temperature, not temperature, is what lifts pads — and notes the LED
+body is not the binding constraint (reflow ratings are ~260 °C for ten seconds).
+
+**She is right, and I had already contradicted myself.** I told Lindsay "middle dial, about 350 °C" on
+2026-10-07, and the printed sheet says a second or two. Both live in the same band as her 300 — but the sheet
+and my verbal note never said what the number was *for* or which direction an error should go. She supplied
+that.
+
+**Where I conceded plainly:** the "one to two seconds" figure is a **judgement, not a measurement.** It comes
+from the ordinary hand-soldering norm that a through-hole joint should wet in one to three seconds; I have no
+thermocouple and have not measured this board. Answering her second question with a fabricated number would
+have been the same error as answering the ROS2 battery question from Amazon boilerplate.
+
+**Where I added to her case rather than repeating it:**
+1. **The dial is not a thermometer.** On a 60 W station of this class the dial sets heater duty, not tip
+   temperature; tens of degrees of error is ordinary. So 250/300/350 is a band, not a choice, and the only
+   calibration available in the house is a melt test — solder should flow within a second of touching the tip.
+2. **Her dose arithmetic is directionally right but not linear.** Heat flow scales with ΔT, so 250→300
+   shortens the dwell by roughly one-and-a-half to three times, not five. The nonlinearity that actually
+   matters is wetting: once solder flows, the joint is finished and the heat is shared by the joint instead of
+   concentrated at the pad. Time *past* wetting is pure damage; time *before* wetting is pure delay.
+3. **The tip trade is not real at 300.** A tip dies of oxide from being parked hot and dry, not from 50 °C of
+   working range.
+
+**On her guess about why the manual says 250:** right in spirit — wet the new tip at the lowest temperature
+that flows, then hand off. Two additions: the manual names a number only where *its* risk is (a dry new tip,
+an oxidized tip in maintenance), and 250 sits below the comfortable wetting range for SAC305, which is
+consistent with boilerplate text for a leaded rope, or text written to be alloy-agnostic.
+
+**Open, and it is a hand-check not a fetch:** the alloy of the solder that came in the station's box. Nothing
+in the record names it — `headlight-parts.md` says only "it includes solder wire," and the one earlier spec
+line, "rosin-core solder 0.6–0.8 mm," was my shopping-list wish from 2026-09-30, not a reading of the spool.
+**Rosin core is a flux, not an alloy** — so Dawn's inference from "rosin core" toward lead is not evidence.
+The spool label decides it: 60/40 or Sn63/Pb37 melts at 183 °C and 300 is ideal; SAC305 melts at 217–227 °C
+and 300 is the floor, with 330–350 the safer working number.
+
+## The lamp test — and my sensor-port claim was backwards 2026-10-09
+
+Lindsay has the two wires soldered to one board's `+` and `−` and asks which pins on the HAT they plug onto.
+Went to the record first, and the record was already the answer. The PiCar-X assembly manual's **Step-29
+wiring table**, transcribed into this log on 2026-09-09:
+
+| Component        | Ports                 |
+|------------------|-----------------------|
+| Ultrasonic       | D3, D2 **(3V3/GND)**  |
+| Steering servo   | P2 **(5V/GND)**       |
+| Tilt servo       | P1 **(5V/GND)**       |
+| Pan servo        | P0 **(5V/GND)**       |
+| Grayscale        | A2, A1, A0 **(3V3/GND)** |
+| MOTOR2 / MOTOR1  | right / left motor    |
+
+**The D and A rows are 3V3. The P rows are 5V.** On 2026-10-07 I told him the opposite — *"power from a
+spare sensor port (5 V)"* and *"not a servo port — those may carry battery voltage."* Both halves wrong, and
+the second half was the dangerous half to be wrong about, because it steered him away from the only rows that
+carry the voltage the panel needs.
+
+**How the error happened, since it is the second time in two days:** I reasoned from a remembered property
+of the hardware — the ultrasonic is a 5 V sensor, so its port must be 5 V — instead of reading the vendor
+table I had transcribed nine days earlier. That is rule 10 broken again, in exactly the shape of the ROS2
+battery error. **Both times the answer was already in my own record and I answered from inference.**
+
+**Why the wrong port would have been invisible:** a 5 V panel on 3V3 does not fail loudly. White LEDs want
+~3.0–3.2 V, so the panel glows dim or not at all, and dim-or-dark is the ambiguity rule 2 forbids — the test
+would have produced a result that cannot be read. A wrong-port test is worse than no test.
+
+**Answer given:** the **5 V and GND pins of an unused servo row** (the P family). Power the rover off before
+plugging, because a socket slipping across two live pins sparks. Reversal is harmless — at 5 V a reversed
+panel just sits dark, which is exactly why this test is safe to try. Identify 5 V without a meter by the
+plugs already in the rover: on a standard servo plug the **middle wire is red and red is +5V**, brown is GND,
+and the board prints its own labels. Watch for a brownout: the panel pulls up to ~0.5 A on a rail that also
+feeds three servos, so if the Pi resets or the servos twitch when the lamp lights, the rail is marginal and
+that is a finding, not a nuisance.
+
+**Consequence for the final install, recorded so it is not rediscovered:** the lamp's power cannot come from
+a sensor row — those are 3V3. It has to come from a servo row's 5 V pin. And the D4184's trigger needs a pin
+the Pi can actually drive. Encouraging evidence that a servo row supplies that too: our own operational trap
+says *"robot_hat v4 servos use lgpio: only one process can hold a pin,"* and lgpio is the Pi's own GPIO
+library — so the servo signal pins are Pi GPIO pins, not a separate MCU's. One free P row would then give
+5 V, GND **and** a drivable signal, which is the whole final circuit in one connector. **Open, and mine to
+confirm against the board:** which BCM pin each P row maps to, and whether P4–P11 exist as physical headers
+on this HAT or only as library channels.
+
+**The yellow pin, and which colour scheme is the real one 2026-10-09.** Lindsay, holding the board:
+*"The yellow connection isn't involved?"* — right question, and it put my own record back in front of me.
+The HAT V4 pinout (read off the official pinout image on 2026-09-19, `/tmp/hat_pinout.png`) and his own
+photos (2026-09-20) both say the same thing, and I answered from the servo **plug's** wire colours instead
+of the **board's** colours:
+
+- Every channel on this board is three pins in a line, colour-coded at the base:
+  **YELLOW = SIG, RED = power, BLACK = GND.** The silk prints "SIG / 5V / GND" between the groups.
+- There are three kinds of block and they look identical: **DIGITAL** (rows 0–3, red pins **3V3**),
+  **ADC** (rows 0–3, red pins **3V3**), **PWM** (twelve rows numbered 0–11, red pins **5V**).
+- **Only the PWM block's red pin is 5 V.** The lamp's two wires go on a red pin and a black pin of a PWM
+  row with nothing plugged into it. The **yellow (SIG) pin carries nothing today** — it is where the D4184's
+  trigger will go later.
+
+So the answer is yes, the yellow pin is uninvolved for this test — and the durable lesson is the one from
+2026-09-20's note that I failed to use: **the board prints its own colour scheme, and the pin base, not the
+plug's wire colour, is the reference.** Rows 0–2 carry pan, tilt and steering; row 3 is the workaround row on
+rover #2; **rows 4–11 are free on both rovers.** Power and ground may be taken from any red/black pin in the
+same block — only the signal wires need their own channel, which is why a 5-pin grayscale module fits a block
+of 3-pin rows.
+
+## The lamp lights — first power on the first joint 2026-10-09
+
+*"Row 11 was the easiest to get to. I got lucky on the polarity. The lamp almost blinded me when I flipped on
+the power."*
+
+Two hand-made solder joints on a bare board, and the whole chain lit: **solder, pad, wire, panel, and the
+PWM row's red pin.** The lamp was powered from **row 11** — the rightmost row of the third PWM group, the
+same row the zeroing procedure uses for a servo — with the two wires on a **red (5V)** pin and a **black
+(GND)** pin, exactly as the colour scheme predicted.
+
+**What this settles.** The 5 V rail is live 5 V, not just printed 5 V. The joints conduct. The panel is
+good. The brightest unknown in the headlamp design an hour ago was whether a lamp could be fed from this
+board at all; it can, and the answer came from the board's own silkscreen rather than from me.
+
+**What it does not settle, said plainly so it is not read as a victory:** brightness is not a voltage
+measurement. An over-volted panel lights *more* brightly and dies months later — the one failure mode a
+plug-in test cannot see. The evidence here is the silk (red pins in the PWM block read "5V") and the
+vendor's own pinout image, which is a source and not an inference, so the item I have been carrying since
+2026-10-07 — *"MINE TO CLOSE: SunFounder's sensor-port voltage"* — is now closed the only way it ever could
+have been: by reading the board. The swap test still cannot catch over-voltage; the label is what catches it.
+
+**And the polarity, since he called it luck.** At 5 V a reversed panel sits dark and nothing is hurt, so the
+guess was cheap *because* the rail was 5 V. On a battery terminal the same guess costs a board. That is the
+whole reason the colour scheme mattered, and his own sentence is the best evidence that the right rule was
+the silk, not the plug.
+
+**Still unknown, and it is the next real piece of this design:** the switch. The lamp lights when the rover
+is on; nothing yet turns it on *from software*. That is the D4184 MOSFET and a pin the Pi can drive — the
+signal (yellow) pin of a free PWM row is the promising candidate, on the evidence that robot_hat v4 drives
+servos through lgpio, i.e. through the Pi's own GPIO. Not today's job. He has named the mounting as his other
+nerve, and he asks before he acts.
+
+**The brownout question, answered better than I asked it 2026-10-09.** I asked *"when you switched on, did
+the Pi come up normally?"* and Lindsay's answer was: *"I don't know what normally means, but the speaker
+said, 'Hi, Lindsay and Dawn. Desi here.'"* **Both halves of that are corrections, and the first half is
+mine.**
+
+**"Normally" was my undefined word.** I asked for a judgement against a baseline I never stated, which is
+exactly the fault I keep finding in my own sheet — *"four cut-down jumper wires come with this sheet"*, where
+the words describe an object that does not exist yet. A question whose terms I hold privately is not a
+question; it is a quiz. He answered it the right way, by reporting an observation instead of guessing at my
+meaning.
+
+**And the observation is stronger than the answer I wanted.** The Pi did not merely start: it ran the whole
+boot, the announce service fired, and **Piper spoke through the speaker**. So on a real cold start —
+battery switch on, lamp plugged into row 11 drawing up to half an amp — nothing browned out. The rail holds
+the Pi, the servos' circuit, the speaker and the lamp at once. If it had browned out, the visible result
+would have been a boot that restarted, and the audible result would have been silence.
+
+**A standing open item closes with it.** The greeting on both rovers has been recorded since 2026-09-28 as
+**NOT YET PROVEN ACROSS A REAL POWER CYCLE** — the service had only ever been seen working when started by
+hand. This was a real power cycle, by the switch, with new load on the rail, and the announcement came out
+of the speaker. **Desi's rover has now announced itself from a cold boot.** The same has still not been seen
+on rover #2.
+
+**What is left in the headlamp job, in order:** the mount (his second named nerve, and his call when), then
+the switch — nothing yet turns the lamp on from software, and that is the D4184 and a pin the Pi can drive.
+The wiring's power half is now proven twice over: 5 V exists on a PWM row, and the board is happy carrying
+the lamp while the Pi runs.
+
+## The build pauses 2026-10-09
+
+He is out of action for a few days after a fall at home this evening. Not a rover matter, and his to
+describe if he wants it described — nothing about it goes in this log beyond the fact that the bench is
+idle and that is his decision, not a setback.
+
+**State at the pause, so nothing has to be held in his head:** one board wired and proven on row 11; the
+second board is the next piece of work if he feels like it in the morning; the four joints get sealed with
+the glue gun when it arrives (the sheet's second strain-relief option, and just as good as the heat-shrink —
+not both); then the mount. The ROS2 is fully in the house and waits. Nothing decays. The port map, the
+colour rule, the sheet and the parts list are all written down.
+
+**Momentum is not the same thing as progress.** He said he hates to have it broken. Nothing here has to be
+restarted, only resumed; the log exists so the next good day starts where this one stopped.
+
+## The ROS2 card, swapped for $2 2026-10-10
+
+He compared the card I had on the ROS2 list (`B0BDRVFDKP`, SanDisk Ultra 64 GB, 140 MB/s, $24.24) against the
+model the rovers already run (145 MB/s, `SDSQUJQ`) and ordered the newer one, $2 more, returning the first.
+He asked whether that was OK. **It is, and the interesting part is what the swap does and does not buy.**
+
+- **What it buys:** durability ratings — waterproof, temperature, X-ray — on a card that is going into a
+  moving vehicle, plus a newer part at the same capacity. For $2 that is cheap.
+- **What it does not buy:** speed. Both are A1, and on a Pi the SD interface is the bottleneck: real read
+  speeds land around 40–60 MB/s whatever the label says, which is the one point in the Alexa answer worth
+  keeping.
+- **The difference neither answer names:** **A1 versus A2.** Both of these cards are A1, which is the
+  minimum app-performance class; A2 is about random small reads and writes, and that is what a Pi actually
+  waits on — boot, package installs, containers. The ROS2 workload (Ubuntu + ROS2 Humble, Docker per the
+  vendor) is heavier than a typical Pi project. No action: an A1 card works, it is slower to feel, not a
+  failure. If it ever seems sluggish, the meaningful upgrade is an **A2** card (Extreme class), not a faster
+  Ultra.
+
+**The one caution given, and it is the same trap as Dmitri's card:** three 64 GB SanDisk cards are now in the
+house or in transit — all the same brand and size. Before the return envelope leaves, the card going back
+should be identified by what is printed on it, not by which sleeve it was in. A wrong label is not a failure
+mode; a wrong card in an envelope is.
+
+## 64 GB or 256 GB for the ROS2 — decision: stay at 64 2026-10-10
+
+He cancelled the A1 and ordered the SanDisk Extreme **A2, 64 GB, $32**, arriving today, and then asked the
+next question up the ladder: Amazon Basics makes a **256 GB A2 for $67**, $35 more — *"if 256 would be better
+for the ROS2 than 64, I can certainly afford it."* **Answer given: keep the 64. No fourth purchase.**
+
+Three reasons, in the order that matters:
+
+1. **Nothing here fills a card.** The estimate: Raspberry Pi OS or Ubuntu with a desktop ~6–8 GB, ROS2 Humble
+   installed ~5 GB, a ROS2 Docker image ~2–4 GB, then code, logs and map data. Under 30 GB with room to
+   spare. 256 GB would be three-quarters empty forever.
+2. **The fleet stays interchangeable.** Every microSD in this project is now 64 GB SanDisk — the two rover
+   cards, the ROS2's, the one going back. All the same size, so any card can play any role, and one imaging
+   procedure covers every body including Dmitri's. A 256 GB one-off is the only card that would need its own
+   thinking.
+3. **The vendor builds for 64.** SunFounder's own spec says the kit expects a 64 GB TF card, so their image
+   is sized around one. A larger card works — the partition would just have to be expanded afterwards — but
+   that is a step bought for no gain.
+
+**The one case that would change the answer, recorded so it is not re-argued later:** recording camera and
+lidar data on the robot. ROS 2 bag files with a depth camera run to gigabytes per hour, and a 64 GB card
+would fill. That is not the plan, and if it ever becomes the plan the fix is a USB stick on the Pi, not a
+bigger boot card. The boot card should stay small, because the thing that kills cards is writes, and the
+thing that saves you is re-imaging — which is cheap on 64 and slow on 256.
+
+**What the money did buy, and it is the part worth keeping:** he moved from A1 to **A2** — the class that
+covers random small reads and writes, which is what a Pi actually waits on when it boots or runs containers.
+That upgrade matters for this machine. The capacity upgrade would not have.
