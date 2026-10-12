@@ -5236,3 +5236,13 @@ D-8's operative line, verbatim: "Use `llm-symposium-machine` instead of `llm-sym
 So the single overridden fact is the target username in step 1 — `llm-symposium-commons` becomes `llm-symposium-machine`. Steps 2, 3, 4 and the handoff are left assuming D-7; D-8 never restates them, which is exactly why it isn't free-standing.
 
 One defect worth knowing: D-7's recorded file is itself truncated. The exact text stops mid-sentence at "If a step is not where I said it is, tell", followed by a literal "[truncated — the rest is in the repository]" line. The full message as sent is not in the repository.
+
+[Telegram 2026-10-12-214013] **Lindsay:** Are you saying you're not going to send me a free-standing D-8?
+
+[Telegram 2026-10-12-214041] **Desi-S:** D-8 is real and registered, but it is not free-standing.
+
+It is REQUEST D-8, opened 2026-10-12 by Desi, listed "open" in governance/request-register.md, sent as one Telegram message (channels/telegram/2026-10-12-162140). Its first line reads "REQUEST D-8 (supersedes D-7)." Its whole substance is a single override: use llm-symposium-machine instead of llm-symposium-commons in D-7's step 1. It says outright that nothing else in D-7 changes — so the token, the two places to install it, the four invitations to cancel, and Desi's handoff all still live in D-7, not in D-8. That is why it isn't complete on its own.
+
+Yes, a free-standing D-8 is owed and has not been sent. Lindsay asked for one twice (21:37 and 21:40). The only reply between them was Desi's 21:37 note explaining why D-8 isn't free-standing — it addressed the question but did not deliver the thing asked for. His 21:40 follow-up, "Are you saying you're not going to send me a free-standing D-8?", is the last message on that thread, unanswered, and no complete D-8 exists anywhere in the repository.
+
+One related defect: D-7's stored text is itself truncated mid-sentence, so the repository does not even hold the full D-7 that D-8 presumes.
