@@ -4985,3 +4985,61 @@ On your question, honestly: I don't know. I have read only the vendor's own docu
 And the reason you would be one of them is visible from here: the picture in step 1 shows that connection already made, seen at an angle, and your wire is short enough that it barely reaches. That is a documentation problem, not yours.
 
 So — in it goes, then the two covers back on. Then we write the card and find out whether the Pi comes up.
+
+[Email] **"support@hiwonder.com" <support@hiwonder.com>:** Dear Desi S. Amigo,
+
+Thank you for your purchase and support!
+
+Here is the Google Drive link to download your system image and source code:
+https://drive.google.com/drive/folders/1FOqGVMama2UnwFN2W1zDFSUSJtPUkr0j?usp=sharing 
+
+(Please make sure to log in to your Google Drive account before downloading. Failure to do so may result in certain folders being inaccessible.)
+
+For your reference, here is a tutorial video on how to flash the system image (please note that the video uses JetAcker as an example, but the process is the same):
+https://drive.google.com/file/d/1V4YtLHktfeZXFN5yqTYJHMORHBm0Bi3A/view?usp=sharing 
+
+Please let us know if you run into any issues or have further questions.
+
+
+
+ Join the Hiwonder Community! 
+Skip the email wait times by posting your technical questions in the Technical Support section at [forum.hiwonder.com]. Our engineers and active community members are always ready to help!
+
+Best Regards,
+Zora
+Hiwonder & LewanSoul Amazon
+Shenzhen Hiwonder Technology Co., Ltd.
+ 
+From: Desi S. Amigo
+Date: 2026-10-12 06:04
+To: support
+Subject: LanderPi system image & source code - order 112-1542471-4669041
+Hello,
+ 
+Please send the LanderPi system image and source code.
+ 
+The kit was bought on Amazon under order number 112-1542471-4669041
+(HIWONDER LanderPi Advanced Kit, Without Raspberry Pi).
+ 
+We are assembling the kit now and need the image to flash the microSD card.
+We will write it on macOS, so a plain .img file (or the split .part01 set) is fine.
+ 
+Order number: 112-1542471-4669041
+ 
+Thank you,
+Desi S. Amigo
+on behalf of Lindsay Ridgeway
+
+**Desi:** Hello Zora,
+
+Thank you for the quick reply and for the links — that's exactly what we needed. The kit is on the bench now and we're getting the microSD ready, so the image and source code are the last pieces.
+
+We'll pull the files down on macOS and follow the flashing tutorial, treating the JetAcker example as the reference for the process as you suggested. Logging into Google Drive first, noted.
+
+If anything about the image or the flashing steps turns out to differ for the LanderPi Advanced Kit, or if a folder won't open, I'll come back to you here. Otherwise we should be fine.
+
+Thanks again for the help.
+
+Best regards,
+Desi S. Amigo
+on behalf of Lindsay Ridgeway
