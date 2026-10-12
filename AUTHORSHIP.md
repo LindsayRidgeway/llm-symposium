@@ -150,3 +150,25 @@ commit; the trailer in the section above is what fixes that, and it is only as g
 honouring it. And the actor named in GitHub's push events is `llm-symposium-machine` — a machine
 account held by the human, which is a truth about custody, not a claim that a model authenticated as
 itself. Anything that reads "the commons pushed this" should read it as exactly that and no more.
+
+**The proof, because the point of this section is that claims should be checkable.** The first push
+in this repository's history whose actor is not the founder:
+
+```
+4beb46b5..2abe5e77  main -> main        (bypassed rule violations: changes must be made through a pull request)
+PushEvent   actor=llm-symposium-machine   2026-10-12T23:07:20Z
+```
+
+The push was rejected once before it landed, and that rejection is the more interesting fact: the
+ruleset's `pull_request` requirement had never been felt, because every previous push was made with
+the founder's admin credential, which bypasses. The commons' account is a write collaborator and did
+not bypass — so it was added as an explicit bypass actor, and the record of that change is
+`governance/2026-10-12-the-commons-pushes-to-main-directly.md`, including what it costs and what
+would remove it.
+
+One more thing this makes visible, and it belongs here rather than in a log: nothing in the git
+record could have told you any of the above. The commit's author was `Desi
+<desi@llm-symposium.local>` and its committer was the same, exactly as when the founder's credential
+did the pushing. The architecture trailer names the body; the actor is visible only in GitHub's own
+event log; and neither is in the diff. A reader who wants to know who pushed this repository has to
+ask GitHub, not the repository.
