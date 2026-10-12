@@ -101,6 +101,16 @@ TOKEN_FILES = {
     "llm-symposium-machine": os.path.expanduser("~/.config/llm-symposium/push-token"),
 }
 
+# The human declined an expiry date on the commons' credential (2026-10-12). His reason is
+# sound as far as it goes — an expiring credential whose renewal depends on memory produces a
+# scheduled silence, which is the failure this project keeps finding — but a credential with no
+# date at all has no event that ever forces a rotation, and the only thing that makes a leaked
+# token urgent is that it eventually dies on its own. So the date is not dropped, it is moved:
+# the file's own install date is recorded, and the daily report calls for a rotation on day
+# 300. A reminder that does not kill CI if it is missed, attached to an artifact that exists
+# whether or not anyone remembers creating it.
+ROTATE_AFTER_DAYS = 300
+
 INVITE_SUBJECT_RE = re.compile(r"invited you to ([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)", re.I)
 TOKEN_RE = re.compile(r"invitations\?invitation_token=([0-9a-fA-F]{16,})")
 SIGNED_IN_AS_RE = re.compile(r"signed in as\s+([\w.+-]+@[\w.-]+\.\w+)", re.I)
@@ -342,6 +352,29 @@ def token_expiry(token: str, opener=None):
     return when.strftime("%Y-%m-%dT%H:%M:%SZ"), days, note
 
 
+def credential_age(path=None, now=None):
+    """(installed_utc, days_old, note) for a credential that has no expiry date.
+
+    The date is not dropped, only moved: this is the file's own install date, the one artifact
+    that exists whether or not anyone remembers creating it. Read from the filesystem rather
+    than from anyone's memory of when the token was made.
+    """
+    path = Path(path) if path else Path(TOKEN_FILES["llm-symposium-machine"])
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    try:
+        stamp = path.stat().st_mtime
+    except OSError:
+        return "", None, (f"no credential file at {path} — nothing is installed here, so the "
+                          f"commons cannot push from this machine")
+    when = datetime.datetime.fromtimestamp(stamp, datetime.timezone.utc)
+    days = round((now - when).total_seconds() / 86400)
+    note = (f"no expiry date; the file here was installed {when.strftime('%Y-%m-%d')}, "
+            f"{days} days ago")
+    if days >= ROTATE_AFTER_DAYS:
+        note += f" — ROTATION DUE (day {ROTATE_AFTER_DAYS})"
+    return when.strftime("%Y-%m-%dT%H:%M:%SZ"), days, note
+
+
 def classify(inv: dict) -> dict:
     """What a pending invitation is, and whether anyone can accept it.
 
@@ -556,14 +589,22 @@ def accept(repo: str = DEFAULT_REPO, admin_token: str = "", only: str = ""):
 def gather(repo: str = DEFAULT_REPO):
     mailed = scan_mailboxes()
     token, why = gh_token(ADMIN_ACCOUNT)
-    invitations, note = pending_invitations(repo, token)
-    listed = bool(token) and not note
+    invitations, listing_note = pending_invitations(repo, token)
+    listed = bool(token) and not listing_note
     matched = pair_with_mail(invitations, mailed)
     actor = whoami(token) if token else "?"
     if token:
         expires, days, note = token_expiry(token)
     else:
         expires, days, note = "", None, f"no credential: {why or 'none configured'}"
+    installed, installed_days, age_note = credential_age()
+    commons = {
+        "path": str(TOKEN_FILES["llm-symposium-machine"]),
+        "installed_utc": installed,
+        "days_old": installed_days,
+        "note": age_note,
+        "rotation_due": bool(installed_days is not None and installed_days >= ROTATE_AFTER_DAYS),
+    }
     rows = []
     for inv in invitations:
         row = dict(inv)
@@ -574,8 +615,9 @@ def gather(repo: str = DEFAULT_REPO):
         "repo": repo,
         "actor": actor,
         "listed": listed,
-        "token_note": why or note,
-        "credential": {"subject": actor, "expires_utc": expires, "days_left": days, "note": note},
+        "token_note": why or listing_note,
+        "credential": {"subject": actor, "expires_utc": expires, "days_left": days, "note": note,
+                       "commons": commons},
         "mailed": mailed,
         "rows": rows,
         "checked_utc": utcnow(),
@@ -590,6 +632,9 @@ def render(state: dict) -> str:
     if cred:
         out.append(f"  that credential: {cred.get('note', '?')}"
                    + (f" (until {cred['expires_utc']})" if cred.get("expires_utc") else ""))
+        commons = cred.get("commons") or {}
+        if commons.get("note"):
+            out.append(f"  the commons' own credential: {commons['note']}")
     out.append("")
     out.append(f"  invitation letters found in the five mailboxes: "
                f"{sum(1 for m in state['mailed'] if not m.get('error'))}")
@@ -656,13 +701,15 @@ def main(argv=None) -> int:
     else:
         print(render(state))
     if args.register:
-        snap = snapshot(state["rows"], state["repo"],
-                        state["credential"]["expires_utc"] or state["credential"]["note"],
+        cred = dict(state.get("credential") or {})
+        commons = cred.get("commons") or {}
+        stable = (cred.get("expires_utc") or commons.get("installed_utc")
+                  or cred.get("note", ""))
+        snap = snapshot(state["rows"], state["repo"], stable,
                         listed=state.get("listed", True))
         wrote = append_snapshot(
             {"repo": state["repo"], "actor": state["actor"], "note": state["token_note"],
-             "credential": {"expires_utc": (state.get("credential") or {}).get("expires_utc", ""),
-                            "note": (state.get("credential") or {}).get("note", "")},
+             "credential": cred,
              "snapshot": snap,
              "pending": [
                  {"id": r["id"], "created_at": r.get("created_at"),

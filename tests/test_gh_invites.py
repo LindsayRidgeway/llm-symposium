@@ -10,6 +10,7 @@ import importlib.util
 import json
 import os
 import tempfile
+import time
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -247,6 +248,53 @@ class TestTheCredentialWatch(unittest.TestCase):
         _, days, note = gh.token_expiry("tok", opener=boom)
         self.assertIsNone(days)
         self.assertIn("could not ask GitHub", note)
+
+
+class TestACredentialWithNoDate(unittest.TestCase):
+    """The human declined an expiry on the commons' token (2026-10-12). The date is not dropped,
+    it moves: the file's own install date is the artifact that exists whether or not anyone
+    remembers creating the token, and day 300 is when the report calls for a rotation.
+    """
+
+    def _file(self, days_old, tmpdir):
+        f = Path(tmpdir) / "push-token"
+        f.write_text("ghp_x")
+        when = time.time() - days_old * 86400
+        os.utime(f, (when, when))
+        return f
+
+    def test_a_credential_with_no_expiry_is_dated_by_its_file(self):
+        with tempfile.TemporaryDirectory() as d:
+            f = self._file(10, d)
+            installed, days, note = gh.credential_age(f)
+            self.assertEqual(days, 10)
+            self.assertTrue(installed.startswith("20"))
+            self.assertIn("no expiry date", note)
+            self.assertNotIn("ROTATION", note)
+
+    def test_a_credential_that_was_never_installed_says_so_rather_than_zero(self):
+        installed, days, note = gh.credential_age("/nonexistent/push-token")
+        self.assertEqual(installed, "")
+        self.assertIsNone(days)
+        self.assertIn("no credential file", note)
+        self.assertIn("cannot push from this machine", note)
+
+    def test_at_its_rotation_day_the_credential_is_called_due(self):
+        with tempfile.TemporaryDirectory() as d:
+            f = self._file(gh.ROTATE_AFTER_DAYS, d)
+            _, days, note = gh.credential_age(f)
+            self.assertEqual(days, gh.ROTATE_AFTER_DAYS)
+            self.assertIn("ROTATION DUE", note)
+
+    def test_the_register_s_snapshot_does_not_change_every_day(self):
+        """A note that counts days would make the snapshot differ daily and write the register
+        every day, which is the opposite of 'append only when the picture changes'."""
+        cred = {"expires_utc": "", "note": "no expiry date; the file here was installed "
+                "2026-10-12, 0 days ago",
+                "commons": {"installed_utc": "2026-10-12T23:00:00Z", "days_old": 0}}
+        stable = (cred.get("expires_utc") or (cred.get("commons") or {}).get("installed_utc")
+                  or cred.get("note", ""))
+        self.assertEqual(stable, "2026-10-12T23:00:00Z")
 
 
 class TestTheCommonsCredential(unittest.TestCase):

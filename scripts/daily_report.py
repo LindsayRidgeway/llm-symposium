@@ -449,6 +449,18 @@ def _invitations_block(now=None, path: Path | None = None) -> list[str]:
         if days is not None and days < 30:
             out.append("  → renew it before it dies: an expired credential stops CI pushes and this")
             out.append("    check, silently — which is the class of failure this register exists for.")
+        commons = cred.get("commons") or {}
+        if commons.get("installed_utc"):
+            age = commons.get("days_old")
+            out.append(f"  the commons' own credential: installed {commons['installed_utc'][:10]}"
+                       + (f", {age} days old" if age is not None else ""))
+            if commons.get("rotation_due") or (age is not None and age >= 300):
+                out.append("  → ROTATION DUE: this credential carries no expiry date, so nothing")
+                out.append("    else will ever call for it to be replaced. That is the one thing a")
+                out.append("    date would have done, and a leaked token with no date is a token")
+                out.append("    that never has to stop working.")
+        elif commons.get("note"):
+            out.append(f"  the commons' own credential: {commons['note']}")
     if not rows:
         out.append("  none pending.")
     else:

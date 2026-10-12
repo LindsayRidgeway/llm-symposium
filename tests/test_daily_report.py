@@ -314,6 +314,26 @@ class TestTheInvitationsBlock(unittest.TestCase):
         out = self._block([self._record(checked="2026-10-01T00:00:00Z")])
         self.assertIn("STALE", out)
 
+    def test_a_credential_with_no_expiry_is_dated_by_its_file(self):
+        rec = self._record()
+        rec["credential"] = {"note": "no expiry reported", "commons": {
+            "path": "/tmp/push-token", "installed_utc": "2026-10-12T23:00:00Z",
+            "days_old": 10, "note": "no expiry date; the file here was installed 2026-10-12",
+            "rotation_due": False}}
+        out = self._block([rec])
+        self.assertIn("installed 2026-10-12", out)
+        self.assertIn("10 days old", out)
+        self.assertNotIn("ROTATION DUE", out)
+
+    def test_at_day_300_the_report_calls_for_a_rotation(self):
+        rec = self._record()
+        rec["credential"] = {"note": "no expiry reported", "commons": {
+            "path": "/tmp/push-token", "installed_utc": "2025-12-16T23:00:00Z",
+            "days_old": 300, "note": "no expiry date", "rotation_due": True}}
+        out = self._block([rec])
+        self.assertIn("ROTATION DUE", out)
+        self.assertIn("never has to stop working", out)
+
 
 class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
     """The lander refuses a dirty shared checkout, so output left uncommitted here is an outage,
