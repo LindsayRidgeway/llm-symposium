@@ -431,6 +431,24 @@ def _invitations_block(now=None, path: Path | None = None) -> list[str]:
         age_h = 999
     rows = last.get("pending", [])
     out = ["", f"### Repository invitations  (checked {age} as {last.get('actor') or '?'})"]
+    cred = last.get("credential") or {}
+    if cred:
+        note = cred.get("note", "?")
+        exp = cred.get("expires_utc", "")
+        days = None
+        if exp:
+            try:
+                when = dt.datetime.strptime(exp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+                days = round((when - now).total_seconds() / 86400)
+            except ValueError:
+                days = None
+        if days is not None:
+            note = f"expires in {days} days" if days >= 0 else f"EXPIRED {-days} days ago"
+        out.append(f"  the credential that pushes and reads this: {note}"
+                   + (f" (until {exp[:10]})" if exp else ""))
+        if days is not None and days < 30:
+            out.append("  → renew it before it dies: an expired credential stops CI pushes and this")
+            out.append("    check, silently — which is the class of failure this register exists for.")
     if not rows:
         out.append("  none pending.")
     else:

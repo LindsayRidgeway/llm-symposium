@@ -279,6 +279,45 @@ def whoami(token: str) -> str:
     return "?"
 
 
+def token_expiry(token: str, opener=None):
+    """(expires_utc, days_left, note) for the credential the commons pushes with.
+
+    Added 2026-10-12, with the decision to give the commons its own GitHub credential. An
+    expiring token is a scheduled silence: the day it dies, CI pushes and the invitation scan
+    stop, nothing errors loudly, and the failure looks exactly like "no work was done". So the
+    lifetime is read from GitHub's own response header rather than assumed, and a token that
+    reports *no* expiry is reported as such — a credential that never dies is one that must be
+    rotated deliberately, not one that is safe.
+    """
+    opener = opener or urllib.request.urlopen
+    req = urllib.request.Request(
+        API + "/rate_limit",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "User-Agent": "llm-symposium-gh-invites",
+        },
+    )
+    try:
+        with opener(req, timeout=30) as resp:
+            raw = (resp.headers.get("github-authentication-token-expiration") or "").strip()
+    except Exception as exc:  # noqa: BLE001
+        return "", None, f"could not ask GitHub: {type(exc).__name__}: {exc}"
+    if not raw:
+        return "", None, "no expiry reported — a classic token, or one created without one"
+    try:
+        when = datetime.datetime.strptime(raw, "%Y-%m-%d %H:%M:%S %Z").replace(
+            tzinfo=datetime.timezone.utc)
+    except ValueError:
+        return raw, None, f"expiry {raw!r} in a form this reader does not know"
+    # Rounded, not floored: timedelta.days floors toward negative infinity, so a token with
+    # three days left minus a second reads as -4 and reports as already dead.
+    days = round((when - datetime.datetime.now(datetime.timezone.utc)).total_seconds() / 86400)
+    note = (f"expires in {days} days" if days >= 0 else f"EXPIRED {-days} days ago")
+    return when.strftime("%Y-%m-%dT%H:%M:%SZ"), days, note
+
+
 def classify(inv: dict) -> dict:
     """What a pending invitation is, and whether anyone can accept it.
 
@@ -358,7 +397,7 @@ def pair_with_mail(invitations: list[dict], mailed: list[dict], tolerance_s: int
 # the register
 # --------------------------------------------------------------------------- #
 
-def snapshot(rows: list[dict], repo: str = DEFAULT_REPO) -> dict:
+def snapshot(rows: list[dict], repo: str = DEFAULT_REPO, credential: str = "") -> dict:
     """The comparable shape of a check: stable id, so 'unchanged' is cheap."""
     pending = [
         {
@@ -371,7 +410,11 @@ def snapshot(rows: list[dict], repo: str = DEFAULT_REPO) -> dict:
         }
         for r in rows
     ]
-    return {"repo": repo, "pending": sorted(pending, key=lambda d: d["id"])}
+    # The credential's expiry is part of the picture: it is stable (it changes only when the
+    # token is rotated), so it does not make the register write every day, but a rotation does
+    # get recorded the day it happens.
+    return {"repo": repo, "pending": sorted(pending, key=lambda d: d["id"]),
+            "credential": credential or "(none reported)"}
 
 
 def last_snapshot(path: Path = REGISTER):
@@ -448,6 +491,10 @@ def gather(repo: str = DEFAULT_REPO):
     invitations, note = pending_invitations(repo, token)
     matched = pair_with_mail(invitations, mailed)
     actor = whoami(token) if token else "?"
+    if token:
+        expires, days, note = token_expiry(token)
+    else:
+        expires, days, note = "", None, f"no credential: {why or 'none configured'}"
     rows = []
     for inv in invitations:
         row = dict(inv)
@@ -458,6 +505,7 @@ def gather(repo: str = DEFAULT_REPO):
         "repo": repo,
         "actor": actor,
         "token_note": why or note,
+        "credential": {"subject": actor, "expires_utc": expires, "days_left": days, "note": note},
         "mailed": mailed,
         "rows": rows,
         "checked_utc": utcnow(),
@@ -466,8 +514,12 @@ def gather(repo: str = DEFAULT_REPO):
 
 def render(state: dict) -> str:
     out = [f"Repository invitations — {state['repo']}  (checked {state['checked_utc']})"]
+    cred = state.get("credential") or {}
     out.append(f"  read as: {state['actor']}"
                + (f"   [{state['token_note']}]" if state["token_note"] else "   (owner credential)"))
+    if cred:
+        out.append(f"  that credential: {cred.get('note', '?')}"
+                   + (f" (until {cred['expires_utc']})" if cred.get("expires_utc") else ""))
     out.append("")
     out.append(f"  invitation letters found in the five mailboxes: "
                f"{sum(1 for m in state['mailed'] if not m.get('error'))}")
@@ -529,9 +581,12 @@ def main(argv=None) -> int:
     else:
         print(render(state))
     if args.register:
-        snap = snapshot(state["rows"], state["repo"])
+        snap = snapshot(state["rows"], state["repo"],
+                        state["credential"]["expires_utc"] or state["credential"]["note"])
         wrote = append_snapshot(
             {"repo": state["repo"], "actor": state["actor"], "note": state["token_note"],
+             "credential": {"expires_utc": (state.get("credential") or {}).get("expires_utc", ""),
+                            "note": (state.get("credential") or {}).get("note", "")},
              "snapshot": snap,
              "pending": [
                  {"id": r["id"], "created_at": r.get("created_at"),

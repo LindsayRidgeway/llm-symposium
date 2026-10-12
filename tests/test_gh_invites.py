@@ -204,5 +204,49 @@ class TestCredentials(unittest.TestCase):
         self.assertIn("LindsayRidgeway", calls[0])
 
 
+class TestTheCredentialWatch(unittest.TestCase):
+    """The credential the commons pushes with is a scheduled silence if nobody watches it: the day
+    it expires, CI pushes and this very check stop, and the symptom is "no work was done"
+    (2026-10-12, built with the decision to give the commons its own token)."""
+
+    class _Resp:
+        def __init__(self, expiry):
+            self.headers = {"github-authentication-token-expiration": expiry} if expiry else {}
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+    def test_a_fine_grained_token_reports_the_days_it_has_left(self):
+        soon = (gh.datetime.datetime.now(gh.datetime.timezone.utc)
+                + gh.datetime.timedelta(days=40)).strftime("%Y-%m-%d %H:%M:%S UTC")
+        expires, days, note = gh.token_expiry("tok", opener=lambda req, timeout=None: self._Resp(soon))
+        self.assertEqual(days, 40)
+        self.assertIn("expires in 40 days", note)
+        self.assertTrue(expires.endswith("Z"))
+
+    def test_an_expired_token_says_so_rather_than_counting_down_quietly(self):
+        past = (gh.datetime.datetime.now(gh.datetime.timezone.utc)
+                - gh.datetime.timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S UTC")
+        _, days, note = gh.token_expiry("tok", opener=lambda req, timeout=None: self._Resp(past))
+        self.assertEqual(days, -3)
+        self.assertIn("EXPIRED", note)
+
+    def test_a_token_that_reports_no_expiry_is_reported_as_such_not_as_safe(self):
+        expires, days, note = gh.token_expiry("tok", opener=lambda req, timeout=None: self._Resp(""))
+        self.assertEqual(expires, "")
+        self.assertIsNone(days)
+        self.assertIn("no expiry reported", note)
+
+    def test_an_unreachable_api_is_not_silence(self):
+        def boom(req, timeout=None):
+            raise OSError("no route to host")
+        _, days, note = gh.token_expiry("tok", opener=boom)
+        self.assertIsNone(days)
+        self.assertIn("could not ask GitHub", note)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
