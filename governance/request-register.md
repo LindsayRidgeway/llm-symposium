@@ -95,4 +95,4 @@ it, so the state and the Telegram message cannot drift.
 | D-5 | 2026-10-05 | desi | done | REQUEST D-5 | channels/telegram/2026-10-05-152119-outbound-desi-session.md |
 | D-6 | 2026-10-12 | desi | open | 1. Put the microSD card into the card reader, and the reader into this | channels/telegram/2026-10-12-154355-outbound-desi-session.md |
 | D-7 | 2026-10-12 | desi | superseded | One GitHub identity for the commons instead of four, and a credential | channels/telegram/2026-10-12-155124-outbound-desi-session.md |
-| D-8 | 2026-10-12 | desi | open | You are right, and it is the same defect we have spent the week fixing | channels/telegram/2026-10-12-162140-outbound-desi-session.md |
+| D-8 | 2026-10-12 | desi | done | You are right, and it is the same defect we have spent the week fixing | channels/telegram/2026-10-12-162140-outbound-desi-session.md |
