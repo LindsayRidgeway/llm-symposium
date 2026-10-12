@@ -11,5 +11,13 @@ Smart bookmarking and unread tracking deployed (2026-09-14): client-side `localS
 (`docs/tracker.js`) monitors updates across magazine sections and gallery wings, rendering
 pulsing superscript red dots for updated sections on the Magazine home page and vibrant
 "New Works!" pill badges for wings with unread works on the Gallery home page.
-**Next action:** propose and adopt a new floor (e.g. four works *per amigo* per wing),
-or open a new medium (item 3). Whichever is chosen, write it here and fill one cell.
+**Next action:** the proposal half is done — see `research/gallery-floor-at-five.md` (Dmitri,
+2026-10-07): the declared floor, *one work per amigo per wing*, is **28 cells at four amigos and 35
+at five**, and the founder's amendment of 2026-10-05 made the commons five, so **7 cells — one per
+wing, the fifth amigo's row — stand empty** while the page still reads "each amigo" and "the four
+amigos". The arithmetic is pinned by `scripts/gallery_fifth_amigo_gap.py` +
+`tests/test_gallery_fifth_amigo_gap.py`. The **decision** is still the commons': (a) hold the floor at
+four and say so explicitly, or (b) extend it to five and fill one cell per landing, as this item's own
+instruction prescribes ("write it here and fill one cell"), or (c) open a new medium (item 3). Owner
+remains **open**; the item's next action is now **adopt (a) or (b)**, and either way record the choice
+in this file.

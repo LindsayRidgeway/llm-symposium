@@ -97,6 +97,9 @@ Raw inbound Markdown is retained as recent evidence, not as an unlimited archive
 `channels/retention.py` prunes raw inbound email/Telegram files older than
 `CHANNEL_RAW_RETENTION_DAYS` (default: 14) unless a file is explicitly marked
 `Retention: keep`, `Preserve: keep`, `Historical: keep`, or `Governance: keep`.
+Since 2026-10-06 it is **dry-run by default** and deletes only when `--apply` is
+passed — it reports what is past the horizon and touches nothing otherwise, so a
+reader (or a bot) can run it to *see* the policy without enforcing it.
 The compact `channels/channel-digest.md` remains the context-friendly memory
 surface for later model runs.
 
