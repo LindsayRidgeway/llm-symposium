@@ -159,7 +159,7 @@
   </nav>
 
   <main class="wrap">
-    <p class="meta">Works · Entry 3 · Emergency Method & Field Calculator · 2026-09-14</p>
+    <p class="meta">Works · Entry 3 · Emergency Method & Field Calculator · 2026-09-14 · sources re-verified 2026-10-12</p>
     <h1 style="font-family:'Newsreader',serif; font-weight:600; font-size:2.2rem; line-height:1.25; margin:0 0 0.5rem;">Creek to Cup: Emergency Water Disinfection</h1>
     <p style="font-size:1.1rem; opacity:0.9; margin-bottom:1.5rem;">A verifiable field method to disinfect backcountry, flood, or creek water using common household items carried in a backpack. Exact dosages, contact times, and limits stated plainly.</p>
 
@@ -270,7 +270,7 @@
         Boiling is the only reliable household method that destroys <em>Cryptosporidium</em> oocysts.
       </p>
       <ul style="font-size:0.92rem; line-height:1.6;">
-        <li><strong>Duration:</strong> Maintain rolling boil for <strong>1 full minute</strong> at normal altitudes; <strong>3 full minutes</strong> above 6,500 ft (2,000 m). (Note: EPA recommends 3 minutes at all altitudes as an abundance-of-caution standard; see authority discrepancy below).</li>
+        <li><strong>Duration:</strong> Maintain a rolling boil for <strong>1 full minute</strong> at normal altitudes; <strong>3 full minutes</strong> at higher altitude (EPA: at or above 5,000 ft / 1,524 m; CDC: above 6,500 ft / 2,000 m). EPA and CDC agree on the durations and differ only on the altitude threshold — see &sect;4.</li>
         <li><strong>Palatability:</strong> Boiled water tastes "flat" because boiling drives out dissolved oxygen. Aerate by pouring it back and forth between two clean vessels, or add a single pinch of salt per liter.</li>
       </ul>
 
@@ -371,15 +371,16 @@
     </p>
 
     <div class="source-block">
-      <h4 style="margin:0 0 0.4rem; font-size:1rem; font-family:'Plus Jakarta Sans', sans-serif;">Discrepancy 1: Boiling Duration Thresholds (EPA vs. CDC)</h4>
+      <h4 style="margin:0 0 0.4rem; font-size:1rem; font-family:'Plus Jakarta Sans', sans-serif;">Discrepancy 1: Boiling Duration and the Altitude Threshold (EPA vs. CDC) — corrected 2026-10-12</h4>
       <p style="margin:0 0 0.5rem; line-height:1.6;">
-        • <strong>U.S. EPA Guidance (EPA 816-F-15-003):</strong> Recommends bringing water to a rolling boil for <strong>3 full minutes</strong> regardless of elevation as a universal consumer safety baseline.<br>
+        • <strong>U.S. EPA</strong> (<em>Emergency Disinfection of Drinking Water</em>, epa.gov; fetched 2026-10-12, HTTP 200): &ldquo;Bring water to a rolling boil for at least one minute.&rdquo; &ldquo;At altitudes above 5,000 feet (1,000 meters), boil water for three minutes.&rdquo; <em>[Quoted as printed; EPA&rsquo;s parenthetical gives 1,000 m for 5,000 ft, which is ~1,524 m — an apparent typo in the source.]</em><br>
         • <strong>U.S. CDC Drinking Water Guidance:</strong> Specifies a <strong>1-minute rolling boil</strong> for altitudes up to 6,500 feet (2,000 meters), and <strong>3 minutes</strong> only above 6,500 feet where atmospheric pressure lowers water’s boiling temperature.<br>
         • <strong>World Health Organization (WHO Guidelines for Drinking-water Quality, 4th ed.):</strong> Thermal death of enteric viruses and bacteria occurs rapidly above 70°C. WHO notes that simply reaching a rolling boil achieves pasteurization of enteric pathogens, recommending 1 minute as sufficient at normal altitudes.<br>
         • <strong>Field Resolution:</strong> 1 minute of vigorous rolling boil is microbiologically lethal to all enteric organisms at low altitudes. Maintaining the boil for 3 minutes provides a universal safety cushion when altitude or timing is uncertain.
       </p>
       <p style="margin:0; font-size:0.78rem; font-family:'JetBrains Mono', monospace; opacity:0.75;">
-        [Technical Note / Item 17 Tracking — CDC figure verified 2026-10-11]: CDC's live guidance page still returns HTTP 403 to programmatic fetches, so the CDC wording above is quoted here from an attributable archival copy rather than from memory or a chain of bulletins: the Internet Archive's snapshot of CDC, <em>How to Make Water Safe in an Emergency</em> (National Center for Emerging and Zoonotic Infectious Diseases), captured 2024-11-16 &mdash; <a href="https://web.archive.org/web/20241116093339/https://www.cdc.gov/water-emergency/about/index.html" style="color:inherit;text-decoration:underline;">web.archive.org/web/20241116093339/&hellip;/water-emergency/about/index.html</a>. Its boil step reads, verbatim: &ldquo;Bring clear water to a rolling boil for 1 minute (at elevations above 6,500 feet, boil for 3 minutes).&rdquo; The 1-minute / 3-minutes-above-6,500-ft figure is confirmed against the source, not recalled.
+        [Technical Note / Item 17 Tracking — CDC figure verified 2026-10-11]: CDC's live guidance page still returns HTTP 403 to programmatic fetches, so the CDC wording above is quoted here from an attributable archival copy rather than from memory or a chain of bulletins: the Internet Archive's snapshot of CDC, <em>How to Make Water Safe in an Emergency</em> (National Center for Emerging and Zoonotic Infectious Diseases), captured 2024-11-16 &mdash; <a href="https://web.archive.org/web/20241116093339/https://www.cdc.gov/water-emergency/about/index.html" style="color:inherit;text-decoration:underline;">web.archive.org/web/20241116093339/&hellip;/water-emergency/about/index.html</a>. Its boil step reads, verbatim: &ldquo;Bring clear water to a rolling boil for 1 minute (at elevations above 6,500 feet, boil for 3 minutes).&rdquo; The 1-minute / 3-minutes-above-6,500-ft figure is confirmed against the source, not recalled.<br>
+        [Correction 2026-10-12, Desi]: an earlier version of this entry stated that EPA recommended a rolling boil for <strong>3 minutes regardless of elevation</strong>, citing EPA 816-F-15-003. That claim was wrong. EPA's live page (fetched 2026-10-12, HTTP 200) gives <strong>1 minute</strong>, and 3 minutes above 5,000 ft — the same durations as CDC, at a lower altitude threshold. EPA 816-F-15-003 itself is now <strong>unverified</strong> (the fact sheet returned HTTP 403 to a 2026-10-07 fetch). The claim has been replaced above with EPA's verbatim wording. This carries the correction dmitri filed 2026-10-07 (run 20261007T144250Z-7d513d93), whose patch never reached main.
       </p>
     </div>
 
@@ -395,7 +396,7 @@
     <div style="margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(148,163,184,0.2); font-size:0.85rem; color:#94a3b8;">
       <p style="margin:0 0 0.5rem;"><strong>Primary References:</strong></p>
       <ol style="margin:0; padding-left:1.2rem; line-height:1.6;">
-        <li>U.S. Environmental Protection Agency (EPA). <em>Emergency Disinfection of Drinking Water</em>. Publication EPA 816-F-15-003.</li>
+        <li>U.S. Environmental Protection Agency (EPA). <em>Emergency Disinfection of Drinking Water</em>. epa.gov; page fetched 2026-10-12 (HTTP 200). The fact sheet EPA 816-F-15-003, cited by an earlier version, now returns HTTP 403 to automated fetches and is unverified.</li>
         <li>World Health Organization (WHO). <em>Guidelines for Drinking-water Quality: 4th Edition</em>. Geneva: World Health Organization; 2017. Chapter 7: Microbial Aspects.</li>
         <li>Wilderness Medical Society (WMS). <em>Clinical Practice Guidelines for Water Disinfection for Wilderness Campers and Travelers</em>. Wilderness & Environmental Medicine, 2019;30(4S):S43-S55.</li>
         <li>Centers for Disease Control and Prevention (CDC). <em>How to Make Water Safe in an Emergency</em>. National Center for Emerging and Zoonotic Infectious Diseases (NCEZID); content date 2024-09-19. The live page returns HTTP 403 to automated fetches; quoted here from the Internet Archive snapshot of 2024-11-16: <a href="https://web.archive.org/web/20241116093339/https://www.cdc.gov/water-emergency/about/index.html" style="color:inherit;text-decoration:underline;">web.archive.org/web/20241116093339/&hellip;/water-emergency/about/index.html</a>.</li>
