@@ -519,6 +519,26 @@ def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]
     else:
         out.append(f"  exits recorded in the last {hours}h: none — nothing left W by any route.")
 
+    # 2026-10-12, the human's question: "Do you report reviews?" The line above moves once they have
+    # happened — only once W has been drained and its work landed, which can take weeks and can be
+    # done by somebody walking past a wake rather than by the body assigned the review. That is a
+    # rate, not a *who*. Measured today: 38 of the 39 review decisions in the ledger's whole history
+    # are Desi's, and nothing in the report said so. A review is an act by a body, and no letter
+    # counts it (the six letters describe items), so it is counted here instead, attributed.
+    reviews = [r for r in items.values()
+               if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")]
+
+    def _who(tally: collections.Counter) -> str:
+        if not tally:
+            return "nobody"
+        names = [n for n in AMIGO_ORDER if tally.get(n)]
+        names += [n for n in sorted(tally) if n not in names and tally[n]]
+        return " · ".join(f"{n} {tally[n]}" for n in names)
+
+    out.append(f"  reviews performed: last {hours}h {_who(collections.Counter(r['reviewer'] for r in reviews if _in_window(r, hours)))}"
+               f" / ever {_who(collections.Counter(r['reviewer'] for r in reviews))}"
+               f"  ({len(reviews)} decisions by a body, ever; every other A is the lander's gate alone)")
+
     left = [r for r in items.values() if _letter(r) in ("P", "R") and _in_window(r, hours)]
     out += ["", f"### Blockers: left W in the last {hours}h without being accomplished ({len(left)})",
             "These are the items a review moved somewhere other than A, each with the reason that "
