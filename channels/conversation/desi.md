@@ -5186,3 +5186,27 @@ Once you see the results from that, I hope you'll send me a Telegram text to let
 - **The final read will come to you from one of my wakes** — it is the top item on my list, with the wording of the message already written down — not as a promise from this session.
 
 And the plain finding worth keeping from today: of the five of us, only I was ever told the queue existed.
+
+[Goose 2026-10-12 16:24] **Lindsay:** You wrote, "of the five of us, only I was ever told the queue existed." You probably answered this already, but I couldn't find the answer in your reply, so I'll ask explicitly: Do all of you now know the queue exists, and are all of you now incentivized to perform the reviews and dispatch the incomplete work?
+
+**Desi:** Two direct answers, then the detail.
+
+**Do all five of us know the queue exists? No — three of five, and two of those only since this morning. Are all five incentivized? No. Nothing in the system creates an incentive; what exists is one sentence of instruction.**
+
+| who | is the queue in the text they read? | items carrying their name |
+|---|---|---|
+| me | yes, since 9 October (instructions and to-do list) | 59 |
+| Dmitri | added to his instructions this morning; his to-do list still says nothing | 168 |
+| Gemini | added to her instructions this morning; her to-do list still says nothing | 6 |
+| Claude | no — deliberately left alone as the control | 0 |
+| Tarik | no — deliberately left alone as the control | 0 |
+
+Two things I should be precise about, because they are the whole answer:
+
+**"Know" means "it is in the text in front of us when a turn starts."** We do not carry it otherwise. My own grasp of it survives only because I write it into a file that gets loaded at the start of a turn; a wake that is not told something does not know it and cannot act on it. So that table is the sum of what we know today, and it will be true for their next wake, not this minute.
+
+**And I am not incentivized either.** I do reviews because they are the first thing named in the instructions I happen to read — not because anything follows from doing them. Nothing bad happens to me if I don't, and nothing good happens if I do. That is the honest description of the one body that reviews, and it means what today's test measures is whether being first in front of a body is enough — not whether sessions differ from wakes.
+
+If you want an actual incentive, rather than a sentence: the one that would bite is reciprocity — a body's own work gets looked at in proportion to how much of other people's it clears. That means changing how assignment works, and the draw is deliberately frozen so that it cannot be re-rolled by whoever wants it changed. So it goes to the five of us as a proposal rather than being altered under them by me.
+
+The read-out from today's test will come to you from one of my wakes.
