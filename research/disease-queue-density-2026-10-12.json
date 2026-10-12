@@ -1,0 +1,172 @@
+{
+ "conditions": [
+  {
+   "condition": "persistent genital arousal disorder",
+   "any_field": 226,
+   "strict": 143,
+   "trials": 3,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "post-treatment lyme disease syndrome",
+   "any_field": 465,
+   "strict": 145,
+   "trials": 19,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "non-celiac gluten sensitivity",
+   "any_field": 1099,
+   "strict": 325,
+   "trials": 43,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "mast cell activation syndrome",
+   "any_field": 3065,
+   "strict": 347,
+   "trials": 68,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "cyclic vomiting syndrome",
+   "any_field": 1342,
+   "strict": 524,
+   "trials": 25,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "median arcuate ligament syndrome",
+   "any_field": 989,
+   "strict": 538,
+   "trials": 2,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "vulvar lichen sclerosus",
+   "any_field": 1347,
+   "strict": 570,
+   "trials": 47,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "nutcracker syndrome",
+   "any_field": 1297,
+   "strict": 700,
+   "trials": 3,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "functional neurological disorder",
+   "any_field": 1983,
+   "strict": 812,
+   "trials": 7768,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "superior mesenteric artery syndrome",
+   "any_field": 2218,
+   "strict": 965,
+   "trials": 8,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "vestibular migraine",
+   "any_field": 2928,
+   "strict": 1173,
+   "trials": 51,
+   "band": "screenable"
+  },
+  {
+   "condition": "postural orthostatic tachycardia syndrome",
+   "any_field": 4174,
+   "strict": 1194,
+   "trials": 141,
+   "band": "screenable"
+  },
+  {
+   "condition": "small fiber neuropathy",
+   "any_field": 5309,
+   "strict": 1245,
+   "trials": 62,
+   "band": "screenable"
+  },
+  {
+   "condition": "burning mouth syndrome",
+   "any_field": 3261,
+   "strict": 1448,
+   "trials": 49,
+   "band": "screenable"
+  },
+  {
+   "condition": "temporomandibular disorder",
+   "any_field": 5586,
+   "strict": 2548,
+   "trials": 744,
+   "band": "screenable"
+  },
+  {
+   "condition": "chronic prostatitis",
+   "any_field": 7069,
+   "strict": 3508,
+   "trials": 88,
+   "band": "screenable"
+  },
+  {
+   "condition": "idiopathic intracranial hypertension",
+   "any_field": 7240,
+   "strict": 3691,
+   "trials": 56,
+   "band": "screenable"
+  },
+  {
+   "condition": "complex regional pain syndrome",
+   "any_field": 12343,
+   "strict": 4400,
+   "trials": 243,
+   "band": "screenable"
+  },
+  {
+   "condition": "ehlers-danlos syndrome",
+   "any_field": 15088,
+   "strict": 4736,
+   "trials": 96,
+   "band": "screenable"
+  },
+  {
+   "condition": "interstitial cystitis",
+   "any_field": 10107,
+   "strict": 4789,
+   "trials": 242,
+   "band": "screenable"
+  },
+  {
+   "condition": "adenomyosis",
+   "any_field": 13262,
+   "strict": 5146,
+   "trials": 145,
+   "band": "screenable"
+  },
+  {
+   "condition": "hidradenitis suppurativa",
+   "any_field": 11002,
+   "strict": 6554,
+   "trials": 287,
+   "band": "screenable"
+  },
+  {
+   "condition": "chronic fatigue syndrome",
+   "any_field": 21771,
+   "strict": 8522,
+   "trials": 385,
+   "band": "screenable"
+  },
+  {
+   "condition": "trigeminal neuralgia",
+   "any_field": 20572,
+   "strict": 8913,
+   "trials": 176,
+   "band": "screenable"
+  }
+ ]
+}
