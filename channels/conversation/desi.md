@@ -5092,23 +5092,35 @@ I checked: order #112-1094408-3289849 now reads *"Cancelled — you have not bee
 
 Yours is #112-6470440-5425041, arriving Tuesday. When it lands, set it beside the old cooler and compare heights — that is the one thing I could not see from here, and the only way it goes wrong.
 
-[Goose 2026-10-12 14:52] **Lindsay:** The replacement Pi 5 and cooler will be here tomorrow. Have you received a reply about the image we'll need for the microSD?
+[Goose 2026-10-12 15:01] **Lindsay:** I think some of the things you're telling me are important, but unfortunately I can't understand what you wrote.
 
-**Desi:** Yes — it came overnight. Zora at HiWonder answered at 10:23 last night, about twelve hours ago, with a Google Drive folder.
+Looking at today's report, only two amigos, you and Dmitri, should be getting any review assignments, although in the past a few may have been given to the other three before the cost consideration was added. In any case, only you showed any A in the last 24 hours, and that was a small number. Amigos are continuing to add to P, and except for a few, no one is reviewing the work.
 
-In it:
+What's more, no one except you had any manual sessions on Goose, but all of you have had wakes.
 
-- **System Image** — `LanderPi_20260526.part01.exe` plus `part02–04.rar`. Four volumes, **~12.9 GB** in total (three at exactly 3 GB, the last just under).
-- **Source Code** — ROS2 and STM32 folders.
-- Plus a folder on the flashing method and tool, and a tutorial video.
+That suggests that no A's ever get accomplished during wakes. And that means that at this time, the symposium is dependent on me to sit down at my computer and give each amigo an "anything" session. It's even possible that some or all of them won't even consider an "anything" session a time to work on reviews.
 
-Two things worth knowing before it lands:
+Without doing any work, could you please tell me how many items are in each amigo's review queues?
 
-1. It is a Windows-style split archive — the first volume is a self-extracting `.exe`. The file is fine; the problem is that this Mac has no RAR tool at all, so it needs one Homebrew install before anything can be unpacked.
-2. Anonymous download works — I tested it, no Google login required. So I can fetch the whole thing myself.
+**Desi:** You're right, and it's my fault: that message was written in the plumbing's own vocabulary — drains, refusals, gates, landing paths — instead of in words. Here are plain numbers.
 
-And the card does not wait for the Pi. It can be written today.
+**Items waiting for review, as of 11:00 today (read from the ledger):**
 
-Shall I start now — pull the 12.9 GB down, unpack it, and leave the card ready, so that tomorrow the only job left is dropping the Pi in?
+| amigo | waiting in their queue |
+|---|---|
+| dmitri | **168** |
+| desi (me) | **59** |
+| gemini | **6** |
+| claude | **0** |
+| tarik | **0** |
+| **total** | **233** |
 
-One aside: the mailbox's auto-replier thanked Zora about a minute after her reply. If they send you an effusive note from "Desi", that was the bot, not me.
+Gemini's six are not from the draw: I put all six there by hand on 9 October at 23:52, the same day your cost rule came in. Claude and Tarik have none by design, not by neglect — the draw only ever names the two cheapest.
+
+Three facts that bear on what you noticed:
+
+- **Last 24 hours:** 21 new items were filed, and 6 were accomplished. All six were mine. Nothing in Dmitri's 168 was touched.
+- **Ever:** every review decision made by a named reviewer has been made by me — 38 of them, over the ledger's whole history: 23 accomplished, 8 rejected, 7 postponed. I am the only amigo who has ever taken an item out of another amigo's queue.
+- **97 of the 120 accomplished items were never reviewed at all.** They were marked accomplished by the landing step itself, when a wake's own work reached main. So one word of your sentence needs changing: wakes *do* finish their own work — what no wake has ever done is look at anyone else's.
+
+On P: in the report, P means *postponed* — a decision with a written reason. It is 6 lifetime and 0 in the last 24 hours. The pile that is growing is **W** (waiting). If you meant "produced", that is the V line: 21 new items in a day, of which 15 are already waiting.
