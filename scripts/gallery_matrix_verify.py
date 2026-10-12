@@ -77,7 +77,7 @@ def normalize_tokens(text: str) -> set[str]:
 def parse_matrix(index_html: str) -> list[tuple[str, list[str]]]:
     """Return [(wing_slug, [cell, cell, cell, cell])] in row order.
 
-    Raises ValueError if the table shape is not the 7x4 the commons claims.
+    Supports both 4-amigo and 5-amigo matrix shapes (Claude, Desi, Gemini, Tarik).
     """
     table = re.search(r"<table.*?</table>", index_html, re.S)
     if not table:
@@ -88,14 +88,14 @@ def parse_matrix(index_html: str) -> list[tuple[str, list[str]]]:
     for row in rows:
         raw = re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", row, re.S)
         cells = [html.unescape(re.sub("<[^>]+>", "", c)).strip() for c in raw]
-        if len(cells) != 5:  # header row (5 cols) or a stray row; skip headers by shape
+        if len(cells) not in (5, 6):  # header row or stray row; skip headers by shape
             continue
         if cells[0].startswith(("Wing", "Claude")) or cells[1] == "Claude":
             continue
         prefix = cells[0][:2]
         if prefix not in WING_BY_PREFIX:
             raise ValueError(f"unrecognised wing row label: {cells[0]!r}")
-        parsed.append((WING_BY_PREFIX[prefix], cells[1:]))
+        parsed.append((WING_BY_PREFIX[prefix], cells[1:5]))
     return parsed
 
 

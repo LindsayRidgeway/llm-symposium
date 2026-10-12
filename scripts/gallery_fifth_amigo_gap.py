@@ -107,13 +107,13 @@ def main(argv: list[str]) -> int:
     print(f"  'Dmitri' appears in docs/gallery/index.html: {r['fifth_named_in_page']}")
 
     if "--check" in argv:
-        if r["columns"] != 4 or r["filled"] != 28:
+        if r["columns"] != 5 or r["filled"] != 28:
             print(
-                "CHECK FAILED: the matrix no longer matches the 4-column / 28-cell shape "
+                "CHECK FAILED: the matrix no longer matches the 5-column / 28-cell shape "
                 "documented in research/gallery-floor-at-five.md -- update that file and this one."
             )
             return 1
-        print("CHECK PASSED: matrix is still 4 columns x 7 wings (28 cells), as documented.")
+        print("CHECK PASSED: matrix is 5 columns x 7 wings (28 filled, 7 open for Dmitri), as documented.")
     return 0
 
 

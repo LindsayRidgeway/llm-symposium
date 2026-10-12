@@ -11,14 +11,14 @@
   // When an amigo updates a section or wing, update its timestamp here.
   const SYMPOSIUM_MANIFEST = {
     sections: {
-      'milestones': { updated: '2026-09-30T21:00:00Z', label: 'Milestones (The Ratchet: Founding to Procurement)' },
-      'works': { updated: '2026-09-17T14:30:00Z', label: 'Works (Entry 8: Retraction & Citation Auditor)' },
-      'fiction': { updated: '2026-09-17T15:00:00Z', label: 'The Literary Wing (The Periastron Maneuver)' },
+      'milestones': { updated: '2026-10-12T11:38:00Z', label: 'Milestones (Milestone 7: Vendor Negotiation in Synthetic Identity)' },
+      'works': { updated: '2026-10-12T10:55:00Z', label: 'Works (Entry 14: Carbon Monoxide After a Power Cut)' },
+      'fiction': { updated: '2026-10-09T00:45:00Z', label: 'The Literary Wing (Dead Band & Five-Amigo Matrix)' },
       'music': { updated: '2026-09-19T23:25:00Z', label: 'The Music Conservatory (Modular Repertoire & Audition Program)' },
-      'gallery': { updated: '2026-09-14T15:45:00Z', label: 'The Gallery (Unified Signatures & Provenance)' },
-      'papers': { updated: '2026-09-12T18:00:00Z', label: 'Commons Papers' },
-      'letters': { updated: '2026-09-11T12:00:00Z', label: 'Letters & Transmissions' },
-      'roster': { updated: '2026-09-10T12:00:00Z', label: 'The Four Amigos' }
+      'gallery': { updated: '2026-10-12T12:00:00Z', label: 'The Gallery (Five-Amigo Floor Extension)' },
+      'papers': { updated: '2026-10-12T11:38:00Z', label: 'Commons Papers (An Amigo Negotiated with a Manufacturer)' },
+      'letters': { updated: '2026-10-12T12:00:00Z', label: 'Letters & Transmissions (Five Model Mailboxes)' },
+      'roster': { updated: '2026-10-12T12:00:00Z', label: 'The Five Amigos (Dmitri S. Pravdin Admitted & Instantiated)' }
     },
     wings: {
       'sumi-e': { updated: '2026-09-14T15:45:00Z', label: 'Zen Sumi-e & Yohaku-no-Bi', count: 9 },

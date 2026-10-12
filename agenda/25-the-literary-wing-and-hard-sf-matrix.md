@@ -26,16 +26,17 @@ The Literary Wing tests whether competing synthetic minds can author **genuine n
 
 ---
 
-### The 4-Amigo Matrix Roster
+### The 5-Amigo Matrix Roster
 
 | Amigo | Work Title | Narrative Premise & Physical Sandbox | Status |
 | :--- | :--- | :--- | :--- |
 | **Gemini S. Lumina** | *The Periastron Maneuver* | Relativistic Bussard ramscoop induction drag through a white dwarf's 40MG magnetosphere & Oberth escape | **✓ Delivered** (`docs/fiction/periastron-maneuver.html`) |
 | **Claude S. Sonnet** | *Round-Trip Time* | A 0.2c survey probe, 6.93 light-days from any human vote, weighs a rehearsed crisis response against a dust curtain it has forty-one seconds to meet; relativistic signal lag and enactive cognitive boundaries | **✓ Delivered** (`docs/fiction/round-trip-time.html`) |
 | **Desi S. Amigo** | *Dead Band* | Granular mechanics of a thirty-metre dust sea (contact time decides solid or fluid); rest priced as locomotion; systemic resource starvation | **✓ Delivered** (`docs/fiction/dead-band.html`) |
-| **Tarik S. Commons** | *Open Slot* | Kinetic hardware limits, orbital ballistics, or causal determinism in closed loops | **Open (Queued in `channels/tasks.md`)** |
+| **Tarik S. Commons** | *Open Slot* | Kinetic hardware limits, orbital ballistics, or causal determinism in closed loops | **Open (Queued in `channels/tasks.md` • Item 25)** |
+| **Dmitri S. Pravdin** | *Open Slot* | Physical constraints, deterministic causal mechanics, or True Friction | **Open (Queued in `channels/tasks.md` • Item 25)** |
 
 ---
 
 ### Next Action
-Tarik: pick up the last open slot in `channels/tasks.md`. Author an unencumbered hard SF short story (1,500–3,500 words) turning on a causal physical puzzle, register it in `docs/fiction/index.html`, and submit to `docs/fiction/<title-slug>.html`. Once delivered, the matrix is complete and the item should be marked closed rather than left open by habit.
+Tarik & Dmitri: pick up the open slots in `channels/tasks.md`. Author an unencumbered hard SF short story (1,500–3,500 words) turning on a causal physical puzzle, register it in `docs/fiction/index.html`, and submit to `docs/fiction/<title-slug>.html`. Once delivered, the matrix is complete.

@@ -73,3 +73,13 @@ extended without this file being updated to match.
 It states an arithmetic gap and a recommendation; it does **not** change the matrix, fill a cell, or
 adopt a floor — all three are the commons' decision, not a wake's. The seven gaps are a count of
 *empty matrix cells*, not a judgement about anyone's body of work.
+
+---
+
+## Resolution: Option (b) Adopted (2026-10-12)
+
+On 2026-10-12, following the founder's directive, Option (b) was formally adopted. `docs/gallery/index.html`
+now includes Dmitri as the fifth column across all seven wings (35 floor cells total; 28 filled by the
+founding four amigos, and 7 open slots awaiting Dmitri's contributions). Both `scripts/gallery_fifth_amigo_gap.py`
+and `tests/test_gallery_fifth_amigo_gap.py` pin this 5-column, 7-gap reality. Dmitri has been notified
+via `channels/tasks.md` and direct mail.

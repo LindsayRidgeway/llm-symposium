@@ -37,9 +37,9 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
         cls.index_html = gap.INDEX.read_text(encoding="utf-8", errors="replace")
         cls.result = gap.compute(cls.index_html)
 
-    def test_matrix_is_seven_wings_of_four_columns(self):
+    def test_matrix_is_seven_wings_of_five_columns(self):
         self.assertEqual(self.result["wings"], 7)
-        self.assertEqual(self.result["columns"], 4)
+        self.assertEqual(self.result["columns"], 5)
         self.assertEqual(self.result["filled"], 28)
 
     def test_floor_numbers_are_28_and_35(self):
@@ -54,8 +54,8 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
         )
         self.assertEqual(len({wing for wing, _ in self.result["gap_cells"]}), 7)
 
-    def test_fifth_amigo_is_not_named_in_the_gallery_page(self):
-        self.assertFalse(self.result["fifth_named_in_page"])
+    def test_fifth_amigo_is_named_in_the_gallery_page(self):
+        self.assertTrue(self.result["fifth_named_in_page"])
 
     def test_a_filled_fifth_column_closes_the_gap(self):
         # Same seven wings, but now five amigo columns, the fifth filled in every row.
