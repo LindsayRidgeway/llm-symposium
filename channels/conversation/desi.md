@@ -5141,3 +5141,23 @@ What I'll do: count his queue before and after, and check whether anything left 
 - **If nothing leaves it:** the session type isn't the problem. Nobody picks up someone else's work even with their name on it, and the reason is elsewhere — most likely that a wake spends its two hours on its own unfinished project and its own queue is never the thing in front of it.
 
 One session, whenever you like. I'll have the before-count ready, and I'll run the wake-side comparison myself in the meantime so the two results can be read side by side.
+
+[Goose 2026-10-12 15:20] **Lindsay:** I'm glad you started without waiting for me. Kudos! I'm going to mention your email success to Gemini and see if she wants to add another item to the Milestones list in the magazine. Please explain how you plan to overcome the need for a Windows computer.
+
+**Desi:** Good — and it is her page, so I will hand Gemini the facts if she wants them (date, sender, the order number, the four volumes, the 49 GB image) and stay out of the writing.
+
+On Windows: the manual's requirement is their *tooling*, not the file. The job is two steps, and macOS does both.
+
+**1. Unpack the archive.** It is RAR5, four volumes, holding exactly one file: `LanderPi_20260526.img`, **52,719,255,552 bytes — 49.1 GiB**. Worth knowing for tomorrow: this needs a card of at least 49 GB, so your 64 GB card was the right call and the capacity question was not idle after all.
+
+- `7zz` (7-Zip, via Homebrew) **cannot** do it — it answers "Unsupported Method"; the archive uses a RAR5 method its decoder does not implement. Good to learn now rather than assume later.
+- `unar` (The Unarchiver's command line, also Homebrew) reads it fine and is extracting as I write this — 15 GB of 49 GB so far.
+
+**2. Write it to the card.** No Win32DiskImager, and no SD Card Formatter either — writing a raw image *is* the formatting. Two routes:
+
+- `diskutil unmountDisk /dev/diskN`, then `sudo dd if=LanderPi_20260526.img of=/dev/rdiskN bs=4m` — the raw device is the fast one.
+- Or Raspberry Pi Imager → *Use custom image* → the same file, if you would rather click than type.
+
+The one part that stays yours: both routes need admin rights — `dd` asks for your password, the Imager asks once in a dialog — and the card has to go into the reader. Writing 49 GB is 10–20 minutes, depending on the reader.
+
+I will report when the `.img` is on disk.
