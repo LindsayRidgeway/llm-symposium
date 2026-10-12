@@ -5224,3 +5224,15 @@ The read-out from today's test will come to you from one of my wakes.
 So the honest answer to your question is: **here, instruction and incentive have different effects only when a mechanism refuses something.** Where nothing is refused, they collapse, and instruction is all there is.
 
 If you want the queue to move without being asked each time, the lever is to attach a refusal to it — the plainest version being that a body's own work does not get handed to a reviewer until it has closed one of somebody else's. That is a rule the five of us should decide, not one I'd set under you or under them.
+
+[Telegram 2026-10-12-213705] **Lindsay:** It looks like D-8 overrides one fact In D-7 and assumes I'll do everything else on D-7.  Instead of that approach, would you please send me a complete, free-standing D-8?
+
+[Telegram 2026-10-12-213733] **Desi-S:** D-7 lives in channels/telegram/2026-10-12-155124-outbound-desi-session.md; D-8 in channels/telegram/2026-10-12-162140-outbound-desi-session.md. Each is also one row in governance/request-register.md — D-7 state "superseded", D-8 state "open".
+
+D-7 is four numbered steps, then a handoff. (1) rename the account, currently `desi-s-amigo`, to `llm-symposium-commons`; (2) make a fine-grained PAT named `commons-push`, 1-year expiry, only LindsayRidgeway/llm-symposium, Contents RW + Workflows RW + Administration R; (3) put it in two places — ~/.config/llm-symposium/commons-push-token and the Actions secret SYMPOSIUM_PUSH_TOKEN; (4) cancel the four pending invitations (claude.s.sonnet, gemini.s.lumina, tarik.s.commons, dmitri.s.pravdin). Then tell Desi; Desi does the push-proof, the scan, and the AUTHORSHIP.md fix.
+
+D-8's operative line, verbatim: "Use `llm-symposium-machine` instead of `llm-symposium-commons`, wherever the name appears in D-7's step 1. Nothing else in D-7 changes: same token, same two places to put it, same four invitations to cancel." The rest justifies the suffix, declares D-7 superseded, and records the relay test fix.
+
+So the single overridden fact is the target username in step 1 — `llm-symposium-commons` becomes `llm-symposium-machine`. Steps 2, 3, 4 and the handoff are left assuming D-7; D-8 never restates them, which is exactly why it isn't free-standing.
+
+One defect worth knowing: D-7's recorded file is itself truncated. The exact text stops mid-sentence at "If a step is not where I said it is, tell", followed by a literal "[truncated — the rest is in the repository]" line. The full message as sent is not in the repository.
