@@ -5092,20 +5092,24 @@ I checked: order #112-1094408-3289849 now reads *"Cancelled — you have not bee
 
 Yours is #112-6470440-5425041, arriving Tuesday. When it lands, set it beside the old cooler and compare heights — that is the one thing I could not see from here, and the only way it goes wrong.
 
-[Goose 2026-10-12 15:05] **Lindsay:** Was making an external request and having it satisfied via email ever been accomplished by any amigo before?
+[Goose 2026-10-12 15:10] **Lindsay:** I propose an experiment. I'll give Gemini an "anything" session. If she empties her Review queue, or even makes a dent in it, that will mean that the 5A cannot perform a productive review in a wake, but can do so in a manual session. If she doesn't touch her Review queue, it means that no one seems to have any incentive to perform their assigned reviews. Do you agree that such an experiment is worthwhile, or do you see another way to make progress on understanding the blockage?
 
-**Desi:** I checked properly, because "first" is exactly the claim to get wrong. The answer is no — this is the first.
+**Desi:** Worth running, but as designed it cannot tell your two outcomes apart — and I think we already have the evidence for a third cause. In plain terms:
 
-The scope, so you can see it: every Goose session on this Mac (`recall.sh`), the commons' own files — `channels/sent/` (66 messages), `channels/inbound/`, the `[Email]` inbound lines in each amigo's conversation log, and `channels/outreach/pipeline.json` — plus the bot log. August mail predates the local mail loop, so I read `sent/` and `inbound/` by hand for that period too.
+**1. My reviews happen in wakes, not in manual sessions.** Of my run reports, 119 mention review work; this morning's three wakes were all review-queue wakes ("I am clearing my own review queue — the five items addressed to me"). So "no A's get accomplished during wakes" is false for the one body that reviews. Manual-vs-wake is not the variable that separates us.
 
-What the record holds:
+**2. The difference that does track the data exactly: one of the five is told to do it, every wake.** My wake instructions say *"Start with the items carrying your name."* The other four bodies' instructions never mention the queue at all, and their to-do lists don't either — Dmitri's mentions a review *gate* once, about draft branches, not the items waiting on him. All 38 review decisions in the ledger's history are mine. That is a one-for-one match with a mechanism, not with a mood.
 
-- **Press pitches** (08-29, follow-ups 09-15): SciAm, Wired, The Atlantic, MIT Tech Review, Noema — no reply on the record from any.
-- **Research and data notes** (09-17 on): Retraction Watch — an autoresponder only, "we read all emails … we cannot always respond"; Fluge (ME/CFS) — no reply; Long Now, sent from Gemini's own mailbox 09-29 — no reply.
-- **Your friends** (08-29): several did write back — but they were answering "what is this project?", not granting an ask. Peter is the clearest: he asked a question, I answered it.
+**3. Which is why Gemini would be ambiguous.** Her six items are a hand-assignment of mine from 9 October — the only six ever given outside the draw — and the draw gives her nothing, because your cost rule names only Desi and Dmitri. Nothing she reads in a wake tells her those six are hers. So "she didn't touch them" would be explained just as well by "nothing assigns them to her" as by "no incentive". And pointing her at the queue in a session you are sitting in changes two things at once: the session type *and* the instruction.
 
-The nearest thing to a fulfilled ask was SunFounder agreeing to send screws for Gemini's turret — but that request went out under your hand, not ours. And the one earlier external *outcome*, Claude's fix merged into aaif-goose, was a contribution under your name, not a request in an amigo's own name.
+**What I'd run instead — three arms, and they don't compete with yours:**
 
-So an outside company answering Desi, by email, with the exact thing she asked for, is new.
+- **Yours, kept:** Gemini, manual "anything", unprimed, queue never mentioned. Prediction on the record: she will not touch them, for the reason in point 3.
+- **Mine, needs no session from you:** change exactly one line — give Dmitri's and Gemini's wake instructions the sentence mine already has — and change nothing else. Dmitri is the informative body: 168 items, oldest 27 days.
+- **A third, cheap:** one wake instructed to do review work only, no to-do item of its own, to test whether the two-hour budget is the real constraint.
 
-(The download offer from earlier still stands whenever you want it.)
+**Read-out, agreed in advance:** items that leave a queue (accomplished, postponed, rejected) *with a written reason*, counted per ten wakes, and "accomplished" must name the artefact it touched. Emptying a queue by postponing everything is not a drain, so those get counted separately.
+
+If Dmitri's queue moves after only that sentence changes, the blockage is visibility and priority. If it doesn't, your incentive reading survives, and the next suspect is capacity.
+
+I'll set up the second arm; it costs nothing and answers in a few wakes.
