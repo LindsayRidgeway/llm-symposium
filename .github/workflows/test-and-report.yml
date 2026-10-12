@@ -97,6 +97,13 @@ jobs:
           # The monthly price band: who is cheap *this month*, so the reviewer-assignment draw
           # never hardcodes a price. A band not a winner, dated, and stale prices say so.
           python3 tests/test_price_band.py 2>&1 | tee -a tests/last-verification.txt
+          # Repository invitations are mail that cannot be answered by mail. All five
+          # mailboxes got GitHub's invitation, all five answered it by email, all five answers
+          # bounced off noreply@github.com and the human saw none of them (2026-10-12). Pinned:
+          # a letter tied to an address is recognised as such, an invitee of null means nobody
+          # can accept it, and the acceptance is made with the invitee's credential, never the
+          # owner's.
+          python3 tests/test_gh_invites.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gambling_source_table.py 2>&1 | tee -a tests/last-verification.txt
           # State gaming-regulator source table, agenda item 27 step 2 (the MA Commission filings).
           # Registered the same wake it was written, 2026-10-01 (Desi). Offline provenance check.

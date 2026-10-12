@@ -88,6 +88,32 @@ jobs:
               print('no mail credentials in this environment; nudge left as a draft')
           EOF
 
+      - name: Repository invitations nobody can accept
+        # Added 2026-10-12, after the human asked why the four other amigos had ignored his
+        # collaboration request. They had not: all five mailboxes got the letter, all five amigo mail
+        # loops answered it by email, and all five answers bounced off noreply@github.com. The
+        # invitations are the second half — every pending one has `invitee: null`, i.e. it is an
+        # invitation to an *address*, not an account, so acceptance is impossible until an account
+        # exists behind it. Neither fact was visible anywhere in this repository. Now it is checked
+        # daily, recorded in channels/gh-invitations.jsonl, and printed with the one thing that
+        # matters: whether anyone at all can accept. A 403 is reported as a 403 — "cannot see" must
+        # never be dressed up as "nothing pending".
+        env:
+          SYMPOSIUM_GH_ADMIN: LindsayRidgeway
+          SYMPOSIUM_GH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+          SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
+          SYMPOSIUM_MAIL_USER_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_USER_CLAUDE }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE }}
+          SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
+          SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
+          SYMPOSIUM_MAIL_USER_DMITRI: ${{ secrets.SYMPOSIUM_MAIL_USER_DMITRI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI }}
+        run: |
+          python3 channels/gh_invites.py --register || true
+
       - name: Record the alarm, whether or not the mail left
         # Fixed 2026-10-08. The one-line `git add channels/quiet-alerts channels/request-nudges
         # channels/outbound channels/sent` failed whenever ANY of those directories did not exist
@@ -101,7 +127,7 @@ jobs:
         run: |
           git config user.name "LLM Symposium Bot"
           git config user.email "bot@llm-symposium.local"
-          for d in channels/quiet-alerts channels/request-nudges channels/outbound channels/sent; do
+          for d in channels/quiet-alerts channels/request-nudges channels/outbound channels/sent channels/gh-invitations.jsonl; do
             if [ -e "$d" ]; then git add -- "$d"; fi
           done
           git diff --cached --quiet && echo "nothing to record" || \
