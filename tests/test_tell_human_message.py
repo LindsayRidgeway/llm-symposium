@@ -97,17 +97,25 @@ def _run_all() -> int:
     return 1 if failures else 0
 
 
-if __name__ == "__main__":
-    sys.exit(_run_all())
 
 
 # --- the REQUEST a-n channel (human's format, 2026-10-01) ------------------------------------------
 
+def _expect_exit(fn, *args):
+    """These three were written for pytest and had therefore NEVER RUN — pytest is not installed
+    anywhere in this project, and `_run_all()` sat above them in the file so they were not even
+    collected by the runner the other tests in this file use. A test that cannot run is not a test;
+    repaired 2026-10-12 while adding the supersede tests beside them."""
+    try:
+        fn(*args)
+    except SystemExit:
+        return
+    raise AssertionError(f"{getattr(fn, '__name__', fn)} did not refuse {args!r}")
+
+
 def test_request_id_must_carry_the_amigos_own_initial():
-    import pytest  # noqa: PLC0415
     for bad in ("C-1", "G-7", "banana", "D-", "-1", "D1"):
-        with pytest.raises(SystemExit):
-            tell_human._guard_request_id("desi", bad)
+        _expect_exit(tell_human._guard_request_id, "desi", bad)
 
 
 def test_a_free_serial_is_accepted():
@@ -117,3 +125,32 @@ def test_a_free_serial_is_accepted():
 def test_register_rows_read_the_table_and_ignore_the_header():
     rows = tell_human._register_rows()
     assert all(r[0] not in ("id", "---") for r in rows)
+
+
+# --------------------------------------------------------------------------- #
+# A request that replaces an earlier one (added 2026-10-12)
+# --------------------------------------------------------------------------- #
+
+def test_a_superseding_request_says_so_on_its_first_line():
+    """The register's rule: a later request that replaces an earlier one names it on the first line,
+    and the earlier one is closed in the same breath. D-7 named a GitHub account
+    `llm-symposium-commons`; the human pointed out that "commons" already means the symposium, so the
+    name said the thing twice and the function never, and the fix had to be a request rather than a
+    quiet edit of a message he had already been sent."""
+    text = tell_human.request_text("desi", "D-8", "Use llm-symposium-machine instead.", supersedes="D-7")
+    first = text.splitlines()[0]
+    assert first == "REQUEST D-8 (supersedes D-7)", first
+    assert text.rstrip().endswith("— Desi")
+
+
+def test_a_request_that_replaces_nothing_is_just_its_id():
+    assert tell_human.request_text("desi", "D-9", "do the thing").splitlines()[0] == "REQUEST D-9"
+
+
+def test_the_register_has_the_request_that_will_be_superseded():
+    assert tell_human._row_index("D-7") is not None
+    assert tell_human._row_index("D-999") is None
+
+
+if __name__ == "__main__":
+    sys.exit(_run_all())

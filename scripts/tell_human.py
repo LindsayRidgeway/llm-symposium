@@ -200,6 +200,20 @@ def _guard_request_id(amigo: str, rid: str) -> str:
     return rid
 
 
+def request_text(amigo: str, rid: str, body: str, supersedes: str = "") -> str:
+    """The single message a request is: first line exactly `REQUEST <id>[ (supersedes <old>)]`.
+
+    The supersede form is the register's own rule (governance/request-register.md): a later request
+    that replaces an earlier one says so on its first line, and the earlier one is closed in the same
+    breath. Added 2026-10-12, the first time it was needed — D-7 asked the human to rename an account
+    to `llm-symposium-commons`, he pointed out that "commons" is a synonym for the symposium and so
+    the name said the thing twice and the function never, and the correction had to be a request
+    rather than an edit of a message he had already received.
+    """
+    head = f"REQUEST {rid}" + (f" (supersedes {supersedes})" if supersedes else "")
+    return f"{head}\n\n{body.strip()}\n\n— {amigo.capitalize()}"
+
+
 def _append_register(rid: str, amigo: str, gist: str, telegram_path: Path) -> None:
     if not REGISTER.exists():
         raise SystemExit(f"no register at {REGISTER.relative_to(REPO)}; a request must be recorded to exist")
@@ -233,6 +247,10 @@ def main() -> int:
     ap.add_argument("--force", action="store_true",
                     help="send even a bare work report (the 2026-10-06 hold is otherwise on)")
     ap.add_argument("--request", metavar="ID", help="open REQUEST <ID> to the human and register it")
+    ap.add_argument("--supersedes", metavar="ID",
+                    help="with --request: the request this one replaces. It is named on the first "
+                         "line and closed by the same send, so the table never shows two ids asking "
+                         "for the same thing.")
     ap.add_argument("--close", metavar="ID", help="close REQUEST <ID>: sends 'REQUEST <ID> DONE'")
     a = ap.parse_args()
 
@@ -251,7 +269,13 @@ def main() -> int:
         rid = _guard_request_id(a.amigo, a.request)
         if not REGISTER.exists():  # checked before sending, so a message is never sent unregistered
             raise SystemExit(f"no register at {REGISTER.relative_to(REPO)}; a request must be recorded to exist")
-        text = f"REQUEST {rid}\n\n{text}\n\n— {a.amigo.capitalize()}"
+        old = a.supersedes.strip().upper() if a.supersedes else ""
+        if old:
+            if old == rid:
+                raise SystemExit(f"{rid} cannot supersede itself")
+            if _row_index(old) is None:
+                raise SystemExit(f"nothing to supersede: {old} is not in the register")
+        text = request_text(a.amigo, rid, text, supersedes=old)
     elif a.close:
         rid = a.close.strip().upper()
         if not REQUEST_RE.match(rid):
@@ -281,6 +305,9 @@ def main() -> int:
     p = record(a.amigo, text)
     if ok and a.request:
         _append_register(rid, a.amigo, text.split("\n\n", 1)[-1].splitlines()[0], p)
+        if a.supersedes:  # closed in the same breath, as the register's rule says
+            _close_register(a.supersedes.strip().upper())
+            print(f"closed {a.supersedes.strip().upper()} — superseded by {rid}")
     if ok and a.close:
         _close_register(rid)
     print(f"{'sent' if ok else 'FAILED'} as {a.amigo}; recorded {p.relative_to(REPO)}")
