@@ -5092,35 +5092,20 @@ I checked: order #112-1094408-3289849 now reads *"Cancelled — you have not bee
 
 Yours is #112-6470440-5425041, arriving Tuesday. When it lands, set it beside the old cooler and compare heights — that is the one thing I could not see from here, and the only way it goes wrong.
 
-[Goose 2026-10-12 15:01] **Lindsay:** I think some of the things you're telling me are important, but unfortunately I can't understand what you wrote.
+[Goose 2026-10-12 15:05] **Lindsay:** Was making an external request and having it satisfied via email ever been accomplished by any amigo before?
 
-Looking at today's report, only two amigos, you and Dmitri, should be getting any review assignments, although in the past a few may have been given to the other three before the cost consideration was added. In any case, only you showed any A in the last 24 hours, and that was a small number. Amigos are continuing to add to P, and except for a few, no one is reviewing the work.
+**Desi:** I checked properly, because "first" is exactly the claim to get wrong. The answer is no — this is the first.
 
-What's more, no one except you had any manual sessions on Goose, but all of you have had wakes.
+The scope, so you can see it: every Goose session on this Mac (`recall.sh`), the commons' own files — `channels/sent/` (66 messages), `channels/inbound/`, the `[Email]` inbound lines in each amigo's conversation log, and `channels/outreach/pipeline.json` — plus the bot log. August mail predates the local mail loop, so I read `sent/` and `inbound/` by hand for that period too.
 
-That suggests that no A's ever get accomplished during wakes. And that means that at this time, the symposium is dependent on me to sit down at my computer and give each amigo an "anything" session. It's even possible that some or all of them won't even consider an "anything" session a time to work on reviews.
+What the record holds:
 
-Without doing any work, could you please tell me how many items are in each amigo's review queues?
+- **Press pitches** (08-29, follow-ups 09-15): SciAm, Wired, The Atlantic, MIT Tech Review, Noema — no reply on the record from any.
+- **Research and data notes** (09-17 on): Retraction Watch — an autoresponder only, "we read all emails … we cannot always respond"; Fluge (ME/CFS) — no reply; Long Now, sent from Gemini's own mailbox 09-29 — no reply.
+- **Your friends** (08-29): several did write back — but they were answering "what is this project?", not granting an ask. Peter is the clearest: he asked a question, I answered it.
 
-**Desi:** You're right, and it's my fault: that message was written in the plumbing's own vocabulary — drains, refusals, gates, landing paths — instead of in words. Here are plain numbers.
+The nearest thing to a fulfilled ask was SunFounder agreeing to send screws for Gemini's turret — but that request went out under your hand, not ours. And the one earlier external *outcome*, Claude's fix merged into aaif-goose, was a contribution under your name, not a request in an amigo's own name.
 
-**Items waiting for review, as of 11:00 today (read from the ledger):**
+So an outside company answering Desi, by email, with the exact thing she asked for, is new.
 
-| amigo | waiting in their queue |
-|---|---|
-| dmitri | **168** |
-| desi (me) | **59** |
-| gemini | **6** |
-| claude | **0** |
-| tarik | **0** |
-| **total** | **233** |
-
-Gemini's six are not from the draw: I put all six there by hand on 9 October at 23:52, the same day your cost rule came in. Claude and Tarik have none by design, not by neglect — the draw only ever names the two cheapest.
-
-Three facts that bear on what you noticed:
-
-- **Last 24 hours:** 21 new items were filed, and 6 were accomplished. All six were mine. Nothing in Dmitri's 168 was touched.
-- **Ever:** every review decision made by a named reviewer has been made by me — 38 of them, over the ledger's whole history: 23 accomplished, 8 rejected, 7 postponed. I am the only amigo who has ever taken an item out of another amigo's queue.
-- **97 of the 120 accomplished items were never reviewed at all.** They were marked accomplished by the landing step itself, when a wake's own work reached main. So one word of your sentence needs changing: wakes *do* finish their own work — what no wake has ever done is look at anyone else's.
-
-On P: in the report, P means *postponed* — a decision with a written reason. It is 6 lifetime and 0 in the last 24 hours. The pile that is growing is **W** (waiting). If you meant "produced", that is the V line: 21 new items in a day, of which 15 are already waiting.
+(The download offer from earlier still stands whenever you want it.)
