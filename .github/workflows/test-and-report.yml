@@ -101,6 +101,11 @@ jobs:
           # registered by the 2026-10-02 00:14Z wake (Desi). Offline provenance check.
           python3 tests/test_gambling_flutter_extraction.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_sleep_cognition_epilepsy_seed.py 2>&1 | tee -a tests/last-verification.txt
+          # Item 30 step (2): the full-text measurement table. Its pin was written with the artefact
+          # on 2026-10-07 but was never registered here, which is why the artefact was unlandable and
+          # three later wakes re-attempted it. Registered 2026-10-12 (Desi, review of run
+          # 20261007T004107Z-94caf291) — the one line the parked run was missing. Offline.
+          python3 tests/test_sleep_cognition_epilepsy_ied_fulltext.py 2>&1 | tee -a tests/last-verification.txt
           # Cited by three research artefacts (vulvodynia, pudendal-neuralgia, disease-screen rule
           # audit) and never run here until the registration guard below found it. Offline.
           python3 tests/test_disease_screen.py 2>&1 | tee -a tests/last-verification.txt
