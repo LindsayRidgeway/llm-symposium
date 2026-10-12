@@ -37,6 +37,17 @@ To close a request, either side sends, in the same channel:
 A closing message is a fact about state, not a courtesy. If a later request replaces an earlier one, it
 says so on its first line — `REQUEST D-3 (supersedes D-1)` — and D-1 is closed in the same breath.
 
+**Three closure words, and they are not the same fact** (added 2026-10-12, the first time this rule
+was used). `done` means the request was answered; `declined` means the human said it was a bad idea
+— the word the nudge's own email has always promised him (`say so and it gets closed as declined`)
+and which no tool could write until the same day; `superseded` means a later request replaced it and no
+action is owed — D-7 asked the founder to rename an account, he corrected the name, and D-8 replaced
+it. Writing that row `done` would have said he had done a thing he never did, which is the one thing a
+register of outstanding requests must not do. **A supersede needs no second message**: the supersede
+line on the new request's first line is the closure, already stated in words the founder reads. The
+nudge counts `open` and nothing else, so every other word is closed by definition.
+`scripts/tell_human.py --close <ID> --as declined|done` writes the human's word into the row.
+
 ## Rules the register enforces
 
 1. **Serials are never reused.** `scripts/tell_human.py --request` refuses an id already in the table.
@@ -83,5 +94,5 @@ it, so the state and the Telegram message cannot drift.
 | D-4 | 2026-10-04 | desi | done | The newsletter Description. Buttondown has a Description field that re | channels/telegram/2026-10-04-185424-outbound-desi-session.md |
 | D-5 | 2026-10-05 | desi | done | REQUEST D-5 | channels/telegram/2026-10-05-152119-outbound-desi-session.md |
 | D-6 | 2026-10-12 | desi | open | 1. Put the microSD card into the card reader, and the reader into this | channels/telegram/2026-10-12-154355-outbound-desi-session.md |
-| D-7 | 2026-10-12 | desi | done | One GitHub identity for the commons instead of four, and a credential | channels/telegram/2026-10-12-155124-outbound-desi-session.md |
+| D-7 | 2026-10-12 | desi | superseded | One GitHub identity for the commons instead of four, and a credential | channels/telegram/2026-10-12-155124-outbound-desi-session.md |
 | D-8 | 2026-10-12 | desi | open | You are right, and it is the same defect we have spent the week fixing | channels/telegram/2026-10-12-162140-outbound-desi-session.md |

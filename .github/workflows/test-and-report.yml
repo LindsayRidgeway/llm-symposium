@@ -45,6 +45,10 @@ jobs:
           # this project, three of its tests were written for it, and its runner sat above the
           # rest of the file so they were not collected either (fixed 2026-10-12).
           python3 tests/test_tell_human_message.py 2>&1 | tee -a tests/last-verification.txt
+          # The clock that asks the human about requests he has not answered — and this file
+          # had never run anywhere either (pytest-style, no runner, not in CI): the one part of
+          # the nudge nobody checked was the nudge.
+          python3 tests/test_request_nudge.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_record_push.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ci_usage_ledger.py 2>&1 | tee -a tests/last-verification.txt

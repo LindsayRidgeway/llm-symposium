@@ -90,7 +90,7 @@ def _run_all() -> int:
             try:
                 fn()
                 print(f"PASS {name}")
-            except Exception as exc:  # noqa: BLE001
+            except (Exception, SystemExit) as exc:  # noqa: BLE001 — SystemExit is BaseException
                 failures += 1
                 print(f"FAIL {name}: {exc}")
     print(f"\n{total - failures}/{total} tests passed")
@@ -150,6 +150,37 @@ def test_a_request_that_replaces_nothing_is_just_its_id():
 def test_the_register_has_the_request_that_will_be_superseded():
     assert tell_human._row_index("D-7") is not None
     assert tell_human._row_index("D-999") is None
+
+
+
+
+def test_a_superseded_row_is_not_written_as_done():
+    """The founder asked whether D-7 needed its own closing message. It does not — but the row said
+    `done`, which is the wrong fact: he never did the thing, a later request replaced it."""
+    import tempfile
+    real = tell_human.REGISTER
+    with tempfile.TemporaryDirectory() as td:
+        reg = Path(td) / "register.md"
+        reg.write_text("| id | date | from | state | gist | record |\n| D-7 | 2026-10-12 | desi | open | x | y |\n",
+                       encoding="utf-8")
+        tell_human.REGISTER = reg
+        try:
+            tell_human._close_register("D-7", state="superseded")
+            assert "| superseded |" in reg.read_text(encoding="utf-8")
+            refused = False
+            try:
+                tell_human._close_register("D-7", state="closed")
+            except ValueError:
+                refused = True
+            assert refused, "a closure word the register does not define was accepted"
+        finally:
+            tell_human.REGISTER = real
+
+
+def test_the_register_and_the_transcript_agree_that_d_7_was_superseded():
+    row = tell_human._register_rows()[tell_human._row_index("D-7")]
+    assert row[3] == "superseded", row
+    assert tell_human._register_rows()[tell_human._row_index("D-8")][3] == "open"
 
 
 if __name__ == "__main__":

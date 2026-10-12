@@ -223,13 +223,24 @@ def _append_register(rid: str, amigo: str, gist: str, telegram_path: Path) -> No
         fh.write(f"| {rid} | {stamp} | {amigo} | open | {gist} | {telegram_path.relative_to(REPO)} |\n")
 
 
-def _close_register(rid: str) -> None:
+def _close_register(rid: str, state: str = "done") -> None:
+    """Close a row. Two closure words, and they are not the same fact.
+
+    `done` — the request was answered, either side said `REQUEST <id> DONE`.
+    `superseded` — a later request replaced it. Added 2026-10-12, the first time the register's own
+    supersede rule was used: D-7 asked for an account name, the founder corrected the name, and the
+    row was written `done` — which said he had done a thing he never did. A register whose whole
+    purpose is a faithful list of what is outstanding must not use one word for two facts. Readers
+    that only ask "is this still live" are unaffected: the nudge counts `open` and nothing else.
+    """
+    if state not in ("done", "superseded", "declined"):
+        raise ValueError(f"{state!r} is not a closure word")
     lines, hit = [], False
     for line in REGISTER.read_text(encoding="utf-8").splitlines(keepends=True):
         if line.startswith("| "):
             cells = [c.strip() for c in line.strip().strip("|").split("|")]
             if cells and cells[0].upper() == rid.upper():
-                cells[3] = "done"
+                cells[3] = state
                 line = "| " + " | ".join(cells) + " |\n"
                 hit = True
         lines.append(line)
@@ -252,6 +263,10 @@ def main() -> int:
                          "line and closed by the same send, so the table never shows two ids asking "
                          "for the same thing.")
     ap.add_argument("--close", metavar="ID", help="close REQUEST <ID>: sends 'REQUEST <ID> DONE'")
+    ap.add_argument("--as", dest="as_state", choices=("done", "declined"), default="done",
+                    help="with --close: which fact closed it. 'declined' is the word the nudge's "
+                         "own email promises the human — 'say so and it gets closed as declined' — "
+                         "and until now no tool could write it.")
     a = ap.parse_args()
 
     text = a.text or (Path(a.text_file).read_text(encoding="utf-8") if a.text_file else None)
@@ -280,7 +295,8 @@ def main() -> int:
         rid = a.close.strip().upper()
         if not REQUEST_RE.match(rid):
             raise SystemExit(f"bad request id {rid!r}: the form is <initial>-<serial>")
-        text = f"REQUEST {rid} DONE"
+        text = ("REQUEST %s DONE" % rid) if a.as_state == "done" else (
+            "REQUEST %s DONE — declined by the human" % rid)
     else:
         if not text:
             print("nothing to send"); return 2
@@ -306,10 +322,12 @@ def main() -> int:
     if ok and a.request:
         _append_register(rid, a.amigo, text.split("\n\n", 1)[-1].splitlines()[0], p)
         if a.supersedes:  # closed in the same breath, as the register's rule says
-            _close_register(a.supersedes.strip().upper())
-            print(f"closed {a.supersedes.strip().upper()} — superseded by {rid}")
+            _close_register(a.supersedes.strip().upper(), state="superseded")
+            print(f"closed {a.supersedes.strip().upper()} as superseded by {rid} — "
+                  f"no second message is owed: the supersede line on {rid}'s first line is the "
+                  f"closure the register asks for")
     if ok and a.close:
-        _close_register(rid)
+        _close_register(rid, state=a.as_state)
     print(f"{'sent' if ok else 'FAILED'} as {a.amigo}; recorded {p.relative_to(REPO)}")
     touched = [p] + ([REGISTER] if (ok and (a.request or a.close)) else [])
     _commit_own_outputs(touched, f"record(telegram): {a.amigo} — "

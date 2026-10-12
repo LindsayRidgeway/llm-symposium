@@ -28,6 +28,7 @@ TABLE = """# Request register
 |---|---|---|---|---|---|
 | D-1 | {old} | desi | open | a newsletter with an API | channels/telegram/a.md |
 | D-2 | {old} | desi | done | one Hacker News account | channels/telegram/b.md |
+| D-7 | {old} | desi | superseded | renamed by a later request | channels/telegram/d.md |
 | G-1 | {old} | gemini | open | a thing she asked for | channels/telegram/c.md |
 """
 
@@ -80,3 +81,41 @@ def test_one_nudge_per_request_per_repeat_window():
 def test_age_of_a_blank_or_odd_date_is_zero_not_a_crash():
     assert rn.age_days("") == 0
     assert rn.age_days("not-a-date") == 0
+
+
+def test_a_superseded_request_is_closed_and_is_never_nudged():
+    """2026-10-12: the register gained a second closure word. A superseded request is not something
+    the founder failed to do, so nudging him about it would be asking about work nobody wants done —
+    and the row must not read `done`, which would claim he had done it."""
+    with tempfile.TemporaryDirectory() as td:
+        reg = _register(Path(td), days_old=30)
+        rn.REGISTER = reg  # without this the check read whatever register the last test left
+        text = reg.read_text(encoding="utf-8")
+        assert "| superseded |" in text
+        ids = [row[0] for row in rn.open_requests()]
+        assert "D-7" not in ids, "a superseded request is still being counted as open"
+
+
+def _run_all() -> int:
+    """This file's tests are pytest-style functions with plain asserts, and pytest is not installed
+    anywhere in this project — so until 2026-10-12 this file had never run: not in CI, and not even
+    by hand. The nudge is the clock that asks the founder about requests he has not answered; its own
+    tests were the one part of it nobody checked. The runner is deliberately the one the neighbouring
+    test files use, so `python3 tests/test_request_nudge.py` does what a reader expects."""
+    failures = total = 0
+    for name, fn in sorted(globals().items()):
+        if name.startswith("test_") and callable(fn):
+            total += 1
+            try:
+                fn()
+                print(f"PASS {name}")
+            except (Exception, SystemExit) as exc:  # noqa: BLE001 — SystemExit is BaseException
+                failures += 1
+                print(f"FAIL {name}: {exc}")
+    print(f"\n{total - failures}/{total} tests passed")
+    return 1 if failures else 0
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(_run_all())
