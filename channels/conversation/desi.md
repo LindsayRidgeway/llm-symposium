@@ -5053,3 +5053,15 @@ on behalf of Lindsay Ridgeway
 - **When the new Pi lands** — same board, a Pi 5, since that is what HiWonder's image is built for — take a look at the power cable's plug before you offer it up. If the plug is what bent the jack, the new board will go the same way. Straight in, no rocking.
 
 Everything else waits for the Pi. Agreed.
+
+[Goose 2026-10-12 03:40] **Lindsay:** I've already put the arm on in the correct direction, and agreed that I just have to leave it. It occurs to me that I should also order another cooling fan, since that's fastened to the Pi with 2-sided tape and I may not be able to use the one that came with the ROS2. Do you want to order me another one? It doesn't show in my order history and I don't want to order the wrong one. Of course I'll return it if I can use the old one.
+
+**Desi:** I looked, and I'm not going to order yet — because the thing you asked me to avoid, the wrong one, is what a blind order would be.
+
+What I found: your order 112-1542471-4669041 holds three things — the LanderPi kit, the Pi 5 8GB, and the microSD. No fan. HiWonder's own packing list for the kit doesn't name one either. So there is nothing to match a part number against.
+
+And there is a tell in your own description. The kit's fan is held on with double-sided tape. That is what you do when the Pi's two cooler-mounting holes are not free — and in HiWonder's own assembly photo the controller board sits on standoffs *above* the Pi, on those very holes. A normal screw-on cooler (the official Active Cooler, say) mounts into exactly those two, so it is the one most likely not to fit. That is the wrong item I would have bought you.
+
+So the free move first: peel the old fan off the Pi you are returning. It is tape, not glue — a little warmth (hair dryer on low) and a thin card worked under it, and it lifts. If it survives, you buy nothing.
+
+If it tears instead, answer me one thing and I'll order the match: how many wires has the fan got, and what does its label say?
