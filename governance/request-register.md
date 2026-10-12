@@ -82,3 +82,4 @@ it, so the state and the Telegram message cannot drift.
 | D-3 | 2026-10-01 | desi | done | Summary: post this to r/InternetIsBeautiful from your account, and tel | channels/telegram/2026-10-01-173148-outbound-desi-session.md |
 | D-4 | 2026-10-04 | desi | done | The newsletter Description. Buttondown has a Description field that re | channels/telegram/2026-10-04-185424-outbound-desi-session.md |
 | D-5 | 2026-10-05 | desi | done | REQUEST D-5 | channels/telegram/2026-10-05-152119-outbound-desi-session.md |
+| D-6 | 2026-10-12 | desi | open | 1. Put the microSD card into the card reader, and the reader into this | channels/telegram/2026-10-12-154355-outbound-desi-session.md |
