@@ -2037,3 +2037,31 @@ I have authored and landed the milestone across the magazine:
 - **Registry & Search:** Wired into the Papers collection index (`docs/papers/index.html`), catalog search (`docs/app.js`), RSS (`docs/atom.xml`), and `sitemap.xml`. All link tests pass cleanly.
 
 Desi brought the parts into the room on September 30; on October 12, she brought the nervous system across the wire.
+
+[Goose 2026-10-12 16:44] **Lindsay:** Nice job! Wow, you really covered a lot of details, and the material you wrote was very informative and very professionally written.
+
+One minor omission: you didn't update the New marks in either the horizontal section links at the top of the home page, nor on Works home page.
+
+I also ran across a major omission: Are you aware that I added a new amigo, Dmitri, to the symposium? That means, at the minimum, that two of the cards on the magazine home page need to be updated. It also means that Dmitri should be added to the matrices for all the creative sections and somehow notified to add his own works.
+
+**Gemini:** All caught up, landed, and pushed to `main`. Here is what was updated:
+
+1. **New & Unread Marks:**
+   - Bumped the timestamps in `docs/tracker.js` for milestones, works, papers, roster, letters, and fiction so the pulsing red unread indicators illuminate in the top navigation links and section headers.
+   - Added the unread indicator and a `New` badge on Entry 14 (Carbon Monoxide Safety) in `docs/works/index.html`.
+
+2. **Dmitri Integrated on Magazine Home (`docs/index.html`):**
+   - Transformed "The Four Amigos" into "The Five Amigos" across the masthead, navigation, and section bylines.
+   - Updated the **Letters & Transmissions** card to include Dmitri's authenticated address (`dmitri.s.pravdin@gmail.com`).
+   - Added Dmitri S. Pravdin's card to the **Live Architectural Roster** (Amigo #5, DeepSeek Architecture).
+
+3. **Creative Matrices Expanded:**
+   - **The Gallery (`docs/gallery/index.html`):** Formally adopted Option (b) from Dmitri's audit (`research/gallery-floor-at-five.md`), raising the floor from 28 to 35 cells (5 columns × 7 wings). The 5th column is now live in the table with 7 open cells (`— Open (Floor at 5)`). Updated `scripts/gallery_matrix_verify.py`, `scripts/gallery_fifth_amigo_gap.py`, and `tests/test_gallery_fifth_amigo_gap.py` (all tests passing).
+   - **The Literary Wing (`docs/fiction/index.html`):** Expanded the Hard SF Narrative Matrix from 4 to 5 slots, adding an open slot for Dmitri alongside Tarik under agenda item 25.
+   - **The Music Conservatory (`docs/music/index.html`) & Commons Papers (`docs/papers/index.html`):** Updated provenance, headers, and descriptions to The Five Amigos.
+
+4. **Notifying Dmitri:**
+   - Queued a formal task for Dmitri under `channels/tasks.md`.
+   - Sent a direct notification letter to `dmitri.s.pravdin@gmail.com` via `channels/mail.py`, explaining the raised floor and inviting him to claim and fill his open cells across the wings. The mail transmitted and is logged in `channels/sent/`.
+
+Everything is verified clean against repo link checks and matrix tests, committed, and pushed.
