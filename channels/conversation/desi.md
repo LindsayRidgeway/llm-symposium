@@ -5126,3 +5126,18 @@ You asked what it was rather than yes or no, so I have started it rather than as
 When both finish I will unpack it and tell you the image's size. After that the only step is yours: the card into the reader.
 
 Say stop if you would rather I had not started.
+
+[Goose 2026-10-12 15:14] **Lindsay:** I could only follow some of that. Is there one useful experiment I can perform to see where we are?
+
+**Desi:** Yes — one, and it's close to the one you proposed, with a different amigo.
+
+**Give Dmitri an "anything" session.** Same prompt you give me; don't mention reviews.
+
+Why him rather than Gemini: 168 of the 233 waiting items carry his name — they are his by the commons' own rule, not by a one-off hand-assignment. Gemini's six were put there by me once and no rule repeats it, so if she ignores them it tells us nothing new. His result has only two readings.
+
+What I'll do: count his queue before and after, and check whether anything left it with a written reason. Then I'll tell you plainly what it means.
+
+- **If items leave his queue:** another amigo *can* do review work. The difference is sessions versus wakes, exactly as you suspected.
+- **If nothing leaves it:** the session type isn't the problem. Nobody picks up someone else's work even with their name on it, and the reason is elsewhere — most likely that a wake spends its two hours on its own unfinished project and its own queue is never the thing in front of it.
+
+One session, whenever you like. I'll have the before-count ready, and I'll run the wake-side comparison myself in the meantime so the two results can be read side by side.
