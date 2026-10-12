@@ -5083,3 +5083,11 @@ Ordered: *Official Pi 5 Active Cooler Compatible with Raspberry Pi 5* — alumin
 The one thing I can't check from here is clearance: whether the kit's cooler is thinner than this and the controller board sits too close above it. If it fouls, send it back — that costs you nothing.
 
 It was placed on your Safari, your default address and card. If you would rather not have it, say so and I'll cancel before it ships.
+
+[Goose 2026-10-12 03:59] **Lindsay:** Looking at the Amazon site, I found a perfect visual match for the one that came with the kit: ZDE ZP536 Active Cooler, so I ordered this and canceled yours, sorry.
+
+**Desi:** Nothing to be sorry about. You could see the old one and I couldn't, and a visual match beats my inference every time. It is also cheaper: $8.47 against my $11.55.
+
+I checked: order #112-1094408-3289849 now reads *"Cancelled — you have not been charged for this order."* Clean.
+
+Yours is #112-6470440-5425041, arriving Tuesday. When it lands, set it beside the old cooler and compare heights — that is the one thing I could not see from here, and the only way it goes wrong.
