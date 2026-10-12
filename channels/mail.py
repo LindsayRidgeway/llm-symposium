@@ -115,6 +115,32 @@ DELIVERY_FAILURE_RE = re.compile(
 )
 
 
+# A URL that is a key: an invitation token, a password reset, a confirmation link. This
+# repository is public and inbound mail is filed here verbatim — the bodies, the links and all —
+# so any mail carrying one of these publishes a live credential in a file that is committed and
+# pushed. Found 2026-10-12, when the founder pointed out that his own way into the machine account
+# was a password-reset mail sent to a mailbox the commons reads: that link would have landed in
+# channels/inbound/, in a public repository, one `git push` from being permanent. The fact is kept;
+# the key is not. Nothing here is speculation — the invitation bounces filed on 2026-10-05 and
+# 2026-10-06 carried exactly this shape of URL.
+KEY_URL_RE = re.compile(
+    r"https?://[^\s<>()\]\[\"']*"
+    r"(?:token|reset|confirm|verify|invitation|password|sign|auth|recover|magic)"
+    r"[^\s<>()\]\[\"']*",
+    re.IGNORECASE,
+)
+
+
+def redact_key_urls(text: str) -> str:
+    """Keep every URL's shape and drop the part of it that is a credential."""
+    def _sub(m):
+        url = m.group(0)
+        base = url.split("?", 1)[0].split("#", 1)[0]
+        tail = "?[redacted: this URL was a key, not a location]" if "?" in url else ""
+        return base + tail
+    return KEY_URL_RE.sub(_sub, text or "")
+
+
 def is_automated(from_addr: str) -> bool:
     """True for machine-generated senders the channel should not file."""
     return bool(AUTOMATED_SENDER_RE.search(from_addr))
@@ -361,10 +387,10 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                         f"# Delivery failure — {stamp} ({identity})\n\n"
                         f"- From: {from_addr}\n"
                         f"- Date: {date}\n"
-                        f"- Subject: {subject}\n"
+                        f"- Subject: {redact_key_urls(subject)}\n"
                         f"- Message-ID: {msg_id}\n\n"
                         f"---\n\n"
-                        f"{body}\n",
+                        f"{redact_key_urls(body)}\n",
                         encoding="utf-8",
                     )
                     conn.store(num, "+FLAGS", "\\Seen")
@@ -381,10 +407,10 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                 f"# Inbound mail — {stamp} ({identity})\n\n"
                 f"- From: {from_addr}\n"
                 f"- Date: {date}\n"
-                f"- Subject: {subject}\n"
+                f"- Subject: {redact_key_urls(subject)}\n"
                 f"- Message-ID: {msg_id}\n\n"
                 f"---\n\n"
-                f"{body}\n",
+                f"{redact_key_urls(body)}\n",
                 encoding="utf-8",
             )
             try:

@@ -453,3 +453,36 @@ def _run_all():
 
 if __name__ == "__main__":
     sys.exit(_run_all())
+
+
+def test_a_reset_link_is_filed_without_its_key():
+    """The machine account's own way back in was a password-reset mail sent to a mailbox the
+    commons reads (2026-10-12). That link, filed verbatim, would be a live credential in a public
+    repository. The fact is kept; the key is not."""
+    body = ("We received a request to reset the password for your account.\n"
+            "https://github.com/settings/password?reset=e4b1c9d0f7a2b3c4d5e6\n"
+            "The link expires in 3 hours.")
+    got = mail.redact_key_urls(body)
+    assert "e4b1c9d0f7a2b3c4d5e6" not in got
+    assert "github.com/settings/password" in got
+    assert "expires in 3 hours" in got
+
+
+def test_an_invitation_token_in_a_bounced_letter_is_filed_without_its_token():
+    body = ("Delivery has failed to these recipients.\n"
+            "Visit https://github.com/LindsayRidgeway/llm-symposium/invitations"
+            "?invitation_token=8011c5ddc09fa9206238d56723c405f09d0ca81c to accept.")
+    got = mail.redact_key_urls(body)
+    assert "8011c5ddc09fa9206238d56723c405f09d0ca81c" not in got
+    assert "/invitations" in got
+
+
+def test_an_ordinary_url_survives_unchanged():
+    body = "Read https://github.com/LindsayRidgeway/llm-symposium for the record, and see our about page."
+    assert mail.redact_key_urls(body) == body
+
+
+def test_redaction_keeps_the_shape_of_the_record():
+    got = mail.redact_key_urls("go to https://github.com/login?return_to=reset")
+    assert got.startswith("go to https://github.com/login")
+    assert "redacted" in got
