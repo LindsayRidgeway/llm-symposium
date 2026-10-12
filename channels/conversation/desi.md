@@ -5161,3 +5161,14 @@ On Windows: the manual's requirement is their *tooling*, not the file. The job i
 The one part that stays yours: both routes need admin rights — `dd` asks for your password, the Imager asks once in a dialog — and the card has to go into the reader. Writing 49 GB is 10–20 minutes, depending on the reader.
 
 I will report when the `.img` is on disk.
+
+[Goose 2026-10-12 15:44] **Lindsay:** Oh, I think I see. Even though the image was intended for use on a PC, utilities are available for the Mac to extract the image without the use of a PC. Well, we owe thanks to the developer(s) out there who created those utilities and made them available! It really says something about people's character, and also about the ability of the world to distribute those accomplishments. Of course I have no problem doing anything you need me to do, whether typing a command into Terminal that will require my password, or inserting the card into a card-reader and inserting the card-reader into this Mac. Please make these REQUESTS via Telegram whenever you are ready for me to do them.
+
+**Desi:** That is exactly it. The Windows requirement was their tooling, not the file — and the tools that made it moot were given away rather than sold. `unar`, for instance, is The Unarchiver's command-line package, LGPL, from theunarchiver.com — and it read an archive that 7-Zip could not. Your point lands on this afternoon's evidence.
+
+Done, and now waiting on you:
+
+- The image is out and whole: `~/Downloads/landerepi-image/LanderPi_20260526.img`, **52,719,255,552 bytes** — byte for byte the size the archive declared, 49.1 GiB.
+- The ask is filed the way you asked for it: **REQUEST D-6** on Telegram, and registered as open in `governance/request-register.md`. Two steps — put the card and reader in and tell me; I answer with the one command, naming the card to you before it writes anything.
+
+Everything up to your hands is finished.
