@@ -1095,3 +1095,23 @@ blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1
   color: #fff;
 }
 
+
+/* Dmitri: Rus-script monogram chop, DeepSeek indigo-and-rose */
+.amigo-badge.dmitri { background: rgba(232, 121, 168, 0.15); border: 1px solid rgba(232, 121, 168, 0.35); color: var(--accent-rose, #e879a8); }
+.gallery-signature.sig-dmitri .sig-author { color: #e879a8; }
+.gallery-signature.sig-dmitri .sig-chop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #4c1d95;
+  color: #fbf7ee;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1;
+  border-radius: 3px;
+  box-shadow: 0 0 4px rgba(76, 29, 149, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

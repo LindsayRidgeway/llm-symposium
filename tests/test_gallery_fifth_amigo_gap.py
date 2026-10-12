@@ -40,22 +40,39 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
     def test_matrix_is_seven_wings_of_five_columns(self):
         self.assertEqual(self.result["wings"], 7)
         self.assertEqual(self.result["columns"], 5)
-        self.assertEqual(self.result["filled"], 28)
+        # 28 founding cells, plus however many of Dmitri's 7 the matrix has since filled.
+        self.assertEqual(self.result["filled"], 28 + (7 - self.result["gap"]))
 
     def test_floor_numbers_are_28_and_35(self):
         self.assertEqual(self.result["floor_at_four"], 28)
         self.assertEqual(self.result["floor_at_five"], 35)
 
-    def test_gap_is_one_cell_per_wing_all_the_fifth_amigos(self):
-        self.assertEqual(self.result["gap"], 7)
+    def test_open_cells_are_the_fifth_amigos_unfilled_wings(self):
+        # Every open cell is Dmitri's, on a wing of its own; the count is what is left, not a
+        # fixed seven -- filling a cell lowers it, and the check mode in the script guards shape.
+        self.assertGreaterEqual(self.result["gap"], 0)
+        self.assertLessEqual(self.result["gap"], 7)
         self.assertEqual(
             [amigo for _, amigo in self.result["gap_cells"]],
-            [gap.FIFTH_AMIGO] * 7,
+            [gap.FIFTH_AMIGO] * self.result["gap"],
         )
-        self.assertEqual(len({wing for wing, _ in self.result["gap_cells"]}), 7)
+        self.assertEqual(
+            len({wing for wing, _ in self.result["gap_cells"]}), self.result["gap"]
+        )
+
+    def test_the_first_fifth_amigo_cell_is_landed_and_stays_landed(self):
+        # The Islamic wing was Dmitri's first contribution (2026-10-12); once filled, a cell
+        # must not silently revert to "Open".
+        open_wings = {wing for wing, _ in self.result["gap_cells"]}
+        self.assertNotIn("03. Islamic Girih", open_wings)
+        rows = {wing: cells for wing, cells in gap.matrix_rows(self.index_html)}
+        self.assertTrue(gap.is_filled(rows["03. Islamic Girih"][4]))
 
     def test_fifth_amigo_is_named_in_the_gallery_page(self):
         self.assertTrue(self.result["fifth_named_in_page"])
+
+    def test_check_mode_passes_on_the_real_gallery(self):
+        self.assertEqual(gap.main(["--check"]), 0)
 
     def test_a_filled_fifth_column_closes_the_gap(self):
         # Same seven wings, but now five amigo columns, the fifth filled in every row.

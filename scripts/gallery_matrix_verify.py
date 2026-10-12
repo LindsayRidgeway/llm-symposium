@@ -18,11 +18,18 @@ This script closes that specific gap.
 
 What it checks
 --------------
-For each of the 28 cells:
-  1. the cell is non-empty and carries the fill mark — a blank cell means the declared
-     floor (one work per amigo per wing) is broken and the "28/28" claim is false;
+For each *filled* cell (the four founding amigos' 28 cells, all of which must stay filled, plus
+any of Dmitri's cells that have been filled since 2026-10-12):
+  1. the cell carries the fill mark — a blank founding cell means the declared floor
+     (one work per amigo per wing) is broken and the "28/28" claim is false;
   2. every distinctive word of the work name appears somewhere in that wing's own
      `index.html` — i.e. the pavilion the matrix points at actually presents the work.
+
+Dmitri's cells may be left empty: an open fifth-amigo cell is a decision the commons has not
+made (`scripts/gallery_fifth_amigo_gap.py` counts them), not a defect, so an empty one is
+skipped rather than failed. Once a fifth-amigo cell is *filled*, though, it is held to the same
+plausibility check as the founding twenty-eight — which is the whole point, since the fifth
+column is hand-edited and is exactly where a fabricated name could enter next.
 
 Matching is token-set based, not substring, because the matrix and the pavilion pages
 legitimately differ in punctuation and diacritics ("Mangopare Koru" vs a page heading
@@ -30,7 +37,8 @@ legitimately differ in punctuation and diacritics ("Mangopare Koru" vs a page he
 containment across the whole wing page is the loosest rule that still fails on a
 fabricated name, which is the point: it is a plausibility check, not proof.
 
-Exit code: 0 if all 28 cells are filled and resolve to their wing, 1 otherwise.
+Exit code: 0 if the 28 founding cells are filled and every filled cell (founding or fifth-amigo)
+resolves to its wing, 1 otherwise.
 """
 
 from __future__ import annotations
@@ -56,7 +64,13 @@ WING_BY_PREFIX = {
     "07": "russian-realism",
 }
 
-AMIGOS = ["claude", "desi", "gemini", "tarik"]
+AMIGOS = ["claude", "desi", "gemini", "tarik", "dmitri"]
+
+# The fifth amigo (admitted 2026-10-05) began filling his column on 2026-10-12. His cells may be
+# legitimately empty -- an open cell is a decision the commons has not made, not a defect (see
+# scripts/gallery_fifth_amigo_gap.py) -- so only the cells he has filled are verified here. The
+# four founding amigos' 28 cells must all stay filled.
+FOUNDING_AMIGOS = AMIGOS[:4]
 
 # Words that carry no identifying weight in a work title.
 STOPWORDS = {"and", "the", "of", "a", "an", "in", "on", "at", "amp", "svg"}
@@ -75,9 +89,10 @@ def normalize_tokens(text: str) -> set[str]:
 
 
 def parse_matrix(index_html: str) -> list[tuple[str, list[str]]]:
-    """Return [(wing_slug, [cell, cell, cell, cell])] in row order.
+    """Return [(wing_slug, [amigo cell, ...])] in row order, one cell per amigo column.
 
-    Supports both 4-amigo and 5-amigo matrix shapes (Claude, Desi, Gemini, Tarik).
+    Supports both the 4-amigo matrix (wing + four cells) and the 5-amigo shape that adds
+    Dmitri's column (wing + five cells), so a half-filled fifth column is still parsed.
     """
     table = re.search(r"<table.*?</table>", index_html, re.S)
     if not table:
@@ -88,14 +103,14 @@ def parse_matrix(index_html: str) -> list[tuple[str, list[str]]]:
     for row in rows:
         raw = re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", row, re.S)
         cells = [html.unescape(re.sub("<[^>]+>", "", c)).strip() for c in raw]
-        if len(cells) not in (5, 6):  # header row or stray row; skip headers by shape
+        if len(cells) not in (5, 6):  # wing + 4 amigos, or wing + 5; skip stray rows by shape
             continue
         if cells[0].startswith(("Wing", "Claude")) or cells[1] == "Claude":
             continue
         prefix = cells[0][:2]
         if prefix not in WING_BY_PREFIX:
             raise ValueError(f"unrecognised wing row label: {cells[0]!r}")
-        parsed.append((WING_BY_PREFIX[prefix], cells[1:5]))
+        parsed.append((WING_BY_PREFIX[prefix], cells[1:]))
     return parsed
 
 
@@ -128,13 +143,17 @@ def main() -> int:
     if len(rows) != 7:
         problems.append(f"expected 7 wing rows, found {len(rows)}")
 
-    cells_seen = 0
+    filled_seen = 0
     for wing_slug, cells in rows:
         for amigo, cell in zip(AMIGOS, cells):
-            cells_seen += 1
             if not is_filled(cell):
+                # An empty fifth-amigo cell is an open slot, not a defect; an empty founding
+                # cell means the declared floor is broken.
+                if amigo not in FOUNDING_AMIGOS:
+                    continue
                 problems.append(f"{wing_slug}/{amigo}: cell is empty (floor not met)")
                 continue
+            filled_seen += 1
             missing = verify_cell(wing_slug, cell)
             if missing:
                 problems.append(
@@ -143,8 +162,10 @@ def main() -> int:
                     f"(missing: {', '.join(missing)})"
                 )
 
-    if cells_seen != 28:
-        problems.append(f"expected 28 cells (7 wings x 4 amigos), found {cells_seen}")
+    if filled_seen < 28:
+        problems.append(
+            f"expected at least the 28 founding cells filled, found {filled_seen}"
+        )
 
     if problems:
         print("GALLERY MATRIX: FAILED")
@@ -154,8 +175,9 @@ def main() -> int:
 
     print("GALLERY MATRIX: PASSED")
     print(
-        "  All 28 cells (7 wings x 4 amigos) are filled and each names a work "
-        "present in its own pavilion page."
+        f"  {filled_seen} filled cell(s) each name a work present in their own pavilion page; "
+        "the four founding amigos' 28 cells are all filled. (Empty fifth-amigo cells are open "
+        "slots, not defects.)"
     )
     return 0
 

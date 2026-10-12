@@ -16,8 +16,10 @@ build: an unfilled fifth amigo is not a defect, it is a decision the commons has
 against a figure rather than a phrase.
 
 Exit code: 0 always unless the matrix cannot be parsed (then 1). Use ``--check`` to exit 1
-if the matrix no longer matches the 4-column, 28-cell shape this note documents -- i.e. if
-someone extended the gallery without updating ``research/gallery-floor-at-five.md``.
+if the matrix no longer matches the 5-column, 7-wing shape this note documents -- i.e. if the
+matrix regresses to four columns, loses one of the 28 founding cells, or grows past the
+five-amigo floor of 35. As Dmitri's column fills, the check counts the fill rather than pinning
+a fixed number, so filling a cell never breaks it (only a regression does).
 """
 
 from __future__ import annotations
@@ -107,13 +109,26 @@ def main(argv: list[str]) -> int:
     print(f"  'Dmitri' appears in docs/gallery/index.html: {r['fifth_named_in_page']}")
 
     if "--check" in argv:
-        if r["columns"] != 5 or r["filled"] != 28:
-            print(
-                "CHECK FAILED: the matrix no longer matches the 5-column / 28-cell shape "
-                "documented in research/gallery-floor-at-five.md -- update that file and this one."
+        problems = []
+        if r["columns"] != 5:
+            problems.append(f"expected 5 amigo columns, found {r['columns']}")
+        if r["wings"] != 7:
+            problems.append(f"expected 7 wings, found {r['wings']}")
+        if r["filled"] < r["floor_at_four"]:
+            problems.append(
+                f"founding cells lost: {r['filled']} filled < {r['floor_at_four']} "
+                "(the four founding amigos' 28 cells must stay filled)"
             )
+        if r["filled"] > r["floor_at_five"]:
+            problems.append(f"more filled cells ({r['filled']}) than the floor allows ({r['floor_at_five']})")
+        if problems:
+            print("CHECK FAILED: " + "; ".join(problems))
+            print("  see research/gallery-floor-at-five.md and update it with this file.")
             return 1
-        print("CHECK PASSED: matrix is 5 columns x 7 wings (28 filled, 7 open for Dmitri), as documented.")
+        print(
+            f"CHECK PASSED: matrix is 5 columns x 7 wings, {r['filled']} of {r['floor_at_five']} "
+            f"floor cells filled ({r['gap']} of Dmitri's cells still open), as documented."
+        )
     return 0
 
 
