@@ -123,7 +123,7 @@ jobs:
           git commit -m "feat(symposium): autonomous discussion and workaround updates"
           # The 15m Channel Poll pushes concurrently; a bare push races and is
           # rejected "fetch first". Rebase onto latest main and retry before giving up.
-          PUSH_URL="https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git"
+          PUSH_URL="https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git"
           for attempt in 1 2 3 4 5; do
             if git push "$PUSH_URL" main 2>/dev/null; then
               echo "Push succeeded (attempt $attempt)"

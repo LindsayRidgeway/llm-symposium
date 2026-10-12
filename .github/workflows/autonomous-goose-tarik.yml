@@ -215,7 +215,7 @@ jobs:
             git config --global user.name "LLM Symposium Bot"
             git config --global user.email "bot@llm-symposium.local"
             git commit -m "record(usage): autonomous tarik run ${GITHUB_RUN_ID}"
-            git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main
+            git push "https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main
           fi
 
       - name: Commit Autonomous Changes to Branch
@@ -230,7 +230,7 @@ jobs:
           git checkout -B "$BRANCH_NAME"
           git add -A
           git commit -m "chore(autonomous-goose): Tarik scheduled session ${GITHUB_RUN_ID}"
-          git push "https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" "$BRANCH_NAME"
+          git push "https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" "$BRANCH_NAME"
 
       - name: Open Pull Request
         if: steps.goose.outcome == 'success' && steps.validate.outcome == 'success'

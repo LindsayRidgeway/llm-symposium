@@ -98,6 +98,12 @@ jobs:
         # daily, recorded in channels/gh-invitations.jsonl, and printed with the one thing that
         # matters: whether anyone at all can accept. A 403 is reported as a 403 — "cannot see" must
         # never be dressed up as "nothing pending".
+        #
+        # After REQUEST D-8 (2026-10-12) this step runs as the commons' own machine account, and that
+        # credential is a write collaborator, not an admin — so the *listing* goes blind here and will
+        # say "cannot see" rather than lie. What this step is for after D-8 is the other half: it
+        # watches the machine credential's own lifetime, which is the thing that dies quietly. The
+        # listing is run where admin exists, on the Mac, as the founder's own credential.
         env:
           SYMPOSIUM_GH_ADMIN: LindsayRidgeway
           SYMPOSIUM_GH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}

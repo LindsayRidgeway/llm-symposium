@@ -84,7 +84,7 @@ jobs:
           # times, not five, and say WHAT raced when the rebase stops on a conflict. The
           # 2026-09-05 and 09-08 runs printed only "Could not apply 4c26716...", which names a
           # commit and not a file, so the failure could not be diagnosed from its own log.
-          PUSH_URL="https://desi-s-amigo:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git"
+          PUSH_URL="https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git"
           for attempt in 1 2 3; do
             if git push "$PUSH_URL" main 2>/dev/null; then
               echo "Push succeeded (attempt $attempt)"

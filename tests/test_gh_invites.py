@@ -8,6 +8,7 @@ trimmed to the lines that carry meaning.
 """
 import importlib.util
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -246,6 +247,101 @@ class TestTheCredentialWatch(unittest.TestCase):
         _, days, note = gh.token_expiry("tok", opener=boom)
         self.assertIsNone(days)
         self.assertIn("could not ask GitHub", note)
+
+
+class TestTheCommonsCredential(unittest.TestCase):
+    """The account was renamed on 2026-10-12, and the credential is a file.
+
+    Both facts look like trivia and are not. A stale login is a 404 that reads as
+    "no credential configured"; and a machine account whose token lives in the
+    human's keychain is a credential the commons cannot check the lifetime of.
+    """
+
+    def test_the_account_we_hold_a_credential_for_is_the_renamed_one(self):
+        self.assertEqual(gh.KNOWN_ACCOUNTS.get("desi"), "llm-symposium-machine")
+        self.assertNotIn("desi-s-amigo", gh.KNOWN_ACCOUNTS.values())
+
+    def test_the_machine_credential_is_read_from_its_file_not_a_keychain(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "commons-push-token"
+            path.write_text("github_pat_machine\n")
+            saved = {k: os.environ.pop(k, None)
+                     for k in ("SYMPOSIUM_GH_TOKEN", "GH_TOKEN", "GITHUB_TOKEN")}
+            before = dict(gh.TOKEN_FILES)
+            gh.TOKEN_FILES["llm-symposium-machine"] = str(path)
+            try:
+                with mock.patch.object(gh.subprocess, "run",
+                                       side_effect=AssertionError("asked the keychain")):
+                    token, why = gh.gh_token("llm-symposium-machine")
+            finally:
+                gh.TOKEN_FILES.clear()
+                gh.TOKEN_FILES.update(before)
+                for k, v in saved.items():
+                    if v is not None:
+                        os.environ[k] = v
+            self.assertEqual(token, "github_pat_machine")
+            self.assertEqual(why, "")
+
+    def test_a_missing_token_file_does_not_read_as_a_configured_credential(self):
+        saved = {k: os.environ.pop(k, None)
+                 for k in ("SYMPOSIUM_GH_TOKEN", "GH_TOKEN", "GITHUB_TOKEN")}
+        before = dict(gh.TOKEN_FILES)
+        gh.TOKEN_FILES["llm-symposium-machine"] = "/nonexistent/commons-push-token"
+        try:
+            with mock.patch.object(
+                    gh.subprocess, "run",
+                    return_value=mock.Mock(returncode=1, stdout="", stderr="no oauth token")):
+                token, why = gh.gh_token("llm-symposium-machine")
+        finally:
+            gh.TOKEN_FILES.clear()
+            gh.TOKEN_FILES.update(before)
+            for k, v in saved.items():
+                if v is not None:
+                    os.environ[k] = v
+        self.assertEqual(token, "")
+        self.assertIn("nothing at /nonexistent/commons-push-token", why)
+        self.assertIn("no oauth token", why)
+
+
+class TestTheRegisterSaysWhatChanged(unittest.TestCase):
+    """The register has to be readable without the memory of whoever wrote it."""
+
+    def _rec(self, pending, listed=True):
+        return {"listed": listed, "pending": pending}
+
+    def test_an_invitation_that_left_is_named_with_the_verdict_it_carried(self):
+        before = self._rec([{"id": 1, "address": "a@b.c", "verdict": "no_account"},
+                            {"id": 2, "address": "d@e.f", "verdict": "account_exists"}])
+        now = self._rec([{"id": 2, "address": "d@e.f", "verdict": "account_exists"}])
+        got = gh.what_changed(before, now)
+        self.assertEqual([g["id"] for g in got["left_since_last_check"]], [1])
+        self.assertEqual(got["left_since_last_check"][0]["verdict"], "no_account")
+        self.assertNotIn("arrived_since_last_check", got)
+
+    def test_an_invitation_that_arrived_is_named_too(self):
+        got = gh.what_changed(self._rec([]), self._rec([{"id": 9, "address": "x@y.z",
+                                                         "verdict": "no_account"}]))
+        self.assertEqual([g["id"] for g in got["arrived_since_last_check"]], [9])
+
+    def test_a_check_that_could_not_see_the_list_does_not_claim_they_left(self):
+        before = self._rec([{"id": 1, "address": "a@b.c", "verdict": "no_account"}])
+        got = gh.what_changed(before, self._rec([], listed=False))
+        self.assertNotIn("left_since_last_check", got)
+        self.assertIn("neither visible nor accounted for", got["unaccounted"])
+
+    def test_a_blind_check_is_a_change_the_register_records(self):
+        sees = gh.snapshot([], "O/R", "tok", listed=True)
+        blind = gh.snapshot([], "O/R", "tok", listed=False)
+        self.assertNotEqual(sees, blind)
+        self.assertFalse(blind["listed"])
+
+    def test_a_blind_listing_is_printed_as_cannot_see_not_as_zero(self):
+        state = {"repo": "O/R", "checked_utc": "now", "actor": "llm-symposium-machine",
+                 "listed": False, "token_note": "403 from the API", "mailed": [], "rows": [],
+                 "credential": {}}
+        out = gh.render(state)
+        self.assertIn("cannot see", out)
+        self.assertNotIn("pending on the repository: 0", out)
 
 
 if __name__ == "__main__":

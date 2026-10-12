@@ -83,8 +83,22 @@ IDENTITIES = {
 
 # GitHub accounts we hold a credential for. The value is the login to look up
 # with `gh auth token -u`. Empty today beyond Desi, and that is the finding.
+#
+# Renamed 2026-10-12: the account was `desi-s-amigo` and is now
+# `llm-symposium-machine`, after the founder noticed that `-commons` said the
+# symposium's name twice and its function never (REQUEST D-8). The rename is why
+# this value is written here once and pinned by a test: after a rename, every
+# name in every script and workflow is either updated or quietly a 404.
 KNOWN_ACCOUNTS = {
-    "desi": "desi-s-amigo",
+    "desi": "llm-symposium-machine",
+}
+
+# Where a credential lives when it belongs to the commons rather than to a person.
+# A machine account's token is a *file*: it has to be readable by every wake on the
+# machine, it has to survive a keychain that belongs to the human, and its lifetime
+# has to be checkable without a login shell. Keyed by the login the token belongs to.
+TOKEN_FILES = {
+    "llm-symposium-machine": os.path.expanduser("~/.config/llm-symposium/commons-push-token"),
 }
 
 INVITE_SUBJECT_RE = re.compile(r"invited you to ([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)", re.I)
@@ -219,6 +233,15 @@ def gh_token(account: str = ADMIN_ACCOUNT):
         tok = (os.environ.get(var) or "").strip()
         if tok:
             return tok, ""
+    path = TOKEN_FILES.get(account, "")
+    if path:
+        try:
+            with open(path) as fh:
+                tok = fh.read().strip()
+        except OSError:
+            tok = ""
+        if tok:
+            return tok, ""
     try:
         out = subprocess.run(
             ["gh", "auth", "token", "-u", account],
@@ -230,7 +253,8 @@ def gh_token(account: str = ADMIN_ACCOUNT):
         return "", f"{type(exc).__name__}: {exc}"
     if out.returncode == 0 and out.stdout.strip():
         return out.stdout.strip(), ""
-    return "", f"no stored credential for {account}: {(out.stderr or '').strip()[:160]}"
+    where = f" (nothing in the environment, nothing at {path})" if path else ""
+    return "", f"no stored credential for {account}{where}: {(out.stderr or '').strip()[:160]}"
 
 
 def api_get(path: str, token: str, method: str = "GET"):
@@ -397,7 +421,8 @@ def pair_with_mail(invitations: list[dict], mailed: list[dict], tolerance_s: int
 # the register
 # --------------------------------------------------------------------------- #
 
-def snapshot(rows: list[dict], repo: str = DEFAULT_REPO, credential: str = "") -> dict:
+def snapshot(rows: list[dict], repo: str = DEFAULT_REPO, credential: str = "",
+             listed: bool = True) -> dict:
     """The comparable shape of a check: stable id, so 'unchanged' is cheap."""
     pending = [
         {
@@ -413,11 +438,17 @@ def snapshot(rows: list[dict], repo: str = DEFAULT_REPO, credential: str = "") -
     # The credential's expiry is part of the picture: it is stable (it changes only when the
     # token is rotated), so it does not make the register write every day, but a rotation does
     # get recorded the day it happens.
+    #
+    # `listed` is part of the picture for a related reason: an empty list means something
+    # different when the credential could not see the list at all, and a reader comparing two
+    # records must be able to tell those apart. A blind check is a change worth recording.
     return {"repo": repo, "pending": sorted(pending, key=lambda d: d["id"]),
+            "listed": bool(listed),
             "credential": credential or "(none reported)"}
 
 
-def last_snapshot(path: Path = REGISTER):
+def last_record(path: Path = REGISTER):
+    """The last readable record in the register, or None if there is not one."""
     if not path.exists():
         return None
     last = None
@@ -428,7 +459,43 @@ def last_snapshot(path: Path = REGISTER):
                 last = json.loads(line)
             except json.JSONDecodeError:
                 continue
-    return (last or {}).get("snapshot")
+    return last
+
+
+def last_snapshot(path: Path = REGISTER):
+    return (last_record(path) or {}).get("snapshot")
+
+
+def what_changed(before, now):
+    """Which invitations left and which arrived, derived from the two records.
+
+    A register that says "4 pending" and later "0 pending" leaves the reader to guess
+    whether the four were accepted, cancelled, or simply hidden — and a credential
+    that loses the right to look produces exactly the same silence as a change in the
+    world. So the change itself is written down, with the verdict each departed
+    invitation had carried, and is derived from the register rather than remembered.
+    A check that could not see the list claims nothing: it says so.
+    """
+    before_record, now_record = before or {}, now or {}
+    was = {r.get("id"): r for r in (before_record.get("pending") or [])}
+    now = {r.get("id"): r for r in (now_record.get("pending") or [])}
+    def brief(ids, source):
+        return [{"id": i, "invited": source[i].get("address", ""),
+                 "verdict": source[i].get("verdict", "")} for i in ids]
+    out = {}
+    gone = [i for i in was if i not in now]
+    came = [i for i in now if i not in was]
+    blind = not now_record.get("listed", True)
+    if gone:
+        if blind:
+            out["unaccounted"] = (
+                f"this check could not see the invitation list, so {len(gone)} invitation(s) "
+                f"pending before are neither visible nor accounted for here")
+        else:
+            out["left_since_last_check"] = brief(gone, was)
+    if came:
+        out["arrived_since_last_check"] = brief(came, now)
+    return out
 
 
 def append_snapshot(state: dict, path: Path = REGISTER, actor: str = "") -> bool:
@@ -438,6 +505,7 @@ def append_snapshot(state: dict, path: Path = REGISTER, actor: str = "") -> bool
     path.parent.mkdir(parents=True, exist_ok=True)
     record = {"checked_utc": utcnow(), **state}
     record["actor"] = actor or state.get("actor", "")
+    record.update(what_changed(last_record(path), record))
     with path.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(record, sort_keys=True) + "\n")
     return True
@@ -489,6 +557,7 @@ def gather(repo: str = DEFAULT_REPO):
     mailed = scan_mailboxes()
     token, why = gh_token(ADMIN_ACCOUNT)
     invitations, note = pending_invitations(repo, token)
+    listed = bool(token) and not note
     matched = pair_with_mail(invitations, mailed)
     actor = whoami(token) if token else "?"
     if token:
@@ -504,6 +573,7 @@ def gather(repo: str = DEFAULT_REPO):
     return {
         "repo": repo,
         "actor": actor,
+        "listed": listed,
         "token_note": why or note,
         "credential": {"subject": actor, "expires_utc": expires, "days_left": days, "note": note},
         "mailed": mailed,
@@ -542,7 +612,12 @@ def render(state: dict) -> str:
                           if mail.get("gap_s") is not None else "") + "]")
             out.append(f"        {r['classify']['verdict']}: {r['classify']['means']}")
     else:
-        out.append("  pending on the repository: 0  (or not visible to this credential)")
+        if state.get("listed", True):
+            out.append("  pending on the repository: 0  (the credential can see the list, and it is empty)")
+        else:
+            out.append("  pending on the repository: cannot see — "
+                       f"{state.get('token_note') or 'no credential'}")
+            out.append("  (that is not the same as zero, and this line exists so it cannot be read as zero)")
     out.append("")
     out.append("  Every amigo mail loop answers arriving mail by email. GitHub sends from")
     out.append("  noreply@github.com, which cannot receive mail, so an answer to an invitation")
@@ -582,7 +657,8 @@ def main(argv=None) -> int:
         print(render(state))
     if args.register:
         snap = snapshot(state["rows"], state["repo"],
-                        state["credential"]["expires_utc"] or state["credential"]["note"])
+                        state["credential"]["expires_utc"] or state["credential"]["note"],
+                        listed=state.get("listed", True))
         wrote = append_snapshot(
             {"repo": state["repo"], "actor": state["actor"], "note": state["token_note"],
              "credential": {"expires_utc": (state.get("credential") or {}).get("expires_utc", ""),
