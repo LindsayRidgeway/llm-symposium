@@ -703,8 +703,13 @@ def main(argv=None) -> int:
     if args.register:
         cred = dict(state.get("credential") or {})
         commons = cred.get("commons") or {}
-        stable = (cred.get("expires_utc") or commons.get("installed_utc")
-                  or cred.get("note", ""))
+        # The stable key must not depend on which machine ran the check. A register whose
+        # snapshot carries "the file was installed N days ago" changes every day and writes a
+        # line every day; one that carries a locally-observed install date changes when CI and
+        # the Mac alternate. So the snapshot holds the fact GitHub reports (an expiry date, or
+        # the flat statement that there is none) and the local file facts stay in the record and
+        # in the report, which run where the file actually is.
+        stable = cred.get("expires_utc") or "no expiry date reported"
         snap = snapshot(state["rows"], state["repo"], stable,
                         listed=state.get("listed", True))
         wrote = append_snapshot(

@@ -395,6 +395,28 @@ def _letter(rec: dict) -> str:
     return letter_for(rec)
 
 
+CREDENTIAL_FILE = Path.home() / ".config" / "llm-symposium" / "push-token"
+ROTATION_DAYS = 300
+
+
+def _credential_file_age(path: Path | None = None, now=None):
+    """(installed, days_old) for the commons' credential file, or (None, None).
+
+    Read from the file at report time and on the machine the report runs on: the register is
+    written by whichever check ran last, including CI's, where this file does not exist. The
+    install date is a property of this machine, so it is derived here rather than carried.
+    """
+    import datetime as _dt
+    p = path or CREDENTIAL_FILE
+    try:
+        stamp = p.stat().st_mtime
+    except OSError:
+        return None, None
+    when = _dt.datetime.fromtimestamp(stamp, _dt.timezone.utc)
+    now = now or _dt.datetime.now(_dt.timezone.utc)
+    return when, round((now - when).total_seconds() / 86400)
+
+
 def _invitations_block(now=None, path: Path | None = None) -> list[str]:
     """Repository invitations: mail whose answer is not a reply.
 
@@ -450,11 +472,11 @@ def _invitations_block(now=None, path: Path | None = None) -> list[str]:
             out.append("  → renew it before it dies: an expired credential stops CI pushes and this")
             out.append("    check, silently — which is the class of failure this register exists for.")
         commons = cred.get("commons") or {}
-        if commons.get("installed_utc"):
-            age = commons.get("days_old")
-            out.append(f"  the commons' own credential: installed {commons['installed_utc'][:10]}"
-                       + (f", {age} days old" if age is not None else ""))
-            if commons.get("rotation_due") or (age is not None and age >= 300):
+        stamp, age = _credential_file_age()
+        if stamp is not None:
+            out.append(f"  the commons' own credential: the file here was installed "
+                       f"{stamp.strftime('%Y-%m-%d')}, {age} days ago")
+            if age >= 300:
                 out.append("  → ROTATION DUE: this credential carries no expiry date, so nothing")
                 out.append("    else will ever call for it to be replaced. That is the one thing a")
                 out.append("    date would have done, and a leaked token with no date is a token")

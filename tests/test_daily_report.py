@@ -314,25 +314,49 @@ class TestTheInvitationsBlock(unittest.TestCase):
         out = self._block([self._record(checked="2026-10-01T00:00:00Z")])
         self.assertIn("STALE", out)
 
+    def _credential_file(self, days_old, tmpdir):
+        import os as _os
+        import time as _time
+        f = Path(tmpdir) / "push-token"
+        f.write_text("ghp_x")
+        when = _time.time() - days_old * 86400
+        _os.utime(f, (when, when))
+        return f
+
+    def _with_credential(self, records, days_old):
+        import tempfile as _tf
+        from unittest import mock
+        from scripts import daily_report as dr
+        records = [dict(r, credential=r.get("credential") or {"note": "no expiry reported"})
+                   for r in records]
+        with _tf.TemporaryDirectory() as td:
+            f = self._credential_file(days_old, td)
+            with mock.patch.object(dr, "CREDENTIAL_FILE", f):
+                return self._block(records)
+
     def test_a_credential_with_no_expiry_is_dated_by_its_file(self):
-        rec = self._record()
-        rec["credential"] = {"note": "no expiry reported", "commons": {
-            "path": "/tmp/push-token", "installed_utc": "2026-10-12T23:00:00Z",
-            "days_old": 10, "note": "no expiry date; the file here was installed 2026-10-12",
-            "rotation_due": False}}
-        out = self._block([rec])
-        self.assertIn("installed 2026-10-12", out)
-        self.assertIn("10 days old", out)
+        """The date is not dropped when the expiry is: it moves to the file, which is the
+        artifact that exists whether or not anyone remembers creating the token."""
+        out = self._with_credential([self._record()], 10)
+        self.assertIn("the file here was installed", out)
+        self.assertIn("10 days ago", out)
         self.assertNotIn("ROTATION DUE", out)
 
     def test_at_day_300_the_report_calls_for_a_rotation(self):
-        rec = self._record()
-        rec["credential"] = {"note": "no expiry reported", "commons": {
-            "path": "/tmp/push-token", "installed_utc": "2025-12-16T23:00:00Z",
-            "days_old": 300, "note": "no expiry date", "rotation_due": True}}
-        out = self._block([rec])
+        out = self._with_credential([self._record()], 300)
+        self.assertIn("300 days ago", out)
         self.assertIn("ROTATION DUE", out)
         self.assertIn("never has to stop working", out)
+
+    def test_a_credential_file_that_is_not_there_is_not_invented(self):
+        import tempfile as _tf
+        from unittest import mock
+        from scripts import daily_report as dr
+        with _tf.TemporaryDirectory() as td:
+            with mock.patch.object(dr, "CREDENTIAL_FILE", Path(td) / "nope"):
+                out = self._block([self._record()])
+        self.assertNotIn("the file here was installed", out)
+        self.assertNotIn("ROTATION DUE", out)
 
 
 class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
