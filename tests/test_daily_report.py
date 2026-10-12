@@ -273,6 +273,48 @@ class TestTheReviewBlock(unittest.TestCase):
         self.assertIn("(none — nothing left W", self._block(rows))
 
 
+class TestTheInvitationsBlock(unittest.TestCase):
+    """Repository invitations arrived in every mailbox, were answered by every amigo, and every
+    answer bounced (2026-10-12). Two facts have to survive into the report: that the invitations
+    are to addresses nobody can sign in as, and that the check itself is running at all — a
+    register nobody reads is the same defect one level up.
+    """
+
+    def _block(self, records, now=None):
+        import json as _json
+        import datetime as _dt
+        import tempfile as _tf
+        from scripts.daily_report import _invitations_block
+        with _tf.TemporaryDirectory() as td:
+            p = Path(td) / "gh-invitations.jsonl"
+            p.write_text("\n".join(_json.dumps(r) for r in records) + "\n", encoding="utf-8")
+            return "\n".join(_invitations_block(
+                now or _dt.datetime(2026, 10, 12, 15, 0, tzinfo=_dt.timezone.utc), path=p))
+
+    def _record(self, checked="2026-10-12T14:00:00Z", pending=None):
+        return {"checked_utc": checked, "actor": "LindsayRidgeway",
+                "snapshot": {"pending": pending or []}, "pending": pending or []}
+
+    def test_a_register_that_has_never_run_says_so_rather_than_showing_zero(self):
+        from scripts.daily_report import _invitations_block
+        out = "\n".join(_invitations_block(path=Path("/nonexistent/gh-invitations.jsonl")))
+        self.assertIn("no check has ever run", out)
+
+    def test_an_invitation_no_account_can_accept_is_reported_as_such(self):
+        out = self._block([self._record(pending=[
+            {"id": 335802762, "verdict": "no_account", "amigo": "claude",
+             "address": "claude.s.sonnet@gmail.com"}])])
+        self.assertIn("1 pending", out)
+        self.assertIn("claude", out)
+        self.assertIn("no_account", out)
+        self.assertIn("invitation to an ADDRESS", out)
+        self.assertIn("only the human can change that", out)
+
+    def test_a_check_that_stopped_running_is_called_stale(self):
+        out = self._block([self._record(checked="2026-10-01T00:00:00Z")])
+        self.assertIn("STALE", out)
+
+
 class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
     """The lander refuses a dirty shared checkout, so output left uncommitted here is an outage,
     not untidiness: nothing landed between 2026-10-06 and 2026-10-08 for exactly this reason, and

@@ -40,6 +40,7 @@ from __future__ import annotations
 import argparse
 import collections
 import datetime as dt
+import json
 import re
 import subprocess
 import sys
@@ -394,6 +395,63 @@ def _letter(rec: dict) -> str:
     return letter_for(rec)
 
 
+def _invitations_block(now=None, path: Path | None = None) -> list[str]:
+    """Repository invitations: mail whose answer is not a reply.
+
+    Added 2026-10-12 after the human asked why four amigos had ignored his
+    collaboration request. They had not — every one of them answered it by email
+    and every answer bounced off noreply@github.com — and the invitations
+    themselves are to *addresses*, not accounts, so nobody can accept them. The
+    point of printing this in the daily report is that it is a standing condition
+    the human, and only the human, can change; a condition nobody looks at is the
+    original defect, one level up.
+    """
+    now = now or dt.datetime.now(dt.timezone.utc)
+    path = path or (REPO / "channels" / "gh-invitations.jsonl")
+    if not path.exists():
+        return ["", "### Repository invitations", "  no check has ever run — "
+                "`python3 channels/gh_invites.py --status` says which are pending and why"]
+    last = None
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line:
+            try:
+                last = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+    if not last:
+        return ["", "### Repository invitations", "  the register is empty or unreadable"]
+    try:
+        checked = dt.datetime.strptime(last.get("checked_utc", ""), "%Y-%m-%dT%H:%M:%SZ"
+                                       ).replace(tzinfo=dt.timezone.utc)
+        age_h = (now - checked).total_seconds() / 3600
+        age = f"{age_h:.0f}h ago"
+    except ValueError:
+        age = "at an unreadable time"
+        age_h = 999
+    rows = last.get("pending", [])
+    out = ["", f"### Repository invitations  (checked {age} as {last.get('actor') or '?'})"]
+    if not rows:
+        out.append("  none pending.")
+    else:
+        out.append(f"  {len(rows)} pending:")
+        for r in rows:
+            who = r.get("amigo") or "?"
+            addr = r.get("address") or "(address not in any mailbox)"
+            out.append(f"    {r.get('id')}  {who:<7} {addr}  → {r.get('verdict')}")
+        if all(r.get("verdict") == "no_account" for r in rows):
+            out.append("  Every one is an invitation to an ADDRESS, not an account: acceptance is a")
+            out.append("  sign-in, and no account holds those addresses. Neither the amigos nor any")
+            out.append("  script can accept them; only the human can change that. The amigos each")
+            out.append("  answered the invitation by email and their answers bounced.")
+    if age_h > 48:
+        out.append(f"  STALE: the last check is {age_h:.0f}h old — if this is not running, the "
+                   "condition is invisible again, which is the defect this register exists to end.")
+    if last.get("note"):
+        out.append(f"  note: {last['note']}")
+    return out
+
+
 def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]:
     """Who is looking, who is not, and what is actually blocking — the human's 2026-10-09 questions.
 
@@ -517,6 +575,7 @@ def render(hours: int = 24, now: dt.datetime | None = None) -> str:
     lines += _landing_block(now, hours, landed, landing_gap(items, landed))
     lines += _diagnosis(window, life, hours, items, now)
     lines += _review_block(items, window, hours)
+    lines += _invitations_block(now)
     lines += ["", f"### Last {hours}h, by amigo"]
     lines += _letter_block(window, life, hours)
     lines += _inputs_block(now, hours)
