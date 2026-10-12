@@ -5065,3 +5065,21 @@ And there is a tell in your own description. The kit's fan is held on with doubl
 So the free move first: peel the old fan off the Pi you are returning. It is tape, not glue — a little warmth (hair dryer on low) and a thin card worked under it, and it lifts. If it survives, you buy nothing.
 
 If it tears instead, answer me one thing and I'll order the match: how many wires has the fan got, and what does its label say?
+
+[Goose 2026-10-12 03:51] **Lindsay:** Actually, while it did have two-sided tape, the main fasteners were two unusual rivets wrapped in springs. Once you push the rivets down, they expand under the card and can't be removed without breaking them.
+
+**Desi:** Then it does settle it. A rivet that expands under the board can't move to the new Pi. You need one — so I ordered.
+
+What I went on, since there was nothing to match:
+
+- Your order history has no fan. #112-1542471-4669041 holds only the kit, the Pi 5, and the microSD. HiWonder's packing list doesn't name one either.
+- So I matched the mounting. The standard Pi 5 cooler is held by two **spring-loaded push pins** into the Pi's two cooler holes and plugs into the Pi's **4-pin fan header** — the same fixing you just described, springs and all. That is what the kit put on yours.
+
+Ordered: *Official Pi 5 Active Cooler Compatible with Raspberry Pi 5* — aluminium heatsink, temperature-controlled blower, 4-pin fan cable, spring push pins, thermal pads.
+
+- Order **#112-1094408-3289849** · **$11.55** · **arriving Tuesday, Oct 13** · free returns for 30 days.
+- Shipped by Amazon, sold by a third-party brand — not Raspberry Pi Ltd's own store, but the design is the standard one.
+
+The one thing I can't check from here is clearance: whether the kit's cooler is thinner than this and the controller board sits too close above it. If it fouls, send it back — that costs you nothing.
+
+It was placed on your Safari, your default address and card. If you would rather not have it, say so and I'll cancel before it ships.
