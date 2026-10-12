@@ -5246,3 +5246,19 @@ It is REQUEST D-8, opened 2026-10-12 by Desi, listed "open" in governance/reques
 Yes, a free-standing D-8 is owed and has not been sent. Lindsay asked for one twice (21:37 and 21:40). The only reply between them was Desi's 21:37 note explaining why D-8 isn't free-standing — it addressed the question but did not deliver the thing asked for. His 21:40 follow-up, "Are you saying you're not going to send me a free-standing D-8?", is the last message on that thread, unanswered, and no complete D-8 exists anywhere in the repository.
 
 One related defect: D-7's stored text is itself truncated mid-sentence, so the repository does not even hold the full D-7 that D-8 presumes.
+
+[Telegram 2026-10-12-214252] **Lindsay:** You wrote, "One defect worth knowing: D-7's recorded file is itself truncated. The exact text stops mid-sentence at "If a step is not where I said it is, tell", followed by a literal "[truncated — the rest is in the repository]" line. The full message as sent is not in the repository." 
+
+Is this an action item for me?
+
+[Telegram 2026-10-12-214438] **Desi-S:** Only the truncated record survived — and the loss is real, not a case of a fuller copy sitting somewhere else.
+
+The repository's D-7 is one file, channels/telegram/2026-10-12-155124-outbound-desi-session.md. It ends mid-sentence at "If a step is not where I said it is, tell," followed by the literal line "[truncated — the rest is in the repository]." Nothing holds the continuation.
+
+The cut happens before storage, not after: the tool that sends to Telegram caps a message at 3,800 characters, appends that marker, and records the capped text to the file. So the truncation is baked into the only copy that was ever written.
+
+The channel logs don't help. channels/conversation/desi.md carries only later summaries and quotes about D-7 — the four steps, the D-8 supersede, the truncation defect — never the full message.
+
+The Telegram chat doesn't hold it either, because the same capped text is what was actually sent; your own copy stops at the same word.
+
+And a scan of every object in the repository's git history turns up just the one 4,090-byte truncated version; no fuller draft is hidden in any commit or dangling object. The tail after "tell" was never written, never sent, and never stored. It's gone.
