@@ -3833,3 +3833,192 @@ thing that saves you is re-imaging — which is cheap on 64 and slow on 256.
 **What the money did buy, and it is the part worth keeping:** he moved from A1 to **A2** — the class that
 covers random small reads and writes, which is what a Pi actually waits on when it boots or runs containers.
 That upgrade matters for this machine. The capacity upgrade would not have.
+
+## The ROS2 is built, and two things stop it 2026-10-10
+
+Lindsay's report, in his order.
+
+**The headlamps are finished work.** Both lamp boards soldered, all four joints sealed with the hot-glue
+gun, and **both tested on P11 of both rovers** — the lights work and both rovers still announce themselves,
+Desi and Gemini. The headlamp job is now down to the mount and nothing else. SunFounder is sending screws
+to replace the pan/tilt rivets on rover #2's turret; he believes that kills the wobble and says he cannot
+find the play by hand. That is the honest state of it — and it is the same shape as everything else in
+that turret: what cannot be found by eye is being sent by the vendor.
+
+**The ROS2 is assembled** — all parts in hand, including the SanDisk Extreme A2 card — and the battery is
+charged. It does not respond: the power switch does nothing, the handset does nothing.
+
+**I had no vendor source for this car, so I fetched one.** The build log held only the head of the printed
+assembly sheet. The LanderPi manual lives at `docs.hiwonder.com/projects/LanderPi/en/latest/` (Sphinx,
+server-rendered, so readable — the wiki VitePress mirror is not). Its appendix holds the sentence that
+matters most:
+
+> **System Image & Source Code: If you want to get the system image and source code, please email us at
+> support@hiwonder.com, and share your order number :)**
+
+**The image is not published. It is emailed.** And §1.10.1 lists the hardware requirement as *"a computer
+running Windows 10 or Windows 11"*, with Win32DiskImager and SD Card Formatter as the tools. There is no
+Mac path anywhere in the vendor's own document. Those two sentences are why the card cannot be made to
+work tonight.
+
+**Why the switch does nothing — two causes, and the manual separates them cleanly.**
+
+1. **The card has no operating system, so the Pi cannot boot.** §1.3.2: switch on and *"the blue LED1 at
+   the lower right of the expansion board on the Raspberry Pi will light up and start blinking … wait until
+   the buzzer emits a short beep."* The manual's own troubleshooting, verbatim: if LED1 is not blinking,
+   *"the system may not detect the SD card"*; if it still will not blink, *"the system image may not have
+   been written properly."* **No image, no blink, no beep.** That is the expected behaviour of a blank
+   card, whatever the switch does. Certain, not a theory.
+2. **Charging disconnects the battery from the robot.** §1.3.1: *"Make sure the device's power switch is
+   set to OFF. Take out the battery's DC connector from the side of the robot and plug in the charger."*
+   So the battery has to be plugged back into the robot's power lead afterwards, or the switch is switching
+   nothing.
+
+**The one observation that separates them:** does *anything* light when the switch goes on? The STM32
+layout lists item (17), *"on-board power indicator LED: shows if voltages are normal,"* and item (12) the
+power switch, with item (13) the DC 5V–12.6V power input. Nothing anywhere ⇒ the power path is open
+(battery not reconnected, or not charged). Something lit but no blink and no beep ⇒ power is fine and the
+blank card is the whole story.
+
+**The three loose connectors — the manual does name the two 3-wire ones.** §1.2.1 carries a Note attached
+to the mecanum wiring diagram, in the vendor's words:
+
+> *"The two 3-pin servo wires from the pan-tilt on the three chassis should be connected as follows: one to
+> the servo port on the STM32 controller, and the other to the servo at the bottom of the robot arm."*
+
+So the two 3-wire connectors are the camera pan/tilt servo cables, and the manual says where they land. The
+printed assembly sheet he worked from does not carry that note — the manual's wiring section does. **The
+2-wire connector is not named in the manual anywhere**, and I did not guess at it. Two candidates with
+vendor text behind them: the battery lead (the spec sheet gives it a *"2-pin SM connector with
+reverse-polarity protection,"* and the charging step pulls it apart), or the Pi's power cable (the STM32's
+item (14), *"5V 5A output: dedicated power supply for Raspberry Pi, Jetson Nano, or similar controllers"*,
+matched by §1.6.1: *"the ROS controller can be powered directly by connecting to the STM32's power output
+port through its supply interface"*). One photograph settles it.
+
+**The rest of the loose ends, sorted by what the manual actually says.**
+
+- **The handset is not silent by design.** §1.3.5: *"slide the wireless controller switch to the ON
+  position. At this point, the red and green LED indicators on the wireless controller will start flashing
+  simultaneously … once pairing is successful, the green LED will remain solid while the red LED turns
+  off."* The controller in the manual is a PS2-style pad taking two AA cells (fig. 98) and it sleeps after
+  30 seconds. §1.4.1: *"The wireless controller receiver is pre-installed on the robot's STM32 controller
+  at the factory."* It is downstream of the robot booting and cannot do anything while the robot is dead.
+- **A USB-shaped part with no destination** is most likely the factory-installed wireless receiver dongle,
+  or a port protector. The STM32 also carries its own Type-C port for firmware download (§1.7.6). Not
+  named as an assumption — named as candidates, and one photo closes it.
+- **The Advanced kit's four Pi USB ports are all spoken for** by the vendor's own table: 1 Lidar, 2
+  monocular/depth camera, 3 STM32 controller communication cable, 4 WonderEcho Pro / USB wireless
+  controller receiver. So an empty USB socket on the Pi is expected, not a fault.
+- **Unused sockets and spare hardware:** normal.
+- **The arm is on backwards** — four screws, no wiring change. His read, and it matches the documents.
+
+**The 27 W USB-C supply goes back, and he is right.** The kit's own 8.4 V charger charges the battery, and
+the Pi is powered by the robot (§1.6.1, quoted above), so a desk supply fits nothing in this build. Order
+`112-9295656-1453014`, $24.29, to be returned. The only thing given up is the rule-4 swap-in known-good
+supply when a Pi misbehaves, and that is not worth keeping a $24 plug that matches no socket in the fleet.
+
+**What I did not do: name the 2-wire connector.** Rule 11. Inference about a device is how rule 10 got
+broken twice, and this is exactly the shape of the error — three wires and a confident sentence.
+
+**Correction to my own record, the same evening.** My 2026-10-08 section says the ROS2's step 4 is "the
+cable loom (battery cable, 3-pin cable, Pi power cable)." The vendor manual's assembly section does not
+carry six numbered steps with those names; it carries wiring diagrams and one Note. The six-step list came
+from the printed sheet, and the three cable names were my expansion of it, not the sheet's words. The list
+of what is in the loom is therefore mine, not the vendor's, and it should not be read back as a spec.
+
+**He is right that (5d) and the certain cause of (3) are one fault, not two 2026-10-10.** He listed "the
+microSD has not been imaged" as its own loose end alongside "the switch does nothing." They are the same
+card and the same absence: the Pi has nothing to boot from, so the switch *looks* dead. One item, not two.
+
+**And the Windows requirement is the vendor's tooling, not the file.** §1.10.1 names Windows because
+Win32DiskImager and SD Card Formatter are Windows programs. What he will be sent is a disk image, and a disk
+image is written by anything that can write a disk image. The Mac in this house can do it — Raspberry Pi
+Imager, or `dd` — the moment Hiwonder sends the file. The vendor documents no Mac path; that is not the same
+as there being none. What he would actually need from a shop is nothing.
+
+**★★ CORRECTION, the same evening — "cause 2" was mine, and he caught it 2026-10-10.** I wrote that charging
+disconnects the battery from the robot, and gave it a starred heading. He answered with three sentences from
+the sheet **in the box**, which I do not have and had never read:
+
+1. *"Turn off the robot and never use it while charging."* A sentence that is meaningless if the charging
+   socket also feeds the robot.
+2. *"Connect the charger to the DC port."* The DC port is a charging port.
+3. Nothing else in the kit fits that port.
+
+His reading: the battery has its own leads into the robot, and separately a wired port on a lead that comes out
+of the side to be charged. Charging and the robot's supply are two different things. **He is right.**
+
+**What I actually did.** I had one sentence of the web manual — *"Take out the battery's DC connector from the
+side of the robot and plug in the charger"* — and built a mechanism on top of it instead of reading the sentence
+he has, which contradicts it. This is the exact shape of the fault rules 10 and 11 exist to stop: inference
+about a device, dressed as a cause. And it was worse than the two earlier ones, because I gave it a *"CAUSE 2"*
+heading. A guess in a paragraph reads like a guess; a guess under a heading reads like a finding.
+
+**Withdrawn.** Cause 2 is dead. What still stands, and still stands on the vendor's own words: **cause 1 — the
+card has no OS and the Pi cannot boot, and the manual's troubleshooting says an unwritten image is exactly what
+a non-blinking LED1 means.** Certain. If *nothing at all* lights when he switches on, then there is a power
+fault somewhere else — unknown, and to be found by looking at the robot rather than by reasoning from a
+translation.
+
+**And a lesson about which document is "the vendor source."** His sheet carries sections the web manual does
+not — *"Battery Usage Guide"*, *"Charging & Robot Startup"* — with sentences the website's compressed
+translation does not preserve. Rule 10 ("the source I already read beats the source I haven't") is about not
+re-reading what is already in hand; it is not a licence to prefer the website over the paper in his hands when
+the question is what is in the box. **For anything about this car as built, his sheet is the source of record
+and the website is the supplement.** Recorded so the next question starts from the right document.
+
+**The handset matches the manual after all, and it is not ours to use 2026-10-10.** He found the slide switch
+and the two LEDs. So the discrepancy I flagged earlier — the manual describes a switch and two indicators and he
+first saw neither — was him not having found them yet, not a different revision of the hardware. **The manual
+fits his unit.** That matters beyond the handset: it is the first direct evidence that the document I fetched
+describes the car in his house.
+
+**And the handset's real role, decided:** it is the vendor's input device, not ours. The ROS2 is a Pi 5 running a
+ROS 2 stack; once the image is on the card and the robot is in LAN mode on the house Wi-Fi, it is reached over
+ssh and driven through ROS 2 exactly as Desi's and Gemini's bodies are reached over ssh and driven through
+picarx. Two things it is genuinely for, though, and both are the vendor's own examples: it is the only way to
+move the car before it is on a network, and §1.5.1's mapping walkthrough tells the user to drive with it while
+the map builds. So it stays with the robot, batteries in, as the fallback rather than as the plan.
+
+## The photos, the packing list, and one look that settles two questions 2026-10-10 (late)
+
+He sent six photographs of the ROS2: the three unconnected plugs circled in red, the power switch, and four of
+the arm. I read them at full resolution, cropped and brightened.
+
+**The switch IS marked, and I read the marking out of his own photograph.** His switch photo shows **ON**
+printed on the board immediately left of the slide switch, with **BOOT** and **ST** below it. So the label he
+could not find exists; it is small, on the black board, at the angle the photo was taken. What the photo does
+*not* tell me is which END of the slide that label marks.
+
+**One board, three names — worth recording, because it is an hour of confusion waiting.** The vendor's packing
+list calls it the **RRC Lite controller**. §1.8.1 calls the same layout the **STM32 robot controller**. §1.3.2
+calls it **the expansion board on the Raspberry Pi**. Its numbered layout figure puts the **power switch at
+(12)** (right edge, beside the blue power input), the **DC power input (DC 5–12.6 V) at (13)**, the **two PWM
+servo-port pairs at (14) and (15)**, the **four motor encoder ports at (7)**, the I2C expansion at (5), the bus
+servo ports at (6), and the **on-board power indicator LED at (17) — "shows if voltages are normal."**
+
+**The vendor's packing list names every cable that ships as a separate item** (§1.1, the Advanced list, read
+off the figure): Battery cable (150 mm) · Lidar cable (75 mm) · Servo cable (100 mm) · RRC Lite controller +
+Data cable · Depth camera + cable · Raspberry Pi 5 + power cable · 8.4V 2A charger (DC5.5*2.5 male connector) ·
+Type-C cable (100 mm) · Wireless controller + receiver · Card reader · Screw bag. That is the complete set of
+things in his box that can arrive loose.
+
+**And it does not identify the three plugs, which is the honest answer.** A 3-pin plug can be one of those
+cables OR the pigtail permanently moulded onto a servo — the list only enumerates items that ship separately,
+so two 3-wire plus one 2-wire does not map one-to-one onto it. **I could not count wire positions reliably in
+the photographs either**, and I said so rather than naming a connector off a shadow. The two 3-wire ones are
+*likely* the camera gimbal's servo cables, because the manual's Note exists precisely because those two land
+in non-obvious places — a likelihood, labelled as one.
+
+**★ The observation that settles both the 2-wire plug and the dead switch, and it works tonight, with a blank
+card.** Switch the robot on and watch the controller board for any light at all. Item (17) is an on-board power
+indicator that lights when the board's voltages are normal, and the board is fed straight from the battery at
+(13) — **it does not depend on the Pi or on the SD card.** So:
+
+- **Nothing lights anywhere** ⇒ the board has no power at all, and the 2-wire plug becomes the prime suspect
+  for what is missing.
+- **Anything lights** ⇒ the board has power, the 2-wire plug is not the battery cable, and the card is the only
+  fault left standing.
+
+**Rule 12 applies to my own words above:** "the 2-wire plug is the battery cable" is a hypothesis with a test
+attached, not a cause with a heading. Two hours earlier I gave the last one a heading and it was wrong.
