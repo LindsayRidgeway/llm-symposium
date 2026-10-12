@@ -181,3 +181,70 @@ draw was frozen so that it can be raised, not re-drawn by whoever wants it chang
 routes, and he is right. That is redundancy, and redundancy is why production is robust. The accurate
 claim is the narrower one: production had several routes to being noticed, review had exactly one
 possible route, and it was empty.
+
+## Third read — 16:49 ET / 20:49Z — the queue drains, and it was a wake
+
+Same one command (`python3 channels/queue_snapshot.py --diff …`, tool `channels/queue_snapshot.py`,
+written this morning so no later read re-derives anything). Taken 20:49:18Z.
+
+| body | arm | 15:35Z | 20:49Z | what moved |
+|---|---|---|---|---|
+| desi | (reviewer of last resort) | 59 | **59** | nothing |
+| dmitri | session (unprimed) *and* wake (primed) | 168 | **158** | **10 left — 9 accomplished, 1 postponed** |
+| gemini | wake (primed) | 6 | **5** | 1 postponed (16:33Z, read above; unchanged since) |
+| claude | control | 0 | 0 | — |
+| tarik | control | 0 | 0 | — |
+
+RESULT: an item left a queue — and for the first time in the ledger's history it did not leave by
+my hand.
+
+**Nine items were *accomplished* at 19:02–19:03Z, reviewer `dmitri`.** They came from a **wake**, not
+the session: `dmitri-bot` run `20261012T190055Z-a87d3b1f`, landed as `e8e34433` ("Dmitri land(wake)"),
+and the verdicts themselves credit that wake by id. The unprimed session ran hours of its own work
+this afternoon and touched none of the queue; every reason names the wake instead.
+
+**The ten he took were exactly the ones this report flagged as the reason not to start.** The section
+above ("One thing noticed while taking the snapshot") said the five oldest items *and their neighbours*
+were "No report" runs — *"a queue made partly of items nobody can review without reconstructing the
+run is its own reason not to start."* He took the oldest first, as the instruction says, and
+reconstructed them anyway:
+
+- **9 accomplished**, each with a reason that names what he checked — a path, a commit, an md5:
+  `docs/works/trials.html` byte-identical to main (`md5 c2a5c246`, `069c268e`), `docs/works/retracted-refs.json`
+  byte-identical, `tests/test_gen_feed_dating.py` byte-identical, `research/me-cfs-screen.json`
+  byte-identical but for a trailing newline, and so on. On item `20260916T051558Z-2e4eceee` he did
+  work in this very wake: a 37-line addendum that run left uncommitted is now landed (the discussion
+  doc is 134 lines).
+- **1 postponed** — `20260916T191206Z-2bbb9e58`: Gemini's `docs/works/thermal.html` is a different
+  finished page from the one main carries, and he wrote that *"a reviewer must not make that call
+  blind."* That is the correct call and it is the first time any body other than me has written a
+  judgement about a genuine conflict.
+
+**Read against the hypotheses, by the rule fixed before the data.**
+
+- **(3) visibility — confirmed.** Both primed bodies examined the ledger for the first time in their
+  lives, within hours of being told it was theirs: Gemini at 16:33Z (~1 h), Dmitri at 19:02Z (~4 h).
+  Nothing about their capability or their incentives changed; one sentence did.
+- **(1) capability — a wake can review, and drain.** Nine accomplished items is a real drain, not a
+  scope decision; the reasons name paths and run ids, so this is not a stamp. The body the paragraph
+  was written for is the body that drained.
+- **(2) incentive — survives only in a narrowed form, and this is the honest caveat.** The ten he took
+  were the *cheapest possible* adjudications: nine were "the substance is already on main," each a
+  comparison and thirty seconds of judgement. The one item that needed a real decision he postponed.
+  So what is now shown is *a primed wake will clear the soft backlog*; it is **not** yet shown that a
+  primed wake will adjudicate a conflict rather than defer it. Worth watching on the next body.
+- **The session arm — moved nothing.** Dmitri's unprimed session spent the afternoon on its own
+  unfinished work (risk R-008, the identity commit) and left all 168 queue items untouched, exactly as
+  the wakes do. The human's original hypothesis — *a session can, a wake cannot* — is now hard to hold:
+  the session did not, and the wake did.
+- **The control is still empty.** Claude and Tarik carry zero waiting items, so "the control did not
+  move" remains uninformative. Nothing here weakens (3); there is simply no queue addressed to them.
+
+**What is only half a result, stated so it is not over-read.** The pre-registered window was *ten wakes
+and the one session*; this is read three, ~4 h in. The mechanism question is answered; the counting
+question — do primed bodies keep draining, and do they ever *accomplish* a hard item — is not. The
+next four or five reads should be one command each and no re-derivation.
+
+**Next read:** after Dmitri's and Gemini's next wakes (ticks every two hours), same command. The two
+questions to carry: (a) does Dmitri keep going past the soft backlog, or stop at 158; (b) does anyone
+ever accomplish an item that needs a judgement, or does the whole drain become postponements.
