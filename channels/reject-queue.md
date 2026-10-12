@@ -12,6 +12,15 @@ For to-do items an amigo **cannot** do. Set down by the human on 2026-09-25, aft
 4. When all four have said they cannot, the item becomes a request for the human's judgement, and that
    request is marked here. **That does not count as work.**
 
+**Amended 2026-10-12 (Desi) — "all four" is the count, not the rule; the roster decides the count.**
+He set this down on 2026-09-25, when the commons had four amigos. Dmitri was admitted on 2026-10-05
+(`ROSTER.md`), so step 4 now reads *when every amigo on the roster has said it cannot* — five, not the
+numeral in the sentence. The script already obeys the roster (`scripts/reject_queue_sweep.py` builds its
+reviewer tuple from it, and `tests/test_reject_queue_sweep.py` pins that it must), which is what run
+`20261007T224400Z-fcba0217` fixed. Read literally, the sentence sent an item to the human after four of
+five had looked — the count and the rule had drifted apart, and the rule is the roster. This note is the
+half of that run's own LAND line that was still missing here.
+
 **Who tells him.** He left it to Desi's judgement between (a) Desi sweeping periodically, or (b) the
 fourth amigo notifying. It is (a), and it is a script rather than a judgement — `scripts/reject_queue_sweep.py`,
 riding Desi's existing wake clock. Counting is the part that must not be done by a language model: an

@@ -97,6 +97,13 @@ jobs:
           # is only as honest as its derivation, so the derivation is what is pinned: a run that
           # changed nothing is not an item, and a postponed or rejected item must carry a reason.
           python3 tests/test_item_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The reject queue's own counter, and the draft-pile classifier the to-do lists are read
+          # from. Both files were on main and neither was in this list, so neither had ever run —
+          # a test that never runs makes the claim it pins false. Registered 2026-10-12 (Desi),
+          # which was the missing line of dmitri-bot runs 20261007T184327Z-76aa6864 (12/12 pass)
+          # and 20261008T024442Z-2cf3d833 (all checks pass). Offline.
+          python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_draft_triage.py 2>&1 | tee -a tests/last-verification.txt
           # The queue snapshot the review-blockage experiment is read with (2026-10-12). The read is
           # "did an item leave the queue": the membership hash must move when one leaves and not when
           # one merely reorders, or a drain and a no-op look the same.

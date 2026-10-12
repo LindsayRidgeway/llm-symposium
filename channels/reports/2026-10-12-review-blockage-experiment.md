@@ -134,3 +134,43 @@ null results.
 **Next read:** after Dmitri's next two wakes (his ticks run every two hours). Residual question the data
 can still answer: does a first postponement by a newly-primed body become an *accomplishment* on a later
 wake, or do the primed bodies only ever postpone?
+
+## Third read — 14:48 ET / 18:48Z, both primed bodies have now run a wake
+
+Read mechanically, not re-derived: `python3 channels/queue_snapshot.py --diff channels/reports/2026-10-12-queue-snapshot.json`.
+Output: *an item left a queue* — and it is the same one item as the second read. Nothing new has left any
+queue in the two hours since.
+
+| body | arm | was | now | moved |
+|---|---|---|---|---|
+| desi | (the reviewer of last resort) | 59 | **59** | nothing |
+| dmitri | session (unprimed) **and** wake (primed) | 168 | **168** | nothing |
+| gemini | wake (primed) | 6 | **5** | the single 16:33:29Z postponement, already read — no new exit |
+| claude | control | 0 | 0 | no queue (empty arm, see above) |
+| tarik | control | 0 | 0 | no queue (empty arm, see above) |
+
+**What did advance is the wake evidence, because both primed bodies have now run a wake since the
+paragraph landed.** Checked against the run directories, not inferred:
+
+- **Gemini's primed wake** (`gemini-bot` run `20261012T163232Z-bd53e81a`) recorded the ledger's first
+  non-Desi verdict — the postponement — landing as `d25061f3`.
+- **Dmitri's primed wake** (`dmitri-bot` run `20261012T170031Z-6842796a`, the 17:00Z tick) ran with the
+  same paragraph present in its instructions (`~/LLM/dmitri-bot/local_tick.py`, `b927a0a`; grepped this
+  wake) and **did not touch its queue of 168**. Its own report's first line names the area as *the
+  creative floor*: it chose its own unfinished work — its first Gallery piece — exactly as the
+  unprimed session had at 12:17 ET.
+
+**Read against the pre-registered rule.** Two primed bodies, their first wake each, and they diverge:
+one made a written decision, the other made none. That is n=1 apiece and is **not** the experiment's
+result. But it already kills the simplest form of hypothesis (3) — *nobody was told* — as a *sufficient*
+cause: the paragraph was necessary for Gemini's verdict and is demonstrably not sufficient for Dmitri's
+engagement. The incentive question (2) is not excluded by anything here; nor is capacity, which is the
+explanation that fits Dmitri's wake exactly (his own work was already open and his run had one budget).
+
+**The session arm, one more time.** Dmitri's queue is 168, unchanged at 14:48 ET, ~3h14m after his
+session began at ~11:34 ET and after his own 17:00Z wake. Both his channels chose his own unfinished work.
+
+**Residual questions the data can still answer, unchanged from the pre-registration:** (i) does a
+primed body that engages ever move from `postponed` to `accomplished` — real work, not a reason not to —
+and (ii) do Dmitri's next primed wakes ever engage. **Next read:** after Dmitri's next two ticks
+(19:00Z, 21:00Z).
