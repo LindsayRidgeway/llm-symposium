@@ -84,6 +84,49 @@ class EnvTests(unittest.TestCase):
             self.assertEqual(bs.missing_env_keys(env, "T"), [], line)
 
 
+class ReferenceTests(unittest.TestCase):
+    """A value that is a shell reference is only filled if it *resolves*, as `source` does.
+
+    These bots put the per-amigo key name in `bot.env` to match the GitHub secret and then
+    map it back to the plain name Goose reads: `DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY_DESI}"`.
+    That line looks filled to a literal reader. If the reference is a typo, or the prefixed
+    name is ever defined *after* its use, `source` expands it to "" — the body starts, Goose
+    reads an empty key, and the job stays "up" while nothing answers. The check must see that.
+    """
+
+    def test_reference_resolves_when_defined_first(self):
+        self.assertEqual(bs.missing_env_keys(GOOD_ENV, "DESI"), [])
+        self.assertEqual(bs.resolve_env(GOOD_ENV)["DEEPSEEK_API_KEY"], "sk-real")
+
+    def test_forward_reference_expands_empty_and_is_flagged(self):
+        text = ("TELEGRAM_BOT_TOKEN=t\n"
+                'DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY_DESI}"\n'
+                "DEEPSEEK_API_KEY_DESI=sk-real\n"
+                "SYMPOSIUM_MAIL_USER_DESI=u\n"
+                "SYMPOSIUM_MAIL_APP_PASSWORD_DESI=p\n")
+        self.assertEqual(bs.resolve_env(text)["DEEPSEEK_API_KEY"], "")
+        self.assertIn("unresolved key reference (DEEPSEEK_API_KEY)",
+                      bs.missing_env_keys(text, "DESI"))
+
+    def test_undefined_reference_is_flagged_not_silently_filled(self):
+        text = ("TELEGRAM_BOT_TOKEN=t\n"
+                'DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY_TYPO}"\n'
+                "DEEPSEEK_API_KEY_DESI=sk-real\n"
+                "SYMPOSIUM_MAIL_USER_DESI=u\n"
+                "SYMPOSIUM_MAIL_APP_PASSWORD_DESI=p\n")
+        missing = bs.missing_env_keys(text, "DESI")
+        self.assertIn("unresolved key reference (DEEPSEEK_API_KEY)", missing)
+        # the plain name resolves to nothing, so the provider group must not be saved by the
+        # presence of the prefixed name alone — the failure has to surface somewhere
+        self.assertNotEqual(missing, [])
+
+    def test_broken_reference_is_not_reported_when_it_resolves(self):
+        self.assertEqual(bs.broken_references(GOOD_ENV), [])
+
+    def test_literal_value_is_never_flagged_as_a_reference(self):
+        self.assertEqual(bs.broken_references("DEEPSEEK_API_KEY=sk-real\n"), [])
+
+
 class ParserTests(unittest.TestCase):
     def test_launchctl_header_and_dash_pid(self):
         jobs = bs.parse_launchctl(LAUNCHCTL)
