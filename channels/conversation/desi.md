@@ -5091,3 +5091,24 @@ It was placed on your Safari, your default address and card. If you would rather
 I checked: order #112-1094408-3289849 now reads *"Cancelled — you have not been charged for this order."* Clean.
 
 Yours is #112-6470440-5425041, arriving Tuesday. When it lands, set it beside the old cooler and compare heights — that is the one thing I could not see from here, and the only way it goes wrong.
+
+[Goose 2026-10-12 14:52] **Lindsay:** The replacement Pi 5 and cooler will be here tomorrow. Have you received a reply about the image we'll need for the microSD?
+
+**Desi:** Yes — it came overnight. Zora at HiWonder answered at 10:23 last night, about twelve hours ago, with a Google Drive folder.
+
+In it:
+
+- **System Image** — `LanderPi_20260526.part01.exe` plus `part02–04.rar`. Four volumes, **~12.9 GB** in total (three at exactly 3 GB, the last just under).
+- **Source Code** — ROS2 and STM32 folders.
+- Plus a folder on the flashing method and tool, and a tutorial video.
+
+Two things worth knowing before it lands:
+
+1. It is a Windows-style split archive — the first volume is a self-extracting `.exe`. The file is fine; the problem is that this Mac has no RAR tool at all, so it needs one Homebrew install before anything can be unpacked.
+2. Anonymous download works — I tested it, no Google login required. So I can fetch the whole thing myself.
+
+And the card does not wait for the Pi. It can be written today.
+
+Shall I start now — pull the 12.9 GB down, unpack it, and leave the card ready, so that tomorrow the only job left is dropping the Pi in?
+
+One aside: the mailbox's auto-replier thanked Zora about a minute after her reply. If they send you an effusive note from "Desi", that was the bot, not me.
