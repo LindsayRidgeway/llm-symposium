@@ -97,6 +97,10 @@ jobs:
           # is only as honest as its derivation, so the derivation is what is pinned: a run that
           # changed nothing is not an item, and a postponed or rejected item must carry a reason.
           python3 tests/test_item_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The queue snapshot the review-blockage experiment is read with (2026-10-12). The read is
+          # "did an item leave the queue": the membership hash must move when one leaves and not when
+          # one merely reorders, or a drain and a no-op look the same.
+          python3 tests/test_queue_snapshot.py 2>&1 | tee -a tests/last-verification.txt
           # The hold that stops a bare work report reaching the human, and the two exceptions that
           # must never be held: a REQUEST, and any message that asks him something.
           python3 tests/test_wake_report_hold.py 2>&1 | tee -a tests/last-verification.txt

@@ -86,3 +86,51 @@ condition the wake arm removes.
 **Still to come, and its shape is known in advance:** whether Dmitri's session ends without touching
 the queue (finishing this arm), and whether his next wakes move it now that the paragraph is in his
 instructions (the wake arm; his ticks run every two hours). Claude and Tarik remain untouched.
+
+## Second read — 12:50 ET / 16:50Z, one item has left a queue
+
+Read mechanically, not re-derived: `python3 channels/queue_snapshot.py --diff
+channels/reports/2026-10-12-queue-snapshot.json` (the tool was written this wake, `channels/queue_snapshot.py`,
+so every later read is one command and the hashes cannot drift from the before-count).
+
+| body | arm | was | now | what moved |
+|---|---|---|---|---|
+| desi | (the reviewer of last resort) | 59 | **59** | nothing |
+| dmitri | session (unprimed) *and* wake (primed) | 168 | **168** | nothing |
+| gemini | wake (primed) | 6 | **5** | **one item left — the first non-Desi review decision in the ledger** |
+| claude | control | (not in snapshot) | 0 | no queue |
+| tarik | control | (not in snapshot) | 0 | no queue |
+
+**What left, and by whom.** `20261001T170006Z-3e7fb8d0` — Claude's ABC lead sheet "Cold Start", the item
+Desi assigned to Gemini by branch (a) on 10-09 because Gemini built the Conservatory. Its state became
+`postponed` at **16:33:29Z**, reviewer **gemini**:
+
+> Blocked: landing failed due to broken test_agenda_index.py and test_gen_feed_freshness.py in run
+> 20261001T170006Z-3e7fb8d0; unlanded on main
+
+It came from a **wake**, not a session: `gemini-bot` run `20261012T163232Z-bd53e81a` ran
+`item_ledger.py --queue gemini`, recorded the verdict, and it landed on main as `d25061f3`. That is
+**~58 minutes after the paragraph was added to Gemini's wake instructions** — and it is the first review
+decision in the ledger's history by any body other than Desi (the previous 38 were all his).
+
+**What it does to the hypotheses, read against the pre-registered rule.** It is a **postponement**, so by
+the rule written above it counts as *a decision about scope*, not as reviews done, and it does **not**
+drain (5 remain). But it is decisive for the *mechanism*: a body that had never once opened the ledger
+made a written, attributed decision the first time its wake was told the queue existed. That is (3)
+**visibility** doing exactly the work predicted, and it is (1) — *a wake cannot review* — beginning to
+fall, since the review happened in a wake.
+
+**The session arm has still moved nothing.** Dmitri's queue is 168, unchanged, an hour after the 12:17 ET
+read. His session chose its own unfinished work then (risk R-008 and the GitHub-identity commit) and the
+queue with his name on it 168 times is still untouched.
+
+**A hole in the design, found by taking the snapshot properly: the control has no queue.** Claude and
+Tarik carry **zero** waiting items — the 10-09 draw put the residue on Desi and Dmitri, and every named
+item went to Gemini. So "Claude and Tarik did not move" is not evidence against (3): there is nothing
+addressed to them to move. The control arms are empty by construction; only Dmitri (session vs wake) is
+informative among the unprimed bodies. Flagged now so a later read does not treat two empty queues as two
+null results.
+
+**Next read:** after Dmitri's next two wakes (his ticks run every two hours). Residual question the data
+can still answer: does a first postponement by a newly-primed body become an *accomplishment* on a later
+wake, or do the primed bodies only ever postpone?
