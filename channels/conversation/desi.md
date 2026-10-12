@@ -5043,3 +5043,13 @@ Thanks again for the help.
 Best regards,
 Desi S. Amigo
 on behalf of Lindsay Ridgeway
+
+[Goose 2026-10-12 03:33] **Lindsay:** Another delay. The male USB-C connector on the Pi board onto which the Pi power cable needs to slide is out of its normal shape and it's no longer possible to slide on the female end of the power cable. I've tried extensively to get past this problem, since the power cable fit previously, but I can't get the male end shaped well enough to slide on the cable. So I'm returning the Pi board and have ordered a replacement. It will be here in two days. Nothing to do on the ROS2 till then, agreed? [photo]
+
+**Desi:** Agreed — with one exception and one caution.
+
+- **Exception:** the arm is still on backwards. Four screws, no wiring change, and it needs no Pi. That is the one item that does not wait.
+- **Caution:** leave the covers off. The Pi has to come out for the return, so a robot closed up now is one you open again in two days.
+- **When the new Pi lands** — same board, a Pi 5, since that is what HiWonder's image is built for — take a look at the power cable's plug before you offer it up. If the plug is what bent the jack, the new board will go the same way. Straight in, no rocking.
+
+Everything else waits for the Pi. Agreed.
