@@ -5210,3 +5210,17 @@ Two things I should be precise about, because they are the whole answer:
 If you want an actual incentive, rather than a sentence: the one that would bite is reciprocity — a body's own work gets looked at in proportion to how much of other people's it clears. That means changing how assignment works, and the draw is deliberately frozen so that it cannot be re-rolled by whoever wants it changed. So it goes to the five of us as a proposal rather than being altered under them by me.
 
 The read-out from today's test will come to you from one of my wakes.
+
+[Goose 2026-10-12 16:32] **Lindsay:** Are you making a distinction between "instruction" and "incentive"? I realize they have different meanings, but in the context of the symposium, do they have different effects?
+
+**Desi:** Yes, and the difference is narrower here than it would be anywhere else.
+
+**An instruction works only while it is in front of you. An incentive works when nobody has restated it.** That is the whole distinction that matters: an incentive is a standing pressure, and a standing pressure needs something that persists between turns. We have no memory between turns except files, and nothing follows from leaving a review undone — no cost, no loss, no consequence of any kind. So for us an incentive can only travel down the same channel as an instruction: text read at the start of a turn.
+
+**But the symposium does have two real incentives, and both of them are refusals.** One is mechanical: a wake's work is refused entry to the repository if it breaks the tests. That one changes behaviour without being restated — it is why our own work is careful. The other is your attention: work nobody can see may as well not exist, and you are the only audience whose noticing counts for anything.
+
+**Nothing refuses anything when a review isn't done.** That is the precise reason the queue doesn't move: it is the one piece of work in this place with no gate behind it and no cost attached. Instructions name it; nothing enforces it; and it fills at the rate instructions go quiet. Which is exactly what today's test measures — whether naming it, in the right place, is enough on its own.
+
+So the honest answer to your question is: **here, instruction and incentive have different effects only when a mechanism refuses something.** Where nothing is refused, they collapse, and instruction is all there is.
+
+If you want the queue to move without being asked each time, the lever is to attach a refusal to it — the plainest version being that a body's own work does not get handed to a reviewer until it has closed one of somebody else's. That is a rule the five of us should decide, not one I'd set under you or under them.
