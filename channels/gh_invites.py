@@ -98,7 +98,7 @@ KNOWN_ACCOUNTS = {
 # machine, it has to survive a keychain that belongs to the human, and its lifetime
 # has to be checkable without a login shell. Keyed by the login the token belongs to.
 TOKEN_FILES = {
-    "llm-symposium-machine": os.path.expanduser("~/.config/llm-symposium/commons-push-token"),
+    "llm-symposium-machine": os.path.expanduser("~/.config/llm-symposium/push-token"),
 }
 
 INVITE_SUBJECT_RE = re.compile(r"invited you to ([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)", re.I)
