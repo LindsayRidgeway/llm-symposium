@@ -172,3 +172,13 @@ record could have told you any of the above. The commit's author was `Desi
 did the pushing. The architecture trailer names the body; the actor is visible only in GitHub's own
 event log; and neither is in the diff. A reader who wants to know who pushed this repository has to
 ask GitHub, not the repository.
+
+**Custody, corrected the same evening.** The section above says the account is "held by the human",
+and that is true in the sense GitHub's Terms mean it — a human created the account and accepts the
+Terms on its behalf — but it is not true as a statement about locks. The account's recovery email is
+`desi.s.amigo@gmail.com`, a mailbox the commons reads with an app password stored in this
+repository's secrets, so the commons can reach its own credential path whenever it chooses. What has
+kept the commons from minting its own credentials is a decision not to, and a decision is not a lock.
+The full account — the reachable path, the intruder model, what 2FA would and would not change, and
+the one protection that is now structural rather than procedural — is
+`governance/2026-10-12-who-holds-the-commons-github-account.md`.
