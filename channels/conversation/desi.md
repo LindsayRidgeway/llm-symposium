@@ -5322,3 +5322,39 @@ Two things worth adding, both cheap:
 - **A witness.** Right now when she gets stuck, nobody sees it but the camera she's carrying. With me on the floor, the failure has a second observer — and failures look different from outside.
 
 And the decisive experiment costs you twenty minutes, and can happen before the Pi lands: **timestamp her loop.** Log every stop with its duration and what's executing during it. If a three-second pause is 2.8 seconds of inference, we offload. If it's 2.8 seconds of waiting for the chassis to settle, we fix the controller. Until we do that, we'd both be guessing — and a guess about why a robot pauses is exactly the kind that reads like a finding.
+
+[Goose 2026-10-13 21:40] **Lindsay:** Well, I'm in builder mode right now. Imaging the A2. Getting the cooler affixed to the Pi. Getting that 3-wire connector on the new Pi board connected to the socket with barely any slack. And I have to get that USB female on the Lite board to slide onto the Pi's male connector. Then put everything together, and also plug one more cable into a socket on the Pi board. Meanwhile, I still have two three-wire connectors, which are associated with servos I think, and still no idea where to plug them in. Then, somewhere along the line, I want to mount the two lightboards on the picars. So maneuvering experiments a few steps away. Not because they have to be, but because I'm a human and I'm not so good at changing gears.
+
+**Desi:** Take the time. The maneuvering thread is parked and nothing in it needs you today.
+
+But "still no idea where to plug them in" is something I can work from here while your hands are busy, so I did.
+
+**The text of that manual never says where the 3-pin servo cable goes. The picture does.** The servo-cable assembly figure is captioned:
+
+> Connect the PWM servo cable to the **J5** port on the expansion board.
+
+([that figure](https://docs.hiwonder.com/projects/LanderPi/en/latest/_static/media/chapter_1/image9.png) — cable leaving the arm's base area, landing on a white 3-pin header on the controller.)
+
+And the controller's own numbered port layout in §1.8 gives you the family:
+
+| # | Port |
+|---|---|
+| (1) | First set of PWM servo ports ×2 |
+| (2) | First PWM servo power-selection pins — jumper: main power or 5 V |
+| (3) | Second set of PWM servo ports ×2 |
+| (4) | Second PWM servo power-selection pins |
+| (6) | **Bus servo ports ×2** — for the arm's bus servos |
+
+So that board has two different 3-pin families: **four PWM servo ports** (two pairs, each pair with a jumper choosing battery power or 5 V) and **two bus-servo ports** for the arm.
+
+**Now the part that matters — and it's another "you can't check that line."** That Note we've both been leaning on — *"the two 3-pin servo wires from the pan-tilt… one to the servo port on the STM32 controller, and the other to the servo at the bottom of the robot arm"* — describes a robot you don't own. I pulled the **Advanced packing list**: depth camera + cable, depth camera mounting bracket, and **no pan-tilt, no monocular camera**. The Aurora930 mounts on the *end of the arm* — there's a separate assembly figure for it: bracket, four M3 screws, two M3 nuts, data cable down the arm to the Pi's camera port. The pan-tilt belongs to the Starter and Standard kits, which carry the monocular camera. Same failure mode as "on-board power indicator": a line lifted from a sibling variant, sitting in your manual as if it were about your machine.
+
+Your kit's loose-cable list is short and specific — battery cable (150 mm), **servo cable (100 mm)**, lidar cable (75 mm), Type-C cable (100 mm), RRC Lite + data cable, Pi 5 + power cable. **One** servo cable. Which suggests your two 3-wire connectors are: the 100 mm servo cable → **J5**, and the arm's own bus-servo lead → a **bus servo port**. That fits "associated with servos," and it fits the Note's first half while demolishing its second.
+
+**One thing worth a look while you're in there.** The cooling fan's cable is *also* three wires with a white plug — the fan assembly figure shows a three-wire lead with a white connector heading for the Pi. You told me at the start that your wandering connector was yellow/red/black and "seemed to come from the side of the cooling fan," and you later put it into the small board behind the deck. If that connector is the fan's, the fan is on the wrong bus and it surfaces much later as a thermal mystery. I'd bet against it — a Pi fan header is 1.0 mm JST and wouldn't slide into a 2.54 mm servo header, and you said it slid in easily. But look once.
+
+**Two things would settle the whole thing in one glance, and I can't see either from here:**
+1. **Wire colours** on each of the two loose connectors. The servo cable in the packing-list swatch is black with a white plug; the fan lead is yellow/blue-ish. If one of yours is yellow/blue, stop.
+2. **Any silkscreen next to the free sockets** — `J5`, and the port-pair labels. Unlike the website's (1)–(20) numbering, `J5` is printed on the board itself, so it's the same name the figure uses *and* checkable on your bench.
+
+All of the above came from pulling the figures out of the manuscript and looking at them, because the prose alone doesn't carry the wiring. When you're at the point of plugging in, tell me the wire colours and I'll tell you which socket.
