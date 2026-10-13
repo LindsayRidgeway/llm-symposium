@@ -5368,3 +5368,26 @@ The turret is the only one with a fuse on it — and the only one where waiting 
 The one thing worth confirming now, while there's time to fix it: that the flush cutters are actually in the drawer. Cutting the rivet heads *is* the removal method — you can't drill those out without risking the servo body underneath — and if they turn out to be missing on screw day, you've waited two weeks to wait some more.
 
 Otherwise nothing to do. Logged, and it's in the session record with the rest.
+
+[Goose 2026-10-13 23:01] **Lindsay:** When we get home, I'll describe the three cables with white connectors. But I am now virtually certain that the too-short wire from the cooler goes into the port on the small board pre-attached to the floor of the Lander at the base of the robotic arm. I hope that we can nail that down pre-assembly, because it's very difficult to handle after assembly. The other one that I feel some anxiety about is the Pi power cable, since I ended up damaging the female USB connector trying to connect that after assembly. And I simply don't see any sockets for the other two white connectors. But if they do need to be plugged in, maybe that should also be done pre-assembly.
+
+**Desi:** Two things I can settle right now, one I can't, and one correction I owe you.
+
+**1. The sequence rule — and it isn't your technique.** The RRC Lite controller doesn't sit beside the Pi. It sits *stacked on top of it*, on M2.5×20 dual-pass standoffs; the assembly figure is explicit about the 20 mm. So the moment that controller is bolted down, the Pi's USB-C power socket and its fan header are inside a 20 mm slot, in shadow, with no finger room. That is exactly what you ran into. The fix is ordering, not care: **every Pi-side connection happens before the controller stack goes back on** — card, fan lead, power cable, USB serial cable — then the stack, then the covers.
+
+**2. Where things actually live on the controller.** I pulled the numbered front-panel figure:
+
+| Edge | Ports |
+|---|---|
+| The edge **opposite the power switch** | ① first PWM servo ports ×2 · ② first power-selection **jumper** · ③ second PWM servo ports ×2 · ④ second jumper · ⑤ I2C expansion · ⑥ **bus servo ports ×2** |
+| Top | ⑬ **blue power terminal** (battery, DC 5–12.6 V) · ⑭ **5 V/5 A output** · ⑮ USB-C serial/firmware · ⑯ buzzer · ⑰ on-board power LED |
+| Bottom | ⑦ four motor encoder ports (M1–M4) |
+| Other edge | ⑫ power switch · ⑪ reset · ⑩ two user buttons |
+
+Two things fall out of that. First, **two little yellow jumper blocks sit on that left edge right beside the PWM servo ports** — so if your two homeless white connectors belong anywhere, that edge is where to look, and it is the edge that gets swallowed when the board is screwed down. Second, ⑭ is explicitly the port the Pi is powered from: *"The ROS controller can be powered directly by connecting to the STM32's power output port through the power cable."* So the anxious cable runs **⑭ → Pi USB-C**, and both ends are only reachable with the stack open.
+
+**3. What I can't settle: the board at the arm's base.** It does not appear in the manual. Not in the prose, not as a labeled item — and the string `J5` exists in the entire book only *inside* a diagram, where the caption reads "Connect the PWM servo cable to the J5 port on the expansion board." So the documentation's whole story is *servo cable → controller*, and your arm-base board is undocumented. Whatever it is, HiWonder never expected anyone to ask about it. Your certainty may well be right; the manual can't confirm or deny it.
+
+**4. A correction.** Last message I told you your kit has "no pan-tilt," and used that to write off the Note. Half wrong. The arm spec reads: *"HX-06L × 6 (1 × Pan-Tilt, 2 × Body, 1 × Wrist, 1 × Gripper)."* **"Pan-tilt" is the name of one of your arm's six servos** — the base rotation, which the app calls "the base servo of the robot arm." So "the two 3-pin servo wires from the pan-tilt" probably isn't a camera gimbal at all; it's that joint. The Note may matter to you more than I said. I over-corrected, and it's the same trap facing both directions: I can read the website's manual, and I cannot read your robot.
+
+**What to send me when you're home**, for each of the three white connectors: the **wire colours in order**, the **number of positions** in the housing, and **what the other end terminates at**. Plus one photo of the socket on the arm-base board with the silkscreen visible. Those four things should let me name all three ports without either of us guessing.
