@@ -374,6 +374,79 @@ class TestReconcile(unittest.TestCase):
         self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "A")
 
 
+class TestReconcilePaths(unittest.TestCase):
+    """The hand-drain, done once: a run's work is on main iff every path it names is in the tree.
+
+    Background: `channels/reports/2026-10-13-dmitri-review-drain.md`, residual 2 — `--reconcile`
+    keys on the item's own run id and cannot see a delivery that landed under a recovery run, so
+    64 of 137 items sat in W though their paths were on main, and the hand-drain's own landing
+    then conflicted and lost the rows. This pins the deterministic replacement.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        root = Path(self.tmp.name)
+        self.repo = root / "repo"
+        (self.repo / "scripts").mkdir(parents=True)
+        (self.repo / "scripts" / "x.py").write_text("print(1)\n", encoding="utf-8")
+        self.path = root / "items.jsonl"
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _row(self, rid, paths, state=None, assigned_to=None, reviewer=None, reason=None):
+        return {"id": rid, "amigo": "desi", "scope": "internal", "title": "t",
+                "paths": paths, "state": state, "assigned_to": assigned_to,
+                "reviewer": reviewer, "reason": reason,
+                "filed_utc": "2026-10-06T00:00:00Z"}
+
+    def test_every_path_present_is_accomplished(self):
+        il.append([self._row("20261010T000000Z-aaaaaaaa", ["scripts/x.py"])], self.path)
+        made = il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri")
+        self.assertEqual([r["id"] for r in made], ["20261010T000000Z-aaaaaaaa"])
+        rec = il.load(self.path)["20261010T000000Z-aaaaaaaa"]
+        self.assertEqual(rec["state"], "accomplished")
+        self.assertEqual(rec["reviewer"], "dmitri")
+        self.assertIn("scripts/x.py", rec["reason"])
+
+    def test_one_missing_path_stays_waiting_by_default(self):
+        il.append([self._row("20261010T000000Z-bbbbbbbb",
+                             ["scripts/x.py", "research/gone.md"])], self.path)
+        self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri"), [])
+        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-bbbbbbbb"]), "W")
+
+    def test_one_missing_path_is_postponed_when_asked(self):
+        il.append([self._row("20261010T000000Z-cccccccc",
+                             ["scripts/x.py", "research/gone.md"])], self.path)
+        made = il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri",
+                                  postpone_absent=True)
+        self.assertEqual(len(made), 1)
+        rec = il.load(self.path)["20261010T000000Z-cccccccc"]
+        self.assertEqual(rec["state"], "postponed")
+        self.assertIn("research/gone.md", rec["reason"])
+        self.assertIn("delivery state", rec["reason"])
+
+    def test_scope_leaves_another_amigos_queue_alone(self):
+        il.append([self._row("20261010T000000Z-dddddddd", ["scripts/x.py"],
+                             assigned_to="desi")], self.path)
+        self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri",
+                                            scope="dmitri"), [])
+        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "W")
+
+    def test_a_reviewers_decision_is_not_overwritten(self):
+        il.append([self._row("20261010T000000Z-eeeeeeee", ["scripts/x.py"], state="rejected",
+                             reviewer="desi", reason="duplicate of an earlier landing")], self.path)
+        self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri"), [])
+        rec = il.load(self.path)["20261010T000000Z-eeeeeeee"]
+        self.assertEqual(rec["state"], "rejected")
+        self.assertEqual(rec["reason"], "duplicate of an earlier landing")
+
+    def test_reconciling_twice_appends_once(self):
+        il.append([self._row("20261010T000000Z-ffffffff", ["scripts/x.py"])], self.path)
+        self.assertEqual(len(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri")), 1)
+        self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri"), [])
+
+
 class TestAssignment(unittest.TestCase):
     """Who looks. The human's algorithm, 2026-10-09: name the best suited, else draw cheap."""
 

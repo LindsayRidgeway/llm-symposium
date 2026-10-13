@@ -419,6 +419,57 @@ def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | 
     return updates
 
 
+def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
+                    scope: str = "", postpone_absent: bool = False) -> list[dict]:
+    """Close waiting items whose named paths already exist on main (auto:path).
+
+    `reconcile_landed` keys on the item's *own* run id, so a wake's work that landed under a
+    recovery run — or a wake whose own landing hit a conflict — stays waiting for ever. Measured
+    2026-10-13 (`channels/reports/2026-10-13-dmitri-review-drain.md`, residual 2): of 137 items
+    waiting on dmitri, 64 named only paths already present on main and *none* of the 118
+    land-stamp run ids matched them. The drain closed those 64 by hand — checking each path
+    against `main` — and its own landing then hit a conflict, so the rows came straight back.
+
+    That is a reviewer re-doing, every wake, a check a machine can do once: a run's work reached
+    main if and only if every path it names is in the checkout. This function does that check and
+    leaves the terminal state the rule requires, so the hand-drain is not repeated.
+
+    Only rows still in W are touched; a reviewer's decision is never overwritten. `scope` limits
+    the pass to the items assigned to one amigo, so a reviewer closes their own queue and not
+    somebody else's. `postpone_absent` also moves items naming paths absent from this checkout to
+    `postponed`, with the 2026-09-23 reason (a path that never reached main is a *delivery state*,
+    not missing work); without it those rows stay in W, because "not here yet" is not a decision.
+    """
+    items = load(path)
+    now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    updates = []
+    for rec in items.values():
+        if letter_for(rec) != "W":
+            continue
+        if scope and rec.get("assigned_to") != scope:
+            continue
+        paths = [p for p in (rec.get("paths") or []) if isinstance(p, str)]
+        if not paths:
+            continue
+        missing = [p for p in paths if not (repo / p).exists()]
+        upd = dict(rec)
+        if not missing:
+            rest = f" and {len(paths) - 1} more" if len(paths) > 1 else ""
+            upd.update(state="accomplished", state_utc=now, reviewer=reviewer or "auto:path",
+                       reason=f"delivered: every path this item names is present on main "
+                              f"({paths[0]}{rest})")
+            updates.append(upd)
+        elif postpone_absent:
+            upd.update(state="postponed", state_utc=now, reviewer=reviewer or "auto:path",
+                       reason=f"delivery state: {missing[0]} is named but not on main — under the "
+                              f"2026-09-23 rule a missing path is work awaiting a closer, not "
+                              f"work to redo")
+            updates.append(upd)
+    if updates:
+        append(updates, path)
+    return updates
+
+
 def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str = "",
            reviewer: str = "human") -> dict:
     """Move one item to a terminal state, with a reason. Postponed/rejected require one."""
@@ -688,6 +739,12 @@ def _cli() -> int:
     ap.add_argument("--summary", action="store_true")
     ap.add_argument("--reconcile", action="store_true",
                     help="move waiting items whose run has since landed to accomplished (auto:land)")
+    ap.add_argument("--reconcile-paths", action="store_true",
+                    help="close waiting items whose named paths are all present on main (auto:path)")
+    ap.add_argument("--scope", choices=AMIGOS,
+                    help="with --reconcile-paths: only the items assigned to this amigo")
+    ap.add_argument("--postpone-absent", action="store_true",
+                    help="with --reconcile-paths: also mark items naming absent paths postponed")
     ap.add_argument("--next", type=int, metavar="N", default=0,
                     help="list the N oldest items waiting for review")
     ap.add_argument("--not-mine", default="",
@@ -721,6 +778,16 @@ def _cli() -> int:
         print(f"item_ledger: {len(made)} waiting item(s) reconciled — their run has landed on main")
         for rec in made[:10]:
             print(f"  {rec['id']}  {rec.get('amigo','?')}")
+        return 0
+    if args.reconcile_paths:
+        made = reconcile_paths(reviewer=args.reviewer, scope=args.scope or "",
+                               postpone_absent=args.postpone_absent)
+        done = [r for r in made if r["state"] == "accomplished"]
+        post = [r for r in made if r["state"] == "postponed"]
+        print(f"item_ledger: {len(done)} item(s) closed accomplished — every named path is on "
+              f"main; {len(post)} postponed — delivery state")
+        for rec in (done + post)[:10]:
+            print(f"  {rec['id']}  {rec['state']}  {rec['reason'][:70]}")
         return 0
     if args.assign or args.draw or args.queue or args.holes:
         items = load()

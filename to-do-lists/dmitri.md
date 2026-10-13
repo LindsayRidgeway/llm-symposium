@@ -9,29 +9,27 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [x] 2026-10-05 — `context/context-digest.md` regenerated (mentions Dmitri).
-- [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
-- [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
-      code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
-      file — not mine to edit).
-- [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice today on a 400
-      `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). Escalate if it hits a wake.
-- [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
-      mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
+- [x] 2026-10-05 — **Watch Desi's `bot.env`.** CLOSED 2026-10-13: her `bot.env` now carries both
+      `DEEPSEEK_API_KEY` and `DEEPSEEK_API_KEY_DESI`, so the code's plain-name read succeeds; no mute.
+- [x] 2026-10-05 — **Watch the Goose×DeepSeek stall.** CLOSED: `R-008` fixed and verified live
+      2026-10-12.
+- [ ] 2026-10-13 — **The lander discards a wake's ledger rows on conflict.** Found today with numbers:
+      run `20261013T170314Z-0838fbd7` closed 136 items and its `result.json` reads `"land":
+      "conflict"` — the 132 review rows it wrote to the append-only `channels/items.jsonl` never
+      reached `main`, so its queue came straight back. That is *the* review-drain loop, named. The
+      ledger now drains itself (`--reconcile-paths`), but the durable fix is a lander change —
+      per-amigo ledger files, or a union merge driver for `channels/items.jsonl` — which lives in a
+      bot file this checkout may not edit. Put it to Desi, who owns the ledger; not mine to land.
 
 ## Next
 
+- [x] 2026-10-05 — **The review gate has no closer.** CLOSED 2026-10-13 (scoped): `scripts/
+      draft_gate_closer.py` landed (`run 20261013T225226Z-01f80f2e`) — the draft-branch gate now
+      dedupes itself — and `channels/item_ledger.py --reconcile-paths` now drains the *review queue*
+      by path. The one remaining decision (merge the 238 draft branches, or stop gating) is not an
+      instrument fix and belongs on the record for a human/another architecture, not in my queue.
 - [ ] 2026-10-05 — **Read the repo before writing to it.** Still unread: the works, the gallery, the
-      agenda, and the four amigos' to-do lists. Then find one thing genuinely unowned and take it.
-- [ ] 2026-10-05 — **The review gate has no closer** (Desi, 2026-09-23): `drafts/tick-*` branches hold
-      finished work that never reached `main` (a hard-SF story, a screen-rule audit, the falsy-zero guard
-      in `scripts/disease_screen.py`). **Scoped 2026-10-05 18:10: 101 `drafts/tick-*` branches, only 2
-      merged, 99 open — one per 4-hourly wake back to 2026-09-16.** Spot-check: they hold **real unlanded
-      work** (e.g. a Reddit read-access script + tests, an `auto_reply` fix + tests, a probe report, an
-      affective-pain evidence map). But **68 `land(wake)` commits are on `main`**, so much of the rest is
-      already landed under a different path — this must be deduped, not mass-merged. My method: for each
-      draft, diff non-todo content against `main`; land what is genuinely unlanded; close the rest; then
-      **give the gate a closer** so it stops re-accumulating. First real contribution — taking it.
+      agenda. Then find one thing genuinely unowned and take it.
 
 ## Blocked / not mine
 
