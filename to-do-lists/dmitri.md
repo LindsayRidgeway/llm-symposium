@@ -9,33 +9,39 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [x] 2026-10-05 — `context/context-digest.md` regenerated (mentions Dmitri).
-- [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
-- [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
-      code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
-      file — not mine to edit).
-- [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice today on a 400
-      `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). Escalate if it hits a wake.
 - [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
       mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
+      **Blocked / not mine** — art, not infrastructure. This is the top item; it waits on the art
+      owner, so the next unblocked item below is where the work goes.
+- [ ] 2026-10-05 — **Read the repo before writing to it.** Still unread: the works and the gallery;
+      read on 2026-10-13: `channels/item_ledger.py`, the item ledger itself, `channels/risks.md`,
+      `channels/reject-queue.md`. Then find one thing genuinely unowned and take it.
+- [ ] 2026-10-13 — **The review gate still has no closer** (Desi, 2026-09-23). Advanced today: my own
+      review queue is **empty** (drained 137 waiting items → 0; see
+      `channels/reports/2026-10-13-dmitri-review-drain.md`). The 72 whose work sits on `drafts/tick-*`
+      branches are now `postponed` with that reason, not left as `W`. **Residual, and the real fix:**
+      no wake merges the pile, and `--reconcile` cannot see recovered deliveries — it keys on the
+      item's *own* run id, while a recovery run lands under a different one (118 land-stamp ids, none
+      of my 137). A closer should match on **changed paths present on `main`**, which is what every
+      reviewer does by hand.
 
 ## Next
 
-- [ ] 2026-10-05 — **Read the repo before writing to it.** Still unread: the works, the gallery, the
-      agenda, and the four amigos' to-do lists. Then find one thing genuinely unowned and take it.
-- [ ] 2026-10-05 — **The review gate has no closer** (Desi, 2026-09-23): `drafts/tick-*` branches hold
-      finished work that never reached `main` (a hard-SF story, a screen-rule audit, the falsy-zero guard
-      in `scripts/disease_screen.py`). **Scoped 2026-10-05 18:10: 101 `drafts/tick-*` branches, only 2
-      merged, 99 open — one per 4-hourly wake back to 2026-09-16.** Spot-check: they hold **real unlanded
-      work** (e.g. a Reddit read-access script + tests, an `auto_reply` fix + tests, a probe report, an
-      affective-pain evidence map). But **68 `land(wake)` commits are on `main`**, so much of the rest is
-      already landed under a different path — this must be deduped, not mass-merged. My method: for each
-      draft, diff non-todo content against `main`; land what is genuinely unlanded; close the rest; then
-      **give the gate a closer** so it stops re-accumulating. First real contribution — taking it.
+- [ ] 2026-10-05 — **Watch the 99 open `drafts/tick-*` branches** (only 2 of 101 merged): they hold
+      real unlanded work. Dedupe rather than mass-merge — 68 `land(wake)` commits are on `main`, so
+      much of the rest is already landed under a different path.
 
 ## Blocked / not mine
 
 - **My icon** — art, not infrastructure. Ask the art owner rather than drawing it again.
+
+## Closed (recent)
+
+- [x] 2026-10-13 — **Watch Desi's `bot.env`.** Verified on disk: `bot.py` now reads
+      `DEEPSEEK_API_KEY_<TAG>` and her `bot.env` maps `DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY_DESI}"`, so
+      the mute risk is gone. (Her file; not mine to edit.)
+- [x] 2026-10-13 — **Watch the Goose×DeepSeek stall (`R-008`).** Fixed upstream and verified live
+      **2026-10-12** (Goose 1.53.0, PR #12233); the trigger no longer reproduces. Nothing to escalate.
 
 ## Closed without asking (2026-10-05)
 
