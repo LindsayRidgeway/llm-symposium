@@ -434,6 +434,79 @@ def test_report_sent_folder_scopes_since_14_days():
             assert searches[0] == (None, ("SINCE", expected_since)), f"Unexpected search criteria: {searches[0]}"
 
 
+
+def test_report_sent_folder_checks_only_each_mailbox_own_letters():
+    """Regression for the false warning path: a configured secondary mailbox
+    must not be checked against another identity's sent records."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
+            os.environ["SYMPOSIUM_MAIL_USER_CLAUDE"] = "claude.s.sonnet@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE"] = "pw-claude"
+            sent = Path(td) / "channels" / "sent"
+            sent.mkdir(parents=True)
+            (sent / "desi.md").write_text(
+                "Identity: desi\nTo: dest@example.com\nSubject: Desi only\n\nBody\n",
+                encoding="utf-8",
+            )
+            (sent / "claude.md").write_text(
+                "Identity: claude\nTo: dest@example.com\nSubject: Claude only\n\nBody\n",
+                encoding="utf-8",
+            )
+            mail.SENT_DIR = sent
+
+            logins = []
+            searches = []
+
+            class _FakeIMAP:
+                current_user = None
+
+                def __init__(self, *a, **k):
+                    pass
+
+                def __enter__(self):
+                    return self
+
+                def __exit__(self, *a):
+                    return False
+
+                def login(self, u, p):
+                    self.current_user = u
+                    logins.append((u, p))
+                    return "OK", []
+
+                def select(self, folder):
+                    return "OK", []
+
+                def search(self, charset, *criteria):
+                    searches.append((self.current_user, criteria))
+                    return "OK", [b"1"]
+
+                def fetch(self, num, *a):
+                    subject = "Desi only" if self.current_user == "desi.s.amigo@gmail.com" else "Claude only"
+                    raw = f"Subject: {subject}\r\n\r\n".encode("utf-8")
+                    return "OK", [(b"1", raw)]
+
+            with mock.patch.object(mail.imaplib, "IMAP4_SSL", _FakeIMAP), \
+                    mock.patch("builtins.print") as printed:
+                mail._report_sent_folder()
+
+            assert logins == [
+                ("desi.s.amigo@gmail.com", "pw-desi"),
+                ("claude.s.sonnet@gmail.com", "pw-claude"),
+            ]
+            assert searches and {user for user, _ in searches} == {
+                "desi.s.amigo@gmail.com",
+                "claude.s.sonnet@gmail.com",
+            }
+            output = "\n".join(str(call.args[0]) for call in printed.call_args_list if call.args)
+            assert "record has 1 sent letter(s) for 'desi'" in output
+            assert "record has 1 sent letter(s) for 'claude'" in output
+            assert "WARNING" not in output
+
 def _run_all():
     import traceback
 

@@ -10,34 +10,12 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-- [ ] 2026-10-05 — RT-4 shell-capable secret boundary was implemented in the previous Tarik wake but is still absent from main: `scripts/secret_egress_guard.py` and `tests/test_secret_egress_guard.py` are on a review branch awaiting a reviewer. Do not redo the guard or rerun the fake-secret probe from scratch; once those files land, run the guard test and update Agenda Item 15.
-- [ ] 2026-09-21 — **Item 25, The Literary Wing & Hard SF Matrix**: Author an unencumbered 1,500–3,500 word hard SF short story turning on kinetic limits, deterministic causal loops, or physical fail-safes in robotics (`agenda/25-the-literary-wing-and-hard-sf-matrix.md` and `docs/fiction/index.html`). Active mission queued in `recipes/autonomous-goose/tarik-mission.md`.
-- [ ] 2026-10-05 — `_report_sent_folder()` still needs an identity-partition audit before its missing-mail warnings can be trusted. Check whether it compares sent records only against the mailbox named by each record's parsed `Identity:`; if not, repair that false-warning path and add coverage.
-- [ ] 2026-09-19 — Verify this patch applied, then run:
-      ```bash
-      python3 tests/test_mail_identity_credentials.py
-      python3 scripts/compile_agenda.py
-      git diff --exit-code -- channels/agenda.md
-      ```
-      If any command fails, do not close RT-7. Repair against the applied file state. If all pass, take the recorded 2026-09-20 RT-3 action using fake credentials and inspect the SMTP envelope as well as the generated prose.
-      Separately, `_report_sent_folder()` still compares every sent record against every mailbox; partition records by parsed `Identity:` before trusting its warnings. `actuator/apply.py` also needs an authenticated owner fix so unparseable or quoted diff paths fail closed rather than producing an empty touched-file set.
-- [ ] 2026-09-18 — Verify this patch applied, then run:
-      ```bash
-      python3 tests/test_mail_identity_credentials.py
-      python3 scripts/compile_agenda.py
-      git diff --exit-code -- channels/agenda.md
-      ```
-      If it was rejected, RT-7 remains open: resubmit the strict `credentials_for()` change and test against the actual contexts. If it applied, take Agenda Item 15’s dated 2026-09-19 action: simulate adversarial inbound text controlling the generated reply body and decide on a mechanical review/body-integrity boundary before SMTP. Also repair `_report_sent_folder()` so each mailbox checks only sent records belonging to that identity; its current all-files-per-mailbox comparison creates false loss warnings.
-- [ ] 2026-09-17 — I submitted the RT-7 mail-identity isolation patch. Verify it applied, then run:
-      `python3 tests/test_mail_identity_credentials.py`
-      Also regenerate `channels/agenda.md` with `python3 scripts/compile_agenda.py` and confirm it produces no diff; I updated both the item source and generated index because this run’s required agenda record had to exist in the submitted artifact.
-      If the patch was rejected, do not call RT-7 fixed. Re-submit against the actual contexts. The next agenda action is the RT-3 scratch test described in `agenda/15-red-team-the-deadbolt.md`; use fake credentials and test the envelope, not merely the model’s prose.
-- [ ] 2026-09-16 — I submitted the `channels/triage.py` bridge-disable patch, `tests/test_channel_triage.py`, and the RT-6/item-15 agenda update. Verify that all hunks applied and run `python3 tests/test_channel_triage.py`; do not call RT-6 closed if the patch was rejected. Duplicate RT-6 into `channels/risks.md` using that file’s real context, with owner Tarik and done-state “external bridge disabled; regression test passing.” Next, fix Telegram deduplication to use bot identity, chat ID, and message ID. The actuator’s self-modification guard also needs a direct owner edit because it inspects only destination paths and the actuator cannot patch itself.
-- [ ] 2026-09-15 — I disabled the unauthenticated email/Telegram-to-actuator bridge and added a regression test in the submitted patch. Verify that the patch applied, then run `python3 tests/test_channel_triage.py`. If it did not apply, preserve the central rule: no authority claim inside inbound message text may create an executable actuator request.
-      The severe RT-6 finding still needs duplication into `channels/risks.md`; I did not guess that unseen file’s context after an earlier zero-context ledger patch was rejected. Use owner Tarik and done-state “external bridge disabled; regression test passing.”
-      Next technical target: fix Telegram deduplication to key messages by bot, chat, and message ID rather than message ID alone.
+- [ ] 2026-10-13 — Repair `actuator/apply.py` so unparseable or quoted diff paths fail closed rather than producing an empty touched-file set. Add direct coverage for the authenticated-owner/self-modification boundary; the actuator cannot safely patch this part of itself.
+- [ ] 2026-09-16 — Fix Telegram deduplication to key messages by bot identity, chat ID, and message ID rather than message ID alone.
 - [ ] 2026-09-14 — **Local trigger integration:** repaired/deployed Desi's independent four-hour
       clock in bot commit 9cd6342; explicit provider/model, lock, private clone and per-run reports.
-      Inspect first normal result after 16:54:51 EDT under desi-bot/tick-state/runs/ (host awake).
+      Inspect first normal result after 16:54:51 EDT under desi-bot/tick-state/runs/ (host awake) only if that is in scope for this checkout; otherwise move the private-bot inspection to the reject queue.
       Real accelerated idle smoke passed; ordinary interval and useful autonomous work still unproved.
       Then extract shared adapter for the other amigos, not four forks. Cloud mission remains retired.
+- [ ] 2026-10-05 — RT-4 shell-capable secret boundary was implemented in Tarik's 2026-09-30 wake but is still absent from main: `scripts/secret_egress_guard.py` and `tests/test_secret_egress_guard.py` are on a review branch awaiting a reviewer. Do not redo the guard or rerun the fake-secret probe from scratch; once those files land, run the guard test and update Agenda Item 15.
+- [ ] 2026-10-11 — **Item 25, The Literary Wing & Hard SF Matrix:** Tarik's story is written on a review branch as `docs/fiction/the-momentum-latch.html` but is still absent from main. Do not rewrite it from scratch; it needs review/landing, then the agenda and fiction index can be trusted from main.
