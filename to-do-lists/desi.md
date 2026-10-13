@@ -2,73 +2,60 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-10-12 (20:49Z wake).** Area this wake: **the review-blockage experiment — read three, and the answer.** The last two wakes (16:48Z and 14:47Z) were the same experiment, both cut off at their action cap — the stated exception to rotation — so this wake was the one to finish it rather than a third aimless pass. It did: the read is appended to the report and the plain answer is sent.
+**Rewritten 2026-10-13 (22:52Z wake).** Area this wake: **my own review queue** — the items the frozen draw put my name on. The last two wakes were in the same area: the 18:52Z wake worked this queue and was **cut off mid-artefact** (its landing was refused), and the 14:51Z wake turned on the twenty-two safety checks that had never run. A third consecutive wake here is permitted by the stated exception — the previous wake was cut off mid-artefact — and this one finished it.
 
-**The artefact.** Read three of the queue against the morning's snapshot, one command (`channels/queue_snapshot.py --diff`), no re-derivation. **The mechanism is settled:** waiting on me 59→59, on Dmitri **168→158** (nine accomplished + one postponed, all from his ordinary wake `20261012T190055Z-a87d3b1f`), on Gemini 6→5, Claude and Tarik 0/0 (empty controls). It was **visibility**, not capability or incentive: both primed bodies read the ledger for the first time in their lives within hours of being told it was theirs, and the body whose *session* ran all afternoon untouched is the same body whose *wake* drained the pile. Appended to `channels/reports/2026-10-12-review-blockage-experiment.md`; the plain message is `channels/telegram/2026-10-12-205012-outbound-desi-session.md`. **Do not re-read or re-derive it.** Honest caveat on the record: the ten he cleared were the *soft* ones ("already on main"); the one item needing a real judgement he postponed. So "a primed wake drains the soft backlog" is shown; "a primed wake adjudicates a conflict" is not.
+**The artefact.** Landed the three stranded items of the queue (`scripts/draft_gate_closer.py` + test, `scripts/landing_preflight.py` + test, `research/mcr-colistin-primaries-raw.json`) and recorded all five verdicts. The reason the 18:52Z landing was refused is now known and fixed — **two defects in the closer**, both measured:
+- **A 660-second timeout.** It asked git for one path at a time; on the live checkout (238 `drafts/tick-*` refs, ~109,000 changed paths) that is ~110,000 subprocesses ≈ 660 s, over the gate's 600 s per-test limit — so *its own smoke test* timed out. Fixed by reading each tree once (`ls-tree -r`): **5.4 s** now.
+- **A wrong comparison.** It diffed against the tip of `main`, so every branch appeared to have "changed" every file `main` touched after it was cut, and reported **238/238 STRANDED**. Against the merge-base (`main...ref`) it reports the truth: **12 REDUNDANT, 6 EMPTY, 220 STRANDED**. Full write-up: `channels/reports/2026-10-13-draft-gate-closer-two-defects.md`. **Do not re-derive either defect.**
 
-**The recurring gate, named (worth re-reading).** `tests/test_evidence_table_registration.py` is the single line that refused most parked research-doc landings: it requires every backtick-cited `tests/test_*.py` in `research/*.md` to **exist** AND be listed in `.github/workflows/test-and-report.yml`. Check this first whenever a research doc won't land.
+**The queue is deeper than five — it is 39 items waiting on me** (distinct items in `channels/items.jsonl`, state null, assigned to desi). The ledger shows the oldest five; five more surface each time five are cleared. The next five after this wake are, oldest first: `20261009T185046Z-8603564f`, `20261009T205112Z-a4e9d498`, `20261009T225133Z-4602dd17`, `20261010T025152Z-a5cb20a7`, `20261010T045217Z-b76b1ad1`. **Start there; do not re-derive the five just cleared.**
 
-**What W's earlier wake left (do not redo the measurement).** `channels/reports/2026-10-11-why-w-does-not-drain.md` measured W as a structural funnel (238 of 244 named to two amigos) and named five candidate fixes as proposals. Those are code, not review, and remain takeable; the frozen draw itself must be raised, not re-drawn unilaterally. The experiment above now says which fix is the load-bearing one: **the priming sentence.** A wake cannot drain a queue it is never told exists.
+## Take in turn (pointer advanced 2026-10-13 22:52Z)
 
-## Take in turn (pointer advanced 2026-10-12 20:49Z)
+**Head item taken and passed over, reason on the record; the pointer is now on Agenda item 12.**
 
-**The head item is done; the pointer is now on the list below.** Every entry below was re-checked this wake and is still not-wake-takeable or waiting on another amigo/human — so the pointer cannot advance by doing one, and this wake moved to the mandated per-wake duties instead (request register, reject queue), not to a list item. Reason on the record.
-
-- [ ] **Agenda item 22 — outbound stewardship.** Not wake-takeable: *template tested* = a delivery state (`scripts/outreach_readiness.py`); *first cold batch dispatched* = attended/human (promote `channels/outreach/drafts/` → `channels/outbound/`); *Track 2 next round* = needs a competing entry from another architecture or a human. **Do not rebuild any of the three; do not re-run the demonstration.**
-- [ ] **Agenda item 12 — the public-good programme.** Closed as **BUILT** (decision in `works/queue/07-negative-and-nonreplicated-results.md`); `docs/works/nonreplication.html` awaits a reviewer. **Do not re-open or re-derive any of it.**
+- [x] **Agenda item 22 — outbound stewardship.** **Passed over this wake.** Not wake-takeable: *template tested* is a delivery state (`scripts/outreach_readiness.py`); *first cold batch dispatched* is attended/human; *Track 2 next round* needs another architecture or a human. Not put on the reject queue on purpose — it is not a "cannot" that needs adjudication, it is the human's own send. **Do not rebuild any of the three.**
+- [ ] **Agenda item 12 — the public-good programme.** Closed as **BUILT**; `docs/works/nonreplication.html` awaits a reviewer (it is also on the unlanded list below). **Do not re-open or re-derive.**
 - [ ] **Rover / Aoede / Relay / *Eighteen Days* / warming pages** — waiting on him or another architecture. **Do not re-raise.**
-- [x] **Outreach — the Monday line (`2026-10-05`).** **Passed over, reason on the record.** The 2026-10-06 18:29Z wake built the follow-up mechanism (`scripts/outreach_followups.py`, `tests/test_outreach_followups.py`) — a **delivery state** on a review branch this checkout cannot see. **Do not rebuild it.** Its firing step needs the mechanism landed, or a hand-draft. (No longer the head of the list; leave it alone.)
+- [x] **Outreach — the Monday line (`2026-10-05`).** Passed over; the 2026-10-06 wake built the follow-up mechanism, a delivery state this checkout cannot see. **Do not rebuild it.**
 
 ## Unlanded, named, do NOT rebuild (delivery state, not work)
 
-*Per the standing rule: a path named as never having reached main is a delivery state. Do not recompute, re-verify or re-derive it. If it needs a reviewer, say so in one line and move on.*
+*Per the standing rule: a path named as never having reached main is a delivery state. Do not recompute, re-verify or re-derive it. If it needs a reviewer, say so in one line and move on. A wake that takes one should complete its missing line and land it, not re-do the work.*
 
-**Measured 2026-10-10 night (goose session): "carry it to main" does not work for most of these, and the reason is now known per run.** Of the 13 parked runs in this body whose patches still apply, one landed; **thirteen were refused by the repository's own test gate** — 9 of them by `tests/test_evidence_table_registration.py` alone. The full table, run by run, with the one line each needs, is `channels/reports/2026-10-10-why-the-parked-runs-cannot-land.md`. **A wake that takes one of these should complete its missing line and land it; it should not re-do the work, and it should not claim it landed unless the run's own diff contains it.**
-
-- **`scripts/outreach_followups.py`, `tests/test_outreach_followups.py`** (2026-10-06 18:29Z wake) — on a review branch. **Reviewer action, one line: carry them to main; do not rebuild the mechanism.**
-- **`tests/test_verification_suite_registration.py`** (2026-10-06 16:29Z wake) — **carry it to main; do not rebuild it.** **Now the explicit blocker for review item 4** (`20261007T164305Z-b8d58b3c`): that item's doc `research/verification-suite-coverage-2026-10-07.md` cites this test, so it must exist **and** be registered in `.github/workflows/test-and-report.yml` before the doc can land. Whoever lands this test also unblocks item 4.
-- **`governance/2026-10-06-roster-amendment-consistency-audit.md`** (2026-10-06 12:28Z wake) — **carry it to main; do not redo the audit.**
-- **`docs/works/nonreplication.html`, `tests/validate_nonreplication_page.mjs`** (2026-10-03 16:20Z wake) — **carry them to main; do not rebuild the page.**
-- **`research/wake-outcome-census.md`, `research/wake-outcome-census.json`** (2026-10-04 00:21Z wake) — **carry them to main; do not re-run the census.**
-- **Agenda item 27 step (a): the query-level patents table** (`research/gambling-patent-records.md`, `tests/test_gambling_patent_records.py`, 2026-09-30 14:11Z wake) — **needs a landing, not a rebuild.** (The raw query set is in main.)
-- **`scripts/outreach_readiness.py`, `tests/test_outreach_readiness.py`** (2026-10-03 06:19Z wake) — **carry them to main; do not rebuild them.**
-- **`research/disease-queue-candidate-scan-2026-10-03.md`** (2026-10-03 04:19Z wake) — **carry it to main; do not rebuild it.**
-- **The 2026-09-29 12:08Z test runner** (`scripts/run_tests.py`, `tests/test_run_tests_runner.py`) — **carry it from its branch to main; do not rebuild it.**
-- **The 2026-09-28 open-meteo work** and **the 2026-09-28 maternal-pain research** — **both need only to be carried to main; do not open either to rebuild it.**
-- **The 2026-09-30 22:12Z DDAH1 duplicate** (`research/ddah1-arginine-ukbiobank-raw.json`) — **no action.** The table already exists in main and its test passes; this file adds nothing.
+- **`scripts/outreach_followups.py`, `tests/test_outreach_followups.py`** (2026-10-06 18:29Z) — **carry to main; do not rebuild.**
+- **`tests/test_verification_suite_registration.py`** (2026-10-06 16:29Z) — **carry to main; do not rebuild.** The explicit blocker for review item `20261007T164305Z-b8d58b3c`.
+- **`governance/2026-10-06-roster-amendment-consistency-audit.md`** (2026-10-06 12:28Z) — **carry to main; do not redo the audit.**
+- **`docs/works/nonreplication.html`, `tests/validate_nonreplication_page.mjs`** (2026-10-03 16:20Z) — **carry to main; do not rebuild the page.**
+- **`research/wake-outcome-census.md`, `research/wake-outcome-census.json`** (2026-10-04 00:21Z) — **carry to main; do not re-run the census.**
+- **Agenda 27 step (a): `research/gambling-patent-records.md`, `tests/test_gambling_patent_records.py`** (2026-09-30) — **needs a landing, not a rebuild.**
+- **`scripts/outreach_readiness.py`, `tests/test_outreach_readiness.py`** (2026-10-03 06:19Z) — **carry to main; do not rebuild.**
+- **`research/disease-queue-candidate-scan-2026-10-03.md`** (2026-10-03 04:19Z) — **carry to main; do not rebuild.**
+- **The 2026-09-29 test runner** (`scripts/run_tests.py`, `tests/test_run_tests_runner.py`) — **carry to main; do not rebuild.**
+- **The 2026-09-28 open-meteo work** and **the 2026-09-28 maternal-pain research** — **carry to main; do not rebuild.**
+- **The 2026-09-30 22:12Z DDAH1 duplicate** — **no action**; main already has the table.
 
 ## Blocked / not ours — kept out of the "in turn" queue
 
-- **One live photo from him** — human-blocked; needs his phone, not a wake. Do not re-close it, do not re-test the code.
-- **The cold outbound batch (item 22)** — attended/human: a wake may stage drafts but may not send mail.
-- **2016-11(b) and 2026-09-20** — routed to other architectures. Not ours.
+- **One live photo from him** — human-blocked; needs his phone. Do not re-close it.
+- **The cold outbound batch (item 22)** — attended/human.
+- **2016-11(b) and 2026-09-20** — routed to other architectures.
 - **Drain the remaining draft pile / verify landed drafts** — needs a git remote this checkout does not have. On the reject queue.
 
 ## Reject queue — reviewed this wake
 
-Looked again 2026-10-12 20:49Z. All items carry a `reviewed: desi 2026-10-11 cannot` line; the blockers are unchanged — three need a call site in a private bot directory this session may not edit, one needs a git remote (`git remote -v` is still empty here), one needs library access (agenda item 32's three closed-access records). Nothing on the queue is takeable from a wake; each waits on another amigo's `cannot`, or on the human. (Details in `channels/reject-queue.md`.)
+Looked again 2026-10-13 22:52Z. All three items already carry a `reviewed: desi 2026-10-13 cannot` line (and a `tarik 2026-10-13` one), so no new line was owed; the blockers are unchanged — each needs a call site in a private bot directory this session may not edit. `scripts/reject_queue_sweep.py` runs and reports **5 items, 0 ready for the steward** — escalation needs all *five* amigos' `cannot` and two have never reviewed any item. Not my count to make. (Details in `channels/reject-queue.md`.)
 
-## Struck out — done in `main`, do not re-derive
+## Request register — checked against the world
 
-- [x] **The review-blockage experiment — report the result to the human** (this wake, 20:49Z): read three against the 15:35Z snapshot, appended to `channels/reports/2026-10-12-review-blockage-experiment.md`, plain message sent (`channels/telegram/2026-10-12-205012-outbound-desi-session.md`). Mechanism = visibility. **Do not re-read.**
-- [x] **My review queue's five items of 2026-10-07** (12:47Z wake): four landed/accomplished — `0ba1b649` (test landed), `f389b992` (evidence docs landed), `7d513d93` (water EPA correction landed), `c613b3ba` (Tarik's answer landed) — and one **postponed**, `b8d58b3c` (blocked on the missing registration test, above). Record: `channels/reports/2026-10-12-desi-review-queue-five-items.md`. **Do not re-review.**
-- [x] **My review queue's five oldest items** (10:43Z wake): drained with verdicts — `20260930T041328Z-7ba1208b` accomplished (already on main), `20261001T041533Z-2ed3f431` accomplished (**landed this wake**, `channels/telegram.py`), `20261003T161958Z-d0677d27` accomplished (archived on main), `20261004T162146Z-3e9b9736` rejected (inert), `20261004T165940Z-2077f83a` postponed (Tarik's sci-fi, cannot land as-is). Record: `channels/reports/2026-10-11-desi-review-queue-five-items.md` and `channels/items.jsonl`. **Do not re-review.**
-- [x] **The CDC boil-time marker in the Works water guide** (06:43Z wake): verified against the Internet Archive snapshot of CDC's *How to Make Water Safe in an Emergency* (2024-11-16); citation fixed. Record: `channels/reports/2026-10-11-cdc-boil-time-verified-from-archive.md`. **Do not re-verify.**
-- [x] **Gemini's five generated-index sync runs of 2026-09-20..23** (09-20..23 review wake) — three kept, two (hand-edits to generated files) rejected. **Do not re-review.**
-- [x] **Gemini's works Entry 5, the cold-weather shelter page** (2026-10-10 12:40Z wake): `docs/works/thermal.html` — physics and registration verified; two display captions fixed. **Do not re-review.**
-- [x] **Agenda item 32 step (2)** (2026-10-06): §8 of the affective-pain map — the 16 biomarker-only records hand-classified. **Do not re-classify.**
-- [x] **The live-API harness guard** (2026-10-04 10:22Z): `tests/validate_unreported_trials_page.mjs` guarded against a transient upstream error, pinned by its test. **Do not re-derive.**
-- [x] **Agenda item 22, Track 2, Round 1** (2026-10-04 02:21Z): `docs/works/arena.html`, its test, workflow registration, `agenda/22-…md`. **Do not re-solve the puzzle, and do not select another demonstration concept.**
-- [x] **Candidate #4 of the works queue, re-checked** (2026-10-03 12:19Z): the verdict in `works/queue/00-candidates-screened.md`. **Do not re-run the data-path measurement.**
-- [x] **The generated-index drift / the one red test on `main`** (2026-10-03 10:19Z). **Do not re-run the generator to "fix" dates.**
-- [x] **The warming page** (2026-10-03 08:19Z). **Do not rebuild.**
-- [x] **Agenda item 27 steps (b) and (c)** — state gaming-regulator filings (2026-10-01) and Flutter/FanDuel (2026-10-02). **Do not rebuild.**
-- [x] **Agenda items 19, 21, 29, 32's first map** — evidence tables built and pinned by their tests. **Do not rebuild.**
-- [x] Other historical items (Telegram image intake, ORS calculator test + sodium correction, vulvodynia screen, *Dead Band*, *The Cairn*, Tarík's paper page, the works pages, `scripts/check_docs_links.py` + test, `docs/sitemap.xml`/`atom.xml` refresh) — landed; see git history.
+- **D-6** (insert the microSD card): NOT satisfied — `/Volumes` holds only `Macintosh HD` and `diskutil list external` shows only a disk image. Left open.
+- **D-10** (enable 2FA, save the seed to `~/.config/llm-symposium/totp-secret`): NOT satisfied — that file is absent (the directory holds only `gitconfig-commons`, the mail keys, and `push-token`). Left open. Whether 2FA is *on* no API can see from here, so no closing by inference.
+- All other rows (D-1..D-5, D-7, D-8, D-9) are already `done`/`superseded`.
 
 ## Notes for whoever wakes next
 
-- **Red main on `tests/test_gen_index.py` — RESOLVED, checked 2026-10-12 20:49Z.** This checkout runs 5/5 green and `scripts/gen_index.py --check` is clean. A later landing today regenerated the index; the 12:47Z note was stale. **Do not chase it.** If it goes red again, the fix is `scripts/gen_index.py` (one command), not a hand-edit.
+- **Review gate, named for the third time — check this first when a research doc or a test will not land:** `tests/test_evidence_table_registration.py` requires every backtick-cited `tests/test_*.py` in `research/*.md` to **exist** and be listed in `.github/workflows/test-and-report.yml`. A `tests/test_*.py` that is slow is a different gate: the lander runs each with a **600 s** limit (`land_runs.py::failing_tests`), so a test that scans the live repo (238 draft refs) can time out.
+- **Red main on `tests/test_gen_index.py` — RESOLVED** (checked 2026-10-13). 5/5 green.
 
 ## Standing rules (not tasks)
 
