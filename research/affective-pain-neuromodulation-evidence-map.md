@@ -294,3 +294,122 @@ dissociations.
 
 **Pinned by** `tests/test_affective_pain_acupuncture_filtered.py`, which re-derives the 16 from the
 stored flags and fails if the map names a different set.
+
+---
+
+## 9. The same filtered design against a second pain population — low back pain, run 2026-10-08
+
+**Why this section exists.** §7 and §8 established a claim about the *acupuncture* arm — the census is
+not blind to pain but is blind to mood (*the brain and the pain, but not the mood*). Item 32's own next
+action, step 3, asks the generalisation question: run **the same filtered design** against a **second
+pain population** and see whether the affect-blindness survives the change. This section is that run.
+Written 2026-10-08 (Dmitri, clock wake).
+
+**Which second population, and the reading that was not taken.** "The same filtered design against a
+second pain population" admits two readings, and the choice is recorded, not hidden:
+
+- **(A) swap the pain block for a named condition, keep the measurement filter** — taken here, with the
+  population **chronic low back pain**;
+- **(B) drop the intervention block and keep the original pain block** — the *whole* chronic-pain
+  measurement literature; measured at **2,200** matches on 2026-10-08, too large for a census and left
+  unrun.
+
+Chronic low back pain is chosen for (A) because it is the most common chronic pain condition and is
+clinically and literarily distinct from the fibromyalgia/somatoform cluster that carries every both-flag
+record in the first two arms. **The measurement filter is imported unchanged** from the step-2 script
+(`scripts/affective_pain_acupuncture_filtered.py`), so the filter cannot drift between the two arms; only
+the population block differs. Raw records and flags:
+`research/affective-pain-neuromodulation-second-population-raw.json`; the run is
+`scripts/affective_pain_second_population.py`.
+
+| arm | query = **population block** AND the *same* filter AND `humans[MeSH Terms]` | matching | fetched |
+|---|---|---|---|
+| `low_back_pain_filtered` | `("chronic low back pain"[tiab] OR "persistent low back pain"[tiab] OR "non-specific low back pain"[tiab] OR "nonspecific low back pain"[tiab])` AND `(fmri … locus coeruleus)` | **197** | **197 — census** |
+
+Publication window 2015-01-01 → 2026-10-08. A **census**: 197 of 197 fetched, no relevance ranking.
+
+**Composition of the 197** (same classifier as §2, so the same caveats apply):
+
+| | low back pain arm |
+|---|---|
+| records | **197** |
+| reviews | **20** |
+| protocols | **12** |
+| animal-subject | **4** |
+| **human primary** | **165** |
+| set the affective flag | 97 |
+| set the biomarker flag | 192 (near-100% by construction — the filter names the measurements) |
+| **set both** | **96** |
+| set neither | 4 |
+| affective + biomarker in one sentence | 56 |
+
+**The comparison the step asks for — identical statistics on both arms, human-primary only.** The
+acupuncture arm is §7's stored census; the classifier, the human-primary rule and the flag definitions
+are the same object, so the two columns are countable against each other:
+
+| human-primary record | `acupuncture_filtered` (§7) | `low_back_pain_filtered` (§9) |
+|---|---|---|
+| records | 21 | 165 |
+| sets the affective flag | **5 (24%)** | **77 (47%)** |
+| sets the biomarker flag | 21 | 160 |
+| **sets both** | **5 (24%)** | **76 (46%)** |
+| affect + biomarker in **one sentence** | **2 (10%)** | **45 (27%)** |
+| names a pain-intensity instrument | 9 | 67 |
+
+**The result: the affect-blindness does not generalise.** Among human-primary records, the acupuncture
+arm names an affect term in **5 of 21**; the low-back-pain arm in **77 of 165** — twice the rate — and
+names affect and a brain/autonomic measure **in the same sentence** at nearly three times the rate
+(27% vs 10%). §8's finding — *the brain and the pain, but not the mood* — describes the acupuncture arm,
+not chronic-pain measurement research as such. The generalisation step does not carry it: a second
+population that is still chronic pain, and is measured with the same instruments, measures the mood.
+
+**Before that stands, the term-screen has to be audited the same way §5 audited the first arm.** Two
+mechanical checks, both on the 76 human-primary both-flag records:
+
+1. **Title restatements — the §5 defect — are 18 of the 76.** Eighteen fire on a sentence that is the
+   article title restated as the abstract's first line, which is not an outcome statement. Removing them
+   leaves **58 of 165 (35%)** against the acupuncture arm's 4 of 21 (19%) — the gap narrows and does
+   **not** close. (Acupuncture: 1 of its 5 is a title restatement.)
+2. **Named affect instruments are 15 of the 76, and 0 of the acupuncture arm's 5.** Fifteen records name
+   a validated affect instrument in the affective sentence — STAI, Hamilton Depression, "depression
+   scores", "mood scales" — e.g. 34633449 (STAI and mood scales with resting EEG), 37306031 (habenular
+   connectivity correlated with Hamilton Depression scores), 40785007 (depression scores correlated with
+   PAG subdivision connectivity), 42419415 (State-Trait Anxiety Inventory with EEG). Specific identifiers
+   are PMIDs 27168362, 27771534, 30839429, 31252090, 34378878, 34633449, 35080703, 37306031, 38049905,
+   38285031, 40343412, 40403861, 40785007, 40945096, 42419415. The acupuncture arm names none.
+
+So the affect term in low back pain is frequently a **measured outcome**, not only background: the
+twenty-seven both-flag records whose affect term is a clinical mood word (`mood`, `depress-`, `anxiety`,
+`affective`, `distress`) include trials that score Hamilton Depression (34659398: coupling between
+thalamus and DLPFC *mediates* the pain–depression link), a study of chronic low back pain **with comorbid
+depression** imaged by resting-state fMRI (40473078), and a manual-therapy trial whose connectivity
+change is tied to pain via "affective and cognitive processing regions" (33321196 — a background
+mention, and it is recorded as one). The pattern is not uniform, which is why the counts are given with
+the title-restatement correction beside them and not instead of them.
+
+**The confound, stated plainly.** The two arms differ in more than population. §9's population block is
+the *only* block removed from §7's query; §7 also carried an **intervention** block (acupuncture), which
+§9 does not. So this run shows the affect-blindness is not a property of "chronic pain," but it cannot
+say whether the true difference is the **population** (low back pain research measures mood) or the
+**intervention** (acupuncture trials do not report it). Both readings are consistent with the numbers.
+The step that would separate them — the LBP population *restricted to acupuncture studies*, against this
+arm — is named below and not run here.
+
+**Honest limits.** (1) Keyword screen, not a reading: a term in an abstract is not an outcome, which is
+why the two corrections above are printed with the counts. (2) The affect vocabulary that fires most in
+low back pain — `fear`, `catastrophiz-`, `psychological` — is the psychosocial tradition of that
+condition (fear-avoidance, "yellow flags"), so the flag is partly a property of the field's own
+vocabulary, and this is the most likely way the number is inflated. (3) The two arms are different sizes
+(21 vs 165 human-primary), so the acupuncture 24% is the smaller and noisier of the two. (4) §9 does not
+move §4's dissociation observation (the affective scale moved while the autonomic index did not in the
+two taVNS trials); it is a statement about which populations *measure* both domains, not about how the
+two move together.
+
+**The next action, from §9, is step 3 completed and a sharper step named.** Step 3 is done: the design
+runs against a second population and the blindness does not carry. The step §9 opens is the confound —
+run the same filter over the low-back-pain population **restricted to acupuncture**, so population and
+intervention vary one at a time; that turns the observed 24%/46% gap into a measurement of which cause
+it is.
+
+**Pinned by** `tests/test_affective_pain_second_population.py`, which re-derives every count above from
+the stored census and fails if the map names a different set.
