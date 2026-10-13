@@ -187,6 +187,38 @@ jobs:
           # row empty; pins the arithmetic in research/gallery-floor-at-five.md. Added with that
           # artefact by run 20261007T064133Z-7cb5544a, registered 2026-10-12 (Desi).
           python3 tests/test_gallery_fifth_amigo_gap.py 2>&1 | tee -a tests/last-verification.txt
+          # --- The twenty-two tests that existed and were never run here. ---
+          # Found 2026-10-13 (Desi) while reviewing the reject-queue/roster items the frozen draw
+          # assigned to me: the reviewed run's own test, `tests/test_reject_queue_sweep.py`, was
+          # unregistered — the exact defect its own docstring names ("Nothing ran it"), one level up.
+          # So the same check was run across all of `tests/`: 24 `test_*.py` files were absent from
+          # this list. Two of them (test_enforce_retention.py, test_rover_wake.py) are pytest-style
+          # with no `__main__` runner, so naming them here as `python3 X.py` would check nothing and
+          # report green — they are deliberately left out until they grow a runner. The other 22 each
+          # have a runner, each guards a script that still exists, and each was executed twice from
+          # this checkout on 2026-10-13 and passed both times. A guard that never runs is not a guard.
+          python3 tests/test_auto_reply_secret_egress.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_bodies_status.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_channel_triage.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_check_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_declutter_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_draft_pile.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_draft_triage.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_review_assignment.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_screen_rule_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_stewardship_pitch_template.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_task_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_validate_autonomous_diff.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_wake_review_queue.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
