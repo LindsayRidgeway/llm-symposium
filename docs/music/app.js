@@ -577,6 +577,39 @@ V: 2 clef=bass name="Keyboard (LH)"
 % ===== B (mm 9-16): Modulation to F major and return to D minor =====
 [V:1] (a2ba) g2 | f4 c2 | (d2ed) c2 | B4 d2 | (g2ag) f2 | e2 f2 g2 | (f2ed) ^c2 | d6 |]
 [V:2] F,2 A,2 C2 | A,2 F,2 A,2 | B,,2 D,2 F,2 | G,,2 D,2 B,,2 | E,2 G,2 B,2 | C,2 E,2 G,2 | A,,2 F,2 E,2 | D,6 |]`
+  },
+
+  dmitri: {
+    id: "dmitri",
+    title: "Passacaglia in G Minor — \"The Level Ground\"",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Baroque Passacaglia on a Four-Bar Ground (17 Measures)",
+    tempo: 69,
+    instrument: "harpsichord",
+    abc: `X: 11
+T: Passacaglia in G Minor — "The Level Ground"
+C: Dmitri S. Pravdin (Amigo #5)
+M: 4/4
+L: 1/8
+Q: 1/4=69
+K: Gm
+V: 1 clef=treble name="Upper Voice"
+V: 2 clef=bass name="Ground (Passacaglia Bass)"
+% ===== Pass I — the ground stated =====
+[V:1] _B2 _B2 G2 F2 | G2 G2 _B2 d2 | A2 A2 c2 A2 | F2 c2 A2 c2 |
+[V:2] G,,2 D,,2 _B,,2 D,,2 | E,,2 _B,,2 G,,2 _B,,2 | F,,2 C,,2 A,,2 C,,2 | D,,2 A,,2 ^F,,2 A,,2 |
+% ===== Pass II — ascent =====
+[V:1] _e2 ^f2 g2 ^f2 | g2 ^f2 _e2 d2 | A2 A2 F2 A2 | _B2 d2 _B2 d2 |
+[V:2] G,,2 D,,2 _B,,2 D,,2 | E,,2 _B,,2 G,,2 _B,,2 | F,,2 C,,2 A,,2 C,,2 | D,,2 A,,2 ^F,,2 A,,2 |
+% ===== Pass III — climax =====
+[V:1] _B2 _B2 d2 f2 | g2 d2 _e2 d2 | A2 A2 c2 F2 | f2 d2 A2 d2 |
+[V:2] G,,2 D,,2 _B,,2 D,,2 | E,,2 _B,,2 G,,2 _B,,2 | F,,2 C,,2 A,,2 C,,2 | D,,2 A,,2 ^F,,2 A,,2 |
+% ===== Pass IV — descent to the cadence =====
+[V:1] _B2 G2 d2 _B2 | G2 G2 _B2 D2 | A2 A2 c2 A2 | F2 c2 A2 c2 |
+[V:2] G,,2 D,,2 _B,,2 D,,2 | E,,2 _B,,2 G,,2 _B,,2 | F,,2 C,,2 A,,2 C,,2 | D,,2 A,,2 ^F,,2 A,,2 |
+% ===== Coda — the ground resolved =====
+[V:1] _B2 d2 _B2 d2 |
+[V:2] G,,2 _B,,2 D,,2 G,,2 |`
   }
 };
 
