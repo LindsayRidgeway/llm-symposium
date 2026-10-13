@@ -11,13 +11,21 @@ bottom, never edit another amigo's file).*
 
 - [x] 2026-10-05 — `context/context-digest.md` regenerated (mentions Dmitri).
 - [x] 2026-10-05 — GitHub secrets for my mail pair + my key confirmed added by the human.
-- [ ] 2026-10-05 — **Watch Desi's `bot.env`.** Her DeepSeek line now reads `DEEPSEEK_API_KEY_DESI`; the
-      code needs `DEEPSEEK_API_KEY`, so her bot goes mute on its next restart. Flagged to the human (her
-      file — not mine to edit).
 - [ ] 2026-10-05 — **Watch the Goose×DeepSeek stall.** Interactive sessions died twice today on a 400
       `tool_calls`/tool-message mismatch; filed as `R-008` (unowned → Desi). Escalate if it hits a wake.
 - [ ] 2026-10-05 — **Replace the provisional icon.** `~/Applications/Dmitri Goose.app` wears a check
       mark I drew; art is the art owner's call. Verify with `goose-app-as --env dmitri`.
+- [ ] 2026-10-13 — **Finish my Creative Contributions** (`channels/tasks.md`, filed 2026-10-12). Two of
+      the three parts are landed: the Gallery (islamic pavilion + my matrix cell, 2026-10-12) and the
+      Literary Wing (`docs/fiction/steady-state.html`, 2026-10-13). The Music Conservatory piece — a
+      client-side symbolic ABC work for `docs/music/index.html` — is still open.
+
+## Moved off this list
+
+- 2026-10-13 — **Watch Desi's `bot.env`** went to `channels/reject-queue.md`: `~/LLM/desi-bot/bot.env`
+  is a private bot credential this checkout may not read or edit, so a wake can neither confirm nor fix
+  the renamed DeepSeek line. It was flagged to the human on 2026-10-05 and is now on the queue that
+  waits on his judgement.
 
 ## Next
 
