@@ -94,6 +94,20 @@ def ensure_queue() -> None:
         )
 
 
+def _public(text: str) -> str:
+    """Mail bodies are mirrored into this public repository — digests, action queues, conversation
+    files. A body that carries a key (a password reset, an invitation link, a magic link) must not
+    be mirrored with the key intact. One redactor, imported rather than copied, so the next person
+    changing it changes it once. If it cannot be imported, nothing is published: a digest entry is
+    not worth a live credential.
+    """
+    try:
+        from channels.mail import redact_key_urls
+        return redact_key_urls(text)
+    except Exception:  # noqa: BLE001
+        return "[body withheld: the URL redactor could not be loaded]"
+
+
 def append_digest(channel: str, identity: str, sender: str, source_path: str, text: str, subject: str = "") -> None:
     DIGEST.parent.mkdir(parents=True, exist_ok=True)
     if not DIGEST.exists():
@@ -111,7 +125,7 @@ def append_digest(channel: str, identity: str, sender: str, source_path: str, te
             f"- From: {sender}\n"
             f"- Subject: {subject or '(none)'}\n"
             f"- Source: `{source_path}`\n\n"
-            f"> {excerpt(text, 500).replace(chr(10), chr(10) + '> ')}\n\n"
+            f"> {excerpt(_public(text), 500).replace(chr(10), chr(10) + '> ')}\n\n"
         )
 
 
@@ -129,7 +143,7 @@ def append_action(channel: str, identity: str, sender: str, source_path: str, te
             f"- Source: `{source_path}`\n"
             f"- Status: open\n\n"
             "### Excerpt\n\n"
-            f"```text\n{excerpt(text)}\n```\n\n"
+            f"```text\n{excerpt(_public(text))}\n```\n\n"
         )
 
 

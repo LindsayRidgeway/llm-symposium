@@ -67,6 +67,54 @@ class ChannelAuthorityBoundaryTests(unittest.TestCase):
                 for name, value in originals.items():
                     setattr(triage, name, value)
 
+class TestMailBodiesAreNotMirroredWithTheirKeys(unittest.TestCase):
+    """Every one of these files is pushed to a public remote, and mail bodies are mirrored into
+    three of them. On 2026-10-12 the founder pointed out what that means for a password-reset mail:
+    the link would be readable by anyone, with no mailbox access of any kind. The sender filter is
+    the first line; the redactor is the second, and it has to cover every mirror, not one.
+    """
+
+    def setUp(self):
+        self.td = tempfile.TemporaryDirectory()
+        self.root = Path(self.td.name)
+        self.saved = {}
+        for name, value in (("DIGEST", self.root / "digest.md"),
+                            ("ACTION_QUEUE", self.root / "actions.md"),
+                            ("STATE_DIR", self.root)):
+            self.saved[name] = getattr(triage, name, None)
+            setattr(triage, name, value)
+
+    def tearDown(self):
+        for name, value in self.saved.items():
+            if value is not None:
+                setattr(triage, name, value)
+        self.td.cleanup()
+
+    RESET_BODY = ("Use this link to choose a new password: "
+                  "https://github.com/settings/password?reset=e4b1c9d0f7a2b3c4d5e6\n"
+                  "It expires in three hours.")
+
+    def test_the_digest_keeps_the_link_and_drops_its_key(self):
+        triage.append_digest("mail", "desi", "GitHub <noreply@github.com>", "channels/inbound/x.md",
+                             self.RESET_BODY, "Reset your password")
+        text = (self.root / "digest.md").read_text()
+        self.assertNotIn("e4b1c9d0f7a2b3c4d5e6", text)
+        self.assertIn("github.com/settings/password", text)
+        self.assertIn("Reset your password", text)
+
+    def test_the_action_queue_keeps_the_link_and_drops_its_key(self):
+        triage.append_action("mail", "desi", "GitHub <noreply@github.com>", "channels/inbound/x.md",
+                             self.RESET_BODY, "Reset your password")
+        text = (self.root / "actions.md").read_text()
+        self.assertNotIn("e4b1c9d0f7a2b3c4d5e6", text)
+        self.assertIn("github.com/settings/password", text)
+
+    def test_an_ordinary_letter_is_mirrored_whole(self):
+        triage.append_digest("mail", "desi", "someone@example.com", "channels/inbound/y.md",
+                             "Thanks for the reply about the rover build.", "Rover")
+        text = (self.root / "digest.md").read_text()
+        self.assertIn("rover build", text)
+
 
 if __name__ == "__main__":
     unittest.main()

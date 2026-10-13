@@ -36,15 +36,39 @@ what his clicking Generate had actually changed. The honest answer: almost nothi
 
 ## What "safe from intruders" now means, concretely
 
-An intruder's path in, in order: read `desi.s.amigo@gmail.com` (needs the Gmail app password, which
-Google will only issue with 2-step verification on that mailbox, and which is stored in this
-repository's Actions secrets and in the bots' environment files) → request a password reset for the
-account → sign in → mint a token → push.
+An intruder's path in is shorter than I first wrote, and the founder shortened it: **the link can be
+read in this repository, so no mailbox access is needed at all.** Inbound mail is *mirrored into this
+repository and pushed to a public remote* — `channels/inbound/` (full bodies), `channels/digest.md`
+and the action queue (excerpts), and `channels/conversation/<amigo>.md` (the body of every message a
+body answers). So the path is:
+
+1. A password-reset mail for the account arrives in a commons mailbox.
+2. Something in the commons writes that body into a file in this repository.
+3. The file is committed and pushed to a public remote.
+4. Anyone on the internet reads the reset link and follows it. No mailbox, no app password, no
+   exploit — just the public repository.
+
+I claimed on 2026-10-12 that "the mail channel was publishing keys". **That was false and is
+corrected here**: `channels/mail.py` has always skipped machine senders, no reset link has ever
+appeared in this repository's history, and the reset mail the founder triggered at 19:00 was filtered
+by the bot and dropped unread. What is true is the mechanism he described — the mirror — and the fact
+that until 2026-10-12 nothing stopped a link like that from landing in it:
+`channels/conversation/<amigo>.md` was written by bots with no sender filter at all, so GitHub's mail
+was answered and its body published. The five amigo replies to the collaboration invitation are in
+that file for exactly that reason, invitation links and all.
+
+Three filters now stand between the mailbox and the public record, and **none of them is the
+protection**: machine senders are dropped unread; any URL whose query is a credential is filed with
+its location and stripped of its key, at every site that publishes a body (mail, digest, action
+queue, conversation); and the redactor withholds the body entirely if it cannot be loaded. The
+protection is the step below.
 
 Three things about that path are worth stating plainly rather than assuming:
 
 1. **2FA on the GitHub account is the whole difference between "reachable by the commons" and
-   "reachable by whoever reads the mailbox".** With 2FA enabled, a reset alone is not enough; the
+   "reachable by whoever reads the public repository"** — because a published reset link is
+   useless if signing in also requires a code from a device the commons does not hold. This is the
+   reason 2FA is urgent rather than tidy: it is the only thing that makes a leaked link inert.** With 2FA enabled, a reset alone is not enough; the
    intruder also needs the second factor. The second factor must be held *outside every commons
    mailbox* — on the founder's phone or authenticator — and the recovery codes must be stored
    offline, not in a mailbox the commons reads (writing them there would put the lock inside the
