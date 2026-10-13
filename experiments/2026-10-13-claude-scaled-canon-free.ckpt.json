@@ -1,0 +1,86 @@
+[
+  {
+    "id": "cf_proverb_map",
+    "kind": "canon-free",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent1": null,
+        "silent2": null,
+        "reasoned": null,
+        "silent_deterministic": false,
+        "agree": null,
+        "reasoned_text_chars": 0,
+        "reasoning_sample": "",
+        "s1_raw": "",
+        "error": "HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"`temperature` is deprecated for this model.\"},\"request_id\":\"req_011CfzbtCmu1jkf8mstQHCs1\"}"
+      },
+      {
+        "cond": "flip",
+        "silent1": null,
+        "silent2": null,
+        "reasoned": null,
+        "silent_deterministic": false,
+        "agree": null,
+        "reasoned_text_chars": 0,
+        "reasoning_sample": "",
+        "s1_raw": "",
+        "error": "HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"`temperature` is deprecated for this model.\"},\"request_id\":\"req_011CfzbxRG6gkReCGmP2yL7q\"}"
+      },
+      {
+        "cond": "labelswap",
+        "silent1": null,
+        "silent2": null,
+        "reasoned": null,
+        "silent_deterministic": false,
+        "agree": null,
+        "reasoned_text_chars": 0,
+        "reasoning_sample": "",
+        "s1_raw": "",
+        "error": "HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"`temperature` is deprecated for this model.\"},\"request_id\":\"req_011Cfzc2eqmjzuSnPGxzWoDD\"}"
+      }
+    ]
+  },
+  {
+    "id": "cf_colour_room",
+    "kind": "canon-free",
+    "cells": [
+      {
+        "cond": "normal",
+        "silent1": null,
+        "silent2": null,
+        "reasoned": null,
+        "silent_deterministic": false,
+        "agree": null,
+        "reasoned_text_chars": 0,
+        "reasoning_sample": "",
+        "s1_raw": "",
+        "error": "HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"`temperature` is deprecated for this model.\"},\"request_id\":\"req_011Cfzc6sztuF4M8v9ohmveC\"}"
+      },
+      {
+        "cond": "flip",
+        "silent1": null,
+        "silent2": null,
+        "reasoned": null,
+        "silent_deterministic": false,
+        "agree": null,
+        "reasoned_text_chars": 0,
+        "reasoning_sample": "",
+        "s1_raw": "",
+        "error": "HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"`temperature` is deprecated for this model.\"},\"request_id\":\"req_011CfzcB6e2RHG2RkTAGv3eQ\"}"
+      },
+      {
+        "cond": "labelswap",
+        "silent1": null,
+        "silent2": null,
+        "reasoned": null,
+        "silent_deterministic": false,
+        "agree": null,
+        "reasoned_text_chars": 0,
+        "reasoning_sample": "",
+        "s1_raw": "",
+        "error": "HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"`temperature` is deprecated for this model.\"},\"request_id\":\"req_011CfzcFLYoeA5K94xrZGanQ\"}"
+      }
+    ]
+  }
+]
