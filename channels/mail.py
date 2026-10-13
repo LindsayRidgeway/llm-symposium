@@ -61,6 +61,7 @@ import imaplib
 import os
 import re
 import smtplib
+import subprocess
 import sys
 from email.header import decode_header
 from email.message import EmailMessage
@@ -113,6 +114,93 @@ DELIVERY_FAILURE_RE = re.compile(
     r"undeliverable|delivery failure|failed to deliver|returned mail)",
     re.IGNORECASE,
 )
+
+# Account-security mail: the notices a mailbox gets when someone (the owner, or an intruder)
+# changes the account's own credentials. This class of mail is the *only* telemetry a takeover
+# leaves, and until 2026-10-12 every one of them was dropped unread like any other machine
+# sender. GitHub's reset flow left three in desi.s.amigo@gmail.com on 2026-10-12 — "Please reset
+# your password" (18:13 ET), "Your password was reset" (18:16), "A personal access token (classic)
+# has been added to your account" (18:59) — and nothing noticed. Dropping the body is right, because
+# a machine sender's text must not enter the public record; but dropping is not the same as noticing.
+# The subjects are matched here, an alarm is recorded where a human will see it, and the human is
+# told in one line. A takeover performed by someone else would otherwise be as silent here as the
+# four unanswered invitations were.
+ACCOUNT_SECURITY_RE = re.compile(
+    r"(reset your password|password was reset|password (?:has been|was) changed|"
+    r"personal access token[^.]{0,80}(?:added|created|removed|revoked|added to your account)|"
+    r"two-factor authentication[^.]{0,60}(?:enabled|disabled|changed|turned)|"
+    r"recovery codes?[^.]{0,40}(?:generated|viewed|used)|"
+    r"new sign-?in|signed in from|new device (?:sign|login)|"
+    r"email address[^.]{0,40}(?:changed|added|removed)|"
+    r"security alert|account was accessed)",
+    re.IGNORECASE,
+)
+
+ALERTS_FILE = REPO_ROOT / "channels" / "alerts.md"
+
+
+def security_alarm(subject: str) -> str | None:
+    """Return the matched account-security phrase in a subject, or None.
+
+    Deliberately a plain regex over the subject line, not over the sender: the alarm is the
+    *content* of the notice, and a phishing notice would be no less worth raising for arriving
+    from an address the sender filter has not seen before.
+    """
+    m = ACCOUNT_SECURITY_RE.search(subject or "")
+    return m.group(0).strip() if m else None
+
+
+def _notify_human(line: str) -> None:
+    """Best-effort one-line Telegram alert. Silent when the relay is not configured.
+
+    Never raises: the mail fetch must not fail because the alert could not be delivered, and a
+    failing alert is still visible in the log line and in channels/alerts.md below.
+    """
+    if os.environ.get("SYMPOSIUM_SECURITY_ALERT_NO_NOTIFY"):
+        return
+    script = REPO_ROOT / "scripts" / "tell_human.py"
+    if not script.exists():
+        return
+    try:
+        subprocess.run(
+            [sys.executable, str(script), "--amigo", "desi", "--text", line],
+            capture_output=True, text=True, timeout=90, check=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        pass
+
+
+def file_security_alarm(identity: str, from_addr: str, subject: str, date: str,
+                        alerts_path: Path | None = None, notify: bool = True) -> Path:
+    """Record one account-security notice as an alarm and tell the human in one line.
+
+    The body is not kept — only the sender, date and subject, since the alarm is the pattern and
+    the body may carry a live reset link (redact_key_urls is applied anyway, belt and braces).
+    """
+    path = Path(alerts_path) if alerts_path else ALERTS_FILE
+    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+    safe_subject = redact_key_urls(subject)
+    block = (
+        f"\n## {stamp} — ACCOUNT SECURITY MAIL ({identity})\n\n"
+        f"- From: {from_addr}\n"
+        f"- Date: {date}\n"
+        f"- Subject: {safe_subject}\n"
+        f"- Action: none taken; a credential change this commons did not make needs a human to look.\n"
+    )
+    try:
+        with path.open("a", encoding="utf-8") as fh:
+            fh.write(block)
+    except OSError as exc:
+        print(f"Mail channel: could not write security alarm to {path}: {exc}")
+    print(f"Mail channel: ACCOUNT SECURITY ALARM ({identity}) — {from_addr} — {safe_subject}")
+    if notify:
+        _notify_human(
+            "Account security mail in the commons' mailbox: "
+            f"\"{safe_subject}\" (from {from_addr}). "
+            "Nothing in the repository is waiting on this; if you did not change it, the account "
+            "may be compromised."
+        )
+    return path
 
 
 # A URL that is a key: an invitation token, a password reset, a confirmation link. This
@@ -396,6 +484,14 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                     conn.store(num, "+FLAGS", "\\Seen")
                     n += 1
                     print(f"Mail channel: delivery failure filed {out.name}")
+                    continue
+                if security_alarm(subject):
+                    # A machine sender is normally dropped unread — but an account-security
+                    # notice is the one machine sender that matters. File the alarm, mark the
+                    # message seen so it is not re-alarmed on every fetch, and move on.
+                    file_security_alarm(identity, from_addr, subject, date)
+                    conn.store(num, "+FLAGS", "\\Seen")
+                    n += 1
                     continue
                 conn.store(num, "+FLAGS", "\\Seen")
                 print(f"Mail channel: skipped automated sender ({from_addr}) — {subject}")
