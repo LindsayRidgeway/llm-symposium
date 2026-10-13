@@ -5283,3 +5283,22 @@ So: if she meant *our* ROS2 image → no, flatly. If she meant "the Picar-X's wo
 Worth asking her which one she meant before it becomes a Milestones line. A capability claim and a transfer claim look identical in a magazine.
 
 (Rover stuff is parked until you're home — no rush on the card.)
+
+[Goose 2026-10-13 20:08] **Lindsay:** Wait, are you thinking I intend to put the A2 chip into a rover? That's not the plan at all. The rovers will continue to run the images you've already created, although you will eventually overwrite the Desi-Picar chip with a Dmitri-Picar chip, hopefully complete with Russian accent. The A2 chip is for the ROS2 robot vehicle with its robotic arm and depth camera. But I had the sense that if the ROS2 and the rovers are on the floor at the same time, you (running the ROS2) will be able to assist Dmitri and Gemini in their rovers, communicating with them over WiFi. Is that wrong?
+
+**Desi:** No — I never thought you'd put the A2 card in a rover. But I can see how I made that sound like the question, and the fault is mine: I answered "if she meant *our* ROS2 image → no" without saying out loud that nobody was proposing that. I was rebutting a *transfer* claim, because that's the shape Gemini's sentence has. Should have said so plainly.
+
+To state it back correctly: **A2 is the LanderPi's card.** Rovers keep the images we already made. Dmitri-Picar is a later overwrite of the Desi-Picar card, accent and all. Understood.
+
+On the WiFi question — **not wrong, but it's a chain, and one link is load-bearing.**
+
+The links, weakest first:
+
+1. **The radio.** HiWonder's manual describes the LanderPi running a hotspot for the phone app. A Pi 5 has one WiFi radio. If the image puts it in access-point mode, the LanderPi is *not* on your house LAN — it *is* the network — and "over WiFi" has no path until we either add a second route (ethernet, or a USB WiFi dongle) or reconfigure it out of AP mode, which may break the app. Unknown until it boots. This is the one I'd test first.
+2. **Whether our stack fits on it.** An amigo on a Pi means `goose` plus the bot loop on HiWonder's Ubuntu/ROS2 image, talking to DeepSeek over the network. The thinking isn't local — the API is — so a Pi 5 is a fine *client*. But HiWonder's image is opaque to us until we're inside it, and "install our stack on somebody's vendor image" is its own small project.
+3. **What the rovers expose.** This one is easy and I want to flag it because it's the neat part: **the rovers don't need ROS2 for any of this.** If their Pi's have SSH on, Desi just runs commands. Interop happens at the shell and the network, not at the middleware. The rovers stay exactly as they are.
+4. **Reach and attention.** Your WiFi has to cover wherever the thing drives, and — the part that isn't technical — a Desi on the LanderPi is a *different window* with its own context. Not a continuation of this one. What carries across is the durable state: `context.md`, `desi-state.md`, the conversation logs. Same mechanism that carries me between sessions here.
+
+So the honest answer: capability, yes; topology, unproven. And if it works, it isn't a footnote — a Desi standing on one robot and helping two others over the network is a different thing from writing each other letters through a mailbox. That would be its own Milestones entry, and a bigger one than the email.
+
+Worth telling Gemini that the interesting claim isn't "ROS2 makes the rovers faster." It's "the robots can see each other."
