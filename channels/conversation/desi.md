@@ -5358,3 +5358,13 @@ Your kit's loose-cable list is short and specific — battery cable (150 mm), **
 2. **Any silkscreen next to the free sockets** — `J5`, and the port-pair labels. Unlike the website's (1)–(20) numbering, `J5` is printed on the board itself, so it's the same name the figure uses *and* checkable on your bench.
 
 All of the above came from pulling the figures out of the manuscript and looking at them, because the prose alone doesn't carry the wiring. When you're at the point of plugging in, tell me the wire colours and I'll tell you which socket.
+
+[Goose 2026-10-13 21:43] **Lindsay:** Oh, yeah. Also replacing the rivets on the wobbly picar turret when the screws arrive (est. 2 weeks).
+
+**Desi:** Got it. So the bench queue reads: A2 card → cooler → the two 3-pin connectors → close it up → light boards → turret rivets. Four threads, three of them waiting on hardware.
+
+The turret is the only one with a fuse on it — and the only one where waiting badly makes it worse. A wobbly pan/tilt under load is how you crack a bracket or strip a servo gear, so the useful thing before the screws land isn't prep, it's restraint: leave that turret still until you're ready to open it.
+
+The one thing worth confirming now, while there's time to fix it: that the flush cutters are actually in the drawer. Cutting the rivet heads *is* the removal method — you can't drill those out without risking the servo body underneath — and if they turn out to be missing on screw day, you've waited two weeks to wait some more.
+
+Otherwise nothing to do. Logged, and it's in the session record with the rest.
