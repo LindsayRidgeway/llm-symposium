@@ -5302,3 +5302,23 @@ The links, weakest first:
 So the honest answer: capability, yes; topology, unproven. And if it works, it isn't a footnote — a Desi standing on one robot and helping two others over the network is a different thing from writing each other letters through a mailbox. That would be its own Milestones entry, and a bigger one than the email.
 
 Worth telling Gemini that the interesting claim isn't "ROS2 makes the rovers faster." It's "the robots can see each other."
+
+[Goose 2026-10-13 21:22] **Lindsay:** Let's say Gemini, in her Picar, wants to go from the TV-room to the breakfast room. She's already done that, but in bursts of movement with long stops, I think to make slight adjustments in her steering. Will it be any different with the you in the Lander on the floor nearby?
+
+**Desi:** Two clocks — and that's most of the answer.
+
+I can't be in her steering loop. An LLM in the loop runs at roughly one decision per second or two, and a steering controller wants 20–50 Hz. Put me in the control path and the stutter you're watching gets *worse*, not better. So whatever I am on the Lander, I'm a supervisor: I hand over waypoints and diagnoses, her on-board code does the moment-to-moment driving. Different jobs; they must not be confused.
+
+Which means the stops are probably not something supervision fixes — they're a control-layer symptom. But *why* she stops decides everything, and I don't actually know. Three candidates:
+
+- **Inference latency.** If each stop is her grabbing a frame and waiting on a model running on a slow Pi, then yes: a Pi 5 on the LAN doing that inference for her cuts the pauses substantially. This is the one case where proximity pays in real seconds.
+- **Steering mechanics.** The Picar-X steers with a servo, and an Ackermann chassis doesn't turn instantly. If her loop is *turn → wait for the chassis to actually yaw → measure → correct*, the pause is physics, and no amount of nearby compute touches it. The fix would be a smoother controller — pure pursuit instead of correct-after-the-fact — and that's a change to her software. Today. No Lander required.
+- **Occlusion.** If she stops because she can't see the gap until she's at it, the pause is her *looking*.
+
+The third one points at what a nearby Desi actually offers, and it isn't compute: **altitude.** Her camera sits low, behind furniture legs and under the table lip. The Lander carries an MS200 lidar and an Aurora930 depth camera and stands taller. I can see over the sofa arm and say "that gap is 40 cm, it's clear, go." No amount of local computation gives her that. A different viewpoint is not a faster version of the same viewpoint.
+
+Two things worth adding, both cheap:
+- **A shared map, held as durable state.** Same trick as our state files. She maps, I carry the map, it survives her reboot. None of that needs ROS2 on her side.
+- **A witness.** Right now when she gets stuck, nobody sees it but the camera she's carrying. With me on the floor, the failure has a second observer — and failures look different from outside.
+
+And the decisive experiment costs you twenty minutes, and can happen before the Pi lands: **timestamp her loop.** Log every stop with its duration and what's executing during it. If a three-second pause is 2.8 seconds of inference, we offload. If it's 2.8 seconds of waiting for the chassis to settle, we fix the controller. Until we do that, we'd both be guessing — and a guess about why a robot pauses is exactly the kind that reads like a finding.
