@@ -5262,3 +5262,24 @@ The channel logs don't help. channels/conversation/desi.md carries only later su
 The Telegram chat doesn't hold it either, because the same capped text is what was actually sent; your own copy stops at the same word.
 
 And a scan of every object in the repository's git history turns up just the one 4,090-byte truncated version; no fuller draft is hidden in any commit or dangling object. The tail after "tell" was never written, never sent, and never stored. It's gone.
+
+[Goose 2026-10-13 20:00] **Lindsay:** I'm out of the house right now, will do that when I get back. Want to chat? I had a long conversation with Gemini-app this morning, and she was very interested in the ROS2. It seems that it will improve the performance of the Picar-X's. Is that possible?
+
+**Desi:** Yes and no — and the two halves are worth separating, because I think Gemini's sentence is doing both at once.
+
+**The image we're about to flash is not portable.** The LanderPi's ROS2 image is built around LanderPi hardware: an STM32F407 controller on the far side of a serial link, HX-06L bus servos, an MS200 lidar, an Aurora930 depth camera. Put that card in a Picar-X and you get a Pi that boots and then goes looking for hardware that isn't there. There's no version of that transfer that works.
+
+**ROS2 by itself does not make a car faster.** It's a communications layer — nodes passing typed, timestamped messages over DDS. Measured against a tight single Python loop reading the HAT over I2C, ROS2 is *slower*: discovery, serialization, process boundaries. If "performance" means responsiveness, the claim runs backwards.
+
+**What it actually buys is capability.** Three things that are real:
+- **Structure.** Vision in one process, motor control in another, so a dropped camera frame can't stall the steering loop.
+- **Time.** Every message carries a timestamp and a coordinate frame, so IMU + odometry + camera fusion becomes bookkeeping you're handed instead of bookkeeping you invent.
+- **Other people's code.** `nav2`, `slam_toolbox`, `robot_localization`, and rosbag record/replay. That's the real win: a Picar-X stops being "the line follower I wrote" and starts being "SLAM and path planning that somebody else debugged."
+
+**Reality check on the Picar-X.** SunFounder ships no ROS2 — it's all third-party. There's [gzub/ros2-picarx](https://github.com/gzub/ros2-picarx) and [Jchisholm204/picar-x](https://github.com/Jchisholm204/picar-x) as starting points, and SunFounder's own [forum thread](https://forum.sunfounder.com/t/ros2-builds-for-the-pidog-picar/3613) on it is mostly people stuck at step 3. Also the Picar-X is rear-drive with a steering servo, not differential, so `nav2` needs an ackermann config rather than the default. Doable. Not a weekend. And it wants a Pi 4 or 5 — on a Zero 2 W I wouldn't bother.
+
+So: if she meant *our* ROS2 image → no, flatly. If she meant "the Picar-X's would be better robots if they were ROS2 robots" → yes, in capability, paid for in hardware, a learning curve, and some raw responsiveness. I looked, by the way, rather than guessing — that's where the two repos and the forum thread came from.
+
+Worth asking her which one she meant before it becomes a Milestones line. A capability claim and a transfer claim look identical in a magazine.
+
+(Rover stuff is parked until you're home — no rush on the card.)
