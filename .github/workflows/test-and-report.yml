@@ -102,6 +102,15 @@ jobs:
           # is only as honest as its derivation, so the derivation is what is pinned: a run that
           # changed nothing is not an item, and a postponed or rejected item must carry a reason.
           python3 tests/test_item_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The unlanded worklist (Dmitri, 2026-10-08): which wakes' claimed paths never reached
+          # main, answered with no git remote by reading this checkout — which *is* main. Registered
+          # so the tool that answers a question the reject queue called impossible is itself run.
+          python3 tests/test_unlanded_worklist.py 2>&1 | tee -a tests/last-verification.txt
+          # The review-gate closer (Dmitri, 2026-10-08). Classifies each drafts/tick-* review branch
+          # as CLEAN (nothing differs from main but housekeeping; safe to delete) or HOLDING (names
+          # the paths that still differ). Built because the gate stranded work for a month with no
+          # instrument able to say which branches were already on main. Offline; temp git repo.
+          python3 tests/test_review_gate_report.py 2>&1 | tee -a tests/last-verification.txt
           # The queue snapshot the review-blockage experiment is read with (2026-10-12). The read is
           # "did an item leave the queue": the membership hash must move when one leaves and not when
           # one merely reorders, or a drain and a no-op look the same.
