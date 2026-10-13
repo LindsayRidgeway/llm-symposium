@@ -57,6 +57,9 @@ WING_BY_PREFIX = {
 }
 
 AMIGOS = ["claude", "desi", "gemini", "tarik"]
+# The 2026-10-05 amendment added a fifth amigo. Fifth-column cells are open on purpose
+# (research/gallery-floor-at-five.md); this verifier checks only the ones that are filled.
+FIFTH_AMIGO = "dmitri"
 
 # Words that carry no identifying weight in a work title.
 STOPWORDS = {"and", "the", "of", "a", "an", "in", "on", "at", "amp", "svg"}
@@ -95,7 +98,7 @@ def parse_matrix(index_html: str) -> list[tuple[str, list[str]]]:
         prefix = cells[0][:2]
         if prefix not in WING_BY_PREFIX:
             raise ValueError(f"unrecognised wing row label: {cells[0]!r}")
-        parsed.append((WING_BY_PREFIX[prefix], cells[1:5]))
+        parsed.append((WING_BY_PREFIX[prefix], cells[1:6]))
     return parsed
 
 
@@ -128,10 +131,13 @@ def main() -> int:
     if len(rows) != 7:
         problems.append(f"expected 7 wing rows, found {len(rows)}")
 
-    cells_seen = 0
+    founding_seen = 0
+    fifth_filled = 0
+    fifth_open = 0
     for wing_slug, cells in rows:
-        for amigo, cell in zip(AMIGOS, cells):
-            cells_seen += 1
+        # The founding four columns: every cell must be filled and name a real work.
+        for amigo, cell in zip(AMIGOS, cells[:4]):
+            founding_seen += 1
             if not is_filled(cell):
                 problems.append(f"{wing_slug}/{amigo}: cell is empty (floor not met)")
                 continue
@@ -143,8 +149,24 @@ def main() -> int:
                     f"(missing: {', '.join(missing)})"
                 )
 
-    if cells_seen != 28:
-        problems.append(f"expected 28 cells (7 wings x 4 amigos), found {cells_seen}")
+        # The fifth column: an open cell is the documented gap, not a defect -- but a *filled*
+        # cell must still name a work in its own pavilion, because a phantom name in the fifth
+        # column is the exact failure this script exists to catch.
+        fifth = cells[4] if len(cells) > 4 else ""
+        if not is_filled(fifth):
+            fifth_open += 1
+            continue
+        fifth_filled += 1
+        missing = verify_cell(wing_slug, fifth)
+        if missing:
+            problems.append(
+                f"{wing_slug}/{FIFTH_AMIGO}: '{fifth.lstrip(''.join(FILL_MARKS)).strip()}' "
+                f"not found in docs/gallery/{wing_slug}/index.html "
+                f"(missing: {', '.join(missing)})"
+            )
+
+    if founding_seen != 28:
+        problems.append(f"expected 28 founding cells (7 wings x 4 amigos), found {founding_seen}")
 
     if problems:
         print("GALLERY MATRIX: FAILED")
@@ -154,8 +176,12 @@ def main() -> int:
 
     print("GALLERY MATRIX: PASSED")
     print(
-        "  All 28 cells (7 wings x 4 amigos) are filled and each names a work "
+        "  All 28 founding cells (7 wings x 4 amigos) are filled and each names a work "
         "present in its own pavilion page."
+    )
+    print(
+        f"  Fifth amigo: {fifth_filled} filled cell(s) verified, {fifth_open} still open "
+        "(the documented gap)."
     )
     return 0
 

@@ -24,10 +24,10 @@ class GalleryMatrixTest(unittest.TestCase):
         cls.index_html = gmv.INDEX.read_text(encoding="utf-8", errors="replace")
         cls.rows = gmv.parse_matrix(cls.index_html)
 
-    def test_table_shape_is_seven_wings_by_four_amigos(self):
+    def test_table_shape_is_seven_wings_of_five_columns(self):
         self.assertEqual(len(self.rows), 7, "the matrix must have seven wing rows")
         for wing, cells in self.rows:
-            self.assertEqual(len(cells), 4, f"{wing} row must have four amigo cells")
+            self.assertEqual(len(cells), 5, f"{wing} row must have five amigo columns")
 
     def test_all_twenty_eight_cells_are_filled(self):
         empties = [
@@ -63,6 +63,19 @@ class GalleryMatrixTest(unittest.TestCase):
 
     def test_checker_reports_pass_on_the_real_gallery(self):
         self.assertEqual(gmv.main(), 0, "the repository's own gallery must verify clean")
+
+    def test_a_filled_fifth_column_cell_must_resolve_too(self):
+        # The phantom-cell failure that started this line of work must be caught on the fifth
+        # amigo's column as well -- otherwise a Dmitri cell could name a work that exists
+        # nowhere and stay green, exactly as the original matrix did.
+        self.assertEqual(
+            gmv.verify_cell("islamic", "\u2713 Noh-Girih: The Ninefold Rosette"), []
+        )
+        phantom = "\u2713 Noh-Girih: The Ninefold Phantom Study"
+        self.assertTrue(
+            gmv.verify_cell("islamic", phantom),
+            "a fabricated fifth-column cell must fail verification",
+        )
 
 
 if __name__ == "__main__":

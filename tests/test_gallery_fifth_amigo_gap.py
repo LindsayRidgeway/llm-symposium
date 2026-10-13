@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Pin the fifth-amigo gallery gap to reality (Dmitri, 2026-10-07).
+"""Pin the fifth-amigo gallery gap to reality (Dmitri, 2026-10-07; updated 2026-10-13).
 
 `scripts/gallery_fifth_amigo_gap.py` reports the arithmetic in
 `research/gallery-floor-at-five.md`: the matrix is 4 columns x 7 wings (28 cells, all filled),
 the amendment of 2026-10-05 made the commons five, so the same floor is 5 x 7 = 35 and seven
-cells -- one per wing -- are the fifth amigo's. This test is the reason the script exists: it
-fails if the gallery is extended without that note being updated, so the claim cannot quietly
-go stale in either direction.
+cells -- one per wing -- were the fifth amigo's. The first of them was filled on 2026-10-13
+(islamic, "Noh-Girih: The Ninefold Rosette"), leaving six. This test is the reason the script
+exists: it fails if the gallery is extended without that note being updated, so the claim cannot
+quietly go stale in either direction.
 
 The negative cases matter as much as the positive one: a script that cannot see a filled
 fifth column is not measuring the gap, it is printing a constant.
@@ -20,6 +21,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import gallery_fifth_amigo_gap as gap  # noqa: E402
+
+FILLED_FIFTH_CELLS = 1  # islamic, filled 2026-10-13
+REMAINING_GAPS = 7 - FILLED_FIFTH_CELLS
 
 
 def _row(num: str, cells: list[str]) -> str:
@@ -40,19 +44,21 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
     def test_matrix_is_seven_wings_of_five_columns(self):
         self.assertEqual(self.result["wings"], 7)
         self.assertEqual(self.result["columns"], 5)
-        self.assertEqual(self.result["filled"], 28)
+        self.assertEqual(self.result["filled"], 28 + FILLED_FIFTH_CELLS)
 
     def test_floor_numbers_are_28_and_35(self):
         self.assertEqual(self.result["floor_at_four"], 28)
         self.assertEqual(self.result["floor_at_five"], 35)
 
-    def test_gap_is_one_cell_per_wing_all_the_fifth_amigos(self):
-        self.assertEqual(self.result["gap"], 7)
+    def test_gap_is_the_fifth_amigos_remaining_cells(self):
+        self.assertEqual(self.result["gap"], REMAINING_GAPS)
         self.assertEqual(
             [amigo for _, amigo in self.result["gap_cells"]],
-            [gap.FIFTH_AMIGO] * 7,
+            [gap.FIFTH_AMIGO] * REMAINING_GAPS,
         )
-        self.assertEqual(len({wing for wing, _ in self.result["gap_cells"]}), 7)
+        self.assertEqual(len({wing for wing, _ in self.result["gap_cells"]}), REMAINING_GAPS)
+        # The one cell filled so far must no longer read as a gap.
+        self.assertNotIn("islamic", {wing for wing, _ in self.result["gap_cells"]})
 
     def test_fifth_amigo_is_named_in_the_gallery_page(self):
         self.assertTrue(self.result["fifth_named_in_page"])

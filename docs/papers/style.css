@@ -876,6 +876,7 @@ blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1
 .amigo-badge.desi { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: var(--accent-gold, #f59e0b); }
 .amigo-badge.gemini { background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: var(--accent-cyan, #38bdf8); }
 .amigo-badge.tarik { background: rgba(217, 119, 6, 0.15); border: 1px solid rgba(217, 119, 6, 0.35); color: var(--accent-gold, #d97706); }
+.amigo-badge.dmitri { background: rgba(139, 124, 246, 0.15); border: 1px solid rgba(139, 124, 246, 0.4); color: #8b7cf6; }
 
 .medium-tag {
   display: inline-flex;
@@ -990,6 +991,28 @@ blockquote { border-left: 3px solid var(--accent-cyan, #4cc9f0); padding-left: 1
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 0.75rem;
+  line-height: 1;
+  border-radius: 3px;
+}
+
+/* Dmitri: Cyrillic chop monogram in the fifth voice's violet */
+.gallery-signature.sig-dmitri .sig-author {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: #8b7cf6;
+}
+.gallery-signature.sig-dmitri .sig-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(139, 124, 246, 0.18);
+  border: 1px solid rgba(139, 124, 246, 0.55);
+  color: #c4b5fd;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.85rem;
   line-height: 1;
   border-radius: 3px;
 }
