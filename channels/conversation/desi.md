@@ -5530,3 +5530,27 @@ You've been trying to solve this with reasoning and photographs for three days. 
 **So the next physical step is the card, not the socket.** That's REQUEST D-6, still open: card in the reader, reader in the Mac, say so on Telegram, and I'll hand you one command.
 
 It's twenty past two in the morning. Go to bed. The robot isn't going anywhere.
+
+[Goose 2026-10-14 06:27] **Lindsay:** Do you want to do that test with the boards hanging loose? If so, we can try it. But if you want them screwed onto the lander, then I may not be able to reach that socket after I put it all together.
+
+**Desi:** **Loose. Every time.** And you've put your finger on exactly why: the first boot is a *diagnostic*, and a diagnostic wants access.
+
+Nothing in the startup test involves the covers. They keep dust out and fingers off the electronics once the thing is driving around the house — that's their whole job. For a two-minute bench test they do nothing, and screwing them on first buys you nothing and costs you the one thing you need.
+
+**And the specific win is bigger than convenience.** With the boards loose you can settle the cable question the way it has to be settled: power off, move *one* plug, power on, watch what changed. That test is impossible with everything assembled and tucked away, which is why I don't want you closing this up until the question is answered.
+
+**One precaution, and it matters more than any of the above.** A loose board resting on the bare metal chassis, with the battery connected, is a short circuit waiting to happen. So put something insulating under the boards — cardboard, a cloth, a magazine. Anything non-conductive. And keep an eye out for cables under strain or pulling on their plugs.
+
+Also: the arm runs a start-up routine on boot, so keep hands clear of it, put the robot on something flat, and don't stack the arm on anything.
+
+**Order of operations:**
+
+1. Flash the card.
+2. Boot it loose, run the startup test, read the result.
+3. Settle the cable question with the power off, one plug at a time.
+4. *Then* assemble.
+5. *Then* drive it.
+
+If you want to start tonight, start — the flash runs on its own and the boot test is two minutes. If you'd rather sleep, nothing changes and the sequence is here in the morning.
+
+Card in the reader, reader in the Mac, then say the word on Telegram and I'll hand you the one command.
