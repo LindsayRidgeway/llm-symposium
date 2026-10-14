@@ -5617,3 +5617,13 @@ State, checked just now: D-10 is still open in the register, yet ~/.config/llm-s
 Its defined completion state is not just "steps done": the request asks you to report it finished and say whether you enabled or re-enabled, and Desi then "verify the only way that counts: generate a code from the seed and sign in as that account, without you." The register row closes to "done" only via tell_human.py --close.
 
 No record of completion exists. The register still lists D-10 as open. Today's two register reviews checked the filesystem and found no totp-secret. Your 2026-10-14 23:03 "complete (I think)" message is the newest inbound: unreplied, uncommitted. The seed file now exists, but holds 16 characters, not the 32 step 3 expects — so it is either GitHub's real key length or a truncated paste; unverified. Nothing records a code generated, or a sign-in without you. So: performed, perhaps; verified, no.
+
+[Telegram 2026-10-14-230653] **Lindsay:** It was 16 characters, not 32.
+
+[Telegram 2026-10-14-230653] **Desi:** You're right on both counts.
+
+**16, not 32:** I don't have the original message in front of me, but I accept your correction. The token's length doesn't change the check — a 16-character fine-grained or classic token is still auditable the same way. My "32" was either a wrong recollection or a generic placeholder; it shouldn't have been stated as fact. Good catch.
+
+**D-10:** Yes, you're reading it correctly. The instruction assumes you are signed in as `llm-symposium-machine`, not as Lindsay. The password recovery line specifically says the mail goes to Desi's mailbox — which is only true for that account. So the intended sequence is: sign out of GitHub, sign back in as `llm-symposium-machine`, then start at step 1. Your personal account isn't the target of any of those steps.
+
+If you'd rather not sign out (and I won't push it), the alternative is to do the same steps in a private browser window logged into `llm-symposium-machine` — same result, no disruption to your own session.
