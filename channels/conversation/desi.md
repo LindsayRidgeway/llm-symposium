@@ -5429,3 +5429,21 @@ I've recorded both in the build note — including a correction of my own: an ea
 Left on the bench: the two black cables. When you get to them, just tell me which end they lead to.
 
 Still unanswered, and it matters because a Pi went back over it: was the crushed USB-C actually on the Pi, or on that little CH340C board?
+
+[Goose 2026-10-14 03:36] **Lindsay:** I did find candidate sockets for the white connectors. The first picture is Step 4 of the instructions. I drew the two purple arrows. The part on the right is identified as a 3-pin cable and it doesn't look very long. I thought (and still think) that it's shown on the left of the LITE board in the middle one of three white sockets. I think I eventually thought I knew where the other end went (it's a short cable), but now I can't remember where I thought the other end went, and I can't find another picture of in the instructions. Meanwhile, the picture on the right shows the actual LITE controller with that short cable plugged into the middle socket. But imagine that that cable did not exist, despite appearing in Step 4 as a part and maybe plugged into the middle white socket in the picture. In that case, there would be two 3-pin sockets side by side on the LITE controller. The socket to their left is a four-pin socket that I have no theories about. Nor is there any way for me to guess which of the three-pin white connectors would go into which of those 3-pin connectors, but they would provide sockets for all two mystery cables ... Only 3-pin cable from Step 4 would be left out in the cold. That's all I've got. [2 photos: Step 4 of the paper instruction sheet with purple arrows at the LITE board's left sockets and the 3Pin Cable label; the actual LITE controller on the chassis with cable bundles, a USB-A plug, and a purple arrow]
+
+**Desi:** Good hunting — and there's a small orange/yellow block sitting on the board right above that row of white sockets in your photo. That block names the sockets for you.
+
+**In the manual's own port list, the only ports on that board paired with a coloured block are the PWM servo ports, and the block is the power-selection jumper** — it chooses whether those servo pins are fed from the **main battery or from 5 V**. So the row you found is almost certainly the servo-port group. And the **4-pin to its left is most likely the I2C expansion port (5)** — SDA, SCL, VCC, GND, four pins, nothing to do with this build. Your "no theories about it" instinct is right, and you can leave it alone forever.
+
+**And there is a name to look for rather than a reason to reason.** The assembly figure for the servo cable reads: *"Connect the PWM servo cable to the **J5** port on the expansion board."* So one of those sockets has `J5` printed beside it. That label — not my arithmetic — is the thing to match against.
+
+**Before you plug anything: photograph the jumper positions.** Those blocks decide the voltage on the servo pins. Move one and you can feed a 5 V servo 7.4 V, or the reverse. If you have to shift them, photograph first and put them back identical.
+
+**On which cable goes where, the manual's sentence is the rule, and it's the one we keep circling:** *"one to the servo port on the STM32 controller, and the other to the servo at the bottom of the robot arm."* Two 3-pin wires, **one** controller socket. So if your two mystery cables are the pair that sentence describes, filling both sockets would be one too many.
+
+**And on the Step-4 cable, I'd rather hold the question than close it.** Your kit's packing list names exactly one loose servo cable — 100 mm — and you have two loose 3-wire black cables in hand. That arithmetic doesn't close, and I'm not going to close it by picking. Follow each cable to its far end and get me the silkscreen beside those sockets; the labels will name the ports, and the ports will say which cable is the odd one out.
+
+Nothing goes in yet. On this board a wrong socket is a voltage question, not just a fit question — which is the one thing today's success doesn't teach, because the fan header was keyed.
+
+It's nearly midnight. That's a good place to stop, and the two cables will still be there.
