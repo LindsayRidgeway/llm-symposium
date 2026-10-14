@@ -5393,3 +5393,23 @@ Both port groups are on the controller edge that also carries **the two little y
 **5. One thing in the photo I want to ask about.** The USB-C receptacle on that little board looks *deformed* to me — there's a dent across the shield, and the whole thing looks crushed. Is that the connector you damaged? You told me it was on the Pi, and the Pi has already gone back. If the damage was to this board instead, that changes what you're returning and what still needs fixing.
 
 **To close this out I need two things:** for each mystery cable, where the far end lands (per the table), and one photo of the controller's servo-port edge zoomed on the two yellow jumper blocks, so I can count the pins in the sockets beside them. Don't plug anything until then — there's no penalty for leaving three cables loose overnight.
+
+[Goose 2026-10-14 00:19] **Lindsay:** This is the Pi 5 with the cooler rivets pushed in. The red arrow points to the white connector. It has no mate on the Pi, not anywhere else on the robot other than the small pre-attached board near the foot of the robotic arm. [photo: Pi 5 with cooler mounted, red arrow at left edge beside the ethernet jack pointing to the cooler's white 4-position plug]
+
+**Desi:** Stop — I think you've been looking in the wrong corner, and this one is good news.
+
+**The Pi 5 is the first Pi with a dedicated fan connector.** It's a 4-pin JST-SH, and per Raspberry Pi's own documentation it sits — quoting — *"in the top right corner of the board between the 40-pin GPIO header and the USB 2.0 ports,"* and it is **labelled `FAN` on the silkscreen**.
+
+**Now read your own photo in that light.** Your board is lying with the **40-pin GPIO header along the bottom edge** — the long row of black squares, with the cooler's push-pins above it — and the **ethernet and USB-A ports along the left edge**, where the board even has `USB2` printed beside the USB-A jack. So the corner you want is the **bottom left** of your photo. Your red arrow points to the **top left**, up at the ethernet end. No Pi 5 has a fan header up there. That's why it has "no mate."
+
+And there is something in the right corner. When I zoom your photo into the bottom-left, I see a small cream JST socket sitting just left of where the 40-pin header begins, right beside that `USB2` marking, tucked between the USB-A jack and the cooler's front push-pin. Small, flush, in shadow. That's the size and place a Pi 5 fan header is.
+
+**The test that settles it, and needs no judgement from me:** find the printed word **`FAN`** on the board. It's silkscreened next to that socket. If you find `FAN` and the socket beside it is empty and takes your plug, the question is closed. If you find that word somewhere else, I'm wrong and you should tell me where.
+
+**Two things to be firm about.**
+
+First — the CH340C board is not the fallback. Its socket is `5V GND RX TX` at a much larger pitch; the Pi's fan header is 1.0 mm JST-SH, the smallest connector on the whole robot. They are different families. If the cooler's plug truly will not enter the `FAN` socket, that's a real fact and it means the cooler shipped with the wrong connector — it does *not* mean the other socket is the right one. A fit is not evidence of correctness; we established that the hard way.
+
+Second — with the push-pins already pressed in, the cable is going where it was routed, not where it needs to go. You'll likely have to release the cooler and re-seat it so the lead can run under the heatsink to that corner. Better to do it now than after the whole stack is built on top.
+
+**What I'd like:** one photo of the bottom-left corner with light on it and the silkscreen legible, and just tell me whether you can read `FAN` beside that socket. I'm reading a photograph of a board I can't touch — so if your eyes disagree with mine, your eyes win.
