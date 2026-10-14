@@ -655,9 +655,11 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
     * Five names always appear, zeros included. He asked for five lines, and a name missing from a
       scoreboard reads as a name that does not exist — which is how two amigos who have never
       reviewed anything stayed invisible.
-    * Each heading says aloud what it counts ("work filed in this window", "a body's decision in
-      this window"). "Reviewed" means a body decided; the lander's test gate is not a review, and it
-      is not counted here.
+    * The two blocks carry his words, not the ledger's letters. He calls the first "accomplished"
+      and the second "reviewed", and asked for them as A and R — but A and R already mean other
+      things in this same report (accepted as done; rejected), and giving one letter a second
+      meaning is the kind of collision that made the old version unreadable. "Finished" and
+      "reviewed" say it without the clash, and neither depends on knowing the letter scheme.
     """
     now = now or dt.datetime.now(dt.timezone.utc)
     items = load()
@@ -673,12 +675,12 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
     out = [f"**Daily item report — {_local(now)}**",
            f"window: the {hours}h to {_local(now)} (since {since})",
            "",
-           "**Items performed, by amigo** — work filed in this window"]
+           "**Items finished, by amigo** — the last 24 hours"]
     for who in AMIGO_ORDER:
         out.append(f"  {who:<8} {performed.get(who, 0):>4}")
     out.append(f"  {'total':<8} {sum(performed.values()):>4}")
 
-    out += ["", "**Items reviewed, by amigo** — a body's decision in this window"]
+    out += ["", "**Items reviewed, by amigo** — the last 24 hours"]
     for who in AMIGO_ORDER:
         out.append(f"  {who:<8} {decided.get(who, 0):>4}")
     out.append(f"  {'total':<8} {sum(decided.values()):>4}")

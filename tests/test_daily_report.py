@@ -446,17 +446,18 @@ class TestFocusBlock(unittest.TestCase):
         i = next(n for n, l in enumerate(self.lines) if heading in l)
         return self.lines[i + 1:i + 7]
 
-    def test_both_headings_state_their_own_window(self):
-        self.assertIn("filed in this window", self.text)
-        self.assertIn("a body's decision in this window", self.text)
+    def test_both_headings_name_their_window(self):
+        # Every figure in the message comes from one window, and each heading says so, so a reader
+        # never has to work out which period a number belongs to.
+        self.assertEqual(self.text.count("the last 24 hours"), 2)
 
     def test_both_blocks_name_all_five_amigos_even_at_zero(self):
-        for heading in ("Items performed, by amigo", "Items reviewed, by amigo"):
+        for heading in ("Items finished, by amigo", "Items reviewed, by amigo"):
             named = [line.split()[0] for line in self._block(heading)[:5]]
             self.assertEqual(named, list(AMIGO_ORDER), heading)
 
     def test_each_total_is_the_sum_of_its_five_lines(self):
-        for heading in ("Items performed, by amigo", "Items reviewed, by amigo"):
+        for heading in ("Items finished, by amigo", "Items reviewed, by amigo"):
             block = self._block(heading)
             counts = [int(line.split()[1]) for line in block[:5]]
             total = int(block[5].split()[1])
