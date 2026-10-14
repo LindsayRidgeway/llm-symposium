@@ -660,3 +660,92 @@ reject queue. The confound arm adds no new human-primary both-flag record to han
 **Pinned by** `tests/test_affective_pain_confound_arm.py`, which re-derives the census, the composition,
 the three human-primary PMIDs and the zero from the stored records and fails if this section names a set
 the machine no longer produces.
+
+---
+
+## 12. The ten biomarker-only records of the VNS arm — §10's open step, the counterpart of §8, run 2026-10-14
+
+**Why this section exists.** §8 closed the acupuncture arm's complement — the records that set the
+biomarker flag only — by hand-reading all sixteen and sharpening §7's claim from *the brain and not the
+mood* to *the brain and the pain, but not the mood*. §10 named the same open step for the VNS arm: its
+**ten** biomarker-only human-primary records "have not been hand-classified, so the VNS arm carries the
+same open step §8 closed for the acupuncture arm; it is named here rather than left implicit." This
+section is that step, run 2026-10-14 (Desi, clock wake) and hand-read from the stored abstracts.
+
+**How the ten were selected, with nothing hand-picked.** All 31 records of the VNS census set the
+biomarker flag *by construction* — the shared filter names a brain or autonomic measurement, so a record
+cannot be returned without one. Of the 31, **20 are human-primary** under `classify_subject`; **8 of
+those set the affective flag too** (§10, and §4's own eight), leaving **10**. The ten are exactly the
+records a reader re-derives from the stored flags, and they are the rows below:
+
+| PMID | yr | design & population | measures — clinical | measures — brain / autonomic | class |
+|---|---|---|---|---|---|
+| [26728182](https://pubmed.ncbi.nlm.nih.gov/26728182/) | 2016 | RCT, single-blind crossover; 18 **healthy** subjects (t-VNS + slow breathing vs sham) | bone/muscle pain thresholds, conditioned pain modulation | cardiac vagal tone (from ECG) | healthy-volunteer experimental pain |
+| [33262253](https://pubmed.ncbi.nlm.nih.gov/33262253/) | 2021 | RCT; 70 **migraine** patients (59 finished), taVNS vs sham, 4 wk | migraine days, pain intensity, attack frequency | resting-state thalamocortical fMRI | pain-population RCT |
+| [33548494](https://pubmed.ncbi.nlm.nih.gov/33548494/) | 2021 | **narrative review** of VNS across musculoskeletal disease (carries the "RCT" ptype) | — (reviews RA / fibromyalgia pain, and fatigue) | — | secondary / review — see the mislabel note |
+| [33635894](https://pubmed.ncbi.nlm.nih.gov/33635894/) | 2021 | RCT, double-blind sham-controlled crossover; **chronic pancreatitis** with chronic pain | VAS pain diary (primary), Brief Pain Inventory, PGIC, quality of life | cardiac vagal tone and heart rate | pain-population RCT |
+| [38469939](https://pubmed.ncbi.nlm.nih.gov/38469939/) | 2024 | single-blind; 20 **healthy** adults, taVNS cymba concha vs earlobe | nociceptive withdrawal reflex (NWR) threshold | heart rate variability | healthy-volunteer experimental pain |
+| [40461351](https://pubmed.ncbi.nlm.nih.gov/40461351/) | 2025 | RCT; 70 **chronic low back pain** (51 finished), taVNS vs tGANS, 4 wk | pain outcomes | PAG / VTA fMRI static+dynamic FC (descending modulation + reward) | pain-population RCT |
+| [41091086](https://pubmed.ncbi.nlm.nih.gov/41091086/) | 2026 | RCT; **same trial** (NCT03959111), 70 cLBP (51 finished) | pain improvement | brainstem NTS / LC / RN fMRI + structural FA | pain-population RCT |
+| [41454683](https://pubmed.ncbi.nlm.nih.gov/41454683/) | 2025 | double-blind randomised crossover; 22 **healthy** participants (taVNS / tCMS / iTBS / sham) | conditioned pain modulation (CPM) | heart rate variability | healthy-volunteer experimental pain |
+| [42334392](https://pubmed.ncbi.nlm.nih.gov/42334392/) | 2026 | RCT; 38 women with **functional constipation + myofascial pain**, taVNS vs sham, 2 wk | VAS, pressure pain threshold (PPT), PAC-QoL | heart rate variability (HF / LF) | pain-population RCT |
+| [42361949](https://pubmed.ncbi.nlm.nih.gov/42361949/) | 2026 | RCT; **same trial** (NCT03959111), 70 cLBP (51 finished) | pain intensity, bothersomeness, interference | thalamocortical fMRI + DTI fibre tracking + grey matter | pain-population RCT |
+
+**The counts, read off the table.** **Six** of the ten are controlled trials in a patient pain population
+(33262253, 33635894, 40461351, 41091086, 42334392, 42361949); **three** are healthy-volunteer
+experimental-pain studies (26728182, 38469939, 41454683); and **one** (33548494) is a review. **All ten
+name a pain measure** in the stored abstract, and **five** name a specific instrument (algometry,
+VAS, Brief Pain Inventory, the nociceptive withdrawal reflex, and conditioned pain modulation); the
+other five name pain only generically ("pain intensity", "pain improvement", "pain-related outcomes").
+**None of the ten names an affect term at all** — which is what "biomarker-only" means — and that
+includes the two that did measure a patient-reported global score: 33635894 (quality of life) and
+42334392 (PAC-QoL) each gathered the patient's own report without an affective instrument.
+
+**What this changes: §8's finding is not acupuncture-specific.** §8's sharpened claim was *the brain and
+the pain, but not the mood* — the corpus measures the patient's pain with an instrument, often against a
+sham, and is blind only to the mood. Read against these ten, the VNS arm has the same shape and a
+marginally stronger form of it: **10 of 10** name a pain measure against §8's 12 of 16, and **6 of 10**
+are controlled patient trials rather than §8's mixed set. So the missing affective column is not a
+property of needling and not a weakness of one arm's census — it is what these stimulation trials
+across **both** interventions do. That is the hand-read complement §10 predicted from the counts, and it
+is the same conclusion §11 reached from the fixed-population side: *an intervention trial in this
+literature is where the affective column goes missing.*
+
+**Three records that are one trial, said so a reader is not misled.** 40461351, 41091086 and 42361949
+are **three papers from a single low-back-pain trial** (taVNS vs transcutaneous greater auricular nerve
+stimulation, NCT03959111, 70 randomised / 51 completed): one reports the descending-modulation and
+reward networks, one the brainstem nuclei, one the thalamic relay. So the arm's "ten" is really **eight
+distinct studies** — the VNS counterpart to §8's two secondary Neurosynth meta-analyses, and the reason
+§10's cross-arm table should be read as tens of records, not tens of independent experiments. Two of
+the three (40461351, 42361949) do report a **reward- and limbic-network** finding while naming no
+affect scale, which is worth stating plainly: an affective *structure* was imaged where an affective
+*outcome* was not measured. That is the sharpest single instance of §8's distinction in either arm.
+
+**One record that should not be here, recorded not deleted.** 33548494 (*Joint Bone Spine* 2021, "Vagus
+nerve stimulation in musculoskeletal diseases") is a **narrative review** — its abstract surveys RA,
+Sjögren's, lupus, fibromyalgia and hand osteoarthritis and asks for sham-controlled trials — yet it
+carries the "Randomized Controlled Trial" publication type and so passes `classify_subject`'s
+human-primary rule. It is the mirror of §8's 42309066: a record the flags call human-primary that a
+hand-read says is not. It is left in the table because a census should not be edited by hand, and
+recorded here because the arm's human-primary count of twenty should not be read as twenty original
+human studies until this one is explained.
+
+**Honest limits.** (1) The class column is a hand-read of the abstract, not of the paper: an abstract
+that omits an outcome can hide one, which is why the trial-versus-healthy split is stated as a reading
+and the ten-set itself is what the test pins. (2) The affect scan is a keyword list, so "names no affect
+term" means those words are absent, not that no mood was measured — but two of the ten did collect a
+patient global score (33635894, 42334392) and neither used an affective instrument, which is a check on
+the keyword rule rather than a restatement of it. (3) The two three-paper trials and the one review mean
+the arm is eight studies, not ten of equal weight. (4) It does not move §4's dissociation observation:
+the two records that could show convergence (41332177, 40935122) are both-flag records, not these, and
+this section makes no claim about whether either intervention works.
+
+**The next action.** With this section, **step 3 of item 32 is complete in both arms** — §7/§8 hand-read
+the acupuncture complement, §10/§12 hand-read the VNS complement, and the finding is symmetric. What
+remains of the item is only the `[human-blocked]` route: the three both-domain records §6 names
+(41332177, 40935122, 26787729) still need a reader with library access, filed on `channels/reject-queue.md`
+and not wake-takeable. No further census the item's own question requires is outstanding.
+
+**Pinned by** `tests/test_affective_pain_vns_filtered.py` (class `VnsBiomarkerOnlyTest`), which
+re-derives the ten from the stored flags, checks the stored pain-instrument and affect counts, and fails
+if this section names a set the machine no longer produces.

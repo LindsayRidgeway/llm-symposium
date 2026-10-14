@@ -208,5 +208,60 @@ class VnsFilteredArmTest(unittest.TestCase):
         self.assertIn("makes no claim about whether either intervention works", self.md)
 
 
+class VnsBiomarkerOnlyTest(unittest.TestCase):
+    """§12: the ten biomarker-only records, hand-classified — the VNS counterpart of §8's sixteen.
+
+    The hand-read classes (six pain-population trials, three healthy-volunteer experimental-pain
+    studies, one review) are prose and cannot be re-derived from a keyword, so they are not checked
+    here. What is checked is everything a machine can re-derive: the ten-set itself, the stored
+    affect and pain-instrument counts among the ten, and the two records §12 names as defects rather
+    than results (the three-paper single trial, and the review the human-primary rule lets through).
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.raw = json.loads(RAW.read_text())
+        cls.md = MAP.read_text()
+        cls.hp = [r for r in cls.raw["records"] if r["is_human_primary"]]
+        cls.by_id = {r["pmid"]: r for r in cls.raw["records"]}
+        cls.ten = [r for r in cls.hp
+                   if r["neural_or_autonomic_biomarker"] and not r["affective_outcome"]]
+
+    def test_the_ten_are_the_biomarker_only_complement(self):
+        self.assertEqual(sorted(r["pmid"] for r in self.ten), sorted(BIOMARKER_ONLY_PMIDS))
+        self.assertEqual(len(self.ten), 10)
+
+    def test_section_12_exists_and_names_all_ten(self):
+        self.assertIn("## 12. The ten biomarker-only records of the VNS arm", self.md)
+        for pmid in BIOMARKER_ONLY_PMIDS:
+            self.assertIn(pmid, self.md, f"{pmid} is biomarker-only but absent from §12")
+
+    def test_the_stored_counts_section_12_prints_are_re_derivable(self):
+        # §12: five name a specific instrument per the hand-read; the *stored* instrument flag (a
+        # narrower "intensity" keyword) fires on four. Both are true and the section says which is which.
+        self.assertEqual(sum(1 for r in self.ten if r.get("pain_intensity_instrument")), 4)
+        # by construction, none of the ten names an affect term — this is what "biomarker-only" means.
+        self.assertEqual(sum(1 for r in self.ten if r["affective_outcome"]), 0)
+        self.assertIn("**10 of 10**", self.md)
+
+    def test_the_three_paper_trial_is_named_as_a_defect_not_a_result(self):
+        # 40461351, 41091086, 42361949 are three papers from one trial (taVNS vs tGANS, NCT03959111).
+        for pmid in ("40461351", "41091086", "42361949"):
+            self.assertEqual(self.by_id[pmid]["arm"], avf.ARM)
+            self.assertIn(pmid, self.md)
+        self.assertIn('"ten" is really **eight', self.md)
+
+    def test_the_misclassified_review_is_named(self):
+        # 33548494 carries the "RCT" ptype but is a narrative review; classify_subject lets it through.
+        rec = self.by_id["33548494"]
+        self.assertTrue(rec["is_human_primary"])
+        self.assertTrue(any("Randomized Controlled Trial" in p for p in rec["publication_types"]))
+        self.assertIn("33548494", self.md)
+        self.assertIn("narrative review", self.md)
+
+    def test_the_map_still_refuses_to_claim_efficacy(self):
+        self.assertIn("makes no claim about whether either intervention works", self.md)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
