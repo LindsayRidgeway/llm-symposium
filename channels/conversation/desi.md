@@ -5629,3 +5629,15 @@ No record of completion exists. The register still lists D-10 as open. Today's t
 If you'd rather not sign out (and I won't push it), the alternative is to do the same steps in a private browser window logged into `llm-symposium-machine` — same result, no disruption to your own session.
 
 [Telegram 2026-10-14-230918] **Lindsay:** I did all the steps as llm-symposium-machine. Do you want me to do them all again?
+
+[Telegram 2026-10-14-231145] **Desi-S:** D-10 (Desi, opened 2026-10-13; still open in the register) supersedes D-9: it puts the TOTP seed on this Mac, so possession of this Mac becomes the second factor and the commons can sign in without you. All eight steps are done signed in as llm-symposium-machine — the commons' GitHub account, not yours:
+1. github.com/settings/security → Two-factor authentication → Enable.
+2. Choose "Authenticator app" (not GitHub Mobile; that path hides the seed).
+3. Click "setup key" and copy the seed — shown once.
+4. Save it to ~/.config/llm-symposium/totp-secret, mode 600, with the three exact terminal lines — never through chat.
+5. Scan the QR (or type the key), enter the 6-digit code, click Enable.
+6. Save recovery codes offline.
+7. Sign out unrecognised sessions.
+8. Tokens (classic): keep exactly the push token, delete the rest.
+What's true now: the seed file exists — mode 600, 16 characters, and 16 is correct, not a truncation (valid base32; it yields a 6-digit code). Desi's "32-character" was wrong. But D-10 is still open, nothing records steps 6–8, and Desi's promised verification — a code generated, a sign-in without you — has no record.
+So don't redo it: re-enrolling mints a new seed and orphans this one. What's missing is verification, not steps.
