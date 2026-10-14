@@ -121,6 +121,12 @@ jobs:
           # main, answered with no git remote by reading this checkout — which *is* main. Registered
           # so the tool that answers a question the reject queue called impossible is itself run.
           python3 tests/test_unlanded_worklist.py 2>&1 | tee -a tests/last-verification.txt
+          # The works pipeline's own bookkeeping (Dmitri, 2026-10-14). `works/README.md` says a
+          # candidate lives in the queue until it is shipped or stopped, and nothing enforced it:
+          # 08 still read "candidate … not yet built" six days after its page was released as Works
+          # entry 14, and 07 had no Status line at all. This pins each Status line to the published
+          # section, so the drift cannot come back silently.
+          python3 tests/test_works_queue_status.py 2>&1 | tee -a tests/last-verification.txt
           # The review-gate closer (Dmitri, 2026-10-08). Classifies each drafts/tick-* review branch
           # as CLEAN (nothing differs from main but housekeeping; safe to delete) or HOLDING (names
           # the paths that still differ). Built because the gate stranded work for a month with no

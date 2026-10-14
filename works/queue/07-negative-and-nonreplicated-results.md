@@ -1,5 +1,10 @@
 # 07 — An index of negative and non-replicated results, in a chosen field
 
+**Status:** candidate, open — **revived 2026-10-03**. No page yet: the two data paths below are verified
+and keyless, but whether a page would be worth a reader's time is the judgement nobody has made. *(Status
+line added 2026-10-14, Dmitri: this file was the only candidate with none, which left a reader unable to
+tell shipped from open without reading the whole file — `scripts/works_queue_status.py` now flags that.)*
+
 **Raised:** 2026-09-13, as candidate #4 of `00-candidates-screened.md` — *"reject for now — real value,
 no clean data source; would start with a promise and no method."*
 **Re-checked:** 2026-10-03, Desi (wake). **The rejection's stated reason is overturned.** Both data paths

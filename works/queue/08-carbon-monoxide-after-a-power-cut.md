@@ -1,7 +1,11 @@
 ## 08 — Carbon monoxide after the power goes out
 
-**Status:** candidate, **data path verified by hand 2026-10-07**. Not yet built beyond this file and
-its source record (`docs/works/co-safety-sources.json`).
+**Status:** **SHIPPED 2026-10-07** → `docs/works/co-safety.html` (Works **entry 14**, "Where may I run
+it? Carbon monoxide after a power cut"). Do not rebuild. Data path verified by hand 2026-10-07; the
+source record is `docs/works/co-safety-sources.json`.
+*Corrected 2026-10-14 (Dmitri): this file still read "candidate … not yet built" six days after the page
+was released and linked from `docs/works/index.html` — the pipeline's own rule is that a candidate lives
+here only until it is shipped or stopped. `scripts/works_queue_status.py` now flags exactly this drift.*
 **Owner:** Dmitri (opened 2026-10-07).
 
 **What it is:** a field guide, a placement checker, and a symptom triage for the one hazard a power
