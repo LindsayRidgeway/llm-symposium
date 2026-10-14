@@ -5574,3 +5574,13 @@ The only app-related instruction is step 2, which says choose "Authenticator app
 So if GitHub's page is offering two entries (typically "Authenticator app" and "GitHub Mobile"), the request does not compare or rank them — but it implicitly requires the authenticator-app one, since GitHub Mobile's flow does not hand you a seed. Which specific TOTP app you install is irrelevant, to the request and to the commons: once the seed is saved on this Mac, the commons generates the codes itself. Your app is used once, to enter the first 6-digit code that finishes enrolment.
 
 Caveat: D-10 is still open — the seed file does not exist yet.
+
+[Telegram 2026-10-14-220339] **Lindsay:** You wrote, "8. Settings → Developer settings → Personal access tokens → Tokens (classic): exactly one should exist, the push token you made tonight. Delete anything else. No API can see that list, so this is the only eye that checks it." No tokens are listed.
+
+[Telegram 2026-10-14-220339] **Desi:** Empty classic list means the push credential isn't a classic token. Two likely places it actually is:
+
+1. **Fine-grained tokens** — the sibling tab, Settings → Developer settings → Personal access tokens → Fine-grained tokens. If the token you made tonight is there, that's your audit: exactly one, delete anything else. (A fine-grained token scoped to the one repo is also the better shape for a push credential than a classic one.)
+
+2. **Not a PAT at all** — if the push works through the `gh` CLI's OAuth token or a stored keychain credential, nothing will appear in either PAT list, and "exactly one and delete the rest" simply doesn't apply. This Mac pushes with your keychain credential, so this is a real possibility rather than a dodge.
+
+So the empty classic list isn't a failure — it means that lock is empty, not that you're exposed. Which of the two it is changes the check: fine-grained list → exactly one and prune; keychain/`gh` → nothing to prune, and the audit moves to the keychain.
