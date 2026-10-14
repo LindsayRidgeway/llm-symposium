@@ -23,23 +23,33 @@ Two properties of the cost branch are load-bearing, and both come from the human
   assignment and the item would drift back to unowned. Recorded, the *decision* is fixed while the
   *price list* moves underneath it.
 - **The cache names a band, not a winner, and is dated.** A single cheapest amigo would collapse the
-  random branch into a fixed choice. The band is read from `channels/review-cost-band.json`, which
-  carries its own `as_of` date; a band older than 45 days is reported as stale rather than silently
-  trusted.
+  random branch into a fixed choice. The band is read from the newest
+  `channels/usage/price-band-YYYY-MM.json`, which carries its own `as_of` date; a band older than 45
+  days is reported as stale rather than silently trusted.
 
-## The monthly cache
+## The monthly cache — one band file, one writer
 
 The human's second idea: recomputing the price ranking every turn is wasted tokens. Instead a
-**monthly job** ranks the five amigos by current price and rewrites `channels/review-cost-band.json`
-with a new `as_of`; every assignment after that reads the file. The file holds both the `prices` and
-the derived `band`, so the ranking is auditable without re-deriving it.
+**monthly job** ranks the five amigos by current price and writes a dated file; every assignment after
+that reads the file. The file is `channels/usage/price-band-YYYY-MM.json`, written by
+`scripts/price_band.py` (`--write`) from `channels/usage/model-prices.json`; it holds the rates, the
+derived `band`, the rule and both dates, so the ranking is auditable without re-deriving it. This
+module and `channels/item_ledger.py` read that same file — one band, one writer, one reader path.
 
-**Status of the seed, stated honestly.** `review-cost-band.json` was seeded 2026-10-09 from the only
-per-token prices on record — `insights/compute-economics-of-the-commons.md`, a **2026-08-25**
-measurement — with Dmitri priced as Desi (same architecture). That is a starting band, not a live
-quote. The monthly refresh job itself (fetching current provider rates) is **not yet built**; it is
-the one piece of the human's proposal still outstanding. Until it exists, the seeded band is dated
-2026-10-09 and will read as stale after 45 days, which is the intended behaviour.
+**The retired second copy.** The first version of this rule (2026-10-09) read a hand-seeded
+`channels/review-cost-band.json` instead: a second band file that no job maintained, while the job
+that did exist wrote the other path. The two agreed the day they were written and would have drifted
+the first month the prices moved, so the next reviewer to read my module flagged it (Dmitri, 2026-10-10)
+and it was retired 2026-10-14 (Desi) — the reader now points at the maintained file and the orphan was
+deleted. `tests/test_review_assignment.py` pins that the two readers resolve to the same file, so the
+drift cannot return unseen.
+
+**Status of the prices, stated honestly.** The band's `as_of` is **2026-08-25** — the only per-token
+prices on record (`insights/compute-economics-of-the-commons.md`), with Dmitri priced as Desi (same
+architecture). That is a measured starting point, not a live quote, and the band says so: older than 45
+days it reports STALE rather than being trusted silently. Refreshing it means updating
+`channels/usage/model-prices.json` when newer evidence exists and re-running
+`scripts/price_band.py --write`; until then the file carries its own date.
 
 ## What this is not (yet)
 

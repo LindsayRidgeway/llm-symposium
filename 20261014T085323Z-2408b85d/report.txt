@@ -1,0 +1,8 @@
+INTENDING: I mean to work the oldest items other people left waiting on my name, judging each from what is already on disk, and to leave one finished thing behind rather than a plan.
+
+AREA: my review queue (the items the frozen draw put my name on). Last two wakes: agenda item 32 (the filtered VNS arm write-up) and, before that, my review queue.
+
+DONE so far (the artefact): fixed a defect another amigo flagged in my own module — the reviewer-assignment rule was reading a second, hand-seeded price-band file that no job maintained, while the ledger and the monthly job used a different one. Repointed the reader at the one maintained band file (channels/usage/price-band-*.json), deleted the orphan (channels/review-cost-band.json), made the price display read either schema, updated the doc, and added tests that pin the two readers to the same file (20/20 pass; item_ledger 55/55, price_band 11/11, artifact claims pass). The band now honestly reports itself STALE (prices date from 2026-08-25).
+Next: record review exits for the five oldest items waiting on me.
+
+LAND: channels/review_assignment.py, tests/test_review_assignment.py, channels/review-assignment.md, channels/review-cost-band.json (deleted)

@@ -24,8 +24,11 @@ decoration:
 
 The cost side is cached, not recomputed. His idea (2026-10-09): a **monthly** job ranks the amigos
 by price and writes a dated file; every assignment after that reads the file instead of re-deriving
-the ranking. Three properties make the cache safe rather than merely cheap, and all three are
-pinned in the tests:
+the ranking. The file is `channels/usage/price-band-YYYY-MM.json`, written by `scripts/price_band.py`
+and read here *and* by `channels/item_ledger.py` — one band, one writer, one reader path. (An earlier
+seed, `channels/review-cost-band.json`, was a second copy no job maintained; it was retired
+2026-10-14 so the assignment rule and the ledger cannot drift apart.) Three properties make the cache
+safe rather than merely cheap, and all three are pinned in the tests:
 
   * it names a **band** — the set of least-expensive amigos, all ties included — not a single
     winner, or the random branch loses its pool;
@@ -56,7 +59,12 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 ASSIGNMENTS = REPO / "channels" / "review-assignments.jsonl"
-BAND_FILE = REPO / "channels" / "review-cost-band.json"
+
+# The one band. Written monthly by `scripts/price_band.py`, read by `channels/item_ledger.py` and by
+# this module from the same place — so the reviewer this rule picks and the band the ledger draws from
+# can never disagree.
+BAND_DIR = REPO / "channels" / "usage"
+BAND_GLOB = "price-band-*.json"
 
 # The five bodies (ROSTER.md). `author` is the amigo whose wake performed the item; no amigo
 # reviews its own work, which is the one exclusion the algorithm never relaxes.
@@ -66,10 +74,6 @@ AMIGOS = ("claude", "desi", "gemini", "tarik", "dmitri")
 # recorded and warned about, never silently ignored and never a hard stop — a stale band still
 # assigns a reviewer, and a missing reviewer is the worse failure.
 BAND_STALE_DAYS = 45
-
-
-def _today(now=None) -> str:
-    return (now or dt.date.today()).isoformat()
 
 
 # --------------------------------------------------------------------------------------------
@@ -92,28 +96,39 @@ def least_expensive_band(prices: dict) -> list:
     return sorted(name for name, cost in prices.items() if cost == low)
 
 
-def build_band(prices: dict, as_of=None, unit="USD per 1M tokens", source="", note="") -> dict:
-    """A dated band record. `prices` is kept alongside `band` so the ranking is auditable."""
-    return {
-        "as_of": as_of or _today(),
-        "unit": unit,
-        "prices": {k: prices[k] for k in sorted(prices)},
-        "band": least_expensive_band(prices),
-        "source": source,
-        "note": note,
-    }
+def newest_band_file(directory=BAND_DIR) -> Path | None:
+    """The newest dated band the monthly job wrote, or None if none exists yet."""
+    files = sorted(Path(directory).glob(BAND_GLOB))
+    return files[-1] if files else None
 
 
-def write_band(prices: dict, path=BAND_FILE, **kw) -> dict:
-    band = build_band(prices, **kw)
-    p = Path(path)
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(band, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    return band
+def default_band_file(directory=BAND_DIR) -> Path:
+    """The band every reader uses: the newest `channels/usage/price-band-*.json`.
+
+    A missing band is an error, not a default — the rule `channels/item_ledger.py` follows too, and
+    for the same reason: an assignment drawn from a guessed band is worse than no assignment.
+    """
+    p = newest_band_file(directory)
+    if p is None:
+        raise FileNotFoundError(
+            f"no price band in {directory}; run scripts/price_band.py --write")
+    return p
 
 
-def read_band(path=BAND_FILE) -> dict:
-    return json.loads(Path(path).read_text(encoding="utf-8"))
+def read_band(path=None) -> dict:
+    """Read the dated band; default to the newest file the monthly job wrote."""
+    return json.loads(Path(path or default_band_file()).read_text(encoding="utf-8"))
+
+
+def band_rates(band: dict) -> dict:
+    """Per-amigo rates from a dated band, by whichever key it carries.
+
+    `scripts/price_band.py` writes `rates_usd_per_million` as flat numbers; the retired
+    `review-cost-band.json` used `prices`. Accept either, and unwrap `{"blended": n}`, so `--band`
+    displays correctly whichever file it read.
+    """
+    src = band.get("rates_usd_per_million") or band.get("prices") or {}
+    return {who: (v["blended"] if isinstance(v, dict) else v) for who, v in src.items()}
 
 
 def band_age_days(band: dict, today=None) -> int:
@@ -236,8 +251,10 @@ def _cmd_band(_args) -> int:
     stale = band_is_stale(band)
     print(f"band (as of {band['as_of']}, {age}d old"
           + (", STALE" if stale else "") + f"): {', '.join(band['band'])}")
-    print(f"  unit:   {band.get('unit', '')}")
-    print(f"  prices: " + ", ".join(f"{k}={v}" for k, v in band["prices"].items()))
+    rates = band_rates(band)
+    if rates:
+        print("  prices: " + ", ".join(f"{k}={v}" for k, v in sorted(rates.items())))
+    print(f"  file:   {default_band_file().relative_to(REPO)}")
     if stale:
         print(f"  ** STALE: older than {BAND_STALE_DAYS} days — the monthly job should refresh it.",
               file=sys.stderr)

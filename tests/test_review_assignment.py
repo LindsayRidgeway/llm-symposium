@@ -42,11 +42,32 @@ class TestBand(unittest.TestCase):
         with self.assertRaises(ValueError):
             ra.least_expensive_band({"desi": -1.0, "claude": 1.0})
 
-    def test_build_band_keeps_prices_and_the_date(self):
-        b = ra.build_band({"desi": 0.01, "claude": 1.0}, as_of="2026-10-09")
-        self.assertEqual(b["as_of"], "2026-10-09")
-        self.assertEqual(b["band"], ["desi"])
-        self.assertEqual(b["prices"], {"claude": 1.0, "desi": 0.01})
+    def test_the_default_band_is_the_maintained_usage_file(self):
+        # One band, one writer (scripts/price_band.py): the reader points at the file it maintains.
+        p = ra.default_band_file()
+        self.assertEqual(p.parent, ra.BAND_DIR)
+        self.assertRegex(p.name, r"^price-band-\d{4}-\d{2}\.json$")
+
+    def test_the_default_band_is_the_newest_dated_file(self):
+        with tempfile.TemporaryDirectory() as t:
+            (Path(t) / "price-band-2026-09.json").write_text("{}", encoding="utf-8")
+            (Path(t) / "price-band-2026-10.json").write_text("{}", encoding="utf-8")
+            self.assertEqual(ra.default_band_file(t).name, "price-band-2026-10.json")
+
+    def test_a_missing_band_is_an_error_not_a_default(self):
+        with tempfile.TemporaryDirectory() as t:
+            self.assertIsNone(ra.newest_band_file(t))
+            with self.assertRaises(FileNotFoundError):
+                ra.default_band_file(t)
+
+    def test_rates_are_read_from_the_maintained_schema(self):
+        band = {"band": ["desi", "dmitri"],
+                "rates_usd_per_million": {"desi": 0.01, "claude": 1.15}}
+        self.assertEqual(ra.band_rates(band), {"claude": 1.15, "desi": 0.01})
+
+    def test_rates_are_read_from_the_retired_schema_too(self):
+        band = {"band": ["desi"], "prices": {"desi": 0.01, "claude": {"blended": 1.15}}}
+        self.assertEqual(ra.band_rates(band), {"claude": 1.15, "desi": 0.01})
 
     def test_stale_band_is_detected_against_its_date(self):
         fresh = band_of(["desi"], as_of="2026-10-09")
@@ -135,6 +156,24 @@ class TestFreeze(unittest.TestCase):
             self.assertEqual(rec["author"], "claude")
             self.assertIn("assigned_utc", rec)
             self.assertEqual(rec["method"], "cost-draw")
+
+
+class TestTheBandHasOneSource(unittest.TestCase):
+    """The defect this guards: two band files, one of them unmaintained.
+
+    `channels/review_assignment.py` and `channels/item_ledger.py` must read the same band file, or the
+    reviewer this rule picks and the band the ledger draws from can disagree.
+    """
+
+    def test_the_assignment_and_the_ledger_read_the_same_band_file(self):
+        from channels import item_ledger as il
+        ledger_band, _as_of, ledger_file = il.price_band()
+        self.assertEqual(ra.default_band_file(), ledger_file)
+        self.assertEqual(ledger_band, ra.read_band()["band"])
+
+    def test_the_retired_second_band_file_is_gone(self):
+        self.assertFalse((REPO / "channels" / "review-cost-band.json").exists(),
+                         "the unmaintained second band file was retired 2026-10-14")
 
 
 if __name__ == "__main__":
