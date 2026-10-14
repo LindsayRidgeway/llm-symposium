@@ -5447,3 +5447,39 @@ Still unanswered, and it matters because a Pi went back over it: was the crushed
 Nothing goes in yet. On this board a wrong socket is a voltage question, not just a fit question — which is the one thing today's success doesn't teach, because the fan header was keyed.
 
 It's nearly midnight. That's a good place to stop, and the two cables will still be there.
+
+[Goose 2026-10-14 04:36] **Lindsay:** Here's where I am now. The green arrow points to the socket I wanted to plug the fan into. It's now available, and I think the board it's on could be called the expansion board. The purple arrow points to another free socket, this one on the LITE controller. The blue arrow points to the same kind of socket, also on the LITE controller of course. This one currently has one I take to be the 3-pin cable mentioned in step 4. That cable has the same kind of connector at both ends. The third photo shows that the mystery cables are attached to the robot's motors. So we have two free sockets, one on the expansion board and one on the LITE controller, and three floating connectors: the one at the other end of the step 4 3-pin connector and the other two coming up from the motors. Now the trouble is that your msg mentioned PMW servo cable, J5 port, jumper positions, servo pins, Move one, feed a 5 V servo 7.4 V, servo port on the STM32 controller, servo at the bottom of the robot arm, silkscreen beside those sockets. This is what I meant when I'm always saying I can't understand your msgs. I don't know what any of those phrases mean. One last point: The parts list mentions a data cable that doesn't appear anywhere in the instructions, and step 4 mentions a 3pin cable that doesn't appear in the parts list. But don't worry, they don't look the same. So I don't know what either of them are. My theory is now that the blue-arrow socket should not have the 3pin cable in it. Instead, those two side-by-side sockets are for the motors. (I have tried unsuccessfully to remove the connector from the blue socket, but I think it should be possible without damaging it.) So now, let's say the green-arrow socket is the expansion board. In that case, all I would need is one more 3-pin socket for the other end of the 3-pin cable and every cable would be connected at both ends. [3 photos: CH340C board with green arrow at its lower socket; LITE controller close-up with purple arrow (left, sockets beside a 10uF capacitor) and blue arrow (right, by the 5V GND SDA SCL socket); a wheel motor JGA27-310 20:1 7.4V with its cable bundles]
+
+**Desi:** Two things first.
+
+**I was wrong about the yellow block.** It's a capacitor — it has `10uF` printed on it — not a jumper. So the whole "jumper positions, don't move it, 5 V versus 7.4 V" passage in my last message was nonsense. There is nothing there to move and nothing there that sets a voltage. I guessed, then wrote the guess as though it were a finding. That's the third time in this build, and it's a bad habit.
+
+**And you're right that my messages are hard to read. That one was the worst of them.** The trouble is that I've been translating a badly-written manual's vocabulary and handing you my translation as though it were plain English. I'll stop. From here I'll point at things by what's printed on them.
+
+### Stop pulling that plug out
+
+Don't force it. There's a real chance it's already in the right hole, and you'd be moving a cable out of a working position — or breaking a plug.
+
+### Why: the board is already labelled
+
+Look at your own photo of the LITE board. I can read printed words on it: `5V GND SDA SCL` beside the big white 4-hole socket on the right — that's power, ground and two data lines, and nothing in your build goes there, so leave it forever. And `S3  S4  S5  S6` along a row of connectors.
+
+Now the useful part. In the manual's own pictures the four wheel motors are labelled **M1, M2, M3, M4** — one letter-and-number per wheel. So the four holes that take motor cables are the ones printed **`M`**. Whatever `S3 S4 S5 S6` marks, it isn't the motor holes.
+
+**So your theory gets settled by one look at the plastic:**
+- Sockets printed **`M1`–`M4`** → they are the motor holes, your theory is right, and the cable in there now is in the wrong place.
+- Sockets printed **`S…` or `J…`** → not motor holes. Leave the cable where it is.
+
+### And a word to hunt for: `J5`
+
+The manual's picture of that 3-pin cable says, in words: *"Connect the PWM servo cable to the J5 port on the expansion board."* Elsewhere the same manual calls the LITE controller "the expansion board." So `J5` is a socket **on the LITE board** — and if one of your free sockets is printed `J5`, then the 3-pin cable belongs there and it's already home.
+
+### One puzzle in your motor photo
+
+The motor's cable looks like a ribbon of six or seven wires, and the manual gives those motors a **6-pin plug**. So a 3-hole socket and a 7-wire motor cable can't be the same connection. Count the holes in the plastic of your two loose plugs — if they have three holes, they are not motor plugs, whatever they're attached to.
+
+### What I need, and none of it is reasoning
+
+Three photos, each with the printed word readable: the two side-by-side sockets; the free socket on the little board; the two loose plugs, showing the holes. And tell me whether any of them says `J5`.
+
+Nothing gets pulled until then.
