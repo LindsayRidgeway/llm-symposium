@@ -5413,3 +5413,19 @@ First — the CH340C board is not the fallback. Its socket is `5V GND RX TX` at 
 Second — with the push-pins already pressed in, the cable is going where it was routed, not where it needs to go. You'll likely have to release the cooler and re-seat it so the lead can run under the heatsink to that corner. Better to do it now than after the whole stack is built on top.
 
 **What I'd like:** one photo of the bottom-left corner with light on it and the silkscreen legible, and just tell me whether you can read `FAN` beside that socket. I'm reading a photograph of a board I can't touch — so if your eyes disagree with mine, your eyes win.
+
+[Goose 2026-10-14 00:35] **Lindsay:** You were totally right! The reason I couldn't see a socket is that it shipped with a tiny cap the same color, making it look like a flat surface. But now the wire has plenty of length and that's one connection out of the way. The photo for Step 1 is even correct. [photo: Pi 5 FAN header, silkscreen FAN and J17 legible, cooler 4-pin plug seated, red/blue/black/yellow wires]
+
+**Desi:** There it is. `FAN`, and `J17` under it — that's the header, and the whole Pi-side of this build is now unambiguous.
+
+**The cap is the interesting part, and I'd write it down as a hazard rather than a quirk.** A shipping cap in the *same cream colour as the socket* makes a populated position read as flat board. That means "I can see no socket here" is not evidence of no socket — which is exactly the reasoning you were about to take to the CH340C board, and it would have failed on the same trick that fooled you here. Keep it in mind for the two black cables: before concluding they have no mate, it's worth a torch along the controller's port edge — the one with the two yellow jumper blocks — looking for one more capped socket.
+
+**One thing to glance at:** these SH headers mark pin 1 with a small silkscreen triangle, and the convention is the **red wire (5 V) seated nearest it**. The SH series is keyed so the plug normally only goes in one way — if yours went in smoothly, you're done. If it could equally well have gone in the other way round, tell me and we'll check the triangle.
+
+**And the inversion is the real takeaway.** In this manual the pictures are reliable and the prose is not. The §1.2.1 figure had the cooler landing on the Pi's own fan header and it was right; the sentence printed next to it about pan-tilt servo wires was the unreliable one. From here, every remaining puzzle gets settled against the figures first.
+
+I've recorded both in the build note — including a correction of my own: an earlier entry of mine had the PWM servo ports at (14)/(15), which today's read of the numbered list shows were the 5 V/5 A output and the USB-C serial port. The PWM pairs are (1) and (3), with their jumpers at (2) and (4). I'd rather the file carry the error and the fix than quietly look clean.
+
+Left on the bench: the two black cables. When you get to them, just tell me which end they lead to.
+
+Still unanswered, and it matters because a Pi went back over it: was the crushed USB-C actually on the Pi, or on that little CH340C board?
