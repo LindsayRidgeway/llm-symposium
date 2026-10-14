@@ -429,11 +429,12 @@ class TestFocusBlock(unittest.TestCase):
     """The report answers two questions and no more (the human, 2026-10-14).
 
     He said the report "tries to answer more questions than I have right now", and asked instead for
-    two blocks: by amigo, items performed; by amigo, items reviewed — five lines and a total each.
-    Three display promises are pinned here, because a scoreboard is only useful if it is complete
-    and adds up: five names always appear, each total is the sum of its five lines, and each heading
-    says aloud which window it means. One label over two populations is what made the old report
-    unreadable — 23 items were filed in its "last 24h" and 172 moved in the same words.
+    two blocks: by amigo, items performed; by amigo, items reviewed — five lines and a total each,
+    all of it in one window. Four promises are pinned here, because a scoreboard is only useful if it
+    is complete, adds up, and is all the same period: five names always appear, each total is the sum
+    of its five lines, each heading says aloud which window it means, and nothing outside that window
+    appears. One label over two populations is what made the old report unreadable — 23 items were
+    filed in its "last 24h" and 172 moved in the same words.
     """
 
     @classmethod
@@ -461,15 +462,17 @@ class TestFocusBlock(unittest.TestCase):
             total = int(block[5].split()[1])
             self.assertEqual(sum(counts), total, heading)
 
-    def test_each_block_carries_a_lifetime_total(self):
-        for heading in ("Items performed, by amigo", "Items reviewed, by amigo"):
-            self.assertRegex(self._block(heading)[5], r"\(lifetime \d+\)", heading)
+    def test_the_block_is_only_the_window_it_claims(self):
+        # He asked for the last 24 hours. A lifetime figure anywhere in the message is a defect,
+        # not a bonus: printing one period's number beside another's is exactly what made the old
+        # report unreadable, and the first draft of this block did it again.
+        self.assertNotIn("lifetime", self.text)
+        self.assertNotIn("ever", self.text)
 
-    def test_the_gate_is_not_counted_as_a_review(self):
-        # The lander's test suite is not somebody looking; it is reported on its own line so that
-        # performed and reviewed reconcile rather than leaving unexplained arithmetic.
-        self.assertIn("not reviewed by a body:", self.text)
-        self.assertIn("test gate alone", self.text)
+    def test_there_is_no_third_section(self):
+        # Two questions, two blocks. A third heading is how the report grew past what he asked for.
+        headings = [line for line in self.lines if line.startswith("**") and "amigo**" in line]
+        self.assertEqual(len(headings), 2, headings)
 
 
 if __name__ == "__main__":

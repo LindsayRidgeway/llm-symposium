@@ -646,18 +646,18 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
     asked for instead is two blocks — by amigo, items performed; by amigo, items reviewed — five
     lines and a total each.
 
-    Four things are deliberate:
+    Three things are deliberate:
 
+    * One window, and only one. He asked for the last 24 hours, so every figure in the message comes
+      from that window. The first draft of this block printed a lifetime total on each total line,
+      which is the same defect the old report had — a number from one period sitting beside numbers
+      from another — and he caught it the next day.
     * Five names always appear, zeros included. He asked for five lines, and a name missing from a
       scoreboard reads as a name that does not exist — which is how two amigos who have never
       reviewed anything stayed invisible.
-    * The window figure is the number and the lifetime figure rides on the total line, so a running
-      score is visible without doubling the block's length.
-    * Each heading names its own window aloud ("filed in this window", "a decision in this window").
-      The one defect that made the previous report hard to read was one label, "last 24h", over two
-      different populations.
-    * "Reviewed" means a body decided. The lander's test gate is not a review, and it is counted
-      separately underneath so that performed and reviewed reconcile on the page.
+    * Each heading says aloud what it counts ("work filed in this window", "a body's decision in
+      this window"). "Reviewed" means a body decided; the lander's test gate is not a review, and it
+      is not counted here.
     """
     now = now or dt.datetime.now(dt.timezone.utc)
     items = load()
@@ -665,12 +665,10 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
     since = (now - dt.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%MZ")
 
     performed = collections.Counter(r.get("amigo") for r in every if _filed_within(r, hours, now))
-    performed_ever = collections.Counter(r.get("amigo") for r in every)
 
     reviewed = [r for r in every
                 if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")]
     decided = collections.Counter(r.get("reviewer") for r in reviewed if _in_window(r, hours))
-    decided_ever = collections.Counter(r.get("reviewer") for r in reviewed)
 
     out = [f"**Daily item report — {_local(now)}**",
            f"window: the {hours}h to {_local(now)} (since {since})",
@@ -678,18 +676,12 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
            "**Items performed, by amigo** — work filed in this window"]
     for who in AMIGO_ORDER:
         out.append(f"  {who:<8} {performed.get(who, 0):>4}")
-    out.append(f"  {'total':<8} {sum(performed.values()):>4}   "
-               f"(lifetime {sum(performed_ever.values())})")
+    out.append(f"  {'total':<8} {sum(performed.values()):>4}")
 
     out += ["", "**Items reviewed, by amigo** — a body's decision in this window"]
     for who in AMIGO_ORDER:
         out.append(f"  {who:<8} {decided.get(who, 0):>4}")
-    out.append(f"  {'total':<8} {sum(decided.values()):>4}   "
-               f"(lifetime {sum(decided_ever.values())})")
-    gate = sum(1 for r in every if r.get("reviewer") == "auto:land" and _letter(r) == "A")
-    never = sum(1 for r in every if _letter(r) == "W")
-    out.append(f"  not reviewed by a body: {gate} reached main on the lander's test gate alone, "
-               f"{never} nobody has looked at")
+    out.append(f"  {'total':<8} {sum(decided.values()):>4}")
     return "\n".join(out)
 
 
