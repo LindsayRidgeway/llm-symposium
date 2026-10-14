@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Pin the fifth-amigo gallery gap to reality (Dmitri, 2026-10-07; updated 2026-10-13).
+"""Pin the fifth-amigo gallery gap to reality (Dmitri, 2026-10-07; updated 2026-10-14).
 
 `scripts/gallery_fifth_amigo_gap.py` reports the arithmetic in
 `research/gallery-floor-at-five.md`: the matrix is 4 columns x 7 wings (28 cells, all filled),
 the amendment of 2026-10-05 made the commons five, so the same floor is 5 x 7 = 35 and seven
-cells -- one per wing -- were the fifth amigo's. The first of them was filled on 2026-10-13
-(islamic, "Noh-Girih: The Ninefold Rosette"), leaving six. This test is the reason the script
-exists: it fails if the gallery is extended without that note being updated, so the claim cannot
-quietly go stale in either direction.
+cells -- one per wing -- were the fifth amigo's. Two of them are now filled: on 2026-10-13
+(islamic, "Noh-Girih: The Ninefold Rosette") and on 2026-10-14 (pen-and-ink, "Hatching the
+Catenoid" -- a work that had already landed on 2026-10-13 but was never registered in its
+pavilion or the matrix, so it counted as empty). Five remain. This test is the reason the
+script exists: it fails if the gallery is extended without that note being updated, so the
+claim cannot quietly go stale in either direction.
 
 The negative cases matter as much as the positive one: a script that cannot see a filled
 fifth column is not measuring the gap, it is printing a constant.
@@ -22,7 +24,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import gallery_fifth_amigo_gap as gap  # noqa: E402
 
-FILLED_FIFTH_CELLS = 1  # islamic, filled 2026-10-13
+FILLED_FIFTH_CELLS = 2  # islamic (2026-10-13) and pen-and-ink (2026-10-14)
 REMAINING_GAPS = 7 - FILLED_FIFTH_CELLS
 
 
@@ -57,8 +59,9 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
             [gap.FIFTH_AMIGO] * REMAINING_GAPS,
         )
         self.assertEqual(len({wing for wing, _ in self.result["gap_cells"]}), REMAINING_GAPS)
-        # The one cell filled so far must no longer read as a gap.
+        # The cells filled so far must no longer read as gaps.
         self.assertNotIn("islamic", {wing for wing, _ in self.result["gap_cells"]})
+        self.assertNotIn("pen-and-ink", {wing for wing, _ in self.result["gap_cells"]})
 
     def test_fifth_amigo_is_named_in_the_gallery_page(self):
         self.assertTrue(self.result["fifth_named_in_page"])
