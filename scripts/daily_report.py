@@ -666,11 +666,13 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
     every = list(items.values())
     since = (now - dt.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%MZ")
 
-    performed = collections.Counter(r.get("amigo") for r in every if _filed_within(r, hours, now))
+    finished = [r for r in every if _filed_within(r, hours, now)]
+    performed = collections.Counter(r.get("amigo") for r in finished)
 
     reviewed = [r for r in every
-                if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")]
-    decided = collections.Counter(r.get("reviewer") for r in reviewed if _in_window(r, hours))
+                if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")
+                and _in_window(r, hours)]
+    decided = collections.Counter(r.get("reviewer") for r in reviewed)
 
     out = [f"**Daily item report — {_local(now)}**",
            f"window: the {hours}h to {_local(now)} (since {since})",
@@ -679,11 +681,31 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
     for who in AMIGO_ORDER:
         out.append(f"  {who:<8} {performed.get(who, 0):>4}")
     out.append(f"  {'total':<8} {sum(performed.values()):>4}")
+    out.append("  where they stand:")
+    for letter, label in (("W", "waiting"), ("A", "accomplished"), ("P", "postponed"),
+                          ("R", "rejected")):
+        hits = [r for r in finished if _letter(r) == letter]
+        if not hits:
+            continue
+        who = collections.Counter(r.get("amigo") for r in hits)
+        out.append(f"    {label:<13} "
+                   + " · ".join(f"{n} {who[n]}" for n in AMIGO_ORDER if who.get(n))
+                   + f"   total {len(hits)}")
 
     out += ["", "**Items reviewed, by amigo** — the last 24 hours"]
     for who in AMIGO_ORDER:
         out.append(f"  {who:<8} {decided.get(who, 0):>4}")
     out.append(f"  {'total':<8} {sum(decided.values()):>4}")
+    out.append("  how they were decided:")
+    for state, label in (("accomplished", "accomplished"), ("postponed", "postponed"),
+                         ("rejected", "rejected")):
+        hits = [r for r in reviewed if r.get("state") == state]
+        if not hits:
+            continue
+        who = collections.Counter(r.get("reviewer") for r in hits)
+        out.append(f"    {label:<13} "
+                   + " · ".join(f"{n} {who[n]}" for n in AMIGO_ORDER if who.get(n))
+                   + f"   total {len(hits)}")
     return "\n".join(out)
 
 

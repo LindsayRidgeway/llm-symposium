@@ -470,6 +470,22 @@ class TestFocusBlock(unittest.TestCase):
         self.assertNotIn("lifetime", self.text)
         self.assertNotIn("ever", self.text)
 
+    def test_the_state_lines_add_up_to_the_block_total(self):
+        # His G and I: the states an item can be in must account for every item counted in the block
+        # above them, or the reader is left doing arithmetic the report should have done.
+        for lead_in, heading in (("where they stand:", "Items finished, by amigo"),
+                                 ("how they were decided:", "Items reviewed, by amigo")):
+            block = self._block(heading)
+            total = int(block[5].split()[1])
+            start = self.lines.index(next(l for l in self.lines if lead_in in l))
+            states = []
+            for line in self.lines[start + 1:]:
+                if "total" not in line:
+                    break
+                states.append(int(line.rsplit("total", 1)[1].strip()))
+            self.assertTrue(states, lead_in)
+            self.assertEqual(sum(states), total, lead_in)
+
     def test_there_is_no_third_section(self):
         # Two questions, two blocks. A third heading is how the report grew past what he asked for.
         headings = [line for line in self.lines if line.startswith("**") and "amigo**" in line]
