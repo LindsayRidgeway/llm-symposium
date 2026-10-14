@@ -5483,3 +5483,27 @@ The motor's cable looks like a ribbon of six or seven wires, and the manual give
 Three photos, each with the printed word readable: the two side-by-side sockets; the free socket on the little board; the two loose plugs, showing the holes. And tell me whether any of them says `J5`.
 
 Nothing gets pulled until then.
+
+[Goose 2026-10-14 05:13] **Lindsay:** You're saying you want better photos than the green-arrow photo of the little board, the purple and blue arrows on the LITE board, and the two motors with their black cables attached? Well, you're right that the motor cables are 7-pin connectors, and they are connected to a row of four 7-pin sockets along an adjacent edge of the LITE controller. I don't actually remember plugging them in, though, so it's kind of a mystery how I would have thought I knew which one goes in which socket. Or maybe the LITE board was already wired up on the robot coming out of the box, which I also don't remember. Sigh. Anyway, the sockets for the two mystery 3-pin cables are not visible on the bottom of the lander. I think they must be hidden under the same cover that the battery is hidden under. I can get you a better picture of the bottom of the lander, but I really question how much better I can do than the photos I sent you with the arrows on them. I think that the writing best associated with the green-arrow socket on the little board says 'NC'. The writing best associated with the purple and blue arrows is 'S + -', and also an upside down 'P1' on the corner of the board next to the purple-arrow socket. I however have looked and looked, and I cannot find J5 anywhere on any board.
+
+**Desi:** The photos were fine. The request was badly put — I asked for "better photos" when what I actually needed was **the printed words**, and you've now read me three of them. That's better than any photograph, because you're reading the plastic and I'm reading a JPEG. Don't go photograph the underside on my account.
+
+**`S + -` is the one that changes things.** `S` is signal, `+` and `−` are power. Three pins, three labels — that is exactly what a servo needs, and it's what your purple and blue sockets say. So those two sockets are **servo sockets**. The manual says your board carries six of them, in two groups of two plus a pair for the arm. That would square nicely with you finding labels `S3 S4 S5 S6`.
+
+**`NC` most likely means "not connected."** On a board, those two letters are how you write *nothing goes here*. If that's what's printed beside the green socket, then it isn't a home for anything — which quietly kills the idea I half-encouraged, that the Step-4 cable's loose end could live there. Worth one look at which pin the `NC` sits next to.
+
+**Forget J5.** If it isn't printed on your board, it doesn't apply to your board — that figure was drawn for the Ackerman version, not yours. Another reason to trust the printing over the paper.
+
+**And your last point has an answer, and it isn't "you're missing something."** The parts list's **"Servo cable (100 mm)"** and Step 4's **"3Pin Cable"** are the same cable under two names. The parts list's **"Data cable"** and the manual's port table's **"STM32 controller communication cable"** are the same cable under two names. Two real cables, four names, and the manual never admits it. That's the manual's fault. It's also why you couldn't match anything up.
+
+**On the motors — you almost certainly didn't wire them.** The packing list sells the "LanderPi chassis" as one line item, and the manual's wiring picture for it shows a finished chassis with M1–M4 already stamped on it. It came out of the box wired. Nothing to feel bad about. (And if a wheel later spins the wrong way, that's just which cable is in which of the four sockets, and rolling it tells you — no harm done.)
+
+**The one fact I still need, and it isn't a photo. Where does each of the two loose cables end at its other end?** Follow one gently with a torch and tell me what it disappears into — the arm, the deck, the battery box, a wheel.
+
+Because here is the sentence the manual actually prints about these two wires:
+
+> *"one to the servo port on the STM32 controller, and the other to the servo at the bottom of the robot arm."*
+
+Two wires, **one** board socket. So if these are that pair, one of them belongs on the arm itself and has no board socket to find at all — which would explain exactly what you're seeing: one cable too many, and no second home however hard you look.
+
+That is a hypothesis, not a finding. The torch decides it.
