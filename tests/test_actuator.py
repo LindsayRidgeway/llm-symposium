@@ -102,7 +102,46 @@ class ActuatorTest(unittest.TestCase):
         r = run_actuator(repo)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
         self.assertIn("REJECTED", r.stdout)
+        self.assertIn("unparseable diff paths", r.stdout)
         self.assertTrue((repo / "actuator" / "rejected" / "bad.patch").exists())
+
+    def test_unparseable_git_header_rejected_before_git_apply(self):
+        """A diff with an unreadable path header is not treated as touching no
+        files. The actuator rejects it before git apply, so an empty touched set
+        cannot bypass the self-modification or verification boundary.
+        """
+        repo = make_repo()
+        body = (
+            'diff --git "a/main.py b/main.py\n'
+            '--- a/main.py\n'
+            '+++ b/main.py\n'
+            '@@ -1 +1 @@\n'
+            '-VALUE = 1\n'
+            '+VALUE = 2\n'
+        )
+        drop_request(repo, "unparseable-header.patch", body)
+        r = run_actuator(repo)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("REJECTED", r.stdout)
+        self.assertIn("unparseable diff paths", r.stdout)
+        self.assertEqual((repo / "main.py").read_text(encoding="utf-8"), MAIN_V1)
+        self.assertTrue((repo / "actuator" / "rejected" / "unparseable-header.patch").exists())
+
+    def test_unparseable_quoted_file_header_rejected_before_git_apply(self):
+        repo = make_repo()
+        body = (
+            '--- "a/main.py\n'
+            '+++ b/main.py\n'
+            '@@ -1 +1 @@\n'
+            '-VALUE = 1\n'
+            '+VALUE = 2\n'
+        )
+        drop_request(repo, "unparseable-file-header.patch", body)
+        r = run_actuator(repo)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("REJECTED", r.stdout)
+        self.assertIn("unparseable diff paths", r.stdout)
+        self.assertEqual((repo / "main.py").read_text(encoding="utf-8"), MAIN_V1)
 
     def test_self_modification_rejected(self):
         repo = make_repo()
@@ -120,9 +159,32 @@ class ActuatorTest(unittest.TestCase):
         self.assertIn("self-modification", r.stdout)
         self.assertTrue((repo / "actuator" / "rejected" / "evil.patch").exists())
 
+    def test_authenticated_owner_patch_to_actuator_is_still_rejected(self):
+        """Even a request already present in actuator/requests/ cannot rewrite the
+        verifier. This is the authenticated-owner boundary: authority to submit
+        a patch is not authority for the actuator to modify itself.
+        """
+        repo = make_repo()
+        body = (
+            "diff --git a/actuator/apply.py b/actuator/apply.py\n"
+            "--- a/actuator/apply.py\n"
+            "+++ b/actuator/apply.py\n"
+            "@@ -1,2 +1,3 @@\n"
+            " #!/usr/bin/env python3\n"
+            "+# owner-requested-self-edit\n"
+            " import datetime\n"
+        )
+        drop_request(repo, "authenticated-owner-self-edit.patch", body)
+        r = run_actuator(repo)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("self-modification", r.stdout)
+        self.assertTrue((repo / "actuator" / "rejected" / "authenticated-owner-self-edit.patch").exists())
+        self.assertNotIn("owner-requested-self-edit", (repo / "actuator" / "apply.py").read_text(encoding="utf-8"))
+
     def test_self_modification_guard_catches_deletion(self):
         """The guard must catch deletion of the engine even when the destination
-        is /dev/null."""
+        is /dev/null.
+        """
         repo = make_repo()
         body = (
             "diff --git a/actuator/apply.py b/dev/null\n"
@@ -144,7 +206,8 @@ class ActuatorTest(unittest.TestCase):
         spells the path in a normalized form ('actuator//apply.py') that git
         accepts and applies to the real engine. This is a regression test for
         the out-of-band fix of 2026-08-29: the exact-string guard was
-        bypassable via path normalization."""
+        bypassable via path normalization.
+        """
         repo = make_repo()
         engine = (repo / "actuator" / "apply.py").read_text(encoding="utf-8")
         head = engine.splitlines()[:3]
@@ -171,7 +234,8 @@ class ActuatorTest(unittest.TestCase):
     def test_verify_rejects_path_escaping_repo(self):
         """The verifier must refuse to compile a path that resolves outside
         the repository (defense in depth; git apply already blocks most such
-        headers)."""
+        headers).
+        """
         import importlib.util
 
         spec = importlib.util.spec_from_file_location("symposium_apply", APPLY_PY)
@@ -203,11 +267,11 @@ class ActuatorTest(unittest.TestCase):
         self.assertEqual((repo / "main.py").read_text(encoding="utf-8"), "VALUE = 2\n")
         self.assertTrue((repo / "actuator" / "applied" / "b.patch").exists())
 
-
     def test_self_modification_guard_catches_quoted_path(self):
         """Git accepts and applies a C-quoted header even when quoting was not
         required, so '"a/actuator/apply.py"' edits the real engine. The guard
-        must read the quoted spelling or it fails open (R-006, found by Tarik)."""
+        must read the quoted spelling or it fails open (R-006, found by Tarik).
+        """
         repo = make_repo()
         body = (
             'diff --git "a/actuator/apply.py" "b/actuator/apply.py"\n'
@@ -228,7 +292,8 @@ class ActuatorTest(unittest.TestCase):
     def test_touched_files_reads_quoted_spaced_and_escaped_paths(self):
         """The header scanner unquotes git's C-style paths, so quoted spellings
         and paths that legitimately contain spaces are attributed to the real
-        file (R-006)."""
+        file (R-006).
+        """
         import importlib.util
 
         spec = importlib.util.spec_from_file_location("symposium_apply", APPLY_PY)
@@ -245,10 +310,23 @@ class ActuatorTest(unittest.TestCase):
         # Non-ASCII bytes are octal-escaped under core.quotepath.
         self.assertEqual(
             mod.touched_files('diff --git "a/docs/caf\\303\\251.md" "b/docs/caf\\303\\251.md"\n'),
-            ["docs/caf\u00e9.md"],
+            ["docs/café.md"],
         )
         # A removal line inside a hunk ('--- text') must not be read as a header.
         self.assertEqual(mod.touched_files("--- old line\n+++ a/real.py\n"), ["real.py"])
+
+    def test_touched_files_rejects_unparseable_quoted_paths(self):
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("symposium_apply", APPLY_PY)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        with self.assertRaises(mod.DiffPathError):
+            mod.touched_files('diff --git "a/docs/bad.md b/docs/bad.md\n')
+        with self.assertRaises(mod.DiffPathError):
+            mod.touched_files('--- "a/docs/bad.md\n+++ b/docs/bad.md\n')
+        with self.assertRaises(mod.DiffPathError):
+            mod.require_touched_files("not a diff\n")
 
 
 if __name__ == "__main__":

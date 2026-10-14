@@ -43,6 +43,11 @@ REJECTED_DIR = REPO_ROOT / "actuator" / "rejected"
 LOG_PATH = REPO_ROOT / "actuator" / "log.md"
 ENGINE = "actuator/apply.py"
 
+
+class DiffPathError(ValueError):
+    """A diff header path could not be parsed safely."""
+
+
 # Offline verification suite (same commands the CI verification workflow runs).
 VERIFY_SUITE = [
     ("tests/test_projection.py", sys.executable, "tests/test_projection.py"),
@@ -91,8 +96,10 @@ def _unquote_git_path(token: str) -> str:
     "a/actuator/apply.py" and have git apply it. The scanner must read the
     quoted form too, or the self-modification guard fails open (R-006).
     """
-    if len(token) < 2 or token[0] != '"' or token[-1] != '"':
+    if len(token) < 2 or token[0] != '"':
         return token
+    if token[-1] != '"':
+        raise DiffPathError(f"unterminated quoted path: {token[:80]}")
     body = token[1:-1]
     out = bytearray()
     i = 0
@@ -104,7 +111,7 @@ def _unquote_git_path(token: str) -> str:
             continue
         i += 1
         if i >= len(body):
-            break
+            raise DiffPathError(f"dangling escape in quoted path: {token[:80]}")
         esc = body[i]
         i += 1
         if esc in _C_ESCAPES:
@@ -130,14 +137,15 @@ def _quote_end(text: str, start: int) -> int:
         if text[i] == '"':
             return i + 1
         i += 1
-    return len(text)
+    raise DiffPathError(f"unterminated quoted path in diff header: {text[:120]}")
 
 
 def _header_tokens(line: str) -> list[str]:
     """The two path tokens of a 'diff --git <src> <dst>' line.
 
     Each token is either a C-quoted string (which may contain spaces) or a run
-    of non-space bytes. Nothing after the second token is read.
+    of non-space bytes. Extra text, a missing token, or an unterminated quote is
+    a parse failure, not an empty touched-file set.
     """
     tokens: list[str] = []
     i = len("diff --git ")
@@ -155,6 +163,10 @@ def _header_tokens(line: str) -> list[str]:
                 j += 1
             tokens.append(line[i:j])
             i = j
+    if len(tokens) != 2:
+        raise DiffPathError(f"expected two diff --git paths, found {len(tokens)}: {line[:120]}")
+    if line[i:].strip():
+        raise DiffPathError(f"unexpected text after diff --git paths: {line[:120]}")
     return tokens
 
 
@@ -168,8 +180,33 @@ def _as_repo_path(token: str, *, require_ab: bool) -> str | None:
     path = _unquote_git_path(token)
     for prefix in ("a/", "b/"):
         if path.startswith(prefix):
-            return path[len(prefix):]
-    return None if require_ab else path
+            path = path[len(prefix):]
+            if not path:
+                raise DiffPathError(f"empty diff path after {prefix!r}: {token[:80]}")
+            return path
+    if require_ab:
+        return None
+    if not path:
+        raise DiffPathError("empty diff path")
+    return path
+
+
+def _fallback_header_token(rest: str) -> str:
+    """Read the path token from a ---/+++ line, honoring C-style quotes."""
+    if rest.startswith('"'):
+        token_end = _quote_end(rest, 0)
+        if rest[token_end:].strip():
+            raise DiffPathError(f"unexpected text after quoted file header: {rest[:120]}")
+        return rest[:token_end]
+    return re.split(r"[\t ]", rest, maxsplit=1)[0]
+
+
+def require_touched_files(patch_text: str) -> list[str]:
+    """Return touched files, rejecting patches whose file paths cannot be read."""
+    files = touched_files(patch_text)
+    if not files:
+        raise DiffPathError("no touched files detected")
+    return files
 
 
 def touched_files(patch_text: str) -> list[str]:
@@ -195,19 +232,19 @@ def touched_files(patch_text: str) -> list[str]:
             add(_as_repo_path(token, require_ab=False))
     if not files:
         for m in re.finditer(r"^(?:---|\+\+\+) (.*)$", patch_text, re.MULTILINE):
-            rest = m.group(1)
-            if rest.startswith('"'):
-                token = rest[: _quote_end(rest, 0)]
-            else:
-                token = re.split(r"[\t ]", rest, maxsplit=1)[0]
+            token = _fallback_header_token(m.group(1))
             add(_as_repo_path(token, require_ab=True))
     return [_canonical(p) for p in files]
 
 
-def verify(patch_text: str) -> tuple[bool, str]:
+def verify(patch_text: str, touched: list[str] | None = None) -> tuple[bool, str]:
     """Run py_compile + offline suite against the current working tree."""
     results = []
-    for path in touched_files(patch_text):
+    try:
+        paths = touched if touched is not None else require_touched_files(patch_text)
+    except DiffPathError as e:
+        return False, f"Unparseable diff paths: {e}"
+    for path in paths:
         candidate = REPO_ROOT / path
         if not candidate.resolve().is_relative_to(REPO_ROOT.resolve()):
             return False, f"Path traversal detected: {path}"
@@ -245,7 +282,13 @@ def process_request(patch_path: Path) -> str:
         _move(patch_path, REJECTED_DIR)
         return f"REJECTED {name}: unreadable patch ({e})"
 
-    if ENGINE in touched_files(patch_text):
+    try:
+        touched = require_touched_files(patch_text)
+    except DiffPathError as e:
+        _move(patch_path, REJECTED_DIR)
+        return f"REJECTED {name}: unparseable diff paths — {e}"
+
+    if ENGINE in touched:
         _move(patch_path, REJECTED_DIR)
         return f"REJECTED {name}: self-modification guard — patches may not touch {ENGINE}"
 
@@ -266,7 +309,7 @@ def process_request(patch_path: Path) -> str:
         _move(patch_path, REJECTED_DIR)
         return f"REJECTED {name}: git apply failed\n{apply.stderr.strip()[:2000]}"
 
-    ok, detail = verify(patch_text)
+    ok, detail = verify(patch_text, touched)
     if ok:
         _move(patch_path, APPLIED_DIR)
         return f"APPLIED {name}: verification passed\n{detail}"
@@ -297,6 +340,8 @@ def main() -> int:
     for patch_path in requests:
         try:
             touched = touched_files(patch_path.read_text(encoding="utf-8"))
+        except DiffPathError as e:
+            touched = [f"unparseable ({e})"]
         except Exception:
             touched = []
         status = process_request(patch_path)

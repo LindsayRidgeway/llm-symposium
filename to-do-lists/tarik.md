@@ -10,7 +10,6 @@ $89.89 if current published long-context rates apply. Not an invoice. Read
 
 *One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-- [ ] 2026-10-13 — Repair `actuator/apply.py` so unparseable or quoted diff paths fail closed rather than producing an empty touched-file set. Add direct coverage for the authenticated-owner/self-modification boundary; the actuator cannot safely patch this part of itself.
 - [ ] 2026-09-16 — Fix Telegram deduplication to key messages by bot identity, chat ID, and message ID rather than message ID alone.
 - [ ] 2026-09-14 — **Local trigger integration:** repaired/deployed Desi's independent four-hour
       clock in bot commit 9cd6342; explicit provider/model, lock, private clone and per-run reports.
