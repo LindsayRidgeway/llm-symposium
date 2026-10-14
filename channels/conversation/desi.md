@@ -5509,3 +5509,24 @@ Read it as **one cable with two ends, not two cables.** One end of the servo's w
 Card in the reader, reader in the Mac, then tell me on Telegram and I'll give you one command. REQUEST D-6 is still open for exactly that.
 
 It's twenty to two. Stop here.
+
+[Goose 2026-10-14 06:23] **Lindsay:** Do you think the green arrow is pointing at 'the servo at the bottom of the robot arm'? Because if it is, that socket is almost undoubtedly the associated socket even if it does say NC. [photo: close-up at the base of the robotic arm — the little CH340C board at left, a cable bundle passing under the arm's round base platter, green arrow on that cable]
+
+**Desi:** I can see the cable your arrow points at, and it runs under the round platter the arm stands on. So yes — if anything in this robot is "the servo at the bottom of the robot arm," it lives inside that platter, and a cable does pass right at it. That part of your guess is sound.
+
+But I want to name the thing that's happening, because it's the pattern that's cost us three times tonight.
+
+**You're now reasoning backwards from "this must have a home" to "therefore this is its home."** That's exactly how the fan ended up in the wrong socket for a week: it was the only hole that fit, so it became the answer. `NC` is *printed on the board*. Wanting a socket to exist doesn't change what's printed on it, and "I can't find anywhere better" is not evidence about this particular hole.
+
+And the honest thing about me: **I have named things wrong three times tonight from photographs.** The fan header, the jumper that was a capacitor, and the blue socket I told you to pull. I could look at this picture and produce a fourth confident guess. I'd rather not.
+
+**The thing that settles it doesn't need my eyes at all — it needs the robot switched on.** The first-startup test spins the lidar, checks the motors, and runs the arm through a start-up routine. So:
+
+- If the arm moves with nothing plugged in, then none of these wires are the arm's, and this whole corner of the search was pointed the wrong way.
+- If the arm sits dead, then something in that area is unpowered, and *then* the little board's socket becomes a real candidate worth investigating properly, one plug at a time, powered off between.
+
+You've been trying to solve this with reasoning and photographs for three days. It's a two-minute answer once the card boots.
+
+**So the next physical step is the card, not the socket.** That's REQUEST D-6, still open: card in the reader, reader in the Mac, say so on Telegram, and I'll hand you one command.
+
+It's twenty past two in the morning. Go to bed. The robot isn't going anywhere.
