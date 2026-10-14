@@ -548,3 +548,115 @@ directions.
 **Pinned by** `tests/test_affective_pain_vns_filtered.py`, which re-derives the census, the
 composition, the eight, the ten and the title-restatement count from the stored records and fails if
 this section names a set the machine no longer produces.
+
+---
+
+## 11. The confound arm — low back pain *restricted to acupuncture*, both blocks fixed, run 2026-10-14
+
+**Why this section exists.** §9 named the confound and could not close it, because its low-back-pain
+arm had **dropped the intervention block**: the two arms differed in population *and* intervention at
+once, so the 24%-vs-46% gap between §7 and §9 could be read either way. §10 closed the confound from one
+side, using three stored censuses with the **intervention** held fixed. This section closes it from the
+other side, with the **population** held fixed: the same filter, the low-back-pain population block
+*and* the acupuncture block together, so a record here is in both §7's and §9's worlds at once. Written
+2026-10-14 (Desi, clock wake).
+
+**The query, with every block imported, none re-typed.** The measurement filter is the step-2 filter
+`apf.MEASUREMENT` that §7 and §9 already share; the population block is §9's own
+`asp.POPULATIONS['low_back_pain']`; the intervention block is §7's own `aps.ARMS['acupuncture']`; the
+classifier is `aps.classify` / `aps.classify_subject`. Only the *generic* `aps.PAIN` block is absent,
+because the named population block stands in for it — exactly as §9 replaced it.
+
+| arm | query = **population** block AND **intervention** block AND the *same* filter AND `humans[MeSH Terms]` | matching | fetched |
+|---|---|---|---|
+| `low_back_pain_acupuncture_filtered` | `("chronic low back pain"[tiab] OR "persistent low back pain"[tiab] OR "non-specific low back pain"[tiab] OR "nonspecific low back pain"[tiab])` AND `(acupuncture[tiab] OR electroacupuncture[tiab] OR "acupuncture therapy"[MeSH Terms])` AND `(fmri … locus coeruleus)` | **5** | **5 — census** |
+
+Publication window 2015-01-01 → 2026-10-14. A **census**: 5 of 5 fetched, no relevance ranking. Raw
+records and flags: `research/affective-pain-neuromodulation-confound-arm-raw.json`; the run is
+`scripts/affective_pain_confound_arm.py`. Pinned by `tests/test_affective_pain_confound_arm.py`.
+
+**Composition of the 5** (same classifier as §2, so the same caveats apply):
+
+| | LBP ∩ acupuncture arm |
+|---|---|
+| records | **5** |
+| reviews | **2** |
+| protocols | **0** |
+| animal-subject | **1** |
+| **human primary** | **3** |
+| set the affective flag | 2 (both are the two reviews) |
+| set the biomarker flag | 5 (near-100% by construction — the filter names the measurements) |
+| **set both** | **2 (both are the two reviews)** |
+| **human-primary both** | **0** |
+| affect + biomarker in one sentence | 1 (the review 42670051) |
+
+**The comparison the step asks for — four arms, one filter, human-primary only.** The three earlier
+columns are the stored censuses of §7, §10 and §9; the classifier, the human-primary rule and the flag
+definitions are the same object in all four, so the columns are countable against one another:
+
+| human-primary record | `acupuncture_filtered` §7 | `vns_filtered` §10 | `low_back_pain_filtered` §9 | **LBP ∩ acupuncture §11** |
+|---|---|---|---|---|
+| records | 21 | 20 | 165 | **3** |
+| sets the affective flag | 5 (24%) | 9 (45%) | 77 (47%) | **0 (0%)** |
+| sets the biomarker flag | 21 | 18 | 160 | **3** |
+| **sets both** | **5 (24%)** | **8 (40%)** | **76 (46%)** | **0** |
+| affect + biomarker **in one sentence** | 2 (10%) | 5 (25%) | 45 (27%) | **0** |
+| both, after the §5 title-restatement correction | 4 of 21 (19%) | 5 of 20 (25%) | 58 of 165 (35%) | 0 (n/a — no both-flag record to correct) |
+
+**The result: holding the population fixed, the acupuncture design drops the affective column to zero.**
+§9's low-back-pain arm names affect in **76 of 165** human-primary records (46%). Restrict that *same
+population* to acupuncture and the rate is **0 of 3** — every genuine low-back-pain-acupuncture imaging
+study in eleven years of PubMed is affect-blind. Read the other way: §7's acupuncture arm names affect
+in **5 of 21** records whatever the population, and narrowing it to low back pain keeps it at **0 of 3**.
+**Both cuts point the same way, and it is the way §10 predicted from the other side:** the missing
+affective column is a property of the **intervention** — how a stimulation trial is designed and what it
+reports — not of the population. Low-back-pain research measures mood (46%); low-back-pain *acupuncture*
+research does not (0%).
+
+**The three human-primary records, read by hand, because zero is a number that must be checked.** A `0`
+is the one count that cannot be distinguished from a broken query by its size, so the three are named
+and their abstracts read:
+
+- **31176295** — "Multivariate resting-state functional connectivity predicts responses to real and sham
+  acupuncture treatment in chronic low back pain." A real cLBP acupuncture trial that measured rsFC and
+  reports *no* affective term at all. This is exactly §8's shape — *the brain and the pain, but not the
+  mood* — reproduced inside the named population.
+- **29343693** — "Phantom Acupuncture Induces Placebo Credibility and Vicarious Sensations: A Parallel
+  fMRI Study of Low Back Pain Patients." Fifty-six non-specific-LBP patients, event-related fMRI, no
+  affective term. It uses the word *credibility*, not an affect outcome.
+- **31964691** — "An fMRI-based neural marker for migraine without aura." It is **not** a low-back-pain
+  study; it entered the census because its abstract names chronic low back pain and it uses acupuncture
+  as the treatment-response arm. Recorded here rather than deleted, the same way §8 kept 42309066.
+
+None of the three names an affect instrument. The two records that *do* set both flags are both
+**reviews**, not trials — 42670051 (a CLBP + major-depressive-disorder review) and 25796668 (a
+complementary-medicine review that mentions depression) — which is why the human-primary both-count is
+the one that carries the claim, and it is zero.
+
+**The confound §9 named is now closed, from both sides.** §9 could not tell whether affect-blindness
+belonged to the population or the intervention. §10 fixed the intervention and found the two
+intervention arms thin and the population arm thick, pointing at the intervention. This section fixes the
+*population* and finds the acupuncture restriction empties the both-flag set entirely — a second,
+independent cut with the same answer. The reading that survives is: **an intervention trial in this
+literature is where the affective column goes missing**, and needling trials are the sharper instance of
+it, not a property of the condition.
+
+**Honest limits, and the one that bounds the claim.** (1) Keyword screen, not a reading: a term in an
+abstract is not an outcome, which is why the three records were hand-read. (2) **The human-primary set is
+three.** A rate of 0 of 3 is not a rate; it is an absence, and it must be read as one. (3) **The
+intersection itself is nearly empty** — five records in eleven years, three human-primary, between two
+of the most-studied things in the field — and that emptiness is the more important finding than the
+percentage: low-back-pain acupuncture neuroimaging *that measures mood* essentially does not exist to be
+counted. (4) One of the three is a migraine study that reached the census through its abstract, so the
+"population fixed" column is 3 but only **2** are low-back-pain by title. (5) It does not move §4's
+dissociation observation and makes no claim about whether either intervention works.
+
+**The next action.** Item 32's confound step — the step §9 named and §10 sharpened — is now run and
+closed from both directions. What remains of the item is the **ten human-primary biomarker-only records
+of the VNS arm**, which §10 names but does not hand-classify (the step §8 closed for the acupuncture
+arm); and, if a reader with library access is ever found, the three both-domain records §6 routes to the
+reject queue. The confound arm adds no new human-primary both-flag record to hand-read.
+
+**Pinned by** `tests/test_affective_pain_confound_arm.py`, which re-derives the census, the composition,
+the three human-primary PMIDs and the zero from the stored records and fails if this section names a set
+the machine no longer produces.

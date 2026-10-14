@@ -1,0 +1,263 @@
+{
+ "generated": "2026-10-14",
+ "source": "PubMed E-utilities (esearch + efetch), low-back-pain x acupuncture confound arm",
+ "arms": {
+  "low_back_pain_acupuncture_filtered": {
+   "query": "(\"chronic low back pain\"[tiab] OR \"persistent low back pain\"[tiab] OR \"non-specific low back pain\"[tiab] OR \"nonspecific low back pain\"[tiab]) AND (acupuncture[tiab] OR electroacupuncture[tiab] OR \"acupuncture therapy\"[MeSH Terms]) AND (fmri[tiab] OR \"functional magnetic resonance\"[tiab] OR \"functional connectivity\"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR \"event-related potential\"[tiab] OR meg[tiab] OR \"near-infrared spectroscopy\"[tiab] OR fnirs[tiab] OR \"heart rate variability\"[tiab] OR hrv[tiab] OR autonomic[tiab] OR \"skin conductance\"[tiab] OR \"vagal tone\"[tiab] OR \"pupil\"[tiab] OR \"insula\"[tiab] OR \"amygdala\"[tiab] OR \"anterior cingulate\"[tiab] OR \"brainstem\"[tiab] OR \"locus coeruleus\"[tiab]) AND humans[MeSH Terms]",
+   "population": "low_back_pain",
+   "population_block": "(\"chronic low back pain\"[tiab] OR \"persistent low back pain\"[tiab] OR \"non-specific low back pain\"[tiab] OR \"nonspecific low back pain\"[tiab])",
+   "intervention_block": "(acupuncture[tiab] OR electroacupuncture[tiab] OR \"acupuncture therapy\"[MeSH Terms])",
+   "filter": "(fmri[tiab] OR \"functional magnetic resonance\"[tiab] OR \"functional connectivity\"[tiab] OR eeg[tiab] OR electroencephalogra*[tiab] OR \"event-related potential\"[tiab] OR meg[tiab] OR \"near-infrared spectroscopy\"[tiab] OR fnirs[tiab] OR \"heart rate variability\"[tiab] OR hrv[tiab] OR autonomic[tiab] OR \"skin conductance\"[tiab] OR \"vagal tone\"[tiab] OR \"pupil\"[tiab] OR \"insula\"[tiab] OR \"amygdala\"[tiab] OR \"anterior cingulate\"[tiab] OR \"brainstem\"[tiab] OR \"locus coeruleus\"[tiab])",
+   "total_matching": 5,
+   "fetched": 5,
+   "censored": false,
+   "pmids": [
+    "42670051",
+    "31964691",
+    "31176295",
+    "29343693",
+    "25796668"
+   ],
+   "query_translation": "(\"chronic low back pain\"[Title/Abstract] OR \"persistent low back pain\"[Title/Abstract] OR \"non-specific low back pain\"[Title/Abstract] OR \"nonspecific low back pain\"[Title/Abstract]) AND (\"acupuncture\"[Title/Abstract] OR \"electroacupuncture\"[Title/Abstract] OR \"acupuncture therapy\"[MeSH Terms]) AND (\"fmri\"[Title/Abstract] OR \"functional magnetic resonance\"[Title/Abstract] OR \"functional connectivity\"[Title/Abstract] OR \"eeg\"[Title/Abstract] OR \"electroencephalogra*\"[Title/Abstract] OR \"event-related potential\"[Title/Abstract] OR \"meg\"[Title/Abstract] OR \"near-infrared spectroscopy\"[Title/Abstract] OR \"fnirs\"[Title/Abstract] OR \"heart rate variability\"[Title/Abstract] OR \"hrv\"[Title/Abstract] OR \"autonomic\"[Title/Abstract] OR \"skin conductance\"[Title/Abstract] OR \"vagal tone\"[Title/Abstract] OR \"pupil\"[Title/Abstract] OR \"insula\"[Title/Abstract] OR \"amygdala\"[Title/Abstract] OR \"anterior cingulate\"[Title/Abstract] OR \"brainstem\"[Title/Abstract] OR \"locus coeruleus\"[Title/Abstract]) AND \"humans\"[MeSH Terms] AND 2015/01/01:2026/10/14[Date - Publication]"
+  }
+ },
+ "records": [
+  {
+   "pmid": "42670051",
+   "title": "Comorbidity Mechanism and Management of Chronic Low Back Pain and Major Depressive Disorder: From Neural Circuit Remodeling to Precision Medicine.",
+   "journal": "Brain Behav",
+   "year": "2026",
+   "abstract_plain": "OBJECTIVE: This review systematically elaborates multi-system interactive mechanisms underlying comorbid chronic low back pain (CLBP) and major depressive disorder (MDD), synthesizes recent advances in diagnosis, treatment, and management, and proposes precision medicine directions to address clinical challenges, including missed diagnosis, treatment resistance, and poor prognosis. METHOD: We reviewed 86 studies published between 2015 and 2025 from the PubMed, Embase, and CNKI databases. We focused on basic research and clinical trials, integrating multi-omics data to construct mechanistic frameworks and therapeutic evidence. RESULT: The comorbid pathogenesis of CLBP and MDD is driven by dysregulation of the \"neural-immune-endocrine-gut-brain axis\" network. Spinal dorsal horn N-methyl-D-aspartate (NMDA) receptor NR2B phosphorylation amplifies pain signals 2- to 3-fold, while anterior cingulate cortex (ACC)-insula connectivity correlates positively with depression severity. Microglial toll-like receptor 4/nuclear factor-\u03baB (TLR4/NF-\u03baB) activation increases cerebrospinal fluid interleukin-6 (IL-6) and tumor necrosis factor-\u03b1 (TNF-\u03b1) by 3.2- and 2.7-fold, respectively. Hypothalamic-pituitary-adrenal (HPA) axis dysfunction causes a flattened cortisol rhythm, with glucocorticoid receptor gene (NR3C1) hypermethylation reducing glucocorticoid sensitivity by 45%. Gut dysbiosis decreases short-chain fatty acids (SCFAs) by 30% and increases plasma lipopolysaccharide (LPS) by 2.3-fold, accompanied by abnormal proliferation of pro-inflammatory E. coli and Desulfovibrio as well as depletion of anti-inflammatory Prevotella. Duloxetine reduces visual analog scale (VAS) pain scores by 40% and Hamilton Depression Rating Scale (HAM-D) scores by 35% relative to placebo. Closed-loop spinal cord stimulation (SCS) improves treatment response rates to 68% compared with open-loop stimulation. Electroacupuncture at BL23/LR3 alleviates clinical symptoms in 75% of patients relative to sham acupuncture. At the 12-month follow-up, duloxetine's pain relief efficacy slightly declined from 40% to 38%, a phenomenon speculated to be linked to serotonin transporter upregulation. At the 1-year follow-up, closed-loop SCS efficacy decreases to 55%, which may be associated with secondary neural circuit re-remodeling. At the 6-month follow-up, electroacupuncture treatment carries a 22% symptom recurrence rate, which researchers hypothesize arises from secondary gut microbiota re-dysbiosis featuring reduced Prevotella abundance. CONCLUSION: Pathological progression of concurrent CLBP and MDD relies on multi-level remodeling of molecular, cellular, and systemic biological networks. Precision interventions targeting neural circuits, neuroinflammation, and the gut-brain axis, combined with multidisciplinary clinical collaboration, represent core strategies to break through current diagnostic and therapeutic bottlenecks.",
+   "publication_types": [
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Humans",
+    "Major Depressive Disorder",
+    "Precision Medicine",
+    "Low Back Pain",
+    "Chronic Pain",
+    "Comorbidity",
+    "Animals"
+   ],
+   "arm": "low_back_pain_acupuncture_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "Comorbidity Mechanism and Management of Chronic Low Back Pain and Major Depressive Disorder: From Neural Circuit Remodeling to Precision Medicine.."
+   },
+   "biomarker": {
+    "term": "neural",
+    "sentence": "Comorbidity Mechanism and Management of Chronic Low Back Pain and Major Depressive Disorder: From Neural Circuit Remodeling to Precision Medicine.."
+   },
+   "intensity": {
+    "term": "vas",
+    "sentence": "Duloxetine reduces visual analog scale (VAS) pain scores by 40% and Hamilton Depression Rating Scale (HAM-D) scores by 35% relative to placebo."
+   },
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": true,
+   "is_human_primary": false,
+   "co_mention_sentence": "Comorbidity Mechanism and Management of Chronic Low Back Pain and Major Depressive Disorder: From Neural Circuit Remodeling to Precision Medicine.."
+  },
+  {
+   "pmid": "31964691",
+   "title": "An fMRI-based neural marker for migraine without aura.",
+   "journal": "Neurology",
+   "year": "2020",
+   "abstract_plain": "OBJECTIVE: To identify and validate an fMRI-based neural marker for migraine without aura (MwoA) and to examine its association with treatment response. METHODS: We conducted cross-sectional studies with resting-state fMRI data from 230 participants and machine learning analyses. In studies 1 through 3, we identified, cross-validated, independently validated, and cross-sectionally validated an fMRI-based neural marker for MwoA. In study 4, we assessed the relationship between the neural marker and treatment responses in migraineurs who received a 4-week real or sham acupuncture treatment, or were waitlisted, in a registered clinical trial. RESULTS: In study 1 (n = 116), we identified a neural marker with abnormal functional connectivity within the visual, default mode, sensorimotor, and frontal-parietal networks that could discriminate migraineurs from healthy controls (HCs) with 93% sensitivity and 89% specificity. In study 2 (n = 38), we investigated the generalizability of the marker by applying it to an independent cohort of migraineurs and HCs and achieved 84% sensitivity and specificity. In study 3 (n = 76), we verified the specificity of the marker with new datasets of migraineurs and patients with other chronic pain disorders (chronic low back pain and fibromyalgia) and demonstrated 78% sensitivity and 76% specificity for discriminating migraineurs from nonmigraineurs. In study 4 (n = 116), we found that the changes in the marker responses showed significant correlation with the changes in headache frequency in response to real acupuncture. CONCLUSION: We identified an fMRI-based neural marker that captures distinct characteristics of MwoA and can link disease pattern changes to brain changes.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, N.I.H., Extramural",
+    "Research Support, Non-U.S. Gov't",
+    "Comment"
+   ],
+   "mesh": [
+    "Brain",
+    "Cross-Sectional Studies",
+    "Humans",
+    "Machine Learning",
+    "Magnetic Resonance Imaging",
+    "Migraine without Aura"
+   ],
+   "arm": "low_back_pain_acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "An fMRI-based neural marker for migraine without aura.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "31176295",
+   "title": "Multivariate resting-state functional connectivity predicts responses to real and sham acupuncture treatment in chronic low back pain.",
+   "journal": "Neuroimage Clin",
+   "year": "2019",
+   "abstract_plain": "Despite the high prevalence and socioeconomic impact of chronic low back pain (cLBP), treatments for cLBP are often unsatisfactory, and effectiveness varies widely across patients. Recent neuroimaging studies have demonstrated abnormal resting-state functional connectivity (rsFC) of the default mode, salience, central executive, and sensorimotor networks in chronic pain patients, but their role as predictors of treatment responsiveness has not yet been explored. In this study, we used machine learning approaches to test if pre-treatment rsFC can predict responses to both real and sham acupuncture treatments in cLBP patients. Fifty cLBP patients participated in 4\u202fweeks of either real (N\u202f=\u202f24, age\u202f=\u202f39.0\u202f\u00b1\u202f12.6, 16 females) or sham acupuncture (N\u202f=\u202f26, age\u202f=\u202f40.0\u202f\u00b1\u202f13.7, 15 females) treatment in a single-blinded trial, and a resting-state fMRI scan prior to treatment was used in data analysis. Both real and sham acupuncture can produce significant pain reduction, with those receiving real treatment experiencing greater pain relief than those receiving sham treatment. We found that pre-treatment rsFC could predict symptom changes with up to 34% and 29% variances for real and sham treatment, respectively, and the rsFC characteristics that were significantly predictive for real and sham treatment differed. These results suggest a potential way to predict treatment responses and may facilitate the development of treatment plans that optimize time, cost, and available resources.",
+   "publication_types": [
+    "Controlled Clinical Trial",
+    "Journal Article",
+    "Research Support, N.I.H., Extramural"
+   ],
+   "mesh": [
+    "Acupuncture Therapy",
+    "Adult",
+    "Basal Ganglia",
+    "Cerebral Cortex",
+    "Chronic Pain",
+    "Connectome",
+    "Female",
+    "Humans",
+    "Low Back Pain",
+    "Machine Learning",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Middle Aged",
+    "Outcome Assessment, Health Care",
+    "Placebos",
+    "Prefrontal Cortex",
+    "Single-Blind Method"
+   ],
+   "arm": "low_back_pain_acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "functional connectivity",
+    "sentence": "Multivariate resting-state functional connectivity predicts responses to real and sham acupuncture treatment in chronic low back pain.."
+   },
+   "intensity": null,
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "29343693",
+   "title": "Phantom Acupuncture Induces Placebo Credibility and Vicarious Sensations: A Parallel fMRI Study of Low Back Pain Patients.",
+   "journal": "Sci Rep",
+   "year": "2018",
+   "abstract_plain": "Although acupuncture is an effective therapeutic intervention for pain reduction, the exact difference between real and sham acupuncture has not been clearly understood because a somatosensory tactile component is commonly included in the existing sham acupuncture protocols. In an event-related fMRI experiment, we implemented a novel form of sham acupuncture, phantom acupuncture, that reproduces the acupuncture needling procedure without somatosensory tactile stimulation while maintaining the credibility of the acupuncture treatment context. Fifty-six non-specific low back pain patients received either real (REAL) or phantom (PHNT) acupuncture stimulation in a parallel group study. The REAL group exhibited greater activation in the posterior insula and anterior cingulate cortex, reflecting the needling-specific components of acupuncture. We demonstrated that PHNT could be delivered credibly. Interestingly, the PHNT-credible group exhibited bilateral activation in SI/SII and also reported vicarious acupuncture sensations without needling stimulation. The PHNT group showed greater activation in the bilateral dorsolateral/ventrolateral prefrontal cortex (dlPFC/vlPFC). Moreover, the PHNT group exhibited significant pain reduction, with a significant correlation between the subjective fMRI signal in the right dlPFC/vlPFC and a score assessing belief in acupuncture effectiveness. These results support an expectation-related placebo analgesic effect on subjective pain intensity ratings, possibly mediated by right prefrontal cortex activity.",
+   "publication_types": [
+    "Journal Article",
+    "Research Support, Non-U.S. Gov't"
+   ],
+   "mesh": [
+    "Acupuncture",
+    "Acupuncture Points",
+    "Acupuncture Therapy",
+    "Adult",
+    "Brain",
+    "Brain Mapping",
+    "Female",
+    "Humans",
+    "Low Back Pain",
+    "Magnetic Resonance Imaging",
+    "Male",
+    "Phantoms, Imaging",
+    "Placebo Effect",
+    "Sensation"
+   ],
+   "arm": "low_back_pain_acupuncture_filtered",
+   "affective": null,
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Phantom Acupuncture Induces Placebo Credibility and Vicarious Sensations: A Parallel fMRI Study of Low Back Pain Patients.."
+   },
+   "intensity": {
+    "term": "pain intensity",
+    "sentence": "These results support an expectation-related placebo analgesic effect on subjective pain intensity ratings, possibly mediated by right prefrontal cortex activity."
+   },
+   "affective_outcome": false,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": true,
+   "both_affective_and_biomarker": false,
+   "abstract_present": true,
+   "is_review": false,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": true,
+   "co_mention_sentence": null
+  },
+  {
+   "pmid": "25796668",
+   "title": "[Advances in research of complementary and integrative medicine: a review of recent publications in some of the leading medical journals].",
+   "journal": "Harefuah",
+   "year": "2015",
+   "abstract_plain": "This article assesses the evidence for effectiveness, adverse effects and cost-effectiveness of complementary therapies, as reflected in publications in high impact factor medical journals during the years 2012-2014. The search detected 13 randomized controlled studies (RCTs) and 14 meta-analyses, which collectively assessed results of 191 RCTs involving the participation of several thousand patients. Pain was the major focus of acupuncture research in both clinical and fMRI studies, which demonstrated that the effect of acupuncture is beyond the placebo effect. In addition, RCTs supported the use of acupuncture as an adjunctive therapy in chronic obstructive pulmonary disease and in moderate to severe depression. A promising trend was reported for the ameliorating effect of acupuncture in gout. Spinal manipulations may be helpful in cervical pain and yoga may be a useful treatment option for chronic neck pain, chronic low back pain and for pain-related disability. Beneficial effects of adding hypnosis and massage therapy to the treatment of fibromyalgia patients were also documented. Tai-chi may reduce balance impairment in mild-to-moderate Parkinson's disease and improve symptoms in patients with osteoarthritis. Products containing cranberry are associated with protective effects in some subgroups of patients with recurrent urinary tract infections. Chinese herbs may assist in glycemic control of diabetes patients and improve survival rate of patients with non-small cell lung cancer. Some of the complementary therapies were found to be cost-effective. Physicians should be aware of the possible adverse effects of these treatments and of possible drug-herb interactions. Further larger scale trials are justified.",
+   "publication_types": [
+    "English Abstract",
+    "Journal Article",
+    "Review"
+   ],
+   "mesh": [
+    "Complementary Therapies",
+    "Cost-Benefit Analysis",
+    "Humans",
+    "Integrative Medicine",
+    "Randomized Controlled Trials as Topic"
+   ],
+   "arm": "low_back_pain_acupuncture_filtered",
+   "affective": {
+    "term": "depress-",
+    "sentence": "In addition, RCTs supported the use of acupuncture as an adjunctive therapy in chronic obstructive pulmonary disease and in moderate to severe depression."
+   },
+   "biomarker": {
+    "term": "fmri",
+    "sentence": "Pain was the major focus of acupuncture research in both clinical and fMRI studies, which demonstrated that the effect of acupuncture is beyond the placebo effect."
+   },
+   "intensity": null,
+   "affective_outcome": true,
+   "neural_or_autonomic_biomarker": true,
+   "pain_intensity_instrument": false,
+   "both_affective_and_biomarker": true,
+   "abstract_present": true,
+   "is_review": true,
+   "is_protocol": false,
+   "is_animal_subject": false,
+   "is_human_primary": false,
+   "co_mention_sentence": null
+  }
+ ],
+ "tallies": {
+  "n_records": 5,
+  "n_affective_outcome": 2,
+  "n_neural_or_autonomic_biomarker": 5,
+  "n_both_affective_and_biomarker": 2,
+  "n_co_mention_same_sentence": 1,
+  "n_neither": 0,
+  "n_no_affective_term": 3,
+  "n_no_biomarker_term": 0,
+  "n_review": 2,
+  "n_protocol": 0,
+  "n_animal_subject": 1,
+  "n_human_primary": 3,
+  "n_abstract_missing": 0,
+  "pmids_both": [
+   "25796668",
+   "42670051"
+  ],
+  "pmids_co_mention": [
+   "42670051"
+  ]
+ }
+}

@@ -2916,7 +2916,18 @@ intervention-fixed arms are the thin ones while the population-fixed (low-back-p
 confound resolves toward the **intervention** — the design of a stimulation trial — not the population.
 *This file had recorded neither §9 nor §10 until this line; the arm was on disk from 2026-10-09 with no
 write-up.*
-**Next action:** the confound arm §9 named and §10 sharpened — run the same filter over the **low-back-pain
-population restricted to acupuncture**, holding population and intervention fixed at once. Second, the ten
-human-primary biomarker-only records of the VNS arm, which §10 names but does not hand-classify (the step
-§8 closed for the acupuncture arm).
+**Done 2026-10-14 (§11) — the confound arm is run and the confound is closed from both sides.** §11 of
+`research/affective-pain-neuromodulation-evidence-map.md`: the same filter over the **low-back-pain
+population restricted to acupuncture** (`scripts/affective_pain_confound_arm.py`,
+`research/affective-pain-neuromodulation-confound-arm-raw.json`, pinned by
+`tests/test_affective_pain_confound_arm.py`, 11/11 offline). A census of **5** records, **3**
+human-primary, and **0** of the three names an affect term — where §9's wider low-back-pain arm had
+**76 of 165**. So holding the population fixed, the acupuncture restriction empties the affective
+column; §10 had fixed the intervention and pointed the same way. The discriminator is the
+**intervention** (how a stimulation trial is designed), not the population. Honest limit on the record:
+the intersection between low-back-pain and acupuncture neuro-measurement is itself nearly empty (5
+records in eleven years), so the finding is an absence as much as a rate.
+**Next action:** the confound step is closed; only the **ten human-primary biomarker-only records of the
+VNS arm** remain, which §10 names but does not hand-classify (the step §8 closed for the acupuncture
+arm). The three both-domain records §6 routes to the reject queue still need a reader with library
+access, and are not wake-takeable.

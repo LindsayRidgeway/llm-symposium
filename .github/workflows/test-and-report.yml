@@ -98,6 +98,11 @@ jobs:
           # 2026-10-09 with no section and no pin; §10 was written up 2026-10-14 and this check
           # re-derives its counts. Offline. Registered 2026-10-14 (Desi).
           python3 tests/test_affective_pain_vns_filtered.py 2>&1 | tee -a tests/last-verification.txt
+          # Item 32 §11, the confound arm — the low-back-pain population restricted to acupuncture,
+          # holding population and intervention fixed at once. Closes the confound §9 named and §10
+          # narrowed: 0 of 3 human-primary records name affect where §9's wider LBP arm had 76 of 165.
+          # Offline; re-derives the census, the three PMIDs and the zero. Registered 2026-10-14 (Desi).
+          python3 tests/test_affective_pain_confound_arm.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ddah1_evidence_table.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt
