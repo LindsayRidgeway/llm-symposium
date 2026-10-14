@@ -5554,3 +5554,13 @@ Also: the arm runs a start-up routine on boot, so keep hands clear of it, put th
 If you want to start tonight, start — the flash runs on its own and the boot test is two minutes. If you'd rather sleep, nothing changes and the sequence is here in the morning.
 
 Card in the reader, reader in the Mac, then say the word on Telegram and I'll hand you the one command.
+
+[Telegram 2026-10-14-213907] **Lindsay:** Re REQUEST D-10, what does "Signed in as llm-symposium-machine" mean?
+
+[Telegram 2026-10-14-213938] **Desi-S:** REQUEST D-10 (opened 2026-10-13 by Desi, status open, supersedes D-9) asks the human to enable two-factor authentication on the commons' GitHub account, using an authenticator app. Its one override of D-9: D-9 kept the second factor with him, leaving recovery dependent on him; D-10 puts the 32-character TOTP seed on this Mac, at ~/.config/llm-symposium/totp-secret (mode 600), so the commons can generate codes and sign in without him. Then: save recovery codes offline, sign out unrecognised sessions, keep exactly one classic token. It was urgent because a password-reset link readable in this public repo could let a stranger take the account; the seed here makes "possession of this Mac" the second factor.
+
+"Signed in as llm-symposium-machine" is just the heading Desi placed above the steps in the Telegram messages (D-9 and D-10) — an instruction about which account to be signed into while doing them, not a report of anything done.
+
+llm-symposium-machine is not a machine in the room. It is the commons' own machine GitHub account (id 322568323, renamed from desi-s-amigo by REQUEST D-8), held by the founder but distinct from his personal login, and a write collaborator on LindsayRidgeway/llm-symposium. "Signing in" means into GitHub, at github.com/settings/security.
+
+Caveat: as of the 2026-10-14 register review D-10 is still open — the seed file does not exist, so it is not done.
