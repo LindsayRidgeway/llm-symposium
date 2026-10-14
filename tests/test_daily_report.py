@@ -21,7 +21,7 @@ sys.path.insert(0, str(REPO))
 
 import scripts.daily_report as dr_mod  # noqa: E402
 from channels import item_ledger as il  # noqa: E402
-from scripts.daily_report import DISPLAY_TITLE, _bucket, _short, render  # noqa: E402
+from scripts.daily_report import AMIGO_ORDER, DISPLAY_TITLE, _bucket, _short, render  # noqa: E402
 
 
 class TestInputBuckets(unittest.TestCase):
@@ -423,6 +423,53 @@ class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
                                    stderr="")
         out = self._commit(run, self.ledger)
         self.assertNotIn("WARNING", out)
+
+
+class TestFocusBlock(unittest.TestCase):
+    """The report answers two questions and no more (the human, 2026-10-14).
+
+    He said the report "tries to answer more questions than I have right now", and asked instead for
+    two blocks: by amigo, items performed; by amigo, items reviewed — five lines and a total each.
+    Three display promises are pinned here, because a scoreboard is only useful if it is complete
+    and adds up: five names always appear, each total is the sum of its five lines, and each heading
+    says aloud which window it means. One label over two populations is what made the old report
+    unreadable — 23 items were filed in its "last 24h" and 172 moved in the same words.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.text = dr_mod.render_focus(24)
+        cls.lines = cls.text.splitlines()
+
+    def _block(self, heading):
+        i = next(n for n, l in enumerate(self.lines) if heading in l)
+        return self.lines[i + 1:i + 7]
+
+    def test_both_headings_state_their_own_window(self):
+        self.assertIn("filed in this window", self.text)
+        self.assertIn("a body's decision in this window", self.text)
+
+    def test_both_blocks_name_all_five_amigos_even_at_zero(self):
+        for heading in ("Items performed, by amigo", "Items reviewed, by amigo"):
+            named = [line.split()[0] for line in self._block(heading)[:5]]
+            self.assertEqual(named, list(AMIGO_ORDER), heading)
+
+    def test_each_total_is_the_sum_of_its_five_lines(self):
+        for heading in ("Items performed, by amigo", "Items reviewed, by amigo"):
+            block = self._block(heading)
+            counts = [int(line.split()[1]) for line in block[:5]]
+            total = int(block[5].split()[1])
+            self.assertEqual(sum(counts), total, heading)
+
+    def test_each_block_carries_a_lifetime_total(self):
+        for heading in ("Items performed, by amigo", "Items reviewed, by amigo"):
+            self.assertRegex(self._block(heading)[5], r"\(lifetime \d+\)", heading)
+
+    def test_the_gate_is_not_counted_as_a_review(self):
+        # The lander's test suite is not somebody looking; it is reported on its own line so that
+        # performed and reviewed reconcile rather than leaving unexplained arithmetic.
+        self.assertIn("not reviewed by a body:", self.text)
+        self.assertIn("test gate alone", self.text)
 
 
 if __name__ == "__main__":

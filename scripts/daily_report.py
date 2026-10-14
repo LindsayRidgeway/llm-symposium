@@ -34,6 +34,11 @@ Usage:
     python3 scripts/daily_report.py                 # render to stdout
     python3 scripts/daily_report.py --send          # render, send to the human, record it
     python3 scripts/daily_report.py --hours 24 --send
+
+What is sent is `render_focus` — the two blocks the human asked for on 2026-10-14 (performed by
+amigo, reviewed by amigo), and nothing else. It was 8.5k characters answering questions he did not
+have. The rest is not deleted: the recorded file keeps the focus block, then a rule, then the full
+analysis underneath, so the depth stays available without being delivered.
 """
 from __future__ import annotations
 
@@ -616,6 +621,78 @@ def _sections(items: dict[str, dict], hours: int) -> tuple[list[dict], list[dict
     return postponed, waiting
 
 
+def _filed_within(rec: dict, hours: int, now: dt.datetime) -> bool:
+    """Was this item *filed* inside the window? The performed tally counts filing, not decision.
+
+    `_in_window` deliberately reads `state_utc`, because for the letters the question is when an
+    item reached its state. Performance is the other axis: when the work was offered. Keeping them
+    as two named helpers is the point — the earlier report used the words "last 24h" for both and
+    the two populations are different sizes (23 filed, 172 moved), which is what made it unreadable.
+    """
+    stamp = rec.get("filed_utc")
+    if not stamp:
+        return False
+    try:
+        when = dt.datetime.strptime(stamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+    except ValueError:
+        return False
+    return (now - when) <= dt.timedelta(hours=hours)
+
+
+def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
+    """The two questions the human asked on 2026-10-14, and nothing else.
+
+    His words: "I think the report tries to answer more questions than I have right now." What he
+    asked for instead is two blocks — by amigo, items performed; by amigo, items reviewed — five
+    lines and a total each.
+
+    Four things are deliberate:
+
+    * Five names always appear, zeros included. He asked for five lines, and a name missing from a
+      scoreboard reads as a name that does not exist — which is how two amigos who have never
+      reviewed anything stayed invisible.
+    * The window figure is the number and the lifetime figure rides on the total line, so a running
+      score is visible without doubling the block's length.
+    * Each heading names its own window aloud ("filed in this window", "a decision in this window").
+      The one defect that made the previous report hard to read was one label, "last 24h", over two
+      different populations.
+    * "Reviewed" means a body decided. The lander's test gate is not a review, and it is counted
+      separately underneath so that performed and reviewed reconcile on the page.
+    """
+    now = now or dt.datetime.now(dt.timezone.utc)
+    items = load()
+    every = list(items.values())
+    since = (now - dt.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%MZ")
+
+    performed = collections.Counter(r.get("amigo") for r in every if _filed_within(r, hours, now))
+    performed_ever = collections.Counter(r.get("amigo") for r in every)
+
+    reviewed = [r for r in every
+                if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")]
+    decided = collections.Counter(r.get("reviewer") for r in reviewed if _in_window(r, hours))
+    decided_ever = collections.Counter(r.get("reviewer") for r in reviewed)
+
+    out = [f"**Daily item report — {_local(now)}**",
+           f"window: the {hours}h to {_local(now)} (since {since})",
+           "",
+           "**Items performed, by amigo** — work filed in this window"]
+    for who in AMIGO_ORDER:
+        out.append(f"  {who:<8} {performed.get(who, 0):>4}")
+    out.append(f"  {'total':<8} {sum(performed.values()):>4}   "
+               f"(lifetime {sum(performed_ever.values())})")
+
+    out += ["", "**Items reviewed, by amigo** — a body's decision in this window"]
+    for who in AMIGO_ORDER:
+        out.append(f"  {who:<8} {decided.get(who, 0):>4}")
+    out.append(f"  {'total':<8} {sum(decided.values()):>4}   "
+               f"(lifetime {sum(decided_ever.values())})")
+    gate = sum(1 for r in every if r.get("reviewer") == "auto:land" and _letter(r) == "A")
+    never = sum(1 for r in every if _letter(r) == "W")
+    out.append(f"  not reviewed by a body: {gate} reached main on the lander's test gate alone, "
+               f"{never} nobody has looked at")
+    return "\n".join(out)
+
+
 def render(hours: int = 24, now: dt.datetime | None = None) -> str:
     now = now or dt.datetime.now(dt.timezone.utc)
     items = load()
@@ -722,7 +799,10 @@ def main() -> int:
             print(f"daily_report: titling skipped ({type(exc).__name__}: {exc})")
     ledger = REPO / "channels" / "items.jsonl"
     text = render(a.hours)
+    focus = render_focus(a.hours)
     if not a.send:
+        print(focus)
+        print("\n--- the full report below is recorded, not sent ---\n")
         print(text)
         # collect() just appended rows to the ledger; a render that walks away from them dirties the
         # checkout and blocks landing, so the ledger is committed on the render path too.
@@ -732,10 +812,13 @@ def main() -> int:
 
     out = REPO / "channels" / "reports" / f"daily-{dt.datetime.now():%Y-%m-%d}.md"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(text + "\n", encoding="utf-8")
+    # The record keeps both: what he was sent, then the full analysis underneath it. The message is
+    # the two questions he actually has; the depth stays on disk for anyone who wants it, which is
+    # why nothing below the rule was deleted — only stopped being delivered.
+    out.write_text(focus + "\n\n---\n\n" + text + "\n", encoding="utf-8")
     # Telegram caps a message near 4096 characters. Never let a cap silently eat the counts: the
     # counts are at the top, the item lists are at the bottom, so the tail is what gets dropped.
-    sent = text
+    sent = focus
     if len(sent) > 3900:
         sent = sent[:3860].rsplit("\n", 1)[0] + f"\n\n[…trimmed; full report: {out.name}]"
     r = subprocess.run(
