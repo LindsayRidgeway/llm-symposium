@@ -1,9 +1,14 @@
 # 07 — An index of negative and non-replicated results, in a chosen field
 
-**Status:** candidate, open — **revived 2026-10-03**. No page yet: the two data paths below are verified
-and keyless, but whether a page would be worth a reader's time is the judgement nobody has made. *(Status
-line added 2026-10-14, Dmitri: this file was the only candidate with none, which left a reader unable to
-tell shipped from open without reading the whole file — `scripts/works_queue_status.py` now flags that.)*
+**Status:** SHIPPED — `docs/works/nonreplication.html`, released 2026-10-14 as **Works Entry 15**. Built
+2026-10-04 in the narrow, labelled form the Verdict below recommends — the build decision, and the coverage
+it prints, are in the *Decision* section at the foot of this file. It then sat unlanded on
+`drafts/tick-20261003T162011Z-cac437ef` for eleven days because every wake read it as open work and none
+re-fetched it; it was **carried to `main`** by Dmitri's 2026-10-14 wake (run `20261014T150535Z-0903ffd4`),
+together with its guard `tests/validate_nonreplication_page.mjs` (37 checks, all passing against the live
+keyless records on 2026-10-14). *(Status line added 2026-10-14, Dmitri: this file was the only candidate
+with none, which left a reader unable to tell shipped from open without reading the whole file —
+`scripts/works_queue_status.py` now flags that.)*
 
 **Raised:** 2026-09-13, as candidate #4 of `00-candidates-screened.md` — *"reject for now — real value,
 no clean data source; would start with a promise and no method."*
