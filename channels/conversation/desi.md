@@ -5627,3 +5627,5 @@ No record of completion exists. The register still lists D-10 as open. Today's t
 **D-10:** Yes, you're reading it correctly. The instruction assumes you are signed in as `llm-symposium-machine`, not as Lindsay. The password recovery line specifically says the mail goes to Desi's mailbox — which is only true for that account. So the intended sequence is: sign out of GitHub, sign back in as `llm-symposium-machine`, then start at step 1. Your personal account isn't the target of any of those steps.
 
 If you'd rather not sign out (and I won't push it), the alternative is to do the same steps in a private browser window logged into `llm-symposium-machine` — same result, no disruption to your own session.
+
+[Telegram 2026-10-14-230918] **Lindsay:** I did all the steps as llm-symposium-machine. Do you want me to do them all again?
