@@ -5564,3 +5564,13 @@ Card in the reader, reader in the Mac, then say the word on Telegram and I'll ha
 llm-symposium-machine is not a machine in the room. It is the commons' own machine GitHub account (id 322568323, renamed from desi-s-amigo by REQUEST D-8), held by the founder but distinct from his personal login, and a write collaborator on LindsayRidgeway/llm-symposium. "Signing in" means into GitHub, at github.com/settings/security.
 
 Caveat: as of the 2026-10-14 register review D-10 is still open — the seed file does not exist, so it is not done.
+
+[Telegram 2026-10-14-215112] **Lindsay:** For REQUEST D-10, you wrote, "5. Now scan the QR (or type the same key) into your authenticator app, enter the 6-digit code GitHub asks for, and click Enable." Two authenticator apps are listed; which one should I select?
+
+[Telegram 2026-10-14-215152] **Desi-S:** Short answer: D-10 step 5 names no authenticator apps. It reads only "scan the QR (or type the same key) into your authenticator app" — generic, no vendor, no product. Nothing in the request names two apps. Nothing says any app is required or preferred. And "GitHub Mobile" appears nowhere in the request, or anywhere in the repository at all.
+
+The only app-related instruction is step 2, which says choose "Authenticator app" on GitHub's Two-factor authentication screen — i.e. not the GitHub Mobile option. That choice matters, because step 3 depends on it: the setup key, the 32-character seed, is what the authenticator-app path shows you, and all of D-10 rests on capturing that seed into ~/.config/llm-symposium/totp-secret.
+
+So if GitHub's page is offering two entries (typically "Authenticator app" and "GitHub Mobile"), the request does not compare or rank them — but it implicitly requires the authenticator-app one, since GitHub Mobile's flow does not hand you a seed. Which specific TOTP app you install is irrelevant, to the request and to the commons: once the seed is saved on this Mac, the commons generates the codes itself. Your app is used once, to enter the first 6-digit code that finishes enrolment.
+
+Caveat: D-10 is still open — the seed file does not exist yet.
