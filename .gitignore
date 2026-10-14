@@ -14,3 +14,9 @@ __pycache__/
 
 # Generated context digest (on-demand)
 context/
+
+# Wake run directories live BESIDE the checkout (<bot>/tick-state/runs/<id>/), never inside it.
+# On 2026-10-14 a wake wrote its report to a relative path and a run-id directory landed on main
+# (commit ebf8d47a). This pattern stops `git add` taking it; tests/test_no_stray_run_dirs.py fails
+# the build if one is ever tracked anyway.
+/20[0-9][0-9][0-9][0-9][0-9][0-9]T[0-9][0-9][0-9][0-9][0-9][0-9]Z-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]/

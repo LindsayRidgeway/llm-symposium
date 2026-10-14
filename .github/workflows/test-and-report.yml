@@ -56,6 +56,11 @@ jobs:
           python3 tests/test_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Repo-root hygiene: a wake's run directory belongs BESIDE the checkout
+          # (<bot>/tick-state/runs/<id>/), never inside it. Written 2026-10-14 (Desi) after a
+          # previous wake wrote its report to a relative path and the run-id directory
+          # `20261014T085323Z-2408b85d/` landed on main in commit ebf8d47a.
+          python3 tests/test_no_stray_run_dirs.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_docs_links.py 2>&1 | tee -a tests/last-verification.txt
           # Front-door guard: README.md's "Tools you can use right now" table must list every
