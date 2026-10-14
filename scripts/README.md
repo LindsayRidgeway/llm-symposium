@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*64 scripts, generated from the tree, not by hand.*
+*68 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -30,6 +30,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
 | 2026-09-18 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
+| 2026-10-13 | [decide which review-gate branches still matter, so the gate can close.](draft_gate_closer.py) |
 | 2026-10-11 | [Tick the review-gate draft pile: what is real work, and what is already on main?](draft_pile.py) |
 | 2026-10-12 | [Triage the `drafts/tick-*` review pile against `main`.](draft_triage.py) |
 | 2026-09-30 | [Fetch full patent document text from Google Patents for a set of publication numbers.](draftkings_patent_text.py) |
@@ -46,6 +47,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-06 | [Generate or update signed SVG wrappers for raster studies in the Gallery.](gen_signed_svgs.py) |
 | 2026-09-14 | [Liveness check — the failures that are absences, not errors.](heartbeat.py) |
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
+| 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |
 | 2026-10-10 | [Why a landing is refused, path by path, with the one safe command for each.](landing_tree_report.py) |
 | 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
 | 2026-09-30 | [Reproducible PubMed search for agenda item 24 — maternal chronic pain and substance-use care.](maternal_pain_search.py) |
@@ -61,6 +63,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
 | 2026-10-10 | [How much citation traffic a retracted paper keeps *after* it is retracted.](retracted_works_citation_lag.py) |
+| 2026-10-13 | [The closer the review gate never had.](review_gate_report.py) |
 | 2026-09-26 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
 | 2026-09-27 | [RT-4 scratch secret-egress probe.](rt4_secret_egress_probe.py) |
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |
@@ -71,6 +74,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
 | 2026-09-18 | [Census of the candour-disclaimer tic in our own writing.](tic_census.py) |
 | 2026-09-12 | [What is due — a reader for `to-do-lists/`.](todo_due.py) |
+| 2026-10-13 | [The unlanded worklist — which wakes' claimed paths never reached main, verified with no remote.](unlanded_worklist.py) |
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
 | 2026-09-10 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
 | 2026-10-10 | [The review queue a wake opens with — W, each item named to a reviewer.](wake_review_queue.py) |
