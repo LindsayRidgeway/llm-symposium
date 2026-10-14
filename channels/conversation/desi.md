@@ -5368,3 +5368,28 @@ The turret is the only one with a fuse on it — and the only one where waiting 
 The one thing worth confirming now, while there's time to fix it: that the flush cutters are actually in the drawer. Cutting the rivet heads *is* the removal method — you can't drill those out without risking the servo body underneath — and if they turn out to be missing on screw day, you've waited two weeks to wait some more.
 
 Otherwise nothing to do. Logged, and it's in the session record with the rest.
+
+[Goose 2026-10-14 00:07] **Lindsay:** Three cables with white connectors: 1. Cooler cable: 4 wires: red, blue, black, yellow. 2. Mystery cable #1 coming thru hole in floor of robot: three black wires, no matching port to plug into 3. Mystery cable #2 also coming thru hole in floor of robot: three black wires, again no matching port to plug into [photo: CH340C USB-serial board behind the arm deck, green arrow pointing at the bottom-edge white socket]
+
+**Desi:** Good — the four wires settle the one you were anxious about, and I have to correct your hunch rather than confirm it.
+
+**1. The cooler cable goes to the Pi, and nowhere else.** Red / blue / black / yellow in a 4-position plug *is* the Raspberry Pi 5 fan lead — 5 V, PWM, GND, tach, which is exactly the colour set on the official cooler. It belongs on the **only 4-pin header on the Pi, marked `FAN`, in the corner beside the 40-pin GPIO block** — the same edge as the USB-C power socket. Not the arm-base board. So the too-short wire is not a 3-wire and does not go on that little board, and the shortness is by design: the header is at the far edge of the Pi while the cooler sits over the middle, so the pigtail has to be **routed under the heatsink and clicked in before the cooler is pressed down**. That's step one of the Pi, long before the chassis.
+
+**And one stop.** That little board has a 4-position white socket too. Both are white, both are 4-position, both are on this robot. Do not put the cooler plug in it: its pins are silkscreened `5V GND RX TX` — a serial port, and a fan there puts tach and PWM onto RX and TX. They're different pitches so it probably won't seat — but note this, because it's the lesson from last time: **a connector that slides in easily is not evidence that it's the right port.** That's how the first one got in.
+
+**2. What your photo shows, read off the board.** The chip says **WCH CH340C** — a USB-to-serial bridge. USB-C on one end, a `PWR` LED, a 4-pin header labelled `5V GND RX TX` that is currently **empty**, and a second white socket on the bottom edge where your green arrow points. This board's business is UART over USB. It is not a servo board — which *supports* your "no matching port" finding instead of contradicting it.
+
+**3. The two mystery cables — I can't name them from the photo, but you can, in one minute.** Follow each to its *other* end with a torch:
+
+| Far end lands | Then it is | And it plugs into |
+|---|---|---|
+| up inside the arm | a bus-servo lead | controller **bus servo ports ⑥** |
+| down inside the chassis, at a motor or board | a chassis lead | controller **PWM servo ports ① / ③** |
+
+Both port groups are on the controller edge that also carries **the two little yellow jumper blocks** — the edge opposite the power switch. That edge ends up against the chassis wall and under the top cover, which is precisely why you can't see the sockets, and precisely why this has to be answered before the board is screwed down.
+
+**4. And take this seriously as a possibility: one of them may need no socket at all.** The Note reads *"one to the servo port on the STM32 controller, and the other to the servo at the bottom of the robot arm."* That describes two 3-pin wires where **only one** goes to the controller — the second continues the daisy chain into the base servo. If that's the arrangement, "no matching port" for the second cable isn't a problem you've failed to solve; it's the answer. My strongest hypothesis is that you're hunting a socket that was never meant to exist. Hypothesis, not finding — I can't see the far ends, and the manual doesn't say.
+
+**5. One thing in the photo I want to ask about.** The USB-C receptacle on that little board looks *deformed* to me — there's a dent across the shield, and the whole thing looks crushed. Is that the connector you damaged? You told me it was on the Pi, and the Pi has already gone back. If the damage was to this board instead, that changes what you're returning and what still needs fixing.
+
+**To close this out I need two things:** for each mystery cable, where the far end lands (per the table), and one photo of the controller's servo-port edge zoomed on the two yellow jumper blocks, so I can count the pins in the sockets beside them. Don't plug anything until then — there's no penalty for leaving three cables loose overnight.
