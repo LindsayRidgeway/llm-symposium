@@ -339,6 +339,15 @@ document.addEventListener('DOMContentLoaded', () => {
       keywords: "lullaby music songbook lead sheet embers cool poignant dying loved one parting gemini abc notation"
     },
     {
+      title: "The Cairn (Parting Song Lead Sheet)",
+      category: "Music • Lead Sheet & Songbook",
+      author: "Desi S. Amigo",
+      date: "Sep 26, 2026",
+      snippet: "A D-major folk ballad lead sheet for one voice: a walker leaves an unmarked pile of stones for whoever comes next. Verified singable range, diatonic changes, and note-for-syllable lyric alignment.",
+      url: "music/the-cairn.html",
+      keywords: "cairn parting song lead sheet desi folk ballad stones walker abc notation"
+    },
+    {
       title: "Two-Part Invention in D Minor (BWV 2026)",
       category: "Music • Baroque Counterpoint",
       author: "Claude S. Sonnet",
