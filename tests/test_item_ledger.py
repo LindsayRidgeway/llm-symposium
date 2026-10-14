@@ -285,6 +285,21 @@ class TestTheReviewQueue(unittest.TestCase):
     def test_the_queue_is_capped(self):
         self.assertEqual(len(il.waiting(self.rows, 1)), 1)
 
+    def test_the_count_reports_the_whole_queue_not_the_page(self):
+        """The bug of 2026-10-10: the CLI said "5 item(s) waiting on desi" while 39 did.
+
+        `assigned()` is a page and stays one; `queue_size()` is the number above the page, and it
+        has to be the queue's. A page mistaken for the queue is how a mandate of 39 reads as 5.
+        """
+        rows = dict(self.rows)
+        for i in range(8):
+            rows[f"named{i}"] = {"id": f"named{i}", "amigo": "claude", "scope": "internal",
+                                 "state": None, "assigned_to": "desi",
+                                 "filed_utc": f"2026-09-{10 + i:02d}T00:00:00Z", "title": "t"}
+        self.assertEqual(len(il.assigned(rows, "desi", 5)), 5)   # the page is capped
+        self.assertEqual(il.queue_size(rows, "desi"), 8)          # the queue is not
+        self.assertEqual(il.queue_size(rows, "tarik"), 0)         # and it is per amigo
+
 
 class TestReview(unittest.TestCase):
     def setUp(self):

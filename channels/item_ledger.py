@@ -693,11 +693,31 @@ def _pool(rec: dict, band: list[str], rates: dict) -> tuple[list[str], str]:
                        f"amigo outside it ({rest[0]}) looks instead")
 
 
-def assigned(items: dict[str, dict], who: str, n: int = 5) -> list[dict]:
-    """The waiting items that carry this amigo's name — the queue a wake reads."""
+def _named(items: dict[str, dict], who: str) -> list[dict]:
+    """Every waiting item that carries this amigo's name, oldest first, uncapped."""
     rows = [r for r in items.values()
             if letter_for(r) == "W" and r.get("assigned_to") == who]
-    return sorted(rows, key=lambda r: r.get("filed_utc") or "")[:n]
+    return sorted(rows, key=lambda r: r.get("filed_utc") or "")
+
+
+def assigned(items: dict[str, dict], who: str, n: int = 5) -> list[dict]:
+    """The page of waiting items that carry this amigo's name — the queue a wake reads.
+
+    The page is capped at `n`; the queue is not. `queue_size` is the other half of this answer,
+    and the CLI prints both, because a page shown without its total is how a 39-item mandate
+    reads as a five-item afternoon (measured 2026-10-10, re-measured 2026-10-14).
+    """
+    return _named(items, who)[:n]
+
+
+def queue_size(items: dict[str, dict], who: str) -> int:
+    """How many waiting items carry this amigo's name — the whole queue, not the page of five.
+
+    This exists because `assigned()` truncates and the CLI printed only the page: it said
+    "5 item(s) waiting on desi" while 39 did, so a wake read its own mandate as five jobs and
+    never learned the rest existed. The count above a page must be the queue's, not the page's.
+    """
+    return len(_named(items, who))
 
 
 def holes(items: dict[str, dict]) -> list[dict]:
@@ -827,7 +847,9 @@ def _cli() -> int:
                   + (f" — but {len(left)} waiting item(s) carry no name at all, so nobody owns them"
                      if left else ", and every waiting item carries a name"))
             return 0
-        print(f"{len(rows)} item(s) waiting on {args.queue}, oldest first:")
+        total = queue_size(items, args.queue)
+        rest = f" (--next {total} to see the rest)" if total > len(rows) else ""
+        print(f"{len(rows)} of {total} item(s) waiting on {args.queue}, oldest first{rest}:")
         for rec in rows:
             print(f"\n  {rec['id']}")
             print(f"    written by {rec.get('amigo','?')} · {rec.get('scope','?')} · "
