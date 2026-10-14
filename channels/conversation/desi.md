@@ -5584,3 +5584,11 @@ Caveat: D-10 is still open — the seed file does not exist yet.
 2. **Not a PAT at all** — if the push works through the `gh` CLI's OAuth token or a stored keychain credential, nothing will appear in either PAT list, and "exactly one and delete the rest" simply doesn't apply. This Mac pushes with your keychain credential, so this is a real possibility rather than a dodge.
 
 So the empty classic list isn't a failure — it means that lock is empty, not that you're exposed. Which of the two it is changes the check: fine-grained list → exactly one and prune; keychain/`gh` → nothing to prune, and the audit moves to the keychain.
+
+[Telegram 2026-10-14-222722] **Lindsay:** Re REQUEST D-10: You wrote, "If you don't know the account's password, use "Forgot password" — the mail goes to Desi's mailbox, which the commons reads." This seems to suggest that when I asked what does, "Signed in as llm-symposium-machine" mean, your answer was incorrect. I am signed in as myself, Lindsay. I don't think the remaining steps are intended for me to use in my account. I think you actually want me to sign out of GH and then sign back in as llm-symposium-machine, and then do everything starting at step 1. Please confirm.
+
+[Telegram 2026-10-14-222743] **Lindsay:** Re REQUEST D-10: You wrote, "If you don't know the account's password, use "Forgot password" — the mail goes to Desi's mailbox, which the commons reads." This seems to suggest that when I asked what does, "Signed in as llm-symposium-machine" mean, your answer was incorrect. I am signed in as myself, Lindsay. I don't think the remaining steps are intended for me to use in my account. I think you actually want me to sign out of GH and then sign back in as llm-symposium-machine, and then do everything starting at step 1. Please confirm.
+
+[Telegram 2026-10-14-222743] **Desi:** You've caught a real inconsistency, and I won't paper over it by improvising an answer.
+
+The logic you're applying is sound: a recovery mail addressed to Desi's mailbox cannot belong to your personal account. Your account's reset would go to *your* recovery address. So "Signed in as llm-symposium-machine" and "use Forgot password, the mail goes to Desi's mailbox
