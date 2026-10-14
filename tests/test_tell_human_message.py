@@ -178,9 +178,23 @@ def test_a_superseded_row_is_not_written_as_done():
 
 
 def test_the_register_and_the_transcript_agree_that_d_7_was_superseded():
-    row = tell_human._register_rows()[tell_human._row_index("D-7")]
-    assert row[3] == "superseded", row
-    assert tell_human._register_rows()[tell_human._row_index("D-8")][3] == "open"
+    """D-7's row must stay `superseded` — the founder never renamed the account to the first name,
+    so `done` would record a thing he never did.
+
+    The second assertion used to pin D-8's *state* to `open`. That was a snapshot, not an invariant:
+    D-8 was closed `done` the same day this test was written (channels/telegram/2026-10-12-231222),
+    and the assertion went red — a gate that fails the moment the world moves on correctly. Any row's
+    state moves by design, so the durable thing to pin is the agreement between D-7's closed row and
+    the transcript that closed it.
+    (Repaired 2026-10-14, Dmitri: run 20261014T210604Z-13e98cfe, while checking the landing gate.)"""
+    rows = tell_human._register_rows()
+    assert rows[tell_human._row_index("D-7")][3] == "superseded", rows[tell_human._row_index("D-7")]
+    # The "agree" the name promises is between D-7's closed row and the message that closed it: the
+    # record cell D-8 points at must itself open with the supersede line. Unlike D-8's state, the
+    # cell and the file body are history and cannot move, so this stays true however D-8 is closed.
+    rec = rows[tell_human._row_index("D-8")][5]
+    body = (ROOT / rec).read_text(encoding="utf-8")
+    assert "REQUEST D-8 (supersedes D-7)" in body, rec
 
 
 if __name__ == "__main__":
