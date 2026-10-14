@@ -88,6 +88,11 @@ jobs:
           # (R-009); landed by Desi's review 2026-10-13, and registered here because the map it pins
           # cites this test in backticks — an unregistered pin is a claim that never runs.
           python3 tests/test_affective_pain_second_population.py 2>&1 | tee -a tests/last-verification.txt
+          # Item 32 §10, the filtered VNS arm — the item's own second intervention, one filter with
+          # only the intervention block changed. The census and its script were on main from
+          # 2026-10-09 with no section and no pin; §10 was written up 2026-10-14 and this check
+          # re-derives its counts. Offline. Registered 2026-10-14 (Desi).
+          python3 tests/test_affective_pain_vns_filtered.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ddah1_evidence_table.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt

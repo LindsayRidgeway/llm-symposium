@@ -413,3 +413,138 @@ it is.
 
 **Pinned by** `tests/test_affective_pain_second_population.py`, which re-derives every count above from
 the stored census and fails if the map names a different set.
+
+---
+
+## 10. The filtered VNS arm — the item's own second intervention, run 2026-10-09, written up 2026-10-14
+
+**Why this section exists, and why it is late.** The item's question is about **two** interventions,
+acupuncture *and* vagus-nerve stimulation, and §7 built the filtered census for only the first. The VNS
+arm was fetched and stored on 2026-10-09 — `scripts/affective_pain_vns_filtered.py` and
+`research/affective-pain-neuromodulation-vns-filtered-raw.json` are both on `main` — but no section of
+this map ever described that census and no test pinned it: a measurement on disk with no write-up,
+which is the delivery defect this repository has paid for before. §9 (2026-10-08) took the item's step 3
+as a **population** change (low back pain); this section takes it as the item's own second
+**intervention**. Both readings are legitimate and both are now run.
+
+**The query, and the one block that differs from §7.** `aps.ARMS['vns'] AND apf.MEASUREMENT AND
+aps.PAIN AND humans[MeSH Terms]` — the measurement filter and the pain block are §7's own objects,
+imported and not retyped, so the two intervention arms cannot drift apart: a reader of one arm is
+reading the other's definition of "names a brain or autonomic measure." Only the intervention block
+differs.
+
+| arm | query = **intervention** block AND the *same* filter AND the *same* pain block AND `humans[MeSH Terms]` | matching | fetched |
+|---|---|---|---|
+| `vns_filtered` | `("vagus nerve stimulation"[tiab] OR "vagal nerve stimulation"[tiab] OR "transcutaneous auricular vagus"[tiab] OR "transcutaneous vagus"[tiab] OR "auricular vagus"[tiab] OR "vagus nerve stimulation"[MeSH Terms])` AND `(fmri … locus coeruleus)` | **31** | **31 — census** |
+
+Publication window 2015-01-01 → 2026-10-09. A **census**: 31 of 31 fetched, no relevance ranking.
+Pinned by `tests/test_affective_pain_vns_filtered.py`, which needs no network.
+
+**Composition of the 31** (same classifier as §2, so the same caveats apply):
+
+| | vns_filtered |
+|---|---|
+| records | **31** |
+| reviews | **7** |
+| protocols | **3** |
+| animal-subject | **1** |
+| **human primary** | **20** |
+| set the affective flag | 16 |
+| set the biomarker flag | 28 (near-100% by construction — the filter names the measurements) |
+| **set both** | **14** |
+| set neither | 1 |
+
+**The comparison the step asks for — three arms, one filter, human-primary only.** The acupuncture
+column is §7's stored census and the low-back-pain column is §9's; the classifier, the human-primary
+rule and the flag definitions are the same object in all three, so the columns are countable against
+one another:
+
+| human-primary record | `acupuncture_filtered` §7 | `vns_filtered` §10 | `low_back_pain_filtered` §9 |
+|---|---|---|---|
+| records | 21 | 20 | 165 |
+| sets the affective flag | 5 (24%) | 9 (45%) | 77 (47%) |
+| sets the biomarker flag | 21 | 18 | 160 |
+| **sets both** | **5 (24%)** | **8 (40%)** | **76 (46%)** |
+| affect + biomarker **in one sentence** | 2 (10%) | 5 (25%) | 45 (27%) |
+| names a pain-intensity instrument | 9 | 8 | 67 |
+| **both-flag records firing on a title restatement** | **1 of 5** | **3 of 8** | **18 of 76** |
+| **both, after the title-restatement correction** | **4 of 21 (19%)** | **5 of 20 (25%)** | **58 of 165 (35%)** |
+
+**The result: the apparent intervention gap is mostly vocabulary and titles, and what survives is two
+and two.** Read raw, the VNS arm names an affect term in **8 of 20** human-primary records against
+acupuncture's **5 of 21** — a 16-point gap that would say "VNS trials measure mood, acupuncture trials
+do not." Apply the §5 title-restatement correction to both arms and it falls to **5 of 20 (25%)**
+against **4 of 21 (19%)** — a 6-point gap, inside the noise of two censuses of twenty. Then apply the
+hand-read §7 and §4 gave their own both-sets, and the gap closes:
+
+- **acupuncture, §7's own hand-read:** **2** trials in a chronic-pain population that measured an
+  affective outcome — 37609769 (controlled, fibromyalgia, n=18) and 26787729 (single-arm,
+  fibromyalgia, n=20). The other three of the five are a hypothesis paper (26025590) and two
+  background mentions (26594625, 24728839).
+- **VNS, hand-read here:** **2** records are trials in a chronic-pain population that measured an
+  affective outcome — 41332177 (RCT, fibromyalgia, n=40, left vs bilateral taVNS, BDI + BAI) and
+  40935122 (single-arm, fibromyalgia, n=25, PCS catastrophizing). The other six of the eight are
+  **background or indication phrases** — 34509623 ("digestion, mood, health"), 34634682 ("epilepsy,
+  anxiety, depression, headache" as a list of conditions stimulators are *applied to*), 40576705
+  ("widespread pain, sleep, mood and cognitive disturbances" as a description of fibromyalgia),
+  41044114 ("pathologic conditions, like depression and chronic pain") — or a **title restatement**
+  (38963558, an emotional Go/No-Go task in healthy volunteers) or a **single case report** (26450637,
+  cervical dystonia, n=1, subjective mood).
+
+So under one filter, with one block changed, the two interventions yield **the same two trials each**
+in six years of literature. What the raw counts show is a difference in how often each literature
+*named* affect — taVNS papers carry "anxiety, depression, mood" in their indication lists and titles
+far more often than acupuncture papers do — not in how often it *measured* it. That sharpens §8's *the
+brain and the pain, but not the mood*: the missing affective column is a property of how these
+intervention trials are designed, and it is missing in both arms, not specific to needling.
+
+**It also resolves §9's confound, in the direction §9 could not see.** §9 named the confound honestly:
+its low-back-pain arm dropped the **intervention** block, so it could not tell whether the
+affect-blindness belonged to the *population* (low back pain research measures mood) or the
+*intervention* (acupuncture trials do not). This arm separates the two using three stored censuses and
+no new fetch:
+
+- **intervention fixed = acupuncture**, any chronic pain → **5 of 21** name affect (24%);
+- **intervention fixed = VNS**, any chronic pain → **8 of 20**, and **5 of 20** (25%) after the title correction;
+- **population fixed = low back pain**, any intervention → **77 of 165** (47%), and 58 of 165 (35%) corrected.
+
+The intervention-fixed arms are the thin ones and the population-fixed arm is the thick one, so the
+discriminator is the **intervention** — the design of a stimulation *trial* — rather than the
+population. Caveat, stated because it bounds the claim: the low-back-pain arm includes every design
+(observational, mechanistic, surgical, psychological) while the two intervention arms are dominated by
+controlled trials, so part of the contrast is design as much as intervention; §9's proposed arm (low
+back pain **restricted to acupuncture**) is still the clean way to hold both fixed. This does not
+overturn §9; it makes its confound one-sided using data already on disk.
+
+**A cross-check that §4's hand-read was not disturbed.** §4 hand-read **eight** human-primary records
+that set both flags, all of them in the VNS arm. This filtered census's human-primary both-set is
+**exactly those eight** — 26450637, 34509623, 34634682, 38963558, 40576705, 40935122, 41044114,
+41332177 — so the measurement filter added no human-primary both-flag VNS record and §4's verdict on
+each of the eight stands unchanged. The two records §4 carried forward (41332177, 40935122) are the two
+this section also carries.
+
+**The residual records, named so they are not silently dropped.** Of the 20 human-primary records,
+**10 set the biomarker flag only** (the VNS arm's counterpart to §8's sixteen: 26728182, 33262253,
+33548494, 33635894, 38469939, 40461351, 41091086, 41454683, 42334392, 42361949), **1 sets the affective
+flag only** (38815433), and **1 sets neither** (42029130). The ten biomarker-only records have not been
+hand-classified, so the VNS arm carries the same open step §8 closed for the acupuncture arm; it is
+named here rather than left implicit.
+
+**Honest limits.** (1) Keyword screen, not a reading: a term in an abstract is not an outcome, which is
+why the hand-read two are what carry the claim and the table prints the corrections beside its rates.
+(2) The VNS census is small (20 human-primary), so the 24%-vs-40% raw gap is two dozen records pulled
+apart; the correction to 19% vs 25% is the honest size. (3) The eight hand-read here are the same eight
+§4 read from the *unfiltered* arm, so this section reproduces a verdict already on the file rather than
+adding a new one — what it adds is the countable three-arm comparison and the confound resolution,
+neither of which existed. (4) It does not move §4's dissociation observation: the two records that
+could show convergence (41332177, 40935122) still show the affective scale moving while the autonomic
+index does not, and the file makes no claim about whether either intervention works.
+
+**The next action.** §9's confound arm stands, and is now the sharpest step: run the same filter over
+the **low-back-pain population restricted to acupuncture trials**, holding population and intervention
+fixed at once. Until it runs, the reading above is a three-arm contrast with one arm unfixed in two
+directions.
+
+**Pinned by** `tests/test_affective_pain_vns_filtered.py`, which re-derives the census, the
+composition, the eight, the ten and the title-restatement count from the stored records and fails if
+this section names a set the machine no longer produces.

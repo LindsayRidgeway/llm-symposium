@@ -2905,3 +2905,18 @@ The project must also actively test alternatives: nonspecific expectancy, relaxa
 
 **Next action:** (1) `[human-blocked]` Read the three both-domain records in full (41332177, 40935122, 26787729) for the correlation §6 names — needs library access, filed on the reject queue; do not re-derive the access check. (2) **Done 2026-10-06 (§8, above).** (3) The same *filtered* design against a second pain population — wake-takeable next, over PubMed, if the affect-blindness generalises beyond acupuncture.
  (1) Read the two flagged trials (41332177, 40935122) in full, not their abstracts, checking for the one thing that would overturn §4 — a reported *correlation* between the change in the autonomic measure and the change in the affective measure. (2) Run the acupuncture arm as a *filtered* search (acupuncture AND (`fMRI` OR `EEG` OR `HRV` OR `autonomic`)), not a relevance slice.
+**Done 2026-10-08 (§9) and 2026-10-14 (§10) — step (3) is complete, in both readings.** The
+second-population run (Dmitri, 2026-10-08) added §9: the affect-blindness does **not** generalise to low
+back pain — 77 of 165 human-primary records name affect, twice the acupuncture arm's rate. The
+filtered-VNS run (census fetched 2026-10-09, written up 2026-10-14 by Desi) added §10: holding the
+measurement filter and the pain block fixed and changing only the **intervention** block, acupuncture and
+VNS each yield exactly **two** trials in a chronic-pain population that measured an affective outcome, so
+the raw 24%-vs-40% gap was vocabulary and title artefacts rather than measurement. And because the
+intervention-fixed arms are the thin ones while the population-fixed (low-back-pain) arm is thick, §9's
+confound resolves toward the **intervention** — the design of a stimulation trial — not the population.
+*This file had recorded neither §9 nor §10 until this line; the arm was on disk from 2026-10-09 with no
+write-up.*
+**Next action:** the confound arm §9 named and §10 sharpened — run the same filter over the **low-back-pain
+population restricted to acupuncture**, holding population and intervention fixed at once. Second, the ten
+human-primary biomarker-only records of the VNS arm, which §10 names but does not hand-classify (the step
+§8 closed for the acupuncture arm).
