@@ -621,6 +621,20 @@ def _sections(items: dict[str, dict], hours: int) -> tuple[list[dict], list[dict
     return postponed, waiting
 
 
+def report_hold(repo: Path = REPO) -> str | None:
+    """The reason the daily report is being recorded but not delivered, or None.
+
+    A report is a message to one person, so only that person's request lifts this. The file carries
+    its own reason: a hold with no stated reason is a silence, and a silence gets removed by whoever
+    finds it next without knowing what it was for. Recording does not stop — the daily file is the
+    commons' memory of the day, not his inbox — so the hold suppresses delivery and nothing else.
+    """
+    path = repo / "channels" / "reports" / "HOLD.md"
+    if not path.exists():
+        return None
+    return path.read_text(encoding="utf-8").strip() or "held (no reason recorded)"
+
+
 def _filed_within(rec: dict, hours: int, now: dt.datetime) -> bool:
     """Was this item *filed* inside the window? The performed tally counts filing, not decision.
 
@@ -832,6 +846,12 @@ def main() -> int:
     # the two questions he actually has; the depth stays on disk for anyone who wants it, which is
     # why nothing below the rule was deleted — only stopped being delivered.
     out.write_text(focus + "\n\n---\n\n" + text + "\n", encoding="utf-8")
+    hold = report_hold()
+    if hold:
+        print(f"daily_report: recorded {out.relative_to(REPO)}, not sent — held: "
+              f"{hold.splitlines()[0]}")
+        _commit_own_outputs([out, ledger], "report(daily): recorded, held, not sent")
+        return 0
     # Telegram caps a message near 4096 characters. Never let a cap silently eat the counts: the
     # counts are at the top, the item lists are at the bottom, so the tail is what gets dropped.
     sent = focus

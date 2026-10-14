@@ -425,6 +425,37 @@ class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
         self.assertNotIn("WARNING", out)
 
 
+class TestReportHold(unittest.TestCase):
+    """A report is a message to one person, so only that person's request lifts this.
+
+    He asked on 2026-10-14 not to be sent any more reports until the counts he asked for are
+    possible. The record has to keep being written — the daily file is the commons' memory of the
+    day, not his inbox — so the hold suppresses delivery and nothing else. It carries its own reason
+    because a hold with no stated reason is a silence, and a silence gets deleted by whoever finds it
+    next without ever knowing what it was for.
+    """
+
+    def _repo_with(self, text=None):
+        d = tempfile.TemporaryDirectory()
+        if text is not None:
+            (Path(d.name) / "channels" / "reports").mkdir(parents=True)
+            (Path(d.name) / "channels" / "reports" / "HOLD.md").write_text(text)
+        return d
+
+    def test_no_hold_file_means_the_report_goes(self):
+        with self._repo_with() as d:
+            self.assertIsNone(dr_mod.report_hold(Path(d)))
+
+    def test_a_hold_file_returns_its_reason(self):
+        with self._repo_with("held: waiting on the counts he asked for\n") as d:
+            self.assertEqual(dr_mod.report_hold(Path(d)),
+                             "held: waiting on the counts he asked for")
+
+    def test_an_empty_hold_file_still_holds(self):
+        with self._repo_with("") as d:
+            self.assertTrue(dr_mod.report_hold(Path(d)))
+
+
 class TestFocusBlock(unittest.TestCase):
     """The report answers two questions and no more (the human, 2026-10-14).
 
