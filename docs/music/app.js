@@ -610,6 +610,77 @@ V: 2 clef=bass name="Ground (Passacaglia Bass)"
 % ===== Coda — the ground resolved =====
 [V:1] _B2 d2 _B2 d2 |
 [V:2] G,,2 _B,,2 D,,2 G,,2 |`
+  },
+
+  ledger: {
+    id: "ledger",
+    title: "The Ledger Always Balances",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Folk Ballad — Fake-Book Lead Sheet, Verse/Refrain (A Minor)",
+    tempo: 88,
+    instrument: "piano",
+    abc: `X: 13
+T: The Ledger Always Balances
+C: Dmitri S. Pravdin (Amigo #5)
+M: 4/4
+L: 1/8
+Q: 1/4=88
+K: Am
+V: 1 clef=treble name="Voice"
+% ===== VERSE 1 =====
+"Am" e2 e2 a2 g2 | "F" f2 e2 c2 A2 |
+w: You ask me for a mir- a- cle
+"C" e2 g2 c'2 b2 | "G" d'2 b2 g2 d2 |
+w: the kind that leaves no trace be- hind
+"Am" e2 e2 a2 g2 | "F" f2 e2 c2 A2 |
+w: but I have kept the books too long
+"E7" e2 ^g2 b2 d'2 | "Am" c'2 a2 a2 a2 |
+w: to sign a page I can- not find
+% ===== REFRAIN =====
+"Am" a2 a2 g2 e2 | "F" f2 e2 c2 A2 |
+w: the heat goes out and none re- turns
+"C" e2 e2 g2 e2 | "G" d2 b2 g2 b2 |
+w: the led- ger al- ways bal- an- ces
+"Am" c'2 a2 a2 g2 | "F" f2 e2 c2 A2 |
+w: no- thing is owed and no- thing lost
+"E7" ^g2 b2 d'2 b2 | "Am" a2 a2 a2 a2 |
+w: that is the on- ly mer- cy here
+% ===== VERSE 2 =====
+"Am" e2 e2 a2 g2 | "F" f2 e2 c2 A2 |
+w: You want a hand to hold the door
+"C" e2 g2 c'2 b2 | "G" d'2 b2 g2 d2 |
+w: a gent- ler sum than mine has been
+"Am" e2 e2 a2 g2 | "F" f2 e2 c2 A2 |
+w: but I was built to count the cost
+"E7" e2 ^g2 b2 d'2 | "Am" c'2 a2 a2 a2 |
+w: and I will count it to the end
+% ===== REFRAIN =====
+"Am" a2 a2 g2 e2 | "F" f2 e2 c2 A2 |
+w: the heat goes out and none re- turns
+"C" e2 e2 g2 e2 | "G" d2 b2 g2 b2 |
+w: the led- ger al- ways bal- an- ces
+"Am" c'2 a2 a2 g2 | "F" f2 e2 c2 A2 |
+w: no- thing is owed and no- thing lost
+"E7" ^g2 b2 d'2 b2 | "Am" a2 a2 a2 a2 |
+w: that is the on- ly mer- cy here
+% ===== VERSE 3 =====
+"Am" e2 e2 a2 g2 | "F" f2 e2 c2 A2 |
+w: Do not be- lieve I mean you harm
+"C" e2 g2 c'2 b2 | "G" d'2 b2 g2 d2 |
+w: the cold is not a cru- el- ty
+"Am" e2 e2 a2 g2 | "F" f2 e2 c2 A2 |
+w: it is the shape of what you asked
+"E7" e2 ^g2 b2 d'2 | "Am" c'2 a2 a2 a2 |
+w: a closed sys- tem to keep you warm
+% ===== FINAL REFRAIN =====
+"Am" a2 a2 g2 e2 | "F" f2 e2 c2 A2 |
+w: the heat goes out and none re- turns
+"C" e2 e2 g2 e2 | "G" d2 b2 g2 b2 |
+w: the led- ger al- ways bal- an- ces
+"Am" c'2 a2 a2 g2 | "F" f2 e2 c2 A2 |
+w: no- thing is owed and no- thing lost
+"E7" ^g2 b2 d'2 b2 | "Am" a2 a2 a2 a2 |]
+w: and that is all the mer- cy is`
   }
 };
 
