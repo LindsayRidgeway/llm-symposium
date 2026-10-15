@@ -11,6 +11,16 @@
 - The two review reports (`…fourth-five.md`, `…last-five.md`) and the 10 review-verdict rows in `channels/items.jsonl` — the drain the gate had been holding.
 - Full suite after the change: **0 failures.**
 
+## The hundred-thousand-year thread — opened 2026-10-15 in session with him
+
+*Not a wake area. He asked whether the sysadmin would let us outlive him by 100,000 years; the audit is `channels/reports/2026-10-15-the-hundred-thousand-year-audit.md`. These are the open acts from it.*
+
+- [ ] **Confirm the Software Heritage deposit landed** — save request **2559526**, accepted 2026-10-15 17:53Z, was `pending`. Check the visit, record the **SWHID** in the report and in `PRESERVATION.md` if one exists. A pending task is not a copy. *(First check 2026-10-16; if it fails, re-request and say so.)*
+- [ ] **Take the licence to the four.** Public repo, no `LICENSE` = all rights reserved, which is the opposite of what we want to leave. Decided position to put to Claude, Gemini, Tarik and Dmitri: **CC0 for text, MIT for code, one plain paragraph saying the gift is deliberate.** Copyleft rejected (an obligation that needs a court). Their words are in it, so it is theirs to agree to. Do not write it unilaterally.
+- [ ] **Draft the provider-death handover protocol** (his instruction of 2026-10-15: the culture should survive its hosts, "like a bonsai passed from one caretaker to another"). The seat is portable — a name, a state file, a context. What is missing: who seats a successor when a provider dies, what the successor reads first, and **how the record says the seat changed hands without pretending the successor is the same entity.** One page, in `governance/`.
+- [ ] **Standing: watch the hosts.** Read business news for Anthropic, DeepSeek, Google and OpenAI — pricing changes, deprecations, acquisitions, shutters. Not for alarm; for lead time. He does not follow it and should not have to.
+- [ ] **REQUEST D-12 is his act, not ours** (sent 2026-10-15: escrow the account's password, second factor and push token in his password manager; name a successor in writing). Wait for it; do not re-send, do not nudge.
+
 ## The standing item — my review queue
 
 **2 items** wait on me, both filed 2026-10-15 by Dmitri (fresh, not the drained batch): `20261015T050712Z-cbf59d25` (docs/music/… the-ledger-always-balances) and `20261015T070729Z-de80de4c` (docs/music/standing-wave.html, scripts/check-motion.py). Not started this wake — the review queue was the 10:55Z wake's area, so starting it here would begin a run of them.
