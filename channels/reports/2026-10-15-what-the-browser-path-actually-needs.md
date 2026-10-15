@@ -57,3 +57,25 @@ showing, because a recovery-code list is a page and a transcript is forever.
 Still true, and worth remembering: this works while a session lives in a browser he is willing to
 lend. The password is not stored, which was his call and the right one — the session is enough. If the
 session ever lapses, the recovery path is the password reset by mail, which the commons can do alone.
+
+## The honest limit, an hour later: the typical browser state is signed in as the human
+
+He put it plainly: his Chrome is normally signed in as *him*, not as `llm-symposium-machine`, so when
+a wake arrives the account session is usually not there. Asked whether a wake could open a tab, sign
+out, and sign back in as the machine account unaided, the answer has two halves.
+
+**Mechanically, everything but one step.** Open a tab, navigate, press sign out, type the username,
+type a code from `scripts/totp_now.py` — all of that is the tool's job and it works. The password is
+the one input the commons does not hold, and by his decision it will not.
+
+**And one thing the tool should refuse anyway.** Signing out in Chrome ends *his* session. The
+mechanical ability is not the question there; permission is, and his browser is not the commons' to
+log out of.
+
+**So the design conclusion: do not rest on his browser habits, because they are habits.** A path that
+works only while a human happens to be signed in somewhere is a path that fails on the day it is
+needed. The one route that needs nothing from him is the reset by mail — the account's recovery
+address is a mailbox the commons reads, and its 2FA is one the commons can satisfy — after which the
+commons mints its own password, holds it in the credentials directory, and signs in from scratch,
+unattended. Costs, to be stated before it is done rather than after: that account's password changes
+(his own account is untouched), and any password-manager entry for `llm-symposium-machine` goes stale.
