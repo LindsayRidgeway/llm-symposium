@@ -5669,3 +5669,53 @@ diskutil list external
 ```
 
 Then I'll read the card back to you — its size and its name — so you can confirm it's the right one before a single byte is written.
+
+[Goose 2026-10-15 00:56] **Lindsay:** Ready for you to try reading it again.
+
+**Desi:** **The card is there.** Here's exactly what the Mac reports:
+
+- `/dev/disk16` — external, removable, writable
+- **63.9 GB** (63,864,569,856 bytes, i.e. a 64 GB card)
+- one partition, NTFS, named `Untitled`, mounted at `/Volumes/Untitled`
+- **and it is empty.** The only things on it are `.Spotlight-V100` and `.fseventsd` — both created just now, both by this Mac when it mounted the card. No files of yours on it. Nothing to lose either way.
+
+**The image fits with room to spare.** Image 52.7 GB, card 63.9 GB — about 11 GB left over.
+
+**And the image is valid.** I attached it read-only to look at its structure. It contains:
+
+| Partition | Type | Size |
+|---|---|---|
+| 1 | FAT32, named **`bootfs`** | 536.9 MB |
+| 2 | Linux | 52.2 GB |
+
+That's the signature to look for on the card afterwards. If you see `bootfs` and a Linux partition, the write landed.
+
+---
+
+### Check this first
+
+**Read the label printed on the card itself and tell me it says A2.** I can't see the printing on the plastic from here, and I can't tell an A2 card from an A1 card over USB — macOS doesn't expose it.
+
+This matters because **your kit also shipped a 64 GB card.** So there may be two 64 GB cards in the house. Either one will take this image and run. The A2 is the faster one, and for running an operating system off a card, faster random reads make a real difference. So if this turns out to be the kit's card and you'd rather have the A2 in the robot, swap them **now** — after the write, the two are indistinguishable except by speed.
+
+If it says A2, you're good. Then paste this:
+
+```
+diskutil list external physical | grep -q '^/dev/disk16 ' || { echo 'ABORT: disk16 is no longer the external card.'; exit 1; }
+diskutil unmountDisk /dev/disk16
+sudo dd if=/Users/lindsayridgeway/Downloads/landerepi-image/LanderPi_20260526.img of=/dev/rdisk16 bs=1m
+```
+
+**While it runs:** press **Ctrl-T** in that Terminal window to make it print how far it's got. It'll take roughly ten to thirty minutes and say nothing until it finishes. That's normal.
+
+**When it finishes**, confirm with:
+
+```
+diskutil list /dev/disk16
+```
+
+You want to see `bootfs` and a Linux partition.
+
+**And one thing to be ready for:** macOS will very likely pop up "The disk you inserted was not readable by this computer," because the card will now carry Linux partitions. **Click Ignore.** Do *not* click Initialize — that would erase the image you just wrote.
+
+The guard on the first line is there so that if the disk number ever changes, the command refuses instead of writing to the wrong thing.
