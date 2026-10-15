@@ -5829,27 +5829,22 @@ I won't drive your Safari without asking first, so: say the word and I'll go fin
 
 And one thing to keep in mind: a charged battery and a *good* battery are different claims. If it goes green quickly and the robot is still dead, that's a meter question too.
 
-[Goose 2026-10-15 03:13] **Lindsay:** The charger's red light went out in less than five minutes. Now a smaller green light is on.
+[Goose 2026-10-15 03:19] **Lindsay:** No lights, nothing spins (but I don't know what the lidar is).
 
-**Desi:** Red to green in under five minutes means one of two things, and they look identical from the outside:
+**Desi:** First, the lidar: it's the small cylindrical module that sits on top of the robot and **spins** while it scans — like a little turret with a window in it. If it isn't mounted on your robot yet, ignore that check entirely; it can't spin if it isn't there.
 
-- **the pack was already essentially full** — plausible, lithium cells self-discharge slowly and it's only been weeks; or
-- **the charger can't push current into it**, which also shows green almost immediately.
+**Total darkness with a charged battery points upstream — at the battery's own wiring, not at the Pi.** Four things, in the order I'd look. All are visual except the last, and they take five minutes:
 
-So that doesn't settle the battery. It just means we have to let the robot tell us.
+**1. The DC connector you unplugged to charge.** That's the only connection that changed tonight, which makes it suspect number one. Push it firmly home. Those barrel-style plugs seat with a distinct feel, and they sit perfectly happily while touching nothing. Check it's in the *same* socket it came out of, not a look-alike.
 
-**Next: charger out, battery back into the robot** — the DC connector at the side, where it came from. Switch off, then on.
+**2. The power switch.** Ignore the `ON` marking — try the **other** position. A slide switch has two, and if it's the wrong one, everything downstream is dead. Watch for a light as you switch.
 
-**Watch four things and report each:**
+**3. The blue terminal, with a screwdriver.** Two screws. Loosen each, look at the bare copper, and make sure the wire ends are **under the metal clamp** — not pushed alongside it, which looks identical from above and carries nothing. Red to `+`, black to `−`. Then tighten firmly. A strand outside the clamp is the oldest failure in this whole project and the one that produces exactly this symptom: nothing at all, anywhere.
 
-1. **Any LED on the Pi itself**, by the USB-C power socket.
-2. **Does the cooler fan spin?** Silent or not, put a finger near it. A Pi with power spins that fan almost immediately — it's a power indicator you already own.
-3. **Does the lidar turn?**
-4. **Anything at all from the buzzer?**
+**4. The LITE board's own power light — the light, not the label.** The manual's numbered layout puts it on the **same edge of the board as the blue terminal, near the buzzer** — a small LED that comes on the instant the battery is connected, without the Pi doing anything. If you have been looking for it elsewhere, look there.
 
-**And the single most useful one — the LITE board's own power light.** The manual's numbered layout gives that board an *"on-board power indicator LED: shows if voltages are normal."* It feeds straight off the battery and **doesn't need the Pi to be running at all.** You couldn't find that label on your paper sheet, and I shouldn't have leaned on the label then. So look for the **light**, not the wording: a small LED on the LITE board that comes on the moment the battery is connected.
+**While you're in there, one question:** the battery cable is a separate item in your kit's packing list, and the manual says the battery should be disconnected for transport. So — **is the battery actually wired to the board at all right now?** Follow the two wires from the blue terminal down through the deck and see where they end. If they end in a plug that isn't plugged into the battery, that's your whole answer, and it explains every symptom.
 
-- **That light comes on** → battery and board are both fine, and everything after them is suspect. We go looking at the Pi's power cable.
-- **It stays dark** → the fault is upstream of everything: the pack, the battery cable, or those two screws in the blue terminal. Check them with a screwdriver — a loose strand in a screw terminal is the oldest failure in this project.
+---
 
-Give me those four observations plus that one light, and we'll have it down to one cable.
+If all four are clean and the robot is still completely dark, **stop there.** Don't buy more guesses — that's what the meter is for, and it's the next thing to arrive. We'll measure the battery, then measure the blue terminal, and one of those two numbers will end this.
