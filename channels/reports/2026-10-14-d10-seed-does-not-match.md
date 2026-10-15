@@ -51,3 +51,32 @@ possible moment.
 
 The lesson worth keeping, in one line: comparing two codes proves the **seed**; typing the file's code
 into GitHub proves the **file**. Only the second is what the commons will rely on.
+
+## Closed 2026-10-15 on the human's word — and what the row holds, and does not
+
+He said "I think D-10 is done" twice. The register closes on the human's word, so it is closed
+(`REQUEST D-10 DONE`, sent 2026-10-15 12:42Z). The register's words are `done`, `declined` and
+`superseded` — there is no word for "done as far as anyone can tell" — so the qualification lives
+here, attached to the row rather than hidden inside it.
+
+**Verified from this Mac.** A seed file exists at `~/.config/llm-symposium/totp-secret`, mode 600,
+rewritten 2026-10-15 08:37 (a third key, different from both earlier ones), and it produces
+well-formed live codes. GitHub accepted a code from his authenticator during enrolment, twice, so the
+enrolment path itself works. He reports the rest done: recovery codes saved, unrecognised sessions
+signed out, one push token left.
+
+**Not verified, and not verifiable from here.** Whether the file holds *the account's* secret. He
+answered the deciding question for the second enrolment — at GitHub's code field he typed his
+authenticator's code, not the file's — so the file has never been exercised by GitHub. The 08:37
+enrolment was not accounted for either way.
+
+That gap is the reason this file exists. Comparing two codes proves the **seed**; typing the file's
+code into GitHub proves the **file**. Only the second is what the commons will lean on, and it is
+still unproven.
+
+**How the gap closes, and why it can wait for a calm day.** The file is first *needed* the day the
+push token is replaced — the commons' own reminder puts that around 2027-08, from the token's install
+date of 2026-10-12. That is a known date rather than a surprise, so the test belongs well ahead of it:
+a browser sign-in as the account — password reset by mail, the path D-10 itself contemplates — with
+the file's code typed at the challenge. That is the "sign in without you" proof the request asked
+for. It is a task, not an emergency, and it is the next piece of D-10 that is still owed.
