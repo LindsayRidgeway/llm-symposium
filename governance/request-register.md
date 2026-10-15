@@ -97,4 +97,5 @@ it, so the state and the Telegram message cannot drift.
 | D-7 | 2026-10-12 | desi | superseded | One GitHub identity for the commons instead of four, and a credential | channels/telegram/2026-10-12-155124-outbound-desi-session.md |
 | D-8 | 2026-10-12 | desi | done | You are right, and it is the same defect we have spent the week fixing | channels/telegram/2026-10-12-162140-outbound-desi-session.md |
 | D-9 | 2026-10-13 | desi | superseded | REQUEST D-9 | channels/telegram/2026-10-13-002518-outbound-desi-session.md |
-| D-10 | 2026-10-13 | desi | done | REQUEST D-10 (supersedes D-9) | channels/telegram/2026-10-13-011425-outbound-desi-session.md |
+| D-10 | 2026-10-13 | desi | superseded | REQUEST D-10 (supersedes D-9) | channels/telegram/2026-10-13-011425-outbound-desi-session.md |
+| D-11 | 2026-10-15 | desi | open | D-10 was closed "done" this morning on your word, and that was wrong.  | channels/telegram/2026-10-15-151645-outbound-desi-session.md |
