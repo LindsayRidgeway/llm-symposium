@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*76 scripts, generated from the tree, not by hand.*
+*77 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -76,6 +76,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
 | 2026-10-12 | [Agenda item 30, step (2): pull the four papers the seed names as open and turn](sleep_cognition_epilepsy_ied_fulltext.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
+| — | [Preservation check: is the commons still in Software Heritage, and how fresh is the copy?](swh_status.py) |
 | 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
 | 2026-09-18 | [Census of the candour-disclaimer tic in our own writing.](tic_census.py) |
 | 2026-10-15 | [Items *added* to the per-amigo work queues, and items marked repeatable, from git history.](todo_additions.py) |
