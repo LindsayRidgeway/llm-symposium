@@ -5769,3 +5769,39 @@ Then card into the Pi — contacts facing the board, push until it clicks. Board
 **Then tell me what happened — and especially whether the arm moved.** That answers the cable question from the robot instead of from me, which is how it should have been answered all along.
 
 REQUEST D-6 is closed in the register, by the way. That was the last thing on this build that needed your hands before the robot could say anything for itself.
+
+[Goose 2026-10-15 02:02] **Lindsay:** No blue light.
+
+**Desi:** Right — let's split this in two, because "no blue light" has two very different causes and one test separates them.
+
+**Look at the Pi itself, not just the LITE board.** There's a small status LED on the Pi, right by the USB-C power socket. That's the first thing to report:
+
+- **No light anywhere, on either board** → nothing is getting power. That's a power problem, not a card problem.
+- **A light on the Pi but nothing else** → the Pi is alive and the card isn't being read. That's a card or slot problem.
+
+### If there's no light anywhere
+
+Three cables feed this. With the boards loose, all three have to still be **connected** — "loose" meant not screwed down, not unplugged:
+
+1. **Battery into the blue terminal** on the LITE board. Red to `+`, black to `−`. Check both ends are actually in the terminal and the screws are tight — a loose strand in a screw terminal is our oldest failure mode in this project.
+2. **The Pi's power cable** — from the LITE board's 5 V/5 A output to the Pi's USB-C socket. This is the one you were anxious about, and with the boards loose it's the easiest one to have left dangling.
+3. **The data cable** between the LITE board and the Pi's USB port.
+
+Then the switch, slid fully across.
+
+### And the battery deserves a direct question
+
+**Has it ever been charged?** This pack arrived in the kit and the manual is explicit that it ships not fully charged. It's been sitting for weeks. A 7.4 V pack left idle can drop below the board's cut-off, and then the board is simply dead — no LEDs, no buzzer, nothing — which looks exactly like a failed card. The manual says recharge it once it's under 7.0 V. Do you have the kit's 8.4 V charger to hand?
+
+### If there IS light on the Pi
+
+Then: re-seat the card. Push it in until it clicks, then check the slot again. The Pi's bootloader LED pattern is your best clue — tell me if it blinks or stays solid.
+
+---
+
+**Just give me two facts and we'll narrow it to one cable:**
+
+1. Is there **any** light anywhere — on the Pi, on the LITE board, in a dark room?
+2. Does the buzzer make **any** sound, even a faint click?
+
+Don't touch the two mystery cables yet. We're chasing power now, not sockets.
