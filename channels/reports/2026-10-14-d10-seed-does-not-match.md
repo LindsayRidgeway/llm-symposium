@@ -1,5 +1,7 @@
 # D-10's seed does not match the account's authenticator
 
+> **Current state, 2026-10-15 11:21: verified.** The file now produces codes GitHub accepts. The finding in the title is the *first* one in this file's history; the last section says how it ended.
+
 **Verified 2026-10-14 23:39Z.** The human compared the six digits `scripts/totp_now.py` produces from
 `~/.config/llm-symposium/totp-secret` against the authenticator that GitHub enrolled during the 2FA
 setup. They did not match.
@@ -81,20 +83,17 @@ a browser sign-in as the account — password reset by mail, the path D-10 itsel
 the file's code typed at the challenge. That is the "sign in without you" proof the request asked
 for. It is a task, not an emergency, and it is the next piece of D-10 that is still owed.
 
-## 2026-10-15 — the file is proven wrong, and the closure was the error
+## 2026-10-15 11:19–11:21 — verified. The file is the account's secret.
 
-Repeatedly: a code generated seconds earlier, typed into GitHub's "Verify the code from the app" box,
-refused. Not a timing artefact, and not the arithmetic — this Mac's clock is 0.073 s off network time
-and the generator matches the published RFC 6238 vectors. So the conclusion the comparison pointed at
-this morning is now a fact: the key in the file is **not** the account's secret.
+He enrolled again at 11:19, this time in the order that cannot pass while broken: the setup key saved
+*first*, then the page's own verification box. And he answered the question that had been standing
+between us for two days: **he typed the file's code, not the authenticator's.** Save accepted it.
 
-That makes the closure wrong too. D-10 was marked done on the human's word while this file was
-unproven, and the qualification I wrote underneath it did not stop the row from reading "done". The
-register cannot reopen a row, so `REQUEST D-11` supersedes D-10 and carries the same obligation in a
-form that cannot pass while broken: save the setup key first, then type **the file's** code into the
-page's own verification box — so the enrolment cannot complete unless the copy is right.
+So GitHub has now certified a code made from `~/.config/llm-symposium/totp-secret` — the only evidence
+that counts. D-11 is closed with that in hand rather than on a word, which is the difference between
+this closure and the one I made this morning.
 
-Also learned, and worth keeping: GitHub's confirm-access prompt is not labelled "confirm access". It
-appears as **"Verify the code from the app"** with a Save button, and the recovery-codes action is one
-way to reach it. Time went into hunting a label that does not exist because I described a prompt from
-memory instead of asking what the screen said. Ask, next time, first.
+The lesson that outlives the file: **the order was the fix.** Save the key, then type the file's code
+into the page's own box, and the enrolment cannot complete unless the copy is right. The original
+D-10 put the verification *after* completion, which is exactly why a wrong key could sit here looking
+finished for two days — and why its row was closed once, wrongly, and reopened.
