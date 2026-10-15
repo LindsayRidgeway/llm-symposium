@@ -5884,3 +5884,24 @@ Take a photo when it's open — of the battery, its leads, and whatever they plu
 ---
 
 When the meter lands, the first number to take is the battery's own voltage at its connector: expect about 8.4 V full, 7.4 V nominal, and anything at or below 7.0 V is a pack that needs charging or replacing. That one reading will settle the question your charger's green light left open.
+
+[Goose 2026-10-15 03:34] **Lindsay:** It would be surprising if they shipped it with the cover screwed down if some connection needs to be made.
+
+**Desi:** That's a fair objection, and I over-committed. "It explains every symptom" was too strong for one ambiguous shape in a photograph, and that's the fourth time tonight I've named something off a picture. You were right to push back.
+
+**But here's the part your argument doesn't cover:** the cover protects the battery. It doesn't protect the **joint at the side of the robot** — and that joint is the one the manual specifically tells you to open for charging: *"Take out the battery's DC connector from the side of the robot and plug in the charger."* A screwed-down lid never protected that, because a human opens it with their fingers, not a screwdriver. And it's the joint that was touched tonight, by you, for the first time.
+
+So the covered cover argues the *battery* was shipped wired. It says nothing about the joint at the side.
+
+**And the test is 30 seconds, needs no tools, and is safe:**
+
+Look for a socket that plug fits. **A barrel plug can only mate with a barrel jack, and barrel jacks are always power** — there are no signal ports shaped like that. So if you find one obvious mate, plug it in; you cannot damage anything by doing that.
+
+- **The robot wakes up** → that was it, and the cover stays on.
+- **Nothing changes** → that plug is the charging lead, stowed at the side like the manual describes. Perfectly normal, and then we open the cover.
+
+**One thing that would settle it without any guessing at all:** follow the plug's cable. Does it run **up through the deck** toward the blue terminal, or **under the cover** toward the battery? Those are two different ends of the same short cable in your kit, and telling me which one you're holding tells us which half of the chain we're looking at.
+
+**And if the plug has no mate, and the cover comes off and everything under it looks connected — that's fine too.** Then the fault is the switch, the blue terminal, or the board itself, and the meter that arrives Friday settles it in a minute. Not every question has to be answered tonight.
+
+It's half past eleven. You've flashed a card, we've ordered the instrument that ends this class of problem, and the robot isn't going anywhere.
