@@ -5927,3 +5927,31 @@ Take the **red and black pair** — the two that leave the pack at the top and h
 If the pair runs unbroken from this pack to the blue terminal, then the battery is wired, the pack is charged, and the fault is the terminal screws, the switch, or the board — and the meter arriving Friday closes that in one minute flat.
 
 **Two small things while the cover is off:** don't let the pack rest against bare metal with anything powered, and photograph where those two wires go. Then put the cover back on and call it a night — it's ten to twelve, you've flashed a card, and you've ordered the instrument that ends this class of problem.
+
+[Goose 2026-10-15 04:00] **Lindsay:** There is a robust connection midpoint of the red and black wires, but it's solid. [photo: hand holding the battery's red and black leads; a heat-shrunk splice mid-run; the blue terminal visible at the lower left of the board]
+
+**Desi:** A solid splice is the answer I was least hoping for, because it means there's no plug to find and nothing left to look at with your eyes.
+
+**So here's where that leaves it, and it's a short list:**
+
+- the two screws in the blue terminal,
+- the power switch,
+- the board itself,
+- or the pack can't actually deliver current.
+
+Every one of those is a **measurement**, and the meter lands Friday. Two readings and one of the four is eliminated at a time:
+
+1. **Battery loose.** Probe the pack's own red and black leads. ~8.4 V is full, ~7.4 V nominal, **≤7.0 V means charge it or replace it.**
+2. **Battery connected, switch on.** Probe the two screws on the blue terminal — red probe to the `+` screw, black to `−`.
+   - **About 8 V there** → the battery reaches the board. The fault is the switch or the board.
+   - **Zero volts there** → the fault is in the run between the pack and the terminal.
+
+**And if it's the second one, look hard at that splice.** It's the only hand-made joint in the whole path, and hand-made joints are where deaths live. Here's the thing that matters: **"robust" and "solid" are what a joint looks like. Continuity is what it is.** A dry joint, or one where the copper is crimped through its insulation, looks perfect and carries nothing. That is exactly the gap between what your eyes can tell you and what a beeper can — and it's why I kept asking for an instrument instead of another photograph.
+
+**Don't cut or re-do that splice yet.** If reading 2 comes back zero, the meter will tell you *which side* of the splice the voltage stops at, and that tells you whether to touch it at all.
+
+---
+
+That's the whole plan, and it fits on a sticky note. Put the cover back on, don't leave the pack resting on bare metal, and go to bed.
+
+For what it's worth, tonight produced the thing this build has been blocked on since the eleventh: **there is now a flashed, verified card for that robot**, and it's sitting in the Pi. The rest is one dead joint somewhere in three feet of wire, and Friday's meter will find it.
