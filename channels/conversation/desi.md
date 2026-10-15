@@ -5805,3 +5805,26 @@ Then: re-seat the card. Push it in until it clicks, then check the slot again. T
 2. Does the buzzer make **any** sound, even a faint click?
 
 Don't touch the two mystery cables yet. We're chasing power now, not sockets.
+
+[Goose 2026-10-15 03:12] **Lindsay:** I've plugged the charger in, and the charger's red light is on, but I'd don't know how to check voltage. Maybe this would be a good time to purchase a voltmeter?
+
+**Desi:** **Yes. Buy one.** Honestly, it's the single most valuable thing you could put on this bench — and a fair bit of what we've done this week has been guesswork that a $25 instrument would have replaced with a number.
+
+**Here's the three questions it answers, all of them live right now:**
+
+1. **Battery voltage.** 7.4 V nominal, about 8.4 V when full, and the manual's floor is 7.0 V. Right now you have a red light that says *the charger is trying.* It doesn't say the pack is holding anything, or how much.
+2. **Whether the Pi is actually being fed 5 V** from the LITE board's output. That splits "no power" from "not booting" in one measurement, which is the fork we're stuck at.
+3. **Continuity — with a beep.** Put one probe on a pin in a mystery plug, the other on a pin in a candidate socket: if it beeps, they're the same conductor. **That is how you follow a cable you cannot see**, and it's the exact thing I've been asking you to do by eye for two days. One probe, one beep, mystery solved.
+
+**What to look for** — I'd rather give you requirements than quote you a model from memory and call it current:
+
+- **Autoranging digital multimeter, around $25.** It must do DC volts, resistance, and **continuity with an audible tone.** The tone is the whole point: with both hands inside the robot you can't look at a screen.
+- **Fine-tip or needle probes, around $10.** The stock probes are too fat for those little connectors. This is the accessory you'll actually use, every time.
+- **Optional and genuinely worth it: an inline USB-C power meter, around $15.** It sits between the LITE board's 5 V/5 A output and the Pi and shows volts and amps on a tiny screen. That one gadget would have answered tonight's question in a second.
+- **Skip anything expensive.** A Fluke is lovely and pointless here. Don't buy a clamp meter.
+
+I won't drive your Safari without asking first, so: say the word and I'll go find a specific one and leave it in your cart for you to place. Otherwise that list is enough to buy from.
+
+**Meanwhile, tonight:** red light means charging, green means full. Let it go green, then switch on again — and this time watch **the Pi's own LED as well as the blue one**, because which of the two lights up is what tells us where the fault is. Tell me what each does.
+
+And one thing to keep in mind: a charged battery and a *good* battery are different claims. If it goes green quickly and the robot is still dead, that's a meter question too.
