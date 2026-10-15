@@ -1,0 +1,1188 @@
+{
+ "disease": "burning mouth syndrome",
+ "disease_resolved": "burning mouth syndrome",
+ "efo_id": "MONDO_0006687",
+ "disease_papers_any_field": 3841,
+ "disease_papers_strict": 1649,
+ "registered_trials_for_disease": 49,
+ "disease_forms_searched": [
+  "burning mouth syndrome",
+  "oral burning",
+  "glossodynia",
+  "stomatodynia",
+  "burning mouth"
+ ],
+ "note": "any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") \u2014 counts mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT \u2014 the number that decides novelty. Counts move with spelling; these are small numbers, not exact ones. A zero means nobody has PUBLISHED the link; it does not mean the link is true, untested, or valuable. Where a target carries `names`, any_field/strict are the maximum over the symbol and every name, so a row is only 'unjoined' if it is unjoined under every spelling supplied. Every strict join carries its `strict_hits` \u2014 open them; the count cannot tell a paper about the pair from a coincidence of English. A row marked `\"control\": true` is a string that names nothing: it is scored, kept out of every count and band, and reported in `controls` with a `control_check` line, so the reader can see whether the unjoined band separates a gene from noise. `strict` or `any_field` of -1 means that query FAILED: the row is not a zero, is excluded from every band, and is listed in `failed_queries`; compare `n_scored` with `n_targets` before calling a band complete.",
+ "n_targets": 44,
+ "n_controls": 3,
+ "n_scored": 44,
+ "n_failed": 0,
+ "failed_queries": [],
+ "failed_queries_note": null,
+ "unjoined": [
+  "CACNA2D1",
+  "FUT2"
+ ],
+ "incidental_any_field_only": [
+  "HTR2A",
+  "ESR2",
+  "GPX1",
+  "MT1A"
+ ],
+ "no_title_abstract_join": [
+  "NTRK1",
+  "NTRK2",
+  "SCN10A",
+  "CACNA2D1",
+  "GRIN2B",
+  "DRD1",
+  "COMT",
+  "HTR2A",
+  "ESR1",
+  "ESR2",
+  "CYP19A1",
+  "PGR",
+  "TAS2R38",
+  "SCNN1A",
+  "AQP5",
+  "BPIFA2",
+  "MTHFR",
+  "TCN2",
+  "FUT2",
+  "SOD2",
+  "GPX1",
+  "NFE2L2",
+  "MT1A"
+ ],
+ "no_strict_join_but_discussed": [
+  "NTRK1",
+  "NTRK2",
+  "SCN10A",
+  "GRIN2B",
+  "DRD1",
+  "COMT",
+  "ESR1",
+  "CYP19A1",
+  "PGR",
+  "TAS2R38",
+  "SCNN1A",
+  "AQP5",
+  "BPIFA2",
+  "MTHFR",
+  "TCN2",
+  "SOD2",
+  "NFE2L2"
+ ],
+ "joined_in_title_or_abstract": [
+  "TRPV1",
+  "TRPA1",
+  "TRPM8",
+  "UCHL1",
+  "NGF",
+  "BDNF",
+  "SCN9A",
+  "SCN11A",
+  "CALCA",
+  "TAC1",
+  "VIP",
+  "DRD2",
+  "SLC6A4",
+  "CA6",
+  "MUC1",
+  "TNF",
+  "IL6",
+  "IL1B",
+  "IL10",
+  "TPO",
+  "TG"
+ ],
+ "false_gaps_repaired_by_names": [
+  "TRPM8",
+  "UCHL1",
+  "SCN11A",
+  "CALCA",
+  "TAC1",
+  "SLC6A4",
+  "CA6"
+ ],
+ "ambiguous_joins_to_read": [
+  "NGF",
+  "VIP",
+  "CA6",
+  "TNF",
+  "IL6",
+  "TPO",
+  "TG"
+ ],
+ "density_floor": 1000,
+ "density_warning": null,
+ "control_check": "3 of 3 strings that name nothing scored 'unjoined', and so did 2 of 44 scorable real targets (5%). The two are separable at this density, but the band is not free of noise either \u2014 read every row before treating a zero as a gap.",
+ "controls": [
+  {
+   "symbol": "QZXK77",
+   "any_field": 0,
+   "strict": 0,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  },
+  {
+   "symbol": "VBPLM42",
+   "any_field": 0,
+   "strict": 0,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  },
+  {
+   "symbol": "WFTJ19",
+   "any_field": 0,
+   "strict": 0,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  }
+ ],
+ "seconds": 480.6,
+ "targets": [
+  {
+   "category": "TRP channels (oral nociception)",
+   "symbol": "TRPV1",
+   "is_control": false,
+   "any_field": 213,
+   "strict": 13,
+   "symbol_only_strict": 13,
+   "symbol_only_any_field": 201,
+   "matched_name": "TRPV1",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "41585143",
+     "title": "Effects of ovariectomy of rat on tongue neuropathy: Relevance to burning mouth syndrome.",
+     "year": "2026"
+    },
+    {
+     "pmid": "40905465",
+     "title": "Morpho-Histo-Cytological Evaluation of Oral Tissues in Burning Mouth Syndrome: A Systematic Review.",
+     "year": "2025"
+    },
+    {
+     "pmid": "40573289",
+     "title": "Potential Target Receptors for the Pharmacotherapy of Burning Mouth Syndrome.",
+     "year": "2025"
+    }
+   ],
+   "open_targets_score": 0.028303532282714174,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "TRP channels (oral nociception)",
+   "symbol": "TRPA1",
+   "is_control": false,
+   "any_field": 78,
+   "strict": 1,
+   "symbol_only_strict": 1,
+   "symbol_only_any_field": 70,
+   "matched_name": "TRPA1",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "18652806",
+     "title": "Overexpression of artemin in the tongue increases expression of TRPV1 and TRPA1 in trigeminal afferents and causes oral sensitivity to capsaicin and mustard oil.",
+     "year": "2008"
+    }
+   ],
+   "open_targets_score": 0.0042501683288740716,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "TRP channels (oral nociception)",
+   "symbol": "TRPM8",
+   "is_control": false,
+   "any_field": 43,
+   "strict": 3,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 38,
+   "matched_name": "TRPM8",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "42526437",
+     "title": "TRPM8 is a non-canonical target of 7-nitrobenzodiazepines.",
+     "year": "2026"
+    },
+    {
+     "pmid": "PPR1225349",
+     "title": "Clonazepam activates the transient receptor potential melastatin 8 (TRPM8) ion channel",
+     "year": "2026"
+    },
+    {
+     "pmid": "PMC13635707",
+     "title": "Cooling a burning mouth: is TRPM8 the therapeutically relevant target of clonazepam in burning mouth disorder?",
+     "year": "2026"
+    }
+   ],
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "small-fiber neuropathy / nerve fiber density",
+   "symbol": "UCHL1",
+   "is_control": false,
+   "any_field": 10,
+   "strict": 3,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 10,
+   "matched_name": "protein gene product 9.5",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "41585143",
+     "title": "Effects of ovariectomy of rat on tongue neuropathy: Relevance to burning mouth syndrome.",
+     "year": "2026"
+    },
+    {
+     "pmid": "24581846",
+     "title": "Peripheral GABAA receptor activation modulates rat tongue afferent mechanical sensitivity.",
+     "year": "2014"
+    },
+    {
+     "pmid": "9738358",
+     "title": "[Etiopathogenic, clinical-diagnostic and therapeutic aspects of the burning mouth syndrome. Research and treatment protocols in a patient group].",
+     "year": "1998"
+    }
+   ],
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "small-fiber neuropathy / nerve fiber density",
+   "symbol": "NGF",
+   "is_control": false,
+   "any_field": 112,
+   "strict": 6,
+   "symbol_only_strict": 6,
+   "symbol_only_any_field": 108,
+   "matched_name": "NGF",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": true,
+   "strict_hits": [
+    {
+     "pmid": "40905465",
+     "title": "Morpho-Histo-Cytological Evaluation of Oral Tissues in Burning Mouth Syndrome: A Systematic Review.",
+     "year": "2025"
+    },
+    {
+     "pmid": "39518993",
+     "title": "Small Fiber Neuropathy in Burning Mouth Syndrome: A Systematic Review.",
+     "year": "2024"
+    },
+    {
+     "pmid": "31880064",
+     "title": "Characterization of burning mouth syndrome profiles based on response to a local anaesthetic lozenge.",
+     "year": "2020"
+    }
+   ],
+   "open_targets_score": 0.009822200604670423,
+   "verdict": "already published together (title/abstract) \u2014 DO NOT CLOSE YET: the symbol is short and may be an ordinary word or another field's acronym; open strict_hits and confirm the gene"
+  },
+  {
+   "category": "small-fiber neuropathy / nerve fiber density",
+   "symbol": "NTRK1",
+   "is_control": false,
+   "any_field": 21,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 4,
+   "matched_name": "TrkA",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (21 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "small-fiber neuropathy / nerve fiber density",
+   "symbol": "BDNF",
+   "is_control": false,
+   "any_field": 68,
+   "strict": 4,
+   "symbol_only_strict": 3,
+   "symbol_only_any_field": 74,
+   "matched_name": "brain-derived neurotrophic factor",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "40015704",
+     "title": "[Accurate evaluation model of burning mouth syndrome based on inflammatory factors and psychological scores: a clinical study].",
+     "year": "2025"
+    },
+    {
+     "pmid": "38618099",
+     "title": "Potential salivary and serum biomarkers for burning mouth syndrome and their relationship with anxiety/depression.",
+     "year": "2024"
+    },
+    {
+     "pmid": "25322841",
+     "title": "The association of openness personality trait with stress-related salivary biomarkers in burning mouth syndrome.",
+     "year": "2015"
+    }
+   ],
+   "open_targets_score": 0.06312023539838799,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "small-fiber neuropathy / nerve fiber density",
+   "symbol": "NTRK2",
+   "is_control": false,
+   "any_field": 15,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "TrkB",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (15 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "neuropathic pain ion channels",
+   "symbol": "SCN9A",
+   "is_control": false,
+   "any_field": 34,
+   "strict": 3,
+   "symbol_only_strict": 1,
+   "symbol_only_any_field": 18,
+   "matched_name": "Nav1.7",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "39518993",
+     "title": "Small Fiber Neuropathy in Burning Mouth Syndrome: A Systematic Review.",
+     "year": "2024"
+    },
+    {
+     "pmid": "28410768",
+     "title": "[Small fiber neuropathy].",
+     "year": "2018"
+    },
+    {
+     "pmid": "20529324",
+     "title": "Sodium channel Na v 1.7 immunoreactivity in painful human dental pulp and burning mouth syndrome.",
+     "year": "2010"
+    }
+   ],
+   "open_targets_score": 0.006853435190101457,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuropathic pain ion channels",
+   "symbol": "SCN10A",
+   "is_control": false,
+   "any_field": 25,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 8,
+   "matched_name": "Nav1.8",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (25 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "neuropathic pain ion channels",
+   "symbol": "SCN11A",
+   "is_control": false,
+   "any_field": 17,
+   "strict": 1,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 6,
+   "matched_name": "Nav1.9",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "39518993",
+     "title": "Small Fiber Neuropathy in Burning Mouth Syndrome: A Systematic Review.",
+     "year": "2024"
+    }
+   ],
+   "open_targets_score": 0.0022174791281082107,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuropathic pain ion channels",
+   "symbol": "CACNA2D1",
+   "is_control": false,
+   "any_field": 0,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "CACNA2D1",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": 0.25870589827929125,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "neuropeptides",
+   "symbol": "CALCA",
+   "is_control": false,
+   "any_field": 119,
+   "strict": 2,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 8,
+   "matched_name": "CGRP",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "20038912",
+     "title": "Salivary and serum levels of substance P, neurokinin A and calcitonin gene related peptide in burning mouth syndrome.",
+     "year": "2010"
+    },
+    {
+     "pmid": "19192048",
+     "title": "Calcitonin gene-related peptide levels in saliva of patients with burning mouth syndrome.",
+     "year": "2009"
+    }
+   ],
+   "open_targets_score": 0.004619748183558773,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuropeptides",
+   "symbol": "TAC1",
+   "is_control": false,
+   "any_field": 161,
+   "strict": 3,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 6,
+   "matched_name": "substance P",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "20038912",
+     "title": "Salivary and serum levels of substance P, neurokinin A and calcitonin gene related peptide in burning mouth syndrome.",
+     "year": "2010"
+    },
+    {
+     "pmid": "20233324",
+     "title": "Neuropeptides in saliva of subjects with burning mouth syndrome: a pilot study.",
+     "year": "2010"
+    },
+    {
+     "pmid": "24581846",
+     "title": "Peripheral GABAA receptor activation modulates rat tongue afferent mechanical sensitivity.",
+     "year": "2014"
+    }
+   ],
+   "open_targets_score": 0.020170436535842075,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuropeptides",
+   "symbol": "VIP",
+   "is_control": false,
+   "any_field": 45,
+   "strict": 1,
+   "symbol_only_strict": 1,
+   "symbol_only_any_field": 41,
+   "matched_name": "VIP",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": true,
+   "strict_hits": [
+    {
+     "pmid": "36527860",
+     "title": "Contribution of pain to subsequent cognitive decline or dementia: A systematic review and meta-analysis of cohort studies.",
+     "year": "2023"
+    }
+   ],
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 DO NOT CLOSE YET: the symbol is short and may be an ordinary word or another field's acronym; open strict_hits and confirm the gene"
+  },
+  {
+   "category": "central sensitization / NMDA",
+   "symbol": "GRIN2B",
+   "is_control": false,
+   "any_field": 11,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 10,
+   "matched_name": "GRIN2B",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (11 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "dopaminergic",
+   "symbol": "DRD2",
+   "is_control": false,
+   "any_field": 52,
+   "strict": 1,
+   "symbol_only_strict": 1,
+   "symbol_only_any_field": 51,
+   "matched_name": "DRD2",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "30793423",
+     "title": "Neurophysiology and genetics of burning mouth syndrome.",
+     "year": "2019"
+    }
+   ],
+   "open_targets_score": 0.02342725634418026,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "dopaminergic",
+   "symbol": "DRD1",
+   "is_control": false,
+   "any_field": 12,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 12,
+   "matched_name": "DRD1",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (12 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "dopaminergic / catecholamine clearance",
+   "symbol": "COMT",
+   "is_control": false,
+   "any_field": 37,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 35,
+   "matched_name": "COMT",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (37 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "serotonergic / psychiatric comorbidity",
+   "symbol": "SLC6A4",
+   "is_control": false,
+   "any_field": 27,
+   "strict": 2,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 12,
+   "matched_name": "serotonin transporter",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "34541697",
+     "title": "Duloxetine attenuates pain in association with downregulation of platelet serotonin transporter in patients with burning mouth syndrome and atypical odontalgia.",
+     "year": "2022"
+    },
+    {
+     "pmid": "16942951",
+     "title": "Interleukin-1beta and serotonin transporter gene polymorphisms in burning mouth syndrome patients.",
+     "year": "2006"
+    }
+   ],
+   "open_targets_score": 0.38590652664389374,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "serotonergic / psychiatric comorbidity",
+   "symbol": "HTR2A",
+   "is_control": false,
+   "any_field": 5,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 5,
+   "matched_name": "HTR2A",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "incidental only (5) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "estrogen / menopausal hormonal axis",
+   "symbol": "ESR1",
+   "is_control": false,
+   "any_field": 10,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 7,
+   "matched_name": "estrogen receptor alpha",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": 0.004968795824094324,
+   "verdict": "discussed (10 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "estrogen / menopausal hormonal axis",
+   "symbol": "ESR2",
+   "is_control": false,
+   "any_field": 4,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 2,
+   "matched_name": "estrogen receptor beta",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "estrogen / menopausal hormonal axis",
+   "symbol": "CYP19A1",
+   "is_control": false,
+   "any_field": 23,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 1,
+   "matched_name": "aromatase",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (23 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "estrogen / menopausal hormonal axis",
+   "symbol": "PGR",
+   "is_control": false,
+   "any_field": 15,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 5,
+   "matched_name": "progesterone receptor",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": true,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (15 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "taste / gustatory signaling",
+   "symbol": "CA6",
+   "is_control": false,
+   "any_field": 27,
+   "strict": 1,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 13,
+   "matched_name": "gustin",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": true,
+   "strict_hits": [
+    {
+     "pmid": "20180965",
+     "title": "Buccal alterations in diabetes mellitus.",
+     "year": "2010"
+    }
+   ],
+   "open_targets_score": 0.0014783194187388072,
+   "verdict": "already published together (title/abstract) \u2014 DO NOT CLOSE YET: the symbol is short and may be an ordinary word or another field's acronym; open strict_hits and confirm the gene"
+  },
+  {
+   "category": "taste / gustatory signaling",
+   "symbol": "TAS2R38",
+   "is_control": false,
+   "any_field": 7,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 7,
+   "matched_name": "TAS2R38",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "taste / gustatory signaling",
+   "symbol": "SCNN1A",
+   "is_control": false,
+   "any_field": 6,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "epithelial sodium channel",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (6 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "salivary gland function",
+   "symbol": "AQP5",
+   "is_control": false,
+   "any_field": 15,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 9,
+   "matched_name": "AQP5",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (15 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "salivary gland function",
+   "symbol": "MUC1",
+   "is_control": false,
+   "any_field": 16,
+   "strict": 3,
+   "symbol_only_strict": 3,
+   "symbol_only_any_field": 15,
+   "matched_name": "MUC1",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "28199919",
+     "title": "Relationships between oral MUC1 expression and salivary hormones in burning mouth syndrome.",
+     "year": "2017"
+    },
+    {
+     "pmid": "29480594",
+     "title": "Oral epithelial MUC1 and oral health.",
+     "year": "2018"
+    },
+    {
+     "pmid": "23411403",
+     "title": "MUC1 and Toll-like receptor-2 expression in burning mouth syndrome and oral lichen planus.",
+     "year": "2013"
+    }
+   ],
+   "open_targets_score": 0.019954848287276,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "salivary gland function",
+   "symbol": "BPIFA2",
+   "is_control": false,
+   "any_field": 17,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 2,
+   "matched_name": "PSP",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (17 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "neuroinflammation / cytokines",
+   "symbol": "TNF",
+   "is_control": false,
+   "any_field": 380,
+   "strict": 16,
+   "symbol_only_strict": 15,
+   "symbol_only_any_field": 314,
+   "matched_name": "TNF",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": true,
+   "strict_hits": [
+    {
+     "pmid": "40015704",
+     "title": "[Accurate evaluation model of burning mouth syndrome based on inflammatory factors and psychological scores: a clinical study].",
+     "year": "2025"
+    },
+    {
+     "pmid": "38618099",
+     "title": "Potential salivary and serum biomarkers for burning mouth syndrome and their relationship with anxiety/depression.",
+     "year": "2024"
+    },
+    {
+     "pmid": "37332081",
+     "title": "Is burning mouth syndrome associated with stress? A meta-analysis.",
+     "year": "2023"
+    }
+   ],
+   "open_targets_score": 0.020586058245625892,
+   "verdict": "already published together (title/abstract) \u2014 DO NOT CLOSE YET: the symbol is short and may be an ordinary word or another field's acronym; open strict_hits and confirm the gene"
+  },
+  {
+   "category": "neuroinflammation / cytokines",
+   "symbol": "IL6",
+   "is_control": false,
+   "any_field": 156,
+   "strict": 12,
+   "symbol_only_strict": 1,
+   "symbol_only_any_field": 227,
+   "matched_name": "interleukin 6",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": true,
+   "strict_hits": [
+    {
+     "pmid": "41858644",
+     "title": "Burning Mouth Syndrome and the Oral Microbiome: Unveiling Potential Links.",
+     "year": "2026"
+    },
+    {
+     "pmid": "39760200",
+     "title": "Is There a Correlation Between Quality of Life and Salivary Interleukin-6 in Patients With Oral Lichen Planus or Burning Mouth Syndrome?",
+     "year": "2025"
+    },
+    {
+     "pmid": "40224121",
+     "title": "A scientometric study on research trends and characteristics of burning mouth syndrome.",
+     "year": "2025"
+    }
+   ],
+   "open_targets_score": 0.03183970713703732,
+   "verdict": "already published together (title/abstract) \u2014 DO NOT CLOSE YET: the symbol is short and may be an ordinary word or another field's acronym; open strict_hits and confirm the gene"
+  },
+  {
+   "category": "neuroinflammation / cytokines",
+   "symbol": "IL1B",
+   "is_control": false,
+   "any_field": 28,
+   "strict": 1,
+   "symbol_only_strict": 1,
+   "symbol_only_any_field": 23,
+   "matched_name": "IL1B",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "42636754",
+     "title": "Salivary human mRNA and lncRNA in postmenopausal burning mouth syndrome: Linking inflammation, pain, and comorbidities at the RNA level.",
+     "year": "2026"
+    }
+   ],
+   "open_targets_score": 0.03782812813336781,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "neuroinflammation / cytokines",
+   "symbol": "IL10",
+   "is_control": false,
+   "any_field": 85,
+   "strict": 1,
+   "symbol_only_strict": 1,
+   "symbol_only_any_field": 75,
+   "matched_name": "IL10",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [
+    {
+     "pmid": "38791010",
+     "title": "Burning Mouth Syndrome Treated with Low-Level Laser and Clonazepam: A Randomized, Single-Blind Clinical Trial.",
+     "year": "2024"
+    }
+   ],
+   "open_targets_score": 0.008415743935453641,
+   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+  },
+  {
+   "category": "B12 / one-carbon metabolism",
+   "symbol": "MTHFR",
+   "is_control": false,
+   "any_field": 9,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 8,
+   "matched_name": "MTHFR",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (9 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "B12 / one-carbon metabolism",
+   "symbol": "TCN2",
+   "is_control": false,
+   "any_field": 8,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 7,
+   "matched_name": "transcobalamin II",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (8 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "B12 / one-carbon metabolism",
+   "symbol": "FUT2",
+   "is_control": false,
+   "any_field": 0,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "FUT2",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+  },
+  {
+   "category": "thyroid autoimmunity",
+   "symbol": "TPO",
+   "is_control": false,
+   "any_field": 31,
+   "strict": 1,
+   "symbol_only_strict": 1,
+   "symbol_only_any_field": 29,
+   "matched_name": "TPO",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": true,
+   "strict_hits": [
+    {
+     "pmid": "30937336",
+     "title": "The Association between Burning Mouth Syndrome and Level of Thyroid Hormones in Hashimotos Thyroiditis in Public Hospitals in Shiraz, 2016.",
+     "year": "2019"
+    }
+   ],
+   "open_targets_score": null,
+   "verdict": "already published together (title/abstract) \u2014 DO NOT CLOSE YET: the symbol is short and may be an ordinary word or another field's acronym; open strict_hits and confirm the gene"
+  },
+  {
+   "category": "thyroid autoimmunity",
+   "symbol": "TG",
+   "is_control": false,
+   "any_field": 31,
+   "strict": 4,
+   "symbol_only_strict": 3,
+   "symbol_only_any_field": 105,
+   "matched_name": "thyroglobulin",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": true,
+   "strict_hits": [
+    {
+     "pmid": "35028027",
+     "title": "Anemia, hematinic deficiencies, and hyperhomocysteinemia in burning mouth syndrome patients with thyroglobulin antibody/thyroid microsomal antibody positivity but without gastric parietal cell antibody positivity.",
+     "year": "2022"
+    },
+    {
+     "pmid": "32883568",
+     "title": "Gastric parietal cell and thyroid autoantibodies in patients with burning mouth syndrome.",
+     "year": "2020"
+    },
+    {
+     "pmid": "34484577",
+     "title": "Anemia, hematinic deficiencies, and hyperhomocysteinemia in serum gastric parietal cell antibody-positive burning mouth syndrome patients without serum thyroid autoantibodies.",
+     "year": "2021"
+    }
+   ],
+   "open_targets_score": 0.009870861952203908,
+   "verdict": "already published together (title/abstract) \u2014 DO NOT CLOSE YET: the symbol is short and may be an ordinary word or another field's acronym; open strict_hits and confirm the gene"
+  },
+  {
+   "category": "oxidative stress",
+   "symbol": "SOD2",
+   "is_control": false,
+   "any_field": 9,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 7,
+   "matched_name": "SOD2",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (9 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "oxidative stress",
+   "symbol": "GPX1",
+   "is_control": false,
+   "any_field": 4,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 4,
+   "matched_name": "GPX1",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "oxidative stress / antioxidant transcription",
+   "symbol": "NFE2L2",
+   "is_control": false,
+   "any_field": 30,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 1,
+   "matched_name": "Nrf2",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "discussed (30 any-field, 0 strict) \u2014 read the list; not novel on this number"
+  },
+  {
+   "category": "zinc homeostasis",
+   "symbol": "MT1A",
+   "is_control": false,
+   "any_field": 1,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "MT1A",
+   "matched_disease_form": "burning mouth",
+   "failed_scopes": [],
+   "naming_sensitive": true,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+  },
+  {
+   "category": "null control",
+   "symbol": "QZXK77",
+   "is_control": true,
+   "any_field": 0,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "QZXK77",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  },
+  {
+   "category": "null control",
+   "symbol": "VBPLM42",
+   "is_control": true,
+   "any_field": 0,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "VBPLM42",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  },
+  {
+   "category": "null control",
+   "symbol": "WFTJ19",
+   "is_control": true,
+   "any_field": 0,
+   "strict": 0,
+   "symbol_only_strict": 0,
+   "symbol_only_any_field": 0,
+   "matched_name": "WFTJ19",
+   "matched_disease_form": "burning mouth syndrome",
+   "failed_scopes": [],
+   "naming_sensitive": false,
+   "ambiguous_symbol": false,
+   "strict_hits": [],
+   "open_targets_score": null,
+   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+  }
+ ]
+}
