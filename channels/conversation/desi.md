@@ -5905,3 +5905,25 @@ Look for a socket that plug fits. **A barrel plug can only mate with a barrel ja
 **And if the plug has no mate, and the cover comes off and everything under it looks connected — that's fine too.** Then the fault is the switch, the blue terminal, or the board itself, and the meter that arrives Friday settles it in a minute. Not every question has to be answered tonight.
 
 It's half past eleven. You've flashed a card, we've ordered the instrument that ends this class of problem, and the robot isn't going anywhere.
+
+[Goose 2026-10-15 03:53] **Lindsay:** Only three wires, all sealed in plastic. [photo: the battery pack under the opened cover — label reads Lithium battery 7.4V 2200mAh 10C, hiwonder.com; a red and black wire pair twisted together leaving the pack at the top-left, and a thick black lead with a moulded boot leaving at the bottom-right]
+
+**Desi:** **You were right and I was wrong.** Scratch the loose plug as a fault — I called it off a photograph and I shouldn't have.
+
+Here's the evidence, and it's on your own label and in your own manual:
+
+- The pack reads **7.4 V 2200 mAh 10C**, and the manual's specification table gives the battery a **separate discharge connector** — *"SM connector with reverse-polarity protection."*
+- The charger in your kit is listed with a **male DC 5.5 × 2.5 connector** — so whatever the charger plugs into on the robot is that connector's mate, and a lead ending in that mate **dangles on purpose.**
+- And the manual's own storage advice is to *"disconnect the battery cable."* A joint designed to be unplugged is a joint you will find unplugged.
+
+So a lead hanging open at the side is normal, and I misread it. That's four of those tonight; I'm keeping count.
+
+**But what you've just told me is more useful than what I guessed.** Three wires, all sealed in plastic, means the battery itself has **no user joint** — the sealed ends are permanent. Which moves the question to where those wires end.
+
+**So one thing, and it's the last thing I'll ask for tonight:**
+
+Take the **red and black pair** — the two that leave the pack at the top and head upward — and follow them. They almost certainly run up through the deck to your blue terminal. **But if there's a plug anywhere along that run, and it isn't plugged in, that is your dead robot**, and it's the exact joint the manual tells you to open for storage.
+
+If the pair runs unbroken from this pack to the blue terminal, then the battery is wired, the pack is charged, and the fault is the terminal screws, the switch, or the board — and the meter arriving Friday closes that in one minute flat.
+
+**Two small things while the cover is off:** don't let the pack rest against bare metal with anything powered, and photograph where those two wires go. Then put the cover back on and call it a night — it's ten to twelve, you've flashed a card, and you've ordered the instrument that ends this class of problem.
