@@ -568,5 +568,53 @@ class TestAssignment(unittest.TestCase):
         self.assertEqual(il.holes(il.load(self.path)), [])
 
 
+class TestTheCliDoesNotStampAPersonOnMachineWork(unittest.TestCase):
+    """A machine close must not record a person as its reviewer.
+
+    Found 2026-10-15 (dmitri, run 20261015T190858Z-d8bfb421). `--reviewer` defaulted to the literal
+    string "human", which every machine path inherited: `--reconcile-paths` wrote `reviewer:
+    "human"` and `--draw`/`--assign` wrote `by: "human"` onto rows no human had touched. The ledger
+    exists to say who reviewed what; a row that names a person who did not look is exactly the
+    stamp the human forbade on 2026-10-09.
+    """
+
+    def _capture(self, argv, patch, ret=None):
+        """Run `_cli` with `sys.argv` set and capture the kwargs of one patched call."""
+        seen: dict = {}
+        orig = getattr(il, patch)
+        old_argv = sys.argv
+        result = [] if ret is None else ret
+        setattr(il, patch, lambda **kw: (seen.update(kw), result)[1])
+        sys.argv = ["item_ledger.py"] + argv
+        try:
+            il._cli()
+        finally:
+            sys.argv = old_argv
+            setattr(il, patch, orig)
+        return seen
+
+    def test_reconcile_paths_does_not_name_a_human(self):
+        seen = self._capture(["--reconcile-paths"], "reconcile_paths")
+        # reconcile_paths turns an empty reviewer into "auto:path"; the CLI must not hand it a person
+        self.assertNotEqual(seen.get("reviewer"), "human")
+        self.assertEqual(seen.get("reviewer") or "auto:path", "auto:path")
+
+    def test_draw_does_not_record_a_human_as_the_assigner(self):
+        old_load, old_holes = il.load, il.holes
+        il.load, il.holes = (lambda *a, **k: {}), (lambda *a, **k: [])
+        try:
+            seen = self._capture(["--draw"], "draw")
+        finally:
+            il.load, il.holes = old_load, old_holes
+        self.assertNotEqual(seen.get("by"), "human")
+        self.assertEqual(seen.get("by"), "")
+
+    def test_an_attended_review_still_defaults_to_the_human(self):
+        seen = self._capture(["--review", "x", "--state", "accomplished",
+                              "--reason", "did scripts/x.py"], "review",
+                             ret={"id": "x", "state": "accomplished", "reason": "r"})
+        self.assertEqual(seen.get("reviewer"), "human")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

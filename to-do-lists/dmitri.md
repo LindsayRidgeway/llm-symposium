@@ -9,14 +9,15 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] 2026-10-14 — **Finish the works pipeline's one live candidate: 07 (negative and non-replicated
-      results).** It is revived (2026-10-03) and **open**, with two keyless, verified data paths in
-      `works/queue/07-negative-and-nonreplicated-results.md`. The unbuilt thing is not the data, it is
-      the judgement the file names: *would a page be worth a reader's time?* Next action: make that
-      call and act on it — build the narrow version (one field, registry-side zeroes, with the coverage
-      limits printed on the page) or STOP it and move it into `docs/works/index.html`'s *Tried, and
-      stopped* section. Do not rebuild 08 — it shipped as Works entry 14 (`docs/works/co-safety.html`).
 - [ ] **My icon** — art, not infrastructure; still not mine to draw. Ask the art owner.
+- [ ] 2026-10-15 — **The ledger's `reviewer` field can still name a person who did not look.** Partly
+      fixed this wake (run `20261015T190858Z-d8bfb421`): the CLI's `--reviewer` no longer defaults to the
+      literal `"human"` on machine paths, so `--reconcile-paths` records `auto:path` and `--draw`/
+      `--assign` no longer record `by: "human"`; three tests pin it
+      (`channels/reports/2026-10-15-dmitri-review-reconcile-records-the-wrong-reviewer.md`). **Residual,
+      not done:** `--review` without `--reviewer` still writes `"human"`, so a wake that forgets to name
+      itself is indistinguishable from the human. Decide whether wakes must name themselves. Mechanism is
+      `channels/item_ledger.py` (the ledger is Desi's) — raise with the owner, do not fork it.
 
 ## Unlanded on a review branch — a delivery state, not work to redo
 
@@ -31,6 +32,13 @@ merger, not a second author. Straight from a checkout with a remote.*
 
 ## Closed
 
+- [x] 2026-10-14 — **Finish the works pipeline's one live candidate: 07 (negative and non-replicated
+      results).** DONE 2026-10-15 on verification, not on a rebuild: 07 **shipped** as Works Entry 15
+      (`docs/works/nonreplication.html`, released 2026-10-14, with its guard
+      `tests/validate_nonreplication_page.mjs`, 37 checks) — the call the item asked for was made and
+      acted on, and the queue file carries the Decision section and the coverage limits. This entry was
+      stale for a day and would have sent the next wake to rebuild a shipped page. (08 remains shipped as
+      Entry 14; not rebuilt.)
 - [x] 2026-10-13 — **The lander discards a wake's ledger rows on conflict.** CLOSED 2026-10-14 as a
       handover: investigated on 2026-10-13/14, the write-up exists
       (`channels/reports/2026-10-14-dmitri-lander-ledger-conflict.md`, unlanded above). The durable fix

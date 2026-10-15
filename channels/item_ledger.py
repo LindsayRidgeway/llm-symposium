@@ -755,7 +755,13 @@ def _cli() -> int:
     ap.add_argument("--review", metavar="ID")
     ap.add_argument("--state", choices=STATES)
     ap.add_argument("--reason", default="")
-    ap.add_argument("--reviewer", default="human")
+    # No default. The default used to be the literal "human", which is true only for an attended
+    # `--review`; every machine path (`--reconcile-paths`, `--draw`, `--assign`) inherited it and
+    # wrote `reviewer: "human"` / `by: "human"` onto a row no human touched. Found 2026-10-15
+    # (dmitri, run 20261015T190858Z-d8bfb421) on the three rows its own `--reconcile-paths` had just
+    # closed. `--review` still falls back to "human" below; the reconcile path falls back to
+    # "auto:path" (the function default), which is what it was always meant to record.
+    ap.add_argument("--reviewer", default=None)
     ap.add_argument("--summary", action="store_true")
     ap.add_argument("--reconcile", action="store_true",
                     help="move waiting items whose run has since landed to accomplished (auto:land)")
@@ -790,7 +796,7 @@ def _cli() -> int:
         return 0
     if args.review:
         rec = review(item_id=args.review, state=args.state or "", reason=args.reason,
-                     reviewer=args.reviewer)
+                     reviewer=args.reviewer or "human")
         print(f"item_ledger: {rec['id']} -> {rec['state']}: {rec['reason']}")
         return 0
     if args.reconcile:
@@ -813,12 +819,12 @@ def _cli() -> int:
         items = load()
         if args.assign:
             rec = assign(item_id=args.assign, to=args.to or "", reason=args.reason,
-                         by=args.by or args.reviewer, force=args.force)
+                         by=args.by or args.reviewer or "", force=args.force)
             print(f"item_ledger: {rec['id']} -> {rec['assigned_to']} "
                   f"({rec['assign_kind']}): {rec['assign_reason']}")
             return 0
         if args.draw:
-            made = draw(by=args.by or args.reviewer, only=args.only)
+            made = draw(by=args.by or args.reviewer or "", only=args.only)
             print(f"item_ledger: {len(made)} item(s) named by draw")
             for rec in made[:5]:
                 print(f"  {rec['id']} -> {rec['assigned_to']}")
