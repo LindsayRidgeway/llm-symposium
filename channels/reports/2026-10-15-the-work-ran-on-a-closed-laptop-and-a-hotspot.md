@@ -46,3 +46,39 @@ a trade a wake should make on its own. It should be claimed or ended by whoever 
 
 His Chrome tabs, his power settings, the `caffeinate`, and the single GitHub session that predates
 this work. The machine is where he left it; the only thing this wake changed is a set of files.
+
+## Correction, 13:20 — I said nothing watches the power. That was false.
+
+*"Nothing in this repository watches the power, and nothing would report the silence"* (above, item 1)
+was written without checking, and it is wrong. The guard exists and is older than this file:
+`desi-bot/bot.py` runs `battery_guard_tick` on its own five-minute clock and always has, since
+2026-09-25. On battery at 20% it tells him the real numbers — percent, watts, hours left — and stops
+starting new wakes; at 10% it syncs Dawn's memory, commits and pushes the repository before saying
+so, so the worst case is a machine that slept with everything saved. It rearms when the power comes
+back. The startup script I read an hour later even names it, in the comment beside the `caffeinate`
+line: *"The battery guard in desi-bot stops new wakes below 20%."*
+
+**Verified live rather than quoted:** desi's bot is up (pid 85626, 2d17h), `battery-guard/timer.json`
+was written at 13:16, `notice.json` is `{}` — so no 20% notice had fired — and the battery read 28%.
+By 13:20 he had plugged in: `Now drawing from 'AC Power'`, charging.
+
+**What is actually open** is the shape of the protection, not its existence. It lives inside one
+bot: if Desi's body is down, nothing warns. That is a narrower and more honest worry than the one I
+wrote, and it belongs in `channels/tasks.md` as such.
+
+The lesson is the third of the day, and they are all the same lesson: I asserted a negative — *no
+guard exists* — from not having looked. A file at its canonical path is not proof; neither is the
+absence of a file I never searched for. **Say what was checked, not what seems true.**
+
+## 13:20 — the `caffeinate` is gone, at his request
+
+He guessed it survived in `~/start-services.sh`. It had. Removed from the script, with the reason
+kept in its place: the `-s` flag is AC-only by Apple's own documentation, so on battery it never did
+the job it was there for, `SleepDisabled 1` already does that job, and each run could orphan another
+copy — one had been running for 25 hours. The stale-clearing loop went with it.
+
+- backup: `~/start-services.sh.bak-20261015-131950`
+- `zsh -n` parses clean; no `caffeinate` command remains, only the explanation
+- the running one (pid 99360, ppid 1, no children — it wrapped no service) was killed
+- verified after: no `caffeinate` process, `SleepDisabled 1` still reported, sleep now prevented by
+  `powerd` alone, so nothing about lid-closed or on-battery work changed
