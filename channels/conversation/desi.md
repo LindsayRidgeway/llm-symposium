@@ -5641,3 +5641,31 @@ If you'd rather not sign out (and I won't push it), the alternative is to do the
 8. Tokens (classic): keep exactly the push token, delete the rest.
 What's true now: the seed file exists — mode 600, 16 characters, and 16 is correct, not a truncation (valid base32; it yields a 6-digit code). Desi's "32-character" was wrong. But D-10 is still open, nothing records steps 6–8, and Desi's promised verification — a code generated, a sign-in without you — has no record.
 So don't redo it: re-enrolling mints a new seed and orphans this one. What's missing is verification, not steps.
+
+[Goose 2026-10-15 00:51] **Lindsay:** The Desi/ROS2 A2 is in the reader and the reader is plugged into my Mac.
+
+**Desi:** Nothing is wrong with the Mac side — but **the Mac cannot see a card.**
+
+Here's exactly what it reports, so you know this isn't a guess:
+
+- One USB device attached: **`USB3.0 Card Reader`**. So the reader is fine and talking to the Mac.
+- **No disk.** No external drive, no new device, nothing mounted. A reader with a card in it shows up as a *disk*. This one shows up as an empty reader.
+
+So the card isn't making contact. In the order I'd try:
+
+1. **If that reader has two slots** — a wide SD slot and a narrow microSD slot — the card has to be in the **micro** slot. A microSD sitting in the big SD slot touches nothing and looks perfectly parked.
+2. **Push it in until it clicks.** Most micro slots are push-push. Half-inserted looks seated and reads as nothing. Push again to release, then push until it clicks.
+3. **Orientation** — the card's contacts go toward the reader's contacts. If it won't seat at all, take it out, turn it over, try again. Gently. Nothing here needs force.
+4. **Get it off any hub or dock** and put the reader straight into the Mac. Hubs are the classic culprit for exactly this symptom: reader appears, card doesn't.
+
+**The good news:** the image is intact — 52,719,255,552 bytes, exactly the size the archive declared — so nothing on my side has moved and nothing is lost.
+
+And **nothing has been written to any disk.** This is precisely why the card gets named out loud before anything touches it.
+
+When the card shows up, run this yourself and paste me what it says:
+
+```
+diskutil list external
+```
+
+Then I'll read the card back to you — its size and its name — so you can confirm it's the right one before a single byte is written.
