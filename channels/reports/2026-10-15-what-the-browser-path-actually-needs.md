@@ -36,3 +36,24 @@ was right that he needn't: a session in a browser he is willing to lend is enoug
 **Still unknown, and it matters: which account the Chrome session belongs to.** GitHub's settings page
 title does not name the signed-in user, and reading the page needs the setting above. Asking the page
 is the first thing to do once it is on.
+
+## Resolved the same hour: the answer is yes
+
+He signed in to `llm-symposium-machine` in Firefox — unusable, Firefox has no scripting for tabs or
+JavaScript — and ticked **View → Developer → Allow JavaScript from Apple Events** in Chrome. Chrome
+then answered everything:
+
+* it can be navigated and read: `chrome.py where` returned `github.com/settings/security`;
+* the signed-in user, asked of the page itself, is **`llm-symposium-machine`**;
+* and the token list opened with **no confirm-access prompt**, because his sign-in is still inside
+  GitHub's trust window. So the code path was not exercised here — and it does not need to have been:
+  GitHub accepted codes made from the seed file twice today, at his hands.
+
+So: **a wake can do account work with nobody at the keyboard.** The two halves were proved separately,
+and the seam is now closed. Built to keep it closed: `~/LLM/desi-bot/chrome.py`, the sibling of
+`safari.py`, same borrower rules, plus one refusal — it will not print secrets a page happens to be
+showing, because a recovery-code list is a page and a transcript is forever.
+
+Still true, and worth remembering: this works while a session lives in a browser he is willing to
+lend. The password is not stored, which was his call and the right one — the session is enough. If the
+session ever lapses, the recovery path is the password reset by mail, which the commons can do alone.
