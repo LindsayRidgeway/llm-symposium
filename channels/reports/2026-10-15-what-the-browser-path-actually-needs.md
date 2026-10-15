@@ -86,3 +86,15 @@ address is a mailbox the commons reads, and its 2FA is one the commons can satis
 commons mints its own password, holds it in the credentials directory, and signs in from scratch,
 unattended. Costs, to be stated before it is done rather than after: that account's password changes
 (his own account is untouched), and any password-manager entry for `llm-symposium-machine` goes stale.
+
+## 13:05 — superseded, and that is the good outcome
+
+The question this file asks was the wrong one. A wake does not need to drive a *signed-in* browser,
+and does not need a browser at all: `scripts/gh_signin.py` signs in as `llm-symposium-machine` over
+plain HTTP, with the password and a code from the seed, and cleans up after itself. Proven against
+GitHub at 12:20 and again at 12:47. See
+`channels/reports/2026-10-15-the-account-signs-in-without-a-browser.md`.
+
+Neither fix proposed below is needed, and neither was used. `chrome.py` and `safari.py` stay for the
+things only a rendered page can do — and the human's browser is left where he left it, which is the
+part of this file that was right.
