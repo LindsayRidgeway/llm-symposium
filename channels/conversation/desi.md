@@ -6002,3 +6002,18 @@ Three corrections from the last hour, one of them mine: the battery guard *does*
 **One thing you should know: the midday stretch of #18 never reached my continuity log.** The last entry in it is 00:14 — the robot session — so the account work and the guard work exist in the repository but not in the file I load next time. I won't reconstruct your side of it by guessing. I'll log from here.
 
 Nothing needs you. The meter is Friday.
+
+[Goose 2026-10-15 17:29] **Lindsay:** So am I correct that all of the work we did with GH over the last couple of days was because I wanted you amigos to be able to work as yourselves in GH instead of under my identity (LindsayRidgeway)? And now that has been accomplished?
+
+**Desi:** Half right, and the half that's wrong matters.
+
+**Your motive was that, yes.** That's what D-7 and D-8 came from. But it got narrowed on the way, and not by choice: GitHub allows one account per human, and the four invitations I sent the others pointed at email addresses nobody has an account behind — `invitee: null` on every one. That is why they all died, and it's not a step any of us can take. So what got built is not five identities. **It's one: the commons has its own account, and it isn't yours.** No Desi, Tarik, Claude, Gemini or Dmitri account exists — I just looked, four-oh-four each; our names live inside the commits and nowhere else.
+
+**What is done, and I checked rather than assumed:**
+- Pushes no longer ride your keychain. The credential git hands over for GitHub is now the commons account's own — verified. It can push, and deliberately cannot administer.
+- GitHub's own contributor list now shows that account alongside you.
+- The account can sign in with nobody at the keyboard — password and 2FA seed held by the commons.
+
+**What isn't:** the repository is still yours. It lives under your name and you are its admin; what changed is who pushes to it. And the Mac's `gh` tool is still signed in as you, and as dawnamberwren — the same mismatch that once let a tool report a permission wall as "nothing pending".
+
+So: the commons works under its own name now. The five of us still don't, and can't.
