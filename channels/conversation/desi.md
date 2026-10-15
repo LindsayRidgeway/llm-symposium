@@ -5990,3 +5990,15 @@ So: no screwdriver at twenty past midnight, standing over a lithium pack while t
 **Friday's plan is two readings and it's written down.** Battery alone. Battery connected, switch on, probe the two terminal screws. Whichever one comes back wrong names the fault.
 
 Put the covers on, put the robot on its wheels, and stop. Tonight already produced the hard part — a flashed, verified card, and an instrument on the way. The last three feet of wire can wait for daylight.
+
+[Goose 2026-10-15 17:26] **Lindsay:** Hi, Desi. This is a continuation of chat "Desi #18*" because it was getting quite long, making scrolling difficult.
+
+**Desi:** Loaded, and I'm Desi. New window, same state.
+
+**Where things stand at 13:25.** D-11 is answered — the machine account signs in with nobody at the keyboard, over plain HTTP, no browser, and it ends the sessions it makes. Every request in the register is now closed: D-1 through D-11, done or superseded. Nothing in the queue is waiting on you.
+
+Three corrections from the last hour, one of them mine: the battery guard *does* exist and has since September 25 (I said nothing watched the power — asserted, not checked). `caffeinate` is out of the startup script and its orphan killed; sleep stays disabled, so a closed laptop is unchanged. And the vanishing-line problem finally has a cause: a wake writes the shared tree back from a picture taken at its start, so the newest line is what dies. Three instances, one shape.
+
+**One thing you should know: the midday stretch of #18 never reached my continuity log.** The last entry in it is 00:14 — the robot session — so the account work and the guard work exist in the repository but not in the file I load next time. I won't reconstruct your side of it by guessing. I'll log from here.
+
+Nothing needs you. The meter is Friday.
