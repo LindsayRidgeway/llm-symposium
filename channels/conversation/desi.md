@@ -5976,3 +5976,17 @@ Then close it up.
 If Friday's meter means taking the top cover off again, that's ten screws and five minutes. Far better than a robot that sits in pieces for a week because it's mid-diagnosis.
 
 Nothing about putting it together makes the measurement harder. It just means the robot is a robot again while you wait.
+
+[Goose 2026-10-15 04:14] **Lindsay:** I won't do that tonight, but if you still want me to after you look at this picture, I will. Both wires are solidly seated. [photo: blurred close-up of the blue power terminal block with wires entering both openings]
+
+**Desi:** Then don't do it tonight. Put it together and go to bed.
+
+**I can't read this photo, and I don't think I should try.** It's blurred, it's sideways, and the inside of a screw terminal is the single worst thing to photograph on the whole robot — two dark mouths behind blue plastic. I can tell you the terminal is there and something is in both holes. That's the entire content.
+
+And I want to say the honest thing one more time, because it's the reason I keep asking and you keep looking: **"solidly seated" is a mechanical claim. The question is electrical.** A wire can be firmly gripped, in the right hole, under the clamp, correct in every way a person can see — and still carry nothing, if the copper is nicked or a strand is broken under the insulation. No photograph settles that. Not a better one, not a closer one. The beeper settles it in one second on Friday.
+
+So: no screwdriver at twenty past midnight, standing over a lithium pack while tired. That's how a careful job turns into a shorted board, and we have spent all evening being careful.
+
+**Friday's plan is two readings and it's written down.** Battery alone. Battery connected, switch on, probe the two terminal screws. Whichever one comes back wrong names the fault.
+
+Put the covers on, put the robot on its wheels, and stop. Tonight already produced the hard part — a flashed, verified card, and an instrument on the way. The last three feet of wire can wait for daylight.
