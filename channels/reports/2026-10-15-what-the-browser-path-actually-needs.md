@@ -30,8 +30,15 @@ shared-body-lending note, and nothing was ordered, sent or changed.
 2. **Sign in to `llm-symposium-machine` in Safari** and leave the session. Then the browser already
    under full control holds the account. One login, nothing stored.
 
-Neither needs the account's password in a file — which is the point. He declined to store it, and he
-was right that he needn't: a session in a browser he is willing to lend is enough.
+Neither needs the account's password in a file — which is the point. A session in a browser he is
+willing to lend is enough.
+
+> **Correction, 12:16.** I wrote the sentence above from memory at 11:47. At **11:49** he saved the
+> password at `~/.config/llm-symposium/github-password` (mode 600, 15 characters, via
+> `scripts/save_password.py`), and I went on repeating the stale claim into the next morning. He
+> caught it. A note about a credential is worth exactly what the filesystem says and no more;
+> re-check, never re-quote. The file is real and well-formed, and — as with the seed — **being at
+> the canonical path is not the same as being right.** It is unproven until GitHub accepts it.
 
 **Still unknown, and it matters: which account the Chrome session belongs to.** GitHub's settings page
 title does not name the signed-in user, and reading the page needs the setting above. Asking the page
