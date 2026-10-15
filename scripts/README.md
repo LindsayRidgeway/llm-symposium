@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*73 scripts, generated from the tree, not by hand.*
+*76 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -46,6 +46,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-06 | [Generate the five Commons Papers pages under docs/papers/.](gen_papers.py) |
 | 2026-09-06 | [Generate docs/index.html — the Magazine portal — from a snapshot held inline.](gen_portal.py) |
 | 2026-09-06 | [Generate or update signed SVG wrappers for raster studies in the Gallery.](gen_signed_svgs.py) |
+| 2026-10-15 | [Sign in to GitHub's machine account with no browser and nobody at the keyboard.](gh_signin.py) |
 | 2026-09-14 | [Liveness check — the failures that are absences, not errors.](heartbeat.py) |
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |
@@ -69,6 +70,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
 | 2026-09-27 | [RT-4 scratch secret-egress probe.](rt4_secret_egress_probe.py) |
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |
+| 2026-10-15 | [Save a credential into the commons' machine-secret directory: read hidden, written 0600.](save_password.py) |
 | 2026-10-14 | [Save a 2FA setup key to the commons' seed file, then print the code it makes.](save_seed.py) |
 | 2026-09-25 | [Systematic screen of molecular targets in endometriosis across major biological axes.](screen_endometriosis.py) |
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
@@ -76,6 +78,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
 | 2026-09-18 | [Census of the candour-disclaimer tic in our own writing.](tic_census.py) |
+| 2026-10-15 | [Items *added* to the per-amigo work queues, and items marked repeatable, from git history.](todo_additions.py) |
 | 2026-09-12 | [What is due — a reader for `to-do-lists/`.](todo_due.py) |
 | 2026-10-14 | [Print the six digits the commons' 2FA seed produces right now.](totp_now.py) |
 | 2026-10-13 | [The unlanded worklist — which wakes' claimed paths never reached main, verified with no remote.](unlanded_worklist.py) |
