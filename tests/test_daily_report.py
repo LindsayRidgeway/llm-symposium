@@ -21,7 +21,14 @@ sys.path.insert(0, str(REPO))
 
 import scripts.daily_report as dr_mod  # noqa: E402
 from channels import item_ledger as il  # noqa: E402
-from scripts.daily_report import AMIGO_ORDER, DISPLAY_TITLE, _bucket, _short, render  # noqa: E402
+from scripts.daily_report import (  # noqa: E402
+    AMIGO_ORDER,
+    DISPLAY_TITLE,
+    POSTPONED_SHOWN,
+    _bucket,
+    _short,
+    render,
+)
 
 
 class TestInputBuckets(unittest.TestCase):
@@ -135,11 +142,26 @@ class TestReportShape(unittest.TestCase):
 
     def test_the_waiting_total_survives_truncation(self):
         # He accepted a truncated list *as long as the total is still shown* (2026-10-06), and the
-        # waiting list is now the one that grows.
-        out = render(hours=24)
-        self.assertIn("Waiting for review", out)
-        self.assertIn("showing", out)
-        self.assertIn("oldest shown first", out)
+        # waiting list is now the one that grows. This test used to render the LIVE ledger and
+        # assert the truncation phrase — so it failed the moment a wake drained W below the display
+        # limit, and the lander refused the very diff that emptied the queue: the wake that drains W
+        # could not land the change that drains W. It builds its own pile now, through the renderer's
+        # `items` seam, so it pins the rule and not today's data.
+        def pile(n):
+            return {f"w{i}": {"id": f"w{i}", "amigo": "gemini", "scope": "internal",
+                              "state": None, "filed_utc": f"2026-10-0{i + 1}T00:00:00Z",
+                              "title": f"waiting item {i}"} for i in range(n)}
+
+        # A pile past the display limit truncates: the total is shown and so is the phrase.
+        long_pile = render(hours=24, items=pile(POSTPONED_SHOWN + 2))
+        self.assertIn("Waiting for review", long_pile)
+        self.assertIn("showing", long_pile)
+        self.assertIn("oldest shown first", long_pile)
+        # A pile at or under the limit does not truncate — and the total must survive anyway.
+        short_pile = render(hours=24, items=pile(POSTPONED_SHOWN))
+        self.assertIn("Waiting for review", short_pile)
+        self.assertIn("showing", short_pile)
+        self.assertNotIn("oldest shown first", short_pile)
 
     def test_the_accomplished_split_is_never_hidden(self):
         # A is one letter with two causes: a review, or the lander's test gate. The human's whole

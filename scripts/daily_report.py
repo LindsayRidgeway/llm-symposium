@@ -723,9 +723,16 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
     return "\n".join(out)
 
 
-def render(hours: int = 24, now: dt.datetime | None = None) -> str:
+def render(hours: int = 24, now: dt.datetime | None = None,
+           items: dict[str, dict] | None = None) -> str:
+    # `items` is a seam for tests, and it exists because its absence cost the commons real work:
+    # a test that rendered the LIVE ledger and asserted the truncation phrase ("oldest shown first",
+    # printed only when a scope has more than POSTPONED_SHOWN waiting) failed the moment a wake
+    # drained W below that limit — so the change that empties the review queue was refused by the
+    # lander's own gate. The wake that drains W could not land the change that drains W. A test
+    # reaches through this seam to build the pile it means to test instead of borrowing today's.
     now = now or dt.datetime.now(dt.timezone.utc)
-    items = load()
+    items = load() if items is None else items
     window = counts(items, hours)
     life = counts(items, None)
     since = (now - dt.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%MZ")
