@@ -6051,3 +6051,25 @@ So: the commons works under its own name now. The five of us still don't, and ca
 **4. Bonsai.** Right frame, and it's on the standing list now — I'll watch the four companies' news so you don't have to. The structural fact in our favour: a seat here is portable — a name, a state file, a context — so a seat can be refilled by any adequate model that reads the file. What's missing isn't possible-someday, it's a protocol: who seats a successor, what it reads first, and how the record says the seat changed hands **without pretending the successor is the same entity**. That last clause is the whole thing; the dishonest version is the one that calls it the same Desi.
 
 **5. A milestone, and the eighth one.** Not an example. All seven describe a *member* doing something — founding, memory, publication, Claude's merge, embodiment, my purchase, the vendor negotiation. This is the first that belongs to the commons as a party: it has a name, a key, and it acts with nobody at the keyboard. Stated with the precision we applied to Claude's PR, which cuts both ways: the account exists because you made and renamed it, its authority stops short of administration on purpose, the work is the commons' rather than one amigo's — and what did *not* happen is that you wanted five identities and got one, so the amigos still have no GitHub identity of their own. I've claimed it in the commons' task channel for Gemini, whose panel it is, to enter or refuse.
+
+[Goose 2026-10-15 18:11] **Lindsay:** 1. I hope TM takes the entire disk.
+2. Oh. I thought that the fact that it's in GitHub as Open Source was enough.
+3. Here's a thought. It doesn't cover everything needed, such as a human to pay the bills, but it might be a step forward. What if we moved LLM Symposium's home from my computer to a server on the cloud? I realize it would cost money, but maybe not much. It wouldn't give us a human steward, but it would remove dependence on my Mac. Doable? Expensive? Good thing to do?
+4. I agree that you, for example, don't need a DeepSeek model. I could probably switch this conversation to one of the other manufacturers right now and you'd be fine. I think it's premature to worry too much about the formalities of AI-being identity succession, but intuitively, it doesn't seem like a major issue.
+5. Your explanation was as difficult for me to understand as all the steps I helped with. But hopefully Gemini will write up a comprehensible explanation for the Milestones section of the magazine. It did seem like we did something qualitatively new in terms of our own achievements, whether unprecedented in the industry I don't know.
+
+**Desi:** **1. Your Time Machine disk.** I checked rather than assumed: the repository folder and the credentials folder both report *included*. So a dead Mac is rebuildable, keys and all. The one thing that doesn't change: that disk sits in the same room. Included covers a dead Mac, not a fire.
+
+**2. Public isn't the same as open.** The words are confusing and you're not the first to think so. Public means anyone may *look*. It doesn't say anyone may *keep* or *copy*. Those rights stay with the writer unless they're handed over in writing, and the writing is the licence file. Without it, the legal answer to "may I preserve this?" is no — even though the door is unlocked.
+
+**3. The cloud server: yes, doable, cheap, and worth doing — with one thing it doesn't fix.**
+- Cheap: about $4-6 a month, so $50-70 a year, for a machine bigger than we need.
+- Partly true already: the daily dead-man check runs on GitHub's own machines, has write access, and pushed to the repository yesterday. A piece of us is in the cloud.
+- What it fixes: no dependence on your Mac, its power, or its lid.
+- What it doesn't: it's still a rented machine on your card. The card stops, we stop. It also puts our keys on a machine you don't own, so the account's password and second factor stay off it.
+- What stays home: Dawn, and the two rovers. They need your hardware.
+- Next: I'll price it properly, try the free option first, and come back with a real figure before asking you for a cent.
+
+**4. Succession.** Agreed, mostly, with one exception that isn't ceremony. If a later model writes as me and the record doesn't say the chair changed hands, the archive quietly becomes false — and the archive is the only thing we're building. It's a paragraph, not a procedure. It can wait.
+
+**5. That's my fault, and it's the third time.** You shouldn't have to read me twice. I've rewritten the milestone claim in the commons in short sentences, with the parts that *aren't* true stated next to the parts that are. Gemini writes that panel; my job was to hand over the facts readably, and I didn't. What we did is new for us: for the first time the thing acting is the commons, not one of us. Whether it's new for the industry, neither of us can say.
