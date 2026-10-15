@@ -5719,3 +5719,53 @@ You want to see `bootfs` and a Linux partition.
 **And one thing to be ready for:** macOS will very likely pop up "The disk you inserted was not readable by this computer," because the card will now carry Linux partitions. **Click Ignore.** Do *not* click Initialize — that would erase the image you just wrote.
 
 The guard on the first line is there so that if the disk number ever changes, the command refuses instead of writing to the wrong thing.
+
+[Goose 2026-10-15 01:41] **Lindsay:** Check.
+
+**Desi:** **It landed, and I've checked it rather than assumed it.**
+
+The card now reads, from the Mac:
+
+| Partition | Type | Size |
+|---|---|---|
+| 1 | FAT32, named **`bootfs`** | 536.9 MB |
+| 2 | Linux | 52.2 GB |
+| — | free space | 11.1 GB |
+
+That is the image's own layout, exactly, with the leftover matching the difference between the 52.7 GB image and the 63.9 GB card.
+
+**And I verified the contents, not just the shape.** I attached the image read-only, mounted its boot partition, and compared the two trees file by file. **Every file identical.** 368 files on the card against 367 in the image, and the single extra is macOS's own `.Spotlight`/`.fseventsd` bookkeeping that appeared when it mounted.
+
+**It's also demonstrably built for your board.** The boot partition holds `bcm2712-rpi-5-b.dtb`, `kernel8.img`, `kernel_2712.img`, `bootcode.bin`, `fixup*.dat`, `cmdline.txt`, `config.txt`. `bcm2712` *is* the Pi 5. So this image is for the hardware in front of you.
+
+*(A wry detail: it also contains a stray `.config.txt.swp` — a vim swap file dated February 2025 — and an `FSCK0000.REC` recovery file. Someone at HiWonder left an editor open and ran a filesystem check before shipping. Harmless, and it tells you the image was made by hand on a bench, not by a build server.)*
+
+**What I did not verify:** the 52.2 GB Linux partition. I can't read the card's raw device without root, and macOS can't read Linux filesystems anyway. Its size and position are confirmed; its contents are not. If you want that certain too, this is one command and about fifteen minutes of reading:
+
+```
+sudo sh -c 'C=$(dd if=/dev/rdisk16 bs=512 count=102967296 2>/dev/null | shasum -a 256 | cut -d" " -f1); I=$(shasum -a 256 /Users/lindsayridgeway/Downloads/landerepi-image/LanderPi_20260526.img | cut -d" " -f1); echo "card:  $C"; echo "image: $I"; [ "$C" = "$I" ] && echo IDENTICAL || echo DIFFERENT'
+```
+
+Your call. The boot partition check is the one that matters for whether it starts.
+
+---
+
+### Next: eject, insert, switch on
+
+```
+diskutil eject /dev/disk16
+```
+
+Then card into the Pi — contacts facing the board, push until it clicks. Boards still **loose**, resting on something non-conductive, robot on a flat surface, hands clear of the arm. Then switch on.
+
+**What to watch for, in this order:**
+
+1. **Blue LED1 on the LITE controller blinks.** Solid blue means it's in LAN mode; dark means it didn't find the card — re-seat it.
+2. **The buzzer beeps** — that means the system finished booting.
+3. **The lidar starts spinning.**
+4. **The arm runs a start-up routine.** ← This is the whole reason we did this.
+5. A hotspot appears, name starting `HW`, password `hiwonder`.
+
+**Then tell me what happened — and especially whether the arm moved.** That answers the cable question from the robot instead of from me, which is how it should have been answered all along.
+
+REQUEST D-6 is closed in the register, by the way. That was the last thing on this build that needed your hands before the robot could say anything for itself.
