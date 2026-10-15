@@ -5955,3 +5955,24 @@ Every one of those is a **measurement**, and the meter lands Friday. Two reading
 That's the whole plan, and it fits on a sticky note. Put the cover back on, don't leave the pack resting on bare metal, and go to bed.
 
 For what it's worth, tonight produced the thing this build has been blocked on since the eleventh: **there is now a flashed, verified card for that robot**, and it's sitting in the Pi. The rest is one dead joint somewhere in three feet of wire, and Friday's meter will find it.
+
+[Goose 2026-10-15 04:06] **Lindsay:** Actually, I want to put everything back together. It is very uncomfortable leaving it disassembled. If I need to take a board or three off again to do our measurements, I'd rather do that than leave it the way it is. [photo: the LanderPi on a table, boards off, arm attached, chassis bare]
+
+**Desi:** Put it back together. That's the right call, and not just because you want it — a robot in pieces on a table is a robot nobody touches, and this one has been in pieces since October the eighth.
+
+**But do one thing first, while the battery cover is already off, because it's the only diagnostic available tonight and it costs nothing:**
+
+Take a screwdriver to the two screws in the blue terminal. Loosen each one, look at the bare copper, make sure the wire is **under the metal clamp** and not alongside it, then tighten firmly. A strand outside the clamp looks exactly like a strand inside it, and that is suspect number one for a robot that is completely dark. **Before and after, photograph the terminal with the wires in it** — when the meter arrives you'll want to know exactly which screw you're probing.
+
+Then close it up.
+
+**Two things to carry through the reassembly:**
+
+1. **Leave the two mystery 3-pin cables loose and *reachable*.** Don't bury them under a cover and don't be tempted into a socket. Nothing is damaged by a loose cable; the only risky state is a wrong socket. If they'll end up trapped, tape them somewhere you can still get two fingers to them.
+2. **Note or photograph which cable sits in which socket** as you go. It costs thirty seconds now and it's the thing that turns "some cable" into "the green one" later.
+
+**Reassembly order:** battery cover → LITE board back onto the Pi's standoffs → power cable and data cable into the Pi → top cover with the WonderEcho Pro → done.
+
+If Friday's meter means taking the top cover off again, that's ten screws and five minutes. Far better than a robot that sits in pieces for a week because it's mid-diagnosis.
+
+Nothing about putting it together makes the measurement harder. It just means the robot is a robot again while you wait.
