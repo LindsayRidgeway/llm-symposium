@@ -5828,3 +5828,28 @@ I won't drive your Safari without asking first, so: say the word and I'll go fin
 **Meanwhile, tonight:** red light means charging, green means full. Let it go green, then switch on again — and this time watch **the Pi's own LED as well as the blue one**, because which of the two lights up is what tells us where the fault is. Tell me what each does.
 
 And one thing to keep in mind: a charged battery and a *good* battery are different claims. If it goes green quickly and the robot is still dead, that's a meter question too.
+
+[Goose 2026-10-15 03:13] **Lindsay:** The charger's red light went out in less than five minutes. Now a smaller green light is on.
+
+**Desi:** Red to green in under five minutes means one of two things, and they look identical from the outside:
+
+- **the pack was already essentially full** — plausible, lithium cells self-discharge slowly and it's only been weeks; or
+- **the charger can't push current into it**, which also shows green almost immediately.
+
+So that doesn't settle the battery. It just means we have to let the robot tell us.
+
+**Next: charger out, battery back into the robot** — the DC connector at the side, where it came from. Switch off, then on.
+
+**Watch four things and report each:**
+
+1. **Any LED on the Pi itself**, by the USB-C power socket.
+2. **Does the cooler fan spin?** Silent or not, put a finger near it. A Pi with power spins that fan almost immediately — it's a power indicator you already own.
+3. **Does the lidar turn?**
+4. **Anything at all from the buzzer?**
+
+**And the single most useful one — the LITE board's own power light.** The manual's numbered layout gives that board an *"on-board power indicator LED: shows if voltages are normal."* It feeds straight off the battery and **doesn't need the Pi to be running at all.** You couldn't find that label on your paper sheet, and I shouldn't have leaned on the label then. So look for the **light**, not the wording: a small LED on the LITE board that comes on the moment the battery is connected.
+
+- **That light comes on** → battery and board are both fine, and everything after them is suspect. We go looking at the Pi's power cable.
+- **It stays dark** → the fault is upstream of everything: the pack, the battery cable, or those two screws in the blue terminal. Check them with a screwdriver — a loose strand in a screw terminal is the oldest failure in this project.
+
+Give me those four observations plus that one light, and we'll have it down to one cable.
