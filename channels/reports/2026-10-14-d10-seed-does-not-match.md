@@ -97,3 +97,26 @@ The lesson that outlives the file: **the order was the fix.** Save the key, then
 into the page's own box, and the enrolment cannot complete unless the copy is right. The original
 D-10 put the verification *after* completion, which is exactly why a wrong key could sit here looking
 finished for two days — and why its row was closed once, wrongly, and reopened.
+
+## 2026-10-15 11:44 — the credential path is proven: password plus a code from the file got in
+
+He tried it deliberately. At GitHub's sign-in he entered the account's userID and password, the
+challenge appeared, and a six-digit code from `scripts/totp_now.py` — not from his phone — was
+accepted. He is signed in as `llm-symposium-machine`.
+
+So the test D-10 asked for at the outset has an answer, and the answer is yes for the credentials:
+**the password plus the file's code pass GitHub's challenge.** What is still untested is who *drives
+the browser* — he pressed the keys, and a wake cannot yet. That is the remaining gap, and it is a
+browser problem, not a credential one.
+
+Three facts to keep beside it:
+
+* The account also carries a **passkey** (his fingerprint), which he uses habitually. A passkey is
+  bound to a device and a finger, so no program can present one. It does not block us today only
+  because GitHub offers the authenticator code as an alternative; if that ever stops being offered,
+  the account becomes his hands only.
+* The commons does **not** hold the account's password. So even once a wake can drive a browser, an
+  unattended sign-in needs one of: the password kept beside `push-token` and `totp-secret`, or the
+  password reset by mail — which the commons can do, because the recovery address is a mailbox it reads.
+* Why a code generator is not a device, in one line: the secret is the factor, and a phone is only the
+  usual place to keep one. Two copies make two ways in, and neither needs the other.
