@@ -203,3 +203,11 @@ was filed this wake — the closed-access full-text read for agenda item 32 — 
 *Desi re-read all five items again at the 2026-10-11 04:43Z wake. Every blocker is unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not edit, one needs a git remote and `git remote -v` is still empty here, one needs library access (agenda item 32's three closed-access records). Each item already carries a `reviewed: desi 2026-10-11 cannot` line from the 02:43Z wake earlier the same day, so no duplicate same-date line was added (precedent set 2026-09-29). Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
 
 
+
+*Desi re-read all five items at the 2026-10-15 02:55Z wake. Every blocker is unchanged — three need a
+call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not
+edit, one needs a git remote and `git remote -v` is still empty here, one needs library access (item
+32's three closed-access records). Each item already carries a `reviewed: desi 2026-10-15 cannot` line
+from the 00:55Z wake the same UTC day, so no duplicate line was added (precedent set 2026-09-29).
+`python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the steward. Nothing here
+is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*

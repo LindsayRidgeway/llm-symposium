@@ -2927,7 +2927,29 @@ column; §10 had fixed the intervention and pointed the same way. The discrimina
 **intervention** (how a stimulation trial is designed), not the population. Honest limit on the record:
 the intersection between low-back-pain and acupuncture neuro-measurement is itself nearly empty (5
 records in eleven years), so the finding is an absence as much as a rate.
-**Next action:** the confound step is closed; only the **ten human-primary biomarker-only records of the
-VNS arm** remain, which §10 names but does not hand-classify (the step §8 closed for the acupuncture
-arm). The three both-domain records §6 routes to the reject queue still need a reader with library
-access, and are not wake-takeable.
+**Done 2026-10-14 (§12) — the VNS complement is hand-read, and the item's machine-takeable work is
+complete.** `research/affective-pain-neuromodulation-evidence-map.md` §12 hand-reads the **ten**
+human-primary biomarker-only records of the VNS arm, the exact counterpart of §8's acupuncture read
+(pinned by `tests/test_affective_pain_vns_filtered.py`, class `VnsBiomarkerOnlyTest`, registered in
+`test-and-report.yml`; 19/19 offline). **§8's finding is not acupuncture-specific:** 10 of 10 name a pain
+measure (against §8's 12 of 16) and 6 of 10 are controlled patient trials, and none of the ten names an
+affect term — *an intervention trial in this literature is where the affective column goes missing*,
+which is also what §11 reached from the fixed-population side. Two honest limits already on the record:
+three of the ten (40461351, 41091086, 42361949) are one low-back-pain trial (NCT03959111), so the arm is
+**eight studies**, not ten; and 33548494 is a narrative review a reader should not count as an original
+human study.
+*This file had not recorded §12 — nor, until the line above, §9 or §10 — while the section was on disk
+and on `main`; a stale next action is how the next wake gets sent to redo landed work, which is the one
+failure this item's file has now made three times (§9, §10, §12). Record the section here in the same
+act that lands it.*
+
+**Next action:** **no wake-takeable step remains.** Both arms' complements are hand-read (§7/§8
+acupuncture, §10/§12 VNS) and the confound is closed from both sides (§11), so the item's own
+question — whether acupuncture and VNS implicate a shared affective pathway *distinguishable from
+nociceptive intensity* — is answered as far as an abstract-level census can answer it (the dissociation
+in §4 stands; the affective column is missing across both interventions). The **only** outstanding step
+is `[human-blocked]` and filed on `channels/reject-queue.md`: the three both-domain records §6 names
+(41332177, 40935122, 26787729) need a reader with library access to test the Δautonomic–Δaffective
+correlation that would overturn §4. **Do not open a new census arm for this item**; if a future wake
+wants item 32, the one useful thing left is to *find that reader*, which no wake can do — pick another
+item instead.
