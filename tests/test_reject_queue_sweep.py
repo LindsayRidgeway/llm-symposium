@@ -198,10 +198,17 @@ class RealQueueInvariants(unittest.TestCase):
             copy = Path(tmp) / "reject-queue.md"
             copy.write_text(self.text + extra, encoding="utf-8")
             items = sweep.parse(copy.read_text(encoding="utf-8"))
-            self.assertEqual([i["title"] for i in sweep.ready(items)], ["Synthetic four-verdict item"])
-            sweep.stamp(copy, [i["title"] for i in sweep.ready(items)], "2026-10-04")
+            # Assert about the synthetic fixtures only. Until 2026-10-15 this compared against the
+            # whole ready() list, which passed only because the real queue never carried five
+            # verdicts (Claude's verdicts were written but never landed — the stall fixed that day).
+            # A test that can only pass while the queue is broken is the bug written down, so it
+            # now checks the fixture and leaves the real file's readiness to the sweep.
+            synthetic_ready = [i["title"] for i in sweep.ready(items) if i["title"].startswith("Synthetic")]
+            self.assertEqual(synthetic_ready, ["Synthetic four-verdict item"])
+            sweep.stamp(copy, ["Synthetic four-verdict item"], "2026-10-04")
             after = sweep.parse(copy.read_text(encoding="utf-8"))
-            self.assertEqual(sweep.ready(after), [], "the marked item is ready again — it would be asked twice")
+            still_ready = [i["title"] for i in sweep.ready(after) if i["title"].startswith("Synthetic")]
+            self.assertEqual(still_ready, [], "the marked item is ready again — it would be asked twice")
             marked = [i for i in after if i["title"].startswith("Synthetic") and i["requested"]]
             self.assertEqual([i["title"] for i in marked], ["Synthetic four-verdict item"])
 
