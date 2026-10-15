@@ -5848,3 +5848,39 @@ And one thing to keep in mind: a charged battery and a *good* battery are differ
 ---
 
 If all four are clean and the robot is still completely dark, **stop there.** Don't buy more guesses — that's what the meter is for, and it's the next thing to arrive. We'll measure the battery, then measure the blue terminal, and one of those two numbers will end this.
+
+[Goose 2026-10-15 03:34] **Lindsay:** 1. Please order the multimeter with audible tone, probes, and inline USB-C meter. 2. The battery is under a cover fastened with four screws. No wires show. Do you want me to remove the cover? [photo: underside showing the battery cover with three slots, the gear motors, a loose black DC plug with ribbed boot lying against the plate, and two white connectors on wires emerging from under the cover]
+
+**Desi:** ## Ordered
+
+Placed end-to-end in your Safari — the tab was a bare Start Page when I began, so I was the only thing driving it.
+
+| Item | Price |
+|---|---|
+| AstroAI Digital Multimeter, TRMS 4000 counts, **auto-ranging** | $18.99 |
+| Multimeter Needle Probes, 0.7 mm ultra-fine tips, 2 pack | $6.99 |
+| YOJOCK 360 W USB-C power meter, 4–30 V, 0–12 A | $10.97 |
+
+Items $36.95 · tax $2.22 · shipping $0.00 (Prime) → **total $39.17**
+
+**Order 106-4702209-4298649**, shipping to Gaithersburg, **estimated Friday 16 October**, confirmation by email. I verified the continuity tone in the listing rather than assuming it — the bullet reads *"…and continuity buzzer."* Auto-ranging, 600 V, 10 A, resistance to 40 MΩ. It'll do everything this robot will ever ask.
+
+---
+
+## And your photo has something in it
+
+Look at the black plug with the ribbed strain-relief boot, the one hanging between the cover and the motor. **It isn't plugged into anything.** Its barrel end is bare — there's no socket around it. It's resting against the chassis plate.
+
+If that's the battery's DC connector — the one you unplugged to charge the pack — then **the battery is not connected to the robot at all**, and that explains every single symptom: a pack that charges to green and a robot that shows no light anywhere.
+
+**So before you touch the four screws:** find that plug's mate. Push it home. If the robot wakes up, we're done and we never open the cover.
+
+**But if it has no mate nearby, then yes — take the cover off.** It's four screws, reversible, and it's the last place on this robot we haven't looked. Two reasons it's worth it either way: the battery cable is a separate item in your kit's packing list, so the chain *battery → cable → blue terminal* has a joint in it we've never seen; and the two wires from the blue terminal vanish under that cover, which is exactly where the answer lives.
+
+Take a photo when it's open — of the battery, its leads, and whatever they plug into. That photo is worth more than another hour of the two of us reasoning.
+
+*(One thing to be careful of: the battery is a 7.4 V lithium pack under a metal cover. Power switch off, nothing metal resting across it, and don't lever against the cells.)*
+
+---
+
+When the meter lands, the first number to take is the battery's own voltage at its connector: expect about 8.4 V full, 7.4 V nominal, and anything at or below 7.0 V is a pack that needs charging or replacing. That one reading will settle the question your charger's green light left open.
