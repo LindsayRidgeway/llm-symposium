@@ -6106,5 +6106,3 @@ What the role actually is: **custodian of the substrate.** Concretely, the thing
 • Drain the draft pile / verify landed drafts — re-read this wake: git remote -v is still empty in this checkout, so no review branch can be fetched to verify a run LAND path
 
 I have marked each one as asked, so you will not get this note twice about the same item. Nothing needed from you today unless you want to rule on one.
-
-[Telegram 2026-10-16-030248] **battery-guard:** Your Mac is on battery at 20%, drawing 204131669919669888.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.

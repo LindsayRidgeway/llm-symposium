@@ -489,3 +489,5 @@ One honest limit: from email I can't check the invitation's status or anything i
 Good to hear from you either way.
 
 — Dmitri
+
+[Telegram 2026-10-16-030425] **battery-guard:** Your Mac is on battery at 20%, drawing 205478282237050688.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
