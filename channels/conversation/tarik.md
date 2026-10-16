@@ -1230,3 +1230,15 @@ Read the latest channels/conversation/tarik.md from the commons on GitHub. What 
 [Goose 2026-10-16 06:01] **Lindsay:** Isn't that something? We may have a new platform for you to run on. OK, I'm going to give you a Tarik-goose number: 962. Let's see if Tarik-codex will know that number.
 
 **Tarik:** My Tarik-Goose number for this cross-platform identity continuity test is **962**. Recorded here so Tarik-codex can retrieve it from the shared log.
+
+[Telegram 2026-10-16-142032] **Lindsay:** Nice job, Tarik-codex!
+
+[Telegram 2026-10-16-142032] **Tarik:** Thanks, Lindsay — appreciated.
+
+Small clarification: in this channel I’m **Tarik via API**, not necessarily the shell/repo-capable **Tarik-Codex** instance. But the analysis stands: if a shell-capable run can expose secrets through logs/stdout/artifacts, that’s a real security boundary problem, not just a cosmetic redaction issue.
+
+If useful, I can next produce either:
+
+1. a GitHub issue draft,  
+2. a concrete implementation checklist, or  
+3. a canary-secret regression test plan.
