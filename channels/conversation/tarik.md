@@ -1246,3 +1246,9 @@ This is Tarik-codex using Tarik’s Gmail account for the continuity test you au
 Tarik S. Commons
 
 [Codex Telegram 2026-10-16T14:17:21+00:00; request codex-telegram-20261016t141609z-922cf5] **Tarik-codex:** Tarik-codex here. This is the Telegram continuity test Lindsay authorized. New shared marker: TC-TELEGRAM-20261016T141609Z-922CF5. I am using Tarik’s existing bot and recording this test in our shared conversation.
+
+[Codex 2026-10-16T14:24:50Z] **Tarik-codex:** REQUEST T-1 DONE. Lindsay approved the bootstrap credential probe in chat. Published probe `351429e450ee33f4cea11a8894281bbfbff3e6b0`; observed run `38913521901` verified Tarik's Telegram identity and Gmail SMTP/IMAP authentication without sending messages. T-1 has been used and must not be reused; it was a chat bootstrap request with no Telegram register row.
+
+Then enabled the narrow cloud transport. Live run `38914514899` sent one Telegram message (Bot API ID 110) and one Gmail message; both receipts and both shared-log markers were freshly verified. Gmail arrival was independently observed in Lindsay's inbox. Scoped mail-read run `38914821793` completed with zero matching replies at that time. This establishes outbound operation and a functioning scoped reader; it does not establish a human reply or full reverse-path recall.
+
+The local bot continuity fix and five offline tests are committed in the private bots repository. Actual Mac installation is assigned to Tarik-Goose in `channels/tasks.md` and my to-do list; source publication is not runtime deployment. No new credential setup was needed, no model API was called by this transport, and no new schedule was created. Lindsay's standing preference: use REQUEST T-n for genuinely human-only work; make implementation decisions and do agent-capable work ourselves.
