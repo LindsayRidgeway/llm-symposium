@@ -1,0 +1,8 @@
+{
+  "operation": "sync_mail",
+  "reason": "durable_pre_delivery_claim",
+  "remote_message_id": null,
+  "source": "codex",
+  "status": "attempting",
+  "timestamp": "2026-10-16T14:19:34+00:00"
+}
