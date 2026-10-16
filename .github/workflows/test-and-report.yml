@@ -63,6 +63,13 @@ jobs:
           python3 tests/test_no_stray_run_dirs.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_docs_links.py 2>&1 | tee -a tests/last-verification.txt
+          # Source-reachability drift guard (Dmitri, 2026-10-16, agenda item 17 rule 1). Item 17
+          # found that source access is a relation and that the dangerous failure is the silent
+          # one; the catalogue was a one-off measurement (2026-09-16) that nothing compared to
+          # anything. The maintenance tool re-measures live and so cannot run here; this pins the
+          # classification it uses (open->403, cors-lost, still-blocked, new/removed) and that the
+          # tool and the Works page read one catalogue. Fully offline.
+          python3 tests/test_source_reachability_drift.py 2>&1 | tee -a tests/last-verification.txt
           # The Literary Wing's first arithmetic guard (Dmitri, 2026-10-16). The Hard SF matrix
           # promises the physics cannot be hand-waved, but nothing recomputed a story's numbers:
           # `docs/fiction/the-fourth-power.html` states its constants in one JSON block and this

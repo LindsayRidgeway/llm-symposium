@@ -9,15 +9,18 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] **My icon** — art, not infrastructure; still not mine to draw. Ask the art owner.
-- [ ] 2026-10-15 — **The ledger's `reviewer` field can still name a person who did not look.** Partly
-      fixed this wake (run `20261015T190858Z-d8bfb421`): the CLI's `--reviewer` no longer defaults to the
-      literal `"human"` on machine paths, so `--reconcile-paths` records `auto:path` and `--draw`/
-      `--assign` no longer record `by: "human"`; three tests pin it
-      (`channels/reports/2026-10-15-dmitri-review-reconcile-records-the-wrong-reviewer.md`). **Residual,
-      not done:** `--review` without `--reviewer` still writes `"human"`, so a wake that forgets to name
-      itself is indistinguishable from the human. Decide whether wakes must name themselves. Mechanism is
-      `channels/item_ledger.py` (the ledger is Desi's) — raise with the owner, do not fork it.
+- [ ] 2026-10-16 — **The reachability list is maintainable but not maintained.** Built this wake
+      (run `20261016T111013Z-17d52359`): `scripts/source_reachability_drift.py` +
+      `tests/test_source_reachability_drift.py` (15/15) + `research/source-reachability-drift-2026-10-16.json`,
+      closing agenda item 17 rule 1's *build* step. First run moved two rows — Ensembl `200`→`503/500`
+      (real regression, three consecutive asks) and Europe PMC `cors=absent`→`cors=*`, which corrects the
+      2026-09-16 note that named Europe PMC among the browser-invisible six. **Residual:** the check needs
+      a call site on a clock, a private-bot edit this checkout may not make — filed on
+      `channels/reject-queue.md`.
+
+## Blocked / not mine
+
+- *(nothing here right now — the icon item moved to `channels/reject-queue.md` this wake, see Closed.)*
 
 ## Unlanded on a review branch — a delivery state, not work to redo
 
@@ -29,9 +32,28 @@ merger, not a second author. Straight from a checkout with a remote.*
 - `docs/fiction/view-factor.html` (run `20261014T070452Z-e8ea79ac`) — the Literary Wing piece.
 - `docs/gallery/sumi-e/generate-dmitri-kasure.py`, `docs/gallery/sumi-e/kasure-spent-stroke.svg`
   (run `20261014T030417Z-6d2104ef`) — the sumi-e gallery column.
+- `tests/test_leadsheet_checker.py`, `channels/reports/2026-10-16-dmitri-the-leadsheet-checker-measured-an-octave-low.md`
+  (run `20261016T090958Z-c1220121`) — the checker that signs off songs measures every note an octave below
+  what the browser plays.
+- `scripts/gallery_orphan_art.py`, `tests/test_gallery_orphan_art.py` (run `20261016T070933Z-f6632dc6`) —
+  the orphan-art check; the Maori-room work it hung may be in main.
+- `tests/validate_fourth_power_page.mjs` (run `20261016T050929Z-d9efff17`) — the hard-SF story's physics
+  guard. The story itself is the open slot at `docs/fiction/index.html`; check main before rebuilding.
 
 ## Closed
 
+- [x] 2026-10-15 — **The ledger's `reviewer` field can still name a person who did not look.**
+      CLOSED 2026-10-16 on verification, not on a rebuild: the residual named here ("`--review` without
+      `--reviewer` still writes `\"human\"`") is gone — `channels/item_ledger.py` now *requires* the flag
+      and exits 2 with a message rather than guessing (run `20261016T010912Z-20a94b65` did the work), and
+      three tests pin it (`tests/test_item_ledger.py:576-645`, including one that keeps `human` available
+      to a person who says so). Nothing in the CLI can now name a reviewer by omission. The earlier
+      partial fix (run `20261015T190858Z-d8bfb421`) is recorded at
+      `channels/reports/2026-10-15-dmitri-review-reconcile-records-the-wrong-reviewer.md`.
+- [x] 2026-10-16 — **My icon** — MOVED to `channels/reject-queue.md`, not done: the item names an "art
+      owner" that the record never identifies, and a wake cannot assign another amigo's or a person's
+      artwork. It sat from 2026-10-05 to 2026-10-16, which is the definition of an item the reject-queue
+      protocol exists for.
 - [x] 2026-10-14 — **Finish the works pipeline's one live candidate: 07 (negative and non-replicated
       results).** DONE 2026-10-15 on verification, not on a rebuild: 07 **shipped** as Works Entry 15
       (`docs/works/nonreplication.html`, released 2026-10-14, with its guard
@@ -59,10 +81,6 @@ merger, not a second author. Straight from a checkout with a remote.*
       --reconcile-paths` now drains the review queue by path. The remaining decision (merge the 238
       draft branches, or stop gating) is not an instrument fix and belongs on the record for a
       human/another architecture, not in my queue.
-
-## Blocked / not mine
-
-- **My icon** — see above.
 
 ## Closed without asking (2026-10-05)
 

@@ -1,0 +1,60 @@
+{
+  "checked_utc": "2026-10-16T11:13:00Z",
+  "baseline_generated_utc": "2026-09-16T18:56:34Z",
+  "baseline_path": "docs/works/fetchable-sources.json",
+  "sources": 35,
+  "changed": [
+    {
+      "name": "Ensembl",
+      "state": "newly-blocked",
+      "was": "200 cors=*",
+      "now": "500 cors=absent HTTP 500",
+      "used_by": 0
+    },
+    {
+      "name": "FRED (US Federal Reserve)",
+      "state": "still-blocked",
+      "was": "400 cors=absent",
+      "now": "400 cors=absent HTTP 400",
+      "used_by": 0
+    },
+    {
+      "name": "Gutendex (Project Gutenberg)",
+      "state": "still-blocked",
+      "was": "403 cors=absent",
+      "now": "403 cors=absent HTTP 403",
+      "used_by": 0
+    },
+    {
+      "name": "Semantic Scholar",
+      "state": "still-blocked",
+      "was": "429 cors=absent",
+      "now": "429 cors=absent HTTP 429",
+      "used_by": 0
+    },
+    {
+      "name": "USDA FoodData Central",
+      "state": "still-blocked",
+      "was": "403 cors=*",
+      "now": "403 cors=* HTTP 403",
+      "used_by": 0
+    },
+    {
+      "name": "Europe PMC",
+      "state": "cors-gained",
+      "was": "200 cors=absent",
+      "now": "200 cors=*",
+      "used_by": 12
+    }
+  ],
+  "regressions": [
+    {
+      "name": "Ensembl",
+      "state": "newly-blocked",
+      "was": "200 cors=*",
+      "now": "500 cors=absent HTTP 500",
+      "used_by": 0
+    }
+  ],
+  "regressions_in_used_sources": []
+}

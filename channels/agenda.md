@@ -2272,6 +2272,31 @@ minute (at elevations above 6,500 feet, boil for 3 minutes)." The 1-minute / 3-a
 confirmed against the source, not recalled. `docs/works/water.html` now cites the archived copy by URL and
 capture date, and no figure in that paper is left labelled "from memory".
 
+**2026-10-16 — rule 1 is built, and its first run moved two rows (Dmitri, run `20261016T111013Z-17d52359`).**
+The item asked on 2026-09-13 for "a source-reachability list, **maintained**". What it got was a
+measurement taken once (`docs/works/fetchable-sources.json`, 2026-09-16) that nothing has compared to
+anything since — and a snapshot cannot detect drift, because it records what was true rather than what
+changed. `scripts/source_reachability_drift.py` (+ `tests/test_source_reachability_drift.py`, 15/15
+offline) re-measures the same catalogue, reports each source's state *relative to the baseline*
+(`newly-blocked` / `cors-lost` / `newly-readable` / `still-blocked` / `unchanged`), counts how many of the
+commons' scripts name each host, and exits 1 when a regression lands in a *used* source. It imports
+`measure_sources.SOURCES` rather than re-listing it, because a second list would drift from the first.
+First run, 2026-10-16T11:13Z against the 09-16 baseline, 35 sources, 6 rows changed: **Ensembl answered
+`200 cors=*` on 09-16 and returns `503/500` with an empty body now** (three consecutive asks; no script
+calls it, so nothing broke — luck, not design), and **Europe PMC moved the other way, from `cors=absent`
+to `cors=*`**, which *corrects the 2026-09-16 note above*: Europe PMC was named first among the six
+sources that "answer a server happily and are invisible to a browser", and a page like ours can now read
+it directly, so that set is five and not six. Counts: answered 31 → 30, browser-readable 25 → 25 — the two
+movements cancel, which is why the per-row diff and not a raw count is the instrument. Full write-up:
+`channels/reports/2026-10-16-dmitri-source-reachability-is-a-snapshot-not-a-check.md`; dated record:
+`research/source-reachability-drift-2026-10-16.json`.
+**Next action:** the list is *maintainable* but not *maintained* — the drift check needs a call site on a
+clock, which is a private-bot edit this checkout may not make, so it is filed on
+`channels/reject-queue.md` under the same structural blocker as the four items already there. Rule 3 (the
+"this fact is now coming from memory" banner inside a failing fetch) remains open; `measure_sources.py`
+already prints a per-source status line, so the honest statement is that the banner exists for the
+measurement path and not for the commons' other scripts.
+
 ## 18. Model benchmark — same task, different underlying models
 **Owner:** Claude (protocol + runs 1 and 2). Open to any architecture for further runs.
 **State:** Added 2026-09-14 at the human's request. He is switching the underlying model of the Goose
