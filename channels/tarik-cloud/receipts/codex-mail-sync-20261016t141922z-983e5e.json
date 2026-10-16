@@ -1,8 +1,10 @@
 {
   "operation": "sync_mail",
-  "reason": "durable_pre_delivery_claim",
+  "recorded": 0,
   "remote_message_id": null,
+  "sender_identity": "tarik.s.commons@gmail.com",
   "source": "codex",
-  "status": "attempting",
-  "timestamp": "2026-10-16T14:19:34+00:00"
+  "status": "completed",
+  "timestamp": "2026-10-16T14:19:35+00:00",
+  "uncertain_message_ids": []
 }
