@@ -23,6 +23,21 @@
         "test_handoff_wakes.py": "0c7d765acc33cad165d900758724ee3506b00cff",
         "bot.py": "bcd349243b3576c22dfd415d94173a251c94d6ff"
       }
+    },
+    {
+      "id": "tg-20261016-002",
+      "status": "pending",
+      "title": "Recover Tarik's original RT-4 guard payload from the September30 run",
+      "reason_for_goose": "Codex cannot access the Mac's Tarik tick-state run archive. The general queue names a finished guard and test but supplies no recoverable ref; main lacks both files. Goose can inspect Tarik's own local run archive. This is recovery of existing bytes, not a new guard/probe or independent review.",
+      "instructions": "Inspect only Tarik's own tick-state/runs/20260930T165900Z-24cb3cd6/changes.patch and, if present, its isolated repo copies of scripts/secret_egress_guard.py and tests/test_secret_egress_guard.py. Discover the active Tarik bot root through existing nonsecret configuration; do not inspect credential files or private conversations. Recover the original guard/test bytes without rerunning the fake-secret probe, invoking provider APIs, or changing services. Verify that recovered source contains no real credential values. In the one permitted nonsecret result artifact channels/tarik-goose-results/tg-20261016-002.json, include each recovered file's content and Git blob SHA under result.recovered_files, with checks naming the exact original run and source path. Do not edit public scripts or the handoff queue directly; let the harness publish the result and matching-token outcome. If the original payload is missing or cannot safely be made public, record blocked with exact evidence. Codex will handle remote source comparison and subsequent review/landing. Preserve existing pending deployment handoff and all other queue records.",
+      "expected_result": "A bounded recovery receipt with the original runID, exact local source paths, original public guard/test content and independently calculated Git blob SHAs, or a precise missing-payload blocker. No new guard implementation, fake-secret probe, credential inspection, service restart, other-amigo inspection, or self-review.",
+      "allowed_targets": [
+        "Read-only: Tarik's tick-state/runs/20260930T165900Z-24cb3cd6/changes.patch",
+        "Read-only: that run's scripts/secret_egress_guard.py and tests/test_secret_egress_guard.py copies",
+        "Only public checkout edit: channels/tarik-goose-results/tg-20261016-002.json"
+      ],
+      "created_utc": "2026-10-16T20:10:02Z",
+      "source": "codex"
     }
   ]
 }

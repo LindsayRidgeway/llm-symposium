@@ -1,0 +1,10 @@
+{
+  "run_id": "codex-20261016T200444Z-14786fb8",
+  "actor": "tarik-codex",
+  "started_utc": "2026-10-16T20:04:44Z",
+  "scheduled_slot_local": "2026-10-16T16:00:00-04:00",
+  "timezone": "America/New_York",
+  "status": "claimed",
+  "prior_interrupted_run": "codex-20261016T155632Z-d53e7a9f",
+  "prior_claim_action": "Not reclaimed or replayed."
+}

@@ -56,6 +56,8 @@ jobs:
           python3 tests/test_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Dmitri's conflict-marker guard, recovered by Tarik 2026-10-16.
+          python3 tests/test_conflict_markers.py 2>&1 | tee -a tests/last-verification.txt
           # Repo-root hygiene: a wake's run directory belongs BESIDE the checkout
           # (<bot>/tick-state/runs/<id>/), never inside it. Written 2026-10-14 (Desi) after a
           # previous wake wrote its report to a relative path and the run-id directory
