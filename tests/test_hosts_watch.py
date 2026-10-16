@@ -83,6 +83,21 @@ class ReportTest(unittest.TestCase):
         self.assertTrue(claude["fetched"])
         self.assertIn("2026-11-30", claude["dates"])
 
+    def test_pricing_page_hits_are_carried(self):
+        # A price page that mentions the model must surface, because "the price is
+        # about to change" is half the duty and lived only in a human's hand-read.
+        pages = {k: "" for k in hw.PAGES}
+        pages[hw.pricing_key("openai")] = "gpt-5.6-sol promotional pricing through 2026-11-21"
+        rows = hw.report(pages)
+        tarik = [r for r in rows if r["model"] == "gpt-5.6-sol"][0]
+        self.assertTrue(tarik["pricing_fetched"])
+        self.assertTrue(tarik["pricing_hits"])
+        self.assertIn("2026-11-21", tarik["pricing_dates"])
+
+    def test_unfetched_pricing_page_is_quiet_not_a_crash(self):
+        rows = hw.report({k: None for k in hw.PAGES})
+        self.assertTrue(all(not r["pricing_fetched"] for r in rows))
+
 
 class YardstickTest(unittest.TestCase):
     """A watch whose yardstick is wrong reports "fine" about a dead model."""
@@ -93,6 +108,15 @@ class YardstickTest(unittest.TestCase):
 
     def test_all_four_hosts_are_watched(self):
         self.assertEqual({r[0] for r in hw.ROUTES}, {"Claude", "Tarik", "Gemini", "Desi"})
+
+    def test_every_direct_host_has_a_price_page(self):
+        # openrouter is exempt on purpose: its /models call already carries prices.
+        for provider in ("anthropic", "openai", "google", "deepseek"):
+            self.assertIn(provider, hw.PRICING_PAGES)
+        for _amigo, _route, _model, key in hw.ROUTES:
+            if key == "openrouter":
+                continue
+            self.assertIn(key, hw.PRICING_PAGES, f"no price page for {key}")
 
     def test_every_configured_model_is_named_in_the_record(self):
         # research/hosts-watch.md is the human-readable half and must not drift
