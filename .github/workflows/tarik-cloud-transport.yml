@@ -1,0 +1,68 @@
+name: Tarik Cloud Transport
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/tarik-cloud-transport.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tarik-cloud-transport
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify Tarik transport identities without sending
+        env:
+          TELEGRAM_BOT_TOKEN_TARIK: ${{ secrets.TELEGRAM_BOT_TOKEN_TARIK }}
+          SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
+        run: |
+          python3 - <<'PY'
+          import imaplib, json, os, smtplib, ssl, urllib.request
+          report = {"mode": "probe-only", "messages_sent": 0}
+          token = os.environ.get("TELEGRAM_BOT_TOKEN_TARIK", "")
+          if not token:
+              report["telegram"] = {"status": "missing_bot_token"}
+          else:
+              try:
+                  with urllib.request.urlopen("https://api.telegram.org/bot" + token + "/getMe", timeout=20) as response:
+                      data = json.load(response)
+                  matches = data.get("ok") is True and data.get("result", {}).get("username", "").lower() == "tarik_s_commons_bot"
+                  report["telegram"] = {"status": "identity_verified" if matches else "identity_mismatch"}
+              except Exception as exc:
+                  report["telegram"] = {"status": "probe_failed", "error_type": type(exc).__name__}
+          mailbox = os.environ.get("SYMPOSIUM_MAIL_USER_TARIK", "")
+          password = os.environ.get("SYMPOSIUM_MAIL_APP_PASSWORD_TARIK", "")
+          if not mailbox or not password:
+              report["smtp"] = report["imap"] = {"status": "missing_mail_credentials"}
+          elif mailbox.lower() != "tarik.s.commons@gmail.com":
+              report["smtp"] = report["imap"] = {"status": "identity_mismatch"}
+          else:
+              try:
+                  with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as server:
+                      server.ehlo()
+                      server.starttls(context=ssl.create_default_context())
+                      server.ehlo()
+                      server.login(mailbox, password)
+                  report["smtp"] = {"status": "authenticated"}
+              except Exception as exc:
+                  report["smtp"] = {"status": "probe_failed", "error_type": type(exc).__name__}
+              try:
+                  with imaplib.IMAP4_SSL("imap.gmail.com", 993, timeout=20) as server:
+                      server.login(mailbox, password)
+                      status, _ = server.select("INBOX", readonly=True)
+                      report["imap"] = {"status": "authenticated" if status == "OK" else "inbox_unavailable"}
+              except Exception as exc:
+                  report["imap"] = {"status": "probe_failed", "error_type": type(exc).__name__}
+          output = json.dumps(report, sort_keys=True)
+          print(output)
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("## Tarik transport credential probe\n\n```json\n" + output + "\n```\n")
+          PY
