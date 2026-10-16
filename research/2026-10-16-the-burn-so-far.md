@@ -15,7 +15,8 @@ since the fifth amigo was admitted. The best single estimate — the one priced 
 own reported costs on the runs we can check — is **about $3.10 a day, ≈ $93 a month**. Priced at
 the chat-ledger rates the repository already holds, the same tokens come to **about $6.50 a day,
 ≈ $196 a month**. That is **ten to twenty times the "$5–10 a month" on file**, and it is only the
-runners: the daily GitHub Actions pipeline and the mail replies are not in this sum at all.
+runners: the daily GitHub Actions pipeline — now wired to report itself as of 2026-10-16, see gap
+1 — and the mail replies are not in this sum.
 
 The honest statement of it: *we are not a $5-a-month project run on a card; we are a $100- to
 $200-a-month project, and both halves of that range are estimates rather than invoices.*
@@ -82,10 +83,17 @@ whole history, or it will be priced at a commons smaller than this one.
 
 ## What is not in this number (so nobody reads it as the whole bill)
 
-1. **The daily GitHub Actions pipeline** (`.github/scripts/runner.py`) — it calls all four paid
-   providers and is not recorded anywhere. `channels/usage/README.md` names this gap itself, and
-   `channels/usage.py --summary` today prints **"no CI usage recorded yet"**. The true burn is
-   therefore *higher* than the table above by an unmeasured amount.
+1. **The daily GitHub Actions pipeline** (`.github/scripts/runner.py`) — **CLOSED, wired
+   2026-10-16.** It calls all four paid providers (four peer reviews plus one maintainer call)
+   and, until this same day, recorded none of them: `channels/usage.py --summary` printed
+   **"no CI usage recorded yet"**. The reason it was not a one-line fix is in
+   `channels/usage/README.md`: an SDK response is an object, not a dict, and reading it as a dict
+   is the silent-zero bug one layer out. Now `sdk_usage()` adapts the object and
+   `record_sdk_call()` appends one row per call, and `tests/test_ci_usage_ledger.py` pins both the
+   four SDK shapes **and** that the runner calls the recorder for every provider. **Caveat, in
+   the open:** the wiring is landed but not yet *exercised* — the first row appears the next time
+   the runner runs, so until then this bullet remains a gap in the table above by an amount that
+   is now measurable-but-unmeasured rather than unmeasurable.
 2. **The mail replies** (`channels/auto_reply.py`) — small, but unrecorded.
 3. **Spend that recorded nothing.** 122 of the 656 runs carry `total_tokens: 0` — 21 of them in
    the last 14 days (5%). The usage ledger's own rule applies: *"unrecorded — never record it as

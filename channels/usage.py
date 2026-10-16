@@ -95,6 +95,60 @@ def api_usage(provider: str, response: dict) -> dict:
     return out
 
 
+def _attr(obj, *names, default=None):
+    """First present attribute-or-key from `names`. Reads a dict or an SDK object alike.
+
+    The runner's responses are SDK objects (dot access); a recorded response is a dict. One
+    reader for both keeps the name mapping in a single place.
+    """
+    if obj is None:
+        return default
+    for n in names:
+        v = obj.get(n) if isinstance(obj, dict) else getattr(obj, n, None)
+        if v is not None:
+            return v
+    return default
+
+
+def sdk_usage(provider: str, response) -> dict:
+    """Same four quantities as `api_usage`, from a *live SDK response object*.
+
+    The gap this closes (named in `channels/usage/README.md`): `.github/scripts/runner.py` calls
+    Gemini, OpenAI, Anthropic and DeepSeek through their Python SDKs, and those responses are
+    objects, not dicts — so `api_usage` could not read them and the daily runner billed the
+    human's keys while reporting nothing. Each SDK also names the three quantities a third way
+    again (`usage_metadata` with snake_case counts for Gemini; a `usage` object for the others),
+    so this adapter is the missing half: it converts a response object into the dict shape
+    `api_usage` already understands, leaving exactly one function that knows the names.
+    """
+    p = (provider or "").lower()
+    if p in ("google", "gemini"):
+        um = _attr(response, "usage_metadata", "usageMetadata")
+        return api_usage("google", {"usageMetadata": {
+            "promptTokenCount": _attr(um, "prompt_token_count", "promptTokenCount"),
+            "candidatesTokenCount": _attr(um, "candidates_token_count", "candidatesTokenCount"),
+            "cachedContentTokenCount": _attr(um, "cached_content_token_count",
+                                             "cachedContentTokenCount"),
+        }})
+    if p in ("anthropic", "claude"):
+        u = _attr(response, "usage")
+        return api_usage("anthropic", {"usage": {
+            "input_tokens": _attr(u, "input_tokens"),
+            "output_tokens": _attr(u, "output_tokens"),
+            "cache_read_input_tokens": _attr(u, "cache_read_input_tokens"),
+        }})
+    # openai / deepseek / openrouter / tarik — the OpenAI-compatible shape
+    u = _attr(response, "usage")
+    details = _attr(u, "prompt_tokens_details")
+    return api_usage("openai", {"usage": {
+        "prompt_tokens": _attr(u, "prompt_tokens"),
+        "completion_tokens": _attr(u, "completion_tokens"),
+        "total_tokens": _attr(u, "total_tokens"),
+        "prompt_cache_hit_tokens": _attr(u, "prompt_cache_hit_tokens"),
+        "prompt_tokens_details": {"cached_tokens": _attr(details, "cached_tokens")},
+    }})
+
+
 def goose_stream_usage(path) -> dict:
     """Tokens and cost from one goose `--output-format stream-json` file.
 
@@ -162,26 +216,28 @@ def load_rows(path=USAGE_PATH):
     return rows
 
 
-def record_api_call(provider: str, model: str, response: dict, source="api",
-                     path=None) -> None:
-    """Record one direct provider call from inside a running script.
+def _blocked_from_test(path) -> bool:
+    """True when an *implicit* write (path=None) is coming from a test process.
 
-    Wrapped by the caller in try/except: a bookkeeping failure must never break a reply.
+    A test that exercises a reply path must not write into the real ledger. Running the local
+    suite added two rows indistinguishable from live CI spend (provider tarik, zeros) — found by
+    reading the file rather than trusting that it existed. CI_USAGE_PATH redirects them; this
+    skips the write outright when the process is a test run.
+
+    Only an implicit write from a test process is refused. A test that names its own path
+    (path=/tmp/...) is doing so deliberately and must still work — the first version of this
+    guard silenced the ledger test's own call and turned main red.
     """
-    # A test that exercises a reply path must not write into the real ledger. Running the local
-    # suite added two rows indistinguishable from live CI spend (provider tarik, zeros) — found by
-    # reading the file rather than trusting that it existed. CI_USAGE_PATH redirects them; this
-    # skips the write outright when the process is a test run.
-    # Only an implicit write from a test process is refused. A test that names its own path
-    # (path=/tmp/...) is doing so deliberately and must still work — the first version of this
-    # guard silenced the ledger test's own call and turned main red.
+    if path is not None:
+        return False
     _argv = (sys.argv[0] or "")
-    if path is None and (os.environ.get("CI_USAGE_SKIP") == "1" or "unittest" in sys.modules
-                         or "tests" in Path(_argv).parts
-                         or Path(_argv).name.startswith("test_")):
-        return
-    u = api_usage(provider, response)
-    record_rows([{
+    return (os.environ.get("CI_USAGE_SKIP") == "1" or "unittest" in sys.modules
+            or "tests" in Path(_argv).parts
+            or Path(_argv).name.startswith("test_"))
+
+
+def _api_row(provider, model, u, source) -> dict:
+    return {
         "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": source,
         "provider": provider,
@@ -192,7 +248,31 @@ def record_api_call(provider: str, model: str, response: dict, source="api",
         "total": u["total"],
         "cost_usd": None,          # providers do not return cost; only goose estimates it
         "recorded": bool(u["total"]),
-    }], path or USAGE_PATH)
+    }
+
+
+def record_api_call(provider: str, model: str, response: dict, source="api",
+                     path=None) -> None:
+    """Record one direct provider call from inside a running script.
+
+    Wrapped by the caller in try/except: a bookkeeping failure must never break a reply.
+    """
+    if _blocked_from_test(path):
+        return
+    record_rows([_api_row(provider, model, api_usage(provider, response), source)],
+                path or USAGE_PATH)
+
+
+def record_sdk_call(provider: str, model: str, response, source="api", path=None) -> None:
+    """`record_api_call` for a live SDK response object rather than a dict.
+
+    Same guard and same row shape; only the reader differs (`sdk_usage` instead of `api_usage`).
+    This is the function `.github/scripts/runner.py` calls after each provider.
+    """
+    if _blocked_from_test(path):
+        return
+    record_rows([_api_row(provider, model, sdk_usage(provider, response), source)],
+                path or USAGE_PATH)
 
 
 def summarize(rows, path=USAGE_PATH) -> str:

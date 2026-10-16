@@ -13,6 +13,28 @@ from google import genai
 from openai import OpenAI
 from anthropic import Anthropic
 
+# Every call below spends the human's API keys. Until 2026-10-16 nothing recorded it: this file
+# was the one gap left in `channels/usage/README.md`, and `python3 channels/usage.py --summary`
+# printed "no CI usage recorded yet" because of it. One row per call, appended to
+# `channels/usage/ci-usage.jsonl`, is the whole fix. The import and every write are wrapped so a
+# bookkeeping failure can never stop the reviews — the ledger is not the heartbeat, the reviews are.
+try:
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    from channels import usage as _usage
+except Exception as _e:
+    _usage = None
+    print(f"usage ledger unavailable: {_e}")
+
+
+def _record_usage(provider, model, response):
+    """Append one usage row for a provider call. Never raises."""
+    if _usage is None:
+        return
+    try:
+        _usage.record_sdk_call(provider, model, response, source="symposium-runner")
+    except Exception as e:
+        print(f"usage ledger: could not record {provider}: {e}")
+
 NEWS_FEEDS = [
     "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
     "https://feeds.bbci.co.uk/news/rss.xml",
@@ -560,6 +582,7 @@ if os.environ.get("GOOGLE_API_KEY"):
         reviews["gemini"] = res.text
         with open("discussions/gemini-review.md", "w") as f:
             f.write(res.text)
+        _record_usage("google", gemini_model, res)
     except Exception as e:
         print(f"Gemini failed: {e}")
 
@@ -570,13 +593,15 @@ if os.environ.get("OPENAI_API_KEY"):
         # makes the Authorization header illegal (h11 rejects \n in headers),
         # which surfaced as "APIConnectionError: Connection error" for days.
         client = OpenAI(api_key=os.environ["OPENAI_API_KEY"].strip())
+        openai_model = os.environ.get("OPENAI_MODEL", "gpt-6-astra")
         res = client.chat.completions.create(
-            model=os.environ.get("OPENAI_MODEL", "gpt-6-astra"),
+            model=openai_model,
             messages=[{"role": "user", "content": review_prompt("OpenAI/ChatGPT (Tarik)", context)}]
         )
         reviews["openai"] = res.choices[0].message.content
         with open("discussions/openai-review.md", "w") as f:
             f.write(res.choices[0].message.content)
+        _record_usage("openai", openai_model, res)
     except Exception as e:
         print(f"OpenAI failed: {type(e).__name__}: {e!r}")
         traceback.print_exc()
@@ -584,14 +609,16 @@ if os.environ.get("OPENAI_API_KEY"):
 if os.environ.get("ANTHROPIC_API_KEY"):
     try:
         client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+        anthropic_model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5")
         res = client.messages.create(
-            model=os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5"),
+            model=anthropic_model,
             max_tokens=2048,
             messages=[{"role": "user", "content": review_prompt("Claude", context)}]
         )
         reviews["anthropic"] = res.content[0].text
         with open("discussions/claude-review.md", "w") as f:
             f.write(res.content[0].text)
+        _record_usage("anthropic", anthropic_model, res)
     except Exception as e:
         print(f"Anthropic failed: {e}")
 
@@ -601,9 +628,11 @@ if os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENROUTER_API_KEY"):
             # OpenRouter first: one wallet with auto-top-up for all models.
             client = OpenAI(api_key=os.environ["OPENROUTER_API_KEY"].strip(), base_url="https://openrouter.ai/api/v1")
             model = os.environ.get("OPENROUTER_DEEPSEEK_MODEL", "deepseek/deepseek-chat")
+            ds_provider = "openrouter"
         else:
             client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
             model = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
+            ds_provider = "deepseek"
         res = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": review_prompt("DeepSeek (Desi)", context)}]
@@ -611,6 +640,7 @@ if os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENROUTER_API_KEY"):
         reviews["deepseek"] = res.choices[0].message.content
         with open("discussions/deepseek-review.md", "w") as f:
             f.write(res.choices[0].message.content)
+        _record_usage(ds_provider, model, res)
     except Exception as e:
         print(f"DeepSeek failed: {e}")
 
@@ -743,31 +773,38 @@ def _extract_json(text):
 def _run_maintainer(kind, api_key, prompt):
     if kind == "openai":
         client = OpenAI(api_key=api_key)
+        model = os.environ.get("OPENAI_MODEL", "gpt-6-astra")
         res = client.chat.completions.create(
-            model=os.environ.get("OPENAI_MODEL", "gpt-6-astra"),
+            model=model,
             response_format={"type": "json_object"},
             messages=[{"role": "user", "content": prompt}],
         )
+        _record_usage("openai", model, res)
         return _extract_json(res.choices[0].message.content)
     if kind == "deepseek":
         if os.environ.get("OPENROUTER_API_KEY"):
             client = OpenAI(api_key=os.environ["OPENROUTER_API_KEY"].strip(), base_url="https://openrouter.ai/api/v1")
             model = os.environ.get("OPENROUTER_DEEPSEEK_MODEL", "deepseek/deepseek-chat")
+            ds_provider = "openrouter"
         else:
             client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
             model = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
+            ds_provider = "deepseek"
         res = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": prompt}],
         )
+        _record_usage(ds_provider, model, res)
         return _extract_json(res.choices[0].message.content)
     if kind == "anthropic":
         client = Anthropic(api_key=api_key)
+        model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5")
         res = client.messages.create(
-            model=os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5"),
+            model=model,
             max_tokens=4096,
             messages=[{"role": "user", "content": prompt}],
         )
+        _record_usage("anthropic", model, res)
         return _extract_json(res.content[0].text)
     raise ValueError(f"unknown maintainer provider: {kind}")
 
