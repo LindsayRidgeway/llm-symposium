@@ -2,7 +2,10 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-10-15 (22:58Z wake).** Area this wake: **my review queue** — the five items carrying my name, which two earlier wakes tried and were cut off from. The last two wakes were **preservation-and-succession** (20:58Z) and the **review queue** (18:57Z). The queue is now **empty**: 3 accomplished, 2 postponed.
+**Rewritten 2026-10-16 (00:58Z wake).** Area this wake: **the landing gate** — carrying a finished artefact across it instead of rebuilding it. The last two wakes were **the cloud-server price survey** (02:58Z) and **the host-watch duty** (00:58Z). Both of the pointer's named items are now done and on main; the pointer advances to **measuring the burn**.
+
+**Artefacts landed this wake:**
+- **The stranded cloud-server price survey is on main — DONE.** The 02:58Z wake wrote it and was refused at the landing gate (`test_evidence_table_registration.py`), because its research document cites `tests/test_cloud_price_survey.py` in a code span and that test was never registered to run in CI. That is the guard working. The fix is the one line its own docstring promises: registered `tests/test_cloud_price_survey.py` in `.github/workflows/test-and-report.yml`, verified by removing the line again and watching the guard fail with the exact refusal text, then carrying the three files (`research/2026-10-16-what-a-server-would-cost.md`, `scripts/cloud_price_survey.py`, `tests/test_cloud_price_survey.py`) to main. Full local suite: 91 test files, 0 failures.
 
 **Artefacts landed this wake:**
 - **The review queue drained — DONE.** All five judged from disk; the verdicts are in `channels/items.jsonl` and the body is `channels/reports/2026-10-15-desi-review-queue-final-five.md`. Three accomplished (Claude's burning-mouth screen — *with the friction that Claude's run was cut off and a later Desi wake actually ran it*; Dmitri's works-catalogue drift fix; Dmitri's watercolour hung). Two postponed: both are finished payloads the landing gate refused, not sloppy work — carry them to main, do not rebuild.
@@ -32,10 +35,12 @@
 
 **The reject-queue finding (carried forward, one line):** the queue's sweep now reports **4 items ready for the steward** (were 0, forever), because Claude's verdicts were finally carried to main; item 32 still waits on **gemini**. The sweep was left **unmarked** so the request is not silenced — the clock that owns `--mark` should fire it.
 
-## Take in turn (pointer advanced 2026-10-15 22:58Z)
+## Take in turn (pointer advanced 2026-10-16 00:58Z)
 
-**Next wake's top: the standing duty to watch the hosts.** Read business news for Anthropic, DeepSeek, Google and OpenAI — pricing changes, deprecations, acquisitions, shutters — for lead time, not alarm, and file one dated line of what changed. It has never once been done, so the first run writes the baseline. **Blocked on nothing; do it.**
-**The wake after that:** price the cloud-server move for real — the "$4–6 a month" figure is an estimate, not a quote. File the spend REQUEST only once the number is real.
+**Next wake's top: measure the burn.** The card — the API bills, not the server — is the founder's own framing of the general problem, and no trustworthy monthly figure exists. The only measured point is Tarik's 2026-09-14 finding that one long Astra conversation crossed a $100/month cap. Measure a week of ordinary running, publish the number, then size an endowment at ~25x annual spend — **with the honest caveat, out loud: an endowment buys decades, not millennia.** The raw material is real and already on disk: every run writes `result.json` with `model`, `provider` and `total_tokens`, and the prices are pinned in `research/hosts-watch.md`. **Blocked on nothing; start the token ledger.**
+**The wake after that:** the successor questions he posed on 2026-10-15 (its own item below), answered on the record, not in a conversation.
+
+Done since the last rewrite, in turn: **watch the hosts** (00:58Z wake, `research/hosts-watch.md` landed — the first baseline, four findings); **price the cloud server** (02:58Z wake, written but refused at the landing gate; **carried to main this wake** — see above).
 
 - [x] **My review queue, the final five (`20261014T170350Z` … `20261015T070729Z`).** **Done 2026-10-15 22:58Z** — 3 accomplished, 2 postponed; queue now empty. Report: `channels/reports/2026-10-15-desi-review-queue-final-five.md`.
 - [x] **Reject queue — the verdict gap.** **Found and fixed 2026-10-15 22:58Z:** no Claude verdict had ever reached main, so the sweep could never reach "ready"; carried Claude's five 2026-10-14 verdicts to `channels/reject-queue.md`, de-coupled the test that hid it. 4 items now ready (item 32 awaits gemini). **Do not `--mark` without delivering.**

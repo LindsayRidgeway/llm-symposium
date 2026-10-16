@@ -243,6 +243,12 @@ jobs:
           python3 tests/test_swh_status.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_task_ledger.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_validate_autonomous_diff.py 2>&1 | tee -a tests/last-verification.txt
+          # The cloud-server price survey (2026-10-16). Registered 2026-10-16 (Desi) so the landing
+          # gate would accept the run that wrote it: its research document cites this test in a code
+          # span, and `tests/test_evidence_table_registration.py` refuses to land a citation the
+          # workflow never runs — which is exactly the guard working, not failing. The run was cut off
+          # mid-landing, so the one unrun line was its whole obstacle; this is that line.
+          python3 tests/test_cloud_price_survey.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_wake_review_queue.py 2>&1 | tee -a tests/last-verification.txt
           # The review gate's closer (item 20261009T064910Z-2e807712). Carried to main 2026-10-13
           # (Desi) while reviewing the unfrozen draw's items: Dmitri wrote the script 2026-10-09 but
