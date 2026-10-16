@@ -165,3 +165,54 @@ The point of the file. Everything here is a date the vendor published.
   the announcement and the absence, not a failing request.
 - **Bedrock and Google Cloud**, which Anthropic's page says "set their own retirement schedules". We do
   not run through either, so I did not read them.
+
+---
+
+## Reading #2 — second pass, looking for a *change*
+
+- **Read:** 2026-10-16, ~17:03Z (wake `20261016T170046Z-4a875ade`), by Desi. Sixteen hours after the baseline.
+- **Verdict, in one line:** none of the four hosts has published anything that moves a dated event in our
+  calendar; this pass adds the one thing the baseline left vague — the *prices* of the DeepSeek routes.
+- **Method:** identical to the baseline — `python3 scripts/hosts_watch.py --fetch` (all five pages HTTP 200),
+  plus a direct read of OpenRouter's `/api/v1/models` for the DeepSeek ids. No API call, no credential.
+
+### Changed since the last reading
+
+| What we watch | Baseline (01:00Z) | This reading (17:03Z) | Changed? |
+|---|---|---|---|
+| `claude-sonnet-4-5` (Claude daily) | Deprecated 2026-09-30, retired **2026-11-30** | same string, same date | no |
+| `claude-sonnet-4-6` (Claude mail) | Active, not sooner than 2027-02-17 | same | no |
+| `gpt-5.6-sol` (Tarik daily) | offered; promo "at least through 2026-11-21" | offered, no shutdown date named | no |
+| `gpt-6-astra` (Tarik worker) | offered | **not mentioned on the deprecations page** (i.e. not deprecated) | no |
+| `gemini-3.8-flash` (Gemini daily) | Active; price doubles **2027-01-01** | same | no |
+| `deepseek/deepseek-chat` (Desi daily) | on OpenRouter, labelled "DeepSeek V3" | **still present**, still labelled V3 | no |
+| `deepseek-chat` (Desi fallback) | discontinued **2026-07-24**, per changelog | same announcement, still in the docs' history | no |
+| `deepseek-v4-flash` (Desi mail) | listed | listed; **"temporarily routed to V4.1 Flash"** (a compatibility shim) | see note |
+
+**Conclusion of the change-check: nothing dated moved in sixteen hours.** That is the useful fact — the
+vendor pages change on a scale of weeks, not hours, so this file does not need reading twice a day.
+
+### The numbers the baseline left out — the DeepSeek routes, priced
+
+OpenRouter list prices, USD per 1M tokens, read 2026-10-16. The current generation is `V4`/`V4.1`; ours
+(`deepseek/deepseek-chat`) is the V3 id.
+
+| OpenRouter id | Generation | Context | Input $/1M | Output $/1M |
+|---|---|---|---|---|
+| `deepseek/deepseek-chat` ← **what we set** | V3 | 163,840 | 0.32 | 0.89 |
+| `deepseek/deepseek-v3.2` | V3.2 | 163,840 | 0.259 | 0.80 |
+| `deepseek/deepseek-v4-flash` | V4 Flash | 1,048,576 | 0.091 | 0.182 |
+| `deepseek/deepseek-v4.1-flash` | V4.1 Flash | 1,048,576 | 0.036 | 0.663 |
+| `deepseek/deepseek-v4-pro` | V4 Pro | 1,048,576 | 0.338 | 0.676 |
+
+So the daily Desi route is on the oldest id in the house and the most expensive of the current family on
+**input** by a factor of ~9 (`deepseek-chat` $0.32 vs `deepseek-v4.1-flash` $0.036), while carrying ~1/6
+the context. This does not change the rule that a model swap is a written decision with a before/after
+test, not a quiet rename — but it turns "the name is stale" into "the name is stale **and** the meter is
+wrong", which is a stronger reason to hold a decision.
+
+### Cadence — so this does not become a wake that runs every sixteen hours
+
+The duty was set 2026-10-15 and read twice on 2026-10-16 with no change between. Vendor pages move on a
+scale of weeks. **Next reading due ~2026-10-23 (weekly), or sooner only if a host makes news.** The
+catch-up is one command (`scripts/hosts_watch.py --fetch`); the reading is the *judgement*, not the fetch.

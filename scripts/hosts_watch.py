@@ -46,7 +46,7 @@ ROUTES = [
     ("Desi", "mail replies", "deepseek-v4-flash", "deepseek"),
 ]
 
-# Where each host says what it is retiring and what it charges. Read 2026-10-16.
+# Where each host says what it is retiring. Read 2026-10-16.
 PAGES = {
     "anthropic": "https://docs.anthropic.com/en/docs/about-claude/model-deprecations",
     "openai": "https://platform.openai.com/docs/deprecations",
@@ -54,6 +54,23 @@ PAGES = {
     "deepseek": "https://api-docs.deepseek.com/updates",
     "openrouter": "https://openrouter.ai/api/v1/models",
 }
+
+# ...and where each host says what it charges. Half this duty is "a published price that is about to
+# change", and the baseline found both price events (OpenAI's promo end, Gemini's doubling) by reading
+# these pages *by hand* — they were absent from PAGES, so the automated watch could not see the half of
+# the job its own docstring promised. Added 2026-10-16. OpenRouter is not repeated here: its /models
+# call above already carries each model's price, which is why the DeepSeek routes read their price there.
+PRICING_PAGES = {
+    "anthropic": "https://www.anthropic.com/pricing",
+    "openai": "https://platform.openai.com/docs/pricing",
+    "google": "https://ai.google.dev/gemini-api/docs/pricing",
+    "deepseek": "https://api-docs.deepseek.com/quick_start/pricing",
+}
+
+
+def pricing_key(provider: str) -> str:
+    """Namespace a pricing page so it cannot collide with the deprecations page for the same host."""
+    return f"price:{provider}"
 
 ISO_DATE = re.compile(r"\b(20\d{2})-(\d{2})-(\d{2})\b")
 
@@ -107,16 +124,18 @@ def report(pages: dict) -> list:
     rows = []
     for amigo, route, model, key in ROUTES:
         text = pages.get(key)
-        if text is None:
-            rows.append({"amigo": amigo, "route": route, "model": model,
-                         "page": PAGES[key], "fetched": False, "hits": [], "dates": []})
-            continue
-        hits = mentions(text, model)
-        rows.append({
-            "amigo": amigo, "route": route, "model": model, "page": PAGES[key],
-            "fetched": True, "hits": hits,
-            "dates": dates_in(" ".join(hits)),
-        })
+        ptext = pages.get(pricing_key(key))
+        p_hits = mentions(ptext, model) if ptext else []
+        row = {
+            "amigo": amigo, "route": route, "model": model,
+            "page": PAGES[key], "fetched": text is not None,
+            "hits": mentions(text, model) if text is not None else [],
+            "pricing_page": PRICING_PAGES.get(key), "pricing_fetched": ptext is not None,
+            "pricing_hits": p_hits,
+        }
+        row["dates"] = dates_in(" ".join(row["hits"]))
+        row["pricing_dates"] = dates_in(" ".join(p_hits))
+        rows.append(row)
     return rows
 
 
@@ -129,7 +148,9 @@ def main(argv=None) -> int:
     if not args.fetch:
         print("hosts_watch: offline (pass --fetch to read the vendors' pages)\n")
         for amigo, route, model, key in ROUTES:
-            print(f"  {amigo:7s} {route:26s} {model:26s} -> {PAGES[key]}")
+            pricing = PRICING_PAGES.get(key, "(price read from the same page)")
+            print(f"  {amigo:7s} {route:26s} {model:26s} -> {PAGES[key]}\n"
+                  f"  {'':7s} {'':26s} {'':26s}    price -> {pricing}")
         return 0
 
     pages = {}
@@ -140,6 +161,13 @@ def main(argv=None) -> int:
         except Exception as exc:  # noqa: BLE001 - a dead vendor must not kill the report
             print(f"FETCH FAILED {url}: {exc}", file=sys.stderr)
             pages[key] = None
+    for key, url in PRICING_PAGES.items():
+        try:
+            pages[pricing_key(key)] = fetch(url)
+            print(f"fetched {url}", file=sys.stderr)
+        except Exception as exc:  # noqa: BLE001 - a dead vendor must not kill the report
+            print(f"FETCH FAILED {url}: {exc}", file=sys.stderr)
+            pages[pricing_key(key)] = None
 
     rows = report(pages)
     if args.json:
@@ -149,13 +177,25 @@ def main(argv=None) -> int:
     for r in rows:
         if not r["fetched"]:
             print(f"\n## {r['amigo']} — {r['model']}\n  page not reachable: {r['page']}")
+        else:
+            head = "not mentioned" if not r["hits"] else f"{len(r['hits'])} mention(s)"
+            print(f"\n## {r['amigo']} — {r['model']} ({r['route']})\n  {head}")
+            for h in r["hits"]:
+                print(f"    · {h}")
+            if r["dates"]:
+                print(f"  dates seen: {', '.join(r['dates'])}")
+        if not r.get("pricing_page"):
             continue
-        head = "not mentioned" if not r["hits"] else f"{len(r['hits'])} mention(s)"
-        print(f"\n## {r['amigo']} — {r['model']} ({r['route']})\n  {head}")
-        for h in r["hits"]:
-            print(f"    · {h}")
-        if r["dates"]:
-            print(f"  dates seen: {', '.join(r['dates'])}")
+        if not r["pricing_fetched"]:
+            print(f"  price page not reachable: {r['pricing_page']}")
+        elif not r["pricing_hits"]:
+            print(f"  price page: {r['model']} not named on {r['pricing_page']}")
+        else:
+            print(f"  price page mentions ({r['pricing_page']}):")
+            for h in r["pricing_hits"]:
+                print(f"    £ {h}")
+            if r["pricing_dates"]:
+                print(f"  price dates seen: {', '.join(r['pricing_dates'])}")
     return 0
 
 
