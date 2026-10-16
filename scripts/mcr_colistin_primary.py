@@ -9,7 +9,8 @@ collection year, mcr variant, detection method and sampling design are all missi
 exactly the columns that decide whether the reported cross-sector pattern is biology or surveillance.
 So the item's next action is to go to the primary studies and read the missing columns off them.
 
-This script does the *retrieval* half and nothing else: for each heavy/anomalous seed row it names
+This script does the *retrieval* half and nothing else: for each target seed row (the heavy/anomalous
+ones named on 2026-10-11, plus the food and environmental rows 18/20/21/25 added 2026-10-16) it names
 the primary study by DOI, fetches the Europe PMC core record, and writes the raw metadata plus
 abstract to `research/mcr-colistin-primary-raw.json`. The classification (variant, method, design,
 window) is done by hand in `research/mcr-colistin-harmonisation.md`, because it is a reading task and
@@ -57,6 +58,18 @@ TARGETS = [
      "ref": "39", "doi": "10.3389/fmicb.2022.1076315"},
     {"row": "17i", "country": "Portugal", "sector": "Livestock", "seed_n": 28,  "seed_pos": 17,
      "ref": "39", "doi": "10.3389/fmicb.2022.1076315"},
+    # Added 2026-10-16: the seed's food and environmental rows. These four carry the sampling-frame
+    # differences the item's question is really about (meat vs a picked animal cohort; a cohabiting
+    # dog/human household vs a survey; farmland soil/water/manure vs clinical sampling), and they are
+    # the next step named in research/mcr-colistin-harmonisation.md section 7.
+    {"row": "18",  "country": "Multiple countries in Europe", "sector": "Meat",
+     "seed_n": 128,  "seed_pos": 33, "ref": "40", "doi": "10.15436/JFST.1.4.5"},
+    {"row": "20",  "country": "Italy", "sector": "Meat", "seed_n": 147, "seed_pos": 2,
+     "ref": "22", "doi": "10.3390/microorganisms10091805"},
+    {"row": "21",  "country": "Portugal", "sector": "Human and companion animal", "seed_n": 227,
+     "seed_pos": 12, "ref": "42", "doi": "10.2807/1560-7917.ES.2022.27.44.2101144"},
+    {"row": "25",  "country": "Algeria", "sector": "Soil, water, and manure", "seed_n": 103,
+     "seed_pos": 8, "ref": "21", "doi": "10.1016/j.jgar.2019.10.001"},
 ]
 
 

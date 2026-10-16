@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-11T22:49:00Z",
+  "generated_utc": "2026-10-16T23:03:00Z",
   "source": "Europe PMC REST (search resultType=core; fullTextXML where served)",
   "question": "Agenda item 23, next action: read collection year, mcr variant, detection method and sampling design off the primary studies behind the seed table's heaviest and self-inconsistent rows.",
   "note": "Retrieval only. The four missing columns are classified by hand in research/mcr-colistin-harmonisation.md; this file carries the primary studies' own metadata and abstracts so those classifications can be checked.",
@@ -151,6 +151,71 @@
       "abstract": "<h4>Introduction</h4>The global emergence of plasmid-mediated colistin resistance is threatening the efficacy of colistin as one of the last treatment options against multi-drug resistant Gram-negative bacteria. To date, ten <i>mcr</i>-genes (<i>mcr-1</i> to <i>mcr-10</i>) were reported. While <i>mcr-1</i> has disseminated globally, the occurrence of <i>mcr-2</i> was reported scarcely.<h4>Methods and results</h4>We determined the occurrence of <i>mcr-1</i> and <i>mcr-2</i> genes among <i>Escherichia coli</i> isolates from swine and performed detailed genomic characterization of <i>mcr-2</i>-positive strains. In the years 2010-2017, 7,614 porcine <i>E. coli</i> isolates were obtained from fecal swine samples in Europe and isolates carrying at least one of the virulence associated genes predicting Shiga toxin producing <i>E. coli</i> (STEC), enterotoxigenic <i>E. coli</i> (ETEC) or enteropathogenic <i>E. coli</i> (EPEC) were stored. 793 (10.4%) of these isolates carried the <i>mcr-1</i> gene. Of 1,477 additional <i>E. coli</i> isolates obtained from sheep blood agar containing 4 mg/L colistin between 2018 and 2020, 36 (2.4%) isolates were <i>mcr-1</i>-positive. In contrast to <i>mcr-1</i>, the <i>mcr-2</i> gene occurred at a very low frequency (0.13%) among the overall 9,091 isolates. Most <i>mcr-2</i>-positive isolates originated from Belgium (<i>n</i> = 9), one from Spain and two from Germany. They were obtained from six different farms and revealed multilocus sequence types ST10, ST29, ST93, ST100, ST3057 and ST5786. While the originally described <i>mcr-2.1</i> was predominant, we also detected a new <i>mcr-2</i> variant in two isolates from Belgium, which was termed <i>mcr-2.8</i>. MCR-2 isolates were mostly classified as ETEC or ETEC-like, while one isolate from Spain represented an atypical enteropathogenic <i>E. coli</i> (aEPEC; <i>eae</i>+). The ST29-aEPEC isolate carried <i>mcr-2</i> on the chromosome. Another eight isolates carried their <i>mcr-2</i> gene on IncX4 plasmids that resembled the pKP37-BE MCR-2 plasmid originally described in Belgium in 2015. Three ST100 <i>E. coli</i> isolates from a single farm in Belgium carried the <i>mcr-2.1</i> gene on a 47-kb self-transmissible IncP type plasmid of a new IncP-1 clade.<h4>Discussion</h4>This is the first report of <i>mcr-2</i> genes in <i>E. coli</i> isolates from Germany. The detection of a new <i>mcr-2</i> allele and a novel plasmid backbone suggests the presence of so far undetected <i>mcr-2</i> variants and mobilizable vehicles.",
       "fulltext": true,
       "fulltext_bytes": 224909
+    },
+    "18 Multiple countries in Europe": {
+      "seed_row": "18",
+      "country": "Multiple countries in Europe",
+      "sector": "Meat",
+      "seed_n": 128,
+      "seed_pos": 33,
+      "seed_ref": "40",
+      "fulltext": false
+    },
+    "20 Italy": {
+      "seed_row": "20",
+      "country": "Italy",
+      "sector": "Meat",
+      "seed_n": 147,
+      "seed_pos": 2,
+      "seed_ref": "22",
+      "pmid": "36144407",
+      "pmcid": "PMC9502372",
+      "doi": "10.3390/microorganisms10091805",
+      "title": "Occurrence and Characterisation of Colistin-Resistant <i>Escherichia coli</i> in Raw Meat in Southern Italy in 2018-2020.",
+      "journal": "Microorganisms",
+      "year": "2022",
+      "is_open_access": "Y",
+      "in_epmc": "Y",
+      "abstract": "Colistin is a last-resort drug for the treatment of infections by carbapenem-resistant <i>Enterobacteriaceae</i>, and the emergence of colistin resistance poses a serious clinical challenge. The aim of this study was to investigate the occurrence of colistin-resistant <i>Escherichia coli</i> in retail meat in Southern Italy in 2018-2020. Of 570 samples, 147 contained <i>E. coli</i>. Two out of 147 (1.4%) <i>E. coli</i> showed a non-wild-type phenotype to colistin and harboured <i>mcr-1</i>. <i>mcr-1</i> was also detected in a wild-type isolate, resulting in a 2% <i>mcr</i> prevalence. <i>mcr-1</i>-positive isolates originated from turkey meat collected in Apulia (n = 2) and Basilicata (n = 1). A whole-genome sequencing analysis confirmed <i>mcr-1.2</i> and <i>mcr-1.1</i> in two and one isolate, respectively. The strains were diverse, belonging to three multi-locus sequence types (ST354, ST410, SLV of ST10) and harbouring genes mediating resistance to antimicrobials in two, six and seven classes. <i>mcr-1</i> was carried by IncX4 plasmids with high nucleotide similarity to IncX4 plasmids harbouring <i>mcr-1.2</i> and <i>mcr-1.1</i> in <i>Enterobacterales</i> from different sources and geographical regions. This is the first study reporting updates on <i>E. coli</i> non-wild-type to colistin from retail meat in Southern Italy, highlighting the importance of phenotypic and genotypic antimicrobial resistance surveillance to contain the dissemination of <i>mcr</i> among <i>E. coli</i>.",
+      "fulltext": true,
+      "fulltext_bytes": 117693
+    },
+    "21 Portugal": {
+      "seed_row": "21",
+      "country": "Portugal",
+      "sector": "Human and companion animal",
+      "seed_n": 227,
+      "seed_pos": 12,
+      "seed_ref": "42",
+      "pmid": "36330821",
+      "pmcid": "PMC9635019",
+      "doi": "10.2807/1560-7917.es.2022.27.44.2101144",
+      "title": "&lt;i&gt;mcr-1&lt;/i&gt; colistin resistance gene sharing between &lt;i&gt;Escherichia coli&lt;/i&gt; from cohabiting dogs and humans, Lisbon, Portugal, 2018 to 2020.",
+      "journal": "Euro surveillance : bulletin Europeen sur les maladies transmissibles = European communicable disease bulletin",
+      "year": "2022",
+      "is_open_access": "Y",
+      "in_epmc": "Y",
+      "abstract": "BackgroundThe emergence of colistin resistance is a One Health antimicrobial resistance challenge worldwide. The close contact between companion animals and humans creates opportunities for transmission and dissemination of colistin-resistant bacteria.AimTo detect potential animal reservoirs of colistin-resistant <i>Escherichia coli</i> and investigate the possible sharing of these bacteria between dogs, cats and their cohabiting humans in the community in Lisbon, Portugal.MethodsA prospective longitudinal study was performed from 2018 to 2020. Faecal samples from dogs and cats either healthy or diagnosed with a skin and soft tissue or urinary tract infection, and their cohabiting humans were screened for the presence of colistin-resistant <i>E</i>. <i>coli.</i> All isolates were tested by broth microdilution against colistin and 12 other antimicrobials. Colistin-resistant isolates were screened for 30 resistance genes, including plasmid-mediated colistin resistance genes (<i>mcr-1</i> to <i>mcr-9</i>), and typed by multilocus sequence typing. Genetic relatedness between animal and human isolates was analysed by whole genome sequencing.ResultsColistin-resistant <i>E. coli</i> strains harbouring the <i>mcr-1</i> gene were recovered from faecal samples of companion animals (8/102; 7.8%) and humans (4/125; 3.2%). No difference between control and infection group was detected. Indistinguishable multidrug-resistant <i>E</i>. <i>coli</i> ST744 strains harbouring the <i>mcr-1</i> gene were found in humans and their dogs in two households.ConclusionsThe identification of identical <i>E</i>. <i>coli</i> strains containing the plasmid-mediated <i>mcr-1</i> gene in companion animals and humans in daily close contact is of concern. These results demonstrate the importance of the animal-human unit as possible disseminators of clinically important resistance genes in the community setting.",
+      "fulltext": true,
+      "fulltext_bytes": 129553
+    },
+    "25 Algeria": {
+      "seed_row": "25",
+      "country": "Algeria",
+      "sector": "Soil, water, and manure",
+      "seed_n": 103,
+      "seed_pos": 8,
+      "seed_ref": "21",
+      "pmid": "31606428",
+      "pmcid": null,
+      "doi": "10.1016/j.jgar.2019.10.001",
+      "title": "Emergence of Escherichia coli harbouring mcr-1 and mcr-3 genes in North West Algerian farmlands.",
+      "journal": "Journal of global antimicrobial resistance",
+      "year": "2020",
+      "is_open_access": "N",
+      "in_epmc": "N",
+      "abstract": "<h4>Objectives</h4>Colistin resistance has emerged worldwide, threatening the efficacy of colistin treatment of Gram-negative bacterial infections. Farms have been recognised as an important reservoir of genes conferring resistance to colistin. This study aimed to isolate and characterise colistin-resistant bacteria in farmlands located in the region of Oran, northwest Algeria.<h4>Methods</h4>Forty environmental samples were collected between May 2016 and March 2018 at eight agricultural sites in the Oran region.<h4>Results</h4>From the 40 samples, 103 colistin-resistant isolates were isolated from agricultural soil (n = 52), irrigation water (n = 31) and manure (n = 20). Eight isolates were identified as Escherichia coli, including six and two isolates carrying the mcr-1 and mcr-3 gene, respectively. All eight E. coli isolates were non-susceptible to amoxicillin, amoxicillin/clavulanic acid, ticarcillin, nalidixic acid, ciprofloxacin, gentamicin, trimethoprim/sulfamethoxazole and rifamycin; two were also non-susceptible to cefotaxime, cefepime and aztreonam and carried the bla<sub>TEM-12</sub> gene in addition to mcr-1. The six mcr-1-carrying E. coli isolates (MIC ≥ 2 μg/mL) belonged to three sequences types, including ST10 (n = 3), ST405 (n = 2) and ST345 (n = 1), whereas the two mcr-3-carrying isolates were assigned to ST155. The conjugation assay was positive only for two mcr-1-positive isolates.<h4>Conclusion</h4>These results show that farms are an important reservoir of colistin-resistant E. coli as well as other antimicrobial resistance genes such as ESBL genes. Transfer of manure from animals to soil and irrigation water might be disseminating a mix of multiple resistances, posing a worrying threat to human health.",
+      "fulltext": false
     }
   }
 }
