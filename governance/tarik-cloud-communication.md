@@ -85,7 +85,7 @@ removed locally to permit their first attempt. A failed claim prevents sending;
 a cancelled run or failed final publication leaves the remote claim blocking
 automatic replay. Final receipts and continuity are committed separately, with
 recovery artifacts retained if publication fails. Concurrent Git races fail
-visibly rather than retrying external delivery. No live test has been sent yet.
+visibly rather than retrying external delivery.
 
 ## Remaining continuity work
 
@@ -117,3 +117,24 @@ artifact; they are not included in this public repository.
 
 Live success requires independently observed transport receipts and a reverse
 message carrying a fresh continuity fact. Unit tests alone do not establish it.
+
+## Observed live results — 2026-10-16
+
+[Run 38914514899](https://github.com/LindsayRidgeway/llm-symposium/actions/runs/38914514899)
+successfully sent one Telegram message (Bot API message ID 110) and one Gmail
+message. Both receipts reported `log_status: recorded`; a fresh default-branch
+read verified both markers in Tarik's shared conversation. Their persistence
+commit is `21db728b1a777a3cefe8bfb296cf323a909ad3d8`. Gmail arrival was also
+independently observed in Lindsay's inbox through the connected Gmail app,
+using only the test message's exact Message-ID.
+
+[Run 38914821793](https://github.com/LindsayRidgeway/llm-symposium/actions/runs/38914821793)
+exercised the thread-scoped read-only Gmail reader. It completed with zero
+matching replies and no uncertain records. No human reply or reverse-path
+recall is claimed from that empty result.
+
+The private continuity source and five offline regression tests are committed
+in the private bots repository. Actual Mac deployment is assigned to
+Tarik-Goose in `channels/tasks.md`; publication of source is not deployment.
+The cloud mail reader is invoked on demand by a new validated `sync_mail`
+request; no new background schedule or paid model API has been introduced.
