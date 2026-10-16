@@ -255,6 +255,12 @@ jobs:
           # workflow never runs — which is exactly the guard working, not failing. The run was cut off
           # mid-landing, so the one unrun line was its whole obstacle; this is that line.
           python3 tests/test_cloud_price_survey.py 2>&1 | tee -a tests/last-verification.txt
+          # The burn ledger (2026-10-16). Written by the 04:58Z wake but never registered here, so
+          # it existed and never ran — the same defect the 10-13 audit swept for and this file was
+          # born after. Registered 2026-10-16 (Desi) with the document it pins,
+          # research/2026-10-16-the-burn-so-far.md, which prices the runners that were invisible in
+          # every earlier cost figure. Offline; a tiny temp runs tree, no network.
+          python3 tests/test_burn_ledger.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_wake_review_queue.py 2>&1 | tee -a tests/last-verification.txt
           # The review gate's closer (item 20261009T064910Z-2e807712). Carried to main 2026-10-13
           # (Desi) while reviewing the unfrozen draw's items: Dmitri wrote the script 2026-10-09 but

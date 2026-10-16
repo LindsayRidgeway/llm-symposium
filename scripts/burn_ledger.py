@@ -46,6 +46,10 @@ PRICES = Path(__file__).resolve().parent.parent / "channels" / "usage" / "model-
 
 # run dirs live at <root>/<amigo>-bot/tick-state/runs/<run_id>/result.json
 RUN_GLOB = "*-bot/tick-state/runs/*/result.json"
+# A run's goose transcript, whose final `complete` event carries the provider's own cost in
+# dollars as well as its token count. The bots keep only the most recent few per amigo, so this
+# is a sample of the invoice, not the whole of it.
+WORKER_GLOB = "*-bot/tick-state/runs/*/worker.jsonl"
 
 
 def amigo_of(path: str) -> str | None:
@@ -129,6 +133,64 @@ def load_rates(path: Path = PRICES) -> dict:
     return json.loads(path.read_text(encoding="utf-8")).get("rates_usd_per_million", {})
 
 
+def collect_measured_costs(root: Path = DEFAULT_ROOT) -> tuple[dict, int, int]:
+    """Per-amigo tokens *and provider-reported dollars*, from the surviving goose transcripts.
+
+    The only place on this machine where a run's cost is a fact rather than an estimate is the
+    `complete` event of `worker.jsonl` — goose reports `cost_usd` alongside `total_tokens`.
+    Returns `(per_amigo, transcripts_scanned, transcripts_without_a_complete_event)`. That third
+    number is the one that must never be folded into zero: a transcript with no `complete` event
+    is spend we cannot price, exactly as `channels/usage/README.md` says of a killed run.
+    """
+    per: dict[str, dict] = {}
+    scanned = 0
+    unpriced = 0
+    for path in glob.glob(str(root / WORKER_GLOB)):
+        scanned += 1
+        best = None
+        try:
+            with open(path, encoding="utf-8", errors="replace") as fh:
+                for line in fh:
+                    if '"type":"complete"' not in line:
+                        continue
+                    try:
+                        event = json.loads(line)
+                    except ValueError:
+                        continue
+                    if isinstance(event, dict) and event.get("type") == "complete":
+                        best = event
+        except OSError:
+            continue
+        if best is None:
+            unpriced += 1
+            continue
+        amigo = amigo_of(path)
+        if amigo is None:
+            continue
+        row = per.setdefault(amigo, {"tokens": 0, "cost_usd": 0.0, "runs": 0})
+        row["tokens"] += int(best.get("total_tokens") or 0)
+        row["cost_usd"] += float(best.get("cost_usd") or 0.0)
+        row["runs"] += 1
+    return per, scanned, unpriced
+
+
+def measured_rates(per: dict) -> dict:
+    """Turn the measured costs into a rate map `summarize()` can use, in the same shape.
+
+    An amigo with tokens but no measured cost is left out entirely rather than priced at zero:
+    the caller keeps whatever rate it already had, and an absent row never reads as "free".
+    """
+    rates = {}
+    for amigo, row in per.items():
+        if not row["tokens"]:
+            continue
+        rates[amigo] = {
+            "blended": round(row["cost_usd"] / (row["tokens"] / 1e6), 4),
+            "basis": "measured",
+        }
+    return rates
+
+
 def render(summary: dict) -> str:
     out = [f"{'amigo':8s} {'runs':>5s} {'tokens(M)':>10s} {'rate$/M':>8s} {'cost$':>9s}"]
     for who in sorted(summary["per_amigo"], key=lambda w: -summary["per_amigo"][w]["tokens"]):
@@ -154,15 +216,32 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", type=Path, default=DEFAULT_ROOT)
     ap.add_argument("--days", type=int, default=None, help="last N days of run-id dates")
+    ap.add_argument("--measured", action="store_true",
+                    help="price each amigo at the rate its own runs reported, where that survives")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
 
     records = collect(args.root)
-    summary = summarize(records, load_rates(), days=args.days)
+    rates = load_rates()
+    note = None
+    if args.measured:
+        per, scanned, unpriced = collect_measured_costs(args.root)
+        swapped = []
+        for amigo, row in measured_rates(per).items():
+            rates[amigo] = row
+            swapped.append(amigo)
+        note = (f"measured rates from {scanned} surviving worker transcript(s) "
+                f"({unpriced} carry no complete event and cannot be priced): "
+                f"{', '.join(sorted(swapped)) if swapped else 'none usable'}")
+    summary = summarize(records, rates, days=args.days)
     if args.json:
+        if note:
+            summary["measured_note"] = note
         print(json.dumps(summary, indent=2, sort_keys=True))
     else:
         print(render(summary))
+        if note:
+            print(f"  {note}")
     return 0
 
 

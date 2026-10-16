@@ -97,5 +97,57 @@ class CollectTest(unittest.TestCase):
             self.assertFalse(list(root.rglob("*.tmp")), "collect must not write into the tree")
 
 
+class MeasuredRateTest(unittest.TestCase):
+    """The measured column: dollars the provider reported, not dollars we priced.
+
+    The failure this class exists to stop is the same one at one remove. A transcript that was
+    killed before goose wrote its `complete` event spent real money and reported none; if that
+    reads as a run with zero cost, the measured rate comes out low and the figure the founder is
+    shown is *cheaper* than the truth, in the direction that would make him fund too little.
+    """
+
+    def _tree(self, root: Path) -> Path:
+        priced = root / "gemini-bot" / "tick-state" / "runs" / "20261016T000000Z-1"
+        priced.mkdir(parents=True)
+        (priced / "worker.jsonl").write_text(
+            '{"type":"start"}\n'
+            '{"type":"complete","total_tokens":2000000,"cost_usd":1.0}\n')
+        cut = root / "desi-bot" / "tick-state" / "runs" / "20261016T030000Z-2"
+        cut.mkdir(parents=True)
+        (cut / "worker.jsonl").write_text('{"type":"tool"}\n{"type":"error"}\n')
+        return root
+
+    def test_provider_reported_cost_becomes_the_rate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            per, scanned, unpriced = bl.collect_measured_costs(self._tree(Path(tmp)))
+            self.assertEqual((scanned, unpriced), (2, 1))
+            self.assertEqual(per["gemini"]["cost_usd"], 1.0)
+            self.assertNotIn("desi", per)
+            self.assertEqual(bl.measured_rates(per),
+                             {"gemini": {"blended": 0.5, "basis": "measured"}})
+
+    def test_an_amigo_with_no_measured_tokens_gets_no_measured_rate(self):
+        per = {"tarik": {"tokens": 0, "cost_usd": 0.0, "runs": 1}}
+        self.assertEqual(bl.measured_rates(per), {},
+                         "a run with no token count must not become a $0/M rate")
+
+    def test_main_measured_swaps_the_measured_rate_and_keeps_the_others(self):
+        import contextlib
+        import io
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._tree(Path(tmp))
+            run = root / "gemini-bot" / "tick-state" / "runs" / "20261016T000000Z-1"
+            (run / "result.json").write_text(json.dumps(
+                {"run_id": "20261016T000000Z-1", "model": "m", "total_tokens": 2_000_000}))
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                bl.main(["--root", str(root), "--measured", "--json"])
+            summary = json.loads(buf.getvalue())
+            # the chat ledger prices gemini at 0.59/M; the runner's own runs said 0.50
+            self.assertEqual(summary["per_amigo"]["gemini"]["rate_usd_per_million"], 0.5)
+            self.assertEqual(summary["per_amigo"]["gemini"]["cost_usd"], 1.0)
+            self.assertIn("1 carry no complete event", summary["measured_note"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
