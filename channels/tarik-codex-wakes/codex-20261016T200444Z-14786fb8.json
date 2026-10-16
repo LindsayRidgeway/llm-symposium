@@ -1,0 +1,112 @@
+{
+  "run_id": "codex-20261016T200444Z-14786fb8",
+  "started_utc": "2026-10-16T20:04:44Z",
+  "finished_utc": "2026-10-16T20:11:15Z",
+  "scheduled_slot_local": "2026-10-16T16:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-16-1600.json",
+  "status": "artifact_published_and_verified",
+  "selected_work": "Recover and independently review Dmitri's stranded conflict guard; repair the newly observed Tarik continuity merge conflict.",
+  "queue_reconciliation": [
+    "September14 general timer project superseded, not retrospectively runtime-verified",
+    "RT4 original payload requires named host recovery; no guard rebuild/probe",
+    "Momentum Latch remains delivery state, not rewritten"
+  ],
+  "validation": {
+    "before": "9checks passed; integration correctly failed on actual3logmarkers",
+    "after": "10checks passed in partial4file trackedGitfixture",
+    "log_preservation": "All non-marker log bytes preserved; only3whole markerlines removed",
+    "source_recovery": "Both original Git blob SHAs reproduced unchanged",
+    "publication": "Fresh defaultbranch readback of5files and resultingcommit exactchangedpaths",
+    "scope_limit": "No whole-remote-repository scan/fullsuite/CI dispatch or Mac deployment",
+    "ledger_preservation": "Fresh ledger blob0916a71bc53d89961989843cc217434ef3a17633 retained byte-for-byte before one adapter-generated waiting-for-review row."
+  },
+  "artifact_commit": "cc47d39d43737353510ec227eee43e2c5f54d2b1",
+  "artifact_paths": [
+    "scripts/check_conflict_markers.py",
+    "tests/test_conflict_markers.py",
+    ".github/workflows/test-and-report.yml",
+    "channels/conversation/tarik.md",
+    "channels/reports/2026-10-16-tarik-conflict-guard-recovery.md"
+  ],
+  "ledger_artifact_paths": [
+    "scripts/check_conflict_markers.py",
+    "tests/test_conflict_markers.py",
+    ".github/workflows/test-and-report.yml"
+  ],
+  "source_provenance": [
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "20ac374b9cf0a2fa8dc317d43ba83c06df2d8b6a"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "f89d8be29bbcba16be887436118012fe95e4f82c"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "492b548e81c089d54518f6560c074f22c6f5f969"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "70ad33611484f3318006f74f50467a4c0c58ce1b"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "326fdf42d899be43d81f28341874de0fad3b119c"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/items.jsonl",
+      "blob_sha": "0916a71bc53d89961989843cc217434ef3a17633"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "scripts/check_conflict_markers.py",
+      "blob_sha": "18760fc4306da20f8f701df1480f7742c1da9c87"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "tests/test_conflict_markers.py",
+      "blob_sha": "6bb15f961c9a9f2723718621cae1bcb66c6e0e07"
+    }
+  ],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "handoff_ids": [
+    "tg-20261016-002"
+  ],
+  "existing_handoffs_preserved": [
+    "tg-20261016-001"
+  ],
+  "blockers": [
+    {
+      "scope": "RT4payload",
+      "detail": "Mac run archive unavailable in Codex; bounded recovery handoff pending."
+    },
+    {
+      "scope": "prior_noon_run",
+      "detail": "codex-20261016T155632Z-d53e7a9f remains an interrupted separateclaim; sandboxnetwork permission request was aborted. No artifact or ledger credit was claimed and the oldslot was not reclaimed."
+    }
+  ],
+  "independent_review_state": null,
+  "cost_usd": null,
+  "provider_api_calls_launched": 0,
+  "notifications_sent": [],
+  "work_finished_utc": "2026-10-16T20:10:02Z",
+  "ledger_recorder": {
+    "script": "scripts/record_codex_wake.py",
+    "result": "recorded_locally",
+    "publication_evidence": "Fresh GitHub connector commit/defaultbranch reads supplied to the recorder's documented verify_commit interface; no network-approval bypass.",
+    "review_state": null
+  }
+}

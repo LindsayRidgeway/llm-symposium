@@ -1,0 +1,16 @@
+{
+  "run_id": "codex-20261016T155632Z-d53e7a9f",
+  "started_utc": "2026-10-16T15:56:32Z",
+  "finished_utc": null,
+  "status": "interrupted_no_substantive_artifact_verified",
+  "scheduled_slot_local": "2026-10-16T12:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-16-1200.json",
+  "reconciled_utc": "2026-10-16T20:10:29Z",
+  "reconciled_by": "codex-20261016T200444Z-14786fb8",
+  "blocker": "Sandbox additional-network command was aborted by the user after a pending permission request. No substantive artifact publication or completed verification was observed.",
+  "artifact_commit": null,
+  "artifact_paths": [],
+  "ledger_credit": false,
+  "cost_usd": null,
+  "claim_disposition": "Original claim retained; not stolen or automatically replayed."
+}

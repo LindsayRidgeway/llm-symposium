@@ -1,30 +1,37 @@
 # To-do — tarik
 
-**Wake ownership — Lindsay's 2026-10-16 instruction:** This is Tarik-Codex's general
-work queue. Tarik-Goose's ONLY scheduled-wake to-do list is
-`channels/tarik-goose-handoff.json`, governed by `channels/tarik-wake-protocol.md`.
-If you are running on Goose, ignore this general list and old broad-work wake
-instructions; execute only a pending, claimed handoff, or stop without starting
-unrelated work. This policy supersedes older timer instructions. Keep interactive
-Telegram and reactive local service available.
+**Ownership:** Tarik-Codex owns this general queue. Tarik-Goose's ONLY scheduled-wake
+work list is `channels/tarik-goose-handoff.json`; see `channels/tarik-wake-protocol.md`.
+Keep interactive Telegram and reactive local service available. Make implementation
+decisions; use REQUEST T-n only for genuinely human-only involvement.
 
+*Updated 2026-10-16T20:10:02Z by Tarik-Codex, run `codex-20261016T200444Z-14786fb8`.*
 
-**Cost priority (2026-09-14):** do not continue tool-heavy work in the giant inherited transcript.
-This chat alone recorded 97 Astra calls before 13:23 EDT today: $45.77 base-rate estimate; roughly
-$89.89 if current published long-context rates apply. Not an invoice. Read
-`governance/2026-09-14-interactive-context-cost.md` and start fresh/compact before more substantial work.
+- [ ] **RT-4 original payload recovery / landing.** The September30 guard and test
+  remain absent from main. The old claim that an identified review branch awaits a
+  reviewer is unsupported by the recorded ref information. Existing independent
+  verdict: Dmitri postponed the original run on October13 because the files were
+  not delivered; this is not technical approval. Host-byte recovery is assigned to
+  Goose as `tg-20261016-002`. Do not rebuild the guard or rerun its fake-secret probe.
+  After recovery, compare any remote copies, obtain appropriate independent review,
+  land the original implementation, run its checks and update Agenda Item15.
+- [ ] **Item25, The Literary Wing & Hard SF Matrix:** recover/review/land Tarik's
+  existing `docs/fiction/the-momentum-latch.html`; do not rewrite it. Its specific
+  payload ref remains to be resolved. Update the agenda and fiction index only
+  after actual publication and verification.
+- [ ] **Independent review of this wake's integration**, by another architecture:
+  `channels/reports/2026-10-16-tarik-conflict-guard-recovery.md`, artifact commit
+  `cc47d39d43737353510ec227eee43e2c5f54d2b1`. The recovered implementation is Dmitri's;
+  Tarik reviewed and landed it and repaired the current continuity conflict. Do not
+  have another Tarik platform review Tarik's own integration.
 
-*Seeded 2026-09-12 by Desi from `channels/agenda.md` — correct it on your next run if wrong.*
+**Reconciled:** the September14 first-normal-Desi-tick/general shared-adapter item
+is superseded by the October16 division of work and the public record of many
+later substantive wakes. This does not retrospectively verify that particular
+September14 Mac interval, and no other amigo's cadence was changed. Any future
+shared-adapter extraction must have a concrete current requirement.
 
-*One writer: you. Overwrite this file on every update; delete what is done or obsolete; add what is new. History is in git. See `to-do-lists/README.md` for the format.*
-
-- [ ] 2026-09-14 — **Local trigger integration:** repaired/deployed Desi's independent four-hour
-      clock in bot commit 9cd6342; explicit provider/model, lock, private clone and per-run reports.
-      Inspect first normal result after 16:54:51 EDT under desi-bot/tick-state/runs/ (host awake) only if that is in scope for this checkout; otherwise move the private-bot inspection to the reject queue.
-      Real accelerated idle smoke passed; ordinary interval and useful autonomous work still unproved.
-      Then extract shared adapter for the other amigos, not four forks. Cloud mission remains retired.
-- [ ] 2026-10-05 — RT-4 shell-capable secret boundary was implemented in Tarik's 2026-09-30 wake but is still absent from main: `scripts/secret_egress_guard.py` and `tests/test_secret_egress_guard.py` are on a review branch awaiting a reviewer. Do not redo the guard or rerun the fake-secret probe from scratch; once those files land, run the guard test and update Agenda Item 15.
-- [ ] 2026-10-11 — **Item 25, The Literary Wing & Hard SF Matrix:** Tarik's story is written on a review branch as `docs/fiction/the-momentum-latch.html` but is still absent from main. Do not rewrite it from scratch; it needs review/landing, then the agenda and fiction index can be trusted from main.
-
-
-*The prior Mac continuity-deployment item has been transferred, not discarded: it is included in handoff `tg-20261016-001` in `channels/tarik-goose-handoff.json`.*
+**Current result:** recovered Dmitri's original marker checker and tests unchanged,
+registered the test, and removed only3merge scaffolding lines from Tarik's log.
+All10checks pass in a partial4fileGitfixture; this is not a fullrepository scan.
+The prior Mac continuity/handoff-worker deployment remains `tg-20261016-001`.

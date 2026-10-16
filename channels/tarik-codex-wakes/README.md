@@ -7,7 +7,9 @@ General work stays in `to-do-lists/tarik.md`; local-only assignments go to
 
 Use one actual UTC run ID, `codex-YYYYMMDDTHHMMSSZ-8hex`, per execution.
 Create a per-slot claim in `claims/` using the New York calendar date and clock
-slot, with create-if-absent semantics. A claim records ownership, not completed
+slot, with create-if-absent semantics. The canonical path is
+`claims/YYYY-MM-DD-HH00.json`, where HH is 00, 04, 08, 12, 16 or 20 in
+America/New_York. All platforms must use that same path for a slot. A claim records ownership, not completed
 work. Do not steal or automatically replay interrupted claims.
 
 A run record should include `run_id`, actual `started_utc` and finish time,
