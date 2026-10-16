@@ -146,6 +146,20 @@ BAND_GLOB = "price-band-*.json"
 
 RUN_ID_RE = re.compile(r"^\d{8}T\d{6}Z-[0-9a-f]{8}$")
 ANY_RUN_ID_RE = re.compile(r"\b(\d{8}T\d{6}Z-[0-9a-f]{8})\b")
+# A run id may be written with a platform prefix. Codex records its rows as
+# `codex-20261016T200444Z-14786fb8` (`scripts/record_codex_wake.py`), while the landing log names the
+# bare id — `ANY_RUN_ID_RE` pulls the `20261016T200444Z-14786fb8` token out of the subject
+# `land(wake): Codex work from run codex-…`. So matching a row's id against the land log has to strip
+# the prefix, or a Codex run whose work is already on main sits in W for ever and surfaces as an item
+# nobody owns. Measured 2026-10-16: the single `--holes` row was exactly this — Tarik's recovered
+# conflict guard, on main since commit cc47d39d, still waiting because its id kept the prefix.
+PREFIXED_RUN_ID_RE = re.compile(r"^[a-z][a-z0-9]*-(\d{8}T\d{6}Z-[0-9a-f]{8})$")
+
+
+def canonical_run_id(run_id: str) -> str:
+    """`codex-20261016T200444Z-14786fb8` -> `20261016T200444Z-14786fb8`; anything else unchanged."""
+    match = PREFIXED_RUN_ID_RE.match(run_id or "")
+    return match.group(1) if match else (run_id or "")
 ITEM_RE = re.compile(r"^\s*ITEM:\s*\[(?P<scope>internal|external)\]\s*(?P<title>.+?)\s*$", re.I)
 TITLE_MAX = 160
 TITLE_SHOWN = 60          # how much of a title --next prints; the full one stays in the ledger
@@ -252,7 +266,8 @@ def run_to_items(amigo: str, run_dir: Path, repo: Path = REPO) -> list[dict]:
     if not declared and all(is_generated_path(p, repo) for p in changed):
         return []
     run_id = data.get("run_id") or run_dir.name
-    filed = parse_run_time(run_id) if RUN_ID_RE.match(run_id) else None
+    canonical = canonical_run_id(run_id)
+    filed = parse_run_time(canonical) if RUN_ID_RE.match(canonical) else None
     common = {
         "id": run_id,
         "filed_utc": filed,
@@ -363,7 +378,7 @@ def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = N
                 if item["id"] in known:
                     continue
                 # Verify the accomplishment rather than assert it.
-                item["state"] = "accomplished" if item["id"] in landed else None
+                item["state"] = ("accomplished" if canonical_run_id(item["id"]) in landed else None)
                 item["state_utc"] = item["filed_utc"] if item["state"] else None
                 item["reason"] = ("landed on main (lander's test gate passed)"
                                   if item["state"] else None)
@@ -408,7 +423,7 @@ def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | 
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     updates = []
     for rec in items.values():
-        if letter_for(rec) != "W" or rec.get("id") not in landed:
+        if letter_for(rec) != "W" or canonical_run_id(rec.get("id")) not in landed:
             continue
         upd = dict(rec)
         upd.update(state="accomplished", state_utc=now,

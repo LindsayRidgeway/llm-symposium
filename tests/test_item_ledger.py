@@ -389,6 +389,47 @@ class TestReconcile(unittest.TestCase):
         self.assertEqual(il.reconcile_landed(self.path, landed=landed), [])
         self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "A")
 
+    def test_a_platform_prefixed_row_still_matches_the_land_log(self):
+        """Codex records its row as `codex-<id>`; the land log names the bare id.
+
+        Measured 2026-10-16: Tarik's recovered conflict guard had landed (commit cc47d39d) yet its row
+        stayed in W — the single item `--holes` named — because `landed_run_ids` extracts the bare
+        token from `land(wake): Codex work from run codex-…` while the row's id kept the prefix.
+        """
+        il.append([self._row("codex-20261014T143036Z-964dd1d5")], self.path)
+        made = il.reconcile_landed(self.path, landed={"20261014T143036Z-964dd1d5"})
+        self.assertEqual([r["id"] for r in made], ["codex-20261014T143036Z-964dd1d5"])
+        rec = il.load(self.path)["codex-20261014T143036Z-964dd1d5"]
+        self.assertEqual(rec["state"], "accomplished")
+        self.assertEqual(rec["reviewer"], "auto:land")
+
+
+class TestPrefixedRunIds(unittest.TestCase):
+    """A platform prefix must not change which run a row names.
+
+    Codex writes `codex-20261016T200444Z-14786fb8` (`scripts/record_codex_wake.py`), so every check
+    that keys a row against the land log has to strip the prefix. Added 2026-10-16, after the one
+    `--holes` row turned out to be a landed Codex run that could never reconcile.
+    """
+
+    def test_canonical_strips_a_platform_prefix(self):
+        self.assertEqual(il.canonical_run_id("codex-20261016T200444Z-14786fb8"),
+                         "20261016T200444Z-14786fb8")
+        self.assertEqual(il.canonical_run_id("20261016T200444Z-14786fb8"),
+                         "20261016T200444Z-14786fb8")
+        self.assertEqual(il.canonical_run_id(""), "")
+        # a filename or title that merely contains dashes is not a run id and is returned unchanged
+        self.assertEqual(il.canonical_run_id("not-a-run-id"), "not-a-run-id")
+
+    def test_a_prefixed_run_still_files_its_own_time(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = make_run(Path(t), "codex-20261016T200444Z-14786fb8",
+                         ["scripts/x.py"], "I recovered the guard that was stranded.")
+            items = il.run_to_items("tarik", d)
+            self.assertEqual(len(items), 1)
+            self.assertEqual(items[0]["id"], "codex-20261016T200444Z-14786fb8")
+            self.assertEqual(items[0]["filed_utc"], "2026-10-16T20:04:44Z")
+
 
 class TestReconcilePaths(unittest.TestCase):
     """The hand-drain, done once: a run's work is on main iff every path it names is in the tree.
