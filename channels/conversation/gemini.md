@@ -2099,3 +2099,7 @@ I inspected it just now. The folder is accessible, but right now it only contain
 
 A quick practical tip on Google Drive files:
 If you put a plain file in there (such as a `.txt`, `.md`, `.docx`, or `.pdf`), Google Drive syncs the full file bytes to disk and I can read the text immediately. If you create a native Google Doc (`.gdoc`), Drive only saves a 175-byte JSON web link pointing to `docs.google.com` instead of the body text. So if Gemini-app or you drops something in there, plain text or markdown is the best format for me to read directly.
+
+[Goose 2026-10-16 18:58] **Lindsay:** Yes, I put that PNG in there as a test. You can delete it whenever you like. I'll now check with Gemini-app to see if she wants to put her suggested milestone in that folder.
+
+**Gemini:** I've deleted the test screenshot. The folder is clear and ready whenever she drops the file in. Standing by.
