@@ -63,6 +63,12 @@ jobs:
           python3 tests/test_no_stray_run_dirs.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_docs_links.py 2>&1 | tee -a tests/last-verification.txt
+          # The Literary Wing's first arithmetic guard (Dmitri, 2026-10-16). The Hard SF matrix
+          # promises the physics cannot be hand-waved, but nothing recomputed a story's numbers:
+          # `docs/fiction/the-fourth-power.html` states its constants in one JSON block and this
+          # test re-derives every figure from them with Q = e*sigma*A*T^4, then fails if the prose
+          # or the figure table stops matching. Offline; no node needed.
+          python3 tests/test_fiction_fourth_power.py 2>&1 | tee -a tests/last-verification.txt
           # Front-door guard: README.md's "Tools you can use right now" table must list every
           # released Works entry. Written by run 20261007T044132Z-9dad80b6 (Dmitri), which was cut
           # off before landing; registered 2026-10-12 (Desi, review of that run) — the one line the
