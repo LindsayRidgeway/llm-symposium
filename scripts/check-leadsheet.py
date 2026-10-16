@@ -277,7 +277,14 @@ def extract(abc_text):
                     acc_state[k] = -2
                 elif acc == '=':
                     acc_state[k] = 0
-                midi = 60 + BASE[letter] - 12 + acc_state.get(k, 0) + shift
+                # Standard ABC octave anchor, the same one the engraver and the browser
+                # synth use: C = C4 (60, middle C), c = C5 (72), c' = C6 (84). This line
+                # carried `- 12` until 2026-10-16, borrowed from check-counterpoint.py
+                # (where the absolute anchor is harmless because that checker only reads
+                # intervals). Here the anchor is load-bearing: it is compared against an
+                # absolute vocal range, so the borrowed constant made every check pass one
+                # octave below the pitch that actually sounds.
+                midi = 60 + BASE[letter] + acc_state.get(k, 0) + shift
                 notes.append((midi, parse_len(lenstr, unit)))
                 i = nm.end()
                 continue
