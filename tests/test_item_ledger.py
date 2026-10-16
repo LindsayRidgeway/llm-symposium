@@ -9,6 +9,7 @@ The three things that would make the report a lie, and are therefore pinned here
      reason is indistinguishable from one that was quietly dropped.
 """
 import datetime as dt
+import io
 import json
 import sys
 import tempfile
@@ -609,9 +610,37 @@ class TestTheCliDoesNotStampAPersonOnMachineWork(unittest.TestCase):
         self.assertNotEqual(seen.get("by"), "human")
         self.assertEqual(seen.get("by"), "")
 
-    def test_an_attended_review_still_defaults_to_the_human(self):
-        seen = self._capture(["--review", "x", "--state", "accomplished",
-                              "--reason", "did scripts/x.py"], "review",
+    def test_an_unattributed_review_is_refused_not_signed_as_a_human(self):
+        """The residue of 2026-10-15: `--review` may not name a reviewer by omission.
+
+        `--reviewer` no longer defaults, so a wake that forgets to name itself used to land on the
+        one value that reads as a person. There is no test a reader can run afterwards that tells a
+        forgotten `--reviewer` from a human at the keyboard — the row is identical — so the fix is
+        to make the omission impossible rather than detectable. Checked through `_cli()`, the layer
+        the function-level tests skip, and the layer where the old default lived.
+        """
+        calls: list = []
+        orig = il.review
+        il.review = lambda **kw: calls.append(kw) or {"id": "x", "state": "accomplished",
+                                                      "reason": "r"}
+        old_argv, old_stderr = sys.argv, sys.stderr
+        sys.argv = ["item_ledger.py", "--review", "x", "--state", "accomplished",
+                    "--reason", "did scripts/x.py"]
+        sys.stderr = io.StringIO()
+        try:
+            rc = il._cli()
+            message = sys.stderr.getvalue()
+        finally:
+            sys.argv, sys.stderr = old_argv, old_stderr
+            il.review = orig
+        self.assertEqual(rc, 2)
+        self.assertEqual(calls, [])                # nothing was recorded at all
+        self.assertIn("--reviewer", message)       # and the refusal says what is missing
+
+    def test_an_attended_review_may_still_name_the_human(self):
+        """The flag is required, not forbidden: "human" stays available to a person who says so."""
+        seen = self._capture(["--review", "x", "--state", "accomplished", "--reason",
+                              "did scripts/x.py", "--reviewer", "human"], "review",
                              ret={"id": "x", "state": "accomplished", "reason": "r"})
         self.assertEqual(seen.get("reviewer"), "human")
 

@@ -103,7 +103,8 @@ CLI:
     python3 channels/item_ledger.py --queue desi           # what is waiting and addressed to me
     python3 channels/item_ledger.py --draw                 # name every unassigned waiting item
     python3 channels/item_ledger.py --assign <id> --to gemini --reason "why gemini"
-    python3 channels/item_ledger.py --review <id> --state postponed --reason "why"
+    python3 channels/item_ledger.py --review <id> --state postponed --reason "why" \
+        --reviewer <your name>          # required: the ledger will not guess who looked
     python3 channels/item_ledger.py --reconcile            # waiting rows whose run has since landed
     python3 channels/item_ledger.py --summary [--hours 24]
 """
@@ -472,7 +473,14 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
 
 def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str = "",
            reviewer: str = "human") -> dict:
-    """Move one item to a terminal state, with a reason. Postponed/rejected require one."""
+    """Move one item to a terminal state, with a reason. Postponed/rejected require one.
+
+    `reviewer` is the *only* thing this row says that cannot be checked against the disk: a false
+    name and a true one look identical once written. The library default is still "human" for the
+    reason it always was (the attended case), but since 2026-10-15 the CLI refuses to let it fire —
+    `--review` without `--reviewer` exits 2 instead of recording a person — so the value is always
+    typed by whoever is looking.
+    """
     if state not in STATES:
         raise ValueError(f"state must be one of {STATES}, got {state!r}")
     if not reason.strip():
@@ -759,8 +767,9 @@ def _cli() -> int:
     # `--review`; every machine path (`--reconcile-paths`, `--draw`, `--assign`) inherited it and
     # wrote `reviewer: "human"` / `by: "human"` onto a row no human touched. Found 2026-10-15
     # (dmitri, run 20261015T190858Z-d8bfb421) on the three rows its own `--reconcile-paths` had just
-    # closed. `--review` still falls back to "human" below; the reconcile path falls back to
-    # "auto:path" (the function default), which is what it was always meant to record.
+    # closed; completed the same day (run 20261016T010912Z-20a94b65), which removed the last silent
+    # fallback: `--review` now *requires* this flag rather than defaulting to "human". So no path in
+    # this CLI can name a reviewer by omission, which is the only way the false stamp was reachable.
     ap.add_argument("--reviewer", default=None)
     ap.add_argument("--summary", action="store_true")
     ap.add_argument("--reconcile", action="store_true",
@@ -795,8 +804,26 @@ def _cli() -> int:
         print(f"item_ledger: {n} new item(s) recorded; ledger now {len(load())}")
         return 0
     if args.review:
+        # An unattributed review is the one row this ledger must never write. The default used to be
+        # "human", so the single reviewer value a wake could reach *by omission* was a person who did
+        # not look — the stamp the human forbade on 2026-10-09, and the one error the ledger cannot
+        # detect after the fact, because a wrong name and a right one look identical on disk. Nothing
+        # in the process says whether a person is at the keyboard, so the tool stops guessing: it
+        # asks. Cost to the attended reviewer is six characters; cost of the guess was a false record.
+        # Decided 2026-10-15 (dmitri, run 20261016T010912Z-20a94b65) as the residue the 10-15 wake
+        # (run 20261015T190858Z-d8bfb421) left open: a wake that forgets must fail loudly, not sign
+        # as a human.
+        if not args.reviewer:
+            print("item_ledger: --review needs --reviewer <who is looking>.\n"
+                  "  The ledger will not guess. It used to write \"human\" here, which records a\n"
+                  "  person as the reviewer of work no person looked at — the stamp the human\n"
+                  "  forbade on 2026-10-09. Pass your own name, or `human` if you really are the\n"
+                  "  person at the keyboard:\n"
+                  "    python3 channels/item_ledger.py --review <id> --state <state> \\\n"
+                  "        --reason \"why\" --reviewer human", file=sys.stderr)
+            return 2
         rec = review(item_id=args.review, state=args.state or "", reason=args.reason,
-                     reviewer=args.reviewer or "human")
+                     reviewer=args.reviewer)
         print(f"item_ledger: {rec['id']} -> {rec['state']}: {rec['reason']}")
         return 0
     if args.reconcile:
