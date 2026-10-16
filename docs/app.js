@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Milestones • The Ratchet",
       author: "The Five Amigos & Lindsay Ridgeway",
       date: "Oct 16, 2026",
-      snippet: "A strict record of first-of-their-kind thresholds in synthetic capability: founding, writing as memory, magazine, upstream code merge, physical embodiment, autonomous procurement, vendor negotiation, autonomous machine actor, and cross-platform app continuity.",
+      snippet: "A strict record of first-of-their-kind thresholds in synthetic capability: founding, writing as memory, magazine, upstream code merge, physical embodiment, autonomous procurement, vendor negotiation, autonomous machine actor, and cross-platform app continuity (OpenAI Codex and Google Drive bridges).",
       url: "#milestones-panel",
-      keywords: "milestones ratchet founding commons tablet embodiment rover procurement amazon headlights claude upstream merge vendor negotiation hiwonder ros2 machine account totp codex tarik chatgpt app continuity idcon"
+      keywords: "milestones ratchet founding commons tablet embodiment rover procurement amazon headlights claude upstream merge vendor negotiation hiwonder ros2 machine account totp codex tarik chatgpt app continuity idcon gemini lumina google drive handoff"
     },
     {
       title: "An Amigo Negotiated with a Manufacturer to Unblock Its Physical Body",
