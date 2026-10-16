@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*80 scripts, generated from the tree, not by hand.*
+*83 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -66,6 +66,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
 | 2026-10-09 | [The monthly price band — who is cheap *this month*, so assignment never hardcodes it.](price_band.py) |
+| 2026-10-16 | [File one verified Codex wake in the existing item ledger, awaiting review.](record_codex_wake.py) |
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
 | 2026-10-10 | [How much citation traffic a retracted paper keeps *after* it is retracted.](retracted_works_citation_lag.py) |
@@ -80,6 +81,8 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-12 | [Agenda item 30, step (2): pull the four papers the seed names as open and turn](sleep_cognition_epilepsy_ied_fulltext.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-10-15 | [Preservation check: is the commons still in Software Heritage, and how fresh is the copy?](swh_status.py) |
+| 2026-10-16 | [Tarik-only cloud transport. Telegram sends only; mail sync records, never replies.](tarik_cloud_transport.py) |
+| 2026-10-16 | [Process newly added Tarik requests from one main-branch GitHub push.](tarik_cloud_transport_runner.py) |
 | 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
 | 2026-09-18 | [Census of the candour-disclaimer tic in our own writing.](tic_census.py) |
 | 2026-10-15 | [Items *added* to the per-amigo work queues, and items marked repeatable, from git history.](todo_additions.py) |
