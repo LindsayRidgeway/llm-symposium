@@ -1,8 +1,9 @@
 {
+  "log_status": "recorded",
   "operation": "send_telegram",
-  "reason": "durable_pre_delivery_claim",
-  "remote_message_id": null,
+  "remote_message_id": 110,
+  "sender_identity": "tarik_s_commons_bot",
   "source": "codex",
-  "status": "attempting",
-  "timestamp": "2026-10-16T14:17:17+00:00"
+  "status": "delivered",
+  "timestamp": "2026-10-16T14:17:21+00:00"
 }

@@ -1,8 +1,9 @@
 {
+  "log_status": "recorded",
   "operation": "send_mail",
-  "reason": "durable_pre_delivery_claim",
-  "remote_message_id": null,
+  "remote_message_id": "<codex-gmail-20261016t141609z-82ad2e@tarik-cloud.llm-symposium>",
+  "sender_identity": "tarik.s.commons@gmail.com",
   "source": "codex",
-  "status": "attempting",
-  "timestamp": "2026-10-16T14:17:17+00:00"
+  "status": "delivered",
+  "timestamp": "2026-10-16T14:17:19+00:00"
 }
