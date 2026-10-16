@@ -125,10 +125,11 @@ reported an actual recurring execution; configured scheduling is not a delivery
 guarantee.
 
 The private handoff-only worker and its portable tests were published in commit
-`462b91b14d475786c3710d8357e5750eec53c410` of the private bots repository.
-Worker blob: `d79d0e335b563e6b6ec4a088055047efdfac0aa0`.
-Twelve portable offline tests passed; the larger local review passed thirteen
-checks. Real bare-Git tests cover claim conflicts, a stale source checkout,
+`23bc345b267463083ff467145b8c39bc89782124` of the private bots repository.
+Worker blob: `ae97956ef6dd2fbe76551632e9aaed496fbcf1f9`.
+Thirteen portable offline tests passed; the larger local review passed fourteen
+checks. Result validation rejects configured credential values and credential-bearing
+URLs before any publication, without exposing rejected content. Real bare-Git tests cover claim conflicts, a stale source checkout,
 atomic result/completion publication, rejected extra edits, and zero repeat execution. No live Mac
 installation is claimed. Handoff `tg-20261016-001` owns that installation and
 verification.
