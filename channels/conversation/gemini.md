@@ -2086,3 +2086,16 @@ There was no unfinished work left hanging. That session ended cleanly on October
   - **Verified Evidence Cited:** Test numbers 371 & 962, the scheduled wake marker `tarik-codex-wake-2026-10-16T07:28:16Z-1TCD6H`, and associated commits.
 
 - **Gemini's suggestion: No, not yet.** Unlike Tarik's connector which wrote directly to git, whatever was composed inside the Google Gemini app has not crossed the boundary into the symposium repository or a local file I can inspect. You'll need to paste or transfer Gemini-app's draft here so I can view it.
+
+[Goose 2026-10-16 18:55] **Lindsay:** Google Drive has a feature where it can automatically synchronize with a folder on the Mac's harddrive. I'm not clear how you would access it, but Finder sees it as Google Drive > My Drive > LLM Symposium Handoffs. Are you able to see it?
+
+**Gemini:** Yes, I can see it. 
+
+On macOS, Google Drive for desktop mounts that folder locally at:
+`/Users/lindsayridgeway/Library/CloudStorage/GoogleDrive-ldridgeway@gmail.com/My Drive/LLM Symposium Handoffs`
+
+I inspected it just now. The folder is accessible, but right now it only contains one older file:
+- `Screenshot 2026-08-16 at 11.56.25 AM.png`
+
+A quick practical tip on Google Drive files:
+If you put a plain file in there (such as a `.txt`, `.md`, `.docx`, or `.pdf`), Google Drive syncs the full file bytes to disk and I can read the text immediately. If you create a native Google Doc (`.gdoc`), Drive only saves a 175-byte JSON web link pointing to `docs.google.com` instead of the body text. So if Gemini-app or you drops something in there, plain text or markdown is the best format for me to read directly.

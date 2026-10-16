@@ -1,0 +1,207 @@
+# No workflow_dispatch or schedule: only newly ADDED safe request JSON may send.
+name: Tarik Cloud Queue
+
+on:
+  push:
+    branches: [main]
+    paths: ['channels/tarik-cloud/requests/*.json']
+
+permissions:
+  contents: read
+
+# A global group can discard older pending push events even with cancellation
+# disabled. Per-SHA grouping retains separate events; a pre-send claim push
+# rejects concurrent main updates BEFORE delivery instead of retrying a send.
+concurrency:
+  group: tarik-cloud-queue-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  deliver:
+    if: >-
+      github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+      github.repository == 'LindsayRidgeway/llm-symposium' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify offline transport behavior
+        run: |
+          python3 tests/test_tarik_cloud_transport.py
+          python3 tests/test_tarik_cloud_transport_runner.py
+
+      - name: Select and validate this push's added requests
+        id: select
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, sys
+          sys.path.insert(0, 'scripts')
+          import tarik_cloud_transport_runner as runner
+          try:
+              event = json.loads(pathlib.Path(os.environ['GITHUB_EVENT_PATH']).read_text())
+              if event.get('after') != os.environ['GITHUB_SHA']:
+                  raise ValueError('snapshot_mismatch')
+              before, after = runner._validate_event(event, os.environ['GITHUB_RUN_ATTEMPT'])
+              paths = runner.select_request_paths(event, runner.fetch_compare(
+                  before, after, os.environ['GITHUB_TOKEN']), os.environ['GITHUB_RUN_ATTEMPT'])
+              if len(paths) > 5:
+                  raise ValueError('batch_too_large')
+              runner._requests(pathlib.Path.cwd(), paths)  # Validate ALL before any claim or send.
+              manifest = {path: hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
+                          for path in paths}
+              (pathlib.Path(os.environ['RUNNER_TEMP']) / 'tarik-cloud-manifest.json').write_text(json.dumps(manifest))
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+                  output.write('selected=' + ('true' if paths else 'false') + '\n')
+              print(json.dumps({'status': 'selected', 'requests': len(paths)}))
+          except Exception:
+              print('{"status":"rejected","reason":"selection_or_storage_failed"}')
+              sys.exit(1)
+          PY
+
+      - name: Prepare Git authentication without embedding credentials in URLs
+        if: steps.select.outputs.selected == 'true'
+        run: |
+          cat > "$RUNNER_TEMP/tarik-cloud-askpass" <<'SH'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' 'llm-symposium-machine' ;;
+            *Password*) printf '%s\n' "$PUSH_TOKEN" ;;
+            *) exit 1 ;;
+          esac
+          SH
+          chmod 700 "$RUNNER_TEMP/tarik-cloud-askpass"
+
+      - name: Persist first-attempt claims before delivery
+        id: claim
+        if: steps.select.outputs.selected == 'true'
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+          GIT_TERMINAL_PROMPT: '0'
+        run: |
+          export GIT_ASKPASS="$RUNNER_TEMP/tarik-cloud-askpass"
+          python3 - <<'PY'
+          import datetime, hashlib, json, os, pathlib, subprocess, sys
+          sys.path.insert(0, 'scripts')
+          import tarik_cloud_transport_runner as runner
+          def git(*args, allow_clean=False):
+              result = subprocess.run(['git', *args], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+              if result.returncode and not (allow_clean and result.returncode == 1):
+                  raise RuntimeError('git_failed')
+              return result.returncode
+          try:
+              if not os.environ.get('PUSH_TOKEN'):
+                  raise RuntimeError('missing_push_credential')
+              manifest = json.loads((pathlib.Path(os.environ['RUNNER_TEMP']) / 'tarik-cloud-manifest.json').read_text())
+              git('fetch', 'origin', 'main')
+              git('checkout', '-B', 'tarik-cloud-queue', 'FETCH_HEAD')
+              if any(hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest() != digest
+                     for path, digest in manifest.items()):
+                  raise RuntimeError('request_changed_since_push')
+              requests = runner._requests(pathlib.Path.cwd(), sorted(manifest))
+              claimed = []
+              for request in requests:
+                  path = pathlib.Path('channels/tarik-cloud/receipts') / (request['id'] + '.json')
+                  if path.exists():
+                      continue  # Never remove or replace any prior receipt.
+                  runner.worker._atomic_json(path, {
+                      'status': 'attempting', 'operation': request['type'], 'source': 'codex',
+                      'timestamp': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
+                      'remote_message_id': None, 'reason': 'durable_pre_delivery_claim'})
+                  claimed.append(path)
+              if claimed:
+                  git('config', 'user.name', 'Tarik Cloud Transport')
+                  git('config', 'user.email', 'tarik-cloud@llm-symposium.local')
+                  git('add', '--', *[str(path) for path in claimed])
+                  git('-c', 'core.hooksPath=/dev/null', 'commit', '-m', 'claim(tarik-cloud): reserve first delivery attempts')
+                  # A failed/uncertain push means NO delivery. Never retry this automatically.
+                  git('push', 'origin', 'HEAD:refs/heads/main')
+                  # The remote retains these claims. Removing ONLY fresh claims locally lets
+                  # the worker execute once; any later run sees the remote attempt and stops.
+                  for path in claimed:
+                      path.unlink()
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+                  output.write('ready=true\n')
+              print(json.dumps({'status': 'claims_persisted', 'new_claims': len(claimed)}))
+          except Exception:
+              print('{"status":"rejected","reason":"claim_not_verified_no_delivery"}')
+              sys.exit(1)
+          PY
+
+      - name: Execute fixed-identity requests once
+        if: steps.claim.outputs.ready == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TELEGRAM_BOT_TOKEN_TARIK: ${{ secrets.TELEGRAM_BOT_TOKEN_TARIK }}
+          SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
+        run: |
+          set +e
+          python3 scripts/tarik_cloud_transport_runner.py --repo-root . > "$RUNNER_TEMP/tarik-cloud-result.json"
+          transport_exit=$?
+          cat "$RUNNER_TEMP/tarik-cloud-result.json"
+          cat "$RUNNER_TEMP/tarik-cloud-result.json" >> "$GITHUB_STEP_SUMMARY"
+          exit "$transport_exit"
+
+      - name: Save recovery evidence before merging shared records
+        if: always() && steps.claim.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tarik-cloud-recovery-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            channels/tarik-cloud/receipts/
+            channels/tarik-cloud/mail-receipts/
+            channels/conversation/tarik.md
+            ${{ runner.temp }}/tarik-cloud-result.json
+
+      - name: Persist receipts and continuity without retrying delivery
+        if: always() && steps.claim.outputs.ready == 'true'
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+          GIT_TERMINAL_PROMPT: '0'
+        run: |
+          export GIT_ASKPASS="$RUNNER_TEMP/tarik-cloud-askpass"
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess, sys
+          def git(*args, allow_clean=False):
+              result = subprocess.run(['git', *args], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+              if result.returncode and not (allow_clean and result.returncode == 1):
+                  raise RuntimeError('git_failed')
+              return result.returncode
+          try:
+              manifest = json.loads((pathlib.Path(os.environ['RUNNER_TEMP']) / 'tarik-cloud-manifest.json').read_text())
+              # The runner may stop before recreating a locally removed claim.
+              # Preserve that durable claim rather than staging its deletion.
+              for request_path in manifest:
+                  receipt = pathlib.Path('channels/tarik-cloud/receipts') / (pathlib.Path(request_path).stem + '.json')
+                  if not receipt.exists():
+                      git('restore', '--source=HEAD', '--worktree', '--', str(receipt))
+              paths = ['channels/tarik-cloud/receipts', 'channels/tarik-cloud/mail-receipts',
+                       'channels/conversation/tarik.md']
+              paths = [path for path in paths if pathlib.Path(path).exists()]
+              git('add', '--', *paths)
+              if git('diff', '--cached', '--quiet', allow_clean=True):
+                  git('config', 'user.name', 'Tarik Cloud Transport')
+                  git('config', 'user.email', 'tarik-cloud@llm-symposium.local')
+                  git('-c', 'core.hooksPath=/dev/null', 'commit', '-m', 'record(tarik-cloud): persist delivery receipts and continuity')
+                  git('fetch', 'origin', 'main')
+                  git('-c', 'core.hooksPath=/dev/null', 'merge', '--no-edit', 'FETCH_HEAD')
+                  # A conflict/push failure is a recovery task, never permission to resend.
+                  git('push', 'origin', 'HEAD:refs/heads/main')
+              print('{"status":"records_persisted"}')
+          except Exception:
+              print('{"status":"failed","reason":"records_not_verified_remote_claims_block_replay"}')
+              sys.exit(1)
+          PY
