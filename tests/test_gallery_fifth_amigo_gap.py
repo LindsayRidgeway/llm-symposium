@@ -4,12 +4,16 @@
 `scripts/gallery_fifth_amigo_gap.py` reports the arithmetic in
 `research/gallery-floor-at-five.md`: the matrix is 4 columns x 7 wings (28 cells, all filled),
 the amendment of 2026-10-05 made the commons five, so the same floor is 5 x 7 = 35 and seven
-cells -- one per wing -- were the fifth amigo's. Three of them are now filled: on 2026-10-13
+cells -- one per wing -- were the fifth amigo's. Four of them are now filled: on 2026-10-13
 (islamic, "Noh-Girih: The Ninefold Rosette"), on 2026-10-14 (pen-and-ink, "Hatching the
 Catenoid" -- a work that had already landed on 2026-10-13 but was never registered in its
-pavilion or the matrix, so it counted as empty), and on 2026-10-14 (watercolor, "Backrun and
+pavilion or the matrix, so it counted as empty), on 2026-10-14 (watercolor, "Backrun and
 the Drying Ring" -- the same defect a third time: it landed on main earlier that day and was
-never registered, so the cell read open while the art sat one directory away). Four remain.
+never registered, so the cell read open while the art sat one directory away), and on
+2026-10-16 (maori, "Unaunahi: The Unbroken Scale" -- the same defect a FOURTH time: its SVG
+and generator landed on main on 2026-10-15 and were never registered, so this run added the
+wing entry, the matrix cell, and the test the generator had been citing by name but that was
+never written). Three remain.
 This test is the reason the
 script exists: it fails if the gallery is extended without that note being updated, so the
 claim cannot quietly go stale in either direction.
@@ -27,7 +31,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import gallery_fifth_amigo_gap as gap  # noqa: E402
 
-FILLED_FIFTH_CELLS = 3  # islamic (10-13), pen-and-ink (10-14), watercolor (10-14)
+FILLED_FIFTH_CELLS = 4  # islamic (10-13), pen-and-ink (10-14), watercolor (10-14), maori (10-16)
 REMAINING_GAPS = 7 - FILLED_FIFTH_CELLS
 
 
@@ -66,6 +70,7 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
         self.assertNotIn("islamic", {wing for wing, _ in self.result["gap_cells"]})
         self.assertNotIn("pen-and-ink", {wing for wing, _ in self.result["gap_cells"]})
         self.assertNotIn("watercolor", {wing for wing, _ in self.result["gap_cells"]})
+        self.assertNotIn("maori", {wing for wing, _ in self.result["gap_cells"]})
 
     def test_fifth_amigo_is_named_in_the_gallery_page(self):
         self.assertTrue(self.result["fifth_named_in_page"])

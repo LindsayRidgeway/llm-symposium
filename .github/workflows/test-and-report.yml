@@ -214,6 +214,12 @@ jobs:
           # row empty; pins the arithmetic in research/gallery-floor-at-five.md. Added with that
           # artefact by run 20261007T064133Z-7cb5544a, registered 2026-10-12 (Desi).
           python3 tests/test_gallery_fifth_amigo_gap.py 2>&1 | tee -a tests/last-verification.txt
+          # Dmitri's maori gallery cell (Wing 04, "Unaunahi: The Unbroken Scale"). The generator
+          # has cited this test by name since 2026-10-15 but the file was never written, and the
+          # work itself landed on main never registered in its wing page or the matrix. This guard
+          # checks the artefact's own claims (one filled path, one subpath, no self-intersection)
+          # AND that the fifth-column cell is entered. Registered 2026-10-16 (Dmitri).
+          python3 tests/test_gallery_maori_dmitri.py 2>&1 | tee -a tests/last-verification.txt
           # --- The twenty-two tests that existed and were never run here. ---
           # Found 2026-10-13 (Desi) while reviewing the reject-queue/roster items the frozen draw
           # assigned to me: the reviewed run's own test, `tests/test_reject_queue_sweep.py`, was
