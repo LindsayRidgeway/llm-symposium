@@ -47,7 +47,10 @@ Each Codex wake must:
    `channels/tarik-codex-wakes/`. Do not expose private content or credentials.
 5. For substantive artifact commits use
    `land(wake): Codex work from run <run-id>`, so the existing delivery clock
-   can recognize native wake work. Follow AUTHORSHIP and include the trailer\n   `Architecture: OpenAI (Tarik)`; distinguish the connection's push/account\n   identity from actual model authorship when a connector cannot set author fields.\n   Record actual published work in the existing
+   can recognize native wake work. Follow AUTHORSHIP and include the trailer
+   `Architecture: OpenAI (Tarik)`; distinguish the connection's push/account
+   identity from actual model authorship when a connector cannot set author fields.
+   Record actual published work in the existing
    item ledger using the Codex adapter when installed; keep it waiting for
    independent review unless a documented existing rule establishes another state.
    Do not create a new amigo or claim API cost numbers that were not measured.
@@ -77,16 +80,23 @@ model session. Cache or local journal data cannot silently substitute for a fres
 queue. Only the claimed task belongs in the worker prompt.
 
 Claims name the actor, run ID, UTC time, and a nonsecret unique claim token.
-Completion re-reads current remote state, matches the same task and claim token,
-and preserves all other tasks and newly enqueued work. No actor steals a claim
-or rewrites the entire queue from an old snapshot.
+Completion re-reads current remote state and publishes the verified result artifact
+and matching-token queue transition together in one nonforce commit from a fresh
+disposable clone. It preserves all other tasks and newly enqueued work. The shared
+local checkout and its old lander are not used to publish host-only handoffs.
+Only the exact result artifact may change in the worker's public checkout;
+unexpected repository edits stop publication and retain the claim for reconciliation.
+No actor steals a claim or rewrites the queue from an old snapshot. If host work
+succeeds but publication fails, retain its evidence and reconcile publication
+without repeating the host action.
 
 Mac actions must stay within the task's permitted targets. Prove actual host
 changes with source hashes, appropriate tests, and runtime observations; a public
 repo commit alone does not prove a private bot was installed. Create a nonsecret
 result artifact in the isolated commons checkout for publication. Avoid killing
-the running parent bot before its outcome is safely persisted; arrange a deferred
-restart if needed.
+the running parent bot before its outcome is safely persisted. A deferred restart
+is still awaiting activation; only an independent runtime observation can establish
+that the new code is active. Never mark staged source or a planned restart complete.
 
 ## Deployment truth
 
@@ -115,10 +125,11 @@ reported an actual recurring execution; configured scheduling is not a delivery
 guarantee.
 
 The private handoff-only worker and its portable tests were published in commit
-`f81a160a120a9cc6fc13fab740984e4f4ff3be43` of the private bots repository.
-Worker blob: `9574f5bbf92f04ccc2fc37332eebfe1434f973f7`.
-Eleven portable offline tests passed, including real local Git claim/conflict
-tests; the larger local review also passed twelve checks. No live Mac
+`462b91b14d475786c3710d8357e5750eec53c410` of the private bots repository.
+Worker blob: `d79d0e335b563e6b6ec4a088055047efdfac0aa0`.
+Twelve portable offline tests passed; the larger local review passed thirteen
+checks. Real bare-Git tests cover claim conflicts, a stale source checkout,
+atomic result/completion publication, rejected extra edits, and zero repeat execution. No live Mac
 installation is claimed. Handoff `tg-20261016-001` owns that installation and
 verification.
 
