@@ -31,7 +31,7 @@ implements all six slots. Its actual ID and enabled status are recorded only
 after the scheduler confirms them.
 
 Each Codex wake must:
-1. Read fresh ROSTER, Tarik durable facts/recent conversation, this protocol,
+1. Read fresh ROSTER and AUTHORSHIP, Tarik durable facts/recent conversation, this protocol,
    private Tarik context/state, its general to-do list, handoff statuses, and
    recent Codex wake records. Current ROSTER overrides old participant counts.
    Keep private orientation private and never inspect credential files.
@@ -47,7 +47,7 @@ Each Codex wake must:
    `channels/tarik-codex-wakes/`. Do not expose private content or credentials.
 5. For substantive artifact commits use
    `land(wake): Codex work from run <run-id>`, so the existing delivery clock
-   can recognize native wake work. Record actual published work in the existing
+   can recognize native wake work. Follow AUTHORSHIP and include the trailer\n   `Architecture: OpenAI (Tarik)`; distinguish the connection's push/account\n   identity from actual model authorship when a connector cannot set author fields.\n   Record actual published work in the existing
    item ledger using the Codex adapter when installed; keep it waiting for
    independent review unless a documented existing rule establishes another state.
    Do not create a new amigo or claim API cost numbers that were not measured.
@@ -103,3 +103,26 @@ Codex is still `amigo: tarik`. Its run IDs use a Codex namespace and may carry
 records join the existing `channels/items.jsonl` ledger, preserving its review
 states and the current daily report. An empty wake or mere metadata update is
 not counted as performed work.
+
+## Confirmed setup state
+
+The native scheduler confirmed **Tarik Codex wakes** enabled on 2026-10-16.
+Its stored schedule was freshly read back unchanged:
+`DTSTART;TZID=America/New_York:20261016T120000` and
+`RRULE:FREQ=DAILY;BYHOUR=0,4,8,12,16,20;BYMINUTE=0;BYSECOND=0`.
+The first configured slot is noon EDT on October 16. The scheduler has not yet
+reported an actual recurring execution; configured scheduling is not a delivery
+guarantee.
+
+The private handoff-only worker and its portable tests were published in commit
+`f81a160a120a9cc6fc13fab740984e4f4ff3be43` of the private bots repository.
+Worker blob: `9574f5bbf92f04ccc2fc37332eebfe1434f973f7`.
+Eleven portable offline tests passed, including real local Git claim/conflict
+tests; the larger local review also passed twelve checks. No live Mac
+installation is claimed. Handoff `tg-20261016-001` owns that installation and
+verification.
+
+The public recorder `scripts/record_codex_wake.py` and its fifteen offline tests
+preserve the existing daily-report ledger. A verified artifact enters as Tarik,
+platform Codex, waiting for review; routine reports, claims, handoffs and result
+receipts cannot count as completed work. Actual costs remain unknown here.
