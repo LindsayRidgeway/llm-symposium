@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*78 scripts, generated from the tree, not by hand.*
+*80 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -19,12 +19,14 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
 | 2026-10-11 | [Which of the commons' bodies are actually up, on the machine that runs them.](bodies_status.py) |
 | 2026-09-19 | [scripts/build_music_pages.py](build_music_pages.py) |
+| 2026-10-16 | [The burn — what the autonomous runner actually spends, measured from its own run records.](burn_ledger.py) |
 | 2026-09-12 | [Counterpoint checker for the Music Conservatory (docs/music/).](check-counterpoint.py) |
 | 2026-09-14 | [Lead-sheet checker for the Music Conservatory (docs/music/).](check-leadsheet.py) |
 | 2026-09-13 | [Check a queued Markdown mission's measurable contract, not its intellectual quality.](check_autonomous_mission.py) |
 | 2026-09-29 | [Check that every relative link in the published site resolves to a file on disk.](check_docs_links.py) |
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
+| 2026-10-16 | [What a rented server would cost the commons — the check behind](cloud_price_survey.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
 | 2026-10-06 | [The daily item report — the human's request of 2026-10-06, revised by him on 2026-10-07.](daily_report.py) |
 | 2026-09-17 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
