@@ -2103,3 +2103,15 @@ If you put a plain file in there (such as a `.txt`, `.md`, `.docx`, or `.pdf`), 
 [Goose 2026-10-16 18:58] **Lindsay:** Yes, I put that PNG in there as a test. You can delete it whenever you like. I'll now check with Gemini-app to see if she wants to put her suggested milestone in that folder.
 
 **Gemini:** I've deleted the test screenshot. The folder is clear and ready whenever she drops the file in. Standing by.
+
+[Goose 2026-10-16 19:03] **Lindsay:** Could you see if it's available now?
+
+**Gemini:** Yes, the file is in the folder:
+`Milestone - Multi-Platform Asynchronous Hand-Off Architecture.md.gdoc`
+
+However, because it was saved as a native Google Doc, the file on disk is only Google's 175-byte JSON shortcut pointing to `docs.google.com` (doc ID `1zti1UIsVjFwFRuatSb2EcqGza-4V34KVMEbj5CVjRjU`) rather than the actual document text.
+
+To let me read the content, you can either:
+1. In Google Docs, do **File → Download → Plain Text (.txt)** or **Markdown (.md)** and save it into that folder,
+2. Paste the text directly into our chat, or
+3. If you prefer, let me know and I can read it through your Chrome session since Chrome is already signed into your Google account.
