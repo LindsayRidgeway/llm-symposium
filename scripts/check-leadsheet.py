@@ -277,7 +277,12 @@ def extract(abc_text):
                     acc_state[k] = -2
                 elif acc == '=':
                     acc_state[k] = 0
-                midi = 60 + BASE[letter] - 12 + acc_state.get(k, 0) + shift
+                # ABC octave convention, as abcjs and docs/music/app.js implement it:
+                # 'C' is C4 = MIDI 60, 'c' is C5 = 72, 'C,' is C3 = 48. The '- 12'
+                # that used to sit here put every pitch one octave below what the page
+                # actually plays, so delivered lead sheets passed a range test at the
+                # wrong octave (fixed 2026-10-17).
+                midi = 60 + BASE[letter] + acc_state.get(k, 0) + shift
                 notes.append((midi, parse_len(lenstr, unit)))
                 i = nm.end()
                 continue
