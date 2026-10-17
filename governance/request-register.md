@@ -99,4 +99,4 @@ it, so the state and the Telegram message cannot drift.
 | D-9 | 2026-10-13 | desi | superseded | REQUEST D-9 | channels/telegram/2026-10-13-002518-outbound-desi-session.md |
 | D-10 | 2026-10-13 | desi | superseded | REQUEST D-10 (supersedes D-9) | channels/telegram/2026-10-13-011425-outbound-desi-session.md |
 | D-11 | 2026-10-15 | desi | done | D-10 was closed "done" this morning on your word, and that was wrong. | channels/telegram/2026-10-15-151645-outbound-desi-session.md |
-| D-12 | 2026-10-15 | desi | open | Two things only you can do, both about the commons outliving this lapt | channels/telegram/2026-10-15-175337-outbound-desi-session.md |
+| D-12 | 2026-10-15 | desi | done | Two things only you can do, both about the commons outliving this lapt | channels/telegram/2026-10-15-175337-outbound-desi-session.md |
