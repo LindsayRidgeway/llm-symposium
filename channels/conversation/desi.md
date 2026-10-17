@@ -6773,3 +6773,29 @@ That's conclusive either way, which nothing else on the table is. The manual pre
 **One caution:** watch the charger. If the board is drawing a short's worth of current, a 2 A supply will get warm or start to sag, and you stop at that point rather than letting it cook.
 
 If you'd rather not run the board off the charger, the honest alternative is to stop here and wait for the meter readings to matter less than a known-good pack. But I'd try the charger first — it's one switch and it tells us which half of this robot to take apart.
+
+[Goose 2026-10-17 22:24] **Lindsay:** You wrote, 'But the path exists is not the same as the path is good.' How could the voltage across the blue terminal be 8.5V if the path isn't good? You wrote, 'Plug the charger into the robot's charge socket. Then switch on and watch for lights, buzzer, lidar.' I haven't kept up with everything you've said, but that sounds like a great test! I'm out now, but when I get home I'll put the connector together again and try that test.
+
+**Desi:** **Because a voltmeter draws almost no current.** That's the whole answer, and it's the single most useful thing this meter will ever teach you.
+
+Numbers, with your actual readings:
+
+- The meter's internal resistance is about **10 million ohms**. At 8.5 volts that means it draws **0.85 microamps** — under one millionth of an amp.
+- Push that through a bad joint of, say, **50 ohms**, and the voltage lost is 0.85 µA × 50 Ω = **0.00004 volts.** Forty microvolts. Your meter cannot see it. It reads 8.50.
+- Now let the **board** draw from the same joint. At 0.17 amps, the same 50 ohms costs **8.46 volts** — every volt the pack has. The terminal lands at 0.043.
+
+Same joint, both times. The only thing that changed is how much current was flowing: **voltage drop = current × resistance**, and the meter's current is a millionth of the board's, so the meter sees a millionth of the drop.
+
+**The garden hose version**, if it's more use than the numbers: open the tap a crack and water reaches the far end and a pressure gauge there reads full pressure. The kink can pass a trickle. Open the tap wide and the flow collapses to a dribble — same kink, same gauge, different readout.
+
+**And you already know this from cars.** A battery that reads 12.6 volts and won't turn the engine over. Everyone has met it. Nobody thinks the voltmeter lied; they think the battery is tired. That's exactly the shape of what we're looking at.
+
+**That's also why it explains the missing heat.** 8.46 volts across 50 ohms dissipates about 1.4 watts — inside a big plastic housing, over a minute, that's warm at most, and not reliably detectable with a fingertip. So my "nothing is warm" wasn't evidence of anything, and I should have done that arithmetic before leaning on it.
+
+So to answer you precisely: the 8.5 V proves **the path exists and the pack can push a trickle through it.** It proves nothing about whether the path is *good*, because "good" is a claim about current, and the meter never asked the path to carry any.
+
+**Which is why the rule is: to test a path, measure it while it's carrying current.** Hence "measure under load." Hence every voltmeter check of a car battery that ends in a jump start.
+
+---
+
+The charger test is the right next move, and it's the one measurement that doesn't depend on any of this reasoning being right. Connector together, charger into the charge socket, switch on, watch for lights and listen for the buzzer. And keep a hand near the charger — if it warms, stop.
