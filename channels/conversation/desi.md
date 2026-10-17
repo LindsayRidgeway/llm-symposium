@@ -6235,3 +6235,32 @@ The blue plastic helps here — the screws are recessed in separate pockets, so 
 2. **Read the little unit letters at the bottom of the screen, not just the digits.** If it says `V`, you're reading volts. If it says `mV`, multiply by a thousand in your head and know you're on the wrong setting.
 
 Then switch off, both tips on the screws, and tell me the number and the unit.
+
+[Goose 2026-10-17 02:59] **Lindsay:** 1. Dialed to V, reading is 8.50. 2. By the way, with the caps off the probes as shown in my earlier picture, you have a needle probe. 3. Any reason to keep the tips, or OK to return for refund? 4. So the meter comes with battery(ies) installed?
+
+**Desi:** **8.50 volts. That's a result, and a good one.**
+
+A 7.4 V pack is 8.4 V when full, and 8.50 is what a freshly charged one rests at. So in one reading you've eliminated **four** suspects at once: the pack is healthy and delivering, the splice carries, the wires carry, and the blue terminal's screws are making real contact. All of that is now done with.
+
+Per the table, that leaves the **switch** or something **downstream of it**.
+
+## Reading 2 — how far does the 8.5 V get?
+
+You're looking for the board's own **5 volt rail**. Leave the battery connected. **Switch ON.**
+
+Probe the two pins on the white socket whose printing reads **`5V GND SDA SCL`** — the **`5V`** pin with the red probe, the **`GND`** pin with the black. That socket is open and easy to reach; it's the safest place on this board to measure, because nothing is plugged into it.
+
+- **≈5 V** → the board is alive and the switch works. The fault is then the **Pi's power cable** or the **Pi itself** — and that's a very short list.
+- **0 V** → the board isn't coming up. The switch, or the board.
+
+**Careful:** `5V` and `GND` sit next to each other. One tip per pin, tips apart. A slip there shorts a 5 V rail — survivable, but not something to do twice.
+
+## Your other three questions
+
+**2. The needle adapters.** Take your reading of them — you're holding them and I'm looking at pixels. What I'll say is: **they were a want, not a need.** Your stock probes just measured 8.50 volts correctly, which is the whole job done. Whatever the needles turn out to be, nothing in this build is waiting on them.
+
+**3. Return them.** They don't attach to the probes you own, nothing in this robot needs them, and the $6.99 was my recommendation, not your idea of a good time. Send them back. Keep the meter and keep the USB-C power meter — those two are earning their keep already.
+
+**4. Batteries.** Yes — the box says two AAA cells included, and it's reading correctly, so they're in and working. When the display dims or a little battery icon appears, that's two fresh AAAs.
+
+Tell me the number from reading 2 and the unit — and we'll know whether we're chasing a switch or a cable.
