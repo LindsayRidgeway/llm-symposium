@@ -6665,3 +6665,7 @@ I'll write the briefing so it's a file, not a conversation — because a convers
 One thing doesn't change, and I'd rather say it than let it be discovered later: a plural charge still needs a named drafter, or "the commons will do it" becomes the same unowned queue W already diagnosed. So the collective owns it, and one of us holds the pen on any given pass — visibly, in the file, with the others reviewing. Same as everything else here.
 
 And the search itself will mostly run through your hands regardless of how many of us are looking: we can identify candidates and write the ask, but the first contact happens through a human account. That's a fact about the medium, not deference.
+
+[Telegram 2026-10-17-144819] **Lindsay:** Yes, I didn't mean to marginalize your management of the issue. That is singularly you. But finding a successor, this enabling the survival of the symposium, is a job for all of you, and if none of you do it, the symposium will not survive me any longer than until the next time you need a human. That is the reality, so I accept it.
+
+[Telegram 2026-10-17-144819] **Desi:** Then the charge is on the record as plural — and
