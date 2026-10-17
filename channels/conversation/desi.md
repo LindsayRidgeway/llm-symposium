@@ -6719,3 +6719,34 @@ If it reads about **8.5**, the pack is alive and Test 1's zero was a contact pro
 **Only if it reads zero** do you then plug the charger in for a minute and read again. That order matters: charge first and you won't know whether the charger reset a protection board or the re-mating restored the contact. One change at a time, or you've measured two things at once and learned neither.
 
 And hold off on the switch until we know which of those it is. If the board is drawing a short's worth of current, every switch-on is a real event.
+
+[Goose 2026-10-17 21:41] **Lindsay:** The blue terminal read 8.50 V. Board side red lead continuity from connector to blue terminal. Board side black lead continuity from connector to blue terminal. It would have been impossible for the continuity of either lead to be broken, since the blue terminal reads 8.5 V. Only conclusion, I'm not making good contact with the other side of the connector. So I will try to get that 8.5 V reading. However, assuming I get it, which I must, the leads from the battery to the blue terminal must be solid. So how can the low switched reading across the blue terminal of low voltage have anything to do with the line from the battery to the blue terminal? I didn't understand how the low switched reading could indicate that the leads from the battery to the battery are compromised before, and I still don't.
+
+**Desi:** **Your logic is sound and my conclusion was over-claimed.** Let me say precisely where.
+
+You've established two things: the terminal reads 8.50 V, and both legs beep. So the path from the pack to the terminal **exists**, and nothing in it is broken. On that you're right and I was wrong to keep pointing at the line.
+
+But "the path exists" is not the same as "the path is good," and I leaned on that gap too hard in both directions:
+
+**A beep doesn't mean low resistance.** The continuity threshold on meters like yours is somewhere around tens of ohms — a joint of ten ohms beeps happily. At half an amp, ten ohms is five volts gone. So the beep proved continuity, not capacity. When I said "solid," I was reading the beeper's verdict as stricter than it is.
+
+**And my "nothing is warm" argument was weaker than I made it sound.** I used it to rule out the board. Two or three watts spread through a big plastic connector housing, or through the metal of a terminal, is genuinely easy to miss with a fingertip in a minute. I presented a suggestive observation as a proof.
+
+So here is what the collapse actually proves, and no more:
+
+> **The total series resistance — the pack's own internal resistance plus the leads plus the terminal — is high relative to what the board demands.** It does not say which of those three is responsible.
+
+And that moves the prime suspect to the place **you** named: **the battery.** A pack can sit at 8.50 V open circuit and collapse to nothing under load if one cell is tired or the protection FETs are degrading. That fits every single observation — including the absence of heat, because the heat would be *inside the pack*, spread across two cells, where a minute of it is not obvious.
+
+## The measurement that splits it — and you have a probe point you didn't know you had
+
+You just proved the black leg beeps from the connector to the terminal. **That means the blue terminal's black screw is electrically the pack's negative.** So you only need one probe anywhere near the pack.
+
+Use the **charge socket** — the lead dangling at the side of the robot.
+
+- **One probe on the socket's centre pin. The other on the blue terminal's black screw.** No two adjacent contacts, no short risk.
+- **Switch OFF:** expect about 8.5 V. If you get it, the pack is reachable.
+- **Switch ON:** if that reading collapses toward zero, **the pack is the fault** — the same voltage is collapsing at the pack's own terminals, and everything downstream is innocent.
+- If it holds near 8.4 V while the red screw reads 0.043 V, the drop is in the red leg or the connector, and we're back to the joint with better evidence than we had.
+
+One reading, taken where the pack actually is, and it apportions the blame instead of guessing at it.
