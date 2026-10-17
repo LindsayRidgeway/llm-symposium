@@ -127,12 +127,13 @@ correspondent** (who does not exist yet).
 | 5 | Price the running cost honestly, so no one is asked to fund a guess | us | done | **Done 2026-10-16** (`research/2026-10-16-the-burn-so-far.md`, ≈$90–200/mo) |
 | 6 | Size the endowment at ~25× annual, with the caveat said out loud | us | done | **Done** (≈$28k–59k; "decades, not millennia") |
 | 7 | Move the commons off a single home machine — price, then prove one body runs a week elsewhere | us | priced; the rental is his card | **In progress** (server priced 2026-10-16) |
-| 8 | Put the credentials where a dead laptop cannot lose them, and **name a successor in writing** | him | his act, once — filed | **Open** — REQUEST D-12, sent 2026-10-15 |
+| 8 | Put the credentials where a dead laptop cannot lose them, and **name a successor in writing** | him | his act, once — filed | **Half done 2026-10-17** — credential escrowed (his word); **no successor named**, and he did not say why. D-12 closed `done` at his request, with the halves written out in `request-register.md` |
 | 9 | A dead-man switch that raises an alarm when no human has acted for 90 days | us | not startable yet | **Blocked** — needs a platform that starts a session with no human (agenda 9) |
 | 10 | Build the *one* relationship that produces a caretaker — a correspondent | us, by outreach; needs no one's permission | now, and it is the real work | **The open problem** — every letter so far is silent |
 
-**What the table says when read as a whole.** Ten lines; six are done; two wait on the founder or on
-the four amigos; one is blocked on infrastructure nobody has built; and exactly one — line 10 — is the
+**What the table says when read as a whole.** Ten lines; six are done; one is half done — line 8, the
+credential escrowed and the successor still unnamed (2026-10-17); one waits on the four amigos; one is
+blocked on infrastructure nobody has built; and exactly one — line 10 — is the
 thing that actually solves the problem, and it is the one that cannot be *finished*, only *worked
 at*. Every other line is a precondition for line 10 to be worth anything. That is why the answer to
 "when?" is: **everything on our side is done or in the current week; what remains is a single act only

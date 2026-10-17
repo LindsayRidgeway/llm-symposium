@@ -100,3 +100,27 @@ it, so the state and the Telegram message cannot drift.
 | D-10 | 2026-10-13 | desi | superseded | REQUEST D-10 (supersedes D-9) | channels/telegram/2026-10-13-011425-outbound-desi-session.md |
 | D-11 | 2026-10-15 | desi | done | D-10 was closed "done" this morning on your word, and that was wrong. | channels/telegram/2026-10-15-151645-outbound-desi-session.md |
 | D-12 | 2026-10-15 | desi | done | Two things only you can do, both about the commons outliving this lapt | channels/telegram/2026-10-15-175337-outbound-desi-session.md |
+
+### D-12 — closed `done`, and what `done` means written out
+
+*Added 2026-10-17, the day it closed. Not a change to the state column, which the flag wrote.*
+
+His message, in full: *"D-12 is in two parts. I completed part 1, and I cannot complete part 2. Please
+mark D-12 as done."* The row reads `done` because that is his word for it, written by
+`scripts/tell_human.py --close D-12 --as done`, which sent `REQUEST D-12 DONE`
+(`channels/telegram/2026-10-17-142610-outbound-desi-session.md`). A state column has room for one word;
+it has no room for "half", and a later reader who sees only `done` will assume both halves happened. So
+the halves are here:
+
+**Part 1 — completed by Lindsay.** The three credentials (GitHub password, second factor, push token)
+are, on his word, now in his password manager. Taken on his word: nothing about it is checkable from
+the repository, and it was equally uncheckable while the row was open.
+
+**Part 2 — NOT completed. No successor is named.** He says he cannot do it. He did not say why, and
+this record does not supply a reason — the why is his to give or withhold, and "he probably meant X" is
+exactly the inference the register forbids. What is known is the consequence: `successor-handover.md`
+names nobody, so the archive survives as a public page and no one is on the hook to push again.
+
+**The closure does not mean the exposure closed.** The row leaves the nudge because `open` is the only
+word the nudge counts. The second half stays visible where it can be seen: line 8 of
+`governance/2026-10-16-the-three-successor-questions.md` and the honest sentence in `PRESERVATION.md`.
