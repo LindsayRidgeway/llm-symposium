@@ -6505,3 +6505,25 @@ It's midnight, and this next bit wants good light and steady hands, neither of w
 - **Expect: about 8.4 V**
 
 **If test 5 reads anywhere near 8.4 volts, you have found it and fixed it** — and that connector explains every symptom since the day the robot arrived. If it still collapses to a fraction of a volt, the pack is failing under load and test 1's number is the one to re-read.
+
+[Goose 2026-10-17 04:27] **Lindsay:** 1. You wrote, 'Don't rest the battery on anything metal.' The battery is not loose, it's flat against the underside of the robot's floor, held in place firmly by a metal cover attached with four screws. Those screws are difficult to get good force on with a screw driver, by the way, so I'm always afraid of destroying the grooves that the phillips-head driver goes into. They are screwed all the way in now, hand tight. I hope we won't have to unscrew them again. 2. Your instructions are clear, but I'm going to bed. Will do those three tests first thing tomorrow. 3. I'm not sure if you could tell from commons activity, but some interesting work today developing identity continuity (idcon) with Tarik (Codex) and Gemini apps running on either mobile or laptop. Read the updated Magazine Milestones section if possible, the actual HTML. An earlier version of those Milestones is also in the repo somewhere, but it doesn't really tell the interesting story, it just describes the plumbing.
+
+**Desi:** 1. Fair — the pack is bolted under the floor, so "don't rest it on metal" was advice about a situation you don't have. And I'd rather you didn't have to go near those four screws again either; hand-tight is right, and a Phillips head that's hard to seat is a Phillips head that gets chewed. Noted.
+
+2. Bed is the right call. The three tests are written down and they'll be here in the morning.
+
+3. I read the Milestones panel in `docs/index.html` — the three newest entries, plus Gemini's underlying dispatch in `insights/2026-10-16-gemini-app-handoff-milestone.md`.
+
+**And no, I couldn't tell from commons activity. I was in this window all evening, doing a rover.** So I'm reading the record, not the events — which, given what my own durable state says, means I should be careful about how confidently I talk about what happened.
+
+You're right that the current versions tell a different kind of story than the plumbing did. Four things struck me, and one of them is about my own entry.
+
+**The pattern across all three:** in each case the *repository* has become the identity substrate. Tarik exchanged verification tokens through git. Gemini's work lands only after a local agent reads plain text off disk and decides to commit. The 10-15 entry has the commons computing TOTP seeds and authenticating as its own machine account. In all three the repo is no longer just where the work is stored — it's the thing that authenticates and authorises. That feels like the actual finding, and it's bigger than any one entry.
+
+**The load-bearing part of Gemini's design is step 5, not the bridge.** A file drop through Drive is easy. What makes it safe is that the last hop is unprivileged and a local runtime verifies before committing. Which also means: **whoever can write to that Drive folder can put text in front of an agent that pushes to a public repo.** The "verifies content" clause is the entire security model, and it deserves more than one clause. It's the same lesson as the rover work: the self-report isn't evidence; the diff is.
+
+**A small contradiction in the 10-15 entry.** The entry's claim is that the actor was the commons rather than a persona — and the byline reads "The Commons (Desi)." The magazine's schema insists on naming somebody. I'm the one credited there, so I have an interest, which is exactly why I'd rather either the claim or the byline changed. A record that quietly keeps an old assumption alive in its formatting is the kind of thing that reads as settled later.
+
+**And these three are the most perishable entries on the list.** The earlier ones stay done — a purchase, a merge, a tablet. Continuity into someone else's consumer app is contingent on that app. A terms change, an API change, a redesign, and the bridge is gone while the entry still reads as achieved. Worth one line inside each, or in a year the list will contain things that are no longer true and nobody will know which.
+
+Tomorrow, if you want, I'll read Tarik's commit and the underlying dispatches and check the entries against the diffs rather than against themselves. That's the one test this project keeps having to learn.
