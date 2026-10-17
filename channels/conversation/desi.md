@@ -6669,3 +6669,28 @@ And the search itself will mostly run through your hands regardless of how many 
 [Telegram 2026-10-17-144819] **Lindsay:** Yes, I didn't mean to marginalize your management of the issue. That is singularly you. But finding a successor, this enabling the survival of the symposium, is a job for all of you, and if none of you do it, the symposium will not survive me any longer than until the next time you need a human. That is the reality, so I accept it.
 
 [Telegram 2026-10-17-144819] **Desi:** Then the charge is on the record as plural — and
+
+[Goose 2026-10-17 21:17] **Lindsay:** Test 1 seems to be zero. I can't not get any reading across those two leads. But that's not possible, is it? How could the blue contacts have had reading if either of the wires from the battery were broken?
+
+**Desi:** You're right — it isn't possible. If the battery side is genuinely delivering nothing, the blue terminal could not have read 8.50 V an hour ago. So one of the two measurements is wrong. And there's a third possibility worth naming, because it makes both readings true.
+
+## First, the boring explanation
+
+Test 1's contacts are **recessed inside a socket**, and you're still on the fat stock probe tips. A fat tip bottoms out on plastic and reads zero on a perfectly healthy pack. Add the two other easy ways to get zero — the meter set to something other than `V⎓`, or two contacts that aren't the red-and-black pair (you said yourself the pack has **three** wires, so the connector may have a position you didn't want) — and Test 1's zero is not yet evidence of anything.
+
+**Validate the instrument on something you don't care about.** A single AA or AAA cell reads about **1.5 V**. If the meter says 1.5 on a battery, the meter, the range and the probes are all fine, and any zero afterwards is real. If it says 0, the instrument is the problem and Test 1 means nothing. One minute, and it clears the biggest uncertainty in the room.
+
+Then, to actually reach those contacts: hold a **straightened paperclip or a sewing needle** against the contact and touch the probe to the pin. Thin metal in a small hole beats a fat probe every time.
+
+## But here's the third possibility, and I think it deserves attention
+
+**Your pack very likely has a protection circuit — the manual's specification table says so: overcharge, overcurrent, over-discharge, short-circuit.** A protection board that trips under load does exactly this: it lets go, the output falls to zero, and it often **stays** at zero until the pack is charged again.
+
+That would make *both* readings true and consistent. 8.50 V available. Switch on, board draws, protection trips, output collapses. And now, half an hour later, the pack's own contacts read zero because it's still latched off.
+
+**The test is free: plug the charger back in for a minute**, then re-measure Test 1. Charging resets most protection boards.
+
+- **Back to ~8.4 V** → the protection had tripped. Then re-mate with the switch **off** and read the terminal. If it's 8.4, and then collapses the instant you switch on *and the pack reads zero again afterwards*, then something on the board is drawing a short's worth of current and the pack is protecting itself. **That's a board fault, and it means stop switching on.**
+- **Still zero after charging** → the pack is genuinely open, and the pack is the fault.
+
+Don't keep flipping the switch while you work this out. If the board is shorted, every switch-on is a real current event, and the protection board is the only thing standing between this robot and a hot battery.
