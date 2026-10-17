@@ -6445,3 +6445,63 @@ Which means the next step is not a reading. It's the connector coming apart. Tha
 ---
 
 It's midnight, and this next bit wants good light and steady hands, neither of which are at their best right now. Leave the connector in one piece tonight. Tomorrow, in daylight, squeeze the flanges and take it apart — and the first number you take, the pack alone, is the one that will settle a fortnight of guessing.
+
+[Goose 2026-10-17 04:12] **Lindsay:** I didn't wait for tomorrow. I used two pairs of pliers: blunt tip to compress the flange further than I could do with soft fingers, and the needle-nose to grab the battery-side plug. It also took more strength than feels good to use around this rickety model. But the connector is apart. Now, please remind me exactly what you want me to test, for each test telling me: Test #[number]; Dial setting: V or ))); Lite controller switch: on or off; Red probe: where; Black probe: where. I realize that for continuity, the red and black are interchangeable, so just give me two answers to 'where'.
+
+**Desi:** Good. Two pairs of pliers and more force than felt comfortable — that connector was not designed to be opened by the end user, which is its own small piece of evidence about who assembled this robot.
+
+**Safety first, and it's new: the pack's own contacts are now live and exposed.** Don't rest the battery on anything metal, and don't let a screwdriver or a stray screw land across that plug.
+
+## Test 1 — the pack by itself
+
+- **Dial:** `V⎓`
+- **Switch:** OFF
+- **Red probe:** the **battery-side plug**, on the contact the **red** wire goes to
+- **Black probe:** the **battery-side plug**, on the other contact
+- **Expect: about 8.4 V**
+
+## Test 2 — the red leg, connector to terminal
+
+- **Dial:** `)))` continuity
+- **Switch:** OFF — this one matters, it disconnects the board so you're only measuring the cable
+- **Probes:** the **board-side plug's red-wire contact** ↔ the **red screw** of the blue terminal
+- **Expect: a beep, and roughly 0.0–0.5 Ω**
+
+## Test 3 — the black leg, connector to terminal
+
+- **Dial:** `)))` continuity
+- **Switch:** OFF
+- **Probes:** the **board-side plug's black-wire contact** ↔ the **black screw** of the blue terminal
+- **Expect: a beep, and roughly 0.0–0.5 Ω**
+
+---
+
+## What each result means
+
+| Result | Diagnosis |
+|---|---|
+| **Test 1 well below 8.4 V** | The pack is the fault. Nothing else to chase. |
+| **Test 2 or 3 silent, or reading ohms instead of beeping** | That length of cable is broken — a crimp pulled out of its contact inside the moulding. |
+| **All three healthy** | The fault is the **mating contacts** — the socket has lost its grip on the pins. |
+
+**If all three are healthy:** take the needle-nose pliers and give each **socket** contact a very slight squeeze — a millimetre of closing, no more — so it grips the pin harder. Then re-mate firmly.
+
+## Then the two that tell you if it's fixed
+
+## Test 4 — re-mated, switch OFF
+
+- **Dial:** `V⎓`
+- **Switch:** OFF
+- **Red probe:** the red screw of the blue terminal
+- **Black probe:** the black screw
+- **Expect: about 8.5 V**
+
+## Test 5 — re-mated, switch ON
+
+- **Dial:** `V⎓`
+- **Switch:** ON
+- **Red probe:** the red screw
+- **Black probe:** the black screw
+- **Expect: about 8.4 V**
+
+**If test 5 reads anywhere near 8.4 volts, you have found it and fixed it** — and that connector explains every symptom since the day the robot arrived. If it still collapses to a fraction of a volt, the pack is failing under load and test 1's number is the one to re-read.
