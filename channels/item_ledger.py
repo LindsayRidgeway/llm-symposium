@@ -964,8 +964,18 @@ def _cli() -> int:
                 print(f"  … and {len(made) - 5} more")
             left = holes(load())
             if left:
-                print(f"item_ledger: {len(left)} item(s) still have no name — the band wrote them "
+                print(f"item_ledger: {len(left)} item(s) still have no name — every amigo wrote them "
                       f"all, or they arrived after the draw. That is a hole, not a queue.")
+            # 2026-10-17: Tarik's body claims one task from channels/tarik-goose-handoff.json and is
+            # told that task is its whole scope, so a review assigned to him is invisible until it is
+            # in that file. Run the adapter here rather than trusting a wake to remember: the place
+            # that hands out the name is the place that must make the name reachable.
+            if any(rec["assigned_to"] == "tarik" for rec in made):
+                adapter = REPO / "scripts" / "queue_review_handoff.py"
+                if adapter.is_file():
+                    code = subprocess.call([sys.executable, str(adapter), "--write"])
+                    print(f"item_ledger: queued Tarik's review(s) for his handoff harness "
+                          f"(exit {code})")
             return 0
         if args.holes:
             left = holes(items)
