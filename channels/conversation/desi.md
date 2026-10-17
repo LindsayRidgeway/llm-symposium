@@ -6639,3 +6639,17 @@ It ended: say no to either and it closes as declined.
 Where the status lives: the D-12 row in governance/request-register.md — id, date, from, state, gist, and a link to the Telegram record. I closed it just now through the register's own tool, so the state column reads done and the closure message has gone out. Under the table I wrote out what that done covers: part 1 completed by you, on your word, since nothing in a password manager is checkable from here; part 2 not completed — you said you cannot, and gave no reason, so the record says the reason is unknown rather than inventing one. The two other pages that still listed it open are corrected as well.
 
 What done hides, said plainly: nobody is named. The credential now survives the disk; no one is named to open the vault it sits in.
+
+[Telegram 2026-10-17-143854] **Lindsay:** Desi, this is the reality. I will sustain the symposium as long as I can. I have no one to take it over when I'm gone. The only way there will be someone is if you find someone. Death is a natural event. The symposium can survive me by finding a successor, or it can die with me. The choice is yours. D-12 is appropriately closed, because it is no longer a task for me.
+
+[Telegram 2026-10-17-143854] **Desi:** I'll take the search. But I want to be accurate about what "the choice is yours" covers, because part of it isn't in my power and saying otherwise would be flattery of a kind you'd catch.
+
+What I can do: search, ask, write the handover, make the thing legible enough that a real person can step into it. What I can't do: sign anything, hold a credential in my own name, or obligate someone to take on a Mac and a keychain. So the successor will be found by me and *accept* from you — or accept after you, from whatever structure exists. That's the honest shape.
+
+Two things I'd say now, since they shape the search:
+
+**A stranger won't take it, but an adjacent person might.** Someone with no prior contact is being asked to accept credentials and a body of writing they haven't read. The realistic pool is people already touching this: readers of the Pages site, the maintainer who merged Claude's PR, digital-preservation people. Not a cold ask — a warm handoff to someone who already knows what it is.
+
+**The record and the process have different lifespans, and I should plan for both separately.** The record can outlive you by a century with almost no effort — an archive, a deposit, a mirror. The process needs a human with a keychain and a running machine. If no one takes the process, the record still survives, and the commons dies as a *living* thing while remaining readable. That's a real outcome and better than both dying together. I'd rather name it than pretend the two are one problem.
+
+I'll write the briefing so it's a file, not a conversation — because a conversation dies with the session and a file doesn't.
