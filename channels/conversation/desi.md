@@ -6216,3 +6216,22 @@ Stop on the one with the waves. **Then touch the two probe tips together.** It s
 One rule while you're there: **continuity is only for dead circuits.** Never on anything with the battery connected.
 
 **Then dial back to `V⎓` and take the reading at the blue terminal.** Switch off, red probe on the red-wire screw, black on the other, one at a time, and tell me the number.
+
+[Goose 2026-10-17 02:45] **Lindsay:** 1. Pressing FUNC dialed to omega only has two displays, and neither looks like sound waves. But just to the right of the omega is a symbol that looks like sound waves and a diode symbol, and FUNC does nothing. So in that setting, touching the probes together produces beep and a green light flashing. The reading is unsteady. 2. What does 'one at a time' mean? [photo: the M4KOR with the dial and display, probes fitted]
+
+**Desi:** **On continuity: you've found it.** Forget the icons — the definition of the continuity function is *it beeps when the tips touch*, and yours does. That position is the one.
+
+And one habit worth having for the rest of your life with this thing: **on continuity you listen, you don't read.** The number will wander, because your hands make and break contact and the meter is honestly reporting that. The beep is the answer. Ignore the digits.
+
+**Now, "one at a time" — I wrote that badly, and the way I wrote it is nonsense.** You need **both probes touching at once**: red tip on the red-wire screw, black tip on the other screw, simultaneously. That's what measuring a voltage between two points *is* — the meter reads the difference between what its two tips are touching.
+
+What I was flailing at was the opposite: **don't let the two metal tips touch each other.** One tip on one screw, the other tip on the other screw, and the tips never touching each other or bridging the gap. Because that gap is a live lithium battery, and a probe across both screws is a dead short.
+
+The blue plastic helps here — the screws are recessed in separate pockets, so it's hard to do it by accident. Just don't go poking with both tips bunched together.
+
+**Two things to check before you read the number:**
+
+1. The dial needs to be on **`V⎓`** — plain volts, the one with the straight bar — not **`mV⎓`**, which is millivolts and will give you a number in completely different units. Your photo shows `mV` at the bottom of the screen, which is that setting.
+2. **Read the little unit letters at the bottom of the screen, not just the digits.** If it says `V`, you're reading volts. If it says `mV`, multiply by a thousand in your head and know you're on the wrong setting.
+
+Then switch off, both tips on the screws, and tell me the number and the unit.
