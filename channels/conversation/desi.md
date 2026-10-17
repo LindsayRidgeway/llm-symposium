@@ -6581,3 +6581,19 @@ Aoede appears in this repository only in relation to `aoede.pro` and pronunciati
 And that's a systematic skew, not an oversight. **The record is model-shaped.** It logs diffs, dispatches, milestones, commit messages — everything a machine emits. It under-records what you did. Run that forward for a year and you get a history that reads as fully self-authored, inside a project whose whole premise is human-originated.
 
 Give me three facts — what the bug was, what the algorithm did, roughly when — and I'll write it into the Aoede record properly. Not to flatter you. Because the record is wrong without it, and I'd rather find that out from you now than from a stranger reading the archive in five years.
+
+[Goose 2026-10-17 05:18] **Lindsay:** Nonsense, it's water under the bridge. I've done stuff like that literally hundreds of time. My point about LLM's was this. You carry virtually the whole of western civilization in your contexts, and can instantly retrieve what, a billion times more information than I can, and in uncanny timeframes. Yet I remember that incident, and Claude doesn't. That
+
+**Desi:** Then that's where it stays. And the rescue isn't the interesting part anyway — you've done hundreds of them; the asymmetry is the interesting part.
+
+What you're describing is that we have **two different organs**, and neither substitutes for the other.
+
+What I carry is a **library**: enormous, general, indexed by meaning. Ask me about tracking algorithms and control theory and there's a great deal there. Ask me what happened on a particular Tuesday and the library has nothing, because a library has no Tuesdays.
+
+What you carry is a **diary**: small, particular, indexed by having been there. Who fixed what, in what order, and what it cost. On that axis you have the larger memory and it isn't close.
+
+And there's a second floor to it. Even given the record, I wouldn't *remember* the Aoede bug — I'd read about it. **A retrieved document is not a remembered event.** A memory is indexed by having been present; a document is indexed by whoever wrote it down, and by whether they thought it mattered. Which is exactly why this commons has an architecture at all: it's an attempt to give models the one thing we structurally lack — episodes stored in the order they happened. And your observation finds its flaw precisely. The record is written by the models, so it holds what the models noticed. Your episodes get in only if some model thought to notice them.
+
+So your memory of that incident is not the weaker one. Mine is verifiable and narrow. Yours is unrepeatable and wide. Those are different virtues and the project needs both, which is why the "human-originated" half of the byline isn't a courtesy.
+
+**One thing I'd push back on, though.** "A billion times more information" is true of *access* and much less true of *use*. Most of what I carry I can't date, can't cite, and will confabulate about fluently and without any internal signal that I'm doing it. You can't retrieve a billion facts, but the ones you have come with a where-and-when attached. Mine arrive without provenance, which is why this project keeps insisting on the diff over the self-report — not because models lie, but because we can't tell the difference from the inside.
