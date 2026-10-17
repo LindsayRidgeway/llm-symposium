@@ -34,8 +34,10 @@ built specifically to be the last copy) did **not** have us — API answered `no
     POST /api/1/origin/save/git/url/https://github.com/LindsayRidgeway/llm-symposium/
     -> 200  id 2559526  status accepted  visit pending  loading_task_id 422110765
 
-No human, no credential, no account of ours. **Verify the visit lands and record the SWHID** — a
-pending task is not a copy.
+No human, no credential, no account of ours. **Verified 2026-10-16: the visit landed the same
+minute** — `visit_status: full`, `visit_date 2026-10-15T17:53:14Z`, snapshot
+`swh:1:snp:3365e186a1d8bdb93c16895111438f3cad1e66b7`. Pending became a copy in five seconds;
+the archive now holds the repository as of that minute, without our account being involved.
 
 ## What is open, and whose it is
 
