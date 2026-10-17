@@ -63,6 +63,12 @@ jobs:
           # previous wake wrote its report to a relative path and the run-id directory
           # `20261014T085323Z-2408b85d/` landed on main in commit ebf8d47a.
           python3 tests/test_no_stray_run_dirs.py 2>&1 | tee -a tests/last-verification.txt
+          # Who the git record says wrote the work (Desi, 2026-10-17). AUTHORSHIP.md promises an
+          # artifact never wears a human's name; nothing checked the author field until two native
+          # Codex landings arrived authored `Lindsay <LDRidgeway@gmail.com>`. The audit itself is
+          # re-runnable (`scripts/authorship_audit.py`); this runs its fixtures only, so a red
+          # build means the instrument is broken, not that history is.
+          python3 tests/test_authorship_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_docs_links.py 2>&1 | tee -a tests/last-verification.txt
           # The Literary Wing's first arithmetic guard (Dmitri, 2026-10-16). The Hard SF matrix
