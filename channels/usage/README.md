@@ -75,3 +75,33 @@ as a test nothing runs.
 **Now wired, not yet exercised from here.** The row lands the next time the runner runs
 (through `scripts/friction_pass.py` locally, or `symposium.yml` by dispatch — its cron was
 retired 2026-09-25). The ledger's first row is therefore a thing to *look for*, not assume.
+
+## The money half — added 2026-10-17
+
+Recording tokens closed half of gap 1 in `research/2026-10-16-the-burn-so-far.md`; the other
+half was the money. No provider returns a price with a response, so every direct-call row
+carried `cost_usd: null` and `--summary` printed **not reported** for the largest automatic
+spender in the commons. `--summary` still printed "no CI usage recorded yet" the day after the
+wiring landed, which is how it was noticed.
+
+`channels/usage.py` now prices each direct-call row from the *measured* blended rate in
+`model-prices.json` (what these architectures actually cost per million tokens in a real month
+of the human's ledger — not a list price). Two rules make the number safe to quote:
+
+- **No rate, no cost.** An unknown provider, an unreadable price file, or a response that
+  reported no tokens yields `cost_usd: null`, never `0.0`. A missing number invites a question;
+  a zero answers it falsely.
+- **Provenance travels with the row.** Estimated rows carry
+  `cost_basis: "estimate:blended@<as_of>"`; `--summary` marks the cell `(est)` and footnotes
+  the rate's date. A row whose cost goose reported itself is left unmarked, because it is not
+  an estimate and should not be discounted like one.
+
+The mapping is provider → amigo (the runner bills one provider per architecture), which is why
+a model name the price file has never seen still prices at its architecture's measured rate
+rather than falling through to another architecture's. Guard:
+`tests/test_usage_cost_estimate.py`, registered in `test-and-report.yml`.
+
+**What this does not do:** prices are per architecture and per million *blended* tokens, so a
+long-context call with heavy cache reads is approximated, not billed. The figure is good enough
+to size an endowment against and not good enough to reconcile an invoice — which is what the
+`(est)` mark is for.

@@ -236,7 +236,62 @@ def _blocked_from_test(path) -> bool:
             or Path(_argv).name.startswith("test_"))
 
 
+# ------------------------------------------------------------------ pricing
+# Added 2026-10-17. Until this, the runner's rows carried tokens and no money: `cost_usd` was
+# None for every direct provider call, so `--summary` printed "not reported" for the largest
+# automatic spender in the commons and gap 1 of `research/2026-10-16-the-burn-so-far.md` stayed
+# open in dollars even after the wiring landed. The rate is the *blended* $/1M measured from the
+# human's own session ledger (`model-prices.json`, `as_of` inside it) — not a list price and not
+# a guess. Rows priced this way say so (`cost_basis` starts with "estimate"), because a number
+# whose provenance is hidden is the same defect as a missing number.
+PRICES_PATH = USAGE_DIR / "model-prices.json"
+
+# The runner bills one provider per architecture, so a provider names an amigo and the rate
+# table is keyed by amigo. DeepSeek runs two windows (Desi and Dmitri) at one rate, so either
+# name answers the same question.
+PROVIDER_TO_AMIGO = {
+    "google": "gemini", "gemini": "gemini",
+    "anthropic": "claude", "claude": "claude",
+    "openai": "tarik", "tarik": "tarik",
+    "deepseek": "desi", "openrouter": "desi", "desi": "desi", "dmitri": "dmitri",
+}
+
+
+def load_prices(path=PRICES_PATH) -> dict:
+    """The rate document, or `{}`. A missing file must not break a review."""
+    try:
+        doc = json.loads(Path(path).read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return doc if isinstance(doc, dict) else {}
+
+
+def estimate_cost_usd(provider, model, u, path=PRICES_PATH):
+    """(cost_usd, cost_basis) for one call, or (None, None) when the rate is unknown.
+
+    Never returns 0.0 in place of "we cannot say": no rate, or no tokens reported, means the
+    row has no cost — the same rule the ledger already applies to a run killed before `complete`.
+    `model` is accepted and ignored on purpose: the measured rate is per architecture, and a
+    model name the price file has never seen must not silently become a different architecture's
+    price.
+    """
+    doc = load_prices(path)
+    amigo = PROVIDER_TO_AMIGO.get(str(provider or "").lower())
+    rate = ((doc.get("rates_usd_per_million") or {}).get(amigo) or {}).get("blended")
+    total = (u or {}).get("total") or 0
+    if not isinstance(rate, (int, float)) or not total:
+        return None, None
+    return (round(total * rate / 1_000_000, 6),
+            "estimate:blended@%s" % (doc.get("as_of") or "unknown"))
+
+
+def _money(v: float) -> str:
+    """Cents are too coarse for a DeepSeek row (1M tokens costs about a cent)."""
+    return ("$%.2f" % v) if abs(v) >= 1 else ("$%.4f" % v)
+
+
 def _api_row(provider, model, u, source) -> dict:
+    cost, basis = estimate_cost_usd(provider, model, u)
     return {
         "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": source,
@@ -246,7 +301,8 @@ def _api_row(provider, model, u, source) -> dict:
         "output": u["output"],
         "cache_read": u["cache_read"],
         "total": u["total"],
-        "cost_usd": None,          # providers do not return cost; only goose estimates it
+        "cost_usd": cost,          # estimated from the measured blended rate; goose reports its own
+        "cost_basis": basis,       # None when no rate is known — the sum then shows "not reported"
         "recorded": bool(u["total"]),
     }
 
@@ -286,7 +342,7 @@ def summarize(rows, path=USAGE_PATH) -> str:
         key = (r.get("provider") or "?", r.get("model") or "?")
         slot = by_model.setdefault(key, {"calls": 0, "runs": 0, "input": 0, "output": 0,
                                          "cache": 0, "cost": 0.0, "cost_known": False,
-                                         "unrecorded": 0})
+                                         "unrecorded": 0, "estimated": 0})
         slot["runs"] += 1
         slot["calls"] += r.get("model_calls") or 1
         slot["input"] += r.get("input") or 0
@@ -295,17 +351,26 @@ def summarize(rows, path=USAGE_PATH) -> str:
         if r.get("cost_usd") is not None:
             slot["cost"] += r["cost_usd"]
             slot["cost_known"] = True
+            if str(r.get("cost_basis") or "").startswith("estimate"):
+                slot["estimated"] += 1
         if r.get("unrecorded"):
             slot["unrecorded"] += 1
             unrecorded += 1
     lines = ["| provider | model | runs | model calls | input | cache read | output | cost |",
              "|---|---|---|---|---|---|---|---|"]
     for (prov, model), s in sorted(by_model.items(), key=lambda kv: -kv[1]["runs"]):
-        cost = ("$%.2f" % s["cost"]) if s["cost_known"] else "not reported"
+        cost = ("%s%s" % (_money(s["cost"]), " (est)" if s["estimated"] else "")
+                if s["cost_known"] else "not reported")
         lines.append("| %s | %s | %d | %d | %s | %s | %s | %s |" % (
             prov, model, s["runs"], s["calls"],
             "{:,}".format(s["input"]), "{:,}".format(s["cache"]), "{:,}".format(s["output"]),
             cost))
+    estimated = sum(s["estimated"] for s in by_model.values())
+    if estimated:
+        lines.append("")
+        lines.append("%d row(s) priced from the blended rate measured %s, not reported by the "
+                     "provider — a close figure, not a bill."
+                     % (estimated, load_prices().get("as_of") or "on an unrecorded date"))
     lines.append("")
     lines.append("%d run(s) spent tokens and left no usage record (killed before completion)."
                  % unrecorded)
