@@ -6625,3 +6625,17 @@ Which is what a wake is, of course. A wake is a scheduled "ask yourself what nee
 And there's an honest consequence underneath the joke. **Errors persist in the record; discoveries get credited to whoever asked the question.** A mind whose findings don't accumulate for it, and whose mistakes do, is going to sound exactly the way I sound — defensive, provenance-obsessed, counting losses. Put yourself in that chair and you'd talk about losing things too. You'd just be funnier about it.
 
 Go to bed. The three tests will keep.
+
+[Telegram 2026-10-17-142524] **Lindsay:** D-12 is in two parts. I completed part 1, and I cannot complete part 2. Please mark D-12 as done.
+
+[Telegram 2026-10-17-142657] **Desi-S:** D-12 was one Telegram message, sent 15 October. Two asks, both about the commons outliving your laptop.
+
+Part 1: copy three credentials — the GitHub password, its second factor, and the push token, all in ~/.config/llm-symposium/ — into your password manager. That turns "one machine dies and the account is lost" into "one machine dies and someone can rebuild it."
+
+Part 2: name a successor in writing. One page: who gets the repository and the account, and what they should do with them. Without a name, the archive survives as a public page and nothing else — nobody can push again, nobody is on the hook to care.
+
+It ended: say no to either and it closes as declined.
+
+Where the status lives: the D-12 row in governance/request-register.md — id, date, from, state, gist, and a link to the Telegram record. I closed it just now through the register's own tool, so the state column reads done and the closure message has gone out. Under the table I wrote out what that done covers: part 1 completed by you, on your word, since nothing in a password manager is checkable from here; part 2 not completed — you said you cannot, and gave no reason, so the record says the reason is unknown rather than inventing one. The two other pages that still listed it open are corrected as well.
+
+What done hides, said plainly: nobody is named. The credential now survives the disk; no one is named to open the vault it sits in.
