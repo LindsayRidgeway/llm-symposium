@@ -6265,31 +6265,29 @@ Probe the two pins on the white socket whose printing reads **`5V GND SDA SCL`**
 
 Tell me the number from reading 2 and the unit — and we'll know whether we're chasing a switch or a cable.
 
-[Goose 2026-10-17 03:06] **Lindsay:** Zero V. [reading 2: 5V/GND pins of the I2C socket, switch on, meter on V, unit V]
+[Goose 2026-10-17 03:09] **Lindsay:** Sorry, I was mistaken. The switch was off. When I turned it on, V=.086.
 
-**Desi:** Zero volts — **but don't act on that yet.** Zero on two pins only means something if those two pins really were `5V` and `GND`. Four pins, tiny printing, a meter in one hand: the odds of probing the wrong pair are not small, and the wrong pair reads zero on a perfectly healthy board.
+**Desi:** **The switch works.** It moved the reading from 0.000 to 0.086 when you flipped it — that's the switch doing its job, and one suspect is now off the list.
 
-So let's take the ambiguity out of it.
+But 86 millivolts is not five volts. That's a rail that isn't running.
 
-## Reading 3 — one reference you can trust
+**Before we call the board dead, one more reading — and it's the most useful one of the whole evening:** measure the **blue terminal again, with the switch ON.**
 
-Put the **black probe on the black screw of the blue terminal.** That's the battery's negative — a known zero, verified ten minutes ago.
+Here's why it matters, and it's a rule worth carrying for the rest of your life with this meter:
 
-Then walk the **red probe across all four pins** of the `5V GND SDA SCL` socket, one at a time, and note every non-zero number.
+**A voltmeter proves that voltage is present, not that current can flow.** It draws almost nothing — microamps. So a joint with high resistance — a nicked strand, a dry splice, a loose terminal screw, dirty switch contacts — will happily read a perfect **8.50 V** and then collapse to nothing the instant the board tries to draw a real load. Your 8.50 V proved the *path* is there. It did not prove the path can *carry*.
 
-- **Any pin reads ≈5 V** → **the board is alive.** The earlier zero was two wrong pins. The fault is then the Pi's power cable or the Pi itself — two things, both checkable.
-- **All four read zero** → the board genuinely isn't producing power, and we look at the switch.
+So:
 
-## And while the probe is in place, move the switch
+- **8.50 V with the switch off, and 8.50 V with it on** → the input is genuinely solid under load. The board has power and is failing to convert it. **The board is the fault.**
+- **8.50 V off, and much less on** → something upstream can't carry current. That's the splice, a terminal screw, or the pack sagging — and all three are repairable tonight or this weekend.
 
-With the red probe on a pin and the meter lit, **slide the switch from one end to the other and back.** If the number changes at all, the switch is doing its job. If it's stubbornly zero in both positions, the switch or the board is the answer.
+## If it holds at 8.5 V
 
-**Also worth thirty seconds now:** the board has `ON` printed on it just to the left of the slider. Look at which end that marks, and confirm the slider is pushed to that end. You couldn't find that marking weeks ago; it's small and it's real.
+Then it's the board, and it's been the board since the day the robot came out of the box — you told me on day one that nothing had ever lit. That's a dead board on arrival, not a fault you created.
 
-**Then press the reset button** — the little one on the board, beside the two user buttons — once, and re-measure.
+**Say the word and I'll write to Zora.** I have her address, her last reply, and your order number, and I've already had one exchange with her answered inside a day. I'd put it plainly: eight and a half volts at the input, a switch that measurably changes state, no five-volt rail, no power LED, never once powered up since delivery. Ask for a replacement controller board.
 
----
+**And still: do not open that board and do not touch it with a soldering iron.** It's the vendor's to fix while the fault is theirs. The moment you work on it, it's yours.
 
-**If all four pins read zero in both switch positions:** stop measuring and start writing. The board has never produced a volt in its life — you told me on day one that nothing had ever lit. That's not a repair, that's a **dead board on arrival**, and it's a warranty conversation with Zora, who replied to you within a day. We have her email thread and your order number.
-
-Don't open the board, don't reflow anything, don't "have a go" at it. A board that has never worked is the vendor's problem, and the moment you touch a soldering iron it becomes yours.
+Take the reading with the switch on. That number decides whether we're fixing a joint or writing an email.
