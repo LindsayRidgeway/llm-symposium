@@ -122,6 +122,57 @@ with tempfile.TemporaryDirectory() as tmp:
     check("a missing worker.jsonl is handled, not raised",
           usage.goose_stream_usage(tmp / "nope" / "worker.jsonl")["model_calls"] == 0)
 
+    # ---- 7. the SDK adapter: live response objects, not dicts (added 2026-10-16) ------------
+    # `.github/scripts/runner.py` calls the providers through their SDKs and holds the response
+    # *object*; `api_usage` cannot read it and would record zeros — the same silent-zero bug this
+    # file's own section 4 warns about, one layer out. `sdk_usage` is the adapter that closes the
+    # last gap in the burn figure. These are the shapes the SDKs actually return.
+    class _Obj:
+        def __init__(self, **kw):
+            self.__dict__.update(kw)
+
+    sdk_cases = {
+        "google": (_Obj(usage_metadata=_Obj(prompt_token_count=1500, candidates_token_count=60,
+                                            cached_content_token_count=1400)), (1500, 60, 1400)),
+        "anthropic": (_Obj(usage=_Obj(input_tokens=800, output_tokens=25,
+                                      cache_read_input_tokens=700)), (800, 25, 700)),
+        "openai": (_Obj(usage=_Obj(prompt_tokens=1200, completion_tokens=40, total_tokens=1240,
+                                   prompt_tokens_details=_Obj(cached_tokens=1024))),
+                   (1200, 40, 1024)),
+        "deepseek": (_Obj(usage=_Obj(prompt_tokens=900, completion_tokens=30, total_tokens=930,
+                                     prompt_cache_hit_tokens=800)), (900, 30, 800)),
+    }
+    for _prov, (_resp, _want) in sdk_cases.items():
+        _u = usage.sdk_usage(_prov, _resp)
+        _got = (_u["input"], _u["output"], _u["cache_read"])
+        check("%s: SDK response object normalises (never zero)" % _prov, _got == _want,
+              "got %r want %r" % (_got, _want))
+
+    # A recorded SDK row must land in the ledger, under the right provider, with its tokens.
+    led2 = tmp / "sdk-usage.jsonl"
+    usage.record_sdk_call("anthropic", "claude-sonnet-5", sdk_cases["anthropic"][0], path=led2)
+    rows2 = usage.load_rows(led2)
+    check("record_sdk_call writes one row with provider and tokens",
+          len(rows2) == 1 and rows2[0]["provider"] == "anthropic" and rows2[0]["input"] == 800,
+          json.dumps(rows2))
+
+    # ---- 8. the runner is wired, not merely capable -----------------------------------------
+    # The adapter is worthless if the runner never calls it. This is the "registered but never
+    # run" defect the evidence-table guard exists for, one layer down: a capability nothing uses.
+    runner_src = (Path(__file__).resolve().parent.parent
+                  / ".github" / "scripts" / "runner.py").read_text()
+    check("runner imports the ledger adapter",
+          "from channels import usage" in runner_src and "record_sdk_call" in runner_src)
+    for _label, _needle in (("google", '_record_usage("google"'),
+                            ("openai", '_record_usage("openai"'),
+                            ("anthropic", '_record_usage("anthropic"'),
+                            ("deepseek", "_record_usage(ds_provider")):
+        check("runner records its %s review call" % _label,
+              _needle in runner_src, "missing %r" % _needle)
+    check("runner records the maintainer calls too (>=7 call sites)",
+          runner_src.count("_record_usage(") >= 7,
+          "found %d" % runner_src.count("_record_usage("))
+
 print()
 print("%d check(s) failed" % len(fails) if fails else "all checks passed")
 sys.exit(1 if fails else 0)
