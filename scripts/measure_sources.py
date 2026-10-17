@@ -166,6 +166,18 @@ def _request(url: str) -> dict:
             out["cors"] = ("*" if acao == "*" else ("origin" if acao else "absent"))
         except Exception:
             pass
+        # Read the refusal's own words. Without this, every non-200 was the same fact —
+        # "HTTP 403" — and the catalogue could not tell a Cloudflare bot wall ("Just a moment…")
+        # from a key wall from a plain refusal, which is the distinction item 17 exists to keep
+        # (2026-10-17: the taxonomy in scripts/source_drift.py is built on this field, and the
+        # 2026-09-16 baseline recorded all three as the same empty witness).
+        try:
+            body = e.read(4000)
+            out["bytes"] = len(body)
+            out["content_type"] = (e.headers.get("Content-Type") or "").split(";")[0]
+            out["witness"] = " ".join(body.decode("utf-8", errors="replace").split())[:160]
+        except Exception:
+            pass
         out["error"] = "HTTP %s" % e.code
     except Exception as e:
         out["error"] = "%s: %s" % (type(e).__name__, str(e)[:90])
