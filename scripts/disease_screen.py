@@ -46,8 +46,12 @@ together" hits were the symbol `AR` in a paper about **augmented reality** (PMID
 token matches and both are wrong, so a token-boundary guard does not fix this and the count
 alone cannot: *no count can tell "a paper about the pair" from a coincidence of English.* So
 every strict join now fetches its top documents (title, PMID, year) into the artefact, and any
-symbol of three characters or fewer is flagged `ambiguous_symbol` — the reader is told to open
-the hit before a "prior work" verdict is allowed to close a lead.
+symbol of three characters or fewer is flagged `ambiguous_symbol`. Its positive token count
+does not enter `joined_in_title_or_abstract` without a successful positive expanded-name query;
+it stays in `ambiguous_unverified_joins`, neither prior work nor an absence. Raw counts and hits
+are retained. `name_confirmation` records the separate name query and its documents, even when
+the larger raw symbol count wins the maximum. Supplied names still need scientific review:
+query evidence is not biological verification, and an empty document fetch is explicit.
 
 **3. A failed count (-1) is not a row, and it is not a zero.** Europe PMC drops a request now and
 then; the failure is recorded as -1 so it can never be read as a real 0. Until 2026-09-23 the -1
@@ -260,17 +264,22 @@ def failed_scopes(r: dict) -> list:
     return [k for k in ("strict", "any_field") if r[k] < 0]
 
 
-def verdict(any_n: int, strict_n: int, ambiguous_symbol: bool = False) -> str:
+def verdict(any_n: int, strict_n: int, ambiguous_symbol: bool = False,
+            name_confirmed: bool = False) -> str:
     # Either count failing makes the pair unreadable. `any_n == 0, strict_n == -1` used to fall
     # through to "unjoined — a candidate, NOT a finding": a failed strict query printed as a
     # promising lead. Found 2026-09-23 on P2RY12, MGLL and SORT1 in the vulvodynia screen.
     if any_n < 0 or strict_n < 0:
         return "QUERY FAILED — re-run this pair; do not read the number"
     if strict_n > 0:
+        if ambiguous_symbol and not name_confirmed:
+            return ("UNRESOLVED AMBIGUOUS MATCH — REFUSING to classify a short-symbol count "
+                    "as prior work without expanded-name evidence; open strict_hits. "
+                    "This is not an absence of a link.")
         if ambiguous_symbol:
-            return ("already published together (title/abstract) — DO NOT CLOSE YET: the symbol "
-                    "is short and may be an ordinary word or another field's acronym; open "
-                    "strict_hits and confirm the gene")
+            return ("expanded-name title/abstract match — prior-work evidence; read "
+                    "name_confirmation and its strict_hits, not the raw symbol count. "
+                    "Supplied names are not biological verification.")
         return "already published together (title/abstract) — prior work, cite it"
     if any_n == 0:
         return "unjoined — no document contains both; a candidate, NOT a finding"
@@ -372,6 +381,7 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         # A target is a symbol AND the names a paper would actually use for it.
         names = [sym] + [n for n in t.get("names", []) if n]
         best = None  # (both counts real, strict, any_field, name, disease form)
+        name_best = None  # separate evidence; a larger symbol maximum must not mask it
         for name in names:
             for form in forms:
                 s, a = strict(name, form), any_field(name, form)
@@ -381,6 +391,10 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                 cand = (s >= 0 and a >= 0, s, a, name, form)
                 if best is None or cand[:3] > best[:3]:
                     best = cand
+                if (ambiguous(sym) and s > 0 and a > 0 and not ambiguous(name)
+                        and name.strip().casefold() != sym.strip().casefold()):
+                    if name_best is None or cand[:3] > name_best[:3]:
+                        name_best = cand
         _, s, a, name, form = best
         # What the plain symbol-only query would have reported, kept so a reader can see the
         # difference a name makes rather than trusting the maximum on its own.
@@ -389,6 +403,17 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         score = ot_score(sym, efo) if use_ot else None
         ctl = is_control(t)
         fs = [k for k, v in (("strict", s), ("any_field", a)) if v < 0]
+        hits = epmc_hits(strict_query(name, form)) if s > 0 else []
+        confirmation = None
+        if name_best is not None and not ctl:
+            _, ns, na, nn, nf = name_best
+            query = strict_query(nn, nf)
+            name_hits = hits if (nn, nf) == (name, form) else epmc_hits(query)
+            confirmation = {"name": nn, "disease_form": nf, "strict": ns,
+                            "any_field": na, "query": query, "strict_hits": name_hits,
+                            "hits_available": bool(name_hits)}
+        unresolved = (not ctl and not fs and s > 0 and ambiguous_symbol
+                      and confirmation is None)
         return {
             "category": t.get("category", ""),
             "symbol": sym,
@@ -403,12 +428,14 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
             "failed_scopes": fs,
             "naming_sensitive": (name != sym or form != disease),
             "ambiguous_symbol": ambiguous_symbol,
+            "name_confirmation": confirmation,
+            "unresolved_ambiguity": unresolved,
             # A join is only evidence if you can open it. Empty unless strict > 0.
-            "strict_hits": epmc_hits(strict_query(name, form)) if s > 0 else [],
+            "strict_hits": hits,
             "open_targets_score": score,
             "verdict": ("null control — a string that names nothing; it is here to be scored and "
                         "is excluded from every count" if ctl
-                        else verdict(a, s, ambiguous_symbol)),
+                        else verdict(a, s, ambiguous_symbol, confirmation is not None)),
         }
 
     # 8 parallel workers trips Europe PMC's rate limit on a burst (observed 2026-09-23: 54 of
@@ -427,7 +454,8 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
     scored_rows = [r for r in real_rows if scored(r)]
     failed_rows = [r for r in real_rows if not scored(r)]
     false_gaps = [r["symbol"] for r in scored_rows
-                  if r["naming_sensitive"] and r["symbol_only_strict"] == 0 and r["strict"] > 0]
+                  if r["naming_sensitive"] and r["symbol_only_strict"] == 0 and r["strict"] > 0
+                  and not r["unresolved_ambiguity"]]
     return {
         "disease": disease,
         "disease_resolved": efo_name,
@@ -450,7 +478,10 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                  "so the reader can see whether the unjoined band separates a gene from noise. "
                  "`strict` or `any_field` of -1 means that query FAILED: the row is not a zero, "
                  "is excluded from every band, and is listed in `failed_queries`; compare "
-                 "`n_scored` with `n_targets` before calling a band complete."),
+                 "`n_scored` with `n_targets` before calling a band complete. A positive short "
+                 "symbol without successful positive expanded-name counts is unresolved, not "
+                 "joined or unjoined; see `ambiguous_unverified_joins`. `name_confirmation` "
+                 "keeps its own query/counts/hits; supplied aliases are not biological proof."),
         "n_targets": len(real_rows),
         "n_controls": len(ctrl_rows),
         # How much of the list this screen actually measured, said plainly. Before 2026-09-23
@@ -477,7 +508,10 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         "no_title_abstract_join": [r["symbol"] for r in scored_rows if r["strict"] == 0],
         "no_strict_join_but_discussed": [r["symbol"] for r in scored_rows
                                          if r["strict"] == 0 and r["any_field"] > INCIDENTAL_MAX],
-        "joined_in_title_or_abstract": [r["symbol"] for r in scored_rows if r["strict"] > 0],
+        "joined_in_title_or_abstract": [r["symbol"] for r in scored_rows
+                                        if r["strict"] > 0 and not r["unresolved_ambiguity"]],
+        "ambiguous_unverified_joins": [r["symbol"] for r in scored_rows
+                                        if r["unresolved_ambiguity"]],
         # The rows a symbol-only screen would have called unjoined but which are joined under a
         # name the literature actually uses. This is the false-gap count, and it belongs in the
         # artefact: the whole defect is that a false gap is indistinguishable from a real one.
@@ -626,11 +660,23 @@ def main() -> int:
         print(f"\nrows a symbol-only query would have called unjoined, but which are joined under a "
               f"name the literature uses ({len(fg)}): {', '.join(fg)}")
     for sym in res["ambiguous_joins_to_read"]:
-        hits = next(r["strict_hits"] for r in res["targets"] if r["symbol"] == sym)
+        row = next(r for r in res["targets"] if r["symbol"] == sym)
         print(f"\n'{sym}' is short enough to be an ordinary word or another field's acronym. "
-              f"Open these before closing the lead:")
-        for h in hits:
+              "Raw selected-query documents (not verified gene matches):")
+        for h in row["strict_hits"]:
             print(f"  PMID {h['pmid']} ({h['year']}): {h['title']}")
+        confirmation = row["name_confirmation"]
+        if confirmation:
+            print(f"  Expanded-name evidence: {confirmation['name']!r}; "
+                  f"disease form {confirmation['disease_form']!r}; "
+                  f"strict={confirmation['strict']}, any_field={confirmation['any_field']}")
+            print(f"  Query: {confirmation['query']}")
+            if not confirmation["hits_available"]:
+                print("  Document retrieval unavailable; a positive count is not a read document.")
+            for h in confirmation["strict_hits"]:
+                print(f"  PMID {h['pmid']} ({h['year']}): {h['title']}")
+    print("\nunresolved short-symbol matches (neither prior work nor absence): "
+          + (", ".join(res["ambiguous_unverified_joins"]) or "(none)"))
     print(f"\nno title/abstract join (all bands), over {res['n_scored']} scored rows: "
           f"{', '.join(res['no_title_abstract_join']) or '(none)'}")
     print(f"  of those, fully unjoined (0/0): {', '.join(res['unjoined']) or '(none)'}")

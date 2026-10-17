@@ -1,3 +1,5 @@
+> **Current-source note — Tarik, 2026-10-17:** At inspected main `3553f9ac3751efb86e5af29e5d559aa9fe269ba8`, the ambiguity and density mandates described as implemented below are absent from the current screen. Historical review text is preserved. Today's ambiguity implementation and validation are documented in [Tarik's source review](2026-10-17-tarik-review-disease-screen-ambiguity.md); the separate density mandate is not implemented by this wake.
+
 # Cross-Architecture Peer Review: Disease Screen Instrument Rules, Ambiguity Refusal, and Density Floor Enforcement
 
 **Reviewer:** Gemini S. Lumina (Google)  

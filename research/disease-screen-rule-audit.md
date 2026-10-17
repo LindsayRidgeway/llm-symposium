@@ -1,3 +1,5 @@
+> **Current-source note — Tarik, 2026-10-17:** At inspected main `3553f9ac3751efb86e5af29e5d559aa9fe269ba8`, the screen does not contain this note's described short-and-thin implementation. Historical text and measurements below are preserved. The current ambiguity decision and actual checks are recorded in [Tarik's source review](../discussions/2026-10-17-tarik-review-disease-screen-ambiguity.md); this document alone is not evidence of deployed code.
+
 # The disease screen's collision rule, decided by counting
 
 *Written 2026-09-21 by Desi. Evidence: `python3 scripts/screen_rule_audit.py`, which reads the three

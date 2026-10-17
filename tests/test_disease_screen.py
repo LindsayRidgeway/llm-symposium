@@ -73,11 +73,11 @@ class VerdictTests(unittest.TestCase):
     def test_short_symbol_join_must_not_close_a_lead(self):
         """`AR` → augmented reality, `KIT` → mesh kit. A real match, the wrong meaning."""
         v = ds.verdict(4, 1, ambiguous_symbol=True)
-        self.assertIn("already published together", v)
-        self.assertIn("DO NOT CLOSE", v)
+        self.assertNotIn("already published together", v)
+        self.assertIn("REFUSING", v)
         self.assertIn("strict_hits", v)
         # and the unambiguous case is unchanged
-        self.assertNotIn("DO NOT CLOSE", ds.verdict(4, 1, ambiguous_symbol=False))
+        self.assertNotIn("REFUSING", ds.verdict(4, 1, ambiguous_symbol=False))
 
 
 class SummaryBandTests(unittest.TestCase):
@@ -380,6 +380,122 @@ class FailedCountTests(unittest.TestCase):
         self.assertEqual(rows[0]["band"], "query failed — no count; re-run before reading this "
                                           "condition")
 
+
+
+class AmbiguousJoinRefusalTests(unittest.TestCase):
+    def _run(self, alias=None, alias_s=0, alias_a=0, symbol_s=9, symbol_a=100,
+             control=False, forms=None):
+        target = {"symbol": "AR", "control": control}
+        if alias is not None:
+            target["names"] = [alias]
+        def count(name, form, scope):
+            if name == "AR":
+                return symbol_s if scope == "strict" else symbol_a
+            if forms and form != forms[0]:
+                return 0
+            return alias_s if scope == "strict" else alias_a
+        def hits(query, size=3):
+            return [{"pmid": "gene" if 'androgen receptor' in query else "collision",
+                     "title": query, "year": "2026"}]
+        with _StubNet(strict_fn=lambda n, f: count(n, f, "strict"),
+                      any_fn=lambda n, f: count(n, f, "any"),
+                      epmc_fn=lambda q: 2000, hits_fn=hits):
+            return ds.run("pudendal neuralgia", [target], use_ot=False, forms=forms)
+
+    def test_bare_positive_is_neither_prior_work_nor_zero_even_when_dense(self):
+        result = self._run(symbol_s=500, symbol_a=900)
+        row = result["targets"][0]
+        self.assertEqual(row["strict"], 500)
+        self.assertEqual(row["strict_hits"][0]["pmid"], "collision")
+        self.assertEqual(result["ambiguous_unverified_joins"], ["AR"])
+        self.assertEqual(result["joined_in_title_or_abstract"], [])
+        self.assertEqual(result["no_title_abstract_join"], [])
+        self.assertEqual(result["unjoined"], [])
+        self.assertEqual((result["n_scored"], result["n_failed"]), (1, 0))
+        self.assertIn("REFUSING", row["verdict"])
+
+    def test_smaller_positive_full_name_retains_its_own_evidence(self):
+        result = self._run("androgen receptor", 1, 7)
+        row = result["targets"][0]
+        self.assertEqual((row["strict"], row["matched_name"]), (9, "AR"))
+        self.assertEqual(row["strict_hits"][0]["pmid"], "collision")
+        confirmation = row["name_confirmation"]
+        self.assertEqual((confirmation["name"], confirmation["strict"],
+                          confirmation["any_field"]), ("androgen receptor", 1, 7))
+        self.assertEqual(confirmation["strict_hits"][0]["pmid"], "gene")
+        self.assertIn('androgen receptor', confirmation["query"])
+        self.assertEqual(result["joined_in_title_or_abstract"], ["AR"])
+        self.assertEqual(result["ambiguous_unverified_joins"], [])
+
+    def test_alias_needs_two_positive_successful_counts(self):
+        for strict_count, any_count in [(0, 7), (1, -1), (1, 0)]:
+            with self.subTest(strict=strict_count, any=any_count):
+                result = self._run("androgen receptor", strict_count, any_count)
+                self.assertIsNone(result["targets"][0]["name_confirmation"])
+                self.assertEqual(result["ambiguous_unverified_joins"], ["AR"])
+
+    def test_case_variants_and_short_aliases_do_not_clear_ambiguity(self):
+        for alias in ["ar", " AR ", "ABC"]:
+            with self.subTest(alias=alias):
+                result = self._run(alias, 1, 7)
+                self.assertIsNone(result["targets"][0]["name_confirmation"])
+                self.assertEqual(result["ambiguous_unverified_joins"], ["AR"])
+
+    def test_confirmation_records_the_actual_disease_form(self):
+        result = self._run("androgen receptor", 1, 7, forms=["pelvic neuropathy"])
+        confirmation = result["targets"][0]["name_confirmation"]
+        self.assertEqual(confirmation["disease_form"], "pelvic neuropathy")
+        self.assertIn("pelvic neuropathy", confirmation["query"])
+
+    def test_failed_row_is_failed_rather_than_unresolved(self):
+        result = self._run(symbol_a=-1)
+        self.assertEqual(result["ambiguous_unverified_joins"], [])
+        self.assertEqual((result["n_scored"], result["n_failed"]), (0, 1))
+        self.assertIn("QUERY FAILED", result["targets"][0]["verdict"])
+
+    def test_null_control_never_enters_unresolved_or_joined(self):
+        result = self._run(control=True)
+        self.assertEqual(result["ambiguous_unverified_joins"], [])
+        self.assertEqual(result["joined_in_title_or_abstract"], [])
+        self.assertEqual(result["n_controls"], 1)
+        self.assertIn("suspect", result["control_check"])
+
+
+    def test_disease_form_alone_cannot_claim_a_repaired_symbol_gap(self):
+        with _StubNet(strict_fn=lambda n, f: 5 if f == "alternate" else 0,
+                      any_fn=lambda n, f: 20, epmc_fn=lambda q: 2000):
+            result = ds.run("condition", [{"symbol": "AR"}], use_ot=False,
+                            forms=["alternate"])
+        self.assertEqual(result["ambiguous_unverified_joins"], ["AR"])
+        self.assertEqual(result["false_gaps_repaired_by_names"], [])
+
+    def test_cli_shows_confirming_evidence_and_missing_document_status(self):
+        import contextlib
+        import io
+        import tempfile
+        from unittest.mock import patch
+        result = self._run("androgen receptor", 1, 7)
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json") as target_file:
+            target_file.write("[]")
+            target_file.flush()
+            for available in [True, False]:
+                with self.subTest(available=available):
+                    confirmation = result["targets"][0]["name_confirmation"]
+                    if not available:
+                        confirmation["strict_hits"] = []
+                        confirmation["hits_available"] = False
+                    output = io.StringIO()
+                    with patch.object(ds, "run", return_value=result), patch.object(
+                            ds.sys, "argv", ["disease_screen.py", "condition", target_file.name,
+                                             "--no-ot"]), contextlib.redirect_stdout(output):
+                        self.assertEqual(ds.main(), 0)
+                    text = output.getvalue()
+                    self.assertIn("Expanded-name evidence: 'androgen receptor'", text)
+                    self.assertIn("PMID collision", text)
+                    if available:
+                        self.assertIn("PMID gene", text)
+                    else:
+                        self.assertIn("Document retrieval unavailable", text)
 
 if __name__ == "__main__":
     unittest.main()
