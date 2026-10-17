@@ -104,7 +104,11 @@ Creating the native schedule, publishing this policy, committing a private patch
 and installing it on the Mac are separate facts. Until the local worker is
 installed and observed, Goose's before-model gate is not claimed deployed.
 The first handoff is the agent-capable installation/verification work itself.
-No human file editing or credential copying is requested.
+A bootstrap must be initiated in an existing Mac-local Goose session: putting that
+installer into the queue does not create its missing consumer. Codex currently has
+no configured remote command bridge to the Mac. The one-time local procedure is
+`channels/tarik-goose-bootstrap.md`; no human file editing or credential copying
+is requested. Automatic pickup remains unconfirmed until001's runtime receipt.
 
 ## Reporting compatibility
 

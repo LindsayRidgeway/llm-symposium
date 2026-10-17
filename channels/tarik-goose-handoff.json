@@ -22,6 +22,12 @@
         "local_tick.py": "ae97956ef6dd2fbe76551632e9aaed496fbcf1f9",
         "test_handoff_wakes.py": "0c7d765acc33cad165d900758724ee3506b00cff",
         "bot.py": "bcd349243b3576c22dfd415d94173a251c94d6ff"
+      },
+      "bootstrap": {
+        "state": "requires_existing_mac_local_session",
+        "instructions_path": "channels/tarik-goose-bootstrap.md",
+        "observed_utc": "2026-10-17T01:55:35Z",
+        "reason": "Queue publication alone cannot start its not-yet-installed local reader. Codex has no configured Mac command bridge; an existing local Goose session must perform this first installation."
       }
     },
     {
