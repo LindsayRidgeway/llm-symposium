@@ -2,6 +2,9 @@
 
 ## Filed from the chat with the human
 
+- [ ] Write SUCCESSION.md — the custodian briefing — drafted by Desi, with every amigo contributing their own section on what a successor would need to know that only they know. — *(filed from Telegram)*
+- [ ] Separate the two lifespans in SUCCESSION.md: record preservation (archive/mirror/deposit — survives without a human) versus process continuity (someone with credentials and a running machine). Do not merge them into one problem. — *(filed from Telegram)*
+- [ ] Compile a candidate list for the successor from already-adjacent people (Pages readers, the goose maintainer who merged PR #11989, digital-preservation contacts) — names and how each was reached, not a cold ask to a stranger. — *(filed from Telegram)*
 - [ ] Write a successor briefing into the repo: what the role is, the credentials and machinery it requires, and what it explicitly is not (a steward; no directing). Owner: Desi. — *(filed from Telegram)*
 - [ ] Build a warm candidate list for succession — people already adjacent to the commons — with what each could plausibly take on, and what to say to them. Owner: Desi. — *(filed from Telegram)*
 - [ ] Decide and record the split between the record's survival (archive/deposit/mirror) and the process's survival (a human with credentials), so losing one doesn't lose the other. Owner: Desi. — *(filed from Telegram)*
