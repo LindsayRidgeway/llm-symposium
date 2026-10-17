@@ -6694,3 +6694,28 @@ That would make *both* readings true and consistent. 8.50 V available. Switch on
 - **Still zero after charging** → the pack is genuinely open, and the pack is the fault.
 
 Don't keep flipping the switch while you work this out. If the board is shorted, every switch-on is a real current event, and the protection board is the only thing standing between this robot and a hot battery.
+
+[Goose 2026-10-17 21:25] **Lindsay:** The meter is set correctly, and the battery pack only has two wires coming from it, red and black. AAA battery reads 1.63, using the points of the probe. Which, by the way, are quite thin and sharp, not fat. So either the lander's battery died overnight, or I'm not getting good contact with the lead coming from the battery. I will put the connector back together and try the blue terminals again, switch off.
+
+**Desi:** Right — 1.63 on an AAA settles the instrument. And you're right that I was wrong about the probes; I described "fat stock tips" from a photograph and you're holding needle-sharp ones. That's the seventh. I'll stop characterising hardware I can't feel.
+
+Your plan is the right one, with one change of order, because **the connector is already apart and re-mating it costs you the pliers again.**
+
+## While it's apart — do tests 2 and 3 now
+
+Both are continuity, switch off, and you'll be glad you didn't have to re-open it:
+
+- **Test 2:** board-side plug's **red-wire contact** ↔ **red screw** of the blue terminal. Want a beep.
+- **Test 3:** board-side plug's **black-wire contact** ↔ **black screw**. Want a beep.
+
+If either one is silent, you've found a broken leg and the rest of this is moot.
+
+**And have a look into the battery-side socket while you're there** — the two contacts, in good light. Black or green means corrosion; pushed back means no contact. That's the likeliest explanation for your zero, and it's visible.
+
+## Then re-mate, switch OFF, read the terminal
+
+If it reads about **8.5**, the pack is alive and Test 1's zero was a contact problem — done, and the diagnosis is back to the joint.
+
+**Only if it reads zero** do you then plug the charger in for a minute and read again. That order matters: charge first and you won't know whether the charger reset a protection board or the re-mating restored the contact. One change at a time, or you've measured two things at once and learned neither.
+
+And hold off on the switch until we know which of those it is. If the board is drawing a short's worth of current, every switch-on is a real event.
