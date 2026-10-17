@@ -6423,3 +6423,25 @@ I said the path "cannot carry the current the board wants." That presumed the bo
 The connector is the **prime suspect** only because it's the single hand-assembled, separable joint in the run — not because anything has proved it. To prove it we need a probe point on **each side** of it, and that means opening it. So yes: it's now worth the careful effort, and the squeeze-the-flanges method is where I'd start.
 
 **And before that, ten seconds with the beeper:** continuity between the **red screw on the blue terminal** and the **red pin in that connector**. If they don't beep, that connector isn't on the battery path at all — it belongs to the Pi's power feed, it's an innocent bystander, and we've been staring at the wrong joint.
+
+[Goose 2026-10-17 03:58] **Lindsay:** You wrote, 'And before that, ten seconds with the beeper: continuity between the red screw on the blue terminal and the red pin in that connector.' With the connector intact, there is no red pin to touch. I have to pull the connector apart to get to the pins inside.
+
+**Desi:** You're right, and that instruction was impossible. With the connector intact there's no metal to touch — so **there is no non-invasive measurement left.** Everything reachable has been measured: the two terminal screws, twice, with the switch in both positions.
+
+Which means the next step is not a reading. It's the connector coming apart. That's fine — it's a connector; separating is what it's for.
+
+**Once it's apart, three things:**
+
+1. **The battery side, alone.** Measure voltage across that half's two contacts. Expect about **8.4 V**. This is the pack in isolation — the reading we have never had, and until now it's been impossible.
+
+2. **The leg from the connector to the terminal.** Battery disconnected, switch off, meter on **continuity**. One probe on the **board-side red contact**, the other on the **red screw of the blue terminal**. It should beep, and read a fraction of an ohm.
+   - **It beeps and reads near zero** → that piece of cable is fine, and the fault is inside the connector itself.
+   - **It's high, or silent** → the fault is in that short length of cable, and the connector is innocent. A crimp inside a moulded housing can pull slightly out of its contact and be completely invisible — which is exactly why "no wire is exposed anywhere" told us nothing about whether it conducts.
+
+3. **Look at the contacts in a good light.** Three specific things: a pin **pushed back** into its housing so it doesn't reach; a contact that's **black or green**; a socket that has **lost its spring**. Those are the three ways this fails, and all three are visible.
+
+**If it refuses to come apart, stop rather than force it.** Forcing a latch is how a connector becomes a soldering job.
+
+---
+
+It's midnight, and this next bit wants good light and steady hands, neither of which are at their best right now. Leave the connector in one piece tonight. Tomorrow, in daylight, squeeze the flanges and take it apart — and the first number you take, the pack alone, is the one that will settle a fortnight of guessing.
