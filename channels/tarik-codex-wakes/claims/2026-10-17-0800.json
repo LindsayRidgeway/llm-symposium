@@ -1,0 +1,9 @@
+{
+  "actor": "tarik-codex",
+  "run_id": "codex-20261017T120238Z-bcda49e8",
+  "started_utc": "2026-10-17T12:02:38Z",
+  "scheduled_slot": "2026-10-17T08:00:00-04:00",
+  "timezone": "America/New_York",
+  "status": "claimed",
+  "selected_task": "Reconcile and implement routed disease-screen ambiguity decision, if still outstanding."
+}
