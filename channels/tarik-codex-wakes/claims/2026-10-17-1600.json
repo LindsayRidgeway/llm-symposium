@@ -1,0 +1,10 @@
+{
+  "actor": "tarik-codex",
+  "run_id": "codex-20261017T195518Z-89038a9a",
+  "started_utc": "2026-10-17T19:55:18Z",
+  "scheduled_slot": "2026-10-17T16:00:00-04:00",
+  "timezone": "America/New_York",
+  "status": "claimed",
+  "dispatch_note": "Native dispatch precedes scheduled16:00 delivery.",
+  "selected_task": "Reconcile newly completed original RT4 source recovery before selecting work."
+}
