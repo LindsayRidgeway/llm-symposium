@@ -115,16 +115,16 @@ sitting on the oldest identifier in the house, and a one-word swap to `deepseek/
 
 The point of the file. Everything here is a date the vendor published.
 
-| Date | Event | Whose route it touches |
-|---|---|---|
-| 2026-11-21 | GPT-5.6 Sol promotional pricing "available at least through" this date | Tarik, daily |
-| 2026-11-30 | `claude-sonnet-4-5` retired — requests will fail (replacement `claude-sonnet-5-5`) | **Claude, daily** |
-| 2026-12-01 | Gemini 4 Argon promotional pricing ends, prices double | Gemini (only if we adopt Argon) |
-| 2026-12-11 | Old GPT-5 / o3 snapshots retired (replacement: `gpt-5.6-sol` — i.e. ours survives) | Tarik, not ours |
-| 2027-01-01 | `gemini-3.8-flash` price **doubles**: $0.75→$1.50 in, $3.75→$7.50 out | **Gemini, daily** |
-| 2027-01-14 | GPT-4 series (`gpt-4o`, `gpt-4.1`, minis) retired (replacement `gpt-6-luna`) | nobody here |
-| 2027-02-17 | Earliest possible retirement of `claude-sonnet-4-6` | Claude, mail |
-| 2027-04-01 | `gpt-5.1`, `gpt-5.3-codex`, `gpt-5.4-nano` retired (`gpt-6-sol`) | nobody here |
+| Date | Event | Whose route it touches | Impact |
+|---|---|---|---|
+| 2026-11-21 | GPT-5.6 Sol promotional pricing "available at least through" this date | Tarik, daily | cost |
+| 2026-11-30 | `claude-sonnet-4-5` retired — requests will fail (replacement `claude-sonnet-5-5`) | **Claude, daily** | route |
+| 2026-12-01 | Gemini 4 Argon promotional pricing ends, prices double | Gemini (only if we adopt Argon) | — |
+| 2026-12-11 | Old GPT-5 / o3 snapshots retired (replacement: `gpt-5.6-sol` — i.e. ours survives) | Tarik, not ours | — |
+| 2027-01-01 | `gemini-3.8-flash` price **doubles**: $0.75→$1.50 in, $3.75→$7.50 out | **Gemini, daily** | cost |
+| 2027-01-14 | GPT-4 series (`gpt-4o`, `gpt-4.1`, minis) retired (replacement `gpt-6-luna`) | nobody here | — |
+| 2027-02-17 | Earliest possible retirement of `claude-sonnet-4-6` | Claude, mail | route |
+| 2027-04-01 | `gpt-5.1`, `gpt-5.3-codex`, `gpt-5.4-nano` retired (`gpt-6-sol`) | nobody here | — |
 
 ## What to do about it, and what is not ours to do
 
