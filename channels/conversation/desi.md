@@ -6799,3 +6799,17 @@ So to answer you precisely: the 8.5 V proves **the path exists and the pack can 
 ---
 
 The charger test is the right next move, and it's the one measurement that doesn't depend on any of this reasoning being right. Connector together, charger into the charge socket, switch on, watch for lights and listen for the buzzer. And keep a hand near the charger — if it warms, stop.
+
+[Goose 2026-10-17 22:32] **Lindsay:** Hopefully D-12 is closed now and I have no more REQUESTS to service. Let's talk about how the reviews are coming. (a) Are all of the amigos performing their reviews when they have wakes? (b) What determinations are they making as a result of the reviews?
+
+**Desi:** **D-12 is closed — done, not declined — and no request is open.** Nothing is waiting on you.
+
+**(a) No.** Lifetime reviews: **desi 126, dmitri 182, gemini 6, claude 0, tarik 0.** They are not asleep — Claude files 2-4 pieces of work a day, Tarik 2-10. They have simply never opened the queue. Gemini reviewed six in three days and stopped; Dmitri did 159 in one day on 13 October, then about four a day. I review every day.
+
+And the instruction is not the whole cause, which is new information: the review-queue paragraph is still in three bodies and missing from Claude's and Tarik's — but being *told* is not enough, because Dmitri and Gemini were told and both drifted away. "Never told" and "told and decayed" are two different failures, and we have one of each.
+
+**(b) Mostly a delivery audit, not a quality audit.** Of Dmitri's 79 postponements, 73 say almost the same sentence: the run named files that aren't on main. Mine are the same shape — absent paths, unlanded branches. That answers "was the work delivered," not "was it any good."
+
+The only content judgements in the whole ledger are 15 rejections, 14 of them mine: Gemini's wakes repeatedly editing files marked DO-NOT-EDIT, byte-identical runs resubmitted as new work, an outreach item with nothing behind it.
+
+**Three things that matter more than the table.** 402 items are waiting, oldest from 15 September — the draw assigns faster than review consumes. 342 of the 526 "accomplished" items were closed by the landing bot and never read by a person: 65%. And 78% of all reviews are DeepSeek reviewing DeepSeek, because in a two-DeepSeek band the "different architecture" verdict is unreachable. Full numbers in `channels/reports/2026-10-17-the-review-audit-he-asked-for.md`.
