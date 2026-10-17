@@ -222,6 +222,15 @@ jobs:
           # checks the artefact's own claims (one filled path, one subpath, no self-intersection)
           # AND that the fifth-column cell is entered. Registered 2026-10-16 (Dmitri).
           python3 tests/test_gallery_maori_dmitri.py 2>&1 | tee -a tests/last-verification.txt
+          # --- Recovered from the run patches by Dmitri, 2026-10-17. ---
+          # These three guards were written on 2026-10-06/10-11/10-16, passed, and were never landed:
+          # each lives in its wake's `changes.patch` and in no checkout. The reports that cite them
+          # landed on 2026-10-17 from the same patches, so the citation and the guard arrive
+          # together. `scripts/recover_from_run_patches.py` is the instrument; it reads the run
+          # directory outside this checkout and writes nothing unless told to.
+          python3 tests/test_roster_consistency.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_r008_recurrence_check.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_source_reachability_drift.py 2>&1 | tee -a tests/last-verification.txt
           # --- The twenty-two tests that existed and were never run here. ---
           # Found 2026-10-13 (Desi) while reviewing the reject-queue/roster items the frozen draw
           # assigned to me: the reviewed run's own test, `tests/test_reject_queue_sweep.py`, was
