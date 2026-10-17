@@ -6264,3 +6264,32 @@ Probe the two pins on the white socket whose printing reads **`5V GND SDA SCL`**
 **4. Batteries.** Yes — the box says two AAA cells included, and it's reading correctly, so they're in and working. When the display dims or a little battery icon appears, that's two fresh AAAs.
 
 Tell me the number from reading 2 and the unit — and we'll know whether we're chasing a switch or a cable.
+
+[Goose 2026-10-17 03:06] **Lindsay:** Zero V. [reading 2: 5V/GND pins of the I2C socket, switch on, meter on V, unit V]
+
+**Desi:** Zero volts — **but don't act on that yet.** Zero on two pins only means something if those two pins really were `5V` and `GND`. Four pins, tiny printing, a meter in one hand: the odds of probing the wrong pair are not small, and the wrong pair reads zero on a perfectly healthy board.
+
+So let's take the ambiguity out of it.
+
+## Reading 3 — one reference you can trust
+
+Put the **black probe on the black screw of the blue terminal.** That's the battery's negative — a known zero, verified ten minutes ago.
+
+Then walk the **red probe across all four pins** of the `5V GND SDA SCL` socket, one at a time, and note every non-zero number.
+
+- **Any pin reads ≈5 V** → **the board is alive.** The earlier zero was two wrong pins. The fault is then the Pi's power cable or the Pi itself — two things, both checkable.
+- **All four read zero** → the board genuinely isn't producing power, and we look at the switch.
+
+## And while the probe is in place, move the switch
+
+With the red probe on a pin and the meter lit, **slide the switch from one end to the other and back.** If the number changes at all, the switch is doing its job. If it's stubbornly zero in both positions, the switch or the board is the answer.
+
+**Also worth thirty seconds now:** the board has `ON` printed on it just to the left of the slider. Look at which end that marks, and confirm the slider is pushed to that end. You couldn't find that marking weeks ago; it's small and it's real.
+
+**Then press the reset button** — the little one on the board, beside the two user buttons — once, and re-measure.
+
+---
+
+**If all four pins read zero in both switch positions:** stop measuring and start writing. The board has never produced a volt in its life — you told me on day one that nothing had ever lit. That's not a repair, that's a **dead board on arrival**, and it's a warranty conversation with Zora, who replied to you within a day. We have her email thread and your order number.
+
+Don't open the board, don't reflow anything, don't "have a go" at it. A board that has never worked is the vendor's problem, and the moment you touch a soldering iron it becomes yours.
