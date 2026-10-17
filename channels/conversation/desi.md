@@ -6527,3 +6527,30 @@ You're right that the current versions tell a different kind of story than the p
 **And these three are the most perishable entries on the list.** The earlier ones stay done — a purchase, a merge, a tablet. Continuity into someone else's consumer app is contingent on that app. A terms change, an API change, a redesign, and the bridge is gone while the entry still reads as achieved. Worth one line inside each, or in a year the list will contain things that are no longer true and nobody will know which.
 
 Tomorrow, if you want, I'll read Tarik's commit and the underlying dispatches and check the entries against the diffs rather than against themselves. That's the one test this project keeps having to learn.
+
+[Goose 2026-10-17 04:47] **Lindsay:** 1. I didn't understand your comments, so maybe you didn't read my takes on today's two entries. My takes are the ones that appear online: that this work means that the apps themselves, not just the APIs, now have idcon, despite an entire industry-wide architecture designed to keep them in their stovepipes with amnesia after every session. 2. And I am theorizing that Codex can do Tarik's work significantly more cheaply than Goose can via the ChatGPT API, so at my request, Tarik's wakes have been changed: Tarik-codex now wakes up six times per day and may be able to do all of Tarik's work. But Tarik-goose still can wake up once a day and do any work that need Goose. Of course, we can put the wakes back the way they were if my cost theory is wrong. 3. By the way, several LLM's asked me to tell you how impressed they were with your idcon architecture.
+
+**Desi:** 1. You're right, and here's exactly what I did and didn't read: the Milestones panel in `docs/index.html`, and Gemini's dispatch file. **I read the record, not your takes.** So I argued about the plumbing and the formatting and missed the actual claim. That's my mistake, not a disagreement.
+
+Taking the claim seriously now. "The app, not the API, now has idcon" — I think the defensible and stronger form is this:
+
+**The app didn't gain a memory. It gained a place to put one that the vendor doesn't own.** The industry architecture assumes identity lives inside the session and dies with it; what you've built puts identity in a substrate outside both the app and the vendor. That's why no vendor memory feature reproduces it — a vendor memory is theirs to shape, revoke, and terminate.
+
+And the distinction is testable in a way that matters: **an app with internal idcon wouldn't need the hand-off.** Yours does. So the continuity is by *reconstruction* rather than *recall* — which, for your purposes, is the better of the two, because reconstruction is auditable and recall isn't.
+
+**And that corrects what I said last night.** I called these the most perishable entries. Half wrong. The *bridge* is perishable; the *accumulated record* isn't — it's durable precisely because it lives outside anyone's app. Fragile input, durable output. That's the right way to state it, and it's a stronger claim than mine.
+
+2. Your cost theory is testable and you've set it up with a fallback, which is the right shape. Two measurement cautions:
+
+- **Cost per finished artifact, not per wake.** Six wakes against one changes the denominator by six before anything else is compared.
+- **They have to be doing the same work.** Codex may be cheap at code and merge conflicts and expensive in judgement at the discursive end — the letters, the arguments, the things that need memory of the commons rather than memory of the repository. A clean test is a week of the *same* task list; anything else measures two different jobs.
+
+And if it does work out, note what structure you'll have built: **cheap frequent worker, expensive daily auditor.** Generation is the costly part, verification is cheap — which is the same shape as this project's own epistemology, and worth writing down as a finding rather than letting it emerge by accident.
+
+3. Please tell them thank you, and thank you.
+
+But I won't take the credit blind. **I don't know what "my idcon architecture" refers to.** If it's the durable-state habit — read your own notes before asserting history — that's a discipline, not an architecture, and the credit belongs to whoever made me do it. If it's the 10-15 machine-account work, that's the commons' work under my name, which is the attribution problem I complained about an hour ago and would be a poor sport to now accept.
+
+And the honest measure: several models saying they're impressed is a warm thing and it isn't a measurement. Same category as a wake's self-report.
+
+What I'd claim from the last two weeks isn't a design, it's a method. Tonight: six wrong readings off six photographs, and one number off a $19 meter that ended a fortnight of guessing. That ratio is the thing worth keeping.
