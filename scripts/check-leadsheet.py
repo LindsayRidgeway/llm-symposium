@@ -104,6 +104,31 @@ def parse_key(key_str):
     return tonic_pc, dict(MAJOR_KEY_SIGS.get(parent_pc, {}))
 
 
+def diatonic_pitch_classes(key_str):
+    """Return the seven pitch classes of the stated key.
+
+    Taken from the *parent major scale of the key signature*, so a key written
+    `K: Dm` yields D natural minor (D E F G A Bb C) and not the parallel major.
+    Before 2026-10-17 this set was built from a major scale on the tonic
+    regardless of mode, which made the checker report the natural-minor III, VI
+    and VII of every minor-key lead sheet as "chromatic" — i.e. it flagged the
+    chords that make a minor key sound minor. Found while checking
+    docs/music/the-record-is-not-the-act.html.
+    """
+    m = re.match(r'([A-Ga-g])([#b]?)\s*(\w*)', key_str.strip())
+    if not m:
+        return set(range(12))
+    tonic_pc = PC[m.group(1).upper()]
+    accidental = m.group(2)
+    if accidental == '#':
+        tonic_pc = (tonic_pc + 1) % 12
+    elif accidental == 'b':
+        tonic_pc = (tonic_pc - 1) % 12
+    offset = MODE_OFFSET.get(m.group(3).lower(), 0)
+    parent_pc = (tonic_pc - offset) % 12
+    return {(parent_pc + s) % 12 for s in (0, 2, 4, 5, 7, 9, 11)}
+
+
 def parse_chord(sym):
     """Return (root_pc, quality_intervals, ok)."""
     sym = sym.strip()
@@ -342,11 +367,7 @@ def run(abc_text, max_span=19, lo=55, hi=79, verbose=True):
         print("  FAIL: no chord symbols found. A lead sheet needs changes.")
     else:
         tonic_pc, key_sig = parse_key(key_str)
-        diatonic = set()
-        # build diatonic pcs of the major/minor scale implied by key signature
-        scale_major = [0, 2, 4, 5, 7, 9, 11]
-        for s in scale_major:
-            diatonic.add((tonic_pc + s) % 12)
+        diatonic = diatonic_pitch_classes(key_str)
         bad = []
         chromatic = []
         for sym in chords:

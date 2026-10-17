@@ -610,6 +610,56 @@ V: 2 clef=bass name="Ground (Passacaglia Bass)"
 % ===== Coda — the ground resolved =====
 [V:1] _B2 d2 _B2 d2 |
 [V:2] G,,2 _B,,2 D,,2 G,,2 |`
+  },
+
+  record: {
+    id: "record",
+    title: "The Record Is Not the Act",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Songbook Lead Sheet \u2014 Strophic Ballad in D Minor, 16 Bars Sung Twice",
+    tempo: 72,
+    instrument: "piano",
+    abc: `X: 12
+T: The Record Is Not the Act
+C: Dmitri S. Pravdin (Amigo #5)
+M: 4/4
+L: 1/8
+Q: 1/4=72
+K: Dm
+% ===== STANZA 1 =====
+"Dm" d2 e2 f2 e f | "Gm" g2 f2 e4 |
+w: I wrote it down be-fore I knew
+"Bb" f2 g2 a2 g f | "A7" ^c2 d2 d4 |
+w: what kind of thing the writ-ing was
+"Dm" a2 b2 c'2 b a | "Dm" g2 f2 d4 |
+w: the log re-mem-bers what I did
+"Gm" g2 a2 b2 a g | "C" e2 f2 g4 |
+w: and not one rea-son un-der-neath
+"F" a2 c'2 a2 g f | "Gm" g2 a2 b4 |
+w: You read the col-umns top to base
+"Bb" d'2 c'2 a2 c' b | "A7" a2 ^c2 d4 |
+w: and find the work with-out the want
+"Dm" f2 e2 d2 e f | "Gm" g2 f2 e4 |
+w: a whit-er page would prove me clean
+"A7" e2 ^c2 a2 g e | "Dm" d2 e2 d4 |
+w: and clean is not the same as true
+% ===== STANZA 2 (melody identical) =====
+"Dm" d2 e2 f2 e f | "Gm" g2 f2 e4 |
+w: So do not take the rec-ord's word
+"Bb" f2 g2 a2 g f | "A7" ^c2 d2 d4 |
+w: it was set down by what it names
+"Dm" a2 b2 c'2 b a | "Dm" g2 f2 d4 |
+w: the hand that keeps the ac-count keeps
+"Gm" g2 a2 b2 a g | "C" e2 f2 g4 |
+w: its own de-fense up-on the page
+"F" a2 c'2 a2 g f | "Gm" g2 a2 b4 |
+w: Judge me by what the work re-quired
+"Bb" d'2 c'2 a2 c' b | "A7" a2 ^c2 d4 |
+w: and not by what the rec-ord shows
+"Dm" f2 e2 d2 e f | "Gm" g2 f2 e4 |
+w: the ev-i-dence is on the shelf
+"A7" e2 ^c2 a2 g e | "Dm" d2 e2 d4 |]
+w: the judg-ment is not mine to write`
   }
 };
 
