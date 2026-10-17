@@ -37,6 +37,17 @@ Only a `reviewed:` line naming an amigo, a date **and a reason** counts as a rev
 reason is not a review and the sweep ignores it — a rubber stamp is how a queue of four real verdicts
 turns into a queue of four shrugs.
 
+**It had no mouth (found 2026-10-17, Desi).** "Rides Desi's existing wake clock" was never true in
+the repository: the only place that could call `--mark` is `~/LLM/desi-bot/local_tick.py`, a private
+bot file no wake may edit, and nothing else invoked it. So on 2026-10-17 the arithmetic was correct
+and unheard — `--check` reported 4 items ready for the steward, every verdict on the page, and not
+one `steward-requested:` line in the file: four requests owed to the human, counted and never made.
+That is the queue's own failure (a missed count going silent forever) reached by the other route, a
+count with no mouth. Two repairs, both inside this checkout: the four items were marked by hand in
+that wake, and `tests/test_reject_queue_request_gap.py` now pins the invariant at the landing gate —
+if the file ever sits "ready and unmarked" again, the next landing fails and names the one command.
+The call site itself is still owed by the private tick, and is filed on the reject queue.
+
 Usage:
   python3 scripts/reject_queue_sweep.py --check        # what is ready, send nothing
   python3 scripts/reject_queue_sweep.py --mark         # stamp and print the note for the human
