@@ -389,19 +389,60 @@ class TestReconcile(unittest.TestCase):
         self.assertEqual(il.reconcile_landed(self.path, landed=landed), [])
         self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "A")
 
-    def test_a_platform_prefixed_row_still_matches_the_land_log(self):
-        """Codex records its row as `codex-<id>`; the land log names the bare id.
-
-        Measured 2026-10-16: Tarik's recovered conflict guard had landed (commit cc47d39d) yet its row
-        stayed in W — the single item `--holes` named — because `landed_run_ids` extracts the bare
-        token from `land(wake): Codex work from run codex-…` while the row's id kept the prefix.
-        """
+    def test_native_codex_delivery_does_not_claim_a_goose_test_gate(self):
+        """A direct Codex GitHub push is delivery, not evidence Goose's gate ran."""
         il.append([self._row("codex-20261014T143036Z-964dd1d5")], self.path)
         made = il.reconcile_landed(self.path, landed={"20261014T143036Z-964dd1d5"})
-        self.assertEqual([r["id"] for r in made], ["codex-20261014T143036Z-964dd1d5"])
+        self.assertEqual(made, [])
         rec = il.load(self.path)["codex-20261014T143036Z-964dd1d5"]
-        self.assertEqual(rec["state"], "accomplished")
-        self.assertEqual(rec["reviewer"], "auto:land")
+        self.assertIsNone(rec["state"])
+        self.assertIsNone(rec["reviewer"])
+
+    def test_native_platform_or_source_is_respected_without_an_id_prefix(self):
+        for field in ("platform", "source"):
+            with self.subTest(field=field):
+                row = self._row("20261016T200444Z-14786fb8")
+                row[field] = "codex"
+                il.append([row], self.path)
+                self.assertEqual(il.reconcile_landed(
+                    self.path, landed={"20261016T200444Z-14786fb8"}), [])
+                self.assertIsNone(il.load(self.path)[row["id"]]["state"])
+
+    def test_codex_and_goose_in_the_same_batch_preserve_the_gate_distinction(self):
+        codex = self._row("codex-20261016T200444Z-14786fb8")
+        goose = self._row("20261010T000000Z-aaaaaaaa")
+        il.append([codex, goose], self.path)
+        landed = {"20261016T200444Z-14786fb8", goose["id"]}
+        self.assertEqual([r["id"] for r in il.reconcile_landed(self.path, landed=landed)],
+                         [goose["id"]])
+        self.assertEqual(il.reconcile_landed(self.path, landed=landed), [])
+        self.assertIsNone(il.load(self.path)[codex["id"]]["state"])
+
+    def test_an_actual_codex_review_is_preserved(self):
+        row = self._row("codex-20261016T200444Z-14786fb8", state="accomplished",
+                        reviewer="claude", reason="reviewed scripts/check_conflict_markers.py")
+        il.append([row], self.path)
+        self.assertEqual(il.reconcile_landed(
+            self.path, landed={"20261016T200444Z-14786fb8"}), [])
+        self.assertEqual(il.load(self.path)[row["id"]], row)
+
+    def test_collect_does_not_initially_grant_a_codex_gate_pass(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as t:
+            root = Path(t)
+            rid = "codex-20261016T200444Z-14786fb8"
+            make_run(root, rid, ["scripts/x.py"], "I published a native app artifact.")
+            with patch.object(il, "runs_dir", return_value=root), \
+                    patch.object(il, "landed_run_ids", return_value={il.canonical_run_id(rid)}), \
+                    patch.object(il, "draw", return_value=[]):
+                self.assertEqual(il.collect(self.path, amigo="tarik"), 1)
+                rec = il.load(self.path)[rid]
+                self.assertIsNone(rec["state"])
+                self.assertIsNone(rec["reviewer"])
+                self.assertIsNone(rec["reason"])
+                before = self.path.read_bytes()
+                self.assertEqual(il.collect(self.path, amigo="tarik"), 0)
+                self.assertEqual(self.path.read_bytes(), before)
 
 
 class TestPrefixedRunIds(unittest.TestCase):

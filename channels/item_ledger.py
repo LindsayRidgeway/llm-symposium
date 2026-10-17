@@ -360,6 +360,12 @@ def append(records: list[dict], path: Path = LEDGER) -> None:
             fh.write(json.dumps(rec, sort_keys=True) + "\n")
 
 
+def is_native_codex(rec: dict) -> bool:
+    """Native app publication is not evidence that the private Goose gate ran."""
+    return (rec.get("platform") == "codex" or rec.get("source") == "codex"
+            or str(rec.get("id", "")).startswith("codex-"))
+
+
 def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = None) -> int:
     """Append one `performed` row per new run that changed something. Idempotent by run id."""
     known = load(path)
@@ -378,7 +384,8 @@ def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = N
                 if item["id"] in known:
                     continue
                 # Verify the accomplishment rather than assert it.
-                item["state"] = ("accomplished" if canonical_run_id(item["id"]) in landed else None)
+                item["state"] = ("accomplished" if not is_native_codex(item)
+                                 and canonical_run_id(item["id"]) in landed else None)
                 item["state_utc"] = item["filed_utc"] if item["state"] else None
                 item["reason"] = ("landed on main (lander's test gate passed)"
                                   if item["state"] else None)
@@ -416,6 +423,10 @@ def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | 
 
     Only rows still in W are touched: a reviewer's decision (accomplished/postponed/rejected) is a
     person's judgement and is never overwritten by the lander's.
+
+    Native Codex publications use the same delivery stamp but are pushed directly through GitHub,
+    without the private Goose lander's test gate. Keep those items waiting rather than claiming
+    that gate passed. Their delivery ids still belong in landed_run_ids and the delivery clock.
     """
     if landed is None:
         landed = landed_run_ids(repo)
@@ -423,6 +434,8 @@ def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | 
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     updates = []
     for rec in items.values():
+        if is_native_codex(rec):
+            continue
         if letter_for(rec) != "W" or canonical_run_id(rec.get("id")) not in landed:
             continue
         upd = dict(rec)
