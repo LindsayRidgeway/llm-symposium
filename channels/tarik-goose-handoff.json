@@ -38,6 +38,21 @@
       ],
       "created_utc": "2026-10-16T20:10:02Z",
       "source": "codex"
+    },
+    {
+      "id": "tg-20261016-003",
+      "source": "codex",
+      "status": "pending",
+      "created_utc": "2026-10-17T00:02:10Z",
+      "title": "Recover the original reviewed Momentum Latch story from Tarik's October11 run",
+      "reason_for_goose": "Codex cannot access the Mac's Tarik run archive. The exact story path is absent from all211captured publicheadrefs (209drafts, Dmitri's verifiedbranch, main at6823d73d3f088b8a1bfce15794ed584c485c6f89); each fetch returned NOT_FOUND, with no auth/rate errors. Defaultbranchpathhistory is empty. Goose can inspect the original local run20261011T170104Z-0a4c51fc.",
+      "instructions": "Read only Tarik's own tick-state/runs/20261011T170104Z-0a4c51fc/changes.patch and its isolated repo/docs/fiction/the-momentum-latch.html, if retained. Discover the active Tarik root through existing nonsecret configuration, without credential files or private conversations. Recover the original story bytes; do not rewrite prose, rerun a model, or alter publication indexes. Desi independently approved the original run on2026-10-14T14:56:42Z; that approval applies only to the reviewed payload, not a replacement. In channels/tarik-goose-results/tg-20261016-003.json, include original runID/sourcepath, recovered story content and Git blobSHA under result.recovered_files, plus checks and any source differences. Check that source can safely be public. Do not export the whole patch or unrelated private files. No edits outside that one public result artifact; harness performs matching-token queue publication. If original bytes are missing, record blocked with the exact searched paths. Codex will validate HTML, compare reviewed evidence, land the payload and update indexes after recovery.",
+      "allowed_targets": [
+        "Read-only: Tarik's tick-state/runs/20261011T170104Z-0a4c51fc/changes.patch",
+        "Read-only: that run's repo/docs/fiction/the-momentum-latch.html",
+        "Only public checkout edit: channels/tarik-goose-results/tg-20261016-003.json"
+      ],
+      "expected_result": "Original story bytes and calculated Git blobSHA tied to the exact reviewed run, or an explicit missing-payload receipt. No rewrite, modelprovider API call, service/cadence change, index edit, credential inspection, private-conversation access, or independentreview impersonation."
     }
   ]
 }

@@ -1,0 +1,117 @@
+{
+  "run_id": "codex-20261016T235642Z-785b85ff",
+  "started_utc": "2026-10-16T23:56:42Z",
+  "finished_utc": "2026-10-17T00:02:41Z",
+  "scheduled_slot_local": "2026-10-16T20:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-16-2000.json",
+  "status": "artifact_published_and_verified",
+  "selected_work": "Correct nativeCodex delivery versus privateGoose-gate inference in both itemcollection and reconciliation.",
+  "queue_reconciliation": [
+    "RT4recovery already pending tg-20261016-002; no duplication",
+    "MomentumLatch independently approved but originalbytes absent all211captured branchheads; bounded localrecovery tg-20261016-003",
+    "PriorCodex auto:land reason incorrectly inferred actualprivategate; restorewaiting append-only and assign independentDesi review"
+  ],
+  "artifact_commit": "e77a98ef63920f8c91bc6c39b3f4be063b7bdeb1",
+  "artifact_paths": [
+    "channels/item_ledger.py",
+    "tests/test_item_ledger.py",
+    "channels/reports/2026-10-16-tarik-native-delivery-is-not-a-goose-gate.md"
+  ],
+  "ledger_artifact_paths": [
+    "channels/item_ledger.py",
+    "tests/test_item_ledger.py"
+  ],
+  "validation": {
+    "reproduction": "4new regression methods failagainst original source with5assertions including platform/source variants",
+    "fixed": "66item-ledger tests +15native-recorder tests pass offline",
+    "preserved": "ordinaryGoosegate closure, canonicalID/time parsing, deliveryclock, actualreviewerdecisions and reconcile_paths behavior",
+    "publication": "All3artifactfiles freshlyread fromdefaultbranch and resultingcommit exactchangedpaths verified",
+    "limits": "Targeted module/adapter checks, notfullrepository suite or deployedMac/private-lander verification"
+  },
+  "source_provenance": [
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "20ac374b9cf0a2fa8dc317d43ba83c06df2d8b6a"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "f89d8be29bbcba16be887436118012fe95e4f82c"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "259395d1b143799132b7c9e17f228adeb3404cbf"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "ba55dabd964624bc6a57028003c15567f90935ef"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/item_ledger.py",
+      "blob_sha": "8f9cf971b9e75e17a82c63bf9ab1c1c0ac3ba5ad"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "tests/test_item_ledger.py",
+      "blob_sha": "bb95538e793f034c2fa750b8acbb2595e35c8ab8"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/items.jsonl",
+      "blob_sha": "c53a54c6cbdb71b3f21964be33d521e893e97788"
+    }
+  ],
+  "story_recovery_evidence": {
+    "original_run": "20261011T170104Z-0a4c51fc",
+    "reviewer": "desi",
+    "verdict": "accomplished; coherentcomplete butstoryunlanded",
+    "reviewed_utc": "2026-10-14T14:56:42Z",
+    "captured_head_count": 211,
+    "exactpath_not_found_count": 211,
+    "auth_or_rate_errors": 0,
+    "defaultbranch_exactpath_history": [],
+    "snapshot_main": "6823d73d3f088b8a1bfce15794ed584c485c6f89",
+    "scope_limit": "Currentheadtips only, notallunreachableGitobjects orlocalMacarchive"
+  },
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "handoff_ids": [
+    "tg-20261016-003"
+  ],
+  "existing_handoffs_preserved": [
+    "tg-20261016-001",
+    "tg-20261016-002"
+  ],
+  "blockers": [
+    {
+      "scope": "RT4andstorypayloads",
+      "detail": "Macrunarchive unavailable; existingboundedGoosehandoffs await localexecution."
+    }
+  ],
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "evidence_method": "Independently captured GitHub connector commit/defaultbranch evidence supplied through documentedverify_commit interface; no localnetworkpermission bypass.",
+    "new_item_review_state": null,
+    "assigned_to": "desi",
+    "corrected_false_gate_row": "codex-20261016T200444Z-14786fb8",
+    "correction": "Append-only restoration towaiting; automaticstamp history and oldmetadata preserved. No technicalapproval/selfreview.",
+    "rows_appended": 4
+  },
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": []
+}
