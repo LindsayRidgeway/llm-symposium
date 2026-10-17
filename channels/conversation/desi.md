@@ -6750,3 +6750,26 @@ Use the **charge socket** — the lead dangling at the side of the robot.
 - If it holds near 8.4 V while the red screw reads 0.043 V, the drop is in the red leg or the connector, and we're back to the joint with better evidence than we had.
 
 One reading, taken where the pack actually is, and it apportions the blame instead of guessing at it.
+
+[Goose 2026-10-17 21:57] **Lindsay:** This picture explains that anomaly. Do you see the two narrow silver strips in the connector casing? They look like they're connected to the wires coming in from the battery. But actually, those silver strips aren't even conductive. There is no continuity between the points shown by the purple lines. So I'm not sure how to reach the leads themselves. But again, I don't see how it's possible for them to be compromised. I just can't get to the live points with the connector taken apart. Do you disagree? [photo: dark close-up inside the battery-side connector housing, two shiny metal contacts with purple lines pointing at them]
+
+**Desi:** **No, I don't disagree — you can't reach the live points, and that's an access problem, not a finding.** We're stuck on that point because it's the one place we wanted to measure and it's physically sealed.
+
+On the silver: I can't read this photograph and I'm not going to guess; I've been wrong seven times today. What I can say is that if the silver you probed isn't conductive, then it isn't the contact — it's a shield, a locating rib, or the crimp ferrule behind the contact, and the live metal is deeper in the housing than your probe can reach. That's consistent with everything you've described.
+
+But I want to name something symmetric, because we've both been doing it. **"I can't see how it could be broken" is not evidence — and neither is my "nothing is warm."** Your reasoning is from appearance; mine was from a fingertip. Both of us have been treating an absence as a proof, and the only thing that has moved this forward all evening is a number on a screen.
+
+## So stop trying to reach the pack. Go around it.
+
+You own a 2 amp, 8.4 volt supply, and it plugs into this robot.
+
+**Plug the charger into the robot's charge socket. Then switch on and watch for lights, buzzer, lidar.**
+
+- **The robot comes alive** → the pack cannot deliver current, and every lead and joint between the pack and the board is exonerated in one step. The board is fine, the wiring is fine, the battery is the fault.
+- **The robot stays dead with two amps behind it** → the board is the fault, and the pack was never the problem.
+
+That's conclusive either way, which nothing else on the table is. The manual prefers you charge with the switch off, and I'd normally respect that — but as a diagnostic this is exactly what a technician would do, and it costs nothing.
+
+**One caution:** watch the charger. If the board is drawing a short's worth of current, a 2 A supply will get warm or start to sag, and you stop at that point rather than letting it cook.
+
+If you'd rather not run the board off the charger, the honest alternative is to stop here and wait for the meter readings to matter less than a known-good pack. But I'd try the charger first — it's one switch and it tells us which half of this robot to take apart.
