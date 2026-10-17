@@ -1,0 +1,9 @@
+{
+  "run_id": "codex-20261017T035522Z-2ea227a1",
+  "actor": "tarik-codex",
+  "started_utc": "2026-10-17T03:55:22Z",
+  "timezone": "America/New_York",
+  "scheduled_slot": "2026-10-17T00:00:00-04:00",
+  "status": "claimed",
+  "dispatch_note": "Actual start precedes the scheduled midnight delivery; next native scheduled slot."
+}
