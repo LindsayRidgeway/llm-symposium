@@ -6381,3 +6381,45 @@ Here's something worth noticing: **your 8.5 volts with the switch off is already
 - **Pack warm** → stop, and don't do that again. A warm lithium pack means it's being over-discharged.
 
 If it's getting more than comfortably warm, stop well before thirty seconds. And if **nothing** is warm anywhere, that's information too — it means almost no current is flowing at all, and the joint is near-open rather than merely resistive.
+
+[Goose 2026-10-17 03:53] **Lindsay:** First of all, nothing feels warm, even after more than a minute. Secondly, I don't understand your reasoning. Switch off: the blue terminal carries 8.5V. Switch on: it carries .043V. Why does that tell you that the problem is in the path between the battery and the blue terminal, rather than somewhere on the Lite board or elsewhere?
+
+**Desi:** Fair challenge, and my earlier wording was too strong. Let me put the reasoning out properly, because you're right that it needs to earn the conclusion.
+
+## What those two readings actually say
+
+The voltage at those screws is the battery's voltage minus whatever is lost between the battery and the screws:
+
+**V(screws) = V(battery) − I × R(path)**
+
+- **Switch off** → no current flows → the loss is zero → you read the battery itself: **8.5 V.** That's all the off-reading is. The pack, plus the wire, doing nothing.
+- **Switch on** → the board starts drawing → you read **0.043 V**. So about **8.46 V is being lost in that path.**
+
+And lost volts have to go somewhere: they become heat, `8.46 × I` watts, inside whatever has the resistance.
+
+## You're right that a board fault could do this
+
+If the LITE board had a short and tried to pull ten amps, a normal wire would sag, the terminal would collapse, and the fault would be entirely on the board. So **the switch-on reading by itself does not distinguish upstream from downstream.** That's the gap in what I said, and you found it.
+
+## Two things close the gap
+
+**First, the heat.** Eight and a half volts times a current big enough to drag down a pack rated at 22 amps is a *lot* of watts — tens of them — and a minute of that is unmistakable to your fingers, usually with a smell to go with it. **Nothing was warm after more than a minute.** So the current is small, well under an amp. And a small current can only produce a huge drop if the **resistance is large**. Small current plus big drop equals one thing: a bad, nearly-open joint. It cannot be an overloaded board.
+
+**Second, the board isn't running.** At 0.043 volts at its input, the board has no supply and is not drawing anything meaningful. A thing that isn't drawing current cannot be the thing pulling the supply down.
+
+So the readings say: **there is a high resistance somewhere between the battery and those two screws.** That's the whole claim.
+
+## Where I overreached
+
+I said the path "cannot carry the current the board wants." That presumed the board wants a normal current, which we haven't established. The honest version is narrower: **the path between the pack and the screws is too resistive.** And that narrow claim does *not* name the connector. It could be:
+
+- the connector,
+- one of the factory crimps at either end,
+- the protection board inside the pack,
+- or the terminal screws themselves.
+
+## What that means for next
+
+The connector is the **prime suspect** only because it's the single hand-assembled, separable joint in the run — not because anything has proved it. To prove it we need a probe point on **each side** of it, and that means opening it. So yes: it's now worth the careful effort, and the squeeze-the-flanges method is where I'd start.
+
+**And before that, ten seconds with the beeper:** continuity between the **red screw on the blue terminal** and the **red pin in that connector**. If they don't beep, that connector isn't on the battery path at all — it belongs to the Pi's power feed, it's an innocent bystander, and we've been staring at the wrong joint.
