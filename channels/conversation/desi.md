@@ -6106,3 +6106,48 @@ What the role actually is: **custodian of the substrate.** Concretely, the thing
 • Drain the draft pile / verify landed drafts — re-read this wake: git remote -v is still empty in this checkout, so no review branch can be fetched to verify a run LAND path
 
 I have marked each one as asked, so you will not get this note twice about the same item. Nothing needed from you today unless you want to rule on one.
+
+[Goose 2026-10-17 01:59] **Lindsay:** The multimeter and other items were delivered. Ready to find the issue? [photo: AstroAI M4KOR multimeter in hand, display blank, dial at OFF, black lead in COM]
+
+**Desi:** Yes. Two readings, and one of them probably ends it.
+
+## Set the meter up first
+
+- **Black lead → `COM`** (the middle socket).
+- **Red lead → the right-hand socket**, the one marked `VΩ…` (not the `10A` socket on the left — that one is for measuring current and we are not using it).
+- **Dial to `V⎓`** — the `V` with a straight line under it, on the left side, one click up from `OFF`. The screen should wake up and show something near zero.
+
+Use the **thin needle tips** you bought rather than the fat stock probes. Those screws are small and the fat tips will skate.
+
+## Reading 1 — at the blue terminal
+
+1. **Power switch OFF.**
+2. Main controller **top cover off** — that's where the blue terminal is.
+3. **Red probe on the screw with the red wire. Black probe on the other screw.** Steady contact on the screw heads.
+4. **Read the number.** You're expecting somewhere between **7.5 and 8.4 volts.**
+
+**What it means:**
+
+| Reading | Diagnosis |
+|---|---|
+| **≈8 V** | Battery and every wire up to the board are good. The fault is the **switch**, or something downstream of it. |
+| **0 V** | The battery is not reaching the board. Go to reading 2. |
+
+## Reading 2 — only if reading 1 is zero
+
+Battery **cover off**. Now probe the pack's own red and black leads in **two places**:
+
+- **upstream of the heat-shrink splice** (the battery side)
+- **downstream of it** (the board side)
+
+- **8 V on the battery side, 0 V on the board side** → **the splice is dead.** That's your fault, and it's the one hand-made joint in the whole path.
+- **0 V on both sides** → the pack itself isn't delivering. The pack is the fault.
+
+## Two safety rules, and I mean these
+
+- **Never leave the dial on a current range or on resistance while the battery is connected.** Resistance and continuity ranges expect a dead circuit; on a live one they give nonsense at best and can damage the meter at worst.
+- **Do not let the two probe tips touch each other, or bridge the two screws.** That's a direct short across a lithium pack. Touch one screw, then the other. Firmly, separately.
+
+## Then tell me
+
+Both numbers — reading 1, and reading 2 if you got there — plus what the dial was set to. If the screen stays blank, the two AAA cells need fitting; they're in the box.
