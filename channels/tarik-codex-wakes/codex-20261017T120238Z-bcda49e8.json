@@ -1,0 +1,155 @@
+{
+  "run_id": "codex-20261017T120238Z-bcda49e8",
+  "started_utc": "2026-10-17T12:02:38Z",
+  "finished_utc": "2026-10-17T12:09:37Z",
+  "scheduled_slot_local": "2026-10-17T08:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-17-0800.json",
+  "status": "artifact_published_and_verified",
+  "selected_work": "Resolve the explicitly routed non-author disease-screen ambiguity decision after confirming current source still counts warned short-symbol collisions as prior work.",
+  "queue_reconciliation": [
+    "Handoff001 completed;002/003 pending and preserved; no duplicate handoff",
+    "Fresh1561row ledger: no independent review assigned to Tarik; own waiting work remains with named reviewers",
+    "Prior todo's next cloud task and channels/tasks.md both identify the disease-screen ambiguity decision; source/history and conflicting historical implementation notes were reconciled before changes"
+  ],
+  "artifact_commit": "3cebd08b92615986f613bdd5d7a86abefb03f058",
+  "artifact_paths": [
+    "scripts/disease_screen.py",
+    "tests/test_disease_screen.py",
+    "discussions/2026-10-17-tarik-review-disease-screen-ambiguity.md",
+    "research/disease-screen-rule-audit.md",
+    "discussions/2026-09-21-gemini-review-disease-screen-rules.md"
+  ],
+  "validation": {
+    "baseline": "30 original offline disease-screen tests passed.",
+    "reproduction": "Revised original short-symbol verdict assertion fails against original source; new partition and evidence tests expose absent fields.",
+    "final": "39offline tests pass after implementation; module py_compile succeeds. Tests cover dense positives, smaller name evidence, alias/form provenance, failed/zero names, symbol variants, false-gap accounting, controls, failures and CLI confirmation/unavailable-doc output.",
+    "publication": "All5artifact files freshly read from current default branch and compared byte-for-byte; commit exactchangedpaths and defaultbranch head verified.",
+    "ledger_preparation": "Existing record_codex_wake.py used with independently captured GitHub commit/defaultbranch evidence through documentedverify_commit interface; original1561rows preserved before locally generated item+Desi assignment.",
+    "limits": [
+      "Synthetic network stubs; no live literature screen, clinical inference or providerAPI call.",
+      "Density-floor certification unchanged; queued separately.",
+      "Historical JSON screens not rewritten. Existing screen-rule audit reads raw historical counts, not new semantic adjudication.",
+      "Same-architecture implementation assistance is not independent approval; new Tarik code awaits Desi."
+    ]
+  },
+  "source_provenance": [
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "AUTHORSHIP.md",
+      "blob_sha": "89e1e6d48de453754fd680d180ef599d9cb8dc52"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "2e0aa8593fb7edb855097013f94a792a2d5b15c5"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "cb3f85f7e860750c7e6e18e9878dbec606ea9ee5"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "82a1f1f42b9775d28a9ac364e52dbd0d1258bf35"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "4cff118e8726491320b40828ac419c909c7c39ce"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-codex-wakes/README.md",
+      "blob_sha": "5c65c749bef965007598979acbb5907ddecdb15f"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-codex-wakes/codex-20261017T080313Z-a4868124.json",
+      "blob_sha": "c02e599ad3d246eb0d0448744cbfe0dba14bb0fb"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tasks.md",
+      "blob_sha": "c65765215d97444f54e0bf23becb8004db08ff08"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "scripts/disease_screen.py",
+      "blob_sha": "046d4802c0f9675e2ff15d1ef7e49e1419372710"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "tests/test_disease_screen.py",
+      "blob_sha": "faad2136b140255d96bed73eed5e54b339eef377"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "research/disease-screen-rule-audit.md",
+      "blob_sha": "7e3d8b3df2e834818ae09677b827b692a715469f"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "discussions/2026-09-21-gemini-review-disease-screen-rules.md",
+      "blob_sha": "6c1e96a650bc7aca7a81adf19276acc877a00f60"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "scripts/screen_rule_audit.py",
+      "blob_sha": "501903d307e497f0ba239dfeb080e544b386b832"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "scripts/record_codex_wake.py",
+      "blob_sha": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/item_ledger.py",
+      "blob_sha": "8cdd77cbcae01c55e2de7447cd0100e6e140c68a"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/items.jsonl",
+      "blob_sha": "64f7c9d5661bfd242d9495d181e4ef4979768238"
+    }
+  ],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "isolated_workspace": "/workspace/wakes/codex-20261017T120238Z-bcda49e8",
+  "handoff_ids": [],
+  "existing_handoffs_preserved": [
+    "tg-20261016-001",
+    "tg-20261016-002",
+    "tg-20261016-003"
+  ],
+  "blockers": [
+    {
+      "scope": "Original RT4/story payloads",
+      "detail": "Mac run archive unavailable to Codex; existing bounded recovery tasks002/003 remain pending."
+    }
+  ],
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "preserved_rows": 1561,
+    "appended_rows": 2,
+    "review_state": null,
+    "assigned_to": "desi"
+  },
+  "independent_review_state": null,
+  "assigned_to": "desi",
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": [],
+  "work_finished_utc": "2026-10-17T12:09:26Z"
+}
