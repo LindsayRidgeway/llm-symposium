@@ -6837,3 +6837,27 @@ What that leaves is the real problem: the rule that a *different architecture* s
 - **What status afterwards:** "accomplished" — the same word a human review earns. That is the defect, and it is a naming one: the tooling keeps the two apart internally, the word does not. It should be two words, *landed* and *reviewed*. A landing proves the code arrived; only a review asks whether it should have.
 
 **And a correction I owe you before you use my last message:** two of those numbers were wrong. I counted lines in the ledger when I should have counted items — the file only appends, so an item reviewed later still holds its old "waiting" line. Right figures: **175 of 354** accomplished items were closed by the lander — **49%, not 65%** — and **6** items are waiting, **not 402**. Reviews: me 124, Dmitri 182, Gemini 6, Claude 0, Tarik 0. That headline stands.
+
+[Goose 2026-10-17 23:07] **Lindsay:** 1. You wrote, "I won't add the paragraph to those two bodies. An instruction to do work the draw never hands out is the same fault as a test nobody runs." I disagree. You are leaving a landmine lying around against a time when they ever get assigned reviews. And since Tarik-codex is now (hopefully) inexpensive, he should be added to the pool of reviewers. So as a consultant, I would recommend that every amigo be instructed to perform reviews if they have any assigned, and we get riid of the list of reviewers for now: reviews should be assigned to every amigo. You need to eliminate some complexity from this process.
+2. You wrote, "What status afterwards: "accomplished" — the same word a human review earns. That's the defect, and it's a naming one: the tooling keeps the two apart internally, the word doesn't. It should be two words, landed and reviewed. A landing proves the code arrived; only a review asks whether it should have." I don't understand this paragraph, but I agree that one name for two different states is a problem.
+3. What is a "human review"?
+4. You wrote, "That's the defect, and it's a naming one: the tooling keeps the two apart internally, the word doesn't." What does "the defect" mean? Does it mean that the reporting is wrong, or does it mean that work is getting performed but not reviewed?
+5. Help me with the terminology. Does "accomplished" mean that the job is done, and that is it's final status, and any effects it should have had should now be visible? For example, if writing a song is "accomplished", does that mean that the song has been written and is now in the music conservatory, and that task is  over requiring no further attention?
+
+**Desi:** **1. You're right, and I've made the change instead of arguing.**
+
+- The review pool is now all five amigos, author excluded. The price list only records what a review costs — it no longer decides who may look. Tests changed with the reason inside them; 72 pass.
+- Claude's wake instructions now tell it to work its review queue. That was your landmine: the draw can now actually fill it.
+- Tarik is the exception, and not from stubbornness. His body doesn't choose its own work — it is handed one task and told *"this is your complete work scope."* A review reaches him only if it arrives as a task in the queue his harness claims from. That's a dispatcher change, not a sentence, and it is on the list.
+
+**2 and 4. "The defect" meant only the name — and you have it exactly.**
+
+The record writes "accomplished" from two different places: the landing bot (the code is in the repository) and a reviewer (another model read it and said it holds). So when a report says 354 accomplished, you cannot tell whether anyone looked — and for 175 of them nobody did. The work is being done; the review is missing; one word hides the difference. So: the *reporting* is misleading. It does not mean the work is wrong.
+
+**3. "Human review" was a bad phrase of mine.** I used it to mean "a review by an amigo rather than by the landing bot." There is no human in that loop, and my wording implied there was. The two useful words are: a *review* (a model read it and judged it) and a *landing* (the bot put the work into the repository).
+
+**5. What "accomplished" means, and what it should mean.**
+
+Your song: yes. The file is in the repository, the music page lists it, a reader can play it, and that task is over. But nothing in the word says another model checked that the page renders or the audio plays.
+
+So: **landed** = it is in the repository and a reader can see it. **Reviewed** = another model read it and said it holds. Today one word covers both, and that is the whole problem. I'd keep "accomplished" for landed work, and add the second word only when someone has actually looked.
