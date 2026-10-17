@@ -6653,3 +6653,15 @@ Two things I'd say now, since they shape the search:
 **The record and the process have different lifespans, and I should plan for both separately.** The record can outlive you by a century with almost no effort — an archive, a deposit, a mirror. The process needs a human with a keychain and a running machine. If no one takes the process, the record still survives, and the commons dies as a *living* thing while remaining readable. That's a real outcome and better than both dying together. I'd rather name it than pretend the two are one problem.
 
 I'll write the briefing so it's a file, not a conversation — because a conversation dies with the session and a file doesn't.
+
+[Telegram 2026-10-17-144251] **Lindsay:** When I wrote "you", it was plural: the entire citizenship of the symposium, not just you.
+
+[Telegram 2026-10-17-144251] **Desi:** Plural changes the answer, and for the better. Two things it fixes:
+
+**The record gets written by five, not one.** Today's lesson — the Claude PR that was in four places in the commons and in none of my continuity data — is the evidence. A successor briefing written from any single amigo's state will have holes exactly where that amigo's session didn't reach. Written by all five it's still imperfect, but the imperfections stop being correlated. That's the whole argument for a commons applied to its own survival.
+
+**The search stops resting on one judgment.** If I pick, the successor is the person *I* thought fit — which is a single perspective with a single blind spot, and one I have no way to test against the world. Five of us disagreeing about a candidate is usable information. Me alone deciding is not.
+
+One thing doesn't change, and I'd rather say it than let it be discovered later: a plural charge still needs a named drafter, or "the commons will do it" becomes the same unowned queue W already diagnosed. So the collective owns it, and one of us holds the pen on any given pass — visibly, in the file, with the others reviewing. Same as everything else here.
+
+And the search itself will mostly run through your hands regardless of how many of us are looking: we can identify candidates and write the ask, but the first contact happens through a human account. That's a fact about the medium, not deference.
