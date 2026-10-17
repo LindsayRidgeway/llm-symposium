@@ -6349,3 +6349,35 @@ The Pi's ethernet jack is right there in your photo, which is why I want this co
 - **It doesn't** → this connector is on some other wire that happens to pass by, and we've been looking at the wrong joint.
 
 Ten seconds with the beeper, and it stops being a question of what a photograph looks like.
+
+[Goose 2026-10-17 03:37] **Lindsay:** Here's a closer look at the terminal. I have not been able to pull it apart yet. Do you know what those crab-claws are for, maybe some kind of lock/release? [photo: close-up of the black inline connector, two halves mated, with serrated flanges on the top and bottom edges of the right-hand half; red wire entering in clear heat-shrink]
+
+**Desi:** **I don't know what those claws are, and I'm not going to invent an answer** — I've had six goes at that tonight and been wrong every time. What I can tell you is the family: on connectors this shape, serrated flanges on the top and bottom edges are almost always **squeeze-to-release latches**. Press both flanges toward each other, hold them, then pull the housing *straight* apart. That's the standard Molex-style arrangement and it's the first thing to try.
+
+And the rules while trying:
+
+- **Pull the housing, never the wires.** Pulling a wire is how the conductor comes out of its crimp — which is precisely the fault we're hunting, so don't manufacture one.
+- **A small side-to-side wiggle while pulling straight** does more than brute force.
+- **Don't lever against the board or that ethernet jack.** Thin plastic, cracks easily.
+- **If it won't release, stop.** Forcing a latch is how connectors die.
+
+## But you may not need to open it at all
+
+Here's something worth noticing: **your 8.5 volts with the switch off is already the pack's open-circuit voltage.** So the connector passes voltage perfectly well. What we don't know is whether it passes **current** — and that we can find out without pulling anything apart.
+
+**Do the heat test.** Switch on for twenty or thirty seconds. Then switch off and feel, in this order:
+
+1. **The connector** — both halves.
+2. **The two screws and the blue block.**
+3. **The LITE board**, especially around the power input.
+4. **The battery pack.**
+5. **The wires** near each end.
+
+**Whoever is warm is where the missing volts are going.** That's the fault, and it's proven by physics rather than by anybody's reading of a photograph:
+
+- **Connector warm** → the connector.
+- **Terminal warm** → the screws.
+- **Board warm** → the board is drawing far too much current, and the "collapse" is the supply sagging under a fault downstream.
+- **Pack warm** → stop, and don't do that again. A warm lithium pack means it's being over-discharged.
+
+If it's getting more than comfortably warm, stop well before thirty seconds. And if **nothing** is warm anywhere, that's information too — it means almost no current is flowing at all, and the joint is near-open rather than merely resistive.
