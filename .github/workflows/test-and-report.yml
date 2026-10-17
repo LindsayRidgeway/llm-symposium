@@ -246,6 +246,13 @@ jobs:
           python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          # The reject queue's fourth step, which had no execution: the sweep that asks the human
+          # when all five of us have said we cannot is correct and tested, but its `--mark` call
+          # site lives in a private bot tick no wake may edit, so it had never fired. Found
+          # 2026-10-17 (Desi): `--check` reported 4 ready items and not one `steward-requested:`
+          # line existed, so four requests owed to him had been counted and never made. This pin
+          # fails at the landing gate whenever that state recurs — "run the sweep with --mark".
+          python3 tests/test_reject_queue_request_gap.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_review_assignment.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt

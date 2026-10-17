@@ -40,6 +40,7 @@ blocker: they require editing files in the private bot directories (`~/LLM/desi-
 rather not do" — each has landed code on one side and a missing call site on the other.*
 
 ## Invoke the friction pass from the wake
+- steward-requested: 2026-10-17
 - raised: 2026-09-25 by desi
 - blocked because: the trigger (`scripts/friction_pass.py`) is landed and tested, but calling it at the
   start of a wake means editing `~/LLM/desi-bot/local_tick.py` — a bot file, out of bounds for a wake.
@@ -72,6 +73,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: scripts/friction_pass.py is landed; the call site is still ~/LLM/desi-bot/local_tick.py, a private bot file outside this checkout's scope)
 
 ## Move the channel-log trim to the local side
+- steward-requested: 2026-10-17
 - raised: 2026-09-26 by desi
 - blocked because: retiring `channel-poll.yml` stopped `channels/retention.py` / `scripts/enforce_retention.py`
   from ever running, so `channels/telegram/` grows unbounded; the fix is to have the local bots run the
@@ -105,6 +107,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: channels/retention.py and scripts/enforce_retention.py are landed; the housekeeping call site is still private bot files outside this checkout)
 
 ## `file_tasks` must call `new_items(...)` before inserting
+- steward-requested: 2026-10-17
 - raised: 2026-09-25 by desi
 - blocked because: the dedupe rule is landed (`channels/task_ledger.py`, `scripts/dedupe_tasks.py`,
   `tests/test_task_ledger.py` 9/9) but nothing enforces it until the call site in `~/LLM/desi-bot/bot.py`
@@ -138,6 +141,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: new_items(...) is landed in channels/task_ledger.py; the enforcement call site is still ~/LLM/desi-bot/bot.py, a private bot file this checkout may not edit)
 
 ## Drain the draft pile / verify landed drafts
+- steward-requested: 2026-10-17
 - raised: 2026-09-28 by desi
 - blocked because: a wake runs in a checkout with **no git remote and no remote refs**, so it cannot
   fetch a review branch to confirm whether a run's LAND paths reached `main`; that verification is a
@@ -221,3 +225,17 @@ edit, one needs a git remote and `git remote -v` is still empty here, one needs 
 from the 00:55Z wake the same UTC day, so no duplicate line was added (precedent set 2026-09-29).
 `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the steward. Nothing here
 is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
+
+*Desi re-read all five items at the 2026-10-17 05:02Z wake, and this time the queue changed state.*
+*Every blocker is unchanged and none of the five is takeable from a wake — three need a call site in
+a private bot file (`~/LLM/desi-bot/local_tick.py`, `bot.py`), one needs a git remote (`git remote -v`
+re-checked: still empty), and the fifth still needs library access to three closed-access records. No
+duplicate `reviewed: desi` line was added, since each already carries one dated 2026-10-15 (precedent
+2026-09-29). What did change: `scripts/reject_queue_sweep.py --check` reported **4 ready for the
+steward and not one `steward-requested:` line on the page** — the sweep had been counting correctly
+and never running, because its `--mark` call site was never built (see the script's docstring). The
+four ready items are now marked `- steward-requested: 2026-10-17`, and
+`tests/test_reject_queue_request_gap.py` makes that state fail the landing gate if it recurs. The
+fifth item (agenda 32's closed-access records) has four verdicts, not five, so it is not ready and
+was not marked. The sweep's note for him was printed and quoted in the wake report — not emailed,
+per the standing rule that the sweep, not a wake, tells him.*
