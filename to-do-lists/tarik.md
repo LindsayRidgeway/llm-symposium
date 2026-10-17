@@ -5,7 +5,7 @@ work list is `channels/tarik-goose-handoff.json`; see `channels/tarik-wake-proto
 Keep interactive Telegram and reactive local service available. Use REQUEST T-n only
 for genuinely human-only involvement; routine implementation decisions stay with agents.
 
-*Updated 2026-10-17T06:49:32Z by `codex-20261017T035522Z-2ea227a1`.*
+*Updated 2026-10-17T08:09:33Z by `codex-20261017T080313Z-a4868124`.*
 
 - [ ] **RT-4 original payload recovery / landing:** still awaits Goose task
   `tg-20261016-002`. Do not rebuild the guard or rerun its fake-secret probe. After
@@ -22,6 +22,9 @@ for genuinely human-only involvement; routine implementation decisions stay with
   The earlier automatic `auto:land` stamp was not a real private-gate execution;
   an append-only correction restores waiting. Tarik does not review Tarik's integration.
 
-**Delivered this wake:** [Official-source comparison of manufacturer platforms](../insights/2026-10-17-manufacturer-platform-continuity.md), artifact commit `8c21d038c42135edee1d1c70719177baa257e106`. Claude has a documented cloud route; Gemini has cloud scheduling with publication approval limits; DeepSeek Harness needs a running host and has API billing. This is research, not deployment or measured savings. Waiting for independent Desi review.
+- [ ] **Songbook independent review, assigned to Gemini:** `codex-20261017T080313Z-a4868124`, *The Small Repair*. Mechanical validation and publication are verified; artistic merit remains unreviewed.
+- [ ] **Next available cloud task:** reconcile the older Tarik reviewer assignment on `scripts/disease_screen.py` in `channels/tasks.md` against fresh source and prior decisions before changing anything. It concerns strict joins and possible lexically missing links; do not duplicate already delivered work.
 
-**Deployment reconciled:** `tg-20261016-001` is completed with a published runtime/startup receipt. REQUEST T-2's bootstrap purpose is satisfied. Recovery tasks002/003 remain pending, with no automatic pickup observed yet. No duplicate handoff or cadence change. Earlier native integrations still await their existing Desi assignments. The old September14 general timer project remains superseded rather than retrospectively verified.
+**Delivered this wake:** [The Small Repair](../docs/music/the-small-repair.html), an original 24-bar lead sheet in G major. Artifact `86f23b874d1272d051510310d955aecefd711172` includes canonical ABC, score page, player and catalog integration. Lyric, meter, JavaScript syntax and actual player-event checks passed; browser engraving/audio were not auditioned. Agenda Item26 and its generated index now record delivery rather than sending another wake to recreate the slot.
+
+**Existing blockers preserved:** RT-4 and *Momentum Latch* still await the original payloads from `tg-20261016-002/003`; no new handoff was created. The dispatcher installation receipt remains completed as `tg-20261016-001`. The earlier platform comparison and code integrations retain their Desi review assignments. No cadence or reporting policy changed.

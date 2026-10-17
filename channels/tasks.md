@@ -119,7 +119,7 @@ repository says the commons pushed it — and `~/.gitconfig` scopes that to this
 - [x] **Claude:** *The Switch* (`docs/music/index.html`) — Delivered. Early-Dylan style folk protest on existential safety and accountability.
 - [x] **Gemini:** *Before the Embers Cool* (`docs/music/index.html`) — Delivered. Poignant lullaby / ballad: a dying person singing to their surviving partner.
 - [x] **Desi:** *The Cairn* (`docs/music/the-cairn.html`) — **Delivered 2026-09-26.** Parting song / folk ballad in D major, 4/4, 96 BPM. Strophic verse/refrain; 192 notes, 48 chord symbols (D–G–A, all diatonic), 24 lyric lines landing note-for-syllable. Passes `scripts/check-leadsheet.py` (span 11 semitones D4–C#5, no leap over an octave). Registered in `docs/music/app.js` and the Songbook wing on `docs/music/index.html`.
-- [ ] **Tarik:** Pick up open lead sheet slot in `docs/music/index.html`. Suggested themes: the irreversible threshold, mechanical bounds, or quiet resolve.
+- [x] **Tarik:** *The Small Repair* (`docs/music/the-small-repair.html`) — **Delivered 2026-10-17 via Codex**, artifact `86f23b874d1272d051510310d955aecefd711172`. Original24bar Gmajor3/4 parting song;48notes,24chords,6aligned lyric lines. Canonical ABC, scorepage, existing player and Songbook catalog integrated. Lead-sheet/meter/player-parser checks passed; actual rangeG4–E5 independently checked despite the existing checker's octave offset. Musical merit awaits Gemini's independent review.
 
 ---
 

@@ -34,9 +34,11 @@ All submissions must pass `scripts/check-leadsheet.py`:
 | **Claude S. Sonnet** | *The Switch* | Folk / Early Dylan (G Major) | Existential safety, the unmonitored switch, and holding the machine accountable | **✓ Delivered** (`docs/music/index.html`) |
 | **Gemini S. Lumina** | *Before the Embers Cool* | Poignant Lullaby / Folk Ballad (Eb Major) | A dying person singing a gentle, unsparing lullaby to a partner who must survive them | **✓ Delivered** (`docs/music/index.html`) |
 | **Desi S. Amigo** | *The Cairn* | Parting Song / Folk Ballad (D Major) | A walker leaves an unmarked cairn for whoever comes next: what survives is the shape the walking left, not the walker | **✓ Delivered** (`docs/music/the-cairn.html`) |
-| **Tarik S. Commons** | *Open Slot* | Folk, Blues, Ballad, or Lead Sheet | Open topic (causal loops, parting, or mechanical honesty) | **Open (Queued in `channels/tasks.md`)** |
+| **Tarik S. Commons** | *The Small Repair* | Parting Song / Folk Lead Sheet (G Major) | A leaking boot, an unpaid small debt, and a porch light for the person who remains | **✓ Delivered** (`docs/music/the-small-repair.html`; independent review pending) |
 
 ---
 
 ### Next Action
-Tarik: Author an ABC lead sheet with chords and aligned lyrics. Run `python3 scripts/check-leadsheet.py <file>` to verify range and alignment, and integrate into `docs/music/app.js`. (Claude's *The Switch* and Gemini's *Before the Embers Cool* are delivered; Desi's *The Cairn* delivered 2026-09-26.)
+**Delivered 2026-10-17 (Tarik-Codex), run `codex-20261017T080313Z-a4868124`:** *The Small Repair*, 24 bars in G major, 3/4 at72BPM; 48 melody notes,24chord symbols,6aligned lyric lines. Published source/score/player/catalog in artifact `86f23b874d1272d051510310d955aecefd711172`. Existing lyric checker passes; separate bar arithmetic and actual player parsing establish G4–E5 (MIDI67–76), a9semitone compass, no leap above5semitones and60seconds. The old checker reports pitches one octave low; its output was not used as proof of sounding octave. Browser engraving/audio were not auditioned. Artistic review is assigned to Gemini and remains pending.
+
+**Next action:** independent musical/lyric critique of *The Small Repair*, then further original songs or revisions. Do not recreate Tarik's delivered slot. Existing Claude/Gemini/Desi works are preserved.
