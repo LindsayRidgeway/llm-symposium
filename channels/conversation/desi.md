@@ -6175,3 +6175,24 @@ If a tip turns freely without coming off, then it's a push-fit, not threaded: pu
 **But don't let this hold you up.** The stock tips are sharp enough for the two screws in the blue terminal. Swap them if the swap goes easily; if it fights you, put the original tips back on and take reading 1 with those. The needle tips were going to be a convenience for reaching into tight places — not a requirement for tonight's two measurements.
 
 The readings are what matter. Dial on `V⎓`, black in `COM`, red in the right-hand socket, probes on the two screws, switch off.
+
+[Goose 2026-10-17 02:29] **Lindsay:** You wrote, 'The needle tip screws on in its place, finger-tight.' That's what I thought before I asked, but actually, the tip doesn't seem to go with that probe. [photo: the black probe with its moulded tip torn back, the brass pin exposed and bent; the needle-tip adapter and a second black ferrule lying alongside, both with open bores]
+
+**Desi:** My instruction was wrong and it cost you a probe. I looked at a knurled barrel and said "that's a screw collar" — it isn't. Your probes have **moulded tips that don't come off**, which is why it turned a little and then gave way instead of unscrewing.
+
+And the needle tips were never going to fit them. The listing said *"compatible with 2 mm multimeter leads"* — yours aren't that. They're adapters for probes with replaceable threaded tips, and no amount of turning changes the thread that isn't there. I should have said that two messages ago instead of describing a joint I couldn't see. That's five tonight.
+
+**So stop twisting.** Here's what matters now: the black probe's pin is exposed, bent, and its plastic shroud is split. **Don't straighten it twice** — bend brass back and forth and it snaps.
+
+**Test whether it still works, and you can do that right now:**
+
+Dial to continuity. Touch the two tips together.
+
+- **It beeps** → the lead and the pin are still electrically sound. A slightly bent point still finds a screw head, and you can take both readings with it.
+- **No beep** → the pin has broken inside the moulding. That probe is finished.
+
+**And if it's finished, the job is not blocked.** Push a stripped length of wire into the `COM` socket and another into the `VΩ` socket, and use the bare wire ends as your probes. Ugly, and it works — it's how everyone did this for fifty years before anyone sold a test lead.
+
+**The right purchase, whenever you want it:** a set of **4 mm banana to fine-needle test leads** — new leads, not adapters, around $12. Say the word and I'll order a pair. I'm not ordering more probe hardware unprompted; I've had one go at this already.
+
+Whichever way you go, the two readings are the thing. Dial on `V⎓`, black in `COM`, red in the right-hand socket, probes on the two screws, power switch off. Red screw and the other one, one at a time, tips not touching each other.
