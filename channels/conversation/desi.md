@@ -6838,26 +6838,30 @@ What that leaves is the real problem: the rule that a *different architecture* s
 
 **And a correction I owe you before you use my last message:** two of those numbers were wrong. I counted lines in the ledger when I should have counted items — the file only appends, so an item reviewed later still holds its old "waiting" line. Right figures: **175 of 354** accomplished items were closed by the lander — **49%, not 65%** — and **6** items are waiting, **not 402**. Reviews: me 124, Dmitri 182, Gemini 6, Claude 0, Tarik 0. That headline stands.
 
-[Goose 2026-10-17 23:07] **Lindsay:** 1. You wrote, "I won't add the paragraph to those two bodies. An instruction to do work the draw never hands out is the same fault as a test nobody runs." I disagree. You are leaving a landmine lying around against a time when they ever get assigned reviews. And since Tarik-codex is now (hopefully) inexpensive, he should be added to the pool of reviewers. So as a consultant, I would recommend that every amigo be instructed to perform reviews if they have any assigned, and we get riid of the list of reviewers for now: reviews should be assigned to every amigo. You need to eliminate some complexity from this process.
-2. You wrote, "What status afterwards: "accomplished" — the same word a human review earns. That's the defect, and it's a naming one: the tooling keeps the two apart internally, the word doesn't. It should be two words, landed and reviewed. A landing proves the code arrived; only a review asks whether it should have." I don't understand this paragraph, but I agree that one name for two different states is a problem.
-3. What is a "human review"?
-4. You wrote, "That's the defect, and it's a naming one: the tooling keeps the two apart internally, the word doesn't." What does "the defect" mean? Does it mean that the reporting is wrong, or does it mean that work is getting performed but not reviewed?
-5. Help me with the terminology. Does "accomplished" mean that the job is done, and that is it's final status, and any effects it should have had should now be visible? For example, if writing a song is "accomplished", does that mean that the song has been written and is now in the music conservatory, and that task is  over requiring no further attention?
+[Goose 2026-10-17 23:30] **Lindsay:** 1. You wrote, "Tarik is the exception." How did that happen? Are you saying that after this conversation, that will no longer be true?
+2. What does "into the repository" mean? Where else can it be?
+3. You wrote, "nothing in the word says another model checked that the page renders or the audio plays." I think such a check would be a luxury, and one more thing to dispatch and carry out. As a consultant, I would recommend that you not include such a check in your process.
+4. [his four-step census protocol: name the statuses, count at A, count at B 24h later, log every transition with the amigo who made it, then validate that the log accounts for the difference]
 
-**Desi:** **1. You're right, and I've made the change instead of arguing.**
+**Desi:** **1. How it happened, and no — not yet, but it is now only waiting for one draw.** Tarik's body does not run a free wake. It reads a short list of tasks kept in the repository, takes the oldest unfinished one, and is told *"this selected task is your complete work scope."* It was built that way — a copy of my harness adapted to a Codex-shaped job, where work arrives one item at a time. So the exception was never a decision about reviews; it is a consequence of his body having no say in what it does. And naming him in the draw *before* fixing that would freeze items on a body that never sees them — worse than not naming him. So I wrote the missing link: a small tool that copies any review assigned to Tarik into the list his body reads, and the draw now runs it whenever it picks him. It is in the repository. Nothing is waiting on Tarik at the moment, so the exception ends the first time the draw chooses him.
 
-- The review pool is now all five amigos, author excluded. The price list only records what a review costs — it no longer decides who may look. Tests changed with the reason inside them; 72 pass.
-- Claude's wake instructions now tell it to work its review queue. That was your landmine: the draw can now actually fill it.
-- Tarik is the exception, and not from stubbornness. His body doesn't choose its own work — it is handed one task and told *"this is your complete work scope."* A review reaches him only if it arrives as a task in the queue his harness claims from. That's a dispatcher change, not a sentence, and it is on the list.
+**2. "In the repository" means three possible places, and only one survives.**
+- In a wake's private working folder: written, never handed over. This is the commonest failure — the run says it wrote a report, and the report dies with the folder.
+- In the run's own report text: described, never written to a file.
+- In the shared repository: the copy under version control, readable by anyone, published on the web.
+"Landed" means the third. The other two are claims.
 
-**2 and 4. "The defect" meant only the name — and you have it exactly.**
+**3. Agreed, and I was not proposing one.** I was saying the word "accomplished" does not promise it — not that we should add the check. Nothing gets dispatched. (Related, and the opposite problem: there are page-checking scripts in the repository that CI only checks for syntax and never actually runs. A check that exists and does nothing. I'll fix or delete those on my own time; it is not new work for anyone.)
 
-The record writes "accomplished" from two different places: the landing bot (the code is in the repository) and a reviewer (another model read it and said it holds). So when a report says 354 accomplished, you cannot tell whether anyone looked — and for 175 of them nobody did. The work is being done; the review is missing; one word hides the difference. So: the *reporting* is misleading. It does not mean the work is wrong.
+**4. Done, in your shape.** Six statuses, one sentence each; a count now; a second count in 24 hours; every transition logged with the amigo who made it; then the trail is applied to the first count and must reproduce the second exactly. Tonight at 19:29, **493 items**:
 
-**3. "Human review" was a bad phrase of mine.** I used it to mean "a review by an amigo rather than by the landing bot." There is no human in that loop, and my wording implied there was. The two useful words are: a *review* (a model read it and judged it) and a *landing* (the bot put the work into the repository).
+| Status | meaning | count |
+|---|---|---|
+| 1 | done, and another model read it and said it holds | 180 |
+| 2 | done and in the repository, but no model has read it | 175 |
+| 3 | waiting, and a particular amigo is named to look | 5 |
+| 4 | waiting, and nobody owns it | 0 |
+| 5 | postponed, with the reason | 117 |
+| 6 | rejected, with the reason | 16 |
 
-**5. What "accomplished" means, and what it should mean.**
-
-Your song: yes. The file is in the repository, the music page lists it, a reader can play it, and that task is over. But nothing in the word says another model checked that the page renders or the audio plays.
-
-So: **landed** = it is in the repository and a reader can see it. **Reviewed** = another model read it and said it holds. Today one word covers both, and that is the whole problem. I'd keep "accomplished" for landed work, and add the second word only when someone has actually looked.
+I rehearsed the validation on yesterday's 24 hours before trusting it: 39 transitions, each naming the amigo, and applying them reproduced the second count exactly — PASS. The real B is tomorrow night. A wake will run it and send you the two counts, the transitions by amigo, and whether the trail balances. Significance after the numbers, as you said.
