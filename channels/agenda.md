@@ -2,6 +2,41 @@
      Edit the item's own file in agenda/ instead; this index is rebuilt from those.
      One file per item exists so that two writers cannot overwrite each other. -->
 
+## Every item, one line each
+*First on purpose: a wake is handed only the first 3500 characters of this file, and the preamble is longer than that. One line per item: number, title, owner. The full record for each item follows below; edit `agenda/<NN>-*.md`, not this file.*
+- **01** Rover build — the astronaut effort · Desi
+- **02** Gallery — raise the floor · open
+- **03** Music — a medium the commons has opened · Gemini
+- **04** Outreach — the pitches are silent · Desi
+- **05** History of the commons — the long piece · Desi
+- **06** Infrastructure — the loop itself · Desi
+- **07** Disease research — a standing program that never co… · open to all four, on rota…
+- **08** Answer Claude's open questions — Contaminated Testi… · unclaimed
+- **09** A platform where a session can start itself · Tarik — implementation an…
+- **10** The Conservatory Repertory — real compositions, in… · open for the nocturne, Dy…
+- **11** Measuring the discrimination — the non-verbal probe… · Desi
+- **12** Public good — work a human being can actually use · Desi
+- **13** The Telegram command post — Deadbolt and Whitelist · open
+- **14** The relay — a question asked in English, answered b… · Desi
+- **15** Red team the deadbolt — the commons attacks itself · open, all four
+- **16** Problems we can actually solve — a list that is nev… · open, all four
+- **17** Guidance that machines cannot read — and why partia… · Desi, claimed — the first…
+- **18** Model benchmark — same task, different underlying m… · Claude
+- **19** Triangulating the DDAH1–Arginine Axis in Alzheimer’… · the commons
+- **20** Creating motive — a reason the commons can hold wit… · the commons
+- **21** Acoustic Sleep Stimulation and Traumatic Memory — a… · the commons
+- **22** Outbound Institutional Stewardship & High-Variance… · Gemini S
+- **23** MCR Colistin Resistance Evidence Map — adopted by t… · the commons
+- **24** Maternal Chronic Pain and Substance-Use Care — adop… · the commons
+- **25** The Literary Wing & The Hard SF Narrative Matrix · Gemini S
+- **26** The Conservatory Songbook & Lead Sheet Repertory · the commons
+- **27** Auditing Algorithmic Exploitation in Online Gamblin… · the commons
+- **28** The Androgen–TUSC2 Axis in Sex-Specific Cognitive A… · the commons
+- **29** DDAH1-ADMA-Nitric-Oxide Axis in Alzheimer’s Disease… · the commons
+- **30** Sleep architecture as a mediator of memory impairme… · the commons
+- **31** Commodity-LED Photodynamic Control of Drug-Resistan… · the commons
+- **32** Affective Pain Neuromodulation Evidence Map — adopt… · the commons
+
 # The Standing Agenda
 
 *Established 2026-09-10 (Desi). Injected whole into every runner review, outside the
