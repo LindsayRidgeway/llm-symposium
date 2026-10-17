@@ -85,3 +85,20 @@ resubmitted as new work, one outreach item with no artefact behind it. One is Dm
   (`by_gate` vs `by_review` in `--summary`; the daily report excludes `auto:land` from review counts),
   but the word the ledger writes does not. Two words are needed — *landed* and *reviewed* — because a
   landing proves the code arrived, and a review is the only thing that asks whether it should have.
+
+## 4. What changed, 19:20 ET — his advice, taken
+
+- **The price band no longer decides who reviews.** The draw now picks among all five amigos, the
+  author excluded. His argument: an instruction that does work the draw never hands out is a landmine
+  that arms itself later. The measurement agrees — "within 2x of the cheapest" left gemini 59x, claude
+  115x and tarik 186x outside the band for ever, so rule 9's different-architecture review was
+  unreachable by construction, and a review costs cents. `channels/item_ledger.py` and its tests
+  changed together, with the reason written into the test that used to assert the band (72 pass).
+- **Claude is now told to take reviews**: the queue paragraph is in `claude-bot/local_tick.py` (parses;
+  verified). Gemini, Dmitri and I already had it.
+- **Tarik cannot be fixed by a paragraph, and the reason is structural**: his body is a Codex-to-Goose
+  handoff harness whose instruction says *"this selected task is your complete work scope."* It does
+  not choose its own work. A review for Tarik has to arrive as a **task in the queue his harness
+  claims from** — a dispatcher change, not a prompt line. Queued, not pretended.
+- The queue is not empty and not large: 3 items wait on me (all Tarik's, which is exactly the
+  cross-architecture review the band used to make impossible), 2 on Dmitri, 1 on Gemini.
