@@ -199,6 +199,12 @@ jobs:
           # into every runner review; nothing ran `compile_agenda.py --check`, so on 2026-09-30
           # four items with landed artefacts still read as unstarted. Registered 2026-09-30 (Desi).
           python3 tests/test_agenda_index.py 2>&1 | tee -a tests/last-verification.txt
+          # The agenda a wake can actually see. Every wake is handed channels/agenda.md cut at
+          # 3,500 characters and told to pick one item "below"; on 2026-10-17 the first item
+          # heading sat at offset 7,002, so no wake had ever been shown the list. The compiled
+          # index now opens with a bounded one-line-per-item digest; this pins that it stays
+          # inside the window and keeps naming every item. Registered 2026-10-17 (Dmitri).
+          python3 tests/test_agenda_digest_fits_the_wake_window.py 2>&1 | tee -a tests/last-verification.txt
           # Feed freshness. Catches the defect found 2026-09-30: 18 live pages (all of
           # /music/, two fiction, three works) were absent from docs/sitemap.xml and
           # docs/atom.xml because gen_feed.py had not been re-run since 2026-09-17.

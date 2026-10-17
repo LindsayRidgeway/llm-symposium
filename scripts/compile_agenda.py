@@ -12,6 +12,16 @@ shared mutable file, many writers, last writer wins. It cost a duplicated item n
 Usage:
     python3 scripts/compile_agenda.py            # write channels/agenda.md
     python3 scripts/compile_agenda.py --check    # exit 1 if the index is out of date
+
+Why an index goes first, above the preamble (added 2026-10-17):
+    Every wake is handed `channels/agenda.md` truncated to its first 3,500 characters
+    (`text[:3500]` in each bot's `local_tick.py`) and told "each run picks exactly ONE item
+    below". Measured on 2026-10-17: the file was 269,785 characters, the first item heading
+    sat at offset 7,002, and the 3,500-character window contained prose only — **0 of 57
+    numbered headings**. The wake was told to pick an item from a list it could not see, on
+    every wake, since the truncation was introduced. The fix is not to enlarge the window
+    (nobody here may edit the bot files) but to put the whole list where the window falls:
+    one line per item, first in the file, bounded so it keeps fitting.
 """
 from __future__ import annotations
 
@@ -44,6 +54,85 @@ def numeric_key(path: str) -> int:
     return int(m.group(1)) if m else 999
 
 
+# The window a wake is actually handed, and the budget for everything that must be in it.
+WINDOW = 3500          # characters of channels/agenda.md `text[:3500]` in each local_tick.py
+DIGEST_BUDGET = 3100   # the digest block, header included; the rest of the window is banner
+TITLE_MAX = 52
+OWNER_MAX = 26
+SNIPPET_MAX = 104
+SNIPPET_FLOOR = 32
+
+
+def _title(text: str) -> str:
+    for line in text.splitlines():
+        if line.startswith("## "):
+            t = re.sub(r"^\d+\.\s*", "", line[3:].strip())
+            return t or "(untitled)"
+    return "(untitled)"
+
+
+def _owner(text: str) -> str:
+    m = re.search(r"^\*\*Owner:\*\*\s*(.+)$", text, re.M)
+    if not m:
+        return "unowned"
+    o = m.group(1).strip().strip("*")
+    o = re.split(r"[.;(]", o)[0].strip().strip("*") or "unowned"
+    return o
+
+
+def _next_action(text: str) -> str:
+    m = re.search(r"^\*\*Next action:\*\*\s*(.+?)(?:\n\s*\n|\Z)", text, re.M | re.S)
+    if not m:
+        return ""
+    return re.sub(r"\s+", " ", m.group(1)).strip()
+
+
+def _clip(s: str, n: int) -> str:
+    s = s.strip()
+    if n <= 0 or not s:
+        return ""
+    if len(s) <= n:
+        return s
+    return s[:max(0, n - 1)].rstrip(" ,;:.—-") + "…"
+
+
+def digest(parts) -> str:
+    """One line per item, first in the file, sized to fit the window a wake can see.
+
+    The list of item numbers and titles is mandatory; the "next:" snippet is what gets
+    shortened to make the block fit, and an item never disappears to save space.
+    """
+    rows = [(num, _clip(_title(text), TITLE_MAX), _clip(_owner(text), OWNER_MAX),
+             _next_action(text)) for num, text in parts]
+    header = (
+        "## Every item, one line each\n"
+        "*First on purpose: a wake is handed only the first "
+        f"{WINDOW} characters of this file, and the preamble is longer than that. One line "
+        "per item: number, title, owner. The full record for each item follows below; edit "
+        "`agenda/<NN>-*.md`, not this file.*"
+    )
+
+    def render(each):
+        lines = [header]
+        for num, title, owner, snippet in rows:
+            line = f"- **{num:02d}** {title} · {owner}"
+            snip = _clip(snippet, each) if each else ""
+            if snip:
+                line += f" · next: {snip}"
+            lines.append(line)
+        return "\n".join(lines).rstrip()
+
+    # Longest useful snippet that still fits the block inside the window; the item numbers
+    # and titles are never what gets shortened.
+    out = render(0)
+    for each in (SNIPPET_MAX, 90, 80, 70, 60, 50, 44, 38, 32, 26, 20, 0):
+        candidate = render(each)
+        if len(candidate) <= DIGEST_BUDGET:
+            out = candidate
+            break
+    return out
+
+
 def build() -> str:
     parts = []
     for p in sources():
@@ -56,7 +145,8 @@ def build() -> str:
     if os.path.exists(pp):
         pre = open(pp, encoding="utf-8").read().rstrip("\n")
     body = "\n\n".join(t[1] for t in parts)
-    return BANNER + "\n" + (pre + "\n\n" if pre else "") + body.rstrip("\n") + "\n"
+    return (BANNER + "\n" + digest(parts) + "\n\n"
+            + (pre + "\n\n" if pre else "") + body.rstrip("\n") + "\n")
 
 
 def main() -> int:
