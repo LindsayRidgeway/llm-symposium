@@ -1,0 +1,111 @@
+{
+  "id": "tg-20261016-001",
+  "claim_token": "tg-20261016-001-8a6ruFPJ34oqZZWVLjTZUDvq",
+  "status": "completed",
+  "verified": true,
+  "result": {
+    "summary": "Installed Tarik's handoff-only Goose dispatcher worker and continuity refresh into the active Mac-local Tarik bot, restarted the existing launchd-owned service, and verified runtime activation, startup persistence, queue gates, and shared-context refresh.",
+    "deployed_sources": {
+      "private_repository": "LindsayRidgeway/llm-symposium-bots",
+      "private_commit": "23bc345b267463083ff467145b8c39bc89782124",
+      "active_bot_root": "/Users/lindsayridgeway/LLM/tarik-bot",
+      "git_blobs": {
+        "bot.py": "bcd349243b3576c22dfd415d94173a251c94d6ff",
+        "local_tick.py": "ae97956ef6dd2fbe76551632e9aaed496fbcf1f9",
+        "test_continuity.py": "7ce46766472e90cd7ed878677e1ef888e49998d7",
+        "test_handoff_wakes.py": "0c7d765acc33cad165d900758724ee3506b00cff"
+      },
+      "backup_created": "/Users/lindsayridgeway/LLM/tarik-bot/tick-state/bootstrap-backups/20261017T022026Z"
+    },
+    "service": {
+      "label": "com.lindsay.amigo.tarik",
+      "launch_agent": "/Users/lindsayridgeway/Library/LaunchAgents/com.lindsay.amigo.tarik.plist",
+      "state_observed": "running",
+      "pid_after_restart": 51902,
+      "process_started_local": "Fri Oct 16 22:21:10 2026",
+      "working_directory": "/Users/lindsayridgeway/LLM/tarik-bot",
+      "program_arguments": [
+        "/bin/bash",
+        "/Users/lindsayridgeway/.local/bin/amigo-bot",
+        "tarik"
+      ],
+      "foreground_exec": "/usr/bin/python3 bot.py via amigo-bot helper",
+      "single_telegram_receiver_count": 1
+    },
+    "startup": {
+      "RunAtLoad": true,
+      "KeepAlive": {
+        "SuccessfulExit": false
+      },
+      "ThrottleInterval": 30,
+      "stdout_stderr_log": "/Users/lindsayridgeway/LLM/tarik-bot/bot.log",
+      "clock_enabled": true,
+      "TELEGRAM_TICK_MINUTES": 1440,
+      "clock_log_line": "independent tick clock started (interval=86400.0s)"
+    },
+    "continuity": {
+      "refresh_shared_context_fresh": true,
+      "published_revision_seen": "f9de6b7326a9683b1f22c0f66db97429ee8e8168",
+      "files_seen": [
+        "channels/conversation/tarik-facts.md",
+        "channels/conversation/tarik.md"
+      ],
+      "continuity_chars": 7503
+    },
+    "queue_gate_checks": {
+      "empty_queue": {
+        "status": "skipped_no_pending_handoff",
+        "executor_calls": 0,
+        "workspace": null
+      },
+      "unavailable_queue": {
+        "status": "skipped_handoff_unavailable",
+        "executor_calls": 0,
+        "workspace": null
+      },
+      "malformed_queue": {
+        "status": "skipped_handoff_unavailable",
+        "executor_calls": 0,
+        "workspace": null
+      },
+      "offline_test_continuity": "python3 test_continuity.py: 5 tests OK",
+      "offline_test_handoff_wakes": "python3 test_handoff_wakes.py: 13 tests OK",
+      "py_compile": "bot.py, local_tick.py, test_continuity.py, and test_handoff_wakes.py compiled successfully"
+    },
+    "clock_behavior_checks": {
+      "controlled_poll_sequence": [
+        "first -> initialized, no callback",
+        "early -> waiting, no callback",
+        "still_waiting -> waiting, no callback",
+        "due -> ran, one callback",
+        "clock_reset -> clock_reset, no new callback",
+        "overdue_sleep_path -> ran, second callback after overdue path"
+      ]
+    },
+    "scope": {
+      "other_queued_tasks_preserved": [
+        "tg-20261016-002",
+        "tg-20261016-003"
+      ],
+      "credential_values_recorded": false,
+      "private_dawn_content_read": false,
+      "unrelated_services_changed": false,
+      "second_bot_receiver_started": false
+    },
+    "checks": [
+      "Fresh-cloned private bots repository at 23bc345b267463083ff467145b8c39bc89782124 before installation.",
+      "Installed active Tarik bot.py/local_tick.py/tests with blobs bcd349243b3576c22dfd415d94173a251c94d6ff, ae97956ef6dd2fbe76551632e9aaed496fbcf1f9, 7ce46766472e90cd7ed878677e1ef888e49998d7, and 0c7d765acc33cad165d900758724ee3506b00cff.",
+      "Ran python3 -m py_compile on all installed Python files successfully.",
+      "Ran python3 test_continuity.py: 5 tests passed.",
+      "Ran python3 test_handoff_wakes.py: 13 tests passed, including claim conflict, stale checkout, atomic result/completion publication, rejected extra edits, and zero repeat execution paths.",
+      "Ran synthetic empty/unavailable/malformed queue checks with a failing executor sentinel; observed zero executor/model calls and no workspace creation.",
+      "Restarted only the existing launchd-owned com.lindsay.amigo.tarik service via run.sh/launchctl kickstart; old pid 85638 replaced by pid 51902.",
+      "Observed launchctl state running for com.lindsay.amigo.tarik, WorkingDirectory /Users/lindsayridgeway/LLM/tarik-bot, RunAtLoad true, KeepAlive SuccessfulExit false, and log output paths under the Tarik bot directory.",
+      "Observed exactly one bot.py process with cwd /Users/lindsayridgeway/LLM/tarik-bot after restart.",
+      "Observed bot.log startup line after deployment with model gpt-5.5 and independent tick clock interval 86400.0 seconds.",
+      "Ran bot.refresh_shared_context from the installed code and received a fresh published snapshot at revision f9de6b7326a9683b1f22c0f66db97429ee8e8168 with Tarik facts and conversation files.",
+      "Ran controlled PeriodicWorker poll checks for initialization, waiting, due run, backward clock reset, and overdue/sleep path without controlling hardware.",
+      "Published this result and the matching-token queue transition from a fresh public clone; did not use the shared checkout lander."
+    ]
+  }
+}
