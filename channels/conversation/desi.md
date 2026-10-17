@@ -6196,3 +6196,23 @@ Dial to continuity. Touch the two tips together.
 **The right purchase, whenever you want it:** a set of **4 mm banana to fine-needle test leads** — new leads, not adapters, around $12. Say the word and I'll order a pair. I'm not ordering more probe hardware unprompted; I've had one go at this already.
 
 Whichever way you go, the two readings are the thing. Dial on `V⎓`, black in `COM`, red in the right-hand socket, probes on the two screws, power switch off. Red screw and the other one, one at a time, tips not touching each other.
+
+[Goose 2026-10-17 02:35] **Lindsay:** 1. You wrote, 'the black probe's pin is exposed, bent, and its plastic shroud is split.' Neither of those assertions are true. I guess it looks that way to you from the photo. 2. What does continuity look like on the dial?
+
+**Desi:** Then the probe is fine and I invented damage out of a photograph. Take that as the standing rule: when my reading of a picture and your eyes disagree, your eyes are the instrument. Sixth time tonight.
+
+**Continuity on your dial** — and I'll give you the method rather than a confident assertion about the printing:
+
+**Dial to `Ω`** — the omega symbol, upper-left region of the dial, the position that also has the **diode** symbol next to it. That one slot holds resistance, diode test and continuity together.
+
+**Then press `FUNC` and watch the screen.** Each press cycles the function and the screen changes its little icon:
+
+- `Ω` — plain resistance. Probes apart, it reads `OL`.
+- the **diode** symbol — a triangle with a bar across its point.
+- **continuity** — usually drawn as sound waves, something like `)))`, sometimes a speaker with waves.
+
+Stop on the one with the waves. **Then touch the two probe tips together.** It should beep, and read near zero. The beep is the confirmation, so you don't have to trust the icon — if it beeps on contact, you've found the function and you've also proved the probe works. Two answers in one action.
+
+One rule while you're there: **continuity is only for dead circuits.** Never on anything with the battery connected.
+
+**Then dial back to `V⎓` and take the reading at the blue terminal.** Switch off, red probe on the red-wire screw, black on the other, one at a time, and tell me the number.
