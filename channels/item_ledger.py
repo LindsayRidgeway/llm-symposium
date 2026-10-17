@@ -188,20 +188,97 @@ def parse_run_time(run_id: str) -> str:
 # A wake's report opens with whatever it wrote first, and older runners wrote their *intent*
 # before doing anything ("Intend to: …"). An intent is not an item; the title must say what the
 # wake did or found. Measured on the 2026-09-15/16 runs, which are all intent-first.
-_NOT_A_TITLE_RE = re.compile(
-    r"^(?:intend(?:ing)?\b|start(?:ing|ed)?\b|i will\b|plan(?:ning)?\b|area this wake\b|"
+_INTENT_RE = re.compile(
+    r"^(?:intend(?:ing)?\b|start(?:ing|ed)?\b|i will\b|i intend(?:ed)?\b|i'm going to\b|"
+    r"i am going to\b|plan(?:ning)?\b|area this wake\b|"
     r"chose item\b|wake\b\s*[—:-])", re.I)
+# The rest of a report's furniture, which is not the work either: the LAND line is addressed to the
+# lander rather than to a reader, and the progress markers are what a run writes *before* it has
+# anything finished to report ("Done so far: …", "In progress: …").
+_FURNITURE_RE = re.compile(
+    r"^(?:land(?:pre)?\b|done so far\b|in progress\b|so far\b|progress\b\s*:|area\b\s*:|"
+    r"intent\b\s*:)", re.I)
+_MARKUP_START = "#-*|>"
+
+
+def _is_furniture(line: str) -> bool:
+    return bool(_INTENT_RE.match(line) or _FURNITURE_RE.match(line))
+
+
+# A wrap is not a title. Added 2026-10-17, from Dmitri's measurement in
+# `channels/reports/2026-10-16-dmitri-the-ledger-titles-a-wrapped-report-with-a-fragment.md`, which
+# found two faults in one function and left the second one to its owner (this file):
+#   A. `best_title()` skipped the labelled *line*, not the labelled *sentence*, so when the label
+#      wrapped, the continuation was filed as the title — run `20261015T170413Z-562d5e04` went into
+#      the ledger as "were introspection/item 11 (10-13, 10-14); the one before that was music/item
+#      26 (10-12)."
+#   B. The unit was a line, so **any** content sentence that wrapped was cut at the wrap — run
+#      `20261007T164305Z-b8d58b3c` titled as "The last two wakes were the disease-screen instrument
+#      and the creek-water drinking guide, so this is a", and `--next` then printed 60 characters of
+#      it.
+# The decision the report asked for is B: a title is the first **sentence** of the first content
+# block, joined across its wrap, not the first line. Measured before and after on every report on
+# disk: 11 of 655 changed title, and each change replaced a fragment with the sentence it came from.
+_TERMINAL_RE = re.compile(r"""[.!?]["')\]]?$""")
+
+
+def _skip_label(lines: list[str], i: int, skip) -> int:
+    """Advance past the label at `i` and past the lines that are its wrap (a wrap does not end)."""
+    i += 1
+    while i < len(lines) and not _TERMINAL_RE.search(lines[i - 1]):
+        nxt = lines[i]
+        if nxt[:1] in _MARKUP_START or skip(nxt):   # a heading or the next label, not a wrap
+            break
+        i += 1
+    return i
+
+
+def _title_at(lines: list[str], i: int, limit: int) -> str:
+    """The first sentence from line `i`, joined across its wrap, cut at `limit`."""
+    out = lines[i]
+    j = i
+    while (not _TERMINAL_RE.search(out) and j + 1 < len(lines) and len(out) < limit
+           and not _is_furniture(lines[j + 1]) and lines[j + 1][:1] not in _MARKUP_START):
+        j += 1
+        out = f"{out} {lines[j]}"
+    # A title is a sentence, and a *useful* one: a short opener ("Done. Then …", "I have just
+    # started this wake.") is no title at all, so sentences accumulate until there is enough of one
+    # to name the work — TITLE_SHOWN, the width the daily report and `--next` print — and stop
+    # there, which keeps the title to the first informative sentence and not the whole report.
+    title = ""
+    for part in re.split(r"(?<=[.!?])\s+", out):
+        title = f"{title} {part}".strip() if title else part
+        if len(title) >= TITLE_SHOWN:
+            break
+    if len(title) > limit:                       # cut on a word, never mid-word
+        title = title[:limit].rsplit(" ", 1)[0] or title[:limit]
+    return title
+
+
+def _title_with(lines: list[str], skip, limit: int) -> str:
+    i = 0
+    while i < len(lines):
+        if skip(lines[i]):
+            i = _skip_label(lines, i, skip)
+            continue
+        if len(lines[i]) >= 25:                  # a title, not a heading fragment
+            return _title_at(lines, i, limit)
+        i += 1
+    return ""
 
 
 def best_title(text: str, limit: int = TITLE_MAX) -> str:
-    """The report's own one-line summary of the work, not its statement of intent."""
+    """The report's own one-sentence summary of the work — never its intent, never a wrap.
+
+    Two passes: the first skips intent, LAND and progress furniture; the second skips only the
+    intent labels, so a report whose *only* prose is a LAND or progress line still lends its title
+    rather than falling back to its opening line. A report that is nothing but intent is quoted
+    rather than invented, as before.
+    """
     lines = [ln.strip() for ln in (text or "").splitlines() if ln.strip()]
-    for line in lines:
-        if _NOT_A_TITLE_RE.match(line):
-            continue
-        if len(line) >= 25:                      # a title, not a heading fragment
-            return line[:limit]
-    return (lines[0][:limit] if lines else "(no report)")
+    return (_title_with(lines, _is_furniture, limit)
+            or _title_with(lines, lambda ln: bool(_INTENT_RE.match(ln)), limit)
+            or (lines[0][:limit] if lines else "(no report)"))
 
 
 def items_from_report(report_text: str) -> list[dict]:

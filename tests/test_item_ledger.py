@@ -149,6 +149,57 @@ class TestTitle(unittest.TestCase):
         report = "Intending to: take the next item in turn and review the reject queue, properly.\n"
         self.assertEqual(il.best_title(report), report.strip())
 
+    # The three cases below are Dmitri's 2026-10-16 finding (`channels/reports/
+    # 2026-10-16-dmitri-the-ledger-titles-a-wrapped-report-with-a-fragment.md`), which named
+    # `channels/item_ledger.py` as its owner's file rather than editing it. Both faults it measured
+    # are pinned here so a later tidying of `best_title()` cannot reintroduce either.
+
+    def test_a_wrapped_label_does_not_become_the_title(self):
+        report = ("Area this wake: the item ledger, and the two wakes before it\n"
+                  "were the gallery and the lander.\n"
+                  "I fixed the title derivation so a wrap is not a title.\n")
+        self.assertEqual(il.best_title(report),
+                         "I fixed the title derivation so a wrap is not a title.")
+
+    def test_a_wrapped_content_sentence_is_joined_not_cut(self):
+        report = ("Starting: looking at the last two wakes.\n"
+                  "The last two wakes were the disease-screen instrument and the creek-water\n"
+                  "drinking guide, so this wake is in the screening programme.\n")
+        self.assertEqual(il.best_title(report),
+                         "The last two wakes were the disease-screen instrument and the creek-water "
+                         "drinking guide, so this wake is in the screening programme.")
+
+    def test_a_land_or_progress_line_is_not_the_title(self):
+        report = ("Starting: orienting.\n"
+                  "LAND: docs/music/a-song.html, scripts/check_song.py\n"
+                  "Done so far: the checker and the page, both tests green.\n"
+                  "I wrote a song and a checker that refuses a melody outside the singer's range.\n")
+        self.assertEqual(
+            il.best_title(report),
+            "I wrote a song and a checker that refuses a melody outside the singer's range.")
+
+    def test_a_report_whose_only_prose_is_a_land_line_still_lends_a_title(self):
+        report = ("Starting: orienting.\n"
+                  "LAND: docs/music/a-song.html, scripts/check_song.py\n")
+        self.assertEqual(il.best_title(report),
+                         "LAND: docs/music/a-song.html, scripts/check_song.py")
+
+    def test_the_title_stops_at_the_first_informative_sentence(self):
+        report = ("I rebuilt the emergency rehydration page around the WHO's own oral rehydration "
+                  "formula rather than the old home mix. Then I wrote the test that keeps it honest.\n")
+        self.assertEqual(
+            il.best_title(report),
+            "I rebuilt the emergency rehydration page around the WHO's own oral rehydration formula "
+            "rather than the old home mix.")
+
+    def test_a_short_opener_is_extended_rather_than_title_alone(self):
+        report = ("I fixed the song checker. It had read every minor key as chromatic, which made "
+                  "three songs fail for no reason.\n")
+        self.assertEqual(
+            il.best_title(report),
+            "I fixed the song checker. It had read every minor key as chromatic, which made three "
+            "songs fail for no reason.")
+
 
 class TestLetters(unittest.TestCase):
     """The classifier of the human's second scheme (2026-10-07). Two rules, both his, both pinned:
