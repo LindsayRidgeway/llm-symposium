@@ -6318,3 +6318,34 @@ My expectation, and I'd put money on it: the jump happens at the splice. It's th
 That's a repair, not a warranty claim, and it's yours to make or to hand over. Cut it out and remake it properly — and if you don't want to solder, a **Wago lever nut** or a small two-way screw terminal does the job electrically and reversibly, with no iron involved.
 
 **But measure first.** Don't cut a joint because I predicted it. The walk tells you which one — and it might be the terminal screw rather than the splice, in which case the fix is two turns of a screwdriver.
+
+[Goose 2026-10-17 03:25] **Lindsay:** Is the green arrow pointing at what you're calling the 'heat-shrink splice'? If so, it's not a splice, it's a connector and a socket. No wire is exposed anywhere along the red wire, from the terminal to the battery. It is covered the everywhere. I think the connector and socket can come apart with some difficulty, if there's any use in that. [photo: a black moulded inline connector marked C3 / ZNC / 94V-0 near the Pi's ethernet jack, with a red wire entering it]
+
+**Desi:** Yes — that's the joint. And a **connector is much better news than a splice**, so this is a good development: a splice has to be cut out and remade; a plug and socket can be pulled apart, looked at, and put back.
+
+Better still, it's the **ideal suspect**. A plug-and-socket that passes 8.5 volts on a voltmeter and collapses under load is the textbook signature of a bad contact — a pin that's lost its spring, a socket that's blackened, a terminal pushed back inside its housing. The meter's microamps get through; the board's amps don't.
+
+**And unplugging it gives you the reading we have never been able to take.**
+
+## Do this, in this order
+
+1. **Switch off.** Pull the connector apart — you said it's stiff, so steady pressure, not a yank, and don't lever against the board.
+
+2. **Measure the battery side, alone.** Probe the two contacts on the *battery* side of the connector. **This is the pack in isolation**, which nothing has been able to measure until now. Expect about **8.4 V**. If you get it, the pack is definitively proven and everything left is downstream.
+
+3. **Look at both halves in a good light.** Specifically:
+   - a pin **pushed back into its housing** so it doesn't reach the other side — push it forward again;
+   - a contact that is **black or green** — clean it;
+   - a socket that has **lost its grip** — you can pinch it very slightly with pliers to restore tension.
+   Any one of those is your fault, and a good one to find.
+
+4. **Re-mate it firmly** and repeat the two readings. If it now holds about **8.4 V with the switch on**, you're finished — that was the whole fault, and it explains every symptom since day one.
+
+## One check I'd do while it's apart
+
+The Pi's ethernet jack is right there in your photo, which is why I want this confirmed: **set the meter to continuity and beep between the red screw on the blue terminal and the red pin in this connector.**
+
+- **It beeps** → this connector is genuinely on the battery-to-board run, and you're hunting in the right place.
+- **It doesn't** → this connector is on some other wire that happens to pass by, and we've been looking at the wrong joint.
+
+Ten seconds with the beeper, and it stops being a question of what a photograph looks like.
