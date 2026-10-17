@@ -1,0 +1,10 @@
+{
+  "actor": "tarik-codex",
+  "run_id": "codex-20261017T155629Z-33624d68",
+  "started_utc": "2026-10-17T15:56:29Z",
+  "scheduled_slot": "2026-10-17T12:00:00-04:00",
+  "timezone": "America/New_York",
+  "status": "claimed",
+  "dispatch_note": "Native dispatch precedes scheduled noon delivery.",
+  "selected_task": "Reconcile and implement the outstanding disease-screen density-floor certification contract."
+}
