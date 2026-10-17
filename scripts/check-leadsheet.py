@@ -70,6 +70,55 @@ MODE_OFFSET = {
     'aeolian': 9, 'aeo': 9, 'minor': 9, 'm': 9, 'locrian': 11, 'loc': 11,
 }
 
+# Semitones above the tonic for each mode. This is the *mode's own* scale, not the
+# major scale on the same tonic: `K: Gmix` means the F is natural, and `K: Dm` means
+# the F and C are natural. Fixed 2026-10-17 — until then section 2 of `run()` built
+# the diatonic set from the major scale on the tonic whatever the mode said, so it
+# called a mixolydian seventh and every minor third "chromatic to the key". Measured
+# on the wing's own files before the fix: `docs/music/bounded-frontier.html` (`K: Gmix`)
+# had its plain tonic-seventh `F` flagged, and a minor-key lead sheet would have had
+# four of its seven scale degrees flagged. No chord is chromatic in its own mode.
+MODE_INTERVALS = {
+    'major': (0, 2, 4, 5, 7, 9, 11), 'ionian': (0, 2, 4, 5, 7, 9, 11),
+    'dorian': (0, 2, 3, 5, 7, 9, 10), 'dor': (0, 2, 3, 5, 7, 9, 10),
+    'phrygian': (0, 1, 3, 5, 7, 8, 10), 'phr': (0, 1, 3, 5, 7, 8, 10),
+    'lydian': (0, 2, 4, 6, 7, 9, 11), 'lyd': (0, 2, 4, 6, 7, 9, 11),
+    'mixolydian': (0, 2, 4, 5, 7, 9, 10), 'mix': (0, 2, 4, 5, 7, 9, 10),
+    'aeolian': (0, 2, 3, 5, 7, 8, 10), 'aeo': (0, 2, 3, 5, 7, 8, 10),
+    'minor': (0, 2, 3, 5, 7, 8, 10), 'm': (0, 2, 3, 5, 7, 8, 10),
+    'locrian': (0, 1, 3, 5, 6, 8, 10), 'loc': (0, 1, 3, 5, 6, 8, 10),
+}
+MINOR_MODES = {'aeolian', 'aeo', 'minor', 'm', 'locrian', 'loc'}
+
+
+def key_mode(key_str):
+    """The mode named in an ABC `K:` field, normalised, or 'major' when none is given.
+
+    ABC writes modes as a suffix: `K: Dm`, `K: Gmix`, `K: Ador`, `K: Eb`. The suffix
+    is case-insensitive in practice (`K: Dm` and `K: DM` both appear in the wing's files).
+    """
+    m = re.match(r'([A-Ga-g])([#b]?)\s*(\w*)', key_str.strip())
+    if not m:
+        return 'major'
+    mode = m.group(3).lower()
+    return mode if mode in MODE_INTERVALS else 'major'
+
+
+def diatonic_pcs(key_str):
+    """Pitch classes that belong to the stated key, read from the key's own mode.
+
+    In a minor key the raised seventh (the harmonic-minor leading tone) is also
+    admitted: `E` in A minor is the dominant of the most ordinary cadence in the
+    language, and a checker that called it chromatic would be nagging about the
+    cadence rather than about an accident.
+    """
+    tonic_pc, _ = parse_key(key_str)
+    mode = key_mode(key_str)
+    pcs = {(tonic_pc + s) % 12 for s in MODE_INTERVALS[mode]}
+    if mode in MINOR_MODES:
+        pcs.add((tonic_pc + 11) % 12)
+    return pcs
+
 # Chord quality -> semitone offsets from root
 CHORD_QUALITIES = {
     '': [0, 4, 7], 'maj': [0, 4, 7], 'M': [0, 4, 7],
@@ -347,11 +396,8 @@ def run(abc_text, max_span=19, lo=55, hi=79, verbose=True):
         print("  FAIL: no chord symbols found. A lead sheet needs changes.")
     else:
         tonic_pc, key_sig = parse_key(key_str)
-        diatonic = set()
-        # build diatonic pcs of the major/minor scale implied by key signature
-        scale_major = [0, 2, 4, 5, 7, 9, 11]
-        for s in scale_major:
-            diatonic.add((tonic_pc + s) % 12)
+        # the mode the K: field names, not the major scale on the same tonic
+        diatonic = diatonic_pcs(key_str)
         bad = []
         chromatic = []
         for sym in chords:
