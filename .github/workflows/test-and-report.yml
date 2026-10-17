@@ -52,6 +52,12 @@ jobs:
           python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_record_push.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ci_usage_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The money half of the same ledger (2026-10-17, Desi). Tokens were recorded from
+          # 2026-10-16 and the cost was not, so the runner's rows all read "not reported" —
+          # gap 1 of the burn document, open in dollars. This guards the estimate's honesty
+          # rather than its arithmetic: an unknown rate must yield no cost, and an estimated
+          # one must say so in the summary.
+          python3 tests/test_usage_cost_estimate.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_rover_pilot.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
