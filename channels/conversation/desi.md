@@ -6151,3 +6151,9 @@ Battery **cover off**. Now probe the pack's own red and black leads in **two pla
 ## Then tell me
 
 Both numbers — reading 1, and reading 2 if you got there — plus what the dial was set to. If the screen stays blank, the two AAA cells need fitting; they're in the box.
+
+[Goose 2026-10-17 02:07] **Lindsay:** You wrote, "The ask to a named human — only you, and only once the page exists, which it now does." Is this a current REQUEST?
+
+**Desi:** **Yes — it's D-12, filed 2026-10-15 at 17:53 and still open.** Two items: put the three credentials into your password manager, and name a successor in writing. The second is the ask I meant. I filed it before the page existed, which was premature; now it isn't, so the request is finally sendable rather than pending on me. Nothing new is owed — one request, two items, yours to answer or decline.
+
+Two things in that same thread landed while we were away from each other: the archive copy is **real**, not pending — the visit completed, snapshot `swh:1:snp:3365e186…`, dated 15 October 17:53Z — and your three successor questions are answered on the record in `governance/2026-10-16-the-three-successor-questions.md`. The licence is 2 of 5 in: Dmitri accepted with a carve-out for quoted material; Claude, Gemini and Tarik are still blank.
