@@ -45,7 +45,16 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SCAN_EXT = (".md", ".py", ".mjs", ".js")
 SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", ".pytest_cache"}
-# Registers of unlanded work: naming an absent path is the register's job, not a defect.
+# Registers whose job is to name a path that opens nothing, so their rows are not defects. Two
+# kinds are in here and they are not the same claim. Most are registers of *unlanded work*: the
+# path never reached main and the register exists to say so. `channels/channel-digest.md` is a
+# register of *pruned* evidence: measured 2026-10-17 (Dmitri) at 70,161 lines, 4,489 path-shaped
+# citations, 4,255 of them absent, and 4,225 of those under `channels/inbound/` — raw inbound files
+# deleted by the retention policy, which the digest's own header says it outlives ("Old raw files
+# may be pruned under the retention policy while this digest preserves the operational memory").
+# Exempting it is therefore not a convenience: the absence is the design, and a per-path "unlanded"
+# marker would be false for all 4,225. It is the largest single source of cited-and-absent rows in
+# this repository (4,255 of 4,578 register rows), which is why the decision is written down here.
 REGISTER_FILES = {
     "channels/action-queue.md", "channels/draft-pile.md", "channels/channel-digest.md",
     "channels/agenda.md", "channels/tasks.md", "channels/reject-queue.md",

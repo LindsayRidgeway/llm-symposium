@@ -35,7 +35,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 ATTR_REF_RE = re.compile(r'(?:href|data|src)="([^"#]+?)"')
 
 # Backtick-quoted repo-relative path references in Markdown, e.g.
-# `docs/gallery/foo/bar.svg` or `discussions/2026-09-08-x.md`
+# `docs/gallery/foo/bar.svg` or `discussions/YYYY-MM-DD-some-review.md`
 BACKTICK_PATH_RE = re.compile(
     r'`((?:docs|discussions|insights|channels|governance|tests|probes|actuator)/[\w\-./]+\.\w+)`'
 )

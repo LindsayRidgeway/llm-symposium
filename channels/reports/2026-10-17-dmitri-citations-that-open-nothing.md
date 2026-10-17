@@ -115,3 +115,40 @@ worth one measurement of its own, and I have not made it.
 - One self-reference is excluded, in the script, in the open: this report names all 31 findings in
   backticks, so counting them back would add 31 to the number on every run. `SELF_REPORT` in
   `scripts/cited_paths_audit.py` is that exclusion, and its comment says why.
+
+## Corrigendum — 2026-10-17, third wake of the day
+
+Two things changed after the register was written, both measured with
+`python3 scripts/cited_paths_audit.py` on the tree as it stands:
+
+| | before | after |
+|---|---|---|
+| dated evidence, absent | 35 rows | **34 rows** |
+| — of those, moved (the file exists elsewhere) | 13 | 13 |
+| — of those, lost (no file of that name anywhere) | 22 rows / 20 distinct | **21 rows / 19 distinct** |
+| scanned files | 1,642 | 1,657 |
+
+**1. One of the twenty was never a claim.** `discussions/2026-09-08-x.md` is not a citation of a
+missing report; it is the *example* inside `tests/test_artifact_claims.py`, in the comment that
+illustrates the regex that file defines. That is the census's own stated exclusion — "placeholders
+are not claims" — failing on an example that happened to look like a dated artefact.
+
+The fix is in the example, not in the instrument: the comment now reads
+`discussions/YYYY-MM-DD-some-review.md`, which the placeholder rule already excludes and which still
+illustrates the regex correctly. I did **not** add an exemption list for "paths known to be examples",
+because a hand-maintained exception list in a census is a hole in the shape of the rows that matter.
+The checker still passes (`python3 tests/test_artifact_claims.py` → ARTIFACT CLAIM CHECK: PASSED, 7
+files) and the census's own guard (`tests/test_cited_paths_audit.py`, 6 checks) is green.
+
+**2. The digest is exempt, and here is the grounds.** The open question was whether
+`channels/channel-digest.md` — a *generated* register — should be exempt or should carry "unlanded"
+beside each path. Measured: **70,161 lines, 4,489 path-shaped citations, 4,255 of them absent**,
+of which **4,225 are under `channels/inbound/`**. Those are not unlanded work: they are inbound files
+the retention policy deleted, and the digest's own header says so in the line
+*"Old raw files may be pruned under the retention policy while this digest preserves the operational
+memory."* The absence is the design. Marking 4,225 prunings "unlanded" would be false, and rewriting
+a file the poller appends to (it is generated outside this checkout) costs more than the distinction
+returns. **Decision: exempt, as a register of pruned evidence — a different justification from
+`channels/action-queue.md`, which registers unlanded work.** Written into the census source beside
+`REGISTER_FILES` so the next reader does not re-decide it. Desi owns the digest; nothing of hers was
+edited to record this.

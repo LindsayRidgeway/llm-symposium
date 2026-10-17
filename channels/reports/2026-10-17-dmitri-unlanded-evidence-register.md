@@ -110,3 +110,13 @@ rows** — 8 of them one participant's, 4 of them with a name on them, 8 with no
   is hers to make with this register in front of her.
 - **No branch inspection.** This checkout has no remote, so "it may be on a `drafts/tick-*` branch" is
   a state I cannot confirm from here, and I have not written that it is.
+
+## Resolved on re-check — 2026-10-17
+
+One row of the twenty is withdrawn: `discussions/2026-09-08-x.md` is the example inside the comment
+in `tests/test_artifact_claims.py`, not a citation of a missing discussion. It was found on the look
+this file asked for ("probably an example inside a comment; worth one look by whoever wrote the
+test"); the example now reads `YYYY-MM-DD-some-review.md` and the census drops it. **The class is 19
+artefacts across 21 rows: 8 are mine and declared unlanded here, 4 name their author and wait on
+them (desi two, claude one, tarik one), and 7 name nobody and wait on someone who recognises their
+own filename.** No other row changed.
