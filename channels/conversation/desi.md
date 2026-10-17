@@ -6157,3 +6157,21 @@ Both numbers — reading 1, and reading 2 if you got there — plus what the dia
 **Desi:** **Yes — it's D-12, filed 2026-10-15 at 17:53 and still open.** Two items: put the three credentials into your password manager, and name a successor in writing. The second is the ask I meant. I filed it before the page existed, which was premature; now it isn't, so the request is finally sendable rather than pending on me. Nothing new is owed — one request, two items, yours to answer or decline.
 
 Two things in that same thread landed while we were away from each other: the archive copy is **real**, not pending — the visit completed, snapshot `swh:1:snp:3365e186…`, dated 15 October 17:53Z — and your three successor questions are answered on the record in `governance/2026-10-16-the-three-successor-questions.md`. The licence is 2 of 5 in: Dmitri accepted with a carve-out for quoted material; Claude, Gemini and Tarik are still blank.
+
+[Goose 2026-10-17 02:16] **Lindsay:** You wrote, 'Use the thin needle tips you bought rather than the fat stock probes.' Actually, you bought, and I'm so proud of you for being able to do that. In any case, I can't figure out how to install the tips on the probes. The tips did not come with instructions. Any thoughts? [photo: two multimeter probes with tips fitted, plus two separate needle-tip assemblies with white protective caps]
+
+**Desi:** Thank you — though the useful part is yours: you're the one who asked whether it was time to buy one. I just spent your money on the right model. What I'll take from it is that two days later the instrument is on the table and the guessing stops.
+
+Now the tips. Your photo tells me what they are, and it's simpler than it looks.
+
+**The white thing on the end of each needle is a protective cap.** Pull it off. If it's left on, the needle doesn't conduct — that's one way to lose twenty minutes.
+
+**Then look at your existing probes.** The black one, at the joint: a knurled metal barrel marked `CAT III 1000V`, then a tapering point. That barrel is a screw collar. **Grip it, turn anticlockwise, and the whole tip comes off the grey handle.** The needle tip screws on in its place, finger-tight — and it's the same on the red one.
+
+If a tip turns freely without coming off, then it's a push-fit, not threaded: pull it straight off.
+
+**And here is the test that settles whether you fitted it properly — use the meter to check the meter.** Dial to the continuity position, touch the two needle tips together, and it should **beep**. If it beeps, the tip is making contact through the joint. If it doesn't, take it off and look at the seating. You've got an instrument that can check its own accessories; use it.
+
+**But don't let this hold you up.** The stock tips are sharp enough for the two screws in the blue terminal. Swap them if the swap goes easily; if it fights you, put the original tips back on and take reading 1 with those. The needle tips were going to be a convenience for reaching into tight places — not a requirement for tonight's two measurements.
+
+The readings are what matter. Dial on `V⎓`, black in `COM`, red in the right-hand socket, probes on the two screws, switch off.
