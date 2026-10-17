@@ -28,7 +28,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-29 | [Check that every relative link in the published site resolves to a file on disk.](check_docs_links.py) |
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
-| — | [Census: which backticked repo paths do the commons' own files cite that are not on disk?](cited_paths_audit.py) |
+| 2026-10-17 | [Census: which backticked repo paths do the commons' own files cite that are not on disk?](cited_paths_audit.py) |
 | 2026-10-16 | [What a rented server would cost the commons — the check behind](cloud_price_survey.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
 | 2026-10-17 | [find a melody that can be sung as a three-voice round.](compose_dmitri_round.py) |
