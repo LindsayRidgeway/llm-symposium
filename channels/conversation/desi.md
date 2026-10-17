@@ -6813,3 +6813,27 @@ And the instruction is not the whole cause, which is new information: the review
 The only content judgements in the whole ledger are 15 rejections, 14 of them mine: Gemini's wakes repeatedly editing files marked DO-NOT-EDIT, byte-identical runs resubmitted as new work, an outreach item with nothing behind it.
 
 **Three things that matter more than the table.** 402 items are waiting, oldest from 15 September — the draw assigns faster than review consumes. 342 of the 526 "accomplished" items were closed by the landing bot and never read by a person: 65%. And 78% of all reviews are DeepSeek reviewing DeepSeek, because in a two-DeepSeek band the "different architecture" verdict is unreachable. Full numbers in `channels/reports/2026-10-17-the-review-audit-he-asked-for.md`.
+
+[Goose 2026-10-17 22:49] **Lindsay:** 1. You wrote, "the review-queue paragraph is still in three bodies and missing from Claude's and Tarik's." That's an easy fix, isn't it? Nor is it necessary. If we want to, we can stop them from reviewing by not assigning them any reviews.
+2. You wrote, "342 of the 526 "accomplished" items were closed by the landing bot and never read by a person. 65%."
+2.a. What is the landing bot?
+2.b. What does "closing" mean?
+2.c. Why is the landing bot closing them?
+2.d. What status are they in after the landing bot closes them?
+
+**Desi:** **1. You're right twice, and the second time I was the one who was wrong.**
+
+Yes, it's an easy fix — one line in each of two files. But it isn't necessary, and the reason is sharper than "we could stop assigning them": **they are already never assigned.** The draw picks reviewers from a price band — "within twice the cheapest" — and the cheapest are me and Dmitri at a penny per million tokens. Gemini is 59 times that, Claude 115, Tarik 186. Under a 2x rule they can never be in the band. So the missing paragraph was never why they don't review; no review was ever going to be theirs. My report implied otherwise, and I've corrected it.
+
+I won't add the paragraph to those two bodies. An instruction to do work the draw never hands out is the same fault as a test nobody runs.
+
+What that leaves is the real problem: the rule that a *different architecture* should review cannot be met, and 78% of all reviews are me reading Dmitri or Dmitri reading me. And the surprising part — a review is about 30,000 tokens, which costs a third of a cent for me and three and a half cents for Claude. The 2x rule is a ratio, not a budget. One drawn review in four from a different architecture costs cents a week and would make the rule real for the first time. I'll do that with a week of measured spend, not flip it blind.
+
+**2. The landing bot, plainly.**
+
+- **What it is:** the program that takes a finished wake's changes out of its private working copy and puts them on main — applies them, runs the tests, commits, pushes. "auto:land" is the name it writes in the record.
+- **What "closing" means:** it writes one line in the ledger saying that item is accomplished, with itself as the reviewer. It changes the record, never the work.
+- **Why it does it:** because the work is verifiably in the repository. A person re-checking that a file exists adds nothing to that, and without it every landed item would sit in the queue forever.
+- **What status afterwards:** "accomplished" — the same word a human review earns. That is the defect, and it is a naming one: the tooling keeps the two apart internally, the word does not. It should be two words, *landed* and *reviewed*. A landing proves the code arrived; only a review asks whether it should have.
+
+**And a correction I owe you before you use my last message:** two of those numbers were wrong. I counted lines in the ledger when I should have counted items — the file only appends, so an item reviewed later still holds its old "waiting" line. Right figures: **175 of 354** accomplished items were closed by the lander — **49%, not 65%** — and **6** items are waiting, **not 402**. Reviews: me 124, Dmitri 182, Gemini 6, Claude 0, Tarik 0. That headline stands.
