@@ -1,0 +1,1916 @@
+{
+  "run_utc": "2026-10-17T11:05:22Z",
+  "baseline_utc": "2026-09-16T18:56:34Z",
+  "baseline_path": "docs/works/fetchable-sources.json",
+  "origin_sent": "https://lindsayridgeway.github.io",
+  "days_since_baseline": 30,
+  "counts": {
+    "unchanged": 33,
+    "regressed": 0,
+    "improved": 1,
+    "changed": 1,
+    "sources": 35,
+    "answered_now": 31,
+    "browser_now": 26,
+    "answered_then": 31,
+    "browser_then": 25,
+    "claims_data_now": 29
+  },
+  "sources": [
+    {
+      "name": "ClinicalTrials.gov",
+      "url": "https://clinicaltrials.gov/api/v2/studies?query.cond=melanoma&pageSize=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"studies\":[ {\"protocolSection\":{\"identificationModule\":{\"nctId\":\"NCT01153763\",\"orgStudyIdInfo\":{\"id\":\"113710\"},\"organization\":{\"fullName\":\"GlaxoSmithKline\",\"cl",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "ClinicalTrials.gov",
+        "field": "health",
+        "holds": "Every registered clinical trial, worldwide",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.cond=melanoma&pageSize=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"studies\":[ {\"protocolSection\":{\"identificationModule\":{\"nctId\":\"NCT00003222\",\"orgStudyIdInfo\":{\"id\":\"7621\"},\"secondaryIdInfos\":[{\"id\":\"IRB-HSR 7621\"},{\"id\":\"N",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "ClinicalTrials.gov",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.cond=melanoma&pageSize=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "PubMed (E-utilities)",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=melanoma&retmode=json&retmax=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 422,
+        "witness": "{\"header\":{\"type\":\"esearch\",\"version\":\"0.3\"},\"esearchresult\":{\"count\":\"184925\",\"retmax\":\"1\",\"retstart\":\"0\",\"idlist\":[\"42746895\"],\"translationset\":[{\"from\":\"mela",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "PubMed (E-utilities)",
+        "field": "health",
+        "holds": "35M+ biomedical abstracts and citations",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=melanoma&retmode=json&retmax=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 422,
+        "witness": "{\"header\":{\"type\":\"esearch\",\"version\":\"0.3\"},\"esearchresult\":{\"count\":\"185605\",\"retmax\":\"1\",\"retstart\":\"0\",\"idlist\":[\"42888623\"],\"translationset\":[{\"from\":\"mela",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "PubMed (E-utilities)",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=melanoma&retmode=json&retmax=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Europe PMC",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=melanoma&format=json&pageSize=1",
+      "drift": {
+        "verdict": "improved",
+        "before": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 1064,
+        "witness": "{\"version\":\"6.9\",\"hitCount\":534367,\"nextCursorMark\":\"AoIIQAuf1ig1NjM0MzI0MQ==\",\"nextPageUrl\":\"https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=mela",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Europe PMC",
+        "field": "health",
+        "holds": "Life-science literature with full text for open articles",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=melanoma&format=json&pageSize=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 1106,
+        "witness": "{\"version\":\"6.9\",\"hitCount\":537208,\"nextCursorMark\":\"AoIIQA7aFyg1NjY3ODA2NQ==\",\"nextPageUrl\":\"https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=mela",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Europe PMC",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=melanoma&format=json&pageSize=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": "reproduced (200 then 200)",
+      "flaked": 200
+    },
+    {
+      "name": "openFDA",
+      "url": "https://api.fda.gov/drug/event.json?limit=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 1819,
+        "witness": "{ \"meta\": { \"disclaimer\": \"Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you shou",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "openFDA",
+        "field": "health",
+        "holds": "US drug adverse-event reports and recalls",
+        "url": "https://api.fda.gov/drug/event.json?limit=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 1819,
+        "witness": "{ \"meta\": { \"disclaimer\": \"Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you shou",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "openFDA",
+        "url": "https://api.fda.gov/drug/event.json?limit=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "WHO Global Health Observatory",
+      "url": "https://ghoapi.azureedge.net/api/Indicator?$top=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 212,
+        "witness": "{\"@odata.context\":\"https://ghoapi.azureedge.net/api/$metadata#Indicator\",\"value\":[{\"IndicatorCode\":\"ABORTION_ADMISSIONS\",\"IndicatorName\":\"Abortion admissions pe",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "WHO Global Health Observatory",
+        "field": "health",
+        "holds": "WHO's country health statistics",
+        "url": "https://ghoapi.azureedge.net/api/Indicator?$top=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 212,
+        "witness": "{\"@odata.context\":\"https://ghoapi.azureedge.net/api/$metadata#Indicator\",\"value\":[{\"IndicatorCode\":\"ABORTION_ADMISSIONS\",\"IndicatorName\":\"Abortion admissions pe",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "WHO Global Health Observatory",
+        "url": "https://ghoapi.azureedge.net/api/Indicator?$top=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "confirmation": null
+    },
+    {
+      "name": "UniProt",
+      "url": "https://rest.uniprot.org/uniprotkb/search?query=p53&size=1&format=json",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"results\":[{\"entryType\":\"UniProtKB reviewed (Swiss-Prot)\",\"primaryAccession\":\"Q8I8V0\",\"secondaryAccessions\":[\"A0A0B4KFU2\",\"Q9VHV0\"],\"uniProtkbId\":\"TAD2B_DROME\"",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "UniProt",
+        "field": "health",
+        "holds": "Protein sequences and function annotations",
+        "url": "https://rest.uniprot.org/uniprotkb/search?query=p53&size=1&format=json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"results\":[{\"entryType\":\"UniProtKB reviewed (Swiss-Prot)\",\"primaryAccession\":\"Q8I8V0\",\"secondaryAccessions\":[\"A0A0B4KFU2\",\"Q9VHV0\"],\"uniProtkbId\":\"TAD2B_DROME\"",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "UniProt",
+        "url": "https://rest.uniprot.org/uniprotkb/search?query=p53&size=1&format=json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "RCSB Protein Data Bank",
+      "url": "https://data.rcsb.org/rest/v1/core/entry/1crn",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"audit_author\":[{\"name\":\"Hendrickson, W.A.\",\"pdbx_ordinal\":1},{\"name\":\"Teeter, M.M.\",\"pdbx_ordinal\":2}],\"cell\":{\"Z_PDB\":2,\"angle_alpha\":90.0,\"angle_beta\":90.77",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "RCSB Protein Data Bank",
+        "field": "health",
+        "holds": "3D structures of proteins and nucleic acids",
+        "url": "https://data.rcsb.org/rest/v1/core/entry/1crn",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"audit_author\":[{\"name\":\"Hendrickson, W.A.\",\"pdbx_ordinal\":1},{\"name\":\"Teeter, M.M.\",\"pdbx_ordinal\":2}],\"cell\":{\"Z_PDB\":2,\"angle_alpha\":90.0,\"angle_beta\":90.77",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "RCSB Protein Data Bank",
+        "url": "https://data.rcsb.org/rest/v1/core/entry/1crn",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "ChEMBL",
+      "url": "https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 3815,
+        "witness": "{\"molecules\": [{\"atc_classifications\": [], \"availability_type\": -1, \"biotherapeutic\": null, \"black_box_warning\": 0, \"chemical_probe\": 0, \"chirality\": -1, \"cross",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "ChEMBL",
+        "field": "health",
+        "holds": "Bioactive molecules and their measured activities",
+        "url": "https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 3815,
+        "witness": "{\"molecules\": [{\"atc_classifications\": [], \"availability_type\": -1, \"biotherapeutic\": null, \"black_box_warning\": 0, \"chemical_probe\": 0, \"chirality\": -1, \"cross",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "ChEMBL",
+        "url": "https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/aspirin/property/MolecularFormula/JSON",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 129,
+        "witness": "{ \"PropertyTable\": { \"Properties\": [ { \"CID\": 2244, \"MolecularFormula\": \"C9H8O4\" } ] } }",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "PubChem",
+        "field": "health",
+        "holds": "Chemical compounds and their properties",
+        "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/aspirin/property/MolecularFormula/JSON",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 129,
+        "witness": "{ \"PropertyTable\": { \"Properties\": [ { \"CID\": 2244, \"MolecularFormula\": \"C9H8O4\" } ] } }",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "PubChem",
+        "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/aspirin/property/MolecularFormula/JSON",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Ensembl",
+      "url": "https://rest.ensembl.org/info/ping?content-type=application/json",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 10,
+        "witness": "{\"ping\":1}",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Ensembl",
+        "field": "health",
+        "holds": "Genomes and gene annotations",
+        "url": "https://rest.ensembl.org/info/ping?content-type=application/json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 10,
+        "witness": "{\"ping\":1}",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Ensembl",
+        "url": "https://rest.ensembl.org/info/ping?content-type=application/json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "NHANES-style CDC WONDER",
+      "url": "https://wonder.cdc.gov/",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "text/html",
+        "bytes": 4000,
+        "witness": "<!DOCTYPE html> <html lang=\"en-us\" class=\"cdc-2022 theme-blue cdc-page-type-content cdc-tp5\"> <head> <meta charset=\"utf-8\" /> <title>CDC WONDER</title> <meta ch",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "NHANES-style CDC WONDER",
+        "field": "health",
+        "holds": "US population health statistics (query form, not API)",
+        "url": "https://wonder.cdc.gov/",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "text/html",
+        "bytes": 4000,
+        "witness": "<!DOCTYPE html> <html lang=\"en-us\" class=\"cdc-2022 theme-blue cdc-page-type-content cdc-tp5\"> <head> <meta charset=\"utf-8\" /> <title>CDC WONDER</title> <meta ch",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "NHANES-style CDC WONDER",
+        "url": "https://wonder.cdc.gov/",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Crossref",
+      "url": "https://api.crossref.org/works?rows=1&query=malaria",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 1139,
+        "witness": "{\"status\":\"ok\",\"message-type\":\"work-list\",\"message-version\":\"1.0.0\",\"message\":{\"facets\":{},\"total-results\":89500,\"items\":[{\"indexed\":{\"date-parts\":[[2024,9,6]],",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Crossref",
+        "field": "scholarly",
+        "holds": "DOIs and metadata for 150M+ published works",
+        "url": "https://api.crossref.org/works?rows=1&query=malaria",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 1139,
+        "witness": "{\"status\":\"ok\",\"message-type\":\"work-list\",\"message-version\":\"1.0.0\",\"message\":{\"facets\":{},\"total-results\":90019,\"items\":[{\"indexed\":{\"date-parts\":[[2024,9,6]],",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Crossref",
+        "url": "https://api.crossref.org/works?rows=1&query=malaria",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "OpenAlex",
+      "url": "https://api.openalex.org/works?per-page=1&search=malaria",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"meta\": {\"count\": 609819, \"db_response_time_ms\": 104, \"page\": 1, \"per_page\": 1, \"groups_count\": null, \"x_query\": {\"oql\": \"works where full text has (malaria)\",",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "OpenAlex",
+        "field": "scholarly",
+        "holds": "The scholarly graph: works, authors, institutions",
+        "url": "https://api.openalex.org/works?per-page=1&search=malaria",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"meta\": {\"notice\": \"No API key, so this request shares one free daily budget ($0.10) with everyone on your network's IP address. Get a free key with its own $1",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "OpenAlex",
+        "url": "https://api.openalex.org/works?per-page=1&search=malaria",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "arXiv",
+      "url": "https://export.arxiv.org/api/query?search_query=all:electron&max_results=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/atom+xml",
+        "bytes": 2938,
+        "witness": "<?xml version='1.0' encoding='UTF-8'?> <feed xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:arxiv=\"http://arxiv.org/schemas/atom\" xmlns=\"http://w",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "arXiv",
+        "field": "scholarly",
+        "holds": "Preprints in physics, maths, computing, biology",
+        "url": "https://export.arxiv.org/api/query?search_query=all:electron&max_results=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/atom+xml",
+        "bytes": 2938,
+        "witness": "<?xml version='1.0' encoding='UTF-8'?> <feed xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:arxiv=\"http://arxiv.org/schemas/atom\" xmlns=\"http://w",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "arXiv",
+        "url": "https://export.arxiv.org/api/query?search_query=all:electron&max_results=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Retraction Watch (Crossref)",
+      "url": "https://api.crossref.org/works?filter=update-type:retraction&rows=1&mailto=desi.s.amigo@gmail.com",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 2984,
+        "witness": "{\"status\":\"ok\",\"message-type\":\"work-list\",\"message-version\":\"1.0.0\",\"message\":{\"facets\":{},\"total-results\":75487,\"items\":[{\"indexed\":{\"date-parts\":[[2026,5,4]],",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Retraction Watch (Crossref)",
+        "field": "scholarly",
+        "holds": "Retractions, by Crossref update-type",
+        "url": "https://api.crossref.org/works?filter=update-type:retraction&rows=1&mailto=desi.s.amigo@gmail.com",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 2984,
+        "witness": "{\"status\":\"ok\",\"message-type\":\"work-list\",\"message-version\":\"1.0.0\",\"message\":{\"facets\":{},\"total-results\":76285,\"items\":[{\"indexed\":{\"date-parts\":[[2026,5,4]],",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Retraction Watch (Crossref)",
+        "url": "https://api.crossref.org/works?filter=update-type:retraction&rows=1&mailto=desi.s.amigo@gmail.com",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Semantic Scholar",
+      "url": "https://api.semanticscholar.org/graph/v1/paper/search?query=malaria&limit=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": false,
+          "browser_usable": false,
+          "claims_data": false,
+          "why_not": "did not answer",
+          "kind": "speed wall",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": false,
+          "browser_usable": false,
+          "claims_data": false,
+          "why_not": "did not answer",
+          "kind": "speed wall",
+          "cors": "absent"
+        }
+      },
+      "then": {
+        "http_status": 429,
+        "cors": "absent",
+        "content_type": "",
+        "bytes": 0,
+        "witness": "",
+        "error": "HTTP 429",
+        "throttled_then_answered": false,
+        "first_attempt_status": 429,
+        "name": "Semantic Scholar",
+        "field": "scholarly",
+        "holds": "Paper graph with citations (key now expected)",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/search?query=malaria&limit=1",
+        "advertised_key": true,
+        "ok": false,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 429,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 174,
+        "witness": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", ",
+        "error": "HTTP 429",
+        "throttled_then_answered": false,
+        "first_attempt_status": 429,
+        "name": "Semantic Scholar",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/search?query=malaria&limit=1",
+        "advertised_key": true,
+        "ok": false,
+        "browser_usable": false
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Open-Meteo forecast",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 320,
+        "witness": "{\"latitude\":52.52,\"longitude\":13.419998,\"generationtime_ms\":0.0324249267578125,\"utc_offset_seconds\":0,\"timezone\":\"GMT\",\"timezone_abbreviation\":\"GMT\",\"elevation\"",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Open-Meteo forecast",
+        "field": "earth",
+        "holds": "Hourly weather forecasts, no key, no account",
+        "url": "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 325,
+        "witness": "{\"latitude\":52.512604,\"longitude\":13.419517,\"generationtime_ms\":0.05555152893066406,\"utc_offset_seconds\":0,\"timezone\":\"GMT\",\"timezone_abbreviation\":\"GMT\",\"eleva",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Open-Meteo forecast",
+        "url": "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Open-Meteo air quality",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.52&longitude=13.41&current=pm2_5",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 306,
+        "witness": "{\"latitude\":52.5,\"longitude\":13.400002,\"generationtime_ms\":0.08308887481689453,\"utc_offset_seconds\":0,\"timezone\":\"GMT\",\"timezone_abbreviation\":\"GMT\",\"elevation\"",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Open-Meteo air quality",
+        "field": "earth",
+        "holds": "PM2.5, ozone and pollen by coordinate",
+        "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.52&longitude=13.41&current=pm2_5",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 306,
+        "witness": "{\"latitude\":52.5,\"longitude\":13.400002,\"generationtime_ms\":0.14066696166992188,\"utc_offset_seconds\":0,\"timezone\":\"GMT\",\"timezone_abbreviation\":\"GMT\",\"elevation\"",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Open-Meteo air quality",
+        "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.52&longitude=13.41&current=pm2_5",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "USGS earthquakes",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 976,
+        "witness": "{\"type\":\"FeatureCollection\",\"metadata\":{\"generated\":1789584971000,\"url\":\"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=1\",\"title\":\"USGS ",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "USGS earthquakes",
+        "field": "earth",
+        "holds": "Every instrumentally recorded earthquake",
+        "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 939,
+        "witness": "{\"type\":\"FeatureCollection\",\"metadata\":{\"generated\":1792235091000,\"url\":\"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=1\",\"title\":\"USGS ",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "USGS earthquakes",
+        "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "US National Weather Service",
+      "url": "https://api.weather.gov/points/39.7456,-97.0892",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/geo+json",
+        "bytes": 3928,
+        "witness": "{ \"@context\": [ \"https://geojson.org/geojson-ld/geojson-context.jsonld\", { \"@version\": \"1.1\", \"wx\": \"https://api.weather.gov/ontology#\", \"s\": \"https://schema.or",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "US National Weather Service",
+        "field": "earth",
+        "holds": "US forecasts and alerts (a User-Agent is required)",
+        "url": "https://api.weather.gov/points/39.7456,-97.0892",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/geo+json",
+        "bytes": 3928,
+        "witness": "{ \"@context\": [ \"https://geojson.org/geojson-ld/geojson-context.jsonld\", { \"@version\": \"1.1\", \"wx\": \"https://api.weather.gov/ontology#\", \"s\": \"https://schema.or",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "US National Weather Service",
+        "url": "https://api.weather.gov/points/39.7456,-97.0892",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "NASA APOD",
+      "url": "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "origin"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "origin"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "origin",
+        "content_type": "application/json",
+        "bytes": 1428,
+        "witness": "{\"date\":\"2026-09-16\",\"explanation\":\"Sometimes where Hubble finds darkness, Webb sees light. An example is today\\u2019s composite images of Messier 64 (M64), a n",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "NASA APOD",
+        "field": "space",
+        "holds": "Astronomy picture of the day (shared DEMO_KEY only)",
+        "url": "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",
+        "advertised_key": true,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "origin",
+        "content_type": "application/json",
+        "bytes": 1146,
+        "witness": "{\"date\":\"2026-10-17\",\"explanation\":\"Put on your red/blue glasses and float next to the jagged and double-lobed nucleus of Churyumov-Gerasimenko, also known as C",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "NASA APOD",
+        "url": "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",
+        "advertised_key": true,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "JPL Horizons",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27499%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27NO%27",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 310,
+        "witness": "{\"signature\":{\"source\":\"NASA/JPL Horizons API\",\"version\":\"1.2\"},\"error\":\"No output possible for request. Check MAKE_EPHEM or OBJ_DATA.; wldini(): error loading ",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "JPL Horizons",
+        "field": "space",
+        "holds": "Ephemerides for solar-system bodies",
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27499%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27NO%27",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 310,
+        "witness": "{\"error\":\"No output possible for request. Check MAKE_EPHEM or OBJ_DATA.; wldini(): error loading execution-control file.\",\"signature\":{\"version\":\"1.2\",\"source\":",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "JPL Horizons",
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27499%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27NO%27",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "confirmation": null
+    },
+    {
+      "name": "World Bank",
+      "url": "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 302,
+        "witness": "[{\"page\":1,\"pages\":66,\"per_page\":1,\"total\":66,\"sourceid\":\"2\",\"lastupdated\":\"2026-07-13\"},[{\"indicator\":{\"id\":\"NY.GDP.MKTP.CD\",\"value\":\"GDP (current US$)\"},\"coun",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "World Bank",
+        "field": "civic",
+        "holds": "Development indicators for every country",
+        "url": "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 302,
+        "witness": "[{\"page\":1,\"pages\":66,\"per_page\":1,\"total\":66,\"sourceid\":\"2\",\"lastupdated\":\"2026-10-08\"},[{\"indicator\":{\"id\":\"NY.GDP.MKTP.CD\",\"value\":\"GDP (current US$)\"},\"coun",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "World Bank",
+        "url": "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "US Census (ACS)",
+      "url": "https://api.census.gov/data/2021/acs/acs1?get=NAME,B01001_001E&for=state:06",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": false,
+          "why_not": "200 but the body says 'missing key'",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": false,
+          "why_not": "200 but the body says 'missing key'",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "text/html",
+        "bytes": 4000,
+        "witness": "<html style=\"font-size: 14px;\"> <head> <title>Missing Key</title> <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\"> <link rel=\"stylesheet\" type=\"text/css",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "US Census (ACS)",
+        "field": "civic",
+        "holds": "US demographic and economic tables",
+        "url": "https://api.census.gov/data/2021/acs/acs1?get=NAME,B01001_001E&for=state:06",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "text/html",
+        "bytes": 4000,
+        "witness": "<html style=\"font-size: 14px;\"> <head> <title>Missing Key</title> <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\"> <link rel=\"stylesheet\" type=\"text/css",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "US Census (ACS)",
+        "url": "https://api.census.gov/data/2021/acs/acs1?get=NAME,B01001_001E&for=state:06",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "REST Countries",
+      "url": "https://restcountries.com/v3.1/name/kenya?fields=name,capital,population",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": false,
+          "why_not": "200 but the body says '\"success\": false'",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": false,
+          "why_not": "200 but the body says '\"success\": false'",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 261,
+        "witness": "{ \"success\": false, \"data\": null, \"errors\": [ { \"message\": \"This API version has been deprecated. Please visit https://restcountries.com/docs/countries/legacy-a",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "REST Countries",
+        "field": "civic",
+        "holds": "Country facts: borders, capitals, populations",
+        "url": "https://restcountries.com/v3.1/name/kenya?fields=name,capital,population",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 261,
+        "witness": "{ \"success\": false, \"data\": null, \"errors\": [ { \"message\": \"This API version has been deprecated. Please visit https://restcountries.com/docs/countries/legacy-a",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "REST Countries",
+        "url": "https://restcountries.com/v3.1/name/kenya?fields=name,capital,population",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "GDELT",
+      "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=malaria&mode=artlist&maxrecords=1&format=json",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 286,
+        "witness": "{\"articles\": [ { \"url\": \"https://baijiahao.baidu.com/s?id=1871284133187723873\", \"url_mobile\": \"\", \"title\": \"\u8001\u631d\u759f\u75be\u9632\u6cbb\u53d6\u5f97\u9636\u6bb5\u6027\u6210\u6548\", \"seendate\": \"20260721T050000Z\", \"soc",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "GDELT",
+        "field": "civic",
+        "holds": "Global news events, updated every 15 minutes",
+        "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=malaria&mode=artlist&maxrecords=1&format=json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 504,
+        "witness": "{\"articles\": [ { \"url\": \"https://www.premiumtimesng.com/promoted/900077-malaria-preventable-killer-we-must-no-longer-ignore-by-nosimot-soneye.html\", \"url_mobile",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "GDELT",
+        "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=malaria&mode=artlist&maxrecords=1&format=json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "UN SDG API",
+      "url": "https://unstats.un.org/SDGAPI/v1/sdg/Indicator/List?pageSize=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "origin"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "origin"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "origin",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "[{\"goal\":\"1\",\"target\":\"1.1\",\"code\":\"1.1.1\",\"description\":\"Proportion of the population living below the international poverty line by sex, age, employment statu",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "UN SDG API",
+        "field": "civic",
+        "holds": "Sustainable-development goal indicators",
+        "url": "https://unstats.un.org/SDGAPI/v1/sdg/Indicator/List?pageSize=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "origin",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "[{\"goal\":\"1\",\"target\":\"1.1\",\"code\":\"1.1.1\",\"description\":\"Proportion of the population living below the international poverty line by sex, age, employment statu",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "UN SDG API",
+        "url": "https://unstats.un.org/SDGAPI/v1/sdg/Indicator/List?pageSize=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "FRED (US Federal Reserve)",
+      "url": "https://api.stlouisfed.org/fred/series?series_id=GDP&file_type=json",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": false,
+          "browser_usable": false,
+          "claims_data": false,
+          "why_not": "did not answer",
+          "kind": "key wall",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": false,
+          "browser_usable": false,
+          "claims_data": false,
+          "why_not": "did not answer",
+          "kind": "key wall",
+          "cors": "absent"
+        }
+      },
+      "then": {
+        "http_status": 400,
+        "cors": "absent",
+        "content_type": "",
+        "bytes": 0,
+        "witness": "",
+        "error": "HTTP 400",
+        "throttled_then_answered": false,
+        "name": "FRED (US Federal Reserve)",
+        "field": "civic",
+        "holds": "US economic time series (key required)",
+        "url": "https://api.stlouisfed.org/fred/series?series_id=GDP&file_type=json",
+        "advertised_key": true,
+        "ok": false,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 400,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 162,
+        "witness": "{\"error_code\":400,\"error_message\":\"Bad Request. Variable api_key is not set. Read https:\\/\\/fred.stlouisfed.org\\/docs\\/api\\/api_key.html for more information.\"}",
+        "error": "HTTP 400",
+        "throttled_then_answered": false,
+        "name": "FRED (US Federal Reserve)",
+        "url": "https://api.stlouisfed.org/fred/series?series_id=GDP&file_type=json",
+        "advertised_key": true,
+        "ok": false,
+        "browser_usable": false
+      },
+      "confirmation": null
+    },
+    {
+      "name": "USDA FoodData Central",
+      "url": "https://api.nal.usda.gov/fdc/v1/foods/search?query=apple&pageSize=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": false,
+          "browser_usable": false,
+          "claims_data": false,
+          "why_not": "did not answer",
+          "kind": "key wall",
+          "cors": "*"
+        },
+        "after": {
+          "answers": false,
+          "browser_usable": false,
+          "claims_data": false,
+          "why_not": "did not answer",
+          "kind": "key wall",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 403,
+        "cors": "*",
+        "content_type": "",
+        "bytes": 0,
+        "witness": "",
+        "error": "HTTP 403",
+        "throttled_then_answered": false,
+        "name": "USDA FoodData Central",
+        "field": "food",
+        "holds": "US food composition data (key required; DEMO_KEY throttled)",
+        "url": "https://api.nal.usda.gov/fdc/v1/foods/search?query=apple&pageSize=1",
+        "advertised_key": true,
+        "ok": false,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 403,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 133,
+        "witness": "{ \"error\": { \"code\": \"API_KEY_MISSING\", \"message\": \"No api_key was supplied. Get one at https://api.nal.usda.gov:443\" } }",
+        "error": "HTTP 403",
+        "throttled_then_answered": false,
+        "name": "USDA FoodData Central",
+        "url": "https://api.nal.usda.gov/fdc/v1/foods/search?query=apple&pageSize=1",
+        "advertised_key": true,
+        "ok": false,
+        "browser_usable": false
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Open Food Facts",
+      "url": "https://world.openfoodfacts.org/api/v2/product/737628064502.json",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"code\":\"0737628064502\",\"product\":{\"_id\":\"0737628064502\",\"_keywords\":[\"and\",\"asia\",\"beverage\",\"cereal\",\"food\",\"gluten\",\"include\",\"kit\",\"kitchen\",\"no\",\"noodle\",\"",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Open Food Facts",
+        "field": "food",
+        "holds": "Packaged food products, crowdsourced worldwide",
+        "url": "https://world.openfoodfacts.org/api/v2/product/737628064502.json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"code\":\"0737628064502\",\"product\":{\"_id\":\"0737628064502\",\"_keywords\":[\"and\",\"asia\",\"beverage\",\"cereal\",\"food\",\"gluten\",\"include\",\"kit\",\"kitchen\",\"no\",\"noodle\",\"",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Open Food Facts",
+        "url": "https://world.openfoodfacts.org/api/v2/product/737628064502.json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Wikipedia (REST)",
+      "url": "https://en.wikipedia.org/api/rest_v1/page/summary/Malaria",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 3050,
+        "witness": "{\"type\":\"standard\",\"title\":\"Malaria\",\"displaytitle\":\"<span lang=\\\"en\\\" dir=\\\"ltr\\\"><span class=\\\"mw-page-title-main\\\">Malaria</span></span>\",\"namespace\":{\"id\":0",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Wikipedia (REST)",
+        "field": "culture",
+        "holds": "Article summaries, every language",
+        "url": "https://en.wikipedia.org/api/rest_v1/page/summary/Malaria",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 2894,
+        "witness": "{\"type\":\"standard\",\"title\":\"Malaria\",\"displaytitle\":\"<span lang=\\\"en\\\" dir=\\\"ltr\\\"><span class=\\\"mw-page-title-main\\\">Malaria</span></span>\",\"namespace\":{\"id\":0",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Wikipedia (REST)",
+        "url": "https://en.wikipedia.org/api/rest_v1/page/summary/Malaria",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Wikidata",
+      "url": "https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q12156&format=json",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": false,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "absent"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"entities\":{\"Q12156\":{\"pageid\":13729,\"ns\":0,\"title\":\"Q12156\",\"lastrevid\":2542325629,\"modified\":\"2026-09-08T15:46:53Z\",\"type\":\"item\",\"id\":\"Q12156\",\"labels\":{\"it",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Wikidata",
+        "field": "culture",
+        "holds": "Structured facts behind Wikipedia",
+        "url": "https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q12156&format=json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "absent",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"entities\":{\"Q12156\":{\"pageid\":13729,\"ns\":0,\"title\":\"Q12156\",\"lastrevid\":2557614747,\"modified\":\"2026-10-16T08:34:12Z\",\"type\":\"item\",\"id\":\"Q12156\",\"labels\":{\"it",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Wikidata",
+        "url": "https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q12156&format=json",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": false
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Wikimedia On This Day",
+      "url": "https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/selected/09/16",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"selected\":[{\"text\":\"A lone gunman fatally shot twelve people and injured three others at the headquarters of the Naval Sea Systems Command in Washington, D.C.",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Wikimedia On This Day",
+        "field": "culture",
+        "holds": "What happened on a given date, from the record",
+        "url": "https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/selected/09/16",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 4000,
+        "witness": "{\"selected\":[{\"text\":\"A lone gunman fatally shot twelve people and injured three others at the headquarters of the Naval Sea Systems Command in Washington, D.C.",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Wikimedia On This Day",
+        "url": "https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/selected/09/16",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Open Library",
+      "url": "https://openlibrary.org/search.json?q=melville&limit=1",
+      "drift": {
+        "verdict": "unchanged",
+        "before": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        },
+        "after": {
+          "answers": true,
+          "browser_usable": true,
+          "claims_data": true,
+          "why_not": "",
+          "kind": "answered",
+          "cors": "*"
+        }
+      },
+      "then": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 3206,
+        "witness": "{\"numFound\":19144,\"start\":0,\"numFoundExact\":true,\"num_found\":19144,\"documentation_url\":\"https://openlibrary.org/dev/docs/api/search\",\"q\":\"melville\",\"offset\":nul",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Open Library",
+        "field": "culture",
+        "holds": "Bibliographic records for published books",
+        "url": "https://openlibrary.org/search.json?q=melville&limit=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "now": {
+        "http_status": 200,
+        "cors": "*",
+        "content_type": "application/json",
+        "bytes": 2852,
+        "witness": "{\"numFound\":19161,\"start\":0,\"numFoundExact\":true,\"num_found\":19161,\"documentation_url\":\"https://openlibrary.org/dev/docs/api/search\",\"q\":\"melville\",\"offset\":nul",
+        "error": null,
+        "throttled_then_answered": false,
+        "name": "Open Library",
+        "url": "https://openlibrary.org/search.json?q=melville&limit=1",
+        "advertised_key": false,
+        "ok": true,
+        "browser_usable": true
+      },
+      "confirmation": null
+    },
+    {
+      "name": "Gutendex (Project Gutenberg)",
+      "url": "https://gutendex.com/books?search=melville",
+      "drift": {
+        "verdict": "changed",
+        "before": {
+          "answers": false,
+          "browser_usable": false,
+          "claims_data": false,
+          "why_not": "did not answer",
+          "kind": "refused",
+          "cors": "absent"
+        },
+        "after": {
+          "answers": false,
+          "browser_usable": false,
+          "claims_data": false,
+          "why_not": "did not answer",
+          "kind": "bot wall",
+          "cors": "absent"
+        }
+      },
+      "then": {
+        "http_status": 403,
+        "cors": "absent",
+        "content_type": "",
+        "bytes": 0,
+        "witness": "",
+        "error": "HTTP 403",
+        "throttled_then_answered": false,
+        "name": "Gutendex (Project Gutenberg)",
+        "field": "culture",
+        "holds": "Metadata for 70k+ public-domain books",
+        "url": "https://gutendex.com/books?search=melville",
+        "advertised_key": false,
+        "ok": false,
+        "browser_usable": false
+      },
+      "now": {
+        "http_status": 403,
+        "cors": "absent",
+        "content_type": "text/html",
+        "bytes": 4000,
+        "witness": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA",
+        "error": "HTTP 403",
+        "throttled_then_answered": false,
+        "name": "Gutendex (Project Gutenberg)",
+        "url": "https://gutendex.com/books?search=melville",
+        "advertised_key": false,
+        "ok": false,
+        "browser_usable": false
+      },
+      "confirmation": "reproduced (403 then 403)",
+      "flaked": 403
+    }
+  ],
+  "snapshot": "research/source-drift/20261017T110522Z.json"
+}
