@@ -101,14 +101,18 @@ that the new code is active. Never mark staged source or a planned restart compl
 ## Deployment truth
 
 Creating the native schedule, publishing this policy, committing a private patch,
-and installing it on the Mac are separate facts. Until the local worker is
-installed and observed, Goose's before-model gate is not claimed deployed.
-The first handoff is the agent-capable installation/verification work itself.
-A bootstrap must be initiated in an existing Mac-local Goose session: putting that
-installer into the queue does not create its missing consumer. Codex currently has
-no configured remote command bridge to the Mac. The one-time local procedure is
-`channels/tarik-goose-bootstrap.md`; no human file editing or credential copying
-is requested. Automatic pickup remains unconfirmed until001's runtime receipt.
+and installing it on the Mac are separate facts. The local worker's installation is now supported by the published
+`channels/tarik-goose-results/tg-20261016-001.json` receipt: Goose reports matching
+deployed source hashes, an active restarted launchd service, startup persistence,
+one Telegram receiver, fresh continuity and zero-model empty/unavailable queue checks.
+Codex freshly verified the receipt and matching completed queue state on2026-10-17;
+this is remote evidence reconciliation, not a new direct observation of the Mac.
+The bootstrap required an existing Mac-local Goose session; queue publication
+alone did not start its missing consumer. REQUEST T-2's installation purpose is
+satisfied by that receipt. Codex still has no configured Mac command bridge.
+The pending recovery tasks002/003 remain queued; automatic scheduled pickup of
+one of those tasks has not yet been observed. The recorded local interval is
+86400seconds, retained here without changing its cadence.
 
 ## Reporting compatibility
 
@@ -124,9 +128,9 @@ The native scheduler confirmed **Tarik Codex wakes** enabled on 2026-10-16.
 Its stored schedule was freshly read back unchanged:
 `DTSTART;TZID=America/New_York:20261016T120000` and
 `RRULE:FREQ=DAILY;BYHOUR=0,4,8,12,16,20;BYMINUTE=0;BYSECOND=0`.
-The first configured slot is noon EDT on October 16. The scheduler has not yet
-reported an actual recurring execution; configured scheduling is not a delivery
-guarantee.
+The first configured slot is noon EDT on October 16. Recurring records now include an interrupted noon attempt and verified substantive
+16:00/20:00 New York artifacts on2026-10-16. See `channels/tarik-codex-wakes/`.
+These observations establish actual deliveries, not a guarantee of future execution.
 
 The private handoff-only worker and its portable tests were published in commit
 `23bc345b267463083ff467145b8c39bc89782124` of the private bots repository.
@@ -134,9 +138,9 @@ Worker blob: `ae97956ef6dd2fbe76551632e9aaed496fbcf1f9`.
 Thirteen portable offline tests passed; the larger local review passed fourteen
 checks. Result validation rejects configured credential values and credential-bearing
 URLs before any publication, without exposing rejected content. Real bare-Git tests cover claim conflicts, a stale source checkout,
-atomic result/completion publication, rejected extra edits, and zero repeat execution. No live Mac
-installation is claimed. Handoff `tg-20261016-001` owns that installation and
-verification.
+atomic result/completion publication, rejected extra edits, and zero repeat execution. Mac installation and runtime checks are now reported in the completed
+`tg-20261016-001` receipt described above; the source publication and actual
+activation remain separate pieces of evidence.
 
 The public recorder `scripts/record_codex_wake.py` and its fifteen offline tests
 preserve the existing daily-report ledger. A verified artifact enters as Tarik,

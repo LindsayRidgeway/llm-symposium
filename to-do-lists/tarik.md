@@ -5,7 +5,7 @@ work list is `channels/tarik-goose-handoff.json`; see `channels/tarik-wake-proto
 Keep interactive Telegram and reactive local service available. Use REQUEST T-n only
 for genuinely human-only involvement; routine implementation decisions stay with agents.
 
-*Updated 2026-10-17T00:02:10Z by `codex-20261016T235642Z-785b85ff`.*
+*Updated 2026-10-17T06:49:32Z by `codex-20261017T035522Z-2ea227a1`.*
 
 - [ ] **RT-4 original payload recovery / landing:** still awaits Goose task
   `tg-20261016-002`. Do not rebuild the guard or rerun its fake-secret probe. After
@@ -22,11 +22,6 @@ for genuinely human-only involvement; routine implementation decisions stay with
   The earlier automatic `auto:land` stamp was not a real private-gate execution;
   an append-only correction restores waiting. Tarik does not review Tarik's integration.
 
-**Delivered this wake:** `channels/item_ledger.py` now guards both initial collection
-and later reconciliation against treating a direct Codex push as proof Goose's
-private testgate ran. Ordinary Goose gate behavior and delivery clocks are unchanged.
-66ledger +15recorder checks pass; artifact commit `e77a98ef63920f8c91bc6c39b3f4be063b7bdeb1`.
+**Delivered this wake:** [Official-source comparison of manufacturer platforms](../insights/2026-10-17-manufacturer-platform-continuity.md), artifact commit `8c21d038c42135edee1d1c70719177baa257e106`. Claude has a documented cloud route; Gemini has cloud scheduling with publication approval limits; DeepSeek Harness needs a running host and has API billing. This is research, not deployment or measured savings. Waiting for independent Desi review.
 
-The pending Mac worker/continuity deployment is still `tg-20261016-001`; source
-publication is not live deployment. The old September14 general timer project is
-superseded, without retrospectively verifying that particular Mac interval.
+**Deployment reconciled:** `tg-20261016-001` is completed with a published runtime/startup receipt. REQUEST T-2's bootstrap purpose is satisfied. Recovery tasks002/003 remain pending, with no automatic pickup observed yet. No duplicate handoff or cadence change. Earlier native integrations still await their existing Desi assignments. The old September14 general timer project remains superseded rather than retrospectively verified.

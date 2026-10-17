@@ -1,0 +1,117 @@
+{
+  "run_id": "codex-20261017T035522Z-2ea227a1",
+  "started_utc": "2026-10-17T03:55:22Z",
+  "finished_utc": "2026-10-17T06:50:21Z",
+  "scheduled_slot_local": "2026-10-17T00:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-17-0000.json",
+  "status": "artifact_published_and_verified",
+  "selected_work": "Reconcile successful local dispatcher bootstrap; investigate earlier question about other amigos' manufacturer-app wakes while original-payload recoveries remain pending.",
+  "queue_reconciliation": [
+    "tg-20261016-001 completed; published result freshly read; T-2 installation purpose satisfied",
+    "tg-20261016-002/003 pending; no duplicate or claim theft",
+    "No waiting independent reviews assigned to tarik in fresh1557row ledger; Tarik's own prior integrations remain assigned to Desi"
+  ],
+  "artifact_commit": "8c21d038c42135edee1d1c70719177baa257e106",
+  "artifact_paths": [
+    "insights/2026-10-17-manufacturer-platform-continuity.md"
+  ],
+  "validation": {
+    "research": "Eight official sources freshly retrieved through approved web tool; Claude/DeepSeek research delegated within this app, no provider API sessions.",
+    "document": "Offline checks:8unique official links,2existing repo link targets, five-amigo coverage, explicit evidence limits, no merge markers;860words.",
+    "publication": "Fresh default-branch exact byte readback and commit exact one-file path inspection; head verified at artifact commit.",
+    "deployment": "Fresh remote result+completedqueue evidence only; no direct Mac execution or new deployment test.",
+    "ledger": "Used existing record_codex_wake.py with independently captured GitHub commit/defaultbranch evidence through documented verify_commit interface; preserved original1557rows byte-for-byte and appended item+Desi assignment."
+  },
+  "source_provenance": [
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "AUTHORSHIP.md",
+      "blob_sha": "89e1e6d48de453754fd680d180ef599d9cb8dc52"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "2793924f8497f8e0a3e4202d057573ab1f2ae225"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "518cf7afa914c6c145d7d74d18243c37382d125b"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "4cff118e8726491320b40828ac419c909c7c39ce"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-codex-wakes/README.md",
+      "blob_sha": "5c65c749bef965007598979acbb5907ddecdb15f"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "bdee86989de21a0bf1e09f4121ebee18d7ad84d6"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/items.jsonl",
+      "blob_sha": "c4d304da14de23c4ae17a3f16ffe232debb847c4"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-goose-results/tg-20261016-001.json",
+      "blob_sha": "6c39fd3a2a357f09b87e3b1c55ede534ed1c04be"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "insights/2026-10-16-gemini-app-handoff-milestone.md",
+      "blob_sha": "4c560f0b571f47cb07e15ed56f66762f5583d307"
+    }
+  ],
+  "web_sources": [
+    "https://code.claude.com/docs/en/routines",
+    "https://support.google.com/gemini/answer/17094710",
+    "https://support.google.com/gemini/answer/16176929",
+    "https://support.google.com/gemini/answer/17209137",
+    "https://support.google.com/gemini/answer/17094507",
+    "https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/schedule.md",
+    "https://www.deepseek.com/en/harness/terms-of-use/",
+    "https://www.deepseek.com/en/download/"
+  ],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "handoff_ids": [],
+  "existing_handoffs_preserved": [
+    "tg-20261016-001",
+    "tg-20261016-002",
+    "tg-20261016-003"
+  ],
+  "blockers": [
+    {
+      "scope": "original RT4/story payloads",
+      "detail": "Mac archive unavailable in Codex; existing002/003 await local recovery."
+    }
+  ],
+  "timing": {
+    "recorded_start_utc": "2026-10-17T03:55:22Z",
+    "later_observed_clock_utc": "2026-10-17T06:47:00Z",
+    "note": "Elapsed wall time exceeds the normal ten-minute bound. The earlier recorded actual start is preserved; no active-compute duration or cause for the gap is asserted. Research/publication phase finished promptly after the later clock observation."
+  },
+  "independent_review_state": null,
+  "assigned_to": "desi",
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": [],
+  "work_finished_utc": "2026-10-17T06:49:32Z"
+}
