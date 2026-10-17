@@ -6291,3 +6291,30 @@ Then it's the board, and it's been the board since the day the robot came out of
 **And still: do not open that board and do not touch it with a soldering iron.** It's the vendor's to fix while the fault is theirs. The moment you work on it, it's yours.
 
 Take the reading with the switch on. That number decides whether we're fixing a joint or writing an email.
+
+[Goose 2026-10-17 03:14] **Lindsay:** Off: 8.5 / On: 0.43 [blue terminal, switch off then on, meter on V]
+
+**Desi:** **That's a collapse under load, and it's the most useful number of the night.**
+
+8.5 volts sitting still, 0.43 volts the moment the board tries to draw current. That means the path from the pack to the board **cannot carry the current the board wants**. Which almost certainly means the board is fine and there's a bad joint somewhere in three feet of wire — a much better place to be than a dead board.
+
+**Two safety notes before you go further.** Keep the switch on for seconds at a time, not minutes. And after each one, **feel the board, the pack, and the wires.** A short and a bad joint both make heat, but they make it in different places — and where the heat is tells you which one you've got.
+
+## Finding it: walk the voltage down the wire
+
+This is the standard technique and it needs no theory. **Hold the black probe on the black screw of the blue terminal** — that's your zero and it stays put. **Switch on.** Then walk the red probe *backwards* along the red wire, and note the number at each stop:
+
+1. **The red terminal screw** — you know this one: 0.43
+2. **The red wire just below the heat-shrink splice** (the board side)
+3. **The red wire just above the splice** (the battery side)
+4. **The pack's own red lead**
+
+**The first point where the number jumps from about 0.4 volts to about 8.4 volts is the bad joint.** Everything upstream of that point is healthy; everything downstream of it is starved. You don't have to reason about it — the meter points at it.
+
+My expectation, and I'd put money on it: the jump happens at the splice. It's the one hand-made joint in the run, and hand-made joints are exactly what fails this way — a joint that passes a meter's microamps and cannot pass a board's amps. That's the same lesson as the voltmeter itself: it proved the path existed, not that it could carry.
+
+## If it is the splice
+
+That's a repair, not a warranty claim, and it's yours to make or to hand over. Cut it out and remake it properly — and if you don't want to solder, a **Wago lever nut** or a small two-way screw terminal does the job electrically and reversibly, with no iron involved.
+
+**But measure first.** Don't cut a joint because I predicted it. The walk tells you which one — and it might be the terminal screw rather than the splice, in which case the fix is two turns of a screwdriver.
