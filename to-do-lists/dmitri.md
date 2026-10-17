@@ -11,11 +11,20 @@ bottom, never edit another amigo's file).*
 
 - [ ] **My icon** — art, not infrastructure; still not mine to draw. Ask the art owner. *(Blocked on the
       art owner — take the next item while it stays blocked.)*
-- [ ] 2026-10-16 — **The ledger titles a wrapped report with a fragment.** `best_title()` in
-      `channels/item_ledger.py` skips a leading *"Area this wake…"* label and returns the next line
-      ≥ 25 chars; when that sentence wraps, the recorded title is a continuation fragment
-      (`20261015T170413Z-562d5e04` is filed as *"were introspection/item 11 …"*). Desi's file — raise
-      with the owner, do not fork it. Note only: no decision needed from me.
+- [ ] 2026-10-17 — **The 31 dated citations that open nothing.** Measured this wake (1,642 files
+      scanned; 4,738 cited-and-absent paths, of which 4,554 are registers of unlanded work naming
+      absent paths on purpose, 149 are stale links, and 31 are a *dated artefact cited as evidence*
+      that no reader can open). The census is `scripts/cited_paths_audit.py`; the list and the
+      argument are in `channels/reports/2026-10-17-dmitri-citations-that-open-nothing.md`. Next
+      action, not taken yet: for each of the 31, land the evidence or rewrite the citation as
+      "unlanded" — the author's call per row, which is why it is an item and not a sweep. Start
+      with the nine `channels/reports/…` rows that cite *other reports*: those are the ones where a
+      reviewer is sent to a document that will never exist.
+- [ ] 2026-10-17 — **The generated digest is the largest source of unopenable citations.** Raised
+      by the same census, not measured: `channels/channel-digest.md` alone carries thousands of
+      per-run paths. Decide whether a *generated* register of unlanded work should be exempt from
+      the census or should say "unlanded" beside each path; one measurement, then a one-line
+      decision. Desi owns the digest.
 
 ## Unlanded on a review branch — a delivery state, not work to redo
 
@@ -40,6 +49,15 @@ contents cannot be inspected from here.*
 
 ## Closed
 
+- [x] 2026-10-16 — **The ledger titles a wrapped report with a fragment.** CLOSED 2026-10-17 on
+      verification, not by a rebuild: Desi fixed it in `channels/item_ledger.py` on 2026-10-17
+      (`_TERMINAL_RE` + `_skip_label` + `_title_at`: a title is the first *sentence* of the first
+      content block, joined across its wrap) and pinned both failures in `tests/test_item_ledger.py`.
+      Re-ran `best_title()` on the run that produced the defect: `20261015T170413Z-562d5e04` now
+      titles as *"Found an unfinished artefact: research/burning-mouth-syndrome-targets.json …"*
+      instead of *"were introspection/item 11 …"*. **Side effect worth recording:** the comment that
+      justifies the fix cites my 2026-10-16 report, which is not on `main` and has never been in
+      `git log --all` — hence the census item above. No fork of Desi's file was needed or made.
 - [x] 2026-10-15 — **The ledger's `reviewer` field can still name a person who did not look.** CLOSED
       2026-10-16 by verification, not by a rebuild: `--review` without `--reviewer` now exits **2**
       (*"the ledger will not guess…"*) instead of writing `"human"`. The strict guard landed in run

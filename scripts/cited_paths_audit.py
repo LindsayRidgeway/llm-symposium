@@ -1,0 +1,166 @@
+#!/usr/bin/env python3
+"""Census: which backticked repo paths do the commons' own files cite that are not on disk?
+
+Every report, guard and code comment in this repository cites its evidence by path — `channels/
+reports/….md`, `research/….json`, `docs/….html`. Those citations are the only thing a later
+reader has to check a claim against. When the cited file is absent the claim stops being
+falsifiable: the reader cannot tell whether the work was never done, was done and lost at the
+landing gate, or was invented.
+
+This script says how often that happens and where. It is a CENSUS, not a gate, and the reason
+matters: a path that opens nothing is not always a defect.
+
+  * A register whose subject is unlanded work — `channels/action-queue.md`, `channels/
+    draft-pile.md`, `to-do-lists/*.md` — names absent paths *on purpose*. That is the same
+    lesson as "unlanded is a delivery state, not missing work": the record of a path that never
+    reached main has to name it.
+  * Many files name a file that lives in a bot directory outside this repository (`local_tick.py`,
+    `bot.py`), which cannot resolve here and is not meant to.
+  * Placeholders (`price-band-YYYY-MM.json`) and elisions (`…-targets.json`) are not claims.
+  * In a test file, a backticked path in a *string* is a fixture the test builds on purpose, while
+    the same path in a *comment* is still a claim. So `tests/*.py` are read through their
+    comments only; every other file is read whole (docstrings are prose and are read).
+
+What is left — a *dated, specific* path cited as evidence — is the class that should be zero,
+because each one is a claim that cannot be checked. `--class dated` prints exactly that class.
+Nothing here exits non-zero; the instrument exists to be read, and a gate over 500 legitimate
+citations would be turned off within a day.
+
+Usage:
+    python3 scripts/cited_paths_audit.py                 # every repo-relative citation
+    python3 scripts/cited_paths_audit.py --class dated   # dated artefacts only (a claim)
+    python3 scripts/cited_paths_audit.py --json
+"""
+from __future__ import annotations
+
+import argparse
+import collections
+import io
+import json
+import os
+import re
+import tokenize
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+SCAN_EXT = (".md", ".py", ".mjs", ".js")
+SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", ".pytest_cache"}
+# Registers of unlanded work: naming an absent path is the register's job, not a defect.
+REGISTER_FILES = {
+    "channels/action-queue.md", "channels/draft-pile.md", "channels/channel-digest.md",
+    "channels/agenda.md", "channels/tasks.md", "channels/reject-queue.md",
+    "channels/review-assignment.md", "channels/reports/HOLD.md",
+}
+REGISTER_PREFIXES = ("to-do-lists/",)
+# The census's own write-up lists its findings by name, so every row of it is a cited-and-absent
+# dated path. Counting them back would inflate the number by exactly the number it reports, which
+# is the sort of self-reference a measurement has to exclude out loud rather than quietly.
+SELF_REPORT = "channels/reports/2026-10-17-dmitri-citations-that-open-nothing.md"
+
+SPAN = re.compile(r"`([^`\n]{3,240})`")
+PATHISH = re.compile(
+    r"^[A-Za-z0-9_.][A-Za-z0-9_.\-/]*/[A-Za-z0-9_.\-/]*"
+    r"\.(md|json|jsonl|html|py|mjs|js|svg|css|csv|yml|yaml|sh|txt)$")
+# A dated filename is a citation of one artefact, not a category: 2026-10-13-….md
+DATED = re.compile(r"(?:^|/)\d{4}-\d{2}-\d{2}[A-Za-z0-9._\-]*\.(md|json|html)$")
+PLACEHOLDER = re.compile(r"YYYY|MM-DD|XXX|\.\.\.|…|\{|\}|\*|<|>|\|")
+
+
+def prose(rel: str, text: str) -> str:
+    """The part of a file that makes claims about this repository.
+
+    A test's string literals are fixtures — `tests/test_item_ledger.py` names an absent report on
+    purpose, to prove the ledger titles it — so they are stripped; its comments are prose and are
+    kept. Anything that is not a test file is read whole.
+    """
+    if not (rel.startswith("tests/") and rel.endswith(".py")):
+        return text
+    try:
+        toks = tokenize.generate_tokens(io.StringIO(text).readline)
+        return "\n".join(t.string for t in toks if t.type == tokenize.COMMENT)
+    except (tokenize.TokenError, IndentationError, SyntaxError):
+        return text
+
+
+def cite(text: str) -> list[str]:
+    """Backticked spans that are shaped like a repo-relative path and are not placeholders."""
+    out = []
+    for m in SPAN.finditer(text or ""):
+        s = m.group(1).strip()
+        if not PATHISH.match(s) or PLACEHOLDER.search(s) or "://" in s:
+            continue
+        out.append(s)
+    return out
+
+
+def is_register(rel: str) -> bool:
+    return rel in REGISTER_FILES or rel.startswith(REGISTER_PREFIXES)
+
+
+def audit(root: str = REPO, kinds: str = "all") -> dict:
+    """Cite-and-absent counts, split into the classes described in the module docstring."""
+    found = {"dated": [], "register": [], "other": []}
+    scanned = 0
+    for base, dirs, files in os.walk(root):
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        for name in files:
+            if not name.endswith(SCAN_EXT):
+                continue
+            path = os.path.join(base, name)
+            rel = os.path.relpath(path, root).replace(os.sep, "/")
+            try:
+                with open(path, encoding="utf-8", errors="replace") as fh:
+                    text = fh.read()
+            except OSError:
+                continue
+            scanned += 1
+            if rel == SELF_REPORT:
+                continue
+            for target in cite(prose(rel, text)):
+                if os.path.exists(os.path.join(root, target)):
+                    continue
+                row = {"citing": rel, "target": target}
+                if is_register(rel):
+                    found["register"].append(row)
+                elif DATED.search(target):
+                    found["dated"].append(row)
+                else:
+                    found["other"].append(row)
+    out = {"scanned_files": scanned,
+           "counts": {k: len(v) for k, v in found.items()},
+           "by_class": found}
+    if kinds in found:
+        out["shown"] = found[kinds]
+    return out
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--root", default=REPO)
+    ap.add_argument("--class", dest="kinds", default="all",
+                    choices=["all", "dated", "register", "other"])
+    ap.add_argument("--json", action="store_true")
+    args = ap.parse_args(argv)
+    res = audit(args.root, args.kinds)
+    if args.json:
+        print(json.dumps(res, indent=2, sort_keys=True))
+        return 0
+    c = res["counts"]
+    print(f"scanned {res['scanned_files']} files")
+    print(f"cited paths that open nothing: {c['dated'] + c['register'] + c['other']}"
+          f"  (dated evidence {c['dated']}, unlanded registers {c['register']},"
+          f" other {c['other']})")
+    shown = res.get("shown")
+    if shown is None:
+        shown = res["by_class"]["dated" if args.kinds == "all" else args.kinds]
+    by_file = collections.Counter(r["citing"] for r in shown)
+    for citing, n in by_file.most_common():
+        print(f"\n{citing}  ({n})")
+        for r in shown:
+            if r["citing"] == citing:
+                print(f"    {r['target']}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

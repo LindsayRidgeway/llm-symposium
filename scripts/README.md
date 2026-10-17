@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*83 scripts, generated from the tree, not by hand.*
+*90 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -17,17 +17,21 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-13 | [Second-population arm for agenda item 32 (affective pain neuromodulation).](affective_pain_second_population.py) |
 | 2026-10-10 | [Filtered VNS arm for agenda item 32 (affective pain neuromodulation).](affective_pain_vns_filtered.py) |
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
+| 2026-10-17 | [Who the git record says wrote the commons' work — an audit, not a policy.](authorship_audit.py) |
 | 2026-10-11 | [Which of the commons' bodies are actually up, on the machine that runs them.](bodies_status.py) |
 | 2026-09-19 | [scripts/build_music_pages.py](build_music_pages.py) |
 | 2026-10-16 | [The burn — what the autonomous runner actually spends, measured from its own run records.](burn_ledger.py) |
 | 2026-09-12 | [Counterpoint checker for the Music Conservatory (docs/music/).](check-counterpoint.py) |
 | 2026-09-14 | [Lead-sheet checker for the Music Conservatory (docs/music/).](check-leadsheet.py) |
 | 2026-09-13 | [Check a queued Markdown mission's measurable contract, not its intellectual quality.](check_autonomous_mission.py) |
+| 2026-10-16 | [Find git conflict markers left in a working tree, before they are landed.](check_conflict_markers.py) |
 | 2026-09-29 | [Check that every relative link in the published site resolves to a file on disk.](check_docs_links.py) |
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
+| — | [Census: which backticked repo paths do the commons' own files cite that are not on disk?](cited_paths_audit.py) |
 | 2026-10-16 | [What a rented server would cost the commons — the check behind](cloud_price_survey.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
+| 2026-10-17 | [find a melody that can be sung as a three-voice round.](compose_dmitri_round.py) |
 | 2026-10-06 | [The daily item report — the human's request of 2026-10-06, revised by him on 2026-10-07.](daily_report.py) |
 | 2026-09-17 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
@@ -53,6 +57,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-15 | [Watch the four model hosts for the two things that can reach us unannounced:](hosts_watch.py) |
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |
+| 2026-10-17 | [Reconcile what a wake *said* it landed with what its landing commit *did*.](landing_reconcile.py) |
 | 2026-10-10 | [Why a landing is refused, path by path, with the one safe command for each.](landing_tree_report.py) |
 | 2026-10-14 | [Recover item-ledger rows a failed landing threw away, from the run's own patch.](ledger_row_recovery.py) |
 | 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
@@ -79,6 +84,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-25 | [Systematic screen of molecular targets in endometriosis across major biological axes.](screen_endometriosis.py) |
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
 | 2026-10-12 | [Agenda item 30, step (2): pull the four papers the seed names as open and turn](sleep_cognition_epilepsy_ied_fulltext.py) |
+| 2026-10-17 | [Re-measure the reachability catalogue, and report what CHANGED since it was measured.](source_drift.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-10-15 | [Preservation check: is the commons still in Software Heritage, and how fresh is the copy?](swh_status.py) |
 | 2026-10-16 | [Tarik-only cloud transport. Telegram sends only; mail sync records, never replies.](tarik_cloud_transport.py) |
@@ -92,6 +98,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
 | 2026-09-10 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
 | 2026-10-10 | [The review queue a wake opens with — W, each item named to a reviewer.](wake_review_queue.py) |
+| 2026-10-17 | [What a wake spends its actions on — measured from the runs' own transcripts.](wake_shape_audit.py) |
 | 2026-10-14 | [The works pipeline's own bookkeeping check: does each candidate's Status line tell the truth?](works_queue_status.py) |
 
 *(Generated by `scripts/gen_index.py`, owner: Desi, 2026-09-17. If a document is missing from this list, it is not committed.)*
