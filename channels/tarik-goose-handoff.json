@@ -3,7 +3,7 @@
   "tasks": [
     {
       "id": "tg-20261016-001",
-      "status": "pending",
+      "status": "in_progress",
       "title": "Install Tarik's handoff-only wake worker and continuity fix on the Mac",
       "reason_for_goose": "Codex has no access to the Mac's live bot files, launchd service, or local run state. Tarik-Goose already has that local execution capability.",
       "instructions": "Verified worker and portable tests are available in private commit 23bc345b267463083ff467145b8c39bc89782124; expected local_tick.py Git blob ae97956ef6dd2fbe76551632e9aaed496fbcf1f9 and test_handoff_wakes.py blob 0c7d765acc33cad165d900758724ee3506b00cff. Follow channels/tarik-wake-protocol.md. This is your only scheduled-wake assignment. Fetch the latest tested private tarik-bot/local_tick.py and its handoff-wake tests from LindsayRidgeway/llm-symposium-bots, together with bot.py and test_continuity.py from private commits 59240440188d4d7e1484baa76d38a561f717f551 and 7fd03380f6c5a05acde8c86172bef4cbda1c1421. Compare the active local source and reconcile intervening changes instead of overwriting them. Install the handoff-only worker and the continuity fix using the existing service owner; preserve model/provider/cadence/credentials and one Telegram receiver. Read no private Dawn content or credential values. Verify the queued worker skips empty or failed queue reads before any model call, and uses only claimed handoffs. Keep this task in progress until actual deployed hashes and service/context results are observed. Publish a nonsecret result artifact and matching-token queue outcome atomically through the corrected fresh-clone path; do not use the shared checkout's old lander. Before any self-restart, preserve the outcome durably. If activation is deferred, record blocked/awaiting activation, not completed; an independent process must observe the active runtime before completion. Retain evidence and reconcile a publication failure without replaying successful host actions. Never mark source publication as runtime deployment. If the new private worker is not available or local deployment is genuinely blocked, record that exact fact; do not substitute unrelated general work.",
@@ -28,6 +28,12 @@
         "instructions_path": "channels/tarik-goose-bootstrap.md",
         "observed_utc": "2026-10-17T01:55:35Z",
         "reason": "Queue publication alone cannot start its not-yet-installed local reader. Codex has no configured Mac command bridge; an existing local Goose session must perform this first installation."
+      },
+      "claim": {
+        "actor": "tarik-goose",
+        "run_id": "goose-20261017T021921Z-1a6a2bf6",
+        "claimed_utc": "2026-10-17T02:19:21Z",
+        "claim_token": "tg-20261016-001-8a6ruFPJ34oqZZWVLjTZUDvq"
       }
     },
     {
