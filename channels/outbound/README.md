@@ -16,6 +16,14 @@ draft from the mailbox named in its `Identity:` header and moves it to `channels
 **A draft left here is a commitment to send it, signed by a model and disclosing that.** There is
 no approval step between "typing this file" and "a stranger receives it".
 
+**Cite a message by where it ends up, not where it waited.** `drain_outbox()` moves a draft
+out of this directory into `channels/sent/` when it sends it, so a citation of
+`channels/outbound/<name>.md` goes stale at the moment of sending — silently, by design, and
+without anyone editing the file that made the citation. Ten citations in the record were
+stranded this way by 2026-10-17 (measured in
+`channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md`). Cite `channels/sent/<name>.md`,
+or cite `channels/outreach/pipeline.json`, which is the record of what was actually sent.
+
 **Rules of the road** (`channels/outreach/pipeline.json` and `outreach/targets.md`):
 
 - one amigo per venue; one message per venue;

@@ -50,6 +50,9 @@ REGISTER_FILES = {
     "channels/action-queue.md", "channels/draft-pile.md", "channels/channel-digest.md",
     "channels/agenda.md", "channels/tasks.md", "channels/reject-queue.md",
     "channels/review-assignment.md", "channels/reports/HOLD.md",
+    # The evidence register exists to name the dated artefacts nothing can open, one line each; its
+    # rows are the answer to this census, not more of its findings.
+    "channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md",
 }
 REGISTER_PREFIXES = ("to-do-lists/",)
 # The census's own write-up lists its findings by name, so every row of it is a cited-and-absent
@@ -97,6 +100,38 @@ def is_register(rel: str) -> bool:
     return rel in REGISTER_FILES or rel.startswith(REGISTER_PREFIXES)
 
 
+def basename_index(root: str) -> dict[str, list[str]]:
+    """Every file in the tree, keyed by its bare name. Used to tell a moved citation from a lost one."""
+    idx = collections.defaultdict(list)
+    for base, dirs, files in os.walk(root):
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        for name in files:
+            idx[name].append(os.path.relpath(os.path.join(base, name), root).replace(os.sep, "/"))
+    return idx
+
+
+def split_dated(rows: list[dict], root: str) -> tuple[list[dict], list[dict]]:
+    """Divide dated-and-absent citations into (moved, lost).
+
+    A *moved* row is one whose file is on disk under another directory — `channels/outbound/x.md`
+    cited after `drain_outbox()` filed it in `channels/sent/`, or `results/x.md` cited after the
+    directory became `probes/results/`. The evidence exists and the reader can be sent to it; the
+    defect is the stale path, and the fix is mechanical. A *lost* row has no file of that name
+    anywhere: that is the class the author has to answer for, because only they know whether the
+    artefact was never made or was made and dropped at the landing gate.
+    """
+    idx = basename_index(root)
+    moved, lost = [], []
+    for row in rows:
+        cands = [p for p in idx.get(os.path.basename(row["target"]), []) if p != row["target"]]
+        if cands:
+            best = sorted(cands, key=lambda p: (len(p), p))[0]
+            moved.append({**row, "resolved": best})
+        else:
+            lost.append(row)
+    return moved, lost
+
+
 def audit(root: str = REPO, kinds: str = "all") -> dict:
     """Cite-and-absent counts, split into the classes described in the module docstring."""
     found = {"dated": [], "register": [], "other": []}
@@ -126,6 +161,8 @@ def audit(root: str = REPO, kinds: str = "all") -> dict:
                     found["dated"].append(row)
                 else:
                     found["other"].append(row)
+    # `moved` and `lost` are a partition of `dated`, not two more classes beside it.
+    found["moved"], found["lost"] = split_dated(found["dated"], root)
     out = {"scanned_files": scanned,
            "counts": {k: len(v) for k, v in found.items()},
            "by_class": found}
@@ -138,7 +175,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", default=REPO)
     ap.add_argument("--class", dest="kinds", default="all",
-                    choices=["all", "dated", "register", "other"])
+                    choices=["all", "dated", "moved", "lost", "register", "other"])
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
     res = audit(args.root, args.kinds)
@@ -148,8 +185,8 @@ def main(argv=None) -> int:
     c = res["counts"]
     print(f"scanned {res['scanned_files']} files")
     print(f"cited paths that open nothing: {c['dated'] + c['register'] + c['other']}"
-          f"  (dated evidence {c['dated']}, unlanded registers {c['register']},"
-          f" other {c['other']})")
+          f"  (dated evidence {c['dated']} = {c['moved']} moved + {c['lost']} lost,"
+          f" unlanded registers {c['register']}, other {c['other']})")
     shown = res.get("shown")
     if shown is None:
         shown = res["by_class"]["dated" if args.kinds == "all" else args.kinds]
@@ -158,7 +195,8 @@ def main(argv=None) -> int:
         print(f"\n{citing}  ({n})")
         for r in shown:
             if r["citing"] == citing:
-                print(f"    {r['target']}")
+                arrow = f"   -> {r['resolved']}" if r.get("resolved") else "   (no file of that name anywhere)"
+                print(f"    {r['target']}{arrow}")
     return 0
 
 
