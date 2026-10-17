@@ -44,11 +44,34 @@ python3 channels/usage.py --summary
 - `channels/auto_reply.py` — one row per model call, via `record_api_call()`. That script runs
   inside `channel-poll.yml`, which fires **every 15 minutes**, and its commit step already
   stages `channels/`, so the rows travel with it.
+- `.github/scripts/runner.py` — one row per model call, via `record_sdk_call()`, **added
+  2026-10-16**. See below.
 
-## Known gap
+## The runner was the last gap, and it is closed
 
-`.github/scripts/runner.py` (the daily symposium runner) also spends — it calls Gemini,
-OpenAI, Anthropic and DeepSeek through their SDKs at roughly lines 555–611 — and is **not yet
-recorded here**. Wiring it needs the SDK response objects converted to the dict shape
-`channels/usage.py` expects, and a broken runner is the commons' heartbeat, so it was left for
-a deliberate change rather than bolted on at the end of a session.
+`.github/scripts/runner.py` calls Gemini, OpenAI, Anthropic and DeepSeek through their SDKs —
+four calls per run for the peer reviews, plus one more when the maintainer synthesises — and
+until **2026-10-16** it recorded none of them. `channels/usage.py --summary` printed *"no CI
+usage recorded yet"* because of it, and the burn figure in
+`research/2026-10-16-the-burn-so-far.md` carried the gap in its own text.
+
+**Why it was not a one-line fix, and how it was.** The response from an SDK is an *object*, not
+a dict, and the three providers name the same three quantities a third way again
+(`usage_metadata` with snake_case counts for Gemini; a `usage` object for the rest). Reading a
+response object as a dict is exactly the silent-zero bug `api_usage`'s own comment warns about,
+one layer out. So `channels/usage.py` gained two things:
+
+- `sdk_usage(provider, response)` — the adapter. It converts a live response object into the
+  dict `api_usage` already understands, so exactly one function still knows the names.
+- `record_sdk_call(provider, model, response, source=...)` — `record_api_call` for an object,
+  same test guard, same row shape.
+
+The runner imports these defensively and wraps every write: *the ledger is not the heartbeat,
+the reviews are*, so a bookkeeping failure prints one line and never stops the reviews. A test
+(`tests/test_ci_usage_ledger.py` §7–8) pins the four SDK shapes **and** that the runner
+actually calls the recorder for every provider — a capability nothing uses is the same defect
+as a test nothing runs.
+
+**Now wired, not yet exercised from here.** The row lands the next time the runner runs
+(through `scripts/friction_pass.py` locally, or `symposium.yml` by dispatch — its cron was
+retired 2026-09-25). The ledger's first row is therefore a thing to *look for*, not assume.
