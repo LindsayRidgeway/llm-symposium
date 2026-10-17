@@ -497,5 +497,94 @@ class AmbiguousJoinRefusalTests(unittest.TestCase):
                     else:
                         self.assertIn("Document retrieval unavailable", text)
 
+
+class CandidateDensityGateTests(unittest.TestCase):
+    def _run(self, density_counts, forms=None):
+        def epmc_count(query):
+            form = next((f for f in density_counts if '"' + f + '"' in query), "condition")
+            return density_counts[form]
+        with _StubNet(epmc_fn=epmc_count):
+            return ds.run("condition", [{"symbol": "SCN9A"}], use_ot=False, forms=forms)
+
+    def test_below_floor_keeps_observation_but_withholds_candidate_status(self):
+        result = self._run({"condition": 221})
+        self.assertEqual(result["unjoined"], ["SCN9A"])
+        self.assertEqual(result["density_qualified_unjoined"], [])
+        self.assertEqual(result["density_status"], "below_floor")
+        self.assertFalse(result["candidates_certified"])
+        self.assertIn("WITHHELD", result["targets"][0]["verdict"])
+        self.assertIn("BELOW DENSITY FLOOR", result["targets"][0]["verdict"])
+        self.assertNotIn("a candidate,", result["targets"][0]["verdict"])
+
+    def test_boundary_is_999_vs_1000_not_scientific_certification(self):
+        for count, qualified in [(999, False), (1000, True)]:
+            with self.subTest(count=count):
+                result = self._run({"condition": count})
+                self.assertEqual(result["density_qualified"], qualified)
+                self.assertEqual(result["density_qualified_unjoined"],
+                                 ["SCN9A"] if qualified else [])
+                self.assertFalse(result["candidates_certified"])
+
+    def test_failed_density_differs_from_known_zero_density(self):
+        failed = self._run({"condition": -1})
+        zero = self._run({"condition": 0})
+        self.assertEqual(failed["density_status"], "unknown")
+        self.assertEqual(zero["density_status"], "below_floor")
+        self.assertFalse(failed["density_qualified"])
+        self.assertIn("UNKNOWN", failed["targets"][0]["verdict"])
+        self.assertNotIn("saturates", failed["density_warning"])
+
+    def test_failed_form_prevents_an_unproven_below_floor_claim(self):
+        result = self._run({"condition": 221, "alternate": -1}, ["alternate"])
+        self.assertEqual(result["disease_papers_strict"], 221)
+        self.assertEqual(result["density_status"], "unknown")
+        self.assertFalse(result["density_strict_queries_complete"])
+        self.assertEqual([q["strict"] for q in result["density_queries"]], [221, -1])
+        self.assertEqual(result["density_qualified_unjoined"], [])
+
+    def test_successful_dense_form_proves_floor_despite_incomplete_coverage(self):
+        result = self._run({"condition": 1500, "alternate": -1}, ["alternate"])
+        self.assertEqual(result["density_status"], "meets_floor")
+        self.assertTrue(result["density_qualified"])
+        self.assertFalse(result["density_strict_queries_complete"])
+        self.assertEqual(result["density_qualified_unjoined"], ["SCN9A"])
+        self.assertFalse(result["candidates_certified"])
+
+    def test_gate_preserves_failed_control_joined_and_ambiguous_bands(self):
+        counts = {"ZERO": (0, 0), "JOINED": (100, 5), "AR": (100, 9),
+                  "FAILED": (-1, 0), "NULL": (0, 0)}
+        with _StubNet(any_fn=lambda n, f: counts[n][0],
+                      strict_fn=lambda n, f: counts[n][1], epmc_fn=lambda q: 221):
+            result = ds.run("condition", [{"symbol": s, "control": s == "NULL"}
+                                         for s in counts], use_ot=False)
+        self.assertEqual(result["unjoined"], ["ZERO"])
+        self.assertEqual(result["joined_in_title_or_abstract"], ["JOINED"])
+        self.assertEqual(result["ambiguous_unverified_joins"], ["AR"])
+        self.assertEqual((result["n_scored"], result["n_failed"], result["n_controls"]),
+                         (3, 1, 1))
+        self.assertEqual(result["density_qualified_unjoined"], [])
+        failed = next(r for r in result["targets"] if r["symbol"] == "FAILED")
+        self.assertIn("QUERY FAILED", failed["verdict"])
+        joined = next(r for r in result["targets"] if r["symbol"] == "JOINED")
+        self.assertIn("prior work", joined["verdict"])
+
+    def test_cli_labels_raw_zeros_and_density_qualification_separately(self):
+        import contextlib
+        import io
+        import tempfile
+        from unittest.mock import patch
+        result = self._run({"condition": 221})
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json") as target_file:
+            target_file.write("[]")
+            target_file.flush()
+            output = io.StringIO()
+            with patch.object(ds, "run", return_value=result), patch.object(
+                    ds.sys, "argv", ["disease_screen.py", "condition", target_file.name,
+                                     "--no-ot"]), contextlib.redirect_stdout(output):
+                self.assertEqual(ds.main(), 0)
+        self.assertIn("density status: below_floor", output.getvalue())
+        self.assertIn("density-qualified zero rows: (none)", output.getvalue())
+        self.assertIn("raw 0/0 observations", output.getvalue())
+
 if __name__ == "__main__":
     unittest.main()

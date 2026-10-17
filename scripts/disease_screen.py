@@ -67,6 +67,13 @@ exists to avoid. So: a row is *scored* only if both counts are real; unscored ro
 every band and named in `failed_queries`; the control check divides by what it actually scored; and
 `verdict(0, -1)` now says QUERY FAILED instead of offering a candidate.
 
+**4. Density qualification is separate from raw zeros.** A 0/0 row stays in the raw
+`unjoined` band below the corpus floor, but its candidate status is withheld. Only
+`density_qualified_unjoined` passes that necessary screening threshold. Per-form density
+counts distinguish an observed thin corpus from a failed query. Passing the floor is not
+scientific certification: `candidates_certified` remains false, and aliases, controls and
+the actual papers still need review.
+
 Usage:
     python3 scripts/disease_screen.py ENDOMETRIOSIS targets.json --out research/endo-screen.json
     python3 scripts/disease_screen.py "pudendal neuralgia" targets.json --forms "pudendal nerve,pudendal neuropathy"
@@ -371,8 +378,17 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
     is_ctl = [is_control(t) for t in targets]
     controls = [t for t, c in zip(targets, is_ctl) if c]
     real = [t for t, c in zip(targets, is_ctl) if not c]
-    dis_any = max(epmc(f'"{f}"') for f in forms)
-    dis_strict = max(epmc(f'(TITLE:"{f}" OR ABSTRACT:"{f}")') for f in forms)
+    density_queries = [{"disease_form": f, "any_field": epmc(f'"{f}"'),
+                        "strict": epmc(f'(TITLE:"{f}" OR ABSTRACT:"{f}")')}
+                       for f in forms]
+    dis_any = max(q["any_field"] for q in density_queries)
+    dis_strict = max(q["strict"] for q in density_queries)
+    density_complete = all(q["strict"] >= 0 for q in density_queries)
+    # One observed dense form proves a lower bound. With no such form, a failed
+    # alternate query prevents claiming the entire observed corpus is below floor.
+    density_status = ("meets_floor" if dis_strict >= FLOOR_STRICT else
+                      "below_floor" if density_complete else "unknown")
+    density_qualified = density_status == "meets_floor"
     n_trials = trials(disease)
     efo, efo_name = ot_disease(disease) if use_ot else (None, None)
 
@@ -414,6 +430,15 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                             "hits_available": bool(name_hits)}
         unresolved = (not ctl and not fs and s > 0 and ambiguous_symbol
                       and confirmation is None)
+        raw_zero = not ctl and a == 0 and s == 0
+        row_verdict = ("null control — a string that names nothing; it is here to be scored and "
+                       "is excluded from every count" if ctl
+                       else verdict(a, s, ambiguous_symbol, confirmation is not None))
+        if raw_zero and not density_qualified:
+            reason = (f"BELOW DENSITY FLOOR: {dis_strict} < {FLOOR_STRICT} strict papers"
+                      if density_status == "below_floor" else
+                      "UNKNOWN CORPUS DENSITY: strict density query failed")
+            row_verdict = f"unjoined raw 0/0 observation — candidate status WITHHELD ({reason})"
         return {
             "category": t.get("category", ""),
             "symbol": sym,
@@ -430,12 +455,11 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
             "ambiguous_symbol": ambiguous_symbol,
             "name_confirmation": confirmation,
             "unresolved_ambiguity": unresolved,
+            "candidate_density_status": density_status if raw_zero else None,
             # A join is only evidence if you can open it. Empty unless strict > 0.
             "strict_hits": hits,
             "open_targets_score": score,
-            "verdict": ("null control — a string that names nothing; it is here to be scored and "
-                        "is excluded from every count" if ctl
-                        else verdict(a, s, ambiguous_symbol, confirmation is not None)),
+            "verdict": row_verdict,
         }
 
     # 8 parallel workers trips Europe PMC's rate limit on a burst (observed 2026-09-23: 54 of
@@ -467,10 +491,11 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         "note": ("any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") — counts "
                  "mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT "
                  "— the number that decides novelty. Counts move with spelling; these are small "
-                 "numbers, not exact ones. A zero means nobody has PUBLISHED the link; it does "
-                 "not mean the link is true, untested, or valuable. Where a target carries "
+                 "numbers, not exact ones. A zero records no matches in the supplied query "
+                 "scope; it does not mean the link is true, untested, or valuable. Where a target carries "
                  "`names`, any_field/strict are the maximum over the symbol and every name, so a "
-                 "row is only 'unjoined' if it is unjoined under every spelling supplied. Every "
+                 "raw 'unjoined' records zero counts from the selected successful query; failed "
+                 "alternate spellings can leave coverage incomplete. Every "
                  "strict join carries its `strict_hits` — open them; the count cannot tell a "
                  "paper about the pair from a coincidence of English. A row marked "
                  "`\"control\": true` is a string that names nothing: it is scored, kept out of "
@@ -481,7 +506,10 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                  "`n_scored` with `n_targets` before calling a band complete. A positive short "
                  "symbol without successful positive expanded-name counts is unresolved, not "
                  "joined or unjoined; see `ambiguous_unverified_joins`. `name_confirmation` "
-                 "keeps its own query/counts/hits; supplied aliases are not biological proof."),
+                 "keeps its own query/counts/hits; supplied aliases are not biological proof. "
+                 "`unjoined` preserves raw 0/0 observations; only `density_qualified_unjoined` "
+                 "meets the necessary corpus-density floor. Density qualification never "
+                 "certifies a scientific hypothesis, controls or complete target-name coverage."),
         "n_targets": len(real_rows),
         "n_controls": len(ctrl_rows),
         # How much of the list this screen actually measured, said plainly. Before 2026-09-23
@@ -520,7 +548,22 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         "ambiguous_joins_to_read": [r["symbol"] for r in scored_rows
                                     if r["strict"] > 0 and r["ambiguous_symbol"]],
         "density_floor": FLOOR_STRICT,
-        "density_warning": floor_warning(dis_strict),
+        "density_measure": "maximum observed per-form strict count; not a union count",
+        "density_status": density_status,
+        "density_qualified": density_qualified,
+        "density_queries": density_queries,
+        "density_strict_queries_complete": density_complete,
+        "density_qualified_unjoined": [r["symbol"] for r in scored_rows
+                                       if r["strict"] == 0 and r["any_field"] == 0
+                                       and density_qualified],
+        # A floor is necessary screening context, never scientific certification.
+        "candidates_certified": False,
+        "candidate_certification_note": ("No scientific certification is performed. "
+                                         "Density qualification is only a corpus threshold; "
+                                         "aliases, controls and papers still require review."),
+        "density_warning": ("UNKNOWN corpus density: a strict density query failed and no "
+                            "successful form meets the floor; candidate status is withheld."
+                            if density_status == "unknown" else floor_warning(dis_strict)),
         # The null controls, and what they scored next to the real targets.
         "control_check": control_check(ctrl_rows, real_rows),
         "controls": [{"symbol": r["symbol"], "any_field": r["any_field"], "strict": r["strict"],
@@ -680,6 +723,9 @@ def main() -> int:
     print(f"\nno title/abstract join (all bands), over {res['n_scored']} scored rows: "
           f"{', '.join(res['no_title_abstract_join']) or '(none)'}")
     print(f"  of those, fully unjoined (0/0): {', '.join(res['unjoined']) or '(none)'}")
+    print(f"  density status: {res['density_status']}; density-qualified zero rows: "
+          f"{', '.join(res['density_qualified_unjoined']) or '(none)'}")
+    print("  raw 0/0 observations are not scientific certification; read density and control checks.")
     print(f"  of those, incidental only (1-5): {', '.join(res['incidental_any_field_only']) or '(none)'}")
     print(f"  of those, co-mentioned but never studied: "
           f"{', '.join(res['no_strict_join_but_discussed']) or '(none)'}")
