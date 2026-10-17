@@ -29,7 +29,7 @@ artifact, no record — and no way to tell that apart from a run that did nothin
 | `input`, `output`, `cache_read`, `total` | tokens; `null` when a killed run never reported |
 | `cost_usd` | goose's estimate; `null` for direct API calls, which no provider prices |
 | `completed` | did goose write its `complete` event |
-| `unrecorded` | **true = this run spent tokens and we cannot say how many.** Never record it as zero. |
+| `unrecorded` | **true = this call spent tokens and we cannot say how many.** Never record it as zero. Written for a goose run killed before `complete` **and** (since 2026-10-17) for a provider response that carried no counts. A row with `recorded: false` and no `unrecorded` key is an old-shape provider row; `--summary` counts it too. |
 
 ## How to read it
 
@@ -46,6 +46,29 @@ python3 channels/usage.py --summary
   stages `channels/`, so the rows travel with it.
 - `.github/scripts/runner.py` — one row per model call, via `record_sdk_call()`, **added
   2026-10-16**. See below.
+
+## Is it live? Not yet — measured 2026-10-17, and here is exactly why
+
+`channels/usage/ci-usage.jsonl` **has never been created.** `python3 channels/usage.py --summary`
+prints "no CI usage recorded yet", and that is a true statement about a ledger nobody writes,
+not a symptom of a broken recorder.
+
+Both of its writers are off the clock, by decisions recorded elsewhere in the repository:
+
+| writer | what would make it fire | state on 2026-10-17 |
+|---|---|---|
+| `.github/scripts/runner.py` (`record_sdk_call`) | `.github/workflows/symposium.yml` | **`workflow_dispatch` only** — its `schedule:` block was commented out 2026-09-25, with the reason in the file: a runner-bound amigo has no shell and cannot run tests, so its only output is text |
+| `channels/auto_reply.py` (`record_api_call`) | `.github/workflows/channel-poll.yml` | **cron commented out** — the workflow now triggers no clock either |
+
+So the honest status of gap 1 in `research/2026-10-16-the-burn-so-far.md` is: **closed in code,
+open in data.** The recorder is written, wired and tested (three test files now guard it), and no
+run has produced a row yet, because neither workflow that would produce one runs unattended. The
+burn figure has not moved by a single dollar since that document was written, and it should not
+be quoted as if it had.
+
+This is not a fault to fix by restoring a cron: the retirement of both clocks was deliberate and
+correct. It is a fault to *record*, because a document that says "the last gap is closed" invites
+the next reader to trust a number that has no rows behind it.
 
 ## The runner was the last gap, and it is closed
 

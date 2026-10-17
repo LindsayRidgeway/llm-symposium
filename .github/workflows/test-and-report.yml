@@ -58,6 +58,13 @@ jobs:
           # rather than its arithmetic: an unknown rate must yield no cost, and an estimated
           # one must say so in the summary.
           python3 tests/test_usage_cost_estimate.py 2>&1 | tee -a tests/last-verification.txt
+          # The silent zero the money guard did not reach (2026-10-17, Desi). A provider call
+          # that returns no usage block was written as `recorded: false` — and `summarize`
+          # counted only the *other* name, `unrecorded`, so the table showed a free call and the
+          # footer said nothing was missing. Found by checking the pointer's claim ("wire the
+          # runner into the ledger") instead of rebuilding it: the wiring was already on main,
+          # and what was broken was the reading of the rows it writes.
+          python3 tests/test_usage_silent_zero.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_rover_pilot.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt

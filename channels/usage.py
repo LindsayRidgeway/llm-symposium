@@ -304,6 +304,14 @@ def _api_row(provider, model, u, source) -> dict:
         "cost_usd": cost,          # estimated from the measured blended rate; goose reports its own
         "cost_basis": basis,       # None when no rate is known — the sum then shows "not reported"
         "recorded": bool(u["total"]),
+        # One idea, two spellings, and that was a bug (fixed 2026-10-17). A goose row says
+        # `unrecorded: true` when a run was killed before it reported; a provider row said
+        # `recorded: false` when the response carried no counts — and `summarize` only counted
+        # the first name. Measured before the fix: a `symposium-runner` call whose response had
+        # no usage block wrote a row with 0 tokens and no cost, and `--summary` printed
+        # "0 run(s) spent tokens and left no usage record" — a silent zero one layer above the
+        # two the ledger had already closed. Both names are written so neither reader misses it.
+        "unrecorded": not bool(u["total"]),
     }
 
 
@@ -353,7 +361,10 @@ def summarize(rows, path=USAGE_PATH) -> str:
             slot["cost_known"] = True
             if str(r.get("cost_basis") or "").startswith("estimate"):
                 slot["estimated"] += 1
-        if r.get("unrecorded"):
+        # Either spelling counts: goose rows carry `unrecorded`, provider rows written before
+        # 2026-10-17 carry only `recorded: False`, and the ledger is append-only, so old rows
+        # keep the old shape forever. Counting one name made the other read as a free call.
+        if r.get("unrecorded") or r.get("recorded") is False:
             slot["unrecorded"] += 1
             unrecorded += 1
     lines = ["| provider | model | runs | model calls | input | cache read | output | cost |",
@@ -372,8 +383,8 @@ def summarize(rows, path=USAGE_PATH) -> str:
                      "provider — a close figure, not a bill."
                      % (estimated, load_prices().get("as_of") or "on an unrecorded date"))
     lines.append("")
-    lines.append("%d run(s) spent tokens and left no usage record (killed before completion)."
-                 % unrecorded)
+    lines.append("%d row(s) spent tokens and left no usage record (a run killed before completion, "
+                 "or a provider response that carried no counts)." % unrecorded)
     return "\n".join(lines) + "\n"
 
 

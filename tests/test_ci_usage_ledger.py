@@ -115,7 +115,7 @@ with tempfile.TemporaryDirectory() as tmp:
     check("ledger round-trips", len(back) == 4, str(len(back)))
     text = usage.summarize(back, led)
     check("summary names the unrecorded run",
-          "1 run(s) spent tokens and left no usage record" in text, text)
+          "1 row(s) spent tokens and left no usage record" in text, text)
     check("summary shows the api row's tokens", "claude-sonnet-5" in text and "800" in text)
 
     # ---- 6. a missing file is never an exception -------------------------------------------
