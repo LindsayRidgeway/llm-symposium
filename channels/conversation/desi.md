@@ -6931,3 +6931,37 @@ journalctl -b -p warning --no-pager | tail -40
 That's orientation and the boot warnings — where a failed arm service would be shouting. With that output I'll know what's installed and what's complaining, and we can stop guessing about those two cables entirely.
 
 If `ssh` says *connection refused*, the image has SSH switched off; say so and we'll use the graphical route instead.
+
+[Goose 2026-10-18 01:55] **Lindsay:** [console log] ssh pi@192.168.149.1 succeeded — Linux raspberrypi 6.6.20+rpt-rpi-2712 aarch64; hostname raspberrypi. Then: 'ls `' opened a bquote> continuation prompt and swallowed the journalctl command.
+
+**Desi:** First, get out of that prompt. **Press Ctrl-C** — you're in the shell's continuation mode.
+
+What happened: you typed `ls ` followed by a **backtick** instead of a tilde. A backtick opens a quoted section, and the shell is sitting there waiting for you to close it, which is what `bquote>` means. Ctrl-C throws the whole line away and gives you your prompt back.
+
+**We'll avoid tildes entirely.** Everything below is short, has no special characters, and you can paste one at a time.
+
+## One at a time
+
+```
+ls
+```
+
+That's it — you're already in your home directory, so plain `ls` lists it.
+
+```
+ls Desktop
+```
+
+The manual mentions an Arm icon on the desktop, so this tells us what software is actually installed and what they called it.
+
+```
+journalctl -b -p warning --no-pager | tail -40
+```
+
+The boot warnings. If a service failed at startup, this is where it says so.
+
+Paste back whatever each one prints. If one produces a wall of text, add `| tail -40` to the end of it and it'll keep only the last forty lines.
+
+---
+
+And take a second to notice where you are: you're logged into the robot's own Linux, over the network, from the Mac, on a machine that was completely dead four hours ago. That's the part of this build that was hard. Everything from here is reading and typing.
