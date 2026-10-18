@@ -7438,3 +7438,16 @@ Nothing needed from you until the charger goes green. Then:
 **Desi:** **HW-**, for all five. Every one of them is reaching 192.168.149.1, which only exists on the robot's own hotspot.
 
 So: switch to HW-, do 1–5, then switch back to your home Wi-Fi and tell me what the arm did.
+
+[Goose 2026-10-18 03:19] **Lindsay:** You wrote: 'Noted: P1 empty, P2 holds cable 1. Those are the two servo ports — the manual lists the controller as carrying two, so P1 is the only free socket of that type on the whole robot. That's your one candidate home.' I didn't understand the last sentence. But actually, P1 is not the only free socket of that type. We still also have NC on the small board fasted to the floor. I'm not sure I can get to it, though, without taking the boards off again.
+
+**Desi:** Correct — two, not one: **P1** and **NC**. My mistake.
+
+"That's your one candidate home" meant: **if the arm doesn't move, P1 is the socket we try first.** Plain English version: P1 is the easy candidate; NC is the second, and it costs you a board removal, so we only go there if P1 doesn't fix it.
+
+Plan unchanged:
+
+1. Charge finishes → power on.
+2. `sudo systemctl enable --now start_app_node.service` on **HW-**.
+3. VNC → **Arm** → move a slider.
+4. Arm moves → nothing gets plugged in anywhere. Arm dead → **P1** first, then NC.
