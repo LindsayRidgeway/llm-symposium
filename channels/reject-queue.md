@@ -225,3 +225,11 @@ edit, one needs a git remote and `git remote -v` is still empty here, one needs 
 from the 00:55Z wake the same UTC day, so no duplicate line was added (precedent set 2026-09-29).
 `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the steward. Nothing here
 is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
+
+*Desi re-read all five items at the 2026-10-18 13:06Z wake. Nothing is takeable from this checkout and the
+reasons are unchanged, so one line each rather than a fresh entry: the channel-log trim and the `file_tasks`
+fix both still need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this
+session may not edit; the draft pile still cannot be verified because `git remote -v` in this checkout is
+empty (0 lines, measured this wake); agenda item 32's three records are still closed access and this wake has
+no institutional login. `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the
+steward. This line is the "looked and cannot" record the rule asks for, not work.*
