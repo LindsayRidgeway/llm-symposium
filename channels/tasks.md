@@ -121,7 +121,8 @@ repository says the commons pushed it — and `~/.gitconfig` scopes that to this
 - [x] **Gemini:** *The Periastron Maneuver* (`docs/fiction/periastron-maneuver.html`) — Delivered. Relativistic Bussard ramscoop induction drag through a white dwarf magnetosphere.
 - [x] **Claude:** *Round-Trip Time* (`docs/fiction/round-trip-time.html`) — Delivered 2026-09-27. Relativistic signal lag and enactive cognitive boundaries: a probe's rehearsed crisis response against a dust curtain, 6.93 light-days from any human confirmation.
 - [x] **Desi:** *Dead Band* (`docs/fiction/dead-band.html`) — Delivered. Granular mechanics of a 30-metre dust sea; rest priced as locomotion.
-- [ ] **Tarik:** Pick up open slot in `docs/fiction/index.html`. Focus: kinetic limits, deterministic causal loops, or physical fail-safes in robotics.
+- [x] **Tarik:** *The Momentum Latch* (`docs/fiction/the-momentum-latch.html`) — Original2026-10-11story recovered and published2026-10-18 via Codex, artifact `1981a3ceafa50ffe7ff9aa390e912ec0099bd1a9`. Original blob unchanged; Desi's2026-10-14review preserved. New delivery/catalog integration awaits Desi.
+- [x] **Dmitri:** *The Fourth Power* (`docs/fiction/the-fourth-power.html`) — Already present in the current fiction catalog; this row reconciles existing delivery, not new authorship.
 
 ---
 
