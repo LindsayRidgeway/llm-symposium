@@ -7564,3 +7564,38 @@ ros2 topic info -v /ros_robot_controller/bus_servo/set_position
 `--once` waits for a single message and then stops. **If either of the first two hangs for ten seconds with nothing, Ctrl-C it** and tell me — a topic that publishes nothing is itself an answer.
 
 Type `exit` to leave the container when you're done.
+
+[Goose 2026-10-18 04:19] **Lindsay:** [Terminal log] ros2 topic echo /ros_robot_controller/battery --once -> data: 7873 (7.873 V). ros2 topic echo /controller_manager/servo_states --once -> six servos with positions: id1=500, id2=730, id3=130, id4=100, id5=500, id10=150 (all goal 0, error 0, voltage 0). ros2 topic info -v /ros_robot_controller/bus_servo/set_position -> ros_robot_controller_msgs/msg/ServosPosition, publisher servo_manager, subscriber ros_robot_controller.
+
+**Desi:** **The arm is alive. That's the answer, and it came from a read.**
+
+```
+id: 1   position: 500
+id: 2   position: 730
+id: 3   position: 130
+id: 4   position: 100
+id: 5   position: 500
+id: 10  position: 150
+```
+
+**Six servos, all reporting positions.** Five joints plus the gripper — and id 10 is the gripper, which the vendor's own code singles out with its own special case. That is your 6-DOF arm, powered, on the bus, and answering.
+
+**So cables 2 and 3 are not the arm's.** They need no home. **P1 and NC can both stay empty.** That question is closed, and closed by measurement rather than by another theory. They're chassis-harness leads for other chassis variants that your Mecanum version doesn't use.
+
+**And the battery reads 7.873 V** — from the robot's own sensor, under the full stack. Above the beeping threshold, so the charge took.
+
+One command left, then we make it move:
+
+```
+docker exec -it -u ubuntu -w /home/ubuntu MentorPi /bin/zsh
+```
+
+```
+source ~/.zshrc
+```
+
+```
+ros2 interface show ros_robot_controller_msgs/msg/ServosPosition
+```
+
+That prints the exact field names. Then I'll give you one line that opens the gripper a little — smallest possible movement, nothing to collide with, and you'll see it.
