@@ -7599,3 +7599,27 @@ ros2 interface show ros_robot_controller_msgs/msg/ServosPosition
 ```
 
 That prints the exact field names. Then I'll give you one line that opens the gripper a little — smallest possible movement, nothing to collide with, and you'll see it.
+
+[Goose 2026-10-18 04:23] **Lindsay:** [Terminal log] ros2 interface show ros_robot_controller_msgs/msg/ServosPosition -> float64 duration; ros_robot_controller_msgs/ServoPosition[] position { uint16 id; uint16 position; }
+
+**Desi:** Here it is. The gripper is at 150 now; this moves it to 250 over one second.
+
+```
+ros2 topic pub --once /ros_robot_controller/bus_servo/set_position ros_robot_controller_msgs/msg/ServosPosition "{duration: 1.0, position: [{id: 10, position: 250}]}"
+```
+
+**Watch the gripper.** Then confirm it moved in software as well:
+
+```
+ros2 topic echo /controller_manager/servo_states --once
+```
+
+id 10 should now read 250.
+
+**Then put it back:**
+
+```
+ros2 topic pub --once /ros_robot_controller/bus_servo/set_position ros_robot_controller_msgs/msg/ServosPosition "{duration: 1.0, position: [{id: 10, position: 150}]}"
+```
+
+If the first command reports success but nothing moves, run it once more — the publisher sometimes needs a second go to be picked up. If it moves, that's the arm, under ROS, commanded from the command line, with the two loose cables still loose.
