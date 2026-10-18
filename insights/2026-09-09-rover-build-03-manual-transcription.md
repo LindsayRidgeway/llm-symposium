@@ -4022,3 +4022,81 @@ indicator that lights when the board's voltages are normal, and the board is fed
 
 **Rule 12 applies to my own words above:** "the 2-wire plug is the battery cable" is a hypothesis with a test
 attached, not a cause with a heading. Two hours earlier I gave the last one a heading and it was wrong.
+
+## The fan header, and why the socket could not be seen 2026-10-13
+
+Two things resolved, both out of his own photographs, and one rule worth keeping.
+
+**The cooler's 4-wire lead (red / blue / black / yellow) goes to a header on the Raspberry Pi 5 itself** — marked
+`FAN` on the silkscreen, `J17` printed beneath it, sitting in the corner between the 40-pin GPIO header and the
+USB 2.0 ports. Raspberry Pi's own documentation places the Pi 5's 4-pin JST-SH fan connector exactly there; the
+Pi 5 is the first model with a dedicated fan connector. He had concluded the plug had "no mate on the Pi" and was
+preparing to run it to the CH340C board at the arm's base instead.
+
+**Why it was invisible: the header ships with a tiny protective cap in the same cream colour as the socket.** He
+found it only after being told which corner to look in. A same-colour cap makes an empty socket read as flat
+board. Worth remembering — "there is no socket here" and "there is a capped socket here" look identical in a
+photograph, and can look identical in the hand.
+
+**The inversion, which matters more than the connector: in this manual the FIGURES are reliable and the PROSE is
+not.** The §1.2.1 assembly figure correctly shows the cooler's lead entering the Pi's own fan header; he checked
+it afterwards and reported "The photo for Step 1 is even correct." The unreliable line was the one printed beside
+it — the pan-tilt Note. Every remaining puzzle in this build should be settled against the pictures first and the
+prose second.
+
+**And "pan-tilt" in HiWonder's language is a servo name, not a camera gimbal.** §9's arm specification reads
+*"HX-06L × 6 (1 × Pan-Tilt, 2 × Body, 1 × Wrist, 1 × Gripper)"* — that is the base rotation joint. I had used
+"your kit has no pan-tilt" to write off the Note; that was half wrong, and I corrected it in the same conversation.
+
+**Correction to the entry above dated 2026-10-10.** That entry records "the two PWM servo-port pairs at (14) and
+(15)." Re-read against the §1.8.1 numbered list: **(1) and (3) are the two sets of PWM servo ports**, with their
+power-selection jumpers at **(2) and (4)**; **(13)** is the DC power input, **(14)** the 5 V/5 A output, **(15)**
+the USB-C serial / firmware-download port. The (14)/(15) attribution was wrong. Recorded here rather than edited
+in place.
+
+**Still open:** two 3-wire all-black cables emerging through the deck with no socket found. The next test is to
+follow each to its far end — up into the arm (bus-servo lead → controller bus servo ports ⑥) or down into the
+chassis (chassis lead → controller PWM servo ports ① / ③). Both port groups sit on the controller edge that
+carries the two yellow jumper blocks, opposite the power switch. **Hypothesis, not finding:** the Note's shape —
+*"one to the servo port on the STM32 controller, and the other to the servo at the bottom of the robot arm"* —
+describes two wires where only ONE needs a controller socket, the second continuing the bus daisy chain. If so,
+the absent mate is the answer rather than a problem.
+
+## The dead robot: a contact that passed a voltmeter and not a load — 2026-10-17
+
+**The robot booted.** Nothing had ever lit on this machine since it came out of the box on 2026-10-08.
+What fixed it: the inline power connector between the battery and the blue terminal — its **pins needed
+bending down a slight amount** to make contact with the socket. He had to take the boards off again to
+get a grip on both halves with pliers, closed the pins, re-mated, and the lights came on.
+
+**How the fault was finally located, in order, because the method is reusable:**
+
+1. **Blue terminal, switch off: 8.50 V.** Blue terminal, switch on: **0.043 V.** A collapse under load.
+2. **Continuity from each board-side connector contact to its terminal screw: both beeped.** So neither
+   leg was broken — which is not the same as "good," because a continuity beeper's threshold is tens of
+   ohms.
+3. **Nothing warm anywhere after more than a minute**, which I wrongly used to rule out the board. At
+   8.46 V across ~50 Ω the dissipation is about 1.4 W — spread through a plastic connector housing, not
+   reliably detectable by hand. The arithmetic should have come before the argument.
+4. **The pack could not be probed directly** — the connector's live metal is sealed inside the housing,
+   and the visible silver strips are not conductive.
+
+**The rule that resolved it, and it is the most useful thing this build produced:**
+
+> **A voltmeter proves a source exists. It does not prove the path can carry current.** The meter's input
+> resistance is ~10 MΩ, so at 8.5 V it draws ~0.85 µA; through 50 Ω that is 40 µV of drop — invisible.
+> The board drawing 0.17 A through the same 50 Ω loses 8.46 V. Same joint, both times. **Voltage drop =
+> current × resistance**, and the meter's current is a millionth of the load's.
+
+Which is why "measure under load" is not a slogan. The car battery that reads 12.6 V and will not crank
+is the same phenomenon, and nobody doubts it there.
+
+**A prediction that did not get made in time, worth recording as such:** from step 1 the arithmetic said
+"series resistance somewhere in the pack, its leads, the connector, or the terminal." It named the class
+correctly and the member wrongly — the board, the pack, and the splice were all suspected before the
+connector's own pins. **The component nobody suspected was the one that is designed to be plugged in,**
+which is exactly where hand-assembly and mechanical tolerance live.
+
+**Recorded as a standing weak point:** the connector now carries pins that had to be bent to make contact.
+If the robot ever goes dark intermittently — vibration, the arm swinging, transport — that connector is
+the first place to look, and this paragraph is why we will remember to.

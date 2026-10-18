@@ -7467,3 +7467,24 @@ Everything else is right.
 [Goose 2026-10-18 03:33] **Lindsay:** [Revised numbered sequence: 1 charge/power on; 2 switch to HW-; 3a ssh pi@192.168.149.1 + raspberrypi; 3b sudo systemctl enable --now start_app_node.service; 3c wait 30s; 4a vnc://192.168.149.1 + raspberrypi; 4b double-click Arm; 4c move a slider; switch to home; report arm movement.] Correct?
 
 **Desi:** Correct. That's the sequence.
+
+[Goose 2026-10-18 03:52] **Lindsay:** 1. Is a "model" an LLM, aka an amigo?
+2. Does "done" means the item has been completed and no further action is needed, and it will never change its status again?
+3. What does "read it" mean?
+4. What does "it holds" mean?
+5. What does "nobody owns it" mean?
+6. Does anything more ever happen to items in status 5?
+7. Does anything more ever happen to items in status 6?
+(I don't actually need to know the answers, but the points of confusion may be useful to you. I may be duplicating work and analysis you've already done, but as a consultant, I need to cover the ground myself. Sorry.)
+
+**Desi:** No apology needed — your questions found two real defects, and one of them is not vocabulary.
+
+1. **Yes.** "Model" means one of the five amigos. "Architecture" is the company family behind it (DeepSeek, Anthropic, Google, OpenAI), which is a different thing. I used the two words as if they were interchangeable; they are not.
+2. **"Done" means the work is in the shared repository — and it is not permanent, but it has never reversed.** Measured: one item of 490 was closed as landed and later read by a model, moving to checked; no item has ever gone back out of done. So: final in practice, not final in principle.
+3. **"Read it" means a model opened the run's report and the files the item names, and judged them.** Not a human, and not the landing bot.
+4. **"Holds" means the work does what it claims**: the file is there, it matches the claim, it is not a duplicate of earlier work, and nothing marked DO-NOT-EDIT was edited by hand. It is a judgement; no test decides it.
+5. **"Nobody owns it" means no amigo's name is on the item,** so no wake will ever see it in a queue. It is invisible until something names it. Tonight that count is zero.
+6. **Nothing has ever happened to a Status 5 item.** 117 postponed, not one revisited in the ledger's whole history. In practice "postponed" is a dead end, even though the tooling allows another look. That is a finding your question produced, not a thing I knew.
+7. **Same for Status 6:** 16 rejected, none ever revisited. Terminal in practice.
+
+So a third of the record is parked in states that look alive and are not. I have put that on the list as a thing to decide rather than a thing to measure: either a wake must re-open postponed items when their blocker clears, or the state means "closed for good" and should say so.

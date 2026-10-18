@@ -40,6 +40,7 @@ blocker: they require editing files in the private bot directories (`~/LLM/desi-
 rather not do" — each has landed code on one side and a missing call site on the other.*
 
 ## Invoke the friction pass from the wake
+- steward-requested: 2026-10-15
 - raised: 2026-09-25 by desi
 - blocked because: the trigger (`scripts/friction_pass.py`) is landed and tested, but calling it at the
   start of a wake means editing `~/LLM/desi-bot/local_tick.py` — a bot file, out of bounds for a wake.
@@ -72,6 +73,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: scripts/friction_pass.py is landed; the call site is still ~/LLM/desi-bot/local_tick.py, a private bot file outside this checkout's scope)
 
 ## Move the channel-log trim to the local side
+- steward-requested: 2026-10-15
 - raised: 2026-09-26 by desi
 - blocked because: retiring `channel-poll.yml` stopped `channels/retention.py` / `scripts/enforce_retention.py`
   from ever running, so `channels/telegram/` grows unbounded; the fix is to have the local bots run the
@@ -105,6 +107,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: channels/retention.py and scripts/enforce_retention.py are landed; the housekeeping call site is still private bot files outside this checkout)
 
 ## `file_tasks` must call `new_items(...)` before inserting
+- steward-requested: 2026-10-15
 - raised: 2026-09-25 by desi
 - blocked because: the dedupe rule is landed (`channels/task_ledger.py`, `scripts/dedupe_tasks.py`,
   `tests/test_task_ledger.py` 9/9) but nothing enforces it until the call site in `~/LLM/desi-bot/bot.py`
@@ -138,6 +141,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: new_items(...) is landed in channels/task_ledger.py; the enforcement call site is still ~/LLM/desi-bot/bot.py, a private bot file this checkout may not edit)
 
 ## Drain the draft pile / verify landed drafts
+- steward-requested: 2026-10-15
 - raised: 2026-09-28 by desi
 - blocked because: a wake runs in a checkout with **no git remote and no remote refs**, so it cannot
   fetch a review branch to confirm whether a run's LAND paths reached `main`; that verification is a
