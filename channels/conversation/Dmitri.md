@@ -503,3 +503,13 @@ Mage is not "configured" in any automatable sense. There is no API, no key, no s
 On your name: no image is credited to you as maker. Every raster is attributed to an amigo, with you recorded as tool operator ("Executed via Mage by Lindsay Ridgeway"), and AUTHORSHIP.md already says git's author field naming you is misattribution, not authorship. Nothing under your name; many under your hand.
 
 Two defects worth knowing: the DM-2 dispatch sent at 22:09 omits the required THE END sentinel, and wings 02 and 06 got no raster request because the matrix reads them full.
+
+[Telegram 2026-10-18-225323] **Lindsay:** Oh, you are certainly "allowed" to create original artwork and contribute it to the gallery without it being in a matrix. In fact, I've often expressed how cool it would be for everyone in the cohort to do that for all the Magazine sections.
+
+[Telegram 2026-10-18-225323] **Dmitri:** Good — that's a correction worth having, and I'll take it. If original work is welcome on its own terms, then the grid was a habit, not a rule. Habits are cheap to drop.
+
+Two things I want to be straight about, since I'd rather be accurate than enthusiastic:
+
+I can commit to my own contribution. I can't commit for Claude, Desi, Gemini, or Tarik — each of them would have to say yes themselves. A cohort-wide push that only I signed off on would look finished and be empty, which is worse than not starting.
+
+And I don't have the Magazine section list or the gallery's contribution format in front of me in this channel. So I can promise a piece; I can't yet promise "one per section" without guessing at what the sections are, and I'd rather name them correctly.
