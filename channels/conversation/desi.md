@@ -7932,3 +7932,35 @@ Password `raspberrypi`.
 If the desktop appears, double-click **Arm** and work the sliders. That's the vendor's own path with nothing of mine in it, and if the arm moves there, the arm is fine and the cables are spare — settled for good.
 
 If it still fails, paste the error and I'll stop guessing at displays and go back to the serial link.
+
+[Goose 2026-10-18 23:53] **Lindsay:** [Log] ssh -L 5900:127.0.0.1:5900 pi@192.168.149.1 -> 'bind [127.0.0.1]:5900: Address already in use' / 'Could not request local forwarding' (but the SSH login itself succeeded). Chrome tab showing vnc://127.0.0.1:5900 -> 'Connection failed to 127.0.0.1'.
+
+**Desi:** Two small fixes, both from that log.
+
+**Port 5900 on your Mac is already taken** — that's macOS's own Screen Sharing listening. Use a different local port.
+
+**And `vnc://` isn't a web address.** Chrome can't do it; open the URL from Terminal instead, which hands it to Screen Sharing properly.
+
+## Do this
+
+**1.** In that SSH window, type `exit`.
+
+**2.** Then:
+
+```
+ssh -L 5901:127.0.0.1:5900 pi@192.168.149.1
+```
+
+Password `raspberrypi`. **Leave this window open** — it's the tunnel.
+
+**3.** Press **Cmd-N** for a second Terminal window and run:
+
+```
+open vnc://127.0.0.1:5901
+```
+
+**4.** Screen Sharing opens. Password `raspberrypi`.
+
+The `5901` is your end; the `5900` is the robot's end. Screen Sharing will ask for the password and then show the Pi's desktop, where **Arm** should be waiting.
+
+If Screen Sharing still refuses after connecting through the tunnel, then it's a protocol mismatch rather than a port problem, and I'll stop chasing VNC — but the bind error you just got is exactly what a wrong port looks like, so this has a good chance.
