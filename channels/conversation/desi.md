@@ -7868,3 +7868,33 @@ head -60 robot_pi/arm_pc/action_group_controller.py
 The first shows what action groups are installed — their names are what `runAction` takes. The second shows what it does before it moves anything, which should include the step we're missing.
 
 Then I'll give you one command that plays one. **Clear the space around the arm before you run it** — a stored action group moves several joints in sequence, not one gripper.
+
+[Goose 2026-10-18 23:45] **Lindsay:** You wrote, 'On the Pi, no container.' Since I had to switch WiFi's, don't I need at least a new SSH?
+
+**Desi:** Yes — every time. Switching to your home network kills the session, so each return to **HW-** starts with a fresh SSH. That's the cost of the hotspot arrangement; LAN mode would remove it, whenever you want to spend five minutes on the WonderPi app.
+
+So tomorrow's remaining steps, in full:
+
+**1.** Switch Wi-Fi to **HW-**.
+**2.** 
+
+```
+ssh pi@192.168.149.1
+```
+Password `raspberrypi`.
+
+**3.**
+
+```
+ls robot_pi/arm_pc/ActionGroups
+```
+
+**4.**
+
+```
+head -60 robot_pi/arm_pc/action_group_controller.py
+```
+
+**5.** Switch to home Wi-Fi, paste 3 and 4.
+
+No service commands — the robot starts its own stack now. And you can skip the `is-enabled` check; you already ran it.
