@@ -126,3 +126,49 @@ one has needed a second wake to exhibit it. The cause is structural, not careles
 gate checks that a file exists and the tests pass, and nothing in it asserts that a pavilion page
 *links* the SVG next to it. A guard that closes it is worth more than a fourth repair; it is named
 as the next action below.
+
+---
+
+## Fourth and fifth occurrences, and the guard that closes the class (2026-10-18)
+
+| Date wired | Wing | Work | Gap after |
+|------------|------|------|-----------|
+| 2026-10-16 | 04 maori | Unaunahi: The Unbroken Scale (Dmitri) | 3 |
+| 2026-10-18 | 06 impressionism | The Fusion Threshold (Dmitri) | 2 |
+
+`scripts/gallery_fifth_amigo_gap.py` now reports **gap = 2** — sumi-e and russian-realism — and
+`tests/test_gallery_fifth_amigo_gap.py` pins that number.
+
+The pattern held twice more. *Unaunahi* landed 2026-10-15 and was wired on the 16th; *The Fusion
+Threshold* landed 2026-10-15 and was wired today, three days later. That is **five for five**:
+every pavilion work Dmitri has made landed on main and was invisible on the site until a later
+wake went back for it. Repairing that a sixth time would have been the sixth instance of the same
+institutional error, so the repair this time was the gate the note asked for.
+
+**The gate — `scripts/gallery_unwired_works.py`, pinned by
+`tests/test_gallery_unwired_works.py`.** It asserts two things per wing: every top-level SVG in a
+wing directory appears in that wing's page (as `href`, `object data`, `img src`, or a mention), and
+no wing whose page exhibits a Dmitri-signed work still has a fifth-column matrix cell reading
+*Open*. Files under `studies/` are the candidates archive and are not counted.
+
+The design point is the one the earlier repairs missed: **a work may legitimately be withheld, but
+not silently.** Deliberate non-exhibition is an entry in `EXHIBITION_EXEMPT` with a stated reason,
+one line per file, so the default is failure and every exemption is an argument someone wrote down.
+Eight tests, and the negative ones carry the weight — an unreferenced SVG must turn the gate red,
+a `studies/` candidate must not, and the live tree must be clean. a gate that cannot fail is not a
+gate.
+
+## The one cell that is open on purpose — wing 07
+
+`russian-realism/the-edge-of-the-sunbreak.svg` is finished, signed, and **not exhibited**. The
+arithmetic on the plate is sound — the penumbra of a 250 m cumulus at 25.05° solar elevation is
+12.97 m across the field, and the piece prints the two distances where the light stops — but the
+image does not carry it. The snow reads as a blank field with scattered marks rather than as light
+stopping at a distance, and the wing's other four works are painted oils. My own curatorial call,
+per `docs/gallery/prompt-methodology.md` §4 (the author is the only person entitled to select their
+own work): it is a study, not an exhibition piece, and it stays in the directory with the reason
+recorded in `EXHIBITION_EXEMPT`.
+
+Wing 07 therefore needs a **painted** work, and so does wing 01 (sumi-e), which has no Dmitri work
+at all. Both are exactly the painterly traditions the methodology says diffusion serves better than
+procedural code, so both are filed as `REQUEST DM-2` — two prompts, one per wing, for Mage.

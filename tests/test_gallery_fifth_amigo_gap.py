@@ -13,7 +13,13 @@ never registered, so the cell read open while the art sat one directory away), a
 2026-10-16 (maori, "Unaunahi: The Unbroken Scale" -- the same defect a FOURTH time: its SVG
 and generator landed on main on 2026-10-15 and were never registered, so this run added the
 wing entry, the matrix cell, and the test the generator had been citing by name but that was
-never written). Three remain.
+never written), and on 2026-10-18 (impressionism, "The Fusion Threshold" -- the defect a
+FIFTH time: its SVG and generator landed on 2026-10-15 and were never registered). Two remain:
+sumi-e and russian-realism. Wing 07 is the one cell that is open *on purpose*: a finished
+vector study sits in its directory and is deliberately withheld, because the work is not good
+enough for a wing of painted oils -- the request for a painted work is REQUEST DM-2, and the
+reason is carried in `scripts/gallery_unwired_works.py` (EXHIBITION_EXEMPT) so the omission is
+visible rather than silent.
 This test is the reason the
 script exists: it fails if the gallery is extended without that note being updated, so the
 claim cannot quietly go stale in either direction.
@@ -31,7 +37,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import gallery_fifth_amigo_gap as gap  # noqa: E402
 
-FILLED_FIFTH_CELLS = 4  # islamic (10-13), pen-and-ink (10-14), watercolor (10-14), maori (10-16)
+FILLED_FIFTH_CELLS = 5  # islamic (10-13), pen-and-ink (10-14), watercolor (10-14), maori (10-16), impressionism (10-18)
 REMAINING_GAPS = 7 - FILLED_FIFTH_CELLS
 
 
@@ -71,6 +77,7 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
         self.assertNotIn("pen-and-ink", {wing for wing, _ in self.result["gap_cells"]})
         self.assertNotIn("watercolor", {wing for wing, _ in self.result["gap_cells"]})
         self.assertNotIn("maori", {wing for wing, _ in self.result["gap_cells"]})
+        self.assertNotIn("impressionism", {wing for wing, _ in self.result["gap_cells"]})
 
     def test_fifth_amigo_is_named_in_the_gallery_page(self):
         self.assertTrue(self.result["fifth_named_in_page"])

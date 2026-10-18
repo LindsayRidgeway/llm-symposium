@@ -34,7 +34,10 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
 HUMAN_CHAT_ID = os.environ.get("HUMAN_TELEGRAM_CHAT", "1733127278")
-BOTS = {"desi": "desi-bot", "claude": "claude-bot", "gemini": "gemini-bot", "tarik": "tarik-bot"}
+BOTS = {"desi": "desi-bot", "claude": "claude-bot", "gemini": "gemini-bot", "tarik": "tarik-bot",
+        "dmitri": "dmitri-bot"}  # added 2026-10-18: the fifth amigo has had a bot and a token
+                                # since D-5; only this map was still four, so his first real
+                                # REQUEST could not be delivered by any tool.
 
 WAKE_PREFIXES = (
     "I woke up by myself just now and did some work, and it is in the repository now — "
