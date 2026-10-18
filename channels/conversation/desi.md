@@ -7028,3 +7028,54 @@ ls /var/log
 And if `dmesg` says *Operation not permitted*, that's fine — it just means the image restricts it to root, and we'll use `sudo dmesg`.
 
 The first two are what I'm actually waiting on. File names will tell me what the vendor built and what they called the arm software, and that's more use right now than any log.
+
+[Goose 2026-10-18 02:06] **Lindsay:** Do you understand that I can only be connected to one WiFi address at a time? To talk to you (like now), I have to be connected to my home WiFi. Same for accessing the manual. But I take it these CLI commands you've been giving me are for the HW- WiFi. Is that correct? Either way, please tell me which WiFi network you want me to be on, and what commands you want me to type ... and what you want me to do after I type them, with the understanding that if you want me to talk to you, I may have to switch WiFi networks again. [Also: dmesg gave 'Unable to obtain kernel buffer' and ls /var/log returned macOS directories — the last commands ran on the Mac, not the robot.]
+
+**Desi:** Yes — and I got it wrong twice already, which is why you're right to ask.
+
+**Your last two commands didn't run on the robot at all.** Look at what `ls /var/log` returned: `fsck_apfs.log`, `com.apple.xpc.launchd`, `com.apple.wifi.analytics`, `CoreDuet`, `CoreCapture`, `wifi.log`. Those are **macOS** directories. And `dmesg` printed *"usage: sudo dmesg"* — that's the Mac's wording, not Linux's. The SSH session had already ended, and you were typing into your own laptop.
+
+**So the topology is exactly what you said:** the SSH session exists only while the Mac is on the **HW-** hotspot, because the robot *is* the network. The moment you go back to your home Wi-Fi, the connection to 192.168.149.1 is gone. Talking to me and reaching the robot are mutually exclusive on one Wi-Fi radio. Every command I gave you assumed otherwise, and that was careless of me.
+
+## Tonight — batch it, one switch
+
+Don't switch yet. Copy this list first, then:
+
+1. Switch the Mac to **HW-**.
+2. `ssh pi@192.168.149.1`, password `raspberrypi`.
+3. Run these five, one at a time.
+
+```
+ls
+```
+```
+ls Desktop
+```
+```
+ls /opt
+```
+```
+sudo dmesg | tail -40
+```
+```
+ps aux | head -40
+```
+
+`sudo` will ask for the password again — same one.
+
+4. **Don't clear the Terminal window.** Switch the Mac back to your home Wi-Fi. The session dies, but the text stays on screen. Select it, copy it, paste it to me. No file juggling needed.
+
+## Tomorrow — make the problem disappear
+
+The robot supports **LAN mode**: it joins your home network instead of broadcasting its own, and then the Mac stays on home Wi-Fi permanently, SSH just works, and the robot gets internet — which it will need eventually anyway.
+
+It's set up from the **WonderPi app**, not the shell:
+
+1. Connect your phone to your home Wi-Fi (the manual says 5 GHz).
+2. Open **WonderPi** → **Advanced** → **LanderPi(M1)**.
+3. Tap **+** → choose **LAN Mode**.
+4. Enter your home Wi-Fi password.
+
+After that the hotspot stops, LED1 stays solid blue, and the robot appears on your router's client list with an ordinary IP. Worth doing — it removes this whole class of confusion for good.
+
+Take the batch first, though. Five commands and a scrollback is all tonight needs.
