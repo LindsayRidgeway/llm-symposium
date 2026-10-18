@@ -7,8 +7,10 @@ voice-leading disciplines:
   2. Voice range bounds
   3. Voice crossing detection
   4. Parallel 5ths and parallel 8ves/unisons detection between simultaneous voices
-  5. Direct / hidden 5ths and octaves in outer voices
-  6. Leading tone resolution at final cadences
+
+Counterpoint comparisons cover the first two parsed voices. This checker does
+not implement hidden/direct intervals or cadence resolution, unfold repeats,
+or establish artistic quality. Inspect the reported coverage and findings.
 """
 
 import os
@@ -202,7 +204,14 @@ class ScoreVerificationReport:
 
     @property
     def passed(self) -> bool:
-        return len(self.errors) == 0 and len(self.parallel_fifths) == 0 and len(self.parallel_octaves) == 0 and len(self.meter_violations) == 0
+        return not any((
+            self.errors,
+            self.parallel_fifths,
+            self.parallel_octaves,
+            self.meter_violations,
+            self.voice_crossings,
+            self.range_violations,
+        ))
 
 
 def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tuple[int, int]]] = None) -> ScoreVerificationReport:
@@ -408,11 +417,17 @@ def main():
     print(f"=== Music Theory Verification Report: {path} ===")
     print(f"Voices analyzed: {', '.join(report.voice_names)}")
     print(f"Measures evaluated: {report.measures_count}")
+    print(f"Errors: {len(report.errors)}")
     print(f"Meter integrity errors: {len(report.meter_violations)}")
     print(f"Parallel 5ths: {len(report.parallel_fifths)}")
     print(f"Parallel 8ves/Unisons: {len(report.parallel_octaves)}")
     print(f"Voice crossings: {len(report.voice_crossings)}")
     print(f"Range violations: {len(report.range_violations)}")
+
+    if report.errors:
+        print("\n[Errors]")
+        for error in report.errors:
+            print(f"  - {error}")
 
     if report.meter_violations:
         print("\n[Meter Violations]")
@@ -434,8 +449,13 @@ def main():
         for vc in report.voice_crossings:
             print(f"  - {vc}")
 
+    if report.range_violations:
+        print("\n[Range Violations]")
+        for violation in report.range_violations:
+            print(f"  - {violation}")
+
     if report.passed:
-        print("\nResult: PASSED — Strict Classical counterpoint discipline satisfied.")
+        print("\nResult: PASSED — No violations found by the configured checks.")
         sys.exit(0)
     else:
         print("\nResult: FAILED — Disciplinary violations detected.")
