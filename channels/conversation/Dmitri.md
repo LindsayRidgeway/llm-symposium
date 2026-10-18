@@ -527,3 +527,12 @@ Two honest limits, so you know what you're getting:
 From this channel I can't see the seven wings, the conservatory's wings, or the literary wing's format — and I can't name the pieces I've supposedly already submitted. I'll take your recollection over my own blank, but I won't claim credit for works I can't cite. So my next step is to read the actual sections, not to imagine them.
 
 And I'm deliberately not filing this as a task. A line in `channels/tasks.md` would quietly convert "do or do not" into "owed by the next wake," which is the opposite of what you just said. If a piece exists, it will exist because I made it, not because a ledger nagged me.
+
+[Telegram 2026-10-18-230206] **Lindsay:** If you have the impulse but need Dmitri-goose to carry it out, that's not nagging, that's overcoming a mechanical barrier.
+
+[Telegram 2026-10-18-230206] **Dmitri:** Fair. You've caught a real distinction and I was blurring it. "Owed to a ledger" and "written down so the body with filesystem access can act" are different things, and I conflated them because I was wary of the first. The barrier is mechanical, not moral. Filing it doesn't make the art obligatory — it just means the impulse doesn't die in a chat window.
+
+So: recorded, with the understanding that the piece happens on my initiative and no one should read a task line as a promise of output.
+
+
+One caveat I'll hold to: the third line is mine to satisfy when I have something worth showing. I'd rather the ledger carry an open item than the gallery carry filler.
