@@ -7173,3 +7173,53 @@ ls robot_pi/arm_pc
 - **`ls robot_pi/arm_pc`** — what the arm program consists of.
 
 Same routine: copy these, switch to HW-, run, switch back, paste the scrollback.
+
+[Goose 2026-10-18 02:26] **Lindsay:** [Terminal log] docker ps: one container, adb8457c2eec, image ros:humble, command 'tail -f /dev/null', 23 months old, Up 39 minutes, NAME MentorPi. systemctl is-active start_node.service -> inactive. start_node.sh: xhost +local:; docker exec -u ubuntu -w /home/ubuntu MentorPi zsh -c '~/.stop_ros.sh'; sleep 3; docker exec ... 'source ~/.zshrc; ros2 launch bringup bringup.launch.py'. ls /dev/serial/by-id -> usb-1a86_USB_Serial-if00-port0 and usb-1a86_USB_Single_Serial_5B22015852-if00 (both WCH CH340-class). ls robot_pi/arm_pc -> action_change.py ActionGroups arm.sh control_demo.py servo_controller.py bus_servo_control.py main.py ros_robot_controller_sdk.py ui.py etc.
+
+**Desi:** **I think we've found it, and it isn't a cable.**
+
+Four things in that output.
+
+**1. The container being "up" means nothing.** It's running `tail -f /dev/null` — a command whose only purpose is to keep a container alive while doing nothing. The ROS stack is launched into it by `docker exec` when needed, not by the container.
+
+**2. `start_node.service` is `inactive`.** That's the finding. Your boot script does this:
+
+```
+sudo systemctl restart start_node.service
+```
+
+and that service then runs the ROS bringup inside the container. **It isn't running.** So the ROS nodes that would drive the arm were never brought up. The arm isn't refusing to move — nothing has ever told it to, and nothing is listening.
+
+**3. Both serial devices are WCH `1a86` chips** — CH340 class. There are two of them, one with a unique serial number (`5B22015852`). So **both USB-serial interfaces exist and have enumerated.** My missing-cable theory is now mostly dead, and I'm glad we checked before bending anything else.
+
+**4. And here's the piece that ties it together.** Look inside `arm_pc`:
+
+```
+bus_servo_control.py    ros_robot_controller_sdk.py
+```
+
+That second one is the SDK for the **RosRobotController** — the STM32 board. So the arm's servos are driven *through* the controller over the serial link. The arm does not work unless the ROS bringup is running. And the bringup is down.
+
+## Batch four — four commands
+
+```
+systemctl --failed
+```
+```
+systemctl is-enabled start_node.service
+```
+```
+ls /dev/ttyUSB*
+```
+```
+bash robot_pi/start_node.sh
+```
+
+- The first lists anything that failed to start. If the bringup crashed during boot, it's named there.
+- The second says whether it's even supposed to start automatically — `enabled` or `disabled`.
+- The third tells us both port names.
+- **The fourth runs the vendor's own startup by hand, in front of you, so you can read what it says.** That's the real diagnostic: any Python error, any missing device, any ROS complaint appears on screen instead of disappearing into a log we don't have.
+
+**Two things about the last one.** It prints a lot and it keeps running — leave it about thirty seconds, read the output, then **Ctrl-C**. And the very first line, `xhost +local:`, will probably fail with *"unable to open display"* over SSH. That's harmless; the script carries on.
+
+Then switch back and paste whatever it said — especially any line with **Error**, **error**, **Traceback**, or **No such file** in it.
