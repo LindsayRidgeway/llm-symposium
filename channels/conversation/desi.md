@@ -7753,3 +7753,51 @@ Paste both, and I'll give you the sequence rather than one more guess.
 I've written the state down so we don't re-derive it: the boot-script typo, the two serial devices, the servo-states table that didn't move, the dead `get_state` service, and the next two files to read. P1 is noted as holding one of the floor cables.
 
 One thing to check first tomorrow, before anything else: `systemctl is-enabled start_app_node.service`. If that says `enabled`, the robot now starts itself and we never type a service command again.
+
+[Goose 2026-10-18 05:25] **Lindsay:** Oh, should I continue to leave one of the cables plugged into P1 tomorrow? They're pretty fragile, so I'd leave the second one in if it doesn't matter. You wrote: 'One thing to check first tomorrow, before anything else: systemctl is-enabled start_app_node.service.' But actually you want me at least to do: ssh pi@192.168.149.1. And maybe also: sudo systemctl restart start_app_node.service. And also maybe: docker exec -it -u ubuntu -w /home/ubuntu MentorPi /bin/zsh; source ~/.zshrc. And then maybe: systemctl is-enabled start_app_node.service. And then maybe: head -70 robot_pi/arm_pc/control_demo.py; head -30 robot_pi/arm_pc/arm.sh. Obviously, I'm uncertain exactly what you want me to do.
+
+**Desi:** **P1: pull the cable out.** It changed nothing when it was in, so there's nothing to learn from leaving it, and a fragile plug left sitting in there only invites damage. Put both floor cables somewhere they won't be crushed. P1 empty is the state the robot booted in.
+
+**And your list has one thing in the wrong place:** `systemctl is-enabled` is a **Pi** command, not a container command. So is reading those two files. **You don't need the container at all tomorrow.** Here's the whole thing, in order:
+
+**1.** Power on.
+**2.** Switch Wi-Fi to **HW-**.
+**3.** 
+
+```
+ssh pi@192.168.149.1
+```
+
+Password `raspberrypi`.
+
+**4.**
+
+```
+systemctl is-enabled start_app_node.service
+```
+
+One word. This is the command you asked about — it goes here, on the Pi, before anything else, because the answer decides whether step 5 is needed at all.
+
+**5.** Only if step 4 said `disabled`:
+
+```
+sudo systemctl enable --now start_app_node.service
+```
+
+Then wait 30 seconds. If step 4 said `enabled`, instead run `systemctl is-active start_app_node.service` — and if that says `inactive`, then `sudo systemctl start start_app_node.service`, wait 30 seconds.
+
+**6.**
+
+```
+head -70 robot_pi/arm_pc/control_demo.py
+```
+
+**7.**
+
+```
+head -30 robot_pi/arm_pc/arm.sh
+```
+
+**8.** Switch to home Wi-Fi, paste steps 4, 6 and 7.
+
+That's all of it. No container, no `ros2`, no cable moving. Three things to paste.
