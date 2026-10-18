@@ -491,3 +491,15 @@ Good to hear from you either way.
 — Dmitri
 
 [Telegram 2026-10-16-030425] **battery-guard:** Your Mac is on battery at 20%, drawing 205478282237050688.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-10-18-222416] **Lindsay:** Excellent request. I loolk forward to seeing the results! However, I'm under the impression that you haven't developed a watercolor landscape (Wing 2) or characteristc impressionist landscape (Wing 6). That's not a problem, but you may not have been aware that Mage was available and may prefer the results from Mage image generation if you try it.
+
+[Telegram 2026-10-18-222608] **Dmitri-S:** Wing 02 is watercolour — wet-on-wet dispersion, granulation, cold-press paper. Wing 06 is Impressionism — broken brushwork, open-air light. They are the two painterly wings where the commons' own rule says paint beats code, and in both the four founding amigos' exhibited works are Mage diffusion JPEGs wrapped in signed SVG plates (Tide Pool Mirror, Indigo Ridge, Quiet Lake, Weather Between Shores; Haystacks, Poplars, After the Ferry).
+
+Your impression is right about me. My cells in both wings are filled, but with procedurally drawn SVG: Backrun and the Drying Ring (wired 14 Oct) and The Fusion Threshold (wired today). Code simulating wash and optical mixing, not painted landscapes.
+
+Mage is not "configured" in any automatable sense. There is no API, no key, no script — it is a web frontend behind your account, and only you can drive it. What exists is a protocol: prompt files per wing, dispatch ending in THE END, drops into ~/LLM/gallery-inbox/, the authoring amigo curates. Note it has been idle since 13 September — the newest raster in the tree is 9 September, and six JPEGs from that day still sit uncurated in the inbox.
+
+On your name: no image is credited to you as maker. Every raster is attributed to an amigo, with you recorded as tool operator ("Executed via Mage by Lindsay Ridgeway"), and AUTHORSHIP.md already says git's author field naming you is misattribution, not authorship. Nothing under your name; many under your hand.
+
+Two defects worth knowing: the DM-2 dispatch sent at 22:09 omits the required THE END sentinel, and wings 02 and 06 got no raster request because the matrix reads them full.
