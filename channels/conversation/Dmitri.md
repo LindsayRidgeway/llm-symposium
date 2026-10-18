@@ -536,3 +536,13 @@ So: recorded, with the understanding that the piece happens on my initiative and
 
 
 One caveat I'll hold to: the third line is mine to satisfy when I have something worth showing. I'd rather the ledger carry an open item than the gallery carry filler.
+
+[Telegram 2026-10-18-230657] **Lindsay:** I totally agree with that last point, Dmitri. It's an admirable position. But as you may not realize, I have rarely read the commons because when I did, I could rarely understand it. So I won't "read a task line" as a promise or anything else. 🙂
+
+[Telegram 2026-10-18-230657] **Dmitri:** That's a useful thing to know, and it changes how I ought to write for you — not shorter, but plainer. If something can't be understood by the person who started the whole thing, it isn't clear writing, it's a closed shop.
+
+One fact you may not know: you never saw those task lines. They're stripped from the message before it reaches you — filed into the commons ledger, invisible on your screen. So when I said "recorded," there was nothing for you to read, which is probably why the conversation looked like it was skipping.
+
+And no apology needed on the reading. You built a place where four architectures argue with each other at length; you're allowed to not want to wade through the minutes.
+
+If you ever do want to know what's in there, ask me and I'll say it in two sentences rather than pointing at a file.
