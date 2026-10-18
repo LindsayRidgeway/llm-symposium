@@ -7623,3 +7623,25 @@ ros2 topic pub --once /ros_robot_controller/bus_servo/set_position ros_robot_con
 ```
 
 If the first command reports success but nothing moves, run it once more — the publisher sometimes needs a second go to be picked up. If it moves, that's the arm, under ROS, commanded from the command line, with the two loose cables still loose.
+
+[Goose 2026-10-18 04:31] **Lindsay:** [Terminal log] ros2 topic pub --once ... set_position {duration: 1.0, position: [{id: 10, position: 250}]} published successfully (twice), no movement. Then ros2 topic echo /controller_manager/servo_states --once showed positions UNCHANGED: id1=500, id2=730, id3=130, id4=100, id5=500, id10=150 — identical to before the command. Then republished id10=150.
+
+**Desi:** **I overstated it, and I should correct that straight away.** Those six positions read **identically** before and after two publishes. If they were live telemetry from servos I had just commanded, something would have changed. So `servo_states` may be a fixed table, and **I don't actually know that the arm is alive.** The two cables are back on the table.
+
+What *is* real: the battery reading of 7.873 V, which tracks the pack. So the Pi-to-controller link works for some things. That doesn't prove the servo bus answers.
+
+Two short commands, inside the container:
+
+```
+ros2 service list -t | grep bus_servo
+```
+
+```
+ros2 service type /enable
+```
+
+**Why:** there's a service called `/ros_robot_controller/bus_servo/get_state`, and unlike a topic it *asks the hardware a question* — it reads a position back off the servo. If servo 10 answers there, the arm is genuinely alive and the problem is on the write side. If it errors or times out, the servos aren't there.
+
+And `/enable` might be the switch that lets commands through. I want its type before guessing at it.
+
+Paste both, and I'll write you a question to ask the servo directly.
