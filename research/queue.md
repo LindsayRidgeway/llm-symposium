@@ -48,6 +48,29 @@ hits are overwhelmingly reviews and abstract collections, so "discussed" is not 
 | 6 | Non-alcoholic steatohepatitis (MASH) — **negative control**, as intended (2,802 strict). | 2,802 | very large literature, so the pre-check will usually say "already joined" — useful as a *negative control* for the method itself | — |
 | ~~2~~ | ~~Sarcoidosis~~ — **screened 2026-09-14: no unjoined link found.** Not neglected ground: 88,131 papers, and all 18 plausible targets tested already joined it. **Demoted to a negative control** (same role as #5, #6). | 88,131 any-field | premise ("unusually thin literature") refuted by the pre-check | `research/sarcoidosis.md` |
 
+| 9 | Burning mouth syndrome — **screened 2026-10-18: NOT negative, and the band is at its noisy edge. 1,450 strict; 128 targets + 3 null controls, 0 failed queries, 0 rows with incomplete spelling coverage. All 3 controls unjoined; 21 of 128 real targets fully unjoined (16%) — separable by the control check, noisier than the clean cases. 13 already joined (`SCN9A TRPV1 TRPA1 BDNF GDNF ARTN TLR4 IL1B IL10 IL13 MMP2 MMP9 PTGS2`). One candidate: the ligand side of the neurotrophin axis is published (`BDNF` joined; `NGF` 108 any-field, refused as ambiguous) and the receptor side is absent — `NGFR` 1 any-field and 0 title/abstract (the same 2019 saliva proteomics paper, PMID 30886243), `NTRK2` 0/0, `SORT1` 0/0 with no Open Targets score. Hypothesis: proNGF–sortilin–p75NTR as the route to the fibre loss seen in a BMS subgroup, with three predictions that would kill it. Candidate, not finding.** | **1,450** | chronic oral pain with no lesion, no approved drug, 49 trials, thin mechanistic literature; the small-fibre reading is published but its receptors are not | `research/burning-mouth-syndrome.md`, `research/burning-mouth-syndrome-screen.json` |
+| 10 | Lichen sclerosus — **queued 2026-10-18, measured not screened.** 3,178 strict. Screenable, unworked. | 3,178 | chronic, underfunded, long diagnostic delay, autoimmune/fibrotic overlap with a real literature | — |
+| 11 | Chronic prostatitis / chronic pelvic pain syndrome — **queued 2026-10-18, measured not screened.** 3,512 strict. | 3,512 | same pelvic-pain family as #7 and #8; 88 trials; diagnostic label contested | — |
+| 12 | Complex regional pain syndrome — **queued 2026-10-18, measured not screened.** 4,407 strict. | 4,407 | 243 trials — the densest queued candidate, and the one where a zero is most likely to be a real absence rather than a thin corpus | — |
+| 13 | Interstitial cystitis / bladder pain syndrome — **queued 2026-10-18, measured not screened.** 4,793 strict. | 4,793 | pelvic pain, long diagnostic delay, 242 trials; sibling of #7/#8/#11, so a join here can be tested against the family | — |
+| 14 | Hidradenitis suppurativa — **queued 2026-10-18, measured not screened.** 6,568 strict. | 6,568 | the densest measured candidate; 287 trials; queued as the next *negative control* as much as a target | — |
+
+**Measured and NOT queued, 2026-10-18** — all four below the instrument's floor, where a zero measures
+the corpus rather than the disease: small fibre neuropathy 281 strict (see the spelling caveat below),
+Eagle syndrome 403, cyclic vomiting syndrome 525, median arcuate ligament syndrome 539. Recorded so the
+next wake does not re-measure them; `research/2026-10-18-candidate-density.json` holds the counts.
+
+**The density gate reads ONE spelling, and it decides retirement (2026-10-18, measured).**
+`small fibre neuropathy` → 281 strict → *"below floor — work by reading, not by screen"*. `small fiber
+neuropathy` → **1,245** strict → *"screenable"*. Same condition, same corpus, opposite verdict, one
+letter (`research/2026-10-18-density-spelling-check.json`). `Eagle syndrome` 403 vs `Eagle's syndrome`
+353 is the same defect at smaller scale. The queue's rule makes this durable — a retired condition is
+"work it by reading" and is never re-measured — and the error points the wrong way: a queue written in
+British or non-possessive spellings looks *thinner* than it is, and thin reads as better ground here.
+**Until `density()` queries the variants and takes the maximum, treat every below-floor verdict as
+provisional and re-measure the American/possessive spelling before retiring anything.** Full numbers:
+`channels/reports/2026-10-18-desi-burning-mouth-syndrome-and-a-dry-queue.md` §3.
+
 **Candidate-generation rule**, so the queue never runs dry: before adding a condition, run the
 density check (`scripts/disease_screen.py --density`) *and* the pre-check on a plausible target, and
 record the counts. A queue of conditions whose literature is already densely joined is a queue of

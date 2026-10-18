@@ -1,0 +1,39 @@
+{
+ "conditions": [
+  {
+   "condition": "small fibre neuropathy",
+   "any_field": 1079,
+   "strict": 281,
+   "trials": 62,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "Eagle's syndrome",
+   "any_field": 434,
+   "strict": 353,
+   "trials": 1,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "Eagle syndrome",
+   "any_field": 658,
+   "strict": 403,
+   "trials": 2,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "cyclic vomiting syndrome",
+   "any_field": 1346,
+   "strict": 525,
+   "trials": 25,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "small fiber neuropathy",
+   "any_field": 5326,
+   "strict": 1245,
+   "trials": 62,
+   "band": "screenable"
+  }
+ ]
+}
