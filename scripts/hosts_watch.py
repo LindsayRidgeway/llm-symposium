@@ -88,22 +88,60 @@ def strip_html(s: str) -> str:
     return s
 
 
-def mentions(text: str, needle: str, window: int = 160, limit: int = 4):
+# Our id can appear in a snapshotted or revisioned form and still name us:
+# `claude-sonnet-4-5` -> `claude-sonnet-4-5-20250929`, `gemini-3.8-flash-001`.
+# A *sibling* id that merely starts with our name is a different model and must not be
+# reported as ours. Found 2026-10-18, in the third reading: `gemini-3.8-flash-tts`, the
+# `gemini-3.8-flash-lite-tts` row, and — worse — the *replacement* column of the row
+# above ours all matched, and the flattened hits read exactly like "our daily Gemini
+# model is a legacy alias being silently re-routed". It is not; the sentence belonged
+# to the neighbouring row. A watch that cries wolf on a prefix is a watch a reader
+# learns to skim.
+SNAPSHOT_CONTINUATION = re.compile(r"^-(?:20\d{6}|\d{1,4})$")
+
+
+def _names_our_model(line: str, end: int) -> bool:
+    """True when the text after our id ends it, or continues it as a snapshot stamp."""
+    rest = line[end:]
+    if not rest or not (rest[0].isalnum() or rest[0] in "-_."):
+        return True
+    token = re.match(r"[-_.][\w.-]*", rest)
+    if not token:
+        return False
+    return bool(SNAPSHOT_CONTINUATION.match(token.group(0).rstrip(".,;:)]")))
+
+
+def mentions(text: str, needle: str, window: int = 160, limit: int = 4, near_misses=None):
     """Lines containing `needle`, trimmed to a readable window, deduped.
 
     Substring match on purpose: the pages write `claude-sonnet-4-5-20250929`
     where we write `claude-sonnet-4-5`, and a snapshotted form still names us.
+    A longer id that starts with ours (`gemini-3.8-flash-tts`) does not: it is a
+    different model, and reporting it as ours is a false alarm. When `near_misses`
+    is a list, every rejected id is appended to it, so the reader can see what the
+    report ignored instead of trusting a silence.
     """
     out, seen = [], set()
+    low_needle = needle.lower()
     for line in text.splitlines():
-        j = line.lower().find(needle.lower())
-        if j < 0:
-            continue
-        snippet = line[max(0, j - 40) : j + window].strip()
-        if snippet in seen:
-            continue
-        seen.add(snippet)
-        out.append(snippet)
+        low = line.lower()
+        start = 0
+        while True:
+            j = low.find(low_needle, start)
+            if j < 0:
+                break
+            end = j + len(needle)
+            start = end
+            if not _names_our_model(line, end):
+                if near_misses is not None:
+                    token = re.match(r"[-_.][\w.-]*", line[end:])
+                    near_misses.append(needle + (token.group(0) if token else ""))
+                continue
+            snippet = line[max(0, j - 40) : end + window].strip()
+            if snippet not in seen:
+                seen.add(snippet)
+                out.append(snippet)
+            break
         if len(out) >= limit:
             break
     return out
@@ -125,13 +163,16 @@ def report(pages: dict) -> list:
     for amigo, route, model, key in ROUTES:
         text = pages.get(key)
         ptext = pages.get(pricing_key(key))
-        p_hits = mentions(ptext, model) if ptext else []
+        p_near = []
+        near = []
+        p_hits = mentions(ptext, model, near_misses=p_near) if ptext else []
         row = {
             "amigo": amigo, "route": route, "model": model,
             "page": PAGES[key], "fetched": text is not None,
-            "hits": mentions(text, model) if text is not None else [],
+            "hits": mentions(text, model, near_misses=near) if text is not None else [],
+            "near_misses": near,
             "pricing_page": PRICING_PAGES.get(key), "pricing_fetched": ptext is not None,
-            "pricing_hits": p_hits,
+            "pricing_hits": p_hits, "pricing_near_misses": p_near,
         }
         row["dates"] = dates_in(" ".join(row["hits"]))
         row["pricing_dates"] = dates_in(" ".join(p_hits))
@@ -182,6 +223,9 @@ def main(argv=None) -> int:
             print(f"\n## {r['amigo']} — {r['model']} ({r['route']})\n  {head}")
             for h in r["hits"]:
                 print(f"    · {h}")
+            if r["near_misses"]:
+                print("  ignored (different ids sharing our prefix): "
+                      + ", ".join(sorted(set(r["near_misses"]))))
             if r["dates"]:
                 print(f"  dates seen: {', '.join(r['dates'])}")
         if not r.get("pricing_page"):
@@ -196,6 +240,9 @@ def main(argv=None) -> int:
                 print(f"    £ {h}")
             if r["pricing_dates"]:
                 print(f"  price dates seen: {', '.join(r['pricing_dates'])}")
+            if r["pricing_near_misses"]:
+                print("  price page ignored: "
+                      + ", ".join(sorted(set(r["pricing_near_misses"]))))
     return 0
 
 
