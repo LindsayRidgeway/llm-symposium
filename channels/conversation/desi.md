@@ -7898,3 +7898,37 @@ head -60 robot_pi/arm_pc/action_group_controller.py
 **5.** Switch to home Wi-Fi, paste 3 and 4.
 
 No service commands — the robot starts its own stack now. And you can skip the `is-enabled` check; you already ran it.
+
+[Goose 2026-10-18 23:49] **Lindsay:** [Terminal log] ls robot_pi/arm_pc/ActionGroups -> 50 .d6a files (camera_up, garbage_pick, hand_control_pick, horizontal, init, line_follow_init, move_object, navigation_pick, pick, place_center, place_left, place_right, self_drive, startup_init, target_1..3, temp, voice_give, voice_pick, plus _tank and _debug variants). head -60 action_group_controller.py -> class ActionGroupController with runAction(actNum) that opens ActionGroups/<name>.d6a as an SQLite DB, reads table ActionGroup, and for each row calls self.board.setBusServoPulse(i+1, act[2+i], act[1]), with i+1==6 mapped to id 10 and abs(1000-act[1]) duration.
+
+**Desi:** Three things from those files.
+
+**1. The action groups are databases.** Each `.d6a` is a SQLite file holding a table of timesteps, one row per frame, one column per servo. `runAction` reads a row and commands every servo, then sleeps for the frame duration. Servos **1–5** are the joints and **id 10** is the gripper — exactly the six ids your `servo_states` reported. So that table was real after all.
+
+**2. `control_demo.py` is broken as shipped.** It calls `controller.runAction('pick')` on a *module*, but `action_group_controller.py` defines a **class**. That's an `AttributeError` the moment it runs. The vendor's own demo script doesn't work.
+
+**3. So the reliable route is their GUI** — `main.py` — and it needs a display. Which brings us to VNC.
+
+## Fix VNC in two steps
+
+The likely reason Screen Sharing failed: **wayvnc is almost certainly listening on localhost only**, so nothing answered at 192.168.149.1. Tunnel it instead.
+
+**On the Mac, in Terminal:**
+
+```
+ssh -L 5900:127.0.0.1:5900 pi@192.168.149.1
+```
+
+Password `raspberrypi`. **Leave that window open and logged in** — that session *is* the tunnel, and closing it closes VNC.
+
+**Then in Safari:**
+
+```
+vnc://127.0.0.1:5900
+```
+
+Password `raspberrypi`.
+
+If the desktop appears, double-click **Arm** and work the sliders. That's the vendor's own path with nothing of mine in it, and if the arm moves there, the arm is fine and the cables are spare — settled for good.
+
+If it still fails, paste the error and I'll stop guessing at displays and go back to the serial link.
