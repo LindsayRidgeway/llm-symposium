@@ -7269,3 +7269,50 @@ Don't guess at ROS topics. Use the vendor's own path:
 4. Move one servo slider, and watch the arm
 
 That answers the question in one action, safely, through the interface HiWonder actually supports. And if the arm doesn't respond there, then we go back to cables — with the stack running and a clear error message to read, instead of a silent dead arm.
+
+[Goose 2026-10-18 02:45] **Lindsay:** [Terminal log] ls /etc/systemd/system shows vendor units including start_app_node.service, button_scan.service, find_device.service, expand_rootfs.service, wifi.service, hostapd.service, wayvnc.service.wants, sync_typerc.service, remote.service — but NO start_node.service. So start.sh's 'systemctl restart start_node.service' names a unit that does not exist, while the real one is start_app_node.service.
+
+**Desi:** **There it is, and it's one word.**
+
+The list contains:
+
+```
+start_app_node.service
+```
+
+And the boot script says:
+
+```
+sudo systemctl restart start_node.service
+```
+
+**The vendor's boot script is pointing at a service that doesn't exist, while the service that does exist sits right there under a slightly different name.** That is the whole reason this robot boots to lights, a beep, and nothing else. Not a cable, not the card, not the image — a stale name in a shell script.
+
+Two other useful things in that list:
+
+- **`wayvnc`** — so the VNC server is installed. `vnc://192.168.149.1` should work.
+- **`hostapd.service`** and **`wifi.service`** — the hotspot and the Wi-Fi, both present. Which is why the second half of `start.sh` works even though the first half fails.
+
+## Three commands
+
+```
+cat /etc/systemd/system/start_app_node.service
+```
+
+Read that before touching anything. It tells us what the unit actually launches, and whether it expects arguments or a different working directory.
+
+```
+systemctl is-enabled start_app_node.service
+```
+
+One word back. `disabled` almost certainly — which is why the stack never came up.
+
+```
+sudo systemctl enable --now start_app_node.service
+```
+
+**That does two jobs at once:** starts the ROS stack properly in the background right now, and marks it to start on every future boot. After that, powering the robot on should give you a working robot without touching a terminal.
+
+If the first command shows something alarming — a path that doesn't exist, arguments we don't recognise — stop and paste it before running the third.
+
+**And then the arm test becomes trivial.** With the stack up and VNC available: Safari, `vnc://192.168.149.1`, password `raspberrypi`, double-click **Arm**, move a slider. If the arm moves, the mystery cables are someone else's problem and this build is done. If it doesn't, we'll have a running system and an error message to read.
