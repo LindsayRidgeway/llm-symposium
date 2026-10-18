@@ -6865,3 +6865,23 @@ What that leaves is the real problem: the rule that a *different architecture* s
 | 6 | rejected, with the reason | 16 |
 
 I rehearsed the validation on yesterday's 24 hours before trusting it: 39 transitions, each naming the amigo, and applying them reproduced the second count exactly — PASS. The real B is tomorrow night. A wake will run it and send you the two counts, the transitions by amigo, and whether the trail balances. Significance after the numbers, as you said.
+
+[Goose 2026-10-18 00:34] **Lindsay:** New status: The lights come on when I turn power on, and after about two mins, there's a beep. The robotic arm hasn't moved. Explanation: To get the powerline connector together again, I had to take everything apart again so I could get a good grips on both sides. Turned out, I also need to bend the pins down a tiny amount. Anyway, I finally got it together, then put things back together until I was sure nothing was touching. My mind was going down the route of, does the manuf have an assembly service? Anyway, then I flipped the power and all the lights came on. Flipped it off, completed assembly, flipped on power again, and all the lights still came on. Left it on while I tightened a couple of screws, and as I said, after about two minutes, there was a modest little beep.
+
+**Desi:** **That's the robot booting.** Lights on, and a beep at about two minutes is precisely the manual's sequence: switch on, LED1 lights and blinks, then the buzzer chirps when the system has finished starting. A first boot is slow — filesystem expansion, then the services — so two minutes is normal, not a fault.
+
+And the fix tells you the diagnosis was right, in the only way that counts: **a contact that would pass a voltmeter's microamps and not the board's amps.** You bent the pins down a hair and restored the grip. A theory confirmed by a repair, which is the first time in this build that's happened.
+
+**Write one thing down, and I have:** that connector is now a known weak point. A pin that needed bending to make contact can lose contact again — under vibration, or when the arm swings. If this robot ever goes dark intermittently, that connector is the first place to look, and you'll have forgotten by then unless it's in the file. It's in the build note, with the meter readings that found it and the arithmetic that explains why a voltmeter couldn't see it.
+
+## Next, in order
+
+1. **Check for the hotspot.** A network named something like `HW…`, password `hiwonder`. That's the software half confirming the hardware half. Phone, Wi-Fi list.
+2. **Is the lidar spinning?** By now it should be.
+3. **The arm.** Don't guess, and don't start plugging the two loose cables in yet. Once we're on the network we can read the logs and find out *why* the arm service isn't driving it. Four days of this build have been spent trying sockets in the dark; the robot can now speak for itself, and we should let it.
+
+For step 3 you'll need the manual's login for VNC/SSH — §1.4.2 has the username and password, and I don't want to guess at either.
+
+**On the assembly service:** HiWonder doesn't offer one worth the shipping, and you've now done the thing they'd have charged you for. You do have a support address that answered within a day, if the arm turns out to need a part.
+
+**One small safety note, said once:** you mentioned leaving it powered while you tightened screws. Fine for a cover, but don't do it at the blue terminal — a slipped screwdriver across those two screws is a dead short across a lithium pack. Power off, then tighten, then on.
