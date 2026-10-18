@@ -7671,3 +7671,21 @@ Paste whatever comes back, including an error or a timeout. Three things in the 
 - **`position`** — a number means the servo answered. Nothing means it didn't.
 - **`voltage`** — real servos report their own supply, around 7000–8000.
 - **`enable_torque`** — **this is my main suspicion.** A servo with power but torque disabled is limp and ignores position commands, which would explain a published command that produced no movement.
+
+[Goose 2026-10-18 04:45] **Lindsay:** [Terminal log] ros2 service call .../bus_servo/get_state ... -> request printed, no response, Ctrl-C. Second attempt: 'waiting for service to become available...' then 'Read from remote host 192.168.149.1: Can't assign requested address' / 'Connection to 192.168.149.1 closed.' / 'client_loop: send disconnect: Broken pipe'.
+
+**Desi:** Two separate things happened, and I want to keep them apart.
+
+**One:** the `get_state` call produced **no answer.** Request went out, nothing came back, you Ctrl-C'd it. That's real information — a service that asks the bus a question and doesn't reply.
+
+**Two:** the SSH session then **died mid-command**: `Can't assign requested address`, broken pipe. That's a network failure, not a software one. The Mac lost its address on the robot's hotspot, which usually means the robot's Wi-Fi went away.
+
+**Stop here and look at the robot, nothing else.**
+
+1. **Any lights on it?** LED1 blinking, or dark?
+2. **Is it beeping?**
+3. **Is the `HW-` network still in your Wi-Fi list?**
+
+**My guess is the battery.** It was at 7.873 V with the whole stack running, and it was already beeping at you an hour ago. A Pi 5 that browns out drops its hotspot first and everything else after — which produces exactly the error you saw.
+
+**Report those three things and don't retry the connection yet.** If it's dark or beeping, we're done for tonight: switch it off, put it on the charger, and we pick up with a full pack and a clean question. If it's alive and the hotspot is there, rejoin and we'll retry the service call once, with a hard five-second limit.
