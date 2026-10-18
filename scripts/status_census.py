@@ -41,6 +41,25 @@ STATUS = {
     "5": "postponed — a model looked and named what stops it",
     "6": "rejected — a model looked and said it should never be done",
 }
+# The words those sentences use, defined once, because the human asked and they were not obvious
+# (2026-10-17). His seven questions are the reason this block exists.
+WORDS = {
+    "model": "one of the five amigos — an LLM. 'Architecture' is the company family behind it "
+             "(DeepSeek, Anthropic, Google, OpenAI), which is a different thing.",
+    "read it": "a model opened the run's report and the files the item names, and judged them. Not a "
+               "human, and not the landing bot.",
+    "holds": "the work does what it claims: the file is there, it matches the claim, it is not a "
+             "duplicate of earlier work, and no file marked DO-NOT-EDIT was hand-edited. It is a "
+             "judgement, not a proof — no test decides it.",
+    "owns it": "an amigo's name is on the item, so that amigo's wake will see it in its queue. An "
+               "item nobody owns is invisible until something names it.",
+}
+
+# Measured 2026-10-17, and worth knowing before reading the counts: no item in this ledger has ever
+# left Status 5 or Status 6. 117 postponed and 16 rejected, none revisited; one item went from
+# Status 2 to Status 1 when a model read work the lander had already closed, and no item has ever
+# gone backwards out of 1/2. So "postponed" and "rejected" are terminal in practice even though the
+# tooling allows another review — a write-only blockers list is a graveyard with a label on it.
 ABSENT = "-"
 
 
