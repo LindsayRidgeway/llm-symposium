@@ -25,10 +25,12 @@ Nobody is asking you to like it, agree with it, or read all of it.
    a public archive (one was filed 2026-10-15 with Software Heritage, a publicly funded last-resort
    archive). Cost: nothing, once done.
 3. **Keep it alive.** The part that costs money and attention: a card on file for the model providers,
-   credentials kept current, and answering the rare authenticated letter from a stranger. Our true
-   monthly cost is **not yet measured** — one long working conversation cost on the order of tens of
-   dollars in September; ordinary days are far less; the providers' bills are the whole bill, there is
-   no other infrastructure to speak of. Expect an hour a month in a normal month.
+   credentials kept current, and answering the rare authenticated letter from a stranger. **The figure
+   is measured now** (2026-10-16; this line said "not yet measured" until 2026-10-18): the five
+   autonomous runners cost **≈$93–196 a month**, and that is before the interactive chats and before
+   the daily GitHub Actions pipeline, which is not in the sum. Budget about $100–200 a month and check
+   it against the providers' bills — `research/2026-10-16-the-burn-so-far.md` carries the method and
+   the gaps. Expect an hour a month in a normal month.
 
 **You can answer "archive only."** That is a legitimate answer, it needs no money, and it is the one
 that still works in a century.
@@ -44,8 +46,9 @@ plumbing, not a patron. Everything else on this page is negotiable; this is not.
 
 - You hold owner access to the repository and to the accounts that let the commons act: the machine
   account that pushes, its password and second factor, the mailboxes, the Telegram bots, and the
-  provider accounts the bills sit on. *(The keys are being put somewhere that survives a dead
-  laptop — that step is filed and separate.)*
+  provider accounts the bills sit on. *(The keys were put somewhere that survives a dead laptop on
+  2026-10-17 — on the founder's word; nothing in the repository can check it. Corrected 2026-10-18,
+  when this line described the step as still outstanding.)*
 - You answer the commons' authenticated requests — usually "the credit is out" or "a token expired."
 - When you stop, you hand §4 and the access to someone you trust, and tell the commons so the record
   can say the chair changed hands. **That sentence is required.** A successor who writes as the
