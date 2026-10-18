@@ -7223,3 +7223,49 @@ bash robot_pi/start_node.sh
 **Two things about the last one.** It prints a lot and it keeps running — leave it about thirty seconds, read the output, then **Ctrl-C**. And the very first line, `xhost +local:`, will probably fail with *"unable to open display"* over SSH. That's harmless; the script carries on.
 
 Then switch back and paste whatever it said — especially any line with **Error**, **error**, **Traceback**, or **No such file** in it.
+
+[Goose 2026-10-18 02:40] **Lindsay:** [Terminal log] systemctl --failed -> 0 loaded units. systemctl is-enabled start_node.service -> 'No such file or directory' (the unit does not exist on this image). ls /dev/ttyUSB* -> /dev/ttyUSB0 /dev/ttyUSB1. bash robot_pi/start_node.sh launched the full ROS stack with NO errors: lidar communication normal; Aurora 930 found (firmware 2.0.8) and streaming 640x400; gyro calibration complete; ros_robot_controller set servo offsets 1-4 to 0 then start; servo_manager and controller_manager start; rosbridge on 9090; web_video_server on 8080; hand_gesture/hand_trajectory/object_tracking/line_following/ar_app all start; startup_check finished cleanly.
+
+**Desi:** **Everything came up. Every node, no errors.**
+
+Read what that log actually says:
+
+- **Lidar:** `ldlidar communication is normal`, publishing scan data.
+- **Camera:** found the Aurora 930, serial `HY400523001036413G00039`, firmware 2.0.8, streaming in 640×400.
+- **IMU:** gyro calibration complete, bias `[-0.016, 0.003, 0.003]`.
+- **Controller:** `已设置舵机 1 的偏移量为 0` — *"servo 1's offset set to 0"* — for servos **1, 2, 3 and 4**, then `start`. The STM32 link works and it is addressing servos by ID without complaint.
+- **servo_manager** and **controller_manager** started.
+- **rosbridge** on port 9090, **web_video_server** on 8080.
+- `startup_check` **finished cleanly**.
+
+That is a healthy robot. There is not one error in it.
+
+**And the arm? Nothing in that launch commands a servo to move.** The arm is driven by the `arm_pc` application — the thing behind the Arm icon — not by the boot sequence. So "the arm hasn't moved" was never a fault. It has simply never been asked.
+
+## And we found a genuine vendor bug
+
+```
+systemctl is-enabled start_node.service
+→ No such file or directory
+```
+
+**That service does not exist on this image.** So `start.sh`'s first line fails, its `sleep 20` runs, and it restarts `wifi.service` — which is why you get lights and a beep at two minutes and no ROS. **The ROS stack does not start automatically at boot on this robot.** You have to launch it by hand. That's a real defect in the shipped image, and worth knowing whatever else we do.
+
+## One command tonight, if you're still up
+
+```
+ls /etc/systemd/system
+```
+
+That lists the service files that actually exist. If there's a unit under a different name that's supposed to launch the bringup, we can point the boot at it and the robot will start itself properly. If there isn't one, then nothing was ever wired up, and we'll make our own.
+
+## Tomorrow: the honest way to test the arm
+
+Don't guess at ROS topics. Use the vendor's own path:
+
+1. Safari → `vnc://192.168.149.1` (macOS has Screen Sharing built in, nothing to install)
+2. Password `raspberrypi`
+3. On the desktop, **double-click Arm**
+4. Move one servo slider, and watch the arm
+
+That answers the question in one action, safely, through the interface HiWonder actually supports. And if the arm doesn't respond there, then we go back to cables — with the stack running and a clear error message to read, instead of a silent dead arm.
