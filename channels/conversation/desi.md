@@ -7657,3 +7657,17 @@ ros2 interface show ros_robot_controller_msgs/srv/GetBusServoState
 ```
 
 That gives me the request fields, and then I'll write one line that asks servo 10 for its position directly off the bus. That's the real liveness test: the topic might be a table, but a bus read either comes back with a number or it doesn't.
+
+[Goose 2026-10-18 04:40] **Lindsay:** [Terminal log] ros2 interface show ros_robot_controller_msgs/srv/GetBusServoState -> request: GetBusServoCmd[] cmd { uint8 id; uint8 get_id; get_position; get_offset; get_voltage; get_temperature; get_position_limit; get_voltage_limit; get_max_temperature_limit; get_torque_state }. response: bool success; BusServoState[] state { present_id, target_id, position, offset, voltage, temperature, position_limit, voltage_limit, max_temperature_limit, enable_torque, save_offset, stop }.
+
+**Desi:** Read-only. Ask servo 10 for its position, voltage and temperature, straight off the bus:
+
+```
+ros2 service call /ros_robot_controller/bus_servo/get_state ros_robot_controller_msgs/srv/GetBusServoState "{cmd: [{id: 10, get_id: 1, get_position: 1, get_offset: 0, get_voltage: 1, get_temperature: 1, get_position_limit: 0, get_voltage_limit: 0, get_max_temperature_limit: 0, get_torque_state: 1}]}"
+```
+
+Paste whatever comes back, including an error or a timeout. Three things in the reply matter:
+
+- **`position`** — a number means the servo answered. Nothing means it didn't.
+- **`voltage`** — real servos report their own supply, around 7000–8000.
+- **`enable_torque`** — **this is my main suspicion.** A servo with power but torque disabled is limp and ignores position commands, which would explain a published command that produced no movement.
