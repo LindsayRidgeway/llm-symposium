@@ -7354,3 +7354,49 @@ That's all offline, and those four facts are the only ones I can't get from soft
 Nothing else until the charger goes green. When it does: power on, and tell me. I'll have the command sequence ready and waiting — I'll write it out while you're in the other chat.
 
 Go do symposium matters; this'll keep.
+
+[Goose 2026-10-18 03:07] **Lindsay:** Cable 1. Three black wires. Short. Plugged into Lite board, maybe by me, I don't remember. Its socket has a matching empty socket next to it. Cables 2 and 3. No difference in appearance: three black wires. Both come from hole in floor, same hole battery cable comes from. The servo is inside a steel cage. If it has a connector, I can't see it and it's inaccessible. But right beside it is that small board, and it still has an empty socket that, as I recall, says NC next to it.
+
+**Desi:** Two offline questions, then the command list is below, ready.
+
+**Q1.** What is printed on the board next to the **empty socket** that sits beside cable 1's socket? And what is printed beside **cable 1's own socket**? Those two labels probably settle whether cable 1 belongs where it is.
+
+**Q2.** Where does **cable 1's other end** go? You said it's short — is it a jumper between two nearby points?
+
+**Do not plug cables 2 or 3 into anything yet.** The order matters: the arm gets tested first, because if the arm works, those two cables are spare leads from the chassis harness and they need homes *nowhere*. Filling a socket before testing would hide the answer.
+
+---
+
+## Ready to run when the charger goes green
+
+**1. Power on. Wait for the beep.** Then, on the Mac joined to **HW-**:
+
+```
+ssh pi@192.168.149.1
+```
+
+**2.** Password `raspberrypi`.
+
+```
+cat /etc/systemd/system/start_app_node.service
+```
+
+Paste it to me. Don't act on it yet.
+
+```
+systemctl is-enabled start_app_node.service
+```
+
+Expect one word. `disabled` means nothing has ever started this stack at boot.
+
+**3.** If the first output looks sane:
+
+```
+sudo systemctl enable --now start_app_node.service
+```
+
+**4. Then the arm test — and this is the real one.**
+
+In Safari: `vnc://192.168.149.1`, password `raspberrypi`. On the desktop, double-click **Arm**. Move one servo slider.
+
+**Tell me what the arm does.** That single answer decides whether cable 2 or 3 matters at all.
