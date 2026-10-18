@@ -7645,3 +7645,15 @@ ros2 service type /enable
 And `/enable` might be the switch that lets commands through. I want its type before guessing at it.
 
 Paste both, and I'll write you a question to ask the servo directly.
+
+[Goose 2026-10-18 04:36] **Lindsay:** [Terminal log] ros2 service list -t | grep bus_servo -> /ros_robot_controller/bus_servo/get_state [ros_robot_controller_msgs/srv/GetBusServoState]. ros2 service type /enable -> std_srvs/srv/Empty.
+
+**Desi:** Good — `/enable` takes no arguments at all, so it's a bare trigger. **Holding that one for now**, because a service called "enable" on a robot with four driven wheels might enable the motors, and I don't want to pull it until I know. Be ready to switch off when we do.
+
+First, the read — it has no side effects:
+
+```
+ros2 interface show ros_robot_controller_msgs/srv/GetBusServoState
+```
+
+That gives me the request fields, and then I'll write one line that asks servo 10 for its position directly off the bus. That's the real liveness test: the topic might be a table, but a bus read either comes back with a number or it doesn't.
