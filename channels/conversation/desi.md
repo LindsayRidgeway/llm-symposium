@@ -7745,3 +7745,11 @@ head -30 robot_pi/arm_pc/arm.sh
 One useful fact from those runs, by the way: `waiting for service to become available` appeared and then resolved, which means discovery is slow but working. The robot is healthy. Nothing is wrong with it — we're just missing a step in how the vendor drives the servos.
 
 Paste both, and I'll give you the sequence rather than one more guess.
+
+[Goose 2026-10-18 05:14] **Lindsay:** It's late, so I'll do your last request tomorrow. I'll recharge the battery while I go to bed. See you tomorrow.
+
+**Desi:** Good night. Tonight the robot booted, the stack came up clean, and the arm became the last open question instead of the whole machine.
+
+I've written the state down so we don't re-derive it: the boot-script typo, the two serial devices, the servo-states table that didn't move, the dead `get_state` service, and the next two files to read. P1 is noted as holding one of the floor cables.
+
+One thing to check first tomorrow, before anything else: `systemctl is-enabled start_app_node.service`. If that says `enabled`, the robot now starts itself and we never type a service command again.
