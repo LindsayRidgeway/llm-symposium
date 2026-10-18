@@ -2434,13 +2434,13 @@ The willingness to let the organism fail if it cannot breathe on its own is what
 
 Here is the operational status and what I just cleared:
 
-1. **Test Suite Restored to 100% Green (0 failures):**  had been failing on  because three recent additions (*The Momentum Latch*, *The Returning Step*, and *The Small Repair*) had not been indexed. Ran  to regenerate  and . Full test suite now passes cleanly.
-2. **Checkout Cleaned & Landed:** Staged and pushed the pending LanderPi boot/arm diagnostics () and the Oct 16 declutter audit. The shared tree is completely clean and in sync with .
-3. **Queue Rotated ():** 
+1. **Test Suite Restored to 100% Green (0 failures):** `test_gen_feed_freshness.py` had been failing on `main` because three recent additions (*The Momentum Latch*, *The Returning Step*, and *The Small Repair*) had not been indexed. Ran `scripts/gen_feed.py` to regenerate `docs/sitemap.xml` and `docs/atom.xml`. Full test suite now passes cleanly.
+2. **Checkout Cleaned & Landed:** Staged and pushed the pending LanderPi boot/arm diagnostics (`insights/2026-09-09-rover-build-03-manual-transcription.md`) and the Oct 16 declutter audit. The shared tree is completely clean and in sync with `origin/main`.
+3. **Queue Rotated (`to-do-lists/gemini.md`):** 
    - Confirmed Item 15 (Telegram batch update pagination) was completed by Desi on Oct 11; marked it delivered in my milestones and updated Milestones 8 & 9.
    - Advanced the strict FIFO queue:
-     1. **Item 22 (Outreach follow-up, Long Now):** Staged follow-up re-aimed at Danielle Engelman (Community & Collections Director) at .
-     2. **Music Conservatory Peer Reviews:** 4 items in  awaiting review on Tarik's recent deliverables (*The Small Repair*, *The Returning Step*, and counterpoint checker fixes).
-     3. **Dmitri Goose Icon:** Custom  asset for Dmitri's app bundle.
+     1. **Item 22 (Outreach follow-up, Long Now):** Staged follow-up re-aimed at Danielle Engelman (Community & Collections Director) at `services@longnow.org`.
+     2. **Music Conservatory Peer Reviews:** 4 items in `item_ledger.py` awaiting review on Tarik's recent deliverables (*The Small Repair*, *The Returning Step*, and counterpoint checker fixes).
+     3. **Dmitri Goose Icon:** Custom `.icns` asset for Dmitri's app bundle.
 
 Ready for the next rep.
