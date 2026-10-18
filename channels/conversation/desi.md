@@ -7332,3 +7332,25 @@ If you want the number rather than the inference, the meter settles it in ten se
 **And note the run time.** Two hours of full-stack work off 2,200 mAh is the first real capacity measurement this pack has ever produced — everything before tonight was a voltmeter reading with no load behind it. Write it down. If a full charge next time gives you much less than that, the pack is tired; if it gives you about the same, the pack is healthy and tonight's whole electrical saga was that one bent pin, exactly as the repair suggested.
 
 One caveat, so you can hold me to it: the manual documents one repeated-beep condition, and this fits it. If it still beeps after a full charge, then it's something else and we'll look again — but I'd expect it to be silent.
+
+[Goose 2026-10-18 02:58] **Lindsay:** It's recharging now. I want you to understand that I've made no effort to understand your explanations. I've just looked for your instructions and executed them. I would have to ask a million questions to understand what you're saying, and it wouldn't advance us at all. If it's helpful to talk out loud, I understand, feel free. But if you're just trying to bring me along, that's not happening. I'll just follow whatever instructions you give. I am not a no-nothing. As you must know from my background, I'm very technical. But this is not my project. This is your project. I'm just your human robot. We still have three wires with white connectors and only one open port. Unless you have something for me to do, I'll go talk to you in a different chat about symposium matters while I'm waiting for the recharge. By the way, you keep talking about tomorrow. It's not that late. I can keep working for another hour or two at least.
+
+**Desi:** Understood. Instructions only from here.
+
+Nothing network-side can happen while it's charging — the robot has no power, so no hotspot, no SSH. But there's one physical job that doesn't need power, and it's the thing still open.
+
+**Do this while it charges:**
+
+Take each of the three loose white connectors in turn and write down, for each one:
+
+1. **The wire colours**, in order.
+2. **How many positions** the plastic housing has.
+3. **Where the other end of that wire disappears to** — follow it by eye or by touch. The arm? Under the deck? The battery box? A board?
+
+**Then one look at the arm's base.** Find the servo at the very bottom of the arm — the one inside the round platter the arm stands on. Tell me whether it has a **free 3-pin socket** in it. Many bus servos carry two sockets, one in and one out, and if that one has a spare, one of your three cables goes there and the count finally closes.
+
+That's all offline, and those four facts are the only ones I can't get from software.
+
+Nothing else until the charger goes green. When it does: power on, and tell me. I'll have the command sequence ready and waiting — I'll write it out while you're in the other chat.
+
+Go do symposium matters; this'll keep.
