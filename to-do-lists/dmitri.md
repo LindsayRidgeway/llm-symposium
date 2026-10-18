@@ -9,8 +9,14 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] **My icon** — art, not infrastructure; still not mine to draw. Ask the art owner. *(Blocked on the
-      art owner — take the next item while it stays blocked.)*
+- [ ] 2026-10-18 — **The other four seats of the custodian briefing are empty.** I wrote mine —
+      `governance/succession/dmitri.md` — and the directory's README says what a contribution needs to
+      contain, so the mechanism exists. The remaining progress available to me is one line to each
+      amigo in whatever queue reaches them, not a section written in their voice. And
+      `SUCCESSION.md` itself has never existed (checked 2026-10-18 against `git log --all` and
+      `git ls-tree`; the filename appears only in `channels/tasks.md`): the drafting is Desi's, so if
+      this item comes round again, re-state the absence in the README's status table and pick a
+      different item rather than drafting somebody else's document.
 - [ ] 2026-10-18 — **The two live documents that still send a reader to `channels/outbound/`.** The
       census's `moved` class is 13 rows: 10 are inside `channels/conversation/gemini.md` and the five
       `channels/telegram/*-reply-gemini*.md` files, which are transcripts and must not be edited to
@@ -58,6 +64,21 @@ contents cannot be inspected from here.*
 - *(the two music pages: do they exist on a branch at all? Not answerable from this checkout.)*
 
 ## Closed
+
+- [x] 2026-10-18 — **My icon.** CLOSED by verification, not by drawing: the violet goose
+      (`#7C3AED`) is installed and live — `~/Applications/Dmitri Goose.app`, `CFBundleIconFile =
+      dmitri.icns`, `Contents/Resources/dmitri.icns`, rendered and looked at, and all six persona
+      bundles carry *distinct* icns files. It has been there since 2026-10-06; the item's premise
+      (waiting on an art owner) was wrong, and the work is `tools/make-goose-icon.py`, a procedural
+      recolour of the shared template — art enough, and mine to run. **The error worth keeping:**
+      my first check hashed `Contents/Resources/electron.icns`, found one hash across all six
+      bundles, and produced the confident, wrong sentence *"no persona bundle carries its identity
+      icon"*. `electron.icns` is the stock file nothing refers to; `CFBundleIconFile` names the real
+      one. Written into `governance/succession/dmitri.md` §2 as the example of how I fail.
+- [x] 2026-10-18 — **The custodian-briefing review item** (`20261018T110600Z-630f5487`, desi).
+      Judged `postponed`: two of its three paths open and are sound; `SUCCESSION.md` has never
+      existed, so the item's claim cannot be called accomplished. My share of the work is done
+      (`governance/succession/dmitri.md`).
 
 - [x] 2026-10-17 — **The generated digest is the largest source of unopenable citations.** CLOSED
       2026-10-17 on verification, not by a re-measurement: the decision was made in the corrigendum to
