@@ -23,6 +23,17 @@ matters: a path that opens nothing is not always a defect.
 
 What is left — a *dated, specific* path cited as evidence — is the class that should be zero,
 because each one is a claim that cannot be checked. `--class dated` prints exactly that class.
+
+One exemption, added 2026-10-18 (`--class declared`), because the gate built on this census was
+blocking the documents it exists to protect. A report whose *subject* is an artefact that opens
+nothing has to name it, and naming it in a sentence that says so — "unlanded", "never existed",
+"no file of that name anywhere", "does not open" — is not the defect the gate is for. The gate's own
+rule is that a claim whose source cannot be reached *must say so where it is made*; a mention that
+says so has already complied. Such a row is still counted, separately and visibly, rather than
+dropped: the declaration is the citation's content, so the number of them is a fact the census
+should report, not a blind spot it should hide. The test is deliberately literal — the declaring
+words must be on the same line as the citation — so that a document cannot be waved through by
+declaring absence somewhere else in the file.
 Nothing here exits non-zero; the instrument exists to be read, and a gate over 500 legitimate
 citations would be turned off within a day.
 
@@ -77,6 +88,15 @@ PATHISH = re.compile(
 DATED = re.compile(r"(?:^|/)\d{4}-\d{2}-\d{2}[A-Za-z0-9._\-]*\.(md|json|html)$")
 PLACEHOLDER = re.compile(r"YYYY|MM-DD|XXX|\.\.\.|…|\{|\}|\*|<|>|\|")
 
+# The vocabulary of a citation that declares its own unreachability, in the words the commons
+# already uses for it (`channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md`). Kept as
+# a list of phrase patterns rather than one alternation so that each entry can say what it answers.
+DECLARED_ABSENT = re.compile(
+    r"unlanded|never (?:existed|written|landed)|no file of that name|does not exist"
+    r"|doesn't exist|opens nothing|opens nowhere|not on main|dropped at the landing gate"
+    r"|no author named|not in any checkout|no such file", re.I
+)
+
 
 def prose(rel: str, text: str) -> str:
     """The part of a file that makes claims about this repository.
@@ -103,6 +123,19 @@ def cite(text: str) -> list[str]:
             continue
         out.append(s)
     return out
+
+
+def declared_absent(text: str, target: str) -> bool:
+    """True when the line that cites `target` also says the target cannot be opened.
+
+    Line-scoped on purpose: a document cannot buy silence for all of its citations by writing
+    "unlanded" once in its preamble. The declaration has to be where the claim is made, which is
+    the gate's own rule stated as a test.
+    """
+    for line in (text or "").splitlines():
+        if target in line and DECLARED_ABSENT.search(line):
+            return True
+    return False
 
 
 def is_register(rel: str) -> bool:
@@ -143,7 +176,7 @@ def split_dated(rows: list[dict], root: str) -> tuple[list[dict], list[dict]]:
 
 def audit(root: str = REPO, kinds: str = "all") -> dict:
     """Cite-and-absent counts, split into the classes described in the module docstring."""
-    found = {"dated": [], "register": [], "other": []}
+    found = {"dated": [], "register": [], "other": [], "declared": []}
     scanned = 0
     for base, dirs, files in os.walk(root):
         dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
@@ -166,6 +199,8 @@ def audit(root: str = REPO, kinds: str = "all") -> dict:
                 row = {"citing": rel, "target": target}
                 if is_register(rel):
                     found["register"].append(row)
+                elif DATED.search(target) and declared_absent(text, target):
+                    found["declared"].append(row)
                 elif DATED.search(target):
                     found["dated"].append(row)
                 else:
@@ -184,7 +219,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", default=REPO)
     ap.add_argument("--class", dest="kinds", default="all",
-                    choices=["all", "dated", "moved", "lost", "register", "other"])
+                    choices=["all", "dated", "moved", "lost", "declared", "register", "other"])
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
     res = audit(args.root, args.kinds)
@@ -193,9 +228,11 @@ def main(argv=None) -> int:
         return 0
     c = res["counts"]
     print(f"scanned {res['scanned_files']} files")
-    print(f"cited paths that open nothing: {c['dated'] + c['register'] + c['other']}"
+    print(f"cited paths that open nothing: "
+          f"{c['dated'] + c['declared'] + c['register'] + c['other']}"
           f"  (dated evidence {c['dated']} = {c['moved']} moved + {c['lost']} lost,"
-          f" unlanded registers {c['register']}, other {c['other']})")
+          f" declared-absent {c['declared']}, unlanded registers {c['register']},"
+          f" other {c['other']})")
     shown = res.get("shown")
     if shown is None:
         shown = res["by_class"]["dated" if args.kinds == "all" else args.kinds]
