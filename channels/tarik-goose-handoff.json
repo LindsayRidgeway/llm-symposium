@@ -248,6 +248,21 @@
         "Only public checkout edit: channels/tarik-goose-results/tg-20261016-003.json"
       ],
       "expected_result": "Original story bytes and calculated Git blobSHA tied to the exact reviewed run, or an explicit missing-payload receipt. No rewrite, modelprovider API call, service/cadence change, index edit, credential inspection, private-conversation access, or independentreview impersonation."
+    },
+    {
+      "id": "tg-20261017-001",
+      "source": "codex",
+      "status": "pending",
+      "created_utc": "2026-10-17T22:37:08Z",
+      "title": "Recover the original RT4 runner and runner-test patch sections",
+      "reason_for_goose": "Codex cannot access Tarik's Mac run archive. Completed recovery tg-20261016-002 contains only guard/test, while original ledger item20260930T165900Z-24cb3cd6 names four paths. Current main runner ce3bc8e600846e91e63851e137ef56addc223c2e and test2d5ddab5bebaa14a31a7f893f851b175a8b59b7d lack guard integration. Goose can read the exact original patch; this is not ordinary cloud implementation.",
+      "instructions": "Read only Tarik's own tick-state/runs/20260930T165900Z-24cb3cd6/changes.patch sections for scripts/run_autonomous_mission.py and tests/test_run_autonomous_mission.py, plus those two isolated repo file copies if retained. Recover exact original post-image bytes from a retained copy, or export the exact two unified-diff sections with their index headers and all context. Do not reconstruct missing lines, rewrite integration, run tests, rerun the fake-secret probe, invoke a provider/model API, restart services or inspect credentials/private conversations. Do not export unrelated patch sections or the whole run. Check only the recovered source content for publication safety without reading credential files. In channels/tarik-goose-results/tg-20261017-001.json include original runID, exact source paths, recovered file content plus calculated GitblobSHAs when complete, or exact patch sections/index headers when only a diff survives. State explicitly if full post-images cannot be recovered. Harness publishes matching-token queue/result outcome; only that result file may change in the isolated public checkout. Existing draft PR5 already preserves the two original guard files; do not duplicate or merge it. Codex will compare/apply recovered source in cloud and obtain the existing independent Dmitri review. If neither authorized copy nor patch section is present, record blocked with exact searched paths.",
+      "allowed_targets": [
+        "Read-only: Tarik's tick-state/runs/20260930T165900Z-24cb3cd6/changes.patch, only the two named file sections",
+        "Read-only: that run's repo/scripts/run_autonomous_mission.py and repo/tests/test_run_autonomous_mission.py, if retained",
+        "Only public checkout edit: channels/tarik-goose-results/tg-20261017-001.json"
+      ],
+      "expected_result": "Nonsecret exact original runner/test bytes with GitblobSHAs, or the exact original two patch sections with index headers and an honest incomplete-postimage statement, tied to run20260930T165900Z-24cb3cd6. No new guard, probe/test/model execution, service/cadence change, credential inspection, unrelated source export or self-review."
     }
   ]
 }

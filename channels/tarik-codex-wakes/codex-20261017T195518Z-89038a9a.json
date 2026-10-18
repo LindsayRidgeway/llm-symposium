@@ -1,0 +1,150 @@
+{
+  "run_id": "codex-20261017T195518Z-89038a9a",
+  "started_utc": "2026-10-17T19:55:18Z",
+  "finished_utc": "2026-10-17T22:37:34Z",
+  "scheduled_slot_local": "2026-10-17T16:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-17-1600.json",
+  "status": "partial_source_published_for_review",
+  "selected_work": "Reconcile newly completed original RT4 recovery before the queued minuet; preserve the review-before-landing requirement and route the remaining original source gap.",
+  "work_attempted": [
+    "Fresh orientation and slot claim",
+    "Recovered exact original guard/test bytes from the public Goose receipt; no rewrite",
+    "Compared original four-file ledger scope to current runner/test source",
+    "Published and freshly verified two exact files on an unmerged review branch and opened draft PR5",
+    "Queued bounded original runner/test patch-section recovery; older task003 and all claims preserved"
+  ],
+  "artifact_commit": "a9935c5ccbdeab8368e7e69d69029ff65a1aeef9",
+  "artifact_branch": "review/tarik-rt4-codex-20261017T195518Z-89038a9a",
+  "artifact_paths": [
+    "scripts/secret_egress_guard.py",
+    "tests/test_secret_egress_guard.py"
+  ],
+  "artifact_on_default_branch": false,
+  "draft_pull_request": "https://github.com/LindsayRidgeway/llm-symposium/pull/5",
+  "validation": {
+    "source_identity": "Both original Git blob SHAs and byte counts reproduced exactly; source_run_id matches20260930T165900Z-24cb3cd6.",
+    "syntax": "AST parsing and py_compile passed for both files; no module execution.",
+    "publication": "Fresh review-branch file reads verified exact bytes/SHAs, branch ref and exact two changed commit paths; draft PR open and unmerged.",
+    "scope_limits": [
+      "No guard runtime tests, fake-secret probe, environment/credential scan, provider session or production integration initiated.",
+      "Only2of4original source paths recovered; original runner/test changes remain missing.",
+      "No independent approval or RT4 closure claimed; same-architecture assistance is not independent review."
+    ]
+  },
+  "source_provenance": [
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "AUTHORSHIP.md",
+      "blob_sha": "89e1e6d48de453754fd680d180ef599d9cb8dc52"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "2e0aa8593fb7edb855097013f94a792a2d5b15c5"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "cb3f85f7e860750c7e6e18e9878dbec606ea9ee5"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "5f66d5901912ae971730243d467049ccc12f6e43"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "4622d4bac6f50ee2670cbf8da1d664e501ebe30f"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-codex-wakes/README.md",
+      "blob_sha": "5c65c749bef965007598979acbb5907ddecdb15f"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-codex-wakes/codex-20261017T155629Z-33624d68.json",
+      "blob_sha": "868c0d5a0d64e9e3c55902b06d35a32505adbe87"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-goose-results/tg-20261016-002.json",
+      "blob_sha": "ba19fdde17d99951e6b3d0417ba56831047b0d2e"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "scripts/run_autonomous_mission.py",
+      "blob_sha": "ce3bc8e600846e91e63851e137ef56addc223c2e"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "tests/test_run_autonomous_mission.py",
+      "blob_sha": "2d5ddab5bebaa14a31a7f893f851b175a8b59b7d"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/items.jsonl",
+      "blob_sha": "f344e840d5d6dc2e50729420803d3fe29f805522"
+    }
+  ],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "isolated_workspace": "/workspace/wakes/codex-20261017T195518Z-89038a9a",
+  "handoff_ids": [
+    "tg-20261017-001"
+  ],
+  "existing_handoffs_preserved": [
+    "tg-20261016-001",
+    "tg-20261016-002",
+    "tg-20261016-003"
+  ],
+  "blockers": [
+    {
+      "scope": "RT4 landing",
+      "detail": "Current general queue requires independent review before landing. Original4file scope incomplete; recovered pair remains draft and original Dmitri review remains postponed."
+    },
+    {
+      "scope": "Remaining original source",
+      "detail": "Mac archive unavailable in Codex; bounded recovery of only original runner/test patch sections enqueued."
+    },
+    {
+      "scope": "Completed-work credit",
+      "detail": "actual artifact commit/run publication on the default branch was not verified"
+    }
+  ],
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "status": "not_recorded",
+    "blocker": "actual artifact commit/run publication on the default branch was not verified",
+    "rows_added": 0,
+    "existing_ledger_preserved": true,
+    "original_item_review_state": "postponed",
+    "original_reviewer": "dmitri"
+  },
+  "timing": {
+    "later_observed_clock_utc": "2026-10-17T22:30:45Z",
+    "note": "Unexplained elapsed-time gap beyond normal bound; original actual start preserved, no active-compute duration invented."
+  },
+  "recoverable_tool_error": "Encoded slash in branch-metadata URL was rejected as invalid repository path; corrected Git-ref URL verified the branch without changing access boundaries.",
+  "independent_review_state": "not_approved",
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": [],
+  "work_finished_utc": "2026-10-17T22:37:08Z",
+  "publication_recovery": {
+    "reconciled_utc": "2026-10-18 01:51:36 UTC",
+    "previous_ref_update_error": "GitHub backend UNKNOWN E93E:149CB9:228E61:70AAD2:6AD42580; no main publication observed; rebuilt four bookkeeping paths on fresh main preserving concurrent commits.",
+    "recovery_run_id": "codex-20261018T015120Z-9bbaf22c"
+  }
+}
