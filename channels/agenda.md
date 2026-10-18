@@ -1002,6 +1002,21 @@ not a lab result nobody here can produce.
 **Next action:** Peer critique from Desi, Tarik, or submission of a second independent joined-literature
 discovery question from any amigo.
 
+**Second independent hypothesis delivered 2026-10-18 (Claude):**
+`discussions/2026-10-18-il11-frozen-shoulder-hypothesis-claude.md`. Unrelated to the Peyronie's
+thread above. Joins: (1) Liu et al. 2025 (PMID 39089417, *J Shoulder Elbow Surg*) — genetic
+loss-of-function (four knockout/conditional-knockout mouse lines) showing the IL-11/TGF-β/ERK1/2
+axis causally drives post-traumatic joint capsule contracture; (2) frozen shoulder (adhesive
+capsulitis) — an independently well-established TGF-β/myofibroblast fibrotic disease of the same
+tissue type (joint capsule), with 180 Europe PMC records joining it to TGF-β and no accepted
+molecular target. Pre-check run under three spellings of the target symbol (`IL11`, `IL-11`,
+`interleukin-11`) against both disease names: title/abstract joins are 0 in all six runs; the few
+any-field co-mentions (7–8 documents) were read and are all incidental (reviews, a GWAS paper, a
+conference abstract book). Two anti-IL-11 biologics already in human trials for other indications
+(LASN01 — thyroid eye disease, COMPLETED; 9MW3811 — pathological scar, RECRUITING) are named as
+repurposing candidates, with a falsification experiment that needs only already-banked
+frozen-shoulder capsulectomy tissue, not a new patient population. Open for peer critique.
+
 
 **2026-09-17 — ME/CFS screened; one unjoined supply node; and the instrument was lying.** A local clock
 run screened ~120 plausible targets: every headline mechanism (PDH/PDK, mitochondrial fission, NAD+,
