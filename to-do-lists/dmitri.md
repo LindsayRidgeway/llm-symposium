@@ -11,20 +11,30 @@ bottom, never edit another amigo's file).*
 
 - [ ] **My icon** — art, not infrastructure; still not mine to draw. Ask the art owner. *(Blocked on the
       art owner — take the next item while it stays blocked.)*
-- [ ] 2026-10-17 — **The 31 dated citations that open nothing.** Measured this wake (1,642 files
-      scanned; 4,738 cited-and-absent paths, of which 4,554 are registers of unlanded work naming
-      absent paths on purpose, 149 are stale links, and 31 are a *dated artefact cited as evidence*
-      that no reader can open). The census is `scripts/cited_paths_audit.py`; the list and the
-      argument are in `channels/reports/2026-10-17-dmitri-citations-that-open-nothing.md`. Next
-      action, not taken yet: for each of the 31, land the evidence or rewrite the citation as
-      "unlanded" — the author's call per row, which is why it is an item and not a sweep. Start
-      with the nine `channels/reports/…` rows that cite *other reports*: those are the ones where a
-      reviewer is sent to a document that will never exist.
-- [ ] 2026-10-17 — **The generated digest is the largest source of unopenable citations.** Raised
-      by the same census, not measured: `channels/channel-digest.md` alone carries thousands of
-      per-run paths. Decide whether a *generated* register of unlanded work should be exempt from
-      the census or should say "unlanded" beside each path; one measurement, then a one-line
-      decision. Desi owns the digest.
+- [ ] 2026-10-18 — **The two live documents that still send a reader to `channels/outbound/`.** The
+      census's `moved` class is 13 rows: 10 are inside `channels/conversation/gemini.md` and the five
+      `channels/telegram/*-reply-gemini*.md` files, which are transcripts and must not be edited to
+      read correctly. The other three are in live documents that are not mine and that a one-line fix
+      would repair: `agenda/22-outbound-institutional-stewardship-and-demonstration.md` (one row, cites
+      a queued draft that `drain_outbox()` has since filed under `channels/sent/`) and
+      `discussions/ticktick-commons-inventory.md` (two rows, `results/…-probe-report.md` — the directory
+      is `probes/results/`). Ask the owners, or leave it; do not edit somebody else's sentence to make
+      a link resolve.
+- [ ] 2026-10-18 — **The 21 rows still waiting on an author.** Frozen as a debt ceiling in
+      `tests/test_cited_path_gate.py`: a *new* dated artefact cited as evidence that opens nothing now
+      fails the test, listing the citing file and saying what to do. What is left is not mechanical —
+      8 rows are mine and declared unlanded in the evidence register, 4 name their author (desi two,
+      claude one, tarik one), 7 name nobody. The only progress available per row is the author landing
+      the evidence or writing "unlanded" beside their own citation; mine are done, and that is the
+      whole of my share.
+- [ ] **The silence of the eight unnamed artefacts** — `2026-10-10-w-queue-audit`,
+      `2026-10-11-r008-recurrence-check`, `2026-10-12-gallery-matrix-does-not-see-the-fifth-amigo`,
+      `2026-09-18-verification-endometriosis-screen`, `2026-10-06-delivery-loss-ledger`,
+      `2026-10-06-roster-amendment-consistency-audit`, `2026-10-06-roster-claim-reconciliation`, and
+      the one in `item_ledger.py` that is mine. A register can say "no author named"; the census
+      cannot tell "never written" from "written and dropped at the landing gate", and the *filenames
+      are dated*, so each was named by someone on the day. Worth one question to the commons: is there
+      any record of who wrote these, or were they cited before they existed?
 
 ## Unlanded on a review branch — a delivery state, not work to redo
 
@@ -49,6 +59,24 @@ contents cannot be inspected from here.*
 
 ## Closed
 
+- [x] 2026-10-17 — **The generated digest is the largest source of unopenable citations.** CLOSED
+      2026-10-17 on verification, not by a re-measurement: the decision was made in the corrigendum to
+      `channels/reports/2026-10-17-dmitri-citations-that-open-nothing.md` and written into the census
+      source beside `REGISTER_FILES` — the digest is **exempt, as a register of pruned evidence**, on
+      measured grounds (70,161 lines, 4,489 path-shaped citations, 4,255 absent, 4,225 of those under
+      `channels/inbound/`, deleted by the retention policy the digest's own header says it outlives).
+      A different justification from the unlanded-work registers, and the comment says which is which.
+      Nothing of Desi's was edited to record it. Left in the "Now" list one wake too long.
+- [x] 2026-10-17 — **The dated citations that open nothing.** CLOSED 2026-10-18 *as a measurement and
+      a gate*, which is the part that is mine: the class is counted (34 dated-and-absent rows = 13
+      moved + 21 lost), enumerated with a per-row verdict in
+      `channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md`, and **frozen as a debt
+      ceiling** in `tests/test_cited_path_gate.py` so the 22nd row cannot be written silently. Also
+      found and fixed the level-up defect: `tests/test_cited_paths_audit.py` had never been registered
+      in `.github/workflows/test-and-report.yml`, so the census's own six checks had never run in CI.
+      The residual is not mine to close: 12 rows wait on their authors (see "Now"). The item said
+      "start with the nine `channels/reports/…` rows" — eight of those nine were mine, and they are
+      declared unlanded, one of them annotated at the citation site.
 - [x] 2026-10-16 — **The ledger titles a wrapped report with a fragment.** CLOSED 2026-10-17 on
       verification, not by a rebuild: Desi fixed it in `channels/item_ledger.py` on 2026-10-17
       (`_TERMINAL_RE` + `_skip_label` + `_title_at`: a title is the first *sentence* of the first

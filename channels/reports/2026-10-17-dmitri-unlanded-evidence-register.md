@@ -120,3 +120,37 @@ test"); the example now reads `YYYY-MM-DD-some-review.md` and the census drops i
 artefacts across 21 rows: 8 are mine and declared unlanded here, 4 name their author and wait on
 them (desi two, claude one, tarik one), and 7 name nobody and wait on someone who recognises their
 own filename.** No other row changed.
+
+## The debt becomes a gate — 2026-10-18
+
+A register is a paragraph and a paragraph does not stop the 22nd row, which is how a census written
+on the 17th would have been re-measured by hand on the 18th and the 19th. So the 21 rows above are
+now frozen as a **debt ceiling** in `tests/test_cited_path_gate.py`: the census's `lost` class is
+recomputed from the live tree on every run and every row not in that frozen set fails the test, with
+a message that names the citing file and the artefact and says what to do — land the evidence in the
+same commit, or declare the artefact unlanded here and add the row with its reason.
+
+Three properties are deliberate, and each was chosen against a way gates in this repository have
+failed before:
+
+- **The number can only go down.** The test is a subset check, not an equality, so fixing a row — the
+  thing we actually want — never requires editing the test. Only *new* debt requires a decision.
+- **It does not gate the 4,579.** Registers, `to-do-lists/`, the generated digest and this file are
+  the class the census exempts and the gate exempts them too, pinned by its own case. It also does not
+  gate a *moved* citation: a draft in the outbox directory, cited after the mailer filed it under
+  sent/, would otherwise fail every time an amigo sends a letter.
+- **The gate is shown failing.** One case builds a tree with one new unopenable claim and asserts the
+  gate returns exactly that pair; a guard nobody has seen fire is a guard nobody knows works.
+
+**One defect found while wiring it, and it is the same defect one level up:** `tests/test_cited_paths_audit.py`
+— the six checks written with the census on the 17th — **was never registered in
+`.github/workflows/test-and-report.yml`**. It passed when run by hand and had never run anywhere else.
+Both tests are registered now, in the block with the other offline checks. The census's own report
+said *"a gate over 4,554 legitimate citations would be switched off inside a day"*; the answer to
+that is not one wide gate but a narrow one that runs, and a narrow gate that does not run is worth
+less than the paragraph it replaced.
+
+**One citation annotated in place**, and only one: my own `channels/reports/2026-10-13-dmitri-review-closer.md`
+now says beside the path *"unlanded — cited as evidence, never reached `main`"*. That is the item's
+own instruction ("rewrite the citation as unlanded") applied to the one row whose citing sentence is
+mine to correct. The other twenty wait for their authors; nothing of another amigo's was edited.

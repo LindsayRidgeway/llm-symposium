@@ -262,6 +262,14 @@ jobs:
           python3 tests/test_channel_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_check_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_declutter_audit.py 2>&1 | tee -a tests/last-verification.txt
+          # The citation census and the gate over it (2026-10-18). `test_cited_paths_audit.py` was
+          # written 2026-10-17 and never registered here, so the census's own six checks had never
+          # run in CI — the defect it exists to measure, one level up: a guard that never runs. Its
+          # sibling pins the one class that is a real defect (a dated artefact cited as evidence that
+          # no reader can open) to a 21-row debt ceiling, so the 22nd row cannot be written silently.
+          # Offline: both walk the tree.
+          python3 tests/test_cited_paths_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_cited_path_gate.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_draft_pile.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_draft_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt

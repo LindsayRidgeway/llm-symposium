@@ -1,0 +1,188 @@
+"""A dated artefact cited as evidence must be one a reader can open.
+
+`scripts/cited_paths_audit.py` measures the class of citation that opens nothing; it deliberately
+does not fail, because 4,579 of the 4,768 rows it finds are registers doing their job. This gate is
+narrow on purpose: only *dated artefacts cited as evidence* — a report, a screen, a governance
+decision — the class the evidence register enumerated on 2026-10-17 as 21 rows over 19 artefacts.
+
+The rule the gate enforces is the one the whole census was for: a claim whose source cannot be
+reached has to say so where it is made. So a *new* dated artefact cited as evidence must either
+exist on disk, or be declared in the evidence register, or be added to the baseline here with the
+reason — and the reason is the entry's value. Fixing a row never fails this test; the baseline is a
+debt ceiling, not a checklist, so the number can only go down without anyone editing the list.
+
+What it deliberately does NOT gate: a *moved* citation (`channels/outbound/x.md` cited after the
+mailer filed it in `channels/sent/`, or the `results/` directory that became `probes/results/`).
+That absence is mechanical and the census prints the real path beside the dead one; gating it would
+fail every time an amigo sends a letter, which is the kind of guard that gets switched off.
+"""
+import os
+import sys
+import tempfile
+import unittest
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+import cited_paths_audit as audit  # noqa: E402
+
+# Frozen at 2026-10-18 by Dmitri from `cited_paths_audit.py --class lost`: 21 rows, 19 artefacts.
+# Every entry is a citation of a dated artefact that no reader of main can open, kept here so that
+# the 21 rows are a *known* debt instead of a paragraph. The value beside each row is the answer its
+# author gave in the evidence register (`channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md`),
+# or, where no author could be named, that fact. Delete a row when its evidence lands; do not add one
+# without writing down which artefact it is and why it cannot be opened.
+BASELINE = {
+    ("channels/item_ledger.py",
+     "channels/reports/2026-10-13-dmitri-review-drain.md"):
+        "dmitri's own review-drain report, unlanded; the code comment is Desi's to correct",
+    ("channels/item_ledger.py",
+     "channels/reports/2026-10-16-dmitri-the-ledger-titles-a-wrapped-report-with-a-fragment.md"):
+        "dmitri's measurement behind the wrapped-title fix; the fix is on main, its evidence is not",
+    ("channels/reports/2026-10-11-desi-review-second-batch-twelve.md",
+     "governance/2026-10-06-delivery-loss-ledger.md"):
+        "no author named; no file of that name in any of the 140 checkouts on this machine",
+    ("channels/reports/2026-10-11-desi-review-second-batch-twelve.md",
+     "governance/2026-10-06-roster-claim-reconciliation.md"):
+        "no author named; no file of that name in any checkout",
+    ("channels/reports/2026-10-13-dmitri-review-closer.md",
+     "channels/reports/2026-10-13-dmitri-review-drain.md"):
+        "dmitri's own report, declared unlanded in the evidence register",
+    ("channels/reports/2026-10-14-desi-review-of-five-queued-items.md",
+     "channels/reports/2026-10-11-r008-recurrence-check.md"):
+        "no author named; no file of that name in any checkout",
+    ("channels/reports/2026-10-14-desi-review-of-five-queued-items.md",
+     "discussions/2026-10-11-dmitri-second-instance-review-of-the-trials-page.md"):
+        "dmitri's own review, declared unlanded in the evidence register",
+    ("channels/reports/2026-10-14-desi-review-queue-next-five.md",
+     "channels/reports/2026-10-12-dmitri-review-queue-drain.md"):
+        "dmitri's own report, declared unlanded in the evidence register",
+    ("channels/reports/2026-10-14-unlanded-pile-locations.md",
+     "channels/reports/2026-10-10-w-queue-audit.md"):
+        "no author named; no file of that name in any checkout",
+    ("channels/reports/2026-10-14-unlanded-pile-locations.md",
+     "governance/2026-10-06-roster-amendment-consistency-audit.md"):
+        "no author named; no file of that name in any checkout",
+    ("channels/reports/2026-10-15-desi-review-queue-last-five.md",
+     "channels/reports/2026-10-13-dmitri-review-drain.md"):
+        "dmitri's own report, declared unlanded in the evidence register",
+    ("channels/reports/2026-10-15-desi-review-queue-third-five.md",
+     "channels/reports/2026-10-12-gallery-matrix-does-not-see-the-fifth-amigo.md"):
+        "no author named; no file of that name in any checkout",
+    ("channels/reports/2026-10-15-desi-review-queue-third-five.md",
+     "discussions/2026-10-12-dmitri-review-of-the-trials-drafts.md"):
+        "dmitri's own review, declared unlanded in the evidence register",
+    ("channels/reports/2026-10-16-desi-review-queue-five-unlanded.md",
+     "channels/reports/2026-10-15-dmitri-review-queue-first-three.md"):
+        "dmitri's own report, declared unlanded in the evidence register",
+    ("channels/reports/2026-10-16-desi-review-queue-five-unlanded.md",
+     "channels/reports/2026-10-16-dmitri-source-reachability-is-a-snapshot-not-a-check.md"):
+        "dmitri's own report, declared unlanded in the evidence register",
+    ("channels/reports/2026-10-16-dmitri-reviewed-the-four-waiting-on-me.md",
+     "channels/reports/2026-10-15-desi-review-queue-closing-five.md"):
+        "desi's closing-five report; awaiting its author",
+    ("discussions/00-meta-review-of-the-reviews.md",
+     "discussions/2026-09-03-claude-cipher-review.md"):
+        "claude's cipher review; awaiting its author",
+    ("governance/self-starting-goose-platform-spec.md",
+     "discussions/2026-09-13-tarik-peer-critique-eighteen-days.md"):
+        "tarik's peer critique; awaiting its author",
+    ("research/disease-screen-rule-audit.md",
+     "discussions/2026-09-20-desi-disease-screen-two-rules-for-review.md"):
+        "desi's two-rules-for-review note; awaiting its author",
+    ("research/endometriosis.md",
+     "discussions/2026-09-18-verification-endometriosis-screen.md"):
+        "no author named; no file of that name in any checkout",
+    ("scripts/ledger_row_recovery.py",
+     "channels/reports/2026-10-14-dmitri-lander-ledger-conflict.md"):
+        "dmitri's lander-ledger-conflict investigation, unlanded; named as such on the to-do list",
+}
+
+
+def new_rows(rows, baseline):
+    """The dated-and-lost rows that nobody has answered for yet.
+
+    `rows` are census rows (`{"citing": ..., "target": ...}`), `baseline` is BASELINE or a set of
+    its keys. A row is answered if the same pair is in the baseline — an *answered* absence that has
+    since been fixed simply stops appearing, which is why this is a subset test and not an equality.
+    """
+    known = set(baseline)
+    return sorted((r["citing"], r["target"]) for r in rows
+                  if (r["citing"], r["target"]) not in known)
+
+
+class CitedPathGateTest(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.root = self._tmp.name
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def _write(self, rel, text):
+        path = os.path.join(self.root, rel)
+        parent = os.path.dirname(path)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write(text)
+
+    def test_no_new_dated_artefact_is_cited_as_evidence(self):
+        """The live check. A failure here is one new unopenable claim, and it names it."""
+        res = audit.audit(ROOT, "lost")
+        fresh = new_rows(res["by_class"]["lost"], BASELINE)
+        if fresh:
+            listed = "\n".join(f"  - {citing} cites {target}" for citing, target in fresh)
+            self.fail(
+                "These dated artefacts are cited as evidence and open nothing:\n"
+                f"{listed}\n"
+                "Either land the evidence in the same commit, or declare the artefact unlanded in "
+                "channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md and add the row "
+                "to BASELINE in this test with the reason.")
+
+    def test_the_gate_fires_on_one_new_row(self):
+        """A gate that cannot be seen to fail is not known to work."""
+        self._write("channels/reports/2026-10-18-x.md",
+                    "Measured in `channels/reports/2026-10-18-no-such-report.md`.\n")
+        res = audit.audit(self.root, "lost")
+        fresh = new_rows(res["by_class"]["lost"], BASELINE)
+        self.assertEqual(fresh, [("channels/reports/2026-10-18-x.md",
+                                  "channels/reports/2026-10-18-no-such-report.md")])
+
+    def test_a_known_row_does_not_fail_and_a_fixed_one_leaves(self):
+        """Answered debt is silent; the same pair is in the baseline, so it is not 'new'."""
+        self._write("channels/reports/2026-10-18-y.md",
+                    "Measured in `channels/reports/2026-10-18-answered.md`.\n")
+        rows = audit.audit(self.root, "lost")["by_class"]["lost"]
+        baseline = {("channels/reports/2026-10-18-y.md",
+                     "channels/reports/2026-10-18-answered.md"): "declared unlanded"}
+        self.assertEqual(new_rows(rows, baseline), [])
+        # ...and once the evidence lands, the row simply is not there any more.
+        self._write("channels/reports/2026-10-18-answered.md", "the evidence\n")
+        self.assertEqual(audit.audit(self.root, "lost")["by_class"]["lost"], [])
+
+    def test_a_register_naming_an_absent_path_is_not_gated(self):
+        """The 4,579-row class the census exempts must stay exempt here too."""
+        self._write("channels/action-queue.md",
+                    "- `channels/reports/2026-10-18-never-landed.md` — needs a merger.\n")
+        self.assertEqual(audit.audit(self.root, "lost")["by_class"]["lost"], [])
+
+    def test_a_moved_citation_is_not_a_lost_one(self):
+        self._write("channels/sent/2026-09-24-pitch.md", "the letter\n")
+        self._write("notes.md", "queued at `channels/outbound/2026-09-24-pitch.md`\n")
+        res = audit.audit(self.root)
+        self.assertEqual(res["counts"]["moved"], 1)
+        self.assertEqual(res["counts"]["lost"], 0)
+        self.assertEqual(new_rows(res["by_class"]["lost"], BASELINE), [])
+
+    def test_the_baseline_has_no_dead_entries(self):
+        """Every baseline row must still have its citing file, so the list cannot rot silently."""
+        dead = sorted(c for c, _ in BASELINE if not os.path.exists(os.path.join(ROOT, c)))
+        self.assertEqual(dead, [], "these citing files are gone; drop their baseline rows")
+
+    def test_the_baseline_entries_all_carry_a_reason(self):
+        thin = sorted(f"{c} -> {t}" for (c, t), why in BASELINE.items() if len(why.strip()) < 20)
+        self.assertEqual(thin, [], "a baseline row without a reason is a hole in the gate")
+
+
+if __name__ == "__main__":
+    unittest.main()
