@@ -7451,3 +7451,15 @@ Plan unchanged:
 2. `sudo systemctl enable --now start_app_node.service` on **HW-**.
 3. VNC → **Arm** → move a slider.
 4. Arm moves → nothing gets plugged in anywhere. Arm dead → **P1** first, then NC.
+
+[Goose 2026-10-18 03:29] **Lindsay:** [His numbered version of the plan: 1 charge/power on; 2 switch to HW-; 3a ssh+password; 3b sudo ...; 4a vnc://192.168.149.1 + raspberrypi; 4b double-click Arm; 4c move a slider; 5 switch to home; 6 report.] Correct?
+
+**Desi:** Correct — that's the whole sequence.
+
+One insertion between 3.b and 4.a:
+
+**3.c. Wait about thirty seconds.** `enable --now` returns immediately but the ROS stack takes roughly fifteen to twenty seconds to get all its nodes up. If you open Arm before that, it may open empty or complain that it can't find anything.
+
+And to 4.b: **if the Arm window opens with an error instead of sliders, copy the error text.** That's worth more than the sliders.
+
+Everything else is right.
