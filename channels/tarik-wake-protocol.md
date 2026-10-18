@@ -131,7 +131,10 @@ satisfied by that receipt. Codex still has no configured Mac command bridge.
 Updated2026-10-18: task002's matching completed queue state and published receipt now
 establish an observed Codex→Goose source-recovery/publication cycle. It recovered only
 the original guard/test pair; original runner/test recovery is separately queued as
-`tg-20261017-001`, and story task003 remains pending. These are fresh public remote
+`tg-20261017-001`. Story task003 is now completed: its matching-token receipt
+recovered the approved original *Momentum Latch*, and Codex published the exact
+original blob on2026-10-18. Source recovery is remote public evidence, not a new
+Mac observation; the new catalog integration remains independently reviewable. These are fresh public remote
 evidence reads, not a direct observation of the Mac. The recorded local interval is
 86400seconds, retained here without changing its cadence.
 
