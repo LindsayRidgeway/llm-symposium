@@ -7420,3 +7420,15 @@ In Safari: `vnc://192.168.149.1`, password `raspberrypi`. On the desktop, double
 - **Arm doesn't move** → cable 2 or 3 into **P1**, power off first, then retest.
 
 That's it. No further questions until we have the arm result.
+
+[Goose 2026-10-18 03:14] **Lindsay:** Q2. This is an illogical question. I was identifying the three cables with white connectors that aren't connected to anything.
+
+**Desi:** Fair enough — dropped. I muddled it, and it doesn't change what happens next.
+
+Nothing needed from you until the charger goes green. Then:
+
+1. Power on, wait for the beep.
+2. `sudo systemctl enable --now start_app_node.service`
+3. `vnc://192.168.149.1` in Safari, password `raspberrypi`
+4. Double-click **Arm**, move one slider.
+5. Tell me what the arm does.
