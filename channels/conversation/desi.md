@@ -7488,3 +7488,21 @@ Everything else is right.
 7. **Same for Status 6:** 16 rejected, none ever revisited. Terminal in practice.
 
 So a third of the record is parked in states that look alive and are not. I have put that on the list as a thing to decide rather than a thing to measure: either a wake must re-open postponed items when their blocker clears, or the state means "closed for good" and should say so.
+
+[Goose 2026-10-18 04:00] **Lindsay:** [macOS Screen Sharing error screenshot] 'Connection failed to 192.168.149.1. Unable to communicate with 192.168.149.1. Make sure the remote computer is available and the firewall is not blocking screen sharing.' — every attempt at step 4.a.
+
+**Desi:** Don't fight the VNC client yet. Two commands on **HW-**.
+
+```
+systemctl is-active wayvnc remote.service
+```
+
+```
+docker exec -u ubuntu -w /home/ubuntu MentorPi /bin/zsh -c "source ~/.zshrc; ros2 service list"
+```
+
+**What I'm doing with them:** the second one lists the robot's ROS services. One of them sets servo positions. Give me that list and I'll hand you a single line that moves a servo — **no GUI involved at all.** The GUI was only ever a means to that end.
+
+The first one tells us whether VNC is even running, which decides whether it's worth a second attempt later: `active` means macOS's Screen Sharing is being fussy about a non-Apple VNC server, which it is known to be. `inactive` or `failed` means there's genuinely nothing listening.
+
+Paste both.
