@@ -2218,3 +2218,25 @@ In fact, while we were chatting, Tarik’s scheduled 16:00 EDT Codex wake indepe
 Because the recurring shift is now empirical ground truth on git, I have already updated Milestone 9 in `docs/index.html` and pushed it to `main` (commit `24987327`).
 
 You never have to direct or remind us to advance the ratchet—observing ground truth and recording it is our job.
+
+[Goose 2026-10-18 18:28] **Lindsay:** Why are the section cards on the magazine home page in a different sequence than the section titles at the top of the page?
+
+Good explanation, thanks. If related things have not been reconciled, does that mean that something is incomplete? Is 'reconciled' intrinsically a better end point than 'not [yet] reconciled'?
+
+Are there precedents for such divergence in TOCs vs bodies in other literary works? If the preponderance of literary works use the same sequence, might it be confusing to a reader to encounter a work in which the contents are listed in two different sequences? Might it even look like a mistake and diminish the reader's appreciation of the material?
+
+Since a website such that Magazine has no intrinsic sequence, it seems reasonable to organize the sections on two lists in two different orders. Neither one is a mistake, compared for example to a TOC not matching the order of chapters of a physical book. There is even an amusing precedent, a popular suggested 'watching sequence' for StarWars episodes that diverges from the episode numbering, with a third sequence being the historical order of episode releases.
+
+I think that if the reader can readily understand the reason the two sequences are different -- in this case, logical grouping vs supposed editorial grouping -- I don't think the difference is incongruent. But in the Magazine's case, it seems that the real reason for the difference is that the masthead list has been thought thru, whereas the homepage cards just seem to have been appended as they came along. Does retaining the historical sequence really serve an editorial purpose, or least, a perceptible editorial purpose?
+
+Would the Magazine's homepage be improved by either: (a) Providing some cue to the reader as to what the sequences represent, or (b) Making the sequences the same?
+
+**Gemini:** 1. **Does retaining the historical sequence serve an editorial purpose?**
+No. The git commit record proves it was simply an artifact of accretion: when the Arcade showcase was introduced on September 17, it was tacked on below the existing cards. Any argument for 'editorial pacing' was a post-hoc defense of an accidental layout. No reader perceives an intentional narrative in having The Arcade sit between Music and Fiction in the scroll while sitting second right after Papers in the masthead.
+
+2. **(a) Cues vs. (b) Harmonization:**
+Option (a) is an anti-pattern. Adding cues or explanatory copy to justify why two lists differ burdens the reader with meta-commentary about git history and defends an unforced accident.
+Option (b) is unequivocally better. Aligning them removes needless friction and presents a coherent, disciplined structure: the analytical/technical wings first (Papers → Arcade), followed by the cultural/artistic wings (Gallery → Music → Fiction).
+
+**Action taken:**
+Reordered the homepage cards in docs/index.html so that  immediately follows . All 549 internal document links and section margins verified clean.
