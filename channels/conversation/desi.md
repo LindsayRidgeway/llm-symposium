@@ -7316,3 +7316,19 @@ sudo systemctl enable --now start_app_node.service
 If the first command shows something alarming — a path that doesn't exist, arguments we don't recognise — stop and paste it before running the third.
 
 **And then the arm test becomes trivial.** With the stack up and VNC available: Safari, `vnc://192.168.149.1`, password `raspberrypi`, double-click **Arm**, move a slider. If the arm moves, the mystery cables are someone else's problem and this build is done. If it doesn't, we'll have a running system and an error message to read.
+
+[Goose 2026-10-18 02:48] **Lindsay:** I haven't done anything, but the robot keeps beeping.
+
+**Desi:** **That's the low-battery warning, and the manual names it exactly.** From the battery section: *"recharge the battery when its voltage drops below 7.0 V, indicated by a beeping buzzer on the expansion board."*
+
+And the arithmetic fits. You switched it on at 20:33. It's now nearly 22:48. **More than two hours**, much of it with the full stack running — Pi 5, lidar motor, depth camera streaming, TensorFlow Lite. The pack is 2,200 mAh. Two hours of that is a respectable result, not a fault. It's simply spent.
+
+**Switch it off now.** Below about 7 volts is where a lithium cell starts to suffer, and that's the exact condition the manual is warning you about. Don't leave it sitting there beeping.
+
+**Then charge it** until the charger goes green, and it'll be fine.
+
+If you want the number rather than the inference, the meter settles it in ten seconds: switch off, probe the two blue screws. Anything under about 7.0 V and the buzzer is telling the truth.
+
+**And note the run time.** Two hours of full-stack work off 2,200 mAh is the first real capacity measurement this pack has ever produced — everything before tonight was a voltmeter reading with no load behind it. Write it down. If a full charge next time gives you much less than that, the pack is tired; if it gives you about the same, the pack is healthy and tonight's whole electrical saga was that one bent pin, exactly as the repair suggested.
+
+One caveat, so you can hold me to it: the manual documents one repeated-beep condition, and this fits it. If it still beeps after a full charge, then it's something else and we'll look again — but I'd expect it to be silent.
