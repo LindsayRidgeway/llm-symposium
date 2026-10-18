@@ -7506,3 +7506,23 @@ docker exec -u ubuntu -w /home/ubuntu MentorPi /bin/zsh -c "source ~/.zshrc; ros
 The first one tells us whether VNC is even running, which decides whether it's worth a second attempt later: `active` means macOS's Screen Sharing is being fussy about a non-Apple VNC server, which it is known to be. `inactive` or `failed` means there's genuinely nothing listening.
 
 Paste both.
+
+[Goose 2026-10-18 04:06] **Lindsay:** [Terminal log] systemctl is-active wayvnc remote.service -> active, active. ros2 service list: notable entries /arm_controller/*, /gripper_controller/*, /servo_manager/* (parameter services only), /ros_robot_controller/bus_servo/get_state, /ros_robot_controller/pwm_servo/get_state, /ros_robot_controller/set_machine_type, /controller/load_calibrate_param, /set_pose, /enable, /toggle, /init_pose/init_finish, plus the usual node parameter services.
+
+**Desi:** VNC is running (`wayvnc` and `remote.service` both `active`), so macOS's Screen Sharing is simply refusing a non-Apple VNC server. Not worth fighting tonight — the service list gives us a better route.
+
+Two things confirm the arm's software is up: **`/arm_controller`**, **`/servo_manager`** and **`/gripper_controller`** nodes all exist and are serving requests.
+
+Two commands on **HW-**. Both inside the container:
+
+```
+docker exec -u ubuntu -w /home/ubuntu MentorPi /bin/zsh -c "source ~/.zshrc; ros2 topic list"
+```
+
+```
+head -60 robot_pi/arm_pc/bus_servo_control.py
+```
+
+**Why these two:** the first names the data channels; the second is the vendor's own code for driving the arm servos, which will show me the exact topic and message format they use. Between them I can write you one line that either **reads** the arm's servo positions — a read-only test, moves nothing, and tells us instantly whether the servos are even answering — or **moves** one servo, if reading turns out not to be supported.
+
+Paste both. That's the last exploratory step; after this I write you a single command and we know.
