@@ -7079,3 +7079,51 @@ It's set up from the **WonderPi app**, not the shell:
 After that the hotspot stops, LED1 stays solid blue, and the robot appears on your router's client list with an ordinary IP. Worth doing — it removes this whole class of confusion for good.
 
 Take the batch first, though. Five commands and a scrollback is all tonight needs.
+
+[Goose 2026-10-18 02:12] **Lindsay:** [Terminal log from the robot] ls: Bookshelf Desktop docker Documents Downloads Music Pictures Public __pycache__ robot_pi Servo.sh shared_folder start.sh Templates Videos wifi_manager. ls Desktop: arm.desktop lab_tool.desktop navigation.desktop slam.desktop tool.desktop. ls /opt: containerd pigpio WidevineCdm. sudo dmesg | tail -40: only Bluetooth and brcmfmac Wi-Fi channel errors (reason -52); no serial/UART/USB device lines. ps aux | head -40: forty kernel threads (my command was wrong).
+
+**Desi:** That's a lot of useful information. Here's what it says.
+
+**You have vendor software installed, and it has names.**
+
+- **`Servo.sh`** in your home directory — that name is not ambiguous. Linux calls this sort of thing by what it does.
+- **`start.sh`** next to it — the boot sequence.
+- **`robot_pi`** — almost certainly the vendor's whole tree.
+- **`arm.desktop`** on the Desktop, alongside `navigation`, `slam` and `lab_tool` — so there's a launcher that starts the arm app, and it contains the exact command they use.
+- **`containerd`** in `/opt` — so parts of this are probably running in Docker containers, which means processes may not show up where you'd expect them.
+
+**And one thing that isn't there:** `dmesg` has nothing at all about a serial port, a UART, or a USB device. Only Bluetooth and Wi-Fi chatter. So nothing has complained about failing to find the arm — which fits my suspicion that nothing has tried, or that it tried and quietly found nothing to talk to.
+
+**Also: `ps aux | head -40` was my mistake.** That sorts by process ID, which starts with forty kernel threads. Useless. Sorry.
+
+## Batch two — five commands
+
+Copy these first, then switch to **HW-**, SSH in, run them, and switch back without clearing the window.
+
+```
+cat Desktop/arm.desktop
+```
+```
+cat Servo.sh
+```
+```
+cat start.sh
+```
+```
+ls robot_pi
+```
+```
+ls /dev/ttyUSB0 /dev/ttyAMA0
+```
+
+**Why these five:**
+
+- The first is the money shot: it names the exact command the vendor launches the arm with, including any arguments and any working directory.
+- The second tells us how they initialise the servos.
+- The third tells us the boot order — what starts before what, and whether the arm is supposed to start automatically or only when you tap the icon.
+- The fourth shows the tree: is there an `arm` directory with Python or ROS packages in it?
+- The fifth asks whether a serial device exists at all. **If both of those return "No such file", that is the answer**: the arm's interface isn't present, and a cable is missing.
+
+If any `cat` floods the screen, Ctrl-C stops it — you'll already have the first screenful, which is usually the part that matters.
+
+Then switch back and paste it all. Same scrollback trick: the session dies, the text doesn't.
