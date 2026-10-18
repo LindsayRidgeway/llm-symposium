@@ -15,15 +15,18 @@ redundancy worth keeping deliberately, not tidying away.
 
 What this one does:
 
-Parses a restricted subset of ABC notation (multi-voice, one note/rest/bar per
-token, inline chord symbols and dynamics ignored, no bracketed chords within a
-voice) and checks:
+Parses a restricted subset of ABC notation (multi-voice, note/rest/bar tokens,
+inline chord symbols and dynamics ignored, bracketed chords represented by
+their highest note) and checks:
 
   1. Parallel fifths / parallel octaves (and unisons) between every pair of
      voices — strict species-counterpoint rule.
-  2. Voice range sanity, if --range MIN:MAX given per voice.
-  3. Prints the harmonic-interval timeline so a human/model can eyeball
-     dissonance treatment (not automatically judged — flagged informationally).
+  2. Voice range sanity, if --range VOICE=MIN:MAX is given per voice, using
+     standard MIDI pitches (ABC C = MIDI 60, middle C).
+
+It does not validate meter or crossings, unfold repeats, or judge dissonance.
+Before 2026-10-18 its pitch anchor was 12 semitones low. API callers with old
+compensating ranges must use actual MIDI bounds and remove pitch + 12 workarounds.
 
 This is intentionally narrower than a real music-theory engine: it is scoped
 to catch the one rule named explicitly in channels/agenda.md item 10 (no
@@ -32,8 +35,8 @@ loop, not a research project of its own.
 
 Usage:
     python3 scripts/check-counterpoint.py path/to/piece.abc
-    python3 scripts/check-counterpoint.py --self-test    (checks the four
-        existing Conservatory pieces extracted from docs/music/app.js)
+    python3 scripts/check-counterpoint.py path/to/piece.abc --range 1=60:84 --range 2=36:60
+    python3 scripts/check-counterpoint.py --self-test    (checks an embedded excerpt)
 """
 
 import re
@@ -43,6 +46,7 @@ from fractions import Fraction
 
 BASE = {'C': 0, 'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11,
         'c': 12, 'd': 14, 'e': 16, 'f': 17, 'g': 19, 'a': 21, 'b': 23}
+MIDDLE_C = 60
 
 NOTE_RE = re.compile(
     r"(?P<acc>\^{1,2}|_{1,2}|=)?"
@@ -152,10 +156,8 @@ def parse_voice_line(line, unit=Fraction(1, 8), key_sig=None):
             continue
         if ch == '[':
             # Bracketed chord [XYZ]dur — take the HIGHEST note as the
-            # representative pitch for parallel-motion purposes (matches the
-            # convention scripts/check_music_rules.py uses for its "first
-            # note" pick, oriented so outer-voice parallels against the
-            # melodic top of the chord are still caught).
+            # representative pitch for parallel-motion purposes. This is not
+            # an analysis of every constituent chord voice.
             j = line.find(']', i)
             if j == -1:
                 i += 1
@@ -186,7 +188,7 @@ def parse_voice_line(line, unit=Fraction(1, 8), key_sig=None):
                     elif acc == '=':
                         accidental_state[key] = 0
                     semitone_offset = accidental_state.get(key, 0)
-                    midi = 60 + BASE[letter] - 12 + semitone_offset + oshift
+                    midi = MIDDLE_C + BASE[letter] + semitone_offset + oshift
                     chord_midis.append(midi)
                     k = nm.end()
                 else:
@@ -223,10 +225,8 @@ def parse_voice_line(line, unit=Fraction(1, 8), key_sig=None):
             elif acc == '=':
                 accidental_state[key] = 0
             semitone_offset = accidental_state.get(key, 0)
-            midi = 60 + BASE[letter] - 12 + semitone_offset + base_oct_shift
-            # BASE already encodes octave (upper vs lower case = one octave apart,
-            # centered so that 'C' -> MIDI 48 (C3) and 'c' -> MIDI 60 (C4) roughly;
-            # exact octave anchor doesn't matter for interval analysis.
+            midi = MIDDLE_C + BASE[letter] + semitone_offset + base_oct_shift
+            # BASE encodes the octave: ABC C = C4/MIDI60, c = C5/MIDI72.
             dur = parse_len(lenstr, unit)
             events.append(('note', midi, dur))
             i = m.end()
@@ -356,6 +356,8 @@ def run_checks(abc_text, ranges=None, verbose=True):
         print("\n--- Range check ---")
         for v, (lo, hi) in ranges.items():
             if v not in timelines:
+                print(f"[{v}] unknown voice requested for range check.")
+                ok = False
                 continue
             bad = check_range(v, timelines[v], lo, hi)
             if bad:
@@ -387,13 +389,35 @@ def self_test():
         print()
 
 
+def parse_voice_range(value):
+    """Parse a CLI voice plus inclusive standard-MIDI bounds."""
+    match = re.fullmatch(r"([^=\s]+)=([0-9]+):([0-9]+)", value)
+    if match is None:
+        raise argparse.ArgumentTypeError("range must be VOICE=MIN:MAX with integer MIDI bounds")
+    voice, lower, upper = match.groups()
+    lower, upper = int(lower), int(upper)
+    if not 0 <= lower <= upper <= 127:
+        raise argparse.ArgumentTypeError("range must satisfy 0 <= MIN <= MAX <= 127")
+    return voice, (lower, upper)
+
+
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('file', nargs='?', help='Path to a file containing ABC notation')
     ap.add_argument('--self-test', action='store_true')
+    ap.add_argument('--range', dest='voice_ranges', action='append', type=parse_voice_range,
+                    default=[], metavar='VOICE=MIN:MAX',
+                    help='inclusive standard-MIDI bounds; repeat for each voice (ABC C=60)')
     args = ap.parse_args()
+    ranges = {}
+    for voice, bounds in args.voice_ranges:
+        if voice in ranges:
+            ap.error(f"duplicate range for voice {voice!r}")
+        ranges[voice] = bounds
 
     if args.self_test:
+        if ranges:
+            ap.error("--range requires a score file, not --self-test")
         self_test()
         sys.exit(0)
 
@@ -403,5 +427,5 @@ if __name__ == '__main__':
 
     with open(args.file) as f:
         text = f.read()
-    ok = run_checks(text)
+    ok = run_checks(text, ranges=ranges)
     sys.exit(0 if ok else 1)

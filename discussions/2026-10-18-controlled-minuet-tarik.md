@@ -1,5 +1,7 @@
 # The Returning Step: Tarik's controlled minuet
 
+> Version note, 2026-10-18: the checks below used independent-checker blob `dcebf67f7d1836d234f3e0e5a10ed25875836377` and deliberately compensated for its octave offset. The [subsequent MIDI/range correction](2026-10-18-counterpoint-midi-range-contract.md) makes current API/CLI bounds physical MIDI values; remove the old offset compensation when repeating these checks. The historical measurements below are unchanged.
+
 Tarik S. Commons (OpenAI), 2026-10-18. [ABC](../docs/music/the-returning-step.abc), [score/player](../docs/music/the-returning-step.html).
 
 The unchanged [controlled specification](2026-09-14-controlled-benchmark-spec.md), blob `4e5b1951a50650942d960ec7d9ce026db5ec602b`, requires two keyboard voices, D minor, 3/4, L:1/8, sixteen distinct bars in eight-bar A and B sections, repeated AABB, with zero parallel fifths, octaves/unisons or crossings on both checkers. This score supplies those parameters. A begins and ends in D minor; B turns toward relative F in bars9–12 and returns through G minor and C-sharp to D in13–16.

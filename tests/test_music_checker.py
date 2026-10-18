@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""test_music_checker.py — Unit tests for ABC music theory & counterpoint verification engine."""
+"""Unit and CLI regressions for the two ABC music checkers."""
 
 import sys
+import importlib.util
 import subprocess
 import tempfile
 import unittest
@@ -11,6 +12,12 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.check_music_rules import verify_abc_score  # noqa: E402
+
+CP_SPEC = importlib.util.spec_from_file_location(
+    "independent_counterpoint", REPO_ROOT / "scripts/check-counterpoint.py"
+)
+counterpoint = importlib.util.module_from_spec(CP_SPEC)
+CP_SPEC.loader.exec_module(counterpoint)
 
 
 class TestMusicChecker(unittest.TestCase):
@@ -181,6 +188,88 @@ F,2 D,2 A,,2 D,2 | G,,2 B,,2 C,4 |
         self.assertEqual(len(report.parallel_octaves), 0)
         self.assertEqual(len(report.meter_violations), 0)
         self.assertTrue(report.passed)
+
+
+class TestIndependentCounterpoint(unittest.TestCase):
+    def run_checker(self, score, *arguments):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "score.abc"
+            path.write_text(score, encoding="utf-8")
+            return subprocess.run(
+                [sys.executable, str(REPO_ROOT / "scripts/check-counterpoint.py"), str(path), *arguments],
+                capture_output=True, text=True, check=False,
+            )
+
+    def test_abc_octaves_use_standard_midi_middle_c(self):
+        notes = counterpoint.parse_voice_line("C, C c c'")
+        self.assertEqual([event[1] for event in notes], [48, 60, 72, 84])
+
+    def test_chord_representative_uses_same_midi_anchor(self):
+        notes = counterpoint.parse_voice_line("[CEG] [ceg]")
+        self.assertEqual([event[1] for event in notes], [67, 79])
+
+    def test_key_and_bar_accidentals_preserve_correct_octave(self):
+        notes = counterpoint.parse_voice_line("B ^c c | c", key_sig=counterpoint.parse_key("Dm"))
+        self.assertEqual([event[1] for event in notes if event[0] == "note"], [70, 73, 73, 72])
+
+    def test_rest_stays_silent_between_standard_midi_notes(self):
+        events = counterpoint.parse_voice_line("C2 z2 c2")
+        timeline = counterpoint.events_to_timeline(events)
+        self.assertEqual([event[2] for event in timeline], [60, None, 72])
+        self.assertEqual(float(timeline[-1][0] + timeline[-1][1]), 0.75)
+
+    def test_api_physical_range_boundary_and_both_sides(self):
+        for note, expected in [("C", True), ("B,", False), ("^C", False)]:
+            with self.subTest(note=note):
+                self.assertEqual(
+                    counterpoint.run_checks(f"L:1/8\nK:C\n[V:1] {note}8 |", ranges={"1": (60, 60)}),
+                    expected,
+                )
+
+    def test_api_unknown_range_voice_is_failure(self):
+        self.assertFalse(counterpoint.run_checks("K:C\n[V:1] C8 |", ranges={"typo": (60, 72)}))
+
+    def test_cli_range_accepts_physical_midi_and_preserves_default(self):
+        score = "L:1/8\nK:C\n[V:1] C8 |\n[V:2] E,8 |"
+        ranged = self.run_checker(score, "--range", "1=60:60", "--range", "2=52:52")
+        self.assertEqual(ranged.returncode, 0, ranged.stdout + ranged.stderr)
+        self.assertIn("[1] all notes within [60,60]", ranged.stdout)
+        default = self.run_checker(score)
+        self.assertEqual(default.returncode, 0, default.stdout)
+        self.assertNotIn("--- Range check ---", default.stdout)
+
+    def test_cli_range_rejects_out_of_range_note(self):
+        result = self.run_checker("K:C\n[V:1] c8 |", "--range", "1=48:60")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("outside MIDI range [48,60]: [72]", result.stdout)
+
+    def test_cli_unknown_voice_does_not_silently_pass(self):
+        result = self.run_checker("K:C\n[V:1] C8 |", "--range", "typo=60:72")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("unknown voice", result.stdout.lower())
+
+    def test_cli_malformed_reversed_or_non_midi_ranges_are_usage_errors(self):
+        for value in ("60:72", "=60:72", "1=high:low", "1=72:60", "1=-1:72", "1=0:128"):
+            with self.subTest(value=value):
+                result = self.run_checker("K:C\n[V:1] C8 |", "--range", value)
+                self.assertEqual(result.returncode, 2)
+
+    def test_cli_duplicate_voice_range_is_usage_error(self):
+        result = self.run_checker("K:C\n[V:1] C8 |", "--range", "1=60:72", "--range", "1=48:60")
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("duplicate", result.stderr.lower())
+
+    def test_cli_ranges_cannot_be_silently_ignored_by_self_test(self):
+        result = self.run_checker("K:C\n[V:1] C8 |", "--self-test", "--range", "1=60:72")
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("--range requires a score file", result.stderr)
+
+    def test_parallel_fifth_detection_and_reported_pitches_remain_consistent(self):
+        result = self.run_checker("L:1/8\nK:C\n[V:1] G4 A4 |\n[V:2] C4 D4 |")
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn("parallel fifth", result.stdout)
+        self.assertIn("1:67->69", result.stdout)
+        self.assertIn("2:60->62", result.stdout)
 
 
 if __name__ == '__main__':

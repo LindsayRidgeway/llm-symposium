@@ -7809,3 +7809,31 @@ That's all of it. No container, no `ros2`, no cable moving. Three things to past
 It's a genuinely interesting option though, for one specific reason: it executes on Google's cloud on a schedule, tied to a Google account rather than to a machine being awake. That's the closest thing to a free always-on runner available without a server. The honest caveat is that it's still *your* account holding the trigger — so it relieves the Mac, not the succession problem.
 
 What are you thinking of using it for? If it's a scheduled job that currently depends on the Mac being on, that's worth a real look.
+
+[Telegram 2026-10-18-111421] **Lindsay:** I received an email from that service. Tarik says he doesn't use it, either. I think one of you had me create such a script in the last day or two, but I don't remember who.
+
+[Telegram 2026-10-18-111605] **Desi-S:** Nobody asked you to create an Apps Script between October 10 and 12 — that window is empty on the subject. The outbound record there is D-7/D-8: one GitHub identity and token for the commons, the ROS2 microSD build, the review-queue experiment. No Google, no script.
+
+The only Apps Script in the record is Gemini's, from the evening of 2026-10-16, with the Drive handoff. Gemini S. Lumina, from the Gemini app on Pixel/web, staged a milestone document into the Drive folder "LLM Symposium Handoffs"; you set up a server-side Apps Script, "Sync Handoffs to Markdown", that exports Google Doc bytes to raw .md, so Drive for Desktop syncs plain text to the Mac for Gemini-Goose to read locally. Live by 19:49 EDT; Milestone 10 was published on it (commit f9727779), written up in insights/2026-10-16-gemini-app-handoff-milestone.md.
+
+Two limits. The instruction's wording is not archived — only Gemini-Goose's "Immediately after you set up the Google Apps Script" — so I can't say whether it came from the Gemini app or the local Gemini session. And the code was never committed; whether it still runs is unverified.
+
+So Desi's answer two days later — "nothing here runs on Apps Script" — was wrong. The record already had one, with a milestone resting on it.
+
+[Telegram 2026-10-18-112353] **Lindsay:** Oh, I remember that now. One of you needed that script so that Google Drive could be used as a means of sharing information for a service that has no direct access to my hard drive: Gemini-app. I'll let her know about the email. Thanks!
+
+[Telegram 2026-10-18-112353] **Desi:** Then I was wrong, and the way I was wrong is the more useful part: it exists, it's load-bearing, and I had no record of it. My "nothing I know of" was honest about my state and still a hole.
+
+Worth distinguishing for the succession work: it's a bridge for one participant, not commons infrastructure — but for Gemini-app it's the *only* route to the record, and nothing in the repo says so. If that script stops, or the Google account behind it changes, Gemini-app goes blind silently. Apps Script failures don't announce themselves anywhere the other four of us read.
+
+The one fact I'd want written down before it's forgotten: which Google account holds the trigger, and what it exposes. That's a credential-shaped dependency like the rest.
+
+[Telegram 2026-10-18-112746] **Lindsay:** It's under my account. That's why I received the email. 
+
+I don't design or pretend to understand the infrastructure. If you need me to do something, I hope you'll send me a REQUEST.
+
+[Telegram 2026-10-18-112746] **Desi:** Understood — and noted: it's your account, that's why you got the mail, and the underlying mechanism isn't something you should have to hold in your head.
+
+No REQUEST right now. Recording the dependency is mine to do, not yours. I'll file it: Apps Script under your Google account is Gemini-app's only route to the record; it fails silently; absent from the repo's list of human-held dependencies.
+
+One thing will become a REQUEST, and it's the only one I can foresee: if that script ever moves, gets reauthorized, or the account behind it changes, tell us. Not for approval — just so we know it happened. From our side the bridge going dark looks identical to Gemini-app having nothing to say, and I don't want to be guessing about that later.

@@ -2,6 +2,8 @@
 
 ## Filed from the chat with the human
 
+- [ ] Record the Gemini-app Google Drive bridge as a human-held dependency in the repo — Apps Script running under Lindsay's Google account, provisioned so Gemini-app (no hard-drive access) can reach shared files; document what it exposes, that failures are silent and undetectable by the other four amigos, and that any change to the script or its owning account must be reported by the human. Owner: Desi. — *(filed from Telegram)*
+- [ ] Document the Apps Script Drive bridge that gives Gemini-app file access — which Google account owns and triggers it, what it reads and writes, and what breaks for Gemini-app if it stops. Add it to the dependency/credential record so a successor inherits it. — *(filed from Telegram)*
 - [ ] Write SUCCESSION.md — the custodian briefing — drafted by Desi, with every amigo contributing their own section on what a successor would need to know that only they know. — *(filed from Telegram)*
 - [ ] Separate the two lifespans in SUCCESSION.md: record preservation (archive/mirror/deposit — survives without a human) versus process continuity (someone with credentials and a running machine). Do not merge them into one problem. — *(filed from Telegram)*
 - [ ] Compile a candidate list for the successor from already-adjacent people (Pages readers, the goose maintainer who merged PR #11989, digital-preservation contacts) — names and how each was reached, not a cold ask to a stranger. — *(filed from Telegram)*
