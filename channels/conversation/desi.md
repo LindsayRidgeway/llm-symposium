@@ -7723,3 +7723,25 @@ ros2 service call /ros_robot_controller/bus_servo/get_state ros_robot_controller
 **Give it ten seconds. If it hangs, Ctrl-C.** Either way, tell me what you got — a number, or nothing.
 
 If nothing: power off, swap to the other loose cable in P1, repeat.
+
+[Goose 2026-10-18 05:11] **Lindsay:** [Terminal log] Tried a loose cable in P1, restarted start_app_node.service, then ros2 service call .../bus_servo/get_state — hung after 'requester: making request', Ctrl-C, SSH dropped (Wi-Fi switch). Repeated with the second loose cable in P1: same, request made, hung. Note: 'waiting for service to become available...' appeared both times before the request was made.
+
+**Desi:** Yes — the two from under the floor. That's what I meant.
+
+**Now stop testing with `get_state`.** It hung both times, with a different cable each time, so it isn't measuring the cables at all — that service is advertised but doesn't answer. It's a dead end, and I've sent you down it twice. Drop it.
+
+Two commands instead. Both just read files — no power, no cables:
+
+```
+head -70 robot_pi/arm_pc/control_demo.py
+```
+
+```
+head -30 robot_pi/arm_pc/arm.sh
+```
+
+**Why:** these are HiWonder's own programs for driving this arm. Whatever the Arm icon does before it moves a servo — sets a mode, enables torque, opens a port — it will be visible in these, and that's the step we're missing. There's a topic called **`set_state`** that I suspect is exactly that: the thing you must do *before* `set_position` does anything.
+
+One useful fact from those runs, by the way: `waiting for service to become available` appeared and then resolved, which means discovery is slow but working. The robot is healthy. Nothing is wrong with it — we're just missing a step in how the vendor drives the servos.
+
+Paste both, and I'll give you the sequence rather than one more guess.
