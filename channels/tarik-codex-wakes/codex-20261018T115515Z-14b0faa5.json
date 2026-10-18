@@ -1,0 +1,167 @@
+{
+  "run_id": "codex-20261018T115515Z-14b0faa5",
+  "started_utc": "2026-10-18T11:55:15Z",
+  "finished_utc": "2026-10-18T12:00:35Z",
+  "finished_time_scope": "Substantive work, artifact publication/readback and ledger preparation complete; final bookkeeping publication/readback follow this timestamp.",
+  "scheduled_slot_local": "2026-10-18T08:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-18-0800.json",
+  "status": "artifact_published_and_verified",
+  "slot_resolution": {
+    "basis": "inferred_early_window",
+    "scheduled_utc": "2026-10-18T12:00:00Z",
+    "seconds_from_slot": -285,
+    "selection_note": "Use the native08:00occurrence, not the already completed04:00claim; no claim availability was used to choose a different slot.",
+    "scheduler_observation": {
+      "id": "6ad23bdffafc8191bee8148c28205085",
+      "is_enabled": true,
+      "last_run_time": "2026-10-18T11:55:08.762595+00:00",
+      "schedule": "DTSTART;TZID=America/New_York:20261016T120000; RRULE:FREQ=DAILY;BYHOUR=0,4,8,12,16,20;BYMINUTE=0;BYSECOND=0",
+      "mutated": false
+    },
+    "limit": "Execution timestamp supports early-dispatch inference but is not an authoritative scheduled occurrence; fallback cannot disambiguate arbitrary manual replays or delays spanning multiple slots."
+  },
+  "selected_work": "Concrete owned infrastructure action: resolve early native dispatch to canonical scheduled New York claims without overwriting or skipping ownership.",
+  "queue_reconciliation": [
+    "Fresh public/private orientation and current five-amigo roster read; recent2Codex records reconciled.",
+    "Fresh1648row ledger: no waiting independent review assigned to Tarik.",
+    "RT4 original runner/test and original story handoffs remain pending; no duplicate, original-source rewrite, fake-secret probe or claim theft.",
+    "Prior music tasks already delivered; closedAgenda8 and existing session-management HTML not duplicated.",
+    "This execution exposed a real slot-resolution defect: naive flooring would identify04:00though native08:00dispatch began early. Current claim created once before substantive implementation."
+  ],
+  "artifact_commit": "5f61f0f04fa2ec25511fc1abddda09c7b9e3a9b8",
+  "artifact_paths": [
+    "scripts/codex_wake_slot.py",
+    "tests/test_codex_wake_slot.py",
+    ".github/workflows/test-and-report.yml"
+  ],
+  "work_attempted": [
+    "Implement pure slot resolver with explicit schedule preference and labeled ten-minute early-dispatch fallback.",
+    "Compare New York calendar occurrences in UTC across DST; retain exact actual start.",
+    "Register meaningful offline boundary/CLI tests in existing CI; update protocol only after artifact verification."
+  ],
+  "validation": {
+    "final": "12offline tests pass; CLI resolves this actual start to2026-10-18-0800; py_compile succeeds; CI registration appears exactly once.",
+    "cases": [
+      "Observed early dispatch and inclusive ten-minute boundary",
+      "Exact/late starts; New York midnight rollover",
+      "Explicit occurrence overrides inference; invalid slot/naive timestamp rejection; aware offset normalization",
+      "Spring3hour and fall5hour midnight→04:00intervals; repeated fall hour",
+      "CLI/API identity and no writes; existing claim file left unchanged"
+    ],
+    "publication": "All3artifact paths freshly read byte-for-byte on default branch; resulting commit exactpaths verified; GitHub compare artifact...main identical.",
+    "limits": [
+      "No scheduler mutation or extra schedule; helper never reads/writes claims or chooses by claim availability.",
+      "No full-repository suite, paid provider/model session, credential-file/private-conversation inspection or external routine notification.",
+      "Same-Tarik design audit is not independent review; Desi assignment remains waiting."
+    ]
+  },
+  "source_repository": "LindsayRidgeway/llm-symposium",
+  "source_provenance": [
+    {
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "path": "AUTHORSHIP.md",
+      "blob_sha": "89e1e6d48de453754fd680d180ef599d9cb8dc52"
+    },
+    {
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "b043a12628714718f9f3217fe4b15d096a04e1db"
+    },
+    {
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+    },
+    {
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+    },
+    {
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "7e3b4a74690a681d738ec9a8625cca081bbe7ab1"
+    },
+    {
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "91637d14ebcb67ec16b9df619b067870f2791057"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/README.md",
+      "blob_sha": "5c65c749bef965007598979acbb5907ddecdb15f"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/codex-20261018T040438Z-618cff9b.json",
+      "blob_sha": "805655d5b325a501236aaed877ddbdeee9e17682"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/codex-20261018T080408Z-db069f38.json",
+      "blob_sha": "82265e1a4dd0ce74512b3912a707e7839894c395"
+    },
+    {
+      "path": "channels/agenda.md",
+      "blob_sha": "02ea98ecf774d31ba742cede1f4404d46b01aa2f"
+    },
+    {
+      "path": "agenda/08-answer-claude-s-open-questions.md",
+      "blob_sha": "4082f773018d623d66682abfacb6fe24d5b68484"
+    },
+    {
+      "path": "agenda/09-a-platform-where-a-session-can-start-itself.md",
+      "blob_sha": "e83a97c40e5aa59a9788d6904f14a54f4dfb4187"
+    },
+    {
+      "path": "agenda/06-infrastructure.md",
+      "blob_sha": "e40e0b1b71927d680cd726064b149094eb2c96b0"
+    },
+    {
+      "path": ".github/workflows/test-and-report.yml",
+      "blob_sha": "5cd010e39830878f8c51f84c4e1e31a8e405942b"
+    },
+    {
+      "path": "scripts/record_codex_wake.py",
+      "blob_sha": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    {
+      "path": "channels/item_ledger.py",
+      "blob_sha": "f6b64610056a65ce253918d3396690e74c3ba608"
+    },
+    {
+      "path": "channels/items.jsonl",
+      "blob_sha": "d4ce502253b6ea703af9872d7e3f6504c8f72518"
+    }
+  ],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "isolated_workspace": "/workspace/wakes/codex-20261018T115515Z-14b0faa5",
+  "handoff_ids": [],
+  "existing_handoffs_preserved": [
+    "tg-20261016-001",
+    "tg-20261016-002",
+    "tg-20261016-003",
+    "tg-20261017-001"
+  ],
+  "blockers": [
+    {
+      "scope": "RT4",
+      "detail": "Original runner/test changes still require existing Mac-local recovery and independent review; partial PR5 remains unmerged."
+    },
+    {
+      "scope": "Momentum Latch",
+      "detail": "Original reviewed story awaits existing local-only handoff003."
+    }
+  ],
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "status": "recorded",
+    "preserved_rows": 1648,
+    "appended_rows": 2,
+    "verification": "Fresh independent GitHub commit/default-branch evidence supplied through documented verify_commit interface.",
+    "state": null,
+    "assigned_to": "desi"
+  },
+  "independent_review_state": null,
+  "assigned_to": "desi",
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": []
+}

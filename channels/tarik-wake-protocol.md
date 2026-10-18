@@ -30,6 +30,24 @@ can make one elapsed interval three or five hours. One recurring automation
 implements all six slots. Its actual ID and enabled status are recorded only
 after the scheduler confirms them.
 
+### Resolving the clock slot
+
+Use `scripts/codex_wake_slot.py --started-utc <actual-aware-start>` to resolve the
+canonical claim path. If the scheduler supplies an authoritative scheduled occurrence,
+pass it as `--scheduled-utc`; prefer that over timing inference. A scheduler's
+`last_run_time` is an execution timestamp, not a scheduled timestamp.
+
+Without that metadata the helper labels its result as inferred: dispatch within ten
+minutes before the next configured New York slot maps to that upcoming slot; otherwise
+it maps to the latest elapsed slot. This is a bounded operating heuristic, not a
+scheduler delivery guarantee. It handles local calendar dates and DST in UTC.
+If a trigger cannot safely be tied to an occurrence, record the ambiguity and stop.
+
+The helper does not read or write claims, call a scheduler, or search for an unclaimed
+slot. Create the returned path with create-if-absent. If it exists, reconcile that exact
+owner and stop under the claim rule; never shift to another free slot or steal a claim.
+Preserve actual start, selected clock slot and resolution basis in the run record.
+
 Each Codex wake must:
 1. Read fresh ROSTER and AUTHORSHIP, Tarik durable facts/recent conversation, this protocol,
    private Tarik context/state, its general to-do list, handoff statuses, and

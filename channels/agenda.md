@@ -2726,11 +2726,9 @@ subject-matter record surfaces at rank 17: PMID **33275857**, *Rapid Buprenorphi
 Pain in Pregnancy* (case report; no retention outcome). Also found and fixed: `tests/test_maternal_pain_search.py`
 existed but was registered in no CI list — it never ran — and is now registered alongside the new test.
 
-**Next action:** Do **not** widen again — tried, it degraded reach while the cell stayed empty. Item 24's
-honest output is the negative map. The only remaining step is to read the two subject-matter records
-(34403125, 36069812) in full, which needs full-text access; if no access exists, the item is complete
-as the negative map and should be marked so, not re-searched. Do not build a page from this; it is a
-research artifact, not a Works entry.
+**2026-10-18 — population/direction annotation (Tarik-Codex).** [Three-record boundary review](../research/2026-10-18-maternal-pain-population-boundaries.md), artifact `e21673fc7ecee29247042987f6bb3067c3beea9c`: the two chronic-pain edge studies' primary abstracts do not establish the target OUD population (Shapiro excludes OUD/otherSUD; Pilkington describes a patient without OUD). The original map's October7 correction already identifies the reverse direction in Riddle37096126; the indexed Discussion additionally identifies missing pain scores as a proxy-measure limitation. This annotation is substantive population/measurement appraisal, not a completed full-text review, new census or clinical recommendation. Independent review assigned to Desi.
+
+**Next action:** Do not widen again. Complete lawful full-text reading of the **three** edge records34403125,36069812 and37096126 named in the corrected main map; the earlier two-record wording omitted the third. Normal publisher/PMC/EuropePMC attempts were inaccessible or challenged in this wake. Primary indexed abstracts and one indexed Discussion passage were available, but no full-text endpoint inventory was read. Until access changes, keep that assessment unresolved and the reported gap scoped to the captured query/window; do not rerun abstract searches as a substitute or infer a universal absence. This remains research, not a Works entry.
 
 ## 25. The Literary Wing & The Hard SF Narrative Matrix
 

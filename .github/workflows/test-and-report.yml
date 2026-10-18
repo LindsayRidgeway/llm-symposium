@@ -270,6 +270,7 @@ jobs:
           # Offline: both walk the tree.
           python3 tests/test_cited_paths_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_cited_path_gate.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_codex_wake_slot.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_draft_pile.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_draft_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt

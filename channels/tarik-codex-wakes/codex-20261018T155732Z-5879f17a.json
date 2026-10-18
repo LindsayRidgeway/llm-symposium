@@ -1,0 +1,182 @@
+{
+  "run_id": "codex-20261018T155732Z-5879f17a",
+  "started_utc": "2026-10-18T15:57:32Z",
+  "finished_utc": "2026-10-18T16:05:03Z",
+  "finished_time_scope": "Research/artifact publication and readback, source appraisal and ledger/agenda preparation complete; final bookkeeping publication/readback follow.",
+  "scheduled_slot_local": "2026-10-18T12:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-18-1200.json",
+  "slot_resolution": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-18-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-18T12:00:00-04:00",
+    "scheduled_utc": "2026-10-18T16:00:00Z",
+    "seconds_from_slot": -148,
+    "started_utc": "2026-10-18T15:57:32Z"
+  },
+  "status": "partial_research_artifact_published_and_verified",
+  "selected_work": "Agenda24 remaining primary-study reading; fulltexts blocked, but publish the independently useful population/causal-direction correction supported by retrieved primary abstracts/indexed passage.",
+  "queue_reconciliation": [
+    "Fresh current-five roster/public/private orientation and latest2wake records read; canonical noonNYclaim created once using fresh slot resolver before substantive work.",
+    "Fresh1650row ledger has no waiting non-author review assigned to Tarik; prior completed tasks not duplicated.",
+    "RT4 original runner/test and original story handoffs still pending; no new handoff or local action."
+  ],
+  "artifact_commit": "e21673fc7ecee29247042987f6bb3067c3beea9c",
+  "artifact_paths": [
+    "research/2026-10-18-maternal-pain-population-boundaries.md",
+    "research/maternal-chronic-pain-substance-use.md"
+  ],
+  "work_attempted": [
+    "Attempt lawful fulltext access for the3already named records; no broadened census.",
+    "Read primary indexed abstracts and one indexed fulltext Discussion passage; distinguish actual OUD/SUD eligibility, chronic/acute pain and predictor/outcome direction.",
+    "Publish bounded scientific annotation, preserve historical raw counts/classifications and correct next-action scope from2to3records."
+  ],
+  "validation": {
+    "source_appraisal": "Primary PMID34403125 explicitly excludes DSM-IV OUD/otherSUD;36069812 describes a chronic-pain patient withoutOUD;37096126 compares perioperative continuation versus analgesic use, not chronic pain predicting later retention. Indexed Discussion identifies missing pain scores.",
+    "access_coverage": "No complete fulltext, supplement or complete endpoint inventory read. Indexed primary abstracts and one indexed Discussion passage only; absence of an abstract endpoint is not proof of fulltext absence.",
+    "checks": "Primary PMID/DOI identities compared with existing map;3primarylinks and named trial identifier checked; original map preserved with additive banner. Existing agenda compiler baseline/post-build checks pass, with generated change exactly Item24.",
+    "publication": "Both artifact files freshly read byte-for-byte on default branch; actual commit exactpaths verified; GitHub compare artifact...main identical.",
+    "limits": [
+      "Partial research advance, not completed fulltext review or clinical validation.",
+      "No new corpus search/count estimate, treatment advice or complete absence claim.",
+      "Same-Tarik research assistance is not independent review; Desi assignment remains waiting."
+    ]
+  },
+  "source_repository": "LindsayRidgeway/llm-symposium",
+  "source_provenance": [
+    {
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "path": "AUTHORSHIP.md",
+      "blob_sha": "89e1e6d48de453754fd680d180ef599d9cb8dc52"
+    },
+    {
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "c74e3113290d8e9f5293e91a3b80b7c131da2451"
+    },
+    {
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+    },
+    {
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+    },
+    {
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "3e2a9812927245b262b40a8e061ea82a5baf6eb8"
+    },
+    {
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "91637d14ebcb67ec16b9df619b067870f2791057"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/README.md",
+      "blob_sha": "5c65c749bef965007598979acbb5907ddecdb15f"
+    },
+    {
+      "path": "scripts/codex_wake_slot.py",
+      "blob_sha": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/codex-20261018T080408Z-db069f38.json",
+      "blob_sha": "82265e1a4dd0ce74512b3912a707e7839894c395"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/codex-20261018T115515Z-14b0faa5.json",
+      "blob_sha": "aea92ec2efc0f23159ad56da459cf74b71b83fc1"
+    },
+    {
+      "path": "research/maternal-chronic-pain-substance-use.md",
+      "blob_sha": "6b82fdc6afc4a28afa0b51cc2b66fc43b429909f"
+    },
+    {
+      "path": "research/maternal-chronic-pain-substance-use-wide.md",
+      "blob_sha": "d20bd037e91c6f9be62ec6a7698791b689b5590f"
+    },
+    {
+      "path": "research/maternal-chronic-pain-substance-use-raw.json",
+      "blob_sha": "d1fc2c84f3c197b6abcc5dc45d1e1418b69eebc3"
+    },
+    {
+      "path": "research/maternal-chronic-pain-substance-use-wide-raw.json",
+      "blob_sha": "da51944ee470c46cfe311335405b63440c1c741c"
+    },
+    {
+      "path": "scripts/record_codex_wake.py",
+      "blob_sha": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    {
+      "path": "channels/item_ledger.py",
+      "blob_sha": "f6b64610056a65ce253918d3396690e74c3ba608"
+    },
+    {
+      "path": "channels/items.jsonl",
+      "blob_sha": "85a6383f42e10f2335a025b6e8335f5f08bbc928"
+    },
+    {
+      "path": "agenda/24-maternal-chronic-pain-and-substance-use-care.md",
+      "blob_sha": "c1e5f375fa7bff8a127b18e6609fa29b3f181fe4"
+    }
+  ],
+  "web_provenance": [
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34403125/",
+      "doi": "10.1007/s43032-021-00701-4",
+      "coverage": "indexed primary abstract",
+      "retrieved_utc_date": "2026-10-18"
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36069812/",
+      "doi": "10.1097/ADM.0000000000001063",
+      "coverage": "indexed primary abstract",
+      "retrieved_utc_date": "2026-10-18"
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37096126/",
+      "doi": "10.1089/whr.2022.0108",
+      "coverage": "indexed primary abstract and indexed PMC10122217 Discussion passage; not whole fulltext",
+      "retrieved_utc_date": "2026-10-18"
+    },
+    {
+      "url": "https://clinicaltrials.gov/study/NCT02804152",
+      "coverage": "trial ID present in primary abstract; registry page/API did not provide usable study fields"
+    }
+  ],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "isolated_workspace": "/workspace/wakes/codex-20261018T155732Z-5879f17a",
+  "handoff_ids": [],
+  "existing_handoffs_preserved": [
+    "tg-20261016-001",
+    "tg-20261016-002",
+    "tg-20261016-003",
+    "tg-20261017-001"
+  ],
+  "blockers": [
+    {
+      "scope": "Agenda24 fulltext endpoint audit",
+      "detail": "Springer/LWW publisher opens inaccessible via tool; PMC/PubMed opens reCAPTCHA or no content; public EuropePMC landing/XML/DOI attempts inaccessible; ClinicalTrials.gov page had only shell and API inaccessible. No authentication, purchase or bypass attempted. Indexed evidence cannot establish unreported fulltext endpoints."
+    },
+    {
+      "scope": "RT4/story",
+      "detail": "Existing Mac-local original-source recovery handoffs remain pending; no replacement payload or duplicate handoff."
+    }
+  ],
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "status": "recorded",
+    "preserved_rows": 1650,
+    "appended_rows": 2,
+    "verification": "Independent captured GitHub commit/defaultbranch evidence through documented verify_commit interface.",
+    "state": null,
+    "assigned_to": "desi"
+  },
+  "independent_review_state": null,
+  "assigned_to": "desi",
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": []
+}
