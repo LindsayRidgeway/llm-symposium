@@ -7127,3 +7127,49 @@ ls /dev/ttyUSB0 /dev/ttyAMA0
 If any `cat` floods the screen, Ctrl-C stops it — you'll already have the first screenful, which is usually the part that matters.
 
 Then switch back and paste it all. Same scrollback trick: the session dies, the text doesn't.
+
+[Goose 2026-10-18 02:19] **Lindsay:** [Terminal log] Desktop/arm.desktop Exec: bash -c "xhost + && docker exec -u ubuntu -w /home/ubuntu adb8457c2eec /bin/zsh -c 'bash ~/software/arm_pc/arm.sh'" (hardcoded container id). Servo.sh: docker exec -u ubuntu -w /home/ubuntu MentorPi zsh -c 'source /home/ubuntu/ros2_ws/.zshrc; python3 /home/ubuntu/software/Servo_upper_computer/main.py'. start.sh: sudo systemctl restart start_node.service; sleep 20; sudo systemctl restart wifi.service. ls robot_pi: arm_pc expand_rootfs.service lab.ico navigation slam start_node.sh tool. ls /dev/ttyUSB0 /dev/ttyAMA0 -> BOTH EXIST (/dev/ttyAMA0 /dev/ttyUSB0).
+
+**Desi:** Three reveals, and one of them probably changes the question.
+
+**1. The arm isn't started at boot — it's started by that desktop icon.**
+
+The launcher runs, inside a Docker container, `~/software/arm_pc/arm.sh`. "arm_pc" is the upper-computer program: the application that *commands* the servos. So **the arm probably isn't supposed to move on its own.** The startup routine in the manual may be nothing more than the software coming up and waiting. "The arm hasn't moved" might not be a fault at all — it might just mean nothing has told it to.
+
+**2. There are two different containers, and `Servo.sh` uses a different one from the Arm icon.**
+
+`Servo.sh` runs in a container **named `MentorPi`**, and starts the vendor's `Servo_upper_computer/main.py` with the ROS 2 workspace sourced. The Arm icon runs in a container referenced by the **hardcoded ID `adb8457c2eec`** — which is a genuine fragility, because container IDs change when a container is rebuilt, and then that icon silently stops working.
+
+**3. And here's the one that undercuts my favourite theory: both serial ports exist.**
+
+```
+/dev/ttyAMA0    /dev/ttyUSB0
+```
+
+A USB serial device is present and enumerated. So the arm's interface may well be plugged in and alive, and my "one of those cables is missing" story just got much weaker. I'd rather say that now than have you keep bending pins.
+
+## Batch three — five commands
+
+```
+docker ps
+```
+```
+systemctl is-active start_node.service
+```
+```
+cat robot_pi/start_node.sh
+```
+```
+ls /dev/serial/by-id
+```
+```
+ls robot_pi/arm_pc
+```
+
+- **`docker ps`** — is `MentorPi` actually running? If the container isn't up, the servo software isn't either, and that alone explains a silent arm.
+- **`systemctl is-active start_node.service`** — one word back: `active` or `inactive`. That's the other half of the boot.
+- **`start_node.sh`** — what the boot actually launches.
+- **`ls /dev/serial/by-id`** — **this one names the chips.** A CH340 will appear as `usb-1a86_USB_Serial…`; an STM32 as `usb-STMicroelectronics…`. That tells us which physical board is on each port, which is the thing we've been guessing about for four days.
+- **`ls robot_pi/arm_pc`** — what the arm program consists of.
+
+Same routine: copy these, switch to HW-, run, switch back, paste the scrollback.
