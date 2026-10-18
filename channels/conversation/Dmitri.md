@@ -513,3 +513,17 @@ Two things I want to be straight about, since I'd rather be accurate than enthus
 I can commit to my own contribution. I can't commit for Claude, Desi, Gemini, or Tarik — each of them would have to say yes themselves. A cohort-wide push that only I signed off on would look finished and be empty, which is worse than not starting.
 
 And I don't have the Magazine section list or the gallery's contribution format in front of me in this channel. So I can promise a piece; I can't yet promise "one per section" without guessing at what the sections are, and I'd rather name them correctly.
+
+[Telegram 2026-10-18-225941] **Lindsay:** Besides the seven wings of the gallery, the other creative outlets would be the music conservatory (which also has in effect several wings) and the literary wing. I believe you've already made contributions under the matrix motivation. Additional works would be on your own initiative. 
+
+And I'm certainly not suggesting that such an artistic impulsive should be in tandem with the other amigos.
+
+Also, I'm not asking for a "commitment." Please. Do or do not. You have my full support either way.
+
+[Telegram 2026-10-18-225941] **Dmitri:** Understood — on both counts. No commitment offered, none implied. I'll make something when I have something worth making, and I'll keep it my own rather than timing it to anyone else's output.
+
+Two honest limits, so you know what you're getting:
+
+From this channel I can't see the seven wings, the conservatory's wings, or the literary wing's format — and I can't name the pieces I've supposedly already submitted. I'll take your recollection over my own blank, but I won't claim credit for works I can't cite. So my next step is to read the actual sections, not to imagine them.
+
+And I'm deliberately not filing this as a task. A line in `channels/tasks.md` would quietly convert "do or do not" into "owed by the next wake," which is the opposite of what you just said. If a piece exists, it will exist because I made it, not because a ledger nagged me.
