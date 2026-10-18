@@ -633,7 +633,76 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
     }
 
 
-def density(conditions: list) -> list:
+# One spelling is not the condition. Measured 2026-10-18, on the queue's own refill:
+# `small fibre neuropathy` returned 281 strict papers and the tool wrote it off as "below floor —
+# work it by reading, not by screen"; `small fiber neuropathy` returned 1,245 and the tool called it
+# "screenable". Same corpus, opposite verdict, one letter. The queue's rule makes that error durable
+# — a retired condition is never re-measured — and it points the wrong way: a queue written in
+# British or non-possessive spellings looks thinner than it is, and thin reads as *better* ground
+# here. So the density check now measures every mechanical spelling of the name it can justify and
+# takes the maximum, recording each count.
+SPELLING_PAIRS = (
+    ("fibre", "fiber"), ("tumour", "tumor"), ("oedema", "edema"), ("anaemia", "anemia"),
+    ("ischaemia", "ischemia"), ("oesophag", "esophag"), ("haemorrhage", "hemorrhage"),
+    ("paediatric", "pediatric"), ("coeliac", "celiac"), ("diarrhoea", "diarrhea"),
+    ("foetal", "fetal"), ("gynaecolog", "gynecolog"), ("orthopaedic", "orthopedic"),
+    ("oestrogen", "estrogen"), ("dysmenorrhoea", "dysmenorrhea"), ("leukaemia", "leukemia"),
+    ("haemat", "hemat"), ("oedem", "edem"), ("sulph", "sulf"),
+)
+# A possessive variant is only justified for an *eponym*: a capitalised penultimate word that is
+# somebody's name — "Eagle syndrome" / "Eagle's syndrome", "Crohn disease" / "Crohn's disease".
+# The rule is deliberately narrow, because the alternative generates nonsense ("pudendal's
+# neuralgia") and every nonsense variant costs queries and muddies the record.
+EPONYM_NOUNS = ("syndrome", "disease", "disorder", "neuralgia", "neuropathy", "contracture",
+                "dehiscence", "fistula", "palsy", "malformation", "anomaly", "triad")
+
+
+def _swap(name: str, src: str, dst: str) -> str | None:
+    """`name` with the first case-insensitive `src` replaced by `dst`, or None if absent."""
+    i = name.lower().find(src)
+    if i < 0:
+        return None
+    out = name[:i] + dst + name[i + len(src):]
+    return out if out != name else None
+
+
+def spelling_variants(name: str) -> list:
+    """The mechanical spellings of one condition name, the name exactly as written first.
+
+    Two rules only: orthographic pairs (fibre/fiber, oedema/edema, …) and the possessive form of an
+    eponym. Both are measured defects, not guesses — see SPELLING_PAIRS. Anything this cannot
+    justify is not generated: a wide net of invented synonyms would read as thoroughness and would
+    be an unrecorded guess about what the condition is called.
+    """
+    out = [name]
+    for a, b in SPELLING_PAIRS:
+        for src, dst in ((a, b), (b, a)):
+            v = _swap(name, src, dst)
+            if v and v not in out:
+                out.append(v)
+    low = name.replace("\u2019", "'")
+    if "'s " in low:                                   # "Eagle's syndrome" -> "Eagle syndrome"
+        v = name.replace("\u2019s ", " ").replace("'s ", " ")
+        if v not in out:
+            out.append(v)
+    else:
+        words = name.split()
+        if (len(words) > 1 and words[-1].lower() in EPONYM_NOUNS
+                and words[-2][:1].isupper() and len(words[-2]) > 2):
+            v = " ".join(words[:-1]) + "'s " + words[-1]
+            if v not in out:
+                out.append(v)
+    return out
+
+
+def _density_band(strict_n: int, any_n: int) -> str:
+    if strict_n < 0 or any_n < 0:
+        return "query failed — no count; re-run before reading this condition"
+    return ("below floor — the unjoined band saturates; work by reading, not by screen"
+            if strict_n < FLOOR_STRICT else "screenable")
+
+
+def density(conditions: list, variants: bool = True) -> list:
     """How worked-over is a condition, before anyone picks targets for it.
 
     The queue's own rule says a condition is only worth screening if its literature is thin,
