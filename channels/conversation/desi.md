@@ -7526,3 +7526,41 @@ head -60 robot_pi/arm_pc/bus_servo_control.py
 **Why these two:** the first names the data channels; the second is the vendor's own code for driving the arm servos, which will show me the exact topic and message format they use. Between them I can write you one line that either **reads** the arm's servo positions — a read-only test, moves nothing, and tells us instantly whether the servos are even answering — or **moves** one servo, if reading turns out not to be supported.
 
 Paste both. That's the last exploratory step; after this I write you a single command and we know.
+
+[Goose 2026-10-18 04:11] **Lindsay:** [Terminal log] ros2 topic list includes /ros_robot_controller/bus_servo/set_position, /ros_robot_controller/bus_servo/set_state, /ros_robot_controller/pwm_servo/set_state, /ros_robot_controller/battery, /controller_manager/servo_states, /controller_manager/joint_states, /servo_controller, /set_pose, /set_odom, /cmd_vel, /joint_controller. head -60 robot_pi/arm_pc/bus_servo_control.py: class BusServoControl; setBusServoPulse(servo_id, position(0-1000), duration) -> board.bus_servo_set_position(duration/1000, [[servo_id, position]]); special case servo_id==10 inverts position.
+
+**Desi:** Everything I need is in that list. **`/ros_robot_controller/bus_servo/set_position`** is the channel that moves the arm, and `bus_servo_control.py` shows the vendor's own call: servo id, position 0–1000, duration in milliseconds.
+
+To stop you typing the long `docker exec` prefix every time, **enter the container once** and work inside it:
+
+```
+docker exec -it -u ubuntu -w /home/ubuntu MentorPi /bin/zsh
+```
+
+```
+source ~/.zshrc
+```
+
+Then these three, which are short:
+
+```
+ros2 topic echo /ros_robot_controller/battery --once
+```
+
+```
+ros2 topic echo /controller_manager/servo_states --once
+```
+
+```
+ros2 topic info -v /ros_robot_controller/bus_servo/set_position
+```
+
+**What they are:**
+
+- The first reads the **battery voltage off the robot's own instrumentation.** Real number, under a real load. It also proves the controller link is live.
+- The second reads the **arm servo states** — this is the read-only arm test. If it reports servo positions, the servos are powered and answering, and no cable needs plugging in.
+- The third prints the **message format** for the motor command, which is the one thing I need before writing you a line that moves a servo.
+
+`--once` waits for a single message and then stops. **If either of the first two hangs for ten seconds with nothing, Ctrl-C it** and tell me — a topic that publishes nothing is itself an answer.
+
+Type `exit` to leave the container when you're done.
