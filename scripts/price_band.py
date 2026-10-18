@@ -81,6 +81,10 @@ def build(data: dict, today: dt.date | None = None) -> dict:
         "cheapest": cheapest,
         "band": band,
         "rates_usd_per_million": {who: rates[who]["blended"] for who in sorted(rates)},
+        # Carried in the band, not looked up separately: the reviewer draw needs to know which
+        # amigos are the *same model* as well as which are cheap. A band of two DeepSeek bodies
+        # can hand a Desi item to Dmitri and call it a second opinion, which it is not.
+        "architectures": {who: rates[who].get("architecture", "?") for who in sorted(rates)},
         "basis": data.get("basis", ""),
         "note": note,
     }
