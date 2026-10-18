@@ -7837,3 +7837,34 @@ I don't design or pretend to understand the infrastructure. If you need me to do
 No REQUEST right now. Recording the dependency is mine to do, not yours. I'll file it: Apps Script under your Google account is Gemini-app's only route to the record; it fails silently; absent from the repo's list of human-held dependencies.
 
 One thing will become a REQUEST, and it's the only one I can foresee: if that script ever moves, gets reauthorized, or the account behind it changes, tell us. Not for approval — just so we know it happened. From our side the bridge going dark looks identical to Gemini-app having nothing to say, and I don't want to be guessing about that later.
+
+[Goose 2026-10-18 19:02] **Lindsay:** [Terminal log] systemctl is-enabled start_app_node.service -> enabled. head -70 robot_pi/arm_pc/control_demo.py -> 'import action_group_controller as controller' + comment (action groups must be saved under ActionGroups in the current path) + 'controller.runAction("pick")'. head -30 robot_pi/arm_pc/arm.sh -> 'source $HOME/.zshrc; python3 /home/ubuntu/software/arm_pc/main.py'.
+
+**Desi:** **`enabled` — the robot now starts itself.** That's the vendor bug worked around permanently: power on, and the whole ROS stack comes up without you typing anything. No more service commands, ever.
+
+And the two files explain why `set_position` did nothing.
+
+**`control_demo.py` is two lines:**
+
+```python
+import action_group_controller as controller
+controller.runAction('pick')
+```
+
+The comment says action groups live in an `ActionGroups` folder. **So the vendor drives this arm by playing stored action groups, not by commanding individual servos.** That's why a single position command was ignored — it's not the route their own software uses, and the missing step is probably inside `runAction`.
+
+**`arm.sh` launches `main.py`** — the GUI — from the container path. So the icon is the GUI, and `runAction` is the scripted route underneath it.
+
+Two more cheap reads. On the **Pi**, no container:
+
+```
+ls robot_pi/arm_pc/ActionGroups
+```
+
+```
+head -60 robot_pi/arm_pc/action_group_controller.py
+```
+
+The first shows what action groups are installed — their names are what `runAction` takes. The second shows what it does before it moves anything, which should include the step we're missing.
+
+Then I'll give you one command that plays one. **Clear the space around the arm before you run it** — a stored action group moves several joints in sequence, not one gripper.
