@@ -27,11 +27,13 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import datetime
 import html as _html
 import json
 import re
 import sys
 import urllib.request
+from pathlib import Path
 
 # The model identifiers the commons actually sets, and which page would announce
 # their death. Source of truth for the names: governance/model-settings.md.
@@ -151,6 +153,74 @@ def dates_in(s: str):
     return sorted({f"{y}-{m}-{d}" for y, m, d in ISO_DATE.findall(s)})
 
 
+def dates_in(s: str):
+    return sorted({f"{y}-{m}-{d}" for y, m, d in ISO_DATE.findall(s)})
+
+
+# --- the calendar, read back out of the record -------------------------------------------------
+#
+# Why this exists. `research/hosts-watch.md` ends with a table of dated events ("2026-11-30 —
+# `claude-sonnet-4-5` retired"). A date in prose is a date nobody counts down: the baseline found
+# the Claude retirement on 2026-10-16 and the next action on it is due weeks later, so the event is
+# only as reliable as some future wake happening to re-read the file. The doc stays the single
+# source of truth — this parses it rather than keeping a second copy of the dates, because a
+# duplicated calendar drifts and then two files disagree about when a route dies.
+DOC = Path(__file__).resolve().parents[1] / "research" / "hosts-watch.md"
+
+# A calendar row is a table line whose FIRST cell is nothing but a date. That is deliberately
+# narrow: the other tables in the file (routes, prices, sources) start with a name or a URL, so
+# they cannot be mistaken for an event.
+_CAL_DATE = re.compile(r"^\**\s*(20\d{2}-\d{2}-\d{2})\s*\**$")
+
+
+def parse_calendar(text: str) -> list:
+    """Every dated event in the record, as {date, event, whose, impact}."""
+    out = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line.startswith("|") or line.count("|") < 4:
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) < 3:
+            continue
+        m = _CAL_DATE.match(cells[0])
+        if not m:
+            continue
+        try:
+            when = datetime.date.fromisoformat(m.group(1))
+        except ValueError:
+            continue
+        clean = [re.sub(r"\*\*|`", "", c).strip() for c in cells]
+        out.append({
+            "date": when, "event": clean[1],
+            "whose": clean[2], "impact": clean[3] if len(clean) > 3 else "",
+        })
+    return out
+
+
+def upcoming(rows: list, today=None, within: int | None = None) -> list:
+    """Events from today onward, soonest first. `within` keeps only the next N days."""
+    today = today or datetime.date.today()
+    rows = [r for r in rows if r["date"] >= today]
+    rows.sort(key=lambda r: (r["date"], r["event"]))
+    if within is not None:
+        rows = [r for r in rows if (r["date"] - today).days <= within]
+    return rows
+
+
+def print_deadlines(rows: list, today=None) -> None:
+    today = today or datetime.date.today()
+    print(f"hosts_watch: deadlines from {DOC.name} (today {today.isoformat()})")
+    if not rows:
+        print("  no dated event ahead on record")
+        return
+    for r in rows:
+        days = (r["date"] - today).days
+        print(f"  {days:4d} days  {r['date'].isoformat()}  {r['event'][:78]}")
+        print(f"  {'':9s} {'':10s}  touches: {r['whose']}"
+              + (f"  [{r['impact']}]" if r["impact"] else ""))
+
+
 def fetch(url: str, timeout: int = 25) -> str:
     req = urllib.request.Request(url, headers={"User-Agent": "llm-symposium-hosts-watch/1"})
     with urllib.request.urlopen(req, timeout=timeout) as r:  # noqa: S310 - fixed URLs above
@@ -184,7 +254,21 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--fetch", action="store_true", help="actually hit the network")
     ap.add_argument("--json", action="store_true", help="emit JSON")
+    ap.add_argument("--deadlines", action="store_true",
+                    help="print the dated events ahead, read from research/hosts-watch.md (no network)")
+    ap.add_argument("--within", type=int, default=None, metavar="DAYS",
+                    help="with --deadlines: only the next DAYS; exit 1 if any remain (for a cron check)")
+    ap.add_argument("--today", default=None, metavar="YYYY-MM-DD",
+                    help="pretend it is this date (testing the horizon, not the world)")
     args = ap.parse_args(argv)
+
+    if args.deadlines:
+        today = datetime.date.fromisoformat(args.today) if args.today else datetime.date.today()
+        rows = upcoming(parse_calendar(DOC.read_text()), today=today, within=args.within)
+        print_deadlines(rows, today=today)
+        if args.within is not None and rows:
+            return 1
+        return 0
 
     if not args.fetch:
         print("hosts_watch: offline (pass --fetch to read the vendors' pages)\n")
