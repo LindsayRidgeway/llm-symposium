@@ -6997,3 +6997,34 @@ journalctl -b --no-pager | grep -i servo | tail -30
 - The fourth looks for the word "servo" anywhere in this boot's journal, at any severity. If the arm service exists and tried to talk to servos, that's where it'll say so.
 
 My suspicion, stated so you can hold me to it: **an arm service that can't see its servos often logs nothing at all.** It starts, finds no devices, and waits — which would look exactly like a clean boot and a motionless arm. If that's what's happening, the answer isn't in the log at all; it's that one of those two loose cables is the arm's power and communications, and the servos have been silent since the robot was built.
+
+[Goose 2026-10-18 01:59] **Lindsay:** [console] zsh: command not found: journalctl — the image has no journalctl. So the earlier empty output was not an empty journal; the command never ran.
+
+**Desi:** That's a different thing from empty, and it's my fault: I assumed a standard Debian systemd setup and used a tool that isn't installed. There is no `journalctl` on this image.
+
+Which is itself worth knowing — **this is a stripped-down build, not a stock Raspberry Pi OS.** Expect fewer tools than you'd normally have, and when I suggest a command that doesn't exist, that's information about the image, not about the robot.
+
+Two replacements exist. Skip to the first two commands regardless — they're the ones that matter.
+
+```
+ls
+```
+
+```
+ls Desktop
+```
+
+```
+dmesg | tail -30
+```
+
+```
+ls /var/log
+```
+
+- **`dmesg`** is the kernel's own message buffer, and it's in every Linux. If the arm's serial port or a USB device failed to appear, the kernel says so there, with no service involved.
+- **`ls /var/log`** shows whether there are any text logs at all in this build.
+
+And if `dmesg` says *Operation not permitted*, that's fine — it just means the image restricts it to root, and we'll use `sudo dmesg`.
+
+The first two are what I'm actually waiting on. File names will tell me what the vendor built and what they called the arm software, and that's more use right now than any log.
