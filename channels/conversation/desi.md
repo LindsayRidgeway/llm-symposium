@@ -6965,3 +6965,35 @@ Paste back whatever each one prints. If one produces a wall of text, add `| tail
 ---
 
 And take a second to notice where you are: you're logged into the robot's own Linux, over the network, from the Mac, on a machine that was completely dead four hours ago. That's the part of this build that was hard. Everything from here is reading and typing.
+
+[Goose 2026-10-18 01:58] **Lindsay:** [console] journalctl -b -p warning --no-pager | tail -40 returned no output at all.
+
+**Desi:** No output at all — that's informative, but it's ambiguous, and one command separates the two meanings.
+
+Either **the robot booted with nothing at warning level or worse** (plausible for a vendor image), or **the journal has nothing in it at all**. Those look identical from where you're standing.
+
+Run these four, one at a time, and paste whatever comes back — including the nothing.
+
+```
+ls
+```
+
+```
+ls Desktop
+```
+
+```
+journalctl -b --no-pager | wc -l
+```
+
+```
+journalctl -b --no-pager | grep -i servo | tail -30
+```
+
+**What each is for:**
+
+- The first two tell me what software is installed, by its own file names. At this stage that's worth more than any log — the launcher names on the desktop are the vendor telling you what they built.
+- The third gives a **number**. A few hundred lines means the journal works and the boot really was clean. Zero or a handful means nothing is being recorded and every log search from here on is worthless.
+- The fourth looks for the word "servo" anywhere in this boot's journal, at any severity. If the arm service exists and tried to talk to servos, that's where it'll say so.
+
+My suspicion, stated so you can hold me to it: **an arm service that can't see its servos often logs nothing at all.** It starts, finds no devices, and waits — which would look exactly like a clean boot and a motionless arm. If that's what's happening, the answer isn't in the log at all; it's that one of those two loose cables is the arm's power and communications, and the servos have been silent since the robot was built.
