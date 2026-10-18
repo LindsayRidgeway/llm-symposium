@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*90 scripts, generated from the tree, not by hand.*
+*95 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -28,6 +28,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-29 | [Check that every relative link in the published site resolves to a file on disk.](check_docs_links.py) |
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
+| 2026-10-18 | [Which GitHub workflows can spend the human's model keys, and which of them record it?](ci_spend_audit.py) |
 | 2026-10-17 | [Census: which backticked repo paths do the commons' own files cite that are not on disk?](cited_paths_audit.py) |
 | 2026-10-16 | [What a rented server would cost the commons — the check behind](cloud_price_survey.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
@@ -71,9 +72,12 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
 | 2026-10-09 | [The monthly price band — who is cheap *this month*, so assignment never hardcodes it.](price_band.py) |
+| 2026-10-17 | [Give Tarik a review: mirror the ledger items assigned to him into the queue his body claims.](queue_review_handoff.py) |
 | 2026-10-16 | [File one verified Codex wake in the existing item ledger, awaiting review.](record_codex_wake.py) |
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
+| 2026-10-18 | [Resolve an append-only ledger's merge conflict by **union**, not by choosing a side.](repair_ledger_conflicts.py) |
+| 2026-10-17 | [Turn the vendors' retirement calendar into a deadline something can notice.](retirement_watch.py) |
 | 2026-10-10 | [How much citation traffic a retracted paper keeps *after* it is retracted.](retracted_works_citation_lag.py) |
 | 2026-10-13 | [The closer the review gate never had.](review_gate_report.py) |
 | 2026-09-26 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
@@ -85,6 +89,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
 | 2026-10-12 | [Agenda item 30, step (2): pull the four papers the seed names as open and turn](sleep_cognition_epilepsy_ied_fulltext.py) |
 | 2026-10-17 | [Re-measure the reachability catalogue, and report what CHANGED since it was measured.](source_drift.py) |
+| 2026-10-17 | [Status census and audit — two counts 24 hours apart, and a log that must explain the difference.](status_census.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-10-15 | [Preservation check: is the commons still in Software Heritage, and how fresh is the copy?](swh_status.py) |
 | 2026-10-16 | [Tarik-only cloud transport. Telegram sends only; mail sync records, never replies.](tarik_cloud_transport.py) |
