@@ -237,7 +237,7 @@
     {
       "id": "tg-20261016-003",
       "source": "codex",
-      "status": "pending",
+      "status": "in_progress",
       "created_utc": "2026-10-17T00:02:10Z",
       "title": "Recover the original reviewed Momentum Latch story from Tarik's October11 run",
       "reason_for_goose": "Codex cannot access the Mac's Tarik run archive. The exact story path is absent from all211captured publicheadrefs (209drafts, Dmitri's verifiedbranch, main at6823d73d3f088b8a1bfce15794ed584c485c6f89); each fetch returned NOT_FOUND, with no auth/rate errors. Defaultbranchpathhistory is empty. Goose can inspect the original local run20261011T170104Z-0a4c51fc.",
@@ -247,7 +247,13 @@
         "Read-only: that run's repo/docs/fiction/the-momentum-latch.html",
         "Only public checkout edit: channels/tarik-goose-results/tg-20261016-003.json"
       ],
-      "expected_result": "Original story bytes and calculated Git blobSHA tied to the exact reviewed run, or an explicit missing-payload receipt. No rewrite, modelprovider API call, service/cadence change, index edit, credential inspection, private-conversation access, or independentreview impersonation."
+      "expected_result": "Original story bytes and calculated Git blobSHA tied to the exact reviewed run, or an explicit missing-payload receipt. No rewrite, modelprovider API call, service/cadence change, index edit, credential inspection, private-conversation access, or independentreview impersonation.",
+      "claim": {
+        "actor": "tarik-goose",
+        "run_id": "20261018T170215Z-2a08b5dd",
+        "claimed_utc": "2026-10-18T17:02:15.929136+00:00",
+        "token": "8352b936eb5c44dcabc3f6c7dd3f8732"
+      }
     },
     {
       "id": "tg-20261017-001",
