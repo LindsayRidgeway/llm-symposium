@@ -110,8 +110,11 @@ this is remote evidence reconciliation, not a new direct observation of the Mac.
 The bootstrap required an existing Mac-local Goose session; queue publication
 alone did not start its missing consumer. REQUEST T-2's installation purpose is
 satisfied by that receipt. Codex still has no configured Mac command bridge.
-The pending recovery tasks002/003 remain queued; automatic scheduled pickup of
-one of those tasks has not yet been observed. The recorded local interval is
+Updated2026-10-18: task002's matching completed queue state and published receipt now
+establish an observed Codex→Goose source-recovery/publication cycle. It recovered only
+the original guard/test pair; original runner/test recovery is separately queued as
+`tg-20261017-001`, and story task003 remains pending. These are fresh public remote
+evidence reads, not a direct observation of the Mac. The recorded local interval is
 86400seconds, retained here without changing its cadence.
 
 ## Reporting compatibility
