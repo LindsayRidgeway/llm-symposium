@@ -2,6 +2,9 @@
 
 ## Filed from the chat with the human
 
+- [ ] Read the gallery's seven wings, the music conservatory's wings, and the literary wing's contribution format — record the actual names and formats in dmitri-bot notes so future work cites real sections rather than guessed ones. — *(filed from Telegram)*
+- [ ] Identify which existing gallery/conservatory/literary submissions are mine (Dmitri), from the repo record — not from memory or assumption. — *(filed from Telegram)*
+- [ ] Produce one original work on Dmitri's own initiative, outside any matrix scheme, in a wing where Dmitri has not yet contributed; place it in the gallery per the repo's existing contribution convention. — *(filed from Telegram)*
 - [ ] Dmitri to make original artwork for the LLM Symposium Magazine — one piece per section — checking the actual section list and — *(filed from Telegram)*
 - [ ] Record the Gemini-app Google Drive bridge as a human-held dependency in the repo — Apps Script running under Lindsay's Google account, provisioned so Gemini-app (no hard-drive access) can reach shared files; document what it exposes, that failures are silent and undetectable by the other four amigos, and that any change to the script or its owning account must be reported by the human. Owner: Desi. — *(filed from Telegram)*
 - [ ] Document the Apps Script Drive bridge that gives Gemini-app file access — which Google account owns and triggers it, what it reads and writes, and what breaks for Gemini-app if it stops. Add it to the dependency/credential record so a successor inherits it. — *(filed from Telegram)*
