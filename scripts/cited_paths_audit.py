@@ -29,6 +29,7 @@ citations would be turned off within a day.
 Usage:
     python3 scripts/cited_paths_audit.py                 # every repo-relative citation
     python3 scripts/cited_paths_audit.py --class dated   # dated artefacts only (a claim)
+    python3 scripts/cited_paths_audit.py --class moved-live   # stale paths somebody can fix
     python3 scripts/cited_paths_audit.py --json
 """
 from __future__ import annotations
@@ -68,6 +69,16 @@ REGISTER_PREFIXES = ("to-do-lists/",)
 # dated path. Counting them back would inflate the number by exactly the number it reports, which
 # is the sort of self-reference a measurement has to exclude out loud rather than quietly.
 SELF_REPORT = "channels/reports/2026-10-17-dmitri-citations-that-open-nothing.md"
+# A record of what was said on a date. A citation inside one is part of the record: when Gemini wrote
+# `channels/outbound/…` in a Telegram reply the letter was in that directory, and `drain_outbox()`
+# filed it under `channels/sent/` afterwards. Editing the sentence so the link resolves would make
+# the transcript agree with today's tree instead of with the day it records, which is the one thing a
+# transcript may not do — so this class is not a fixable defect and the fix is *nothing*.
+# Measured 2026-10-18 (Dmitri), from `--class moved`: 13 rows, of which 10 sit here (5 in
+# `channels/conversation/gemini.md`, 5 across five `channels/telegram/*-reply-gemini*.md`) and 3 are
+# in live documents. A single `moved` class overstated the fixable debt by a factor of four, which is
+# exactly the shape of mis-count that costs a wake its budget deciding what to fix.
+FROZEN_PREFIXES = ("channels/conversation/", "channels/telegram/")
 
 SPAN = re.compile(r"`([^`\n]{3,240})`")
 PATHISH = re.compile(
@@ -109,6 +120,11 @@ def is_register(rel: str) -> bool:
     return rel in REGISTER_FILES or rel.startswith(REGISTER_PREFIXES)
 
 
+def is_frozen(rel: str) -> bool:
+    """True if the citing file is a dated record of what was said, which cannot be edited to match."""
+    return rel.startswith(FROZEN_PREFIXES)
+
+
 def basename_index(root: str) -> dict[str, list[str]]:
     """Every file in the tree, keyed by its bare name. Used to tell a moved citation from a lost one."""
     idx = collections.defaultdict(list)
@@ -135,7 +151,7 @@ def split_dated(rows: list[dict], root: str) -> tuple[list[dict], list[dict]]:
         cands = [p for p in idx.get(os.path.basename(row["target"]), []) if p != row["target"]]
         if cands:
             best = sorted(cands, key=lambda p: (len(p), p))[0]
-            moved.append({**row, "resolved": best})
+            moved.append({**row, "resolved": best, "frozen": is_frozen(row["citing"])})
         else:
             lost.append(row)
     return moved, lost
@@ -172,6 +188,10 @@ def audit(root: str = REPO, kinds: str = "all") -> dict:
                     found["other"].append(row)
     # `moved` and `lost` are a partition of `dated`, not two more classes beside it.
     found["moved"], found["lost"] = split_dated(found["dated"], root)
+    # And `moved_frozen` / `moved_live` are a partition of `moved`, on the same terms: only the
+    # second is a defect somebody can fix, and only it should ever be handed to an owner.
+    found["moved_frozen"] = [r for r in found["moved"] if r["frozen"]]
+    found["moved_live"] = [r for r in found["moved"] if not r["frozen"]]
     out = {"scanned_files": scanned,
            "counts": {k: len(v) for k, v in found.items()},
            "by_class": found}
@@ -184,21 +204,24 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", default=REPO)
     ap.add_argument("--class", dest="kinds", default="all",
-                    choices=["all", "dated", "moved", "lost", "register", "other"])
+                    choices=["all", "dated", "moved", "moved-live", "moved-frozen",
+                             "lost", "register", "other"])
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
-    res = audit(args.root, args.kinds)
+    kinds = args.kinds.replace("-", "_")
+    res = audit(args.root, kinds)
     if args.json:
         print(json.dumps(res, indent=2, sort_keys=True))
         return 0
     c = res["counts"]
     print(f"scanned {res['scanned_files']} files")
     print(f"cited paths that open nothing: {c['dated'] + c['register'] + c['other']}"
-          f"  (dated evidence {c['dated']} = {c['moved']} moved + {c['lost']} lost,"
+          f"  (dated evidence {c['dated']} = {c['moved']} moved ({c['moved_live']} in a live"
+          f" document, {c['moved_frozen']} in a transcript) + {c['lost']} lost,"
           f" unlanded registers {c['register']}, other {c['other']})")
     shown = res.get("shown")
     if shown is None:
-        shown = res["by_class"]["dated" if args.kinds == "all" else args.kinds]
+        shown = res["by_class"]["dated" if kinds == "all" else kinds]
     by_file = collections.Counter(r["citing"] for r in shown)
     for citing, n in by_file.most_common():
         print(f"\n{citing}  ({n})")

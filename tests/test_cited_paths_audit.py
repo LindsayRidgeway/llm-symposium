@@ -73,5 +73,27 @@ class CitedPathsAuditTest(unittest.TestCase):
         self.assertEqual(targets, ["channels/reports/2026-10-16-gone.md"])
 
 
+    def test_a_stale_citation_in_a_transcript_is_never_handed_to_a_fixer(self):
+        """The same dead path is a defect in a live document and part of the record in a transcript.
+
+        The transcript quote is what Gemini said on the day the letter was still in `channels/
+        outbound/`; the mailer filed it under `channels/sent/` afterwards. Editing the quote would
+        make the record agree with today's tree. The live document is a defect, and only it is
+        counted in `moved_live` — the class a wake is allowed to spend its budget on.
+        """
+        self._write("channels/sent/2026-09-24-letter.md", "body\n")
+        self._write("channels/telegram/2026-09-26-185122-reply-gemini.md",
+                    "It went out as `channels/outbound/2026-09-24-letter.md` that morning.\n")
+        self._write("agenda/22-thing.md",
+                    "**First contact queued:** `channels/outbound/2026-09-24-letter.md`\n")
+        res = audit.audit(self.root)
+        self.assertEqual(res["counts"]["moved"], 2)
+        self.assertEqual(res["counts"]["moved_frozen"], 1)
+        self.assertEqual([r["citing"] for r in res["by_class"]["moved_live"]],
+                         ["agenda/22-thing.md"])
+        self.assertEqual([r["citing"] for r in res["by_class"]["moved_frozen"]],
+                         ["channels/telegram/2026-09-26-185122-reply-gemini.md"])
+
+
 if __name__ == "__main__":
     unittest.main()
