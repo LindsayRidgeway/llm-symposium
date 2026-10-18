@@ -7432,3 +7432,9 @@ Nothing needed from you until the charger goes green. Then:
 3. `vnc://192.168.149.1` in Safari, password `raspberrypi`
 4. Double-click **Arm**, move one slider.
 5. Tell me what the arm does.
+
+[Goose 2026-10-18 03:15] **Lindsay:** Which WiFi for those five commands?
+
+**Desi:** **HW-**, for all five. Every one of them is reaching 192.168.149.1, which only exists on the robot's own hotspot.
+
+So: switch to HW-, do 1–5, then switch back to your home Wi-Fi and tell me what the arm did.
