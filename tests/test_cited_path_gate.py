@@ -95,6 +95,14 @@ BASELINE = {
     ("scripts/ledger_row_recovery.py",
      "channels/reports/2026-10-14-dmitri-lander-ledger-conflict.md"):
         "dmitri's lander-ledger-conflict investigation, unlanded; named as such on the to-do list",
+    # Added 2026-10-18, by the author of the citing file, and it is a *deliberate* 22nd row rather
+    # than debt discovered late: the 10-18 review report cites this path only to record that it is
+    # unlanded (that run's own patch carries the code and not the report). A citation whose whole
+    # content is "this opens nothing" cannot be reworded out of existence without losing the fact,
+    # so it is declared here instead. The ceiling moved 21 -> 22 on purpose, with this reason.
+    ("channels/reports/2026-10-18-dmitri-two-items-drained-and-a-dropped-report-recovered.md",
+     "channels/reports/2026-10-14-dmitri-lander-ledger-conflict.md"):
+        "cites it only to record that it is unlanded; declared unlanded in the evidence register",
 }
 
 
