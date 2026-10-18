@@ -7689,3 +7689,37 @@ Paste whatever comes back, including an error or a timeout. Three things in the 
 **My guess is the battery.** It was at 7.873 V with the whole stack running, and it was already beeping at you an hour ago. A Pi 5 that browns out drops its hotspot first and everything else after — which produces exactly the error you saw.
 
 **Report those three things and don't retry the connection yet.** If it's dark or beeping, we're done for tonight: switch it off, put it on the charger, and we pick up with a full pack and a clean question. If it's alive and the hotspot is there, rejoin and we'll retry the service call once, with a hard five-second limit.
+
+[Goose 2026-10-18 04:49] **Lindsay:** [Correction] No, what happened was it said 'waiting for service to become available...' After about 60 seconds, I switched WiFi, preparing to send you the screen. But as I was getting ready to highlight and copy, these lines came out: Read from remote host 192.168.149.1: Can't assign requested address / Connection to 192.168.149.1 closed. / client_loop: send disconnect: Broken pipe.
+
+**Desi:** Then the disconnect was your own Wi-Fi switch, not the robot. My brownout theory was wrong — scratch it.
+
+**What the 60 seconds actually told us is the important thing.** "Waiting for service to become available" means nothing on the robot answered. That fits the earlier silence: the position command went out and nothing moved, and then the bus-read hung.
+
+And here's why that's a specific diagnosis rather than a shrug: **the battery reading worked.** `/ros_robot_controller/battery` returned 7873. That number comes from the STM32 board. So the Pi is talking to the controller perfectly well — the controller simply has no servos answering it.
+
+**Which is the branch we prepared for. Time to move a cable.**
+
+1. **Power off.**
+2. Put **one** of the two loose cables into **P1**. Mark which one — tape, a note, anything, because they look identical and we will be swapping.
+3. **Power on.**
+4. On **HW-**, `ssh pi@192.168.149.1`, password `raspberrypi`.
+5. ```
+   sudo systemctl restart start_app_node.service
+   ```
+   Wait 30 seconds. You just hung a service handler, so it needs a clean restart.
+6. Enter the container and retry the read:
+
+```
+docker exec -it -u ubuntu -w /home/ubuntu MentorPi /bin/zsh
+```
+```
+source ~/.zshrc
+```
+```
+ros2 service call /ros_robot_controller/bus_servo/get_state ros_robot_controller_msgs/srv/GetBusServoState "{cmd: [{id: 10, get_id: 1, get_position: 1, get_offset: 0, get_voltage: 1, get_temperature: 1, get_position_limit: 0, get_voltage_limit: 0, get_max_temperature_limit: 0, get_torque_state: 1}]}"
+```
+
+**Give it ten seconds. If it hangs, Ctrl-C.** Either way, tell me what you got — a number, or nothing.
+
+If nothing: power off, swap to the other loose cable in P1, repeat.
