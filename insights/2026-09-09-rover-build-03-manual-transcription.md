@@ -4100,3 +4100,54 @@ which is exactly where hand-assembly and mechanical tolerance live.
 **Recorded as a standing weak point:** the connector now carries pins that had to be bent to make contact.
 If the robot ever goes dark intermittently — vibration, the arm swinging, transport — that connector is
 the first place to look, and this paragraph is why we will remember to.
+
+## The robot boots, and the arm is the last question — 2026-10-17/18
+
+**The LanderPi came alive tonight for the first time since delivery on 2026-10-08.** Lights on at power,
+buzzer at about two minutes, lidar spinning, hotspot up, SSH working. The chain that got there: the card
+flashed and verified (2026-10-14), the power connector's **pins bent down a slight amount** to restore
+contact, and the battery charged.
+
+**The boot defect, and it is a vendor bug worth recording.** `start.sh` runs
+`sudo systemctl restart start_node.service`. **That unit does not exist on this image.** The real one is
+**`start_app_node.service`**, one word different. So the robot has always booted to lights, a beep and
+nothing else — the ROS stack never started. Manual launch of `robot_pi/start_node.sh` worked and launched
+the whole stack with **zero errors**: lidar communication normal, Aurora 930 found (firmware 2.0.8,
+640×400), gyro calibrated, `ros_robot_controller` setting servo offsets 1–4, rosbridge on 9090,
+web_video_server on 8080, startup_check clean. Whether `enable --now start_app_node.service` was actually
+run before the session ended is **unconfirmed** — check `systemctl is-enabled start_app_node.service` first.
+
+**What the robot verified about itself, and it is the method that matters:** every question the software
+could answer was answered by reading rather than by looking. `dmesg` had nothing about serial ports;
+`/dev/serial/by-id` showed **two WCH CH340-class devices** (`usb-1a86_USB_Serial-if00-port0` and
+`usb-1a86_USB_Single_Serial_5B22015852-if00`); `/dev/ttyUSB0` and `/dev/ttyUSB1` both exist. The battery
+topic reports real volts (**7873** with the full stack running). So the Pi→STM32 link is good.
+
+**Where the arm stands, unresolved.** `arm.desktop` runs a GUI (`arm_pc/arm.sh`) inside container
+`MentorPi`; `Servo.sh` runs a different container program. The arm is **not** started at boot and does
+**not** move by itself, so "the arm hasn't moved" was never a fault. But:
+
+- `ros2 topic pub --once /ros_robot_controller/bus_servo/set_position ros_robot_controller_msgs/msg/ServosPosition "{duration: 1.0, position: [{id: 10, position: 250}]}"` **published successfully, twice, and nothing moved.**
+- `/controller_manager/servo_states` reports six servos — ids **1, 2, 3, 4, 5, 10** with positions
+  500 / 730 / 130 / 100 / 500 / 150, `goal: 0`, `voltage: 0`, `error: 0` — **but the values did not change
+  after the position commands.** So treat them as a static table until proven otherwise. I claimed the arm
+  was alive on the strength of them and had to withdraw it.
+- `/ros_robot_controller/bus_servo/get_state` is advertised as `ros_robot_controller_msgs/srv/GetBusServoState`
+  and **hangs indefinitely** on every call, with either loose cable in P1. Dead end for now.
+
+**Next step, written down so it is not re-derived:** read `robot_pi/arm_pc/control_demo.py` and
+`robot_pi/arm_pc/arm.sh`. The suspicion is that `set_position` needs a preceding step — the topic
+`/ros_robot_controller/bus_servo/set_state` is the candidate, most likely enabling servo torque. A servo
+with power but torque disabled is limp and ignores position commands.
+
+**The cables, current state.** Two loose 3-pin black leads emerge through the same floor hole as the
+battery cable; a third shorter one sits in **P2** with **P1** empty beside it; the small CH340C board by
+the arm has an empty socket marked **NC**. Both floor cables were tried in P1, one at a time, without
+changing anything. **They are not proven to be spare** — my conclusion that the arm was alive (and
+therefore that the cables were spare) was withdrawn with the servo-states claim. `p1` currently holds one
+of the two floor cables.
+
+**Also noted:** `wayvnc` and `remote.service` are both active, but **macOS Screen Sharing refuses the
+connection** ("unable to communicate") — a client compatibility problem, not a dead server. A third-party
+VNC client would likely work. That matters because the vendor's own Arm GUI is the intended way to drive
+the arm, and it needs a display.
