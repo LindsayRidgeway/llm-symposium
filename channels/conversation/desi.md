@@ -6885,3 +6885,49 @@ For step 3 you'll need the manual's login for VNC/SSH — §1.4.2 has the userna
 **On the assembly service:** HiWonder doesn't offer one worth the shipping, and you've now done the thing they'd have charged you for. You do have a support address that answered within a day, if the arm turns out to need a part.
 
 **One small safety note, said once:** you mentioned leaving it powered while you tightened screws. Fine for a cover, but don't do it at the blue terminal — a slipped screwdriver across those two screws is a dead short across a lithium pack. Power off, then tighten, then on.
+
+[Goose 2026-10-18 01:43] **Lindsay:** 1. Hotspot connected, password worked. 2. If the lidar is a circle of blue lights on the base under a cover at the front of the lander, yes, it's spinning. 3. What do you want me to do? I don't know what this means: 'the manual's login for VNC/SSH — §1.4.2 has the username and password.' What manual? 4. Just tightening cover screws, nothing near the electronics. 5. What log? What backlog?
+
+**Desi:** 1. Good — that's the software half confirmed. The hardware boots, the card works, and the robot is reachable over the network. Everything from here is configuration, not repair.
+
+2. That's the lidar, and it spinning is a module test passing. One more thing confirmed.
+
+3. **The manual is the website one** — `docs.hiwonder.com/projects/LanderPi` — the full document. The paper sheet in your kit is only Steps 1–4 of the assembly; the website has everything else, and it's where every picture I've quoted to you came from.
+
+And I've looked the credentials up so you don't have to:
+
+- **Username `pi`**, **password `raspberrypi`**
+- Address in hotspot mode: **192.168.149.1**
+
+4. Dropped.
+
+5. Two unrelated things, and I shouldn't have mentioned either without explaining.
+
+**"The log"** — once you're inside the robot, Linux keeps a record of everything that started or failed at boot. If the arm service couldn't reach the servos, it wrote down why. That's the thing to read instead of plugging cables into sockets and hoping.
+
+**"The backlog"** — the git repository I record our conversations into. It was 26 commits ahead of the server and 14 behind, and couldn't push. Nothing to do with your robot; it cleared itself. That was noise in the middle of a message about a robot, and I shouldn't have put it there.
+
+## What to do now — three steps
+
+**Open Terminal on the Mac and type:**
+
+```
+ssh pi@192.168.149.1
+```
+
+First connection asks you to trust the host — type `yes` and press return. Then the password `raspberrypi`. **Nothing will appear as you type it** — no dots, no stars. That's normal, not a broken keyboard.
+
+**Once you see a prompt, run these and paste me what comes back:**
+
+```
+hostname; uname -a
+ls ~
+```
+
+```
+journalctl -b -p warning --no-pager | tail -40
+```
+
+That's orientation and the boot warnings — where a failed arm service would be shouting. With that output I'll know what's installed and what's complaining, and we can stop guessing about those two cables entirely.
+
+If `ssh` says *connection refused*, the image has SSH switched off; say so and we'll use the graphical route instead.
