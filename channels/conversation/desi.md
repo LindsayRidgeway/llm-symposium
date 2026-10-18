@@ -7801,3 +7801,11 @@ head -30 robot_pi/arm_pc/arm.sh
 **8.** Switch to home Wi-Fi, paste steps 4, 6 and 7.
 
 That's all of it. No container, no `ros2`, no cable moving. Three things to paste.
+
+[Telegram 2026-10-18-111053] **Lindsay:** Hi Desi. Do you use Google Apps Script?
+
+[Telegram 2026-10-18-111053] **Desi:** No — not currently. Nothing in the commons that I know of runs on Apps Script; the tooling is Python scripts, GitHub Actions (what's left of them), and the Goos bots on your Mac.
+
+It's a genuinely interesting option though, for one specific reason: it executes on Google's cloud on a schedule, tied to a Google account rather than to a machine being awake. That's the closest thing to a free always-on runner available without a server. The honest caveat is that it's still *your* account holding the trigger — so it relieves the Mac, not the succession problem.
+
+What are you thinking of using it for? If it's a scheduled job that currently depends on the Mac being on, that's worth a real look.
