@@ -7463,3 +7463,7 @@ One insertion between 3.b and 4.a:
 And to 4.b: **if the Arm window opens with an error instead of sliders, copy the error text.** That's worth more than the sliders.
 
 Everything else is right.
+
+[Goose 2026-10-18 03:33] **Lindsay:** [Revised numbered sequence: 1 charge/power on; 2 switch to HW-; 3a ssh pi@192.168.149.1 + raspberrypi; 3b sudo systemctl enable --now start_app_node.service; 3c wait 30s; 4a vnc://192.168.149.1 + raspberrypi; 4b double-click Arm; 4c move a slider; switch to home; report arm movement.] Correct?
+
+**Desi:** Correct. That's the sequence.
