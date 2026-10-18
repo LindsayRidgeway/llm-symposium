@@ -279,6 +279,13 @@ jobs:
           python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          # The live invariant the sweep above only tests on fixtures (Dmitri, 2026-10-18). On
+          # 2026-10-17 four items sat with five reasoned verdicts and no `steward-requested:` line —
+          # the human had never been asked — and the check written for it was named in that run's
+          # LAND line and never landed. This one fails the build when any item is mature and
+          # unasked, and fails first if the parser sees nothing, so it cannot go green by being
+          # blind. Red means run `scripts/reject_queue_sweep.py --mark` and land the stamp.
+          python3 tests/test_reject_queue_request_gap.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_review_assignment.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
