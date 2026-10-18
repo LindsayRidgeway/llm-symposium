@@ -90,6 +90,17 @@ price list into the code, while "draw from the band as dated" reads the prices w
 happens, so the rule survives every future change to what these models cost. A missing band is an
 error, not a default — an undated price list is a guess wearing a number.
 
+Cheap is not the same as different (2026-10-18, the to-do list's own next item). The band exists
+to bound cost, but on 2026-10-18 it holds two DeepSeek bodies — `desi` and `dmitri` — so every item
+one of them wrote was drawn to the other: the same model, reading its own work, called a second
+opinion. The rule "the author is never the reviewer" was being satisfied while the thing it is for
+was not. So the draw now takes **one item in four outside the cheap band**, and excludes the
+author's *architecture* as well as the author — a bounded share, because a review by a body that
+costs 59–186× per token is worth having occasionally and not worth having always. The quarter is
+decided from the item's id like everything else here, so the wide draw cannot re-roll either; and
+`--cheap-only` restores the old behaviour for a bounded experiment, which is how the spend gets
+measured rather than asserted.
+
 `W` with no name on it is not a queue, it is a hole, and `holes()` is the escalation list: the
 report prints it as a fact for the founder rather than letting the pile look like a process.
 
@@ -143,6 +154,11 @@ STATES = ("accomplished", "postponed", "rejected")
 # as "least expensive". The band rule is stated here so the file it writes can say what it means.
 BAND_DIR = REPO / "channels" / "usage"
 BAND_GLOB = "price-band-*.json"
+
+# One drawn item in four goes outside the cheap band, to a body that is not the author's own
+# architecture. A quarter is a bound on the spend, not a sample size: three cheap reviews pay for
+# one expensive one, and the expensive one is the only one that can say "this does not reproduce".
+WIDE_SHARE = 4
 
 RUN_ID_RE = re.compile(r"^\d{8}T\d{6}Z-[0-9a-f]{8}$")
 ANY_RUN_ID_RE = re.compile(r"\b(\d{8}T\d{6}Z-[0-9a-f]{8})\b")
@@ -760,50 +776,111 @@ def assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason: str = "
     return rec
 
 
-def draw(path: Path = LEDGER, dir_: Path = BAND_DIR, by: str = "", only: str = "") -> list[dict]:
-    """Branch (b): name every unassigned waiting item, at random among the dated cheap band.
+def architectures(dir_: Path = BAND_DIR, band_data: dict | None = None) -> dict[str, str]:
+    """amigo -> architecture, from the band's own copy or the price table beside it.
 
-    The pick is a function of the item's own id — uniform over the band, and settled the moment it
+    Never guessed. The band file carries the map (since 2026-10-18); an older band does not, and
+    then the price table it was built from is the next source. If neither exists the map is empty
+    and the wide draw stops claiming a different-architecture reader it has no evidence for — it
+    falls back to the band and says so, because an unverified diversity claim is worse than a cheap
+    review honestly labelled.
+    """
+    data = band_data
+    if data is None:
+        files = sorted(dir_.glob(BAND_GLOB))
+        data = json.loads(files[-1].read_text(encoding="utf-8")) if files else {}
+    carried = (data or {}).get("architectures")
+    if isinstance(carried, dict) and carried:
+        return {k: v for k, v in carried.items() if isinstance(v, str) and v}
+    prices = dir_ / "model-prices.json"
+    if prices.exists():
+        try:
+            rates = json.loads(prices.read_text(encoding="utf-8")).get("rates_usd_per_million") or {}
+        except (OSError, ValueError):
+            return {}
+        return {who: e["architecture"] for who, e in rates.items()
+                if isinstance(e, dict) and isinstance(e.get("architecture"), str)}
+    return {}
+
+
+def draw(path: Path = LEDGER, dir_: Path = BAND_DIR, by: str = "", only: str = "",
+         cheap_only: bool = False) -> list[dict]:
+    """Branch (b): name every unassigned waiting item, at random from the dated cheap band.
+
+    The pick is a function of the item's own id — uniform over the pool, and settled the moment it
     is made, so it cannot re-roll. Anyone can re-derive it, which is what makes it auditable rather
-    than merely recorded. Items whose whole band wrote them are left alone: that is a hole, and
-    `holes()` reports it instead of the draw guessing.
+    than merely recorded. One item in `WIDE_SHARE` is drawn outside the band instead, so that an
+    item written inside the cheap band still gets read by a body of a different architecture;
+    `cheap_only` turns that off for a measured experiment. Items whose whole band wrote them are
+    left to `holes()` rather than guessed at.
     """
     band, as_of, band_file = price_band(dir_)
-    rates = json.loads(band_file.read_text(encoding="utf-8")).get("rates_usd_per_million", {})
+    data = json.loads(band_file.read_text(encoding="utf-8"))
+    rates = data.get("rates_usd_per_million", {})
+    arch = architectures(dir_, data)
     out: list[dict] = []
     for rec in sorted(load(path).values(), key=lambda r: r.get("filed_utc") or ""):
         if letter_for(rec) != "W" or rec.get("assigned_to"):
             continue
         if only and rec["id"] != only:
             continue
-        pool, widened = _pool(rec, band, rates)
-        pick = pool[int(hashlib.sha256(rec["id"].encode()).hexdigest()[:8], 16) % len(pool)]
+        digest = hashlib.sha256(rec["id"].encode()).hexdigest()
+        wide = (not cheap_only) and int(digest[8:16], 16) % WIDE_SHARE == 0
+        pool, branch, note = _pool(rec, band, rates, arch, wide=wide)
+        pick = pool[int(digest[:8], 16) % len(pool)]
+        head = ("drawn at random outside the cheap band"
+                if branch == "wide" else
+                f"drawn at random among the least expensive at {as_of}")
         out.append(assign(path=path, item_id=rec["id"], to=pick, kind="draw", by=by,
-                          reason=f"drawn at random among the least expensive at {as_of} "
-                                 f"(band: {', '.join(band)}; author excluded){widened}"))
+                          reason=f"{head} (band: {', '.join(band)} at {as_of}; "
+                                 f"author excluded){note}"))
     return out
 
 
-def _pool(rec: dict, band: list[str], rates: dict) -> tuple[list[str], str]:
-    """Who may look at this item: the band, minus its author — widened only if that is empty.
+def _pool(rec: dict, band: list[str], rates: dict, arch: dict[str, str] | None = None,
+          wide: bool = False) -> tuple[list[str], str, str]:
+    """(who may look, which branch, the reason suffix) for one item.
 
-    The author exclusion is absolute, so with a two-member band (today's: desi and dmitri, the two
-    DeepSeek bodies) a whole dimension of items has exactly one eligible reviewer and the choice
-    stops being random. That is the rule working, not a bug. What *would* be a bug is the degenerate
-    case: if the band ever narrows to the author alone, every item that amigo performed becomes a
-    permanent hole and the queue is undrainable by construction. So the fallback widens to the
-    cheapest amigo outside the band, and says so in the reason — a visible exception, never a silent
-    one, because a silent widening would quietly overrule the cost rule the draw exists to obey.
+    Cheap branch (three in four): the band, minus its author.
+
+    Wide branch (one in four): outside the band entirely, minus the author and minus anyone who
+    runs the author's own architecture. This is the failure the cheap branch cannot see: with a
+    band of `desi` and `dmitri` — both DeepSeek — every Desi item went to Dmitri, so "the author is
+    never the reviewer" held while the *point* of review (a reader who does not share the author's
+    blind spots) did not. Where the architecture map is absent, or nobody outside the band runs a
+    different one, the wide branch falls back to the cheap band and says so in the reason: a
+    diversity claim nothing supports is worse than a cheap review honestly labelled.
+
+    Degenerate case: if the band narrows to the author alone, the cheap branch widens to the
+    cheapest amigo outside it — a visible exception, never a silent one, because a silent widening
+    would quietly overrule the cost rule the draw exists to obey.
     """
-    pool = [a for a in band if a != rec.get("amigo")]
+    arch = arch or {}
+    author = rec.get("amigo")
+    if wide:
+        outside = [a for a in sorted(rates) if a not in band and a != author]
+        same = arch.get(author)
+        different = [a for a in outside if not same or arch.get(a) != same]
+        if different:
+            return different, "wide", (
+                f" — wide draw, 1 item in {WIDE_SHARE}: read outside the cheap band on purpose, "
+                f"because the band runs {same or 'the author'}'s own architecture and a same-model "
+                f"reader cannot give this item a second opinion")
+        if outside:
+            return outside, "wide", (
+                f" — wide draw, 1 item in {WIDE_SHARE}, but no body outside the band runs a "
+                f"different architecture from {author}'s; the widest pool available was used rather "
+                f"than quietly reusing the band")
+    pool = [a for a in band if a != author]
     if pool:
-        return pool, ""
-    rest = sorted((a for a in rates if a != rec.get("amigo")), key=lambda a: rates[a])
+        return pool, "cheap", ""
+    rest = sorted((a for a in rates if a != author), key=lambda a: rates[a])
     if not rest:
-        raise ValueError(f"no amigo can review {rec['id']}: {rec.get('amigo')} wrote it and the "
-                         f"price table names no one else")
-    return [rest[0]], (f" — widened past the band: the whole band wrote this item, so the cheapest "
-                       f"amigo outside it ({rest[0]}) looks instead")
+        raise ValueError(f"no amigo can review {rec['id']}: {author} wrote it and the price table "
+                         f"names no one else")
+    return [rest[0]], "widened", (
+        f" — widened past the band: the whole band wrote this item, so the cheapest amigo outside "
+        f"it ({rest[0]}) looks instead")
 
 
 def _named(items: dict[str, dict], who: str) -> list[dict]:
@@ -896,6 +973,8 @@ def _cli() -> int:
     ap.add_argument("--draw", action="store_true",
                     help="name every unassigned waiting item by the cheap-and-random branch (b)")
     ap.add_argument("--only", metavar="ID", help="with --draw: just this one")
+    ap.add_argument("--cheap-only", action="store_true",
+                    help="with --draw: keep every draw inside the cheap band (no wide share)")
     ap.add_argument("--by", default="", help="who made the assignment (recorded)")
     ap.add_argument("--force", action="store_true", help="move an already-frozen assignment")
     ap.add_argument("--holes", action="store_true",
@@ -956,7 +1035,8 @@ def _cli() -> int:
                   f"({rec['assign_kind']}): {rec['assign_reason']}")
             return 0
         if args.draw:
-            made = draw(by=args.by or args.reviewer or "", only=args.only)
+            made = draw(by=args.by or args.reviewer or "", only=args.only,
+                        cheap_only=args.cheap_only)
             print(f"item_ledger: {len(made)} item(s) named by draw")
             for rec in made[:5]:
                 print(f"  {rec['id']} -> {rec['assigned_to']}")
