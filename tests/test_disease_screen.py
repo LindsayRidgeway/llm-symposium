@@ -586,5 +586,117 @@ class CandidateDensityGateTests(unittest.TestCase):
         self.assertIn("density-qualified zero rows: (none)", output.getvalue())
         self.assertIn("raw 0/0 observations", output.getvalue())
 
+class IncompleteSpellingCoverageTests(unittest.TestCase):
+    """Probe D1 from Desi's 2026-10-17 density review, and gap 1 from the ambiguity review.
+
+    D1: a row scored 0/0 from one spelling while another supplied spelling FAILED entered
+    `density_qualified_unjoined` as a certified zero. The failure was computed and then thrown
+    away, so a failed query was read as a zero at the band-selection layer. Gap 1: a failed
+    expanded-name query left no trace, making it identical to no name having been supplied.
+    """
+
+    def _run(self, counts, names=None, density=1500):
+        def any_fn(n, f):
+            return counts.get((n, f), (0, 0))[0]
+
+        def strict_fn(n, f):
+            return counts.get((n, f), (0, 0))[1]
+
+        target = {"symbol": "SCN9A"}
+        if names is not None:
+            target["names"] = names
+        with _StubNet(any_fn=any_fn, strict_fn=strict_fn, epmc_fn=lambda q: density):
+            return ds.run("condition", [target], use_ot=False)
+
+    def test_failed_alias_keeps_the_zero_out_of_the_qualified_band(self):
+        names = ["sodium channel Nav1.7"]
+        result = self._run({("SCN9A", "condition"): (0, 0),
+                            ("sodium channel Nav1.7", "condition"): (-1, -1)}, names)
+        row = result["targets"][0]
+        self.assertEqual((row["strict"], row["any_field"]), (0, 0))
+        self.assertEqual(result["density_status"], "meets_floor")
+        self.assertTrue(result["density_qualified"])
+        self.assertFalse(row["coverage_complete"])
+        self.assertTrue(row["unmeasured_zero"])
+        self.assertEqual(row["expanded_name_failed"], names)
+        self.assertEqual(row["failed_spelling_pairs"],
+                         [{"name": names[0], "disease_form": "condition"}])
+        # Still an observation, no longer a certified zero.
+        self.assertEqual(result["unjoined"], ["SCN9A"])
+        self.assertEqual(result["unjoined_incomplete_coverage"], ["SCN9A"])
+        self.assertEqual(result["density_qualified_unjoined"], [])
+        self.assertIn("INCOMPLETE SPELLING COVERAGE", row["verdict"])
+        self.assertIn("WITHHELD", row["verdict"])
+        self.assertNotIn("a candidate, NOT a finding", row["verdict"])
+
+    def test_every_spelling_answered_zero_is_still_certified(self):
+        names = ["sodium channel Nav1.7"]
+        result = self._run({("SCN9A", "condition"): (0, 0),
+                            ("sodium channel Nav1.7", "condition"): (0, 0)}, names)
+        row = result["targets"][0]
+        self.assertTrue(row["coverage_complete"])
+        self.assertFalse(row["unmeasured_zero"])
+        self.assertEqual(row["expanded_name_failed"], [])
+        self.assertEqual(result["density_qualified_unjoined"], ["SCN9A"])
+        self.assertEqual(result["unjoined_incomplete_coverage"], [])
+        self.assertIsNone(result["incomplete_coverage_note"])
+
+    def test_a_positive_join_with_a_failed_alias_stays_joined(self):
+        names = ["sodium channel Nav1.7"]
+        result = self._run({("SCN9A", "condition"): (100, 5),
+                            ("sodium channel Nav1.7", "condition"): (-1, -1)}, names)
+        row = result["targets"][0]
+        self.assertFalse(row["coverage_complete"])
+        self.assertEqual(result["joined_in_title_or_abstract"], ["SCN9A"])
+        self.assertEqual(result["n_rows_incomplete_coverage"], 1)
+        self.assertIsNotNone(result["incomplete_coverage_note"])
+        self.assertEqual(sorted(row["failed_spelling_pairs"][0]), ["disease_form", "name"])
+
+    def test_failed_expanded_name_is_recorded_not_read_as_no_name(self):
+        """Gap 1: 'the alias did not answer' must not look like 'no alias was supplied'."""
+        failed = self._run({("SCN9A", "condition"): (0, 0),
+                            ("sodium channel Nav1.7", "condition"): (-1, 0)},
+                           ["sodium channel Nav1.7"])
+        absent = self._run({("SCN9A", "condition"): (0, 0)}, [])
+        self.assertEqual(failed["targets"][0]["expanded_name_failed"],
+                         ["sodium channel Nav1.7"])
+        self.assertEqual(absent["targets"][0]["expanded_name_failed"], [])
+        self.assertTrue(absent["targets"][0]["coverage_complete"])
+        self.assertTrue(any(sp["failed_scopes"] == ["any_field"]
+                            for sp in failed["targets"][0]["spellings"]))
+
+    def test_the_row_carries_every_spelling_it_queried(self):
+        names = ["sodium channel Nav1.7", "Nav1.7"]
+        result = self._run({("SCN9A", "condition"): (0, 0)}, names, density=221)
+        row = result["targets"][0]
+        self.assertEqual([(sp["name"], sp["disease_form"]) for sp in row["spellings"]],
+                         [("SCN9A", "condition"), (names[0], "condition"), (names[1], "condition")])
+        # Below the density floor, the spelling coverage is complete; the verdict names density.
+        self.assertTrue(row["coverage_complete"])
+        self.assertIn("BELOW DENSITY FLOOR", row["verdict"])
+        self.assertNotIn("INCOMPLETE SPELLING COVERAGE", row["verdict"])
+
+    def test_cli_says_whether_the_density_vector_answered(self):
+        import contextlib
+        import io
+        import tempfile
+        from unittest.mock import patch
+        result = self._run({("SCN9A", "condition"): (0, 0),
+                            ("sodium channel Nav1.7", "condition"): (-1, -1)},
+                           ["sodium channel Nav1.7"])
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json") as target_file:
+            target_file.write("[]")
+            target_file.flush()
+            output = io.StringIO()
+            with patch.object(ds, "run", return_value=result), patch.object(
+                    ds.sys, "argv", ["disease_screen.py", "condition", target_file.name,
+                                     "--no-ot"]), contextlib.redirect_stdout(output):
+                self.assertEqual(ds.main(), 0)
+        text = output.getvalue()
+        self.assertIn("density queries complete: True", text)
+        self.assertIn("zeros NOT certified", text)
+        self.assertIn("SCN9A", text)
+
+
 if __name__ == "__main__":
     unittest.main()
