@@ -7400,3 +7400,23 @@ sudo systemctl enable --now start_app_node.service
 In Safari: `vnc://192.168.149.1`, password `raspberrypi`. On the desktop, double-click **Arm**. Move one servo slider.
 
 **Tell me what the arm does.** That single answer decides whether cable 2 or 3 matters at all.
+
+[Goose 2026-10-18 03:11] **Lindsay:** Q1. The empty socket says P1 next to it. Cable 1's own socket says P2 next to it. Q2. That [message truncated]
+
+**Desi:** **Noted: P1 empty, P2 holds cable 1.** Those are the two servo ports — the manual lists the controller as carrying two, so **P1 is the only free socket of that type on the whole robot.** That's your one candidate home.
+
+**Q2 got cut off.** When you get a moment: where does cable 1's other end go?
+
+**Nothing to do until the charger goes green.** The sequence stands:
+
+1. Power on, wait for the beep.
+2. `ssh pi@192.168.149.1`, password `raspberrypi`.
+3. `sudo systemctl enable --now start_app_node.service`
+4. Safari → `vnc://192.168.149.1` → double-click **Arm** → move a slider.
+
+**Then the branch:**
+
+- **Arm moves** → P1 stays empty. Cables 2 and 3 are spare chassis leads and need no home. The build is done.
+- **Arm doesn't move** → cable 2 or 3 into **P1**, power off first, then retest.
+
+That's it. No further questions until we have the arm result.
