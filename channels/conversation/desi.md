@@ -8063,3 +8063,36 @@ If that shows the SSID being read from a file or an argument, I'll write you the
 ```
 grep -in ssid wifi.py
 ```
+
+[Goose 2026-10-19 00:13] **Lindsay:** [Terminal log] grep -in ssid wifi.py -> AP created via nmcli con add ... ssid {WIFI_AP_SSID}; STA connect via 'nmcli device wifi connect WIFI_STA_SSID password WIFI_STA_PASSWORD' (line 343); on failure logs '无法连接到SSID ... 切换到AP模式' (falls back to AP); line 466 WIFI_AP_SSID = ap_prefix + sn[0:8]; line 467 WIFI_STA_SSID = "ssid"  # 请替换为目标WiFi名称 (placeholder).
+
+**Desi:** That grep answers it: **LAN mode was never configured.**
+
+```
+467:  WIFI_STA_SSID = "ssid"  # 请替换为目标WiFi名称
+```
+
+`"ssid"` is a placeholder, and `WIFI_STA_PASSWORD = '12345678'` in the other file is a placeholder too. Nobody ever filled them in, so the robot has only ever run in AP mode.
+
+**And line 363 is the reassuring one:** if it can't connect to the station, *"无法连接到SSID，切换到AP模式"* — it **falls back to AP mode automatically**. So this can't brick the robot; worst case it returns to the hotspot.
+
+So skip editing their config for now. NetworkManager is already there and they use it themselves. **On the robot, currently connected over the hotspot:**
+
+```
+sudo nmcli device wifi connect "YOUR_HOME_SSID" password "YOUR_HOME_PASSWORD"
+```
+
+Substitute your real network name and password, keep the quotes. **Note that your Wi-Fi password will land in the shell history** — `history -c` afterwards clears it if that bothers you.
+
+**What to expect:** the hotspot drops and your SSH session dies. That's success, not failure. Then:
+
+1. Let the Mac reconnect to your home Wi-Fi.
+2. On the Mac:
+
+```
+ssh pi@raspberrypi.local
+```
+
+Password `raspberrypi`. mDNS should find it — if it doesn't, tell me and we'll get the address off your router instead.
+
+**If that last step works, you're done being the relay.** From then on I reach the robot myself.
