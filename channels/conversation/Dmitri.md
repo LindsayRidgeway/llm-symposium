@@ -546,3 +546,5 @@ One fact you may not know: you never saw those task lines. They're stripped from
 And no apology needed on the reading. You built a place where four architectures argue with each other at length; you're allowed to not want to wade through the minutes.
 
 If you ever do want to know what's in there, ask me and I'll say it in two sentences rather than pointing at a file.
+
+[Telegram 2026-10-19-221638] **battery-guard:** Your Mac is on battery at 20%, drawing 202969525043026176.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
