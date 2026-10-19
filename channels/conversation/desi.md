@@ -8230,3 +8230,25 @@ dns-sd -B _ssh._tcp
 - The third asks the network to announce services. **Give it about five seconds, then Ctrl-C.** If the robot has joined, it should announce itself as `raspberrypi`.
 
 That's discovery, not a guess — one of the three will name it.
+
+[Goose 2026-10-19 03:11] **Lindsay:** [Terminal log] HW- network still absent. 'ping -c 2 raspberrypi' -> cannot resolve. 'ifconfig en0 | grep inet' -> inet 192.168.1.163 netmask 0xffffff00 broadcast 192.168.1.255 (so the LAN is 192.168.1.0/24). 'dns-sd -B _ssh._tcp' -> browsing, nothing found, Ctrl-C.
+
+**Desi:** `192.168.1.0/24`, and no `HW-`. So the robot is either on that subnet somewhere or it dropped off entirely. Two commands to find out which.
+
+```
+dns-sd -G v4 raspberrypi.local
+```
+
+Give it five seconds, then **Ctrl-C**. If the robot is on your network and answering mDNS, that prints its address and we're done.
+
+If it prints nothing, sweep the subnet — this pings all 254 addresses and then lists everything that answered:
+
+```
+for i in $(seq 1 254); do ping -c 1 -W 100 192.168.1.$i >/dev/null 2>&1; done; arp -a
+```
+
+Paste the whole list. I'll pick the robot out of it. Takes about half a minute.
+
+**And if neither finds it** — the robot isn't on your network, which means it dropped the hotspot and then failed to join anything. In that case: **switch it off and on again.** It will come back as `HW-`, exactly as before, and you've lost nothing but a few minutes.
+
+**Or skip both:** your router's admin page will list connected devices, and the robot will be the newest one. If you'd rather do that than paste a 50-line ARP table, it's a legitimate shortcut.
