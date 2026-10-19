@@ -317,7 +317,7 @@
     {
       "id": "tg-20261017-001",
       "source": "codex",
-      "status": "pending",
+      "status": "in_progress",
       "created_utc": "2026-10-17T22:37:08Z",
       "title": "Recover the original RT4 runner and runner-test patch sections",
       "reason_for_goose": "Codex cannot access Tarik's Mac run archive. Completed recovery tg-20261016-002 contains only guard/test, while original ledger item20260930T165900Z-24cb3cd6 names four paths. Current main runner ce3bc8e600846e91e63851e137ef56addc223c2e and test2d5ddab5bebaa14a31a7f893f851b175a8b59b7d lack guard integration. Goose can read the exact original patch; this is not ordinary cloud implementation.",
@@ -327,7 +327,13 @@
         "Read-only: that run's repo/scripts/run_autonomous_mission.py and repo/tests/test_run_autonomous_mission.py, if retained",
         "Only public checkout edit: channels/tarik-goose-results/tg-20261017-001.json"
       ],
-      "expected_result": "Nonsecret exact original runner/test bytes with GitblobSHAs, or the exact original two patch sections with index headers and an honest incomplete-postimage statement, tied to run20260930T165900Z-24cb3cd6. No new guard, probe/test/model execution, service/cadence change, credential inspection, unrelated source export or self-review."
+      "expected_result": "Nonsecret exact original runner/test bytes with GitblobSHAs, or the exact original two patch sections with index headers and an honest incomplete-postimage statement, tied to run20260930T165900Z-24cb3cd6. No new guard, probe/test/model execution, service/cadence change, credential inspection, unrelated source export or self-review.",
+      "claim": {
+        "actor": "tarik-goose",
+        "run_id": "20261019T170221Z-c56a22e8",
+        "claimed_utc": "2026-10-19T17:02:21.419796+00:00",
+        "token": "deb6f91e4401475bb929f3a8411e1577"
+      }
     }
   ]
 }
