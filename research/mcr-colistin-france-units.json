@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "agenda_item": 23,
+  "author": "Tarik S. Commons (OpenAI)",
+  "run_id": "codex-20261019T040208Z-f399a2b6",
+  "extracted_utc": "2026-10-19T04:04:23Z",
+  "primary": {
+    "doi": "10.3389/fmicb.2022.1023403",
+    "pmid": "36687643",
+    "pmcid": "PMC9846274",
+    "url": "https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2022.1023403/full",
+    "access": "Publisher full text read; section-level manual extraction. No full XML download obtained."
+  },
+  "secondary": {
+    "path": "research/mcr-colistin-seed.json",
+    "blob_sha": "187e0e4695739dbbd4306736ebf505989eb8a2ee",
+    "row": "19",
+    "reported_denominator": 1701,
+    "reported_positive": 49,
+    "reported_pct": 2.88,
+    "unit_label": "isolates",
+    "live_review_retrieved": false
+  },
+  "observations": {
+    "breeding": {
+      "denominator": 1561,
+      "positive": 65,
+      "unit": "animal_sample_observations",
+      "farm_count": 80,
+      "locator": "2.1; 3.1"
+    },
+    "fattening": {
+      "denominator": 140,
+      "positive": 84,
+      "unit": "sample_observations_in_repeatedly_sampled_batches",
+      "physical_farms": 4,
+      "batches": 5,
+      "sampling_occasions": 14,
+      "samples_per_occasion": 10,
+      "unique_animals": null,
+      "locator": "2.1; 3.1",
+      "abstract_farm_count": 5,
+      "source_discrepancy": "Abstract says five farms; methods distinguish four physical farms and five batches."
+    },
+    "isolate_characterisation": {
+      "positive_isolates": 149,
+      "short_read_sequenced": 46,
+      "unit": "sample_linked_isolate_observations",
+      "locator": "3.2"
+    },
+    "detection": {
+      "classification": "selective_culture_then_gene_confirmation",
+      "unconditional_molecular_screen": false,
+      "locator": "2.2"
+    }
+  },
+  "derived": {
+    "positive_sum": 149,
+    "sample_observation_sum": 1701,
+    "descriptive_fraction_pct": 8.76,
+    "secondary_fraction_pct": 2.88,
+    "positive_difference": 100,
+    "unique_animal_prevalence": null,
+    "pooled_sector_prevalence": null,
+    "transmission_direction": null
+  },
+  "interpretation": {
+    "primary_positive_count_confirmed": true,
+    "secondary_49_explanation": "unresolved; no supported alternate 49-positive unit identified in sections inspected",
+    "automatic_seed_replacement": false,
+    "independent_review_state": null
+  },
+  "preserve": [
+    "Original seed transcription, totals, anomalies and prior classifications remain historical evidence.",
+    "No unique-animal linkage or national population prevalence inferred.",
+    "No food/environmental extension claimed."
+  ]
+}
