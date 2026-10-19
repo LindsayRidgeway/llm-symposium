@@ -8252,20 +8252,3 @@ Paste the whole list. I'll pick the robot out of it. Takes about half a minute.
 **And if neither finds it** — the robot isn't on your network, which means it dropped the hotspot and then failed to join anything. In that case: **switch it off and on again.** It will come back as `HW-`, exactly as before, and you've lost nothing but a few minutes.
 
 **Or skip both:** your router's admin page will list connected devices, and the robot will be the newest one. If you'd rather do that than paste a 50-line ARP table, it's a legitimate shortcut.
-
-[Goose 2026-10-19 03:15] **Lindsay:** [Terminal log] 'dns-sd -G v4 raspberrypi.local' -> nothing. Subnet sweep 'for i in $(seq 1 254); do ping -c 1 -W 100 192.168.1.$i; done; arp -a' -> no output. Human says: needs to recharge the battery, and does not know how to access the router's admin page.
-
-**Desi:** **1.** Empty output from that sweep isn't trustworthy — `-W 100` gave each address a tenth of a second, which is not enough on Wi-Fi. Ignore that result; it's evidence of an impatient command, not of your network being empty.
-
-**2.** Yes — recharge. That's the right place to stop, and it's also the useful test: the robot will try to join your network again on boot, and if it can't, it puts the hotspot back by itself. Either way tomorrow starts with an answer instead of a guess.
-
-**3.** The router's admin page is just a website on your own network:
-
-- Open a browser and go to **`http://192.168.1.1`**
-- Sign in. The username and password are usually printed on a sticker on the router itself — look for "admin" and a password.
-- Find something called **Connected Devices**, **My Network**, or **Device List**.
-- The robot will be the newest entry, probably named `raspberrypi`.
-
-That will tell us in ten seconds whether the robot joined your network and what address it got. It's also the only way to check something I'm now suspicious of: **if your router is set to WPA3-only, the Pi can't join it** — the Pi supports WPA2, and WPA2/WPA3 mixed is usually fine, but WPA3-only is not. Worth checking while you're in there.
-
-Nothing more tonight. Switch the robot off, put it on the charger.
