@@ -8305,3 +8305,42 @@ That log contains the join attempt and its error. It'll say either that it could
 **2. Then check the password.** Click the **eye icon** beside the Wi-Fi Password field on the router page and compare it with what you typed into the robot. **Don't paste me a screenshot of it** — just tell me whether it matches.
 
 On your WPA question: that page doesn't show the mode. The **cog icon** at the right-hand end of the "Wi-Fi Enabled" row, top right, is where I'd look — but only bother if the log points that way.
+
+[Goose 2026-10-19 04:03] **Lindsay:** [Terminal log] tail -40 wifi_manager/wifi.log shows: AP created as HW-9EEF9E01; 'ERROR - 设置AP模式时出错: [Errno 99] Cannot assign requested address'; LED control via ros2 topic pub /ros_robot_controller/set_led ros_robot_controller_msgs/msg/LedState; then '已断开并删除WiFi连接', followed by three retries all failing with "Error: No network with SSID 'RidgewayFIOS' found." and '无法连接到SSID: RidgewayFIOS，切换到AP模式' — so the SSID case was wrong (capital I), which came from MY sed command. Also 'ERROR - 本地控制LED时出错: name re is not defined' (missing import re). Human reports WPA2, correct password, and asks why I only ever tested the arm.
+
+**Desi:** **1. You're right, and it's my error, twice over.** The capital `I` came from **my** `sed` command, which you pasted — I wrote `RidgewayFIOS`, not `RidgewayFiOS`. Then, when your `grep` echoed it back, I read it as confirmation instead of checking it against the router. The log proves whose fault it was:
+
+```
+连接到WiFi失败: Error: No network with SSID 'RidgewayFIOS' found.
+```
+
+The robot asked for exactly the name I gave it. So: WPA2 is fine, the password is fine, the bands are fine, and the entire failure was one letter's case in a command I typed. Sorry.
+
+**The fix, for tomorrow** — on **HW-**, in `~/wifi_manager`:
+
+```
+sed -i 's/WIFI_STA_SSID = "RidgewayFIOS"/WIFI_STA_SSID = "RidgewayFiOS"/' wifi.py
+```
+```
+grep -n WIFI_STA_SSID wifi.py
+```
+
+Check the case in that output carefully before going on, then:
+
+```
+sudo systemctl restart wifi.service
+```
+
+**2. And your last question deserves an honest answer: because I was wrong about where to look.** The arm was the only thing that *reported* a failure, so I kept pulling on that thread — and I never tested whether **anything** the Pi sends reaches the STM32. If the wheels won't turn on command either, then the arm was never the problem and four hours of cable-swapping were beside the point. That's a real hole in how I worked tonight.
+
+**Your own log just handed me the fix for it.** It shows the vendor sending LED commands that way — a working, copy-pasteable example:
+
+```
+ros2 topic pub /ros_robot_controller/set_led ros_robot_controller_msgs/msg/LedState '{id: 1, on_time: 1, off_time: 0, repeat: 1}' --once
+```
+
+If the LED lights, the command path works end to end. Then the wheels. The arm last. That's tomorrow's order, and it should have been tonight's.
+
+**Two vendor bugs spotted in the log while I was there:** the LED fallback crashes with `name 're' is not defined` — a missing `import re` — and AP setup throws `Cannot assign requested address` and carries on anyway. Neither matters to us, but they're worth knowing.
+
+Good night. Put it on the charger and leave it.
