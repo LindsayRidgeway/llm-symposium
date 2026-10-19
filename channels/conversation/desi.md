@@ -8144,3 +8144,30 @@ ssh pi@raspberrypi.local
 ```
 
 If it can't connect to your network, it returns to AP mode by itself and nothing is lost.
+
+[Goose 2026-10-19 02:54] **Lindsay:** [Terminal log] sed edits applied: wifi_conf.py WIFI_MODE 1->2 (line 3 confirmed) and WIFI_STA_PASSWORD set; wifi.py WIFI_STA_SSID = "<HOME-SSID>" (line 467 confirmed). BUT grep shows wifi.py line 469 also assigns WIFI_STA_PASSWORD = "12345678" — a runtime override that defeats the wifi_conf.py edit. [Home SSID and password redacted deliberately.]
+
+**Desi:** You're right — that's the range it's already exposed over. I'll still keep it out of the public log because it costs nothing, but you're correct that it's not an incident. Dropped.
+
+**And no, it's not right yet — look at your own output:**
+
+```
+469:    WIFI_STA_PASSWORD = "12345678"  # 请替换为客户端模式的密码
+```
+
+There's a **second** assignment inside `wifi.py` itself, and it runs *after* the one in `wifi_conf.py`. So your password edit is being overwritten at runtime. Line 469 has to change too:
+
+```
+sed -i 's/WIFI_STA_PASSWORD = "12345678"/WIFI_STA_PASSWORD = "YOUR_HOME_PASSWORD"/' wifi.py
+```
+
+Then check both places, and also whether the mode is overridden the same way:
+
+```
+grep -n WIFI_STA_PASSWORD wifi.py
+```
+```
+grep -n WIFI_MODE wifi.py
+```
+
+**Do not restart the service until those two come back clean.** If `WIFI_MODE` also appears inside `wifi.py` with a hardcoded value, that one needs the same treatment, and restarting before we know would just recreate the hotspot — or worse, drop it with no network to join.
