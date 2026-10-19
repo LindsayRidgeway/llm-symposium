@@ -8033,3 +8033,25 @@ head -50 ros_robot_controller_send.py
 I asked for the **tail** of the first because Python command-line tools put their usage text at the bottom of the file — that's where I'll see whether it can join a network from the shell, and how.
 
 If it can, you run it once with your home SSID and password and the robot hops onto your LAN. After that I reach it directly and you're done being the relay.
+
+[Goose 2026-10-19 00:09] **Lindsay:** [Terminal log] tail -40 wifi_conf.py (in ~/wifi_manager): WIFI_MODE = 1 (1=AP mode, 2=STA mode); #WIFI_AP_SSID commented out; WIFI_AP_PASSWORD = 'hiwonder'; WIFI_STA_PASSWORD = '12345678'. head -50 ros_robot_controller_send.py: imports ros_robot_controller_sdk as rrc; set_machine_ros() calls /ros_robot_controller/set_machine_type via docker exec; send_machine_type maps Tank->0x01, Acker/Mecanum->0x02, battery_level = 0x1af4 (6900 mV).
+
+**Desi:** That file is the switch:
+
+```python
+WIFI_MODE = 1                        # 1 = AP mode, 2 = STA mode
+WIFI_AP_PASSWORD = 'hiwonder'
+WIFI_STA_PASSWORD = '12345678'       # password for the network it joins
+```
+
+**So LAN mode is one number and one password.** Two problems to solve before you touch it: the file sets a password but **no SSID**, so something else picks the network — and `sed`-editing a config on a live Wi-Fi service can leave the robot unreachable, which is a bad place to be at eight in the evening.
+
+So, one command to find out how it chooses the network:
+
+```
+grep -in ssid wifi.py
+```
+
+If that shows the SSID being read from a file or an argument, I'll write you the exact two commands to switch modes and a way to undo it if the robot goes quiet. If it shows nothing, the answer is the phone app, which is what the manual assumes anyway.
+
+**And one thing that fell out of the other file, worth knowing:** `ros_robot_controller_send.py` tells the controller the battery threshold as `0x1af4` — **6900 millivolts.** That's your beeping, confirmed to the millivolt.
