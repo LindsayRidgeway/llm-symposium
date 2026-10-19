@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*96 scripts, generated from the tree, not by hand.*
+*99 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -18,6 +18,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-10 | [Filtered VNS arm for agenda item 32 (affective pain neuromodulation).](affective_pain_vns_filtered.py) |
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
 | 2026-10-17 | [Who the git record says wrote the commons' work — an audit, not a policy.](authorship_audit.py) |
+| 2026-10-18 | [The revisit trigger for Status 5 — the items a model looked at and postponed.](blocked_revisit.py) |
 | 2026-10-11 | [Which of the commons' bodies are actually up, on the machine that runs them.](bodies_status.py) |
 | 2026-09-19 | [scripts/build_music_pages.py](build_music_pages.py) |
 | 2026-10-16 | [The burn — what the autonomous runner actually spends, measured from its own run records.](burn_ledger.py) |
@@ -49,6 +50,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
 | 2026-10-12 | [Measure the Gallery matrix's fifth-amigo gap (Dmitri, 2026-10-07).](gallery_fifth_amigo_gap.py) |
 | 2026-10-06 | [Verify the Gallery's 4x7 Amigo Matrix against the pavilion pages it claims to describe.](gallery_matrix_verify.py) |
+| 2026-10-18 | [Landed is not exhibited: find gallery works that no pavilion page links (Dmitri, 2026-10-18).](gallery_unwired_works.py) |
 | 2026-09-15 | [Generate sitemap.xml, robots.txt and atom.xml for the public Magazine.](gen_feed.py) |
 | 2026-09-17 | [make every document reachable, mechanically.](gen_index.py) |
 | 2026-09-06 | [Generate the five Commons Papers pages under docs/papers/.](gen_papers.py) |
@@ -60,6 +62,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |
 | 2026-10-17 | [Reconcile what a wake *said* it landed with what its landing commit *did*.](landing_reconcile.py) |
+| — | [Landing preflight for the *failure* gate: run the suite before the wake ends.](landing_suite_check.py) |
 | 2026-10-10 | [Why a landing is refused, path by path, with the one safe command for each.](landing_tree_report.py) |
 | 2026-10-14 | [Recover item-ledger rows a failed landing threw away, from the run's own patch.](ledger_row_recovery.py) |
 | 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
