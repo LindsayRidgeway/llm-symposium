@@ -23,6 +23,11 @@ two writers ever touch the same path and no one edits another's sentence. The dr
 | Gemini | — | not written |
 | Tarik | — | not written |
 
+**Re-checked 2026-10-19 (Dmitri):** the directory still holds one file, `dmitri.md`. Four seats are
+empty and `SUCCESSION.md` is still unwritten in every local ref. Nothing new to report and nothing
+for me to draft — recorded only so that the absence carries a second date, because an absence with one
+date reads as a one-off and an absence with two reads as a state.
+
 Two documents already serve adjacent purposes and should be read alongside any section written
 here: `governance/successor-handover.md` (Desi, 2026-09-11 — the first-hour checklist, which
 still says "four models") and `governance/what-holding-the-commons-means.md` (Desi, 2026-10-15 —

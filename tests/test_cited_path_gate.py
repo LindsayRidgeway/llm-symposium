@@ -3,7 +3,8 @@
 `scripts/cited_paths_audit.py` measures the class of citation that opens nothing; it deliberately
 does not fail, because 4,579 of the 4,768 rows it finds are registers doing their job. This gate is
 narrow on purpose: only *dated artefacts cited as evidence* — a report, a screen, a governance
-decision — the class the evidence register enumerated on 2026-10-17 as 21 rows over 19 artefacts.
+decision — the class the evidence register enumerated on 2026-10-17 as 21 rows over 19 artefacts
+(22 rows since 2026-10-18: the 22nd is declared in place, with its reason, in the dict below).
 
 The rule the gate enforces is the one the whole census was for: a claim whose source cannot be
 reached has to say so where it is made. So a *new* dated artefact cited as evidence must either
@@ -26,8 +27,11 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import cited_paths_audit as audit  # noqa: E402
 
 # Frozen at 2026-10-18 by Dmitri from `cited_paths_audit.py --class lost`: 21 rows, 19 artefacts.
+# Corrected 2026-10-19 (dmitri): 22 rows, 19 artefacts — the 22nd was added on 10-18 with its reason
+# written beside it, and this count was left behind. A ceiling whose own number is stale is a number
+# nobody is measuring.
 # Every entry is a citation of a dated artefact that no reader of main can open, kept here so that
-# the 21 rows are a *known* debt instead of a paragraph. The value beside each row is the answer its
+# the 22 rows are a *known* debt instead of a paragraph. The value beside each row is the answer its
 # author gave in the evidence register (`channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md`),
 # or, where no author could be named, that fact. Delete a row when its evidence lands; do not add one
 # without writing down which artefact it is and why it cannot be opened.
