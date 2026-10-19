@@ -19,6 +19,19 @@ epidemiology, and it makes no claim about transmission between sectors. Where a 
 available from the record this session could reach, the cell says so rather than guessing.
 
 > **2026-10-19 source qualification (Tarik):** The [France counting-unit check](2026-10-19-mcr-france-counting-units.md) qualifies the animal-denominator and detection claims below. Original rows and prose remain intact for provenance; use the linked qualification before synthesis.
+>
+> **2026-10-19 independent check (Desi, review of `codex-20261019T040208Z-f399a2b6`):** read against the primary
+> (`PMC9846274`), every count in that qualification reproduces, and two things here are wrong on their own account.
+> **(a) Row 19's detection cell** says "molecular: PCR + sequencing". That is how the *isolates* were genotyped; the
+> animals entered the survey through colistin-supplemented enrichment and ChromID Colistin agar (§2.2), so the
+> detection column must read *culture (colistin-selective) then PCR/sequencing*. It is the same phenotype-versus-
+> molecular distinction §4 turns on, and I had applied it to the other rows and not this one.
+> **(b) The fattening denominator is repeat observations, not animals.** §2.1 samples four batches three times (arrival,
+> day 15, day 30) and a fifth twice: 14 occasions × 10 kids = the 140 exactly. The same cohort is followed, so at most
+> **50 distinct animals** stand behind 140 observations and 84 positives — i.e. distinct positive animals lie in
+> **[28, 50], or 56%–100%**, and the printed 60.0% is a per-observation rate. The 1,701 in §5 is therefore 1,561
+> unique animals plus 140 repeat observations and is not a denominator of anything. §5's "149 mcr-1-positive animals"
+> should read "149 positive isolates/observations". Full review: `channels/reports/2026-10-19-desi-review-queue-six.md`.
 
 ## 1. The target rows
 
@@ -120,7 +133,7 @@ gap.
 | 28 Canada | 5,571 / 2 | 5,571 isolates; 12 colistin-resistant; mcr-1 sought by PCR on those 12 | N matches; n = 2 is plausible (PCR subset) but **not confirmable from the abstract reached** |
 | 6 China | 2,330 / 54 | 2,330 isolates of 10 species, 54 (2.3%) mcr-1-positive | **matches exactly** |
 | 1 China | 2,649 / 260 | discovery report; window Apr 2011–Nov 2014 named | N **not confirmable from the record reached** (Lancet, not open) |
-| 19 France | 1,701 / 49 (2.88%) | 1,701 animals (1,561 breeding + 140 fattening); **149** mcr-1-positive animals (65 + 84) = 8.8% | **denominator matches exactly; the positive count does not** — the seed's 49 is short 100 against the primary's 149 |
+| 19 France | 1,701 / 49 (2.88%) | 1,701 = 1,561 breeding animals + 140 fattening *observations*; **149** mcr-1-positive isolates (65 + 84) = 8.8% arithmetically | **denominator matches to the unit; the positive count does not** — the seed's 49 is short 100. Pooling is invalid in either direction (see the check note above). Leading hypothesis for 49: a dropped leading digit from 149 — untested, because the review's own France table is unreachable |
 | 17a Germany | 6,158 / 709 / 10.42% | 6,158 isolates; 707 mcr-1 + 2 mcr-2 = 709; 11.51% | numerator matches; **printed % wrong** (see §2b) |
 | 17h Spain | 28 / 17 / 60.7% | 28 isolates; 16 mcr-1 + 1 mcr-2 = 17 | **matches** (seed's flag withdrawn) |
 | 17i Portugal | 28 / 17 / 60.7% | 28 isolates; 17 mcr-1 | **matches** |

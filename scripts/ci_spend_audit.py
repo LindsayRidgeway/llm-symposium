@@ -188,6 +188,33 @@ def classify_script(relpath: str, root: Path = ROOT) -> dict:
             "provider": sorted(set(providers)), "via": via}
 
 
+GIT_ADD_RE = re.compile(r"^\s*git\s+add\b(?P<args>[^\n]*)$", re.M)
+GIT_COMMIT_RE = re.compile(r"^\s*git\s+commit\b", re.M)
+GIT_PUSH_RE = re.compile(r"^\s*git\s+push\b", re.M)
+
+
+def persists_ledger(text: str) -> bool:
+    """True when a step stages, commits and pushes the usage ledger off the runner.
+
+    `records` answers a weaker question than it looks: it says a script appends rows to
+    `channels/usage/ci-usage.jsonl`. A GitHub runner's filesystem dies with the job, so a row
+    that is written and not committed is as absent as one never written — the ledger's zero
+    stays a zero and nobody can tell which it was. Measured 2026-10-19: `symposium.yml` stages
+    everything (`git add .`), commits and pushes with the commons' credential, so it persists;
+    nothing else spends, and nothing else persists.
+
+    Comments are stripped first, so a commented-out commit step cannot earn a workflow a yes —
+    that is the same defect as counting a retirement comment as a trigger.
+    """
+    live = "\n".join(_strip_comment(line) for line in text.splitlines())
+    stages = False
+    for m in GIT_ADD_RE.finditer(live):
+        args = m.group("args")
+        if re.search(r"(^|\s)(-A|--all|\.)(\s|$)", args) or "channels/usage" in args:
+            stages = True
+    return stages and bool(GIT_COMMIT_RE.search(live)) and bool(GIT_PUSH_RE.search(live))
+
+
 def audit(workflow_dir: Path = WORKFLOWS, root: Path = ROOT) -> list:
     """One row per workflow file: triggers, whether it can spend on a clock, whether it records."""
     rows = []
@@ -213,6 +240,7 @@ def audit(workflow_dir: Path = WORKFLOWS, root: Path = ROOT) -> list:
         if spends and not scripts:
             records = any(m in text for m in RECORD_MARKERS)
         on_clock = [t for t in triggers if t in CLOCK_TRIGGERS]
+        keeps = persists_ledger(text) if (spends and records) else None
         rows.append({
             "workflow": wf.name,
             "triggers": triggers,
@@ -220,18 +248,23 @@ def audit(workflow_dir: Path = WORKFLOWS, root: Path = ROOT) -> list:
             "spends": spends,
             "spends_because": why,
             "records": records if spends else None,
-            "verdict": _verdict(spends, records, on_clock),
+            "persists": keeps,
+            "verdict": _verdict(spends, records, on_clock, keeps),
         })
     return rows
 
 
-def _verdict(spends: bool, records: bool, on_clock: list) -> str:
+def _verdict(spends: bool, records: bool, on_clock: list, persists=None) -> str:
     if not spends:
         return "no model spend"
     if on_clock and not records:
         return "FAIL: on the clock and unrecorded"
+    if on_clock and records and persists is False:
+        return "FAIL: on the clock, recorded onto a filesystem that dies"
     if on_clock and records:
         return "on the clock, recorded"
+    if records and persists is False:
+        return "manual, recorded but not persisted"
     if records:
         return "manual, recorded"
     return "manual, unrecorded"
@@ -239,13 +272,15 @@ def _verdict(spends: bool, records: bool, on_clock: list) -> str:
 
 def render(rows: list) -> str:
     w = max([len(r["workflow"]) for r in rows] + [8])
-    out = [f"{'workflow'.ljust(w)}  {'clock':<10} {'spends':<7} {'records':<8} verdict",
-           "-" * (w + 40)]
+    out = [f"{'workflow'.ljust(w)}  {'clock':<10} {'spends':<7} {'records':<8} {'keeps':<6} verdict",
+           "-" * (w + 46)]
     for r in rows:
         clock = ",".join(r["on_clock"]) if r["on_clock"] else "-"
         spends = "yes" if r["spends"] else "-"
         records = "-" if r["records"] is None else ("yes" if r["records"] else "NO")
-        out.append(f"{r['workflow'].ljust(w)}  {clock:<10} {spends:<7} {records:<8} {r['verdict']}")
+        keeps = "-" if r["persists"] is None else ("yes" if r["persists"] else "NO")
+        out.append(f"{r['workflow'].ljust(w)}  {clock:<10} {spends:<7} {records:<8} "
+                   f"{keeps:<6} {r['verdict']}")
     clocked = [r for r in rows if r["on_clock"] and r["spends"]]
     out.append("")
     if not clocked:
@@ -258,6 +293,10 @@ def render(rows: list) -> str:
     out.append("Unrecorded on-the-clock spend: "
                f"{len(failures)}" + (" — " + ", ".join(r["workflow"] for r in failures)
                                      if failures else " (the ledger's zero is explained)"))
+    unpinned = [r["workflow"] for r in rows
+                if r["records"] and r["persists"] is False]
+    out.append("Recorded onto the runner's disk and never committed: "
+               + (", ".join(unpinned) if unpinned else "none"))
     return "\n".join(out)
 
 
