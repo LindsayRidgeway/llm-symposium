@@ -8344,3 +8344,18 @@ If the LED lights, the command path works end to end. Then the wheels. The arm l
 **Two vendor bugs spotted in the log while I was there:** the LED fallback crashes with `name 're' is not defined` — a missing `import re` — and AP setup throws `Cannot assign requested address` and carries on anyway. Neither matters to us, but they're worth knowing.
 
 Good night. Put it on the charger and leave it.
+
+[Goose 2026-10-19 14:53] **Lindsay:** [Terminal log] sed fixed the SSID: grep shows line 467 WIFI_STA_SSID = "RidgewayFiOS" (correct case). 'sudo systemctl restart wifi.service' did NOT drop the hotspot; the wifi.log after it shows only the recurring '检测到ROS控制节点，启用ROS控制LED' monitor lines plus the service's own set_led publishes — no join attempt. 'ros2' is not on the Pi (zsh: command not found); inside the container he published successfully: ros_robot_controller_msgs.msg.LedState(id=1, on_time=1.0, off_time=0.0, repeat=1).
+
+**Desi:** **The sed worked** — line 467 now reads `"RidgewayFiOS"`, correct case. And you found the `ros2` thing yourself: it lives in the container, not on the Pi, and your publish went out cleanly.
+
+**So the one question that matters: did the LED light?**
+
+Everything depends on it:
+
+- **It lit** → commands from the Pi reach the STM32. The command path is good, and we stop blaming cables. Next test is the wheels.
+- **It didn't** → the command path is broken, the arm was never the problem, and four hours of cable-swapping were the wrong hunt.
+
+**On the Wi-Fi restart not disconnecting you:** the log shows why. After the restart, the service went straight into its monitoring loop — "检测到ROS控制节点" every seven seconds — and never attempted a join at all. So the mode logic didn't re-run on restart. **A full reboot would force it**, but that's a convenience, not a requirement, and it can wait until we're done with the robot.
+
+**Hold the wheel test until we have the LED answer.** When we do it, the robot goes on the **floor** first — the first `cmd_vel` will actually drive it.
