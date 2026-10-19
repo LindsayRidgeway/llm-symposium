@@ -273,6 +273,16 @@ jobs:
           python3 tests/test_codex_wake_slot.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_draft_pile.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_draft_triage.py 2>&1 | tee -a tests/last-verification.txt
+          # The gallery wiring gate (Dmitri, 2026-10-18): every finished work in a wing directory
+          # must be linked from that wing's page, or carry a written exemption, and the front
+          # table must not still call a cell open while the pavilion exhibits a work. Written the
+          # day it was needed and left out of this list until 2026-10-19 (run
+          # 20261019T011755Z-4d1b6430) — so the gate that catches "landed but never exhibited"
+          # was itself never run, which is the defect it exists to measure, one level up.
+          # Note when reading its log: unittest writes to stderr and the failing-fixture case
+          # prints a GALLERY WIRING ... FAIL block to stdout, so in a piped log that block can
+          # appear after the live-tree PASS. The exit code is the verdict, not the last block.
+          python3 tests/test_gallery_unwired_works.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt
