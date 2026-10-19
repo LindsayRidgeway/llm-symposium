@@ -15,7 +15,10 @@ in the repository watched the folder, so nothing could tell the two apart.
 What it measures: for every `.gdoc` pointer in the folder, whether the sidebar `.md` the script was
 supposed to write beside it exists (an orphan is a handoff that was staged and never converted); and
 the age of the freshest markdown (past a threshold the bridge is STALE, whether or not anything is
-wrong with it).
+wrong with it); and whether any `Receipt …txt` in the folder claims delivery of a source whose
+markdown is not there. A receipt is a *claim written by the reader*, never by the script — one sat in
+the real folder saying `Delivered & Verified` beside a pointer that had not converted in three days
+(found 2026-10-19, Dmitri, while reviewing `governance/2026-10-19-gemini-app-drive-bridge.md`).
 
 What it cannot see, and says so: the script itself. It can report that the bridge is not delivering.
 It can never report that the script is well.
@@ -45,6 +48,7 @@ DEFAULT_ROOT = os.path.join(
 )
 
 POINTER_SUFFIX = ".gdoc"
+RECEIPT_PREFIX = "receipt"
 OK, ANOMALY, ABSENT = 0, 1, 2
 
 
@@ -60,6 +64,7 @@ def survey(root, max_age_hours=72.0, now=None):
         "exists": os.path.isdir(root),
         "handoffs": [],
         "orphans": [],
+        "receipts": [],
         "freshest": None,
         "freshest_age_hours": None,
         "max_age_hours": max_age_hours,
@@ -92,6 +97,8 @@ def survey(root, max_age_hours=72.0, now=None):
         elif name.endswith(".md"):
             mt = _mtime(path)
             facts["handoffs"].append({"name": name, "mtime": mt})
+        elif name.lower().startswith(RECEIPT_PREFIX) and name.lower().endswith(".txt"):
+            facts["receipts"].append(_read_receipt(path))
 
     facts["handoffs"].sort(key=lambda h: h["mtime"] or 0, reverse=True)
     if facts["handoffs"]:
@@ -100,6 +107,18 @@ def survey(root, max_age_hours=72.0, now=None):
         if freshest["mtime"] is not None:
             age = (now - freshest["mtime"]) / 3600.0
             facts["freshest_age_hours"] = round(age, 1)
+
+    for receipt in facts["receipts"]:
+        source = receipt["source"]
+        if source:
+            present = os.path.exists(os.path.join(root, source))
+            receipt["source_present"] = present
+            if not present:
+                facts["notes"].append(
+                    f"receipt '{receipt['name']}' claims delivery of '{source}', which is not in "
+                    "the folder: a receipt is written by whoever read a handoff, not by the script, "
+                    "so it is evidence of a reader's success and never of a conversion."
+                )
 
     stale = facts["freshest_age_hours"] is None or facts["freshest_age_hours"] > max_age_hours
     if facts["orphans"]:
@@ -118,6 +137,29 @@ def survey(root, max_age_hours=72.0, now=None):
     else:
         facts["state"] = "OK"
     return facts
+
+
+def _read_receipt(path):
+    """Parse the `Key: value` head of a receipt. Prose after it is not parsed; this is not a log."""
+    info = {"name": os.path.basename(path), "mtime": _mtime(path), "status": None,
+            "source": None, "source_present": None}
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as fh:
+            head = fh.readlines()[:40]
+    except OSError:
+        return info
+    for line in head:
+        key, sep, value = line.partition(":")
+        if not sep:
+            continue
+        key, value = key.strip().lower(), value.strip()
+        if not value:
+            continue
+        if key in ("status", "state"):
+            info["status"] = value
+        elif key in ("source file", "source"):
+            info["source"] = value
+    return info
 
 
 def _mtime(path):
@@ -142,6 +184,13 @@ def render(facts):
     lines.append(f"  orphan pointers: {len(facts['orphans'])}")
     for orphan in facts["orphans"]:
         lines.append(f"    - {orphan['pointer']} (expected {orphan['expected']})")
+    if facts["receipts"]:
+        lines.append(
+            f"  receipts found: {len(facts['receipts'])} (a reader's claim, not a script log)"
+        )
+        for receipt in facts["receipts"]:
+            status = receipt["status"] or "no status line"
+            lines.append(f"    - {receipt['name']}: {status}")
     lines.extend(f"  note: {n}" for n in facts["notes"])
     return "\n".join(lines)
 

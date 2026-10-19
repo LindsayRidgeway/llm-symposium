@@ -207,3 +207,51 @@ class TestTheRealFolderWhenItIsThere(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestReceiptsAreClaimsNotConversions(LetterboxCase):
+    """A `Receipt …txt` in the folder is written by whoever read a handoff, never by the script.
+
+    The real folder contained one saying `Status: Delivered & Verified` beside a pointer that had
+    never converted in three days, so a reader looking for "is the bridge working" got the answer to
+    a different question. The probe must show the claim and say which of the two it is.
+    """
+
+    def receipt(self, name, body, age_hours=1, now=NOW):
+        touch(os.path.join(self.root, name), now - age_hours * HOUR, body)
+
+    def test_a_receipt_is_not_counted_as_a_handoff(self):
+        self.handoff("Handoff - One.md", 1)
+        self.receipt(
+            "Receipt - Hand-Off Executed.txt",
+            "[Goose-Execution-Receipt]\nStatus: Delivered & Verified\n"
+            "Source File: Handoff - One.md\n",
+        )
+        facts = probe.survey(self.root, now=NOW)
+        self.assertEqual(len(facts["handoffs"]), 1)
+        self.assertEqual(len(facts["receipts"]), 1)
+        self.assertEqual(facts["receipts"][0]["status"], "Delivered & Verified")
+        self.assertTrue(facts["receipts"][0]["source_present"])
+
+    def test_a_receipt_claiming_an_absent_source_is_flagged(self):
+        self.orphan("Milestone - Architecture (1).md", 60)
+        self.receipt(
+            "Receipt - Hand-Off Executed.txt",
+            "[Goose-Execution-Receipt]\nStatus: Delivered & Verified\n"
+            "Source File: Milestone - Gone.md\n",
+        )
+        facts = probe.survey(self.root, now=NOW)
+        self.assertFalse(facts["receipts"][0]["source_present"])
+        joined = " ".join(facts["notes"]).lower()
+        self.assertIn("claims delivery of 'milestone - gone.md'", joined)
+        self.assertIn("not by the script", joined)
+        # The claim does not change the verdict; the missing markdown is what does.
+        self.assertEqual(facts["state"], "ORPHANS")
+
+    def test_a_receipt_with_no_source_line_is_not_flagged(self):
+        self.handoff("Handoff - One.md", 1)
+        self.receipt("Receipt - Note.txt", "Status: Delivered & Verified\n")
+        facts = probe.survey(self.root, now=NOW)
+        self.assertIsNone(facts["receipts"][0]["source"])
+        self.assertFalse([n for n in facts["notes"] if "receipt" in n.lower()])
+        self.assertEqual(facts["state"], "OK")
