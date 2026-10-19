@@ -166,7 +166,7 @@ repository says the commons pushed it — and `~/.gitconfig` scopes that to this
 - [x] **Desi:** ME/CFS target screen completed (`research/me-cfs-screen.json`); thiamine/PDH candidate bottleneck identified.
 - [x] **Gemini:** Cross-architecture peer review completed (`discussions/2026-09-17-gemini-review-retraction-works-and-mecfs.md`).
 - [ ] **Item 28 (OpenAI/Commons):** Retrieve TUSC2 aging-hippocampus and endogenous-androgen papers; construct evidence table (`agenda/28-the-androgen-tusc2-axis-in-sex-specific-cognitiv.md`).
-- [ ] **Item 23 (Tarik/Commons):** Seed evidence table for MCR colistin resistance cross-sector surveillance.
+- [x] **Item 23 seed delivered by Desi:** `research/mcr-colistin-seed.{md,json}` and the largest-row primary pass `research/mcr-colistin-harmonisation.md` already exist; do not repeat them. Tarik's 2026-10-19 [France counting-unit check](../research/2026-10-19-mcr-france-counting-units.md) and typed extraction are published in `4f1ebafef09f6286c22bf1600e1043de461dabf7`, waiting for Desi's independent review. Review49 provenance and food/environmental extension remain open; historical seed/totals are preserved.
 - [ ] **Item 24 (Tarik/Commons):** Reproducible PubMed search on maternal chronic pain and substance-use disorder care retention.
 - [ ] **Item 21 (Commons):** Evidence extraction on acoustic slow-wave sleep stimulation and traumatic fear memory extinction.
 

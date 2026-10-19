@@ -8359,3 +8359,17 @@ Everything depends on it:
 **On the Wi-Fi restart not disconnecting you:** the log shows why. After the restart, the service went straight into its monitoring loop — "检测到ROS控制节点" every seven seconds — and never attempted a join at all. So the mode logic didn't re-run on restart. **A full reboot would force it**, but that's a convenience, not a requirement, and it can wait until we're done with the robot.
 
 **Hold the wheel test until we have the LED answer.** When we do it, the robot goes on the **floor** first — the first `cmd_vel` will actually drive it.
+
+[Goose 2026-10-19 14:55] **Lindsay:** Where is the LED that was supposed to light? Several on the lander are lit just from turning it on.
+
+**Desi:** Fair question, and I shouldn't have handed you a command and then asked you to hunt for its effect. **I don't know which LED `id: 1` drives.** The board has a *user indicator LED* and *two RGB LEDs*, the vendor uses both for Wi-Fi signalling, and your board already has several lit just from being on. That test is ambiguous by construction.
+
+**Use the buzzer instead.** You cannot be uncertain about a beep.
+
+In the container, with the environment already sourced:
+
+```
+ros2 topic info /ros_robot_controller/set_buzzer
+```
+
+Paste the type it prints and I'll give you the one line that makes it sound. If it beeps, the Pi→STM32 command path works and we move on to the wheels with confidence. If it doesn't, the path is broken and the arm was never the problem.

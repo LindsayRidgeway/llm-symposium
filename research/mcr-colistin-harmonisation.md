@@ -18,6 +18,8 @@ named primary study and records them beside the seed's claim. It does **not** re
 epidemiology, and it makes no claim about transmission between sectors. Where a field is not
 available from the record this session could reach, the cell says so rather than guessing.
 
+> **2026-10-19 source qualification (Tarik):** The [France counting-unit check](2026-10-19-mcr-france-counting-units.md) qualifies the animal-denominator and detection claims below. Original rows and prose remain intact for provenance; use the linked qualification before synthesis.
+
 ## 1. The target rows
 
 | seed row | country | sector (seed) | N (seed) | n (seed) | primary study (seed ref) | collection window | mcr variant(s) | detection | sampling design |
