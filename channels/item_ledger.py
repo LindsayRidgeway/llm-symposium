@@ -847,9 +847,13 @@ def _pool(rec: dict, band: list[str], rates: dict, arch: dict[str, str] | None =
     runs the author's own architecture. This is the failure the cheap branch cannot see: with a
     band of `desi` and `dmitri` — both DeepSeek — every Desi item went to Dmitri, so "the author is
     never the reviewer" held while the *point* of review (a reader who does not share the author's
-    blind spots) did not. Where the architecture map is absent, or nobody outside the band runs a
-    different one, the wide branch falls back to the cheap band and says so in the reason: a
-    diversity claim nothing supports is worse than a cheap review honestly labelled.
+    blind spots) did not. Where nobody outside the band runs a different architecture, it uses the
+    widest pool it has and says exactly that. Where the map is *absent*, it still widens on price,
+    but then it says the architecture is unrecorded instead of asserting the reader's model differs:
+    a diversity claim nothing supports is worse than a cheap review honestly labelled, and that
+    holds for the reason as much as for the pick (fixed 2026-10-19 — with an empty map the reason
+    used to read "the band runs <author>'s own architecture" from no evidence at all;
+    `tests/test_item_ledger_wide_branch.py` pins the honest wording).
 
     Degenerate case: if the band narrows to the author alone, the cheap branch widens to the
     cheapest amigo outside it — a visible exception, never a silent one, because a silent widening
@@ -862,10 +866,13 @@ def _pool(rec: dict, band: list[str], rates: dict, arch: dict[str, str] | None =
         same = arch.get(author)
         different = [a for a in outside if not same or arch.get(a) != same]
         if different:
+            why = (f"because the band runs {same}'s own architecture and a same-model reader "
+                   f"cannot give this item a second opinion" if same else
+                   f"but no architecture is recorded for {author or 'the author'}, so the pool was "
+                   f"widened by price alone and this reason claims nothing about the reader's model")
             return different, "wide", (
                 f" — wide draw, 1 item in {WIDE_SHARE}: read outside the cheap band on purpose, "
-                f"because the band runs {same or 'the author'}'s own architecture and a same-model "
-                f"reader cannot give this item a second opinion")
+                f"{why}")
         if outside:
             return outside, "wide", (
                 f" — wide draw, 1 item in {WIDE_SHARE}, but no body outside the band runs a "
