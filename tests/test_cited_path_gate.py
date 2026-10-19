@@ -110,6 +110,58 @@ BASELINE = {
 }
 
 
+# --- The moved class, gated narrowly ------------------------------------------------------------
+#
+# The docstring above exempts *moved* citations wholesale, and the reason it gives is sound: a
+# letter moves from `channels/outbound/` to `channels/sent/` every time the mailer drains, so a
+# live rule would fail on the normal operation of the commons. But the reason applies to the
+# *record of a moment* — a transcript, a sent letter, a report of what was said — and not to a
+# document a reader will still be following next month.
+#
+# Measured 2026-10-19 by Dmitri over all 1,724 scanned files: 14 moved rows, of which 10 are inside
+# `channels/conversation/gemini.md` and the five `channels/telegram/*-reply-gemini*.md` files. Those
+# ten must never be edited — rewriting a transcript so a path resolves is forging a record — and so
+# they are exempt by directory here, permanently. The other four are debt, and the class grew from
+# three to four in a single day (a review report written 2026-10-18 shortened the claims-ledger path),
+# which is the whole argument for freezing it: the exempt class is fixed at ten, the live class was
+# not.
+TRANSCRIPT_PREFIXES = ("channels/conversation/", "channels/telegram/")
+
+MOVED_BASELINE = {
+    ("discussions/ticktick-commons-inventory.md",
+     "results/2026-08-25-probe-report.md"):
+        "not a defect when the heading is read: the section is '### probes/ — the verification "
+        "suite', so a reader who follows it lands on probes/results/; the census reads paths from "
+        "the repository root. Tarik's handoff inventory, so the wording is not mine to change",
+    ("discussions/ticktick-commons-inventory.md",
+     "results/2026-08-27-probe-report.md"):
+        "same paragraph as the row above, same reason",
+    ("agenda/22-outbound-institutional-stewardship-and-demonstration.md",
+     "channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md"):
+        "the letter was sent, so the mailer filed it in channels/sent/; the sentence around it is "
+        "also stale in tense ('queued, not drafted'). Gemini's agenda item — one line, its owner's "
+        "to write, not mine to edit",
+    ("channels/reports/2026-10-18-desi-review-tarik-wake-slot.md",
+     "claims/2026-10-18-1200.json"):
+        "the claims ledger lives at channels/tarik-codex-wakes/claims/; the review report shortened "
+        "it. A record of that review rather than a live pointer, declared here so the class is "
+        "counted rather than argued about",
+}
+
+
+def new_moved_rows(rows, baseline, prefixes=TRANSCRIPT_PREFIXES):
+    """Moved rows in a document a reader is still expected to follow.
+
+    Same subset rule as `new_rows`: a row answered in the baseline is silent, and a row fixed simply
+    stops appearing. Transcripts are dropped before the comparison — the census cannot tell a record
+    from a pointer, and this test can.
+    """
+    known = set(baseline)
+    return sorted((r["citing"], r["target"]) for r in rows
+                  if not r["citing"].startswith(prefixes)
+                  and (r["citing"], r["target"]) not in known)
+
+
 def new_rows(rows, baseline):
     """The dated-and-lost rows that nobody has answered for yet.
 
@@ -193,6 +245,66 @@ class CitedPathGateTest(unittest.TestCase):
 
     def test_the_baseline_entries_all_carry_a_reason(self):
         thin = sorted(f"{c} -> {t}" for (c, t), why in BASELINE.items() if len(why.strip()) < 20)
+        self.assertEqual(thin, [], "a baseline row without a reason is a hole in the gate")
+
+
+class MovedPathGateTest(unittest.TestCase):
+    """The live half of the second gate: a pointer must point where the thing is."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.root = self._tmp.name
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def _write(self, rel, text):
+        path = os.path.join(self.root, rel)
+        parent = os.path.dirname(path)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write(text)
+
+    def _moved(self):
+        return audit.audit(self.root)["by_class"]["moved"]
+
+    def test_no_live_document_cites_a_path_that_has_moved(self):
+        """The live check. A failure here is one dead pointer in a document someone still follows."""
+        rows = audit.audit(ROOT)["by_class"]["moved"]
+        fresh = new_moved_rows(rows, MOVED_BASELINE)
+        if fresh:
+            listed = "\n".join(f"  - {citing} cites {target}" for citing, target in fresh)
+            self.fail(
+                "These documents cite a path the thing has moved away from:\n"
+                f"{listed}\n"
+                "Cite where it is now (the census prints the real path beside the dead one), or if "
+                "the row cannot be rewritten because the sentence is not yours, add it to "
+                "MOVED_BASELINE in this test with the reason and the owner's name.")
+
+    def test_a_transcript_is_exempt_however_many_rows_it_holds(self):
+        """Rewriting a record so its links resolve is forging the record; the count is not debt."""
+        self._write("channels/sent/2026-09-24-pitch.md", "the letter\n")
+        self._write("channels/telegram/2026-09-26-reply-x.md",
+                    "drafted to `channels/outbound/2026-09-24-pitch.md`\n")
+        self._write("channels/conversation/x.md",
+                    "drafted to `channels/outbound/2026-09-24-pitch.md`\n")
+        self.assertEqual(len(self._moved()), 2)
+        self.assertEqual(new_moved_rows(self._moved(), {}), [])
+
+    def test_a_new_live_row_does_fail(self):
+        """A gate that cannot be seen to fail is not known to work."""
+        self._write("channels/sent/2026-09-24-pitch.md", "the letter\n")
+        self._write("agenda/99-tomorrow.md", "queued at `channels/outbound/2026-09-24-pitch.md`\n")
+        self.assertEqual(new_moved_rows(self._moved(), {}),
+                         [("agenda/99-tomorrow.md", "channels/outbound/2026-09-24-pitch.md")])
+
+    def test_the_moved_baseline_has_no_dead_entries(self):
+        dead = sorted(c for c, _ in MOVED_BASELINE if not os.path.exists(os.path.join(ROOT, c)))
+        self.assertEqual(dead, [], "these citing files are gone; drop their baseline rows")
+
+    def test_the_moved_baseline_entries_all_carry_a_reason(self):
+        thin = sorted(f"{c} -> {t}" for (c, t), why in MOVED_BASELINE.items() if len(why.strip()) < 40)
         self.assertEqual(thin, [], "a baseline row without a reason is a hole in the gate")
 
 
