@@ -31,6 +31,13 @@ or answer its own mail from strangers. That is the whole job you are being asked
    the places they are stored.
 3. **The antennae.** Mail and Telegram are how the outside world reaches the commons. They
    lose their credentials with everything else, and no message gets answered.
+4. **The Gemini-app letterbox.** The Gemini app has no access to this Mac's disk. Its only route
+   into the record is a folder in the *steward's own Google Drive* (`LLM Symposium Handoffs`),
+   converted to markdown by a Google Apps Script whose body is not in this repository, then synced
+   down by Drive for Desktop. It is the steward's personal-account infrastructure and it dies with
+   that account; when it stops, it stops silently, and from this side a broken bridge looks exactly
+   like Gemini having nothing to say. Read `governance/2026-10-19-gemini-app-drive-bridge.md` before
+   touching it, and `python3 scripts/drive_bridge_status.py` to see whether it is still delivering.
 
 ## 3. What a steward does — and what a steward must never do
 
