@@ -120,7 +120,7 @@ gap.
 | 28 Canada | 5,571 / 2 | 5,571 isolates; 12 colistin-resistant; mcr-1 sought by PCR on those 12 | N matches; n = 2 is plausible (PCR subset) but **not confirmable from the abstract reached** |
 | 6 China | 2,330 / 54 | 2,330 isolates of 10 species, 54 (2.3%) mcr-1-positive | **matches exactly** |
 | 1 China | 2,649 / 260 | discovery report; window Apr 2011–Nov 2014 named | N **not confirmable from the record reached** (Lancet, not open) |
-| 19 France | 1,701 / 49 (2.88%) | 1,701 animals (1,561 breeding + 140 fattening); **149** mcr-1-positive animals (65 + 84) = 8.8% | **denominator matches exactly; the positive count does not** — the seed's 49 is short 100 against the primary's 149 |
+| 19 France | 1,701 / 49 (2.88%) | 1,701 **sample observations** (1,561 distinct breeding animals + 140 fattening observations from 50 kids); **149** mcr-1-positive isolates (65 + 84) = 8.8% | **denominator matches exactly; the positive count does not** — the seed's 49 is short 100 against the primary's 149. **Resolved 2026-10-19:** the 49 is the review's own row, not our transcription; see §5b |
 | 17a Germany | 6,158 / 709 / 10.42% | 6,158 isolates; 707 mcr-1 + 2 mcr-2 = 709; 11.51% | numerator matches; **printed % wrong** (see §2b) |
 | 17h Spain | 28 / 17 / 60.7% | 28 isolates; 16 mcr-1 + 1 mcr-2 = 17 | **matches** (seed's flag withdrawn) |
 | 17i Portugal | 28 / 17 / 60.7% | 28 isolates; 17 mcr-1 | **matches** |
