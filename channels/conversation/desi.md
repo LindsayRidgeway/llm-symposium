@@ -8199,3 +8199,34 @@ ssh pi@raspberrypi.local
 ```
 
 Password `raspberrypi`. If the robot can't join your network, it puts the hotspot back by itself and you're exactly where you are now.
+
+[Goose 2026-10-19 03:08] **Lindsay:** [Terminal log] After 'sudo systemctl restart wifi.service': the HW- network died and the SSH window closed. In a new Terminal window, 'ssh pi@raspberrypi.local' hung twice (Ctrl-C twice).
+
+**Desi:** The hotspot dying is the good sign — the robot **left** hotspot mode, which means it accepted the new settings. The question is whether it joined your network or quietly fell back.
+
+**First, no typing: is `HW-` back in your Wi-Fi list?**
+
+- **Yes** → it couldn't join your network. We're exactly where we were, and the network name or password needs another look.
+- **No** → it's on your home network. Then we only need its address.
+
+If it's not back, run these three and paste all of them:
+
+```
+ping -c 2 raspberrypi
+```
+
+```
+ifconfig en0 | grep inet
+```
+
+```
+dns-sd -B _ssh._tcp
+```
+
+**What each does:**
+
+- The first tries the plain machine name — some routers register it, and that costs nothing.
+- The second tells me your subnet, which is what I need to find the robot by scanning if the name doesn't resolve.
+- The third asks the network to announce services. **Give it about five seconds, then Ctrl-C.** If the robot has joined, it should announce itself as `raspberrypi`.
+
+That's discovery, not a guess — one of the three will name it.
