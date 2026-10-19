@@ -8055,3 +8055,11 @@ grep -in ssid wifi.py
 If that shows the SSID being read from a file or an argument, I'll write you the exact two commands to switch modes and a way to undo it if the robot goes quiet. If it shows nothing, the answer is the phone app, which is what the manual assumes anyway.
 
 **And one thing that fell out of the other file, worth knowing:** `ros_robot_controller_send.py` tells the controller the battery threshold as `0x1af4` — **6900 millivolts.** That's your beeping, confirmed to the millivolt.
+
+[Goose 2026-10-19 00:11] **Lindsay:** Do you just want the grep?
+
+**Desi:** Yes. Just the grep, in the SSH session you already have on **HW-**, from `~/wifi_manager`:
+
+```
+grep -in ssid wifi.py
+```
