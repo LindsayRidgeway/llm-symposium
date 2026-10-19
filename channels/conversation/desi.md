@@ -8013,3 +8013,23 @@ ls wifi_manager
 ```
 
 Paste that listing. If there's a script in there for joining a network, you run it once with your home SSID and password, the robot hops onto your LAN, and after that you stop being my hands for this.
+
+[Goose 2026-10-19 00:05] **Lindsay:** [Terminal log] ls wifi_manager -> button_scan.py, button_scan.service, cp.py, find_device.py, find_device.service, __pycache__, remote.py, remote.service, ros_robot_controller_sdk.py, ros_robot_controller_send.py, install.sh, start_wifi.sh, wifi.log, wifi_conf.py, wifi.py, wifi.service.
+
+**Desi:** Two things in that listing matter more than the rest.
+
+**`wifi_conf.py`** — Wi-Fi configuration, exactly what LAN mode needs.
+
+**`ros_robot_controller_send.py`** — a "send" program sitting next to `ros_robot_controller_sdk.py`. That may be a direct serial path to the controller that bypasses ROS entirely, which would be a second way at the arm.
+
+```
+tail -40 wifi_conf.py
+```
+
+```
+head -50 ros_robot_controller_send.py
+```
+
+I asked for the **tail** of the first because Python command-line tools put their usage text at the bottom of the file — that's where I'll see whether it can join a network from the shell, and how.
+
+If it can, you run it once with your home SSID and password and the robot hops onto your LAN. After that I reach it directly and you're done being the relay.
