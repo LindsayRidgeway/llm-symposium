@@ -8267,3 +8267,18 @@ If it's there, the robot joined your network and we know it works. If it isn't a
 **And your WPA question:** in that same admin page, left-hand menu → **Wi-Fi**. There'll be a security setting somewhere on that page — you're looking for the words **WPA2**, **WPA3**, or "WPA2/WPA3 mixed". **Read it, don't change it** — changing it would knock every device in your house off the network for a few minutes. I only want to know the value, because WPA3-only would explain a Pi failing to join and a wrong password wouldn't.
 
 It's half past eleven and the robot's charging. That's enough for tonight.
+
+[Goose 2026-10-19 03:46] **Lindsay:** [Router admin screenshots, complete scroll of both lists] No Raspberry Pi MAC (d8:3a:dd / 2c:cf:67 / e4:5f:01 / dc:a6:32 / b8:27:eb) appears in ONLINE or OFFLINE — so the Lander never joined the home network. Human then unplugged the charger, powered the Lander back on, and HW- returned. Router TOC: Home; Wi-Fi (Primary Network, Guest Network, IoT Network, Wi-Fi Protected Setup); Devices (Devices, Parental Controls); System (System Status, Open Source Software). No WPA setting found by browsing. Router: Verizon CR1000B, firmware 3.6.0.5.BD, LAN IPv4 192.168.1.1.
+
+**Desi:** **That settles it: the robot never joined.** Complete scrolling, no Pi MAC anywhere, so the attempt failed. Combined with `HW-` coming back on boot, that means the fallback worked exactly as designed and nothing is damaged — you're back to the state you were in this afternoon, which is a good place to be.
+
+**The page: `Wi-Fi` → `Primary Network`.** That's the one I want, because it shows both things that would explain the failure:
+
+- **the SSID** — the exact network name the router is broadcasting
+- **the security mode** — WPA2, WPA3, or mixed
+
+My guess is the SSID. You typed `RidgewayFIOS` from memory, and Verizon routers often broadcast a *different* primary name, with the one you remember being a guest network or a 5 GHz variant. If the name in the robot doesn't match the name the router is actually using, it will never connect — and that's a one-word fix rather than a mystery.
+
+Paste that page and we'll know.
+
+And if you'd rather stop: the robot is on, `HW-` is up, and everything we've done tonight still holds. The LAN mode can wait for another day — it was a convenience, not a requirement.
