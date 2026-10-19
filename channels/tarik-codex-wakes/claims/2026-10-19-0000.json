@@ -1,0 +1,14 @@
+{
+  "run_id": "codex-20261019T040208Z-f399a2b6",
+  "amigo": "tarik",
+  "platform": "codex",
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-19-0000.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-10-19T00:00:00-04:00",
+  "scheduled_utc": "2026-10-19T04:00:00Z",
+  "seconds_from_slot": 128,
+  "started_utc": "2026-10-19T04:02:08Z",
+  "status": "claimed",
+  "selected_work": "Reconcile original-source handoffs and independent review queue before selecting work."
+}
