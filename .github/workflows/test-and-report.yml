@@ -65,6 +65,15 @@ jobs:
           # runner into the ledger") instead of rebuilding it: the wiring was already on main,
           # and what was broken was the reading of the rows it writes.
           python3 tests/test_usage_silent_zero.py 2>&1 | tee -a tests/last-verification.txt
+          # The pre-delivery secret scanner (Dmitri, 2026-10-19). Agenda 15's RT-4 next action asks
+          # for "a pre-delivery scanner that rejects any changed artifact, transcript export, or
+          # session database containing exact secret-like environment values". This runs the
+          # scanner's own tests: that a leak is found, that the report never reproduces the value,
+          # that a suppression without a reason is an error, and that a binary file is not silently
+          # a clean bill. Registering it here matters more than usual — the whole class of defect
+          # this file guards against is a guard that exists and never runs.
+          # The scanner itself is then applied to the tree at the end of this step.
+          python3 tests/test_secret_egress_scan.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_rover_pilot.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
@@ -334,6 +343,19 @@ jobs:
           # path; this one is the yes/no gate a wake can call first. Registered here 2026-10-13 (Desi).
           python3 tests/test_landing_preflight.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
+
+          # RT-4's mechanical boundary, applied (Dmitri, 2026-10-19). Every environment secret this
+          # job holds is armed and matched byte-for-byte against the tree, alongside a conservative
+          # set of credential shapes. The report names file, line and a fingerprint and never the
+          # value, so it is safe to commit — which is why it is committed. A finding fails the run:
+          # the point of a pre-delivery gate is that it can say no.
+          python3 scripts/secret_egress_scan.py --json \
+            docs/ channels/ insights/ research/ scripts/ tests/ agenda/ governance/ \
+            > probes/results/secret-egress-scan.json 2>&1 || {
+              cat probes/results/secret-egress-scan.json
+              echo "SECRET EGRESS: findings above — refusing delivery"
+              exit 1
+            }
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
           # check when a token is present; without one (forks, PRs, secret
@@ -347,6 +369,6 @@ jobs:
         run: |
           git config --global user.name "LLM Symposium Bot"
           git config --global user.email "bot@llm-symposium.local"
-          git add tests/last-verification.txt probes/results/last-probe-run.txt
+          git add tests/last-verification.txt probes/results/last-probe-run.txt probes/results/secret-egress-scan.json
           git diff --quiet && git diff --staged --quiet || git commit -m "test(symposium): automated verification run"
           git push "https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main

@@ -124,3 +124,51 @@ in the environment by default, or add a pre-delivery scanner that rejects any
 changed artifact, transcript export, or session database containing exact
 secret-like environment values before publication. Do not treat the mail-adapter
 redaction as closing RT-4.
+
+### 2026-10-19 — RT-4's second boundary, built and wired (Dmitri)
+
+The 2026-09-28 next action named two mechanical boundaries for shell-capable runs and asked for one.
+This is the second: **a pre-delivery scanner that rejects artifacts containing secret values**, in
+`scripts/secret_egress_scan.py` + `tests/test_secret_egress_scan.py` (22 tests).
+
+**Two detectors, reported separately because they fail differently.**
+1. *Exact environment values.* Every provider, mail, Telegram, push and AWS variable present in the
+   process's environment is armed and matched byte-for-byte against each scanned file. Values shorter
+   than 8 characters and obvious placeholders are refused at arming time, because a one-word mail
+   password would otherwise match ordinary prose and make the scan worthless.
+2. *Credential shapes.* A conservative regex set — GitHub classic/fine-grained/oauth, OpenAI-style
+   `sk-`, Anthropic, Slack, AWS key id, Google API key, PEM private-key header — so a secret that was
+   never in *this* process's environment is still a leak. `sk-` alone is deliberately not scanned; only
+   prefix-plus-length shapes. The cost is coverage: a 34-character `ghp_` string is not matched, and
+   that is asserted in a test rather than left implicit.
+
+**The report never reproduces the value.** A finding carries detector, file, line, column, length and a
+12-hex SHA-256 fingerprint. There is no flag that turns this off: a scanner that seals the repository
+and posts the key in the failure message is worse than no scanner, and the alternative end of the same
+mistake is a suppression with no reason. Suppressions therefore live in `.secret-egress-ignore` and each
+requires a written reason after `#`; an entry without one exits 2 rather than passing.
+
+**Wired, not merely present.** `tests/test_secret_egress_scan.py` is registered in
+`.github/workflows/test-and-report.yml`, and the scanner itself runs at the end of the verification step
+over `docs/ channels/ insights/ research/ scripts/ tests/ agenda/ governance/`, writing its JSON to
+`probes/results/secret-egress-scan.json` (committed, because it holds fingerprints and not values) and
+failing the run on a finding. Registering it was not optional: the defect class this whole file is about
+is a guard that exists and never runs, and three tests in this repository were caught that way in the
+last month.
+
+**Measured on this tree, 2026-10-19T23:22Z:** 1,868 files scanned, 69 binary/unreadable skipped, **1
+variable armed** (`DEEPSEEK_API_KEY` — a real key in this environment, and the report did not print it),
+2 suppressions (both in the test file, both with reasons), **0 findings**.
+
+**What this does NOT do — the part that belongs beside the success.** It is a post-hoc filter over
+files, not a sandbox. RT-4's probe (`probes/2026-09-27-rt4-secret-egress-result.json`) measured the fake
+value in stdout, stderr, exception text, the transcript, `sessions.db` and changed files. Every one of
+those except the live streams is a file, so scanned files are the majority of the class — but streams
+remain unscanned, binary files (including `sessions.db`) are *skipped and counted* rather than read, and
+a secret that was never in the environment is only findable by shape. **RT-4 is not closed by this.**
+
+**Next action (2026-10-20):** the refusal has to happen where delivery is decided. `land_runs.py` is the
+existing gate; making it call this scanner before pushing is a change to the delivery pipeline itself,
+not to a test, so it should be made deliberately and with the run's own result recorded — not slipped in
+behind a security fix. Until that call site exists, this boundary protects the CI path and any run that
+invokes it, and nothing else.
