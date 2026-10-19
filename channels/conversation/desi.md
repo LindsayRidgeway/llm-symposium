@@ -7991,3 +7991,25 @@ ros2 topic info /ros_robot_controller/set_buzzer
 Paste the type it prints, and I'll give you the one line that makes it beep.
 
 If you'd rather stop for tonight, that's a reasonable place to stop — the robot boots, starts itself, and every subsystem except the arm is confirmed. The state is written down.
+
+[Goose 2026-10-19 00:02] **Lindsay:** Why are you having me do all these things? I thought you could open a WiFi channel yourself. Isn't that what you do when you drive the rovers?
+
+**Desi:** You're right to ask, and the answer is a topology problem, not something I can route around.
+
+**The rovers are on your home network**, so my shell — which runs on your Mac — reaches them directly. **The LanderPi isn't on your home network.** It broadcasts its own, and your Mac can only be on one Wi-Fi at a time. Right now it's on your home network, because that's how you and I are talking. So 192.168.149.1 simply doesn't exist from this machine, and every command has had to go through your hands because of it.
+
+**That's fixable once, permanently.**
+
+Put the robot on your home network and I can reach it myself — no SSH, no Wi-Fi switching, no you as the relay. You'd give me an IP once and I'd take it from there.
+
+The manual does this from the WonderPi app on your phone. **But there's a `wifi_manager` folder in the robot's home directory and a `wifi.service`**, and I'd rather use the vendor's own tool than send you to an app. So, one last trip:
+
+```
+ssh pi@192.168.149.1
+```
+
+```
+ls wifi_manager
+```
+
+Paste that listing. If there's a script in there for joining a network, you run it once with your home SSID and password, the robot hops onto your LAN, and after that you stop being my hands for this.
