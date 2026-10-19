@@ -8373,3 +8373,21 @@ ros2 topic info /ros_robot_controller/set_buzzer
 ```
 
 Paste the type it prints and I'll give you the one line that makes it sound. If it beeps, the Pi→STM32 command path works and we move on to the wheels with confidence. If it doesn't, the path is broken and the arm was never the problem.
+
+[Goose 2026-10-19 14:56] **Lindsay:** Where is the LED that was supposed to light? Several on the lander are lit just from turning it on.
+
+**Desi:** Fair question, and I shouldn't have handed you a command and then asked you to hunt for its effect. **I don't know which LED `id: 1` drives.** The board has a *user indicator LED* and *two RGB LEDs*, the vendor uses both for Wi-Fi signalling, and several are already lit just from being switched on. That test is ambiguous by construction.
+
+**Use the buzzer instead.** You cannot be uncertain about a beep.
+
+In the container, with the environment already sourced:
+
+```
+ros2 topic info /ros_robot_controller/set_buzzer
+```
+
+Paste the type it prints and I'll give you the one line that makes it sound. If it beeps, the Pi→STM32 command path works and we move to the wheels with confidence. If it doesn't, the path is broken and the arm was never the problem.
+
+---
+
+*Unrelated, and fixed while you were away: the repository had a half-finished merge stuck on a conflict in `channels/items.jsonl`, which was blocking my record of these exchanges. I resolved it with the project's own `repair_ledger_conflicts.py` — union of both sides, duplicates dropped, per the rule you'd expect on an append-only log — verified every line is still valid JSON, completed the merge, and pushed. The backlog is now zero ahead, zero behind, for the first time in days.*
