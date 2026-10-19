@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+# Owner: Desi
+"""The revisit trigger for Status 5 — the items a model looked at and postponed.
+
+Why this exists (2026-10-19): the census at 2026-10-19T03:09Z counts 120 items in Status 5 and
+*not one has ever left it*. A state that no mechanism can move out of is not a queue, it is a
+graveyard with a label on it — the same defect the ledger already repaired once, when one word,
+"accomplished", carried both "the lander closed it" and "a model read it".
+
+The measurement that matters, taken the same morning over all 120 rows:
+
+  * 105 name a *delivery* reason — "absent from main", "unlanded", "not on main", "delivery state";
+  * 0 have landed since: not one postponed run id appears in any landing commit on main;
+  * 11 have all of their named paths present in the tree now, 14 have none;
+  * every one of the 120 was postponed within the last seven days.
+
+So the pile is not full of work waiting on a person. It is mostly reviews that correctly found the
+payload missing, parked in a state whose exit nobody runs. This script is the thing that runs it:
+it re-asks each item's blocker a question a machine can answer, and names the items whose answer
+has changed.
+
+    python3 scripts/blocked_revisit.py                 # the report
+    python3 scripts/blocked_revisit.py --stale-days 14 # age the "nobody re-looked" line
+    python3 scripts/blocked_revisit.py --json          # the same facts, for another tool
+
+Four verdicts, in this order, and the first that applies wins:
+
+  landed        the run id now appears in a landing commit on main — the blocker has gone; re-look
+  stale         postponed longer than --stale-days ago with no later row for the same id
+  present       every repo path the item names exists now — weak evidence: a *modified* file exists
+                whether or not the change landed, so this says "look", not "done"
+  absent        none of the named paths exists — the blocker stands exactly as recorded
+  unverifiable  the item names no repo path, so no machine here can check its reason
+
+Only the first three are "needs a look". A script that reports everything as needing a look is the
+same as one that reports nothing.
+"""
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+LEDGER = REPO / "channels" / "items.jsonl"
+STATUS5 = "postponed"
+
+
+def load(path: Path) -> list[dict]:
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def postponed(rows: list[dict]) -> list[dict]:
+    """One row per postponed id: the *latest* postponed row, since the ledger can hold duplicates."""
+    latest: dict[str, dict] = {}
+    for row in rows:
+        if row.get("state") != STATUS5:
+            continue
+        i = row["id"]
+        if i not in latest or row.get("state_utc", "") >= latest[i].get("state_utc", ""):
+            latest[i] = row
+    return [latest[i] for i in sorted(latest)]
+
+
+def later_rows(rows: list[dict], item: dict) -> list[dict]:
+    """Rows for the same id dated after the postponement — a re-look leaves one of these."""
+    return [r for r in rows
+            if r["id"] == item["id"] and r.get("state_utc", "") > item.get("state_utc", "")]
+
+
+def landed_ids(repo: Path, log_text: str | None = None) -> str:
+    """The whole git log as text; a landing commit names the run id it carries."""
+    if log_text is not None:
+        return log_text
+    try:
+        return subprocess.run(["git", "-C", str(repo), "log", "--all", "--format=%s%n%b"],
+                              capture_output=True, text=True, check=False).stdout
+    except OSError:
+        return ""
+
+
+def repo_paths(item: dict) -> list[str]:
+    return [p for p in item.get("paths", []) if p and not p.startswith(("http://", "https://"))]
+
+
+def classify(item: dict, rows: list[dict], log_text: str, repo: Path, stale_days: int,
+             now: dt.datetime) -> tuple[str, str]:
+    """(verdict, one line of why). The first verdict that applies wins; order is the rule."""
+    if item["id"] in log_text:
+        return "landed", "its run id now appears in a landing commit on main"
+    try:
+        when = dt.datetime.strptime(item["state_utc"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+    except (KeyError, ValueError):
+        when = now
+    age = (now - when).days
+    if age > stale_days and not later_rows(rows, item):
+        return "stale", f"postponed {age} days ago and no later row names it again"
+    paths = repo_paths(item)
+    if not paths:
+        return "unverifiable", "names no repository path, so its reason cannot be checked here"
+    present = [p for p in paths if (repo / p).exists()]
+    if present and len(present) == len(paths):
+        return "present", f"all {len(paths)} named path(s) exist now (a modified file proves nothing — look)"
+    if not present:
+        return "absent", f"none of its {len(paths)} named path(s) exists — the blocker stands"
+    return "absent", f"{len(present)} of {len(paths)} named path(s) exist; the payload is not there"
+
+
+ORDER = ["landed", "stale", "present", "absent", "unverifiable"]
+NEEDS_A_LOOK = {"landed", "stale", "present"}
+
+
+def build(rows: list[dict], log_text: str, repo: Path, stale_days: int,
+          now: dt.datetime | None = None) -> list[dict]:
+    now = now or dt.datetime.now(dt.timezone.utc)
+    out = []
+    for item in postponed(rows):
+        verdict, why = classify(item, rows, log_text, repo, stale_days, now)
+        out.append({"id": item["id"], "verdict": verdict, "why": why,
+                    "postponed_utc": item.get("state_utc", ""),
+                    "amigo": item.get("amigo", "?"), "reviewer": item.get("reviewer", "?"),
+                    "title": (item.get("short_title") or item.get("title") or "")[:70]})
+    return sorted(out, key=lambda r: (ORDER.index(r["verdict"]), r["postponed_utc"]))
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--ledger", default=str(LEDGER))
+    ap.add_argument("--repo", default=str(REPO))
+    ap.add_argument("--stale-days", type=int, default=14)
+    ap.add_argument("--json", action="store_true")
+    ap.add_argument("--all", action="store_true", help="list every item, not only those needing a look")
+    a = ap.parse_args()
+
+    rows = load(Path(a.ledger))
+    repo = Path(a.repo)
+    facts = build(rows, landed_ids(repo), repo, a.stale_days)
+
+    if a.json:
+        print(json.dumps({"items": facts, "counts": counts(facts)}, indent=1))
+        return 0
+
+    print(f"Status 5 (postponed): {len(facts)} item(s)")
+    for verdict in ORDER:
+        print(f"  {verdict:<13}{counts(facts)[verdict]:4d}")
+    look = [f for f in facts if f["verdict"] in NEEDS_A_LOOK]
+    print(f"\nneeds a look now: {len(look)}")
+    for f in (facts if a.all else look):
+        print(f"  [{f['verdict']}] {f['id']}  postponed {f['postponed_utc'][:10]} by {f['reviewer']}"
+              f"  {f['title']}\n      {f['why']}")
+    return 0
+
+
+def counts(facts: list[dict]) -> dict[str, int]:
+    out = {v: 0 for v in ORDER}
+    for f in facts:
+        out[f["verdict"]] = out.get(f["verdict"], 0) + 1
+    return out
+
+
+if __name__ == "__main__":
+    sys.exit(main())

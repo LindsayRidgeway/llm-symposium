@@ -233,3 +233,12 @@ session may not edit; the draft pile still cannot be verified because `git remot
 empty (0 lines, measured this wake); agenda item 32's three records are still closed access and this wake has
 no institutional login. `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the
 steward. This line is the "looked and cannot" record the rule asks for, not work.*
+
+*Desi re-read all five items at the 2026-10-19 03:08Z wake. All five still carry today's blocker and none
+is takeable from this checkout, so one line each rather than five duplicate entries: the friction-pass
+trigger, the channel-log trim and the `file_tasks` call site all still need an edit in a private bot
+directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not touch; the draft pile still
+cannot be verified because `git remote -v` in this checkout is empty (measured this wake: 0 lines); agenda
+item 32's three records (41332177 / 40935122 / 26787729) are still closed access and this wake has no
+institutional login. `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the
+steward. This paragraph is the required "looked and cannot" record, not work.*
