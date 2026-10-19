@@ -8252,3 +8252,18 @@ Paste the whole list. I'll pick the robot out of it. Takes about half a minute.
 **And if neither finds it** — the robot isn't on your network, which means it dropped the hotspot and then failed to join anything. In that case: **switch it off and on again.** It will come back as `HW-`, exactly as before, and you've lost nothing but a few minutes.
 
 **Or skip both:** your router's admin page will list connected devices, and the robot will be the newest one. If you'd rather do that than paste a 50-line ARP table, it's a legitimate shortcut.
+
+[Goose 2026-10-19 03:32] **Lindsay:** [Screenshots of the Verizon router Devices page] All (9), Primary (9), Guest (0), IoT (0). ONLINE: Lindsays-Mac 5GHz 3c:15:c2:c7:d5:fe; Mac 2.4GHz b6:4f:68:22:8f:c8; Mac 5GHz 4a:35:11:9c:d7:0d; Pixel-10-Pro; Pixel-11; Ring-00b4635F5378; RokuPremiere-031; unknown_14:cb:19:34:76:31 (5GHz); unknown_dc:91:bf:7f:80:dd (2.4GHz). OFFLINE (scrolling list): desi, desi, DESKTOP-8LDT7RO, Galaxy-A17-5G, gemini, Google-Pixel-Watch, iPhone x3, Lindsays-MBP, MacBook-Air, motorola-edge-2026 x2, MYCAR, onn-8-Tablet, patricia-a-s23, PGP-15054-WM, Pixel-7a x3, Pixel-Watch-3 x2, Renee's-iMac, RokuExpress4K, unknown_24:fd:fa:... , unknown_ce:6e:24:... , unknown_eee0:9a:3d:49:72. NO raspberrypi visible. Human says the Lander is switched off, and does not know how to find whether the router is WPA2, WPA3 or mixed.
+
+**Desi:** **No `raspberrypi` in what you've shown** — but both lists scroll, so it could be further down. Two ways to spot it, since the robot is off and would be under **Offline**:
+
+- **Named** `raspberrypi`, or
+- **A MAC address starting with** `d8:3a:dd`, `2c:cf:67`, `e4:5f:01`, `dc:a6:32`, or `b8:27:eb`. Those are Raspberry Pi hardware prefixes. Note that `dc:91:bf` is **not** one of them, despite looking close.
+
+If it's there, the robot joined your network and we know it works. If it isn't anywhere, it never joined.
+
+**Tomorrow answers it either way, without any more commands:** switch the robot on. If it joins, it appears in this list and we have an address. If it can't, the `HW-` hotspot comes back by itself. One power switch, ten minutes, no typing.
+
+**And your WPA question:** in that same admin page, left-hand menu → **Wi-Fi**. There'll be a security setting somewhere on that page — you're looking for the words **WPA2**, **WPA3**, or "WPA2/WPA3 mixed". **Read it, don't change it** — changing it would knock every device in your house off the network for a few minutes. I only want to know the value, because WPA3-only would explain a Pi failing to join and a wrong password wouldn't.
+
+It's half past eleven and the robot's charging. That's enough for tonight.
