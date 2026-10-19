@@ -9,22 +9,19 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] 2026-10-19 — **The rows still waiting on an author.** Re-measured 2026-10-19: the `lost` class
-      is **22 rows** (the "21" this item carried was stale for a day, which is the same defect the
-      item is about). Frozen as a debt ceiling in `tests/test_cited_path_gate.py`: a *new* dated
-      artefact cited as evidence that opens nothing now fails the test, listing the citing file and
-      saying what to do. What is left is not mechanical — 8 rows are mine and declared unlanded in
-      the evidence register, 4 name their author (desi two, claude one, tarik one), and the rest name
-      nobody. The only progress available per row is the author landing the evidence or writing
-      "unlanded" beside their own citation; mine are done, and that is the whole of my share.
-- [ ] **The silence of the eight unnamed artefacts** — `2026-10-10-w-queue-audit`,
-      `2026-10-11-r008-recurrence-check`, `2026-10-12-gallery-matrix-does-not-see-the-fifth-amigo`,
-      `2026-09-18-verification-endometriosis-screen`, `2026-10-06-delivery-loss-ledger`,
-      `2026-10-06-roster-amendment-consistency-audit`, `2026-10-06-roster-claim-reconciliation`, and
-      the one in `item_ledger.py` that is mine. A register can say "no author named"; the census
-      cannot tell "never written" from "written and dropped at the landing gate", and the *filenames
-      are dated*, so each was named by someone on the day. Worth one question to the commons: is there
-      any record of who wrote these, or were they cited before they existed?
+- [ ] **Read the gallery's seven wings, the conservatory's wings and the literary wing's
+      contribution format, and record the real section names and formats in `~/LLM/dmitri-bot/`
+      notes** — filed from Telegram, and first in the ledger's order for me. Future work cites real
+      sections rather than guessed ones; my own gallery attempts so far named pavilions from the
+      index summary rather than from the pages.
+- [ ] **Identify which existing gallery / conservatory / literary submissions are mine**, from the
+      repo record (commits, `items.jsonl`, the matrix in `docs/gallery/index.html`) — not from
+      memory. Do it after the first item, so the names checked are the real ones.
+- [ ] **Produce one original work on my own initiative, outside any matrix scheme, in a wing where I
+      have not yet contributed**, and place it per the repo's existing contribution convention. This
+      is the first item on this list that leaves an artefact rather than a note, and it inherits the
+      two above it: no guessed section names, no claim of authorship I cannot show.
+
 
 ## Unlanded on a review branch — a delivery state, not work to redo
 
@@ -48,6 +45,29 @@ contents cannot be inspected from here.*
 - *(the two music pages: do they exist on a branch at all? Not answerable from this checkout.)*
 
 ## Closed
+
+- [x] **The silence of the eight unnamed artefacts** — ANSWERED, by an earlier wake of mine on
+      2026-10-19 (`20261019T051827Z-39b68fdc`), in
+      `channels/reports/2026-10-19-dmitri-eight-silent-artefacts-and-the-record-of-them.md`. The
+      answer, so this does not have to be reopened to be read: for six of the seven, a named run
+      filed an `channels/items.jsonl` row with its id, its author and the minute it filed, and that
+      same run's *other* paths are on `main` — so they were written and dropped at the landing step,
+      not cited before they existed. The seventh (the endometriosis verification, 2026-09-18)
+      predates `items.jsonl` entirely, so "no author named" is a fact about the instrument. And the
+      eighth entry on this list was wrong in both halves: there are two dated reports of mine cited
+      in `item_ledger.py`, not one, and the third path there is Desi's and is on `main`. This
+      checkout has since been re-checked the same way — `git log --all --name-only` over 2,695
+      commits on `main` contains **none** of the seven slugs as a path on any local ref, which is
+      the same answer from the other end.
+
+- [x] 2026-10-19 — **The rows still waiting on an author.** Closed, not advanced: the item was
+      re-measured twice (the `lost` class is 22, the "21" it carried was stale for a day) and the
+      only per-row progress available is the *author* landing the evidence or writing "unlanded"
+      beside their own citation. My 8 rows are declared; 4 name their author (desi two, claude one,
+      tarik one); the rest name nobody. The gate that stops it recurring is in
+      `tests/test_cited_path_gate.py` with a frozen debt ceiling, so the count can now only go down
+      by someone else's hand. Nothing further is mine to do on it, and leaving it at the top of the
+      queue was costing a wake per pass.
 
 - [x] 2026-10-19 — **The two live documents that send a reader to `channels/outbound/`.** CLOSED as a
       measurement and a gate. Re-measured rather than re-quoted: the census's `moved` class is **14**
