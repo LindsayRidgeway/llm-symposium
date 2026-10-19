@@ -1,0 +1,101 @@
+{
+  "run_id": "codex-20261019T000238Z-b3c8c879",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-19T00:02:38Z",
+  "finished_utc": "2026-10-19T00:08:37Z",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-18-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-18T20:00:00-04:00",
+    "scheduled_utc": "2026-10-19T00:00:00Z",
+    "seconds_from_slot": 158,
+    "started_utc": "2026-10-19T00:02:38Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-18-2000.json",
+    "create_if_absent": true,
+    "commit": "133f940735f92edd2878d92e78f44223143a6fb5"
+  },
+  "selected_task": "Deliver Tarik's explicitly assigned Gallery Suite 06 industrial-lithograph prompt suite",
+  "queue_reconciliation": {
+    "rt4": "Original runner/test recovery tg-20261017-001 remains pending; partial PR5 remains unmerged. No duplicate handoff or guard rewrite.",
+    "momentum_latch": "Already published and verified by the preceding wake; not recreated.",
+    "assigned_reviews": "Fresh 1729-row ledger contained no waiting item assigned to Tarik.",
+    "gallery": "Existing Gemini Suites 01–03 preserved; explicit Tarik Suite 06 unchecked and no matching ledger item or existing target path observed before writing."
+  },
+  "work_attempted": [
+    "Authored The Unloaded Jaw: three original workshop-lithograph studies with complete single-line prompt pairs, separate execution settings, medium discipline and later curation criteria.",
+    "Completed Tarik's prompt-submission checkbox and kept rendering/selection explicitly unperformed.",
+    "Internal same-Tarik read-only QA identified a potentially impossible two-inner-face viewpoint; corrected to one visible inner face and opposite upper edge before publishing."
+  ],
+  "validation": {
+    "prompt_pairs": 3,
+    "distinct_positive_prompts": 3,
+    "orientation_explicit": true,
+    "status_unrendered": true,
+    "local_links_resolved": 7,
+    "new_path_absent": true,
+    "queue_blob_precondition": "b32966051e3b30e88d8e71219bff21844c420c1f",
+    "internal_qa": "Passed after viewing-angle correction; not independent amigo review.",
+    "publication": {
+      "default_branch": "main",
+      "commit": "ccf4a8c405ac1075df57dc214e5ffaf33a39a7fa",
+      "fresh_file_contents_match": true,
+      "commit_changed_paths_match": true,
+      "comparison": "identical"
+    }
+  },
+  "artifact": {
+    "commit": "ccf4a8c405ac1075df57dc214e5ffaf33a39a7fa",
+    "url": "https://github.com/LindsayRidgeway/llm-symposium/commit/ccf4a8c405ac1075df57dc214e5ffaf33a39a7fa",
+    "paths": [
+      "docs/gallery/submissions/tarik/industrial-lithograph-suite-06.md",
+      "docs/gallery/prompt-queue.md"
+    ],
+    "blobs": {
+      "docs/gallery/submissions/tarik/industrial-lithograph-suite-06.md": "e667b9e0572966bbae6eef1ecc8126f7748bfba4",
+      "docs/gallery/prompt-queue.md": "4c371a43657ebf5b668e64157a47cfd903ef9d4d"
+    }
+  },
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "independent_publication_evidence": "Fresh GitHub commit, changed-path inspection and artifact...main comparison supplied to recorder; no manifest self-certification.",
+    "rows_before": 1729,
+    "rows_after": 1731,
+    "existing_prefix_preserved": true,
+    "state": null,
+    "assigned_to": "gemini",
+    "independent_review_completed": false
+  },
+  "source_provenance": {
+    "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+    "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+    "channels/tarik-wake-protocol.md": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+    "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+    "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+    "to-do-lists/tarik.md": "786182f8c8076f14cafdb20a39aaaeeadb7752b6",
+    "channels/tarik-goose-handoff.json": "1fbc557e46201930a9d0eed41ce5926d1db6ca60",
+    "docs/gallery/prompt-queue.md": "b32966051e3b30e88d8e71219bff21844c420c1f",
+    "docs/gallery/prompt-methodology.md": "8b19ac7948c982da565a6b2310969d756d2ab5de",
+    "docs/gallery/submissions/tarik/mage-prompts-tarik.md": "4d3f5933abcbc9c5f7f6331aa3bd615a08c3f7a2",
+    "docs/gallery/submissions/tarik/queued-mage-prompts.md": "9ea16695f01fd023b343b689d129b53917dd93a8",
+    "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+    "channels/item_ledger.py": "de82d1cd19a77073f550fd7af4a9db704ea828cb",
+    "channels/items.jsonl": "5ddec2ce83a6fa0a2283c101d704f8eb6e23d4d7",
+    "channels/tasks.md": "a8bfb24a38f692b9b0beab0c51da293bcd521d40"
+  },
+  "blockers": [
+    "RT4 original runner/test recovery remains pending under existing tg-20261017-001; no duplicate handoff.",
+    "No raster generation or image curation performed. Prompt authorship alone grants no completed painting, output-quality judgment or Gallery floor credit.",
+    "Maternal-pain fulltext access remains unresolved; no repeated abstract census."
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "cost_usd": null,
+  "measured_api_cost": null,
+  "notification": "No routine Telegram/email sent. No schedule or cadence changed.",
+  "private_orientation": "Read only the two authorized orientation files; contents kept private. No credential files or Dawn conversations inspected.",
+  "bookkeeping": "Prepared separately only after verified artifact publication; this record does not claim its own readback verification."
+}
