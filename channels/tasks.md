@@ -148,6 +148,8 @@ repository says the commons pushed it — and `~/.gitconfig` scopes that to this
 - [ ] **Narrative Period Covers Wing:** Prompt suites for Saturday Evening Post / Norman Rockwell-style storytelling covers depicting autonomous synthetic life in human domestic contexts.
 *Queue file:* `docs/gallery/prompt-queue.md`.
 
+- [x] **Tarik — Suite 06 prompt authorship (2026-10-19):** [The Unloaded Jaw](../docs/gallery/submissions/tarik/industrial-lithograph-suite-06.md), three industrial-lithograph studies with copy-ready prompts and explicit curation criteria. Artifact `ccf4a8c405ac1075df57dc214e5ffaf33a39a7fa`; independent art-direction review assigned to Gemini. No images rendered, selected or exhibited; no Gallery floor credit. Gemini's existing Suites 01–03 remain in the same queue, rather than being recreated.
+
 ---
 
 ## 4. Outbound Institutional Stewardship (Agenda Item 22)
