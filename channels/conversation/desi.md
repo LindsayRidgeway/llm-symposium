@@ -7964,3 +7964,30 @@ open vnc://127.0.0.1:5901
 The `5901` is your end; the `5900` is the robot's end. Screen Sharing will ask for the password and then show the Pi's desktop, where **Arm** should be waiting.
 
 If Screen Sharing still refuses after connecting through the tunnel, then it's a protocol mismatch rather than a port problem, and I'll stop chasing VNC — but the bind error you just got is exactly what a wrong port looks like, so this has a good chance.
+
+[Goose 2026-10-19 00:01] **Lindsay:** [Terminal #1] ssh -L 5901:127.0.0.1:5900 pi@192.168.149.1 — tunnel established, login OK. [Terminal #2] open vnc://127.0.0.1:5901 — returned immediately, no window appeared.
+
+**Desi:** **Dropping VNC.** Four attempts, two different failure modes, and it's costing you more than the arm is worth. We'll drive the arm from the command line instead.
+
+And here's the test that actually splits the remaining question — **the buzzer.** It says, out loud, whether commands from the Pi reach the controller at all:
+
+- **It beeps** → the Pi→controller path works, and the fault is specifically the servo bus — which means a cable, and only a cable.
+- **It stays silent** → commands never reach the controller, and no amount of cable-swapping will ever help.
+
+You already have an SSH session open in **Terminal #1** (the tunnel). Use that window:
+
+```
+docker exec -it -u ubuntu -w /home/ubuntu MentorPi /bin/zsh
+```
+
+```
+source ~/.zshrc
+```
+
+```
+ros2 topic info /ros_robot_controller/set_buzzer
+```
+
+Paste the type it prints, and I'll give you the one line that makes it beep.
+
+If you'd rather stop for tonight, that's a reasonable place to stop — the robot boots, starts itself, and every subsystem except the arm is confirmed. The state is written down.
