@@ -445,11 +445,24 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
 
 
 def append(records: list[dict], path: Path = LEDGER) -> None:
+    """Append rows, stamping each with the moment the ledger learned it.
+
+    `filed_utc` and `state_utc` answer *when did this happen*; `recorded_utc` answers a
+    different question — *when did the record learn it* — and only the second one can place a
+    row that is written after the run it describes (`--collect` of a finished run, a
+    `--backfill`, the recovery pass). Without it the 24-hour census cannot tell "this happened
+    before A" from "we learned of it after A": measured 2026-10-19, the window A→B grew by 32
+    items while its trail could place only 18, and four more were masked because an in-window
+    close carried them to the right answer (channels/reports/2026-10-19-desi-status-audit-b.md).
+    """
     if not records:
         return
     path.parent.mkdir(parents=True, exist_ok=True)
+    recorded = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     with path.open("a", encoding="utf-8") as fh:
         for rec in records:
+            if not rec.get("recorded_utc"):
+                rec = {**rec, "recorded_utc": recorded}
             fh.write(json.dumps(rec, sort_keys=True) + "\n")
 
 

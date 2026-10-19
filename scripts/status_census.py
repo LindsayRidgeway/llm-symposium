@@ -149,12 +149,12 @@ def transitions(evs: dict[str, list[dict]], a: str, b: str) -> list[dict]:
     return sorted(out, key=lambda t: t["ts"])
 
 
-def validate(evs, a, b, census_a, census_b) -> list[dict]:
+def validate(evs, a, b, census_a, census_b, trail=None) -> list[dict]:
     """Apply the logged transitions to census A; any item that disagrees with census B is a hole."""
     predicted = dict(census_a)
     for item in set(census_a) | set(census_b):
         predicted.setdefault(item, ABSENT)
-    for t in transitions(evs, a, b):
+    for t in (trail if trail is not None else transitions(evs, a, b)):
         predicted[t["id"]] = t["to"]
     bad = []
     for item in set(predicted) | set(census_b):
@@ -163,6 +163,59 @@ def validate(evs, a, b, census_a, census_b) -> list[dict]:
         if want != got:
             bad.append({"id": item, "predicted": got, "counted": want})
     return sorted(bad, key=lambda x: x["id"])
+
+
+def write_times(rows: list[dict]) -> dict[str, str]:
+    """When the ledger says it *learned* of each item — the latest `recorded_utc` per id.
+
+    Event time (`filed_utc`, `state_utc`) answers *when did this happen*; `recorded_utc`
+    answers *when did the record learn it*. Rows written before 2026-10-19 carry no stamp and
+    are absent here — that is the whole reason the first 24-hour window failed, and naming it
+    is more useful than pretending the two clocks are the same one.
+    """
+    out: dict[str, str] = {}
+    for r in rows:
+        rec = _ts(r.get("recorded_utc"))
+        if rec and rec > out.get(r["id"], ""):
+            out[r["id"]] = rec
+    return out
+
+
+def arrivals(rows: list[dict], evs: dict[str, list[dict]], a: str, b: str,
+             census_a: dict[str, str]) -> list[dict]:
+    """Items the ledger learned about inside (a, b], placed at the minute it was written.
+
+    Only for items that were not in census A: an item already counted at A that merely
+    received a later row is a status change, and `transitions()` owns it.
+    """
+    out = []
+    for item, when in write_times(rows).items():
+        if a < when <= b and item not in census_a and item in evs:
+            out.append({"id": item, "ts": when, "from": ABSENT, "to": status_at(evs, b),
+                        "actor": "ledger", "kind": "recorded"})
+    return sorted(out, key=lambda t: t["ts"])
+
+
+def classify(census_a: dict[str, str], census_b: dict[str, str], trail: list[dict]) -> dict:
+    """Split every item that appeared between A and B by how the trail places it.
+
+    placed    — an arrival the trail records, either from `recorded_utc` or an in-window filing
+    masked    — NOT in A, but carried to the right answer by an in-window transition on an item
+                the census never counted; validation alone says PASS for these, which is the
+                defect this function exists to make visible
+    unplaceable — no arrival anywhere in the trail: the record cannot say when it entered
+    """
+    arriving = {t["id"] for t in trail if t["from"] == ABSENT}
+    touched = {t["id"] for t in trail}
+    out: dict[str, list[str]] = {"placed": [], "masked": [], "unplaceable": []}
+    for item in sorted(set(census_b) - set(census_a)):
+        if item in arriving:
+            out["placed"].append(item)
+        elif item in touched:
+            out["masked"].append(item)
+        else:
+            out["unplaceable"].append(item)
+    return out
 
 
 def main() -> int:
@@ -213,19 +266,31 @@ def main() -> int:
             d = nb[k] - na[k]
             print(f"  Status {k}  {na[k]:4d} -> {nb[k]:4d}   {d:+d}")
         ts = transitions(evs, A, B)
-        print(f"\naudit trail: {len(ts)} transition(s)")
+        late = arrivals(rows, evs, A, B, ca)
+        trail = sorted(ts + late, key=lambda t: t["ts"])
+        print(f"\naudit trail: {len(trail)} transition(s)"
+              + (f" — {len(late)} of them placed by the ledger's write clock" if late else ""))
         by_actor: dict[str, int] = {}
-        for t in ts:
+        for t in trail:
             by_actor[t["actor"]] = by_actor.get(t["actor"], 0) + 1
         print("  by amigo: " + ", ".join(f"{k} {v}" for k, v in sorted(by_actor.items(), key=lambda x: -x[1])))
-        for t in ts:
+        for t in trail:
             print(f"    {t['ts']}  {t['id']}  {t['from']} -> {t['to']}  by {t['actor']} ({t['kind']})")
-        bad = validate(evs, A, B, ca, cb)
+        bad = validate(evs, A, B, ca, cb, trail)
+        split = classify(ca, cb, trail)
         print(f"\nvalidation: {'PASS' if not bad else 'FAIL'} — "
-              f"{len(ts)} transitions explain {sum(1 for _ in ts)} status changes")
+              f"{len(trail)} transitions, {len(split['placed']) + len(split['masked']) + len(split['unplaceable'])} "
+              f"item(s) appeared between A and B")
         for b in bad:
-            print(f"  UNACCOUNTED {b['id']}: predicted Status {b['predicted']}, counted Status {b['counted']}")
-        return 0 if not bad else 1
+            print(f"  UNPLACEABLE {b['id']}: no transition reaches it; counted Status {b['counted']}")
+        for item in split["masked"]:
+            print(f"  MASKED ARRIVAL {item}: not counted at A, counted {cb[item]} at B, and the trail "
+                  f"reaches it only through a transition on an item A never had")
+        stamped = sum(1 for r in rows if r.get("recorded_utc"))
+        print(f"\nledger clock: {stamped}/{len(rows)} rows carry recorded_utc (write time). "
+              f"Rows without it cannot be placed in any window; they are the only rows that can "
+              f"fail this audit from 2026-10-19 forward.")
+        return 0 if not bad and not split["masked"] else 1
 
     when = a.at or now
     c = census(rows, when)
