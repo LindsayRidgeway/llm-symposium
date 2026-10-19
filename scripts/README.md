@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*100 scripts, generated from the tree, not by hand.*
+*104 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -45,7 +45,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-12 | [Triage the `drafts/tick-*` review pile against `main`.](draft_triage.py) |
 | 2026-09-30 | [Fetch full patent document text from Google Patents for a set of publication numbers.](draftkings_patent_text.py) |
 | 2026-09-30 | [Fetch DraftKings patent records from Google Patents, for agenda item 27.](draftkings_patents.py) |
-| — | [Is the Gemini-app Drive bridge still delivering? — a read of the letterbox, not of the script.](drive_bridge_status.py) |
+| 2026-10-19 | [Is the Gemini-app Drive bridge still delivering? — a read of the letterbox, not of the script.](drive_bridge_status.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
@@ -63,6 +63,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |
 | 2026-10-17 | [Reconcile what a wake *said* it landed with what its landing commit *did*.](landing_reconcile.py) |
+| 2026-10-19 | [Reconcile the landing refusals — which refused runs are still refused.](landing_refusals.py) |
 | 2026-10-19 | [Landing preflight for the *failure* gate: run the suite before the wake ends.](landing_suite_check.py) |
 | 2026-10-10 | [Why a landing is refused, path by path, with the one safe command for each.](landing_tree_report.py) |
 | 2026-10-14 | [Recover item-ledger rows a failed landing threw away, from the run's own patch.](ledger_row_recovery.py) |
@@ -72,6 +73,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-10 | [Widened reproducible PubMed search for agenda item 24 — the one the item asked for next.](maternal_pain_widened_search.py) |
 | 2026-09-09 | [Produce amigo contributions to the 4x7 gallery matrix, each runner cycle.](matrix_producer.py) |
 | 2026-10-11 | [Pull the primary studies behind the heaviest rows of the mcr-colistin seed table.](mcr_colistin_primary.py) |
+| 2026-10-19 | [Does a seed row's positive count survive the primary's own numbers?](mcr_numerator_check.py) |
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |
@@ -79,6 +81,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-09 | [The monthly price band — who is cheap *this month*, so assignment never hardcodes it.](price_band.py) |
 | 2026-10-17 | [Give Tarik a review: mirror the ledger items assigned to him into the queue his body claims.](queue_review_handoff.py) |
 | 2026-10-16 | [File one verified Codex wake in the existing item ledger, awaiting review.](record_codex_wake.py) |
+| 2026-10-19 | [What the failure gate blamed, and whether the blame survives a second look.](refusal_causes.py) |
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
 | 2026-10-18 | [Resolve an append-only ledger's merge conflict by **union**, not by choosing a side.](repair_ledger_conflicts.py) |
@@ -95,6 +98,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-12 | [Agenda item 30, step (2): pull the four papers the seed names as open and turn](sleep_cognition_epilepsy_ied_fulltext.py) |
 | 2026-10-17 | [Re-measure the reachability catalogue, and report what CHANGED since it was measured.](source_drift.py) |
 | 2026-10-17 | [Status census and audit — two counts 24 hours apart, and a log that must explain the difference.](status_census.py) |
+| — | [Does the custodian briefing still describe a world that exists? — the two lifespans, checked.](succession_check.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-10-15 | [Preservation check: is the commons still in Software Heritage, and how fresh is the copy?](swh_status.py) |
 | 2026-10-16 | [Tarik-only cloud transport. Telegram sends only; mail sync records, never replies.](tarik_cloud_transport.py) |
