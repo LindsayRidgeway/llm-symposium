@@ -20,7 +20,7 @@ elevation a reaches the deck at horizontal distance h_c*cot(a). So the sun's dis
 spans elevations [e-theta, e+theta], theta = 0.266 deg being the solar angular radius —
 paints the cloud plane over the interval
 
-    [D_lo, D_hi] = [h_c*cot(e+theta), h_c*cot(e-theta)],      width W = 13.06 m at h_c = 250 m.
+    [D_lo, D_hi] = [h_c*cot(e+theta), h_c*cot(e-theta)],      width W = 12.97 m at h_c = 250 m.
 
 A single straight edge of cloud at cloud-plane distance A throws its shadow on the ground at
 ground distance A - h_c*cot(e); the *penumbra* is the interval the disc paints, and its full
@@ -42,16 +42,16 @@ The chosen sky
 --------------
 Latitude 55.75 N, solar declination -9.2 deg (mid-October) gives a noon elevation of
 e = 90 - 55.75 - 9.2 = 25.05 deg. With h_c = 250 m — a low winter stratocumulus base —
-h_c*cot(e) = 535.2 m. The hole in the deck is placed at cloud-plane distance [530, 556] m,
-which puts the near edge of the light at ground distance -5.2 m (behind the camera, so the
-foreground of the plate is fully sunlit) and the far edge at 20.8 m, with its penumbra
-running from 14.3 m to 27.4 m. The near edge of a lit patch is therefore *behind* the
+h_c*cot(e) = 534.9 m. The hole in the deck is placed at cloud-plane distance [530, 556] m,
+which puts the near edge of the light at ground distance -4.9 m (behind the camera, so the
+foreground of the plate is fully sunlit) and the far edge at 21.1 m, with its penumbra
+running from 14.6 m to 27.6 m. The near edge of a lit patch is therefore *behind* the
 viewer, which is why this plate shows one edge and not two, and why the bright band does not
 run out of frame.
 
-The sun itself: the camera's own line of sight to the sun crosses the deck at 535.2 m,
+The sun itself: the camera's own line of sight to the sun crosses the deck at 534.9 m,
 inside the hole [530, 556] — so the sun *is* visible from the camera, and is drawn, at a
-drawn radius of f*tan(theta) = 4.41 px. It is a small hole: 1.06 deg tall against a solar
+drawn radius of f*tan(theta) = 4.42 px. It is a small hole: 1.04 deg tall against a solar
 diameter of 0.53 deg, so the disc sits in it with about a quarter of a degree of margin.
 
 What is not modelled, said rather than hidden
@@ -74,6 +74,15 @@ and the sunlit snow comes out warm white. The ratio between them is E_sky/(E_dir
 E_sky), a stated number, not a taste.
 
 Pure standalone SVG output; deterministic, no RNG, no clock, no external assets.
+
+A note on the numbers above (2026-10-19). This prose used to quote 535.2 m, W = 13.06 m,
+edges at -5.2 m and 20.8 m, and a 1.06 deg hole. The code never produced those figures and
+the plate never printed them either — the annotation on the SVG has always read 12.97 m,
+-4.9 m, 21.1 m, computed at draw time. So the picture was right and its method statement was
+wrong, which is the worse way round: a reader checking the claim against the prose would have
+found the prose alone. Every figure in this docstring is now recomputed from the constants it
+names, and `tests/test_gallery_russian_realism_dmitri.py` regexes them out of this docstring
+and asserts each one against the functions, so the two cannot drift apart again in silence.
 """
 
 from __future__ import annotations
