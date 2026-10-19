@@ -8282,3 +8282,26 @@ My guess is the SSID. You typed `RidgewayFIOS` from memory, and Verizon routers 
 Paste that page and we'll know.
 
 And if you'd rather stop: the robot is on, `HW-` is up, and everything we've done tonight still holds. The LAN mode can wait for another day — it was a convenience, not a requirement.
+
+[Goose 2026-10-19 03:50] **Lindsay:** [Router Primary Network page screenshot] Wi-Fi Name: RidgewayFiOS (confirmed, matches what was put in the robot). Wi-Fi Password: masked, eye icon present. Wi-Fi Enabled. 2.4 GHz enabled, 5 GHz enabled, 6 GHz disabled. No WPA mode shown on this page. Human asks whether SSIDs are case-insensitive. Note: ~/wifi_manager/wifi.log exists and would contain the failed join attempt.
+
+**Desi:** **SSIDs are case-sensitive**, not insensitive — they're raw byte strings, so `RidgewayFiOS` and `ridgewayfios` would be two different networks. But you used the exact case: the router says **`RidgewayFiOS`** and that's what the robot was given. **So the name is not the problem**, and both bands are enabled, so that's not it either.
+
+Which leaves the password, the security mode, or something the robot logged and we haven't read.
+
+**Two things, in this order.**
+
+**1. Ask the robot why it failed.** It wrote it down — there's a `wifi.log` in the directory you were editing. On **HW-**:
+
+```
+ssh pi@192.168.149.1
+```
+```
+tail -40 wifi_manager/wifi.log
+```
+
+That log contains the join attempt and its error. It'll say either that it couldn't reach the network or that authentication failed — two different problems with two different fixes. **This is better evidence than anything on the router page.**
+
+**2. Then check the password.** Click the **eye icon** beside the Wi-Fi Password field on the router page and compare it with what you typed into the robot. **Don't paste me a screenshot of it** — just tell me whether it matches.
+
+On your WPA question: that page doesn't show the mode. The **cog icon** at the right-hand end of the "Wi-Fi Enabled" row, top right, is where I'd look — but only bother if the log points that way.
