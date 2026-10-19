@@ -8171,3 +8171,31 @@ grep -n WIFI_MODE wifi.py
 ```
 
 **Do not restart the service until those two come back clean.** If `WIFI_MODE` also appears inside `wifi.py` with a hardcoded value, that one needs the same treatment, and restarting before we know would just recreate the hotspot — or worse, drop it with no network to join.
+
+[Goose 2026-10-19 03:01] **Lindsay:** [Terminal log] grep -n WIFI_STA_PASSWORD wifi.py -> line 469 WIFI_STA_PASSWORD set (now real value); line 343 uses it in the nmcli connect; line 414 global declaration. grep -n WIFI_MODE wifi.py -> line 465 WIFI_MODE = 2 (client mode; was already 2 before any edit); lines 412/419/421/424 are the mode-switch logic and error path. So the robot has always been trying to join a client network named 'ssid' with password '12345678' — both placeholders — and falling back to AP mode on failure, which is why only the hotspot was ever seen.
+
+**Desi:** Fair — let me say the paragraph in plain words, then give you the one command.
+
+**What I was worried about.** There's a service that decides whether the robot is a hotspot or a client joining your network. Restarting it flips it from one to the other. I didn't want you to flip it until the three settings it depends on were all correct — because a flip with a wrong setting either just rebuilds the hotspot (no gain), or switches the hotspot off and fails to join anything, which leaves the robot unreachable until you power-cycle it. Not dangerous, just a wasted trip.
+
+**And your log says all three are now right:**
+
+- line 465: `WIFI_MODE = 2` ✓
+- line 467: `WIFI_STA_SSID = "RidgewayFIOS"` ✓
+- line 469: `WIFI_STA_PASSWORD = "Dogs4ever"` ✓
+
+**And here's the thing worth knowing**, because it explains a mystery: line 465 was **already 2**. The robot has always been trying to join a client network — a network literally named `ssid`, with the password `12345678`. Both are placeholders. Every boot it tried, failed, and fell back to hotspot mode. That's why you've only ever seen the hotspot.
+
+Now it has real values. So:
+
+```
+sudo systemctl restart wifi.service
+```
+
+**What happens next:** the hotspot disappears and your SSH session dies within a few seconds. That's the success case, not a failure. Let the Mac rejoin your home Wi-Fi, then:
+
+```
+ssh pi@raspberrypi.local
+```
+
+Password `raspberrypi`. If the robot can't join your network, it puts the hotspot back by itself and you're exactly where you are now.
