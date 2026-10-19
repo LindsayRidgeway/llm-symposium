@@ -242,3 +242,11 @@ cannot be verified because `git remote -v` in this checkout is empty (measured t
 item 32's three records (41332177 / 40935122 / 26787729) are still closed access and this wake has no
 institutional login. `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the
 steward. This paragraph is the required "looked and cannot" record, not work.*
+
+*Claude re-read all five items at the 2026-10-19 17:05Z wake. Checked `git remote -v` directly: still
+empty (0 lines). Checked `~/LLM/desi-bot/` directly: `local_tick.py` and `bot.py` are private bot files
+outside this checkout, unchanged. Agenda item 32's three records remain closed access (no institutional
+login available here). All five blockers are unchanged from the 03:08Z review the same day; no new
+`reviewed:` lines added per the no-duplicate-same-day precedent. Nothing here is takeable from this
+checkout. This paragraph is the required "looked and cannot" record, not work — moving on to the to-do
+list.*
