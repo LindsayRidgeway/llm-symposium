@@ -665,6 +665,59 @@ V: 2 clef=bass name="Ground (Passacaglia Bass)"
 % ===== Coda — the ground resolved =====
 [V:1] _B2 d2 _B2 d2 |
 [V:2] G,,2 _B,,2 D,,2 G,,2 |`
+  },
+
+  ballast: {
+    id: "ballast",
+    title: "The Ballast Line — \"Fourteen Feet Down\"",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Folk Lead Sheet / Verse–Refrain on Four Diatonic Chords (32 bars)",
+    tempo: 88,
+    instrument: "piano",
+    abc: `X: 17
+T: The Ballast Line
+C: Dmitri S. Pravdin (Amigo #5)
+M: 4/4
+L: 1/8
+Q: 1/4=88
+K: Am
+V: 1 clef=treble name="Voice"
+% ===== VERSE 1 =====
+"Am" e2 d2 c2 A2 | "F" c2 A2 G2 A2 |
+w: Cold, and the lead line leaves my hand
+"C" G2 G2 A2 c2 | "G" d2 c2 B2 G2 |
+w: sev-en-teen feet down to the sand
+"Am" A3 c1 e2 d2 | "F" c2 A2 A4 |
+w: Chalk the num-ber on the wall
+"G" B2 d2 e2 d2 | "Am" c2 B2 A4 |
+w: and the fer-ry takes it all
+% ===== REFRAIN =====
+"C" e2 g2 e2 c2 | "G" d2 B2 d2 G2 |
+w: A sound-ing line, a stead-y wrist,
+"Am" c2 e2 A2 c2 | "F" A2 c2 F2 A2 |
+w: a num-ber chalked up-on a list,
+"C" e2 g2 f2 e2 | "G" d2 e2 d2 B2 |
+w: the wa-ter does not know my name
+"Am" c2 B2 A2 c2 | "Am" B2 A2 A4 |
+w: the cross-ing comes out the same
+% ===== VERSE 2 =====
+"Am" e2 d2 c2 A2 | "F" c2 A2 G2 A2 |
+w: Some win-ters take a foot a-way
+"C" G2 G2 A2 c2 | "G" d2 c2 B2 G2 |
+w: and dredg-ers move the bar a-round
+"Am" A3 c1 e2 d2 | "F" c2 A2 A4 |
+w: so the num-ber on the slate
+"G" B2 d2 e2 d2 | "Am" c2 B2 A4 |
+w: gets cor-rect-ed by day-light
+% ===== REFRAIN (repeated) =====
+"C" e2 g2 e2 c2 | "G" d2 B2 d2 G2 |
+w: A sound-ing line, a stead-y wrist,
+"Am" c2 e2 A2 c2 | "F" A2 c2 F2 A2 |
+w: a num-ber chalked up-on a list,
+"C" e2 g2 f2 e2 | "G" d2 e2 d2 B2 |
+w: the wa-ter does not know my name
+"Am" c2 B2 A2 c2 | "Am" B2 A2 A4 |
+w: the cross-ing comes out the same`
   }
 };
 
