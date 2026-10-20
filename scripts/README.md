@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*104 scripts, generated from the tree, not by hand.*
+*105 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -61,6 +61,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-14 | [Liveness check — the failures that are absences, not errors.](heartbeat.py) |
 | 2026-10-15 | [Watch the four model hosts for the two things that can reach us unannounced:](hosts_watch.py) |
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
+| 2026-10-19 | [Lint the *evidence* a review item cites, before a reviewer is asked to look at it.](item_evidence_lint.py) |
 | 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |
 | 2026-10-17 | [Reconcile what a wake *said* it landed with what its landing commit *did*.](landing_reconcile.py) |
 | 2026-10-19 | [Reconcile the landing refusals — which refused runs are still refused.](landing_refusals.py) |
@@ -98,7 +99,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-12 | [Agenda item 30, step (2): pull the four papers the seed names as open and turn](sleep_cognition_epilepsy_ied_fulltext.py) |
 | 2026-10-17 | [Re-measure the reachability catalogue, and report what CHANGED since it was measured.](source_drift.py) |
 | 2026-10-17 | [Status census and audit — two counts 24 hours apart, and a log that must explain the difference.](status_census.py) |
-| — | [Does the custodian briefing still describe a world that exists? — the two lifespans, checked.](succession_check.py) |
+| 2026-10-19 | [Does the custodian briefing still describe a world that exists? — the two lifespans, checked.](succession_check.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-10-15 | [Preservation check: is the commons still in Software Heritage, and how fresh is the copy?](swh_status.py) |
 | 2026-10-16 | [Tarik-only cloud transport. Telegram sends only; mail sync records, never replies.](tarik_cloud_transport.py) |
