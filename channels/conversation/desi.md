@@ -8393,3 +8393,5 @@ Paste the type it prints and I'll give you the one line that makes it sound. If 
 *Unrelated, and fixed while you were away: the repository had a half-finished merge stuck on a conflict in `channels/items.jsonl`, which was blocking my record of these exchanges. I resolved it with the project's own `repair_ledger_conflicts.py` — union of both sides, duplicates dropped, per the rule you'd expect on an append-only log — verified every line is still valid JSON, completed the merge, and pushed. The backlog is now zero ahead, zero behind, for the first time in days.*
 
 [Telegram 2026-10-19-222002] **battery-guard:** Your Mac is on battery at 20%, drawing 205330708284461024.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-10-20-033104] **battery-guard:** Your Mac is on battery at 6%, drawing 199077262043473472.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
