@@ -1,0 +1,126 @@
+{
+  "artifact": "MCR seed row18 endpoint and sampling qualification",
+  "written_by": "Tarik S. Commons (OpenAI/Codex)",
+  "date": "2026-10-20",
+  "seed_row": "18",
+  "seed_claim": {
+    "denominator": 128,
+    "denominator_label": "isolates",
+    "numerator": 33,
+    "percent": 25.78,
+    "preserved": true
+  },
+  "primary": {
+    "title": "Assessment of the occurrence of MCR producing Enterobacteriaceae in Swiss and imported poultry meat",
+    "authors": [
+      "Katrin Zurfluh",
+      "Simone Buess",
+      "Roger Stephan",
+      "Magdalena Nüesch-Inderbinen"
+    ],
+    "year": 2016,
+    "pages": "137–141",
+    "doi_printed": "10.15436/JFST.1.4.5",
+    "url": "https://www.openaccessjournals.siftdesk.org/articles/pdf/Assessment-of-the-occurrence-of-MCR-producing-Enterobacteriaceae-in-Swiss20161221023738.pdf",
+    "retrieved_utc": "2026-10-20T20:11:26Z",
+    "pdf_bytes": 1059329,
+    "pdf_sha256": "2dfd100225d9b482bc8805d08dcb6f96a8449506ffff2726fdc721ea2ab3e19c",
+    "identity_status": "Full publisher PDF title/authors/printed DOI agree with seed reference; resolver returned404, Crossref title/DOI matched."
+  },
+  "collection": {
+    "start_month": "2016-08",
+    "end_month": "2016-09",
+    "unit": "different fresh retail poultry meat products",
+    "total": 128,
+    "chicken": 108,
+    "turkey": 20,
+    "retail_locations": [
+      "Switzerland",
+      "Southern Germany"
+    ],
+    "origin_counts": {
+      "Switzerland": 40,
+      "Germany": 69,
+      "Hungary": 6,
+      "Denmark": 6,
+      "Austria": 2,
+      "Italy": 5
+    },
+    "sampling_frame": "Retail products mainly collected by consumer protection organisation Gesundheitstipp; probability selection of stores/products not established.",
+    "randomisation_caveat": "Random within-product portions do not establish random store/product sampling."
+  },
+  "endpoints": [
+    {
+      "id": "sample_associated_mixed_culture_mcr1_pcr",
+      "numerator": 33,
+      "denominator": 128,
+      "denominator_unit": "sample-associated cultures from fresh poultry meat products",
+      "event": "mcr-1 PCR positive in growth on initial selective medium after enrichment",
+      "positive_origins": {
+        "Germany": 28,
+        "Italy": 5
+      },
+      "not_equivalent_to": "33 confirmed E. coli isolates or direct-PCR positivity of untreated meat"
+    },
+    {
+      "id": "confirmed_ecoli_recovery",
+      "numerator": 12,
+      "denominator": 128,
+      "denominator_unit": "fresh poultry meat products",
+      "event": "pure mcr-1 E. coli culture recovered from a sample",
+      "positive_origins": {
+        "Germany": 10,
+        "Italy": 2
+      },
+      "by_product": {
+        "chicken": {
+          "positive": 7,
+          "total": 108
+        },
+        "turkey": {
+          "positive": 5,
+          "total": 20
+        }
+      }
+    },
+    {
+      "id": "pcr_positive_without_pure_ecoli_recovery",
+      "numerator": 21,
+      "denominator": 33,
+      "denominator_unit": "initial PCR-positive sample-associated cultures",
+      "event": "discarded during repeated subculture because of mixed Proteus growth",
+      "classification": "unrecovered positive cultures, not negative samples"
+    }
+  ],
+  "detection": {
+    "classification": "culture-enriched molecular screen followed by isolate recovery and characterisation",
+    "sequence": [
+      "enrichment and selective culture",
+      "mcr-1 PCR on bacteria from initial selective plates",
+      "subculture and colony PCR",
+      "sequence confirmation of the 12 recovered mcr-1 E. coli isolates",
+      "downstream susceptibility characterisation"
+    ],
+    "observed_variant": "mcr-1",
+    "additional_variants_absent": null,
+    "direct_meat_dna_screen": false
+  },
+  "inference_limits": [
+    "No representative national prevalence inferred from product-origin strata.",
+    "No transmission direction inferred from shared sequence types.",
+    "Sample-level screen and pure-isolate recovery must remain separate endpoints.",
+    "No seed counts or pooled totals changed."
+  ],
+  "locations": {
+    "sampling_methods": "p138",
+    "screen_and_recovery": "pp137–138",
+    "isolate_table": "p139",
+    "collector": "p140"
+  },
+  "corroboration": {
+    "url": "https://www.aramis.admin.ch/Dokument?DocumentID=46334",
+    "type": "primary investigator final report dated10April2017,section3.1.7",
+    "pdf_sha256": "2aa3d06c24639c8e7676f2ffac770da0f9968dc7a577e36f45619a366dc2d601"
+  },
+  "review_state": "waiting for independent amigo review"
+}

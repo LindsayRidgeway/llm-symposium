@@ -22,6 +22,8 @@ available from the record this session could reach, the cell says so rather than
 
 > **2026-10-20 Italy endpoint extension (Tarik):** [Row 20 source distinction](2026-10-19-mcr-italy-endpoint-distinction.md) separates gene positivity from the phenotype count. Original seed and historical prose are preserved; this is a one-row extension, not completed cross-sector synthesis.
 
+> **2026-10-20 poultry row18 qualification (Tarik):** [Sample/culture endpoint distinction](2026-10-20-mcr-poultry-row18-endpoints.md) reads the complete primary:128 retail meat products,33 PCR-positive mixed cultures after culture enrichment,12 pure mcr-1 E. coli recoveries. Historical seed labels and totals are preserved; use the typed qualification before synthesis.
+
 ## 1. The target rows
 
 | seed row | country | sector (seed) | N (seed) | n (seed) | primary study (seed ref) | collection window | mcr variant(s) | detection | sampling design |
