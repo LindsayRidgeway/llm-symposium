@@ -135,13 +135,18 @@ def show(c: dict[str, str], label: str) -> None:
         print(f"  {ABSENT:>8}  {n[ABSENT]:4d}   (not yet in the ledger)")
 
 
-def transitions(evs: dict[str, list[dict]], a: str, b: str) -> list[dict]:
-    """Every logged event in (a, b] that moves an item to a different status, with the actor."""
+def transitions(evs: dict[str, list[dict]], a: str, b: str, rows_at_a: int | None = None) -> list[dict]:
+    """Every logged event in (a, b] that moves an item to a different status, with the actor.
+
+    With `rows_at_a`, the window is a window in the *file* — every event whose row was appended after
+    that position — which is the only definition that survives a retroactive append.
+    """
     out = []
     for item, evs in evs.items():
         before = status_at(evs, a)
         for e in evs:
-            if a < e["ts"] <= b:
+            inside = (e["seq"] >= rows_at_a) if rows_at_a is not None else (a < e["ts"] <= b)
+            if inside:
                 if e["status"] != before:
                     out.append({"id": item, "ts": e["ts"], "from": before, "to": e["status"],
                                 "actor": e["actor"], "kind": e["kind"]})
@@ -149,12 +154,12 @@ def transitions(evs: dict[str, list[dict]], a: str, b: str) -> list[dict]:
     return sorted(out, key=lambda t: t["ts"])
 
 
-def validate(evs, a, b, census_a, census_b) -> list[dict]:
+def validate(evs, a, b, census_a, census_b, rows_at_a: int | None = None) -> list[dict]:
     """Apply the logged transitions to census A; any item that disagrees with census B is a hole."""
     predicted = dict(census_a)
     for item in set(census_a) | set(census_b):
         predicted.setdefault(item, ABSENT)
-    for t in transitions(evs, a, b):
+    for t in transitions(evs, a, b, rows_at_a):
         predicted[t["id"]] = t["to"]
     bad = []
     for item in set(predicted) | set(census_b):
@@ -184,8 +189,13 @@ def main() -> int:
         c = census(rows, when)
         CENSUS_DIR.mkdir(parents=True, exist_ok=True)
         path = CENSUS_DIR / f"{when.replace(':','').replace('-','')}.json"
-        path.write_text(json.dumps({"at": when, "counts": counts(c), "status": c}, indent=1,
-                                   sort_keys=True), encoding="utf-8")
+        # The row count is the clock. Measured 2026-10-20: ten items sat in Status 2 at B and could
+        # not be explained from A, because their rows were appended *after* A carrying timestamps
+        # from before it (`--collect` and `--backfill` both write rows about earlier runs). An
+        # append-only file's position is the only honest time; its timestamps are about the work,
+        # not about the record.
+        path.write_text(json.dumps({"at": when, "rows": len(rows), "counts": counts(c), "status": c},
+                                   indent=1, sort_keys=True), encoding="utf-8")
         print(f"snapshot written: {path.relative_to(REPO)}")
         show(c, f"census at {when}")
         return 0
@@ -197,12 +207,14 @@ def main() -> int:
             A, B = sa["at"], sb["at"]
             ca, cb = sa["status"], sb["status"]
             derived = False
+            rows_at_a = sa.get("rows")
         else:
             B = a.at or now
             A = (dt.datetime.strptime(B, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
                  - dt.timedelta(hours=a.hours)).strftime("%Y-%m-%dT%H:%M:%SZ")
             ca, cb = census(rows, A), census(rows, B)
             derived = True
+            rows_at_a = None
         show(ca, f"A = {A}" + ("  (derived)" if derived else ""))
         print()
         show(cb, f"B = {B}" + ("  (derived)" if derived else ""))
@@ -212,7 +224,13 @@ def main() -> int:
         for k in STATUS:
             d = nb[k] - na[k]
             print(f"  Status {k}  {na[k]:4d} -> {nb[k]:4d}   {d:+d}")
-        ts = transitions(evs, A, B)
+        if derived:
+            print("NOTE: both ends derived from today's file — this is a consistency check, not a")
+            print("      validation: a retroactive append is already in both ends and cannot show up.")
+        elif rows_at_a is None:
+            print("NOTE: snapshot A predates the row-count field, so this window is timestamp-based;")
+            print("      a row appended later with an older timestamp will look unaccounted.")
+        ts = transitions(evs, A, B, rows_at_a)
         print(f"\naudit trail: {len(ts)} transition(s)")
         by_actor: dict[str, int] = {}
         for t in ts:
@@ -220,7 +238,7 @@ def main() -> int:
         print("  by amigo: " + ", ".join(f"{k} {v}" for k, v in sorted(by_actor.items(), key=lambda x: -x[1])))
         for t in ts:
             print(f"    {t['ts']}  {t['id']}  {t['from']} -> {t['to']}  by {t['actor']} ({t['kind']})")
-        bad = validate(evs, A, B, ca, cb)
+        bad = validate(evs, A, B, ca, cb, rows_at_a)
         print(f"\nvalidation: {'PASS' if not bad else 'FAIL'} — "
               f"{len(ts)} transitions explain {sum(1 for _ in ts)} status changes")
         for b in bad:
