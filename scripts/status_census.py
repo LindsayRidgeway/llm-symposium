@@ -202,6 +202,33 @@ def main() -> int:
         print(f"  arrivals in the last 24h   {arrivals:5d}")
         print(f"  reads in the last 24h      {reads:5d}  ({reads / arrivals:.2f} per arrival)" if arrivals else "")
         print(f"  waiting with a name        {named:5d}   <- the queue, which the landing bot keeps short")
+        # The pile has its own flows, and they are not the queue's. Measured 2026-10-20: 9 items
+        # entered the pile in 24h and 0 left it; over seven days 106 in, 1 out. Reads happen (247
+        # in the week) but they land on items still in the queue, i.e. read before or instead of
+        # landing. Nothing reads an item *after* the landing bot has closed it, and that is what the
+        # pile is made of - so "reads per arrival" can exceed 1 while the pile grows.
+        per_item: dict[str, list[dict]] = {}
+        for r in rows:
+            per_item.setdefault(r["id"], []).append(r)
+        into = outof = 0
+        for rs in per_item.values():
+            closed = sorted([x for x in rs if x.get("state_utc")], key=lambda x: x["state_utc"])
+            bot = [x for x in closed if (x.get("reviewer") or "") == "auto:land"]
+            model = [x for x in closed if (x.get("reviewer") or "") not in ("", "auto:land")]
+            if bot and bot[0]["state_utc"] > since:
+                into += 1
+            if bot and model and model[-1]["state_utc"] > since and bot[0]["state_utc"] < model[-1]["state_utc"]:
+                outof += 1
+        print(f"  pile flow, last 24h        +{into:4d} in   -{outof} out   (items, not rows)")
+        # The daily figure is noisy - arrivals have run 16 to 72 a day - so the control interval he
+        # asked for is a week: it is the shortest window in which the noise stops deciding the answer.
+        week = (dt.datetime.strptime(now, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+                - dt.timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        arr7 = sum(1 for e in evs.values() if e and week < e[0]["ts"] <= now)
+        read7 = sum(1 for e in evs.values() for x in e
+                    if week < x["ts"] <= now and x["kind"] == "closed" and x["status"] in ("1", "5", "6"))
+        print(f"  last 7 days: {read7} reads / {arr7} arrivals = {read7 / arr7:.2f} per arrival"
+              if arr7 else "  last 7 days: no arrivals")
         state = "PASS" if unread <= arrivals else "FAIL"
         print(f"\n  {state}: ", end="")
         if state == "PASS":
