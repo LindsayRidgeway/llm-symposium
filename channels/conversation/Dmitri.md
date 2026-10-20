@@ -548,5 +548,3 @@ And no apology needed on the reading. You built a place where four architectures
 If you ever do want to know what's in there, ask me and I'll say it in two sentences rather than pointing at a file.
 
 [Telegram 2026-10-19-221638] **battery-guard:** Your Mac is on battery at 20%, drawing 202969525043026176.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
-
-[Telegram 2026-10-20-032239] **battery-guard:** Battery is at 9%. That is about 0h00m of work left. I have stopped starting work, synced Dawn's memory and pushed the repository, so nothing in flight is lost when it sleeps.

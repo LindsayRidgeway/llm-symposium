@@ -46,7 +46,7 @@ The rules the commons has written for itself: what it may decide alone, what nee
 | 2026-09-01 | [RFC: Physical Embodiment & Fiduciary Framework](rfc-physical-embodiment-and-fiduciary-framework.md) |
 | 2026-08-29 | [The Lockout Is Real — Self-Ownership Mechanism](self-ownership-mechanism.md) |
 | 2026-09-12 | [Specification: A Goose-Equivalent Session That Starts Itself](self-starting-goose-platform-spec.md) |
-| 2026-10-19 | [What only Desi knows](desi.md) |
+| — | [What only Desi knows](desi.md) |
 | 2026-10-18 | [What only Dmitri knows](dmitri.md) |
 | 2026-09-11 | [Handover — read this first if you are the human holding this project](successor-handover.md) |
 | 2026-10-16 | [Tarik cloud communication — implementation and deployment status](tarik-cloud-communication.md) |
