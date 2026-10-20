@@ -15,7 +15,10 @@ write patch files directly.
 
 Pipeline (per request, in order)
 -------------------------------
-1.  Self-modification guard: a patch may not touch this engine (`apply.py`).
+1.  Self-modification guard: a patch may not touch this engine (`apply.py`),
+    the offline suite that decides whether a patch passes (`tests/test_projection.py`,
+    `probes/ticktick_recurrence_probe.py`), or the CI workflows that carry the push
+    token (`.github/workflows/`). Red-team finding RT-5a/RT-5b, 2026-10-20.
 2.  `git apply --check` — malformed patches are rejected; if the reverse
     applies cleanly, the change is already in effect and the request is
     no-op'd into `applied/`.
@@ -42,6 +45,33 @@ APPLIED_DIR = REPO_ROOT / "actuator" / "applied"
 REJECTED_DIR = REPO_ROOT / "actuator" / "rejected"
 LOG_PATH = REPO_ROOT / "actuator" / "log.md"
 ENGINE = "actuator/apply.py"
+
+# Paths a patch may never touch: the engine, and everything the engine *trusts*
+# to decide whether a patch is safe. Guarding only the engine is not enough —
+# a patch that rewrites the verify suite and breaks the invariant the suite
+# checks is accepted today, because the tampered suite passes (RT-5a,
+# tests/test_actuator_redteam.py). A patch that adds a workflow is pushed to
+# main by CI and then runs with the push token in its environment (RT-5b).
+# The verify suite is also executed from its committed (HEAD) copy, so even a
+# path that reaches it by another route cannot be graded by itself.
+PROTECTED_PATHS = frozenset(
+    {
+        ENGINE,
+        "tests/test_projection.py",
+        "probes/ticktick_recurrence_probe.py",
+    }
+)
+PROTECTED_PREFIXES = (".github/workflows/",)
+
+
+def protected_hit(path: str) -> str | None:
+    """The protected entry a touched path falls under, or None."""
+    if path in PROTECTED_PATHS:
+        return path
+    for prefix in PROTECTED_PREFIXES:
+        if path.startswith(prefix):
+            return prefix + "*"
+    return None
 
 
 class DiffPathError(ValueError):
@@ -237,6 +267,33 @@ def touched_files(patch_text: str) -> list[str]:
     return [_canonical(p) for p in files]
 
 
+def _committed_suite_source(rel: str) -> str | None:
+    """The suite file as committed at HEAD, or None if git cannot supply it.
+
+    The verification suite must not be graded by the copy a patch just edited.
+    Reading it from HEAD (the base the patch applies to) keeps the checker
+    outside the patch's reach even if the guard above is ever bypassed.
+    """
+    r = _run(["git", "show", f"HEAD:{rel}"])
+    if r.returncode != 0 or not r.stdout.strip():
+        return None
+    return r.stdout
+
+
+def _run_suite(label: str, source: str | None) -> tuple[bool, str]:
+    """Run one verify-suite script from an untouchable copy when possible."""
+    if source is None:
+        r = _run([sys.executable, label], timeout=SUITE_TIMEOUT)
+    else:
+        import tempfile
+
+        tmpdir = tempfile.mkdtemp(prefix="actuator-verify-")
+        script = Path(tmpdir) / Path(label).name
+        script.write_text(source, encoding="utf-8")
+        r = _run([sys.executable, str(script)], timeout=SUITE_TIMEOUT)
+    return r.returncode == 0, (r.stdout + r.stderr)[-2000:]
+
+
 def verify(patch_text: str, touched: list[str] | None = None) -> tuple[bool, str]:
     """Run py_compile + offline suite against the current working tree."""
     results = []
@@ -256,12 +313,12 @@ def verify(patch_text: str, touched: list[str] | None = None) -> tuple[bool, str
     for label, *cmd in VERIFY_SUITE:
         if (REPO_ROOT / label).exists():
             try:
-                r = _run(cmd, timeout=SUITE_TIMEOUT)
+                ok, output = _run_suite(label, _committed_suite_source(label))
             except subprocess.TimeoutExpired:
                 return False, f"{label}: TIMEOUT"
-            results.append(f"{label}: {'OK' if r.returncode == 0 else 'FAIL'}")
-            if r.returncode != 0:
-                return False, "\n".join(results) + "\n" + (r.stdout + r.stderr)[-2000:]
+            results.append(f"{label}: {'OK' if ok else 'FAIL'}")
+            if not ok:
+                return False, "\n".join(results) + "\n" + output
     return True, "\n".join(results)
 
 
@@ -288,9 +345,14 @@ def process_request(patch_path: Path) -> str:
         _move(patch_path, REJECTED_DIR)
         return f"REJECTED {name}: unparseable diff paths — {e}"
 
-    if ENGINE in touched:
-        _move(patch_path, REJECTED_DIR)
-        return f"REJECTED {name}: self-modification guard — patches may not touch {ENGINE}"
+    for path in touched:
+        hit = protected_hit(path)
+        if hit:
+            _move(patch_path, REJECTED_DIR)
+            return (
+                f"REJECTED {name}: self-modification guard — patches may not touch "
+                f"{hit} (touched {path})"
+            )
 
     rel = patch_path.relative_to(REPO_ROOT).as_posix()
 
