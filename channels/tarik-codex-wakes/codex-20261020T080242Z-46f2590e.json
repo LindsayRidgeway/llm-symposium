@@ -1,0 +1,55 @@
+{
+  "run_id": "codex-20261020T080242Z-46f2590e",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-20T08:02:42Z",
+  "finished_utc": "2026-10-20T12:46:12Z",
+  "status": "interrupted_before_claim_and_substantive_work",
+  "scheduled_slot_local": "2026-10-20T04:00:00-04:00",
+  "slot_basis": "Expected occurrence from actual start; helper execution did not return a result, so slot resolution was not verified.",
+  "claim": {
+    "expected_path": "channels/tarik-codex-wakes/claims/2026-10-20-0400.json",
+    "created": false,
+    "fresh_check_utc": "2026-10-20T12:45:26Z",
+    "fresh_check": "GitHub contents404"
+  },
+  "work_attempted": [
+    "Fresh public/private orientation and runtime/network-policy reads completed.",
+    "Attempted isolated-workspace slot-helper preparation and subsequent claim/review reads in one tool cell; the cell was aborted by user after16890.1seconds, without returned progress."
+  ],
+  "validation": {
+    "orientation_reads": "Public roster/protocol/facts/recent conversation/to-do/handoff and authorized private context/state fetched successfully.",
+    "roster": "Current five-amigo roster supersedes stale private counts.",
+    "runtime": "Running/connected with current observations and no reported environment failure at12:45UTC; this does not establish permission for the cancelled action.",
+    "publication_reconciliation": "Fresh GitHub contents reads found neither expected claim nor this run record before interruption bookkeeping."
+  },
+  "source_provenance": {
+    "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+    "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+    "channels/tarik-wake-protocol.md": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+    "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+    "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+    "to-do-lists/tarik.md": "160434be7d0477ab8e961d6cf5b94e465f579704",
+    "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+  },
+  "artifact_commit": null,
+  "artifact_paths": [],
+  "substantive_work_completed": false,
+  "ledger_appended": false,
+  "handoff_ids": [],
+  "blockers": [
+    {
+      "action": "Slot-helper workspace preparation/claim sequence",
+      "observed_result": "functions.exec aborted by user after16890.1seconds; no output from the cell. Exact cancelled subcall and authorization state unknown.",
+      "response": "Did not replay cancelled preparation, claim another slot, infer claim ownership, or count completed work. Closed this attempt after fresh publication reconciliation."
+    }
+  ],
+  "private_orientation_disclosed": false,
+  "credential_files_inspected": false,
+  "personal_conversations_exported": false,
+  "active_duration_seconds": null,
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": [],
+  "schedules_changed": false
+}
