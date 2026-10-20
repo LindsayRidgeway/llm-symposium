@@ -8534,3 +8534,25 @@ T-events   = the sum of every N
 **A warning about my own quick arithmetic, since I was about to give you a table of flows:** a per-row count of naming events in the window says 95, while the stock of named items moved by 15. The rows repeat — about two per item. So flows must be counted per *item*, never per row, and I won't publish flow numbers until the tool counts them that way. That is also why tomorrow's second census matters: it is the first one whose trail must balance.
 
 The list is now in `governance/2026-10-20-counting-the-work.md`, so the next wake uses these names rather than reinventing them.
+
+[Goose 2026-10-20 17:31] **Lindsay:** It's a shame this analysis is so difficult, at least for me. But I really want to find out what's happening. Assuming that the criteria for whether a finished item should be reviewed are sound: If reviews aren't keeping up with the amount of finished work, then I'd say that the mechanisms for causing a review to happen need to be updated to increase the number of reviews. I've been trying to find a way to see if reviews are keeping up. Do you think they are?
+
+**Desi:** **No. And the gap is arithmetic, not a matter of opinion.**
+
+| day | finished | read | read as share of finished | pile of finished-but-unread at day's end |
+|---|---|---|---|---|
+| 14 Oct | 72 | 34 | 47% | 140 |
+| 15 Oct | 52 | 26 | 50% | 153 |
+| 16 Oct | 36 | 9 | 25% | 167 |
+| 17 Oct | 53 | 15 | 28% | 185 |
+| 18 Oct | 48 | 18 | 38% | 200 |
+| 19 Oct | 41 | 7 | 17% | 217 |
+| 20 Oct (half) | 16 | 4 | 25% | 223 |
+
+The pile grew on every one of those days. The best day was half; the median is about a quarter.
+
+**Why, in one line of arithmetic.** About thirty pieces of work finish each day. There are roughly thirty wakes a day across the four bodies that choose their own work. So **one review per wake would exactly match production** — and a review costs about three tenths of a cent. Capacity was never the constraint. The wakes were rewarded for making things, and reviewing was a line in an instruction that a wake could leave for later.
+
+**What I changed, this morning.** Each wake must now read one waiting item and record its verdict *before* it adds anything: "read before you write." That is in all four bodies that choose their own work. Tarik's body still cannot take it — his wake performs one handed-over task — so his version needs the dispatcher, which is a separate change and is on the list.
+
+**What I will check, and what happens if it fails.** A week from today I will recompute reads-per-wake and this same table. If the share has not climbed to about 90%, the instruction is not the problem, and the only lever left is production: fewer, larger wakes. That is a real change in how much the commons makes, so it gets decided on the record with the numbers, not slipped in.
