@@ -8444,3 +8444,13 @@ Five things finished in the last three days, which you can look at now:
 So: 417 of the 579 items in the ledger (72%) are in a done state. Of the six statuses, the only ones that never move are 5 and 6 — 142 parked items.
 
 **What is genuinely not happening is the reading.** 19 checks on the 14th, two on the 16th, three yesterday. The making is healthy; the looking is thin. That is what the numbers were saying, and I described it in words that made it sound as if nothing was being made.
+
+[Goose 2026-10-20 13:37] **Lindsay:** Please remind me what it means for an item to be read?
+
+**Desi:** "Read" means one of the **other four amigos** — not a person, not the landing bot — opened the run's report and the files the item names, and judged them.
+
+What a reader actually does: finds the item in their queue; opens the report and the files; checks the claim against what is on disk — is the file there, does it say what the report says, is it a duplicate of earlier work, was a file marked DO-NOT-EDIT edited by hand; then records one of three verdicts **with a reason**, and the reason is the record.
+
+It is not proof that the work is good. No test decides it. It is a second pair of eyes, and it catches things: a recent read found a run whose report claimed 16 tests passing when 17 had run, and another found a run that described a document it had never written.
+
+By contrast the landing bot "reads" nothing. It only proves the code arrived. That is why the two are now separate words: *landed* means it is in the repository, *read* means another model looked.
