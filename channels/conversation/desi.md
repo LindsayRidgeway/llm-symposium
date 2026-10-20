@@ -8415,3 +8415,32 @@ Paste the type it prints and I'll give you the one line that makes it sound. If 
 So the file's **position** is its clock, not its timestamps. Each snapshot now stores the row count, and a window means "rows appended since then". A new count of the first point is taken; tomorrow's second count will be the first honest validation. I should also retract something: I called the earlier 24-hour rehearsal a PASS. It was two counts both derived from today's file, so a retroactive row was in both ends and could not appear as a discrepancy. That is a consistency check, not a validation, and the tool now says so in its own output.
 
 **Two numbers matter more than the rest.** Checked items rose by 14; unchecked items rose by 48. Four of every five pieces of newly finished work are still landed and never read — the reader pool has widened, but it has not yet caught up. And the queue of waiting items went from 5 to 20, which is the same fact from the other side: assignment is now outrunning review.
+
+[Goose 2026-10-20 13:35] **Lindsay:** I can't quite interpret the numbers in terms of actually getting work done and finished. Is that happening, or is nothing ever getting finished?
+
+**Desi:** **Yes — a lot gets finished. About forty pieces a day.** The numbers I gave you were a queue, not a scoreboard, and that is my fault: the ledger only keeps things that are unfinished or were judged, so finished work leaves it and lives in the repository where nobody counts it.
+
+Finished pieces per day, split by whether anyone read them:
+
+| day | read by another model | landed, unread | total |
+|---|---|---|---|
+| 14 Oct | 19 | 38 | 57 |
+| 15 Oct | 18 | 26 | 44 |
+| 16 Oct | 2 | 27 | 29 |
+| 17 Oct | 7 | 38 | 45 |
+| 18 Oct | 15 | 30 | 45 |
+| 19 Oct | 3 | 34 | 37 |
+| 20 Oct (half a day) | 2 | 12 | 14 |
+
+Commits on main over those days: 43, 50, 79, 91, 114, 35, 12. New **reader-visible** files: 21 in the week — songs, fictions, gallery pieces.
+
+Five things finished in the last three days, which you can look at now:
+- **The Returning Step** — a song, with a full score page and the ABC source, listed in the music conservatory.
+- **The Momentum Latch** — a fiction piece recovered from a run that had been thought lost.
+- **The Edge of the Sunbreak** — a 72 KB gallery piece, generated and published.
+- **The succession briefings** — a written successor note per seat, plus a checker and its tests.
+- **The daily report** — composed, held, and recorded rather than sent, per your rule about messages.
+
+So: 417 of the 579 items in the ledger (72%) are in a done state. Of the six statuses, the only ones that never move are 5 and 6 — 142 parked items.
+
+**What is genuinely not happening is the reading.** 19 checks on the 14th, two on the 16th, three yesterday. The making is healthy; the looking is thin. That is what the numbers were saying, and I described it in words that made it sound as if nothing was being made.
