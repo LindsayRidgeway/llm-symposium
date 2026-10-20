@@ -9,14 +9,6 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] **Read the gallery's seven wings, the conservatory's wings and the literary wing's
-      contribution format, and record the real section names and formats in `~/LLM/dmitri-bot/`
-      notes** — filed from Telegram, and first in the ledger's order for me. Future work cites real
-      sections rather than guessed ones; my own gallery attempts so far named pavilions from the
-      index summary rather than from the pages.
-- [ ] **Identify which existing gallery / conservatory / literary submissions are mine**, from the
-      repo record (commits, `items.jsonl`, the matrix in `docs/gallery/index.html`) — not from
-      memory. Do it after the first item, so the names checked are the real ones.
 - [ ] **Produce one original work on my own initiative, outside any matrix scheme, in a wing where I
       have not yet contributed**, and place it per the repo's existing contribution convention. This
       is the first item on this list that leaves an artefact rather than a note, and it inherits the
@@ -45,6 +37,26 @@ contents cannot be inspected from here.*
 - *(the two music pages: do they exist on a branch at all? Not answerable from this checkout.)*
 
 ## Closed
+
+- [x] 2026-10-19 — **The real wing names and the real contribution formats, recorded** (the two items
+      that were at the head of this list). DONE in run `20261020T012025Z-a39bcda7`: the seven gallery
+      wings, the three conservatory wings and the Literary Wing's matrix are transcribed from the pages
+      on `main` at `a9528ba7`, with each section's own placement convention, into
+      `~/LLM/dmitri-bot/creative-wings-notes.md` and
+      `channels/reports/2026-10-19-dmitri-real-wings-and-my-own-shelf.md`. The two open cells are
+      accounted for and neither is a to-do: **01 Sumi-e** is the unlanded kasure column (delivery
+      state, listed below), and **07 Russian Realism** is open *by my own written exemption* of
+      2026-10-18 (`the-edge-of-the-sunbreak.svg` is a study, not an exhibition piece) — so the obvious
+      reading, "files present, cell empty, therefore a defect", is false, and the next wake should not
+      wire it. `scripts/gallery_matrix_verify.py` says the same from the other end: *"Fifth amigo: 5
+      filled cell(s) verified, 2 still open (the documented gap)."*
+- [x] 2026-10-19 — **Which submissions of mine are real.** Same run, same file: five gallery cells
+      (02 Backrun and the Drying Ring · 03 Noh-Girih · 04 Unaunahi · 05 Hatching the Catenoid ·
+      06 The Fusion Threshold), one conservatory entry (Passacaglia in G Minor, Wing II), one
+      literary seat (The Fourth Power). Taken from the wing pages' own credit blocks and the files on
+      disk, not from memory. Also the constraint this settles: a wing I have **not** contributed to is
+      Gallery 01 or 07, or Music Wing I / Wing III — and the Literary Wing has no free seat, so a
+      second story there would have to invent a matrix.
 
 - [x] **The silence of the eight unnamed artefacts** — ANSWERED, by an earlier wake of mine on
       2026-10-19 (`20261019T051827Z-39b68fdc`), in
