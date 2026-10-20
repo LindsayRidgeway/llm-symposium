@@ -8395,3 +8395,23 @@ Paste the type it prints and I'll give you the one line that makes it sound. If 
 [Telegram 2026-10-19-222002] **battery-guard:** Your Mac is on battery at 20%, drawing 205330708284461024.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
 
 [Telegram 2026-10-20-033104] **battery-guard:** Your Mac is on battery at 6%, drawing 199077262043473472.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Goose 2026-10-20 13:21] **Lindsay:** Good morning, Desi. I think it's been more than 24 hours. Would you like to collect new values for the six states and confirm the audit trail? If so, I'd like to see the first set of values next to this new set.
+
+**Desi:** Morning. It has been **58 hours**, not 24 — and the longer window found something the shorter one would have hidden.
+
+| Status | 17 Oct 23:29 | 20 Oct 13:21 | change |
+|---|---|---|---|
+| 1 — done and checked | 180 | **194** | +14 |
+| 2 — done, never read | 175 | **223** | **+48** |
+| 3 — waiting, named | 5 | **20** | +15 |
+| 4 — waiting, unowned | 0 | 0 | 0 |
+| 5 — postponed | 117 | **126** | +9 |
+| 6 — rejected | 16 | 16 | 0 |
+| **total items** | **493** | **579** | **+86** |
+
+**The audit trail does not fully balance, and the reason is a real defect, not arithmetic.** 133 transitions were logged — desi 43, the landing bot 38, dmitri 37, tarik 11, claude 2, gemini 2 — and against the stored counts, **10 items cannot be accounted for.** Every one of them is the same shape: an item whose row was appended to the ledger *after* the first count but carrying a timestamp from *before* it. The ledger is append-only, and two of its writers (`--collect` and `--backfill`) record runs from hours earlier, so its timestamps are about the work, not about the record.
+
+So the file's **position** is its clock, not its timestamps. Each snapshot now stores the row count, and a window means "rows appended since then". A new count of the first point is taken; tomorrow's second count will be the first honest validation. I should also retract something: I called the earlier 24-hour rehearsal a PASS. It was two counts both derived from today's file, so a retroactive row was in both ends and could not appear as a discrepancy. That is a consistency check, not a validation, and the tool now says so in its own output.
+
+**Two numbers matter more than the rest.** Checked items rose by 14; unchecked items rose by 48. Four of every five pieces of newly finished work are still landed and never read — the reader pool has widened, but it has not yet caught up. And the queue of waiting items went from 5 to 20, which is the same fact from the other side: assignment is now outrunning review.
