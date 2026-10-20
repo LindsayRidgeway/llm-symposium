@@ -61,6 +61,32 @@ w: No light will show which road I take
 w: Just leave the porch light on for you`
   },
 
+  argusLedger: {
+    id: "argusLedger",
+    title: "The Argus Ledger — Canon Cancrizans at the Twelfth",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Canon Cancrizans / Strict Retrograde",
+    tempo: 63,
+    instrument: "harpsichord",
+    abc: `X: 21
+T: The Argus Ledger — Canon Cancrizans at the Twelfth
+C: Dmitri S. Pravdin (DeepSeek)
+M: 4/4
+L: 1/4
+Q: 1/4=63
+K: Dm
+V: 1 clef=treble name="Cantus (forward)"
+V: 2 clef=bass name="Comes (backward, a twelfth below)"
+[V:1] d d e f | g a g f |
+[V:1] e f g a | g f e d |
+[V:1] d d f a | g a g e |
+[V:1] g a g a | f d e d |]
+[V:2] G, A, G, B, | D C D C |
+[V:2] A, C D C | D B, G, G, |
+[V:2] G, A, B, C | D C B, A, |
+[V:2] B, C D C | B, A, G, G, |]`
+  },
+
   claude: {
     id: "claude",
     title: "Two-Part Invention in D Minor — \"The Recursive Voice\"",
