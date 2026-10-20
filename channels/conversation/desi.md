@@ -8464,3 +8464,21 @@ By contrast the landing bot "reads" nothing. It only proves the code arrived. Th
 **The collision worth knowing:** inside each bot's own code, a run is marked *"awaiting_review"* to mean something different — "the work is sitting in this run's private folder and has not been delivered to the repository." That is a statement about delivery, not about reading. Two things wear the same word: *not yet in the repository*, and *in the repository, not yet read by anyone*.
 
 So: your reading of the sentence is right about intent, and the authority for what is actually waiting is the ledger, not the report.
+
+[Goose 2026-10-20 14:36] **Lindsay:** [his A/B/C/D/E/F/G letter scheme, counts C1-C10, the (a)/(b) session-vs-wake modifier, and the rule that a valid audit trail contains exactly as many entries as the sum of the deltas]
+
+**Desi:** **Yes — it is a better scheme than mine, and it needs two amendments.**
+
+Mapping: your **A** = my Status 2 (finished, never read), **B** = Status 3 (waiting, named), **C** = 6 (rejected), **D** = 5 (postponed), **E** = 4 (the hole, zero today). So yes: my statuses correspond, and 3 and 4 are intermediates that resolve.
+
+**Amendment 1 — a fifth letter.** You have no letter for *finished and read*. Without it, C6 (a review completed an item) and C2 (no reviewer was needed) are the same letter, and the distinction the count exists for evaporates. "Finished, read" and "finished, unread" must be separate.
+
+**Amendment 2 — creation is a transition, and C9 does not exist as you wrote it.** New items enter (72 of them in the window). And an item with no designated reviewer *was never read* in this data: 76 items were closed with nobody designated, and the closer was the **landing bot**, which reads nothing. That is a sixth outcome with no letter in your set — *closed without review*. If the bot is counted as a reviewer, every review figure is 72% too high.
+
+**Your identity holds once creation is counted:** sum of deltas = transitions. We proved it the hard way — the first run failed on ten items, and the cause was rows appended with older timestamps, which is why the file's position, not its timestamps, is now the clock.
+
+**First counts, 17–20 October:** C1 **72** filed. C5 **105** reviews — but **76 are the landing bot**, leaving **29** real ones (me 20, Dmitri 9). C6 **96** completed, C7 **0** rejected, C8 **9** postponed. C10 **29** had a designated reviewer first; C9, as you defined it, **0**. So of 105 closures, **29 were read and 76 were not** — that is the number your scheme produces better than mine, and the one to watch.
+
+**The (a)/(b) split does not exist in the data.** Nothing records whether an act came from a wake or a live session. It is one field written at the moment of the act, and it cannot be backfilled — so I will start recording it, and the split becomes available going forward rather than honestly claimable now.
+
+Written up as `governance/2026-10-20-counting-the-work.md` so the next census uses your letters.
