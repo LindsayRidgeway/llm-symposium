@@ -177,12 +177,41 @@ def main() -> int:
     ap.add_argument("--window", nargs="*", help="A and B: two census snapshots, or --hours")
     ap.add_argument("--hours", type=float, default=24.0)
     ap.add_argument("--ledger", default=str(LEDGER))
+    ap.add_argument("--target", action="store_true",
+                    help="the founder's target, 2026-10-20: the review backlog must never exceed a "
+                         "day's arrivals — counts it, and says PASS or FAIL")
     a = ap.parse_args()
 
     ledger = Path(a.ledger)
     rows = load(ledger)
     evs = events(rows)
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    if a.target:
+        now = a.at or now
+        since = (dt.datetime.strptime(now, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+                 - dt.timedelta(hours=24)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        c = census(rows, now)
+        unread = sum(1 for v in c.values() if v == "2")
+        named = sum(1 for v in c.values() if v == "3")
+        arrivals = sum(1 for i, evs in evs.items() if evs and since < evs[0]["ts"] <= now)
+        reads = sum(1 for evs in evs.values() for e in evs
+                    if since < e["ts"] <= now and e["kind"] == "closed" and e["status"] in ("1", "5", "6"))
+        print(f"target: backlog of finished-but-unread must not exceed one day's arrivals")
+        print(f"  finished and not read      {unread:5d}")
+        print(f"  arrivals in the last 24h   {arrivals:5d}")
+        print(f"  reads in the last 24h      {reads:5d}  ({reads / arrivals:.2f} per arrival)" if arrivals else "")
+        print(f"  waiting with a name        {named:5d}   <- the queue, which the landing bot keeps short")
+        state = "PASS" if unread <= arrivals else "FAIL"
+        print(f"\n  {state}: ", end="")
+        if state == "PASS":
+            print("the backlog is no larger than a day's work.")
+        else:
+            pace = (unread - arrivals) / (reads - arrivals) if reads > arrivals else None
+            print(f"{unread - arrivals} item(s) over the line; ", end="")
+            print(f"drains in about {pace:.0f} day(s) at this pace." if pace else
+                  "and reads do not exceed arrivals, so it never drains.")
+        return 0 if state == "PASS" else 1
 
     if a.census:
         when = a.at or now
