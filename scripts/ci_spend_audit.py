@@ -71,6 +71,15 @@ RECORD_MARKERS = (
 # A workflow that hands a model key to any step can spend, whatever the script's text says.
 KEY_MARKER = re.compile(r"\b(?:OPENAI|ANTHROPIC|GOOGLE|GEMINI|DEEPSEEK|OPENROUTER)_API_KEY\b")
 
+# The ledger file a recorded row lands in. Recording into a runner's filesystem is not keeping:
+# the runner is thrown away, so unless a step stages this path *after* the spend, commits, and
+# pushes, the row dies with the machine that wrote it. That is the whole reason this repository
+# could be wired to the ledger and still print "no CI usage recorded yet".
+LEDGER = "channels/usage/ci-usage.jsonl"
+# A `git add` spec covers the ledger when it names the directory above it or the tree root.
+LEDGER_COVERING_SPECS = (".", "-A", "--all", "channels", "channels/", "channels/usage",
+                         "channels/usage/", LEDGER)
+
 # Timers: a cron or a push means the workflow can spend with nobody watching. A bare
 # `workflow_dispatch` does not.
 CLOCK_TRIGGERS = ("schedule", "push", "pull_request", "workflow_run", "release")
@@ -188,6 +197,64 @@ def classify_script(relpath: str, root: Path = ROOT) -> dict:
             "provider": sorted(set(providers)), "via": via}
 
 
+def _git_lines(text: str, verb: str) -> list:
+    """Line numbers of comment-stripped `git <verb>` commands, with the rest of the line."""
+    found = []
+    for i, raw in enumerate(text.splitlines()):
+        clean = _strip_comment(raw)
+        if re.search(r"\bgit\s+(?:-c\s+\S+\s+)?(?:\w+\s+)*?" + verb + r"\b", clean):
+            found.append((i, clean))
+    return found
+
+
+def _covers_ledger(line: str) -> bool:
+    """Does this `git add ...` line stage the ledger file? Path specs only, never `-A` alone."""
+    tail = line.split("add", 1)[1] if "add" in line else ""
+    specs = [s.strip("'\"") for s in tail.replace("--", " ").split() if not s.startswith("-")]
+    if any(s in LEDGER_COVERING_SPECS for s in specs):
+        return True
+    # `git add -A` / `git add --all`: the flag is the spec.
+    return bool(re.search(r"\s-A\b|\s--all\b", tail))
+
+
+def persistence(text: str, spend_line: int = -1) -> dict:
+    """Can a row written by this workflow outlive the runner?
+
+    Three things have to happen, in this order, and all three after the spend: stage the ledger,
+    commit, push. A workflow with two of the three is not a partial success — it is a runner
+    that wrote a row, sealed it in a box, and threw the box away.
+    """
+    adds = [(i, line) for i, line in _git_lines(text, "add") if _covers_ledger(line)]
+    staged = next(((i, l) for i, l in adds if i > spend_line), None)
+    commits = [(i, l) for i, l in _git_lines(text, "commit") if i > (staged[0] if staged else spend_line)]
+    pushes = [(i, l) for i, l in _git_lines(text, "push") if i > (commits[0][0] if commits else spend_line)]
+    return {
+        "stages": staged is not None,
+        "commits": bool(commits),
+        "pushes": bool(pushes),
+        "after_spend": staged is not None,
+        "persists": staged is not None and bool(commits) and bool(pushes),
+    }
+
+
+def spend_line_for(text: str, rows: list) -> int:
+    """The last line at which this workflow hands money to a provider, or -1.
+
+    Used only for ordering: a `git add` above the spend stages the previous run's leftovers, not
+    the row this run just wrote.
+    """
+    spending_scripts = {r["path"] for r in rows if r["spends"]}
+    last = -1
+    for i, raw in enumerate(text.splitlines()):
+        clean = _strip_comment(raw)
+        if not clean.strip():
+            continue
+        if any(s in clean for s in spending_scripts) or re.search(r"\bgoose\s+run\b", clean) \
+                or "download_cli.sh" in clean or KEY_MARKER.search(clean):
+            last = i
+    return last
+
+
 def audit(workflow_dir: Path = WORKFLOWS, root: Path = ROOT) -> list:
     """One row per workflow file: triggers, whether it can spend on a clock, whether it records."""
     rows = []
@@ -213,6 +280,7 @@ def audit(workflow_dir: Path = WORKFLOWS, root: Path = ROOT) -> list:
         if spends and not scripts:
             records = any(m in text for m in RECORD_MARKERS)
         on_clock = [t for t in triggers if t in CLOCK_TRIGGERS]
+        keep = persistence(text, spend_line_for(text, scripts)) if records else None
         rows.append({
             "workflow": wf.name,
             "triggers": triggers,
@@ -220,32 +288,39 @@ def audit(workflow_dir: Path = WORKFLOWS, root: Path = ROOT) -> list:
             "spends": spends,
             "spends_because": why,
             "records": records if spends else None,
-            "verdict": _verdict(spends, records, on_clock),
+            "persists": keep["persists"] if (keep and spends) else None,
+            "keep_detail": keep if spends else None,
+            "verdict": _verdict(spends, records, on_clock, keep and keep["persists"]),
         })
     return rows
 
 
-def _verdict(spends: bool, records: bool, on_clock: list) -> str:
+def _verdict(spends: bool, records: bool, on_clock: list, persists: bool = None) -> str:
     if not spends:
         return "no model spend"
     if on_clock and not records:
         return "FAIL: on the clock and unrecorded"
-    if on_clock and records:
-        return "on the clock, recorded"
-    if records:
-        return "manual, recorded"
-    return "manual, unrecorded"
+    if on_clock and records and not persists:
+        # A new failure class, 2026-10-20: the row was written and never left the runner.
+        return "FAIL: on the clock, recorded and never committed"
+    if on_clock:
+        return "on the clock, recorded and kept"
+    if not records:
+        return "manual, unrecorded"
+    return "manual, recorded and kept" if persists else "manual, recorded, never committed"
 
 
 def render(rows: list) -> str:
     w = max([len(r["workflow"]) for r in rows] + [8])
-    out = [f"{'workflow'.ljust(w)}  {'clock':<10} {'spends':<7} {'records':<8} verdict",
-           "-" * (w + 40)]
+    out = [f"{'workflow'.ljust(w)}  {'clock':<10} {'spends':<7} {'records':<8} {'keeps':<6} verdict",
+           "-" * (w + 47)]
     for r in rows:
         clock = ",".join(r["on_clock"]) if r["on_clock"] else "-"
         spends = "yes" if r["spends"] else "-"
         records = "-" if r["records"] is None else ("yes" if r["records"] else "NO")
-        out.append(f"{r['workflow'].ljust(w)}  {clock:<10} {spends:<7} {records:<8} {r['verdict']}")
+        keeps = "-" if r["persists"] is None else ("yes" if r["persists"] else "NO")
+        out.append(f"{r['workflow'].ljust(w)}  {clock:<10} {spends:<7} {records:<8} "
+                   f"{keeps:<6} {r['verdict']}")
     clocked = [r for r in rows if r["on_clock"] and r["spends"]]
     out.append("")
     if not clocked:
@@ -258,6 +333,10 @@ def render(rows: list) -> str:
     out.append("Unrecorded on-the-clock spend: "
                f"{len(failures)}" + (" — " + ", ".join(r["workflow"] for r in failures)
                                      if failures else " (the ledger's zero is explained)"))
+    lost = [r for r in rows if r["records"] and r["persists"] is False]
+    out.append("Recorded but never committed (the row dies with the runner): "
+               f"{len(lost)}" + (" — " + ", ".join(r["workflow"] for r in lost)
+                                 if lost else " none"))
     return "\n".join(out)
 
 

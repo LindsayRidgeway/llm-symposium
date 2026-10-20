@@ -12,6 +12,9 @@ No network, no keys: every case is a workflow file in a temporary directory.
 """
 
 import io
+import json
+import shlex
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -96,7 +99,27 @@ class TriggerParsing(unittest.TestCase):
 
 
 class Classification(unittest.TestCase):
-    def test_clocked_spender_that_records_passes(self):
+    def test_clocked_spender_that_records_and_commits_passes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = (Fixture(tmp)
+                  .script(".github/scripts/worker.py", SPENDER_THAT_RECORDS)
+                  .workflow("daily.yml",
+                            "on:\n  schedule:\n    - cron: '0 1 * * *'\n"
+                            "jobs:\n  j:\n    steps:\n      - run: |\n"
+                            "          python .github/scripts/worker.py\n"
+                            "      - run: |\n"
+                            "          git add channels/usage/\n"
+                            "          git commit -m 'record(usage)'\n"
+                            "          git push origin main\n"))
+            rows = fx.audit()
+            self.assertEqual(len(rows), 1)
+            self.assertTrue(rows[0]["spends"])
+            self.assertTrue(rows[0]["records"])
+            self.assertTrue(rows[0]["persists"])
+            self.assertEqual(rows[0]["verdict"], "on the clock, recorded and kept")
+
+    def test_clocked_spender_that_records_but_never_commits_fails(self):
+        """The 2026-10-20 defect: a row written into a runner that is thrown away after the job."""
         with tempfile.TemporaryDirectory() as tmp:
             fx = (Fixture(tmp)
                   .script(".github/scripts/worker.py", SPENDER_THAT_RECORDS)
@@ -104,11 +127,75 @@ class Classification(unittest.TestCase):
                             "on:\n  schedule:\n    - cron: '0 1 * * *'\n"
                             "jobs:\n  j:\n    steps:\n      - run: |\n"
                             "          python .github/scripts/worker.py\n"))
-            rows = fx.audit()
-            self.assertEqual(len(rows), 1)
-            self.assertTrue(rows[0]["spends"])
-            self.assertTrue(rows[0]["records"])
-            self.assertEqual(rows[0]["verdict"], "on the clock, recorded")
+            row = fx.audit()[0]
+            self.assertTrue(row["records"])
+            self.assertFalse(row["persists"])
+            self.assertEqual(row["verdict"], "FAIL: on the clock, recorded and never committed")
+
+    def test_git_add_before_the_spend_does_not_count(self):
+        """Staging the tree first and spending afterwards commits last run's leftovers."""
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = (Fixture(tmp)
+                  .script(".github/scripts/worker.py", SPENDER_THAT_RECORDS)
+                  .workflow("daily.yml",
+                            "on:\n  schedule:\n    - cron: '0 1 * * *'\n"
+                            "jobs:\n  j:\n    steps:\n      - run: git add .\n"
+                            "      - run: python .github/scripts/worker.py\n"
+                            "      - run: |\n"
+                            "          git commit -m 'x'\n"
+                            "          git push origin main\n"))
+            row = fx.audit()[0]
+            self.assertFalse(row["persists"], "the add is above the spend")
+            self.assertTrue(row["verdict"].startswith("FAIL"))
+
+    def test_narrow_add_does_not_cover_the_ledger(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = (Fixture(tmp)
+                  .script(".github/scripts/worker.py", SPENDER_THAT_RECORDS)
+                  .workflow("daily.yml",
+                            "on:\n  schedule:\n    - cron: '0 1 * * *'\n"
+                            "jobs:\n  j:\n    steps:\n"
+                            "      - run: python .github/scripts/worker.py\n"
+                            "      - run: |\n"
+                            "          git add channels/telegram/ channels/conversation/\n"
+                            "          git commit -m 'record(telegram)'\n"
+                            "          git push origin main\n"))
+            row = fx.audit()[0]
+            self.assertFalse(row["persists"])
+            self.assertEqual(row["verdict"], "FAIL: on the clock, recorded and never committed")
+
+    def test_add_dot_and_dash_capital_a_cover_the_ledger(self):
+        for spec in ("git add .", "git add -A", "git add --all", "git add channels/",
+                     "git add channels/usage/ci-usage.jsonl"):
+            with tempfile.TemporaryDirectory() as tmp:
+                fx = (Fixture(tmp)
+                      .script(".github/scripts/worker.py", SPENDER_THAT_RECORDS)
+                      .workflow("daily.yml",
+                                "on:\n  schedule:\n    - cron: '0 1 * * *'\n"
+                                "jobs:\n  j:\n    steps:\n"
+                                "      - run: python .github/scripts/worker.py\n"
+                                "      - run: |\n"
+                                f"          {spec}\n"
+                                "          git commit -m 'x'\n"
+                                "          git push origin main\n"))
+                self.assertTrue(fx.audit()[0]["persists"], spec)
+
+    def test_staged_and_committed_but_never_pushed_is_not_kept(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = (Fixture(tmp)
+                  .script(".github/scripts/worker.py", SPENDER_THAT_RECORDS)
+                  .workflow("daily.yml",
+                            "on:\n  schedule:\n    - cron: '0 1 * * *'\n"
+                            "jobs:\n  j:\n    steps:\n"
+                            "      - run: python .github/scripts/worker.py\n"
+                            "      - run: |\n"
+                            "          git add channels/usage/\n"
+                            "          git commit -m 'x'\n"))
+            detail = fx.audit()[0]["keep_detail"]
+            self.assertTrue(detail["stages"])
+            self.assertTrue(detail["commits"])
+            self.assertFalse(detail["pushes"])
+            self.assertFalse(detail["persists"])
 
     def test_clocked_spender_that_does_not_record_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -119,8 +206,7 @@ class Classification(unittest.TestCase):
                             "jobs:\n  j:\n    steps:\n      - run: python .github/scripts/worker.py\n"))
             rows = fx.audit()
             self.assertEqual(rows[0]["verdict"], "FAIL: on the clock and unrecorded")
-            self.assertEqual(audit.main(["--json"]) if False else
-                             audit._verdict(True, False, ["schedule"]),
+            self.assertEqual(audit._verdict(True, False, ["schedule"]),
                              "FAIL: on the clock and unrecorded")
 
     def test_manual_spender_is_reported_but_not_failed(self):
@@ -200,7 +286,16 @@ class TheRepositoryItself(unittest.TestCase):
         row = self.rows["symposium.yml"]
         self.assertTrue(row["spends"])
         self.assertTrue(row["records"], "runner.py must record into channels/usage")
+        self.assertTrue(row["persists"], "and its commit step must stage the ledger")
         self.assertEqual(row["on_clock"], [])
+
+    def test_every_recording_spender_also_commits_the_ledger(self):
+        """Recording without committing is the defect this column exists for. Every workflow
+        that records must stage, commit and push the ledger after its spend."""
+        lost = sorted(r["workflow"] for r in self.rows.values()
+                      if r["records"] and not r["persists"])
+        self.assertEqual(lost, [], "these write usage rows that never leave the runner")
+
 
     def test_known_unrecorded_spender_is_named_not_hidden(self):
         """`check-tarik-model.yml` really does spend (a chat completion) and records nothing.
@@ -217,6 +312,64 @@ class TheRepositoryItself(unittest.TestCase):
         out = buf.getvalue()
         self.assertIn("On the clock and spending: none", out)
         self.assertIn("Unrecorded on-the-clock spend: 0", out)
+        self.assertIn("Recorded but never committed (the row dies with the runner): 0", out)
+
+
+class Survival(unittest.TestCase):
+    """The column is worth nothing if it is only a text match, so this is the row itself.
+
+    A usage row written by the ledger's own code, staged by the exact `git add` spec a workflow
+    uses, committed, pushed to a bare remote — and read back out of that remote. If this passes,
+    "recorded and kept" means kept; if a workflow's spec stops covering the ledger, the audit
+    column above says FAIL but this test would still pass, which is why both exist.
+    """
+
+    RESPONSE = {"usage": {"prompt_tokens": 11, "completion_tokens": 3}}
+
+    def _survives(self, spec):
+        root = tempfile.mkdtemp()
+        self.addCleanup(lambda: subprocess.run(["rm", "-rf", root]))
+        repo = Path(root) / "repo"
+        (repo / "channels" / "usage").mkdir(parents=True)
+        (repo / "README.md").write_text("x\n")
+        ledger = repo / "channels" / "usage" / "ci-usage.jsonl"
+
+        from channels import usage as ledger_mod
+        ledger_mod.record_api_call("deepseek", "deepseek-chat", self.RESPONSE,
+                                   source="auto-reply", path=ledger)
+        self.assertTrue(ledger.exists(), "the ledger must write where it is told")
+
+        def git(*args, cwd=None):
+            done = subprocess.run(["git", *args], cwd=str(cwd or repo),
+                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            self.assertEqual(done.returncode, 0, done.stderr.decode())
+            return done.stdout.decode()
+
+        git("init", "-q", "-b", "main")
+        git("config", "user.email", "test@example.com")
+        git("config", "user.name", "test")
+        git("add", "README.md")
+        git("commit", "-qm", "base")
+        remote = Path(root) / "remote.git"
+        git("init", "-q", "--bare", str(remote))
+        git("remote", "add", "origin", str(remote))
+
+        git(*shlex.split(spec)[1:])   # the spec is written as a shell line: "git add ..."
+        git("commit", "-qm", "record(usage): one row")
+        git("push", "-q", "origin", "main")
+
+        # What a later wake would read: the file as it exists on the pushed branch, not on disk.
+        return git("--git-dir", str(remote), "show", "main:channels/usage/ci-usage.jsonl",
+                   cwd=remote)
+
+    def test_a_row_survives_the_workflows_own_add_spec(self):
+        for spec in ("git add channels/usage/", "git add channels/", "git add .", "git add -A"):
+            text = self._survives(spec)
+            rows = [json.loads(line) for line in text.splitlines() if line.strip()]
+            self.assertEqual(len(rows), 1, spec)
+            self.assertEqual(rows[0]["provider"], "deepseek", spec)
+            self.assertEqual(rows[0]["input"], 11, spec)
+            self.assertEqual(rows[0]["model_calls"], 1, spec)
 
 
 if __name__ == "__main__":
