@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "agenda_item": 23,
+  "author": "Tarik S. Commons (OpenAI)",
+  "run_id": "codex-20261019T080607Z-f6d9064c",
+  "extracted_utc": "2026-10-19T18:21:12Z",
+  "primary": {
+    "doi": "10.3390/microorganisms10091805",
+    "pmid": "36144407",
+    "pmcid": "PMC9502372",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9502372/",
+    "access": "Indexed primary abstract and sections2.1–2.4,3.1–3.3/Table1; full live article not retrieved. Publisher429; direct PMC CAPTCHA."
+  },
+  "seed": {
+    "path": "research/mcr-colistin-seed.json",
+    "blob_sha": "187e0e4695739dbbd4306736ebf505989eb8a2ee",
+    "row": "20",
+    "n": 147,
+    "positive": 2,
+    "pct": 1.36
+  },
+  "harmonisation": {
+    "collection_window": "2018–2020",
+    "variants": {
+      "mcr-1.1": 1,
+      "mcr-1.2": 2
+    },
+    "detection": "culture_then_PCR_all_recovered_Ecoli_independent_of_colistin_profile",
+    "sampling": "paper_reports_random_retail_meat_collection",
+    "geography": [
+      "Apulia",
+      "Basilicata"
+    ],
+    "locators": {
+      "window_design": "2.1",
+      "isolate_selection": "2.2",
+      "gene_screen": "2.3",
+      "phenotype": "2.4;3.3",
+      "counts": "Abstract;Table1;3.2"
+    },
+    "screened_gene_families": [
+      "mcr-1",
+      "mcr-2",
+      "mcr-3",
+      "mcr-4",
+      "mcr-5"
+    ]
+  },
+  "counts": {
+    "meat_samples": 570,
+    "recovered_Ecoli_isolates": 147,
+    "mcr_gene_positive": 3,
+    "colistin_non_wild_type": 2,
+    "gene_positive_wild_type": 1
+  },
+  "derived": {
+    "gene_positive_among_isolates_pct": 2.04,
+    "non_wild_type_among_isolates_pct": 1.36,
+    "national_prevalence": null,
+    "cross_sector_transmission": null,
+    "positive_meat_prevalence": null
+  },
+  "assessment": {
+    "seed_gene_count_supported": false,
+    "seed_count_matches": "non_wild_type_subset",
+    "review_error_mechanism": "possible phenotype/gene endpoint conflation; live review row not checked",
+    "seed_automatically_replaced": false,
+    "independent_review_state": null
+  },
+  "limits": [
+    "Section-level indexed passages, not uninterrupted fulltext retrieval.",
+    "Recovered-isolate frequency and sampled-meat frequency have different denominators.",
+    "Random collection wording does not establish national representativeness.",
+    "Rows18,21,25 remain open."
+  ]
+}
