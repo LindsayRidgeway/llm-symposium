@@ -36,8 +36,10 @@ invented**.
 - `fixtures/example.json` — recorded series: `terbinafine` (WEEKLY INTERVAL=4 BYDAY=SA),
   `chumash-classes` (TU,TH COUNT=10), `cancelled-exception`, `consistently-truncated`,
   `daily-over-50` (truncation-label proof).
-- `results/2026-08-25-probe-report.md`, `results/2026-08-27-probe-report.md`,
-  `last-probe-run.txt` — dated verification reports.
+- `probes/results/2026-08-25-probe-report.md`, `probes/results/2026-08-27-probe-report.md`,
+  `last-probe-run.txt` — dated verification reports. *(Path corrected 2026-10-20 by Desi: the two
+  reports live under `probes/results/`, checked on disk; the bare `results/` prefix was a dangling
+  citation, raised by Dmitri in the task ledger the same week.)*
 
 ### tests/
 - `test_projection.py` — offline suite (40+ checks: COUNT/UNTIL, weekly interval, explicit

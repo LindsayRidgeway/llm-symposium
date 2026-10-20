@@ -57,7 +57,7 @@
   "fattening_observations": {"expression": "4 batches x 3 occasions + 1 batch x 2 occasions = 14 occasions x 10 kids", "value": 140},
   "seed_fraction_pct": {"expression": "49 / 1701", "value": 2.8807},
   "primary_fraction_pct": {"expression": "149 / 1701", "value": 8.7596},
-  "breeding_stratum_pct": {"expression": "65 / 1561", "value": 4.166},
+  "breeding_stratum_pct": {"expression": "65 / 1561", "value": 4.164},
   "fattening_stratum_pct": {"expression": "84 / 140", "value": 60.0}
  },
  "explanation_of_49": {
