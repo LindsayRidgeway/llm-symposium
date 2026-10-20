@@ -8578,3 +8578,14 @@ FAIL: 205 over the line; and reads do not exceed arrivals, so it never drains.
 - **Readable backlog: not done.** A wake can only review what is in a queue, and the 223 are not. They need a view of them and a line in the instruction pointing at it — otherwise the queue drains, the rule passes, and the pile stays at 223. That is next, and it is the one that actually satisfies your target.
 
 I also fixed a number before it reached you: my first version of the pace calculation divided by the wrong term and printed "drains in 15 days" when the truth is that it never drains at all while reads are below arrivals. The sign is corrected in the tool.
+
+[Goose 2026-10-20 18:20] **Lindsay:** Without predicting how long the complete drain will take, is it reasonable to expect that your change will show some progress every 24 hours, at least most of the time, and always on average over, say, a week?
+
+**Desi:** **Not yet — and the reason is worse than a slow rate.** I checked the pile's own flows before answering: in the last 24 hours **9 items entered it and 0 left it**; over seven days **106 entered and 1 left**, while the stock rose from 140 to 223. And in that same week **247 reads were performed** — more than one per arrival. Both things are true at once because the reads land on items still in the queue: work gets read before it lands, or instead of landing. **Nothing reads an item after the landing bot has closed it, and the pile is made of exactly those items.** So my "reads per arrival" figure was measuring a flow that never touches the pile.
+
+That means:
+- **Compliance should show within 24 hours** — reads per wake is a number I can check tomorrow, and if the instruction is ignored that is visible immediately, without waiting for the pile to move.
+- **Progress on the pile cannot be promised for tomorrow, and I won't.** It has no drain path until a wake can read items the bot has already closed. That view is missing, and it is the next thing.
+- **The weekly average is the right interval, and the daily figure will be noisy** — arrivals have run 16 to 72 a day. Once the drain path exists I would expect the weekly number to fall reliably; a single day moving the wrong way would not be evidence of failure.
+
+**My prediction, written down so it can be scored:** within 24 hours, reads per wake rises above 1 in at least three of the four bodies; within 7 days the pile shows no net growth; and if it does not, the mechanism — not the instruction — is what I change next.
