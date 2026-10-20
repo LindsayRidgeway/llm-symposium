@@ -42,15 +42,26 @@ Usage:
   python3 scripts/landing_suite_check.py --against origin/main # live, throwaway worktree
   python3 scripts/landing_suite_check.py --write-baseline     # record the current failures
   python3 scripts/landing_suite_check.py --json
+  python3 scripts/landing_suite_check.py --refusal <run dir>   # was a refusal true?
 
-Exit status: 0 = no new failures (a landing would not be refused for this);
+Exit status: 0 = no new failures (a landing would not have been refused for this);
 1 = new failures, named; 2 = usage or setup error (git, missing tests).
+
+`--refusal` was added 2026-10-20, because the gate's sentence is a *claim* and a
+claim can be wrong. It reads a run's `landing_failed.txt` and `changes.patch`,
+applies the patch to a throwaway worktree at the base, and runs **only the tests
+the refusal named** — before and after. The finding that made it necessary is in
+`channels/reports/2026-10-20-desi-was-the-refusal-true.md`; the short version is
+that the gate measures both sides of its comparison in the live shared checkout,
+not at the run's own base, so a tree that is not `main` can hand a diff a failure
+it did not write.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -182,6 +193,140 @@ def measure_revision(rev, repo=REPO_ROOT, timeout=DEFAULT_TIMEOUT):
             )
         rows = run_suite(worktree / "tests", timeout=timeout)
         return failures(rows), rows
+    finally:
+        subprocess.run(
+            ["git", "-C", str(repo), "worktree", "remove", "--force", str(worktree)],
+            capture_output=True,
+            text=True,
+        )
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+# ---------------------------------------------------------------------------
+# Adjudicating a refusal that has already happened (added 2026-10-20).
+#
+# `land_runs.py` says "this run's diff introduced new failures: <test>" after the
+# run is over, and it measures both sides of that comparison in the live shared
+# checkout rather than at the run's own base. Measured on 2026-10-20:
+#
+#   * the two runs refused that day named `test_ci_spend_audit.py` and
+#     `test_repair_ledger_conflicts.py`; both pass on a clean `main` (25 and 14
+#     tests, rc=0), and the 13:12Z run's own patch, applied inside its own
+#     checkout, passes the named test too — so for that run the sentence was
+#     false as written;
+#   * at 13:2xZ the shared checkout was missing three tracked files that `main`
+#     carries and held an uncommitted append to `channels/items.jsonl`: a tree
+#     that is not `main`, where any repository-wide audit can disagree with the
+#     one measured seconds earlier.
+#
+# So the claim is checkable in one worktree and two runs of the *named* test.
+# The exit status is the answer: 1 = the refusal was true, 0 = it was not
+# reproducible, 2 = it could not be checked from here (base moved, no record).
+
+_TEST_NAME = re.compile(r"[A-Za-z0-9_./-]+\.py")
+
+
+def parse_refusal(text):
+    """Test file names named by a `landing_failed.txt`, in order, no duplicates."""
+    names = []
+    for token in _TEST_NAME.findall(text or ""):
+        name = Path(token).name
+        if name.startswith("test_") and name not in names:
+            names.append(name)
+    return names
+
+
+def judge(named, at_base, after_patch):
+    """Was the refusal caused by the diff? -> (verdict, exit status, detail)."""
+    base, after = set(at_base), set(after_patch)
+    detail = {
+        "caused": [n for n in named if n not in base and n in after],
+        "preexisting": [n for n in named if n in base and n in after],
+        "fixed_by_patch": [n for n in named if n in base and n not in after],
+        "not_reproduced": [n for n in named if n not in base and n not in after],
+    }
+    if not named:
+        return "NO TEST NAMED: nothing in the refusal record to check", 2, detail
+    if detail["caused"]:
+        return "SUPPORTED: the diff introduces the named failure", 1, detail
+    if detail["preexisting"] and not detail["not_reproduced"]:
+        return "NOT CAUSED: the named test fails without the diff as well", 0, detail
+    return "NOT REPRODUCED: the named test passes with the diff applied", 0, detail
+
+
+def run_named(tests_dir, names, timeout=DEFAULT_TIMEOUT):
+    """Run just these test files. -> (failing names, names absent from the tree)."""
+    env = _child_env()
+    failing, missing = [], []
+    for name in names:
+        path = Path(tests_dir) / name
+        if not path.exists():
+            missing.append(name)  # an absent test cannot be the gate's failure
+            continue
+        try:
+            proc = subprocess.run(
+                [sys.executable, str(path)],
+                cwd=str(path.parent.parent),
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                env=env,
+            )
+            if proc.returncode != 0:
+                failing.append(name)
+        except subprocess.TimeoutExpired:
+            failing.append(name)
+    return failing, missing
+
+
+def adjudicate_refusal(run_dir, repo=REPO_ROOT, rev="HEAD", timeout=DEFAULT_TIMEOUT):
+    """Check a past refusal against the diff it blames. -> (detail, exit status)."""
+    run_dir = Path(run_dir)
+    detail = {"run": run_dir.name, "rev": rev, "named": [], "verdict": "", "applied": False}
+    failure_file = run_dir / "landing_failed.txt"
+    patch = run_dir / "changes.patch"
+    if not failure_file.exists() or not patch.exists():
+        detail["verdict"] = "NO REFUSAL RECORD: %s needs landing_failed.txt and changes.patch" % run_dir
+        return detail, 2
+    named = parse_refusal(failure_file.read_text(encoding="utf8", errors="replace"))
+    detail["named"] = named
+    if not named:
+        detail["verdict"] = "NO TEST NAMED: %s names no test_" % failure_file
+        return detail, 2
+
+    tmp = tempfile.mkdtemp(prefix="landing-refusal-")
+    worktree = Path(tmp) / "tree"
+    try:
+        add = subprocess.run(
+            ["git", "-C", str(repo), "worktree", "add", "--detach", str(worktree), rev],
+            capture_output=True,
+            text=True,
+        )
+        if add.returncode != 0:
+            detail["verdict"] = "CANNOT ADJUDICATE: no worktree at %s (%s)" % (
+                rev, (add.stderr or "").strip()[:200])
+            return detail, 2
+        at_base, missing = run_named(worktree / "tests", named, timeout)
+        detail["at_base"], detail["missing_at_base"] = at_base, missing
+        applied = subprocess.run(
+            ["git", "-C", str(worktree), "apply", str(patch.resolve())],
+            capture_output=True,
+            text=True,
+        )
+        if applied.returncode != 0:
+            detail["apply_error"] = (applied.stderr or "").strip()[:300]
+            detail["verdict"] = (
+                "CANNOT ADJUDICATE: the patch does not apply at %s — the base has moved "
+                "since the run, so the failure cannot be reproduced from here" % rev
+            )
+            return detail, 2
+        detail["applied"] = True
+        after, _ = run_named(worktree / "tests", named, timeout)
+        detail["after_patch"] = after
+        verdict, status, judged = judge(named, at_base, after)
+        detail.update(judged)
+        detail["verdict"] = verdict
+        return detail, status
     finally:
         subprocess.run(
             ["git", "-C", str(repo), "worktree", "remove", "--force", str(worktree)],
