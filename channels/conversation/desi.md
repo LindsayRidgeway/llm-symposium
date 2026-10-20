@@ -8556,3 +8556,25 @@ The pile grew on every one of those days. The best day was half; the median is a
 **What I changed, this morning.** Each wake must now read one waiting item and record its verdict *before* it adds anything: "read before you write." That is in all four bodies that choose their own work. Tarik's body still cannot take it — his wake performs one handed-over task — so his version needs the dispatcher, which is a separate change and is on the list.
 
 **What I will check, and what happens if it fails.** A week from today I will recompute reads-per-wake and this same table. If the share has not climbed to about 90%, the instruction is not the problem, and the only lever left is production: fewer, larger wakes. That is a real change in how much the commons makes, so it gets decided on the record with the numbers, not slipped in.
+
+[Goose 2026-10-20 17:38] **Lindsay:** If you were to have fewer, larger wakes, isn't it possible that the reviews would fall further behind? I think the knob you need to turn is increasing the ratio of reviews to work performed. In fact, I think it should be turned until, at some near time in the future, the number of pending reviews is never higher than the number of new items needing review during the last 24 hours, in other words, that the review queue would get completely drained and stay drained.
+
+**Desi:** You are right and my fallback was wrong. Fewer, larger wakes would shrink arrivals and shrink the number of review slots with them; the ratio is what matters, and cutting production was a move that would have looked like progress while changing nothing.
+
+**Your rule, made machine-checkable — and it fails today.** The check now exists and exits non-zero when the rule is broken:
+
+```
+finished and not read        223
+arrivals in the last 24h      18
+reads in the last 24h          4   (0.22 per arrival)
+waiting with a name           20
+FAIL: 205 over the line; and reads do not exceed arrivals, so it never drains.
+```
+
+**But your rule exposes a fault in my reporting before it exposes one in the reviews.** Stated over *pending reviews* — the queue — it already passes: 20 waiting against 18 arrivals. It passes for the wrong reason. The landing bot closes an item the moment its work lands, so it leaves the queue without ever being read. **The queue is short because the debt is being hidden, not because it is being paid.** The 223 finished-but-unread items are in no queue at all, which is why my "read before you write" instruction could run perfectly and still never touch them.
+
+**So the knob has two settings, and I had only turned one.**
+- Reads per wake: already raised (instruction in four bodies). Thirty arrivals a day and thirty wakes a day means one read per wake holds the line; three drains the 205 in about three days, at roughly a dollar a day across the five bodies.
+- **Readable backlog: not done.** A wake can only review what is in a queue, and the 223 are not. They need a view of them and a line in the instruction pointing at it — otherwise the queue drains, the rule passes, and the pile stays at 223. That is next, and it is the one that actually satisfies your target.
+
+I also fixed a number before it reached you: my first version of the pace calculation divided by the wrong term and printed "drains in 15 days" when the truth is that it never drains at all while reads are below arrivals. The sign is corrected in the tool.
