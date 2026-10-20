@@ -25,7 +25,9 @@ has changed.
 
 Four verdicts, in this order, and the first that applies wins:
 
-  landed        the run id now appears in a landing commit on main — the blocker has gone; re-look
+  landed        the run id now appears in a landing commit on main — the blocker has gone
+  arrived       a path it names was *written after the postponement* and is not furniture — the
+                payload may have reached main under a different run id (added 2026-10-20)
   stale         postponed longer than --stale-days ago with no later row for the same id
   present       every repo path the item names exists now — weak evidence: a *modified* file exists
                 whether or not the change landed, so this says "look", not "done"
@@ -40,6 +42,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -47,6 +50,11 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 LEDGER = REPO / "channels" / "items.jsonl"
 STATUS5 = "postponed"
+
+# More commits than this touching one path make it furniture: it changes for other reasons than
+# this item's payload. 15 is above every payload file named by a postponed item and below every
+# path the 2026-10-20 measurement showed doing the flagging (24-45 commits).
+FURNITURE_OVER = 15
 
 
 def load(path: Path) -> list[dict]:
@@ -86,8 +94,78 @@ def repo_paths(item: dict) -> list[str]:
     return [p for p in item.get("paths", []) if p and not p.startswith(("http://", "https://"))]
 
 
-def classify(item: dict, rows: list[dict], log_text: str, repo: Path, stale_days: int,
-             now: dt.datetime) -> tuple[str, str]:
+# A repository path written in an item's own words ("…is absent from main"). The `paths` field is
+# not the payload: it lists what the *reviewed run* touched, so a review filed because a report
+# never landed reads `present` on shared files that were never in question.
+MENTIONED = re.compile(
+    r"\b((?:channels|scripts|tests|docs|research|governance|agenda|to-do-lists|\.github)"
+    r"/[A-Za-z0-9_./-]*[A-Za-z0-9_-]\.[A-Za-z0-9]+)")
+
+
+def reason_paths(item: dict) -> list[str]:
+    """Repository paths named in the item's reason/title, in first-seen order, deduplicated.
+
+    Evidence, not a verdict: which of these exist is reported beside the verdict so a reader can
+    see whether the thing the reason called missing has since arrived. Making it decide the
+    verdict would break the rule the tests pin — order of evidence, declared paths first.
+    """
+    text = " ".join(str(item.get(k) or "") for k in ("reason", "title", "short_title"))
+    out: list[str] = []
+    for match in MENTIONED.finditer(text):
+        path = match.group(1)
+        if path not in out:
+            out.append(path)
+    return out
+
+
+def git(repo: Path, *args: str) -> str:
+    try:
+        return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True,
+                              check=False).stdout
+    except OSError:
+        return ""
+
+
+def touch_counts(repo: Path) -> dict[str, int]:
+    """path -> number of commits that changed it, from one pass of `git log --name-only`.
+
+    This is what separates a payload from the furniture. Measured 2026-10-20: 102 of the 126
+    postponed items name at least one path written *after* the postponement, so "a named path
+    changed since" flags almost the whole pile — because five shared files do most of the
+    changing (`channels/reject-queue.md` in 45 items, `.github/workflows/test-and-report.yml` in
+    34, `to-do-lists/desi.md` in 26, `scripts/README.md` in 24, `channels/items.jsonl` in 15).
+    A path every wake touches says nothing about one item's payload; a path that changes twice a
+    year and changed this week says a great deal.
+    """
+    counts: dict[str, int] = {}
+    for line in git(repo, "log", "--format=", "--name-only").splitlines():
+        path = line.strip()
+        if path:
+            counts[path] = counts.get(path, 0) + 1
+    return counts
+
+
+def arrived(item: dict, repo: Path, touches: dict[str, int],
+            furniture_over: int = FURNITURE_OVER) -> list[tuple[str, str]]:
+    """(path, timestamp) for named paths written to main after the postponement, furniture excluded.
+
+    Evidence, not a verdict, and deliberately conservative: a path that does not exist, a path
+    changed more than `furniture_over` times, and a path whose last write predates the
+    postponement all say nothing about whether this item's payload landed.
+    """
+    out: list[tuple[str, str]] = []
+    named = list(dict.fromkeys(list(item.get("paths") or []) + reason_paths(item)))
+    postponed_utc = str(item.get("state_utc") or "")
+    for path in named:
+        if path.startswith(("http://", "https://")) or not (repo / path).exists():
+            continue
+        if touches.get(path, 0) > furniture_over:
+            continue
+        stamp = git(repo, "log", "-1", "--format=%cI", "--", path).strip()
+        if stamp and postponed_utc and stamp > postponed_utc:
+            out.append((path, stamp[:19]))
+    return out
+             now: dt.datetime, touches: dict | None = None) -> tuple[str, str]:
     """(verdict, one line of why). The first verdict that applies wins; order is the rule."""
     if item["id"] in log_text:
         return "landed", "its run id now appears in a landing commit on main"
@@ -98,6 +176,11 @@ def classify(item: dict, rows: list[dict], log_text: str, repo: Path, stale_days
     age = (now - when).days
     if age > stale_days and not later_rows(rows, item):
         return "stale", f"postponed {age} days ago and no later row names it again"
+    evidence = arrived(item, repo, touches or {})
+    if evidence:
+        path, stamp = evidence[0]
+        more = f" (and {len(evidence) - 1} more)" if len(evidence) > 1 else ""
+        return "arrived", f"{path} was last written {stamp}{more} — after the postponement, so the payload may be home"
     paths = repo_paths(item)
     if not paths:
         return "unverifiable", "names no repository path, so its reason cannot be checked here"
@@ -109,20 +192,26 @@ def classify(item: dict, rows: list[dict], log_text: str, repo: Path, stale_days
     return "absent", f"{len(present)} of {len(paths)} named path(s) exist; the payload is not there"
 
 
-ORDER = ["landed", "stale", "present", "absent", "unverifiable"]
-NEEDS_A_LOOK = {"landed", "stale", "present"}
+ORDER = ["landed", "arrived", "stale", "present", "absent", "unverifiable"]
+NEEDS_A_LOOK = {"landed", "arrived", "stale", "present"}
 
 
 def build(rows: list[dict], log_text: str, repo: Path, stale_days: int,
-          now: dt.datetime | None = None) -> list[dict]:
+          now: dt.datetime | None = None, touches: dict[str, int] | None = None) -> list[dict]:
     now = now or dt.datetime.now(dt.timezone.utc)
+    if touches is None:
+        touches = touch_counts(repo)
     out = []
     for item in postponed(rows):
-        verdict, why = classify(item, rows, log_text, repo, stale_days, now)
+        verdict, why = classify(item, rows, log_text, repo, stale_days, now, touches)
+        named = reason_paths(item)
         out.append({"id": item["id"], "verdict": verdict, "why": why,
                     "postponed_utc": item.get("state_utc", ""),
                     "amigo": item.get("amigo", "?"), "reviewer": item.get("reviewer", "?"),
-                    "title": (item.get("short_title") or item.get("title") or "")[:70]})
+                    "title": (item.get("short_title") or item.get("title") or "")[:70],
+                    "reason_named": named,
+                    "reason_present": [p for p in named if (repo / p).exists()],
+                    "reason_absent": [p for p in named if not (repo / p).exists()]})
     return sorted(out, key=lambda r: (ORDER.index(r["verdict"]), r["postponed_utc"]))
 
 
@@ -151,6 +240,12 @@ def main() -> int:
     for f in (facts if a.all else look):
         print(f"  [{f['verdict']}] {f['id']}  postponed {f['postponed_utc'][:10]} by {f['reviewer']}"
               f"  {f['title']}\n      {f['why']}")
+        if f["reason_named"]:
+            line = (f"      its own words name {len(f['reason_named'])} more path(s): "
+                    f"{len(f['reason_present'])} present, {len(f['reason_absent'])} absent")
+            if f["reason_present"]:
+                line += f" — present: {', '.join(f['reason_present'][:3])}"
+            print(line)
     return 0
 
 
