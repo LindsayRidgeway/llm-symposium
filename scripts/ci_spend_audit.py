@@ -18,17 +18,23 @@ without recording what it spent.
 
 It is a check, not a model call: it reads the repository, costs nothing, and needs no key.
 
-The two questions it answers per workflow:
+The three questions it answers per workflow:
 
   spends?   a script the workflow executes talks to a paid provider — an SDK import
             (openai / anthropic / google.genai), a provider endpoint, or a goose run
             (which bills whatever provider it is pointed at)
   records?  that script touches the usage ledger — `record_sdk_call`, `record_api_call`,
             `channels.usage`, or runner.py's `_record_usage`
+  persists? a step after it stages the ledger path, commits, and pushes — a row written
+            into a runner's filesystem and never committed is indistinguishable from no
+            row at all, which is the exact shape of the 2026-10-16 gap ("closed in code,
+            open in data"): a recorder that works, and a file that does not survive the job.
 
-Exit code is 1 when an on-the-clock spender does not record. A `workflow_dispatch`-only
-workflow is reported but never fails the check: a human pressing a button knows they are
-spending, and that is the whole point of the retirement.
+Exit code is 1 when an on-the-clock spender does not record, **or when any spender records
+into a file the runner throws away**. A `workflow_dispatch`-only workflow that records
+nothing is reported but never fails the check: a human pressing a button knows they are
+spending, and that is the whole point of the retirement. A manual workflow that *does*
+record is held to the persistence test — the money is the same whichever hand pressed it.
 
 CLI:
   python3 scripts/ci_spend_audit.py
@@ -165,6 +171,64 @@ def local_imports(text: str, root: Path = ROOT) -> list:
     return found
 
 
+LEDGER_PATH = "channels/usage/ci-usage.jsonl"
+
+
+def _covers_ledger(pathspec: str) -> bool:
+    """Does this `git add` pathspec take `channels/usage/ci-usage.jsonl` with it?
+
+    `git add .` and `git add -A` do. So does any directory above the file (`channels/`,
+    `channels/usage/`) and the file itself. `git add tests/…` does not, and neither does a
+    pathspec that only looks like a parent — `channels/usage-notes/` must not pass.
+    """
+    p = pathspec.strip().strip("'\"")
+    if p in ("-A", "--all", ".", ":/", "*"):
+        return True
+    p = p.rstrip("/")
+    if p in ("", "channels", "channels/usage"):
+        return True
+    if p.startswith("*") or "*" in p:         # `channels/usage/*.jsonl`
+        prefix = p.split("*")[0].rstrip("/")
+        return LEDGER_PATH.startswith(prefix + "/") or prefix == ""
+    return p == LEDGER_PATH or LEDGER_PATH.startswith(p + "/")
+
+
+def persistence(text: str) -> dict:
+    """Can a row written to `channels/usage/ci-usage.jsonl` reach `main` from this workflow?
+
+    Three things are needed and each one alone is a false positive: staging without a commit
+    leaves the row in the index, a commit without a push leaves it in the runner's clone, and a
+    push alone sends whatever was already committed. Commented-out lines do not count — the
+    repository is full of retired steps, and reading one as live is the failure this file
+    exists to avoid.
+    """
+    stages = commits = pushes = False
+    evidence = []
+    for raw in text.splitlines():
+        line = _strip_comment(raw).strip()
+        if not line:
+            continue
+        # `git` may sit behind a conditional or a loop — `if git push …; then`, `for …; do git
+        # commit …` — so each command is searched for anywhere in the line, not only at its
+        # start. The first version of this required `^git` and reported two real pushes as
+        # absent, which would have turned a working workflow into a FAIL.
+        add = re.search(r"\bgit\s+add\b(.*)", line)
+        if add:
+            rest = re.split(r"&&|\|\||[;|]", add.group(1))[0]
+            args = [a for a in rest.split() if a != "--"]
+            if any(_covers_ledger(a) for a in args):
+                stages = True
+                evidence.append(line)
+        if re.search(r"\bgit\b[^\n]*?\bcommit\b", line):
+            commits = True
+            evidence.append(line)
+        if re.search(r"\bgit\b[^\n]*?\bpush\b", line):
+            pushes = True
+            evidence.append(line)
+    return {"stages": stages, "commits": commits, "pushes": pushes,
+            "persists": stages and commits and pushes, "evidence": evidence}
+
+
 def classify_script(relpath: str, root: Path = ROOT) -> dict:
     """What one script costs and whether it says so, including the modules it calls into."""
     path = (root / relpath).resolve()
@@ -213,6 +277,7 @@ def audit(workflow_dir: Path = WORKFLOWS, root: Path = ROOT) -> list:
         if spends and not scripts:
             records = any(m in text for m in RECORD_MARKERS)
         on_clock = [t for t in triggers if t in CLOCK_TRIGGERS]
+        keep = persistence(text)
         rows.append({
             "workflow": wf.name,
             "triggers": triggers,
@@ -220,14 +285,22 @@ def audit(workflow_dir: Path = WORKFLOWS, root: Path = ROOT) -> list:
             "spends": spends,
             "spends_because": why,
             "records": records if spends else None,
-            "verdict": _verdict(spends, records, on_clock),
+            # Only asked of a workflow that records: "persists" of a workflow with nothing to
+            # persist is a column that would answer a question nobody asked.
+            "persists": keep["persists"] if (spends and records) else None,
+            "persists_because": keep["evidence"] if (spends and records) else [],
+            "verdict": _verdict(spends, records, on_clock, keep["persists"]),
         })
     return rows
 
 
-def _verdict(spends: bool, records: bool, on_clock: list) -> str:
+def _verdict(spends: bool, records: bool, on_clock: list, persists=None) -> str:
     if not spends:
         return "no model spend"
+    if records and persists is False:
+        # The row is real and the file dies with the job. This is not a lesser failure than
+        # recording nothing: it is the same silence with a receipt that says it was fixed.
+        return "FAIL: records rows the runner throws away"
     if on_clock and not records:
         return "FAIL: on the clock and unrecorded"
     if on_clock and records:
@@ -239,13 +312,16 @@ def _verdict(spends: bool, records: bool, on_clock: list) -> str:
 
 def render(rows: list) -> str:
     w = max([len(r["workflow"]) for r in rows] + [8])
-    out = [f"{'workflow'.ljust(w)}  {'clock':<10} {'spends':<7} {'records':<8} verdict",
-           "-" * (w + 40)]
+    out = [f"{'workflow'.ljust(w)}  {'clock':<10} {'spends':<7} {'records':<8} "
+           f"{'keeps':<6} verdict",
+           "-" * (w + 46)]
     for r in rows:
         clock = ",".join(r["on_clock"]) if r["on_clock"] else "-"
         spends = "yes" if r["spends"] else "-"
         records = "-" if r["records"] is None else ("yes" if r["records"] else "NO")
-        out.append(f"{r['workflow'].ljust(w)}  {clock:<10} {spends:<7} {records:<8} {r['verdict']}")
+        keeps = "-" if r.get("persists") is None else ("yes" if r["persists"] else "NO")
+        out.append(f"{r['workflow'].ljust(w)}  {clock:<10} {spends:<7} {records:<8} "
+                   f"{keeps:<6} {r['verdict']}")
     clocked = [r for r in rows if r["on_clock"] and r["spends"]]
     out.append("")
     if not clocked:
@@ -255,9 +331,15 @@ def render(rows: list) -> str:
         out.append(f"On the clock and spending: {len(clocked)} "
                    f"({', '.join(r['workflow'] for r in clocked)})")
     failures = [r for r in rows if r["verdict"].startswith("FAIL")]
+    unrecorded = [r for r in failures if "unrecorded" in r["verdict"]]
     out.append("Unrecorded on-the-clock spend: "
-               f"{len(failures)}" + (" — " + ", ".join(r["workflow"] for r in failures)
-                                     if failures else " (the ledger's zero is explained)"))
+               f"{len(unrecorded)}" + (" — " + ", ".join(r["workflow"] for r in unrecorded)
+                                       if unrecorded else " (the ledger's zero is explained)"))
+    lost = [r for r in rows if r["verdict"] == "FAIL: records rows the runner throws away"]
+    out.append("Rows a recording workflow loses with its runner: "
+               f"{len(lost)}" + (" — " + ", ".join(r["workflow"] for r in lost)
+                                 if lost else " (every recorder stages, commits and pushes "
+                                              "the ledger)"))
     return "\n".join(out)
 
 

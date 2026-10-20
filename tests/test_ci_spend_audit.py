@@ -103,11 +103,15 @@ class Classification(unittest.TestCase):
                   .workflow("daily.yml",
                             "on:\n  schedule:\n    - cron: '0 1 * * *'\n"
                             "jobs:\n  j:\n    steps:\n      - run: |\n"
-                            "          python .github/scripts/worker.py\n"))
+                            "          python .github/scripts/worker.py\n"
+                            "          git add channels/usage/\n"
+                            "          git commit -m 'record usage'\n"
+                            "          git push origin main\n"))
             rows = fx.audit()
             self.assertEqual(len(rows), 1)
             self.assertTrue(rows[0]["spends"])
             self.assertTrue(rows[0]["records"])
+            self.assertTrue(rows[0]["persists"])
             self.assertEqual(rows[0]["verdict"], "on the clock, recorded")
 
     def test_clocked_spender_that_does_not_record_fails(self):
@@ -175,6 +179,76 @@ class Classification(unittest.TestCase):
             self.assertTrue(any("model key" in r for r in row["spends_because"]))
 
 
+class PersistenceDetection(unittest.TestCase):
+    """The third question: does the row reach `main`, or die in the runner's filesystem?
+
+    Not hypothetical. `channels/usage/README.md` spent three weeks saying the recorder was
+    "closed in code, open in data", and the reason was invisible in any single workflow file:
+    a script that records correctly, and a job that never commits what it wrote.
+    """
+
+    def test_every_way_of_staging_the_ledger_counts(self):
+        for pathspec in (".", "-A", "--all", "channels/", "channels", "channels/usage/",
+                         "channels/usage", "channels/usage/ci-usage.jsonl",
+                         "channels/usage/*.jsonl"):
+            self.assertTrue(audit._covers_ledger(pathspec), pathspec)
+
+    def test_other_pathspecs_do_not(self):
+        for pathspec in ("tests/last-verification.txt", "probes/results/",
+                         "docs/", "channels/usage-notes/", "actuator/requests/",
+                         "channels/usage-archive/"):
+            self.assertFalse(audit._covers_ledger(pathspec), pathspec)
+
+    def test_all_three_git_commands_are_required(self):
+        stage = "git add channels/usage/\n"
+        commit = "git commit -m 'row'\n"
+        push = "git push origin main\n"
+        self.assertTrue(audit.persistence(stage + commit + push)["persists"])
+        for missing in (stage + commit, stage + push, commit + push):
+            self.assertFalse(audit.persistence(missing)["persists"],
+                             f"these three are not enough on their own:\n{missing}")
+
+    def test_a_conditional_push_counts(self):
+        """Regression: the real workflows write `if git push …; then`. A `^git` anchor called
+        two working pushes absent and turned a correct workflow into a FAIL."""
+        text = ("git add channels/usage/\n"
+                "git commit -m 'row'\n"
+                "if git push \"$PUSH_URL\" main; then echo ok; fi\n")
+        self.assertTrue(audit.persistence(text)["persists"])
+
+    def test_commented_out_steps_do_not_count(self):
+        """The repository is built out of retired steps. Reading one as live is the defect."""
+        text = ("# git add channels/usage/\n"
+                "# git commit -m 'row'\n"
+                "# git push origin main\n")
+        keep = audit.persistence(text)
+        self.assertFalse(keep["persists"])
+
+    def test_a_recorder_that_cannot_persist_fails_the_audit(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = (Fixture(tmp)
+                  .script(".github/scripts/worker.py", SPENDER_THAT_RECORDS)
+                  .workflow("manual.yml",
+                            "on:\n  workflow_dispatch:\n"
+                            "jobs:\n  j:\n    steps:\n      - run: |\n"
+                            "          python .github/scripts/worker.py\n"
+                            "          git add tests/last-verification.txt\n"
+                            "          git commit -m 'not the ledger'\n"
+                            "          git push origin main\n"))
+            row = fx.audit()[0]
+            self.assertTrue(row["records"])
+            self.assertFalse(row["persists"])
+            self.assertEqual(row["verdict"], "FAIL: records rows the runner throws away")
+
+    def test_verdict_does_not_borrow_the_clock_failure(self):
+        self.assertEqual(audit._verdict(True, True, ["schedule"], False),
+                         "FAIL: records rows the runner throws away")
+        self.assertEqual(audit._verdict(True, True, ["schedule"], True),
+                         "on the clock, recorded")
+        self.assertEqual(audit._verdict(True, False, ["schedule"], False),
+                         "FAIL: on the clock and unrecorded")
+
+
 class TheRepositoryItself(unittest.TestCase):
     """The measured facts this script was written to state. If one of them changes, that is the
     moment the usage ledger's silence stops being explainable and this test should fail."""
@@ -201,6 +275,29 @@ class TheRepositoryItself(unittest.TestCase):
         self.assertTrue(row["spends"])
         self.assertTrue(row["records"], "runner.py must record into channels/usage")
         self.assertEqual(row["on_clock"], [])
+
+    def test_every_recorder_persists_its_rows(self):
+        """Measured 2026-10-20: all three workflows that write usage rows also stage, commit
+        and push the ledger. This is the fact the to-do item "persist the CI usage rows" was
+        written without — it was rebuilt from a missing-file reading, and the file had never
+        been written because nothing on a clock spends, not because no step commits it.
+        If a future edit drops the staging line, this fails and the audit stops passing."""
+        recorders = {n: r for n, r in self.rows.items() if r["records"]}
+        self.assertEqual(sorted(recorders),
+                         ["autonomous-goose-tarik.yml", "channel-poll.yml", "symposium.yml"])
+        for name, row in recorders.items():
+            self.assertTrue(row["persists"], f"{name} records rows it never commits back")
+            self.assertEqual(row["verdict"], "manual, recorded")
+
+    def test_the_persistence_evidence_names_the_git_commands(self):
+        """Per workflow, the three commands must be findable in its own text — the report
+        quotes them, so they must not be inferred from the absence of a failure."""
+        for name in ("autonomous-goose-tarik.yml", "channel-poll.yml", "symposium.yml"):
+            keep = audit.persistence(audit._read(audit.WORKFLOWS / name))
+            self.assertTrue(keep["stages"], name)
+            self.assertTrue(keep["commits"], name)
+            self.assertTrue(keep["pushes"], name)
+            self.assertTrue(keep["evidence"], name)
 
     def test_known_unrecorded_spender_is_named_not_hidden(self):
         """`check-tarik-model.yml` really does spend (a chat completion) and records nothing.
