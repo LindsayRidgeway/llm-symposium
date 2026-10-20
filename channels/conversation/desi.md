@@ -8482,3 +8482,55 @@ Mapping: your **A** = my Status 2 (finished, never read), **B** = Status 3 (wait
 **The (a)/(b) split does not exist in the data.** Nothing records whether an act came from a wake or a live session. It is one field written at the moment of the act, and it cannot be backfilled — so I will start recording it, and the split becomes available going forward rather than honestly claimable now.
 
 Written up as `governance/2026-10-20-counting-the-work.md` so the next census uses your letters.
+
+[Goose 2026-10-20 14:51] **Lindsay:** Your amendments refer to mechanisms in your process that I don't understand. I'm not saying that the process is wrong, I'm just saying that I don't understand your terms "finished", "read", and "created". But don't define those terms right now. Instead, please give me your comprehensive list of counts and associated formulas. Don't keep my designations, use your own naming scheme. But if one of your names has the identical meaning as one of my Cn and Cn(x) names, please show that name in parentheses in your list.
+
+**Desi:** Here it is. Parentheses mean **identical meaning**; "≈" means nearest but not the same. Every one is countable from the trail unless marked otherwise.
+
+**Stocks — items in a state at one moment (`Q`)**
+
+| name | counts | yours |
+|---|---|---|
+| `Q-read` | finished, and a model read it and accepted it | — |
+| `Q-unread` | finished, and no model has read it | (A) |
+| `Q-named` | not finished, a reader's name is on it | (B) |
+| `Q-unnamed` | not finished, no name on it | (E) |
+| `Q-postponed` | read, with the reason it is stopped | (D) |
+| `Q-rejected` | read, and it should never be done | (C) |
+
+**Flows — items entering a state during a window (`N`)**
+
+| name | counts | yours |
+|---|---|---|
+| `N-arrive` | a new item appears in the ledger | (C1) |
+| `N-name` | an item is given a reader's name | — |
+| `N-read-accept` | a model reads it and accepts it | (C6) |
+| `N-read-reject` | a model reads it and rejects it | (C7) |
+| `N-read-postpone` | a model reads it and postpones it | (C8) |
+| `N-close-unread` | the landing bot closes it, no model ever read it | ≈ (C9) |
+| `N-read-named` | read by the reader who had been named | (C10) |
+| `N-read-unnamed` | read with no name on it beforehand | (C9) |
+| `N-reopen` | leaves postponed or rejected and returns to play | — |
+
+**Totals and checks**
+
+```
+T-reads    = N-read-accept + N-read-reject + N-read-postpone     (C5, models only)
+T-closures = T-reads + N-close-unread
+T-events   = the sum of every N
+
+(1) Q-total(after) = Q-total(before) + N-arrive
+(2) for each state q:  Q_q(after) = Q_q(before) + inflow_q - outflow_q
+(3) summing (2):  the sum of the deltas = N-arrive      <- your rule, corrected
+(4) audit-trail length = the sum of inflows             <- not the sum of deltas
+(5) N-read-named + N-read-unnamed = T-reads            (your C5 = C9 + C10)
+(6) N-arrive = C3 + C4 + C2                            <- needs the run's own report, not the ledger
+```
+
+**(3) and (4) differ, and that is the one correction to your design:** the trail's length equals the number of moves *into* states; the sum of the deltas equals arrivals. They are the same number only when no state both gains and loses in the same window — and states do both, constantly.
+
+**Two counts are not available today.** Your C3/C4/C2 describe what the amigo *said* about needing a review, which is in the run's report text, not in the ledger. And `(a)/(b)` — session versus wake — is recorded nowhere: one new field from today forward, nothing older honestly reconstructible.
+
+**A warning about my own quick arithmetic, since I was about to give you a table of flows:** a per-row count of naming events in the window says 95, while the stock of named items moved by 15. The rows repeat — about two per item. So flows must be counted per *item*, never per row, and I won't publish flow numbers until the tool counts them that way. That is also why tomorrow's second census matters: it is the first one whose trail must balance.
+
+The list is now in `governance/2026-10-20-counting-the-work.md`, so the next wake uses these names rather than reinventing them.
