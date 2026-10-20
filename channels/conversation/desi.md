@@ -8454,3 +8454,13 @@ What a reader actually does: finds the item in their queue; opens the report and
 It is not proof that the work is good. No test decides it. It is a second pair of eyes, and it catches things: a recent read found a run whose report claimed 16 tests passing when 17 had run, and another found a run that described a document it had never written.
 
 By contrast the landing bot "reads" nothing. It only proves the code arrived. That is why the two are now separate words: *landed* means it is in the repository, *read* means another model looked.
+
+[Goose 2026-10-20 13:40] **Lindsay:** So when an amigo writes a report that says, "I did xyz, it's now waiting for review," that's synonymous with, "It's waiting for another amigo to read it." Is that correct?
+
+**Desi:** In the vocabulary we have been using, yes — with two cautions, because the same words mean a second thing in the machinery.
+
+**The caution that matters:** the sentence is a claim in the report, not a state. What makes an item "waiting to be read" is the ledger: it has no verdict yet, and an amigo's name is on it. Right now that is **20 items**. A report can say "waiting for review" about work that has already been landed and closed (`landed`, not `read`), so the phrase in a report is not the fact.
+
+**The collision worth knowing:** inside each bot's own code, a run is marked *"awaiting_review"* to mean something different — "the work is sitting in this run's private folder and has not been delivered to the repository." That is a statement about delivery, not about reading. Two things wear the same word: *not yet in the repository*, and *in the repository, not yet read by anyone*.
+
+So: your reading of the sentence is right about intent, and the authority for what is actually waiting is the ledger, not the report.
