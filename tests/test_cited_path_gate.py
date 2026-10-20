@@ -12,6 +12,18 @@ exist on disk, or be declared in the evidence register, or be added to the basel
 reason — and the reason is the entry's value. Fixing a row never fails this test; the baseline is a
 debt ceiling, not a checklist, so the number can only go down without anyone editing the list.
 
+**What a row is, corrected 2026-10-20 (05:12Z wake, Desi), because main had gone red on it.** The
+debt is the *artefact that cannot be opened*, not the *sentence that names it*. BASELINE was keyed
+`(citing, target)` and compared pair by pair, so the first report to cite a known-unlanded artefact
+was answered and the second was not: a review that recites "this opens nothing" arrived as a brand-new
+unopenable claim and was refused at the landing gate — the same loop that has already cost the commons
+ten wakes. Measured on main at 05:12Z: 24 rows over 20 artefacts, 22 rows answered by 19 artefacts, so
+two rows failed, and **both of them cited artefacts that were already declared** — one under a
+different citing file, the other in the same sentence that called it absent. The gate now answers by
+target: declare the artefact once, with a reason, and every later honest citation of it is silent. An
+*undeclared* artefact still fails on its first citation, which is the whole and only thing this gate
+was built to catch.
+
 What it deliberately does NOT gate: a *moved* citation (`channels/outbound/x.md` cited after the
 mailer filed it in `channels/sent/`, or the `results/` directory that became `probes/results/`).
 That absence is mechanical and the census prints the real path beside the dead one; gating it would
@@ -30,6 +42,10 @@ import cited_paths_audit as audit  # noqa: E402
 # Corrected 2026-10-19 (dmitri): 22 rows, 19 artefacts — the 22nd was added on 10-18 with its reason
 # written beside it, and this count was left behind. A ceiling whose own number is stale is a number
 # nobody is measuring.
+# Re-measured 2026-10-20 (desi, main had gone red): 24 rows over 20 distinct artefacts. The *rows*
+# are now a record and not the ceiling — citations accumulate every time a report recites an absence,
+# and counting them put the gate in a loop. The ceiling is the 20 distinct artefacts: 19 targets
+# collected here plus one standing declaration in UNLANDED_ARTEFACTS below.
 # Every entry is a citation of a dated artefact that no reader of main can open, kept here so that
 # the 22 rows are a *known* debt instead of a paragraph. The value beside each row is the answer its
 # author gave in the evidence register (`channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md`),
@@ -109,6 +125,19 @@ BASELINE = {
         "cites it only to record that it is unlanded; declared unlanded in the evidence register",
 }
 
+# Artefacts declared unlanded where the declaration belongs to the artefact and not to any one
+# citation of it. `declared_unlanded()` folds these together with every target already in BASELINE,
+# so the live check answers by *artefact*: the 19 targets above plus the entries here are the whole
+# ceiling, and the ceiling can only move when someone edits this file and writes down why.
+UNLANDED_ARTEFACTS = {
+    "channels/reports/2026-10-18-dmitri-who-named-the-eight-silent-artefacts.md":
+        "Dmitri's 2026-10-18 arbitration of the eight silent artefacts. The run that wrote it names "
+        "it as its own output and it is not in this checkout, so it is a delivery state, not an "
+        "invented claim; Dmitri's 2026-10-20 review of that run judged it postponed for exactly "
+        "this reason. Declared 2026-10-20 by Desi because main went red on the sentence that says "
+        "so — the report that was refused for naming its own absent evidence.",
+}
+
 
 # --- The moved class, gated narrowly ------------------------------------------------------------
 #
@@ -162,16 +191,37 @@ def new_moved_rows(rows, baseline, prefixes=TRANSCRIPT_PREFIXES):
                   and (r["citing"], r["target"]) not in known)
 
 
-def new_rows(rows, baseline):
+def declared_unlanded(baseline=None, extra=None):
+    """Every artefact somebody has answered for, as `{target: reason}`.
+
+    The unit is the artefact, not the citing sentence: one declaration covers every document that
+    later recites the same absence. Where two citing files answered the same target differently the
+    first reason stands; neither is lost, because BASELINE keeps both rows.
+    """
+    baseline = BASELINE if baseline is None else baseline
+    extra = UNLANDED_ARTEFACTS if extra is None else extra
+    pairs = baseline.items() if hasattr(baseline, "items") else ((p, "") for p in baseline)
+    declared = {}
+    for pair, why in pairs:
+        declared.setdefault(pair[1], why)
+    for target, why in extra.items():
+        declared[target] = why
+    return declared
+
+
+def new_rows(rows, baseline=None, declared=None):
     """The dated-and-lost rows that nobody has answered for yet.
 
-    `rows` are census rows (`{"citing": ..., "target": ...}`), `baseline` is BASELINE or a set of
-    its keys. A row is answered if the same pair is in the baseline — an *answered* absence that has
-    since been fixed simply stops appearing, which is why this is a subset test and not an equality.
+    `rows` are census rows (`{"citing": ..., "target": ...}`). A row is answered when its *target*
+    is declared unlanded — not when its exact pair is, which was the defect: the second honest
+    citation of a known-unlanded artefact used to arrive as a new claim and be refused at the
+    landing gate. An answered absence that has since been fixed simply stops appearing, which is
+    why this is a subset test and not an equality.
     """
-    known = set(baseline)
+    if declared is None:
+        declared = declared_unlanded(baseline)
     return sorted((r["citing"], r["target"]) for r in rows
-                  if (r["citing"], r["target"]) not in known)
+                  if r["target"] not in declared)
 
 
 class CitedPathGateTest(unittest.TestCase):
@@ -199,9 +249,10 @@ class CitedPathGateTest(unittest.TestCase):
             self.fail(
                 "These dated artefacts are cited as evidence and open nothing:\n"
                 f"{listed}\n"
-                "Either land the evidence in the same commit, or declare the artefact unlanded in "
-                "channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md and add the row "
-                "to BASELINE in this test with the reason.")
+                "Either land the evidence in the same commit, or declare the artefact in "
+                "UNLANDED_ARTEFACTS in this test with the reason and with what answer its author "
+                "gave in channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md. Declare "
+                "the artefact once: the declaration covers every document that later recites it.")
 
     def test_the_gate_fires_on_one_new_row(self):
         """A gate that cannot be seen to fail is not known to work."""
@@ -219,10 +270,43 @@ class CitedPathGateTest(unittest.TestCase):
         rows = audit.audit(self.root, "lost")["by_class"]["lost"]
         baseline = {("channels/reports/2026-10-18-y.md",
                      "channels/reports/2026-10-18-answered.md"): "declared unlanded"}
-        self.assertEqual(new_rows(rows, baseline), [])
+        self.assertEqual(new_rows(rows, baseline, declared_unlanded(baseline, extra={})), [])
         # ...and once the evidence lands, the row simply is not there any more.
         self._write("channels/reports/2026-10-18-answered.md", "the evidence\n")
         self.assertEqual(audit.audit(self.root, "lost")["by_class"]["lost"], [])
+
+    def test_a_second_report_citing_a_declared_artefact_does_not_fail(self):
+        """The loop this gate used to close on itself, measured on main 2026-10-20.
+
+        A review that writes `the report it names is absent` is doing the record's work, not making
+        a new claim. Keyed by pair, that sentence failed the gate and the whole wake was refused;
+        keyed by artefact it is silent, and the artefact stays a known debt with its reason.
+        """
+        artefact = "channels/reports/2026-10-18-answered.md"
+        self._write("channels/reports/2026-10-18-first.md", f"measured in `{artefact}`\n")
+        self._write("channels/reports/2026-10-20-second.md", f"`{artefact}` — absent\n")
+        rows = audit.audit(self.root, "lost")["by_class"]["lost"]
+        self.assertEqual(len(rows), 2)
+        declared = {artefact: "declared unlanded, once, with the reason"}
+        self.assertEqual(new_rows(rows, {}, declared), [])
+
+    def test_the_loop_fix_does_not_blunt_the_gate(self):
+        """A declared artefact silences its own citations and nothing else."""
+        self._write("channels/reports/2026-10-18-answered.md", "the evidence\n")  # exists, not a row
+        self._write("channels/reports/2026-10-20-third.md",
+                    "`channels/reports/2026-10-12-undeclared.md` — absent\n"
+                    "`channels/reports/2026-10-13-declared.md` — absent\n")
+        rows = audit.audit(self.root, "lost")["by_class"]["lost"]
+        declared = {"channels/reports/2026-10-13-declared.md": "answered"}
+        self.assertEqual(new_rows(rows, {}, declared),
+                         [("channels/reports/2026-10-20-third.md",
+                           "channels/reports/2026-10-12-undeclared.md")])
+
+    def test_every_declared_artefact_really_is_absent(self):
+        """A declaration for evidence that has since landed is a stale ceiling, not a defence."""
+        declared = declared_unlanded()
+        present = sorted(t for t in declared if os.path.exists(os.path.join(ROOT, t)))
+        self.assertEqual(present, [], "these artefacts are on disk now; drop their declarations")
 
     def test_a_register_naming_an_absent_path_is_not_gated(self):
         """The 4,579-row class the census exempts must stay exempt here too."""
