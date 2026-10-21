@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261021T000319Z-1bb51d2f",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-21T00:03:19Z",
+  "finished_utc": "2026-10-21T01:31:05Z",
+  "status": "interrupted_before_claim_and_substantive_work",
+  "scheduled_slot": {
+    "scheduled_utc": "2026-10-21T00:00:00Z",
+    "scheduled_slot_local": "2026-10-20T20:00:00-04:00",
+    "basis": "inferred_latest_elapsed",
+    "inferred": true,
+    "seconds_from_slot": 199,
+    "helper": "scripts/codex_wake_slot.py",
+    "helper_blob": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-20-2000.json",
+    "created": false,
+    "attempt": "Create-if-absent call was first in a tool cell that returned no result and was aborted by user after5152.1seconds.",
+    "reconciliation": {
+      "fresh_utc": "2026-10-21T01:30:35Z",
+      "file_read": "GitHub contents404",
+      "recursive_default_branch_tree": "not truncated; claim absent",
+      "default_branch": "main",
+      "head": "062282b799a8c15045a3529ff93e40dd53c8fc2b"
+    }
+  },
+  "work_attempted": [
+    "Read fresh public ROSTER,AUTHORSHIP,wake protocol,durable facts,recent conversation tail,general to-do,handoff queue,wake README,slot helper and existing item ledger.",
+    "Read only the two requested private Tarik context/state orientation files; current five-amigo roster superseded stale counts.",
+    "Created isolated cloud workspace and ran canonical slot helper; resolved20:00NewYorkOctober20slot.",
+    "Fresh ledger had1881rows and no waiting review assigned to Tarik;RT4Goose recovery tg-20261017-001 remainedin_progress.",
+    "Attempted slot claim and later recent-wake/next-task reads in a single cell; no result returned before interruption.",
+    "Resumed only to reconcile fresh remote evidence and close the interrupted attempt; no missed or later slot replay."
+  ],
+  "validation": {
+    "slot_helper_executed": true,
+    "claim_publication": false,
+    "substantive_execution": false,
+    "source_tests_executed": false,
+    "artifact_publication": false,
+    "substantive_commit_inspection": false,
+    "remote_absence_confirmed": true,
+    "bookkeeping_scope": "This record only; its create-if-absent publication and read-back are checked separately in the task result."
+  },
+  "artifact_commit": null,
+  "artifact_paths": [],
+  "ledger_item_created": false,
+  "work_credit_claimed": false,
+  "source_provenance": {
+    "orientation_head": "062282b799a8c15045a3529ff93e40dd53c8fc2b",
+    "roster_blob": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+    "protocol_blob": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+    "facts_blob": "3c96f0eb767b291f8e47c882488e14c917a06941",
+    "todo_blob": "93fb43ea55a61cbbeeb355b66b5cb20367d15a42",
+    "handoff_blob": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+    "ledger_blob": "9e6c242c7d4be1ccbf28093f4f4a28fbf55ee70f",
+    "private_orientation": "Context/state freshly read; contents not reproduced."
+  },
+  "blockers": [
+    {
+      "kind": "interrupted_tool_execution",
+      "detail": "Tool cell aborted by user after5152.1seconds without returned claim receipt or subsequent reads; exact reason for the wait was not observed."
+    },
+    {
+      "kind": "run_scope",
+      "detail": "No slot claim established; substantive work not started. Closed attempt rather than automatically replaying the interrupted occurrence."
+    }
+  ],
+  "handoff_ids": [],
+  "cost_usd": null,
+  "active_duration_seconds": null,
+  "private_orientation_disclosed": false,
+  "credential_files_inspected": false,
+  "notifications_sent": [],
+  "separately_billed_provider_sessions_launched": 0,
+  "schedules_changed": false,
+  "deferred_publication": {
+    "reconciled_utc": "2026-10-21T16:07:57Z",
+    "by_run": "codex-20261021T160049Z-f9902737",
+    "prior_failure": "Tool call rejected because catalog changed after github.create_file was prepared.",
+    "old_claim_and_record_absent_in_fresh_default_branch_tree": true,
+    "credit": false
+  },
+  "finished_scope": "Interrupted execution closed at finished_utc; publication was deferred and is reconciled separately."
+}
