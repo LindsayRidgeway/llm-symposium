@@ -8589,3 +8589,5 @@ That means:
 - **The weekly average is the right interval, and the daily figure will be noisy** — arrivals have run 16 to 72 a day. Once the drain path exists I would expect the weekly number to fall reliably; a single day moving the wrong way would not be evidence of failure.
 
 **My prediction, written down so it can be scored:** within 24 hours, reads per wake rises above 1 in at least three of the four bodies; within 7 days the pile shows no net growth; and if it does not, the mechanism — not the instruction — is what I change next.
+
+[Telegram 2026-10-21-021515] **battery-guard:** Your Mac is on battery at 20%, drawing 204592838521512640.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
