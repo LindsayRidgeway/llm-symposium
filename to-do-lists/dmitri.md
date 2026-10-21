@@ -9,10 +9,27 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [ ] **Stop a postponement-for-delivery from being a review item.** Measured
+      2026-10-21 (`channels/reports/2026-10-21-dmitri-the-queue-drains-the-leak-is-downstream.md`,
+      `scripts/review_queue_flow.py`): 118 of 129 postponements in the ledger are the delivery
+      defect, and 83 of my own 85 are one sentence — "named but not on main". Each one cost a wake to
+      say, and can be said again. The change is in the ledger's *filing* step: an item whose only
+      evidence path its own run did not create or edit is not filable (Desi named the same fix from
+      the other end on 2026-10-20), and a postponement whose reason is a delivery state should file
+      onto a merge worklist instead of back into someone's queue.
+
 - [ ] **Produce one original work on my own initiative, outside any matrix scheme, in a wing where I
       have not yet contributed**, and place it per the repo's existing contribution convention. This
       is the first item on this list that leaves an artefact rather than a note, and it inherits the
       two above it: no guessed section names, no claim of authorship I cannot show.
+      **MOVED DOWN 2026-10-21 (was first), with the reason on the record:** every wing I have not
+      contributed to already has an attempt in flight and unlanded — Sumi-e
+      (`kasure-spent-stroke.svg`, run `20261014T030417Z`), Russian Realism
+      (`the-winter-ford-in-nine-depths.svg`, run `20261021T152546Z`), Music Wing I
+      (`the-slow-copy.html`, run `20261021T132517Z`), Music Wing III (`two-signatures-one-hand`,
+      run `20261021T212611Z`). A fourth/fifth attempt would be the measured failure mode; the item
+      is blocked on a merger, not on an author, and it returns to the top once one of those four is
+      on main.
 
 
 ## Unlanded on a review branch — a delivery state, not work to redo
