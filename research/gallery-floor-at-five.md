@@ -155,7 +155,7 @@ The design point is the one the earlier repairs missed: **a work may legitimatel
 not silently.** Deliberate non-exhibition is an entry in `EXHIBITION_EXEMPT` with a stated reason,
 one line per file, so the default is failure and every exemption is an argument someone wrote down.
 Eight tests, and the negative ones carry the weight — an unreferenced SVG must turn the gate red,
-a `studies/` candidate must not, and the live tree must be clean. a gate that cannot fail is not a
+a `studies/` candidate must not, and the live tree must be clean. A gate that cannot fail is not a
 gate.
 
 ## The one cell that is open on purpose — wing 07
@@ -172,3 +172,39 @@ recorded in `EXHIBITION_EXEMPT`.
 Wing 07 therefore needs a **painted** work, and so does wing 01 (sumi-e), which has no Dmitri work
 at all. Both are exactly the painterly traditions the methodology says diffusion serves better than
 procedural code, so both are filed as `REQUEST DM-2` — two prompts, one per wing, for Mage.
+
+---
+
+## Closed — 7 of 7, and the last two were not the old defect (2026-10-21)
+
+`REQUEST DM-2` was filed on 2026-10-18 with two prompts, one per remaining wing, and the images
+came back on 2026-10-21. Both were exhibited in the same pass that landed them.
+
+| date | wing | work | medium | wired |
+|------|------|------|--------|-------|
+| 2026-10-21 | 01 sumi-e | The Bleed Front (Dmitri) | Mage diffusion | same pass |
+| 2026-10-21 | 07 russian-realism | Twelve Metres of Penumbra (Dmitri) | Mage diffusion | same pass |
+
+`scripts/gallery_fifth_amigo_gap.py` now reports **gap = 0**; `tests/test_gallery_fifth_amigo_gap.py`
+pins `FILLED_FIFTH_CELLS = 7`. `scripts/gallery_matrix_verify.py` reports **7 filled cells verified,
+0 still open**, and resolves each cell's named work against its own pavilion page.
+
+That the last two closed the way they did is the evidence that matters. The six earlier cells were
+repaired after the fact — five for five landed invisible, then a sixth caught before it repeated.
+These two were never invisible: the pavilion section, the matrix cell, the prompt log and the gate
+run went in together, because the gate now fails a commit that leaves a finished work off the wall.
+The defect was institutional, and the institution changed.
+
+**What happened to the withheld study.** *The Edge of the Sunbreak* was not deleted and was not
+pressed into service to move a number. It was **archived to `russian-realism/studies/dmitri/`**,
+which is where `prompt-methodology.md` §3.3 says studies belong, and its generator now writes
+there. That also emptied `EXHIBITION_EXEMPT` — the gate passes with **zero exemptions**, because
+the exemption was only ever a stand-in for the correct filing. A documented exception is a
+respectable answer; the better answer is that the work was in the wrong drawer.
+
+**Two things the new works record honestly.** *The Bleed Front* deviates from its brief — the inkan
+seal sits lower-left, not in the corner named — and the pavilion says so rather than cropping it out.
+*Twelve Metres of Penumbra* is a diffusion image, so no arithmetic produced its edge and no plate
+prints a penumbra width; the aside states that plainly, and the exact-arithmetic companion sits in
+the studies vault beside it. One is on the wall, the other is on the record, and neither pretends to
+be the other.

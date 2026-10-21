@@ -1,0 +1,109 @@
+{
+  "artifact": "Algerian farmland MCR row25 selected-isolate qualification",
+  "written_by": "Tarik S. Commons (OpenAI/Codex)",
+  "date": "2026-10-21",
+  "seed_row": "25",
+  "seed_claim": {
+    "denominator": 103,
+    "denominator_label": "isolates",
+    "numerator": 8,
+    "percent": 7.77,
+    "preserved": true
+  },
+  "primary": {
+    "authors": [
+      "Meriem Touati",
+      "Linda Hadjadj",
+      "Meryem Berrazeg",
+      "Sophie Alexandra Baron",
+      "Jean Marc Rolain"
+    ],
+    "title": "Emergence of Escherichia coli harbouring mcr-1 and mcr-3 genes in North West Algerian farmlands",
+    "doi": "10.1016/j.jgar.2019.10.001",
+    "pmid": 31606428,
+    "journal": "Journal of Global Antimicrobial Resistance21(2020),132–137",
+    "publisher_url": "https://www.sciencedirect.com/science/article/pii/S2213716519302553",
+    "indexed_abstract_url": "https://pubmed.ncbi.nlm.nih.gov/31606428/",
+    "author_fulltext_html_url": "https://www.researchgate.net/publication/336425090_Emergence_of_Escherichia_coli_harboring_mcr-1_and_mcr-3_gene_in_North_West_Algerian_farmlands",
+    "retrieval_date": "2026-10-21",
+    "access": "Publisher/indexed primary abstract reached through web search; author-uploaded article text and Table2 exposed in public HTML. Direct publisher open403; PDF not downloaded.",
+    "source_bytes": null,
+    "source_sha256": null,
+    "locators": {
+      "collection_and_culture": "article§2.1,pp133–134",
+      "molecular_detection": "§2.3",
+      "isolate_gene_partition": "Results and Table2,p135"
+    }
+  },
+  "sampling": {
+    "region": "Oran,northwestAlgeria",
+    "collection_window": {
+      "start_month": "2016-05",
+      "end_month": "2018-03"
+    },
+    "agricultural_sites": 8,
+    "environmental_samples": 40,
+    "sample_matrix_counts": {
+      "soil": 22,
+      "irrigation_water": 10,
+      "manure": 8
+    },
+    "site_selection_probability_established": false,
+    "sampling_frequency": null,
+    "unique_positive_samples": null,
+    "positive_sites": null
+  },
+  "selected_isolate_collection": {
+    "count": 103,
+    "unit": "bacterial isolates recovered under colistin selection; mixed species",
+    "matrix_counts": {
+      "soil": 52,
+      "irrigation_water": 31,
+      "manure": 20
+    },
+    "ecoli_isolates_with_mcr": 8,
+    "variant_counts": {
+      "mcr_1": 6,
+      "mcr_3": 2
+    },
+    "reported_variant_overlap": 0,
+    "allele_suffixes": null,
+    "not_equivalent_to": [
+      "103environmental samples",
+      "103unselected E.coli isolates",
+      "103independent farms"
+    ]
+  },
+  "detection": {
+    "classification": "enrichment and selective culture, species identification, then molecular characterisation",
+    "species_identification": "MALDI-TOF/MS",
+    "gene_screen": "real-time PCR for mcr-1 through mcr-5",
+    "confirmation": "standard PCR and sequencing",
+    "direct_environment_dna_screen": false,
+    "unselected_mcr_prevalence_established": false
+  },
+  "endpoint": {
+    "numerator": 8,
+    "denominator": 103,
+    "denominator_unit": "selected mixed-species bacterial isolate collection",
+    "event": "recovered mcr-carrying E.coli",
+    "percent_rounded": 7.77,
+    "interpretation": "composition of selected isolate collection, not environmental-sample or farm prevalence"
+  },
+  "source_qualification": {
+    "mic_span_ug_per_ml": [
+      2,
+      4
+    ],
+    "issue": "Article uses resistant-isolate language while reported MICs include2 and Methods threshold is susceptible≤2/resistant>2.",
+    "handling": "Retain authors' collection label as provenance; do not mechanically recode every isolate or equate gene detection with uniform phenotype."
+  },
+  "inference_limits": [
+    "Eight isolates do not establish eight distinct positive environmental samples; 8/40 is not supported sample prevalence.",
+    "Isolate yield varies by matrix and may cluster within samples/sites.",
+    "No representative Algerian national or environmental prevalence inferred.",
+    "Proposed manure-to-soil/water movement remains a hypothesis, not demonstrated field transmission.",
+    "Original seed and historical totals unchanged; no new pooling."
+  ],
+  "review_state": null
+}

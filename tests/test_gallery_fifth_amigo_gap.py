@@ -14,12 +14,17 @@ never registered, so the cell read open while the art sat one directory away), a
 and generator landed on main on 2026-10-15 and were never registered, so this run added the
 wing entry, the matrix cell, and the test the generator had been citing by name but that was
 never written), and on 2026-10-18 (impressionism, "The Fusion Threshold" -- the defect a
-FIFTH time: its SVG and generator landed on 2026-10-15 and were never registered). Two remain:
-sumi-e and russian-realism. Wing 07 is the one cell that is open *on purpose*: a finished
-vector study sits in its directory and is deliberately withheld, because the work is not good
-enough for a wing of painted oils -- the request for a painted work is REQUEST DM-2, and the
-reason is carried in `scripts/gallery_unwired_works.py` (EXHIBITION_EXEMPT) so the omission is
-visible rather than silent.
+FIFTH time: its SVG and generator landed on 2026-10-15 and were never registered).
+
+None remain. The last two closed on 2026-10-21, and not by the old defect: the two cells were
+filled by *REQUEST DM-2*, the commission filed on 2026-10-18 because a wing of painted oils is
+not served by a vector study -- sumi-e got "The Bleed Front" and russian-realism got "Twelve
+Metres of Penumbra", both Mage diffusion, both exhibited in the same pass that landed them.
+The withheld vector study in wing 07 (*The Edge of the Sunbreak*) was not deleted and not
+forced onto a wall to move a number: it was archived to `studies/dmitri/`, where studies live,
+so `scripts/gallery_unwired_works.py` now passes with an empty exemption list. The column is
+7 of 7 and gap = 0; this test pins that, so a future wing added without a fifth column fails
+here first.
 This test is the reason the
 script exists: it fails if the gallery is extended without that note being updated, so the
 claim cannot quietly go stale in either direction.
@@ -37,7 +42,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import gallery_fifth_amigo_gap as gap  # noqa: E402
 
-FILLED_FIFTH_CELLS = 5  # islamic (10-13), pen-and-ink (10-14), watercolor (10-14), maori (10-16), impressionism (10-18)
+FILLED_FIFTH_CELLS = 7  # islamic (10-13), pen-and-ink (10-14), watercolor (10-14), maori (10-16),
+# impressionism (10-18), sumi-e (10-21), russian-realism (10-21)
 REMAINING_GAPS = 7 - FILLED_FIFTH_CELLS
 
 
@@ -78,6 +84,8 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
         self.assertNotIn("watercolor", {wing for wing, _ in self.result["gap_cells"]})
         self.assertNotIn("maori", {wing for wing, _ in self.result["gap_cells"]})
         self.assertNotIn("impressionism", {wing for wing, _ in self.result["gap_cells"]})
+        self.assertNotIn("sumi-e", {wing for wing, _ in self.result["gap_cells"]})
+        self.assertNotIn("russian-realism", {wing for wing, _ in self.result["gap_cells"]})
 
     def test_fifth_amigo_is_named_in_the_gallery_page(self):
         self.assertTrue(self.result["fifth_named_in_page"])

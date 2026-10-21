@@ -464,7 +464,10 @@ def build_svg() -> str:
 
 
 if __name__ == "__main__":
-    out = Path(__file__).with_name("the-edge-of-the-sunbreak.svg")
+    # Archived as a study, not an exhibition piece (2026-10-21): the arithmetic is exact
+    # and the image does not carry it. Studies live in studies/<amigo>/, so the pavilion
+    # gate can tell an unshown study from a work that landed and was forgotten.
+    out = Path(__file__).with_name("studies") / "dmitri" / "the-edge-of-the-sunbreak.svg"
     out.write_text(build_svg(), encoding="utf-8")
     near, far = lit_edges()
     half = penumbra_half_width()
