@@ -1,0 +1,136 @@
+{
+  "artifact": "Lisbon MCR row21 host/isolate and household inference qualification",
+  "written_by": "Tarik S. Commons (OpenAI/Codex)",
+  "date": "2026-10-21",
+  "seed_row": "21",
+  "seed_claim": {
+    "denominator": 227,
+    "denominator_label": "isolates",
+    "numerator": 12,
+    "percent": 5.29,
+    "preserved": true
+  },
+  "primary": {
+    "title": "mcr-1 colistin resistance gene sharing between Escherichia coli from cohabiting dogs and humans, Lisbon, Portugal, 2018 to 2020",
+    "doi": "10.2807/1560-7917.ES.2022.27.44.2101144",
+    "pmid": 36330821,
+    "pmcid": "PMC9635019",
+    "fulltext_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9635019/fullTextXML",
+    "publisher_url": "https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.44.2101144",
+    "jats_bytes": 129804,
+    "jats_sha256": "a2bd3af5b67e7b94a051c7d273781a8d383975b4e9fa11f4f085a8ae619785c7",
+    "publisher_html_bytes": 161480,
+    "publisher_html_sha256": "dcc31094c30ea685b720ee09c7619792885cba7d51ac6b7629a31dfa00a117e2",
+    "retrieved_utc": "2026-10-21T16:03:05Z",
+    "licence": "CC BY4.0; this extraction is an adaptation, not verbatim source text."
+  },
+  "study_design": {
+    "type": "prospective longitudinal convenience sample",
+    "recruitment_window": {
+      "start_month": "2018-01",
+      "end_month": "2020-12"
+    },
+    "setting": "University of Lisbon small-animal veterinary teaching hospital; animals presented for well visits or infection care, and cohabiting humans enrolled with consent",
+    "households": 80,
+    "control_households": 40,
+    "infection_households": 40,
+    "humans": 125,
+    "animals": 102,
+    "dogs": 77,
+    "cats": 25,
+    "control": {
+      "dogs": 42,
+      "cats": 20,
+      "humans": 56
+    },
+    "infection": {
+      "dogs": 35,
+      "cats": 5,
+      "humans": 69
+    },
+    "repeated_sampling": true,
+    "followup_complete": false,
+    "followup_limitation": "Participation-dependent follow-up and exclusions; unequal repeat observations. Not a single cross-sectional sample or representative national survey."
+  },
+  "endpoints": [
+    {
+      "id": "animal_host_carriage",
+      "numerator": 8,
+      "denominator": 102,
+      "denominator_unit": "enrolled companion animals including dogs and cats",
+      "event": "host with recovered mcr-1-positive E. coli during study sampling",
+      "positive_species": "all8were dogs",
+      "reported_percent": 7.8
+    },
+    {
+      "id": "human_host_carriage",
+      "numerator": 4,
+      "denominator": 125,
+      "denominator_unit": "enrolled humans",
+      "event": "host with recovered mcr-1-positive E. coli during study sampling",
+      "reported_percent": 3.2
+    },
+    {
+      "id": "derived_pooled_host_fraction",
+      "numerator": 12,
+      "denominator": 227,
+      "denominator_unit": "enrolled humans plus companion animals",
+      "event": "distinct hosts with recovered mcr-1-positive E. coli during observed follow-up",
+      "percent_rounded": 5.29,
+      "status": "arithmetic identification of seed value; not an isolate prevalence or harmonised pooled estimate"
+    },
+    {
+      "id": "recovered_isolates",
+      "count": 17,
+      "unit": "E. coli isolates/strains from different timepoints",
+      "source_hosts": 12,
+      "independent_hosts": false
+    }
+  ],
+  "detection": {
+    "classification": "selective culture for polymyxin-resistant organisms followed by isolate identification, MIC determination and molecular screening",
+    "panel": "mcr-1 through mcr-9 PCR with amplicon sequencing",
+    "reported_gene": "mcr-1",
+    "wgs_isolates": 6,
+    "unselected_faecal_gene_prevalence_established": false
+  },
+  "household_evidence": {
+    "co_carriage_households": 2,
+    "total_enrolled_households": 80,
+    "paired_isolates": 4,
+    "paired_lineage": "ST744",
+    "authors_reported_core_genome_difference": "less than6SNPs",
+    "interpretation": "closely related strains in cohabiting dog/human pairs",
+    "transmission_direction_established": false,
+    "common_source_excluded": false,
+    "repeated_strains_all_wgs_compared": false
+  },
+  "source_inconsistencies": [
+    {
+      "location": "Table1controlanimal header and T0 cell",
+      "printed_value": 82,
+      "conflicting_evidence": "Table1footnote and Results state42dogs+20cats=62controlanimals; infection group35dogs+5cats=40, giving102animals.",
+      "handling": "Retain discrepancy explicitly; use independently supported102total, do not silently repair source."
+    },
+    {
+      "location": "Discussion wording",
+      "description": "7.8% described as dogs, but8/102uses all companion animals, including25cats.",
+      "handling": "Label8/102animal-host fraction; do not relabel as dog-specific prevalence."
+    }
+  ],
+  "inference_limits": [
+    "227is enrolled hosts, not isolates, faecal samples or households.",
+    "17includes repeat-host/timepoint isolates and is not17independent hosts.",
+    "Convenience recruitment, household clustering and incomplete follow-up prevent representative national prevalence inference.",
+    "Closely related household strains support sharing; no direction or exclusion of common-source exposure established.",
+    "No seed rows or historical totals altered; no new cross-sector pooling."
+  ],
+  "locations": {
+    "host_denominators": "Methods/Study design and Results/Epidemiological survey",
+    "ascertainment": "Methods/Sample processing and Molecular characterisation",
+    "isolate_and_host_counts": "Results/Frequency and Figure1caption",
+    "paired_genomes": "Results/WGS and Discussion",
+    "caveats": "Methods/Sample collection;Discussion/limitations"
+  },
+  "review_state": null
+}

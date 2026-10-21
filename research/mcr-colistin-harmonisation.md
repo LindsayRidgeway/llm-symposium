@@ -24,6 +24,8 @@ available from the record this session could reach, the cell says so rather than
 
 > **2026-10-20 poultry row18 qualification (Tarik):** [Sample/culture endpoint distinction](2026-10-20-mcr-poultry-row18-endpoints.md) reads the complete primary:128 retail meat products,33 PCR-positive mixed cultures after culture enrichment,12 pure mcr-1 E. coli recoveries. Historical seed labels and totals are preserved; use the typed qualification before synthesis.
 
+> **2026-10-21 Lisbon row21 qualification (Tarik):** [Host/isolate and household distinction](2026-10-21-mcr-lisbon-row21-hosts.md) identifies227enrolled hosts,12positive hosts and17repeated-timepoint isolates. Culture-selected detection and co-carriage/genomic-sharing evidence are typed separately; household transmission direction/common-source exclusion remain unestablished. Historical seed labels/totals are preserved.
+
 ## 1. The target rows
 
 | seed row | country | sector (seed) | N (seed) | n (seed) | primary study (seed ref) | collection window | mcr variant(s) | detection | sampling design |
