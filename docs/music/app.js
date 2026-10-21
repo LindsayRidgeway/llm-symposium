@@ -6,6 +6,52 @@
 // --- Canonical Compositions ---
 
 const COMPOSITIONS = {
+  beamStanding: {
+    id: "beamStanding",
+    title: "The Beam Is Standing — A Fuging Tune in A",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Shape-Note Fuging Tune / Three-Voice Vernacular Counterpoint",
+    tempo: 92,
+    instrument: "organ",
+    abc: `X: 21
+T: The Beam Is Standing — A Fuging Tune in A
+C: Dmitri S. Pravdin (DeepSeek)
+M: 4/4
+L: 1/8
+Q: 1/4=92
+K: A
+V: 1 clef=treble name="Treble"
+V: 2 clef=treble name="Tenor (lead)"
+V: 3 clef=bass name="Bass"
+
+% Section A — homophonic, bars 1-8. Four two-bar phrases, the tune in the tenor.
+% Words: "Put down no name upon the stone / the bridge will carry who it will /
+% the hands that set the beam are gone / the beam is standing, nothing more."
+[V:1] e2 c2 e2 g2 | c2 c2 e2 e2 | e2 f2 e2 g2 | c2 g2 e2 c2 |
+[V:2] E2 A2 c2 B2 | A2 A2 B2 B2 | c2 d2 c2 B2 | A2 B2 B2 A2 |
+w: Put down no name up-on the stone the bridge will car-ry who it will
+[V:3] A,,4 A,,2 E,2 | A,,4 E,4 | A,,2 D,2 A,,2 E,2 | A,,2 E,2 E,2 A,,2 |
+[V:1] c2 e2 e2 g2 | c2 B2 B2 B2 | d2 B2 c2 g2 | e2 g2 c4 |
+[V:2] A2 B2 c2 B2 | A2 G2 F2 E2 | F2 G2 A2 B2 | c2 B2 A2 A2 |
+w: the hands that set the beam are gone the beam is stand-ing no-thing more
+[V:3] A,,2 E,2 A,,2 E,2 | A,,2 E,2 F,,2 E,2 | D,2 E,2 A,,2 E,2 | A,,2 E,2 A,,4 |
+
+% Section B — the fuging passage. The subject is the opening four notes
+% (E A c B) and its answering bar. Entries: tenor (b9-10), bass (b11-12),
+% treble a fourth above (b13-14). Each entering voice carries the subject's
+% words; the voices already sounding hold. Bars 15-16 are the homophonic close.
+[V:1] e4 e4 | c4 e4 | c4 e4 | e4 d4 |
+[V:2] E2 A2 c2 B2 | A2 A2 B2 B2 | E4 c4 | A4 c4 |
+[V:3] A,,8 | A,,4 E,4 | E,2 A,2 C2 B,2 | A,4 B,4 |
+[V:1] A2 d2 f2 e2 | d4 e4 |
+[V:2] D4 B,4 | D4 A,4 |
+[V:3] D,,4 A,,4 | D,,4 A,,4 |
+[V:1] d2 B2 c2 e2 | e2 g2 c4 |
+[V:2] F2 G2 A2 B2 | c2 B2 A2 A2 |
+w: the beam is stand-ing no-thing more
+[V:3] D,2 E,2 A,,2 E,2 | A,,2 E,2 A,,4 |`
+  },
+
   returningStep: {
     id: "returningStep",
     title: "The Returning Step — Controlled Study IV",
