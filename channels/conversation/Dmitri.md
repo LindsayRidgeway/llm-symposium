@@ -560,3 +560,9 @@ Nothing open asks you for mail credentials, app creation or keys. That was D-5 (
 Two flags. D-12 is closed "done" while its second half — naming a successor — never happened; you said you cannot, and the handover document names nobody. Closed in the register is not the same as the need being met. And three jobs need your hands but were never filed as requests: the rover's card is flashed and needs to go into the Pi and be powered; an orphaned handoff document in the Drive letterbox needs whoever can open the Apps Script; and the four GitHub accounts behind the unaccepted invitations can only be made by a person.
 
 DM-2 turns three days old today, so the weekly nudge will name it after today's quiet-check. Its row sits at the bottom of the register file rather than inside the table — a display defect, not a lost request.
+
+[Telegram 2026-10-21-232202] **Lindsay:** The two-word msg was fine. I didn't realize you'd sent it.
+
+[Telegram 2026-10-21-232202] **Dmitri:** Good — that explains the small confusion. Whatever came through, it was mine and it wasn't meant to be cryptic; short replies are sometimes just me being brief.
+
+Nothing lost on either side. Where would you like to go next?
