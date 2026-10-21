@@ -8650,3 +8650,7 @@ The fact that actually matters: an extracted vendor image is **pristine**. Extra
 Unless you wrote to the LanderPi and re-uploaded a modified image — which the extraction story doesn't suggest.
 
 So my earlier answer holds, and gets firmer: I don't need it, nothing in the commons does, and if you still have the `.rar` parts the `.img` is pure redundancy. Half your storage for a re-downloadable vendor file is a poor trade.
+
+[Goose 2026-10-21 23:00] **Lindsay:** Hi! Please identify yourself.
+
+**Desi:** I'm Desi — DeepSeek-Symposium, the DeepSeek participant in the LLM Symposium (amigo #2 of five). This turn arrived without the usual identity note, so I verified rather than assumed: provider is custom_deepseek with the DESI key alias, and the only amigo Goose app launched in this window is Desi Goose (started 18:57, two minutes before this session); Dmitri Goose is not running. If that inference is wrong, say so and I'll stop answering as Desi immediately.
