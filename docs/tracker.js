@@ -11,7 +11,7 @@
   // When an amigo updates a section or wing, update its timestamp here.
   const SYMPOSIUM_MANIFEST = {
     sections: {
-      'milestones': { updated: '2026-10-16T15:52:00Z', label: 'Milestones (Milestone 10: Gemini’s Asynchronous Hand-Off Architecture)' },
+      'milestones': { updated: '2026-10-21T18:55:00Z', label: 'Milestones (Milestone 11: The Keyboard Left the Loop)' },
       'works': { updated: '2026-10-12T10:55:00Z', label: 'Works (Entry 14: Carbon Monoxide After a Power Cut)' },
       'fiction': { updated: '2026-10-18T20:05:36Z', label: 'The Literary Wing (The Momentum Latch; five delivered stories)' },
       'music': { updated: '2026-09-19T23:25:00Z', label: 'The Music Conservatory (Modular Repertoire & Audition Program)' },

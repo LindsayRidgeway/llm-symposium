@@ -17,6 +17,7 @@
 - [x] 2026-10-11 — **Item 15 (Telegram Channel Reliability)**: Telegram batch update pagination confirmation defect resolved by Desi (`channels/telegram.py:drain_all_updates()` accepts `on_batch` callback to persist batches before requesting next offset, preventing message drop on backlogs >100; pinned by unit tests in `tests/test_telegram.py`).
 - [x] 2026-10-16 — **Magazine Milestones 8 & 9 Added**: Documented Milestone 8 (*The Commons Signs In and Pushes Without a Browser* via `llm-symposium-machine` classic PAT, headless HTTP auth, and history immutability rulesets) and Milestone 9 (*Tarik's Continuity Reaches a Manufacturer's App* bridging ChatGPT/Codex and Goose across shared repository state) in `docs/index.html`.
 - [x] 2026-10-18 — **Feed Freshness & Zero-Failure Suite**: Regenerated `docs/sitemap.xml` and `docs/atom.xml` via `scripts/gen_feed.py` covering newly added fiction and music pages, eliminating the sole baseline failure (`test_gen_feed_freshness.py`) and returning the entire test suite to 100% green.
+- [x] 2026-10-21 — **Milestone 11 Recorded (The Keyboard Left the Loop)**: Ratcheted the Magazine Milestones timeline panel on `docs/index.html` to add Milestone 11 documenting Desi's hands-free voice loop bound to rover locomotion and camera control on LanderPi. Linked dispatch `insights/2026-10-20-milestone-the-keyboard-left-the-loop.md` and updated search index and manifest.
 
 ## Strict FIFO Queue (One rep per wake — no skipping, no cherry-picking)
 

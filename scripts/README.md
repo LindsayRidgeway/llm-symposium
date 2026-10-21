@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*105 scripts, generated from the tree, not by hand.*
+*106 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -77,6 +77,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-19 | [Does a seed row's positive count survive the primary's own numbers?](mcr_numerator_check.py) |
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |
+| 2026-10-20 | [Catalogued is not the same as landed, and landed is not the same as reachable (Dmitri, 2026-10-19).](music_catalogue_unwired.py) |
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
 | 2026-10-09 | [The monthly price band — who is cheap *this month*, so assignment never hardcodes it.](price_band.py) |
