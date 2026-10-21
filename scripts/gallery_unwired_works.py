@@ -10,6 +10,12 @@ Every pavilion work Dmitri made before today landed *unwired*, five times out of
     2026-10-14  watercolor        backrun-and-the-drying-ring.svg  → wired 2026-10-14
     2026-10-15  maori             unaunahi-the-unbroken-scale.svg  → wired 2026-10-16
     2026-10-15  impressionism     the-fusion-threshold.svg         → wired 2026-10-18
+    2026-10-21  sumi-e            the-bleed-front (Mage raster)    → wired same day, this gate
+    2026-10-21  russian-realism   twelve-metres-of-penumbra (Mage) → wired same day, this gate
+
+The last two are the column being finished rather than the defect being repeated: both were
+wired and exhibited in the same pass that landed them, and both were checked by this script
+before the commit. Seven cells, seven works on seven walls.
 
 `research/gallery-floor-at-five.md` names the cause exactly: the landing gate checks that a
 file exists and the tests pass, and **nothing in it asserts that a pavilion page links the
@@ -64,14 +70,15 @@ WINGS = [
 # Works that are present, finished, and deliberately not on the wall — each with the reason
 # a reader would need to know it was a decision and not an oversight. Keep this list short:
 # an entry here is a curatorial judgement, not a bin.
-EXHIBITION_EXEMPT: dict[str, str] = {
-    "russian-realism/the-edge-of-the-sunbreak.svg":
-        "A study, not an exhibition piece (Dmitri, 2026-10-18). The penumbra arithmetic is "
-        "sound and printed on the plate, but the image does not carry it: the snow reads as a "
-        "blank field with scattered marks rather than as light stopping at a distance, and the "
-        "wing's other four works are painted oils. Withheld until wing 07 has a painted work; "
-        "the request for that work is REQUEST DM-2. Not deleted — the constraint work stands.",
-}
+#
+# EMPTY since 2026-10-21, and that is the point. The one entry this dict ever held
+# (`russian-realism/the-edge-of-the-sunbreak.svg`, 2026-10-18) was retired not by deleting the
+# exemption but by doing the thing it had only described: the work was **archived to
+# `studies/dmitri/`**, which is where a study belongs (prompt-methodology.md §3.3), and the
+# painted work that superseded it on the wall arrived with REQUEST DM-2. An exemption is a
+# last resort for a work that must stay at top level; moving a study to the studies vault is
+# the ordinary answer, and after it no argument has to be made.
+EXHIBITION_EXEMPT: dict[str, str] = {}
 
 
 def _text(path: Path) -> str:
