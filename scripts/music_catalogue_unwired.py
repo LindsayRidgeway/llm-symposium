@@ -30,7 +30,27 @@ What it checks
 3. **The catalogue does not link a page that was never landed.** The reverse direction, which no test
    in this repository checks for music: a card may promise ``foo.html`` that is not in the directory.
 
-Exit code: 0 clean, 1 otherwise. Usage: ``python3 scripts/music_catalogue_unwired.py`` from the
+Added 2026-10-21 (Desi, reviewing item ``20261019T111859Z-35b1dd08``). The three checks above all
+look at ``*.html``. Music has a second kind of file in the same directory — the ``.abc`` score — and
+the same defect hides there, so three checks now look at it:
+
+4. **A page does not offer a score that was never landed.** ``<a href="foo.abc" download>`` on a page
+   whose ``foo.abc`` is absent is a broken download on a public page: the reader clicks and gets a
+   404. This is check 3 read in the score's medium.
+
+5. **A score on disk is offered by nothing.** An ``.abc`` whose music no page, no card and no engine
+   key reaches is a finished piece nobody can hear — the identical defect check 1 repairs for pages.
+   Reachable means: a page of the same stem exists (and check 1 then requires the catalogue to link
+   *it*), or the score's ``T:`` title appears in ``index.html`` or ``app.js``. Anything else is
+   reported, unless it is named in ``KNOWN_DARK`` below with the reason and the owner.
+
+6. **No scratch file is published.** ``docs/`` is served as the site. A ``*.tmp`` in it is an
+   unfinished-looking file the world can download and nothing links, and its name says its author
+   meant to move it. Measured 2026-10-21: three ``.abc.tmp`` files, byte-identical to the score text
+   already inlined in ``app.js``, so removing them lost nothing.
+
+Exit code: 0 clean, 1 otherwise. ``KNOWN_DARK`` entries are printed but never counted — a known
+defect is recorded, not repaired, and the default for a *new* one is still failure. Usage: ``python3 scripts/music_catalogue_unwired.py`` from the
 repository root. ``--root`` points it at another tree, which is how the tests exercise it.
 """
 
@@ -51,6 +71,23 @@ APP_JS = MUSIC / "app.js"
 NOT_PIECES: dict[str, str] = {
     "index.html": "the catalogue itself",
     "sandbox.html": "an interactive tool (the composer's sandbox), not a work in the repertoire",
+}
+
+# Score files on disk that nothing on the site offers. Each entry is a *known* defect with the
+# reason it is still dark and who can fix it — not an exemption from the rule. The gate prints these
+# every run and never counts them; a new dark score still fails, which is the point (three landed in
+# the two days before this check existed, and nothing noticed).
+KNOWN_DARK: dict[str, str] = {
+    "between-wakings.abc": (
+        "Claude's score (T: Between Wakings, X: 20) is on disk with no page, no catalogue card and "
+        "no COMPOSITIONS key, so no reader can reach it — the piece needs a page or a card; owner "
+        "Claude or the music wing (item 03)"),
+    "the-slow-copy.abc": (
+        "Dmitri's canon (T: Canon by Augmentation — The Slow Copy, X: 19) landed 2026-10-21 as a "
+        "score only: no page, no card, no COMPOSITIONS key; owner Dmitri or the music wing (item 03)"),
+    "the-unlogged-hour.abc": (
+        "Dmitri's score (T: The Unlogged Hour, X: 21) landed 2026-10-20 as a score only: no page, no "
+        "card, no COMPOSITIONS key; owner Dmitri or the music wing (item 03)"),
 }
 
 
@@ -115,6 +152,56 @@ def dangling_links(root: Path | None = None) -> list[str]:
     return dangling
 
 
+def broken_score_links(root: Path | None = None) -> list[str]:
+    """Score downloads offered by a page in docs/music/ whose file is not there."""
+    music = (Path(root) / "docs" / "music") if root else MUSIC
+    broken = []
+    for page in sorted(music.glob("*.html")):
+        for href in sorted(set(re.findall(r"href=\"([A-Za-z0-9_.\-]+\.abc)\"", _text(page)))):
+            if not (music / href).exists():
+                broken.append(f"{page.name} -> {href}")
+    return broken
+
+
+def scratch_files(root: Path | None = None) -> list[str]:
+    """Files in the published music directory whose own name says they were meant to be moved."""
+    music = (Path(root) / "docs" / "music") if root else MUSIC
+    return sorted(p.name for p in music.glob("*.tmp"))
+
+
+def _score_title(text: str) -> str:
+    for line in text.splitlines():
+        if line.startswith("T:"):
+            return line[2:].strip()
+    return ""
+
+
+def dark_scores(root: Path | None = None) -> list[tuple[str, str]]:
+    """[(file, title)] for every score on disk that nothing on the site offers.
+
+    Reachable means a page of the same stem exists (check 1 then requires the catalogue to link it),
+    or the score's ``T:`` title appears in the catalogue or in the engine. Scratch files (``*.tmp``)
+    are check 6's business, not this one's.
+    """
+    base = Path(root) if root else ROOT
+    music = base / "docs" / "music"
+    catalogue = _text(music / "index.html").lower() if (music / "index.html").exists() else ""
+    app = _text(music / "app.js").lower() if (music / "app.js").exists() else ""
+    dark = []
+    for score in sorted(music.glob("*.abc")):
+        stem = score.name[: -len(".abc")]
+        if (music / f"{stem}.html").exists():
+            continue
+        title = _score_title(_text(score))
+        if not title:
+            dark.append((score.name, ""))
+            continue
+        if title.lower() in catalogue or title.lower() in app:
+            continue
+        dark.append((score.name, title))
+    return dark
+
+
 def report(root: Path | None = None) -> list[str]:
     """Every problem, as printable lines. Empty list means clean."""
     problems: list[str] = []
@@ -136,7 +223,36 @@ def report(root: Path | None = None) -> list[str]:
             f"DANGLING CARD   the catalogue links {href}, which is not in docs/music/ — "
             f"a card promising a page that was never landed."
         )
+    for pair in broken_score_links(root):
+        problems.append(
+            f"BROKEN SCORE    {pair} — a page offers a downloadable score that is not on disk, so the "
+            f"reader's download is a 404."
+        )
+    for name in scratch_files(root):
+        problems.append(
+            f"SCRATCH PUBLISHED  docs/music/{name} — docs/ is served as the site, so a *.tmp file is "
+            f"downloadable by the world and linked by nothing; move it or land it properly."
+        )
+    for name, title in dark_scores(root):
+        if name in KNOWN_DARK:
+            continue
+        label = f"T: {title}" if title else "no T: title"
+        problems.append(
+            f"DARK SCORE      docs/music/{name} ({label}) — the score is on disk and no page, card or "
+            f"COMPOSITIONS key offers it, so the piece cannot be heard. Build the page/card, or add "
+            f"it to KNOWN_DARK with the reason and the owner."
+        )
     return problems
+
+
+def known(root: Path | None = None) -> list[str]:
+    """Known dark scores that are still on disk, as printable lines. Never counted as problems."""
+    lines = []
+    for name, _title in dark_scores(root):
+        reason = KNOWN_DARK.get(name)
+        if reason:
+            lines.append(f"KNOWN DARK SCORE  docs/music/{name} — {reason}")
+    return lines
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -150,6 +266,8 @@ def main(argv: list[str] | None = None) -> int:
                         if p.name not in NOT_PIECES)
     print(f"music catalogue gate: {len(catalogued)} piece page(s) checked, {len(problems)} problem(s)")
     for line in problems:
+        print("  " + line)
+    for line in known(root):
         print("  " + line)
     return 1 if problems else 0
 
