@@ -277,17 +277,32 @@ class TheRepositoryItself(unittest.TestCase):
         self.assertEqual(row["on_clock"], [])
 
     def test_every_recorder_persists_its_rows(self):
-        """Measured 2026-10-20: all three workflows that write usage rows also stage, commit
-        and push the ledger. This is the fact the to-do item "persist the CI usage rows" was
+        """Measured 2026-10-20: every workflow that writes usage rows also stages, commits and
+        pushes the ledger. This is the fact the to-do item "persist the CI usage rows" was
         written without — it was rebuilt from a missing-file reading, and the file had never
         been written because nothing on a clock spends, not because no step commits it.
-        If a future edit drops the staging line, this fails and the audit stops passing."""
+        If a future edit drops the staging line, this fails and the audit stops passing.
+
+        Rewritten 2026-10-21. It used to pin the *list* of recorders —
+        `["autonomous-goose-tarik.yml", "channel-poll.yml", "symposium.yml"]` — and that made a
+        repair unlandable: the 2026-10-21 07:14Z wake taught `check-tarik-model.yml` to record,
+        which is the one thing this audit exists to want, and the gate refused the landing
+        because this line said the set must not grow. The rule is "every recorder persists";
+        the roster of recorders is not a fact worth pinning, and pinning it turned the check
+        into a machine that refuses the fix it asks for.
+        """
         recorders = {n: r for n, r in self.rows.items() if r["records"]}
-        self.assertEqual(sorted(recorders),
-                         ["autonomous-goose-tarik.yml", "channel-poll.yml", "symposium.yml"])
+        self.assertGreaterEqual(len(recorders), 3,
+                                "the audit found fewer recorders than main has; it is reading "
+                                "something other than these workflows")
         for name, row in recorders.items():
             self.assertTrue(row["persists"], f"{name} records rows it never commits back")
             self.assertEqual(row["verdict"], "manual, recorded")
+        # What *is* stable under a workflow starting or stopping recording: which workflows can
+        # spend. That list changing means a workflow was added or removed, which is a fact.
+        spenders = sorted(n for n, r in self.rows.items() if r["spends"])
+        self.assertEqual(spenders, ["autonomous-goose-tarik.yml", "channel-poll.yml",
+                                    "check-tarik-model.yml", "symposium.yml"])
 
     def test_the_persistence_evidence_names_the_git_commands(self):
         """Per workflow, the three commands must be findable in its own text — the report
@@ -299,13 +314,27 @@ class TheRepositoryItself(unittest.TestCase):
             self.assertTrue(keep["pushes"], name)
             self.assertTrue(keep["evidence"], name)
 
-    def test_known_unrecorded_spender_is_named_not_hidden(self):
-        """`check-tarik-model.yml` really does spend (a chat completion) and records nothing.
-        It is manual-only, so it is a fact to report, not a failure to fix tonight."""
-        row = self.rows["check-tarik-model.yml"]
-        self.assertTrue(row["spends"])
-        self.assertFalse(row["records"])
-        self.assertEqual(row["on_clock"], [])
+    def test_an_unrecorded_spender_is_named_not_hidden(self):
+        """The rule is *disclosure*, not the persistence of the defect.
+
+        Until 2026-10-21 this test named `check-tarik-model.yml` and asserted `records` was
+        False. When the 07:14Z wake taught that workflow to record — the only remaining
+        unrecorded spender in the repository, and the very thing `ci_spend_audit.py` reports —
+        the failure gate refused the landing, because this line had made the bug an
+        expectation. A test that a repair must break is a test that forbids repair.
+
+        What survives a repair: a workflow that can spend and does not record must be
+        manual-only (an unrecorded *clocked* spender is a FAIL, pinned above), and it must be
+        visible in the rendered table as `records NO`, so reading the report finds it.
+        """
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            out = audit.render(list(self.rows.values()))
+        unrecorded = {n: r for n, r in self.rows.items() if r["spends"] and not r["records"]}
+        for name, row in unrecorded.items():
+            self.assertEqual(row["on_clock"], [], f"{name} spends on a clock and records nothing")
+            line = next(l for l in out.splitlines() if l.startswith(name))
+            self.assertIn("NO", line, f"{name} records nothing and the report does not say so")
 
     def test_render_says_the_clock_is_clear(self):
         buf = io.StringIO()

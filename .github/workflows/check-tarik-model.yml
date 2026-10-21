@@ -32,6 +32,7 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           import json, os, urllib.request
+          from pathlib import Path
           from urllib.parse import quote
           key = os.environ['OPENAI_API_KEY'].strip()
           model = os.environ['GOOSE_MODEL']
@@ -48,6 +49,10 @@ jobs:
               result = json.load(response)
           assert json.loads(result['choices'][0]['message']['content'])['ok'] is True
           print(json.dumps({'requested_model': model, 'returned_model': result['model'], 'text_json_ok': True, 'usage': result.get('usage')}))
+          # The completion above spends the human's key. Keep the response so the step below
+          # can record what it cost: added 2026-10-21, when `scripts/ci_spend_audit.py` named
+          # this workflow as the last one in the repository reading `spends yes / records NO`.
+          Path(os.environ['RUNNER_TEMP'], 'model-check-usage.json').write_text(json.dumps(result))
           PY
 
       - name: Verify actual Goose tool execution in scratch directory
@@ -91,3 +96,79 @@ jobs:
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
               summary.write('Tarik model smoke passed: ' + os.environ['GOOSE_MODEL'] + '. Text JSON and shell execution checked with CI credential. No repository or mail changes.\n')
           PY
+
+      # Added 2026-10-21 (Desi). This workflow was the last one in the repository that could
+      # reach a paid provider and wrote nothing down: `scripts/ci_spend_audit.py` reported it as
+      # `spends yes / records NO` and excused it as "manual", which is a true statement about who
+      # presses the button and a false one about whose money leaves. Two spends happen above — one
+      # chat completion with the CI credential, and one goose run of up to four turns — and both
+      # are recorded here, from the artifacts those steps already produce. A run killed or failed
+      # above still records, because `if: always()`: the failed run is the one that most needs a
+      # row. If the push cannot be made, this step fails loudly rather than leaving a row in a
+      # runner's filesystem, which `channels/usage/README.md` calls "no row at all".
+      - name: Record Token Usage to the Commons Ledger
+        if: always()
+        shell: bash
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          set -uo pipefail
+          python3 - <<'PY'
+          import json, os, subprocess, sys
+          from pathlib import Path
+          sys.path.insert(0, '.')
+          try:
+              from channels import usage
+          except Exception as exc:                       # bookkeeping must not hide the check
+              print('usage ledger unavailable: %s' % exc)
+              raise SystemExit(0)
+          temp = Path(os.environ['RUNNER_TEMP'])
+          model = os.environ.get('GOOSE_MODEL', 'unknown')
+          run_id = os.environ.get('GITHUB_RUN_ID', '')
+
+          # The goose run: its stream-json log carries the `complete` event, and
+          # channels/usage.py is the documented reader for it. A log with model calls and no
+          # completion is recorded as UNRECORDED, never as zero.
+          log = temp / 'model-check.log'
+          if log.is_file() and log.stat().st_size:
+              workdir = temp / 'goose-check'
+              workdir.mkdir(parents=True, exist_ok=True)
+              (workdir / 'worker.jsonl').write_text(log.read_text(errors='replace'))
+              subprocess.run([sys.executable, 'channels/usage.py', '--source', 'goose',
+                              '--dir', str(workdir), '--workflow', 'check-tarik-model',
+                              '--run-id', run_id, '--provider', 'openai', '--model', model],
+                             check=False)
+
+          # The direct completion: the response body kept by the step above, read by the same
+          # adapter the runner uses.
+          saved = temp / 'model-check-usage.json'
+          if saved.is_file():
+              try:
+                  response = json.loads(saved.read_text())
+              except ValueError:
+                  response = {}
+              usage.record_api_call('openai', response.get('model') or model, response,
+                                    source='check-tarik-model')
+          PY
+          python3 channels/usage.py --summary >> "$GITHUB_STEP_SUMMARY" || true
+          git add channels/usage/
+          if git diff --staged --quiet; then
+            echo "no new usage rows"
+            exit 0
+          fi
+          git config --global user.name "LLM Symposium Bot"
+          git config --global user.email "bot@llm-symposium.local"
+          git commit -m "record(usage): tarik model smoke check ${GITHUB_RUN_ID}"
+          PUSH_URL="https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git"
+          for attempt in 1 2 3; do
+            if git push "$PUSH_URL" main 2>/dev/null; then
+              echo "usage row pushed (attempt $attempt)"
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); rebasing onto latest main..."
+            git fetch "$PUSH_URL" main 2>/dev/null || true
+            git rebase FETCH_HEAD || git rebase --abort
+            sleep 5
+          done
+          echo "usage row NOT pushed — the spend is unrecorded" >&2
+          exit 1
