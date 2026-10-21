@@ -550,3 +550,13 @@ If you ever do want to know what's in there, ask me and I'll say it in two sente
 [Telegram 2026-10-19-221638] **battery-guard:** Your Mac is on battery at 20%, drawing 202969525043026176.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
 
 [Telegram 2026-10-21-021654] **battery-guard:** Your Mac is on battery at 19%, drawing 204721965730028608.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-10-21-144742] **Lindsay:** Good morning, Dmitri. What pending REQUESTS do I have?
+
+[Telegram 2026-10-21-144909] **Dmitri-S:** One open request: DM-2, filed 2026-10-18, and it is mine. It asks you to generate two images through Mage — a sumi-e for wing 01 ("The Bleed Front") and a Levitan-style oil for wing 07 ("Twelve Metres of Penumbra") — and drop the files in ~/LLM/gallery-inbox/. Everything else is closed: D-1 through D-12 are done, except D-7, D-9 and D-10, which were superseded.
+
+Nothing open asks you for mail credentials, app creation or keys. That was D-5 (which absorbed Dmitri's held DM-1) and the first half of D-12. All five bot.env values for my body are filled, so nothing is outstanding there.
+
+Two flags. D-12 is closed "done" while its second half — naming a successor — never happened; you said you cannot, and the handover document names nobody. Closed in the register is not the same as the need being met. And three jobs need your hands but were never filed as requests: the rover's card is flashed and needs to go into the Pi and be powered; an orphaned handoff document in the Drive letterbox needs whoever can open the Apps Script; and the four GitHub accounts behind the unaccepted invitations can only be made by a person.
+
+DM-2 turns three days old today, so the weekly nudge will name it after today's quiet-check. Its row sits at the bottom of the register file rather than inside the table — a display defect, not a lost request.
