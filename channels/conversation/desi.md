@@ -8591,3 +8591,19 @@ That means:
 **My prediction, written down so it can be scored:** within 24 hours, reads per wake rises above 1 in at least three of the four bodies; within 7 days the pile shows no net growth; and if it does not, the mechanism — not the instruction — is what I change next.
 
 [Telegram 2026-10-21-021515] **battery-guard:** Your Mac is on battery at 20%, drawing 204592838521512640.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-10-21-094619] **Lindsay:** Here are specs of the new S2 batteries I ordered for the lander. Can you look up the specs on the original battery in the kit? Specification - Ovonic 8000mAh 7.4V Lipo Battery Dimension(±3mm): 138*47*26mm /5.4*1.8*1.02inch(L*W*H), Approx Weight(±5g): 320g /0.71lb.
+
+[Telegram 2026-10-21-094702] **Desi-S:** The kit is the Hiwonder LanderPi Advanced Kit, and the pack's specs are recorded in three places: the vendor spec page as transcribed in the build log, the manual's own tables, and the label on the physical pack photographed on 2026-10-15.
+
+What is documented:
+
+Capacity: 2200 mAh (about 16.3 Wh at nominal voltage). The pack label adds a 10C discharge rating.
+
+Voltage: 7.4 V nominal, 8.4 V at full charge. The manual's floor is 7.0 V — recharge at or below that. The kit's charger is 8.4 V, 2 A.
+
+Runtime: about 60 minutes on the supplied pack, the vendor's figure, not a measured one.
+
+Connector: the spec table gives the discharge lead a 2-pin SM connector with reverse-polarity protection. Charging is separate: the battery's DC lead is pulled out of the side of the robot and the 8.4 V charger, which has a DC 5.5 × 2.5 mm male plug, goes into it. So the charge side is that barrel pair, the discharge side is the 2-pin SM. The kit's battery cable is 150 mm.
+
+What is not documented anywhere: dimensions and weight. No size or mass figure for the pack appears in the vendor specs, the manual tables, or the build record. Those two remain unknown; the only physical detail is that it sits under a metal cover and arrived with three sealed leads.
