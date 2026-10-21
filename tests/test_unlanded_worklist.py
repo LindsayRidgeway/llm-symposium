@@ -183,7 +183,11 @@ class Cli(unittest.TestCase):
         self.assertIn("verified_against", data)
         self.assertIn("runs", data)
         for row in data["runs"]:
-            self.assertEqual(sorted(row), ["absent", "amigo", "claimed", "present", "run"])
+            self.assertEqual(sorted(row), ["absent", "absent_never_written", "absent_written",
+                                           "amigo", "claimed", "present", "run", "written"])
+            # The split must partition `absent` exactly — no path in neither bucket, none in both.
+            self.assertEqual(sorted(row["absent_written"] + row["absent_never_written"]),
+                             sorted(row["absent"]))
 
 
 if __name__ == "__main__":

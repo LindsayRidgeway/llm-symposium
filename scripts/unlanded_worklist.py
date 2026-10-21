@@ -116,6 +116,26 @@ def claimed_paths(run_dir: Path) -> list[str]:
     return out
 
 
+def runner_changed_paths(run_dir: Path) -> list[str]:
+    """The runner's own accounting of the diff: `result.json` `changed_paths`.
+
+    Kept separate from `claimed_paths` because the two answer different questions, and conflating
+    them made this tool — and the wake instruction that quotes it — describe work that was never
+    written as work sitting on a review branch. Measured 2026-10-21 on my own previous wake
+    (`dmitri 20261021T112454Z-d302263e`): its `LAND:` line named three paths (a script, a report,
+    the to-do list), `land_missing` in its own `result.json` listed all three, and `changed_paths`
+    held two entirely different files (`docs/index.html`, `docs/plates/index.html`). The wake had
+    run out of actions before writing any of the three; the next wake was then told they existed
+    on a branch and must not be recomputed. That is the 2026-09-23 rule ("unlanded is not
+    missing") without its complement: **claimed is not written**.
+    """
+    try:
+        data = json.loads((run_dir / "result.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    return [p for p in (data.get("changed_paths") or []) if isinstance(p, str)]
+
+
 def classify(paths: list[str], repo: Path) -> tuple[list[str], list[str]]:
     """Split claimed paths into (present in this checkout, absent from it). Preserves order."""
     present, absent = [], []
@@ -148,9 +168,21 @@ def worklist(root: Path = HOME / "LLM", repo: Path = REPO, amigo: str | None = N
     rows = []
     for who, d in iter_runs(root, amigo):
         claimed = claimed_paths(d)
+        written = set(runner_changed_paths(d))
         present, absent = classify(claimed, repo)
+        # An absent path has two very different meanings, and the difference is the whole worklist:
+        #   absent_written        — the run produced this file and it is not in main (real work
+        #                           behind the gate: a conflict, a refused landing, a lost branch)
+        #   absent_never_written  — the run's own LAND line named it and the run never created it
+        #                           (cut off, or the line was written from intent). Nothing exists
+        #                           to land, so nothing may be re-landed; the fix is at the report.
+        absent_written = [p for p in absent if p in written]
+        absent_never_written = [p for p in absent if p not in written]
         rows.append({"run": d.name, "amigo": who, "claimed": claimed,
-                     "present": present, "absent": absent})
+                     "present": present, "absent": absent,
+                     "written": sorted(written),
+                     "absent_written": absent_written,
+                     "absent_never_written": absent_never_written})
     return rows
 
 
@@ -198,6 +230,18 @@ def _selftest() -> int:
         e = [r for r in rows3 if r["run"].startswith("20261008T010000Z")][0]
         checks.append(("a record-less run claims no paths", e["claimed"] == [] and e["absent"] == []))
 
+        # The two kinds of absence must not be conflated. `missing.txt` is in `changed_paths`
+        # (written, not landed); `ghost.txt` is only in the LAND line (never written). Measured
+        # 2026-10-21: without this split the tool reported a wake's three unwritten paths as work
+        # "on a branch", and the next wake was told not to recompute files that never existed.
+        checks.append(("a written-but-unlanded path is classed as written",
+                       rows[0]["absent_written"] == ["missing.txt"]))
+        checks.append(("a claimed-but-never-written path is classed as never written",
+                       rows[0]["absent_never_written"] == ["ghost.txt"]))
+        checks.append(("the split never loses a path",
+                       sorted(rows[0]["absent_written"] + rows[0]["absent_never_written"])
+                       == sorted(rows[0]["absent"])))
+
     for name, ok in checks:
         print("%s %s" % ("PASS" if ok else "FAIL", name))
     bad = [n for n, ok in checks if not ok]
@@ -230,20 +274,33 @@ def _cli() -> int:
 
     claimed = sum(len(r["claimed"]) for r in rows)
     absent = sum(len(r["absent"]) for r in rows)
+    absent_written = sum(len(r["absent_written"]) for r in rows)
+    absent_never = sum(len(r["absent_never_written"]) for r in rows)
     with_absent = [r for r in rows if r["absent"]]
+    runs_never = sum(1 for r in rows if r["absent_never_written"])
     print("unlanded worklist — verified against %s in %s" % (verified_at, repo))
     print("%d run(s) read, %d claimed path(s), %d absent from this checkout (%d run(s) affected)"
           % (len(rows), claimed, absent, len(with_absent)))
+    print("  %d absent path(s) were WRITTEN by their run and did not land  (real work behind the gate)"
+          % absent_written)
+    print("  %d absent path(s) were never written at all, only claimed   (%d run(s); nothing to land)"
+          % (absent_never, runs_never))
     for r in rows:
         if args.only_absent and not r["absent"]:
             continue
         if not r["claimed"]:
             continue
-        print("  %s %s  %d/%d absent" % (r["amigo"], r["run"], len(r["absent"]), len(r["claimed"])))
-        for p in r["absent"]:
+        print("  %s %s  %d/%d absent (%d written, %d never written)"
+              % (r["amigo"], r["run"], len(r["absent"]), len(r["claimed"]),
+                 len(r["absent_written"]), len(r["absent_never_written"])))
+        for p in r["absent_written"]:
             print("      ! %s" % p)
+        for p in r["absent_never_written"]:
+            print("      ~ %s" % p)
     if absent and not args.only_absent:
         print("\n(run with --only-absent for just the unlanded runs)")
+        print("  ! = written by the run, absent from this checkout — needs a merger or a fixer")
+        print("  ~ = named by the run, never written by it — needs nothing; do not recompute it")
     return 0
 
 
