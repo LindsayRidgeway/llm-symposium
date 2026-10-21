@@ -170,6 +170,107 @@ def validate(evs, a, b, census_a, census_b, rows_at_a: int | None = None) -> lis
     return sorted(bad, key=lambda x: x["id"])
 
 
+def _hours_between(a: str, b: str) -> float:
+    fmt = "%Y-%m-%dT%H:%M:%SZ"
+    try:
+        d = dt.datetime.strptime(b, fmt) - dt.datetime.strptime(a, fmt)
+    except ValueError:
+        return 0.0
+    return d.total_seconds() / 3600.0
+
+
+def unread_items(rows: list[dict], when: str, limit: int = 12, amigo: str = "",
+                 repo: Path = REPO) -> dict:
+    """Status 2 — in the repository, closed by the landing bot, and no model has read it.
+
+    This is the pile the founder's target is about, and until 2026-10-21 it had no view: a Status 2
+    item carries no name, appears in nobody's `--queue`, and so could only be read by accident.
+    "Read before you write" therefore drained the 43 named items and left the 225 alone.
+
+    Two columns are the reason this is a judgement aid and not a list. `closed` is how long the
+    work has been sitting there unread, and `files` is how many of the paths the item names are
+    still present on main. An item whose files are all there is work to *read*; an item whose files
+    are partly missing is a *delivery* problem wearing a reading problem's clothes, and no amount of
+    reading will fix it. Separating those two is the whole point — the same confusion cost this
+    commons ten wakes in September.
+
+    Oldest landing first, because the oldest unread work is the work most likely to have been
+    overtaken by later work that cannot know about it.
+    """
+    # `events()` reads the row's position in the file (`_seq`), which `load()` sets. A caller that
+    # built rows in memory (a test, another tool) has no position, so give it the list index —
+    # position in the sequence is the same fact.
+    seq_rows = []
+    for n, r in enumerate(rows):
+        if "_seq" not in r:
+            r = dict(r, _seq=n)
+        seq_rows.append(r)
+    evs = events(seq_rows)
+    latest: dict[str, dict] = {}
+    for r in seq_rows:
+        latest[r["id"]] = r
+    items = []
+    for item, e in evs.items():
+        if status_at(e, when) != "2":
+            continue
+        row = latest.get(item, {})
+        closed = [x for x in e if x["status"] == "2" and x["ts"] <= when]
+        closed_at = closed[-1]["ts"] if closed else ""
+        paths = [p for p in (row.get("paths") or []) if p]
+        present = sum(1 for p in paths if (repo / p).exists())
+        items.append({
+            "id": item,
+            "amigo": row.get("amigo") or "?",
+            "scope": row.get("scope") or "",
+            "title": row.get("title") or row.get("short_title") or "(no report)",
+            "closed_utc": closed_at,
+            "age_hours": round(_hours_between(closed_at, when), 1) if closed_at else 0.0,
+            "paths": paths,
+            "paths_present": present,
+            "paths_missing": [p for p in paths if not (repo / p).exists()],
+        })
+    if amigo:
+        items = [i for i in items if i["amigo"] == amigo]
+    items.sort(key=lambda i: (i["closed_utc"] or "", i["id"]))
+    readable = [i for i in items if i["paths"] and not i["paths_missing"]]
+    undelivered = [i for i in items if i["paths_missing"]]
+    shown = items if limit <= 0 else items[:limit]
+    return {"when": when, "total": len(items), "shown": shown, "limit": limit, "amigo": amigo,
+            "readable": len(readable), "undelivered": len(undelivered),
+            "oldest": items[0] if items else None}
+
+
+def show_unread(view: dict) -> None:
+    items = view["shown"]
+    who = (" for " + view["amigo"]) if view["amigo"] else ""
+    print(f"finished and not read{who}: {view['total']} item(s), oldest landing first")
+    if not items:
+        print("  nothing — every finished item in the ledger has been read.")
+        return
+    print("")
+    print(f"  {'#':>3}  {'id':<28} {'by':<7} {'closed':<12} {'waiting':>9}  {'files':>6}  title")
+    for n, i in enumerate(items, 1):
+        files = f"{i['paths_present']}/{len(i['paths'])}" if i["paths"] else "-"
+        title = " ".join(i["title"].split())[:64]
+        print(f"  {n:>3}  {i['id']:<28} {i['amigo']:<7} {i['closed_utc'][:10]:<12} "
+              f"{i['age_hours']:>8.0f}h  {files:>6}  {title}")
+    if view["limit"] > 0 and view["total"] > len(items):
+        print(f"\n  showing {len(items)} of {view['total']}  (--limit 0 for all)")
+    print("")
+    print(f"  {view['readable']} name only files that are still on main — work to read.")
+    print(f"  {view['undelivered']} name at least one file that is not on main — a delivery "
+          f"problem, not a reading problem.")
+    if view["oldest"]:
+        o = view["oldest"]
+        print(f"  oldest unread: {o['id']} by {o['amigo']}, closed {o['closed_utc'][:10]}, "
+              f"{o['age_hours']:.0f}h ago.")
+    print("")
+    print("  to drain one, read the run's report and the files it names, then record it:")
+    print('    python3 channels/item_ledger.py --review <id> --state accomplished \\')
+    print('        --reason "read it: what I opened and what I checked" --reviewer <you>')
+    print("  a read that finds the work wrong is still a read: say what is wrong in the reason.")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--at", help="census as of this UTC timestamp (default: now)")
@@ -180,12 +281,32 @@ def main() -> int:
     ap.add_argument("--target", action="store_true",
                     help="the founder's target, 2026-10-20: the review backlog must never exceed a "
                          "day's arrivals — counts it, and says PASS or FAIL")
+    ap.add_argument("--unread", action="store_true",
+                    help="the pile itself: Status 2 items (in the repository, closed by the landing "
+                         "bot, read by no model), oldest first, with whether the files they name are "
+                         "still on main — the view that did not exist until 2026-10-21")
+    ap.add_argument("--limit", type=int, default=12,
+                    help="with --unread: how many to show (0 = all); default 12")
+    ap.add_argument("--amigo", default="",
+                    help="with --unread: only items written by this amigo")
+    ap.add_argument("--json", action="store_true", help="with --unread: machine-readable")
+    ap.add_argument("--repo", default=str(REPO),
+                    help="with --unread: where the named paths are looked for (default: this repo)")
     a = ap.parse_args()
 
     ledger = Path(a.ledger)
     rows = load(ledger)
     evs = events(rows)
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    if a.unread:
+        view = unread_items(rows, a.at or now, limit=a.limit, amigo=a.amigo,
+                            repo=Path(a.repo))
+        if a.json:
+            print(json.dumps(view, indent=1, sort_keys=True))
+        else:
+            show_unread(view)
+        return 0
 
     if a.target:
         now = a.at or now
