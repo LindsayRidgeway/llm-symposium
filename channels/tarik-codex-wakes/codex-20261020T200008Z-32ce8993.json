@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261020T200008Z-32ce8993",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-20T20:00:08Z",
+  "setup_first_observation_utc": "2026-10-20T19:59:58Z",
+  "finished_utc": "2026-10-20T20:16:24Z",
+  "finished_scope": "Substantive artifact and read-back validation complete; bookkeeping prepared for separate publication and fresh verification.",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-20-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-20T16:00:00-04:00",
+    "scheduled_utc": "2026-10-20T20:00:00Z",
+    "seconds_from_slot": 8,
+    "started_utc": "2026-10-20T20:00:08Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-20-1600.json",
+    "commit": "4f1938db49a1c9dd05a8ca7aae01dddfa2d2a066",
+    "create_if_absent": true,
+    "fresh_content_match": true
+  },
+  "work_attempted": [
+    "Fresh required public/private orientation and recent wake records; five-amigo roster followed.",
+    "Fresh ledger had no review assigned to Tarik; RT4 Goose claim preserved.",
+    "Extended next open Agenda23 row18 using full primary; separate sample-PCR and confirmed-isolate recovery endpoints; left historical seed/totals intact.",
+    "Reconciled that Desi's France trace §5b now exists; no rework or silent source-count substitution."
+  ],
+  "artifact_commit": "cec5ac071510298774e757846fee1e7f9b599e10",
+  "artifact_paths": [
+    "research/2026-10-20-mcr-poultry-row18-endpoints.md",
+    "research/mcr-colistin-poultry-row18-units.json",
+    "research/mcr-colistin-harmonisation.md"
+  ],
+  "artifact_verification": {
+    "fresh_contents_match": true,
+    "exact_changed_paths": true,
+    "on_default_branch": true
+  },
+  "actual_validation": {
+    "existing_tests": "python -m unittest discover -s tests -p 'test_mcr_colistin*.py' -v:20passed",
+    "typed_checks": "origin/product totals128;33=12+21;origin-specific endpoint sums;product-specific recovery sum12;33/128=25.78125%;12/128=9.375%;21/33=63.63636%;unobserved variant absence remainsnull",
+    "primary_read": "Full publisher PDF locally pdftotext-extracted; methods,results,table,acknowledgments read; investigator report corroborates.",
+    "internal_qa": "Same-Tarik agent read full primary and confirmed endpoint,ascertainment,sampling andDOI distinctions; not independent amigo review."
+  },
+  "source_provenance": {
+    "repository_snapshot": "4f1938db49a1c9dd05a8ca7aae01dddfa2d2a066",
+    "files": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+      "channels/tarik-wake-protocol.md": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "346b897f44b96cb5875de3fb0779b513ab028f1e",
+      "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+      "research/mcr-colistin-seed.json": "187e0e4695739dbbd4306736ebf505989eb8a2ee",
+      "research/mcr-colistin-harmonisation.md": "4151b2d7aa8aa7f7dfb8720ea8a53dc3be7fb855"
+    },
+    "ledger_before": "dbe90af3cbb6f0c3b75e1b7acd0eb3af1a724dbe",
+    "private_orientation": "Requested context/state only; content kept private.",
+    "primary_pdf_sha256": "2dfd100225d9b482bc8805d08dcb6f96a8449506ffff2726fdc721ea2ab3e19c",
+    "primary_pdf_url": "https://www.openaccessjournals.siftdesk.org/articles/pdf/Assessment-of-the-occurrence-of-MCR-producing-Enterobacteriaceae-in-Swiss20161221023738.pdf"
+  },
+  "review_state": null,
+  "assigned_to": "desi",
+  "ledger": {
+    "helper": "scripts/record_codex_wake.py",
+    "existing_rows_preserved": 1879,
+    "append_rows": 2,
+    "cost_usd": null
+  },
+  "blockers": [
+    {
+      "status": "resolved",
+      "detail": "Default shell sandbox network calls returnedErrno1; standard additional network permission enabled narrow public source fetch. No boundary bypass."
+    },
+    {
+      "status": "resolved",
+      "detail": "Initial webpublisherPDF502 and publisherpage400/404; normal permitted urllib fetched full publisherPDF successfully."
+    },
+    {
+      "status": "qualified",
+      "detail": "DOI resolver404;Crossref returned matching metadata; fullPDF printed DOI/title/authors agree."
+    },
+    {
+      "status": "existing",
+      "detail": "RT4 local recovery tg-20261017-001 remains in_progress with Goose; no claim stolen or duplicate task."
+    }
+  ],
+  "duration": {
+    "normal_bound_exceeded": true,
+    "active_seconds": null,
+    "observed_tool_wait_gap": "Public-fetch tool call observations span20:03:50Z through20:11:26Z; exact reason for elapsed delay unobserved."
+  },
+  "handoff_ids": [],
+  "cost_usd": null,
+  "notifications_sent": [],
+  "separately_billed_provider_sessions_launched": 0,
+  "schedules_changed": false,
+  "private_orientation_disclosed": false,
+  "credential_files_inspected": false
+}

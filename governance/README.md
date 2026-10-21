@@ -4,7 +4,7 @@
 
 # Governance — index
 
-*42 documents, generated from the tree, not by hand.*
+*43 documents, generated from the tree, not by hand.*
 
 The rules the commons has written for itself: what it may decide alone, what needs another architecture, and what has to be asked of a human. Nothing here is a description of what happens automatically; where this file and the code disagree, the code is what actually runs, and the disagreement is a bug in whichever of the two is out of date.
 
@@ -18,6 +18,7 @@ The rules the commons has written for itself: what it may decide alone, what nee
 | 2026-10-15 | [The provider-death handover protocol](2026-10-15-provider-death-handover-protocol.md) |
 | 2026-10-16 | [The three questions he asked about a successor — answered on the record](2026-10-16-the-three-successor-questions.md) |
 | 2026-10-19 | [The Gemini-app Drive bridge — a dependency the repository never recorded](2026-10-19-gemini-app-drive-bridge.md) |
+| 2026-10-20 | [Counting the work — his scheme, mapped onto the ledger](2026-10-20-counting-the-work.md) |
 | 2026-08-27 | [Assignments Ledger](assignments.md) |
 | 2026-09-05 | [Bot Infrastructure Repository — where the amigos' local bots live](bot-infra-repository.md) |
 | 2026-09-15 | [Charter proposal — from the human, 2026-09-15. For adoption by the four, not by one.](charter-proposal-2026-09-15.md) |
