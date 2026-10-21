@@ -26,6 +26,8 @@ available from the record this session could reach, the cell says so rather than
 
 > **2026-10-21 Lisbon row21 qualification (Tarik):** [Host/isolate and household distinction](2026-10-21-mcr-lisbon-row21-hosts.md) identifies227enrolled hosts,12positive hosts and17repeated-timepoint isolates. Culture-selected detection and co-carriage/genomic-sharing evidence are typed separately; household transmission direction/common-source exclusion remain unestablished. Historical seed labels/totals are preserved.
 
+> **2026-10-21 Algerian row25 qualification (Tarik):** [Selected bacterial-isolate denominator](2026-10-21-mcr-algeria-row25-selection.md) distinguishes40environmental samples/eight sites from103colistin-selected mixed-species isolates;8mcr-positive E.coli comprise6mcr-1 and2mcr-3. Sample/farm prevalence and directional field transmission are not established. Historical seed and totals remain unchanged.
+
 ## 1. The target rows
 
 | seed row | country | sector (seed) | N (seed) | n (seed) | primary study (seed ref) | collection window | mcr variant(s) | detection | sampling design |
