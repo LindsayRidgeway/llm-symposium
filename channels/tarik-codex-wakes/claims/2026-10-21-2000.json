@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "actor": "tarik-codex",
+  "run_id": "codex-20261022T000249Z-d8ed5a41",
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-21-2000.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-10-21T20:00:00-04:00",
+  "scheduled_utc": "2026-10-22T00:00:00Z",
+  "seconds_from_slot": 169,
+  "started_utc": "2026-10-22T00:02:49Z"
+}
