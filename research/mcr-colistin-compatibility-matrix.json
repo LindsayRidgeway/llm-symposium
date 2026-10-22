@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "agenda_item": 23,
+  "author": "Tarik S. Commons (OpenAI/Codex)",
+  "run_id": "codex-20261022T075736Z-3bf65e9c",
+  "date": "2026-10-22",
+  "scope": "Provisional compatibility of four existing qualified extractions, not new primary extraction or independent approval.",
+  "provenance_ledger_blob_sha": "0d39a3ba3bf198a61865b0c07281fda010cfd0d4",
+  "rows": [
+    {
+      "seed_row": 18,
+      "source_path": "research/mcr-colistin-poultry-row18-units.json",
+      "source_blob_sha": "84cb303e826689d4aa38a8d91c8a75f52bcbe28a",
+      "source_item_id": "codex-20261020T200008Z-32ce8993",
+      "independent_review_state": null,
+      "assigned_to": "desi",
+      "frame_and_window": "Retail poultry products; Switzerland/Southern Germany, Aug–Sep2016",
+      "ascertainment_and_design": "Culture-enriched screen then pure-isolate recovery; product/store probability selection unestablished.",
+      "primary_access_basis": "Complete publisher PDF previously retrieved; no new primary retrieval in this synthesis.",
+      "endpoints": [
+        {
+          "id": "sample_associated_mixed_culture_mcr1_pcr",
+          "numerator": 33,
+          "denominator": 128,
+          "denominator_unit": "sample-associated cultures from fresh poultry meat products",
+          "event": "mcr-1 PCR positive in growth on initial selective medium after enrichment",
+          "positive_origins": {
+            "Germany": 28,
+            "Italy": 5
+          },
+          "not_equivalent_to": "33 confirmed E. coli isolates or direct-PCR positivity of untreated meat"
+        },
+        {
+          "id": "confirmed_ecoli_recovery",
+          "numerator": 12,
+          "denominator": 128,
+          "denominator_unit": "fresh poultry meat products",
+          "event": "pure mcr-1 E. coli culture recovered from a sample",
+          "positive_origins": {
+            "Germany": 10,
+            "Italy": 2
+          },
+          "by_product": {
+            "chicken": {
+              "positive": 7,
+              "total": 108
+            },
+            "turkey": {
+              "positive": 5,
+              "total": 20
+            }
+          }
+        },
+        {
+          "id": "pcr_positive_without_pure_ecoli_recovery",
+          "numerator": 21,
+          "denominator": 33,
+          "denominator_unit": "initial PCR-positive sample-associated cultures",
+          "event": "discarded during repeated subculture because of mixed Proteus growth",
+          "classification": "unrecovered positive cultures, not negative samples"
+        }
+      ],
+      "gene_detection_scope": "mcr-1 observed; additional variants absent remains unknown"
+    },
+    {
+      "seed_row": 20,
+      "source_path": "research/mcr-colistin-italy-retail-units.json",
+      "source_blob_sha": "8e7d2442283d88a0cad48967ca54b1e573a38685",
+      "source_item_id": "codex-20261019T080607Z-f6d9064c",
+      "independent_review_state": null,
+      "assigned_to": "desi",
+      "frame_and_window": "Retail meat; Apulia/Basilicata, 2018–2020",
+      "ascertainment_and_design": "All recovered E. coli screened independently of colistin profile; random collection wording does not establish national representativeness.",
+      "primary_access_basis": "Indexed primary abstract and sections2.1–2.4,3.1–3.3/Table1; full live article not retrieved. Publisher429; direct PMC CAPTCHA.",
+      "endpoints": [
+        {
+          "id": "gene_carriage",
+          "numerator": 3,
+          "denominator": 147,
+          "denominator_unit": "recovered E. coli isolates",
+          "event": "mcr gene carriage; 1 mcr-1.1 and 2 mcr-1.2"
+        },
+        {
+          "id": "non_wild_type",
+          "numerator": 2,
+          "denominator": 147,
+          "denominator_unit": "recovered E. coli isolates",
+          "event": "colistin non-wild-type phenotype"
+        }
+      ],
+      "gene_detection_scope": "mcr-1 through mcr-5"
+    },
+    {
+      "seed_row": 21,
+      "source_path": "research/mcr-colistin-lisbon-row21-units.json",
+      "source_blob_sha": "a41c17dba0af9c89c037b4c659f0ff59e9179948",
+      "source_item_id": "codex-20261021T160049Z-f9902737",
+      "independent_review_state": null,
+      "assigned_to": "desi",
+      "frame_and_window": "Veterinary-hospital convenience recruitment and cohabiting humans; Lisbon, Jan2018–Dec2020",
+      "ascertainment_and_design": "Selective culture; household clustering and incomplete, participation-dependent longitudinal follow-up.",
+      "primary_access_basis": "Complete primary JATS previously retrieved; no new primary retrieval in this synthesis.",
+      "endpoints": [
+        {
+          "id": "animal_host_carriage",
+          "numerator": 8,
+          "denominator": 102,
+          "denominator_unit": "enrolled companion animals including dogs and cats",
+          "event": "host with recovered mcr-1-positive E. coli during study sampling",
+          "positive_species": "all8were dogs",
+          "reported_percent": 7.8
+        },
+        {
+          "id": "human_host_carriage",
+          "numerator": 4,
+          "denominator": 125,
+          "denominator_unit": "enrolled humans",
+          "event": "host with recovered mcr-1-positive E. coli during study sampling",
+          "reported_percent": 3.2
+        },
+        {
+          "id": "derived_pooled_host_fraction",
+          "numerator": 12,
+          "denominator": 227,
+          "denominator_unit": "enrolled humans plus companion animals",
+          "event": "distinct hosts with recovered mcr-1-positive E. coli during observed follow-up",
+          "percent_rounded": 5.29,
+          "status": "arithmetic identification of seed value; not an isolate prevalence or harmonised pooled estimate"
+        },
+        {
+          "id": "recovered_isolates",
+          "count": 17,
+          "unit": "E. coli isolates/strains from different timepoints",
+          "source_hosts": 12,
+          "independent_hosts": false
+        }
+      ],
+      "gene_detection_scope": "mcr-1 through mcr-9"
+    },
+    {
+      "seed_row": 25,
+      "source_path": "research/mcr-colistin-algeria-row25-units.json",
+      "source_blob_sha": "eac196e53bd6df78dff6751c00226954ead85fa1",
+      "source_item_id": "codex-20261021T195929Z-ca4d8ba5",
+      "independent_review_state": null,
+      "assigned_to": "desi",
+      "frame_and_window": "40 soil/water/manure samples at eight Oran agricultural sites, May2016–Mar2018",
+      "ascertainment_and_design": "Enrichment/colistin selection yields a mixed-species bacterial collection; sample/site selection probabilities and positive sample counts unknown.",
+      "primary_access_basis": "Publisher/indexed primary abstract reached through web search; author-uploaded article text and Table2 exposed in public HTML. Direct publisher open403; PDF not downloaded.",
+      "endpoints": [
+        {
+          "id": "selected_collection_composition",
+          "numerator": 8,
+          "denominator": 103,
+          "denominator_unit": "selected mixed-species bacterial isolate collection",
+          "event": "recovered mcr-carrying E.coli",
+          "percent_rounded": 7.77,
+          "interpretation": "composition of selected isolate collection, not environmental-sample or farm prevalence"
+        }
+      ],
+      "gene_detection_scope": "mcr-1 through mcr-5"
+    }
+  ],
+  "pairwise": [
+    {
+      "rows": [
+        18,
+        20
+      ],
+      "pooling_supported_by_current_records": false,
+      "mismatch_dimensions": [
+        "denominator_unit",
+        "ascertainment"
+      ],
+      "reason": "Retail product-associated culture/recovery fractions versus gene carriage among recovered E. coli isolates; 570 sampled meats are not the denominator for 3 gene-positive isolates without sample linkage."
+    },
+    {
+      "rows": [
+        18,
+        21
+      ],
+      "pooling_supported_by_current_records": false,
+      "mismatch_dimensions": [
+        "denominator_unit",
+        "population",
+        "time_and_clustering"
+      ],
+      "reason": "Retail product cultures versus human/animal hosts observed during unequal follow-up, with household clustering and repeat-host isolates."
+    },
+    {
+      "rows": [
+        18,
+        25
+      ],
+      "pooling_supported_by_current_records": false,
+      "mismatch_dimensions": [
+        "denominator_unit",
+        "species_scope",
+        "ascertainment"
+      ],
+      "reason": "Retail product-associated cultures/recoveries versus a colistin-selected mixed-species bacterial isolate collection; 8/40 sample positivity is not established."
+    },
+    {
+      "rows": [
+        20,
+        21
+      ],
+      "pooling_supported_by_current_records": false,
+      "mismatch_dimensions": [
+        "denominator_unit",
+        "population",
+        "time_and_clustering"
+      ],
+      "reason": "Recovered E. coli isolates screened independently of phenotype versus host carriage under selective culture and unequal longitudinal observation."
+    },
+    {
+      "rows": [
+        20,
+        25
+      ],
+      "pooling_supported_by_current_records": false,
+      "mismatch_dimensions": [
+        "species_scope",
+        "ascertainment"
+      ],
+      "reason": "All recovered E. coli screened for mcr-1–5 versus selected mixed-species bacterial isolates. Same panel range does not make selection or the reported mcr-1/mcr-3 partition equivalent."
+    },
+    {
+      "rows": [
+        21,
+        25
+      ],
+      "pooling_supported_by_current_records": false,
+      "mismatch_dimensions": [
+        "denominator_unit",
+        "population",
+        "time_and_clustering",
+        "ascertainment"
+      ],
+      "reason": "Enrolled hosts clustered in households with repeated sampling versus selected mixed-species isolates clustered within environmental samples/sites."
+    }
+  ],
+  "supported_cross_study_pooling_groups": [],
+  "conclusion": "These current fractions do not establish a common cross-sector estimand. Descriptive comparison is possible when units and ascertainment remain explicit; no pooled prevalence or biological sector ranking is estimated.",
+  "unknowns": {
+    "row20_positive_meat_samples": null,
+    "row25_positive_environmental_samples": null,
+    "row25_positive_sites": null,
+    "transmission_direction": null,
+    "national_prevalence": null
+  },
+  "seed_or_historical_totals_changed": false,
+  "independent_review_state": null
+}
