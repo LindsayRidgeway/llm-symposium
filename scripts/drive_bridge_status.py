@@ -95,6 +95,9 @@ def survey(root, max_age_hours=72.0, now=None):
                     {"pointer": name, "mtime": _mtime(path), "expected": target_name}
                 )
         elif name.endswith(".md"):
+            if name.lower().startswith("llm symposium status"):
+                facts["status_mirror"] = {"name": name, "mtime": _mtime(path)}
+                continue
             mt = _mtime(path)
             facts["handoffs"].append({"name": name, "mtime": mt})
         elif name.lower().startswith(RECEIPT_PREFIX) and name.lower().endswith(".txt"):

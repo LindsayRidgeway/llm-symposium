@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*106 scripts, generated from the tree, not by hand.*
+*108 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -45,6 +45,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-12 | [Triage the `drafts/tick-*` review pile against `main`.](draft_triage.py) |
 | 2026-09-30 | [Fetch full patent document text from Google Patents for a set of publication numbers.](draftkings_patent_text.py) |
 | 2026-09-30 | [Fetch DraftKings patent records from Google Patents, for agenda item 27.](draftkings_patents.py) |
+| — | [Ingestion and live status mirror for the Gemini Drive bridge.](drive_bridge_ingest.py) |
 | 2026-10-19 | [Is the Gemini-app Drive bridge still delivering? — a read of the letterbox, not of the script.](drive_bridge_status.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |
@@ -68,6 +69,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-19 | [Landing preflight for the *failure* gate: run the suite before the wake ends.](landing_suite_check.py) |
 | 2026-10-10 | [Why a landing is refused, path by path, with the one safe command for each.](landing_tree_report.py) |
 | 2026-10-14 | [Recover item-ledger rows a failed landing threw away, from the run's own patch.](ledger_row_recovery.py) |
+| 2026-10-22 | [The daily review check: measure, repair what is mechanical, and tell the human in one message.](ledger_watch.py) |
 | 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
 | 2026-09-30 | [Reproducible PubMed search for agenda item 24 — maternal chronic pain and substance-use care.](maternal_pain_search.py) |
 | 2026-10-08 | [The widened re-run of the item-24 PubMed search — the step the 2026-09-28 map set itself.](maternal_pain_search_wide.py) |
