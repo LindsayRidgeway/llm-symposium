@@ -61,7 +61,7 @@ def parse_calendar(text: str) -> list[dict]:
     guess.
     """
     rows = []
-    for line in text.splitlines():
+    for lineno, line in enumerate(text.splitlines(), start=1):
         s = line.strip()
         if not re.match(r"^\|\s*\d{4}-\d{2}-\d{2}\s*\|", s):
             continue
@@ -79,10 +79,47 @@ def parse_calendar(text: str) -> list[dict]:
                 "event": event,
                 "owner": cells[2],
                 "impact": cells[3] if len(cells) >= 4 and cells[3] in IMPACTS else None,
-                "models": _TOKEN.findall(event),
+                # Where it came from, so a refusal can say which line to fix instead of
+                # naming only the shape of the fault (2026-10-22: a wake lost its landing to
+                # "a row lost its Impact cell" and no row was ever named).
+                "line": lineno,
+                "raw": s,
+                "fourth": cells[3] if len(cells) >= 4 else None,
             }
         )
     return rows
+
+
+def unclassified(rows: list[dict]) -> list[dict]:
+    """The rows this file could read as calendar rows but could not classify. Empty is healthy."""
+    return [r for r in rows if r["impact"] is None]
+
+
+def describe_unclassified(rows: list[dict], doc: str = "research/hosts-watch.md") -> str:
+    """Say *which* lines are unclassified, what their fourth cell actually holds, and what to do.
+
+    This file is both prose and a machine-read calendar: any line beginning with a date is a
+    calendar row. So a human-readable summary table pasted in beside the calendar is not a
+    formatting wart — it is three fake rows, and a `verdict` of 2. The message has to carry the
+    line number, because the reader is an instrument's stderr in a run that is about to end.
+    """
+    bad = unclassified(rows)
+    if not bad:
+        return ""
+    out = [
+        f"{doc}: {len(bad)} line(s) begin with a date but carry no Impact cell — "
+        f"`route`, `cost` or `—` belongs in the fourth column:"
+    ]
+    for r in bad:
+        fourth = "no fourth cell at all" if r.get("fourth") is None else f"fourth cell is {r['fourth']!r}"
+        out.append(f"  line {r.get('line', '?')}: {fourth}")
+        out.append(f"    {r.get('raw', '')[:160]}")
+    out.append(
+        "Every line in this file that starts with a date is read as a calendar row. Fix one of "
+        "two ways: give it an Impact cell in the fourth column, or stop the row starting with a "
+        "date (a derived or summary table belongs with another column first)."
+    )
+    return "\n".join(out)
 
 
 def is_set(model: str, settings_text: str) -> bool:
@@ -151,10 +188,9 @@ def render(rows: list[dict], as_of: date, warn: int, window: int) -> str:
             f"{mark:2} {r['date'].isoformat()}  {r['days']:>5}d  {r['impact'] or '?':5}  "
             f"{r['status']:<8}  {r['event']}"
         )
-    unknown = [r for r in rows if r["impact"] is None]
+    unknown = unclassified(rows)
     if unknown:
-        lines += ["", f"UNCLASSIFIED ({len(unknown)}): a calendar row with no impact cell — "
-                      f"add `route`, `cost` or `—` in the fourth column."]
+        lines += ["", describe_unclassified(rows)]
     due = [r for r in rows if r["status"] == "due"]
     lines += [""]
     if due:
