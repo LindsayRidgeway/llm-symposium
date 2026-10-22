@@ -25,6 +25,9 @@ import datetime as dt
 import json
 import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from channels.item_ledger import names_a_person  # noqa: E402
+from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 LEDGER = REPO / "channels" / "items.jsonl"
@@ -90,7 +93,11 @@ def events(rows: list[dict]) -> dict[str, list[dict]]:
                          "actor": r.get("assigned_by") or "?", "status": "3",
                          "to": r["assigned_to"]})
         if r.get("state_utc") and r.get("state"):
-            st = {"accomplished": "2" if (r.get("reviewer") or "") == "auto:land" else "1",
+            # 2026-10-22: "checked" means a body read it. A path comparison (`auto:path`) is the
+                  # same kind of fact as the lander's gate (`auto:land`) and used to be counted
+                  # here as status 1 — reviewed — which inflated the checked pile, the one the
+                  # backlog ratio is measured against.
+                  st = {"accomplished": "1" if names_a_person(r.get("reviewer")) else "2",
                   "postponed": "5", "rejected": "6"}[r["state"]]
             item.append({"ts": _ts(r["state_utc"]), "seq": r["_seq"], "kind": "closed",
                          "actor": r.get("reviewer") or "?", "status": st})
@@ -334,8 +341,8 @@ def main() -> int:
         into = outof = 0
         for rs in per_item.values():
             closed = sorted([x for x in rs if x.get("state_utc")], key=lambda x: x["state_utc"])
-            bot = [x for x in closed if (x.get("reviewer") or "") == "auto:land"]
-            model = [x for x in closed if (x.get("reviewer") or "") not in ("", "auto:land")]
+            bot = [x for x in closed if not names_a_person(x.get("reviewer"))]
+            model = [x for x in closed if names_a_person(x.get("reviewer"))]
             if bot and bot[0]["state_utc"] > since:
                 into += 1
             if bot and model and model[-1]["state_utc"] > since and bot[0]["state_utc"] < model[-1]["state_utc"]:

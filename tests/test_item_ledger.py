@@ -8,6 +8,7 @@ The three things that would make the report a lie, and are therefore pinned here
   3. a postponed or rejected item must carry a reason — an item filed as "postponed" with no
      reason is indistinguishable from one that was quietly dropped.
 """
+import contextlib
 import datetime as dt
 import io
 import json
@@ -555,8 +556,14 @@ class TestReconcilePaths(unittest.TestCase):
         self.assertEqual([r["id"] for r in made], ["20261010T000000Z-aaaaaaaa"])
         rec = il.load(self.path)["20261010T000000Z-aaaaaaaa"]
         self.assertEqual(rec["state"], "accomplished")
-        self.assertEqual(rec["reviewer"], "dmitri")
+        # 2026-10-22: a path comparison is not a reading, so it does not sign as the body that ran
+        # it. Who ran the pass is kept — as a different fact, in a different field.
+        self.assertEqual(rec["reviewer"], "auto:path")
+        self.assertEqual(rec["checked_by"], "dmitri")
+        self.assertIn("not a reading", rec["reason"])
         self.assertIn("scripts/x.py", rec["reason"])
+        c = il.counts({rec["id"]: rec}, None)
+        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (0, 1))
 
     def test_one_missing_path_stays_waiting_by_default(self):
         il.append([self._row("20261010T000000Z-bbbbbbbb",
@@ -776,6 +783,110 @@ class TestTheCliDoesNotStampAPersonOnMachineWork(unittest.TestCase):
                               "did scripts/x.py", "--reviewer", "human"], "review",
                              ret={"id": "x", "state": "accomplished", "reason": "r"})
         self.assertEqual(seen.get("reviewer"), "human")
+
+
+class TestAMachineCheckIsNotAReview(unittest.TestCase):
+    """`auto:path` counts as the gate, not as a review by a body (2026-10-22).
+
+    The ledger's own record already said it — "An `auto:path` close is a machine check"
+    (`channels/reports/2026-10-15-dmitri-review-reconcile-records-the-wrong-reviewer.md`) — and the
+    count disagreed, because the split was `reviewer not in (None, "auto:land")`. So every item a
+    path pass drained was added to the pile that reads as somebody having looked, in the one number
+    built to show how much of the queue is drained by the disk check rather than by reading.
+    """
+
+    def _row(self, rid, reviewer):
+        return {"id": rid, "amigo": "desi", "scope": "internal", "state": "accomplished",
+                "filed_utc": "2026-01-01T00:00:00Z", "reviewer": reviewer, "reason": "x"}
+
+    def test_a_path_close_is_the_gate_and_not_a_review(self):
+        c = il.counts({"a": self._row("a", "auto:path")}, None)
+        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (0, 1))
+
+    def test_the_lander_and_the_path_check_are_the_same_kind_of_fact(self):
+        c = il.counts({"a": self._row("a", "auto:land"), "b": self._row("b", "auto:path")}, None)
+        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (0, 2))
+
+    def test_a_body_that_looked_still_counts_as_a_review(self):
+        c = il.counts({"a": self._row("a", "desi"), "b": self._row("b", "gemini")}, None)
+        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (2, 0))
+
+    def test_nobody_named_at_all_is_the_gate(self):
+        c = il.counts({"a": self._row("a", None)}, None)
+        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (0, 1))
+
+    def test_any_future_machine_pass_is_covered_without_being_listed(self):
+        # The reason the check is a prefix and not a list: a fourth machine pass would otherwise
+        # arrive counted as a human review, and nobody would notice for weeks.
+        c = il.counts({"a": self._row("a", "auto:whatever-comes-next")}, None)
+        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (0, 1))
+
+
+class TestTheQueueSaysWhatItCanJudge(unittest.TestCase):
+    """A review item is only reviewable if its evidence is in this checkout (2026-10-22).
+
+    Measured that morning: four of the five items waiting on desi named files that were not on
+    disk at all — work that never reached main, which under the 2026-09-23 rule is a delivery
+    state, not work to redo. The queue listed those paths plainly and said nothing about whether
+    they were here, so each wake spent its opening actions rediscovering the same thing in silence.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        root = Path(self.tmp.name)
+        self.repo = root / "repo"
+        (self.repo / "research").mkdir(parents=True)
+        (self.repo / "research" / "here.md").write_text("x\n", encoding="utf-8")
+        self._old_repo = il.REPO
+        il.REPO = self.repo
+
+    def tearDown(self):
+        il.REPO = self._old_repo
+        self.tmp.cleanup()
+
+    def _row(self, rid, paths):
+        return {"id": rid, "amigo": "gemini", "scope": "internal", "title": "t", "paths": paths,
+                "state": None, "assigned_to": "desi", "filed_utc": "2026-10-19T00:00:00Z",
+                "assign_reason": "drawn", "evidence": "a run"}
+
+    def _queue_output(self, rows):
+        old_load, old_argv = il.load, sys.argv
+        il.load = lambda *a, **k: rows
+        sys.argv = ["item_ledger.py", "--queue", "desi"]
+        buf = io.StringIO()
+        try:
+            with contextlib.redirect_stdout(buf):
+                il._cli()
+        finally:
+            il.load, sys.argv = old_load, old_argv
+        return buf.getvalue()
+
+    def test_an_item_whose_evidence_is_all_here_says_so(self):
+        out = self._queue_output({"a": self._row("a", ["research/here.md"])})
+        self.assertIn("1 of 1 present — judgeable from this checkout", out)
+        self.assertNotIn("NOT judgeable", out)
+
+    def test_an_item_whose_evidence_is_absent_is_named_as_a_delivery_state(self):
+        out = self._queue_output({"a": self._row("a", ["research/here.md", "research/gone.md"])})
+        self.assertIn("1 of 2 present — NOT judgeable here", out)
+        self.assertIn("delivery state", out)
+        self.assertIn("0 of 1 item(s) in this queue can be judged", out)
+
+    def test_a_mixed_queue_counts_both_sides(self):
+        rows = {"a": self._row("a", ["research/here.md"]),
+                "b": self._row("b", ["research/gone.md"])}
+        out = self._queue_output(rows)
+        self.assertIn("1 of 2 item(s) in this queue can be judged from this checkout", out)
+        self.assertIn("1 name paths that are not here", out)
+
+    def test_a_fully_reachable_queue_adds_no_warning(self):
+        out = self._queue_output({"a": self._row("a", ["research/here.md"])})
+        self.assertNotIn("can be judged from this checkout;", out)
+
+    def test_the_check_reads_the_row_not_the_report(self):
+        here, named = il.presence(self._row("a", ["research/here.md", "nope.md"]))
+        self.assertEqual((here, named), (1, 2))
+        self.assertEqual(il.presence(self._row("b", [])), (0, 0))
 
 
 if __name__ == "__main__":

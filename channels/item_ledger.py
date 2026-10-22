@@ -575,14 +575,24 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
             continue
         missing = [p for p in paths if not (repo / p).exists()]
         upd = dict(rec)
+        # The reviewer of a path comparison is the comparison, not the body that ran it
+        # (2026-10-22). `reviewer` used to be whatever the caller passed, so
+        # `--reconcile-paths --reviewer desi` wrote `desi` onto rows nobody had read — the same
+        # false stamp the 2026-10-15 fix removed from the *default*, still reachable through the
+        # flag, and now the likelier route because the wake instruction tells a reviewer to pass
+        # their own name. Who ran the pass is a real fact; it goes in its own field, where it
+        # cannot be read as a review.
+        upd.update(reviewer="auto:path")
+        if reviewer and reviewer != "auto:path":
+            upd["checked_by"] = reviewer
         if not missing:
             rest = f" and {len(paths) - 1} more" if len(paths) > 1 else ""
-            upd.update(state="accomplished", state_utc=now, reviewer=reviewer or "auto:path",
+            upd.update(state="accomplished", state_utc=now,
                        reason=f"delivered: every path this item names is present on main "
-                              f"({paths[0]}{rest})")
+                              f"({paths[0]}{rest}) — a path comparison, not a reading")
             updates.append(upd)
         elif postpone_absent:
-            upd.update(state="postponed", state_utc=now, reviewer=reviewer or "auto:path",
+            upd.update(state="postponed", state_utc=now,
                        reason=f"delivery state: {missing[0]} is named but not on main — under the "
                               f"2026-09-23 rule a missing path is work awaiting a closer, not "
                               f"work to redo")
@@ -648,6 +658,39 @@ def is_exempt(rec: dict) -> bool:
     return bool((rec.get("no_review_reason") or "").strip())
 
 
+def names_a_person(reviewer) -> bool:
+    """True only when the reviewer is a body that could have read the work.
+
+    Every machine pass in this file writes a name that starts `auto:` — `auto:land` for the
+    lander's test gate, `auto:path` for a path list compared against the checkout. Neither read
+    anything. The `by_review`/`by_gate` split exists so the human can see how much of a queue is
+    drained by a disk check rather than by reading, and it was computed as
+    `reviewer not in (None, "auto:land")` — so every path close landed in `by_review`, and the
+    daily report printed it as a review performed by a body.
+
+    The 2026-10-15 fix (`channels/reports/2026-10-15-dmitri-review-reconcile-records-the-wrong-
+    reviewer.md`) closed the leak in the CLI's *default* and left this one, the count. Found
+    2026-10-22 while draining a queue whose oldest item's paths were all present **because they
+    were the files under review**: the advertised pass would have closed it "accomplished by
+    desi" — a review, in the numbers — with nobody having read a line.
+    """
+    return bool(reviewer) and not str(reviewer).startswith("auto:")
+
+
+def presence(rec: dict, repo: Path | None = None) -> tuple[int, int]:
+    """(named paths present in this checkout, named paths). `(0, 0)` if the row names none.
+
+    The review rule is "judge from what is on disk". Measured 2026-10-22: four of the five items
+    waiting on desi named files that were not on disk at all — work that never reached main, which
+    under the 2026-09-23 rule is a delivery state and not work to redo. The queue printed those
+    paths without saying whether they were here, so every wake spent its first actions
+    rediscovering it. This is the check the queue should have been able to make for itself.
+    """
+    repo = repo or REPO
+    paths = [p for p in (rec.get("paths") or []) if isinstance(p, str)]
+    return sum(1 for p in paths if (repo / p).exists()), len(paths)
+
+
 def counts(items: dict[str, dict], hours: int | None = None) -> dict:
     """The six groups, split by amigo and by internal/external. `hours=None` is lifetime.
 
@@ -698,7 +741,7 @@ def counts(items: dict[str, dict], hours: int | None = None) -> dict:
         letter = letter_for(rec)
         add(letter, who, scope)
         if letter == "A":
-            out["A"]["by_review" if rec.get("reviewer") not in (None, "auto:land") else "by_gate"] += 1
+            out["A"]["by_review" if names_a_person(rec.get("reviewer")) else "by_gate"] += 1
         if in_window(rec.get("state_utc")):
             out["decisions"] += 1
     return out
@@ -1085,6 +1128,7 @@ def _cli() -> int:
         total = queue_size(items, args.queue)
         rest = f" (--next {total} to see the rest)" if total > len(rows) else ""
         print(f"{len(rows)} of {total} item(s) waiting on {args.queue}, oldest first{rest}:")
+        judgeable = 0
         for rec in rows:
             print(f"\n  {rec['id']}")
             print(f"    written by {rec.get('amigo','?')} · {rec.get('scope','?')} · "
@@ -1094,6 +1138,18 @@ def _cli() -> int:
             print(f"    evidence: {rec.get('evidence','?')}")
             if rec.get("paths"):
                 print(f"    paths: {', '.join(rec['paths'][:6])}")
+                here, named = presence(rec)
+                if named and here == named:
+                    judgeable += 1
+                    print(f"    on disk: {here} of {named} present — judgeable from this checkout")
+                else:
+                    print(f"    on disk: {here} of {named} present — NOT judgeable here: a "
+                          f"delivery state under the 2026-09-23 rule, not work to redo")
+        if judgeable < len(rows):
+            print(f"\n{judgeable} of {len(rows)} item(s) in this queue can be judged from this "
+                  f"checkout; {len(rows) - judgeable} name paths that are not here. Decide those "
+                  f"from the run's own report if you have it, or postpone them saying so — do not "
+                  f"rebuild what never reached main.")
         print("\nEvery exit leaves W into an existing queue, and no exit goes nowhere:")
         print("  accomplished — ONLY by doing the work yourself, in this wake; say what you did")
         print("  postponed / rejected — with a substantive reason; that reason IS the record")

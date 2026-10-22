@@ -63,6 +63,7 @@ from channels.item_ledger import (  # noqa: E402
     landing_gap,
     last_landing,
     load,
+    names_a_person,
     price_band,
 )
 
@@ -551,7 +552,7 @@ def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]
     if exits:
         tally = collections.Counter(_letter(r) for r in exits)
         reviewed = sum(1 for r in exits if _letter(r) == "A"
-                       and r.get("reviewer") not in (None, "auto:land"))
+                       and names_a_person(r.get("reviewer")))
         parts = [f"A {tally['A']}" + (f" ({reviewed} by a review)" if tally["A"] else "")]
         parts += [f"{letter} {tally[letter]}" for letter in ("P", "R") if tally[letter]]
         out.append(f"  exits recorded in the last {hours}h: " + " · ".join(parts))
@@ -565,7 +566,7 @@ def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]
     # are Desi's, and nothing in the report said so. A review is an act by a body, and no letter
     # counts it (the six letters describe items), so it is counted here instead, attributed.
     reviews = [r for r in items.values()
-               if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")]
+               if names_a_person(r.get("reviewer")) and _letter(r) in ("A", "P", "R")]
 
     def _who(tally: collections.Counter) -> str:
         if not tally:
@@ -684,7 +685,7 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
     performed = collections.Counter(r.get("amigo") for r in finished)
 
     reviewed = [r for r in every
-                if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")
+                if names_a_person(r.get("reviewer")) and _letter(r) in ("A", "P", "R")
                 and _in_window(r, hours)]
     decided = collections.Counter(r.get("reviewer") for r in reviewed)
 
