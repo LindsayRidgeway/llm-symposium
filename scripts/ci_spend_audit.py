@@ -343,10 +343,173 @@ def render(rows: list) -> str:
     return "\n".join(out)
 
 
+# ------------------------------------------------------------------ history (--history)
+#
+# Why this second half exists (2026-10-22). The table above answers "does CI spend money?" from
+# the repository text alone, and on 2026-10-18 it answered "the ledger's zero is explained:
+# every spender is manual". That is true and it is not enough. Three workflows claim `keeps=yes`
+# — they stage, commit and push the ledger — and a claim about a step is not evidence that the
+# step has ever run. Zero rows in the ledger has two causes that look identical from the repo:
+# nobody pressed the button, or somebody pressed it and the row died. Only the public Actions
+# history can tell them apart, so this half reads it.
+#
+# The rule, and why its date is 2026-10-21 rather than the ledger's own birthday: a row can only
+# be missing from a run that happened after *that workflow's* recorder existed. The dates differ
+# — `runner.py`'s `_record_usage` landed 2026-10-17 (commit 85f7f8a2), `check-tarik-model.yml`'s
+# persistence step only on 2026-10-21 (commit 0d82ee81) — so one global date has to be the newest
+# of them, and the cost is stated rather than hidden: a `check-tarik-model` run between 10-17 and
+# 10-21 that left no row would not be caught here. No such run exists (that workflow's newest run
+# is 2026-09-14), so nothing is being concealed today, and after 2026-10-21 the date is exact for
+# every workflow. Using the ledger's own birthday would be worse: it would report
+# `channel-poll.yml`'s 2026-09-25 run as a lost row, and a check that manufactures one false
+# failure on its first run is a check that gets switched off.
+
+RECORDER_EPOCH = "2026-10-21"
+DEFAULT_REPO = "LindsayRidgeway/llm-symposium"
+LEDGER_FILE = ROOT / "channels" / "usage" / "ci-usage.jsonl"
+
+
+def ledger_rows(path: Path = LEDGER_FILE) -> list:
+    """The recorded rows, tolerating a missing file (the current state: no row has ever landed)."""
+    path = Path(path)
+    if not path.is_file():
+        return []
+    out = []
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = line.strip()
+        if line.startswith("{"):
+            try:
+                out.append(json.loads(line))
+            except ValueError:
+                pass
+    return out
+
+
+def ledger_evidence(rows: list) -> dict:
+    """Which workflows the ledger has a row for, and under which run ids.
+
+    Two row shapes have to count, because the ledger has two writers: a goose row carries
+    `workflow` + `run_id`, and a direct API row carries `source` and no run id at all. Matching
+    only `workflow` would report `check-tarik-model.yml` as silent while its rows sat in the file.
+    """
+    names, run_ids = {}, set()
+    for r in rows:
+        for key in ("workflow", "source"):
+            name = r.get(key)
+            if isinstance(name, str) and name:
+                names.setdefault(name, 0)
+                names[name] += 1
+        if r.get("run_id"):
+            run_ids.add(str(r["run_id"]))
+    return {"names": names, "run_ids": run_ids}
+
+
+def _http_json(url: str):
+    """Public GitHub API, no token: anonymous reads of a public repository's run history."""
+    import urllib.request
+    req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json",
+                                               "User-Agent": "llm-symposium-ci-spend-audit"})
+    try:
+        with urllib.request.urlopen(req, timeout=25) as fh:
+            return json.loads(fh.read().decode("utf-8", "replace"))
+    except Exception:
+        return None
+
+
+def workflow_ids(repo: str = DEFAULT_REPO, get=_http_json) -> dict:
+    """`filename.yml` → workflow id, from the public API. Empty when the network is unavailable."""
+    data = get(f"https://api.github.com/repos/{repo}/actions/workflows?per_page=100")
+    if not isinstance(data, dict):
+        return {}
+    out = {}
+    for w in data.get("workflows") or data.get("workflow_runs") or []:
+        path = w.get("path") or ""
+        if path:
+            out[path.rsplit("/", 1)[-1]] = w.get("id")
+    return out
+
+
+def history(rows=None, repo: str = DEFAULT_REPO, get=_http_json,
+            ledger: list = None, epoch: str = RECORDER_EPOCH, per_page: int = 10) -> list:
+    """For every workflow that can spend: when it last ran, and whether the ledger noticed.
+
+    A verdict of `unknown` is deliberate and never a failure: an audit that turns red because a
+    laptop had no network is an audit somebody switches off, and the honest state of "cannot see
+    the history" is the same word the CI check already prints for an unreadable invitation list.
+    """
+    rows = audit() if rows is None else rows
+    ledger = ledger_rows() if ledger is None else ledger
+    ev = ledger_evidence(ledger)
+    ids = workflow_ids(repo, get) if get is not None else {}
+    out = []
+    for r in rows:
+        if not r["spends"]:
+            continue
+        wid = ids.get(r["workflow"])
+        if wid is None:
+            verdict, last, run_id = "unknown", None, None
+        else:
+            data = get(f"https://api.github.com/repos/{repo}/actions/workflows/{wid}"
+                       f"/runs?per_page={per_page}")
+            runs = (data or {}).get("workflow_runs") if isinstance(data, dict) else None
+            if runs is None:
+                verdict, last, run_id = "unknown", None, None
+            elif not runs:
+                verdict, last, run_id = "never dispatched", None, None
+            else:
+                last = runs[0].get("created_at") or ""
+                run_id = runs[0].get("id")
+                named = (r["workflow"] in ev["names"]) or (r["workflow"][:-4] in ev["names"])
+                if last and last[:10] < epoch:
+                    verdict = f"last ran {last[:10]}, before the recorders ({epoch})"
+                elif named or str(run_id) in ev["run_ids"]:
+                    verdict = f"ran {last[:10]}, row in the ledger"
+                else:
+                    verdict = (f"FAIL: ran {last[:10]} and left no row "
+                               f"(run {run_id}) — the recorder is unproven")
+        out.append({"workflow": r["workflow"], "id": wid, "last_run": last,
+                    "run_id": run_id, "ledger_rows": ev["names"].get(r["workflow"], 0)
+                    + ev["names"].get(r["workflow"][:-4], 0), "verdict": verdict})
+    return out
+
+
+def render_history(hist: list, ledger: list = None) -> str:
+    if not hist:
+        return "No workflow in this tree can reach a paid provider."
+    w = max(len(h["workflow"]) for h in hist)
+    out = [f"{'workflow'.ljust(w)}  {'last run':<10} {'rows':<5} verdict", "-" * (w + 40)]
+    for h in hist:
+        out.append(f"{h['workflow'].ljust(w)}  {(h['last_run'] or '-')[:10]:<10} "
+                   f"{h['ledger_rows']:<5} {h['verdict']}")
+    n = len(ledger or [])
+    exercised = [h for h in hist if h["verdict"].startswith("ran ")]
+    out.append("")
+    out.append(f"Ledger rows on disk: {n}")
+    out.append(f"Spenders proved to have recorded something: {len(exercised)} of {len(hist)}")
+    blind = [h["workflow"] for h in hist if h["verdict"] == "unknown"]
+    if blind:
+        out.append("Cannot see the run history for: " + ", ".join(blind)
+                   + " (no network or no API answer; nothing is claimed about them)")
+    return "\n".join(out)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Audit which CI workflows can spend model keys.")
     ap.add_argument("--json", action="store_true", help="machine-readable rows")
+    ap.add_argument("--history", action="store_true",
+                    help="also ask the public Actions API whether the spenders ever ran")
+    ap.add_argument("--repo", default=DEFAULT_REPO, help="owner/name for --history")
     args = ap.parse_args(argv)
+    if args.history:
+        hist = history(repo=args.repo)
+        if args.json:
+            print(json.dumps(hist, indent=2))
+        else:
+            print(render(audit()))
+            print()
+            print(render_history(hist, ledger_rows()))
+        return 1 if any(h["verdict"].startswith("FAIL") for h in hist) else 0
+
     rows = audit()
     if args.json:
         print(json.dumps(rows, indent=2))

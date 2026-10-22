@@ -345,5 +345,84 @@ class TheRepositoryItself(unittest.TestCase):
         self.assertIn("Unrecorded on-the-clock spend: 0", out)
 
 
+class HistoryTest(unittest.TestCase):
+    """`--history`: does the ledger's zero mean "nobody pressed the button" or "a row was lost"?
+
+    The repository text cannot tell those apart — both leave `channels/usage/ci-usage.jsonl`
+    empty — so these cases pin the only thing that can: the public run history, injected here
+    as a dict of URLs. The failure this class exists to prevent is the comfortable verdict. On
+    2026-10-18 the audit said "the ledger's zero is explained" from workflow text alone; four
+    days later the history showed that not one spender had run since 2026-09-24, so the zero
+    also meant the persistence claim in three workflows had never been exercised once.
+    """
+
+    def rows(self):
+        return [{"workflow": "spend.yml", "spends": True},
+                {"workflow": "free.yml", "spends": False}]
+
+    def fake(self, runs, wid=111, blind=False):
+        def get(url):
+            if blind:
+                return None
+            if "/actions/workflows?" in url:
+                return {"workflows": [{"id": wid, "path": ".github/workflows/spend.yml"}]}
+            if "/actions/workflows/%d/runs" % wid in url:
+                return {"workflow_runs": runs}
+            return None
+        return get
+
+    def test_free_workflows_are_not_asked_about(self):
+        hist = audit.history(rows=self.rows(), get=self.fake([]), ledger=[])
+        self.assertEqual([h["workflow"] for h in hist], ["spend.yml"])
+
+    def test_never_dispatched_is_not_a_failure(self):
+        hist = audit.history(rows=self.rows(), get=self.fake([]), ledger=[])
+        self.assertEqual(hist[0]["verdict"], "never dispatched")
+        self.assertFalse(audit.main.__name__ and hist[0]["verdict"].startswith("FAIL"))
+
+    def test_a_run_before_the_recorders_proves_nothing_either_way(self):
+        hist = audit.history(rows=self.rows(), ledger=[],
+                             get=self.fake([{"id": 9, "created_at": "2026-09-24T17:54:26Z"}]))
+        self.assertIn("before the recorders", hist[0]["verdict"])
+        self.assertNotIn("FAIL", hist[0]["verdict"])
+
+    def test_a_run_after_the_recorders_with_no_row_is_a_failure(self):
+        hist = audit.history(rows=self.rows(), ledger=[],
+                             get=self.fake([{"id": 4242, "created_at": "2026-10-22T01:00:00Z"}]))
+        self.assertTrue(hist[0]["verdict"].startswith("FAIL"))
+        self.assertIn("4242", hist[0]["verdict"], "a failure must name the run to chase")
+
+    def test_a_row_naming_the_run_is_evidence(self):
+        ledger = [{"workflow": "spend.yml", "run_id": "4242", "provider": "openai"}]
+        hist = audit.history(rows=self.rows(), ledger=ledger,
+                             get=self.fake([{"id": 4242, "created_at": "2026-10-22T01:00:00Z"}]))
+        self.assertEqual(hist[0]["verdict"], "ran 2026-10-22, row in the ledger")
+        self.assertEqual(hist[0]["ledger_rows"], 1)
+
+    def test_a_direct_api_row_counts_under_its_source_name(self):
+        # `check-tarik-model.yml` writes rows through `record_api_call`, which names a `source`
+        # (`check-tarik-model`, no `.yml`) and carries no run id. Matching only `workflow` would
+        # report its spend as lost while its rows sat in the file.
+        ledger = [{"source": "spend", "provider": "openai"}]
+        hist = audit.history(rows=self.rows(), ledger=ledger,
+                             get=self.fake([{"id": 77, "created_at": "2026-10-23T01:00:00Z"}]))
+        self.assertEqual(hist[0]["verdict"], "ran 2026-10-23, row in the ledger")
+
+    def test_no_network_is_unknown_never_a_failure(self):
+        hist = audit.history(rows=self.rows(), get=self.fake([], blind=True), ledger=[])
+        self.assertEqual(hist[0]["verdict"], "unknown")
+        out = audit.render_history(hist, [])
+        self.assertIn("Cannot see the run history", out)
+        self.assertNotIn("FAIL", out)
+
+    def test_render_counts_what_was_proved(self):
+        hist = audit.history(rows=self.rows(),
+                             get=self.fake([{"id": 5, "created_at": "2026-10-23T01:00:00Z"}]),
+                             ledger=[{"workflow": "spend.yml", "run_id": "5"}])
+        out = audit.render_history(hist, [{"workflow": "spend.yml"}])
+        self.assertIn("Ledger rows on disk: 1", out)
+        self.assertIn("Spenders proved to have recorded something: 1 of 1", out)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
