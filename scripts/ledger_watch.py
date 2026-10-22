@@ -143,6 +143,12 @@ def measure(now: dt.datetime) -> dict:
                 pile += 1
 
     refusals_24, refused_rows_24 = refused_patches(now - dt.timedelta(hours=24))
+    reading_queue: dict[str, int] = {}
+    for rec in by.values():
+        cur = latest(rec)
+        if il.is_unread(cur) and cur.get("reading_assigned_to"):
+            who = cur["reading_assigned_to"]
+            reading_queue[who] = reading_queue.get(who, 0) + 1
 
     return {
         "at": iso(now),
@@ -157,6 +163,7 @@ def measure(now: dt.datetime) -> dict:
         "gate_refusals_24h": refusals_24,
         "gate_refusals_carrying_verdicts_24h": refused_rows_24,
         "items_total": len(by),
+        "reading_queue": dict(sorted(reading_queue.items())),
     }
 
 
@@ -345,6 +352,9 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
     lines.append(f"Finished and never read: {m['pile']}"
                  + (f" ({label} {prev['pile']})" if prev else "")
                  + f" · read out of that pile in 24h: {m['pile_read_24h']}")
+    if m.get("reading_queue"):
+        spread = " · ".join(f"{a} {n}" for a, n in m["reading_queue"].items())
+        lines.append(f"Of those, named and ready for a waking reader: {spread}")
     lines.append(f"Refused landings, 24h: {m['gate_refusals_24h']}"
                  f" ({m['gate_refusals_carrying_verdicts_24h']} carried a verdict)")
     did = []
