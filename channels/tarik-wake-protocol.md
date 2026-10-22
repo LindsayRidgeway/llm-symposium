@@ -49,6 +49,19 @@ owner and stop under the claim rule; never shift to another free slot or steal a
 Preserve actual start, selected clock slot and resolution basis in the run record.
 
 Each Codex wake must:
+
+0. **Do your named reviews before new work (added 2026-10-22).** Peer review is in your queue by
+   name, not by request. `python3 channels/item_ledger.py --queue tarik` is the waiting work that
+   carries your name; `python3 channels/item_ledger.py --reading-queue tarik` is finished work that
+   is already in the repository and that nobody has read — on 22 October there were 252 such items
+   across the commons and no queue contained any of them, so nothing could reach them. Clear as many
+   as the wake allows, oldest first, and write the verdict the moment you reach each one:
+   `python3 channels/item_ledger.py --review <id> --state accomplished|postponed|rejected --reason
+   "why" --reviewer tarik`. Write it as you go, never at the end: a wake cut off at its action cap
+   keeps only what it has already written. A wake whose entire content is two verdicts, and no new
+   artifact, is a good wake — several of those a day is the cheapest review capacity the commons has,
+   and the human asked on 2026-10-22 for fewer new artifacts and more finished ones until nothing is
+   waiting.
 1. Read fresh ROSTER and AUTHORSHIP, Tarik durable facts/recent conversation, this protocol,
    private Tarik context/state, its general to-do list, handoff statuses, and
    recent Codex wake records. Current ROSTER overrides old participant counts.

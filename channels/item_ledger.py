@@ -796,7 +796,11 @@ def is_unread(rec: dict) -> bool:
 # put 115 of 252 items on claude and tarik, who wake once a day each and would carry them to the
 # grave. Dated like the price band, and re-measured the same way — a change in how often we wake
 # should change this table, not be discovered later.
-WAKES_PER_DAY = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 1}
+WAKES_PER_DAY = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 3}
+# Re-measured 2026-10-22 evening: tarik was 1 in the morning table and is 3 now that Tarik-app
+# (the codex platform) runs several wakes a day; Tarik-goose has not woken since 2026-10-19, so
+# the 3 are counted on the app. The morning table named 9 of the 252 pile items to tarik when
+# it should have named about 22; `--rebalance-unread` corrects names made under a stale table.
 
 
 def _capacity_pick(item_id: str, author: str | None) -> str:
@@ -835,6 +839,42 @@ def name_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> lis
                 "queue at all, which is how 252 items came to sit unread at once. Shared by capacity "
                 "(wakes per day), not uniformly: a name on a body that does not wake is a name on "
                 "nothing"),
+        )
+        out.append(row)
+        if not dry_run:
+            append([row], path)
+    return out
+
+
+def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> list[dict]:
+    """Re-name pile items whose name was made under a stale capacity table.
+
+    A draw does not re-roll — that is the rule, and it is why a name means something. This is the
+    one honest exception: the table the names were made from was *wrong*, measurably so (tarik woke
+    three times a day, not once), and not one of the 252 had been opened yet. Re-deriving them
+    against the corrected table before any work has been spent is cheaper than carrying a wrong
+    distribution for months. It says so in the row, and it will not fire again for the same item
+    unless the table changes again.
+    """
+    items = load(path)
+    out: list[dict] = []
+    for rec in sorted(items.values(), key=lambda r: r.get("filed_utc") or ""):
+        if not is_unread(rec):
+            continue
+        current = rec.get("reading_assigned_to")
+        if not current:
+            continue
+        pick = _capacity_pick(rec["id"], rec.get("amigo"))
+        if pick == current:
+            continue
+        row = dict(rec)
+        row.update(
+            reading_assigned_to=pick,
+            reading_assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            reading_assigned_by=by or "?",
+            reading_assign_reason=(f"re-named from {current}: the capacity table it was named under "
+                                   f"was stale (tarik wakes 3 times a day, not once); corrected "
+                                   f"before any of these items was opened"),
         )
         out.append(row)
         if not dry_run:
@@ -1070,6 +1110,8 @@ def _cli() -> int:
                          "the second queue, which nothing could see before 2026-10-22")
     ap.add_argument("--reading-queue", choices=AMIGOS,
                     help="the never-read items that carry this amigo's name")
+    ap.add_argument("--rebalance-unread", action="store_true",
+                    help="re-name never-read items whose name was made under a stale capacity table")
     ap.add_argument("--dry-run", action="store_true",
                     help="with --name-unread: say what would be named, change nothing")
     ap.add_argument("--hours", type=int, default=24)
@@ -1119,7 +1161,17 @@ def _cli() -> int:
         for rec in (done + post)[:10]:
             print(f"  {rec['id']}  {rec['state']}  {rec['reason'][:70]}")
         return 0
-    if args.name_unread or args.reading_queue:
+    if args.name_unread or args.reading_queue or args.rebalance_unread:
+        if args.rebalance_unread:
+            rows = rebalance_unread(by=args.by or args.reviewer or "", dry_run=args.dry_run)
+            verb = "would re-name" if args.dry_run else "re-named"
+            print(f"item_ledger: {verb} {len(rows)} never-read item(s) against the current table")
+            counts_by: dict[str, int] = {}
+            for rec in rows:
+                counts_by[rec["reading_assigned_to"]] = counts_by.get(rec["reading_assigned_to"], 0) + 1
+            for who, n in sorted(counts_by.items()):
+                print(f"  {who}: {n}")
+            return 0
         if args.name_unread:
             rows = name_unread(by=args.by or args.reviewer or "", dry_run=args.dry_run)
             verb = "would name" if args.dry_run else "named"

@@ -349,6 +349,10 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
                  f" · filed in 24h: {m['arrivals_24h']}")
     lines.append(f"Reviews by a model, 24h: {m['model_decisions_24h']}"
                  f" · closed by the landing bot: {m['machine_closures_24h']}")
+    ratio = (m["model_decisions_24h"] / m["arrivals_24h"]) if m["arrivals_24h"] else 0.0
+    lines.append(f"New artifacts filed : verdicts written = {m['arrivals_24h']} : "
+                 f"{m['model_decisions_24h']} ({ratio:.2f}) — the human wants the left number "
+                 f"falling and the right one rising until nothing waits")
     lines.append(f"Finished and never read: {m['pile']}"
                  + (f" ({label} {prev['pile']})" if prev else "")
                  + f" · read out of that pile in 24h: {m['pile_read_24h']}")

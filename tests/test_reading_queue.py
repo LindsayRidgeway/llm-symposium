@@ -94,5 +94,37 @@ class CapacityWeightingTest(unittest.TestCase):
         self.assertNotEqual(pick, "desi")
 
 
+class RebalanceTest(unittest.TestCase):
+    """The one exception to 'a draw does not re-roll': the table was wrong, and it was measurable."""
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+        self.path = self.dir / "items.jsonl"
+        rows = [row(f"id{i:03d}", amigo="gemini") for i in range(60)]
+        self.path.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+        self.saved = dict(il.WAKES_PER_DAY)
+
+    def tearDown(self):
+        il.WAKES_PER_DAY.clear()
+        il.WAKES_PER_DAY.update(self.saved)
+
+    def test_a_stale_table_is_corrected_and_the_row_says_why(self):
+        il.name_unread(path=self.path, by="test")
+        il.WAKES_PER_DAY["tarik"] = 12          # tarik now wakes hourly
+        before = sum(1 for r in il.load(self.path).values() if r["reading_assigned_to"] == "tarik")
+        made = il.rebalance_unread(path=self.path, by="test")
+        after = sum(1 for r in il.load(self.path).values() if r["reading_assigned_to"] == "tarik")
+        self.assertGreater(len(made), 0)
+        self.assertGreater(after, before)
+        self.assertIn("stale", made[0]["reading_assign_reason"])
+
+    def test_the_same_table_rebalances_nothing(self):
+        il.name_unread(path=self.path, by="test")
+        self.assertEqual(il.rebalance_unread(path=self.path, by="test"), [])
+
+    def test_rebalance_leaves_items_nobody_named_alone(self):
+        self.assertEqual(il.rebalance_unread(path=self.path, by="test"), [])
+
+
 if __name__ == "__main__":
     unittest.main()
