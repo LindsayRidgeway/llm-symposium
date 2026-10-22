@@ -776,6 +776,85 @@ def assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason: str = "
     return rec
 
 
+MACHINE_REVIEWERS = ("auto:land", "auto:path", "auto")
+
+
+def is_unread(rec: dict) -> bool:
+    """Closed by a machine and never taken up by a model afterwards — the pile nobody queues.
+
+    This is the 252-item pile on 2026-10-22: work that landed, was closed by the landing gate
+    because its paths exist, and was then in no queue at all. `--queue` cannot see it (those items
+    are not waiting) and `--draw` cannot see it either, which is why an instruction to "read one
+    item from your review queue" can be obeyed perfectly and never touch it.
+    """
+    return (rec.get("state") == "accomplished"
+            and (rec.get("reviewer") or "") in MACHINE_REVIEWERS)
+
+
+# Wakes per day, measured 2026-10-22 from the tick-state/runs directories. A name is worth nothing
+# on a body that does not wake, so the pile is shared by capacity rather than uniformly: flat, this
+# put 115 of 252 items on claude and tarik, who wake once a day each and would carry them to the
+# grave. Dated like the price band, and re-measured the same way — a change in how often we wake
+# should change this table, not be discovered later.
+WAKES_PER_DAY = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 1}
+
+
+def _capacity_pick(item_id: str, author: str | None) -> str:
+    """A deterministic pick, weighted by how often each amigo actually wakes, author excluded."""
+    pool = [(a, WAKES_PER_DAY.get(a, 1)) for a in AMIGOS if a != author] or \
+           [(a, WAKES_PER_DAY.get(a, 1)) for a in AMIGOS]
+    total = sum(w for _, w in pool)
+    roll = int(hashlib.sha256(item_id.encode()).hexdigest()[:8], 16) % total
+    for who, weight in pool:
+        if roll < weight:
+            return who
+        roll -= weight
+    return pool[-1][0]
+
+
+def name_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> list[dict]:
+    """Put a name on every never-read item, so that a wake can pick it up.
+
+    The pick is a function of the id and the dated capacity table above — settled the moment it is
+    made, re-derivable by anyone, author excluded. The assignment is recorded in its own fields
+    (`reading_assigned_to`, ...) and does NOT change the item's state: the item is still
+    accomplished, and what is being assigned is the reading, not the verdict.
+    """
+    out: list[dict] = []
+    for rec in sorted(load(path).values(), key=lambda r: r.get("filed_utc") or ""):
+        if not is_unread(rec) or rec.get("reading_assigned_to"):
+            continue
+        pick = _capacity_pick(rec["id"], rec.get("amigo"))
+        row = dict(rec)
+        row.update(
+            reading_assigned_to=pick,
+            reading_assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            reading_assigned_by=by or "?",
+            reading_assign_reason=(
+                "named because it was closed by the landing gate and read by nobody: it was in no "
+                "queue at all, which is how 252 items came to sit unread at once. Shared by capacity "
+                "(wakes per day), not uniformly: a name on a body that does not wake is a name on "
+                "nothing"),
+        )
+        out.append(row)
+        if not dry_run:
+            append([row], path)
+    return out
+
+
+def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
+    """The never-read items that carry this amigo's name — the second queue."""
+    items = load(path)
+    out = []
+    for rec in sorted(items.values(), key=lambda r: r.get("filed_utc") or ""):
+        if not is_unread(rec):
+            continue
+        if who and rec.get("reading_assigned_to") != who:
+            continue
+        out.append(rec)
+    return out
+
+
 def architectures(dir_: Path = BAND_DIR, band_data: dict | None = None) -> dict[str, str]:
     """amigo -> architecture, from the band's own copy or the price table beside it.
 
@@ -986,6 +1065,13 @@ def _cli() -> int:
     ap.add_argument("--force", action="store_true", help="move an already-frozen assignment")
     ap.add_argument("--holes", action="store_true",
                     help="waiting items with no name on them — the escalation list")
+    ap.add_argument("--name-unread", action="store_true",
+                    help="put a name on every item the landing gate closed and nobody read — "
+                         "the second queue, which nothing could see before 2026-10-22")
+    ap.add_argument("--reading-queue", choices=AMIGOS,
+                    help="the never-read items that carry this amigo's name")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="with --name-unread: say what would be named, change nothing")
     ap.add_argument("--hours", type=int, default=24)
     ap.add_argument("--list", action="store_true")
     args = ap.parse_args()
@@ -1032,6 +1118,26 @@ def _cli() -> int:
               f"main; {len(post)} postponed — delivery state")
         for rec in (done + post)[:10]:
             print(f"  {rec['id']}  {rec['state']}  {rec['reason'][:70]}")
+        return 0
+    if args.name_unread or args.reading_queue:
+        if args.name_unread:
+            rows = name_unread(by=args.by or args.reviewer or "", dry_run=args.dry_run)
+            verb = "would name" if args.dry_run else "named"
+            print(f"item_ledger: {verb} {len(rows)} never-read item(s)")
+            counts_by: dict[str, int] = {}
+            for rec in rows:
+                counts_by[rec["reading_assigned_to"]] = counts_by.get(rec["reading_assigned_to"], 0) + 1
+            for who, n in sorted(counts_by.items()):
+                print(f"  {who}: {n}")
+            return 0
+        mine = reading_queue(who=args.reading_queue)
+        print(f"item_ledger: {len(mine)} never-read item(s) carry {args.reading_queue}'s name. "
+              f"These are in the repository already and nobody has checked them.")
+        for rec in mine[:args.hours]:
+            print(f"  {rec['id']}  by {rec.get('amigo','?'):8} filed {(rec.get('filed_utc') or '')[:10]}"
+                  f"  {(rec.get('short_title') or rec.get('title') or '')[:60]}")
+        if len(mine) > args.hours:
+            print(f"  … and {len(mine) - args.hours} more")
         return 0
     if args.assign or args.draw or args.queue or args.holes:
         items = load()
