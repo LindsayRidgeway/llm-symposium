@@ -42,8 +42,10 @@ Checked today:
   2026-09-22. Whatever uploaded 50 GB did not leave a 50 GB local file behind to upload from.
 - **The Drive mount** (`~/Library/CloudStorage/GoogleDrive-ldridgeway@gmail.com/My Drive`) today
   holds 603 entries and **nothing above 31 MB**. No `LanderPi*`, no `*.img`, no `*.rar`, no
-  `.part0*`. So the file is either already deleted, or it sits somewhere that mount does not show
-  — Drive's **trash**, or a different account.
+  `.part0*`. **He deleted them on 2026-10-21** — confirmed by him on 2026-10-22, and the absence
+  above is consistent with it. Deleted Drive files sit in the trash and keep counting against
+  quota for 30 days, so the space returns when the trash is emptied, not when the files are
+  deleted.
 - **No local copy remains**: no `LanderPi*.img` and no `.part0*` RAR anywhere within three levels
   of the home directory or in `~/Downloads`.
 
