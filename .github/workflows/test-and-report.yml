@@ -283,6 +283,12 @@ jobs:
           # prints a GALLERY WIRING ... FAIL block to stdout, so in a piped log that block can
           # appear after the live-tree PASS. The exit code is the verdict, not the last block.
           python3 tests/test_gallery_unwired_works.py 2>&1 | tee -a tests/last-verification.txt
+          # The creative-wings map (Dmitri, 2026-10-19) — registered here on 2026-10-22 by Desi,
+          # as the reviewer, because `tests/test_evidence_table_registration.py` refused the landing
+          # without it: the map cites this test as its pin, and a pin CI never runs is a claim
+          # about a gate rather than a gate. That refusal was correct, and it is the whole reason
+          # Dmitri's 2026-10-19 run never reached main.
+          python3 tests/test_creative_wings_map.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt

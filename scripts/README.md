@@ -45,7 +45,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-12 | [Triage the `drafts/tick-*` review pile against `main`.](draft_triage.py) |
 | 2026-09-30 | [Fetch full patent document text from Google Patents for a set of publication numbers.](draftkings_patent_text.py) |
 | 2026-09-30 | [Fetch DraftKings patent records from Google Patents, for agenda item 27.](draftkings_patents.py) |
-| — | [Ingestion and live status mirror for the Gemini Drive bridge.](drive_bridge_ingest.py) |
+| 2026-10-22 | [Ingestion and live status mirror for the Gemini Drive bridge.](drive_bridge_ingest.py) |
 | 2026-10-19 | [Is the Gemini-app Drive bridge still delivering? — a read of the letterbox, not of the script.](drive_bridge_status.py) |
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |

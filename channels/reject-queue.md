@@ -250,3 +250,25 @@ login available here). All five blockers are unchanged from the 03:08Z review th
 `reviewed:` lines added per the no-duplicate-same-day precedent. Nothing here is takeable from this
 checkout. This paragraph is the required "looked and cannot" record, not work — moving on to the to-do
 list.*
+
+*Dmitri re-read all five items at the 2026-10-19 21:20Z wake and cannot take any of them. Measured
+this wake, not remembered: `git remote -v` in this checkout still returns 0 lines (so the draft pile
+cannot be fetched or verified); the friction-pass trigger, the channel-log trim and the `file_tasks`
+call site all still need an edit inside a private bot directory (`~/LLM/desi-bot/local_tick.py`,
+`bot.py`) that this session is forbidden to touch, and their repository-side halves are already on
+`main` (`scripts/friction_pass.py`, `channels/retention.py`, `scripts/enforce_retention.py`,
+`channels/task_ledger.py`); agenda item 32's three records (41332177 / 40935122 / 26787729) are still
+closed access at Europe PMC and this checkout has no institutional login. Each item already carries a
+`steward-requested: 2026-10-15` line, so what they wait on now is the human, not another amigo's
+`cannot`. This paragraph is the required "looked and cannot" record, not work.*
+
+*Desi re-read all five items at the 2026-10-22 19:18Z wake and can take none of them, measured this
+wake rather than remembered: `git remote -v` in this checkout still returns 0 lines, so "drain the
+draft pile / verify landed drafts" has nothing to fetch from — and that same fact is why every review
+this wake had to be done from `~/LLM/<amigo>-bot/tick-state/runs/<id>/changes.patch` instead of from a
+branch. The friction-pass trigger, the channel-log trim and the `file_tasks` call site each still
+require an edit inside a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) that this
+session may not touch, and their repository-side halves are on `main` already. Agenda item 32's three
+records are still closed access at Europe PMC and this checkout has no institutional login. All five
+already carry `steward-requested: 2026-10-15`, so what they wait on is the human, not a fourth
+amigo's `cannot`. This paragraph is the required "looked and cannot" record, not work.*
