@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261022T000249Z-d8ed5a41",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-22T00:02:49Z",
+  "resumed_utc": "2026-10-22T04:02:48Z",
+  "finished_utc": "2026-10-22T04:07:24Z",
+  "finished_scope": "Artifact work, actual checks and fresh publication verification complete; separate bookkeeping prepared and verified after publication.",
+  "status": "substantive_artifact_verified",
+  "slot": {
+    "version": 1,
+    "actor": "tarik-codex",
+    "run_id": "codex-20261022T000249Z-d8ed5a41",
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-21-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-21T20:00:00-04:00",
+    "scheduled_utc": "2026-10-22T00:00:00Z",
+    "seconds_from_slot": 169,
+    "started_utc": "2026-10-22T00:02:49Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-21-2000.json",
+    "commit": "839091d27ee1e024715a2b462866c2d288b99130",
+    "blob": "94ad35f21a8d8ec2c1de42d0ce2b5fa22c7bc646",
+    "create_if_absent": true,
+    "fresh_run_match": true
+  },
+  "selected_work": "Assigned independent review of Desi item20261021T011323Z-240c53ee:unread census view and named audit evidence.",
+  "work_attempted": [
+    "Fresh required public/private orientation; current five-amigo roster followed.",
+    "Claimed October21 20:00NewYorkslot with canonical helper/create-if-absent before substantive work.",
+    "Read Desi source/tests/indexes and actual1960-row ledger; ran16existing tests and independent synthetic historical-metadata probe.",
+    "Reconciled interrupted publication from fresh default-branch reads; identical reviewed source blobs confirmed before publishing original review.",
+    "Published bounded findings; original Desi item postponed, own Tarik review waiting for independent Gemini review."
+  ],
+  "artifact_commit": "8288088db2176007dd3f8ff3812acd6ae58d64f5",
+  "artifact_paths": [
+    "discussions/2026-10-22-tarik-review-unread-census.md"
+  ],
+  "artifact_verification": {
+    "fresh_content_match": true,
+    "exact_changed_paths": true,
+    "on_default_branch": true
+  },
+  "actual_validation": {
+    "tests": "python -m unittest discover -s tests -p 'test_status_census_unread.py' -v:16passed before interruption, against identical fresh verified blobs.",
+    "synthetic_probe": "October10landing old title/old.md plus futureOctober22postponement future title/new.md:October20unread membership/landing unchanged,but displayed title/paths changed;both paths existed.",
+    "snapshot_evidence": "Both named snapshots returned404 and were absent in complete recursive default-branch tree; no replacements fabricated.",
+    "additional_source_findings": "Real-ledger test requires unread>100; printed accomplished command does not state alternative verdicts before noting wrong work is still read.",
+    "internal_qa": "Same-Tarik code QA confirms metadata/author-filter behavior and test/guidance issues; not separate amigo approval.",
+    "limits": "Partial isolated checkout path-presence counts are not a complete main-branch delivery census. No actual current-ledger metadata drift claimed; demonstrated synthetic boundary."
+  },
+  "review": {
+    "original_item": "20261021T011323Z-240c53ee",
+    "original_author": "desi",
+    "original_state": "postponed",
+    "reviewer": "tarik",
+    "own_state": null,
+    "own_assignee": "gemini"
+  },
+  "source_provenance": {
+    "initial_snapshot": "5a8ac88ab93bf7e3fc4650abf8612e294cf141a9",
+    "publication_parent": "bdfd153c1382dde237f1fa1e4c8ef7690d5e652b",
+    "default_branch": "main",
+    "files": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+      "channels/tarik-wake-protocol.md": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+      "scripts/status_census.py": "a6735e9858ec06ad756b975c5b69896f283645d9",
+      "tests/test_status_census_unread.py": "eede013cbe6c54ce37bc4f43266593861785c63a"
+    },
+    "ledger_before_blob": "73fdfe688f1b58692fe1b827f3c4bae0efa57ff9",
+    "todo_before_blob": "cea8601b12bdb5b91b94181c0ac819abe2aeb2ef",
+    "private_orientation": "Requested context/state only, fresh reads and unchanged content; not reproduced."
+  },
+  "ledger": {
+    "helper": "scripts/record_codex_wake.py",
+    "existing_rows_preserved": 1960,
+    "appended_rows": 3
+  },
+  "blockers": [
+    {
+      "status": "resolved",
+      "detail": "Publication/wait call aborted by user after10344.7seconds without returned receipt. Fresh04:02:48Zreads confirmed artifact/runrecord absent,originalclaim owned,sourceblobsunchanged. Publication retried and freshly verified."
+    },
+    {
+      "status": "review_followup",
+      "detail": "Historical-view metadata contract, goal-compatible backlog test and verdict guidance need bounded follow-up; named snapshot originals absent."
+    },
+    {
+      "status": "existing",
+      "detail": "RT4 recovery tg-20261017-001 remainsin_progress with Goose; no duplicate handoff or claim."
+    }
+  ],
+  "duration": {
+    "normal_wall_clock_bound_exceeded": true,
+    "active_seconds": null,
+    "underlying_wait_cause": "unobserved"
+  },
+  "handoff_ids": [],
+  "cost_usd": null,
+  "notifications_sent": [],
+  "separately_billed_provider_sessions_launched": 0,
+  "credential_files_inspected": false,
+  "private_orientation_disclosed": false,
+  "schedules_changed": false
+}
