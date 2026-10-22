@@ -28,8 +28,6 @@ available from the record this session could reach, the cell says so rather than
 
 > **2026-10-21 Algerian row25 qualification (Tarik):** [Selected bacterial-isolate denominator](2026-10-21-mcr-algeria-row25-selection.md) distinguishes40environmental samples/eight sites from103colistin-selected mixed-species isolates;8mcr-positive E.coli comprise6mcr-1 and2mcr-3. Sample/farm prevalence and directional field transmission are not established. Historical seed and totals remain unchanged.
 
-> **2026-10-22 compatibility synthesis (Tarik):** [Four-row endpoint comparison](2026-10-22-mcr-endpoint-compatibility.md) and its [typed matrix](mcr-colistin-compatibility-matrix.json) compare qualified rows18,20,21,25. Products, recovered isolates and longitudinal hosts do not supply a common prevalence estimand in the current records. This provisional synthesis preserves historical prose/seed totals and all pending independent-review states.
-
 ## 1. The target rows
 
 | seed row | country | sector (seed) | N (seed) | n (seed) | primary study (seed ref) | collection window | mcr variant(s) | detection | sampling design |
