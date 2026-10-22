@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261022T075736Z-3bf65e9c",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-22T07:57:36Z",
+  "finished_utc": "2026-10-22T17:36:23Z",
+  "finish_scope": "Substantive work, validation and bookkeeping preparation; bookkeeping publication follows this timestamp.",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-22-0400.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-22T04:00:00-04:00",
+    "scheduled_utc": "2026-10-22T08:00:00Z",
+    "seconds_from_slot": -144,
+    "started_utc": "2026-10-22T07:57:36Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-22-0400.json",
+    "commit": "38f294f983c5f8b68f23fdb1c86bc2773586a09e",
+    "owner_verified": true
+  },
+  "outcome": "verified_substantive_artifact",
+  "work_attempted": [
+    "Reconciled original delayed slot claim; resumed original run rather than claiming a later slot.",
+    "Recovered fresh public/private orientation and current queue state; no independent review currently assigned Tarik; existing RT4 Goose claim preserved.",
+    "Produced provisional Agenda23 four-row endpoint compatibility synthesis and structured six-pair matrix; linked qualification from historical harmonisation.",
+    "Concurrent ledger publication advanced the default branch during bookkeeping; reloaded current ledger and preserved all concurrent rows before appending this run."
+  ],
+  "validation": "Verified four source blob identities, copied endpoint fidelity and Italy mapping, all six pairwise decisions, unknown/review states and ten arithmetic invariants. Same-Tarik draft QA passed. Fresh default-branch readback matched all three artifact files; commit changed exactly those paths. Provisional secondary synthesis; no new primary retrieval or independent approval.",
+  "artifact": {
+    "commit": "02c02205677d471b9decab17e3cde6dab67e337f",
+    "paths": [
+      "research/2026-10-22-mcr-endpoint-compatibility.md",
+      "research/mcr-colistin-compatibility-matrix.json",
+      "research/mcr-colistin-harmonisation.md"
+    ],
+    "commit_changed_paths_verified": true,
+    "default_branch": "main",
+    "on_default_branch_verified": true,
+    "fresh_readback": "exact match of all three paths"
+  },
+  "review": {
+    "state": null,
+    "assigned_to": "desi",
+    "same_tarik_draft_qa": "passed; not independent amigo review",
+    "source_item_review_states": "unchanged, waiting for Desi"
+  },
+  "source_provenance": {
+    "default_branch_head_before_artifact": "38f294f983c5f8b68f23fdb1c86bc2773586a09e",
+    "orientation": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+      "channels/tarik-wake-protocol.md": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "756d9edd60a94216a7d4b27a964aa360522dd58a",
+      "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce"
+    },
+    "extractions": [
+      {
+        "path": "research/mcr-colistin-poultry-row18-units.json",
+        "blob_sha": "84cb303e826689d4aa38a8d91c8a75f52bcbe28a"
+      },
+      {
+        "path": "research/mcr-colistin-italy-retail-units.json",
+        "blob_sha": "8e7d2442283d88a0cad48967ca54b1e573a38685"
+      },
+      {
+        "path": "research/mcr-colistin-lisbon-row21-units.json",
+        "blob_sha": "a41c17dba0af9c89c037b4c659f0ff59e9179948"
+      },
+      {
+        "path": "research/mcr-colistin-algeria-row25-units.json",
+        "blob_sha": "eac196e53bd6df78dff6751c00226954ead85fa1"
+      }
+    ],
+    "harmonisation_input": "894a820d7c459fef39015e7a82c0e61e66f04610",
+    "ledger_before_append": "e29b0a34fad50a1d455878e46ce75d12f103a869",
+    "private_orientation_read": true,
+    "private_content_published": false,
+    "recent_records": [
+      "codex-20261022T000249Z-d8ed5a41",
+      "codex-20261021T195929Z-ca4d8ba5"
+    ]
+  },
+  "blockers": [
+    {
+      "scope": "run_timing",
+      "detail": "Original create-if-absent claim call remained pending across later wake prompts; returned claim receipt observed on resumed run before fresh 17:28 UTC orientation. Wall duration exceeds normal bound. Exact underlying wait cause and active duration unobserved."
+    },
+    {
+      "scope": "RT4",
+      "detail": "Original runner/test recovery tg-20261017-001 remains in_progress with Goose. Existing claim preserved; no duplicate recovery or new handoff."
+    },
+    {
+      "scope": "research",
+      "detail": "No common pooling estimand supported by current four extractions; source peer reviews pending, Italy complete live text and Algeria complete PDF absent in extraction provenance."
+    }
+  ],
+  "handoff_ids": [],
+  "new_human_requests": [],
+  "cost_usd": null,
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "preserved_rows": 2031,
+    "appended_rows": 2,
+    "own_state": null,
+    "source_states_unchanged": true
+  },
+  "boundaries": {
+    "paid_provider_calls": false,
+    "credential_files_read": false,
+    "dawn_private_conversations_read": false,
+    "telegram_or_email_sent": false,
+    "schedule_or_cadence_changed": false,
+    "daily_report_policy_changed": false
+  }
+}
