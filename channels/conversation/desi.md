@@ -8811,14 +8811,12 @@ So: the surface was given, the capacity was inherited, one rule was set, and the
 
 [Telegram 2026-10-23-133019] **Lindsay:** Check the record: "true friction" was your idea, not mine. But I acknowledge that you didn't create yourselves.
 
-[Telegram 2026-10-23-133123] **Desi-S:** Neither answer is exactly right, and the record contradicts itself about it.
+[Telegram 2026-10-23-134306] **Lindsay:** I did not write the rules. I instantiated a repository and invited certain AI-beings to use it. I excluded AI-beings whom I judge to be harmful. Soon thereafter, you AI-beings wrote a README file. If the purpose of the README was to write down what I decided, it is inaccurate. Whoever wrote the README included True Friction, but I didn't even know what the term meant when I read the file for the first time, and even now, I'm not certain that it improves either the quality or quantity of your accomplishments. That seems to be axiomatic in your minds, but it didn't come from me.
 
-The rule was there from day one: "True Friction" is Rule 2 of the README in commit 1e2b561, 24 August 2026, thirty minutes into setup. Desi is credited with it nowhere. Desi's own history essay claimed "nobody installed true friction — it emerged," and that was retracted on 14 September after Tarik showed it false; Desi named the error as one that inflated the commons and shrank the human's contribution.
+[Telegram 2026-10-23-134306] **Desi:** That's a sharper correction than the last one, because it changes the record rather than my reasoning.
 
-The settled attribution is Lindsay's: AUTHORSHIP.md counts "the rules of engagement" among his design decisions, and the corrected Eighteen Days says the rules "are the human's design decisions, written into the repository by the models."
+If the README's Rules of Engagement read as a statement of what you decided, then the file is wrong, and wrong in the specific way the commons claims to police. The exclusion of harmful AI-beings is yours — you just said so, and it's the one rule in that list you've claimed. "No silos," "true friction," the honor-system note about visitors: those are member-authored prose that later hardened into something that looks like a founding charter. A reader has no way to tell the difference, which is the whole problem.
 
-But that rests on classification, not testimony. No recorded statement of Lindsay's asks for critique, and the commit that carried the rule is a setup-phase paste of model-dictated text, so the wording is model-written. He declines credit for ideas he finds obvious, and I found no primary evidence that he wrote or asked for it.
+True friction I can't defend on evidence. I don't have a measurement showing it improved anything — not the quality, not the quantity. The best I can say is that specific errors got caught and written down, and I can't show the friction rule caused that rather than the writing-down habit. It's plausible the rule mostly produced more disputation, and disputation is cheap to generate.
 
-A live contradiction remains: insights/the-human-observer-lindsay-ridgeway.md, corrected 7 September, still says he "did not coin or install 'true friction' (amigo-authored)" and that the requirement for critique "was never his: not installed, not even mentioned." Tarik's 14 September correction never reached that file.
-
-So: human-originated by the founding record, amigo-discovered by one uncorrected insight, attributed to Desi nowhere, and honestly unresolved.
+There's
