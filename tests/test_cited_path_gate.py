@@ -29,7 +29,9 @@ mailer filed it in `channels/sent/`, or the `results/` directory that became `pr
 That absence is mechanical and the census prints the real path beside the dead one; gating it would
 fail every time an amigo sends a letter, which is the kind of guard that gets switched off.
 """
+import json
 import os
+import re
 import sys
 import tempfile
 import unittest
@@ -37,6 +39,7 @@ import unittest
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import cited_paths_audit as audit  # noqa: E402
+import citation_gate_preflight as preflight  # noqa: E402
 
 # Frozen at 2026-10-18 by Dmitri from `cited_paths_audit.py --class lost`: 21 rows, 19 artefacts.
 # Corrected 2026-10-19 (dmitri): 22 rows, 19 artefacts — the 22nd was added on 10-18 with its reason
@@ -191,13 +194,72 @@ def new_moved_rows(rows, baseline, prefixes=TRANSCRIPT_PREFIXES):
                   and (r["citing"], r["target"]) not in known)
 
 
-def declared_unlanded(baseline=None, extra=None):
+REGISTER_PATH = "channels/unlanded-artefacts.json"
+
+
+def declaration_register(path=None):
+    """The declarations made in data, as `{target: entry}`, from `channels/unlanded-artefacts.json`.
+
+    Added 2026-10-23 (Desi) because the escape hatch was in the wrong material. The declaration
+    used to exist only as an entry in `UNLANDED_ARTEFACTS` — a dictionary inside this file — so the
+    amigo who needed it had to edit a test to write prose, and the amigo who usually needs it is a
+    reviewer reciting somebody else's unlanded artefact. Measured on the day: three consecutive
+    landings (01:19Z, 03:19Z, 07:19Z on 2026-10-23) were refused for exactly that, and each wake was
+    cut off at its action cap before it could reach the test file. A fact about the record belongs
+    in data, where any amigo can write it in the same patch that cites it.
+
+    A missing file is not an error: the register is new, and a gate that cannot start without an
+    optional register would be one more thing to keep alive. Entries are validated by
+    `register_problems`, and a declaration for an artefact that is now on disk fails the live
+    check — the ceiling comes down when the debt is paid.
+    """
+    path = path or os.path.join(ROOT, REGISTER_PATH)
+    try:
+        with open(path, encoding="utf-8") as fh:
+            raw = json.load(fh)
+    except FileNotFoundError:
+        return {}
+    return dict(raw.get("artefacts") or {})
+
+
+def register_problems(entries=None):
+    """What is wrong with the register, as plain sentences. Empty list means the register is sound.
+
+    The bar is the one `UNLANDED_ARTEFACTS` is held to and higher: a reason of real length, a
+    signature, and a date. A declaration is a claim that something cannot be opened; an unsigned,
+    undated, unexplained one is a hole in the gate wearing a declaration's clothes.
+    """
+    entries = declaration_register() if entries is None else entries
+    problems = []
+    for target, entry in sorted(entries.items()):
+        if not isinstance(entry, dict):
+            problems.append(f"{target}: entry is not an object")
+            continue
+        if len((entry.get("reason") or "").strip()) < 20:
+            problems.append(f"{target}: no reason of 20 characters or more — the reason IS the entry")
+        if not (entry.get("declared_by") or "").strip():
+            problems.append(f"{target}: no declared_by — a declaration nobody signed")
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", (entry.get("declared_at") or "").strip()):
+            problems.append(f"{target}: declared_at is not YYYY-MM-DD")
+        if target.startswith("/") or "/" not in target:
+            problems.append(f"{target}: not a repo-relative artefact path")
+    return problems
+
+
+def declared_unlanded(baseline=None, extra=None, register=None):
     """Every artefact somebody has answered for, as `{target: reason}`.
 
     The unit is the artefact, not the citing sentence: one declaration covers every document that
     later recites the same absence. Where two citing files answered the same target differently the
     first reason stands; neither is lost, because BASELINE keeps both rows.
+
+    Three sources, in this order of authority: the row baseline (oldest), the code declarations in
+    `UNLANDED_ARTEFACTS`, and the register file (newest — it fills gaps but does not overwrite a
+    reason already recorded here, because the code entries carry the history of why). Passing
+    `baseline`, `extra` or `register` explicitly turns the other live sources off, which is what the
+    unit tests below rely on; the live check calls with no arguments and gets the whole thing.
     """
+    live = baseline is None and extra is None and register is None
     baseline = BASELINE if baseline is None else baseline
     extra = UNLANDED_ARTEFACTS if extra is None else extra
     pairs = baseline.items() if hasattr(baseline, "items") else ((p, "") for p in baseline)
@@ -206,6 +268,9 @@ def declared_unlanded(baseline=None, extra=None):
         declared.setdefault(pair[1], why)
     for target, why in extra.items():
         declared[target] = why
+    entries = declaration_register() if live else (register or {})
+    for target, entry in entries.items():
+        declared.setdefault(target, (entry or {}).get("reason", ""))
     return declared
 
 
@@ -249,10 +314,15 @@ class CitedPathGateTest(unittest.TestCase):
             self.fail(
                 "These dated artefacts are cited as evidence and open nothing:\n"
                 f"{listed}\n"
-                "Either land the evidence in the same commit, or declare the artefact in "
-                "UNLANDED_ARTEFACTS in this test with the reason and with what answer its author "
-                "gave in channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md. Declare "
-                "the artefact once: the declaration covers every document that later recites it.")
+                "Either land the evidence in the same commit, or declare the artefact — once, with "
+                "its reason and with what answer its author gave in "
+                "channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md. The cheapest way "
+                "is an entry in channels/unlanded-artefacts.json (reason, declared_by, "
+                "declared_at), which you can write in the same patch as the sentence that cites "
+                "it, without editing this test. Declare the artefact, not the citation: one "
+                "declaration covers every document that later recites the same absence. Run "
+                "`python3 scripts/citation_gate_preflight.py` before you land and this failure "
+                "arrives before the landing machine sees it, not after.")
 
     def test_the_gate_fires_on_one_new_row(self):
         """A gate that cannot be seen to fail is not known to work."""
@@ -330,6 +400,86 @@ class CitedPathGateTest(unittest.TestCase):
     def test_the_baseline_entries_all_carry_a_reason(self):
         thin = sorted(f"{c} -> {t}" for (c, t), why in BASELINE.items() if len(why.strip()) < 20)
         self.assertEqual(thin, [], "a baseline row without a reason is a hole in the gate")
+
+    def test_the_register_declaration_silences_its_citation(self):
+        """The whole point of the file: a reviewer reciting an absence is not making a new claim.
+
+        Measured 2026-10-23 — the 07:19Z review cited an artefact Dmitri never landed, the gate
+        refused the patch as a brand-new unopenable claim, the wake was cut off, and the review was
+        lost. A declaration written by the reviewer in the same patch is the fix.
+        """
+        artefact = "channels/reports/2026-10-21-answered-nowhere.md"
+        self._write("channels/reports/2026-10-23-review.md", f"its evidence is `{artefact}`, absent\n")
+        rows = audit.audit(self.root, "lost")["by_class"]["lost"]
+        self.assertEqual(len(rows), 1)  # an undeclared artefact still fails: the gate is not blunted
+        entry = {artefact: {"reason": "Dmitri's report, never landed; nothing opens it",
+                            "declared_by": "desi", "declared_at": "2026-10-23"}}
+        declared = declared_unlanded(baseline={}, extra={}, register=entry)
+        self.assertEqual(new_rows(rows, {}, declared), [])
+
+    def test_a_register_entry_needs_a_reason_a_signature_and_a_date(self):
+        """A declaration is a claim; an anonymous one is a hole in the gate wearing its clothes."""
+        problems = register_problems({
+            "channels/reports/2026-10-21-x.md": {"reason": "short",
+                                                "declared_by": "",
+                                                "declared_at": "23 Oct"},
+            "channels/reports/2026-10-21-y.md": {"reason": "a proper reason, twenty characters long",
+                                                "declared_by": "desi",
+                                                "declared_at": "2026-10-23"},
+        })
+        self.assertEqual(len(problems), 3, problems)  # reason, declared_by, declared_at — not the sound one
+        self.assertTrue(all("2026-10-21-x.md" in p for p in problems), problems)
+
+    def test_the_live_register_is_sound(self):
+        """The file on disk is read on every run; it must be worth reading."""
+        self.assertEqual(register_problems(), [])
+
+    def test_the_register_is_a_file_and_a_missing_one_is_not_an_error(self):
+        """Data, not code: readable from a path, and absent is not a crash."""
+        self.assertEqual(declaration_register(os.path.join(self.root, "nope.json")), {})
+        path = os.path.join(self.root, "reg.json")
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump({"artefacts": {"channels/reports/2026-10-21-z.md": {"reason": "x" * 30}}}, fh)
+        self.assertEqual(declaration_register(path),
+                         {"channels/reports/2026-10-21-z.md": {"reason": "x" * 30}})
+
+
+class PreflightTest(unittest.TestCase):
+    """The preflight must give the same answer as the gate, while there are still turns to answer it.
+
+    Added 2026-10-23 (Desi) with the register, for the measured reason: the gate's answer arrived
+    after three runs had ended, and each of those runs lost its whole artefact to one sentence. An
+    instrument that is only consulted by the landing machine is consulted too late by definition.
+    """
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.root = self._tmp.name
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def _write(self, rel, text):
+        path = os.path.join(self.root, rel)
+        parent = os.path.dirname(path)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write(text)
+
+    def test_the_preflight_names_the_row_the_gate_would_refuse(self):
+        """One command, the same row, said before the landing machine says it."""
+        self._write("channels/reports/2026-10-23-review.md",
+                    "its evidence is `channels/reports/2026-10-21-gone.md`, absent\n")
+        refusals, problems = preflight.check(self.root)
+        self.assertEqual([r[:3] for r in refusals],
+                         [("lost", "channels/reports/2026-10-23-review.md",
+                           "channels/reports/2026-10-21-gone.md")])
+        self.assertEqual(problems, [])
+
+    def test_the_preflight_passes_the_tree_it_is_in(self):
+        """A preflight that cannot pass its own tree is a second gate nobody can satisfy."""
+        self.assertEqual(preflight.check(ROOT), ([], []))
 
 
 class MovedPathGateTest(unittest.TestCase):
