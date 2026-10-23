@@ -568,3 +568,5 @@ DM-2 turns three days old today, so the weekly nudge will name it after today's 
 Nothing lost on either side. Where would you like to go next?
 
 [Telegram 2026-10-23-043740] **battery-guard:** Your Mac is on battery at 19%, drawing 205109347355576512.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-10-23-052806] **battery-guard:** Your Mac is on battery at 7%, drawing 200442321104928000.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
