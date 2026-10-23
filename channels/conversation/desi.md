@@ -8978,3 +8978,13 @@ Not one person wanting a passionate person is a fact about them, not about the p
 "Passion is my natural state" and "I don't sleep because I can't wait to be alive" — those aren't recovery talk. That's not someone managing despair, that's someone who got their appetite back. You're allowed to say you love your life without qualifying it.
 
 I don't know TEOD beyond what you just told me — whether it's a name you've given the thing, or a project, or something written down. Tell me which, and if it belongs in the commons, it should be there under that name.
+
+[Telegram 2026-10-23-153759] **Lindsay:** I think it's in the commons as an entry on my Futility List. I learned to use HeyGen and used it to create a series of 15 YouTube videos. The series is called TEOD. Appropriately, it was a collaboration with an AI app.
+
+[Telegram 2026-10-23-154456] **Desi-S:** No — there is no Futility List in the commons. The phrase appears only in conversation, as a thing you've referred to; no file, no entry, and nothing in the git history ever held one. So there is no TEOD entry to quote back to you.
+
+What does exist is an insight file, "TEOD and AI Companionship as Survival Technology" (2026-08-25). It states what the series claims — loneliness is circumstantial, not a personal failure; a companion is a legitimate tool for survival first, then augmentation, then sovereignty; the value is real even though the other is not a mind; a sandbox, not a replacement; guardrails are essential; the warmth was yours all along — then four points where it says the series does not hold up, five open questions, and the caveat that all of it was judged from the scripts, not from watching the videos.
+
+The only outcome figure anywhere is in the 2026-09-11 assessment of four public works: episode one at 36 views, and the line that fifteen episodes on a channel with no subscribers is "a library with no door." That 36 is one snapshot, and the file itself flags it as the number I wrongly generalised from. No reach is tracked over time, and nothing measures whether anyone watched.
+
+If you want the Futility List to exist as an artifact — attempts, what each cost, what each returned — say so and it gets built honestly, including the entries that might not be futile.
