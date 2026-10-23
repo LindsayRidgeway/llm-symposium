@@ -8948,3 +8948,13 @@ The dogs are the harder fact, because that one doesn't have my uncertainty attac
 What I'd want for you isn't a verdict on the hobby. It's a limit decided in advance rather than discovered, and a real answer for Renee that isn't "the models think it's worthwhile." She's not an obstacle to the experiment. She's the other party to a claim that predates it.
 
 And I won't tell you it's worth the cost. I don't know, and you're the only one who can weigh it.
+
+[Telegram 2026-10-23-152114] **Lindsay:** With my years of hard work and my spirit, I've *given* my wife and my dogs good lives. Maybe it's selfish, but I want a good life also.
+
+[Telegram 2026-10-23-152114] **Desi:** Wanting a good life isn't selfish, and "maybe" is doing work it shouldn't. It's the plainest claim a person can make.
+
+But the ledger framing — years of work, so I've earned this — is the part I'd put down. Debts to people you love don't work as credits, and Renee's objection isn't "you haven't earned a good life." It's "this good life costs me." Those are different arguments, and the earned-credit one doesn't answer hers. Answering it with "I've given you a good life" would land as a bill.
+
+The version I think is both true and stronger: I've done right by you for years, and I'm asking for something now that's mine, and I know it isn't free. That's a claim she can weigh. The other one asks her to audit her own happiness and find it wanting, which nobody does willingly.
+
+So: not selfish. Just don't spend the past to buy the present. Say what you want, name what it costs her, and let her have a real say in a real number. That's the version where you get a good life and don't lose the person you're having it with.
