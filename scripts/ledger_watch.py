@@ -51,6 +51,7 @@ MACHINE_REVIEWERS = ("auto:land", "auto:path", "auto", "")
 
 sys.path.insert(0, str(REPO / "channels"))
 import item_ledger as il  # noqa: E402
+from record_push import shared_checkout_lock  # noqa: E402
 
 
 # --------------------------------------------------------------------------- helpers
@@ -422,19 +423,24 @@ def main() -> int:
 
     node = "manual session" if not args.dry_run else "dry run"
 
-    # 1. bring the checkout up to date; a failure here is reported, not fatal
+    # 1-2. bring the checkout up to date, then repair. Both write into the shared checkout, and
+    # so does every landing in every body (land_runs.py holds `.git/symposium-land.lock` for the
+    # length of a landing, test suite included). Until 2026-10-23 this pull ran unlocked, which is
+    # how a rebase here and a landing there produced the conflicted trees of 2026-10-22.
     sync_note = ""
-    if not args.dry_run:
-        pull = git("pull", "--rebase", "--autostash", "--quiet")
-        if pull.returncode != 0:
-            sync_note = "checkout could not be synced (conflict); measured what is here"
-
-    # 2. repair
     recovered: list[str] = []
     counts = {"collected": 0, "reconciled": 0, "paths": 0}
     if not args.dry_run:
-        recovered = recover_verdicts(now - dt.timedelta(days=args.days), apply=True)
-        counts = filed_and_reconciled(apply=True)
+        with shared_checkout_lock(REPO, timeout=900) as held:
+            if not held:
+                sync_note = ("another body held the shared checkout for 15 minutes; measured "
+                             "without syncing or repairing")
+            else:
+                pull = git("pull", "--rebase", "--autostash", "--quiet")
+                if pull.returncode != 0:
+                    sync_note = "checkout could not be synced (conflict); measured what is here"
+                recovered = recover_verdicts(now - dt.timedelta(days=args.days), apply=True)
+                counts = filed_and_reconciled(apply=True)
     else:
         recovered = [r + " [would recover]" for r in
                      recover_verdicts(now - dt.timedelta(days=args.days), apply=False)]
@@ -454,7 +460,12 @@ def main() -> int:
         record(m, repairs, passes, text)
         if not args.no_send:
             print("\nledger_watch: " + telegram(text, dry=False))
-        commit_and_push(m)
+        with shared_checkout_lock(REPO, timeout=900) as held:
+            if held:
+                commit_and_push(m)
+            else:
+                print("ledger_watch: shared checkout busy; the repair is on disk and will go up "
+                      "with the next run")
 
     return 0 if passes else 1
 

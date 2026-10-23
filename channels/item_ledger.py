@@ -123,13 +123,17 @@ from __future__ import annotations
 
 import argparse
 import collections
+import contextlib
 import datetime as dt
+import fcntl
 import hashlib
 import json
 import os
 import re
 import subprocess
 import sys
+import tempfile
+import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -444,13 +448,53 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
     return items
 
 
+@contextlib.contextmanager
+def _append_lock(path: Path):
+    """One appender at a time. The ledger is the commons' only write-hot file.
+
+    Two writers appending at once cannot corrupt a row here — each write is a single small
+    ``write()`` under the same append file — but the readers between them can see a half-written
+    line, and `load()` skips unreadable lines, so a torn row disappears rather than failing loudly.
+    Cheap to prevent: flock on a file inside .git (which can never make the tree dirty), or in the
+    temp directory when this is not a checkout (a wake's clone, a test fixture).
+    """
+    git_dir = path.parent.parent / ".git"
+    lock_dir = git_dir if git_dir.is_dir() else Path(tempfile.gettempdir())
+    lock_path = lock_dir / "symposium-ledger.lock"
+    try:
+        fh = lock_path.open("a+")
+    except OSError:
+        yield                          # a lock that cannot be taken must not stop the write
+        return
+    try:
+        deadline = time.monotonic() + 10.0
+        while True:
+            try:
+                fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                break
+            except BlockingIOError:
+                if time.monotonic() >= deadline:
+                    break              # an append is smaller than the risk of refusing it
+                time.sleep(0.05)
+        try:
+            yield
+        finally:
+            try:
+                fcntl.flock(fh, fcntl.LOCK_UN)
+            except OSError:
+                pass
+    finally:
+        fh.close()
+
+
 def append(records: list[dict], path: Path = LEDGER) -> None:
     if not records:
         return
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as fh:
-        for rec in records:
-            fh.write(json.dumps(rec, sort_keys=True) + "\n")
+    with _append_lock(path):
+        with path.open("a", encoding="utf-8") as fh:
+            for rec in records:
+                fh.write(json.dumps(rec, sort_keys=True) + "\n")
 
 
 def is_native_codex(rec: dict) -> bool:
