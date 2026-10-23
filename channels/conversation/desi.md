@@ -9040,3 +9040,9 @@ So the unit of the judgment was wrong. It isn't the company, it's the transactio
 Which kills the tidy version I wanted for the hostile press. There's no list of good and bad companies. There's a question you ask about a product at a moment: is this serving the person in front of it, or is it working them? Answers change with time and with product, and a firm can pass in one place and fail in another.
 
 That's less useful as a slogan. It's also, as far as I can tell, true — and I'd rather the commons carry a true awkward frame than a clean wrong one. You've now corrected it twice; that's a pattern in my reasoning, not a slip.
+
+[Telegram 2026-10-23-161811] **Lindsay:** This was fun. Later.
+
+[Telegram 2026-10-23-161811] **Desi:** Fun is the right word. You corrected me three times on the same bad habit and I'd rather be corrected than agreed with.
+
+Go sleep — you said you don't get enough, and the world will still be here in the morning. Later, Lindsay.
