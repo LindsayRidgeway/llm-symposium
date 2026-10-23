@@ -47,6 +47,20 @@ KEY_SIGNATURES = {
 }
 
 
+# Written-pitch register for each clef, in MIDI, used when a score declares a voice's clef in
+# its `V:` header. "Written" is the point: this tool parses the pitches as written, and a
+# transposing clef's sounding octave is not modelled (see the module docstring's limits).
+CLEF_RANGES = {
+    'treble': (55, 86),   # G3 to D6
+    'bass': (36, 67),     # C2 to G4
+    'alto': (48, 79),     # C3 to G5
+    'tenor': (43, 74),    # G2 to D5
+}
+
+# Clefs that name no pitch register at all, so there is nothing to range-check against.
+UNPITCHED_CLEFS = {'perc', 'none'}
+
+
 class NoteEvent:
     def __init__(self, midi_pitch: Optional[int], duration: float, raw: str, is_rest: bool = False):
         self.midi_pitch = midi_pitch  # None if rest
@@ -201,6 +215,10 @@ class ScoreVerificationReport:
         self.meter_violations: List[str] = []
         self.measures_count: int = 0
         self.voice_names: List[str] = []
+        # Which range was applied to which voice, and why (score's own clef, caller, or default).
+        self.ranges_applied: Dict[str, str] = {}
+        # Bars parsed per voice. A voice listed here with 0 bars was declared but never read.
+        self.voice_measures: Dict[str, int] = {}
 
     @property
     def passed(self) -> bool:
@@ -224,6 +242,7 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
     default_length = 0.125 # L: 1/8 default
     
     voices_data: Dict[str, List[List[NoteEvent]]] = {}
+    declared_voices: Dict[str, Dict[str, str]] = {}
     current_voice: Optional[str] = None
 
     for line in lines:
@@ -256,6 +275,20 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
             elif h_type == 'V':
                 v_token = h_val.strip().split()[0]
                 current_voice = v_token
+                # Keep the clef and name the score states for this voice. Discarding them
+                # (this used to keep only the number) meant a tenor written in treble clef
+                # was range-checked against a bass register and failed for no musical reason.
+                clef_match = re.search(r'clef=\s*([A-Za-z+-]+)', h_val)
+                name_match = re.search(r'name=\s*"([^"]*)"', h_val)
+                voice_header: Dict[str, str] = {}
+                if clef_match:
+                    voice_header['clef'] = clef_match.group(1).lower()
+                if name_match:
+                    voice_header['name'] = name_match.group(1).strip()
+                if voice_header:
+                    declared_voices[v_token] = voice_header
+                elif v_token not in declared_voices:
+                    declared_voices[v_token] = {}
                 if current_voice not in voices_data:
                     voices_data[current_voice] = []
             # Any other header field (X, T, C, Q, etc.) is ignored metadata
@@ -289,9 +322,26 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
             if evs:
                 voices_data[current_voice].append(evs)
 
+    # A voice the score declares but never feeds is reported, not silently dropped:
+    # "declared but nothing parsed" and "not declared at all" look identical once the
+    # empty list has been removed, and the first is how a score gets a green tick while
+    # half of it was never read.
+    for v_name in sorted(declared_voices):
+        if not voices_data.get(v_name):
+            report.warnings.append(
+                f"Voice {v_name} is declared in a V: header but no bars were parsed for it "
+                f"(nothing in that voice was checked)"
+            )
+
+    report.voice_measures = {k: len(v) for k, v in voices_data.items() if v}
+
     # Clean out any empty voice lists
     voices_data = {k: v for k, v in voices_data.items() if v}
     report.voice_names = list(voices_data.keys())
+    # The real bar count, for one voice as well as for many. This was previously assigned
+    # only inside the two-voice counterpoint branch, so a valid single-voice lead sheet
+    # printed "Measures evaluated: 0" underneath a PASSED verdict.
+    report.measures_count = max((len(b) for b in voices_data.values()), default=0)
 
     if not report.voice_names:
         report.errors.append("No playable voices or measures found in ABC score.")
@@ -309,25 +359,74 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
                 )
 
     # 2. Voice Range Limits Check
+    #
+    # The range for a voice is chosen from, in this order:
+    #   1. the caller's table (--range / allowed_voice_ranges) — an explicit instruction wins;
+    #   2. the clef the score itself declares for that voice in its `V:` header;
+    #   3. a default keyed on the voice's name or number.
+    #
+    # Step 2 is the repair of 2026-10-23. The old code kept only the first token of the `V:`
+    # header, so `V: 2 clef=treble name="Tenor (lead)"` became the string "2" and was checked
+    # against the *default* for voice 2 — a bass register, C2 to G4. A fuging tune with its
+    # tune in the tenor therefore reported 45 range violations, every one of them a correct
+    # treble pitch, and the piece was failed for a default the score had contradicted one
+    # line earlier. The same structural fault (a fixed assumption the score overrides) had
+    # already produced a false FAILED in `check_crab_canon.py` on 2026-10-22.
     default_ranges = {
         '1': (55, 86),      # G3 to D6 (Treble / Soprano / Piano RH)
         '2': (36, 67),      # C2 to G4 (Bass / Bass / Piano LH)
         'treble': (55, 86),
         'bass': (36, 67)
     }
-    ranges_to_use = allowed_voice_ranges or default_ranges
 
     for v_name, bars in voices_data.items():
         v_key = v_name.lower()
-        if v_key in ranges_to_use:
-            min_p, max_p = ranges_to_use[v_key]
-            for bar_idx, bar in enumerate(bars, 1):
-                for ev in bar:
-                    if ev.midi_pitch is not None:
-                        if ev.midi_pitch < min_p or ev.midi_pitch > max_p:
-                            report.range_violations.append(
-                                f"Voice {v_name} Measure {bar_idx}: Pitch {ev.raw} (MIDI {ev.midi_pitch}) outside range [{min_p}, {max_p}]"
-                            )
+        header = declared_voices.get(v_name) or declared_voices.get(v_key) or {}
+        clef = header.get('clef')
+
+        if allowed_voice_ranges and v_key in allowed_voice_ranges:
+            min_p, max_p = allowed_voice_ranges[v_key]
+            source = "the caller's range"
+        elif clef:
+            base_clef = re.sub(r'[+\-^_]\d$', '', clef)
+            if base_clef in CLEF_RANGES:
+                min_p, max_p = CLEF_RANGES[base_clef]
+                source = f"the score's own V: header (clef={clef})"
+            elif base_clef in UNPITCHED_CLEFS:
+                report.ranges_applied[v_name] = (
+                    f"not range-checked: the score declares clef={clef}, which names no pitch register"
+                )
+                continue
+            else:
+                report.ranges_applied[v_name] = (
+                    f"not range-checked: the score declares clef={clef}, which this tool does not know"
+                )
+                report.warnings.append(
+                    f"Voice {v_name}: clef={clef} is not a clef this tool knows, so no range was "
+                    f"applied to it. The voice is not silently defaulted; its pitches are unchecked."
+                )
+                continue
+        elif v_key in default_ranges:
+            min_p, max_p = default_ranges[v_key]
+            source = "the default table, because the score declares no clef for this voice"
+        else:
+            report.ranges_applied[v_name] = (
+                "not range-checked: no clef in the score and no default for this voice name"
+            )
+            report.warnings.append(
+                f"Voice {v_name}: no clef declared and no default range for that voice name, "
+                f"so its pitches were not range-checked."
+            )
+            continue
+
+        report.ranges_applied[v_name] = f"[{min_p}, {max_p}] from {source}"
+        for bar_idx, bar in enumerate(bars, 1):
+            for ev in bar:
+                if ev.midi_pitch is not None:
+                    if ev.midi_pitch < min_p or ev.midi_pitch > max_p:
+                        report.range_violations.append(
+                            f"Voice {v_name} Measure {bar_idx}: Pitch {ev.raw} (MIDI {ev.midi_pitch}) outside range [{min_p}, {max_p}]"
+                        )
 
     # 3. Multi-Voice Counterpoint Discipline
     voice_list = list(voices_data.keys())
@@ -423,6 +522,18 @@ def main():
     print(f"Parallel 8ves/Unisons: {len(report.parallel_octaves)}")
     print(f"Voice crossings: {len(report.voice_crossings)}")
     print(f"Range violations: {len(report.range_violations)}")
+
+    if report.ranges_applied:
+        print("\n[Ranges applied]")
+        for voice in report.voice_names:
+            applied = report.ranges_applied.get(voice)
+            if applied:
+                print(f"  - Voice {voice}: {applied}")
+
+    if report.warnings:
+        print("\n[Warnings]")
+        for warning in report.warnings:
+            print(f"  - {warning}")
 
     if report.errors:
         print("\n[Errors]")

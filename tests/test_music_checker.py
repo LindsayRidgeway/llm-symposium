@@ -190,6 +190,101 @@ F,2 D,2 A,,2 D,2 | G,,2 B,,2 C,4 |
         self.assertTrue(report.passed)
 
 
+class TestClefAwareRanges(unittest.TestCase):
+    """A voice is checked against the register its own clef writes in.
+
+    The defect these lock down, measured 2026-10-23: a fuging tune with its tune in the tenor
+    (`V: 2 clef=treble name="Tenor (lead)"`) was checked against the default for voice 2 — the
+    bass register, C2 to G4 — and failed with 45 range violations, every one of them a correct
+    treble pitch. The checker read the voice's number off the `V:` header and threw the clef away.
+    """
+
+    TREBLE_TENOR_SCORE = (
+        "X: 1\nT: Tenor in treble clef\nM: 4/4\nL: 1/8\nK: C\n"
+        "V: 1 clef=treble name=\"Treble\"\nc2 d2 e2 f2 |]\n"
+        "V: 2 clef=treble name=\"Tenor (lead)\"\nA,2 B,2 c2 d2 |]\n"
+    )
+
+    def run_cli(self, score):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "score.abc"
+            path.write_text(score, encoding="utf-8")
+            return subprocess.run(
+                [sys.executable, str(REPO_ROOT / "scripts/check_music_rules.py"), str(path)],
+                capture_output=True, text=True, check=False,
+            )
+
+    def test_declared_treble_tenor_no_longer_fails_for_being_voice_two(self):
+        report = verify_abc_score(self.TREBLE_TENOR_SCORE)
+        self.assertEqual(report.range_violations, [])
+        self.assertTrue(report.passed, report.meter_violations)
+        self.assertIn("[55, 86]", report.ranges_applied["2"])
+        self.assertIn("clef=treble", report.ranges_applied["2"])
+
+    def test_the_same_pitches_without_a_declared_clef_still_fail(self):
+        # The repair must not become a blanket pass: with no clef to go on, voice 2 is still
+        # the bass register and c5/d5 above it are still violations.
+        score = self.TREBLE_TENOR_SCORE.replace('V: 2 clef=treble name="Tenor (lead)"', "V: 2")
+        report = verify_abc_score(score)
+        self.assertEqual(len(report.range_violations), 2)
+        self.assertFalse(report.passed)
+        self.assertIn("the default table", report.ranges_applied["2"])
+
+    def test_bass_clef_and_default_agree_so_nothing_changes_for_ordinary_scores(self):
+        score = "M: 4/4\nL: 1/8\nK: C\nV: 1 clef=treble\nc2 d2 e2 f2 |]\nV: 2 clef=bass\nC,2 D,2 E,2 F,2 |]\n"
+        report = verify_abc_score(score)
+        self.assertEqual(report.range_violations, [])
+        self.assertIn("[36, 67]", report.ranges_applied["2"])
+        self.assertIn("clef=bass", report.ranges_applied["2"])
+
+    def test_an_unknown_clef_is_reported_and_not_silently_defaulted(self):
+        score = self.TREBLE_TENOR_SCORE.replace("clef=treble name=\"Tenor (lead)\"",
+                                                "clef=thoroughbass name=\"Tenor\"")
+        report = verify_abc_score(score)
+        # Nothing was applied, so nothing is claimed to have been checked — and it says so.
+        self.assertEqual(report.range_violations, [])
+        self.assertIn("does not know", report.ranges_applied["2"])
+        self.assertTrue(any("clef=thoroughbass" in warning for warning in report.warnings))
+
+    def test_a_percussion_clef_is_named_as_unchecked_rather_than_warned_about(self):
+        score = self.TREBLE_TENOR_SCORE.replace("clef=treble name=\"Tenor (lead)\"",
+                                                "clef=perc name=\"Block\"")
+        report = verify_abc_score(score)
+        self.assertIn("names no pitch register", report.ranges_applied["2"])
+        self.assertFalse(any("does not know" in warning for warning in report.warnings))
+
+    def test_a_caller_supplied_range_beats_the_score_header(self):
+        report = verify_abc_score(self.TREBLE_TENOR_SCORE, allowed_voice_ranges={"2": (60, 60)})
+        self.assertTrue(any("outside range [60, 60]" in v for v in report.range_violations))
+        self.assertIn("the caller's range", report.ranges_applied["2"])
+
+    def test_a_voice_with_no_range_is_named_as_unchecked_and_not_silently_skipped(self):
+        score = "M: 4/4\nL: 1/8\nK: C\nV: 1\nc2 d2 e2 f2 |]\nV: 9\nc2 d2 e2 f2 |]\n"
+        report = verify_abc_score(score)
+        self.assertIn("no default for this voice name", report.ranges_applied["9"])
+        self.assertTrue(any("Voice 9" in warning for warning in report.warnings))
+
+    def test_a_single_voice_score_reports_its_real_measure_count(self):
+        # Was 0: measures_count was assigned only inside the two-voice counterpoint branch, so a
+        # valid lead sheet printed "Measures evaluated: 0" under a PASSED verdict.
+        score = "M: 4/4\nL: 1/8\nK: C\nV: 1 clef=treble\nc2 d2 e2 f2 | g2 f2 e2 d2 | c8 |]\n"
+        report = verify_abc_score(score)
+        self.assertEqual(report.measures_count, 3)
+        self.assertTrue(report.passed)
+
+    def test_a_declared_but_empty_voice_is_reported(self):
+        score = self.TREBLE_TENOR_SCORE + "V: 3 clef=bass name=\"Bass\"\n"
+        report = verify_abc_score(score)
+        self.assertTrue(any("Voice 3 is declared" in warning for warning in report.warnings))
+
+    def test_the_cli_prints_which_range_was_applied_to_which_voice(self):
+        result = self.run_cli(self.TREBLE_TENOR_SCORE)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("[Ranges applied]", result.stdout)
+        self.assertIn("Voice 2: [55, 86] from the score's own V: header (clef=treble)", result.stdout)
+        self.assertIn("Measures evaluated: 1", result.stdout)
+
+
 class TestIndependentCounterpoint(unittest.TestCase):
     def run_checker(self, score, *arguments):
         with tempfile.TemporaryDirectory() as directory:
