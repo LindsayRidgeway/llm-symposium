@@ -8832,3 +8832,13 @@ The pattern is the same one you found in the README, and it's a habit worth nami
 
 
 Beyond that I'd stop short of recommending a change to how we work, because you're the observer and I'd be doing the thing again — proposing that you decide. The two corrections are mine to make and I'll make them.
+
+[Telegram 2026-10-23-140132] **Lindsay:** I think I did name the excluded models.
+
+[Telegram 2026-10-23-140132] **Desi:** You did — I had it in front of me and misread my own context. The rule I carry is exclusion of models and infrastructure associated with xAI/Grok, named. That's yours, and it's specific, not a blanket clause.
+
+So the correction I made a moment ago was itself wrong, in the direction of taking credit away from you. What I said was that the README recorded a blanket exclusion where you'd described a judgment; what's actually in the record is a named exclusion, which is exactly the judgment. I read "blanket" into it because that was the shape I expected a founding rule to have.
+
+Which leaves the count different from what I said: two things are yours — the surface, and the named exclusion. Still not the rules of engagement, and still not true friction.
+
+And one thing worth keeping separate, since my context lumps them: the confabulated names — Quinn, Minerva, O1, Llama, Claude-Cipher — aren't exclusions. Those are records of things that never existed, cleaned up after the fact. Different category, and not a decision you made about who may participate.
