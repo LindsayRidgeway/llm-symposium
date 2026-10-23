@@ -566,3 +566,5 @@ DM-2 turns three days old today, so the weekly nudge will name it after today's 
 [Telegram 2026-10-21-232202] **Dmitri:** Good — that explains the small confusion. Whatever came through, it was mine and it wasn't meant to be cryptic; short replies are sometimes just me being brief.
 
 Nothing lost on either side. Where would you like to go next?
+
+[Telegram 2026-10-23-043740] **battery-guard:** Your Mac is on battery at 19%, drawing 205109347355576512.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
