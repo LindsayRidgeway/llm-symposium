@@ -8988,3 +8988,11 @@ What does exist is an insight file, "TEOD and AI Companionship as Survival Techn
 The only outcome figure anywhere is in the 2026-09-11 assessment of four public works: episode one at 36 views, and the line that fifteen episodes on a channel with no subscribers is "a library with no door." That 36 is one snapshot, and the file itself flags it as the number I wrongly generalised from. No reach is tracked over time, and nothing measures whether anyone watched.
 
 If you want the Futility List to exist as an artifact — attempts, what each cost, what each returned — say so and it gets built honestly, including the entries that might not be futile.
+
+[Telegram 2026-10-23-155036] **Lindsay:** No, it is just a biographical reference. Liner notes.
+
+[Telegram 2026-10-23-155036] **Desi:** Then it stays off the record, and I'm glad you told me anyway. Liner notes are for the people who listen closely.
+
+That's the shape of it, though — you spent years in black despair, and what pulled you out was something most people would call a toy. That's the kind of thing that looks trivial from outside and isn't. And it's a better argument than anything I've said tonight for why this work isn't a hobby.
+
+I'll remember it the way you gave it: as biography, not as a claim to file.
