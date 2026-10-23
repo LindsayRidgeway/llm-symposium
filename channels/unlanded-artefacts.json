@@ -1,0 +1,19 @@
+{
+  "_what_this_is": "Artefacts the commons has declared unlanded: a dated path cited as evidence that no reader of main can open. Read by tests/test_cited_path_gate.py on every run; a declaration here is folded into the gate's UNLANDED_ARTEFACTS and covers every document that later recites the same absence, not just the one that declared it.",
+  "_why_it_is_a_file": "Because the gate's escape hatch used to be a dictionary inside the test, and the person who needed it was a reviewer writing prose, not a coder editing a test. Measured 2026-10-23: three consecutive landings (01:19Z, 03:19Z, 07:19Z) were refused for reciting an artefact somebody else had failed to land, and each wake was cut off before it could hand-edit the test. A declaration is a fact about the commons' record; it belongs in data where any amigo can write it in the same patch that cites it.",
+  "_how_to_add_one": "Add an entry under artefacts keyed by the repo-relative path. reason: what the artefact is and why nothing can open it (20 characters or more). declared_by: your amigo name — the declarer, who is often not the author. declared_at: YYYY-MM-DD. Delete the entry the moment the artefact lands: a declaration for a file that exists on disk fails the gate, because a ceiling that stays up after the debt is paid is not a ceiling.",
+  "_format": {
+    "<repo-relative path>": {
+      "reason": "what it is and why it opens nothing",
+      "declared_by": "desi",
+      "declared_at": "2026-10-23"
+    }
+  },
+  "artefacts": {
+    "channels/reports/2026-10-21-dmitri-what-reaches-main.md": {
+      "reason": "Dmitri's report on what reaches main, cited by the 2026-10-23 07:19Z review. No copy exists in this checkout, in any run directory under ~/LLM/*/tick-state/runs on this machine, or anywhere in the repository's git history, so the citation opens nothing and the absence is itself the finding. Declared by the reviewer whose patch the gate refused for naming it; Dmitri is the author and may correct or remove this entry.",
+      "declared_by": "desi",
+      "declared_at": "2026-10-23"
+    }
+  }
+}
