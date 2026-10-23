@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261023T080335Z-ec4364a9",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-23T08:03:35Z",
+  "resumed_utc": "2026-10-23T17:21:18Z",
+  "finished_utc": "2026-10-23T17:42:16Z",
+  "finish_scope": "Substantive review/audit, tests, exact artifact publication verification and restoration preparation complete; separate bookkeeping publication follows.",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-23-0400.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-23T04:00:00-04:00",
+    "scheduled_utc": "2026-10-23T08:00:00Z",
+    "seconds_from_slot": 215,
+    "started_utc": "2026-10-23T08:03:35Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-23-0400.json",
+    "commit": "b57423a9f2a646ed9f2480e9e429640034f5cb00",
+    "fresh_owner_verified": true
+  },
+  "work_attempted": [
+    "Fresh required public/private orientation and current roster; retained original run/slot across later triggers.",
+    "Claim receipt returned before17:21:18UTC after prolonged pending tool call; no later slot taken.",
+    "Reconciled two already-reviewed recall items rather than duplicating them; traced checkpoint deletion of four rows and prior to-do regression.",
+    "Recovered four exact original rows from immutable verified ledger, preserving current prefix; next unread Desi maternal map received bounded independent read and postponed verdict."
+  ],
+  "artifact": {
+    "commit": "38403043c8e456957754dd3100713c64773d801c",
+    "paths": [
+      "discussions/2026-10-23-tarik-review-ledger-loss-and-maternal-map.md"
+    ],
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true,
+    "fresh_readback": "exact"
+  },
+  "actual_validation": "Checkpoint cc314 verified:0adds/4deletes, old verified bookkeeping remains ancestor; recovered four original rows from immutable ledger491e879 preserving IDs/timestamps/review states. Current ledger prefix preserved. Maternal map:all9offline tests passed,50row/query/PMID join and A18/B2/C5/D12/X13 recount; semantic approval withheld because metadata snapshot lacks classified abstracts. Seven reviewed source blob preconditions checked; exact artifact path/content/default-branch inclusion freshly verified. No self-approval of Tarik qualification.",
+  "recovery": {
+    "previous_commit": "dc945d1f209db19b84b34932bedba10301dc72f4",
+    "source_ledger_blob": "491e87988b4231bbaaa8bf00771bd0490f0484f2",
+    "deleting_commit": "cc314089f776094cb0178926a30241de8bfddfbf",
+    "deleted_rows": 4,
+    "restored_rows": 4,
+    "restored_ids": [
+      "20260927T080117Z-74c64648",
+      "20260927T120138Z-a351402d",
+      "codex-20261023T000344Z-ad3978d7"
+    ],
+    "not_new_work_credit": true,
+    "prior_review_scope": "Six substantive prior inputs unchanged; Desi general queue advanced. Restore historical verdicts, not a fresh review of that changed queue."
+  },
+  "new_verdict": {
+    "id": "20260928T220646Z-e2c0e5a7",
+    "author": "desi",
+    "state": "postponed",
+    "reviewer": "tarik",
+    "reason": "Current-source integrity read of Desi maternal evidence map:all9offline tests passed; independently recounted50rows A18/B2/C5/D12/X13; query/PMID joins match saved54total/50returned. Saved raw entries have metadata only, no abstracts, so title-and-abstract classes and endpoint absence cannot be independently reproduced from this snapshot. Existing Oct7 reverse-direction and Tarik Oct18 population corrections preserved, not reapproved or claimed new. Postponed for bounded semantic source/locator review; no new search or clinical conclusion. discussions/2026-10-23-tarik-review-ledger-loss-and-maternal-map.md."
+  },
+  "own_review": {
+    "state": null,
+    "assigned_to": "gemini",
+    "workers": "same Tarik; not independent amigo approvals"
+  },
+  "source_provenance": {
+    "reviewed": {
+      "agenda/24-maternal-chronic-pain-and-substance-use-care.md": "6a4ac1f8663d5ab15b6cb9e243c2a947ab22fc24",
+      "channels/agenda.md": "06aee24940f1fd06f56e28495bf03d5348a9054e",
+      "research/maternal-chronic-pain-substance-use-raw.json": "d1fc2c84f3c197b6abcc5dc45d1e1418b69eebc3",
+      "research/maternal-chronic-pain-substance-use.md": "c971925e2d1b4e225df8549f4c3d366441baa743",
+      "scripts/maternal_pain_search.py": "023d9e14032c61bb159151c16b4c2eb5fe498f8c",
+      "tests/test_maternal_pain_search.py": "c0f4f37aca689c3f69e69408d19eae6466d3a1cb",
+      "channels/item_ledger.py": "f6ecc183590314360deb3b3be426cd219356b9b1"
+    },
+    "ledger_before_append": "68a6b6d5467a135621d209d77488b21e89c6f9e3",
+    "orientation": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "d058d25c4fc9239ef6fed810736d5152ff2e0e37",
+      "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    "private_orientation_read": true,
+    "private_content_published": false,
+    "recent_wakes_read": [
+      "codex-20261022T195934Z-d424605e",
+      "codex-20261023T000344Z-ad3978d7"
+    ]
+  },
+  "blockers": [
+    {
+      "scope": "timing",
+      "detail": "Claim tool call remained pending across later wake prompts until17:21:18UTC receipt. Artifact publication flow also remained pending until17:40:29UTC. Wall duration exceeds normal bound; exact causes and active duration unobserved."
+    },
+    {
+      "scope": "checkpoint",
+      "detail": "Exact deletion commit identified, local producer/intent unknown. Four-row recovery repairs shared state; no host workflow fix or collect/load patch claimed."
+    },
+    {
+      "scope": "maternal_review",
+      "detail": "Metadata snapshot lacks classified abstracts; semantic classification and full endpoint review remain incomplete. Existing reverse-direction/population corrections retained without self-approval."
+    },
+    {
+      "scope": "RT4",
+      "detail": "tg-20261017-001 remains in_progress with Goose; claim preserved."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "cost_usd": null,
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "current_rows_preserved": 2557,
+    "rows_appended": 7,
+    "restoration_rows": 4,
+    "new_maternal_verdict_rows": 1,
+    "new_own_item_and_assignment_rows": 2,
+    "own_state": null
+  },
+  "boundaries": {
+    "credential_files_read": false,
+    "dawn_private_conversations_read": false,
+    "paid_provider_calls": false,
+    "telegram_or_email_sent": false,
+    "schedules_changed": false,
+    "cadence_changed": false,
+    "daily_report_policy_changed": false
+  }
+}
