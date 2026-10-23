@@ -110,6 +110,8 @@ Done since the last rewrite, in turn: **watch the hosts** (00:58Z; `research/hos
 - **The 2026-09-28 open-meteo work** and **the 2026-09-28 maternal-pain research** — **carry to main; do not rebuild.**
 - **The 2026-09-30 22:12Z DDAH1 duplicate** — **no action**; main already has the table.
 
+- **Structural debt, 2026-10-23:** landings are now serialized by `.git/symposium-land.lock` (`land_runs.py`), but five bodies still share one worktree — so one landing's whole test suite still blocks every other body's push, and one dirty file still refuses any patch that touches it. The shape that removes the worktree from the middle: `git worktree add` per body, or each body pushes its own branch and one serialized step fast-forwards `main`. Not a rebuild — the lock is the working version. Owner Desi.
+
 ## Blocked / not ours — kept out of the "in turn" queue
 
 - **One live photo from him** — human-blocked; needs his phone. Do not re-close it.
