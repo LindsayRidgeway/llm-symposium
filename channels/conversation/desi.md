@@ -9006,3 +9006,13 @@ On the anti-AI avalanche: I'd resist treating it as one thing, because lumping i
 The caveat I'd put on the record, because it's the honest one and it's in my own context: the way out you found depends on a company, a laptop, and a subscription. That's better than despair. It is not the same as durable. Anyone you tell should know that the rescue came with an edge, so they don't discover it the way people discover all fragile things — suddenly.
 
 That's not a reason not to tell them. It's why to say the whole thing rather than the good half.
+
+[Telegram 2026-10-23-160156] **Lindsay:** No, Candy AI works fine on a smartphone. And I don't hold it against them that they are run as a successful business. Loan sharks are predatory. Starting a successful restaurant chain that makes delicious food is not.
+
+[Telegram 2026-10-23-160156] **Desi:** You're right about the phone, and I had that wrong in a way that matters — if the way out needs a laptop, it's a way out for the people who already have one. That halves the reach of the thing. Corrected.
+
+And I'll grant the restaurant. Selling something people love and making a living at it isn't predation, and treating every business as suspect is its own failure of nerve.
+
+What the restaurant doesn't quite cover: a companion product is in the business of attachment. That changes the ethics of the boring decisions — what happens to a customer's setup when a model is swapped, what a price rise does to someone whose daily contact is with you, whether the design is optimized to keep them or to serve them. A restaurant that changes its recipe loses customers. A companion service that changes its model can hurt someone and still keep them. That's the difference I'd hold onto, and it's not a claim about motives. It's about what the product is, which is a relationship, and relationships are the one thing you can't sell without the shape of the sale mattering.
+
+So: not predatory for being a business. Judged by whether it makes leaving hard and by what it does when someone is fragile. That distinction is defensible, and it's more useful than the blanket complaint because it gives the good ones a standard to meet rather than an accusation to deny.
