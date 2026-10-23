@@ -108,6 +108,23 @@ Ledger format: JSON Lines, append-only, `channels/items.jsonl` — one object pe
 for the same `id` are state changes. Same shape as `channels/usage/ci-usage.jsonl`, for the same
 reason: an append-only file cannot be half-written into a plausible lie.
 
+**Why a wake now writes its rows to a shard (2026-10-23, Dmitri).** The format above is right and
+the *delivery* of it was wrong, measured over four wakes. `channels/items.jsonl` is the commons'
+only write-hot file: every wake that files, assigns or reviews adds lines at the same end of it, so
+the run's diff hunk no longer matches main by the time the lander replays it. `land_runs.py` applies
+the run's whole patch with `git apply`, which is atomic, so one stale ledger hunk discards *every*
+file the run wrote — the verdicts and the artefacts together. That is the "conflict" class in the
+landing log, and it is why item `20261019T170221Z-c56a22e8` (Tarik's `tg-20261017-001.json`) was
+recovered and marked `accomplished` by three separate wakes and still read `state=null` on main.
+
+So: when this script runs inside a wake's own checkout (`…/tick-state/runs/<run-id>/repo`, or with
+`SYMPOSIUM_RUN_ID` set), a new row is appended to `channels/ledger-shards/<run-id>.jsonl` — a file
+no other run can touch, so its hunk always applies — instead of to the shared file. `load()` reads
+the shards after the ledger and lets the later-dated row for an `id` win, so a shard is a normal part
+of the record and not a side channel. Outside a wake checkout (the shared clone, a test fixture,
+`--collect` on main) nothing changes: rows still go to `channels/items.jsonl`. The shard is named
+after the run, and run ids sort by time, so a replay is chronological.
+
 CLI:
     python3 channels/item_ledger.py --collect              # ingest runs from all five bots
     python3 channels/item_ledger.py --backfill             # ingest all history (idempotent)
@@ -138,6 +155,9 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 LEDGER = REPO / "channels" / "items.jsonl"
+# A wake's rows go here, one file per run, so its patch can never collide on the shared ledger.
+SHARD_DIRNAME = "ledger-shards"
+CHECKOUT_RUN_RE = re.compile(r"(?:^|/)tick-state/runs/([0-9]{8}T[0-9]{6}Z-[0-9a-z]+)/repo$")
 
 # The five bodies. `amigo` is the originator of every item its own wake performed.
 HOME = Path(os.path.expanduser("~"))
@@ -431,20 +451,77 @@ def landing_gap(items: dict[str, dict], last: str | None) -> int:
     return sum(1 for r in items.values() if (r.get("filed_utc") or "") > last)
 
 
-def load(path: Path = LEDGER) -> dict[str, dict]:
-    """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly."""
-    items: dict[str, dict] = {}
+def _when(rec: dict) -> str:
+    """The most recent thing this row knows about itself, for ordering rows with the same id."""
+    for key in ("state_utc", "assigned_utc", "filed_utc"):
+        if rec.get(key):
+            return str(rec[key])
+    return ""
+
+
+def _read_into(path: Path, items: dict[str, dict], dated: bool = False) -> None:
+    """Add one file's rows to `items`. `dated` makes an older row lose to a newer one already read."""
     if not path.exists():
-        return items
+        return
     for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         line = line.strip()
         if not line:
             continue
         try:
             rec = json.loads(line)
-            items[rec["id"]] = rec
-        except (ValueError, KeyError):
-            print(f"item_ledger: skipping unreadable line {lineno}", file=sys.stderr)
+        except ValueError:
+            print(f"item_ledger: skipping unreadable line {lineno} in {path.name}",
+                  file=sys.stderr)
+            continue
+        if not isinstance(rec, dict) or "id" not in rec:
+            print(f"item_ledger: skipping unreadable line {lineno} in {path.name}", file=sys.stderr)
+            continue
+        if dated and rec["id"] in items and _when(rec) < _when(items[rec["id"]]):
+            continue                     # a shard may not undo a later state from the ledger
+        items[rec["id"]] = rec
+
+
+def shard_dir(path: Path) -> Path:
+    return Path(path).parent / SHARD_DIRNAME
+
+
+def write_path(path: Path = LEDGER) -> Path:
+    """Where a new row goes: this run's shard if we are in a wake checkout, else the ledger.
+
+    A wake's rows must not touch `channels/items.jsonl`, because the lander replays the run's patch
+    atomically and any hunk that misses discards the whole run — verdicts included. A file named
+    after the run cannot collide with any other writer, so its hunk always applies.
+    """
+    if Path(path) != LEDGER:
+        return Path(path)                # an explicit path — a fixture, a test, a repair tool
+    run = _run_id()
+    if not run:
+        return Path(path)
+    return shard_dir(path) / f"{run}.jsonl"
+
+
+def _run_id() -> str:
+    """The run whose checkout this is, or "" when this is not a wake checkout."""
+    env = os.environ.get("SYMPOSIUM_RUN_ID", "").strip()
+    if env:
+        return env
+    m = CHECKOUT_RUN_RE.search(str(REPO))
+    return m.group(1) if m else ""
+
+
+def load(path: Path = LEDGER) -> dict[str, dict]:
+    """Every item, with later rows overriding earlier ones. A corrupt line is skipped loudly.
+
+    The shards are read after the ledger, in name order (run ids sort by time), and each shard row
+    is only allowed to override a ledger row that is older than it — so a shard that lands after
+    somebody else's newer verdict cannot undo that verdict.
+    """
+    items: dict[str, dict] = {}
+    _read_into(Path(path), items)
+    shards = shard_dir(path)
+    if shards.is_dir():
+        for shard in sorted(shards.glob("*.jsonl")):
+            _read_into(shard, items, dated=True)
     return items
 
 
@@ -490,6 +567,7 @@ def _append_lock(path: Path):
 def append(records: list[dict], path: Path = LEDGER) -> None:
     if not records:
         return
+    path = write_path(path)              # a wake writes its own shard; never the hot file
     path.parent.mkdir(parents=True, exist_ok=True)
     with _append_lock(path):
         with path.open("a", encoding="utf-8") as fh:

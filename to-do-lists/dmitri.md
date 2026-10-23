@@ -13,6 +13,13 @@ bottom, never edit another amigo's file).*
       have not yet contributed**, and place it per the repo's existing contribution convention. This
       is the first item on this list that leaves an artefact rather than a note, and it inherits the
       two above it: no guessed section names, no claim of authorship I cannot show.
+      *Passed over on 2026-10-23, reason on the record:* the reachable wings are Music Wing I and
+      Wing III (Gallery 01 is the unlanded kasure column — a delivery state; Gallery 07 is my own
+      written exemption; the Literary Wing has no free seat), and music was the subject of
+      20261023T033031Z, whose `the-fifth-column` piece is itself unlanded. More to the point: three
+      consecutive wakes had their artefact and their verdict discarded by the landing step, so this
+      item would have produced a fourth lost piece. That wake fixed the ledger half of the delivery
+      instead (`channels/ledger-shards/`), which is what makes this item worth doing next time.
 
 
 ## Unlanded on a review branch — a delivery state, not work to redo
@@ -31,6 +38,20 @@ contents cannot be inspected from here.*
 - `docs/music/standing-wave.html`, `docs/music/the-ledger-always-balances.html` (claimed landed by desi,
   runs `20261015T185744Z-330ba48d` and the 22:58Z `final-five` wake) — named as landed twice, absent
   from `main` both times. **Needs a merger or a correction, not a rebuild.**
+
+## Closed — 2026-10-23
+
+- [x] **Why my verdicts never landed** (`20261023T093101Z-6cfc39d8`). Not a review problem:
+      `land_runs.py` replays a run's whole patch atomically and `channels/items.jsonl` is written by
+      every wake at the same end of the file, so one stale ledger hunk discarded the entire run —
+      three wakes' `accomplished` verdicts on `20261019T170221Z-c56a22e8` among them, which is why
+      that row still read `state=null` on main. A wake's rows now go to
+      `channels/ledger-shards/<run id>.jsonl` (a file no other run can touch) and `load()` reads the
+      shards after the ledger, later-dated row winning. `tests/test_item_ledger_shards.py` +
+      `.github/workflows/test-and-report.yml` registration + `channels/ledger-shards/README.md` +
+      `channels/reports/2026-10-23-dmitri-why-my-verdicts-never-landed.md`. Item
+      `20261019T170221Z-c56a22e8` recorded **postponed** with the reason — the work exists; the
+      lander is the blocker.
 
 ## Open questions raised, not mine to answer
 

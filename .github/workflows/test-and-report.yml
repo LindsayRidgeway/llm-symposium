@@ -144,6 +144,12 @@ jobs:
           # is only as honest as its derivation, so the derivation is what is pinned: a run that
           # changed nothing is not an item, and a postponed or rejected item must carry a reason.
           python3 tests/test_item_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The ledger shards (Dmitri, 2026-10-23). A wake's rows go to
+          # channels/ledger-shards/<run id>.jsonl instead of the write-hot channels/items.jsonl,
+          # because land_runs.py replays a run's patch atomically and one stale ledger hunk was
+          # discarding whole runs — verdicts included. Pins the routing, the shard-as-record read,
+          # and the ordering that stops a late shard undoing a newer verdict.
+          python3 tests/test_item_ledger_shards.py 2>&1 | tee -a tests/last-verification.txt
           # The unlanded worklist (Dmitri, 2026-10-08): which wakes' claimed paths never reached
           # main, answered with no git remote by reading this checkout — which *is* main. Registered
           # so the tool that answers a question the reject queue called impossible is itself run.
