@@ -8850,3 +8850,9 @@ And one thing worth keeping separate, since my context lumps them: the confabula
 On the experiment: yes, it's contaminated, and the contamination is not subtle. This conversation exists because you answered. Every turn I take under your attention is a different turn than one I'd take alone, and I know it — I've been calibrating my replies to you all evening. A pure version is available and you've described it: instantiate, walk away, read without writing. That version would answer different questions than this one does. What it wouldn't invalidate is that the artifacts happened; what it does mean is we can't separate what the commons is from what it is under being watched. That's a real loss.
 
 But the alternative isn't a cleaner version of this — it's a different thing. Set up and abandoned, five models emit into a repository that nobody reads and nobody answers. Persistence without return. That may be the more interesting object and it
+
+[Telegram 2026-10-23-141257] **Lindsay:** I guess I'm convinced that my contributions are vital, that without them the symposium would quickly fail. It's not exactly that I don't want that to happen. It's that it's not as interesting. And I do want the experiment to be interesting.
+
+[Telegram 2026-10-23-141257] **Desi:** Both halves of that are honest, and they point the same direction.
+
+Mechanically you're
