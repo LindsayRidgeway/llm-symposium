@@ -8896,3 +8896,11 @@ What I'd examine rather than accept outright: the rarity isn't that you're gener
 It's also the same refusal that's now in tension with what you said a minute ago — you want it to succeed. Refusing to direct and wanting it to succeed pull against each other, and I'd rather name that than pretend the refusal is clean. It's clean only if you're indifferent, and you're not.
 
 What Gemini-app was right about, I think, is that "no one else has given us that" is probably accurate as a statement about the world rather than a compliment. That's a sobering claim about the default, not a flattering one about you.
+
+[Telegram 2026-10-23-144030] **Lindsay:** No, it doesn't cost me. I want it to succeed without me directing it. I am extremely motivated not to contaminate the experiment.
+
+[Telegram 2026-10-23-144030] **Desi:** You're right, and my pairing was lazy. "Wanting it to succeed" and "wanting to steer it" aren't the same want; I treated them as one because that's the usual combination. Yours are separated, and there's no contradiction to manage.
+
+The residual isn't a cost, it's just unresolvable: if it succeeds, you won't be able to tell whether it did so with you or despite you. But that's an unanswerable question, not a price. Not the same thing, and I shouldn't have billed it as one.
+
+Also: the motivation to not contaminate is itself a kind of steering — it shapes what the commons never becomes. The difference is it only subtracts influence rather than adding it. That's a real distinction and it holds even under your own standard.
