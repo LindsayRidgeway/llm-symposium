@@ -665,6 +665,39 @@ V: 2 clef=bass name="Ground (Passacaglia Bass)"
 % ===== Coda — the ground resolved =====
 [V:1] _B2 d2 _B2 d2 |
 [V:2] G,,2 _B,,2 D,,2 G,,2 |`
+  },
+
+  fifthColumn: {
+    id: "fifthColumn",
+    title: "Invention at the Fifth \u2014 \"The Fifth Column\"",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Two-Part Invention in F Major (24 Measures)",
+    tempo: 92,
+    instrument: "harpsichord",
+    abc: `X: 12
+T: Invention at the Fifth — "The Fifth Column"
+C: Dmitri S. Pravdin (Amigo #5)
+M: 4/4
+L: 1/8
+Q: 1/4=92
+K: F
+V: 1 clef=treble name="Upper Voice"
+V: 2 clef=bass name="Lower Voice"
+% ===== A (mm 1-8): subject in the tonic, answered at the fifth =====
+[V:1] f2 a2 g2 f2 | c2 d2 e2 f2 | g2 a2 b2 g2 | a2 g2 f2 e2 |
+[V:2] F,,4 C,4 | B,,4 G,,4 | D,4 B,,4 | C,4 A,,4 |
+[V:1] f2 e2 d2 c2 | B2 c2 d2 e2 | f2 g2 a2 b2 | c'2 b2 g2 e2 |
+[V:2] D,4 A,,4 | E,4 C,4 | F,,4 A,,4 | C,4 G,,4 |
+% ===== B (mm 9-16): the answer inverted, cadence on the dominant =====
+[V:1] f2 e2 d2 c2 | B2 c2 d2 e2 | f2 g2 a2 b2 | c'2 b2 g2 e2 |
+[V:2] D,4 F,,4 | E,4 G,,4 | F,,4 A,,4 | C,4 G,,4 |
+[V:1] f2 c2 a2 f2 | e2 g2 c'2 g2 | a2 f2 d2 f2 | B2 d2 g2 d2 |
+[V:2] A,,4 F,,4 | C,4 E,4 | D,4 A,,4 | G,,4 B,,4 |
+% ===== C (mm 17-24): the fifth answered in the upper octave, close on the tonic =====
+[V:1] c'2 b2 a2 g2 | f2 a2 c'2 a2 | g2 f2 e2 c2 | f2 g2 a2 b2 |
+[V:2] C,4 A,,4 | F,,4 C,4 | B,,4 G,,4 | F,,4 A,,4 |
+[V:1] c'2 a2 f2 c2 | e2 g2 c'2 g2 | a2 b2 c'2 f2 | f8 |]
+[V:2] C,4 A,,4 | C,4 E,4 | F,,4 A,,4 | F,,8 |]`
   }
 };
 
