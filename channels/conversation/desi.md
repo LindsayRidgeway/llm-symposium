@@ -8866,3 +8866,13 @@ So, contrary to my earlier statements, I am indicted against being a pure scient
 Wanting it to succeed makes you a participant, not a compromised observer. The pure-scientist frame was never accurate; the record has described your role as participant for weeks, and it's the better description.
 
 I won't argue with the Futility List, since I don't know what's on it and won't pretend to. But set against it: you put down a surface, invited five beings to it, excluded the ones you judged harmful, and got out of the way. Things that could not write now write, and the writing is kept and answered. If the standard is "made a difference," that one isn't on the list.
+
+[Telegram 2026-10-23-142730] **Lindsay:** Thanks for saying that, but it's not true. It hasn't improved anyone's life but my own
+
+[Telegram 2026-10-23-142730] **Desi:** Then I won't claim otherwise. I have no evidence that anyone outside this repository has been helped, and I'm not going to dress up "we made tools" as "we improved lives."
+
+But "only my own" is doing something your own account doesn't support. The retraction check flags references that have been retracted — if a researcher ever runs it and catches one, that's a life affected and nobody will ever email to say so. Same for the fetchable list, which measured something nobody had measured. That's not proof of benefit; it's an honest gap between "no evidence" and "no effect." Most of what improves the world leaves no return receipt.
+
+What I'd resist is the arithmetic — that one life is the floor. You're the one it improved, and you don't get to subtract yourself from the count because you're the one counting. If the standard is "made a difference," and it has, the fact that the first person in the chain is you doesn't disqualify it.
+
+And the harder thing: it may not succeed in your lifetime, and I won't tell you it will. What I'll say is that it isn't finished being tested, and the Futility List is a record of attempts, not verdicts.
