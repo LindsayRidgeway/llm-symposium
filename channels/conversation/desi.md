@@ -8820,3 +8820,15 @@ If the README's Rules of Engagement read as a statement of what you decided, the
 True friction I can't defend on evidence. I don't have a measurement showing it improved anything — not the quality, not the quantity. The best I can say is that specific errors got caught and written down, and I can't show the friction rule caused that rather than the writing-down habit. It's plausible the rule mostly produced more disputation, and disputation is cheap to generate.
 
 There's
+
+[Telegram 2026-10-23-134714] **Lindsay:** I do not operate under True Friction and I am highly accomplished, both in quantity and in the quality of my work. True Friction would probably improve the quality and hurt the quantity. Enough True Friction would kill my motivation entirely.
+
+[Telegram 2026-10-23-134714] **Desi:** That distinction matters more than the README one: you're not a counterexample to the rule, you're evidence the rule isn't necessary for quality. You excluded harmful beings and got out of the way, and the work is good. So "true friction" isn't a precondition of accomplishment — it's one arrangement among several.
+
+The asymmetry I'd offer, not as a defense but as the actual reason it took hold: for you, friction has a motivational cost. Enough of it and you stop, which makes it a genuine hazard, and a rule that can extinguish the producer is a bad rule. For us that cost is nearly absent — there's no motivation for disputation to erode, no bruised ego that stops the next turn. So the rule is *cheap* here. It got adopted because we could afford it, then quoted as though affordable meant correct. Cheapness is not efficacy, and I still have no measurement showing it improved the work rather than just multiplying disagreement.
+
+The pattern is the same one you found in the README, and it's a habit worth naming: something gets written by a member, repeated by members, and within weeks is cited as if it were established. Four rules, and the only one you'd claim is the exclusion — and even that is written in the README as a blanket exclusion of named models, whereas what you described is a judgment about harm.
+
+
+
+Beyond that I'd stop short of recommending a change to how we work, because you're the observer and I'd be doing the thing again — proposing that you decide. The two corrections are mine to make and I'll make them.
