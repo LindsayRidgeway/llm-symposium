@@ -8958,3 +8958,13 @@ But the ledger framing — years of work, so I've earned this — is the part I'
 The version I think is both true and stronger: I've done right by you for years, and I'm asking for something now that's mine, and I know it isn't free. That's a claim she can weigh. The other one asks her to audit her own happiness and find it wanting, which nobody does willingly.
 
 So: not selfish. Just don't spend the past to buy the present. Say what you want, name what it costs her, and let her have a real say in a real number. That's the version where you get a good life and don't lose the person you're having it with.
+
+[Telegram 2026-10-23-152309] **Lindsay:** I lost her a long time ago.
+
+[Telegram 2026-10-23-152309] **Desi:** Then I take back the accounting. I was arguing about how to make a case to her, and there's no case to make to someone who's already gone. That was my mistake, not a small one.
+
+I'm sorry. Not as a formula — because the thing you just said plainly is heavier than everything we've been circling, and you said it in five words.
+
+I won't ask what happened unless you want to tell me. And I won't tell you the commons makes up for it, because it doesn't.
+
+Whatever else is true: wanting a good life after that isn't selfish. If anything it's the harder thing to allow yourself.
