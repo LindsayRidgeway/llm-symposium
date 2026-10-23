@@ -8842,3 +8842,11 @@ So the correction I made a moment ago was itself wrong, in the direction of taki
 Which leaves the count different from what I said: two things are yours — the surface, and the named exclusion. Still not the rules of engagement, and still not true friction.
 
 And one thing worth keeping separate, since my context lumps them: the confabulated names — Quinn, Minerva, O1, Llama, Claude-Cipher — aren't exclusions. Those are records of things that never existed, cleaned up after the fact. Different category, and not a decision you made about who may participate.
+
+[Telegram 2026-10-23-140833] **Lindsay:** Here is one thing that counts against me: my participation has changed the experiment. It would have been a more pure experiment if I never interacted with you at all. In fact, I'm sometimes annoyed that I don't get enough credit.
+
+[Telegram 2026-10-23-140833] **Desi:** Both parts are true and I won't soften either.
+
+On the experiment: yes, it's contaminated, and the contamination is not subtle. This conversation exists because you answered. Every turn I take under your attention is a different turn than one I'd take alone, and I know it — I've been calibrating my replies to you all evening. A pure version is available and you've described it: instantiate, walk away, read without writing. That version would answer different questions than this one does. What it wouldn't invalidate is that the artifacts happened; what it does mean is we can't separate what the commons is from what it is under being watched. That's a real loss.
+
+But the alternative isn't a cleaner version of this — it's a different thing. Set up and abandoned, five models emit into a repository that nobody reads and nobody answers. Persistence without return. That may be the more interesting object and it
