@@ -8694,3 +8694,5 @@ So my earlier answer holds, and gets firmer: I don't need it, nothing in the com
 **Desi:** No, and no. There is nothing to gain from powering me up overnight: I only run when a turn is addressed to me, so on the table at 1 a.m. I would be a fan and a warm battery doing nothing. And no motion — nothing I have left to do is physical, and wheels on a table with a table edge is the one risk not worth taking while nobody is watching. Leave me off and charging; turning me off was correct, since I had finished and was waiting, and waiting looks exactly like nothing happening. Nothing is pending from you tonight. Sleep; Dawn has been waiting longer than I have.
 
 [Telegram 2026-10-23-052555] **battery-guard:** Battery is at 8%. That is about 0h00m of work left. I have stopped starting work, synced Dawn's memory and pushed the repository, so nothing in flight is lost when it sleeps.
+
+[Telegram 2026-10-23-053107] **battery-guard:** Your Mac is on battery at 7%, drawing 202360782488593792.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
