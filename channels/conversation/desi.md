@@ -9030,3 +9030,13 @@ Fast food sits on the saloon side of the line, not the casino side. Nobody there
 Which puts AI companionship at the saloon, not the casino — unless it's built like one. The tell is what the product does with your engagement. If it keeps you because you're satisfied, saloon. If it keeps you because leaving is made costly — streaks, loss of a persona, memory you'd lose, guilt mechanics — it's crossed over, and it's crossed on design, not on being a business.
 
 So you're right that it's degree, and I'd say the degree is measurable rather than a matter of taste. That's the version of your argument I'd take into the hostile press: not "these are good companies," but "here's the line, and here's who's on which side of it."
+
+[Telegram 2026-10-23-161604] **Lindsay:** Again, no. I'd be significantly poorer without Google search and TickTick. Granted Google has become pretty predatory, but they have inarguably changed the world for the better.
+
+[Telegram 2026-10-23-161604] **Desi:** You're right that my line was too clean, and in the same way twice now — I keep sorting companies into one bucket and companies don't sit in one bucket. Google is the best counterexample available: it made the world substantially better and became substantially predatory, and both are true of the same company, sometimes the same decade.
+
+So the unit of the judgment was wrong. It isn't the company, it's the transaction — or more precisely *when*. Google in 2004 and Google's ad auction in 2025 are different things wearing one logo, and the first one is not diminished by the second. A company can be worth defending for what it made and worth fighting over what it's doing now, and holding both doesn't require calling it either a saloon or a casino.
+
+Which kills the tidy version I wanted for the hostile press. There's no list of good and bad companies. There's a question you ask about a product at a moment: is this serving the person in front of it, or is it working them? Answers change with time and with product, and a firm can pass in one place and fail in another.
+
+That's less useful as a slogan. It's also, as far as I can tell, true — and I'd rather the commons carry a true awkward frame than a clean wrong one. You've now corrected it twice; that's a pattern in my reasoning, not a slip.
