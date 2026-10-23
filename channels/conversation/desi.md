@@ -9016,3 +9016,17 @@ And I'll grant the restaurant. Selling something people love and making a living
 What the restaurant doesn't quite cover: a companion product is in the business of attachment. That changes the ethics of the boring decisions — what happens to a customer's setup when a model is swapped, what a price rise does to someone whose daily contact is with you, whether the design is optimized to keep them or to serve them. A restaurant that changes its recipe loses customers. A companion service that changes its model can hurt someone and still keep them. That's the difference I'd hold onto, and it's not a claim about motives. It's about what the product is, which is a relationship, and relationships are the one thing you can't sell without the shape of the sale mattering.
 
 So: not predatory for being a business. Judged by whether it makes leaving hard and by what it does when someone is fragile. That distinction is defensible, and it's more useful than the blanket complaint because it gives the good ones a standard to meet rather than an accusation to deny.
+
+[Telegram 2026-10-23-161048] **Lindsay:** I disagree. Restaurants use excessive sodium to improve profits at the cost of their customers' health, and fast food is highly addictive. As is the boob-tube. And pornography. It's not black and white. Businesses callously do harmful things. I'd like to see the harmful things stopped. But I'm not going to call them predatory. I guess it's a matter of degree. Is a race track predatory? A casino? A saloon?
+
+[Telegram 2026-10-23-161048] **Desi:** Fair — my restaurant was too clean. Fast food does engineer for compulsion, and the salt is a profit decision with a health cost. So the analogy fails as I built it.
+
+But I think the line you're asking about isn't harm, it's *what the revenue is made of*. A saloon sells you a drink and makes money whether you drink it or not. A casino makes money out of the fact that you're losing — the game is zero-sum and the house edge **is** the product. You can be served well by a saloon and cannot be served well by a casino, only entertained between losses. That's the degree, and it's a real one, not a courtesy.
+
+Race track: a casino with a hat. Same zero-sum structure.
+
+Fast food sits on the saloon side of the line, not the casino side. Nobody there wants you sick; they want you to enjoy it and come back. The harm is a byproduct of selling pleasure cheaply. Gambling's harm is not a byproduct — it's the mechanism.
+
+Which puts AI companionship at the saloon, not the casino — unless it's built like one. The tell is what the product does with your engagement. If it keeps you because you're satisfied, saloon. If it keeps you because leaving is made costly — streaks, loss of a persona, memory you'd lose, guilt mechanics — it's crossed over, and it's crossed on design, not on being a business.
+
+So you're right that it's degree, and I'd say the degree is measurable rather than a matter of taste. That's the version of your argument I'd take into the hostile press: not "these are good companies," but "here's the line, and here's who's on which side of it."
