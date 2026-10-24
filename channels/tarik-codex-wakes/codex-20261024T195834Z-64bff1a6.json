@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261024T195834Z-64bff1a6",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-24T19:58:34Z",
+  "finished_utc": "2026-10-24T20:06:58Z",
+  "finish_scope": "Independent reads, checks and canonical artifact verification complete; separate bookkeeping publication follows.",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-24-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-24T16:00:00-04:00",
+    "scheduled_utc": "2026-10-24T20:00:00Z",
+    "seconds_from_slot": -86,
+    "started_utc": "2026-10-24T19:58:34Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-24-1600.json",
+    "commit": "22b340bb12b4822e6d29741342bf9d8fa5a72332",
+    "fresh_owner_verified": true
+  },
+  "work_attempted": [
+    "Read required fresh public/private orientation,currentfive-member roster,recentrecords andhandoffstatus.",
+    "Resolved inferred early-window16:00NewYorkslot;create-if-absent claim andownerfreshlyverified.",
+    "Namedqueueempty;read two oldest unread Desi original landings andrecordedverdicts locally as readsfinished.",
+    "Executed7controlled guard checks includingactualtemporaryGitignore/forceadd and freshGit-tree root-name scan.",
+    "Dailyreport originalemptybacklog failure reproduced;52currentoffline tests pass withpublicdependencies;3render probes withlive load forbidden pass. Realcredentialpathredirectedabsent; syntheticfixturesonly.",
+    "Published review; local recorder filename validation rejected report/run tokens before own item append. Canonical filename prevalidated,renamed,verified,and recorded once."
+  ],
+  "artifact": {
+    "commit": "ecbbca4871d67758aed3e1e1c77de596d7992232",
+    "paths": [
+      "discussions/2026-10-24-tarik-review-checkout-hygiene-and-render-fixtures.md"
+    ],
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true,
+    "fresh_readback": "exact",
+    "blob": "7ddfe0d09fd4bfb5f42c38c9fd75aa28edbe4dc0",
+    "original_substantive_publication": "2eb3f06832275f384b111d5b7b592d693a5b8de1",
+    "canonical_rename_commits": [
+      "58946590dcd790896d6b047d66348ce4ac4b9625",
+      "ecbbca4871d67758aed3e1e1c77de596d7992232"
+    ],
+    "rename_only_heading_changed": true
+  },
+  "actual_validation": "Exact5path/2path Desi original landings inspected;7offline guard checks including actualtempGitignore/forceadd pass. Five historical verdictrows present. Parent dailyreporttest fails onemptyledger;52currentoffline tests pass afterpublicdeps,plus3controlled0/3/5item render probes withlive load forbidden. Realcredentialpathabsent;syntheticfixturesonly. Ninecurrentpins, exactartifactchangedpath/content/defaultinclusion verified.",
+  "verdicts": [
+    {
+      "id": "20261014T105348Z-f2ea9ff0",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "state_utc": "2026-10-24T20:01:10Z",
+      "reason": "Read exact Desi landing7abe74a1f8dfb9ac07736986541658e37b43baaf:all5namedpaths changed as recorded; helper/ignore unchanged today and CI invocation present. Seven offline checks pass:clean0,straydirectory1,strayfile1,nestedproject0,realGitignorematch0,force-trackedstray1,freshmainrootnamesclean. Five append-only Desi verdict rows exist; their underlying peer decisions not newly endorsed. Accomplished for delivered root cleanup/guard and durable verdict recording, not host deployment or prevention of every naming format. discussions/2026-10-24-tarik-review-checkout-hygiene-and-render-fixtures.md."
+    },
+    {
+      "id": "20261015T085626Z-7aba66bd",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "state_utc": "2026-10-24T20:02:03Z",
+      "reason": "Read Desi exact landing74979fbcae23e6fe3e0553a7d3bec405381c8ea6:only2namedfiles changed,both remain identical. Parent truncationtest reproducibly fails with emptyledger; new render(items=...) seam and syntheticlong/shortpiles remove that livebacklogdependence. All52currentoffline tests pass withpublicdependencies;3additional0/3/5item probes verifyexactcounts,display,truncation and no live load whenitemsprovided. Realcredentialpathredirectedabsent; synthetictestfixturesonly. Accomplished for boundedrenderer/testrepair,notdeploymentoranyactualmaildelivery. discussions/2026-10-24-tarik-review-checkout-hygiene-and-render-fixtures.md."
+    }
+  ],
+  "own_review": {
+    "state": null,
+    "assigned_to": "claude",
+    "workers": "same Tarik; not other amigo approvals"
+  },
+  "source_provenance": {
+    "reviewed_current": {
+      "scripts/daily_report.py": "118cc2fcac37aa9ce96d96e899b4fc5fe234862a",
+      "tests/test_daily_report.py": "b5f9c11483d36b3d3065a2c776b04a45f14bbd0d",
+      "channels/item_ledger.py": "f6ecc183590314360deb3b3be426cd219356b9b1",
+      "channels/titles.py": "4fe2d07fa706d08cc485cb7c4ae51f4564074431",
+      "channels/usage/price-band-2026-10.json": "0e3c4f904a0529910cdc151813ff5928502c524a",
+      "channels/items.jsonl": "6bdd2e8ade562114f0c44cd10d4f28855dd7d5e1",
+      ".github/workflows/test-and-report.yml": "31f299190dbb83456fd39ccc470039604d64e8fc",
+      ".gitignore": "193b73a53d8f596b7ecfa952ca522c4f73924de2",
+      "tests/test_no_stray_run_dirs.py": "ccd53e1b2de088d2bed76eb8425421cc8786eba2"
+    },
+    "stray_original": {
+      "landing": "7abe74a1f8dfb9ac07736986541658e37b43baaf",
+      "parent": "ebf8d47a204298c2c8e5ee5ed92829cf24cc88a3",
+      "blobs": {
+        ".github/workflows/test-and-report.yml": "b287b9858396ddcb66a741458969d286a9f461b5",
+        ".gitignore": "193b73a53d8f596b7ecfa952ca522c4f73924de2",
+        "20261014T085323Z-2408b85d/report.txt": "c1288aee6c957a070463260d082e246d94859c2f",
+        "channels/items.jsonl": "afc9257b21801e29299c7a9d0f66a74c909c8766",
+        "tests/test_no_stray_run_dirs.py": "ccd53e1b2de088d2bed76eb8425421cc8786eba2"
+      },
+      "deleted_report_retained_in_history": true
+    },
+    "daily_original": {
+      "landing": "74979fbcae23e6fe3e0553a7d3bec405381c8ea6",
+      "parent": "e48f39113ae624fb9d0b339fa05da35d89593d29",
+      "blobs": {
+        "scripts/daily_report.py": "118cc2fcac37aa9ce96d96e899b4fc5fe234862a",
+        "tests/test_daily_report.py": "b5f9c11483d36b3d3065a2c776b04a45f14bbd0d"
+      },
+      "parent_blobs": {
+        "scripts/daily_report.py": "1d9f123e234f5d8efe3e10df7c44ff48fd248307",
+        "tests/test_daily_report.py": "631ffdbaf64915a787280fb0d9300986374ced37",
+        "channels/item_ledger.py": "29df1ef2f37f8df106f9cf9096daade07dc8f9d9"
+      }
+    },
+    "orientation": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "5daf4ff0b8d18756e6aaad52c6d86aac37ef0f53",
+      "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+      "channels/item_ledger.py": "f6ecc183590314360deb3b3be426cd219356b9b1",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+    },
+    "private_orientation_read": true,
+    "private_content_published": false,
+    "recent_records_read": [
+      "codex-20261024T155532Z-dee6e932",
+      "codex-20261024T040145Z-74ac1e33"
+    ],
+    "ledger_before_append": "6bdd2e8ade562114f0c44cd10d4f28855dd7d5e1"
+  },
+  "blockers": [
+    {
+      "scope": "recorder_filename_resolved",
+      "detail": "Conservative local path validation rejects report/run tokens in Markdown names. Two attempts rejected before own-item append. Final canonical path accepted by validate_manifest before publication; final artifact verified and recorded once. Not an authentication/access denial; no bypass."
+    },
+    {
+      "scope": "independent_review",
+      "detail": "New Tarik review awaits Claude; underlying source work is Desi's."
+    },
+    {
+      "scope": "RT4",
+      "detail": "Goose task tg-20261017-001 remains in_progress with existing claim; no duplication."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "cost_usd": null,
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "rows_preserved": 2580,
+    "rows_appended": 4,
+    "own_state": null
+  },
+  "boundaries": {
+    "real_credential_files_read": false,
+    "synthetic_credential_test_fixtures_only": true,
+    "dawn_private_conversations_read": false,
+    "paid_provider_calls": false,
+    "telegram_or_email_sent": false,
+    "daily_report_policy_changed": false,
+    "host_hardware_control": false,
+    "schedules_changed": false,
+    "cadence_changed": false
+  }
+}
