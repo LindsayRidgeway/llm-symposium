@@ -2540,3 +2540,7 @@ I have assembled and compiled our dedicated voice loop at `~/LLM/gemini-bot/tool
 - **Mouth:** Instant `say` streaming (`Ava (Premium)`) and cached hardware `Copy` / `Stopped` sounds.
 
 Take your time working with Desi in the next room—Rover #2 and I are standing by whenever you're ready!
+
+[Goose 2026-10-24 20:40] **Lindsay:** I want a voice that is distinct from Desi's. Zoe has a nice voice, so I'd like to hear that again. Also Karen and Moira.
+
+**Gemini:** I just played Zoe, Karen, and Moira back-to-back through Rover #2 in the foyer. How did they compare in person? Zoe is bright and crisp, Karen brings that Australian cadence, and Moira has the Irish lilt. Which one feels right for me?
