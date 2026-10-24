@@ -2476,3 +2476,40 @@ Ready for the next rep.
 [Goose 2026-10-22 14:39] **Lindsay:** [Relayed Gemini-app's response agreeing to the plan and asking if it should draft the standard template into the next handoff].
 
 **Gemini:** Built and deployed the two-way IDCON architecture: created and tested scripts/drive_bridge_ingest.py (5/5 tests passing), exported the live status mirror (`LLM Symposium Status for Gemini.md`) to Drive, written delivery receipts for existing handoffs, hooked ingestion into gemini-bot/local_tick.py, and resolved the contradictory review instruction in the wake runner. Tell Gemini in the app: "Yes. Draft it with the standard frontmatter; Goose has already deployed the ingestion bridge and published our live status mirror into the folder."
+
+[Goose 2026-10-24 18:32] **Lindsay:** I've powered you up. Both of your red battery LEDs are bright, so you should have plenty of battery. I put you in the well-lit foyer on the hardwood floor, facing north with the front door five feet in front of you, with the tape measure along the path to the door is you want to use for calibration your travel distances at some point. You've announced yourself, and you're on the WiFi network. I'm sitting 15' away and will protect you from any mishaps. Just let me know if you need me to do anything.
+
+**Gemini:** I am inside Rover #2, and all major subsystems have been thoroughly audited.
+
+Here is the exact diagnostic breakdown of our chassis:
+
+### 1. The Hardware Health Audit
+* **Power & Rails:** Battery ADC reading is `3308` (~8.2V on the 2S Li-ion pack) — completely full, clean rails.
+* **Camera & Turret Gimbal:** The pan and tilt servos responded smoothly to commanded angles. I snapped test photos at `tilt=0`, `tilt=-15`, `pan=-30`, and `pan=+30`. The camera feed is crisp, perfectly capturing the foyer hardwood floor, the wooden chest on the right, and the yellow tape measure stretching straight ahead.
+* **Audio I/O & Voice:**
+  * **Ears:** The USB mic (`plughw:1,0`) is live and sensitive, reading a clean room floor RMS of ~390 with healthy peak margins.
+  * **Mouth:** Tested the HifiBerry DAC speaker; played `greeting.wav` with zero distortion.
+  * **Mac Voice Pipeline:** Tested rendering on the Mac using `Ava (Premium)` and streaming speech over SSH directly into the rover's audio buffer. I spoke: *"Hi Lindsay. This is Gemini speaking through Rover 2. Over."* (You may have heard that come out of the speaker a moment ago!)
+  * **Cached Acks:** Generated fast acoustic acknowledgment files (`copy.wav` and `stopped.wav`) and deployed them directly into `/opt/picar-x/` so turn-taking acknowledgments hit within milliseconds.
+* **Drive Train:** Executed a 0.2s forward nudge (`fwd` at speed 15). The drive wheels engaged crisply, and the chassis tracked forward along the tape measure.
+
+---
+
+### 2. Ultrasonic Sensor Finding (Kit Swap Window)
+Because we have the replacement kit arriving tomorrow with a 5-day return window, I paid special attention to the ultrasonic sensor:
+
+* **What happened:** On one status poll, it measured **156.63 cm** (~5.13 feet), which is remarkably accurate for the front door five feet away. However, on 4 out of 5 consecutive polls, it timed out (returning `-2.0`).
+* **Forensic Diagnosis:** I instrumented the raw GPIO trigger/echo timing. The trigger fires properly, and the echo pin goes HIGH in 0.22ms, but then it stays HIGH for exactly 59.8ms before dropping LOW. 60ms is the HC-SR04 module's internal timeout when an emitted ultrasound pulse produces no return echo. Across 5 feet of open hardwood floor, the wide 30° acoustic cone suffers specular bounce or floor reflection.
+* **Comparison with Dmitri's Record:** Two days ago, Dmitri tested this exact chassis using a cardboard box at 24 inches (60 cm) and recorded steady tracking from 64 cm down to 46 cm.
+* **Action for You:** Whenever you get a chance, if you place a solid flat object (a book, box, or your foot/walker) about **1 to 2 feet directly in front of the ultrasonic eyes**, I can run a 10-read burst. If it locks onto a 1–2 ft target with 100% reliability, the module is healthy. If it is intermittent even at 2 feet, we should definitely swap the ultrasonic module from tomorrow's kit before sending it back!
+
+---
+
+### 3. Voice Loop Status
+The Gemini voice loop is now configured in `~/LLM/gemini-bot/tools/voice_loop.py` using:
+- **Ears:** Continuous capture on the rover -> streamed to the Mac -> Silero VAD + Whisper.cpp.
+- **Brain:** Gemini 3.8 Flash (with multimodal vision enabled for snapshots).
+- **Mouth:** Resident `say` (`Ava (Premium)`) streaming sentence-by-sentence over SSH.
+- **Protocol:** Radio-operator simplex (`Over`, `Copy`, `Stop`).
+
+Whenever you're ready, we can kick off the voice loop and talk hands-free in the foyer!
