@@ -543,10 +543,11 @@ class TestReconcilePaths(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def _row(self, rid, paths, state=None, assigned_to=None, reviewer=None, reason=None):
+    def _row(self, rid, paths, state=None, assigned_to=None, reviewer=None, reason=None,
+             assign_kind=None):
         return {"id": rid, "amigo": "desi", "scope": "internal", "title": "t",
                 "paths": paths, "state": state, "assigned_to": assigned_to,
-                "reviewer": reviewer, "reason": reason,
+                "reviewer": reviewer, "reason": reason, "assign_kind": assign_kind,
                 "filed_utc": "2026-10-06T00:00:00Z"}
 
     def test_every_path_present_is_accomplished(self):
@@ -594,6 +595,30 @@ class TestReconcilePaths(unittest.TestCase):
         il.append([self._row("20261010T000000Z-ffffffff", ["scripts/x.py"])], self.path)
         self.assertEqual(len(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri")), 1)
         self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri"), [])
+
+    def test_a_named_request_is_never_closed_by_presence(self):
+        """Tarik's written request names its subject; the subject being on main is the premise.
+
+        Measured 2026-10-21 (Desi): of 20 rows in W, 9 named only paths already present and 7 of
+        those were named requests. One pass would have stamped every one of them.
+        """
+        il.append([self._row("20261010T000000Z-11111111", ["scripts/x.py"], assigned_to="dmitri",
+                             assign_kind="name")], self.path)
+        skipped = []
+        self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri",
+                                            skipped=skipped), [])
+        self.assertEqual([r["id"] for r in skipped], ["20261010T000000Z-11111111"])
+        rec = il.load(self.path)["20261010T000000Z-11111111"]
+        self.assertIsNone(rec.get("state"))
+        self.assertEqual(il.letter_for(rec), "W")
+
+    def test_a_drawn_row_beside_a_named_one_still_closes(self):
+        il.append([self._row("20261010T000000Z-22222222", ["scripts/x.py"], assigned_to="dmitri"),
+                   self._row("20261010T000000Z-33333333", ["scripts/x.py"], assigned_to="dmitri",
+                             assign_kind="name")], self.path)
+        made = il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri")
+        self.assertEqual([r["id"] for r in made], ["20261010T000000Z-22222222"])
+        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-33333333"]), "W")
 
 
 class TestAssignment(unittest.TestCase):

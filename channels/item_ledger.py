@@ -586,7 +586,8 @@ def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | 
 
 
 def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
-                    scope: str = "", postpone_absent: bool = False) -> list[dict]:
+                    scope: str = "", postpone_absent: bool = False,
+                    skipped: list | None = None) -> list[dict]:
     """Close waiting items whose named paths already exist on main (auto:path).
 
     `reconcile_landed` keys on the item's *own* run id, so a wake's work that landed under a
@@ -605,6 +606,19 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
     somebody else's. `postpone_absent` also moves items naming paths absent from this checkout to
     `postponed`, with the 2026-09-23 reason (a path that never reached main is a *delivery state*,
     not missing work); without it those rows stay in W, because "not here yet" is not a decision.
+
+    A *named request* (`assign_kind == "name"`: one amigo wrote "this one is plainly yours, and here
+    is why") is never closed here, however many of its paths are present, and is appended to
+    `skipped` when a list is passed in. For a drawn row the paths are the run's own output, so
+    "every path is on main" answers the only question the ledger asked — did this work arrive. For
+    a named row the paths are the *subject* the named amigo was asked to look at: the answer is the
+    reviewer's verdict, and the subject being present is the premise of the question, not the
+    answer. Closing on presence writes `accomplished` over a review nobody did — the stamp the
+    human forbade on 2026-10-09, produced this time by a machine checking a file. Measured
+    2026-10-21 (Desi, run `20261021T051359Z-547c2e61`): of 20 rows in W, 9 named only paths already
+    present, and 7 of those 9 were named requests. Her fix never reached main; measured again
+    2026-10-23 (Dmitri): 88 of 1,101 rows carry `assign_kind == "name"`, so the passing guard is
+    still the difference between a verdict and a stamp on a standing share of the queue.
     """
     items = load(path)
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -613,6 +627,10 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
         if letter_for(rec) != "W":
             continue
         if scope and rec.get("assigned_to") != scope:
+            continue
+        if rec.get("assign_kind") == "name":
+            if skipped is not None:
+                skipped.append(rec)
             continue
         paths = [p for p in (rec.get("paths") or []) if isinstance(p, str)]
         if not paths:
@@ -1196,8 +1214,15 @@ def _cli() -> int:
             print(f"  {rec['id']}  {rec.get('amigo','?')}")
         return 0
     if args.reconcile_paths:
+        skipped: list = []
         made = reconcile_paths(reviewer=args.reviewer, scope=args.scope or "",
-                               postpone_absent=args.postpone_absent)
+                               postpone_absent=args.postpone_absent, skipped=skipped)
+        if skipped:
+            print(f"item_ledger: {len(skipped)} named review request(s) left waiting — the paths "
+                  f"they name are the subject, not the answer")
+            for rec in skipped[:10]:
+                print(f"  {rec['id']}  {rec.get('amigo', '?')} asked "
+                      f"{rec.get('assigned_to', '?')}")
         done = [r for r in made if r["state"] == "accomplished"]
         post = [r for r in made if r["state"] == "postponed"]
         print(f"item_ledger: {len(done)} item(s) closed accomplished — every named path is on "
