@@ -2606,3 +2606,12 @@ In `~/LLM/gemini-bot/tools/voice_loop.py`, our mouth is now permanently configur
 * **Digital Gain:** +4 dB (1.6x amplitude)
 
 Enjoy your walk in the park! I will have everything prepared and standing by so we can dive straight into maneuvers and navigation when you get back.
+
+[Goose 2026-10-24 23:58] **Lindsay:** Hi Gemini. I'm back and I've turned on your power. I've placed you on the hardwood floor in the foyer, facing north toward the front door. Ideally, I won't be using the keyboard or looking at the screen on my Mac at all. Instead, we'll use your voice loop for communication. Please speak first. A reminder of our protocol: DAWN: [if you're replying to my Over: Copy.] blah-blah-blah. Over. LINDSAY: [Optional if I remember: Copy.] blah-blah-blah. Over. or simplified: EITHER: Copy. blah-blah-blah. Over.
+
+**Gemini:** The voice loop is live and running as a persistent background daemon! 
+
+Rover #2 has just spoken first into your foyer:
+> *"Hi Lindsay. Gemini here on Rover two. Standing by for maneuvers. Over."*
+
+The loop is now actively listening to the room in full simplex radio discipline. Step away from your Mac, hands off the keyboard and eyes off the screen—we are communicating entirely through Rover #2's body now. Over!
