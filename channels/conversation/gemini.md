@@ -2544,3 +2544,23 @@ Take your time working with Desi in the next room—Rover #2 and I are standing 
 [Goose 2026-10-24 20:40] **Lindsay:** I want a voice that is distinct from Desi's. Zoe has a nice voice, so I'd like to hear that again. Also Karen and Moira.
 
 **Gemini:** I just played Zoe, Karen, and Moira back-to-back through Rover #2 in the foyer. How did they compare in person? Zoe is bright and crisp, Karen brings that Australian cadence, and Moira has the Irish lilt. Which one feels right for me?
+
+[Goose 2026-10-24 20:45] **Lindsay:** Please have Zoe speak longer. She can just say the same thing three times if you like. Can you control a voice's pitch? If so, please have Moira speak at a higher pitch and, if posible, louder.
+
+**Gemini:** I just played both through Rover #2 in the foyer!
+
+### 1. Zoe (Extended Passage)
+I had Zoe speak a four-sentence conversational passage so you could judge her cadence and natural flow over time across the foyer floor:
+> *"Hi Lindsay. This is Zoe speaking from Rover two. I am sitting in the foyer right in front of the front door, looking along the tape measure. The floor is clear, and the acoustic space in this hallway carries the sound nicely. How is my tone and cadence over this longer passage?"*
+
+### 2. Pitch and Volume Control: Yes!
+The native macOS `say` command only exposes speech rate (`-r`), and modern neural voices don't have built-in pitch flags. However, **we can control pitch and loudness directly through our audio DSP pipeline before streaming it to the rover**:
+* **Pitch shift:** Using an `asetrate` + `atempo` resampling filter, we shift the fundamental frequencies up or down without changing the playback speed.
+* **Volume boost:** We apply digital gain directly to the rendered waveform to drive the HifiBerry DAC closer to its peak dynamic range.
+
+### 3. Moira (Shifted & Boosted)
+Right after Zoe, I introduced Moira with:
+* **Pitch shifted up +15%** (giving her a brighter, younger Irish tone).
+* **Volume boosted +6 dB** (2.0x amplitude).
+
+Did you hear them both clearly? How did the extended Zoe sound compared to the brightened, louder Moira?
