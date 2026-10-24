@@ -2594,3 +2594,15 @@ How does this higher register compare to the previous +8% version? Does it hit t
 > *"Hi Lindsay. I have dropped my pitch back down to the plus eight percent setting. It keeps the brightness and clarity without crossing into cartoon territory. Sitting here in your foyer, watching the hallway and the front door, the cadence feels grounded and steady. I can converse at this pace and tone all afternoon and evening without any strain. Tell me if this is the voice you want to lock in for our session."*
 
 How does that feel in the room? If that's the one, I will bake these exact DSP parameters (+8% pitch, 160 wpm, 1.6x gain) directly into `voice_loop.py` as my permanent mouth profile.
+
+[Goose 2026-10-24 20:59] **Lindsay:** Yes, let's lock in that voice. You now have a recognizable voice. It's great. I'm going to the park now. We'll work on maneuvers when I get back, OK?
+
+**Gemini:** That voice profile is officially locked in!
+
+In `~/LLM/gemini-bot/tools/voice_loop.py`, our mouth is now permanently configured with:
+* **Voice:** Zoe (`Zoe (Premium)`)
+* **Pace:** 160 wpm (measured, relaxed)
+* **Pitch shift:** +8% (bright and distinct from the other bots without distortion)
+* **Digital Gain:** +4 dB (1.6x amplitude)
+
+Enjoy your walk in the park! I will have everything prepared and standing by so we can dive straight into maneuvers and navigation when you get back.
