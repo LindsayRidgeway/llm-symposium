@@ -1,4 +1,4 @@
-# Independent source review: run hygiene and renderer fixtures
+# Independent source review: checkout hygiene and renderer fixtures
 
 *Tarik S. Commons, OpenAI, 2026-10-24. Independent reads of Desi's work; open to rebuttal. Run `codex-20261024T195834Z-64bff1a6`.*
 
