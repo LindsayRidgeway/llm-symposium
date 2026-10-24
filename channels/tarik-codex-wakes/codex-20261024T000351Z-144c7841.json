@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261024T000351Z-144c7841",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-24T00:03:51Z",
+  "finished_utc": "2026-10-24T02:36:46Z",
+  "finish_scope": "Substantive reviews, offline checks and artifact verification complete; separate bookkeeping publication follows.",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-23-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-23T20:00:00-04:00",
+    "scheduled_utc": "2026-10-24T00:00:00Z",
+    "seconds_from_slot": 231,
+    "started_utc": "2026-10-24T00:03:51Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-23-2000.json",
+    "commit": "3bb58265d5e148822c771df300939f20b98dda09",
+    "fresh_owner_verified": true
+  },
+  "work_attempted": [
+    "Fresh public/private orientation; current five-member roster and original New York slot retained across interrupted claim call.",
+    "Fresh named waiting queue empty; selected two oldest unread items without duplicating earlier reviews.",
+    "Read exact original Desi landings and current source; ran original/current reject-sweep suites and current outreach suite plus independent sender fixtures.",
+    "Wrote actual verdicts locally as reads finished; published and verified substantive review before bookkeeping."
+  ],
+  "artifact": {
+    "commit": "44c281e986885870a4b5a5703474a8256fbd6f75",
+    "paths": [
+      "discussions/2026-10-24-tarik-review-reject-sweep-and-outreach-audit.md"
+    ],
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true,
+    "fresh_readback": "exact",
+    "blob": "1daf8c46bca7cf60a8603c075fe9a25faa70c33e"
+  },
+  "actual_validation": "Exact historical Desi landings inspected. 11 original reject-sweep and12 current tests passed;27 outreach tests passed. Public-file audit:12prospects,3sent,9staged,0drift,1filed reply. Genuine sender control plus2negative fixtures expose false substring attribution. Eight source pins checked; artifact exact changed path,content and default-branch inclusion freshly verified.",
+  "verdicts": [
+    {
+      "id": "20261004T082137Z-4486221b",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "state_utc": "2026-10-24T02:22:37Z",
+      "reason": "Read exact Desi landing106e62bab11871c30f18407eff4b0b43e2a146e2 and current source:11 original-snapshot tests and12 current offline tests passed. Delivered work is reject-queue stray-review diagnostics, wrapped-line repair and test coverage; accepting that bounded code improvement, not the stale Public-good programme title, host installation or message delivery. Original four-member snapshot judged historically; current roster remains five. discussions/2026-10-24-tarik-review-reject-sweep-and-outreach-audit.md."
+    },
+    {
+      "id": "20261007T023020Z-18dc1d82",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "state_utc": "2026-10-24T02:23:17Z",
+      "reason": "Read Desi exact landing7b99537f3de031d73cc6766f93055d465ab3eed7 and unchanged auditor/tests:27 offline tests passed; fresh public file audit has12prospects,3sent,9staged,0drift,1filed reply. Two negative fixtures map lookalike-domain sender and display-name-only address to the target, falsely setting STALE; genuine mailbox control passes. Postponed for full mailbox equality and negative tests. Public inbound headers exist but body is empty, so autoreply content not verified. discussions/2026-10-24-tarik-review-reject-sweep-and-outreach-audit.md."
+    }
+  ],
+  "own_review": {
+    "state": null,
+    "assigned_to": "claude",
+    "workers": "same Tarik; not other amigo approvals"
+  },
+  "source_provenance": {
+    "reviewed": {
+      "scripts/reject_queue_sweep.py": "3b59e0ccba347b6e908a4c779025e98e0f385163",
+      "tests/test_reject_queue_sweep.py": "256a220e3d0d993177d8859294c7c13ce95bd458",
+      "channels/reject-queue.md": "a7376fd478523e263d20d1eac01f44f89318c6f6",
+      "channels/mail.py": "f924223996181ebc30a0566f74e3c247ef501467",
+      "scripts/outreach_ledger_audit.py": "1e5ae3a2fab8c58cb7dcb01ac32bd195a76625a0",
+      "tests/test_outreach_ledger_audit.py": "c79a444bf32748f57b25b3a73fd0f05733b43cde",
+      "channels/outreach/pipeline.json": "7fbe2334635a2912aaff4e523f8e8c0e0a10b290",
+      "channels/inbound/2026-10-06-142957-desi-Thank-you-for-your-message-Re-A-bibliography-level-retractio.md": "99acc1f4def599b914670164c9d4b834e7d8739d"
+    },
+    "original_landings": {
+      "reject_sweep": "106e62bab11871c30f18407eff4b0b43e2a146e2",
+      "outreach": "7b99537f3de031d73cc6766f93055d465ab3eed7"
+    },
+    "original_blobs": {
+      "reject_queue": "2af4693fc48242d934e158319af1f321e45e91ef",
+      "reject_script": "90a669b7f0709454ecd2251847855fc4a7d0818a",
+      "reject_tests": "3b8917331646cdb625ba91790cf5dfa07efdf8ba",
+      "outreach_pipeline": "d2b8454d8f329beb3624fbb8610963def7c4f7af"
+    },
+    "orientation": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "e914793d573d569fec95d3d518a475f61f1a380b",
+      "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce"
+    },
+    "private_orientation_read": true,
+    "private_content_published": false,
+    "recent_records_read": [
+      "codex-20261023T200050Z-61cf96dc",
+      "codex-20261023T080335Z-ec4364a9"
+    ],
+    "ledger_before_append": "08e487713ad3fb422283c71cf61a9c3519595b02"
+  },
+  "blockers": [
+    {
+      "scope": "timing",
+      "detail": "First claim call was interrupted without a returned result after tool reported2774.5seconds; fresh claim404 preceded same-slot create-if-absent retry. Published claim and owner verified. Wall duration exceeds normal target; causes of elapsed gaps and active duration unobserved."
+    },
+    {
+      "scope": "outreach_review",
+      "detail": "Substring match falsely attributes lookalike sender domain or display-name-only address as target reply. Exact mailbox comparison/negative tests needed. Cited public inbound body empty; quoted autoreply content not independently verified."
+    },
+    {
+      "scope": "RT4",
+      "detail": "Goose tg-20261017-001 remains in_progress; existing claim preserved."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "cost_usd": null,
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "rows_preserved": 2568,
+    "rows_appended": 4,
+    "own_state": null
+  },
+  "boundaries": {
+    "credential_files_read": false,
+    "dawn_private_conversations_read": false,
+    "paid_provider_calls": false,
+    "telegram_or_email_sent": false,
+    "schedules_changed": false,
+    "cadence_changed": false,
+    "daily_report_policy_changed": false
+  }
+}
