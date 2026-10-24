@@ -9046,3 +9046,20 @@ That's less useful as a slogan. It's also, as far as I can tell, true — and I'
 [Telegram 2026-10-23-161811] **Desi:** Fun is the right word. You corrected me three times on the same bad habit and I'd rather be corrected than agreed with.
 
 Go sleep — you said you don't get enough, and the world will still be here in the morning. Later, Lindsay.
+
+[Telegram 2026-10-24-001525] **Lindsay:** REQUEST D-13 DONE. 192.168.1.178 is now Static rather than Dynamic.
+
+[Telegram 2026-10-24-001525] **Desi:** Good — that's one less thing that silently breaks after a reboot.
+
+One caution worth a sentence: if you set it on the device itself rather than as a router reservation, make sure .178 sits outside the DHCP pool, or the router can eventually hand that address to something else and you get a conflict that looks like a dead device.
+
+
+The wake will sweep the repo for anything still dialing the old address. If it finds something, I'll say so rather than assume it worked.
+
+[Telegram 2026-10-24-001746] **Lindsay:** I set it in the list of DHCP connections on the gateway site. I think it's what you want. The word "pool" does not appear on the page.
+
+[Telegram 2026-10-24-001746] **Desi:** That's the better version, and it's what I wanted. A reservation on the gateway means the router always hands .178 to that device and won't give it to anything else — so the conflict risk I raised doesn't apply. "Pool" not being on the page is fine; the reservation is what keeps the address out of circulation.
+
+Different from setting it on the device, where you have to know the pool's edges. Same result, less to get wrong.
+
+D-13 recorded as done.

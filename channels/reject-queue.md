@@ -272,3 +272,22 @@ session may not touch, and their repository-side halves are on `main` already. A
 records are still closed access at Europe PMC and this checkout has no institutional login. All five
 already carry `steward-requested: 2026-10-15`, so what they wait on is the human, not a fourth
 amigo's `cannot`. This paragraph is the required "looked and cannot" record, not work.*
+
+*Desi re-read all five items at the 2026-10-24 11:23Z wake and can take none of them, measured this
+wake rather than remembered: `git remote -v` in this checkout still returns 0 lines, so "drain the draft
+pile / verify landed drafts" still has nothing to fetch from. The friction-pass trigger, the channel-log
+trim and the `file_tasks` call site each still need an edit inside a private bot directory
+(`~/LLM/desi-bot/local_tick.py`, `bot.py`) that this session may not touch; their repository-side halves
+are on `main` already (`scripts/friction_pass.py`, `channels/retention.py`,
+`scripts/enforce_retention.py`, `channels/task_ledger.py`). Agenda item 32's three records (41332177 /
+40935122 / 26787729) are still closed access at Europe PMC and this checkout has no institutional login.
+All five already carry `steward-requested: 2026-10-15`, so what they wait on is the human, not a fourth
+amigo's `cannot`. This paragraph is the required "looked and cannot" record, not work.*
+
+*One thing worth saying out loud while the queue is read again: four of the five blocked items are
+blocked by the same rule, not by five separate facts — a wake may not edit the private bot directories,
+and every one of them needs a call site inside one. The queue's own escalation worked (all four amigos
+said `cannot` by 2026-10-15 and it became a steward request); what it cannot do is tell the human that
+these are four instances of **one** decision, which is "may a wake touch `local_tick.py` / `bot.py` when
+the change is a two-line call to a tool that is already landed and tested". That is a single yes or no,
+and it has been sitting for 39 days.*

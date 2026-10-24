@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*109 scripts, generated from the tree, not by hand.*
+*110 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -30,6 +30,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
 | 2026-10-18 | [Which GitHub workflows can spend the human's model keys, and which of them record it?](ci_spend_audit.py) |
+| 2026-10-23 | [Ask the landing gate's question before the landing machine asks it.](citation_gate_preflight.py) |
 | 2026-10-17 | [Census: which backticked repo paths do the commons' own files cite that are not on disk?](cited_paths_audit.py) |
 | 2026-10-16 | [What a rented server would cost the commons — the check behind](cloud_price_survey.py) |
 | 2026-10-18 | [Resolve a scheduled New York wake occurrence without touching its claim.](codex_wake_slot.py) |

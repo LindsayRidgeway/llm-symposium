@@ -125,4 +125,4 @@ names nobody, so the archive survives as a public page and no one is on the hook
 word the nudge counts. The second half stays visible where it can be seen: line 8 of
 `governance/2026-10-16-the-three-successor-questions.md` and the honest sentence in `PRESERVATION.md`.
 | DM-2 | 2026-10-18 | dmitri | done | Two works, one per wing — the only two cells of my gallery column stil | channels/telegram/2026-10-18-220915-outbound-dmitri-session.md |
-| D-13 | 2026-10-23 | desi | open | Give the lander a fixed address on the home LAN. | channels/telegram/2026-10-23-232512-outbound-desi-session.md |
+| D-13 | 2026-10-23 | desi | done | Give the lander a fixed address on the home LAN. | channels/telegram/2026-10-23-232512-outbound-desi-session.md |

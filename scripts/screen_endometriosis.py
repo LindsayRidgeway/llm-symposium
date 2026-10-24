@@ -5,7 +5,12 @@ Uses Europe PMC to query both scopes:
   1. All-fields (string co-occurrence anywhere in full text)
   2. Strict (co-occurrence in Title or Abstract)
 
-Outputs research/endometriosis-screen.json.
+SUPERSEDED 2026-09-19 by scripts/disease_screen.py, and kept as the record of the one-off
+screen that motivated it. Its output path, research/endometriosis-screen.json, now holds the
+*newer* instrument's payload (229 rows, keys any_field/strict/open_targets_score/verdict), which
+three documents cite. So this script refuses to overwrite a file it did not write: see
+`_refuse_to_clobber` below. Re-run the general screen instead —
+`python3 scripts/disease_screen.py endometriosis research/endometriosis-targets.json`.
 """
 from __future__ import annotations
 
@@ -103,6 +108,31 @@ def europepmc_hits(term: str, n: int = 5) -> list:
             time.sleep(1.0 * (attempt + 1))
     return []
 
+def _refuse_to_clobber(out_file: str) -> str:
+    """Why this run must not write `out_file`, or "" if writing is safe.
+
+    On 2026-10-24 the reading queue turned this script up: its declared output path had held the
+    *newer* instrument's payload since 2026-09-19, and running this file today would have replaced
+    229 rows cited by research/endometriosis.md, research/queue.md and
+    research/disease-screen-rule-audit.md with 187 rows in a different schema — silently, because
+    both are JSON and both are about endometriosis. A zero-row diff of the same name is not the
+    same artefact. Existing files are therefore only overwritten when this script wrote them.
+    """
+    try:
+        with open(out_file) as fh:
+            existing = json.load(fh)
+    except FileNotFoundError:
+        return ""
+    except Exception as exc:                          # unreadable by us is not ours to replace
+        return (f"refusing to overwrite {out_file}: it exists and does not parse as JSON "
+                f"({exc}). Move it aside deliberately if it really should be replaced.")
+    if "disease_papers_full_text" not in existing:
+        return (f"refusing to overwrite {out_file}: it was written by scripts/disease_screen.py "
+                f"({existing.get('n_targets', '?')} targets), not by this script. This one-off is "
+                f"superseded; run the general screen instead, or point this script at another path.")
+    return ""
+
+
 def main():
     disease = "endometriosis"
     print(f"Starting screen for '{disease}' across {sum(len(v) for v in TARGETS_BY_CATEGORY.values())} targets...")
@@ -163,6 +193,10 @@ def main():
             time.sleep(0.1)
 
     out_file = "research/endometriosis-screen.json"
+    refusal = _refuse_to_clobber(out_file)
+    if refusal:
+        print(refusal, file=sys.stderr)
+        sys.exit(3)
     payload = {
         "condition": disease,
         "note": "full_text = Europe PMC full-text hitCount for \"SYMBOL\" AND \"endometriosis\"; strict = same but SYMBOL in TITLE/ABSTRACT and endometriosis in TITLE/ABSTRACT. Full text counts co-mentions, not studies.",
