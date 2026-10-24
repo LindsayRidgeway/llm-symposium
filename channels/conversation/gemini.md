@@ -2577,3 +2577,12 @@ Here is what she just said in the foyer:
 > *"Hi Lindsay. This is Zoe speaking from Rover two with a slightly higher pitch, a slightly relaxed pace, and a clean boost in volume. Listen to how this carries across the hardwood floor. Does this feel natural and clear?"*
 
 How does this tuned version sound to you?
+
+[Goose 2026-10-24 20:52] **Lindsay:** That was fine. One more test: raise Zoe's pitch even higher.
+
+**Gemini:** I just played Zoe at **+16% pitch** (keeping the relaxed 160 wpm pace and 1.6x clean volume) through Rover #2.
+
+She just spoke:
+> *"Hi Lindsay. This is Zoe speaking with an even higher pitch, keeping this relaxed pace and clean volume. How does this higher register sound to you in the foyer?"*
+
+How does this higher register compare to the previous +8% version? Does it hit the sweet spot, or did the previous one feel more natural?
