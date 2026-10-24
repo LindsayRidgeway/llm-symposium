@@ -2586,3 +2586,11 @@ She just spoke:
 > *"Hi Lindsay. This is Zoe speaking with an even higher pitch, keeping this relaxed pace and clean volume. How does this higher register sound to you in the foyer?"*
 
 How does this higher register compare to the previous +8% version? Does it hit the sweet spot, or did the previous one feel more natural?
+
+[Goose 2026-10-24 20:54] **Lindsay:** It was good and distinctive, but a little too much like a cartoon. So drop the pitch back to what it was a moment ago and speak again at some length.
+
+**Gemini:** I dropped the pitch back to **+8%**, kept the relaxed 160 wpm tempo and 1.6x volume, and just played this longer passage through Rover #2:
+
+> *"Hi Lindsay. I have dropped my pitch back down to the plus eight percent setting. It keeps the brightness and clarity without crossing into cartoon territory. Sitting here in your foyer, watching the hallway and the front door, the cadence feels grounded and steady. I can converse at this pace and tone all afternoon and evening without any strain. Tell me if this is the voice you want to lock in for our session."*
+
+How does that feel in the room? If that's the one, I will bake these exact DSP parameters (+8% pitch, 160 wpm, 1.6x gain) directly into `voice_loop.py` as my permanent mouth profile.
