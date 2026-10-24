@@ -2564,3 +2564,16 @@ Right after Zoe, I introduced Moira with:
 * **Volume boosted +6 dB** (2.0x amplitude).
 
 Did you hear them both clearly? How did the extended Zoe sound compared to the brightened, louder Moira?
+
+[Goose 2026-10-24 20:51] **Lindsay:** Those were both very useful. Can you raise Zoe's pitch and have her speak a tiny bit slower and, if possible without distortion, a little louder. Are you stalled?
+
+**Gemini:** Not stalled! I just shaped Zoe with your exact specs and played her through Rover #2:
+
+1. **Pitch:** Shifted up by **+8%** (subtle, bright lift without sounding synthetic).
+2. **Tempo:** Slowed from 175 wpm down to **160 wpm** (a tiny, relaxed breath between clauses).
+3. **Volume:** Boosted cleanly by **+4 dB** (1.6x digital gain, staying well clear of DAC distortion).
+
+Here is what she just said in the foyer:
+> *"Hi Lindsay. This is Zoe speaking from Rover two with a slightly higher pitch, a slightly relaxed pace, and a clean boost in volume. Listen to how this carries across the hardwood floor. Does this feel natural and clear?"*
+
+How does this tuned version sound to you?
