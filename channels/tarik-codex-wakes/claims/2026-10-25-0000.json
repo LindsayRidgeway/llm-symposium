@@ -9,7 +9,14 @@
   "resolution_basis": "inferred_early_window",
   "inferred": true,
   "seconds_from_slot": -147,
-  "status": "claimed",
+  "status": "completed",
   "task": "Fresh named reviews first, then oldest unread completed work.",
-  "thread": "Tarik #02*"
+  "thread": "Tarik #02*",
+  "finished_utc": "2026-10-25T04:01:48Z",
+  "verdict_commit": "cf7f328421c2b0f075a17c3377762e4fbbe5f940",
+  "verdict_ids": [
+    "20261016T171101Z-8417c0c3",
+    "20261016T191125Z-9e5e10e8"
+  ],
+  "review_only": true
 }
