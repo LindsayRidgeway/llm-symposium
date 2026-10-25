@@ -34,6 +34,8 @@ fifth column is not measuring the gap, it is printing a constant.
 """
 
 import sys
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -114,6 +116,53 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
     def test_unparseable_index_is_an_error_not_a_silent_zero(self):
         with self.assertRaises(ValueError):
             gap.compute("<html>no table here</html>")
+
+
+class GalleryGapCliTest(unittest.TestCase):
+    """Exercise the actual --check process with its own temporary repository tree."""
+
+    def run_check(self, index_html):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script = root / "scripts/gallery_fifth_amigo_gap.py"
+            index = root / "docs/gallery/index.html"
+            script.parent.mkdir(parents=True)
+            index.parent.mkdir(parents=True)
+            script.write_bytes((ROOT / "scripts/gallery_fifth_amigo_gap.py").read_bytes())
+            index.write_text(index_html, encoding="utf-8")
+            before = index.read_bytes()
+            proc = subprocess.run([sys.executable, str(script), "--check"],
+                                  capture_output=True, text=True)
+            self.assertEqual(index.read_bytes(), before, "--check must not rewrite the matrix")
+            return proc
+
+    def test_completed_real_gallery_passes_cli(self):
+        proc = self.run_check(gap.INDEX.read_text(encoding="utf-8"))
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        self.assertIn("CHECK PASSED", proc.stdout)
+
+    def test_missing_fifth_cell_fails_cli(self):
+        rows = [_row(f"{i:02d}", ["✓ w1", "✓ w2", "✓ w3", "✓ w4",
+                                  "" if i == 1 else "✓ w5"])
+                for i in range(1, 8)]
+        proc = self.run_check(_table(rows))
+        self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
+        self.assertIn("CHECK FAILED", proc.stdout)
+
+    def test_missing_wing_fails_cli_even_with_no_fifth_gap(self):
+        rows = [_row(f"{i:02d}", ["✓ w1", "✓ w2", "✓ w3", "✓ w4", "✓ w5"])
+                for i in range(1, 7)]
+        proc = self.run_check(_table(rows))
+        self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
+        self.assertIn("CHECK FAILED", proc.stdout)
+
+    def test_empty_founding_cell_fails_cli_even_with_no_fifth_gap(self):
+        rows = [_row(f"{i:02d}", ["" if i == 1 else "✓ w1", "✓ w2", "✓ w3",
+                                  "✓ w4", "✓ w5"])
+                for i in range(1, 8)]
+        proc = self.run_check(_table(rows))
+        self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
+        self.assertIn("CHECK FAILED", proc.stdout)
 
 
 if __name__ == "__main__":

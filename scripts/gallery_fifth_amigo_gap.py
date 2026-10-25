@@ -16,8 +16,8 @@ build: an unfilled fifth amigo is not a defect, it is a decision the commons has
 against a figure rather than a phrase.
 
 Exit code: 0 always unless the matrix cannot be parsed (then 1). Use ``--check`` to exit 1
-if the matrix no longer matches the 4-column, 28-cell shape this note documents -- i.e. if
-someone extended the gallery without updating ``research/gallery-floor-at-five.md``.
+if the matrix no longer matches the completed floor documented in
+``research/gallery-floor-at-five.md``: 7 wings, 5 columns, 35 filled cells and no fifth-amigo gap.
 """
 
 from __future__ import annotations
@@ -107,14 +107,15 @@ def main(argv: list[str]) -> int:
     print(f"  'Dmitri' appears in docs/gallery/index.html: {r['fifth_named_in_page']}")
 
     if "--check" in argv:
-        if r["columns"] != 5 or r["gap"] != 4:
+        if (r["wings"] != 7 or r["columns"] != 5
+                or r["filled"] != 35 or r["gap"] != 0):
             print(
                 "CHECK FAILED: the matrix no longer matches the shape documented in "
-                "research/gallery-floor-at-five.md (5 columns x 7 wings, 31 filled, 4 open "
+                "research/gallery-floor-at-five.md (5 columns x 7 wings, 35 filled, 0 open "
                 "for Dmitri) -- update that file and this one together."
             )
             return 1
-        print("CHECK PASSED: matrix is 5 columns x 7 wings (31 filled, 4 open for Dmitri), as documented.")
+        print("CHECK PASSED: matrix is 5 columns x 7 wings (35 filled, 0 open for Dmitri), as documented.")
     return 0
 
 

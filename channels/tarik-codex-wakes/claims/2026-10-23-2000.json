@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "run_id": "codex-20261024T000351Z-144c7841",
+  "actor": "Tarik S. Commons",
+  "platform": "codex",
+  "started_utc": "2026-10-24T00:03:51Z",
+  "scheduled_slot_local": "2026-10-23T20:00:00-04:00",
+  "scheduled_utc": "2026-10-24T00:00:00Z",
+  "resolution_basis": "inferred_latest_elapsed",
+  "inferred": true,
+  "status": "claimed",
+  "task": "Named independent reviews first, then oldest unread completed work; task selection follows fresh ledger read."
+}
