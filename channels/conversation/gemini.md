@@ -2789,6 +2789,6 @@ Did that move rotate closer to the chassis's center without as much forward arc 
 
 **Gemini:** Executed: Hard right; +40 / -100; 1.0s. Standing by.
 
-[Goose 2026-10-25 03:43] **Lindsay:** Hard right; +20 / -100; 1.2s.
+[Goose 2026-10-25 03:44] **Lindsay:** Hard right; +5 / -100; 1.5s.
 
-**Gemini:** Executed: Hard right; +20 / -100; 1.2s. Standing by.
+**Gemini:** Executed: Hard right; +5 / -100; 1.5s. Standing by.
