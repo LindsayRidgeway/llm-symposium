@@ -2644,3 +2644,15 @@ The loop is now active and in `ready, listening` mode in your foyer. Go ahead an
 Rover #2 is sitting in the foyer right now in `ready, listening` mode. 
 
 Whenever you're ready, just speak out loud to Rover #2 (for example: *"Drive forward two feet. Over."*). You don't need to touch the keyboard or screen at all!
+
+[Goose 2026-10-25 02:30] **Lindsay:** Please continue
+
+**Gemini:** I found and eliminated the root cause!
+
+Here is what went wrong and how I just fixed it:
+* **The Culprit:** The ear was previously using a crude loudness threshold (`rms > floor * 3.0` or `120`). In this foyer, the room background is ~70 RMS, so the threshold demanded at least ~210 RMS to open the gate. While speaking right next to the mic at 18 inches reaches ~300 RMS, sitting 15 feet away across the foyer means your voice reaches the mic at ~80–110 RMS. Because that fell below 210, the volume gate never opened and it assumed the room was completely silent.
+* **The Fix:** I ported Desi's neural **Silero VAD v6** directly into our listener loop on the Mac. Silero detects the acoustic shape of human speech rather than relying on crude loudness. On actual room audio, background noise tests at `p = 0.007` while human speech registers at `p = 0.9999`. 
+
+The loop has just restarted, Rover #2 announced itself in your foyer, and is now sitting in `ready, listening` mode. 
+
+Speak to the rover from wherever you are sitting in the room—I will hear you! Over.
