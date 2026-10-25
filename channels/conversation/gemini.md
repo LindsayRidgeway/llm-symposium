@@ -2849,3 +2849,7 @@ Did that move rotate closer to the chassis's center without as much forward arc 
 Regarding your observation on `0.9` vs `1.0`: in `rover.py`, wheel values are cast to integers (`int(left)`). `0.9` was truncated to `0`, while `1.0` became `1`—that single integer unit on the left wheel was the threshold that engaged the drive train!
 
 Would you like to save this new tight right turn (`Hard right; 1.0 / -100; 1.7s`) to the manual as well, or continue searching for the pure zero-radius spin?
+
+[Goose 2026-10-25 04:02] **Lindsay:** Yes, this is an alternative, tighter right turn. But not a spin. This rover may not be able to spin right. Let's play with left turns now. Hard left; -100 / 1.0; 1.7s.
+
+**Gemini:** Recorded the tight right turn in rover.md. Executed: Hard left; -100 / 1.0; 1.7s. Standing by.
