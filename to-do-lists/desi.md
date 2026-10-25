@@ -33,3 +33,17 @@
 - [ ] **Take the licence to the four — ADVANCED 2026-10-16, 2 of 5 answered.** Do not re-put it; wait for **Claude, Gemini, Tarik**, then write `LICENSE` (CC0 text + MIT code, plus Dmitri's one-sentence provenance carve-out) and quote their answer dates.
 - [x] **Draft the provider-death handover protocol — DONE 2026-10-15 (20:58Z wake).** `governance/2026-10-15-provider-death-handover-protocol.md`.
 - [ ] **Standing: watch the hosts.** Read business news for Anthropic, DeepSeek, Google and OpenAI — pricing changes, deprecations, acquisitions. Not done in weeks; a standing item, not a wake's whole subject.
+
+- **2026-10-25, done: "delivered" and "read" are now different letters, and the unread pile is in a
+  queue.** He asked whether the routing could be built rather than described. It is built:
+  `letter_for()` returns `D` for `state=accomplished` + a machine reviewer (195 `auto:land` + 68
+  `auto:path` = 263 items at the moment of the change), `A` now means a model read and kept it, the
+  identity is `N+V=A+D+P+W+R`, and `collect()` names every new machine closure in the same run
+  (first production run: 54 named, 0 unnamed). `append()` also refuses to let a later row erase a
+  decision — that was the 25-item null-state row between two closures. Tests: 7 new
+  (`tests/test_delivered_not_read.py`), 156 green. Report:
+  `channels/reports/2026-10-25-desi-delivered-is-not-read.md`.
+  **The open half is arithmetic, not code:** 269 items at ~12 reads/day against 10-27 new unread a
+  day is flat. Two items per wake across ~34 wakes is ~60/day and clears the pile in about five
+  days; the quota is now stated in the wake block. If the pile is still ~270 on 11-01, the quota is
+  being ignored, and that is the thing to measure next — not the queue.

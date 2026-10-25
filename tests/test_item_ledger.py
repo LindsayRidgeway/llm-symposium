@@ -251,9 +251,12 @@ class TestCounts(unittest.TestCase):
         # letter from each axis, which is what makes it a check rather than a tautology.
         c = il.counts(self.rows(), None)
         self.assertEqual(c["N"]["total"] + c["V"]["total"],
-                         c["A"]["total"] + c["P"]["total"] + c["W"]["total"] + c["R"]["total"])
+                         c["A"]["total"] + c["D"]["total"] + c["P"]["total"]
+                         + c["W"]["total"] + c["R"]["total"])
         self.assertEqual(c["N"]["total"] + c["V"]["total"], 6)
         self.assertNotIn("U", c)          # the letter he retired, 2026-10-06
+        # D (2026-10-25) is not that letter: it is a delivery with no reader, not a state with no
+        # decision. It was carved out of A so that A could go back to meaning "somebody read this".
 
     def test_nothing_is_exempt_without_saying_so(self):
         c = il.counts(self.rows(), None)
@@ -273,17 +276,31 @@ class TestCounts(unittest.TestCase):
         self.assertEqual(c["W"]["total"], 3)     # a, b, d — nobody has looked, or nobody wrote it
         self.assertNotIn("undecided", c["P"])    # that split is now the W letter itself
 
-    def test_accomplished_says_whether_a_review_or_the_lander_did_it(self):
+    def test_a_lander_closure_is_not_an_accomplishment(self):
+        """2026-10-25: A used to carry both claims; the gate closure moved to D.
+
+        Measured when this changed: 263 of 492 accomplished items had never been read by a model,
+        and only 38 of the 306 items ever machine-closed were opened afterwards. A count that mixes
+        them cannot answer "is review keeping up".
+        """
         c = il.counts(self.rows(), None)
-        self.assertEqual(c["A"]["total"], 1)
-        self.assertEqual(c["A"]["by_gate"], 1)
-        self.assertEqual(c["A"]["by_review"], 0)
+        self.assertEqual(c["A"]["total"], 0)     # nobody has read c
+        self.assertEqual(c["D"]["total"], 1)     # c: closed by auto:land
+        self.assertEqual(c["D"]["by_gate"], 1)
         rows = self.rows()
         rows["h"] = {"id": "h", "amigo": "desi", "scope": "internal", "state": "accomplished",
                      "filed_utc": "2026-01-01T00:00:00Z", "reviewer": "gemini",
                      "reason": "reviewed, kept"}
         c = il.counts(rows, None)
-        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (1, 1))
+        self.assertEqual((c["A"]["total"], c["A"]["by_review"]), (1, 1))
+        self.assertEqual((c["D"]["total"], c["D"]["by_gate"]), (1, 1))
+        # auto:path is a delivery check, not a review — it must not inflate A either
+        rows["i"] = {"id": "i", "amigo": "desi", "scope": "internal", "state": "accomplished",
+                     "filed_utc": "2026-01-01T00:00:00Z", "reviewer": "auto:path",
+                     "reason": "delivered: every path is present on main"}
+        c = il.counts(rows, None)
+        self.assertEqual(c["A"]["total"], 1)
+        self.assertEqual(c["D"]["total"], 2)
 
     def test_decisions_counts_what_left_waiting(self):
         # Δ(V−W) is derived, not stored: every written decision takes exactly one item out of W.
@@ -300,7 +317,8 @@ class TestCounts(unittest.TestCase):
     def test_the_window_excludes_old_items(self):
         c = il.counts(self.rows(), 24)
         self.assertEqual(c["N"]["total"] + c["V"]["total"], 3)   # a, b, c — filed today
-        self.assertEqual(c["A"]["total"], 1)                     # c
+        self.assertEqual(c["A"]["total"], 0)                     # c was closed by a machine
+        self.assertEqual(c["D"]["total"], 1)                     # c
         self.assertEqual(c["W"]["total"], 2)                     # a, b
         self.assertEqual(c["P"]["total"], 0)                     # f is old
         self.assertEqual(c["R"]["total"], 0)                     # e is old
@@ -438,7 +456,8 @@ class TestReconcile(unittest.TestCase):
         landed = {"20261010T000000Z-dddddddd"}
         self.assertEqual(len(il.reconcile_landed(self.path, landed=landed)), 1)
         self.assertEqual(il.reconcile_landed(self.path, landed=landed), [])
-        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "A")
+        # the lander's gate closes the row; it does not read it, so the letter is D, not A
+        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "D")
 
     def test_native_codex_delivery_does_not_claim_a_goose_test_gate(self):
         """A direct Codex GitHub push is delivery, not evidence Goose's gate ran."""

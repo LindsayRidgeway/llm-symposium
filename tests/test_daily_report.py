@@ -133,11 +133,14 @@ class TestShortName(unittest.TestCase):
 
 
 class TestReportShape(unittest.TestCase):
-    def test_the_six_letters_are_reported_and_the_identity_is_printed(self):
+    def test_the_letters_are_reported_and_the_identity_is_printed(self):
         out = render(hours=24)
-        for letter in ("N", "V", "A", "P", "W", "R"):
+        for letter in ("N", "V", "A", "D", "P", "W", "R"):
             self.assertIn(f"{letter}=", out, letter)
-        self.assertIn("N+V=A+P+W+R", out)
+        # D was added 2026-10-25: A had been carrying both "a model read it" and "a machine found
+        # its paths", so 263 unread items were reported as accomplishments. The identity gained a
+        # term; the check is the same check, and it still has to balance.
+        self.assertIn("N+V=A+D+P+W+R", out)
         self.assertNotIn("U=", out)          # the human retired U on 2026-10-06
 
     def test_the_waiting_total_survives_truncation(self):
@@ -164,11 +167,13 @@ class TestReportShape(unittest.TestCase):
         self.assertNotIn("oldest shown first", short_pile)
 
     def test_the_accomplished_split_is_never_hidden(self):
-        # A is one letter with two causes: a review, or the lander's test gate. The human's whole
-        # complaint on 2026-10-08 was reading A=0 as "nothing accomplished".
+        # A is one letter with two causes — a model read it, or a machine found its paths and
+        # nobody read it. The human's whole complaint on 2026-10-08 was reading A=0 as "nothing
+        # accomplished"; the 2026-10-25 correction is the converse, and worse: reading A as
+        # "somebody read it" when 263 of them had never been opened.
         out = render(hours=24)
-        self.assertIn("by a review", out)
-        self.assertIn("by the lander's test gate", out)
+        self.assertIn("read by a model", out)
+        self.assertIn("delivered and unread", out)
 
     def test_the_postponed_and_waiting_sections_are_separate(self):
         out = render(hours=24)

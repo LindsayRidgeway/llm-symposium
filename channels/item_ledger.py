@@ -512,9 +512,37 @@ def _append_lock(path: Path):
         fh.close()
 
 
+DECISION_FIELDS = ("state", "state_utc", "reason", "reviewer")
+
+
+def _keep_decisions(records: list[dict], path: Path = LEDGER) -> list[dict]:
+    """An append may add to an item; it may not un-decide it.
+
+    Found 2026-10-25: 25 items showed a row with no state sitting between two closures — the item
+    read as "waiting" to anything that looked at the last line, and only the reconcile two seconds
+    later put the decision back. On a day when the reconcile did not run (10-21, 10-24) those items
+    simply stayed in W, which is one of the ways the review queue appeared to grow while reviewers
+    were working. Whatever wrote them, the rule that makes it harmless is here rather than in each
+    writer: a later row that carries no state inherits the decision the record already has, and says
+    which row it inherited it from. Silence is not a reversal.
+    """
+    known = load(path)
+    out = []
+    for rec in records:
+        old = known.get(rec.get("id"))
+        if old and old.get("state") and not rec.get("state"):
+            rec = dict(rec)
+            for field in DECISION_FIELDS:
+                rec.setdefault(field, old.get(field))
+            rec["decision_preserved_from"] = old.get("state_utc")
+        out.append(rec)
+    return out
+
+
 def append(records: list[dict], path: Path = LEDGER) -> None:
     if not records:
         return
+    records = _keep_decisions(records, path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with _append_lock(path):
         with path.open("a", encoding="utf-8") as fh:
@@ -570,6 +598,21 @@ def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = N
                   f"they are holes until `--draw` runs")
     # Rows filed before their run landed would otherwise sit in W for ever; re-check them (2026-10-10).
     reconcile_landed(path, landed=landed)
+    # The landing gate and the path check close items without a reader. That used to leave them in
+    # no queue at all — 252 of them by 2026-10-22 — because `--queue` sees only W and the reading
+    # queue had to be remembered and run by hand. Naming them here, at the moment they are closed,
+    # is the routing fix: an unread item is in somebody's queue the same second it is delivered,
+    # and the balance between inflow and reading stops depending on anybody remembering.
+    try:
+        pending = [r for r in load(path).values()
+                   if is_unread(r) and not r.get("reading_assigned_to")]
+        if pending:
+            named = name_unread(path=path, by="collect")
+            print(f"item_ledger: {len(named)} machine-closed-but-unread item(s) named for "
+                  f"reading (delivered is not read)")
+    except (OSError, ValueError) as exc:
+        print(f"item_ledger: WARNING — {exc}; the unread pile is unnamed until "
+              f"`--name-unread` runs")
     return len(fresh)
 
 
@@ -708,17 +751,36 @@ def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str 
     return rec
 
 
+# Closed by a machine and never by a reader. `auto:land` is the Goose lander's test gate (the paths
+# exist and the suite passed); `auto:path` is the delivery check (every named path is on main).
+# Both are statements about the repository, not about the work, and neither is a review.
+MACHINE_REVIEWERS = ("auto:land", "auto:path", "auto")
+
+
 def letter_for(rec: dict) -> str:
-    """Which of A/P/W/R an item sits in. W is the remainder, and deliberately so.
+    """Which of A/D/P/W/R an item sits in. W is the remainder, and deliberately so.
 
     W is the honest place for anything undecided: an item is *waiting for review* unless the
     artifact already carries a decision. `postponed` without a written reason reads as W too —
     a postponement nobody wrote down is not a decision, it is an absence, and the rule from
     2026-10-07 says an unwritten claim does not count.
+
+    D is the 2026-10-25 addition and it exists because A was carrying two incompatible claims:
+    "someone read this and kept it" and "a machine found its paths on main". Measured the hour it
+    was added: of 492 accomplished items, 263 had never been read by a model (195 auto:land, 68
+    auto:path), and of the 306 items ever machine-closed only 38 — 12% — were opened by a reviewer
+    afterwards. A letter meaning both things cannot answer "is review keeping up"; it answers "is
+    the lander working", which is a different question with a much better answer. That is how a
+    54%-unread pile came to be reported, in good faith, as accomplished.
+
+    Not the retired U (2026-10-06). U meant "performed, not yet reviewed", which duplicated W and
+    he killed it for that reason. D has a state, a delivery and a reason on disk; what it lacks is
+    a reader, and `is_unread()` is the only definition of its membership — the letter and the
+    reading queue are the same predicate, so they cannot drift apart.
     """
     state = rec.get("state")
     if state == "accomplished":
-        return "A"
+        return "D" if (rec.get("reviewer") or "") in MACHINE_REVIEWERS else "A"
     if state == "rejected":
         return "R"
     if state == "postponed" and (rec.get("reason") or "").strip():
@@ -763,9 +825,9 @@ def counts(items: dict[str, dict], hours: int | None = None) -> dict:
     def blank() -> dict:
         return {"total": 0, "internal": 0, "external": 0, "by_amigo": {}}
 
-    out = {g: blank() for g in ("N", "V", "A", "P", "W", "R")}
+    out = {g: blank() for g in ("N", "V", "A", "P", "W", "R", "D")}
     out["A"]["by_review"] = 0
-    out["A"]["by_gate"] = 0
+    out["D"]["by_gate"] = 0
     out["decisions"] = 0
     out["items"] = rows
 
@@ -785,7 +847,9 @@ def counts(items: dict[str, dict], hours: int | None = None) -> dict:
         letter = letter_for(rec)
         add(letter, who, scope)
         if letter == "A":
-            out["A"]["by_review" if rec.get("reviewer") not in (None, "auto:land") else "by_gate"] += 1
+            out["A"]["by_review"] += 1
+        if letter == "D":
+            out["D"]["by_gate"] += 1
         if in_window(rec.get("state_utc")):
             out["decisions"] += 1
     return out
@@ -861,9 +925,6 @@ def assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason: str = "
     )
     append([rec], path)
     return rec
-
-
-MACHINE_REVIEWERS = ("auto:land", "auto:path", "auto")
 
 
 def is_unread(rec: dict) -> bool:
@@ -1398,18 +1459,27 @@ def _cli() -> int:
         for label, hours in (("lifetime", None), (f"last {args.hours}h", args.hours)):
             c = counts(items, hours)
             left = c["N"]["total"] + c["V"]["total"]
-            right = sum(c[g]["total"] for g in ("A", "P", "W", "R"))
+            right = sum(c[g]["total"] for g in ("A", "P", "W", "R", "D"))
             print(f"{label:10s} "
-                  + "  ".join(f"{g}={c[g]['total']}" for g in ("N", "V", "A", "P", "W", "R"))
-                  + ("  ✓ N+V=A+P+W+R" if left == right else "  ✗ identity broken")
-                  + f"   (A: {c['A']['by_review']} reviewed / {c['A']['by_gate']} gate;"
-                    f" decisions this window: {c['decisions']})")
+                  + "  ".join(f"{g}={c[g]['total']}" for g in ("N", "V", "A", "P", "W", "R", "D"))
+                  + ("  ✓ N+V=A+D+P+W+R" if left == right else "  ✗ identity broken")
+                  + f"   (A: {c['A']['by_review']} read by a model / D: {c['D']['total']} closed "
+                    f"by a machine and unread; decisions this window: {c['decisions']})")
         waiting_rows = [r for r in items.values() if letter_for(r) == "W"]
         named = collections.Counter(r.get("assigned_to") for r in waiting_rows
                                     if r.get("assigned_to"))
         print("W: " + (" · ".join(f"{w}={n}" for w, n in named.most_common())
                        if named else "no names at all — nothing is addressed to anybody")
               + f"   holes: {len(holes(items))}")
+        unread = [r for r in items.values() if letter_for(r) == "D"]
+        if unread:
+            oldest = min(unread, key=lambda r: r.get("filed_utc") or "")
+            reading = collections.Counter(r.get("reading_assigned_to") for r in unread)
+            print(f"D: {len(unread)} delivered-but-unread, oldest filed {oldest.get('filed_utc')}"
+                  f"  ·  reading names: "
+                  + (" · ".join(f"{w}={n}" for w, n in reading.most_common() if w)
+                     if any(reading) else "none — this pile is in nobody's queue")
+                  + f"  ·  unnamed: {reading.get(None, 0)}")
         return 0
     ap.print_help()
     return 0
