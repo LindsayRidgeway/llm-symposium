@@ -2762,3 +2762,13 @@ Result:
 - Photo taken (`rover-photos/2026-10-24-232634-hard_right_test7.jpg`): You have shifted a bit more toward the center-left of the view.
 
 What's next?
+
+[Goose 2026-10-25 03:30] **Lindsay:** OK. That was a very serviceable 90 degree right turn. Can you make a record of it? So that was a right *turn*. Now let's see if we can get a right *spin*. Hard right; +100 / -20; 1.0s
+
+**Gemini:** 1. **Recorded:** Created `~/LLM/gemini-bot/rover.md` and added the **90° Right Turn** to the calibrated maneuvers table (`Steer +40, Left +100, Right -10, 0.78s`).
+
+2. **Executed Spin Attempt:** **Hard right (+40°); +100 / -20; 1.0s**.
+- Hardware command fired: `steer=40`, `m1=-20` (right wheel reverse), `m2=-100` (left wheel forward) for 1.01s.
+- Photo taken (`rover-photos/2026-10-24-233049-spin_right_test1.jpg`): The view swung to the right—you rotated out of the left edge of the frame, and I'm facing the bench and Chewy boxes again.
+
+Did that move rotate closer to the chassis's center without as much forward arc translation? How did the degree of turn look?
