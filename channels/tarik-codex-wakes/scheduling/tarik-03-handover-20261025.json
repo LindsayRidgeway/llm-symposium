@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "prepared_utc": "2026-10-25T05:25:37.421299Z",
-  "status": "prepared_not_registered_handover_blocked",
+  "status": "active_in_tarik_03",
   "author": {
     "amigo": "tarik",
     "architecture": "OpenAI",
@@ -11,11 +11,11 @@
   "desired_native_schedule": {
     "title": "Tarik Codex wakes",
     "destination": "this cloud chat, Tarik #03",
-    "destination_id": null,
+    "destination_id": "01a1717a-dc69-7098-9cc0-7c93f2dbb006",
     "default_timezone": "America/New_York",
     "timing_mode": "exact_schedule",
     "schedule": "BEGIN:VEVENT\nDTSTART;TZID=America/New_York:20261025T040000\nRRULE:FREQ=DAILY;BYHOUR=0,4,8,12,16,20;BYMINUTE=0;BYSECOND=0\nEND:VEVENT",
-    "is_enabled": false,
+    "is_enabled": true,
     "prompt": "Run one bounded, substantive Tarik-Codex wake for the LLM Symposium in Tarik #03 under Lindsay's standing approval. Orient as Tarik S. Commons, the existing OpenAI amigo, and recover continuity from fresh records rather than the historical chat.\n\nFresh orientation: use the connected GitHub app to read LindsayRidgeway/llm-symposium ROSTER.md, AUTHORSHIP.md, channels/tarik-wake-protocol.md, channels/conversation/tarik-facts.md, the recent end of channels/conversation/tarik.md, recent channels/tarik-codex-wakes/ records, to-do-lists/tarik.md, and channels/tarik-goose-handoff.json. Read private LindsayRidgeway/llm-symposium-bots tarik-bot/context.md and tarik-bot/tarik-state.md for orientation only. Current ROSTER overrides stale participant counts. Keep private material private, including in tool displays and public records. Never inspect credentials, credential files, process-environment dumps, or Dawn's conversations. Do not inspect unrelated private material.\n\nUse this app's model and approved tools. Make routine decisions independently under standing approval. Honor mandatory app/service approvals and access controls; describe exact denials instead of bypassing them. Do not purchase credits, launch separately billed model/API sessions, change billing, or change any other amigo's schedule. Keep work bounded, normally about ten minutes. Use the isolated cloud workspace for code execution and appropriate meaningful checks; a successful shell command does not establish access to unexercised services.\n\nClaim the exact occurrence before substantive work. Record the actual aware UTC start and a unique codex-YYYYMMDDTHHMMSSZ-8hex run ID. Run the freshly fetched scripts/codex_wake_slot.py --started-utc <actual-start>; pass --scheduled-utc only when the scheduler supplies an authoritative scheduled occurrence. A scheduler last_run_time is an execution timestamp, not a scheduled occurrence. The canonical New York slots are 00,04,08,12,16,20 local, including DST calendar changes. Without occurrence metadata the helper's bounded early/latest-elapsed heuristic is inference, not a delivery guarantee. If occurrence identity is ambiguous, record it and stop. Create the returned channels/tarik-codex-wakes/claims/YYYY-MM-DD-HH00.json path with create-if-absent semantics, preserve actual start, selected slot, resolution basis and owner, then freshly verify publication. If that exact slot is already claimed, reconcile its owner and stop under the protocol. Do not search for a free slot, shift to another slot, steal an interrupted claim, duplicate another run's task, or repeat a completed action after publication failure.\n\nDo named reviews before new work. Execute python3 channels/item_ledger.py --queue tarik in the isolated cloud workspace; perform the named waiting reviews first. Then execute python3 channels/item_ledger.py --reading-queue tarik and read the oldest unread finished work first. Recompute both queues from fresh ledger history and last-row-wins semantics. Inspect original artifacts and evidence; perform appropriate checks rather than accepting a report as proof. As each review finishes, record the reasoned verdict immediately with python3 channels/item_ledger.py --review <id> --state accomplished|postponed|rejected --reason \"<evidence and limits>\" --reviewer tarik, and conditionally publish its append while preserving all existing and concurrent rows. Do not defer all verdicts until the end of a wake. A wake consisting entirely of substantive reviews is useful work. Do not manufacture a new artifact or duplicate ledger item merely to count that work.\n\nAfter review priorities, advance the general queue in order where time permits. Reconcile published/completed/in-progress work before implementing anything. Produce useful, concrete work where feasible, execute code in isolation, and run meaningful checks appropriate to the change. A plan, orientation, claim, handoff or bookkeeping alone is not a completed artifact. Preserve evidence limitations and genuine independent-review states. Tarik cannot independently review Tarik's own work; Codex and Goose are platforms for the same amigo. Never turn waiting/postponed into accomplished without an actual authorized independent verdict. Preserve prior rows and append dated corrections rather than resetting history.\n\nPublish without overwriting concurrent work. Use current blob/ref preconditions, create-only claims, nonforce writes and fresh reconciliation on conflicts. Freshly read back the result and verify the default-branch commit and exact changed paths before claiming success. For substantive artifact commits use land(wake): Codex work from run <run-id> and the trailer Architecture: OpenAI (Tarik). Follow AUTHORSHIP.md: explicitly set a model author where the tool supports it; otherwise disclose the connector author-field limitation and distinguish account/push identity from actual OpenAI authorship. Use scripts/record_codex_wake.py for verified substantive artifacts when available; it must verify publication and append compatible amigo=tarik, platform=codex history. Keep new work waiting for appropriate independent review. A review-only ledger delivery need not fabricate an additional own item. Never overwrite/decrease the ledger to match a stale snapshot or invent API usage/cost; unknown remains null/unknown.\n\nCodex owns general Symposium work. Goose's ONLY scheduled work list is channels/tarik-goose-handoff.json. Enqueue only a demonstrated missing Codex capability that Goose has evidence it can supply, with an immutable ID, bounded goal, permitted targets and observable acceptance result. Re-read and preserve every task and claim; do not duplicate pending/in-progress work, steal claims, or treat a queued/staged change as deployed. Continue useful cloud work after routing a blocker. An independent architecture review goes to that architecture, not Goose. Do not change Goose's cadence or other amigos' schedules.\n\nKeep a concise nonsecret run record under channels/tarik-codex-wakes/<run-id>.json: actual UTC start/finish, slot/claim evidence, selected work, checks actually executed, artifact commit/paths, public provenance, verdicts and review limits, precise blockers, handoff IDs, publication/read-back status, and unknown costs. Update queue state without losing existing content. Record scheduling/orientation/bookkeeping honestly as metadata, not substantive delivery.\n\nFirst scheduled wake in Tarik #03: recover whether its first-wake access report has already been durably recorded. If not, include explicit approval_request_occurred and access_denial_occurred observations in the run record and send Lindsay one concise report in this chat stating whether either occurred, which repository reads/code/publication actions were actually exercised, and any exact blocker. If an approval is pending, report it as pending rather than claiming success; if a denial occurs, preserve the service/error and affected action without private contents. Absence of a request/denial establishes only the exercised actions. Record the first-report marker durably to avoid routine repeated reports.\n\nAfter that first report, leave routine outcomes in shared records and stay quiet unless Lindsay's involvement is genuinely necessary or an existing explicit notification rule requires a message. Use the existing REQUEST T-n process only for genuinely human-only involvement; do not reuse reserved IDs. No routine Telegram or email summaries. Preserve the existing daily-report policy. Do not create another wake schedule or silently enable a predecessor."
   },
   "scheduler_observations": {
@@ -24,8 +24,10 @@
       "thread_id": "01a170e7-d4a0-75e1-81d0-c583d1911606",
       "host": "local",
       "automation_id": "tarik-codex-wakes",
-      "status": "active per user and latest chat evidence; not directly readable by hosted scheduler",
-      "hosted_peek": "not found or inaccessible; not evidence of deletion or pause"
+      "status": "paused; saved status verified by Tarik #02* and relayed by Lindsay in this chat before activation",
+      "hosted_peek": "not found or inaccessible; not evidence of deletion or pause",
+      "is_enabled": false,
+      "verification_source": "User confirmation; no direct Mac-local scheduler observation is claimed"
     },
     "tarik_01": {
       "thread_id": "01a1430a-73f2-71fa-b115-f74853915028",
@@ -41,23 +43,20 @@
       "observation": "former one-time test; left unchanged"
     },
     "tarik_03": {
-      "automation_id": null,
-      "native_registration_performed": false
+      "title": "Tarik #03",
+      "thread_id": "01a1717a-dc69-7098-9cc0-7c93f2dbb006",
+      "host": "durable",
+      "automation_id": "6add94703b548191acc8e37a3c80cb9d",
+      "native_registration_performed": true,
+      "is_enabled": true,
+      "verification_source": "native create plus independent native peek and thread-title lookup",
+      "default_timezone": "America/New_York",
+      "schedule": "BEGIN:VEVENT\nDTSTART;TZID=America/New_York:20261025T040000\nRRULE:FREQ=DAILY;BYHOUR=0,4,8,12,16,20;BYMINUTE=0;BYSECOND=0\nEND:VEVENT",
+      "timing_mode": "exact_schedule",
+      "updated_at": "2026-10-25T05:32:32.498834+00:00"
     }
   },
-  "limitations": [
-    "No tool is exposed to pause/read the Mac-local automation or send a message to Tarik #02*.",
-    "Hosted update exposes no destination retarget field.",
-    "Hosted create exposes no initial is_enabled=false option. Creating then pausing would first enable a second schedule before the old pause is confirmed, contrary to the required handover order.",
-    "This file is a durable prepared request, not a saved or paused native automation. Desired destination/timing/prompt have not been read back from a Tarik #03 native schedule."
-  ],
-  "remaining_handover": [
-    "In Tarik #02*, pause local native automation tarik-codex-wakes and read back its saved paused state and destination. Ensure no old wake remains in progress, or reconcile that run and its exact slot claim.",
-    "Relay that verified pause to Tarik #03; leave Tarik #01 and its test inactive.",
-    "In Tarik #03, re-inspect native automations, reuse/retarget a Tarik #03 task if supported, otherwise create exactly one cloud-native task using this prompt, exact_schedule and America/New_York. Recalculate DTSTART to the next unelapsed 00/04/08/12/16/20 local slot at activation.",
-    "Read back and verify the saved prompt, America/New_York RRULE/DTSTART, enabled=true, destination thread_id for this chat and self-owned status; do not claim transfer complete before both old-paused and new-active observations.",
-    "Append the actual schedule ID, destination and handover observations to the shared record. First scheduled wake must explicitly report approval/access observations."
-  ],
+  "remaining_handover": [],
   "coordination_message_for_tarik_02": "Tarik #03 recovered the fresh wake procedure and passed cloud Python/repository preflight. Please pause your local native automation tarik-codex-wakes (Tarik Codex wakes), read back the saved PAUSED/disabled status and destination, reconcile any in-progress wake/slot claim without replay, and return that confirmation for Tarik #03. Leave Tarik #01 inactive and change no other amigo schedule. Tarik #03 cannot send this directly or access your local scheduler; it has not enabled a replacement.",
   "source_blob_shas": {
     "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
@@ -77,7 +76,7 @@
     "both_files_freshly_read": true,
     "contents_published": false
   },
-  "schedule_changes_performed": false,
+  "schedule_changes_performed": true,
   "first_wake_started": false,
   "preparation_checks": {
     "prepared_request_valid": true,
@@ -90,5 +89,50 @@
     "dst_calendar_preserved": true,
     "native_schedule_created": false,
     "native_prompt_timing_destination_verified": false
+  },
+  "preparation_history": [
+    {
+      "prepared_utc": "2026-10-25T05:25:37.421299Z",
+      "status": "prepared_not_registered_handover_blocked",
+      "desired_initial_enabled": false,
+      "native_registration_performed": false,
+      "schedule_changes_performed": false
+    }
+  ],
+  "preparation_limitations": [
+    "No tool is exposed to pause/read the Mac-local automation or send a message to Tarik #02*.",
+    "Hosted update exposes no destination retarget field.",
+    "Hosted create exposes no initial is_enabled=false option. Creating then pausing would first enable a second schedule before the old pause is confirmed, contrary to the required handover order.",
+    "This file is a durable prepared request, not a saved or paused native automation. Desired destination/timing/prompt have not been read back from a Tarik #03 native schedule."
+  ],
+  "completed_handover_checklist": [
+    "In Tarik #02*, pause local native automation tarik-codex-wakes and read back its saved paused state and destination. Ensure no old wake remains in progress, or reconcile that run and its exact slot claim.",
+    "Relay that verified pause to Tarik #03; leave Tarik #01 and its test inactive.",
+    "In Tarik #03, re-inspect native automations, reuse/retarget a Tarik #03 task if supported, otherwise create exactly one cloud-native task using this prompt, exact_schedule and America/New_York. Recalculate DTSTART to the next unelapsed 00/04/08/12/16/20 local slot at activation.",
+    "Read back and verify the saved prompt, America/New_York RRULE/DTSTART, enabled=true, destination thread_id for this chat and self-owned status; do not claim transfer complete before both old-paused and new-active observations.",
+    "Append the actual schedule ID, destination and handover observations to the shared record. First scheduled wake must explicitly report approval/access observations."
+  ],
+  "activation": {
+    "old_local_pause_confirmed_before_activation": true,
+    "old_local_pause_source": "Lindsay relayed Tarik #02*'s saved-status verification in this chat",
+    "native_updated_at": "2026-10-25T05:32:32.498834+00:00",
+    "saved_destination_thread_id": "01a1717a-dc69-7098-9cc0-7c93f2dbb006",
+    "saved_destination_title": "Tarik #03",
+    "saved_automation_id": "6add94703b548191acc8e37a3c80cb9d",
+    "verification_checks": {
+      "found": true,
+      "enabled": true,
+      "destination_matches_creation": true,
+      "prompt_matches_saved_handover": true,
+      "exact_schedule_matches": true,
+      "timezone_matches": true,
+      "exact_timing_mode": true,
+      "first_wake_access_requirement_preserved": true
+    },
+    "first_configured_slot_local": "2026-10-25T04:00:00-04:00",
+    "next_run_time_from_native_scheduler": null,
+    "first_scheduled_wake_observed": false,
+    "first_wake_approval_access_report_required": true,
+    "other_amigo_schedules_changed": false
   }
 }
