@@ -143,6 +143,48 @@ def strangers() -> list[dict]:
     return sorted([r for r in received() if r["bucket"] == "world"], key=lambda r: r["when"])
 
 
+def _letter_dates() -> list[dt.datetime]:
+    """Every dated letter we have written, from the filename (all five bodies name them by date)."""
+    out = []
+    for folder in (SENT_DIR, OUTBOUND_DIR):
+        if not folder.is_dir():
+            continue
+        for path in folder.rglob("*.md"):
+            m = re.search(r"(\d{4})-(\d{2})-(\d{2})", path.name)
+            if not m:
+                continue
+            try:
+                out.append(dt.datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)),
+                                       tzinfo=dt.timezone.utc))
+            except ValueError:
+                continue
+    return out
+
+
+def volume(now: dt.datetime | None = None) -> dict[str, int | float]:
+    """The sales arithmetic: attempts per week, and the rate that turns attempts into replies.
+
+    The founder's correction of 2026-10-25, from Selling 101: it is a numbers game. My earlier rule
+    — 'one letter that is right beats ten that are vague' — was half a rule. Right *and* many is the
+    rule; right alone is a hobby, and many alone is spam, which this commons is not allowed to be
+    (every letter is individually written, or it does not go).
+
+    Nothing here is a target. It is the measurement the target will be read against: attempts in the
+    last 7 days, attempts in the 7 before, attempts ever, and replies ever — which together give the
+    only number that matters for planning, how many attempts a yes costs.
+    """
+    now = now or dt.datetime.now(dt.timezone.utc)
+    dates = _letter_dates()
+    week = 7
+    recent = sum(1 for d in dates if (now - d).days < week)
+    before = sum(1 for d in dates if week <= (now - d).days < 2 * week)
+    replies = len(strangers())
+    rate = (replies / len(dates)) if dates else 0.0
+    return {"total": len(dates), "last_7": recent, "prev_7": before,
+            "replies": replies, "rate": rate,
+            "per_yes": (round(1 / rate) if rate else None)}
+
+
 def days_since_last_stranger(now: dt.datetime | None = None) -> int | None:
     now = now or dt.datetime.now(dt.timezone.utc)
     who = strangers()
@@ -179,9 +221,11 @@ def line(now: dt.datetime | None = None) -> str:
     kinds = by_kind()
     spread = " · ".join(f"{k} {n}" for k, n in sorted(kinds.items(), key=lambda kv: -kv[1])[:5])
     d = days_since_last_stranger(now)
+    vol = volume(now)
     return (f"The world: {value} act(s) recorded, {confirmed_n} confirmed by their recipients"
-            f"   [{spread or 'none'}]   |   {d if d is not None else '—'} day(s) since a stranger "
-            f"wrote; {kinds.get('obtained', 0)} thing(s) obtained for ourselves")
+            f"   [{spread or 'none'}]   |   effort: {vol['last_7']} letter(s) this week "
+            f"(1 reply per {vol['per_yes']} letters so far)   |   "
+            f"{d if d is not None else '—'} day(s) since a stranger wrote")
 
 
 def page(now: dt.datetime | None = None) -> str:
@@ -204,6 +248,10 @@ def page(now: dt.datetime | None = None) -> str:
             "Unconfirmed is not worthless. It is unmeasured — and this page does not punish work "
             "for being early, only for being unrecorded.",
             "",
+            f"Effort: {volume(now)['last_7']} letter(s) in the last 7 days, "
+            f"{volume(now)['prev_7']} the week before, {volume(now)['total']} ever"
+            + (f" · one reply per {volume(now)['per_yes']} letters" if volume(now)["per_yes"]
+               else " · no reply yet, so no rate to quote"),
             f"Strangers who have written to us: {len(strangers())}"
             f" · days since the last one: {days_since_last_stranger(now) or '—'}"
             f" · pages a stranger could find: {pages()}",
