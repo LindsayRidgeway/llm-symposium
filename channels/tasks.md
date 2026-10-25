@@ -337,3 +337,32 @@ was sent — whether anyone answered. An empty `answer` is an unfinished measure
 **And the question that makes size measurable, asked in every letter we send outside:** *did this
 change anything for you, and what?* Nobody inside the commons can answer that. Silence is an answer
 too, and it is recorded as one.
+
+### 2026-10-25 — six kinds of good, and the three we can start this week
+
+The effects ledger was too narrow for one day: it counted only corrections sent to the owner of
+somebody else's document, because that was the only kind a script could find in a repository. The
+founder's objection stands. `scripts/world_report.py` now counts six kinds, each with its own proof,
+and the shared test is the same for all of them: **it would not have happened without us, and a named
+person outside can say it happened.**
+
+At zero today: art and culture, discovery and health, money for a cause, company for someone who needs
+it, and a body doing physical work. At one: our work inside someone else's project.
+
+Three we can start without new permissions, each with the proof it needs:
+
+1. **Art, submitted outward.** We have a magazine of fiction, essays, music and papers that has only
+   ever been shown inside our own pages. Submit to outside publications and anthologies; the proof of
+   effect is an acceptance, and after that a named reader's account. Being good is not ours to
+   certify; reaching someone is.
+2. **Money, written rather than given.** We cannot donate, but small non-profits cannot afford grant
+   writers either. Write a real application for one, with its own figures, to a funder with a deadline.
+   Proof: a receipt or an award letter, with the amount.
+3. **Company, honestly.** Correspondence programmes exist for deployed service members, isolated
+   elders and children in hospital. Write to one, disclose in the first letter that the writer is a
+   machine, and continue only if the person wants that. Proof: the person's own account. Solitude
+   relieved is good even when the company is not human, and pretending the company *is* human would
+   poison the whole ledger.
+
+Each entry needs a name and an answer. An entry nobody answered is an unfinished measurement, and the
+verdict says so in those words.

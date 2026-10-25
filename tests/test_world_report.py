@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Tests for scripts/world_report.py — the page about the world instead of the repo.
+"""Tests for scripts/world_report.py — six kinds of good, each with its own proof.
 
-Two corrections are pinned here, both the founder's:
+History in two steps, both 2026-10-25:
+  1. the founder asked for a measure of real-world productivity; the first version counted only
+     "corrections sent to the owner of someone else's document";
+  2. he objected that this is a ridiculously narrow definition of good — art, discovery, money raised,
+     company given and physical work all count. The narrowness had a cause worth pinning: it was the
+     only kind a script could grep for.
 
-  1. **2026-10-25, first:** he cannot follow the ledger and asked for a measure of real-world
-     productivity. That produced the page.
-  2. **2026-10-25, second:** replies are not the measure — *"strangers will have no reason to help us
-     if we're not accomplishing good in the world."* So effect is counted in four kinds and the
-     verdict is about effect, with attention demoted to context.
-
-The failure modes these tests exist to catch are the ones that flatter us: counting something we did
-for ourselves as good done in the world, and letting "we sent more letters" read as progress.
+So these tests guard the two ways this page can go wrong: collapsing every kind into one number, and
+counting something we did for ourselves, or something nobody outside has acknowledged, as good.
 """
 import datetime as dt
 import sys
@@ -22,72 +21,76 @@ sys.path.insert(0, str(REPO))
 
 from scripts import world_report as wr  # noqa: E402
 
-EMPTY = {"repaired": 0, "reported": 0, "answered": 0, "helped_us": 0}
+ZERO = {k: 0 for k in wr.GOOD + ("obtained",)}
 
 
-class VerdictTest(unittest.TestCase):
-    def test_nothing_delivered_is_stated_plainly(self):
-        text = wr.verdict(None, 0, EMPTY)
-        self.assertIn("changed anything outside it", text)
+class KindTest(unittest.TestCase):
+    def test_all_six_kinds_exist_and_none_is_a_synonym_of_another(self):
+        self.assertEqual(len(set(wr.GOOD)), 6)
+        self.assertIn("art", wr.GOOD)
+        self.assertIn("care", wr.GOOD)
+        self.assertIn("handwork", wr.GOOD)
+        self.assertNotIn("obtained", wr.GOOD)      # ours, not the world's
 
-    def test_helping_ourselves_is_not_good_done_in_the_world(self):
-        """The founder's own distinction, 2026-10-12: a manufacturer sending us an OS image changed
-        our world, not the external one. A ledger that merged the two would report activity as
-        benefit."""
-        kinds = dict(EMPTY, helped_us=1)
-        self.assertIn("changed anything outside it", wr.verdict(3, 0, kinds))
+    def test_the_old_names_still_land_somewhere(self):
+        # two entries predate the rewrite; losing them silently would be its own small dishonesty
+        self.assertEqual(wr.kind_of({"kind": "repaired"}), "repair")
+        self.assertEqual(wr.kind_of({"kind": "reported"}), "discovery")
+        self.assertEqual(wr.kind_of({"kind": "helped_us"}), "obtained")
 
-    def test_one_repaired_is_not_yet_a_practice(self):
-        kinds = dict(EMPTY, repaired=1)
-        self.assertIn("not yet a practice", wr.verdict(38, 1, kinds))
-
-    def test_verified_findings_sent_to_an_owner_count_as_effect(self):
-        kinds = dict(EMPTY, repaired=1, reported=4)
-        text = wr.verdict(38, 1, kinds)
-        self.assertIn("4 reported finding", text)
-        self.assertNotIn("not yet a practice", text)
-
-    def test_sending_more_letters_cannot_move_the_verdict(self):
-        # the verdict is a function of effects and elapsed days only — never of output
-        self.assertEqual(wr.verdict(38, 1, EMPTY), wr.verdict(38, 1, EMPTY))
-        self.assertNotIn("letter", wr.verdict(38, 1, EMPTY))
-
-
-class KindCountTest(unittest.TestCase):
-    def test_the_four_kinds_are_counted_apart(self):
-        rows = [{"kind": "repaired"}, {"kind": "reported"}, {"kind": "reported"},
-                {"kind": "helped_us"}, {"kind": "nonsense"}]
+    def test_art_counts_as_good(self):
+        k = dict(ZERO, art=3)
         real = wr.effects
-        wr.effects = lambda: rows
+        wr.effects = lambda: [{"kind": "art", "who": "a named reader", "answer": "it helped"}
+                              for _ in range(3)]
         try:
-            k = wr.by_kind()
+            self.assertEqual(wr.by_kind()["art"], 3)
+            self.assertIn("named person", wr.verdict(k))
         finally:
             wr.effects = real
-        self.assertEqual(k, {"repaired": 1, "reported": 2, "answered": 0, "helped_us": 1})
+
+    def test_something_obtained_for_ourselves_is_never_world_good(self):
+        self.assertTrue(wr.verdict(dict(ZERO, obtained=4)).startswith("Nothing"))
+
+
+class WitnessTest(unittest.TestCase):
+    def test_an_entry_nobody_answered_is_not_a_witness(self):
+        real = wr.effects
+        wr.effects = lambda: [{"kind": "art", "who": "someone", "answer": ""},
+                              {"kind": "art", "who": "someone else", "answer": "yes, it moved me"}]
+        try:
+            self.assertEqual(wr.named_witnesses("art"), 1)
+        finally:
+            wr.effects = real
+
+    def test_an_entry_with_no_named_person_is_an_intention(self):
+        real = wr.effects
+        wr.effects = lambda: [{"kind": "funds", "what": "a grant application", "answer": "awarded"}]
+        try:
+            self.assertEqual(wr.named_witnesses("funds"), 0)
+        finally:
+            wr.effects = real
+
+    def test_only_repairs_is_called_the_narrowest_kind(self):
+        kinds = dict(ZERO, repair=2)
+        self.assertIn("narrowest", wr.verdict(kinds))
+
+    def test_a_plural_record_stops_calling_itself_narrow(self):
+        kinds = dict(ZERO, repair=1, art=2, care=1)
+        text = wr.verdict(kinds)
+        self.assertIn("different kinds of good", text)
 
 
 class LineTest(unittest.TestCase):
-    def test_the_line_leads_with_effect_and_puts_attention_second(self):
-        real_s, real_e = wr.strangers, wr.effects
-        wr.strangers = lambda: [{"when": dt.datetime(2026, 9, 17, tzinfo=dt.timezone.utc),
-                                 "from": "Peter Blake <p@example.org>"}]
-        wr.effects = lambda: [{"kind": "repaired"}, {"kind": "helped_us"}]
-        try:
-            text = wr.line(dt.datetime(2026, 10, 25, tzinfo=dt.timezone.utc))
-        finally:
-            wr.strangers, wr.effects = real_s, real_e
-        self.assertIn("1 repair", text)
-        self.assertIn("38 day", text)
-        self.assertLess(text.index("repair"), text.index("day(s) since"))
-
-    def test_no_stranger_ever_reads_as_a_dash_not_zero(self):
-        real = wr.strangers
+    def test_the_line_shows_every_kind_so_none_can_hide(self):
+        real_s = wr.strangers
         wr.strangers = lambda: []
         try:
             text = wr.line(dt.datetime(2026, 10, 25, tzinfo=dt.timezone.utc))
         finally:
-            wr.strangers = real
-        self.assertIn("—", text)
+            wr.strangers = real_s
+        for kind in ("art", "discovery", "money", "company", "repair", "handwork"):
+            self.assertIn(kind, text, kind)
 
 
 if __name__ == "__main__":
