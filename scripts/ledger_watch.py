@@ -436,9 +436,12 @@ def main() -> int:
                 sync_note = ("another body held the shared checkout for 15 minutes; measured "
                              "without syncing or repairing")
             else:
-                pull = git("pull", "--rebase", "--autostash", "--quiet")
-                if pull.returncode != 0:
-                    sync_note = "checkout could not be synced (conflict); measured what is here"
+                # 2026-10-25 (Desi): this used to be `pull --rebase --autostash`. The run of
+                # 07:45 stopped on the first of 58 commits, committed the conflicted tree anyway,
+                # and left the checkout mid-rebase for two and a half hours with every landing in
+                # every body failing behind it. Never rebase this tree; never measure a tree with
+                # an unfinished operation in it.
+                sync_note = sync_checkout(REPO)
                 recovered = recover_verdicts(now - dt.timedelta(days=args.days), apply=True)
                 counts = filed_and_reconciled(apply=True)
     else:
@@ -470,11 +473,106 @@ def main() -> int:
     return 0 if passes else 1
 
 
+_MARKERS = ("<<<<<<<", ">>>>>>>")
+_COMMITTED_PATHS = ("channels/items.jsonl", "channels/watch")
+
+
+def unmerged_state(repo: Path) -> str | None:
+    """The unfinished git operation leaving conflict markers in the tree, if there is one.
+
+    Named rather than boolean: the message this feeds should say *which* operation to abort.
+    """
+    gitdir = repo / ".git"
+    for name in ("rebase-merge", "rebase-apply", "MERGE_HEAD", "CHERRY_PICK_HEAD"):
+        if (gitdir / name).exists():
+            return name
+    return None
+
+
+def abort_unfinished(repo: Path, state: str) -> str:
+    """End the unfinished operation. Returns the phrase to put in the sync note."""
+    verb = {"rebase-merge": "rebase", "rebase-apply": "rebase",
+            "MERGE_HEAD": "merge", "CHERRY_PICK_HEAD": "cherry-pick"}[state]
+    out = subprocess.run(["git", "-C", str(repo), f"{verb}", "--abort"],
+                         capture_output=True, text=True, timeout=300)
+    if out.returncode == 0:
+        return f"aborted the unfinished {verb}"
+    return f"could not abort the unfinished {verb} ({(out.stderr or '').strip()[:120]})"
+
+
+def detached(repo: Path) -> bool:
+    """True when HEAD is not on a branch. `git push origin HEAD:main` from here writes straight to
+    main with no branch of its own — which is how the half-merged ledger reached main at 11:45Z."""
+    return subprocess.run(["git", "-C", str(repo), "symbolic-ref", "-q", "HEAD"],
+                          capture_output=True, text=True).returncode != 0
+
+
+def sync_checkout(repo: Path) -> str:
+    """Bring the shared checkout level with origin/main without ever starting a rebase.
+
+    A rebase in a tree five bodies write to is a trap: it can stop half-way and leave the checkout
+    detached with conflict markers in the ledger, which is what happened on 2026-10-22 and again on
+    2026-10-25 (see the report). So: end anything unfinished, fetch, and fast-forward only. A
+    *diverged* checkout is named and left alone — reconciling a stranded branch is a wake's job with
+    turns to spend, not a clock's.
+    """
+    def g(*args: str) -> subprocess.CompletedProcess:
+        # `repo`, not the module's REPO: the tests drive this against throwaway checkouts.
+        return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True,
+                              timeout=120)
+
+    state = unmerged_state(repo)
+    if state:
+        abort_unfinished(repo, state)
+    g("fetch", "-q", "origin", "main")
+    ahead = int(g("rev-list", "--count", "origin/main..HEAD").stdout.strip() or 0)
+    behind = int(g("rev-list", "--count", "HEAD..origin/main").stdout.strip() or 0)
+    if ahead and behind:
+        return (f"checkout is {ahead} commit(s) ahead of and {behind} behind origin/main — not "
+                f"reconciling here; measured what is on disk")
+    if behind:
+        if g("merge", "--ff-only", "-q", "origin/main").returncode != 0:
+            return "checkout could not fast-forward to origin/main; measured what is on disk"
+    return ""
+
+
+def markers_in_patch(diff_text: str) -> list[str]:
+    """Conflict markers a staged diff would *add*, i.e. lines this commit would introduce.
+
+    Only added lines count: a marker already red in the tree is a separate problem, and blocking
+    on it would freeze the commit path forever instead of stopping the one commit that made it.
+    """
+    found: list[str] = []
+    for line in diff_text.splitlines():
+        if not line.startswith("+"):
+            continue
+        body = line[1:].rstrip()
+        if body.startswith(_MARKERS) or body == "=======":
+            found.append(body)
+    return found
+
+
 def commit_and_push(m: dict) -> None:
     status = git("status", "--porcelain").stdout.strip()
     if not status:
         return
-    git("add", "channels/items.jsonl", "channels/watch")
+    git("add", *_COMMITTED_PATHS)
+    # Guard added 2026-10-25 (Desi), after this function committed a half-merged ledger to main:
+    # the 07:45 run's pull conflicted, the note said "measured what is here", and the commit went
+    # up carrying three marker lines and a stale conflict block. The ledger does not fail on those
+    # lines; it skips them and under-reports, which is why nothing noticed for a day.
+    state = unmerged_state(REPO)
+    if state:
+        git("reset", "-q", "--", *_COMMITTED_PATHS)
+        print(f"ledger_watch: refusing to commit during an unfinished git operation ({state}); "
+              f"the repair stays on disk. Run `{state}` to a clean tree and rerun.")
+        return
+    added = markers_in_patch(git("diff", "--cached", "-U0").stdout)
+    if added:
+        git("reset", "-q", "--", *_COMMITTED_PATHS)
+        print("ledger_watch: refusing to commit conflict markers "
+              f"({len(added)} added line(s), first {added[0][:40]!r}); nothing was committed")
+        return
     ident = ["-c", "user.name=desi", "-c", "user.email=desi@llm-symposium.local"]
     commit = subprocess.run(["git", "-C", str(REPO), *ident, "commit", "-q", "-m",
                              f"watch: daily ledger check {m['at'][:10]} — "
@@ -484,14 +582,18 @@ def commit_and_push(m: dict) -> None:
     if commit.returncode != 0:
         print("ledger_watch: commit failed: " + (commit.stderr or "")[-200:])
         return
-    for attempt in range(2):
-        push = git("push", "--quiet", "origin", "HEAD:main")
-        if push.returncode == 0:
-            return
-        if attempt == 0:
-            git("pull", "--rebase", "--autostash", "--quiet")
-    print("ledger_watch: push failed; the repair is committed locally and will go up with the next "
-          "wake that pushes")
+    # 2026-10-25 (Desi): the retry here used to be another `pull --rebase`, and the push used
+    # HEAD:main — which writes to main from whatever HEAD happens to be. Both are gone: a detached
+    # HEAD refuses, and a refused push is left for a landing to carry rather than rebasing a tree
+    # five bodies write to.
+    if detached(REPO):
+        print("ledger_watch: refusing to push from a detached HEAD (the repair is committed on "
+              "whatever is checked out); a landing will carry it once main is back on a branch")
+        return
+    push = git("push", "--quiet", "origin", "HEAD:main")
+    if push.returncode != 0:
+        print("ledger_watch: push refused (" + ((push.stderr or "").strip()[:150]) +
+              "); the repair is committed on main and the next landing carries it")
 
 
 if __name__ == "__main__":

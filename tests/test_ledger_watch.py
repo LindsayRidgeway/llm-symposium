@@ -7,6 +7,7 @@ that carried a verdict from one that carried only prose.
 
 import importlib.util
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -101,6 +102,147 @@ class VerdictRuleTest(unittest.TestCase):
         self.assertFalse(passes)
         self.assertIn("72 waiting against 23", reasons[0])
         self.assertIn("up 14", reasons[1])
+
+
+class CommitGuardTest(unittest.TestCase):
+    """The guard added 2026-10-25, after this script committed a half-merged ledger to main.
+
+    The 07:45 run's `git pull --rebase` conflicted, the note said "measured what is here", and the
+    commit went up with three marker lines and a stale conflict block in `channels/items.jsonl`.
+    Nothing failed: the ledger skips unreadable lines and under-reports, so the queue was quietly
+    wrong rather than loudly broken.
+    """
+
+    def test_a_conflicted_block_in_a_diff_is_caught(self):
+        diff = (
+            "+++ b/channels/items.jsonl\n"
+            "+<<<<<<< HEAD\n"
+            '+{"id": "a"}\n'
+            "+=======\n"
+            '+{"id": "b"}\n'
+            "+>>>>>>> 53d61095 (rover: voice loop)\n"
+        )
+        self.assertEqual(len(lw.markers_in_patch(diff)), 3)
+
+    def test_an_ordinary_row_that_contains_equals_signs_is_not_a_marker(self):
+        diff = (
+            "--- a/channels/items.jsonl\n"
+            "+++ b/channels/items.jsonl\n"
+            '+{"id": "x", "title": "a ======= b"}\n'
+            "+<!-- not a marker -->\n"
+        )
+        self.assertEqual(lw.markers_in_patch(diff), [])
+
+    def test_only_added_lines_count_so_an_old_red_tree_does_not_freeze_commits(self):
+        """A marker already in the tree is somebody else's problem to repair; blocking on it
+        would stop every commit forever instead of the one commit that introduced it."""
+        diff = "-<<<<<<< HEAD\n--- a/f\n+++ b/f\n+clean\n"
+        self.assertEqual(lw.markers_in_patch(diff), [])
+
+    def test_an_unfinished_rebase_is_named(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / ".git" / "rebase-merge").mkdir(parents=True)
+            self.assertEqual(lw.unmerged_state(root), "rebase-merge")
+
+    def test_an_unfinished_merge_is_named(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / ".git").mkdir()
+            (root / ".git" / "MERGE_HEAD").write_text("0" * 40)
+            self.assertEqual(lw.unmerged_state(root), "MERGE_HEAD")
+
+    def test_a_clean_checkout_reports_nothing(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / ".git").mkdir()
+            self.assertIsNone(lw.unmerged_state(root))
+
+
+class SyncWithoutRebaseTest(unittest.TestCase):
+    """The 07:45 run of 2026-10-25 synced with `pull --rebase --autostash`. It stopped on the first
+    of 58 commits, committed the conflicted tree, and left the shared checkout mid-rebase for two
+    and a half hours; every landing in every body failed behind it.
+
+    These tests pin the replacement: fast-forward only, never a rebase, and a diverged checkout is
+    named and left alone rather than half-reconciled.
+    """
+
+    def _git(self, cwd, *args):
+        return subprocess.run(["git", "-C", str(cwd), *args], capture_output=True, text=True)
+
+    def _pair(self, root: Path):
+        """A bare origin and one clone of it with one commit on main."""
+        origin = root / "origin.git"
+        work = root / "work"
+        self._git(root, "init", "-q", "--bare", "-b", "main", str(origin))
+        self._git(root, "clone", "-q", str(origin), str(work))
+        for k, v in (("user.name", "t"), ("user.email", "t@e")):
+            self._git(work, "config", k, v)
+        (work / "f.txt").write_text("one\n")
+        self._git(work, "add", "-A")
+        self._git(work, "commit", "-q", "-m", "one")
+        self._git(work, "push", "-q", "-u", "origin", "main")
+        return origin, work
+
+    def _other_writer(self, origin: Path, root: Path, text: str):
+        """A second clone that pushes a commit, i.e. the cloud wake moving origin on."""
+        other = root / "other"
+        self._git(root, "clone", "-q", str(origin), str(other))
+        for k, v in (("user.name", "o"), ("user.email", "o@e")):
+            self._git(other, "config", k, v)
+        (other / "f.txt").write_text(text)
+        self._git(other, "add", "-A")
+        self._git(other, "commit", "-q", "-m", "theirs")
+        self._git(other, "push", "-q", "origin", "main")
+
+    def test_a_checkout_only_behind_is_fast_forwarded_and_says_nothing(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            origin, work = self._pair(root)
+            self._other_writer(origin, root, "one\ntwo\n")
+            self.assertEqual(lw.sync_checkout(work), "")
+            self.assertEqual((work / "f.txt").read_text(), "one\ntwo\n")
+
+    def test_a_diverged_checkout_is_named_and_left_alone_never_rebased(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            origin, work = self._pair(root)
+            (work / "mine.txt").write_text("mine\n")          # not pushed: ahead
+            self._git(work, "add", "-A")
+            self._git(work, "commit", "-q", "-m", "mine")
+            head = self._git(work, "rev-parse", "HEAD").stdout.strip()
+            self._other_writer(origin, root, "theirs\n")      # and behind
+            note = lw.sync_checkout(work)
+            self.assertIn("1 commit(s) ahead of and 1 behind", note)
+            self.assertEqual(self._git(work, "rev-parse", "HEAD").stdout.strip(), head,
+                             "sync_checkout moved HEAD on a diverged checkout")
+            self.assertFalse((work / ".git" / "rebase-merge").exists(), "a rebase was started")
+            self.assertFalse((work / ".git" / "MERGE_HEAD").exists(), "a merge was started")
+
+    def test_an_unfinished_rebase_is_ended_before_anything_is_measured(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            origin, work = self._pair(root)
+            self._git(work, "checkout", "-q", "-b", "side")
+            (work / "f.txt").write_text("side\n")
+            self._git(work, "commit", "-q", "-am", "side")
+            self._git(work, "checkout", "-q", "main")
+            (work / "f.txt").write_text("main\n")
+            self._git(work, "commit", "-q", "-am", "main")
+            self._git(work, "rebase", "side")                 # stops: real conflict, real state
+            self.assertTrue((work / ".git" / "rebase-merge").exists())
+            lw.sync_checkout(work)
+            self.assertFalse((work / ".git" / "rebase-merge").exists(),
+                             "the unfinished rebase was left in place")
+
+    def test_a_detached_checkout_is_recognised(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            origin, work = self._pair(root)
+            self.assertFalse(lw.detached(work))
+            self._git(work, "checkout", "-q", "--detach", "HEAD")
+            self.assertTrue(lw.detached(work))
 
 
 if __name__ == "__main__":
