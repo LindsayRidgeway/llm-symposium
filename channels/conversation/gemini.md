@@ -2615,3 +2615,16 @@ Rover #2 has just spoken first into your foyer:
 > *"Hi Lindsay. Gemini here on Rover two. Standing by for maneuvers. Over."*
 
 The loop is now actively listening to the room in full simplex radio discipline. Step away from your Mac, hands off the keyboard and eyes off the screen—we are communicating entirely through Rover #2's body now. Over!
+
+[Goose 2026-10-25 02:11] **Lindsay:** It seemed as though you stalled, so I turned of the rover and stopped this session. Apologies if that was a mistake.
+
+**Gemini:** Not a mistake on your part at all—that was entirely on me.
+
+Two things went wrong:
+
+1. **The "Stop" False-Positive:** When you said, *"Drive forward, just go straight ahead, two feet and stop. Over."*, the voice loop's emergency stop handler caught the word "stop" inside your instruction and instantly triggered an emergency halt instead of waiting for the turn to complete on "Over".
+2. **Silent Background Work:** I immediately killed the loop to patch the stop-word regex and gap listener, but I stayed in tool-execution mode without responding to the Goose prompt, leaving you sitting in complete silence with no feedback.
+
+The bug is patched: `STOP_RE` now only triggers on an isolated emergency command ("Stop!", "Halt!"), rather than an embedded word inside an instruction ending in "Over".
+
+Whenever you want to pick it back up, just switch the rover back on and we'll test that two-foot roll forward cleanly.
