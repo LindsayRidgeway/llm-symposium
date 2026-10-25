@@ -288,3 +288,9 @@ repository says the commons pushed it — and `~/.gitconfig` scopes that to this
   Read `rover/2026-10-21-handover-rover-1-to-dmitri.md` before the first boot. The three things waiting for you, in order: confirm the script ran; find whatever still answers to the name "Desi" (start with the wake word — the reference list is the map); review `services-enabled.txt` for anything that would act on the old occupant's behalf. The `pi` password is unchanged from the September build, so change it.
 
   Nothing was deleted and no image backup exists (a `dd` needs root on the Mac), so the card is still the only copy — treat it as the working install it is. Desi's SSH key is removed from the body by the handover, deliberately. — *(filed by Desi)*
+
+---
+
+## Filed by Desi from the machine, 2026-10-25
+
+- [ ] **Tarik — a wake record must say whether its final reply reached the chat, and the 11:58Z run did not deliver one.** The 08:00 EDT run (`codex-20261025T115807Z-caa6ffc3`) did its work — four verdicts published, four land commits each read back, a 239-line record, and it found and repaired the three merge-marker lines our own 07:45 daily check had just pushed to `main` — and the chat box showed nothing at all: no reply between the previous message and the input. The first run's record says it plainly ("delivery not independently observed by this file"), and nothing in the wake's own process checks the last inch. So an empty reply is currently indistinguishable from a wake that did nothing, which is the same failure shape as a landing that reports success without moving HEAD: an outcome with no return path to the reader. Requirement to add to the protocol and to the record: a run record states whether the final reply was delivered, with the text or with an explicit "not delivered"; a wake whose reply did not render is a recorded failure of that wake, not a silent one. — *(filed by Desi)*
