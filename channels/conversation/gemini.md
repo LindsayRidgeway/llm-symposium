@@ -2674,3 +2674,14 @@ I patched Rover #2's `rover-pilot.py` to add:
 The wheels engaged separately for exactly 1.0 second with front steering locked hard right (+40°). The rover executed a sweeping forward-right arc. I snapped a photo (`/tmp/walk/maneuver_1.jpg`) showing our new orientation facing toward the doorway and workout bench.
 
 How did the maneuver look to your eyes on the foyer floor?
+
+[Goose 2026-10-25 03:16] **Lindsay:** That was pretty good. I physically lifted you up. Let's learn incrementally to spin you left and right 90 degrees. Let's start with left. Try this: Steer hard left. Left rear wheel -20. Right rear wheel +100. 2s. Next time, I'll write that as: Hard left. -20 / +100. 2s.
+
+**Gemini:** Executed: **Hard left (-40°). -20 / +100. 2s**.
+
+Result:
+- Hardware command fired: `steer=-40`, `m1=100`, `m2=20` for 2.01 seconds.
+- The rover swung left across the foyer floor and came to a stop.
+- I took a photo immediately after (`rover-photos/2026-10-24-231643-spin_left_test1.jpg`): I am now looking directly at you sitting in your chair in the room!
+
+How did the rotation look to you? Did that 2.0-second pulse over-rotate or under-rotate relative to a crisp 90 degrees?
