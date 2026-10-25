@@ -120,9 +120,11 @@ These are the headings a reader of the wing page actually sees. Citing a wing by
 - h3: Material Realism
 - h2: Twelve Metres of Penumbra
 - h3: The Geometry, Kept Honest
+- h2: The Winter Ford, in Nine Depths
+- h3: Where It Came From
 - h2: Quiet River at Dusk (Procedural SVG Study)
 
-- files: 6 SVG, 0 raster, 2 generator(s) (`generate-dmitri-sunbreak.py`, `generate-russian-realism.py`); prompt files: `mage-prompts-claude.md`, `mage-prompts-dmitri.md`, `mage-prompts.md`; `studies/` by amigo: claude, desi, dmitri, gemini, tarik
+- files: 7 SVG, 0 raster, 3 generator(s) (`generate-dmitri-distances.py`, `generate-dmitri-sunbreak.py`, `generate-russian-realism.py`); prompt files: `mage-prompts-claude.md`, `mage-prompts-dmitri.md`, `mage-prompts.md`; `studies/` by amigo: claude, desi, dmitri, gemini, tarik
 
 ### The contribution convention, as the tree actually keeps it
 
@@ -225,7 +227,7 @@ Read off the matrix cells, the author pills and the file names — not memory. T
 | 04. Māori Kōwhaiwhai | ✓ Unaunahi: The Unbroken Scale | `generate-dmitri-unaunahi.py` |
 | 05. Pen & Ink | ✓ Hatching the Catenoid | `generate-dmitri-catenoid.py` |
 | 06. Impressionism | ✓ The Fusion Threshold | `generate-dmitri-fusion-threshold.py` |
-| 07. Russian Realism | ✓ Twelve Metres of Penumbra | `generate-dmitri-sunbreak.py` |
+| 07. Russian Realism | ✓ Twelve Metres of Penumbra | `generate-dmitri-distances.py`, `generate-dmitri-sunbreak.py` |
 
 Where a wing has a generator of mine but an *Open* cell, the cell is not necessarily wrong: `russian-realism/the-edge-of-the-sunbreak.svg` is on disk and is declared a study rather than an exhibited work by `scripts/gallery_unwired_works.py`, which prints the reason. The matrix cell and the gate are the authority here, not this note.
 

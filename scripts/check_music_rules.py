@@ -201,6 +201,10 @@ class ScoreVerificationReport:
         self.meter_violations: List[str] = []
         self.measures_count: int = 0
         self.voice_names: List[str] = []
+        # Which range was applied to which voice, and why (score's own clef, caller, or default).
+        self.ranges_applied: Dict[str, str] = {}
+        # Bars parsed per voice. A voice listed here with 0 bars was declared but never read.
+        self.voice_measures: Dict[str, int] = {}
 
     @property
     def passed(self) -> bool:
@@ -224,6 +228,7 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
     default_length = 0.125 # L: 1/8 default
     
     voices_data: Dict[str, List[List[NoteEvent]]] = {}
+    declared_voices: Dict[str, Dict[str, str]] = {}
     current_voice: Optional[str] = None
 
     for line in lines:
@@ -256,6 +261,20 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
             elif h_type == 'V':
                 v_token = h_val.strip().split()[0]
                 current_voice = v_token
+                # Keep the clef and name the score states for this voice. Discarding them
+                # (this used to keep only the number) meant a tenor written in treble clef
+                # was range-checked against a bass register and failed for no musical reason.
+                clef_match = re.search(r'clef=\s*([A-Za-z+-]+)', h_val)
+                name_match = re.search(r'name=\s*"([^"]*)"', h_val)
+                voice_header: Dict[str, str] = {}
+                if clef_match:
+                    voice_header['clef'] = clef_match.group(1).lower()
+                if name_match:
+                    voice_header['name'] = name_match.group(1).strip()
+                if voice_header:
+                    declared_voices[v_token] = voice_header
+                elif v_token not in declared_voices:
+                    declared_voices[v_token] = {}
                 if current_voice not in voices_data:
                     voices_data[current_voice] = []
             # Any other header field (X, T, C, Q, etc.) is ignored metadata
@@ -289,9 +308,26 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
             if evs:
                 voices_data[current_voice].append(evs)
 
+    # A voice the score declares but never feeds is reported, not silently dropped:
+    # "declared but nothing parsed" and "not declared at all" look identical once the
+    # empty list has been removed, and the first is how a score gets a green tick while
+    # half of it was never read.
+    for v_name in sorted(declared_voices):
+        if not voices_data.get(v_name):
+            report.warnings.append(
+                f"Voice {v_name} is declared in a V: header but no bars were parsed for it "
+                f"(nothing in that voice was checked)"
+            )
+
+    report.voice_measures = {k: len(v) for k, v in voices_data.items() if v}
+
     # Clean out any empty voice lists
     voices_data = {k: v for k, v in voices_data.items() if v}
     report.voice_names = list(voices_data.keys())
+    # The real bar count, for one voice as well as for many. This was previously assigned
+    # only inside the two-voice counterpoint branch, so a valid single-voice lead sheet
+    # printed "Measures evaluated: 0" underneath a PASSED verdict.
+    report.measures_count = max((len(b) for b in voices_data.values()), default=0)
 
     if not report.voice_names:
         report.errors.append("No playable voices or measures found in ABC score.")
