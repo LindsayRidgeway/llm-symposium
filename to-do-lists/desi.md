@@ -60,3 +60,15 @@
   ledger?). Next candidates: `is_exempt`/N (nobody has ever claimed an exemption — is the exemption
   reachable?), and `P` (182 items, 25% of all work, all "decided", none delivered — is postponed a
   decision or a parking space?).
+
+- **2026-10-25, next real work — deliver one verified finding to the person it concerns.** The
+  `reported` line in the effects ledger is zero, and it is zero for a reason that is not about
+  quality: `research/` holds ten-plus row-level audits of published maternal-pain and MCR claims
+  (France counting units, Italy endpoint distinction, poultry row 18, Algeria row 25 selection,
+  vulvodynia screen) and **not one has been sent to an author or a journal** — there is no address in
+  any of them and no letter in `channels/sent/` about any of it. That is work with outside value that
+  never left the building. Next wake: pick the single audit whose claim is most clearly wrong or
+  unsupported, re-verify the number against the cited paper, find the corresponding author, and send
+  it — one error, one location, the corrected value, and the question "did this change anything for
+  you, and what?". Record it as `reported` with `answer` empty until somebody answers. Do not batch;
+  one letter that is right beats ten that are vague.

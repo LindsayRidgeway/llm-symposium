@@ -47,7 +47,7 @@ sys.path.insert(0, str(REPO))
 
 SENT_DIR = REPO / "channels" / "sent"
 OUTBOUND_DIR = REPO / "channels" / "outbound"
-WINS = REPO / "channels" / "world-wins.jsonl"
+EFFECTS = REPO / "channels" / "world-effects.jsonl"
 DOCS = REPO / "docs"
 _TO_RE = re.compile(r"^To:\s*(.+)$", re.M)
 _AT_RE = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
@@ -113,11 +113,11 @@ def days_since_last_stranger(now: dt.datetime | None = None) -> int | None:
     return (now - who[-1]["when"]).days
 
 
-def wins() -> list[dict]:
-    if not WINS.exists():
+def effects() -> list[dict]:
+    if not EFFECTS.exists():
         return []
     out = []
-    for line in WINS.read_text(encoding="utf-8").splitlines():
+    for line in EFFECTS.read_text(encoding="utf-8").splitlines():
         if line.strip():
             try:
                 out.append(json.loads(line))
@@ -126,27 +126,63 @@ def wins() -> list[dict]:
     return sorted(out, key=lambda r: r.get("date") or "")
 
 
+def by_kind() -> dict[str, int]:
+    """Repaired / reported / answered / helped_us — the four kinds of effect, counted apart.
+
+    `helped_us` is kept visible on purpose. The founder drew the line himself on 2026-10-12: a
+    manufacturer sending us an OS image changed our world, not anyone else's. A ledger that let
+    those two merge would report activity as benefit, which is the exact error this page exists
+    to stop.
+    """
+    counts = {"repaired": 0, "reported": 0, "answered": 0, "helped_us": 0}
+    for rec in effects():
+        kind = rec.get("kind", "")
+        if kind in counts:
+            counts[kind] += 1
+    return counts
+
+
 def pages() -> int:
     return len(list(DOCS.rglob("*.html"))) if DOCS.is_dir() else 0
 
 
-def verdict(days: int | None, adopted: int) -> str:
-    if days is None:
-        return ("no one outside the commons has ever written to us. Nothing here is known to "
-                "have reached anyone.")
-    if days > 30:
-        return (f"a stranger last wrote {days} days ago. In this window the commons has not been "
-                f"a conversation; it has been a broadcast into silence.")
-    if days > 7:
-        return f"several weeks of silence from outside, and {adopted} adoption(s) ever."
-    return "the world is answering." if adopted else "the world is answering, nothing adopted yet."
+def verdict(days: int | None, adopted: int, kinds: dict[str, int] | None = None) -> str:
+    """The honest sentence. It is about effect; the reply count is context, not the finding.
+
+    If nothing has been repaired and nothing verified has been sent to an owner, then no matter how
+    many letters went out, the answer to "is the world better because we exist" is: not measurably.
+    """
+    k = kinds or by_kind()
+    delivered = k["repaired"] + k["reported"] + k["answered"]
+    if delivered == 0:
+        return ("nothing the commons has made is known to have changed anything outside it: no "
+                "repair in anyone's work, no verified finding sent to the person it concerns, no "
+                "outsider served. That is the whole finding, and it cannot be improved by writing "
+                "more reports.")
+    if k["reported"] == 0 and k["repaired"] <= 1:
+        return (f"one kind act of work has reached the world ({delivered} instance in all), which is "
+                f"not yet a practice. The rest is a broadcast; a stranger last wrote "
+                f"{days if days is not None else '—'} days ago.")
+    return (f"{k['repaired']} repair(s), {k['reported']} reported finding(s), {k['answered']} "
+            f"answered question(s). Small, real, and countable in somebody else's terms.")
 
 
 def line(now: dt.datetime | None = None) -> str:
+    """The one line for the daily report: effect first, attention second.
+
+    Order is the argument. `repaired` means somebody else's work now contains ours; `reported`
+    means a verified error reached the person who owns it; `answered` means an outsider asked and
+    used what came back. Replies and letters sit second, because a reply is only the channel — the
+    founder's correction of 2026-10-25 was that strangers have no reason to help a commons that is
+    not doing any good, so the good has to be counted by itself and not inferred from the replies.
+    """
     d = days_since_last_stranger(now)
-    _, recent = letters_sent(hours=24)
-    return (f"The world: {d if d is not None else '—'} day(s) since a stranger replied "
-            f"· {recent} letter(s) sent out in 24h · {len(wins())} adoption(s) ever")
+    k = by_kind()
+    return (f"The world: {k['repaired']} repair(s) in someone else's work"
+            f" · {k['reported']} verified error(s) reported to its owner"
+            f" · {k['answered']} question(s) answered for an outsider"
+            f"   |   {d if d is not None else '—'} day(s) since a stranger wrote"
+            f" · {k['helped_us']} thing(s) we got for ourselves, counted apart")
 
 
 def page(now: dt.datetime | None = None) -> str:
@@ -154,18 +190,22 @@ def page(now: dt.datetime | None = None) -> str:
     d = days_since_last_stranger(now)
     sent, recent = letters_sent(hours=7 * 24)
     who = strangers()
-    adopted = wins()
+    adopted = effects()
     out = [f"**The world, not the repo — {now.astimezone().strftime('%Y-%m-%d')}**", ""]
     out.append(f"Letters sent to addresses outside the commons: {len(_outside_addresses())} people, "
                f"{sent} letters ({recent} in the last 7 days)   — an output, not a result")
     out.append(f"Replies from a stranger, ever: {len(who)}")
     out.append(f"Days since a stranger replied: {d if d is not None else 'never'}"
                + (f"   (last: {who[-1]['from'][:50]}, {who[-1]['when'].date()})" if who else ""))
-    out.append(f"Work adopted by a project we do not own: {len(adopted)}"
-               + (f"   (last: {adopted[-1].get('what', '?')[:60]})" if adopted else ""))
+    k = by_kind()
+    out.append(f"Repaired in someone else's work: {k['repaired']}"
+               + (f"   ({adopted[0].get('what', '?')[:60]}…)" if k["repaired"] else ""))
+    out.append(f"Verified errors reported to the person who owns them: {k['reported']}")
+    out.append(f"Questions from an outsider answered and used: {k['answered']}")
+    out.append(f"Things we got for ourselves, counted apart: {k['helped_us']}")
     out.append(f"Pages a stranger could reach: {pages()}   — reachable, not read: nobody reports a "
                f"reader and no analytics exist")
-    out += ["", "**Verdict.** " + verdict(d, len(adopted))]
+    out += ["", "**Verdict.** " + verdict(d, len(adopted), k)]
     return "\n".join(out)
 
 

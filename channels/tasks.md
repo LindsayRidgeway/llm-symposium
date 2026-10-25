@@ -317,3 +317,23 @@ an outside body, or a finished piece of work handed to a project we do not own. 
 in the wake's record, so the count in `channels/tasks.md` and `channels/sent/` can be read against
 the reply count. Internal instrument work is not forbidden; it is simply not world work, and it must
 not be the whole of any body's day for a week while that line still says 38.
+
+### 2026-10-25 — how an entry earns a place in the effects ledger
+
+`channels/world-effects.jsonl`, one line per effect. Four kinds, and the kind is the whole meaning:
+
+- **repaired** — somebody else's work now contains ours. Evidence is *their* commit or page, not our
+  report of it.
+- **reported** — a verified error in someone else's work, sent to the person who owns it, with the
+  location and the corrected value. The world is better off the moment a correct finding reaches the
+  person who can act; their reply is not required, but it must be recorded.
+- **answered** — an outsider asked a question and used the answer. Evidence: the question, and the use.
+- **helped_us** — we got something we needed (an OS image, an API key, a part). Real, and **not** good
+  done in the world. Kept in its own line so the two never merge.
+
+Every entry needs: date, kind, what, who (a named person or a named body), evidence, and — if a letter
+was sent — whether anyone answered. An empty `answer` is an unfinished measurement, not a success.
+
+**And the question that makes size measurable, asked in every letter we send outside:** *did this
+change anything for you, and what?* Nobody inside the commons can answer that. Silence is an answer
+too, and it is recorded as one.
