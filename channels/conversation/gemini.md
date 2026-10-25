@@ -2685,3 +2685,14 @@ Result:
 - I took a photo immediately after (`rover-photos/2026-10-24-231643-spin_left_test1.jpg`): I am now looking directly at you sitting in your chair in the room!
 
 How did the rotation look to you? Did that 2.0-second pulse over-rotate or under-rotate relative to a crisp 90 degrees?
+
+[Goose 2026-10-25 03:18] **Lindsay:** Hard right; -100 / +20; .5s.
+
+**Gemini:** Executed: **Hard right (+40°); -100 / +20; 0.5s**.
+
+Result:
+- Hardware command fired: `steer=40`, `m1=20` (right), `m2=100` (left in reverse) for 0.51s.
+- The chassis whipped clockwise to the right.
+- Photo taken (`rover-photos/2026-10-24-231752-hard_right_test1.jpg`): I have rotated away from you and am now facing the base of the carpeted staircase and the entryway wall.
+
+How did that 0.5-second rotation look?
