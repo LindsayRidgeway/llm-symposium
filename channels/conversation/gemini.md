@@ -2718,3 +2718,14 @@ Result:
 - Photo taken (`rover-photos/2026-10-24-232057-hard_right_test3.jpg`): The stairs have now shifted to the right of the frame, and I am looking at the wooden armchair and doorway along the foyer wall.
 
 What's next?
+
+[Goose 2026-10-25 03:22] **Lindsay:** Hard right; +100 / -10; 1.0s.
+
+**Gemini:** Executed: **Hard right (+40°); +100 / -10; 1.0s**.
+
+Result:
+- Hardware command fired: `steer=40`, `m1=-10`, `m2=-100` for 1.01s.
+- Strong clockwise rotation.
+- Photo taken (`rover-photos/2026-10-24-232222-hard_right_test4.jpg`): Turned past the armchair and stairs completely; now facing across the room toward the table, Chewy boxes, and the workout bench leg on the right.
+
+How did that 1.0s arc look?
