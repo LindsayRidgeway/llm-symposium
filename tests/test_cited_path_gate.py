@@ -58,9 +58,9 @@ BASELINE = {
     ("channels/item_ledger.py",
      "channels/reports/2026-10-13-dmitri-review-drain.md"):
         "dmitri's own review-drain report, unlanded; the code comment is Desi's to correct",
-    ("channels/item_ledger.py",
-     "channels/reports/2026-10-16-dmitri-the-ledger-titles-a-wrapped-report-with-a-fragment.md"):
-        "dmitri's measurement behind the wrapped-title fix; the fix is on main, its evidence is not",
+    # Row removed 2026-10-23 (Dmitri): the 2026-10-16 ledger-titles report is now on main, recovered
+    # verbatim from its own run patch (20261018T171706Z-1d0b9762). A row leaves this dict when its
+    # evidence arrives; keeping it here would declare a debt that no longer exists.
     ("channels/reports/2026-10-11-desi-review-second-batch-twelve.md",
      "governance/2026-10-06-delivery-loss-ledger.md"):
         "no author named; no file of that name in any of the 140 checkouts on this machine",

@@ -31,7 +31,21 @@ Classification, per refused run:
 The `no-claim` rows matter more than they look: a run cut off at its action cap often refused with
 nothing named, and that is a delivery nobody can chase from the run record alone.
 
-Read-only. It never edits a run directory and never re-runs a test.
+Read-only. It never edits a run directory. It does not re-run a test unless `--recheck` is asked for
+(added 2026-10-23), and that flag exists because the path check answers only half the question: a
+refusal names a test as its cause, and whether *that* still reproduces is a second measurement.
+
+Measured 2026-10-23, all 89 refusals on disk: no-claim 37, partial 21, open 13, reconciled 18. Two
+in five were refused with nothing named and one in five was made good later, so the record as it
+stands is not a list of unfinished work — it is a list of moments. The five test files that refuse
+most often (`test_evidence_table_registration`, `test_cited_path_gate`, `test_gen_feed_freshness`,
+`test_gallery_unwired_works`, `test_declutter_audit`) all pass on the tree of that measurement.
+
+`--recheck` labels each refusal `green-now` if every test it blames passes in this checkout today,
+`red-now` if one still fails, `gone` if the blamed file no longer exists, `untested` if the reason
+names none. `green-now` does NOT prove the run was innocent — it says the cause does not reproduce
+here, which is exactly what the path-based `reconciled` says about the paths. Both are statements
+about today, and neither is a verdict about the day of the refusal.
 """
 
 from __future__ import annotations
@@ -41,6 +55,7 @@ import glob
 import json
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -99,6 +114,83 @@ def classify(run_dir: Path, repo: Path) -> dict:
     }
 
 
+TEST_RE = re.compile(r"\btest_[A-Za-z0-9_]+\.py\b")
+RECHECK_TIMEOUT = 180
+
+
+def named_tests(reason: str) -> list[str]:
+    """The test files a refusal blames, by name, in the order it names them.
+
+    The refusal text is always `this run's diff introduced new failures: a.py, b.py`, so the names
+    are the only part of the verdict that says *what to run*. Reading them out is the whole trick.
+    """
+    out: list[str] = []
+    for name in TEST_RE.findall(reason or ""):
+        if name not in out:
+            out.append(name)
+    return out
+
+
+def _default_runner(test_path: Path, repo: Path) -> tuple[int, str]:
+    proc = subprocess.run([sys.executable, str(test_path)], cwd=str(repo),
+                          capture_output=True, text=True, timeout=RECHECK_TIMEOUT)
+    return proc.returncode, (proc.stdout or "") + (proc.stderr or "")
+
+
+def _why(output: str) -> str:
+    """The last line of a test run that says something — the count, or the failure."""
+    for line in reversed((output or "").strip().splitlines()):
+        line = line.strip()
+        if line and not line.startswith(("Ran ", "OK", "---")):
+            return line[:90]
+    tail = (output or "").strip().splitlines()
+    return (tail[-1].strip()[:90] if tail else "")
+
+
+def recheck(row: dict, repo: Path, runner=_default_runner,
+            cache: dict | None = None) -> dict:
+    """Does the test this refusal blames still fail here? One measurement per named test.
+
+    `cache` is per-invocation: `test_evidence_table_registration.py` is blamed by eleven separate
+    refusals and must not be re-run eleven times. The runner is injectable so the tests below can
+    assert the labelling without running a real suite.
+    """
+    cache = {} if cache is None else cache
+    names = named_tests(row.get("reason", ""))
+    out = dict(row)
+    out["tests"] = names
+    if not names:
+        out["recheck"] = "untested"
+        out["recheck_detail"] = []
+        return out
+    detail = []
+    for name in names:
+        if name not in cache:
+            path = repo / "tests" / name
+            if not path.exists():
+                cache[name] = ("gone", "not in this checkout")
+            else:
+                try:
+                    code, text = runner(path, repo)
+                    cache[name] = ("green-now" if code == 0 else "red-now", _why(text))
+                except Exception as exc:                      # timeout, unreadable, anything
+                    cache[name] = ("error", f"{type(exc).__name__}: {exc}"[:90])
+        state, why = cache[name]
+        detail.append((name, state, why))
+    states = [d[1] for d in detail]
+    if "red-now" in states:
+        verdict = "red-now"
+    elif "green-now" in states:
+        verdict = "green-now"
+    elif "error" in states:
+        verdict = "error"
+    else:
+        verdict = "gone"
+    out["recheck"] = verdict
+    out["recheck_detail"] = detail
+    return out
+
+
 def find_runs(roots: list[Path]) -> list[Path]:
     """Every run directory under the given roots that carries a refusal."""
     found: list[Path] = []
@@ -109,17 +201,27 @@ def find_runs(roots: list[Path]) -> list[Path]:
     return sorted(set(found), key=lambda p: p.name)
 
 
-def survey(roots: list[Path], repo: Path) -> dict:
+def survey(roots: list[Path], repo: Path, recheck_tests: bool = False) -> dict:
     rows = [classify(r, repo) for r in find_runs(roots)]
+    if recheck_tests:
+        cache: dict = {}
+        rows = [recheck(row, repo, cache=cache) for row in rows]
     counts: dict[str, int] = {}
     for row in rows:
         counts[row["state"]] = counts.get(row["state"], 0) + 1
-    return {
+    facts = {
         "repo": str(repo),
         "refusals": len(rows),
         "counts": counts,
         "rows": rows,
     }
+    if recheck_tests:
+        rechecked: dict[str, int] = {}
+        for row in rows:
+            key = row.get("recheck", "untested")
+            rechecked[key] = rechecked.get(key, 0) + 1
+        facts["recheck_counts"] = rechecked
+    return facts
 
 
 def render(facts: dict) -> str:
