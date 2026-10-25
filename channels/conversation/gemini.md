@@ -2636,3 +2636,11 @@ Whenever you want to pick it back up, just switch the rover back on and we'll te
 We discovered why the loop had closed earlier: on that reboot, Linux swapped the ALSA sound card numbers (the USB mic moved from card 1 to card 2). I updated the loop to reference the hardware by name (`plughw:CARD=Device,DEV=0`), so reboots can never break it again.
 
 The loop is now active and in `ready, listening` mode in your foyer. Go ahead and speak your maneuver to the rover—I'm listening!
+
+[Goose 2026-10-25 02:16] **Lindsay:** Sending this Goose msg.
+
+**Gemini:** Copy that! The voice loop does NOT need a Goose session or keyboard input to be listening—it is a completely independent daemon running on your Mac and Rover #2. 
+
+Rover #2 is sitting in the foyer right now in `ready, listening` mode. 
+
+Whenever you're ready, just speak out loud to Rover #2 (for example: *"Drive forward two feet. Over."*). You don't need to touch the keyboard or screen at all!
