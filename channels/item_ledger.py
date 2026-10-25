@@ -863,6 +863,18 @@ WAKES_PER_DAY = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 3}
 # (the codex platform) runs several wakes a day; Tarik-goose has not woken since 2026-10-19, so
 # the 3 are counted on the app. The morning table named 9 of the 252 pile items to tarik when
 # it should have named about 22; `--rebalance-unread` corrects names made under a stale table.
+#
+# 2026-10-25: the numbers below are still right and this table is unchanged on purpose. Read by
+# `scripts/wake_cadence.py --now 2026-10-25T11:25:40Z`: desi 11.9/day, gemini 5.9, claude 1.0,
+# dmitri 11.7, tarik 2.6 — every weight within tolerance, so no weight is re-derived. The number
+# was never the whole question. The same reading found tarik's *last evidence of a wake* 39.4
+# hours old (codex filing `codex-20261023T200050Z-61cf96dc`; no goose run since
+# `20261019T170221Z-c56a22e8`), i.e. 22 never-read items named to a body that had gone quiet for
+# a day and a half, and nothing in the repository could notice — the table is dated, and a dated
+# table says nothing about today. A weight is a capacity, not a heartbeat: it is the second number
+# that needed measuring, and `wake_cadence.py --check` is what measures it. Changing tarik's weight
+# to 1 would re-name items already assigned, which the frozen-draw rule forbids; so the table stands
+# and the reading stands beside it.
 
 
 def _capacity_pick(item_id: str, author: str | None) -> str:

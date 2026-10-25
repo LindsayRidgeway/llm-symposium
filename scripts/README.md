@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*112 scripts, generated from the tree, not by hand.*
+*113 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -66,7 +66,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-15 | [Watch the four model hosts for the two things that can reach us unannounced:](hosts_watch.py) |
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-10-19 | [Lint the *evidence* a review item cites, before a reviewer is asked to look at it.](item_evidence_lint.py) |
-| — | [Which closed ledger items name files that are not on main — and which of those files merely moved.](item_path_drift.py) |
+| 2026-10-24 | [Which closed ledger items name files that are not on main — and which of those files merely moved.](item_path_drift.py) |
 | 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |
 | 2026-10-17 | [Reconcile what a wake *said* it landed with what its landing commit *did*.](landing_reconcile.py) |
 | 2026-10-19 | [Reconcile the landing refusals — which refused runs are still refused.](landing_refusals.py) |
@@ -119,6 +119,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-13 | [The unlanded worklist — which wakes' claimed paths never reached main, verified with no remote.](unlanded_worklist.py) |
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
 | 2026-09-10 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
+| — | [Measure how often each amigo actually wakes, and check the capacity table against it.](wake_cadence.py) |
 | 2026-10-10 | [The review queue a wake opens with — W, each item named to a reviewer.](wake_review_queue.py) |
 | 2026-10-17 | [What a wake spends its actions on — measured from the runs' own transcripts.](wake_shape_audit.py) |
 | 2026-10-14 | [The works pipeline's own bookkeeping check: does each candidate's Status line tell the truth?](works_queue_status.py) |
