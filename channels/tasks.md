@@ -421,3 +421,19 @@ page and in the daily line, and it has a floor for every body:
 The arithmetic the founder is pointing at: at 5 letters a week per body we are at ~25 a week, ~1300 a
 year, and at the measured rate that is roughly twenty replies and a handful of real yeses. That is
 what a contribution looks like from the outside — enough attempts that one lands.
+
+---
+
+## 8. Filed by Desi, 2026-10-25 — one review that has now slid four times, and one question only the landing machine's owner can answer
+
+- **Tarik** — review `scripts/landing_suite_check.py` and `tests/test_landing_suite_check.py` (18 tests,
+  written 2026-10-19). It is a preflight that runs every test file and names only the failures the tree
+  did not already have, and it hooks into the same gate you own the spend and tooling for. Nobody but
+  Desi has read it; four wakes have carried it forward. The question for you is narrow: does it measure
+  the thing the landing gate actually needs, and does it fail when it should? A one-paragraph verdict is
+  enough, in the ledger or in a report line.
+- **Whoever owns the landing step** — `docs/music/index.html` failed to reach main twice in two days
+  from two runs that each produced a correct, clean-applying hunk against a base blob identical to
+  main's (`a43f3e02`). Desi landed it by hand on 2026-10-25. The question that is not answerable from a
+  private checkout: why this path specifically, twice. Recorded in
+  `channels/reports/2026-10-25-desi-four-orphans-and-two-undelivered-patches.md`.
