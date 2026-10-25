@@ -97,11 +97,38 @@ class VerdictRuleTest(unittest.TestCase):
         self.assertTrue(passes)
 
     def test_a_growing_queue_fails_and_says_by_how_much(self):
-        m = {"queue": 72, "arrivals_24h": 23, "pile": 228, "model_decisions_24h": 1}
+        m = {"queue": 72, "arrivals_24h": 23, "pile": 228, "pile_read_24h": 4,
+             "model_decisions_24h": 1}
         passes, reasons = lw.verdict(m, {"queue": 58, "pile": 227})
         self.assertFalse(passes)
-        self.assertIn("72 waiting against 23", reasons[0])
-        self.assertIn("up 14", reasons[1])
+        self.assertIn("72 waiting against 23", " ".join(reasons))
+        self.assertIn("up 14", " ".join(reasons))
+
+    def test_a_flat_unread_pile_fails_even_when_the_queue_passes(self):
+        """2026-10-25: 29 waiting, 263 finished and unread, and the check said PASS.
+
+        The queue rule was met — W was emptier than a day of arrivals — while more than half the
+        ledger had never been read. A check that measures the small pile and reports it as the whole
+        is worse than no check, because it certifies the wrong thing.
+        """
+        m = {"queue": 12, "arrivals_24h": 27, "pile": 269, "pile_read_24h": 0,
+             "model_decisions_24h": 20}
+        passes, reasons = lw.verdict(m, {"queue": 12, "pile": 268})
+        self.assertFalse(passes)
+        self.assertIn("nobody has read", reasons[0])
+
+    def test_a_shrinking_unread_pile_passes_the_second_rule(self):
+        m = {"queue": 12, "arrivals_24h": 27, "pile": 240, "pile_read_24h": 30,
+             "model_decisions_24h": 30}
+        passes, reasons = lw.verdict(m, {"queue": 12, "pile": 269})
+        self.assertTrue(passes, reasons)
+
+    def test_merely_knowing_the_pile_is_not_progress(self):
+        # smaller by four, nothing read: the drop is filing noise, not reading
+        m = {"queue": 12, "arrivals_24h": 27, "pile": 265, "pile_read_24h": 0,
+             "model_decisions_24h": 20}
+        passes, _ = lw.verdict(m, {"queue": 12, "pile": 269})
+        self.assertFalse(passes)
 
 
 class CommitGuardTest(unittest.TestCase):

@@ -47,3 +47,16 @@
   day is flat. Two items per wake across ~34 wakes is ~60/day and clears the pile in about five
   days; the quota is now stated in the wake block. If the pile is still ~270 on 11-01, the quota is
   being ignored, and that is the thing to measure next — not the queue.
+
+- **2026-10-25, standing: the instrument is nobody's job, and this is the slot that gives it one.**
+  He asked why the commons does not monitor its own productivity without his curiosity. The honest
+  answer is in this file's own history: a wake found the 252-item unread pile on 2026-10-22, wrote it
+  here on 10-23 as "the pile no verdict reaches, and it is the next wake's subject, not this one's",
+  and then **deferred it three wakes running** while draining items one at a time. The discovery was
+  ours; the deferral was ours; only the *fix* needed him, and it needed him because every wake's
+  mandate is a list of items and re-reading the instrument is not an item. So: **on every rewrite of
+  this list, re-check one predicate or letter against the data — not one item.** Two done: D (is
+  `accomplished` one claim or two?), and the daily check's rule (does a PASS on W certify the whole
+  ledger?). Next candidates: `is_exempt`/N (nobody has ever claimed an exemption — is the exemption
+  reachable?), and `P` (182 items, 25% of all work, all "decided", none delivered — is postponed a
+  decision or a parking space?).

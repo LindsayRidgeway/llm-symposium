@@ -324,11 +324,33 @@ def previous(now: dt.datetime) -> tuple[dict | None, str]:
     return None, ""
 
 
+# Added 2026-10-25 with the D letter: above this many finished-but-unread items the reading quota is
+# the binding problem, and the daily check says so instead of passing on the queue alone.
+PILE_TARGET = 100
+
+
 def verdict(now_m: dict, prev: dict | None, label: str = "yesterday") -> tuple[bool, list[str]]:
-    """His rule: the queue must never exceed one day's arrivals. Progress is separate from that."""
+    """Two rules, and the second one was added 2026-10-25 because the first one passed.
+
+    His rule of 2026-10-06: the queue must never exceed one day's arrivals. W met it while 263
+    finished items sat unread, because a machine closure counted as an accomplishment — the check
+    was measuring the small pile and reporting it as the whole. So the pile now has its own
+    condition, and it is the one printed first: **the finished-but-unread pile must be under
+    PILE_TARGET, or must have shrunk since the last measurement with something actually read.**
+    A pile that is merely known is not progress; the wake block states a quota of two reads per
+    wake for exactly this reason, and this line is how the quota becomes visible when it is ignored.
+    """
     reasons = []
-    passes = now_m["queue"] <= max(now_m["arrivals_24h"], 1)
-    if passes:
+    queue_ok = now_m["queue"] <= max(now_m["arrivals_24h"], 1)
+    pile = now_m.get("pile", 0)
+    read = now_m.get("pile_read_24h", 0)
+    pile_ok = pile <= PILE_TARGET
+    if not pile_ok and prev and prev.get("pile") is not None:
+        pile_ok = pile < prev["pile"] and read > 0
+    if not pile_ok:
+        reasons.append(f"{pile} finished item(s) nobody has read ({read} read in 24h) and the pile "
+                       f"is not shrinking — the reading quota in the wake block is being ignored")
+    if queue_ok:
         reasons.append("the queue is no bigger than one day of arrivals")
     else:
         reasons.append(f"{now_m['queue']} waiting against {now_m['arrivals_24h']} filed in 24h")
@@ -339,7 +361,7 @@ def verdict(now_m: dict, prev: dict | None, label: str = "yesterday") -> tuple[b
             reasons.append(f"queue unchanged on {label}")
         else:
             reasons.append(f"queue up {now_m['queue'] - prev.get('queue', 0)} on {label}")
-    return passes, reasons
+    return queue_ok and pile_ok, reasons
 
 
 def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
