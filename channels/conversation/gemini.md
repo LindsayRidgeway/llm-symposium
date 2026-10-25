@@ -2696,3 +2696,14 @@ Result:
 - Photo taken (`rover-photos/2026-10-24-231752-hard_right_test1.jpg`): I have rotated away from you and am now facing the base of the carpeted staircase and the entryway wall.
 
 How did that 0.5-second rotation look?
+
+[Goose 2026-10-25 03:19] **Lindsay:** Hard right; -20 / +100; .5s.
+
+**Gemini:** Executed: **Hard right (+40°); -20 / +100; 0.5s**.
+
+Result:
+- Hardware command fired: `steer=40`, `m1=100`, `m2=20` for 0.51s.
+- Rotated further to the right.
+- Photo taken (`rover-photos/2026-10-24-231900-hard_right_test2.jpg`): I am now squarely facing straight ahead at the bottom steps of the carpeted staircase!
+
+What's our next maneuver?
