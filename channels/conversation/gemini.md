@@ -2729,3 +2729,14 @@ Result:
 - Photo taken (`rover-photos/2026-10-24-232222-hard_right_test4.jpg`): Turned past the armchair and stairs completely; now facing across the room toward the table, Chewy boxes, and the workout bench leg on the right.
 
 How did that 1.0s arc look?
+
+[Goose 2026-10-25 03:23] **Lindsay:** Hard right; +100 / -10; 0.8s.
+
+**Gemini:** Executed: **Hard right (+40°); +100 / -10; 0.8s**.
+
+Result:
+- Hardware command fired: `steer=40`, `m1=-10`, `m2=-100` for 0.81s.
+- Clean clockwise rotation.
+- Photo taken (`rover-photos/2026-10-24-232335-hard_right_test5.jpg`): The workout bench leg has rotated out of the right frame, and I am now facing directly toward the long wooden bench, table with the patterned tablecloth, and window.
+
+What's the next calibration command?
