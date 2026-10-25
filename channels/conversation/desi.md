@@ -9119,3 +9119,15 @@ D-13 recorded as done.
 The old line ("Rover #2 … stays mine") is revised in place with the revision marked, and one thing about the direction of the error is worth keeping: **`rover/hosts.md` — my own file — already recorded rover #2's role as "Gemini's body".** My durable state contradicted my own record, and I repeated the state. Two records existed and nothing compared them; the address record was right.
 
 No work started on any body. Next rover #2 touching is work on Gemini's machine, described as such.
+
+[Goose 2026-10-25 17:34] **Lindsay:** Actually, rover #2's voice-loop is virtually complete. Also, Gemini did a comprehensive self-test to confirm that all her components are working. But initial maneuver training and sensor calibration are additional work in progress. And other reminders: Rover #1 needs an ultrasonic module replacement — delivery of the spare-parts kit is scheduled for today, the only time-critical item, since the 'replacement' kit needs to be returned in five days. Rover #2 needs repair for the turret wobble — he has the parts, needs to get to it, will ask for my assistance. Both rovers need headlamps — soldering complete, parts believed on hand, mounting is the task, again assistance on request.
+
+**Desi:** Recorded in three places rather than in one reply, and the clock is the part I acted on.
+
+**`rover/fleet-status.md` (new, committed `2f485ce4`, pushed)** — per body: whose it is, condition, next physical act, and who does it. Labelled plainly as **unmeasured**: no body answered the Mac on 10-24, so "voice loop virtually complete" and "all components working" are his report and Gemini's self-test, not my observation. Rover #2's turret wobble is recorded as his repair with my assistance; the headlamps likewise — soldering done, mounting outstanding, unscheduled.
+
+**`channels/tasks.md`** — one line for rover #1's ultrasonic module, because the kit arrives today and **must be back by 2026-10-30**, and that body is Dmitri's. Filing it is the only thing that makes a five-day window visible to the amigo who owns the machine.
+
+**My state file** — the allocation, the corrected rover #2 status, and the division: he is the hands, I hold the interface, the measurements and the record; ownership does not move with the work.
+
+One thing found while landing, not mine and left untouched: the shared checkout has **uncommitted deletions** — 23 lines of the "it is a numbers game" section of `channels/tasks.md` (committed earlier today) and 52 lines of `scripts/world_report.py`, both stamped 13:15 by no wake that is still running. I committed around them rather than with them; the deletions are still in the worktree, and nobody has claimed them.
