@@ -431,8 +431,28 @@ def landing_gap(items: dict[str, dict], last: str | None) -> int:
     return sum(1 for r in items.values() if (r.get("filed_utc") or "") > last)
 
 
+VERDICT_KEYS = ("state", "state_utc", "reason", "reviewer")
+
+
 def load(path: Path = LEDGER) -> dict[str, dict]:
-    """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly."""
+    """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly.
+
+    One exception, added 2026-10-25: a later line that says nothing about the verdict cannot
+    erase one. `assign()` and `review()` both append a *whole record* rather than a diff, so a
+    row written by a process that had not seen an earlier verdict is a snapshot of the record as
+    that process found it — verdict fields included, and `None` if it never saw them. When the
+    two histories meet in one file the snapshot sorts later and silently reopens the item.
+
+    Measured, not hypothesised: three of my own verdicts (state `postponed`, `state_utc`
+    2026-10-25T03:25:36Z, reviewer desi) were re-filed for review at 2026-10-25T11:45:06Z as
+    unowned waiting items with `state: None`, and the queue handed them back to the same reviewer
+    three hours after the reasons were written. Five consecutive wakes then "worked the queue"
+    and cleared nothing visible, which is the same shape as the vulvodynia loop, arriving through
+    the merge instead of the to-do list.
+
+    So: a row may change a verdict (a later review wins), but a row that omits it inherits it.
+    Nothing in the ledger reopens an item; a second review is an explicit new state, not a None.
+    """
     items: dict[str, dict] = {}
     if not path.exists():
         return items
@@ -442,6 +462,11 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
             continue
         try:
             rec = json.loads(line)
+            prev = items.get(rec["id"])
+            if prev is not None and prev.get("state") and not rec.get("state"):
+                for key in VERDICT_KEYS:
+                    if not rec.get(key):
+                        rec[key] = prev.get(key)
             items[rec["id"]] = rec
         except (ValueError, KeyError):
             print(f"item_ledger: skipping unreadable line {lineno}", file=sys.stderr)

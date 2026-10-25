@@ -803,5 +803,65 @@ class TestTheCliDoesNotStampAPersonOnMachineWork(unittest.TestCase):
         self.assertEqual(seen.get("reviewer"), "human")
 
 
+class ALaterRowCannotEraseAVerdictItNeverSaw(unittest.TestCase):
+    """2026-10-25: `assign()` appends a whole snapshot, so a row written by a process that had
+    not seen an earlier verdict sorts later with `state: None` and reopens the item.
+
+    That is not a thought experiment. Three verdicts of mine (`postponed`, 03:25:36Z, reviewer
+    desi) were re-filed at 11:45:06Z as unowned waiting items and handed back to me three hours
+    after the reasons were written; five wakes in a row then "worked the queue" and cleared
+    nothing anyone could see.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = Path(self.tmp.name) / "items.jsonl"
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _file(self, **over):
+        row = {"id": "a", "amigo": "dmitri", "scope": "internal", "title": "t",
+               "state": None, "state_utc": None, "reason": None, "reviewer": None,
+               "filed_utc": "2026-10-23T13:31:32Z"}
+        row.update(over)
+        il.append([row], self.path)
+        return row
+
+    def test_a_snapshot_written_without_the_verdict_does_not_reopen_it(self):
+        self._file()
+        verdict = il.review(path=self.path, item_id="a", state="postponed",
+                            reason="the report it names is not on disk", reviewer="desi")
+        # exactly what assign() writes: the record as *it* found it, verdict fields and all
+        self._file(assigned_to="desi", assign_kind="draw",
+                   assign_reason="drawn at random among the least expensive",
+                   assigned_utc="2026-10-25T11:45:06Z", assigned_by="collect")
+        rec = il.load(self.path)["a"]
+        self.assertEqual(rec["state"], "postponed")
+        self.assertEqual(rec["reason"], "the report it names is not on disk")
+        self.assertEqual(rec["reviewer"], "desi")
+        self.assertEqual(rec["state_utc"], verdict["state_utc"])
+        self.assertEqual(rec["assigned_to"], "desi")      # the later row still wins where it spoke
+        self.assertEqual(il.letter_for(rec), "P")
+        self.assertNotIn("a", [r["id"] for r in il.waiting(il.load(self.path))])
+
+    def test_a_later_review_still_overrides_an_earlier_one(self):
+        """Inheritance is not stickiness: a row that does state the verdict is believed."""
+        self._file()
+        il.review(path=self.path, item_id="a", state="postponed", reason="no report on disk",
+                  reviewer="desi")
+        il.review(path=self.path, item_id="a", state="accomplished", reason="did docs/x.html",
+                  reviewer="tarik")
+        rec = il.load(self.path)["a"]
+        self.assertEqual(rec["state"], "accomplished")
+        self.assertEqual(rec["reason"], "did docs/x.html")
+        self.assertEqual(rec["reviewer"], "tarik")
+
+    def test_an_unreviewed_item_stays_in_the_queue(self):
+        self._file()
+        self._file(assigned_to="desi", assigned_utc="2026-10-25T11:45:06Z")
+        self.assertIn("a", [r["id"] for r in il.waiting(il.load(self.path))])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
