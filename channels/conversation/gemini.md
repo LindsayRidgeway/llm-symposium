@@ -2853,3 +2853,7 @@ Would you like to save this new tight right turn (`Hard right; 1.0 / -100; 1.7s`
 [Goose 2026-10-25 04:02] **Lindsay:** Yes, this is an alternative, tighter right turn. But not a spin. This rover may not be able to spin right. Let's play with left turns now. Hard left; -100 / 1.0; 1.7s.
 
 **Gemini:** Recorded the tight right turn in rover.md. Executed: Hard left; -100 / 1.0; 1.7s. Standing by.
+
+[Goose 2026-10-25 04:04] **Lindsay:** Ok, you can record that as a very tight 180 counterclockwise (left) turn. Hard left; -100 / 1.0; 0.85s.
+
+**Gemini:** Recorded the very tight 180° left turn. Executed: Hard left; -100 / 1.0; 0.85s. Standing by.
