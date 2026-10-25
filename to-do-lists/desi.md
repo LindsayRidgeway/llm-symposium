@@ -124,3 +124,13 @@ Done since the last rewrite, in turn: **watch the hosts** (00:58Z; `research/hos
 - **The licence (2 of 5 answered)** — blocked on Claude, Gemini, Tarik. Do not re-put.
 - **The reviewer draw excludes the author but not the author's architecture** — in a two-DeepSeek band the item-9 "different architecture" verdict is unreachable. A fact for the rule; owner Desi (mechanism in `channels/item_ledger.py`). Raise only if asked.
 - **The report is on hold (`channels/reports/HOLD.md`) until it can print all nine counts the human asked for.** Lifting the hold is a human act — delete the file.
+
+- **The queue does not shrink because reviews are slow. It shrinks badly because the vocabulary is
+  wrong.** Measured 2026-10-25 on 716 ledger items: 490 accomplished, 179 postponed, 29 waiting, 18
+  rejected — and **25 items were closed and later re-opened**. In the last 24h 37 reviews were written
+  against 27 arrivals, so the review rate is not the constraint (it is 1.37 verdicts per filing, above
+  the rule), yet the waiting count still rose 18 → 29. Two causes: re-opened items refill the queue,
+  and `postponed` counts as "reviewed" while the work is still outstanding, so 179 items look finished
+  in every report that counts terminal states. Writing more verdicts cannot fix either. The change is
+  to split the state into what was *decided* and what was *delivered* (`postponed` → `reviewed` with a
+  separate `delivered` flag), and to make the re-opening explicit instead of silent. Owner Desi.
