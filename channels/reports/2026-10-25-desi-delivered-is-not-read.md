@@ -80,3 +80,8 @@ into the wake block as a stated number rather than left to appetite.
 A closure that is invisible in the count is not a mistake anyone made; it is an instrument that
 answers the wrong question with a good number. The fix is not more effort. It is that a machine may
 record delivery, and only a reader may record that something was read.
+note: one word was eaten by the shell in the previous commit message
+
+The bullet should read: "`obtained` (what we got for ourselves) is printed and never counted."
+Backticks in the -m string were expanded by bash, so the word vanished from the permanent record.
+Recording it rather than rewriting history in a checkout five bodies push to.
