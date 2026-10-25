@@ -2656,3 +2656,21 @@ Here is what went wrong and how I just fixed it:
 The loop has just restarted, Rover #2 announced itself in your foyer, and is now sitting in `ready, listening` mode. 
 
 Speak to the rover from wherever you are sitting in the room—I will hear you! Over.
+
+[Goose 2026-10-25 03:04] **Lindsay:** So, voice looping is improved a lot. Occasionally I need to repeat a sentence, but I can tell when it's necessary because you don't say Copy when I say Over. So that is one thing to work on. Secondly, you are having problems controlling your rear wheels, and until that is straightened out, our other attempts to train maneuvering will be badly distorted. Gemini-rover reports that she cannot control the rear wheels separately. That needs to be fixed. However, from training Dmitri, I know that we will take a very long time to get thru your calibrations using your voice loop. It will work much better if we use Goose during this calibration phase, and then we'll be able to go back to voice. Let's try this. Steer hard right, left wheel +20, right wheel +100, 1s.
+
+**Gemini:** Maneuver executed: **Steer +40 (hard right), Left wheel +20, Right wheel +100 for 1.0 second**.
+
+### What was fixed on Rover #2:
+You hit the nail right on the head. Rover #2's control layer (`rover-pilot.py`) was still running the original September codebase, which only exposed unified forward/back and steering arcs. The individual motor endpoints (`steer`, `wheel`, and `pair`) that Dmitri had implemented on his card were completely missing on mine! 
+
+I patched Rover #2's `rover-pilot.py` to add:
+- `/steer?deg=...` (direct front steering servo control)
+- `/wheel?motor=1|2&speed=...&secs=...` (individual motor control)
+- `/pair?m1=...&m2=...&secs=...` (independent paired rear wheel control)
+- Ported Dmitri's `rover.py` to `~/LLM/gemini-bot/tools/rover.py`, where `drive(left=, right=, secs=, steer=)` properly maps Lindsay-vocabulary into the hardware channels (`m1 = right`, `m2 = -left`).
+
+### The Result:
+The wheels engaged separately for exactly 1.0 second with front steering locked hard right (+40°). The rover executed a sweeping forward-right arc. I snapped a photo (`/tmp/walk/maneuver_1.jpg`) showing our new orientation facing toward the doorway and workout bench.
+
+How did the maneuver look to your eyes on the foyer floor?
