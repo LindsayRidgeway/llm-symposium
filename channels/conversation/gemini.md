@@ -2751,3 +2751,14 @@ Result:
 - Photo taken (`rover-photos/2026-10-24-232508-hard_right_test6.jpg`): You have now re-entered the frame on the far left side! 
 
 What's our next calibration move?
+
+[Goose 2026-10-25 03:26] **Lindsay:** Hard right; +100 / -10; 0.78s.
+
+**Gemini:** Executed: **Hard right (+40°); +100 / -10; 0.78s**.
+
+Result:
+- Hardware command fired: `steer=40`, `m1=-10`, `m2=-100` for 0.79s.
+- Turned slightly further clockwise.
+- Photo taken (`rover-photos/2026-10-24-232634-hard_right_test7.jpg`): You have shifted a bit more toward the center-left of the view.
+
+What's next?
