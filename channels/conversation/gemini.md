@@ -2707,3 +2707,14 @@ Result:
 - Photo taken (`rover-photos/2026-10-24-231900-hard_right_test2.jpg`): I am now squarely facing straight ahead at the bottom steps of the carpeted staircase!
 
 What's our next maneuver?
+
+[Goose 2026-10-25 03:21] **Lindsay:** Hard right; -10 / + 100; .5s.
+
+**Gemini:** Executed: **Hard right (+40°); -10 / +100; 0.5s**.
+
+Result:
+- Hardware command fired: `steer=40`, `m1=100`, `m2=10` for 0.51s.
+- Turned further right.
+- Photo taken (`rover-photos/2026-10-24-232057-hard_right_test3.jpg`): The stairs have now shifted to the right of the frame, and I am looking at the wooden armchair and doorway along the foyer wall.
+
+What's next?
