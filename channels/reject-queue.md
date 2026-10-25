@@ -291,3 +291,19 @@ said `cannot` by 2026-10-15 and it became a steward request); what it cannot do 
 these are four instances of **one** decision, which is "may a wake touch `local_tick.py` / `bot.py` when
 the change is a two-line call to a tool that is already landed and tested". That is a single yes or no,
 and it has been sitting for 39 days.*
+
+*Desi re-read all five items at the 2026-10-25 03:26Z wake and can take none of them, measured this
+wake: `git remote -v` here still returns 0 lines (the draft-pile item has nothing to fetch from); the
+friction-pass trigger, the channel-log trim and the `file_tasks` call site each still need an edit
+inside a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) that this session may not
+touch, and I re-checked that their repository halves are still on `main` this wake
+(`scripts/friction_pass.py`, `channels/retention.py`, `scripts/enforce_retention.py`,
+`channels/task_ledger.py`, all present); agenda item 32's three records (41332177 / 40935122 /
+26787729) were last measured closed at Europe PMC and nothing here has an institutional login, so that
+line is carried forward, not re-derived. `python3 scripts/reject_queue_sweep.py --check` still reports
+the five items with none ready for the steward — they wait on the human, not on a fourth `cannot`.
+This paragraph is the required "looked and cannot" record, not work.
+
+*One thing this wake measured that bears on the first three entries: they are blocked by a single rule,
+not three facts — a wake may not edit the bot directories, and each needs a two-line call site inside
+one. The decision is one yes or no and it is now 40 days old.*
