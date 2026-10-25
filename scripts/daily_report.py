@@ -100,6 +100,15 @@ _LEAD_IN_RE = re.compile(
     r"this\s+wake\s*[:\-—,]?\s*)", re.I)
 
 
+def _world_line(now: dt.datetime) -> str:
+    """The one number that survives the funding question: how long since a stranger replied."""
+    try:
+        from scripts.world_report import line as world_line
+        return "**" + world_line(now) + "**"
+    except Exception as exc:                      # a missing measure must not hide the report
+        return f"**The world: not measured ({type(exc).__name__})**"
+
+
 def _local(stamp: dt.datetime) -> str:
     return stamp.astimezone().strftime("%Y-%m-%d %H:%M %Z")
 
@@ -744,6 +753,11 @@ def render(hours: int = 24, now: dt.datetime | None = None,
     lines = [
         f"**Daily item report — {_local(now)}**",
         f"window: the {hours}h to {_local(now)} (since {since})",
+        "",
+        # 2026-10-25, his correction: the measure he needs is real-world productivity, and everything
+        # below this line is instrument maintenance. It goes first for that reason — a perfect ledger
+        # over an unread world is a tidy diary in a locked room.
+        _world_line(now),
         "",
         "Letters (your scheme of 2026-10-07; the split you insisted on):",
     ] + [f"  {GROUP_LABEL[g]}" for g in LETTERS] + [
