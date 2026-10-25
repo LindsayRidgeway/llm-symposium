@@ -2628,3 +2628,11 @@ Two things went wrong:
 The bug is patched: `STOP_RE` now only triggers on an isolated emergency command ("Stop!", "Halt!"), rather than an embedded word inside an instruction ending in "Over".
 
 Whenever you want to pick it back up, just switch the rover back on and we'll test that two-foot roll forward cleanly.
+
+[Goose 2026-10-25 02:14] **Lindsay:** I didn't even realize I had put 'stop' into that sentence. So sorry! Well, the rover is on. Please speak to me and I'll suggest a number of maneuvers so see how you do.
+
+**Gemini:** I just spoke into the foyer! 
+
+We discovered why the loop had closed earlier: on that reboot, Linux swapped the ALSA sound card numbers (the USB mic moved from card 1 to card 2). I updated the loop to reference the hardware by name (`plughw:CARD=Device,DEV=0`), so reboots can never break it again.
+
+The loop is now active and in `ready, listening` mode in your foyer. Go ahead and speak your maneuver to the rover—I'm listening!
