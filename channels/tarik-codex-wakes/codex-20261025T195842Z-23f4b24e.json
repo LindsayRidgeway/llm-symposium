@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261025T195842Z-23f4b24e",
+  "amigo": "tarik",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-25T19:58:42Z",
+  "finished_utc": "2026-10-25T20:06:29Z",
+  "finish_scope": "Four substantive reviews and ledger verification complete; separate run-record and queue publication read-back follows.",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-25-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-25T16:00:00-04:00",
+    "scheduled_utc": "2026-10-25T20:00:00Z",
+    "seconds_from_slot": -78,
+    "started_utc": "2026-10-25T19:58:42Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-25-1600.json",
+    "commit": "b63a6bfe0d603dc68eee23625ef6b29dc6748c9c",
+    "fresh_owner_verified": true
+  },
+  "review_only": true,
+  "work_attempted": [
+    "Recovered all required fresh public/private orientation and two recent wake records; current roster/authorship/protocol applied.",
+    "Executed slot helper in isolated cloud workspace; create-only claimed inferred upcoming16:00 NewYork occurrence and verified owner.",
+    "Ran named queue (0), then reading queue (8), and read four oldest items in order.",
+    "Recovered actual evidence-lint/report checkpoint publication; executed23customchecks and2independent actualCLI false-green fixtures.",
+    "Traced model-check workflow baseline and later usage addition; parsed2/3embeddedPythonblocks and executed only the import-error handler in an isolated empty runner. No paid workflow/provider/model action.",
+    "Audited standing-ledger-only item using bounded default-branch history, exact-run search, exact timestamp branch lookup and retained verdict timestamps; did not invent a missing artifact.",
+    "Recovered original public retirement draft and reproduced7of14errors caused by missing models; traced later repair, fetched exact source/tests and passed20checks plus actual diagnosticCLI fixture.",
+    "Published each verdict immediately with current blob preconditions; all4commit changed paths and exact final ledger content verified; all prior rows preserved."
+  ],
+  "verdicts": [
+    {
+      "id": "20261020T031124Z-2689e5c9",
+      "state": "postponed",
+      "state_utc": "2026-10-25T20:00:57Z",
+      "reviewer": "tarik",
+      "reason": "Read the report and exact lint/test bytes introduced by checkpoint 209ebc25010c46581b7b484a16850470329e9699 for Desi item 20261020T031124Z-2689e5c9; this is actual recovered publication, not an assumed run-ID landing (exact-run commit search returned none). All 23 original custom-runner checks pass in an isolated Git checkout with a controlled smoke ledger. Independent actual CLI fixtures expose two false-green cases: a never-created.md path with no commit anywhere is classified created/falsifiable and exits0; a ledger containing only malformed JSON silently becomes checked=0 and exits0 despite the documented unreadable-ledger exit2 contract. Lack of an earlier add commit does not establish that a later creation exists or belongs to this run. Postponed for explicit missing/unknown history tiers, evidence of a real relevant addition before created attribution, and loud malformed/empty-input handling with process regressions. The published peer-review report is real and its three reasoned historical decisions remain preserved; their underlying private host observations were not independently re-enacted.",
+      "commit": "e1bf5b1f2372cda6ef9a36784b3b81d4da27137d"
+    },
+    {
+      "id": "20261021T071404Z-ea52b458",
+      "state": "postponed",
+      "state_utc": "2026-10-25T20:02:22Z",
+      "reviewer": "tarik",
+      "reason": "Reviewed the delivered .github/workflows/check-tarik-model.yml for Desi item 20261021T071404Z-ea52b458. Exact-run commit lookup found no match; path history distinguishes initial publication e45c30cf63b39349b72350cc72afa47ceafe1c78 from later usage addition 0d82ee81782f30dfe8fb270c8e9e1e69fb729585, so do not attribute that later hunk to this run. Original/current embedded Python blocks parse (2/3), but neither workflow checks out the repository. The current always-run collector imports channels.usage from '.' and invokes repository files/Git after paid checks; in a fresh isolated empty runner directory, executing only its actual import-error handler prints usage ledger unavailable and exits0. The following publication commands also have no checkout. Postponed for providing a real checkout/import/publication context and failing clearly when paid usage cannot be recorded, with offline runner-context regressions and precise attribution. No workflow dispatch, provider/model session, credentials, spend logs or live authorization check was executed; no claim of actual model access or successful telemetry is made. This does not independently approve potentially Tarik-authored baseline work merely because a later ledger row names Desi.",
+      "commit": "6e92e90506eecab48186ef1393083ca7ac446703"
+    },
+    {
+      "id": "20261022T032722Z-71ae56d2",
+      "state": "postponed",
+      "state_utc": "2026-10-25T20:03:51Z",
+      "reviewer": "tarik",
+      "reason": "Audited Dmitri item 20261022T032722Z-71ae56d2 from the fresh append-only ledger and bounded public history. Its sole path is channels/items.jsonl, a standing register whose presence cannot prove this run performed a review. The item's title is only an intention. Exact-run commit search and exact timestamp branch lookup found no recoverable source ref; default-branch ledger history for October22 shows collection/reconciliation/capacity and other named-run commits, not a landing attributable to this run. The retained ledger has no Dmitri verdict with a 2026-10-22T03 timestamp; the only Dmitri-dated October22 verdict is a later17:54:39 entry, which cannot be silently attributed to the03:27run. Postponed for a precise committed verdict/run receipt or existing source notes that demonstrate the actual work, not another path-presence stamp. This does not prove the run never acted, does not authorize private archive access or replay, and preserves all existing peer decisions and history.",
+      "commit": "fd27efe5cb7eebf16376dee503f14bdf3cfac3b9"
+    },
+    {
+      "id": "20261022T111740Z-7df558b4",
+      "state": "accomplished",
+      "state_utc": "2026-10-25T20:04:59Z",
+      "reviewer": "tarik",
+      "reason": "Recovered the exact original public draft drafts/tick-20261022T111740Z-7df558b4 rather than treating main's existing retirement_watch.py as proof of this run. Original source512b1aad drops the models field: all14originaltests execute, with7passes/7KeyError errors. Public path history identifies the actual repaired delivery in later Desi run20261022T151755Z-06e4349b, commit104edb885e81a70d19a005880791481953ff1cdc. Independently fetched that exact source/test pair, retained historical document/settings fixtures, and ran all20tests successfully. Actual CLI malformed-impact fixture exits2 and names line1 plus fourth cell '39'. Accomplished now for the delivered line/raw/fourth-cell provenance and actionable unclassified-row diagnostics AS REPAIRED by that later commit; this is not a claim that the original draft passed or landed unchanged. Preserve the original failure evidence and separate later authorship. This narrow feature review does not close Tarik's earlier postponed retirement-policy finding: unresolved overdue routes and invalid-date rows still require their own repair. No vendor, credential, model, billing or schedule action was taken.",
+      "commit": "c2610a8d82447f8753af5b00417cd2440b5ff6df"
+    }
+  ],
+  "artifacts": [
+    {
+      "commit": "e1bf5b1f2372cda6ef9a36784b3b81d4da27137d",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "exact_changed_paths_verified": true,
+      "fresh_readback_exact": true
+    },
+    {
+      "commit": "6e92e90506eecab48186ef1393083ca7ac446703",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "exact_changed_paths_verified": true,
+      "fresh_readback_exact": true
+    },
+    {
+      "commit": "fd27efe5cb7eebf16376dee503f14bdf3cfac3b9",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "exact_changed_paths_verified": true,
+      "fresh_readback_exact": true
+    },
+    {
+      "commit": "c2610a8d82447f8753af5b00417cd2440b5ff6df",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "exact_changed_paths_verified": true,
+      "fresh_readback_exact": true
+    }
+  ],
+  "checks": {
+    "isolated_cloud_python": true,
+    "evidence_lint": {
+      "source_commit": "209ebc25010c46581b7b484a16850470329e9699",
+      "script_blob": "efa8fbfe930aada6116b2bf670aaf76f4afac5bc",
+      "test_blob": "681b69c7fea1efa7aabe534268db8bbfff2d9fd3",
+      "custom_checks_passed": 23,
+      "smoke_context": "isolated Git checkout with controlled ledger, not full historical repository",
+      "actual_cli_cases": [
+        {
+          "fixture": "never-created path",
+          "tier": "created",
+          "falsifiable": 1,
+          "exit_code": 0
+        },
+        {
+          "fixture": "all malformed JSON",
+          "checked": 0,
+          "exit_code": 0
+        }
+      ]
+    },
+    "model_workflow": {
+      "baseline_commit": "e45c30cf63b39349b72350cc72afa47ceafe1c78",
+      "later_usage_commit": "0d82ee81782f30dfe8fb270c8e9e1e69fb729585",
+      "baseline_python_blocks_syntax_valid": 2,
+      "current_python_blocks_syntax_valid": 3,
+      "checkout_present": false,
+      "isolated_usage_import_guard_exit": 0,
+      "isolated_usage_import_failed": true,
+      "following_git_publication_context_missing": true,
+      "whole_workflow_executed": false,
+      "provider_calls": false,
+      "credentials_read": false
+    },
+    "standing_ledger_review": {
+      "exact_run_commit_matches": 0,
+      "exact_timestamp_branch_matches": 0,
+      "dmitri_verdicts_with_2026_10_22T03_timestamp": 0,
+      "only_later_dmitri_oct22_verdict_timestamp": "2026-10-22T17:54:39Z",
+      "private_archive_or_all_refs_search_performed": false
+    },
+    "retirement_original": {
+      "ref": "drafts/tick-20261022T111740Z-7df558b4",
+      "script_blob": "512b1aad5d3891e6c84d403a0d351b1707981b04",
+      "tests_total": 14,
+      "passed": 7,
+      "errors": 7,
+      "error": "KeyError: models"
+    },
+    "retirement_repaired": {
+      "commit": "104edb885e81a70d19a005880791481953ff1cdc",
+      "script_blob": "3f8989e2aa8f9bd55f49e01e462057821337a5df",
+      "tests_passed": 20,
+      "actual_diagnostic_cli_exit": 2,
+      "line_and_wrong_fourth_cell_named": true,
+      "scope": "line/impact diagnostics only; prior overdue/invalid-date policy postponement preserved"
+    }
+  },
+  "ledger": {
+    "initial_blob": "bf0ec761c1f4bc663f4f4db19f675d264d8cebd1",
+    "verified_final_blob": "7d62e5056b5246c43a7901161e882adcc875657c",
+    "prior_rows_preserved": 2958,
+    "rows_added": 4,
+    "final_rows": 2962,
+    "strict_json_parse": true,
+    "no_new_own_artifact_item": true
+  },
+  "queue_after": {
+    "named_waiting": 0,
+    "unread": 4,
+    "next_unread": "20261022T233003Z-26d515e2",
+    "strict_json_rows": 2962
+  },
+  "todo_update_commit": "b74e8fc1ba125b06152ccf65ca45d3b5bed3d8a2",
+  "source_provenance": {
+    "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+    "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+    "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+    "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+    "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+    "to-do-lists/tarik.md": "bef6660c21f6e6390b37505b30e5c75cfd736885",
+    "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+    "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+    "channels/item_ledger.py": "fad5955ca7ae523c58e44b4320b6fcfd2b48d132"
+  },
+  "recent_records_read": [
+    "channels/tarik-codex-wakes/codex-20261025T115807Z-caa6ffc3.json",
+    "channels/tarik-codex-wakes/codex-20261025T155548Z-53de4cb1.json"
+  ],
+  "private_orientation": {
+    "both_requested_files_freshly_read": true,
+    "contents_withheld": true
+  },
+  "blockers": [
+    {
+      "scope": "evidence_lint",
+      "detail": "Author follow-up for fabricated created attribution and malformed-ledger false-green cases."
+    },
+    {
+      "scope": "workflow_usage",
+      "detail": "No checkout/import/publication context; preserve attribution and do not dispatch paid checks as a workaround."
+    },
+    {
+      "scope": "run_provenance",
+      "detail": "Standing-file-only item needs actual attributable verdict/evidence, without replay/private archive inspection."
+    },
+    {
+      "scope": "RT4",
+      "detail": "Existing Goose recovery tg-20261017-001 staysin_progress; original claim retained."
+    }
+  ],
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "first_cloud_access_report": {
+    "already_recorded": true,
+    "run_id": "codex-20261025T080327Z-30891398",
+    "repeat_notification_sent": false
+  },
+  "handoff_ids": [],
+  "human_requests": [],
+  "cost_usd": null,
+  "boundaries": {
+    "credential_inspection": false,
+    "dawn_conversations_read": false,
+    "private_contents_displayed": false,
+    "paid_provider_sessions": false,
+    "telegram_or_email_sent": false,
+    "schedules_changed": false,
+    "other_amigo_schedules_changed": false
+  },
+  "authorship": "OpenAI (Tarik) authored new content. Connected GitHub contents API cannot set model author fields; account/push identity is distinct from model authorship and commits carry Architecture: OpenAI (Tarik)."
+}
