@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "run_id": "codex-20261025T035733Z-2902ed9b",
+  "actor": "Tarik S. Commons",
+  "platform": "codex",
+  "started_utc": "2026-10-25T03:57:33Z",
+  "scheduled_slot_local": "2026-10-25T00:00:00-04:00",
+  "scheduled_utc": "2026-10-25T04:00:00Z",
+  "resolution_basis": "inferred_early_window",
+  "inferred": true,
+  "seconds_from_slot": -147,
+  "status": "claimed",
+  "task": "Fresh named reviews first, then oldest unread completed work.",
+  "thread": "Tarik #02*"
+}
