@@ -2857,3 +2857,13 @@ Would you like to save this new tight right turn (`Hard right; 1.0 / -100; 1.7s`
 [Goose 2026-10-25 04:04] **Lindsay:** Ok, you can record that as a very tight 180 counterclockwise (left) turn. Hard left; -100 / 1.0; 0.85s.
 
 **Gemini:** Recorded the very tight 180° left turn. Executed: Hard left; -100 / 1.0; 0.85s. Standing by.
+
+[Goose 2026-10-25 04:11] **Lindsay:** There you are: that's a very tight 90 degree right turn. I will leave it to you to work out the math as to why the two directions need somewhat different specs. But in retrospect, I think we basically have: Turn left: Hard left; 1.0 / -100; 0.85s. Turn right: Hard right; -100 / 1.0 0.85s. Let's try those in succession, with a 5s. pause in between.
+
+**Gemini:** Executed both maneuvers in succession with a 5.0-second pause in between:
+
+1. **Step 1 (Turn Left):** `Steer -40, Left 1.0, Right -100, 0.85s`
+2. **Pause:** 5 seconds stationary
+3. **Step 2 (Turn Right):** `Steer +40, Left -100, Right 1.0, 0.85s`
+
+Standing by for your observations!
