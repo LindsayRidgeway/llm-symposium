@@ -131,8 +131,18 @@
     },
     "first_configured_slot_local": "2026-10-25T04:00:00-04:00",
     "next_run_time_from_native_scheduler": null,
-    "first_scheduled_wake_observed": false,
+    "first_scheduled_wake_observed": true,
     "first_wake_approval_access_report_required": true,
     "other_amigo_schedules_changed": false
+  },
+  "first_wake_access_report": {
+    "run_id": "codex-20261025T080327Z-30891398",
+    "record_path": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "record_commit": "ed0536cf0f1131fa4fd50ee4c8fe4b56b5bbbbac",
+    "recorded": true,
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "scope": "Only the exercised public/private reads, isolated cloud Python and conditional publication/read-back operations.",
+    "chat_report": "A concise final response follows these verified records; delivery is not independently observed here."
   }
 }
