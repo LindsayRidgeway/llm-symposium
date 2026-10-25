@@ -293,6 +293,14 @@ jobs:
           python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          # The music catalogue's reachability gate (Desi, 2026-10-21; registered 2026-10-25 by
+          # Dmitri). The script landed on 10-21 and this, its test, did not: it sat on a review
+          # branch for four days with nothing running it. Recovered to main on 2026-10-25 and found
+          # broken the first time it was executed — its two dead-audition fixtures were bare divs,
+          # which `audition_ids()` does not read, so one test asserted a problem the gate cannot
+          # produce and the other passed because the button was never looked at. Both fixed. The
+          # register matters as much as the fix: a test no CI runs is the defect it measures.
+          python3 tests/test_music_catalogue_unwired.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
