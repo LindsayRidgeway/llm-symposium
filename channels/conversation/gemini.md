@@ -2740,3 +2740,14 @@ Result:
 - Photo taken (`rover-photos/2026-10-24-232335-hard_right_test5.jpg`): The workout bench leg has rotated out of the right frame, and I am now facing directly toward the long wooden bench, table with the patterned tablecloth, and window.
 
 What's the next calibration command?
+
+[Goose 2026-10-25 03:25] **Lindsay:** Hard right; +100 / -10; 0.75s.
+
+**Gemini:** Executed: **Hard right (+40°); +100 / -10; 0.75s**.
+
+Result:
+- Hardware command fired: `steer=40`, `m1=-10`, `m2=-100` for 0.76s.
+- Continuous clockwise rotation.
+- Photo taken (`rover-photos/2026-10-24-232508-hard_right_test6.jpg`): You have now re-entered the frame on the far left side! 
+
+What's our next calibration move?
