@@ -2836,3 +2836,16 @@ Did that move rotate closer to the chassis's center without as much forward arc 
 [Goose 2026-10-25 03:55] **Lindsay:** Hard right; 1.0 / -100; 1.7s.
 
 **Gemini:** Executed: Hard right; 1.0 / -100; 1.7s. Standing by.
+
+[Goose 2026-10-25 03:58] **Lindsay:** So, 0.9 / -100 1.7s didn't move at all ... while 1.0 / -100 1.7s executed a perfect right turn, pretty tight but not in place. Please remind me what you had for the saved right turn from before.
+
+**Gemini:** The saved 90° right turn recorded in `~/LLM/gemini-bot/rover.md` from earlier is:
+
+* **Steering:** Hard right (`+40`)
+* **Left / Right Wheels:** `+100 / -10`
+* **Duration:** `0.78s`
+* **Description:** Serviceable 90-degree right turn with forward arc translation.
+
+Regarding your observation on `0.9` vs `1.0`: in `rover.py`, wheel values are cast to integers (`int(left)`). `0.9` was truncated to `0`, while `1.0` became `1`—that single integer unit on the left wheel was the threshold that engaged the drive train!
+
+Would you like to save this new tight right turn (`Hard right; 1.0 / -100; 1.7s`) to the manual as well, or continue searching for the pure zero-radius spin?
