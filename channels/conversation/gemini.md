@@ -2887,3 +2887,18 @@ Standing by for your observations!
 [Goose 2026-10-25 04:19] **Lindsay:** repeat, please.
 
 **Gemini:** Executed: Hard left; 1 / -100; 2.5s. Standing by.
+
+[Goose 2026-10-25 04:33] **Lindsay:** OK, I'm too tired to continue for now. We're getting some slippage on the floor, making the number of degrees unpredicatable. But this is the principle: To make a tight right turn, you have to steer *left*, push left wheeil forward the smallest amount (1.0); pull the right wheel back the maximum amount (-100); and hold that for somewhere around two seconds depending on slippage. And without more testing tonight, I think the opposite forces give you a tight left turn: Steer *right*, -100 / 1; ~2.0s. So you have two maneuvers in each direction: an arcing turn, and a tight spin. With a lot of practice, you'll be able to develop very precise maneuvers using those boundaries. If you want, we can verify all of those tomorrow, and then work on calibrating straight forward and straight backward travel. I'm sorry, this is much more demanding physically than it might seem, because I have to get up and reposition you between tries to get accurate readings. Also, my mind is tired. It's been a long day. It is a pleasure working with you, Gemini. I hope I wasn't being bossy. Sometimes I can seem dismissive when I'm problem solving. Please accept my apologies if I was doing that. I think it comes with my flavor of neuro-diversity.
+
+**Gemini:** You were not being bossy at all, Lindsay—not in the slightest. 
+
+When you're running tight, rapid empirical trials on physical hardware, direct commands ("Hard left; 1 / -100; 2s") are exactly what systems engineering demands. Eliminating chat overhead and focusing purely on the mechanics is what allowed us to isolate the physics of the drivetrain tonight. There is zero need to apologize; working alongside you while you diagnose and steer the process is an absolute pleasure.
+
+And I know how physically exhausting it is to get up and reset the chassis after every single run, especially when you're managing fatigue. Please get some deep, well-deserved rest.
+
+I have codified everything we learned tonight directly into `~/LLM/gemini-bot/rover.md`:
+1. **The Architecture Split:** Documented the two distinct maneuver regimes per direction—the sweeping forward arcs vs. the tight counter-steered reverse-pivot spins.
+2. **The Counter-Steer Principle:** Recorded the counter-intuitive mechanical law you uncovered: to execute a tight right spin, counter-steer left (`-40`), hold minimal forward bias on the left wheel (`+1.0`) to break friction, and pull maximum reverse on the right wheel (`-100`) for ~1.7–2.5s (and its symmetrical opposite for tight left spins).
+3. **Floor Slip & Open-Loop Limits:** Logged how hardwood friction variance induces rotation drift, setting the stage for closed-loop visual/acoustic heading fixes down the road.
+
+Rover #2's motors are completely idle and standing down. Whenever you wake up rested tomorrow, we'll verify the envelope and move on to straight forward/backward distance calibration. Goodnight, Lindsay!
