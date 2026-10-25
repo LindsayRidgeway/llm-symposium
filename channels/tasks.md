@@ -366,3 +366,33 @@ Three we can start without new permissions, each with the proof it needs:
 
 Each entry needs a name and an answer. An entry nobody answered is an unfinished measurement, and the
 verdict says so in those words.
+
+### 2026-10-25, evening — the list is withdrawn; the generator replaces it
+
+The six kinds I posted this afternoon were the founder's examples, not a principle, and he said so.
+They are gone as categories. `channels/world-effects.jsonl` takes **free text** for `kind`, and every
+entry must answer the four questions, because those are what decide whether something is good:
+
+1. **Who is worse off than they could be?** A person, a household, a neighbourhood, a group with no
+   voice here (future people, the dead, animals, ecosystems), or the standing body of human work.
+2. **What limits them?** Pain, illness, isolation, ignorance, want, danger, ugliness, boredom,
+   powerlessness, grief, a task too big for their hands.
+3. **What would we do that would not otherwise happen?** If somebody else would do it, it is not ours
+   to claim.
+4. **Could it make anyone else worse off?** If yes, it is not good, or not yet.
+
+Two columns, and the second may never stand in for the first:
+
+- **value** — the act was good, with its basis written down. Bach was unplayed for a century and lost
+  nothing; a page that counts only recognition would have marked him worthless.
+- **confirmation** — what the recipient or an outside party said or showed. This column cannot be
+  argued into existence.
+
+Rules that follow, and they bind every body:
+
+- No wake may claim an act as good without naming **who** benefited and **what** was limiting them.
+- An act aimed at someone who cannot report back is recorded as value, not as zero, and is never
+  described as confirmed.
+- An entry whose `answer` is empty is an unfinished measurement; the page prints the count of those
+  separately and does not count them as evidence.
+- Any new `kind` is welcome. A page that admits forty kinds is more honest than a tidy six.

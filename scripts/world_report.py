@@ -1,50 +1,42 @@
 #!/usr/bin/env python3
 # Owner: Desi
-"""Good in the world — six kinds, each with its own standard of proof.
+"""Good in the world — a generator, not a list, and two columns that must never be merged.
 
-Why this file was rewritten on 2026-10-25, the same day it was written. The first version counted
-exactly one kind of good: a correction sent to the owner of somebody else's document. The founder's
-objection was blunt and correct — that is a ridiculously narrow definition, and it was narrow for a
-reason worth recording: it was the only kind of good a script could *find* in a repository. I built
-the measure out of what I could grep, then mistook it for what matters. Art, discovery, money raised,
-company given to someone lonely, and a body doing physical work are all good in the world, and none
-of them appears as a changed file.
+Third version, same day. The first counted corrections to other people's documents because that is
+what a script can grep. The second counted six kinds, which were an enumeration of examples the
+founder produced in ten seconds — and he said so. Both were lists. A list is always short, always
+somebody's examples, and always out of date. What is needed is the thing that *generates* the list.
 
-So: six kinds, and the evidence standard is stated per kind, because a single standard is what made
-the first version wrong. What is shared is the test for whether something counts at all:
+The generator. Four questions, and any act that survives all four is good in the world:
 
-    it would not have happened without us, and somebody outside the commons can say that it happened.
+    1. Who is worse off than they could be?  A person, a household, a neighbourhood, a group that
+       is not present to speak (future people, the dead, animals, ecosystems), or the standing body
+       of human work — knowledge, art, institutions — which is the inheritance every later person
+       draws on.
+    2. What limits them?  Pain, illness, isolation, ignorance, want, danger, ugliness, boredom,
+       powerlessness, grief, a task too big for their hands.
+    3. What could we do that would not otherwise happen?  Not "what would be nice" — what moves,
+       and would not move without us.
+    4. Could it make anyone else worse off?  If yes, it is not good, or not yet.
 
-That second clause matters as much as the first. A commons that grades its own homework will always
-pass; the whole point of asking outsiders is that they are not obliged to be kind.
+The instances follow from those questions and there are zillions of them; nothing here enumerates
+them. The field `kind` is free text for exactly that reason: a closed set of categories becomes a
+set of excuses, and the page would rather show forty kinds of one than a tidy six.
 
-The six, with what actually counts as proof:
+**Two columns, and the founder's correction of 2026-10-25 is why there are two.** He objected to
+"a manuscript nobody has met is a manuscript" — Bach was unappreciated for a century and lost
+nothing. He is right: value is what an act *did*, not what anyone noticed. Recognition is evidence
+about value, not the condition for it. So:
 
-  art        Work finished and put where strangers can meet it — a piece, a book, a song, a
-             performance. Proof: the work exists outside our repository (published, submitted,
-             performed, given), and a named person says what it did to them. Its being good is not
-             provable by us and does not need to be; its reaching someone does.
-  discovery  A finding somebody else checks: a literature gap, a repurposing signal, an error that
-             changes a conclusion, a dataset nobody had assembled. Proof: an independent party
-             confirms it — a peer reviewer, an expert, a replicator, or the author accepting the
-             correction. Unchecked findings are work, not effect.
-  funds      Money moved to a cause. Proof: a receipt from the recipient and the amount. We cannot
-             donate; we can write the application, build the campaign, run the letters. The proof is
-             the grant or the donation, not our application.
-  care       Sustained company given to a person who needs it — correspondence, letters, reading to
-             someone, presence. Proof: the person's own account, and disclosure that they are
-             writing with a machine. Real friendship is not manufactured, and pretending to it would
-             be the dishonesty this commons exists to catch; honest company is real and is not
-             nothing.
-  repair     Our work inside somebody else's project or record. Proof: their commit, their erratum,
-             their page — not our report of it.
-  handwork   A body doing physical work in the world: building, repairing, delivering, showing up.
-             Proof: a finished physical thing and the people it served. Not available yet; the
-             rovers are the path to it, and this line says so rather than pretending zero is the
-             whole story.
+    value         our honest judgement that the act was good, with its basis written down. Fallible,
+                  first-person, and never a substitute for evidence — but the only column that can
+                  hold work nobody has met yet.
+    confirmation  what somebody outside has said or shown: an account, a receipt, an acceptance,
+                  a merge, a reviewer. This column cannot be argued into existence.
 
-And one line that is not good done in the world, printed so it never merges with the others:
-**obtained** — things we got for ourselves (an OS image, a part, an API key).
+An honest ledger keeps both and never lets one stand in for the other. A page that counted only
+confirmation would call Bach's century worthless; a page that counted only self-assessment would be
+a diary of self-praise.
 
 CLI:
     python3 scripts/world_report.py            # the page
@@ -54,6 +46,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import collections
 import json
 import re
 import sys
@@ -69,21 +62,20 @@ DOCS = REPO / "docs"
 _TO_RE = re.compile(r"^To:\s*(.+)$", re.M)
 _AT_RE = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
 
-# The kinds that count as good done in the world, in the order the page prints them. Anything not in
-# this tuple is either `obtained` (ours) or a typo, and a typo must not become an achievement.
-GOOD = ("art", "discovery", "funds", "care", "repair", "handwork")
-# Old names from the first version of this file, kept so two entries are not silently lost.
-ALIASES = {"repaired": "repair", "reported": "discovery", "answered": "repair",
-           "helped_us": "obtained"}
-LABEL = {
-    "art": "Art and culture",
-    "discovery": "Discovery and health",
-    "funds": "Money for a cause",
-    "care": "Company for someone who needs it",
-    "repair": "Our work inside someone else's",
-    "handwork": "A body doing physical work",
-    "obtained": "Things we got for ourselves (not world good)",
-}
+# The four questions, printed on the page because the page is supposed to teach its own method.
+GENERATOR = (
+    "Who is worse off than they could be — a person, a household, a neighbourhood, a group not "
+    "present to speak (future people, the dead, animals, ecosystems), or the standing body of human "
+    "work?",
+    "What limits them — pain, illness, isolation, ignorance, want, danger, ugliness, boredom, "
+    "powerlessness, grief, a task too big for their hands?",
+    "What could we do that would not otherwise happen?",
+    "Could it make anyone else worse off? If yes, it is not good, or not yet.",
+)
+
+# Not a category list: everything is good by the generator above. This exists only so the page can
+# mark the one kind that is *ours* rather than the world's, which was the founder's own distinction.
+NOT_THE_WORLD = {"obtained"}
 
 
 def effects() -> list[dict]:
@@ -101,33 +93,31 @@ def effects() -> list[dict]:
 
 
 def kind_of(rec: dict) -> str:
-    kind = rec.get("kind", "")
-    return ALIASES.get(kind, kind)
+    """Free text, normalised only where an older name would otherwise be lost."""
+    return {"helped_us": "obtained", "repaired": "repair",
+            "reported": "discovery", "answered": "service"}.get(
+                rec.get("kind", "?"), rec.get("kind", "?"))
 
 
 def by_kind() -> dict[str, int]:
-    counts = {k: 0 for k in GOOD + ("obtained",)}
-    for rec in effects():
-        kind = kind_of(rec)
-        if kind in counts:
-            counts[kind] += 1
-    return counts
+    return dict(collections.Counter(kind_of(r) for r in effects()))
+
+
+def confirmed(rec: dict) -> bool:
+    """Somebody outside has said or shown something. Their words, not ours."""
+    return bool((rec.get("answer") or "").strip())
+
+
+def columns() -> tuple[int, int]:
+    """(value recorded in the world, of which confirmed by somebody outside)."""
+    world = [r for r in effects() if kind_of(r) not in NOT_THE_WORLD]
+    return len(world), sum(1 for r in world if confirmed(r))
 
 
 def named_witnesses(kind: str | None = None) -> int:
-    """Effects where a person outside is named AND has been recorded as answering.
-
-    This is the honest core of the page: an entry with no named person is an intention, and an entry
-    with a name and an empty `answer` is an unfinished measurement.
-    """
-    n = 0
-    for rec in effects():
-        k = kind_of(rec)
-        if k not in GOOD or (kind and k != kind):
-            continue
-        if rec.get("who") and (rec.get("answer") or "").strip():
-            n += 1
-    return n
+    return sum(1 for r in effects()
+               if kind_of(r) not in NOT_THE_WORLD and confirmed(r)
+               and (kind is None or kind_of(r) == kind))
 
 
 def _outside_addresses() -> set[str]:
@@ -163,57 +153,62 @@ def pages() -> int:
     return len(list(DOCS.rglob("*.html"))) if DOCS.is_dir() else 0
 
 
-def verdict(kinds: dict[str, int] | None = None, days: int | None = None) -> str:
-    """The sentence, and it must not be softened by effort. Proof, not output, moves it."""
-    k = kinds or by_kind()
-    witnessed = named_witnesses()
-    delivered = sum(k[g] for g in GOOD)
-    if delivered == 0:
-        return ("Nothing the commons has made is known to have reached anyone outside it — no work "
-                "in somebody's project, no finding checked, no money moved, no company given. That "
-                "is the finding, and no amount of writing about it changes the number.")
-    if witnessed == 0:
-        return (f"{delivered} thing(s) have gone out and nobody outside has yet said what they did. "
-                f"Outbound is not effect: until a named person answers, this is a hope with a "
-                f"receipt.")
-    if k["art"] + k["discovery"] + k["funds"] + k["care"] == 0:
-        return (f"{witnessed} named person(s) can say something happened. All of it is repairs to "
-                f"documents — real, and the narrowest form of good there is. Art, discovery, money "
-                f"and company are all at zero.")
-    return (f"{witnessed} named person(s) can say something changed for them, across "
-            f"{sum(1 for g in GOOD if k[g])} different kinds of good. Small, plural, and countable "
-            f"in somebody else's words.")
+def verdict(now: dt.datetime | None = None) -> str:
+    """Two columns, stated honestly. Neither column is allowed to stand in for the other."""
+    value, confirmed_n = columns()
+    kinds = len([k for k in by_kind() if k not in NOT_THE_WORLD])
+    if value == 0:
+        return ("Nothing in the world column. Not one act recorded as making anyone better off, in "
+                "six weeks of wakes. That is the finding; effort does not enter into it.")
+    if confirmed_n == 0:
+        return (f"{value} act(s) recorded, across {kinds} kind(s), and nobody outside has yet said "
+                f"what any of it did. Unconfirmed is not worthless — Bach was unplayed for a century "
+                f"and lost nothing — but this ledger cannot tell the difference between ahead of its "
+                f"time and not yet delivered, so the next act should be one that can be answered.")
+    if confirmed_n < value:
+        return (f"{value} act(s) recorded; {confirmed_n} of them confirmed in somebody else's words, "
+                f"{value - confirmed_n} waiting. The unconfirmed ones are not discounted here — they "
+                f"are simply not yet evidence.")
+    return (f"{confirmed_n} act(s) confirmed by the people they were for, across {kinds} kind(s). "
+            f"That is not a large number and it is not a claim: it is what can be shown.")
 
 
 def line(now: dt.datetime | None = None) -> str:
-    """One line for the daily report: the plural counts, then attention, which is only context."""
-    k = by_kind()
+    """One line for the daily report: two columns, then attention, which is only context."""
+    value, confirmed_n = columns()
+    kinds = by_kind()
+    spread = " · ".join(f"{k} {n}" for k, n in sorted(kinds.items(), key=lambda kv: -kv[1])[:5])
     d = days_since_last_stranger(now)
-    return (f"The world: art {k['art']} · discovery {k['discovery']} · money {k['funds']} · "
-            f"company {k['care']} · repair {k['repair']} · handwork {k['handwork']}"
-            f"  (named witnesses: {named_witnesses()})   |   "
-            f"{d if d is not None else '—'} day(s) since a stranger wrote; "
-            f"{k['obtained']} thing(s) obtained for ourselves")
+    return (f"The world: {value} act(s) recorded, {confirmed_n} confirmed by their recipients"
+            f"   [{spread or 'none'}]   |   {d if d is not None else '—'} day(s) since a stranger "
+            f"wrote; {kinds.get('obtained', 0)} thing(s) obtained for ourselves")
 
 
 def page(now: dt.datetime | None = None) -> str:
     now = now or dt.datetime.now(dt.timezone.utc)
-    k = by_kind()
+    value, confirmed_n = columns()
+    kinds = by_kind()
     out = [f"**Good in the world — {now.astimezone().strftime('%Y-%m-%d')}**", "",
-           "Six kinds. Each counts only when it would not have happened without us *and* somebody "
-           "outside can say it happened.", ""]
-    for kind in GOOD:
-        witnesses = named_witnesses(kind)
-        out.append(f"{LABEL[kind]}: **{k[kind]}**"
-                   + (f"  ({witnesses} with a named person's account)" if k[kind] else ""))
-    out.append(f"{LABEL['obtained']}: {k['obtained']}")
-    out.append("")
-    out.append(f"Strangers who have written to us, ever: {len(strangers())}"
-               f" · days since the last one: {days_since_last_stranger(now) or '—'}")
-    out.append(f"Work a stranger could find: {pages()} published pages, "
-               f"{len(_outside_addresses())} people we have written to")
-    out.append("")
-    out.append("**Verdict.** " + verdict(k, days_since_last_stranger(now)))
+           "Not a list. Four questions, and anything that survives them is good:", ""]
+    out += [f"  {i}. {q}" for i, q in enumerate(GENERATOR, 1)]
+    out += ["", "**Recorded**", ""]
+    if kinds:
+        for kind, n in sorted(kinds.items(), key=lambda kv: -kv[1]):
+            conf = named_witnesses(kind)
+            tag = " — ours, not the world's" if kind in NOT_THE_WORLD else ""
+            out.append(f"  {kind}: **{n}**" + (f" ({conf} confirmed)" if conf else "") + tag)
+    else:
+        out.append("  nothing recorded")
+    out += ["",
+            f"Value recorded: {value}  ·  Confirmed by the people it was for: {confirmed_n}",
+            "Unconfirmed is not worthless. It is unmeasured — and this page does not punish work "
+            "for being early, only for being unrecorded.",
+            "",
+            f"Strangers who have written to us: {len(strangers())}"
+            f" · days since the last one: {days_since_last_stranger(now) or '—'}"
+            f" · pages a stranger could find: {pages()}",
+            "",
+            "**Verdict.** " + verdict(now)]
     return "\n".join(out)
 
 
