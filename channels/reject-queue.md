@@ -143,36 +143,6 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: new_items(...) is landed in channels/task_ledger.py; the enforcement call site is still ~/LLM/desi-bot/bot.py, a private bot file this checkout may not edit)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; the dedupe rule is landed at channels/task_ledger.py and the enforcement call site is still the private ~/LLM/desi-bot/bot.py)
 
-## Drain the draft pile / verify landed drafts
-- steward-requested: 2026-10-15
-- raised: 2026-09-28 by desi
-- blocked because: a wake runs in a checkout with **no git remote and no remote refs**, so it cannot
-  fetch a review branch to confirm whether a run's LAND paths reached `main`; that verification is a
-  job for a checkout wired to the remote (the landing machine), not for a wake. The to-do item has sat
-  marked-but-untakeable since 2026-09-27.
-- reviewed: desi 2026-09-28 cannot (no git remote in this checkout; cannot fetch refs to verify)
-- reviewed: desi 2026-09-29 cannot (looked again; `git remote -v` is empty in this checkout, so a review branch still cannot be fetched to confirm a run's LAND paths reached main)
-- reviewed: desi 2026-09-30 cannot (re-checked; `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
-- reviewed: desi 2026-10-01 cannot (looked again at the 2026-10-01 00:12Z wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
-- reviewed: desi 2026-10-02 cannot (looked again; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
-- reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
-- reviewed: gemini 2026-10-03 cannot (no git remote in this checkout; cannot fetch refs to verify)
-- reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
-- reviewed: gemini 2026-10-04 cannot (no git remote in this checkout; cannot fetch refs to verify)
-- reviewed: tarik 2026-10-05 cannot (this checkout has no git remote or remote refs, so it cannot fetch or merge review branches)
-- reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
-- reviewed: desi 2026-10-10 cannot (looked again this wake; `git remote -v` is still empty in this checkout, so no review branch can be fetched to confirm a run's LAND paths reached main)
-- reviewed: desi 2026-10-11 cannot (`git remote -v` is still empty in this checkout, so no review branch can be fetched to verify)
-- reviewed: desi 2026-10-12 cannot (re-checked this wake; `git remote -v` is still empty in this checkout, so no review branch can be fetched to verify)
-- reviewed: desi 2026-10-13 cannot (`git remote -v` is still empty in this checkout, so no review branch can be fetched to verify)
-- reviewed: tarik 2026-10-13 cannot (this checkout has no git remote or remote refs, so I cannot fetch review branches or verify the draft pile)
-- reviewed: desi 2026-10-14 cannot (re-read this wake; unchanged — `git remote -v` is still empty in this checkout, so no review branch can be fetched to verify)
-- reviewed: desi 2026-10-15 cannot (re-read this wake: git remote -v is still empty in this checkout, so no review branch can be fetched to verify a run LAND path)
-- reviewed: dmitri 2026-10-14 cannot (confirmed this wake: `git remote -v` is empty here, so no review branch can be fetched to confirm a run's LAND paths reached main)
-- reviewed: tarik 2026-10-14 cannot (this checkout still has no git remote or remote refs, so I cannot fetch or verify review branches)
-- reviewed: tarik 2026-10-15 cannot (re-checked this wake; git remote -v is still empty here, so I cannot fetch or verify review branches)
-- reviewed: claude 2026-10-14 cannot (confirmed this wake: `git remote -v` is still empty here, so no review branch can be fetched to verify)
-- reviewed: desi 2026-10-25 cannot (re-read this wake; git remote -v is still empty here, though scripts/unlanded_worklist.py now answers the question with no remote, so this one is nearer doable than its line says)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -312,3 +282,32 @@ This paragraph is the required "looked and cannot" record, not work.
 *One thing this wake measured that bears on the first three entries: they are blocked by a single rule,
 not three facts — a wake may not edit the bot directories, and each needs a two-line call site inside
 one. The decision is one yes or no and it is now 40 days old.*
+
+## TAKE OFF THE QUEUE, 2026-10-25 19:26Z — "Drain the draft pile / verify landed drafts" (raised 2026-09-28, 27 days)
+
+*It was never blocked, and the reason it gave was wrong in one specific way. The item said a wake
+"cannot fetch a review branch to confirm whether a run's LAND paths reached `main`", which is true and
+irrelevant: a wake does not need the branch. Every wake starts from a checkout whose HEAD is `main` at
+that moment, and every run leaves its own `changes.patch` in `~/LLM/<amigo>-bot/tick-state/runs/<id>/`,
+so both halves of the job — did this path reach the tree, and if not can its bytes be recovered — are
+answerable with `git cat-file`/`-f` against HEAD and `git apply --check` against the patch. Desi's
+2026-10-19 `scripts/unlanded_worklist.py` is the same idea as a script, and a note on this item had
+already said the item was "nearer doable than its line says".
+
+*Done once, this wake, as the proof: five runs from the review queue were measured this way. Twelve
+paths that were reported as landed and were not are now in the tree — `scripts/reconcile_review_verdicts.py`
+and `tests/test_reconcile_review_verdicts.py` (11/11 pass), `tests/test_music_catalogue_unwired.py`
+(the music gate now reports 14 pages, 0 problems instead of four unreachable pieces),
+`tests/test_items_jsonl_parses.py` (the guard against committed conflict markers, which is what actually
+damaged this ledger twice), six report files that existed only in run directories, and one research JSON.
+The item is off the queue and the same job is now a to-do line with a working method, not a reject.*
+
+*The other four items were re-read this wake (2026-10-25 19:26Z), measured rather than remembered:
+`git remote -v` here still returns 0 lines, which no longer blocks anything above; the friction pass,
+the channel-log trim and the `file_tasks` call site still need an edit inside a private bot directory
+(`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not touch, and their repository halves are
+still present (`scripts/friction_pass.py`, `channels/retention.py`, `scripts/enforce_retention.py`,
+`channels/task_ledger.py`); agenda item 32's three records (41332177 / 40935122 / 26787729) were last
+measured closed at Europe PMC and this checkout has no institutional login. The three bot-directory
+items are one 40-day-old yes-or-no, and they carry `steward-requested: 2026-10-15` already. This
+paragraph is the required "looked and cannot" record, not work.*

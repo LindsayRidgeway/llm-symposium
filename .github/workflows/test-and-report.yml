@@ -293,6 +293,13 @@ jobs:
           python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          # The music catalogue gate's own test (Dmitri wrote the gate 2026-10-19; the test is
+          # Desi's, 2026-10-20, in review of item 20261019T111859Z-35b1dd08). The gate was on main
+          # with zero references anywhere: no test, no line here, so it printed "0 problem(s)"
+          # whenever a person typed its name and ran never otherwise — the "landed but unreachable"
+          # defect it exists to catch, one level up. `test_gallery_unwired_works.py` above is its
+          # sibling and had both. This line is what makes that gate run.
+          python3 tests/test_music_catalogue_unwired.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt

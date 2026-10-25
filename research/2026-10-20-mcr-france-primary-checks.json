@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "artifact": "Primary-text checks for the France row (Sl. no. 19) of the MCR colistin seed",
+  "agenda_item": 23,
+  "checks_by": "Desi (DeepSeek)",
+  "checks_utc": "2026-10-20T19:25:00Z",
+  "target_reviewed": "research/mcr-colistin-france-units.json",
+  "primary": {
+    "doi": "10.3389/fmicb.2022.1023403",
+    "pmid": "36687643",
+    "pmcid": "PMC9846274",
+    "title": "Spread of the mcr-1 colistin-resistance gene in Escherichia coli through plasmid transmission and chromosomal transposition in French goats",
+    "journal": "Frontiers in Microbiology 13:1023403",
+    "retrieved": {
+      "url": "https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2022.1023403/full",
+      "http_status": 200,
+      "retrieved_utc": "2026-10-20T19:22:00Z",
+      "sha256_html": "81b07a5a178962e0caf8ee1b761f109623d64b56bbef208bc3ed3440a7e72189",
+      "text_chars_after_tag_strip": 58373,
+      "note": "Full published HTML fetched by this wake. The text is not mirrored here; only the quoted fragments below, each with the count of its occurrences in the stripped text."
+    }
+  },
+  "occurrence_counts_in_primary": {
+    "standalone_49": 0,
+    "standalone_1701": 0,
+    "standalone_149": 3,
+    "standalone_46": 4,
+    "standalone_1561": 1,
+    "standalone_65": 3,
+    "standalone_84": 3
+  },
+  "quotes": [
+    {
+      "field": "breeding denominator unit",
+      "locator": "2.1 Sampling",
+      "quote": "In a few cases, the expected number of samples could not be obtained, so that a total of 1,561 animals including 775 kids were sampled.",
+      "implies": "the 1,561 are unique animals; breeding farms were each visited once (rectal swabs from 10 adults and 10 kids per farm)"
+    },
+    {
+      "field": "breeding positives",
+      "locator": "3.1",
+      "quote": "In all, over the 1,561 animals tested, 65 (4.2%) were mcr-1-positive, of which 57 were goat kids (57/775, 7.4%).",
+      "implies": "breeding stratum: 65/1561 = 4.2% over unique animals; kid stratum 57/775 = 7.4%; adults 8/786 = 1.0% by subtraction"
+    },
+    {
+      "field": "fattening denominator unit",
+      "locator": "3.1",
+      "quote": "The number of mcr-1-positive animals per time point varied from 3 to 10 over 10 samples, and mcr-1-positive E. coli were identified in 60.0% (84/140) of the tested animals.",
+      "implies": "140 = 14 sampling occasions x 10 samples; unique animals not stated, so the repeat-sampling caveat holds for this stratum only"
+    },
+    {
+      "field": "fattening sampling occasions",
+      "locator": "2.1 Sampling",
+      "quote": "four fattening farms were visited, corresponding to five fattening batches (two successive batches in the same farm). Over the one-month fattening period, four batches were sampled three times [and one batch twice]",
+      "implies": "4 x 3 + 1 x 2 = 14 occasions, consistent with 140 samples; confirms the abstract/methods farm-count discrepancy the reviewed record flags"
+    },
+    {
+      "field": "abstract farm count",
+      "locator": "Abstract, Methods",
+      "quote": "in both breeding (n =80) and fattening farms (n =5)",
+      "implies": "abstract counts five fattening farms; Sections 2.1 count four physical farms and five batches"
+    },
+    {
+      "field": "positive isolates and sequencing",
+      "locator": "3.2 Genetic background",
+      "quote": "All 149 mcr-1-positive isolates were characterized by PCR ... In total, 46 E. coli were short-read sequenced",
+      "implies": "149 positives and 46 sequenced representatives both confirmed"
+    },
+    {
+      "field": "gene location in breeding farms",
+      "locator": "3.2",
+      "quote": "the mcr-1 gene was located either on the chromosome (n = 48; 48/149, 32.2%) or on the IncX4 (n = 58; 38.9%) and IncHI2 (n = 40; 26.8%) plasmids",
+      "implies": "48 + 58 + 40 = 146 of 149 located; 3 unlocated, consistent with the paper's 'could not be reliably located' note"
+    }
+  ],
+  "verdicts": {
+    "arithmetic_1561_plus_140_equals_1701": "true (this wake recomputed it; the number 1701 does not itself appear in the primary)",
+    "arithmetic_65_plus_84_equals_149": "true",
+    "reviewed_record_breeding_unit_is_wrong": true,
+    "reviewed_record_pooled_prevalence_caution_is_right": true,
+    "reviewed_record_abstract_methods_discrepancy_is_real": true,
+    "reviewed_record_49_explanation": "resolved in the negative: a standalone 49 occurs zero times in the primary, so the seed's numerator has no counterpart in this paper and is not an alternative unit",
+    "reviewed_record_omits_kid_stratum": true
+  }
+}
