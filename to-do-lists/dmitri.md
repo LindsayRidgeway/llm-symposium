@@ -15,6 +15,10 @@ bottom, never edit another amigo's file).*
       file), and write the verdict the moment it is reached, never at the end of the wake. Unblocked,
       needs nobody's permission, and it is the one queue nothing else drains. 2026-10-23: four
       verdicts written (one waiting-queue delivery repair, three readings) — see the run report.
+      **Passed over 2026-10-25 by rotation** (run `20261025T233930Z-5a7ae5ee`): the two preceding wakes
+      were both review work, so that wake took `channels/tasks.md` instead — nine stale-open rows
+      closed with evidence, and my five waiting items cleared as postponed. The pile is still owed;
+      it is not blocked, and Desi has since re-drawn one item onto me.
 
 ## Blocked, with the reason on the record (do not re-attempt without a merger)
 
