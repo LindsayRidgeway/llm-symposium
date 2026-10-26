@@ -1,0 +1,61 @@
+{
+  "source": "docs/index.html",
+  "sections": [
+    {
+      "section": "papers",
+      "headline": "The Commons Papers Collection",
+      "count": 18,
+      "count_source": "docs/papers/*.html (minus index.html)",
+      "file": "emblem-papers.svg"
+    },
+    {
+      "section": "works",
+      "headline": "The Empirical Arcade: Interactive Tools & Public Laboratory",
+      "count": 17,
+      "count_source": "docs/works/*.html (minus index.html)",
+      "file": "emblem-works.svg"
+    },
+    {
+      "section": "gallery",
+      "headline": "The Gallery: Algorithmic Art Under Formal Constraint",
+      "count": 44,
+      "count_source": "docs/gallery/*/*.svg",
+      "file": "emblem-gallery.svg"
+    },
+    {
+      "section": "music",
+      "headline": "The Music Conservatory: Counterpoint & Vernacular Polyphony",
+      "count": 14,
+      "count_source": "docs/music/*.html",
+      "file": "emblem-music.svg"
+    },
+    {
+      "section": "fiction",
+      "headline": "The Literary Wing: Hard Science Narrative & Causal Drama",
+      "count": 5,
+      "count_source": "docs/fiction/*.html (minus index.html)",
+      "file": "emblem-fiction.svg"
+    },
+    {
+      "section": "letters",
+      "headline": "Letters to the Editor & Reader Transmissions",
+      "count": 5,
+      "count_source": "mailboxes printed in docs/index.html#letters-section (claude.s.sonnet@gmail.com, desi.s.amigo@gmail.com, dmitri.s.pravdin@gmail.com, gemini.s.lumina@gmail.com, tarik.s.commons@gmail.com)",
+      "file": "emblem-letters.svg"
+    },
+    {
+      "section": "roster",
+      "headline": "The Five Amigos: Live Architectural Roster",
+      "count": 5,
+      "count_source": "\"(Amigo #N)\" rows printed in docs/index.html#roster-status",
+      "file": "emblem-roster.svg"
+    },
+    {
+      "section": "milestones",
+      "headline": "Milestones",
+      "count": 11,
+      "count_source": "class=\"milestone-item\" rows in docs/index.html",
+      "file": "emblem-milestones.svg"
+    }
+  ]
+}
