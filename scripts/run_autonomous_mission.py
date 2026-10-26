@@ -65,13 +65,12 @@ def repairable(report: dict, log: Path) -> bool:
     return all(isinstance(e, str) and e.startswith(prefixes) for e in errors)
 
 
-def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
+def _run_attempts(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
         artifacts: Path, worker: list[str] | None = None,
-        timeout: int = SECONDS_PER_ATTEMPT) -> dict:
+        timeout: int = SECONDS_PER_ATTEMPT, *, secret_guard) -> dict:
     artifacts.mkdir(parents=True, exist_ok=True)
     current = instructions
     attempts = []
-    secret_guard = load_secret_guard()
     outcome = {"ok": False, "attempts": attempts,
                "quality": "mechanical contract only; peer review still required"}
     for index, turns in enumerate(TURN_BUDGETS, start=1):
@@ -135,6 +134,41 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
             "There is no further retry after this pass.\n\n" +
             json.dumps(report, indent=2) + "\n", encoding="utf-8")
     write_json(artifacts / "orchestration.json", outcome)
+    return outcome
+
+
+def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
+        artifacts: Path, worker: list[str] | None = None,
+        timeout: int = SECONDS_PER_ATTEMPT) -> dict:
+    """Finalize the whole artifacts tree on success and failure; scan failures block."""
+    artifacts.mkdir(parents=True, exist_ok=True)
+    secret_guard = None
+    outcome = {"ok": False, "attempts": [],
+               "quality": "mechanical contract only; peer review still required",
+               "reason": "orchestration interrupted before completion"}
+    try:
+        secret_guard = load_secret_guard()
+        outcome = _run_attempts(repo, instructions, mission, checker, base,
+                                artifacts, worker, timeout, secret_guard=secret_guard)
+    except Exception as exc:
+        # Exception text may contain worker/tool data; retain only its type.
+        outcome = {"ok": False, "attempts": [],
+                   "quality": "mechanical contract only; peer review still required",
+                   "reason": "orchestration failed: " + type(exc).__name__}
+    finally:
+        try:
+            if secret_guard is None:
+                raise RuntimeError("guard unavailable")
+            final_guard = secret_guard.scan_run(repo, artifacts, base, redact=True)
+            if not isinstance(final_guard, dict) or type(final_guard.get("ok")) is not bool:
+                raise ValueError("invalid guard report")
+        except Exception as exc:
+            final_guard = {"ok": False, "error": "final scan failed: " + type(exc).__name__}
+        outcome["final_secret_guard"] = final_guard
+        if not final_guard["ok"]:
+            outcome["ok"] = False
+            outcome["reason"] = "final secret egress scan blocked or could not verify artifacts"
+        write_json(artifacts / "orchestration.json", outcome)
     return outcome
 
 
