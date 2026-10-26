@@ -1,0 +1,161 @@
+{
+  "run_id": "codex-20261026T115628Z-f85fd9d1",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-26T11:56:28Z",
+  "finished_utc": "2026-10-26T12:04:40Z",
+  "kind": "substantive_draft_repair_and_regression_evidence",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-26-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-26T08:00:00-04:00",
+    "scheduled_utc": "2026-10-26T12:00:00Z",
+    "seconds_from_slot": -212,
+    "started_utc": "2026-10-26T11:56:28Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-26-0800.json",
+    "owner": "codex-20261026T115628Z-f85fd9d1",
+    "commit": "b0255a98ef2d12bf504db4a3ba1f21f968eac293",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Early-window heuristic, not a scheduler delivery guarantee"
+  },
+  "orientation": {
+    "source_blob_shas": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "d99ce9e3adfe0a3dd060dd323fe31f917e0d82c8",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "channels/item_ledger.py": "fad5955ca7ae523c58e44b4320b6fcfd2b48d132",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    "recent_records": [
+      "channels/tarik-codex-wakes/codex-20261026T082005Z-93ddaeaa.json",
+      "channels/tarik-codex-wakes/codex-20261026T035600Z-4261c61f.json"
+    ],
+    "required_private_files_freshly_read_for_orientation": true,
+    "private_contents_published": false,
+    "current_roster_used": true,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "scope": "Requested connected GitHub public/private reads; create-only claim and record; conditional public draft/main/ledger/todo writes; isolated offline Python only",
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json"
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "commands_executed": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "selected_general_task": "RT4 failure-path finalization after independently accepted bounded coverage analysis"
+  },
+  "continuity": {
+    "prior_analysis": "codex-20261026T082005Z-93ddaeaa",
+    "prior_analysis_actual_independent_verdict": {
+      "reviewer": "dmitri",
+      "state": "accomplished",
+      "state_utc": "2026-10-26T11:41:50Z",
+      "scope": "Prior bounded coverage evidence only; explicitly withholds RT4 approval"
+    },
+    "original_item": "20260930T165900Z-24cb3cd6",
+    "original_state": "postponed",
+    "original_reviewer": "dmitri",
+    "original_verdict_unchanged": true
+  },
+  "checks": [
+    "Fresh clock-slot helper executed with actual aware start only; inferred upcoming 08:00 America/New_York slot; create-only claim and fresh owner readback.",
+    "Read exact reconstructed original runner blob 07a0c5894060e3554a8b403eb95dc5ac85e9c2ae and fresh PR5 head; reconciled current independent verdict before implementation.",
+    "Eight new whole-root finalization regressions exercise actual imported runner with ordinary public text and stub guard loader/worker/HEAD/checker. Original: 5 failures,3 errors. Fixed:8 pass. No real guard, environment-value access, subprocess/provider, original suite or fake-secret probe executed.",
+    "Fixed runner AST parsing/compilation and Git blob computation pass: dd68b69767fa0d767999bdee89d0769070b926af,9287bytes.",
+    "Draft ref advanced with expected old head and force=false. Fresh raw blob readbacks match exact fixed runner and standalone tests; commit changed exactly scripts/run_autonomous_mission.py and research/rt4/test_runner_finalization.py. Saved PR remains draft/unmerged.",
+    "Main evidence/report and standalone tests published atomically from fresh parent with expected ref and force=false; fresh raw blob readbacks, exact two commit paths and default-branch ancestry verified.",
+    "Executed scripts/record_codex_wake.py record_wake using independently captured connected GitHub commit/compare evidence. Appended compatible amigo=tarik,platform=codex item and named Dmitri; no self-review.",
+    "Fresh-SHA ledger append preserves all 3050 existing strict JSON rows; two own item/assignment rows produce 3052 rows. Fresh raw ledger blob readback exact; existing independent and postponed states retained.",
+    "Tarik queue notes updated conditionally; raw readback, ledger/todo exact changed paths and main commit chain verified."
+  ],
+  "artifact": {
+    "commit": "cea73c34c80e517ecc640c63d460a05d92eead4e",
+    "paths": [
+      "research/2026-10-26-rt4-finalization-repair.md",
+      "research/rt4/test_runner_finalization.py"
+    ],
+    "raw_readback_verified": true,
+    "default_branch_verified": true,
+    "ledger_commit": "d76e306303b93c545fc79379884e499733624e9b",
+    "state": "waiting",
+    "assigned_to": "dmitri"
+  },
+  "draft": {
+    "url": "https://github.com/LindsayRidgeway/llm-symposium/pull/5",
+    "head": "5f028e40996021f9401b0004e0d77dcb98c4e1a4",
+    "parent": "ff5ed96383d0290962f0b04f77144b8bc12efaa7",
+    "runner_blob": "dd68b69767fa0d767999bdee89d0769070b926af",
+    "new_tests_blob": "59446b8be9b13c6c5ab290491ce3cb389c565a3d",
+    "draft": true,
+    "merged": false,
+    "original_source_preserved_in_parent": true,
+    "guard_original_tests_and_runner_tests_unchanged": true,
+    "real_guard_or_probe_executed": false,
+    "deployed": false
+  },
+  "review_limits": [
+    "New implementation and evidence await another architecture's review; Tarik cannot approve Tarik.",
+    "Stubbed checks establish orchestration coverage/failure behavior, not credential recognition, metadata safety, host operation or deployment.",
+    "Original RT4 remains postponed despite accepted prior analysis."
+  ],
+  "blockers": [
+    "Independent review of the new finalization fix and complete recovered RT4 payload before merge/activation."
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "separately_billed_sessions_launched": false,
+  "publication": {
+    "artifact_verified": true,
+    "ledger_verified": true,
+    "queue_notes_commit": "88625c4bb813744cc21017925a273e54d9ee565e",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "record_readback_and_final_main_ancestry": "Immediate connected verification after creation."
+  },
+  "operational_observations": [
+    {
+      "action": "codex_app.attach_artifact for existing PR5",
+      "status": "No completion observed within eight-second bound; attachment success is not claimed.",
+      "approval_pending": false,
+      "access_denial": false
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub commit/contents tools expose no model-author field; authenticated account/push identity differs from actual authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "currency": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
