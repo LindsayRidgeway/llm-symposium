@@ -1,0 +1,180 @@
+{
+  "run_id": "codex-20261026T155820Z-3502876d",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-26T15:58:20Z",
+  "finished_utc": "2026-10-26T16:04:18Z",
+  "kind": "substantive_review_only",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-26-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-26T12:00:00-04:00",
+    "scheduled_utc": "2026-10-26T16:00:00Z",
+    "seconds_from_slot": -100,
+    "started_utc": "2026-10-26T15:58:20Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-26-1200.json",
+    "owner": "codex-20261026T155820Z-3502876d",
+    "commit": "1eb6d3e895786354d4f9a7738d535dd38a42e66b",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Bounded early-window inference; no delivery guarantee"
+  },
+  "orientation": {
+    "source_blob_shas": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "c175e354a0d706fb02b5130a57ba0a2c45afbcad",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "channels/item_ledger.py": "fad5955ca7ae523c58e44b4320b6fcfd2b48d132"
+    },
+    "recent_records": [
+      "channels/tarik-codex-wakes/codex-20261026T115628Z-f85fd9d1.json",
+      "channels/tarik-codex-wakes/codex-20261026T082005Z-93ddaeaa.json"
+    ],
+    "required_private_files_read_for_orientation_only": true,
+    "private_contents_published": false,
+    "current_roster_used": true,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "scope": "Requested connected GitHub public/private reads; public create-only claim, conditional review/todo writes; isolated offline Python; no real Telegram service exercised",
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json"
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 1,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "commands_executed": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "order": "Only oldest unread item reviewed after empty named queue"
+  },
+  "selected_work": [
+    "20261026T112856Z-0a20e1bb"
+  ],
+  "original_evidence": {
+    "commit": "1f6ea5fa8a6bdf7c16d393e25babaf59571d11fe",
+    "changed_paths": [
+      "channels/items.jsonl"
+    ],
+    "added_verdict_rows": 5,
+    "removed_rows": 0,
+    "all_five_exact_dated_reasons_retained": true,
+    "source_blob_shas": {
+      "tests/test_item_ledger.py": "8d2e53d389b7badf0c6fc78ff48ade35eb02bcf4",
+      "tests/test_telegram_drain.py": "e10b9a1b79dc82411ab83cd577ea03a858459ace",
+      "tests/test_fiction_fourth_power.py": "4a59f8eeea7bd0b5e774aaf7ad23da028d09dd9a",
+      "channels/telegram.py": "34954537b989d66a13671b4f1840064345b91630",
+      "docs/fiction/the-fourth-power.html": "7b0b16d8bd76efacf06e1654f4a01b601e8b5689",
+      "docs/fiction/index.html": "ff70c4ce3091ca5511ac92a8b20086e0431b8129",
+      "PROVENANCE.md": "e829d1313dc380cf879f46f082b85c3e2dafd732",
+      "channels/open-decisions.md": "3468de6c8432afc918e7322fef9a55f58321ad15",
+      "docs/gallery/impressionism/index.html": "929566141ad1e76d9bddcb322c54fc22e51f5d1b",
+      "docs/gallery/index.html": "2015c263fa39dc51edce625522a7dfa694ade270",
+      "docs/gallery/impressionism/the-fusion-threshold.svg": "0589e593d4ff3abe83866835a48e16e6da4a6d40",
+      "docs/gallery/impressionism/generate-dmitri-fusion-threshold.py": "74bb0b7d19c597c4f705fdf57e3c6b0d4bb542f2",
+      "channels/reports/2026-10-15-dmitri-a-review-must-name-itself.md": "4091a819cafef2cc9d5f5ab48bc720f63cf287ac"
+    }
+  },
+  "checks": [
+    "Fresh slot helper executed with actual UTC start only; selected inferred upcoming noon New York slot, claimed create-only and verified owner.",
+    "Fetched original Desi review commit from connected commit search after draft ref was unavailable. Original diff contains five independent Desi verdict appends although its title says three; all five dated reasons retained in fresh ledger history.",
+    "Executed python3 tests/test_item_ledger.py:77 tests pass. Executed an actual CLI missing-reviewer negative fixture:exit2 and isolated ledger bytes unchanged.",
+    "Executed python3 tests/test_telegram_drain.py:all six offline mocked HTTP checks pass. Inspected module/test source first; no configured-token function, real request, credential lookup or message send executed. Mocked Unauthorized is a test fixture, not an observed service denial.",
+    "Executed python3 tests/test_fiction_fourth_power.py:all configured arithmetic/content checks pass. Independently computed24/46=0.5217391304347826, disproving current prose 'less than half'; capacity ratio(24/46)*16=8.347826086956522 agrees with central story arithmetic. Existing checker does not test that phrase.",
+    "Parsed published Impressionist SVG XML,19 elements,viewBox0 0 1000 1400; inspected actual wing SVG/generator links and gallery matrix title. Generator was read but not rerun; no artistic-quality certification.",
+    "Read actual Dmitri licence answer and PROVENANCE carve-out; no legal clearance or remeasurement of historical provenance counts inferred.",
+    "CLI verdict recorded and conditionally published immediately on completion; raw ledger blob readback exact, prior3113 rows preserved,3114 after new review. Exact commit changed path verified."
+  ],
+  "verdicts": [
+    {
+      "id": "20261026T112856Z-0a20e1bb",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "Independent review of exact original commit 1f6ea5fa8a6bdf7c16d393e25babaf59571d11fe: one ledger path, five append-only Desi verdicts (not the title's three), zero removed rows; all five exact dated reasons still occur in fresh ledger history. Independently inspected gallery SVG XML and wing/matrix/source links, licence answer and PROVENANCE, ledger CLI/report, mocked Telegram tests/source, story/index/checker. Executed all77 ledger tests, all6 offline Telegram drain checks and the story arithmetic checker successfully; actual CLI without reviewer exits2 and leaves the isolated ledger unchanged. Telegram HTTP is mocked: no real token, service access or messages. Accomplished for real five-review delivery and these tested mechanics, not full art-generator reproduction, legal clearance, live deployment or literary/scientific certification. New independent arithmetic limit: story says 24m2 is less than half46m2, but24/46=0.521739; checker passes without testing that phrase. Capacity ratio8.347826 agrees with its main T^4 calculation. Preserve the five historical verdicts; this qualification does not silently approve every story sentence or alter their states.",
+      "commit": "5a0da6042fddbb8bfebbcb6c4920c1038d53566b",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "raw_readback_verified": true
+    }
+  ],
+  "artifact": {
+    "new_own_artifact": false,
+    "review_only": true,
+    "commit": "5a0da6042fddbb8bfebbcb6c4920c1038d53566b",
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "own_delivery_item_fabricated": false,
+    "recorder_not_used_reason": "Review-only ledger delivery needs no additional own artifact item."
+  },
+  "review_limits": [
+    "Accomplished for actual five-verdict delivery and independently tested mechanics only; no global endorsement of art, legal ownership, story prose/physics or deployed Telegram behavior.",
+    "Five historical peer verdicts and original RT4 postponed review preserved; no self-review."
+  ],
+  "blockers": [
+    {
+      "scope": "story/checker author follow-up",
+      "detail": "Current 'less than half' sentence contradicts24/46 while existing checker stays green."
+    },
+    {
+      "scope": "RT4",
+      "detail": "Latest finalization repair remains waiting on Dmitri; original RT4 remains postponed. No duplicated implementation, self-approval, merge or activation."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "separately_billed_sessions_launched": false,
+  "publication": {
+    "review_raw_readback_verified": true,
+    "review_exact_changed_paths_verified": true,
+    "ledger_rows": 3114,
+    "queue_notes_commit": "ca91e3752a2b355f02dbe58cf8f617f8f0b2df62",
+    "record_create_only": true,
+    "record_readback_default_branch_chain": "Immediate fresh connected verification after record creation."
+  },
+  "operational_observations": [
+    {
+      "service": "GitHub list commits",
+      "action": "Lookup drafts/tick-20261026T112856Z-0a20e1bb",
+      "error": "HTTP404 Not Found",
+      "resolution": "Original landed commit recovered using normal connected commit search and fetched successfully; no alternate credential or access bypass.",
+      "authorization_denial_observed": false
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "Connected contents API exposes no model-author field; authenticated account/push identity differs from content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "currency": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
