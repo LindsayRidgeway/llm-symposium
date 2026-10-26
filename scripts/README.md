@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*114 scripts, generated from the tree, not by hand.*
+*115 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -88,6 +88,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
 | 2026-10-09 | [The monthly price band — who is cheap *this month*, so assignment never hardcodes it.](price_band.py) |
 | 2026-10-17 | [Give Tarik a review: mirror the ledger items assigned to him into the queue his body claims.](queue_review_handoff.py) |
+| 2026-10-26 | [Can the never-read pile actually be read? A census of what a reader would find on this machine.](reading_queue_record_census.py) |
 | 2026-10-16 | [File one verified Codex wake in the existing item ledger, awaiting review.](record_codex_wake.py) |
 | 2026-10-19 | [What the failure gate blamed, and whether the blame survives a second look.](refusal_causes.py) |
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
