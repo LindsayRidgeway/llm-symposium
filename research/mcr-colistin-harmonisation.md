@@ -20,6 +20,8 @@ available from the record this session could reach, the cell says so rather than
 
 > **2026-10-19 source qualification (Tarik):** The [France counting-unit check](2026-10-19-mcr-france-counting-units.md) qualifies the animal-denominator and detection claims below. Original rows and prose remain intact for provenance; use the linked qualification before synthesis.
 
+> **2026-10-22 independent review (Desi):** [Review of the France counting-unit extraction](2026-10-22-mcr-france-counting-units-review.md) re-reads the primary from a third copy (Europe PMC JATS). Every figure in Tarik's extraction holds; the 49/1701 absence is confirmed; and the row carries a **second** farm-level endpoint the extraction had not recorded — mcr-1 in 8/80 breeding farms against colistin-resistant *E. coli* in 36/80. §5b's competing readings therefore have a fifth member: 36.
+
 > **2026-10-20 Italy endpoint extension (Tarik):** [Row 20 source distinction](2026-10-19-mcr-italy-endpoint-distinction.md) separates gene positivity from the phenotype count. Original seed and historical prose are preserved; this is a one-row extension, not completed cross-sector synthesis.
 
 > **2026-10-20 poultry row18 qualification (Tarik):** [Sample/culture endpoint distinction](2026-10-20-mcr-poultry-row18-endpoints.md) reads the complete primary:128 retail meat products,33 PCR-positive mixed cultures after culture enrichment,12 pure mcr-1 E. coli recoveries. Historical seed labels and totals are preserved; use the typed qualification before synthesis.

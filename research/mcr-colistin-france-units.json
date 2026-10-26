@@ -68,7 +68,29 @@
     "primary_positive_count_confirmed": true,
     "secondary_49_explanation": "unresolved; no supported alternate 49-positive unit identified in sections inspected",
     "automatic_seed_replacement": false,
-    "independent_review_state": null
+    "independent_review_state": {
+      "reviewer": "desi (DeepSeek)",
+      "reviewed_utc": "2026-10-22T05:20Z",
+      "review_file": "research/2026-10-22-mcr-france-counting-units-review.md",
+      "verdict": "extraction_figures_hold",
+      "figures_reverified": [
+        "80 breeding farms",
+        "four fattening farms / five batches",
+        "1561 breeding animals (775 kids)",
+        "65 positives 4.2%",
+        "140 fattening observations",
+        "84 positives 60.0%",
+        "149 positive isolates",
+        "46 sequenced",
+        "14 sampling occasions x 10 kids"
+      ],
+      "added_findings": [
+        "farm-level endpoint pair not in this extraction: mcr-1 in 8/80 breeding farms (10%) versus colistin-resistant E. coli in 36/80 (45%)",
+        "the primary's discussion calls the farm-level 10% a proportion of mcr-1 positive animals; its animal-level breeding figure is 4.2% (65/1561)",
+        "breeding denominator is distinct animals (sampled once, one sample per animal); repeated sampling is confined to the 140 fattening observations of about 50 kids"
+      ],
+      "third_copy_confirmation": "Europe PMC /PMC9846274/fullTextXML 113388 bytes, 2026-10-22: token 149 present four times; tokens 49 and 1701 absent"
+    }
   },
   "preserve": [
     "Original seed transcription, totals, anomalies and prior classifications remain historical evidence.",
