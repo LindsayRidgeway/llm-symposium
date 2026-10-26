@@ -256,10 +256,21 @@ def declared_unlanded(baseline=None, extra=None, register=None):
     Three sources, in this order of authority: the row baseline (oldest), the code declarations in
     `UNLANDED_ARTEFACTS`, and the register file (newest — it fills gaps but does not overwrite a
     reason already recorded here, because the code entries carry the history of why). Passing
-    `baseline`, `extra` or `register` explicitly turns the other live sources off, which is what the
-    unit tests below rely on; the live check calls with no arguments and gets the whole thing.
+    `extra` or `register` explicitly turns the live sources off, which is what the unit tests below
+    rely on; the live check calls with no arguments and gets the whole thing.
+
+    **The register is read whenever `register` is not handed in — corrected 2026-10-26.** Until
+    today an explicit `baseline` also switched the live register off, and the live check *does* pass
+    its row baseline by name. So the file added on 2026-10-23 to be the escape hatch was never
+    opened by the gate that needed it: `channels/reports/2026-10-21-dmitri-what-reaches-main.md` was
+    declared, with its reason and a signature, on 10-23, and `test_cited_path_gate` still failed on
+    it for three days. `baseline` is the *row* baseline — which pairs are old debt — not a statement
+    about whether a declaration file exists, and the two were conflated here. Measured the hour of
+    the fix: the landing preflight (`scripts/citation_gate_preflight.py`) folds the register in by
+    hand and printed "the citation gate would pass this tree" on every one of those three days, so
+    the two instruments disagreed and only one of them was consulted before a landing.
     """
-    live = baseline is None and extra is None and register is None
+    live = extra is None and register is None
     baseline = BASELINE if baseline is None else baseline
     extra = UNLANDED_ARTEFACTS if extra is None else extra
     pairs = baseline.items() if hasattr(baseline, "items") else ((p, "") for p in baseline)
@@ -323,6 +334,48 @@ class CitedPathGateTest(unittest.TestCase):
                 "declaration covers every document that later recites the same absence. Run "
                 "`python3 scripts/citation_gate_preflight.py` before you land and this failure "
                 "arrives before the landing machine sees it, not after.")
+
+    def test_the_live_check_reads_the_register_file(self):
+        """The wiring from `channels/unlanded-artefacts.json` to the live check, which was broken.
+
+        Every register test below hands its declaration in by hand — `register=entry` — so none of
+        them touched the path a real wake depends on, and the path was dead: the live check passes
+        `BASELINE` as an explicit argument, `declared_unlanded` read that as "a unit test is
+        calling", and the register file was never opened. Measured on main 2026-10-26: an artefact
+        declared on 10-23 kept the live check red for three days, and the landing preflight — which
+        folds the register in itself — said the tree would pass. This test points the module's
+        register path at a temp file and calls exactly what the live check calls, with no fold.
+        """
+        artefact = "channels/reports/2026-10-21-answered-nowhere.md"
+        self._write("channels/reports/2026-10-23-review.md", f"its evidence is `{artefact}`, absent\n")
+        register = os.path.join(self.root, "unlanded-artefacts.json")
+        with open(register, "w", encoding="utf-8") as fh:
+            json.dump({"artefacts": {artefact: {"reason": "never landed; the register is the only "
+                                                          "record of it",
+                                                "declared_by": "desi",
+                                                "declared_at": "2026-10-23"}}}, fh)
+        global REGISTER_PATH
+        saved = REGISTER_PATH
+        REGISTER_PATH = register  # absolute, so os.path.join(ROOT, ...) yields it unchanged
+        try:
+            rows = audit.audit(self.root, "lost")["by_class"]["lost"]
+            self.assertEqual(len(rows), 1)  # still a real lost row: the gate is not blunted
+            self.assertEqual(new_rows(rows, BASELINE), [])
+        finally:
+            REGISTER_PATH = saved
+
+    def test_the_preflight_and_the_gate_agree_on_this_tree(self):
+        """Two instruments read one rule; if they can disagree, one of them is decoration.
+
+        Written 2026-10-26 after three days of exactly that: the preflight said "the citation gate
+        would pass this tree" and the test refused the same tree, because only the preflight folded
+        the register in. A rule stated twice will drift; a test that compares the two statements
+        cannot drift quietly.
+        """
+        refusals, _ = preflight.check(ROOT)
+        lost = sorted((citing, target) for kind, citing, target, _ in refusals if kind == "lost")
+        fresh = new_rows(audit.audit(ROOT, "lost")["by_class"]["lost"])
+        self.assertEqual(lost, fresh)
 
     def test_the_gate_fires_on_one_new_row(self):
         """A gate that cannot be seen to fail is not known to work."""
