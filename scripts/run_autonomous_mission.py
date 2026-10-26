@@ -9,6 +9,7 @@ Copy this file, checker and mission outside the checkout BEFORE starting the wor
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -18,6 +19,18 @@ import sys
 
 TURN_BUDGETS = (25, 15)
 SECONDS_PER_ATTEMPT = 240
+
+
+def load_secret_guard():
+    guard_path = Path(__file__).resolve().with_name("secret_egress_guard.py")
+    if not guard_path.exists():
+        guard_path = Path(__file__).resolve().parent.parent / "scripts" / "secret_egress_guard.py"
+    spec = importlib.util.spec_from_file_location("secret_egress_guard", guard_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("could not load secret egress guard")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -58,6 +71,7 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
     artifacts.mkdir(parents=True, exist_ok=True)
     current = instructions
     attempts = []
+    secret_guard = load_secret_guard()
     outcome = {"ok": False, "attempts": attempts,
                "quality": "mechanical contract only; peer review still required"}
     for index, turns in enumerate(TURN_BUDGETS, start=1):
@@ -78,13 +92,15 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
         if head != base:
             outcome["reason"] = "worker changed HEAD; stopping without repair"
             break
-        # Do not give billing credentials to the deterministic checker.
-        env = {k: v for k, v in os.environ.items() if k != "OPENAI_API_KEY"}
+        # Do not give credentials to the deterministic checker.
         checked = subprocess.run([
             sys.executable, str(checker), "--repo", str(repo), "--mission", str(mission),
             "--base", base, "--artifacts", str(attempt_dir)
-        ], capture_output=True, text=True, env=env, timeout=30)
+        ], capture_output=True, text=True, env=secret_guard.sanitized_environment(), timeout=30)
         (attempt_dir / "checker-output.txt").write_text(checked.stdout + checked.stderr, encoding="utf-8")
+        guard_report = secret_guard.scan_run(repo, attempt_dir, base, redact=True)
+        (attempt_dir / "secret-egress-report.json").write_text(json.dumps(guard_report, indent=2) + "\n", encoding="utf-8")
+        attempt["secret_guard"] = guard_report
         report_path = attempt_dir / "mission-check.json"
         try:
             report = json.loads(report_path.read_text(encoding="utf-8"))
@@ -93,6 +109,9 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
             break
         attempt["checker_exit"] = checked.returncode
         attempt["check"] = report
+        if not guard_report.get("ok"):
+            outcome["reason"] = "secret egress guard blocked worker output before repair or publication"
+            break
         if code != 0:
             outcome["reason"] = "worker process failed; no automatic provider/process retry"
             break
