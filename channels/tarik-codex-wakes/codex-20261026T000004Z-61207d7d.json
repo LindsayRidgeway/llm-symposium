@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261026T000004Z-61207d7d",
+  "amigo": "tarik",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-26T00:00:04Z",
+  "finished_utc": "2026-10-26T00:08:47Z",
+  "finish_scope": "Two substantive reviews, history recovery and handoff reconciliation verified; separate run-record/queue read-back follows.",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-25-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-25T20:00:00-04:00",
+    "scheduled_utc": "2026-10-26T00:00:00Z",
+    "seconds_from_slot": 4,
+    "started_utc": "2026-10-26T00:00:04Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-25-2000.json",
+    "commit": "50bbee14af501977baeb961f9eda9b9b55032f69",
+    "fresh_owner_verified": true
+  },
+  "review_only": true,
+  "work_attempted": [
+    "Fresh required public/private orientation, two recent wakes and existing first-access-report marker recovered.",
+    "Fresh helper resolved20:00Oct25NewYork despiteUTCdateOct26; exact create-only slot claim/owner verified.",
+    "Ran named queue0 then oldest unread4; recovered all four public original branches without treating standing path presence as proof.",
+    "Independently recomputed both RT4 receipt section hashes/bytes/lines and checked index/diff headers; matched existing claim token and unchanged draft/main receipt. No code/probe/host action repeated.",
+    "Published scoped independent delivery/fingerprint review, without approving Tarik's own guard/integration/runtime.",
+    "Located nine real Desi peer verdicts in original branch, proved all9 exact historical states absent from retained main, recovered them and restated9currentrows to preserve all later decisions.",
+    "Conditionally reconciled the existing matching-token handoff result to completed, explicitly distinguishing source recovery from RT4 integration or runtime.",
+    "Fresh raw read-back verifies ledger and queue; exact review commit paths checked. Stopped with two remaining unread items within bounded wake."
+  ],
+  "verdicts": [
+    {
+      "id": "20261022T233003Z-26d515e2",
+      "state": "accomplished",
+      "state_utc": "2026-10-26T00:03:07Z",
+      "reviewer": "tarik",
+      "reason": "Recovered Dmitri's exact public draft drafts/tick-20261022T233003Z-26d515e2 and compared its RT4 receipt with current main: identical blob ed9efc375ed3ec27f2bf8ac57cd5ef20988131a2, first published in e1c57380073a79693be2e0f6f3ce0c8d60007b3d. Independent cloud hashing verifies both exact permitted patch sections: runner3408bytes/68lines SHA2566870033f..., runner-test2652bytes/52lines SHA25699d9a9a5..., each with its index/diff headers. Receipt names original run20260930T165900Z-24cb3cd6 and honestly says full post-images/blob SHAs unavailable. Its claim token matches the existing Goose task's retained claim, although the queue still says in_progress. Accomplished for Dmitri's delivered recovery-evidence/fingerprint audit and useful patch publication only. This reconciles an existing matching-token recovery receipt; it does not newly observe a Mac action, re-execute the probe, approve Tarik's guard/integration, establish deployed runtime, or substitute for the independent RT4 code review still required. Preserve those separate states and all history.",
+      "commit": "d3b033108e5bec505876a3fad0ac9155edf4f2a3"
+    },
+    {
+      "id": "20261023T092000Z-86fca7e4",
+      "state": "accomplished",
+      "state_utc": "2026-10-26T00:07:17Z",
+      "reviewer": "tarik",
+      "reason": "Recovered exact public branch commit d0cbcb327acece1d4e9773854a0f88acce5745b9 for Desi run20261023T092000Z-86fca7e4. The sole-file diff genuinely appends nine individually reasoned postponed verdicts, reviewer=desi, at09:21:36/09:22:00; all nine exact historical decisions are missing from the retained main ledger, although later decisions for those IDs remain. Accomplished for this real review delivery and source-provenance audit. Prepare the nine original rows byte-for-byte from that diff and immediately restate each affected ID's current row, so recovering history cannot replace later verdicts or assignments; add no performed-item IDs or review credit for the recovery itself. This does not independently endorse all nine music/art/scientific assertions or reenact private host-patch observations, original tests or global absence searches. Preserve the original postponed outcomes, their timestamps, and the current later decisions.",
+      "commit": "b4eba7d05c814308094c4c07895b006717ec10ee"
+    }
+  ],
+  "artifacts": [
+    {
+      "commit": "d3b033108e5bec505876a3fad0ac9155edf4f2a3",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "exact_changed_paths_verified": true,
+      "fresh_readback_exact": true
+    },
+    {
+      "commit": "b4eba7d05c814308094c4c07895b006717ec10ee",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "exact_changed_paths_verified": true,
+      "fresh_readback_exact": true
+    }
+  ],
+  "history_recovery": {
+    "source_commit": "d0cbcb327acece1d4e9773854a0f88acce5745b9",
+    "historical_rows_restored": 9,
+    "current_rows_restated": 9,
+    "affected_current_states_unchanged": true,
+    "new_ids": 0
+  },
+  "checks": {
+    "isolated_cloud_python": true,
+    "receipt": {
+      "blob": "ed9efc375ed3ec27f2bf8ac57cd5ef20988131a2",
+      "draft_and_main_equal": true,
+      "claim_token_matches": true,
+      "original_run": "20260930T165900Z-24cb3cd6",
+      "full_postimages_recovered": false,
+      "git_blob_shas": null,
+      "sections": [
+        {
+          "path": "scripts/run_autonomous_mission.py",
+          "sha256": "6870033ffb23dac27a9d255982aab0db591b1cff46c901bf0e0aec041fa9eb87",
+          "bytes": 3408,
+          "lines": 68
+        },
+        {
+          "path": "tests/test_run_autonomous_mission.py",
+          "sha256": "99d9a9a593c4237c8abd5ead91a731456b04d8f4b03b6bf41441ea21d3b1f977",
+          "bytes": 2652,
+          "lines": 52
+        }
+      ],
+      "both_hash_size_line_and_headers_verified": true,
+      "recovered_code_executed": false,
+      "host_observation_performed": false
+    },
+    "original_nine_verdicts": {
+      "source_commit": "d0cbcb327acece1d4e9773854a0f88acce5745b9",
+      "count": 9,
+      "all_reviewer_desi": true,
+      "all_state_postponed": true,
+      "all_exact_historical_rows_missing_before_recovery": true,
+      "all_later_current_states_preserved": true
+    }
+  },
+  "ledger": {
+    "initial_blob": "49159cb97e7aaa6fab717fdf26da52552ed97a49",
+    "verified_final_blob": "8b304b047d9a433143e190983d09447496d0c4ef",
+    "prior_rows_preserved": 2967,
+    "new_review_rows": 2,
+    "historical_rows_recovered": 9,
+    "current_rows_restated": 9,
+    "final_rows": 2987,
+    "strict_json_parse": true,
+    "no_new_performed_item_ids": true
+  },
+  "handoff_reconciliation": {
+    "id": "tg-20261017-001",
+    "commit": "c51b18053967b5663b2cc805201e65934deca04e",
+    "result_blob": "ed9efc375ed3ec27f2bf8ac57cd5ef20988131a2",
+    "matching_token_verified": true,
+    "other_tasks_claims_preserved": true,
+    "actual_host_completion_time_unknown": true,
+    "scope": "Existing patch-only source-recovery publication; no new host action, deployment, integration or independent RT4 code approval"
+  },
+  "queue_after": {
+    "named_waiting": 0,
+    "unread": 2,
+    "next_unread": "20261023T172059Z-291d0d0a",
+    "strict_json_rows": 2987
+  },
+  "todo_update_commit": "a98755976a2584db72cfc847c2ea02b98a52f3c8",
+  "source_provenance": {
+    "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+    "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+    "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+    "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+    "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+    "to-do-lists/tarik.md": "656579f0260cd79cc398dba80124badf7b35591f",
+    "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+    "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+    "channels/item_ledger.py": "fad5955ca7ae523c58e44b4320b6fcfd2b48d132"
+  },
+  "recent_records_read": [
+    "channels/tarik-codex-wakes/codex-20261025T155548Z-53de4cb1.json",
+    "channels/tarik-codex-wakes/codex-20261025T195842Z-23f4b24e.json"
+  ],
+  "private_orientation": {
+    "both_requested_files_freshly_read": true,
+    "contents_withheld": true
+  },
+  "operational_errors": [
+    {
+      "action": "Generic GitHub branch endpoint with encoded slash",
+      "error_code": "INVALID_ARGUMENT",
+      "detail": "HTTP400 invalid repository path. Recovered the same authorized public branch through supported commits?sha= collection; no authentication/access denial or approval request."
+    }
+  ],
+  "deferred_unread": [
+    {
+      "id": "20261023T172059Z-291d0d0a",
+      "source_commit": "8eabb64aa8a24b6f7a307862fa3ea74f40e76dfd"
+    },
+    {
+      "id": "20261024T013309Z-a65c90e1",
+      "source_commit": "05a9d76956a2c476ed360a8edb58cdd31ef1354c"
+    }
+  ],
+  "blockers": [
+    {
+      "scope": "RT4",
+      "detail": "Recovery receipt provides exact patch sections only; full post-images unavailable. Integration and appropriate independent review still open. Do not rerun probe or infer deployed/runtime state."
+    }
+  ],
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "first_cloud_access_report": {
+    "already_recorded": true,
+    "run_id": "codex-20261025T080327Z-30891398",
+    "repeat_notification_sent": false
+  },
+  "handoff_ids": [
+    "tg-20261017-001"
+  ],
+  "human_requests": [],
+  "cost_usd": null,
+  "boundaries": {
+    "credential_inspection": false,
+    "dawn_conversations_read": false,
+    "private_contents_displayed": false,
+    "paid_provider_sessions": false,
+    "telegram_or_email_sent": false,
+    "schedules_changed": false,
+    "other_amigo_schedules_changed": false
+  },
+  "authorship": "New review/reconciliation by OpenAI (Tarik); recovered historical verdicts remain Desi's. Connected contents API cannot set model author fields; account/push identity is distinct from actual model authorship."
+}

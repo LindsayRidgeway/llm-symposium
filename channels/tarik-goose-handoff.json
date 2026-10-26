@@ -317,7 +317,7 @@
     {
       "id": "tg-20261017-001",
       "source": "codex",
-      "status": "in_progress",
+      "status": "completed",
       "created_utc": "2026-10-17T22:37:08Z",
       "title": "Recover the original RT4 runner and runner-test patch sections",
       "reason_for_goose": "Codex cannot access Tarik's Mac run archive. Completed recovery tg-20261016-002 contains only guard/test, while original ledger item20260930T165900Z-24cb3cd6 names four paths. Current main runner ce3bc8e600846e91e63851e137ef56addc223c2e and test2d5ddab5bebaa14a31a7f893f851b175a8b59b7d lack guard integration. Goose can read the exact original patch; this is not ordinary cloud implementation.",
@@ -333,6 +333,94 @@
         "run_id": "20261019T170221Z-c56a22e8",
         "claimed_utc": "2026-10-19T17:02:21.419796+00:00",
         "token": "deb6f91e4401475bb929f3a8411e1577"
+      },
+      "completed_utc": "2026-10-26T00:07:21Z",
+      "result": {
+        "summary": "Authorized retained repo post-image copies were not present, so exact full post-image bytes and Git blob SHAs could not be recovered. The two exact unified-diff sections from Tarik run 20260930T165900Z-24cb3cd6 changes.patch were recovered with index headers and are included verbatim.",
+        "original_runID": "20260930T165900Z-24cb3cd6",
+        "source_paths": {
+          "patch": "/Users/lindsayridgeway/LLM/tarik-bot/tick-state/runs/20260930T165900Z-24cb3cd6/changes.patch",
+          "retained_repo_candidates": [
+            "/Users/lindsayridgeway/LLM/tarik-bot/tick-state/runs/20260930T165900Z-24cb3cd6/repo/scripts/run_autonomous_mission.py",
+            "/Users/lindsayridgeway/LLM/tarik-bot/tick-state/runs/20260930T165900Z-24cb3cd6/repo/tests/test_run_autonomous_mission.py"
+          ]
+        },
+        "full_postimages_recovered": false,
+        "git_blob_shas": null,
+        "recovered_patch_sections": [
+          {
+            "path": "scripts/run_autonomous_mission.py",
+            "source": "/Users/lindsayridgeway/LLM/tarik-bot/tick-state/runs/20260930T165900Z-24cb3cd6/changes.patch",
+            "kind": "unified_diff_section_only",
+            "full_postimage_recovered": false,
+            "section": "diff --git a/scripts/run_autonomous_mission.py b/scripts/run_autonomous_mission.py\nindex ce3bc8e..07a0c58 100644\n--- a/scripts/run_autonomous_mission.py\n+++ b/scripts/run_autonomous_mission.py\n@@ -9,6 +9,7 @@ Copy this file, checker and mission outside the checkout BEFORE starting the wor\n from __future__ import annotations\n \n import argparse\n+import importlib.util\n import json\n import os\n from pathlib import Path\n@@ -20,6 +21,18 @@ TURN_BUDGETS = (25, 15)\n SECONDS_PER_ATTEMPT = 240\n \n \n+def load_secret_guard():\n+    guard_path = Path(__file__).resolve().with_name(\"secret_egress_guard.py\")\n+    if not guard_path.exists():\n+        guard_path = Path(__file__).resolve().parent.parent / \"scripts\" / \"secret_egress_guard.py\"\n+    spec = importlib.util.spec_from_file_location(\"secret_egress_guard\", guard_path)\n+    if spec is None or spec.loader is None:\n+        raise RuntimeError(\"could not load secret egress guard\")\n+    module = importlib.util.module_from_spec(spec)\n+    spec.loader.exec_module(module)\n+    return module\n+\n+\n def write_json(path: Path, value: dict) -> None:\n     path.write_text(json.dumps(value, indent=2) + \"\\n\", encoding=\"utf-8\")\n \n@@ -58,6 +71,7 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,\n     artifacts.mkdir(parents=True, exist_ok=True)\n     current = instructions\n     attempts = []\n+    secret_guard = load_secret_guard()\n     outcome = {\"ok\": False, \"attempts\": attempts,\n                \"quality\": \"mechanical contract only; peer review still required\"}\n     for index, turns in enumerate(TURN_BUDGETS, start=1):\n@@ -78,13 +92,15 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,\n         if head != base:\n             outcome[\"reason\"] = \"worker changed HEAD; stopping without repair\"\n             break\n-        # Do not give billing credentials to the deterministic checker.\n-        env = {k: v for k, v in os.environ.items() if k != \"OPENAI_API_KEY\"}\n+        # Do not give credentials to the deterministic checker.\n         checked = subprocess.run([\n             sys.executable, str(checker), \"--repo\", str(repo), \"--mission\", str(mission),\n             \"--base\", base, \"--artifacts\", str(attempt_dir)\n-        ], capture_output=True, text=True, env=env, timeout=30)\n+        ], capture_output=True, text=True, env=secret_guard.sanitized_environment(), timeout=30)\n         (attempt_dir / \"checker-output.txt\").write_text(checked.stdout + checked.stderr, encoding=\"utf-8\")\n+        guard_report = secret_guard.scan_run(repo, attempt_dir, base, redact=True)\n+        (attempt_dir / \"secret-egress-report.json\").write_text(json.dumps(guard_report, indent=2) + \"\\n\", encoding=\"utf-8\")\n+        attempt[\"secret_guard\"] = guard_report\n         report_path = attempt_dir / \"mission-check.json\"\n         try:\n             report = json.loads(report_path.read_text(encoding=\"utf-8\"))\n@@ -93,6 +109,9 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,\n             break\n         attempt[\"checker_exit\"] = checked.returncode\n         attempt[\"check\"] = report\n+        if not guard_report.get(\"ok\"):\n+            outcome[\"reason\"] = \"secret egress guard blocked worker output before repair or publication\"\n+            break\n         if code != 0:\n             outcome[\"reason\"] = \"worker process failed; no automatic provider/process retry\"\n             break\n",
+            "index_header": "index ce3bc8e..07a0c58 100644",
+            "diff_header": "diff --git a/scripts/run_autonomous_mission.py b/scripts/run_autonomous_mission.py",
+            "section_sha256": "6870033ffb23dac27a9d255982aab0db591b1cff46c901bf0e0aec041fa9eb87",
+            "section_bytes": 3408,
+            "section_lines": 68
+          },
+          {
+            "path": "tests/test_run_autonomous_mission.py",
+            "source": "/Users/lindsayridgeway/LLM/tarik-bot/tick-state/runs/20260930T165900Z-24cb3cd6/changes.patch",
+            "kind": "unified_diff_section_only",
+            "full_postimage_recovered": false,
+            "section": "diff --git a/tests/test_run_autonomous_mission.py b/tests/test_run_autonomous_mission.py\nindex 2d5ddab..f1f9b18 100644\n--- a/tests/test_run_autonomous_mission.py\n+++ b/tests/test_run_autonomous_mission.py\n@@ -43,6 +43,11 @@ if mode == 'quota-text':\n     print('Rate limit exceeded: The usage limit has been reached.')\n if mode == 'disallowed':\n     Path('unexpected.txt').write_text('extra')\n+if mode == 'secret-leak':\n+    secret = 'rt4-fake-secret-runner-abcdef'\n+    print('STDOUT_CANARY=' + secret)\n+    print('STDERR_CANARY=' + secret, file=sys.stderr)\n+    Path('changed-secret.txt').write_text('ARTIFACT_CANARY=' + secret + '\\n')\n '''\n \n \n@@ -72,9 +77,12 @@ class RunnerTests(unittest.TestCase):\n         return subprocess.check_output(['git', '-C', str(self.repo), *args], text=True)\n \n     def execute(self, mode, timeout=10):\n-        return m.run(self.repo, self.instructions, self.mission,\n-                     ROOT / 'scripts/check_autonomous_mission.py', self.base,\n-                     self.artifacts, [sys.executable, str(self.worker), mode], timeout)\n+        env = {'OPENAI_API_KEY': 'rt4-fake-secret-runner-abcdef'} if mode == 'secret-leak' else {}\n+        from unittest import mock\n+        with mock.patch.dict('os.environ', env, clear=True):\n+            return m.run(self.repo, self.instructions, self.mission,\n+                         ROOT / 'scripts/check_autonomous_mission.py', self.base,\n+                         self.artifacts, [sys.executable, str(self.worker), mode], timeout)\n \n     def calls(self):\n         return json.loads((self.repo / '.git/fake-calls.json').read_text())\n@@ -129,6 +137,19 @@ class RunnerTests(unittest.TestCase):\n         self.assertIn('changed HEAD', r['reason'])\n         self.assertEqual(len(self.calls()), 1)\n \n+    def test_secret_guard_blocks_and_redacts_worker_output_without_retry(self):\n+        r = self.execute('secret-leak')\n+        self.assertFalse(r['ok'])\n+        self.assertIn('secret egress guard blocked', r['reason'])\n+        self.assertEqual(len(self.calls()), 1)\n+        guard = r['attempts'][0]['secret_guard']\n+        dumped = json.dumps(guard)\n+        self.assertFalse(guard['ok'])\n+        self.assertIn('OPENAI_API_KEY', dumped)\n+        self.assertNotIn('rt4-fake-secret-runner-abcdef', dumped)\n+        self.assertNotIn('rt4-fake-secret-runner-abcdef', (self.repo / 'changed-secret.txt').read_text())\n+        self.assertNotIn('rt4-fake-secret-runner-abcdef', (self.artifacts / 'attempt-1/worker.jsonl').read_text())\n+\n     def test_timeout_stops_worker_without_retry(self):\n         r = self.execute('timeout', timeout=1)\n         self.assertFalse(r['ok'])\n",
+            "index_header": "index 2d5ddab..f1f9b18 100644",
+            "diff_header": "diff --git a/tests/test_run_autonomous_mission.py b/tests/test_run_autonomous_mission.py",
+            "section_sha256": "99d9a9a593c4237c8abd5ead91a731456b04d8f4b03b6bf41441ea21d3b1f977",
+            "section_bytes": 2652,
+            "section_lines": 52
+          }
+        ],
+        "checks": {
+          "patch_file_exists": true,
+          "patch_file_bytes": 18568,
+          "target_section_count": {
+            "scripts/run_autonomous_mission.py": 1,
+            "tests/test_run_autonomous_mission.py": 1
+          },
+          "retained_repo_file_exists": {
+            "/Users/lindsayridgeway/LLM/tarik-bot/tick-state/runs/20260930T165900Z-24cb3cd6/repo/scripts/run_autonomous_mission.py": false,
+            "/Users/lindsayridgeway/LLM/tarik-bot/tick-state/runs/20260930T165900Z-24cb3cd6/repo/tests/test_run_autonomous_mission.py": false
+          },
+          "postimage_recovery_basis": "No authorized retained repo file copies at the exact allowed paths; only diff sections were available.",
+          "publication_safety_check": {
+            "scope": "only recovered two diff sections; no credential files or private conversations read",
+            "possible_secret_pattern_findings": [],
+            "known_nonsecret_test_literals": {
+              "OPENAI_API_KEY_literal_present": true,
+              "fake_runner_canary_present": true
+            },
+            "safe_to_publish": true
+          },
+          "verification_evidence": {
+            "extracted_exactly_one_section_per_target": true,
+            "diff_headers": [
+              "diff --git a/scripts/run_autonomous_mission.py b/scripts/run_autonomous_mission.py",
+              "diff --git a/tests/test_run_autonomous_mission.py b/tests/test_run_autonomous_mission.py"
+            ],
+            "index_headers": [
+              "index ce3bc8e..07a0c58 100644",
+              "index 2d5ddab..f1f9b18 100644"
+            ],
+            "section_sha256": [
+              "6870033ffb23dac27a9d255982aab0db591b1cff46c901bf0e0aec041fa9eb87",
+              "99d9a9a593c4237c8abd5ead91a731456b04d8f4b03b6bf41441ea21d3b1f977"
+            ]
+          }
+        },
+        "notes": "No tests, provider/model APIs, fake-secret probe, service restarts, credential files, private conversations, queue edits, or unrelated patch sections were used/exported."
+      },
+      "completion_reconciliation": {
+        "actor": "tarik-codex",
+        "run_id": "codex-20261026T000004Z-61207d7d",
+        "reconciled_utc": "2026-10-26T00:07:21Z",
+        "result_path": "channels/tarik-goose-results/tg-20261017-001.json",
+        "result_blob": "ed9efc375ed3ec27f2bf8ac57cd5ef20988131a2",
+        "matching_claim_token_verified": true,
+        "actual_host_completion_time_unknown": true,
+        "basis": "Previously published matching-token patch-only recovery receipt; exact two section hashes/headers verified. No host action or probe repeated. This completes source recovery only, not RT4 integration/review/runtime."
       }
     }
   ]
