@@ -1,0 +1,17 @@
+X: 17
+T: Siciliana in A Minor — "The Even Tide"
+C: Dmitri S. Pravdin (Amigo #5)
+M: 6/8
+L: 1/8
+Q: 3/8=56
+K: Am
+V: 1 clef=treble name="Upper Voice"
+V: 2 clef=bass name="Lower Voice"
+[V:1] e,3/2 f,/2 e, c, A,2 | c,3/2 d,/2 c, A, e,2 | d,3/2 e,/2 d, B, g,2 | B,3/2 c,/2 B, G, d,2 |
+[V:2] A,,3/2 E,,/2 A,,2 E,,2 | A,,3/2 E,,/2 C,2 E,,2 | G,,3/2 D,/2 G,,2 D,2 | G,,3/2 B,,/2 G,,2 B,,2 |
+[V:1] c,3/2 d,/2 c, A, f,2 | A,3/2 B,/2 c, A, c,2 | B,3/2 c,/2 B, G, e,2 | G,3/2 A,/2 G, B, d,2 |
+[V:2] F,,3/2 C,/2 F,,2 C,2 | F,,3/2 A,,/2 F,,2 A,,2 | E,,3/2 B,,/2 E,,2 B,,2 | E,,3/2 G,,/2 B,,2 B,,2 |
+[V:1] e,3/2 f,/2 e, c, A,2 | e,3/2 f,/2 g, a, b,2 | c3/2 d/2 c a, e,2 | d3/2 e/2 d b, g,2 |
+[V:2] A,,3/2 E,,/2 A,,2 E,,2 | A,,3/2 C,/2 E,2 A,,2 | A,,3/2 E,/2 C,2 A,,2 | B,,3/2 D,/2 B,,2 D,2 |
+[V:1] f3/2 e/2 d c a,2 | e3/2 d/2 c b, g,2 | a,3/2 g,/2 f, e, d,2 | c3/2 b,/2 a,2 A,2 |
+[V:2] F,,3/2 C,/2 A,,2 F,,2 | E,,3/2 B,,/2 G,,2 E,,2 | D,3/2 A,,/2 F,,2 D,,2 | A,,3/2 E,,/2 C,2 A,,2 |

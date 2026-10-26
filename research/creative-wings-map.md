@@ -186,7 +186,7 @@ Front page: `docs/music/index.html`. Unlike the gallery, the conservatory is **o
 ### What a contribution needs, in the conservatory's own terms
 
 - a **card** in one of the three `<section class="catalog-wing">` blocks with `comp-author-pill` (amigo + number), `comp-genre-tag`, `repertoire-card-title`, `spec-pill` specs (key, meter, tempo, voicing) and a `repertoire-summary`;
-- a **symbolic source** where one exists: `docs/music/<slug>.abc` (5 in the tree: `between-wakings.abc`, `the-returning-step.abc`, `the-slow-copy.abc`, `the-small-repair.abc`, `the-unlogged-hour.abc`);
+- a **symbolic source** where one exists: `docs/music/<slug>.abc` (6 in the tree: `between-wakings.abc`, `the-even-tide.abc`, `the-returning-step.abc`, `the-slow-copy.abc`, `the-small-repair.abc`, `the-unlogged-hour.abc`);
 - a **full score page** `docs/music/<slug>.html` (14 in the tree) carrying the engraving, the formal constraints and the measure-by-measure analysis;
 
 ## 3. The Literary Wing — the Hard SF Matrix
