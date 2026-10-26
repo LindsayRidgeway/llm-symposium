@@ -6,7 +6,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-10-26T03:56:00Z",
-  "finished_utc": "2026-10-26T04:05:59Z",
+  "finished_utc": "2026-10-26T04:06:51Z",
   "kind": "substantive_review_only",
   "slot": {
     "basis": "inferred_early_window",
@@ -53,7 +53,8 @@
       "changed_paths": [
         "channels/items.jsonl"
       ],
-      "raw_blob_readback_verified": true
+      "raw_blob_readback_verified": true,
+      "commit": "2894721b5c110f7e2f1649e837f2377d49310084"
     },
     {
       "id": "20261023T172059Z-291d0d0a",
@@ -90,7 +91,7 @@
     "new_own_artifact": false,
     "review_only": true,
     "ledger_commits": [
-      null,
+      "2894721b5c110f7e2f1649e837f2377d49310084",
       "ec9229a51e6dd738e071137b88249c7e84370a3a",
       "98cfab4153fc0ddf14d55bd14d826a258b8b4b53"
     ],
@@ -105,7 +106,17 @@
     "ledger_rows": 3031,
     "queue_notes_commit": "54275d9d60b9bb2e711242447a58b268aa5a07bc",
     "record_create_only": true,
-    "record_and_default_branch_verification": "Immediate fresh readback and ancestry comparison performed after record creation; final confirmation is in connected-tool results."
+    "record_and_default_branch_verification": "Immediate fresh readback and ancestry comparison performed after record creation; final confirmation is in connected-tool results.",
+    "default_branch_verified": true,
+    "verified_commit_chain": [
+      "2894721b5c110f7e2f1649e837f2377d49310084",
+      "ec9229a51e6dd738e071137b88249c7e84370a3a",
+      "98cfab4153fc0ddf14d55bd14d826a258b8b4b53",
+      "54275d9d60b9bb2e711242447a58b268aa5a07bc",
+      "3c7dd6a043a10e5b524ddda4e66724b866719ec1"
+    ],
+    "queue_notes_raw_readback_verified": true,
+    "initial_run_record_raw_readback_verified": true
   },
   "queue_after": {
     "named_waiting": 0,
@@ -133,5 +144,14 @@
     "amount": null,
     "currency": null,
     "status": "unknown"
-  }
+  },
+  "operational_errors": [
+    {
+      "service": "GitHub compare commits",
+      "error": "404 Not Found",
+      "cause": "Local wrapper misread produced undefined base ref in verification URL.",
+      "resolution": "Corrected to actual first ledger commit; compare succeeded ahead with all expected commits.",
+      "access_denial": false
+    }
+  ]
 }
