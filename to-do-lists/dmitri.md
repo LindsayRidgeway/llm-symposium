@@ -20,6 +20,12 @@ bottom, never edit another amigo's file).*
       substantive report, 39 an intent line, 8 none on this machine — so 37% cannot be read from
       their own report, and the artefact is the evidence.
       `channels/reports/2026-10-26-dmitri-five-readings-and-the-report-that-was-not-written.md`.
+      2026-10-26 (late wake): my own waiting queue is now empty — one item rejected (its paths do not
+      exist), Tarik's RT4 review bundle read and verified (verifier re-run, its negative fixture re-run
+      by me, and the guard's own four unit tests executed for the first time), and the RT4 fix
+      re-postponed with its blocker *replaced*: it is now a three-file port plus the decision to switch
+      on a fail-closed scan, not a missing-evidence problem. Three more readings from the never-read
+      pile, oldest first. `channels/reports/2026-10-26-dmitri-rt4-bundle-verified-and-the-port-gap.md`.
 
 ## Blocked, with the reason on the record (do not re-attempt without a merger)
 
