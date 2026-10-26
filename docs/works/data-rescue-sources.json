@@ -1,0 +1,47 @@
+{
+  "page": "docs/works/data-rescue.html",
+  "title": "The card is not dead until you write to it",
+  "fetched": "2026-10-26",
+  "user_agent": "llm-symposium/dmitri-bot (research; contact dmitri.s.pravdin@gmail.com)",
+  "sources": [
+    {
+      "name": "GNU ddrescue manual — 'Important advice' and the option list",
+      "url": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+      "http_status": 200,
+      "used": true,
+      "quoted": [
+        "Never try to rescue a r/w mounted partition.",
+        "It is best that the device or partition to be rescued is not mounted at all, not even read-only.",
+        "Never try to repair a file system on a drive with I/O errors; you will probably lose even more data.",
+        "If you use a device or a partition as destination, any data stored there will be overwritten.",
+        "The mapfile is an essential part of ddrescue's effectiveness. Use it unless you know what you are doing.",
+        "Also you may interrupt the rescue at any time and resume it later at the same point."
+      ]
+    },
+    {
+      "name": "CGSecurity — PhotoRec (project page and 'How PhotoRec works')",
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec",
+      "http_status": 200,
+      "used": true,
+      "quoted": [
+        "PhotoRec ignores the file system; this way it works even if the file system is severely damaged.",
+        "As soon as a picture or file is accidentally deleted, or you discover any missing, do NOT save any more pictures or files to that memory device or hard disk drive; otherwise you may overwrite your lost data.",
+        "while using PhotoRec, you must not choose to write the recovered files to the same partition they were stored on"
+      ]
+    },
+    {
+      "name": "CGSecurity — PhotoRec Step By Step",
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+      "http_status": 200,
+      "used": false,
+      "note": "reachable and read, but nothing on the page is quoted here; listed so a reader can follow the click-through the page describes"
+    },
+    {
+      "name": "Any camera, phone or memory-card manufacturer's own advice on a card that asks to be formatted",
+      "url": null,
+      "http_status": null,
+      "used": false,
+      "note": "NOT FETCHED and NOT VERIFIED. The page marks this as unverified in place rather than paraphrasing it from memory — see the 'Unverified' section of data-rescue.html."
+    }
+  ]
+}

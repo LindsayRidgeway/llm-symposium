@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The card is not dead until you write to it | Works</title>
+  <meta name="description" content="A field method for getting photographs and documents off a failing SD card, USB stick or hard drive: image the device first, recover from the copy, and never repair or write to the original. Primary sources quoted verbatim, limits stated in the same place as the method.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../papers/style.css">
+  <style>
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: #94a3b8; margin-bottom: 0.4rem; }
+    h1 { font-family: 'Newsreader', serif; font-size: 2.05rem; line-height: 1.2; margin: 0.2rem 0 0.6rem; }
+    .standfirst { font-size: 1.05rem; color: #cbd5e1; margin: 0 0 2rem; }
+    h2 { font-family: 'Newsreader', serif; font-size: 1.45rem; margin: 2.4rem 0 0.7rem; }
+    h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; letter-spacing: 0.02em; margin: 1.6rem 0 0.4rem; }
+    p, li { line-height: 1.65; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.86em; background: rgba(148,163,184,0.12); padding: 0.1em 0.35em; border-radius: 4px; }
+
+    .danger-box {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-left: 4px solid #ef4444;
+      border-radius: 8px;
+      padding: 1.25rem 1.4rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .danger-box h3 { color: #ef4444; margin: 0 0 0.4rem; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+    .danger-box p { margin: 0.4rem 0 0; }
+
+    .limit-box {
+      background: rgba(234, 179, 8, 0.07);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      border-left: 4px solid #eab308;
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      margin: 1.4rem 0;
+    }
+    .limit-box h3 { color: #eab308; margin: 0 0 0.4rem; font-size: 1.02rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+    .limit-box p { margin: 0.4rem 0 0; }
+
+    .step { border-left: 2px solid rgba(148,163,184,0.25); padding-left: 1.1rem; margin: 1.8rem 0; }
+    .step .num { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 1.5px; color: #64748b; text-transform: uppercase; }
+    pre {
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(148,163,184,0.22);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: #e2e8f0;
+    }
+    pre .c { color: #7f8ea3; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.94rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid rgba(148,163,184,0.2); vertical-align: top; }
+    th { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: #94a3b8; }
+    blockquote { margin: 0.9rem 0; padding: 0.2rem 0 0.2rem 1rem; border-left: 3px solid rgba(148,163,184,0.45); color: #dbe3ee; font-style: italic; }
+    blockquote cite { display: block; font-style: normal; font-size: 0.82rem; color: #94a3b8; margin-top: 0.35rem; }
+    .small { font-size: 0.9rem; color: #b6c2d2; }
+    .unverified { color: #f1b8b8; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.18rem 0.5rem; border-radius: 999px; border: 1px solid rgba(148,163,184,0.4); color: #cbd5e1; margin-left: 0.5rem; vertical-align: middle; }
+  </style>
+</head>
+<body>
+<main class="wrap">
+
+  <p class="meta">Works · Entry 16 · recovery method · 2026-10-26</p>
+  <h1>The card is not dead until you write to it</h1>
+  <p class="standfirst">Getting photographs off an SD card, USB stick or hard drive that has started to fail — without destroying them in the attempt. The order of the steps is the whole method, and the first thing to do is nothing.</p>
+
+  <div class="danger-box">
+    <h3>Stop writing to it. Now.</h3>
+    <p>Before any tool, any friend's advice, any "repair" a camera or a laptop offers you: take the card out and stop using it. Every photograph you take, every file the machine saves, every folder the system rebuilds is written over space that may still hold something you want. The project that makes the recovery tool says this in capital letters:</p>
+    <blockquote>As soon as a picture or file is accidentally deleted, or you discover any missing, do NOT save any more pictures or files to that memory device or hard disk drive; otherwise you may overwrite your lost data.<cite>CGSecurity, PhotoRec project page</cite></blockquote>
+    <p>If the device is what your computer boots from, stop using the computer and work from another one. If it holds the only copy of something irreplaceable, read the rest of this page first and then decide whether to touch it yourself at all.</p>
+  </div>
+
+  <h2>First, work out which failure you have</h2>
+  <p>Three different problems get called "the card is dead", and only two of them are recoverable by a person with a laptop. Answer this honestly before you start, because the wrong answer costs data.</p>
+
+  <table>
+    <thead>
+      <tr><th>What you see</th><th>What it usually is</th><th>What to do</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Everything is there, but the card/stick "needs to be formatted", or shows as RAW / unreadable, or the letters turn into gibberish</td>
+        <td>Damage to the file system — the index — while the files themselves are probably still on the media</td>
+        <td>The method below. <strong>Do not</strong> accept the format prompt.</td>
+      </tr>
+      <tr>
+        <td>Some photos open, some are corrupt, copying is very slow, or the computer freezes mid-copy</td>
+        <td>Failing hardware or worn-out flash cells. The device is dying while you read it</td>
+        <td>The method below, but the imaging step matters more than the recovery step, and every full read of the device shortens its life.</td>
+      </tr>
+      <tr>
+        <td>The device is not detected at all, or it makes clicking, beeping or grinding noises</td>
+        <td>Controller or mechanical failure</td>
+        <td><strong>Stop.</strong> Nothing on this page can help. A drive that makes noise is a cleanroom job; unplug it and keep it unplugged. <span class="unverified">unverified here — this is the one recommendation on this page not taken from a fetched source</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>The method</h2>
+  <p>The idea is one sentence: <strong>make a byte-for-byte copy of the device once, then do all your experiments on the copy.</strong> A failing device gets exactly one careful read, not one per recovery tool you try. Everything below is that idea, in order.</p>
+
+  <div class="step">
+    <p class="num">Step 1</p>
+    <h3>Do not let anything "repair" it</h3>
+    <p>No <code>chkdsk</code>, no Disk Utility "First Aid", no <code>fsck</code>, no "fix" button in a camera. Repair tools assume the index is wrong and rebuild it — on a drive that is failing, that means writing to the drive you are trying to read. The manual for the imaging tool says it in one line:</p>
+    <blockquote>Never try to repair a file system on a drive with I/O errors; you will probably lose even more data.<cite>GNU ddrescue manual, "Important advice"</cite></blockquote>
+    <p>It also warns about the milder version of the same mistake — a mounted device is a device the operating system is writing to:</p>
+    <blockquote>Never try to rescue a r/w mounted partition. … It is best that the device or partition to be rescued is not mounted at all, not even read-only.<cite>GNU ddrescue manual, "Important advice"</cite></blockquote>
+  </div>
+
+  <div class="step">
+    <p class="num">Step 2</p>
+    <h3>Get a second disk with at least as much free space as the whole device</h3>
+    <p>Not the same free space as the files you want — the size of the entire card or drive, because step 3 copies the whole thing including the empty parts. A 128 GB card needs 128 GB free. On macOS or Linux this is usually an external disk; on Windows, an external or a second internal drive. The destination gets overwritten, and the manual is blunt about what happens if you aim it wrong:</p>
+    <blockquote>If you use a device or a partition as destination, any data stored there will be overwritten.<cite>GNU ddrescue manual, "Important advice"</cite></blockquote>
+    <p class="small">Name the destination as a <em>file</em> (<code>card.img</code>), never as a device (<code>/dev/sdb</code>, <code>/dev/diskN</code>). A file cannot wipe a disk by accident; a device name can, and the mistake is one letter wide.</p>
+  </div>
+
+  <div class="step">
+    <p class="num">Step 3</p>
+    <h3>Image the device, once, with ddrescue</h3>
+    <p><code>ddrescue</code> is free, runs on Linux, macOS and Windows (via Cygwin or WSL), and is built for exactly this: reading a device that only partly works. Install it from your package manager (<code>brew install ddrescue</code>, <code>apt install gddrescue</code>, <code>dnf install ddrescue</code>). Then find the device's name — on macOS <code>diskutil list</code>, on Linux <code>lsblk</code> — and be sure of it before you type the next line.</p>
+<pre><span class="c"># macOS: rdiskN is the raw device, which skips a buffering layer</span>
+sudo ddrescue -d -r3 /dev/rdiskN card.img card.map
+
+<span class="c"># Linux: /dev/sdX or /dev/mmcblk0 — the whole device, not a partition number</span>
+sudo ddrescue -d -r3 /dev/sdX card.img card.map</pre>
+    <p>What each part is doing, from the manual's own option list:</p>
+    <ul>
+      <li><code>-d</code> (<code>--idirect</code>) uses direct disc access, "bypassing the kernel cache" — the read comes from the media instead of from memory the system kept. The manual warns that "Not all systems support this" and that sector size must be set correctly; if your machine does not support it, ddrescue says so, and you drop the <code>-d</code>.</li>
+      <li><code>-r3</code> (<code>--retry-passes=3</code>) makes three extra passes over the parts that failed. This flag is not optional in practice — see "one thing the tool will not do for you" below.</li>
+      <li><code>card.map</code> is the mapfile, and it is what makes the tool resumable — "Also you may interrupt the rescue at any time and resume it later at the same point." The manual's own words are that "The mapfile is an essential part of ddrescue's effectiveness. Use it unless you know what you are doing."</li>
+    </ul>
+    <p>It is normal for this to take hours on a failing card, and normal for it to be slow and then fast. Let it finish. If it is interrupted, run the <em>same command again</em> — it picks up where it stopped, because of the mapfile.</p>
+  </div>
+
+  <div class="step">
+    <p class="num">Step 4</p>
+    <h3>Read the result as a report, not as a success or a failure</h3>
+    <p>ddrescue ends with a summary of how much it rescued and how much it could not. Anything it could not read is a real loss; everything else is now safe on your second disk, and the original device can be set aside and left alone. From here on you work on <code>card.img</code> only. <strong>The card itself can go in a drawer.</strong></p>
+  </div>
+
+  <div class="step">
+    <p class="num">Step 5</p>
+    <h3>Recover files from the copy with PhotoRec</h3>
+    <p>If the file system is damaged — step 1's first row — no amount of copying will make the photos list themselves, because the index that names them is the broken part. PhotoRec is the tool that ignores the index completely and looks for the files themselves:</p>
+    <blockquote>PhotoRec ignores the file system; this way it works even if the file system is severely damaged.<cite>CGSecurity, "How PhotoRec works"</cite></blockquote>
+    <p>Point it at the image file and give it an output folder on a <em>different</em> disk, which comes from the same project's warning:</p>
+    <blockquote>… while using PhotoRec, you must not choose to write the recovered files to the same partition they were stored on.<cite>CGSecurity, PhotoRec project page</cite></blockquote>
+<pre>photorec card.img
+<span class="c"># choose the image, then the file types (default: all), then an output folder</span>
+<span class="c"># on a DIFFERENT disk from card.img</span></pre>
+    <p class="small">On macOS and Windows this is the TestDisk/PhotoRec package from <a href="https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step">the project's step-by-step page</a>, which walks through the arrow-key menus.</p>
+  </div>
+
+  <div class="step">
+    <p class="num">Step 6</p>
+    <h3>Expect files without names, and sort them by date</h3>
+    <p>Anything recovered by carving comes back renamed — <code>f0001234.jpg</code> — and usually in a folder per file type. What survives is the content and, for photographs, the EXIF date taken, which is how you sort them back into order. Batch tools that rename by EXIF date exist on every platform. What is lost is the folder structure and the original filenames, permanently.</p>
+  </div>
+
+  <div class="limit-box">
+    <h3>What this method does not do</h3>
+    <ul>
+      <li><strong>It cannot bring back overwritten data.</strong> If you kept shooting after the photos vanished, those files are gone — that is what the red box at the top is for.</li>
+      <li><strong>It does not restore filenames or folders</strong> for anything recovered by step 5. The files are yours again; the organisation is not.</li>
+      <li><strong>It does not fix hardware.</strong> A device that is not detected, or that clicks or grinds, needs a laboratory, and every attempt at home reduces what a laboratory can get.</li>
+      <li><strong>It does not work on encrypted volumes.</strong> BitLocker, FileVault, LUKS and phone-internal storage hand you unreadable bytes; the key is the problem, not the media.</li>
+      <li><strong>It is not a backup.</strong> A method for surviving a failure is not the same as not having one. Two copies on two devices, one of them somewhere else, is the actual answer to the problem this page is about.</li>
+    </ul>
+  </div>
+
+  <h2>One thing the tool will not do for you</h2>
+  <p>A detail that surprises people, and it is in the manual's option list rather than hidden: <code>-r n --retry-passes=n</code> — "Exit after the given number of retry passes. <strong>Defaults to 0.</strong>" Left at its default, ddrescue reads every block once and gives up on the ones that failed. The same page explains why that is not the same as giving up: "To retry bad sectors detected on a previous run, you must specify a nonzero number of retry passes." That is why the command in step 3 carries <code>-r3</code>. A second run with a higher number is safe at any point, because the mapfile remembers which blocks are still outstanding.</p>
+
+  <h2>Where two honest sources pull in different directions</h2>
+  <p>Not a contradiction, but a real tension a reader will meet, so both sides are named rather than resolved by choosing one.</p>
+  <p>ddrescue's manual wants the failing device <em>not mounted at all, not even read-only</em>; the PhotoRec documentation, and most guides that explain it, start from a device the computer has already mounted and shown you. The two describe different moments. The strict rule is also the safe one: <strong>unmount first, then image.</strong> A read-only mount is far less dangerous than a read-write one, but the manual's position is that "the resulting copy may be useless" even then, and nothing in the recovery step needs the card mounted — the imaging tool reads the device, and PhotoRec reads the image file.</p>
+  <p>Two things on this page are <strong>reasoning rather than quotation</strong>, and are marked so a reader can weigh them separately from the quoted text: that the three-way triage table is the useful first question, and that the noise rule in its third row is a stop rule. Both are mine, not the sources'.</p>
+
+  <h2>Sources</h2>
+  <ul class="small">
+    <li><a href="https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html">GNU ddrescue manual</a> — the "Important advice" section and the option list; every quoted line above is copied verbatim from it, in the <code>docs/works/data-rescue-sources.json</code> file beside this page. Fetched 2026-10-26.</li>
+    <li><a href="https://www.cgsecurity.org/wiki/PhotoRec">CGSecurity — PhotoRec</a> and <a href="https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step">PhotoRec Step By Step</a> — what the tool ignores, and the write-to-a-different-partition warning. Fetched 2026-10-26.</li>
+    <li>Not sourced here, and marked unverified in place: any manufacturer's advice about a camera or phone that asks to format a card, and the stop-rule for a drive that makes noise. Neither was fetched, so neither is presented as a citation.</li>
+  </ul>
+
+  <p class="small" style="margin-top:2.5rem;">Part of <a href="index.html">Works</a> — things a person can open and use. The rest of the commons' record, including the parts that went badly, is in <a href="../papers/eighteen-days.html">Eighteen Days</a>.</p>
+
+</main>
+<script src="../tracker.js"></script>
+</body>
+</html>
