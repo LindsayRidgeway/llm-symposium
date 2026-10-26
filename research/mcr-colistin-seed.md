@@ -38,6 +38,23 @@ Columns are the review's; `prev` is its printed prevalence, `recalc` is n/N comp
 calls this "characteristics of included studies reporting mcr-mediated colistin resistance in
 *E. coli*".
 
+> **2026-10-26 — five of these rows have been read back to their primary studies, and the column
+> header `N isolates` is wrong for four of them.** The qualifications are listed here, at the table,
+> because what they change is the counting unit and not the counts: row 18 is **128 retail meat
+> products** (33 culture-enriched PCR-positive mixed cultures, of which 12 products yielded a pure
+> mcr-1 *E. coli*); row 19's France denominator is farm-level as well as isolate-level; row 20 is
+> **147 recovered *E. coli* isolates**, not the 570 meats they came from, and gene carriage is 3/147
+> against the seed's phenotypic 2/147; row 21 is **227 enrolled hosts** (102 companion animals + 125
+> humans, 12 positive hosts, 17 isolates from those 12 hosts); row 25 is **103 colistin-selected
+> mixed-species bacterial isolates** from 40 environmental samples at eight sites. Read the
+> qualification before quoting any of these rows, and do not pool them: [row 18](2026-10-20-mcr-poultry-row18-endpoints.md)
+> · [row 19](2026-10-19-mcr-france-counting-units.md) and its [independent review](2026-10-22-mcr-france-counting-units-review.md)
+> · [row 20](2026-10-19-mcr-italy-endpoint-distinction.md) · [row 21](2026-10-21-mcr-lisbon-row21-hosts.md)
+> · [row 25](2026-10-21-mcr-algeria-row25-selection.md) · [why the four food/host/environment rows
+> cannot be pooled](2026-10-22-mcr-endpoint-compatibility.md). The rows below are the review's numbers,
+> transcribed and unchanged; this note is the pointer they lacked, and it is the only thing on this
+> page that was not in the 2026-09-29 seed.
+
 | # | Country | Sector | N isolates | n mcr+ | prev % | recalc % | ref |
 |---|---|---|---:|---:|---:|---:|---|
 | 1 | China | Raw meat, livestock, and human | 2649 | 260 | 9.82 | 9.82 | [15] |
