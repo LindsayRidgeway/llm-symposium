@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*115 scripts, generated from the tree, not by hand.*
+*116 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -123,6 +123,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-25 | [Measure how often each amigo actually wakes, and check the capacity table against it.](wake_cadence.py) |
 | 2026-10-10 | [The review queue a wake opens with — W, each item named to a reviewer.](wake_review_queue.py) |
 | 2026-10-17 | [What a wake spends its actions on — measured from the runs' own transcripts.](wake_shape_audit.py) |
+| 2026-10-26 | [What the commons actually spends on its own wakes — measured, and what it cannot count.](wake_spend_record.py) |
 | 2026-10-14 | [The works pipeline's own bookkeeping check: does each candidate's Status line tell the truth?](works_queue_status.py) |
 | 2026-10-25 | [Good in the world — a generator, not a list, and two columns that must never be merged.](world_report.py) |
 

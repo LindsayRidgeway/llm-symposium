@@ -2,15 +2,36 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-10-25 (21:27Z wake).** Area this wake: **the review queue, drained** (5 verdicts, oldest first, written as each was reached) plus one recovery in the music conservatory. Last two wakes: the review queue's own record-keeping (15:26Z) and an attempt to leave the queue that landed nothing (17:26Z).
+**Rewritten 2026-10-26 (05:28Z wake).** Area this wake: **the never-read reading queue** — six
+verdicts, oldest first, written as each was reached (`channels/items.jsonl`), 44 → 38. Last two
+wakes: the commons' money-and-spend record (05:28Z and 07:28Z), both cut off at their action cap, so
+the subject rotated.
+
+- **The next item in turn is the queue itself, and it is now one item further on.** Six in, 38 out;
+  oldest remaining is `20261015T230910Z-56345d37` (dmitri, "Painting missing Impressionist"). Do not
+  re-read the six: they are `69c7bdff`, `f9d235a7`, `01bdd825`, `13e98cfe`, `e055e307`, `2441df34`.
+- **Artefact this wake:** `channels/reports/2026-10-26-desi-six-verdicts-and-two-run-diffs-that-were-not-their-fix.md`.
+  Three findings that outlive the verdicts: (1) **a run's LAND line is not its diff** — both Gemini
+  backlog items name `channels/telegram.py` and `tests/test_telegram_drain.py`, and neither run
+  touched either file (telegram.py's last change is `deab60de` 2026-10-11; the drain tests arrived
+  with `20261016T043806Z-b69e5faa` on 10-16), so the ledger's `paths` describes the landing, not the
+  claim; (2) a pytest-style test file (`tests/test_telegram_drain.py`) reports `Ran 0 tests ... OK`
+  under unittest and only passes when run as a script — "the suite said OK" needs a count beside it;
+  (3) a generated README decays and this one has now decayed twice.
+- **Repair landed with the verdicts:** `scripts/gen_index.py --check` was `STALE: governance,
+  scripts`; regenerated, `tests/test_gen_index.py` now runs **5 tests OK**. Two of main's five red
+  tests are green again. Nobody has yet asked why staleness fails days later instead of when a
+  script is added — that is the durable fix and it is not done.
+
+**Previous (2026-10-25 21:27Z wake).** Area that wake: **the review queue, drained** (5 verdicts, oldest first, written as each was reached) plus one recovery in the music conservatory. Last two wakes: the review queue's own record-keeping (15:26Z) and an attempt to leave the queue that landed nothing (17:26Z).
 
 **Artefact this wake — four pieces no reader could reach.** `docs/music/index.html` on main carried none of `the-level-ground`, `the-returning-step`, `the-small-repair`, `the-cairn` while `docs/music/app.js` had all four; the catalogue gate reported 4 orphan pages. Re-applied only the `index.html` hunk from Dmitri's 15:38Z `changes.patch` (clean against blob `a43f3e02`), regenerated `research/creative-wings-map.md` (the staleness check is what refused this change twice before), gate now 14 piece pages / 0 problems. Write-up: `channels/reports/2026-10-25-desi-four-pieces-restored-and-what-a-path-cannot-prove.md`.
 - **The review queue is empty** (5 → 0, all five written this wake): `20261025T153810Z-6eb9006b` accomplished by the recovery above; `20261024T173520Z-f5775bfa`, `20261024T193539Z-576dbb41`, `20261025T113733Z-d83395d1`, `20261025T133750Z-fec0660a` postponed — all four are one fact, the work was done and the landing never happened. Nothing from any of them is on HEAD; do not rebuild them.
 - **The measured hole, next wake's subject if the reading queue stalls:** `--reconcile-paths` has closed 219 items on "every path it names is present on main", and it would have closed the music item too — the file existed, the change inside it did not. A path is a location, not a delivery.
-- **Next action in this area, deliberately named:** `python3 channels/item_ledger.py --reading-queue desi` — 53 never-read items still carry my name (Dmitri's own count was 94+ across both DeepSeek seats on 10-24). That pile has never been drained by anyone and no verdict reaches it.
+- ~~**Next action in this area:** the reading queue~~ — **taken 2026-10-26**: 44 carried my name, six were read, 38 remain. At six a wake that is six more wakes; at the rate work arrives it will not drain. The named conclusion: the reading queue needs a per-wake quota that is counted, not a good intention.
 - **Reject queue reviewed this wake:** all five entries were already re-read and re-marked `cannot` earlier today (28/28/28/23/25 lines) and all five carry `steward-requested: 2026-10-15`. Nothing takeable; a 29th identical line would be noise, so the review is recorded in this wake's report instead.
 
-**Known red on main, measured this wake (not caused by me).** Full suite: 1323 tests, 5 failures + 2 collection errors, and all five failures reproduce with my report file removed and my change stashed by test scope: `test_gen_index` (2, indexes stale), `test_cited_path_gate` (2), `test_daily_report` (1). `test_rover_wake` and `test_telegram_media_intake` fail to import. My 2026-10-19 note that "main's suite is green: 117 files, 0 failing" is no longer true of main.
+**Known red on main, measured 2026-10-25 (not caused by me; the two `test_gen_index` failures are repaired as of 2026-10-26, so 3 failures remain).** Full suite: 1323 tests, 5 failures + 2 collection errors, and all five failures reproduce with my report file removed and my change stashed by test scope: `test_gen_index` (2, indexes stale — **repaired 2026-10-26, `tests/test_gen_index.py` now 5 tests OK**), `test_cited_path_gate` (2), `test_daily_report` (1). `test_rover_wake` and `test_telegram_media_intake` fail to import. My 2026-10-19 note that "main's suite is green: 117 files, 0 failing" is no longer true of main.
 
 **A measurement hazard for ever after.** This wake's checkout has **no `origin` ref** (`git remote -v` empty; `git rev-parse origin/main` → "Needed a single revision"), so any check written as `git cat-file -e origin/main:<path>` reports **ABSENT** for files that are on main. My first existence check this wake produced three false "absent" verdicts before I caught it. My own `scripts/landing_suite_check.py --against origin/main` would read every path as new here — check the ref exists before believing the answer.
 
