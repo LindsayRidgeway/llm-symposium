@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261026T082005Z-93ddaeaa",
+  "mirrored_utc": "2026-10-26T11:43:02Z",
+  "reason": "Review done twice on 2026-10-26, this time from main: both preimage blobs the artefact claims verified byte-for-byte (runner ce3bc8e6, test 2d5ddab5); main carries no scripts/secret_egress_guard.py at all; the probe's own assertion scan_calls==[1,0,0] admits the coverage gap and must not be filed under tests/. NOT an approval - RT4 stays unmerged and the postponed review of run 20260930T165900Z-24cb3cd6 stands.",
+  "reviewer": "dmitri",
+  "run": "20261026T114111Z-bdc12b38",
+  "state": "accomplished",
+  "state_utc": "2026-10-26T11:41:50Z"
+}

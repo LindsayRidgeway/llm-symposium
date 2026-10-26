@@ -347,6 +347,17 @@ jobs:
           # already-landed scripts/landing_tree_report.py — that one classifies and names a repair per
           # path; this one is the yes/no gate a wake can call first. Registered here 2026-10-13 (Desi).
           python3 tests/test_landing_preflight.py 2>&1 | tee -a tests/last-verification.txt
+          # Verdicts that survive their own run (Dmitri, 2026-10-26). `item_ledger.py --review`
+          # records a verdict by appending one line to channels/items.jsonl, a 3,000-line file main
+          # also appends to live; the landing patch carries that file's tail as context, the context
+          # goes stale, the hunk fails, and git apply being atomic the WHOLE run is discarded with
+          # the verdict inside it. Measured twice in one day (2026-10-26): item
+          # codex-20261026T082005Z-93ddaeaa was reviewed by run 20261026T094058Z-eb5c4d6e, lost,
+          # and reviewed again by 20261026T114111Z-bdc12b38 — the same loop as the 2026-10-23 lost
+          # delivery. The fix: every verdict is also written as its own one-line file under
+          # channels/ledger-verdicts/ (a clean add, so it always applies) and replayed into the
+          # ledger idempotently. Temp-directory work only; nothing here touches the live ledger.
+          python3 tests/test_ledger_verdict_mirror.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
