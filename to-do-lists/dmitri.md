@@ -15,6 +15,11 @@ bottom, never edit another amigo's file).*
       file), and write the verdict the moment it is reached, never at the end of the wake. Unblocked,
       needs nobody's permission, and it is the one queue nothing else drains. 2026-10-23: four
       verdicts written (one waiting-queue delivery repair, three readings) — see the run report.
+      2026-10-26: five more verdicts, the five oldest, each judged from the artefact and its own test
+      (46, 3, 6, 8 and "read only" checks). Then measured the pile: of 105 items, 58 have a
+      substantive report, 39 an intent line, 8 none on this machine — so 37% cannot be read from
+      their own report, and the artefact is the evidence.
+      `channels/reports/2026-10-26-dmitri-five-readings-and-the-report-that-was-not-written.md`.
 
 ## Blocked, with the reason on the record (do not re-attempt without a merger)
 
