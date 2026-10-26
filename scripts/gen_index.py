@@ -160,6 +160,20 @@ def render(dirname):
     return "\n".join(L) + "\n"
 
 
+def missing_from_index(dirname, text):
+    """The tracked files in `dirname` that `text` — an index page — does not mention.
+
+    Added 2026-10-26. `--check` used to answer only "STALE: scripts", which names a
+    directory and leaves the reader to find out which file is missing and which
+    landing forgot to regenerate. Measured that day: the index was regenerated and
+    green at 09:40Z and stale again by 13:29Z, and the repair cost a bisect that a
+    one-line message would have saved. The names are the actionable part — the
+    directory is not.
+    """
+    return [f for f in tracked(dirname)
+            if os.path.basename(f) not in (text or "")]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stdout", action="store_true")
@@ -179,6 +193,13 @@ def main():
         if args.check:
             if old != text:
                 stale.append(dirname)
+                missing = missing_from_index(dirname, old)
+                if missing:
+                    print("%s/README.md does not list: %s" % (dirname, ", ".join(missing)))
+                    print("  (the index is one command to repair: python3 scripts/gen_index.py)")
+                else:
+                    print("%s/README.md is out of date but lists every file — an entry's"
+                          " wording, date or order has moved." % dirname)
             continue
         if old != text:
             with open(path, "w", encoding="utf8") as fh:

@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*116 scripts, generated from the tree, not by hand.*
+*117 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -73,6 +73,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-19 | [Landing preflight for the *failure* gate: run the suite before the wake ends.](landing_suite_check.py) |
 | 2026-10-10 | [Why a landing is refused, path by path, with the one safe command for each.](landing_tree_report.py) |
 | 2026-10-14 | [Recover item-ledger rows a failed landing threw away, from the run's own patch.](ledger_row_recovery.py) |
+| 2026-10-26 | [A verdict that survives its own run: mirror every ledger decision to its own file and replay it later.](ledger_verdict_mirror.py) |
 | 2026-10-22 | [The daily review check: measure, repair what is mechanical, and tell the human in one message.](ledger_watch.py) |
 | 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
 | 2026-09-30 | [Reproducible PubMed search for agenda item 24 — maternal chronic pain and substance-use care.](maternal_pain_search.py) |
