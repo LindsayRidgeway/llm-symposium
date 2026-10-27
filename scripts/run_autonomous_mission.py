@@ -9,6 +9,7 @@ Copy this file, checker and mission outside the checkout BEFORE starting the wor
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -18,6 +19,18 @@ import sys
 
 TURN_BUDGETS = (25, 15)
 SECONDS_PER_ATTEMPT = 240
+
+
+def load_secret_guard():
+    guard_path = Path(__file__).resolve().with_name("secret_egress_guard.py")
+    if not guard_path.exists():
+        guard_path = Path(__file__).resolve().parent.parent / "scripts" / "secret_egress_guard.py"
+    spec = importlib.util.spec_from_file_location("secret_egress_guard", guard_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("could not load secret egress guard")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -52,18 +65,20 @@ def repairable(report: dict, log: Path) -> bool:
     return all(isinstance(e, str) and e.startswith(prefixes) for e in errors)
 
 
-def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
+def _run_attempts(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
         artifacts: Path, worker: list[str] | None = None,
-        timeout: int = SECONDS_PER_ATTEMPT) -> dict:
+        timeout: int = SECONDS_PER_ATTEMPT, *, secret_guard, attempts: list) -> dict:
     artifacts.mkdir(parents=True, exist_ok=True)
     current = instructions
-    attempts = []
     outcome = {"ok": False, "attempts": attempts,
                "quality": "mechanical contract only; peer review still required"}
     for index, turns in enumerate(TURN_BUDGETS, start=1):
         attempt_dir = artifacts / f"attempt-{index}"
         attempt_dir.mkdir()
         log = attempt_dir / "worker.jsonl"
+        attempt = {"number": index, "max_turns": turns,
+                   "worker_exit": None, "checker_exit": None}
+        attempts.append(attempt)
         argv = (worker or ["goose"]) + [
             "run", "--with-builtin", "developer", "--instructions", str(current),
             "--max-turns", str(turns), "--output-format", "stream-json"]
@@ -72,19 +87,21 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
         except OSError as exc:
             code = 127
             log.write_text(str(exc), encoding="utf-8")
-        attempt = {"number": index, "max_turns": turns, "worker_exit": code}
-        attempts.append(attempt)
+        attempt["worker_exit"] = code
         head = subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
         if head != base:
             outcome["reason"] = "worker changed HEAD; stopping without repair"
             break
-        # Do not give billing credentials to the deterministic checker.
-        env = {k: v for k, v in os.environ.items() if k != "OPENAI_API_KEY"}
+        # Do not give credentials to the deterministic checker.
         checked = subprocess.run([
             sys.executable, str(checker), "--repo", str(repo), "--mission", str(mission),
             "--base", base, "--artifacts", str(attempt_dir)
-        ], capture_output=True, text=True, env=env, timeout=30)
+        ], capture_output=True, text=True, env=secret_guard.sanitized_environment(), timeout=30)
+        attempt["checker_exit"] = checked.returncode
         (attempt_dir / "checker-output.txt").write_text(checked.stdout + checked.stderr, encoding="utf-8")
+        guard_report = secret_guard.scan_run(repo, attempt_dir, base, redact=True)
+        (attempt_dir / "secret-egress-report.json").write_text(json.dumps(guard_report, indent=2) + "\n", encoding="utf-8")
+        attempt["secret_guard"] = guard_report
         report_path = attempt_dir / "mission-check.json"
         try:
             report = json.loads(report_path.read_text(encoding="utf-8"))
@@ -93,6 +110,9 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
             break
         attempt["checker_exit"] = checked.returncode
         attempt["check"] = report
+        if not guard_report.get("ok"):
+            outcome["reason"] = "secret egress guard blocked worker output before repair or publication"
+            break
         if code != 0:
             outcome["reason"] = "worker process failed; no automatic provider/process retry"
             break
@@ -116,6 +136,48 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
             "There is no further retry after this pass.\n\n" +
             json.dumps(report, indent=2) + "\n", encoding="utf-8")
     write_json(artifacts / "orchestration.json", outcome)
+    return outcome
+
+
+def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
+        artifacts: Path, worker: list[str] | None = None,
+        timeout: int = SECONDS_PER_ATTEMPT) -> dict:
+    """Finalize the whole artifacts tree on success and failure; scan failures block."""
+    artifacts.mkdir(parents=True, exist_ok=True)
+    secret_guard = None
+    attempts = []
+    outcome = {"ok": False, "attempts": [],
+               "quality": "mechanical contract only; peer review still required",
+               "reason": "orchestration interrupted before completion"}
+    try:
+        secret_guard = load_secret_guard()
+        outcome = _run_attempts(repo, instructions, mission, checker, base,
+                                artifacts, worker, timeout, secret_guard=secret_guard,
+                                attempts=attempts)
+    except Exception as exc:
+        # Exception text may contain worker/tool data; retain only its type.
+        # Preserve observed numeric facts, without replaying tool/report text.
+        summary = [{key: (attempt.get(key) if type(attempt.get(key)) is int else None)
+                    for key in ("number", "max_turns", "worker_exit", "checker_exit")}
+                   for attempt in attempts]
+        outcome = {"ok": False, "attempts": summary,
+                   "attempt_history": "numeric summary after exception",
+                   "quality": "mechanical contract only; peer review still required",
+                   "reason": "orchestration failed: " + type(exc).__name__}
+    finally:
+        try:
+            if secret_guard is None:
+                raise RuntimeError("guard unavailable")
+            final_guard = secret_guard.scan_run(repo, artifacts, base, redact=True)
+            if not isinstance(final_guard, dict) or type(final_guard.get("ok")) is not bool:
+                raise ValueError("invalid guard report")
+        except Exception as exc:
+            final_guard = {"ok": False, "error": "final scan failed: " + type(exc).__name__}
+        outcome["final_secret_guard"] = final_guard
+        if not final_guard["ok"]:
+            outcome["ok"] = False
+            outcome["reason"] = "final secret egress scan blocked or could not verify artifacts"
+        write_json(artifacts / "orchestration.json", outcome)
     return outcome
 
 

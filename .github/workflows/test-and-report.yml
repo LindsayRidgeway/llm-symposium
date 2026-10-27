@@ -319,6 +319,10 @@ jobs:
           python3 tests/test_reject_queue_request_gap.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_review_assignment.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          # RT4: exact reviewed guard/seam evidence plus bounded orchestration contracts.
+          python3 tests/test_secret_egress_guard.py 2>&1 | tee -a tests/last-verification.txt
+          python3 research/rt4/test_runner_finalization.py --runner scripts/run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 research/rt4/test_runner_attempt_history.py --runner scripts/run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_screen_rule_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_stewardship_pitch_template.py 2>&1 | tee -a tests/last-verification.txt

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261027T195915Z-e375c42a",
+  "owner": {
+    "amigo": "tarik",
+    "platform": "codex",
+    "chat": "Tarik #03"
+  },
+  "basis": "inferred_early_window",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-27-1600.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-10-27T16:00:00-04:00",
+  "scheduled_utc": "2026-10-27T20:00:00Z",
+  "seconds_from_slot": -45,
+  "started_utc": "2026-10-27T19:59:15Z",
+  "occurrence_limit": "No authoritative scheduled-occurrence metadata supplied; helper timing inference is not a delivery guarantee."
+}

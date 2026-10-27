@@ -1,0 +1,186 @@
+{
+  "run_id": "codex-20261027T195915Z-e375c42a",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-27T19:59:15Z",
+  "finished_utc": "2026-10-27T20:04:04Z",
+  "kind": "substantive_reviewed_port_landing",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-27-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-27T16:00:00-04:00",
+    "scheduled_utc": "2026-10-27T20:00:00Z",
+    "seconds_from_slot": -45,
+    "started_utc": "2026-10-27T19:59:15Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-27-1600.json",
+    "owner": "codex-20261027T195915Z-e375c42a",
+    "commit": "c09c2ba59bcf7409a9c58344ee89f59324d137f7",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Bounded early-window inference; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "6e2a623e37c9f533aebff513e7b97b55d82e6964"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub public/private orientation reads, PR metadata/merge, conditional public ledger/todo writes, create-only claim/run record and isolated offline Python. No live workflow/provider/host exercise."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "fresh_final_ledger_unchanged_verified": true
+  },
+  "selected_work": [
+    "Reconcile independent RT4 review evidence, verify PR5 exact source tree, and land reviewed fail-closed port under standing approval."
+  ],
+  "checks": [
+    "Fresh occurrence helper with actual start only: inferred upcoming16:00 New York slot, -45seconds; create-only claim owner freshly verified.",
+    "Fresh last-row-wins ledger confirms Dmitri's accomplished2026-10-27T09:45:08Z evidence verdict on codex-20261027T080046Z-31537fbe. His26 actual test executions are attributed to him; no Tarik self-review.",
+    "Fresh PR5 tree confirms all5 candidate blobs equal the independently reviewed pinned snapshots. Current main's runner/test preimages unchanged from reviewed base.",
+    "python3 -I research/rt4/verify_port_gate_evidence.py:7 source hashes,26 AST case inventory,4 registered commands, unchanged manual-only trigger;0 test bodies executed.",
+    "python3 -I research/rt4/test_runner_attempt_history.py --runner research/rt4/review-bundle/repaired/run_autonomous_mission-attempt-history.py.txt:4 stub tests pass.",
+    "Copied exact runner snapshot to candidate_runner.py for loader compatibility, then python3 -I research/rt4/test_runner_finalization.py --runner candidate_runner.py:8 stub tests pass.",
+    "Inspected current autonomous/verification workflow triggers:manual-only. No dispatch or separately billed session.",
+    "Native expected-head PR merge returned merged=true; fresh PR read confirms closed/merged with exact merge SHA. Fresh main compare initially identical. Entire pre/post main tree comparison changes exactly5 intended blobs, other files preserved.",
+    "Fresh merged file SHAs match all5 reviewed candidate blobs. Raw commit API independently supplies actual modified/added statuses and nonzero change counts to recorder.",
+    "scripts/record_codex_wake.py record_wake consumed captured live GitHub commit/default-branch evidence; appended compatible waiting item, assigned to Dmitri by item_ledger.py. Fresh-SHA publication and raw readback verify all3305 rows, all prior bytes preserved.",
+    "Conditional queue-note append/raw readback and exact ledger/todo commit paths verified; final queues empty."
+  ],
+  "artifact": {
+    "commit": "6f3ccce5eb3f2fe549a9b6af3e8f16c903b7b112",
+    "paths": [
+      ".github/workflows/test-and-report.yml",
+      "scripts/run_autonomous_mission.py",
+      "tests/test_run_autonomous_mission.py",
+      "scripts/secret_egress_guard.py",
+      "tests/test_secret_egress_guard.py"
+    ],
+    "pull_request": "https://github.com/LindsayRidgeway/llm-symposium/pull/5",
+    "reviewed_head": "4d83ac31b1f4e24c1945252b480d557fe0da554f",
+    "premerge_main": "c09c2ba59bcf7409a9c58344ee89f59324d137f7",
+    "on_default_branch_verified": true,
+    "exact_changed_paths_verified": true,
+    "merged_blob_hashes_verified": true,
+    "original_code_not_reimplemented": true,
+    "activation": "Fail-closed guard is unconditional in autonomous runner on main; no later enable flag.",
+    "live_mission_observed": false,
+    "host_installation_observed": false
+  },
+  "independent_review": {
+    "prior_evidence_item": "codex-20261027T080046Z-31537fbe",
+    "reviewer": "dmitri",
+    "state": "accomplished",
+    "state_utc": "2026-10-27T09:45:08Z",
+    "reviewer_limit_closed": "Reviewer could not access draft refs; this wake verifies real PR tree equals reviewed snapshots.",
+    "merge_decision": "Tarik under standing approval, not an independent verdict.",
+    "new_landing_item": "codex-20261027T195915Z-e375c42a",
+    "assigned_to": "dmitri",
+    "new_item_state": null,
+    "original_and_prior_postponed_states_preserved": true
+  },
+  "review_limits": [
+    "No original guard/probe rerun, real credential access, live mission/provider/service or host action. Stub tests do not certify real-world detection.",
+    "Main source activation is verified; no claim that an autonomous mission has exercised it. Schedules unchanged.",
+    "Original RT4 missing-path postponed verdict is preserved; independent follow-up may append a dated correction after checking actual landing."
+  ],
+  "verdicts": [],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "separately_billed_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "eac07a55e97e5d862c9cced041d26bb3cc3e89e0",
+    "ledger_rows": 3305,
+    "prior_ledger_bytes_preserved": true,
+    "ledger_raw_readback_verified": true,
+    "queue_notes_commit": "81b87e19e81e38c0866f5e64e54efc6c4af5f36e",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "record_final_check": "Fresh raw readback and exact changed-path/default-branch ancestry verification immediately after creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Initial recorder invocation",
+      "error": "Normalized connector commit files omit status/change counts; recorder correctly refused incomplete evidence.",
+      "resolution": "Fetched raw commit API response and reran recorder successfully; no failed append."
+    },
+    {
+      "action": "Replace local publication evidence fixture",
+      "error": "apply_patch rejected delete/add targeting same local path.",
+      "resolution": "Created a new evidence-complete local file; no repository mutation from failure."
+    },
+    {
+      "action": "Attach existing PR to chat",
+      "error": "Current attachment-tool completion unobserved within3seconds; no denial or approval request observed.",
+      "resolution": "PR was already attached successfully in an earlier wake; GitHub merge/readback completed independently."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "No model-author field exposed. Account/push identity differs from actual content authorship; commit message and PR/run records disclose this."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
