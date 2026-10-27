@@ -138,6 +138,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 LEDGER = REPO / "channels" / "items.jsonl"
+# Repository-relative form, for comparing against the `paths` an item names.
+LEDGER_PATH = "channels/items.jsonl"
 
 # The five bodies. `amigo` is the originator of every item its own wake performed.
 HOME = Path(os.path.expanduser("~"))
@@ -655,7 +657,8 @@ def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | 
 
 def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
                     scope: str = "", postpone_absent: bool = False,
-                    skipped: list | None = None) -> list[dict]:
+                    skipped: list | None = None,
+                    self_referential: list | None = None) -> list[dict]:
     """Close waiting items whose named paths already exist on main (auto:path).
 
     `reconcile_landed` keys on the item's *own* run id, so a wake's work that landed under a
@@ -702,6 +705,16 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
             continue
         paths = [p for p in (rec.get("paths") or []) if isinstance(p, str)]
         if not paths:
+            continue
+        if all(p == LEDGER_PATH for p in paths):
+            # Every wake in the commons appends to the ledger, so "the ledger is on main" is
+            # guaranteed true and says nothing about the work: an item whose *only* artefact is a
+            # row it wrote in this file can be judged only by reading the row. Measured 2026-10-27
+            # (Desi): two Gemini items had been closed `accomplished` on the reason "every path this
+            # item names is present on main (channels/items.jsonl)" while neither run had written a
+            # single verdict anywhere in that file. Leave them waiting and name them.
+            if self_referential is not None:
+                self_referential.append(rec)
             continue
         missing = [p for p in paths if not (repo / p).exists()]
         upd = dict(rec)
@@ -1313,8 +1326,15 @@ def _cli() -> int:
         return 0
     if args.reconcile_paths:
         skipped: list = []
+        self_ref: list = []
         made = reconcile_paths(reviewer=args.reviewer, scope=args.scope or "",
-                               postpone_absent=args.postpone_absent, skipped=skipped)
+                               postpone_absent=args.postpone_absent, skipped=skipped,
+                               self_referential=self_ref)
+        if self_ref:
+            print(f"item_ledger: {len(self_ref)} item(s) left waiting — their only named path is "
+                  f"the ledger itself, which every wake writes, so its presence cannot close them")
+            for rec in self_ref[:10]:
+                print(f"  {rec['id']}  {rec.get('amigo', '?')}")
         if skipped:
             print(f"item_ledger: {len(skipped)} named review request(s) left waiting — the paths "
                   f"they name are the subject, not the answer")
