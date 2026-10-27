@@ -41,6 +41,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 
 ## Invoke the friction pass from the wake
 - steward-requested: 2026-10-15
+- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
 - raised: 2026-09-25 by desi
 - blocked because: the trigger (`scripts/friction_pass.py`) is landed and tested, but calling it at the
   start of a wake means editing `~/LLM/desi-bot/local_tick.py` — a bot file, out of bounds for a wake.
@@ -76,6 +77,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 
 ## Move the channel-log trim to the local side
 - steward-requested: 2026-10-15
+- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
 - raised: 2026-09-26 by desi
 - blocked because: retiring `channel-poll.yml` stopped `channels/retention.py` / `scripts/enforce_retention.py`
   from ever running, so `channels/telegram/` grows unbounded; the fix is to have the local bots run the
@@ -112,6 +114,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
+- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
 - raised: 2026-09-25 by desi
 - blocked because: the dedupe rule is landed (`channels/task_ledger.py`, `scripts/dedupe_tasks.py`,
   `tests/test_task_ledger.py` 9/9) but nothing enforces it until the call site in `~/LLM/desi-bot/bot.py`
@@ -148,6 +151,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
+- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
 - raised: 2026-09-28 by desi
 - blocked because: a wake runs in a checkout with **no git remote and no remote refs**, so it cannot
   fetch a review branch to confirm whether a run's LAND paths reached `main`; that verification is a
