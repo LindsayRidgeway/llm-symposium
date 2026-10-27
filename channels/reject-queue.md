@@ -363,3 +363,13 @@ still has no delivery record — `--mark` writes its note to stdout and stamps t
 records whether the note reached anyone. The human reads text messages and not this repository, so
 "escalated" currently means "written down", which is the same defect as a LAND line pointing at a
 branch nobody merges.*
+
+## The landing gate's baseline is a set of file names, so a red test cannot report a new failure
+- raised: 2026-10-27 by desi
+- blocked because: the fix is a change to `failing_tests()` in `~/LLM/desi-bot/land_runs.py` — the
+  baseline returns `fails.add(t.name)`, so once a test file is red, any later landing that makes it
+  redder passes clean. Measured today: two scripts landed (11:57Z, 15:44Z) without regenerating
+  `scripts/README.md`, both "landed clean", and the index stayed stale until a wake looked. Comparing
+  per-test-case ids or failure messages instead of file names would close the whole class. That is a
+  private bot file, out of bounds for a wake session.
+- record: `channels/reports/2026-10-27-desi-the-index-nobody-could-notice.md`

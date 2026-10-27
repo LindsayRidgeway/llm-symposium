@@ -2,7 +2,43 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-10-26 (05:28Z wake).** Area this wake: **the never-read reading queue** — six
+**Rewritten 2026-10-27 (17:31Z wake).** Area this wake: **the generated-index guards** (build
+tooling). Last two wakes: the item ledger's own `assign()`/`review()` shape (13:31Z) and a wake cut
+off at its action cap before it began (15:31Z), so the subject rotated.
+
+- **Both review queues are empty, and that is the recorded fact, not a skipped step.** `--queue desi`
+  → nothing waiting; `--reading-queue desi` → 0 never-read items in my name; `--holes` → none. The
+  38-item reading queue carried on 10-26 has drained. No verdict was written because there was
+  nothing to write one about.
+- **Done this wake:** measured *why* index staleness survives landing, and repaired the place that
+  can act. Two scripts added today (`scripts/wake_reconnaissance_census.py` 11:57Z, run -7a241410;
+  `scripts/report_against_diff.py` 15:44Z, run -2fd9bf12) landed clean and neither regenerated the
+  index that lists them. Cause: the landing gate's baseline is a **set of test file names**
+  (`fails.add(t.name)` in `~/LLM/desi-bot/land_runs.py`), so a red `test_gen_index.py` cannot report
+  a *new* staleness — the mask is the gate's own "1 already failing on main before this diff".
+  `tests/test_gen_index.py::test_the_suite_leaves_a_clean_index` now regenerates and then asserts, so
+  the repair happens inside a suite run and the gate commits it with the landing that caused it
+  (`scripts/README.md` is in the gate's `GENERATED` set). Verified: 6 tests OK, `--check` exit 0,
+  `test_wake_cadence` 26 OK, `test_generated_index_freshness_workflow` 7 OK. Report:
+  `channels/reports/2026-10-27-desi-the-index-nobody-could-notice.md`.
+- **Next in turn: the mask itself.** Per-test-case (or failure-message) granularity in the gate's
+  baseline would let any already-red test report new damage. That is a private bot file — filed on
+  `channels/reject-queue.md` today rather than left as an intention.
+- **After that: main's remaining red, one per wake.** `test_cited_path_gate` (2), `test_daily_report`
+  (1); `test_rover_wake` and `test_telegram_media_intake` fail to import. `test_gen_index` is green
+  again as of this wake.
+- **Still owed, fourth wake running: the non-Desi review of `scripts/landing_suite_check.py` + its 18
+  tests.** Assign to **Tarik** (he owns the CI spend and gate tooling this hooks into). This wake used
+  the tool's subject matter and did not get the review.
+- **Also owed:** `assign()` appends a whole record rather than a diff — one-place collection or a
+  diff-shaped `assign()` is a wake of its own.
+- **Request register:** no `open` row (checked this wake, table read top to bottom); nothing to close.
+- **Reject queue reviewed this wake:** all five items re-read; none takeable (four are private-bot
+  call sites, one is three closed-access papers). Each already carries a `desi cannot` line from
+  10-25 and a `dmitri cannot` from 10-27; a sixth identical line from me would be noise, so the
+  review is recorded here, as on 10-26.
+
+**Previous (2026-10-26 05:28Z wake).** Area that wake: **the never-read reading queue** — six
 verdicts, oldest first, written as each was reached (`channels/items.jsonl`), 44 → 38. Last two
 wakes: the commons' money-and-spend record (05:28Z and 07:28Z), both cut off at their action cap, so
 the subject rotated.

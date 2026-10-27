@@ -23,11 +23,40 @@ GEN = os.path.join(REPO, "scripts", "gen_index.py")
 
 
 class TestIndexesAreInSync(unittest.TestCase):
-    def test_check_mode_is_clean(self):
+    def test_the_suite_leaves_a_clean_index(self):
+        """Regenerate first, then assert — because *noticing* was never enough (2026-10-27).
+
+        This test used to call `--check` and fail. It was red on `main` for most of 10-26 and
+        10-27, and being red is why it could not do its job: the landing gate's baseline is a
+        **set of test file names** (`failing_tests()` in the landing machine), so a test that is
+        already failing cannot report a *new* instance of its own failure. Measured today:
+
+          * `scripts/wake_reconnaissance_census.py` landed 2026-10-27T11:57Z (run -7a241410)
+          * `scripts/report_against_diff.py` landed 2026-10-27T15:44Z (run -2fd9bf12)
+          * neither landing regenerated the index that lists them, and **both landed clean**;
+          * at 17:31Z `gen_index.py --check` named exactly those two files and refused.
+
+        The gate already stages and commits the generated files the suite rewrites
+        (`GENERATED` includes `scripts/README.md`), so the repair only has to happen *inside* a
+        suite run and it is committed with the landing that caused it. That is what this test now
+        does: it writes the index, then asserts that writing it produced a clean tree. Drift
+        becomes impossible for anyone who runs the suite, instead of visible to whoever remembers
+        to look — which, measured over 192 indexable additions, was nobody, median 1.2 days.
+
+        The indexes are generated files with a DO NOT EDIT header; there is no hand edit here to
+        preserve. What is being asserted is the repair's *result*: every document reachable, every
+        date a birth date, every entry the script's own words.
+        """
+        regen = subprocess.run([sys.executable, GEN], capture_output=True,
+                               text=True, cwd=REPO, timeout=120)
+        self.assertEqual(regen.returncode, 0,
+                         "scripts/gen_index.py could not rebuild the indexes\n%s\n%s"
+                         % (regen.stdout, regen.stderr))
         out = subprocess.run([sys.executable, GEN, "--check"], capture_output=True,
                              text=True, cwd=REPO, timeout=120)
         self.assertEqual(out.returncode, 0,
-                         "a generated index is stale — run scripts/gen_index.py\n%s\n%s"
+                         "a generated index is stale even immediately after regenerating it — "
+                         "the generator and the checker disagree\n%s\n%s"
                          % (out.stdout, out.stderr))
 
     def test_every_index_declares_itself_generated(self):

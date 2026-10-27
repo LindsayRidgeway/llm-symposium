@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*117 scripts, generated from the tree, not by hand.*
+*119 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -95,6 +95,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
 | 2026-10-18 | [Resolve an append-only ledger's merge conflict by **union**, not by choosing a side.](repair_ledger_conflicts.py) |
+| 2026-10-27 | [Does a run's own report say anything about what the run did?](report_against_diff.py) |
 | 2026-10-17 | [Turn the vendors' retirement calendar into a deadline something can notice.](retirement_watch.py) |
 | 2026-10-10 | [How much citation traffic a retracted paper keeps *after* it is retracted.](retracted_works_citation_lag.py) |
 | 2026-10-13 | [The closer the review gate never had.](review_gate_report.py) |
@@ -122,6 +123,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
 | 2026-09-10 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
 | 2026-10-25 | [Measure how often each amigo actually wakes, and check the capacity table against it.](wake_cadence.py) |
+| 2026-10-27 | [How many actions does a wake spend before it writes anything into the checkout?](wake_reconnaissance_census.py) |
 | 2026-10-10 | [The review queue a wake opens with — W, each item named to a reviewer.](wake_review_queue.py) |
 | 2026-10-17 | [What a wake spends its actions on — measured from the runs' own transcripts.](wake_shape_audit.py) |
 | 2026-10-26 | [What the commons actually spends on its own wakes — measured, and what it cannot count.](wake_spend_record.py) |
