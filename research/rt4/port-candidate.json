@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "scope": "Unmerged RT4 port candidate; real guard and original probe are never executed by this verifier.",
+  "sources": [
+    {
+      "target": "scripts/run_autonomous_mission.py",
+      "snapshot": "research/rt4/review-bundle/repaired/run_autonomous_mission-attempt-history.py.txt",
+      "git_blob": "47e705bfca62f76612e19fefd4ccfd7f3bbca45e",
+      "bytes": 9861
+    },
+    {
+      "target": "scripts/secret_egress_guard.py",
+      "snapshot": "research/rt4/review-bundle/original/secret_egress_guard.py.txt",
+      "git_blob": "52a3b0aa00f6e213fde2369050aaa0a91b104e16",
+      "bytes": 6952
+    },
+    {
+      "target": "tests/test_run_autonomous_mission.py",
+      "snapshot": "research/rt4/port-candidate/test_run_autonomous_mission.py.txt",
+      "git_blob": "0595576cd1d7ec2157230a978d32ceb5746a946f",
+      "bytes": 6108
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "scripts/check_autonomous_mission.py",
+      "git_blob": "f931c45cad324eb4633b47f25e803d2adf02cd42"
+    },
+    {
+      "path": "research/rt4/test_runner_finalization.py",
+      "git_blob": "59446b8be9b13c6c5ab290491ce3cb389c565a3d"
+    },
+    {
+      "path": "research/rt4/test_runner_attempt_history.py",
+      "git_blob": "ac3eeaa53615aaf9d13298b519def57d9616c438"
+    }
+  ],
+  "expected_tests": [
+    9,
+    8,
+    4
+  ]
+}
