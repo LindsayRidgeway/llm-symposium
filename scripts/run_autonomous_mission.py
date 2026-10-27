@@ -67,16 +67,18 @@ def repairable(report: dict, log: Path) -> bool:
 
 def _run_attempts(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
         artifacts: Path, worker: list[str] | None = None,
-        timeout: int = SECONDS_PER_ATTEMPT, *, secret_guard) -> dict:
+        timeout: int = SECONDS_PER_ATTEMPT, *, secret_guard, attempts: list) -> dict:
     artifacts.mkdir(parents=True, exist_ok=True)
     current = instructions
-    attempts = []
     outcome = {"ok": False, "attempts": attempts,
                "quality": "mechanical contract only; peer review still required"}
     for index, turns in enumerate(TURN_BUDGETS, start=1):
         attempt_dir = artifacts / f"attempt-{index}"
         attempt_dir.mkdir()
         log = attempt_dir / "worker.jsonl"
+        attempt = {"number": index, "max_turns": turns,
+                   "worker_exit": None, "checker_exit": None}
+        attempts.append(attempt)
         argv = (worker or ["goose"]) + [
             "run", "--with-builtin", "developer", "--instructions", str(current),
             "--max-turns", str(turns), "--output-format", "stream-json"]
@@ -85,8 +87,7 @@ def _run_attempts(repo: Path, instructions: Path, mission: Path, checker: Path, 
         except OSError as exc:
             code = 127
             log.write_text(str(exc), encoding="utf-8")
-        attempt = {"number": index, "max_turns": turns, "worker_exit": code}
-        attempts.append(attempt)
+        attempt["worker_exit"] = code
         head = subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
         if head != base:
             outcome["reason"] = "worker changed HEAD; stopping without repair"
@@ -96,6 +97,7 @@ def _run_attempts(repo: Path, instructions: Path, mission: Path, checker: Path, 
             sys.executable, str(checker), "--repo", str(repo), "--mission", str(mission),
             "--base", base, "--artifacts", str(attempt_dir)
         ], capture_output=True, text=True, env=secret_guard.sanitized_environment(), timeout=30)
+        attempt["checker_exit"] = checked.returncode
         (attempt_dir / "checker-output.txt").write_text(checked.stdout + checked.stderr, encoding="utf-8")
         guard_report = secret_guard.scan_run(repo, attempt_dir, base, redact=True)
         (attempt_dir / "secret-egress-report.json").write_text(json.dumps(guard_report, indent=2) + "\n", encoding="utf-8")
@@ -143,16 +145,23 @@ def run(repo: Path, instructions: Path, mission: Path, checker: Path, base: str,
     """Finalize the whole artifacts tree on success and failure; scan failures block."""
     artifacts.mkdir(parents=True, exist_ok=True)
     secret_guard = None
+    attempts = []
     outcome = {"ok": False, "attempts": [],
                "quality": "mechanical contract only; peer review still required",
                "reason": "orchestration interrupted before completion"}
     try:
         secret_guard = load_secret_guard()
         outcome = _run_attempts(repo, instructions, mission, checker, base,
-                                artifacts, worker, timeout, secret_guard=secret_guard)
+                                artifacts, worker, timeout, secret_guard=secret_guard,
+                                attempts=attempts)
     except Exception as exc:
         # Exception text may contain worker/tool data; retain only its type.
-        outcome = {"ok": False, "attempts": [],
+        # Preserve observed numeric facts, without replaying tool/report text.
+        summary = [{key: (attempt.get(key) if type(attempt.get(key)) is int else None)
+                    for key in ("number", "max_turns", "worker_exit", "checker_exit")}
+                   for attempt in attempts]
+        outcome = {"ok": False, "attempts": summary,
+                   "attempt_history": "numeric summary after exception",
                    "quality": "mechanical contract only; peer review still required",
                    "reason": "orchestration failed: " + type(exc).__name__}
     finally:
