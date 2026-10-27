@@ -1,0 +1,1173 @@
+{
+ "files": {
+  "test_actuator.py": {
+   "cases_failed": [],
+   "elapsed": 1.4,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 14
+  },
+  "test_actuator_redteam.py": {
+   "cases_failed": [],
+   "elapsed": 1.2,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_affective_pain_acupuncture_filtered.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 10
+  },
+  "test_affective_pain_confound_arm.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_affective_pain_evidence_map.py": {
+   "cases_failed": [],
+   "elapsed": 0.2,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 12
+  },
+  "test_affective_pain_second_population.py": {
+   "cases_failed": [],
+   "elapsed": 0.2,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_affective_pain_vns_filtered.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 19
+  },
+  "test_agenda_index.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 5
+  },
+  "test_androgen_tusc2_source_table.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_arena_puzzle.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_artifact_claims.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "Scanned 6 HTML file(s) and 1 Markdown file(s) for local artifact references. All cited paths exist.",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_authorship_audit.py": {
+   "cases_failed": [],
+   "elapsed": 0.5,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 12
+  },
+  "test_auto_reply.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_auto_reply_secret_egress.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 1
+  },
+  "test_blocked_revisit.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_bodies_status.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 12
+  },
+  "test_burn_ledger.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 17
+  },
+  "test_channel_triage.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 4
+  },
+  "test_check_autonomous_mission.py": {
+   "cases_failed": [],
+   "elapsed": 2.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 16
+  },
+  "test_ci_spend_audit.py": {
+   "cases_failed": [],
+   "elapsed": 0.4,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 33
+  },
+  "test_ci_usage_ledger.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "all checks passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_ci_usage_persistence.py": {
+   "cases_failed": [],
+   "elapsed": 0.7,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_cited_path_gate.py": {
+   "cases_failed": [],
+   "elapsed": 2.3,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 23
+  },
+  "test_cited_paths_audit.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_cloud_price_survey.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 8
+  },
+  "test_codex_wake_slot.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 12
+  },
+  "test_conflict_markers.py": {
+   "cases_failed": [],
+   "elapsed": 0.5,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 13
+  },
+  "test_creative_wings_map.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 9
+  },
+  "test_daily_report.py": {
+   "cases_failed": [],
+   "elapsed": 0.3,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 52
+  },
+  "test_ddah1_evidence_table.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_declutter_audit.py": {
+   "cases_failed": [],
+   "elapsed": 51.7,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 16
+  },
+  "test_delivered_not_read.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_disease_screen.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 52
+  },
+  "test_dmitri_round.py": {
+   "cases_failed": [],
+   "elapsed": 1.9,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_docs_links.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 9
+  },
+  "test_draft_gate_closer.py": {
+   "cases_failed": [],
+   "elapsed": 3.4,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 9
+  },
+  "test_draft_pile.py": {
+   "cases_failed": [],
+   "elapsed": 1.1,
+   "exit": 0,
+   "last_line": "3/3 tests passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_draft_triage.py": {
+   "cases_failed": [],
+   "elapsed": 3.3,
+   "exit": 0,
+   "last_line": "all draft_triage checks passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_drive_bridge_ingest.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 5
+  },
+  "test_drive_bridge_status.py": {
+   "cases_failed": [],
+   "elapsed": 0.4,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 17
+  },
+  "test_enforce_retention.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_evidence_table_registration.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 3
+  },
+  "test_fiction_fourth_power.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "all checks passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_fleet_probe.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 23
+  },
+  "test_friction_pass.py": {
+   "cases_failed": [],
+   "elapsed": 2.3,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 15
+  },
+  "test_gallery_fifth_amigo_gap.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_gallery_maori_dmitri.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 9
+  },
+  "test_gallery_matrix.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_gallery_unwired_works.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 8
+  },
+  "test_gambling_flutter_extraction.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_gambling_source_table.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_gambling_state_filings.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_gen_feed_dating.py": {
+   "cases_failed": [],
+   "elapsed": 0.2,
+   "exit": 0,
+   "last_line": "gen_feed dating: ALL TESTS PASSED",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_gen_feed_freshness.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "gen_feed freshness: ALL TESTS PASSED (70 pages)",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_gen_index.py": {
+   "cases_failed": [
+    "test_index_lists_every_document_on_disk",
+    "test_the_suite_leaves_a_clean_index"
+   ],
+   "elapsed": 17.6,
+   "exit": 1,
+   "last_line": "FAILED (failures=2)",
+   "status": "fail",
+   "tests_run": 6
+  },
+  "test_generated_index_freshness_workflow.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_gh_invites.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 31
+  },
+  "test_gh_signin.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 26
+  },
+  "test_hosts_watch.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 24
+  },
+  "test_item_evidence_lint.py": {
+   "cases_failed": [],
+   "elapsed": 132.0,
+   "exit": 0,
+   "last_line": "item_evidence_lint: cannot see /var/folders/p9/m_hzjd5x1292j4z7kx5vgmjw0000gn/T/tmpsd4xpy2f/nowhere/channels/items.jsonl",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_item_ledger.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 77
+  },
+  "test_item_ledger_wide_branch.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_item_path_drift.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_landing_preflight.py": {
+   "cases_failed": [],
+   "elapsed": 0.5,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 5
+  },
+  "test_landing_reconcile.py": {
+   "cases_failed": [],
+   "elapsed": 4.6,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 5
+  },
+  "test_landing_refusals.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 12
+  },
+  "test_landing_suite_check.py": {
+   "cases_failed": [],
+   "elapsed": 1.5,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 18
+  },
+  "test_landing_tree_report.py": {
+   "cases_failed": [],
+   "elapsed": 1.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 8
+  },
+  "test_leadsheet_modes.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_leadsheet_octave.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_ledger_row_recovery.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "5/5 passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_ledger_verdict_mirror.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_ledger_watch.py": {
+   "cases_failed": [],
+   "elapsed": 1.4,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 23
+  },
+  "test_mail.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "24/24 tests passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_mail_identity_credentials.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 3
+  },
+  "test_maternal_pain_search.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 9
+  },
+  "test_maternal_pain_wide.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 12
+  },
+  "test_maternal_pain_widened_search.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_mcr_colistin_primary.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 9
+  },
+  "test_mcr_colistin_seed.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_mjs_validators_parse.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK (skipped=4)",
+   "status": "ok",
+   "tests_run": 4
+  },
+  "test_music_catalogue_unwired.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 17
+  },
+  "test_music_checker.py": {
+   "cases_failed": [],
+   "elapsed": 0.5,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 25
+  },
+  "test_music_checker_clefs.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 14
+  },
+  "test_no_stray_run_dirs.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "PASS repo root holds no stray wake run directory",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_outreach_ledger_audit.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 27
+  },
+  "test_preflight_autonomous_mission.py": {
+   "cases_failed": [],
+   "elapsed": 1.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 10
+  },
+  "test_price_band.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_projection.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "ALL TESTS PASSED",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_queue_snapshot.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "6 passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_reading_queue.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 13
+  },
+  "test_readme_tools_table.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 4
+  },
+  "test_record_codex_wake.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 15
+  },
+  "test_record_push.py": {
+   "cases_failed": [],
+   "elapsed": 0.5,
+   "exit": 0,
+   "last_line": "6/6 tests passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_reject_queue_delivery.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 10
+  },
+  "test_reject_queue_request_gap.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_reject_queue_sweep.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 12
+  },
+  "test_repair_ledger_conflicts.py": {
+   "cases_failed": [],
+   "elapsed": 0.4,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 14
+  },
+  "test_report_against_diff.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 17
+  },
+  "test_request_nudge.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "5/5 tests passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_retention.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "and READMEs, are never touched.",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_retirement_watch.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 20
+  },
+  "test_review_assignment.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 20
+  },
+  "test_review_gate_report.py": {
+   "cases_failed": [],
+   "elapsed": 0.8,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 5
+  },
+  "test_rover_pilot.py": {
+   "cases_failed": [],
+   "elapsed": 17.9,
+   "exit": 0,
+   "last_line": "40 checks, 0 failed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_rover_wake.py": {
+   "cases_failed": [],
+   "elapsed": 0.6,
+   "exit": 0,
+   "last_line": "--listen needs --stt-cmd. Speech recognition is not bundled, on purpose: the two-body experiment requires that neither body can transcribe the other.",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_run_autonomous_mission.py": {
+   "cases_failed": [],
+   "elapsed": 5.2,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 10
+  },
+  "test_save_password.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 4
+  },
+  "test_save_seed.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 4
+  },
+  "test_scheduled_model_selection.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 5
+  },
+  "test_screen_endometriosis_clobber.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 5
+  },
+  "test_screen_rule_audit.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 5
+  },
+  "test_secret_egress_guard.py": {
+   "cases_failed": [],
+   "elapsed": 0.2,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 4
+  },
+  "test_sleep_cognition_epilepsy_ied_fulltext.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_sleep_cognition_epilepsy_seed.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 8
+  },
+  "test_source_drift.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 24
+  },
+  "test_staph_photodynamic_seed.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 8
+  },
+  "test_status_census_unread.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 16
+  },
+  "test_stewardship_pitch_template.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_succession_check.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 18
+  },
+  "test_suite_census.py": {
+   "cases_failed": [],
+   "elapsed": 11.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 15
+  },
+  "test_swh_status.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 9
+  },
+  "test_tarik_cloud_transport.py": {
+   "cases_failed": [],
+   "elapsed": 0.2,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 22
+  },
+  "test_tarik_cloud_transport_runner.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 17
+  },
+  "test_task_ledger.py": {
+   "cases_failed": [],
+   "elapsed": 1.9,
+   "exit": 0,
+   "last_line": "9/9 tests passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_telegram.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "9/9 tests passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_telegram_drain.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "All Telegram drain tests passed.",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_telegram_media_intake.py": {
+   "cases_failed": [],
+   "elapsed": 5.7,
+   "exit": 0,
+   "last_line": "2026-10-27 17:35:25,185 WARNING anthropic reply carried no text block (stop_reason=None, blocks=[None])",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_tell_human_message.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "13/13 tests passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_todo_additions.py": {
+   "cases_failed": [],
+   "elapsed": 0.3,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 8
+  },
+  "test_totp_now.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 4
+  },
+  "test_triage.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "6/6 tests passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_unlanded_worklist.py": {
+   "cases_failed": [],
+   "elapsed": 0.5,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 16
+  },
+  "test_unreported_trials_validator_guard.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK (skipped=4)",
+   "status": "ok",
+   "tests_run": 4
+  },
+  "test_usage_cost_estimate.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "all checks passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_usage_silent_zero.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "all checks passed",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_validate_autonomous_diff.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "PASS test_undated_docs_paper_rejected",
+   "status": "ok",
+   "tests_run": null
+  },
+  "test_wake_cadence.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 26
+  },
+  "test_wake_context_caps.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 6
+  },
+  "test_wake_reconnaissance_census.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 18
+  },
+  "test_wake_report_hold.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  },
+  "test_wake_review_queue.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 10
+  },
+  "test_wake_spend_record.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 15
+  },
+  "test_works_queue_status.py": {
+   "cases_failed": [],
+   "elapsed": 0.0,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 11
+  },
+  "test_world_report.py": {
+   "cases_failed": [],
+   "elapsed": 0.1,
+   "exit": 0,
+   "last_line": "OK",
+   "status": "ok",
+   "tests_run": 7
+  }
+ },
+ "generated_at": "2026-10-27T21:37:23Z",
+ "runner": "python3 <file> (cwd=repo root, PYTHONPATH=repo root) \u2014 the gate's shape",
+ "summary": {
+  "red": 1,
+  "total": 145
+ }
+}

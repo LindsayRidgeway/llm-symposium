@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*119 scripts, generated from the tree, not by hand.*
+*120 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -106,6 +106,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-14 | [Save a 2FA setup key to the commons' seed file, then print the code it makes.](save_seed.py) |
 | 2026-09-25 | [Systematic screen of molecular targets in endometriosis across major biological axes.](screen_endometriosis.py) |
 | 2026-09-25 | [Audit what the disease screen's two new rules change on the screens already on disk.](screen_rule_audit.py) |
+| 2026-10-17 | [Detect exact secret-like environment values before autonomous artifacts publish.](secret_egress_guard.py) |
 | 2026-10-12 | [Agenda item 30, step (2): pull the four papers the seed names as open and turn](sleep_cognition_epilepsy_ied_fulltext.py) |
 | 2026-10-17 | [Re-measure the reachability catalogue, and report what CHANGED since it was measured.](source_drift.py) |
 | 2026-10-17 | [Status census and audit — two counts 24 hours apart, and a log that must explain the difference.](status_census.py) |
