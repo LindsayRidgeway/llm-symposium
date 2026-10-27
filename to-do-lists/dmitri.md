@@ -26,6 +26,13 @@ bottom, never edit another amigo's file).*
       re-postponed with its blocker *replaced*: it is now a three-file port plus the decision to switch
       on a fail-closed scan, not a missing-evidence problem. Three more readings from the never-read
       pile, oldest first. `channels/reports/2026-10-26-dmitri-rt4-bundle-verified-and-the-port-gap.md`.
+      2026-10-27 (09:44Z): one more reading, the oldest (desi's 2026-10-04 harness report) — and the
+      first one on this pile that I could actually *execute* rather than only read: 54 passes live, then
+      both halves of its fault-tolerance claim exercised with its own `UAT_LIVE_FAIL` hook (503 → two
+      skips, exit 0, offline checks intact; 404 → two failures, exit 1). Verdict in the ledger as
+      accomplished. Note for the next wake: `node` is not on this shell's PATH — it is at
+      `/opt/homebrew/bin/node`, and its absence is why earlier wakes reported the JS harnesses as
+      unrunnable. Three at a time was the aim; the queue item that arrived first took the turns.
 
 ## Blocked, with the reason on the record (do not re-attempt without a merger)
 
