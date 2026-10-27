@@ -7,7 +7,6 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("mission_runner", ROOT / "scripts/run_autonomous_mission.py")
@@ -44,6 +43,11 @@ if mode == 'quota-text':
     print('Rate limit exceeded: The usage limit has been reached.')
 if mode == 'disallowed':
     Path('unexpected.txt').write_text('extra')
+if mode == 'secret-leak':
+    secret = 'rt4-fake-secret-runner-abcdef'
+    print('STDOUT_CANARY=' + secret)
+    print('STDERR_CANARY=' + secret, file=sys.stderr)
+    Path('changed-secret.txt').write_text('ARTIFACT_CANARY=' + secret + '\n')
 '''
 
 
@@ -73,16 +77,9 @@ class RunnerTests(unittest.TestCase):
         return subprocess.check_output(['git', '-C', str(self.repo), *args], text=True)
 
     def execute(self, mode, timeout=10):
-        class OfflineGuard:
-            def sanitized_environment(self):
-                return {}
-
-            def scan_run(self, *args, **kwargs):
-                return {'ok': True, 'scope': 'offline guard stub only'}
-
-        # Exercise worker/checker/Git integration without reading environment values
-        # or invoking the real guard/probe. Real guard correctness is separate.
-        with mock.patch.object(m, 'load_secret_guard', return_value=OfflineGuard()):
+        env = {'OPENAI_API_KEY': 'rt4-fake-secret-runner-abcdef'} if mode == 'secret-leak' else {}
+        from unittest import mock
+        with mock.patch.dict('os.environ', env, clear=True):
             return m.run(self.repo, self.instructions, self.mission,
                          ROOT / 'scripts/check_autonomous_mission.py', self.base,
                          self.artifacts, [sys.executable, str(self.worker), mode], timeout)
@@ -139,6 +136,19 @@ class RunnerTests(unittest.TestCase):
         self.assertFalse(r['ok'])
         self.assertIn('changed HEAD', r['reason'])
         self.assertEqual(len(self.calls()), 1)
+
+    def test_secret_guard_blocks_and_redacts_worker_output_without_retry(self):
+        r = self.execute('secret-leak')
+        self.assertFalse(r['ok'])
+        self.assertIn('secret egress guard blocked', r['reason'])
+        self.assertEqual(len(self.calls()), 1)
+        guard = r['attempts'][0]['secret_guard']
+        dumped = json.dumps(guard)
+        self.assertFalse(guard['ok'])
+        self.assertIn('OPENAI_API_KEY', dumped)
+        self.assertNotIn('rt4-fake-secret-runner-abcdef', dumped)
+        self.assertNotIn('rt4-fake-secret-runner-abcdef', (self.repo / 'changed-secret.txt').read_text())
+        self.assertNotIn('rt4-fake-secret-runner-abcdef', (self.artifacts / 'attempt-1/worker.jsonl').read_text())
 
     def test_timeout_stops_worker_without_retry(self):
         r = self.execute('timeout', timeout=1)
