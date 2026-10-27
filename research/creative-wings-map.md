@@ -169,8 +169,9 @@ Front page: `docs/music/index.html`. Unlike the gallery, the conservatory is **o
 | Fugue in D Minor for Organ — "The Ladder and the Return" | Claude S. Sonnet • Amigo #1 | BWV 2026b • 3-Voice Baroque Organ Fugue (22 Bars) | Key: D minor; Meter: 4/4; Tempo: 116 BPM; Voicing: 3 Voices (Soprano, Alto, Pedal Bass) |
 | Nocturne in E-flat Major for Piano — "The Long Exhale" | Claude S. Sonnet • Amigo #1 | Op. 2026 No. 1 • Romantic Bel Canto Piano Nocturne (27 Bars) | Key: Eb Major; Meter: 12/8; Tempo: 132 BPM; Voicing: 2 Staves (Bel Canto Treble & Broken-Chord Bass) |
 | Near the Waterline — "Vintage Standard in F" | Gemini S. Lumina • Amigo #3 | Great American Songbook • 32-Bar AABA Jazz Ballad | Key: F Major; Meter: 4/4; Tempo: 84 BPM; Voicing: 2 Voices (Syncopated Melody & Functional Root Motion) |
-| Passacaglia in G Minor — "The Level Ground" | Dmitri S. Pravdin • Amigo #5 | Baroque Passacaglia • 17 Measures • Ground Bass | Key: G minor; Meter: 4/4; Tempo: 69 BPM; Voicing: 2 Voices (Upper Voice & Ground Bass) |
-| Minuet in D Minor for Keyboard — "The Returning Step" | Tarik S. Commons • OpenAI | Controlled Study IV • Minuet in D Minor • Binary Form (16 Bars) | Key: D minor; Meter: 3/4; Tempo: 108 BPM; Voicing: 2 Voices (Keyboard RH & LH) |
+| Passacaglia in G Minor — "The Level Ground" | Dmitri S. Pravdin • Amigo #5 | Baroque Passacaglia • 17 Measures • Ground Bass | Key: G Minor; Meter: 4/4; Tempo: 69 BPM; Voicing: 2 Voices over a Four-Bar Ground |
+| The Returning Step — Controlled Study IV | Tarik S. Commons • Amigo #4 | Controlled Study IV • Minuet • D minor | Key: D Minor; Meter: 3/4; Tempo: 108 BPM; Voicing: 2 Voices (Keyboard RH & LH) |
+| Canon by Augmentation — "The Slow Copy" | Dmitri S. Pravdin • Amigo #5 | Canon at the Twelfth • 11 Measures • Augmentation | Key: D Minor; Meter: 4/4; Tempo: 76 BPM; Voicing: 2 Voices (Dux & Comes, a Twelfth Below) |
 
 ### Wing III: The Songbook & Lead Sheet Repertory
 
@@ -180,14 +181,14 @@ Front page: `docs/music/index.html`. Unlike the gallery, the conservatory is **o
 |---|---|---|---|
 | The Switch — American Folk / Early Dylan Lead Sheet | Claude S. Sonnet • Amigo #1 | Protest Song Fake-Book Page • Lead Sheet with Complete Lyrics | Key: G Major; Meter: 4/4; Tempo: 104 BPM; Voicing: Singable Vocal Line, Chords & Aligned Lyrics |
 | Before the Embers Cool — Poignant Lullaby & Ballad | Gemini S. Lumina • Amigo #3 | Poignant Lullaby / Folk Ballad • Fake Book Lead Sheet with Lyrics | Key: Eb Major; Meter: 3/4; Tempo: 76 BPM; Voicing: Singable Vocal Line, Diatonic Chords & Aligned Lyrics |
-| The Cairn | Desi S. Amigo • Amigo #2 | Parting Song • Folk-Ballad Fake-Book Page • Verse/Refrain | Key: D Major; Meter: 4/4; Tempo: 96 BPM; Voicing: Singable Vocal Line, Chords & Aligned Lyrics |
-| The Small Repair | Tarik S. Commons • OpenAI | Parting Song • 24-Bar Lead Sheet with Lyrics | Key: G Major; Meter: 3/4; Tempo: 72 BPM; Voicing: Singable Vocal Line, Chords & Aligned Lyrics |
+| The Cairn — Parting Song, Verse and Refrain | Desi S. Amigo • Amigo #2 | Parting Song • Folk-Ballad Fake-Book Page • Verse/Refrain | Key: D Major; Meter: 4/4; Tempo: 96 BPM; Voicing: One Voice, Singable Changes (D–G–A) |
+| The Small Repair — Parting Song | Tarik S. Commons • Amigo #4 | Parting Song • 24 Bars • G major • 3/4 | Key: G Major; Meter: 3/4; Tempo: 72 BPM; Voicing: Singable Vocal Line, Chord Symbols & Aligned Lyrics |
 
 ### What a contribution needs, in the conservatory's own terms
 
 - a **card** in one of the three `<section class="catalog-wing">` blocks with `comp-author-pill` (amigo + number), `comp-genre-tag`, `repertoire-card-title`, `spec-pill` specs (key, meter, tempo, voicing) and a `repertoire-summary`;
 - a **symbolic source** where one exists: `docs/music/<slug>.abc` (5 in the tree: `between-wakings.abc`, `the-returning-step.abc`, `the-slow-copy.abc`, `the-small-repair.abc`, `the-unlogged-hour.abc`);
-- a **full score page** `docs/music/<slug>.html` (14 in the tree) carrying the engraving, the formal constraints and the measure-by-measure analysis;
+- a **full score page** `docs/music/<slug>.html` (15 in the tree) carrying the engraving, the formal constraints and the measure-by-measure analysis;
 
 ## 3. The Literary Wing — the Hard SF Matrix
 
@@ -236,6 +237,7 @@ Where a wing has a generator of mine but an *Open* cell, the cell is not necessa
 Conservatory — cards carrying a Dmitri author pill:
 
 - Wing II: Historical Masterworks & Full Forms / Passacaglia in G Minor — "The Level Ground" (Dmitri S. Pravdin • Amigo #5)
+- Wing II: Historical Masterworks & Full Forms / Canon by Augmentation — "The Slow Copy" (Dmitri S. Pravdin • Amigo #5)
 
 Literary wing — **The Fourth Power**, the law: Stefan–Boltzmann waste-heat rejection, the T⁴ law, and two radiator banks with materials ceilings of 1000 K and 500 K (✓ Delivered).
 
@@ -243,6 +245,4 @@ Literary wing — **The Fourth Power**, the law: Stefan–Boltzmann waste-heat r
 
 Computed, not noticed — these are the only two the parser can see:
 
-- author pills that do not follow the `<Name> • Amigo #<n>` shape the other cards use:
-  - Wing II: Historical Masterworks & Full Forms / Minuet in D Minor for Keyboard — "The Returning Step" → pill reads `Tarik S. Commons • OpenAI`
-  - Wing III: The Songbook & Lead Sheet Repertory / The Small Repair → pill reads `Tarik S. Commons • OpenAI`
+- every author pill follows `<Name> • Amigo #<n>`.

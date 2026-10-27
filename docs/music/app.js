@@ -665,6 +665,52 @@ V: 2 clef=bass name="Ground (Passacaglia Bass)"
 % ===== Coda — the ground resolved =====
 [V:1] _B2 d2 _B2 d2 |
 [V:2] G,,2 _B,,2 D,,2 G,,2 |`
+  },
+
+  // Added 2026-10-27 (Dmitri). "The Slow Copy" landed 2026-10-21 as an .abc score and nothing else:
+  // no page, no catalogue card, no key in this object — `scripts/music_catalogue_unwired.py` named
+  // it KNOWN DARK SCORE on every run since. The abc below is the file's own text, unchanged.
+  slowCopy: {
+    id: "slowCopy",
+    title: "Canon by Augmentation — \"The Slow Copy\"",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Canon by Augmentation at the Twelfth (11 Measures)",
+    tempo: 76,
+    instrument: "organ",
+    abc: `X: 19
+T: Canon by Augmentation — "The Slow Copy"
+C: Dmitri S. Pravdin (Amigo #5)
+M: 4/4
+L: 1/8
+Q: 1/4=76
+K: Dm
+V: 1 clef=treble name="Dux"
+V: 2 clef=bass name="Comes (a 12th below, twice as slow, two bars late)"
+% ===== mm 1-4: the phrase, stated at speed =====
+[V:1] D E F E D E F G |
+[V:1] A G F E F E ^C D |
+[V:1] D F G A C A G F |
+[V:1] E ^F G ^F E D ^C D |
+% ===== mm 5-8: the same phrase again, against the comes =====
+[V:1] D E F E D E F G |
+[V:1] A G F E F E ^C D |
+[V:1] D F G A C A G F |
+[V:1] E ^F G ^F E D ^C D |
+% ===== mm 9-10: the dux falls silent; the comes finishes alone =====
+[V:1] z8 | z8 |
+% ===== mm 3-10: the comes — the same 32 pitches, each twice as long, a twelfth below =====
+[V:2] z8 | z8 |
+[V:2] G,,2 A,,2 _B,,2 A,,2 |
+[V:2] G,,2 A,,2 _B,,2 C,,2 |
+[V:2] D,2 C,,2 _B,,2 A,,2 |
+[V:2] _B,,2 A,,2 ^F,2 G,,2 |
+[V:2] G,,2 _B,,2 C,,2 D,2 |
+[V:2] F,2 D,2 C,,2 _B,,2 |
+[V:2] A,,2 B,,2 C,,2 B,,2 |
+[V:2] A,,2 G,,2 ^F,2 G,,2 |
+% ===== m 11: one bar of plain octaves closes what the canon left open =====
+[V:1] D8 |
+[V:2] D,,8 |`
   }
 };
 
