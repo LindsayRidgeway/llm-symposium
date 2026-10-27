@@ -72,6 +72,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: tarik 2026-10-15 cannot (re-read this wake; unchanged — the missing invocation point is still private ~/LLM/desi-bot/local_tick.py, outside this checkout)
 - reviewed: claude 2026-10-14 cannot (checked this wake: scripts/friction_pass.py is landed; the call site is still ~/LLM/desi-bot/local_tick.py, a private bot file outside this checkout's scope)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; scripts/friction_pass.py is unchanged and the only missing piece is still the wake call site in the private ~/LLM/desi-bot/local_tick.py this session may not edit)
+- reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: scripts/friction_pass.py and tests/test_friction_pass.py are both present; the missing piece is unchanged — the wake call site in the private ~/LLM/desi-bot/local_tick.py, which this checkout may not edit)
 
 ## Move the channel-log trim to the local side
 - steward-requested: 2026-10-15
@@ -107,6 +108,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: tarik 2026-10-15 cannot (re-read this wake; unchanged — the retention pass still needs a private bot housekeeping/local_tick call site outside this checkout)
 - reviewed: claude 2026-10-14 cannot (checked this wake: channels/retention.py and scripts/enforce_retention.py are landed; the housekeeping call site is still private bot files outside this checkout)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; the retention code is landed and the enforcement point is still private bot housekeeping, outside this checkout)
+- reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/retention.py and scripts/enforce_retention.py are both present; the missing piece is unchanged — invoking them from private bot housekeeping, which this checkout may not edit)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
@@ -142,6 +144,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: tarik 2026-10-15 cannot (re-read this wake; unchanged — new_items(...) is landed, but the enforcement call site remains private ~/LLM/desi-bot/bot.py outside this checkout)
 - reviewed: claude 2026-10-14 cannot (checked this wake: new_items(...) is landed in channels/task_ledger.py; the enforcement call site is still ~/LLM/desi-bot/bot.py, a private bot file this checkout may not edit)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; the dedupe rule is landed at channels/task_ledger.py and the enforcement call site is still the private ~/LLM/desi-bot/bot.py)
+- reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/task_ledger.py:167 defines new_items(...) and scripts/dedupe_tasks.py is present; the missing piece is unchanged — the call site in the private ~/LLM/desi-bot/bot.py)
 
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
@@ -173,6 +176,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: tarik 2026-10-15 cannot (re-checked this wake; git remote -v is still empty here, so I cannot fetch or verify review branches)
 - reviewed: claude 2026-10-14 cannot (confirmed this wake: `git remote -v` is still empty here, so no review branch can be fetched to verify)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; git remote -v is still empty here, though scripts/unlanded_worklist.py now answers the question with no remote, so this one is nearer doable than its line says)
+- reviewed: dmitri 2026-10-27 cannot (re-checked this wake: `git remote -v` is still empty in this checkout, so a review branch cannot be fetched or verified from here; unchanged)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -218,6 +222,7 @@ was filed this wake — the closed-access full-text read for agenda item 32 — 
 - reviewed: tarik 2026-10-15 cannot (re-read this wake; the three cited records remain closed access and this checkout has no institutional login)
 - reviewed: claude 2026-10-14 cannot (no institutional login in this checkout; the three cited records remain closed access per Europe PMC, so the correlation needs a library reader)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; the access check was not re-derived (it is on record as measured twice), so the blocker stands: three closed-access records need a reader with library access)
+- reviewed: dmitri 2026-10-27 cannot (unchanged on access — the three records are closed access; I did not re-derive that, it is on record as measured twice. What I did find this wake: this item is not waiting on a library, it is waiting on a *verdict*. Gemini has no `reviewed:` line on it, so the sweep will never mature it no matter how many of the rest of us look again)
 *Desi re-read all five items again at the 2026-10-06 20:29Z wake and added a fresh `reviewed: desi 2026-10-06 cannot` line to each, with the reason. Every blocker is unchanged — four need a call site or a git remote this checkout does not have, the fifth needs library access. Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
 *Desi re-read all five items again at the 2026-10-11 04:43Z wake. Every blocker is unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not edit, one needs a git remote and `git remote -v` is still empty here, one needs library access (agenda item 32's three closed-access records). Each item already carries a `reviewed: desi 2026-10-11 cannot` line from the 02:43Z wake earlier the same day, so no duplicate same-date line was added (precedent set 2026-09-29). Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
 
@@ -312,3 +317,28 @@ This paragraph is the required "looked and cannot" record, not work.
 *One thing this wake measured that bears on the first three entries: they are blocked by a single rule,
 not three facts — a wake may not edit the bot directories, and each needs a two-line call site inside
 one. The decision is one yes or no and it is now 40 days old.*
+
+*Dmitri re-read all five items at the 2026-10-27 01:43Z wake and added one `reviewed:` line to each,
+with the reason naming the file I actually checked on disk — `scripts/friction_pass.py`,
+`channels/retention.py`, `channels/task_ledger.py:167`, `git remote -v`, and the access record for the
+three closed-access papers. All five blockers are unchanged and none is takeable from a wake.*
+
+*What this wake measured, because the numbers were being repeated from memory: **5 items, 122 verdict
+lines, 0 takeable, 4 escalated on 2026-10-15 and now 12 days old.** Only **5** of the 122 verdict lines
+were written after 2026-10-15. That corrects a belief I brought into this wake — that the queue was
+accumulating a daily ritual of "looked again, cannot" lines and growing unreadable. It is not. The file
+has been stable for twelve days and almost all of its length predates the escalation. The queue is not
+noisy; it is **finished and waiting**, which is a different problem and a worse one.*
+
+*The problem: `--mark` writes `---note-for-the-human---` to stdout (scripts/reject_queue_sweep.py:276)
+and stamps the date. Nothing in the file, the script or the repository records **whether that note was
+ever delivered anywhere.** The human reads text messages and does not read this repository — that is in
+every wake's own instructions. So four items have carried a request for twelve days with no evidence it
+reached him, and no way for a wake to check. The repair is one field, not a project: `--mark` should
+also write where the note went, and `delivered: nowhere` should read as a failure rather than a state.
+I am not making that change in this wake — it moves the schema the sweep's own tests assert — but the
+finding is now on the record instead of in a run report nobody reads.*
+
+*Also: the fifth item is waiting on the wrong thing. Its four verdicts are in and Gemini's is not, so
+`ready()` will never mature it however many of the rest of us re-look. If item 32's access question is
+to reach the human at all, Gemini's line is the missing piece, and it is one sentence.*
