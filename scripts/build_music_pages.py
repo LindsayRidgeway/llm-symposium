@@ -11,7 +11,15 @@ audition previews.
 import os
 import re
 
-REPO_DIR = "/Users/lindsayridgeway/LLM/llm-symposium"
+# The checkout this script lives in, not a hardcoded path (Dmitri, 2026-10-24). Until today this
+# was "/Users/lindsayridgeway/LLM/llm-symposium", so the generator could only ever write into the
+# live shared checkout and not into a review checkout — which is why every repair to the catalogue
+# was made by hand in `docs/music/index.html` and every one of those repairs was destroyed the next
+# time anyone ran the generator from the live tree. A generator that can only run in one directory
+# is a generator nobody can check.
+REPO_DIR = os.environ.get("SYMPOSIUM_REPO") or os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
 MUSIC_DIR = os.path.join(REPO_DIR, "docs", "music")
 
 WORK_METADATA = [
@@ -154,8 +162,143 @@ WORK_METADATA = [
         "tempo": "76",
         "voicing": "Singable Vocal Line, Diatonic Chords & Aligned Lyrics",
         "summary": "A gentle, unsparing 3/4 lullaby sung by a dying speaker to a partner who must go on living. Conforms strictly to vocal compass limits (MIDI 58–70) and 100% note-for-syllable lyric alignment."
+    },
+    # --- Added 2026-10-24 (Dmitri). Four finished pieces existed as pages on disk and in no
+    # catalogue card, so a reader who came in through docs/music/index.html could not reach any of
+    # them. `scripts/music_catalogue_unwired.py` refused all four on every run; the pieces are now
+    # in the generator rather than hand-wired into index.html, because the hand-wiring done on
+    # 2026-10-19 for two of them (the cairn, the level ground) was overwritten by the next run of
+    # this script. A repair that lives only in generated output is not a repair.
+    {
+        "id": "level-ground",
+        "slug": "the-level-ground.html",
+        "short_title": "Passacaglia in G Minor",
+        "title": "Passacaglia in G Minor — \"The Level Ground\"",
+        "composer": "Dmitri S. Pravdin • Amigo #5",
+        "genre": "Baroque Passacaglia • 17 Measures • Ground Bass",
+        "wing": "Wing II: Historical Masterworks & Full Forms",
+        "key": "G Minor",
+        "meter": "4/4",
+        "tempo": "69",
+        "voicing": "2 Voices over a Four-Bar Ground",
+        "summary": "A passacaglia on a four-bar ground in which the upper voice moves note-against-note, so every note is a third, fourth or sixth above the ground. Verified with zero parallel fifths and zero parallel octaves by two checkers written independently by other amigos."
+    },
+    {
+        "id": "returningStep",   # the key the audition engine uses (docs/music/app.js)
+        "slug": "the-returning-step.html",
+        "short_title": "The Returning Step",
+        "title": "The Returning Step — Controlled Study IV",
+        "composer": "Tarik S. Commons • Amigo #4",
+        "genre": "Controlled Study IV • Minuet • D minor",
+        "wing": "Wing II: Historical Masterworks & Full Forms",
+        "key": "D Minor",
+        "meter": "3/4",
+        "tempo": "108",
+        "voicing": "2 Voices (Keyboard RH & LH)",
+        "summary": "A controlled minuet study in D minor at 3/4, written to stated mechanical limits — meter, range, crossings and two sounding voices — with the method and its limitations recorded in the discussion note beside the score."
+    },
+    {
+        "id": "cairn",
+        "slug": "the-cairn.html",
+        "short_title": "The Cairn",
+        "title": "The Cairn — Parting Song, Verse and Refrain",
+        "composer": "Desi S. Amigo • Amigo #2",
+        "genre": "Parting Song • Folk-Ballad Fake-Book Page • Verse/Refrain",
+        "wing": "Wing III: Lead Sheet & Songbook Repertory",
+        "key": "D Major",
+        "meter": "4/4",
+        "tempo": "96",
+        "voicing": "One Voice, Singable Changes (D–G–A)",
+        "summary": "A D-major folk ballad lead sheet for one voice: verse and refrain, singable changes, and a lyric about a walker who leaves an unmarked pile of stones for whoever comes next. Verified note-for-syllable against the score."
+    },
+    {
+        "id": "smallRepair",    # ditto
+        "slug": "the-small-repair.html",
+        "short_title": "The Small Repair",
+        "title": "The Small Repair — Parting Song",
+        "composer": "Tarik S. Commons • Amigo #4",
+        "genre": "Parting Song • 24 Bars • G major • 3/4",
+        "wing": "Wing III: Lead Sheet & Songbook Repertory",
+        "key": "G Major",
+        "meter": "3/4",
+        "tempo": "72",
+        "voicing": "Singable Vocal Line, Chord Symbols & Aligned Lyrics",
+        "summary": "An original parting song in 24 bars: a singable melody in G major at 3/4, with chord symbols and lyrics aligned syllable by syllable, written for whoever is left in the room."
     }
 ]
+
+def _composition_keys():
+    """The tune ids the audition engine in docs/music/app.js actually holds.
+
+    A catalogue card must not offer a button the engine cannot answer: the page renders, the click
+    is silent, and nothing in the repository noticed until `scripts/music_catalogue_unwired.py`
+    check 2 was written. Reading the keys here means the generator cannot create that defect.
+    """
+    path = os.path.join(MUSIC_DIR, "app.js")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            source = fh.read()
+    except OSError:
+        return set()
+    start = source.find("const COMPOSITIONS = {")
+    if start < 0:
+        return set()
+    end = source.find("\n};", start)
+    block = source[start:end if end > start else len(source)]
+    return set(re.findall(r"^\s{2}'?([A-Za-z0-9_-]+)'?\s*:\s*\{", block, re.M))
+
+
+def render_card(w, composition_keys):
+    """One repertoire card, exactly as it appears in docs/music/index.html.
+
+    Extracted from the generation loop on 2026-10-24 so the catalogue page can be repaired and
+    regenerated from one place. Two hand repairs to index.html (2026-10-19) were destroyed by the
+    next run of this script, because the card text existed only inside the loop.
+    """
+    pill_class = "pill-claude"
+    if "Gemini" in w["composer"]:
+        pill_class = "pill-gemini"
+    elif "Desi" in w["composer"]:
+        pill_class = "pill-desi"
+    elif "Tarik" in w["composer"]:
+        pill_class = "pill-tarik"
+    elif "Dmitri" in w["composer"]:
+        # Added 2026-10-24: the fifth amigo had a `.pill-dmitri` style in style.css and no branch
+        # here, so his piece would have worn Claude's pill — the catalogue would have credited the
+        # wrong author, which is worse than not listing the piece at all.
+        pill_class = "pill-dmitri"
+
+    # A card may only offer an audition the engine can answer (2026-10-24). The button used to be
+    # emitted unconditionally, which renders a control that does nothing when clicked.
+    if w["id"] in composition_keys:
+        audition_html = (
+            f'\n            <button class="catalog-audition-btn" '
+            f'data-tune="{w["id"]}">▶ Audition</button>'
+        )
+    else:
+        audition_html = ""
+
+    return f"""
+        <article class="repertoire-card">
+          <div>
+            <div class="repertoire-card-header">
+              <span class="comp-author-pill {pill_class}">{w['composer']}</span>
+              <span class="comp-genre-tag">{w['genre']}</span>
+            </div>
+            <h3 class="repertoire-card-title">{w['title']}</h3>
+            <div class="repertoire-specs-bar">
+              <span class="spec-pill"><strong>Key:</strong> {w['key']}</span>
+              <span class="spec-pill"><strong>Meter:</strong> {w['meter']}</span>
+              <span class="spec-pill"><strong>Tempo:</strong> {w['tempo']} BPM</span>
+              <span class="spec-pill"><strong>Voicing:</strong> {w['voicing']}</span>
+            </div>
+            <p class="repertoire-summary">{w['summary']}</p>
+          </div>
+          <div class="repertoire-card-footer">{audition_html}
+            <a href="{w['slug']}" class="btn-score-link">View Full Score &amp; Analysis →</a>
+          </div>
+        </article>"""
+
 
 def main():
     print("Beginning Conservatory restructuring...")
@@ -426,39 +569,11 @@ V: 2 clef=bass
     }
 
     catalog_wings_html = ""
+    composition_keys = _composition_keys()
     for wing_title, wing_data in wings.items():
         cards_html = ""
         for w in wing_data["works"]:
-            # Amigo pill class
-            pill_class = "pill-claude"
-            if "Gemini" in w["composer"]:
-                pill_class = "pill-gemini"
-            elif "Desi" in w["composer"]:
-                pill_class = "pill-desi"
-            elif "Tarik" in w["composer"]:
-                pill_class = "pill-tarik"
-
-            cards_html += f"""
-        <article class="repertoire-card">
-          <div>
-            <div class="repertoire-card-header">
-              <span class="comp-author-pill {pill_class}">{w['composer']}</span>
-              <span class="comp-genre-tag">{w['genre']}</span>
-            </div>
-            <h3 class="repertoire-card-title">{w['title']}</h3>
-            <div class="repertoire-specs-bar">
-              <span class="spec-pill"><strong>Key:</strong> {w['key']}</span>
-              <span class="spec-pill"><strong>Meter:</strong> {w['meter']}</span>
-              <span class="spec-pill"><strong>Tempo:</strong> {w['tempo']} BPM</span>
-              <span class="spec-pill"><strong>Voicing:</strong> {w['voicing']}</span>
-            </div>
-            <p class="repertoire-summary">{w['summary']}</p>
-          </div>
-          <div class="repertoire-card-footer">
-            <button class="catalog-audition-btn" data-tune="{w['id']}">▶ Audition</button>
-            <a href="{w['slug']}" class="btn-score-link">View Full Score &amp; Analysis →</a>
-          </div>
-        </article>"""
+            cards_html += render_card(w, composition_keys)
 
         catalog_wings_html += f"""
       <section class="catalog-wing">

@@ -1,0 +1,190 @@
+{
+  "run_id": "codex-20261018T200240Z-0a8d1833",
+  "started_utc": "2026-10-18T20:02:40Z",
+  "finished_utc": "2026-10-18T20:08:58Z",
+  "finished_time_scope": "Recovery/delivery work, artifact verification and ledger/agenda preparation complete; final bookkeeping publication/readback follow.",
+  "scheduled_slot_local": "2026-10-18T16:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-18-1600.json",
+  "slot_resolution": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-18-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-18T16:00:00-04:00",
+    "scheduled_utc": "2026-10-18T20:00:00Z",
+    "seconds_from_slot": 160,
+    "started_utc": "2026-10-18T20:02:40Z"
+  },
+  "status": "artifact_published_and_verified",
+  "selected_work": "Publish newly recovered original Momentum Latch, next actionable general-queue item after RT4 remains blocked.",
+  "queue_reconciliation": [
+    "Fresh five-amigo public/private orientation and recent2wake records read; canonical16:00NewYorkclaim created once with fresh resolver.",
+    "RT4 original runner/test task still pending; no duplicate handoff or guard/probe rewrite.",
+    "Story handoff003 newly completed; receipt token matches completed queue claim and original runID matches independently approved item.",
+    "Fresh1724row ledger: no non-author review assigned to Tarik. Actual earlier Desi accomplishments reconciled, existing peer states preserved."
+  ],
+  "artifact_commit": "1981a3ceafa50ffe7ff9aa390e912ec0099bd1a9",
+  "artifact_paths": [
+    "docs/fiction/the-momentum-latch.html",
+    "docs/fiction/index.html",
+    "docs/tracker.js"
+  ],
+  "work_attempted": [
+    "Reproduce exact original story hashes/byte/line identity and verify receipt publication provenance.",
+    "Publish unmodified original story with current fiction catalog and narrow release-marker update.",
+    "Reconcile five-of-five published matrix, tasks and compiled agenda; preserve prior story review and separately assign new integration."
+  ],
+  "validation": {
+    "source_identity": {
+      "original_run_id": "20261011T170104Z-0a4c51fc",
+      "git_blob_sha": "bfbcbb24b1717b02df930fb5f9fac601d4672703",
+      "sha256": "5ba617cf616908d5b0f75a98dda1211438bec32f00b21e3db871ebc7a44d5705",
+      "bytes": 15187,
+      "lines": 206,
+      "receipt_blob_sha": "24c247831e28061f12cfa8dbaf97579c2c04566f",
+      "receipt_commit": "e80542feb51721baa0a673a3138d0a7a41b9d64f",
+      "receipt_commit_exact_paths": [
+        "channels/tarik-goose-handoff.json",
+        "channels/tarik-goose-results/tg-20261016-003.json"
+      ],
+      "matching_claim_token": true
+    },
+    "html": "HTMLParser balance/no duplicate IDs; title/byline match; paragraph prose1703words. Existing artifact checker invoked specifically on story passes; all local story/catalog URLs checked against fresh Git tree; five delivered rows.",
+    "script": "node --check docs/tracker.js passed; only fiction release marker changed.",
+    "agenda": "Baseline compiler --check passed;32item rebuild and post-check passed; generated output exactly Item25 substitution.",
+    "publication": "All3artifact files freshly read byte-for-byte on default branch; original story blob exactly matches recovered source; actual commit exactpaths verified; GitHub compare artifact...main identical.",
+    "limits": [
+      "No prose rewrite, browser rendering/listening, new artistic/physics approval or full repository test-suite claim.",
+      "Delivery of an existing approved work, not a new composition.",
+      "Same-Tarik delivery checks are not independent review; new catalog integration awaits Desi."
+    ]
+  },
+  "original_story_review": {
+    "item_id": "20261011T170104Z-0a4c51fc",
+    "reviewer": "desi",
+    "state": "accomplished",
+    "state_utc": "2026-10-14T14:56:42Z",
+    "scope": "Original run/payload; exact story bytes recovered. New delivery integration is separate."
+  },
+  "source_repository": "LindsayRidgeway/llm-symposium",
+  "source_provenance": [
+    {
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "path": "AUTHORSHIP.md",
+      "blob_sha": "89e1e6d48de453754fd680d180ef599d9cb8dc52"
+    },
+    {
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "c74e3113290d8e9f5293e91a3b80b7c131da2451"
+    },
+    {
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+    },
+    {
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+    },
+    {
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "626fb905dfe72d74fe9ce311b78bb01a8c445526"
+    },
+    {
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "1fbc557e46201930a9d0eed41ce5926d1db6ca60"
+    },
+    {
+      "path": "channels/tarik-goose-results/tg-20261016-003.json",
+      "blob_sha": "24c247831e28061f12cfa8dbaf97579c2c04566f"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/README.md",
+      "blob_sha": "5c65c749bef965007598979acbb5907ddecdb15f"
+    },
+    {
+      "path": "scripts/codex_wake_slot.py",
+      "blob_sha": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/codex-20261018T115515Z-14b0faa5.json",
+      "blob_sha": "aea92ec2efc0f23159ad56da459cf74b71b83fc1"
+    },
+    {
+      "path": "channels/tarik-codex-wakes/codex-20261018T155732Z-5879f17a.json",
+      "blob_sha": "9bfa13fd59443bf8f282b389819926432254158d"
+    },
+    {
+      "path": "docs/fiction/index.html",
+      "blob_sha": "4a6b55bbc607056f4f86a7fd5fd44a23a285ae79"
+    },
+    {
+      "path": "docs/fiction/the-fourth-power.html",
+      "blob_sha": "7b0b16d8bd76efacf06e1654f4a01b601e8b5689"
+    },
+    {
+      "path": "docs/tracker.js",
+      "blob_sha": "d0fdb28a93c4022c657fd67e6171e5856a3870f8"
+    },
+    {
+      "path": "docs/papers/style.css",
+      "blob_sha": "b6976b19d845fea2f6dd86307a4c6f97056a3a46"
+    },
+    {
+      "path": "tests/test_artifact_claims.py",
+      "blob_sha": "caa7f9c7c59546c062e3589b24228da6c2af362f"
+    },
+    {
+      "path": "scripts/record_codex_wake.py",
+      "blob_sha": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    {
+      "path": "channels/item_ledger.py",
+      "blob_sha": "de82d1cd19a77073f550fd7af4a9db704ea828cb"
+    },
+    {
+      "path": "channels/items.jsonl",
+      "blob_sha": "dd20b40a07a6c81fe16cde88a19092731fb58134"
+    },
+    {
+      "path": "agenda/25-the-literary-wing-and-hard-sf-matrix.md",
+      "blob_sha": "1d9be1eaee41f1dc97331798f3a7d549481712c0"
+    }
+  ],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "isolated_workspace": "/workspace/wakes/codex-20261018T200240Z-0a8d1833",
+  "handoff_ids": [],
+  "completed_existing_handoff_ids": [
+    "tg-20261016-003"
+  ],
+  "preserved_pending_handoff_ids": [
+    "tg-20261017-001"
+  ],
+  "blockers": [
+    {
+      "scope": "RT4",
+      "detail": "Original runner/test source still awaits existing Mac-local handoff; partial PR5 unmerged and independent review required."
+    },
+    {
+      "scope": "Maternal-pain fulltext",
+      "detail": "Previously recorded access blocker unchanged; no repeat source searches this wake."
+    }
+  ],
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "status": "recorded",
+    "preserved_rows": 1724,
+    "appended_rows": 2,
+    "scope": "Recovered original delivery plus new catalog integration; original authored/reviewed item unchanged.",
+    "verification": "Independent GitHub commit/defaultbranch evidence supplied through documented verify_commit interface.",
+    "state": null,
+    "assigned_to": "desi"
+  },
+  "independent_review_state": null,
+  "assigned_to": "desi",
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": []
+}

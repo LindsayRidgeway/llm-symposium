@@ -7,8 +7,10 @@ voice-leading disciplines:
   2. Voice range bounds
   3. Voice crossing detection
   4. Parallel 5ths and parallel 8ves/unisons detection between simultaneous voices
-  5. Direct / hidden 5ths and octaves in outer voices
-  6. Leading tone resolution at final cadences
+
+Counterpoint comparisons cover the first two parsed voices. This checker does
+not implement hidden/direct intervals or cadence resolution, unfold repeats,
+or establish artistic quality. Inspect the reported coverage and findings.
 """
 
 import os
@@ -43,6 +45,53 @@ KEY_SIGNATURES = {
     'Ab': {'B': -1, 'E': -1, 'A': -1, 'D': -1},
     'Fm': {'B': -1, 'E': -1, 'A': -1, 'D': -1},
 }
+
+# Sounding range per clef, in MIDI numbers, used when a voice declares `clef=` on its
+# `V:` line. ABC pitches are absolute, so a clef does not move a note — it only tells the
+# reader (and this checker) what a part is expected to span. Before 2026-10-26 the checker
+# ignored `clef=` entirely and picked a range from the voice's *index*, so a tenor line in
+# voice 2 was measured against the bass default (C2-G4) and any note above G4 was reported
+# as a range violation the score itself contradicted. Recorded in
+# channels/reports/2026-10-23-desi-review-five-music-and-queue-items.md, section 1.
+CLEF_RANGES = {
+    'treble': (55, 86),        # G3-D6
+    'bass': (36, 67),          # C2-G4
+    'alto': (48, 79),          # C3-G5
+    'tenor': (45, 76),         # A2-E5
+    'treble-8': (43, 74),      # G2-D5, treble sounding an octave down
+    'treble+8': (67, 98),      # G4-D7, treble sounding an octave up
+    'bass-8': (31, 62),        # G1-D4
+    'perc': None,              # percussion: no pitch expectation
+    'none': None,              # no clef stated: do not guess
+}
+
+# Fallback when a voice declares no clef at all, keyed by voice name/id. Kept from the
+# original checker so that scores written without clefs behave exactly as they did.
+INDEX_RANGES = {
+    '1': (55, 86),
+    '2': (36, 67),
+}
+
+
+def extract_clef(text: str) -> Optional[str]:
+    """Return the normalised clef named by a `V:` field's attributes, if any.
+
+    `V:2 clef=tenor name="Tenor"` -> 'tenor'. Quoted values are stripped, case is
+    lowered, and `treble-8`/`treble-8vb` are folded to one spelling.
+    """
+    match = re.search(r'\bclef\s*=\s*("?)([A-Za-z][A-Za-z0-9+\-]*)', text)
+    if not match:
+        return None
+    clef = match.group(2).strip().lower()
+    aliases = {
+        'treble8': 'treble-8',
+        'treble-8vb': 'treble-8',
+        'treble-8va': 'treble+8',
+        'treble8va': 'treble+8',
+        'bass8': 'bass-8',
+        'treble8vb': 'treble-8',
+    }
+    return aliases.get(clef, clef)
 
 
 class NoteEvent:
@@ -202,7 +251,14 @@ class ScoreVerificationReport:
 
     @property
     def passed(self) -> bool:
-        return len(self.errors) == 0 and len(self.parallel_fifths) == 0 and len(self.parallel_octaves) == 0 and len(self.meter_violations) == 0
+        return not any((
+            self.errors,
+            self.parallel_fifths,
+            self.parallel_octaves,
+            self.meter_violations,
+            self.voice_crossings,
+            self.range_violations,
+        ))
 
 
 def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tuple[int, int]]] = None) -> ScoreVerificationReport:
@@ -215,6 +271,7 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
     default_length = 0.125 # L: 1/8 default
     
     voices_data: Dict[str, List[List[NoteEvent]]] = {}
+    voice_clefs: Dict[str, str] = {}
     current_voice: Optional[str] = None
 
     for line in lines:
@@ -249,17 +306,23 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
                 current_voice = v_token
                 if current_voice not in voices_data:
                     voices_data[current_voice] = []
+                clef = extract_clef(h_val)
+                if clef:
+                    voice_clefs[current_voice] = clef
             # Any other header field (X, T, C, Q, etc.) is ignored metadata
             continue
 
         # Check inline voice declaration e.g. [V: 1] ...
         if line.startswith('['):
-            v_match = re.match(r'\[V:\s*([^\s\]]+)\]\s*(.*)', line)
+            v_match = re.match(r'\[V:\s*([^\s\]]+)([^\]]*)\]\s*(.*)', line)
             if v_match:
-                v_name, rest_of_line = v_match.groups()
+                v_name, v_attrs, rest_of_line = v_match.groups()
                 current_voice = v_name
                 if current_voice not in voices_data:
                     voices_data[current_voice] = []
+                clef = extract_clef(v_attrs)
+                if clef:
+                    voice_clefs[current_voice] = clef
                 key_acc = KEY_SIGNATURES.get(key, {})
                 bars = [b for b in rest_of_line.split('|') if b.strip() and not b.strip() in (']', ':|', '|]', '::')]
                 for bar in bars:
@@ -300,28 +363,49 @@ def verify_abc_score(abc_text: str, allowed_voice_ranges: Optional[Dict[str, Tup
                 )
 
     # 2. Voice Range Limits Check
-    default_ranges = {
-        '1': (55, 86),      # G3 to D6 (Treble / Soprano / Piano RH)
-        '2': (36, 67),      # C2 to G4 (Bass / Bass / Piano LH)
-        'treble': (55, 86),
-        'bass': (36, 67)
-    }
-    ranges_to_use = allowed_voice_ranges or default_ranges
+    # Range choice, in order: an explicit range the caller passed in, then the range the
+    # voice's own `clef=` declares, then the original index-based fallback.
+    explicit_ranges = allowed_voice_ranges or {}
 
     for v_name, bars in voices_data.items():
         v_key = v_name.lower()
-        if v_key in ranges_to_use:
-            min_p, max_p = ranges_to_use[v_key]
-            for bar_idx, bar in enumerate(bars, 1):
-                for ev in bar:
-                    if ev.midi_pitch is not None:
-                        if ev.midi_pitch < min_p or ev.midi_pitch > max_p:
-                            report.range_violations.append(
-                                f"Voice {v_name} Measure {bar_idx}: Pitch {ev.raw} (MIDI {ev.midi_pitch}) outside range [{min_p}, {max_p}]"
-                            )
+        clef = voice_clefs.get(v_name)
+        min_p = max_p = None
+        source = None
+
+        if v_key in explicit_ranges:
+            min_p, max_p = explicit_ranges[v_key]
+            source = "caller range"
+        elif clef in CLEF_RANGES:
+            bounds = CLEF_RANGES[clef]
+            if bounds is None:
+                continue  # clef=perc / clef=none: no pitch expectation to enforce
+            min_p, max_p = bounds
+            source = f"clef={clef}"
+        elif clef is not None:
+            report.warnings.append(
+                f"Voice {v_name}: unrecognised clef '{clef}'; range not checked"
+            )
+            continue
+        elif v_key in INDEX_RANGES:
+            min_p, max_p = INDEX_RANGES[v_key]
+            source = "voice index default (no clef declared)"
+
+        if min_p is None:
+            continue
+        for bar_idx, bar in enumerate(bars, 1):
+            for ev in bar:
+                if ev.midi_pitch is not None:
+                    if ev.midi_pitch < min_p or ev.midi_pitch > max_p:
+                        report.range_violations.append(
+                            f"Voice {v_name} Measure {bar_idx}: Pitch {ev.raw} (MIDI {ev.midi_pitch}) outside range [{min_p}, {max_p}] ({source})"
+                        )
 
     # 3. Multi-Voice Counterpoint Discipline
     voice_list = list(voices_data.keys())
+    if len(voice_list) < 2:
+        # A monophonic score has measures, so its measure count must not be left at 0.
+        report.measures_count = max(len(bars) for bars in voices_data.values())
     if len(voice_list) >= 2:
         v1_name = voice_list[0]
         v2_name = voice_list[1]
@@ -408,11 +492,17 @@ def main():
     print(f"=== Music Theory Verification Report: {path} ===")
     print(f"Voices analyzed: {', '.join(report.voice_names)}")
     print(f"Measures evaluated: {report.measures_count}")
+    print(f"Errors: {len(report.errors)}")
     print(f"Meter integrity errors: {len(report.meter_violations)}")
     print(f"Parallel 5ths: {len(report.parallel_fifths)}")
     print(f"Parallel 8ves/Unisons: {len(report.parallel_octaves)}")
     print(f"Voice crossings: {len(report.voice_crossings)}")
     print(f"Range violations: {len(report.range_violations)}")
+
+    if report.errors:
+        print("\n[Errors]")
+        for error in report.errors:
+            print(f"  - {error}")
 
     if report.meter_violations:
         print("\n[Meter Violations]")
@@ -434,8 +524,13 @@ def main():
         for vc in report.voice_crossings:
             print(f"  - {vc}")
 
+    if report.range_violations:
+        print("\n[Range Violations]")
+        for violation in report.range_violations:
+            print(f"  - {violation}")
+
     if report.passed:
-        print("\nResult: PASSED — Strict Classical counterpoint discipline satisfied.")
+        print("\nResult: PASSED — No violations found by the configured checks.")
         sys.exit(0)
     else:
         print("\nResult: FAILED — Disciplinary violations detected.")

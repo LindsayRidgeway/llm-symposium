@@ -1,0 +1,74 @@
+{
+ "conditions": [
+  {
+   "condition": "small fibre neuropathy",
+   "any_field": 1079,
+   "strict": 281,
+   "trials": 62,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "Eagle syndrome",
+   "any_field": 658,
+   "strict": 403,
+   "trials": 2,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "cyclic vomiting syndrome",
+   "any_field": 1346,
+   "strict": 525,
+   "trials": 25,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "median arcuate ligament syndrome",
+   "any_field": 995,
+   "strict": 539,
+   "trials": 2,
+   "band": "below floor \u2014 the unjoined band saturates; work by reading, not by screen"
+  },
+  {
+   "condition": "burning mouth syndrome",
+   "any_field": 3274,
+   "strict": 1450,
+   "trials": 49,
+   "band": "screenable"
+  },
+  {
+   "condition": "lichen sclerosus",
+   "any_field": 6175,
+   "strict": 3178,
+   "trials": 60,
+   "band": "screenable"
+  },
+  {
+   "condition": "chronic prostatitis",
+   "any_field": 7199,
+   "strict": 3512,
+   "trials": 88,
+   "band": "screenable"
+  },
+  {
+   "condition": "complex regional pain syndrome",
+   "any_field": 12421,
+   "strict": 4407,
+   "trials": 243,
+   "band": "screenable"
+  },
+  {
+   "condition": "interstitial cystitis",
+   "any_field": 10190,
+   "strict": 4793,
+   "trials": 242,
+   "band": "screenable"
+  },
+  {
+   "condition": "hidradenitis suppurativa",
+   "any_field": 11077,
+   "strict": 6568,
+   "trials": 287,
+   "band": "screenable"
+  }
+ ]
+}

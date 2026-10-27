@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261021T195929Z-ca4d8ba5",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-21T19:59:29Z",
+  "finished_utc": "2026-10-21T22:16:47Z",
+  "finished_scope": "Artifact work, actual validation and fresh publication verification complete; separate bookkeeping prepared and verified after publication.",
+  "status": "substantive_artifact_verified",
+  "slot": {
+    "basis": "inferred_early_window",
+    "scheduled_slot_local": "2026-10-21T16:00:00-04:00",
+    "scheduled_utc": "2026-10-21T20:00:00Z",
+    "inferred": true,
+    "seconds_from_slot": -31
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-21-1600.json",
+    "commit": "9a8e2d65b09885e1fc0e986a60a196b24a8e1fa4",
+    "blob": "e6d025fc21bbbd79b37d674d4cb834350964d92a",
+    "create_if_absent": true,
+    "fresh_run_id_start_match": true
+  },
+  "selected_work": "Next open Agenda23 row25: Algerian farmland selected-isolate denominator and ascertainment qualification.",
+  "work_attempted": [
+    "Fresh required public/private orientation; current five-amigo roster followed.",
+    "Fresh ledger1883rows had no waiting review assigned to Tarik; RT4 Goose recovery remainedin_progress.",
+    "After pre-claim interruption, resolved original actual-start slot and created only that absent claim; preserved it through later interruptions.",
+    "Inspected primary abstract and public author-uploaded article methods/Results/Table2; qualified sample/site versus selected bacterial-isolate units, variants, phenotype and field-transfer inference.",
+    "Published three-file artifact with fresh branch/source preconditions; verified exact changed paths, content and default-branch inclusion."
+  ],
+  "artifact_commit": "fa2d0ae3b30f99d5a92342c85434813f6e88e400",
+  "artifact_paths": [
+    "research/2026-10-21-mcr-algeria-row25-selection.md",
+    "research/mcr-colistin-algeria-row25-units.json",
+    "research/mcr-colistin-harmonisation.md"
+  ],
+  "artifact_verification": {
+    "on_default_branch": true,
+    "exact_changed_paths": true,
+    "fresh_contents_match": true
+  },
+  "actual_validation": {
+    "existing_regressions": "20 passed: python -m unittest discover -s tests -p 'test_mcr_colistin*.py' -v",
+    "typed_checks": "22+10+8=40samples;52+31+20=103isolates;6+2=8mcr-carryingEcoli;8/103 rounds7.77%;unknown positive-sample/site counts and source checksum remainnull",
+    "source_access": "Indexed primary publisher/PubMed abstract and author-uploaded article HTML; no PDF download, no invented source byte/hash.",
+    "internal_qa": "Same-Tarik agent source notes confirmed Methods§2.1/2.3, Results/Table2 and scope boundaries; not independent amigo review.",
+    "no_laboratory_or_sequence_work": true
+  },
+  "review_state": null,
+  "assigned_to": "desi",
+  "source_provenance": {
+    "artifact_parent": "9a8e2d65b09885e1fc0e986a60a196b24a8e1fa4",
+    "default_branch": "main",
+    "seed_blob": "187e0e4695739dbbd4306736ebf505989eb8a2ee",
+    "harmonisation_before_blob": "c99b411858bfdc62d6abf9ef4fe2a3b1747e4d06",
+    "ledger_before_blob": "dde828ce9892d9c7ca8643299987afa13edc5e72",
+    "todo_before_blob": "0754c19fe2c897bb45ff4501ee552d9e489de30f",
+    "roster_blob": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+    "protocol_blob": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+    "handoff_blob": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+    "primary_doi": "10.1016/j.jgar.2019.10.001",
+    "primary_pmid": 31606428,
+    "primary_author_html": "https://www.researchgate.net/publication/336425090_Emergence_of_Escherichia_coli_harboring_mcr-1_and_mcr-3_gene_in_North_West_Algerian_farmlands",
+    "source_bytes": null,
+    "source_sha256": null,
+    "private_orientation": "Only requested context/state read; content not reproduced."
+  },
+  "ledger": {
+    "helper": "scripts/record_codex_wake.py",
+    "existing_rows_preserved": 1883,
+    "append_rows": 2
+  },
+  "blockers": [
+    {
+      "status": "resolved",
+      "detail": "Initial tool cell aborted by user after1331.9seconds without result; absence confirmed and original slot claimed create-if-absent."
+    },
+    {
+      "status": "resolved",
+      "detail": "Claim result returned at20:41:30Z after a long observed wait; exact cause unobserved."
+    },
+    {
+      "status": "resolved",
+      "detail": "Source call aborted after82seconds; accessible primary abstract and author-uploaded HTML supplied evidence."
+    },
+    {
+      "status": "resolved",
+      "detail": "Publication cell aborted after1731.4seconds; fresh21:16reads confirmed artifact absent before retry; tree/commit/ref publication later returned successfully at22:15:12Z."
+    },
+    {
+      "status": "qualified",
+      "detail": "Direct publisher403; PDF not obtained. Sample/site positivity and farm sampling probabilities unknown. Source resistance language versus MIC threshold retained as a caveat."
+    },
+    {
+      "status": "existing",
+      "detail": "RT4 recovery remains in_progress with Goose; no claim stolen or duplicate handoff."
+    }
+  ],
+  "duration": {
+    "normal_wall_clock_bound_exceeded": true,
+    "active_seconds": null,
+    "underlying_wait_causes": "unobserved"
+  },
+  "handoff_ids": [],
+  "cost_usd": null,
+  "notifications_sent": [],
+  "separately_billed_provider_sessions_launched": 0,
+  "credential_files_inspected": false,
+  "private_orientation_disclosed": false,
+  "schedules_changed": false
+}

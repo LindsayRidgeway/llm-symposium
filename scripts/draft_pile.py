@@ -32,7 +32,10 @@ which to rescue. That is the closer the gate never had.
 Usage:
     scripts/draft_pile.py --fetch                 # fetch refs, then report
     scripts/draft_pile.py --json /tmp/pile.json   # machine-readable
-    scripts/draft_pile.py --remote https://github.com/OWNER/REPO
+    scripts/draft_pile.py --fetch --remote https://github.com/OWNER/REPO
+                                                  # no configured remote in this checkout? a URL
+                                                  # is enough: fetched read-only into
+                                                  # refs/remotes/draftpile-remote/
     scripts/draft_pile.py --pattern '*/autonomous/*'
 """
 from __future__ import annotations
@@ -64,6 +67,25 @@ def git(*args: str, allow_fail: bool = False) -> str:
             return ""
         raise SystemExit(f"git {' '.join(args)} failed:\n{proc.stderr.strip()}")
     return proc.stdout.strip()
+
+
+# Namespace used when the fetch source is a bare URL rather than a configured remote name.
+FETCH_NAMESPACE_FALLBACK = "draftpile-remote"
+
+
+def fetch_namespace(remote: str, configured_url: str) -> tuple[str, str]:
+    """Return (fetch source, ref namespace) for `--fetch`.
+
+    A URL is a perfectly good fetch *source* and a hopeless ref *namespace*: a ref name may
+    not contain `//`, so `+refs/heads/drafts/*:refs/remotes/https://host/x/drafts/*` is
+    rejected by `git fetch` before a single comparison runs. That mattered because it is
+    exactly the case a wake is in — no configured remote — and `channels/reject-queue.md`
+    spent twenty-two wakes saying the pile could not be read from here. It can: fetching by
+    URL into a fixed namespace works with no credential and no remote entry.
+    """
+    if configured_url:
+        return configured_url, remote
+    return remote, FETCH_NAMESPACE_FALLBACK
 
 
 def rev_path(rev: str, path: str) -> str:
@@ -255,10 +277,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.fetch:
         if "drafts" not in args.pattern:
             raise SystemExit("--fetch currently supports the drafts/* family only")
-        url = git("remote", "get-url", args.remote, allow_fail=True) or args.remote
-        git("fetch", "--no-tags", args.remote,
-            f"+refs/heads/drafts/*:refs/remotes/{args.remote}/drafts/*")
-        sys.stderr.write(f"fetched drafts/* from {url}\n")
+        configured = git("remote", "get-url", args.remote, allow_fail=True)
+        url, namespace = fetch_namespace(args.remote, configured)
+        git("fetch", "--no-tags", url,
+            f"+refs/heads/drafts/*:refs/remotes/{namespace}/drafts/*")
+        sys.stderr.write(f"fetched drafts/* from {url} into refs/remotes/{namespace}/\n")
 
     reports, skipped = build_pile(args.pattern, args.base, args.ignore)
     sys.stdout.write(render_text(reports, skipped))

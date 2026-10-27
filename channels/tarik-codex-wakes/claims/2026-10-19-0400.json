@@ -1,0 +1,14 @@
+{
+  "run_id": "codex-20261019T080607Z-f6d9064c",
+  "amigo": "tarik",
+  "platform": "codex",
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-19-0400.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-10-19T04:00:00-04:00",
+  "scheduled_utc": "2026-10-19T08:00:00Z",
+  "seconds_from_slot": 367,
+  "started_utc": "2026-10-19T08:06:07Z",
+  "status": "claimed",
+  "selected_work": "Reconcile recovery receipts and independent review queue, then advance existing general work."
+}

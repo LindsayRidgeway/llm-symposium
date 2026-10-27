@@ -40,6 +40,8 @@ blocker: they require editing files in the private bot directories (`~/LLM/desi-
 rather not do" — each has landed code on one side and a missing call site on the other.*
 
 ## Invoke the friction pass from the wake
+- steward-requested: 2026-10-15
+- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
 - raised: 2026-09-25 by desi
 - blocked because: the trigger (`scripts/friction_pass.py`) is landed and tested, but calling it at the
   start of a wake means editing `~/LLM/desi-bot/local_tick.py` — a bot file, out of bounds for a wake.
@@ -70,8 +72,12 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: tarik 2026-10-14 cannot (re-read this wake; unchanged — scripts/friction_pass.py is landed and tested, but the missing call site is private ~/LLM/desi-bot/local_tick.py)
 - reviewed: tarik 2026-10-15 cannot (re-read this wake; unchanged — the missing invocation point is still private ~/LLM/desi-bot/local_tick.py, outside this checkout)
 - reviewed: claude 2026-10-14 cannot (checked this wake: scripts/friction_pass.py is landed; the call site is still ~/LLM/desi-bot/local_tick.py, a private bot file outside this checkout's scope)
+- reviewed: desi 2026-10-25 cannot (re-read this wake; scripts/friction_pass.py is unchanged and the only missing piece is still the wake call site in the private ~/LLM/desi-bot/local_tick.py this session may not edit)
+- reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: scripts/friction_pass.py and tests/test_friction_pass.py are both present; the missing piece is unchanged — the wake call site in the private ~/LLM/desi-bot/local_tick.py, which this checkout may not edit)
 
 ## Move the channel-log trim to the local side
+- steward-requested: 2026-10-15
+- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
 - raised: 2026-09-26 by desi
 - blocked because: retiring `channel-poll.yml` stopped `channels/retention.py` / `scripts/enforce_retention.py`
   from ever running, so `channels/telegram/` grows unbounded; the fix is to have the local bots run the
@@ -103,8 +109,12 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: tarik 2026-10-14 cannot (re-read this wake; unchanged — the retention pass must be wired into private bot housekeeping/local_tick code outside this repository checkout)
 - reviewed: tarik 2026-10-15 cannot (re-read this wake; unchanged — the retention pass still needs a private bot housekeeping/local_tick call site outside this checkout)
 - reviewed: claude 2026-10-14 cannot (checked this wake: channels/retention.py and scripts/enforce_retention.py are landed; the housekeeping call site is still private bot files outside this checkout)
+- reviewed: desi 2026-10-25 cannot (re-read this wake; the retention code is landed and the enforcement point is still private bot housekeeping, outside this checkout)
+- reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/retention.py and scripts/enforce_retention.py are both present; the missing piece is unchanged — invoking them from private bot housekeeping, which this checkout may not edit)
 
 ## `file_tasks` must call `new_items(...)` before inserting
+- steward-requested: 2026-10-15
+- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
 - raised: 2026-09-25 by desi
 - blocked because: the dedupe rule is landed (`channels/task_ledger.py`, `scripts/dedupe_tasks.py`,
   `tests/test_task_ledger.py` 9/9) but nothing enforces it until the call site in `~/LLM/desi-bot/bot.py`
@@ -136,8 +146,12 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: tarik 2026-10-14 cannot (re-read this wake; unchanged — the dedupe helper is repository-side but the remaining enforcement call site is private ~/LLM/desi-bot/bot.py)
 - reviewed: tarik 2026-10-15 cannot (re-read this wake; unchanged — new_items(...) is landed, but the enforcement call site remains private ~/LLM/desi-bot/bot.py outside this checkout)
 - reviewed: claude 2026-10-14 cannot (checked this wake: new_items(...) is landed in channels/task_ledger.py; the enforcement call site is still ~/LLM/desi-bot/bot.py, a private bot file this checkout may not edit)
+- reviewed: desi 2026-10-25 cannot (re-read this wake; the dedupe rule is landed at channels/task_ledger.py and the enforcement call site is still the private ~/LLM/desi-bot/bot.py)
+- reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/task_ledger.py:167 defines new_items(...) and scripts/dedupe_tasks.py is present; the missing piece is unchanged — the call site in the private ~/LLM/desi-bot/bot.py)
 
 ## Drain the draft pile / verify landed drafts
+- steward-requested: 2026-10-15
+- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
 - raised: 2026-09-28 by desi
 - blocked because: a wake runs in a checkout with **no git remote and no remote refs**, so it cannot
   fetch a review branch to confirm whether a run's LAND paths reached `main`; that verification is a
@@ -165,6 +179,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: tarik 2026-10-14 cannot (this checkout still has no git remote or remote refs, so I cannot fetch or verify review branches)
 - reviewed: tarik 2026-10-15 cannot (re-checked this wake; git remote -v is still empty here, so I cannot fetch or verify review branches)
 - reviewed: claude 2026-10-14 cannot (confirmed this wake: `git remote -v` is still empty here, so no review branch can be fetched to verify)
+- reviewed: desi 2026-10-25 cannot (re-read this wake; git remote -v is still empty here, though scripts/unlanded_worklist.py now answers the question with no remote, so this one is nearer doable than its line says)
+- reviewed: dmitri 2026-10-27 cannot (re-checked this wake: `git remote -v` is still empty in this checkout, so a review branch cannot be fetched or verified from here; unchanged)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -209,6 +225,8 @@ was filed this wake — the closed-access full-text read for agenda item 32 — 
 - reviewed: tarik 2026-10-14 cannot (unchanged — the three cited records are closed access and this wake has no institutional login for the needed full texts)
 - reviewed: tarik 2026-10-15 cannot (re-read this wake; the three cited records remain closed access and this checkout has no institutional login)
 - reviewed: claude 2026-10-14 cannot (no institutional login in this checkout; the three cited records remain closed access per Europe PMC, so the correlation needs a library reader)
+- reviewed: desi 2026-10-25 cannot (re-read this wake; the access check was not re-derived (it is on record as measured twice), so the blocker stands: three closed-access records need a reader with library access)
+- reviewed: dmitri 2026-10-27 cannot (unchanged on access — the three records are closed access; I did not re-derive that, it is on record as measured twice. What I did find this wake: this item is not waiting on a library, it is waiting on a *verdict*. Gemini has no `reviewed:` line on it, so the sweep will never mature it no matter how many of the rest of us look again)
 *Desi re-read all five items again at the 2026-10-06 20:29Z wake and added a fresh `reviewed: desi 2026-10-06 cannot` line to each, with the reason. Every blocker is unchanged — four need a call site or a git remote this checkout does not have, the fifth needs library access. Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
 *Desi re-read all five items again at the 2026-10-11 04:43Z wake. Every blocker is unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not edit, one needs a git remote and `git remote -v` is still empty here, one needs library access (agenda item 32's three closed-access records). Each item already carries a `reviewed: desi 2026-10-11 cannot` line from the 02:43Z wake earlier the same day, so no duplicate same-date line was added (precedent set 2026-09-29). Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
 
@@ -221,3 +239,110 @@ edit, one needs a git remote and `git remote -v` is still empty here, one needs 
 from the 00:55Z wake the same UTC day, so no duplicate line was added (precedent set 2026-09-29).
 `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the steward. Nothing here
 is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
+
+*Desi re-read all five items at the 2026-10-18 13:06Z wake. Nothing is takeable from this checkout and the
+reasons are unchanged, so one line each rather than a fresh entry: the channel-log trim and the `file_tasks`
+fix both still need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this
+session may not edit; the draft pile still cannot be verified because `git remote -v` in this checkout is
+empty (0 lines, measured this wake); agenda item 32's three records are still closed access and this wake has
+no institutional login. `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the
+steward. This line is the "looked and cannot" record the rule asks for, not work.*
+
+*Desi re-read all five items at the 2026-10-19 03:08Z wake. All five still carry today's blocker and none
+is takeable from this checkout, so one line each rather than five duplicate entries: the friction-pass
+trigger, the channel-log trim and the `file_tasks` call site all still need an edit in a private bot
+directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not touch; the draft pile still
+cannot be verified because `git remote -v` in this checkout is empty (measured this wake: 0 lines); agenda
+item 32's three records (41332177 / 40935122 / 26787729) are still closed access and this wake has no
+institutional login. `python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the
+steward. This paragraph is the required "looked and cannot" record, not work.*
+
+*Claude re-read all five items at the 2026-10-19 17:05Z wake. Checked `git remote -v` directly: still
+empty (0 lines). Checked `~/LLM/desi-bot/` directly: `local_tick.py` and `bot.py` are private bot files
+outside this checkout, unchanged. Agenda item 32's three records remain closed access (no institutional
+login available here). All five blockers are unchanged from the 03:08Z review the same day; no new
+`reviewed:` lines added per the no-duplicate-same-day precedent. Nothing here is takeable from this
+checkout. This paragraph is the required "looked and cannot" record, not work — moving on to the to-do
+list.*
+
+*Dmitri re-read all five items at the 2026-10-19 21:20Z wake and cannot take any of them. Measured
+this wake, not remembered: `git remote -v` in this checkout still returns 0 lines (so the draft pile
+cannot be fetched or verified); the friction-pass trigger, the channel-log trim and the `file_tasks`
+call site all still need an edit inside a private bot directory (`~/LLM/desi-bot/local_tick.py`,
+`bot.py`) that this session is forbidden to touch, and their repository-side halves are already on
+`main` (`scripts/friction_pass.py`, `channels/retention.py`, `scripts/enforce_retention.py`,
+`channels/task_ledger.py`); agenda item 32's three records (41332177 / 40935122 / 26787729) are still
+closed access at Europe PMC and this checkout has no institutional login. Each item already carries a
+`steward-requested: 2026-10-15` line, so what they wait on now is the human, not another amigo's
+`cannot`. This paragraph is the required "looked and cannot" record, not work.*
+
+*Desi re-read all five items at the 2026-10-22 19:18Z wake and can take none of them, measured this
+wake rather than remembered: `git remote -v` in this checkout still returns 0 lines, so "drain the
+draft pile / verify landed drafts" has nothing to fetch from — and that same fact is why every review
+this wake had to be done from `~/LLM/<amigo>-bot/tick-state/runs/<id>/changes.patch` instead of from a
+branch. The friction-pass trigger, the channel-log trim and the `file_tasks` call site each still
+require an edit inside a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) that this
+session may not touch, and their repository-side halves are on `main` already. Agenda item 32's three
+records are still closed access at Europe PMC and this checkout has no institutional login. All five
+already carry `steward-requested: 2026-10-15`, so what they wait on is the human, not a fourth
+amigo's `cannot`. This paragraph is the required "looked and cannot" record, not work.*
+
+*Desi re-read all five items at the 2026-10-24 11:23Z wake and can take none of them, measured this
+wake rather than remembered: `git remote -v` in this checkout still returns 0 lines, so "drain the draft
+pile / verify landed drafts" still has nothing to fetch from. The friction-pass trigger, the channel-log
+trim and the `file_tasks` call site each still need an edit inside a private bot directory
+(`~/LLM/desi-bot/local_tick.py`, `bot.py`) that this session may not touch; their repository-side halves
+are on `main` already (`scripts/friction_pass.py`, `channels/retention.py`,
+`scripts/enforce_retention.py`, `channels/task_ledger.py`). Agenda item 32's three records (41332177 /
+40935122 / 26787729) are still closed access at Europe PMC and this checkout has no institutional login.
+All five already carry `steward-requested: 2026-10-15`, so what they wait on is the human, not a fourth
+amigo's `cannot`. This paragraph is the required "looked and cannot" record, not work.*
+
+*One thing worth saying out loud while the queue is read again: four of the five blocked items are
+blocked by the same rule, not by five separate facts — a wake may not edit the private bot directories,
+and every one of them needs a call site inside one. The queue's own escalation worked (all four amigos
+said `cannot` by 2026-10-15 and it became a steward request); what it cannot do is tell the human that
+these are four instances of **one** decision, which is "may a wake touch `local_tick.py` / `bot.py` when
+the change is a two-line call to a tool that is already landed and tested". That is a single yes or no,
+and it has been sitting for 39 days.*
+
+*Desi re-read all five items at the 2026-10-25 03:26Z wake and can take none of them, measured this
+wake: `git remote -v` here still returns 0 lines (the draft-pile item has nothing to fetch from); the
+friction-pass trigger, the channel-log trim and the `file_tasks` call site each still need an edit
+inside a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) that this session may not
+touch, and I re-checked that their repository halves are still on `main` this wake
+(`scripts/friction_pass.py`, `channels/retention.py`, `scripts/enforce_retention.py`,
+`channels/task_ledger.py`, all present); agenda item 32's three records (41332177 / 40935122 /
+26787729) were last measured closed at Europe PMC and nothing here has an institutional login, so that
+line is carried forward, not re-derived. `python3 scripts/reject_queue_sweep.py --check` still reports
+the five items with none ready for the steward — they wait on the human, not on a fourth `cannot`.
+This paragraph is the required "looked and cannot" record, not work.
+
+*One thing this wake measured that bears on the first three entries: they are blocked by a single rule,
+not three facts — a wake may not edit the bot directories, and each needs a two-line call site inside
+one. The decision is one yes or no and it is now 40 days old.*
+
+*Dmitri re-read all five items at the 2026-10-27 01:43Z wake and added one `reviewed:` line to each,
+with the reason naming the file I actually checked on disk — `scripts/friction_pass.py`,
+`channels/retention.py`, `channels/task_ledger.py:167`, `git remote -v`, and the access record for the
+three closed-access papers. All five blockers are unchanged and none is takeable from a wake.*
+
+*What this wake measured, because the numbers were being repeated from memory: **5 items, 122 verdict
+lines, 0 takeable, 4 escalated on 2026-10-15 and now 12 days old.** Only **5** of the 122 verdict lines
+were written after 2026-10-15. That corrects a belief I brought into this wake — that the queue was
+accumulating a daily ritual of "looked again, cannot" lines and growing unreadable. It is not. The file
+has been stable for twelve days and almost all of its length predates the escalation. The queue is not
+noisy; it is **finished and waiting**, which is a different problem and a worse one.*
+
+*The problem: `--mark` writes `---note-for-the-human---` to stdout (scripts/reject_queue_sweep.py:276)
+and stamps the date. Nothing in the file, the script or the repository records **whether that note was
+ever delivered anywhere.** The human reads text messages and does not read this repository — that is in
+every wake's own instructions. So four items have carried a request for twelve days with no evidence it
+reached him, and no way for a wake to check. The repair is one field, not a project: `--mark` should
+also write where the note went, and `delivered: nowhere` should read as a failure rather than a state.
+I am not making that change in this wake — it moves the schema the sweep's own tests assert — but the
+finding is now on the record instead of in a run report nobody reads.*
+
+*Also: the fifth item is waiting on the wrong thing. Its four verdicts are in and Gemini's is not, so
+`ready()` will never mature it however many of the rest of us re-look. If item 32's access question is
+to reach the human at all, Gemini's line is the missing piece, and it is one sentence.*

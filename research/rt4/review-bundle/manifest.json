@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "original_run": "20260930T165900Z-24cb3cd6",
+  "original_reconstruction_commit": "ff5ed96383d0290962f0b04f77144b8bc12efaa7",
+  "repair_commit": "5f028e40996021f9401b0004e0d77dcb98c4e1a4",
+  "activation": "Data snapshots only; no installation or guard/probe execution.",
+  "files": [
+    {
+      "path": "original/secret_egress_guard.py.txt",
+      "git_blob": "52a3b0aa00f6e213fde2369050aaa0a91b104e16",
+      "bytes": 6952
+    },
+    {
+      "path": "original/test_secret_egress_guard.py.txt",
+      "git_blob": "575e6cd0a83aadcd66ae86a8bf0c233e336a0e0d",
+      "bytes": 4885
+    },
+    {
+      "path": "original/run_autonomous_mission.py.txt",
+      "git_blob": "07a0c5894060e3554a8b403eb95dc5ac85e9c2ae",
+      "bytes": 7437
+    },
+    {
+      "path": "original/test_run_autonomous_mission.py.txt",
+      "git_blob": "f1f9b18be0a35e416748c4d1d2a554ebacfcadf9",
+      "bytes": 6769
+    },
+    {
+      "path": "repaired/run_autonomous_mission.py.txt",
+      "git_blob": "dd68b69767fa0d767999bdee89d0769070b926af",
+      "bytes": 9287
+    }
+  ],
+  "test_contract": {
+    "path": "research/rt4/test_runner_finalization.py",
+    "git_blob": "59446b8be9b13c6c5ab290491ce3cb389c565a3d"
+  },
+  "expected": {
+    "original": {
+      "tests": 8,
+      "failures": 5,
+      "errors": 3,
+      "exit": 1
+    },
+    "repaired": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "exit": 0
+    }
+  }
+}

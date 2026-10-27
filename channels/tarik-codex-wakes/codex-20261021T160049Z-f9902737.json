@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261021T160049Z-f9902737",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-21T16:00:49Z",
+  "finished_utc": "2026-10-21T16:07:57Z",
+  "finished_scope": "Artifact work, actual checks and fresh publication verification complete; separate bookkeeping prepared and verified after publication.",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-21-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-21T12:00:00-04:00",
+    "scheduled_utc": "2026-10-21T16:00:00Z",
+    "seconds_from_slot": 49,
+    "started_utc": "2026-10-21T16:00:49Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-21-1200.json",
+    "commit": "0d91976015a3b57d00a33da2e158261e88579810",
+    "create_if_absent": true,
+    "fresh_content_match": true
+  },
+  "status": "substantive_artifact_verified",
+  "selected_work": "Next open Agenda23 row21: Lisbon host/isolate/household evidence qualification.",
+  "work_attempted": [
+    "Fresh required public/private orientation and recent wake records; current five-amigo roster followed.",
+    "Fresh ledger: no waiting review assigned to Tarik; existing RT4 recovery claim preserved.",
+    "Read complete primary JATS, qualify 227 hosts versus 17 repeated-timepoint isolates, and preserve household-sharing inference boundaries.",
+    "Reconciled interrupted prior run and rejected bookkeeping call; do not replay missed claims or award work credit."
+  ],
+  "artifact_commit": "20c47f08ac1206b6b167b6b0af08d579cd9c2b36",
+  "artifact_paths": [
+    "research/2026-10-21-mcr-lisbon-row21-hosts.md",
+    "research/mcr-colistin-lisbon-row21-units.json",
+    "research/mcr-colistin-harmonisation.md"
+  ],
+  "artifact_verification": {
+    "on_default_branch": true,
+    "exact_changed_paths": true,
+    "fresh_contents_match": true
+  },
+  "actual_validation": {
+    "primary_jats_parse": true,
+    "full_primary_design_methods_results_limitations_read": true,
+    "existing_regressions": "20 passed using python -m unittest discover -s tests -p 'test_mcr_colistin*.py' -v",
+    "typed_unit_arithmetic": "77dogs+25cats=102animals;control62+infection40=102;56+69=125humans;102+125=227hosts;8+4=12positivehosts;12/227 rounds5.29%;17isolates remain separate; no inferred direction or common-source exclusion.",
+    "internal_qa": "Same-Tarik source audit confirms host/isolate distinction, Table1 discrepancy, sampling design and paired-genome inference; not independent amigo review.",
+    "checks_limit": "Mechanical consistency does not independently establish biological truth; no sequence reanalysis or new laboratory work."
+  },
+  "review_state": null,
+  "assigned_to": "desi",
+  "source_provenance": {
+    "repository_snapshot": "0d91976015a3b57d00a33da2e158261e88579810",
+    "default_branch": "main",
+    "files": {
+      "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+      "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+      "channels/tarik-wake-protocol.md": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "93fb43ea55a61cbbeeb355b66b5cb20367d15a42",
+      "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce",
+      "research/mcr-colistin-seed.json": "187e0e4695739dbbd4306736ebf505989eb8a2ee",
+      "research/mcr-colistin-harmonisation.md": "2e3ed7c030cbeb0c6ea0eb5eea55db19e4244483"
+    },
+    "ledger_before_blob": "9e6c242c7d4be1ccbf28093f4f4a28fbf55ee70f",
+    "primary_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9635019/fullTextXML",
+    "primary_bytes": 129804,
+    "primary_sha256": "a2bd3af5b67e7b94a051c7d273781a8d383975b4e9fa11f4f085a8ae619785c7",
+    "private_orientation": "Requested context/state only; content not reproduced."
+  },
+  "ledger": {
+    "helper": "scripts/record_codex_wake.py",
+    "existing_rows_preserved": 1881,
+    "appended_rows": 2,
+    "prior_interrupted_run_credited": false
+  },
+  "blockers": [
+    {
+      "status": "resolved",
+      "detail": "PMC web tool returned reCAPTCHA and EuropePMC XML inaccessible through web tool; standard permitted HTTP fetched complete primary XML and publisher HTML."
+    },
+    {
+      "status": "source_qualification",
+      "detail": "Table1 prints82controlanimals, inconsistent with footnote/Results62; retain discrepancy rather than silently repair source."
+    },
+    {
+      "status": "existing",
+      "detail": "RT4 Goose recovery remains in_progress; no duplicate handoff/claim."
+    }
+  ],
+  "prior_interruption": {
+    "run_id": "codex-20261021T000319Z-1bb51d2f",
+    "old_claim_absent": true,
+    "old_record_absent_before_this_bookkeeping": true,
+    "last_call_result": "Tool call rejected because catalog changed after github.create_file was prepared.",
+    "record_only": true,
+    "substantive_work": false,
+    "ledger_credit": false
+  },
+  "handoff_ids": [],
+  "cost_usd": null,
+  "active_duration_seconds": null,
+  "notifications_sent": [],
+  "separately_billed_provider_sessions_launched": 0,
+  "credential_files_inspected": false,
+  "private_orientation_disclosed": false,
+  "schedules_changed": false
+}

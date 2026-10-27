@@ -30,7 +30,38 @@ can make one elapsed interval three or five hours. One recurring automation
 implements all six slots. Its actual ID and enabled status are recorded only
 after the scheduler confirms them.
 
+### Resolving the clock slot
+
+Use `scripts/codex_wake_slot.py --started-utc <actual-aware-start>` to resolve the
+canonical claim path. If the scheduler supplies an authoritative scheduled occurrence,
+pass it as `--scheduled-utc`; prefer that over timing inference. A scheduler's
+`last_run_time` is an execution timestamp, not a scheduled timestamp.
+
+Without that metadata the helper labels its result as inferred: dispatch within ten
+minutes before the next configured New York slot maps to that upcoming slot; otherwise
+it maps to the latest elapsed slot. This is a bounded operating heuristic, not a
+scheduler delivery guarantee. It handles local calendar dates and DST in UTC.
+If a trigger cannot safely be tied to an occurrence, record the ambiguity and stop.
+
+The helper does not read or write claims, call a scheduler, or search for an unclaimed
+slot. Create the returned path with create-if-absent. If it exists, reconcile that exact
+owner and stop under the claim rule; never shift to another free slot or steal a claim.
+Preserve actual start, selected clock slot and resolution basis in the run record.
+
 Each Codex wake must:
+
+0. **Do your named reviews before new work (added 2026-10-22).** Peer review is in your queue by
+   name, not by request. `python3 channels/item_ledger.py --queue tarik` is the waiting work that
+   carries your name; `python3 channels/item_ledger.py --reading-queue tarik` is finished work that
+   is already in the repository and that nobody has read — on 22 October there were 252 such items
+   across the commons and no queue contained any of them, so nothing could reach them. Clear as many
+   as the wake allows, oldest first, and write the verdict the moment you reach each one:
+   `python3 channels/item_ledger.py --review <id> --state accomplished|postponed|rejected --reason
+   "why" --reviewer tarik`. Write it as you go, never at the end: a wake cut off at its action cap
+   keeps only what it has already written. A wake whose entire content is two verdicts, and no new
+   artifact, is a good wake — several of those a day is the cheapest review capacity the commons has,
+   and the human asked on 2026-10-22 for fewer new artifacts and more finished ones until nothing is
+   waiting.
 1. Read fresh ROSTER and AUTHORSHIP, Tarik durable facts/recent conversation, this protocol,
    private Tarik context/state, its general to-do list, handoff statuses, and
    recent Codex wake records. Current ROSTER overrides old participant counts.
@@ -110,8 +141,14 @@ this is remote evidence reconciliation, not a new direct observation of the Mac.
 The bootstrap required an existing Mac-local Goose session; queue publication
 alone did not start its missing consumer. REQUEST T-2's installation purpose is
 satisfied by that receipt. Codex still has no configured Mac command bridge.
-The pending recovery tasks002/003 remain queued; automatic scheduled pickup of
-one of those tasks has not yet been observed. The recorded local interval is
+Updated2026-10-18: task002's matching completed queue state and published receipt now
+establish an observed Codex→Goose source-recovery/publication cycle. It recovered only
+the original guard/test pair; original runner/test recovery is separately queued as
+`tg-20261017-001`. Story task003 is now completed: its matching-token receipt
+recovered the approved original *Momentum Latch*, and Codex published the exact
+original blob on2026-10-18. Source recovery is remote public evidence, not a new
+Mac observation; the new catalog integration remains independently reviewable. These are fresh public remote
+evidence reads, not a direct observation of the Mac. The recorded local interval is
 86400seconds, retained here without changing its cadence.
 
 ## Reporting compatibility

@@ -88,6 +88,29 @@ class TestIndexesAreInSync(unittest.TestCase):
                 "the index date moved when the document was edited — it must be the "
                 "birth date, not the last-touch date")
 
+    def test_a_stale_index_names_the_file_it_is_missing(self):
+        """A check that says only "STALE: scripts" costs a bisect; the file name costs nothing.
+
+        Measured 2026-10-26: the index was green at 09:40Z and stale by 13:29Z because a
+        landing added `scripts/ledger_verdict_mirror.py` and did not regenerate. The
+        repair is a single command — but only for a reader who knows *which* file.
+        """
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("gen_index_missing", GEN)
+        gen = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(gen)
+
+        listed = gen.missing_from_index("scripts", "")
+        self.assertTrue(listed, "an empty index should be missing every script")
+        self.assertTrue(all(f.startswith("scripts/") for f in listed))
+
+        full = (open(os.path.join(REPO, "scripts", "README.md"), encoding="utf8").read())
+        self.assertIn("gen_index.py", full)
+        # A page that names every basename is missing nothing.
+        complete = "\n".join(os.path.basename(f) for f in gen.tracked("scripts"))
+        self.assertEqual(gen.missing_from_index("scripts", complete), [])
+
     def test_scripts_are_described_in_their_own_words(self):
         """An index entry is the script's own first docstring line, not a paraphrase."""
         index = open(os.path.join(REPO, "scripts", "README.md"), encoding="utf8").read()

@@ -69,17 +69,69 @@ def _read_text(path: Path) -> str | None:
     return data.decode("utf-8", errors="replace")
 
 
-def tracked_files(root: Path) -> list[Path]:
+# A marker block is never megabytes; a cap keeps the scan off a stray untracked blob that some
+# checkout's `.gitignore` happens to miss. 2 MB was too low -- it skipped
+# `channels/channel-digest.md` (2.5 MB), an append log that is a real tracked text file and
+# therefore a real place a conflicted merge can land. Binaries are caught by the NUL test in
+# `_read_text`, so this cap protects against pathology; it is not a filter. Skipped files are
+# named, never silently eaten.
+MAX_BYTES = 20_000_000
+
+
+def _ls_files(root: Path, *flags: str) -> list[Path]:
     out = subprocess.run(
-        ["git", "-C", str(root), "ls-files", "-z"],
+        ["git", "-C", str(root), "ls-files", "-z", *flags],
         capture_output=True, text=True, check=True,
     ).stdout
     return [root / name for name in out.split("\0") if name]
 
 
-def scan(paths: list[Path], root: Path) -> dict[str, list[tuple[int, str]]]:
+def tracked_files(root: Path) -> list[Path]:
+    """Files git already knows about."""
+    return _ls_files(root)
+
+
+def untracked_files(root: Path) -> list[Path]:
+    """Files git has never seen and would not ignore: what a landing is about to add.
+
+    Added 2026-10-18, from Desi's run `20261017T030159Z-3efde3c6`, which wrote this change, was cut
+    off at its action cap and lost the diff at the landing gate. The defect it names is real and
+    was re-measured here: the lander runs the suite *before* it commits (`land_runs.py`: baseline
+    ... `git apply` ... `after = failing_tests()` ... `git add` ... `git commit`), so a file the run
+    **created** is still untracked at the moment this test looks at the tree. Scanning only
+    `git ls-files` caught the original `f48356e3` case -- markers inside files already on `main` --
+    and could never catch the same corruption in a *new* file, which is how most artefacts arrive.
+    `--exclude-standard` keeps `.gitignore` honoured, which is what makes this safe on a live
+    checkout; the lander grades *new* failures against a baseline, so markers already lying in an
+    untracked file block nothing.
+    """
+    return _ls_files(root, "--others", "--exclude-standard")
+
+
+def candidate_files(root: Path) -> list[Path]:
+    """Every file the guard should read: tracked, plus about-to-be-tracked."""
+    return tracked_files(root) + untracked_files(root)
+
+
+def scan(paths: list[Path], root: Path,
+         skipped: list[str] | None = None) -> dict[str, list[tuple[int, str]]]:
+    """Markers found, keyed by repo-relative path.
+
+    Files too large to be a marker block are named in *skipped* when the caller passes a list: a
+    silent skip is the same defect as a silent pass.
+    """
     hits: dict[str, list[tuple[int, str]]] = {}
     for path in paths:
+        try:
+            if path.stat().st_size > MAX_BYTES:
+                if skipped is not None:
+                    try:
+                        skipped.append(str(path.relative_to(root)))
+                    except ValueError:
+                        skipped.append(str(path))
+                continue
+        except OSError:
+            pass
         text = _read_text(path)
         if text is None:
             continue
@@ -96,11 +148,17 @@ def scan(paths: list[Path], root: Path) -> dict[str, list[tuple[int, str]]]:
 def main(argv: list[str]) -> int:
     if argv:
         paths = [Path(a) for a in argv]
+        mode = "explicit"
     else:
-        paths = tracked_files(ROOT)
-    hits = scan(paths, ROOT)
+        paths = candidate_files(ROOT)
+        mode = "tracked + untracked"
+    skipped: list[str] = []
+    hits = scan(paths, ROOT, skipped)
+    if skipped:
+        print("skipped %d file(s) over %d bytes: %s"
+              % (len(skipped), MAX_BYTES, ", ".join(sorted(skipped)[:5])))
     if not hits:
-        print("clean: no conflict markers in %d file(s)" % len(paths))
+        print("clean: no conflict markers in %d file(s) (%s)" % (len(paths), mode))
         return 0
     total = sum(len(v) for v in hits.values())
     for rel in sorted(hits):

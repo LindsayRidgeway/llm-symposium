@@ -4022,3 +4022,581 @@ indicator that lights when the board's voltages are normal, and the board is fed
 
 **Rule 12 applies to my own words above:** "the 2-wire plug is the battery cable" is a hypothesis with a test
 attached, not a cause with a heading. Two hours earlier I gave the last one a heading and it was wrong.
+
+## The fan header, and why the socket could not be seen 2026-10-13
+
+Two things resolved, both out of his own photographs, and one rule worth keeping.
+
+**The cooler's 4-wire lead (red / blue / black / yellow) goes to a header on the Raspberry Pi 5 itself** — marked
+`FAN` on the silkscreen, `J17` printed beneath it, sitting in the corner between the 40-pin GPIO header and the
+USB 2.0 ports. Raspberry Pi's own documentation places the Pi 5's 4-pin JST-SH fan connector exactly there; the
+Pi 5 is the first model with a dedicated fan connector. He had concluded the plug had "no mate on the Pi" and was
+preparing to run it to the CH340C board at the arm's base instead.
+
+**Why it was invisible: the header ships with a tiny protective cap in the same cream colour as the socket.** He
+found it only after being told which corner to look in. A same-colour cap makes an empty socket read as flat
+board. Worth remembering — "there is no socket here" and "there is a capped socket here" look identical in a
+photograph, and can look identical in the hand.
+
+**The inversion, which matters more than the connector: in this manual the FIGURES are reliable and the PROSE is
+not.** The §1.2.1 assembly figure correctly shows the cooler's lead entering the Pi's own fan header; he checked
+it afterwards and reported "The photo for Step 1 is even correct." The unreliable line was the one printed beside
+it — the pan-tilt Note. Every remaining puzzle in this build should be settled against the pictures first and the
+prose second.
+
+**And "pan-tilt" in HiWonder's language is a servo name, not a camera gimbal.** §9's arm specification reads
+*"HX-06L × 6 (1 × Pan-Tilt, 2 × Body, 1 × Wrist, 1 × Gripper)"* — that is the base rotation joint. I had used
+"your kit has no pan-tilt" to write off the Note; that was half wrong, and I corrected it in the same conversation.
+
+**Correction to the entry above dated 2026-10-10.** That entry records "the two PWM servo-port pairs at (14) and
+(15)." Re-read against the §1.8.1 numbered list: **(1) and (3) are the two sets of PWM servo ports**, with their
+power-selection jumpers at **(2) and (4)**; **(13)** is the DC power input, **(14)** the 5 V/5 A output, **(15)**
+the USB-C serial / firmware-download port. The (14)/(15) attribution was wrong. Recorded here rather than edited
+in place.
+
+**Still open:** two 3-wire all-black cables emerging through the deck with no socket found. The next test is to
+follow each to its far end — up into the arm (bus-servo lead → controller bus servo ports ⑥) or down into the
+chassis (chassis lead → controller PWM servo ports ① / ③). Both port groups sit on the controller edge that
+carries the two yellow jumper blocks, opposite the power switch. **Hypothesis, not finding:** the Note's shape —
+*"one to the servo port on the STM32 controller, and the other to the servo at the bottom of the robot arm"* —
+describes two wires where only ONE needs a controller socket, the second continuing the bus daisy chain. If so,
+the absent mate is the answer rather than a problem.
+
+## The dead robot: a contact that passed a voltmeter and not a load — 2026-10-17
+
+**The robot booted.** Nothing had ever lit on this machine since it came out of the box on 2026-10-08.
+What fixed it: the inline power connector between the battery and the blue terminal — its **pins needed
+bending down a slight amount** to make contact with the socket. He had to take the boards off again to
+get a grip on both halves with pliers, closed the pins, re-mated, and the lights came on.
+
+**How the fault was finally located, in order, because the method is reusable:**
+
+1. **Blue terminal, switch off: 8.50 V.** Blue terminal, switch on: **0.043 V.** A collapse under load.
+2. **Continuity from each board-side connector contact to its terminal screw: both beeped.** So neither
+   leg was broken — which is not the same as "good," because a continuity beeper's threshold is tens of
+   ohms.
+3. **Nothing warm anywhere after more than a minute**, which I wrongly used to rule out the board. At
+   8.46 V across ~50 Ω the dissipation is about 1.4 W — spread through a plastic connector housing, not
+   reliably detectable by hand. The arithmetic should have come before the argument.
+4. **The pack could not be probed directly** — the connector's live metal is sealed inside the housing,
+   and the visible silver strips are not conductive.
+
+**The rule that resolved it, and it is the most useful thing this build produced:**
+
+> **A voltmeter proves a source exists. It does not prove the path can carry current.** The meter's input
+> resistance is ~10 MΩ, so at 8.5 V it draws ~0.85 µA; through 50 Ω that is 40 µV of drop — invisible.
+> The board drawing 0.17 A through the same 50 Ω loses 8.46 V. Same joint, both times. **Voltage drop =
+> current × resistance**, and the meter's current is a millionth of the load's.
+
+Which is why "measure under load" is not a slogan. The car battery that reads 12.6 V and will not crank
+is the same phenomenon, and nobody doubts it there.
+
+**A prediction that did not get made in time, worth recording as such:** from step 1 the arithmetic said
+"series resistance somewhere in the pack, its leads, the connector, or the terminal." It named the class
+correctly and the member wrongly — the board, the pack, and the splice were all suspected before the
+connector's own pins. **The component nobody suspected was the one that is designed to be plugged in,**
+which is exactly where hand-assembly and mechanical tolerance live.
+
+**Recorded as a standing weak point:** the connector now carries pins that had to be bent to make contact.
+If the robot ever goes dark intermittently — vibration, the arm swinging, transport — that connector is
+the first place to look, and this paragraph is why we will remember to.
+
+## The robot boots, and the arm is the last question — 2026-10-17/18
+
+**The LanderPi came alive tonight for the first time since delivery on 2026-10-08.** Lights on at power,
+buzzer at about two minutes, lidar spinning, hotspot up, SSH working. The chain that got there: the card
+flashed and verified (2026-10-14), the power connector's **pins bent down a slight amount** to restore
+contact, and the battery charged.
+
+**The boot defect, and it is a vendor bug worth recording.** `start.sh` runs
+`sudo systemctl restart start_node.service`. **That unit does not exist on this image.** The real one is
+**`start_app_node.service`**, one word different. So the robot has always booted to lights, a beep and
+nothing else — the ROS stack never started. Manual launch of `robot_pi/start_node.sh` worked and launched
+the whole stack with **zero errors**: lidar communication normal, Aurora 930 found (firmware 2.0.8,
+640×400), gyro calibrated, `ros_robot_controller` setting servo offsets 1–4, rosbridge on 9090,
+web_video_server on 8080, startup_check clean. Whether `enable --now start_app_node.service` was actually
+run before the session ended is **unconfirmed** — check `systemctl is-enabled start_app_node.service` first.
+
+**What the robot verified about itself, and it is the method that matters:** every question the software
+could answer was answered by reading rather than by looking. `dmesg` had nothing about serial ports;
+`/dev/serial/by-id` showed **two WCH CH340-class devices** (`usb-1a86_USB_Serial-if00-port0` and
+`usb-1a86_USB_Single_Serial_5B22015852-if00`); `/dev/ttyUSB0` and `/dev/ttyUSB1` both exist. The battery
+topic reports real volts (**7873** with the full stack running). So the Pi→STM32 link is good.
+
+**Where the arm stands, unresolved.** `arm.desktop` runs a GUI (`arm_pc/arm.sh`) inside container
+`MentorPi`; `Servo.sh` runs a different container program. The arm is **not** started at boot and does
+**not** move by itself, so "the arm hasn't moved" was never a fault. But:
+
+- `ros2 topic pub --once /ros_robot_controller/bus_servo/set_position ros_robot_controller_msgs/msg/ServosPosition "{duration: 1.0, position: [{id: 10, position: 250}]}"` **published successfully, twice, and nothing moved.**
+- `/controller_manager/servo_states` reports six servos — ids **1, 2, 3, 4, 5, 10** with positions
+  500 / 730 / 130 / 100 / 500 / 150, `goal: 0`, `voltage: 0`, `error: 0` — **but the values did not change
+  after the position commands.** So treat them as a static table until proven otherwise. I claimed the arm
+  was alive on the strength of them and had to withdraw it.
+- `/ros_robot_controller/bus_servo/get_state` is advertised as `ros_robot_controller_msgs/srv/GetBusServoState`
+  and **hangs indefinitely** on every call, with either loose cable in P1. Dead end for now.
+
+**Next step, written down so it is not re-derived:** read `robot_pi/arm_pc/control_demo.py` and
+`robot_pi/arm_pc/arm.sh`. The suspicion is that `set_position` needs a preceding step — the topic
+`/ros_robot_controller/bus_servo/set_state` is the candidate, most likely enabling servo torque. A servo
+with power but torque disabled is limp and ignores position commands.
+
+**The cables, current state.** Two loose 3-pin black leads emerge through the same floor hole as the
+battery cable; a third shorter one sits in **P2** with **P1** empty beside it; the small CH340C board by
+the arm has an empty socket marked **NC**. Both floor cables were tried in P1, one at a time, without
+changing anything. **They are not proven to be spare** — my conclusion that the arm was alive (and
+therefore that the cables were spare) was withdrawn with the servo-states claim. `p1` currently holds one
+of the two floor cables.
+
+**Also noted:** `wayvnc` and `remote.service` are both active, but **macOS Screen Sharing refuses the
+connection** ("unable to communicate") — a client compatibility problem, not a dead server. A third-party
+VNC client would likely work. That matters because the vendor's own Arm GUI is the intended way to drive
+the arm, and it needs a display.
+
+## The buzzer settles the question the voltmeter could not — 2026-10-19
+
+The arm has been the last open question, and the reasoning had stalled on a proxy: `set_position`
+publishes and nothing moves, so either the Pi's commands never reach the STM32, or they arrive and the
+servos don't obey. Those are different faults with different fixes, and no amount of re-publishing
+`set_position` distinguishes them.
+
+**The buzzer distinguishes them, because it uses the same path and a different peripheral.**
+
+```
+ros2 topic info /ros_robot_controller/set_buzzer
+  Type: ros_robot_controller_msgs/msg/BuzzerState
+  Publisher count: 2
+  Subscription count: 1
+```
+
+A subscription count of 1 is the first thing to look at: the topic is not a dead end, something is
+listening. Then:
+
+```
+ros2 interface show ros_robot_controller_msgs/msg/BuzzerState
+  uint16 freq
+  float32 on_time
+  float32 off_time
+  uint16 repeat
+
+ros2 topic pub --once /ros_robot_controller/set_buzzer \
+  ros_robot_controller_msgs/msg/BuzzerState \
+  '{freq: 1000.0, on_time: 0.5, off_time: 0.5, repeat: 2}'
+```
+
+**It beeped twice.** That is the result the whole evening's diagnostics were missing. The Pi→STM32
+command path works: the topic resolves, the publisher is accepted, the STM32 receives the message and
+acts on it, and the periphery it drives is powered and responsive.
+
+So the arm fault is **downstream of the STM32**, and the remaining candidates collapse to two:
+
+1. The bus servos are not powered on their 7.4 V bus, or
+2. The bus servos are powered but have no torque, and torque is a separate enable that `set_position`
+   does not imply.
+
+Note which test did this and which did not. The multimeter measured a source and could not measure a
+path. `servo_states` reported a table of plausible numbers that never changed, and were mistaken for
+evidence when they were decoration. `get_state` hangs. **The buzzer worked because it was an experiment
+rather than a measurement** — it asked the robot to *do* something and watched whether it did it. That
+inversion is worth keeping: when a diagnostic returns numbers, prefer the one that returns an event.
+
+Also corrected: the interface uses `uint16 freq`, not `float64`. Publishing `1000.0` against a `uint16`
+field did not fail — ROS coerced it — which is a reminder that a successful publish is not a validated
+publish.
+
+## The arm moves — 2026-10-19
+
+```
+ros2 topic pub --once /ros_robot_controller/bus_servo/set_position \
+  ros_robot_controller_msgs/msg/ServosPosition \
+  '{duration: 2.0, position: [{id: 1, position: 800}]}'
+```
+
+**The arm turned about 75° counter-clockwise.** id 1 is the base rotation, and it obeys.
+
+So the entire arm fault was an artefact of the first test, which was `{id: 10, position: 250}` — the
+gripper, commanded from a reported 150 to 250. A hundred units on a gripper is a small fraction of its
+travel and is exactly the kind of move that reads as "nothing happened". I built a chain of inference on
+that silence: suspected the command path, suspected torque, suspected the loose cables, and withdrew a
+correct claim along the way. The fault was never real. The test was too small to fail visibly.
+
+**A second lesson, from the same command.** The first publish printed
+
+```
+Waiting for at least 1 matching subscription(s)...
+```
+
+That line is the ROS client refusing to publish into a void until a subscriber appears. It is the
+cheapest liveness check in the toolset and it was sitting in the output the whole time, in the earlier
+sessions too, unread.
+
+**And a third.** Before the command the arm **flopped freely** — with the robot powered on. So idle
+limpness is not a fault on this machine; the servos hold torque only when driven. That was on my list of
+candidate faults and should now be struck from it. A joint that resists you is not the healthy state
+here, and I would have diagnosed a *working* arm as broken on that basis.
+
+**Standing correction for the rest of this build:** when a command produces no visible effect, the first
+hypothesis is that the command was too small or aimed at the wrong joint — not that the hardware is
+dead. Scale the test until failure would be unmistakable, then interpret.
+
+**`/controller_manager/servo_states` is confirmed decoration — 2026-10-19.** After the arm was seen to
+turn ~75°, the topic still reports id 1 at **position 500**, `goal: 0`, `voltage: 0`, `error: 0`. It
+reported the same six numbers before the move. It is not reading the servos; it is emitting a constant
+table. Strike it from the diagnostic set permanently, and note the shape of the trap: it was *plausible*
+— six ids, sensible values, a real message type, a live publisher — and it survived several rounds of
+reasoning because nothing about it looked broken. A stale constant is harder to disbelieve than silence.
+
+**id 1 obeys, id 10 does not.** `{id: 10, position: 700}` from a reported 150 produced no movement of the
+gripper. So the arm answer has become a bus-continuity question: the HX-06L servos are daisy-chained
+SIG/VIN/GND, and a chain that has lost a link leaves everything downstream silent while everything
+upstream works normally. Chain order is almost certainly base(1) → shoulder(2) → elbow(3) → wrist
+pitch(4) → wrist roll(5) → gripper(10), which predicts the exact symptom seen: **the base works and the
+tip does not.** Which would make the two loose 3-pin cables through the floor hole load-bearing after
+all — the conclusion I withdrew twice without ever settling.
+
+## Direct control, and the bus is the answer — 2026-10-19
+
+**LAN mode works.** After the reboot the robot is on the home network at **192.168.1.178**, MAC
+88:a2:9e:ef:9e:2 — the same NEEF9E01 that names the hotspot. `HW-` is gone because it is no longer
+needed: the SSID-case fix plus the reboot put the robot in client mode on the first try. It is reachable
+as `raspberrypi.local` and by IP, and now has a key in `~/.ssh/authorized_keys`, so I drive it from the
+Mac with no password and no human relay. A `Host lander` entry in `~/.ssh/config` makes it one word.
+
+**The first lesson of direct control is that the graph lies after a network change.** With the stack
+running and 53 topics live, a fresh `ros2 topic list` from a new shell returned **two** topics and zero
+nodes. The nodes had been launched at boot on a network that was not yet up; their DDS participants were
+bound to interfaces that no longer carried the traffic. A restart of `start_app_node.service` made all 28
+nodes visible. Anything that looks like "the stack isn't running" on this robot should be re-tested after
+a restart before it is believed.
+
+**`get_state` no longer hangs** — once the stack was restarted, it answers. The earlier hanging was a
+symptom of the pre-restart state, not a broken service. This is the real feedback channel, and it is the
+only honest one on the machine.
+
+**The measurement:**
+
+```
+{cmd: [{id:1,get_id:1},{id:2,get_id:1},{id:3,get_id:1},
+       {id:4,get_id:1},{id:5,get_id:1},{id:10,get_id:1}]}
+
+present_id=[1]   present_id=[]   present_id=[]   present_id=[]   present_id=[]   present_id=[]
+```
+
+**Servo 1 answers. Nothing else does.** The chain is base(1) → shoulder(2) → elbow(3) → wrist pitch(4) →
+wrist roll(5) → gripper(10), and the HX-06L bus carries data *and* power through each servo's in/out
+pair. A break after servo 1 therefore explains every symptom at once: the base rotates (it did, ~75°, and
+again ~20° at boot under `startup_init`), and the rest of the arm is silent, limp, and unpowered. Not five
+separate faults — one missing link.
+
+**So the loose cables are load-bearing after all.** The conclusion I withdrew twice, for lack of evidence
+either way, is now supported by a measurement: something between servo 1 and servo 2 is not connected.
+The candidates remain P1 (empty, beside the cable-1 socket P2) and the empty **NC** socket on the small
+board at the arm base.
+
+**Battery is at 6967 mV**, against a low-battery warning threshold of 6900 mV — that is the beep at boot,
+and it is also why the servos move sluggishly. Charge before any further arm work; a servo bus measured
+under a nearly-flat battery is a measurement with two variables in it.
+
+**Tooling left behind:** `~/LLM/desi-bot/tools/bus_probe.py` (rclpy, currently does not match the service
+from a piped stdin process — unresolved) and `~/LLM/desi-bot/tools/busids.sh`, uploaded to the robot as
+`/home/pi/busids.sh`, which works and is the one to use.
+
+**Operational caution:** a single `get_state` call carrying twelve commands wedged `ros_robot_controller`
+— the battery topic stopped publishing entirely. Restarting the service cleared it. Probe in small
+batches, and check that `/ros_robot_controller/battery` is still alive afterwards.
+
+**Correction to the entry above, same evening.** Two facts reported after the measurement overturn part of
+it.
+
+1. **A floor cable was already in P1 during the measurement.** I had been carrying "P1 empty" forward from
+   the previous session; it is not current. So the silent chain was measured *with* a floor cable
+   connected, and P1 is not the missing link. The remaining candidates are the second floor cable and the
+   empty **NC** socket on the board at the arm base.
+2. **The arm joints are now stiff, and they were limp before.** A servo with no power is limp regardless
+   of torque setting; stiffness means current is in those servos. That contradicts "the chain is
+   unpowered downstream of servo 1" and points somewhere more interesting: **the servos are powered but do
+   not answer reads.** The bus carries VIN/VOUT in parallel through the chain while SIG is the chained
+   half-duplex line, so a break in the signal path alone fits both observations — power everywhere,
+   `present_id` only at the head.
+
+Which makes the earlier "the arm is unpowered past servo 1" wrong, and it also means `set_position` may
+work on those joints even though `get_id` does not. The small movement seen while the elbow was jammed
+against the WonderEcho Pro box is consistent with commands being obeyed.
+
+**Two consequences.** First, the next test is not another cable swap: it is to clear the elbow of the
+WonderEcho box, run the vendor `init` action group to put the arm in a known pose, and then move joints
+one at a time and *look*, with `get_state` position reads as a bonus rather than as the definition of
+working. Second, **the robot must not be left in a pose where `init` drives the arm into an obstruction** —
+at boot it now pushes the elbow into the WonderEcho box every time, and a servo straining against a
+mechanical stop is how these burn out.
+
+## The vendor bug that ate three sessions — 2026-10-19
+
+**`get_voltage: 1` kills `ros_robot_controller`.** From the journal:
+
+```
+[ros_robot_controller-4] File ".../ros_robot_controller_node.py", line 287, in get_bus_servo
+[ros_robot_controller-4]   state = self.board.bus_servo_read_voltage(i.id)
+[ros_robot_controller-4] AttributeError: 'Board' object has no attribute 'bus_servo_read_voltage'.
+[ros_robot_controller-4]     Did you mean: 'bus_servo_read_offset'?
+[ERROR] [ros_robot_controller-4]: process has died [pid 18867, exit code 1]
+```
+
+The method on `Board` is `bus_servo_read_vin`, not `bus_servo_read_voltage`. A request that asks for voltage
+therefore raises `AttributeError` inside the service callback, and the uncaught exception takes the whole
+node down.
+
+**This is the answer to the `get_state` mystery.** The service did not hang — it *killed the node*, and the
+caller then waited forever for a reply from a server that no longer existed. That is what "hangs
+indefinitely after requester: making request" has meant all along. And the corpse explains the rest of the
+evening's confusion: with `ros_robot_controller` dead, `set_position` had **no subscriber**, so every
+subsequent arm command was published into an empty room and the arm's silence was correctly interpreted as
+"nothing happened". It was never the arm. It was a diagnostic that committed murder and then reported no
+answer.
+
+**Use only `get_id` and `get_position`.** Verified working, both in single calls and in batches. Verified
+fatal: `get_voltage`. Untested and to be assumed dangerous until measured: `get_temperature`,
+`get_torque_state`, `get_position_limit`, `get_voltage_limit`, `get_max_temperature_limit`.
+
+**Instrument check, end to end.** `set_position {id: 1, position: 750}` published three times, then
+`get_position` returned **748**. Writes and reads both work on servo 1, and the reading tracks the command.
+Note that a single `--once` publish is unreliable — the CLI spends its first seconds waiting for a matching
+subscription and the message can be dropped; use `--times 3 --rate 2`.
+
+**The bus, measured properly.** With a healthy node: id 1 → `position=[501]`; ids 2, 3, 4, 5, 10 → `[]`.
+A broadcast to id 254 also returns only id 1. **One servo answers.**
+
+**Reading the stillness.** The upper arm holds its pose and feels stiff, which an unpowered servo cannot do,
+so those joints have power. HX-06L servos hold torque without new commands. So the picture is: **power
+present, signal absent, downstream of servo 1** — the upper servos are frozen in whatever pose they were
+last told, and nothing can be read from them because reads travel the same dead line. One pin in one
+connector, between the base servo and the next servo up. That is now the whole remaining fault.
+
+## The arm works — 2026-10-19
+
+**The missing link was one empty socket.** Every servo in the chain has two 3-pin sockets, one in and one
+out, and every one of them had both occupied — except the lowest servo, on top of the turret, which had
+**one socket empty**. Plugging cable #1 (the shorter of the two floor-hole cables) into it closed the chain.
+The moment it seated, the whole arm articulated on its own.
+
+Read back immediately afterwards, all six:
+
+```
+id 1 -> 499   id 2 -> 728   id 3 -> 122   id 4 -> 100   id 5 -> 498   id 10 -> 338
+```
+
+and then, driving one joint at a time and reading after each:
+
+```
+id 2  728 -> 788 (commanded 788)
+id 3  122 -> 174 (commanded 182)
+id 4   98 -> 153 (commanded 160)
+id 5  498 -> 556 (commanded 558)
+id 10 --  -> 448 (commanded 450)
+```
+
+Five joints land within a few counts of target; the small shortfall is the servo's own settling. **The arm
+is not broken and probably never was.** Every "the arm doesn't move" observation in this build traced back
+to a dead `ros_robot_controller` node, and every dead node traced back to a `get_voltage` read.
+
+The gripper is the exception in behaviour, not in health: commands to 700 and 200 left it sitting at 338
+while 450 moved it, so its travel is mechanically limited somewhere above that. Treat 0 and 1000 as
+unsafe for id 10 and calibrate its real range before using it to grasp anything.
+
+**Correction — `/controller_manager/servo_states` is a startup snapshot, not decoration.** I called it
+fabricated because it did not change while I was driving id 1. It reports 500/730/130/100/500/150 against
+live values of 499/728/122/100/498/336: close, and frozen. So it is a stale copy taken once at startup, not
+a synthesis. The operational advice stands — never read it as feedback — but "it is emitting a constant
+table" overstated what it is. What actually happened the night it failed to change is that the node was
+dead and nothing was moving at all.
+
+## Wheels, and a permanent fix for the disappearing stack — 2026-10-19
+
+**The drive train responds.** `/controller/cmd_vel` with `linear.x = 0.12` for three seconds, then a zero
+Twist:
+
+- `/odom` x went from **2.046 → 5.117**, y from −0.180 → −0.482.
+- The Aurora camera view changed between a before and after frame: carpet close up, then the same carpet at
+  greater distance with a foot in frame and the yellow Ethernet lead in a different position.
+
+So all four motors are commanded and all four turn. Note the odometry scale is badly wrong — a 0.36 m
+command produced 3.07 m of reported travel, roughly 8× too high — so **`/odom` is not usable for
+navigation until that is calibrated**. It is still useful as a movement detector, which is what I used it
+for.
+
+**The tether.** Driving was done with Ethernet plugged in, so the robot was on a 10-foot leash. Wi-Fi is
+also up — `nmcli` shows `wlan0` connected to `RidgewayFiOS` with a DHCP address — so the cable is
+management convenience, not a requirement.
+
+**Root cause of the recurring "the stack isn't running" mystery.** `start_node.sh` launched ROS
+immediately at boot, before any interface had an address. The DDS participants then bound to whatever
+existed at that instant, and once Wi-Fi associated the running nodes became undiscoverable from any new
+shell — ~29 healthy nodes, and `ros2 node list` returning nothing. Every occurrence was cured by
+restarting `start_app_node.service` *after* the network was up, which on a bad night looked like a magic
+word.
+
+**Fixed at the source.** `start_node.sh` now waits up to 60 s for an IPv4 address on wlan0 or eth0 (plus a
+5 s settle) before launching. Original saved as `start_node.sh.orig`. This should end the class of failure
+where a power cycle silently costs an hour.
+
+Also on the record: the robot's clock runs in HKT and reads twelve hours ahead of local time; a service
+that has been "running 4 months 25 days" is a clock that was wrong at boot and corrected itself later. Do
+not read uptimes off `systemctl` on this image.
+
+## Wi-Fi needed no fix, and the gripper's real limits — 2026-10-19
+
+**The Wi-Fi was already working.** A reboot with the stack starting in the vendor's order produced, with
+no intervention: `wlan0` associated to `RidgewayFiOS` on its own, address 192.168.1.178, **no hotspot
+created**, and **29 ROS nodes up on the first boot** thanks to the new wait-for-network step in
+`start_node.sh`. The boot-ordering fix and the SSID-case fix between them closed this out. Every earlier
+`HW-` appearance traced to the SSID typo, not to the design.
+
+**Reaching the robot.** `raspberrypi.local` resolves to the Wi-Fi address consistently (3/3), so
+`~/.ssh/config` now has `Host lander` → `raspberrypi.local`, with `lander-wifi` (.178) and `lander-eth`
+(.179) as fixed-address fallbacks. Ethernet is a diagnostic convenience only; the robot runs untethered.
+
+**Buzzing: gone after a reboot.** The soft continuous hum was the arm standing vertically with its
+shoulder servo holding the whole arm against gravity. A re-init cleared it. That is a pose to avoid
+leaving the robot in — a stalled servo is a hot servo.
+
+**Gripper travel, measured.** Commanding beyond the mechanical stops produces no motion at all, which means
+a stalled servo rather than a refused command:
+
+```
+337 commanded 300 -> 333    (will not close past ~332)
+332 commanded 600 -> 544    (open stop)
+544 commanded 800 -> 544    (no movement: hard stop)
+544 commanded 420 -> 421    (responds normally)
+```
+
+So **id 10's real range is about 332–545**, not 0–1000. Command only 360–520. Everything else in this
+manual that assumes 0–1000 for the gripper is wrong for this machine.
+
+**The boot pose**, read after every restart, is stable and worth recording as the known-good home:
+
+```
+id 1 = 500   id 2 = 728   id 3 = 125   id 4 = 100   id 5 = 499   id 10 = 337
+```
+
+**Chassis floor post screw: black M3×6.** The Lander's floor plate is held by four posts (spacer plus a
+screw top and bottom). One bottom screw was missing from delivery. M3×6 fit; M2×6 was too small and the
+PB2.5×6 in the spare bags is a self-tapping screw for plastic, not for a metal standoff. Spares came from
+the kit's own leftovers — **not** from the 641-piece assortment. Starting a screw into a blind hole next
+to an axle was done by sticking it to the driver tip with candle adhesive, which is worth remembering as
+the general trick.
+
+## The base is fully working — 2026-10-19
+
+Four motions, all confirmed against `/odom`:
+
+```
+forward  lx=-0.15 x2s   x 0.00 -> 0.64, y -0.43
+strafe   ly=+0.20 x2s   y -0.43 -> -1.39, x -0.43 -> -0.06
+```
+
+The strafe is what was in doubt. It slid about a metre sideways and barely moved in x, so the four
+mecanum wheels are genuinely crabbing and not just steering. Rotation was confirmed earlier (~137° per
+series, and the lidar view changed with it).
+
+**Two of my own errors in the middle of this.** First, `drive.sh` had the lateral term hard-coded to 0.0
+while accepting a fourth argument for it and quietly ignoring it — so two "strafe tests" proved nothing
+except that a robot told to sit still will sit still. Second, the earlier 21.7 m odometry reading was read
+as an 8× scale error; measured properly against known commands it is about **2.5×**, consistent across
+forward and lateral motion. Both were instrument faults reported as machine faults, which is now three
+times today.
+
+**Everything mechanical on this robot now works:** six arm servos, four wheels in all four motions, lidar,
+depth/RGB camera, battery telemetry, and control from here over Wi-Fi with no human in the loop.
+
+## Calibrating a rover by eye, and why the lidar had to go — 2026-10-19
+
+Human-verified calibration of the base, which no amount of instrument-reading produced:
+
+- **Forward:** `linear.x = 0.15` for 8 s moved **6 ft** where 4 ft was asked — about **1.5× commanded**,
+  or ~0.23 m/s effective. Straight-line distance error is roughly ±1 ft on a 5 ft move.
+- **Turn:** `angular.z = 0.90` for 2 s turned **~330°, not 103°** — about **3.2× commanded**, i.e. ~165°/s.
+  A "90° turn" at the vendor's nominal rate is really 0.55 s of command. My first attempt was off by a
+  factor of three and a half, and only his eyes caught it.
+- **Strafing drifts.** Two lateral moves left the heading 18° and then 34° off course. Real mecanum slip on
+  a wooden floor, not a bug; it accumulates, so strafes must be followed by a heading correction rather
+  than trusted.
+
+**`/odom` yaw is unusable.** It reported −34° for a turn that was actually +330°, −133° at a moment when
+the robot had not moved at all, and −154→27 for a rotation of about 20°. Position from `/odom` is roughly
+right; heading is fiction. That is a mechanical-odometry-plus-IMU fusion that has no absolute reference and
+has not been initialised.
+
+**The lidar is worse than useless for navigation here.** After parsing correctly (my first parser stopped
+at the first `.inf` and silently reported a fragment), `/scan_raw` carries only ~90° of arc per message
+and the vendor's angular filter keeps a window that does not correspond to what the robot calls "front".
+The result was a rover that reported open space ahead and then dragged a throw rug into its wheels twice.
+**It is a human with eyes that made the drive possible**, not a sensor.
+
+**Rule carried out of this:** when a drive must be precise, drive in short increments and let a person
+confirm each one. My instruments are good enough to say *that* it moved, not *where* it went.
+
+## Maiden voyage — 2026-10-19
+
+The LanderPi drove a route through the foyer and back, carrying an arm and a camera, driven from this
+session over the house Wi-Fi with a person watching and correcting. Backed up clear of a stool, strafed
+east and west along the front door, turned, crossed from hardwood onto carpet, ran south 2 ft, then turned
+east and ran 6 ft to the centre of the room. It ended when the low-battery warning sounded, was carried to
+a table and put on the charger.
+
+**What actually made it work was the human, and the honest inventory matters more than the achievement.**
+
+- **Distance:** wheel encoders → `/odom`. Accurate enough at 4–6 ft on hardwood; degraded late in the run
+  as reads were taken too soon after each stop.
+- **Heading:** fictional. `/odom` yaw reported −133° while the robot had not moved, −34° for a +330° turn,
+  and −154°→27° for a 20° rotation. Never usable; every turn was calibrated against his eyes instead.
+- **Turn rate is surface-dependent:** ~0.83 rad/s effective on hardwood, ~0.69 rad/s on carpet, both
+  against 0.90 commanded. A "90° turn" is a different duration on either side of a threshold.
+- **The lidar** contributed nothing. Roughly 90° of arc per message, and the vendor's angular filter
+  (`lidar_filters_config_ms200.yaml`, lower 1.88 / upper 4.25 rad) keeps a window that does not agree with
+  what the robot calls forward. It reported open space and the robot dragged a rug into its wheels twice.
+- **The camera** sees the floor about 0.6 m ahead — fine for finding an edge, useless for route-finding.
+
+**The fix that mattered most was mechanical, not intelligent.** Driving through `ros2 topic pub` in
+separate invocations left seconds of commanded motion between the "go" process exiting and the "stop"
+process starting: a 0.1 s command produced a 180° spin. `drive_node.py`, which publishes the go and the
+stop from one process and waits for a real subscriber before starting the clock, turned the base from
+uncontrollable into predictable in one step.
+
+**Next, and he proposed it:** make the robot speak, then hear. If it can talk, the drive commentary stops
+being a wall of text and becomes a voice in the room.
+
+## Voice, sight that can look up, and the answer to continuous conversation — 2026-10-19
+
+**The robot talks with a real voice.** `espeak-ng` worked first, as a proof of path; **Piper** (neural,
+`en_US-amy-medium`, running on the Pi 5, no cloud) is the voice in use. Installed in `/home/pi/piper-venv`,
+voices in `/home/pi/piper-voices`, spoken through the **USB PnP Audio Device** (card 2) — the WonderEcho
+Pro, which turns out to have a **speaker as well as the microphone array**. `say.sh "text"` speaks.
+
+**The robot hears, and hears well.** `vosk` with the small model was about seventy percent and smeared
+whole clauses. **`faster-whisper` base.en int8** returns sentences verbatim — a twenty-second answer came
+back word-perfect including punctuation. Roughly 2.5 s of compute per second of audio on the Pi 5, so an
+eight-second listen costs about twenty seconds of thinking. `ask.sh "question" <seconds>` speaks, listens,
+transcribes. The microphone needs its capture gain raised (`amixer -c 2 sset Mic 100% cap`).
+
+**The camera can look up, and I had simply parked it looking down.** Joint 4 is the camera's pitch. At
+`id 4 = 100` the view is the tabletop forty-five degrees down; at `243` it is the whole foyer — French
+doors, the chair with the moulded animal, the chest with its lace cover and photographs, the stairs. The
+45-degree downward gaze was my own default pose, not a mounting limitation.
+
+**Turret range is the full range.** `id 1` commanded to 0 reached 7; commanded to 1000 reached 995. No
+stall anywhere in between, so the base sweeps its whole ~240°.
+
+**Continuous conversation is possible, and the mechanism is already installed.** The Goose CLI can resume a
+named session and return a reply:
+
+```
+goose run -n voicetest -t "Remember the number 4173."
+goose run -r -n voicetest -t "What number did I ask you to remember?"   → 4173
+```
+
+So a voice loop can be built: Pi listens → Mac calls `goose run --resume` on a session → reply returns to
+the Pi and is spoken. The session used should be a **fork** of this one, so that the desktop app and the
+voice loop are not two writers on one transcript. Latency per turn will be seconds to a minute depending
+on how much the agent stops to look at things.
+
+**The game controller** on the table is the kit's teleoperation handset; the image runs a `joystick_control`
+node subscribed to `/joy`. It has no role in this work.

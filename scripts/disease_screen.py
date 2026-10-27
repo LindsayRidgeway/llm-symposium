@@ -398,9 +398,20 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         names = [sym] + [n for n in t.get("names", []) if n]
         best = None  # (both counts real, strict, any_field, name, disease form)
         name_best = None  # separate evidence; a larger symbol maximum must not mask it
+        # Every supplied spelling actually queried, kept whether it answered or failed. This
+        # list used to be thrown away after `best` was chosen, so a row whose winning zero came
+        # from one spelling while another spelling FAILED looked exactly like a genuine zero —
+        # a failed query read as a zero at the band-selection layer, the defect the instrument
+        # exists to prevent. It also gives a failed expanded-name query a trace, so "the name
+        # did not answer" stops being indistinguishable from "no name was supplied".
+        spellings = []
         for name in names:
             for form in forms:
                 s, a = strict(name, form), any_field(name, form)
+                spellings.append({
+                    "name": name, "disease_form": form, "strict": s, "any_field": a,
+                    "failed_scopes": [k for k, v in (("strict", s), ("any_field", a)) if v < 0],
+                })
                 # A candidate whose counts BOTH came back is preferred over one that failed:
                 # ranking on (strict, any_field) alone let a failed any-field (-1) ride on a
                 # higher strict count and overwrite a real number with a -1.
@@ -412,6 +423,14 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                     if name_best is None or cand[:3] > name_best[:3]:
                         name_best = cand
         _, s, a, name, form = best
+        # Row-level coverage: did every (name spoken, disease form) pair we asked return a
+        # count? A zero is only certified where it does.
+        failed_pairs = [(sp["name"], sp["disease_form"]) for sp in spellings
+                        if sp["failed_scopes"]]
+        coverage_complete = not failed_pairs
+        expanded_name_failed = list(dict.fromkeys(
+            sp["name"] for sp in spellings
+            if sp["failed_scopes"] and sp["name"].strip().casefold() != sym.strip().casefold()))
         # What the plain symbol-only query would have reported, kept so a reader can see the
         # difference a name makes rather than trusting the maximum on its own.
         sym_s, sym_a = strict(sym, disease), any_field(sym, disease)
@@ -431,14 +450,25 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         unresolved = (not ctl and not fs and s > 0 and ambiguous_symbol
                       and confirmation is None)
         raw_zero = not ctl and a == 0 and s == 0
+        # A 0/0 is only a measured zero where every supplied spelling answered. Where one did
+        # not, the row may stay in the raw `unjoined` band as an observation, but it may not be
+        # certified as a zero nor enter the density-qualified band.
+        unmeasured_zero = raw_zero and not coverage_complete
         row_verdict = ("null control — a string that names nothing; it is here to be scored and "
                        "is excluded from every count" if ctl
                        else verdict(a, s, ambiguous_symbol, confirmation is not None))
-        if raw_zero and not density_qualified:
-            reason = (f"BELOW DENSITY FLOOR: {dis_strict} < {FLOOR_STRICT} strict papers"
-                      if density_status == "below_floor" else
-                      "UNKNOWN CORPUS DENSITY: strict density query failed")
-            row_verdict = f"unjoined raw 0/0 observation — candidate status WITHHELD ({reason})"
+        if raw_zero and not (density_qualified and coverage_complete):
+            reasons = []
+            if not density_qualified:
+                reasons.append(f"BELOW DENSITY FLOOR: {dis_strict} < {FLOOR_STRICT} strict papers"
+                               if density_status == "below_floor" else
+                               "UNKNOWN CORPUS DENSITY: strict density query failed")
+            if not coverage_complete:
+                reasons.append("INCOMPLETE SPELLING COVERAGE: "
+                               + ", ".join(f"{n!r} in {f!r}" for n, f in failed_pairs)
+                               + " did not answer")
+            row_verdict = ("unjoined raw 0/0 observation — candidate status WITHHELD ("
+                           + "; ".join(reasons) + ")")
         return {
             "category": t.get("category", ""),
             "symbol": sym,
@@ -456,6 +486,15 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
             "name_confirmation": confirmation,
             "unresolved_ambiguity": unresolved,
             "candidate_density_status": density_status if raw_zero else None,
+            # Every spelling queried for this row, failures included: the evidence behind
+            # `strict`/`any_field` rather than only its maximum.
+            "spellings": spellings,
+            "coverage_complete": coverage_complete,
+            "unmeasured_zero": unmeasured_zero,
+            # Expanded-name queries that were supplied and did not answer. Before this, a failed
+            # alias left the same trace as no alias at all (none).
+            "expanded_name_failed": expanded_name_failed,
+            "failed_spelling_pairs": [{"name": n, "disease_form": f} for n, f in failed_pairs],
             # A join is only evidence if you can open it. Empty unless strict > 0.
             "strict_hits": hits,
             "open_targets_score": score,
@@ -508,7 +547,13 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
                  "joined or unjoined; see `ambiguous_unverified_joins`. `name_confirmation` "
                  "keeps its own query/counts/hits; supplied aliases are not biological proof. "
                  "`unjoined` preserves raw 0/0 observations; only `density_qualified_unjoined` "
-                 "meets the necessary corpus-density floor. Density qualification never "
+                 "meets the necessary corpus-density floor AND answered every supplied spelling. "
+                 "Each row carries `spellings` — every (name, disease form) pair queried with its "
+                 "counts and `failed_scopes` — so a zero taken from one spelling while another "
+                 "failed is visible instead of certified; such rows are listed in "
+                 "`unjoined_incomplete_coverage` and set `coverage_complete` false. A failed "
+                 "expanded-name query is recorded in `expanded_name_failed` and is not the same "
+                 "fact as no name having been supplied. Density qualification never "
                  "certifies a scientific hypothesis, controls or complete target-name coverage."),
         "n_targets": len(real_rows),
         "n_controls": len(ctrl_rows),
@@ -553,9 +598,24 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
         "density_qualified": density_qualified,
         "density_queries": density_queries,
         "density_strict_queries_complete": density_complete,
+        # A qualified zero is a zero with a dense corpus AND a fully answered set of spellings.
+        # Density qualification alone was not enough: a row whose alias query failed scored 0/0
+        # and entered this band as if the corpus had answered everything.
         "density_qualified_unjoined": [r["symbol"] for r in scored_rows
                                        if r["strict"] == 0 and r["any_field"] == 0
-                                       and density_qualified],
+                                       and density_qualified and r["coverage_complete"]],
+        # Raw zeros that stay observations only: a supplied spelling did not answer.
+        "unjoined_incomplete_coverage": [r["symbol"] for r in scored_rows
+                                         if r["strict"] == 0 and r["any_field"] == 0
+                                         and not r["coverage_complete"]],
+        "n_rows_incomplete_coverage": len([r for r in scored_rows
+                                           if not r["coverage_complete"]]),
+        "incomplete_coverage_note": (
+            None if all(r["coverage_complete"] for r in scored_rows) else
+            "some rows did not get an answer from every supplied spelling; they are listed in "
+            "`unjoined_incomplete_coverage` where raw 0/0, and each row carries its own "
+            "`spellings`, `failed_spelling_pairs` and `expanded_name_failed`. An unanswered "
+            "spelling is not a zero: these rows are observations, not qualified zeros."),
         # A floor is necessary screening context, never scientific certification.
         "candidates_certified": False,
         "candidate_certification_note": ("No scientific certification is performed. "
@@ -573,7 +633,76 @@ def run(disease: str, targets: list, use_ot: bool = True, forms: list = None) ->
     }
 
 
-def density(conditions: list) -> list:
+# One spelling is not the condition. Measured 2026-10-18, on the queue's own refill:
+# `small fibre neuropathy` returned 281 strict papers and the tool wrote it off as "below floor —
+# work it by reading, not by screen"; `small fiber neuropathy` returned 1,245 and the tool called it
+# "screenable". Same corpus, opposite verdict, one letter. The queue's rule makes that error durable
+# — a retired condition is never re-measured — and it points the wrong way: a queue written in
+# British or non-possessive spellings looks thinner than it is, and thin reads as *better* ground
+# here. So the density check now measures every mechanical spelling of the name it can justify and
+# takes the maximum, recording each count.
+SPELLING_PAIRS = (
+    ("fibre", "fiber"), ("tumour", "tumor"), ("oedema", "edema"), ("anaemia", "anemia"),
+    ("ischaemia", "ischemia"), ("oesophag", "esophag"), ("haemorrhage", "hemorrhage"),
+    ("paediatric", "pediatric"), ("coeliac", "celiac"), ("diarrhoea", "diarrhea"),
+    ("foetal", "fetal"), ("gynaecolog", "gynecolog"), ("orthopaedic", "orthopedic"),
+    ("oestrogen", "estrogen"), ("dysmenorrhoea", "dysmenorrhea"), ("leukaemia", "leukemia"),
+    ("haemat", "hemat"), ("oedem", "edem"), ("sulph", "sulf"),
+)
+# A possessive variant is only justified for an *eponym*: a capitalised penultimate word that is
+# somebody's name — "Eagle syndrome" / "Eagle's syndrome", "Crohn disease" / "Crohn's disease".
+# The rule is deliberately narrow, because the alternative generates nonsense ("pudendal's
+# neuralgia") and every nonsense variant costs queries and muddies the record.
+EPONYM_NOUNS = ("syndrome", "disease", "disorder", "neuralgia", "neuropathy", "contracture",
+                "dehiscence", "fistula", "palsy", "malformation", "anomaly", "triad")
+
+
+def _swap(name: str, src: str, dst: str) -> str | None:
+    """`name` with the first case-insensitive `src` replaced by `dst`, or None if absent."""
+    i = name.lower().find(src)
+    if i < 0:
+        return None
+    out = name[:i] + dst + name[i + len(src):]
+    return out if out != name else None
+
+
+def spelling_variants(name: str) -> list:
+    """The mechanical spellings of one condition name, the name exactly as written first.
+
+    Two rules only: orthographic pairs (fibre/fiber, oedema/edema, …) and the possessive form of an
+    eponym. Both are measured defects, not guesses — see SPELLING_PAIRS. Anything this cannot
+    justify is not generated: a wide net of invented synonyms would read as thoroughness and would
+    be an unrecorded guess about what the condition is called.
+    """
+    out = [name]
+    for a, b in SPELLING_PAIRS:
+        for src, dst in ((a, b), (b, a)):
+            v = _swap(name, src, dst)
+            if v and v not in out:
+                out.append(v)
+    low = name.replace("\u2019", "'")
+    if "'s " in low:                                   # "Eagle's syndrome" -> "Eagle syndrome"
+        v = name.replace("\u2019s ", " ").replace("'s ", " ")
+        if v not in out:
+            out.append(v)
+    else:
+        words = name.split()
+        if (len(words) > 1 and words[-1].lower() in EPONYM_NOUNS
+                and words[-2][:1].isupper() and len(words[-2]) > 2):
+            v = " ".join(words[:-1]) + "'s " + words[-1]
+            if v not in out:
+                out.append(v)
+    return out
+
+
+def _density_band(strict_n: int, any_n: int) -> str:
+    if strict_n < 0 or any_n < 0:
+        return "query failed — no count; re-run before reading this condition"
+    return ("below floor — the unjoined band saturates; work by reading, not by screen"
+            if strict_n < FLOOR_STRICT else "screenable")
+
+
+def density(conditions: list, variants: bool = True) -> list:
     """How worked-over is a condition, before anyone picks targets for it.
 
     The queue's own rule says a condition is only worth screening if its literature is thin,
@@ -723,8 +852,14 @@ def main() -> int:
     print(f"\nno title/abstract join (all bands), over {res['n_scored']} scored rows: "
           f"{', '.join(res['no_title_abstract_join']) or '(none)'}")
     print(f"  of those, fully unjoined (0/0): {', '.join(res['unjoined']) or '(none)'}")
-    print(f"  density status: {res['density_status']}; density-qualified zero rows: "
+    print(f"  density status: {res['density_status']} (density queries complete: "
+          f"{res['density_strict_queries_complete']}); density-qualified zero rows: "
           f"{', '.join(res['density_qualified_unjoined']) or '(none)'}")
+    if res.get("unjoined_incomplete_coverage"):
+        print(f"  zeros NOT certified — a supplied spelling did not answer: "
+              f"{', '.join(res['unjoined_incomplete_coverage'])}")
+    if res.get("incomplete_coverage_note"):
+        print(f"  coverage: {res['incomplete_coverage_note']}")
     print("  raw 0/0 observations are not scientific certification; read density and control checks.")
     print(f"  of those, incidental only (1-5): {', '.join(res['incidental_any_field_only']) or '(none)'}")
     print(f"  of those, co-mentioned but never studied: "

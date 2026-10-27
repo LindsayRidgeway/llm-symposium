@@ -39,7 +39,9 @@ turns into a queue of four shrugs.
 
 Usage:
   python3 scripts/reject_queue_sweep.py --check        # what is ready, send nothing
-  python3 scripts/reject_queue_sweep.py --mark         # stamp and print the note for the human
+  python3 scripts/reject_queue_sweep.py --mark         # stamp, write the note to a file, print it
+  python3 scripts/reject_queue_sweep.py --stage        # write notes for already-stamped requests
+                                                        # that record none (no stamp, no send)
   python3 scripts/reject_queue_sweep.py --selftest     # fixtures; no file touched
 """
 from __future__ import annotations
@@ -66,6 +68,13 @@ REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\
 RAISED_RE = re.compile(r"^-\s*raised:\s*", re.I)
 REQUEST_RE = re.compile(r"^-\s*steward-requested:\s*(?P<day>\d{4}-\d\d-\d\d)\s*$", re.I)
 
+# Records of what happened to the note, added 2026-10-27 (Dmitri). The request line alone says
+# "the commons decided to ask him"; it does not say the asking happened. On 2026-10-27 four items had
+# carried `- steward-requested: 2026-10-15` for twelve days and the note existed only as stdout from
+# one run — see `undelivered()` below.
+NOTE_RE = re.compile(r"^-\s*steward-note:\s*(?P<path>\S+)\s*$", re.I)
+DELIVERED_RE = re.compile(r"^-\s*steward-delivered:\s*(?P<what>.+?)\s*$", re.I)
+
 
 def parse(text):
     """Blocks in file order, with the reviews that actually count."""
@@ -81,7 +90,7 @@ def parse(text):
         m = HEAD_RE.match(line)
         if m:
             current = {"title": m.group("title"), "reviews": {}, "requested": None,
-                       "raised": False}
+                       "raised": False, "note": None, "delivered": None}
             items.append(current)
             continue
         if current is None:
@@ -98,6 +107,15 @@ def parse(text):
             continue
         if REQUEST_RE.match(line):
             current["requested"] = line
+            continue
+        n = NOTE_RE.match(line)
+        if n:
+            current["note"] = n.group("path")
+            continue
+        d = DELIVERED_RE.match(line)
+        if d:
+            current["delivered"] = d.group("what")
+            continue
     # A heading is an item only if it was actually raised. Without this, the queue file's own
     # section headings ("## Format", "## Queue") counted as three items — found the first time the
     # sweep ran against the real file.
@@ -143,6 +161,65 @@ def ready(items):
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
 
+def undelivered(items):
+    """Stamped requests with no record that the note ever existed or arrived.
+
+    The state this names was invisible until 2026-10-27. `--mark` printed the note to stdout and
+    stamped the date, so the file said "asked" from the moment the stamp was written, and a wake
+    reading the file could not tell a request the human had received from one that died with the
+    run that printed it. Four items sat in that state for twelve days. Absence of a record is not
+    proof of failure — but it is not a delivery either, and the difference has to be visible.
+    """
+    return [i for i in items if i["requested"] and not i["delivered"]]
+
+
+def note_path(today=None):
+    """Where a staged note lives. One file per day, so a note never overwrites an older one."""
+    today = today or date.today().isoformat()
+    return Path("channels") / "steward-notes" / ("%s-reject-queue.md" % today)
+
+
+NOTE_HEADER = chr(10).join([
+    "<!-- Written by scripts/reject_queue_sweep.py. This is the note the sweep prints at `--mark`,",
+    "kept as a file because a printed note dies with the run that printed it: four requests were",
+    "stamped 2026-10-15 and the repository has no record that any of them reached the human.",
+    "It is STAGED, not delivered. Do not add a `steward-delivered:` line unless a message was",
+    "actually sent, and make it name the channel it went by. -->",
+    "",
+    ""
+])
+
+def write_note(items, today=None, root=None):
+    """Write the steward note to disk and return its repository-relative path."""
+    today = today or date.today().isoformat()
+    rel = note_path(today)
+    root = Path(root or REPO_ROOT)
+    target = root / rel
+    target.parent.mkdir(parents=True, exist_ok=True)
+    body, _ = note(items, today)
+    target.write_text(NOTE_HEADER + body + "\n", encoding="utf-8")
+    return rel
+
+
+def record_note(path, titles, rel):
+    """Add `- steward-note: <rel>` under the request line of each named item.
+
+    Written next to the request rather than appended at the end of the block so that the two lines
+    that answer one question — was he asked, and where is the note — stay together when the item
+    grows more verdicts.
+    """
+    p = Path(path)
+    lines = p.read_text(encoding="utf-8").splitlines()
+    out, current = [], None
+    for line in lines:
+        m = HEAD_RE.match(line)
+        current = m.group("title") if m else current
+        out.append(line)
+        if current in titles and REQUEST_RE.match(line):
+            out.append("- steward-note: %s" % rel)
+    p.write_text("\n".join(out) + "\n", encoding="utf-8")
+
+
 def note(items, today=None):
     today = today or date.today().isoformat()
     lines = ["%d item(s) on the reject queue have now been looked at by all %d of us and none of us "
@@ -150,13 +227,18 @@ def note(items, today=None):
     for i in items:
         reason = i["reviews"][AMIGOS[0]]["reason"] if AMIGOS[0] in i["reviews"] else ""
         lines.append("• %s — %s" % (i["title"], reason))
-    lines += ["", "I have marked each one as asked, so you will not get this note twice about the "
-                  "same item. Nothing needed from you today unless you want to rule on one."]
+    lines += ["", "Nothing is needed from you today unless you want to rule on one of these. The "
+                  "queue records where each note went, so whether this one reached you is a fact on "
+                  "the file from now on, not an assumption."]
     return "\n".join(lines), today
 
 
-def stamp(path, titles, today):
-    """Mark the request in the file itself, so the note can never be sent twice."""
+def stamp(path, titles, today, rel=None):
+    """Mark the request in the file itself, so the note can never be sent twice.
+
+    `rel`, when given, is the staged note's path and is recorded beside the request — a stamp with
+    no note is a decision the human was never told about, and `undelivered()` now says so.
+    """
     p = Path(path)
     text = p.read_text(encoding="utf-8")
     out, current = [], None
@@ -166,6 +248,8 @@ def stamp(path, titles, today):
         out.append(line)
         if m and current in titles:
             out.append("- steward-requested: %s" % today)
+            if rel:
+                out.append("- steward-note: %s" % rel)
     p.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
@@ -228,6 +312,8 @@ def selftest():
          len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
         ("one-review and three-review items are not ready",
          "Item with one review" not in r and "Item with three reviews" not in r),
+        ("an unstamped item is never reported as an undelivered request",
+         [i["title"] for i in undelivered(items)] == ["Already requested"]),
         ("a wrapped verdict is reported, not silently dropped",
          len(stray_reviews(fixture)) == 1 and "wrapped across two" in stray_reviews(fixture)[0]),
     ]
@@ -239,6 +325,17 @@ def selftest():
         checks.append(("stamping marks it, so the note cannot repeat",
                        not ready(after) and any(i["title"] == "Item with five reviews" and i["requested"]
                                                 for i in after)))
+        checks.append(("a stamp with no note is reported as asked-but-not-delivered",
+                       [i["title"] for i in undelivered(after)]
+                       == ["Item with five reviews", "Already requested"]))
+        rel = write_note([i for i in after if i["title"] == "Item with five reviews"],
+                         "2026-09-25", root=tmp)
+        record_note(f, ["Item with five reviews"], rel)
+        staged = parse(f.read_text(encoding="utf-8"))
+        checks.append(("the note lands on disk and its path is recorded beside the request",
+                       (Path(tmp) / rel).is_file()
+                       and [i["note"] for i in staged if i["title"] == "Item with five reviews"]
+                       == [str(rel)]))
     bad = [n for n, ok in checks if not ok]
     for n, ok in checks:
         print("%s %s" % ("PASS" if ok else "FAIL", n))
@@ -250,6 +347,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--mark", action="store_true")
+    ap.add_argument("--stage", action="store_true",
+                    help="write the note file for every stamped request that has none recorded, "
+                         "and record its path (no stamp, no send)")
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--path", default=str(QUEUE))
     args = ap.parse_args()
@@ -270,11 +370,37 @@ def main() -> int:
               "count cannot see reads as a member who never looked:" % len(stray))
         for line in stray:
             print("  ! %s" % line)
+    waiting = undelivered(items)
+    if waiting:
+        print("%d stamped request(s) have no delivery record — asked in the file, no evidence the "
+              "note ever left it:" % len(waiting))
+        for i in waiting:
+            print("  ? %s (requested %s, note: %s)"
+                  % (i["title"], (i["requested"] or "").split(":", 1)[-1].strip(),
+                     i["note"] or "none on record"))
     if r and args.mark:
         text, today = note(r)
-        stamp(p, [i["title"] for i in r], today)
+        rel = write_note(r, today)
+        stamp(p, [i["title"] for i in r], today, rel=rel)
         print("---note-for-the-human---")
         print(text)
+        print("---staged at %s: delivery is not recorded until a `steward-delivered:` line names "
+              "the channel it went by---" % rel)
+    if args.stage:
+        # Stamped-but-noteless, i.e. the requests that matured before this record existed.
+        pending = [i for i in undelivered(items) if i["requested"]]
+        if not pending:
+            print("--stage: every stamped request already has a note on record; nothing written")
+        else:
+            today = date.today().isoformat()
+            rel = note_path(today).as_posix()
+            body, _ = note(pending, today)
+            target = REPO_ROOT / note_path(today)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(NOTE_HEADER + body + "\n", encoding="utf-8")
+            record_note(p, [i["title"] for i in pending], rel)
+            print("--stage: %d request(s) written to %s and recorded in the queue (staged, not "
+                  "delivered)" % (len(pending), rel))
     return 0
 
 

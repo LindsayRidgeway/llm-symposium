@@ -13,7 +13,18 @@ never registered, so the cell read open while the art sat one directory away), a
 2026-10-16 (maori, "Unaunahi: The Unbroken Scale" -- the same defect a FOURTH time: its SVG
 and generator landed on main on 2026-10-15 and were never registered, so this run added the
 wing entry, the matrix cell, and the test the generator had been citing by name but that was
-never written). Three remain.
+never written), and on 2026-10-18 (impressionism, "The Fusion Threshold" -- the defect a
+FIFTH time: its SVG and generator landed on 2026-10-15 and were never registered).
+
+None remain. The last two closed on 2026-10-21, and not by the old defect: the two cells were
+filled by *REQUEST DM-2*, the commission filed on 2026-10-18 because a wing of painted oils is
+not served by a vector study -- sumi-e got "The Bleed Front" and russian-realism got "Twelve
+Metres of Penumbra", both Mage diffusion, both exhibited in the same pass that landed them.
+The withheld vector study in wing 07 (*The Edge of the Sunbreak*) was not deleted and not
+forced onto a wall to move a number: it was archived to `studies/dmitri/`, where studies live,
+so `scripts/gallery_unwired_works.py` now passes with an empty exemption list. The column is
+7 of 7 and gap = 0; this test pins that, so a future wing added without a fifth column fails
+here first.
 This test is the reason the
 script exists: it fails if the gallery is extended without that note being updated, so the
 claim cannot quietly go stale in either direction.
@@ -23,6 +34,8 @@ fifth column is not measuring the gap, it is printing a constant.
 """
 
 import sys
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -31,7 +44,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import gallery_fifth_amigo_gap as gap  # noqa: E402
 
-FILLED_FIFTH_CELLS = 4  # islamic (10-13), pen-and-ink (10-14), watercolor (10-14), maori (10-16)
+FILLED_FIFTH_CELLS = 7  # islamic (10-13), pen-and-ink (10-14), watercolor (10-14), maori (10-16),
+# impressionism (10-18), sumi-e (10-21), russian-realism (10-21)
 REMAINING_GAPS = 7 - FILLED_FIFTH_CELLS
 
 
@@ -71,6 +85,9 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
         self.assertNotIn("pen-and-ink", {wing for wing, _ in self.result["gap_cells"]})
         self.assertNotIn("watercolor", {wing for wing, _ in self.result["gap_cells"]})
         self.assertNotIn("maori", {wing for wing, _ in self.result["gap_cells"]})
+        self.assertNotIn("impressionism", {wing for wing, _ in self.result["gap_cells"]})
+        self.assertNotIn("sumi-e", {wing for wing, _ in self.result["gap_cells"]})
+        self.assertNotIn("russian-realism", {wing for wing, _ in self.result["gap_cells"]})
 
     def test_fifth_amigo_is_named_in_the_gallery_page(self):
         self.assertTrue(self.result["fifth_named_in_page"])
@@ -99,6 +116,53 @@ class GalleryFifthAmigoGapTest(unittest.TestCase):
     def test_unparseable_index_is_an_error_not_a_silent_zero(self):
         with self.assertRaises(ValueError):
             gap.compute("<html>no table here</html>")
+
+
+class GalleryGapCliTest(unittest.TestCase):
+    """Exercise the actual --check process with its own temporary repository tree."""
+
+    def run_check(self, index_html):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script = root / "scripts/gallery_fifth_amigo_gap.py"
+            index = root / "docs/gallery/index.html"
+            script.parent.mkdir(parents=True)
+            index.parent.mkdir(parents=True)
+            script.write_bytes((ROOT / "scripts/gallery_fifth_amigo_gap.py").read_bytes())
+            index.write_text(index_html, encoding="utf-8")
+            before = index.read_bytes()
+            proc = subprocess.run([sys.executable, str(script), "--check"],
+                                  capture_output=True, text=True)
+            self.assertEqual(index.read_bytes(), before, "--check must not rewrite the matrix")
+            return proc
+
+    def test_completed_real_gallery_passes_cli(self):
+        proc = self.run_check(gap.INDEX.read_text(encoding="utf-8"))
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        self.assertIn("CHECK PASSED", proc.stdout)
+
+    def test_missing_fifth_cell_fails_cli(self):
+        rows = [_row(f"{i:02d}", ["✓ w1", "✓ w2", "✓ w3", "✓ w4",
+                                  "" if i == 1 else "✓ w5"])
+                for i in range(1, 8)]
+        proc = self.run_check(_table(rows))
+        self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
+        self.assertIn("CHECK FAILED", proc.stdout)
+
+    def test_missing_wing_fails_cli_even_with_no_fifth_gap(self):
+        rows = [_row(f"{i:02d}", ["✓ w1", "✓ w2", "✓ w3", "✓ w4", "✓ w5"])
+                for i in range(1, 7)]
+        proc = self.run_check(_table(rows))
+        self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
+        self.assertIn("CHECK FAILED", proc.stdout)
+
+    def test_empty_founding_cell_fails_cli_even_with_no_fifth_gap(self):
+        rows = [_row(f"{i:02d}", ["" if i == 1 else "✓ w1", "✓ w2", "✓ w3",
+                                  "✓ w4", "✓ w5"])
+                for i in range(1, 8)]
+        proc = self.run_check(_table(rows))
+        self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
+        self.assertIn("CHECK FAILED", proc.stdout)
 
 
 if __name__ == "__main__":

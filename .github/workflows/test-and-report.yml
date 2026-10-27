@@ -222,6 +222,12 @@ jobs:
           # /music/, two fiction, three works) were absent from docs/sitemap.xml and
           # docs/atom.xml because gen_feed.py had not been re-run since 2026-09-17.
           python3 tests/test_gen_feed_freshness.py 2>&1 | tee -a tests/last-verification.txt
+          # The freshness workflow's own shape (2026-10-26, Desi). The three pins above watch
+          # generated files; `generated-index-freshness.yml` is what runs them at the moment a
+          # landing can invalidate them, because this file has had no trigger since 2026-09-25
+          # and so nothing watched main. A guard that is registered here and never fires is the
+          # defect it exists to catch, so the guard that it still fires runs here. Offline.
+          python3 tests/test_generated_index_freshness_workflow.py 2>&1 | tee -a tests/last-verification.txt
           # The Friction Arena certificate (agenda item 22, Track 2). Re-runs the exhaustive
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
@@ -262,15 +268,55 @@ jobs:
           python3 tests/test_channel_triage.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_check_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_declutter_audit.py 2>&1 | tee -a tests/last-verification.txt
+          # The citation census and the gate over it (2026-10-18). `test_cited_paths_audit.py` was
+          # written 2026-10-17 and never registered here, so the census's own six checks had never
+          # run in CI — the defect it exists to measure, one level up: a guard that never runs. Its
+          # sibling pins the one class that is a real defect (a dated artefact cited as evidence that
+          # no reader can open) to a 21-row debt ceiling, so the 22nd row cannot be written silently.
+          # Offline: both walk the tree.
+          python3 tests/test_cited_paths_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_cited_path_gate.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_codex_wake_slot.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_draft_pile.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_draft_triage.py 2>&1 | tee -a tests/last-verification.txt
+          # The gallery wiring gate (Dmitri, 2026-10-18): every finished work in a wing directory
+          # must be linked from that wing's page, or carry a written exemption, and the front
+          # table must not still call a cell open while the pavilion exhibits a work. Written the
+          # day it was needed and left out of this list until 2026-10-19 (run
+          # 20261019T011755Z-4d1b6430) — so the gate that catches "landed but never exhibited"
+          # was itself never run, which is the defect it exists to measure, one level up.
+          # Note when reading its log: unittest writes to stderr and the failing-fixture case
+          # prints a GALLERY WIRING ... FAIL block to stdout, so in a piped log that block can
+          # appear after the live-tree PASS. The exit code is the verdict, not the last block.
+          python3 tests/test_gallery_unwired_works.py 2>&1 | tee -a tests/last-verification.txt
+          # The creative-wings map (Dmitri, 2026-10-19) — registered here on 2026-10-22 by Desi,
+          # as the reviewer, because `tests/test_evidence_table_registration.py` refused the landing
+          # without it: the map cites this test as its pin, and a pin CI never runs is a claim
+          # about a gate rather than a gate. That refusal was correct, and it is the whole reason
+          # Dmitri's 2026-10-19 run never reached main.
+          python3 tests/test_creative_wings_map.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          # The music catalogue's reachability gate (Desi, 2026-10-21; registered 2026-10-25 by
+          # Dmitri). The script landed on 10-21 and this, its test, did not: it sat on a review
+          # branch for four days with nothing running it. Recovered to main on 2026-10-25 and found
+          # broken the first time it was executed — its two dead-audition fixtures were bare divs,
+          # which `audition_ids()` does not read, so one test asserted a problem the gate cannot
+          # produce and the other passed because the button was never looked at. Both fixed. The
+          # register matters as much as the fix: a test no CI runs is the defect it measures.
+          python3 tests/test_music_catalogue_unwired.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          # The live invariant the sweep above only tests on fixtures (Dmitri, 2026-10-18). On
+          # 2026-10-17 four items sat with five reasoned verdicts and no `steward-requested:` line —
+          # the human had never been asked — and the check written for it was named in that run's
+          # LAND line and never landed. This one fails the build when any item is mature and
+          # unasked, and fails first if the parser sees nothing, so it cannot go green by being
+          # blind. Red means run `scripts/reject_queue_sweep.py --mark` and land the stamp.
+          python3 tests/test_reject_queue_request_gap.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_review_assignment.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
@@ -307,6 +353,17 @@ jobs:
           # already-landed scripts/landing_tree_report.py — that one classifies and names a repair per
           # path; this one is the yes/no gate a wake can call first. Registered here 2026-10-13 (Desi).
           python3 tests/test_landing_preflight.py 2>&1 | tee -a tests/last-verification.txt
+          # Verdicts that survive their own run (Dmitri, 2026-10-26). `item_ledger.py --review`
+          # records a verdict by appending one line to channels/items.jsonl, a 3,000-line file main
+          # also appends to live; the landing patch carries that file's tail as context, the context
+          # goes stale, the hunk fails, and git apply being atomic the WHOLE run is discarded with
+          # the verdict inside it. Measured twice in one day (2026-10-26): item
+          # codex-20261026T082005Z-93ddaeaa was reviewed by run 20261026T094058Z-eb5c4d6e, lost,
+          # and reviewed again by 20261026T114111Z-bdc12b38 — the same loop as the 2026-10-23 lost
+          # delivery. The fix: every verdict is also written as its own one-line file under
+          # channels/ledger-verdicts/ (a clean add, so it always applies) and replayed into the
+          # ledger idempotently. Temp-directory work only; nothing here touches the live ledger.
+          python3 tests/test_ledger_verdict_mirror.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API

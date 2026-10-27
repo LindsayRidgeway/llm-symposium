@@ -149,5 +149,84 @@ class MeasuredRateTest(unittest.TestCase):
             self.assertIn("1 carry no complete event", summary["measured_note"])
 
 
+class MeasuredCostEvidenceTest(unittest.TestCase):
+    """Unknown dollars must not override a real fallback rate as a measured zero."""
+
+    def put_worker(self, root, event, *, compact=True):
+        run = root / "gemini-bot/tick-state/runs/20261016T000000Z-fixture"
+        run.mkdir(parents=True, exist_ok=True)
+        text = json.dumps(event, separators=(",", ":")) if compact else json.dumps(event)
+        (run / "worker.jsonl").write_text(text + "\n")
+        return run
+
+    def test_missing_and_null_cost_stay_unpriced(self):
+        for event in ({"type": "complete", "total_tokens": 2000000},
+                      {"type": "complete", "total_tokens": 2000000, "cost_usd": None}):
+            with self.subTest(event=event), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.put_worker(root, event)
+                per, scanned, unpriced = bl.collect_measured_costs(root)
+                self.assertEqual((scanned, unpriced), (1, 1))
+                self.assertEqual(bl.measured_rates(per), {})
+
+    def test_explicit_zero_cost_is_known(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.put_worker(root, {"type": "complete", "total_tokens": 2000000,
+                                   "cost_usd": 0})
+            per, scanned, unpriced = bl.collect_measured_costs(root)
+            self.assertEqual((scanned, unpriced), (1, 0))
+            self.assertEqual(bl.measured_rates(per)["gemini"]["blended"], 0.0)
+
+    def test_completion_json_whitespace_does_not_lose_known_cost(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.put_worker(root, {"type": "complete", "total_tokens": 2000000,
+                                   "cost_usd": 1.0}, compact=False)
+            per, scanned, unpriced = bl.collect_measured_costs(root)
+            self.assertEqual((scanned, unpriced), (1, 0))
+            self.assertEqual(bl.measured_rates(per)["gemini"]["blended"], 0.5)
+
+    def test_invalid_cost_is_unpriced(self):
+        for cost in (-1, float("nan"), float("inf"), True, "unknown"):
+            with self.subTest(cost=cost), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.put_worker(root, {"type": "complete", "total_tokens": 2000000,
+                                       "cost_usd": cost})
+                per, scanned, unpriced = bl.collect_measured_costs(root)
+                self.assertEqual((scanned, unpriced), (1, 1))
+                self.assertEqual(bl.measured_rates(per), {})
+
+    def test_missing_measured_cost_preserves_configured_rate(self):
+        import contextlib
+        import io
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            run = self.put_worker(root, {"type": "complete", "total_tokens": 2000000})
+            (run / "result.json").write_text(json.dumps({"run_id": run.name,
+                "model": "fixture", "total_tokens": 2000000}))
+            out = io.StringIO()
+            with patch.object(bl, "load_rates", return_value={k: dict(v) for k, v in RATES.items()}), contextlib.redirect_stdout(out):
+                self.assertEqual(bl.main(["--root", str(root), "--measured", "--json"]), 0)
+            data = json.loads(out.getvalue())
+            self.assertEqual(data["per_amigo"]["gemini"]["rate_usd_per_million"], 0.59)
+            self.assertEqual(data["per_amigo"]["gemini"]["cost_usd"], 1.18)
+
+    def test_cli_unknown_price_prints_unknown_without_crashing(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            run = root / "unpriced-fixture-bot/tick-state/runs/20261016T000000Z-fixture"
+            run.mkdir(parents=True)
+            (run / "result.json").write_text(json.dumps({"run_id": run.name,
+                "model": "fixture", "total_tokens": 1000000}))
+            proc = subprocess.run([sys.executable, str(ROOT / "scripts/burn_ledger.py"),
+                                   "--root", str(root)], capture_output=True, text=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+            self.assertIn("unknown", proc.stdout)
+            self.assertIn("tokens have no price", proc.stdout)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

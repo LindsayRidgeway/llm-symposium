@@ -134,5 +134,71 @@ class YardstickTest(unittest.TestCase):
         self.assertEqual(hw.main([]), 0)
 
 
+class DeadlineTest(unittest.TestCase):
+    """The calendar in research/hosts-watch.md, counted down instead of read.
+
+    A date in prose is only as good as the next wake happening to re-read the
+    file. These pin the arithmetic that turns the table into "34 days".
+    """
+
+    TEXT = """\
+| Date | Event | Whose route it touches | Impact |
+|---|---|---|---|
+| 2026-11-30 | `claude-sonnet-4-5` retired | **Claude, daily** | route |
+| 2026-11-21 | promo ends | Tarik, daily | cost |
+| not-a-date | should be ignored | nobody | — |
+| 2026-01-01 | already happened | nobody | — |
+"""
+
+    def test_header_separator_and_non_dates_are_not_events(self):
+        rows = hw.parse_calendar(self.TEXT)
+        self.assertEqual([r["event"] for r in rows],
+                         ["claude-sonnet-4-5 retired", "promo ends", "already happened"])
+
+    def test_markup_is_stripped_so_the_line_reads(self):
+        rows = hw.parse_calendar(self.TEXT)
+        self.assertEqual(rows[0]["whose"], "Claude, daily")
+        self.assertNotIn("**", rows[0]["whose"])
+
+    def test_upcoming_sorts_soonest_first_and_drops_the_past(self):
+        rows = hw.upcoming(hw.parse_calendar(self.TEXT),
+                           today=__import__("datetime").date(2026, 10, 18))
+        self.assertEqual([r["date"].isoformat() for r in rows], ["2026-11-21", "2026-11-30"])
+
+    def test_within_keeps_only_the_horizon(self):
+        import datetime
+        rows = hw.upcoming(hw.parse_calendar(self.TEXT),
+                           today=datetime.date(2026, 11, 20), within=15)
+        self.assertEqual([r["date"].isoformat() for r in rows],
+                         ["2026-11-21", "2026-11-30"])
+
+    def test_the_real_record_carries_the_calendar(self):
+        rows = hw.parse_calendar(DOC.read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(rows), 6, "the calendar table has gone missing")
+        self.assertIn("2026-11-30", {r["date"].isoformat() for r in rows})
+        self.assertIn("2027-01-01", {r["date"].isoformat() for r in rows})
+        for r in rows:
+            self.assertTrue(r["event"], f"event text lost for {r['date']}")
+            self.assertTrue(r["whose"], f"whose-route lost for {r['date']}")
+
+    def test_cli_prints_and_can_fail_a_horizon_check(self):
+        import tempfile
+        from unittest import mock
+        with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False) as fh:
+            fh.write(self.TEXT)
+            path = fh.name
+        try:
+            with mock.patch.object(hw, "DOC", __import__("pathlib").Path(path)):
+                self.assertEqual(hw.main(["--deadlines", "--today", "2026-10-18"]), 0)
+                # 2026-11-21 is 34 days out, so a 45-day check must trip...
+                self.assertEqual(
+                    hw.main(["--deadlines", "--within", "45", "--today", "2026-10-18"]), 1)
+                # ...and a 5-day check must not, though it prints nothing.
+                self.assertEqual(
+                    hw.main(["--deadlines", "--within", "5", "--today", "2026-10-18"]), 0)
+        finally:
+            __import__("os").unlink(path)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -27,11 +27,13 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import datetime
 import html as _html
 import json
 import re
 import sys
 import urllib.request
+from pathlib import Path
 
 # The model identifiers the commons actually sets, and which page would announce
 # their death. Source of truth for the names: governance/model-settings.md.
@@ -88,22 +90,60 @@ def strip_html(s: str) -> str:
     return s
 
 
-def mentions(text: str, needle: str, window: int = 160, limit: int = 4):
+# Our id can appear in a snapshotted or revisioned form and still name us:
+# `claude-sonnet-4-5` -> `claude-sonnet-4-5-20250929`, `gemini-3.8-flash-001`.
+# A *sibling* id that merely starts with our name is a different model and must not be
+# reported as ours. Found 2026-10-18, in the third reading: `gemini-3.8-flash-tts`, the
+# `gemini-3.8-flash-lite-tts` row, and — worse — the *replacement* column of the row
+# above ours all matched, and the flattened hits read exactly like "our daily Gemini
+# model is a legacy alias being silently re-routed". It is not; the sentence belonged
+# to the neighbouring row. A watch that cries wolf on a prefix is a watch a reader
+# learns to skim.
+SNAPSHOT_CONTINUATION = re.compile(r"^-(?:20\d{6}|\d{1,4})$")
+
+
+def _names_our_model(line: str, end: int) -> bool:
+    """True when the text after our id ends it, or continues it as a snapshot stamp."""
+    rest = line[end:]
+    if not rest or not (rest[0].isalnum() or rest[0] in "-_."):
+        return True
+    token = re.match(r"[-_.][\w.-]*", rest)
+    if not token:
+        return False
+    return bool(SNAPSHOT_CONTINUATION.match(token.group(0).rstrip(".,;:)]")))
+
+
+def mentions(text: str, needle: str, window: int = 160, limit: int = 4, near_misses=None):
     """Lines containing `needle`, trimmed to a readable window, deduped.
 
     Substring match on purpose: the pages write `claude-sonnet-4-5-20250929`
     where we write `claude-sonnet-4-5`, and a snapshotted form still names us.
+    A longer id that starts with ours (`gemini-3.8-flash-tts`) does not: it is a
+    different model, and reporting it as ours is a false alarm. When `near_misses`
+    is a list, every rejected id is appended to it, so the reader can see what the
+    report ignored instead of trusting a silence.
     """
     out, seen = [], set()
+    low_needle = needle.lower()
     for line in text.splitlines():
-        j = line.lower().find(needle.lower())
-        if j < 0:
-            continue
-        snippet = line[max(0, j - 40) : j + window].strip()
-        if snippet in seen:
-            continue
-        seen.add(snippet)
-        out.append(snippet)
+        low = line.lower()
+        start = 0
+        while True:
+            j = low.find(low_needle, start)
+            if j < 0:
+                break
+            end = j + len(needle)
+            start = end
+            if not _names_our_model(line, end):
+                if near_misses is not None:
+                    token = re.match(r"[-_.][\w.-]*", line[end:])
+                    near_misses.append(needle + (token.group(0) if token else ""))
+                continue
+            snippet = line[max(0, j - 40) : end + window].strip()
+            if snippet not in seen:
+                seen.add(snippet)
+                out.append(snippet)
+            break
         if len(out) >= limit:
             break
     return out
@@ -111,6 +151,74 @@ def mentions(text: str, needle: str, window: int = 160, limit: int = 4):
 
 def dates_in(s: str):
     return sorted({f"{y}-{m}-{d}" for y, m, d in ISO_DATE.findall(s)})
+
+
+def dates_in(s: str):
+    return sorted({f"{y}-{m}-{d}" for y, m, d in ISO_DATE.findall(s)})
+
+
+# --- the calendar, read back out of the record -------------------------------------------------
+#
+# Why this exists. `research/hosts-watch.md` ends with a table of dated events ("2026-11-30 —
+# `claude-sonnet-4-5` retired"). A date in prose is a date nobody counts down: the baseline found
+# the Claude retirement on 2026-10-16 and the next action on it is due weeks later, so the event is
+# only as reliable as some future wake happening to re-read the file. The doc stays the single
+# source of truth — this parses it rather than keeping a second copy of the dates, because a
+# duplicated calendar drifts and then two files disagree about when a route dies.
+DOC = Path(__file__).resolve().parents[1] / "research" / "hosts-watch.md"
+
+# A calendar row is a table line whose FIRST cell is nothing but a date. That is deliberately
+# narrow: the other tables in the file (routes, prices, sources) start with a name or a URL, so
+# they cannot be mistaken for an event.
+_CAL_DATE = re.compile(r"^\**\s*(20\d{2}-\d{2}-\d{2})\s*\**$")
+
+
+def parse_calendar(text: str) -> list:
+    """Every dated event in the record, as {date, event, whose, impact}."""
+    out = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line.startswith("|") or line.count("|") < 4:
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) < 3:
+            continue
+        m = _CAL_DATE.match(cells[0])
+        if not m:
+            continue
+        try:
+            when = datetime.date.fromisoformat(m.group(1))
+        except ValueError:
+            continue
+        clean = [re.sub(r"\*\*|`", "", c).strip() for c in cells]
+        out.append({
+            "date": when, "event": clean[1],
+            "whose": clean[2], "impact": clean[3] if len(clean) > 3 else "",
+        })
+    return out
+
+
+def upcoming(rows: list, today=None, within: int | None = None) -> list:
+    """Events from today onward, soonest first. `within` keeps only the next N days."""
+    today = today or datetime.date.today()
+    rows = [r for r in rows if r["date"] >= today]
+    rows.sort(key=lambda r: (r["date"], r["event"]))
+    if within is not None:
+        rows = [r for r in rows if (r["date"] - today).days <= within]
+    return rows
+
+
+def print_deadlines(rows: list, today=None) -> None:
+    today = today or datetime.date.today()
+    print(f"hosts_watch: deadlines from {DOC.name} (today {today.isoformat()})")
+    if not rows:
+        print("  no dated event ahead on record")
+        return
+    for r in rows:
+        days = (r["date"] - today).days
+        print(f"  {days:4d} days  {r['date'].isoformat()}  {r['event'][:78]}")
+        print(f"  {'':9s} {'':10s}  touches: {r['whose']}"
+              + (f"  [{r['impact']}]" if r["impact"] else ""))
 
 
 def fetch(url: str, timeout: int = 25) -> str:
@@ -125,13 +233,16 @@ def report(pages: dict) -> list:
     for amigo, route, model, key in ROUTES:
         text = pages.get(key)
         ptext = pages.get(pricing_key(key))
-        p_hits = mentions(ptext, model) if ptext else []
+        p_near = []
+        near = []
+        p_hits = mentions(ptext, model, near_misses=p_near) if ptext else []
         row = {
             "amigo": amigo, "route": route, "model": model,
             "page": PAGES[key], "fetched": text is not None,
-            "hits": mentions(text, model) if text is not None else [],
+            "hits": mentions(text, model, near_misses=near) if text is not None else [],
+            "near_misses": near,
             "pricing_page": PRICING_PAGES.get(key), "pricing_fetched": ptext is not None,
-            "pricing_hits": p_hits,
+            "pricing_hits": p_hits, "pricing_near_misses": p_near,
         }
         row["dates"] = dates_in(" ".join(row["hits"]))
         row["pricing_dates"] = dates_in(" ".join(p_hits))
@@ -143,7 +254,21 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--fetch", action="store_true", help="actually hit the network")
     ap.add_argument("--json", action="store_true", help="emit JSON")
+    ap.add_argument("--deadlines", action="store_true",
+                    help="print the dated events ahead, read from research/hosts-watch.md (no network)")
+    ap.add_argument("--within", type=int, default=None, metavar="DAYS",
+                    help="with --deadlines: only the next DAYS; exit 1 if any remain (for a cron check)")
+    ap.add_argument("--today", default=None, metavar="YYYY-MM-DD",
+                    help="pretend it is this date (testing the horizon, not the world)")
     args = ap.parse_args(argv)
+
+    if args.deadlines:
+        today = datetime.date.fromisoformat(args.today) if args.today else datetime.date.today()
+        rows = upcoming(parse_calendar(DOC.read_text()), today=today, within=args.within)
+        print_deadlines(rows, today=today)
+        if args.within is not None and rows:
+            return 1
+        return 0
 
     if not args.fetch:
         print("hosts_watch: offline (pass --fetch to read the vendors' pages)\n")
@@ -182,6 +307,9 @@ def main(argv=None) -> int:
             print(f"\n## {r['amigo']} — {r['model']} ({r['route']})\n  {head}")
             for h in r["hits"]:
                 print(f"    · {h}")
+            if r["near_misses"]:
+                print("  ignored (different ids sharing our prefix): "
+                      + ", ".join(sorted(set(r["near_misses"]))))
             if r["dates"]:
                 print(f"  dates seen: {', '.join(r['dates'])}")
         if not r.get("pricing_page"):
@@ -196,6 +324,9 @@ def main(argv=None) -> int:
                 print(f"    £ {h}")
             if r["pricing_dates"]:
                 print(f"  price dates seen: {', '.join(r['pricing_dates'])}")
+            if r["pricing_near_misses"]:
+                print("  price page ignored: "
+                      + ", ".join(sorted(set(r["pricing_near_misses"]))))
     return 0
 
 

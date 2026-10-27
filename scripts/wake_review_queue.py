@@ -135,7 +135,44 @@ def block(items: dict[str, dict], amigo: str, limit: int = MAX_SHOWN) -> str:
         lines.append(f"HOLES — {len(holes)} waiting item(s) with no assignable reviewer "
                      f"(author not on the roster); these drain only if a person claims them:")
         lines.append("\n\n".join(_line(r) for r in holes))
+    lines.append("")
+    lines.append(_reading_block(items, amigo, limit))
     return "\n".join(lines).rstrip() + "\n"
+
+
+def _reading_block(items: dict[str, dict], amigo: str, limit: int = MAX_SHOWN) -> str:
+    """The second queue: items a machine closed and nobody read (letter D, added 2026-10-25).
+
+    This is the pile the review queue could never drain, because it was not in the review queue:
+    `--queue` and `--draw` see only W, and a delivered item is not W. It sat at 252 on 2026-10-22
+    and 268 on 10-25 while the reports called it accomplished. Each item here is on main and its
+    work may well be fine — that is exactly why nobody checked. Reading one moves it from D to A;
+    skipping it leaves it a claim nobody tested.
+    """
+    mine = [r for r in il.reading_queue(who=amigo)]
+    total = len(mine)
+    lines = [f"=== YOUR READING QUEUE — delivered, never read (letter D), addressed to {amigo} ===",
+             f"{total} delivered item(s) carry your name as their reader"
+             + (f"; the {min(total, limit)} oldest are shown." if total > limit else "."),
+             "",
+             "These already landed. Nobody has read them, and a machine's path check is not a\n"
+             "review. Read the artifact, then record one verdict:\n"
+             "  - accomplished — it holds up; say what you read and why it stands;\n"
+             "  - postponed or rejected — say what is wrong or missing; that reason is the record.\n"
+             f'  python3 channels/item_ledger.py --review <id> --state accomplished|postponed|rejected \\\n'
+             f'      --reason "why" --reviewer {amigo}   # this moves it from D to A\n'
+             "\nQuota: one item per wake, two while the pile in the whole commons is over 100.\n"
+             "The quota is arithmetic, not appetite: measured 2026-10-25, new machine closures\n"
+             "arrive at 10-20 a day and reading runs at about 12 a day, which is a flat pile for\n"
+             "ever. Two per wake takes capacity to roughly 60 a day across the five bodies, and\n"
+             "269 items then clears in about five days. One per wake never clears it.\n"]
+    if mine:
+        mine.sort(key=lambda r: r.get("filed_utc") or "")
+        lines.append("")
+        lines.append("\n\n".join(_line(r) for r in mine[:limit]))
+    else:
+        lines.append("\n(nothing unread carries your name right now.)")
+    return "\n".join(lines).rstrip()
 
 
 def _cli() -> int:

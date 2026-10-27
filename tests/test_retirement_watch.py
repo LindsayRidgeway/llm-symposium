@@ -61,6 +61,65 @@ class ParseTest(unittest.TestCase):
         self.assertEqual(rows, [])
         self.assertEqual(rw.verdict(rows), 2)
 
+    def test_a_row_keeps_its_models_when_the_shape_changes(self):
+        """The 2026-10-22 regression, pinned.
+
+        A patch that added line numbers to these rows replaced the dict literal and dropped
+        `models` with it. `assess` reads `r["models"][0]`, so seven tests died on `KeyError`
+        and the landing was refused — the row's shape is a contract with the caller, not a
+        private matter of this function.
+        """
+        rows = rw.parse_calendar(CAL)
+        self.assertEqual(rows[1]["models"], ["claude-sonnet-4-5", "claude-sonnet-5-5"])
+        self.assertEqual(rw.assess(rows, SETTINGS, date(2026, 10, 22), 30, 365)[1]["models"],
+                         ["claude-sonnet-4-5", "claude-sonnet-5-5"])
+
+    def test_each_row_can_be_traced_to_its_line(self):
+        rows = rw.parse_calendar(CAL)
+        self.assertEqual([r["line"] for r in rows], [4, 5, 6])
+        self.assertIn("2026-11-30", rows[1]["raw"])
+        self.assertEqual(rows[1]["fourth"], "route")
+
+
+class UnclassifiedMessageTest(unittest.TestCase):
+    """The message a refusal carries. Named rows or it is not a diagnosis."""
+
+    # The real failure, reproduced: a human-readable summary table pasted under the calendar.
+    # Its second column ("days out") is read as the event, so the row has no Impact cell.
+    DOC_WITH_SUMMARY = CAL + """
+| Date | Days out | Action |
+|---|---|---|
+| 2026-11-30 | 39 | swap Claude's model |
+| 2026-12-01 | 40 | nothing |
+"""
+
+    def test_a_healthy_calendar_produces_no_message(self):
+        self.assertEqual(rw.describe_unclassified(rw.parse_calendar(CAL)), "")
+
+    def test_a_summary_table_beside_the_calendar_names_its_own_lines(self):
+        rows = rw.parse_calendar(self.DOC_WITH_SUMMARY)
+        bad = rw.unclassified(rows)
+        self.assertEqual(len(bad), 2, "the summary table's rows are read as calendar rows")
+        msg = rw.describe_unclassified(rows)
+        self.assertIn("2 line(s)", msg)
+        self.assertIn("line 10:", msg)
+        self.assertIn("line 11:", msg)
+        self.assertIn("2026-11-30", msg)
+        self.assertIn("stop the row starting with a date", msg)
+
+    def test_a_missing_fourth_cell_is_named_differently_from_a_wrong_one(self):
+        nothing = rw.parse_calendar("| 2026-11-30 | `claude-sonnet-4-5` retired | Claude |\n")
+        wrong = rw.parse_calendar("| 2026-11-30 | `claude-sonnet-4-5` retired | Claude | 39 |\n")
+        self.assertEqual(rw.unclassified(nothing), rw.unclassified(nothing))
+        self.assertIn("line 1: no fourth cell at all", rw.describe_unclassified(nothing))
+        self.assertIn("line 1: fourth cell is '39'", rw.describe_unclassified(wrong))
+
+    def test_the_rendered_report_carries_the_lines_not_just_a_count(self):
+        rows = rw.assess(rw.parse_calendar(self.DOC_WITH_SUMMARY), SETTINGS, date(2026, 10, 22), 30, 365)
+        text = rw.render(rows, date(2026, 10, 22), 30, 180)
+        self.assertIn("UNCLASSIFIED (2):", text)
+        self.assertIn("line 10:", text)
+
 
 class IsSetTest(unittest.TestCase):
     def test_exact_name_is_set(self):
@@ -114,7 +173,10 @@ class RealDocumentTest(unittest.TestCase):
     def test_the_repository_calendar_parses_fully(self):
         rows = rw.parse_calendar(rw.DOC.read_text(encoding="utf-8"))
         self.assertGreaterEqual(len(rows), 8, "the calendar shrank or changed shape")
-        self.assertTrue(all(r["impact"] for r in rows), "a row lost its Impact cell")
+        # Named lines, not a count: "a row lost its Impact cell" is what a wake was told on
+        # 2026-10-22 while editing this document, and it could not find the row to fix.
+        bad = rw.unclassified(rows)
+        self.assertTrue(not bad, "a row lost its Impact cell\n" + rw.describe_unclassified(bad))
 
     def test_the_document_still_names_the_route_this_instrument_tests(self):
         settings = rw.SETTINGS.read_text(encoding="utf-8")

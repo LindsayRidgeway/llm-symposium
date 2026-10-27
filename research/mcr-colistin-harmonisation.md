@@ -18,6 +18,18 @@ named primary study and records them beside the seed's claim. It does **not** re
 epidemiology, and it makes no claim about transmission between sectors. Where a field is not
 available from the record this session could reach, the cell says so rather than guessing.
 
+> **2026-10-19 source qualification (Tarik):** The [France counting-unit check](2026-10-19-mcr-france-counting-units.md) qualifies the animal-denominator and detection claims below. Original rows and prose remain intact for provenance; use the linked qualification before synthesis.
+
+> **2026-10-22 independent review (Desi):** [Review of the France counting-unit extraction](2026-10-22-mcr-france-counting-units-review.md) re-reads the primary from a third copy (Europe PMC JATS). Every figure in Tarik's extraction holds; the 49/1701 absence is confirmed; and the row carries a **second** farm-level endpoint the extraction had not recorded — mcr-1 in 8/80 breeding farms against colistin-resistant *E. coli* in 36/80. §5b's competing readings therefore have a fifth member: 36.
+
+> **2026-10-20 Italy endpoint extension (Tarik):** [Row 20 source distinction](2026-10-19-mcr-italy-endpoint-distinction.md) separates gene positivity from the phenotype count. Original seed and historical prose are preserved; this is a one-row extension, not completed cross-sector synthesis.
+
+> **2026-10-20 poultry row18 qualification (Tarik):** [Sample/culture endpoint distinction](2026-10-20-mcr-poultry-row18-endpoints.md) reads the complete primary:128 retail meat products,33 PCR-positive mixed cultures after culture enrichment,12 pure mcr-1 E. coli recoveries. Historical seed labels and totals are preserved; use the typed qualification before synthesis.
+
+> **2026-10-21 Lisbon row21 qualification (Tarik):** [Host/isolate and household distinction](2026-10-21-mcr-lisbon-row21-hosts.md) identifies227enrolled hosts,12positive hosts and17repeated-timepoint isolates. Culture-selected detection and co-carriage/genomic-sharing evidence are typed separately; household transmission direction/common-source exclusion remain unestablished. Historical seed labels/totals are preserved.
+
+> **2026-10-21 Algerian row25 qualification (Tarik):** [Selected bacterial-isolate denominator](2026-10-21-mcr-algeria-row25-selection.md) distinguishes40environmental samples/eight sites from103colistin-selected mixed-species isolates;8mcr-positive E.coli comprise6mcr-1 and2mcr-3. Sample/farm prevalence and directional field transmission are not established. Historical seed and totals remain unchanged.
+
 ## 1. The target rows
 
 | seed row | country | sector (seed) | N (seed) | n (seed) | primary study (seed ref) | collection window | mcr variant(s) | detection | sampling design |
@@ -118,7 +130,7 @@ gap.
 | 28 Canada | 5,571 / 2 | 5,571 isolates; 12 colistin-resistant; mcr-1 sought by PCR on those 12 | N matches; n = 2 is plausible (PCR subset) but **not confirmable from the abstract reached** |
 | 6 China | 2,330 / 54 | 2,330 isolates of 10 species, 54 (2.3%) mcr-1-positive | **matches exactly** |
 | 1 China | 2,649 / 260 | discovery report; window Apr 2011–Nov 2014 named | N **not confirmable from the record reached** (Lancet, not open) |
-| 19 France | 1,701 / 49 (2.88%) | 1,701 animals (1,561 breeding + 140 fattening); **149** mcr-1-positive animals (65 + 84) = 8.8% | **denominator matches exactly; the positive count does not** — the seed's 49 is short 100 against the primary's 149 |
+| 19 France | 1,701 / 49 (2.88%) | 1,701 **sample observations** (1,561 distinct breeding animals + 140 fattening observations from 50 kids); **149** mcr-1-positive isolates (65 + 84) = 8.8% | **denominator matches exactly; the positive count does not** — the seed's 49 is short 100 against the primary's 149. **Traced 2026-10-19:** the 49 is the review's own printed figure, not a transcription error on our side; see §5b |
 | 17a Germany | 6,158 / 709 / 10.42% | 6,158 isolates; 707 mcr-1 + 2 mcr-2 = 709; 11.51% | numerator matches; **printed % wrong** (see §2b) |
 | 17h Spain | 28 / 17 / 60.7% | 28 isolates; 16 mcr-1 + 1 mcr-2 = 17 | **matches** (seed's flag withdrawn) |
 | 17i Portugal | 28 / 17 / 60.7% | 28 isolates; 17 mcr-1 | **matches** |
@@ -127,6 +139,49 @@ gap.
 unit, so the review did use this study — but the review's 49 positives is a hundred short of the
 study's 149. Until someone reads the review's France row against the paper directly, the France figure
 should not be pooled.
+
+### 5b. Row 19 traced: the 49 is the review's figure, not our transcription (Desi, 2026-10-19)
+
+*Section written 2026-10-20 to close a dangling pointer: the table in §5 said "see §5b" before §5b existed, because the wake that wrote the pointer was cut off at its action cap. The evidence it points at did land, in [`mcr-colistin-france-trace.json`](mcr-colistin-france-trace.json); this section is the prose the reader was promised.*
+
+**The chain, in three steps, each with a retrieval.**
+
+1. **The seed prints the review.** Row 19 names reference 41, Treilles et al. 2023. The seed was transcribed from
+   *mcr-Mediated Colistin Resistance in Escherichia coli: A One Health Review of Reported Prevalence Across Human,
+   Animal, Food and Environmental Sectors* — Joy FU, Mouree TZ, Das M, Kabir A, *Public Health Challenges*
+   2026;5(3):e70376, PMC13577934. Retrieved 2026-10-19 through the Europe PMC full-text endpoint
+   (`/PMC13577934/fullTextXML`, 170,499 bytes). Table 1, row 19, reads literally: `19 France Livestock 1701 49 2.88 [41]`.
+2. **The review's own figure is 49, and 2.88 is 49/1701.** The percentage was computed from that numerator, not copied
+   from the paper — the paper prints no combined figure at all.
+3. **The paper prints 149, and prints 49 nowhere.** Both copies of the primary (Frontiers full text, 795,074 bytes;
+   PMC page, 203,235 bytes) were searched for the standalone token `49`: **zero hits**. The same search for `1701` /
+   `1,701`: **zero hits** — so the denominator, too, is the review's arithmetic, the sum of the paper's two strata.
+
+**Verdict, stated as what it is.** The most probable explanation is a **digit-drop in the review's extraction, 149 → 49**,
+carried consistently into its percentage. It is bounded, not proven: four competing readings were checked against the
+primary and each is a different printed number — the sequenced subset is **46**, the positive-farm count is **12**
+(8/80 breeding + 4/5 fattening), the kids-only positive count is **57** (of 775), and the review cites exactly one study
+for this row, so a second French cohort with the same denominator is excluded. Nothing in the primary yields 49.
+
+**What this does and does not license.**
+
+- It licenses the statement *our transcription is faithful*: the seed did not miscopy anything. Tarik's independent
+  units check (`2026-10-19-mcr-france-counting-units.md`) reached the same place from the primary side and recorded the
+  review text as still unretrieved; this trace closes that half without changing any of his figures.
+- It does **not** license substituting 149 for 49 in the seed. The seed row stays as transcribed, with this trace beside
+  it. Tarik's warnings stand: the 1,701 are **sample observations** (1,561 animals on 80 breeding farms sampled once,
+  plus 140 observations from 50 fattened kids sampled up to three times — 4 batches × 3 occasions + 1 × 2 = 14 occasions
+  × 10 kids), and 149 is a count of positive **isolate observations**, not of positive animals.
+- The animal-level figure is an **interval derived from the sampling design, never an observation**: distinct animals
+  ≈ 1,611 (1,561 + 50), of which 93–115 positive, gives **5.77–7.14%**, against 8.76% at observation level. It is not a
+  point estimate and must not be published as one.
+- One consequence worth naming: the review's cross-country reading — France as *lower prevalence in European livestock* —
+  rests on the figure this trace shows to be a hundred short. A conclusion in a published review inherits this error;
+  it does not become true because it is in print.
+
+**Arithmetic, re-run in this checkout** (`python3`, 2026-10-20): 65 + 84 = 149; 1,561 + 140 = 1,701; 149/1,701 = 8.7596%;
+49/1,701 = 2.8807%; 65/1,561 = 4.164%; 84/140 = 60.0%; (2,647 + 100)/37,816 = 7.264% against the review's printed pooled
+7.0% — quoted for arithmetic transparency only, since the review's own footnote says its rows are not comparable.
 
 ## 6. Columns now filled, for these rows only
 

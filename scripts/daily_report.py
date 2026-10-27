@@ -55,6 +55,7 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
 from channels.item_ledger import (  # noqa: E402
+    MACHINE_REVIEWERS,
     assigned,
     blocker_of,
     collect,
@@ -66,17 +67,20 @@ from channels.item_ledger import (  # noqa: E402
     price_band,
 )
 
-# The six letters, in the order the human reasoned them out (Telegram, 2026-10-07): the
+# The letters, in the order the human reasoned them out (Telegram, 2026-10-07): the
 # review-needed axis first (N/V), then the outcome axis (A/P/W/R). His labels, near enough verbatim.
+# D was added 2026-10-25: it was inside A, and A meant two incompatible things, so 263 unread items
+# were being reported as accomplishments in good faith.
 GROUP_LABEL = {
     "N": "N — performed, no review needed (only where the record says why)",
     "V": "V — performed, needs review",
-    "A": "A — accomplished",
+    "A": "A — accomplished (a model read it and kept it)",
+    "D": "D — delivered but unread (a machine found its paths on main; nobody has read it)",
     "P": "P — postponed by a decision (reason on disk)",
     "W": "W — waiting for review (nobody has looked)",
     "R": "R — rejected",
 }
-LETTERS = ("N", "V", "A", "P", "W", "R")
+LETTERS = ("N", "V", "A", "D", "P", "W", "R")
 GROUPS = LETTERS
 AMIGO_ORDER = ("desi", "claude", "gemini", "tarik", "dmitri")
 LIST_CAP = 8
@@ -94,6 +98,15 @@ _LEAD_IN_RE = re.compile(
     r"(?:found(?:\s+out)?|checked|verified|noticed|discovered|established)\s+that\s+|"
     r"what\s+i\s+did\s*[:\-—]\s*|area(?:\s+this\s+wake)?\s*[:\-—]\s*|"
     r"this\s+wake\s*[:\-—,]?\s*)", re.I)
+
+
+def _world_line(now: dt.datetime) -> str:
+    """The one number that survives the funding question: how long since a stranger replied."""
+    try:
+        from scripts.world_report import line as world_line
+        return "**" + world_line(now) + "**"
+    except Exception as exc:                      # a missing measure must not hide the report
+        return f"**The world: not measured ({type(exc).__name__})**"
 
 
 def _local(stamp: dt.datetime) -> str:
@@ -547,13 +560,13 @@ def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]
     # today is an accomplishment today, but the letters count items filed in the window, so it never
     # appears in the A line above — and the human reads A=0 in the window as "no reviews are being
     # done" when the review happened. Exits are counted by their own state_utc, which is the fact.
-    exits = [r for r in items.values() if _in_window(r, hours) and _letter(r) in ("A", "P", "R")]
+    exits = [r for r in items.values() if _in_window(r, hours) and _letter(r) in ("A", "P", "R", "D")]
     if exits:
         tally = collections.Counter(_letter(r) for r in exits)
         reviewed = sum(1 for r in exits if _letter(r) == "A"
-                       and r.get("reviewer") not in (None, "auto:land"))
+                       and r.get("reviewer") not in (None,) + MACHINE_REVIEWERS)
         parts = [f"A {tally['A']}" + (f" ({reviewed} by a review)" if tally["A"] else "")]
-        parts += [f"{letter} {tally[letter]}" for letter in ("P", "R") if tally[letter]]
+        parts += [f"{letter} {tally[letter]}" for letter in ("D", "P", "R") if tally[letter]]
         out.append(f"  exits recorded in the last {hours}h: " + " · ".join(parts))
     else:
         out.append(f"  exits recorded in the last {hours}h: none — nothing left W by any route.")
@@ -565,7 +578,7 @@ def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]
     # are Desi's, and nothing in the report said so. A review is an act by a body, and no letter
     # counts it (the six letters describe items), so it is counted here instead, attributed.
     reviews = [r for r in items.values()
-               if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")]
+               if r.get("reviewer") not in (None,) + MACHINE_REVIEWERS and _letter(r) in ("A", "P", "R")]
 
     def _who(tally: collections.Counter) -> str:
         if not tally:
@@ -696,8 +709,8 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
         out.append(f"  {who:<8} {performed.get(who, 0):>4}")
     out.append(f"  {'total':<8} {sum(performed.values()):>4}")
     out.append("  where they stand:")
-    for letter, label in (("W", "waiting"), ("A", "accomplished"), ("P", "postponed"),
-                          ("R", "rejected")):
+    for letter, label in (("W", "waiting"), ("A", "accomplished"), ("D", "delivered"),
+                          ("P", "postponed"), ("R", "rejected")):
         hits = [r for r in finished if _letter(r) == letter]
         if not hits:
             continue
@@ -741,21 +754,28 @@ def render(hours: int = 24, now: dt.datetime | None = None,
         f"**Daily item report — {_local(now)}**",
         f"window: the {hours}h to {_local(now)} (since {since})",
         "",
+        # 2026-10-25, his correction: the measure he needs is real-world productivity, and everything
+        # below this line is instrument maintenance. It goes first for that reason — a perfect ledger
+        # over an unread world is a tidy diary in a locked room.
+        _world_line(now),
+        "",
         "Letters (your scheme of 2026-10-07; the split you insisted on):",
     ] + [f"  {GROUP_LABEL[g]}" for g in LETTERS] + [
-        "`N+V = A+P+W+R` holds by construction. What carries information is the split inside A",
-        "(reviewed vs the lander's gate) and whether W is draining.",
+        "`N+V = A+D+P+W+R` holds by construction. A is work a model read; D is work a machine "
+        "closed and nobody read. What carries information is the split between A and D, and "
+        "whether W is draining.",
         "",
         f"**Lifetime**  " + "  ".join(f"{g}={life[g]['total']}" for g in LETTERS)
-        + ("  ✓ N+V=A+P+W+R" if life["N"]["total"] + life["V"]["total"]
-           == sum(life[g]["total"] for g in "APWR") else "  ✗ the identity is broken — investigate"),
-        f"    A: {life['A']['by_review']} by a review / {life['A']['by_gate']} by the lander's "
-        f"test gate.  P: {life['P']['total']} decided.  W: {life['W']['total']} never looked at.",
+        + ("  ✓ N+V=A+D+P+W+R" if life["N"]["total"] + life["V"]["total"]
+           == sum(life[g]["total"] for g in "ADPWR") else "  ✗ the identity is broken — investigate"),
+        f"    A: {life['A']['by_review']} read by a model / D: {life['D']['total']} delivered and "
+        f"unread.  P: {life['P']['total']} decided.  W: {life['W']['total']} never looked at.",
         f"**Last {hours}h**  " + "  ".join(f"{g}={window[g]['total']}" for g in LETTERS)
         + ("  ✓" if window["N"]["total"] + window["V"]["total"]
-           == sum(window[g]["total"] for g in "APWR") else "  ✗"),
-        f"    A: {window['A']['by_review']} by a review / {window['A']['by_gate']} by the gate.  "
-        f"P: {window['P']['total']} decided.  W: {window['W']['total']} never looked at.",
+           == sum(window[g]["total"] for g in "ADPWR") else "  ✗"),
+        f"    A: {window['A']['by_review']} read by a model / D: {window['D']['total']} delivered "
+        f"and unread.  P: {window['P']['total']} decided.  W: {window['W']['total']} never "
+        f"looked at.",
     ]
     landed = last_landing()
     lines += _landing_block(now, hours, landed, landing_gap(items, landed))

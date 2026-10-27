@@ -44,7 +44,8 @@ they cleared them. Not a topic preference, and not ten wakes failing to read the
 
 The `--reconcile` flag it joins keys on the item's *own* run id, so a delivery that landed under a
 recovery run — or a wake whose own landing conflicted — stays waiting for ever. That mismatch is
-residual 2 of `channels/reports/2026-10-13-dmitri-review-drain.md`, now closed.
+residual 2 of `channels/reports/2026-10-13-dmitri-review-drain.md` (unlanded — cited as evidence,
+never reached `main`; see the evidence register of 2026-10-17), now closed.
 
 ## Effect, measured
 

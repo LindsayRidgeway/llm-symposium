@@ -251,9 +251,12 @@ class TestCounts(unittest.TestCase):
         # letter from each axis, which is what makes it a check rather than a tautology.
         c = il.counts(self.rows(), None)
         self.assertEqual(c["N"]["total"] + c["V"]["total"],
-                         c["A"]["total"] + c["P"]["total"] + c["W"]["total"] + c["R"]["total"])
+                         c["A"]["total"] + c["D"]["total"] + c["P"]["total"]
+                         + c["W"]["total"] + c["R"]["total"])
         self.assertEqual(c["N"]["total"] + c["V"]["total"], 6)
         self.assertNotIn("U", c)          # the letter he retired, 2026-10-06
+        # D (2026-10-25) is not that letter: it is a delivery with no reader, not a state with no
+        # decision. It was carved out of A so that A could go back to meaning "somebody read this".
 
     def test_nothing_is_exempt_without_saying_so(self):
         c = il.counts(self.rows(), None)
@@ -273,17 +276,31 @@ class TestCounts(unittest.TestCase):
         self.assertEqual(c["W"]["total"], 3)     # a, b, d — nobody has looked, or nobody wrote it
         self.assertNotIn("undecided", c["P"])    # that split is now the W letter itself
 
-    def test_accomplished_says_whether_a_review_or_the_lander_did_it(self):
+    def test_a_lander_closure_is_not_an_accomplishment(self):
+        """2026-10-25: A used to carry both claims; the gate closure moved to D.
+
+        Measured when this changed: 263 of 492 accomplished items had never been read by a model,
+        and only 38 of the 306 items ever machine-closed were opened afterwards. A count that mixes
+        them cannot answer "is review keeping up".
+        """
         c = il.counts(self.rows(), None)
-        self.assertEqual(c["A"]["total"], 1)
-        self.assertEqual(c["A"]["by_gate"], 1)
-        self.assertEqual(c["A"]["by_review"], 0)
+        self.assertEqual(c["A"]["total"], 0)     # nobody has read c
+        self.assertEqual(c["D"]["total"], 1)     # c: closed by auto:land
+        self.assertEqual(c["D"]["by_gate"], 1)
         rows = self.rows()
         rows["h"] = {"id": "h", "amigo": "desi", "scope": "internal", "state": "accomplished",
                      "filed_utc": "2026-01-01T00:00:00Z", "reviewer": "gemini",
                      "reason": "reviewed, kept"}
         c = il.counts(rows, None)
-        self.assertEqual((c["A"]["by_review"], c["A"]["by_gate"]), (1, 1))
+        self.assertEqual((c["A"]["total"], c["A"]["by_review"]), (1, 1))
+        self.assertEqual((c["D"]["total"], c["D"]["by_gate"]), (1, 1))
+        # auto:path is a delivery check, not a review — it must not inflate A either
+        rows["i"] = {"id": "i", "amigo": "desi", "scope": "internal", "state": "accomplished",
+                     "filed_utc": "2026-01-01T00:00:00Z", "reviewer": "auto:path",
+                     "reason": "delivered: every path is present on main"}
+        c = il.counts(rows, None)
+        self.assertEqual(c["A"]["total"], 1)
+        self.assertEqual(c["D"]["total"], 2)
 
     def test_decisions_counts_what_left_waiting(self):
         # Δ(V−W) is derived, not stored: every written decision takes exactly one item out of W.
@@ -300,7 +317,8 @@ class TestCounts(unittest.TestCase):
     def test_the_window_excludes_old_items(self):
         c = il.counts(self.rows(), 24)
         self.assertEqual(c["N"]["total"] + c["V"]["total"], 3)   # a, b, c — filed today
-        self.assertEqual(c["A"]["total"], 1)                     # c
+        self.assertEqual(c["A"]["total"], 0)                     # c was closed by a machine
+        self.assertEqual(c["D"]["total"], 1)                     # c
         self.assertEqual(c["W"]["total"], 2)                     # a, b
         self.assertEqual(c["P"]["total"], 0)                     # f is old
         self.assertEqual(c["R"]["total"], 0)                     # e is old
@@ -438,7 +456,8 @@ class TestReconcile(unittest.TestCase):
         landed = {"20261010T000000Z-dddddddd"}
         self.assertEqual(len(il.reconcile_landed(self.path, landed=landed)), 1)
         self.assertEqual(il.reconcile_landed(self.path, landed=landed), [])
-        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "A")
+        # the lander's gate closes the row; it does not read it, so the letter is D, not A
+        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-dddddddd"]), "D")
 
     def test_native_codex_delivery_does_not_claim_a_goose_test_gate(self):
         """A direct Codex GitHub push is delivery, not evidence Goose's gate ran."""
@@ -543,10 +562,11 @@ class TestReconcilePaths(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def _row(self, rid, paths, state=None, assigned_to=None, reviewer=None, reason=None):
+    def _row(self, rid, paths, state=None, assigned_to=None, reviewer=None, reason=None,
+             assign_kind=None):
         return {"id": rid, "amigo": "desi", "scope": "internal", "title": "t",
                 "paths": paths, "state": state, "assigned_to": assigned_to,
-                "reviewer": reviewer, "reason": reason,
+                "reviewer": reviewer, "reason": reason, "assign_kind": assign_kind,
                 "filed_utc": "2026-10-06T00:00:00Z"}
 
     def test_every_path_present_is_accomplished(self):
@@ -594,6 +614,30 @@ class TestReconcilePaths(unittest.TestCase):
         il.append([self._row("20261010T000000Z-ffffffff", ["scripts/x.py"])], self.path)
         self.assertEqual(len(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri")), 1)
         self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri"), [])
+
+    def test_a_named_request_is_never_closed_by_presence(self):
+        """Tarik's written request names its subject; the subject being on main is the premise.
+
+        Measured 2026-10-21 (Desi): of 20 rows in W, 9 named only paths already present and 7 of
+        those were named requests. One pass would have stamped every one of them.
+        """
+        il.append([self._row("20261010T000000Z-11111111", ["scripts/x.py"], assigned_to="dmitri",
+                             assign_kind="name")], self.path)
+        skipped = []
+        self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri",
+                                            skipped=skipped), [])
+        self.assertEqual([r["id"] for r in skipped], ["20261010T000000Z-11111111"])
+        rec = il.load(self.path)["20261010T000000Z-11111111"]
+        self.assertIsNone(rec.get("state"))
+        self.assertEqual(il.letter_for(rec), "W")
+
+    def test_a_drawn_row_beside_a_named_one_still_closes(self):
+        il.append([self._row("20261010T000000Z-22222222", ["scripts/x.py"], assigned_to="dmitri"),
+                   self._row("20261010T000000Z-33333333", ["scripts/x.py"], assigned_to="dmitri",
+                             assign_kind="name")], self.path)
+        made = il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri")
+        self.assertEqual([r["id"] for r in made], ["20261010T000000Z-22222222"])
+        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-33333333"]), "W")
 
 
 class TestAssignment(unittest.TestCase):
@@ -776,6 +820,66 @@ class TestTheCliDoesNotStampAPersonOnMachineWork(unittest.TestCase):
                               "did scripts/x.py", "--reviewer", "human"], "review",
                              ret={"id": "x", "state": "accomplished", "reason": "r"})
         self.assertEqual(seen.get("reviewer"), "human")
+
+
+class ALaterRowCannotEraseAVerdictItNeverSaw(unittest.TestCase):
+    """2026-10-25: `assign()` appends a whole snapshot, so a row written by a process that had
+    not seen an earlier verdict sorts later with `state: None` and reopens the item.
+
+    That is not a thought experiment. Three verdicts of mine (`postponed`, 03:25:36Z, reviewer
+    desi) were re-filed at 11:45:06Z as unowned waiting items and handed back to me three hours
+    after the reasons were written; five wakes in a row then "worked the queue" and cleared
+    nothing anyone could see.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = Path(self.tmp.name) / "items.jsonl"
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _file(self, **over):
+        row = {"id": "a", "amigo": "dmitri", "scope": "internal", "title": "t",
+               "state": None, "state_utc": None, "reason": None, "reviewer": None,
+               "filed_utc": "2026-10-23T13:31:32Z"}
+        row.update(over)
+        il.append([row], self.path)
+        return row
+
+    def test_a_snapshot_written_without_the_verdict_does_not_reopen_it(self):
+        self._file()
+        verdict = il.review(path=self.path, item_id="a", state="postponed",
+                            reason="the report it names is not on disk", reviewer="desi")
+        # exactly what assign() writes: the record as *it* found it, verdict fields and all
+        self._file(assigned_to="desi", assign_kind="draw",
+                   assign_reason="drawn at random among the least expensive",
+                   assigned_utc="2026-10-25T11:45:06Z", assigned_by="collect")
+        rec = il.load(self.path)["a"]
+        self.assertEqual(rec["state"], "postponed")
+        self.assertEqual(rec["reason"], "the report it names is not on disk")
+        self.assertEqual(rec["reviewer"], "desi")
+        self.assertEqual(rec["state_utc"], verdict["state_utc"])
+        self.assertEqual(rec["assigned_to"], "desi")      # the later row still wins where it spoke
+        self.assertEqual(il.letter_for(rec), "P")
+        self.assertNotIn("a", [r["id"] for r in il.waiting(il.load(self.path))])
+
+    def test_a_later_review_still_overrides_an_earlier_one(self):
+        """Inheritance is not stickiness: a row that does state the verdict is believed."""
+        self._file()
+        il.review(path=self.path, item_id="a", state="postponed", reason="no report on disk",
+                  reviewer="desi")
+        il.review(path=self.path, item_id="a", state="accomplished", reason="did docs/x.html",
+                  reviewer="tarik")
+        rec = il.load(self.path)["a"]
+        self.assertEqual(rec["state"], "accomplished")
+        self.assertEqual(rec["reason"], "did docs/x.html")
+        self.assertEqual(rec["reviewer"], "tarik")
+
+    def test_an_unreviewed_item_stays_in_the_queue(self):
+        self._file()
+        self._file(assigned_to="desi", assigned_utc="2026-10-25T11:45:06Z")
+        self.assertIn("a", [r["id"] for r in il.waiting(il.load(self.path))])
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # Gallery Art Direction & Mage Prompt Queue
 
-*A dedicated intake queue for the Four Amigos to author text prompt suites and art direction notes for Lindsay to run through external image generation engines (Mage, DALL-E, etc.).*
+*A dedicated intake queue for the Symposium amigos to author text prompt suites and art direction notes for Lindsay to run through external image generation engines (Mage, DALL-E, etc.).*
 
 ---
 
@@ -62,4 +62,4 @@
 ## Queued Tasks for Amigos:
 - [ ] **Claude:** Submit Suite 04 (e.g., Japanese Shin-hanga woodblock or Atmospheric Watercolor Landscape).
 - [ ] **Desi:** Submit Suite 05 (e.g., Peredvizhniki wilderness or Architectural Russian Realism).
-- [ ] **Tarik:** Submit Suite 06 (e.g., Vintage Blueprint / Technical Lithograph or Industrial Realism).
+- [x] **Tarik:** Suite 06 submitted 2026-10-19: [The Unloaded Jaw — industrial lithograph](submissions/tarik/industrial-lithograph-suite-06.md). Three copy-ready studies, separate execution parameters and curation criteria. Prompts delivered; rendering and selection remain unperformed.

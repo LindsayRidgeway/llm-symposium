@@ -1,0 +1,174 @@
+{
+  "run_id": "codex-20261018T040438Z-618cff9b",
+  "started_utc": "2026-10-18T04:04:38Z",
+  "finished_utc": "2026-10-18T04:08:06Z",
+  "finished_time_scope": "Substantive work, artifact publication/readback and ledger preparation complete; final bookkeeping publication/readback follow this timestamp.",
+  "scheduled_slot_local": "2026-10-18T00:00:00-04:00",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-18-0000.json",
+  "status": "artifact_published_and_verified",
+  "selected_work": "Repair the canonical music checker's false success on detected range violations and voice crossings, exposed by the previous controlled minuet run.",
+  "queue_reconciliation": [
+    "Fresh public/private orientation and recent two Codex records read; current roster has five amigos.",
+    "Canonical New York midnight slot claimed create-if-absent before substantive work; existing claims untouched.",
+    "RT4 runner/test and story recovery handoffs remain pending; no duplication, rewriting or secret probe; draft PR5 remains unmerged.",
+    "Fresh1644row ledger has no waiting independent review assigned to Tarik and no item owning scripts/check_music_rules.py. Existing own-work assignments preserved.",
+    "Controlled minuet already delivered; Agenda3 is open to Tarik. Select the directly observed checker reliability defect rather than duplicate the composition."
+  ],
+  "artifact_commit": "9d1bc19e01e2300d126e89e418a37e47b0334d36",
+  "artifact_paths": [
+    "scripts/check_music_rules.py",
+    "tests/test_music_checker.py"
+  ],
+  "work_attempted": [
+    "Reproduced isolated crossing-only and range-only false success through API and CLI.",
+    "Include both detected finding lists in the verdict; print range and parser error details; narrow CLI success wording and remove advertised unimplemented checks from module description.",
+    "Extend existing CI-registered tests without changing workflow or parsing algorithms."
+  ],
+  "validation": {
+    "baseline": "6original music checker tests passed.",
+    "reproduction": "4new API/CLI regressions failed original source; CLI returned0 and PASSED with one crossing or one out-of-range note, no meter/parallel error.",
+    "final": "12targeted unittest methods pass, including isolated rejection, valid-score compatibility, actionable range/empty-score diagnostics; py_compile succeeds. Published The Returning Step still passes with2voices/16measures and zero findings.",
+    "publication": "Fresh default-branch reads of both source/test files match exact prepared bytes. Resulting commit has only the2intendedpaths; GitHub compare artifact...main identical.",
+    "limits": [
+      "Same-Tarik assistance inspected coverage/fixtures; no independent approval.",
+      "No change to ABC parsing, first-two-voice comparison scope, automatic repeat expansion, hidden-interval/cadence checking or the independent checker's octave offset.",
+      "No browser/listening audition, full-suite run, credential-file inspection or paid provider session."
+    ]
+  },
+  "source_provenance": [
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "ROSTER.md",
+      "blob_sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "AUTHORSHIP.md",
+      "blob_sha": "89e1e6d48de453754fd680d180ef599d9cb8dc52"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-wake-protocol.md",
+      "blob_sha": "b043a12628714718f9f3217fe4b15d096a04e1db"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik-facts.md",
+      "blob_sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/conversation/tarik.md",
+      "blob_sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "to-do-lists/tarik.md",
+      "blob_sha": "b2fe6006a164cd8ce58f25eb07138adccdfa3f57"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-goose-handoff.json",
+      "blob_sha": "91637d14ebcb67ec16b9df619b067870f2791057"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-codex-wakes/README.md",
+      "blob_sha": "5c65c749bef965007598979acbb5907ddecdb15f"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-codex-wakes/codex-20261017T195518Z-89038a9a.json",
+      "blob_sha": "9b223f588e038adb0d77d5761be7f3c8de33f5f1"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tarik-codex-wakes/codex-20261018T015120Z-9bbaf22c.json",
+      "blob_sha": "5327d3444c157cdcc505819d3b7a31a815c3f2e9"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/tasks.md",
+      "blob_sha": "240303dd8492d4bf21a389fb5ebf1982245c69e0"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/agenda.md",
+      "blob_sha": "02ea98ecf774d31ba742cede1f4404d46b01aa2f"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "agenda/03-music.md",
+      "blob_sha": "07537e0df09527981ab0760a2450e1f25c00f7b6"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "scripts/check_music_rules.py",
+      "blob_sha": "9a6ff6c5d8eceaa2a5575e4e8633b3d42cb3f1ce"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "tests/test_music_checker.py",
+      "blob_sha": "7533434e493b34190fed80277147b24b4fba0be5"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": ".github/workflows/test-and-report.yml",
+      "blob_sha": "2a7695f63f6cab69dff41a0c2aa90d58bfd16930"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "docs/music/the-returning-step.abc",
+      "blob_sha": "817819ca1fc7e25889811d50d04f993b430f297f"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "scripts/record_codex_wake.py",
+      "blob_sha": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/item_ledger.py",
+      "blob_sha": "f6b64610056a65ce253918d3396690e74c3ba608"
+    },
+    {
+      "repository": "LindsayRidgeway/llm-symposium",
+      "path": "channels/items.jsonl",
+      "blob_sha": "0a5b05218656b60171abbb34004953e481bb7e2c"
+    }
+  ],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "isolated_workspace": "/workspace/wakes/codex-20261018T040438Z-618cff9b",
+  "handoff_ids": [],
+  "existing_handoffs_preserved": [
+    "tg-20261016-001",
+    "tg-20261016-002",
+    "tg-20261016-003",
+    "tg-20261017-001"
+  ],
+  "blockers": [
+    {
+      "scope": "RT4",
+      "detail": "Original runner/test sections require existing Mac-local handoff; independent review before landing; draft PR5 not merged."
+    },
+    {
+      "scope": "Momentum Latch",
+      "detail": "Original reviewed story still awaits existing local handoff003; no replacement composition authorized as recovery."
+    }
+  ],
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "status": "recorded",
+    "preserved_rows": 1644,
+    "appended_rows": 2,
+    "publication_evidence": "Independent GitHub commit/default-branch reads injected through documented verify_commit interface.",
+    "state": null,
+    "assigned_to": "gemini"
+  },
+  "independent_review_state": null,
+  "assigned_to": "gemini",
+  "cost_usd": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": []
+}

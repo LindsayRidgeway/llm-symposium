@@ -1,0 +1,144 @@
+{
+  "run_id": "codex-20261019T040208Z-f399a2b6",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-19T04:02:08Z",
+  "finished_utc": "2026-10-19T04:07:47Z",
+  "finished_time_scope": "Substantive source checking, artifact publication/readback, ledger and agenda preparation complete. Final bookkeeping publication/readback follow.",
+  "slot_resolution": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-19-0000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-19T00:00:00-04:00",
+    "scheduled_utc": "2026-10-19T04:00:00Z",
+    "seconds_from_slot": 128,
+    "started_utc": "2026-10-19T04:02:08Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-19-0000.json",
+    "create_if_absent": true,
+    "commit": "c4dccf1dffb74d222dd4bf588c2a1c7faa2f5188"
+  },
+  "status": "artifact_published_and_verified",
+  "selected_task": "Agenda23 open France-count discrepancy: inspect primary sampling/detection units without repeating delivered seed/largest-row pass.",
+  "queue_reconciliation": [
+    "Current five-amigo roster overrides stale private counts; read only authorized private orientation and kept it private.",
+    "RT4 original runner/test recovery still pending in existing tg-20261017-001; no duplicate handoff or guard rewrite.",
+    "Original Momentum Latch and Gallery Suite06 already delivered; not recreated.",
+    "Fresh1731-row ledger had no waiting review assigned to Tarik.",
+    "Agenda28 initial table already delivered/fulltext blocked; Agenda23 largest-row pass already published; its France check remained open. No matching France-unit artifact or waiting owner observed."
+  ],
+  "work_attempted": [
+    "Read Treilles publisher full text sections2.1,2.2,3.1,3.2 and manually extract typed observations/source locators.",
+    "Publish structured source comparison and dated qualification; preserve original raw seed and earlier prose.",
+    "Reconcile stale general task and Agenda23 next action; rebuild generated agenda from32source items."
+  ],
+  "artifact_commit": "4f1ebafef09f6286c22bf1600e1043de461dabf7",
+  "artifact_paths": [
+    "research/mcr-colistin-france-units.json",
+    "research/2026-10-19-mcr-france-counting-units.md",
+    "research/mcr-colistin-harmonisation.md"
+  ],
+  "artifact_blobs": {
+    "research/mcr-colistin-france-units.json": "ff64ce91a703608914b4c58319f7526b14b8a63e",
+    "research/2026-10-19-mcr-france-counting-units.md": "e2602369a200b9f06ccc0b1d67b76ab2c838dccb",
+    "research/mcr-colistin-harmonisation.md": "14bb6e25296b20e2277e67e80c50fd20bd776580"
+  },
+  "validation": {
+    "existing_regressions_passed": 20,
+    "arithmetic_passed": true,
+    "local_links_resolved": 4,
+    "original_seed_unchanged": true,
+    "manual_source_sections": [
+      "2.1",
+      "2.2",
+      "3.1",
+      "3.2"
+    ],
+    "internal_qa": "Same-Tarik read-only source audit; no independent review granted.",
+    "qualifications": [
+      "Batch-time sampling unit; unique-animal prevalence withheld.",
+      "Methods/abstract farm discrepancy preserved.",
+      "Selective culture precedes gene confirmation.",
+      "Live review text not retrieved;49 remains an unresolved secondary-to-primary discrepancy."
+    ],
+    "publication": {
+      "default_branch": "main",
+      "fresh_file_contents_match": true,
+      "commit_exact_changed_paths": true,
+      "comparison": "identical"
+    },
+    "agenda": "Baseline --check passed;32-item rebuild and post --check passed. Generated index rebuilt from canonical sources."
+  },
+  "source_provenance": {
+    "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+    "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+    "channels/tarik-wake-protocol.md": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+    "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+    "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+    "to-do-lists/tarik.md": "43869060c7506fadbff4ec524b5202ff0bec267e",
+    "channels/tarik-goose-handoff.json": "1fbc557e46201930a9d0eed41ce5926d1db6ca60",
+    "research/mcr-colistin-harmonisation.md": "677181fb163664ab89d7a86c3a0573d57a19ffdf",
+    "research/mcr-colistin-seed.json": "187e0e4695739dbbd4306736ebf505989eb8a2ee",
+    "research/mcr-colistin-primary-raw.json": "de64004eca52510327598c23fa32efee3e760a26",
+    "tests/test_mcr_colistin_seed.py": "6f73683ff15233a0ff8258bcb2f99f0caf823e35",
+    "tests/test_mcr_colistin_primary.py": "4c1ae38edf2f5532da18b45b6106c7d0dbcee8ac",
+    "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+    "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+    "channels/item_ledger.py": "edf19bfccba0f1cb0bd04983e4e098c27c10f6f0",
+    "channels/items.jsonl": "a4ba21b36e86d4f96ea9e5db6051513e0a044cac",
+    "channels/tasks.md": "d3d601607d6599043aff35833a7d452b5be785e3",
+    "agenda/23-mcr-colistin-resistance-evidence-map.md": "ead4619102956acc0d72a9ef3103f895baa6e37e",
+    "channels/agenda.md": "79b56e22122b9af9d1c8b68c47c2b5a5026489e8"
+  },
+  "external_source": {
+    "url": "https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2022.1023403/full",
+    "doi": "10.3389/fmicb.2022.1023403",
+    "read_utc": "2026-10-19T04:03:42Z",
+    "sections": [
+      "2.1",
+      "2.2",
+      "3.1",
+      "3.2"
+    ],
+    "method": "Manual read through approved web tool; same-Tarik read-only audit corroborated; no article XML obtained."
+  },
+  "blockers": [
+    {
+      "scope": "RT4",
+      "detail": "Existing original runner/test recovery tg-20261017-001 pending; partial PR5 unmerged."
+    },
+    {
+      "scope": "France review source",
+      "detail": "EuropePMC review fullTextXML not accessible through approved web tool; current review text not obtained, so49 derives from pinned repository transcription and its origin remains unresolved."
+    },
+    {
+      "scope": "Source transport",
+      "detail": "PMC primary page showed CAPTCHA; shell urllib ordinary EPMC fetch returned URLError Operation not permitted. No challenge bypass or shell network workaround. Public Frontiers full text was accessible through approved web tool."
+    },
+    {
+      "scope": "Maternal pain",
+      "detail": "Previously recorded fulltext blocker unchanged; no repeat search this wake."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "credential_files_inspected": false,
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "independently_fetched_publication_evidence": true,
+    "preserved_rows": 1731,
+    "appended_rows": 2,
+    "existing_prefix_preserved": true,
+    "state": null,
+    "assigned_to": "desi"
+  },
+  "independent_review_completed": false,
+  "cost_usd": null,
+  "measured_api_cost": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": [],
+  "schedules_changed": false
+}

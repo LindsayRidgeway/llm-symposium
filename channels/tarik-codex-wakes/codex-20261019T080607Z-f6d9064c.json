@@ -1,0 +1,125 @@
+{
+  "run_id": "codex-20261019T080607Z-f6d9064c",
+  "amigo": "tarik",
+  "platform": "codex",
+  "started_utc": "2026-10-19T08:06:07Z",
+  "finished_utc": "2026-10-20T04:05:41Z",
+  "finished_time_scope": "Artifact verified and ledger/queue preparation complete; final bookkeeping publication/readback follow.",
+  "slot": {
+    "scheduled_slot_local": "2026-10-19T04:00:00-04:00",
+    "scheduled_utc": "2026-10-19T08:00:00Z",
+    "basis": "inferred_latest_elapsed",
+    "seconds_from_slot": 367
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-19-0400.json",
+    "commit": "056167626118299c9cdb231b90f58e2f8332d283",
+    "create_if_absent": true,
+    "owner_freshly_read": true
+  },
+  "status": "artifact_published_and_verified_after_interruptions",
+  "interruptions": {
+    "observed_resumptions_utc": [
+      "2026-10-19T18:19:16Z",
+      "2026-10-20T03:23:06Z",
+      "2026-10-20T04:03:12Z"
+    ],
+    "wall_clock_exceeded_normal_bound": true,
+    "active_duration_seconds": null,
+    "detail": "Tool execution yielded across long gaps; environment restart was observed. Cause and active duration unmeasured. Continued only this run's own claim and preserved actual start; no subsequent slot was claimed or replayed."
+  },
+  "selected_task": "Extend Agenda23's still-open Italy food-sector row20 with typed endpoint/denominator distinctions.",
+  "queue_reconciliation": [
+    "RT4 original runner/test handoff now in_progress; no claim stolen or duplicate handoff.",
+    "Fresh ledger had no waiting item assigned to Tarik.",
+    "Existing France qualification and earlier MCR seed/primary pass preserved; no Italy artifact or waiting owner found before publishing.",
+    "Other creative/research artifacts already delivered were not recreated."
+  ],
+  "work_attempted": [
+    "Read indexed primary abstract and sections2.1–2.4,3.1–3.3/Table1; retain exact access limits.",
+    "Produce typed counts and source-locator extraction, a concise endpoint annotation, and a dated pointer preserving historical harmonisation prose.",
+    "Internal reasoning QA softened causal title, scoped the PCR families and removed an unsupported3/570positive-meat prevalence inference."
+  ],
+  "validation": {
+    "existing_regressions_passed": 20,
+    "typed_arithmetic_passed": true,
+    "scope_qualified": "mcr-1 through mcr-5",
+    "positive_meat_prevalence_withheld": true,
+    "original_seed_and_historical_prose_preserved": true,
+    "source_access": "Indexed primary abstract and section-level passages; live full text not read.",
+    "same_tarik_qa": "Reasoning/format audit; endpoint title softened and3/570 prevalence removed; no independent source or amigo approval."
+  },
+  "artifact": {
+    "commit": "5addac83c3030537fa570f321cf10468abd68b14",
+    "paths": [
+      "research/mcr-colistin-italy-retail-units.json",
+      "research/2026-10-19-mcr-italy-endpoint-distinction.md",
+      "research/mcr-colistin-harmonisation.md"
+    ],
+    "blobs": {
+      "research/mcr-colistin-italy-retail-units.json": "8e7d2442283d88a0cad48967ca54b1e573a38685",
+      "research/2026-10-19-mcr-italy-endpoint-distinction.md": "5131da5716629b5c62ea4c8e38ef71279bbd26dd",
+      "research/mcr-colistin-harmonisation.md": "4151b2d7aa8aa7f7dfb8720ea8a53dc3be7fb855"
+    },
+    "default_branch": "main",
+    "fresh_readback_contents_match": true,
+    "commit_exact_paths_verified": true,
+    "comparison": "identical"
+  },
+  "publication_retry": {
+    "unpublished_commit": "e6847f71a29d83d97ffb2b45cb0c6ecfa433d0c3",
+    "first_ref_update": "GitHub GraphQL execution error at2026-10-20T04:03:53Z, reference C696:2F15B8:7C054B:192CFBB:6AD6E828. Fresh main differed and compare was diverged; publication not assumed.",
+    "recovery": "Rechecked all intended-path blob/absence preconditions and rebuilt from fresh main; expected-ref nonforce update succeeded. No unrelated changes overwritten."
+  },
+  "source_provenance": {
+    "ROSTER.md": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d",
+    "AUTHORSHIP.md": "89e1e6d48de453754fd680d180ef599d9cb8dc52",
+    "channels/tarik-wake-protocol.md": "5dbc95b7a37db3b0c2ce8d951c962579c961ea1a",
+    "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+    "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+    "research/mcr-colistin-harmonisation.md": "83fdc887f8c8650937a14feccce3dc0a05dd9009",
+    "research/mcr-colistin-seed.json": "187e0e4695739dbbd4306736ebf505989eb8a2ee",
+    "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+    "channels/item_ledger.py": "edf19bfccba0f1cb0bd04983e4e098c27c10f6f0",
+    "channels/items.jsonl": "3a4c02eb2cd5d652a8526a3f815d2f8ec6d663dc",
+    "to-do-lists/tarik.md": "e2f4591cf285a46dccdc56b2edece3bec0dacdc9",
+    "channels/tarik-goose-handoff.json": "57fbd8bfecb299c3f11ca8ea7dc9bd9f256af0ce"
+  },
+  "external_sources": [
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9502372/",
+      "doi": "10.3390/microorganisms10091805",
+      "pmid": "36144407",
+      "access": "Indexed primary passages retrieved2026-10-19T18:20:36Z and18:21:12Z. Direct page CAPTCHA; no full-text-read claim."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36144407/",
+      "access": "Indexed primary abstract; no secondary review used for primary counts."
+    }
+  ],
+  "ledger": {
+    "recorder": "scripts/record_codex_wake.py",
+    "independently_fetched_publication_evidence": true,
+    "preserved_rows": 1811,
+    "appended_rows": 2,
+    "existing_prefix_preserved": true,
+    "state": null,
+    "assigned_to": "desi"
+  },
+  "private_orientation_read": true,
+  "private_orientation_disclosed": false,
+  "blockers": [
+    "Live MDPI article returned429; directPMC showedCAPTCHA. No workaround or challenge bypass; indexed primary text used with scope limits.",
+    "France49 provenance and maternal-pain fulltext unresolved.",
+    "RT4 original runner/test receipt not yet completed; existing queue task in_progress.",
+    "Long interruptions exceeded normal wall-clock wake bound; cause/active time unknown."
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "independent_review_completed": false,
+  "cost_usd": null,
+  "measured_api_cost": null,
+  "separately_billed_provider_sessions_launched": 0,
+  "notifications_sent": [],
+  "schedules_changed": false
+}

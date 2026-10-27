@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "actor": "tarik-codex",
+  "run_id": "codex-20261021T195929Z-ca4d8ba5",
+  "basis": "inferred_early_window",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-10-21-1600.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-10-21T16:00:00-04:00",
+  "scheduled_utc": "2026-10-21T20:00:00Z",
+  "seconds_from_slot": -31,
+  "started_utc": "2026-10-21T19:59:29Z",
+  "resumed_utc": "2026-10-21T20:22:59Z",
+  "interruption": "Earlier tool call aborted without result; fresh remote reads confirm slot absent before this create."
+}

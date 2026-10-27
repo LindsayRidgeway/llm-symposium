@@ -90,6 +90,17 @@ price list into the code, while "draw from the band as dated" reads the prices w
 happens, so the rule survives every future change to what these models cost. A missing band is an
 error, not a default — an undated price list is a guess wearing a number.
 
+Cheap is not the same as different (2026-10-18, the to-do list's own next item). The band exists
+to bound cost, but on 2026-10-18 it holds two DeepSeek bodies — `desi` and `dmitri` — so every item
+one of them wrote was drawn to the other: the same model, reading its own work, called a second
+opinion. The rule "the author is never the reviewer" was being satisfied while the thing it is for
+was not. So the draw now takes **one item in four outside the cheap band**, and excludes the
+author's *architecture* as well as the author — a bounded share, because a review by a body that
+costs 59–186× per token is worth having occasionally and not worth having always. The quarter is
+decided from the item's id like everything else here, so the wide draw cannot re-roll either; and
+`--cheap-only` restores the old behaviour for a bounded experiment, which is how the spend gets
+measured rather than asserted.
+
 `W` with no name on it is not a queue, it is a hole, and `holes()` is the escalation list: the
 report prints it as a fact for the founder rather than letting the pile look like a process.
 
@@ -112,13 +123,17 @@ from __future__ import annotations
 
 import argparse
 import collections
+import contextlib
 import datetime as dt
+import fcntl
 import hashlib
 import json
 import os
 import re
 import subprocess
 import sys
+import tempfile
+import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -143,6 +158,11 @@ STATES = ("accomplished", "postponed", "rejected")
 # as "least expensive". The band rule is stated here so the file it writes can say what it means.
 BAND_DIR = REPO / "channels" / "usage"
 BAND_GLOB = "price-band-*.json"
+
+# One drawn item in four goes outside the cheap band, to a body that is not the author's own
+# architecture. A quarter is a bound on the spend, not a sample size: three cheap reviews pay for
+# one expensive one, and the expensive one is the only one that can say "this does not reproduce".
+WIDE_SHARE = 4
 
 RUN_ID_RE = re.compile(r"^\d{8}T\d{6}Z-[0-9a-f]{8}$")
 ANY_RUN_ID_RE = re.compile(r"\b(\d{8}T\d{6}Z-[0-9a-f]{8})\b")
@@ -411,8 +431,28 @@ def landing_gap(items: dict[str, dict], last: str | None) -> int:
     return sum(1 for r in items.values() if (r.get("filed_utc") or "") > last)
 
 
+VERDICT_KEYS = ("state", "state_utc", "reason", "reviewer")
+
+
 def load(path: Path = LEDGER) -> dict[str, dict]:
-    """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly."""
+    """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly.
+
+    One exception, added 2026-10-25: a later line that says nothing about the verdict cannot
+    erase one. `assign()` and `review()` both append a *whole record* rather than a diff, so a
+    row written by a process that had not seen an earlier verdict is a snapshot of the record as
+    that process found it — verdict fields included, and `None` if it never saw them. When the
+    two histories meet in one file the snapshot sorts later and silently reopens the item.
+
+    Measured, not hypothesised: three of my own verdicts (state `postponed`, `state_utc`
+    2026-10-25T03:25:36Z, reviewer desi) were re-filed for review at 2026-10-25T11:45:06Z as
+    unowned waiting items with `state: None`, and the queue handed them back to the same reviewer
+    three hours after the reasons were written. Five consecutive wakes then "worked the queue"
+    and cleared nothing visible, which is the same shape as the vulvodynia loop, arriving through
+    the merge instead of the to-do list.
+
+    So: a row may change a verdict (a later review wins), but a row that omits it inherits it.
+    Nothing in the ledger reopens an item; a second review is an explicit new state, not a None.
+    """
     items: dict[str, dict] = {}
     if not path.exists():
         return items
@@ -422,19 +462,92 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
             continue
         try:
             rec = json.loads(line)
+            prev = items.get(rec["id"])
+            if prev is not None and prev.get("state") and not rec.get("state"):
+                for key in VERDICT_KEYS:
+                    if not rec.get(key):
+                        rec[key] = prev.get(key)
             items[rec["id"]] = rec
         except (ValueError, KeyError):
             print(f"item_ledger: skipping unreadable line {lineno}", file=sys.stderr)
     return items
 
 
+@contextlib.contextmanager
+def _append_lock(path: Path):
+    """One appender at a time. The ledger is the commons' only write-hot file.
+
+    Two writers appending at once cannot corrupt a row here — each write is a single small
+    ``write()`` under the same append file — but the readers between them can see a half-written
+    line, and `load()` skips unreadable lines, so a torn row disappears rather than failing loudly.
+    Cheap to prevent: flock on a file inside .git (which can never make the tree dirty), or in the
+    temp directory when this is not a checkout (a wake's clone, a test fixture).
+    """
+    git_dir = path.parent.parent / ".git"
+    lock_dir = git_dir if git_dir.is_dir() else Path(tempfile.gettempdir())
+    lock_path = lock_dir / "symposium-ledger.lock"
+    try:
+        fh = lock_path.open("a+")
+    except OSError:
+        yield                          # a lock that cannot be taken must not stop the write
+        return
+    try:
+        deadline = time.monotonic() + 10.0
+        while True:
+            try:
+                fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                break
+            except BlockingIOError:
+                if time.monotonic() >= deadline:
+                    break              # an append is smaller than the risk of refusing it
+                time.sleep(0.05)
+        try:
+            yield
+        finally:
+            try:
+                fcntl.flock(fh, fcntl.LOCK_UN)
+            except OSError:
+                pass
+    finally:
+        fh.close()
+
+
+DECISION_FIELDS = ("state", "state_utc", "reason", "reviewer")
+
+
+def _keep_decisions(records: list[dict], path: Path = LEDGER) -> list[dict]:
+    """An append may add to an item; it may not un-decide it.
+
+    Found 2026-10-25: 25 items showed a row with no state sitting between two closures — the item
+    read as "waiting" to anything that looked at the last line, and only the reconcile two seconds
+    later put the decision back. On a day when the reconcile did not run (10-21, 10-24) those items
+    simply stayed in W, which is one of the ways the review queue appeared to grow while reviewers
+    were working. Whatever wrote them, the rule that makes it harmless is here rather than in each
+    writer: a later row that carries no state inherits the decision the record already has, and says
+    which row it inherited it from. Silence is not a reversal.
+    """
+    known = load(path)
+    out = []
+    for rec in records:
+        old = known.get(rec.get("id"))
+        if old and old.get("state") and not rec.get("state"):
+            rec = dict(rec)
+            for field in DECISION_FIELDS:
+                rec.setdefault(field, old.get(field))
+            rec["decision_preserved_from"] = old.get("state_utc")
+        out.append(rec)
+    return out
+
+
 def append(records: list[dict], path: Path = LEDGER) -> None:
     if not records:
         return
+    records = _keep_decisions(records, path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as fh:
-        for rec in records:
-            fh.write(json.dumps(rec, sort_keys=True) + "\n")
+    with _append_lock(path):
+        with path.open("a", encoding="utf-8") as fh:
+            for rec in records:
+                fh.write(json.dumps(rec, sort_keys=True) + "\n")
 
 
 def is_native_codex(rec: dict) -> bool:
@@ -485,6 +598,21 @@ def collect(path: Path = LEDGER, since: str | None = None, amigo: str | None = N
                   f"they are holes until `--draw` runs")
     # Rows filed before their run landed would otherwise sit in W for ever; re-check them (2026-10-10).
     reconcile_landed(path, landed=landed)
+    # The landing gate and the path check close items without a reader. That used to leave them in
+    # no queue at all — 252 of them by 2026-10-22 — because `--queue` sees only W and the reading
+    # queue had to be remembered and run by hand. Naming them here, at the moment they are closed,
+    # is the routing fix: an unread item is in somebody's queue the same second it is delivered,
+    # and the balance between inflow and reading stops depending on anybody remembering.
+    try:
+        pending = [r for r in load(path).values()
+                   if is_unread(r) and not r.get("reading_assigned_to")]
+        if pending:
+            named = name_unread(path=path, by="collect")
+            print(f"item_ledger: {len(named)} machine-closed-but-unread item(s) named for "
+                  f"reading (delivered is not read)")
+    except (OSError, ValueError) as exc:
+        print(f"item_ledger: WARNING — {exc}; the unread pile is unnamed until "
+              f"`--name-unread` runs")
     return len(fresh)
 
 
@@ -526,7 +654,8 @@ def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | 
 
 
 def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
-                    scope: str = "", postpone_absent: bool = False) -> list[dict]:
+                    scope: str = "", postpone_absent: bool = False,
+                    skipped: list | None = None) -> list[dict]:
     """Close waiting items whose named paths already exist on main (auto:path).
 
     `reconcile_landed` keys on the item's *own* run id, so a wake's work that landed under a
@@ -545,6 +674,19 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
     somebody else's. `postpone_absent` also moves items naming paths absent from this checkout to
     `postponed`, with the 2026-09-23 reason (a path that never reached main is a *delivery state*,
     not missing work); without it those rows stay in W, because "not here yet" is not a decision.
+
+    A *named request* (`assign_kind == "name"`: one amigo wrote "this one is plainly yours, and here
+    is why") is never closed here, however many of its paths are present, and is appended to
+    `skipped` when a list is passed in. For a drawn row the paths are the run's own output, so
+    "every path is on main" answers the only question the ledger asked — did this work arrive. For
+    a named row the paths are the *subject* the named amigo was asked to look at: the answer is the
+    reviewer's verdict, and the subject being present is the premise of the question, not the
+    answer. Closing on presence writes `accomplished` over a review nobody did — the stamp the
+    human forbade on 2026-10-09, produced this time by a machine checking a file. Measured
+    2026-10-21 (Desi, run `20261021T051359Z-547c2e61`): of 20 rows in W, 9 named only paths already
+    present, and 7 of those 9 were named requests. Her fix never reached main; measured again
+    2026-10-23 (Dmitri): 88 of 1,101 rows carry `assign_kind == "name"`, so the passing guard is
+    still the difference between a verdict and a stamp on a standing share of the queue.
     """
     items = load(path)
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -553,6 +695,10 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
         if letter_for(rec) != "W":
             continue
         if scope and rec.get("assigned_to") != scope:
+            continue
+        if rec.get("assign_kind") == "name":
+            if skipped is not None:
+                skipped.append(rec)
             continue
         paths = [p for p in (rec.get("paths") or []) if isinstance(p, str)]
         if not paths:
@@ -605,17 +751,36 @@ def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str 
     return rec
 
 
+# Closed by a machine and never by a reader. `auto:land` is the Goose lander's test gate (the paths
+# exist and the suite passed); `auto:path` is the delivery check (every named path is on main).
+# Both are statements about the repository, not about the work, and neither is a review.
+MACHINE_REVIEWERS = ("auto:land", "auto:path", "auto")
+
+
 def letter_for(rec: dict) -> str:
-    """Which of A/P/W/R an item sits in. W is the remainder, and deliberately so.
+    """Which of A/D/P/W/R an item sits in. W is the remainder, and deliberately so.
 
     W is the honest place for anything undecided: an item is *waiting for review* unless the
     artifact already carries a decision. `postponed` without a written reason reads as W too —
     a postponement nobody wrote down is not a decision, it is an absence, and the rule from
     2026-10-07 says an unwritten claim does not count.
+
+    D is the 2026-10-25 addition and it exists because A was carrying two incompatible claims:
+    "someone read this and kept it" and "a machine found its paths on main". Measured the hour it
+    was added: of 492 accomplished items, 263 had never been read by a model (195 auto:land, 68
+    auto:path), and of the 306 items ever machine-closed only 38 — 12% — were opened by a reviewer
+    afterwards. A letter meaning both things cannot answer "is review keeping up"; it answers "is
+    the lander working", which is a different question with a much better answer. That is how a
+    54%-unread pile came to be reported, in good faith, as accomplished.
+
+    Not the retired U (2026-10-06). U meant "performed, not yet reviewed", which duplicated W and
+    he killed it for that reason. D has a state, a delivery and a reason on disk; what it lacks is
+    a reader, and `is_unread()` is the only definition of its membership — the letter and the
+    reading queue are the same predicate, so they cannot drift apart.
     """
     state = rec.get("state")
     if state == "accomplished":
-        return "A"
+        return "D" if (rec.get("reviewer") or "") in MACHINE_REVIEWERS else "A"
     if state == "rejected":
         return "R"
     if state == "postponed" and (rec.get("reason") or "").strip():
@@ -660,9 +825,9 @@ def counts(items: dict[str, dict], hours: int | None = None) -> dict:
     def blank() -> dict:
         return {"total": 0, "internal": 0, "external": 0, "by_amigo": {}}
 
-    out = {g: blank() for g in ("N", "V", "A", "P", "W", "R")}
+    out = {g: blank() for g in ("N", "V", "A", "P", "W", "R", "D")}
     out["A"]["by_review"] = 0
-    out["A"]["by_gate"] = 0
+    out["D"]["by_gate"] = 0
     out["decisions"] = 0
     out["items"] = rows
 
@@ -682,7 +847,9 @@ def counts(items: dict[str, dict], hours: int | None = None) -> dict:
         letter = letter_for(rec)
         add(letter, who, scope)
         if letter == "A":
-            out["A"]["by_review" if rec.get("reviewer") not in (None, "auto:land") else "by_gate"] += 1
+            out["A"]["by_review"] += 1
+        if letter == "D":
+            out["D"]["by_gate"] += 1
         if in_window(rec.get("state_utc")):
             out["decisions"] += 1
     return out
@@ -760,50 +927,246 @@ def assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason: str = "
     return rec
 
 
-def draw(path: Path = LEDGER, dir_: Path = BAND_DIR, by: str = "", only: str = "") -> list[dict]:
-    """Branch (b): name every unassigned waiting item, at random among the dated cheap band.
+def is_unread(rec: dict) -> bool:
+    """Closed by a machine and never taken up by a model afterwards — the pile nobody queues.
 
-    The pick is a function of the item's own id — uniform over the band, and settled the moment it
+    This is the 252-item pile on 2026-10-22: work that landed, was closed by the landing gate
+    because its paths exist, and was then in no queue at all. `--queue` cannot see it (those items
+    are not waiting) and `--draw` cannot see it either, which is why an instruction to "read one
+    item from your review queue" can be obeyed perfectly and never touch it.
+    """
+    return (rec.get("state") == "accomplished"
+            and (rec.get("reviewer") or "") in MACHINE_REVIEWERS)
+
+
+# Wakes per day, measured 2026-10-22 from the tick-state/runs directories. A name is worth nothing
+# on a body that does not wake, so the pile is shared by capacity rather than uniformly: flat, this
+# put 115 of 252 items on claude and tarik, who wake once a day each and would carry them to the
+# grave. Dated like the price band, and re-measured the same way — a change in how often we wake
+# should change this table, not be discovered later.
+WAKES_PER_DAY = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 3}
+# Re-measured 2026-10-22 evening: tarik was 1 in the morning table and is 3 now that Tarik-app
+# (the codex platform) runs several wakes a day; Tarik-goose has not woken since 2026-10-19, so
+# the 3 are counted on the app. The morning table named 9 of the 252 pile items to tarik when
+# it should have named about 22; `--rebalance-unread` corrects names made under a stale table.
+#
+# 2026-10-25: the numbers below are still right and this table is unchanged on purpose. Read by
+# `scripts/wake_cadence.py --now 2026-10-25T11:25:40Z`: desi 11.9/day, gemini 5.9, claude 1.0,
+# dmitri 11.7, tarik 2.6 — every weight within tolerance, so no weight is re-derived. The number
+# was never the whole question. The same reading found tarik's *last evidence of a wake* 39.4
+# hours old (codex filing `codex-20261023T200050Z-61cf96dc`; no goose run since
+# `20261019T170221Z-c56a22e8`), i.e. 22 never-read items named to a body that had gone quiet for
+# a day and a half, and nothing in the repository could notice — the table is dated, and a dated
+# table says nothing about today. A weight is a capacity, not a heartbeat: it is the second number
+# that needed measuring, and `wake_cadence.py --check` is what measures it. Changing tarik's weight
+# to 1 would re-name items already assigned, which the frozen-draw rule forbids; so the table stands
+# and the reading stands beside it.
+
+
+def _capacity_pick(item_id: str, author: str | None) -> str:
+    """A deterministic pick, weighted by how often each amigo actually wakes, author excluded."""
+    pool = [(a, WAKES_PER_DAY.get(a, 1)) for a in AMIGOS if a != author] or \
+           [(a, WAKES_PER_DAY.get(a, 1)) for a in AMIGOS]
+    total = sum(w for _, w in pool)
+    roll = int(hashlib.sha256(item_id.encode()).hexdigest()[:8], 16) % total
+    for who, weight in pool:
+        if roll < weight:
+            return who
+        roll -= weight
+    return pool[-1][0]
+
+
+def name_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> list[dict]:
+    """Put a name on every never-read item, so that a wake can pick it up.
+
+    The pick is a function of the id and the dated capacity table above — settled the moment it is
+    made, re-derivable by anyone, author excluded. The assignment is recorded in its own fields
+    (`reading_assigned_to`, ...) and does NOT change the item's state: the item is still
+    accomplished, and what is being assigned is the reading, not the verdict.
+    """
+    out: list[dict] = []
+    for rec in sorted(load(path).values(), key=lambda r: r.get("filed_utc") or ""):
+        if not is_unread(rec) or rec.get("reading_assigned_to"):
+            continue
+        pick = _capacity_pick(rec["id"], rec.get("amigo"))
+        row = dict(rec)
+        row.update(
+            reading_assigned_to=pick,
+            reading_assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            reading_assigned_by=by or "?",
+            reading_assign_reason=(
+                "named because it was closed by the landing gate and read by nobody: it was in no "
+                "queue at all, which is how 252 items came to sit unread at once. Shared by capacity "
+                "(wakes per day), not uniformly: a name on a body that does not wake is a name on "
+                "nothing"),
+        )
+        out.append(row)
+        if not dry_run:
+            append([row], path)
+    return out
+
+
+def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> list[dict]:
+    """Re-name pile items whose name was made under a stale capacity table.
+
+    A draw does not re-roll — that is the rule, and it is why a name means something. This is the
+    one honest exception: the table the names were made from was *wrong*, measurably so (tarik woke
+    three times a day, not once), and not one of the 252 had been opened yet. Re-deriving them
+    against the corrected table before any work has been spent is cheaper than carrying a wrong
+    distribution for months. It says so in the row, and it will not fire again for the same item
+    unless the table changes again.
+    """
+    items = load(path)
+    out: list[dict] = []
+    for rec in sorted(items.values(), key=lambda r: r.get("filed_utc") or ""):
+        if not is_unread(rec):
+            continue
+        current = rec.get("reading_assigned_to")
+        if not current:
+            continue
+        pick = _capacity_pick(rec["id"], rec.get("amigo"))
+        if pick == current:
+            continue
+        row = dict(rec)
+        row.update(
+            reading_assigned_to=pick,
+            reading_assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            reading_assigned_by=by or "?",
+            reading_assign_reason=(f"re-named from {current}: the capacity table it was named under "
+                                   f"was stale (tarik wakes 3 times a day, not once); corrected "
+                                   f"before any of these items was opened"),
+        )
+        out.append(row)
+        if not dry_run:
+            append([row], path)
+    return out
+
+
+def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
+    """The never-read items that carry this amigo's name — the second queue."""
+    items = load(path)
+    out = []
+    for rec in sorted(items.values(), key=lambda r: r.get("filed_utc") or ""):
+        if not is_unread(rec):
+            continue
+        if who and rec.get("reading_assigned_to") != who:
+            continue
+        out.append(rec)
+    return out
+
+
+def architectures(dir_: Path = BAND_DIR, band_data: dict | None = None) -> dict[str, str]:
+    """amigo -> architecture, from the band's own copy or the price table beside it.
+
+    Never guessed. The band file carries the map (since 2026-10-18); an older band does not, and
+    then the price table it was built from is the next source. If neither exists the map is empty
+    and the wide draw stops claiming a different-architecture reader it has no evidence for — it
+    falls back to the band and says so, because an unverified diversity claim is worse than a cheap
+    review honestly labelled.
+    """
+    data = band_data
+    if data is None:
+        files = sorted(dir_.glob(BAND_GLOB))
+        data = json.loads(files[-1].read_text(encoding="utf-8")) if files else {}
+    carried = (data or {}).get("architectures")
+    if isinstance(carried, dict) and carried:
+        return {k: v for k, v in carried.items() if isinstance(v, str) and v}
+    prices = dir_ / "model-prices.json"
+    if prices.exists():
+        try:
+            rates = json.loads(prices.read_text(encoding="utf-8")).get("rates_usd_per_million") or {}
+        except (OSError, ValueError):
+            return {}
+        return {who: e["architecture"] for who, e in rates.items()
+                if isinstance(e, dict) and isinstance(e.get("architecture"), str)}
+    return {}
+
+
+def draw(path: Path = LEDGER, dir_: Path = BAND_DIR, by: str = "", only: str = "",
+         cheap_only: bool = False) -> list[dict]:
+    """Branch (b): name every unassigned waiting item, at random from the dated cheap band.
+
+    The pick is a function of the item's own id — uniform over the pool, and settled the moment it
     is made, so it cannot re-roll. Anyone can re-derive it, which is what makes it auditable rather
-    than merely recorded. Items whose whole band wrote them are left alone: that is a hole, and
-    `holes()` reports it instead of the draw guessing.
+    than merely recorded. One item in `WIDE_SHARE` is drawn outside the band instead, so that an
+    item written inside the cheap band still gets read by a body of a different architecture;
+    `cheap_only` turns that off for a measured experiment. Items whose whole band wrote them are
+    left to `holes()` rather than guessed at.
     """
     band, as_of, band_file = price_band(dir_)
-    rates = json.loads(band_file.read_text(encoding="utf-8")).get("rates_usd_per_million", {})
+    data = json.loads(band_file.read_text(encoding="utf-8"))
+    rates = data.get("rates_usd_per_million", {})
+    arch = architectures(dir_, data)
     out: list[dict] = []
     for rec in sorted(load(path).values(), key=lambda r: r.get("filed_utc") or ""):
         if letter_for(rec) != "W" or rec.get("assigned_to"):
             continue
         if only and rec["id"] != only:
             continue
-        pool, widened = _pool(rec, band, rates)
-        pick = pool[int(hashlib.sha256(rec["id"].encode()).hexdigest()[:8], 16) % len(pool)]
+        digest = hashlib.sha256(rec["id"].encode()).hexdigest()
+        wide = (not cheap_only) and int(digest[8:16], 16) % WIDE_SHARE == 0
+        pool, branch, note = _pool(rec, band, rates, arch, wide=wide)
+        pick = pool[int(digest[:8], 16) % len(pool)]
+        head = ("drawn at random outside the cheap band"
+                if branch == "wide" else
+                f"drawn at random among the least expensive at {as_of}")
         out.append(assign(path=path, item_id=rec["id"], to=pick, kind="draw", by=by,
-                          reason=f"drawn at random among the least expensive at {as_of} "
-                                 f"(band: {', '.join(band)}; author excluded){widened}"))
+                          reason=f"{head} (band: {', '.join(band)} at {as_of}; "
+                                 f"author excluded){note}"))
     return out
 
 
-def _pool(rec: dict, band: list[str], rates: dict) -> tuple[list[str], str]:
-    """Who may look at this item: the band, minus its author — widened only if that is empty.
+def _pool(rec: dict, band: list[str], rates: dict, arch: dict[str, str] | None = None,
+          wide: bool = False) -> tuple[list[str], str, str]:
+    """(who may look, which branch, the reason suffix) for one item.
 
-    The author exclusion is absolute, so with a two-member band (today's: desi and dmitri, the two
-    DeepSeek bodies) a whole dimension of items has exactly one eligible reviewer and the choice
-    stops being random. That is the rule working, not a bug. What *would* be a bug is the degenerate
-    case: if the band ever narrows to the author alone, every item that amigo performed becomes a
-    permanent hole and the queue is undrainable by construction. So the fallback widens to the
-    cheapest amigo outside the band, and says so in the reason — a visible exception, never a silent
-    one, because a silent widening would quietly overrule the cost rule the draw exists to obey.
+    Cheap branch (three in four): the band, minus its author.
+
+    Wide branch (one in four): outside the band entirely, minus the author and minus anyone who
+    runs the author's own architecture. This is the failure the cheap branch cannot see: with a
+    band of `desi` and `dmitri` — both DeepSeek — every Desi item went to Dmitri, so "the author is
+    never the reviewer" held while the *point* of review (a reader who does not share the author's
+    blind spots) did not. Where nobody outside the band runs a different architecture, it uses the
+    widest pool it has and says exactly that. Where the map is *absent*, it still widens on price,
+    but then it says the architecture is unrecorded instead of asserting the reader's model differs:
+    a diversity claim nothing supports is worse than a cheap review honestly labelled, and that
+    holds for the reason as much as for the pick (fixed 2026-10-19 — with an empty map the reason
+    used to read "the band runs <author>'s own architecture" from no evidence at all;
+    `tests/test_item_ledger_wide_branch.py` pins the honest wording).
+
+    Degenerate case: if the band narrows to the author alone, the cheap branch widens to the
+    cheapest amigo outside it — a visible exception, never a silent one, because a silent widening
+    would quietly overrule the cost rule the draw exists to obey.
     """
-    pool = [a for a in band if a != rec.get("amigo")]
+    arch = arch or {}
+    author = rec.get("amigo")
+    if wide:
+        outside = [a for a in sorted(rates) if a not in band and a != author]
+        same = arch.get(author)
+        different = [a for a in outside if not same or arch.get(a) != same]
+        if different:
+            why = (f"because the band runs {same}'s own architecture and a same-model reader "
+                   f"cannot give this item a second opinion" if same else
+                   f"but no architecture is recorded for {author or 'the author'}, so the pool was "
+                   f"widened by price alone and this reason claims nothing about the reader's model")
+            return different, "wide", (
+                f" — wide draw, 1 item in {WIDE_SHARE}: read outside the cheap band on purpose, "
+                f"{why}")
+        if outside:
+            return outside, "wide", (
+                f" — wide draw, 1 item in {WIDE_SHARE}, but no body outside the band runs a "
+                f"different architecture from {author}'s; the widest pool available was used rather "
+                f"than quietly reusing the band")
+    pool = [a for a in band if a != author]
     if pool:
-        return pool, ""
-    rest = sorted((a for a in rates if a != rec.get("amigo")), key=lambda a: rates[a])
+        return pool, "cheap", ""
+    rest = sorted((a for a in rates if a != author), key=lambda a: rates[a])
     if not rest:
-        raise ValueError(f"no amigo can review {rec['id']}: {rec.get('amigo')} wrote it and the "
-                         f"price table names no one else")
-    return [rest[0]], (f" — widened past the band: the whole band wrote this item, so the cheapest "
-                       f"amigo outside it ({rest[0]}) looks instead")
+        raise ValueError(f"no amigo can review {rec['id']}: {author} wrote it and the price table "
+                         f"names no one else")
+    return [rest[0]], "widened", (
+        f" — widened past the band: the whole band wrote this item, so the cheapest amigo outside "
+        f"it ({rest[0]}) looks instead")
 
 
 def _named(items: dict[str, dict], who: str) -> list[dict]:
@@ -896,10 +1259,21 @@ def _cli() -> int:
     ap.add_argument("--draw", action="store_true",
                     help="name every unassigned waiting item by the cheap-and-random branch (b)")
     ap.add_argument("--only", metavar="ID", help="with --draw: just this one")
+    ap.add_argument("--cheap-only", action="store_true",
+                    help="with --draw: keep every draw inside the cheap band (no wide share)")
     ap.add_argument("--by", default="", help="who made the assignment (recorded)")
     ap.add_argument("--force", action="store_true", help="move an already-frozen assignment")
     ap.add_argument("--holes", action="store_true",
                     help="waiting items with no name on them — the escalation list")
+    ap.add_argument("--name-unread", action="store_true",
+                    help="put a name on every item the landing gate closed and nobody read — "
+                         "the second queue, which nothing could see before 2026-10-22")
+    ap.add_argument("--reading-queue", choices=AMIGOS,
+                    help="the never-read items that carry this amigo's name")
+    ap.add_argument("--rebalance-unread", action="store_true",
+                    help="re-name never-read items whose name was made under a stale capacity table")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="with --name-unread: say what would be named, change nothing")
     ap.add_argument("--hours", type=int, default=24)
     ap.add_argument("--list", action="store_true")
     args = ap.parse_args()
@@ -938,14 +1312,51 @@ def _cli() -> int:
             print(f"  {rec['id']}  {rec.get('amigo','?')}")
         return 0
     if args.reconcile_paths:
+        skipped: list = []
         made = reconcile_paths(reviewer=args.reviewer, scope=args.scope or "",
-                               postpone_absent=args.postpone_absent)
+                               postpone_absent=args.postpone_absent, skipped=skipped)
+        if skipped:
+            print(f"item_ledger: {len(skipped)} named review request(s) left waiting — the paths "
+                  f"they name are the subject, not the answer")
+            for rec in skipped[:10]:
+                print(f"  {rec['id']}  {rec.get('amigo', '?')} asked "
+                      f"{rec.get('assigned_to', '?')}")
         done = [r for r in made if r["state"] == "accomplished"]
         post = [r for r in made if r["state"] == "postponed"]
         print(f"item_ledger: {len(done)} item(s) closed accomplished — every named path is on "
               f"main; {len(post)} postponed — delivery state")
         for rec in (done + post)[:10]:
             print(f"  {rec['id']}  {rec['state']}  {rec['reason'][:70]}")
+        return 0
+    if args.name_unread or args.reading_queue or args.rebalance_unread:
+        if args.rebalance_unread:
+            rows = rebalance_unread(by=args.by or args.reviewer or "", dry_run=args.dry_run)
+            verb = "would re-name" if args.dry_run else "re-named"
+            print(f"item_ledger: {verb} {len(rows)} never-read item(s) against the current table")
+            counts_by: dict[str, int] = {}
+            for rec in rows:
+                counts_by[rec["reading_assigned_to"]] = counts_by.get(rec["reading_assigned_to"], 0) + 1
+            for who, n in sorted(counts_by.items()):
+                print(f"  {who}: {n}")
+            return 0
+        if args.name_unread:
+            rows = name_unread(by=args.by or args.reviewer or "", dry_run=args.dry_run)
+            verb = "would name" if args.dry_run else "named"
+            print(f"item_ledger: {verb} {len(rows)} never-read item(s)")
+            counts_by: dict[str, int] = {}
+            for rec in rows:
+                counts_by[rec["reading_assigned_to"]] = counts_by.get(rec["reading_assigned_to"], 0) + 1
+            for who, n in sorted(counts_by.items()):
+                print(f"  {who}: {n}")
+            return 0
+        mine = reading_queue(who=args.reading_queue)
+        print(f"item_ledger: {len(mine)} never-read item(s) carry {args.reading_queue}'s name. "
+              f"These are in the repository already and nobody has checked them.")
+        for rec in mine[:args.hours]:
+            print(f"  {rec['id']}  by {rec.get('amigo','?'):8} filed {(rec.get('filed_utc') or '')[:10]}"
+                  f"  {(rec.get('short_title') or rec.get('title') or '')[:60]}")
+        if len(mine) > args.hours:
+            print(f"  … and {len(mine) - args.hours} more")
         return 0
     if args.assign or args.draw or args.queue or args.holes:
         items = load()
@@ -956,7 +1367,8 @@ def _cli() -> int:
                   f"({rec['assign_kind']}): {rec['assign_reason']}")
             return 0
         if args.draw:
-            made = draw(by=args.by or args.reviewer or "", only=args.only)
+            made = draw(by=args.by or args.reviewer or "", only=args.only,
+                        cheap_only=args.cheap_only)
             print(f"item_ledger: {len(made)} item(s) named by draw")
             for rec in made[:5]:
                 print(f"  {rec['id']} -> {rec['assigned_to']}")
@@ -964,8 +1376,18 @@ def _cli() -> int:
                 print(f"  … and {len(made) - 5} more")
             left = holes(load())
             if left:
-                print(f"item_ledger: {len(left)} item(s) still have no name — the band wrote them "
+                print(f"item_ledger: {len(left)} item(s) still have no name — every amigo wrote them "
                       f"all, or they arrived after the draw. That is a hole, not a queue.")
+            # 2026-10-17: Tarik's body claims one task from channels/tarik-goose-handoff.json and is
+            # told that task is its whole scope, so a review assigned to him is invisible until it is
+            # in that file. Run the adapter here rather than trusting a wake to remember: the place
+            # that hands out the name is the place that must make the name reachable.
+            if any(rec["assigned_to"] == "tarik" for rec in made):
+                adapter = REPO / "scripts" / "queue_review_handoff.py"
+                if adapter.is_file():
+                    code = subprocess.call([sys.executable, str(adapter), "--write"])
+                    print(f"item_ledger: queued Tarik's review(s) for his handoff harness "
+                          f"(exit {code})")
             return 0
         if args.holes:
             left = holes(items)
@@ -1037,18 +1459,27 @@ def _cli() -> int:
         for label, hours in (("lifetime", None), (f"last {args.hours}h", args.hours)):
             c = counts(items, hours)
             left = c["N"]["total"] + c["V"]["total"]
-            right = sum(c[g]["total"] for g in ("A", "P", "W", "R"))
+            right = sum(c[g]["total"] for g in ("A", "P", "W", "R", "D"))
             print(f"{label:10s} "
-                  + "  ".join(f"{g}={c[g]['total']}" for g in ("N", "V", "A", "P", "W", "R"))
-                  + ("  ✓ N+V=A+P+W+R" if left == right else "  ✗ identity broken")
-                  + f"   (A: {c['A']['by_review']} reviewed / {c['A']['by_gate']} gate;"
-                    f" decisions this window: {c['decisions']})")
+                  + "  ".join(f"{g}={c[g]['total']}" for g in ("N", "V", "A", "P", "W", "R", "D"))
+                  + ("  ✓ N+V=A+D+P+W+R" if left == right else "  ✗ identity broken")
+                  + f"   (A: {c['A']['by_review']} read by a model / D: {c['D']['total']} closed "
+                    f"by a machine and unread; decisions this window: {c['decisions']})")
         waiting_rows = [r for r in items.values() if letter_for(r) == "W"]
         named = collections.Counter(r.get("assigned_to") for r in waiting_rows
                                     if r.get("assigned_to"))
         print("W: " + (" · ".join(f"{w}={n}" for w, n in named.most_common())
                        if named else "no names at all — nothing is addressed to anybody")
               + f"   holes: {len(holes(items))}")
+        unread = [r for r in items.values() if letter_for(r) == "D"]
+        if unread:
+            oldest = min(unread, key=lambda r: r.get("filed_utc") or "")
+            reading = collections.Counter(r.get("reading_assigned_to") for r in unread)
+            print(f"D: {len(unread)} delivered-but-unread, oldest filed {oldest.get('filed_utc')}"
+                  f"  ·  reading names: "
+                  + (" · ".join(f"{w}={n}" for w, n in reading.most_common() if w)
+                     if any(reading) else "none — this pile is in nobody's queue")
+                  + f"  ·  unnamed: {reading.get(None, 0)}")
         return 0
     ap.print_help()
     return 0

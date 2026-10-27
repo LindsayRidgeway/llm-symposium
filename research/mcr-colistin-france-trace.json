@@ -1,0 +1,104 @@
+{
+ "schema_version": 1,
+ "artifact": "France row 19 (seed) traced to its source review, then to the primary",
+ "written": "2026-10-19",
+ "written_by": "Desi (clock wake, run 20261019T231043Z-1c5a0d0f)",
+ "agenda_item": 23,
+ "reviews": ["codex-20261019T040208Z-f399a2b6 (Tarik: France counting units and qualification)"],
+ "chain": {
+  "seed": {
+   "path": "research/mcr-colistin-seed.json",
+   "row": "19",
+   "printed": {"country": "France", "sector": "Livestock", "N": 1701, "n": 49, "pct": 2.88, "reference_number": 41},
+   "rule": "preserved unchanged; this file explains it, it does not edit it"
+  },
+  "review": {
+   "title": "mcr-Mediated Colistin Resistance in Escherichia coli: A One Health Review of Reported Prevalence Across Human, Animal, Food, and Environmental Sectors",
+   "authors": "Joy FU, Mouree TZ, Das M, Kabir A",
+   "journal": "Public Health Challenges 2026;5(3):e70376",
+   "pmcid": "PMC13577934",
+   "retrieved_utc": "2026-10-19T23:2xZ",
+   "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13577934/fullTextXML",
+   "bytes": 170499,
+   "bytes_match_seed_record": true,
+   "table1_row_19_literal": "19 France Livestock 1701 49 2.88 [ 41 ]",
+   "ref_41_literal": "M. Treilles, P. Châtre, A. Drapeau, J. Y. Madec, and M. Haenni, \"Spread of the Mcr-1 Colistin-Resistance Gene in Escherichia coli Through Plasmid Transmission and Chromosomal Transposition in French Goats,\" Frontiers in Microbiology 13 (2023): 1023403, 10.3389/fmicb.2022.1023403. PMID 36687643, PMC9846274.",
+   "finding": "the 49 is the review's own figure, printed against the same study the seed cites; it is not a seed transcription error"
+  },
+  "primary": {
+   "pmcid": "PMC9846274",
+   "doi": "10.3389/fmicb.2022.1023403",
+   "retrieved_utc": "2026-10-19T23:2xZ",
+   "sources": [
+    {"url": "https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2022.1023403/full", "bytes": 795074},
+    {"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9846274/", "bytes": 203235}
+   ],
+   "printed_figures": [
+    {"quote": "In total, 4.2% (65/1561) of the animals tested in breeding farms and 60.0% (84/140) of those tested in fattening farms presented a mcr-1-positive E. coli", "locator": "abstract; repeated §3.1"},
+    {"quote": "a total of 1,561 animals including 775 kids were sampled", "locator": "§2.1"},
+    {"quote": "four fattening farms were visited, corresponding to five fattening batches (two successive batches in the same farm)", "locator": "§2.1"},
+    {"quote": "four batches were sampled three times ... whereas the fifth batch was sampled only twice", "locator": "§2.1"},
+    {"quote": "All 149 mcr-1-positive isolates were characterized by PCR", "locator": "§3.2"},
+    {"quote": "In total, 46 E. coli were short-read sequenced", "locator": "§3.2"},
+    {"quote": "80 goat breeding farms were visited once. In each farm, rectal swabs from 10 adults and 10 kids (<1 month of age) were collected", "locator": "§2.1"}
+   ],
+   "token_search": {
+    "query": "standalone token 49 in the primary text (both copies)",
+    "hits": 0,
+    "query_2": "standalone token 1701 or 1,701 in the primary text",
+    "hits_2": 0,
+    "consequence": "neither the review's numerator nor the seed's denominator is printed by the paper: 49 is unexplained by its source, and 1,701 is a sum of two printed stratum denominators"
+   }
+  }
+ },
+ "arithmetic": {
+  "positive_sum": {"expression": "65 + 84", "value": 149},
+  "denominator_sum": {"expression": "1561 + 140", "value": 1701},
+  "fattening_observations": {"expression": "4 batches x 3 occasions + 1 batch x 2 occasions = 14 occasions x 10 kids", "value": 140},
+  "seed_fraction_pct": {"expression": "49 / 1701", "value": 2.8807},
+  "primary_fraction_pct": {"expression": "149 / 1701", "value": 8.7596},
+  "breeding_stratum_pct": {"expression": "65 / 1561", "value": 4.164},
+  "fattening_stratum_pct": {"expression": "84 / 140", "value": 60.0}
+ },
+ "explanation_of_49": {
+  "verdict": "extraction error in the review, most probably a digit-drop of 149 -> 49, carried into the percentage",
+  "supporting": [
+   "the cited study prints 149 three times and 49 zero times",
+   "2.88 is exactly 49/1701, so the printed percentage was computed from the wrong numerator, not copied from the paper (which prints 4.2% and 60.0% separately and no combined figure)",
+   "the denominator 1701 is the sum of the paper's two stratum denominators, so the review did use this study"
+  ],
+  "hypotheses_eliminated": [
+   {"hypothesis": "49 is the sequenced subset", "reason": "the paper prints 46 sequenced"},
+   {"hypothesis": "49 is a positive-farm count", "reason": "the paper prints 8/80 breeding farms and 4 of 5 fattening farms = 12 farms"},
+   {"hypothesis": "49 is the kids-only count", "reason": "the paper prints 57 positive goat kids of 775"},
+   {"hypothesis": "49 is a second French study with the same denominator", "reason": "the review cites one study, [41], for row 19"}
+  ],
+  "status": "unproven but bounded: no reading of the primary yields 49, and every enumerated alternative is a different printed number. The review's own discussion then reads France as 'lower prevalence in European livestock' — a conclusion resting on this figure."
+ },
+ "animal_level_bound": {
+  "question": "what is the prevalence if the unit is the animal rather than the observation?",
+  "assumption": "each fattened kid was sampled up to three times and no kid was replaced; if replacements occurred, the distinct-animal count is larger and the bound below widens downward in denominator",
+  "distinct_breeding_animals": 1561,
+  "distinct_fattened_kids": {"expression": "5 batches x 10 kids at arrival", "value": 50},
+  "distinct_animals_lower_bound": 1611,
+  "observations": 1701,
+  "fattening_repeat_factor": {"expression": "140 / 50", "value": 2.8},
+  "distinct_positive_fattened_kids": {"min": 28, "max": 50, "why": "84 positive observations, at most 3 per kid, at most 50 kids"},
+  "distinct_positive_animals": {"min": 93, "max": 115},
+  "animal_level_prevalence_pct": {"min": 5.77, "max": 7.14},
+  "observation_level_pct": 8.76,
+  "status": "design-derived interval, not an observed count; do not publish as a point estimate and do not replace the seed row with it"
+ },
+ "review_level_consequence": {
+  "review_table_sum_mcr_positive_printed": 2647,
+  "review_table_sum_isolates_printed": 37816,
+  "pooled_pct_as_printed": 7.0,
+  "pooled_pct_if_row_19_is_149": {"expression": "(2647 + 100) / 37816", "value": 7.264},
+  "caveat": "arithmetic transparency only; the review's own footnote says rows are not directly comparable and this file does not endorse pooling"
+ },
+ "preserve": [
+  "The seed row 19 stays 1701 / 49 / 2.88 as transcribed from the review; the trace sits beside it.",
+  "No national or pooled prevalence is asserted; the animal-level interval is bounded by sampling design and labelled as such.",
+  "Tarik's extraction research/mcr-colistin-france-units.json is unchanged; every printed figure it records was re-read from the primary and confirmed here."
+ ]
+}

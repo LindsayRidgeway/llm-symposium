@@ -78,9 +78,64 @@ class ScannerTest(unittest.TestCase):
 
     def test_the_real_tree_is_clean(self):
         """The load-bearing case: if this fails, a conflicted file is on disk and
-        must not be landed. Repair it, do not excuse it."""
-        hits = ccm.scan(ccm.tracked_files(ROOT), ROOT)
+        must not be landed. Repair it, do not excuse it.
+
+        Scans tracked **and** untracked since 2026-10-18: the lander runs this suite between
+        `git apply` and `git add`, so a file the landing creates is still untracked here, and a
+        guard that reads only `git ls-files` cannot see the case it exists for.
+        """
+        hits = ccm.scan(ccm.candidate_files(ROOT), ROOT)
         self.assertEqual(hits, {}, f"conflict markers present: {hits}")
+
+    def _repo(self, d):
+        root = Path(d) / "r"
+        root.mkdir()
+        subprocess.run(["git", "init", "-q", str(root)], check=True)
+        subprocess.run(["git", "-C", str(root), "config", "user.email", "t@example.com"], check=True)
+        subprocess.run(["git", "-C", str(root), "config", "user.name", "t"], check=True)
+        return root
+
+    def test_an_untracked_file_is_scanned(self):
+        """The case the guard was blind to: a marker in a file the landing is about to add."""
+        with tempfile.TemporaryDirectory() as d:
+            root = self._repo(d)
+            (root / "base.md").write_text("ok\n")
+            subprocess.run(["git", "-C", str(root), "add", "base.md"], check=True)
+            subprocess.run(["git", "-C", str(root), "commit", "-qm", "base"], check=True)
+            (root / "new-report.md").write_text("ok\n<<<<<<< ours\nx\n=======\ny\n>>>>>>> theirs\n")
+            self.assertEqual(ccm.scan(ccm.tracked_files(root), root), {},
+                             "fixture is wrong: the untracked file was in the tracked set")
+            hits = ccm.scan(ccm.candidate_files(root), root)
+            self.assertIn("new-report.md", hits,
+                          "an untracked file carrying markers was not scanned -- this is the exact "
+                          "case the lander creates between apply and add")
+
+    def test_an_ignored_file_is_not_scanned(self):
+        """`.gitignore` must stay honoured, or the guard reads build output and camera rolls."""
+        with tempfile.TemporaryDirectory() as d:
+            root = self._repo(d)
+            (root / ".gitignore").write_text("junk/\n")
+            (root / "junk").mkdir()
+            (root / "junk" / "f.md").write_text("=======\n")
+            self.assertNotIn("junk/f.md", ccm.scan(ccm.candidate_files(root), root),
+                             "an ignored file was scanned; pointing this at a live checkout would "
+                             "then depend on what happens to be lying in .gitignore'd space")
+
+    def test_an_oversized_file_is_skipped_by_name(self):
+        """A skip that says nothing is the defect; a skip that names the file is a record."""
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            big = root / "big.md"
+            big.write_text("=======\n" + "x" * 32)
+            old = ccm.MAX_BYTES
+            try:
+                ccm.MAX_BYTES = 8
+                skipped = []
+                hits = ccm.scan([big], root, skipped)
+            finally:
+                ccm.MAX_BYTES = old
+            self.assertEqual(hits, {})
+            self.assertEqual(skipped, ["big.md"], "an oversized file was skipped silently")
 
 
 if __name__ == "__main__":
