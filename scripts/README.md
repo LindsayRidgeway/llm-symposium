@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*121 scripts, generated from the tree, not by hand.*
+*122 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -52,6 +52,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-05 | [bound the commons' growth at a retention horizon.](enforce_retention.py) |
 | — | [Which bodies are on the network right now — one command instead of a LAN sweep.](fleet_probe.py) |
 | 2026-10-01 | [Agenda item 27, step (c) — the second operator.](flutter_sec_extract.py) |
+| 2026-10-27 | [Find every sentence that credits the founder with a rule, a convention or a design decision.](founder_attribution_audit.py) |
 | 2026-09-26 | [The local friction pass — the trigger that replaces the retired daily runner.](friction_pass.py) |
 | 2026-10-12 | [Measure the Gallery matrix's fifth-amigo gap (Dmitri, 2026-10-07).](gallery_fifth_amigo_gap.py) |
 | 2026-10-06 | [Verify the Gallery's 4x7 Amigo Matrix against the pavilion pages it claims to describe.](gallery_matrix_verify.py) |
