@@ -72,7 +72,8 @@ def retraction_notices(crossref_message: dict) -> list[dict]:
     Reads both directions (`updated-by` = notices pointing at this work, `update-to`
     = notices this work is) and keeps entries whose `type` is `retraction`. Each
     notice keeps its own DOI, so the reader can go and read what was actually
-    retracted — which is not always the work in hand (see `notice_is_about_work`).
+    retracted — one notice can retract several articles at once, so the notice is printed
+    beside the work and the date below is taken from the work's own record, not the notice's.
     """
     found: dict[str, dict] = {}
     for key in ("updated-by", "update-to"):
@@ -162,6 +163,17 @@ def build_rows(n: int) -> list[dict]:
             row["after"], row["before"] = citing_counts(w["id"], row["retracted"])
         except Exception as exc:  # noqa: BLE001
             row["note"] = f"openalex count failed: {type(exc).__name__}"
+        # The two halves partition the citing works by publication date, and OpenAlex has works
+        # with no date at all: they fall into neither filter, so `after + before` can be less
+        # than `cited` and the row would not add up. Found on 2026-10-27 reading this file: the
+        # second row of --top 2 read cited 5520 against 44 + 5466 = 5510 with nothing saying
+        # where the ten went. Stated in the row rather than left as an arithmetic surprise.
+        if row["after"] is not None and isinstance(row["cited"], int):
+            residual = row["cited"] - row["after"] - row["before"]
+            if residual:
+                gap = (f"{residual} of {row['cited']} citations carry no publication date, so "
+                       f"they are in neither half")
+                row["note"] = f"{row['note']}; {gap}" if row["note"] else gap
         rows.append(row)
     return rows
 

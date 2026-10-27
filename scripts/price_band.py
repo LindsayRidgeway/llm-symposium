@@ -71,9 +71,15 @@ def build(data: dict, today: dt.date | None = None) -> dict:
         age = (today - dt.date.fromisoformat(price_date)).days
     except ValueError:
         age = -1
-    note = ("prices are current" if 0 <= age <= STALE_DAYS else
-            f"PRICES ARE STALE: the rates behind this band are {age} days old ({price_date}); "
-            f"refresh channels/usage/model-prices.json before trusting the band")
+    # The note is a *measurement at write time*, never a claim about now. It used to read
+    # "prices are current", which was true on the day it was written and false ever after — the
+    # October band was written on 2026-10-09 saying exactly that and still said it on 2026-10-27,
+    # nineteen days later, when its own `as_of` proved it was 63 days old (found while reviewing
+    # this file, 2026-10-27). A generated sentence about the present ages; a date does not.
+    note = (f"prices were {age} days old when this band was written ({price_date})"
+            if 0 <= age <= STALE_DAYS else
+            f"PRICES WERE STALE WHEN WRITTEN: the rates behind this band were {age} days old "
+            f"({price_date}); refresh channels/usage/model-prices.json before trusting the band")
     return {
         "as_of": price_date,
         "written": today.isoformat(),

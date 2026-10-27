@@ -51,9 +51,17 @@ class TestTheBand(unittest.TestCase):
         self.assertIn("STALE", band["note"])
         self.assertIn("2025-01-01", band["note"])
 
-    def test_current_prices_say_that_instead(self):
+    def test_the_note_states_an_age_not_a_currency_claim(self):
+        """A generated sentence about the present goes false as the file ages; an age does not.
+
+        The October band was written on 2026-10-09 saying "prices are current" and still said it
+        on 2026-10-27, when its own `as_of` (2026-08-25) made it 63 days old. The note now records
+        the age at write time, which stays true when read later.
+        """
         band = pb.build(prices({"desi": 0.01}, as_of="2026-10-01"), dt.date(2026, 10, 9))
-        self.assertEqual(band["note"], "prices are current")
+        self.assertIn("8 days old", band["note"])
+        self.assertIn("2026-10-01", band["note"])
+        self.assertNotIn("current", band["note"])
 
     def test_the_band_file_is_named_for_its_month_and_carries_both_dates(self):
         with tempfile.TemporaryDirectory() as td:
