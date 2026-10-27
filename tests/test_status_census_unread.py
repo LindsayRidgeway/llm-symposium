@@ -253,16 +253,61 @@ class CommandLine(unittest.TestCase):
         self.assertEqual(view["total"], census["2"])
 
 
-class TheRealLedger(unittest.TestCase):
-    """One check against the repository itself — a view of an empty file would pass every test above."""
+class ThePileDoesNotGoBlind(unittest.TestCase):
+    """Scale blindness, tested where the input is knowable rather than where the number is meant to fall.
 
-    def test_the_pile_is_not_empty_and_every_row_has_a_reason_to_be_in_it(self):
-        view = sc.unread_items(sc.load(sc.LEDGER), "2999-01-01T00:00:00Z", limit=0)
-        self.assertGreater(view["total"], 100,
-                           "the pile the founder's target is about should still be large; if it "
-                           "is not, either it was drained (good) or this view has gone blind (bad)")
+    Added 2026-10-27 (Desi) from Tarik's 2026-10-22 review (finding 2). The guard against a blind view
+    used to live in `TheRealLedger` as `assertGreater(view["total"], 100)`, which meant the day the
+    pile was actually drained — the outcome the whole view exists for — the suite would go red and
+    the next reader would be told to look for a bug that was not there.
+    """
+
+    def _pile(self, n):
+        return [row("202610%02dT000000Z-%08x" % (i % 28 + 1, i), state="accomplished",
+                    state_utc="2026-10-%02dT00:00:00Z" % (i % 28 + 1), reviewer="auto:land",
+                    paths=["present/a.md"])
+                for i in range(n)]
+
+    def test_a_large_fixture_is_shown_whole(self):
+        view = sc.unread_items(self._pile(150), "2999-01-01T00:00:00Z", limit=0, repo=ROOT)
+        self.assertEqual(view["total"], 150)
+        self.assertEqual(len(view["shown"]), 150)
+        self.assertEqual(len({i["id"] for i in view["shown"]}), 150)
+
+    def test_reading_the_pile_empties_it(self):
+        """A view whose number cannot reach zero is a floor, not a view."""
+        rows = self._pile(150)
+        rows += [dict(r, reviewer="desi", state_utc="2026-11-01T00:00:00Z") for r in rows]
+        view = sc.unread_items(rows, "2999-01-01T00:00:00Z", limit=0, repo=ROOT)
+        self.assertEqual(view["total"], 0)
+
+
+class TheRealLedger(unittest.TestCase):
+    """Checks against the repository itself — a view of an empty file would pass every test above.
+
+    Rewritten 2026-10-27 (Desi) from Tarik's 2026-10-22 review (finding 2). What is left here has to
+    be true of a drained ledger as well as a full one: the file still read, the view agreeing with the
+    census, and every row shown being a row that exists.
+    """
+
+    WHEN_ALL = "2999-01-01T00:00:00Z"
+
+    def test_the_view_agrees_with_the_census_on_the_real_ledger(self):
+        """Two code paths over the real file: if these disagree, one of them is lying about the pile."""
+        loaded = sc.load(sc.LEDGER)
+        self.assertGreater(len(loaded), 500,
+                           "the ledger has only ever grown; a short read means this test is "
+                           "looking at the wrong file, not that the pile got small")
+        view = sc.unread_items(loaded, self.WHEN_ALL, limit=0)
+        self.assertEqual(view["total"], sc.counts(sc.census(loaded, self.WHEN_ALL))["2"])
+
+    def test_every_row_shown_is_a_row_that_exists_and_has_a_landing(self):
+        loaded = sc.load(sc.LEDGER)
+        ids = {r["id"] for r in loaded}
+        view = sc.unread_items(loaded, self.WHEN_ALL, limit=0)
         self.assertEqual(view["total"], len(view["shown"]))
         for i in view["shown"]:
+            self.assertIn(i["id"], ids)
             self.assertTrue(i["closed_utc"], "a Status 2 item must have a landing time")
             self.assertTrue(i["id"])
         self.assertEqual(view["readable"] + view["undelivered"], view["total"])
