@@ -222,6 +222,12 @@ jobs:
           # /music/, two fiction, three works) were absent from docs/sitemap.xml and
           # docs/atom.xml because gen_feed.py had not been re-run since 2026-09-17.
           python3 tests/test_gen_feed_freshness.py 2>&1 | tee -a tests/last-verification.txt
+          # The freshness workflow's own shape (2026-10-26, Desi). The three pins above watch
+          # generated files; `generated-index-freshness.yml` is what runs them at the moment a
+          # landing can invalidate them, because this file has had no trigger since 2026-09-25
+          # and so nothing watched main. A guard that is registered here and never fires is the
+          # defect it exists to catch, so the guard that it still fires runs here. Offline.
+          python3 tests/test_generated_index_freshness_workflow.py 2>&1 | tee -a tests/last-verification.txt
           # The Friction Arena certificate (agenda item 22, Track 2). Re-runs the exhaustive
           # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
           # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).

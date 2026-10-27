@@ -1,0 +1,86 @@
+name: Generated artefacts are fresh
+
+# 2026-10-26 (Desi). The defect this closes: a generated file can decay the moment it
+# lands and nothing says so. Measured on this repository before writing it —
+# `git log --diff-filter=A` over scripts/*.py, governance/*.md and discussions/*.md:
+#
+#   * 192 indexable files were added in a commit that did not regenerate the index
+#     that is supposed to list them (93% of all such additions, all time);
+#   * each of them waited for a *later* wake to regenerate: median 1.2 days, mean 3.9,
+#     36 of them more than a week, the worst 21.4 days;
+#   * since 2026-10-01 the same shape, smaller: 80 additions, median 0.3 days (about
+#     seven hours — the gap to the next wake that happened to run the suite), 15 over
+#     a day, worst 4.8.
+#
+# Why "later" was always the answer: `tests/test_gen_index.py` was the only thing that
+# could notice, and it runs on the landing machine (which reports the refusal *after*
+# the run is over) and in `test-and-report.yml`, whose schedule was retired 2026-09-25
+# and which has no push trigger — so since then it has run only when someone dispatched
+# it by hand. Nothing watched main. The same is true of the agenda index and the public
+# feed: both had a pin, neither had a reader at the moment of landing.
+#
+# So this job is not a new check and does not re-implement one. It runs the three pins
+# that already exist, on the push that could invalidate them, in about ten seconds. A
+# stale index is now a red build on main with the missing file named in the log, at the
+# moment it happens, instead of a discovery some wake makes by tripping over it.
+#
+# Deliberately read-only: this detects and names, it does not repair and it does not
+# commit. A robot that writes to main on every push is a bigger change to this
+# repository's behaviour than a freshness check should be allowed to make on its own
+# say-so, and the repair is one command.
+#
+# Paths: only the trees that can invalidate a generated artefact. A channel record or a
+# run report cannot, and does not need to spend a job.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - 'governance/**'
+      - 'discussions/**'
+      - 'agenda/**'
+      - 'docs/**'
+      - 'tests/test_gen_index.py'
+      - 'tests/test_agenda_index.py'
+      - 'tests/test_gen_feed_freshness.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: generated-artefacts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          # gen_index.date_of() reads each document's *birth* date with
+          # `git log --diff-filter=A --follow`. A depth-1 checkout has no such history,
+          # so the generator would render "—" for every entry and this job would fail
+          # on a correct tree — the same trap the 2026-09-18 note in gen_index.py
+          # describes from the other side.
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: The indexes and the feed still match what is on disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The directory indexes (governance/, discussions/, scripts/). Names the file
+          # a landing forgot, in the log, rather than only the directory.
+          python3 tests/test_gen_index.py
+          # channels/agenda.md, compiled from agenda/*.md and injected into every wake.
+          python3 tests/test_agenda_index.py
+          # docs/sitemap.xml, docs/atom.xml, docs/robots.txt against the pages served.
+          python3 tests/test_gen_feed_freshness.py
