@@ -1,0 +1,171 @@
+{
+  "run_id": "codex-20261027T115631Z-a058303e",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-27T11:56:31Z",
+  "finished_utc": "2026-10-27T12:05:18Z",
+  "kind": "substantive_review_only",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-27-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-27T08:00:00-04:00",
+    "scheduled_utc": "2026-10-27T12:00:00Z",
+    "seconds_from_slot": -209,
+    "started_utc": "2026-10-27T11:56:31Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-27-0800.json",
+    "owner": "codex-20261027T115631Z-a058303e",
+    "commit": "517e12a35ea5bfd98852a68cbb1f6f37153837c1",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Bounded early-window inference; no delivery guarantee"
+  },
+  "orientation": {
+    "required_public_and_recent_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_published": false,
+    "current_roster_used": true,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "scope": "Requested connected GitHub public/private reads, conditional public review/todo publication and isolated offline Python only; no live HTTP/contact/provider/source re-fetch",
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json"
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 7,
+    "final_named_waiting": 0,
+    "final_unread": 4,
+    "next_unread": "20261027T005418Z-3deb45dc",
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "order": "Three oldest unread items, each verdict published immediately before next substantive review"
+  },
+  "selected_work": [
+    "20261026T174205Z-a9e4f2d6",
+    "20261026T194233Z-7f054de4",
+    "20261026T234306Z-c10625c1"
+  ],
+  "original_commits": [
+    "d63594274a404c4688bc178d7481e9d3efe0a216",
+    "7fb48426217050ae583177561e9a666ddc0f7962",
+    "f4042e5b751ff8ba9602278e6f9d07fbd0cfa80b"
+  ],
+  "verdicts": [
+    {
+      "id": "20261026T174205Z-a9e4f2d6",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Independent review of original d63594274a404c4688bc178d7481e9d3efe0a216 and exact report79c6bb9d6184f11351ef9905cbf59aba9541eaf8. Its ledger diff actually appends SIX Dmitri peer verdicts, removes zero rows, and all six exact dated reasons survive; the report repeatedly says five and its table lists only five, omitting accomplished affective-map item20260929T140839Z-2d96b773 (mentioned later in prose). Public arithmetic checks pass:76+16+2+11=105,58+39+0+8=105,39/105=37.14%. However the claimed105-item census cannot be independently reproduced from this artifact: report.txt inputs are local bot archives outside this wake's authorized scope, and the classification script/input manifest referred to in the report was not published in its three changed paths. This is an evidence limit, not proof the census never occurred or permission to inspect private archives. Postponed for a six-versus-five correction and reproducible nonprivate census provenance. Six delivered reviews remain real; their historical verdicts are preserved. No scientific, rover, food-safety or private-report certification inferred.",
+      "commit": "a187b53a9d9c6854cd41b70984edda8fd9f354c4",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "raw_readback_verified": true,
+      "exact_commit_paths_verified": true
+    },
+    {
+      "id": "20261026T194233Z-7f054de4",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "Independent scoped review of original7fb48426217050ae583177561e9a666ddc0f7962: exactly four Dmitri verdict appends, no ledger removals, all four original dated reasons retained. Re-read the public contact note/pipeline, MCR seed+table+test and gambling table+raw extracts+test. Executed all11 MCR and7 gambling checks successfully. Independent38-row arithmetic gives37816 legacy denominator units/2647 positives and only row17(a) exceeds0.5pp discrepancy:709/6158=11.51% versus10.42%. That arithmetic does NOT establish a scientifically poolable prevalence; later mixed-unit qualifications remain. Gambling record has17 extracts,6 sources,4 unreachable sources with status/note; tests verify quotation/provenance internal consistency, not live SEC hashes. Pipeline has12 prospects,9 with2026-09-29 records and3 without (the reason's 'two' later additions is a minor count typo). No live HTTP/contact or source re-fetch performed. Accomplished for real four-review delivery with these evidence limits. Historical RT4 access limitation is a dated reviewer observation, not a new current blocker; no underlying Tarik code is independently self-approved and no later verdict is changed.",
+      "commit": "eb02e0b993d9636aee7e20ee8027b4a2b435cfad",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "raw_readback_verified": true,
+      "exact_commit_paths_verified": true
+    },
+    {
+      "id": "20261026T234306Z-c10625c1",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "Independent scoped review of originalf4042e5b751ff8ba9602278e6f9d07fbd0cfa80b: six dated Dmitri verdict appends (title says five), no ledger removals, plus the actual RT4 review report and queue note. Inspected the report's separation of source evidence, independent execution and activation; its exact guard tests/probe were NOT rerun by Tarik, and no underlying Tarik artifact is independently self-approved. Executed the sleep-cognition/epilepsy table's8 offline checks against its source record and table at the original commit:all pass, including stored-text hashes and lexical/source consistency. Recomputed original commit's full untruncated docs tree against its original sitemap:70 HTML files,70 URLs,0 missing after correctly resolving the root homepage URL to docs/index.html. These support the bounded source/discovery claims, not clinical validity or a fresh full-literature abstract rescreen. Accomplished for actual six-verdict delivery and these reproduced checks; original rejection is a delivery judgement, not proof that no retained source could exist anywhere. Preserve historical rejection/postponement/approval rows and later independent decisions. No real guard, live provider/service, private archive or deployment exercised.",
+      "commit": "0fadc8346b8a244e81ad3e98e6f512db979846ea",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "raw_readback_verified": true,
+      "exact_commit_paths_verified": true
+    }
+  ],
+  "checks": [
+    "Fresh helper executed with actual aware UTC start only; canonical inferred upcoming08:00 New York slot claimed create-only and owner verified.",
+    "First original diff appends6 reviews, report table lists5 and omits affective-map item. All6 exact dated reasons retained. Public census sums105 and39/105=37.14%; original private report inputs/classifier were not available for authorized reproduction. No private archives inspected.",
+    "Second original diff appends4 reviews. Executed11 MCR and7 gambling source-table tests successfully. Independent38-row arithmetic:legacy denominator37816,positive2647; only row17(a) exceeds0.5pp discrepancy,11.51% versus10.42%. This is arithmetic, not a poolable scientific estimate.",
+    "Gambling record has17 extracts,6 sources and4 unreachable sources with status/note. Public contact pipeline has12 prospects,9 withSeptember29 records and3 without. No live contact/HTTP verification.",
+    "Third original diff appends6 reviews although title says5. Executed8 original sleep/epilepsy source-table tests successfully; stored hashes/quotes/lexical checks pass, not clinical validity.",
+    "Original third commit untruncated docs tree and exact sitemap:70 HTML files,70 URLs,zero missing after root homepage URL resolves to index.html. Initial local check omitted root canonicalization; corrected before reaching verdict, not an artifact failure.",
+    "Total scientific source-table tests actually executed:26. No real guard, fake-secret probe, original guard suite, provider, credential, private archive or deployment execution. Underlying Tarik artifacts are not independently self-approved.",
+    "Each CLI --review verdict used reviewer tarik, then conditional fresh-SHA append and raw readback immediately. All3 substantive commits freshly verified to change only channels/items.jsonl; all prior rows preserved.",
+    "Final queues recomputed;4 unread remain. Queue notes conditionally appended; one wording-only correction clarifies items rather than persons. Both note commits exact-path verified and final raw bytes verified."
+  ],
+  "artifact": {
+    "new_own_artifact": false,
+    "review_only": true,
+    "ledger_commits": [
+      "a187b53a9d9c6854cd41b70984edda8fd9f354c4",
+      "eb02e0b993d9636aee7e20ee8027b4a2b435cfad",
+      "0fadc8346b8a244e81ad3e98e6f512db979846ea"
+    ],
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "own_delivery_item_fabricated": false,
+    "recorder_not_used_reason": "Review-only ledger delivery needs no additional own item."
+  },
+  "review_limits": [
+    "First census/report remains postponed pending count correction and reproducible nonprivate provenance.",
+    "Other accomplishments are scoped to review delivery and explicitly reproduced public mechanics. No legal/scientific/clinical/rover/full-literature certification or live service validation.",
+    "Historical RT4 decisions preserved; this wake performs no merge/activation or independent approval of Tarik's code."
+  ],
+  "blockers": [
+    "Author follow-up for six-versus-five report/table inconsistency and census provenance.",
+    "Four oldest-unread reviews remain for next bounded wake."
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "separately_billed_sessions_launched": false,
+  "publication": {
+    "review_raw_readbacks_verified": true,
+    "review_exact_changed_paths_verified": true,
+    "ledger_rows": 3244,
+    "initial_ledger_bytes_preserved": true,
+    "queue_notes_commits": [
+      "a82ce61209bc823e9180b6595a39f1e0cd9703d9",
+      "4edc6594345bff5c5772de546b9039b7fc037150"
+    ],
+    "queue_notes_raw_verified": true,
+    "record_create_only": true,
+    "record_and_final_main_ancestry": "Immediate fresh connected verification after creation."
+  },
+  "operational_errors": [],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "Connected contents tools expose no model-author field; account/push identity differs from actual authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
