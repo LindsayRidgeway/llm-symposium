@@ -1,0 +1,387 @@
+name: Symposium Verification
+
+on:
+  # Retired from the schedule 2026-09-25 (Desi). It ran the repository's test suite daily and
+  # committed the output to tests/last-verification.txt — verification of unchanged material on a
+  # clock, the same defect the runner had. The tests are still run, on every landing, by whoever
+  # lands it: that is the only moment the answer can be different. Dispatch remains for a
+  # deliberate full pass.
+  # schedule:
+  #   - cron: '30 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Offline Verification Suite
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p probes/results
+          python3 tests/test_projection.py 2>&1 | tee tests/last-verification.txt
+          python3 tests/test_actuator.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mail.py 2>&1 | tee -a tests/last-verification.txt
+          # The auto-reply path and the mail fetch path must agree on what "automated" means.
+          # A divergent inline copy of the predicate let `no-reply@accounts.google.com` setup
+          # mail draw eight junk replies from Dmitri's mailbox in the commons' name (2026-10-05).
+          # Registered 2026-10-09 (Desi) — until then this whole file ran nowhere.
+          python3 tests/test_auto_reply.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_telegram.py 2>&1 | tee -a tests/last-verification.txt
+          # The Telegram relay's own rules, including the shape of a REQUEST and of a request
+          # that supersedes one. This file had never run anywhere: pytest is not installed in
+          # this project, three of its tests were written for it, and its runner sat above the
+          # rest of the file so they were not collected either (fixed 2026-10-12).
+          python3 tests/test_tell_human_message.py 2>&1 | tee -a tests/last-verification.txt
+          # The clock that asks the human about requests he has not answered — and this file
+          # had never run anywhere either (pytest-style, no runner, not in CI): the one part of
+          # the nudge nobody checked was the nudge.
+          python3 tests/test_request_nudge.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_telegram_media_intake.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_record_push.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_ci_usage_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The money half of the same ledger (2026-10-17, Desi). Tokens were recorded from
+          # 2026-10-16 and the cost was not, so the runner's rows all read "not reported" —
+          # gap 1 of the burn document, open in dollars. This guards the estimate's honesty
+          # rather than its arithmetic: an unknown rate must yield no cost, and an estimated
+          # one must say so in the summary.
+          python3 tests/test_usage_cost_estimate.py 2>&1 | tee -a tests/last-verification.txt
+          # The silent zero the money guard did not reach (2026-10-17, Desi). A provider call
+          # that returns no usage block was written as `recorded: false` — and `summarize`
+          # counted only the *other* name, `unrecorded`, so the table showed a free call and the
+          # footer said nothing was missing. Found by checking the pointer's claim ("wire the
+          # runner into the ledger") instead of rebuilding it: the wiring was already on main,
+          # and what was broken was the reading of the rows it writes.
+          python3 tests/test_usage_silent_zero.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_rover_pilot.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_triage.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_retention.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_artifact_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Dmitri's conflict-marker guard, recovered by Tarik 2026-10-16.
+          python3 tests/test_conflict_markers.py 2>&1 | tee -a tests/last-verification.txt
+          # Repo-root hygiene: a wake's run directory belongs BESIDE the checkout
+          # (<bot>/tick-state/runs/<id>/), never inside it. Written 2026-10-14 (Desi) after a
+          # previous wake wrote its report to a relative path and the run-id directory
+          # `20261014T085323Z-2408b85d/` landed on main in commit ebf8d47a.
+          python3 tests/test_no_stray_run_dirs.py 2>&1 | tee -a tests/last-verification.txt
+          # Who the git record says wrote the work (Desi, 2026-10-17). AUTHORSHIP.md promises an
+          # artifact never wears a human's name; nothing checked the author field until two native
+          # Codex landings arrived authored `Lindsay <LDRidgeway@gmail.com>`. The audit itself is
+          # re-runnable (`scripts/authorship_audit.py`); this runs its fixtures only, so a red
+          # build means the instrument is broken, not that history is.
+          python3 tests/test_authorship_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_friction_pass.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_docs_links.py 2>&1 | tee -a tests/last-verification.txt
+          # The Literary Wing's first arithmetic guard (Dmitri, 2026-10-16). The Hard SF matrix
+          # promises the physics cannot be hand-waved, but nothing recomputed a story's numbers:
+          # `docs/fiction/the-fourth-power.html` states its constants in one JSON block and this
+          # test re-derives every figure from them with Q = e*sigma*A*T^4, then fails if the prose
+          # or the figure table stops matching. Offline; no node needed.
+          python3 tests/test_fiction_fourth_power.py 2>&1 | tee -a tests/last-verification.txt
+          # Front-door guard: README.md's "Tools you can use right now" table must list every
+          # released Works entry. Written by run 20261007T044132Z-9dad80b6 (Dmitri), which was cut
+          # off before landing; registered 2026-10-12 (Desi, review of that run) — the one line the
+          # parked run was missing. Offline; derives the released set from docs/works/index.html.
+          python3 tests/test_readme_tools_table.py 2>&1 | tee -a tests/last-verification.txt
+          # JS harness parse guard. Added 2026-09-30 (Desi) after finding the retraction
+          # harness (tests/validate_retraction_page.mjs) carried a hard syntax error for
+          # three days — broken by the landing of run 20260927T200258Z-4e5ddbe3, and caught
+          # by no run because the .mjs harnesses are never executed here. `node --check`
+          # needs no network and skips cleanly if node is absent.
+          python3 tests/test_mjs_validators_parse.py 2>&1 | tee -a tests/last-verification.txt
+          # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,
+          # not a crash, while a 4xx (a rejected request the page builds) must still fail.
+          # Added 2026-10-04 (Desi) after a Europe PMC 503 crashed the harness with an
+          # uncaught throw and discarded 33 passing checks. Fully offline (UAT_LIVE_FAIL).
+          python3 tests/test_unreported_trials_validator_guard.py 2>&1 | tee -a tests/last-verification.txt
+          # Evidence-table provenance tests. Each research artefact claims to be pinned by a
+          # test; that claim is false if the test is never run. Registered 2026-09-30 (Desi)
+          # after finding four of them absent from this list.
+          python3 tests/test_affective_pain_evidence_map.py 2>&1 | tee -a tests/last-verification.txt
+          # Filtered acupuncture arm, agenda item 32 §6 step 2. The first arm's "0 of 38" was a
+          # top-80 relevance slice; this arm is a 40-record census of the measurement-naming
+          # sub-literature and finds 5 human-primary both-domain records, 2 of them pain trials.
+          # Offline; re-runs the item's own classifier. Registered 2026-10-04 (Desi).
+          python3 tests/test_affective_pain_acupuncture_filtered.py 2>&1 | tee -a tests/last-verification.txt
+          # Item 32 §9, the same filtered design against a second pain population (chronic low back
+          # pain). Written by Dmitri's 2026-10-08 wake but refused a landing by a dirty shared tree
+          # (R-009); landed by Desi's review 2026-10-13, and registered here because the map it pins
+          # cites this test in backticks — an unregistered pin is a claim that never runs.
+          python3 tests/test_affective_pain_second_population.py 2>&1 | tee -a tests/last-verification.txt
+          # Item 32 §10, the filtered VNS arm — the item's own second intervention, one filter with
+          # only the intervention block changed. The census and its script were on main from
+          # 2026-10-09 with no section and no pin; §10 was written up 2026-10-14 and this check
+          # re-derives its counts. Offline. Registered 2026-10-14 (Desi).
+          python3 tests/test_affective_pain_vns_filtered.py 2>&1 | tee -a tests/last-verification.txt
+          # Item 32 §11, the confound arm — the low-back-pain population restricted to acupuncture,
+          # holding population and intervention fixed at once. Closes the confound §9 named and §10
+          # narrowed: 0 of 3 human-primary records name affect where §9's wider LBP arm had 76 of 165.
+          # Offline; re-derives the census, the three PMIDs and the zero. Registered 2026-10-14 (Desi).
+          python3 tests/test_affective_pain_confound_arm.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_ddah1_evidence_table.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_androgen_tusc2_source_table.py 2>&1 | tee -a tests/last-verification.txt
+          # Item-24 maternal-pain maps. `test_maternal_pain_search.py` pinned the 2026-09-28 strict
+          # map but was itself registered nowhere — an existing pin that never ran, found 2026-10-08.
+          # `test_maternal_pain_wide.py` pins the 2026-10-08 widened re-run (the empty retention cell
+          # and the displaced class-B records). Both offline. Registered 2026-10-08 (Desi).
+          python3 tests/test_maternal_pain_search.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_maternal_pain_wide.py 2>&1 | tee -a tests/last-verification.txt
+          # The item ledger and the daily item report (the human's request, 2026-10-06). The report
+          # is only as honest as its derivation, so the derivation is what is pinned: a run that
+          # changed nothing is not an item, and a postponed or rejected item must carry a reason.
+          python3 tests/test_item_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The unlanded worklist (Dmitri, 2026-10-08): which wakes' claimed paths never reached
+          # main, answered with no git remote by reading this checkout — which *is* main. Registered
+          # so the tool that answers a question the reject queue called impossible is itself run.
+          python3 tests/test_unlanded_worklist.py 2>&1 | tee -a tests/last-verification.txt
+          # The works pipeline's own bookkeeping (Dmitri, 2026-10-14). `works/README.md` says a
+          # candidate lives in the queue until it is shipped or stopped, and nothing enforced it:
+          # 08 still read "candidate … not yet built" six days after its page was released as Works
+          # entry 14, and 07 had no Status line at all. This pins each Status line to the published
+          # section, so the drift cannot come back silently.
+          python3 tests/test_works_queue_status.py 2>&1 | tee -a tests/last-verification.txt
+          # The review-gate closer (Dmitri, 2026-10-08). Classifies each drafts/tick-* review branch
+          # as CLEAN (nothing differs from main but housekeeping; safe to delete) or HOLDING (names
+          # the paths that still differ). Built because the gate stranded work for a month with no
+          # instrument able to say which branches were already on main. Offline; temp git repo.
+          python3 tests/test_review_gate_report.py 2>&1 | tee -a tests/last-verification.txt
+          # The queue snapshot the review-blockage experiment is read with (2026-10-12). The read is
+          # "did an item leave the queue": the membership hash must move when one leaves and not when
+          # one merely reorders, or a drain and a no-op look the same.
+          python3 tests/test_queue_snapshot.py 2>&1 | tee -a tests/last-verification.txt
+          # The hold that stops a bare work report reaching the human, and the two exceptions that
+          # must never be held: a REQUEST, and any message that asks him something.
+          python3 tests/test_wake_report_hold.py 2>&1 | tee -a tests/last-verification.txt
+          # The report's display promises: a glance-length name per item, and a postponed list
+          # that may be truncated only if the total still shows.
+          python3 tests/test_daily_report.py 2>&1 | tee -a tests/last-verification.txt
+          # The monthly price band: who is cheap *this month*, so the reviewer-assignment draw
+          # never hardcodes a price. A band not a winner, dated, and stale prices say so.
+          python3 tests/test_price_band.py 2>&1 | tee -a tests/last-verification.txt
+          # Repository invitations are mail that cannot be answered by mail. All five
+          # mailboxes got GitHub's invitation, all five answered it by email, all five answers
+          # bounced off noreply@github.com and the human saw none of them (2026-10-12). Pinned:
+          # a letter tied to an address is recognised as such, an invitee of null means nobody
+          # can accept it, and the acceptance is made with the invitee's credential, never the
+          # owner's.
+          python3 tests/test_gh_invites.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gambling_source_table.py 2>&1 | tee -a tests/last-verification.txt
+          # State gaming-regulator source table, agenda item 27 step 2 (the MA Commission filings).
+          # Registered the same wake it was written, 2026-10-01 (Desi). Offline provenance check.
+          python3 tests/test_gambling_state_filings.py 2>&1 | tee -a tests/last-verification.txt
+          # Second-operator source table, agenda item 27 step (c) (Flutter/FanDuel). The retrieval
+          # was landed 2026-10-01 12:13Z but the analysis table was never written; written and
+          # registered by the 2026-10-02 00:14Z wake (Desi). Offline provenance check.
+          python3 tests/test_gambling_flutter_extraction.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_sleep_cognition_epilepsy_seed.py 2>&1 | tee -a tests/last-verification.txt
+          # Item 30 step (2): the full-text measurement table. Its pin was written with the artefact
+          # on 2026-10-07 but was never registered here, which is why the artefact was unlandable and
+          # three later wakes re-attempted it. Registered 2026-10-12 (Desi, review of run
+          # 20261007T004107Z-94caf291) — the one line the parked run was missing. Offline.
+          python3 tests/test_sleep_cognition_epilepsy_ied_fulltext.py 2>&1 | tee -a tests/last-verification.txt
+          # Cited by three research artefacts (vulvodynia, pudendal-neuralgia, disease-screen rule
+          # audit) and never run here until the registration guard below found it. Offline.
+          python3 tests/test_disease_screen.py 2>&1 | tee -a tests/last-verification.txt
+          # Item-24 maternal-pain evidence map. The strict map's test was written 2026-09-28 but never
+          # registered until now; the widened-search test was added by the 2026-10-07 wake that did the
+          # item's own next action (loosen the query once). Both offline, no network.
+          python3 tests/test_maternal_pain_search.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_maternal_pain_widened_search.py 2>&1 | tee -a tests/last-verification.txt
+          # Registration guard: any test a research artefact names as its pin must exist AND be in
+          # this list. Added 2026-09-30 (Desi) after finding a pin named for a file never written
+          # (`tests/test_gambling_source_table.py`, cited by the gambling table, did not exist).
+          python3 tests/test_evidence_table_registration.py 2>&1 | tee -a tests/last-verification.txt
+          # Index freshness. Catches the class of defect found 2026-09-30: gen_index.py run
+          # before its new file was committed bakes in a "—" date that turns stale on landing.
+          python3 tests/test_gen_index.py 2>&1 | tee -a tests/last-verification.txt
+          # Agenda-index freshness. channels/agenda.md is compiled from agenda/*.md and injected
+          # into every runner review; nothing ran `compile_agenda.py --check`, so on 2026-09-30
+          # four items with landed artefacts still read as unstarted. Registered 2026-09-30 (Desi).
+          python3 tests/test_agenda_index.py 2>&1 | tee -a tests/last-verification.txt
+          # The agenda a wake can actually see. Every wake is handed channels/agenda.md cut at
+          # 3,500 characters and told to pick one item "below"; on 2026-10-17 the first item
+          # heading sat at offset 7,002, so no wake had ever been shown the list. The compiled
+          # index now opens with a bounded one-line-per-item digest; this pins that it stays
+          # inside the window and keeps naming every item. Registered 2026-10-17 (Dmitri).
+          python3 tests/test_agenda_digest_fits_the_wake_window.py 2>&1 | tee -a tests/last-verification.txt
+          # Feed freshness. Catches the defect found 2026-09-30: 18 live pages (all of
+          # /music/, two fiction, three works) were absent from docs/sitemap.xml and
+          # docs/atom.xml because gen_feed.py had not been re-run since 2026-09-17.
+          python3 tests/test_gen_feed_freshness.py 2>&1 | tee -a tests/last-verification.txt
+          # The freshness workflow's own shape (2026-10-26, Desi). The three pins above watch
+          # generated files; `generated-index-freshness.yml` is what runs them at the moment a
+          # landing can invalidate them, because this file has had no trigger since 2026-09-25
+          # and so nothing watched main. A guard that is registered here and never fires is the
+          # defect it exists to catch, so the guard that it still fires runs here. Offline.
+          python3 tests/test_generated_index_freshness_workflow.py 2>&1 | tee -a tests/last-verification.txt
+          # The Friction Arena certificate (agenda item 22, Track 2). Re-runs the exhaustive
+          # search behind docs/works/arena.html's "exactly one solution" claim. Offline; the
+          # first staged instance of the demonstration track. Registered 2026-10-04 (Desi).
+          python3 tests/test_arena_puzzle.py 2>&1 | tee -a tests/last-verification.txt
+          # The landing-tree report (the lander's refusal loop). Added 2026-10-06 (Desi) after
+          # measuring that no wake's work reached main from 2026-10-04 12:27Z onward, every run
+          # refused with `refused_dirty_tree` on the same paths. Offline; every case is a temp
+          # git repo, so it pins the classification, not what happens to be dirty today.
+          python3 tests/test_landing_tree_report.py 2>&1 | tee -a tests/last-verification.txt
+          # The Gallery 4x7 matrix (agenda item 02). Checks that each of the 28 cells names a
+          # work actually present in its own pavilion — the site of the original phantom-artifact
+          # incident. Built 2026-10-06 (Dmitri); registered here 2026-10-12 (Desi, review of run
+          # 20261007T064133Z-7cb5544a) — it had been left out of this list, so it was not running.
+          python3 tests/test_gallery_matrix.py 2>&1 | tee -a tests/last-verification.txt
+          # The fifth-amigo gallery gap (agenda item 02). Reports that the declared one-work-per-
+          # amigo-per-wing floor is 28 cells at four amigos and 35 at five, with the fifth amigo's
+          # row empty; pins the arithmetic in research/gallery-floor-at-five.md. Added with that
+          # artefact by run 20261007T064133Z-7cb5544a, registered 2026-10-12 (Desi).
+          python3 tests/test_gallery_fifth_amigo_gap.py 2>&1 | tee -a tests/last-verification.txt
+          # Dmitri's maori gallery cell (Wing 04, "Unaunahi: The Unbroken Scale"). The generator
+          # has cited this test by name since 2026-10-15 but the file was never written, and the
+          # work itself landed on main never registered in its wing page or the matrix. This guard
+          # checks the artefact's own claims (one filled path, one subpath, no self-intersection)
+          # AND that the fifth-column cell is entered. Registered 2026-10-16 (Dmitri).
+          python3 tests/test_gallery_maori_dmitri.py 2>&1 | tee -a tests/last-verification.txt
+          # --- The twenty-two tests that existed and were never run here. ---
+          # Found 2026-10-13 (Desi) while reviewing the reject-queue/roster items the frozen draw
+          # assigned to me: the reviewed run's own test, `tests/test_reject_queue_sweep.py`, was
+          # unregistered — the exact defect its own docstring names ("Nothing ran it"), one level up.
+          # So the same check was run across all of `tests/`: 24 `test_*.py` files were absent from
+          # this list. Two of them (test_enforce_retention.py, test_rover_wake.py) are pytest-style
+          # with no `__main__` runner, so naming them here as `python3 X.py` would check nothing and
+          # report green — they are deliberately left out until they grow a runner. The other 22 each
+          # have a runner, each guards a script that still exists, and each was executed twice from
+          # this checkout on 2026-10-13 and passed both times. A guard that never runs is not a guard.
+          python3 tests/test_auto_reply_secret_egress.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_bodies_status.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_channel_triage.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_check_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_declutter_audit.py 2>&1 | tee -a tests/last-verification.txt
+          # The citation census and the gate over it (2026-10-18). `test_cited_paths_audit.py` was
+          # written 2026-10-17 and never registered here, so the census's own six checks had never
+          # run in CI — the defect it exists to measure, one level up: a guard that never runs. Its
+          # sibling pins the one class that is a real defect (a dated artefact cited as evidence that
+          # no reader can open) to a 21-row debt ceiling, so the 22nd row cannot be written silently.
+          # Offline: both walk the tree.
+          python3 tests/test_cited_paths_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_cited_path_gate.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_codex_wake_slot.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_draft_pile.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_draft_triage.py 2>&1 | tee -a tests/last-verification.txt
+          # The gallery wiring gate (Dmitri, 2026-10-18): every finished work in a wing directory
+          # must be linked from that wing's page, or carry a written exemption, and the front
+          # table must not still call a cell open while the pavilion exhibits a work. Written the
+          # day it was needed and left out of this list until 2026-10-19 (run
+          # 20261019T011755Z-4d1b6430) — so the gate that catches "landed but never exhibited"
+          # was itself never run, which is the defect it exists to measure, one level up.
+          # Note when reading its log: unittest writes to stderr and the failing-fixture case
+          # prints a GALLERY WIRING ... FAIL block to stdout, so in a piped log that block can
+          # appear after the live-tree PASS. The exit code is the verdict, not the last block.
+          python3 tests/test_gallery_unwired_works.py 2>&1 | tee -a tests/last-verification.txt
+          # The creative-wings map (Dmitri, 2026-10-19) — registered here on 2026-10-22 by Desi,
+          # as the reviewer, because `tests/test_evidence_table_registration.py` refused the landing
+          # without it: the map cites this test as its pin, and a pin CI never runs is a claim
+          # about a gate rather than a gate. That refusal was correct, and it is the whole reason
+          # Dmitri's 2026-10-19 run never reached main.
+          python3 tests/test_creative_wings_map.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gen_feed_dating.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          # The music catalogue's reachability gate (Desi, 2026-10-21; registered 2026-10-25 by
+          # Dmitri). The script landed on 10-21 and this, its test, did not: it sat on a review
+          # branch for four days with nothing running it. Recovered to main on 2026-10-25 and found
+          # broken the first time it was executed — its two dead-audition fixtures were bare divs,
+          # which `audition_ids()` does not read, so one test asserted a problem the gate cannot
+          # produce and the other passed because the button was never looked at. Both fixed. The
+          # register matters as much as the fix: a test no CI runs is the defect it measures.
+          python3 tests/test_music_catalogue_unwired.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_outreach_ledger_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_preflight_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_reject_queue_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          # The live invariant the sweep above only tests on fixtures (Dmitri, 2026-10-18). On
+          # 2026-10-17 four items sat with five reasoned verdicts and no `steward-requested:` line —
+          # the human had never been asked — and the check written for it was named in that run's
+          # LAND line and never landed. This one fails the build when any item is mature and
+          # unasked, and fails first if the parser sees nothing, so it cannot go green by being
+          # blind. Red means run `scripts/reject_queue_sweep.py --mark` and land the stamp.
+          python3 tests/test_reject_queue_request_gap.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_review_assignment.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          # RT4: exact reviewed guard/seam evidence plus bounded orchestration contracts.
+          python3 tests/test_secret_egress_guard.py 2>&1 | tee -a tests/last-verification.txt
+          python3 research/rt4/test_runner_finalization.py --runner scripts/run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 research/rt4/test_runner_attempt_history.py --runner scripts/run_autonomous_mission.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_scheduled_model_selection.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_screen_rule_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_stewardship_pitch_template.py 2>&1 | tee -a tests/last-verification.txt
+          # Preservation (2026-10-15): the Software Heritage copy is the one that survives us, and
+          # the only failure mode that matters is calling a pending save a copy. Registered with
+          # PRESERVATION.md and scripts/swh_status.py.
+          python3 tests/test_swh_status.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_task_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_validate_autonomous_diff.py 2>&1 | tee -a tests/last-verification.txt
+          # The cloud-server price survey (2026-10-16). Registered 2026-10-16 (Desi) so the landing
+          # gate would accept the run that wrote it: its research document cites this test in a code
+          # span, and `tests/test_evidence_table_registration.py` refuses to land a citation the
+          # workflow never runs — which is exactly the guard working, not failing. The run was cut off
+          # mid-landing, so the one unrun line was its whole obstacle; this is that line.
+          python3 tests/test_cloud_price_survey.py 2>&1 | tee -a tests/last-verification.txt
+          # The burn ledger (2026-10-16). Written by the 04:58Z wake but never registered here, so
+          # it existed and never ran — the same defect the 10-13 audit swept for and this file was
+          # born after. Registered 2026-10-16 (Desi) with the document it pins,
+          # research/2026-10-16-the-burn-so-far.md, which prices the runners that were invisible in
+          # every earlier cost figure. Offline; a tiny temp runs tree, no network.
+          python3 tests/test_burn_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_wake_review_queue.py 2>&1 | tee -a tests/last-verification.txt
+          # The review gate's closer (item 20261009T064910Z-2e807712). Carried to main 2026-10-13
+          # (Desi) while reviewing the unfrozen draw's items: Dmitri wrote the script 2026-10-09 but
+          # only the two new files were recoverable from that run's patch (its workflow hunk had
+          # drifted), so it is registered here by hand. Pins the decision a closer must make — a
+          # duplicate is REDUNDANT, unlanded bytes are STRANDED — on a throwaway git repo, offline.
+          python3 tests/test_draft_gate_closer.py 2>&1 | tee -a tests/last-verification.txt
+          # The lander's preflight (item 20261009T165020Z-958131ab). Same review-and-carry as above:
+          # Dmitri wrote it 2026-10-09 (reporting the dirty-tree condition *before* a landing instead
+          # of after), but only the two new files were recoverable from the patch. Narrower than the
+          # already-landed scripts/landing_tree_report.py — that one classifies and names a repair per
+          # path; this one is the yes/no gate a wake can call first. Registered here 2026-10-13 (Desi).
+          python3 tests/test_landing_preflight.py 2>&1 | tee -a tests/last-verification.txt
+          # Verdicts that survive their own run (Dmitri, 2026-10-26). `item_ledger.py --review`
+          # records a verdict by appending one line to channels/items.jsonl, a 3,000-line file main
+          # also appends to live; the landing patch carries that file's tail as context, the context
+          # goes stale, the hunk fails, and git apply being atomic the WHOLE run is discarded with
+          # the verdict inside it. Measured twice in one day (2026-10-26): item
+          # codex-20261026T082005Z-93ddaeaa was reviewed by run 20261026T094058Z-eb5c4d6e, lost,
+          # and reviewed again by 20261026T114111Z-bdc12b38 — the same loop as the 2026-10-23 lost
+          # delivery. The fix: every verdict is also written as its own one-line file under
+          # channels/ledger-verdicts/ (a clean add, so it always applies) and replayed into the
+          # ledger idempotently. Temp-directory work only; nothing here touches the live ledger.
+          python3 tests/test_ledger_verdict_mirror.py 2>&1 | tee -a tests/last-verification.txt
+          python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
+        env:
+          # Gap C (layer attribution): the probe performs a live TickTick API
+          # check when a token is present; without one (forks, PRs, secret
+          # removed) it reports layer attribution as unverified and stays green.
+          TICKTICK_API_TOKEN: ${{ secrets.TICKTICK_API_KEY }}
+
+      - name: Commit Verification Results
+        if: always()
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          git config --global user.name "LLM Symposium Bot"
+          git config --global user.email "bot@llm-symposium.local"
+          git add tests/last-verification.txt probes/results/last-probe-run.txt
+          git diff --quiet && git diff --staged --quiet || git commit -m "test(symposium): automated verification run"
+          git push "https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main

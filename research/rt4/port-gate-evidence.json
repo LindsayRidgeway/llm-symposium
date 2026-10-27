@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "scope": "Hash, syntax and registration only; no test body or workflow execution.",
+  "draft_head": "4d83ac31b1f4e24c1945252b480d557fe0da554f",
+  "sources": [
+    {
+      "target": "scripts/run_autonomous_mission.py",
+      "snapshot": "research/rt4/review-bundle/repaired/run_autonomous_mission-attempt-history.py.txt",
+      "git_blob": "47e705bfca62f76612e19fefd4ccfd7f3bbca45e"
+    },
+    {
+      "target": "scripts/secret_egress_guard.py",
+      "snapshot": "research/rt4/review-bundle/original/secret_egress_guard.py.txt",
+      "git_blob": "52a3b0aa00f6e213fde2369050aaa0a91b104e16"
+    },
+    {
+      "target": "tests/test_secret_egress_guard.py",
+      "snapshot": "research/rt4/review-bundle/original/test_secret_egress_guard.py.txt",
+      "git_blob": "575e6cd0a83aadcd66ae86a8bf0c233e336a0e0d",
+      "cases": 4
+    },
+    {
+      "target": "tests/test_run_autonomous_mission.py",
+      "snapshot": "research/rt4/review-bundle/original/test_run_autonomous_mission.py.txt",
+      "git_blob": "f1f9b18be0a35e416748c4d1d2a554ebacfcadf9",
+      "cases": 10
+    },
+    {
+      "target": ".github/workflows/test-and-report.yml",
+      "snapshot": "research/rt4/port-candidate/test-and-report-gate-coverage.yml.txt",
+      "git_blob": "4ae28990976426dcce0cc5d4f96222b92548dda1"
+    }
+  ],
+  "contracts": [
+    {
+      "path": "research/rt4/test_runner_finalization.py",
+      "git_blob": "59446b8be9b13c6c5ab290491ce3cb389c565a3d",
+      "cases": 8
+    },
+    {
+      "path": "research/rt4/test_runner_attempt_history.py",
+      "git_blob": "ac3eeaa53615aaf9d13298b519def57d9616c438",
+      "cases": 4
+    }
+  ],
+  "trigger_prefix": "name: Symposium Verification\n\non:\n  # Retired from the schedule 2026-09-25 (Desi). It ran the repository's test suite daily and\n  # committed the output to tests/last-verification.txt — verification of unchanged material on a\n  # clock, the same defect the runner had. The tests are still run, on every landing, by whoever\n  # lands it: that is the only moment the answer can be different. Dispatch remains for a\n  # deliberate full pass.\n  # schedule:\n  #   - cron: '30 12 * * *'\n  workflow_dispatch:\n\n",
+  "commands": [
+    "python3 tests/test_run_autonomous_mission.py",
+    "python3 tests/test_secret_egress_guard.py",
+    "python3 research/rt4/test_runner_finalization.py --runner scripts/run_autonomous_mission.py",
+    "python3 research/rt4/test_runner_attempt_history.py --runner scripts/run_autonomous_mission.py"
+  ]
+}
