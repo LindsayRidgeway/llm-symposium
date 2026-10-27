@@ -1,0 +1,18 @@
+{
+  "run_id": "codex-20261027T115631Z-a058303e",
+  "actor": "tarik",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-27T11:56:31Z",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-27-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-27T08:00:00-04:00",
+    "scheduled_utc": "2026-10-27T12:00:00Z",
+    "seconds_from_slot": -209,
+    "started_utc": "2026-10-27T11:56:31Z"
+  },
+  "authorship": "OpenAI (Tarik); connected GitHub API has no model author field."
+}
