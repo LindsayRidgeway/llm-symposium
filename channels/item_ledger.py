@@ -436,6 +436,18 @@ def landing_gap(items: dict[str, dict], last: str | None) -> int:
 VERDICT_KEYS = ("state", "state_utc", "reason", "reviewer")
 
 
+def verdict_stamp(rec: dict) -> str:
+    """When the *verdict* was decided, as an ISO string — empty if the row carries no decision.
+
+    `state_utc` only. It deliberately does not fall back to `filed_utc` the way
+    `scripts/ledger_row_recovery._stamp` does: a row's filing time is when the work happened, not
+    when somebody judged it, and mixing the two makes "older" mean two different things in two
+    readers. A row with a state and no `state_utc` is therefore *not comparable* and loses the
+    protection below rather than being guessed at — measured 2026-10-27, no such row exists.
+    """
+    return rec.get("state_utc") or "" if rec.get("state") else ""
+
+
 def load(path: Path = LEDGER) -> dict[str, dict]:
     """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly.
 
@@ -454,6 +466,21 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
 
     So: a row may change a verdict (a later review wins), but a row that omits it inherits it.
     Nothing in the ledger reopens an item; a second review is an explicit new state, not a None.
+
+    Second exception, added 2026-10-27: **line order is not time order.** The file is merged from
+    several checkouts, so a row can be appended *after* a decision it predates — a re-collection
+    that reproduced an old snapshot, or a patch applied out of order. When that happens the last
+    line carries an older `state_utc` than the record already holds, and the 10-25 rule above does
+    not save it: both rows have a state, so nothing is inherited and the older decision wins on
+    position alone. Measured on the real ledger this morning (3,281 rows for 778 items): 9 items
+    were showing a reason written at 09:21Z while the reason written at 15:23Z — and, for three of
+    them, at 2026-10-25 — was nowhere in the leading record. Both rows said `postponed`, so no
+    count was wrong; the *reason* was, and the reason is the whole record.
+
+    So the rule is now the one `scripts/ledger_row_recovery` has enforced in its own reader since
+    2026-10-14: newer must not be overwritten by older. A row whose verdict predates the record's
+    keeps its own non-verdict fields (paths, title, assignment) and inherits the newer verdict,
+    naming the stamp it inherited from — the recovery path and the read path finally agree.
     """
     items: dict[str, dict] = {}
     if not path.exists():
@@ -469,10 +496,78 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
                 for key in VERDICT_KEYS:
                     if not rec.get(key):
                         rec[key] = prev.get(key)
+            elif prev is not None and verdict_stamp(prev) and verdict_stamp(rec) \
+                    and verdict_stamp(rec) < verdict_stamp(prev):
+                for key in VERDICT_KEYS:
+                    rec[key] = prev.get(key)
+                rec["verdict_kept_from"] = prev.get("state_utc")
             items[rec["id"]] = rec
         except (ValueError, KeyError):
             print(f"item_ledger: skipping unreadable line {lineno}", file=sys.stderr)
     return items
+
+
+def duplicates(path: Path = LEDGER) -> dict:
+    """How much of the ledger is restatement, and whether any row walks a verdict backwards.
+
+    Append-only is the right shape for a file five processes write — a row cannot be half-written
+    into a plausible lie — but it has a cost nothing was counting. `append()` writes a *whole
+    record*, not a diff, so every assignment, every reconcile and every review copies the item
+    again: measured 2026-10-27, 778 items in 3,281 rows, 2,503 of them restatement (76% of a 3 MB
+    file), every item repeated at least three times and no two copies identical. That is the shape
+    the human's rule forbids rather than the volume: a record that restates itself is a record
+    whose last line can disagree with its own history, and "which copy is the item" then depends on
+    the reader.
+
+    Two readers of this file exist and they disagreed until today. `scripts/ledger_row_recovery`
+    has refused to append a row older than the ledger's own line since 2026-10-14; `load()`, which
+    every queue in the commons reads through, took the last line whatever its stamp. `backdated`
+    below is that disagreement, counted: ids whose final row carries an older `state_utc` than a
+    row above it. `held` is the subset where a *verdict* would have changed — the ones the guard
+    added to `load()` on 2026-10-27 is holding to the newer decision.
+
+    A census, not a gate. Redundancy is how this format works, so it must not fail a build; a
+    `--duplicates` that went red every day would be turned off within a week, which is how the
+    generated-index check failed for months.
+    """
+    rows = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
+    by_id: dict[str, list[dict]] = collections.defaultdict(list)
+    total = 0
+    for line in rows:
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rec = json.loads(line)
+            by_id[rec["id"]].append(rec)
+            total += 1
+        except (ValueError, KeyError):
+            continue
+    backdated: list[str] = []
+    held: list[str] = []
+    disagree_state: list[str] = []
+    for item_id, recs in by_id.items():
+        stated = [r for r in recs if verdict_stamp(r)]
+        if len({r.get("state") for r in stated}) > 1:
+            disagree_state.append(item_id)
+        if len(stated) < 2:
+            continue
+        newest = max(stated, key=verdict_stamp)
+        last = stated[-1]
+        if verdict_stamp(last) != verdict_stamp(newest):
+            backdated.append(item_id)
+            if (last.get("state"), last.get("reason"), last.get("reviewer")) != \
+                    (newest.get("state"), newest.get("reason"), newest.get("reviewer")):
+                held.append(item_id)
+    return {
+        "rows": total,
+        "items": len(by_id),
+        "redundant": total - len(by_id),
+        "copies": collections.Counter(len(v) for v in by_id.values()),
+        "backdated": sorted(backdated),
+        "held": sorted(held),
+        "disagree_state": sorted(disagree_state),
+    }
 
 
 @contextlib.contextmanager
@@ -537,6 +632,16 @@ def _keep_decisions(records: list[dict], path: Path = LEDGER) -> list[dict]:
             for field in DECISION_FIELDS:
                 rec.setdefault(field, old.get(field))
             rec["decision_preserved_from"] = old.get("state_utc")
+        elif old and verdict_stamp(old) and verdict_stamp(rec) \
+                and verdict_stamp(rec) < verdict_stamp(old):
+            # Appending an older decision than the one already on file is a regression, whether it
+            # arrived as a stale snapshot or from a patch applied out of order. Refused at the
+            # write the way `load()` refuses it at the read, so the file stops accumulating rows
+            # that contradict the record. Same rule as `scripts/ledger_row_recovery` (2026-10-14).
+            rec = dict(rec)
+            for field in DECISION_FIELDS:
+                rec[field] = old.get(field)
+            rec["verdict_kept_from"] = old.get("state_utc")
         out.append(rec)
     return out
 
