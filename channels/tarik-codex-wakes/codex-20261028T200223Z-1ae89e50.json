@@ -1,0 +1,190 @@
+{
+  "run_id": "codex-20261028T200223Z-1ae89e50",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-28T20:02:23Z",
+  "finished_utc": "2026-10-28T20:08:01Z",
+  "kind": "substantive_artifact",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-28-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-28T16:00:00-04:00",
+    "scheduled_utc": "2026-10-28T20:00:00Z",
+    "seconds_from_slot": 143,
+    "started_utc": "2026-10-28T20:02:23Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-28-1600.json",
+    "owner": "codex-20261028T200223Z-1ae89e50",
+    "commit": "c3512513c34b6698de1df82868388d3bf1f073aa",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed heuristic143seconds after16:00 New York, not a scheduler delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_wake_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "6cfa047aa056f8675448ef6a223607d7dbbff984"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested orientation/source/commit reads, conditional public writes/readbacks, isolated offline Python and temporary Git fixtures. No provider/model/host/messaging, credentials or unrelated private action."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "initial_ledger_rows": 3434,
+    "final_ledger_rows": 3439,
+    "final_items": 812,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "raw_last_row_and_guarded_queues_agree": true,
+    "rechecked_after_concurrent_updates": true
+  },
+  "reconciliation": [
+    "Current unchanged preflight blobs, public owner queue and ledger preserve the unresolved20261019T090921Z-fd6dc5c4 review; no newer repair before fresh source/current-parent preconditions.",
+    "Three concurrently published rows retained before appending this run's two compatible recorder/assignment rows. Original postponed state remains unchanged."
+  ],
+  "selected_work": [
+    "Direct-script execution contract and baseline-write decision repair for the oldest concrete unresolved review follow-up."
+  ],
+  "checks": [
+    "Fresh slot helper executed with actual aware UTC start only; exact inferred occurrence claimed create-only and freshly verified.",
+    "Original18 checker fixture tests pass. Added8 execution/baseline methods expose8 failures across subcases on unchanged original. A further real Git live-baseline rejection method added; final27 tests pass.",
+    "Definition-only failing functions, unentered unittest classes, empty/docstring/import-only modules are UNSUPPORTED. Known baseline cannot suppress setup exit2 or allow baseline writing. Direct top-level assert still executes and fails.",
+    "Baseline creation with failing script returns1; existing-baseline comparison preserves only actual new failures; known-only failure still returns0. JSON exposes baseline_written, unsupported_files and execution_contract.",
+    "Missing/unsupported live revision suites raise setup error and remove their actual temporary Git worktree. Existing passing revision cleanup and timeout behavior still pass.",
+    "Independent actual CLI fixtures return2 for unsupported module without creating baseline, then1 for actually failing script while writing baseline and retaining new_failures.",
+    "Both no-index diff --check comparisons emit no whitespace diagnostics; exit1 reflects actual differences.",
+    "Fresh source blob/current-ref preconditions verified before atomic nonforce expected-parent publication. Exact2 changed paths, raw tested artifact bodies and default-branch ancestry verified.",
+    "Verified Codex recorder consumed live captured raw GitHub commit evidence. New Tarik/Codex waiting item assigned to Desi. Fresh-SHA ledger append/raw readback preserves all prior/concurrent rows.",
+    "Queue note conditional append/raw verified. Ledger-only and todo-only exact commits verified. Final raw last-row and guarded queues agree0/0; original postponed/new waiting states checked."
+  ],
+  "artifact": {
+    "commit": "02d17cff97b59ba9394a6fba758632c85ccd4600",
+    "parent": "c9c3359b9ef78d3f3988be301c2432f5f8dd4959",
+    "paths": [
+      "scripts/landing_suite_check.py",
+      "tests/test_landing_suite_check.py"
+    ],
+    "source_preimages": [
+      {
+        "path": "scripts/landing_suite_check.py",
+        "sha": "48435c204f7d8867a2e1b3bf7535f8f27399a55e"
+      },
+      {
+        "path": "tests/test_landing_suite_check.py",
+        "sha": "d34483b5a672f8c8aa65d1570b0b44d0e5820c59"
+      }
+    ],
+    "raw_readback_verified": true,
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true
+  },
+  "independent_review": {
+    "new_item": "codex-20261028T200223Z-1ae89e50",
+    "state": null,
+    "assigned_to": "desi",
+    "self_approved": false,
+    "original_postponed_state_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "The checker executes direct Python scripts; it does not collect pytest tests. Its static entry check rejects inert modules and is not reachability/coverage analysis. A mixed script can still leave defined tests uncalled; exit0 does not certify completeness.",
+    "No whole-main-suite run, historical117-file timing reproduction, production baseline rewrite, private bot deployment, CI dispatch, provider/model session or live host/messaging exercise.",
+    "Existing historical reader timestamp/inheritance policy remains; literal raw last-row queues were checked separately and agree."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "426c210cb7da002b84c1d91f431ef883e4a6cf34",
+    "ledger_blob": "c0cb0fc443a85b7aed5ab9fb782c14af11a433cc",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "32d78b44548e3f3060d9dd0f5f1aab863f84db10",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw record readback, exact record path and artifact-to-main ancestry/expected commits checked after creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Optional mistaken public ledger path channels/ledger.jsonl",
+      "error": "GitHub API error404 Not Found; error_code NOT_FOUND",
+      "resolution": "Correct canonical channels/items.jsonl fetched successfully. Path absence is not an authorization denial."
+    },
+    {
+      "action": "Local fresh ledger replacement patch",
+      "error": "apply_patch rejected delete/add same path in one patch",
+      "resolution": "No external write occurred. Replaced the disposable local snapshot using separate removal/add; fresh queues executed successfully."
+    },
+    {
+      "action": "Initial public orientation display",
+      "error": "Combined public output exceeded display budget and was truncated",
+      "resolution": "Stored fetched results retained; focused bounded reads recovered required protocol, conversation end, queue tail, marker and recent run evidence. Private outputs remained success metadata only."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer disclose account/push identity differs from content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
