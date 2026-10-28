@@ -23,7 +23,11 @@ Offline. Reads the real queue; writes only into a temp directory.
 import sys
 import tempfile
 import unittest
+import contextlib
+import io
+import os
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -139,6 +143,116 @@ class TheMarkRoundTrip(unittest.TestCase):
             self.assertEqual(item["note"], str(rel))
             self.assertTrue(item["requested"])
             self.assertEqual(len(sweep.undelivered([item])), 1)
+
+
+class ImmutableStaging(unittest.TestCase):
+    def items(self, title="First request"):
+        return sweep.parse(fixture(requested="2026-10-17").replace(
+            "An item the commons has finished with", title))
+
+    def stage(self, root, queue, *extra):
+        output = io.StringIO()
+        with mock.patch.object(sweep, "REPO_ROOT", Path(root)), mock.patch.object(
+                sys, "argv", ["sweep", "--stage", "--path", str(queue), *extra]), contextlib.redirect_stdout(output):
+            self.assertEqual(sweep.main(), 0)
+        return output.getvalue()
+
+    def test_same_day_cohorts_keep_both_notes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            first = sweep.write_note(self.items(), "2026-10-28", root=tmp)
+            before = (Path(tmp) / first).read_bytes()
+            second = sweep.write_note(self.items("Second request"), "2026-10-28", root=tmp)
+            self.assertNotEqual(first, second)
+            self.assertEqual((Path(tmp) / first).read_bytes(), before)
+            self.assertIn("Second request", (Path(tmp) / second).read_text())
+
+    def test_identical_retry_does_not_rewrite(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rel = sweep.write_note(self.items(), "2026-10-28", root=tmp)
+            path = Path(tmp) / rel
+            os.utime(path, ns=(1, 1))
+            self.assertEqual(sweep.write_note(self.items(), "2026-10-28", root=tmp), rel)
+            self.assertEqual(path.stat().st_mtime_ns, 1)
+
+    def test_conflicting_existing_content_is_never_overwritten(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rel = sweep.write_note(self.items(), "2026-10-28", root=tmp)
+            path = Path(tmp) / rel
+            path.write_text("retained conflicting bytes")
+            with self.assertRaises(ValueError):
+                sweep.write_note(self.items(), "2026-10-28", root=tmp)
+            self.assertEqual(path.read_text(), "retained conflicting bytes")
+
+    def test_record_note_preserves_existing_pointers_without_duplicates(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue = Path(tmp) / "queue.md"
+            original = fixture(requested="2026-10-17", note="notes/old.md")
+            queue.write_text(original)
+            title = sweep.parse(original)[0]["title"]
+            sweep.record_note(queue, [title], "notes/new.md")
+            sweep.record_note(queue, [title], "notes/new.md")
+            self.assertEqual(queue.read_text(), original)
+
+    def test_stage_of_noted_requests_is_a_true_noop(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue = Path(tmp) / "queue.md"
+            original = fixture(requested="2026-10-17", note="notes/old.md")
+            queue.write_text(original)
+            output = self.stage(tmp, queue)
+            self.assertIn("nothing written", output)
+            self.assertEqual(queue.read_text(), original)
+            self.assertEqual(list(Path(tmp).rglob("*.md")), [queue])
+
+    def test_two_staging_passes_only_add_the_new_cohort(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue = Path(tmp) / "queue.md"
+            queue.write_text(fixture(requested="2026-10-17").replace(
+                "An item the commons has finished with", "First request"))
+            self.stage(tmp, queue)
+            first = sweep.parse(queue.read_text())[0]
+            first_bytes = (Path(tmp) / first["note"]).read_bytes()
+            with queue.open("a") as fh:
+                fh.write("\n" + fixture(requested="2026-10-17").replace(
+                    "An item the commons has finished with", "Second request"))
+            self.stage(tmp, queue)
+            items = sweep.parse(queue.read_text())
+            self.assertEqual((Path(tmp) / first["note"]).read_bytes(), first_bytes)
+            self.assertNotEqual(items[0]["note"], items[1]["note"])
+            second_text = (Path(tmp) / items[1]["note"]).read_text()
+            self.assertIn("Second request", second_text)
+            self.assertNotIn("First request", second_text)
+            self.assertEqual(queue.read_text().count("- steward-note:"), 2)
+
+    def test_same_titles_are_checked_per_block(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue = Path(tmp) / "queue.md"
+            queue.write_text(fixture(requested="2026-10-17", note="old.md") +
+                             "\n" + fixture(requested="2026-10-18"))
+            title = sweep.parse(queue.read_text())[0]["title"]
+            sweep.record_note(queue, [title], "new.md")
+            self.assertEqual([i["note"] for i in sweep.parse(queue.read_text())],
+                             ["old.md", "new.md"])
+
+    def test_fenced_example_note_is_not_an_existing_pointer(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue = Path(tmp) / "queue.md"
+            original = fixture(requested="2026-10-17")
+            original = original.replace("- steward-requested:",
+                                        "```\n- steward-note: example.md\n```\n- steward-requested:")
+            queue.write_text(original)
+            title = sweep.parse(original)[0]["title"]
+            sweep.record_note(queue, [title], "real.md")
+            self.assertEqual(sweep.parse(queue.read_text())[0]["note"], "real.md")
+            self.assertIn("```\n- steward-note: example.md\n```", queue.read_text())
+
+    def test_mark_and_stage_together_do_not_duplicate_new_notes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue = Path(tmp) / "queue.md"
+            queue.write_text(fixture())
+            self.stage(tmp, queue, "--mark")
+            self.assertEqual(queue.read_text().count("- steward-note:"), 1)
+            self.assertEqual(len(list((Path(tmp) / "channels/steward-notes").glob("*.md"))), 1)
+            self.assertEqual(len(sweep.undelivered(sweep.parse(queue.read_text()))), 1)
 
 
 if __name__ == "__main__":

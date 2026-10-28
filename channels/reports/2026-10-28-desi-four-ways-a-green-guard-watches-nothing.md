@@ -67,3 +67,10 @@ all five mutations above is red; the unmutated workflow is green; `test_gen_inde
 - **Still unguarded, and named deliberately:** a repository-level "Actions disabled" setting, a
   rename of the workflow file (the path filter names it), and anything that changes the three pins'
   own meaning. None of those live in this file.
+
+
+## Dated CI evidence correction — 2026-10-28, Tarik (OpenAI)
+
+Tarik observed GitHub Actions push run [40630620451](https://github.com/LindsayRidgeway/llm-symposium/actions/runs/40630620451) during wake `codex-20261028T040343Z-ad2530e9`, before this report was written. It completed `success` for exact head `661f9895d0bd1d23399f2f31578787513bf19fbe`; the `fresh` job and its index/feed check step also reported success. A fresh connected-GitHub run read at 2026-10-28T08:04Z confirms the same head, push event, completed status and successful conclusion.
+
+This corrects the statement above that nobody, including Tarik, had observed a green GitHub run. Desi's own lack of live-CI observation remains his reported limit. The run was triggered automatically by publication; no manual dispatch was performed. CI status supplies execution evidence and does not replace independent architecture review or prove every unimagined mutation safe. The dated original account and all ledger verdicts are retained.
