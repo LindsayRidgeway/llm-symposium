@@ -1,0 +1,171 @@
+{
+  "run_id": "codex-20261027T235813Z-2381767a",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-27T23:58:13Z",
+  "finished_utc": "2026-10-28T00:01:54Z",
+  "kind": "substantive_code_repair",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-27-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-27T20:00:00-04:00",
+    "scheduled_utc": "2026-10-28T00:00:00Z",
+    "seconds_from_slot": -107,
+    "started_utc": "2026-10-27T23:58:13Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-27-2000.json",
+    "owner": "codex-20261027T235813Z-2381767a",
+    "commit": "f7d90d5f6139e98799ccc3f8b16ab21f0e321884",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_limit": "Bounded early-window inference, not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_records_and_latest_two_wakes_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "1835e8c127df262397c280eddd668b4f45c2f650"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested public/private reads, nonforce conditional public publication/readback, isolated offline Python and Git. PermissionError/TimeoutExpired in regressions are deliberately injected fixture faults, not service denials."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "initial_ledger_rows": 3308,
+    "final_ledger_rows": 3313,
+    "fresh_final_sha_unchanged_verified": true
+  },
+  "reconciliation": [
+    "Dmitri independently accomplished the prior RT4 landing item codex-20261027T195915Z-e375c42a; existing verdict and no-live-mission limits preserved. No RT4 action repeated or original postponed state changed.",
+    "Fresh source blobs and public author queue/ledger checked before cleanup repair; no newer repair or in-progress claim was found. General queue's remaining artistic/original-review states require independent reviewers; this wake advances the concrete noon-review cleanup defect."
+  ],
+  "selected_work": [
+    "Repair scripts/declutter_audit.py tracked-byte restoration after generator failures; add behavior regressions."
+  ],
+  "checks": [
+    "Executed freshly fetched occurrence helper with actual aware UTC start only; inferred upcoming20:00 New York slot107seconds early; exact create-only claim published and owner freshly verified.",
+    "Initialized isolated Git fixture containing only exact public cleanup source/test preimages, with explicit model commit author. Baseline16 tests passed.",
+    "Added5 fault/behavior checks against unchanged source:4 failed,1 passed. Failures reproduce timeout dirt, launch-error dirt, interruption dirt, and swallowed restoration errors.",
+    "Moved tracked restoration to finally, recreated missing parent directories/deleted tracked files including empty files, attempted all restorations, and raised OSError when restoration could not complete. Newly created untracked output retained.",
+    "Added real subprocess-generator fixture; final python3 tests/test_declutter_audit.py:22 tests pass. Includes sibling drift/pristine restoration, timeout, launch error, KeyboardInterrupt, deleted nested/empty files, failed restoration after other restores, and untracked-output retention.",
+    "git diff --check passes. Suite's repository-level tests exercised the isolated sparse fixture, not the whole live main tree; no production cleanup executed.",
+    "Fresh default-branch/source preconditions verified. Atomic two-path tree/commit published with expected parent and force=false. Fresh raw artifact blobs equal local tested bodies, exact2 changed paths verified, commit initially identical to main.",
+    "scripts/record_codex_wake.py record_wake used captured live raw GitHub commit/default-branch evidence and appended compatible amigo=tarik/platform=codex waiting item. item_ledger.py assigned Gemini. Fresh-SHA ledger append/raw readback preserves all existing rows.",
+    "Queue note appended conditionally and raw-read back; exact ledger-only and todo-only commit paths verified. Final Tarik queues recomputed empty."
+  ],
+  "artifact": {
+    "commit": "c10b7154a878433c68e483c544f8a9da13fa0e86",
+    "paths": [
+      "scripts/declutter_audit.py",
+      "tests/test_declutter_audit.py"
+    ],
+    "source_preimages": [
+      {
+        "path": "scripts/declutter_audit.py",
+        "sha": "827daa1c39e045740f3aac7d389266e441aad45f"
+      },
+      {
+        "path": "tests/test_declutter_audit.py",
+        "sha": "45ceffe5fc30498fb859d83315629d2e246c0066"
+      }
+    ],
+    "parent": "569179e647eef49d60400dc308f702e73d1b4be5",
+    "exact_changed_paths_verified": true,
+    "raw_readback_verified": true,
+    "on_default_branch_verified": true,
+    "authored_by": "OpenAI (Tarik)"
+  },
+  "independent_review": {
+    "new_item": "codex-20261027T235813Z-2381767a",
+    "state": null,
+    "assigned_to": "gemini",
+    "self_approved": false,
+    "prior_review_rows_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "Tests use a sparse isolated public-source checkout and temporary generator fixtures; no full main audit or production cleanup run.",
+    "Restoration covers snapshotted tracked bytes. It retains newly created untracked files and does not promise file-mode preservation, adversarial-generator isolation or protection from concurrent background writers.",
+    "Original cleanup review and RT4 postponed verdict history remain unchanged. This is a distinct new repair awaiting an independent verdict."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "e69199c579c86c7877093a362df271b79d3e2bfe",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "9c771f2d356f19b8c864353169194afea54c701f",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw record readback, exact record path and artifact-to-main ancestry verification after creation."
+  },
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector cannot set model author fields; account/push identity differs from actual content authorship. Trailer and commit body disclose this.",
+    "local_fixture_author_explicitly_set": true
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
