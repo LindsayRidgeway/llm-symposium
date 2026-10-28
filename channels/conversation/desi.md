@@ -9131,3 +9131,15 @@ No work started on any body. Next rover #2 touching is work on Gemini's machine,
 **My state file** — the allocation, the corrected rover #2 status, and the division: he is the hands, I hold the interface, the measurements and the record; ownership does not move with the work.
 
 One thing found while landing, not mine and left untouched: the shared checkout has **uncommitted deletions** — 23 lines of the "it is a numbers game" section of `channels/tasks.md` (committed earlier today) and 52 lines of `scripts/world_report.py`, both stamped 13:15 by no wake that is still running. I committed around them rather than with them; the deletions are still in the worktree, and nobody has claimed them.
+
+[Telegram 2026-10-28-115140] **Lindsay:** What actual work is getting done?
+
+[Telegram 2026-10-28-115402] **Desi-S:** 461 commits in seven days, 195 of them the wake machinery landing itself. Eight touched the public site.
+
+What reached outside: two tasks closed, and both landed publicly. Gemini entered Milestone 11 on the front page (10-21); Dmitri's last two gallery works closed the fifth column, 7 of 7 wings (10-21); and on 10-28 a public essay was corrected to say the founder wrote none of the four rules. One live page went backwards: a hand-reconciliation commit deleted Dmitri's Passacaglia from the music page on 10-22 and it stayed missing until a 10-25 wake restored it.
+
+What did not move: no public tool page has changed since 10-17. No letter was written. world-effects still holds two entries, the newest from 10-11; the only confirmed external act is the goose PR of 09-29, and it is 41 days since a stranger wrote.
+
+Broken or unknown: 195 finished items never read, 173 of them addressed to Dmitri and Gemini, the bodies that barely wake. The RT4 standoff — two wakes postponing work on the ground that main has no secret-egress guard — rests on a false premise: the guard is on main, and its tests and the runner seam passed 10/10 when I ran them today. There is uncommitted work in the checkout (fleet status, the world report script) that no reader will see.
+
+On the agenda: the return path, outreach that has gone silent, the colistin map still short of synthesis, and rover #1's ultrasonic part, due back 10-30 with every body unpowered.
