@@ -47,6 +47,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import sys
 import tempfile
@@ -173,10 +174,11 @@ def undelivered(items):
     return [i for i in items if i["requested"] and not i["delivered"]]
 
 
-def note_path(today=None):
-    """Where a staged note lives. One file per day, so a note never overwrites an older one."""
+def note_path(today=None, digest=None):
+    """New notes carry a content digest; date-only paths remain valid historical lookups."""
     today = today or date.today().isoformat()
-    return Path("channels") / "steward-notes" / ("%s-reject-queue.md" % today)
+    suffix = "-" + digest if digest else ""
+    return Path("channels") / "steward-notes" / ("%s-reject-queue%s.md" % (today, suffix))
 
 
 NOTE_HEADER = chr(10).join([
@@ -190,34 +192,66 @@ NOTE_HEADER = chr(10).join([
 ])
 
 def write_note(items, today=None, root=None):
-    """Write the steward note to disk and return its repository-relative path."""
+    """Create an immutable note, or reuse identical bytes without rewriting it.
+
+    Different cohorts on the same day get different paths. An existing file with
+    unexpected bytes is an error; it is retained rather than overwritten.
+    """
     today = today or date.today().isoformat()
-    rel = note_path(today)
+    body, _ = note(items, today)
+    content = NOTE_HEADER + body + "\n"
+    digest = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
+    rel = note_path(today, digest)
     root = Path(root or REPO_ROOT)
     target = root / rel
     target.parent.mkdir(parents=True, exist_ok=True)
-    body, _ = note(items, today)
-    target.write_text(NOTE_HEADER + body + "\n", encoding="utf-8")
+    try:
+        with target.open("x", encoding="utf-8") as fh:
+            fh.write(content)
+    except FileExistsError:
+        if target.read_bytes() != content.encode("utf-8"):
+            raise ValueError("existing steward note has different bytes: %s" % rel) from None
     return rel
 
 
 def record_note(path, titles, rel):
     """Add `- steward-note: <rel>` under the request line of each named item.
 
+    Existing note pointers are preserved, per block, and repeated calls are no-ops.
     Written next to the request rather than appended at the end of the block so that the two lines
     that answer one question — was he asked, and where is the note — stay together when the item
     grows more verdicts.
     """
     p = Path(path)
     lines = p.read_text(encoding="utf-8").splitlines()
-    out, current = [], None
+    out, block, in_fence, changed = [], [], False, False
+
+    def emit(block):
+        nonlocal changed
+        head = HEAD_RE.match(block[0]) if block else None
+        items = parse("\n".join(block))
+        attach = (head is not None and head.group("title") in titles
+                  and len(items) == 1 and not items[0]["note"])
+        fenced = False
+        for line in block:
+            out.append(line)
+            if line.lstrip().startswith("```"):
+                fenced = not fenced
+            if not fenced and attach and REQUEST_RE.match(line):
+                out.append("- steward-note: %s" % rel)
+                attach = False
+                changed = True
+
     for line in lines:
-        m = HEAD_RE.match(line)
-        current = m.group("title") if m else current
-        out.append(line)
-        if current in titles and REQUEST_RE.match(line):
-            out.append("- steward-note: %s" % rel)
-    p.write_text("\n".join(out) + "\n", encoding="utf-8")
+        if not in_fence and HEAD_RE.match(line):
+            emit(block)
+            block = []
+        block.append(line)
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+    emit(block)
+    if changed:
+        p.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
 def note(items, today=None):
@@ -388,16 +422,14 @@ def main() -> int:
               "the channel it went by---" % rel)
     if args.stage:
         # Stamped-but-noteless, i.e. the requests that matured before this record existed.
-        pending = [i for i in undelivered(items) if i["requested"]]
+        # Re-read after --mark, if both flags were supplied; never restage its new notes.
+        items = parse(p.read_text(encoding="utf-8"))
+        pending = [i for i in undelivered(items) if not i["note"]]
         if not pending:
             print("--stage: every stamped request already has a note on record; nothing written")
         else:
             today = date.today().isoformat()
-            rel = note_path(today).as_posix()
-            body, _ = note(pending, today)
-            target = REPO_ROOT / note_path(today)
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(NOTE_HEADER + body + "\n", encoding="utf-8")
+            rel = write_note(pending, today).as_posix()
             record_note(p, [i["title"] for i in pending], rel)
             print("--stage: %d request(s) written to %s and recorded in the queue (staged, not "
                   "delivered)" % (len(pending), rel))
