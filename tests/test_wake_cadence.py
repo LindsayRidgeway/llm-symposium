@@ -242,3 +242,98 @@ class Registration(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class Obligations(unittest.TestCase):
+    """What a body returns, not how often it wakes — added 2026-10-28.
+
+    The table in `item_ledger.py` scales drawn names by wakes per day. Measured over the ledger's
+    whole history, claude wakes once a day and has never returned a verdict; gemini wakes 5.9 times
+    a day and reads at a fifth of dmitri's rate. A weight built from heartbeats cannot see either
+    fact, so the debt those names carry was invisible. These tests pin the counting rules that
+    make it visible, and the three ways a naive count gets it wrong.
+    """
+
+    def fixture(self, rows):
+        d = tempfile.mkdtemp()
+        p = Path(d) / "items.jsonl"
+        p.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+        return p
+
+    def test_a_verdict_counts_once_per_item_not_once_per_row(self):
+        # An append-only ledger copies the record on every state change, so the same verdict can
+        # appear in four rows. Counting rows would inflate a reader's capacity by the number of
+        # times the item was copied (measured on the real file: 141 rows against 119 items).
+        rows = [
+            {"id": "20261024T000000Z-aaaaaaaa", "amigo": "dmitri", "state": None},
+            {"id": "20261024T000000Z-aaaaaaaa", "amigo": "dmitri", "state": "accomplished",
+             "reviewer": "desi", "state_utc": "2026-10-24T01:00:00Z"},
+            {"id": "20261024T000000Z-aaaaaaaa", "amigo": "dmitri", "state": "accomplished",
+             "reviewer": "desi", "state_utc": "2026-10-24T01:00:00Z", "assigned_to": "dmitri"},
+        ]
+        got = wc.obligations(self.fixture(rows), NOW)
+        self.assertEqual(got["desi"]["verdicts_lifetime"], 1)
+        self.assertEqual(got["desi"]["verdicts_in_window"], 1)
+
+    def test_a_machine_closure_is_not_a_verdict_and_is_counted_as_debt(self):
+        # `auto:path` closes an item because its files exist. That is delivery, not a read, and the
+        # debt it leaves is the never-read pile — counted against the name the reading carries.
+        rows = [
+            {"id": "20261024T000000Z-bbbbbbbb", "amigo": "gemini", "state": "accomplished",
+             "reviewer": "auto:path", "state_utc": "2026-10-24T01:00:00Z",
+             "reading_assigned_to": "gemini"},
+            {"id": "20261024T000000Z-cccccccc", "amigo": "desi", "state": None,
+             "assigned_to": "claude"},
+        ]
+        got = wc.obligations(self.fixture(rows), NOW)
+        self.assertEqual(got["gemini"]["verdicts_lifetime"], 0)
+        self.assertEqual(got["gemini"]["unread"], 1)
+        self.assertEqual(got["gemini"]["total"], 1)
+        self.assertEqual(got["claude"]["waiting"], 1)
+
+    def test_a_machine_postponement_is_debt_and_is_not_hidden_in_either_pile(self):
+        # It is a closure with no reader behind it. It is not waiting (it has a state) and not
+        # "accomplished, unread" (it is postponed), so a counter that knew only those two piles
+        # would drop it — the fifth state the commons' rule forbids.
+        rows = [{"id": "20261024T000000Z-dddddddd", "amigo": "claude", "state": "postponed",
+                 "reviewer": "auto:path", "state_utc": "2026-10-24T01:00:00Z",
+                 "assigned_to": "dmitri"}]
+        got = wc.obligations(self.fixture(rows), NOW)
+        self.assertEqual(got["dmitri"]["machine_postponed"], 1)
+        self.assertEqual(got["dmitri"]["total"], 1)
+
+    def test_debt_on_a_body_that_never_returns_a_verdict_is_named(self):
+        rows = [{"id": "20261024T000000Z-eeeeeeee", "amigo": "desi", "state": None,
+                 "assigned_to": "claude"},
+                {"id": "20261024T000000Z-ffffffff", "amigo": "desi", "state": "accomplished",
+                 "reviewer": "desi", "state_utc": "2026-10-24T01:00:00Z"}]
+        warnings = wc.check_obligations(wc.obligations(self.fixture(rows), NOW))
+        self.assertEqual(len(warnings), 1)
+        self.assertIn("claude", warnings[0])
+        self.assertIn("never returned a verdict", warnings[0])
+
+    def test_a_body_carrying_nothing_is_not_nagged_about(self):
+        rows = [{"id": "20261024T000000Z-gggggggg", "amigo": "desi", "state": "accomplished",
+                 "reviewer": "desi", "state_utc": "2026-10-24T01:00:00Z"}]
+        self.assertEqual(wc.check_obligations(wc.obligations(self.fixture(rows), NOW)), [])
+
+    def test_a_body_that_read_this_fortnight_but_not_this_week_is_reported_as_such(self):
+        # Different sentence, because "stopped this week" and "has never read" call for different
+        # responses: one is a bad week, the other is a name on nothing.
+        rows = [{"id": "20261001T000000Z-hhhhhhhh", "amigo": "desi", "state": "accomplished",
+                 "reviewer": "gemini", "state_utc": "2026-10-01T01:00:00Z"},
+                {"id": "20261024T000000Z-iiiiiiii", "amigo": "desi", "state": None,
+                 "assigned_to": "gemini"}]
+        warnings = wc.check_obligations(wc.obligations(self.fixture(rows), NOW))
+        self.assertEqual(len(warnings), 1)
+        self.assertIn("no verdict in the window", warnings[0])
+
+    def test_an_unnamed_never_read_item_is_counted_rather_than_dropped(self):
+        # The blind spot a census inherits if it only counts named debt: an unread item with no
+        # name is in no queue at all, and `--holes` covers waiting items only.
+        rows = [{"id": "20261024T000000Z-jjjjjjjj", "amigo": "desi", "state": "accomplished",
+                 "reviewer": "auto:path", "state_utc": "2026-10-24T01:00:00Z"}]
+        got = wc.obligations(self.fixture(rows), NOW)
+        self.assertEqual(got["_unnamed_unread"], 1)
+        warnings = wc.check_obligations(got)
+        self.assertTrue(any("no name at all" in w for w in warnings), warnings)
