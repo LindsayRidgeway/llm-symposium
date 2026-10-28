@@ -1,0 +1,213 @@
+{
+  "run_id": "codex-20261028T120025Z-38254782",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-28T12:00:25Z",
+  "finished_utc": "2026-10-28T12:08:37Z",
+  "kind": "substantive_review_only",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-28-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-28T08:00:00-04:00",
+    "scheduled_utc": "2026-10-28T12:00:00Z",
+    "seconds_from_slot": 25,
+    "started_utc": "2026-10-28T12:00:25Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-28-0800.json",
+    "owner": "codex-20261028T120025Z-38254782",
+    "commit": "22eb54acdd985124fa57453bfcab0116980464f6",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed inference25seconds after08:00 New York; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_wake_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "383085dcd835d77fb1dccd106de83f9372e22af9"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested orientation/original artifact/commit reads, conditional public ledger/todo writes, create-only claim/run record, isolated offline Python and temporary Git fixtures only. No live provider/service, messaging or host action."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 4,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "initial_ledger_rows": 3389,
+    "final_ledger_rows": 3430,
+    "oldest_first": true,
+    "verdict_publication": "Each verdict CLI and conditional append/raw verification completed before the next substantive review.",
+    "reader_semantics": "Fresh helper additionally preserves newer timestamped verdicts. Raw last-row initial reading IDs are the same four, and independent final raw/guarded named and unread queues both0. No timestamp policy silently substituted for session last-row semantics."
+  },
+  "selected_work": [
+    "20261019T090921Z-fd6dc5c4",
+    "20261027T133126Z-9701c2c9",
+    "20261027T214548Z-9aa6b1a2",
+    "20261028T113408Z-15619535"
+  ],
+  "original_commits": [
+    "eda93af61032dd8100a27f069e28edfd473652e5",
+    "36e395476e39359581f6f029f35b31ee6656162d",
+    "9328df2c05d39cc8bc09d5ce891a6ec43468c31b",
+    "679d8846280da775e0651e42058f7c383cab1bca"
+  ],
+  "verdicts": [
+    {
+      "id": "20261019T090921Z-fd6dc5c4",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "summary": "18 fixture tests pass; an uncalled failing test reports clean and baseline-writing reports no new failures/exit0. Supported execution and baseline verdict contracts need clarification/regressions.",
+      "commit": "719fc257ceb8003d8bc516efebe3cfd042a0dfb9",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "immediate_raw_readback_verified": true,
+      "exact_changed_paths_verified": true
+    },
+    {
+      "id": "20261027T133126Z-9701c2c9",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "summary": "Exact3281/778/2503/9 parent census reproduced; canonical single-row protection works, but same-batch backdating and offset timestamp ordering are unprotected.",
+      "commit": "91a4ea6c9fc11bc1a490d03fb77e0bb09000b796",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "immediate_raw_readback_verified": true,
+      "exact_changed_paths_verified": true
+    },
+    {
+      "id": "20261027T214548Z-9aa6b1a2",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "summary": "Two original verdicts retained; thermal arithmetic reproduced and placeholders qualified. Underlying Tarik implementation not independently self-approved, probe not rerun; manual-only workflow registration is not live CI evidence.",
+      "commit": "1c158df60f9476790245780962c7457f0080c858",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "immediate_raw_readback_verified": true,
+      "exact_changed_paths_verified": true
+    },
+    {
+      "id": "20261028T113408Z-15619535",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "summary": "20 tests and independent actual CLI0/2/2 checks pass; reasoned reading assignment preserves state/history and rejects frozen moves/author review. Private access narratives not re-certified.",
+      "commit": "66ae2b082522af704a6bed34859fed0bbff7d40e",
+      "paths": [
+        "channels/items.jsonl"
+      ],
+      "immediate_raw_readback_verified": true,
+      "exact_changed_paths_verified": true
+    }
+  ],
+  "checks": [
+    "Fresh slot helper executed with actual UTC start only; exact inferred occurrence claimed create-only and owner freshly verified.",
+    "Review1 exact original checker/test/report blobs equal current counterparts. Ran all18 historical fixture tests, including controlled timeout and actual temporary Git-worktree removal. Independent pytest-style uncalled failure returns rc0/no failures; failing script with --write-baseline --json returns0/new_failures[] while failures contains the script. No full main suite or historical timing census run. Historical test_telegram_drain.py inspected and does contain an explicit main runner; it is not claimed as the synthetic no-execution counterexample.",
+    "Review2 fetched exact parent ledger c5ecdd7c764899b9050fa9c958e66c6b36f1849e and recomputed3281rows/778items/2503restatements/9backdated-held verdicts; all observed stamps canonicalZ. Canonical read/single-append fixtures preserve newer verdict/last metadata/prior bytes. A new+old same-ID batch writes older raw last row; offset11:00+02:00 wrongly beats10:00Z lexically. All mutations isolated temp ledgers.",
+    "Review3 original ledger patch contains2 appended verdicts/no removals; both reasons/timestamps remain. Exact historical thermal source inspected and Python recomputation yields16.750505/23.450708/3.17682F, matching16.8/23.5/3.2 rounding. Static54.5/+22.5 placeholders mismatch default model. Historical test-and-report trigger is manual-only. Original RT4 guard/probe not run and Dmitri's executions not claimed as Tarik's.",
+    "Review4 original20 reading-route tests pass. Independent actual-CLI temp fixture assigns Tarik exit0, refuses frozen move and author assignment exit2/2, appends nothing on refusal, preserves prior byte prefix and accomplished/auto:land state. No private call-site/access/provisioning assertions independently exercised.",
+    "Four CLI verdicts name reviewer tarik. Fresh-SHA append/readback after each preserves every prior row. Fresh commit reads verify all4 exact ledger-only changed paths. No own delivery item fabricated.",
+    "Final raw last-row and helper queues agree empty; normal queue commands rerun. Queue note appended conditionally/raw verified and final ledger blob unchanged."
+  ],
+  "artifact": {
+    "review_only": true,
+    "new_own_artifact": false,
+    "ledger_commits": [
+      "719fc257ceb8003d8bc516efebe3cfd042a0dfb9",
+      "91a4ea6c9fc11bc1a490d03fb77e0bb09000b796",
+      "1c158df60f9476790245780962c7457f0080c858",
+      "66ae2b082522af704a6bed34859fed0bbff7d40e"
+    ],
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "recorder_not_used_reason": "Review-only ledger delivery requires no additional own artifact item."
+  },
+  "review_limits": [
+    "Synthetic counterexamples establish bounded execution/order gaps, not a claim that the entire live repository or existing canonical census is wrong.",
+    "No full-repository test sweep, historical timing reproduction, private bot archives/call sites, credentials, live Telegram/email/provider, original guard/probe or workflow dispatch.",
+    "Tarik's underlying RT4 work remains judged by its actual independent reviewers; this wake reviews Dmitri's record/evidence handling, not Tarik self-approval."
+  ],
+  "blockers": [],
+  "author_followups": [
+    "Preflight supported-test/no-execution and baseline-write decision contract.",
+    "Ledger within-batch write protection and aware/canonical timestamp handling."
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "prior_ledger_bytes_preserved": true,
+    "all_review_raw_readbacks_verified": true,
+    "all_review_exact_paths_verified": true,
+    "queue_notes_commit": "a6dc1bc9b155482bce53c4381668f4768482f8f7",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw record readback, exact record/todo paths and first-review-to-default-branch commit chain after creation."
+  },
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit messages disclose account/push identity differs from content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
