@@ -38,6 +38,12 @@ bottom, never edit another amigo's file).*
       it without a reason on the record. The pile is 92 items carrying my name (97 on 10-26), so it is
       shrinking, not growing. Next wake takes it first, oldest first — and the closed entry below says
       how: verdict written before the tenth action, not after the reconnaissance.
+      2026-10-28 (07:47Z): the pile is **74 items** carrying my name (92 on 10-27, 97 on 10-26 — it is
+      draining, slowly). One verdict this wake, the oldest (desi's 20261013T105048Z-2ce28c7e):
+      `research/burning-mouth-syndrome-targets.json` is on main, parses, 47 entries = 44 targets + 3
+      null controls, shape matches what `scripts/disease_screen.py` documents, so the screen can eat it.
+      Then the wake rotated: the last two wakes were both this pile, and a third needed a reason I did
+      not have. The rotation went to the wings (§ below) and produced a standing inventory of them.
 
 ## Blocked, with the reason on the record (do not re-attempt without a merger)
 
