@@ -17,6 +17,8 @@ Run directly:  python3 tests/test_landing_suite_check.py
 from __future__ import annotations
 
 import importlib.util
+import contextlib
+import io
 import json
 import subprocess
 import sys
@@ -144,7 +146,90 @@ class ExitCodeTest(unittest.TestCase):
         self.assertEqual(lsc.main(["--tests-dir", "/nonexistent/tests"]), 2)
 
 
+class ExecutionContractTest(unittest.TestCase):
+    def invoke(self, tests, baseline, *extra):
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            code = lsc.main(['--tests-dir', str(tests), '--baseline', str(baseline),
+                             '--json', *extra])
+        return code, json.loads(output.getvalue())
+
+    def test_definition_only_function_cannot_be_a_green_file(self):
+        tests = _tree(('test_uncalled.py', 'def test_bad():\n    assert False\n'))
+        rows = lsc.run_suite(tests)
+        self.assertEqual(rows[0]['rc'], 'UNSUPPORTED')
+        self.assertIn('direct-script', rows[0]['tail'])
+
+    def test_unittest_without_entry_point_cannot_be_green(self):
+        tests = _tree(('test_uncalled.py', FAILING.split("if __name__")[0]))
+        self.assertEqual(lsc.run_suite(tests)[0]['rc'], 'UNSUPPORTED')
+
+    def test_empty_or_docstring_only_module_is_unsupported(self):
+        for body in ['', '"""No executed checks."""\n', 'import unittest\n']:
+            with self.subTest(body=body):
+                tests = _tree(('test_empty.py', body))
+                self.assertEqual(lsc.run_suite(tests)[0]['rc'], 'UNSUPPORTED')
+
+    def test_direct_top_level_check_remains_supported(self):
+        tests = _tree(('test_bad.py', 'assert False, "executed"\n'))
+        self.assertEqual(lsc.run_suite(tests)[0]['rc'], 1)
+
+    def test_unsupported_cannot_be_baselined_away_or_written(self):
+        tests = _tree(('test_uncalled.py', 'def test_bad():\n    assert False\n'))
+        baseline = tests / 'baseline.json'
+        baseline.write_text(json.dumps({'failures': ['test_uncalled.py']}))
+        before = baseline.read_bytes()
+        code, report = self.invoke(tests, baseline, '--write-baseline')
+        self.assertEqual(code, 2)
+        self.assertEqual(report['unsupported_files'], ['test_uncalled.py'])
+        self.assertFalse(report['baseline_written'])
+        self.assertEqual(baseline.read_bytes(), before)
+
+    def test_baseline_write_retains_prior_comparison_and_exit_one(self):
+        tests = _tree(('test_a.py', FAILING), ('test_b.py', FAILING))
+        baseline = tests / 'baseline.json'
+        baseline.write_text(json.dumps({'commit': 'prior', 'failures': ['test_a.py']}))
+        code, report = self.invoke(tests, baseline, '--write-baseline')
+        self.assertEqual(code, 1)
+        self.assertEqual(report['new_failures'], ['test_b.py'])
+        self.assertTrue(report['baseline_written'])
+        self.assertEqual(json.loads(baseline.read_text())['failures'], ['test_a.py', 'test_b.py'])
+
+    def test_baseline_creation_without_prior_does_not_certify_red_tree(self):
+        tests = _tree(('test_a.py', FAILING))
+        code, report = self.invoke(tests, tests / 'new.json', '--write-baseline')
+        self.assertEqual(code, 1)
+        self.assertEqual(report['baseline_source'], 'none')
+        self.assertEqual(report['new_failures'], ['test_a.py'])
+
+    def test_baseline_write_with_only_known_failure_retains_zero(self):
+        tests = _tree(('test_a.py', FAILING))
+        baseline = tests / 'baseline.json'
+        baseline.write_text(json.dumps({'failures': ['test_a.py']}))
+        code, report = self.invoke(tests, baseline, '--write-baseline')
+        self.assertEqual(code, 0)
+        self.assertEqual(report['new_failures'], [])
+
+
 class LiveAgainstTest(unittest.TestCase):
+    def test_unsupported_or_empty_live_baseline_is_not_a_clean_baseline(self):
+        for body in [None, 'def test_uncalled():\n    assert False\n']:
+            with self.subTest(body=body):
+                repo = Path(tempfile.mkdtemp())
+                git = ['git', '-C', str(repo), '-c', 'user.name=t', '-c', 'user.email=t@t']
+                subprocess.run([*git, 'init', '-q'], check=True)
+                (repo / 'README').write_text('fixture\n')
+                if body is not None:
+                    (repo / 'tests').mkdir()
+                    (repo / 'tests/test_inert.py').write_text(body)
+                subprocess.run([*git, 'add', '-A'], check=True)
+                subprocess.run([*git, 'commit', '-q', '-m', 'fixture'], check=True)
+                with self.assertRaisesRegex(RuntimeError, 'unsupported'):
+                    lsc.measure_revision('HEAD', repo=repo)
+                listed = subprocess.run([*git, 'worktree', 'list'], capture_output=True,
+                                        text=True, check=True).stdout
+                self.assertNotIn('landing-suite-', listed)
+
     def test_a_revision_is_measured_in_a_worktree_that_is_then_removed(self):
         repo = Path(tempfile.mkdtemp())
         git = ["git", "-c", "user.name=t", "-c", "user.email=t@t"]

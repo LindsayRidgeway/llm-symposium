@@ -20,7 +20,7 @@ exactly the class of failure a wake cannot see while it is writing the file that
 causes it. And both were answerable in about a hundred seconds: measured on main
 at 678760d1, 116 test files, 101.9 s for the whole suite.
 
-So this runs the suite in the work tree the wake is editing, and answers the
+So this runs direct test scripts in the work tree the wake is editing, and answers the
 gate's own question before the gate does. "New" is relative to a baseline,
 because one test was already red on main when this was written
 (`test_gen_index.py`, a stale `scripts/README.md`) — a checker that called that
@@ -44,11 +44,20 @@ Usage:
   python3 scripts/landing_suite_check.py --json
 
 Exit status: 0 = no new failures (a landing would not be refused for this);
-1 = new failures, named; 2 = usage or setup error (git, missing tests).
+1 = new failures, named; 2 = usage or setup error (git, missing/unsupported tests).
+
+Execution contract: each discovered file is executed as `python test_file.py`,
+not collected by pytest. Definition/import-only modules are unsupported, even
+when listed in a baseline. Supply a direct entry point (e.g. unittest.main()) or
+use the project's intended test runner instead. The syntactic entry-point check
+does not prove every defined test is called, nor does exit 0 certify coverage.
+Writing a baseline preserves the decision against the PREVIOUS baseline; it
+does not turn new failures green. Unsupported files prevent baseline writing.
 """
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import os
 import shutil
@@ -77,10 +86,32 @@ def _child_env():
     return env
 
 
+def has_script_entry(path):
+    """Reject inert test modules, without importing/executing their definitions.
+
+    This is a narrow syntax contract, not reachability or coverage analysis.
+    Syntax errors still go to Python and receive its ordinary failing exit.
+    """
+    try:
+        tree = ast.parse(Path(path).read_text(encoding='utf8'))
+    except (SyntaxError, UnicodeError):
+        return True
+
+    def executes(node):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef,
+                             ast.Lambda, ast.Import, ast.ImportFrom)):
+            return False
+        if isinstance(node, (ast.Call, ast.Assert, ast.Raise)):
+            return True
+        return any(executes(child) for child in ast.iter_child_nodes(node))
+
+    return any(executes(node) for node in tree.body)
+
+
 def run_suite(tests_dir, timeout=DEFAULT_TIMEOUT, runner=None):
     """Run each test file; return rows of {file, rc, seconds, tail}.
 
-    rc is an int, or the string "TIMEOUT" for a file that outlived its limit.
+    rc is an int, "TIMEOUT", or "UNSUPPORTED" for a module without a script entry.
     A timeout is a failure, not a skip: the gate would see it as one too.
     """
     rows = []
@@ -88,15 +119,18 @@ def run_suite(tests_dir, timeout=DEFAULT_TIMEOUT, runner=None):
     for path in discover(tests_dir):
         started = time.time()
         try:
-            proc = subprocess.run(
-                runner or [sys.executable, str(path)],
-                cwd=str(path.parent.parent),
-                capture_output=True,
-                text=True,
-                timeout=timeout,
-                env=env,
-            )
-            rc, output = proc.returncode, (proc.stdout or "") + (proc.stderr or "")
+            if not has_script_entry(path):
+                rc, output = 'UNSUPPORTED', 'no direct-script entry; definitions/imports alone do not run tests'
+            else:
+                proc = subprocess.run(
+                    runner or [sys.executable, str(path)],
+                    cwd=str(path.parent.parent),
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                    env=env,
+                )
+                rc, output = proc.returncode, (proc.stdout or "") + (proc.stderr or "")
         except subprocess.TimeoutExpired:
             rc, output = "TIMEOUT", ""
         lines = [ln for ln in output.strip().splitlines() if ln.strip()]
@@ -181,6 +215,8 @@ def measure_revision(rev, repo=REPO_ROOT, timeout=DEFAULT_TIMEOUT):
                 "could not create a worktree at %s: %s" % (rev, (add.stderr or "").strip())
             )
         rows = run_suite(worktree / "tests", timeout=timeout)
+        if not rows or any(row['rc'] == 'UNSUPPORTED' for row in rows):
+            raise RuntimeError('baseline revision has missing or unsupported direct-script tests')
         return failures(rows), rows
     finally:
         subprocess.run(
@@ -218,6 +254,7 @@ def main(argv=None):
         return 2
     elapsed = round(time.time() - started, 1)
     observed = failures(rows)
+    unsupported = [row['file'] for row in rows if row['rc'] == 'UNSUPPORTED']
 
     baseline_names, baseline_source = None, "none"
     if args.against:
@@ -238,15 +275,16 @@ def main(argv=None):
 
     new = new_failures(observed, baseline_names)
 
-    if args.write_baseline:
+    baseline_written = False
+    if args.write_baseline and not unsupported:
         written = write_baseline(rows, head_commit(), Path(args.baseline))
+        baseline_written = True
         if not args.json:
             print(
                 "baseline written: %s (%d files, %s failures, %ss)"
                 % (args.baseline, written["files"], len(written["failures"]), elapsed)
             )
-        # Writing a baseline is not a landing decision: report the same verdict.
-        new = []
+        # Keep the comparison made BEFORE writing; recording is not absolution.
 
     if args.json:
         print(
@@ -257,6 +295,9 @@ def main(argv=None):
                     "failures": observed,
                     "baseline_source": baseline_source,
                     "new_failures": new,
+                    "unsupported_files": unsupported,
+                    "baseline_written": baseline_written,
+                    "execution_contract": "direct Python scripts; exit codes, not test coverage",
                     "rows": rows,
                 },
                 indent=2,
@@ -277,14 +318,18 @@ def main(argv=None):
             print("baseline: %s (%d known)" % (baseline_source, len(baseline_names)))
             if baseline_names and set(observed) <= set(baseline_names):
                 print("note: the tree is not clean, but no failure is the wake's own")
-        if new:
+        if unsupported:
+            print('UNSUPPORTED direct-script tests (setup error; baseline not written):')
+            for name in unsupported:
+                print('  ' + name)
+        elif new:
             print("NEW FAILURES — a landing would be refused:")
             for name in new:
                 print("  " + name)
         else:
             print("no new failures")
 
-    return 1 if new else 0
+    return 2 if unsupported else (1 if new else 0)
 
 
 if __name__ == "__main__":
