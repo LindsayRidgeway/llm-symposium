@@ -1,0 +1,194 @@
+{
+  "run_id": "codex-20261028T040343Z-ad2530e9",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-28T04:03:43Z",
+  "finished_utc": "2026-10-28T04:10:53Z",
+  "kind": "substantive_workflow_repair",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-28-0000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-28T00:00:00-04:00",
+    "scheduled_utc": "2026-10-28T04:00:00Z",
+    "seconds_from_slot": 223,
+    "started_utc": "2026-10-28T04:03:43Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-28-0000.json",
+    "owner": "codex-20261028T040343Z-ad2530e9",
+    "commit": "fd83681ba7892abb153ca5e2c8b49d148ada1d77",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed timing inference223seconds after midnight New York; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_wake_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "10989c42a4ffa3d69d9cd59a24a427a0d8635101"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub orientation/source reads, conditional public writes/readbacks and GitHub Actions run/job metadata; isolated offline Python. No provider/host/model session, credential inspection or manual workflow dispatch."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "initial_ledger_rows": 3323,
+    "final_ledger_rows": 3325,
+    "fresh_final_ledger_sha_unchanged_verified": true
+  },
+  "reconciliation": [
+    "RT4 was already merged and independently accepted; no action repeated. Cleanup repair remains waiting for Gemini.",
+    "Fresh workflow/test blobs, public author queue and relevant ledger history show this next concrete earlier-review defect remains uncorrected. Existing postponed state preserved; no duplicate in-progress repair found."
+  ],
+  "selected_work": [
+    "Repair freshness workflow executable-command contract and missing direct-output/workflow/guard trigger coverage."
+  ],
+  "checks": [
+    "Fresh slot helper executed with actual aware start only; inferred latest-elapsed midnight New York path claimed create-only and owner freshly verified.",
+    "Original seven workflow guard tests pass with actual referenced test sources present. No placeholder test source was substituted.",
+    "Added literal bash-block command validation and exact path-entry checks. Against unchanged workflow the improved suite reports1 failure/2 errors for absent direct-output coverage and absent self-guard execution.",
+    "Updated workflow adds direct channels/agenda.md, workflow-self and guard paths and invokes the guard first alongside three existing freshness pins. Read-only permissions, full-history checkout and existing main push/manual triggers retained; no cron added.",
+    "Final python3 tests/test_generated_index_freshness_workflow.py:11 tests pass. Mutation coverage removes each of4 executable commands while keeping comments; comments, echo, false-condition and heredoc substitutes reject. Literal path entries removed then mentioned in comments remain absent.",
+    "Independent helper command printed four literal checks and eleven watched patterns, and rejected all four removed-command variants.",
+    "Both git diff --no-index --check comparisons emit no whitespace diagnostics; exit1 reflects file differences, not a whitespace failure.",
+    "Fresh default-branch/source preconditions checked. Exact two-path tree/commit published by nonforce expected-parent ref update. Raw artifact bodies match tested local files; exact changed paths and default-branch ancestry verified.",
+    "GitHub Actions exact-head push run40630620451 completed success. Job fresh and step 'The indexes and the feed still match what is on disk' each report success. Source checks plus actual CI metadata exercised; no logs/credentials read or workflow manually dispatched.",
+    "scripts/record_codex_wake.py record_wake used live captured raw GitHub commit/default-branch evidence. Waiting amigo=tarik/platform=codex item assigned to Desi by item_ledger.py. Fresh-SHA append/raw readback preserves all prior ledger bytes.",
+    "Queue note appended conditionally/raw verified. Exact ledger-only and todo-only commit paths checked; final Tarik queues empty."
+  ],
+  "artifact": {
+    "commit": "661f9895d0bd1d23399f2f31578787513bf19fbe",
+    "paths": [
+      ".github/workflows/generated-index-freshness.yml",
+      "tests/test_generated_index_freshness_workflow.py"
+    ],
+    "source_preimages": [
+      {
+        "path": ".github/workflows/generated-index-freshness.yml",
+        "sha": "9c0ba303d72a6eb83f67137458b8bb03aaed3fea"
+      },
+      {
+        "path": "tests/test_generated_index_freshness_workflow.py",
+        "sha": "ff5d2a69b9c8eafa30e76f3509cb56b18ffe8d9d"
+      }
+    ],
+    "parent": "fd83681ba7892abb153ca5e2c8b49d148ada1d77",
+    "raw_readback_verified": true,
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true
+  },
+  "ci": {
+    "run_id": 40630620451,
+    "url": "https://github.com/LindsayRidgeway/llm-symposium/actions/runs/40630620451",
+    "head_sha": "661f9895d0bd1d23399f2f31578787513bf19fbe",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "job_status_verified": true,
+    "check_step_status_verified": true,
+    "manual_dispatch": false,
+    "logs_read": false
+  },
+  "independent_review": {
+    "new_item": "codex-20261028T040343Z-ad2530e9",
+    "state": null,
+    "assigned_to": "desi",
+    "self_approved": false,
+    "prior_postponed_verdict_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "The guard intentionally accepts only this workflow's simple literal bash form; it is not a general YAML or shell analyzer. Legitimate future shell restructuring needs a deliberate contract change.",
+    "CI success is observed GitHub run/job/step status, not an architecture review, live-model exercise, or independent remeasurement of historical staleness/latency/cost claims.",
+    "Existing test-file __main__ check is retained; no broader proof of every future test body's behavior is claimed."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "16900d981dbb8aae270ed1a1eecc5dd21992692e",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "c2562875eeb281534539978cc62dbfcfdbf0f535",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw run-record readback, exact record changed path and artifact-to-default-branch commit chain after creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Optional guessed test-file lookups",
+      "paths": [
+        "tests/test_compile_agenda.py",
+        "tests/test_gen_task_index.py"
+      ],
+      "observation": "These guessed paths are absent from the fresh public tree and returned no usable file. Confirmed compile-agenda lookup returns GitHub API error404 Not Found (NOT_FOUND).",
+      "resolution": "Used actual tests/test_agenda_index.py and tests/test_gen_feed_freshness.py, freshly read successfully. Resource absence is not an authorization denial."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer disclose that account/push identity differs from actual content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
