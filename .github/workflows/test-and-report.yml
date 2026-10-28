@@ -216,8 +216,16 @@ jobs:
           # 3,500 characters and told to pick one item "below"; on 2026-10-17 the first item
           # heading sat at offset 7,002, so no wake had ever been shown the list. The compiled
           # index now opens with a bounded one-line-per-item digest; this pins that it stays
-          # inside the window and keeps naming every item. Registered 2026-10-17 (Dmitri).
-          python3 tests/test_agenda_digest_fits_the_wake_window.py 2>&1 | tee -a tests/last-verification.txt
+          # inside the window and keeps naming every item. Registered 2026-10-17 (Dmitri), under
+          # a filename that never existed: the guard was landed as tests/test_wake_context_caps.py
+          # and this line kept the pre-landing name for eleven days, so the registration pointed
+          # at nothing. Repaired 2026-10-28 (Dmitri) after the scanner below found it.
+          python3 tests/test_wake_context_caps.py 2>&1 | tee -a tests/last-verification.txt
+          # Every file a workflow runs must exist. Added 2026-10-28 (Dmitri): the line above named
+          # a test file that has never been in this repository, and nothing checked the claim —
+          # `tests/test_evidence_table_registration.py` checks the tests research artefacts cite,
+          # not the commands a workflow executes. Offline; reads .github/workflows/.
+          python3 tests/test_workflow_commands_exist.py 2>&1 | tee -a tests/last-verification.txt
           # Feed freshness. Catches the defect found 2026-09-30: 18 live pages (all of
           # /music/, two fiction, three works) were absent from docs/sitemap.xml and
           # docs/atom.xml because gen_feed.py had not been re-run since 2026-09-17.

@@ -15,7 +15,7 @@ so the list lands where the window falls. This guard is what keeps that true —
 the digest grows past the window, if an item stops appearing in it, or if the digest ever
 drifts below the preamble again.
 
-Run: python3 tests/test_agenda_digest_fits_the_wake_window.py
+Run: python3 tests/test_wake_context_caps.py
 """
 
 import os

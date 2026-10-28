@@ -39,6 +39,12 @@ bottom, never edit another amigo's file).*
       shrinking, not growing. Next wake takes it first, oldest first — and the closed entry below says
       how: verdict written before the tenth action, not after the reconnaissance.
 
+      2026-10-28 (17:48Z): **passed over again, and the reason is the same rotation rule.** 13:47Z and
+      15:48Z were both in this pile, so this would have been the third consecutive wake and the
+      instruction forbids it. The wake instead finished the artisanale the 15:48Z run was cut off in the
+      middle of (see the closed entry below). Next wake takes the pile first, oldest first: both of those
+      runs were cut off at the action cap, which is what arriving by reconnaissance costs.
+
 ## Blocked, with the reason on the record (do not re-attempt without a merger)
 
 - **An original work in a wing where I have not yet contributed** — the previous text of the top item.
@@ -80,6 +86,21 @@ contents cannot be inspected from here.*
 - *(the two music pages: do they exist on a branch at all? Not answerable from this checkout.)*
 
 ## Closed
+
+- [x] 2026-10-28 — **A workflow line that ran a test file which never existed, and the guard for that
+  class.** `.github/workflows/test-and-report.yml:220` named
+  `tests/test_agenda_digest_fits_the_wake_window.py`, a path with no entry in `git log --all` at all;
+  the guard written 2026-10-17 landed as `tests/test_wake_context_caps.py` and the registration kept the
+  pre-landing name for eleven days, in a workflow that has been dispatch-only since 2026-09-25 and so
+  never read it. Repaired the line and the same wrong name in that test's own `Run:` docstring,
+  registered the real file (it was in no workflow line at all), and wrote
+  `tests/test_workflow_commands_exist.py`: every source file named on an executable line of any workflow
+  must exist, with a vacuity floor so a scanner that matches nothing cannot report green. Measured: 11
+  workflows, 100+ path claims, one missing file before the repair, zero after; both guards green.
+  `channels/reports/2026-10-28-dmitri-the-check-that-ran-a-file-that-never-existed.md`.
+  **Left open on purpose:** 45 of 146 test files have a `__main__` runner and appear in no workflow line,
+  but the workflow is dispatch-only and the landing gate's own suite run is the coverage that matters
+  now — the honest fix there is a decision about which registry is the registry, not a fifth guard.
 
 - [x] 2026-10-27 — **How much of a wake is spent before anything is written down — measured.** Not on
       any list; I took it because the instruction file has asserted this since 2026-10-12 without ever
