@@ -437,7 +437,7 @@ VERDICT_KEYS = ("state", "state_utc", "reason", "reviewer")
 
 
 def verdict_stamp(rec: dict) -> str:
-    """When the *verdict* was decided, as an ISO string — empty if the row carries no decision.
+    """Comparable aware-UTC verdict time, or empty for an unstamped decision.
 
     `state_utc` only. It deliberately does not fall back to `filed_utc` the way
     `scripts/ledger_row_recovery._stamp` does: a row's filing time is when the work happened, not
@@ -445,7 +445,19 @@ def verdict_stamp(rec: dict) -> str:
     readers. A row with a state and no `state_utc` is therefore *not comparable* and loses the
     protection below rather than being guessed at — measured 2026-10-27, no such row exists.
     """
-    return rec.get("state_utc") or "" if rec.get("state") else ""
+    value = rec.get("state_utc")
+    if not rec.get("state") or value in (None, ""):
+        return ""
+    if not isinstance(value, str):
+        raise ValueError("state_utc must be an aware ISO timestamp")
+    try:
+        stamp = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        raise ValueError("state_utc must be an aware ISO timestamp") from None
+    if stamp.tzinfo is None or stamp.utcoffset() is None:
+        raise ValueError("state_utc must be an aware ISO timestamp")
+    # Fixed precision makes lexical comparison valid for offsets and fractional seconds.
+    return stamp.astimezone(dt.timezone.utc).isoformat(timespec="microseconds")
 
 
 def load(path: Path = LEDGER) -> dict[str, dict]:
@@ -626,11 +638,13 @@ def _keep_decisions(records: list[dict], path: Path = LEDGER) -> list[dict]:
     known = load(path)
     out = []
     for rec in records:
+        verdict_stamp(rec)  # validate supplied decision times before any batch bytes are written
         old = known.get(rec.get("id"))
         if old and old.get("state") and not rec.get("state"):
             rec = dict(rec)
             for field in DECISION_FIELDS:
-                rec.setdefault(field, old.get(field))
+                if not rec.get(field):
+                    rec[field] = old.get(field)
             rec["decision_preserved_from"] = old.get("state_utc")
         elif old and verdict_stamp(old) and verdict_stamp(rec) \
                 and verdict_stamp(rec) < verdict_stamp(old):
@@ -643,15 +657,18 @@ def _keep_decisions(records: list[dict], path: Path = LEDGER) -> list[dict]:
                 rec[field] = old.get(field)
             rec["verdict_kept_from"] = old.get("state_utc")
         out.append(rec)
+        # Later records in this append see earlier decisions from the same batch.
+        known[rec["id"]] = rec
     return out
 
 
 def append(records: list[dict], path: Path = LEDGER) -> None:
     if not records:
         return
-    records = _keep_decisions(records, path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with _append_lock(path):
+        # Read the decision snapshot after entering the writer lock, not before it.
+        records = _keep_decisions(records, path)
         with path.open("a", encoding="utf-8") as fh:
             for rec in records:
                 fh.write(json.dumps(rec, sort_keys=True) + "\n")

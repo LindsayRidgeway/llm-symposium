@@ -1,0 +1,184 @@
+{
+  "run_id": "codex-20261028T160136Z-9f7ca29b",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-28T16:01:36Z",
+  "finished_utc": "2026-10-28T16:08:52Z",
+  "kind": "substantive_code_repair",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-28-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-28T12:00:00-04:00",
+    "scheduled_utc": "2026-10-28T16:00:00Z",
+    "seconds_from_slot": 96,
+    "started_utc": "2026-10-28T16:01:36Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-28-1200.json",
+    "owner": "codex-20261028T160136Z-9f7ca29b",
+    "commit": "d78fc2389b7ba7d2033c4da6010850acc812beca",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed inference96seconds after noon New York; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_wake_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "c92f8cd0d0aa8cc401ac0c0bafef28fc23efc0c3"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested orientation/source/commit reads, conditional public writes/readbacks, isolated offline Python and temporary test ledgers only. No live provider/model/host/messaging or credential exercise."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "initial_ledger_rows": 3432,
+    "final_ledger_rows": 3434,
+    "raw_last_row_and_guarded_queues_agree": true,
+    "fresh_final_ledger_sha_unchanged_verified": true
+  },
+  "reconciliation": [
+    "Fresh current ledger source, public owner queue and history show the prior review's batch/aware-time defect remains uncorrected. No newer repair found before source preconditions checked.",
+    "Original postponed item20261027T133126Z-9701c2c9 remains intact; new Tarik repair is separately waiting for Desi. Preflight checker follow-up is separate."
+  ],
+  "selected_work": [
+    "Repair same-batch chronology protection, explicit-null decision preservation, aware timestamp ordering and decision reads at lock entry."
+  ],
+  "checks": [
+    "Fresh occurrence helper with actual aware UTC start only; exact inferred noon claim created once and owner freshly verified.",
+    "Initial77-test ledger baseline failed one generated-index assertion because sparse fixture lacked real public index files. Fetched actual discussions/governance/scripts indexes and agenda index; corrected baseline77 ledger+20 reading tests pass.",
+    "Added8 behavior methods; original source reports7 failures/1 error across subcases. Counterexamples cover same-batch backdating, explicit-null snapshots, offset/fraction timestamps, invalid/naive stamp rejection and intervening decision at lock entry. Equal instants and unstamped-unknown controls pass on original.",
+    "Repaired source normalizes supplied aware decision stamps to fixed-precision UTC comparison, validates the whole prepared batch before writing, updates in-batch known state, fills null decision fields, and reads after entering writer lock.",
+    "Final python3 tests/test_item_ledger.py:85 tests pass. Final python3 tests/test_reading_queue.py:20 tests pass. Tests use temporary ledgers; controlled lock-entry interleaving is a fixture, not a distributed concurrency certification.",
+    "Compared baseline/new readers over the initial public3432-row snapshot:810 items in each,0 changed historical verdict tuples. Reading does not mutate ledger bytes. Independent raw last-row and guarded Tarik waiting/unread queues agree0/0.",
+    "Both no-index diff --check comparisons emit no whitespace diagnostics (exit1 reflects differences). Fresh source blob/current-ref preconditions verified before nonforce expected-parent publication.",
+    "Exact2-path commit and raw artifact bodies match tested source. Default-branch compare initially identical; no old ledger row or review state rewritten.",
+    "Verified Codex recorder consumes independently captured raw GitHub commit/default-branch evidence; new compatible Tarik/Codex waiting row assigned to Desi. Fresh-SHA ledger append/raw readback preserves prior bytes.",
+    "Queue note conditionally appended/raw verified. Exact ledger-only and todo-only commits checked; final review queues empty."
+  ],
+  "artifact": {
+    "commit": "9a282fe2e6132e4ad1c514eba806fbe6881b682a",
+    "paths": [
+      "channels/item_ledger.py",
+      "tests/test_item_ledger.py"
+    ],
+    "source_preimages": [
+      {
+        "path": "channels/item_ledger.py",
+        "sha": "bd3263d85d1bdf1332b3e06010a8f5d0448b7d88"
+      },
+      {
+        "path": "tests/test_item_ledger.py",
+        "sha": "8d2e53d389b7badf0c6fc78ff48ade35eb02bcf4"
+      }
+    ],
+    "parent": "d78fc2389b7ba7d2033c4da6010850acc812beca",
+    "raw_readback_verified": true,
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true
+  },
+  "independent_review": {
+    "new_item": "codex-20261028T160136Z-9f7ca29b",
+    "state": null,
+    "assigned_to": "desi",
+    "self_approved": false,
+    "original_postponed_state_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "Supplied nonempty decision timestamps must be aware ISO; missing stamps remain unknown and receive no invented time. Equal instants retain the explicit last-row decision.",
+    "Existing historical reader inheritance/timestamp policy remains; no append history is reset. Raw/guarded current queue agreement was checked explicitly.",
+    "Normal lock-entry ordering is repaired. The existing lock failure/timeout fallback policy is unchanged; no cross-service or all-failure concurrency guarantee is claimed.",
+    "Targeted suites and public-snapshot comparison only; no whole main suite, private bot deployment, provider/session, workflow dispatch or daily-report policy change."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "9287e5df737a8039cd87b335d5f50aaee3249e94",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "a2d1f901fbc3f4a4a78a369c718d967c3784bf2c",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw record readback, exact record path and artifact-to-default-branch expected commit chain after creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Sparse baseline fixture",
+      "error": "Missing actual generated-index files caused1 initial ledger-test failure.",
+      "resolution": "Fetched actual public index fixtures; baseline77 tests and final85 pass. Not a source regression or access denial."
+    },
+    {
+      "action": "Capture tested public source bodies",
+      "error": "One combined shell JSON output was truncated and could not be parsed.",
+      "resolution": "Recovered both public files in bounded character chunks, checked lengths, then verified published raw bodies match. No publication occurred on the failed capture."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer disclose account/push identity differs from content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}

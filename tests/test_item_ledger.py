@@ -9,12 +9,14 @@ The three things that would make the report a lie, and are therefore pinned here
      reason is indistinguishable from one that was quietly dropped.
 """
 import datetime as dt
+import contextlib
 import io
 import json
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
@@ -880,6 +882,74 @@ class ALaterRowCannotEraseAVerdictItNeverSaw(unittest.TestCase):
         self._file()
         self._file(assigned_to="desi", assigned_utc="2026-10-25T11:45:06Z")
         self.assertIn("a", [r["id"] for r in il.waiting(il.load(self.path))])
+
+
+class TestChronologicalBatchAppend(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.path = Path(self.tmp.name) / "items.jsonl"
+
+    def row(self, stamp="2026-10-28T10:00:00Z", reason="new", **extra):
+        return {"id": "batch", "amigo": "desi", "state": "postponed",
+                "state_utc": stamp, "reason": reason, "reviewer": "tarik", **extra}
+
+    def raw(self):
+        return [json.loads(line) for line in self.path.read_text().splitlines()]
+
+    def test_same_batch_preserves_newer_verdict_and_last_metadata(self):
+        il.append([self.row(), self.row("2026-10-28T09:00:00Z", "old", title="last")], self.path)
+        self.assertEqual(self.raw()[-1]["reason"], "new")
+        self.assertEqual(self.raw()[-1]["title"], "last")
+
+    def test_null_snapshot_in_same_batch_carries_the_decision(self):
+        il.append([self.row(), {"id": "batch", "state": None, "state_utc": None,
+                               "reason": None, "reviewer": None, "title": "assigned"}], self.path)
+        last = self.raw()[-1]
+        self.assertEqual(last["state"], "postponed")
+        self.assertEqual(last["reason"], "new")
+        self.assertEqual(last["title"], "assigned")
+
+    def test_offset_time_is_compared_in_utc_on_read_and_write(self):
+        newer = self.row()
+        older = self.row("2026-10-28T11:00:00+02:00", "old")
+        self.path.write_text(json.dumps(newer) + "\n" + json.dumps(older) + "\n")
+        self.assertEqual(il.load(self.path)["batch"]["reason"], "new")
+        before = self.path.read_bytes()
+        il.append([older], self.path)
+        self.assertTrue(self.path.read_bytes().startswith(before))
+        self.assertEqual(self.raw()[-1]["reason"], "new")
+
+    def test_fractional_second_is_later_than_the_whole_second(self):
+        il.append([self.row()], self.path)
+        il.append([self.row("2026-10-28T10:00:00.5Z", "fraction")], self.path)
+        self.assertEqual(il.load(self.path)["batch"]["reason"], "fraction")
+
+    def test_equal_instants_keep_explicit_last_row_verdict(self):
+        il.append([self.row(), self.row("2026-10-28T12:00:00+02:00", "same instant")], self.path)
+        self.assertEqual(self.raw()[-1]["reason"], "same instant")
+
+    def test_invalid_or_naive_stamp_rejects_the_whole_append(self):
+        for stamp in ("not-a-date", "2026-10-28T10:00:00", 123):
+            with self.subTest(stamp=stamp):
+                with self.assertRaises(ValueError):
+                    il.append([self.row(), self.row(stamp)], self.path)
+                self.assertFalse(self.path.exists())
+
+    def test_guard_reads_after_entering_the_writer_lock(self):
+        il.append([self.row("2026-10-28T09:00:00Z", "old")], self.path)
+        @contextlib.contextmanager
+        def intervening_writer(path):
+            with path.open("a") as fh:
+                fh.write(json.dumps(self.row()) + "\n")
+            yield
+        with mock.patch.object(il, "_append_lock", intervening_writer):
+            il.append([self.row("2026-10-28T09:30:00Z", "stale")], self.path)
+        self.assertEqual(self.raw()[-1]["reason"], "new")
+
+    def test_missing_stamp_remains_unknown(self):
+        self.assertEqual(il.verdict_stamp(self.row(None)), "")
+        self.assertEqual(il.verdict_stamp({"state": None}), "")
 
 
 if __name__ == "__main__":
