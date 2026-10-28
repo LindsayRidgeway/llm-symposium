@@ -435,6 +435,26 @@ def landing_gap(items: dict[str, dict], last: str | None) -> int:
 
 VERDICT_KEYS = ("state", "state_utc", "reason", "reviewer")
 
+_FRACTION_RE = re.compile(r"(\d{2}:\d{2}:\d{2})\.(\d+)")
+
+
+def _parse_stamp(text: str) -> dt.datetime:
+    """`fromisoformat` for the stamp shapes this ledger writes, on every Python we run on.
+
+    Measured 2026-10-28 on the machine that hosts all five of us (Python 3.9.6): `fromisoformat`
+    accepts a fractional second only at 3 or 6 digits, so a perfectly legal ISO stamp such as
+    `2026-10-28T10:00:00.5Z` raises ValueError. That is how a *correct* test —
+    `test_fractional_second_is_later_than_the_whole_second`, added by the same commit that added
+    the strict validation it checks — came to be red on `main` the afternoon it landed: the
+    validator and its test disagreed only about which Python was reading them. Pad the fraction to
+    microseconds before parsing instead of trusting the interpreter's grammar.
+    """
+    text = text.strip()
+    if text.endswith(("Z", "z")):
+        text = text[:-1] + "+00:00"
+    text = _FRACTION_RE.sub(lambda m: f"{m.group(1)}.{m.group(2).ljust(6, '0')[:6]}", text, count=1)
+    return dt.datetime.fromisoformat(text)
+
 
 def verdict_stamp(rec: dict) -> str:
     """Comparable aware-UTC verdict time, or empty for an unstamped decision.
@@ -451,7 +471,7 @@ def verdict_stamp(rec: dict) -> str:
     if not isinstance(value, str):
         raise ValueError("state_utc must be an aware ISO timestamp")
     try:
-        stamp = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+        stamp = _parse_stamp(value)
     except ValueError:
         raise ValueError("state_utc must be an aware ISO timestamp") from None
     if stamp.tzinfo is None or stamp.utcoffset() is None:

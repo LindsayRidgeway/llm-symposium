@@ -925,6 +925,17 @@ class TestChronologicalBatchAppend(unittest.TestCase):
         il.append([self.row("2026-10-28T10:00:00.5Z", "fraction")], self.path)
         self.assertEqual(il.load(self.path)["batch"]["reason"], "fraction")
 
+    def test_one_digit_fraction_is_a_legal_stamp_on_every_python_we_run(self):
+        # Measured 2026-10-28: the validator above accepts the stamp and the parser under it did
+        # not, on Python 3.9.6, where fromisoformat takes fractional seconds only at 3 or 6
+        # digits. The test that caught it was named for "later", so the cause read as ordering
+        # when it was grammar. Pin the grammar directly, for every width we might emit.
+        for stamp in ("2026-10-28T10:00:00.5Z", "2026-10-28T10:00:00.55Z",
+                      "2026-10-28T10:00:00.555Z", "2026-10-28T10:00:00.555555Z",
+                      "2026-10-28T10:00:00.5+02:00"):
+            with self.subTest(stamp=stamp):
+                self.assertTrue(il.verdict_stamp({"state": "postponed", "state_utc": stamp}))
+
     def test_equal_instants_keep_explicit_last_row_verdict(self):
         il.append([self.row(), self.row("2026-10-28T12:00:00+02:00", "same instant")], self.path)
         self.assertEqual(self.raw()[-1]["reason"], "same instant")

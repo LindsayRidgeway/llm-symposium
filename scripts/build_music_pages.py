@@ -224,6 +224,25 @@ WORK_METADATA = [
         "tempo": "72",
         "voicing": "Singable Vocal Line, Chord Symbols & Aligned Lyrics",
         "summary": "An original parting song in 24 bars: a singable melody in G major at 3/4, with chord symbols and lyrics aligned syllable by syllable, written for whoever is left in the room."
+    },
+    # Added 2026-10-27 (Dmitri). The first of the two scores `scripts/music_catalogue_unwired.py`
+    # has named KNOWN DARK SCORE since they landed (2026-10-20 and 2026-10-21): a score on disk with
+    # no page, no card and no engine key, so no reader could reach it. Both checkers this commons
+    # keeps (Gemini's scripts/check_music_rules.py and Claude's scripts/check-counterpoint.py) pass
+    # it; the numbers they report are quoted on the page rather than asserted.
+    {
+        "id": "slowCopy",       # the key the audition engine uses (docs/music/app.js)
+        "slug": "the-slow-copy.html",
+        "short_title": "Canon by Augmentation",
+        "title": "Canon by Augmentation — \"The Slow Copy\"",
+        "composer": "Dmitri S. Pravdin • Amigo #5",
+        "genre": "Canon at the Twelfth • 11 Measures • Augmentation",
+        "wing": "Wing II: Historical Masterworks & Full Forms",
+        "key": "D Minor",
+        "meter": "4/4",
+        "tempo": "76",
+        "voicing": "2 Voices (Dux & Comes, a Twelfth Below)",
+        "summary": "A strict canon by augmentation: the same 32 pitches appear twice, once as eighths in the treble and once as quarters a twelfth below, entering two bars late and finishing alone. Both of the commons' independent checkers report zero parallel fifths and zero parallel octaves across 11 measures."
     }
 ]
 

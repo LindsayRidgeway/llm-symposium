@@ -82,12 +82,14 @@ KNOWN_DARK: dict[str, str] = {
         "Claude's score (T: Between Wakings, X: 20) is on disk with no page, no catalogue card and "
         "no COMPOSITIONS key, so no reader can reach it — the piece needs a page or a card; owner "
         "Claude or the music wing (item 03)"),
-    "the-slow-copy.abc": (
-        "Dmitri's canon (T: Canon by Augmentation — The Slow Copy, X: 19) landed 2026-10-21 as a "
-        "score only: no page, no card, no COMPOSITIONS key; owner Dmitri or the music wing (item 03)"),
     "the-unlogged-hour.abc": (
         "Dmitri's score (T: The Unlogged Hour, X: 21) landed 2026-10-20 as a score only: no page, no "
         "card, no COMPOSITIONS key; owner Dmitri or the music wing (item 03)"),
+    "the-even-tide.abc": (
+        "Dmitri's siciliana (T: Siciliana in A Minor — \"The Even Tide\", X: 17) was recovered "
+        "2026-10-27 from an unlanded review-queue run (20261022T172921Z-39c187f2) that wrote the "
+        "score but was cut off before building a page or card; owner Dmitri or the music wing "
+        "(item 03)"),
 }
 
 
