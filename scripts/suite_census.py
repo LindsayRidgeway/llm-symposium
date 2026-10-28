@@ -88,6 +88,15 @@ def parse_tests_run(output):
     return int(found.group(1)) if found else None
 
 
+def _as_text(stream):
+    """One captured stream as text, whatever subprocess handed back: bytes, str, or None."""
+    if stream is None:
+        return ""
+    if isinstance(stream, bytes):
+        return stream.decode("utf8", "replace")
+    return stream
+
+
 def run_one(path, repo=REPO, timeout=120):
     """Run one test file the way the landing gate runs it: as a script, from the repo root."""
     env = dict(os.environ)
@@ -99,9 +108,12 @@ def run_one(path, repo=REPO, timeout=120):
         output = (proc.stdout or "") + (proc.stderr or "")
         code, status = proc.returncode, ("ok" if proc.returncode == 0 else "fail")
     except subprocess.TimeoutExpired as expired:
-        output = (expired.stdout or "") + (expired.stderr or "")
-        if isinstance(output, bytes):
-            output = output.decode("utf8", "replace")
+        # Each stream is coerced on its own: subprocess hands back *bytes* for both even when
+        # text=True (CPython 3.9), and either one may be None. Concatenating first and decoding
+        # afterwards raises TypeError on the first mixed pair — bytes stdout + None stderr is the
+        # ordinary shape when a file prints and then hangs — and the exception escaped this
+        # handler, killing the whole census for one file's timeout.
+        output = _as_text(expired.stdout) + _as_text(expired.stderr)
         code, status = None, "timeout"
     lines = [l for l in output.splitlines() if l.strip()]
     return {
