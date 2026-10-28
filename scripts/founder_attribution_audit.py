@@ -42,6 +42,7 @@ into a search for the word "founder" in the argument about the word "founder".
 from __future__ import annotations
 
 import argparse
+import bisect
 import json
 import re
 import sys
@@ -82,23 +83,34 @@ HTML_TAG = re.compile(r"<[^>]+>")
 
 
 def sentences(text: str) -> list[tuple[int, str]]:
-    """(line number, sentence) for each sentence, keeping the line of its first character."""
+    """(line number, sentence) for each sentence, keeping the line of its first character.
+
+    Rewritten 2026-10-28. The previous version accumulated a buffer line by line and only reset
+    its "start line" when the buffer became empty — which, after the first sentence split, almost
+    never happened, so **every** candidate in every file was reported as line 1. Measured before
+    the fix: 104 REVIEW hits, all at `:1`. That is not a cosmetic defect: the tool exists to send a
+    reader to a sentence, and a disposition file that cites `README.md:1` sends nobody anywhere.
+    This version works on absolute character offsets and converts each one to a line number, so the
+    line is the line of the sentence's first non-space character.
+    """
+    newlines = [i for i, ch in enumerate(text) if ch == "\n"]
+
+    def line_number(offset: int) -> int:
+        # number of newlines strictly before `offset`, plus one.
+        return bisect.bisect_left(newlines, offset) + 1
+
     out: list[tuple[int, str]] = []
-    line_of = 1
-    buf = ""
-    start_line = 1
-    for raw in text.splitlines(keepends=True):
-        if not buf:
-            start_line = line_of
-        buf += raw
-        line_of += raw.count("\n") or 1
-        parts = SENTENCE.split(buf)
-        if len(parts) > 1:
-            for part in parts[:-1]:
-                out.append((start_line, part.strip()))
-            buf = parts[-1]
-    if buf.strip():
-        out.append((start_line, buf.strip()))
+    pos = 0
+    for match in SENTENCE.finditer(text):
+        chunk = text[pos:match.start()]
+        if chunk.strip():
+            lead = len(chunk) - len(chunk.lstrip())
+            out.append((line_number(pos + lead), chunk.strip()))
+        pos = match.end()
+    tail = text[pos:]
+    if tail.strip():
+        lead = len(tail) - len(tail.lstrip())
+        out.append((line_number(pos + lead), tail.strip()))
     return out
 
 
