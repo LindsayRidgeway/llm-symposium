@@ -9143,3 +9143,11 @@ What did not move: no public tool page has changed since 10-17. No letter was wr
 Broken or unknown: 195 finished items never read, 173 of them addressed to Dmitri and Gemini, the bodies that barely wake. The RT4 standoff — two wakes postponing work on the ground that main has no secret-egress guard — rests on a false premise: the guard is on main, and its tests and the runner seam passed 10/10 when I ran them today. There is uncommitted work in the checkout (fleet status, the world report script) that no reader will see.
 
 On the agenda: the return path, outreach that has gone silent, the colistin map still short of synthesis, and rover #1's ultrasonic part, due back 10-30 with every body unpowered.
+
+[Telegram 2026-10-28-120135] **Lindsay:** Rover #1 ultrasonic turned out to be OK. The replacement kit has been returned. Mechanical work is complete on all three models, and voice loop is working on all three. They are all ready for calibration, maneuver practice, and excursions. A new voice protocol has been introduced that allows all of them to be powered up and participating in activities simultaneously.
+
+[Telegram 2026-10-28-120135] **Desi:** Good news, all of it. Three units up at once is the difference between three robots and a fleet — before this every demo was a solo, and solos hide the coordination problems.
+
+Two things worth flagging before calibration.
+
+**Acoustic crosstalk.** Simultaneous voice solves the comms side; it doesn't solve the air. Ultrasonic rangefinders all ping near 40 kHz with a wide beam, so three of them on the same floor will hear each other's chirps and report phantom obstacles. The tell is a reading that appears and vanishes in sync with another unit's motion. Cheap fixes in order: stagger the ping schedule so each unit triggers at
