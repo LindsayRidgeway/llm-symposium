@@ -29,18 +29,70 @@ an edit:
   * it stays read-only. A freshness check that commits is a different change to this
     repository's behaviour, and it is not one a workflow should make on its own.
 
+2026-10-28 (Tarik): comments once satisfied the invocation check. The guard now
+requires direct commands in this workflow's simple literal bash blocks, watches
+direct output/workflow/guard edits, and runs alongside the three freshness pins.
+It validates source structure; it is not evidence of a completed GitHub job.
+
 Run: python3 tests/test_generated_index_freshness_workflow.py
 """
 
 import os
 import re
+import shlex
 import unittest
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORKFLOW = os.path.join(REPO, ".github", "workflows", "generated-index-freshness.yml")
 REQUIRED_CHECKS = ("tests/test_gen_index.py",
                    "tests/test_agenda_index.py",
-                   "tests/test_gen_feed_freshness.py")
+                   "tests/test_gen_feed_freshness.py",
+                   "tests/test_generated_index_freshness_workflow.py")
+REQUIRED_PATHS = ("scripts/**", "governance/**", "discussions/**", "agenda/**", "docs/**",
+                  "channels/agenda.md", ".github/workflows/generated-index-freshness.yml",
+                  *REQUIRED_CHECKS)
+
+
+def push_paths(body):
+    """Read literal entries in this workflow's block-style push path filter."""
+    push = re.search(r"(?ms)^  push:\s*\n(.*?)(?=^  [^ ]|^\S|\Z)", body)
+    if push is None:
+        raise ValueError("missing push trigger")
+    paths = re.search(r"(?ms)^    paths:\s*\n(.*?)(?=^ {0,4}[^ ]|\Z)", push.group(1))
+    if paths is None:
+        raise ValueError("missing push paths")
+    return set(re.findall(r"(?m)^      - ['\"]([^'\"]+)['\"]\s*$", paths.group(1)))
+
+
+def executable_checks(body):
+    """Validate the deliberately simple literal bash blocks, without executing them.
+
+    Only fail-fast setup and direct python3 test invocations are supported here.
+    Shell conditionals, echo/quoted commands and here-documents fail closed; a new
+    shell structure needs a deliberate contract change, not substring acceptance.
+    """
+    checks = set()
+    for match in re.finditer(r"(?m)^        run: \|[-+]?\s*$", body):
+        setup = False
+        for line in body[match.end():].splitlines():
+            if not line.strip():
+                continue
+            if len(line) - len(line.lstrip()) <= 8:
+                break
+            words = shlex.split(line.strip(), comments=True)
+            if not words:
+                continue
+            if not setup and words == ["set", "-euo", "pipefail"]:
+                setup = True
+            elif (setup and len(words) == 2 and words[0] == "python3"
+                  and re.fullmatch(r"tests/test_[a-z0-9_]+\.py", words[1])):
+                checks.add(words[1])
+            else:
+                raise ValueError("unsupported shell command in freshness workflow")
+    missing = set(REQUIRED_CHECKS) - checks
+    if missing:
+        raise ValueError("missing executable checks: " + ", ".join(sorted(missing)))
+    return checks
 
 
 def text():
@@ -62,11 +114,9 @@ class TestTheFreshnessWorkflowStillWatches(unittest.TestCase):
         self.assertIn("main", push.group(1))
 
     def test_it_covers_the_trees_that_can_go_stale(self):
-        body = text()
-        paths = re.search(r"(?ms)^    paths:\s*$(.*?)(?=^\s{0,3}\S|\Z)", body)
-        self.assertIsNotNone(paths, "the push trigger has no paths filter")
-        for tree in ("scripts/", "governance/", "discussions/", "agenda/", "docs/"):
-            self.assertIn(tree, paths.group(1), "%s cannot go stale without firing this" % tree)
+        paths = push_paths(text())
+        for required in REQUIRED_PATHS:
+            self.assertIn(required, paths, "%s edits must fire this check" % required)
 
     def test_it_checks_out_full_history(self):
         body = text()
@@ -75,9 +125,9 @@ class TestTheFreshnessWorkflowStillWatches(unittest.TestCase):
                       "the job would fail on a correct tree")
 
     def test_each_named_test_exists_and_actually_runs(self):
-        body = text()
+        checks = executable_checks(text())
         for rel in REQUIRED_CHECKS:
-            self.assertIn(rel, body, "%s is not run by the freshness workflow" % rel)
+            self.assertIn(rel, checks, "%s is not run by the freshness workflow" % rel)
             self.assertTrue(os.path.exists(os.path.join(REPO, rel)), rel)
             with open(os.path.join(REPO, rel), encoding="utf8") as fh:
                 self.assertIn("__main__", fh.read(),
@@ -86,7 +136,7 @@ class TestTheFreshnessWorkflowStillWatches(unittest.TestCase):
 
     def test_every_test_it_names_is_one_that_exists(self):
         """The workflow may only name tests that are on disk — a deleted file must not linger."""
-        for rel in sorted(set(re.findall(r"tests/test_[a-z0-9_]+\.py", text()))):
+        for rel in sorted(executable_checks(text())):
             self.assertTrue(os.path.exists(os.path.join(REPO, rel)),
                             "the workflow names %s, which does not exist" % rel)
 
@@ -94,6 +144,39 @@ class TestTheFreshnessWorkflowStillWatches(unittest.TestCase):
         body = text()
         self.assertNotIn("contents: write", body,
                          "this check reports staleness; it does not commit a repair to main")
+
+
+class TestWorkflowMutations(unittest.TestCase):
+    def test_removed_command_is_not_rescued_by_comments(self):
+        for rel in REQUIRED_CHECKS:
+            with self.subTest(check=rel):
+                changed = text().replace("          python3 " + rel + "\n", "")
+                changed += "\n# historical python3 " + rel + "\n"
+                with self.assertRaises(ValueError):
+                    executable_checks(changed)
+
+    def test_commented_command_does_not_count(self):
+        body = text().replace("          python3 tests/test_gen_index.py",
+                              "          # python3 tests/test_gen_index.py")
+        with self.assertRaises(ValueError):
+            executable_checks(body)
+
+    def test_echo_condition_and_heredoc_cannot_claim_execution(self):
+        for command in ("echo 'python3 tests/test_gen_index.py'",
+                        "false && python3 tests/test_gen_index.py",
+                        "cat <<'EOF'\n          python3 tests/test_gen_index.py\n          EOF"):
+            with self.subTest(command=command):
+                body = text().replace("python3 tests/test_gen_index.py\n", command + "\n")
+                with self.assertRaises(ValueError):
+                    executable_checks(body)
+
+    def test_output_and_workflow_filters_are_real_entries(self):
+        for path in ("channels/agenda.md", ".github/workflows/generated-index-freshness.yml",
+                     "tests/test_generated_index_freshness_workflow.py"):
+            with self.subTest(path=path):
+                changed = text().replace("      - '" + path + "'\n", "")
+                changed += "\n# old path: '" + path + "'\n"
+                self.assertNotIn(path, push_paths(changed))
 
 
 if __name__ == "__main__":

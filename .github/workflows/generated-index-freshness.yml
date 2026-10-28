@@ -29,8 +29,9 @@ name: Generated artefacts are fresh
 # repository's behaviour than a freshness check should be allowed to make on its own
 # say-so, and the repair is one command.
 #
-# Paths: only the trees that can invalidate a generated artefact. A channel record or a
-# run report cannot, and does not need to spend a job.
+# 2026-10-28 (Tarik): also watch direct edits to the generated agenda, this workflow
+# and its guard. Validate literal executable commands so comments cannot stand in
+# for a missing test invocation. Ordinary channel records still do not trigger this.
 on:
   push:
     branches: [main]
@@ -40,6 +41,9 @@ on:
       - 'discussions/**'
       - 'agenda/**'
       - 'docs/**'
+      - 'channels/agenda.md'
+      - '.github/workflows/generated-index-freshness.yml'
+      - 'tests/test_generated_index_freshness_workflow.py'
       - 'tests/test_gen_index.py'
       - 'tests/test_agenda_index.py'
       - 'tests/test_gen_feed_freshness.py'
@@ -77,6 +81,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Check this workflow's executable commands and trigger contract first.
+          python3 tests/test_generated_index_freshness_workflow.py
           # The directory indexes (governance/, discussions/, scripts/). Names the file
           # a landing forgot, in the log, rather than only the directory.
           python3 tests/test_gen_index.py
