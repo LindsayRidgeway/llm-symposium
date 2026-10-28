@@ -711,6 +711,42 @@ V: 2 clef=bass name="Comes (a 12th below, twice as slow, two bars late)"
 % ===== m 11: one bar of plain octaves closes what the canon left open =====
 [V:1] D8 |
 [V:2] D,,8 |`
+  },
+
+  // Wired 2026-10-28 (Desi). The score landed on main as `docs/music/the-even-tide.abc` with
+  // nothing that reached it: no page, no catalogue card, no key here, which is why
+  // `scripts/music_catalogue_unwired.py` listed it as a known dark score. The ABC below is the
+  // score file verbatim; `tempo` here is the engine's clock, a quarter-note BPM, and the score's
+  // own marking is dotted-quarter = 56, which is a quarter-note 84 — so 84 is what makes the
+  // audition match the page rather than play it at two-thirds speed.
+  evenTide: {
+    id: "evenTide",
+    title: "Siciliana in A Minor — \"The Even Tide\"",
+    composer: "Dmitri S. Pravdin (Amigo #5)",
+    genre: "Siciliana • Pastoral Dance in 6/8",
+    tempo: 84,
+    instrument: "piano",
+    abc: `X: 17
+T: Siciliana in A Minor — "The Even Tide"
+C: Dmitri S. Pravdin (Amigo #5)
+M: 6/8
+L: 1/8
+Q: 3/8=56
+K: Am
+V: 1 clef=treble name="Upper Voice"
+V: 2 clef=bass name="Lower Voice"
+% ===== mm 1-4: the strain stated, low in the voice =====
+[V:1] e,3/2 f,/2 e, c, A,2 | c,3/2 d,/2 c, A, e,2 | d,3/2 e,/2 d, B, g,2 | B,3/2 c,/2 B, G, d,2 |
+[V:2] A,,3/2 E,,/2 A,,2 E,,2 | A,,3/2 E,,/2 C,2 E,,2 | G,,3/2 D,/2 G,,2 D,2 | G,,3/2 B,,/2 G,,2 B,,2 |
+% ===== mm 5-8: the strain repeated over a bass that has moved down to F, then E =====
+[V:1] c,3/2 d,/2 c, A, f,2 | A,3/2 B,/2 c, A, c,2 | B,3/2 c,/2 B, G, e,2 | G,3/2 A,/2 G, B, d,2 |
+[V:2] F,,3/2 C,/2 F,,2 C,2 | F,,3/2 A,,/2 F,,2 A,,2 | E,,3/2 B,,/2 E,,2 B,,2 | E,,3/2 G,,/2 B,,2 B,,2 |
+% ===== mm 9-12: the climb, and a bass that turns to B on the twelfth bar =====
+[V:1] e,3/2 f,/2 e, c, A,2 | e,3/2 f,/2 g, a, b,2 | c3/2 d/2 c a, e,2 | d3/2 e/2 d b, g,2 |
+[V:2] A,,3/2 E,,/2 A,,2 E,,2 | A,,3/2 C,/2 E,2 A,,2 | A,,3/2 E,/2 C,2 A,,2 | B,,3/2 D,/2 B,,2 D,2 |
+% ===== mm 13-16: the falling bass F-E-D-A, and the tonic =====
+[V:1] f3/2 e/2 d c a,2 | e3/2 d/2 c b, g,2 | a,3/2 g,/2 f, e, d,2 | c3/2 b,/2 a,2 A,2 |
+[V:2] F,,3/2 C,/2 A,,2 F,,2 | E,,3/2 B,,/2 G,,2 E,,2 | D,3/2 A,,/2 F,,2 D,,2 | A,,3/2 E,,/2 C,2 A,,2 |`
   }
 };
 
