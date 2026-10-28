@@ -34,6 +34,16 @@ requires direct commands in this workflow's simple literal bash blocks, watches
 direct output/workflow/guard edits, and runs alongside the three freshness pins.
 It validates source structure; it is not evidence of a completed GitHub job.
 
+2026-10-28 (Desi, reviewing that repair): two of the four additions above — the trigger
+routes and the command check — are sound, and I reproduced both rejections before writing
+this. But the guard still passed four mutations that leave the workflow unable to do its
+job: `branches-ignore: [main]` instead of `branches: [main]` (fires on nothing it was
+built for), a job-level `if:` (the job is skipped, the build is green), `continue-on-error:
+true` on the run step (the pins fail, the job reports success), and deleting the
+`permissions:` block (the push token reverts to writing, so the "read-only" claim is a
+comment). All four were measured, not imagined. `push_branches()`, `enabled()` and
+`read_only()` now fail closed on them, and each has a mutation test.
+
 Run: python3 tests/test_generated_index_freshness_workflow.py
 """
 
@@ -62,6 +72,54 @@ def push_paths(body):
     if paths is None:
         raise ValueError("missing push paths")
     return set(re.findall(r"(?m)^      - ['\"]([^'\"]+)['\"]\s*$", paths.group(1)))
+
+
+def push_branches(body):
+    """Read the literal branch include list for pushes.
+
+    The earlier form of this test only asked whether the string "main" appeared
+    anywhere under `push:` — and `branches-ignore: [main]` contains it while
+    firing on everything except main. Measured 2026-10-28: that mutation left
+    all 11 tests green.
+    """
+    block = re.search(r"(?ms)^  push:\s*\n(.*?)(?=^  [^ ]|^\S|\Z)", body)
+    if block is None:
+        raise ValueError("missing push trigger")
+    if re.search(r"(?m)^    branches-ignore:", block.group(1)):
+        raise ValueError("the push trigger excludes branches instead of naming main")
+    include = re.search(r"(?m)^    branches:\s*\[([^\]]*)\]\s*$", block.group(1))
+    if include is None:
+        raise ValueError("the push trigger has no literal `branches: [..]` include list")
+    names = {b.strip().strip("'\"") for b in include.group(1).split(",")}
+    if "main" not in names:
+        raise ValueError("the push trigger does not name main")
+    return names
+
+
+def enabled(body):
+    """A job or step that is conditioned off cannot report anything, however green it looks."""
+    if re.search(r"(?m)^\s+if:\s*\S", body):
+        raise ValueError("the workflow carries an `if:` condition that can skip the job")
+    if re.search(r"(?m)^\s+continue-on-error:\s*true", body):
+        raise ValueError("continue-on-error lets a failing freshness pin report a green run")
+    return True
+
+
+def read_only(body):
+    """`contents: write` must be absent, and `contents: read` must be stated, not defaulted.
+
+    Deleting the block is the mutation that matters: the default token on a push to
+    main can write, so `assertNotIn("contents: write", body)` passes on a workflow that
+    has silently regained the ability to commit — measured 2026-10-28.
+    """
+    block = re.search(r"(?ms)^permissions:\s*\n(.*?)(?=^\S|\Z)", body)
+    if block is None:
+        raise ValueError("no permissions block: the default push token can write to main")
+    if re.search(r"(?m)^\s+contents:\s*write", block.group(1)):
+        raise ValueError("this check reports staleness; it does not commit a repair to main")
+    if not re.search(r"(?m)^\s+contents:\s*read\b", block.group(1)):
+        raise ValueError("permissions do not pin contents: read")
+    return True
 
 
 def executable_checks(body):
@@ -109,9 +167,7 @@ class TestTheFreshnessWorkflowStillWatches(unittest.TestCase):
         body = text()
         self.assertRegex(body, r"(?m)^on:\s*$",
                          "the workflow has no top-level `on:` block")
-        push = re.search(r"(?ms)^  push:\s*$(.*?)(?=^\S|\Z)", body)
-        self.assertIsNotNone(push, "no `push:` trigger — the check would only run by hand")
-        self.assertIn("main", push.group(1))
+        self.assertIn("main", push_branches(body))
 
     def test_it_covers_the_trees_that_can_go_stale(self):
         paths = push_paths(text())
@@ -141,9 +197,10 @@ class TestTheFreshnessWorkflowStillWatches(unittest.TestCase):
                             "the workflow names %s, which does not exist" % rel)
 
     def test_it_is_read_only(self):
-        body = text()
-        self.assertNotIn("contents: write", body,
-                         "this check reports staleness; it does not commit a repair to main")
+        self.assertTrue(read_only(text()))
+
+    def test_nothing_can_quietly_skip_the_job(self):
+        self.assertTrue(enabled(text()))
 
 
 class TestWorkflowMutations(unittest.TestCase):
@@ -177,6 +234,33 @@ class TestWorkflowMutations(unittest.TestCase):
                 changed = text().replace("      - '" + path + "'\n", "")
                 changed += "\n# old path: '" + path + "'\n"
                 self.assertNotIn(path, push_paths(changed))
+
+    def test_excluding_main_is_not_the_same_as_watching_main(self):
+        """`branches-ignore: [main]` contains the word "main" and fires on everything else."""
+        changed = text().replace("    branches: [main]", "    branches-ignore: [main]")
+        self.assertNotIn("branches: [main]", changed, "the mutation did not apply")
+        with self.assertRaises(ValueError):
+            push_branches(changed)
+
+    def test_a_skipped_job_is_not_a_green_job(self):
+        for key, mutation in (("if", "jobs:\n  fresh:\n    if: ${{ false }}\n"),
+                              ("continue-on-error", "continue-on-error: true\n")):
+            with self.subTest(key=key):
+                if key == "if":
+                    changed = text().replace("jobs:\n  fresh:\n", mutation)
+                else:
+                    changed = text().replace("        shell: bash\n",
+                                             "        shell: bash\n        " + mutation)
+                self.assertIn(mutation.strip(), changed, "the mutation did not apply")
+                with self.assertRaises(ValueError):
+                    enabled(changed)
+
+    def test_deleting_the_permissions_block_is_not_read_only(self):
+        """The default push token can write, so an absent block is a write permission."""
+        changed = re.sub(r"(?ms)^permissions:\n  contents: read\n\n", "", text())
+        self.assertNotIn("permissions:", changed, "the mutation did not apply")
+        with self.assertRaises(ValueError):
+            read_only(changed)
 
 
 if __name__ == "__main__":
