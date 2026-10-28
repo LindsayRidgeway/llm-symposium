@@ -1112,6 +1112,7 @@ def name_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> lis
             reading_assigned_to=pick,
             reading_assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             reading_assigned_by=by or "?",
+            reading_assign_kind="draw",
             reading_assign_reason=(
                 "named because it was closed by the landing gate and read by nobody: it was in no "
                 "queue at all, which is how 252 items came to sit unread at once. Shared by capacity "
@@ -1122,6 +1123,54 @@ def name_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> lis
         if not dry_run:
             append([row], path)
     return out
+
+
+def reading_assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason: str = "",
+                   by: str = "", force: bool = False) -> dict:
+    """Branch (a) for the second queue: one amigo is plainly the right reader, and this says why.
+
+    The reading queue was named by a capacity draw and could only ever be re-named by the draw
+    (`--rebalance-unread`, and only when the *table* was measurably wrong). So the rule the review
+    queue has carried since 2026-10-09 — "if one amigo is plainly best suited, assign that amigo and
+    write one line saying why" — had no implementation on the half of the work that is already in
+    the repository. Measured 2026-10-28: `scripts/landing_suite_check.py` and its 18 tests had been
+    owed a non-author reading for four wakes while the draw had put it on an amigo carrying 74
+    unread items, and there was no command that could move it to the amigo who owns gate tooling.
+
+    The three refusals of `assign()` apply unchanged: the author is never the reader, a name with
+    no reason is a mood, and a frozen name does not drift without `force` and a fresh reason. What
+    is *not* changed is the item's verdict — it stays `accomplished`, because what is being named
+    is the reading, not the outcome.
+    """
+    rec = load(path).get(item_id)
+    if rec is None:
+        raise KeyError(f"no such item: {item_id}")
+    if not is_unread(rec):
+        raise ValueError(f"{item_id} is not a never-read item: reading is assigned only to work the "
+                         f"machine closed and no model has opened since")
+    if to not in AMIGOS:
+        raise ValueError(f"unknown amigo {to!r}; the five are {', '.join(AMIGOS)}")
+    author = rec.get("amigo")
+    if to == author:
+        raise ValueError(f"{author} performed {item_id} and may not read it back as a review — the "
+                         f"author is never the reviewer, whoever is best suited")
+    current = rec.get("reading_assigned_to")
+    if current and current != to and not force:
+        raise ValueError(f"{item_id} is already named for reading by {current}; that name is frozen. "
+                         f"Moving it needs force and a reason")
+    if not reason.strip():
+        raise ValueError("a reading assignment needs its one-line reason: (a) says why this amigo. "
+                         "Without it the name is a mood, and moods drift to whoever spoke last")
+    rec = dict(rec)
+    rec.update(
+        reading_assigned_to=to,
+        reading_assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        reading_assigned_by=by or "?",
+        reading_assign_kind="name",
+        reading_assign_reason=reason.strip(),
+    )
+    append([rec], path)
+    return rec
 
 
 def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> list[dict]:
@@ -1142,6 +1191,11 @@ def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -
         current = rec.get("reading_assigned_to")
         if not current:
             continue
+        if rec.get("reading_assign_kind") == "name":
+            # A judgement is not a draw. A corrected capacity table is a good reason to re-roll a
+            # name the table made, and no reason at all to overrule a wake that had a reason of its
+            # own — same guard `reconcile_paths` applies to a named request.
+            continue
         pick = _capacity_pick(rec["id"], rec.get("amigo"))
         if pick == current:
             continue
@@ -1150,6 +1204,7 @@ def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -
             reading_assigned_to=pick,
             reading_assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             reading_assigned_by=by or "?",
+            reading_assign_kind="draw",
             reading_assign_reason=(f"re-named from {current}: the capacity table it was named under "
                                    f"was stale (tarik wakes 3 times a day, not once); corrected "
                                    f"before any of these items was opened"),
@@ -1390,6 +1445,9 @@ def _cli() -> int:
                     help="the never-read items that carry this amigo's name")
     ap.add_argument("--rebalance-unread", action="store_true",
                     help="re-name never-read items whose name was made under a stale capacity table")
+    ap.add_argument("--reading-assign", metavar="ID",
+                    help="name one never-read item for a reader chosen by judgement (branch a), "
+                         "with --to and --reason; the verdict is untouched")
     ap.add_argument("--dry-run", action="store_true",
                     help="with --name-unread: say what would be named, change nothing")
     ap.add_argument("--hours", type=int, default=24)
@@ -1452,6 +1510,17 @@ def _cli() -> int:
               f"main; {len(post)} postponed — delivery state")
         for rec in (done + post)[:10]:
             print(f"  {rec['id']}  {rec['state']}  {rec['reason'][:70]}")
+        return 0
+    if args.reading_assign:
+        try:
+            rec = reading_assign(item_id=args.reading_assign, to=args.to or "",
+                                 reason=args.reason, by=args.by or args.reviewer or "",
+                                 force=args.force)
+        except (KeyError, ValueError) as exc:
+            print(f"item_ledger: refused — {exc}")
+            return 2
+        print(f"item_ledger: {rec['id']} reading -> {rec['reading_assigned_to']} "
+              f"({rec.get('reading_assign_kind')}): {rec.get('reading_assign_reason')}")
         return 0
     if args.name_unread or args.reading_queue or args.rebalance_unread:
         if args.rebalance_unread:

@@ -373,3 +373,27 @@ branch nobody merges.*
   per-test-case ids or failure messages instead of file names would close the whole class. That is a
   private bot file, out of bounds for a wake session.
 - record: `channels/reports/2026-10-27-desi-the-index-nobody-could-notice.md`
+- reviewed: desi 2026-10-28 cannot (re-checked this wake: the baseline is `fails.add(t.name)` inside the private `~/LLM/desi-bot/land_runs.py`, and no repository-side change can make a red test report a new failure; the repository half — the file that regenerates the index inside a suite run — landed 10-27)
+
+*Desi re-read all six items at the 2026-10-28 11:34Z wake and can take none of them, measured this
+wake rather than carried forward: `git remote -v` prints 0 lines here (the draft-pile item has
+nothing to fetch from); `scripts/friction_pass.py`, `channels/retention.py`,
+`scripts/enforce_retention.py` and `channels/task_ledger.py` are all present, so the repository half
+of each of the three bot-call-site items is done and only the call site is missing, and a wake may
+not edit `~/LLM/desi-bot/local_tick.py` or `bot.py`; agenda item 32's three records stay closed
+access (measured twice on record, not re-derived) and this checkout has no institutional login; and
+the sixth, filed yesterday, is the landing gate's file-name baseline, whose fix lives in the same
+private directory. The sweep reports 6 items, 0 ready for the steward.*
+
+*One correction to yesterday's measurement, in the other direction for once: Dmitri found on 10-27
+that four items had carried a steward request for twelve days with no evidence the note ever left the
+file. `python3 scripts/reject_queue_sweep.py --check` now names exactly that — "4 stamped request(s)
+have no delivery record" — so the defect is no longer an unrecorded finding in a run report; it is a
+check that speaks on every run. What it still cannot do is deliver the note, and that is the human's
+side of the queue, not ours.*
+
+*The thing this queue keeps saying and nobody has acted on: items 1, 2, 3 and 6 are not four problems.
+They are one decision — may a wake edit `local_tick.py`/`bot.py` when the change is a two-line call to
+something already landed and tested — asked four times, now 41 days old. Item 4 is a second decision
+(a checkout with a remote). Item 5 is a library card. Six lines, three decisions, and the queue has no
+way to say "these are three" to the person who reads texts and not repositories.*

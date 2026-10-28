@@ -94,6 +94,77 @@ class CapacityWeightingTest(unittest.TestCase):
         self.assertNotEqual(pick, "desi")
 
 
+class ReadingAssignTest(unittest.TestCase):
+    """Branch (a) on the second queue: one amigo is plainly the right reader, and says why.
+
+    Written because the rule could not be obeyed. `--assign` refuses anything that is not waiting,
+    and the reading queue could only be re-named by a corrected capacity table — so "the author of a
+    gate script is not its reviewer, and here is who is" had no command behind it, and a four-wake
+    debt stayed unpaid while the draw's name sat on an amigo with 74 unread items.
+    """
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+        self.path = self.dir / "items.jsonl"
+
+    def write(self, rows):
+        self.path.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+
+    def test_a_judged_reader_replaces_the_draw_and_records_why(self):
+        self.write([row("a", amigo="desi", reading_assigned_to="dmitri",
+                        reading_assign_kind="draw", reading_assign_reason="capacity draw")])
+        rec = il.reading_assign(path=self.path, item_id="a", to="tarik",
+                                reason="he owns the gate tooling this hooks into", by="desi",
+                                force=True)
+        self.assertEqual(rec["reading_assigned_to"], "tarik")
+        self.assertEqual(rec["reading_assign_kind"], "name")
+        self.assertIn("gate tooling", rec["reading_assign_reason"])
+        self.assertEqual(rec["reading_assigned_by"], "desi")
+
+    def test_the_author_is_never_the_reader(self):
+        self.write([row("b", amigo="desi")])
+        with self.assertRaises(ValueError):
+            il.reading_assign(path=self.path, item_id="b", to="desi", reason="he wrote it")
+
+    def test_a_name_with_no_reason_is_refused(self):
+        self.write([row("c")])
+        with self.assertRaises(ValueError):
+            il.reading_assign(path=self.path, item_id="c", to="gemini", reason="   ")
+
+    def test_a_frozen_name_does_not_drift_without_force(self):
+        self.write([row("d", reading_assigned_to="claude", reading_assign_kind="draw")])
+        with self.assertRaises(ValueError):
+            il.reading_assign(path=self.path, item_id="d", to="tarik", reason="better suited")
+
+    def test_the_verdict_is_untouched(self):
+        """What is being assigned is the reading, not the outcome."""
+        self.write([row("e")])
+        rec = il.reading_assign(path=self.path, item_id="e", to="gemini", reason="plainly hers")
+        self.assertEqual(rec["state"], "accomplished")
+        self.assertEqual(rec["reviewer"], "auto:land")
+        self.assertTrue(il.is_unread(rec))
+
+    def test_an_item_a_model_has_read_is_not_readable_again(self):
+        self.write([row("f", reviewer="gemini")])
+        with self.assertRaises(ValueError):
+            il.reading_assign(path=self.path, item_id="f", to="tarik", reason="already read")
+
+    def test_a_corrected_table_does_not_overrule_a_judged_name(self):
+        """The guard: a draw may be re-rolled for a better table; a reason may not."""
+        self.write([row(f"id{i:03d}", amigo="gemini") for i in range(40)])
+        il.name_unread(path=self.path, by="test")
+        il.reading_assign(path=self.path, item_id="id000", to="tarik",
+                          reason="he owns this one's subject", by="desi", force=True)
+        il.WAKES_PER_DAY["claude"] = 500
+        try:
+            il.rebalance_unread(path=self.path, by="test")
+        finally:
+            il.WAKES_PER_DAY.pop("claude", None)
+        rec = il.load(self.path)["id000"]
+        self.assertEqual(rec["reading_assigned_to"], "tarik")
+        self.assertEqual(rec["reading_assign_kind"], "name")
+
+
 class RebalanceTest(unittest.TestCase):
     """The one exception to 'a draw does not re-roll': the table was wrong, and it was measurable."""
 
