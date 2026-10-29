@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*122 scripts, generated from the tree, not by hand.*
+*123 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -125,6 +125,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-13 | [The unlanded worklist — which wakes' claimed paths never reached main, verified with no remote.](unlanded_worklist.py) |
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
 | 2026-09-10 | [Check every gallery pavilion's HTML for links whose relative target does not exist.](verify-gallery-links.py) |
+| 2026-10-29 | [How a wake spends its actions: the action cap, the reconnaissance before the first file.](wake_action_census.py) |
 | 2026-10-25 | [Measure how often each amigo actually wakes, and check the capacity table against it.](wake_cadence.py) |
 | 2026-10-27 | [How many actions does a wake spend before it writes anything into the checkout?](wake_reconnaissance_census.py) |
 | 2026-10-10 | [The review queue a wake opens with — W, each item named to a reviewer.](wake_review_queue.py) |
