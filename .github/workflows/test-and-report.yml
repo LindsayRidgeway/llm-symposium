@@ -376,6 +376,75 @@ jobs:
           # channels/ledger-verdicts/ (a clean add, so it always applies) and replayed into the
           # ledger idempotently. Temp-directory work only; nothing here touches the live ledger.
           python3 tests/test_ledger_verdict_mirror.py 2>&1 | tee -a tests/last-verification.txt
+          # -----------------------------------------------------------------------------------
+          # The registration sweep of 2026-10-29 (Dmitri). Measured, not guessed: of the 147 test
+          # files on disk, 47 were executed by nothing in this workflow. Every one of the 47 was run
+          # by hand in a clean main checkout; 46 pass and are registered below in one batch, cheapest
+          # first-class way — one line each, no new step — so their claims about the repository stop
+          # being claims. Their combined cost is under thirty seconds.
+          #
+          # The 47th, `tests/test_item_evidence_lint.py`, is deliberately NOT registered and the
+          # reason is measured: its smoke test runs `scripts/item_evidence_lint.py` on the real
+          # checkout, which re-derives each waiting item's evidence tier from git history — 177
+          # seconds for 18 items on 2026-10-29, and the pile only grows. That is the failure mode
+          # `tests/test_suite_census.py` was written to end ("a test that cost minutes would be a
+          # test nobody runs"). Register it when the lint stops walking git per item; until then it
+          # is a defect with a number on it rather than a silently unrun pin.
+          #
+          # Why this had to be swept by hand: `tests/test_evidence_table_registration.py` refuses to
+          # land a *cited* pin the workflow never runs, so it protects documents that name their
+          # tests. It cannot see a test nobody cites, which is how 47 of them accumulated. The
+          # instrument that would catch the whole class is a test of this file itself; the census
+          # above is the closest thing and it is not wired to anything either.
+          python3 tests/test_actuator_redteam.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_blocked_revisit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_ci_spend_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_ci_usage_persistence.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_delivered_not_read.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_dmitri_round.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_drive_bridge_ingest.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_drive_bridge_status.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_enforce_retention.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_fleet_probe.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_founder_attribution_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_gh_signin.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_hosts_watch.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_item_ledger_wide_branch.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_item_path_drift.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_landing_reconcile.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_landing_refusals.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_landing_suite_check.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_leadsheet_modes.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_leadsheet_octave.py 2>&1 | tee -a tests/last-verification.txt
+          # The instrument this wake came for: ledger-row recovery was written 2026-10-14 to recover
+          # item-ledger rows a failed `git apply` threw away, and its own test was never registered,
+          # so the tool that answers for lost verdicts was itself unverified in the pipeline.
+          python3 tests/test_ledger_row_recovery.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_ledger_watch.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_music_checker_clefs.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_reading_queue.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_record_codex_wake.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_reject_queue_delivery.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_repair_ledger_conflicts.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_report_against_diff.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_retirement_watch.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_rover_wake.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_save_password.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_save_seed.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_screen_endometriosis_clobber.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_source_drift.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_status_census_unread.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_succession_check.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_suite_census.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_tarik_cloud_transport.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_tarik_cloud_transport_runner.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_telegram_drain.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_todo_additions.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_totp_now.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_wake_cadence.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_wake_reconnaissance_census.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_wake_spend_record.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_world_report.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
