@@ -37,6 +37,9 @@ from __future__ import annotations
 
 import argparse
 import datetime
+from email import policy
+from email.errors import HeaderParseError
+from email.parser import Parser
 import json
 import re
 import subprocess
@@ -87,22 +90,49 @@ def classify(draft: str | None, outbound_dir: Path, sent_dir: Path, repo_root: P
     return ("dangling", None)
 
 
+def mailbox_identity(value: str | None) -> str | None:
+    """One well-formed mailbox, case-insensitive as before; display text is not identity.
+
+    Ambiguous lists/groups and malformed headers fail closed. No plus/dot alias
+    rewriting is inferred. This parses filed header evidence, not sender authentication.
+    """
+    if not isinstance(value, str) or not value.strip() or '\n' in value or '\r' in value:
+        return None
+    try:
+        header = Parser(policy=policy.default).parsestr('From: ' + value + '\n\n')['From']
+        if header.defects or len(header.addresses) != 1:
+            return None
+        if any(group.display_name is not None for group in header.groups):
+            return None
+        address = header.addresses[0]
+        if not address.username or not address.domain:
+            return None
+        return address.addr_spec.lower()
+    except (HeaderParseError, ValueError, IndexError):
+        return None
+
+
 def inbound_reply(contact: str | None, inbound_dir: Path) -> str | None:
     """The first inbound file whose `- From:` header names this contact, else None.
 
     A prospect's `contact` is an email address; `mail.py` files the header as
-    `From: "Display Name" <addr>`. The test is a substring match on the lowercased address,
-    so no display-name parsing is needed and a reordered header cannot hide a reply. A
-    `contact` that is a web form (no `@`) can never match, which is correct: a form produces
-    no reply to file.
+    `From: "Display Name" <addr>`. Compare the complete parsed mailbox of one
+    contact against one sender. Read only the metadata before the `---` body
+    separator, refusing duplicate From fields; body text cannot supply evidence.
     """
-    addr = (contact or "").strip().lower()
-    if "@" not in addr or not inbound_dir.is_dir():
+    addr = mailbox_identity(contact)
+    if addr is None or not inbound_dir.is_dir():
         return None
     for f in sorted(inbound_dir.glob("*.md")):
-        text = f.read_text(encoding="utf-8", errors="replace")
-        m = re.search(r"^-\s*From:\s*(.+)$", text, re.MULTILINE)
-        if m and addr in m.group(1).lower():
+        senders = []
+        with f.open(encoding='utf-8', errors='replace') as stream:
+            for line in stream:
+                if line.strip() == '---':
+                    break
+                match = re.match(r'^-\s*From:[ \t]*(.*)$', line.rstrip('\r\n'), re.IGNORECASE)
+                if match:
+                    senders.append(match.group(1))
+        if len(senders) == 1 and mailbox_identity(senders[0]) == addr:
             return str(f)
     return None
 

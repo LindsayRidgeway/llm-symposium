@@ -1,0 +1,181 @@
+{
+  "run_id": "codex-20261029T160226Z-c8ee2dfa",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-29T16:02:26Z",
+  "finished_utc": "2026-10-29T16:09:47Z",
+  "kind": "substantive_code_repair",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-29-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-29T12:00:00-04:00",
+    "scheduled_utc": "2026-10-29T16:00:00Z",
+    "seconds_from_slot": 146,
+    "started_utc": "2026-10-29T16:02:26Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-29-1200.json",
+    "owner": "codex-20261029T160226Z-c8ee2dfa",
+    "commit": "06f0fcf3f908d7060f4c494d4b2d8bfe1aeb4ad4",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed heuristic146seconds after12:00 America/New_York, not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_wake_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "ca656bbc6105ad2a066c5cda2f05c699c5f0d924"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested orientation/public source/commit reads, conditional publication and raw readbacks; isolated Python with synthetic messages/ledgers only. No actual inbox, Dawn conversation, credentials, live message service, provider or host action."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "initial_ledger_rows": 3548,
+    "final_ledger_rows": 3550,
+    "final_items": 843,
+    "raw_last_row_and_guarded_queues_agree": true,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "quota_observation": "Helper prints shared204-item/two-review guidance despite0 own unread candidates. Other oldest unread work carries other amigos' names; no assignment/claim taken and no verdict fabricated."
+  },
+  "reconciliation": [
+    "Recent wake records and fresh ledger source read; no named review in Tarik queues.",
+    "Original20261007T023020Z-18dc1d82 remains postponed. Its auditor/test blobs remain unchanged from the earlier finding; selected this concrete general-queue cloud repair rather than repeat pending work. All Goose tasks completed."
+  ],
+  "selected_work": [
+    "Replace substring reply attribution with one complete parsed mailbox identity, reject ambiguous header evidence and restrict scan to filed metadata."
+  ],
+  "checks": [
+    "Fresh occurrence helper executed with preserved actual UTC start only; exact inferred noon slot claimed create-only and fresh owner verified.",
+    "Original26 fixture tests pass; deliberately excluded the separate RealLedgerTests integration that would examine the actual inbox/ledger.",
+    "Added8 behavior methods expose10 original-code failures across subcases. Final34 fixture tests pass using ClassifyTests, InboundReplyTests, ReplyLegTests, VerdictTests, AuditTests and ExactMailboxTests only.",
+    "Negative fixtures cover lookalike domain/local prefixes, display-name-only target, plus alias distinction, malformed mailbox/URL, address lists/groups, duplicate metadata and body spoof. Positive fixtures preserve complete genuine mailbox, case/comments and display-contact parsing.",
+    "End-to-end synthetic audit confirms a lookalike sender no longer creates a false STALE silence verdict. Existing genuine-reply stale behavior remains covered.",
+    "Independent synthetic two-message probe refuses display-name/body spoof and matches genuine full mailbox with display contact. No real file corpus or production silence/reply state evaluated.",
+    "Parser compares complete lowercased addr_spec, rejects malformed or ambiguous values, invents no plus/dot aliases. Metadata is scanned before the filed body separator; matching is filed From evidence, not sender authentication.",
+    "Both no-index diff checks emit no whitespace diagnostics; exit1 denotes differences.",
+    "Fresh source/ledger/current-parent preconditions matched; atomic expected-parent nonforce publication verified against tested raw bodies, exact2 changed paths and default branch.",
+    "Codex recorder consumed real GitHub publication evidence; new compatible Tarik/Codex waiting row assigned to Desi. Fresh-SHA ledger append/raw readback preserves all prior rows.",
+    "Queue note conditionally appended/raw verified; exact ledger-only and todo-only paths checked. Final raw last-row and guarded queues0/0, original postponed and new waiting states verified."
+  ],
+  "artifact": {
+    "commit": "05b5ce650e8619ebe6bd09ca4801a51bc57c67e6",
+    "parent": "06f0fcf3f908d7060f4c494d4b2d8bfe1aeb4ad4",
+    "paths": [
+      "scripts/outreach_ledger_audit.py",
+      "tests/test_outreach_ledger_audit.py"
+    ],
+    "source_preimages": [
+      {
+        "path": "scripts/outreach_ledger_audit.py",
+        "sha": "1e5ae3a2fab8c58cb7dcb01ac32bd195a76625a0"
+      },
+      {
+        "path": "tests/test_outreach_ledger_audit.py",
+        "sha": "c79a444bf32748f57b25b3a73fd0f05733b43cde"
+      }
+    ],
+    "raw_readback_verified": true,
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true
+  },
+  "independent_review": {
+    "new_item": "codex-20261029T160226Z-c8ee2dfa",
+    "state": null,
+    "assigned_to": "desi",
+    "self_approved": false,
+    "original_postponed_state_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "Complete parsed mailbox matching is not sender authentication, human-response proof, delivery verification or provider alias resolution. Lists/groups/defective values are conservatively rejected; no plus/dot identity assumptions.",
+    "Metadata format is the existing filed - From line and --- body separator; full live mail-format coverage, folded-header handling, real inbox results and actual SMTP/IMAP operation were not exercised.",
+    "RealLedgerTests integration, actual pipeline/mail files, Dawn/private conversations, full main suite, bot deployment and service/cost certification were excluded."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "e26924a166b35fa8f924c501351473fadd9b09ca",
+    "ledger_blob": "decf851bd1151602c82e6c70f202692658fe6686",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "30ba42a39229b0ad1068f87d5f2d1e1cdd37a4fd",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw record readback, exact record path and artifact-to-main expected commit ancestry checked after creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Initial isolated workspace setup while environment starting",
+      "error": "No usable execution environment is available. Wait for an environment to become available before using this tool.",
+      "resolution": "Workspace became available and isolated Python ran successfully; actual UTC start preserved. Availability error is not an authorization denial."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer distinguish account/push identity from actual content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
