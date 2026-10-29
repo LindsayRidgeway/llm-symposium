@@ -15,9 +15,13 @@ query printed in the map is the query the script runs, that the snapshot totals 
 and that the record the map says corrects its own gap claim is really in the retention×pain set.
 """
 import importlib.util
+import contextlib
+import copy
+import io
 import json
 import re
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -124,6 +128,82 @@ class FindingIsPinnedTests(unittest.TestCase):
         self.assertIn("37096126", self.text)
         self.assertIn("superseded", self.text)
         self.assertIn("chronic-pain → retention", self.text)
+
+
+class SnapshotCoverageTests(unittest.TestCase):
+    def fixture(self):
+        return {'retrieved':'2026-10-07', 'strict':{'total_matching':3,'query':'strict fixture query'},
+                'widened':{'total_matching':4,'returned':4},
+                'records':[{'pmid':str(i),'title':'fixture','abstract':'text'} for i in range(1,5)]}
+
+    def test_historical_sample_difference_is_not_the_query_count_delta(self):
+        wide = json.loads(RAW.read_text())
+        strict = json.loads((ROOT / 'research/maternal-chronic-pain-substance-use-raw.json').read_text())
+        before = copy.deepcopy(wide)
+        audit = mpw.snapshot_audit(wide, strict)
+        self.assertEqual(audit['query_total_delta'], 60)
+        compared = audit['strict_snapshot_comparison']
+        self.assertEqual((compared['reported_total'],compared['saved_unique_pmids']), (54,50))
+        self.assertEqual(compared['absent_from_saved_snapshot_count'],64)
+        self.assertFalse(compared['snapshot_complete'])
+        self.assertIsNone(compared['absent_from_complete_same_date_strict_pmids'])
+        self.assertEqual(audit['coverage']['records_with_abstract'],111)
+        self.assertEqual(set(audit['coverage']['missing_abstract_pmids']),{'29664446','28245688','30928567'})
+        self.assertFalse(audit['coverage']['abstract_coverage_complete'])
+        self.assertEqual(wide,before)
+
+    def test_empty_whitespace_and_absent_abstracts_are_unavailable(self):
+        data = self.fixture()
+        for rec, abstract in zip(data['records'], ['', '  ', None, 'text']):rec['abstract']=abstract
+        report=mpw.snapshot_audit(data)['coverage']
+        self.assertTrue(report['retrieval_complete'])
+        self.assertEqual(report['records_with_abstract'],1)
+        self.assertEqual(report['missing_abstract_pmids'],['1','2','3'])
+        self.assertFalse(report['abstract_coverage_complete'])
+
+    def test_duplicate_ids_and_truncated_returns_are_not_complete(self):
+        data=self.fixture();data['records'][-1]['pmid']='1'
+        self.assertFalse(mpw.snapshot_audit(data)['coverage']['retrieval_complete'])
+        data=self.fixture();data['widened']['total_matching']=5
+        self.assertFalse(mpw.snapshot_audit(data)['coverage']['abstract_coverage_complete'])
+
+    def test_complete_same_date_baseline_can_supply_an_id_difference(self):
+        data=self.fixture();strict={'retrieved':data['retrieved'],'total_matching':3,'returned':3,
+                                    'query':data['strict']['query'],
+                                    'records':data['records'][:3]}
+        self.assertEqual(mpw.snapshot_audit(data,strict)['strict_snapshot_comparison']
+                         ['absent_from_complete_same_date_strict_pmids'],['4'])
+        strict['retrieved']='2026-09-28'
+        self.assertIsNone(mpw.snapshot_audit(data,strict)['strict_snapshot_comparison']
+                          ['absent_from_complete_same_date_strict_pmids'])
+        strict['retrieved']=data['retrieved'];strict['query']='another query'
+        self.assertIsNone(mpw.snapshot_audit(data,strict)['strict_snapshot_comparison']
+                          ['absent_from_complete_same_date_strict_pmids'])
+
+    def test_zero_matches_are_complete_retrieval_not_a_clinical_finding(self):
+        data=self.fixture();data['records']=[]
+        data['widened']={'total_matching':0,'returned':0}
+        report=mpw.snapshot_audit(data)
+        self.assertTrue(report['coverage']['retrieval_complete'])
+        self.assertEqual(report['coverage']['records_with_abstract'],0)
+        self.assertIn('do not establish clinical absence',report['limit'])
+
+    def test_live_result_constructor_exposes_incomplete_source_coverage(self):
+        with patch.object(mpw,'_count',return_value=1), patch.object(mpw,'_ids',return_value=(2,['1','2'])), \
+             patch.object(mpw,'_abstracts',return_value={'1':{'title':'fixture','abstract':'pain'}}):
+            result=mpw.run()
+        self.assertEqual(result['snapshot_audit']['coverage']['missing_abstract_pmids'],['2'])
+        self.assertFalse(result['snapshot_audit']['coverage']['abstract_coverage_complete'])
+
+    def test_offline_cli_cannot_fetch_or_write_source_snapshots(self):
+        strict=ROOT / 'research/maternal-chronic-pain-substance-use-raw.json'
+        before=(RAW.read_bytes(),strict.read_bytes());out=io.StringIO()
+        with patch.object(mpw.urllib.request,'urlopen',side_effect=AssertionError('offline network')) as network, \
+             contextlib.redirect_stdout(out):
+            code=mpw.main(['--audit-snapshot',str(RAW),'--strict-snapshot',str(strict)])
+        self.assertEqual(code,0);network.assert_not_called()
+        self.assertEqual(json.loads(out.getvalue())['query_total_delta'],60)
+        self.assertEqual((RAW.read_bytes(),strict.read_bytes()),before)
 
 
 if __name__ == "__main__":

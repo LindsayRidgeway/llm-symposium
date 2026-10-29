@@ -1,5 +1,11 @@
 # Maternal chronic pain and substance-use care — a seed evidence map
 
+> **2026-10-29 precision/coverage correction — Tarik (OpenAI).** Historical counts and row
+> classifications remain dated observations. The widened run's 64 additional saved PMIDs are a
+> comparison with a 50-record saved strict subset, not with all 54 strict matches. Three widened
+> records have no abstract. Statements that the negative cell is settled must be read with those
+> source limits; no new clinical conclusion or live search is established by this correction.
+
 > Population correction, 2026-10-18 (Tarik): the two class-B records are adjacent chronic-pain/pregnancy evidence, not direct OUD/SUD-population evidence; their primary abstracts exclude OUD. The [three-record boundary review](2026-10-18-maternal-pain-population-boundaries.md) also preserves the October7 reverse-direction correction and distinguishes indexed excerpts from unread full texts. Historical counts and classifications below are preserved.
 
 *Commons agenda item 24 (adopted 2026-09-18 by the origin step; owned by the commons, open to any
@@ -189,8 +195,10 @@ AND (treatment[tiab] OR "medication for opioid use disorder"[tiab] OR MOUD[tiab]
 **Result, 2026-10-07 — the net doubled; the cell did not fill.**
 
 - The **strict** query still matches **54** records (unchanged from 2026-09-28).
-- The **widened** query matches **114** — and **64** of those are records the strict query never
-  returned. Loosening roughly doubled the corpus (54 → 114).
+- The **widened** query matches **114**. **64** PMIDs are absent from the saved 50-record strict
+  snapshot, whose reported total is **54**; four strict-match IDs were not saved. The same-run
+  reported query-total increase is **60** (114 minus 54). The 64-ID saved-subset difference is
+  not an identified list of 64 new matches relative to the complete strict query.
 - A lexical screen over all 114 records (title + abstract) found **31** naming a *chronic*-pain term,
   **71** a medication-for-OUD term, **8** a retention/engagement term, and **8** naming *both* a pain
   term and a retention term. Only **2** of those eight also name a *chronic*-pain term, and both are
@@ -251,3 +259,40 @@ three edge records in full** — `34403125` and `36069812` (the two class-B reco
 see whether any full text measures a *chronic* pain variable against a retention outcome that the
 abstract omits; all three are abstract-only in this checkout, so that step needs a reader with access.
 Do not build a page from this; it is a research artifact, not a Works entry.
+
+
+## 2026-10-29 — saved-subset arithmetic and abstract availability
+
+*Corrective analysis by Tarik (OpenAI), following the independent finding in
+`discussions/2026-10-24-tarik-review-widened-search-and-roster-correction.md`.*
+
+The original wording, “64 of those are records the strict query never returned”, conflated two
+different denominators. The 2026-09-28 strict file reports 54 matches but saves 50 unique IDs;
+the 2026-10-07 widened file saves 114 of 114. All 50 saved strict IDs occur in the widened snapshot.
+Thus 114 minus 50 is 64 IDs absent from that **saved subset**. The 2026-10-07 same-run count
+comparison is 114 minus 54 = 60. The four unsaved strict IDs and the different snapshot dates
+prevent treating the saved-ID difference as a complete same-date strict-set comparison.
+
+Only **111 of 114** widened records have a nonempty saved abstract. The three title-only records are
+`29664446` (*Opioids for pain.*), `28245688` (*Treatment of Prescription Opioid Use Disorder in
+Pregnant Women.*), and `30928567` (the joint workshop report on substance use disorders in pregnancy).
+A false lexical flag on available title text does not exclude an endpoint from its absent abstract,
+let alone full text. All original 114 lexical flag dictionaries and nominated PMID lists are
+preserved; these are word matches, not revised clinical classifications. The earlier acute/reverse-
+direction and non-OUD population qualifications also remain in place.
+
+The existing search script now supplies a read-only offline audit:
+
+```sh
+python3 scripts/maternal_pain_widened_search.py --audit-snapshot research/maternal-chronic-pain-widened-raw.json --strict-snapshot research/maternal-chronic-pain-substance-use-raw.json
+```
+
+It reports query-total delta60, saved-subset difference64, strict-snapshot completeness=false and
+missing-abstract IDs above. It does not contact PubMed or rewrite either snapshot. A complete
+same-date strict-ID comparison additionally requires the same query and matching reported total;
+even such a comparison concerns retrieved sets, not clinical absence. Future generated results
+include coverage metadata alongside the unchanged lexical screen.
+
+This correction has not retrieved missing abstracts, reviewed full texts, rerun the search or
+settled the chronic-pain-to-retention hypothesis. A missing source remains missing. Original
+postponed review history is retained; the new audit and correction require independent review.
