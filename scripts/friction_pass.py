@@ -24,6 +24,12 @@ Three rules it holds to, each one a defect that already cost the commons somethi
    state file, the verification log — are excluded from "what landed", or the first pass would
    make every later one think new work existed.
 
+Completion requires successful steps and new nonempty bytes in EVERY configured review file.
+Unchanged bytes are conservatively unproven even if a runner rewrote the same answer. Failed or
+partial attempts retain the previous marker and leave raw outputs for reconciliation. Archives
+are create-only; an existing target stops execution before any runner call. These four legacy
+output paths are an execution contract, not the current participant count (see ROSTER.md).
+
 Usage (from the repository root):
 
     python3 scripts/friction_pass.py --check      # is work waiting? exits 0 either way
@@ -195,7 +201,8 @@ def _run(cmd: list[str], repo: Path) -> int:
         return 1
 
 
-def archive_reviews(repo: Path, when: _dt.date, sha: str, paths: list[str]) -> tuple[str, int]:
+def archive_reviews(repo: Path, when: _dt.date, sha: str, paths: list[str],
+                    reviews: dict[str, bytes | None] | None = None) -> tuple[str, int]:
     """Copy whatever the runner wrote into one dated file. Returns (relpath, n_sections).
 
     Nothing is archived when the runner produced nothing — a pass that reached no model has no
@@ -203,10 +210,14 @@ def archive_reviews(repo: Path, when: _dt.date, sha: str, paths: list[str]) -> t
     """
     sections = []
     for rel in REVIEW_FILES:
-        src = repo / rel
-        if not src.exists():
+        if reviews is None:
+            src = repo / rel
+            data = src.read_bytes() if src.exists() else None
+        else:
+            data = reviews.get(rel)
+        if data is None:
             continue
-        body = src.read_text(encoding="utf-8", errors="replace").strip()
+        body = data.decode('utf-8', errors='replace').strip()
         if not body:
             continue
         model = Path(rel).stem.replace("-review", "")
@@ -232,7 +243,8 @@ def archive_reviews(repo: Path, when: _dt.date, sha: str, paths: list[str]) -> t
     head += [""]
     for model, body in sections:
         head += [f"## {model}", "", body, ""]
-    out.write_text("\n".join(head).rstrip() + "\n", encoding="utf-8")
+    with out.open('x', encoding='utf-8') as stream:
+        stream.write("\n".join(head).rstrip() + "\n")
     return str(out.relative_to(repo)), len(sections)
 
 
@@ -244,7 +256,7 @@ def run_pass(repo: Path, force: bool = False, dry_run: bool = False,
     verdict = due(repo, state)
     result = {"ran": False, "due": verdict["due"], "since": verdict["since"],
               "paths": verdict["paths"], "reason": verdict["reason"],
-              "archive": "", "sections": 0, "steps": []}
+              "archive": "", "sections": 0, "steps": [], "failed": False}
 
     if not verdict["due"] and not force:
         result["reason"] = verdict["reason"]
@@ -254,20 +266,53 @@ def run_pass(repo: Path, force: bool = False, dry_run: bool = False,
         return result
 
     head = head_sha(repo) or verdict["since"]
+    if archive_path(repo, when, head).exists():
+        result.update(failed=True, reason='archive already exists; reconcile retained evidence before retrying')
+        return result
+    def snapshot():
+        return {rel: (repo / rel).read_bytes() if (repo / rel).exists() else None
+                for rel in REVIEW_FILES}
+    try:
+        before = snapshot()
+    except OSError as exc:
+        result.update(failed=True, reason=f'cannot snapshot review outputs: {type(exc).__name__}; marker not advanced')
+        return result
     print(f"friction pass: {verdict['reason']}")
 
-    steps = [(sys.executable, RUNNER)]
-    if not skip_matrix:
-        steps.append((sys.executable, MATRIX))
-    for cmd in steps:
+    result['ran'] = True
+    def step(target):
+        cmd = [sys.executable, target]
         code = _run(list(cmd), repo)
         result["steps"].append({"cmd": " ".join(cmd), "exit": code})
+        return code
 
-    rel, n = archive_reviews(repo, when, head, verdict["paths"])
+    if step(RUNNER) != 0:
+        result.update(failed=True, reason='review runner failed; marker not advanced')
+        return result
+    try:
+        after = snapshot()
+    except OSError as exc:
+        result.update(failed=True, reason=f'cannot read review outputs: {type(exc).__name__}; marker not advanced')
+        return result
+    missing = [rel for rel in REVIEW_FILES if not after[rel] or not after[rel].strip()
+               or after[rel] == before[rel]]
+    if missing:
+        result.update(failed=True, reason='no complete fresh review was produced; marker not advanced',
+                      unproven_reviews=missing)
+        return result
+    if not skip_matrix and step(MATRIX) != 0:
+        result.update(failed=True, reason='matrix generation failed; marker not advanced')
+        return result
+
+    try:
+        rel, n = archive_reviews(repo, when, head, verdict["paths"], reviews=after)
+    except OSError as exc:
+        result.update(failed=True, reason=f'archive not published: {type(exc).__name__}; marker not advanced')
+        return result
     result["archive"], result["sections"] = rel, n
-    result["ran"] = True
 
     if not rel:
+        result['failed'] = True
         result["reason"] = ("no review was produced — no model answered; marker not advanced, so "
                             "the next pass retries this same work")
         return result
@@ -303,11 +348,11 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     res = run_pass(repo, force=args.force, dry_run=args.dry_run, skip_matrix=args.skip_matrix)
-    print(json.dumps({k: res[k] for k in ("ran", "due", "since", "archive", "sections", "reason")},
+    print(json.dumps({k: res[k] for k in ("ran", "due", "since", "archive", "sections", "reason", "failed")},
                      indent=2))
     # A pass that did nothing because nothing landed is the healthy case, and it must not read as
     # a failure to whatever called this.
-    return 0
+    return 1 if res['failed'] else 0
 
 
 if __name__ == "__main__":

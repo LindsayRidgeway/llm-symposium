@@ -145,12 +145,20 @@ class ArchiveTests(unittest.TestCase):
     def _stub_steps(self):
         """Replace the two subprocess steps: this test is about the archive, not about the models."""
         self.calls = []
+        original = fp._run
+        self.addCleanup(setattr, fp, '_run', original)
 
         class _R:
             returncode = 0
 
         def fake(cmd, cwd):
             self.calls.append(cmd)
+            if fp.RUNNER in cmd:
+                for rel in fp.REVIEW_FILES:
+                    target = cwd / rel
+                    # Preserve the empty-output test's deliberately absent answers.
+                    if target.read_text().strip():
+                        target.write_text('fresh answer for ' + rel)
             return 0
 
         fp._run = fake                                    # noqa: SLF001 — the seam the design needs
@@ -213,6 +221,127 @@ class ArchiveTests(unittest.TestCase):
         with contextlib.redirect_stdout(buf):     # a no-op pass must exit 0, not raise or shout
             self.assertEqual(fp.main(["--repo", str(self.r.path)]), 0)
             self.assertEqual(fp.main(["--repo", str(self.r.path), "--check"]), 0)
+
+
+class FreshOutputTests(unittest.TestCase):
+    def setUp(self):
+        self.r = _Repo()
+        self.addCleanup(self.r.close)
+        prior = self.r.commit('docs/old.html')
+        fp.save_state(self.r.path, {'last_sha': prior, 'passes': 7})
+        self.state_bytes = (self.r.path / fp.STATE_PATH).read_bytes()
+        self.head = self.r.commit('docs/new.html')
+        for rel in fp.REVIEW_FILES:
+            p = self.r.path / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text('stale answer for ' + rel)
+        self.calls = []
+        self.original = fp._run
+        self.addCleanup(setattr, fp, '_run', self.original)
+
+    def stub(self, runner_rc=0, fresh=0, matrix_rc=0):
+        def fake(cmd, repo):
+            self.calls.append(cmd)
+            if fp.RUNNER in cmd:
+                for rel in fp.REVIEW_FILES[:fresh]:
+                    (repo / rel).write_text('new answer for ' + rel)
+                return runner_rc
+            return matrix_rc
+        fp._run = fake
+
+    def assert_retained(self, result):
+        self.assertEqual(result['archive'], '')
+        self.assertEqual((self.r.path / fp.STATE_PATH).read_bytes(), self.state_bytes)
+        self.assertTrue(fp.due(self.r.path)['due'])
+        self.assertFalse((self.r.path / 'discussions/friction').exists())
+        self.assertTrue(result.get('failed'))
+
+    def test_failed_runner_never_archives_stale_reviews_or_runs_matrix(self):
+        self.stub(runner_rc=1)
+        self.assert_retained(fp.run_pass(self.r.path))
+        self.assertEqual(len(self.calls), 1)
+
+    def test_zero_exit_without_changed_reviews_is_incomplete(self):
+        self.stub()
+        self.assert_retained(fp.run_pass(self.r.path))
+        self.assertEqual(len(self.calls), 1)
+
+    def test_partial_fresh_outputs_cannot_advance_all_configured_reviews(self):
+        self.stub(fresh=1)
+        self.assert_retained(fp.run_pass(self.r.path))
+
+    def test_rewriting_identical_bytes_is_not_proof_of_fresh_review(self):
+        def same_bytes(cmd, repo):
+            for rel in fp.REVIEW_FILES:
+                p = repo / rel
+                p.write_bytes(p.read_bytes())
+            return 0
+        fp._run = same_bytes
+        self.assert_retained(fp.run_pass(self.r.path, skip_matrix=True))
+
+    def test_missing_output_is_not_replaced_by_stale_sections(self):
+        self.stub(fresh=4)
+        inner = fp._run
+        def missing(cmd, repo):
+            code = inner(cmd, repo)
+            if fp.RUNNER in cmd:
+                (repo / fp.REVIEW_FILES[-1]).unlink()
+            return code
+        fp._run = missing
+        self.assert_retained(fp.run_pass(self.r.path))
+
+    def test_archive_uses_validated_snapshot_not_later_replacement(self):
+        self.stub(fresh=4)
+        inner = fp._run
+        def mutate_after_validation(cmd, repo):
+            code = inner(cmd, repo)
+            if fp.MATRIX in cmd:
+                for rel in fp.REVIEW_FILES:
+                    (repo / rel).write_text('later unvalidated replacement')
+            return code
+        fp._run = mutate_after_validation
+        result = fp.run_pass(self.r.path)
+        body = (self.r.path / result['archive']).read_text()
+        self.assertNotIn('unvalidated replacement', body)
+        self.assertIn('new answer', body)
+
+    def test_matrix_failure_retains_marker_and_does_not_archive(self):
+        self.stub(fresh=4, matrix_rc=1)
+        self.assert_retained(fp.run_pass(self.r.path))
+
+    def test_all_fresh_outputs_success_archive_only_new_answers(self):
+        self.stub(fresh=4)
+        result = fp.run_pass(self.r.path)
+        self.assertFalse(result.get('failed', False))
+        body = (self.r.path / result['archive']).read_text()
+        self.assertNotIn('stale answer', body)
+        self.assertEqual(result['sections'], 4)
+        self.assertEqual(fp.load_state(self.r.path)['last_sha'], self.head)
+
+    def test_existing_archive_stops_before_execution_even_when_forced(self):
+        path = fp.archive_path(self.r.path, datetime.date.today(), self.head)
+        path.parent.mkdir(parents=True)
+        path.write_text('retained evidence')
+        self.stub(fresh=4)
+        result = fp.run_pass(self.r.path, force=True)
+        self.assertEqual(self.calls, [])
+        self.assertEqual(path.read_text(), 'retained evidence')
+        self.assertEqual((self.r.path / fp.STATE_PATH).read_bytes(), self.state_bytes)
+        self.assertTrue(result.get('failed'))
+
+    def test_archive_writer_is_create_only(self):
+        day = datetime.date.today()
+        fp.archive_reviews(self.r.path, day, self.head, ['docs/new.html'])
+        path = fp.archive_path(self.r.path, day, self.head)
+        retained = path.read_bytes()
+        with self.assertRaises(FileExistsError):
+            fp.archive_reviews(self.r.path, day, self.head, ['different'])
+        self.assertEqual(path.read_bytes(), retained)
+
+    def test_cli_reports_failed_attempt_as_failure(self):
+        self.stub(runner_rc=1)
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(fp.main(['--repo', str(self.r.path)]), 1)
 
 
 class CheckModeTests(unittest.TestCase):
