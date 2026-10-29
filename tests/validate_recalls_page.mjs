@@ -3,12 +3,15 @@
 // enforcement API, so the query string, the date rule, the interval arithmetic, the summary and
 // the card renderer are tested as shipped rather than as intended.
 //
-//   node tests/validate_recalls_page.mjs [docs/works/recalls.html]
+//   node tests/validate_recalls_page.mjs [--offline] [docs/works/recalls.html]
+// --offline refuses network access and explicitly skips the live evidence sections.
 //
 // Written by the same architecture that wrote the page: this is a check, not a review.
 import fs from "node:fs";
 
-const file = process.argv[2] || "docs/works/recalls.html";
+const offline = process.argv.includes('--offline');
+const file = process.argv.slice(2).find(arg => arg !== '--offline') || "docs/works/recalls.html";
+if (offline) globalThis.fetch = async () => { throw new Error('offline validator: network access refused'); };
 const html = fs.readFileSync(file, "utf8");
 
 const blocks = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
@@ -40,7 +43,7 @@ const mod = new Function(code + `
   return { parseFdaDate, days, iso, intervals, dated, readRecord, summarize, quantile,
            searchExpr, searchUrl, countUrl, classCountUrl, recordUrl, apiGet, searchPage,
            countByClass, pct, card, dateLine, statBlock, classOf, showQuery,
-           MAX_CARDS, MAX_PAGES, PAGE_SIZE, OVER90, FIELDS, TYPES };
+           run, MAX_CARDS, MAX_PAGES, PAGE_SIZE, OVER90, FIELDS, TYPES };
 `)();
 
 // --- 1. dates: openFDA sends "YYYYMMDD", and nothing else is guessed -----------------
@@ -118,7 +121,64 @@ check("the per-record query quotes the recall number (unquoted, openFDA returns 
   ru.includes(encodeURIComponent('recall_number:"D-1448-2014"')) || ru.includes('recall_number%3A%22D-1448-2014%22'), ru);
 check("the per-record query is limited to one row", /[?&]limit=1\b/.test(ru));
 
+// Request ordering is distinct from sorting whatever an unsorted response happened to return.
+for (const type of ['drug', 'food', 'device']) {
+  check(`${type} retrieval explicitly requests descending publication dates on later pages`,
+    new URL(mod.searchUrl(type, 'product_description', 'fixture', 2000)).searchParams.get('sort') === 'report_date:desc');
+}
+
+// Execute the shipped async search against deliberately unordered, paginated fixture responses.
+// Every fetch is intercepted; these checks make no claim about a live FDA response.
+const realFetch = globalThis.fetch;
+const requests = [];
+const fixtureDates = ['20200101', '20240101', '20220101'];
+globalThis.fetch = async url => {
+  const query = new URL(url);
+  requests.push(query);
+  const result = query.searchParams.has('count')
+    ? { results: [{term:'Class I', count:5000}] }
+    : { meta:{ results:{total:5000}, last_updated:'2026-10-01' }, results:[{
+        recall_number:'R'+Number(query.searchParams.get('skip') || 0)/1000,
+        report_date:fixtureDates[Number(query.searchParams.get('skip') || 0)/1000],
+        recall_initiation_date:'20200101', center_classification_date:'20200101',
+        classification:'Class I', product_description:'fixture'
+      }] };
+  return {ok:true,status:200,json:async()=>result};
+};
+try {
+  document.getElementById('term').value='fixture';
+  document.getElementById('type').value='drug';
+  document.getElementById('field').value='product_description';
+  await mod.run();
+  const searches = requests.filter(u => !u.searchParams.has('count'));
+  const output = document.getElementById('out').innerHTML;
+  check('actual search requests three bounded pages with explicit publication ordering',
+    searches.length === 3 && searches.every(u=>u.searchParams.get('sort')==='report_date:desc')
+    && searches.map(u=>u.searchParams.get('skip')).join(',')==='0,1000,2000');
+  check('actual result cards sort the retrieved records newest first',
+    output.indexOf('id="r-R1"') >= 0 && output.indexOf('id="r-R1"') < output.indexOf('id="r-R2"')
+    && output.indexOf('id="r-R2"') < output.indexOf('id="r-R0"'));
+  check('partial-result statistics identify their retrieved subset without calling it the most recent match',
+    /retrieved records/i.test(output) && !/read the most recent/.test(output));
+  check('card selection describes the retrieved set rather than claiming completeness',
+    /of the retrieved records/.test(output));
+} finally {
+  globalThis.fetch = realFetch;
+}
+
+for (const [label, row] of [
+  ['publication-dominated', rec('20240101','20240101','20250101')],
+  ['equal intervals', rec('20240101','20240102','20240103')],
+  ['missing middle date', rec('20240101',null,'20250101')],
+  ['out-of-order dates', rec('20240102','20240101','20250101')]
+]) {
+  const output = mod.card(mod.readRecord(row, 'drug'),1);
+  check(`${label} card does not attribute most of the interval to classification`,
+    !/Most of that is/.test(output));
+}
+
 // --- 5. live: a blank answer is a zero, not a failure ------------------------------
+if (!offline) {
 const nothing = await mod.apiGet(mod.searchUrl("drug", "product_description", "zzzz-no-such-product-zzzz", 0));
 check("openFDA's 404 'NOT_FOUND' is read as zero records, not thrown",
   nothing.zero === true && !nothing.json, JSON.stringify(nothing).slice(0, 80));
@@ -210,6 +270,9 @@ check("the linked record's dates match the row the page printed",
   `${again.json.results[0].recall_initiation_date} vs ${one.initiated}`);
 
 // --- 9. the renderer: escapes the record's own text, and never accuses --------------
+} else {
+  console.log('SKIP  live openFDA sections 5–8 (--offline); no live access or counts verified');
+}
 const hostile = mod.readRecord({
   recall_number: "<b>D-0001</b>", classification: "Class I", status: "Ongoing",
   recalling_firm: "Firm & Sons <script>", product_description: "<img src=x onerror=alert(1)>",
@@ -223,8 +286,8 @@ check("the card escapes the record's own text", cardHtml.includes("&lt;img") && 
 check("the card does not let a quoted recall number break its own link", !/<script>/.test(cardHtml));
 check("the card prints all three dates rather than folding them into one number",
   cardHtml.includes("2024-01-01") && cardHtml.includes("2024-03-01") && cardHtml.includes("2024-03-10"));
-check("the card prints the headline interval and says most of it is the classification step",
-  /69 d/.test(cardHtml) && /classification step/.test(cardHtml));
+check("the card prints the headline interval without assigning its cause",
+  /69 d/.test(cardHtml) && !/Most of that is/.test(cardHtml));
 check("the card marks the class with the record's own words", cardHtml.includes("Class I"));
 // the row's own words, with the markup taken off first — the sentence carries a <strong> in the
 // middle, so a regex over the raw html sees tags where the reader sees a word

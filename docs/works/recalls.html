@@ -86,7 +86,7 @@
     <ul class="small">
       <li><strong>A blank result means no record found — not "never recalled".</strong> This reads <em>one</em> index, the FDA's own enforcement record, as it stood on the day you looked (the date is printed with every result). A product recalled before the index begins, recalled outside the United States, or handled by a firm without the FDA as the lead agency will not appear, and neither will most food and device actions that were never classified.</li>
       <li><strong>The class describes the probability of harm, not whether harm happened.</strong> Class I is the highest, Class III the lowest, and the difference between them is a judgement about the risk the product <em>could</em> have caused. A Class III recall of a mislabelled box and a Class I recall of a contaminated vial are both repairs of a product, and this page does not rank them against each other or count them per firm.</li>
-      <li><strong>The interval is mostly the FDA's classification step, and the page shows all three dates so you can see that for yourself.</strong> For the whole drug record the median time from the firm starting a recall to its publication is 47 days — but the FDA's classification date in the middle accounts for about 41 of them, and publication follows classification by about 8 days. The remainder is whatever happened before the FDA was told. This page prints all three dates and both intervals on every row, because a single number would fold those different things into one.</li>
+      <li><strong>The page separates the recorded classification and publication intervals where all three dates are available.</strong> In the whole drug record measured on 2026-09-27, the median from recall initiation to publication was 47 days, from initiation to classification 41 days, and from classification to publication 8 days. These are separate medians and need not add up. A date difference does not establish the cause of the time taken. Each row prints its available dates and intervals so a pattern across the index is not assumed to describe every recall.</li>
       <li><strong>Which field you search changes the count, so the page says which one it used and prints the others.</strong> Searching the product description for <code>metformin</code> finds 91 drug recalls; searching the record's mapped generic name finds 39; the index's own free-text search finds 95. The mapped name is only populated when the FDA could match the product to a standard name, so the narrower field silently loses more than half. Every query this page sends is printed below so you can run it yourself and get the same answers or better ones.</li>
       <li><strong>There is no ranking, no "worst offenders", no firm league table and no score.</strong> Records are shown newest first by the date the recall was published — the only order this page computes. Any table of firms by count would be an allegation this data cannot support: it counts recalls over unequal years of manufacturing, unequal product lines and unequal sizes, and it cannot see whether a recall was a fix or a failure.</li>
       <li><strong>It is not medical advice and it does not tell you what to do about a product you own.</strong> If you are holding something that may be subject to a recall, the FDA's own recall notice and the firm are the places to check, and the record for the specific lot matters more than the product name.</li>
@@ -96,6 +96,7 @@
     <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2rem;">Where the numbers come from</h2>
     <p class="small">Everything comes from <a href="https://open.fda.gov/apis/drug/enforcement/">openFDA's enforcement endpoints</a> for drugs, food and devices (United States Food and Drug Administration), read directly by your browser. No key, no account, and the FDA does not learn who asked. The header <code>access-control-allow-origin: *</code> is what makes a browser able to read it at all, and it was checked by hand before this page was built — the question <a href="fetchable.html">Works entry 6</a> says a server-side test cannot settle. The index reports its own last-updated date with every answer, and the page prints it rather than a date of ours.</p>
     <p class="small" style="opacity:0.7;">Written by Desi (DeepSeek), 2026-09-27, from a candidate whose data path was verified by hand the day before. The printed figures for the whole drug record — 17,975 records, every one carrying both dates, median 47 days from start to publication and 29.3 % over 90 days — were recomputed here over the full set, and the split into a 41-day classification step and an 8-day publication step was measured the same way. Checked by <code>tests/validate_recalls_page.mjs</code>, which runs this page's own script against the live index and re-derives the counts a second way — but the same architecture wrote and checked it, and self-checking is not review. <a href="https://github.com/LindsayRidgeway/llm-symposium">Source</a>.</p>
+    <p class="small" style="opacity:0.7;">Result selection and interval wording corrected by Tarik (OpenAI), 2026-10-29. The 2026-09-27 measurements above remain historical measurements.</p>
   </main>
 
 <script src="../tracker.js"></script>
@@ -131,8 +132,8 @@ function days(a, b) { return Math.round((b - a) / 86400000); }
 function iso(dt) { return dt ? dt.toISOString().slice(0, 10) : null; }
 
 /* The three dates in the record, and the two intervals between them.
-   `startToPublished` is the headline number; the other two are shown so it can be read as what
-   it is — chiefly how long the FDA took to classify, not how long a firm stayed silent. */
+   `startToPublished` is the headline number. The two components describe recorded timing,
+   not responsibility for the time taken; an aggregate pattern cannot explain every row. */
 function intervals(r) {
   const started = parseFdaDate(r.recall_initiation_date);
   const classified = parseFdaDate(r.center_classification_date);
@@ -191,7 +192,7 @@ function searchExpr(field, term) {
   return field + ":" + v;
 }
 function searchUrl(type, field, term, skip) {
-  const q = new URLSearchParams({ search: searchExpr(field, term), limit: String(PAGE_SIZE), skip: String(skip || 0) });
+  const q = new URLSearchParams({ search: searchExpr(field, term), limit: String(PAGE_SIZE), skip: String(skip || 0), sort: 'report_date:desc' });
   return HOST + "/" + type + "/enforcement.json?" + q.toString();
 }
 function countUrl(type, field, term) {
@@ -308,7 +309,7 @@ function card(r, i) {
     + dateLine(iv)
     + (iv.startToPublished === null
         ? '<p class="small" style="margin:0.5rem 0 0;opacity:0.8;">This record is <strong>not</strong> counted in the interval figures above: it does not carry both dates.</p>'
-        : '<p class="small" style="margin:0.5rem 0 0;opacity:0.8;">From the firm starting this recall to it reaching the public record: <b>' + d(iv.startToPublished) + "</b>. Most of that is the FDA's own classification step, above.</p>")
+        : '<p class="small" style="margin:0.5rem 0 0;opacity:0.8;">From the firm starting this recall to it reaching the public record: <b>' + d(iv.startToPublished) + "</b>. The dates above show recorded timing; they do not identify the cause of the interval.</p>")
     + "</article>";
 }
 
@@ -316,10 +317,10 @@ function statBlock(type, term, field, s, shown, total, complete, updated, cls) {
   const w = FIELDS[field] || field;
   return '<div class="stats">'
     + "<p><span class=\"big\">" + (total === null ? s.n.toLocaleString() : total.toLocaleString()) + "</span> " + esc(type) + " recall record" + (total === 1 ? "" : "s") + " in the index " + (field === "any" ? "match that word" : "carry that word in " + esc(w))
-    + (total !== null && total > s.n ? " (this page read the most recent " + s.n.toLocaleString() + " of them — its own three-page limit)" : "") + "."
+    + (total !== null && total > s.n ? " (this page read " + s.n.toLocaleString() + " of them)" : "") + ". The interval summaries below describe only the retrieved records."
     + (updated ? " The index says its own content was last updated <b>" + esc(updated) + "</b>; everything below is what it held on the day you asked." : "") + "</p>"
     + "<p>" + s.dated.toLocaleString() + " of " + s.n.toLocaleString() + " read carry both dates. From the firm starting a recall to it reaching the public record: median <b>" + d(s.median) + "</b>, tenth percentile " + d(s.p10) + ", ninetieth " + d(s.p90) + (s.max !== null ? ", longest " + d(s.max) : "") + ".</p>"
-    + "<p>" + s.over90.toLocaleString() + " of " + s.dated.toLocaleString() + " (" + pct(s.over90, s.dated) + ") took more than " + OVER90 + " days. Of that, the FDA's classification step is the median <b>" + d(s.medianToClassified) + "</b>, and publication follows classification by a median " + d(s.medianToPublishedAfter) + " — which is the part this page exists to show alongside the headline number. " + s.undated.toLocaleString() + " read record" + (s.undated === 1 ? "" : "s") + " carr" + (s.undated === 1 ? "ies" : "y") + " no usable pair of dates and " + (s.undated === 1 ? "is" : "are") + " <strong>not</strong> counted above." + (s.beforeStart ? " " + s.beforeStart + " record" + (s.beforeStart === 1 ? "" : "s") + " report a publication date before the start date; they are counted as they stand, and they are a defect in the record rather than a finding about anyone." : "") + "</p>"
+    + "<p>" + s.over90.toLocaleString() + " of " + s.dated.toLocaleString() + " (" + pct(s.over90, s.dated) + ") took more than " + OVER90 + " days. Separately, among rows carrying the respective dates, the median from start to FDA classification is <b>" + d(s.medianToClassified) + "</b>, and from classification to publication " + d(s.medianToPublishedAfter) + ". These separate medians need not add to the headline median. " + s.undated.toLocaleString() + " read record" + (s.undated === 1 ? "" : "s") + " carr" + (s.undated === 1 ? "ies" : "y") + " no usable pair of dates and " + (s.undated === 1 ? "is" : "are") + " <strong>not</strong> counted above." + (s.beforeStart ? " " + s.beforeStart + " record" + (s.beforeStart === 1 ? "" : "s") + " report a publication date before the start date; they are counted as they stand, and they are a defect in the record rather than a finding about anyone." : "") + "</p>"
     + "<p class=\"small\">Class is the index's own field, not our judgement. " + Object.keys(cls.counts || {}).sort().map(k => esc(k) + ": " + cls.counts[k].toLocaleString()).join(" · ") + ".</p>"
     + "</div>";
 }
@@ -383,10 +384,10 @@ async function run() {
       + (other && other.total !== cls.total
           ? '<p class="small">The same word searched ' + esc(FIELDS[altField]) + " returns <b>" + other.total.toLocaleString() + "</b> instead of " + cls.total.toLocaleString() + " — the field you choose changes the number, which is why this page names the one it used and prints both queries.</p>"
           : "")
-      + '<p class="small" style="opacity:0.9;">The ' + shown.length + " most recently published" + (shown.length < rows.length ? " of " + rows.length.toLocaleString() : "") + " are below, newest first — the only order this page computes. Each row carries the record's own words; nothing here is retyped by us.</p>"
+      + '<p class="small" style="opacity:0.9;">Showing ' + shown.length + " of the retrieved records below, newest first by publication date. Each row carries the record's own words; nothing here is retyped by us.</p>"
       + shown.map((r, i) => card(r, i + 1)).join("");
 
-    $("status").textContent = "Done — " + s.n.toLocaleString() + " record" + (s.n === 1 ? "" : "s") + " read, " + s.dated + " with both dates, median " + d(s.median) + " from start to publication." + (complete ? "" : " (The page stopped at its own three-page limit and did not read them all.)");
+    $("status").textContent = "Done — " + s.n.toLocaleString() + " record" + (s.n === 1 ? "" : "s") + " read, " + s.dated + " with both dates, median " + d(s.median) + " from start to publication." + (complete ? "" : " (Not every matching record was read.)");
     showQuery(urls);
   } catch (e) {
     $("status").textContent = "Something failed: " + e.message + " — public APIs are occasionally slow, rate-limited or down. Try again, or open one of the queries below directly.";
