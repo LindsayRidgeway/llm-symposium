@@ -325,8 +325,10 @@ def previous(now: dt.datetime) -> tuple[dict | None, str]:
 
 
 # Added 2026-10-25 with the D letter: above this many finished-but-unread items the reading quota is
-# the binding problem, and the daily check says so instead of passing on the queue alone.
-PILE_TARGET = 100
+# the binding problem, and the daily check says so instead of passing on the queue alone. The number
+# and the quota rule now live in item_ledger, where every wake reads them; this is an alias, not a
+# second copy (2026-10-29).
+PILE_TARGET = il.PILE_TARGET
 
 
 def verdict(now_m: dict, prev: dict | None, label: str = "yesterday") -> tuple[bool, list[str]]:
@@ -337,8 +339,14 @@ def verdict(now_m: dict, prev: dict | None, label: str = "yesterday") -> tuple[b
     was measuring the small pile and reporting it as the whole. So the pile now has its own
     condition, and it is the one printed first: **the finished-but-unread pile must be under
     PILE_TARGET, or must have shrunk since the last measurement with something actually read.**
-    A pile that is merely known is not progress; the wake block states a quota of two reads per
-    wake for exactly this reason, and this line is how the quota becomes visible when it is ignored.
+    A pile that is merely known is not progress. The quota — two reads a wake while the pile is
+    over the target — is printed by `item_ledger.py --reading-queue <name>`, which is the command
+    every wake opens with; this line is only how the pile becomes visible when nothing reads.
+
+    It says what it counted and stops there. Its failure text of 10-25 to 10-29 asserted a cause
+    ("the quota is being ignored") that it had never measured, and the cause was false: no wake
+    had ever been told a number. An instrument that names its own guess as the finding is the same
+    defect as the one this file exists to catch.
     """
     reasons = []
     queue_ok = now_m["queue"] <= max(now_m["arrivals_24h"], 1)
@@ -348,8 +356,19 @@ def verdict(now_m: dict, prev: dict | None, label: str = "yesterday") -> tuple[b
     if not pile_ok and prev and prev.get("pile") is not None:
         pile_ok = pile < prev["pile"] and read > 0
     if not pile_ok:
-        reasons.append(f"{pile} finished item(s) nobody has read ({read} read in 24h) and the pile "
-                       f"is not shrinking — the reading quota in the wake block is being ignored")
+        # 2026-10-29 (Desi): this line used to end "...the reading quota in the wake block is being
+        # ignored" — a cause it had not measured, and the cause was wrong: no wake carried the
+        # quota. It now prints only what it counted, plus where the quota is printed.
+        was = ""
+        moved = ""
+        if prev and prev.get("pile") is not None:
+            was = f" ({label} {prev['pile']})"
+            delta = pile - prev["pile"]
+            moved = f", unchanged on {label}" if delta == 0 else f", {delta:+d} on {label}"
+        reasons.append(f"{pile} finished item(s) nobody has read{was}{moved}; "
+                       f"{read} were read in 24h against {now_m['arrivals_24h']} filed. "
+                       f"The quota is {il.quota(pile)} read(s) per wake — "
+                       f"`item_ledger.py --reading-queue <name>` prints it.")
     if queue_ok:
         reasons.append("the queue is no bigger than one day of arrivals")
     else:
@@ -392,8 +411,9 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
     if repairs.get("reconciled") or repairs.get("paths"):
         did.append(f"closed {repairs['reconciled'] + repairs['paths']} landed item(s)")
     lines.append("Repaired: " + ("; ".join(did) if did else "nothing needed repairing"))
-    lines.append(("PASS" if passes else "FAIL") + " — " + reasons[0] +
-                 ("" if passes else ". The mechanism still needs changing, not the instruction."))
+    lines.append(("PASS" if passes else "FAIL") + " — " + reasons[0].rstrip(".")
+                 + ("" if passes else ". A quota is a mechanism only where the wake reads it — "
+                                      "the reading queue prints the number itself since 10-29."))
     return "\n".join(lines)
 
 

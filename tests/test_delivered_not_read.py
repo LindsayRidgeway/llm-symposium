@@ -115,5 +115,66 @@ class Routing(unittest.TestCase):
             self.assertEqual(il.load(path)["x"]["reviewer"], "tarik")
 
 
+class Quota(unittest.TestCase):
+    """2026-10-29: the quota was written on 10-25 into scripts/wake_review_queue.py — a block that
+    prints only when a person runs it by hand, which nothing does. So the number reached no wake,
+    and ledger_watch.py called the silence "the quota being ignored". These tests exist so the
+    number cannot go unreachable again: it is printed by the command the wake opens with."""
+
+    def test_two_reads_while_the_pile_is_over_the_target(self):
+        self.assertEqual(il.quota(il.PILE_TARGET + 1), 2)
+        self.assertEqual(il.quota(10_000), 2)
+
+    def test_one_read_once_the_pile_is_under_the_target(self):
+        self.assertEqual(il.quota(il.PILE_TARGET), 1)
+        self.assertEqual(il.quota(0), 1)
+
+    def test_the_reading_queue_command_prints_the_quota(self):
+        """The whole point: the number appears where a wake actually looks, not in a helper."""
+        import contextlib
+        import io
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "items.jsonl"
+            il.append([row(f"x{i}", state="accomplished", reviewer="auto:land",
+                           reason="landed on main (lander's test gate passed)") for i in range(3)],
+                      path)
+            il.name_unread(path=path, by="collect")
+            out = io.StringIO()
+            real_queue = il.reading_queue
+            argv = sys.argv[:]
+
+            def on_the_temp_ledger(path_=None, who=""):   # defaults bind the real LEDGER at def time
+                return real_queue(path_ or path, who=who)
+
+            try:
+                il.reading_queue = on_the_temp_ledger
+                sys.argv = ["item_ledger.py", "--reading-queue", "dmitri"]
+                with contextlib.redirect_stdout(out):
+                    il._cli()
+            finally:
+                il.reading_queue = real_queue
+                sys.argv = argv
+            text = out.getvalue()
+            self.assertIn("quota", text)
+            self.assertIn("read 1", text)          # pile is 3, under the target
+            self.assertIn("never-read item(s) carry dmitri", text)
+
+    def test_the_failure_line_reports_the_measurement_not_a_guess(self):
+        """ledger_watch's reason must name what it counted. It cannot know why nobody read."""
+        sys.path.insert(0, str(REPO / "scripts"))
+        import ledger_watch as lw
+        now = {"queue": 12, "arrivals_24h": 27, "pile": 201, "pile_read_24h": 10,
+               "model_decisions_24h": 12}
+        passes, reasons = lw.verdict(now, {"queue": 12, "pile": 195})
+        self.assertFalse(passes)
+        first = reasons[0]
+        self.assertIn("201", first)
+        self.assertIn("195", first)          # what it was, not just what it is
+        self.assertIn("10 were read in 24h", first)
+        self.assertIn("quota is 2", first)   # and where the number comes from
+        self.assertNotIn("being ignored", first)   # the guess that was wrong
+        self.assertNotIn("wake block", first)      # the place that never carried it
+
+
 if __name__ == "__main__":
     unittest.main()

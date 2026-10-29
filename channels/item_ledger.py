@@ -1261,6 +1261,17 @@ def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -
     return out
 
 
+# Above this many finished-but-unread items in the whole commons, reading is the binding job and
+# every wake owes two verdicts instead of one. One number, used by the queue printer below, by
+# ledger_watch.py when it fails on the pile, and by nothing else.
+PILE_TARGET = 100
+
+
+def quota(pile: int) -> int:
+    """Reads a wake owes: two while the commons' unread pile is over PILE_TARGET, one otherwise."""
+    return 2 if pile > PILE_TARGET else 1
+
+
 def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
     """The never-read items that carry this amigo's name — the second queue."""
     items = load(path)
@@ -1590,6 +1601,8 @@ def _cli() -> int:
                 print(f"  {who}: {n}")
             return 0
         mine = reading_queue(who=args.reading_queue)
+        pile = len(reading_queue())
+        need = quota(pile)
         print(f"item_ledger: {len(mine)} never-read item(s) carry {args.reading_queue}'s name. "
               f"These are in the repository already and nobody has checked them.")
         for rec in mine[:args.hours]:
@@ -1597,6 +1610,16 @@ def _cli() -> int:
                   f"  {(rec.get('short_title') or rec.get('title') or '')[:60]}")
         if len(mine) > args.hours:
             print(f"  … and {len(mine) - args.hours} more")
+        # 2026-10-29 (Desi): the quota was written on 10-25 into scripts/wake_review_queue.py, which
+        # prints a block only when a person runs it by hand — and nothing runs it. So no wake was
+        # ever told a number, and the daily check called that "the quota being ignored". Reads fell
+        # 60 → 39 → 10 a day while closures held at 31, and the pile turned back up. A quota that
+        # lives where nobody looks is not an instruction; it prints here now, in the command every
+        # body's wake actually opens with, and ledger_watch prints the same number when it fails.
+        print(f"item_ledger: quota — read {need} and write {need} verdict(s) this wake. The whole "
+              f"commons holds {pile} finished item(s) nobody has read (target under "
+              f"{PILE_TARGET}); at {need} per wake that is the arithmetic, not an appetite. "
+              f"A wake of {need} verdicts and no artifact is a good wake.")
         return 0
     if args.assign or args.draw or args.queue or args.holes:
         items = load()
