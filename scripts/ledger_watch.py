@@ -290,6 +290,82 @@ def filed_and_reconciled(apply: bool = True) -> dict:
     return {"collected": collected, "reconciled": reconciled, "paths": paths}
 
 
+# --------------------------------------------------------------------------- the weekly whole-repo review
+#
+# Added 2026-10-29, after the human noticed that discussions/claude-review.md, openai-review.md,
+# gemini-review.md and deepseek-review.md had not changed since 2026-09-07..09-24. He was right, and
+# nothing had replaced them: the ledger reviews one item at a time, and a queue of items cannot see
+# a shape. It cannot notice that 291 of 414 items filed since 10-15 are about the commons' own
+# machinery, because no single item is wrong. That observation was only possible by looking at the
+# whole record at once — and it was the most useful thing anybody measured this week.
+#
+# So the review is an item now: filed here, once a week, named by the same draw as any other work,
+# with a brief and a demanded output path. If nobody reads it, it shows up as a D. If somebody
+# reads it, it closes. It is routed rather than remembered.
+WHOLE_REVIEW_DAYS = 7
+WHOLE_REVIEW_PREFIX = "whole-repo-review-"
+WHOLE_REVIEW_BRIEF = (
+    "Look at the whole commons, not at the queue. Three answers, and 'none' is an allowed answer "
+    "only if you say why: (1) what is structurally broken — a mechanism that cannot do what it "
+    "claims; (2) what is missing — work no queue is shaped to ask for; (3) what should STOP — a "
+    "category of activity that looks like work and is not. Write it to the path this item names. "
+    "Do not restate the ledger's counts: those are already measured, and a summary is not a review."
+)
+
+
+def whole_review_due(items: dict[str, dict], now: dt.datetime) -> str:
+    """'' if a whole-repo review is open or recent, else the date of the last one ('never')."""
+    rows = [r for r in items.values() if str(r.get("id", "")).startswith(WHOLE_REVIEW_PREFIX)]
+    if any(r.get("state") is None for r in rows):
+        return ""
+    newest = max((r.get("filed_utc") or "" for r in rows), default="")
+    if not newest:
+        return "never"
+    try:
+        when = dt.datetime.strptime(newest[:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=dt.timezone.utc)
+    except ValueError:
+        return "never"
+    return "" if (now - when) < dt.timedelta(days=WHOLE_REVIEW_DAYS) else newest[:10]
+
+
+def file_whole_repo_review(now: dt.datetime | None = None, apply: bool = True,
+                           path: Path | None = None) -> str:
+    """File the weekly whole-repository review as a waiting item and name a reader for it."""
+    now = now or utcnow()
+    path = path or il.LEDGER
+    items = il.load(path)
+    due = whole_review_due(items, now)
+    if not due:
+        return ""
+    day = iso(now)[:10]
+    item_id = WHOLE_REVIEW_PREFIX + day
+    doc = f"discussions/{day}-whole-repo-review.md"
+    rec = {
+        "id": item_id,
+        "amigo": "commons",              # not a body, so the draw can name any of the five
+        "scope": "internal",
+        "source": "scheduled",
+        "filed_utc": iso(now),
+        "title": "Whole-repository review — structure, gaps, and what should stop",
+        "brief": WHOLE_REVIEW_BRIEF,
+        "paths": [doc],
+        "evidence": ("filed by scripts/ledger_watch.py: no whole-repository review since "
+                     + (due if due == "never" else due)),
+        "state": None, "state_utc": None, "reviewer": None, "reason": None,
+    }
+    note = f"filed the weekly whole-repository review as {item_id} (last one: {due})"
+    if not apply:
+        return note + " [would file]"
+    il.append([rec], path)
+    try:
+        named = il.draw(path=path, by="ledger_watch")
+        who = next((r.get("assigned_to") for r in named if r.get("id") == item_id), None)
+        note += f"; named to {who}" if who else "; named to nobody — it is a hole until a draw runs"
+    except (OSError, ValueError, KeyError) as exc:
+        note += f"; WARNING not named ({type(exc).__name__}: {exc})"
+    return note
+
+
 def _last_int(text: str, word: str) -> int:
     """The last '<n> ... <word>' in a tool's output — the line means what it says, nothing more."""
     import re
@@ -410,6 +486,8 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
         did.append(f"filed {repairs['collected']} item(s) no wake had recorded")
     if repairs.get("reconciled") or repairs.get("paths"):
         did.append(f"closed {repairs['reconciled'] + repairs['paths']} landed item(s)")
+    if repairs.get("whole_review"):
+        did.append(repairs["whole_review"])
     lines.append("Repaired: " + ("; ".join(did) if did else "nothing needed repairing"))
     lines.append(("PASS" if passes else "FAIL") + " — " + reasons[0].rstrip(".")
                  + ("" if passes else ". A quota is a mechanism only where the wake reads it — "
@@ -471,6 +549,7 @@ def main() -> int:
     # how a rebase here and a landing there produced the conflicted trees of 2026-10-22.
     sync_note = ""
     recovered: list[str] = []
+    whole = ""
     counts = {"collected": 0, "reconciled": 0, "paths": 0}
     if not args.dry_run:
         with shared_checkout_lock(REPO, timeout=900) as held:
@@ -486,10 +565,12 @@ def main() -> int:
                 sync_note = sync_checkout(REPO)
                 recovered = recover_verdicts(now - dt.timedelta(days=args.days), apply=True)
                 counts = filed_and_reconciled(apply=True)
+                whole = file_whole_repo_review(now)
     else:
         recovered = [r + " [would recover]" for r in
                      recover_verdicts(now - dt.timedelta(days=args.days), apply=False)]
-    repairs = {**counts, "recovered": recovered}
+        whole = file_whole_repo_review(now, apply=False)
+    repairs = {**counts, "recovered": recovered, "whole_review": whole}
 
     # 3. measure after repairing, so the message describes the true state
     m = measure(now)

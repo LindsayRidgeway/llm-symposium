@@ -1680,6 +1680,10 @@ def _cli() -> int:
             print(f"    {_short(rec.get('short_title') or rec.get('title', '(no title)'))}")
             print(f"    yours because: {rec.get('assign_reason','?')}")
             print(f"    evidence: {rec.get('evidence','?')}")
+            if rec.get("brief"):
+                # 2026-10-29: a scheduled item (the weekly whole-repository review) carries what it
+                # asks for, not just a title, so the ask cannot be lost in an id and a date.
+                print(f"    what this asks for: {rec['brief']}")
             if rec.get("paths"):
                 print(f"    paths: {', '.join(rec['paths'][:6])}")
         print("\nEvery exit leaves W into an existing queue, and no exit goes nowhere:")

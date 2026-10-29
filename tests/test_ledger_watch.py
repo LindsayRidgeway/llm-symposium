@@ -5,6 +5,7 @@ in production: which verdict to believe when an item was reviewed twice, and how
 that carried a verdict from one that carried only prose.
 """
 
+import datetime as dt
 import importlib.util
 import json
 import subprocess
@@ -15,6 +16,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "channels"))
+
+import item_ledger as il  # noqa: E402
 
 spec = importlib.util.spec_from_file_location("ledger_watch", REPO / "scripts" / "ledger_watch.py")
 lw = importlib.util.module_from_spec(spec)
@@ -270,6 +273,61 @@ class SyncWithoutRebaseTest(unittest.TestCase):
             self.assertFalse(lw.detached(work))
             self._git(work, "checkout", "-q", "--detach", "HEAD")
             self.assertTrue(lw.detached(work))
+
+
+class WholeRepoReview(unittest.TestCase):
+    """2026-10-29: the human noticed the four discussions/*-review.md files had not changed since
+    2026-09-07..09-24, and nothing had replaced them. The ledger reviews one item at a time and a
+    queue of items cannot see a shape. So the review is now an item, filed weekly and named by the
+    ordinary draw. These tests pin the three ways that can silently stop working."""
+
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        self.path = Path(self.dir.name) / "items.jsonl"
+
+    def tearDown(self):
+        self.dir.cleanup()
+
+    def test_no_review_ever_means_due_now(self):
+        self.assertEqual(lw.whole_review_due({}, dt.datetime(2026, 10, 29, tzinfo=dt.timezone.utc)),
+                         "never")
+
+    def test_a_review_inside_the_week_is_not_due(self):
+        rows = {"whole-repo-review-2026-10-25": {"id": "whole-repo-review-2026-10-25",
+                                                 "filed_utc": "2026-10-25T08:00:00Z",
+                                                 "state": "accomplished"}}
+        self.assertEqual(lw.whole_review_due(rows, dt.datetime(2026, 10, 29, tzinfo=dt.timezone.utc)), "")
+
+    def test_an_open_review_is_never_duplicated(self):
+        rows = {"whole-repo-review-2026-09-01": {"id": "whole-repo-review-2026-09-01",
+                                                 "filed_utc": "2026-09-01T08:00:00Z",
+                                                 "state": None}}
+        self.assertEqual(lw.whole_review_due(rows, dt.datetime(2026, 10, 29, tzinfo=dt.timezone.utc)), "")
+
+    def test_a_stale_review_is_due_again(self):
+        rows = {"whole-repo-review-2026-09-01": {"id": "whole-repo-review-2026-09-01",
+                                                 "filed_utc": "2026-09-01T08:00:00Z",
+                                                 "state": "accomplished"}}
+        self.assertEqual(lw.whole_review_due(rows, dt.datetime(2026, 10, 29, tzinfo=dt.timezone.utc)),
+                         "2026-09-01")
+
+    def test_filing_it_names_a_reader_and_cannot_be_done_twice(self):
+        now = dt.datetime(2026, 10, 29, 12, 0, tzinfo=dt.timezone.utc)
+        note = lw.file_whole_repo_review(now, apply=True, path=self.path)
+        self.assertIn("whole-repo-review-2026-10-29", note)
+        rec = il.load(self.path)["whole-repo-review-2026-10-29"]
+        self.assertIsNone(rec["state"])
+        self.assertIn(rec["assigned_to"], il.AMIGOS)             # a body owns the review
+        self.assertNotIn(rec["amigo"], il.AMIGOS)                  # and no body wrote it
+        self.assertIn("discussions/2026-10-29-whole-repo-review.md", rec["paths"])
+        self.assertIn("what is structurally broken", rec["brief"])
+        self.assertEqual(lw.file_whole_repo_review(now, apply=True, path=self.path), "")
+
+    def test_dry_run_files_nothing(self):
+        now = dt.datetime(2026, 10, 29, 12, 0, tzinfo=dt.timezone.utc)
+        note = lw.file_whole_repo_review(now, apply=False, path=self.path)
+        self.assertIn("[would file]", note)
+        self.assertEqual(il.load(self.path), {})
 
 
 if __name__ == "__main__":
