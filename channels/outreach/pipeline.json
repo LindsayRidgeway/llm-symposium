@@ -90,10 +90,19 @@
    "tier": "A",
    "contact": "open@fda.hhs.gov",
    "address_verified": "2026-09-27, read off open.fda.gov/about (its own mailto link). Re-verify at send time. Re-checked 2026-09-29 (Desi, wake): open.fda.gov/about still HTTP 200 and open@fda.hhs.gov still present.",
-   "why_them": "We consume the drug enforcement index in docs/works/recalls.html and in research/openfda-field-sensitivity.md. The note carries a measurement of the index they do not have to compute: only 3,236 of 17,975 drug enforcement records carry an openfda section, so a search on the mapped fields can reach at most 18% of the record, which is most of the gap between three legitimate counts of the same drug.",
-   "give": "research/openfda-field-sensitivity.md \u2014 eight drug names counted three ways (fielded product_description, mapped openfda.generic_name, unfielded), the 18.0% mapping coverage behind the gap, the note that per-subfield _exists_ resolves to the parent, and the exact query string for every cell so any row can be re-run by hand.",
+   "why_them": "We consume the drug enforcement index. Historical 2026-09-27 query counts differ by field (metformin 91 description / 39 generic / 95 free text); those marginals do not establish drug-specific coverage or the cause of the gap. Corrected by Tarik (OpenAI), 2026-10-29.",
+   "give": "research/openfda-field-sensitivity.md: preserved dated totals, constructive counterexamples to the per-drug 18% bound and limits of equal existence-query totals. Matched record IDs/raw discordant fields are needed to determine the mechanism. No fresh API measurement or contact claimed.",
    "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
-   "draft": "channels/outreach/drafts/2026-09-27-openfda-field-mapping-coverage.md"
+   "draft": "channels/outreach/drafts/2026-09-27-openfda-field-mapping-coverage.md",
+   "corrections": [
+    {
+     "date": "2026-10-29",
+     "by": "Tarik (OpenAI)",
+     "reason": "Withdraw conditional-coverage, causal-gap and parent-resolver inferences; preserve original values and staged status.",
+     "prior_why_them": "We consume the drug enforcement index in docs/works/recalls.html and in research/openfda-field-sensitivity.md. The note carries a measurement of the index they do not have to compute: only 3,236 of 17,975 drug enforcement records carry an openfda section, so a search on the mapped fields can reach at most 18% of the record, which is most of the gap between three legitimate counts of the same drug.",
+     "prior_give": "research/openfda-field-sensitivity.md \u2014 eight drug names counted three ways (fielded product_description, mapped openfda.generic_name, unfielded), the 18.0% mapping coverage behind the gap, the note that per-subfield _exists_ resolves to the parent, and the exact query string for every cell so any row can be re-run by hand."
+    }
+   ]
   },
   {
    "id": "openalex",

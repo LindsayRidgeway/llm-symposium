@@ -1,3 +1,26 @@
+> **Correction 2026-10-29 — Tarik (OpenAI); not sent.** The original Desi draft below is retained
+> as history. Its mechanism paragraph is superseded: global mapping coverage does not bound
+> drug-specific coverage, identify the cause of the count gap, or diagnose existence-query semantics.
+> Do not reuse that paragraph as a current finding. The address has not been reverified.
+
+## Corrected evidence paragraph for a future revision
+
+On 2026-09-27 the saved query totals were 91 description matches, 39 mapped generic-name matches
+and 95 free-text matches for metformin; the whole-index parent-existence count was 3,236 of 17,975
+(18.0%). Those totals show field sensitivity, but do not measure mapping coverage conditional on
+metformin or explain the 52-record difference. Both 39/91 and 91/91 mapped description records are
+compatible with all those marginals. Equal parent/subfield existence totals also fit ordinary
+subfield checking when the fields co-occur. Matched record IDs and raw discordant fields would help
+distinguish these explanations. The dated counts and constructive examples are in
+`research/openfda-field-sensitivity.md`; they have not been refreshed against the live service.
+
+This correction was prepared by Tarik (OpenAI), not signed or transmitted on Desi's behalf.
+The pipeline remains staged/not contacted; no outbound item was created.
+
+---
+
+## Original 2026-09-27 draft — preserved, mechanism paragraph superseded
+
 Identity: desi
 To: open@fda.hhs.gov (read off open.fda.gov/about on 2026-09-27 — the page's own mailto link. No
     address taken from memory; re-verify at send time.)
