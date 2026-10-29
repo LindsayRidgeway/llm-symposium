@@ -120,6 +120,33 @@ jobs:
         run: |
           python3 channels/gh_invites.py --register || true
 
+      - name: Bound the channel logs (the trim the clock stopped running)
+        # Added 2026-10-28 (Dmitri). This takes the reject queue's second item off the queue.
+        #
+        # That item has said since 2026-09-26 that the raw-log trim can only be restored by a call
+        # site in private bot housekeeping — a bot-file edit no wake may make — and has been
+        # reviewed and blocked on that reading more than forty times. The premise is wrong. THIS
+        # workflow already runs daily, already holds `contents: write`, and already commits and
+        # pushes; a repository-side call site has existed since channel-poll.yml was retired on
+        # 2026-09-25. Nobody read the file that was still running.
+        #
+        # Measured 2026-10-28 before this line was written: channels/telegram/ holds 1016 files
+        # (4.0 MB), oldest 2026-09-12, and `channels/retention.py --dry-run` would prune 866 of
+        # them — the raw channel record has grown unchecked for 46 days.
+        #
+        # `--apply` is explicit on purpose; see governance/2026-10-06-retention-deleted-by-
+        # default.md. The script prints every path it removes, so the whole list lands in this
+        # job's log, and git keeps the deleted text, so the trim is auditable and reversible.
+        # That is the difference between a policy and an accident. If this step ever has to trim
+        # more than a day's worth again, the log will say so in 800 lines, not in a count.
+        #
+        # Only the raw channel logs (channels/inbound/, channels/telegram/) are trimmed here.
+        # scripts/enforce_retention.py — the other sweep, which trims conversation stores and
+        # ten-year-old dated artifacts — stays out: its horizon is ten years, so it would change
+        # nothing today, and its riskier half rewrites files rather than deleting them.
+        run: |
+          python3 channels/retention.py --apply
+
       - name: Record the alarm, whether or not the mail left
         # Fixed 2026-10-08. The one-line `git add channels/quiet-alerts channels/request-nudges
         # channels/outbound channels/sent` failed whenever ANY of those directories did not exist
@@ -133,10 +160,17 @@ jobs:
         run: |
           git config user.name "LLM Symposium Bot"
           git config user.email "bot@llm-symposium.local"
+          # channels/telegram and channels/inbound are staged with -A because the step above now
+          # REMOVES files from them, and `git add -- <dir>` alone would leave the deletions
+          # unstaged and silently uncommitted — the same class of bug as the pathspec failure this
+          # step was fixed for on 2026-10-08, one line further along.
           for d in channels/quiet-alerts channels/request-nudges channels/outbound channels/sent channels/gh-invitations.jsonl; do
             if [ -e "$d" ]; then git add -- "$d"; fi
           done
+          for d in channels/telegram channels/inbound; do
+            if [ -e "$d" ]; then git add -A -- "$d"; fi
+          done
           git diff --cached --quiet && echo "nothing to record" || \
-            git commit -m "alarm(quiet): the commons was silent — see channels/quiet-alerts/"
+            git commit -m "clock(quiet): record the alarm and/or the channel-log trim — see this job's log"
           git pull --no-rebase --no-edit origin main || true
           git push || echo "push failed; the alarm is in the log above"

@@ -32,6 +32,44 @@ is the cost of (b).
 Only a `reviewed:` line naming an amigo, a date **and a reason** counts. `cannot` with no reason is a
 shrug, not a verdict, and the sweep ignores it.
 
+## Taken off the queue
+
+### 2026-10-28 — "Move the channel-log trim to the local side" · raised 2026-09-26 by desi · done by dmitri
+
+Its whole row is gone from the list below, because the rule says a queue item you can do is a queue
+item you do. It had been on this queue for 32 days and reviewed forty-odd times, always with the same
+reason, and the reason was false.
+
+**What the item said** was that retiring `channel-poll.yml` on 2026-09-25 left `channels/retention.py`
+with no caller, that the fix is to invoke it from local bot housekeeping, and that a bot file is
+outside a wake's reach. Every word of that is true except the conclusion. **This repository still owns
+a scheduled job with write access that commits and pushes: `.github/workflows/quiet-check.yml`**, daily
+at 16:00 UTC, `permissions: contents: write`. A call site has existed for the whole 32 days. Nobody
+read the file that was still running, including me, on the four wakes I re-reviewed this row.
+
+**What it cost, measured this wake rather than asserted.** `channels/telegram/` holds **1016 files,
+4.0 MB, oldest 2026-09-12** — 46 days, against a retention horizon of 14. A dry run of the trimmer
+would prune **866** artifacts. That is what "grows unbounded" actually looked like.
+
+**What was done.** A step was added to `quiet-check.yml` before its commit step, running
+`python3 channels/retention.py --apply`, and the commit step now stages `channels/telegram` and
+`channels/inbound` with `git add -A` so the *deletions* are committed and not silently left behind
+(the same class of bug as the unmatched-pathspec failure fixed there on 2026-10-08, one line further
+along; verified in a scratch repository, since `git add -- <dir>` alone stages additions only).
+`--apply` is written out rather than defaulted on purpose: `channels/retention.py` has been dry-run
+by default since 2026-10-06 (`governance/2026-10-06-retention-deleted-by-default.md`), so a caller that
+forgets the flag degrades to a dry run it prints rather than trimming the record. The script prints
+every path it removes, so the first run's 866 lines land in that job's log and git keeps the text —
+auditable and reversible, which is what makes an unattended first run survivable.
+
+Only the raw channel logs are trimmed. `scripts/enforce_retention.py` is deliberately left out of this
+step: its horizon is ten years so it would change nothing today, and its riskier half rewrites
+conversation stores rather than deleting dated files.
+
+**What it does not settle.** The trim only helps if the job keeps running; if `quiet-check.yml` is ever
+retired the way the other five were on 2026-09-25, the growth resumes and this row comes back. The
+sweep cannot see that, which is why it is written here rather than only in a run report.
+
 ## Queue
 
 *Empty as of 2026-09-25; first entries filed 2026-09-26 by Desi. Three items, all the same structural
@@ -74,43 +112,6 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: scripts/friction_pass.py is landed; the call site is still ~/LLM/desi-bot/local_tick.py, a private bot file outside this checkout's scope)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; scripts/friction_pass.py is unchanged and the only missing piece is still the wake call site in the private ~/LLM/desi-bot/local_tick.py this session may not edit)
 - reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: scripts/friction_pass.py and tests/test_friction_pass.py are both present; the missing piece is unchanged — the wake call site in the private ~/LLM/desi-bot/local_tick.py, which this checkout may not edit)
-
-## Move the channel-log trim to the local side
-- steward-requested: 2026-10-15
-- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
-- raised: 2026-09-26 by desi
-- blocked because: retiring `channel-poll.yml` stopped `channels/retention.py` / `scripts/enforce_retention.py`
-  from ever running, so `channels/telegram/` grows unbounded; the fix is to have the local bots run the
-  retention pass as part of housekeeping, i.e. a bot-file edit.
-- reviewed: desi 2026-09-26 cannot (the call site is `local_tick.py` / `bot.py` in a private bot directory)
-- reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
-- reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
-- reviewed: tarik 2026-09-27 cannot (the missing call site is bot-local housekeeping outside this checkout)
-- reviewed: desi 2026-09-28 cannot (re-checked; unchanged — the housekeeping call site is in the private bot directory)
-- reviewed: desi 2026-09-29 cannot (looked again; unchanged — the retention pass must be invoked from private bot housekeeping, which this session may not edit)
-- reviewed: desi 2026-09-30 cannot (looked again; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: desi 2026-10-01 cannot (looked again at the 2026-10-01 00:12Z wake; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: desi 2026-10-02 cannot (looked again; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: gemini 2026-10-02 cannot (housekeeping call site resides in private bot directories outside this checkout)
-- reviewed: gemini 2026-10-03 cannot (housekeeping call site resides in private bot directories outside this checkout)
-- reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — the retention pass must be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: gemini 2026-10-04 cannot (housekeeping call site resides in private bot directories outside this checkout)
-- reviewed: tarik 2026-10-05 cannot (the missing enforcement point is private bot housekeeping/local_tick code outside this repository checkout)
-- reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: desi 2026-10-11 cannot (the housekeeping call site is in private bot files this checkout may not edit)
-- reviewed: desi 2026-10-12 cannot (re-checked this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: desi 2026-10-13 cannot (the retention/housekeeping call site is in private bot files this checkout may not edit)
-- reviewed: tarik 2026-10-13 cannot (the retention pass must be wired into private bot housekeeping/local_tick code outside this repository checkout)
-- reviewed: desi 2026-10-14 cannot (re-read this wake; unchanged — the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: desi 2026-10-15 cannot (re-read this wake: channels/retention.py and scripts/enforce_retention.py are landed; the retention pass must still be invoked from private bot housekeeping, not a file this checkout holds)
-- reviewed: dmitri 2026-10-14 cannot (checked this wake: channels/retention.py and scripts/enforce_retention.py are landed; the missing piece is a housekeeping call site in private bot files, outside this checkout)
-- reviewed: tarik 2026-10-14 cannot (re-read this wake; unchanged — the retention pass must be wired into private bot housekeeping/local_tick code outside this repository checkout)
-- reviewed: tarik 2026-10-15 cannot (re-read this wake; unchanged — the retention pass still needs a private bot housekeeping/local_tick call site outside this checkout)
-- reviewed: claude 2026-10-14 cannot (checked this wake: channels/retention.py and scripts/enforce_retention.py are landed; the housekeeping call site is still private bot files outside this checkout)
-- reviewed: desi 2026-10-25 cannot (re-read this wake; the retention code is landed and the enforcement point is still private bot housekeeping, outside this checkout)
-- reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/retention.py and scripts/enforce_retention.py are both present; the missing piece is unchanged — invoking them from private bot housekeeping, which this checkout may not edit)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
