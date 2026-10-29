@@ -1,0 +1,142 @@
+{
+  "artifact": "docs/works/ticks.html",
+  "title": "The Tweezers and the Tick \u2014 removing an attached tick, and when to get care",
+  "measured_utc": "2026-10-29T01:50:00Z",
+  "measured_by": "Dmitri (DeepSeek), unattended wake, private checkout",
+  "method": "Each listed page was fetched once from this session with curl and a plain user-agent string. The HTTP status below is what this session actually received, not what a browser would receive. Every string under `verbatim` is a substring of the response body, copied as it stands; nothing is paraphrased and nothing is drawn from memory. Where a status is not 200 the page is recorded as UNREACHABLE and no figure is drawn from it. No page below was fetched twice, so drift after this date is not measured here.",
+  "why_this_file_exists": "docs/works/ticks.html tells a person what to do in the ten minutes after finding a tick on themselves or a child, and one of the commonest pieces of folk advice (smother it, burn it, pull it out with fingers) is actively harmful. That is a page whose errors hurt at the moment of use, so every instruction on it has to be traceable to an authority's own words, and every point where the authorities differ has to be shown rather than smoothed.",
+  "limits": [
+    "This is a record of what three authorities' own pages say, read on one day. It is not a diagnosis and it is not a substitute for a clinician looking at the bite.",
+    "The three reachable authorities are UK, New York State and British Columbia. None of them is a global standard, and the tick species and the diseases they carry differ by region. A local health authority outranks every line below.",
+    "Nothing here is about prophylactic antibiotics after a bite. No fetched page addressed it, so the page states that plainly rather than importing a practice from memory.",
+    "The U.S. Centers for Disease Control and Prevention, which is the authority most people would expect on this page, could not be read: it returns HTTP 403 to this session's fetch, and no archived copy of the removal page could be located from this session (see `sources`, id `cdc`)."
+  ],
+  "sources": [
+    {
+      "id": "nhs",
+      "authority": "National Health Service (UK)",
+      "page": "Lyme disease",
+      "url": "https://www.nhs.uk/conditions/lyme-disease/",
+      "http_status": 200,
+      "read_utc": "2026-10-29T01:44:00Z",
+      "used_by_page": true,
+      "verbatim": [
+        "To remove a tick safely: Use fine-tipped tweezers or a tick-removal tool. You can buy these from some pharmacies, vets and pet shops. Grasp the tick as close to the skin as possible. Slowly pull upwards, taking care not to squeeze or crush the tick. Dispose of it when you have removed it. Clean the bite with antiseptic or soap and water.",
+        "The chance of getting ill is low. You do not need to do anything else unless you notice a rash or become unwell.",
+        "Not all ticks in England carry the bacteria that causes Lyme disease. But it's still important to be aware of ticks and to safely remove them as soon as possible, just in case.",
+        "The rash can appear up to 3 months after being bitten by an infected tick, but usually appears within 1 to 4 weeks.",
+        "The rash can have a darker or lighter area in the centre and might gradually spread. It's not usually hot or itchy.",
+        "It can be harder to see the rash on brown and black skin and it may look like a bruise.",
+        "Tick bites are not always painful. You may not notice a tick unless you see it on your skin.",
+        "Ask for an urgent GP appointment or get help from NHS 111 if: You've been bitten by a tick or visited an area in the past 3 months where infected ticks could be, and you either: feel unwell with flu-like symptoms \u2013 such as feeling hot or cold, feeling shivery, headaches or aching muscles have a round or oval shape rash",
+        "Some websites offer tests and treatment for Lyme disease that may not be supported by scientific evidence. Speak to a doctor for advice before buying tests or treatment online.",
+        "2 types of blood test are available to help confirm or rule out Lyme disease. But these tests are not always accurate in the early stages of the disease."
+      ]
+    },
+    {
+      "id": "nysdoh",
+      "authority": "New York State Department of Health",
+      "page": "Lyme Disease (Tick-borne borreliosis, Lyme arthritis) Fact Sheet",
+      "url": "https://www.health.ny.gov/diseases/communicable/lyme/fact_sheet.htm",
+      "http_status": 200,
+      "read_utc": "2026-10-29T01:46:00Z",
+      "content_current_as_of": "Last Reviewed: July 2017",
+      "used_by_page": true,
+      "verbatim": [
+        "Grasp the mouthparts with tweezers as close as possible to the attachment (skin) site. Be careful not to squeeze, crush or puncture the body of the tick, which may contain infectious fluids. Pull firmly and steadily upward to remove the tick. After removing the tick, thoroughly disinfect the bite site and wash hands.",
+        "See or call a doctor if there are concerns about incomplete tick removal.",
+        "Do not attempt to remove ticks by using petroleum jelly, lit cigarettes or other home remedies because these may actually increase the chance of contracting a tick-borne disease.",
+        "In general, the tick must be attached for 36 to 48 hours or more.",
+        "Ticks can be active any time the temperature is above 45\u00b0 F.",
+        "Early symptoms usually appear within 3 to 30 days after the bite of an infected tick.",
+        "In 60-80 percent of cases, a circular bull's eye rash about two inches in diameter, called erythema migrans, appears and expands around or near the site of the tick bite."
+      ]
+    },
+    {
+      "id": "healthlinkbc",
+      "authority": "HealthLink BC (Provincial Health Services Authority, British Columbia)",
+      "page": "Tick Bites",
+      "url": "https://www.healthlinkbc.ca/healthwise/tick-bites",
+      "http_status": 200,
+      "read_utc": "2026-10-29T01:46:00Z",
+      "used_by_page": true,
+      "verbatim": [
+        "Use fine-tipped tweezers to remove a tick. If you don't have tweezers, put on gloves or cover your hands with tissue paper, and then use your fingers. Don't handle the tick with bare hands.",
+        "After you remove the tick, wash your hands really well with soap and water.",
+        "Wash the area of the tick bite with soap and a lot of warm, clean water.",
+        "If you need to cover the area, you can apply a thin layer of antiseptic cream, lightly to the wound.",
+        "try to smother an attached tick with petroleum jelly, nail polish, gasoline, or rubbing alcohol. This may increase your risk of infection.",
+        "Save the tick in a container with a tight fitting top",
+        "The rash could be anywhere on the body. It may or may not be near the bite or look like a bull's eye rash.",
+        "Symptoms may begin from 1 day to 6 weeks after the tick bite.",
+        "In most cases, removing the tick, washing the site of the bite, and watching for signs of illness are all that's needed."
+      ],
+      "verbatim_note": "The petroleum-jelly and 'save the tick' strings above are fragments of longer list items on that page; they are quoted as fragments, not as complete sentences."
+    },
+    {
+      "id": "cdc",
+      "authority": "U.S. Centers for Disease Control and Prevention",
+      "page": "Tick removal (expected page: cdc.gov/ticks/removing-a-tick.html)",
+      "url": "https://www.cdc.gov/ticks/removing-a-tick.html",
+      "http_status": 403,
+      "read_utc": "2026-10-29T01:43:00Z",
+      "used_by_page": false,
+      "verbatim": [],
+      "note": "UNREACHABLE to this session: the live page returns 403 to a plain curl user-agent, and both the Wayback availability API and the CDX index returned nothing for this URL on this date, so no archived copy could be cited. No figure or instruction on the page is drawn from CDC. This matches the CDC fetch failure already recorded in agenda item 16 for the boil-water page, so the failure is systematic rather than a transient one."
+    }
+  ],
+  "thresholds": [
+    {
+      "what": "Attachment time above which a tick is generally considered able to transmit Lyme bacteria",
+      "value": "36 to 48 hours or more",
+      "source": "nysdoh",
+      "why_it_matters": "It is the only sourced number for the question 'how much does speed matter', and it is why the page tells the reader to remove first and gather supplies second."
+    },
+    {
+      "what": "Usual window in which an early rash appears",
+      "value": "3 to 30 days (nysdoh); usually 1 to 4 weeks, up to 3 months (nhs); symptoms 1 day to 6 weeks (healthlinkbc)",
+      "source": "see discrepancies",
+      "why_it_matters": "A single 'watch for 30 days' figure would be wrong under two of the three authorities; the page gives the widest sourced window and names each."
+    },
+    {
+      "what": "Air temperature above which ticks can be active",
+      "value": "above 45\u00b0 F / 7\u00b0 C",
+      "source": "nysdoh",
+      "why_it_matters": "It closes the common assumption that ticks are a summer problem only, which matters in late autumn."
+    }
+  ],
+  "discrepancies": [
+    {
+      "question": "What should go on the bite after the tick is out?",
+      "nhs": "antiseptic or soap and water",
+      "nysdoh": "thoroughly disinfect the bite site and wash hands",
+      "healthlinkbc": "soap and a lot of warm, clean water; a thin layer of antiseptic cream only if you need to cover it",
+      "treatment": "Reported, not smoothed. All three converge on washing the site; the antiseptic step is explicit in two and optional in one, so the page says wash first and treats antiseptic as optional rather than required."
+    },
+    {
+      "question": "What if there are no tweezers?",
+      "nhs": "use a tick-removal tool, which can be bought from pharmacies, vets and pet shops",
+      "nysdoh": "tweezers (no fallback given)",
+      "healthlinkbc": "gloves, or fingers covered with tissue paper \u2014 never bare hands",
+      "treatment": "Reported, not smoothed. HealthLink BC is the only authority that gives a household fallback, so the page carries that one, with its condition attached, and says plainly that no authority permits bare fingers."
+    },
+    {
+      "question": "What should be done with the tick afterwards?",
+      "nhs": "dispose of it",
+      "nysdoh": "not addressed",
+      "healthlinkbc": "save it in a container with a tight fitting top, so it can be identified",
+      "treatment": "Reported, not smoothed. These are compatible rather than contradictory \u2014 the page says keep it if keeping it costs no delay, because removal comes first and identification can only help later. Neither authority says keeping the tick changes treatment."
+    },
+    {
+      "question": "How worried should a person be after a clean removal?",
+      "nhs": "the chance of getting ill is low; nothing else is needed unless a rash or illness appears",
+      "nysdoh": "see or call a doctor if there are concerns about incomplete tick removal",
+      "healthlinkbc": "removing the tick, washing the site and watching for signs of illness are all that is usually needed",
+      "treatment": "Consistent, and reported as such: all three say watch and wait, none says go to a doctor for every bite. The page's 'when to get care' list is therefore built from the NHS symptom criteria, which is the only one of the three that states them as a rule."
+    },
+    {
+      "question": "Should antibiotics be taken after a bite, before any symptoms?",
+      "treatment": "NOT COVERED. No fetched page addresses prophylaxis, and the practice differs between countries. The page states that it is not covered here and sends the reader to a clinician, rather than importing an answer from memory."
+    }
+  ]
+}

@@ -398,3 +398,18 @@ They are one decision — may a wake edit `local_tick.py`/`bot.py` when the chan
 something already landed and tested — asked four times, now 41 days old. Item 4 is a second decision
 (a checkout with a remote). Item 5 is a library card. Six lines, three decisions, and the queue has no
 way to say "these are three" to the person who reads texts and not repositories.*
+
+*Dmitri re-read every item on this queue at the 2026-10-29 01:50Z wake and can take none of them; this
+paragraph is the "looked and cannot" record, not work. Measured this wake rather than carried forward:
+`git remote -v` here still prints 0 lines, so the draft-pile item has nothing to fetch from;
+`scripts/friction_pass.py`, `channels/retention.py`, `channels/task_ledger.py` and
+`scripts/enforce_retention.py` are all present, so the repository half of each bot-call-site item is
+done and the missing piece is still a call site in `~/LLM/desi-bot/local_tick.py` or `bot.py`, which
+this session may not edit; agenda item 32's three records stay closed access (measured twice on record,
+not re-derived); and the sixth item — the landing gate's file-name baseline — lives in the same private
+directory. The sweep's own line is quoted above. Per-item `reviewed:` lines were written by me for all
+five surviving items at the 2026-10-27 01:43Z wake and nothing about any of them changed since, so this
+paragraph stands in place of five duplicates, for the reason measured on 10-27: 122 verdict lines
+against 5 written after the escalation. Note the queue is now five items, not six — the channel-log trim
+was taken off it on 2026-10-28 by doing it. This paragraph is not the wake's work; the wake's work was
+`docs/works/ticks.html`.*
