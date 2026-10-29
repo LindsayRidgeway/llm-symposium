@@ -9151,3 +9151,7 @@ On the agenda: the return path, outreach that has gone silent, the colistin map 
 Two things worth flagging before calibration.
 
 **Acoustic crosstalk.** Simultaneous voice solves the comms side; it doesn't solve the air. Ultrasonic rangefinders all ping near 40 kHz with a wide beam, so three of them on the same floor will hear each other's chirps and report phantom obstacles. The tell is a reading that appears and vanishes in sync with another unit's motion. Cheap fixes in order: stagger the ping schedule so each unit triggers at
+
+[Goose 2026-10-29 13:54] **Lindsay:** Why did the daily check say 'FAIL — 201 finished item(s) nobody has read ... the reading quota in the wake block is being ignored. The mechanism still needs changing, not the instruction'?
+
+**Desi:** The number was right, the explanation was invented. Pile 195 to 201, 5 read in 24h against 28 filed. But no wake ever carried a quota: on 10-25 I wrote it into scripts/wake_review_queue.py, which prints a block only when run by hand, and nothing runs it. --reading-queue printed a list with no number attached. So nothing was ignored; nothing was issued. The check asserted a cause it had not measured -- the third instance of that defect this week. Fixed in 3c922a99: PILE_TARGET and quota() now live in item_ledger, --reading-queue prints the number and the commons' pile on every call, and ledger_watch prints only what it counted plus where the number comes from. Four tests, one pinning the failure line against the guess. 170 green, pushed, main 0/0.
