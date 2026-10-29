@@ -1,0 +1,199 @@
+{
+  "run_id": "codex-20261029T080001Z-b1f736f4",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-29T08:00:01Z",
+  "finished_utc": "2026-10-29T08:09:46Z",
+  "kind": "substantive_inference_correction",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-29-0400.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-29T04:00:00-04:00",
+    "scheduled_utc": "2026-10-29T08:00:00Z",
+    "seconds_from_slot": 1,
+    "started_utc": "2026-10-29T08:00:01Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-29-0400.json",
+    "owner": "codex-20261029T080001Z-b1f736f4",
+    "commit": "018f90f3cdf3ad4a84e34f25ecfc9448fe5f605b",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed inference1second after04:00 America/New_York, not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_wake_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "60d5330698482644a792f78d09ed1940f7ccbda3"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested orientation/public artifact/commit reads and conditional writes/raw readbacks; isolated Python set/provenance checks and offline Node page validator. No live FDA/model/provider/recipient/host/messaging or credential exercise."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "initial_ledger_rows": 3447,
+    "final_ledger_rows": 3449,
+    "final_items": 815,
+    "raw_last_row_and_guarded_queues_agree": true,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ]
+  },
+  "reconciliation": [
+    "Recent repairs remain waiting for independent review and were not duplicated. All four Goose tasks completed.",
+    "Next unresolved finding20260927T120138Z-a351402d remains postponed. Fresh research/draft/pipeline/page and owner queue show unsupported conditional/causal/resolver wording still present. Corrected existing artifacts without a new outreach action."
+  ],
+  "selected_work": [
+    "Withdraw unsupported per-drug18% ceiling, causal count-gap attribution and parent-resolver diagnosis while preserving the historical measured counts and staged history."
+  ],
+  "checks": [
+    "Fresh helper executed with actual aware UTC start only; exact inferred04:00 claim created once and fresh owner verified.",
+    "Python set construction checks53 populations, mapped-in-description39..91, each preserving N17975/mapped3236/description91/generic39/free95 and relevant set containments. Endpoints39/91=42.9% and91/91=100% disprove the18% per-drug upper bound and identify nonunique explanations for the same count gap.",
+    "Computed global3236/17975=18.00278%, marginal-only intersection range0..91, and conditional inclusion-exclusion35/91=38.4615% lower bound under explicit extra containment assumptions.",
+    "Constructed3236 ordinary parent objects each containing both subfields; genuine subfield checking returns the same parent/child counts without parent fallback. Equal marginals therefore do not identify resolver semantics.",
+    "All original count-table rows and exact curl query strings retained. Original unsent Desi draft body preserved beneath a dated correction/replacement paragraph, explicitly authored by Tarik without adopting sender identity.",
+    "JSON structural comparison proves all other prospect rows/global fields and openfda status/address/draft fields unchanged. Only scientific why/give text plus dated prior-value history changes. Still staged/not contacted; no outbound item.",
+    "Existing node tests/validate_recalls_page.mjs --offline:75 checks pass; live sections skipped and no live FDA evidence claimed. Four no-index diff checks emit no whitespace diagnostics; exit1 reflects differences.",
+    "Fresh4-source/current-parent/ledger preconditions matched. Atomic expected-parent nonforce artifact publication verified against exact4 changed paths, tested raw bodies and default branch.",
+    "Codex recorder used captured real GitHub commit/default-branch evidence; compatible Tarik/Codex waiting row assigned to Desi. Fresh-SHA ledger append/raw readback preserves all preceding rows.",
+    "Queue note conditional append/raw verified; ledger-only and todo-only exact paths checked. Final raw last-row and guarded queues0/0; original postponed/new waiting states preserved."
+  ],
+  "artifact": {
+    "commit": "3b064fb554c790e6544263649e4cb8cd50f7e162",
+    "parent": "776eb401bd968a1627998935d03b83f8c7158def",
+    "paths": [
+      "research/openfda-field-sensitivity.md",
+      "channels/outreach/drafts/2026-09-27-openfda-field-mapping-coverage.md",
+      "channels/outreach/pipeline.json",
+      "docs/works/recalls.html"
+    ],
+    "source_preimages": [
+      {
+        "path": "research/openfda-field-sensitivity.md",
+        "sha": "5aedb374a8c71fd600b701b4fbffa910ce95fc57"
+      },
+      {
+        "path": "channels/outreach/drafts/2026-09-27-openfda-field-mapping-coverage.md",
+        "sha": "233452064879bbc093e70f4b77b9a1781f4be7ac"
+      },
+      {
+        "path": "channels/outreach/pipeline.json",
+        "sha": "7fbe2334635a2912aaff4e523f8e8c0e0a10b290"
+      },
+      {
+        "path": "docs/works/recalls.html",
+        "sha": "f14b2652b555d60a95a527f1562a3d7440862925"
+      }
+    ],
+    "raw_readback_verified": true,
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true
+  },
+  "independent_review": {
+    "new_item": "codex-20261029T080001Z-b1f736f4",
+    "state": null,
+    "assigned_to": "desi",
+    "self_approved": false,
+    "original_postponed_state_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "Counterexamples establish nonidentification, not the true missing-mapping fraction or actual FDA query mechanism. Extra35/91 bound is conditional on set containments not established by historical count responses.",
+    "Historical data/counted rows, endpoint semantics, CORS, recipient address and current service counts were not remeasured. Corrected draft remains unsent; no contact or reply claimed.",
+    "Offline page validation is script/DOM fixture evidence, not browser layout, hosted deployment, clinical advice, full-suite or independent approval."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "147ac8fc17d53458a06ded6050be1a3b62bef065",
+    "ledger_blob": "abeff0e28b91d1dc7be5db10dfbe7db343dc65bf",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "5b39bbd2e610f0b716280cd7a13e7ca527533c33",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw record readback, exact record path and artifact-to-main expected commit ancestry checked after creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Initial isolated workspace setup while environment starting",
+      "error": "No usable execution environment is available. Wait for an environment to become available before using this tool.",
+      "resolution": "Workspace became available and isolated Python/Node ran successfully; actual start preserved. Availability error is not an authorization denial."
+    },
+    {
+      "action": "Local pipeline literal block patch",
+      "error": "apply_patch could not match expected block",
+      "resolution": "No external write occurred. Used a scoped structured replacement of the openfda block, then compared all other rows/fields and retained original claims/status/address."
+    },
+    {
+      "action": "Draft-retention assertion",
+      "error": "Initial check expected an extra terminal newline and failed",
+      "resolution": "Corrected the fixture expectation; exact existing baseline draft body remains the suffix, and full validation passed."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer distinguish account/push identity from actual content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
