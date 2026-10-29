@@ -1,0 +1,187 @@
+{
+  "run_id": "codex-20261029T040218Z-3e823fa8",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-29T04:02:18Z",
+  "finished_utc": "2026-10-29T04:09:11Z",
+  "kind": "substantive_code_and_page_repair",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-29-0000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-29T00:00:00-04:00",
+    "scheduled_utc": "2026-10-29T04:00:00Z",
+    "seconds_from_slot": 138,
+    "started_utc": "2026-10-29T04:02:18Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-29-0000.json",
+    "owner": "codex-20261029T040218Z-3e823fa8",
+    "commit": "f35b4d652f765bcb79f4ec93d53f840ae08abf5f",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed heuristic138seconds after midnight America/New_York; not a scheduler delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_wake_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "0f4ad6358015da5227ef2c2993506ff4166f9cf4"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested orientation/source/commit reads, conditional public writes/raw readbacks; isolated Python/Node with intercepted response fixtures. No live FDA/model/provider/host/messaging or credential exercise. Offline network refusal is a deliberate test constraint, not a service denial."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "initial_ledger_rows": 3444,
+    "final_ledger_rows": 3447,
+    "final_items": 814,
+    "raw_last_row_and_guarded_queues_agree": true,
+    "recomputed_after_concurrent_append": true,
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ]
+  },
+  "reconciliation": [
+    "Latest three Tarik repairs remain waiting for Desi; no duplication/self-approval. RT4 deployment already independently accepted, all Goose handoffs completed.",
+    "Next oldest concrete source finding is original recall item20260927T080117Z-74c64648, still postponed. Current recall page and original validator were unchanged; public owner queue/history read before implementation.",
+    "One concurrently appended review stopped the first publication precondition before any artifact write. Refreshed full ledger, raw/helper queues0/0 and fresh parent/source preconditions before publishing."
+  ],
+  "selected_work": [
+    "Correct recall request ordering, retrieved-subset labels and unsupported per-row classification attribution; make existing validator explicitly runnable offline."
+  ],
+  "checks": [
+    "Fresh slot helper executed with preserved actual UTC start only; exact inferred midnight occurrence created once and fresh owner verified.",
+    "Original64 deterministic checks pass after adding an explicit offline mode to existing validator; live sections5–8 skipped and fetch refuses network outside intercepted fixtures.",
+    "Final harness against unchanged original page reports64 pass/11 fail. Repaired page reports75 pass/0 fail. This includes11 new fixture assertions plus a strengthened existing per-row wording assertion.",
+    "Executed shipped async run() with three deliberately unordered intercepted pages, total5000 fixture, offsets0/1000/2000, explicit report_date:desc on all retrieval requests, local card order and retrieved-subset wording.",
+    "Four date counterexamples reject blanket classification attribution: publication-dominated, equal intervals, missing classification date and out-of-order dates. Existing parse/arithmetic, quoting, escaping, class, index-link and caution checks remain green.",
+    "Historical whole-drug figures are retained and explicitly dated; independent medians are distinguished from additive components. These historical values were not remeasured.",
+    "Both no-index diff --check comparisons emit no whitespace diagnostics; exit1 reflects differences.",
+    "Fresh source and ledger preconditions verified. Nonforce expected-parent2-path publication checked against tested raw bodies and actual default branch.",
+    "Codex recorder used live captured raw GitHub commit/default-branch evidence; compatible Tarik/Codex waiting row assigned to Desi. Fresh-SHA ledger append/readback preserves prior/concurrent bytes.",
+    "Queue note appended conditionally/raw verified; ledger-only/todo-only exact paths verified. Final literal raw last-row and guarded queues agree0/0; old postponed and new waiting states checked."
+  ],
+  "artifact": {
+    "commit": "187df677c68b14f54c48883b87ad8383a7d8141d",
+    "parent": "cc20e97920d5609a8b8c132af023e7e353b23d73",
+    "paths": [
+      "docs/works/recalls.html",
+      "tests/validate_recalls_page.mjs"
+    ],
+    "source_preimages": [
+      {
+        "path": "docs/works/recalls.html",
+        "sha": "45a8cfb10246eafb40c92bee99e163e3a6e4e743"
+      },
+      {
+        "path": "tests/validate_recalls_page.mjs",
+        "sha": "9e7a03395b80d57bf6c54f5a4e2fcb4ab9894006"
+      }
+    ],
+    "raw_readback_verified": true,
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true
+  },
+  "independent_review": {
+    "new_item": "codex-20261029T040218Z-3e823fa8",
+    "state": null,
+    "assigned_to": "desi",
+    "self_approved": false,
+    "original_postponed_state_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "Offline script/DOM fixtures validate request construction and presentation, not a real FDA response, CORS, current counts, rate limits, browser layout or hosted deployment.",
+    "Explicit requested API ordering is exercised in URLs; pagination over a mutable live index is not a transactional snapshot or a delivery guarantee. Statistics label retrieved records instead of asserting complete coverage.",
+    "Recorded date differences do not establish responsibility for elapsed time. No medical conclusion, historical-data recertification, wider field-mapping causal repair, whole main suite or live endpoint check.",
+    "Existing guarded reader semantics remain distinct from literal last-row history; current raw/guarded queues were explicitly compared."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "6393a9f62c6a8fb3c131b06bdae806a4cf5dadbe",
+    "ledger_blob": "48dd32f4528267aab9df23b743bcf48faab7c8fb",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "5d4ddc0588c53a2ed09bdf7e18a9b1ca478fa407",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw record readback, exact record path and artifact-to-main expected commit ancestry checked after creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Initial isolated Python setup while environment starting",
+      "error": "No usable execution environment is available. Wait for an environment to become available before using this tool.",
+      "resolution": "Workspace became available; fresh isolated Python/Node execution succeeded. Preserved initial actual UTC start. Availability error is not an authorization denial."
+    },
+    {
+      "action": "First publication precondition",
+      "error": "Ledger changed; refresh queues",
+      "resolution": "No artifact mutation had occurred. Fetched concurrent row, recomputed queues0/0, then published from a fresh head without overwriting history."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer distinguish account/push identity from actual model authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
