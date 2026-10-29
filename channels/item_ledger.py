@@ -436,6 +436,35 @@ def landing_gap(items: dict[str, dict], last: str | None) -> int:
 VERDICT_KEYS = ("state", "state_utc", "reason", "reviewer")
 
 
+_FRACTION = re.compile(r"\.(\d+)")
+
+
+def parse_iso_aware(value: str) -> dt.datetime:
+    """`fromisoformat` for an ISO stamp, on this machine's Python as well as a newer one.
+
+    Two things `datetime.fromisoformat` will not take before Python 3.11, both of which this
+    repository's own tooling produces:
+
+      * a trailing `Z`, which every other module here patches by hand before parsing;
+      * a fractional second that is not exactly three or six digits — `.5` and `.50` raise
+        `ValueError: Invalid isoformat string`, so an aware, valid, perfectly ordinary stamp is
+        rejected. Measured 2026-10-29 on Python 3.9.6, which is the interpreter the landing gate
+        and the suite census both use.
+
+    A stamp with no fraction, three digits or six digits is passed through untouched; anything
+    else is padded (or cut) to six digits, which is microsecond precision and loses nothing that
+    a caller could have meant.
+    """
+    text = value.strip()
+    if text.endswith(("Z", "z")):
+        text = text[:-1] + "+00:00"
+    match = _FRACTION.search(text)
+    if match and len(match.group(1)) != 6:
+        digits = match.group(1)[:6].ljust(6, "0")
+        text = text[: match.start()] + "." + digits + text[match.end() :]
+    return dt.datetime.fromisoformat(text)
+
+
 def verdict_stamp(rec: dict) -> str:
     """Comparable aware-UTC verdict time, or empty for an unstamped decision.
 
@@ -451,7 +480,7 @@ def verdict_stamp(rec: dict) -> str:
     if not isinstance(value, str):
         raise ValueError("state_utc must be an aware ISO timestamp")
     try:
-        stamp = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+        stamp = parse_iso_aware(value)
     except ValueError:
         raise ValueError("state_utc must be an aware ISO timestamp") from None
     if stamp.tzinfo is None or stamp.utcoffset() is None:
