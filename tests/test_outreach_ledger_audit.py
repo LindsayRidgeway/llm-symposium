@@ -194,6 +194,55 @@ class ReplyLegTests(unittest.TestCase):
         self.assertEqual(rows[0]["verdict"], "ok")
         self.assertIsNone(rows[0]["reply"])
 
+    def test_lookalike_sender_does_not_make_the_silence_claim_stale(self):
+        self.t.touch('sent', 'p.md')
+        self.t.inbound('r.md', '<team@example.org.evil>')
+        self.t.write_ledger([{'id':'fixture','contact':'team@example.org',
+                             'status':'sent; no reply','draft':'channels/outbound/p.md'}])
+        rows, _, _ = self.t.rows()
+        self.assertEqual(rows[0]['verdict'], 'ok')
+        self.assertIsNone(rows[0]['reply'])
+
+
+class ExactMailboxTests(unittest.TestCase):
+    def setUp(self):
+        self.t = _Tree()
+        self.addCleanup(self.t.close)
+
+    def found(self, sender, contact='team@example.org', body='fixture'):
+        self.t.inbound('r.md', sender, body)
+        return audit.inbound_reply(contact, self.t.root / 'channels/inbound')
+
+    def test_full_mailbox_identity_rejects_similar_strings(self):
+        for sender in ['<team@example.org.evil>', '<evilteam@example.org>',
+                       '<team+alias@example.org>', '"team@example.org" <other@example.net>']:
+            with self.subTest(sender=sender):
+                self.assertIsNone(self.found(sender))
+
+    def test_display_names_comments_and_case_do_not_hide_a_real_mailbox(self):
+        self.assertIsNotNone(self.found('Agency <TEAM@EXAMPLE.ORG>', 'Contact <team@example.org>'))
+        self.assertIsNotNone(self.found('team@example.org (Agency)'))
+
+    def test_contact_display_name_is_not_a_mailbox(self):
+        self.assertIsNone(self.found('<team@example.org>', '"team@example.org" <other@example.net>'))
+
+    def test_multiple_addresses_and_named_groups_are_ambiguous(self):
+        self.assertIsNone(self.found('team@example.org, other@example.net'))
+        self.assertIsNone(self.found('team@example.org', 'team@example.org, other@example.net'))
+        self.assertIsNone(self.found('Team: team@example.org;'))
+
+    def test_malformed_or_non_mailbox_values_are_not_matches(self):
+        for value in ['team@example.org trailing text', '<team@example.org',
+                      'https://example.org/contact?email=team@example.org', 'team@']:
+            with self.subTest(value=value):
+                self.assertIsNone(self.found(value))
+
+    def test_a_body_from_line_is_not_header_evidence(self):
+        self.assertIsNone(self.found('', body='- From: team@example.org\n'))
+
+    def test_duplicate_from_metadata_is_not_single_sender_evidence(self):
+        self.assertIsNone(self.found('team@example.org\n- From: other@example.net'))
+
 
 class VerdictTests(unittest.TestCase):
     def test_sent_file_with_queued_status_is_stale(self):
