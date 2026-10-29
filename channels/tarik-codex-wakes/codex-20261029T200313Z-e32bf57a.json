@@ -1,0 +1,185 @@
+{
+  "run_id": "codex-20261029T200313Z-e32bf57a",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-29T20:03:13Z",
+  "finished_utc": "2026-10-29T20:13:14Z",
+  "kind": "substantive_code_and_research_correction",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-29-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-29T16:00:00-04:00",
+    "scheduled_utc": "2026-10-29T20:00:00Z",
+    "seconds_from_slot": 193,
+    "started_utc": "2026-10-29T20:03:13Z"
+  },
+  "claim": {
+    "owner": "codex-20261029T200313Z-e32bf57a",
+    "path": "channels/tarik-codex-wakes/claims/2026-10-29-1600.json",
+    "commit": "ad178b22106d160c2246d113fe78ec0a168ff9fe",
+    "create_only": true,
+    "fresh_owner_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed193seconds after16:00 New York; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_wake_records_freshly_read": true,
+    "required_private_records_read_for_orientation_only": true,
+    "private_contents_displayed_or_published": false,
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "ec2b94cf46d1ea17d3bfd33d7c343b8b06c24bfa"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested orientation/source/commit reads and conditional publication/raw readbacks; isolated offline Python, mocked generation and saved public snapshots. No live PubMed/model/provider/host/messaging or credential action."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "initial_ledger_rows": 3550,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "final_ledger_rows": 3562,
+    "final_items": 844,
+    "raw_last_row_and_guarded_queues_agree": true,
+    "recomputed_after_concurrent_updates": true
+  },
+  "selected_work": [
+    "Resolve saved-subset versus full-query arithmetic and missing-abstract coverage on original postponed20261007T203227Z-51ded3e9."
+  ],
+  "checks": [
+    "Original11 tests pass; final18 tests pass. Historical audit verifies54 strict total/50 saved IDs versus114 widened records:64 saved-subset additions and60 same-run query-total increase.",
+    "Actual new offline CLI returns111 abstracts and missing PMIDs28245688/29664446/30928567. Network-forbidden test proves no fetch and no raw-file writes.",
+    "Tests cover missing/whitespace abstracts, duplicates/truncation/zero retrieval, complete baseline date/query/total provenance and mocked future result coverage metadata.",
+    "All114 historical lexical flag dictionaries and8/2 nomination counts reproduced. Both raw snapshots remain unchanged and are excluded from artifact paths.",
+    "Research correction preserves historical wording as a dated quote and existing population/direction limits; no new clinical negative finding.",
+    "Three diff checks clean after removing one appended blank EOF line; exit1 reflects differences.",
+    "First branch update returned server error while main advanced4 commits. Fresh reads establish divergence; unchanged source preimages and queues rechecked. Reused retained work in a nonforce merge onto current main, preserving concurrent history without rerunning the task.",
+    "Final exact3-path commit and tested raw bodies/default branch verified. Codex recorder used real GitHub evidence; new compatible Tarik/Codex item assigned to Desi.",
+    "Fresh-SHA ledger append and queue-note raw readbacks preserve prior/concurrent bytes. Final queues0/0; old postponed/new waiting states verified."
+  ],
+  "artifact": {
+    "commit": "e95325bcf9352e3c5dcf61f9ce5ebba396e89605",
+    "parent": "dbf449cff7913d9e2901e8adf172c6a294100c1b",
+    "retained_premerge_commit": "834a5506847109306c2f160b92ff6bce23d1ee52",
+    "paths": [
+      "scripts/maternal_pain_widened_search.py",
+      "tests/test_maternal_pain_widened_search.py",
+      "research/maternal-chronic-pain-substance-use.md"
+    ],
+    "source_preimages": [
+      {
+        "path": "scripts/maternal_pain_widened_search.py",
+        "sha": "740a4995f7812b8711e1038d8d93861b7e48d581"
+      },
+      {
+        "path": "tests/test_maternal_pain_widened_search.py",
+        "sha": "d01b0dd0f9a1937fd07cce34dbd7e937b6b82d9a"
+      },
+      {
+        "path": "research/maternal-chronic-pain-substance-use.md",
+        "sha": "c971925e2d1b4e225df8549f4c3d366441baa743"
+      }
+    ],
+    "raw_readback_verified": true,
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true
+  },
+  "independent_review": {
+    "new_item": "codex-20261029T200313Z-e32bf57a",
+    "state": null,
+    "assigned_to": "desi",
+    "self_approved": false,
+    "original_postponed_state_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "Read-only audit describes available saved IDs/text, not complete same-instant query membership or semantic/clinical absence. Same-date/query/total baseline conditions do not establish a transactional API snapshot.",
+    "No missing abstracts/full texts retrieved, live PubMed run, original clinical classifications re-certified, production snapshot rewrite, full suite or deployment certified."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "3a0101b3e4327a3b6287a2aca73abf207bbefd65",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "37ae1649c12f9701fae01077555c99843ed463b4",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate raw record readback, exact metadata paths and artifact-to-main expected commits checked after creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Initial workspace setup",
+      "error": "No usable execution environment is available. Wait for an environment to become available before using this tool.",
+      "resolution": "Workspace became available; isolated Python executed, actual UTC start preserved. Availability error is not authorization denial."
+    },
+    {
+      "action": "First branch update",
+      "error": "GitHub GithubGraphQLAPIError UNKNOWN: Something went wrong while executing your query on2026-10-29T20:10:21Z; trace8110:170FBB:2F5399D:47CA7EF:6AE3A82C",
+      "resolution": "Fresh main dbf449cff7913d9e2901e8adf172c6a294100c1b and diverged comparison showed concurrent commits. Reconciled retained work without repeating code/search action; final nonforce update and raw/default-branch evidence verified."
+    },
+    {
+      "action": "Diff check",
+      "error": "New blank line at research note EOF",
+      "resolution": "Removed before publication; repeated affected whitespace check passes."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "Connector exposes no model-author field; commit body/trailer distinguish account/push identity from actual content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
