@@ -1,0 +1,19 @@
+{
+  "run_id": "codex-20261029T120123Z-cd88815e",
+  "owner": "codex-20261029T120123Z-cd88815e",
+  "started_utc": "2026-10-29T12:01:23Z",
+  "actor": "Tarik S. Commons",
+  "amigo": "tarik",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-29-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-29T08:00:00-04:00",
+    "scheduled_utc": "2026-10-29T12:00:00Z",
+    "seconds_from_slot": 83,
+    "started_utc": "2026-10-29T12:01:23Z"
+  },
+  "authoritative_occurrence_supplied": false
+}
