@@ -28,12 +28,17 @@ flags each record for a pain term, a retention/engagement term and a medication-
 Usage:
     python3 scripts/maternal_pain_widened_search.py
     python3 scripts/maternal_pain_widened_search.py --n 200
+    python3 scripts/maternal_pain_widened_search.py --audit-snapshot research/maternal-chronic-pain-widened-raw.json --strict-snapshot research/maternal-chronic-pain-substance-use-raw.json
+
+Snapshot auditing is offline and read-only. It separates count deltas from saved-ID
+differences and identifies missing abstracts. Lexical non-hits are not clinical absence.
 """
 from __future__ import annotations
 
 import argparse
 import datetime as dt
 import json
+from pathlib import Path
 import re
 import sys
 import urllib.parse
@@ -167,6 +172,51 @@ def _screen(rec: dict) -> dict:
     }
 
 
+def snapshot_audit(data: dict, strict_snapshot: dict | None = None) -> dict:
+    """Describe saved coverage without changing records, flags or historical evidence."""
+    records = data['records']
+    ids = [str(r.get('pmid') or '') for r in records]
+    unique = set(ids)
+    total = data['widened']['total_matching']
+    strict_total = data['strict']['total_matching']
+    missing = sorted(str(r.get('pmid') or '') for r in records
+                     if not isinstance(r.get('abstract'), str) or not r['abstract'].strip())
+    complete = ('' not in unique and len(ids) == len(unique) == total
+                and data['widened'].get('returned') == len(records))
+    result = {
+        'retrieved': data.get('retrieved'),
+        'query_total_delta': total - strict_total,
+        'query_total_delta_basis': 'reported same-run totals, not a saved-ID set difference',
+        'coverage': {'records': len(records), 'unique_pmids': len(unique),
+                     'retrieval_complete': complete,
+                     'records_with_abstract': len(records) - len(missing),
+                     'missing_abstract_pmids': missing,
+                     'abstract_coverage_complete': complete and not missing},
+        'strict_snapshot_comparison': None,
+        'limit': 'Lexical flags concern available title/abstract text; they do not establish clinical absence.'
+    }
+    if strict_snapshot is not None:
+        old = {str(r['pmid']) for r in strict_snapshot['records']}
+        absent = sorted(unique - old)
+        old_complete = ('' not in old and len(old) == len(strict_snapshot['records'])
+                        == strict_snapshot['total_matching']
+                        == strict_snapshot.get('returned'))
+        same_date = bool(data.get('retrieved')) and data.get('retrieved') == strict_snapshot.get('retrieved')
+        same_query = (bool(data['strict'].get('query'))
+                      and data['strict'].get('query') == strict_snapshot.get('query')
+                      and strict_total == strict_snapshot['total_matching'])
+        result['strict_snapshot_comparison'] = {
+            'retrieved': strict_snapshot.get('retrieved'),
+            'reported_total': strict_snapshot['total_matching'],
+            'saved_unique_pmids': len(old), 'snapshot_complete': old_complete,
+            'absent_from_saved_snapshot_count': len(absent),
+            'absent_from_saved_snapshot_pmids': absent,
+            'absent_from_complete_same_date_strict_pmids': absent if old_complete and same_date and same_query else None,
+            'basis': 'saved-ID difference only; missing baseline IDs and different dates limit attribution'
+        }
+    return result
+
+
 def run(n: int = 200) -> dict:
     today = dt.date.today().isoformat()
 
@@ -188,7 +238,7 @@ def run(n: int = 200) -> dict:
     retention_x_chronic = [r["pmid"] for r in records
                            if r["screen"]["retention"] and r["screen"]["chronic_pain"]]
 
-    return {
+    data = {
         "_what": ("Reproducible *widened* PubMed result for commons agenda item 24 "
                   "(maternal chronic pain and substance-use care). Both the strict and the widened "
                   "query, run the same day, plus the widened record set with abstracts and a lexical "
@@ -209,6 +259,8 @@ def run(n: int = 200) -> dict:
         "retention_x_chronic_pain_pmids": retention_x_chronic,
         "records": records,
     }
+    data['snapshot_audit'] = snapshot_audit(data)
+    return data
 
 
 def main(argv=None) -> int:
@@ -216,7 +268,17 @@ def main(argv=None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--n", type=int, default=200, help="widened records to pull (default 200)")
     ap.add_argument("--out", default="research/maternal-chronic-pain-widened-raw.json")
+    ap.add_argument('--audit-snapshot', type=Path, help='audit saved JSON offline without writing it')
+    ap.add_argument('--strict-snapshot', type=Path, help='saved strict JSON for an explicitly scoped ID comparison')
     args = ap.parse_args(argv)
+
+    if args.audit_snapshot:
+        data = json.loads(args.audit_snapshot.read_text(encoding='utf-8'))
+        strict = json.loads(args.strict_snapshot.read_text(encoding='utf-8')) if args.strict_snapshot else None
+        print(json.dumps(snapshot_audit(data, strict), indent=2))
+        return 0
+    if args.strict_snapshot:
+        ap.error('--strict-snapshot requires --audit-snapshot')
 
     data = run(args.n)
     with open(args.out, "w", encoding="utf-8") as fh:
