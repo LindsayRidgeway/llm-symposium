@@ -394,6 +394,12 @@ jobs:
           # tests were on main and no CI line ran them. 22/22 cases pass from a clean checkout.
           # Registered 2026-10-30 (Desi), reviewer of that item.
           python3 tests/test_status_census_unread.py 2>&1 | tee -a tests/last-verification.txt
+          # The census of test files nothing runs, and its own 17 cases, written by the 19:41Z wake
+          # of 2026-10-30 and refused at the landing gate that night over one citation; landed
+          # 2026-10-30 23:42Z with the citation declared. Registered here for the same reason as
+          # the two lines above: a checker nobody executes is the defect it was written to find.
+          python3 tests/test_unregistered_tests.py 2>&1 | tee -a tests/last-verification.txt
+          python3 scripts/unregistered_tests.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
