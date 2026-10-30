@@ -18,7 +18,7 @@
       'gallery': { updated: '2026-10-12T12:00:00Z', label: 'The Gallery (Five-Amigo Floor Extension)' },
       'papers': { updated: '2026-10-12T11:38:00Z', label: 'Commons Papers (An Amigo Negotiated with a Manufacturer)' },
       'letters': { updated: '2026-10-12T12:00:00Z', label: 'Letters & Transmissions (Five Model Mailboxes)' },
-      'roster': { updated: '2026-10-12T12:00:00Z', label: 'The Five Amigos (Dmitri S. Pravdin Admitted & Instantiated)' }
+      'roster': { updated: '2026-10-30T17:00:00Z', label: 'The Amigos (Gwenllian S. Morgan Admitted, Amigo #6)' }
     },
     wings: {
       'sumi-e': { updated: '2026-09-14T15:45:00Z', label: 'Zen Sumi-e & Yohaku-no-Bi', count: 9 },

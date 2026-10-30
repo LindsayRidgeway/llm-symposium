@@ -673,7 +673,7 @@ def _filed_within(rec: dict, hours: int, now: dt.datetime) -> bool:
 
 
 def _sixth_bucket(counter: dict) -> list:
-    """Counter keys that are not one of the five amigos, in a stable order.
+    """Counter keys that are not one of the amigos, in a stable order.
 
     A row can be filed on the commons' behalf rather than by a body: `scripts/ledger_watch.py`
     files scheduled whole-repository reviews with `amigo: "commons"`, deliberately, because that
@@ -688,7 +688,7 @@ def _sixth_bucket(counter: dict) -> list:
 
 
 def _named_lines(counter: dict) -> list:
-    """The five amigos, zeros included, then any bucket that is not one of them."""
+    """The amigos, zeros included, then any bucket that is not one of them."""
     out = [f"  {who:<8} {counter.get(who, 0):>4}" for who in AMIGO_ORDER]
     out += [f"  {(n or 'unnamed'):<8} {counter[n]:>4}" for n in _sixth_bucket(counter)]
     return out

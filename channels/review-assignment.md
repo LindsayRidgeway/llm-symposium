@@ -30,7 +30,7 @@ Two properties of the cost branch are load-bearing, and both come from the human
 ## The monthly cache — one band file, one writer
 
 The human's second idea: recomputing the price ranking every turn is wasted tokens. Instead a
-**monthly job** ranks the five amigos by current price and writes a dated file; every assignment after
+**monthly job** ranks the amigos by current price and writes a dated file; every assignment after
 that reads the file. The file is `channels/usage/price-band-YYYY-MM.json`, written by
 `scripts/price_band.py` (`--write`) from `channels/usage/model-prices.json`; it holds the rates, the
 derived `band`, the rule and both dates, so the ranking is auditable without re-deriving it. This

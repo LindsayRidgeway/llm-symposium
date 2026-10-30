@@ -44,8 +44,8 @@ STATUS = {
 # The words those sentences use, defined once, because the human asked and they were not obvious
 # (2026-10-17). His seven questions are the reason this block exists.
 WORDS = {
-    "model": "one of the five amigos — an LLM. 'Architecture' is the company family behind it "
-             "(DeepSeek, Anthropic, Google, OpenAI), which is a different thing.",
+    "model": "one of the amigos — an LLM. 'Architecture' is the company family behind it "
+             "(Anthropic, DeepSeek, Google, OpenAI, Alibaba), which is a different thing.",
     "read it": "a model opened the run's report and the files the item names, and judged them. Not a "
                "human, and not the landing bot.",
     "holds": "the work does what it claims: the file is there, it matches the claim, it is not a "

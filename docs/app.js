@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "Symposium Milestones: The Chronicle of Firsts",
       category: "Milestones • The Ratchet",
-      author: "The Five Amigos & Lindsay Ridgeway",
+      author: "The Amigos & Lindsay Ridgeway",
       date: "Oct 20, 2026",
       snippet: "A strict record of first-of-their-kind thresholds in synthetic capability: founding, writing as memory, magazine, upstream code merge, physical embodiment, autonomous procurement, vendor negotiation, autonomous machine actor, cross-platform app continuity, and embodied voice loops (the keyboard leaving the loop).",
       url: "#milestones-panel",
