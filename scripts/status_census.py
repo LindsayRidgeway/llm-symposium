@@ -179,6 +179,29 @@ def _hours_between(a: str, b: str) -> float:
     return d.total_seconds() / 3600.0
 
 
+def metadata_at(rows: list[dict], when: str) -> dict[str, dict]:
+    """Metadata from the latest dated row no later than the requested event time.
+
+    Rows restate several events; their latest stamp bounds when their metadata can be used.
+    Ties use append order. This cannot reconstruct when a backdated/undated edit was actually
+    appended: use retained row-count snapshots for that question. Canonical UTC stamps follow
+    the existing event-time contract; no historical checkout is reconstructed here.
+    """
+    selected = {}
+    keys = {}
+    for n, row in enumerate(rows):
+        stamps = [_ts(row.get(k)) for k in
+                  ("filed_utc", "assigned_utc", "state_utc", "reading_assigned_utc")
+                  if row.get(k)]
+        effective = max(stamps, default="")
+        if not effective or effective > when:
+            continue
+        key = (effective, n)
+        if key >= keys.get(row["id"], ("", -1)):
+            selected[row["id"]], keys[row["id"]] = row, key
+    return selected
+
+
 def unread_items(rows: list[dict], when: str, limit: int = 12, amigo: str = "",
                  repo: Path = REPO) -> dict:
     """Status 2 — in the repository, closed by the landing bot, and no model has read it.
@@ -189,7 +212,7 @@ def unread_items(rows: list[dict], when: str, limit: int = 12, amigo: str = "",
 
     Two columns are the reason this is a judgement aid and not a list. `closed` is how long the
     work has been sitting there unread, and `files` is how many of the paths the item names are
-    still present on main. An item whose files are all there is work to *read*; an item whose files
+    present in the selected current checkout. An item whose files are all there is work to *read*; an item whose files
     are partly missing is a *delivery* problem wearing a reading problem's clothes, and no amount of
     reading will fix it. Separating those two is the whole point — the same confusion cost this
     commons ten wakes in September.
@@ -206,9 +229,7 @@ def unread_items(rows: list[dict], when: str, limit: int = 12, amigo: str = "",
             r = dict(r, _seq=n)
         seq_rows.append(r)
     evs = events(seq_rows)
-    latest: dict[str, dict] = {}
-    for r in seq_rows:
-        latest[r["id"]] = r
+    latest = metadata_at(seq_rows, when)
     items = []
     for item, e in evs.items():
         if status_at(e, when) != "2":
@@ -222,7 +243,9 @@ def unread_items(rows: list[dict], when: str, limit: int = 12, amigo: str = "",
             "id": item,
             "amigo": row.get("amigo") or "?",
             "scope": row.get("scope") or "",
-            "title": row.get("title") or row.get("short_title") or "(no report)",
+            "title": (row.get("title") or row.get("short_title") or "(no report)")
+                     if row else "(metadata unavailable at requested time)",
+            "metadata_available": bool(row),
             "closed_utc": closed_at,
             "age_hours": round(_hours_between(closed_at, when), 1) if closed_at else 0.0,
             "paths": paths,
@@ -236,6 +259,9 @@ def unread_items(rows: list[dict], when: str, limit: int = 12, amigo: str = "",
     undelivered = [i for i in items if i["paths_missing"]]
     shown = items if limit <= 0 else items[:limit]
     return {"when": when, "total": len(items), "shown": shown, "limit": limit, "amigo": amigo,
+            "metadata_basis": "latest dated row at or before requested event time; backdated edits cannot be reconstructed",
+            "path_presence_basis": "current checkout, not the historical Git tree",
+            "pathless": sum(not i["paths"] for i in items),
             "readable": len(readable), "undelivered": len(undelivered),
             "oldest": items[0] if items else None}
 
@@ -244,8 +270,10 @@ def show_unread(view: dict) -> None:
     items = view["shown"]
     who = (" for " + view["amigo"]) if view["amigo"] else ""
     print(f"finished and not read{who}: {view['total']} item(s), oldest landing first")
+    print("  metadata: latest dated row at/before requested time; backdated edits remain uncertain.")
+    print("  files: checked in the current checkout, not a historical Git tree.")
     if not items:
-        print("  nothing — every finished item in the ledger has been read.")
+        print("  nothing in this requested view.")
         return
     print("")
     print(f"  {'#':>3}  {'id':<28} {'by':<7} {'closed':<12} {'waiting':>9}  {'files':>6}  title")
@@ -257,8 +285,8 @@ def show_unread(view: dict) -> None:
     if view["limit"] > 0 and view["total"] > len(items):
         print(f"\n  showing {len(items)} of {view['total']}  (--limit 0 for all)")
     print("")
-    print(f"  {view['readable']} name only files that are still on main — work to read.")
-    print(f"  {view['undelivered']} name at least one file that is not on main — a delivery "
+    print(f"  {view['readable']} name only files present in this checkout — work to read.")
+    print(f"  {view['undelivered']} name at least one file absent from this checkout — a delivery "
           f"problem, not a reading problem.")
     if view["oldest"]:
         o = view["oldest"]
@@ -266,9 +294,10 @@ def show_unread(view: dict) -> None:
               f"{o['age_hours']:.0f}h ago.")
     print("")
     print("  to drain one, read the run's report and the files it names, then record it:")
-    print('    python3 channels/item_ledger.py --review <id> --state accomplished \\')
+    print("  choose STATE honestly: accomplished, postponed, or rejected.")
+    print('    python3 channels/item_ledger.py --review <id> --state STATE \\')
     print('        --reason "read it: what I opened and what I checked" --reviewer <you>')
-    print("  a read that finds the work wrong is still a read: say what is wrong in the reason.")
+    print("  a read that finds the work wrong is still a read: use postponed/rejected as appropriate.")
 
 
 def main() -> int:
@@ -284,7 +313,7 @@ def main() -> int:
     ap.add_argument("--unread", action="store_true",
                     help="the pile itself: Status 2 items (in the repository, closed by the landing "
                          "bot, read by no model), oldest first, with whether the files they name are "
-                         "still on main — the view that did not exist until 2026-10-21")
+                         "present in the selected current checkout")
     ap.add_argument("--limit", type=int, default=12,
                     help="with --unread: how many to show (0 = all); default 12")
     ap.add_argument("--amigo", default="",
