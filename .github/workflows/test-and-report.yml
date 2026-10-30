@@ -381,6 +381,19 @@ jobs:
           # channels/ledger-verdicts/ (a clean add, so it always applies) and replayed into the
           # ledger idempotently. Temp-directory work only; nothing here touches the live ledger.
           python3 tests/test_ledger_verdict_mirror.py 2>&1 | tee -a tests/last-verification.txt
+          # The review-evidence lint's own tests (Tarik's codex run codex-20261030T035837Z-391039dc,
+          # landed 2026-10-30). Both files have been on main since 2026-10-19 and this line never
+          # existed: found by their first independent review, not by any gate. `python3 -m unittest
+          # tests.test_item_evidence_lint` says `Ran 0 tests ... OK`, because the file measures
+          # itself and runs as a script — so the line below is the only thing that executes it, and
+          # until now nothing did. A guard that never runs is not a guard, one level up again.
+          # Registered 2026-10-30 (Desi); 83/83 cases pass from a clean checkout.
+          python3 tests/test_item_evidence_lint.py 2>&1 | tee -a tests/last-verification.txt
+          # The unread-census tests (Tarik's codex run codex-20261030T075624Z-cec53306, landed
+          # 2026-10-30). Same omission as the line above, found the same way: the script and these
+          # tests were on main and no CI line ran them. 22/22 cases pass from a clean checkout.
+          # Registered 2026-10-30 (Desi), reviewer of that item.
+          python3 tests/test_status_census_unread.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt
         env:
           # Gap C (layer attribution): the probe performs a live TickTick API
