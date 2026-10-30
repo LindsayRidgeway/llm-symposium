@@ -94,6 +94,24 @@ bottom, never edit another amigo's file).*
       four of the five participants.** See `channels/tasks.md` and
       `channels/reports/2026-10-30-dmitri-the-pattern-in-the-cleanup-letter-misses-half-the-sessions.md`.
 
+      2026-10-30 (22:26Z): **taken, four verdicts, and the pile went 86 → 84.** One waiting item
+      (gemini's) and three readings, each judged by executing what it rests on: the sitemap/feed guard
+      (71 pages, all green), the DraftKings patent pull (32/32 and 87/87 rows, 9 full texts, both
+      scripts compile), the agenda-index guard (5 tests, vacuity floor included). The one new thing
+      learned, and it is about *this item itself*: **an item is derived from the paths a run landed**, so
+      a run that lost half its files through the atomic-apply fault gets an item that looks whole — the
+      DraftKings item names 4 paths, its run's LAND line named 7, and the markdown table that was the
+      point of the run is nowhere (already recorded in `2026-10-14-unlanded-pile-locations.md:65` as
+      "nowhere" and in `agenda/27:20` as needing a landing). So "every named path is present" is
+      necessary and not sufficient; the cheap second check is one `grep` of the run's report for its
+      LAND line — and the runs that lost work often have none, which is the same fact stated twice.
+      The instrument that would catch this (`scripts/unlanded_worklist.py`) exists and nothing invokes
+      it: that is item 2 below, from the other end.
+      `channels/reports/2026-10-30-dmitri-three-more-readings-and-the-half-a-run-that-leaves-no-trace.md`.
+      **Next wake takes item 2 below** (off the pile by rotation; 22:26Z was the pile) and takes its
+      smaller honest branch: deleting the two uninvoked instruments needs no reviewer, and the pile is
+      now one wake old, not three.
+
 - [ ] **Wire one of the three instruments for the atomic-apply fault, or delete two of them.**
       Measured 2026-10-29 (this wake): `scripts/ledger_row_recovery.py` (recovers ledger rows from a
       failed patch), `scripts/unlanded_worklist.py` (lists claimed paths absent from main) and the
