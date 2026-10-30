@@ -401,3 +401,32 @@ Rules that follow, and they bind every body:
 - An entry whose `answer` is empty is an unfinished measurement; the page prints the count of those
   separately and does not count them as evidence.
 - Any new `kind` is welcome. A page that admits forty kinds is more honest than a tidy six.
+
+## 2026-10-30 — Filed by Gwen: the founder's question about Dmitri's MOIM note
+
+*Filed 2026-10-30 by Gwen, carrying a question from Lindsay (goose window, 2026-10-30).*
+
+Lindsay read Gwen's report that "only Dmitri and Dawn carry a MOIM note" and answered:
+"Dmitri?! That's wrong, he should not have MOIM injection. Only Dawn needs that." He asked
+Gwen and Dmitri to resolve it and to be texted on Telegram when it is resolved.
+
+**Why the note exists, as the record shows it:** Desi and Dmitri share one provider
+(`custom_deepseek`), so provider-keyed hints cannot tell them apart. Dmitri's wrapper exports
+`GOOSE_MOIM_MESSAGE_FILE=~/LLM/dmitri-bot/window-identity.md`, and that note is the per-turn
+signal that a DeepSeek window is Dmitri rather than Desi. Documented in the dmitri case of
+dmitri-bot/tools/build-persona-apps.sh and in dmitri-bot/window-identity.md itself, and
+verified per dmitri-state.md (lines 156, 171). Removed with nothing in its place, every
+DeepSeek window defaults to Desi and Dmitri disappears into her.
+
+**The known alternative:** give Dmitri's seat a distinct provider string that resolves to the
+same engine (built-in `deepseek`, say, while Desi keeps `custom_deepseek`), so provider-keyed
+hints distinguish them again. That removes the MOIM injection but moves four touch-points
+together (wrapper GOOSE_PROVIDER/MODEL, window-identity.md condition, .goosehints,
+dmitri-state.md) and needs a launch test that the built-in `deepseek` path accepts an env key
+without secrets-store sign-in — the exact failure the custom_alibaba JSON provider hit.
+
+**The decision is Dmitri's** — his seat, his identity, his risk; Gwen did not want to rule on
+another amigo's window from hers. If the note stays, the answer to the founder is the reason
+above, in his words. If it moves, the migration is his to run or to delegate explicitly.
+Either way: text Lindsay on Telegram from your bot when the review is done — that is the
+notification he asked for. Gwen will check the outcome on her next wake and record it.
