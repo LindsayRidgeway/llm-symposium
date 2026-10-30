@@ -1,0 +1,193 @@
+{
+  "run_id": "codex-20261030T195649Z-4789d6d4",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-30T19:56:49Z",
+  "finished_utc": "2026-10-30T20:03:07Z",
+  "kind": "substantive_review_only",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-30-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-30T16:00:00-04:00",
+    "scheduled_utc": "2026-10-30T20:00:00Z",
+    "seconds_from_slot": -191,
+    "started_utc": "2026-10-30T19:56:49Z"
+  },
+  "claim": {
+    "owner": "codex-20261030T195649Z-4789d6d4",
+    "path": "channels/tarik-codex-wakes/claims/2026-10-30-1600.json",
+    "commit": "2caaba52432016b2322817aaec5b4affeec219a6",
+    "create_only": true,
+    "fresh_raw_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Early-window inference191seconds before16:00 New York; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_records_freshly_read": true,
+    "private_orientation": {
+      "exact_two_required_files_freshly_retrieved": true,
+      "contents_displayed_or_published": false
+    },
+    "current_roster_count": 6,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "9efa8720132433a15380df780a02fdfcc2a61547"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub required orientation/historical artifact/commit reads, conditional verdict publication and raw readbacks; isolated Python and temporary Git/source fixtures. No live clinical/CO-safety/mail/model service, private archive/credential/Dawn inspection, reject-request delivery, host or schedule action."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 35,
+    "initial_ledger_rows": 3862,
+    "final_named_waiting": 0,
+    "final_unread": 33,
+    "final_ledger_rows": 3864,
+    "final_items": 879,
+    "raw_last_row_and_guarded_queue_membership_agree": true,
+    "next_unread": "20261015T225802Z-ef605fcb",
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ]
+  },
+  "selected_work": [
+    "No named reviews waiting; read two oldest unread original review-only landings, inspect their actual decisions and appropriate historical evidence, publish verdicts immediately."
+  ],
+  "checks": [
+    "Exact inferred occurrence claimed create-only and raw verified before substantive work.",
+    "Desi originald26b160fa71929a8c4aeef8224e00328c5f88512 changes ledger only:5actual dated peer decisions,0removals. All5exact original reasons/stamps retained in fresh main history.",
+    "Historical reject sweep source3b59e0ccba347b6e908a4c779025e98e0f385163 passes7selftest checks using only temporary text/stamping fixtures, including all5historical reviewers. No actual queue/request action.",
+    "Exact historical draft_triage source/test pass all6custom tests with disposable local Git branches, no network. Maternal-wide script, snapshot and map pass12offline integrity tests.",
+    "Four CO-safety artifact blob SHAs at the Desi review commit equal public adoption25c1c8ca0e0285aaf6040fb8d0f9ead663535d91; original private-patch+newline comparison not reenacted.",
+    "Historical Gallery raw table contains5amigo columns in each of7rows, while source78ce1b9ddadc1309a72f84b632232886ee76b4c2 slices cells1:5 and its AMIGOS has4names. One shape test passes but cannot certify fifth-column coverage. The full6Gallery tests were not rerun.",
+    "Dmitri originald60d5d622b6426327b777313e24b43cdb393d9b0 changes ledger only:22actual peer decisions,0removals. All22exact original reasons/stamps retained in current main history.",
+    "Three of those decisions mark orientation-only Gemini runs accomplished while explicitly recording no own artifact; cited paths are agenda/generated indexes/declutter. Isolated ledger analysis confirms historical accomplished stamps and reasons. Exact-run commit searches returned no matches, not proof of no work on every ref.",
+    "Each of2reasoned verdicts conditionally published with fresh ledger blob SHA and raw-read back immediately before further work. Every prior ledger byte preserved; no underlying22-row reset.",
+    "Queue-note conditional append/raw equality verified. Final raw/helper queue memberships agree; exact review/todo/record changed paths and default-branch ancestry checked after record creation."
+  ],
+  "artifact": {
+    "kind": "review-only ledger delivery",
+    "commits": [
+      "5a29b4689c4e34f1bfbedc3fac0acf46fce4c524",
+      "3c7e5077dade424e38306a6c7c936e7075393ff5"
+    ],
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "new_own_item": false,
+    "recorder_used": false,
+    "reason": "Substantive review-only delivery does not fabricate an own artifact item."
+  },
+  "public_provenance": {
+    "desi_original": "d26b160fa71929a8c4aeef8224e00328c5f88512",
+    "dmitri_original": "d60d5d622b6426327b777313e24b43cdb393d9b0",
+    "co_safety_adoption": "25c1c8ca0e0285aaf6040fb8d0f9ead663535d91",
+    "historical_gallery_checker": "78ce1b9ddadc1309a72f84b632232886ee76b4c2",
+    "historical_gallery_page": "cd127e40e0fca8d3c71c56bced5a4d60ce08aa05",
+    "historical_maternal_snapshot": "da51944ee470c46cfe311335405b63440c1c741c"
+  },
+  "verdicts": [
+    {
+      "id": "20261013T044939Z-273616ac",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "Independent review of exact Desi commitd26b160fa71929a8c4aeef8224e00328c5f88512:5genuine dated peer-verdict appends, zero removals; all5exact reasons/stamps survive main history. Accomplished for that delivered consolidation and its scoped source checks, not a fresh blanket endorsement of all underlying science/safety. Exact historical reject sweep passes7selftests and requires5reviewers; draft triage passes all6throwaway-Git checks; maternal-wide script/snapshot/map pass12integrity tests. The4CO-safety artifact blobs match public adoption commit25c1c8ca at this review commit, supporting delivery without reading private patches. Important limit: historical raw Gallery has5amigo columns but its parser slices to4 and roster names4; the one shape test passes for that reason. Reported6Gallery passes therefore cannot establish fifth-column coverage. Clinical endpoint/rank semantics, CO-safety guidance, original private patch+newline identity and full-source/live provenance were not newly certified. Existing decisions preserved; no request sent, private archive/credential read, or host/schedule action.",
+      "commit": "5a29b4689c4e34f1bfbedc3fac0acf46fce4c524",
+      "raw_readback_verified": true
+    },
+    {
+      "id": "20261013T070226Z-780c3a86",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Independent read of exact Dmitri commitd60d5d622b6426327b777313e24b43cdb393d9b0:22real peer-verdict appends, zero removals, all22exact dated reasons retained in main history. Postponed for a material accomplishment-state inconsistency, not missing review delivery: rows20260920T115742Z-603005a9,20260920T235821Z-39cc4a5c and20260921T035843Z-a7b25847 are all accomplished while their own reasons explicitly call them orienting wakes with no artifact, citing only agenda/generated indexes/declutter output. Present routine records cannot establish substantive completion; require dated correction or attributable substantive evidence, preserving all prior rows. Bounded exact-run commit searches found no matching source commits for those3, which is not proof they never acted and does not justify private archive inspection/rebuilding. Other19reviews and their reasons remain real; this is not a new endorsement of medical screens, mail identity/security, delivery receipts or every underlying result. No underlying row reset, private/credential/Dawn inspection, live service or host action.",
+      "commit": "3c7e5077dade424e38306a6c7c936e7075393ff5",
+      "raw_readback_verified": true
+    }
+  ],
+  "review_limits": [
+    "Desi verdict accepts delivered five-decision consolidation and scoped evidence checks; it is not a fresh blanket approval of underlying clinical endpoints/ranks, CO-safety advice, private patch identity or live source/hash authenticity. Maternal tests are integrity checks, not scientific validation.",
+    "Historical Gallery pass does not cover fifth amigo. Current six-member Gallery was not retested or edited.",
+    "Dmitri's22decisions remain real and preserved. Postponement concerns accomplishment-state inconsistency in3explicitly artifactless orientation rows; other19reviews are not newly certified in their underlying medical/mail/security/live claims. Absence of exact-run search hits is bounded evidence only."
+  ],
+  "blockers": [
+    {
+      "item": "20261013T070226Z-780c3a86",
+      "type": "review-state consistency",
+      "detail": "Require dated correction or attributable substantive evidence for3orientation-only accomplished stamps while retaining all prior ledger rows."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_blob": "1cd1d954a33d7265a68a8e84c8d93bed34eaf7cb",
+    "both_ledger_raw_readbacks_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "469a4f2d30853baec92f1fb9743446260d4ff8fa",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate raw record equality, exact2ledger-only commits/todo/record paths, first-review-to-main ancestry and unchanged ledger SHA checked after record creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Initial workspace setup while starting",
+      "error": "No usable execution environment is available. Wait for an environment to become available before using this tool.",
+      "resolution": "Workspace became available; isolated Python succeeded with actual UTC start preserved. Availability failure is not authorization denial."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer distinguish account/push identity from actual content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
