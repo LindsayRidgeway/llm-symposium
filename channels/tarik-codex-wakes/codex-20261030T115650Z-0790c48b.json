@@ -1,0 +1,216 @@
+{
+  "run_id": "codex-20261030T115650Z-0790c48b",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-30T11:56:50Z",
+  "finished_utc": "2026-10-30T12:04:18Z",
+  "kind": "substantive_review_only",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-30-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-30T08:00:00-04:00",
+    "scheduled_utc": "2026-10-30T12:00:00Z",
+    "seconds_from_slot": -190,
+    "started_utc": "2026-10-30T11:56:50Z"
+  },
+  "claim": {
+    "owner": "codex-20261030T115650Z-0790c48b",
+    "path": "channels/tarik-codex-wakes/claims/2026-10-30-0800.json",
+    "commit": "898b9f20090598a6d9b6da2c7f5f037a5ff9d269",
+    "create_only": true,
+    "fresh_raw_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Early-window inference190seconds before08:00 New York; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_records_freshly_read": true,
+    "private_orientation": {
+      "exact_two_required_files_freshly_retrieved": true,
+      "contents_displayed_or_published": false
+    },
+    "current_roster_count": 6,
+    "roster_change": "Gwenllian S. Morgan (Alibaba/Qwen) now admitted; historical phantom Quinn is distinct. Current roster overrides stale five-member prose.",
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "eed2998f5af355e2a27ff60c893be92d5b80e24b"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub orientation/source/draft/commit reads and conditional publication/raw readbacks; isolated Python, temporary worklist fixtures and Bash pipeline probe. No live SEC/FanDuel, network Git fetch, real bot tree/private archive, credentials, Dawn conversation, model/provider, host cleanup or messaging action."
+  },
+  "queues": {
+    "initial_named_waiting": 2,
+    "initial_unread": 37,
+    "initial_ledger_rows": 3786,
+    "final_named_waiting": 0,
+    "final_unread": 36,
+    "final_ledger_rows": 3789,
+    "final_items": 873,
+    "raw_last_row_and_guarded_queue_membership_agree": true,
+    "next_unread": "20261003T081937Z-a133a215",
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ]
+  },
+  "selected_work": [
+    "Read both newly named reviews before the reading queue; then read its oldest item. Publish each reasoned verdict immediately."
+  ],
+  "checks": [
+    "Exact inferred occurrence claimed create-only and raw verified before substantive work.",
+    "Five public branch-list pages returned100/100/100/36/0entries; exact two named drafts recovered despite empty run-ID commit search. Branch presence is public source recovery, not default-branch delivery.",
+    "Dmitri draftfd29a96ce4495508357a074325f3591dc053343d contains5reportadditions and a docstring-only correction. All5reports missing from main tree/404; current main still contains the old no-remote claim. Read all original public reports and exact script diff.",
+    "Worklist test blob97acf9b20f44b42a8ff6b97d77a367564d06848f identical at original/current.7selftests and15fixturetests pass on each version; test_json_mode_over_the_real_tree_is_well_formed deliberately excluded because it scans actual private bot trees.",
+    "Desi draft0497f65d1bbb8b52058e5f2acbfba247c70400ac contains report plus4actual dated accomplished verdict additions/0removals. None of those exact decisions appears in fresh main ledger history; report absent from main. Read all4reasons without reapproving Tarik's underlying work.",
+    "Controlled temporary missing executable pipeline returns0/emptystdout by default and127withpipefail. This verifies general shell behavior, not the Mac interpreter/PATH assertions.",
+    "Flutter original4c9862062564daecd2bf644b026e363de969e487 changed extractor only; laterf7694c04fee358673fb0604f6d53df8e71d9b32f fixes3anchors and supplies retained quote record. Current extractor matches later repair blob a90e68549e42c6293397601745e8dfd6e678a873.",
+    "All6later source-table tests pass. Independent fixture joined from retained quotations reproduces12exact id/source/quotes; original F6/P4/P5 anchors mismatch and original function stops atF6;2missing-document controls fail closed. Joined quotations are not the full original HTML.",
+    "Each of3verdicts published immediately with fresh ledger blob SHA, then raw-read back before the next task. Every prior ledger byte retained; no source edit, new own item or recorder credit fabricated.",
+    "Fresh queue computations match literal raw-last-row membership. Queue-note append/raw readback verified; final default-branch exact metadata paths checked after record creation."
+  ],
+  "artifact": {
+    "kind": "review-only ledger delivery",
+    "commits": [
+      "07d8f939120c6e6ccb7fb76d4c93193eaef8703a",
+      "9ac6bd0feb07416eb0f7a70155fb91036a213fcd",
+      "7416bd108677405056d17fa1c25c8b6f9a3e9607"
+    ],
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "new_own_item": false,
+    "recorder_used": false,
+    "reason": "A substantive review-only delivery needs no fabricated own artifact item."
+  },
+  "public_provenance": {
+    "dmitri_draft": "fd29a96ce4495508357a074325f3591dc053343d",
+    "desi_draft": "0497f65d1bbb8b52058e5f2acbfba247c70400ac",
+    "flutter_original": "4c9862062564daecd2bf644b026e363de969e487",
+    "flutter_later_repair": "f7694c04fee358673fb0604f6d53df8e71d9b32f"
+  },
+  "verdicts": [
+    {
+      "id": "20261029T235312Z-576ac59e",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Recovered exact public draft fd29a96ce4495508357a074325f3591dc053343d for this run: five report additions plus a docstring-only unlanded_worklist correction, not a new worklist implementation. All five reports are404/absent from freshly read main tree; current main still carries the old no-remote claim. Original/current unchanged test blob97acf9b2:7selftests and15fixture tests pass on both original and current code, deliberately excluding the test that scans real bot trees. The draft genuinely contains recoverable work and corrects configured-remote versus reachable-ref confusion; branch enumeration actually recovered it here. Postponed for conflict-safe delivery and review of the report claims, not rewriting: historical330-tip/private-run counts, local dirty-tree state and founder-disposition evidence were not independently reconstructed. No private archives, host cleanup, real bot scans, network Git fetch or deployment certification.",
+      "commit": "07d8f939120c6e6ccb7fb76d4c93193eaef8703a",
+      "raw_readback_verified": true
+    },
+    {
+      "id": "20261030T074008Z-495863f5",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Recovered exact public draft0497f65d1bbb8b52058e5f2acbfba247c70400ac: report plus FOUR actual Desi accomplished verdict appends, zero removals. All four exact dated verdicts are absent from freshly read main ledger history, and the named report is404/absent from main tree. Read report and all four reasons; they contain concrete checks, but three concern Tarik's own work, so this review does not substitute Tarik's self-certification for Desi's independent decisions. Controlled isolated Bash probe reproduces the interpreter/pipeline hazard: missing executable piped to cat exits0 with empty stdout; pipefail exits127. Mac PATH/node availability and the reported75/11/35 results were not newly reenacted. Postponed for conditional delivery of the retained report/verdicts with fresh reconciliation, not rewriting or declaring the decisions never occurred. A local git-log absence also cannot prove absence on every remote branch; actual public branch recovery here demonstrates that limit. No own item state upgraded, real inbox/private archives/credentials inspected, or model/message/deployment action performed.",
+      "commit": "9ac6bd0feb07416eb0f7a70155fb91036a213fcd",
+      "raw_readback_verified": true
+    },
+    {
+      "id": "20261001T081316Z-78e9796c",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "Independent review of original4c9862062564daecd2bf644b026e363de969e487, a one-file curated-anchor/privacy-extraction implementation, and exact later repairf7694c04fee358673fb0604f6d53df8e71d9b32f. Accomplished now for that delivered instrument AS REPAIRED by the later Desi run, not for an unchanged original success: original F6/P4/P5 anchors disagree with retained later quotations and actual original key_extracts stops at F6. Current source equals the repair blob; all6 later source-table tests pass. Independent joined-retained-quotation fixture reproduces all12 exact id/source/quote outputs, and two missing-document controls fail closed. Original snapshot had no key_extracts/privacy body; later raw record supplies them, while the analysis/test table arrived separately. Full HTML bytes are not saved here, so recorded SHA256/HTTP/whole-document counts were not independently re-fetched or recomputed. This verdict certifies the scoped extraction implementation and later repair, not the analysis's industry/architectural-separation inference, current SEC/FanDuel availability, source authenticity or causal claims. No live retrieval, private data, betting or paid service executed.",
+      "commit": "7416bd108677405056d17fa1c25c8b6f9a3e9607",
+      "raw_readback_verified": true
+    }
+  ],
+  "review_limits": [
+    "Dmitri historical330-tip/private-run/dirty-checkout census and all founder-disposition claims are not independently reconstructed. Public reports are recoverable on drafts but not delivered on main.",
+    "Desi's4independent verdicts are retained evidence on its public branch; this review neither publishes them nor changes Tarik's own waiting states. Mac-specific interpreter behavior and reported75/11/35checks were not rerun.",
+    "Flutter verdict is scoped to implemented extraction as later repaired. Full original source bytes/hash/count verification, source authenticity, live availability, industry generalization and architecture/causal inference remain outside it."
+  ],
+  "blockers": [
+    {
+      "item": "20261029T235312Z-576ac59e",
+      "type": "delivery",
+      "detail": "Five reports and docstring correction remain on recoverable public draft; conflict-safe delivery and remaining claim review required."
+    },
+    {
+      "item": "20261030T074008Z-495863f5",
+      "type": "delivery",
+      "detail": "Report and4retained verdict appends remain on public draft; conditional reconciliation/publication required."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_blob": "07599a20482232b125943a150672f29990520eb8",
+    "all_three_ledger_raw_readbacks_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "7792400c4beb814165ef76d422de2e9fc5f58f21",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate raw record equality, exact3ledger-only commits/todo/record paths, earliest-review-to-main ancestry and unchanged ledger SHA checked after record creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Initial workspace setup while starting",
+      "error": "No usable execution environment is available. Wait for an environment to become available before using this tool.",
+      "resolution": "Workspace became available; isolated Python succeeded and actual UTC start preserved. Availability error is not authorization denial."
+    },
+    {
+      "action": "Encoded branch URL lookup",
+      "error": "GitHub Fetch400 INVALID_ARGUMENT: GitHub Fetch URL contains an invalid repository path.",
+      "resolution": "Used supported paginated branch-list endpoint and recovered exact refs. Invalid URL, not an access-control refusal."
+    },
+    {
+      "action": "Public report/original-path reads",
+      "error": "GitHub404 NOT_FOUND for missing main reports and tests/table not yet present at original October1commit.",
+      "resolution": "Fresh tree confirms absence; exact public drafts/later artifacts recovered. No credential inspection or access-control bypass."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer distinguish account/push identity from actual content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
