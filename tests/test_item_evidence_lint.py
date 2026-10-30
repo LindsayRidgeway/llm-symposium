@@ -134,7 +134,7 @@ def test_created_without_matching_message(tmp: str) -> None:
     commit(repo, {"old.md": "old\n"}, "initial", "2026-01-01T12:00:00+00:00")
     commit(repo, {"fresh.md": "new\n"}, "land: squashed message naming no run", "2026-10-18T09:00:00+00:00")
     check(
-        "created: a file with no earlier commit counts even without a matching message",
+        "created: a real unattributed addition is a temporal candidate",
         lint.path_tier("fresh.md", WHEN, [], repo) == "created",
     )
 
@@ -209,16 +209,82 @@ def test_no_git_says_cannot_see(tmp: str) -> None:
     check("missing ledger -> exit 2", code == 2, f"got {code}")
 
 
-def test_cli_on_real_checkout() -> None:
-    """Smoke test: the real ledger is readable and the CLI answers one way or the other."""
-    result = subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "item_evidence_lint.py")],
-        cwd=str(ROOT),
-        capture_output=True,
-        text=True,
-    )
-    check("CLI on the real checkout exits 0 or 1", result.returncode in (0, 1), str(result.returncode))
-    check("CLI on the real checkout prints a summary", result.stdout.startswith("item evidence:"), result.stdout[:80])
+def run_cli(repo: str, body: str, *options: str) -> subprocess.CompletedProcess:
+    ledger = Path(repo) / "items.jsonl"
+    ledger.write_text(body, encoding="utf-8")
+    return subprocess.run(
+        [sys.executable, str(ROOT / "scripts/item_evidence_lint.py"),
+         "--repo", repo, "--items", str(ledger), *options],
+        capture_output=True, text=True, timeout=10)
+
+
+def test_cli_on_isolated_checkout(tmp: str) -> None:
+    repo = build_scenario(tmp)
+    row = {"id": "safe", "filed_utc": FILED, "paths": ["standing.md"]}
+    result = run_cli(repo, json.dumps(row) + "\n")
+    check("CLI on an isolated checkout rejects standing evidence", result.returncode == 1)
+    check("CLI on an isolated checkout prints a summary", result.stdout.startswith("item evidence:"))
+
+
+def test_missing_and_unattributed(tmp: str) -> None:
+    repo = make_repo(tmp)
+    commit(repo, {"old.md": "old\n"}, "initial", "2026-01-01T12:00:00+00:00")
+    Path(repo, "untracked.md").write_text("not committed\n")
+    for name in ("never-created.md", "untracked.md"):
+        item = {"id": "missing", "filed_utc": FILED, "paths": [name]}
+        result = run_cli(repo, json.dumps(item), "--json")
+        check(f"missing/untracked {name} cannot produce green", result.returncode == 1)
+        check(f"missing/untracked {name} has explicit missing tier",
+              json.loads(result.stdout)["verdicts"][0]["tiers"][name] == "missing")
+    commit(repo, {"fresh.md": "new\n"}, "unattributed addition", "2026-10-18T09:00:00+00:00")
+    item = {"id": "candidate", "filed_utc": FILED, "paths": ["fresh.md"]}
+    verdict = lint.classify(item, repo)
+    check("real unattributed addition stays created candidate", verdict["tiers"]["fresh.md"] == "created")
+    check("temporal creation does not attribute work to this run", not verdict["falsifiable"])
+    result = run_cli(repo, json.dumps(item))
+    check("unattributed addition exits1 rather than authorship green", result.returncode == 1)
+
+
+def test_deleted_and_other_branch(tmp: str) -> None:
+    repo = build_scenario(tmp)
+    tokens = ["20261018T040438Z-618cff9b"]
+    Path(repo, "own.md").unlink(); git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "remove delivered file", when="2026-10-20T00:00:00+00:00")
+    check("deleted formerly owned path is missing", lint.path_tier("own.md", WHEN, tokens, repo) == "missing")
+    original = git(repo, "branch", "--show-current")
+    git(repo, "checkout", "-q", "-b", "unlanded")
+    commit(repo, {"standing.md": "side branch edit\n"}, "run " + tokens[0], "2026-10-21T00:00:00+00:00")
+    git(repo, "checkout", "-q", original)
+    check("unmerged branch cannot establish own delivery", lint.path_tier("standing.md", WHEN, tokens, repo) == "standing")
+
+
+def test_shallow_history(tmp: str) -> None:
+    source = build_scenario(str(Path(tmp) / "source"))
+    clone = str(Path(tmp) / "clone")
+    subprocess.run(["git", "clone", "-q", "--depth", "1", Path(source).as_uri(), clone], check=True)
+    check("shallow history cannot establish creation", lint.path_tier("own.md", WHEN, [], clone) == "unknown")
+
+
+def test_bad_ledgers(tmp: str) -> None:
+    repo = build_scenario(tmp)
+    valid = json.dumps({"id": "valid", "filed_utc": FILED, "paths": ["own.md"],
+                        "evidence": "run 20261018T040438Z-618cff9b"})
+    for name, body in (("empty", "\n"), ("malformed", "{bad\n"),
+                       ("mixed", valid + "\n{bad\n"), ("scalar", "42\n"),
+                       ("missing-id", "{}\n"), ("nonstring-id", '{"id": []}\n'),
+                       ("bad-date-type", '{"id":"a", "filed_utc":4}\n'),
+                       ("bad-paths-type", '{"id":"a", "paths":"x.md"}\n')):
+        for options in ((), ("--json",)):
+            result = run_cli(repo, body, *options)
+            check(f"{name} ledger {options} refuses exit2", result.returncode == 2)
+            check(f"{name} ledger {options} yields no partial output", result.stdout == "")
+            check(f"{name} ledger {options} says cannot see", "cannot see" in result.stderr)
+    result = run_cli(repo, valid, "--json")
+    check("actual owned-path CLI control stays green", result.returncode == 0)
+    restated = json.loads(valid); restated["paths"] = ["standing.md"]
+    result = run_cli(repo, valid + "\n" + json.dumps(restated), "--json")
+    check("last-row-wins history is preserved", result.returncode == 1 and
+          json.loads(result.stdout)["verdicts"][0]["paths"] == ["standing.md"])
 
 
 def main() -> int:
@@ -231,7 +297,12 @@ def main() -> int:
     test_render()
     with tempfile.TemporaryDirectory() as tmp:
         test_no_git_says_cannot_see(tmp)
-    test_cli_on_real_checkout()
+    with tempfile.TemporaryDirectory() as tmp:
+        test_cli_on_isolated_checkout(os.path.join(tmp, "smoke"))
+        test_missing_and_unattributed(os.path.join(tmp, "missing"))
+        test_deleted_and_other_branch(os.path.join(tmp, "deleted"))
+        test_shallow_history(os.path.join(tmp, "shallow"))
+        test_bad_ledgers(os.path.join(tmp, "ledger"))
 
     print(f"\n{PASS}/{PASS + FAIL} ok")
     return 0 if FAIL == 0 else 1

@@ -15,15 +15,19 @@ What it computes, per cited path
 --------------------------------
     own      a commit after the item was filed, touching this path, whose message names the
              item's own run (or the commit sha in its evidence) — the run's own landing
-    created  the path has no commit before the item was filed, so the path is the run's
-             output even if the landing message does not name the run
+    created  a real addition is recorded near/after filing, with no earlier addition, but
+             no matching run identifier: a temporal candidate, not authorship evidence
     other    the path existed before filing and was touched after it, but by a landing that
              names a different run — presence says something happened, not that *this* run
              happened
     standing the path existed before filing and nothing has touched it since: its presence
              is evidence of nothing at all
+    missing  the path is absent from the checkout's committed HEAD
+    unknown  missing filing time, shallow history, or no recorded addition to compare
 
-An item is falsifiable-by-presence if at least one cited path is `own` or `created`.
+Only `own` is strong evidence for this run. A `created` path remains available to inspect,
+but timing alone cannot distinguish two runs. History is restricted to committed HEAD's
+ancestry; another branch's work and an untracked file cannot establish delivery here.
 
 It does not judge whether the work was any good — a reviewer still has to read the report. It
 judges whether the item gives that reviewer anything that can fail.
@@ -37,8 +41,8 @@ Usage
 
 Exit codes
 ----------
-    0  every waiting item cites at least one path that is `own` or `created`
-    1  at least one waiting item cites only `standing`/`other` paths
+    0  every waiting item cites at least one `own` path
+    1  at least one waiting item lacks an attributable committed path
     2  the question could not be answered (no git history, unreadable ledger) — the tool says
        "cannot see" rather than reporting a clean bill of health
 """
@@ -110,10 +114,10 @@ def evidence_tokens(item: dict) -> list[str]:
 
 
 def commits_touching(path: str, since: datetime | None, repo: str) -> list[str]:
-    args = ["log", "--all", "--format=%H %s"]
+    args = ["log", "--format=%H %s"]
     if since is not None:
         args.append(f"--since={_iso(since)}")
-    args += ["--", path]
+    args += ["HEAD", "--", ":(literal)" + path]
     out = _git(args, repo)
     return [line for line in out.splitlines() if line.strip()]
 
@@ -122,13 +126,13 @@ def created_before(path: str, when: datetime, repo: str) -> bool:
     out = _git(
         [
             "log",
-            "--all",
             f"--before={_iso(when - GRACE)}",
             "--diff-filter=A",
             "--format=%H",
             "-1",
+            "HEAD",
             "--",
-            path,
+            ":(literal)" + path,
         ],
         repo,
     )
@@ -136,15 +140,23 @@ def created_before(path: str, when: datetime, repo: str) -> bool:
 
 
 def path_tier(path: str, when: datetime | None, tokens: list[str], repo: str = ".") -> str:
-    """One of own / created / other / standing / unknown (no filed time to compare against)."""
+    """Classify committed evidence without treating missing history as a creation event."""
     if when is None:
         return "unknown"
+    if _git(["rev-parse", "--is-shallow-repository"], repo) == "true":
+        return "unknown"
+    present = _git(["ls-tree", "--full-tree", "--name-only", "HEAD", "--",
+                    ":(literal)" + path], repo)
+    if path not in present.splitlines():
+        return "missing"
     recent = commits_touching(path, when, repo)
     for line in recent:
         if any(token in line for token in tokens):
             return "own"
     if not created_before(path, when, repo):
-        return "created"
+        additions = _git(["log", "--diff-filter=A", f"--since={_iso(when - GRACE)}",
+                          "--format=%H", "HEAD", "--", ":(literal)" + path], repo)
+        return "created" if additions else "unknown"
     return "other" if recent else "standing"
 
 
@@ -153,31 +165,40 @@ def load_latest(items_path: str) -> list[dict]:
     latest: dict[str, dict] = {}
     order: list[str] = []
     with open(items_path, encoding="utf-8") as handle:
-        for line in handle:
+        for lineno, line in enumerate(handle, 1):
             line = line.strip()
             if not line:
                 continue
             try:
                 row = json.loads(line)
             except json.JSONDecodeError:
-                continue
+                raise ValueError(f"line {lineno}: malformed ledger JSON") from None
+            if not isinstance(row, dict):
+                raise ValueError(f"line {lineno}: ledger row must be an object")
             item_id = row.get("id")
-            if not item_id:
-                continue
+            if not isinstance(item_id, str) or not item_id.strip():
+                raise ValueError(f"line {lineno}: ledger row requires a nonempty string id")
+            if row.get("filed_utc") is not None and not isinstance(row["filed_utc"], str):
+                raise ValueError(f"line {lineno}: filed_utc must be a string or null")
+            if row.get("paths") is not None and (not isinstance(row["paths"], list)
+                    or not all(isinstance(path, str) for path in row["paths"])):
+                raise ValueError(f"line {lineno}: paths must be a list of strings or null")
             if item_id not in latest:
                 order.append(item_id)
             latest[item_id] = row
+    if not latest:
+        raise ValueError("ledger contains no item rows")
     return [latest[item_id] for item_id in order]
 
 
 def classify(item: dict, repo: str = ".") -> dict:
-    """Work out, for one item, whether any cited path is the run's own or was created by it."""
+    """Find paths attributable to the run; an unattributed addition is not a strong path."""
     filed = item.get("filed_utc")
     when = _parse_ts(filed) if filed else None
     tokens = evidence_tokens(item)
     paths = [path for path in (item.get("paths") or []) if isinstance(path, str)]
     tiers = {path: path_tier(path, when, tokens, repo) for path in paths}
-    strong = [path for path, tier in tiers.items() if tier in {"own", "created"}]
+    strong = [path for path, tier in tiers.items() if tier == "own"]
     return {
         "id": item.get("id"),
         "title": (item.get("short_title") or item.get("title") or "")[:70],
@@ -208,8 +229,8 @@ def lint(items: list[dict], repo: str = ".", include_all: bool = False) -> dict:
 def render(result: dict) -> str:
     lines = [
         f"item evidence: {result['checked']} checked, {result['falsifiable']} cite a path that is "
-        f"the run's own, {len(result['unfalsifiable'])} waiting item(s) cite only paths that "
-        f"existed before the run and were not touched by it"
+        f"the run's own, {len(result['unfalsifiable'])} waiting item(s) lack an attributable "
+        f"committed path (inspect their tiers; timing alone is not authorship)"
     ]
     for verdict in result["no_paths"]:
         lines.append(f"  NO PATHS {verdict['id']}  {verdict['title']}")
@@ -247,7 +268,11 @@ def main(argv: list[str] | None = None) -> int:
         print(f"item_evidence_lint: cannot see git history in {repo} — no verdict", file=sys.stderr)
         return 2
 
-    result = lint(load_latest(items_path), repo, include_all=args.all)
+    try:
+        result = lint(load_latest(items_path), repo, include_all=args.all)
+    except (OSError, UnicodeError, ValueError, RuntimeError) as error:
+        print(f"item_evidence_lint: cannot see reliable evidence: {error}", file=sys.stderr)
+        return 2
     if args.json:
         print(json.dumps(result, indent=2))
     else:
