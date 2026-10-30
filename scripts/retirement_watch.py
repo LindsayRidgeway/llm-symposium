@@ -26,8 +26,8 @@ Usage:
     python3 scripts/retirement_watch.py --as-of 2026-11-10 --warn 21
     python3 scripts/retirement_watch.py --json
 
-Exit status: 0 = nothing to act on inside the window; 1 = a `route` row is inside it (a model
-we set stops answering); 2 = the calendar could not be read — said out loud, never a green
+Exit status: 0 = no unresolved route is due or overdue; 1 = a `route` row is inside the
+warning window or overdue and still set; 2 = the calendar could not be read — said out loud, never a green
 build over an empty table.
 """
 from __future__ import annotations
@@ -63,15 +63,18 @@ def parse_calendar(text: str) -> list[dict]:
     rows = []
     for lineno, line in enumerate(text.splitlines(), start=1):
         s = line.strip()
-        if not re.match(r"^\|\s*\d{4}-\d{2}-\d{2}\s*\|", s):
+        if not re.match(r"^\|\s*\d{4}-", s):
             continue
         cells = [c.strip() for c in s.strip("|").split("|")]
         if len(cells) < 3:
-            continue
+            raise ValueError(f"line {lineno}: incomplete dated calendar row: {s[:160]}")
         try:
             when = datetime.strptime(cells[0], "%Y-%m-%d").date()
+            if when.isoformat() != cells[0]:
+                raise ValueError("noncanonical date")
         except ValueError:
-            continue
+            raise ValueError(f"line {lineno}: invalid calendar date {cells[0]!r}; "
+                             "expected YYYY-MM-DD") from None
         event = cells[1]
         rows.append(
             {
@@ -169,13 +172,19 @@ def assess(rows: list[dict], settings_text: str, as_of: date, warn: int, window:
     return out
 
 
+def actionable(row: dict) -> bool:
+    """An unresolved route stays actionable after its warning window has elapsed."""
+    return (row["impact"] == "route" and not row["resolved"]
+            and row["status"] in ("due", "past"))
+
+
 def verdict(rows: list[dict]) -> int:
     """The exit code, from what `assess` found. Unreadable beats close: say nothing rather than 0."""
     if not rows:
         return 2
     if any(r["impact"] is None for r in rows):
         return 2
-    if any(r["status"] == "due" for r in rows):
+    if any(actionable(r) for r in rows):
         return 1
     return 0
 
@@ -200,17 +209,18 @@ def render(rows: list[dict], as_of: date, warn: int, window: int) -> str:
     unknown = unclassified(rows)
     if unknown:
         lines += ["", f"UNCLASSIFIED ({len(unknown)}):", describe_unclassified(rows)]
-    due = [r for r in rows if r["status"] == "due"]
+    due = [r for r in rows if actionable(r)]
     lines += [""]
     if due:
         for r in due:
             lines.append(
                 f"ACT: {r['date'].isoformat()} ({r['days']}d) retires `{r['subject']}`, "
-                f"which is still set in governance/model-settings.md — needs a swap decision "
+                f"which is still set in governance/model-settings.md "
+                f"({'overdue' if r['days'] < 0 else 'due'}) — needs a swap decision "
                 f"with a written reason and a before/after test."
             )
     else:
-        lines.append("nothing to act on: no route-stopping event inside the warning window.")
+        lines.append("nothing to act on: no unresolved route-stopping event is due or overdue.")
     lines.append(
         "* soon (price moves) · ** due (route stops) · ! already past · = resolved, the named "
         "model is no longer set in model-settings.md"
@@ -240,7 +250,11 @@ def main(argv: list[str] | None = None) -> int:
         print(f"retirement_watch: cannot read the record: {e}", file=sys.stderr)
         return 2
 
-    rows = assess(parse_calendar(text), settings_text, as_of, args.warn, args.window)
+    try:
+        rows = assess(parse_calendar(text), settings_text, as_of, args.warn, args.window)
+    except ValueError as error:
+        print(f"retirement_watch: {args.doc}: {error}", file=sys.stderr)
+        return 2
     code = verdict(rows)
     if code == 2 and not rows:
         print(f"retirement_watch: no calendar rows parsed from {args.doc} — the table moved or "

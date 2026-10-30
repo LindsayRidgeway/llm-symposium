@@ -18,6 +18,9 @@ The real document is also parsed, so moving or re-shaping `research/hosts-watch.
 reds this test rather than quietly disarming the script.
 """
 import sys
+import json
+import subprocess
+import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
@@ -165,6 +168,62 @@ class AssessTest(unittest.TestCase):
         self.assertFalse(not_ours["resolved"],
                          "a row marked '—' must not read as resolved: nobody did that work")
         self.assertEqual(rw.verdict([not_ours]), 0)
+
+
+class DeadlineCliTest(unittest.TestCase):
+    """Actual isolated processes: overdue and malformed rows cannot give false green."""
+
+    def run_cli(self, calendar, settings=SETTINGS, *options):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc, config = root / "calendar.md", root / "settings.md"
+            doc.write_text(calendar, encoding="utf-8")
+            config.write_text(settings, encoding="utf-8")
+            return subprocess.run(
+                [sys.executable, str(ROOT / "scripts/retirement_watch.py"),
+                 "--doc", str(doc), "--settings", str(config),
+                 "--as-of", "2026-12-01", *options],
+                capture_output=True, text=True, timeout=10)
+
+    def test_overdue_route_remains_actionable_even_with_zero_view(self):
+        result = self.run_cli(CAL, SETTINGS, "--window", "0")
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertIn("ACT: 2026-11-30 (-1d)", result.stdout)
+        self.assertIn("overdue", result.stdout)
+        self.assertNotIn("nothing to act on", result.stdout)
+
+    def test_overdue_json_keeps_past_status_and_failing_exit(self):
+        result = self.run_cli(CAL, SETTINGS, "--json")
+        self.assertEqual(result.returncode, 1, result.stderr)
+        route = next(r for r in json.loads(result.stdout)["rows"] if r["impact"] == "route")
+        self.assertEqual((route["status"], route["days"], route["resolved"]),
+                         ("past", -1, False))
+
+    def test_swapped_overdue_route_clears_but_past_cost_and_unowned_rows_do_not_fail(self):
+        result = self.run_cli(CAL, "`claude-sonnet-5-5`")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("resolved", result.stdout)
+        self.assertNotIn("ACT:", result.stdout)
+
+    def test_invalid_date_beside_valid_rows_refuses_text_and_json(self):
+        for value in ("2026-99-30", "2026-02-30", "2026-1-02", "2026-11-30oops"):
+            for options in ((), ("--json",)):
+                with self.subTest(date=value, options=options):
+                    calendar = CAL + f"| {value} | `still-set` retires | somebody | route |\n"
+                    result = self.run_cli(calendar, "`replacement`", *options)
+                    self.assertEqual(result.returncode, 2)
+                    self.assertIn("line 7:", result.stderr)
+                    self.assertIn(value, result.stderr)
+                    self.assertEqual(result.stdout, "")
+
+    def test_incomplete_dated_row_refuses_instead_of_disappearing(self):
+        result = self.run_cli(CAL + "| 2026-12-02 | truncated |\n")
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("line 7: incomplete dated calendar row", result.stderr)
+
+    def test_bad_date_in_library_is_an_explicit_error(self):
+        with self.assertRaisesRegex(ValueError, "line 7: invalid calendar date"):
+            rw.parse_calendar(CAL + "| 2026-02-30 | event | owner | route |\n")
 
 
 class RealDocumentTest(unittest.TestCase):

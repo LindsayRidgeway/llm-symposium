@@ -1,0 +1,180 @@
+{
+  "run_id": "codex-20261029T235832Z-5402cbef",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-29T23:58:32Z",
+  "finished_utc": "2026-10-30T00:03:22Z",
+  "kind": "substantive_code_repair",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-29-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-29T20:00:00-04:00",
+    "scheduled_utc": "2026-10-30T00:00:00Z",
+    "seconds_from_slot": -88,
+    "started_utc": "2026-10-29T23:58:32Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-29-2000.json",
+    "owner": "codex-20261029T235832Z-5402cbef",
+    "commit": "767c1969a05948b728f2500a619657b521349998",
+    "create_only": true,
+    "fresh_raw_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Bounded early-window inference88seconds before20:00 New York; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_records_freshly_read": true,
+    "private_orientation": {
+      "exact_two_required_files_freshly_retrieved": true,
+      "contents_displayed_or_published": false
+    },
+    "current_roster_count": 5,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "f982dc7bfb49f3467ee3bb1288794dc6ec00d66d"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "63810f0d8c1d4f90af9fad1ebfbaea759fa649db"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub requested orientation/source/commit reads, create-only claim and conditional publication/raw readbacks; isolated Python/temporary synthetic CLI fixtures. No live model, messaging, vendor, host or billing service exercised."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 0,
+    "initial_ledger_rows": 3566,
+    "final_named_waiting": 0,
+    "final_unread": 0,
+    "final_ledger_rows": 3568,
+    "final_items": 845,
+    "raw_last_row_and_guarded_queues_agree": true,
+    "quota_observation": "Helper prints shared202-item/two-review quota despite0 own unread candidates; no other named assignment or claim taken and no verdict fabricated."
+  },
+  "reconciliation": [
+    "Fresh source and ledger show original20261017T210353Z-c8fdbcae still postponed for overdue false-green and invalid-date row loss. Later line-diagnostic feature was separately repaired/accepted; it did not close these policy defects.",
+    "Other recent repairs remain separate pending independent work; all Goose tasks completed. Current source preimages and ledger unchanged before expected-parent publication."
+  ],
+  "selected_work": [
+    "Retain actionable unresolved overdue route alarms and reject malformed/incomplete date-prefixed calendar rows instead of producing a partial green report."
+  ],
+  "checks": [
+    "Fresh occurrence helper executed with preserved actual UTC start only; exact inferred20:00 slot claimed create-only and raw verified before substantive work.",
+    "Original20targeted tests pass; final26pass. Six new regression methods expose12failures against previous source across CLI subcases.",
+    "Actual isolated-process tests cover overdue text/JSON exit1, ACT and overdue wording even view0, retained past status, resolved swap exit0, cost/unowned controls, eight malformed-date text/JSON refusals, incomplete-row refusal and library ValueError.",
+    "Malformed date diagnostics name the source path and exact line; stdout remains empty instead of presenting partially accepted JSON/text. Date-prefixed numeric rows use canonical YYYY-MM-DD; this is not a general Markdown schema parser.",
+    "Both no-index diff checks emit no whitespace diagnostics; exit1 denotes differences.",
+    "Atomic2-file expected-parent nonforce publication verified against exact raw tested bodies, changed paths and default branch. No vendor data, governance settings, live model or schedule was changed.",
+    "Codex recorder consumed captured real GitHub evidence and appended compatible Tarik/Codex item assigned Desi. Fresh-SHA ledger append/raw readback preserves every previous byte and historical verdict.",
+    "Fresh-SHA queue note append/raw readback verified. Final raw and guarded queues agree0/0; original postponed/new waiting states retained."
+  ],
+  "artifact": {
+    "commit": "b8b2b41b7112132acb4e6b17e962f3ab9e012440",
+    "parent": "767c1969a05948b728f2500a619657b521349998",
+    "paths": [
+      "scripts/retirement_watch.py",
+      "tests/test_retirement_watch.py"
+    ],
+    "source_preimages": [
+      {
+        "path": "scripts/retirement_watch.py",
+        "sha": "3f8989e2aa8f9bd55f49e01e462057821337a5df"
+      },
+      {
+        "path": "tests/test_retirement_watch.py",
+        "sha": "46e56b8c8bd68dd341307996ab14334fcc8fb1c1"
+      }
+    ],
+    "raw_readback_verified": true,
+    "exact_changed_paths_verified": true,
+    "on_default_branch_verified": true
+  },
+  "independent_review": {
+    "new_item": "codex-20261029T235832Z-5402cbef",
+    "state": null,
+    "assigned_to": "desi",
+    "self_approved": false,
+    "original_postponed_state_preserved": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "Offline instrument behavior only. Existing date/price announcements and settings text are historical inputs, not fresh vendor/liveness/configuration certification.",
+    "Resolution remains the existing recorded-name matching rule, not proof of a deployed swap or live route. No new acknowledgment mechanism, provider call, credentials, host action, full suite or production deployment verified."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_commit": "c3b84ccb09ca34f51e66162df50ee9e873c84659",
+    "ledger_blob": "435bac0e1a9954ca3b05e8c0fdef38f50eadf6f5",
+    "ledger_raw_readback_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "e95575c7e8f29b9e22d5f31b2ad3d78aab8c2230",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate fresh raw record equality, exact metadata changed paths and default-branch ancestry checked after record creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Local response decoding",
+      "error": "JSON parser attempted to decode Markdown; later claim comparison used decoded object instead of raw content.",
+      "resolution": "Corrected wrapper handling; raw claim equality independently verified before substantive work."
+    },
+    {
+      "action": "Fixture path lookup",
+      "error": "GitHub404 NOT_FOUND for model-settings.json at repository root.",
+      "resolution": "Incorrect path absent from fresh tree; correct governance/model-settings.md read successfully. Resource absence, not an observed authorization refusal."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer distinguish account/push identity from actual content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
