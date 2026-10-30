@@ -23,6 +23,7 @@ import json
 import sys
 import tempfile
 import unittest
+import subprocess
 from contextlib import redirect_stdout
 from pathlib import Path
 
@@ -159,6 +160,44 @@ class UnreadView(unittest.TestCase):
         self.assertEqual(sc.unread_items(rows, "2026-10-19T00:00:00Z", repo=self.repo)["total"], 0)
         self.assertEqual(sc.unread_items(rows, "2026-10-21T00:00:00Z", repo=self.repo)["total"], 1)
 
+    def test_future_metadata_does_not_rewrite_a_past_view(self):
+        old = self.landed("a", title="original", paths=["present/a.md"])
+        future = row("a", title="future", paths=["future.md"], state="postponed",
+                     state_utc="2026-10-22T00:00:00Z", reviewer="desi")
+        view = sc.unread_items([old, future], WHEN, repo=self.repo)
+        self.assertEqual(view["shown"][0]["title"], "original")
+        self.assertEqual(view["shown"][0]["paths"], ["present/a.md"])
+
+    def test_older_backfill_does_not_displace_later_dated_metadata(self):
+        old = self.landed("a", title="old", state_utc="2026-10-09T00:00:00Z")
+        newer = self.landed("a", title="newer", state_utc="2026-10-10T00:00:00Z")
+        for rows in ([old, newer], [newer, old]):
+            self.assertEqual(sc.unread_items(rows, WHEN, repo=self.repo)["shown"][0]["title"], "newer")
+
+    def test_no_eligible_metadata_is_explicit_not_future_content(self):
+        future = self.landed("a", title="future", paths=["future.md"])
+        future.update(reading_assigned_utc="2026-10-22T00:00:00Z", reading_assigned_to="tarik")
+        item = sc.unread_items([future], WHEN, repo=self.repo)["shown"][0]
+        self.assertFalse(item.get("metadata_available", True))
+        self.assertIn("metadata unavailable", item["title"])
+        self.assertEqual(item["paths"], [])
+
+    def test_current_path_presence_is_labeled_not_historical(self):
+        rows = [self.landed("a", paths=["present/a.md"])]
+        before = sc.unread_items(rows, WHEN, repo=self.repo)
+        (self.repo / "present/a.md").unlink()
+        after = sc.unread_items(rows, WHEN, repo=self.repo)
+        self.assertEqual((before["readable"], after["undelivered"]), (1, 1))
+        self.assertIn("current checkout", after.get("path_presence_basis", ""))
+        self.assertIn("not a historical Git tree", render(after))
+
+    def test_a_successfully_drained_large_pile_can_be_zero(self):
+        rows = [self.landed(str(i)) for i in range(201)]
+        self.assertEqual(sc.unread_items(rows, WHEN, repo=self.repo)["total"], 201)
+        rows += [row(str(i), state="postponed", state_utc="2026-10-20T00:00:00Z",
+                     reviewer="desi") for i in range(201)]
+        self.assertEqual(sc.unread_items(rows, WHEN, repo=self.repo)["total"], 0)
+
     def test_empty_view_says_so_rather_than_printing_a_header(self):
         view = sc.unread_items([], WHEN, repo=self.repo)
         out = render(view)
@@ -213,7 +252,9 @@ class CommandLine(unittest.TestCase):
         self.assertIn("20261010T000000Z-aaaaaaaa", out)
         self.assertIn("Did a thing", out)
         self.assertIn("--review <id>", out)
-        self.assertIn("1 name only files that are still on main", out)
+        self.assertIn("1 name only files present in this checkout", out)
+        self.assertIn("accomplished, postponed, or rejected", out)
+        self.assertIn("--state STATE", out)
 
     def test_limit_reaches_the_command_line(self):
         self.write([row("2026101%dT000000Z-%08x" % (i, i), state="accomplished",
@@ -252,20 +293,36 @@ class CommandLine(unittest.TestCase):
         self.assertEqual(census["2"], 4)
         self.assertEqual(view["total"], census["2"])
 
+    def test_actual_cli_historical_metadata_and_honest_verdict_guidance(self):
+        old = row("a", title="historical title", paths=["present/a.md"], state="accomplished",
+                  state_utc="2026-10-10T00:00:00Z", reviewer="auto:land")
+        future = {**old, "title": "future title", "paths": ["future.md"],
+                  "state": "postponed", "state_utc": "2026-10-22T00:00:00Z", "reviewer": "desi"}
+        self.write([old, future])
+        base = [sys.executable, str(ROOT / "scripts/status_census.py"), "--ledger", str(self.ledger),
+                "--repo", str(self.dir), "--unread", "--at", WHEN]
+        result = subprocess.run(base + ["--json"], capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        item = json.loads(result.stdout)["shown"][0]
+        self.assertEqual((item["title"], item["paths"]), ("historical title", ["present/a.md"]))
+        result = subprocess.run(base, capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("accomplished, postponed, or rejected", result.stdout)
+        self.assertIn("current checkout, not a historical Git tree", result.stdout)
+
 
 class TheRealLedger(unittest.TestCase):
     """One check against the repository itself — a view of an empty file would pass every test above."""
 
-    def test_the_pile_is_not_empty_and_every_row_has_a_reason_to_be_in_it(self):
-        view = sc.unread_items(sc.load(sc.LEDGER), "2999-01-01T00:00:00Z", limit=0)
-        self.assertGreater(view["total"], 100,
-                           "the pile the founder's target is about should still be large; if it "
-                           "is not, either it was drained (good) or this view has gone blind (bad)")
+    def test_every_unread_row_has_a_reason_without_requiring_a_large_backlog(self):
+        rows = sc.load(sc.LEDGER)
+        view = sc.unread_items(rows, "2999-01-01T00:00:00Z", limit=0)
+        self.assertEqual(view["total"], sc.counts(sc.census(rows, "2999-01-01T00:00:00Z"))["2"])
         self.assertEqual(view["total"], len(view["shown"]))
         for i in view["shown"]:
             self.assertTrue(i["closed_utc"], "a Status 2 item must have a landing time")
             self.assertTrue(i["id"])
-        self.assertEqual(view["readable"] + view["undelivered"], view["total"])
+        self.assertEqual(view["readable"] + view["undelivered"] + view.get("pathless", 0), view["total"])
 
 
 if __name__ == "__main__":
