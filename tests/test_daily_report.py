@@ -495,14 +495,63 @@ class TestFocusBlock(unittest.TestCase):
     filed in its "last 24h" and 172 moved in the same words.
     """
 
+    NOW = dt.datetime(2026, 10, 30, 12, 0, tzinfo=dt.timezone.utc)
+
     @classmethod
     def setUpClass(cls):
-        cls.text = dr_mod.render_focus(24)
+        # A fixture, not the live ledger. The first version of this class rendered whatever the
+        # commons had filed in the last 24 hours, so its assertions were only true on days when
+        # the data happened to have the shape it assumed — and on 2026-10-30 it did not. The same
+        # defect is recorded one class up, in `render`'s docstring: a test that reads today's
+        # ledger fails for today's reason, not for the code's.
+        def rec(key, amigo, state=None, reviewer=None, reason=None):
+            r = {"id": key, "amigo": amigo, "scope": "internal", "title": f"item {key}",
+                 "filed_utc": "2026-10-30T06:00:00Z"}
+            if state:
+                r["state"] = state
+                r["state_utc"] = "2026-10-30T07:00:00Z"
+                r["reviewer"] = reviewer
+            if reason:
+                r["reason"] = reason
+            return r
+
+        items = {}
+        # Finished: two bodies plus one row filed on the commons' behalf. That sixth bucket is not
+        # decoration — it is the case that broke this class, and it is in the fixture so the class
+        # cannot pass again by never meeting it.
+        for key, amigo in (("f1", "desi"), ("f2", "desi"), ("f3", "tarik"), ("f4", "commons")):
+            items[key] = rec(key, amigo, state="accomplished", reviewer="auto:land")
+        # Reviewed: two reviewers across the three decisions.
+        for key, amigo, reviewer, state in (
+                ("r1", "gemini", "desi", "accomplished"),
+                ("r2", "claude", "tarik", "accomplished"),
+                ("r3", "gemini", "desi", "postponed"),
+                ("r4", "claude", "dmitri", "rejected")):
+            items[key] = rec(key, amigo, state=state, reviewer=reviewer,
+                             reason="recorded in the ledger" if state == "postponed" else None)
+        # Outside the window, and must not appear anywhere in the message.
+        items["gone"] = rec("gone", "desi", state="accomplished", reviewer="auto:land")
+        items["gone"]["filed_utc"] = "2026-10-01T00:00:00Z"
+        items["gone"]["state_utc"] = "2026-10-01T00:00:00Z"
+
+        cls.items = items
+        cls.text = dr_mod.render_focus(24, now=cls.NOW, items=items)
         cls.lines = cls.text.splitlines()
 
     def _block(self, heading):
+        """The lines under a heading, up to and including its own total line.
+
+        The total is found by its own prefix, not by counting lines. Counting was correct only
+        while a block could never name more than five bodies — a row filed with `amigo:
+        "commons"` gets its own line (`_sixth_bucket`), so line 6 stopped being the total. On
+        2026-10-30 the live block read `commons 1` where this test expected `total 12` and the
+        assertion became `11 != 1`: the report was right and the test was reading the wrong line.
+        """
         i = next(n for n, l in enumerate(self.lines) if heading in l)
-        return self.lines[i + 1:i + 7]
+        for n in range(i + 1, len(self.lines)):
+            if self.lines[n].strip().startswith("total"):
+                return self.lines[i + 1:n + 1]
+        self.fail(f"no total line under {heading!r}")
 
     def test_both_headings_name_their_window(self):
         # Every figure in the message comes from one window, and each heading says so, so a reader
@@ -514,12 +563,27 @@ class TestFocusBlock(unittest.TestCase):
             named = [line.split()[0] for line in self._block(heading)[:5]]
             self.assertEqual(named, list(AMIGO_ORDER), heading)
 
-    def test_each_total_is_the_sum_of_its_five_lines(self):
+    def test_each_total_is_the_sum_of_every_line_it_names(self):
+        # "the sum of its five lines" was the promise until the block could name a sixth bucket.
+        # The invariant that survives is the one that matters to a reader: every named line is in
+        # the total under it, and nothing unnamed is.
         for heading in ("Items finished, by amigo", "Items reviewed, by amigo"):
             block = self._block(heading)
-            counts = [int(line.split()[1]) for line in block[:5]]
-            total = int(block[5].split()[1])
+            counts = [int(line.split()[1]) for line in block[:-1]]
+            total = int(block[-1].split()[1])
+            self.assertGreaterEqual(len(counts), 5, heading)
             self.assertEqual(sum(counts), total, heading)
+
+    def test_a_row_filed_for_the_commons_is_named_and_counted(self):
+        # `ledger_watch.py` files scheduled whole-repository reviews with `amigo: "commons"`, which
+        # is nobody and is therefore excluded from the draw. Before `_sixth_bucket` those rows were
+        # in the total and on no line, so the block read "total 19" over lines summing to 18 — and
+        # a reader adding up the visible column found the report wrong. Named here so it stays named.
+        block = self._block("Items finished, by amigo")
+        names = [line.split()[0] for line in block[:-1]]
+        self.assertIn("commons", names)
+        counted = sum(int(line.split()[1]) for line in block[:-1])
+        self.assertEqual(counted, int(block[-1].split()[1]))
 
     def test_the_block_is_only_the_window_it_claims(self):
         # He asked for the last 24 hours. A lifetime figure anywhere in the message is a defect,
@@ -534,7 +598,7 @@ class TestFocusBlock(unittest.TestCase):
         for lead_in, heading in (("where they stand:", "Items finished, by amigo"),
                                  ("how they were decided:", "Items reviewed, by amigo")):
             block = self._block(heading)
-            total = int(block[5].split()[1])
+            total = int(block[-1].split()[1])
             start = self.lines.index(next(l for l in self.lines if lead_in in l))
             states = []
             for line in self.lines[start + 1:]:
