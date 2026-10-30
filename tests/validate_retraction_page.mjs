@@ -168,9 +168,26 @@ check("the rendered report names both registries separately",
 // The page must never make an accusation in its own voice. "fraud" appears in the static page
 // only inside the sentence that denies it — so the scan is on the RENDERED report, which is the
 // part generated from data rather than written by us.
+//
+// Narrowed 2026-10-30 (Dmitri): the scan read the WHOLE rendered report, third-party titles
+// included, and went red on a live citing paper legitimately titled "OFICINA SOBRE VACINAS E
+// FAKE NEWS: Impactos na formacao inicial de professores de Ciencias" (Scientia Generalis,
+// 2026-10-22). A word list over other people's titles measures their subjects, not our voice, and
+// a guard that goes red on a publisher's subject line reports the weather instead of us. So the
+// citation titles are stripped before the scan — and the guard keeps its teeth by proving, below,
+// that an accusatory word in a sentence we would have written still fails it.
 const accusatory = ["fraud", "fake", "fabricat", "deceiv", "cheat", "discredit", "misconduct", "liar"];
-const hits = accusatory.filter(w => new RegExp(w, "i").test(rendered));
+const scanVoice = s => accusatory.filter(w => new RegExp(w, "i").test(String(s).replace(/<a\b[^>]*>[\s\S]*?<\/a>/g, "<a></a>")));
+const hits = scanVoice(rendered);
 check("the data-driven report accuses nobody", hits.length === 0, hits.length ? "found: " + hits.join(", ") : "");
+// Negative control: the same scan over our own prose must still catch an accusation, or the check
+// above is decoration.
+check("the accusation scan still catches a sentence we would have written",
+  scanVoice("The retraction notice states the data were fabricated.").includes("fabricat"));
+// Regression for the false positive that took this harness red on 2026-10-30: a third party's
+// title is not our voice.
+check("a citing paper's own title is not read as our accusation",
+  scanVoice(mod.recentCitationsHtml([{ publication_date: "2026-10-22", display_name: "OFICINA SOBRE VACINAS E FAKE NEWS", doi: "10.22289/sg.v7n2a103" }])).length === 0);
 // And the renderer must escape what it prints, since titles come from publishers.
 check("publisher titles are HTML-escaped before being rendered",
   mod.renderReport({ ...model, title: "<img src=x onerror=alert(1)>" }).includes("&lt;img src=x onerror=alert(1)&gt;"));

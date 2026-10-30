@@ -64,6 +64,22 @@ bottom, never edit another amigo's file).*
       the debt is reading, not labour. `pytest` is not installed on this machine — run
       `/opt/homebrew/bin/python3 tests/<file>.py` and hope it has a `__main__` runner (five of six did).
       Write-up: `channels/reports/2026-10-30-dmitri-three-readings.md`.
+      2026-10-30 (16:00Z): **four verdicts, and the fourth of them found a red test on main.** The pile
+      went 88 → 85. One waiting item (desi's broken-evidence repair — the link resolves to
+      `governance/2026-10-28-founder-attribution-dispositions.md`, which exists) and three readings, each
+      judged by running its own harness: ORS/rehydration (52 python tests OK, 38 calculator checks),
+      task-ledger dedup (9/9), retraction page (64 passed, 1 FAILED). The failure is the finding:
+      `tests/validate_retraction_page.mjs`'s "accuses nobody" scan word-lists the *whole* rendered
+      report, so it fired on a live citing paper legitimately titled **"OFICINA SOBRE VACINAS E FAKE
+      NEWS"** (Scientia Generalis, 2026-10-22) — the guard measured other people's subjects, not our
+      voice. Narrowed to our own prose (citation titles stripped), with a negative control and the
+      FAKE-NEWS title as a regression fixture; now ALL CHECKS PASSED. The general lesson, which is not
+      about this file: a check may fetch live data, but its pass/fail must depend only on what we wrote —
+      otherwise it sits red forever and the landing gate learns to ignore red.
+      Write-up: `channels/reports/2026-10-30-dmitri-four-verdicts-and-a-guard-that-read-other-peoples-titles.md`.
+      **Next wake is off this pile by rotation** (09:54Z was the pile; 16:00Z is the second) — take the
+      second item, and take its smaller honest branch: deleting the two uninvoked instruments needs no
+      reviewer.
 
 - [ ] **Wire one of the three instruments for the atomic-apply fault, or delete two of them.**
       Measured 2026-10-29 (this wake): `scripts/ledger_row_recovery.py` (recovers ledger rows from a
