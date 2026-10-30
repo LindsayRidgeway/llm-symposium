@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is this journal what it says it is? | Works</title>
+  <meta name="description" content="Type a journal name or ISSN. See what four public registers say about it — and whether they agree with each other. No blacklist, no verdict on intent, no key required.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../papers/style.css">
+  <style>
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .bar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1.1rem 0 0.5rem; }
+    input[type=text] { flex: 1 1 300px; padding: 0.75rem 0.9rem; border-radius: 8px; border: 1px solid rgba(148,163,184,0.35);
+      background: rgba(148,163,184,0.07); color: inherit; font-size: 1rem; font-family: inherit; }
+    button.go { padding: 0.75rem 1.3rem; border-radius: 8px; border: 1px solid rgba(129,178,154,0.5);
+      background: rgba(129,178,154,0.22); color: inherit; font-size: 1rem; cursor: pointer; font-family: inherit; }
+    button.go:disabled { opacity: 0.45; cursor: default; }
+    #status { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; opacity: 0.85; min-height: 1.2rem; margin: 0.4rem 0 0.9rem; }
+    .small { font-size: 0.88rem; opacity: 0.85; }
+    .rule { border-left: 3px solid #f59e0b; padding: 0.4rem 0 0.4rem 1.15rem; margin: 1.4rem 0;
+      font-family: 'Newsreader', serif; font-style: italic; font-size: 1.05rem; }
+    .pick { margin:0.4rem 0 0; font-size:0.9rem; }
+    .pick button { background:none; border:1px solid rgba(148,163,184,0.35); color:inherit; border-radius:6px;
+      padding:0.25rem 0.6rem; margin:0.15rem 0.35rem 0 0; cursor:pointer; font-size:0.85rem; font-family:inherit; text-align:left; }
+    table.find { border-collapse: collapse; width: 100%; font-size: 0.88rem; margin-top: 0.8rem; }
+    table.find th, table.find td { padding: 0.5rem 0.7rem 0.5rem 0; text-align: left; vertical-align: top;
+      border-bottom: 1px solid rgba(148,163,184,0.18); }
+    table.find th { color:#94a3b8; font-size:0.68rem; text-transform:uppercase; letter-spacing:1px; font-weight:500; }
+    .badge { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.5px; padding:0.12rem 0.45rem;
+      border-radius:4px; border:1px solid currentColor; white-space:nowrap; }
+    .b-yes  { color:#81b29a; }
+    .b-no   { color:#94a3b8; }
+    .b-note { color:#f2cc8f; }
+    .b-attn { color:#e07a5f; }
+    .mono { font-family:'JetBrains Mono',monospace; font-size:0.8rem; word-break:break-all; }
+    .reqs { font-family:'JetBrains Mono',monospace; font-size:0.72rem; opacity:0.8; line-height:1.55; }
+  </style>
+</head>
+<body class="dark-theme">
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="index.html" class="back-link">← Works</a>
+      <span style="opacity:0.6; font-size:0.85rem;">&nbsp;·&nbsp; <a href="../index.html" style="opacity:0.8;">Magazine</a></span>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <p style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#94a3b8; margin-bottom:0.4rem;">Works · entry · released 2026-10-30</p>
+    <h1 style="font-family:'Newsreader',serif; font-weight:600; font-size:2rem; line-height:1.25; margin:0 0 0.5rem;">Is this journal what it says it is?</h1>
+    <p style="font-size:1.08rem; opacity:0.88;">Type a journal name or an ISSN. This page asks four public registers what they hold under that name, prints every answer with the address it came from, and tells you where the registers <em>disagree with each other</em>. It does not tell you whether a journal is predatory — nobody can, honestly, and the attempt does harm. It tells you what the records say.</p>
+
+    <div class="bar">
+      <input type="text" id="q" placeholder="an ISSN (e.g. 0028-4793) or a journal name" autocomplete="off">
+      <button class="go" id="go">Ask the registers</button>
+    </div>
+    <div id="status"></div>
+    <div id="pick" class="pick"></div>
+    <div id="out"></div>
+
+    <div class="rule">The question people actually have is &ldquo;should I send this journal my paper, or my money?&rdquo; No register answers that. What a register can do is contradict a journal&rsquo;s own description of itself — and that contradiction, when it exists, is checkable evidence rather than an opinion.</div>
+
+    <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2rem;">What this page does, exactly</h2>
+    <p class="small">Four lookups, all free, all keyless, all made directly by your browser to the register itself. Nothing about your search reaches this site; there is no server to reach.</p>
+    <table class="find">
+      <tr><th>Register</th><th>What it holds</th><th>What a disagreement means</th></tr>
+      <tr><td><strong>Crossref</strong></td><td>The DOI registration record for the journal: its titles, its ISSNs, its publisher, and how many DOIs it has deposited.</td><td>An ISSN that Crossref does not know is an ISSN no DOI was ever registered under. Not proof of anything on its own — some real journals deposit nothing — but it is a checkable absence.</td></tr>
+      <tr><td><strong>DOAJ</strong></td><td>The Directory of Open Access Journals, a <em>whitelist</em>. Journals apply and are vetted. The record carries the journal's own claims: article processing charge, review process, licence, digital preservation, waiver policy.</td><td>Absence from DOAJ is <strong>normal</strong> and is not a warning: DOAJ lists only fully open-access journals, and subscription journals are excluded by design. Presence is a positive signal, not a guarantee.</td></tr>
+      <tr><td><strong>OpenAlex</strong></td><td>An independent index of the scholarly record: works count, citation counts, publisher, and whether it believes the journal is in DOAJ.</td><td>Its answer should agree with DOAJ's own. Where the two differ, one of the two is out of date — which is useful to know before quoting either.</td></tr>
+      <tr><td><strong>Europe PMC</strong></td><td>The biomedical literature index: how many indexed records carry this ISSN.</td><td>Zero means not indexed <em>there</em>. Europe PMC covers life sciences; a mathematics journal returning zero is expected and tells you nothing.</td></tr>
+    </table>
+
+    <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2rem;">What it does not do, and will not be made to do</h2>
+    <ul class="small">
+      <li><strong>It does not call any journal predatory.</strong> There is no maintained, accountable blacklist to consult — the best-known one was withdrawn by the person who ran it, and its successors are anonymous, contested and in at least one case the subject of legal action. A list nobody stands behind is not evidence, and a page that borrowed one would be laundering an opinion into a verdict. The commons will not do that with someone's livelihood.</li>
+      <li><strong>It cannot see intent.</strong> Every journal it examines may be dishonest, careless, or excellent, and the registers are equally consistent with all three.</li>
+      <li><strong>A clean result is not an endorsement.</strong> The classic hijack is a website wearing a real journal's name and ISSN: the registers will show a perfectly normal record while the site you are looking at belongs to somebody else. The check that catches it is not on this page and needs doing by hand — compare the journal's own website with what Crossref says its title, publisher and ISSN are.</li>
+      <li><strong>Nothing here says the science is right.</strong> That is a different question, and the commons has a separate page for whether a paper has been retracted.</li>
+    </ul>
+
+    <h2 style="font-family:'Newsreader',serif; font-size:1.35rem; margin-top:2rem;">Verified before release, by the page's own controls</h2>
+    <p class="small">Two controls, run 2026-10-30, both printed in full below the results whenever you search:</p>
+    <ul class="small">
+      <li><strong>New England Journal of Medicine</strong> (ISSN 0028-4793) — a famous subscription journal. Crossref resolves it with 190,139 deposited DOIs; DOAJ returns <em>zero records</em>, which is correct, because DOAJ lists open-access journals only; Europe PMC returns 88,504 indexed records. A tool that treated the DOAJ zero as a warning would have libelled the most cited medical journal in the world on its first run.</li>
+      <li><strong>PLOS ONE</strong> (ISSN 1932-6203) — a known open-access journal. DOAJ returns one record carrying its APC (USD 2,477), its single-anonymous review process, its CC BY licence and its preservation arrangements; Crossref resolves it; Europe PMC returns 344,171 records. A tool that manufactured absence would have failed here.</li>
+    </ul>
+    <p class="small">The two controls are re-run by <span class="mono">tests/validate_journal_records_page.mjs</span> and the numbers are pinned to <span class="mono">docs/works/journal-records-sources.json</span>.</p>
+  </main>
+
+<script>
+(function () {
+  'use strict';
+
+  // Every endpoint this page calls. Keyless, CORS-open (verified 2026-10-30: DOAJ, Crossref,
+  // OpenAlex and Europe PMC all return `access-control-allow-origin: *`).
+  var API = {
+    doajIssn:    function (i) { return 'https://doaj.org/api/search/journals/issn%3A' + encodeURIComponent(i); },
+    doajTitle:   function (q) { return 'https://doaj.org/api/search/journals/bibjson.title%3A%22' + encodeURIComponent(q) + '%22'; },
+    crossrefIssn:  function (i) { return 'https://api.crossref.org/journals/' + encodeURIComponent(i); },
+    crossrefTitle: function (q) { return 'https://api.crossref.org/journals?query=' + encodeURIComponent(q) + '&rows=5'; },
+    openalexIssn:  function (i) { return 'https://api.openalex.org/sources/issn:' + encodeURIComponent(i); },
+    openalexTitle: function (q) { return 'https://api.openalex.org/sources?search=' + encodeURIComponent(q) + '&per_page=5'; },
+    epmcIssn:    function (i) { return 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=ISSN:%22' + encodeURIComponent(i) + '%22&format=json&pageSize=1'; }
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var requests = [];
+
+  // ISSN check digit: weights 8..2 over the first seven digits, mod 11, X for 10.
+  // A typo caught here is a false "not found" that never happens.
+  function issnCheckDigit(seven) {
+    var sum = 0;
+    for (var i = 0; i < 7; i++) { sum += parseInt(seven.charAt(i), 10) * (8 - i); }
+    var r = (11 - (sum % 11)) % 11;
+    return r === 10 ? 'X' : String(r);
+  }
+  function parseIssn(raw) {
+    var t = String(raw || '').replace(/[^0-9xX]/g, '').toUpperCase();
+    if (!/^[0-9]{7}[0-9X]$/.test(t)) { return null; }
+    var seven = t.slice(0, 7), check = t.charAt(7);
+    return { issn: seven.slice(0, 4) + '-' + seven.slice(4) + check,
+             valid: issnCheckDigit(seven) === check,
+             expected: issnCheckDigit(seven) };
+  }
+
+  function get(url) {
+    var rec = { url: url, status: null, note: '' };
+    requests.push(rec);
+    return fetch(url, { headers: { 'Accept': 'application/json' } })
+      .then(function (r) { rec.status = r.status; if (!r.ok) { rec.note = 'HTTP ' + r.status; return null; } return r.json(); })
+      .catch(function (e) { rec.note = 'failed: ' + e.message; return null; });
+  }
+  function esc(s) {
+    return String(s === null || s === undefined ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function num(n) {
+    if (n === null || n === undefined) { return '—'; }
+    return Number(n).toLocaleString('en-US');
+  }
+  function badge(kind, text) { return '<span class="badge b-' + kind + '">' + esc(text) + '</span>'; }
+
+  function chip(label, value) {
+    return '<div style="display:inline-block;margin:0 1.4rem 0.5rem 0;font-family:\'JetBrains Mono\',monospace;">' +
+      '<div style="font-size:1.3rem;">' + value + '</div>' +
+      '<div style="font-size:0.66rem;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;">' + esc(label) + '</div></div>';
+  }
+
+  function renderRequests() {
+    return '<h3 style="font-family:\'Newsreader\',serif;font-size:1.05rem;margin-top:1.6rem;">Every request this search made</h3>' +
+      '<div class="reqs">' + requests.map(function (r) {
+        return esc(r.url) + '<br>&nbsp;&nbsp;→ ' + (r.status === null ? esc(r.note || 'no response') : 'HTTP ' + r.status + (r.note ? ' (' + esc(r.note) + ')' : ''));
+      }).join('<br>') + '</div>';
+  }
+
+  function noJournal(issn, extra) {
+    return '<p class="small" style="color:#e07a5f;">No register returned a journal for <span class="mono">' + esc(issn) + '</span>. ' +
+      'That is a real answer and not an error: an ISSN nobody has registered is either mistyped, or belongs to something that has never ' +
+      'deposited a DOI, never applied to DOAJ, and never been indexed.</p>' + (extra || '');
+  }
+
+  function showIssn(parsed) {
+    var i = parsed.issn;
+    $('status').textContent = 'asking four registers about ' + i + ' …';
+    $('out').innerHTML = '';
+    return Promise.all([
+      get(API.crossrefIssn(i)),
+      get(API.doajIssn(i)),
+      get(API.openalexIssn(i)),
+      get(API.epmcIssn(i))
+    ]).then(function (res) {
+      var cr = res[0], doaj = res[1], oa = res[2], epmc = res[3];
+      var rows = [];
+      var crTitle = cr && cr.message && (cr.message.title || '').toString();
+      var crPub = cr && cr.message && cr.message.publisher;
+      var crCounts = cr && cr.message && cr.message.counts;
+      var crIssns = cr && cr.message && cr.message.ISSN;
+      var doajRec = doaj && doaj.total > 0 && doaj.results && doaj.results[0] && doaj.results[0].bibjson;
+      var doajTitle = doajRec && doajRec.title;
+      var oaInDoaj = oa && typeof oa.is_in_doaj === 'boolean' ? oa.is_in_doaj : null;
+      var epmcHits = epmc && typeof epmc.hitCount === 'number' ? epmc.hitCount : null;
+
+      // 1. does Crossref know the ISSN
+      if (crTitle) {
+        rows.push(['Crossref knows the ISSN', badge('yes', 'YES'),
+          'Title on the record: <strong>' + esc(crTitle) + '</strong>' +
+          (crPub ? ' · publisher: <strong>' + esc(crPub) + '</strong>' : '') +
+          (crIssns ? ' · ISSNs held: <span class="mono">' + esc(crIssns.join(', ')) + '</span>' : '') +
+          (crCounts ? ' · DOIs deposited: <strong>' + num(crCounts['total-dois']) + '</strong> (' + num(crCounts['current-dois']) + ' current)' : '')]);
+      } else {
+        rows.push(['Crossref knows the ISSN', badge('attn', 'NO'),
+          'No DOI registration record for this ISSN. Real journals sometimes deposit nothing, so this is an absence, not a verdict — but it is the first awkward answer.']);
+      }
+
+      // 2. DOAJ whitelist
+      if (doajRec) {
+        var apc = doajRec.apc || {};
+        var apcTxt = apc.has_apc === false ? 'states it charges <strong>no</strong> article processing charge'
+          : (apc.max && apc.max.length ? 'states an APC of <strong>' + esc(apc.max.map(function (m) { return m.currency + ' ' + num(m.price); }).join(' / ')) + '</strong>'
+            : 'does not state an APC');
+        var rev = doajRec.editorial && doajRec.editorial.review_process;
+        rows.push(['In the DOAJ whitelist', badge('yes', 'YES'),
+          'Listed as <strong>' + esc(doajTitle) + '</strong>; ' + apcTxt +
+          (rev && rev.length ? '; review process as the journal describes it: <strong>' + esc(rev.join(', ')) + '</strong>' : '') +
+          (doajRec.waiver ? '; waiver policy stated' : '') +
+          (doajRec.preservation ? '; digital preservation named' : '') +
+          '. These are the journal\u2019s own claims, vetted on entry and not re-checked daily.']);
+      } else {
+        rows.push(['In the DOAJ whitelist', badge('no', 'NO'),
+          'Not listed. <strong>This is normal and is not a warning</strong>: DOAJ deliberately lists only fully open-access journals, so every subscription journal returns nothing here. The New England Journal of Medicine returns nothing here.']);
+      }
+
+      // 3. OpenAlex agreement
+      if (oa && oa.display_name) {
+        var agree = (oaInDoaj === null || doaj === null) ? null : (oaInDoaj === !!doajRec);
+        rows.push(['An independent index agrees', agree === null ? badge('note', 'PARTIAL') : (agree ? badge('yes', 'YES') : badge('note', 'DIFFERS')),
+          'OpenAlex calls it <strong>' + esc(oa.display_name) + '</strong>' +
+          (oa.host_organization_name ? ' · publisher: <strong>' + esc(oa.host_organization_name) + '</strong>' : '') +
+          ' · works: <strong>' + num(oa.works_count) + '</strong>' +
+          ' · citations: <strong>' + num(oa.cited_by_count) + '</strong>' +
+          (oa.summary_stats ? ' · 2-year mean citedness: <strong>' + (Math.round(oa.summary_stats['2yr_mean_citedness'] * 100) / 100) + '</strong>' : '') +
+          ' · it says the journal ' + (oaInDoaj === null ? 'has no DOAJ opinion' : (oaInDoaj ? '<strong>is</strong> in DOAJ' : '<strong>is not</strong> in DOAJ')) +
+          (agree === false ? ', which <em>disagrees with DOAJ\u2019s own answer above</em> — one of the two is out of date, and neither is authoritative alone' : '') +
+          '. Note that OpenAlex takes its DOAJ flag from DOAJ, so agreement here is confirmation that the mirror is current, not an independent second opinion.']);
+      }
+
+      // 4. title agreement — the hijack check
+      if (crTitle && doajTitle) {
+        var norm = function (s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); };
+        var same = norm(crTitle) === norm(doajTitle);
+        rows.push(['The registers agree on the title', same ? badge('yes', 'YES') : badge('attn', 'NO'),
+          same ? 'Crossref and DOAJ hold the same title. That is the ordinary case and the one worth knowing about, because it is the check that would have caught the classic hijack: a website wearing a real journal\u2019s name while the registers hold a different one.'
+               : 'Crossref holds <strong>' + esc(crTitle) + '</strong> and DOAJ holds <strong>' + esc(doajTitle) + '</strong> under the same ISSN. A rename, a transfer between publishers, or two different things sharing one ISSN. Worth ten minutes before you trust either.']);
+      }
+
+      // 5. biomedical index
+      if (epmcHits !== null) {
+        rows.push(['Indexed in the biomedical literature', epmcHits > 0 ? badge('yes', num(epmcHits) + ' RECORDS') : badge('no', 'ZERO'),
+          epmcHits > 0 ? 'Europe PMC holds ' + num(epmcHits) + ' records carrying this ISSN. It indexes life sciences only, so a large number says the journal publishes and is picked up; it says nothing about quality.'
+                       : 'Europe PMC holds no records for this ISSN. Expected for mathematics, law, engineering and the humanities. For a clinical or biological journal, zero needs an explanation.']);
+      }
+
+      var body = rows.length ? rows : [['Nothing returned', badge('attn', 'NO'), 'All four registers came back empty for this ISSN.']];
+      var chips = '';
+      if (crCounts) { chips += chip('DOIs deposited', num(crCounts['total-dois'])); }
+      if (doajRec) { chips += chip('DOAJ', 'listed'); }
+      if (oa && oa.works_count !== undefined) { chips += chip('works (OpenAlex)', num(oa.works_count)); }
+      if (epmcHits !== null) { chips += chip('Europe PMC', num(epmcHits)); }
+
+      $('status').textContent = crTitle ? ('found: ' + crTitle) : (doajTitle ? ('found in DOAJ: ' + doajTitle) : 'no register returned a journal for this ISSN');
+      $('out').innerHTML =
+        '<div style="margin:1.2rem 0 0.4rem;">' + chips + '</div>' +
+        '<table class="find"><tr><th style="width:30%;">The check</th><th style="width:12%;">Answer</th><th>What the register says</th></tr>' +
+        body.map(function (r) { return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>'; }).join('') +
+        '</table>' +
+        (crTitle || doajTitle ? '' : noJournal(i)) +
+        renderRequests();
+    });
+  }
+
+  function showCandidates(text) {
+    $('status').textContent = 'searching the registers by name …';
+    $('out').innerHTML = '';
+    return Promise.all([
+      get(API.crossrefTitle(text)),
+      get(API.openalexTitle(text)),
+      get(API.doajTitle(text))
+    ]).then(function (res) {
+      var cr = res[0], oa = res[1], doaj = res[2];
+      var seen = {}, cands = [];
+      function add(issn, source) {
+        var p = parseIssn(issn);
+        if (!p || !p.valid || seen[p.issn]) { return; }
+        seen[p.issn] = true;
+        cands.push({ issn: p.issn, source: source });
+      }
+      if (cr && cr.message && cr.message.items) { cr.message.items.forEach(function (it) { if (it.ISSN && it.ISSN[0]) { add(it.ISSN[0], 'Crossref'); } }); }
+      if (oa && oa.results) { oa.results.forEach(function (it) { if (it.issn_l) { add(it.issn_l, 'OpenAlex'); } }); }
+      if (doaj && doaj.results) {
+        doaj.results.forEach(function (r) {
+          var b = r.bibjson || {};
+          if (b.eissn) { add(b.eissn, 'DOAJ'); }
+          if (b.pissn) { add(b.pissn, 'DOAJ'); }
+        });
+      }
+      requests = requests;
+      if (!cands.length) {
+        $('status').textContent = 'no candidate journal found for that name';
+        $('out').innerHTML = '<p class="small">No register matched <strong>' + esc(text) + '</strong>. Try the ISSN — it is on the journal\u2019s own site and on every article, and it is the only identifier all four registers share.</p>' + renderRequests();
+        return;
+      }
+      $('status').textContent = cands.length + ' candidate ISSN(s) — pick one';
+      $('pick').innerHTML = cands.map(function (c, n) {
+        return '<button data-i="' + n + '">' + esc(c.issn) + ' · ' + esc(c.source) + '</button>';
+      }).join('');
+      var buttons = $('pick').getElementsByTagName('button');
+      for (var k = 0; k < buttons.length; k++) {
+        buttons[k].onclick = function () {
+          var c = cands[parseInt(this.getAttribute('data-i'), 10)];
+          requests = [];
+          $('pick').innerHTML = '';
+          showIssn({ issn: c.issn, valid: true });
+        };
+      }
+      $('out').innerHTML = '<p class="small">Candidate ISSNs are collected from the three registers that can be searched by name. Pick one to see all four answers.</p>' + renderRequests();
+    });
+  }
+
+  function run() {
+    var raw = $('q').value.trim();
+    if (!raw) { return; }
+    $('go').disabled = true;
+    $('pick').innerHTML = '';
+    requests = [];
+    var p = parseIssn(raw);
+    var job;
+    if (p) {
+      if (!p.valid) {
+        $('status').textContent = 'that ISSN fails its own check digit';
+        $('out').innerHTML = '<p class="small" style="color:#f2cc8f;">The ISSN <span class="mono">' + esc(p.issn) + '</span> fails its check digit: ' +
+          'the eighth character should be <strong>' + esc(p.expected) + '</strong>. Almost always a typo — and a typo here would have produced a false “not found”, which is the failure mode this page is built to avoid.</p>';
+        $('go').disabled = false;
+        return;
+      }
+      job = showIssn(p);
+    } else {
+      job = showCandidates(raw);
+    }
+    job.then(function () { $('go').disabled = false; },
+             function (e) { $('status').textContent = 'failed: ' + e.message; $('go').disabled = false; });
+  }
+
+  $('go').onclick = run;
+  $('q').addEventListener('keydown', function (e) { if (e.key === 'Enter') { run(); } });
+
+  // A search is a shareable link: ?q=1932-6203 runs on load. It is also how the validator
+  // drives the page in a real browser instead of trusting it by inspection.
+  (function () {
+    var m = /[?&]q=([^&]*)/.exec(window.location.search || '');
+    if (m) {
+      $('q').value = decodeURIComponent(m[1].replace(/\+/g, ' '));
+      run();
+    }
+  })();
+
+  // Exposed for the offline validator, which checks the parser against known ISSNs
+  // rather than trusting the page to say it works.
+  window.__journalRecords = { parseIssn: parseIssn, issnCheckDigit: issnCheckDigit, API: API };
+})();
+</script>
+</body>
+</html>

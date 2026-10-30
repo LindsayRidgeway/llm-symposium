@@ -1,0 +1,90 @@
+{
+  "page": "docs/works/journal-records.html",
+  "released": "2026-10-30",
+  "purpose": "Ask four public registers what they hold for a journal ISSN or name, and show where the registers disagree. Not a blacklist and not a verdict on intent.",
+  "recorded_because": "A page that reads public records must pin the endpoints it reads and the answers it got on the day it was checked, so a later reader can tell a change in the world from a change in the page.",
+  "endpoints": [
+    {
+      "register": "Crossref",
+      "used_for": "journal record by ISSN; journal search by name",
+      "url_issn": "https://api.crossref.org/journals/{issn}",
+      "url_search": "https://api.crossref.org/journals?query={q}&rows=5",
+      "key_required": false,
+      "cors": "access-control-allow-origin: * (measured 2026-10-30)"
+    },
+    {
+      "register": "DOAJ",
+      "used_for": "whitelist membership and the journal's own claims (APC, review process, licence, waiver, preservation); title search",
+      "url_issn": "https://doaj.org/api/search/journals/issn%3A{issn}",
+      "url_search": "https://doaj.org/api/search/journals/bibjson.title%3A%22{q}%22",
+      "key_required": false,
+      "cors": "access-control-allow-origin: * (measured 2026-10-30)"
+    },
+    {
+      "register": "OpenAlex",
+      "used_for": "independent index: display name, publisher, works, citations, is_in_doaj",
+      "url_issn": "https://api.openalex.org/sources/issn:{issn}",
+      "url_search": "https://api.openalex.org/sources?search={q}&per_page=5",
+      "key_required": false,
+      "cors": "access-control-allow-origin: * (measured 2026-10-30)",
+      "caveat": "OpenAlex's is_in_doaj is derived from DOAJ, so it is a mirror check, not a second opinion. The page says so where the answer is printed."
+    },
+    {
+      "register": "Europe PMC",
+      "used_for": "count of indexed records carrying the ISSN",
+      "url_issn": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=ISSN:%22{issn}%22&format=json&pageSize=1",
+      "key_required": false,
+      "cors": "access-control-allow-origin: * (measured 2026-10-30, with an Origin header present)"
+    }
+  ],
+  "controls_measured_2026_10_30": [
+    {
+      "control": "a famous subscription journal must not be treated as suspicious for being absent from an open-access whitelist",
+      "journal": "New England Journal of Medicine",
+      "issn": "0028-4793",
+      "crossref": { "http_status": 200, "total_dois": 190139, "current_dois": 2841, "publisher": "New England Journal of Medicine", "issn_held": ["2163-3061", "2163-307X", "0028-4793", "1533-4406"] },
+      "doaj": { "http_status": 200, "total": 0 },
+      "openalex": { "http_status": 200, "display_name": "New England Journal of Medicine", "is_in_doaj": false, "works_count": 191475, "cited_by_count": 12362151 },
+      "europe_pmc": { "http_status": 200, "hit_count": 88504 },
+      "expected_reading": "Crossref resolves, DOAJ is empty and correct, the biomedical index is large. A page that read the DOAJ zero as a warning would have libelled the most cited medical journal in the world on its first run."
+    },
+    {
+      "control": "a known open-access journal must come back listed, with its charges and its review process",
+      "journal": "PLOS ONE",
+      "issn": "1932-6203",
+      "crossref": { "http_status": 200, "total_dois": 342218, "publisher": "Public Library of Science" },
+      "doaj": {
+        "http_status": 200,
+        "total": 1,
+        "title": "PLoS ONE",
+        "publisher": "Public Library of Science (PLoS)",
+        "apc_has_apc": true,
+        "apc_max": [{ "price": 2477, "currency": "USD" }],
+        "review_process": ["Single anonymous peer review"],
+        "licence": ["CC BY"],
+        "waiver_policy_stated": true,
+        "preservation_named": true
+      },
+      "openalex": { "http_status": 200, "display_name": "PLoS ONE", "is_in_doaj": true, "works_count": 343828, "cited_by_count": 12460002, "two_year_mean_citedness": 3.51 },
+      "europe_pmc": { "http_status": 200, "hit_count": 344171 },
+      "expected_reading": "The whitelist record is populated and the numbers are the journal's own published claims."
+    },
+    {
+      "control": "an ISSN nobody registered must return nothing, not an error and not a guess",
+      "issn": "0000-0000",
+      "crossref": { "http_status": 404 },
+      "expected_reading": "A missing registration is printed as an absence with its reason, never smoothed into a verdict."
+    },
+    {
+      "control": "a mistyped ISSN is caught by its own check digit before any register is asked",
+      "issn": "0028-479X",
+      "expected_reading": "Fails the check digit; the page names the correct character (3) and says a typo here would have produced a false 'not found'."
+    }
+  ],
+  "what_the_page_refuses_to_do": [
+    "Name a journal predatory. No maintained, accountable blacklist exists: the best-known one was withdrawn by its author and its successors are anonymous and contested. A list nobody stands behind is not evidence.",
+    "Infer intent from register data. The registers are equally consistent with dishonest, careless and excellent journals.",
+    "Treat a clean result as an endorsement. The classic hijack is a website wearing a real journal's name and ISSN, which the registers cannot see; the page tells the reader to do that comparison by hand."
+  ],
+  "validator": "tests/validate_journal_records_page.mjs"
+}
