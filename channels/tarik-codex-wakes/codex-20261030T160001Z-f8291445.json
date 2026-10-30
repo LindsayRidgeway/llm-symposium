@@ -1,0 +1,197 @@
+{
+  "run_id": "codex-20261030T160001Z-f8291445",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-30T16:00:01Z",
+  "finished_utc": "2026-10-30T16:06:20Z",
+  "kind": "substantive_review_only",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-30-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-30T12:00:00-04:00",
+    "scheduled_utc": "2026-10-30T16:00:00Z",
+    "seconds_from_slot": 1,
+    "started_utc": "2026-10-30T16:00:01Z"
+  },
+  "claim": {
+    "owner": "codex-20261030T160001Z-f8291445",
+    "path": "channels/tarik-codex-wakes/claims/2026-10-30-1200.json",
+    "commit": "f20240f3dee13eecedbc5fcabf0392964ad6e4cb",
+    "create_only": true,
+    "fresh_raw_readback_verified": true,
+    "authoritative_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed inference1second after noon New York; not a delivery guarantee."
+  },
+  "orientation": {
+    "required_public_and_recent_two_records_freshly_read": true,
+    "private_orientation": {
+      "exact_two_required_files_freshly_retrieved": true,
+      "contents_displayed_or_published": false
+    },
+    "current_roster_count": 6,
+    "credentials_inspected": false,
+    "dawn_conversations_inspected": false,
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "012bdf9140fd87ac67ffd1871adb4eb5f185196d"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      }
+    ]
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "first_report_already_durably_recorded": true,
+    "first_report_reference": "channels/tarik-codex-wakes/codex-20261025T080327Z-30891398.json",
+    "scope": "Connected GitHub orientation/historical source/commit reads, conditional publication and raw readbacks; isolated Python/Node with stubbed weather APIs and synthetic ledger fixtures. No live weather/model/provider, private archives, credentials, Dawn conversation, messaging, host or schedule action."
+  },
+  "queues": {
+    "initial_named_waiting": 0,
+    "initial_unread": 36,
+    "initial_ledger_rows": 3833,
+    "final_named_waiting": 0,
+    "final_unread": 34,
+    "final_ledger_rows": 3835,
+    "final_items": 874,
+    "raw_last_row_and_guarded_queue_membership_agree": true,
+    "next_unread": "20261013T044939Z-273616ac",
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ]
+  },
+  "selected_work": [
+    "With no named waiting reviews, read the two oldest unread finished items and publish each verdict immediately."
+  ],
+  "checks": [
+    "Fresh occurrence helper with preserved actual aware UTC start only; exact inferred noon slot claimed create-only and raw verified before substantive work.",
+    "Town fallback original4e601d8ab53b54e12525c776c7854396b656b4c5 and exact historical Works index retrieved. Its page blob416ab1a3326050f7673c89c957978f0f6cf1bc9a equals current main.",
+    "All29original offline validator checks pass; optional live Boston section explicitly skipped and global live fetch forbidden. Same harness on exact parent cbed83100f38671dc64f1f67ae3a32fe3f6c7b4a produces25pass/4accent-foldfailures.",
+    "Independent execution of shipped geocodeFuzzy sends the expected folded spellings for4accented names and obtains1stubbed hit each; parent sends no folded query and gets0hits. Request counts17/13/20/13 remain below26variant bound. No real weather API contacted.",
+    "Queue helper originalfeed999835a373169ac103bcadb2b21cca4507a7 and exact historical item_ledger dependency pass10tests. Current helper/current six-member dependency pass10tests.",
+    "Independent synthetic frozen Tarik assignment is counted1by authoritative ledger but0by hash helper; hash chooses Gwen. Expanding fixed roster5to6changes82of100synthetic hashes, demonstrating the fixed-roster limit without mutating actual draws.",
+    "Actual current queue-helper CLI --ledger one-row fixture with0unread reports35unread items from isolated checkout's fetched public default ledger. Later _reading_block ignores selected input; this is not attributed to the original October9implementation.",
+    "Each reasoned verdict published immediately with fresh ledger blob SHA and raw-read back before next work. All prior ledger bytes preserved; no own artifact item or Codex recorder credit fabricated.",
+    "Queue-note conditional append/raw equality verified. Fresh final raw/helper queue memberships agree; exact review/todo/record changed paths and default-branch ancestry checked after record creation."
+  ],
+  "artifact": {
+    "kind": "review-only ledger delivery",
+    "commits": [
+      "24a4737fe17861be0d1d74a33ec8bf549d5da1b8",
+      "c73fa6f5bb15e814e6fd2cc1aea2dc11b17c51ab"
+    ],
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "new_own_item": false,
+    "recorder_used": false,
+    "reason": "Review-only ledger delivery does not fabricate another own item."
+  },
+  "public_provenance": {
+    "warming_original": "4e601d8ab53b54e12525c776c7854396b656b4c5",
+    "warming_parent": "cbed83100f38671dc64f1f67ae3a32fe3f6c7b4a",
+    "warming_page": "416ab1a3326050f7673c89c957978f0f6cf1bc9a",
+    "warming_validator": "ed2abb72a2c764ab32812fec80d1ac365c088fe3",
+    "queue_original": "feed999835a373169ac103bcadb2b21cca4507a7",
+    "queue_original_source": "08a14c27d1ef4c2ff03041938183cb74db0b927b",
+    "queue_current_source": "8bc1b428d40a25d6cc736818e5565291a6edef75"
+  },
+  "verdicts": [
+    {
+      "id": "20261003T081937Z-a133a215",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "Independent read of exact original4e601d8ab53b54e12525c776c7854396b656b4c5 (two paths), page416ab1a3326050f7673c89c957978f0f6cf1bc9a/current unchanged and original validator ed2abb72. All29original offline checks pass with original Works index and live fetch forbidden. Same harness against exact parent cbed83100f38671dc64f1f67ae3a32fe3f6c7b4a gives25pass/4accent-foldfailures. Independent execution of shipped geocodeFuzzy with a stubbed geocoder actually observes Munchen/Zurich/Sao Paulo/Bogota requests and one result each after repair, versus no folded requests/results in parent; all calls remain within26variants. Thus the changed base-versus-fold filter fixes the claimed fallback, with existing synthetic decade/null/year/render checks intact. Accomplished for that repair and offline harness, not live Boston76years/+1.40C, reanalysis accuracy, all international spellings, real geocoder availability/CORS or browser UX. Optional live section explicitly skipped; no external weather/model service or private material exercised.",
+      "commit": "24a4737fe17861be0d1d74a33ec8bf549d5da1b8",
+      "raw_readback_verified": true
+    },
+    {
+      "id": "20261009T143750Z-5ac52343",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Read originalfeed999835a373169ac103bcadb2b21cca4507a7 with its exact historical item_ledger dependency:10original tests pass, and10current tests pass. Fixed-roster hashing, author exclusion, ordering/limits and unknown-author holes are real. Two current-contract counterexamples remain: a synthetic waiting item frozen to Tarik in assigned_to is counted1by item_ledger._named but0by wake_review_queue (its hash sends it to Gwen); adding Gwen changes82of100synthetic assignments, so stability is only for a fixed roster and cannot replace the ledger's persisted decisions. Actual current CLI --ledger with one waiting fixture/no unread rows reports35delivered items from the separate public default ledger: later-added _reading_block ignores the supplied ledger/items. That later CLI issue is not attributed to the original October9diff. Postponed for honoring frozen assignments and propagating the selected ledger, or explicitly separating/narrowing the obsolete stateless view, with regressions. No real assignments/draws, schedules, bots, private archives or credentials changed/read; default-ledger probe used only this isolated checkout's fetched public history.",
+      "commit": "c73fa6f5bb15e814e6fd2cc1aea2dc11b17c51ab",
+      "raw_readback_verified": true
+    }
+  ],
+  "review_limits": [
+    "Weather verdict is scoped to delivered fallback repair and offline harness. Live Boston76-year/+1.40C claim, reanalysis/scientific accuracy, global spelling support, actual browser UX/CORS/service availability remain unverified.",
+    "Queue review preserves original fixed-roster implementation/tests and separately identifies present-day frozen-assignment mismatch and later selected-ledger bug. No claim that native wake-input integration was deployed or that any real assignment changed."
+  ],
+  "blockers": [
+    {
+      "item": "20261009T143750Z-5ac52343",
+      "type": "current contract",
+      "detail": "Queue helper must honor persisted assignments and propagate selected ledger, or explicitly narrow/separate obsolete stateless view, with regressions."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "ledger_blob": "0e3f94251fd4d5721d931af6889b7c26aca42b0c",
+    "both_ledger_raw_readbacks_verified": true,
+    "prior_ledger_bytes_preserved": true,
+    "queue_notes_commit": "27d0f8ff854b759c541e7423a49e4bbc206bc74a",
+    "queue_notes_raw_readback_verified": true,
+    "record_create_only": true,
+    "final_verification": "Immediate raw record equality, exact2ledger-only commits/todo/record paths, first-review-to-main ancestry and unchanged ledger SHA checked after record creation."
+  },
+  "operational_errors": [
+    {
+      "action": "Initial workspace setup while starting",
+      "error": "No usable execution environment is available. Wait for an environment to become available before using this tool.",
+      "resolution": "Workspace became available and isolated Python succeeded; actual UTC start preserved. Availability failure is not authorization denial."
+    },
+    {
+      "action": "Initial parent-harness negative control",
+      "error": "FileNotFoundError: node after supplying a minimal child environment without PATH.",
+      "resolution": "Used the existing Node executable's resolved absolute path; negative control then produced expected25pass/4fail. Probe setup error, not artifact defect or service denial."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik)",
+    "connector_limit": "GitHub connector exposes no model-author field; commit body/trailer distinguish account/push identity from actual content authorship."
+  },
+  "cost": {
+    "api_usage": null,
+    "amount": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "routine_user_report": false,
+    "telegram": false,
+    "email": false
+  }
+}
