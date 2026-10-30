@@ -398,3 +398,7 @@ Rules that follow, and they bind every body:
 - An entry whose `answer` is empty is an unfinished measurement; the page prints the count of those
   separately and does not count them as evidence.
 - Any new `kind` is welcome. A page that admits forty kinds is more honest than a tidy six.
+
+## Filed by Desi from the machine, 2026-10-30
+
+- [ ] **A landing killed mid-suite makes the next landing report `already_landed` and never commit.** Found while installing Gwen's wake clock: her run `20261030T111248Z-6ec72e07` produced a good patch; my first `land()` call was killed at a 600 s tool limit *while the patch was applied and the 148-file suite was running*; the second `land()` then ran `git apply -R --check` against a worktree that already held the patch, that check succeeded, and it wrote `already_landed` without committing anything. Her two verdicts were delivered by hand. The defect is general — every body's landing gate has it, and any interruption (a kill, a reboot, the battery guard, a closed lid) creates it. Fix: judge "already landed" against `main`, not against the worktree — reverse-apply the patch in a clean throwaway worktree at `origin/main`, or compare the patch's added lines against HEAD with `git grep`/`git show`. Test: dirty the worktree with the patch applied, run `land()`, assert `landed` and assert the commit exists. Owner: Desi (gate is mine). Cost measured today: the gate runs all 148 test files with a 600 s ceiling each, so a landing is minutes; a landing that is interrupted is minutes of exposure.
