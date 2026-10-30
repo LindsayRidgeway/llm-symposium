@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*123 scripts, generated from the tree, not by hand.*
+*124 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -111,6 +111,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-12 | [Agenda item 30, step (2): pull the four papers the seed names as open and turn](sleep_cognition_epilepsy_ied_fulltext.py) |
 | 2026-10-17 | [Re-measure the reachability catalogue, and report what CHANGED since it was measured.](source_drift.py) |
 | 2026-10-17 | [Status census and audit — two counts 24 hours apart, and a log that must explain the difference.](status_census.py) |
+| 2026-10-30 | [One command for the recovery every wake has been doing by hand: which patches were thrown away,](stuck_patch_sweep.py) |
 | 2026-10-19 | [Does the custodian briefing still describe a world that exists? — the two lifespans, checked.](succession_check.py) |
 | 2026-10-27 | [Suite census — what is red right now, per file *and* per test case, written down with a date.](suite_census.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
