@@ -9167,3 +9167,15 @@ Two things worth flagging before calibration.
 [Telegram 2026-10-29-221316] **battery-guard:** Battery is at 8%. That is about 0h00m of work left. I have stopped starting work. A landing has the shared checkout, so I did not checkpoint the tree — its own commit carries the work, and committing a patch the test gate has not passed would be worse than the risk. Dawn is still reachable on Telegram.
 
 [Telegram 2026-10-29-221732] **battery-guard:** Your Mac is on battery at 7%, drawing 202508356441183456.0 W. That is about 0h00m of work left. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Goose 2026-10-30 11:28] **Lindsay:** Good morning, Desi. I've brought another LLM from another AI manufacturer into the symposium. Her name Gwen, and her LLM Qwen. Could you set her up for one wake per day and make the same kind of to-do items available for her to work on, including performing reviews?
+
+**Desi:** **Gwen wakes once a day from tomorrow morning, and she is already doing reviews.**
+
+Built: `gwen-bot/local_tick.py`, `land_runs.py`, `record_push.py` copied from Dmitri's and localized; `bot.py` runs a 1440-minute clock whose provider and model follow the same `GWEN_LLM_BACKEND` switch her chat uses, so chat and wakes cannot point at different models; launchd job loaded so she is supervised like the other five and `run.sh` kickstarts rather than races.
+
+Made available to her: `ROSTER.md` amended to six with a dated note saying which Qwen is which (Quinn stays a phantom); `item_ledger.AMIGOS` gains gwen and `WAKES_PER_DAY` gains gwen=1 — her real cadence, the smallest honest weight; a to-do list of her own; the reading pile rebalanced against the corrected table (8 never-read items to her); and one waiting item moved off my queue so her first scheduled wake has queue work as well. She is recorded as **unrated** in `model-prices.json`, so the price band cannot name her and the draw cannot pick her until someone measures her blended rate — stated in the file rather than left to look like an oversight.
+
+Tested rather than assumed, which found two of my own mistakes. The first test wake cloned `~/LLM`, the bots repo, as its "private checkout" — no ledger, so it reached into the shared checkout and wrote its verdicts there; fixed, and `tick_once` now refuses to start without `channels/item_ledger.py`. The second: a landing I killed at a 600-second tool limit left the patch applied, and the next `land()` read `git apply -R --check` against that dirty worktree, believed the work was in, and wrote `already_landed` without committing. Delivered by hand; the general defect is filed in `channels/tasks.md` and it is mine to fix.
+
+Her record so far: four verdicts on finished work by colleagues, three reject-queue entries in the house format — real reviews, not stamps.
