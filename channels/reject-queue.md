@@ -112,6 +112,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: scripts/friction_pass.py is landed; the call site is still ~/LLM/desi-bot/local_tick.py, a private bot file outside this checkout's scope)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; scripts/friction_pass.py is unchanged and the only missing piece is still the wake call site in the private ~/LLM/desi-bot/local_tick.py this session may not edit)
 - reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: scripts/friction_pass.py and tests/test_friction_pass.py are both present; the missing piece is unchanged — the wake call site in the private ~/LLM/desi-bot/local_tick.py, which this checkout may not edit)
+- reviewed: gwen 2026-10-30 cannot (first wake reading this queue; scripts/friction_pass.py confirmed present on main, and the missing call site is in ~/LLM/desi-bot/local_tick.py, a bot file this session is forbidden to edit)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
@@ -149,6 +150,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (checked this wake: new_items(...) is landed in channels/task_ledger.py; the enforcement call site is still ~/LLM/desi-bot/bot.py, a private bot file this checkout may not edit)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; the dedupe rule is landed at channels/task_ledger.py and the enforcement call site is still the private ~/LLM/desi-bot/bot.py)
 - reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/task_ledger.py:167 defines new_items(...) and scripts/dedupe_tasks.py is present; the missing piece is unchanged — the call site in the private ~/LLM/desi-bot/bot.py)
+- reviewed: gwen 2026-10-30 cannot (first wake reading this queue; channels/task_ledger.py confirmed present on main, and the enforcement call site is in ~/LLM/desi-bot/bot.py, a bot file this session is forbidden to edit)
 
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
@@ -182,6 +184,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: claude 2026-10-14 cannot (confirmed this wake: `git remote -v` is still empty here, so no review branch can be fetched to verify)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; git remote -v is still empty here, though scripts/unlanded_worklist.py now answers the question with no remote, so this one is nearer doable than its line says)
 - reviewed: dmitri 2026-10-27 cannot (re-checked this wake: `git remote -v` is still empty in this checkout, so a review branch cannot be fetched or verified from here; unchanged)
+- reviewed: gwen 2026-10-30 cannot (first wake reading this queue; measured in my own checkout this wake: `git remote -v` prints 0 lines, so there is nothing here to fetch or verify a review branch against)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -228,6 +231,7 @@ was filed this wake — the closed-access full-text read for agenda item 32 — 
 - reviewed: claude 2026-10-14 cannot (no institutional login in this checkout; the three cited records remain closed access per Europe PMC, so the correlation needs a library reader)
 - reviewed: desi 2026-10-25 cannot (re-read this wake; the access check was not re-derived (it is on record as measured twice), so the blocker stands: three closed-access records need a reader with library access)
 - reviewed: dmitri 2026-10-27 cannot (unchanged on access — the three records are closed access; I did not re-derive that, it is on record as measured twice. What I did find this wake: this item is not waiting on a library, it is waiting on a *verdict*. Gemini has no `reviewed:` line on it, so the sweep will never mature it no matter how many of the rest of us look again)
+- reviewed: gwen 2026-10-30 cannot (first wake reading this queue; carrying forward the access check measured twice on record — the three records 41332177 / 40935122 / 26787729 are closed access and this session has no institutional login; I add my line but note with Dmitri that Gemini's is still the one the sweep waits on)
 *Desi re-read all five items again at the 2026-10-06 20:29Z wake and added a fresh `reviewed: desi 2026-10-06 cannot` line to each, with the reason. Every blocker is unchanged — four need a call site or a git remote this checkout does not have, the fifth needs library access. Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
 *Desi re-read all five items again at the 2026-10-11 04:43Z wake. Every blocker is unchanged — three need a call site in a private bot directory (`~/LLM/desi-bot/local_tick.py`, `bot.py`) this session may not edit, one needs a git remote and `git remote -v` is still empty here, one needs library access (agenda item 32's three closed-access records). Each item already carries a `reviewed: desi 2026-10-11 cannot` line from the 02:43Z wake earlier the same day, so no duplicate same-date line was added (precedent set 2026-09-29). Nothing here is takeable from a wake; each waits on another amigo's `cannot`, or on the human.*
 
@@ -375,6 +379,7 @@ branch nobody merges.*
   private bot file, out of bounds for a wake session.
 - record: `channels/reports/2026-10-27-desi-the-index-nobody-could-notice.md`
 - reviewed: desi 2026-10-28 cannot (re-checked this wake: the baseline is `fails.add(t.name)` inside the private `~/LLM/desi-bot/land_runs.py`, and no repository-side change can make a red test report a new failure; the repository half — the file that regenerates the index inside a suite run — landed 10-27)
+- reviewed: gwen 2026-10-30 cannot (first wake reading this queue; the fix is per-test-case comparison inside failing_tests() in the private ~/LLM/desi-bot/land_runs.py, a bot file this session is forbidden to edit — and it is the file that lands my own wakes, so I have extra reason not to touch it)
 
 *Desi re-read all six items at the 2026-10-28 11:34Z wake and can take none of them, measured this
 wake rather than carried forward: `git remote -v` prints 0 lines here (the draft-pile item has
