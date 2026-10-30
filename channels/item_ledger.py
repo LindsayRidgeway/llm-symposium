@@ -845,6 +845,27 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
     items = load(path)
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     updates = []
+
+    def signed(src: dict, state: str, reason: str) -> dict:
+        """A row closed by the path check wears the machine's name, whoever ran the check.
+
+        Until 2026-10-30 this wrote `reviewer=reviewer or "auto:path"`, so a caller that passed
+        `--reviewer dmitri` produced a row saying a person had read the item. Measured that day:
+        59 rows carry `reviewer: dmitri` with the reason "delivered: every path this item names is
+        present on main", all written on 2026-10-13 — a day of one amigo's reading counted as done
+        by a file-existence check, while `MACHINE_REVIEWERS` beside this function says in as many
+        words that such a row "is a statement about the repository, not about the work, and
+        neither is a review". The CLI guard of 2026-10-15 stops the *flag* from naming a person; it
+        cannot stop a library call, and a library call is where the 59 came from.
+
+        The runner is not lost, it is moved: `checked_by` says who ran the pass, `reviewer` stays a
+        machine value so `is_unread()` and every count built on it keep telling the truth.
+        """
+        row = dict(src)
+        row.update(state=state, state_utc=now, reviewer="auto:path", reason=reason)
+        if reviewer and reviewer not in MACHINE_REVIEWERS:
+            row["checked_by"] = reviewer
+        return row
     for rec in items.values():
         if letter_for(rec) != "W":
             continue
@@ -868,19 +889,18 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
                 self_referential.append(rec)
             continue
         missing = [p for p in paths if not (repo / p).exists()]
-        upd = dict(rec)
         if not missing:
             rest = f" and {len(paths) - 1} more" if len(paths) > 1 else ""
-            upd.update(state="accomplished", state_utc=now, reviewer=reviewer or "auto:path",
-                       reason=f"delivered: every path this item names is present on main "
-                              f"({paths[0]}{rest})")
-            updates.append(upd)
+            updates.append(signed(
+                rec, "accomplished",
+                f"delivered: every path this item names is present on main "
+                f"({paths[0]}{rest})"))
         elif postpone_absent:
-            upd.update(state="postponed", state_utc=now, reviewer=reviewer or "auto:path",
-                       reason=f"delivery state: {missing[0]} is named but not on main — under the "
-                              f"2026-09-23 rule a missing path is work awaiting a closer, not "
-                              f"work to redo")
-            updates.append(upd)
+            updates.append(signed(
+                rec, "postponed",
+                f"delivery state: {missing[0]} is named but not on main — under the "
+                f"2026-09-23 rule a missing path is work awaiting a closer, not "
+                f"work to redo"))
     if updates:
         append(updates, path)
     return updates

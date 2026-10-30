@@ -577,8 +577,33 @@ class TestReconcilePaths(unittest.TestCase):
         self.assertEqual([r["id"] for r in made], ["20261010T000000Z-aaaaaaaa"])
         rec = il.load(self.path)["20261010T000000Z-aaaaaaaa"]
         self.assertEqual(rec["state"], "accomplished")
-        self.assertEqual(rec["reviewer"], "dmitri")
+        # The runner is recorded, but not as the reviewer: a path check is not a reading.
+        self.assertEqual(rec["reviewer"], "auto:path")
+        self.assertEqual(rec.get("checked_by"), "dmitri")
         self.assertIn("scripts/x.py", rec["reason"])
+
+    def test_a_path_check_never_counts_as_a_reading(self):
+        """Measured 2026-10-30 (Desi): 59 rows said `reviewer: dmitri` over a path check.
+
+        They were all written on 2026-10-13 and all carry the reason "delivered: every path this
+        item names is present on main", so one amigo's reading looked done by a file-existence
+        test. The cost is not cosmetic: `is_unread()` and the reading queue are built on
+        `MACHINE_REVIEWERS`, so each such row is one item the commons believes someone read.
+        Whoever runs the pass, the row must stay machine-signed and stay unread.
+        """
+        il.append([self._row("20261010T000000Z-44444444", ["scripts/x.py"])], self.path)
+        il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri")
+        rec = il.load(self.path)["20261010T000000Z-44444444"]
+        self.assertIn(rec["reviewer"], il.MACHINE_REVIEWERS)
+        self.assertTrue(il.is_unread(rec))
+        self.assertEqual(il.letter_for(rec), "D")
+
+    def test_a_machine_reviewer_is_not_re_recorded_as_a_runner(self):
+        il.append([self._row("20261010T000000Z-55555555", ["scripts/x.py"])], self.path)
+        il.reconcile_paths(self.path, repo=self.repo, reviewer="auto:path")
+        rec = il.load(self.path)["20261010T000000Z-55555555"]
+        self.assertEqual(rec["reviewer"], "auto:path")
+        self.assertNotIn("checked_by", rec)
 
     def test_one_missing_path_stays_waiting_by_default(self):
         il.append([self._row("20261010T000000Z-bbbbbbbb",
