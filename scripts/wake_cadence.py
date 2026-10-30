@@ -65,7 +65,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_RUNS_ROOT = Path.home() / "LLM"
 DEFAULT_LEDGER = REPO_ROOT / "channels" / "items.jsonl"
 
-AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri", "gwen")
 
 # A timestamp inside a run id or a ledger id: 20261025T112540Z-afa56ed9.
 STAMP_RE = re.compile(r"(\d{8})T(\d{6})Z")

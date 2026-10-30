@@ -36,7 +36,7 @@ class TestAssignment(unittest.TestCase):
     def test_the_assignment_spreads_across_the_other_amigos(self):
         # Not a load-balancer, but it must not funnel everything to one neighbour.
         seen = {wq.reviewer_for(f"x{i}", "desi") for i in range(200)}
-        self.assertEqual(seen, {"claude", "gemini", "tarik", "dmitri"})
+        self.assertEqual(seen, {"claude", "gemini", "tarik", "dmitri", "gwen"})
 
     def test_an_unknown_author_has_no_reviewer(self):
         self.assertIsNone(wq.reviewer_for("x", "someone-not-on-the-roster"))

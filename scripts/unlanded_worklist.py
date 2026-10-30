@@ -49,7 +49,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 HOME = Path(os.path.expanduser("~"))
-AMIGOS = ("desi", "claude", "gemini", "tarik", "dmitri")
+AMIGOS = ("desi", "claude", "gemini", "tarik", "dmitri", "gwen")
 RUNS_REL = Path("tick-state") / "runs"
 
 RUN_ID_RE = re.compile(r"^\d{8}T\d{6}Z-[0-9a-f]{8}$")

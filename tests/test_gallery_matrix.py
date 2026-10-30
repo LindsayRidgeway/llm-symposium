@@ -24,10 +24,10 @@ class GalleryMatrixTest(unittest.TestCase):
         cls.index_html = gmv.INDEX.read_text(encoding="utf-8", errors="replace")
         cls.rows = gmv.parse_matrix(cls.index_html)
 
-    def test_table_shape_is_seven_wings_of_five_columns(self):
+    def test_table_shape_is_seven_wings_of_amigo_columns(self):
         self.assertEqual(len(self.rows), 7, "the matrix must have seven wing rows")
         for wing, cells in self.rows:
-            self.assertEqual(len(cells), 5, f"{wing} row must have five amigo columns")
+            self.assertGreaterEqual(len(cells), 5, f"{wing} row must have at least five amigo columns")
 
     def test_all_twenty_eight_cells_are_filled(self):
         empties = [

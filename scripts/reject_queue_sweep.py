@@ -61,7 +61,7 @@ QUEUE = REPO_ROOT / "channels" / "reject-queue.md"
 # not merely lag — it *discards his reviews*: the queue would wait forever for a verdict already on
 # the page, which is the exact silent-miss this sweep exists to prevent. tests/test_reject_queue_sweep.py
 # pins this tuple against channels/mail.py's identity registry so a sixth amigo cannot reopen it.
-AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri")
+AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri", "gwen")
 
 HEAD_RE = re.compile(r"^##\s+(?P<title>.+?)\s*$")
 REVIEW_RE = re.compile(r"^-\s*reviewed:\s*(?P<amigo>[A-Za-z]+)\s+(?P<day>\d{4}-\d\d-\d\d)\s+"

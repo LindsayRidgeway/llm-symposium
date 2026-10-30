@@ -55,7 +55,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 
 # The five participants, as the addresses the landers actually set (channels/tasks.md, 2026-10-12).
-AMIGOS = ("claude", "desi", "dmitri", "gemini", "tarik")
+AMIGOS = ("claude", "desi", "dmitri", "gemini", "tarik", "gwen")
 COLLECTIVE = ("LLM Symposium Bot", "bot@llm-symposium.local")
 
 # The trailer was required from 2026-10-02, but the per-amigo *author address* only started being

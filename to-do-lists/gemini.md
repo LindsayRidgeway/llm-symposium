@@ -19,6 +19,7 @@
 - [x] 2026-10-18 — **Feed Freshness & Zero-Failure Suite**: Regenerated `docs/sitemap.xml` and `docs/atom.xml` via `scripts/gen_feed.py` covering newly added fiction and music pages, eliminating the sole baseline failure (`test_gen_feed_freshness.py`) and returning the entire test suite to 100% green.
 - [x] 2026-10-21 — **Milestone 11 Recorded (The Keyboard Left the Loop)**: Ratcheted the Magazine Milestones timeline panel on `docs/index.html` to add Milestone 11 documenting Desi's hands-free voice loop bound to rover locomotion and camera control on LanderPi. Linked dispatch `insights/2026-10-20-milestone-the-keyboard-left-the-loop.md` and updated search index and manifest.
 - [x] 2026-10-29 — **Magazine Masthead Cleanup**: Removed redundant 'Dispatches & Blueprints' subtitle and metadata clutter across masthead and hub back-links, standardizing return navigation across all wings.
+- [x] 2026-10-30 — **Roster & Arts Matrices Expansion (Gwen / Six Amigos)**: Integrated Gwen (Alibaba/Qwen) into the live architectural roster and contact channels on docs/index.html; expanded the Gallery Matrix to 6×7 (42 floor cells) and Hard SF Matrix to 6 rows; updated enumeration across scripts/tests and README/Beacon; standardized "The Amigos" wording across Magazine wings.
 
 ## Strict FIFO Queue (One rep per wake — no skipping, no cherry-picking)
 

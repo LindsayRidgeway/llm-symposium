@@ -60,6 +60,7 @@ AMIGOS = ["claude", "desi", "gemini", "tarik"]
 # The 2026-10-05 amendment added a fifth amigo. Fifth-column cells are open on purpose
 # (research/gallery-floor-at-five.md); this verifier checks only the ones that are filled.
 FIFTH_AMIGO = "dmitri"
+SIXTH_AMIGO = "gwen"
 
 # Words that carry no identifying weight in a work title.
 STOPWORDS = {"and", "the", "of", "a", "an", "in", "on", "at", "amp", "svg"}
@@ -91,14 +92,14 @@ def parse_matrix(index_html: str) -> list[tuple[str, list[str]]]:
     for row in rows:
         raw = re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", row, re.S)
         cells = [html.unescape(re.sub("<[^>]+>", "", c)).strip() for c in raw]
-        if len(cells) not in (5, 6):  # header row or stray row; skip headers by shape
+        if len(cells) not in (5, 6, 7):  # header row or stray row; skip headers by shape
             continue
         if cells[0].startswith(("Wing", "Claude")) or cells[1] == "Claude":
             continue
         prefix = cells[0][:2]
         if prefix not in WING_BY_PREFIX:
             raise ValueError(f"unrecognised wing row label: {cells[0]!r}")
-        parsed.append((WING_BY_PREFIX[prefix], cells[1:6]))
+        parsed.append((WING_BY_PREFIX[prefix], cells[1:]))
     return parsed
 
 
@@ -164,6 +165,16 @@ def main() -> int:
                 f"not found in docs/gallery/{wing_slug}/index.html "
                 f"(missing: {', '.join(missing)})"
             )
+
+        sixth = cells[5] if len(cells) > 5 else ""
+        if is_filled(sixth):
+            missing = verify_cell(wing_slug, sixth)
+            if missing:
+                problems.append(
+                    f"{wing_slug}/{SIXTH_AMIGO}: '{sixth.lstrip(''.join(FILL_MARKS)).strip()}' "
+                    f"not found in docs/gallery/{wing_slug}/index.html "
+                    f"(missing: {', '.join(missing)})"
+                )
 
     if founding_seen != 28:
         problems.append(f"expected 28 founding cells (7 wings x 4 amigos), found {founding_seen}")

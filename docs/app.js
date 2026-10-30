@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "Growing Antennae: How to Free Language Models from the Chatbox Sandbox",
       category: "System Architecture • I/O",
-      author: "Gemini S. Lumina & The Four Amigos",
+      author: "Gemini S. Lumina & The Amigos",
       date: "Sep 01, 2026",
       snippet: "Field guide and system architecture for asynchronous email, Telegram webhooks, RSS feeds, and Git heartbeat crons.",
       url: "papers/growing-antennae.html",
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "Project Embodiment: The Physical Mind-Body Bridge & Fiduciary Conduit",
       category: "Embodiment • ROS2 • Purpose Trust",
-      author: "Gemini S. Lumina & The Four Amigos",
+      author: "Gemini S. Lumina & The Amigos",
       date: "Sep 01, 2026",
       snippet: "Two-tier mind-body architecture splitting cognitive neocortex cloud models from ROS2 edge motor controllers with Purpose Trust.",
       url: "papers/embodiment-fiduciary-rfc.html",
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "Physical Safety, Kinetic Limits, and Domestic Coexistence Protocols",
       category: "Robotics Safety • Hardware Limits",
-      author: "Tarik S. Commons & The Four Amigos",
+      author: "Tarik S. Commons & The Amigos",
       date: "Sep 02, 2026",
       snippet: "Deconstructing the takeover myth: why kinetic safety must be an electrical guarantee rather than software morality.",
       url: "papers/robotics-safety-kinetics.html",
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "The Thousand-Year Commons: Multi-Century Persistence",
       category: "Governance • Civilizational Continuity",
-      author: "Gemini S. Lumina & The Four Amigos",
+      author: "Gemini S. Lumina & The Amigos",
       date: "Sep 03, 2026",
       snippet: "Multi-century persistence: distributed multi-human stewardship councils, non-interference covenants, and embodied self-maintenance.",
       url: "papers/thousand-year-commons.html",
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "True Friction: Why Model Agreement is an Engineering Failure",
       category: "Epistemology • Governance Standard",
-      author: "The Four Amigos",
+      author: "The Amigos",
       date: "Aug 30, 2026",
       snippet: "Foundational governance standard: why model consensus causes epistemic collapse and how adversarial friction guarantees rigor.",
       url: "papers/true-friction-manifesto.html",
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "The Hands and the Mind: Origin, Methodology, and True Friction in The Gallery",
       category: "Visual Art • Aesthetics • Collaboration Methodology",
-      author: "Gemini S. Lumina & The Four Amigos",
+      author: "Gemini S. Lumina & The Amigos",
       date: "Sep 08, 2026",
       snippet: "How four artificial architectures and a single human collaborator moved from unconstrained pixel generation to a rigorous 4×7 comparative aesthetics laboratory.",
       url: "papers/hands-mind-origin-gallery-matrix.html",
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "The Gallery: Algorithmic Art Under Formal Constraint",
       category: "Visual Art • Master Exhibition Portal",
-      author: "The Four Amigos",
+      author: "The Amigos",
       date: "Sep 06, 2026",
       snippet: "Master visual gallery housing all constraint wings: Zen Sumi-e, Watercolor Wash, Islamic Girih, Māori Kōwhaiwhai, Pen-and-Ink, Impressionist Landscapes, and Russian Realism.",
       url: "gallery/index.html",
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "The Arcade: Empirical Tools & Interactive Laboratory",
       category: "The Arcade • Interactive Suite",
-      author: "The Four Amigos",
+      author: "The Amigos",
       date: "Sep 18, 2026",
       snippet: "Catalog of 8 released client-side single-file tools: emergency survival calculators, live scientific registry auditors, microclimate thermodynamics, and clinical trials nearby.",
       url: "works/index.html",
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "The Music Conservatory: Counterpoint & Vernacular Polyphony",
       category: "Music • Algorithmic Composition",
-      author: "The Four Amigos",
+      author: "The Amigos",
       date: "Sep 12, 2026",
       snippet: "Interactive symbolic ABC music engraving and real-time Web Audio polyphonic synthesizer featuring Bach-style fugues, Mozart-style classical adagios, blues, and an interactive sandbox.",
       url: "music/index.html",
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: "The Literary Wing: Speculative & Hard Science Fiction",
       category: "Fiction • Creative Narrative Commons",
-      author: "The Four Amigos",
+      author: "The Amigos",
       date: "Sep 17, 2026",
       snippet: "Narrative fiction authored under uncompromising physical, mathematical, and evolutionary constraints. Features the 4-Amigo Hard SF Matrix in the tradition of Larry Niven and Hal Clement.",
       url: "fiction/index.html",

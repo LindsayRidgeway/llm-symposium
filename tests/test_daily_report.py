@@ -560,7 +560,7 @@ class TestFocusBlock(unittest.TestCase):
 
     def test_both_blocks_name_all_five_amigos_even_at_zero(self):
         for heading in ("Items finished, by amigo", "Items reviewed, by amigo"):
-            named = [line.split()[0] for line in self._block(heading)[:5]]
+            named = [line.split()[0] for line in self._block(heading)[:len(AMIGO_ORDER)]]
             self.assertEqual(named, list(AMIGO_ORDER), heading)
 
     def test_each_total_is_the_sum_of_every_line_it_names(self):

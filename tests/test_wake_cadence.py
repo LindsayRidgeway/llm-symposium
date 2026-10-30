@@ -153,7 +153,7 @@ class Cadence(unittest.TestCase):
 
 
 class CheckTable(unittest.TestCase):
-    TABLE = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 3}
+    TABLE = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 3, "gwen": 1}
 
     def measured(self, **over):
         base = {a: {"wakes_in_window": self.TABLE[a] * 7, "wakes_per_day": float(self.TABLE[a]),

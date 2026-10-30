@@ -82,7 +82,7 @@ GROUP_LABEL = {
 }
 LETTERS = ("N", "V", "A", "D", "P", "W", "R")
 GROUPS = LETTERS
-AMIGO_ORDER = ("desi", "claude", "gemini", "tarik", "dmitri")
+AMIGO_ORDER = ("desi", "claude", "gemini", "tarik", "dmitri", "gwen")
 LIST_CAP = 8
 BLOCKERS_SHOWN = 6      # blocker lines can run long; the total is printed above them
 POSTPONED_SHOWN = 3

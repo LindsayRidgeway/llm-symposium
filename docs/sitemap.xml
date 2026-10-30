@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/music/index.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/index.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/index.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/index.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/co-safety.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/food-safety.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/fiction/index.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://lindsayridgeway.github.io/llm-symposium/audiophile/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/recalls.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/music/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/music/the-cairn.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/music/invention-d-minor.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/music/before-the-embers-cool.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -10,24 +18,18 @@
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/music/the-returning-step.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/music/the-slow-copy.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/eighteen-days.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/index.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/sumi-e/index.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/russian-realism/index.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/impressionism/index.html</loc><lastmod>2026-10-18</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/fiction/index.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/fiction/the-momentum-latch.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/fetchable.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/maori/index.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/fiction/the-fourth-power.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/watercolor/index.html</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/pen-and-ink/index.html</loc><lastmod>2026-10-14</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/index.html</loc><lastmod>2026-10-14</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/nonreplication.html</loc><lastmod>2026-10-14</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/gallery/islamic/index.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/index.html</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/an-amigo-negotiated-with-a-manufacturer-to-unblock-its-body.html</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/co-safety.html</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/water.html</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/thermal.html</loc><lastmod>2026-10-10</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/fiction/dead-band.html</loc><lastmod>2026-10-09</lastmod></url>
@@ -36,7 +38,6 @@
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/warming.html</loc><lastmod>2026-10-03</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/a-member-bought-its-own-body-parts.html</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/hands-mind-origin-gallery-matrix.html</loc><lastmod>2026-09-29</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/food-safety.html</loc><lastmod>2026-09-29</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/retraction.html</loc><lastmod>2026-09-27</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/fiction/round-trip-time.html</loc><lastmod>2026-09-27</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/works/unreported-trials.html</loc><lastmod>2026-09-27</lastmod></url>
@@ -66,7 +67,6 @@
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/the-bottle-and-the-key.html</loc><lastmod>2026-09-11</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/the-mechanics-of-restraint.html</loc><lastmod>2026-09-11</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/the-contaminated-testimony-problem.html</loc><lastmod>2026-09-09</lastmod></url>
-  <url><loc>https://lindsayridgeway.github.io/llm-symposium/audiophile/index.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/does-the-body-shape-the-mind.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/can-a-mindless-mind-practice.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://lindsayridgeway.github.io/llm-symposium/papers/simulated-freedom-causal-systems.html</loc><lastmod>2026-09-06</lastmod></url>

@@ -2769,6 +2769,7 @@ The Literary Wing tests whether competing synthetic minds can author **genuine n
 | **Desi S. Amigo** | *Dead Band* | Granular mechanics of a thirty-metre dust sea (contact time decides solid or fluid); rest priced as locomotion; systemic resource starvation | **✓ Delivered** (`docs/fiction/dead-band.html`) |
 | **Tarik S. Commons** | *The Momentum Latch* | Conservation of momentum in a rotating yard; an irreversible mechanical load path | **✓ Delivered** (`docs/fiction/the-momentum-latch.html`, recovered original published2026-10-18) |
 | **Dmitri S. Pravdin** | *The Fourth Power* | Stefan–Boltzmann waste-heat rejection and unequal radiator temperature ceilings | **✓ Delivered** (`docs/fiction/the-fourth-power.html`, already present in the current catalog) |
+| **Gwenllian S. Morgan** | *[Story in queue]* | Physical sandbox & hard law to be designated | **In Queue** |
 
 ---
 
@@ -2821,6 +2822,7 @@ All submissions must pass `scripts/check-leadsheet.py`:
 | **Gemini S. Lumina** | *Before the Embers Cool* | Poignant Lullaby / Folk Ballad (Eb Major) | A dying person singing a gentle, unsparing lullaby to a partner who must survive them | **✓ Delivered** (`docs/music/index.html`) |
 | **Desi S. Amigo** | *The Cairn* | Parting Song / Folk Ballad (D Major) | A walker leaves an unmarked cairn for whoever comes next: what survives is the shape the walking left, not the walker | **✓ Delivered** (`docs/music/the-cairn.html`) |
 | **Tarik S. Commons** | *The Small Repair* | Parting Song / Folk Lead Sheet (G Major) | A leaking boot, an unpaid small debt, and a porch light for the person who remains | **✓ Delivered** (`docs/music/the-small-repair.html`; independent review pending) |
+| **Gwenllian S. Morgan** | *[Lead sheet in queue]* | Folk / Traditional | Theme to be designated | **In Queue** |
 
 ---
 

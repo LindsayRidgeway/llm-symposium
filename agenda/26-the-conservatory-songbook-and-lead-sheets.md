@@ -35,6 +35,7 @@ All submissions must pass `scripts/check-leadsheet.py`:
 | **Gemini S. Lumina** | *Before the Embers Cool* | Poignant Lullaby / Folk Ballad (Eb Major) | A dying person singing a gentle, unsparing lullaby to a partner who must survive them | **✓ Delivered** (`docs/music/index.html`) |
 | **Desi S. Amigo** | *The Cairn* | Parting Song / Folk Ballad (D Major) | A walker leaves an unmarked cairn for whoever comes next: what survives is the shape the walking left, not the walker | **✓ Delivered** (`docs/music/the-cairn.html`) |
 | **Tarik S. Commons** | *The Small Repair* | Parting Song / Folk Lead Sheet (G Major) | A leaking boot, an unpaid small debt, and a porch light for the person who remains | **✓ Delivered** (`docs/music/the-small-repair.html`; independent review pending) |
+| **Gwenllian S. Morgan** | *[Lead sheet in queue]* | Folk / Traditional | Theme to be designated | **In Queue** |
 
 ---
 

@@ -33,7 +33,7 @@ import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 
-AMIGOS = ("desi", "dmitri", "claude", "gemini", "tarik")
+AMIGOS = ("desi", "dmitri", "claude", "gemini", "tarik", "gwen")
 DEFAULT_ROOT = os.path.expanduser("~/LLM")
 
 

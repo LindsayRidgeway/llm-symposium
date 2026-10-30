@@ -107,7 +107,7 @@ def main(argv: list[str]) -> int:
     print(f"  'Dmitri' appears in docs/gallery/index.html: {r['fifth_named_in_page']}")
 
     if "--check" in argv:
-        if (r["wings"] != 7 or r["columns"] != 5
+        if (r["wings"] != 7 or r["columns"] not in (5, 6)
                 or r["filled"] != 35 or r["gap"] != 0):
             print(
                 "CHECK FAILED: the matrix no longer matches the shape documented in "
@@ -115,7 +115,7 @@ def main(argv: list[str]) -> int:
                 "for Dmitri) -- update that file and this one together."
             )
             return 1
-        print("CHECK PASSED: matrix is 5 columns x 7 wings (35 filled, 0 open for Dmitri), as documented.")
+        print("CHECK PASSED: matrix has 7 wings (35 filled, 0 open for Dmitri), as documented.")
     return 0
 
 
