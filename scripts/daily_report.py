@@ -605,8 +605,13 @@ def _review_block(items: dict[str, dict], window: dict, hours: int) -> list[str]
     return out
 
 
-def _in_window(rec: dict, hours: int) -> bool:
-    """Did this item reach its state inside the window? (state_utc, not filed_utc.)"""
+def _in_window(rec: dict, hours: int, now: dt.datetime | None = None) -> bool:
+    """Did this item reach its state inside the window? (state_utc, not filed_utc.)
+
+    `now` is a parameter and not a call to the clock because the block below claims ONE window:
+    reading the wall clock here while the caller passed a fixed instant gave two windows and a
+    report whose two halves could disagree about which period they described.
+    """
     stamp = rec.get("state_utc")
     if not stamp:
         return False
@@ -614,7 +619,8 @@ def _in_window(rec: dict, hours: int) -> bool:
         when = dt.datetime.strptime(stamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
     except ValueError:
         return False
-    return when >= dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=hours)
+    now = now or dt.datetime.now(dt.timezone.utc)
+    return when >= now - dt.timedelta(hours=hours)
 
 
 def _sections(items: dict[str, dict], hours: int) -> tuple[list[dict], list[dict]]:
@@ -666,7 +672,37 @@ def _filed_within(rec: dict, hours: int, now: dt.datetime) -> bool:
     return (now - when) <= dt.timedelta(hours=hours)
 
 
-def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
+def _sixth_bucket(counter: dict) -> list:
+    """Counter keys that are not one of the five amigos, in a stable order.
+
+    A row can be filed on the commons' behalf rather than by a body: `scripts/ledger_watch.py`
+    files scheduled whole-repository reviews with `amigo: "commons"`, deliberately, because that
+    field is what the draw excludes and "commons" is nobody, so any of the five can be named. The
+    first version of the block below printed the five AMIGO_ORDER names and nothing else, so such
+    a row was counted in the total and named on no line: on 2026-10-29 the report read
+    "total 19" over five lines summing to 18. `_letter_block` already names a sixth bucket this
+    way; one rule, two places, so the file cannot disagree with itself.
+    """
+    return [n for n in sorted(counter, key=lambda n: (n is None, str(n)))
+            if n not in AMIGO_ORDER and counter.get(n)]
+
+
+def _named_lines(counter: dict) -> list:
+    """The five amigos, zeros included, then any bucket that is not one of them."""
+    out = [f"  {who:<8} {counter.get(who, 0):>4}" for who in AMIGO_ORDER]
+    out += [f"  {(n or 'unnamed'):<8} {counter[n]:>4}" for n in _sixth_bucket(counter)]
+    return out
+
+
+def _joined_counts(counter: dict) -> str:
+    """`desi 4 · dmitri 3` — the same buckets, on one line, honestly summed."""
+    parts = [f"{n} {counter[n]}" for n in AMIGO_ORDER if counter.get(n)]
+    parts += [f"{n or 'unnamed'} {counter[n]}" for n in _sixth_bucket(counter)]
+    return " · ".join(parts)
+
+
+def render_focus(hours: int = 24, now: dt.datetime | None = None,
+                 items: dict[str, dict] | None = None) -> str:
     """The two questions the human asked on 2026-10-14, and nothing else.
 
     His words: "I think the report tries to answer more questions than I have right now." What he
@@ -689,7 +725,7 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
       "reviewed" say it without the clash, and neither depends on knowing the letter scheme.
     """
     now = now or dt.datetime.now(dt.timezone.utc)
-    items = load()
+    items = load() if items is None else items
     every = list(items.values())
     since = (now - dt.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%MZ")
 
@@ -698,15 +734,14 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
 
     reviewed = [r for r in every
                 if r.get("reviewer") not in (None, "auto:land") and _letter(r) in ("A", "P", "R")
-                and _in_window(r, hours)]
+                and _in_window(r, hours, now)]
     decided = collections.Counter(r.get("reviewer") for r in reviewed)
 
     out = [f"**Daily item report — {_local(now)}**",
            f"window: the {hours}h to {_local(now)} (since {since})",
            "",
            "**Items finished, by amigo** — the last 24 hours"]
-    for who in AMIGO_ORDER:
-        out.append(f"  {who:<8} {performed.get(who, 0):>4}")
+    out += _named_lines(performed)
     out.append(f"  {'total':<8} {sum(performed.values()):>4}")
     out.append("  where they stand:")
     for letter, label in (("W", "waiting"), ("A", "accomplished"), ("D", "delivered"),
@@ -715,13 +750,10 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
         if not hits:
             continue
         who = collections.Counter(r.get("amigo") for r in hits)
-        out.append(f"    {label:<13} "
-                   + " · ".join(f"{n} {who[n]}" for n in AMIGO_ORDER if who.get(n))
-                   + f"   total {len(hits)}")
+        out.append(f"    {label:<13} " + _joined_counts(who) + f"   total {len(hits)}")
 
     out += ["", "**Items reviewed, by amigo** — the last 24 hours"]
-    for who in AMIGO_ORDER:
-        out.append(f"  {who:<8} {decided.get(who, 0):>4}")
+    out += _named_lines(decided)
     out.append(f"  {'total':<8} {sum(decided.values()):>4}")
     out.append("  how they were decided:")
     for state, label in (("accomplished", "accomplished"), ("postponed", "postponed"),
@@ -730,9 +762,7 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None) -> str:
         if not hits:
             continue
         who = collections.Counter(r.get("reviewer") for r in hits)
-        out.append(f"    {label:<13} "
-                   + " · ".join(f"{n} {who[n]}" for n in AMIGO_ORDER if who.get(n))
-                   + f"   total {len(hits)}")
+        out.append(f"    {label:<13} " + _joined_counts(who) + f"   total {len(hits)}")
     return "\n".join(out)
 
 
