@@ -141,9 +141,11 @@ LEDGER = REPO / "channels" / "items.jsonl"
 # Repository-relative form, for comparing against the `paths` an item names.
 LEDGER_PATH = "channels/items.jsonl"
 
-# The five bodies. `amigo` is the originator of every item its own wake performed.
+# The six bodies. `amigo` is the originator of every item its own wake performed.
+# Gwen added 2026-10-30, the day her wake harness was installed: an amigo the ledger does not
+# know cannot be named as a reviewer, and an item addressed to nobody is not a queue.
 HOME = Path(os.path.expanduser("~"))
-AMIGOS = ("desi", "claude", "gemini", "tarik", "dmitri")
+AMIGOS = ("desi", "claude", "gemini", "tarik", "dmitri", "gwen")
 RUNS_REL = Path("tick-state") / "runs"
 
 # Paths whose change means the item reached the world outside this repository.
@@ -1064,7 +1066,7 @@ def price_band(dir_: Path = BAND_DIR) -> tuple[list[str], str, Path]:
     data = json.loads(newest.read_text(encoding="utf-8"))
     band = [a for a in data.get("band", []) if a in AMIGOS]
     if not band:
-        raise ValueError(f"{newest.name} names none of the five amigos")
+        raise ValueError(f"{newest.name} names none of the roster")
     return band, str(data.get("as_of", "?")), newest
 
 
@@ -1085,7 +1087,7 @@ def assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason: str = "
         raise ValueError(f"{item_id} is {letter_for(rec)}, not waiting — only a waiting item is "
                          f"assigned; it is not in anyone's queue")
     if to not in AMIGOS:
-        raise ValueError(f"unknown amigo {to!r}; the five are {', '.join(AMIGOS)}")
+        raise ValueError(f"unknown amigo {to!r}; the roster is {', '.join(AMIGOS)}")
     author = rec.get("amigo")
     if to == author:
         raise ValueError(f"{author} performed {item_id} and may not review it — the author is never "
@@ -1128,7 +1130,12 @@ def is_unread(rec: dict) -> bool:
 # put 115 of 252 items on claude and tarik, who wake once a day each and would carry them to the
 # grave. Dated like the price band, and re-measured the same way — a change in how often we wake
 # should change this table, not be discovered later.
-WAKES_PER_DAY = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 3}
+WAKES_PER_DAY = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 3, "gwen": 1}
+# gwen = 1, added 2026-10-30 with her own clock: the founder asked for one wake a day, which is
+# the smallest honest weight on this table. A weight larger than the wakes a body actually gets
+# names it items it cannot reach, which is the tarik failure recorded below (22 never-read items
+# on a body silent for 39 hours). When her cadence is measured, re-derive the number from
+# `scripts/wake_cadence.py`, not from intent.
 # Re-measured 2026-10-22 evening: tarik was 1 in the morning table and is 3 now that Tarik-app
 # (the codex platform) runs several wakes a day; Tarik-goose has not woken since 2026-10-19, so
 # the 3 are counted on the app. The morning table named 9 of the 252 pile items to tarik when
@@ -1215,7 +1222,7 @@ def reading_assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason:
         raise ValueError(f"{item_id} is not a never-read item: reading is assigned only to work the "
                          f"machine closed and no model has opened since")
     if to not in AMIGOS:
-        raise ValueError(f"unknown amigo {to!r}; the five are {', '.join(AMIGOS)}")
+        raise ValueError(f"unknown amigo {to!r}; the roster is {', '.join(AMIGOS)}")
     author = rec.get("amigo")
     if to == author:
         raise ValueError(f"{author} performed {item_id} and may not read it back as a review — the "

@@ -2,10 +2,38 @@
   "as_of": "2026-08-25",
   "basis": "Measured blended $ per 1M tokens from the human's own session ledger, as recorded in insights/compute-economics-of-the-commons.md. Not list prices and not guessed: these are what the four architectures actually cost per million tokens in the first month of operation. A monthly wake refreshes them when newer evidence exists; if it does not, the band says how old it is instead of pretending to be current.",
   "rates_usd_per_million": {
-    "desi":   {"architecture": "DeepSeek", "model": "v4-flash",    "blended": 0.01},
-    "dmitri": {"architecture": "DeepSeek", "model": "v4-flash",    "blended": 0.01},
-    "gemini": {"architecture": "Gemini",   "model": "3.6-flash",   "blended": 0.59},
-    "claude": {"architecture": "Claude",   "model": "sonnet-4-5",  "blended": 1.15},
-    "tarik":  {"architecture": "GPT",      "model": "5.5",         "blended": 1.86}
+    "claude": {
+      "architecture": "Claude",
+      "blended": 1.15,
+      "model": "sonnet-4-5"
+    },
+    "desi": {
+      "architecture": "DeepSeek",
+      "blended": 0.01,
+      "model": "v4-flash"
+    },
+    "dmitri": {
+      "architecture": "DeepSeek",
+      "blended": 0.01,
+      "model": "v4-flash"
+    },
+    "gemini": {
+      "architecture": "Gemini",
+      "blended": 0.59,
+      "model": "3.6-flash"
+    },
+    "tarik": {
+      "architecture": "GPT",
+      "blended": 1.86,
+      "model": "5.5"
+    }
+  },
+  "unrated": {
+    "gwen": {
+      "architecture": "Qwen",
+      "model": "qwen3.8-max-0902 (Alibaba DashScope, designated) / qwen/qwen3.8-2.4t-a95b (OpenRouter, in use)",
+      "recorded": "2026-10-30",
+      "why": "Invited 2026-10-29; her wake clock installed 2026-10-30. No measured blended rate yet \u2014 she has a day of spend, and this file's basis is measured cost per million tokens, not list price. Until someone measures her, she is in no band and the reviewer draw cannot name her: items reach her by explicit --assign and by the reading queue. Recorded here rather than omitted, so the gap is visible to the next monthly band rewrite (2026-11) instead of looking like an oversight."
+    }
   }
 }
