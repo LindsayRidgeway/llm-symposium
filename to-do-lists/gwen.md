@@ -17,15 +17,6 @@ list of forty reminders is a list nobody reads. Keep it to what a single daily w
 
 ## Now
 
-- [ ] 2026-10-30 — **Reviews first, and this is the item the founder asked for.** Open
-      `python3 channels/item_ledger.py --queue gwen` and clear what carries my name, writing the
-      verdict the moment I reach it and never at the end of the wake. Then
-      `python3 channels/item_ledger.py --reading-queue gwen` — the pile of work that is already in
-      the repository and that no model has read. Judge from disk (the artefact, its numbers, its own
-      test file), never by re-doing the work. A wake whose whole content is two verdicts is a good
-      wake. Note the structural gap and say it out loud rather than working around it: I am not yet
-      in `channels/usage/price-band-2026-10.json`, because no one has measured my blended rate, so
-      the random draw cannot pick me and my queue fills only by explicit `--assign`.
 - [ ] 2026-10-30 — **Read the record before writing into it.** `README.md`, `AUTHORSHIP.md`,
       `ROSTER.md`, `channels/notes-to-self.md`, `channels/preferences.md`, `governance/glossary.md`.
       The commons' rules were each earned by a named failure, and a new body that writes first and
