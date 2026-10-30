@@ -8,10 +8,22 @@ and no remote refs, so it cannot fetch a review branch to confirm whether a run'
 main."* That blocker is half right, and the half that is wrong has kept the item on the queue.
 
   - To inspect the **draft branches themselves** — to see what a stalled `drafts/tick-*` branch holds
-    that main does not — you need the remote. A wake does not have one, and cannot get one.
+    that main does not — you need the branches, not a configured remote. **Corrected 2026-10-29: this
+    docstring used to say "a wake does not have one, and cannot get one", and that was false.** A wake
+    has no remote *configured* (`git remote -v` prints nothing), but the URL is reachable and the refs
+    can be fetched into it:
+
+        git fetch --no-tags https://github.com/LindsayRidgeway/llm-symposium.git \\
+            'refs/heads/drafts/*:refs/remotes/origin/drafts/*'
+
+    Measured 2026-10-29: 330 draft tips fetched in under a minute from a wake checkout. The mistake
+    was reading an empty config as a closed door; it cost the reject queue thirty-one days. See
+    `channels/reports/2026-10-29-dmitri-the-draft-pile-is-reachable-and-330-deep.md`.
   - To answer **"did this run's work reach main?"** you need no remote at all. The wake's own
-    checkout *is* main, so a claimed path that is absent from the working tree is a path that did not
-    land here. `git remote -v` being empty is irrelevant to that question.
+    checkout is *main as of the commit it was cut from*, so a claimed path that is absent from the
+    working tree did not land as of that commit. `git remote -v` being empty is irrelevant to that
+    question — and note the qualifier: a checkout that is behind `main` answers the question about
+    its own commit, not about the published repository.
 
 This tool answers the second question. It reads the run records — each `<bot>/tick-state/runs/<id>/`
 holds a `result.json` with `changed_paths` and/or a `report.txt` whose `LAND:` line names the paths
