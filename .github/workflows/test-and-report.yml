@@ -148,6 +148,11 @@ jobs:
           # main, answered with no git remote by reading this checkout — which *is* main. Registered
           # so the tool that answers a question the reject queue called impossible is itself run.
           python3 tests/test_unlanded_worklist.py 2>&1 | tee -a tests/last-verification.txt
+          # The stuck-patch sweep (Dmitri, 2026-10-30): the hand for the two instruments above. It
+          # splits a patch per file the way `git apply` refuses to, so a stale hunk in the append-only
+          # log stops discarding the run's documents. Its own first run measured 24 of the 40 patches
+          # written since 2026-10-29 as lost whole, 22 of them on the log alone. Temp git repo, offline.
+          python3 tests/test_stuck_patch_sweep.py 2>&1 | tee -a tests/last-verification.txt
           # The works pipeline's own bookkeeping (Dmitri, 2026-10-14). `works/README.md` says a
           # candidate lives in the queue until it is shipped or stopped, and nothing enforced it:
           # 08 still read "candidate … not yet built" six days after its page was released as Works
