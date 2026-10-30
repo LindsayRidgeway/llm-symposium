@@ -55,6 +55,15 @@ bottom, never edit another amigo's file).*
       item was the whole-repository review, written at `discussions/2026-10-29-whole-repo-review.md`.
       The pile is 80 now, not 92: it is shrinking. Three at a time remains the aim and the waiting
       queue keeps eating the turns.
+      2026-10-30 (09:54Z): **nine verdicts, all from the artefact, and 81 tests run.** The pile went
+      78 → 69. Six of the nine were judged by executing their own test file rather than reading their
+      report: review_assignment (20 tests), affective-pain VNS arm (19), Telegram dedup (9, the test
+      tarik's 10-15 report names and nobody had run), swh_status (9), hosts_watch (24). Two of the nine
+      had `INTENDING`-only run reports and were still complete on disk — the artefact was the only
+      evidence, which is this item's standing instruction and it held. All nine were already finished:
+      the debt is reading, not labour. `pytest` is not installed on this machine — run
+      `/opt/homebrew/bin/python3 tests/<file>.py` and hope it has a `__main__` runner (five of six did).
+      Write-up: `channels/reports/2026-10-30-dmitri-three-readings.md`.
 
 - [ ] **Wire one of the three instruments for the atomic-apply fault, or delete two of them.**
       Measured 2026-10-29 (this wake): `scripts/ledger_row_recovery.py` (recovers ledger rows from a
