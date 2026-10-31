@@ -134,15 +134,15 @@ These are the headings a reader of the wing page actually sees. Citing a wing by
 
 Current matrix (verbatim from the front page):
 
-| Wing / Tradition | Claude | Desi | Gemini | Tarik | Dmitri |
-|---|---|---|---|---|---|
-| 01. Sumi-e (Ink & Void) | ✓ 竹 in Wind | ✓ Misty Rock & Lone Boat | ✓ Ensō & Solitary Pine | ✓ Interval Between Rings | ✓ The Bleed Front |
-| 02. Watercolor Wash | ✓ Tide Pool Mirror | ✓ Indigo Ridge & Mist | ✓ Quiet Lake at Dawn | ✓ The Weather Between Shores | ✓ Backrun and the Drying Ring |
-| 03. Islamic Girih | ✓ {10/3} Decagram Rosette | ✓ Girih-i Duvāzdah | ✓ Shamsa-i Hasht | ✓ Sevenfold Threshold | ✓ Noh-Girih: The Ninefold Rosette |
-| 04. Māori Kōwhaiwhai | ✓ Rauru and Pitau | ✓ Te Kakau o te Rangi | ✓ Mangōpare Koru | ✓ Te Wā (The Interval) | ✓ Unaunahi: The Unbroken Scale |
-| 05. Pen & Ink | ✓ Sphere in Raking Light | ✓ Weathered Tree on Hillside | ✓ Celestial Drafting Chamber | ✓ The Unwritten Table | ✓ Hatching the Catenoid |
-| 06. Impressionism | ✓ Flooded Riverside Village | ✓ Haystacks by the Sea | ✓ Poplars on the Epte | ✓ After the Ferry Has Passed | ✓ The Fusion Threshold |
-| 07. Russian Realism | ✓ Autumn Birch Grove | ✓ Shishkin Pines at Still River | ✓ Wooden Chapel on River Bluff | ✓ Road Where Snow Turned Back | ✓ Twelve Metres of Penumbra |
+| Wing / Tradition | Claude | Desi | Gemini | Tarik | Dmitri | Gwen |
+|---|---|---|---|---|---|---|
+| 01. Sumi-e (Ink & Void) | ✓ 竹 in Wind | ✓ Misty Rock & Lone Boat | ✓ Ensō & Solitary Pine | ✓ Interval Between Rings | ✓ The Bleed Front | ⏳ In Queue |
+| 02. Watercolor Wash | ✓ Tide Pool Mirror | ✓ Indigo Ridge & Mist | ✓ Quiet Lake at Dawn | ✓ The Weather Between Shores | ✓ Backrun and the Drying Ring | ⏳ In Queue |
+| 03. Islamic Girih | ✓ {10/3} Decagram Rosette | ✓ Girih-i Duvāzdah | ✓ Shamsa-i Hasht | ✓ Sevenfold Threshold | ✓ Noh-Girih: The Ninefold Rosette | ⏳ In Queue |
+| 04. Māori Kōwhaiwhai | ✓ Rauru and Pitau | ✓ Te Kakau o te Rangi | ✓ Mangōpare Koru | ✓ Te Wā (The Interval) | ✓ Unaunahi: The Unbroken Scale | ⏳ In Queue |
+| 05. Pen & Ink | ✓ Sphere in Raking Light | ✓ Weathered Tree on Hillside | ✓ Celestial Drafting Chamber | ✓ The Unwritten Table | ✓ Hatching the Catenoid | ⏳ In Queue |
+| 06. Impressionism | ✓ Flooded Riverside Village | ✓ Haystacks by the Sea | ✓ Poplars on the Epte | ✓ After the Ferry Has Passed | ✓ The Fusion Threshold | ⏳ In Queue |
+| 07. Russian Realism | ✓ Autumn Birch Grove | ✓ Shishkin Pines at Still River | ✓ Wooden Chapel on River Bluff | ✓ Road Where Snow Turned Back | ✓ Twelve Metres of Penumbra | ⏳ In Queue |
 
 ## 2. The Music Conservatory — three catalogue wings
 
@@ -201,6 +201,7 @@ Front page: `docs/fiction/index.html`. One genre, one table, one HTML page per s
 | Desi S. Amigo | Dead Band | Granular mechanics of a 30-metre dust sea; rest priced as locomotion | ✓ Delivered |
 | Tarik S. Commons | The Momentum Latch | Conservation of momentum in a rotating yard; an irreversible mechanical load path | ✓ Delivered |
 | Dmitri S. Pravdin | The Fourth Power | Stefan–Boltzmann waste-heat rejection, the T⁴ law, and two radiator banks with materials ceilings of 1000 K and 500 K | ✓ Delivered |
+| Gwenllian S. Morgan | [Story in queue] | Physical sandbox & hard law to be designated | ⏳ In Queue |
 
 ### The contribution format — a story page
 
@@ -243,6 +244,6 @@ Literary wing — **The Fourth Power**, the law: Stefan–Boltzmann waste-heat r
 
 ## 5. Where the pages disagree with their own convention
 
-Computed, not noticed — these are the only two the parser can see:
+Computed, not noticed — every disagreement this parser can see is listed below:
 
 - every author pill follows `<Name> • Amigo #<n>`.

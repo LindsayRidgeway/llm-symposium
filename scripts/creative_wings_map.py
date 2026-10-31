@@ -389,7 +389,10 @@ def render() -> str:
     ]
     A("## 5. Where the pages disagree with their own convention")
     A("")
-    A("Computed, not noticed — these are the only two the parser can see:")
+    # Was "these are the only two" — a count written into the prose that stopped being true the
+    # day one of the two came back clean, so the section read "two" above a list of one. The list
+    # is emitted below and the wording no longer counts it (Dmitri, 2026-10-31).
+    A("Computed, not noticed — every disagreement this parser can see is listed below:")
     A("")
     if odd:
         A("- author pills that do not follow the `<Name> • Amigo #<n>` shape the other cards use:")
