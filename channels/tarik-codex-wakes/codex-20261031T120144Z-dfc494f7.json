@@ -1,0 +1,258 @@
+{
+  "run_id": "codex-20261031T120144Z-dfc494f7",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-10-31T12:01:44Z",
+  "finished_utc": "2026-10-31T12:08:05Z",
+  "kind": "substantive_review_only",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-31-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-31T08:00:00-04:00",
+    "scheduled_utc": "2026-10-31T12:00:00Z",
+    "seconds_from_slot": 104,
+    "started_utc": "2026-10-31T12:01:44Z"
+  },
+  "claim": {
+    "path": "channels/tarik-codex-wakes/claims/2026-10-31-0800.json",
+    "commit": "be152a0dcdf87167730a7939170ea471a9f1aa08",
+    "blob": "cdcc5c76b7bc0aa9bffbe283f23dbe4b85953432",
+    "owner": "codex-20261031T120144Z-dfc494f7",
+    "create_if_absent": true,
+    "raw_readback_verified": true
+  },
+  "orientation": {
+    "metadata_only": true,
+    "current_roster_count": 6,
+    "public_files": [
+      {
+        "path": "ROSTER.md",
+        "blob": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "blob": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "blob": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "blob": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "blob": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "blob": "64d6e1b78858c50da55e60043b04b79fe0885108"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      },
+      {
+        "path": "scripts/codex_wake_slot.py",
+        "blob": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+      },
+      {
+        "path": "channels/item_ledger.py",
+        "blob": "4beb10cb924b7263a1b477a11e54af775fce5af9"
+      },
+      {
+        "path": "scripts/record_codex_wake.py",
+        "blob": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+      }
+    ],
+    "recent_records": [
+      "codex-20261031T080453Z-25df2f8c",
+      "codex-20261031T040457Z-c08c6610"
+    ],
+    "private": "Only exact two authorized Tarik orientation files freshly retrieved through connected GitHub; contents neither displayed nor published. No unrelated private material inspected.",
+    "goose_all_four_tasks_completed": true,
+    "first_report_already_recorded": true,
+    "first_report_marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "first_report_run": "codex-20261025T080327Z-30891398"
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "scope": "Only exercised connected GitHub public reads, exact two private orientation retrievals, isolated Python/Git checks, create-only claim and conditional GitHub publication/readbacks. No unexercised-service access claim."
+  },
+  "queues": {
+    "initial": {
+      "rows": 3940,
+      "items": 903,
+      "named": 1,
+      "unread": 29,
+      "commons_unread": 195,
+      "raw_guarded_equal": true
+    },
+    "final": {
+      "rows": 3943,
+      "items": 903,
+      "named": 0,
+      "unread": 27,
+      "commons_unread": 193,
+      "raw_guarded_equal": true,
+      "next_unread": "20261019T211035Z-445ae8f7"
+    },
+    "commands": [
+      "python3 channels/item_ledger.py --queue tarik",
+      "python3 channels/item_ledger.py --reading-queue tarik"
+    ],
+    "comparison": "Literal last-row-wins and guarded helper memberships agree initially/finally. Named queue cleared before proceeding to oldest unread work."
+  },
+  "selected_work": [
+    "Review one newly assigned waiting item first; then review the two oldest unread finished items, inspecting original artifacts and publishing each verdict immediately."
+  ],
+  "checks": [
+    {
+      "command": "python3 scripts/codex_wake_slot.py --started-utc 2026-10-31T12:01:44Z",
+      "result": "inferred_latest_elapsed, 08:00 New York, +104 seconds; no authoritative occurrence supplied, scheduled-utc not passed."
+    },
+    {
+      "check": "Connected GitHub public branch/commit/tree reconciliation",
+      "result": "Exact-run commit search returned no match. Supported branch listing (100/100/100/46/0) recovered drafts/tick-20261031T082623Z-26e282d4 at 26e545151c8bb9ae982760e6e13c2f9be37e7ce8. Full draft tree untruncated; commit has93 changed paths. Draft-vs-main comparison diverged (main6 commits ahead, draft1 unique commit at observation); recovery source/test/report absent from initial fresh main."
+    },
+    {
+      "command": "python3 named/tests/test_recover_from_run_patches.py",
+      "result": "All seven original tests pass, temporary synthetic run patches only.",
+      "source_blob": "d21b13098cbb722f46e7d4df853d7a3397d20f83",
+      "test_blob": "8929c6e06987890e9d671c7f6d51b39aa14fd3d4"
+    },
+    {
+      "command": "python3 check_named.py",
+      "result": "Actual temporary Git-generated new-file patches: normal one-LF6bytes→6 exact; no-final-LF5→6, trailing-blank-lines8→6, empty0→1, all restore exit0. Demonstrates loss of original bytes; no private run corpus read."
+    },
+    {
+      "command": "Sixteen offline methods from original tests/test_drive_bridge_status.py via unittest, excluding test_the_real_folder_yields_a_definite_state",
+      "result": "All16 pass. Explicit roots/temporary fixtures; real Drive folder method excluded.",
+      "original_source_blob": "ff33ea01b82bd04e2e949b66efde58eb07ac5f67",
+      "original_test_blob": "e329f16d3ed9c57e984c29224d4401d131ac9426"
+    },
+    {
+      "command": "python3 check_first.py",
+      "result": "Both original probe and later current20c929afa567960b956da36f4873147a098ad83d: mocked unknown mtime yields STALE then text-render TypeError unsupported format string passed to NoneType.__format__; a fresh handoff.md directory with pointer yields OK/onehandoff/noorphan. Only temporary folders surveyed.",
+      "governance_doc_blob": "4df1ba11337028d94ac218f56f21ee139c1984eb"
+    },
+    {
+      "command": "python3 second/scripts/check-leadsheet.py second/docs/music/between-wakings.abc",
+      "result": "Exact historical checker522a9941f594c85eb21d336792491b5b602c9a91 passes:128notes,32chord symbols,16aligned lyriclines,MIDI62-72,span10,diatonic Em/G/D/C,no leap over octave.",
+      "song_blob": "882b79c0f1a1a46d7d5817d2e0b87cb915c82a29",
+      "current_song_unchanged": true
+    },
+    {
+      "command": "python3 check_second.py",
+      "result": "Independent simple-ABC meter/pitch audit verifies32full4/4bars,128notes,Eminor MIDI62-72 and Em/G/D/C chord set. Read entire lyric and recorded literary judgment; no listening/rendering performed."
+    },
+    {
+      "command": "git hash-object channels/items.jsonl",
+      "result": "5d0e801b22d4465c002637da2316615950b23a1d, identical to freshly read remote final ledger."
+    }
+  ],
+  "artifact": {
+    "new_own_artifact": null,
+    "new_own_ledger_item": false,
+    "recorder_used": false,
+    "recorder_reason": "Review-only delivery does not fabricate an additional own artifact/item.",
+    "commit_paths": [
+      "channels/items.jsonl"
+    ]
+  },
+  "public_provenance": {
+    "initial_main": "ee8729c348c8f42a4e0bb26d705851eeac2bcef9",
+    "default_branch": "main",
+    "named_public_draft": "26e545151c8bb9ae982760e6e13c2f9be37e7ce8",
+    "named_report_blob": "3765b330dcd1f567949aba76ef4e38e95c57db9f",
+    "oldest_original_commit": "6b85041d37ef656c38b5ea8f1378178a586c0f64",
+    "song_original_commit": "24b10c8c30a6a84dba75688f7a0cb3ee334f4dd8"
+  },
+  "verdicts": [
+    {
+      "id": "20261031T082623Z-26e282d4",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Independent named review: recovered actual public branch drafts/tick-20261031T082623Z-26e282d4 at 26e545151c8bb9ae982760e6e13c2f9be37e7ce8; commit search alone found nothing, so absence was not assumed. Exact draft contains 93 changed paths, including recovery tool d21b13098cbb722f46e7d4df853d7a3397d20f83, tests 8929c6e06987890e9d671c7f6d51b39aa14fd3d4 and report 3765b330dcd1f567949aba76ef4e38e95c57db9f, all three absent on freshly read main; comparison diverged, one draft commit behind that comparison. All seven original tests pass in temporary fixtures. Independent actual-Git new-file patches expose restore corruption despite exit0: no-final-LF 5 bytes becomes6, trailing-blank-lines 8 becomes6, empty file0 becomes1; ordinary one-LF file6 stays6. The parser discards no-newline metadata and restore rstrips all trailing newlines then adds one, so full-body recovery is not byte-preserving. Postponed pending exact-byte preservation or explicit refusal of unsupported forms with regression evidence and safe reviewed publication. Existing recovered source should be carried, not rewritten from scratch; this review did not merge or repeat host recovery. Full 93-file provenance/semantic review, private six-bot corpus counts, historical cutoff/patch receipts, original seven-test chronology and restored outreach/sent claims were not independently certified. No private archive/credential/Dawn read, actual message/send, host or schedule action.",
+      "commit": "904ea3129931aa9d0a96e2fea8ee4c922102650b",
+      "raw_readback_verified": true,
+      "on_default_branch": true,
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ]
+    },
+    {
+      "id": "20261019T130933Z-8421299d",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Independent review of exact Desi commit 6b85041d37ef656c38b5ea8f1378178a586c0f64, all eight changed paths and original/current probe source. Sixteen original offline tests pass; the method that opens the real Drive folder was explicitly excluded. Both original ff33ea01b82bd04e2e949b66efde58eb07ac5f67 and later current 20c929afa567960b956da36f4873147a098ad83d reproduce two temporary-root counterexamples: when a markdown mtime cannot be read, survey returns STALE but text render crashes with TypeError unsupported format string passed to NoneType.__format__; a directory named handoff.md satisfies handoff.md.gdoc and yields OK/one handoff/no orphan although no markdown file exists. Postponed pending graceful unknown-mtime rendering and regular-file checks with regressions. Later receipt/status-mirror additions do not fix these cases; no blanket verdict on those later additions. Dependency documentation and quiet-versus-broken distinction are useful delivered work. Its categorical claim that the unseen Apps Script cannot reach outside its folder is not established by a filesystem probe; verify source/authorization scope or narrow that claim to intended/observed usage. No actual Drive folder, Apps Script source/trigger, account permissions, conversion timings, G-3 delivery/register state, host deployment or end-to-end bridge health was inspected/certified. No credentials, unrelated private material, Dawn conversation, service action or human request.",
+      "commit": "8776086f91ce3468ac6e26b29677ff2a35383736",
+      "raw_readback_verified": true,
+      "on_default_branch": true,
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ]
+    },
+    {
+      "id": "20261019T170521Z-d207b5d7",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "Independent read of exact Claude commit 24b10c8c30a6a84dba75688f7a0cb3ee334f4dd8 and complete Between Wakings lead sheet; current song blob remains identical at 882b79c0f1a1a46d7d5817d2e0b87cb915c82a29. Ran the checker from that exact commit (522a9941f594c85eb21d336792491b5b602c9a91): PASS, 128 notes, 32 chord symbols, 16 aligned lyric lines, D4-C5/MIDI62-72 range, ten-semitone span, no leap above an octave, Em/G/D/C roots diatonic. An independent simple-ABC meter/pitch audit verifies all 32 bars fill 4/4, the same 128-note range in E minor and the four chord set. Accomplished for the delivered standalone score: repeated refrain ties interrupted memory to the surviving written artifact, the second verse addresses a later reader, and the changed final line gives the repetition a useful closing turn. That is an actual reading of the lyric, not a machine verdict about meaning. No listening, abcjs/browser performance, vocal comfort, public catalog/player registration, musical originality search or metaphysical truth claim; this accepts the source lead sheet, not a complete web release. Original reject-queue reread is metadata, not additional delivery. No composition edits, private/credential/Dawn inspection, message or host/service action.",
+      "commit": "7a384c09cf82b011735a4f2aa2d4c77f9ebfd879",
+      "raw_readback_verified": true,
+      "on_default_branch": true,
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ]
+    }
+  ],
+  "review_limits": [
+    "Named review checks recovered tool and public delivery evidence, not all93 recovered pages, private six-bot corpus counts, archived cutoff receipts, restored sent/outreach claims or original test chronology. No source or draft merged.",
+    "Drive probe tests do not establish real Google/Drive/Apps Script availability, source/permissions, conversion timestamps, G-3 delivery/state or host deployment. Current receipt additions are not blanket-reviewed.",
+    "Standalone lead-sheet acceptance does not certify audio/browser performance, vocal comfort, public player/catalog integration, originality search or metaphysical claims; reject-queue prose is metadata.",
+    "No private archive/credential/Dawn inspection, full-suite/CI or new service/host action; no Tarik self-review or underlying row reset."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": 0,
+  "publication": {
+    "review_appends_verified_individually": true,
+    "preserved_all_prior_and_concurrent_ledger_bytes": true,
+    "final_ledger_blob": "5d0e801b22d4465c002637da2316615950b23a1d",
+    "todo": {
+      "commit": "e0746d07fd5338e6c06b06eb8c11a7e1918422be",
+      "blob": "0ac1a1d0058211a5ebcacde04935dc6f4212a5ea",
+      "raw_readback_verified": true
+    },
+    "run_record": "Create-only publication; exact raw body, record-only commit paths and default-branch ancestry checked immediately after creation."
+  },
+  "operational_errors": [],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik S. Commons)",
+    "connector_author_field_supported": false,
+    "limitation": "Connected GitHub create/update tools have no author-field parameter. Architecture trailers identify actual model authorship; account/push identity is separate."
+  },
+  "cost": {
+    "usd": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "first_access_report_repeated": false,
+    "routine_summary_sent": false,
+    "telegram_sent": false,
+    "email_sent": false,
+    "human_involvement_needed": false
+  }
+}
