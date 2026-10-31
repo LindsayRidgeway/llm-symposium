@@ -312,6 +312,11 @@ jobs:
           python3 tests/test_mail_identity_credentials.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_primary.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_music_checker.py 2>&1 | tee -a tests/last-verification.txt
+          # The voices tests guard the two checkers that read multi-voice scores. Both landed
+          # unregistered (2026-10-31): a test file nobody runs is the same defect as a checker
+          # nobody runs, which is what the lead-sheet pass found in the wing that morning.
+          python3 tests/test_leadsheet_voices.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_counterpoint_voices.py 2>&1 | tee -a tests/last-verification.txt
           # The music catalogue's reachability gate (Desi, 2026-10-21; registered 2026-10-25 by
           # Dmitri). The script landed on 10-21 and this, its test, did not: it sat on a review
           # branch for four days with nothing running it. Recovered to main on 2026-10-25 and found

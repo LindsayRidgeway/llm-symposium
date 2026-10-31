@@ -219,7 +219,11 @@ class TestIndependentCounterpoint(unittest.TestCase):
         self.assertEqual(float(timeline[-1][0] + timeline[-1][1]), 0.75)
 
     def test_api_physical_range_boundary_and_both_sides(self):
-        for note, expected in [("C", True), ("B,", False), ("^C", False)]:
+        # run_checks() answers in three states, not a bool: 'pass' / 'fail' /
+        # 'unchecked'. The third state is not a pass — that collapse is the bug
+        # the tri-state exists to stop. Same outcomes as before, strictly finer:
+        # the out-of-range notes must be 'fail', not merely falsy.
+        for note, expected in [("C", "pass"), ("B,", "fail"), ("^C", "fail")]:
             with self.subTest(note=note):
                 self.assertEqual(
                     counterpoint.run_checks(f"L:1/8\nK:C\n[V:1] {note}8 |", ranges={"1": (60, 60)}),
@@ -227,7 +231,9 @@ class TestIndependentCounterpoint(unittest.TestCase):
                 )
 
     def test_api_unknown_range_voice_is_failure(self):
-        self.assertFalse(counterpoint.run_checks("K:C\n[V:1] C8 |", ranges={"typo": (60, 72)}))
+        self.assertEqual(
+            counterpoint.run_checks("K:C\n[V:1] C8 |", ranges={"typo": (60, 72)}), "fail"
+        )
 
     def test_cli_range_accepts_physical_midi_and_preserves_default(self):
         score = "L:1/8\nK:C\n[V:1] C8 |\n[V:2] E,8 |"

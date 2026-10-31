@@ -237,9 +237,27 @@ def parse_voice_line(line, unit=Fraction(1, 8), key_sig=None):
 
 
 def extract_voices(abc_text):
-    """Split ABC body into per-voice full token streams, handling [V:n] markers
-    that may appear inline (this codebase writes one [V:n] tag at the start of
-    each physical line)."""
+    """Split ABC body into per-voice token streams.
+
+    Two legal ways of naming a voice are both in use in this wing, and both are
+    read here:
+
+      * inline tags -- one `[V:n]` tag at the start of each physical line
+        (what most scores here write, and the only form this function used to
+        understand);
+      * declaration -- a header line `V: <id> [params]`, after which the body
+        lines belong to that voice until the next `V:` header.
+
+    Before 2026-10-31 only the inline form was parsed. A score written the
+    declaration way produced no voices at all, and 'no voices' was reported as
+    a failure — so the run printed "nothing to check" and exited 0. Three of
+    the six scores in docs/music/ were in exactly that state: read as clean
+    without one note of theirs having been looked at.
+
+    Body-level fields (`w:` lyric lines above all) are skipped rather than fed
+    to the note parser: a lyric line is full of letters A-G, and parsing them
+    as pitches would invent notes that are not in the score.
+    """
     unit = Fraction(1, 8)
     m = re.search(r'^L:\s*1/(\d+)', abc_text, re.M)
     if m:
@@ -250,14 +268,31 @@ def extract_voices(abc_text):
         key_sig = parse_key(km.group(1))
     voices = {}
     order = []
+
+    def bucket(vid):
+        if vid not in voices:
+            voices[vid] = []
+            order.append(vid)
+        return voices[vid]
+
+    current = None
     for raw_line in abc_text.splitlines():
-        vm = re.match(r'\s*\[V:\s*(\S+)\]\s*(.*)', raw_line)
+        vm = re.match(r'\s*\[V:\s*([^\]\s]+)\]\s*(.*)', raw_line)
         if vm:
-            vid, rest = vm.group(1), vm.group(2)
-            if vid not in voices:
-                voices[vid] = []
-                order.append(vid)
-            voices[vid].extend(parse_voice_line(rest, unit, key_sig))
+            current = vm.group(1)
+            bucket(current).extend(parse_voice_line(vm.group(2), unit, key_sig))
+            continue
+        dm = re.match(r'\s*V:\s*([^\]\s]+)', raw_line)
+        if dm:
+            current = dm.group(1)
+            bucket(current)
+            continue
+        # Other ABC information fields (w: lyrics, X:, T:, K: ...) are not music.
+        if re.match(r'\s*[A-Za-z]:', raw_line):
+            continue
+        if current is None:
+            continue
+        bucket(current).extend(parse_voice_line(raw_line, unit, key_sig))
     return order, voices
 
 
@@ -325,10 +360,23 @@ def check_range(name, timeline, lo, hi):
 
 
 def run_checks(abc_text, ranges=None, verbose=True):
+    """Return one of three states, never a bare bool:
+
+        'pass'       every check ran and found nothing
+        'fail'       a check ran and found a violation
+        'unchecked'  the checker could not judge this input (no voices, or only
+                     one voice and no range to test) — which is NOT a pass.
+
+    The third state exists because collapsing it into the first two is how an
+    instrument lies: "nothing to check" was returned as a failure by this
+    function and turned into exit 0 by the caller, so a score it could not read
+    came out looking clean. `scripts/check-leadsheet.py` answers in the same
+    three states for the same reason.
+    """
     order, voices = extract_voices(abc_text)
     if not voices:
-        print("No [V:n] voices found — nothing to check.")
-        return False
+        print("No voices found (neither [V:n] tags nor V: headers) — cannot check.")
+        return 'unchecked'
     timelines = {v: events_to_timeline(evs) for v, evs in voices.items()}
     ok = True
     print(f"Voices found: {order}")
@@ -336,6 +384,12 @@ def run_checks(abc_text, ranges=None, verbose=True):
         n_notes = sum(1 for _, _, m in timelines[v] if m is not None)
         span = timelines[v][-1][0] + timelines[v][-1][1] if timelines[v] else 0
         print(f"  {v}: {n_notes} notes, length {float(span):.2f} whole-notes")
+
+    sounding = [v for v in order if timelines[v]]
+    if len(sounding) < 2 and not ranges:
+        print(f"\nOnly {len(sounding)} voice(s) with notes — no voice pair exists, "
+              "so counterpoint cannot be judged here. (unchecked, not clean)")
+        return 'unchecked'
 
     print("\n--- Parallel fifths/octaves check ---")
     any_viol = False
@@ -349,7 +403,9 @@ def run_checks(abc_text, ranges=None, verbose=True):
                 print(f"[{va} vs {vb}] {len(viols)} violation(s):")
                 for line in viols:
                     print(line)
-    if not any_viol:
+    if len(sounding) < 2:
+        print("No voice pair to compare.")
+    elif not any_viol:
         print("None found. Clean.")
 
     if ranges:
@@ -366,7 +422,7 @@ def run_checks(abc_text, ranges=None, verbose=True):
             else:
                 print(f"[{v}] all notes within [{lo},{hi}].")
 
-    return ok
+    return 'pass' if ok else 'fail'
 
 
 SELF_TEST_PIECES = {
@@ -427,5 +483,6 @@ if __name__ == '__main__':
 
     with open(args.file) as f:
         text = f.read()
-    ok = run_checks(text, ranges=ranges)
-    sys.exit(0 if ok else 1)
+    status = run_checks(text, ranges=ranges)
+    print(f"\n[{ {'pass': 'PASS', 'fail': 'FAIL', 'unchecked': 'UNCHECKED'}[status] }] {args.file}")
+    sys.exit({'pass': 0, 'fail': 1, 'unchecked': 2}[status])
