@@ -92,7 +92,17 @@ class RealCheckout(unittest.TestCase):
         self.assertIn("Desi", seats)
         self.assertIn("Dmitri", seats)
         self.assertNotIn("Full", seats)
-        self.assertEqual(len(seats), 5)
+        # The seat count is read from the roster, not written here. It was written here as 5, and on
+        # 2026-10-29 Gwen was invited: six seats, and a red suite with nothing broken. The header row
+        # ("Amigo | Architecture | ...") and the separator must still not read as seats.
+        with open(os.path.join(ROOT, "ROSTER.md"), encoding="utf-8") as fh:
+            data_rows = [
+                line for line in fh
+                # "Amigo" anywhere in the line would drop Desi S. Amigo's own row, which is what
+                # this test exists to catch. Match the header cell, not the word.
+                if line.startswith("|") and not line.startswith("| Amigo ") and "---" not in line
+            ]
+        self.assertEqual(len(seats), len(data_rows))
 
     def test_desi_and_dmitri_have_written_a_section(self):
         state = {s["seat"]: s["present"] for s in check.seat_state(ROOT, check.roster_seats(ROOT))}
