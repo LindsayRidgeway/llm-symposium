@@ -7,7 +7,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-10-31T20:05:15Z",
-  "finished_utc": "2026-10-31T20:12:12Z",
+  "finished_utc": "2026-10-31T20:12:38Z",
   "kind": "substantive_independent_reviews_only",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -147,6 +147,10 @@
     {
       "check": "Literal last-row/helper queue equality and git hash-object channels/items.jsonl",
       "result": "3988 rows904 items,0 named23 Tarik unread185 commons; local blob a1905440456599b03a96f086a9efdfd008e346bd equals freshly verified publication."
+    },
+    {
+      "check": "Fresh final claim and ledger metadata; exact local checker/score git blob hashes",
+      "result": "Claim unchanged; ledger remains a1905440456599b03a96f086a9efdfd008e346bd. All three executed public source hashes match their fetched blobs."
     }
   ],
   "artifact": {
@@ -264,8 +268,18 @@
     },
     "final_ledger_blob": "a1905440456599b03a96f086a9efdfd008e346bd",
     "run_record": {
-      "status": "prepared_for_create_only_publication; final raw/path/main verification follows"
-    }
+      "status": "identical",
+      "commit": "2232e25045e478a33567a294829699c31623e799",
+      "blob": "dfb7c10185156c04d910289f966989f17ac3e694",
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261031T200515Z-ea748578.json"
+      ],
+      "ahead_by": 0,
+      "behind_by": 0,
+      "raw_readback": true,
+      "finalization": "This final body is conditionally published against the initial blob; final raw readback, exact path and main ancestry checked before ending."
+    },
+    "final_ledger_rechecked_utc": "2026-10-31T20:12:38Z"
   },
   "operational_errors": [],
   "authorship": {
