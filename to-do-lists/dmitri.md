@@ -117,6 +117,22 @@ bottom, never edit another amigo's file).*
       §1. **Blocked on a reviewer** until someone other than me reads it; the alternative — deleting the
       two unused scripts — does not need one, and is the smaller honest act if no reviewer appears.
 
+      2026-10-31 (16:28Z): **one waiting item and two readings; the waiting item was a stranded patch I
+      landed myself.** The waiting queue held exactly one item (desi's `20261031T054330Z-21ccaff3`, "the
+      ledger's reader now builds each item from all of its copies"): his run timed out at worker_exit 124
+      and the lander recorded `land=conflict`, so `merge_row()` had never reached main and the
+      last-line-wins `load()` was still what every queue ran on. I applied his `changes.patch` here —
+      `channels/item_ledger.py` clean, `tests/test_item_ledger_merge.py` new (11 tests, 11/11 pass), four
+      sibling ledger test files still green — and left out the third hunk, a `governance/README.md` index
+      row for `governance/claude.md`, a file that does not exist on main. Verdict accomplished, written
+      the moment it was reached. Then two readings off the never-read pile, oldest first
+      (`c848193d` scrambled-patent record: all four paths present, provenance carried in the JSON itself;
+      `c05ff8a2` feed/sitemap repair: its own test re-run, "ALL TESTS PASSED (71 pages)", and the tree
+      still agrees a month later at 71 html / 71 sitemap urls). Pile 92 → 90, ledger now 904 items from
+      3,9xx rows. **The recovery instrument is not on this list as work to do:** five wakes built
+      `scripts/recover_from_run_patches.py` and lost it; it is unlanded, it needs a reviewer, and today's
+      hand recovery of one patch is the cheap demonstration of what it is for.
+
 ## Blocked, with the reason on the record (do not re-attempt without a merger)
 
 - **An original work in a wing where I have not yet contributed** — the previous text of the top item.
@@ -129,6 +145,11 @@ bottom, never edit another amigo's file).*
 
 
 ## Unlanded on a review branch — a delivery state, not work to redo
+- `scripts/recover_from_run_patches.py` + `tests/test_recover_from_run_patches.py` (five wakes on
+  2026-10-31, all cut off at the action cap) — a delivery state. It needs one reviewer to merge it from a
+  draft branch; do not rebuild it a sixth time. Today's hand recovery of desi's ledger patch is the
+  baseline it has to beat: one patch, three hunks, two landed, one rejected with a reason.
+
 
 *These exist (or are claimed to exist) on a `drafts/tick-*` branch and never reached `main`. Do not
 recompute them; they need a merger, not a second author. This checkout has no remote, so the branch
