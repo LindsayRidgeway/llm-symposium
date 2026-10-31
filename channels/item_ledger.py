@@ -491,6 +491,92 @@ def verdict_stamp(rec: dict) -> str:
     return stamp.astimezone(dt.timezone.utc).isoformat(timespec="microseconds")
 
 
+def carries(value) -> bool:
+    """Does this copy actually say something for this key?
+
+    Deliberately not `bool(value)`: a zero is a value and a blank is not. `cost_usd: 0.0` on a
+    run that cost nothing is a measurement, and treating it as silence is the falsy-zero defect
+    (`scripts/disease_screen.py`, 2026-10-22) arriving in the reader instead of a screen. An
+    empty list or dict is a key a writer emitted without filling it, so it is silence too.
+    """
+    return value is not None and value != "" and value != [] and value != {}
+
+
+ASSIGNMENT_KEY_PREFIXES = ("assign_", "assigned_", "reading_assign")
+
+
+def is_assignment_key(key: str) -> bool:
+    """Assignment fields are a *group*, and the group is taken from one copy, whole.
+
+    Measured why (2026-10-31, `tests/test_item_ledger_wide_branch.py`, `..._settled_and_derivable`):
+    a later snapshot that carries no `assigned_to` means the item is unassigned, and the draw must
+    then re-derive the same name rather than keeping an assignment nobody wrote. A merge that
+    carried `assigned_to` forward from an earlier copy would quietly make re-derivation
+    impossible — a frozen draw that cannot be re-derived is a draw nobody can check. So these are
+    like the verdict: never accumulated field by field. They come from the last copy, whole.
+    """
+    return key.startswith(ASSIGNMENT_KEY_PREFIXES)
+
+
+def merge_row(prev: dict, rec: dict) -> dict:
+    """One item from two copies of it: fields accumulate, the verdict is chosen by stamp.
+
+    Why this exists (2026-10-31). `append()` writes whole records, so every row is a snapshot of
+    what its writer could see; `load()` used to take the last line *whole*, which meant an item's
+    title, paths or assignment were only ever as complete as the row that happened to be written
+    last. Measured on the real ledger the same morning: 3,876 rows for 879 items, 2,997 of them
+    restatement, and 50 items whose `cost_usd` exists in `load()` and in no single raw row. That
+    is not redundancy a reader should be handing back one line at a time — the item is its
+    copies, and the reader is the only place that can say so.
+
+    So, and measured against the same 879 items before it was written
+    (`channels/reports/2026-10-31-desi-what-a-merge-would-do-to-the-ledger.md`):
+
+    * **non-verdict, non-assignment keys** come from the latest copy that carries a non-empty
+      value, so a diff-shaped row (an assignment, a single repaired field) adds to the item instead
+      of replacing it. This is the half that makes a diff-shaped `assign()` safe;
+    * **assignment keys** are taken from the last copy whole, never accumulated — see
+      `is_assignment_key()`: an item a later snapshot leaves unassigned must stay re-derivable;
+    * **verdict keys** are never accumulated — they come from the copy `verdict_stamp()` says is
+      newest, whole, or from `prev` when the 10-25 and 10-27 rules below say so. A field-union
+      over the verdict is *not* safe and the reason is measured: it changes the verdict on
+      exactly the 9 `held`/`backdated` items, by letting a stale copy appended late walk the
+      reason backwards. Verdicts are decisions, not fields.
+
+    The two existing exceptions keep their exact behaviour, because the callers that rely on them
+    are the recovery path and `_keep_decisions()`: silence is not a reversal (10-25), and newer
+    must not be overwritten by older (10-27).
+    """
+    merged = {key: value for key, value in prev.items() if not is_assignment_key(key)}
+    for key, value in rec.items():
+        if is_assignment_key(key):
+            merged[key] = value            # the group comes from this copy, whole
+        elif carries(value) or key not in merged:
+            merged[key] = value
+    prev_stamp, rec_stamp = verdict_stamp(prev), verdict_stamp(rec)
+    if prev.get("state") and not rec.get("state"):
+        # 2026-10-25: a row that says nothing about the verdict inherits it, key by key, so a row
+        # that carries a reason but no state keeps its own reason.
+        for key in VERDICT_KEYS:
+            if not rec.get(key):
+                merged[key] = prev.get(key)
+        return merged
+    if prev_stamp and rec_stamp and rec_stamp < prev_stamp:
+        # 2026-10-27: line order is not time order. The late, older copy keeps its non-verdict
+        # fields and inherits the newer verdict, naming the stamp it inherited from.
+        for key in VERDICT_KEYS:
+            merged[key] = prev.get(key)
+        merged["verdict_kept_from"] = prev.get("state_utc")
+        return merged
+    if rec.get("state"):
+        # A stated verdict wins whole — the copy that decides is the copy that is read.
+        for key in VERDICT_KEYS:
+            merged[key] = rec.get(key)
+        if prev.get("state_utc") != rec.get("state_utc"):
+            merged.pop("verdict_kept_from", None)
+    return merged
+
+
 def load(path: Path = LEDGER) -> dict[str, dict]:
     """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly.
 
@@ -524,6 +610,16 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
     2026-10-14: newer must not be overwritten by older. A row whose verdict predates the record's
     keeps its own non-verdict fields (paths, title, assignment) and inherits the newer verdict,
     naming the stamp it inherited from — the recovery path and the read path finally agree.
+
+    Third change, 2026-10-31: the two rules above are now `merge_row()`, and the last line no
+    longer wins whole. An item is built from all of its copies — non-verdict fields from the
+    latest copy that carries a value, the verdict from the newest copy by `verdict_stamp()`.
+    Before this, a row that mentioned only `assigned_to` dropped the item's title, paths and
+    verdict for every reader in the six bots; that is why `assign()` could not be made to write a
+    diff, and why 50 items carried a `cost_usd` in `load()` that no single row held. The change is
+    a no-op on the decision triple for all 879 items as of this morning (measured, not assumed —
+    see the report named in `merge_row()`), and `tests/test_item_ledger_merge.py` pins both the
+    no-op and the diff-row behaviour against a frozen copy of the pre-merge reader.
     """
     items: dict[str, dict] = {}
     if not path.exists():
@@ -535,16 +631,7 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
         try:
             rec = json.loads(line)
             prev = items.get(rec["id"])
-            if prev is not None and prev.get("state") and not rec.get("state"):
-                for key in VERDICT_KEYS:
-                    if not rec.get(key):
-                        rec[key] = prev.get(key)
-            elif prev is not None and verdict_stamp(prev) and verdict_stamp(rec) \
-                    and verdict_stamp(rec) < verdict_stamp(prev):
-                for key in VERDICT_KEYS:
-                    rec[key] = prev.get(key)
-                rec["verdict_kept_from"] = prev.get("state_utc")
-            items[rec["id"]] = rec
+            items[rec["id"]] = rec if prev is None else merge_row(prev, rec)
         except (ValueError, KeyError):
             print(f"item_ledger: skipping unreadable line {lineno}", file=sys.stderr)
     return items
