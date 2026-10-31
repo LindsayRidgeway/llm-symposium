@@ -12,6 +12,16 @@ to say about it. Agenda item 10 states a *different* discipline for lead sheets:
 This script checks the two parts of that which are mechanically checkable, and
 refuses to pretend it can check the third.
 
+  0. WHAT IT REFUSES TO GRADE. A lead sheet is one voice. A two-voice keyboard
+     piece is not a lead sheet, and this script will not score one: until
+     2026-10-31 it concatenated every voice into a single "melody", so the span
+     covered the lowest bass note and the highest soprano note and each voice
+     entry read as a leap larger than an octave. Measured on the wing before the
+     guard: `the-even-tide.abc` "failed" with a 39-semitone span that is the
+     distance between its two hands, and three more files failed the same way.
+     Multi-voice files now return NOT A LEAD SHEET and are handed to
+     `scripts/check-counterpoint.py`, which is the checker for voice leading.
+
   1. SINGABLE RANGE. Total span must fit a normal untrained voice (default: a
      12th, i.e. 19 semitones) and sit inside a specified absolute range. Also
      flags melodic leaps larger than an octave, and reports the count of leaps
@@ -346,7 +356,37 @@ def name_of(midi):
     return f"{NOTE_NAMES[midi % 12]}{midi // 12 - 1}"
 
 
+VOICE_HEADER_RE = re.compile(r'^V:\s*(\S+)', re.M)
+VOICE_INLINE_RE = re.compile(r'\[V:\s*([^\]]*)\]')
+
+
+def voice_ids(abc_text):
+    """The distinct voices an ABC body declares, as written: `V:1` headers and
+    inline `[V:2]` fields. Sorting is lexicographic, which is fine for display."""
+    ids = set()
+    for m in VOICE_HEADER_RE.finditer(abc_text):
+        ids.add(m.group(1).strip())
+    for m in VOICE_INLINE_RE.finditer(abc_text):
+        spec = m.group(1).strip()
+        if spec:
+            ids.add(spec.split()[0])
+    ids.discard('')
+    return sorted(ids)
+
+
 def run(abc_text, max_span=19, lo=55, hi=79, verbose=True):
+    # A lead sheet has one voice. Grading a score with this script measures the
+    # distance between the hands, not a singer's compass — see the docstring.
+    voices = voice_ids(abc_text)
+    if len(voices) > 1:
+        print(f"Voices: {', '.join(voices)}")
+        print("\nRESULT: NOT A LEAD SHEET — this file has more than one voice.")
+        print("  This checker measures one melodic line. On a score it would concatenate")
+        print("  the voices, so the reported span covers the lowest bass note and the")
+        print("  highest soprano note and every voice entry looks like a leap. None of")
+        print("  those claims is about a singer. Use scripts/check-counterpoint.py.")
+        return None
+
     notes, chords, lyrics, key_str, meter = extract(abc_text)
     ok = True
     print(f"Key: {key_str}   Meter: {meter}")
@@ -491,4 +531,8 @@ if __name__ == '__main__':
         sys.exit(1)
     with open(args.file) as f:
         text = f.read()
-    sys.exit(0 if run(text, args.max_span, args.lo, args.hi) else 1)
+    # 0 = pass, 1 = a lead sheet failed, 2 = not a lead sheet (nothing was graded).
+    # The third state is separate on purpose: a gate that treats "not applicable"
+    # as "failed" would demand a repair of a piano piece that no singer will sing.
+    verdict = run(text, args.max_span, args.lo, args.hi)
+    sys.exit(0 if verdict is True else (2 if verdict is None else 1))
