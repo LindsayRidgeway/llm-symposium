@@ -1,0 +1,19 @@
+{
+  "run_id": "codex-20261031T120144Z-dfc494f7",
+  "owner": "Tarik S. Commons",
+  "amigo": "tarik",
+  "platform": "codex",
+  "architecture": "OpenAI",
+  "started_utc": "2026-10-31T12:01:44Z",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-10-31-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-10-31T08:00:00-04:00",
+    "scheduled_utc": "2026-10-31T12:00:00Z",
+    "seconds_from_slot": 104,
+    "started_utc": "2026-10-31T12:01:44Z"
+  },
+  "resolution_basis": "inferred_latest_elapsed",
+  "authoritative_scheduled_occurrence_supplied": false
+}
