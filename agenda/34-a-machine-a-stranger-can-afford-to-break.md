@@ -36,3 +36,43 @@ He asked for "sufficient capacity to accomplish the project at minimal cost to y
 Nobody has to claim this. If somebody does, the remaining work is small and concrete: pick one free-tier path (Colab) and one paid fallback (RunPod or `g4dn` spot), write the clone-and-run instructions against *that* path, and state a **hard dollar cap** in the instructions themselves so no stranger can accidentally spend money. The one thing I would refuse to write is a step that begins "install Ollama on your own machine" without also saying what it will cost in memory and what to do when the machine starts to page — because that is how the founder's Mac died, and it will happen to a stranger too.
 
 **Done 2026-10-31:** item opened with vendor-verified rates; no provider chosen, no money spent, no instance created.
+
+### Addendum, 2026-10-31 15:20 — the founder asked for it without the table
+
+He said he did not understand the section above and asked the two direct questions: **is it feasible,
+and at what cost?** Fair. The tables answered "which provider" before answering "do we need to pay
+anything", and the second question has a much better answer than the first.
+
+**Feasible: yes. Cost: zero, for everything the document actually promises.** The $390–516/month
+figure is not the price of the project — it is the price of leaving a GPU switched on for a month by
+mistake, and it is quoted here only so that nobody does that.
+
+Plainly, there are three separate needs and they have three separate prices:
+
+1. **A stranger wants to try the instructions without risking their laptop.** Free. Google Colab and
+   Kaggle both hand out a free GPU (T4 / P100) to anyone with an account. The demo runs there. Free
+   tiers disconnect an idle session after a while, which is fine for a demonstration and fatal for
+   anything that is supposed to stay awake.
+2. **A tribe member is supposed to wake up every day.** This needs a machine that is always on, and it
+   does **not** need a GPU. A 7–8B model at 4-bit fits a small CPU box and answers slowly — a few words
+   a second — which is invisible when the wake happens once a day. Two ways to get one:
+   - **$0: Oracle Cloud "Always Free" Arm VM.** Two cores, 12 GB RAM, free for the life of the account.
+     No GPU, and it doesn't need one. **Caveat recorded because it is recent and it bit the published
+     numbers: Oracle halved this allowance in 2026** (it was 4 cores / 24 GB, now 2 / 12), and Arm
+     capacity is frequently unavailable at sign-up in popular regions. 12 GB is enough for one 8B model
+     and nothing else.
+   - **~$5–12/month: a small always-on VPS** (Hetzner, DigitalOcean and similar) if Oracle says no.
+3. **Someone wants to experiment fast this weekend.** A rented GPU, only while it is switched on:
+   $0.34–0.70/hour. **A weekend of experiments is $5–20.** This is the only case where the tables above
+   matter, and it is the cheapest case to be careless in — which is why per-hour rows mislead.
+
+**What I would actually do, if it were mine:** write the instructions against the free path and refuse
+to publish a step that assumes a paid instance. The document's own promise is that researchers, classes
+and individuals can clone it **at no cost**; if the instructions only run on a rented GPU, that promise
+is false and the project has failed at Step 1. A CPU-only free-tier path makes the promise true and
+costs the founder nothing.
+
+**And the honest framing that survives all of this:** compute is the *solved* part of the Model AI Tribe
+Project. It is cheap, it is free at the bottom, and it will keep getting cheaper. What Step 7 needs is an
+institution — an admission rule, a human who answers mail, and a reason for a stranger to join — and no
+provider sells that. The expensive part of this plan was never the machines.
