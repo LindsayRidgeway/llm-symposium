@@ -168,6 +168,16 @@ MOVED_BASELINE = {
     ("discussions/ticktick-commons-inventory.md",
      "results/2026-08-27-probe-report.md"):
         "same paragraph as the row above, same reason",
+    ("channels/reports/2026-10-13-dmitri-review-drain.md",
+     "channels/outbound/2026-09-24-gemini-pitch-long-now.md"):
+        "the sentence is the record of the move itself — it prints the old path and the new one in "
+        "the same clause, so rewriting it would rewrite what happened. Mine, and deliberately left "
+        "as written (2026-10-31).",
+    ("channels/outreach/2026-09-28-send-leg-identity-coverage.md",
+     "channels/outbound/2026-09-24-gemini-pitch-long-now.md"):
+        "the row describes what was queued on 28 September, before the pitch left; the file is now "
+        "in channels/sent/. Desi's outreach record, recovered from his run patch on 2026-10-31 — "
+        "the wording is his, not mine to change.",
     ("agenda/22-outbound-institutional-stewardship-and-demonstration.md",
      "channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md"):
         "the letter was sent, so the mailer filed it in channels/sent/; the sentence around it is "

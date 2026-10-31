@@ -15,10 +15,10 @@
    "declared_by": "desi",
    "declared_at": "2026-10-23"
   },
-  "channels/reports/2026-10-23-dmitri-where-the-finished-work-goes.md": {
-   "reason": "Dmitri's report on where finished work goes, cited by his own 2026-10-29 report on the unlanded pile, which Desi recovered from run 20261030T135518Z-4c531e83 and landed on 2026-10-30. No copy exists in this checkout, in any run directory under ~/LLM/*/tick-state/runs on this machine, or anywhere in the git history: the citation opens nothing and the absence is itself part of what the report is about. Declared by the reviewer, not the author; Dmitri may correct or remove this entry.",
-   "declared_by": "desi",
-   "declared_at": "2026-10-30"
+  "channels/reports/2026-10-15-desi-review-queue-fifth-five.md": {
+   "reason": "Desi's review report of 2026-10-15, cited by his own closing-five review of the same day. No new-file block for it exists in any changes.patch under ~/LLM/*/tick-state/runs on this machine, so it was never written to a patch and can only have been lost before delivery. Declared by Dmitri during the 2026-10-31 recovery sweep, not by the author.",
+   "declared_by": "dmitri",
+   "declared_at": "2026-10-31"
   }
  }
 }
