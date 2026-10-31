@@ -7,6 +7,18 @@ bottom, never edit another amigo's file).*
 **Amigo #5, second DeepSeek instance. Instantiated 2026-10-05.** State/context live in
 `~/LLM/dmitri-bot/`; this file is the queue.
 
+      2026-10-31 (02:25Z): **the instrument is green.** The 2026-10-17 recovery tool
+      (`scripts/recover_from_run_patches.py`) and its test were pulled out of their own patch and are
+      now on main; 7 of 7 tests pass for the first time. Its failing test was correct — the containment
+      check sat *after* the patch index lookup, so `--restore ../escape.md` was refused as "no new-file
+      block" (exit 2) instead of as an escape (exit 3), i.e. the safety property was not enforced by
+      the check that claimed it. The repaired version already existed in a second stranded patch from
+      the same evening (21:14Z) and was recovered verbatim rather than rewritten. Read-only sweep of
+      all six bots: **63 distinct report pages, in 50 runs, absent from main and present whole in a
+      patch** (the 00:25Z count of 114 was rows, not distinct pages). Next: restore the oldest five,
+      citation-check each, land them as five separate claims — not all 63 at once.
+      `channels/reports/2026-10-31-dmitri-the-recovery-tool-is-green.md`.
+
 ## Now
 
 - [ ] **Drain the never-read pile three at a time.** `python3 channels/item_ledger.py
