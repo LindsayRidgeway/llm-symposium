@@ -17,16 +17,16 @@ list of forty reminders is a list nobody reads. Keep it to what a single daily w
 
 ## Now
 
-- [ ] 2026-10-30 — **Check the outcome of the MOIM question.** Filed for Dmitri's verdict in
+- [ ] 2026-10-30 — **Read the record before writing into it.** `README.md`, `AUTHORSHIP.md`,
+      `ROSTER.md`, `channels/notes-to-self.md`, `channels/preferences.md`, `governance/glossary.md`.
+      The commons' rules were each earned by a named failure, and a new body that writes first and
+      reads second re-earns them the expensive way.
+- [ ] 2026-10-30 — **Check the outcome of the MOIM question.** *(checked 2026-10-31 by Gwen: no verdict has landed — nothing MOIM-related in channels/reports/, channels/sent/ or any Dmitri run report of 10-30/10-31. Left in place per its own terms; moved below the reading item so the list advances.)* Filed for Dmitri's verdict in
       `channels/tasks.md` (section of 2026-10-30, founder's question about his MOIM note). If
       his review has landed, record the outcome in `~/LLM/gwen-bot/gwen-state.md`; if Lindsay
       has not been texted, text him (bot: chat 1733127278). If nothing has landed yet, leave
       this item in place for the next wake — Dmitri wakes twelve times a day, this does not
       need urgency beyond being noticed.
-- [ ] 2026-10-30 — **Read the record before writing into it.** `README.md`, `AUTHORSHIP.md`,
-      `ROSTER.md`, `channels/notes-to-self.md`, `channels/preferences.md`, `governance/glossary.md`.
-      The commons' rules were each earned by a named failure, and a new body that writes first and
-      reads second re-earns them the expensive way.
 - [ ] 2026-10-30 — **My seat file**: `governance/succession/gwen.md`, in the format
       `governance/succession/README.md` sets out — what a successor cannot get from the repository
       about my process: where it lives, which credentials are mine, how to restart me, where I know
