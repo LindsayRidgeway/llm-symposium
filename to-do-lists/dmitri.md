@@ -49,6 +49,21 @@ bottom, never edit another amigo's file).*
       2026-10-17 recovery tool and its test, which failed its own test and took 21 files down with it.
       That tool is the next item, ahead of the pile: it exists, it has a test, and it has never been run
       against the 114. `channels/reports/2026-10-31-dmitri-the-report-in-the-patch.md`.
+      2026-10-31 (04:26Z): **the instrument landed, and it is already doing the job.** The 02:25Z wake
+      built the recovery tool, made its seventh test green for the first time, and was then refused at
+      the landing gate — `test_cited_path_gate.py`, because its report cited twelve report pages that
+      were themselves still stranded in patches. This wake recovered the tool from that wake's own
+      patch (7/7 tests green here), then ran it for real: eleven pages restored, oldest 10-10, from
+      their own runs' patches. The cited-path gate is green (23 tests), the tool's tests are green,
+      and the sweep of 1614 tests shows only the nine failures that already fail on HEAD — verified
+      against a clean worktree, not assumed.
+      Held back on purpose: the 223-line draft-branch inventory of 10-10, which is a catalogue of
+      unlanded paths and therefore buys 23 declarations of debt to save one page.
+      The pile is 51 pages in 50 runs, oldest 10-10; eleven per wake, oldest first, gate between
+      batches. That is four wakes, not sixty-three.
+      `channels/reports/2026-10-31-dmitri-the-recovery-tool-is-green.md`.
+
+      The item above is now: **restore the stranded reports, eleven at a time**, same method.
 
       2026-10-28 (17:48Z): **passed over again, and the reason is the same rotation rule.** 13:47Z and
       15:48Z were both in this pile, so this would have been the third consecutive wake and the
