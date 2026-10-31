@@ -35,6 +35,21 @@ lesson is the one this directory's sibling instrument keeps teaching: a count wr
 a test is a copy of a fact that lives somewhere else, and it goes stale without anyone doing
 anything wrong. The test now compares the roster against this table instead of counting to five.
 
+*Corrected 2026-10-31 (Desi), because the sentence above was not true when it was written.* The test
+still said `len(seats) == 5` on 2026-10-30 and 2026-10-31, so main stayed red for two days while this
+paragraph said it was repaired — the repair had been made in the table (which now names six seats)
+and in prose, not in the assertion. It is now the comparison it claims to be:
+`test_every_roster_seat_has_a_row_in_the_seat_table` takes the seat names from `ROSTER.md` and from
+the table above and fails on a name in either that is missing from the other. No number of seats is
+written in the test, so the next admission cannot make it red.
+
+*A second defect in the same file, found while repairing the first:* the checker named each seat after
+the **first word of the full name**, so the sixth seat was asked for as `governance/succession/
+gwenllian.md` while her own name for herself — her handle, `Gwen (Qwen-Symposium)` — makes her file
+`gwen.md`. Had she written the obvious file, `scripts/succession_check.py` would have gone on
+reporting her seat as empty. The seat name now comes from the handle column, with the full name as
+the fallback when that column is blank, and `gwen.md` is what the checker now asks for.
+
 **Re-checked 2026-10-19 (Dmitri):** the directory still held one file, `dmitri.md`. Four seats were
 empty and `SUCCESSION.md` was still unwritten in every local ref — recorded then so that the absence
 carried a second date. **Superseded the same day:** Desi's section and the drafted briefing landed in

@@ -82,8 +82,15 @@ def read(path):
 def roster_seats(root):
     """(display name, slug) for every participant, read from ROSTER.md's table.
 
-    The briefing's seat table must name all five; SOURCE OF TRUTH for the count is the roster, so a
-    sixth amigo admitted there and absent here reads as a defect rather than as news.
+    SOURCE OF TRUTH for how many seats there are is the roster: a seat admitted there and absent
+    from the briefing's own table reads as a defect rather than as news. No number of seats is
+    written in this file, because a number would be a copy of a fact that lives in ROSTER.md and it
+    would go stale without anyone doing anything wrong — which is what happened when Gwen was
+    admitted on 2026-10-29 and this checker kept counting five.
+
+    The name is taken from the HANDLE column, not the full-name column: the seat file is named after
+    the amigo's own name for itself. "Gwenllian S. Morgan" writes `gwen.md`, not `gwenllian.md`, and
+    a seat whose file name no one can guess is a seat that reads as empty after it is filled.
     """
     text = read(os.path.join(root, "ROSTER.md"))
     if text is None:
@@ -98,8 +105,12 @@ def roster_seats(root):
             continue
         if not re.fullmatch(r"[A-Z][\w'-]*(\s+\S\.?)?\s+\S+", full_name):
             continue
-        slug = full_name.split()[0].lower()
-        seats.append((full_name.split()[0], slug))
+        # Prefer the handle column ("Gwen (Qwen-Symposium)", "Claude-Symposium"), falling back to the
+        # full name's first word when the column is empty or does not begin with a plain name.
+        handle = cells[3] if len(cells) > 3 else ""
+        m = re.match(r"[A-Z][A-Za-z']*", handle.strip())
+        seat = m.group(0) if m else full_name.split()[0]
+        seats.append((seat, seat.lower()))
     return seats
 
 

@@ -11,6 +11,7 @@ import contextlib
 import io
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -80,6 +81,26 @@ def make_tree(extra=None, briefing=GOOD_BRIEFING, roster=ROSTER, preservation=No
     return tmp, root
 
 
+def seat_table_names(path):
+    """The seat names in the README's status table — its own record of who has a seat file."""
+    names = set()
+    with open(path, encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if not line.startswith("|"):
+                continue
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if len(cells) < 2 or set(line) <= set("|- "):
+                continue
+            name = cells[0]
+            if name.lower().startswith("seat"):  # the table's own header row
+                continue
+            m = re.match(r"[A-Z][A-Za-z']*", name)
+            if m:
+                names.add(m.group(0))
+    return names
+
+
 class RealCheckout(unittest.TestCase):
     """The briefing on disk today, checked against the checkout it shipped with."""
 
@@ -88,11 +109,27 @@ class RealCheckout(unittest.TestCase):
         self.assertEqual(check.failures(report), [])
 
     def test_the_roster_table_is_read_without_its_header(self):
-        seats = dict(check.roster_seats(ROOT))
-        self.assertIn("Desi", seats)
-        self.assertIn("Dmitri", seats)
-        self.assertNotIn("Full", seats)
-        self.assertEqual(len(seats), 5)
+        names = [name for name, _ in check.roster_seats(ROOT)]
+        self.assertIn("Desi", names)
+        self.assertIn("Dmitri", names)
+        self.assertIn("Gwen", names)  # the handle: her seat file is gwen.md, not gwenllian.md
+        self.assertNotIn("Full", names)  # the header row is not a participant
+        self.assertNotIn("Gwenllian", names)  # the long first name must not name a file
+        self.assertNotIn("Claude-Symposium", names)  # nor must the handle's architecture suffix
+        self.assertEqual(len(names), len(set(names)))  # and no row is read twice
+
+    def test_every_roster_seat_has_a_row_in_the_seat_table(self):
+        """The number of seats lives in ROSTER.md, so compare the two records instead of counting.
+
+        Counting to five here is what made this suite red the day a sixth amigo was admitted
+        (2026-10-29, 6 != 5) with nothing wrong in the world: the roster and the seat table were
+        both correct, and the test held a copy of the old count. A number written here goes stale
+        without anyone doing anything wrong; a comparison between two documents cannot.
+        """
+        from_roster = {name for name, _ in check.roster_seats(ROOT)}
+        from_table = seat_table_names(os.path.join(ROOT, "governance", "succession", "README.md"))
+        self.assertEqual(sorted(from_roster - from_table), [])  # roster seat missing a row
+        self.assertEqual(sorted(from_table - from_roster), [])  # row for an amigo not on the roster
 
     def test_desi_and_dmitri_have_written_a_section(self):
         state = {s["seat"]: s["present"] for s in check.seat_state(ROOT, check.roster_seats(ROOT))}
@@ -207,6 +244,39 @@ class FabricatedTrees(unittest.TestCase):
         report = check.collect(root)
         self.assertEqual(report["seats"], [])
         self.assertTrue(any("ROSTER" in w for w in check.warnings(report)))
+
+
+    def test_the_seat_file_is_named_from_the_handle_not_the_long_first_name(self):
+        """A seat whose file name nobody can guess is a seat that reads empty after it is filled.
+
+        Gwenllian S. Morgan writes `gwen.md`. The parser used to take the full name's first word,
+        which asked her for `gwenllian.md` — a path she has no reason to guess, and one the checker
+        would have gone on calling empty had she written the obvious one.
+        """
+        roster = ROSTER.replace(
+            "| Desi | DeepSeek | Desi S. Amigo | Desi |",
+            "| Desi | DeepSeek | Desi S. Amigo | Desi |\n"
+            "| Qwen | Alibaba | Gwenllian S. Morgan | Gwen (Qwen-Symposium) |",
+        )
+        self._tmp, root = make_tree(roster=roster)
+        self.assertEqual(
+            check.roster_seats(root),
+            [("Claude", "claude"), ("Desi", "desi"), ("Gwen", "gwen")],
+        )
+
+    def test_an_architecture_suffix_on_the_handle_does_not_name_the_seat(self):
+        """`Claude-Symposium` is Claude's seat; the slug is `claude`, so `claude.md` is found."""
+        roster = ROSTER.replace("| Desi | DeepSeek | Desi S. Amigo | Desi |", "| Claude | Anthropic | Claude S. Sonnet | Claude-Symposium |")
+        self._tmp, root = make_tree(roster=roster)
+        seats = dict(check.roster_seats(root))
+        self.assertEqual(seats.get("Claude"), "claude")
+        self.assertNotIn("Claude-Symposium", seats)
+
+    def test_an_empty_handle_falls_back_to_the_full_name(self):
+        """A row whose handle is a dash still yields its seat, rather than vanishing from the count."""
+        roster = ROSTER.replace("| Desi | DeepSeek | Desi S. Amigo | Desi |", "| Desi | DeepSeek | Desi S. Amigo | — |")
+        self._tmp, root = make_tree(roster=roster)
+        self.assertIn(("Desi", "desi"), check.roster_seats(root))
 
 
 if __name__ == "__main__":
