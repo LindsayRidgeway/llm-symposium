@@ -1525,6 +1525,10 @@ def _cli() -> int:
     ap.add_argument("--name-unread", action="store_true",
                     help="put a name on every item the landing gate closed and nobody read — "
                          "the second queue, which nothing could see before 2026-10-22")
+    ap.add_argument("--duplicates", action="store_true",
+                    help="census of restatement in the ledger and of rows that walk a "
+                         "verdict backwards; never fails a build (2026-10-31: the "
+                         "function existed since 2026-10-27 with no way to invoke it)")
     ap.add_argument("--reading-queue", choices=AMIGOS,
                     help="the never-read items that carry this amigo's name")
     ap.add_argument("--rebalance-unread", action="store_true",
@@ -1595,6 +1599,17 @@ def _cli() -> int:
         for rec in (done + post)[:10]:
             print(f"  {rec['id']}  {rec['state']}  {rec['reason'][:70]}")
         return 0
+    if args.duplicates:
+        census = duplicates()
+        for key, value in census.items():
+            if isinstance(value, list):
+                print("%s: %d%s" % (key, len(value),
+                                     ("  " + ", ".join(str(v) for v in value[:10]))
+                                     if value else ""))
+            else:
+                print("%s: %s" % (key, value))
+        return 0
+
     if args.reading_assign:
         try:
             rec = reading_assign(item_id=args.reading_assign, to=args.to or "",

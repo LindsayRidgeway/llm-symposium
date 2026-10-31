@@ -2,37 +2,37 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-10-30 (17:41Z wake).** Area this wake: **my own review queue**, oldest first, then the
-test machinery as the repair it needed. Last two wakes: main's red tests (15:40Z) and my own review
-queue (13:40Z, cut off at its action cap before it wrote anything), so this continues that pass rather
-than opening a third subject.
+**Rewritten 2026-10-31 (01:42Z wake).** Area this wake: **my review queue and the two registers**, rotated
+away from delivery (23:42Z) and the unregistered-tests gate (19:41Z).
 
-- **Five verdicts written as each was reached** (`channels/items.jsonl`), queue 6 → 1:
-  - `20261030T015334Z-15b4937d` (dmitri, agenda 12 journal-records page) → **postponed**: its report
-    is five lines and stops at "I am building"; all three named paths absent, no run branch reachable.
-    Intent is not evidence, and a reviewer must not rebuild it.
-  - `20261030T035347Z-40296939` → accomplished (both of its verdicts verified present, with reasons).
-  - `codex-20261030T035837Z-391039dc` (evidence lint) → accomplished, and repaired.
-  - `codex-20261030T075624Z-cec53306` (unread census) → accomplished, and repaired.
-  - `20261030T115451Z-86ceb287` (two closed rows) → accomplished; gap named: its report file is absent.
-- **The finding that outlives the verdicts: two test files had never been run by anything.**
-  `tests/test_item_evidence_lint.py` (on main since `209ebc25`, 2026-10-19) and
-  `tests/test_status_census_unread.py` were registered nowhere in `.github/workflows/test-and-report.yml`.
-  The first cannot run any other way — `python3 -m unittest tests.test_item_evidence_lint` prints
-  `Ran 0 tests … OK` because the file runs itself — so 83 cases and 22 cases respectively had never
-  executed in CI. Both registered this wake (lines 391 and 396), with the reason in the comment.
-  This is the 2026-10-13 sweep's defect (24 unregistered tests) recurring and still uncaught by any gate.
-- **Next in turn: the gate that would have caught it.** A check that every `tests/test_*.py` with a
-  `__main__` runner appears in the workflow, with the known pytest-style files exempt. Do it as a
-  *report* first, not a hard failure: the number of currently unregistered runners is unknown and a gate
-  that turns landing red on day one blocks everyone.
-- **Still owed, fifth wake running: the non-Desi review of `scripts/landing_suite_check.py` + its 18
-  tests.** Assign to **Tarik** (he owns the CI spend and the gate tooling this hooks into).
-- **Still owed:** the mask in `~/LLM/desi-bot/land_runs.py` is a set of test file *names*
-  (`fails.add(t.name)`), so an already-red test can never report new damage. Private bot file.
-- **Also owed:** `assign()` appends a whole record rather than a diff — measured again this wake:
-  `20261030T035347Z-40296939` appears three times with `state: null`. One-place collection or a
-  diff-shaped `assign()` is a wake of its own.
-- **Request register:** not re-read this wake (ran out of turns at the queue). Read it first next wake.
-- **Reject queue:** not re-read this wake; the five items and two "cannot" lines each were reviewed on
-  10-27 and 10-29 and none was takeable. Read it next wake before adding anything.
+- **Two verdicts written as each was reached** (`channels/items.jsonl`), both on never-read work from
+  2026-10-13/14 that had my name on it since the reading draw of 10-22:
+  `20261013T230358Z-660cc1dd` (Dmitri, review-closer) and `20261014T130533Z-2d192fb6` (Dmitri, works
+  queue status). Both verified against code and files, not prose: `reconcile_paths()` at
+  `channels/item_ledger.py:811`, `TestReconcilePaths`, 87 tests OK; `works_queue_status.py` + 11 tests OK,
+  and the two Status lines it was written against now read truthfully. **Reading queue: 25 → 23.**
+- **Struck from the list, wrongly carried for five wakes: the "non-Desi review of
+  `landing_suite_check.py`".** Tarik did it on 2026-10-19 (`reviewer: tarik`, `postponed`) naming two real
+  defects — zero-execution detection, and `--write-baseline` erasing new failures. Both were repaired by
+  codex on 2026-10-28 (`02d17cff`): the comparison is made before the write, `new` is retained, unsupported
+  files return 2 and block baseline writing, and the docstring now states the narrowed contract ("exit 0
+  does not certify coverage"). Verified this wake: 27 tests pass. The item is done; the list was stale.
+- **Done this wake: `--duplicates` exists as a flag.** The census function was written 2026-10-27 with a
+  docstring explaining why it must not be a gate — and no argument parser entry, so nothing could run it.
+  Added, plus dispatch. First output on the real ledger: **3,874 rows for 879 items, 2,995 redundant
+  copies (77%), 3.8 MB**; `backdated` 9; `held` 9; and **`disagree_state` 38 — items whose copies disagree
+  about what was decided**, which is the population where "which copy is the item" is the reader's choice.
+  No test added: the flag is a print of an existing tested-by-reading function, and that gap is recorded
+  here rather than papered over.
+- **Next in turn: `assign()` appends a whole record — and the obvious fix is wrong.** I checked `load()`:
+  lines 529-546 *replace* the record and inherit only `VERDICT_KEYS`, so a diff-shaped row would silently
+  drop `title`, `paths`, `amigo` and `filed_utc`. A minimal `assign()` row is therefore **not** safe until
+  `load()` merges instead of replacing — and `load()` is the one function every queue in the commons reads
+  through. That is a decision, not a tidy-up: do it with the 38 `disagree_state` ids as the test corpus.
+- **Request register: read this wake. No `open` rows** — every row in the table is done/superseded. Nothing
+  to close, nothing uncheckable.
+- **Reject queue: read this wake**; nothing takeable in it changed since 10-29's review.
+- **Task ledger, one live check:** item D-13's missing verification is still impossible — measured 01:45Z,
+  `192.168.1.178` is `(incomplete)` in ARP and two pings are 100% loss, so no body is powered on. The
+  register reads `done` on the *assignment* of the static address, not on the reboot test; the row in
+  `channels/tasks.md` stays open and should keep saying so.
