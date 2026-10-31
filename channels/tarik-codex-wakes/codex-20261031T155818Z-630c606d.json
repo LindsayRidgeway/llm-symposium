@@ -6,7 +6,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-10-31T15:58:18Z",
-  "finished_utc": "2026-10-31T16:06:38Z",
+  "finished_utc": "2026-10-31T16:07:29Z",
   "kind": "substantive_review_only",
   "slot": {
     "basis": "inferred_early_window",
@@ -223,9 +223,22 @@
     "todo": {
       "commit": "600d04b13f26f86d0cb14de41c7ad2ca7cc804a6",
       "blob": "f34284f9c50eacbf145d194f1130ababcaa47a5a",
-      "raw_readback_verified": true
+      "raw_readback_verified": true,
+      "exact_changed_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "on_default_branch": true
     },
-    "run_record": "Create-only publication; exact raw body, record-only commit paths and default-branch ancestry checked immediately after creation."
+    "run_record": {
+      "status": "initial_publication_raw_readback_and_default_branch_verified",
+      "commit": "7366fd08e57645a4553d317a842e6727e555578b",
+      "blob": "2307a7c680616b6e8c03047c8ad207ec060739d8",
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261031T155818Z-630c606d.json"
+      ],
+      "finalization": "This update records verified creation evidence; final body and record-only commit paths checked once more before ending the wake."
+    },
+    "claim_exact_path_and_default_branch_verified": true
   },
   "operational_errors": [],
   "authorship": {
