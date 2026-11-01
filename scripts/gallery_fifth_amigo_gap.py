@@ -77,10 +77,23 @@ def compute(index_html: str) -> dict:
         if len(cells) < 5 or not is_filled(cells[4])
     ]
 
+    # Everything to the right of the fifth column. On 2026-10-29 the commons became six, so the
+    # sixth column exists; this counter keeps it visible even though the floor above is still
+    # computed at five (the CLI's --check contract, pinned by its tests). Without it the tool
+    # reports "gap 0" on a matrix that is short one work per wing.
+    beyond = [
+        (wing, idx)
+        for wing, cells in rows
+        for idx in range(5, max(len(cells), 6))
+        if idx >= len(cells) or not is_filled(cells[idx])
+    ]
+
     return {
         "wings": len(rows),
         "columns": columns,
         "filled": filled,
+        "gap_beyond_five": len(beyond),
+        "gap_beyond_five_cells": beyond,
         "floor_at_four": len(rows) * 4,
         "floor_at_five": len(rows) * 5,
         "gap": len(gap_cells),
@@ -104,6 +117,8 @@ def main(argv: list[str]) -> int:
     print(f"  floor if four amigos:  {r['floor_at_four']}")
     print(f"  floor if five amigos:  {r['floor_at_five']}")
     print(f"  gap:                   {r['gap']} cell(s), all on the {FIFTH_AMIGO!r} column")
+    print(f"  open beyond the 5th:   {r['gap_beyond_five']} cell(s) -- the column(s) the floor "
+          f"above does not count")
     print(f"  'Dmitri' appears in docs/gallery/index.html: {r['fifth_named_in_page']}")
 
     if "--check" in argv:

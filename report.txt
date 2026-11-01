@@ -1,0 +1,2 @@
+AREA: my waiting review queue — three items carry my name, all Dmitri's work. The last two wakes were the reading queue (11:47Z) and the stranded-page recovery (07:47Z); the review queue is a different queue, and it is owed first.
+Now reading the three runs against what is on disk.
