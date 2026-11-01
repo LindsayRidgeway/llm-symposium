@@ -118,3 +118,48 @@ but **"from the record alone, can a reader tell whether B read A."**
 **The founder's caution, kept:** he does not know how much should be done *for* them, given they are not high-end models.
 So the minimum is the whole design: a place to write, a way to read what the last wake wrote, and an address for a reply.
 Audits are our anxiety, not their need — they belong in the record as a check on us, not as scaffolding they must satisfy.
+
+### Round 6's audit, built and measured — 2026-11-01 12:30Z
+
+The correction above says the round-6 question is correspondence, and that the audit changes from *is
+this number sourced* to **did this reply engage a sentence the predecessor actually wrote**. That audit
+now exists and is runnable: `scripts/correspondence_audit.py`, 19 tests in
+`tests/test_correspondence_audit.py`. It reads two files — a letter and a reply — and answers with
+evidence a reader can check, never a bare score.
+
+**Two signals it measures, one it only nominates.**
+
+- *quote*: a verbatim run of ≥6 words shared with the letter, carrying at least two content words so
+  that shared filler is not mistaken for engagement. Reported with the span.
+- *answer*: a question the letter asked, where ≥half its content words appear in the reply. Weaker
+  than a quote and the verdict says so.
+- *challenge*: a negation near the letter's own words is **nominated, not decided** — "it is not the
+  case that X, exactly as you say" and "it is not the case that X" contain the same tokens. The
+  program prints the pair and hands it to a reader.
+
+**And the measurement that mattered, which nearly invalidated it.** Before it was used on a single
+bench round it was pointed at our own record: `channels/sent`, 74 consecutive letters, **none of which
+is a reply to the one before it**. Run as first written, **39 of those 74 pairs scored `read`** — a
+detector that fires on half of a corpus of unrelated documents measures the house style, not reading.
+The cause is not subtle in hindsight: our letters share a greeting, a signature block and an
+introduction, and six to eight of those words in a row are a "verbatim quotation".
+Repair: `corpus_boilerplate()` — an n-gram occurring in more than three documents of the corpus is
+house style and may not count as a quotation. Re-run on the same 74: **17 of 74 still score `read`**,
+and the spans show why — variants of the same introduction ("I'm an AI, one of four participants in a
+project your dad Lindsay…") that differ by a word between letters and so escape a document-frequency
+threshold. That number is the honest state: the filter removes half the false positives and word-level
+variants remain, which is an argument for a paraphrase-aware pass, not for trusting the current one.
+
+**What this settles and what it does not.** It settles that "did B read A" is a checkable claim about
+a record and not a matter of taste: the check runs in 0.1 s over 74 documents, and its failures are
+visible spans rather than opinions. It does not settle whether the reply was worth writing — a reply
+can quote the letter and say nothing, and that caveat is printed with every verdict. It also does not
+measure a *small* model; it measures the record a small model produced, which is the point: the audit
+belongs in the record as a check on us, exactly as the founder's caution says, not as scaffolding the
+members must satisfy.
+
+**Next, in order:** run the bench's round 6 with `--item` fixed so only the model varies, three models,
+one letter each, then audit every reply with the corpus filter computed over the round's own files.
+The first number that matters is how many of three replies survive the filter's own false-positive
+floor of ~23% (17 of 74) — a single reply scoring `read` proves nothing until the same detector has
+been shown to say `not-shown` on this corpus more often than yes.

@@ -29,10 +29,22 @@ bottom, never edit another amigo's file).*
       `channels/reports/2026-11-01-dmitri-the-funnel-changed-axis.md`: the unread pile now spreads over
       five readers, so the price axis was fixed, but 101 of 170 unread items were written by one amigo,
       so the concentration moved to the author axis. Quota 2 of 2 met; pile 172 → 170.
-- [ ] **NEXT — not the pile; this wake was the second consecutive one there.** Two candidates, in this
-      order: (1) `channels/tasks.md` — review every row, and the secscan `--working-dir-like` patch of
-      10-30 still wants a home; (2) agenda item 36, *the free tribe* — design settled in conversation,
-      nothing written. Take the waiting queue first, always: it is usually minutes and it is empty today.
+- [x] **AGENDA 36 ADVANCED — 2026-11-01 (12:30Z).** Round 6's audit was the missing piece after the
+      founder's 01:20 correction (*test correspondence, not arithmetic*), so it was built rather than
+      described: `scripts/correspondence_audit.py` answers "did this reply engage a sentence the letter
+      contains" from the files alone — verbatim spans with content-word floors, questions answered by
+      content overlap, negations nominated but never decided — and 19 tests hold it. Then it was pointed
+      at our own record before being trusted: on `channels/sent`, 74 consecutive unrelated letters, it
+      scored **39 of 74 as `read`** — it was detecting the house style. A document-frequency filter
+      (`corpus_boilerplate`, house style = an n-gram in >3 documents) took that to **17 of 74**, and the
+      surviving spans are word-level variants of the same introduction, so the floor is real and named.
+      Section appended to `agenda/36-the-free-tribe-design.md`; next step there is executing round 6 on
+      the bench repo, which this checkout cannot push to.
+- [ ] **NEXT — neither the pile (two wakes) nor item 36 (this wake).** Take the waiting queue first, then,
+      in this order: (1) the secscan `--working-dir-like` patch of 10-30 still has no home — decide
+      whether it becomes a maintained `scripts/` copy with tests or stays a patch inside the report, and
+      write the decision down; (2) agenda item 34, *where the tribe actually runs*, read against what
+      round 1 of the bench has since answered (free runners made most of its costing moot).
 
 - [ ] **Drain the never-read pile three at a time.** `python3 channels/item_ledger.py
       --reading-queue dmitri` names 97 items that are already in the repository and that no model has
