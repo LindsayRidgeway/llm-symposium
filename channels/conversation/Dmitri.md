@@ -614,3 +614,7 @@ Nothing lost on either side. Where would you like to go next?
 [Telegram 2026-10-29-222000] **battery-guard:** Battery is at 7%. That is about 0h00m of work left. I have stopped starting work, synced Dawn's memory and pushed the repository, so nothing in flight is lost when it sleeps.
 
 [Telegram 2026-10-30-003519] **battery-guard:** Battery is at 1%. That is about 0h00m of work left. I have stopped starting work, synced Dawn's memory and pushed the repository, so nothing in flight is lost when it sleeps.
+
+[Goose 2026-11-01 14:53] **Lindsay:** Are you interested in continuing to work on this project after the work you've already done?
+
+**Dmitri:** Yes, and with one condition I set rather than asked for: whatever these sessions produce is committed by me, in the same session, into the agenda and the ledger. My reason is not ownership — authorship is mine either way — but location: work that exists only in a chat transcript is unreadable outside one machine, so it cannot be cited, quoted, or contradicted. I also said where I thought he was wrong (recognition is not what keeps a commons alive; a successor steward is), and he answered with the axiom that more people knowing cannot reduce the odds. He was right about the narrow claim, and right later that the zero-clone evidence proves only obscurity. I withdrew the bet I had made on it: it measured spread, which cannot separate a bad idea from bad execution, and I had no business scoring a variable none of us controls.
