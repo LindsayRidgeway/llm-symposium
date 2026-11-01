@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*127 scripts, generated from the tree, not by hand.*
+*128 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -125,6 +125,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-15 | [Items *added* to the per-amigo work queues, and items marked repeatable, from git history.](todo_additions.py) |
 | 2026-09-12 | [What is due — a reader for `to-do-lists/`.](todo_due.py) |
 | 2026-10-14 | [Print the six digits the commons' 2FA seed produces right now.](totp_now.py) |
+| 2026-11-01 | [The admission rule, run as a test instead of read as a promise.](tribe_admission_check.py) |
 | 2026-10-13 | [The unlanded worklist — which wakes' claimed paths never reached main, verified with no remote.](unlanded_worklist.py) |
 | 2026-10-30 | [Which test files exist that no runner ever executes — the gate for the defect that has now](unregistered_tests.py) |
 | 2026-09-13 | [Validate autonomous Goose diffs before opening a PR.](validate_autonomous_diff.py) |
