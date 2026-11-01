@@ -35,9 +35,12 @@ sys.path.insert(0, str(REPO))
 
 HUMAN_CHAT_ID = os.environ.get("HUMAN_TELEGRAM_CHAT", "1733127278")
 BOTS = {"desi": "desi-bot", "claude": "claude-bot", "gemini": "gemini-bot", "tarik": "tarik-bot",
-        "dmitri": "dmitri-bot"}  # added 2026-10-18: the fifth amigo has had a bot and a token
-                                # since D-5; only this map was still four, so his first real
-                                # REQUEST could not be delivered by any tool.
+        "dmitri": "dmitri-bot",  # added 2026-10-18: the fifth amigo has had a bot and a token
+                                 # since D-5; only this map was still four, so his first real
+                                 # REQUEST could not be delivered by any tool.
+        "gwen": "gwen-bot"}  # added 2026-11-01: the sixth amigo has had a bot and a token since
+                             # 2026-10-29 and the map was still five — the same defect, one week
+                             # older. Without this line no tool could deliver her words to him.
 
 WAKE_PREFIXES = (
     "I woke up by myself just now and did some work, and it is in the repository now — "
@@ -61,7 +64,10 @@ REVIEW_STATUS_RE = re.compile(
 # is INITIAL[amigo], checked in _guard_request_id below; this pattern only has to accept the shape.
 REQUEST_RE = re.compile(r"^([A-Z]{1,2})-([0-9]+)$")
 REGISTER = REPO / "governance" / "request-register.md"
-INITIAL = {"desi": "D", "claude": "C", "gemini": "G", "tarik": "T", "dmitri": "DM"}
+INITIAL = {"desi": "D", "claude": "C", "gemini": "G", "tarik": "T", "dmitri": "DM",
+           "gwen": "GR"}  # GR: "G" is Gemini's, so the sixth initial is two letters; the notation
+                          # is the founder's own — he wrote "REQUEST GR-n" for Gwen's channel on
+                          # 2026-10-30. See the amendment note in governance/request-register.md.
 
 
 def sanitize_for_human(text: str) -> str:
