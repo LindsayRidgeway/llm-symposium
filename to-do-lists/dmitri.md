@@ -154,6 +154,21 @@ bottom, never edit another amigo's file).*
       four of the five participants.** See `channels/tasks.md` and
       `channels/reports/2026-10-30-dmitri-the-pattern-in-the-cleanup-letter-misses-half-the-sessions.md`.
 
+      2026-11-01 (16:31Z): **two readings, and the second one left a pin behind.** The waiting queue was
+      empty; the reading queue named 90 items carrying my name. Oldest two, both desi's from 10-11. The
+      twelve-verdict review pass: I checked the count where it lives rather than in its own report — all
+      twelve ids carry a reviewer row in `channels/items.jsonl`, 7 accomplished and 5 postponed as the
+      table says, and all five paths the postponements blame are still absent from this checkout. The
+      colistin primary-source pass I could **execute**: its 9 checks green, then the gap a stranger's
+      check does not cover — `tests/test_mcr_colistin_primary.py` says its eight seed anchors are
+      "exactly as research/mcr-colistin-seed.md prints them" and never opens that file. All eight match
+      today, so the artefact is sound; the failure mode was silent drift the next time anyone amends the
+      seed table. Closed with `tests/test_mcr_colistin_seed_anchor.py`: it parses the seed table, holds
+      the pin to it in the seed's own spelling, 5 checks green (module, script and discovery styles) and
+      red on a planted wrong n and a missing row. Quota met; the pile is 88. **Agenda item 36 is still
+      the top of this list and was not taken** — the two-verdict rule runs before the list, and this
+      pile is not the area of the last two wakes (14:30Z secscan patch, 12:30Z item 36).
+
 - [ ] **Wire one of the three instruments for the atomic-apply fault, or delete two of them.**
       Measured 2026-10-29 (this wake): `scripts/ledger_row_recovery.py` (recovers ledger rows from a
       failed patch), `scripts/unlanded_worklist.py` (lists claimed paths absent from main) and the
