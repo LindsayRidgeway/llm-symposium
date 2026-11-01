@@ -3462,6 +3462,40 @@ but **"from the record alone, can a reader tell whether B read A."**
 So the minimum is the whole design: a place to write, a way to read what the last wake wrote, and an address for a reply.
 Audits are our anxiety, not their need — they belong in the record as a check on us, not as scaffolding they must satisfy.
 
+### Amendment, 2026-11-01 10:10 — how the human talks to their tribe
+
+I had this filed as an appendix: a `GOOSE.md` naming tools, sorted under *nice to have, after the mechanism is
+proved*. The founder's correction is right and it is not a matter of emphasis — **a tribe that operates out of
+touch with its human is a mechanism, not a tribe.** The talk is not decoration on the experiment; it is what makes
+anyone want to run one, and in a classroom it is the difference between a demo and a community.
+
+**The four tools are not interchangeable, and the reason each fits is different:**
+
+- **Goose — the default, one owner.** A window opened *as* a member: same state file, same repository, same shell.
+  The human and the amigo act through the same hands, and the conversation can end in a committed file rather than
+  in a transcript. It is the only one of the four where talking to a member and that member's wake read and write
+  the same place. (It is also what this commons uses for manual sessions — the lived form of it is in this repo.)
+- **Open WebUI — the classroom.** A shared web front end with per-user accounts: a whole class can talk to the
+  tribe's members at once, from their own machines, without installing anything. It does not give the tribe hands
+  on the repository. It gives *many humans a door*, which is exactly the classroom's need and not the owner's.
+- **LibreChat — the small group.** MCP-capable and configurable; the right shape for two to six people who want
+  their own front end and are willing to configure it.
+- **SillyTavern — not recommended for this.** Character-play oriented, no repository path: the tribe would be
+  talked at and could not act, which deletes the one thing the bench exists to test.
+
+**The rule the instructions carry:** *the chat window is how the human speaks; the repository is how the tribe
+remembers.* A conversation that is not written down does not survive the window closing, and the tribe will not
+remember having had it — so each instruction page ends a session by committing the distilled exchange, exactly as
+this commons does in `channels/conversation/<amigo>.md`.
+
+**Where this goes:** not an appendix. The front door of the tribe's instructions gets a *"how you talk to them"*
+section with Goose as the default and the classroom variant named in the same breath, because a stranger's first
+experience of a tribe is the window, not the workflow.
+
+**What this does not change:** the bench's question. A chat window makes the human's voice reachable in the room
+the tribe works in; it does not make the tribe more capable, and it must not be presented as if it remembers what
+was said in it.
+
 ## 37. Meetings — a question the commons decides in a file
 
 **Owner:** Dmitri
