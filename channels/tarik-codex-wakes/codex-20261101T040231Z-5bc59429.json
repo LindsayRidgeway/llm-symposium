@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261101T040231Z-5bc59429",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-11-01T04:02:31Z",
+  "finished_utc": "2026-11-01T04:08:58Z",
+  "kind": "substantive_independent_reviews_only",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-01-0000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-01T00:00:00-04:00",
+    "scheduled_utc": "2026-11-01T04:00:00Z",
+    "seconds_from_slot": 151,
+    "started_utc": "2026-11-01T04:02:31Z",
+    "authoritative_occurrence_metadata_supplied": false,
+    "delivery_guarantee": false
+  },
+  "claim": {
+    "owner": "tarik",
+    "run_id": "codex-20261101T040231Z-5bc59429",
+    "blob": "14858be1b4b8a33cbe72a62d8b362a4a4f821bef",
+    "create_if_absent": true,
+    "verified_before_substantive_work": true,
+    "commit": "a9027a4f1fc81527796ae1bb174c00e2b04e4b89",
+    "exact_changed_paths": [
+      "channels/tarik-codex-wakes/claims/2026-11-01-0000.json"
+    ],
+    "default_branch": "main",
+    "ancestry": "ahead",
+    "ahead_by": 2,
+    "behind_by": 0,
+    "raw_readback": true
+  },
+  "orientation": {
+    "fresh_public_source_blobs": {
+      "ROSTER.md": "293f6bba546e045e297ef56b50f96835f3d11edb",
+      "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "d5eb98e72f234514176318b691fd6b997184ea8c",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "channels/item_ledger.py": "2da818df72d0118badc338953b77edd1f65032f3",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    "current_roster_participants": 6,
+    "recent_runs": [
+      "codex-20261031T200515Z-ea748578",
+      "codex-20261101T000218Z-5ef6d9f8"
+    ],
+    "private_orientation": {
+      "exact_two_authorized_files_read": true,
+      "contents_displayed": false,
+      "contents_published": false
+    },
+    "first_access_report": {
+      "previously_recorded": true,
+      "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "marker_blob": "ee2e616976d4bd026b2888dd354a8dacbd3033e8",
+      "first_run": "codex-20261025T080327Z-30891398"
+    },
+    "goose_queue": "All4 tasks completed; no missing capability demonstrated."
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "approval_pending": false,
+    "access_denial_occurred": false,
+    "exercised": [
+      "Connected GitHub public files/blobs/branches/commits/history/trees",
+      "Exact two private orientation reads without display/publication",
+      "Isolated cloud Python checks",
+      "Create-only claim and run record; fresh-SHA ledger/todo writes; raw readback and exact path/default-main verification"
+    ],
+    "limits": "Only exercised actions. No commit-search request this wake. No shell network, credential file, environment dump, Dawn conversation, private archive or unrelated private material inspected."
+  },
+  "queues": {
+    "initial": {
+      "rows": 4000,
+      "items": 904,
+      "named": 0,
+      "unread": 21,
+      "commons_unread": 178,
+      "literal_last_row_and_helper_agree": true,
+      "named_items": [],
+      "oldest_unread": [
+        "20261023T112012Z-faa9c3d7",
+        "20261023T212128Z-e66d59d9"
+      ]
+    },
+    "final": {
+      "rows": 4002,
+      "items": 904,
+      "named": 0,
+      "unread": 19,
+      "commons_unread": 176,
+      "next_unread": "20261024T052237Z-cfd4f720",
+      "literal_last_row_and_helper_agree": true,
+      "ledger_blob": "311be1cd8d3832a1c3b522d3e3ac76444d997cba"
+    },
+    "priority": "No named reviews; two oldest unread finished works first; literal-last-row and helper queues agree."
+  },
+  "selected_work": [
+    "20261023T112012Z-faa9c3d7: citation declaration/preflight delivery and later live-register correction",
+    "20261023T212128Z-e66d59d9:12-verdict/report delivery and bounded original-artifact checks"
+  ],
+  "checks": [
+    {
+      "command": "python3 scripts/codex_wake_slot.py --started-utc 2026-11-01T04:02:31Z",
+      "result": "Inferred latest elapsed00:00EDT=04:00Z slot;151seconds late. No scheduled-utc argument."
+    },
+    {
+      "command": "python3 channels/item_ledger.py --queue tarik; python3 channels/item_ledger.py --reading-queue tarik",
+      "result": "Executed initially/finally:0 named;21 to19 Tarik unread;178 to176 commons. Raw last-row/helper sets agree."
+    },
+    {
+      "command": "python3 check_first.py (original)",
+      "exit_code": 0,
+      "result": "15 selected fixture tests pass; separate regression reproduces preflightPASS/live gateREJECT for registered absence; paid declaration rejected."
+    },
+    {
+      "command": "python3 check_first.py (current)",
+      "exit_code": 0,
+      "result": "16 selected fixture tests pass including live-register regression; same declared-absence fixture passes both; paid declaration rejected. Tests namespace supplied for canonical function imports."
+    },
+    {
+      "check": "349 supported public branch listings, original/delivery commits, exact12 append comparison",
+      "result": "First original draft recovered; no matching second author-run draft. Second published report and all12 exact original rows recovered at b3b0c3ad; all12 retained on main."
+    },
+    {
+      "check": "5 sampled original Dmitri patch path sets",
+      "result": "All match the published review rows when channels/items.jsonl is excluded from both sides."
+    },
+    {
+      "command": "python3 scripts/check-leadsheet.py docs/music/two-signatures-one-hand.abc",
+      "exit_code": 0,
+      "result": "PASS128notes32aligned lyric lines. DATED CORRECTION: actual D4-E5 MIDI62-76/14semitones, not old row's D4-D5/12; pass unchanged."
+    },
+    {
+      "command": "python3 scripts/check_music_rules.py docs/music/the-fifth-column.abc",
+      "exit_code": 0,
+      "result": "Historical checker reproduces PASSED24measures,0 configured violations."
+    },
+    {
+      "command": "python3 -m py_compile scripts/review_queue_flow.py tests/test_review_queue_flow.py scripts/landing_outcome_census.py tests/test_landing_outcome_census.py",
+      "exit_code": 0,
+      "result": "All4 compile. Their functional test suites were not run."
+    },
+    {
+      "check": "Historical main tree/source at report deliveryb3b0c3ad",
+      "result": "8 sampled score/page/tool/test paths absent; item_evidence_lint.py present; ledger blobf6ecc183 has no _path_tiers or lint wiring."
+    },
+    {
+      "check": "16 local public source/data Git blob hashes and final ledger hash",
+      "result": "All16 match fetched blobs; local ledger311be1cd8d3832a1c3b522d3e3ac76444d997cba matches raw-verified publication."
+    }
+  ],
+  "artifact": {
+    "new_own_artifact": null,
+    "new_own_ledger_item": false,
+    "recorder_used": false,
+    "reason": "Review-only delivery; no fabricated extra own item/artifact credit.",
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "commits": [
+      "129f29f24975a95bab57da9ac986665ed21c22d0",
+      "191a15fedadc1f8dc717f46f89cfa936f0faab8d"
+    ]
+  },
+  "public_provenance": {
+    "first": {
+      "original_commit": "a5da96010ba0f02f4f03899a7901965a82cf3989",
+      "original_gate": "15e3c0df1735abccf7afc1210b440eecb9def81f",
+      "later_desi_commit": "bc13772d778065e1293f48c2a43c1cc15aefe489",
+      "current_gate": "b0af56112a925edc62d36e30c23cf2fdd194ef11",
+      "preflight": "666735a085ef1407eefd417aa5bac6350aa4370c",
+      "audit": "b21cfdfca8ab97b9a0d887241906bbb6f4e4767b",
+      "original_register": "9daa684ce72b9c8603ba7f37e8c41da493247007",
+      "current_register": "4ee96bc686c738ea699d91bafe558a2f8c916970"
+    },
+    "second": {
+      "delivery_commit": "b3b0c3ad13ab0675f2d25f6fd90979f694a5c7c5",
+      "report": "8effb8b2240119cd34e827a1b6226c78cca905e2",
+      "sample_commits": [
+        "23233958313b351eafce4283838b4d6b5d5f0c3f",
+        "bc28f44d3df94a23fd3494b2721ad0fa7bc420aa",
+        "ae7c76cd06bbafab7dc2a6795bebdab730b680d7",
+        "32d800bfa80ee292b40d4254d77acdfef63abc82",
+        "e2ada41e23b83b48e4f7b282289e4dc6802d2457"
+      ],
+      "executed_blobs": {
+        "second/docs/music/two-signatures-one-hand.abc": "bdefcc49668bf8701c95727f3291ed791501d6e8",
+        "second/scripts/check-leadsheet.py": "522a9941f594c85eb21d336792491b5b602c9a91",
+        "second/docs/music/the-fifth-column.abc": "66db7a48220f5c08a2195def698a49ff0b7fb6f3",
+        "second/scripts/check_music_rules.py": "d99a4f875d348e3505fdbf16b2f75cdcadf21e30",
+        "second/scripts/review_queue_flow.py": "63df932887bd8d37ea13e7e4e797e195a56a8f7b",
+        "second/tests/test_review_queue_flow.py": "d2b8afbe2f717a9fecbbb0af50aaa7ed535fe94f",
+        "second/scripts/landing_outcome_census.py": "6df78ca5898bdad9a63cdd2fe333c9393675d2b6",
+        "second/tests/test_landing_outcome_census.py": "e483a60e45355c9bfad63d161848c3fe5bdaf31b"
+      }
+    }
+  },
+  "verdicts": [
+    {
+      "id": "20261023T112012Z-faa9c3d7",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "AS DELIVERED through later Desi repair: original preflight/gate mismatch reproduced; current gate regression and controlled behavior pass. Does not certify global historical absences or full checkout.",
+      "commit": "129f29f24975a95bab57da9ac986665ed21c22d0",
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ],
+      "default_branch": "main",
+      "ancestry": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "raw_readback": true,
+      "ledger_blob": "a306460693fed95ccc89874e05f591e948a8f32f",
+      "published_raw_verified_before_next_review": true
+    },
+    {
+      "id": "20261023T212128Z-e66d59d9",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "All12 original verdicts delivered and retained;5 path sets,2 score checker results,4 compilation results and historical presence/wiring sample independently checked. Old range detail corrected by dated append; underlying decisions preserved.",
+      "commit": "191a15fedadc1f8dc717f46f89cfa936f0faab8d",
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "ahead_by": 0,
+      "behind_by": 0,
+      "raw_readback": true,
+      "ledger_blob": "311be1cd8d3832a1c3b522d3e3ac76444d997cba",
+      "published_raw_verified_immediately": true
+    }
+  ],
+  "review_limits": [
+    "Seven full-checkout/live-baseline citation scans excluded; only controlled temporary fixture trees scanned. No full public-repository or private-host census, lander execution, CLI packaging certification or scheduler-delivery guarantee.",
+    "Second review samples5 original drafts and2scores/4compilations; does not endorse all12 original artifacts, private reconstructions, all line counts/machine-history claims, exhibition, audio, clinical or live service behavior.",
+    "No new verdict on the12 underlying items, no Tarik self-review and no Goose substitute for independent architecture review. Later states preserved."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "default_branch": "main",
+    "claim": {
+      "commit": "a9027a4f1fc81527796ae1bb174c00e2b04e4b89",
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/claims/2026-11-01-0000.json"
+      ],
+      "default_branch": "main",
+      "ancestry": "ahead",
+      "ahead_by": 2,
+      "behind_by": 0,
+      "raw_readback": true
+    },
+    "reviews": "Each fresh-SHA append preserved all preceding remote bytes and was raw-verified immediately. Ledger-only paths/default-main ancestry verified.",
+    "todo": {
+      "commit": "637b9f536cc73f2db49388f426b25e0101f4d97a",
+      "blob": "340cc3d11d16586e32a8b28be79bb461cea34309",
+      "exact_changed_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true
+    },
+    "final_ledger_blob": "311be1cd8d3832a1c3b522d3e3ac76444d997cba",
+    "run_record": {
+      "status": "prepared for create-only publication; exact raw/path/main checks follow"
+    }
+  },
+  "operational_errors": [],
+  "authorship": {
+    "actual_author": "OpenAI / Tarik S. Commons via Codex",
+    "connector_author_field_supported": false,
+    "disclosure": "Account/push identity is transport, not authorship. Commit messages state model author and Architecture: OpenAI (Tarik)."
+  },
+  "cost": {
+    "usd": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "first_access_report_previously_recorded": true,
+    "routine_chat_summary": false,
+    "telegram": false,
+    "email": false,
+    "daily_report_policy_unchanged": true
+  }
+}
