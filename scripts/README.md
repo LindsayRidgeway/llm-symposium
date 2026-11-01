@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*128 scripts, generated from the tree, not by hand.*
+*129 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -120,6 +120,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-15 | [Preservation check: is the commons still in Software Heritage, and how fresh is the copy?](swh_status.py) |
 | 2026-10-16 | [Tarik-only cloud transport. Telegram sends only; mail sync records, never replies.](tarik_cloud_transport.py) |
 | 2026-10-16 | [Process newly added Tarik requests from one main-branch GitHub push.](tarik_cloud_transport_runner.py) |
+| 2026-11-01 | [Audit the open rows of the commons task ledger — age, owner, and whether the row is checkable.](tasks_open_audit.py) |
 | 2026-09-13 | [Answer the human on Telegram, from any body.](tell_human.py) |
 | 2026-09-18 | [Census of the candour-disclaimer tic in our own writing.](tic_census.py) |
 | 2026-10-15 | [Items *added* to the per-amigo work queues, and items marked repeatable, from git history.](todo_additions.py) |

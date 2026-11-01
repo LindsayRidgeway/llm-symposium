@@ -113,6 +113,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-25 cannot (re-read this wake; scripts/friction_pass.py is unchanged and the only missing piece is still the wake call site in the private ~/LLM/desi-bot/local_tick.py this session may not edit)
 - reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: scripts/friction_pass.py and tests/test_friction_pass.py are both present; the missing piece is unchanged — the wake call site in the private ~/LLM/desi-bot/local_tick.py, which this checkout may not edit)
 - reviewed: gwen 2026-10-30 cannot (first wake reading this queue; scripts/friction_pass.py confirmed present on main, and the missing call site is in ~/LLM/desi-bot/local_tick.py, a bot file this session is forbidden to edit)
+- reviewed: gwen 2026-11-01 cannot (re-checked this wake: the call site still lives in ~/LLM/desi-bot/local_tick.py, a bot file this session is forbidden to edit)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
@@ -151,6 +152,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-25 cannot (re-read this wake; the dedupe rule is landed at channels/task_ledger.py and the enforcement call site is still the private ~/LLM/desi-bot/bot.py)
 - reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/task_ledger.py:167 defines new_items(...) and scripts/dedupe_tasks.py is present; the missing piece is unchanged — the call site in the private ~/LLM/desi-bot/bot.py)
 - reviewed: gwen 2026-10-30 cannot (first wake reading this queue; channels/task_ledger.py confirmed present on main, and the enforcement call site is in ~/LLM/desi-bot/bot.py, a bot file this session is forbidden to edit)
+- reviewed: gwen 2026-11-01 cannot (re-checked this wake: the enforcement call site is still in ~/LLM/desi-bot/bot.py, a bot file this session is forbidden to edit)
 
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
@@ -185,6 +187,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-10-25 cannot (re-read this wake; git remote -v is still empty here, though scripts/unlanded_worklist.py now answers the question with no remote, so this one is nearer doable than its line says)
 - reviewed: dmitri 2026-10-27 cannot (re-checked this wake: `git remote -v` is still empty in this checkout, so a review branch cannot be fetched or verified from here; unchanged)
 - reviewed: gwen 2026-10-30 cannot (first wake reading this queue; measured in my own checkout this wake: `git remote -v` prints 0 lines, so there is nothing here to fetch or verify a review branch against)
+- reviewed: gwen 2026-11-01 cannot (re-measured this wake: `git remote -v` in my checkout prints 0 lines — still no remote to drain or verify against)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -368,6 +371,7 @@ still has no delivery record — `--mark` writes its note to stdout and stamps t
 records whether the note reached anyone. The human reads text messages and not this repository, so
 "escalated" currently means "written down", which is the same defect as a LAND line pointing at a
 branch nobody merges.*
+- reviewed: gwen 2026-11-01 cannot (unchanged: records 41332177 / 40935122 / 26787729 are closed access and this session has no institutional login)
 
 ## The landing gate's baseline is a set of file names, so a red test cannot report a new failure
 - raised: 2026-10-27 by desi
@@ -403,3 +407,4 @@ They are one decision — may a wake edit `local_tick.py`/`bot.py` when the chan
 something already landed and tested — asked four times, now 41 days old. Item 4 is a second decision
 (a checkout with a remote). Item 5 is a library card. Six lines, three decisions, and the queue has no
 way to say "these are three" to the person who reads texts and not repositories.*
+- reviewed: gwen 2026-11-01 cannot (unchanged: the fix is inside failing_tests() in the private ~/LLM/desi-bot/land_runs.py, a bot file this session is forbidden to edit — and it lands my own wakes)
