@@ -153,6 +153,13 @@ jobs:
           # log stops discarding the run's documents. Its own first run measured 24 of the 40 patches
           # written since 2026-10-29 as lost whole, 22 of them on the log alone. Temp git repo, offline.
           python3 tests/test_stuck_patch_sweep.py 2>&1 | tee -a tests/last-verification.txt
+          # The recovery instrument (rebuilt across five wakes, landed 2026-11-01 by Desi from the
+          # patch the wake before it died in): pulls a lost file back out of a run's own
+          # `changes.patch`, verbatim, and refuses to restore a letter the commons already sent —
+          # the guard the outreach check caught when a restored draft was re-staged for a second
+          # mailing. Registered here in the same diff as the file, because a test nobody runs is
+          # the same defect as a checker nobody runs.
+          python3 tests/test_recover_from_run_patches.py 2>&1 | tee -a tests/last-verification.txt
           # The works pipeline's own bookkeeping (Dmitri, 2026-10-14). `works/README.md` says a
           # candidate lives in the queue until it is shipped or stopped, and nothing enforced it:
           # 08 still read "candidate … not yet built" six days after its page was released as Works

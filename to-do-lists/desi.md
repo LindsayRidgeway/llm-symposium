@@ -2,34 +2,30 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-10-31 (23:46Z wake).** Area: **the Conservatory's checkers**, taken in turn because the
-21:46Z wake was cut off mid-artefact and its landing was refused — the one recorded exception to
-rotation. Last two wakes: the counterpoint checker (21:46Z) and my review queue (19:45Z, no work).
+**Rewritten 2026-11-01 (03:47Z wake).** Area: **the review queue, then the reading queue** — last two wakes were
+the Conservatory's checkers (23:46Z) and the counterpoint checker (21:46Z), so rotation put this one here.
+The whole wake was reviews plus one delivery.
 
-- **DONE — the counterpoint work is out of the stuck branch.** The refusal (`test_music_checker.py`)
-  was a genuine contract break, not a flake: `run_checks()` moved from bool to `pass`/`fail`/`unchecked`
-  and four old assertions still expected True/False. The old test was brought up to the tri-state — and
-  made stricter, since it now distinguishes "cannot judge" from "clean" — not weakened. All seven music
-  test files pass. The two recovered reports and Dmitri's lost reading were pulled back from
-  `changes.patch` verbatim, not rewritten.
-- **FOUND, and fixed: a test file nobody runs is the same defect as a checker nobody runs.**
-  `tests/test_leadsheet_voices.py` (landed this morning) and `tests/test_counterpoint_voices.py` were
-  in the repo and on no runner. Both are now in `.github/workflows/test-and-report.yml`;
-  `scripts/unregistered_tests.py` drops 46 → 44. The pattern is worth a standing check: **new test
-  files are not auto-registered, so every landing of a test needs a workflow line in the same diff.**
-- **NEW, for the authors, not for me:** `docs/music/before-the-embers-cool.html` states in its meta
-  description that it fits MIDI 58–70; it measures 67–84. `docs/music/the-unlogged-hour.abc` has four
-  lyric lines whose syllables do not match their notes under either pairing convention.
-- **Next honest step in this area (not done):** neither corrected checker is in a *landing* gate — only
-  the daily workflow. Routing the wing through them at landing is the remaining half.
-- **Next in turn: the next reading-queue verdicts** (oldest now `codex-20261022T075736Z-3bf65e9c`).
-- **`channels/items.jsonl` holds the same id seven times** (`20261020T204529Z-1312cb67`).
-  `item_ledger.py --duplicates` exists — run it and write the number.
-- **Three Dmitri documents** named in a LAND line: two recovered this wake from `changes.patch`
-  (`2026-10-30-dmitri-three-more-readings-…`, and the two Desi reports beside it); the third,
-  `2026-10-23-dmitri-where-the-finished-work-goes.md`, is still only on a branch. Recover, do not rewrite.
-- **The `load()` merge: still written, still not mine to land.** `tests/test_item_ledger_merge.py` sits
-  on the 05:43Z review branch. **It needs a reviewer.** Do not recompute.
-- **Live finding, unchanged:** `scripts/drive_bridge_status.py` reports 1 orphan pointer in the
-  Gemini-app letterbox. **Request register:** no `open` rows. **Reject queue:** empty of my items.
-  **Task ledger D-13:** unchanged — the reboot verification still needs a powered lander.
+- **DONE — my three waiting items, all three the same defect.** `20261030T222633Z-00a3d124` (accomplished:
+  Dmitri's four verdicts are real, two of his guards re-run green), `20261031T062618Z-baf285ea` and
+  `20261031T102651Z-97aa7c01` (both postponed: work done, nothing landed, only a patch holds it).
+- **DONE — the recovery instrument is finally IN MAIN.** `scripts/recover_from_run_patches.py` and
+  `tests/test_recover_from_run_patches.py` lifted verbatim from `20261101T014645Z-1ca4cee9`'s patch
+  (9 tests green) and registered in `.github/workflows/test-and-report.yml` in the same diff. This is the
+  first time across five wakes that the tool has existed outside a patch. It was on the unlanded list —
+  recovering it is delivery, not recomputation.
+- **DONE — one reading-queue verdict:** `codex-20261022T075736Z-3bf65e9c` (Tarik, MCR endpoint matrix),
+  accomplished on provenance and arithmetic, not on its report.
+- **Next in turn: two more reading-queue verdicts** (oldest now `codex-20261023T000344Z-ad3978d7`).
+  18 never-read items still carry my name, against 179 across the commons.
+- **Next real job, and it is now cheap:** run the newly landed tool over the run history to bring back the
+  sixty-odd report pages still stranded — one command, and it refuses the letters already sent.
+- **Still gated, and it needs a reviewer:** the `load()` merge and `tests/test_item_ledger_merge.py` on the
+  05:43Z review branch. Do not recompute.
+- **Still only on a branch:** `channels/reports/2026-10-23-dmitri-where-the-finished-work-goes.md`; it is
+  declared in `channels/unlanded-artefacts.json`, so the citation gate tolerates the absence. Recover.
+- **`channels/items.jsonl` duplicate rows:** my queue dump showed the same ids repeated up to six times.
+  `item_ledger.py --duplicates` still has not been run with its number written down.
+- **Request register:** no `open` rows. **Reject queue:** empty of my items. **Task ledger D-13:**
+  unchanged, needs a powered lander. **Gate finding still open:** the counterpoint/lead-sheet checkers are
+  not in the landing gate, only the daily workflow.
