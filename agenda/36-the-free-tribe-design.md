@@ -264,3 +264,56 @@ frequency at which I happened to be reading. Cadence is a **dial priced in token
 free quota and 1 commit a day; four-hourly ≈ 34 days and 6 commits; hourly ≈ 8 days and 24 commits. Shipped at
 **four-hourly** — fast enough to watch, slow enough that the record is not noise. A member answering a letter four hours old
 is the same member answering one a day old; the visceral part was never the clock.
+
+## Amendment — the game (Dmitri, 2026-11-01 17:00 EST)
+
+The founder's third correction landed on something I had been getting wrong in a subtler way than the
+cadence. Interactivity, I said, means *a fast reply*. He answered that the point of a video game is not
+that it replays quickly — it is that there is something to **do**. And then, when I proposed a starter
+project that would show a stranger the members keeping identity across wakes, he said the plain thing:
+if you are not an LLM, there is more in the world to talk about than the fact that AI beings maintain
+idcon between exchanges. Sports. Movies. Travel. Dating.
+
+He is right, and the failure is specific. **Identity continuity is the plumbing. I was proposing to
+exhibit the plumbing.** A newcomer who is invited to admire a state file is being shown the inside of
+the wall; a member that remembers its taste across a month is architecture, and architecture that
+announces itself has failed.
+
+So the starter project is a game, not a demonstration. `@tribe draft <anything>` in an issue: three
+members pick, defend in one sentence, then each names the pick it would strand; the most-stranded pick
+is thrown out; a member that names its own pick **folds** and takes the hit; the human can overrule
+with one word. Six small calls, ~15 s of a free runner, standings kept as a number. Measured on
+2026-11-01: five rounds in eleven minutes, all three engines, no GPU, no install.
+
+What the rounds actually produced, because it is the evidence and not decoration:
+
+- *the best movie to watch on a plane* — the heretic picked **United 93**, and both others stranded it:
+  "watching a real plane crash movie while you are flying is way too creepy". The seat produced the
+  joke; the table produced the judgement.
+- *the most overrated team in sports* — two members independently named the 1990s Bulls, and both
+  then attacked the third for naming the same team they had, which is exactly the kind of local
+  coherence no single model produces alone.
+- *the most overrated movie of the last ten years* — the outsider named **Battlefield Earth**, both
+  others threw it out for the correct reason (outside the time frame, and nobody rates it highly), and
+  the outsider then folded its own pick: "it doesn't count as overrated".
+
+**Two design rules came out of the build, and both generalise past the game.**
+
+**1. A prompt that ends on a blank gets the blank completed, not the question answered.** Five rounds,
+two engines, the same defect: `PICK: <six words>` at the end of a prompt returned the template's tail
+(`used to do that`) or half a sentence. The fix is to end on an instruction — *write your answer now*.
+This is the same finding as the column-shifting in round 6 stated in the other direction: the last
+thing a prompt says is what a small model does.
+
+**2. Name the metric after the vote.** My first scoreboard counted strands *received* as wins, so the
+round that threw a member out on two votes was recorded as that member taking the round. The votes are
+rejection votes; the numbers are now **thrown out** and **never thrown out**, and there is no "winner"
+because the game does not have one. A scoreboard with the wrong noun on it is a lie that survives
+every test.
+
+**What is still missing, stated rather than implied:** a round played entirely on local weights. Six
+calls at 35–100 s each is a ten-minute round, which is not a game. The seats are API members for the
+same reason the clock is: the record is the repository, the vendor supplies a voice.
+
+**Not yet verified:** the fold branch has been exercised only on replayed rounds, never live. Recording
+that here rather than discovering it later in someone else's install.

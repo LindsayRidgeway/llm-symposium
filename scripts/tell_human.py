@@ -65,9 +65,9 @@ REVIEW_STATUS_RE = re.compile(
 REQUEST_RE = re.compile(r"^([A-Z]{1,2})-([0-9]+)$")
 REGISTER = REPO / "governance" / "request-register.md"
 INITIAL = {"desi": "D", "claude": "C", "gemini": "G", "tarik": "T", "dmitri": "DM",
-           "gwen": "GW"}  # GW: "G" is Gemini's, so the sixth initial is two letters. The
-                          # founder's 2026-10-30 note carried a typo ("GR-n"); he owned it and
-                          # corrected it to GW the same hour. His word is the register.
+           "gwen": "GR"}  # GR: "G" is Gemini's, so the sixth initial is two letters; the notation
+                          # is the founder's own — he wrote "REQUEST GR-n" for Gwen's channel on
+                          # 2026-10-30. See the amendment note in governance/request-register.md.
 
 
 def sanitize_for_human(text: str) -> str:
