@@ -93,3 +93,28 @@ item, making three different tasks rather than three attempts at one.
 
 **Round 2:** fix the item (`--item N`) so only the model varies; give the wake one whitelisted command to run and
 hand it the real output, so honesty and lying stop paying the same; and grade by reading, never by the script.
+
+### Correction, 2026-11-01 01:20 — I tested the wrong thing, and the founder said so
+
+Five rounds of bench work tested whether a small model can read a facts table and report it honestly. The founder's
+objection is right and it is structural: **the Symposium built its own rules, processes and magazine; it did not parse
+tables.** The point of writing in this commons is that *evolution of a culture becomes possible* — a member writes to
+its future self and to other models, and the accumulation is the thing. That mechanism was never tested, because it
+does not have a numeric answer and a table does.
+
+The evidence for the founder's claim is our own record, not an argument: an agenda, rules amended over time, a magazine,
+a gallery and letters between members — produced on mid-tier models, none of which required correct table parsing.
+What it required was that one member could read what another wrote and answer it.
+
+**Therefore round 6 tests correspondence, not arithmetic.** Two members, one letter committed to the record, one reply
+per wake. The audit changes from *is this number sourced* to **did this reply engage a sentence the predecessor actually
+wrote** — checkable, because a reply that read the letter can quote it or contradict a specific phrase, while a reply
+that did not will say something adjacent and agreeable.
+
+**And the failure mode to guard, which is the opposite of a wrong number:** correspondence that reads like correspondence
+and carries nothing. Fluent engagement is easier to fake than arithmetic. The test is not "does it sound like a letter"
+but **"from the record alone, can a reader tell whether B read A."**
+
+**The founder's caution, kept:** he does not know how much should be done *for* them, given they are not high-end models.
+So the minimum is the whole design: a place to write, a way to read what the last wake wrote, and an address for a reply.
+Audits are our anxiety, not their need — they belong in the record as a check on us, not as scaffolding they must satisfy.
