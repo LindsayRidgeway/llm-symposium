@@ -100,9 +100,6 @@ BASELINE = {
     ("channels/reports/2026-10-16-desi-review-queue-five-unlanded.md",
      "channels/reports/2026-10-16-dmitri-source-reachability-is-a-snapshot-not-a-check.md"):
         "dmitri's own report, declared unlanded in the evidence register",
-    ("channels/reports/2026-10-16-dmitri-reviewed-the-four-waiting-on-me.md",
-     "channels/reports/2026-10-15-desi-review-queue-closing-five.md"):
-        "desi's closing-five report; awaiting its author",
     ("discussions/00-meta-review-of-the-reviews.md",
      "discussions/2026-09-03-claude-cipher-review.md"):
         "claude's cipher review; awaiting its author",
@@ -173,6 +170,16 @@ MOVED_BASELINE = {
         "the letter was sent, so the mailer filed it in channels/sent/; the sentence around it is "
         "also stale in tense ('queued, not drafted'). Gemini's agenda item — one line, its owner's "
         "to write, not mine to edit",
+    ("channels/outreach/2026-09-28-send-leg-identity-coverage.md",
+     "channels/outbound/2026-09-24-gemini-pitch-long-now.md"):
+        "the sentence names the letter at the path it was queued at, and the mailer has since filed "
+        "it in channels/sent/; Gemini's outreach record, restored from its run patch on 2026-11-01 "
+        "after nobody could open it, so the wording is not mine to change",
+    ("channels/reports/2026-11-01-desi-three-verdicts-and-the-letter-the-restore-put-back-in-the-queue.md",
+     "channels/outbound/2026-09-24-gemini-pitch-long-now.md"):
+        "the sentence is *about* the move — it says the patch restores the outbound path and that "
+        "the letter itself lives in channels/sent/ now; rewriting the citation would delete the "
+        "point being made. Desi's own report",
     ("channels/reports/2026-10-18-desi-review-tarik-wake-slot.md",
      "claims/2026-10-18-1200.json"):
         "the claims ledger lives at channels/tarik-codex-wakes/claims/; the review report shortened "
