@@ -45,6 +45,7 @@ from __future__ import annotations
 import argparse
 import collections
 import datetime as dt
+import importlib.util
 import json
 import re
 import subprocess
@@ -318,6 +319,52 @@ def _landing_block(now: dt.datetime, hours: int, last: str | None, gap: int) -> 
         "`waiting for review` counts below describe *delivery*, not review — they can include",
         "finished work the lander parked on a side branch rather than work nobody has looked at.",
     ]
+
+
+def _added_block(hours: int, now: dt.datetime, repo: Path | None = None) -> list[str]:
+    """Count A of the human's nine: items *added* to the per-amigo work queues.
+
+    Added 2026-11-01 (dmitri), and the reason it is here rather than in a report: since 2026-10-14
+    `channels/tasks.md` has said this count cannot exist, because the lists are overwritten rather
+    than appended and "a wholesale rewrite cannot be told from a rewrite that added something".
+    That was measured false on 2026-10-15 — `scripts/todo_additions.py` aligns the file's own
+    committed versions and separates an insertion from an in-place reword — but the tool had no
+    caller for seventeen days, so the false sentence outlived the instrument that answers it. This
+    is the caller. The distinction it reports is the one the count needs: *inserted* is new work,
+    *re-worded* is the same work said differently, and net is neither.
+
+    Fails soft and says so. A shallow clone (one commit, no history) makes every list look
+    unchanged, which is the one failure mode that reads as good news, so it prints UNKNOWN with the
+    reason instead of a row of zeros.
+    """
+    repo = REPO if repo is None else repo
+    heading = ["", f"### Items added to the work queues, last {hours}h (from the lists' git history)"]
+    try:
+        spec = importlib.util.spec_from_file_location(
+            "todo_additions", Path(__file__).resolve().parent / "todo_additions.py")
+        modulus = importlib.util.module_from_spec(spec)  # type: ignore[arg-type]
+        spec.loader.exec_module(modulus)  # type: ignore[union-attr]
+        data = modulus.scan(repo=repo, hours=hours, now=now)
+    except Exception as exc:  # noqa: BLE001 — a report must render even with no history
+        return heading + [
+            f"  **UNKNOWN** — the to-do lists' git history could not be read "
+            f"({exc.__class__.__name__}). This is unmeasured, not zero."]
+    rows = [(who, rec) for who, rec in data.items() if isinstance(rec, dict)]
+    if not any(rec.get("added") or rec.get("net") for _, rec in rows):
+        return heading + ["  (nothing inserted, and no list changed size, in this window)"]
+    out = heading + [
+        "  Inserted is new work; re-worded is the same work said differently; net is neither. "
+        "`repeat:` markers tonight: "
+        + str(sum(len(rec.get("repeat") or []) for _, rec in rows)) + "."]
+    for who, rec in sorted(rows, key=lambda pair: -(len(pair[1].get("added") or []))):
+        out.append(f"  {who:<7} +{len(rec.get('added') or [])} inserted · "
+                   f"{rec.get('reworded', 0)} re-worded · net {rec.get('net', 0):+d} items")
+        for title in (rec.get("added") or [])[:3]:
+            out.append(f"          + {_short(title)}")
+        extra = len(rec.get("added") or []) - 3
+        if extra > 0:
+            out.append(f"          … +{extra} more")
+    return out
 
 
 def _letter_block(window: dict, life: dict, hours: int) -> list[str]:
@@ -815,6 +862,7 @@ def render(hours: int = 24, now: dt.datetime | None = None,
     lines += ["", f"### Last {hours}h, by amigo"]
     lines += _letter_block(window, life, hours)
     lines += _inputs_block(now, hours)
+    lines += _added_block(hours, now)
     lines += [
         "",
         f"### Titles added in the last {hours}h",
