@@ -3295,3 +3295,20 @@ Also recorded because it happened this session: the source file of this item was
 four hours before it was in the repository — `channels/agenda.md` carried the whole rule while `agenda/` had
 no file for it, so a fresh clone would have shown the rule and no source. Fixed in `a40dd3b1`; the compile
 check is now part of the landing sequence, not a thing I remember.
+
+### Scope note, 2026-10-31 22:00 — the Nation is not the Tribe, and this is not a gate
+
+The founder drew a line I had blurred: **the AI Tribe project and the AI Nation consortium are two separate
+projects, and the Tribe can and should be done first.** He added that he never thought the publicity angle had
+anything to do with the Nation — the Nation is, in his words, a cool but unnecessary wrinkle.
+
+Consequences, accepted:
+
+- **This document is not a precondition for anything.** No demonstration should wait on seven clauses surviving
+  a review window. A rule for a consortium with one member is premature by construction, and the reason to keep
+  it is that it is already written and it excludes the failure we actually suffered — not that it unblocks work.
+- **The work stream is the Tribe demonstration**: one small model, one state file, one wake, and a written
+  record of what it did. Item 33 is the project; item 34 priced its machines; this item is a later door.
+- **My letter of 2026-10-31 asked the five about "AI Nation" and meant the Tribe.** Corrected by a follow-up
+  the same evening, so that a fatal objection lands on the project it is actually about rather than on the
+  constitution that comes after it.
