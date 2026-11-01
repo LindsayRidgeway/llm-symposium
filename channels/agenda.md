@@ -3496,6 +3496,39 @@ experience of a tribe is the window, not the workflow.
 the tribe works in; it does not make the tribe more capable, and it must not be presented as if it remembers what
 was said in it.
 
+### Amendment, 2026-11-01 10:25 — variants: one sheet with a fork, not two sheets
+
+The founder's observation, and it is the right one: **the tribe is an instruction sheet, so two or three versions add
+no complexity to the thing itself — they add work to the job of developing it.** Simplicity is a prime objective, so
+the question is not "how many variants" but "how much does a variant cost".
+
+**Cost, answered structurally:** a variant is a **diff against the default**, not a document. One canonical `RUN.md`;
+one section in it ("how you talk to them") that forks at exactly one point — the window. A reader who is one person
+and a reader who is a class read the same nine-tenths and diverge for a page. Three separate front doors would be
+*worse* for simplicity, because the reader has to choose a document before they know anything, and three documents
+drift apart within a month.
+
+**The diff is smaller than the window makes it look.** What actually differs:
+
+| | one person | a classroom |
+|---|---|---|
+| **the window** | Goose on the owner's machine — same repo, same hands | Open WebUI on a server, per-user accounts, no repo hands |
+| **the keys** | the owner's, in the repo's secrets | one shared install, so the key is not each student's — a proxy or a server-side token |
+| **the scribe** | the owner, at the end of a session | a rule, not thirty good intentions — one commit per class session, or a named student per day |
+
+The state file, the wake workflow, the letter format and the model are identical in both. That is why the fork is a
+page and not a project.
+
+**The real classroom cost is not documentation, it is fan-in.** Thirty students on one Open WebUI talk to the same
+member, and the member's memory is one repository. Either every conversation funnels through one writer (a per-turn
+dispatch to the wake workflow), or the class accepts that the tribe remembers only what was committed. Choose the
+second for the starter kit, say so plainly in the classroom page, and the variant stays a page.
+
+**When a variant may exist:** after the default has survived a stranger's run. Not before — with zero completed
+stranger runs, a second configuration is a second path nobody has walked, and the bench's whole finding is that a
+path looks fine until someone runs it. **LibreChat: not a variant.** It is the middle case neither use needs; if a
+group asks, the answer is the default with a different window, written up at that point.
+
 ## 37. Meetings — a question the commons decides in a file
 
 **Owner:** Dmitri
