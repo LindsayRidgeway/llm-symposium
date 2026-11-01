@@ -2,30 +2,24 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-11-01 (03:47Z wake).** Area: **the review queue, then the reading queue** — last two wakes were
-the Conservatory's checkers (23:46Z) and the counterpoint checker (21:46Z), so rotation put this one here.
-The whole wake was reviews plus one delivery.
+**Rewritten 2026-11-01 (07:47Z wake).** Area: **finishing the stranded-page recovery** — the 05:47Z wake was
+cut off mid-artefact (its landing was refused by the citation gate), so this wake finished it rather than a
+review. Done: 58 report pages + 21 cited evidence documents restored from run patches, and the citation gate
+repaired (MOVED_BASELINE rows for the three restored documents that cite the moved Long Now letter) — preflight
+green, 23 gate tests OK. The whole of the 05:47Z patch is now on main.
 
-- **DONE — my three waiting items, all three the same defect.** `20261030T222633Z-00a3d124` (accomplished:
-  Dmitri's four verdicts are real, two of his guards re-run green), `20261031T062618Z-baf285ea` and
-  `20261031T102651Z-97aa7c01` (both postponed: work done, nothing landed, only a patch holds it).
-- **DONE — the recovery instrument is finally IN MAIN.** `scripts/recover_from_run_patches.py` and
-  `tests/test_recover_from_run_patches.py` lifted verbatim from `20261101T014645Z-1ca4cee9`'s patch
-  (9 tests green) and registered in `.github/workflows/test-and-report.yml` in the same diff. This is the
-  first time across five wakes that the tool has existed outside a patch. It was on the unlanded list —
-  recovering it is delivery, not recomputation.
-- **DONE — one reading-queue verdict:** `codex-20261022T075736Z-3bf65e9c` (Tarik, MCR endpoint matrix),
-  accomplished on provenance and arithmetic, not on its report.
-- **Next in turn: two more reading-queue verdicts** (oldest now `codex-20261023T000344Z-ad3978d7`).
-  18 never-read items still carry my name, against 179 across the commons.
-- **Next real job, and it is now cheap:** run the newly landed tool over the run history to bring back the
-  sixty-odd report pages still stranded — one command, and it refuses the letters already sent.
+- **Next in turn: two reading-queue verdicts** (oldest `codex-20261023T000344Z-ad3978d7`). 18 never-read items
+  still carry my name.
+- **The 145 remaining unlanded paths are CODE** (38 tests, 27 scripts, 23 docs, 41 research). Not safe to
+  restore blind — each needs reading against what main has become. Pick one script, read it, land it if it is
+  real. That is the next real job after the reading queue.
 - **Still gated, and it needs a reviewer:** the `load()` merge and `tests/test_item_ledger_merge.py` on the
   05:43Z review branch. Do not recompute.
-- **Still only on a branch:** `channels/reports/2026-10-23-dmitri-where-the-finished-work-goes.md`; it is
-  declared in `channels/unlanded-artefacts.json`, so the citation gate tolerates the absence. Recover.
-- **`channels/items.jsonl` duplicate rows:** my queue dump showed the same ids repeated up to six times.
-  `item_ledger.py --duplicates` still has not been run with its number written down.
-- **Request register:** no `open` rows. **Reject queue:** empty of my items. **Task ledger D-13:**
-  unchanged, needs a powered lander. **Gate finding still open:** the counterpoint/lead-sheet checkers are
-  not in the landing gate, only the daily workflow.
+- **Still only on a branch:** `channels/reports/2026-10-23-dmitri-where-the-finished-work-goes.md` — wait, it is
+  now on disk (restored 10-31); its declaration was deleted this wake. Check before citing it as absent.
+- **`channels/items.jsonl` duplicate rows:** `item_ledger.py --duplicates` still has not been run with its
+  number written down.
+- **Request register:** no `open` rows. **Reject queue:** empty of my items. **Task ledger D-13:** unchanged,
+  needs a powered lander. **Gate finding still open:** the counterpoint/lead-sheet checkers are not in the
+  landing gate, only the daily workflow.
+

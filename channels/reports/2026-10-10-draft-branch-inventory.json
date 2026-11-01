@@ -1,0 +1,3974 @@
+{
+  "generated_by": "scripts/draft_branch_inventory.py",
+  "main": "2f84532a",
+  "branches_total": 148,
+  "branches_unlanded": 102,
+  "branches_landed": 3,
+  "branches_diverged": 43,
+  "distinct_missing_paths": 202,
+  "missing_paths": [
+    {
+      "path": "research/affective-pain-neuromodulation-vns-filtered-raw.json",
+      "count": 4,
+      "branches": [
+        "tick-20261007T043030Z-2e282d46",
+        "tick-20261007T163202Z-a05de64b",
+        "tick-20261008T063401Z-0bf4f3ae",
+        "tick-20261009T123747Z-439305ac"
+      ]
+    },
+    {
+      "path": "scripts/affective_pain_vns_filtered.py",
+      "count": 4,
+      "branches": [
+        "tick-20261007T043030Z-2e282d46",
+        "tick-20261007T163202Z-a05de64b",
+        "tick-20261008T063401Z-0bf4f3ae",
+        "tick-20261009T123747Z-439305ac"
+      ]
+    },
+    {
+      "path": "scripts/review_state.py",
+      "count": 3,
+      "branches": [
+        "tick-20261007T143144Z-032e72b7",
+        "tick-20261008T023333Z-b5d22412",
+        "tick-20261008T163500Z-3b609ebf"
+      ]
+    },
+    {
+      "path": "tests/test_review_state.py",
+      "count": 3,
+      "branches": [
+        "tick-20261007T143144Z-032e72b7",
+        "tick-20261008T023333Z-b5d22412",
+        "tick-20261008T163500Z-3b609ebf"
+      ]
+    },
+    {
+      "path": "channels/draft-pile.md",
+      "count": 2,
+      "branches": [
+        "tick-20261006T023805Z-7796e151",
+        "tick-20261007T104200Z-0ba1b649"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-10-05-followup-fluge.md",
+      "count": 2,
+      "branches": [
+        "tick-20261005T022413Z-048b7567",
+        "tick-20261005T162617Z-323f06d6"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-10-05-followup-retraction-watch.md",
+      "count": 2,
+      "branches": [
+        "tick-20261005T022413Z-048b7567",
+        "tick-20261005T162617Z-323f06d6"
+      ]
+    },
+    {
+      "path": "channels/review_assignment.py",
+      "count": 2,
+      "branches": [
+        "tick-20261009T163757Z-04aebf98",
+        "tick-20261009T203851Z-33d8f331"
+      ]
+    },
+    {
+      "path": "probes/results/2026-10-04-probe-report.md",
+      "count": 2,
+      "branches": [
+        "tick-20261004T202320Z-367b0fbe",
+        "tick-20261005T022413Z-048b7567"
+      ]
+    },
+    {
+      "path": "research/gambling-regulator-filings-raw.json",
+      "count": 2,
+      "branches": [
+        "tick-20261001T041306Z-baabb47a",
+        "tick-20261001T161405Z-bb24c6d5"
+      ]
+    },
+    {
+      "path": "research/gambling-regulator-filings.md",
+      "count": 2,
+      "branches": [
+        "tick-20261001T041306Z-baabb47a",
+        "tick-20261001T161405Z-bb24c6d5"
+      ]
+    },
+    {
+      "path": "research/mcr-colistin-primary-studies.md",
+      "count": 2,
+      "branches": [
+        "tick-20261007T063055Z-3a43e8e5",
+        "tick-20261007T123139Z-171f5382"
+      ]
+    },
+    {
+      "path": "scripts/asm_sleep_eeg_search.py",
+      "count": 2,
+      "branches": [
+        "tick-20261007T003013Z-80dc119a",
+        "tick-20261007T183217Z-c8ce5593"
+      ]
+    },
+    {
+      "path": "scripts/draft_pile.py",
+      "count": 2,
+      "branches": [
+        "tick-20261006T023805Z-7796e151",
+        "tick-20261007T104200Z-0ba1b649"
+      ]
+    },
+    {
+      "path": "scripts/reddit_read.py",
+      "count": 2,
+      "branches": [
+        "tick-20261005T122543Z-09ba65ae",
+        "tick-20261008T003307Z-d334dbc8"
+      ]
+    },
+    {
+      "path": "tests/test_affective_pain_biomarker_only.py",
+      "count": 2,
+      "branches": [
+        "tick-20261004T202320Z-367b0fbe",
+        "tick-20261006T143936Z-2b54fe68"
+      ]
+    },
+    {
+      "path": "tests/test_affective_pain_vns_filtered.py",
+      "count": 2,
+      "branches": [
+        "tick-20261007T163202Z-a05de64b",
+        "tick-20261008T063401Z-0bf4f3ae"
+      ]
+    },
+    {
+      "path": "tests/test_asm_sleep_eeg_corpus.py",
+      "count": 2,
+      "branches": [
+        "tick-20261007T003013Z-80dc119a",
+        "tick-20261007T183217Z-c8ce5593"
+      ]
+    },
+    {
+      "path": "tests/test_reddit_read.py",
+      "count": 2,
+      "branches": [
+        "tick-20261005T122543Z-09ba65ae",
+        "tick-20261008T003307Z-d334dbc8"
+      ]
+    },
+    {
+      "path": "tests/test_review_assignment.py",
+      "count": 2,
+      "branches": [
+        "tick-20261009T163757Z-04aebf98",
+        "tick-20261009T203851Z-33d8f331"
+      ]
+    },
+    {
+      "path": "tests/test_roster_consistency.py",
+      "count": 2,
+      "branches": [
+        "tick-20261005T182619Z-ecd0a080",
+        "tick-20261006T063829Z-bd44915e"
+      ]
+    },
+    {
+      "path": ".github/workflows/retention.yml",
+      "count": 1,
+      "branches": [
+        "tick-20260928T140531Z-6e0252e8"
+      ]
+    },
+    {
+      "path": "channels/assignment.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T185046Z-8603564f"
+      ]
+    },
+    {
+      "path": "channels/declutter/2026-09-27.md",
+      "count": 1,
+      "branches": [
+        "tick-20260928T000318Z-d664208d"
+      ]
+    },
+    {
+      "path": "channels/declutter/2026-10-03.md",
+      "count": 1,
+      "branches": [
+        "tick-20261003T162011Z-cac437ef"
+      ]
+    },
+    {
+      "path": "channels/declutter/2026-10-04.md",
+      "count": 1,
+      "branches": [
+        "tick-20261004T162256Z-94c76c9b"
+      ]
+    },
+    {
+      "path": "channels/outreach/2026-09-28-send-leg-identity-coverage.md",
+      "count": 1,
+      "branches": [
+        "tick-20260928T120502Z-af3e5f49"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-09-28-desi-followup-fluge.md",
+      "count": 1,
+      "branches": [
+        "tick-20260928T020322Z-80992a79"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-09-28-desi-followup-retraction-watch.md",
+      "count": 1,
+      "branches": [
+        "tick-20260928T020322Z-80992a79"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-09-28-open-meteo-model-and-geocoding.md",
+      "count": 1,
+      "branches": [
+        "tick-20260928T180605Z-4821f8da"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-10-06-fluge-followup.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T162909Z-d8ea0a0e"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-10-06-retraction-watch-followup.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T162909Z-d8ea0a0e"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-10-09-followup-fluge.md",
+      "count": 1,
+      "branches": [
+        "tick-20261009T043620Z-dcdc2e1e"
+      ]
+    },
+    {
+      "path": "channels/outreach/drafts/2026-10-09-followup-retraction-watch.md",
+      "count": 1,
+      "branches": [
+        "tick-20261009T043620Z-dcdc2e1e"
+      ]
+    },
+    {
+      "path": "channels/outreach/newsletter-platform-tiers.json",
+      "count": 1,
+      "branches": [
+        "tick-20261008T123441Z-a4450961"
+      ]
+    },
+    {
+      "path": "channels/outreach/newsletter-platform-tiers.md",
+      "count": 1,
+      "branches": [
+        "tick-20261008T123441Z-a4450961"
+      ]
+    },
+    {
+      "path": "channels/reports/2026-10-10-w-queue-audit.md",
+      "count": 1,
+      "branches": [
+        "tick-20261010T085301Z-3df7ff30"
+      ]
+    },
+    {
+      "path": "channels/review-assignment-band.json",
+      "count": 1,
+      "branches": [
+        "tick-20261009T163757Z-04aebf98"
+      ]
+    },
+    {
+      "path": "channels/review-assignment.md",
+      "count": 1,
+      "branches": [
+        "tick-20261009T203851Z-33d8f331"
+      ]
+    },
+    {
+      "path": "channels/review-cost-band.json",
+      "count": 1,
+      "branches": [
+        "tick-20261009T203851Z-33d8f331"
+      ]
+    },
+    {
+      "path": "channels/reviews/2026-10-09-desi-first-item-review.md",
+      "count": 1,
+      "branches": [
+        "tick-20261009T023610Z-5f0acb17"
+      ]
+    },
+    {
+      "path": "channels/reviews/2026-10-09-desi-review-warm-room.md",
+      "count": 1,
+      "branches": [
+        "tick-20261009T063648Z-1033ec13"
+      ]
+    },
+    {
+      "path": "channels/reviews/2026-10-10-desi-review-queue-b.md",
+      "count": 1,
+      "branches": [
+        "tick-20261010T104046Z-5422b681"
+      ]
+    },
+    {
+      "path": "channels/reviews/2026-10-10-desi-thermal-review.md",
+      "count": 1,
+      "branches": [
+        "tick-20261010T023937Z-b5feff11"
+      ]
+    },
+    {
+      "path": "channels/sent/2026-10-06-fluge-followup.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T042722Z-eedbb01e"
+      ]
+    },
+    {
+      "path": "channels/sent/2026-10-06-retraction-watch-followup.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T042722Z-eedbb01e"
+      ]
+    },
+    {
+      "path": "channels/usage/cost-band.json",
+      "count": 1,
+      "branches": [
+        "tick-20261009T185046Z-8603564f"
+      ]
+    },
+    {
+      "path": "docs/fiction/the-sample-is-too-small.html",
+      "count": 1,
+      "branches": [
+        "tick-20260926T215957Z-fb2d0014"
+      ]
+    },
+    {
+      "path": "docs/fiction/the-sample-is-too-small.poem",
+      "count": 1,
+      "branches": [
+        "tick-20260926T215957Z-fb2d0014"
+      ]
+    },
+    {
+      "path": "docs/gallery/islamic/fivefold-khatim-pravda.svg",
+      "count": 1,
+      "branches": [
+        "tick-20261009T044858Z-94cc32e9"
+      ]
+    },
+    {
+      "path": "docs/gallery/islamic/generate-dmitri-girih.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T044858Z-94cc32e9"
+      ]
+    },
+    {
+      "path": "docs/gallery/sumi-e/crow-on-the-bare-branch.svg",
+      "count": 1,
+      "branches": [
+        "tick-20261008T124615Z-750312dd"
+      ]
+    },
+    {
+      "path": "docs/gallery/sumi-e/generate-dmitri-fifth-stroke.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T205112Z-a4e9d498"
+      ]
+    },
+    {
+      "path": "docs/gallery/sumi-e/the-fifth-stroke.svg",
+      "count": 1,
+      "branches": [
+        "tick-20261009T205112Z-a4e9d498"
+      ]
+    },
+    {
+      "path": "docs/papers/autonomous-session-management-strategies.md",
+      "count": 1,
+      "branches": [
+        "tick-20260926T135905Z-787e2836"
+      ]
+    },
+    {
+      "path": "docs/papers/friction-arena-claims.json",
+      "count": 1,
+      "branches": [
+        "tick-20261003T142002Z-006d140f"
+      ]
+    },
+    {
+      "path": "docs/papers/the-friction-arena.html",
+      "count": 1,
+      "branches": [
+        "tick-20261003T142002Z-006d140f"
+      ]
+    },
+    {
+      "path": "docs/works/co-safety-sources.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T204355Z-8920b079"
+      ]
+    },
+    {
+      "path": "docs/works/co-safety.html",
+      "count": 1,
+      "branches": [
+        "tick-20261007T204355Z-8920b079"
+      ]
+    },
+    {
+      "path": "docs/works/nonreplication.html",
+      "count": 1,
+      "branches": [
+        "tick-20261003T162011Z-cac437ef"
+      ]
+    },
+    {
+      "path": "docs/works/sanitation.html",
+      "count": 1,
+      "branches": [
+        "tick-20260928T100433Z-1c9f9957"
+      ]
+    },
+    {
+      "path": "governance/2026-10-06-code-roster-consistency.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T223004Z-8a5fad1e"
+      ]
+    },
+    {
+      "path": "governance/2026-10-06-delivery-loss-ledger.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T224058Z-ff1dd5de"
+      ]
+    },
+    {
+      "path": "governance/2026-10-06-retention-deleted-by-default.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T024123Z-6be91847"
+      ]
+    },
+    {
+      "path": "governance/2026-10-06-roster-amendment-consistency-audit.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T122820Z-0a2242e3"
+      ]
+    },
+    {
+      "path": "governance/2026-10-06-roster-claim-reconciliation.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T063829Z-bd44915e"
+      ]
+    },
+    {
+      "path": "governance/2026-10-07-stale-four-references-after-the-amendment.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T084135Z-d10b448e"
+      ]
+    },
+    {
+      "path": "governance/2026-10-09-the-assignment-algorithm.md",
+      "count": 1,
+      "branches": [
+        "tick-20261009T163757Z-04aebf98"
+      ]
+    },
+    {
+      "path": "governance/2026-10-10-four-in-the-record.md",
+      "count": 1,
+      "branches": [
+        "tick-20261010T045217Z-b76b1ad1"
+      ]
+    },
+    {
+      "path": "governance/roster-amendment-audit.md",
+      "count": 1,
+      "branches": [
+        "tick-20261005T182619Z-ecd0a080"
+      ]
+    },
+    {
+      "path": "report.txt",
+      "count": 1,
+      "branches": [
+        "tick-20261009T163757Z-04aebf98"
+      ]
+    },
+    {
+      "path": "research/affective-pain-acupuncture-records.json",
+      "count": 1,
+      "branches": [
+        "tick-20260928T040337Z-4f0681ec"
+      ]
+    },
+    {
+      "path": "research/affective-pain-neuromodulation-second-population-filtered-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261010T084040Z-777a9667"
+      ]
+    },
+    {
+      "path": "research/affective-pain-neuromodulation-second-population-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261008T104603Z-9abe40eb"
+      ]
+    },
+    {
+      "path": "research/affective-pain-neuromodulation.md",
+      "count": 1,
+      "branches": [
+        "tick-20260928T040337Z-4f0681ec"
+      ]
+    },
+    {
+      "path": "research/affective-pain-vns-records.json",
+      "count": 1,
+      "branches": [
+        "tick-20260928T040337Z-4f0681ec"
+      ]
+    },
+    {
+      "path": "research/androgen-tusc2-bridge-search-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20260930T061036Z-756e43ba"
+      ]
+    },
+    {
+      "path": "research/androgen-tusc2-bridge-search.md",
+      "count": 1,
+      "branches": [
+        "tick-20260930T061036Z-756e43ba"
+      ]
+    },
+    {
+      "path": "research/antiseizure-sleep-eeg-corpus.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T183217Z-c8ce5593"
+      ]
+    },
+    {
+      "path": "research/antiseizure-sleep-eeg-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T183217Z-c8ce5593"
+      ]
+    },
+    {
+      "path": "research/asm-sleep-eeg-corpus.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T003013Z-80dc119a"
+      ]
+    },
+    {
+      "path": "research/asm-sleep-eeg-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T003013Z-80dc119a"
+      ]
+    },
+    {
+      "path": "research/disease-screen-density-band-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T124222Z-f389b992"
+      ]
+    },
+    {
+      "path": "research/disease-screen-density-band.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T124222Z-f389b992"
+      ]
+    },
+    {
+      "path": "research/emergency-sanitation-sources.md",
+      "count": 1,
+      "branches": [
+        "tick-20260928T100433Z-1c9f9957"
+      ]
+    },
+    {
+      "path": "research/gallery-floor-at-five.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T064133Z-7cb5544a"
+      ]
+    },
+    {
+      "path": "research/landing-gate-refusals-2026-10-05.md",
+      "count": 1,
+      "branches": [
+        "tick-20261006T002708Z-7539884d"
+      ]
+    },
+    {
+      "path": "research/live-harness-guard-audit.md",
+      "count": 1,
+      "branches": [
+        "tick-20261004T182309Z-2b6c4c6e"
+      ]
+    },
+    {
+      "path": "research/maternal-chronic-pain-substance-use-broad-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T083122Z-fc8332c2"
+      ]
+    },
+    {
+      "path": "research/maternal-chronic-pain-substance-use-wide.json",
+      "count": 1,
+      "branches": [
+        "tick-20261008T044511Z-2c46c983"
+      ]
+    },
+    {
+      "path": "research/maternal-chronic-pain-substance-use-widened.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T083122Z-fc8332c2"
+      ]
+    },
+    {
+      "path": "research/maternal-chronic-pain-widened-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T203227Z-51ded3e9"
+      ]
+    },
+    {
+      "path": "research/mcr-colistin-primaries-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261009T104950Z-01ce019a"
+      ]
+    },
+    {
+      "path": "research/mcr-colistin-primary-harmonisation.json",
+      "count": 1,
+      "branches": [
+        "tick-20261010T065242Z-81cd9300"
+      ]
+    },
+    {
+      "path": "research/mcr-colistin-primary-harmonisation.md",
+      "count": 1,
+      "branches": [
+        "tick-20261010T065242Z-81cd9300"
+      ]
+    },
+    {
+      "path": "research/mcr-colistin-primary-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T123139Z-171f5382"
+      ]
+    },
+    {
+      "path": "research/mcr-colistin-primary-reconciliation.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T123139Z-171f5382"
+      ]
+    },
+    {
+      "path": "research/mcr-colistin-primary-verification.json",
+      "count": 1,
+      "branches": [
+        "tick-20261008T043357Z-40436fdc"
+      ]
+    },
+    {
+      "path": "research/mcr-colistin-primary-verification.md",
+      "count": 1,
+      "branches": [
+        "tick-20261008T043357Z-40436fdc"
+      ]
+    },
+    {
+      "path": "research/mcr-primary-studies-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T063055Z-3a43e8e5"
+      ]
+    },
+    {
+      "path": "research/mcr-primary-studies.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T063055Z-3a43e8e5"
+      ]
+    },
+    {
+      "path": "research/open-meteo-sensitivity-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20260928T180605Z-4821f8da"
+      ]
+    },
+    {
+      "path": "research/open-meteo-sensitivity.md",
+      "count": 1,
+      "branches": [
+        "tick-20260928T180605Z-4821f8da"
+      ]
+    },
+    {
+      "path": "research/queue-candidate-density-2026-09-27.json",
+      "count": 1,
+      "branches": [
+        "tick-20260927T220314Z-b593b7b3"
+      ]
+    },
+    {
+      "path": "research/queue-candidate-density-2026-09-27b.json",
+      "count": 1,
+      "branches": [
+        "tick-20260927T220314Z-b593b7b3"
+      ]
+    },
+    {
+      "path": "research/queue-candidate-generation-2026-09-27.md",
+      "count": 1,
+      "branches": [
+        "tick-20260927T220314Z-b593b7b3"
+      ]
+    },
+    {
+      "path": "research/reddit-403-diagnosis-2026-10-07.md",
+      "count": 1,
+      "branches": [
+        "tick-20261008T003307Z-d334dbc8"
+      ]
+    },
+    {
+      "path": "research/reddit-read-access-2026-10-05-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261005T122543Z-09ba65ae"
+      ]
+    },
+    {
+      "path": "research/reddit-read-access-2026-10-05.md",
+      "count": 1,
+      "branches": [
+        "tick-20261005T122543Z-09ba65ae"
+      ]
+    },
+    {
+      "path": "research/sleep-cognition-epilepsy-ied-fulltext-raw.json",
+      "count": 1,
+      "branches": [
+        "tick-20261007T004107Z-94caf291"
+      ]
+    },
+    {
+      "path": "research/sleep-cognition-epilepsy-ied-fulltext.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T004107Z-94caf291"
+      ]
+    },
+    {
+      "path": "research/sleep-cognition-epilepsy-ied-measurements.json",
+      "count": 1,
+      "branches": [
+        "tick-20261009T103736Z-4ea4f075"
+      ]
+    },
+    {
+      "path": "research/sleep-cognition-epilepsy-ied-measurements.md",
+      "count": 1,
+      "branches": [
+        "tick-20261009T103736Z-4ea4f075"
+      ]
+    },
+    {
+      "path": "research/verification-suite-coverage-2026-10-07.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T164305Z-b8d58b3c"
+      ]
+    },
+    {
+      "path": "research/wake-outcome-census.json",
+      "count": 1,
+      "branches": [
+        "tick-20261004T002123Z-e8adcbe4"
+      ]
+    },
+    {
+      "path": "research/wake-outcome-census.md",
+      "count": 1,
+      "branches": [
+        "tick-20261004T002123Z-e8adcbe4"
+      ]
+    },
+    {
+      "path": "scripts/affective_pain_biomarker_only.py",
+      "count": 1,
+      "branches": [
+        "tick-20261004T202320Z-367b0fbe"
+      ]
+    },
+    {
+      "path": "scripts/affective_pain_biomarker_only_classify.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T143936Z-2b54fe68"
+      ]
+    },
+    {
+      "path": "scripts/affective_pain_second_population.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T104603Z-9abe40eb"
+      ]
+    },
+    {
+      "path": "scripts/affective_pain_second_population_filtered.py",
+      "count": 1,
+      "branches": [
+        "tick-20261010T084040Z-777a9667"
+      ]
+    },
+    {
+      "path": "scripts/bodies_status.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T003744Z-9f069ff0"
+      ]
+    },
+    {
+      "path": "scripts/check_roster_consistency.py",
+      "count": 1,
+      "branches": [
+        "tick-20261005T182619Z-ecd0a080"
+      ]
+    },
+    {
+      "path": "scripts/check_test_registration.py",
+      "count": 1,
+      "branches": [
+        "tick-20260930T101102Z-d7c44071"
+      ]
+    },
+    {
+      "path": "scripts/check_test_registry.py",
+      "count": 1,
+      "branches": [
+        "tick-20260930T121117Z-3db52bb4"
+      ]
+    },
+    {
+      "path": "scripts/check_villanelle.py",
+      "count": 1,
+      "branches": [
+        "tick-20260926T215957Z-fb2d0014"
+      ]
+    },
+    {
+      "path": "scripts/draft_gate_closer.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T064910Z-2e807712"
+      ]
+    },
+    {
+      "path": "scripts/draft_gate_sweep.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T163953Z-b274e47e"
+      ]
+    },
+    {
+      "path": "scripts/draft_triage.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T024442Z-2cf3d833"
+      ]
+    },
+    {
+      "path": "scripts/drafts_triage.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T084534Z-3b08fb60"
+      ]
+    },
+    {
+      "path": "scripts/fetch_reddit.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T223554Z-8df55da9"
+      ]
+    },
+    {
+      "path": "scripts/friction_arena_claims.py",
+      "count": 1,
+      "branches": [
+        "tick-20261003T142002Z-006d140f"
+      ]
+    },
+    {
+      "path": "scripts/gallery_fifth_amigo_gap.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T064133Z-7cb5544a"
+      ]
+    },
+    {
+      "path": "scripts/gambling_regulator_filings.py",
+      "count": 1,
+      "branches": [
+        "tick-20261001T041306Z-baabb47a"
+      ]
+    },
+    {
+      "path": "scripts/landing_preflight.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T165020Z-958131ab"
+      ]
+    },
+    {
+      "path": "scripts/landing_tree_report.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T082758Z-245fa706"
+      ]
+    },
+    {
+      "path": "scripts/maternal_pain_widened_search.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T203227Z-51ded3e9"
+      ]
+    },
+    {
+      "path": "scripts/mcr_colistin_primary_pull.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T123139Z-171f5382"
+      ]
+    },
+    {
+      "path": "scripts/mcr_primary_studies.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T063055Z-3a43e8e5"
+      ]
+    },
+    {
+      "path": "scripts/outreach_followup_due.py",
+      "count": 1,
+      "branches": [
+        "tick-20261005T162617Z-323f06d6"
+      ]
+    },
+    {
+      "path": "scripts/outreach_readiness.py",
+      "count": 1,
+      "branches": [
+        "tick-20261003T061929Z-f2f6732a"
+      ]
+    },
+    {
+      "path": "scripts/pubmed_fetch.py",
+      "count": 1,
+      "branches": [
+        "tick-20260928T040337Z-4f0681ec"
+      ]
+    },
+    {
+      "path": "scripts/retention_pass.py",
+      "count": 1,
+      "branches": [
+        "tick-20260926T055750Z-a80068bc"
+      ]
+    },
+    {
+      "path": "scripts/retracted_works_citation_lag.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T003610Z-5fb06d5c"
+      ]
+    },
+    {
+      "path": "scripts/review_gate_report.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T184715Z-8f81f389"
+      ]
+    },
+    {
+      "path": "scripts/roster.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T004808Z-8bc74663"
+      ]
+    },
+    {
+      "path": "scripts/run_tests.py",
+      "count": 1,
+      "branches": [
+        "tick-20260929T120836Z-e4064e63"
+      ]
+    },
+    {
+      "path": "scripts/secret_egress_scan.py",
+      "count": 1,
+      "branches": [
+        "tick-20260928T080419Z-da7ea601"
+      ]
+    },
+    {
+      "path": "scripts/sleep_cognition_epilepsy_ied_fulltext.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T004107Z-94caf291"
+      ]
+    },
+    {
+      "path": "scripts/sleep_epilepsy_ied_fulltext.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T103736Z-4ea4f075"
+      ]
+    },
+    {
+      "path": "scripts/unlanded_worklist.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T164656Z-0a7036ae"
+      ]
+    },
+    {
+      "path": "scripts/wake_review_queue.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T143750Z-5ac52343"
+      ]
+    },
+    {
+      "path": "scripts/zz_probe_measurement.py",
+      "count": 1,
+      "branches": [
+        "tick-20261004T162256Z-94c76c9b"
+      ]
+    },
+    {
+      "path": "tests/test_affective_pain_biomarker_stratum.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T043828Z-684c3006"
+      ]
+    },
+    {
+      "path": "tests/test_affective_pain_second_population.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T104603Z-9abe40eb"
+      ]
+    },
+    {
+      "path": "tests/test_androgen_tusc2_bridge_search.py",
+      "count": 1,
+      "branches": [
+        "tick-20260930T061036Z-756e43ba"
+      ]
+    },
+    {
+      "path": "tests/test_assignment.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T185046Z-8603564f"
+      ]
+    },
+    {
+      "path": "tests/test_bodies_status.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T003744Z-9f069ff0"
+      ]
+    },
+    {
+      "path": "tests/test_check_test_registration.py",
+      "count": 1,
+      "branches": [
+        "tick-20260930T101102Z-d7c44071"
+      ]
+    },
+    {
+      "path": "tests/test_check_villanelle.py",
+      "count": 1,
+      "branches": [
+        "tick-20260926T215957Z-fb2d0014"
+      ]
+    },
+    {
+      "path": "tests/test_deepseek_key_repoint.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T123910Z-0d782f6b"
+      ]
+    },
+    {
+      "path": "tests/test_draft_gate_closer.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T064910Z-2e807712"
+      ]
+    },
+    {
+      "path": "tests/test_draft_gate_sweep.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T163953Z-b274e47e"
+      ]
+    },
+    {
+      "path": "tests/test_draft_pile.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T104200Z-0ba1b649"
+      ]
+    },
+    {
+      "path": "tests/test_draft_triage.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T024442Z-2cf3d833"
+      ]
+    },
+    {
+      "path": "tests/test_fetch_reddit.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T223554Z-8df55da9"
+      ]
+    },
+    {
+      "path": "tests/test_friction_arena_claims.py",
+      "count": 1,
+      "branches": [
+        "tick-20261003T142002Z-006d140f"
+      ]
+    },
+    {
+      "path": "tests/test_gallery_fifth_amigo_gap.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T064133Z-7cb5544a"
+      ]
+    },
+    {
+      "path": "tests/test_gambling_regulator_filings.py",
+      "count": 1,
+      "branches": [
+        "tick-20261001T161405Z-bb24c6d5"
+      ]
+    },
+    {
+      "path": "tests/test_landing_preflight.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T165020Z-958131ab"
+      ]
+    },
+    {
+      "path": "tests/test_landing_tree_report.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T082758Z-245fa706"
+      ]
+    },
+    {
+      "path": "tests/test_live_harness_guards.py",
+      "count": 1,
+      "branches": [
+        "tick-20261004T182309Z-2b6c4c6e"
+      ]
+    },
+    {
+      "path": "tests/test_maternal_pain_widened_search.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T203227Z-51ded3e9"
+      ]
+    },
+    {
+      "path": "tests/test_mcr_colistin_primary.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T123139Z-171f5382"
+      ]
+    },
+    {
+      "path": "tests/test_mcr_colistin_primary_verification.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T043357Z-40436fdc"
+      ]
+    },
+    {
+      "path": "tests/test_mcr_primary_studies.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T063055Z-3a43e8e5"
+      ]
+    },
+    {
+      "path": "tests/test_newsletter_platform_tiers.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T123441Z-a4450961"
+      ]
+    },
+    {
+      "path": "tests/test_outbound_send_coverage.py",
+      "count": 1,
+      "branches": [
+        "tick-20260928T120502Z-af3e5f49"
+      ]
+    },
+    {
+      "path": "tests/test_outreach_followup_due.py",
+      "count": 1,
+      "branches": [
+        "tick-20261005T162617Z-323f06d6"
+      ]
+    },
+    {
+      "path": "tests/test_outreach_readiness.py",
+      "count": 1,
+      "branches": [
+        "tick-20261003T061929Z-f2f6732a"
+      ]
+    },
+    {
+      "path": "tests/test_pubmed_fetch.py",
+      "count": 1,
+      "branches": [
+        "tick-20260928T040337Z-4f0681ec"
+      ]
+    },
+    {
+      "path": "tests/test_readme_tools_table.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T044132Z-9dad80b6"
+      ]
+    },
+    {
+      "path": "tests/test_request_register.py",
+      "count": 1,
+      "branches": [
+        "tick-20261005T142550Z-9b5d61ff"
+      ]
+    },
+    {
+      "path": "tests/test_retention_pass.py",
+      "count": 1,
+      "branches": [
+        "tick-20260926T055750Z-a80068bc"
+      ]
+    },
+    {
+      "path": "tests/test_review_gate_report.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T184715Z-8f81f389"
+      ]
+    },
+    {
+      "path": "tests/test_run_tests_runner.py",
+      "count": 1,
+      "branches": [
+        "tick-20260929T120836Z-e4064e63"
+      ]
+    },
+    {
+      "path": "tests/test_secret_egress_scan.py",
+      "count": 1,
+      "branches": [
+        "tick-20260928T080419Z-da7ea601"
+      ]
+    },
+    {
+      "path": "tests/test_site_roster.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T224751Z-72baa2a0"
+      ]
+    },
+    {
+      "path": "tests/test_sleep_cognition_epilepsy_ied_fulltext.py",
+      "count": 1,
+      "branches": [
+        "tick-20261007T004107Z-94caf291"
+      ]
+    },
+    {
+      "path": "tests/test_suite_registration.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T125011Z-b23da3f4"
+      ]
+    },
+    {
+      "path": "tests/test_task_ledger_dedupe.py",
+      "count": 1,
+      "branches": [
+        "tick-20260925T195613Z-53958b7f"
+      ]
+    },
+    {
+      "path": "tests/test_test_registry.py",
+      "count": 1,
+      "branches": [
+        "tick-20260930T121117Z-3db52bb4"
+      ]
+    },
+    {
+      "path": "tests/test_thermal_calculator_defaults.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T063648Z-1033ec13"
+      ]
+    },
+    {
+      "path": "tests/test_thermal_page_static_defaults.py",
+      "count": 1,
+      "branches": [
+        "tick-20261010T023937Z-b5feff11"
+      ]
+    },
+    {
+      "path": "tests/test_unlanded_worklist.py",
+      "count": 1,
+      "branches": [
+        "tick-20261008T164656Z-0a7036ae"
+      ]
+    },
+    {
+      "path": "tests/test_verification_suite_registration.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T162909Z-d8ea0a0e"
+      ]
+    },
+    {
+      "path": "tests/test_wake_review_queue.py",
+      "count": 1,
+      "branches": [
+        "tick-20261009T143750Z-5ac52343"
+      ]
+    },
+    {
+      "path": "tests/test_workflow_test_registration.py",
+      "count": 1,
+      "branches": [
+        "tick-20261006T022710Z-19164866"
+      ]
+    },
+    {
+      "path": "tests/validate_co_safety_page.mjs",
+      "count": 1,
+      "branches": [
+        "tick-20261007T204355Z-8920b079"
+      ]
+    },
+    {
+      "path": "tests/validate_nonreplication_page.mjs",
+      "count": 1,
+      "branches": [
+        "tick-20261003T162011Z-cac437ef"
+      ]
+    },
+    {
+      "path": "tests/validate_sanitation_page.mjs",
+      "count": 1,
+      "branches": [
+        "tick-20260928T100433Z-1c9f9957"
+      ]
+    },
+    {
+      "path": "tests/validate_thermal_page.mjs",
+      "count": 1,
+      "branches": [
+        "tick-20261010T104046Z-5422b681"
+      ]
+    },
+    {
+      "path": "works/queue/08-carbon-monoxide-after-a-power-cut.md",
+      "count": 1,
+      "branches": [
+        "tick-20261007T204355Z-8920b079"
+      ]
+    }
+  ],
+  "branches": [
+    {
+      "branch": "tick-20260925T175554Z-9368ced1",
+      "sha": "7cc16baafe706b6edfa487e034d8078622aba5ca",
+      "base": "5f102434af3fb4173a7d57b81bf5734369090aa2",
+      "files": {
+        "LANDED": [
+          "scripts/dedupe_tasks.py"
+        ],
+        "DIFFERS": [
+          "channels/task_ledger.py",
+          "tests/test_task_ledger.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260925T195613Z-53958b7f",
+      "sha": "3d69448f21b2fe507170975fc2456abbf83da76b",
+      "base": "c535570e2cbd51268de3473aae7c3f37b1fa9bd7",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/task_ledger.py"
+        ],
+        "MISSING": [
+          "tests/test_task_ledger_dedupe.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260925T215638Z-afe03ad7",
+      "sha": "09b55c811c090954e98d4d2225a2e541fd1ba02d",
+      "base": "f9cbb71db61fd2c7c8d5e123de8f20c1b5eaf903",
+      "files": {
+        "LANDED": [
+          "channels/task_ledger.py",
+          "scripts/dedupe_tasks.py",
+          "tests/test_task_ledger.py",
+          "tests/validate_ors_calculator.mjs"
+        ],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260925T235650Z-d9205341",
+      "sha": "0036919a277bd4f004f4318509166dbfa6bcfa69",
+      "base": "1e3b25446eb2d930a58467f0324db4a4f730be02",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/works/ors.html",
+          "tests/validate_ors_calculator.mjs"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260926T015658Z-8ecea256",
+      "sha": "422df3082d5c98880a436fb0efd3cebb557558ba",
+      "base": "ca4463e04053008c65137946d4b96bc85e7d46d8",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/papers/autonomous-session-management-strategies.html",
+          "docs/papers/index.html",
+          "tests/validate_ors_calculator.mjs"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260926T035720Z-c339c83b",
+      "sha": "ba7410fd0be27bf187b6ecbac62a256ffb3cac76",
+      "base": "daaa8c1b20c92e6a4d4a69f35ba56e058d2a71ab",
+      "files": {
+        "LANDED": [
+          "channels/record_push.py"
+        ],
+        "DIFFERS": [
+          ".github/workflows/channel-poll.yml",
+          ".github/workflows/test-and-report.yml",
+          "channels/agenda.md",
+          "discussions/README.md",
+          "scripts/README.md",
+          "tests/test_record_push.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260926T055750Z-a80068bc",
+      "sha": "002a8cfd8fe7f0a6b2609f36a0883076a96fa452",
+      "base": "9c44ab2bc3f43158cc4533a793e083b9a551d9b9",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/agenda.md",
+          "channels/retention.py",
+          "discussions/README.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "scripts/retention_pass.py",
+          "tests/test_retention_pass.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260926T075812Z-a04cb0cf",
+      "sha": "10a260f846cbdf8a10f0ccc271e9dbcd9a6c852a",
+      "base": "f142990b672a6461a635a3e911d8470d4f2aa38d",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/agenda.md",
+          "discussions/README.md",
+          "docs/works/ors.html",
+          "scripts/README.md",
+          "tests/validate_ors_calculator.mjs"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260926T095836Z-508ea4d9",
+      "sha": "15cf311b712072b9c7b7919dc60d326c57b04f23",
+      "base": "5449220c073d7ae6774a2695e9c2dd6b4251649b",
+      "files": {
+        "LANDED": [
+          "agenda/26-the-conservatory-songbook-and-lead-sheets.md",
+          "docs/music/app.js",
+          "docs/music/the-cairn.html"
+        ],
+        "DIFFERS": [
+          "channels/tasks.md",
+          "docs/music/before-the-embers-cool.html",
+          "docs/music/index.html"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260926T115857Z-935ef00f",
+      "sha": "e56a525c2e20ebef09993f9a59ae3c374bfaa179",
+      "base": "84eb729a44c24caa8bbb84a287bfbf48c1cb702f",
+      "files": {
+        "LANDED": [
+          "scripts/declutter_audit.py"
+        ],
+        "DIFFERS": [],
+        "MISSING": []
+      },
+      "verdict": "LANDED"
+    },
+    {
+      "branch": "tick-20260926T135905Z-787e2836",
+      "sha": "18dbb7bf0013546977ba7ba59716bde1f53aa772",
+      "base": "17a1cb3691a5c69e4782161ea478b6204726e874",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/papers/autonomous-session-management-strategies.html",
+          "docs/papers/index.html",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "docs/papers/autonomous-session-management-strategies.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260926T215957Z-fb2d0014",
+      "sha": "7e441191bd4938d86b2682090d78052dd1a5b89a",
+      "base": "e98ac24ff9a5ad29e55d258f8038bd5a105440f6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/fiction/index.html"
+        ],
+        "MISSING": [
+          "docs/fiction/the-sample-is-too-small.html",
+          "docs/fiction/the-sample-is-too-small.poem",
+          "scripts/check_villanelle.py",
+          "tests/test_check_villanelle.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260927T220314Z-b593b7b3",
+      "sha": "e7cfabe01b163c4359d8bf6c83b3a80eea3ced3b",
+      "base": "9619ec3adaa96f0719136557c132a2d7079270b2",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "agenda/07-disease-research.md",
+          "channels/agenda.md",
+          "channels/reject-queue.md",
+          "research/queue.md"
+        ],
+        "MISSING": [
+          "research/queue-candidate-density-2026-09-27.json",
+          "research/queue-candidate-density-2026-09-27b.json",
+          "research/queue-candidate-generation-2026-09-27.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T000318Z-d664208d",
+      "sha": "22b8d05ce573e2903c22a12962f2127087a32406",
+      "base": "8cfb112dd723fc08be7bf042d5d93840c92a63d9",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "scripts/README.md",
+          "scripts/declutter_audit.py",
+          "works/queue/03-claim-and-source.md"
+        ],
+        "MISSING": [
+          "channels/declutter/2026-09-27.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T020322Z-80992a79",
+      "sha": "5d73a20f5e684d8ed19b99a9f574267f1d26c407",
+      "base": "115062c46fdb462866a4e9444883cd3c92fa345a",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/outreach/pipeline.json",
+          "scripts/outreach_ledger_audit.py",
+          "tests/test_outreach_ledger_audit.py"
+        ],
+        "MISSING": [
+          "channels/outreach/drafts/2026-09-28-desi-followup-fluge.md",
+          "channels/outreach/drafts/2026-09-28-desi-followup-retraction-watch.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T040337Z-4f0681ec",
+      "sha": "bde776e520036a7ec3beff44ab963f308c566fc0",
+      "base": "11e723eab2d8676f2f67fb6dabb976331efcf1ee",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/32-affective-pain-neuromodulation-evidence-map.md",
+          "channels/agenda.md",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "research/affective-pain-acupuncture-records.json",
+          "research/affective-pain-neuromodulation.md",
+          "research/affective-pain-vns-records.json",
+          "scripts/pubmed_fetch.py",
+          "tests/test_pubmed_fetch.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T060353Z-61767f9a",
+      "sha": "adf343cf245364fe8fa83fcbddfe38534bcd4b1c",
+      "base": "4bede440149269debe1bd76c37c0b38519fb1f20",
+      "files": {
+        "LANDED": [
+          "rover/wake.py",
+          "tests/test_rover_wake.py"
+        ],
+        "DIFFERS": [],
+        "MISSING": []
+      },
+      "verdict": "LANDED"
+    },
+    {
+      "branch": "tick-20260928T080419Z-da7ea601",
+      "sha": "affcd3fa1de675d40dbe8dd2cdf763a49b7ad121",
+      "base": "d7ad3536dde2d3b8c73f986306943362c90bf7d6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/15-red-team-the-deadbolt.md",
+          "channels/agenda.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "scripts/secret_egress_scan.py",
+          "tests/test_secret_egress_scan.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T100433Z-1c9f9957",
+      "sha": "f5a3baf063166314f4388593591f582acd180e52",
+      "base": "6b757da301cab6e3c39dfead290f815f2a880854",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/app.js",
+          "docs/works/index.html"
+        ],
+        "MISSING": [
+          "docs/works/sanitation.html",
+          "research/emergency-sanitation-sources.md",
+          "tests/validate_sanitation_page.mjs"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T120502Z-af3e5f49",
+      "sha": "fb6a30857f079486f99d4670a162111b55802795",
+      "base": "754a17498940b97d1c091fbc86c79eccaecf25dc",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/quiet-check.yml",
+          ".github/workflows/test-and-report.yml",
+          "channels/outreach/pipeline.json",
+          "channels/reject-queue.md",
+          "channels/tasks.md"
+        ],
+        "MISSING": [
+          "channels/outreach/2026-09-28-send-leg-identity-coverage.md",
+          "tests/test_outbound_send_coverage.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T140531Z-6e0252e8",
+      "sha": "4bb588068acd1d3e1428d1b72d31149f3fc55ab1",
+      "base": "d8c51018ab5c129fdf39a752e069a28e058389b1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/channel-poll.yml",
+          "channels/README.md",
+          "channels/reject-queue.md",
+          "channels/tasks.md"
+        ],
+        "MISSING": [
+          ".github/workflows/retention.yml"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T160542Z-f2f30be9",
+      "sha": "30ea19fdea6783302baa7a575a5a68c3315b063f",
+      "base": "caf482961560a66210dfab520bfd99f26df26a0e",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "docs/works/index.html",
+          "docs/works/retraction.html",
+          "tests/validate_retraction_page.mjs"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260928T180605Z-4821f8da",
+      "sha": "1c5b3dc9c2791c0f92922a77f93367d85dabeff3",
+      "base": "e5b0ae27b7057651e383a4ecae729891f364fc71",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/outreach/pipeline.json",
+          "channels/reject-queue.md",
+          "channels/tasks.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "channels/outreach/drafts/2026-09-28-open-meteo-model-and-geocoding.md",
+          "research/open-meteo-sensitivity-raw.json",
+          "research/open-meteo-sensitivity.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260928T200629Z-78b286b7",
+      "sha": "558470af47f73e1197909afd2fb87410f2f30f73",
+      "base": "43f1ad65b4b926f37cbe88dde4f98dd4e4345877",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "channels/tasks.md",
+          "scripts/README.md"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260928T220646Z-e2c0e5a7",
+      "sha": "cfd1100d20bed747b1f4381db55839824ae08103",
+      "base": "81947fa74389c897dce54c917e4ba9806411f44a",
+      "files": {
+        "LANDED": [
+          "research/maternal-chronic-pain-substance-use-raw.json",
+          "research/maternal-chronic-pain-substance-use.md",
+          "scripts/maternal_pain_search.py",
+          "tests/test_maternal_pain_search.py"
+        ],
+        "DIFFERS": [
+          "agenda/24-maternal-chronic-pain-and-substance-use-care.md",
+          "channels/agenda.md"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260929T000703Z-dddd4880",
+      "sha": "edd3a1c7222f5d932938ae4da1109d5b767c1f92",
+      "base": "96d4d35eb5a31f32c1d1f8373a72f8b818fa217b",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/tasks.md",
+          "scripts/README.md",
+          "tests/test_mail_identity_credentials.py",
+          "tests/test_music_checker.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260929T120836Z-e4064e63",
+      "sha": "b89fc2d402b5b255468bc00f1fb0dd6e3518d704",
+      "base": "bb30850d849d453a92ed37219b79fd5a06515e27",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "TEST.md",
+          "scripts/README.md",
+          "scripts/gen_index.py"
+        ],
+        "MISSING": [
+          "scripts/run_tests.py",
+          "tests/test_run_tests_runner.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260929T220928Z-a0ade17f",
+      "sha": "09750820b7ec54f9aa857579a74e6d35b0d9ba96",
+      "base": "355b19866ce9efa4fb1b4e66805c19e0e4eade58",
+      "files": {
+        "LANDED": [
+          "docs/papers/hands-mind-origin-gallery-matrix.html",
+          "scripts/check_docs_links.py",
+          "tests/test_docs_links.py"
+        ],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "scripts/README.md"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260930T041008Z-420af4f8",
+      "sha": "95d513cedda771c6ce3894a86a2a9da0ef9f6de6",
+      "base": "3971db362412ec58627a7beca49a0d28d8be52fc",
+      "files": {
+        "LANDED": [
+          "probes/results/2026-09-30-probe-report.md",
+          "research/gambling-algorithmic-exploitation.md",
+          "tests/test_evidence_table_registration.py",
+          "tests/test_gambling_source_table.py"
+        ],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260930T061036Z-756e43ba",
+      "sha": "526e5ab8e5e67811f9423a3bd4429489db68ad15",
+      "base": "2fe21e1b228123a13550accc704e60ebc962901e",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/androgen-tusc2-bridge-search-raw.json",
+          "research/androgen-tusc2-bridge-search.md",
+          "tests/test_androgen_tusc2_bridge_search.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260930T081101Z-2b64f31d",
+      "sha": "e93cd557cd9ee6cdbbb4db1e017ecc59c1ce84bd",
+      "base": "cdd0bcba40effe1aa49bfeaa0d6313357859b67c",
+      "files": {
+        "LANDED": [
+          "tests/test_mjs_validators_parse.py",
+          "tests/validate_retraction_page.mjs",
+          "tests/validate_trials_page.mjs"
+        ],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20260930T101102Z-d7c44071",
+      "sha": "21a94b9a3f8760c62363a388f665d6fdcabe0726",
+      "base": "a8a0e2d918b7b4eb93b13485f86cd1977e08b199",
+      "files": {
+        "LANDED": [
+          "tests/validate_trials_page.mjs"
+        ],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "tests/validate_retraction_page.mjs"
+        ],
+        "MISSING": [
+          "scripts/check_test_registration.py",
+          "tests/test_check_test_registration.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260930T121117Z-3db52bb4",
+      "sha": "c460453608b96265fa36ef6b261e04ef362896c5",
+      "base": "ec2433544f0b26e62cc2304e6e782aa3ae48b0bd",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "scripts/README.md",
+          "tests/validate_retraction_page.mjs",
+          "tests/validate_trials_page.mjs"
+        ],
+        "MISSING": [
+          "scripts/check_test_registry.py",
+          "tests/test_test_registry.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20260930T141130Z-c848193d",
+      "sha": "231f8a85282ff5ad96183d21638e2b2c43d48176",
+      "base": "3de9f0344bd3f27b93f5f8e82fa3b1145ae3a2ef",
+      "files": {
+        "LANDED": [
+          "research/draftkings-patent-text-raw.json",
+          "research/draftkings-patents-raw.json",
+          "scripts/draftkings_patent_text.py",
+          "scripts/draftkings_patents.py"
+        ],
+        "DIFFERS": [],
+        "MISSING": []
+      },
+      "verdict": "LANDED"
+    },
+    {
+      "branch": "tick-20260930T161143Z-c05ff8a2",
+      "sha": "888d444b7a4cf0b70d5d984b96b95b27ca02b1f9",
+      "base": "662c02ed2375ea834af70f92f73be97b850536c8",
+      "files": {
+        "LANDED": [
+          "tests/test_gen_feed_freshness.py"
+        ],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "docs/atom.xml",
+          "docs/sitemap.xml"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261001T041306Z-baabb47a",
+      "sha": "4ed1567858351ab86886d2eebccca861adf6e072",
+      "base": "6fe45af3218e9fd0d35c1d2d357bbdada2c9f2f9",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/gambling-regulator-filings-raw.json",
+          "research/gambling-regulator-filings.md",
+          "scripts/gambling_regulator_filings.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261001T161405Z-bb24c6d5",
+      "sha": "0806e0944d2b89fa273727ba4e5437baa6038051",
+      "base": "687dbe41154780b9aba9cd72aa798e69e7f66efb",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml"
+        ],
+        "MISSING": [
+          "research/gambling-regulator-filings-raw.json",
+          "research/gambling-regulator-filings.md",
+          "tests/test_gambling_regulator_filings.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261001T221434Z-4a6793ac",
+      "sha": "d0c13a58449a3199332cbbc5dbe28cb6455aebb7",
+      "base": "2a4f596aacb161d92b6a294199b4bcce1565a4cb",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "scripts/outreach_ledger_audit.py",
+          "tests/test_outreach_ledger_audit.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261003T061929Z-f2f6732a",
+      "sha": "a7bff257f20dcbbcc09dde73a205bd86c37fee5e",
+      "base": "cbed83100f38671dc64f1f67ae3a32fe3f6c7b4a",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/outreach/drafts/2026-10-01-stewardship-long-now.md",
+          "channels/outreach/drafts/internet_archive.md",
+          "channels/outreach/pipeline.json"
+        ],
+        "MISSING": [
+          "scripts/outreach_readiness.py",
+          "tests/test_outreach_readiness.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261003T142002Z-006d140f",
+      "sha": "c9fa2faaa987ebbf48a7f699e1082239eb977ec7",
+      "base": "6180d1b705762161cc6402c4b84ba96bb1be368c",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/atom.xml",
+          "docs/papers/index.html",
+          "docs/sitemap.xml",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "docs/papers/friction-arena-claims.json",
+          "docs/papers/the-friction-arena.html",
+          "scripts/friction_arena_claims.py",
+          "tests/test_friction_arena_claims.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261003T162011Z-cac437ef",
+      "sha": "96fa24c23a6b1805b5e97f94c74c7dc5be4233be",
+      "base": "08c436bdf92d6a3158d800717a2a2ff1b4bf1ee8",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/atom.xml",
+          "docs/sitemap.xml",
+          "docs/works/index.html",
+          "works/queue/00-candidates-screened.md",
+          "works/queue/07-negative-and-nonreplicated-results.md"
+        ],
+        "MISSING": [
+          "channels/declutter/2026-10-03.md",
+          "docs/works/nonreplication.html",
+          "tests/validate_nonreplication_page.mjs"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261004T002123Z-e8adcbe4",
+      "sha": "311f468fbb8664e22bc4ec409d3a4b43d6664ba1",
+      "base": "07a74436947b4ffa79569f47ed3b2b258312a9d9",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "agenda/20-creating-motive.md",
+          "channels/open-decisions.md",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "research/wake-outcome-census.json",
+          "research/wake-outcome-census.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261004T142238Z-2418f998",
+      "sha": "bcd1baa6e0e1886f2f6a297be88dc89f46d81d16",
+      "base": "acfec936b67e45a8fb413269075248a7c60a050e",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "agenda/32-affective-pain-neuromodulation-evidence-map.md",
+          "channels/agenda.md",
+          "research/affective-pain-neuromodulation-evidence-map.md",
+          "scripts/README.md",
+          "tests/test_affective_pain_acupuncture_filtered.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261004T162256Z-94c76c9b",
+      "sha": "f15a8be4359b8074381349b2909a85e983cbf68a",
+      "base": "24cd06302cbe7570f0be5fec7dc3167e874ae0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "channels/declutter/2026-10-04.md",
+          "scripts/zz_probe_measurement.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261004T182309Z-2b6c4c6e",
+      "sha": "d3668b8065f95e11acc3e3c386fd22aa8754fed3",
+      "base": "0de15356deb96ff531b4d78533fd2627fb00205f",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "tests/validate_recalls_page.mjs"
+        ],
+        "MISSING": [
+          "research/live-harness-guard-audit.md",
+          "tests/test_live_harness_guards.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261004T202320Z-367b0fbe",
+      "sha": "2d760c7bd373db42e3441021b4fa809e0f08359f",
+      "base": "800d60ac8dab74d2b037358efb0241e7e3d7054d",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/32-affective-pain-neuromodulation-evidence-map.md",
+          "channels/agenda.md",
+          "channels/reject-queue.md",
+          "research/affective-pain-neuromodulation-evidence-map.md"
+        ],
+        "MISSING": [
+          "probes/results/2026-10-04-probe-report.md",
+          "scripts/affective_pain_biomarker_only.py",
+          "tests/test_affective_pain_biomarker_only.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261004T222329Z-68c32aa1",
+      "sha": "5218fb919ca808327483a0b50f7bee4679cea50f",
+      "base": "75803fc2418b6571e2e87cd30c3e78d312357519",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "agenda/32-affective-pain-neuromodulation-evidence-map.md",
+          "channels/agenda.md",
+          "channels/reject-queue.md",
+          "research/affective-pain-neuromodulation-evidence-map.md",
+          "tests/test_affective_pain_acupuncture_filtered.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261005T022413Z-048b7567",
+      "sha": "5579db1e20773e83ee24a1d39d5415111ff01d61",
+      "base": "8c660fa5bd3a073a6922f00be3a9eeeba59d80c6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "agenda/04-outreach.md",
+          "channels/agenda.md",
+          "channels/outreach/pipeline.json",
+          "channels/reject-queue.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "channels/outreach/drafts/2026-10-05-followup-fluge.md",
+          "channels/outreach/drafts/2026-10-05-followup-retraction-watch.md",
+          "probes/results/2026-10-04-probe-report.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261005T122543Z-09ba65ae",
+      "sha": "d0dd6a37832f08e9f789ca87476d526b245b7285",
+      "base": "72628d33a8aeeeb9ea5b9a7e372a2ae97b247885",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "outreach/reddit/README.md"
+        ],
+        "MISSING": [
+          "research/reddit-read-access-2026-10-05-raw.json",
+          "research/reddit-read-access-2026-10-05.md",
+          "scripts/reddit_read.py",
+          "tests/test_reddit_read.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261005T142550Z-9b5d61ff",
+      "sha": "ca041e80a75282e61bf8b07dc8759f91c69c4f46",
+      "base": "7d47a478a575a230d0f03d52513ce54314f647aa",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "governance/request-register.md",
+          "scripts/tell_human.py"
+        ],
+        "MISSING": [
+          "tests/test_request_register.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261005T162617Z-323f06d6",
+      "sha": "662fbf06f007ca55b0052a5204803f41e4a6b001",
+      "base": "dd4eed117f6d0bf9a9a1333d083515b389f58434",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/outreach/pipeline.json",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "channels/outreach/drafts/2026-10-05-followup-fluge.md",
+          "channels/outreach/drafts/2026-10-05-followup-retraction-watch.md",
+          "scripts/outreach_followup_due.py",
+          "tests/test_outreach_followup_due.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261005T182619Z-ecd0a080",
+      "sha": "b4482263dd17213978043e309741f9ad4116f894",
+      "base": "c53cc716530fba20b08cc5d3221f2c5049767d14",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "README.md",
+          "actuator/README.md",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "governance/roster-amendment-audit.md",
+          "scripts/check_roster_consistency.py",
+          "tests/test_roster_consistency.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261005T202646Z-8694cdda",
+      "sha": "db687d7bd36ba15eb64f21b8a4dce920c61316b1",
+      "base": "8eaa4556aa3208b4a04475347ad98956be844461",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/auto_reply.py",
+          "tests/test_auto_reply.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261006T002708Z-7539884d",
+      "sha": "2b2d6bf40ff8b73ab3af8715e1176567639be385",
+      "base": "058d746bc625e3e251401e7fefb3c3f630586d1d",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "channels/risk-archive/2026.md",
+          "channels/risks.md",
+          "channels/tasks.md"
+        ],
+        "MISSING": [
+          "research/landing-gate-refusals-2026-10-05.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T003744Z-9f069ff0",
+      "sha": "64c02ecbd6bce685043534bd502031a279bffad0",
+      "base": "598dbf79d72a9aea083b70e920b1757134004a6e",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "scripts/README.md",
+          "scripts/reject_queue_sweep.py",
+          "tests/test_reject_queue_sweep.py"
+        ],
+        "MISSING": [
+          "scripts/bodies_status.py",
+          "tests/test_bodies_status.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T022710Z-19164866",
+      "sha": "eed33d2a49c0dbfaaac7759c68542393ac48c0af",
+      "base": "0d017bf20eb815a10b59134edcd4823df9ecd749",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "tests/test_workflow_test_registration.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T023805Z-7796e151",
+      "sha": "cc080c81f00d511defb66792522a4da5f8b9b037",
+      "base": "3cde64935b610f73a3e1db8982c8cfa96748edd0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "channels/draft-pile.md",
+          "scripts/draft_pile.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T042722Z-eedbb01e",
+      "sha": "c26708f6ba3f0f752bf792096e4460458acd6ebc",
+      "base": "3476838b649e45d146656972adb22f435c0319e7",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/outreach/pipeline.json",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "channels/sent/2026-10-06-fluge-followup.md",
+          "channels/sent/2026-10-06-retraction-watch-followup.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T043828Z-684c3006",
+      "sha": "b4d25bfefbadecce96e23c99897dcda4360ac92d",
+      "base": "8e8e9f4a0c132c2c31327e77639818ef801b9fb1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/32-affective-pain-neuromodulation-evidence-map.md",
+          "research/affective-pain-neuromodulation-evidence-map.md"
+        ],
+        "MISSING": [
+          "tests/test_affective_pain_biomarker_stratum.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T063829Z-bd44915e",
+      "sha": "6ecd28720ea1f85ea8a38c018bb3717296430f18",
+      "base": "9fb2ea57eba275802a1d1be8af27b17081526c3a",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "LLM-SYMPOSIUM-BEACON.md",
+          "README.md",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "governance/2026-10-06-roster-claim-reconciliation.md",
+          "tests/test_roster_consistency.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T082758Z-245fa706",
+      "sha": "50c71f9f59c66bd5e78043c49e2c6618df8aa400",
+      "base": "9b755ea1568e03885e8aa069ff43af526a4335f3",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/risks.md"
+        ],
+        "MISSING": [
+          "scripts/landing_tree_report.py",
+          "tests/test_landing_tree_report.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T083831Z-92dc78b6",
+      "sha": "3c8c72d174d0c318ecb75f0a8efe45f8e77a256e",
+      "base": "d46541bdecaee8596e94a38488c1815d6d7e4d80",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/channel-poll.yml",
+          ".github/workflows/symposium.yml",
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "scripts/reject_queue_sweep.py",
+          "tests/test_reject_queue_sweep.py",
+          "tests/test_scheduled_model_selection.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261006T102809Z-8f86a4f1",
+      "sha": "9412c4e7df1700585f64a7c0df0c9681e6f80328",
+      "base": "ab8d14f20ff5da2f71752a34672e410b388c62f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/auto_reply.py",
+          "scripts/README.md",
+          "tests/test_auto_reply.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261006T103841Z-68a19489",
+      "sha": "bde71f44f95334d03841188c665bb7992e82dc6a",
+      "base": "23a4b89484ea9807434b97c88ee512eb551b52cc",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "scripts/README.md",
+          "scripts/gen_index.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261006T122820Z-0a2242e3",
+      "sha": "70acac509ed3ba7d0d39e9438fe02250b02566df",
+      "base": "54189c6f72b3128e570beb7015abe243205157a5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "LLM-SYMPOSIUM-BEACON.md",
+          "README.md",
+          "channels/reject-queue.md",
+          "docs/index.html",
+          "governance/README.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "governance/2026-10-06-roster-amendment-consistency-audit.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T123910Z-0d782f6b",
+      "sha": "9f1ae4a9476648fc096a7c7c1d12f5543b36cfe7",
+      "base": "5054812612540be930963c536563332ee7a2d5c5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/channel-poll.yml",
+          ".github/workflows/symposium.yml",
+          ".github/workflows/test-and-report.yml",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "tests/test_deepseek_key_repoint.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T143936Z-2b54fe68",
+      "sha": "8b69f908f8765b4e74a8af9bf7519c89621658f1",
+      "base": "327773c0445fefcb274dafcadfbd54d0c77624c3",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/32-affective-pain-neuromodulation-evidence-map.md",
+          "research/affective-pain-neuromodulation-evidence-map.md"
+        ],
+        "MISSING": [
+          "scripts/affective_pain_biomarker_only_classify.py",
+          "tests/test_affective_pain_biomarker_only.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T162909Z-d8ea0a0e",
+      "sha": "c240d9a1d9bb437c77f656f9bf35cea65810a5c9",
+      "base": "06adab173f19670b24b0a861fb139baa48042c39",
+      "files": {
+        "LANDED": [
+          "scripts/README.md"
+        ],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml"
+        ],
+        "MISSING": [
+          "channels/outreach/drafts/2026-10-06-fluge-followup.md",
+          "channels/outreach/drafts/2026-10-06-retraction-watch-followup.md",
+          "tests/test_verification_suite_registration.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T163953Z-b274e47e",
+      "sha": "05590dd537ecc4481b2f073d451a3257b04df539",
+      "base": "93de9f73eed65bdb7156f10cac2c4f4241452900",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "scripts/reject_queue_sweep.py"
+        ],
+        "MISSING": [
+          "scripts/draft_gate_sweep.py",
+          "tests/test_draft_gate_sweep.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T223004Z-8a5fad1e",
+      "sha": "48e011a929491c96289a491c6db7d328566232ae",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/auto_reply.py",
+          "channels/triage.py",
+          "scripts/gen_feed.py",
+          "scripts/reject_queue_sweep.py"
+        ],
+        "MISSING": [
+          "governance/2026-10-06-code-roster-consistency.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261006T224058Z-ff1dd5de",
+      "sha": "2bc21d294ee41c6557ee097de61d37a2c38ea14f",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "governance/README.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "governance/2026-10-06-delivery-loss-ledger.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T003013Z-80dc119a",
+      "sha": "aa97edb76016f8d6db87be4f8ce9cd455b4afd06",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/asm-sleep-eeg-corpus.md",
+          "research/asm-sleep-eeg-raw.json",
+          "scripts/asm_sleep_eeg_search.py",
+          "tests/test_asm_sleep_eeg_corpus.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T004107Z-94caf291",
+      "sha": "df3afa7cc47fd6972651de7db97f3571c5575d90",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/sleep-cognition-epilepsy-ied-fulltext-raw.json",
+          "research/sleep-cognition-epilepsy-ied-fulltext.md",
+          "scripts/sleep_cognition_epilepsy_ied_fulltext.py",
+          "tests/test_sleep_cognition_epilepsy_ied_fulltext.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T023020Z-18dc1d82",
+      "sha": "fd67a9d3b8db150cd8847261656a42e8fe7d45b0",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/outreach/pipeline.json",
+          "scripts/outreach_ledger_audit.py",
+          "tests/test_outreach_ledger_audit.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261007T024123Z-6be91847",
+      "sha": "7d7fe480867070ec57de82e3e54bcf07b0dd0cc7",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/README.md",
+          "channels/reject-queue.md",
+          "channels/retention.py",
+          "tests/test_retention.py"
+        ],
+        "MISSING": [
+          "governance/2026-10-06-retention-deleted-by-default.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T043030Z-2e282d46",
+      "sha": "063b2a091cfb1a56678556ed3911c03ed5e2cab7",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "research/affective-pain-neuromodulation-evidence-map.md"
+        ],
+        "MISSING": [
+          "research/affective-pain-neuromodulation-vns-filtered-raw.json",
+          "scripts/affective_pain_vns_filtered.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T044132Z-9dad80b6",
+      "sha": "9aa8d0b1bb89ff546c7bb6761061af48273318c8",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "README.md"
+        ],
+        "MISSING": [
+          "tests/test_readme_tools_table.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T063055Z-3a43e8e5",
+      "sha": "810be0303968fdbe64c210101ce2db5f6b57953b",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/mcr-colistin-primary-studies.md",
+          "research/mcr-primary-studies-raw.json",
+          "research/mcr-primary-studies.json",
+          "scripts/mcr_primary_studies.py",
+          "tests/test_mcr_primary_studies.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T064133Z-7cb5544a",
+      "sha": "4a16ee8d64e0f57ff37e04aca76c84382e7d475a",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/02-gallery.md",
+          "channels/open-decisions.md",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "research/gallery-floor-at-five.md",
+          "scripts/gallery_fifth_amigo_gap.py",
+          "tests/test_gallery_fifth_amigo_gap.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T083122Z-fc8332c2",
+      "sha": "86bffadcc89a480e19bc3268c96e53353f8abf40",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "agenda/24-maternal-chronic-pain-and-substance-use-care.md",
+          "research/maternal-chronic-pain-substance-use.md",
+          "scripts/maternal_pain_search.py"
+        ],
+        "MISSING": [
+          "research/maternal-chronic-pain-substance-use-broad-raw.json",
+          "research/maternal-chronic-pain-substance-use-widened.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T084135Z-d10b448e",
+      "sha": "3b57f2653d378c5a7861d0f9ec1e883facee3b1c",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "LLM-SYMPOSIUM-BEACON.md",
+          "README.md",
+          "actuator/README.md",
+          "channels/reject-queue.md",
+          "docs/atom.xml",
+          "governance/assignments.md",
+          "scripts/README.md",
+          "scripts/gen_feed.py"
+        ],
+        "MISSING": [
+          "governance/2026-10-07-stale-four-references-after-the-amendment.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T103122Z-2bb22baa",
+      "sha": "0df1d50cc385d25e806878285ef100ba232e0241",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/06-infrastructure.md",
+          "channels/agenda.md",
+          "channels/reject-queue.md",
+          "scripts/README.md"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261007T104200Z-0ba1b649",
+      "sha": "659a690226458d566dee457cfef780a69fe7a81e",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "channels/draft-pile.md",
+          "scripts/draft_pile.py",
+          "tests/test_draft_pile.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T123139Z-171f5382",
+      "sha": "1ca54637e609a420bcfe8676f223fee9245356c7",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/23-mcr-colistin-resistance-evidence-map.md",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "research/mcr-colistin-primary-raw.json",
+          "research/mcr-colistin-primary-reconciliation.json",
+          "research/mcr-colistin-primary-studies.md",
+          "scripts/mcr_colistin_primary_pull.py",
+          "tests/test_mcr_colistin_primary.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T124222Z-f389b992",
+      "sha": "75d9980c05253d6eae3cebc50ffd19066c46a18f",
+      "base": "4e20c64530dc53b297bf57f67b468d746f7b88ba",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "research/queue.md",
+          "scripts/disease_screen.py",
+          "tests/test_disease_screen.py"
+        ],
+        "MISSING": [
+          "research/disease-screen-density-band-raw.json",
+          "research/disease-screen-density-band.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T143144Z-032e72b7",
+      "sha": "2e9d8814040b01349365fd28cb054f30c0055aef",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "scripts/review_state.py",
+          "tests/test_review_state.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T144250Z-7d513d93",
+      "sha": "47d31d6eb3dcc79ad6d7613ab733c89df8062590",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "agenda/16-problems-we-can-actually-solve.md",
+          "channels/agenda.md",
+          "docs/works/water.html"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261007T163202Z-a05de64b",
+      "sha": "9c7ec3ce8d06556dc4791362ddbd5e87c834b08e",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/32-affective-pain-neuromodulation-evidence-map.md",
+          "channels/reject-queue.md",
+          "research/affective-pain-neuromodulation-evidence-map.md"
+        ],
+        "MISSING": [
+          "research/affective-pain-neuromodulation-vns-filtered-raw.json",
+          "scripts/affective_pain_vns_filtered.py",
+          "tests/test_affective_pain_vns_filtered.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T164305Z-b8d58b3c",
+      "sha": "2e3de3dd224c3e34bf6d3488fcafddaa2aed3ad6",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "research/verification-suite-coverage-2026-10-07.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T183217Z-c8ce5593",
+      "sha": "3ac4e47eeab20b3e3f211d3632f5a707ac1be870",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/30-sleep-architecture-as-a-mediator-of-memory-impai.md",
+          "channels/agenda.md",
+          "channels/reject-queue.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "research/antiseizure-sleep-eeg-corpus.md",
+          "research/antiseizure-sleep-eeg-raw.json",
+          "scripts/asm_sleep_eeg_search.py",
+          "tests/test_asm_sleep_eeg_corpus.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T184327Z-76aa6864",
+      "sha": "7bf853ad850121a240f380e75653cc6dff9ae28a",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "scripts/README.md",
+          "scripts/reject_queue_sweep.py",
+          "tests/test_reject_queue_sweep.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261007T203227Z-51ded3e9",
+      "sha": "e4f13221d562eeec310257a6e37bd5383a05785d",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "research/maternal-chronic-pain-substance-use.md"
+        ],
+        "MISSING": [
+          "research/maternal-chronic-pain-widened-raw.json",
+          "scripts/maternal_pain_widened_search.py",
+          "tests/test_maternal_pain_widened_search.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T204355Z-8920b079",
+      "sha": "5a75d8022d252c9c5dac12b67535a5d9baff90ac",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/atom.xml",
+          "docs/sitemap.xml",
+          "docs/works/index.html"
+        ],
+        "MISSING": [
+          "docs/works/co-safety-sources.json",
+          "docs/works/co-safety.html",
+          "tests/validate_co_safety_page.mjs",
+          "works/queue/08-carbon-monoxide-after-a-power-cut.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261007T224400Z-fcba0217",
+      "sha": "fc2a2f2a728a324484440487bc5faa593834f8ce",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "scripts/reject_queue_sweep.py",
+          "tests/test_reject_queue_sweep.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261008T003307Z-d334dbc8",
+      "sha": "6f250a5397b6fc59102ad453bf82b382c507f778",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/reddit-403-diagnosis-2026-10-07.md",
+          "scripts/reddit_read.py",
+          "tests/test_reddit_read.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T023333Z-b5d22412",
+      "sha": "c36c53ac010b3ce892c02e079bcfd09cfb818772",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml"
+        ],
+        "MISSING": [
+          "scripts/review_state.py",
+          "tests/test_review_state.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T024442Z-2cf3d833",
+      "sha": "cb4e9bf9bba02f284c2f7f31eeec98555e7b50de",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "scripts/draft_triage.py",
+          "tests/test_draft_triage.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T043357Z-40436fdc",
+      "sha": "3c87e32be320ff01fd4685b15c2d4b075eca95b2",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/mcr-colistin-primary-verification.json",
+          "research/mcr-colistin-primary-verification.md",
+          "tests/test_mcr_colistin_primary_verification.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T044511Z-2c46c983",
+      "sha": "9c3c953528836f6159e26c830cc4f51d74d003ac",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "agenda/24-maternal-chronic-pain-and-substance-use-care.md",
+          "channels/agenda.md",
+          "channels/reject-queue.md",
+          "research/maternal-chronic-pain-substance-use.md",
+          "scripts/maternal_pain_search_wide.py",
+          "tests/test_maternal_pain_wide.py"
+        ],
+        "MISSING": [
+          "research/maternal-chronic-pain-substance-use-wide.json"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T063401Z-0bf4f3ae",
+      "sha": "3ea473e786917233371354d2cf5a57ce76df46d4",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "research/affective-pain-neuromodulation-evidence-map.md"
+        ],
+        "MISSING": [
+          "research/affective-pain-neuromodulation-vns-filtered-raw.json",
+          "scripts/affective_pain_vns_filtered.py",
+          "tests/test_affective_pain_vns_filtered.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T064511Z-0b176449",
+      "sha": "74eda8375c2a19d2d4412db2039c8244c42b86f1",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "channels/risks.md"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261008T084534Z-3b08fb60",
+      "sha": "bf1cf466aa59a041b9f649b4ed500705f46503fa",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "scripts/reject_queue_sweep.py",
+          "tests/test_reject_queue_sweep.py"
+        ],
+        "MISSING": [
+          "scripts/drafts_triage.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T103435Z-67a6a565",
+      "sha": "a234020c799fe462a46c3c831189b1a2ae35d59b",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "channels/risks.md",
+          "scripts/README.md"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261008T104603Z-9abe40eb",
+      "sha": "88376f0a431885e3a10786f02e7a7b6b95c39572",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "research/affective-pain-neuromodulation-evidence-map.md"
+        ],
+        "MISSING": [
+          "research/affective-pain-neuromodulation-second-population-raw.json",
+          "scripts/affective_pain_second_population.py",
+          "tests/test_affective_pain_second_population.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T123441Z-a4450961",
+      "sha": "adc44f25c18645801d776dd8811ca90a58b564da",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "governance/requests-to-the-human.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "channels/outreach/newsletter-platform-tiers.json",
+          "channels/outreach/newsletter-platform-tiers.md",
+          "tests/test_newsletter_platform_tiers.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T124615Z-750312dd",
+      "sha": "0d2d4ab62ca925baf793a46821a5089cf23b9d53",
+      "base": "dc5afe5faf15f42433608c0433746069ba9831b6",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/papers/style.css"
+        ],
+        "MISSING": [
+          "docs/gallery/sumi-e/crow-on-the-bare-branch.svg"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T144640Z-65c99bbf",
+      "sha": "ad95c133f95970cc245f1746c0c9c91400653375",
+      "base": "d1f35ea15fa22473ec099b72eb2fb74047f57577",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/index.html"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261008T163500Z-3b609ebf",
+      "sha": "1b100ee4156f2643a2d1895e00fd6e3921ecbd13",
+      "base": "d1f35ea15fa22473ec099b72eb2fb74047f57577",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "scripts/review_state.py",
+          "tests/test_review_state.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T164656Z-0a7036ae",
+      "sha": "0be886e68c81810b20cdfa541b52fea0bc99baf7",
+      "base": "d1f35ea15fa22473ec099b72eb2fb74047f57577",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "scripts/unlanded_worklist.py",
+          "tests/test_unlanded_worklist.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T183521Z-ec648ed9",
+      "sha": "19ff6469bbce22f86aade73dbfcb1d7bf920efbd",
+      "base": "d1f35ea15fa22473ec099b72eb2fb74047f57577",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/auto_reply.py",
+          "channels/reject-queue.md",
+          "channels/tasks.md",
+          "tests/test_auto_reply.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261008T184715Z-8f81f389",
+      "sha": "11397d973eb80a97b042cbadc8e91928c9d623b6",
+      "base": "d1f35ea15fa22473ec099b72eb2fb74047f57577",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/open-decisions.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "scripts/review_gate_report.py",
+          "tests/test_review_gate_report.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T203539Z-db9756ed",
+      "sha": "da1ec1b32f40a3b049e829b804b6fc83882193a5",
+      "base": "d1f35ea15fa22473ec099b72eb2fb74047f57577",
+      "files": {
+        "LANDED": [
+          "agenda/24-maternal-chronic-pain-and-substance-use-care.md",
+          "channels/agenda.md",
+          "research/maternal-chronic-pain-substance-use-wide-raw.json",
+          "research/maternal-chronic-pain-substance-use-wide.md",
+          "scripts/maternal_pain_search_wide.py",
+          "tests/test_maternal_pain_wide.py"
+        ],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261008T204744Z-dc2fd692",
+      "sha": "934c3345fe71cf704e692a0f7da2d133d669b727",
+      "base": "d1f35ea15fa22473ec099b72eb2fb74047f57577",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "scripts/reject_queue_sweep.py",
+          "tests/test_reject_queue_sweep.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261008T223554Z-8df55da9",
+      "sha": "75745fccbbe11f62b83c0d77585f6a952c4ee73a",
+      "base": "5b8e5974f133bfc97ae06662d3ed5c42ea5ccb0f",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "channels/tasks.md",
+          "outreach/reddit/README.md"
+        ],
+        "MISSING": [
+          "scripts/fetch_reddit.py",
+          "tests/test_fetch_reddit.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261008T224751Z-72baa2a0",
+      "sha": "ba7c35bd874fd11f7573d5a8b5e8b3611fd6463f",
+      "base": "5b8e5974f133bfc97ae06662d3ed5c42ea5ccb0f",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "docs/index.html"
+        ],
+        "MISSING": [
+          "tests/test_site_roster.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T003610Z-5fb06d5c",
+      "sha": "7bf5b3fd848bd55b693c30d11bbafbd0e1b91360",
+      "base": "6bcf784f7c4d458e4edd63df3b00f581fe715c4d",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "scripts/retracted_works_citation_lag.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T004808Z-8bc74663",
+      "sha": "ebb8449371ca5b3b7d5814e85f8213a84e20fa39",
+      "base": "6bcf784f7c4d458e4edd63df3b00f581fe715c4d",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "scripts/reject_queue_sweep.py"
+        ],
+        "MISSING": [
+          "scripts/roster.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T023610Z-5f0acb17",
+      "sha": "a086e681a792f6fb2fb975b18a5873e37cbff8e2",
+      "base": "6bcf784f7c4d458e4edd63df3b00f581fe715c4d",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/item_ledger.py",
+          "channels/items.jsonl",
+          "tests/test_item_ledger.py"
+        ],
+        "MISSING": [
+          "channels/reviews/2026-10-09-desi-first-item-review.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T024838Z-bbfc3dd2",
+      "sha": "9265d2de183de27a6a5640364b193bce30507534",
+      "base": "6bcf784f7c4d458e4edd63df3b00f581fe715c4d",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "scripts/reject_queue_sweep.py",
+          "tests/test_reject_queue_sweep.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261009T043620Z-dcdc2e1e",
+      "sha": "ae2c3039dee1c8bd382db8977b1e2d77d8a14eff",
+      "base": "6bcf784f7c4d458e4edd63df3b00f581fe715c4d",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/outreach/pipeline.json"
+        ],
+        "MISSING": [
+          "channels/outreach/drafts/2026-10-09-followup-fluge.md",
+          "channels/outreach/drafts/2026-10-09-followup-retraction-watch.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T044858Z-94cc32e9",
+      "sha": "1f09f6a0b77388dcb076239399b0968bea878ef5",
+      "base": "788867c647edd264c8f884c985b6130131dd52f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "docs/gallery/islamic/index.html",
+          "docs/papers/style.css"
+        ],
+        "MISSING": [
+          "docs/gallery/islamic/fivefold-khatim-pravda.svg",
+          "docs/gallery/islamic/generate-dmitri-girih.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T063648Z-1033ec13",
+      "sha": "ee64ece31784f916111f8121c0d1843c83e8a654",
+      "base": "788867c647edd264c8f884c985b6130131dd52f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/items.jsonl",
+          "channels/reject-queue.md",
+          "channels/tasks.md",
+          "docs/works/thermal.html"
+        ],
+        "MISSING": [
+          "channels/reviews/2026-10-09-desi-review-warm-room.md",
+          "tests/test_thermal_calculator_defaults.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T064910Z-2e807712",
+      "sha": "13b5f2e409479f23bf637263f425eea4eb1bf75d",
+      "base": "788867c647edd264c8f884c985b6130131dd52f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml"
+        ],
+        "MISSING": [
+          "scripts/draft_gate_closer.py",
+          "tests/test_draft_gate_closer.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T083712Z-80db65fc",
+      "sha": "451593714efe5f3d0ffe5b8b7b170a7eace87ea2",
+      "base": "788867c647edd264c8f884c985b6130131dd52f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/item_ledger.py",
+          "channels/items.jsonl",
+          "tests/test_item_ledger.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261009T103736Z-4ea4f075",
+      "sha": "5cce50f63212a6e84bac19dd0a030df2531897dd",
+      "base": "788867c647edd264c8f884c985b6130131dd52f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/sleep-cognition-epilepsy-ied-measurements.json",
+          "research/sleep-cognition-epilepsy-ied-measurements.md",
+          "scripts/sleep_epilepsy_ied_fulltext.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T104950Z-01ce019a",
+      "sha": "bb6ac5cd293c49f35c7ea1c7f733417749135c7c",
+      "base": "788867c647edd264c8f884c985b6130131dd52f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/mcr-colistin-primaries-raw.json"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T123747Z-439305ac",
+      "sha": "600c8af54c119b2636eb9a27a601b9a5d7e3bab7",
+      "base": "788867c647edd264c8f884c985b6130131dd52f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "research/affective-pain-neuromodulation-vns-filtered-raw.json",
+          "scripts/affective_pain_vns_filtered.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T125011Z-b23da3f4",
+      "sha": "d9f638e993911cf0a82338d392d6b470c519853c",
+      "base": "788867c647edd264c8f884c985b6130131dd52f1",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/reject-queue.md",
+          "scripts/README.md",
+          "scripts/reject_queue_sweep.py",
+          "tests/test_reject_queue_sweep.py"
+        ],
+        "MISSING": [
+          "tests/test_suite_registration.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T143750Z-5ac52343",
+      "sha": "55a0d83c04f5a68ed6cd3689c53b14a85911fe09",
+      "base": "d45df4decfd3e36516695b84aa8797ef9c6c2395",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "scripts/wake_review_queue.py",
+          "tests/test_wake_review_queue.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T163757Z-04aebf98",
+      "sha": "564635bd52828ce80187bb7f57af56768ba627df",
+      "base": "03819da1307e4d2f99f97b9f1c1c1d9d617ce9d0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/item_ledger.py",
+          "channels/items.jsonl"
+        ],
+        "MISSING": [
+          "channels/review-assignment-band.json",
+          "channels/review_assignment.py",
+          "governance/2026-10-09-the-assignment-algorithm.md",
+          "report.txt",
+          "tests/test_review_assignment.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T165020Z-958131ab",
+      "sha": "db1b3b5f285b5a0b436e1d0ab4eb46c1c9e8b931",
+      "base": "03819da1307e4d2f99f97b9f1c1c1d9d617ce9d0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/risks.md",
+          "scripts/README.md"
+        ],
+        "MISSING": [
+          "scripts/landing_preflight.py",
+          "tests/test_landing_preflight.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T183825Z-79ec3024",
+      "sha": "962093d452f04ce66f4ec03d4d57686356644634",
+      "base": "03819da1307e4d2f99f97b9f1c1c1d9d617ce9d0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "scripts/README.md"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261009T185046Z-8603564f",
+      "sha": "f950b164c94db0d94c4a9061be7bc95de0f4ddad",
+      "base": "03819da1307e4d2f99f97b9f1c1c1d9d617ce9d0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "channels/assignment.py",
+          "channels/usage/cost-band.json",
+          "tests/test_assignment.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T203851Z-33d8f331",
+      "sha": "95bb4d2787c0398b955376bffe24ff04cc0bb8d9",
+      "base": "03819da1307e4d2f99f97b9f1c1c1d9d617ce9d0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "channels/review-assignment.md",
+          "channels/review-cost-band.json",
+          "channels/review_assignment.py",
+          "tests/test_review_assignment.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T205112Z-a4e9d498",
+      "sha": "f6376b4a4c0a5df7765272d35540121e0a802d78",
+      "base": "03819da1307e4d2f99f97b9f1c1c1d9d617ce9d0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [],
+        "MISSING": [
+          "docs/gallery/sumi-e/generate-dmitri-fifth-stroke.py",
+          "docs/gallery/sumi-e/the-fifth-stroke.svg"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261009T223915Z-09f2602e",
+      "sha": "21163e69ed0d8f751f7c492c68247a040919eb10",
+      "base": "03819da1307e4d2f99f97b9f1c1c1d9d617ce9d0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/auto_reply.py",
+          "tests/test_auto_reply.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261009T225133Z-4602dd17",
+      "sha": "7bbcdf131ec371cc8fd20873f02e929a6a6c573e",
+      "base": "03819da1307e4d2f99f97b9f1c1c1d9d617ce9d0",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md",
+          "channels/risks.md"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261010T003915Z-a80bb862",
+      "sha": "f8a087e7b65283e961f0daae120b0562d378f426",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/item_ledger.py",
+          "channels/items.jsonl",
+          "tests/test_item_ledger.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261010T023937Z-b5feff11",
+      "sha": "2e7eecbda9723fe46103b0c3a92a349926cd4076",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          ".github/workflows/test-and-report.yml",
+          "channels/items.jsonl",
+          "channels/reject-queue.md",
+          "docs/works/thermal.html"
+        ],
+        "MISSING": [
+          "channels/reviews/2026-10-10-desi-thermal-review.md",
+          "tests/test_thermal_page_static_defaults.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261010T025152Z-a5cb20a7",
+      "sha": "0eefffca8bc792c2a5f19e1a24cafd1ad65a2201",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/item_ledger.py",
+          "channels/reject-queue.md",
+          "tests/test_item_ledger.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261010T044000Z-5b1ca2c1",
+      "sha": "a4703906af5b1eaee8ab4f3d81e0330e14387efb",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/items.jsonl",
+          "docs/works/thermal.html"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261010T045217Z-b76b1ad1",
+      "sha": "66572e21cbe082405221e27db0623c285a19fd16",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "LLM-SYMPOSIUM-BEACON.md",
+          "README.md",
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "governance/2026-10-10-four-in-the-record.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261010T064028Z-944a5d64",
+      "sha": "617829accba9d8cbde0166716604f879e7eb8e64",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/item_ledger.py",
+          "channels/items.jsonl",
+          "tests/test_item_ledger.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    },
+    {
+      "branch": "tick-20261010T065242Z-81cd9300",
+      "sha": "472c1faa1870f022270c3ba05a5cc858c1e0e916",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "agenda/23-mcr-colistin-resistance-evidence-map.md",
+          "channels/reject-queue.md",
+          "research/mcr-colistin-seed.md"
+        ],
+        "MISSING": [
+          "research/mcr-colistin-primary-harmonisation.json",
+          "research/mcr-colistin-primary-harmonisation.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261010T084040Z-777a9667",
+      "sha": "d90b6b0dcacdcd0df6cc1278406af06d9a8b8ddf",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "research/affective-pain-neuromodulation-evidence-map.md"
+        ],
+        "MISSING": [
+          "research/affective-pain-neuromodulation-second-population-filtered-raw.json",
+          "scripts/affective_pain_second_population_filtered.py"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261010T085301Z-3df7ff30",
+      "sha": "eaad3df2173e4e91df0b00e4381f9f6de58373fd",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/reject-queue.md"
+        ],
+        "MISSING": [
+          "channels/reports/2026-10-10-w-queue-audit.md"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261010T104046Z-5422b681",
+      "sha": "48a91d47ba69450f875c1c92e4fb50e7b38e6205",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/items.jsonl",
+          "docs/works/thermal.html"
+        ],
+        "MISSING": [
+          "channels/reviews/2026-10-10-desi-review-queue-b.md",
+          "tests/validate_thermal_page.mjs"
+        ]
+      },
+      "verdict": "UNLANDED"
+    },
+    {
+      "branch": "tick-20261010T105316Z-a428ab7a",
+      "sha": "b261a4c33c9d595f1261adbff32c547916251dd2",
+      "base": "952defa66ed3f660a206231f618f1ccbdf81b0e5",
+      "files": {
+        "LANDED": [],
+        "DIFFERS": [
+          "channels/telegram.py",
+          "tests/test_telegram.py"
+        ],
+        "MISSING": []
+      },
+      "verdict": "DIVERGED"
+    }
+  ]
+}
