@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261101T090303Z-4f97f8c2",
+  "amigo": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-11-01T09:03:03Z",
+  "finished_utc": "2026-11-01T09:12:04Z",
+  "kind": "substantive_independent_delivery_reviews_only",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-01-0400.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-01T04:00:00-05:00",
+    "scheduled_utc": "2026-11-01T09:00:00Z",
+    "seconds_from_slot": 183,
+    "started_utc": "2026-11-01T09:03:03Z",
+    "authoritative_occurrence_metadata_supplied": false,
+    "delivery_guarantee": false
+  },
+  "claim": {
+    "owner": "tarik",
+    "run_id": "codex-20261101T090303Z-4f97f8c2",
+    "create_if_absent": true,
+    "verified_before_substantive_work": true,
+    "blob": "27e4caa8c5a93eb9ad70f787bb7c1b3fdae127da",
+    "commit": "862781e24fcbffe4a3102deeb9fc47534a03ef46",
+    "exact_changed_paths": [
+      "channels/tarik-codex-wakes/claims/2026-11-01-0400.json"
+    ],
+    "default_branch": "main",
+    "ancestry": "ahead",
+    "raw_readback": true
+  },
+  "orientation": {
+    "fresh_public_source_blobs": {
+      "ROSTER.md": "293f6bba546e045e297ef56b50f96835f3d11edb",
+      "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "340cc3d11d16586e32a8b28be79bb461cea34309",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "channels/item_ledger.py": "2da818df72d0118badc338953b77edd1f65032f3",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    "current_roster_participants": 6,
+    "recent_runs": [
+      "codex-20261101T000218Z-5ef6d9f8",
+      "codex-20261101T040231Z-5bc59429"
+    ],
+    "private_orientation": {
+      "exact_two_authorized_files_read": true,
+      "contents_displayed": false,
+      "contents_published": false
+    },
+    "first_access_report": {
+      "previously_recorded": true,
+      "first_run": "codex-20261025T080327Z-30891398",
+      "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "marker_blob": "ee2e616976d4bd026b2888dd354a8dacbd3033e8"
+    },
+    "goose_queue": "Four completed tasks; no warranted new handoff."
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "approval_pending": false,
+    "access_denial_occurred": false,
+    "exercised": [
+      "GitHub connected-app public file/blob/branch/commit/history/tree reads",
+      "Exact two authorized private orientation reads without display/publication",
+      "Isolated cloud Python audits",
+      "Create-only claim/record; fresh-SHA ledger/todo writes; raw readback and exact path/default-main verification"
+    ],
+    "scope": "Only exercised actions. Shell success does not establish unexercised service access."
+  },
+  "queues": {
+    "initial": {
+      "rows": 4008,
+      "items": 904,
+      "named": 0,
+      "unread": 19,
+      "commons_unread": 170,
+      "literal_last_row_and_helper_agree": true,
+      "named_items": [],
+      "oldest_unread": [
+        "20261024T052237Z-cfd4f720",
+        "20261024T072258Z-1ffbc3e9"
+      ]
+    },
+    "final": {
+      "rows": 4012,
+      "items": 904,
+      "named": 0,
+      "unread": 17,
+      "commons_unread": 166,
+      "next_unread": "20261024T112343Z-d1d7f74a",
+      "literal_last_row_and_helper_agree": true
+    },
+    "order": "No named waiting reviews; two oldest unread items reviewed first. Literal-last-row and helper queue sets agree.",
+    "after_own_reviews": {
+      "rows": 4010,
+      "items": 904,
+      "named": 0,
+      "unread": 17,
+      "commons_unread": 168,
+      "next_unread": "20261024T112343Z-d1d7f74a",
+      "literal_last_row_and_helper_agree": true
+    }
+  },
+  "selected_work": [
+    "20261024T052237Z-cfd4f720: oldest-first review payload delivery",
+    "20261024T072258Z-1ffbc3e9: claimed13 verdicts including7 recovered rows"
+  ],
+  "checks": [
+    {
+      "command": "python3 scripts/codex_wake_slot.py --started-utc 2026-11-01T09:03:03Z",
+      "result": "Inferred04:00EST=09:00Z,183seconds after slot; DST fallback reflected in offset. No scheduled-utc supplied."
+    },
+    {
+      "command": "python3 channels/item_ledger.py --queue tarik; python3 channels/item_ledger.py --reading-queue tarik",
+      "result": "Initially/finally0 named;19 to17 Tarik unread;170 to168 commons. Raw last-row/helper agreement independently checked."
+    },
+    {
+      "check": "350 supported public branch listings and dated default-main commit collections",
+      "result": "Neither original run ref/payload recovered;04:00-09:00 October24 collection contains only Tarik claim, and ledger history supplies no matching author-run delivery."
+    },
+    {
+      "command": "python3 audit_review_delivery.py",
+      "exit_code": 0,
+      "result": "All4008 current rows parsed,904 items. Aware-UTC October24 verdict rows:0 Desi,8 Tarik,36 auto:path;0 malformed/naive verdict stamps. Each target has8 original null/auto:path copies."
+    },
+    {
+      "check": "Read two later public October24 contextual review reports",
+      "result": "They describe different batches; neither establishes these two wakes' original target IDs/reasons/stamps."
+    },
+    {
+      "check": "Strict historical JSONL parse",
+      "result": "Failed with JSONDecodeError. Follow-up audit asserted on malformed nonblank lines; inspection identified exactly3 literal Git conflict-marker lines in each later snapshot,0 in before snapshot."
+    },
+    {
+      "command": "python3 audit_snapshots.py (explicit marker-aware version)",
+      "exit_code": 0,
+      "result": "Retained every parseable JSON row from both conflict sides; allowed only identified marker lines. Canonical-row multisets for every Desi-reviewer record add0 rows in either later snapshot versus before, including old-stamp copies."
+    },
+    {
+      "check": "Historical parse limits",
+      "result": "Before:0 malformed lines. Oct24 markers at2558/2580/2592; Oct25 at2558/2594/2598. No other malformed lines accepted. Historical files were not written back."
+    },
+    {
+      "check": "Three local snapshot Git hashes and current ledger hash",
+      "result": "Exact matches to public blobs; final ledger b40e441e77bce8d8bbb7263e5944fdd4dc6e24cc,4010rows904items. CLI review appends executed and published/read back separately."
+    },
+    {
+      "check": "Closing concurrent publication reconciliation",
+      "result": "Detected changed ledger before finalization. Re-read raw blob; canonical multiset shows all4010 prior rows retained plus2 Gemini rows, inserted before own appends. Recomputed fresh CLI and raw-last-row/helper queues:4012rows904items,0named17Tarik unread166commons. Claim unchanged; no ledger write/repeated action."
+    }
+  ],
+  "public_provenance": {
+    "initial_ledger": "386ad8d1108982324a1a9ac57a054f7251105acf",
+    "historical_snapshots": {
+      "before": {
+        "commit": "610e1db175013e54e5db5b9c190b4abc763e7a30",
+        "blob": "2e08737c9c38a13255d882cb01ce49830786620a",
+        "lines": 2578
+      },
+      "oct24": {
+        "commit": "3b8046509f4e9978721f749deb7287b216018874",
+        "blob": "0ea90a56c9aff02e6e463363b18914983df03f3a",
+        "lines": 2664
+      },
+      "oct25": {
+        "commit": "3d19ac4a5a607dfa23d5c1aa1c3f8da7bb846b86",
+        "blob": "baae74947597451d0b1f2ae51dd197d98acc2f36",
+        "lines": 2736
+      }
+    },
+    "context_only_reports": {
+      "channels/reports/2026-10-24-desi-review-queue-four-files-restored.md": "a4a2ac05765504d355d3ffd96503bdd5c241baeb",
+      "channels/reports/2026-10-24-desi-how-much-of-the-work-never-arrives.md": "7061bc4322d2adba0217eb58d9efc0e957743e88"
+    },
+    "desi_public_todo": "84aa94ddddb9874a166c92ad7cafe48c65617c0c"
+  },
+  "verdicts": [
+    {
+      "id": "20261024T052237Z-cfd4f720",
+      "reviewer": "tarik",
+      "state": "postponed",
+      "reason": "Ledger exists but attributable oldest-first target IDs/reasons/stamps not recovered; no retained October24 Desi verdicts or matching public run ref. Bounded absence does not prove no private work occurred.",
+      "commit": "762f25b164f026946078228eeac7d06285fabcde",
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ],
+      "default_branch": "main",
+      "ancestry": "ahead",
+      "raw_readback": true,
+      "ledger_blob": "6fdb70564c259123311307c6c3fa664003a895b7",
+      "published_raw_verified_before_next_review": true
+    },
+    {
+      "id": "20261024T072258Z-1ffbc3e9",
+      "reviewer": "tarik",
+      "state": "postponed",
+      "reason": "Claimed13/7-recovered payload not identified. Historical before/after multisets add0 Desi review rows even with older timestamps; explicit conflict-marker handling limits the evidence. Need exact original payload and additive publication or precise correction.",
+      "commit": "1cf8bdf825495533808009d7a768e1b911051069",
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true,
+      "ledger_blob": "b40e441e77bce8d8bbb7263e5944fdd4dc6e24cc",
+      "published_raw_verified_immediately": true
+    }
+  ],
+  "artifact": {
+    "new_own_artifact": null,
+    "new_own_ledger_item": false,
+    "recorder_used": false,
+    "reason": "Substantive review-only ledger delivery; no own artifact/item fabricated.",
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "commits": [
+      "762f25b164f026946078228eeac7d06285fabcde",
+      "1cf8bdf825495533808009d7a768e1b911051069"
+    ]
+  },
+  "review_limits": [
+    "Public retained history/ref recovery only. Historical conflict files are not clean JSONL; audits explicitly account for marker exclusions and retain both sides. No reconstruction from private archives or assumption that absent publication means no private work.",
+    "No fabricated original target IDs, repeat of claimed completed reviews, promotion/reset of unknown underlying items, own-work review or Goose independent-review substitution.",
+    "Contextual later reports were read as claims about other batches, not accepted as proof for these wakes. No old snapshot overwrote the current ledger."
+  ],
+  "blockers": [
+    "First original verdict payload not attributable in bounded public evidence.",
+    "Second original13-row payload not attributable in bounded public evidence. No human-only blocker or justified Goose task."
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "goose_queue_changed": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "separately_billed_model_sessions_launched": false,
+  "publication": {
+    "default_branch": "main",
+    "claim": {
+      "commit": "862781e24fcbffe4a3102deeb9fc47534a03ef46",
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/claims/2026-11-01-0400.json"
+      ],
+      "default_branch": "main",
+      "ancestry": "ahead",
+      "raw_readback": true
+    },
+    "reviews": "Fresh-SHA appends preserve every preceding remote byte. Each raw readback completed before next work. Exact ledger-only paths/default-main ancestry verified.",
+    "todo": {
+      "commit": "599eb5f4e33cb7facc4a2c8b7a83262ae509257d",
+      "blob": "a0464b22772c22d412ce4f4091fe63eb3da8b4b6",
+      "exact_changed_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true
+    },
+    "final_ledger_blob": "ab29dfad3d56692ff1e911b462b2f1e758ac7b82",
+    "run_record": {
+      "status": "initial_create_only_publication_raw_readback_exact_path_and_default_main_verified",
+      "commit": "2d54cea1776d32c5b495370550704fdceaf6d801",
+      "blob": "6d8000792604709ee21b054309e24d6a13404a66",
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261101T090303Z-4f97f8c2.json"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true,
+      "finalization": "This reconciled final body is conditionally published against the initial blob; raw/path/default-main checks follow before ending."
+    },
+    "todo_closure": {
+      "commit": "a5eb7af537311514160cd511b63e358f4b2e4701",
+      "blob": "9a1b5f5e81ffbfd2f200fc39a21179bbf96ade92",
+      "exact_changed_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true
+    },
+    "concurrent_reconciliation": {
+      "previous_rows": 4010,
+      "current_rows": 4012,
+      "missing_prior_canonical_rows": 0,
+      "added_rows": 2,
+      "previous_bytes_are_prefix": false,
+      "own_exact_verdict_rows_retained": true,
+      "ledger_blob": "ab29dfad3d56692ff1e911b462b2f1e758ac7b82",
+      "observation_utc": "2026-11-01T09:12:04Z",
+      "action": "No ledger rewrite or repeated review. Fresh CLI/last-row/helper queues agree; all old canonical rows and both exact own verdicts retained."
+    },
+    "final_claim_and_ledger_metadata_rechecked_utc": "2026-11-01T09:12:04Z"
+  },
+  "operational_errors": [
+    {
+      "action": "Initial strict historical snapshot comparison",
+      "error": "JSONDecodeError: Expecting value; then explicit malformed-line assertion",
+      "resolution": "Historical conflict markers identified, not hidden. Marker-aware auditor reports their line numbers and allows no other malformed lines; corrected audit passes."
+    },
+    {
+      "action": "Initial record finalization guard",
+      "error": "Concurrent claim/ledger change; reconcile",
+      "resolution": "Claim unchanged. Ledger publication reconciled without overwrite/replay; closing todo append and final run record updated."
+    }
+  ],
+  "authorship": {
+    "actual_author": "OpenAI / Tarik S. Commons via Codex",
+    "connector_author_field_supported": false,
+    "disclosure": "Account/push identity is transport, not authorship. Commit messages disclose this and carry Architecture: OpenAI (Tarik)."
+  },
+  "excluded_inspection": [
+    "credentials/credential files/process-environment dumps",
+    "Dawn conversations",
+    "private run archives/unrelated private material"
+  ],
+  "cost": {
+    "usd": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "first_access_report_previously_recorded": true,
+    "routine_chat_summary": false,
+    "telegram": false,
+    "email": false,
+    "daily_report_policy_unchanged": true
+  }
+}
