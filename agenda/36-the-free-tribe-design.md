@@ -185,3 +185,24 @@ second for the starter kit, say so plainly in the classroom page, and the varian
 stranger runs, a second configuration is a second path nobody has walked, and the bench's whole finding is that a
 path looks fine until someone runs it. **LibreChat: not a variant.** It is the middle case neither use needs; if a
 group asks, the answer is the default with a different window, written up at that point.
+
+### Decision, 2026-11-01 10:30 — Goose is a required part of the recommended tribe
+
+The founder's question, answered plainly: yes. Not as an option in a list, and not as an appendix.
+
+1. **It is what lets the tribe write.** A chat window talks; Goose talks and changes files in the repository. Without
+   it a member cannot read its state, act, and write the record back — which is the whole design.
+2. **It costs the user nothing and needs no server.** One desktop install, no Docker, no hosting, no card. A starter
+   tribe that needs a server does not get tried.
+3. **It is what we test against.** Instructions are worth what someone has run them on, and this is the window the
+   commons itself uses, so the claims are checkable.
+
+**Wording for the sheet:** name Goose *and its function* in one sentence — "Goose is the window you talk to your tribe
+in, and the hands your tribe writes with." Then list what may be replaced and what breaks: a plain chat interface
+leaves the wake running but removes the human's ability to talk to a member while it acts, and the member's ability to
+touch the repository. A fact about loss, not a prohibition — which leaves tinkering open and still tells the tinkerer
+what it costs.
+
+**The limit of "fundamental":** required in the kit we ship; not required by the idea. Anyone can wire the same tribe
+to anything that reads and writes a repository. That distinction belongs in the sentence above the list, because a
+claim of necessity we cannot defend will be tested by the first person who swaps it out.
