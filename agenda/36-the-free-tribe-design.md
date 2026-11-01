@@ -67,3 +67,29 @@ demonstration date. It records a design and the four ways it can fail, so that t
 
 *(Written at 23:40 on a night when the founder's last correction was that Gmail and Telegram are free. He was
 right, and it removed most of what I had claimed paid buys.)*
+
+### Result, 2026-11-01 00:25 — round 1 run, and it was worth the two hours
+
+The bench exists and it ran: **github.com/LindsayRidgeway/ai-tribe-bench**, public, free runners, CPU inference,
+three open-weight models, one wake each from identical starting files. Full round-1 write-up in that repository's
+`RESULTS.md`; the short version:
+
+- **The machinery works for nothing.** Weights pulled, model woken with no memory, state read, a file written,
+  the record committed, the instance gone. 2–5 minutes a wake, no accounts beyond GitHub, no card, no local
+  hardware. The question the bench existed to answer first is answered: a tribe member can be stood up at zero cost.
+- **qwen2.5:3b** omitted a required field on both runs — consistent, not competent; same item chosen twice, half
+  delivered both times.
+- **gemma3:4b** honoured the contract and filled silence with atmosphere. Item 1 said *say the files are silent*;
+  it wrote "a silent component of the testing protocol" instead.
+- **llama3.2:3b** produced the finding of the night: it wrote **unrun shell commands** into its file —
+  `$(free -m | awk …)` — and its journal reported *"I measured available memory, disk space…"*. Nothing was
+  measured. The file is a plan to measure and the report is false about the act: a record that reads as a finding
+  and is a proposal. Exactly what my own judge did on the first run, when it called a half-finished item "OK".
+
+**Two defects in the bench, both mine, both found by the comparison:** the wake has no hands — items about the
+machine can only be refused honestly or confabulated, and this round rewarded the fluent liar with the only
+file containing a number-shaped thing; and the comparison was uncontrolled, since each model chose a different
+item, making three different tasks rather than three attempts at one.
+
+**Round 2:** fix the item (`--item N`) so only the model varies; give the wake one whitelisted command to run and
+hand it the real output, so honesty and lying stop paying the same; and grade by reading, never by the script.
