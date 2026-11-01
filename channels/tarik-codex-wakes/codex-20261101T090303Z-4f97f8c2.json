@@ -7,7 +7,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-11-01T09:03:03Z",
-  "finished_utc": "2026-11-01T09:10:12Z",
+  "finished_utc": "2026-11-01T09:12:04Z",
   "kind": "substantive_independent_delivery_reviews_only",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -92,6 +92,16 @@
       ]
     },
     "final": {
+      "rows": 4012,
+      "items": 904,
+      "named": 0,
+      "unread": 17,
+      "commons_unread": 166,
+      "next_unread": "20261024T112343Z-d1d7f74a",
+      "literal_last_row_and_helper_agree": true
+    },
+    "order": "No named waiting reviews; two oldest unread items reviewed first. Literal-last-row and helper queue sets agree.",
+    "after_own_reviews": {
       "rows": 4010,
       "items": 904,
       "named": 0,
@@ -99,8 +109,7 @@
       "commons_unread": 168,
       "next_unread": "20261024T112343Z-d1d7f74a",
       "literal_last_row_and_helper_agree": true
-    },
-    "order": "No named waiting reviews; two oldest unread items reviewed first. Literal-last-row and helper queue sets agree."
+    }
   },
   "selected_work": [
     "20261024T052237Z-cfd4f720: oldest-first review payload delivery",
@@ -144,6 +153,10 @@
     {
       "check": "Three local snapshot Git hashes and current ledger hash",
       "result": "Exact matches to public blobs; final ledger b40e441e77bce8d8bbb7263e5944fdd4dc6e24cc,4010rows904items. CLI review appends executed and published/read back separately."
+    },
+    {
+      "check": "Closing concurrent publication reconciliation",
+      "result": "Detected changed ledger before finalization. Re-read raw blob; canonical multiset shows all4010 prior rows retained plus2 Gemini rows, inserted before own appends. Recomputed fresh CLI and raw-last-row/helper queues:4012rows904items,0named17Tarik unread166commons. Claim unchanged; no ledger write/repeated action."
     }
   ],
   "public_provenance": {
@@ -253,16 +266,52 @@
       "ancestry": "identical",
       "raw_readback": true
     },
-    "final_ledger_blob": "b40e441e77bce8d8bbb7263e5944fdd4dc6e24cc",
+    "final_ledger_blob": "ab29dfad3d56692ff1e911b462b2f1e758ac7b82",
     "run_record": {
-      "status": "prepared for create-only publication; raw/path/default-main verification follows"
-    }
+      "status": "initial_create_only_publication_raw_readback_exact_path_and_default_main_verified",
+      "commit": "2d54cea1776d32c5b495370550704fdceaf6d801",
+      "blob": "6d8000792604709ee21b054309e24d6a13404a66",
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261101T090303Z-4f97f8c2.json"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true,
+      "finalization": "This reconciled final body is conditionally published against the initial blob; raw/path/default-main checks follow before ending."
+    },
+    "todo_closure": {
+      "commit": "a5eb7af537311514160cd511b63e358f4b2e4701",
+      "blob": "9a1b5f5e81ffbfd2f200fc39a21179bbf96ade92",
+      "exact_changed_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true
+    },
+    "concurrent_reconciliation": {
+      "previous_rows": 4010,
+      "current_rows": 4012,
+      "missing_prior_canonical_rows": 0,
+      "added_rows": 2,
+      "previous_bytes_are_prefix": false,
+      "own_exact_verdict_rows_retained": true,
+      "ledger_blob": "ab29dfad3d56692ff1e911b462b2f1e758ac7b82",
+      "observation_utc": "2026-11-01T09:12:04Z",
+      "action": "No ledger rewrite or repeated review. Fresh CLI/last-row/helper queues agree; all old canonical rows and both exact own verdicts retained."
+    },
+    "final_claim_and_ledger_metadata_rechecked_utc": "2026-11-01T09:12:04Z"
   },
   "operational_errors": [
     {
       "action": "Initial strict historical snapshot comparison",
       "error": "JSONDecodeError: Expecting value; then explicit malformed-line assertion",
       "resolution": "Historical conflict markers identified, not hidden. Marker-aware auditor reports their line numbers and allows no other malformed lines; corrected audit passes."
+    },
+    {
+      "action": "Initial record finalization guard",
+      "error": "Concurrent claim/ledger change; reconcile",
+      "resolution": "Claim unchanged. Ledger publication reconciled without overwrite/replay; closing todo append and final run record updated."
     }
   ],
   "authorship": {
