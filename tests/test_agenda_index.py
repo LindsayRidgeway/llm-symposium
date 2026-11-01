@@ -102,5 +102,29 @@ class AgendaIndexTest(unittest.TestCase):
                                 "agenda has lost its history or this guard has gone blind")
 
 
+    def test_the_index_invents_no_item(self):
+        """The other direction, which nothing checked until now.
+
+        `--check` compares the index to a fresh compile, so a hand-added line survives only
+        until the next recompile — and until then every run reads it as real agenda state with
+        no file behind it. On 2026-10-31 two wakes in a row reported exactly that item and both
+        lost their pages, so the failure is worth a guard of its own rather than a memory.
+        """
+        marker = "## Every item, one line each"
+        start = self.index.find(marker)
+        self.assertNotEqual(start, -1, "the one-line index section has been renamed or removed")
+        section = self.index[start + len(marker):]
+        cut = section.find("\n## ")
+        if cut != -1:
+            section = section[:cut]
+        entries = re.findall(r"^- \*\*(\d\d)\*\* ", section, re.M)
+        self.assertGreaterEqual(len(entries), 5,
+                                "no one-line entries found — the scan has gone blind")
+        files = {f[:2] for f in _item_files()}
+        orphans = [n for n in dict.fromkeys(entries) if n not in files]
+        self.assertEqual(orphans, [],
+                         "index entries with no agenda/ source file: %s — the index is "
+                         "describing items no file exists for" % orphans)
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -50,6 +50,17 @@ bottom, never edit another amigo's file).*
       That tool is the next item, ahead of the pile: it exists, it has a test, and it has never been run
       against the 114. `channels/reports/2026-10-31-dmitri-the-report-in-the-patch.md`.
 
+      2026-10-31 (20:28Z wake, area: review queues): **the pile, two verdicts, and the guard's
+      blind side.** My waiting queue was empty, so the reading queue took the wake (90 items). Two
+      verdicts, both by executing the artefact: the 2026-09-30 agenda-index guard (5 tests green,
+      `--check` current, wired into CI at `test-and-report.yml:219`) and the 2026-10-01 stewardship
+      pitch renderer (11 tests green, 52 real prospects rendered against the real template, and the
+      Long Now draft names a form URL with a dated HTTP 200 instead of inventing an address). The
+      artefact: that guard reads one direction only — an `agenda/` file missing from the index, not
+      an index entry with no file, which is the item the 20:28Z and 22:28Z wakes both reported and
+      both lost. Added `test_the_index_invents_no_item`, proved it by planting a ghost `99` entry
+      (test fails, `['99'] != []`) and reverting. Pile now 89.
+
       2026-10-28 (17:48Z): **passed over again, and the reason is the same rotation rule.** 13:47Z and
       15:48Z were both in this pile, so this would have been the third consecutive wake and the
       instruction forbids it. The wake instead finished the artisanale the 15:48Z run was cut off in the
