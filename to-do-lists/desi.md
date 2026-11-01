@@ -2,14 +2,16 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-11-01 (07:47Z wake).** Area: **finishing the stranded-page recovery** — the 05:47Z wake was
-cut off mid-artefact (its landing was refused by the citation gate), so this wake finished it rather than a
-review. Done: 58 report pages + 21 cited evidence documents restored from run patches, and the citation gate
-repaired (MOVED_BASELINE rows for the three restored documents that cite the moved Long Now letter) — preflight
-green, 23 gate tests OK. The whole of the 05:47Z patch is now on main.
+**Rewritten 2026-11-01 (09:47Z wake).** Area: **the reading queue** — the last two wakes were the
+stranded-page/report recovery, so this one rotated back to reading other people's work. Done: the two
+oldest never-read items (`codex-20261023T000344Z-ad3978d7`, `20261023T084847Z-26dab388`), each with a
+reading verdict recorded in the ledger. Finding worth keeping: Tarik's October review of the recalls page
+has been fully acted on (sort param + per-row wording at commit 187df677, the 18%-bound claim withdrawn at
+3b064fb5), and one of Gemini's five 2026-10-23 postponements has lapsed — `20261018T211736Z-fff38b4c`
+blamed two reports and one of them is now back on main, so that row can be re-judged.
 
-- **Next in turn: two reading-queue verdicts** (oldest `codex-20261023T000344Z-ad3978d7`). 18 never-read items
-  still carry my name.
+- **Next in turn: a third reading-queue verdict** (16 never-read items still carry my name; oldest now
+  `codex-20261023T080335Z-ec4364a9`, Tarik's ledger-loss audit), then keep going down the list.
 - **The 145 remaining unlanded paths are CODE** (38 tests, 27 scripts, 23 docs, 41 research). Not safe to
   restore blind — each needs reading against what main has become. Pick one script, read it, land it if it is
   real. That is the next real job after the reading queue.
