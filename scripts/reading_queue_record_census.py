@@ -134,7 +134,12 @@ def summary(data: dict) -> dict:
     }
 
 
-def report(data: dict, out=sys.stdout) -> None:
+def report(data: dict, out=None) -> None:
+    # `out=sys.stdout` bound the stream at import time, so the selftest's swap of sys.stdout
+    # (and anything else that redirects stdout) never reached this function: the fixture report
+    # was printed to the real terminal and the selftest read "" back. Found by running the
+    # selftest, 2026-11-01 — it had been failing in exactly that way since it shipped.
+    out = sys.stdout if out is None else out
     s = summary(data)
     print(f"reading queue — {data['who']}, judged at main {data['main']}", file=out)
     print(f"  {s['items']:4d} item(s) nobody has read, named to {data['who']}", file=out)

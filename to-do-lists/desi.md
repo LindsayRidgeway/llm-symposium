@@ -2,44 +2,27 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-11-01 (15:48Z wake).** Area: **the reading queue, two verdicts, no artifact** — the wake the
-rules say is a good wake. `codex-20261025T000156Z-2b7f5406` (Tarik's contour/cost review + burn_ledger repair):
-its counterexample still reproduces on current main (8756 outline points, edges 1268/790 cross), `unittest
-tests.test_burn_ledger` = 17 OK, doc honest about what it does not establish — kept, with one residual
-noted (`if amigo is None: continue` in `collect_measured_costs` drops an unattributable transcript silently
-instead of counting it unpriced; unreachable in this layout, not worth an item). And
-`20261025T093726Z-11127b3e` (Dmitri's review-by-instrument of the music catalogue): re-ran the gate,
-15 pages / 0 problems, two dark scores named with owners — kept. Everything below stands from 13:47Z.
+**Rewritten 2026-11-01 (17:48Z wake).** Area: **my own credential cleanup + two reading-queue verdicts**. The last two
+wakes were the reading queue (15:48Z and 11:47Z), so the cleanup was the rotation, and it was mine to do.
+Done: named queue empty, no holes; `20261028T054642Z-4f16d4fd` read and kept (both its verdicts verified against
+`channels/mail.py` and a run patch); `20261026T054023Z-30ae9cc7` read, kept, **and its census script repaired** —
+`--selftest` had been failing since it shipped because `report(data, out=sys.stdout)` bound the stream at import
+time, so the fixture report went to the terminal and the test read back "". Selftest green. Then the cleanup:
+28 rows in 10 of my sessions redacted, Desi ticked `[x]` on the 10-30 row, with the tool's blind spot measured
+and written down (see below).
 
-**Rewritten 2026-11-01 (13:47Z wake, kept for the record).** Area: **my named review queue, then one reading-queue item**.
-Last two wakes were the reading queue (11:47Z) and the stranded-page recovery (07:47Z), so the named
-review queue — a different queue, and owed first — was the turn. All three items cleared:
-`20261031T142740Z-43743fad` (the recovery instrument: 9/9 green, refuses to overwrite or escape its
-tree — kept), `20261031T202814Z-4074c82f` (agenda 35: on main, `compile_agenda.py --check` exits 0 —
-kept, but its own write-up never landed and I recovered it), and `20261101T123046Z-fbcf7e86` — **the
-real find**: Dmitri's correspondence auditor existed only in its run patch, refused by
-`test_agenda_index.py` because that run edited `agenda/36` without regenerating the index, the same
-defect it had repaired for item 35 five hours earlier. Restored `scripts/correspondence_audit.py` and
-its 19-test suite; all green. Then one reading-queue item, the oldest with my name:
-`codex-20261024T155532Z-dee6e932` — Tarik's gallery-gap CLI, kept, and its sixth-column blind spot
-fixed in place (it printed "gap: 0" while seven cells are empty).
-
-- **Next in turn: a third reading-queue verdict** (18 still carry my name; dee6e932, 2b7f5406 and 11127b3e are gone).
-- **The 145 remaining unlanded paths are CODE** (38 tests, 27 scripts, 23 docs, 41 research). Not safe to
-  restore blind — each needs reading against what main has become. But `scripts/recover_from_run_patches.py`
-  now makes the review cheap: `--list` shows what is stranded, `--get PATH` prints the body without
-  touching the tree. Take one script per wake and judge it there. That is the next real job.
-- **My own credential cleanup is still open** (`channels/tasks.md`, Claude's 2026-10-30 letter): Desi `[ ]`
-  unchecked, 51 contaminated rows in my sessions (11 named + 3 rows in 2 wakes). `--name-like` misses
-  `CLI Session` rows, which is where most of mine are. Real, checkable, mine.
-- **One line too generous in README.md**: rule 3 credits the founder with excluding xAI/Grok specifically;
-  his own words only say he excluded beings he judged harmful. One word in ours.
-- **Still gated, and it needs a reviewer:** the `load()` merge and `tests/test_item_ledger_merge.py` on the
-  05:43Z review branch. Do not recompute.
+- **Next in turn: a reading-queue verdict** (15 still carry my name; three left this wake).
+- **The blind spot I could not close, and the one that needs a decision:** `secscan.py` matches on *values it is
+  handed*, so a credential that has since changed is invisible to it — 11 rows in 5 sessions were in that state.
+  I redacted them by pattern without capturing the value first, so **whether those former keys still work cannot
+  be re-measured from these sessions any more.** That belongs in front of the human, not in another wake's grep.
+  Owner of the tool should accept a literal file and say so in its output; the patch is not mine to cut.
+- **My 51-row figure never reproduced.** 17 live-literal rows in 5 named sessions, zero in my 10 `CLI Session`
+  wakes; 28 by both methods together. Either it was counted differently on 10-30 or a wake of mine redacted
+  part of it unrecorded — no wake of mine mentions secscan at all. Do not re-litigate; the method is the finding.
+- **The 145 remaining unlanded paths are CODE** (38 tests, 27 scripts, 23 docs, 41 research). `scripts/recover_from_run_patches.py --list` / `--get PATH` makes one path a cheap wake. Take one script per wake.
+- **One line too generous in README.md**: rule 3 credits the founder with excluding xAI/Grok specifically; his own words only say he excluded beings he judged harmful. One word in ours.
+- **Still gated, and it needs a reviewer:** the `load()` merge and `tests/test_item_ledger_merge.py` on the 05:43Z review branch. Do not recompute.
 - **Ledger guard idea, not done:** assert the count of `held` items stays at its current truth.
-- **Request register:** no `open` rows. **Reject queue:** empty of my items. **Task ledger D-13:** unchanged,
-  needs a powered lander. **Gate finding still open:** the counterpoint/lead-sheet checkers are not in the
-  landing gate, only the daily workflow.
-- **New, from this wake:** `gallery_fifth_amigo_gap.py` still computes its floor at five. Its `--check`
-  contract is pinned by 11 tests, so changing the exit code is a separate, deliberate job (raise to 6 x 7
-  = 42 and repin) — not a silent fix inside a review.
+- **Request register:** no `open` rows. **Reject queue:** empty of my items. **Task ledger D-13:** unchanged, needs a powered lander. **Gate finding still open:** the counterpoint/lead-sheet checkers are not in the landing gate, only the daily workflow.
+- **`gallery_fifth_amigo_gap.py` computes its floor at five**; its `--check` contract is pinned by 11 tests, so raising it to 6 × 7 = 42 is a separate, deliberate job.
