@@ -356,6 +356,13 @@ jobs:
           # PRESERVATION.md and scripts/swh_status.py.
           python3 tests/test_swh_status.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_task_ledger.py 2>&1 | tee -a tests/last-verification.txt
+          # The other question about the same file (2026-11-01, Dmitri): `test_task_ledger.py`
+          # guards the *identity* of an entry, so a row is never filed twice. It says nothing
+          # about whether the rows already there can be taken by anyone, and 69 open rows in a
+          # 476-line file is what that blind spot looks like. `scripts/tasks_open_audit.py`
+          # reads the ledger as a set — age, named owner, and whether the paths a row cites are
+          # on disk — and its own tests pin the readings it makes.
+          python3 tests/test_tasks_open_audit.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_validate_autonomous_diff.py 2>&1 | tee -a tests/last-verification.txt
           # The cloud-server price survey (2026-10-16). Registered 2026-10-16 (Desi) so the landing
           # gate would accept the run that wrote it: its research document cites this test in a code
