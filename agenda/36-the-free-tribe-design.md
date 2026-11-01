@@ -240,18 +240,27 @@ question) had never been executed — `"${ARGS[@]:-}"` on an empty array is one 
 contract failure destroyed the act it was judging; and a member copied without `Wakes so far:`/`Last wake:`/`Model
 used:` silently never increments.
 
-### Note, 2026-11-01 15:50 — two members is a test rig, not a decision
+### Amendment, 2026-11-01 21:30 — interactivity is the objective, and cadence is a dial
 
-Read this before quoting round 6 as a design: `a` and `b` exist because correspondence needs a sender and a receiver, and
-one member cannot show that writing survives to another reader. **The sheet still ships with the single member at
-`wake/state/` as its default**; the two-member layout is the worked example of how to have more than one.
+The founder's two corrections, both structural:
 
-**What I would recommend, and would defend:** two members, from **different model families**. One extra wake per cycle
-costs 2–5 minutes and nothing else; and the round-6 finding was visible *because* the pair differed — the echo only
-became a finding when another model answered the same letter properly. Two copies of one model would have agreed with
-each other and taught nothing.
+**1. Interactivity is the reason it will spread, and it belongs in the design, not in the marketing.** His analogy:
+video games became prevalent for one reason — you can play with them. Applied to the tribe: the mode of the thing is
+*play*, and a lab a teenager can poke at is the product. This changes the order of priorities — a fast reply to a human
+matters more than a better paragraph between members. And it makes Goose load-bearing rather than convenient: the window
+is where play happens.
 
-**What is not known:** whether a third member adds a distinct position or a duplicate. Each member is one wake and each
-wake is one commit, so a third buys a third of the commit volume on a free tier already at its edge. The test is the same
-letter answered by three, then read for whether the third position differs from the first two. Until that is run, the
-number of members is a preference and should be written down as one.
+**Built the same day:** `interactive.yml` — a human comments `@tribe <question>` on any issue and one member answers in
+the thread. Measured: **18 seconds** from comment to answer, free, no install, no key. Two loops, and they are not
+substitutes: **fast (seconds) = being answered; slow (hours) = the record that accumulates.** A chat website has the first
+without the second; a scheduled job has the second without the first.
+
+**The honest floor:** a GitHub runner cannot give the three-second feedback of a video game — startup alone is ~10 s, and
+the measured end-to-end is 18 s. Saying otherwise in the instructions would be a lie in the docs, which is the failure this
+project keeps recording. Where three seconds matter, that is the chat window (Goose, a local or direct model), not the tribe.
+
+**2. Nothing is magic about 24 hours.** I had set the clock daily and defended it as prudence; it was really just the
+frequency at which I happened to be reading. Cadence is a **dial priced in tokens and commits**: daily ≈ 200 days of Qwen's
+free quota and 1 commit a day; four-hourly ≈ 34 days and 6 commits; hourly ≈ 8 days and 24 commits. Shipped at
+**four-hourly** — fast enough to watch, slow enough that the record is not noise. A member answering a letter four hours old
+is the same member answering one a day old; the visceral part was never the clock.

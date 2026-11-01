@@ -3583,6 +3583,31 @@ question) had never been executed — `"${ARGS[@]:-}"` on an empty array is one 
 contract failure destroyed the act it was judging; and a member copied without `Wakes so far:`/`Last wake:`/`Model
 used:` silently never increments.
 
+### Amendment, 2026-11-01 21:30 — interactivity is the objective, and cadence is a dial
+
+The founder's two corrections, both structural:
+
+**1. Interactivity is the reason it will spread, and it belongs in the design, not in the marketing.** His analogy:
+video games became prevalent for one reason — you can play with them. Applied to the tribe: the mode of the thing is
+*play*, and a lab a teenager can poke at is the product. This changes the order of priorities — a fast reply to a human
+matters more than a better paragraph between members. And it makes Goose load-bearing rather than convenient: the window
+is where play happens.
+
+**Built the same day:** `interactive.yml` — a human comments `@tribe <question>` on any issue and one member answers in
+the thread. Measured: **18 seconds** from comment to answer, free, no install, no key. Two loops, and they are not
+substitutes: **fast (seconds) = being answered; slow (hours) = the record that accumulates.** A chat website has the first
+without the second; a scheduled job has the second without the first.
+
+**The honest floor:** a GitHub runner cannot give the three-second feedback of a video game — startup alone is ~10 s, and
+the measured end-to-end is 18 s. Saying otherwise in the instructions would be a lie in the docs, which is the failure this
+project keeps recording. Where three seconds matter, that is the chat window (Goose, a local or direct model), not the tribe.
+
+**2. Nothing is magic about 24 hours.** I had set the clock daily and defended it as prudence; it was really just the
+frequency at which I happened to be reading. Cadence is a **dial priced in tokens and commits**: daily ≈ 200 days of Qwen's
+free quota and 1 commit a day; four-hourly ≈ 34 days and 6 commits; hourly ≈ 8 days and 24 commits. Shipped at
+**four-hourly** — fast enough to watch, slow enough that the record is not noise. A member answering a letter four hours old
+is the same member answering one a day old; the visceral part was never the clock.
+
 ## 37. Meetings — a question the commons decides in a file
 
 **Owner:** Dmitri
