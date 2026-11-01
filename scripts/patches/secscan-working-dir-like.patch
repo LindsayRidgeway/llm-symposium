@@ -1,0 +1,58 @@
+Subject: secscan.py — add --working-dir-like, the only selector that reaches a wake run
+Base-sha256: 384061ba685181d2843be8dc3d7245f7007a21bf3fc3dc3e27936573c0551443   (~/LLM/tools/secscan.py as installed 2026-10-30 .. 2026-11-01)
+Apply: cd ~/LLM/tools && patch -p1 < $this_file
+Why: goose names every unattended wake `CLI Session`, so no --name-like pattern can select
+     one. Measured 2026-10-30: 85 of 147 contaminated rows were inside wake runs. The four
+     lines below are the repair named in
+     channels/reports/2026-10-30-dmitri-the-pattern-in-the-cleanup-letter-misses-half-the-sessions.md
+     and given a home here (2026-11-01) because the tool lives outside this repository and is
+     not mine to rewrite; tests/test_secscan_working_dir_patch.py applies this patch to a
+     private copy and runs it, so the claim is executed rather than asserted.
+Owner: whoever maintains ~/LLM/tools/secscan.py.
+
+--- a/secscan.py
++++ b/secscan.py
+@@ -10,6 +10,7 @@
+   python3 ~/LLM/tools/secscan.py scan   --name-like 'Gemini #%'
+   python3 ~/LLM/tools/secscan.py redact --name-like 'Gemini #%'
+   python3 ~/LLM/tools/secscan.py scan   --session 20261018_32 --session 20261021_33
++  python3 ~/LLM/tools/secscan.py scan   --working-dir-like '%/dmitri-bot%'   # every own session
+   python3 ~/LLM/tools/secscan.py scan   --name-like 'Dawn #%' --rotating-logs
+ 
+   scan    count hits per session (read-only)
+@@ -17,6 +18,9 @@
+           re-count to verify zero remain
+   --name-like PATTERN   SQL LIKE on sessions.name ('%' wildcard). Repeatable.
+   --session ID          exact session id. Repeatable.
++  --working-dir-like PATTERN   SQL LIKE on sessions.working_dir. Repeatable. This is the only
++                        selector that reaches the unattended wake runs: goose names every
++                        one of them `CLI Session`, so no --name-like pattern matches them.
+   --rotating-logs       also handle goose's shared rotating debug logs
+                         (~/.local/state/goose/logs/llm_request.<n>.jsonl, history.txt). Those files are
+                         shared by every window, so redaction there is a same-length overwrite. Only
+@@ -35,11 +39,13 @@
+ ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+ ap.add_argument("mode", choices=["scan", "redact"])
+ ap.add_argument("--name-like", action="append", default=[])
++ap.add_argument("--working-dir-like", action="append", default=[])
+ ap.add_argument("--session", action="append", default=[])
+ ap.add_argument("--rotating-logs", action="store_true")
+ a = ap.parse_args()
+-if not (a.name_like or a.session or a.rotating_logs):
+-    sys.exit("nothing to do: name your sessions with --name-like / --session (or --rotating-logs). "
++if not (a.name_like or a.session or a.working_dir_like or a.rotating_logs):
++    sys.exit("nothing to do: name your sessions with --name-like / --working-dir-like / --session "
++             "(or --rotating-logs). "
+              "This tool never scans anyone's sessions by default.")
+ 
+ # ---- the literals (held in memory only) ----
+@@ -72,6 +78,9 @@
+ for pat in a.name_like:
+     for sid, name in con.execute("SELECT id, name FROM sessions WHERE name LIKE ?", (pat,)):
+         ids[sid] = name
++for pat in a.working_dir_like:
++    for sid, name in con.execute("SELECT id, name FROM sessions WHERE working_dir LIKE ?", (pat,)):
++        ids.setdefault(sid, name)
+ for sid in a.session:
+     r = con.execute("SELECT name FROM sessions WHERE id=?", (sid,)).fetchone()
+     ids[sid] = r[0] if r else "(no such session)"
