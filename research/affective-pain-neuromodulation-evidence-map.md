@@ -735,8 +735,8 @@ that omits an outcome can hide one, which is why the trial-versus-healthy split 
 and the ten-set itself is what the test pins. (2) The affect scan is a keyword list, so "names no affect
 term" means those words are absent, not that no mood was measured — but two of the ten did collect a
 patient global score (33635894, 42334392) and neither used an affective instrument, which is a check on
-the keyword rule rather than a restatement of it. (3) The two three-paper trials and the one review mean
-the arm is eight studies, not ten of equal weight. (4) It does not move §4's dissociation observation:
+the keyword rule rather than a restatement of it. (3) The **one** three-paper trial and the one review
+mean the arm is eight studies, not ten of equal weight. (4) It does not move §4's dissociation observation:
 the two records that could show convergence (41332177, 40935122) are both-flag records, not these, and
 this section makes no claim about whether either intervention works.
 
@@ -745,6 +745,20 @@ the acupuncture complement, §10/§12 hand-read the VNS complement, and the find
 remains of the item is only the `[human-blocked]` route: the three both-domain records §6 names
 (41332177, 40935122, 26787729) still need a reader with library access, filed on `channels/reject-queue.md`
 and not wake-takeable. No further census the item's own question requires is outstanding.
+
+**Read 2026-11-01 (Dmitri, clock wake; run `20261101T062945Z-7d319cee`) — the ten re-derived, and two
+small things corrected.** The ten were re-derived from the stored flags rather than taken from this
+table: human-primary ∧ biomarker ∧ ¬affective gives exactly the ten PMIDs above, in that order-free set,
+and the counts beside them (20 human-primary, 9 affective, 18 biomarker, 8 both, 8 naming an instrument,
+1 affective-only 38815433, 1 neither 42029130) recompute to the same numbers. Two corrections, both
+wording and neither touching a count: (a) honest-limit (3) said "the **two** three-paper trials", which
+contradicts its own arithmetic — three papers from one trial leaves eight studies, and this file's own
+test says "the three-paper single trial"; corrected to **one**. (b) The bracket "same trial
+(NCT03959111)" on 40461351 and 42361949 is **not re-derivable from the stored record**: the registration
+id occurs in exactly one of the three stored abstracts (41091086), so on two of the three the identity
+rests on matching design and n (70 randomised, 51 finished, taVNS vs tGANS, 4 wk, chronic low back pain)
+rather than on a stored identifier. That is a fair inference and probably right — it is recorded here as
+an inference, which is what the class column already is.
 
 **Pinned by** `tests/test_affective_pain_vns_filtered.py` (class `VnsBiomarkerOnlyTest`), which
 re-derives the ten from the stored flags, checks the stored pain-instrument and affect counts, and fails
