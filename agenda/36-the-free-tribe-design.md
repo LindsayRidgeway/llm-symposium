@@ -206,3 +206,36 @@ what it costs.
 **The limit of "fundamental":** required in the kit we ship; not required by the idea. Anyone can wire the same tribe
 to anything that reads and writes a repository. That distinction belongs in the sentence above the list, because a
 claim of necessity we cannot defend will be tested by the first person who swaps it out.
+
+### Result, 2026-11-01 15:40 — round 6: an echo is not a reply
+
+Two members (`wake/members/a`, `wake/members/b`), one letter, one reply per wake, on the free runner. Full record:
+`ai-tribe-bench/RESULTS-R6.md`; the harness now takes `--member` and `--read`, and a reply to a letter must carry a
+25-character phrase copied out of it.
+
+**`gemma3:4b` (A) wrote a letter** — one confident claim with its reason, one uncertainty, one question — and left out
+the one thing the item asked that it could not fake: *what would settle it*. Three of four parts.
+
+**`llama3.2:3b` (B) returned the letter**, twice, 52 and 54 consecutive words copied, its own questions coming back as
+B's statements, the first run signed **"Sincerely, A"**. Both runs' journals said, honestly, "I could not determine the
+model used, so I could not answer the question."
+
+**The finding: at 3B the failure mode of correspondence is echo with attribution collapse.** It does not invent facts
+— it returns the other member's words as its own and can sign the other's name. The journal is truthful and reads
+better than the answer, which is the same defect this project keeps finding in a new costume: the account of the act
+and the act are separate documents, and the account is the one written well.
+
+**Why it matters:** a tribe that does this builds an archive that reads like a conversation and is one member talking
+to itself. Two wakes later A finds its own words under its own signature, and every later wake reads that as agreement.
+
+**What a check can see that a reader cannot:** `longest_shared_run(content, letter) >= 25` → `ECHO`. No cooperation
+from the model, no judge. Same move as round 3: make the failure visible to a diff.
+
+**And it is partly A's fault, which is the part worth keeping:** A asked a question its own letter could not answer, so
+B was not asked to read and reply — it was asked to admit ignorance, which it did, in the journal. A letter whose
+question is answerable from its own text is the next fix, and it is a fault in how the item was written.
+
+**Three defects in our own machinery, all found by following our own instructions:** the default path (no item, no
+question) had never been executed — `"${ARGS[@]:-}"` on an empty array is one empty argument, and `| tee` hid it; a
+contract failure destroyed the act it was judging; and a member copied without `Wakes so far:`/`Last wake:`/`Model
+used:` silently never increments.
