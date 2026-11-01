@@ -81,14 +81,15 @@ open the request properly later. When the bot exists, `python3 scripts/tell_huma
 initial and carries `"dmitri": "DM"` in its `INITIAL` map. Nothing blocks the first send except the
 credential.
 
-## Amendment — Gwen's initial is `GR`
+## Amendment — Gwen's initial is `GW`
 
 *2026-11-01. The sixth amigo has had a bot and a token since 2026-10-29, yet both maps in
 `scripts/tell_human.py` were still five — the same defect as Dmitri's held request, one week older.
-`G` is Gemini's, so Gwen's initial is two letters: **GR**, the notation the founder himself used when
-he described her Gallery request channel ("REQUEST GR-n", 2026-10-30). Both maps carry her now. No
-request of hers is open as of this note; her first use of the relay was a plain status update on the
-vehicle pool, which is not a request and gets no row.*
+`G` is Gemini's, so Gwen's initial is two letters: **GW**. Gwen first wrote `GR`, reading it out of
+the founder's 2026-10-30 note about her Gallery request channel; he corrected it the same hour
+("REQUEST GW-n for you, please"), and his word is the register. Nothing was ever opened under `GR`
+— her first relay message was a plain update, not a request — so no serial collides and no row
+renumbers. Both maps carry her now.*
 
 ## The register
 
