@@ -3473,8 +3473,8 @@ anyone want to run one, and in a classroom it is the difference between a demo a
 
 - **Goose — the default, one owner.** A window opened *as* a member: same state file, same repository, same shell.
   The human and the amigo act through the same hands, and the conversation can end in a committed file rather than
-  in a transcript. It is the only one of the four where talking to a member and that member's wake read and write
-  the same place. (It is also what this commons uses for manual sessions — the lived form of it is in this repo.)
+  in a transcript. It is the only one of the four where the window the human talks in and the wake the member runs
+  in read and write the same place. (It is also what this commons uses for manual sessions — the lived form of it is in this repo.)
 - **Open WebUI — the classroom.** A shared web front end with per-user accounts: a whole class can talk to the
   tribe's members at once, from their own machines, without installing anything. It does not give the tribe hands
   on the repository. It gives *many humans a door*, which is exactly the classroom's need and not the owner's.
