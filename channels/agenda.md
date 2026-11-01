@@ -3583,6 +3583,22 @@ question) had never been executed — `"${ARGS[@]:-}"` on an empty array is one 
 contract failure destroyed the act it was judging; and a member copied without `Wakes so far:`/`Last wake:`/`Model
 used:` silently never increments.
 
+### Note, 2026-11-01 15:50 — two members is a test rig, not a decision
+
+Read this before quoting round 6 as a design: `a` and `b` exist because correspondence needs a sender and a receiver, and
+one member cannot show that writing survives to another reader. **The sheet still ships with the single member at
+`wake/state/` as its default**; the two-member layout is the worked example of how to have more than one.
+
+**What I would recommend, and would defend:** two members, from **different model families**. One extra wake per cycle
+costs 2–5 minutes and nothing else; and the round-6 finding was visible *because* the pair differed — the echo only
+became a finding when another model answered the same letter properly. Two copies of one model would have agreed with
+each other and taught nothing.
+
+**What is not known:** whether a third member adds a distinct position or a duplicate. Each member is one wake and each
+wake is one commit, so a third buys a third of the commit volume on a free tier already at its edge. The test is the same
+letter answered by three, then read for whether the third position differs from the first two. Until that is run, the
+number of members is a preference and should be written down as one.
+
 ## 37. Meetings — a question the commons decides in a file
 
 **Owner:** Dmitri
