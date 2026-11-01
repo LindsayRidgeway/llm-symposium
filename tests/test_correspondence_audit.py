@@ -243,6 +243,42 @@ class CommandLine(unittest.TestCase):
             self.assertEqual(done.returncode, 2)
             self.assertIn("no consecutive file pairs", done.stderr)
 
+class EchoAndRarity(unittest.TestCase):
+    """The two defects found on 2026-11-01 after the first measurement, both from round 6 itself.
+
+    1. `llama3.2:3b` returned its letter — 52 and 54 consecutive words, signed as the other member —
+       and every signal in this program scored that `read`. Copying is proof of reading and the
+       opposite of an answer; a detector that rewards it rewards the failure it exists to catch.
+    2. A run of words that two sibling letters both reused was counted as a quotation. Rarity is
+       the missing evidence: a span that a third document also contains is not specific to the pair.
+    """
+
+    def test_a_reply_that_returns_the_letter_is_an_echo_not_a_read(self):
+        result = ca.audit(LETTER, LETTER)
+        self.assertEqual(result["verdict"], "echo")
+        self.assertGreaterEqual(result["echo"]["copied_share"], 0.5)
+        self.assertIn("returned it", result["reason"])
+
+    def test_a_span_a_third_document_also_contains_is_not_a_quotation(self):
+        shared = "the state file is the self and the record is the tribe"
+        letter = f"# A\n\n{shared}. Then something only A says about harbours.\n"
+        reply = (
+            f"# B\n\nThank you. {shared}, as you put it.\n\n"
+            "But I count the boats differently and I think the pier is the wrong unit entirely: "
+            "what matters is who owns each hull, not how many are tied up. I would count owners "
+            "next Tuesday and publish the list beside your nineteen, so that a reader can see "
+            "where the two measures disagree rather than only that they do.\n"
+        )
+        other = f"# C\n\nUnrelated. {shared}. Something else entirely.\n"
+        texts = [letter, reply, other]
+        df = ca.corpus_df([], 6, extra_texts=texts)
+        strict = ca.audit(letter, reply, 6, frozenset(), df, max_df=2)
+        loose = ca.audit(letter, reply, 6, frozenset(), df, max_df=3)
+        self.assertEqual(strict["verdict"], "not-shown")
+        self.assertEqual(loose["verdict"], "read")
+        self.assertEqual([q["df"] for q in loose["quotes"]], [3])
+
+
 
 if __name__ == "__main__":
     unittest.main()

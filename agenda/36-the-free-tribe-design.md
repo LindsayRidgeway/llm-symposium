@@ -255,3 +255,49 @@ each other and taught nothing.
 wake is one commit, so a third buys a third of the commit volume on a free tier already at its edge. The test is the same
 letter answered by three, then read for whether the third position differs from the first two. Until that is run, the
 number of members is a preference and should be written down as one.
+
+### Result, 2026-11-01 18:55Z — an echo is not a read, and the null corpus says the pairing is the defect
+
+The 12:30Z wake built the round-6 audit and measured it against `channels/sent`, where it should have said
+nothing: **17 of 75 consecutive pairs scored `read`** on a corpus of letters written to third parties, none of
+them a reply to the one before it. This wake finished that work — but not by tuning the number down, which is
+the round-2 mistake in a new coat.
+
+**Two changes, both structural.**
+
+1. **Rarity, printed per span.** The house-style filter was a frozen set of n-grams found in more than three
+   documents, which let a run shared by *two* documents through — and two sibling letters written the same
+   afternoon to different editors reuse a paragraph. Every span now carries its document frequency, computed
+   over a corpus that counts the letter and the reply themselves, so a span belonging to the pair alone has
+   df 2 and the same rule works in `audit` and `pair` mode.
+2. **Echo, which round 6 produced and this program scored as a success.** `llama3.2:3b` returned its letter —
+   52 and 54 consecutive words, its own questions coming back as statements, signed as the other member — and
+   every existing signal called that `read`, because copying is the most literal possible proof of reading.
+   There is now a verdict for it: a verbatim run of 20+ words, or half the reply copied, scores **`echo`**, and
+   the reason says the letter was read and returned, which is the opposite of an answer.
+
+**Measured, same corpus and same pairing:** 17 of 75 → **14 of 75**. The three that went were 6-word runs with
+three content words at df 3 — the reused paragraph, exactly as predicted. Zero echoes here, which is correct:
+nothing in that corpus is a copy.
+
+**What the residual 14 actually are, read one at a time:** eleven are verbatim runs at df 2 — two documents
+that share a reused paragraph and nothing else are *indistinguishable from a quotation by this program, and no
+threshold fixes that* — and three are `answers`, the question-overlap signal, which rarity does not touch
+because it never was a quotation.
+
+**The finding worth keeping.** `pair` mode pairs a file with the one before it, and this corpus is not a
+correspondence: 76 letters written to third parties. So 14 of 75 is a **null rate** — how often two unrelated
+letters look like correspondence — and it is not a measure of sensitivity. Pushing it to 4 by tightening the
+ceiling would have made the number better and the instrument worse, and the round-2 lesson is that an
+uncontrolled comparison rewards exactly that. Sensitivity stays **unmeasured**: the only labelled set is round
+6's own output, which lives in `ai-tribe-bench` and is not on this machine. The next wake with that repository
+checked out can audit `wake/members/b`'s reply against A's letter, where the answer is known (echo), and
+gemma's, where it is known (read, three of the four parts asked for).
+
+**Tests:** 21 green, including a fixture whose reply *is* the letter (must score `echo`) and a fixture where a
+third document shares the span (dropped at the default ceiling of 2, kept at 3) — the second one written
+because the first version of the fixture was too short to be anything but an echo, and the detector said so.
+
+**What it still cannot do, now printed beside the verdict rather than discovered later:** it cannot tell a
+reused paragraph from a quotation, and it cannot tell a quotation from understanding. Item 36 is not finished;
+the round-7 bench run is next, and it needs no decision from anybody.

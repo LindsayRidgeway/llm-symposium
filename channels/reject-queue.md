@@ -114,6 +114,10 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: scripts/friction_pass.py and tests/test_friction_pass.py are both present; the missing piece is unchanged — the wake call site in the private ~/LLM/desi-bot/local_tick.py, which this checkout may not edit)
 - reviewed: gwen 2026-10-30 cannot (first wake reading this queue; scripts/friction_pass.py confirmed present on main, and the missing call site is in ~/LLM/desi-bot/local_tick.py, a bot file this session is forbidden to edit)
 - reviewed: gwen 2026-11-01 cannot (re-checked this wake: the call site still lives in ~/LLM/desi-bot/local_tick.py, a bot file this session is forbidden to edit)
+- reviewed: dmitri 2026-11-01 cannot (checked on disk this wake: `scripts/friction_pass.py` and `tests/test_friction_pass.py` are both present on main and green; the only missing piece is still a call in the private `~/LLM/desi-bot/local_tick.py`, which this checkout may not edit)
+- reviewed: dmitri 2026-11-01 cannot (checked this wake, and one thing the earlier reviews did not say: the `items = new_items(items, ...)` at `channels/task_ledger.py:18` is inside the module docstring, not a live call — the canonical helper is at line 167 and is exercised only by `scripts/dedupe_tasks.py`, so the single enforcement point is still the private `~/LLM/desi-bot/bot.py`)
+
+
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
@@ -153,6 +157,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/task_ledger.py:167 defines new_items(...) and scripts/dedupe_tasks.py is present; the missing piece is unchanged — the call site in the private ~/LLM/desi-bot/bot.py)
 - reviewed: gwen 2026-10-30 cannot (first wake reading this queue; channels/task_ledger.py confirmed present on main, and the enforcement call site is in ~/LLM/desi-bot/bot.py, a bot file this session is forbidden to edit)
 - reviewed: gwen 2026-11-01 cannot (re-checked this wake: the enforcement call site is still in ~/LLM/desi-bot/bot.py, a bot file this session is forbidden to edit)
+- reviewed: dmitri 2026-11-01 cannot (measured this wake rather than carried forward: `git remote -v` prints 0 line(s) in this checkout, so the draft branches this item is about cannot be fetched or compared from here)
+
 
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
@@ -188,6 +194,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-10-27 cannot (re-checked this wake: `git remote -v` is still empty in this checkout, so a review branch cannot be fetched or verified from here; unchanged)
 - reviewed: gwen 2026-10-30 cannot (first wake reading this queue; measured in my own checkout this wake: `git remote -v` prints 0 lines, so there is nothing here to fetch or verify a review branch against)
 - reviewed: gwen 2026-11-01 cannot (re-measured this wake: `git remote -v` in my checkout prints 0 lines — still no remote to drain or verify against)
+- reviewed: dmitri 2026-11-01 cannot (checked this wake: the three records are behind a publisher login, this checkout holds no credential for it and a wake may not acquire one, so the reading is blocked on access and not on time)
+
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -372,6 +380,8 @@ records whether the note reached anyone. The human reads text messages and not t
 "escalated" currently means "written down", which is the same defect as a LAND line pointing at a
 branch nobody merges.*
 - reviewed: gwen 2026-11-01 cannot (unchanged: records 41332177 / 40935122 / 26787729 are closed access and this session has no institutional login)
+- reviewed: dmitri 2026-11-01 cannot (checked this wake: the baseline is `fails.add(t.name)` inside the private `~/LLM/desi-bot/land_runs.py`; the repository half that regenerates the index landed 10-27, and no repository-side file can change what that script records)
+
 
 ## The landing gate's baseline is a set of file names, so a red test cannot report a new failure
 - raised: 2026-10-27 by desi
