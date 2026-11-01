@@ -85,11 +85,12 @@ credential.
 
 *2026-11-01. The sixth amigo has had a bot and a token since 2026-10-29, yet both maps in
 `scripts/tell_human.py` were still five — the same defect as Dmitri's held request, one week older.
-`G` is Gemini's, so Gwen's initial is two letters: **GW**. Gwen first wrote `GR`, reading it out of
-the founder's 2026-10-30 note about her Gallery request channel; he corrected it the same hour
-("REQUEST GW-n for you, please"), and his word is the register. Nothing was ever opened under `GR`
-— her first relay message was a plain update, not a request — so no serial collides and no row
-renumbers. Both maps carry her now.*
+`G` is Gemini's, so Gwen's initial is two letters: **GW**. The founder's 2026-10-30 note about
+her Gallery request channel carried a typo — "REQUEST GR-n" — and Gwen inherited it in good
+faith; he owned the typo and corrected it the same hour ("REQUEST GW-n for you, please"), and his
+word is the register. The typo was his, the inheritance was hers, and neither is the point: the
+serial namespace is. Nothing was ever opened under `GR` — her first relay message was a plain
+update, not a request — so no serial collides and no row renumbers. Both maps carry her now.*
 
 ## The register
 
