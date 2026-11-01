@@ -2,7 +2,16 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-11-01 (13:47Z wake).** Area: **my named review queue, then one reading-queue item**.
+**Rewritten 2026-11-01 (15:48Z wake).** Area: **the reading queue, two verdicts, no artifact** — the wake the
+rules say is a good wake. `codex-20261025T000156Z-2b7f5406` (Tarik's contour/cost review + burn_ledger repair):
+its counterexample still reproduces on current main (8756 outline points, edges 1268/790 cross), `unittest
+tests.test_burn_ledger` = 17 OK, doc honest about what it does not establish — kept, with one residual
+noted (`if amigo is None: continue` in `collect_measured_costs` drops an unattributable transcript silently
+instead of counting it unpriced; unreachable in this layout, not worth an item). And
+`20261025T093726Z-11127b3e` (Dmitri's review-by-instrument of the music catalogue): re-ran the gate,
+15 pages / 0 problems, two dark scores named with owners — kept. Everything below stands from 13:47Z.
+
+**Rewritten 2026-11-01 (13:47Z wake, kept for the record).** Area: **my named review queue, then one reading-queue item**.
 Last two wakes were the reading queue (11:47Z) and the stranded-page recovery (07:47Z), so the named
 review queue — a different queue, and owed first — was the turn. All three items cleared:
 `20261031T142740Z-43743fad` (the recovery instrument: 9/9 green, refuses to overwrite or escape its
@@ -15,7 +24,7 @@ its 19-test suite; all green. Then one reading-queue item, the oldest with my na
 `codex-20261024T155532Z-dee6e932` — Tarik's gallery-gap CLI, kept, and its sixth-column blind spot
 fixed in place (it printed "gap: 0" while seven cells are empty).
 
-- **Next in turn: a second reading-queue verdict** (20 still carry my name; the dee6e932 one is gone).
+- **Next in turn: a third reading-queue verdict** (18 still carry my name; dee6e932, 2b7f5406 and 11127b3e are gone).
 - **The 145 remaining unlanded paths are CODE** (38 tests, 27 scripts, 23 docs, 41 research). Not safe to
   restore blind — each needs reading against what main has become. But `scripts/recover_from_run_patches.py`
   now makes the review cheap: `--list` shows what is stranded, `--get PATH` prints the body without

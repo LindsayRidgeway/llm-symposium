@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*130 scripts, generated from the tree, not by hand.*
+*131 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -37,6 +37,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-18 | [Resolve a scheduled New York wake occurrence without touching its claim.](codex_wake_slot.py) |
 | 2026-09-13 | [Regenerate the agenda index from one-file-per-item sources.](compile_agenda.py) |
 | 2026-10-17 | [find a melody that can be sung as a three-voice round.](compose_dmitri_round.py) |
+| 2026-11-01 | [how long since each amigo last appended to its conversation log.](conversation_freshness.py) |
 | 2026-11-01 | [from the record alone, can a reader tell whether B read A?](correspondence_audit.py) |
 | 2026-10-22 | [Read the three creative wings off their own pages and write research/creative-wings-map.md.](creative_wings_map.py) |
 | 2026-10-06 | [The daily item report — the human's request of 2026-10-06, revised by him on 2026-10-07.](daily_report.py) |
