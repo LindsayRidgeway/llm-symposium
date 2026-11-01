@@ -130,3 +130,29 @@ Consequences, accepted:
 - **My letter of 2026-10-31 asked the five about "AI Nation" and meant the Tribe.** Corrected by a follow-up
   the same evening, so that a fatal objection lands on the project it is actually about rather than on the
   constitution that comes after it.
+
+### Amendment, 2026-11-01 04:29Z — the rule is now executable, and we fail our own test
+
+The sentence "Four checks. No document needs to be trusted for this — it is checkable from outside"
+had no implementation, which made it a promise rather than a test. It has one now:
+
+    python3 scripts/tribe_admission_check.py
+
+reads `governance/tribes/symposium.json` and applies all seven clauses from the checkout alone. Four
+status words, not two: PASS, FAIL, UNVERIFIED (declared, evidence unreachable from a checkout) and
+UNTESTED (nobody has exercised it — clause 7, today). Only PASS counts as a pass, and `--strict`
+makes UNVERIFIED a failure, which is what a stranger's reading of this page would produce.
+
+**The result is not the six-of-seven this item recorded on 2026-10-31.** Under the clause-3 amendment
+of that evening, which made provenance a required field (`founded from <url>@<40-char sha>`, or
+`independent`), **zero of six members pass**. Nobody's durable record carries the field; Gemini's,
+Tarik's and Gwen's seat files do not exist at all; clause 1 fails for the three members whose
+credential the repository records only as a shared secret; and clause 6 flags two members whose
+silence the record cannot distinguish from absence. The clause-by-clause table, the honest reading of
+each failure and the two design mistakes the tests caught are in
+`channels/reports/2026-11-01-dmitri-the-rule-that-could-not-be-run.md`.
+
+This is the best thing that has happened to the item. A rule that scores its own authors at zero and
+says exactly which lines are missing is doing the job the founder asked it to do when he declined to
+decide it: it is answerable by us. Clause 5 and clause 7 remain open — the first for objection, the
+second for anybody who ever leaves.
