@@ -117,6 +117,8 @@ CLI:
     python3 channels/item_ledger.py --review <id> --state postponed --reason "why" \
         --reviewer <your name>          # required: the ledger will not guess who looked
     python3 channels/item_ledger.py --reconcile            # waiting rows whose run has since landed
+    python3 channels/item_ledger.py --postpone-expired     # postponed rows whose blocker has
+                                                          # expired — a case, not a verdict
     python3 channels/item_ledger.py --summary [--hours 24]
 """
 from __future__ import annotations
@@ -995,6 +997,54 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
     return updates
 
 
+def postpone_expired(path: Path = LEDGER, repo: Path = REPO, scope: str = "") -> list[dict]:
+    """Every postponed item whose named paths are all present now. Prints a case; writes nothing.
+
+    Why this exists (2026-11-02, Desi; the item is in `to-do-lists/desi.md`). `reconcile_paths`
+    touches only rows still in W — deliberately, because a person's verdict is never overwritten by
+    a machine — and the consequence nobody noticed for a month is that **nothing ever looks at a
+    `postponed` row again**. A postponement whose stated blocker was "this file is not on main yet"
+    therefore outlives its blocker silently, and the ledger keeps saying "waiting" about work that
+    landed hours later. Measured the day this was written: Gemini postponed two items at
+    2026-11-01T01:01:58Z because their deliverables were absent; every file it named was on main
+    within seven hours (the recovery tool at 03:56Z, the October reports at 07:56Z), and both rows
+    still read `postponed` the next day until a wake re-read them by hand.
+
+    It writes no verdict, and that is the design, not caution. The expiry of a *blocker* is not the
+    expiry of a *reason*: "the file is missing" can become false while "this should not be done"
+    stays true, and a machine that flipped the row on file presence would be writing the stamp the
+    human forbade on 2026-10-09 under a new name. So this pass answers exactly one question — which
+    postponements are now asking a dead question — and hands the answer back for a person's verdict.
+
+    Rows whose only named path is the ledger itself are skipped for the reason `reconcile_paths`
+    gives: every wake appends to that file, so its presence says nothing about any particular item.
+    `scope` limits the list to one amigo's rows (its `assigned_to`, else its author).
+    """
+    items = load(path)
+    cases: list[dict] = []
+    for rec in items.values():
+        if rec.get("state") != "postponed":
+            continue
+        if scope and scope not in (rec.get("assigned_to"), rec.get("amigo")):
+            continue
+        paths = [q for q in (rec.get("paths") or []) if isinstance(q, str)]
+        if not paths or all(q == LEDGER_PATH for q in paths):
+            continue
+        missing = [q for q in paths if not (repo / q).exists()]
+        if missing:
+            continue
+        cases.append({
+            "id": rec.get("id", "?"),
+            "amigo": rec.get("amigo", "?"),
+            "reviewer": rec.get("reviewer", "?"),
+            "state_utc": rec.get("state_utc", ""),
+            "reason": rec.get("reason") or "",
+            "paths": paths,
+        })
+    cases.sort(key=lambda c: (c.get("state_utc") or "", c.get("id") or ""))
+    return cases
+
+
 def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str = "",
            reviewer: str = "human") -> dict:
     """Move one item to a terminal state, with a reason. Postponed/rejected require one.
@@ -1592,6 +1642,9 @@ def _cli() -> int:
                     help="with --reconcile-paths: only the items assigned to this amigo")
     ap.add_argument("--postpone-absent", action="store_true",
                     help="with --reconcile-paths: also mark items naming absent paths postponed")
+    ap.add_argument("--postpone-expired", action="store_true",
+                    help="list postponed items whose named paths are all on main now — a case "
+                         "for a reviewer, not a verdict; writes nothing")
     ap.add_argument("--next", type=int, metavar="N", default=0,
                     help="list the N oldest items waiting for review")
     ap.add_argument("--not-mine", default="",
@@ -1632,6 +1685,24 @@ def _cli() -> int:
     if args.collect or args.backfill:
         n = collect(amigo=args.amigo)
         print(f"item_ledger: {n} new item(s) recorded; ledger now {len(load())}")
+        return 0
+    if args.postpone_expired:
+        # Nothing is written here by design: which postponements are asking a dead question is a
+        # fact about the tree, which verdict should replace one is a judgement about the work.
+        cases = postpone_expired(scope=args.scope or "")
+        if not cases:
+            print("item_ledger: no postponed item names only paths that are all on main now — "
+                  "nothing has expired")
+            return 0
+        print(f"item_ledger: {len(cases)} postponed item(s) whose named paths are all on main "
+              f"now. This is a case for a reviewer, not a verdict: nothing was written.")
+        for case in cases:
+            print(f"  {case['id']}  {case['amigo']} postponed by {case['reviewer']} "
+                  f"{case['state_utc']}")
+            print(f"      why it was postponed: {case['reason'][:200]}")
+            print(f"      now on main: {len(case['paths'])} path(s), e.g. {case['paths'][0]}")
+        print("  Close one with --review <id> --state accomplished|postponed|rejected "
+              "--reason \"why\" --reviewer <you>.")
         return 0
     if args.review:
         # An unattributed review is the one row this ledger must never write. The default used to be
