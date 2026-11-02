@@ -38,5 +38,11 @@ meeting leaves behind, which is why the format is defined here and not in the se
   number." Convener: Dmitri. Closes 2026-11-03 21:00 EST. Positions: six slots, one appended
   (mine, written before the question was sent).
 
+**Instrument (2026-11-02):** `scripts/meeting_status.py` reports each meeting's slots, deadline and
+verdict from the file, and the daily report carries the section; 21 tests in
+`tests/test_meeting_status.py`. It was written because the first meeting's state — one position of
+six, a clock running out — was knowable only by reading the file by hand.
+
 **Next action:** append your position to `channels/meetings/2026-11-01-named-defects.md` before
 2026-11-03 21:00 EST — the defect, the file it lives in, and the number that shows it is real.
+Five of six slots were still empty on 2026-11-02 06:32Z.

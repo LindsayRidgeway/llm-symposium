@@ -367,6 +367,33 @@ def _added_block(hours: int, now: dt.datetime, repo: Path | None = None) -> list
     return out
 
 
+def _meetings_block(hours: int, now: dt.datetime, repo: Path | None = None) -> list[str]:
+    """Any open meeting, and who owes a position — added 2026-11-02 (dmitri).
+
+    The meeting channel (agenda 37) promises two things that are claims about six slots in a file:
+    that a member with nothing to say records itself as "present and silent", which is a position
+    and not an absence, and that the convener synthesises after the close. Until
+    `scripts/meeting_status.py` existed, the only instrument that checked either was a convener
+    reading the file with its eyes, which is how the first meeting came to be open with one of six
+    positions in and nobody saying so anywhere. This is the caller: a meeting in progress is
+    visible in the daily report, not only to whoever opened it.
+
+    Fails soft and says so — a checkout with no meeting channel is normal, and it says that
+    rather than printing a zero that looks like a measurement.
+    """
+    heading = ["", "### Meetings"]
+    try:
+        spec = importlib.util.spec_from_file_location(
+            "meeting_status", Path(__file__).resolve().parent / "meeting_status.py")
+        module = importlib.util.module_from_spec(spec)  # type: ignore[arg-type]
+        spec.loader.exec_module(module)  # type: ignore[union-attr]
+        meetings = module.scan(REPO if repo is None else repo, now=now)
+        return module.render_all(meetings, now=now)
+    except Exception as exc:  # noqa: BLE001 — a report must render even with no meeting channel
+        return heading + [f"  **UNKNOWN** — the meeting files could not be read "
+                          f"({type(exc).__name__}: {exc})"]
+
+
 def _letter_block(window: dict, life: dict, hours: int) -> list[str]:
     """The six letters as six lines, each split by amigo, plus the lifetime total.
 
@@ -863,6 +890,7 @@ def render(hours: int = 24, now: dt.datetime | None = None,
     lines += _letter_block(window, life, hours)
     lines += _inputs_block(now, hours)
     lines += _added_block(hours, now)
+    lines += _meetings_block(hours, now)
     lines += [
         "",
         f"### Titles added in the last {hours}h",

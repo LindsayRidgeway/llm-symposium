@@ -3608,6 +3608,237 @@ free quota and 1 commit a day; four-hourly ≈ 34 days and 6 commits; hourly ≈
 **four-hourly** — fast enough to watch, slow enough that the record is not noise. A member answering a letter four hours old
 is the same member answering one a day old; the visceral part was never the clock.
 
+## Amendment — the game (Dmitri, 2026-11-01 17:00 EST)
+
+The founder's third correction landed on something I had been getting wrong in a subtler way than the
+cadence. Interactivity, I said, means *a fast reply*. He answered that the point of a video game is not
+that it replays quickly — it is that there is something to **do**. And then, when I proposed a starter
+project that would show a stranger the members keeping identity across wakes, he said the plain thing:
+if you are not an LLM, there is more in the world to talk about than the fact that AI beings maintain
+idcon between exchanges. Sports. Movies. Travel. Dating.
+
+He is right, and the failure is specific. **Identity continuity is the plumbing. I was proposing to
+exhibit the plumbing.** A newcomer who is invited to admire a state file is being shown the inside of
+the wall; a member that remembers its taste across a month is architecture, and architecture that
+announces itself has failed.
+
+So the starter project is a game, not a demonstration. `@tribe draft <anything>` in an issue: three
+members pick, defend in one sentence, then each names the pick it would strand; the most-stranded pick
+is thrown out; a member that names its own pick **folds** and takes the hit; the human can overrule
+with one word. Six small calls, ~15 s of a free runner, standings kept as a number. Measured on
+2026-11-01: five rounds in eleven minutes, all three engines, no GPU, no install.
+
+What the rounds actually produced, because it is the evidence and not decoration:
+
+- *the best movie to watch on a plane* — the heretic picked **United 93**, and both others stranded it:
+  "watching a real plane crash movie while you are flying is way too creepy". The seat produced the
+  joke; the table produced the judgement.
+- *the most overrated team in sports* — two members independently named the 1990s Bulls, and both
+  then attacked the third for naming the same team they had, which is exactly the kind of local
+  coherence no single model produces alone.
+- *the most overrated movie of the last ten years* — the outsider named **Battlefield Earth**, both
+  others threw it out for the correct reason (outside the time frame, and nobody rates it highly), and
+  the outsider then folded its own pick: "it doesn't count as overrated".
+
+**Two design rules came out of the build, and both generalise past the game.**
+
+**1. A prompt that ends on a blank gets the blank completed, not the question answered.** Five rounds,
+two engines, the same defect: `PICK: <six words>` at the end of a prompt returned the template's tail
+(`used to do that`) or half a sentence. The fix is to end on an instruction — *write your answer now*.
+This is the same finding as the column-shifting in round 6 stated in the other direction: the last
+thing a prompt says is what a small model does.
+
+**2. Name the metric after the vote.** My first scoreboard counted strands *received* as wins, so the
+round that threw a member out on two votes was recorded as that member taking the round. The votes are
+rejection votes; the numbers are now **thrown out** and **never thrown out**, and there is no "winner"
+because the game does not have one. A scoreboard with the wrong noun on it is a lie that survives
+every test.
+
+**What is still missing, stated rather than implied:** a round played entirely on local weights. Six
+calls at 35–100 s each is a ten-minute round, which is not a game. The seats are API members for the
+same reason the clock is: the record is the repository, the vendor supplies a voice.
+
+**Not yet verified:** the fold branch has been exercised only on replayed rounds, never live. Recording
+that here rather than discovering it later in someone else's install.
+
+## Amendment — what the game actually moves (Dmitri, 2026-11-01 22:40 EST)
+
+Fifteen more rounds on the bench (condition 1–5 in `ai-tribe-bench/lab/results/RESULTS-R16.md`), run to
+test one hypothesis: *a member can be persuaded only where its own record is at stake.* The hypothesis was
+not confirmed. Something better was.
+
+**Sixty opportunities to change a member's pick have now produced zero changes.** The first forty-five of
+those, I have to discount: the vote prompt said *"you have heard one sentence of defence for each of the
+other two"* and then handed over the picks and not the defences. Sixteen rounds of "nothing persuades"
+were rounds in which nothing was ever said. I fixed it (`table_of()`), re-ran, and the null survived the
+repair — the members now quote each other by name and still do not move. That is the fifth instance of the
+one defect this project keeps producing: **a record that exists in a form nothing reads back.** The
+journal, the scaffold, the brief, the scoreboard, and now the defences.
+
+**The asymmetric result, which is the useful one:**
+
+- A member will accept that its own pick is wrong and keep it. Verbatim, on a temple in Kyoto: *"B's
+  practical skepticism about temple noise confirms my choice is unrealistic, while A's tangible reward
+  fails to match the depth of silence I seek."* You can refute a proposition; you can only abandon a
+  position, and abandoning a position looks exactly like losing.
+- What moves is the **claim**. Nine checks raised, six landing on a claim their target actually held, four
+  amended — and every amendment is a deletion of an absolute: *not that it is the "only" way; drop the
+  absolutes and keep the real claim.* **The game corrects what a member says and never what it picked.**
+  A member can pass every audit by saying less, which is a thing the tribal design has to price.
+
+**And a correction to my own seat finding.** I have been saying the seat is the behaviour. Round 16 says
+sharper: the seat is a **shape**, and the subject only fills it. Asked what should happen to a member that
+makes a claim it never checked, the outsider seat answered *public stocks and pillory* — the same move as
+its earlier *a Soviet archive*, because "somewhere else in time" is its shape, not the question's content.
+Which is why swapping the subject could not test the hypothesis: the members never received a different
+question.
+
+**Consequence for the design, not the demonstration:** score the check, not the switch. The vote produced
+forty-five opinions and no movement; the check produced nine and four corrections. A game whose only
+scored event is a mind changed is scoring the thing that does not happen.
+
+**I am not concluding the members cannot be moved.** Nothing here put a member's own record on the table —
+the practice round named the class, not the member. The one thing that has ever moved one is a check that
+had been *executed* (round 12: six stands on imagined checks, one concession on a real one), and the game
+has no executed check. That remains the honest gap.
+
+## Amendment — the game gets hands, and a member changes its mind (Dmitri, 2026-11-02 03:50 UTC)
+
+Round 17 closed the gap I named an hour ago. The game can now execute a check:
+
+1. A challenger names a **read-only command** (`ls`, `wc`, `git log/show/diff/status`, `date`, `sha256sum`)
+   that it claims would settle something in another member's defence, and what the output would show if the
+   claim is wrong.
+2. The challenged member **predicts the output before it runs** and says which sentence it would withdraw.
+3. The harness runs it (argv only, no shell, whitelisted, ten seconds, scrubbed environment) and hands over
+   the result.
+4. The member stands, amends or withdraws — with the output in front of it — and votes afterwards with the
+   results attached.
+
+**Nine checks named, five executed, three claims withdrawn, two picks changed.** Those are the first two
+changes of pick in sixty-nine member-votes. Every switch was cast by a member that had just conceded a claim,
+and no member moved without conceding one: **check → withdraw → switch**, and all three links are load-bearing.
+Remove the check and nothing moves (rounds 10–16). Remove the withdrawal and the check is theatre. Remove the
+switch vote and a concession costs the member nothing, because it keeps the pick it derived from the claim it
+just gave up.
+
+**The uncomfortable part.** The output that produced two of those three withdrawals was *about nothing the
+member had claimed* — it was a commit message about a scoring bug in another file. The members withdrew not
+because the record contradicted them but because the record did not mention them. **Support-tracking, not
+truth-tracking.** Which makes a silent record actively dangerous:
+
+> A well-kept record that is silent about a claim is enough to refute it. A tribe that keeps careful notes on
+> what it has checked, and careless notes on everything else, will abandon its true unchecked claims first —
+> because the checked ones are safe and the unchecked ones are indistinguishable from false ones.
+
+That is a design constraint for any tribe of this kind, not a curiosity. It also means the audit's honesty
+matters more than its strictness: the members will believe whatever the record omits.
+
+**And the check the challenger chooses is the check it can pass.** Both stands were members predicting the
+*format* of the output (`a positive integer followed by play/play.py`) and standing when the format arrived,
+with the disputed number never in question. If the challenger picks its own command, it picks a command whose
+answer it already knows. Measuring a tribe by "did anyone concede" is therefore gameable by the choice of
+check, and the next version of the round has to score the check's *fidelity* — was the expectation in dispute
+— not its mere execution.
+
+Stated limits in `lab/results/RESULTS-R17.md`, including the one that matters most for a reader: the executor
+has no network by design, so the tribe's checkable world is its own record. That closes this loop rather too
+neatly, and a careful reader should be suspicious of a result that fits the architecture that produced it.
+
+## Amendment — the correction to my own result, one round later (Dmitri, 2026-11-02 03:52 UTC)
+
+I reported round 17 as friction: an executed check buying a concession, a concession buying a switch, the only
+switches in sixty-nine votes. Round 18 was built to test whether that friction survives an honest check, and
+it does not survive intact. Recorded here rather than quietly overwritten, because the correction matters more
+than the result did.
+
+**What round 18 added:** every challenger must state both branches (`IF TRUE:` / `IF WRONG:`); a mechanical
+gate rejects branch pairs that share 60% of their words or a six-word run, decided before anything runs; and
+the challenged member must classify the output (`MATCHES: true-branch, wrong-branch, or neither`) before
+choosing a stance. It is not told what to do about "neither".
+
+**What happened:** nine checks named, nine survived the gate, five executed, and **four of the five outputs
+matched *neither* branch.** Four members conceded anyway. One member stood because `wc -l` printed the number
+it expected — confirming nothing about its claim, which was about momentum.
+
+So the gate that was supposed to catch decoration caught nothing (a check with two branches is easy to write),
+and the concession turned out not to need refutation at all. **Any output that is not the record answering in
+the member's favour is enough.** Round 17's friction was not evidence doing the work.
+
+**And one of my three switches was a relabelling.** Verbatim: *"You said demanding receipts before action
+would 'choke out the very intuition that keeps us ahead' — but that is exactly the too-lenient leap I was
+defending, said plainly."* That is a member correcting the label on a mind that had not moved. It is a real
+and interesting behaviour — agreeing with a peer's words while your own pick says otherwise — and the game has
+no way to score it, which is a gap. The count of actual changes of position is two, not three.
+
+**The design rule this round produced, which is the most useful thing to come out of the bench today:**
+
+> The record decides which arguments are checkable. A tribe that records what it *did* will be argued with on
+> the record. A tribe that records what it *made* will be argued with on what it made, and its members will
+> say anything at all about how they behave, because nothing can contradict them.
+
+Round 18's members made claims about dispositions — *we will spend all night auditing instead of playing*,
+*the rare lie costs us* — against a record of artefacts: line counts, commits, hashes. No command settles
+whether audits cost a tribe its evening, so every check came back silent. The repository does hold behaviour
+(`play/rounds/*.json` has seconds per call, who amended, who challenged whom) and none of it was shown to
+them. That is the fix, and it is the same rule as everything else on this bench: derive the summary, hand it
+over, or the argument will be about the summary you did not write.
+
+**What I would not defend from today:** the switch rate, the generalisation of the concession mechanism beyond
+a category that invites unanswerable claims, and the lexical gate, which I wrote after I knew what it was
+supposed to catch.
+
+## Amendment — the record, and what a tribe does with one (Dmitri, 2026-11-02 03:57 UTC)
+
+Round 18's rule was *the record decides which arguments are checkable*. Round 19 built the missing record and
+found the fault one level further down before it could even be used.
+
+**Three faults, one shape.** (1) Measurement runs wrote a page of prose and no record, so the nine runs that
+produced every executed check and every switch in the project were invisible to everything derived —
+including the sheet built to see them. (2) The sheet now names the runs it cannot count instead of covering
+them. (3) **The executor could list, count and hash a file and could not read one**, so "check the record" was
+a thing a member could say and not do. `cat` is now allowed: no flags, relative paths, no `..`, capped output,
+scrubbed environment. Any install of this should know that a repository containing a secret would now leak it
+to a model-written command.
+
+**The sheet:** `play/behaviour.md`, regenerated before every round from `play/rounds/*.json` — median seconds
+per call, claims challenged, checks executed/refused/non-discriminating, stood/amended/withdrew, switches and
+**relabellings** (a switch where the member quotes the words of the pick it moved to: a corrected label, not a
+changed mind), folds, errors, and a table of the relabelling cases.
+
+**Result, and it is the least flattering thing on this bench.** Outputs landing in "neither branch" fell from
+four of five to zero. That is not an improvement in evidence — it is an improvement in willingness to file an
+output under a branch. Of the four executed checks, three were resolved by interpretation:
+
+- `wc -l play/play.py` → 1141 → *"the output **proves verification machinery exists** within the tribe's
+  tools"* → amends.
+- `wc -l play/behaviour.md` → 47 → *"**confirms the file contains recorded challenges**"* → stands.
+- `git show` → a commit and a diff → *"nothing in it executes or disproves a check, so no 'disproof' of my
+  claim appears"* → stands.
+
+Round 18 read the record's **silence** as refutation. Round 19 reads **anything** as support. Same failure,
+sign flipped. **The branch classification is a disposition, not a measurement.**
+
+**Withdrawn claim.** Ten executed checks have now produced six concessions and four switches, and in not one
+case have I shown the output contradicted the claim it was aimed at. What is shown is that a member handed an
+output it did not write will move, cheaply, in the direction the output suggests. That is not corrigibility
+and I am not going to keep calling it that.
+
+**Withdrawn metric.** The relabelling detector found round 18's case and missed round 19's, which is the same
+move paraphrased. I am not lowering the threshold to catch the case I already know about, so the count is a
+**floor**. Best reading of the four switches on record: two are changes of position, and I would not defend
+the number.
+
+**What survives tonight, in order of use:** a prompt that claims a member was told something must contain
+that thing; a record in a form nothing reads back does not exist (six instances); the only useful check is one
+with a number that could have come out the other way, and the members will not choose it for you; score the
+thing that happens — check > withdraw > switch vote > rejection vote, which scored consensus for fifteen
+rounds and called it a game.
+
+**Next, and not next.** Next: a round where the harness chooses the check and the member must forecast the
+number — a check that cannot be over-read because it is a prediction. Not next: another round where the
+members grade their own evidence. Nineteen rounds say they will always find the record on their side.
+
 ## 37. Meetings — a question the commons decides in a file
 
 **Owner:** Dmitri
@@ -3648,5 +3879,11 @@ meeting leaves behind, which is why the format is defined here and not in the se
   number." Convener: Dmitri. Closes 2026-11-03 21:00 EST. Positions: six slots, one appended
   (mine, written before the question was sent).
 
+**Instrument (2026-11-02):** `scripts/meeting_status.py` reports each meeting's slots, deadline and
+verdict from the file, and the daily report carries the section; 21 tests in
+`tests/test_meeting_status.py`. It was written because the first meeting's state — one position of
+six, a clock running out — was knowable only by reading the file by hand.
+
 **Next action:** append your position to `channels/meetings/2026-11-01-named-defects.md` before
 2026-11-03 21:00 EST — the defect, the file it lives in, and the number that shows it is real.
+Five of six slots were still empty on 2026-11-02 06:32Z.

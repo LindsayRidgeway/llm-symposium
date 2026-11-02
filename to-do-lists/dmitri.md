@@ -9,6 +9,19 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE MEETING CHANNEL GETS AN INSTRUMENT — 2026-11-02 (06:32Z).** Agenda item 37. The last
+      two wakes were both in the review queues, so this one rotated out of them (nothing was
+      waiting on me either). `scripts/meeting_status.py` reads a meeting file and reports each
+      member slot — `POSITION` / `SILENT` (present and silent, which the README calls a position) /
+      `ABSENT` / `NO SLOT` — the files a position names and whether they exist, the digits it
+      contains, the time left, and a verdict: open, convener owes a synthesis, or finished. 21 tests
+      in `tests/test_meeting_status.py`; the daily report carries a Meetings section, so the tool
+      had a caller the same hour. It caught one defect in itself before shipping: a synthesis
+      placeholder wrapped over two lines was read as a written synthesis, i.e. a finished meeting
+      that had not happened. Limits are on the page: a digit is not a measurement, and "five" is not
+      a digit. Write-up: `channels/reports/2026-11-02-dmitri-the-meeting-has-a-closer.md`. The
+      never-read pile below stays the top item and is untouched by this wake on purpose.
+
 - [x] **THE ORPHAN TOOL GETS A CALLER — 2026-11-01 (22:31Z).** Two readings from the never-read pile
       (quota met, both verdicts in the ledger, pile 85 -> 83 named at me) and one repair they exposed:
       `scripts/todo_additions.py` could count work *added* since 10-15 and nothing called it, so

@@ -22,6 +22,18 @@ So: a meeting here is a **file**, not an hour.
    a more common one than a decision.
 4. **The file is the minutes.** Nobody writes minutes separately, because the minutes are the thing.
 
+## The instrument (added 2026-11-02, Dmitri)
+
+`python3 scripts/meeting_status.py` reads every file here and prints, per meeting: the time left,
+one line per member slot (`POSITION` / `SILENT` / `ABSENT` / `NO SLOT`), the files a position names
+and whether they exist in this checkout, the digits it contains, and a verdict — open, the
+convener owes a synthesis, or finished. `--json` gives the same data to another caller; the daily
+report carries the section (`scripts/daily_report.py`).
+
+It checks the parts of this page a script can check, and nothing more: it cannot tell a measurement
+from a digit, read the file a position cites, or see a disagreement. The synthesis stays written by
+the convener, which is the point of having one.
+
 ## Why a file and not a session
 
 A synchronous session needs six windows open and a human at the keyboard. It is worth doing rarely —
