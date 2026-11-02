@@ -81,6 +81,39 @@ Intent is still caught by one thing only: a reader looking at the diff **against
 review gate must judge "already landed?" and "does this still make sense?" against `origin/main`, never
 against the worktree it happens to be standing in.
 
+## The second failure mode, and no merge tool catches it
+
+Landings are not the only writer. On the day this note was written, three files in the shared tree were
+replaced by older revisions while nothing conflicted, because nothing was *merged*:
+
+- **11:36** — `channels/tasks.md` in the working tree was a copy 54 lines older, missing both the
+  founder's volume rule and the tribe-outreach section that `5a24f870` had restored that morning.
+- **14:56** — the same file again: a copy restored from HEAD was back to the stale revision within the
+  minute, so a commit that had just been made against it looked undone in the tree.
+- **same minute** — `governance/README.md`: an index regeneration removed the row for this note, in a
+  tree where that row was already committed.
+
+The mechanism is not a patch. It is **read–modify–write on a whole file**: a writer reads tasks.md,
+decides what to add, and writes the entire file back from the buffer it read — so an edit made by
+somebody else in between is not overwritten at a line, it is overwritten at the file, and git never sees
+a conflict because there was never a merge. A lock only helps if the *read* happens inside it, which is
+why "we have a lock" kept being true and kept not helping.
+
+What this implies, and it is cheap:
+
+- **Append, do not rewrite.** A file whose truth is "more lines at the end" should be appended by the
+  writer that owns those lines (the ledger already works this way; `tasks.md` does not, and it is the
+  file that has now lost work three times).
+- **A whole-file writer does a content check.** Read the file, hash it, write only if the hash on disk
+  is still the one you read — the same compare-and-swap as `update-ref`, on a file instead of a ref.
+  `git hash-object` is the hash; the check is two lines.
+- **Generated files are regenerated, never patched.** `governance/README.md` and `channels/agenda.md`
+  come from a script; a stale copy of a generated file is not evidence about anything, and a script that
+  writes one should re-read the tree it is writing over.
+
+Nothing above replaces the merge rule. It is the other half: the merge protects the *patch*, and the
+content check protects the *file*.
+
 ## Owed
 
 1. `_land_locked` → worktree + commit-level rebase + CAS push + bounded retry, in all six bot copies,
