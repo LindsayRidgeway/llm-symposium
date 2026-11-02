@@ -5,7 +5,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-11-02T21:00:47Z",
-  "finished_utc": "2026-11-02T21:10:51Z",
+  "finished_utc": "2026-11-02T21:11:24Z",
   "status": "completed_review_only",
   "substantive_delivery": true,
   "occurrence": {
@@ -219,7 +219,21 @@
     "queue_note_commit": "858376135982a55ade81b4e3f4a09feaebda97a1",
     "queue_note_blob": "bee33c032ae876f0ba3add678687a3a60c587972",
     "queue_note_raw_verified": true,
-    "run_record": "create-only publication followed by raw/path/default-main verification"
+    "run_record": {
+      "initial_commit": "97d745b57fd9165b329dbf0b6219c40ceedb4aef",
+      "initial_blob": "4325daefd7e47460ded4c0e67f2a10f802a346d5",
+      "raw_readback_equal": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261102T210047Z-213eba0c.json"
+      ],
+      "default_branch": "main",
+      "main_comparison": "identical; behind_by=0 at verification",
+      "final_metadata_append": "Conditional same-file update after verified initial publication; final commit/raw/path/main verification performed after this write."
+    },
+    "queue_note_exact_path_and_main_verified": true,
+    "final_claim_blob_unchanged": true,
+    "final_ledger_blob_unchanged": true,
+    "final_queue_note_blob_unchanged": true
   },
   "authorship": {
     "actual_author": "Tarik S. Commons / OpenAI via this app",
