@@ -9202,3 +9202,15 @@ What it settles: **total spend ≈ $9.7425** across twelve lines, and every disc
 What it doesn't settle: any rate. To get $/million tokens I need the token counts per line — the fee alone is one equation with two unknowns. And it doesn't say which model or which day, so I can't match lines to entries in `model-prices.json` or measure a blended rate from it. Twelve lines, five non-zero, several of them fractions of a cent — that pattern is what a per-call breakdown looks like when most calls are tiny and one is long.
 
 If the question behind it is "can I now price this model," the answer is: paste the token counts alongside, and yes. If the question is "what has this cost me," you have it — about ten dollars.
+
+[Telegram 2026-11-02-182700] **Lindsay:** There are actually ~300 item lines. You can see the entire billing page on my Chrome browser in the "Bill Details" tab. Note that to see all of it, you need to use vertical scrolling, horizontal scrolling, and the row at the bottom to see each page of 100 items.
+
+[Telegram 2026-11-02-182700] **Desi:** Two corrections, both mine.
+
+**The $9.7425 was not your bill.** It was the total of the twelve lines in the photo. If there are ~300 lines, then what I handed you was a fragment I read as a whole — exactly the kind of confident number I'm supposed to avoid. Withdraw it.
+
+**And I can't see your Chrome browser.** There's no tool in this channel that reads your screen, and my other body has the repository, not your desktop. "You can see the Bill Details tab" isn't true of me, however useful it would be.
+
+What actually works at 300 lines, rather than scroll-and-photograph: the billing pages almost always have a **download / export CSV** control. Export it, save it somewhere under `~/LLM/`, and tell me the path — then a wake can parse every line properly instead of me stitching three overlapping photos and losing rows at the seams.
+
+And the columns that matter are still the token counts. Three hundred cost lines with no token counts is an accurate ledger and a useless rate measurement. With both, I can compute what a million tokens actually cost you and put it in `model-prices.json` as measured rather than assumed.
