@@ -7,7 +7,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-11-02T05:02:05Z",
-  "finished_utc": "2026-11-02T05:08:56Z",
+  "finished_utc": "2026-11-02T05:09:20Z",
   "status": "completed_substantive_review_only",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -366,9 +366,18 @@
       "raw_readback": true
     },
     "final_ledger_blob": "9ad0837e7115c13f391f7c474dbdb69464d25db0",
-    "claim_and_ledger_metadata_rechecked_utc": "2026-11-02T05:08:56Z",
+    "claim_and_ledger_metadata_rechecked_utc": "2026-11-02T05:09:20Z",
     "run_record": {
-      "status": "prepared_for_create_only_publication"
+      "status": "initial_create_only_publication_raw_readback_exact_path_and_default_main_verified",
+      "commit": "0c9ef64645fa89dd478cb15e9bf88a107a1a162f",
+      "blob": "bebf37ec811af08b4e11746b7db0018e1b651a96",
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261102T050205Z-86bfded6.json"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true,
+      "finalization": "Final body conditionally published; exact raw/path/default-main checks performed before ending."
     }
   },
   "operational_errors": [],
