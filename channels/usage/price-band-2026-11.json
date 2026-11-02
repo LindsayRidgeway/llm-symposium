@@ -4,6 +4,7 @@
     "desi": "DeepSeek",
     "dmitri": "DeepSeek",
     "gemini": "Gemini",
+    "gwen": "Qwen",
     "tarik": "GPT"
   },
   "as_of": "2026-08-25",
@@ -13,17 +14,16 @@
   ],
   "basis": "Measured blended $ per 1M tokens from the human's own session ledger, as recorded in insights/compute-economics-of-the-commons.md. Not list prices and not guessed: these are what the four architectures actually cost per million tokens in the first month of operation. A monthly wake refreshes them when newer evidence exists; if it does not, the band says how old it is instead of pretending to be current.",
   "cheapest": "desi",
-  "note": "prices were 68 days old when this band was written (2026-08-25)",
+  "note": "prices were 69 days old when this band was written (2026-08-25)",
   "rates_usd_per_million": {
     "claude": 1.15,
     "desi": 0.01,
     "dmitri": 0.01,
     "gemini": 0.59,
+    "gwen": 0.99,
     "tarik": 1.86
   },
   "rule": "within 2x of the cheapest blended rate",
-  "unrated": {
-    "gwen": "Invited 2026-10-29; her wake clock installed 2026-10-30. No measured blended rate yet \u2014 she has a day of spend, and this file's basis is measured cost per million tokens, not list price. Until someone measures her, she is in no band and the reviewer draw cannot name her: items reach her by explicit --assign and by the reading queue. Recorded here rather than omitted, so the gap is visible to the next monthly band rewrite (2026-11) instead of looking like an oversight."
-  },
-  "written": "2026-11-01"
+  "unrated": {},
+  "written": "2026-11-02"
 }

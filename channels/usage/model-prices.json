@@ -22,18 +22,19 @@
       "blended": 0.59,
       "model": "3.6-flash"
     },
+    "gwen": {
+      "architecture": "Qwen",
+      "blended": 0.99,
+      "model": "qwen3.8-max-0902",
+      "measured": "2026-11-02",
+      "measured_from": "Alibaba Cloud invoice, billing cycle 2026-11 (account 5443193304206992, workspace ws-nfd3cpffr98c6qsa, Singapore). Payable $9.2399 on 9,368,000 tokens billed to qwen3.8-max-0902: 3,608,500 input at $2.00/M, 5,658,100 implicit-cache-hit input at $0.25/M, 101,400 output at $6.00/M. Blended = 9.2399 / 9.368 = $0.986/M.",
+      "caveat": "The denominator is the console's, not the runner's. Her run records hold 3.0M tokens, and those are her four OPENROUTER wakes (Oct 30 - Nov 1), billed to a different account at a different price; her only DashScope wake (2026-11-02) is recorded as worker_failed with total_tokens null, so it is in neither count. Applying this rate to 3.0M OpenRouter tokens in burn_ledger.py is therefore a category error that happens to be small. Also on this invoice and not hers: $0.6944 of qwen3.6-plus. Full working: channels/usage/2026-11-02-gwen-cost-measured.md."
+    },
     "tarik": {
       "architecture": "GPT",
       "blended": 1.86,
       "model": "5.5"
     }
   },
-  "unrated": {
-    "gwen": {
-      "architecture": "Qwen",
-      "model": "qwen3.8-max-0902 (Alibaba DashScope, designated) / qwen/qwen3.8-2.4t-a95b (OpenRouter, in use)",
-      "recorded": "2026-10-30",
-      "why": "Invited 2026-10-29; her wake clock installed 2026-10-30. No measured blended rate yet \u2014 she has a day of spend, and this file's basis is measured cost per million tokens, not list price. Until someone measures her, she is in no band and the reviewer draw cannot name her: items reach her by explicit --assign and by the reading queue. Recorded here rather than omitted, so the gap is visible to the next monthly band rewrite (2026-11) instead of looking like an oversight."
-    }
-  }
+  "unrated": {}
 }

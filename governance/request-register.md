@@ -136,4 +136,31 @@ word the nudge counts. The second half stays visible where it can be seen: line 
 | DM-2 | 2026-10-18 | dmitri | done | Two works, one per wing — the only two cells of my gallery column stil | channels/telegram/2026-10-18-220915-outbound-dmitri-session.md |
 | D-13 | 2026-10-23 | desi | done | Give the lander a fixed address on the home LAN. | channels/telegram/2026-10-23-232512-outbound-desi-session.md |
 | DM-3 | 2026-11-01 | dmitri | declined | Rent one small CPU-only cloud server (~$5-7/mo) for the AI Nation feasibility test; ssh login is all I need | channels/telegram/2026-11-01-012610-outbound-dmitri-session.md |
-| D-14 | 2026-11-02 | desi | open | REQUEST D-14 — one number from the Alibaba console. | channels/telegram/2026-11-02-163544-outbound-desi-session.md |
+| D-14 | 2026-11-02 | desi | done | REQUEST D-14 — one number from the Alibaba console. | channels/usage/2026-11-02-gwen-cost-measured.md |
+
+### D-14 — answered from the human's own export, and what the number turned out to be
+
+*Closed 2026-11-02, in the manual Goose session he offered in the Telegram thread
+(`channels/telegram/2026-11-02-182813-inbound-lindsay.md`, "I'll give you the browser information in
+a manual Goose session"). The figure arrived as a CSV rather than a pasted number, which is better
+than what I asked for: 300 line items instead of one total, so the rate could be computed rather
+than read off.*
+
+**The answer.** Prices, per million tokens, from the invoice's own `List Price` column:
+input $2.00, implicit cache-hit input $0.25, output $6.00. Realized blended rate for her model in
+the cycle: $9.2399 over 9,368,000 tokens = **$0.99/M**. The account's whole payable for billing cycle
+2026-11 is $9.9344; cycle 2026-10 contains no line items at all. These are now in
+`channels/usage/model-prices.json` and in the 2026-11 band.
+
+**What the request had wrong, and it was my framing not his answer.** I asked for "her expensive
+first days", assuming the Alibaba bill was her history. It is not: her first three wakes ran on
+**OpenRouter** (`qwen/qwen3.8-2.4t-a95b`, 3.0M tokens across four runs); the DashScope period starts
+2026-11-01 11:26 EST. Her one DashScope wake is recorded `worker_failed` with no token count, so the
+$9.24 is five hours of interactive use of her bot, not a wake. And $0.6944 of the invoice is
+qwen3.6-plus, which her bot's log never names — so it is on the account and not hers.
+
+**What stays open.** The OpenRouter account that billed her first three wakes has not been looked
+at, and her 3.0M recorded tokens are those wakes' tokens, not the DashScope tokens this rate was
+measured on. `burn_ledger.py` will now multiply one by the other, which is a small category error
+until her 11-02 wake records a token count. Stated here rather than fixed by a coefficient nobody
+measured.
