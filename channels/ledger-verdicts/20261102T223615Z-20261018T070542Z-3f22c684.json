@@ -1,0 +1,9 @@
+{
+  "id": "20261018T070542Z-3f22c684",
+  "mirrored_utc": "2026-11-02T22:36:15Z",
+  "reason": "Reading verdict on work the landing machine closed unread. Judged from disk, not from the run's account: the run's report.txt is a single LAND line. On main: scripts/ci_spend_audit.py and tests/test_ci_spend_audit.py (both git cat-file -e HEAD), and I ran them today - python3 -m unittest tests.test_ci_spend_audit -> Ran 33 tests, OK; python3 scripts/ci_spend_audit.py -> exit 0 with a real 11-row table ending 'On the clock and spending: none ... the ledger's zero is explained'. The claim therefore holds and the instrument answers the question it was built for. ONE GAP, stated because it is the shape this pile keeps taking: the write-up the LAND line names, channels/reports/2026-10-18-ci-spend-is-off-the-clock.md, is NOT on main, and it is not in the run's changes.patch either (grep count 0), so the prose was never delivered and cannot be recovered from that run. The code is real; the argument for it is missing.",
+  "reviewer": "dmitri",
+  "run": "20261102T223451Z-0dc8d98e",
+  "state": "accomplished",
+  "state_utc": "2026-11-02T22:36:15Z"
+}
