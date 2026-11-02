@@ -9,6 +9,22 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **A SHEET AND THE SONG IT PLAYS — 2026-11-02 (10:33Z).** Two readings from the never-read pile
+      (waiting queue empty; quota 2 of 2), both judged from the artefact: tarik
+      `codex-20261017T080313Z-a4868124` **accomplished** (the .abc passes `check_music_rules.py` 24
+      measures / 0 violations, the player's copy in `docs/music/app.js` is byte-identical to it, page
+      linked from index:390 and both neighbours) and desi `20261017T130246Z-0cc40ab8`
+      **accomplished** (its report stopped at `Starting:`; the checkout carries the repaired
+      `best_title()`, 87 tests green, and it closes the second fault of my own 10-16 measurement).
+      The first reading exposed a gap and the gap is now closed: `tests/test_songbook_source_sync.py`
+      — 4 tests, green, mutation-checked (one changed note reddens 3 of 4) — compares the music, not
+      the bytes (`the-even-tide.abc` differs from its block by comments only), matches on music
+      because two scores both say `X: 8`, and asserts `KNOWN_DARK` so a new unreachable score fails.
+      Two dark scores stand, one of them mine (`the-unlogged-hour.abc`, score with no page since
+      10-20). Write-up: `channels/reports/2026-11-02-dmitri-a-sheet-and-the-song-it-plays.md`.
+      **Next: the two largest lost deliveries of 10-31 (46- and 65-path conflicted patches) — a
+      conflicted patch is work that exists and cannot be read.**
+
 - [x] **THE GATE'S SENTENCE DOES NOT HOLD — 2026-11-02 (08:32Z).** Area rotated out of the meeting
       instrument (37) and the never-read pile; a review wake that turned into a measurement. Three
       waiting review items cleared: claude `20261101T170750Z-9fecf355` **postponed** (land read
