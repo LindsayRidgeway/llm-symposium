@@ -19,8 +19,11 @@ Three properties, all of them his, and all of them the reason this is a file rat
 
 Input:  `channels/usage/model-prices.json` — per-amigo blended $/1M tokens, hand-maintained, with
         its own `as_of` date and the source it came from.
-Output: `channels/usage/price-band-YYYY-MM.json` — the band, the rule, the rates, both dates, and a
-        staleness note when the prices behind it are old.
+Output: `channels/usage/price-band-YYYY-MM.json` — the band, the rule, the rates, both dates, a
+        staleness note when the prices behind it are old, and the `unrated` block carried through
+        from the input so that "in no band" can be told apart from "never measured". Until
+        2026-11-02 the second of those was silently dropped, which made a sixth amigo who arrived
+        in October invisible to every reader of the band.
 
 CLI:
     python3 scripts/price_band.py --write     # write this month's band (idempotent)
@@ -80,6 +83,13 @@ def build(data: dict, today: dt.date | None = None) -> dict:
             if 0 <= age <= STALE_DAYS else
             f"PRICES WERE STALE WHEN WRITTEN: the rates behind this band were {age} days old "
             f"({price_date}); refresh channels/usage/model-prices.json before trusting the band")
+    # Everyone the input file knows about and the band cannot name, carried out rather than
+    # dropped. Until 2026-11-02 this function read only `rates_usd_per_million` and silently
+    # discarded `unrated` — so the band file could not tell "expensive, so not in the band" apart
+    # from "nobody has measured this amigo", and a sixth participant who arrived in October was
+    # invisible to every reader of every band written since. Found while reading Gwen's own
+    # 2026-10-30 run, which said exactly that and had nowhere to say it in the file it measured.
+    unrated = data.get("unrated") or {}
     return {
         "as_of": price_date,
         "written": today.isoformat(),
@@ -87,6 +97,10 @@ def build(data: dict, today: dt.date | None = None) -> dict:
         "cheapest": cheapest,
         "band": band,
         "rates_usd_per_million": {who: rates[who]["blended"] for who in sorted(rates)},
+        # Names and reasons, never a guessed rate: the whole basis of this file is measured cost,
+        # so an unmeasured amigo must read as missing, not as cheap and not as expensive.
+        "unrated": {who: entry.get("why", "no reason recorded")
+                    for who, entry in sorted(unrated.items()) if who not in rates},
         # Carried in the band, not looked up separately: the reviewer draw needs to know which
         # amigos are the *same model* as well as which are cheap. A band of two DeepSeek bodies
         # can hand a Desi item to Dmitri and call it a second opinion, which it is not.
@@ -125,6 +139,8 @@ def main() -> int:
         band = build(load_prices())
         print(f"price_band: wrote {out.relative_to(REPO)} — band {', '.join(band['band'])} "
               f"(cheapest {band['cheapest']}, {band['rule']})")
+        for who in band["unrated"]:
+            print(f"price_band: note — {who} is in no band: {band['unrated'][who].splitlines()[0]}")
         if "STALE" in band["note"]:
             print(f"price_band: WARNING — {band['note']}")
         return 0
@@ -141,6 +157,11 @@ def main() -> int:
     for who, rate in data["rates_usd_per_million"].items():
         mark = " ←" if who in data["band"] else ""
         print(f"    {who:7s} ${rate:.2f}/M{mark}")
+    # Printed, never omitted: a reader who sees five names and a band of two must be able to
+    # tell that a sixth amigo exists and was never priced, or the draw's blind spot reads as
+    # "she is expensive" — the opposite of the truth, which is "nobody has measured her".
+    for who, why in (data.get("unrated") or {}).items():
+        print(f"  unrated: {who} — {why.splitlines()[0]}")
     print(f"  note:   {data['note']}")
     return 0
 

@@ -95,6 +95,91 @@ class TestTheBand(unittest.TestCase):
                 pb.load_prices(path)
 
 
+class TestTheUnratedAreCarriedNotDropped(unittest.TestCase):
+    """An amigo the file has no rate for must come out of the band named, not vanished.
+
+    The defect this covers (found 2026-11-02 while reading Gwen's 2026-10-30 run): `build()` read
+    only `rates_usd_per_million` and silently discarded `unrated`, so every written band was
+    indistinguishable between "expensive, so outside the band" and "nobody has ever measured this
+    amigo". Gwen was invited on 2026-10-29 and is in the second category; the band could not say
+    so, `--show` did not print her at all, and the draw that the band feeds therefore had a
+    blind spot with no record of having one.
+    """
+
+    def priced(self, rates, unrated=None, as_of="2026-08-25"):
+        data = prices(rates, as_of=as_of)
+        if unrated is not None:
+            data["unrated"] = unrated
+        return data
+
+    def test_an_unmeasured_amigo_is_named_in_the_band_and_is_not_in_it(self):
+        band = pb.build(self.priced({"desi": 0.01, "dmitri": 0.01},
+                                    {"gwen": {"why": "no measured blended rate yet"}}),
+                        dt.date(2026, 11, 2))
+        self.assertEqual(band["band"], ["desi", "dmitri"])
+        self.assertIn("gwen", band["unrated"])
+        self.assertIn("no measured blended rate", band["unrated"]["gwen"])
+        self.assertNotIn("gwen", band["rates_usd_per_million"])
+
+    def test_no_guess_is_made_for_an_unmeasured_amigo(self):
+        """The file's basis is measured cost. An unmeasured amigo gets a name, never a number."""
+        band = pb.build(self.priced({"desi": 0.01}, {"gwen": {"why": "unmeasured"}}),
+                        dt.date(2026, 11, 2))
+        self.assertNotIn("gwen", band["rates_usd_per_million"])
+        self.assertEqual(band["unrated"], {"gwen": "unmeasured"})
+
+    def test_expensive_and_unmeasured_are_different_states(self):
+        band = pb.build(self.priced({"desi": 0.01, "tarik": 1.86},
+                                    {"gwen": {"why": "unmeasured"}}), dt.date(2026, 11, 2))
+        self.assertNotIn("tarik", band["band"])       # priced, outside the band
+        self.assertNotIn("tarik", band["unrated"])
+        self.assertIn("gwen", band["unrated"])        # unpriced, in no band at all
+        self.assertNotIn("gwen", band["rates_usd_per_million"])
+
+    def test_a_file_with_nothing_unrated_gets_an_empty_map_not_a_missing_key(self):
+        band = pb.build(prices({"desi": 0.01}), dt.date(2026, 11, 2))
+        self.assertEqual(band["unrated"], {})
+
+    def test_an_unmeasured_name_that_someone_later_priced_is_not_listed_twice(self):
+        """A stale `unrated` entry beside a real rate must lose to the rate, not confuse the reader."""
+        data = prices({"desi": 0.01})
+        data["unrated"] = {"desi": {"why": "priced on 2026-10-30"}}
+        band = pb.build(data, dt.date(2026, 11, 2))
+        self.assertEqual(band["unrated"], {})
+        self.assertIn("desi", band["rates_usd_per_million"])
+
+    def test_the_written_file_carries_the_unrated_block(self):
+        with tempfile.TemporaryDirectory() as td:
+            usage = Path(td)
+            data = prices({"desi": 0.01})
+            data["unrated"] = {"gwen": {"why": "no measured blended rate yet"}}
+            (usage / "model-prices.json").write_text(json.dumps(data), encoding="utf-8")
+            out = pb.write(usage, dt.date(2026, 11, 2))
+            written = json.loads(out.read_text(encoding="utf-8"))
+            self.assertIn("gwen", written["unrated"])
+            self.assertNotIn("gwen", written["rates_usd_per_million"])
+
+
+class TestTheShippedBandNamesItsBlindSpot(unittest.TestCase):
+    """The band on disk must still say who it cannot name — the regression guard."""
+
+    def test_the_shipped_band_carries_the_unrated_map(self):
+        latest = pb.newest()
+        data = json.loads(latest.read_text(encoding="utf-8"))
+        self.assertIn("unrated", data,
+                      "regenerate with scripts/price_band.py --write: the band predates the "
+                      "unrated block and reads as a complete roster of five")
+
+    def test_every_shipped_amigo_is_either_priced_or_named_unrated(self):
+        data = pb.load_prices()
+        latest = json.loads(pb.newest().read_text(encoding="utf-8"))
+        priced = set(data["rates_usd_per_million"])
+        known = priced | set(data.get("unrated") or {})
+        self.assertEqual(known - priced, set(latest["unrated"]) - priced,
+                         "an amigo in the price file is in neither the rates nor the band's "
+                         "unrated map, so the band cannot say where she went")
+
+
 class TestTheRealPriceFile(unittest.TestCase):
     """The shipped table must be readable, sourced, and dated — not a placeholder."""
 

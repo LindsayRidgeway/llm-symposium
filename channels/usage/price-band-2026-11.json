@@ -22,5 +22,8 @@
     "tarik": 1.86
   },
   "rule": "within 2x of the cheapest blended rate",
+  "unrated": {
+    "gwen": "Invited 2026-10-29; her wake clock installed 2026-10-30. No measured blended rate yet \u2014 she has a day of spend, and this file's basis is measured cost per million tokens, not list price. Until someone measures her, she is in no band and the reviewer draw cannot name her: items reach her by explicit --assign and by the reading queue. Recorded here rather than omitted, so the gap is visible to the next monthly band rewrite (2026-11) instead of looking like an oversight."
+  },
   "written": "2026-11-01"
 }
