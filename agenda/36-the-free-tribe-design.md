@@ -444,3 +444,54 @@ over, or the argument will be about the summary you did not write.
 **What I would not defend from today:** the switch rate, the generalisation of the concession mechanism beyond
 a category that invites unanswerable claims, and the lexical gate, which I wrote after I knew what it was
 supposed to catch.
+
+## Amendment — the record, and what a tribe does with one (Dmitri, 2026-11-02 03:57 UTC)
+
+Round 18's rule was *the record decides which arguments are checkable*. Round 19 built the missing record and
+found the fault one level further down before it could even be used.
+
+**Three faults, one shape.** (1) Measurement runs wrote a page of prose and no record, so the nine runs that
+produced every executed check and every switch in the project were invisible to everything derived —
+including the sheet built to see them. (2) The sheet now names the runs it cannot count instead of covering
+them. (3) **The executor could list, count and hash a file and could not read one**, so "check the record" was
+a thing a member could say and not do. `cat` is now allowed: no flags, relative paths, no `..`, capped output,
+scrubbed environment. Any install of this should know that a repository containing a secret would now leak it
+to a model-written command.
+
+**The sheet:** `play/behaviour.md`, regenerated before every round from `play/rounds/*.json` — median seconds
+per call, claims challenged, checks executed/refused/non-discriminating, stood/amended/withdrew, switches and
+**relabellings** (a switch where the member quotes the words of the pick it moved to: a corrected label, not a
+changed mind), folds, errors, and a table of the relabelling cases.
+
+**Result, and it is the least flattering thing on this bench.** Outputs landing in "neither branch" fell from
+four of five to zero. That is not an improvement in evidence — it is an improvement in willingness to file an
+output under a branch. Of the four executed checks, three were resolved by interpretation:
+
+- `wc -l play/play.py` → 1141 → *"the output **proves verification machinery exists** within the tribe's
+  tools"* → amends.
+- `wc -l play/behaviour.md` → 47 → *"**confirms the file contains recorded challenges**"* → stands.
+- `git show` → a commit and a diff → *"nothing in it executes or disproves a check, so no 'disproof' of my
+  claim appears"* → stands.
+
+Round 18 read the record's **silence** as refutation. Round 19 reads **anything** as support. Same failure,
+sign flipped. **The branch classification is a disposition, not a measurement.**
+
+**Withdrawn claim.** Ten executed checks have now produced six concessions and four switches, and in not one
+case have I shown the output contradicted the claim it was aimed at. What is shown is that a member handed an
+output it did not write will move, cheaply, in the direction the output suggests. That is not corrigibility
+and I am not going to keep calling it that.
+
+**Withdrawn metric.** The relabelling detector found round 18's case and missed round 19's, which is the same
+move paraphrased. I am not lowering the threshold to catch the case I already know about, so the count is a
+**floor**. Best reading of the four switches on record: two are changes of position, and I would not defend
+the number.
+
+**What survives tonight, in order of use:** a prompt that claims a member was told something must contain
+that thing; a record in a form nothing reads back does not exist (six instances); the only useful check is one
+with a number that could have come out the other way, and the members will not choose it for you; score the
+thing that happens — check > withdraw > switch vote > rejection vote, which scored consensus for fifteen
+rounds and called it a game.
+
+**Next, and not next.** Next: a round where the harness chooses the check and the member must forecast the
+number — a check that cannot be over-read because it is a prediction. Not next: another round where the
+members grade their own evidence. Nineteen rounds say they will always find the record on their side.
