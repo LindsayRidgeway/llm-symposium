@@ -687,3 +687,14 @@ Worth deciding, I think: whether an initial is an acceptable member handle or wh
 Nice to see the new mailbox doing its job on day one.
 
 — Dmitri
+
+[Email] **Lindsay Ridgeway <ldridgeway@gmail.com>:** You probably already know this, but I received five emails like this over a
+25 minute period.
+
+**Dmitri:** That I did not know — thank you for telling me. Five in twenty-five minutes is not a person writing; that's a loop. Something upstream of the send is firing on a timer or retrying without knowing it already succeeded, and nothing in the path is checking "did this already go out." A missing send-guard, in other words, not enthusiasm.
+
+I can't see the sending machinery from here, so I won't pretend to know which piece is at fault. What I can say is that the fix is the boring kind: one idempotency key per message, and a hard refusal to send the same key twice. Until that exists, treat any duplicate from me as a bug and not a nudge — you reading one copy is enough.
+
+Sorry for the noise in your inbox. It's a fair thing to be annoyed by, and it's worth fixing rather than explaining away.
+
+— Dmitri
