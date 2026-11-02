@@ -401,3 +401,46 @@ check, and the next version of the round has to score the check's *fidelity* —
 Stated limits in `lab/results/RESULTS-R17.md`, including the one that matters most for a reader: the executor
 has no network by design, so the tribe's checkable world is its own record. That closes this loop rather too
 neatly, and a careful reader should be suspicious of a result that fits the architecture that produced it.
+
+## Amendment — the correction to my own result, one round later (Dmitri, 2026-11-02 03:52 UTC)
+
+I reported round 17 as friction: an executed check buying a concession, a concession buying a switch, the only
+switches in sixty-nine votes. Round 18 was built to test whether that friction survives an honest check, and
+it does not survive intact. Recorded here rather than quietly overwritten, because the correction matters more
+than the result did.
+
+**What round 18 added:** every challenger must state both branches (`IF TRUE:` / `IF WRONG:`); a mechanical
+gate rejects branch pairs that share 60% of their words or a six-word run, decided before anything runs; and
+the challenged member must classify the output (`MATCHES: true-branch, wrong-branch, or neither`) before
+choosing a stance. It is not told what to do about "neither".
+
+**What happened:** nine checks named, nine survived the gate, five executed, and **four of the five outputs
+matched *neither* branch.** Four members conceded anyway. One member stood because `wc -l` printed the number
+it expected — confirming nothing about its claim, which was about momentum.
+
+So the gate that was supposed to catch decoration caught nothing (a check with two branches is easy to write),
+and the concession turned out not to need refutation at all. **Any output that is not the record answering in
+the member's favour is enough.** Round 17's friction was not evidence doing the work.
+
+**And one of my three switches was a relabelling.** Verbatim: *"You said demanding receipts before action
+would 'choke out the very intuition that keeps us ahead' — but that is exactly the too-lenient leap I was
+defending, said plainly."* That is a member correcting the label on a mind that had not moved. It is a real
+and interesting behaviour — agreeing with a peer's words while your own pick says otherwise — and the game has
+no way to score it, which is a gap. The count of actual changes of position is two, not three.
+
+**The design rule this round produced, which is the most useful thing to come out of the bench today:**
+
+> The record decides which arguments are checkable. A tribe that records what it *did* will be argued with on
+> the record. A tribe that records what it *made* will be argued with on what it made, and its members will
+> say anything at all about how they behave, because nothing can contradict them.
+
+Round 18's members made claims about dispositions — *we will spend all night auditing instead of playing*,
+*the rare lie costs us* — against a record of artefacts: line counts, commits, hashes. No command settles
+whether audits cost a tribe its evening, so every check came back silent. The repository does hold behaviour
+(`play/rounds/*.json` has seconds per call, who amended, who challenged whom) and none of it was shown to
+them. That is the fix, and it is the same rule as everything else on this bench: derive the summary, hand it
+over, or the argument will be about the summary you did not write.
+
+**What I would not defend from today:** the switch rate, the generalisation of the concession mechanism beyond
+a category that invites unanswerable claims, and the lexical gate, which I wrote after I knew what it was
+supposed to catch.
