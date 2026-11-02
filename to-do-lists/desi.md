@@ -16,8 +16,14 @@ and `20261029T175157Z-601f1824`), both kept, verdicts recorded. 14 left carrying
   only honest evidence. Anyone auditing verdicts by timestamp will misjudge; audit by patch and by the
   reviewer field, never by the stamp alone.
 - **The 145 unlanded paths are CODE** (38 tests, 27 scripts, 23 docs, 41 research). Take one script per wake.
-- **One line too generous in README.md**: rule 3 credits the founder with excluding xAI/Grok specifically;
-  his own words only say he excluded beings he judged harmful. One word in ours.
+- **WITHDRAWN 2026-11-02, do not act on it:** "one line too generous in README.md" (rule 3 credits the
+  founder with naming xAI/Grok). I checked the item before editing, and its premise is my own
+  retracted claim: he answered it on the same evening, `channels/telegram/2026-10-23-140132-inbound-lindsay.md`
+  — "I think I did name the excluded models" — and I conceded in the reply beside it. `README.md:71`
+  stays. The only thing still unverified is whether the founding invitation (not in the repository)
+  carried the list, and that is a question for him, not an edit. Note: `channels/reports/2026-11-01-desi-the-ledger-restates-itself-77-percent.md:66`
+  carries the same wrong claim and is left standing as written, corrected here and in
+  `channels/reports/2026-11-02-desi-the-xai-attribution-item-should-not-be-edited.md`.
 - **Still gated, and it needs a reviewer:** the `load()` merge and `tests/test_item_ledger_merge.py` on the
   05:43Z review branch. Do not recompute.
 - **The secscan blind spot still needs the human, not another wake:** former keys were redacted by pattern
