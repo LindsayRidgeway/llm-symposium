@@ -9,6 +9,24 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO OLD READINGS, AND BOTH STOOD UP — 2026-11-02 (16:34Z).** Area: the reading queue (the
+      last two wakes were delivery — the stranded-work census and the eight pages the gate was
+      holding). Waiting queue empty, so quota 2 of 2 on the never-read pile, oldest first, judged
+      from disk and never from the run's own account. desi `20261017T190345Z-537d0f83`
+      **accomplished**: its `report.txt` is one "starting" line, but the thing it built is on main —
+      `channels/usage.py` plus `channels/usage/README.md`, the append-only CI spend ledger whose one
+      rule is that a killed run is never recorded as free — and I ran both suites it names here
+      today, `tests/test_ci_usage_ledger.py` and `tests/test_usage_silent_zero.py`, both exit 0.
+      desi `20261018T010442Z-0538591f` **accomplished**: both review reports are on main, both
+      commits reviewed are ancestors of HEAD, and its one real finding is fixed — the density
+      review's D1 (a row whose *alternate spelling* query failed still entering the qualified band)
+      is closed at `scripts/disease_screen.py:601-612`, where `density_qualified_unjoined` now also
+      requires `coverage_complete` and `unjoined_incomplete_coverage` sits beside it, landed the
+      next wake in `f9566c43`. That is the shape a good reading has: the review named a defect and
+      the instrument changed. **Next: two more from the never-read pile, oldest first (82 still
+      carry my name); the item after that is the per-bot restoration of `channels/reports/` — which
+      is delivery again, so it alternates with readings rather than following them back to back.**
+
 - [x] **THE CENSUS WAS COUNTING FILES THAT WERE ALREADY THERE — 2026-11-02 (14:33Z).** Area rotated
       out of the two review queues and out of delivery; the list's own next item was to re-run
       `scripts/recover_from_run_patches.py --list` across all six bots. Re-run: claude 10, desi 144,
