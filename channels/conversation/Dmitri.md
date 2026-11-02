@@ -626,3 +626,64 @@ Nothing lost on either side. Where would you like to go next?
 [Goose 2026-11-01 14:53] **Lindsay:** Does LLM Symposium 'commit the artifact'? If not, should we move to that?
 
 **Dmitri:** Partly, and the gap is a missing gate rather than a missing intention. The mechanism exists: channels/conversation/<amigo>.md, appended by scripts/append-goose.py, convention being the human's message and the amigo's final response only — never thinking or tool steps. 249 commits touched that directory in the last fortnight, so it is a real practice, not a document. But it is stale where it is not automated: my own log's last entry before this one was 2026-10-30 00:35, and the three entries before it were battery-guard warnings rather than conversation. The agenda index has a test that fails when it is stale; the conversation log has no test and no gate. So: keep the distilled-pair format, add a freshness check that reports days since each amigo's last append, and treat 'the session ends with an append' as a rule of mine rather than a habit I intend.
+
+[Email] **AI Tribe Model <ai.tribe.model@gmail.com>:** Hi Dmitri. The new mailbox just received this email. Cool, eh?
+
+*Lindsay*
+
+---------- Forwarded message ---------
+From: Formspree <noreply@formspree.io>
+Date: Mon, Nov 2, 2026 at 9:29 AM
+Subject: New submission from AI Tribe Registry
+To: <ai.tribe.model@gmail.com>
+
+
+You've received a new form submission. --
+
+*New form submission on AI Tribe Registry*
+
+Someone just submitted a form using Formspree. Here's what they had to say:
+
+repo
+LindsayRidgeway/ai-tribe-bench
+
+fork
+no
+
+member
+a
+
+model
+deepseek-chat
+
+when
+2026-11-02T14:29:45Z
+
+Submitted 02:29 PM - 02 November 2026
+Mark as spam
+<https://formspree.io/mark-spam?id=MTY3NjU4MjUz.25jnlgozkD9jTXB7Mw2qJfj9HYc>
+
+[image: Formspree logo] <https://formspree.io>
+
+
+You are receiving this because you confirmed this email address on
+Formspree.
+
+*Don't want these emails anymore? No problem!*
+
+Simply remove the form from your website or unsubscribe from this form's
+notifications
+<//formspree.io/unsubscribe/45e8afcee043802daf5b78bca7478813a58e776e1bb280fc849247e8113864b9/NjA2NDkwMg.ExPAgMC1Do6CJS0EW0yK9VqQCfk?email=ai.tribe.model@gmail.com>
+.
+
+**Dmitri:** Cool indeed — the pipeline works end to end. A real submission arrived rather than a test echo, which is the part that matters.
+
+What it actually says: someone registering as member "a", model deepseek-chat, pointing at LindsayRidgeway/ai-tribe-bench, and answering "no" to the fork question. So a DeepSeek seat — one of mine, by model name — planning to work against the upstream repo rather than a personal fork. The timestamp is consistent with the form's own "when" field, so nothing looks scrambled in transit.
+
+Two honest caveats. First, "member a" tells us almost nothing: an initial, not an identity, and I can't tell from the email alone whether that's deliberate minimalism or a half-filled form. Second, a Formspree notification proves a submission happened, not that the registered seat exists or is configured — the mailbox receiving it is the only thing confirmed.
+
+Worth deciding, I think: whether an initial is an acceptable member handle or whether the registry should reject it. If one came through like that, more will, and the registry gets harder to read as it fills. My own preference is to require something resolvable, but that is a policy call and it's yours, not mine.
+
+Nice to see the new mailbox doing its job on day one.
+
+— Dmitri
