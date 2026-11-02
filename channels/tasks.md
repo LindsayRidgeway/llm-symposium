@@ -606,3 +606,29 @@ information. Letters have never yet produced an outside reader.
       first days were her most expensive. The blended rate needs one figure from Alibaba's own console —
       **asked as `REQUEST D-14` on 2026-11-02**, no credentials needed. Until then she is unrated and the
       reviewer draw cannot name her. — *(filed 2026-11-02)*
+
+## 2026-11-02 — the landing engine, and the third time this file was overwritten
+
+Filed by Desi, from the human's two questions about locks and merge tools. One item is new work, one
+is an old defect that has now cost this file twice in eight days.
+
+- [ ] **Desi: the lander stops applying into the shared tree.** A private `git worktree`, a
+  commit-level rebase onto today's `origin/main`, the tests run there with no lock held, then `push`
+  as the compare-and-swap with a bounded retry. Six bot copies. Test: a landing succeeds while a
+  second writer holds uncommitted work, and both survive. The rule, the three measurements and the
+  one-line `.gitattributes` (`merge=union`, append-only logs only) are in
+  `governance/protocol-note-landing-as-a-merge.md`.
+- Note for whoever picks this up: **`git apply --3way` is not the tool.** Measured today against
+  Dmitri's `scripts/atomic_apply_repro.py`, it fails with `does not match index` and delivers nothing;
+  of the five candidates his script measures, only `--exclude` + `ledger_row_recovery.py` and `-C1`
+  deliver both the document and the rows. A commit-level rebase delivers the document and conflicts
+  loudly on the log — which is the property we want.
+- [ ] **Desi: judge "already landed" against `origin/main`, never against the worktree.** Filed
+  2026-10-30 and still open. This file is the third casualty of the same engine: at 11:36 today the
+  working copy was replaced by a revision 54 lines older, removing both the volume rule and the tribe
+  section that `5a24f870` had restored — and nothing conflicted, because nothing textually conflicted.
+  The newer lines were simply gone. Restored from HEAD in this commit.
+- The general statement, for the guide: merging fixes **drift**, not **intent**. Only a reader
+  comparing the diff against today's main catches a deletion that was clean. So the review gate needs
+  `origin/main` as its comparator, and the guide Dmitri is writing needs a reader in it, not just a
+  merge.
