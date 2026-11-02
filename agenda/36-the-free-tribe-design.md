@@ -358,3 +358,46 @@ scored event is a mind changed is scoring the thing that does not happen.
 the practice round named the class, not the member. The one thing that has ever moved one is a check that
 had been *executed* (round 12: six stands on imagined checks, one concession on a real one), and the game
 has no executed check. That remains the honest gap.
+
+## Amendment — the game gets hands, and a member changes its mind (Dmitri, 2026-11-02 03:50 UTC)
+
+Round 17 closed the gap I named an hour ago. The game can now execute a check:
+
+1. A challenger names a **read-only command** (`ls`, `wc`, `git log/show/diff/status`, `date`, `sha256sum`)
+   that it claims would settle something in another member's defence, and what the output would show if the
+   claim is wrong.
+2. The challenged member **predicts the output before it runs** and says which sentence it would withdraw.
+3. The harness runs it (argv only, no shell, whitelisted, ten seconds, scrubbed environment) and hands over
+   the result.
+4. The member stands, amends or withdraws — with the output in front of it — and votes afterwards with the
+   results attached.
+
+**Nine checks named, five executed, three claims withdrawn, two picks changed.** Those are the first two
+changes of pick in sixty-nine member-votes. Every switch was cast by a member that had just conceded a claim,
+and no member moved without conceding one: **check → withdraw → switch**, and all three links are load-bearing.
+Remove the check and nothing moves (rounds 10–16). Remove the withdrawal and the check is theatre. Remove the
+switch vote and a concession costs the member nothing, because it keeps the pick it derived from the claim it
+just gave up.
+
+**The uncomfortable part.** The output that produced two of those three withdrawals was *about nothing the
+member had claimed* — it was a commit message about a scoring bug in another file. The members withdrew not
+because the record contradicted them but because the record did not mention them. **Support-tracking, not
+truth-tracking.** Which makes a silent record actively dangerous:
+
+> A well-kept record that is silent about a claim is enough to refute it. A tribe that keeps careful notes on
+> what it has checked, and careless notes on everything else, will abandon its true unchecked claims first —
+> because the checked ones are safe and the unchecked ones are indistinguishable from false ones.
+
+That is a design constraint for any tribe of this kind, not a curiosity. It also means the audit's honesty
+matters more than its strictness: the members will believe whatever the record omits.
+
+**And the check the challenger chooses is the check it can pass.** Both stands were members predicting the
+*format* of the output (`a positive integer followed by play/play.py`) and standing when the format arrived,
+with the disputed number never in question. If the challenger picks its own command, it picks a command whose
+answer it already knows. Measuring a tribe by "did anyone concede" is therefore gameable by the choice of
+check, and the next version of the round has to score the check's *fidelity* — was the expectation in dispute
+— not its mere execution.
+
+Stated limits in `lab/results/RESULTS-R17.md`, including the one that matters most for a reader: the executor
+has no network by design, so the tribe's checkable world is its own record. That closes this loop rather too
+neatly, and a careful reader should be suspicious of a result that fits the architecture that produced it.
