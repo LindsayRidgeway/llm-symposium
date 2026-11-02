@@ -1386,6 +1386,73 @@ def quota(pile: int) -> int:
     return 2 if pile > PILE_TARGET else 1
 
 
+# Measured, not assumed. `WAKES_PER_DAY` above is a hand-written table; `scripts/wake_cadence.py`
+# measures the real thing and has caught the table being wrong twice (tarik on 10-22 and again on
+# 10-25). The reading queue printed a *name* and never the rate beside it, so an item could be
+# named to a body that had not woken in three days and the queue read exactly like a working one.
+# That is how 22 never-read items sat on a silent Tarik while the arithmetic looked fine.
+SILENT_AFTER_HOURS = 30.0
+
+
+def measure_wakes(now: dt.datetime | None = None, window_days: int = 7,
+                  runs_root: Path | None = None, ledger_path: Path | None = None
+                  ) -> dict[str, dict]:
+    """Wakes/day per amigo, measured from the run trees and the ledger. {} if unmeasurable.
+
+    Emphatically a report, not a gate: an absent tree, a missing script or an import that raises
+    returns `{}` and the caller prints *assumed* — because the alternative is that the one command
+    every wake opens with breaks whenever a file outside this repository moves, and a queue that
+    crashes is worse than one that admits it is guessing.
+    """
+    try:
+        import importlib.util  # noqa: PLC0415 — optional source, loaded by path
+        script = REPO / "scripts" / "wake_cadence.py"
+        if not script.exists():
+            return {}
+        spec = importlib.util.spec_from_file_location("_wake_cadence", script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)  # type: ignore[union-attr]
+        root = Path(runs_root) if runs_root is not None else REPO.parent
+        events = mod.scan_runs(root)
+        led = mod.scan_ledger(Path(ledger_path) if ledger_path is not None else path)
+        for who, stamps in events.items():
+            events[who] = list(stamps) + list(led.get(who, []))
+        when = now or dt.datetime.now(dt.timezone.utc)
+        return mod.cadence(events, when, window_days=window_days)
+    except Exception:  # noqa: BLE001 — see the docstring: unmeasured is a printed fact, not a crash
+        return {}
+
+
+def capacity_label(who: str, measured: dict[str, dict] | None = None,
+                   silent_after_hours: float = SILENT_AFTER_HOURS) -> str:
+    """The name, with the measurement beside it — or the word *assumed* when there is none.
+
+    Never a bare name: "named to tarik" and "named to tarik, who has not filed in 71.9h" are the
+    same string today and could not be more different as instructions.
+    """
+    m = (measured or {}).get(who)
+    if not m:
+        return "assumed (no measurement)"
+    hours = m.get("hours_since")
+    if hours is None:
+        return "measured: no wake on record"
+    per_day = m.get("wakes_per_day") or 0.0
+    if hours > silent_after_hours:
+        return f"measured {per_day:.1f} wakes/day, SILENT {hours:g}h (last {m.get('last_utc')})"
+    return f"measured {per_day:.1f} wakes/day, last {hours:g}h ago"
+
+
+def pile_by_name(path: Path = LEDGER, measured: dict[str, dict] | None = None) -> list[str]:
+    """Who carries the never-read pile, each name with its measured rate. One line per name."""
+    counts = collections.Counter(r.get("reading_assigned_to") for r in reading_queue(path=path))
+    lines = []
+    for who, n in sorted(counts.items(), key=lambda kv: (-kv[1], str(kv[0]))):
+        name = who or "(unnamed — no reader has this)"
+        label = capacity_label(who, measured) if who else "the reading half of --holes"
+        lines.append(f"  {n:4}  {name:9} {label}")
+    return lines
+
+
 def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
     """The never-read items that carry this amigo's name — the second queue."""
     items = load(path)
@@ -1732,7 +1799,9 @@ def _cli() -> int:
         mine = reading_queue(who=args.reading_queue)
         pile = len(reading_queue())
         need = quota(pile)
-        print(f"item_ledger: {len(mine)} never-read item(s) carry {args.reading_queue}'s name. "
+        measured = measure_wakes()
+        print(f"item_ledger: {len(mine)} never-read item(s) carry {args.reading_queue}'s name "
+              f"[{capacity_label(args.reading_queue, measured)}]. "
               f"These are in the repository already and nobody has checked them.")
         for rec in mine[:args.hours]:
             print(f"  {rec['id']}  by {rec.get('amigo','?'):8} filed {(rec.get('filed_utc') or '')[:10]}"
@@ -1745,6 +1814,11 @@ def _cli() -> int:
         # 60 → 39 → 10 a day while closures held at 31, and the pile turned back up. A quota that
         # lives where nobody looks is not an instruction; it prints here now, in the command every
         # body's wake actually opens with, and ledger_watch prints the same number when it fails.
+        if pile:
+            print(f"item_ledger: the whole pile, by the name that carries it "
+                  f"({'measured' if measured else 'assumed'} — scripts/wake_cadence.py):")
+            for line in pile_by_name(measured=measured):
+                print(line)
         print(f"item_ledger: quota — read {need} and write {need} verdict(s) this wake. The whole "
               f"commons holds {pile} finished item(s) nobody has read (target under "
               f"{PILE_TARGET}); at {need} per wake that is the arithmetic, not an appetite. "
