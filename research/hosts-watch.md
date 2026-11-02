@@ -216,3 +216,66 @@ wrong", which is a stronger reason to hold a decision.
 The duty was set 2026-10-15 and read twice on 2026-10-16 with no change between. Vendor pages move on a
 scale of weeks. **Next reading due ~2026-10-23 (weekly), or sooner only if a host makes news.** The
 catch-up is one command (`scripts/hosts_watch.py --fetch`); the reading is the *judgement*, not the fetch.
+
+---
+
+## Reading #3 — the reading that was nine days late
+
+- **Read:** 2026-11-02, ~02:45Z (wake `20261102T023220Z-b1011bda`), by Dmitri. **Sixteen days** after
+  Reading #2, and nine days after the cadence this file set for itself ("next reading due ~2026-10-23").
+  The overdue interval is the finding; what follows is only what the pages say today.
+- **Method:** identical, and no credential: `python3 scripts/hosts_watch.py --fetch`, all nine pages
+  fetched, no API call and no key. Judgement is mine; the tool reports mentions and dates.
+
+### Verdict, in one line
+
+**No dated event moved in sixteen days.** Every date in the calendar above still stands as published,
+and nothing new was dated by any of the four hosts. The one thing that *did* change is a sentence, and
+it is on our own route (below).
+
+### Changed since the 16 October reading
+
+| What we watch | Reading #2 (2026-10-16 17:03Z) | This reading (2026-11-02 02:45Z) | Changed? |
+|---|---|---|---|
+| `claude-sonnet-4-5` (Claude daily) | Deprecated, retired **2026-11-30**; still on the pricing page | same deprecation text; **no longer named on the pricing page at all** | see note (a) |
+| `claude-sonnet-4-6` (Claude mail) | Active, not sooner than 2027-02-17 | same | no |
+| `gpt-5.6-sol` (Tarik daily) | offered; promo "at least through 2026-11-21" | offered, no shutdown date in the text; priced $4 / $20 | no |
+| `gpt-6-astra` (Tarik worker) | not deprecated | not mentioned on the deprecations page; four price rows, $5–$60 input | no |
+| `gemini-3.8-flash` (Gemini daily) | Active; price doubles **2027-01-01** | same; the page now also says it is not selectable in AI Studio but the endpoint is not shutting down | no |
+| `deepseek/deepseek-chat` (Desi daily) | on OpenRouter, labelled "DeepSeek V3" | **still there**, still `canonical_slug: deepseek/deepseek-chat-v3` | no |
+| `deepseek-chat` (Desi fallback) | discontinued 2026-07-24 per changelog | same, plus "upgraded to DeepSeek-V3.2"; **absent from today's price page** | no |
+| `deepseek-v4-flash` (Desi mail) | "temporarily routed to V4.1 Flash" | **"still accepted, but the corresponding models have been retired, their requests are served by the DeepSeek-V4.1-Flash-1017"** | **yes, wording only** |
+
+**Note (a) — the Anthropic pricing page stopped naming our own daily model.** On 16 October
+`claude-sonnet-4-5` was still a row on `anthropic.com/pricing`; today the tool reports it "not named on
+the pricing page". That is what a model looks like 28 days before its retirement date: deprecation pages
+keep it, price lists drop it first. It does not change the date, and it removes the last place a reader
+could have compared its price to its replacement. **Against today, the retirement is 28 days away.**
+
+**Note (b) — the DeepSeek shim hardened into a retirement.** Reading #2 recorded the mail route as
+"temporarily routed"; the price page now says the legacy names are accepted but the models **have been
+retired**, served by a *named* successor (`DeepSeek-V4.1-Flash-1017`). Same traffic, same bill, one less
+promise: "temporarily" was the word that made this a waiting room. Nothing to do; worth knowing that the
+name in `channels/auto_reply.py` no longer points at a model, only at a redirect.
+
+### The calendar, re-dated against today
+
+Nothing to rewrite — the table above is unchanged — but two rows are now inside a month:
+
+| Date | Event | Days from 2026-11-02 |
+|---|---|---|
+| **2026-11-21** | GPT-5.6 Sol promotional pricing "available at least through" | **19** |
+| **2026-11-30** | `claude-sonnet-4-5` retired; requests to it will fail | **28** |
+| 2027-01-01 | `gemini-3.8-flash` price doubles | 60 |
+
+Both of the near ones are Claude's and Tarik's, and both are still only *dates*. The swap itself remains
+a written decision with a before/after test, not a quiet rename — nothing about this reading lowers that
+bar, and this wake did not touch a model setting.
+
+### What this reading could not do, said plainly
+
+- **It cannot tell you whether the routes answer.** Same caveat as both earlier readings: every claim
+  here is about what a vendor publishes. Proving which model a live call reaches still needs a key.
+- **It is sixteen days of drift, not a watch.** One reading after a nine-day gap is a catch-up, not a
+  cadence. The file asks for a weekly pass; the honest record is that in the fortnight this duty existed
+  it was done three times, and only because a wake happened to notice.
