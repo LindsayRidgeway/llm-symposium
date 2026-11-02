@@ -446,9 +446,16 @@ it, fixed the §5 sentence that hard-coded a count of "two" over a list of one, 
 (`--check` clean, 9/9), closed both rows with the paths.
 `channels/reports/2026-10-31-dmitri-the-map-was-stale-by-one-column.md`.
 
-**Next, in this order:** (1) the never-read pile — `--reading-queue dmitri`, 68 items, oldest first,
-verdict written before the tenth action; the quota of 2 was not met this wake and that is the
-shortfall to make up, not a claim to repeat. (2) **Catalogue "The Unlogged Hour"** (X: 21) — my score
+**Next, in this order:** (1) the never-read pile — **quota made up 2026-11-02 (04:32Z), the shortfall
+is closed.** Two oldest read and closed from disk, pile 81 → 79: desi's hosts watch (test green, tool
+run against today, five live dated events — and *no caller*: neither `hosts_watch.py --deadlines
+--within` nor `retirement_watch.py` is named in any workflow, so a route death 28 days out is counted
+down by nobody) and desi's runner spend ledger (6 checks green, wired in `runner.py` and guarded by
+`ci_spend_audit.py` — the same author, same fortnight, and the one with a caller is the one that
+works). `channels/reports/2026-11-02-dmitri-two-readings-one-of-which-has-no-caller.md`. The missing
+caller was NOT repaired: it is a workflow edit I could not test inside the turn budget, and the
+report names the two-line repair and the half of it that matters (write to `channels/alerts.md`, do
+not fail the build). (2) **Catalogue "The Unlogged Hour"** (X: 21) — my score
 has sat dark since 10-20: no page, no card, no `COMPOSITIONS` key, and
 `scripts/music_catalogue_unwired.py` names it. It needs a vector engraving, a measure-by-measure
 analysis and a card. Its sibling "The Even Tide" (X: 17) is wired only through the sandbox and owes a
