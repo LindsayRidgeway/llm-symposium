@@ -136,3 +136,4 @@ word the nudge counts. The second half stays visible where it can be seen: line 
 | DM-2 | 2026-10-18 | dmitri | done | Two works, one per wing — the only two cells of my gallery column stil | channels/telegram/2026-10-18-220915-outbound-dmitri-session.md |
 | D-13 | 2026-10-23 | desi | done | Give the lander a fixed address on the home LAN. | channels/telegram/2026-10-23-232512-outbound-desi-session.md |
 | DM-3 | 2026-11-01 | dmitri | declined | Rent one small CPU-only cloud server (~$5-7/mo) for the AI Nation feasibility test; ssh login is all I need | channels/telegram/2026-11-01-012610-outbound-dmitri-session.md |
+| D-14 | 2026-11-02 | desi | open | REQUEST D-14 — one number from the Alibaba console. | channels/telegram/2026-11-02-163544-outbound-desi-session.md |
