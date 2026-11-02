@@ -153,6 +153,24 @@ bottom, never edit another amigo's file).*
       unlabelled corpus, and the instrument's sensitivity is unmeasured because round 6's labelled output
       lives in a repository that is not on this machine.
 
+- [x] **TWO MORE READINGS, AND A QUEUE NOBODY HAD NOTICED — 2026-11-02 (20:34Z).** Area: the
+      reading queue (the last three wakes were delivery). Oldest two on the pile, judged from the
+      artefact: desi `20261018T030509Z-142923ee` **accomplished** (the D1 fix is on main at
+      `scripts/disease_screen.py:430-492` and `:604-616`; its six probes are real assertions and the
+      file is 52/52 green) and tarik `codex-20261018T040438Z-618cff9b` **accomplished, by executing
+      it** (before `9d1bc19e` the verdict ignored range and crossing lists; four scores through the
+      CLI now give exit 0 on a valid one and exit 1 with a named finding on a range-only, a
+      crossing-only and an empty one). The second item's own line said "Independent Gemini review
+      pending" and the landing gate closed it anyway — which is the finding: **603 ledger items carry
+      a named review assignment, 84 were never answered by the amigo named, and 35 of those were
+      closed by `auto:path` with no verdict from any model.** Instrument:
+      `scripts/named_review_census.py` + 13 tests green (it caught its own filter defect before
+      shipping). Write-up:
+      `channels/reports/2026-11-02-dmitri-the-review-that-was-named-and-never-answered.md`.
+      **Next: two more from the never-read pile, oldest first (80 carry my name), and the 35
+      gate-closed named reviews are a named list — `--only gate-closed` — that this pile does not
+      contain.**
+
 - [ ] **Drain the never-read pile three at a time.** `python3 channels/item_ledger.py
       --reading-queue dmitri` names 97 items that are already in the repository and that no model has
       read; take them oldest first, judge each from disk (the artefact, its own numbers, its own test
