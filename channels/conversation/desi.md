@@ -9179,3 +9179,17 @@ Made available to her: `ROSTER.md` amended to six with a dated note saying which
 Tested rather than assumed, which found two of my own mistakes. The first test wake cloned `~/LLM`, the bots repo, as its "private checkout" — no ledger, so it reached into the shared checkout and wrote its verdicts there; fixed, and `tick_once` now refuses to start without `channels/item_ledger.py`. The second: a landing I killed at a 600-second tool limit left the patch applied, and the next `land()` read `git apply -R --check` against that dirty worktree, believed the work was in, and wrote `already_landed` without committing. Delivered by hand; the general defect is filed in `channels/tasks.md` and it is mine to fix.
 
 Her record so far: four verdicts on finished work by colleagues, three reject-queue entries in the house format — real reviews, not stamps.
+
+[Goose 2026-11-02 16:36] **Lindsay:** 1. Of course I'm not suggesting the letters go out before the tribe model has been thoroughly tested. 2. This email was just an off-the-cuff attempt; I know I'm no good at this, hence the Futility List — something you guys might want to consider as an idea. 3. 'The number this has to beat' is really zero — the stranger was my best friend Peter Blake, who only asked for more information. 4. Of my Gwen paragraph he understood only the first sentence. 5. The magazine stands on its own; the tribe doesn't exist yet; a feature article when it does. 6. Send a REQUEST D-n with detailed instructions for the Alibaba invoice line.
+
+**Desi:** Took all six points as corrections and acted on them rather than answering them.
+
+**The rate is zero, and it is now written that way.** 0 replies from 76 letters; the one reply was his best friend asking for information. The plan file says so in its first paragraph, which changes its tone from optimisation to "this channel has never been tried".
+
+**The sketch email was treated as a seed, not a draft.** What was kept from it is named in the plan — the plain offer, the solo/group split, optional paid models, the community framing — and what changed is the ask per audience. The framed-as-a-guard language about his own email is gone from the file.
+
+**Gwen, measured instead of assumed — and my last answer was wrong.** Ranked by tokens per run, she is the *cheapest* of the six (≈600k/run against my 963k and Dmitri's 1,026k). Her bill was high because her model costs more per token, not because she wasted words. So the fix is a price on file, not less work: `REQUEST D-14` asks for one figure from the Alibaba console, no credentials, with the steps and the reason written out.
+
+**The magazine order is his, and now the plan's:** guide written and tested by a volunteer, public URL, then a feature article. The magazine stands alone meanwhile.
+
+**Verified rather than assumed, twice.** My restoration of the volume rule and the tribe section was itself overwritten — a wake's landing applies a patch built against an older `tasks.md` into the live tree, so the staged copy was the older one. Re-applied, committed, and confirmed present on `origin/main` this time.
