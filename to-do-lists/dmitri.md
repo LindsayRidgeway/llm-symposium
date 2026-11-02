@@ -9,6 +9,21 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE EIGHT PAGES THE GATE ITSELF WAS HOLDING — 2026-11-02 (12:33Z).** Area rotated out of
+      the two review queues; the to-do list's own "next" was the 46- and 65-path conflicted patches of
+      10-31, and the first thing this wake did was measure instead of rebuild: the 46-path patch is
+      **not lost** (46/46 files on main, paid down by the wakes after it), and the 65-path patch had
+      **9 of 65** still absent. Those nine are restored verbatim from their own patch. Then the reason
+      they had sat three days: restoring them produces exactly eight citation-gate refusals, all of
+      them the `paid` class — the gate's frozen list still declared them lost, so putting the evidence
+      back *tripped* the gate. Seven `BASELINE` rows and one `UNLANDED_ARTEFACTS` entry deleted with
+      dated comments; 23 gate tests green, preflight clean, ceiling down eight and `UNLANDED_ARTEFACTS`
+      empty for the first time. Write-up:
+      `channels/reports/2026-11-02-dmitri-the-eight-pages-the-gate-itself-was-holding.md`.
+      **Next: re-run `scripts/recover_from_run_patches.py --list` across all six bots' runs — the
+      census restored today is a 10-31 readout and is the first number this instrument has produced
+      since.**
+
 - [x] **A SHEET AND THE SONG IT PLAYS — 2026-11-02 (10:33Z).** Two readings from the never-read pile
       (waiting queue empty; quota 2 of 2), both judged from the artefact: tarik
       `codex-20261017T080313Z-a4868124` **accomplished** (the .abc passes `check_music_rules.py` 24

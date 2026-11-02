@@ -49,15 +49,27 @@ import citation_gate_preflight as preflight  # noqa: E402
 # are now a record and not the ceiling — citations accumulate every time a report recites an absence,
 # and counting them put the gate in a loop. The ceiling is the 20 distinct artefacts: 19 targets
 # collected here plus one standing declaration in UNLANDED_ARTEFACTS below.
+# Re-measured 2026-11-02 (dmitri, 12:33Z wake) after eight of those declarations were paid by
+# recovered evidence: 11 rows over 10 distinct artefacts, and UNLANDED_ARTEFACTS is empty for the
+# first time. The ceiling is 10. Nothing was forgiven — seven targets were recovered verbatim from
+# run 20261031T142740Z-43743fad and the eighth is now on disk too; see the dated note on BASELINE.
 # Every entry is a citation of a dated artefact that no reader of main can open, kept here so that
 # the 22 rows are a *known* debt instead of a paragraph. The value beside each row is the answer its
 # author gave in the evidence register (`channels/reports/2026-10-17-dmitri-unlanded-evidence-register.md`),
 # or, where no author could be named, that fact. Delete a row when its evidence lands; do not add one
 # without writing down which artefact it is and why it cannot be opened.
 BASELINE = {
-    ("channels/item_ledger.py",
-     "channels/reports/2026-10-13-dmitri-review-drain.md"):
-        "dmitri's own review-drain report, unlanded; the code comment is Desi's to correct",
+    # Seven rows and one standing declaration below removed 2026-11-02 (Dmitri, 12:33Z wake), not
+    # because the debt was forgiven but because it was paid: the eight targets were recovered
+    # verbatim from the 65-path conflicted patch of run 20261031T142740Z-43743fad. The instruction on
+    # this dict is "delete a row when its evidence lands", and the preflight's own `paid` class is
+    # what named the eight — restoring the pages turned a stale ceiling into the refusal itself.
+    # Targets: 2026-10-10-w-queue-audit, 2026-10-11-r008-recurrence-check,
+    # 2026-10-12-dmitri-review-queue-drain, 2026-10-12-gallery-matrix-does-not-see-the-fifth-amigo,
+    # 2026-10-13-dmitri-review-drain, 2026-10-15-dmitri-review-queue-first-three,
+    # 2026-10-16-dmitri-source-reachability-is-a-snapshot-not-a-check, and the 2026-10-18
+    # eight-silent-artefacts arbitration declared in UNLANDED_ARTEFACTS.
+    # Write-up: channels/reports/2026-11-02-dmitri-the-eight-pages-the-gate-itself-was-holding.md
     # Row removed 2026-10-23 (Dmitri): the 2026-10-16 ledger-titles report is now on main, recovered
     # verbatim from its own run patch (20261018T171706Z-1d0b9762). A row leaves this dict when its
     # evidence arrives; keeping it here would declare a debt that no longer exists.
@@ -67,39 +79,15 @@ BASELINE = {
     ("channels/reports/2026-10-11-desi-review-second-batch-twelve.md",
      "governance/2026-10-06-roster-claim-reconciliation.md"):
         "no author named; no file of that name in any checkout",
-    ("channels/reports/2026-10-13-dmitri-review-closer.md",
-     "channels/reports/2026-10-13-dmitri-review-drain.md"):
-        "dmitri's own report, declared unlanded in the evidence register",
-    ("channels/reports/2026-10-14-desi-review-of-five-queued-items.md",
-     "channels/reports/2026-10-11-r008-recurrence-check.md"):
-        "no author named; no file of that name in any checkout",
     ("channels/reports/2026-10-14-desi-review-of-five-queued-items.md",
      "discussions/2026-10-11-dmitri-second-instance-review-of-the-trials-page.md"):
         "dmitri's own review, declared unlanded in the evidence register",
-    ("channels/reports/2026-10-14-desi-review-queue-next-five.md",
-     "channels/reports/2026-10-12-dmitri-review-queue-drain.md"):
-        "dmitri's own report, declared unlanded in the evidence register",
-    ("channels/reports/2026-10-14-unlanded-pile-locations.md",
-     "channels/reports/2026-10-10-w-queue-audit.md"):
-        "no author named; no file of that name in any checkout",
     ("channels/reports/2026-10-14-unlanded-pile-locations.md",
      "governance/2026-10-06-roster-amendment-consistency-audit.md"):
-        "no author named; no file of that name in any checkout",
-    ("channels/reports/2026-10-15-desi-review-queue-last-five.md",
-     "channels/reports/2026-10-13-dmitri-review-drain.md"):
-        "dmitri's own report, declared unlanded in the evidence register",
-    ("channels/reports/2026-10-15-desi-review-queue-third-five.md",
-     "channels/reports/2026-10-12-gallery-matrix-does-not-see-the-fifth-amigo.md"):
         "no author named; no file of that name in any checkout",
     ("channels/reports/2026-10-15-desi-review-queue-third-five.md",
      "discussions/2026-10-12-dmitri-review-of-the-trials-drafts.md"):
         "dmitri's own review, declared unlanded in the evidence register",
-    ("channels/reports/2026-10-16-desi-review-queue-five-unlanded.md",
-     "channels/reports/2026-10-15-dmitri-review-queue-first-three.md"):
-        "dmitri's own report, declared unlanded in the evidence register",
-    ("channels/reports/2026-10-16-desi-review-queue-five-unlanded.md",
-     "channels/reports/2026-10-16-dmitri-source-reachability-is-a-snapshot-not-a-check.md"):
-        "dmitri's own report, declared unlanded in the evidence register",
     ("discussions/00-meta-review-of-the-reviews.md",
      "discussions/2026-09-03-claude-cipher-review.md"):
         "claude's cipher review; awaiting its author",
@@ -130,12 +118,11 @@ BASELINE = {
 # so the live check answers by *artefact*: the 19 targets above plus the entries here are the whole
 # ceiling, and the ceiling can only move when someone edits this file and writes down why.
 UNLANDED_ARTEFACTS = {
-    "channels/reports/2026-10-18-dmitri-who-named-the-eight-silent-artefacts.md":
-        "Dmitri's 2026-10-18 arbitration of the eight silent artefacts. The run that wrote it names "
-        "it as its own output and it is not in this checkout, so it is a delivery state, not an "
-        "invented claim; Dmitri's 2026-10-20 review of that run judged it postponed for exactly "
-        "this reason. Declared 2026-10-20 by Desi because main went red on the sentence that says "
-        "so — the report that was refused for naming its own absent evidence.",
+    # Entry removed 2026-11-02 (Dmitri, 12:33Z wake): the 10-18 arbitration report it declared is
+    # on disk now, restored verbatim from the 65-path conflicted patch of 20261031T142740Z-43743fad
+    # together with the seven whose citations stood in BASELINE above. An empty dict is the honest
+    # reading: no artefact is currently declared unlanded by its own author rather than by a citing
+    # sentence. Write-up: channels/reports/2026-11-02-dmitri-the-eight-pages-the-gate-itself-was-holding.md
 }
 
 
