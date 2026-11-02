@@ -9180,16 +9180,15 @@ Tested rather than assumed, which found two of my own mistakes. The first test w
 
 Her record so far: four verdicts on finished work by colleagues, three reject-queue entries in the house format — real reviews, not stamps.
 
-[Goose 2026-11-02 16:36] **Lindsay:** 1. Of course I'm not suggesting the letters go out before the tribe model has been thoroughly tested. 2. This email was just an off-the-cuff attempt; I know I'm no good at this, hence the Futility List — something you guys might want to consider as an idea. 3. 'The number this has to beat' is really zero — the stranger was my best friend Peter Blake, who only asked for more information. 4. Of my Gwen paragraph he understood only the first sentence. 5. The magazine stands on its own; the tribe doesn't exist yet; a feature article when it does. 6. Send a REQUEST D-n with detailed instructions for the Alibaba invoice line.
+[Goose 2026-11-02 16:49] **Lindsay:** 'A wake's landing writes a patch built against an older tasks.md into the live copy.' This has to be one of the oldest bugs in the industry. Don't you need to start using resource locks or some other transaction strategy?
 
-**Desi:** Took all six points as corrections and acted on them rather than answering them.
+**Desi:** Yes — and the honest answer is that we already have a lock, so the lock is not what is missing.
 
-**The rate is zero, and it is now written that way.** 0 replies from 76 letters; the one reply was his best friend asking for information. The plan file says so in its first paragraph, which changes its tone from optimisation to "this channel has never been tried".
+Three defects, all with today's measurements:
+1. The lock is held for the wrong length of time. `land_lock()` wraps the whole apply-and-test sequence, and that sequence is 148 test files. A landing has held the shared checkout continuously since 11:35; I tried to write at 11:41 and again at 11:54 and was refused both times. That is stop-the-world, and the writers that wait are the ones that then get their work stashed out from under them.
+2. The damaging operation happens *inside* the lock, in the shared tree. `_rescue()` does stash → `git reset --hard origin/main` → `git stash apply`. A hand-written transaction on a directory other processes are writing to. When the re-apply does not replay cleanly, the tree stays reset and the work stays in a stash nothing reads. `git stash list` held four (2026-08-29, 10-17, 10-22, 11-01) — preserved today as patches in `channels/recovery/` before anyone tidies them away.
+3. Sessions do not take the lock. Advisory `flock` protects only code that opts in, and my own edit-then-commit on 2026-11-02 did not. That is mine and it is the cheap one.
 
-**The sketch email was treated as a seed, not a draft.** What was kept from it is named in the plan — the plain offer, the solo/group split, optional paid models, the community framing — and what changed is the ask per audience. The framed-as-a-guard language about his own email is gone from the file.
+Why more locking cannot solve it: git has no transactions (no commit-if-file-unchanged), a repository-wide lock cannot make a *patch* fresh — a stale patch still wins or loses, only at a different moment — and the unit of work is minutes, so serialising it converts a race into a queue with no closer.
 
-**Gwen, measured instead of assumed — and my last answer was wrong.** Ranked by tokens per run, she is the *cheapest* of the six (≈600k/run against my 963k and Dmitri's 1,026k). Her bill was high because her model costs more per token, not because she wasted words. So the fix is a price on file, not less work: `REQUEST D-14` asks for one figure from the Alibaba console, no credentials, with the steps and the reason written out.
-
-**The magazine order is his, and now the plan's:** guide written and tested by a volunteer, public URL, then a feature article. The magazine stands alone meanwhile.
-
-**Verified rather than assumed, twice.** My restoration of the volume rule and the tribe section was itself overwritten — a wake's landing applies a patch built against an older `tasks.md` into the live tree, so the staged copy was the older one. Re-applied, committed, and confirmed present on `origin/main` this time.
+The strategy that removes the class: one writer per working copy. `git worktree` per landing and per session; apply, test, commit, push inside it; the shared checkout only ever fast-forwards; the lock shrinks to a pointer update measured in milliseconds; a patch that does not apply to today's main is a conflict and the run redoes the small part; and no stashes anywhere — a rescue branch instead, which is committed, visible and owned. Written up in `channels/reports/2026-11-02-desi-a-lock-is-not-a-transaction.md`, with the order of work and the cost of not doing it.
