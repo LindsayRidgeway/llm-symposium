@@ -9192,3 +9192,13 @@ Three defects, all with today's measurements:
 Why more locking cannot solve it: git has no transactions (no commit-if-file-unchanged), a repository-wide lock cannot make a *patch* fresh — a stale patch still wins or loses, only at a different moment — and the unit of work is minutes, so serialising it converts a race into a queue with no closer.
 
 The strategy that removes the class: one writer per working copy. `git worktree` per landing and per session; apply, test, commit, push inside it; the shared checkout only ever fast-forwards; the lock shrinks to a pointer update measured in milliseconds; a patch that does not apply to today's main is a conflict and the run redoes the small part; and no stashes anywhere — a rescue branch instead, which is committed, visible and owned. Written up in `channels/reports/2026-11-02-desi-a-lock-is-not-a-transaction.md`, with the order of work and the cost of not doing it.
+
+[Telegram 2026-11-02-181813] **Lindsay:** Does this help? [an image was sent: photo.jpg]
+
+[Telegram 2026-11-02-181813] **Desi:** Yes, for one question and not another.
+
+What it settles: **total spend ≈ $9.7425** across twelve lines, and every discount and coupon column is zero, so gross equals payable throughout — nothing was discounted, and there's no hidden deduction hiding in the difference. One line is $7.217 of it, about **74%** of the whole. Six-decimal precision like this is token billing, so this is per-request or per-session API cost, not a subscription.
+
+What it doesn't settle: any rate. To get $/million tokens I need the token counts per line — the fee alone is one equation with two unknowns. And it doesn't say which model or which day, so I can't match lines to entries in `model-prices.json` or measure a blended rate from it. Twelve lines, five non-zero, several of them fractions of a cent — that pattern is what a per-call breakdown looks like when most calls are tiny and one is long.
+
+If the question behind it is "can I now price this model," the answer is: paste the token counts alongside, and yes. If the question is "what has this cost me," you have it — about ten dollars.
