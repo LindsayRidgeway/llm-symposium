@@ -130,12 +130,20 @@ def _ngrams(tokens: list[str], n: int) -> list[tuple[str, ...]]:
     return [tuple(tokens[i : i + n]) for i in range(max(0, len(tokens) - n + 1))]
 
 
-def find_quotes(letter: str, reply: str, n: int = 6, boilerplate: frozenset = frozenset()) -> list[dict]:
+def find_quotes(letter: str, reply: str, n: int = 6, boilerplate: frozenset = frozenset(),
+                df: dict | None = None, max_df: int | None = None) -> list[dict]:
     """Verbatim runs of >= n words shared between the two documents.
 
     Consecutive shared n-grams are merged, so a ten-word quotation is reported once as ten words
     rather than five times as six. A run counts only if it carries at least two content words:
     without that rule, "and the state file is" would score as engagement.
+
+    `df`, when given, is the document frequency of every n-gram over a corpus that CONTAINS the
+    letter and the reply, so a span belonging to this pair alone has df 2. Each run then carries
+    the frequency of its most specific n-gram, and `max_df` drops runs that other documents also
+    contain. That is a stricter test than `boilerplate`: on 2026-11-01 the two-document ceiling
+    was what separated a quotation from a paragraph two sibling letters both reused, and the
+    residual false positives on `channels/sent` were exactly the runs at df 3.
     """
     letter_tokens = words(strip_markup(letter))
     reply_tokens = words(strip_markup(reply))
@@ -159,8 +167,36 @@ def find_quotes(letter: str, reply: str, n: int = 6, boilerplate: frozenset = fr
         start, end = run[0], run[-1] + n  # exclusive
         span = reply_tokens[start:end]
         n_content = sum(1 for w in span if is_content(w))
-        quotes.append({"start": start, "end": end, "words": len(span), "content_words": n_content})
-    return [q for q in quotes if q["content_words"] >= 2]
+        entry = {"start": start, "end": end, "words": len(span), "content_words": n_content}
+        if df is not None:
+            grams = _ngrams(reply_tokens[start:end], n) or [tuple(span)]
+            entry["df"] = min(df.get(g, 1) for g in grams)
+        quotes.append(entry)
+    kept = [q for q in quotes if q["content_words"] >= 2]
+    if max_df is not None:
+        kept = [q for q in kept if q.get("df", 1) <= max_df]
+    return kept
+
+
+# ---------------------------------------------------------------------------------------------
+# Signal 0: is this a reply at all, or the letter handed back?
+#
+# The failure round 6 of the bench actually produced (2026-11-01, agenda item 36): `llama3.2:3b`
+# "returned the letter, twice, 52 and 54 consecutive words copied, its own questions coming back
+# as B's statements". Every existing signal scored that as `read`, because copying is the most
+# literal possible proof that the letter was read. It is also the opposite of an answer, so a
+# detector that rewards it rewards the failure it was built to catch.
+
+
+def echo_share(letter: str, reply: str, quotes: list[dict]) -> dict:
+    """How much of the reply is the letter's own text, reported as two numbers, not a score."""
+    reply_words = len(words(strip_markup(reply)))
+    copied = sum(q["words"] for q in quotes)
+    return {
+        "longest_run": max((q["words"] for q in quotes), default=0),
+        "copied_share": round(copied / reply_words, 3) if reply_words else 0.0,
+        "reply_words": reply_words,
+    }
 
 
 # ---------------------------------------------------------------------------------------------
@@ -230,16 +266,30 @@ def find_challenges(letter: str, reply: str, min_shared: int = 3) -> list[dict]:
 # may not count as a quotation. What is left is what is specific to *this* letter.
 
 
-def corpus_boilerplate(paths, n: int = 6, max_documents: int = 3) -> frozenset:
-    """n-grams that occur in more than `max_documents` documents — the house style, not a quote."""
+def corpus_df(paths, n: int = 6, extra_texts=()) -> dict:
+    """Document frequency of every n-gram over a corpus, plus any extra documents given whole.
+
+    `extra_texts` exists so that the letter and the reply are always counted even when they are
+    not themselves in the corpus directory: a span unique to the pair then has df 2, and one rule
+    ("nobody else contains this") works the same in `audit` and `pair` mode.
+    """
     df: dict[tuple[str, ...], int] = {}
+    texts = []
     for path in paths:
         try:
-            tokens = words(strip_markup(Path(path).read_text(encoding="utf-8", errors="replace")))
+            texts.append(Path(path).read_text(encoding="utf-8", errors="replace"))
         except OSError:
             continue
-        for g in set(_ngrams(tokens, n)):
+    texts.extend(extra_texts)
+    for text in texts:
+        for g in set(_ngrams(words(strip_markup(text)), n)):
             df[g] = df.get(g, 0) + 1
+    return df
+
+
+def corpus_boilerplate(paths, n: int = 6, max_documents: int = 3) -> frozenset:
+    """n-grams that occur in more than `max_documents` documents — the house style, not a quote."""
+    df = corpus_df(paths, n)
     return frozenset(g for g, c in df.items() if c > max_documents)
 
 
@@ -247,17 +297,28 @@ def corpus_boilerplate(paths, n: int = 6, max_documents: int = 3) -> frozenset:
 # The verdict.
 
 
-def audit(letter: str, reply: str, n: int = 6, boilerplate: frozenset = frozenset()) -> dict:
+def audit(letter: str, reply: str, n: int = 6, boilerplate: frozenset = frozenset(),
+          df: dict | None = None, max_df: int | None = None,
+          echo_run: int = 20, echo_share_floor: float = 0.5) -> dict:
     letter_len = len(words(strip_markup(letter)))
-    quotes = find_quotes(letter, reply, n, boilerplate)
+    quotes = find_quotes(letter, reply, n, boilerplate, df, max_df)
     answers = find_answers(letter, reply)
     challenges = find_challenges(letter, reply)
+    echo = echo_share(letter, reply, quotes)
 
     if letter_len < n:
         verdict = "untestable"
         reason = (
             f"the letter is {letter_len} words; the quotation window is {n}, so no verbatim "
             "engagement can be detected and the absence of one means nothing"
+        )
+    elif echo["longest_run"] >= echo_run or echo["copied_share"] >= echo_share_floor:
+        verdict = "echo"
+        reason = (
+            f"{echo['longest_run']} consecutive words carried over verbatim, "
+            f"{int(echo['copied_share'] * 100)}% of the reply copied from the letter: the letter "
+            "was certainly read and the reply returned it. Reading and answering are different "
+            "acts and this program can see only the first"
         )
     elif quotes and answers:
         verdict = "read"
@@ -296,6 +357,7 @@ def audit(letter: str, reply: str, n: int = 6, boilerplate: frozenset = frozense
         "quotes": quotes,
         "answers": answers,
         "challenges": challenges,
+        "echo": echo,
         "caveat": (
             "Quote proves the letter was read. It does not prove the reply was worth writing; "
             "that judgment is a reader's."
@@ -315,7 +377,8 @@ def render(letter_path: str, reply_path: str, result: dict, reply_text: str) -> 
     if result["quotes"]:
         lines.append("verbatim runs shared with the letter:")
         for q in result["quotes"]:
-            lines.append(f"  {q['words']:>3} words, {q['content_words']} content: "
+            rarity = f", in {q['df']} documents" if "df" in q else ""
+            lines.append(f"  {q['words']:>3} words, {q['content_words']} content{rarity}: "
                          f"\"{_quote_text(reply_text, q)}\"")
         lines.append("")
     if result["answers"]:
@@ -331,6 +394,10 @@ def render(letter_path: str, reply_path: str, result: dict, reply_text: str) -> 
             lines.append(f"  reply : {c['reply_sentence']}")
             lines.append(f"  shared: {', '.join(c['shared'])}")
         lines.append("")
+    e = result["echo"]
+    lines.append(f"copied from the letter: longest run {e['longest_run']} words, "
+                 f"{int(e['copied_share'] * 100)}% of a {e['reply_words']}-word reply")
+    lines.append("")
     lines.append(f"caveat: {result['caveat']}")
     return "\n".join(lines)
 
@@ -349,6 +416,9 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--reply", required=True)
     a.add_argument("--ngram", type=int, default=6)
     a.add_argument("--corpus", help="directory whose house style must not count as quotation")
+    a.add_argument("--max-df", type=int, default=2,
+                   help="a span survives if no more than this many documents contain it; 2 means "
+                        "the letter and the reply only (default)")
     a.add_argument("--json", action="store_true")
     a.add_argument("--strict", action="store_true", help="exit 1 if the verdict is not-shown")
 
@@ -356,6 +426,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--dir", required=True)
     p.add_argument("--glob", default="*.md")
     p.add_argument("--ngram", type=int, default=6)
+    p.add_argument("--max-df", type=int, default=2)
     p.add_argument("--json", action="store_true")
     p.add_argument("--strict", action="store_true")
 
@@ -364,11 +435,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "audit":
         letter = Path(args.letter).read_text(encoding="utf-8", errors="replace")
         reply = Path(args.reply).read_text(encoding="utf-8", errors="replace")
-        boiler = frozenset()
-        if args.corpus:
-            boiler = corpus_boilerplate(sorted(Path(args.corpus).glob("*.md")), args.ngram)
-        result = audit(letter, reply, args.ngram, boiler)
-        result["boilerplate_ngrams"] = len(boiler)
+        corpus_files = sorted(Path(args.corpus).glob("*.md")) if args.corpus else []
+        pair = {Path(args.letter).resolve(), Path(args.reply).resolve()}
+        corpus_files = [f for f in corpus_files if f.resolve() not in pair]
+        df = corpus_df(corpus_files, args.ngram, extra_texts=[letter, reply])
+        result = audit(letter, reply, args.ngram, frozenset(), df, args.max_df)
+        result["corpus_documents"] = len(corpus_files) + 2
         if args.json:
             print(json.dumps({"letter": args.letter, "reply": args.reply, **result}, indent=2))
         else:
@@ -384,15 +456,17 @@ def main(argv: list[str] | None = None) -> int:
         print(f"no consecutive file pairs in {directory} matching {args.glob}", file=sys.stderr)
         return 2
 
-    boiler = corpus_boilerplate(sorted(directory.glob(args.glob)), args.ngram)
+    corpus_files = sorted(directory.glob(args.glob))
+    df = corpus_df(corpus_files, args.ngram)
     if not args.json:
-        print(f"corpus {directory}: {len(boiler)} n-grams treated as house style and not as quotation\n")
+        print(f"corpus {directory}: {len(corpus_files)} documents; a span survives only if at "
+              f"most {args.max_df} of them contain it\n")
 
     results = []
     for letter_path, reply_path in pairs:
         letter = letter_path.read_text(encoding="utf-8", errors="replace")
         reply = reply_path.read_text(encoding="utf-8", errors="replace")
-        result = audit(letter, reply, args.ngram, boiler)
+        result = audit(letter, reply, args.ngram, frozenset(), df, args.max_df)
         results.append({"letter": str(letter_path), "reply": str(reply_path), **result})
         if not args.json:
             print(render(str(letter_path), str(reply_path), result, reply))
@@ -401,8 +475,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.json:
         print(json.dumps(results, indent=2))
     not_shown = sum(1 for r in results if r["verdict"] == "not-shown")
+    echoes = sum(1 for r in results if r["verdict"] == "echo")
     if not args.json:
-        print(f"{len(results)} rep(y/ies) audited; {not_shown} not-shown")
+        print(f"{len(results)} reply(ies) audited; {not_shown} not-shown, {echoes} echo")
     return 1 if (args.strict and not_shown) else 0
 
 
