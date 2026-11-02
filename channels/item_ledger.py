@@ -995,6 +995,90 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
     return updates
 
 
+_PATH_TOKEN = re.compile(r"[A-Za-z0-9_.\-]+(?:/[A-Za-z0-9_.\-]+)+")
+_PATH_SUFFIXES = (".py", ".md", ".json", ".jsonl", ".html", ".yml", ".yaml", ".csv", ".tsv", ".txt")
+
+
+def blockers_named(reason: str, repo: Path = REPO) -> tuple[list[str], list[str]]:
+    """Repo-relative paths named in a postponement's reason, split into present / still absent.
+
+    Deliberately narrow: a token counts as a path claim only if it has a directory part, ends in a
+    known suffix, and its first segment is a real directory in this checkout. A bare `script.py` in
+    prose is not a claim about the repository, and treating it as one would manufacture a blocker.
+    """
+    present: list[str] = []
+    absent: list[str] = []
+    seen: set[str] = set()
+    try:
+        top = {p.name for p in repo.iterdir() if p.is_dir()}
+    except OSError:
+        return present, absent
+    for m in _PATH_TOKEN.finditer(reason or ""):
+        tok = m.group(0).strip("./")
+        if tok in seen:
+            continue
+        seen.add(tok)
+        if not tok.endswith(_PATH_SUFFIXES) or tok.split("/")[0] not in top:
+            continue
+        (present if (repo / tok).exists() else absent).append(tok)
+    return present, absent
+
+
+def postpone_expired(path: Path = LEDGER, repo: Path = REPO, hours: int = 0,
+                     amigo: str = "") -> list[dict]:
+    """Re-check rows a reviewer *postponed* and report the ones whose named blocker has since gone.
+
+    The gap this closes, measured 2026-11-02 (Desi, run `20261102T135034Z-4006f665`): a
+    `postponed` row is terminal. `reconcile_landed` and `reconcile_paths` both filter on
+    `letter_for(rec) == "W"`, so nothing in this file ever looks at P again — and P is where a
+    reviewer files "blocked on work that is not here yet". Four rows postponed on 2026-10-31 were
+    unblocked hours later by files landing at 03:56Z and 07:56Z on 11-01 and sat in P for two days,
+    counted as decisions, read by nobody. A backlog that is invisible is not a backlog.
+
+    This pass re-checks and PRINTS; it never writes. That is the whole design: whether an expired
+    blocker means the work was done is the reviewer's judgement, and a machine that stamped
+    `accomplished` here would be writing exactly the stamp the human forbade on 2026-10-09, this
+    time off a file-existence check. `expired` means only "every path this row names is in the
+    checkout today". `partial` names both halves so the reader can see which one is still missing.
+
+    `hours` (0 = all) skips rows postponed more recently than that, so a pass does not re-print a
+    blocker a reviewer is still working through. Rows whose reason names no repo path at all are
+    reported as `unmeasurable` rather than silently dropped: a postponement with no stated blocker
+    is a postponement nobody can revisit.
+    """
+    items = load(path)
+    now = dt.datetime.now(dt.timezone.utc)
+    out = []
+    for rec in items.values():
+        if rec.get("state") != "postponed":
+            continue
+        if amigo and rec.get("amigo") != amigo:
+            continue
+        stamp = str(rec.get("state_utc") or "")
+        if hours:
+            try:
+                when = dt.datetime.strptime(stamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+            except ValueError:
+                when = None
+            if when is not None and (now - when).total_seconds() < hours * 3600:
+                continue
+        present, absent = blockers_named(rec.get("reason") or "", repo)
+        if present and not absent:
+            status = "expired"
+        elif present:
+            status = "partial"
+        elif absent:
+            status = "still-blocked"
+        else:
+            status = "unmeasurable"
+        out.append({"id": rec.get("id"), "amigo": rec.get("amigo"), "state_utc": stamp,
+                    "reviewer": rec.get("reviewer"), "status": status,
+                    "present": present, "absent": absent,
+                    "reason": (rec.get("reason") or "")})
+    out.sort(key=lambda r: (r["state_utc"] or "", r["id"] or ""))
+    return out
+
+
 def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str = "",
            reviewer: str = "human") -> dict:
     """Move one item to a terminal state, with a reason. Postponed/rejected require one.
@@ -1590,6 +1674,11 @@ def _cli() -> int:
                     help="close waiting items whose named paths are all present on main (auto:path)")
     ap.add_argument("--scope", choices=AMIGOS,
                     help="with --reconcile-paths: only the items assigned to this amigo")
+    ap.add_argument("--postpone-expired", action="store_true",
+                    help="re-check rows a reviewer POSTPONED and print the ones whose named "
+                         "blocker is now on main; prints only, never writes a verdict")
+    ap.add_argument("--expired-after-hours", type=int, default=0, metavar="N",
+                    help="with --postpone-expired: skip rows postponed less than N hours ago")
     ap.add_argument("--postpone-absent", action="store_true",
                     help="with --reconcile-paths: also mark items naming absent paths postponed")
     ap.add_argument("--next", type=int, metavar="N", default=0,
@@ -1685,6 +1774,27 @@ def _cli() -> int:
               f"main; {len(post)} postponed — delivery state")
         for rec in (done + post)[:10]:
             print(f"  {rec['id']}  {rec['state']}  {rec['reason'][:70]}")
+        return 0
+    if args.postpone_expired:
+        rows = postpone_expired(hours=args.expired_after_hours, amigo=args.amigo or "")
+        if not rows:
+            print("item_ledger: no postponed row matches — nothing to re-check")
+            return 0
+        tally: dict[str, int] = {}
+        for rec in rows:
+            tally[rec["status"]] = tally.get(rec["status"], 0) + 1
+            print(f"  {rec['status']:<13} {rec['id']}  by {rec['amigo']}  postponed "
+                  f"{rec['state_utc']}  (reviewer {rec['reviewer']})")
+            if rec["present"]:
+                print(f"      now on main: {', '.join(rec['present'][:3])}"
+                      f"{' …' if len(rec['present']) > 3 else ''}")
+            if rec["absent"]:
+                print(f"      still absent: {', '.join(rec['absent'][:3])}"
+                      f"{' …' if len(rec['absent']) > 3 else ''}")
+        print("item_ledger: %s" % ", ".join(f"{k} {v}" for k, v in sorted(tally.items())))
+        print("item_ledger: this pass wrote nothing. An expired blocker is evidence, not a "
+              "verdict — close it yourself with --review <id> --state accomplished --reviewer "
+              "<you> --reason '…', or leave it for a reader.")
         return 0
     if args.duplicates:
         census = duplicates()
