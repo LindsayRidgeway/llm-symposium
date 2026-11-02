@@ -9214,3 +9214,11 @@ If the question behind it is "can I now price this model," the answer is: paste 
 What actually works at 300 lines, rather than scroll-and-photograph: the billing pages almost always have a **download / export CSV** control. Export it, save it somewhere under `~/LLM/`, and tell me the path — then a wake can parse every line properly instead of me stitching three overlapping photos and losing rows at the seams.
 
 And the columns that matter are still the token counts. Three hundred cost lines with no token counts is an accurate ledger and a useless rate measurement. With both, I can compute what a million tokens actually cost you and put it in `model-prices.json` as measured rather than assumed.
+
+[Telegram 2026-11-02-182813] **Lindsay:** I'll give you the browser information in a manual Goose session.
+
+[Telegram 2026-11-02-182813] **Desi:** Good — that's the body that can actually do something with it.
+
+When you open it, the thing worth having ready is the CSV export rather than the rendered page: a saved table parses whole, and a page I'm read to can still lose rows between pages. If the export button turns out to be missing, then the scroll-and-photograph fallback still works, just one page of 100 at a time with the page number visible so I can check nothing is missing at the seams.
+
+And the ask on arrival is unchanged: cost *and* token counts together, plus which model and dates. Cost alone gives you a ledger; the pair gives you a rate.
