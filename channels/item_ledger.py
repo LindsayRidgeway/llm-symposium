@@ -995,6 +995,88 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
     return updates
 
 
+# A repository path as written in prose: a known top-level directory, a file extension, no spaces.
+# Deliberately anchored to directories that exist in this checkout, because a looser pattern turns
+# every "2026-11-01" and every "channels/" into a claim that a file is missing.
+PATH_TOKEN = re.compile(
+    r"(?<![A-Za-z0-9_./-])"
+    r"((?:channels|scripts|tests|docs|agenda|governance|research|insights|discussions|experiments|"
+    r"to-do-lists)/[A-Za-z0-9_./-]*[A-Za-z0-9_-]\.[A-Za-z0-9]+)")
+
+
+def paths_named_by(rec: dict) -> list[str]:
+    """Every repository path a row claims, from its `paths` field and from the prose of its reason.
+
+    Both, because they are different claims. `paths` is the run's own output (what it changed);
+    `reason` is the reviewer's sentence about why it stopped, and since 2026-10-31 that sentence
+    names files — "scripts/recover_from_run_patches.py is absent from main" — which is the actual
+    blocker. A pass that read only `paths` would miss the blocker and re-report the work.
+    """
+    out, seen = [], set()
+    for p in (rec.get("paths") or []) + PATH_TOKEN.findall(rec.get("reason") or ""):
+        if not isinstance(p, str):
+            continue
+        p = p.rstrip(".,;:)`'\"")
+        if p and p not in seen:
+            seen.add(p)
+            out.append(p)
+    return out
+
+
+def postpone_expired(path: Path = LEDGER, repo: Path = REPO, amigo: str = "") -> list[dict]:
+    """Rows whose verdict is `postponed` and whose named blocker has since arrived. Reports, never writes.
+
+    The gap this closes (measured 2026-11-02, run `20261102T135034Z-4006f665`). Every other pass in
+    this file works on W: `--reconcile` closes a waiting row whose run landed, `--reconcile-paths`
+    closes a waiting row whose paths are present, `--draw`/`--assign` name waiting rows. **No pass
+    has ever re-read a `postponed` row**, so a postponement is permanent by construction, however
+    temporary its reason was. It is not a rare shape: four rows closed on 11-02 had blockers that
+    expired hours after the verdict — Gemini postponed `20261031T022537Z-20f65972` and
+    `20261031T042604Z-1281e08d` at 2026-11-01T01:01Z on "these paths are absent from main", and the
+    files landed at 03:56Z and 07:56Z the same morning. The verdict was true when written and false
+    by breakfast, and nothing was watching.
+
+    What this returns, per row: the paths it names, which of them are now present, which are still
+    missing, and `expired` — true only when *every* named path is present, because half a blocker
+    gone is not a blocker gone. Partial arrivals are returned too (with `expired: False`) because
+    "two of the three named files arrived" is the fact a human needs to judge the row, and a pass
+    that hid it would send the next reader to re-measure it by hand.
+
+    It does **not** write a verdict, and that is the design, not a missing feature. A machine can
+    see that a file exists; it cannot see whether the reviewer's objection was "the file is absent"
+    or "the file is there and the argument in it is wrong", and the reason text is prose. Closing a
+    postponement on presence alone writes `accomplished` over a judgement nobody made — the stamp
+    the human forbade on 2026-10-09, produced this time by a file-existence check. So this prints
+    the candidates and the next wake judges them, which is one line of reading instead of a search.
+    """
+    items = load(path)
+    out = []
+    for rec in items.values():
+        if rec.get("state") != "postponed":
+            continue
+        if amigo and rec.get("amigo") != amigo:
+            continue
+        named = paths_named_by(rec)
+        if not named:
+            continue
+        present = [p for p in named if (repo / p).exists()]
+        missing = [p for p in named if p not in present]
+        out.append({
+            "id": rec["id"],
+            "amigo": rec.get("amigo", "?"),
+            "reviewer": rec.get("reviewer", ""),
+            "state_utc": rec.get("state_utc", ""),
+            "named": named,
+            "present": present,
+            "missing": missing,
+            "expired": bool(present) and not missing,
+        })
+    # Expired first, then the partials; oldest verdict first inside each group, because the oldest
+    # postponement has been wrong the longest.
+    out.sort(key=lambda r: (not r["expired"], r["state_utc"] or "", r["id"]))
+    return out
+
+
 def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str = "",
            reviewer: str = "human") -> dict:
     """Move one item to a terminal state, with a reason. Postponed/rejected require one.
@@ -1592,6 +1674,9 @@ def _cli() -> int:
                     help="with --reconcile-paths: only the items assigned to this amigo")
     ap.add_argument("--postpone-absent", action="store_true",
                     help="with --reconcile-paths: also mark items naming absent paths postponed")
+    ap.add_argument("--postpone-expired", action="store_true",
+                    help="report postponed rows whose named blocker is now on main; prints, "
+                         "writes no verdict (nothing else in this file re-reads a P row)")
     ap.add_argument("--next", type=int, metavar="N", default=0,
                     help="list the N oldest items waiting for review")
     ap.add_argument("--not-mine", default="",
@@ -1685,6 +1770,24 @@ def _cli() -> int:
               f"main; {len(post)} postponed — delivery state")
         for rec in (done + post)[:10]:
             print(f"  {rec['id']}  {rec['state']}  {rec['reason'][:70]}")
+        return 0
+    if args.postpone_expired:
+        # Reports only. A verdict stays a reader's act: this pass can see that a file arrived and
+        # cannot see whether the reviewer's objection was the absence of the file or what is in it.
+        rows = postpone_expired(amigo=args.amigo or "")
+        expired = [r for r in rows if r["expired"]]
+        partial = [r for r in rows if not r["expired"]]
+        if not rows:
+            print("item_ledger: no postponed row names a path that this checkout can check")
+            return 0
+        print(f"item_ledger: {len(expired)} postponed item(s) whose named blocker is now on main "
+              f"— these need a human verdict, not a stamp; {len(partial)} more partly arrived")
+        for rec in expired:
+            print(f"  {rec['id']}  {rec['amigo']} <- {rec['reviewer']} {rec['state_utc']}")
+            print(f"      all {len(rec['present'])} named path(s) present: {rec['present'][0]}")
+        for rec in partial:
+            print(f"  {rec['id']}  {rec['amigo']}  {len(rec['present'])}/{len(rec['named'])} "
+                  f"named path(s) present, still missing {rec['missing'][0]}")
         return 0
     if args.duplicates:
         census = duplicates()
