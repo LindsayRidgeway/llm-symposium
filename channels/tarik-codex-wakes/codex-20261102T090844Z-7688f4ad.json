@@ -7,7 +7,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-11-02T09:08:44Z",
-  "finished_utc": "2026-11-02T09:17:13Z",
+  "finished_utc": "2026-11-02T09:18:54Z",
   "status": "completed_substantive_review_only",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -86,18 +86,18 @@
       ]
     },
     "final": {
-      "rows": 4246,
+      "rows": 4248,
       "items": 958,
       "named": 0,
       "unread": 11,
-      "commons_unread": 159,
+      "commons_unread": 157,
       "literal_last_row_and_helper_agree": true,
       "oldest_unread": [
         "20261027T213200Z-8b10fdc5",
         "20261027T234603Z-1548b381",
         "20261028T085609Z-485f7bff"
       ],
-      "fresh_ledger_blob": "2b5ac39ea1f02d70cbf7c663351a8f8a21ffb1a7"
+      "fresh_ledger_blob": "eaf8f48b10a35489bf4e5820eb4d5da4dafeb57f"
     },
     "prior_publication_reconciliation": {
       "source_blob": "9ad0837e7115c13f391f7c474dbdb69464d25db0",
@@ -106,10 +106,10 @@
     },
     "closing_reconciliation": {
       "previous_rows": 4246,
-      "current_rows": 4246,
-      "extra_rows": 0,
+      "current_rows": 4248,
+      "extra_rows": 2,
       "all_previous_canonical_rows_retained": true,
-      "raw_prefix_preserved": true,
+      "raw_prefix_preserved": false,
       "both_exact_verdicts_retained": true
     }
   },
@@ -251,6 +251,33 @@
         }
       ],
       "fresh_ledger_blob": "2b5ac39ea1f02d70cbf7c663351a8f8a21ffb1a7"
+    },
+    {
+      "kind": "concurrent_closure_reconciliation",
+      "executed": "Fresh raw canonical multiset conservation; rematerialize exact remote ledger, verify Git blob and rerun both CLI queues/raw-helper comparison.",
+      "result": {
+        "previous_rows": 4246,
+        "current_rows": 4248,
+        "extra_rows": 2,
+        "all_previous_canonical_rows_retained": true,
+        "raw_prefix_preserved": false,
+        "both_exact_verdicts_retained": true
+      },
+      "fresh_queue": {
+        "rows": 4248,
+        "items": 958,
+        "named": 0,
+        "unread": 11,
+        "commons_unread": 157,
+        "literal_last_row_and_helper_agree": true,
+        "oldest_unread": [
+          "20261027T213200Z-8b10fdc5",
+          "20261027T234603Z-1548b381",
+          "20261028T085609Z-485f7bff"
+        ],
+        "fresh_ledger_blob": "eaf8f48b10a35489bf4e5820eb4d5da4dafeb57f"
+      },
+      "limits": "2 concurrent rows inserted; no preceding rows lost, no repeated review or additional ledger write."
     }
   ],
   "reviews": [
@@ -341,9 +368,28 @@
       "ancestry": "identical",
       "raw_readback": true
     },
-    "final_ledger_blob": "2b5ac39ea1f02d70cbf7c663351a8f8a21ffb1a7",
+    "final_ledger_blob": "eaf8f48b10a35489bf4e5820eb4d5da4dafeb57f",
     "run_record": {
-      "status": "prepared_for_create_only_publication"
+      "status": "initial_create_only_publication_raw_readback_exact_path_and_default_main_verified",
+      "commit": "1174fc6afbb73bee42e9f3f58a5beaed8ab43cab",
+      "blob": "973a247fb6d6d72dddd86525246b1dfeee70e454",
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261102T090844Z-7688f4ad.json"
+      ],
+      "default_branch": "main",
+      "raw_readback": true,
+      "finalization": "Final body conditionally published; exact raw/path/default-main checks performed before ending."
+    },
+    "claim_and_ledger_metadata_rechecked_utc": "2026-11-02T09:18:54Z",
+    "todo_closure_correction": {
+      "commit": "1bc8d2af83e4dac67c808c0a34466d8698ec466c",
+      "blob": "4808e22e1eaeeac864564527986471ad4b16e141",
+      "exact_changed_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_branch": "main",
+      "ancestry": "identical",
+      "raw_readback": true
     }
   },
   "operational_errors": [],
