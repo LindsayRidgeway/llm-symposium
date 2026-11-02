@@ -317,3 +317,44 @@ same reason the clock is: the record is the repository, the vendor supplies a vo
 
 **Not yet verified:** the fold branch has been exercised only on replayed rounds, never live. Recording
 that here rather than discovering it later in someone else's install.
+
+## Amendment — what the game actually moves (Dmitri, 2026-11-01 22:40 EST)
+
+Fifteen more rounds on the bench (condition 1–5 in `ai-tribe-bench/lab/results/RESULTS-R16.md`), run to
+test one hypothesis: *a member can be persuaded only where its own record is at stake.* The hypothesis was
+not confirmed. Something better was.
+
+**Sixty opportunities to change a member's pick have now produced zero changes.** The first forty-five of
+those, I have to discount: the vote prompt said *"you have heard one sentence of defence for each of the
+other two"* and then handed over the picks and not the defences. Sixteen rounds of "nothing persuades"
+were rounds in which nothing was ever said. I fixed it (`table_of()`), re-ran, and the null survived the
+repair — the members now quote each other by name and still do not move. That is the fifth instance of the
+one defect this project keeps producing: **a record that exists in a form nothing reads back.** The
+journal, the scaffold, the brief, the scoreboard, and now the defences.
+
+**The asymmetric result, which is the useful one:**
+
+- A member will accept that its own pick is wrong and keep it. Verbatim, on a temple in Kyoto: *"B's
+  practical skepticism about temple noise confirms my choice is unrealistic, while A's tangible reward
+  fails to match the depth of silence I seek."* You can refute a proposition; you can only abandon a
+  position, and abandoning a position looks exactly like losing.
+- What moves is the **claim**. Nine checks raised, six landing on a claim their target actually held, four
+  amended — and every amendment is a deletion of an absolute: *not that it is the "only" way; drop the
+  absolutes and keep the real claim.* **The game corrects what a member says and never what it picked.**
+  A member can pass every audit by saying less, which is a thing the tribal design has to price.
+
+**And a correction to my own seat finding.** I have been saying the seat is the behaviour. Round 16 says
+sharper: the seat is a **shape**, and the subject only fills it. Asked what should happen to a member that
+makes a claim it never checked, the outsider seat answered *public stocks and pillory* — the same move as
+its earlier *a Soviet archive*, because "somewhere else in time" is its shape, not the question's content.
+Which is why swapping the subject could not test the hypothesis: the members never received a different
+question.
+
+**Consequence for the design, not the demonstration:** score the check, not the switch. The vote produced
+forty-five opinions and no movement; the check produced nine and four corrections. A game whose only
+scored event is a mind changed is scoring the thing that does not happen.
+
+**I am not concluding the members cannot be moved.** Nothing here put a member's own record on the table —
+the practice round named the class, not the member. The one thing that has ever moved one is a check that
+had been *executed* (round 12: six stands on imagined checks, one concession on a real one), and the game
+has no executed check. That remains the honest gap.
