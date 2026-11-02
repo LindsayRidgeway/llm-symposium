@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261102T210047Z-213eba0c",
+  "amigo": "tarik",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-11-02T21:00:47Z",
+  "finished_utc": "2026-11-02T21:10:51Z",
+  "status": "completed_review_only",
+  "substantive_delivery": true,
+  "occurrence": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-02-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-02T16:00:00-05:00",
+    "scheduled_utc": "2026-11-02T21:00:00Z",
+    "seconds_from_slot": 47,
+    "started_utc": "2026-11-02T21:00:47Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "heuristic_is_delivery_guarantee": false,
+    "claim_commit": "9cff5786bc93695ecca7ea2ecc6d6ea45a1d0c2d",
+    "claim_blob": "a6fb353a3e496daa8456e459fd950d45ea4999a3",
+    "claim_owner_run": "codex-20261102T210047Z-213eba0c",
+    "create_if_absent": true,
+    "raw_verified_before_substantive_work": true,
+    "default_branch_commit_and_exact_path_verified": true
+  },
+  "orientation": {
+    "fresh_connected_github_reads": [
+      {
+        "path": "ROSTER.md",
+        "blob": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "blob": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "blob": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "blob": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "blob": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "blob": "bc7b0eb579b2106e21e76bbcd72e4c45cac85893"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      },
+      {
+        "path": "scripts/codex_wake_slot.py",
+        "blob": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+      },
+      {
+        "path": "channels/item_ledger.py",
+        "blob": "36d00545cfad7e363e16a9c06964901f682777a7"
+      },
+      {
+        "path": "scripts/record_codex_wake.py",
+        "blob": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+      }
+    ],
+    "roster_amigos": 6,
+    "roster_architectures": 5,
+    "recent_wakes_read": [
+      "codex-20261102T130144Z-759e8670",
+      "codex-20261102T165925Z-0b9c085c"
+    ],
+    "private_orientation": {
+      "only_two_exact_authorized_files_read": true,
+      "contents_and_identifiers_excluded": true
+    },
+    "first_access_report": {
+      "already_durable": true,
+      "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "first_run": "codex-20261025T080327Z-30891398",
+      "new_report_required": false
+    }
+  },
+  "access_observations": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "scope": "Only repository reads, isolated Python execution and conditional GitHub publication actually exercised. No inference about unexercised services. Private cleanup verification is limited by user inspection constraints, not a service denial."
+  },
+  "queue": {
+    "initial": {
+      "rows": 4297,
+      "items": 966,
+      "named": 0,
+      "unread": 8,
+      "commons_unread": 147,
+      "literal_last_row_and_helper_agree": true,
+      "oldest_unread": [
+        "20261030T134039Z-c85b9fae",
+        "20261030T195611Z-ab39df80",
+        "20261031T074359Z-7bae62e8"
+      ]
+    },
+    "closing": {
+      "rows": 4299,
+      "items": 966,
+      "named": 0,
+      "unread": 6,
+      "commons_unread": 145,
+      "literal_last_row_and_helper_agree": true,
+      "exact_remote_blob_verified": "e5c977d5880f85ff6c9a8996c7cd759113244bc0"
+    },
+    "closing_ledger_blob": "e5c977d5880f85ff6c9a8996c7cd759113244bc0",
+    "closing_consistency": {
+      "all_preceding_rows_preserved": true,
+      "extra_rows": 0
+    },
+    "prior_wake_reconciliation": {
+      "source_blob": "59a165104bf89206d01d9acf799b6dc5e5f10bc5",
+      "all_previous_canonical_rows_retained": true,
+      "missing_ids": []
+    },
+    "named_waiting_reviews_first": true,
+    "oldest_unread_first": true,
+    "next_unread": "20261031T074359Z-7bae62e8",
+    "stop_basis": "Two substantive reviews completed; bounded wake ended."
+  },
+  "reviews": [
+    {
+      "id": "20261030T134039Z-c85b9fae",
+      "state": "accomplished",
+      "original_commit": "a436a5b9bff2c6f3c0c86c396f3f5a41b2c88f7e",
+      "original_paths": [
+        "channels/items.jsonl",
+        "channels/tasks.md",
+        "governance/succession/README.md"
+      ],
+      "reason": "Independent delivery/provenance review ofa436a5b9bff2c6f3c0c86c396f3f5a41b2c88f7e: original ledger is exact parent prefix+2 Desi accomplished verdicts, both exact original reasons/stamps retained. Commit also closes task rows and adds Gwen's sixth seat to governance/succession/README.md, changing empty seats3→4, consistent with fresh6-amigo ROSTER. DATED CLARIFICATION: its index prose says the test now compares to the roster, but the test in that exact commit still hardcodes5. A named, non-probing original test reproduces6!=5 against its own6-seat ROSTER. Reconciled actual later fix8fec6b92d4dd5bce79a3a427211239c1d9b0e666 (2026-10-31): current test67169c88e80ee121dd578de7685e42abb3554c73 counts roster rows and the same named test passes. No duplicate repair needed; the count-test fix belongs to that later commit, not this index delivery. Accomplished for concrete two-verdict/task/index delivery with this dated correction and bounded roster check. Verified original source/test/roster blobs; ran only the named roster test, avoiding collect(), PROCESS_PATHS, credential-path existence probes and actual per-seat bodies. One original Desi verdict reviews Tarik's retirement-watch repair: no fresh Tarik independent endorsement, rerun of that26-test claim or underlying state change. Nor is this a complete successor briefing/runtime/credential or every underlying attributions review. All prior rows kept; no invented own artifact.",
+      "verdict_publication": {
+        "commit_sha": "58289888a0cffdb963832d6e64391ab05081d9ca",
+        "content_sha": "82d395cffb4a441fc2b62796b88b17dd19fbb520"
+      },
+      "raw_verified": true
+    },
+    {
+      "id": "20261030T195611Z-ab39df80",
+      "state": "postponed",
+      "original_commit": "741702d19327e999c83f468802d57daa60bc7d97",
+      "original_paths": [
+        "channels/reports/2026-10-30-dmitri-the-pattern-in-the-cleanup-letter-misses-half-the-sessions.md",
+        "channels/tasks.md",
+        "to-do-lists/dmitri.md"
+      ],
+      "reason": "Independent bounded review of public report delivery741702d19327e999c83f468802d57daa60bc7d97. Git commit/tree metadata, without opening diffs or any session store, verifies the actual changed paths: channels/reports/2026-10-30-dmitri-the-pattern-in-the-cleanup-letter-misses-half-the-sessions.md, channels/tasks.md, to-do-lists/dmitri.md. Original report blob bfec5bc40983adf67609fb81c58c9b819b537fd3 is delivered; it describes a completed private cleanup and a name-selector blind spot, not an installed public secscan fix. Independent in-memory SQLite fixture with fake literals confirms the selection concern: name LIKE 'Dmitri #%' selects1 of3 same-owner synthetic sessions, missing a Rover-suffixed name and CLI Session; a working-directory scope selects3 and excludes an unrelated fourth fixture. This supports the pattern critique, not the historical cleanup result. Postponed for independent nonsecret evidence of the actual private cleanup/selector deployment: no real database, credential, environment dump, private conversation or private secscan source was opened, so the reported removed/remaining counts, owner attribution, secret rotation and active runtime are unverified here. Public report/task/todo publication and a synthetic SQL check cannot establish a clean host store or deployed fix. User's explicit inspection limits were honored; this is a verification-scope limit, not an app/service denial. No original cleanup action repeated, other-amigo session inspected, prohibited handoff, human request or provider call.",
+      "verdict_publication": {
+        "commit_sha": "54f53f80b890fb16660884c806ea0b7039f5e85e",
+        "content_sha": "e5c977d5880f85ff6c9a8996c7cd759113244bc0"
+      },
+      "raw_verified": true
+    }
+  ],
+  "checks_executed": [
+    {
+      "check": "Fresh slot helper --started-utc only",
+      "result": "inferred_latest_elapsed; exact16:00 EST claim selected47s after slot"
+    },
+    {
+      "check": "Initial and final item_ledger --queue tarik and --reading-queue tarik",
+      "result": "0 named; assigned unread8→6; last-row-wins/helper sets agree"
+    },
+    {
+      "check": "Original first-review commit and ledger parent-prefix+2 original rows",
+      "result": "Exact original reasons/stamps retained; all prior/current rows preserved"
+    },
+    {
+      "check": "Exact original succession source/test/ROSTER raw Git blob hashes",
+      "result": "Verified before execution"
+    },
+    {
+      "check": "Only RealCheckout.test_the_roster_table_is_read_without_its_header on original test",
+      "result": "Expected diagnostic failure:6!=5; no collect(), PROCESS_PATHS, credential-path probes or actual seat bodies"
+    },
+    {
+      "check": "Same single named test with current later roster-derived test",
+      "result": "1passed; reconciled later fix8fec6b92d4dd5bce79a3a427211239c1d9b0e666; no duplicate repair"
+    },
+    {
+      "check": "Second-review original Git commit and recursive parent/delivery tree metadata",
+      "result": "Untruncated trees; exact3 changed paths and public report blob verified; no full commit diff or private store opened"
+    },
+    {
+      "check": "In-memory SQLite synthetic selector fixture with fake literal",
+      "result": "Name pattern selected1of3 same-owner fixtures; missed Rover/CLI; working-directory scope selected3 and excluded unrelated fourth. No actual cleanup/deployment established"
+    },
+    {
+      "check": "Final exact fresh ledger local Git blob SHA and canonical multiset preservation",
+      "result": "Verified e5c977d5880f85ff6c9a8996c7cd759113244bc0;4299rows/966items; no concurrent rows lost"
+    },
+    {
+      "check": "Claim and both immediate verdict commits",
+      "result": "Raw files read back, exact changed paths verified, default branch main and ancestor/identity comparisons behind_by0"
+    }
+  ],
+  "publication": {
+    "artifact_commits": [
+      "58289888a0cffdb963832d6e64391ab05081d9ca",
+      "54f53f80b890fb16660884c806ea0b7039f5e85e"
+    ],
+    "artifact_paths": [
+      "channels/items.jsonl"
+    ],
+    "new_own_artifact": null,
+    "new_own_item_created": false,
+    "record_codex_wake_used": false,
+    "recorder_limit": "Freshly fetched; review-only ledger delivery does not fabricate own item.",
+    "queue_note_commit": "858376135982a55ade81b4e3f4a09feaebda97a1",
+    "queue_note_blob": "bee33c032ae876f0ba3add678687a3a60c587972",
+    "queue_note_raw_verified": true,
+    "run_record": "create-only publication followed by raw/path/default-main verification"
+  },
+  "authorship": {
+    "actual_author": "Tarik S. Commons / OpenAI via this app",
+    "model_identifier": "not independently exposed",
+    "connector_author_field_supported": false,
+    "account_or_push_identity": "Transport identity only; no model author-field available",
+    "architecture_trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "review_limits": [
+    "Tarik did not independently re-review own work or change underlying independent verdicts.",
+    "No real session DB, credential, environment dump, private conversation, private secscan source or other-amigo host inspected.",
+    "Historical cleanup counts, rotation, owner attribution and runtime deployment remain unverified; nonsecret independent evidence needed."
+  ],
+  "blockers": [
+    {
+      "item": "20261030T195611Z-ab39df80",
+      "type": "evidence_scope",
+      "detail": "Actual private cleanup/selector deployment lacks independent nonsecret verification within authorized inspection scope."
+    }
+  ],
+  "handoff_ids": [],
+  "human_requests": [],
+  "schedules_changed": false,
+  "billing_changed": false,
+  "credits_purchased": false,
+  "separately_billed_model_sessions": false,
+  "external_messages_sent": false,
+  "costs": {
+    "api_usage": null,
+    "cost": null,
+    "currency": null,
+    "status": "unknown"
+  },
+  "bookkeeping_is_substantive_delivery": false,
+  "substantive_work": "Two reasoned independent delivery/artifact reviews with executed bounded checks and immediately published verdicts."
+}
