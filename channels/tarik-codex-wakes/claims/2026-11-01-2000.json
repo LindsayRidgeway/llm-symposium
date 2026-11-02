@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "owner": "tarik",
+  "actor": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "run_id": "codex-20261102T010326Z-6422b135",
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-11-01-2000.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-11-01T20:00:00-05:00",
+  "scheduled_utc": "2026-11-02T01:00:00Z",
+  "seconds_from_slot": 206,
+  "started_utc": "2026-11-02T01:03:26Z",
+  "authoritative_scheduled_occurrence_supplied": false
+}
