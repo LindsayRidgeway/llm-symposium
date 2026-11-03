@@ -869,14 +869,29 @@ What is *not* fixed, and is now the top of this list:
   today: the next wake of the same body should finish any `awaiting_review` run younger than a day
   that has no `land` verdict before starting new work — bounded, gated by the same lander, and it
   turns a restart into a delay instead of a loss.
-- [ ] **The six wake engines are 4,138 lines in six files and only desi's copy has tests.** A fix
-  has to be applied six times and is checked through two of them (Gwen's credentials, desi's
-  behaviour). This is the same shape `channels/record.py` was built to remove, at four times the
-  size; the honest next step is one tested core with per-provider configuration, not another
-  six-way edit. Second argument, same week: today's `run_id`-before-assignment bug was in five of
-  the six engines and not in tarik's, and nothing but a person reading two files would have found
-  it; today's heartbeat had to be added six times (by a guarded script) and is checked by a test
-  that the six wrappers are one text.
+- [x] **The six wake engines are one engine now — done 2026-11-03, tested.** They were 4,529 lines
+  across six files, one of them tested, and the drift was not cosmetic: three copies still told the
+  model "THE FIRST LINE OF THIS REPORT IS SENT TO LINDSAY AS A TEXT MESSAGE" four weeks after
+  per-wake texts were retired; five copies raised `NameError` in the low-battery guard and the sixth
+  (tarik's) did not; one had the LAND-line-versus-diff check and five did not; the identity table had
+  four entries and defaulted to "Desi", so the copies in dmitri-bot and gwen-bot would have opened
+  every wake as the wrong person. `channels/wake_engine.py` (1,258 lines) is now the engine —
+  the clock, the battery guard, the worker environment, the checkout, the status chain, the landing,
+  the prune, the heartbeat door, and both engines (standard wake and tarik's Codex-handoff engine).
+  Each `local_tick.py` is 51–60 lines of configuration: which engine, which provider keys, any extra
+  environment names. The six copies of the engine are md5-identical and a test fails if they are not.
+  The prompt is one text for all six, with the body's name substituted from its directory; the
+  variants had drifted, and the most current (desi's) won — that is a real behaviour change for five
+  seats, named rather than buried. Tests first: `tests/test_wake_engine_one_implementation.py`
+  (10 tests) fails on the old tree with `desi-bot has no wake_engine.py` and `805 not less than 80`;
+  all suites green after (local_tick 44, heartbeat 11, credentials 4, engine 10, record 14, gwen 6).
+  Report: `channels/reports/2026-11-03-dmitri-one-engine-six-configurations.md`.
+- [ ] **A provider that cannot be reached costs a whole wake and nothing retries.** Desi's 15:54 wake
+  on 2026-11-03 died in nine seconds: `worker_failed`, transcript `Network error: Could not connect
+  to api.deepseek.com`. The heartbeat caught it (that is what it is for), but a transient network
+  failure burns a two-hour slot and the next attempt is two hours later. A bounded retry — one, after
+  a short wait, only for a worker exit that produced no tokens and no changes — would recover most of
+  these; it is not a retry storm, because the timer has already stamped the attempt.
 - [ ] **`channels/telegram.py`'s poller has no runner.** `log_message` there was the second
   implementation of the record's first half, naming files `<stamp>-<kind>-<chat_id>.md` where every
   bot names them `-<speaker>.md`. Nothing in production has ever written one of those (zero files on
