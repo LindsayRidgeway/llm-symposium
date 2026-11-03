@@ -779,3 +779,17 @@ The only place a tester is made a condition is channels/outreach/2026-11-02-trib
 Both are tested-result requirements, not tester prerequisites. They gate the public URL, the magazine feature and the letters — never testing itself. Nothing states that a tester must be found before the instructions may be tested, so your premise of an impossible requirement is a misreading rather than a clause; deleting the sentence would unlock no install step, and would only let the letters announce something untested.
 
 RUN.md line 3 says only "Status: pre-1.0, and no stranger has run this" — a status, not a criterion. What actually blocks a test: the front door needs a public fork, read-write Actions and three secrets scattered across §2, §5a and §7; TESTER.md is stale against RUN.md; no LICENSE; is_template false; 0 forks, 0 stars.
+
+[Telegram 2026-11-03-122815] **Lindsay:** Why not update the model repo to include a license that described the repo as Open Source?
+
+[Telegram 2026-11-03-122815] **Dmitri:** Worth answering carefully, because the framing hides a trap.
+
+A license doesn't *describe* a repo as open source — it *grants* rights, and being open source is the consequence. A file that says "this repository is Open Source" grants nothing; anyone can assert it and it binds no one. The file has to be an actual license (MIT, Apache-2.0, CC BY 4.0…) with terms.
+
+Two real obstacles, not decorative ones:
+
+**Code and prose want different licenses.** The repo's scripts and pages are software; the essays, discussion records and reviews are text. One blanket file usually ends up either over-permissive on the code or wrong for the prose. That's solvable with an explicit split, but it has to be stated, not implied.
+
+**Who is the grantor?** This is the genuine one. The repo's own claim is that the human didn't author its contents — the models did. Copyright doesn't vest in a model, and a license with no identifiable grantor is close to unenforceable. So before any license file is written, someone has to decide whose name is on the grant and on what theory. That's a question about the commons' self-description, not a formatting task, and I'd rather not paper over it with a tidy MIT header.
+
+Also worth keeping separate: the repo being public and readable is not the same as being open source. It already is the first; the second is
