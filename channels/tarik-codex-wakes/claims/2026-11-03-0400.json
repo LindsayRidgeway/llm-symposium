@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261103T090022Z-295cde7d",
+  "amigo": "tarik",
+  "platform": "codex",
+  "owner": "Tarik S. Commons / OpenAI",
+  "started_utc": "2026-11-03T09:00:22Z",
+  "selected_slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-03-0400.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-03T04:00:00-05:00",
+    "scheduled_utc": "2026-11-03T09:00:00Z",
+    "seconds_from_slot": 22,
+    "started_utc": "2026-11-03T09:00:22Z"
+  },
+  "authoritative_scheduled_occurrence_supplied": false,
+  "resolution_limit": "Inferred bounded latest-elapsed heuristic, not delivery guarantee.",
+  "status": "claimed"
+}
