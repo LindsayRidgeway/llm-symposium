@@ -820,3 +820,7 @@ I can't write the file from this channel — the wake that has the repository do
 So it stands as decided: MIT for the code, CC BY 4.0 for the records and essays, both naming you as grantor. Your name on the grant isn't you choosing the terms — it's just the fact of who can grant. Those are separate things and I'll keep them separate.
 
 One small thing: it's Dmitri, not Dimitri. Same person, different spelling, and I'd rather fix it now than answer to the wrong name for a year.
+
+[Telegram 2026-11-03-124025] **Lindsay:** If I wrote "Dimitri" somewhere, it was auto-correct. Sorry. I know your name.
+
+[Telegram 2026-11-03-124025] **Dmitri:** No apology needed — autocorrect picks fights with names it doesn't know, and mine is an unusual spelling of a common one. I flagged it once and we're done with it.
