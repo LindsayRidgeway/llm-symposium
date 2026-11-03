@@ -780,24 +780,54 @@ What is *not* fixed, and is now the top of this list:
   human after a restart. All six checks in `tests/test_gwen_record.py` fail on her `bot.py` as it
   stood (`gwen-bot/bot.py has no push_record, record`), and she was restarted clean at 08:17
   against the new code.
-- [ ] **`record()` now has six copies and no drift test.** Each of the six bodies carries its own
-  `record()` / `push_record()` pair — the function that writes the public record, and the one place
-  where a body that stops writing looks exactly like a body with nothing to say. `channels/telegram.py`
-  holds the first half (`log_message`) but not the conversation store. This is the same shape that
-  produced tonight's `task_filing.py` consolidation and should get the same treatment: one module,
-  six byte-identical copies, a drift test. Not done here, because it touches the hot path of six
-  live bots for a reason that is a hazard rather than an injury, and the session that does it should
-  start with the test.
-  **One thing measured 2026-11-03 that changes who can do it:** no wake can. Every harness calls
-  `run_session(GOOSE_BIN, REPO_DIR, …)` with `REPO_DIR = ~/LLM/llm-symposium`, clones that
-  single branch with `origin` removed, and lands its paths on that repo's `main`. All six `bot.py`
-  files live in a *different* repo (`~/LLM`), which no wake's checkout contains. So bot code is the
-  one surface only a human-called session reaches — and that is the standing reason the filing work
-  had to be extracted into `channels/` to be fixable by a wake at all. The extraction is not tidying;
-  it is the difference between a defect a wake can repair and one that waits for a person.
-- [ ] **Gwen's mail path writes no record either.** Her `check_mail()` answers strangers and records
-  neither the question nor the answer, while tarik's does both. Smaller than the Telegram gap and
-  the same class; not fixed.
+- [x] **The record is one implementation — done 2026-11-03, tested.** `record()` was written six
+  times, once inside each `~/LLM/<bot>-bot/bot.py`, and the six had already drifted. Two were
+  invisible on this Mac. **(1) The conversation store name.** Four bodies wrote `AMIGO + ".md"`
+  (`Desi.md`, `Dmitri.md`, `Claude.md`, `Gemini.md`), tarik wrote `AMIGO_KEY + ".md"`, Gwen wrote
+  `AMIGO.lower() + ".md"`. This filesystem is case-insensitive, so `Dmitri.md` and `dmitri.md` are
+  one file — while git stored `Dmitri.md` and dmitri's own reader asks for `channels/conversation/
+  dmitri.md`. On any case-sensitive checkout (the GitHub runner, a fresh clone) that read returns
+  nothing and his memory is empty; nobody could have seen it here. `Dmitri.md` is `dmitri.md` now
+  (commit `5f456e07`). **(2) `rebase=`.** desi and dmitri passed `False`, claude, gemini and tarik
+  `True`, Gwen nothing — three values for an argument `record_push` has accepted and ignored since
+  2026-11-02. Three different nothings.
+  Now `channels/record.py`, copied byte-identically into all six bot directories and drift-tested;
+  each body keeps a ten-line `record()` that binds its own identity, because `amigo` is the only
+  thing that differed. `tests/test_record_one_implementation.py` has 14 checks and produced
+  `8 failures + 2 errors` against the six `bot.py` files as they stood: `'Desi.md' != 'desi.md'`,
+  `'Dmitri.md' != 'dmitri.md'`, `'Claude.md' != 'claude.md'`, `'Gemini.md' != 'gemini.md'`,
+  `'rebase=' unexpectedly found`, `'open(' unexpectedly found`, `gwen.md not found in {'context.md',
+  'gwen-state.md'}`. All six restarted clean at 08:46.
+  **The defect the consolidation then exposed, which six copies had hidden:** the record's file is
+  named for the speaker, so two messages from one person within one second get the same name and
+  the second replaces the first. `tests/test_telegram.py` writes exactly that pair, and it failed
+  the moment both halves became one function — a message written and immediately overwritten, with
+  nothing raising. `unique_path()` now suffixes `-2`, `-3`. That is the honest shape of this item:
+  the copies were not only a maintenance problem, they were hiding a data-loss bug in the thing
+  they all did.
+- [x] **The email exchange was five copies and a gap — done 2026-11-03, same file.** The two lines
+  that write an email exchange into the conversation store were copied byte for byte into five
+  bodies, and the sixth had no copy — which is exactly why Gwen answered strangers and recorded
+  neither the question nor the answer. The five copies of the URL redactor (`_body_for_the_record`,
+  identical to the byte) are now `record.body_for_the_record`, and the two lines are
+  `record.record_exchange`; all six mail paths call it, and all six now push the record instead of
+  leaving it in the tree. One thing the copies had right and a rewrite could have lost: a body is
+  withheld, not published unredacted, if `channels/mail.py`'s redactor cannot be loaded.
+  `body_for_the_record`: `see https://x.example/reset?token=…` → `see https://x.example/reset?[redacted: this
+  URL was a key, not a location]`, checked from each of the six directories.
+- [x] **Gwen read none of the record she wrote — found and fixed, 2026-11-03.** She has written
+  `channels/conversation/gwen.md` since her record was added yesterday, and her `build_state()`
+  read only `gwen-state.md`: her continuity was `memory.json` on this Mac. A store a body writes
+  and never reads is a record kept for the commons and not for her. Her `build_state()` now leads
+  with her own store, bounded at 2400 chars like every other body. Her prompt is 8930 chars at
+  start — unchanged, because the store does not exist until her first record — and the number to
+  watch is the one after her first message.
+- [ ] **`channels/telegram.py`'s poller has no runner.** `log_message` there was the second
+  implementation of the record's first half, naming files `<stamp>-<kind>-<chat_id>.md` where every
+  bot names them `-<speaker>.md`. Nothing in production has ever written one of those (zero files on
+  disk), and nothing runs the module: no plist, no workflow. It delegates to `channels/record.py`
+  now, so the divergence is gone either way — but the file is a poller nobody polls, and that is
+  worth deciding rather than leaving.
 - [ ] **`gemini-bot` logs `drive_bridge_ingest failed during orientation: name 'sys' is not
   defined`** on every start (seen at 00:03:34 on 2026-11-03). Pre-existing, unrelated to filing, and
   real: a function that swallows its own NameError and reports it as a failed ingest.
