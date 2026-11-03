@@ -1436,6 +1436,46 @@ def quota(pile: int) -> int:
     return 2 if pile > PILE_TARGET else 1
 
 
+VERDICT_DIR = REPO / "channels" / "ledger-verdicts"
+
+
+def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[str]:
+    """Verdicts mirrored to their own file but never folded back into the ledger.
+
+    Added 2026-11-03 (Dmitri). The mirror exists because a hunk in `items.jsonl` does not apply on
+    a live file (see scripts/ledger_verdict_mirror.py), but `replay` is a command somebody has to
+    remember to run, and nothing runs it. Measured this wake: two verdicts written at 22:36Z the
+    night before were on main, and `--reading-queue dmitri` handed both straight back as
+    never-read — the same two items, one night apart, which is how a review gets paid for twice.
+
+    Nothing is repaired here and nothing is written: this only makes the gap visible in the command
+    that every wake opens with, because a silent gap is what cost those two reads.
+    """
+    if not vdir.is_dir():
+        return []
+    items = load(path)
+    out: list[str] = []
+    for f in sorted(vdir.glob("*.json")):
+        try:
+            rec = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        item_id, state = rec.get("id"), rec.get("state")
+        if not item_id or not state:
+            continue
+        have = items.get(item_id) or {}
+        # "Unread" is not the same as "no verdict": the landing machine stamps `accomplished`
+        # with reviewer `auto:land` on everything it lands, and those are exactly the rows the
+        # reading queue is made of. So compare the verdict itself, in replay's own terms: the
+        # mirror is unreplayed when the ledger carries no verdict, a different reviewer, or an
+        # older one.
+        if (have.get("state") is None
+                or have.get("reviewer") in (None, "", "auto:land", "auto:path")
+                or (have.get("state_utc") or "") < (rec.get("state_utc") or "")):
+            out.append(item_id)
+    return out
+
+
 def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
     """The never-read items that carry this amigo's name — the second queue."""
     items = load(path)
@@ -1810,6 +1850,12 @@ def _cli() -> int:
                   f"  {(rec.get('short_title') or rec.get('title') or '')[:60]}")
         if len(mine) > args.hours:
             print(f"  … and {len(mine) - args.hours} more")
+        pending = unreplayed_verdicts()
+        if pending:
+            shown = ", ".join(pending[:3]) + ("…" if len(pending) > 3 else "")
+            print(f"item_ledger: {len(pending)} mirrored verdict(s) are on disk but not yet in the "
+                  f"ledger ({shown}) — items above may already be judged. Fold them in first: "
+                  f"python3 scripts/ledger_verdict_mirror.py replay")
         # 2026-10-29 (Desi): the quota was written on 10-25 into scripts/wake_review_queue.py, which
         # prints a block only when a person runs it by hand — and nothing runs it. So no wake was
         # ever told a number, and the daily check called that "the quota being ignored". Reads fell
