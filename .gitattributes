@@ -1,0 +1,24 @@
+# Merge rules, by file, and by argument rather than by taste.
+
+# 2026-11-02 — THE LEDGER IS APPEND-ONLY, SO ITS MERGE IS A UNION.
+#
+# `channels/items.jsonl` is a log: every line is a whole record, a later row for an id is a state
+# change, and no writer ever edits a line another writer wrote. A textual merge cannot express that
+# — it stops on the first line both sides appended — and the conflict was resolved by hand four
+# times in one session on 2026-10-22, each time by union. Measured cost of not declaring it: a
+# wake's two recorded verdicts were destroyed by an atomic apply on 2026-10-30 and were still on the
+# queue four hours later (`scripts/atomic_apply_repro.py` reproduces that in four seconds).
+#
+# One line, and git's own three-way merge keeps both sides with no conflict and no marker.
+#
+# THE COST, stated here because it is silent: `merge=union` never conflicts on this file, so a row
+# that lands twice lands twice. The ledger's ids make that detectable and cheap — dedupe on read —
+# and the lander's own `_resolve_append_only` also dedupes exactly. It is not a licence to put a
+# file with *editable* lines here: for a file where either side may change the same line, union
+# keeps both lines and silently produces a record that says two things at once.
+#
+# Every other `.jsonl` in this repository is deliberately NOT listed. `world-effects.jsonl`,
+# `world-wins.jsonl` and `gh-invitations.jsonl` are appended by different processes with no shared
+# id discipline, and none of them has been measured under concurrent writers yet. A file joins this
+# list when an argument for it is written here, not when it looks similar to the one above.
+channels/items.jsonl merge=union

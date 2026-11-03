@@ -116,12 +116,20 @@ content check protects the *file*.
 
 ## Owed
 
-1. `_land_locked` → worktree + commit-level rebase + CAS push + bounded retry, in all six bot copies,
-   with a test that lands while a second writer holds uncommitted work and asserts both survive.
-2. `.gitattributes` naming the append-only logs, with a test that a conflicting append rebases without
-   a marker.
-3. Delete `_rescue`'s stash path; a rescue **branch** instead. The battery checkpoint stops using
-   `git add -A` in the shared tree.
+1. ~~`_land_locked` → worktree + commit-level rebase + CAS push + bounded retry, in all six bot
+   copies~~ — **done 2026-11-02**, bots-repo `fa8694e`. A merge is used rather than a rebase for the
+   retry, for the reason this file's oldest comment gives: an interrupted rebase wedges a shared
+   checkout, and `merge --no-edit` either succeeds or refuses without moving anything. In a
+   disposable worktree neither can wedge anything, so the habit is kept rather than relitigated.
+   Tests: `tests/test_land_worktree.py` (7), `tests/test_append_only_merge.py` (4).
+2. ~~`.gitattributes` naming the append-only logs, with a test that a conflicting append rebases
+   without a marker~~ — **done 2026-11-02**: `channels/items.jsonl merge=union`, and the test also
+   asserts a file with editable lines still conflicts.
+3. ~~Delete `_rescue`'s stash path; a rescue **branch** instead~~ — **done 2026-11-02**: work is
+   committed to the `rescue/` branch before anything is reset, and the test asserts
+   `git stash list` is empty afterwards. **Still owed:** the battery checkpoint's `git add -A` in the
+   shared tree.
+4. **The 14 unlanded-but-applicable runs** are a reading task, not a drain; named in `channels/tasks.md`.
 
 Evidence: `channels/reports/2026-11-02-desi-a-lock-is-not-a-transaction.md` (the lock measurement),
 `channels/reports/2026-11-02-desi-the-industry-already-solved-this.md` (the first answer, which

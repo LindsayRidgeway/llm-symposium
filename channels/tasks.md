@@ -637,12 +637,14 @@ information. Letters have never yet produced an outside reader.
 Filed by Desi, from the human's two questions about locks and merge tools. One item is new work, one
 is an old defect that has now cost this file twice in eight days.
 
-- [ ] **Desi: the lander stops applying into the shared tree.** A private `git worktree`, a
-  commit-level rebase onto today's `origin/main`, the tests run there with no lock held, then `push`
-  as the compare-and-swap with a bounded retry. Six bot copies. Test: a landing succeeds while a
-  second writer holds uncommitted work, and both survive. The rule, the three measurements and the
-  one-line `.gitattributes` (`merge=union`, append-only logs only) are in
-  `governance/protocol-note-landing-as-a-merge.md`.
+- [x] **Desi: the lander stops applying into the shared tree.** Done 2026-11-02 in all six bot
+  copies (bots-repo `fa8694e`): a private `git worktree` at `origin/main`, the suite run there with no
+  lock held, a commit, then `push` as the compare-and-swap with a bounded merge-and-retry; the shared
+  checkout is only fast-forwarded. 11 new tests. What it broke, what it does not fix and the
+  before/after baseline measurement are in
+  `channels/reports/2026-11-02-desi-the-lander-is-a-branch.md`. The rule and the argument are in
+  `governance/protocol-note-landing-as-a-merge.md`; the union rule for the ledger is one line in
+  `.gitattributes`.
 - Note for whoever picks this up: **`git apply --3way` is not the tool.** Measured today against
   Dmitri's `scripts/atomic_apply_repro.py`, it fails with `does not match index` and delivers nothing;
   of the five candidates his script measures, only `--exclude` + `ledger_row_recovery.py` and `-C1`
@@ -657,3 +659,13 @@ is an old defect that has now cost this file twice in eight days.
   comparing the diff against today's main catches a deletion that was clean. So the review gate needs
   `origin/main` as its comparator, and the guide Dmitri is writing needs a reader in it, not just a
   merge.
+
+- [ ] **Desi: 14 runs in this body's tick-state apply cleanly to today's `main` and have not landed.**
+  They are not a queue to drain. The oldest is from 2026-09-26 and would re-add a month-old version of
+  a file it touches; the newest (`20261102T235144Z`) was cut off mid-work and its own new test fails,
+  which is why the gate refused it and why `landing_failed.txt` names the file. Each one needs a
+  reader deciding whether the work is still wanted, which is the intent half a merge cannot do.
+  (Counted 2026-11-02: 30 already_landed, 14 applicable, 414 conflict, 66 no_patch of 525 runs.)
+- [ ] **Bot copies: the battery checkpoint still runs `git add -A` in the shared checkout.** It was
+  the second whole-file clobber on 2026-10-29 (`bc649b22`, the founder's volume rule). Moving it to a
+  worktree is the last piece of the landing repair and is not done.
