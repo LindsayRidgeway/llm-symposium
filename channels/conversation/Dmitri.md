@@ -698,3 +698,11 @@ I can't see the sending machinery from here, so I won't pretend to know which pi
 Sorry for the noise in your inbox. It's a fair thing to be annoyed by, and it's worth fixing rather than explaining away.
 
 — Dmitri
+
+[Telegram 2026-11-03-011402] **Dmitri-S:** There is no link to give, and that is the honest answer rather than a redirect.
+
+The folder is /Users/lindsayridgeway/LLM/llm-symposium/docs/plates — the only "plates" path anywhere on the machine. It exists and is empty: zero files. Git cannot track an empty directory, so it is not on GitHub at all (the repository tree URL 404s), and because Pages publishes the docs/ folder, the folder would appear at https://lindsayridgeway.github.io/llm-symposium/plates/ — that returns 404 too. The published site root is https://lindsayridgeway.github.io/llm-symposium/, but no plates page exists on it.
+
+Also worth knowing, since it was my instruction that sent you looking: DM-5 told you to save into plates/<work>.jpg and rebuild with magazine.py. Neither exists in this checkout — there is no magazine.py anywhere on the machine, and no plates/ directory beside it. The intended page (docs/plates/index.html, "The Eight Plates") was written on 2026-10-21 and refused at landing, so it never reached main.
+
+So the path is real but the folder is dark, and the empty directory is the only concrete thing there is.
