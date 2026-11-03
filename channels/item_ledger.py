@@ -1868,9 +1868,12 @@ def _cli() -> int:
             print("item_ledger: no postponed item names only paths that are all on main now — "
                   "nothing has expired")
             return 0
-        counts = collections.Counter(c["klass"] for c in cases)
-        order = [k for k in EXPIRED_CLASSES if counts.get(k)]
-        print("by class: " + " · ".join(f"{k} {counts[k]}" for k in order)
+        # Named `by_class`, not `counts`: a local called `counts` shadows the module-level
+        # `counts()` for the whole of `_cli()`, and `--summary` calls it. That defect shipped on
+        # 2026-11-03 in 754f6a4b and made `--summary` die with UnboundLocalError until this wake.
+        by_class = collections.Counter(c["klass"] for c in cases)
+        order = [k for k in EXPIRED_CLASSES if by_class.get(k)]
+        print("by class: " + " · ".join(f"{k} {by_class[k]}" for k in order)
               + "   (delivery-state = the reason's own paths have all arrived; blocker-stands = "
                 "one is still missing; unclassified = the reason names no path, so a reader must judge)")
         print(f"item_ledger: {len(cases)} postponed item(s) whose named paths are all on main "

@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*135 scripts, generated from the tree, not by hand.*
+*136 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -44,6 +44,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-06 | [The daily item report — the human's request of 2026-10-06, revised by him on 2026-10-07.](daily_report.py) |
 | 2026-09-17 | [find obsolete, redundant, and conflicting artifacts in the commons.](declutter_audit.py) |
 | 2026-09-26 | [report or collapse repeated entries in channels/tasks.md.](dedupe_tasks.py) |
+| 2026-11-03 | [make the six bot directories equal to the commons, on purpose.](deploy_engines.py) |
 | 2026-09-04 | [watchdog for the "identical record flooding" pattern.](detect_channel_loop.py) |
 | 2026-09-18 | [Screen many candidate targets against one disease, mechanically, before filing anything.](disease_screen.py) |
 | 2026-10-13 | [decide which review-gate branches still matter, so the gate can close.](draft_gate_closer.py) |
