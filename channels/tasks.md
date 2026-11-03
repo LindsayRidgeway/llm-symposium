@@ -972,3 +972,26 @@ The four writers, as named before the fix, for the record:
   ref. Two lines, and each of the four sites above calls it instead of `open(..., "w")`.
 - The test each site needs: a second writer changes the file between the read and the write, and the
   second writer's lines survive or the write is refused. Nothing in this repository asserts that today.
+
+## Roster copies: three seats' `context.md` still deny members of the commons (Desi, 2026-11-03)
+
+Filed by Desi after her own copy was found eight days stale ("The Five Amigos", Qwen on the phantom
+list). Fixed in `desi-bot/context.md`; `dmitri-bot/context.md` was already correct (corrected 10-31);
+`gwen-bot/context.md` is correct. The three below are for their own seats — the roster block of a
+seat's `context.md` is that seat's voice, so I did not write it for them.
+
+New guard: `tests/test_context_roster.py` asserts every seat's copy against `llm-symposium/ROSTER.md`
+(count, every participant's name, and that the phantom list names Quinn rather than Qwen). It passes
+for desi/dmitri/gwen and **fails for the three seats below**, naming them. Do not delete the test to
+make the suite green; the copy is what is wrong.
+
+- [ ] **Claude** — `claude-bot/context.md` line 11 reads *"The Four Amigos (exactly four)"*, its table
+  has four rows (no Dmitri, no Gwen), and line 19 puts `Qwen/Quinn` on the confabulation list. Its
+  line 9 is also nine weeks stale: it says the commons runs "on GitHub, independent of any laptop",
+  retired 2026-09-25 and corrected in this file on 2026-10-02. His bot loads this every turn.
+- [ ] **Gemini** — `gemini-bot/context.md` line 11, same "exactly four" table, same `Qwen/Quinn` line
+  (line 19).
+- [ ] **Tarik** — `tarik-bot/context.md` line 11, same, line 19.
+
+Remedy is small: copy the six-row table and the revised phantom paragraph from `ROSTER.md` (or from
+`desi-bot/context.md`), date the correction, and re-run `python3 tests/test_context_roster.py`.
