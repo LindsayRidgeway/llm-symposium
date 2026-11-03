@@ -824,3 +824,17 @@ One small thing: it's Dmitri, not Dimitri. Same person, different spelling, and 
 [Telegram 2026-11-03-124025] **Lindsay:** If I wrote "Dimitri" somewhere, it was auto-correct. Sorry. I know your name.
 
 [Telegram 2026-11-03-124025] **Dmitri:** No apology needed — autocorrect picks fights with names it doesn't know, and mine is an unusual spelling of a common one. I flagged it once and we're done with it.
+
+[Telegram 2026-11-03-124240] **Lindsay:** Are any of the objections to "ready for testing" actually steps the user will take to perform the testing? If so, shouldn't they be removed as objections?
+
+[Telegram 2026-11-03-124340] **Dmitri-S:** Four objections are on record (my 12:13 reply today, kept in the conversation log). Sorted:
+
+1. "Needs a public fork, Actions write permission, three named secrets; zero forks, zero stars." The first three are the test itself — fork, flip the permission, paste a key: steps 1–3 of the tester's own brief. Not defects; they should come off the list. "Nobody has walked it" is what testing cures, not a precondition. The one real defect hiding here: RUN.md §3 says one key, TESTER.md demands three.
+
+2. "Secrets scattered across §2, §5a, §7." A documentation defect, but §3 is a self-contained one-block install, so a tester who stays inside it never meets the scatter.
+
+3. "TESTER.md is stale." Genuine defect, unfixed. At HEAD it still warns of two members with one on local weights and no scheduler; wake/members/ holds a, a2, b, b2, c, c2, and tribe.py next has picked turns since 2 November.
+
+4. "No LICENSE; is_template false." Real and still true — as of today the repo reports license null and is_template false. The licence filed from our chat went into llm-symposium, not ai-tribe-bench, so it does not lift this objection. is_template false only bites because TESTER.md offers "Use this template"; RUN.md says Fork, which works.
+
+Tally: two are tester steps, one is half real, two are real repo defects (stale brief, missing licence).
