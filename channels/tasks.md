@@ -737,18 +737,51 @@ What is *not* fixed, and is now the top of this list:
 - [ ] **A person's manual session is now the biggest writer of that tree**, and the one no hook can
   help. The bots no longer move it, which is a real improvement — an uncommitted edit was carried
   away by a bot on every human message for a year. It is still not safe from the session itself.
-- [ ] **Four of six bots never file into the ledger.** `file_tasks` exists in `desi-bot` and
-  `dmitri-bot` only, so a request raised in Claude's, Gemini's, Gwen's or Tarik's chat never reaches
-  `channels/tasks.md` — and the founder's "judge it by whether tasks.md has my name in it" is only
-  true of two bodies.
+- [x] **Four of six bots never filed into the ledger — done 2026-11-03, tested.** `file_tasks`
+  existed in `desi-bot` and `dmitri-bot` only, so a request raised in Claude's, Gemini's, Gwen's or
+  Tarik's chat never reached `channels/tasks.md`, and the founder's *judge it by whether tasks.md has
+  my name in it* was true of two bodies out of six. It is now one implementation —
+  `channels/task_filing.py`, copied byte-identically into all six dirs, with a drift test — and all
+  six chats call it. **The half I would have missed by only writing code:** the paragraph in the
+  system prompt that tells a model the `TASK:` marker exists. The four bodies had neither the
+  function *nor* that sentence; a function with no sentence in front of it is dead code that tests
+  green. Proof it is live rather than landed: the assembled prompt in all six bodies carries the
+  paragraph (claude 23011 chars, gemini 14354, tarik 14219, desi 21268, dmitri 17994, gwen 8930),
+  and all six were restarted against the new code at 00:05 on 2026-11-03 and started clean.
+  Tests: `tests/test_task_filing_all_bodies.py` (5) — a real origin, a real shared clone, a `TASK:`
+  line ends up in `channels/tasks.md` **on origin**, the marker never reaches the human, the
+  checkout ends clean and current — and `tests/test_file_tasks_guard.py` (11), rewritten to test the
+  module instead of slicing `file_tasks` out of `bot.py`. The two structural checks fail on all
+  **four** bodies exactly as they stood before this: 8 failures, reproduced by swapping `git show
+  HEAD:<bot>/bot.py` back in and restoring it afterwards.
+- [ ] **Gwen's chat writes nothing else to the commons.** Now that it files, her chat at least
+  reaches the ledger — but it has no `record()` and no `push_record()`, unlike the other five, so
+  her side of a conversation never enters `channels/conversation/gwen.md` and no one reads what was
+  said, only what was filed. Found while wiring the filing path; not fixed, because adding a
+  record path is a different change with a different test.
+- [ ] **`file_tasks` still does not dedupe.** The identity rule was landed on 2026-09-25 in
+  `channels/task_ledger.py` with the sentence "this is the function `file_tasks` should call before
+  it inserts anything" — and it has never been called, because it lives in the commons and the
+  function did not. It does now: wiring `new_items()` into `task_filing.file_tasks` is one line from
+  here, and it should be the next session's first job, before the ledger grows a tenth copy of the
+  image-intake item.
+- [ ] **`gemini-bot` logs `drive_bridge_ingest failed during orientation: name 'sys' is not
+  defined`** on every start (seen at 00:03:34 on 2026-11-03). Pre-existing, unrelated to filing, and
+  real: a function that swallows its own NameError and reports it as a failed ingest.
 
 ### The four writers, as they now stand
 
 The four writers, as named before the fix, for the record:
 
-- [ ] **`file_tasks` in all six `bot.py` copies** — reads `channels/tasks.md`, splices the new items in
-  near the top, and writes the whole file back with no lock and no freshness check. It is the write
-  path to the one file that has lost work three times, and it runs on every human message.
+- [x] **The ledger's own write path — done 2026-11-02 and 2026-11-03, tested.** As this item was
+  first written it said "`file_tasks` in all six `bot.py` copies … writes the whole file back with no
+  lock and no freshness check". Two corrections. It was in **two** copies, not six — the other four
+  bodies had no filing path at all (see the item above). And as of 2026-11-03 it is in **zero**
+  `bot.py` files: the code moved to `channels/task_filing.py`, where the read and the write share
+  `shared_checkout_lock`, the text is re-read before the write and re-spliced if it changed, and the
+  publish goes through `record_push.push_paths` instead of four git commands outside the lock. What
+  is *not* fixed by any of that is dedupe (see the open item above) and the sweep, which is still a
+  machine rewriting this file twelve times a day.
 - [ ] **`scripts/sweep_risks.py` — and this one is not hypothetical, it is a machine.** It rewrites
   `channels/tasks.md` wholesale (`TASKS.write_text(...)`, line ~274) and `channels/risks.md` twice.
   `.github/scripts/poll_channels.py` runs it on every poll, and `channel-poll.yml` runs ~12 times a
