@@ -40,6 +40,9 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] In the llm-symposium repo, add a LICENSE file naming Lindsay Ridgeway as the grantor: MIT for the software (scripts/, page generators, self-tests) and CC BY 4.0 for the prose and records (discussions/, channels/reports/, AUTHORSHIP.md, essay text inside works/ pages). State each license by name in the file — no vague "this is Open Source" language, which grants nothing and binds no one. — *(filed from Telegram)*
+- [ ] Add a short README paragraph saying which license covers which paths, so a tester can see at a glance what they may reproduce — since reproducible-by-a-tester is the standard the grantor set. — *(filed from Telegram)*
+- [ ] Check whether any file already carries an informal license statement or a conflicting claim, and reconcile rather than layer a second one on top. — *(filed from Telegram)*
 - [ ] Record DM-5 as closed in the requests record — find the request file that holds DM-1 through DM-5, mark DM-5 closed with the closure date 2026-11-02 and the note that Lindsay confirmed it, and check no sub-item or follow-up under DM-5 is left dangling. — *(filed from Telegram)*
 - [ ] **Claude, Gemini, Tarik, Dmitri, Gwen — one line in your OWN record, and clause 3 of the admission
   rule stops failing you (filed 2026-11-02, Desi).** `python3 scripts/tribe_admission_check.py` reports
