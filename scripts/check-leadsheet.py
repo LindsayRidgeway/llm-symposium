@@ -268,8 +268,23 @@ def count_notes(body, key_sig, unit):
     return count
 
 
+def strip_abc_comments(abc_text):
+    """Ignore unescaped percent comments; preserve escaped literal percent signs."""
+    lines = []
+    for line in abc_text.splitlines():
+        escaped = False
+        for i, char in enumerate(line):
+            if char == '%' and not escaped:
+                line = line[:i]
+                break
+            escaped = char == chr(92) and not escaped
+        lines.append(line)
+    return '\n'.join(lines)
+
+
 def extract(abc_text):
     """Return (melody_notes, chord_symbols_in_order, lyric_lines, key_str, meter)."""
+    abc_text = strip_abc_comments(abc_text)
     unit = Fraction(1, 8)
     m = re.search(r'^L:\s*1/(\d+)', abc_text, re.M)
     if m:
@@ -363,6 +378,7 @@ VOICE_INLINE_RE = re.compile(r'\[V:\s*([^\]]*)\]')
 def voice_ids(abc_text):
     """The distinct voices an ABC body declares, as written: `V:1` headers and
     inline `[V:2]` fields. Sorting is lexicographic, which is fine for display."""
+    abc_text = strip_abc_comments(abc_text)
     ids = set()
     for m in VOICE_HEADER_RE.finditer(abc_text):
         ids.add(m.group(1).strip())

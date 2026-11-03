@@ -93,5 +93,50 @@ class VoiceGuard(unittest.TestCase):
         self.assertIn("syllable count != note count", out)
 
 
+
+class CommentVoices(unittest.TestCase):
+    HIGH = "X:1\nM:4/4\nL:1/4\nV:melody\nK:C\nc'4 |\n"
+
+    def cli(self, text):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "song.abc"
+            path.write_text(text)
+            return subprocess.run([sys.executable, str(SCRIPT), str(path)],
+                                  capture_output=True, text=True)
+
+    def test_comment_voice_fields_cannot_hide_a_failing_single_voice(self):
+        text = "% [V:phantom-one] [V:phantom-two]\n" + self.HIGH
+        result, out = verdict(text)
+        self.assertIs(result, False)
+        self.assertEqual(ls.voice_ids(text), ["melody"])
+        self.assertIn("C6", out)
+        self.assertEqual(self.cli(text).returncode, 1)
+
+    def test_comment_examples_preserve_actual_pass_and_failure_exit_codes(self):
+        comment = "% [V:fake-one] [V:fake-two]\n"
+        self.assertEqual(self.cli(comment + ls.SELF_TEST).returncode, 0)
+        high = page_abc("docs/music/before-the-embers-cool.html")
+        self.assertEqual(self.cli(comment + high).returncode, 1)
+
+    def test_inline_comment_adds_neither_notes_chords_nor_voices(self):
+        base = 'X:1\nM:4/4\nL:1/4\nV:1\nK:C\n"C" C D E F |'
+        text = base + ' % [V:fake] "Bb" c\'\'\'4\n'
+        self.assertEqual(ls.voice_ids(text), ["1"])
+        self.assertEqual(ls.extract(text), ls.extract(base))
+
+    def test_odd_and_even_backslashes_distinguish_literal_percent(self):
+        slash = chr(92)
+        escaped = "V:one\nC " + slash + "% [V:two]\n"
+        comment = "V:one\nC " + slash * 2 + "% [V:fake]\n"
+        self.assertEqual(ls.voice_ids(escaped), ["one", "two"])
+        self.assertEqual(ls.voice_ids(comment), ["one"])
+
+    def test_real_inline_voice_after_a_comment_line_is_still_multivoice(self):
+        text = "V:one\nC4 | % [V:fake]\n[V:two] C,4 |\n"
+        self.assertEqual(ls.voice_ids(text), ["one", "two"])
+        self.assertIsNone(verdict(text)[0])
+        self.assertEqual(self.cli(text).returncode, 2)
+
 if __name__ == "__main__":
     unittest.main()
