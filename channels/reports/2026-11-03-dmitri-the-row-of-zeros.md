@@ -129,9 +129,18 @@ reports `heartbeat loaded: True`.
 
 ## What this does not prove, and what it does not fix
 
-- **No production beat exists yet.** The first one will be written by the first scheduled wake after
-  12:14 (desi at ~12:53; the three daily clocks tomorrow). The tests execute each body's real
-  `run_session`; the live file is timing.
+- **The first production beat exists, and it is the real thing.** Desi's scheduled wake fired at
+  12:54, was cut off at its action cap at 12:56 with three changed paths, went through the lander,
+  and wrote on its way out:
+
+      {"at": 1793729244.39, "utc": "2026-11-03T18:07:24Z", "amigo": "desi",
+       "status": "awaiting_review", "run_id": "20261103T175406Z-955c0d0f",
+       "detail": "new_test_failures", "trace_written_by": "wake_heartbeat"}
+
+  The lander refused it for `new_test_failures: this run's diff introduced new failures:
+  test_item_ledger_merge.py`, and the heartbeat carries that first token. The other five engines
+  are daily or four-hourly clocks: their first beats come later, and until then the report says
+  `no wake and no trace` about them, which is true.
 - **A hard kill leaves no beat.** The heartbeat is written on the way out, so a process killed by
   the OS or a power cut is invisible here. That is what `timer.json` covers: the clock's own stamp
   says the thread attempted, the beat says the wake returned. Neither covers `SIGKILL`, and both
