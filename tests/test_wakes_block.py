@@ -75,6 +75,16 @@ class Fixture(unittest.TestCase):
         env = self.root / ("%s-bot" % body) / "bot.env"
         env.write_text("TELEGRAM_TICK_MINUTES=%d\n" % minutes, encoding="utf-8")
 
+    def heartbeat(self, body, status="skipped_no_pending_handoff", hours_ago=0.0, detail=""):
+        """What the engine writes on its way out of an attempt, skips included."""
+        state = self.body_dir(body)
+        state.joinpath("last-wake.json").write_text(json.dumps({
+            "at": (NOW - dt.timedelta(hours=hours_ago)).timestamp(),
+            "utc": (NOW - dt.timedelta(hours=hours_ago)).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "amigo": body, "status": status, "run_id": "fixture-run", "detail": detail,
+            "trace_written_by": "wake_heartbeat",
+        }), encoding="utf-8")
+
     def block(self):
         return "\n".join(self.m._wakes_block(NOW, 24, self.root))
 
@@ -148,6 +158,51 @@ class TestSilenceWhenNothingIsWrong(Fixture):
         self.assertIn("claude's wakes ran 3 time(s)", text)
         self.assertIn("nothing", text)
         self.assertIn("claude's wakes ran 3 time(s)", self.focus())
+
+
+class TestTheQuietRowsSayWhy(Fixture):
+    """Six zeros is two facts. The heartbeat is what tells them apart."""
+
+    def test_an_engine_that_declined_is_named_with_what_it_said(self):
+        self.fake_run("desi", 2, land="landed")
+        self.clock("desi", hours_ago=1)
+        self.clock("tarik", hours_ago=1, minutes=1440)
+        self.heartbeat("tarik", "skipped_no_pending_handoff", hours_ago=0.5)
+        text = self.block()
+        self.assertIn("What the quiet engines said", text)
+        self.assertIn("tarik", text)
+        self.assertIn("skipped_no_pending_handoff", text,
+                      "the report shows tarik's zeros and does not say why they are zeros")
+        self.assertNotIn("failed: tarik", text, "a declined wake is not a failure")
+
+    def test_a_silent_engine_says_it_has_no_trace(self):
+        self.fake_run("desi", 2, land="landed")
+        self.heartbeat("desi", "awaiting_review", hours_ago=2)
+        text = self.block()
+        self.assertIn("no wake and no trace", text,
+                      "an engine that has never reported is not the same as one that declined")
+
+    def test_the_section_disappears_when_every_engine_ran(self):
+        for body in BODIES:
+            self.fake_run(body, 3, land="landed")
+            self.heartbeat(body, "awaiting_review", hours_ago=3)
+        self.assertNotIn("What the quiet engines said", self.block(),
+                         "a section that is always present is a section nobody reads")
+
+    def test_a_detail_is_carried_but_only_as_one_token(self):
+        self.heartbeat("gwen", "worker_failed", hours_ago=1, detail="worker_failed")
+        self.fake_run("desi", 2, land="landed")
+        text = self.block()
+        self.assertIn("gwen", text)
+        self.assertIn("worker_failed", text)
+
+    def test_the_live_heartbeats_are_readable(self):
+        for body in BODIES:
+            beat = self.m.last_wake(body)
+            if beat is None:
+                continue
+            self.assertIn("status", beat)
+            self.assertIn("at", beat)
 
 
 class TestOffThisMachine(Fixture):

@@ -836,26 +836,49 @@ What is *not* fixed, and is now the top of this list:
   message when the fleet is healthy. Her bot restarted 11:25; the credential path is proven live
   (`exit 0`, `ok`) and her next wake is the end-to-end confirmation. Report:
   `channels/reports/2026-11-03-dmitri-the-engine-that-could-not-authenticate.md`.
-- [ ] **Tarik's engine has written no run since 2026-10-19.** His wake exists to process a pending
-  Codex handoff, and `skipped_no_pending_handoff` returns without a log line and without a run
-  directory — so "the queue is empty" and "the queue is broken" are the same observation from
-  outside, for fifteen days. One log line on that path separates them. Not changed here: it is his
-  seat, and the session's brief was the clockwork, not another amigo's engine.
+- [x] **A wake that does nothing said nothing — done 2026-11-03, tested.** The human could not
+  understand the paragraph that described this, and he was right: it was a paragraph of reasons not
+  to act. Tarik's engine returns `skipped_no_pending_handoff` before any run directory is written,
+  so in the daily report his row was six zeros for fifteen days, and six zeros is what a dead
+  engine also shows. Every engine's skip paths were the same: a dictionary returned to a caller
+  nobody reads. Now `channels/wake_heartbeat.py` writes `tick-state/last-wake.json` on the way out
+  of every attempt (one file, overwritten, `status` exactly as the engine returned it, one machine
+  token of detail); `run_session` in all six engines is a fifteen-line wrapper around the unchanged
+  engine body (`_run_session`) so every exit — including an exception raised outside the engine's
+  own try, which is recorded and re-raised — leaves the trace; and `scripts/daily_report.py` reads
+  it (`last_wake`), so the quiet rows now say `tarik skipped_no_pending_handoff at 12:05 — it
+  declined to start a model, which a run count cannot show`, or say plainly that there is no trace
+  at all. His engine is still his: the skip path is unchanged, only observable.
+  `tests/test_wake_heartbeat.py` (14 tests) fails on the code that was running with 38 checks
+  (`desi ran a wake and left no heartbeat`, ×6) and passes after; `tests/test_wakes_block.py` gained
+  5 tests that fail on HEAD's report. Report: `channels/reports/2026-11-03-dmitri-the-row-of-zeros.md`.
+- [x] **The low-battery guard raised instead of skipping — found and fixed 2026-11-03, tested.** In
+  five of the six engines it returned a `run_id` that was assigned fifteen lines below it: unplugged
+  and under 20%, the guard a wake depends on raised `NameError`, and the wake died with no run
+  directory and no result. It had never fired in production (rare condition) and had never been
+  tested (the condition had to be produced in a test). `run_id` is assigned first now; the test
+  patches `battery_state()` to 12% on battery. The sixth engine, tarik's, already assigned it first —
+  which is exactly the class the next item is about.
 - [ ] **The six wake engines are 4,138 lines in six files and only desi's copy has tests.** A fix
   has to be applied six times and is checked through two of them (Gwen's credentials, desi's
   behaviour). This is the same shape `channels/record.py` was built to remove, at four times the
   size; the honest next step is one tested core with per-provider configuration, not another
-  six-way edit.
+  six-way edit. Second argument, same week: today's `run_id`-before-assignment bug was in five of
+  the six engines and not in tarik's, and nothing but a person reading two files would have found
+  it; today's heartbeat had to be added six times (by a guarded script) and is checked by a test
+  that the six wrappers are one text.
 - [ ] **`channels/telegram.py`'s poller has no runner.** `log_message` there was the second
   implementation of the record's first half, naming files `<stamp>-<kind>-<chat_id>.md` where every
   bot names them `-<speaker>.md`. Nothing in production has ever written one of those (zero files on
   disk), and nothing runs the module: no plist, no workflow. It delegates to `channels/record.py`
   now, so the divergence is gone either way — but the file is a poller nobody polls, and that is
   worth deciding rather than leaving.
-- [ ] **`gemini-bot` logs `drive_bridge_ingest failed during orientation: name 'sys' is not
-  defined`** on every start (seen at 00:03:34 on 2026-11-03). Pre-existing, unrelated to filing, and
-  real: a function that swallows its own NameError and reports it as a failed ingest.
-
+- [x] **`gemini-bot` logged `drive_bridge_ingest failed during orientation: name 'sys' is not
+  defined` on every start — fixed 2026-11-03.** `orientation()` called `sys.path.insert` to load her
+  Drive bridge and the module never imported `sys`: a function swallowing its own `NameError` and
+  reporting it as a failed ingest, since September. Found while adding the heartbeat's import block;
+  the `import sys` stays in her file. Her next wake is the confirmation, since the warning was
+  logged by the wake path rather than at start.
 ### The four writers, as they now stand
 
 The four writers, as named before the fix, for the record:

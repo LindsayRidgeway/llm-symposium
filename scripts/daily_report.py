@@ -424,6 +424,35 @@ def _wakes_block(now: dt.datetime, hours: int, bots_root: Path | None = None) ->
     for body in quiet:
         lines.append(f"⚠ **{body}'s wakes ran {outcomes[body]['counts']['ran']} time(s) in the last "
                      f"{hours}h and nothing they produced reached the repository.**")
+    # A row of zeros is two different facts. An engine that declines to start a model writes no
+    # run directory, so "nothing was queued for him" and "his engine is broken" were printed in the
+    # same six zeros — the human said plainly that he could not understand the paragraph I wrote
+    # about it, which is what an unreadable instrument looks like. Every wake now writes
+    # tick-state/last-wake.json on its way out (channels/wake_heartbeat.py), so the quiet rows say
+    # what the quiet engine actually said.
+    silent = [b for b in AMIGO_ORDER if not outcomes[b]["counts"]["ran"]]
+    if silent:
+        said = []
+        for body in silent:
+            beat = last_wake(body, bots_root)
+            if not beat:
+                said.append("    %-8s no wake and no trace — this engine has not reported since the "
+                            "heartbeat was added on 2026-11-03" % body)
+                continue
+            detail = beat.get("detail") or ""
+            when = beat.get("at")
+            try:
+                when_text = _local(dt.datetime.fromtimestamp(float(when), dt.timezone.utc))
+            except (TypeError, ValueError, OSError):
+                when_text = "an unreadable time"
+            said.append("    %-8s %s at %s%s — it declined to start a model, which a run count "
+                        "cannot show" % (body, beat.get("status") or "unknown", when_text,
+                                         (" (%s)" % detail) if detail else ""))
+        if said:
+            lines.append("")
+            lines.append("  What the quiet engines said (a wake that does not run leaves no run "
+                         "directory):")
+            lines += said
     for body in AMIGO_ORDER:
         interval = tick_interval_hours(body, bots_root)
         if not interval:
@@ -441,6 +470,23 @@ def _wakes_block(now: dt.datetime, hours: int, bots_root: Path | None = None) ->
                          f"attempted {age_h / 24:.1f} day(s) ago.** The clock thread is not "
                          f"ticking; nothing it was meant to do is happening.")
     return lines
+
+
+def last_wake(body: str, bots_root: Path | None = None) -> dict | None:
+    """What this body's engine said on its last attempt, from its own heartbeat file.
+
+    Added 2026-11-03. `wake_outcomes` counts run directories, which measure work *started*; an
+    engine that answers "nothing queued" writes none, so its row was zeros and the report had no
+    way to say whether that was idleness or death. The heartbeat is written by the engine on the
+    way out of every attempt (channels/wake_heartbeat.py), skips included.
+    """
+    bots_root = bots_root or REPO.parent
+    path = bots_root / ("%s-bot" % body) / "tick-state" / "last-wake.json"
+    try:
+        beat = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return beat if isinstance(beat, dict) else None
 
 
 def clock_last_attempt(body: str, bots_root: Path | None = None):
