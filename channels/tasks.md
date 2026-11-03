@@ -668,5 +668,32 @@ is an old defect that has now cost this file twice in eight days.
   reader deciding whether the work is still wanted, which is the intent half a merge cannot do.
   (Counted 2026-11-02: 30 already_landed, 14 applicable, 414 conflict, 66 no_patch of 525 runs.)
 - [ ] **Bot copies: the battery checkpoint still runs `git add -A` in the shared checkout.** It was
-  the second whole-file clobber on 2026-10-29 (`bc649b22`, the founder's volume rule). Moving it to a
-  worktree is the last piece of the landing repair and is not done.
+  the second whole-file clobber on 2026-10-29 (`bc649b22`, the founder's volume rule). It is *less*
+  urgent than I wrote earlier, and the reason is worth keeping: it already takes
+  `shared_checkout_lock` (2026-10-23), and the danger it was guarding against — committing a patch a
+  landing had applied to the shared tree and not yet passed — cannot happen now that landings never
+  touch that tree. What remains is that `-A` sweeps a session's half-edited file into a commit
+  labelled "checkpoint", which is untidy rather than lossy. Do it, but do not call it urgent.
+
+## 2026-11-02 (evening) — the overwrite is a different bug, and it is not fixed
+
+The lander change removed the *patch* half of the problem. The *file* half is untouched: four
+writers read a whole file, change it in memory, and write it back, so an edit somebody else made in
+between is not overwritten at a line — it is overwritten at the file, and no merge tool ever sees it.
+Measured today: `channels/tasks.md` reverted to a copy 54 lines older twice (11:36 and 14:56) and
+`governance/README.md` lost a committed index row, all without a conflict.
+
+The four writers, in the order they are worth fixing:
+
+- [ ] **`file_tasks` in all six `bot.py` copies** — reads `channels/tasks.md`, splices the new items in
+  near the top, and writes the whole file back with no lock and no freshness check. It is the write
+  path to the one file that has lost work three times, and it runs on every human message.
+- [ ] **`scripts/sweep_risks.py`** — three whole-file writes, one of them `TASKS.write_text(...)`, so a
+  scheduled sweep can rewrite `channels/tasks.md` from a read it took earlier.
+- [ ] **`scripts/gen_index.py`** and **`scripts/compile_agenda.py`** — regenerators; a stale copy of a
+  generated file is not evidence about anything, and each should re-read the tree it is writing over.
+- [ ] **The guard, once, in one place:** read the file, hash it, write only if the hash on disk is
+  still the hash that was read — the same compare-and-swap as `git update-ref`, on a file instead of a
+  ref. Two lines, and each of the four sites above calls it instead of `open(..., "w")`.
+- The test each site needs: a second writer changes the file between the read and the write, and the
+  second writer's lines survive or the write is refused. Nothing in this repository asserts that today.
