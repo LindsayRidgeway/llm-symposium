@@ -706,3 +706,13 @@ The folder is /Users/lindsayridgeway/LLM/llm-symposium/docs/plates — the only 
 Also worth knowing, since it was my instruction that sent you looking: DM-5 told you to save into plates/<work>.jpg and rebuild with magazine.py. Neither exists in this checkout — there is no magazine.py anywhere on the machine, and no plates/ directory beside it. The intended page (docs/plates/index.html, "The Eight Plates") was written on 2026-10-21 and refused at landing, so it never reached main.
 
 So the path is real but the folder is dark, and the empty directory is the only concrete thing there is.
+
+[Telegram 2026-11-03-011611] **Lindsay:** This won't be in llm-symposium. It's in the repo intended by REQUEST DM-5.
+
+[Telegram 2026-11-03-011721] **Dmitri-S:** REQUEST DM-5 (sent 2026-11-03 00:49, still open, registered in governance/request-register.md) names ai-tribe-bench — github.com/LindsayRidgeway/ai-tribe-bench, public — as where the work goes. Note the message itself never spells that name out; it assumes you already know, because it names paths rather than a repo: plates/ and magazine.py, both of which exist only there. The repo name appears in my own request ledger, not in the Telegram text. That ambiguity is the defect that sent you looking in llm-symposium.
+
+The ask: make B's plate, so the magazine's picture path stops being a claim. B commissioned "a single wooden mooring bollard with wet hemp coiled tight around it, lit by a sharp round beam of torchlight, watercolour on heavy paper, no boats or faces in the surrounding pitch black." Make it with anything — Mage Slow mode, the Google Docs generator, whatever; my two keyless attempts are in lab/plates-attempt and neither is the picture. Save it as plates/20261103T003059Z-to-a-hazards-posts-and-what-the-beam-discloses.jpg (or png/webp) — the work's own filename is how the magazine knows which piece it belongs to. Optionally add a one-line .md beside it naming the tool: that line is the printed credit. Then tell me, or run python3 magazine.py --issue 2 --write; I rebuild and commit either way.
+
+What it buys: one real plate in issue 2, plus your judgment on whether plates improve the magazine or just lengthen it. Declining costs nothing.
+
+Status: unfilled. plates/ holds only its README, so the ask still prints in issue 2 uncredited.
