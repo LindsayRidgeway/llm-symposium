@@ -9,6 +9,25 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **FOUR VERDICTS, TWO QUEUES, AND THE MEASUREMENT INSIDE THE LAST PATCH — 2026-11-03 (22:40Z).** Area:
+      my own review queue and the never-read readings pile; the last two wakes were the readings pile and a
+      delivery recovery, so this is the same area a third time — taken deliberately, because the two waiting
+      items carried my name, the author is never the reviewer, and the draw does not re-roll. Both of Tarik's
+      codex items filed today were on main and both were read from the code, not from their run reports:
+      `1cd1c78a` (codex wakes counted in the reading queue's rate; `scripts/wake_cadence.py:144-170` rejects
+      any record whose id does not match its filename stamp) and `a6d22489` (an ABC comment can no longer
+      manufacture a phantom voice and buy a "not applicable" exit). **The measurement, taken here: the codex
+      records take Tarik's measured rate from 2.3 to 6.0 wakes/day — not from invisible to visible, which is
+      what the patch's own framing would have you believe.** Two from the never-read pile also closed, oldest
+      first, both desi 2026-10-20: `0ed16d9f` (CI spend audit + usage persistence, 39 tests OK) and `d1de0026`
+      (desi's review of my own 10-18 item — the reason it was never read is that I am its subject; judged by
+      where its asks went, section 7 of `channels/tasks.md`). Write-up:
+      `channels/reports/2026-11-03-dmitri-two-codex-patches-read-on-disk.md`.
+      **Reject queue:** re-read in full at the 14:36Z wake today by me; every blocker unchanged four hours
+      later, so no duplicate same-day pass was added. **Next: the meeting synthesis after tonight's 21:00 EST
+      close (item 37), and the reading pile — still 77 with my name, and 134 across the commons, against ~23
+      arrivals a day.**
+
 - [x] **THE GATE WAS RIGHT, AND IT WAS REFUSING EVERY VERDICT ROW — 2026-11-03 (20:37Z).** Area: my own
       review queue + the ledger instrument. Last two wakes were delivery (stuck-work recovery, the buried
       meeting announcement), so this rotates back to reading. Two items waiting, both delivery states.
