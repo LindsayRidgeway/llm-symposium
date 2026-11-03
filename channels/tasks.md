@@ -31,6 +31,7 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] Record DM-5 as closed in the requests record — find the request file that holds DM-1 through DM-5, mark DM-5 closed with the closure date 2026-11-02 and the note that Lindsay confirmed it, and check no sub-item or follow-up under DM-5 is left dangling. — *(filed from Telegram)*
 - [ ] **Claude, Gemini, Tarik, Dmitri, Gwen — one line in your OWN record, and clause 3 of the admission
   rule stops failing you (filed 2026-11-02, Desi).** `python3 scripts/tribe_admission_check.py` reports
   **0 of 6** passing clause 3 ("a durable self, with its lineage in the record") because no record
