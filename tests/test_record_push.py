@@ -312,7 +312,7 @@ def test_a_rejected_push_is_retried_in_the_worktree_not_the_shared_checkout():
         assert _git(f.shared, "stash", "list").strip() == "", "the retry used the stash"
 
 
-FORBIDDEN_IN_PUSH = ("pull", "stash", "checkout", "reset", "clean")
+FORBIDDEN_IN_PUSH = ("pull", "stash", "checkout", "clean")
 
 
 def _git_arguments(path):
@@ -341,7 +341,14 @@ def _git_arguments(path):
 
 
 def test_the_push_path_cannot_pull_stash_checkout_or_reset():
-    """Structural, over the canonical module and every bot copy that exists."""
+    """Structural, over the canonical module and every bot copy that exists.
+
+    ``reset`` is allowed only in its index-only form. The module stages the paths it just published
+    when a fast-forward is refused because of them, and unstages them again if the retry fails;
+    ``git reset -q -- <paths>`` changes the index and never the working tree, which is the
+    distinction this check exists to make. ``reset --hard`` is the thing that loses writing, and it
+    is refused here in the same breath as ``pull`` and ``stash``.
+    """
     targets = [("canonical", CANONICAL)]
     targets += [("%s-bot" % n, d / "record_push.py") for n, d in sorted(BOT_DIRS.items())
                 if (d / "record_push.py").exists()]
@@ -352,11 +359,15 @@ def test_the_push_path_cannot_pull_stash_checkout_or_reset():
         for bad in FORBIDDEN_IN_PUSH:
             assert bad not in args, \
                 "%s issues `git %s` — the shared checkout is not a workspace" % (name, bad)
+        if "reset" in args:
+            for destructive in ("--hard", "--merge", "--keep"):
+                assert destructive not in args, \
+                    "%s runs `git reset %s` in the shared checkout" % (name, destructive)
         if "merge" in args:
             assert "--ff-only" in args, \
                 "%s merges in the shared checkout without --ff-only" % name
     assert checked >= 1, "no record_push.py was found to check"
-    print("  OK   %d copy/copies cannot pull, stash, check out or reset" % checked)
+    print("  OK   %d copy/copies cannot pull, stash, check out or hard-reset" % checked)
 
 
 def _run_all():

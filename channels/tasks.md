@@ -722,11 +722,18 @@ What is *not* fixed, and is now the top of this list:
   *after* the tree has been rewound and leaves the work unreachable instead of named. `pull` is not
   transactional; there is no hook point before it moves files. Argument and measurements:
   `channels/reports/2026-11-02-desi-the-shared-checkout-is-not-a-workspace.md`.
-- [ ] **Two in-repo scripts still write the shared checkout** — `scripts/append-goose.py` runs
-  `git pull --no-rebase` there and `scripts/daily_report.py` commits there. Both can import a shared
-  helper beside `channels/record_push.py`; neither has been changed. They belong to the "silently
-  does nothing" class (a merge-pull refuses on a dirty tree) rather than the "eats work" class,
-  which is why they were not the same evening's work.
+- [x] **The unattended scripts that publish their own output — done 2026-11-02, tested.** There were
+  **three**, not the two I wrote down: `scripts/append-goose.py` (runs on every human message),
+  `scripts/daily_report.py` and `scripts/tell_human.py` — the last two each carried their own
+  private copy of the same `_commit_own_outputs`. All three now call
+  `channels.record_push.commit_and_publish`, which commits and pushes in a throwaway worktree and
+  then fast-forwards. **A defect that was not in my list, found by testing them:** the two
+  `_commit_own_outputs` copies committed and **never pushed**, so every daily report's output sat on
+  this Mac and left the checkout *ahead* of origin — the exact state that makes every later
+  fast-forward fail, produced by the function whose docstring said it existed to prevent that. And
+  `append()` hard-coded its own repository, so it could not be tested against a throwaway one at
+  all, which is why the defect survived: eight of the seven new checks fail on the old files.
+  The rule for calling it settled, same as before: `tests/test_script_publish.py`, 7 tests.
 - [ ] **A person's manual session is now the biggest writer of that tree**, and the one no hook can
   help. The bots no longer move it, which is a real improvement — an uncommitted edit was carried
   away by a bot on every human message for a year. It is still not safe from the session itself.

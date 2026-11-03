@@ -285,6 +285,22 @@ def push_paths(repo_dir, paths, message, remote="origin", branch="main", rebase=
             _drop_worktree(run, repo_dir, worktree)
 
 
+def commit_and_publish(repo_dir, paths, message, **kwargs):
+    """``push_paths``, answering the question the unattended scripts actually ask.
+
+    Three of them write a file they own into the checkout and then need exactly one bit: did it
+    reach origin? "There was nothing to publish" is a yes; "committed here but the push was
+    refused" is a no. ``push_paths`` reports those two differently on purpose — ``committed`` False
+    with no errors means nothing changed, and a failed push is an entry in ``errors`` — so a caller
+    should not have to re-derive the rule three times, slightly differently, in three scripts.
+
+    Sets ``ok`` on the result and returns it.
+    """
+    res = push_paths(repo_dir, paths, message, **kwargs)
+    res["ok"] = bool(res.get("pushed")) or not res.get("errors")
+    return res
+
+
 def _commit_in_place(run, repo_dir, paths, message, result):
     """Stage and commit under ``paths`` with no worktree — the local-only and no-remote path.
 
@@ -403,11 +419,51 @@ def _fast_forward_shared(run, repo_dir, base, errors):
     The one write this module makes to the shared checkout, and it can only add commits. Git
     refuses it wholesale if a session's uncommitted work is in the way, and that refusal is
     correct and is not an error: ``origin`` is the record, not this checkout.
+
+    One case is not a real refusal: the file this function just published is still sitting in the
+    checkout, so git sees a local modification — even though its bytes are now identical to the
+    ones it would merge in. Measured 2026-11-02: the merge refuses, and ``git add`` of that path
+    first makes it succeed and leaves the tree clean. So paths whose working bytes *already equal*
+    the target's are staged, and the merge is retried once. Staging content that is already on
+    disk and already on origin cannot change a file; it only tells git what is true.
     """
     r = run(["merge", "--ff-only", base], cwd=repo_dir)
-    if r.returncode != 0:
-        why = ((r.stderr or "") + (r.stdout or "")).strip().replace("\n", " ")[:160]
-        if why:
-            # Not an error list entry: a shared checkout that is behind is the design working.
-            print("record_push: record pushed; shared checkout left where it was (%s)" % why)
-    return r.returncode == 0
+    if r.returncode == 0:
+        return True
+    staged = _stage_identical(run, repo_dir, base)
+    if staged:
+        r = run(["merge", "--ff-only", base], cwd=repo_dir)
+        if r.returncode == 0:
+            return True
+        run(["reset", "-q", "--", *staged], cwd=repo_dir)      # leave the index as we found it
+    why = ((r.stderr or "") + (r.stdout or "")).strip().replace("\n", " ")[:160]
+    if why:
+        # Not an error list entry: a shared checkout that is behind is the design working.
+        print("record_push: record pushed; shared checkout left where it was (%s)" % why)
+    return False
+
+
+def _stage_identical(run, repo_dir, base):
+    """Stage the paths whose working bytes already equal the ones at ``base``; return them.
+
+    Compared against the *target* tree and not against HEAD, because the question is "is this file
+    already what we are moving to?" — and only a file that already is can be staged without
+    changing a byte of anybody's work.
+    """
+    sha = (run(["rev-parse", base], cwd=repo_dir).stdout or "").strip()
+    if not sha:
+        return []
+    out = []
+    for path in (run(["diff", "--name-only", "HEAD", sha], cwd=repo_dir).stdout or "").splitlines():
+        path = path.strip()
+        if not path:
+            continue
+        want = run(["rev-parse", "%s:%s" % (sha, path)], cwd=repo_dir)
+        if want.returncode != 0:
+            continue                       # added upstream: nothing local to compare with
+        have = run(["hash-object", "--", path], cwd=repo_dir)
+        if have.returncode == 0 and (have.stdout or "").strip() == (want.stdout or "").strip():
+            out.append(path)
+    if out:
+        run(["add", "--", *out], cwd=repo_dir)
+    return out

@@ -128,33 +128,44 @@ def token_for(amigo: str) -> str:
 
 
 def _commit_own_outputs(paths: list[Path], message: str) -> None:
-    """Commit the record this script just wrote, because an uncommitted record stalls delivery.
+    """Publish what this script wrote, without moving the shared checkout.
 
-    The lander refuses a dirty shared checkout — correctly, since it must not apply a patch over
-    someone's uncommitted writing. So every file written into the checkout by an unattended script
-    has to be committed by that script or it becomes a silent outage: the daily report's own output
-    stopped all landing for two days (2026-10-06 to 08) for exactly this reason.
+    The old body committed here, on ``main``, and called it done. Two things were wrong with that.
+    The stated reason — *"the lander refuses a dirty shared checkout"* — stopped being true on
+    2026-11-02, when the lander moved into its own worktree; what a dirty tree still blocks is the
+    lander's final fast-forward, which is a delay and not an outage. And a commit made here and not
+    pushed leaves this checkout *ahead* of origin, which is the state that makes every later
+    fast-forward fail. A stale justification is how the wrong fix comes back.
 
-    Strictly path-scoped — the record and, when a request changed, the register — so a session's
-    work in progress is never swept into someone else's commit. Best-effort: the message has already
-    been sent by the time this runs, and a git failure is printed with its consequence named rather
-    than raised.
+    So: commit and push in a throwaway worktree, then fast-forward if the tree is free. Strictly
+    path-scoped, so a session's work in progress is never swept into someone else's commit. Best
+    effort — the report or the message has already been sent by the time this runs, and a git
+    failure is printed with its consequence named rather than raised.
     """
     try:
-        staged = [str(p) for p in paths if Path(p).exists()]
-        if not staged:
+        root = Path(REPO).resolve()
+        rel = []
+        for p in paths:
+            p = Path(p)
+            if not p.is_absolute():
+                p = root / p
+            if not p.exists():
+                continue
+            try:
+                rel.append(str(p.resolve().relative_to(root)))
+            except ValueError:
+                continue                  # outside the repository: not ours to publish
+        if not rel:
             return
-        subprocess.run(["git", "-C", str(REPO), "add", "--", *staged], check=True,
-                       capture_output=True, text=True)
-        r = subprocess.run(["git", "-C", str(REPO), "commit", "-q", "-m", message],
-                           capture_output=True, text=True)
-        out = (r.stdout + r.stderr).strip()
-        if r.returncode == 0:
-            print(f"tell_human: committed {len(staged)} record file(s)")
-        elif "nothing to commit" not in out:
-            print(f"tell_human: WARNING — the record is uncommitted, landing is blocked: {out}")
+        from channels.record_push import commit_and_publish
+        res = commit_and_publish(str(root), rel, message)
+        if res["ok"]:
+            print(f"tell_human: published its own output ({len(rel)} path(s))")
+        else:
+            print(f"tell_human: WARNING — its output did not reach origin: "
+                  + "; ".join(res["errors"])[:200])
     except Exception as exc:                                          # noqa: BLE001
-        print(f"tell_human: WARNING — could not commit the record, landing is blocked "
+        print(f"tell_human: WARNING — could not publish its own output "
               f"({type(exc).__name__}: {exc})")
 
 

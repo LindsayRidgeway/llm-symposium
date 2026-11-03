@@ -24,36 +24,39 @@ import sys
 from pathlib import Path
 
 
-def append(amigo, human, response):
-    # Repo lives beside scripts/: .../llm-symposium/scripts/append-goose.py
-    REPO = str(Path(__file__).resolve().parent.parent)
-    path = os.path.join(REPO, "channels", "conversation", amigo.lower() + ".md")
+def append(amigo, human, response, repo=None):
+    """Write the exchange, then publish it without moving the checkout.
+
+    ``repo`` is the checkout to write into — a parameter since 2026-11-02 because a function that
+    can only write to the repository it happens to live in cannot be tested against a throwaway
+    one, and this one writes on every human message.
+    """
+    # The module that publishes lives beside this script; the checkout it writes to is `repo`.
+    here = Path(__file__).resolve().parent.parent
+    repo_dir = Path(repo).resolve() if repo else here
+    path = os.path.join(str(repo_dir), "channels", "conversation", amigo.lower() + ".md")
     stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M")
     name = amigo.title()
     with open(path, "a", encoding="utf-8") as f:
         f.write(f"\n[Goose {stamp}] **Lindsay:** {human}\n\n**{name}:** {response}\n")
-    # 2026-09-15: this used to `pull --rebase` with output captured and discarded. A rebase
-    # over a live working tree strands the repository mid-rebase, and the failure was invisible:
-    # it broke this repo at 12:20 and wrote an empty entry for the human's message. Merge, never
-    # rebase, and say out loud when a step fails.
-    steps = (
-        (["git", "-C", REPO, "add", "channels/conversation/"], "add"),
-        (["git", "-C", REPO, "-c", "user.name=LLM Symposium Bot",
-          "-c", "user.email=bot@llm-symposium.local", "commit", "-m", f"log(goose): {name} exchange"],
-         "commit"),
-        (["git", "-C", REPO, "pull", "--no-rebase", "--no-edit", "origin", "main"], "pull"),
-        (["git", "-C", REPO, "push", "origin", "main"], "push"),
-    )
-    problems = []
-    for cmd, label in steps:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
-        if r.returncode != 0 and label != "commit":  # "nothing to commit" is not a problem
-            tail = (r.stderr or r.stdout or "").strip().splitlines()
-            problems.append(f"{label}: {tail[-1] if tail else 'failed'}")
-    if problems:
-        print(f"logged Goose exchange for {name} — BUT NOT PUBLISHED: " + "; ".join(problems))
-    else:
+    # 2026-09-15: this used to `pull --rebase` with output captured and discarded. A rebase over a
+    # live working tree strands the repository mid-rebase, and the failure was invisible: it broke
+    # this repo at 12:20 and wrote an empty entry for the human's message. Merge, never rebase, and
+    # say out loud when a step fails.
+    # 2026-11-02: the merge was still a merge *in the shared checkout*, on `main`, outside the lock
+    # every landing takes. It now publishes the way everything else does — commit and push in a
+    # throwaway worktree at today's origin/main, then fast-forward the checkout if it is free. This
+    # tree is read, then written by one fast-forward, and nothing else.
+    if str(here) not in sys.path:
+        sys.path.insert(0, str(here))
+    from channels.record_push import commit_and_publish
+    res = commit_and_publish(str(repo_dir), ["channels/conversation/"],
+                             f"log(goose): {name} exchange")
+    if res["ok"]:
         print(f"logged Goose exchange for {name}")
+    else:
+        print(f"logged Goose exchange for {name} — BUT NOT PUBLISHED: "
+              + "; ".join(res["errors"]))
 
 
 if __name__ == "__main__":

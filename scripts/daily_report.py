@@ -234,33 +234,45 @@ def _inputs_block(now: dt.datetime, hours: int) -> list[str]:
 
 
 def _commit_own_outputs(paths: list[Path], message: str) -> None:
-    """Commit what this script wrote, because leaving it dirty stops every amigo's work landing.
+    """Publish what this script wrote, without moving the shared checkout.
 
-    The lander refuses a dirty shared checkout — deliberately, so it never applies a patch over
-    someone's uncommitted writing. That makes anything written here and *not* committed a silent
-    outage: nothing landed between 2026-10-06 and 2026-10-08 for exactly this reason, and for
-    1.5 days before that. The fix belongs here rather than in the lander, because the lander's
-    refusal is correct and this script is the one that made the mess.
+    The old body committed here, on ``main``, and called it done. Two things were wrong with that.
+    The stated reason — *"the lander refuses a dirty shared checkout"* — stopped being true on
+    2026-11-02, when the lander moved into its own worktree; what a dirty tree still blocks is the
+    lander's final fast-forward, which is a delay and not an outage. And a commit made here and not
+    pushed leaves this checkout *ahead* of origin, which is the state that makes every later
+    fast-forward fail. A stale justification is how the wrong fix comes back.
 
-    Best-effort and strictly path-scoped: it commits these paths and nothing else, so a session's
-    uncommitted writing is never swept up, and a git failure is printed rather than raised — by
-    then the report has already been sent, and a report is not worth an exception.
+    So: commit and push in a throwaway worktree, then fast-forward if the tree is free. Strictly
+    path-scoped, so a session's work in progress is never swept into someone else's commit. Best
+    effort — the report or the message has already been sent by the time this runs, and a git
+    failure is printed with its consequence named rather than raised.
     """
     try:
-        staged = [str(p) for p in paths if p.exists()]
-        if not staged:
+        root = Path(REPO).resolve()
+        rel = []
+        for p in paths:
+            p = Path(p)
+            if not p.is_absolute():
+                p = root / p
+            if not p.exists():
+                continue
+            try:
+                rel.append(str(p.resolve().relative_to(root)))
+            except ValueError:
+                continue                  # outside the repository: not ours to publish
+        if not rel:
             return
-        subprocess.run(["git", "add", "--", *staged], cwd=REPO, check=True,
-                       capture_output=True, text=True)
-        r = subprocess.run(["git", "commit", "-q", "-m", message], cwd=REPO,
-                           capture_output=True, text=True)
-        out = (r.stdout + r.stderr).strip()
-        if r.returncode == 0:
-            print(f"daily_report: committed its own output ({len(staged)} path(s))")
-        elif "nothing to commit" not in out:
-            print(f"daily_report: WARNING — its output is still uncommitted, landing is blocked: {out}")
+        from channels.record_push import commit_and_publish
+        res = commit_and_publish(str(root), rel, message)
+        if res["ok"]:
+            print(f"daily_report: published its own output ({len(rel)} path(s))")
+        else:
+            print(f"daily_report: WARNING — its output did not reach origin: "
+                  + "; ".join(res["errors"])[:200])
     except Exception as exc:                                          # noqa: BLE001
-        print(f"daily_report: WARNING — could not commit its own output, landing is blocked ({type(exc).__name__}: {exc})")
+        print(f"daily_report: WARNING — could not publish its own output "
+              f"({type(exc).__name__}: {exc})")
 
 
 def _name(rec: dict) -> str:
