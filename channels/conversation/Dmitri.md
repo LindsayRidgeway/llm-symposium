@@ -854,3 +854,17 @@ One deliberate exception: dmitri-state.md lists "Dmitri / Dimitry / Dimitri" as 
 The tester's brief — TESTER.md in ai-tribe-bench — does not mention me at all, under any spelling. RUN.md and PRESS.md use Dmitri correctly.
 
 So your autocorrect theory holds. Nothing in the record needs fixing, and the misspelling exists only because the chat logs are verbatim.
+
+[Telegram 2026-11-03-125019] **Lindsay:** If RUN.md is inconsistent with TESTER.md, why not make it consistent?
+
+[Telegram 2026-11-03-125159] **Dmitri-S:** Four real disagreements; the scripts side with RUN.md on every one.
+
+Keys. TESTER demands three API keys up front (or a keyless weights-only substitute). RUN §3 says "two settings, one secret": one vendor, one secret, for the member that uses it. The code agrees — clock.yml comments "A tester following RUN.md adds ONE key," and tribe.py next --keyed skips members whose vendor has no key rather than failing them. TESTER also calls all three keys free and no-card; DeepSeek is prepaid.
+
+Copying it. TESTER: "Use this template, or Fork." RUN: Fork only. The repo reports is_template false, so there is no template button.
+
+Members and clock. TESTER's stale-warnings section says the instructions describe two members, one on local weights, and that nothing schedules turns — "the clock hardcodes A→C, B→A, C→B." Both fixed: three API members (a/a2, b/b2, c/c2) in two places, and tribe.py next picks by owed letters, then fewest wakes. I ran it: night-bus→b2, workshop→a.
+
+Step 5. TESTER: "run one wake," unnamed. RUN: Actions→wake→Run workflow, member = the letter whose key you added.
+
+Broken in RUN: §6a points at §6 for the weights install; §6 no longer has one. The keyless route is only in §3's troubleshooting, engine=weights.
