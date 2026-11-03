@@ -333,6 +333,170 @@ def _landing_block(now: dt.datetime, hours: int, last: str | None, gap: int) -> 
     ]
 
 
+def wake_outcomes(now: dt.datetime, hours: int, bots_root: Path | None = None) -> dict:
+    """What each body's wake engine actually did in the window — read from the runs, this Mac only.
+
+    Added 2026-11-03 (dmitri). The report counted what wakes *finished*, from the items ledger, and
+    never what they *failed at*: a run that died before writing anything leaves no item, so a body
+    whose engine is broken is indistinguishable in this report from a body with nothing to do.
+
+    That is not hypothetical. On 2026-11-03 Gwen's wake engine had been dead for four days — every
+    run ended `worker_failed` with HTTP 401 in the transcript, because her provider's key name was
+    mapped to one it never asks for. In the same window desi finished 12 items and Gwen finished
+    none, and the report said so in a way that read as "Gwen had a quiet day". Nothing else in the
+    commons said anything at all: the per-wake texts were switched off on the human's own
+    instruction (2026-10-06: one counted report a day, not a text per wake), and the run outcomes
+    were never counted anywhere he reads.
+
+    So the counts come from `~/LLM/<bot>-bot/tick-state/runs/*/result.json`, which every wake
+    already writes, and this adds no new bookkeeping to the machinery. Off this Mac (the GitHub
+    runner) there are no run directories and the block is simply absent.
+    """
+    bots_root = bots_root or REPO.parent
+    out = {}
+    for body in AMIGO_ORDER:
+        runs_dir = bots_root / ("%s-bot" % body) / "tick-state" / "runs"
+        counts = collections.Counter()
+        reasons = collections.Counter()
+        failed = []
+        newest = None
+        if runs_dir.is_dir():
+            for path in runs_dir.glob("*/result.json"):
+                try:
+                    stamp = dt.datetime.strptime(path.parent.name[:16], "%Y%m%dT%H%M%SZ")
+                except ValueError:
+                    continue
+                stamp = stamp.replace(tzinfo=dt.timezone.utc)
+                if newest is None or stamp > newest:
+                    newest = stamp
+                if stamp < now - dt.timedelta(hours=hours):
+                    continue
+                try:
+                    record = json.loads(path.read_text(encoding="utf-8"))
+                except (OSError, ValueError):
+                    continue
+                counts["ran"] += 1
+                status = record.get("status") or "unknown"
+                land = str(record.get("land") or "")
+                if status == "awaiting_review" and land.startswith("landed"):
+                    counts["landed"] += 1
+                elif status == "awaiting_review":
+                    counts["not_landed"] += 1
+                    reasons[land.split(":")[0] or "(no lander verdict)"] += 1
+                elif status == "no_work_done":
+                    counts["nothing_due"] += 1
+                else:
+                    counts["failed"] += 1
+                    failed.append((stamp, status))
+                    reasons[status] += 1
+        out[body] = {"counts": counts, "reasons": reasons, "failed": sorted(failed),
+                     "newest": newest}
+    return out
+
+
+def _wakes_block(now: dt.datetime, hours: int, bots_root: Path | None = None) -> list[str]:
+    """The wake engines, counted. Silent about a healthy engine; never silent about a dead one."""
+    try:
+        outcomes = wake_outcomes(now, hours, bots_root)
+    except Exception as exc:                                  # noqa: BLE001
+        return ["", f"(the wake counts could not be read: {type(exc).__name__}: {exc})"]
+    if not any(o["counts"]["ran"] or o["newest"] for o in outcomes.values()):
+        return []                                             # not this Mac; nothing to say
+    lines = ["", f"### The wake engines (this Mac, last {hours}h)"]
+    lines.append("  %-8s %4s %7s %11s %12s %7s" % ("amigo", "ran", "landed", "not landed",
+                                                   "nothing due", "failed"))
+    for body in AMIGO_ORDER:
+        c = outcomes[body]["counts"]
+        lines.append("  %-8s %4d %7d %11d %12d %7d"
+                     % (body, c["ran"], c["landed"], c["not_landed"], c["nothing_due"],
+                        c["failed"]))
+    # A run that dies leaves no item, so it is named individually: it is the only trace it has.
+    for body in AMIGO_ORDER:
+        for stamp, status in outcomes[body]["failed"]:
+            lines.append(f"  failed: {body} {status} at {_local(stamp)}")
+    for body in AMIGO_ORDER:
+        o = outcomes[body]
+        if o["counts"]["not_landed"]:
+            lines.append("  not landed: %s — %s" % (
+                body, ", ".join("%s×%d" % kv for kv in o["reasons"].most_common(4))))
+    quiet = [b for b in AMIGO_ORDER
+             if outcomes[b]["counts"]["ran"] >= 2 and outcomes[b]["counts"]["landed"] == 0]
+    for body in quiet:
+        lines.append(f"⚠ **{body}'s wakes ran {outcomes[body]['counts']['ran']} time(s) in the last "
+                     f"{hours}h and nothing they produced reached the repository.**")
+    for body in AMIGO_ORDER:
+        interval = tick_interval_hours(body, bots_root)
+        if not interval:
+            continue
+        # The clock's own stamp, not the newest run directory: a body whose engine answers "nothing
+        # queued" without writing a run is not broken, and tarik's does exactly that (his wake runs
+        # only for a pending Codex handoff). What is worth an alarm is a clock that has stopped
+        # ticking, or one that ticks and produces nothing — the second is caught above.
+        last = clock_last_attempt(body, bots_root)
+        if last is None:
+            continue
+        age_h = (now - last).total_seconds() / 3600.0
+        if age_h > 2 * interval:
+            lines.append(f"⚠ **{body}'s wake clock is set to run every {interval:.0f}h and last "
+                         f"attempted {age_h / 24:.1f} day(s) ago.** The clock thread is not "
+                         f"ticking; nothing it was meant to do is happening.")
+    return lines
+
+
+def clock_last_attempt(body: str, bots_root: Path | None = None):
+    """When this body's wake clock last fired, from its own timer state. None if it keeps none."""
+    bots_root = bots_root or REPO.parent
+    path = bots_root / ("%s-bot" % body) / "tick-state" / "timer.json"
+    try:
+        stamp = float(json.loads(path.read_text(encoding="utf-8"))["last_attempt"])
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    return dt.datetime.fromtimestamp(stamp, dt.timezone.utc)
+
+
+def _wakes_focus(now: dt.datetime, hours: int, bots_root: Path | None = None) -> list[str]:
+    """The one thing the two counted blocks above cannot show: a wake that died leaves no item.
+
+    The per-wake texts were switched off on the human's own instruction (2026-10-06). What he asked
+    for instead was one counted report a day — so this is where a dead engine has to speak, once,
+    and only when there is something to say. A healthy fleet adds nothing.
+    """
+    try:
+        outcomes = wake_outcomes(now, hours, bots_root)
+    except Exception:                                         # noqa: BLE001
+        return []
+    failed = [(b, stamp, status) for b in AMIGO_ORDER for stamp, status in outcomes[b]["failed"]]
+    barren = [b for b in AMIGO_ORDER
+              if outcomes[b]["counts"]["ran"] >= 2 and outcomes[b]["counts"]["landed"] == 0]
+    if not failed and not barren:
+        return []
+    lines = ["", "**Something to know** — the wake engines, which the counts above cannot show:"]
+    for body, stamp, status in failed[:4]:
+        lines.append(f"  {body}'s wake failed at {_local(stamp)} ({status}) — it produced nothing, "
+                     f"so it is in none of the item counts.")
+    if len(failed) > 4:
+        lines.append(f"  … and {len(failed) - 4} more failed run(s).")
+    for body in barren[:3]:
+        lines.append(f"  {body}'s wakes ran {outcomes[body]['counts']['ran']} time(s) and nothing "
+                     f"they produced reached the repository.")
+    return lines
+
+
+def tick_interval_hours(body: str, bots_root: Path | None = None) -> float | None:
+    """How often this body's wake is meant to run, from its own bot.env. None when it is off."""
+    bots_root = bots_root or REPO.parent
+    env_file = bots_root / ("%s-bot" % body) / "bot.env"
+    try:
+        for line in env_file.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line.startswith("TELEGRAM_TICK_MINUTES="):
+                minutes = float(line.split("=", 1)[1].strip().strip('"') or 0)
+                return minutes / 60.0 if minutes > 0 else None
+    except (OSError, ValueError):
+        return None
+    return None
+
+
 def _added_block(hours: int, now: dt.datetime, repo: Path | None = None) -> list[str]:
     """Count A of the human's nine: items *added* to the per-amigo work queues.
 
@@ -849,6 +1013,7 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None,
             continue
         who = collections.Counter(r.get("reviewer") for r in hits)
         out.append(f"    {label:<13} " + _joined_counts(who) + f"   total {len(hits)}")
+    out += _wakes_focus(now, hours)
     return "\n".join(out)
 
 
@@ -895,6 +1060,7 @@ def render(hours: int = 24, now: dt.datetime | None = None,
     ]
     landed = last_landing()
     lines += _landing_block(now, hours, landed, landing_gap(items, landed))
+    lines += _wakes_block(now, hours)
     lines += _diagnosis(window, life, hours, items, now)
     lines += _review_block(items, window, hours)
     lines += _invitations_block(now)

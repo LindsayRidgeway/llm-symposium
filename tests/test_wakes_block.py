@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+# Owner: Dmitri
+"""The report must show a wake engine that is dead, because nothing else does.
+
+Written 2026-11-03 by Dmitri, after finding Gwen's wake engine dead for four days: every run ended
+`worker_failed` with HTTP 401, and in the same window the daily report showed desi finishing twelve
+items and Gwen finishing none. Read as a scoreboard, that says "Gwen had a quiet day". A wake that
+dies leaves no item behind, so the only place it can be seen is a count of run outcomes — and the
+per-wake texts were switched off on the human's own instruction (2026-10-06: one counted report a
+day, not a text per wake).
+
+Two properties are asserted here, and the second one costs as much as the first: the report must
+speak when an engine is dead, and it must NOT speak when one is merely idle. Tarik's engine answers
+"nothing queued" without writing a run — by design, his wake exists for a pending Codex handoff —
+and a reporter that cannot tell that apart from a dead engine will cry wolf every day and be
+ignored on the day it is right.
+
+Run: python3 tests/test_wakes_block.py
+"""
+
+from __future__ import annotations
+
+import datetime as dt
+import importlib.util
+import json
+import shutil
+import tempfile
+import unittest
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+NOW = dt.datetime(2026, 11, 3, 12, 0, tzinfo=dt.timezone.utc)
+BODIES = ("desi", "claude", "gemini", "tarik", "dmitri", "gwen")
+
+
+def load_report():
+    spec = importlib.util.spec_from_file_location("daily_report_under_test",
+                                                  str(REPO / "scripts" / "daily_report.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+class Fixture(unittest.TestCase):
+    def setUp(self):
+        self.root = Path(tempfile.mkdtemp(prefix="wakes-root-"))
+        self.addCleanup(shutil.rmtree, self.root, True)
+        self.m = load_report()
+
+    def body_dir(self, body):
+        path = self.root / ("%s-bot" % body) / "tick-state"
+        (path / "runs").mkdir(parents=True, exist_ok=True)
+        return path
+
+    def fake_run(self, body, hours_ago, status="awaiting_review", land="landed", run_id=None):
+        when = NOW - dt.timedelta(hours=hours_ago)
+        ident = run_id or (when.strftime("%Y%m%dT%H%M%SZ") + "-" +
+                           ("%06x" % (abs(hash((body, hours_ago, land))) % 0xFFFFFF)))
+        run_dir = self.body_dir(body) / "runs" / ident
+        run_dir.mkdir(parents=True, exist_ok=True)
+        record = {"run_id": ident, "status": status}
+        if land is not None:
+            record["land"] = land
+        (run_dir / "result.json").write_text(json.dumps(record), encoding="utf-8")
+        return run_dir
+
+    def clock(self, body, hours_ago=0.0, minutes=120):
+        state = self.body_dir(body)
+        state.joinpath("timer.json").write_text(
+            json.dumps({"last_attempt": (NOW - dt.timedelta(hours=hours_ago)).timestamp()}),
+            encoding="utf-8")
+        self.interval(body, minutes)
+
+    def interval(self, body, minutes):
+        env = self.root / ("%s-bot" % body) / "bot.env"
+        env.write_text("TELEGRAM_TICK_MINUTES=%d\n" % minutes, encoding="utf-8")
+
+    def block(self):
+        return "\n".join(self.m._wakes_block(NOW, 24, self.root))
+
+    def focus(self):
+        return "\n".join(self.m._wakes_focus(NOW, 24, self.root))
+
+
+class TestTheCountsAreTheRuns(Fixture):
+    def test_each_body_is_counted_by_what_its_runs_did(self):
+        self.fake_run("desi", 2, land="landed")
+        self.fake_run("desi", 3, land="conflict")
+        self.fake_run("desi", 4, status="no_work_done", land=None)
+        self.fake_run("gwen", 5, status="worker_failed", land=None)
+        text = self.block()
+        self.assertIn("desi", text)
+        desi = [l for l in text.splitlines() if l.strip().startswith("desi")][0].split()
+        self.assertEqual(desi[1:], ["3", "1", "1", "1", "0"], "desi's counts do not match its runs")
+        gwen = [l for l in text.splitlines() if l.strip().startswith("gwen")][0].split()
+        self.assertEqual(gwen[1:], ["1", "0", "0", "0", "1"], "gwen's failed run is not counted")
+
+    def test_an_old_run_is_outside_the_window(self):
+        self.fake_run("desi", 30, land="landed")
+        text = self.block()
+        desi = [l for l in text.splitlines() if l.strip().startswith("desi")][0].split()
+        self.assertEqual(desi[1], "0", "a run from 30 hours ago is inside a 24-hour window")
+
+
+class TestAFailedRunIsNamed(Fixture):
+    def test_the_failure_is_written_down_with_its_time_and_status(self):
+        self.fake_run("gwen", 5, status="worker_failed", land=None)
+        text = self.block()
+        self.assertIn("failed: gwen worker_failed", text,
+                      "a run that died is the only one nobody can see; it must be named")
+
+    def test_the_counted_message_says_it_too(self):
+        self.fake_run("gwen", 5, status="worker_failed", land=None)
+        focus = self.focus()
+        self.assertIn("gwen", focus)
+        self.assertIn("worker_failed", focus)
+        self.assertIn("produced nothing", focus,
+                      "the message must say why the item counts cannot show this")
+
+
+class TestSilenceWhenNothingIsWrong(Fixture):
+    def test_a_healthy_fleet_adds_nothing_to_the_message(self):
+        for body in BODIES:
+            self.fake_run(body, 3, land="landed")
+            self.clock(body, hours_ago=1)
+        self.assertEqual(self.focus(), "", "a healthy fleet must not add a line to his message")
+
+    def test_an_idle_engine_is_not_a_dead_one(self):
+        """Tarik's engine answers 'nothing queued' without writing a run. That is not a fault."""
+        self.clock("tarik", hours_ago=1, minutes=1440)      # ticking: one attempt 1h ago
+        self.fake_run("desi", 3, land="landed")
+        self.clock("desi", hours_ago=1)
+        self.assertEqual(self.focus(), "",
+                         "an engine with nothing to do was reported as broken")
+
+    def test_a_clock_that_stopped_ticking_is_reported(self):
+        self.clock("desi", hours_ago=24 * 5, minutes=60)    # 60-minute clock, last attempt 5 days ago
+        self.fake_run("desi", 24 * 5, land="landed")
+        text = self.block()
+        self.assertIn("wake clock is set to run every 1h and last attempted", text)
+        self.assertIn("clock thread is not ticking", text)
+
+    def test_wakes_that_produce_nothing_are_reported(self):
+        for hour in (2, 4, 6):
+            self.fake_run("claude", hour, land="conflict")
+        self.clock("claude", hours_ago=1)
+        text = self.block()
+        self.assertIn("claude's wakes ran 3 time(s)", text)
+        self.assertIn("nothing", text)
+        self.assertIn("claude's wakes ran 3 time(s)", self.focus())
+
+
+class TestOffThisMachine(Fixture):
+    def test_with_no_run_directories_the_block_is_absent(self):
+        """On the GitHub runner there is no ~/LLM/<bot>-bot; the report must not invent a section."""
+        self.assertEqual(self.m._wakes_block(NOW, 24, self.root / "nowhere"), [])
+        self.assertEqual(self.m._wakes_focus(NOW, 24, self.root / "nowhere"), [])
+
+
+class TestTheRealMachinesNumbers(Fixture):
+    """One guard on the live data: the block must be able to read this Mac's runs at all."""
+
+    def test_the_live_tick_state_is_readable(self):
+        outcomes = self.m.wake_outcomes(dt.datetime.now(dt.timezone.utc), 24)
+        self.assertEqual(set(outcomes), set(BODIES))
+        ran = sum(o["counts"]["ran"] for o in outcomes.values())
+        self.assertGreater(ran, 0, "no wakes were read at all — the path or the format has moved")
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
