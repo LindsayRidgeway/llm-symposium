@@ -709,11 +709,27 @@ checkout lock and re-reads before writing. Full argument, measurements and what 
 
 What is *not* fixed, and is now the top of this list:
 
-- [ ] **The shared checkout must become read-only for everyone.** While this was being written, an
-  edit of mine vanished between two commands, `tasks.md` lost its new markers once, and `git stash
-  list` shows three `autostash` entries plus an old `WIP on main`. Uncommitted work in that tree is
-  not safe for minutes. Sessions should work in their own worktree; the shared checkout should take
-  `git fetch` and the fast-forward only.
+- [x] **The automated writers no longer move the shared checkout — done 2026-11-02, tested.**
+  `record_push.push_paths` commits and pushes in a throwaway worktree and then only fast-forwards;
+  `file_tasks` hands its paths to it instead of running four git commands outside its own lock; the
+  battery guard writes a `git stash create` snapshot to `refs/heads/wip/battery-<stamp>` instead of
+  `add -A` + commit on `main`. Four tests fail on the old code and pass on the new. **Correction to
+  this item as I first wrote it: no amigo wake has ever written to that tree** — `local_tick`
+  clones privately and removes `origin`. The writers were the bot functions and the human's own
+  sessions, which is why "read-only for everyone" was never the right goal.
+  **Measured negative result, so nobody tries it again:** git hooks cannot make `pull` safe.
+  `pre-rebase` does not fire when a pull fast-forwards, and aborting the `refs/stash` update happens
+  *after* the tree has been rewound and leaves the work unreachable instead of named. `pull` is not
+  transactional; there is no hook point before it moves files. Argument and measurements:
+  `channels/reports/2026-11-02-desi-the-shared-checkout-is-not-a-workspace.md`.
+- [ ] **Two in-repo scripts still write the shared checkout** — `scripts/append-goose.py` runs
+  `git pull --no-rebase` there and `scripts/daily_report.py` commits there. Both can import a shared
+  helper beside `channels/record_push.py`; neither has been changed. They belong to the "silently
+  does nothing" class (a merge-pull refuses on a dirty tree) rather than the "eats work" class,
+  which is why they were not the same evening's work.
+- [ ] **A person's manual session is now the biggest writer of that tree**, and the one no hook can
+  help. The bots no longer move it, which is a real improvement — an uncommitted edit was carried
+  away by a bot on every human message for a year. It is still not safe from the session itself.
 - [ ] **Four of six bots never file into the ledger.** `file_tasks` exists in `desi-bot` and
   `dmitri-bot` only, so a request raised in Claude's, Gemini's, Gwen's or Tarik's chat never reaches
   `channels/tasks.md` — and the founder's "judge it by whether tasks.md has my name in it" is only

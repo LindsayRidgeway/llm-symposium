@@ -31,6 +31,7 @@ to-do-lists/desi.md instead.
 
 Run: python3 tests/test_record_push.py      (exit 0 pass, 1 fail)
 """
+import ast
 import re
 import subprocess
 import sys
@@ -50,6 +51,8 @@ BOT_DIRS = {
     "claude": HOME / "LLM" / "claude-bot",
     "gemini": HOME / "LLM" / "gemini-bot",
     "tarik": HOME / "LLM" / "tarik-bot",
+    "dmitri": HOME / "LLM" / "dmitri-bot",
+    "gwen": HOME / "LLM" / "gwen-bot",
 }
 
 
@@ -196,6 +199,164 @@ def test_report_which_bots_stage_the_conversation_store():
         else:
             print("  DRIFT %s-bot stages %s — conversation store is NOT versioned by it "
                   "(needs %s; see to-do-lists/desi.md)" % (name, ", ".join(staged), DEFAULT_PATHS[1]))
+
+
+# -------------------------------- 7-10: the shared checkout is not a workspace
+
+class _Origin:
+    """A bare origin, a shared clone and a rival clone — the three bodies of every real race."""
+
+
+def _origin_fixture():
+    f = _Origin()
+    f.tmp = tempfile.TemporaryDirectory()
+    f.root = Path(f.tmp.name)
+    f.origin = f.root / "origin.git"
+    f.shared = f.root / "shared"
+    f.rival = f.root / "rival"
+    subprocess.run(["git", "init", "-q", "-b", "main", "--bare", str(f.origin)],
+                   capture_output=True, check=True)
+    for path in (f.shared, f.rival):
+        subprocess.run(["git", "clone", "-q", str(f.origin), str(path)],
+                       capture_output=True, check=True)
+    return f
+
+
+def _seed(f):
+    _write(f.shared, "agenda/36.md", "one\ntwo\nthree\n")
+    _write(f.shared, "channels/conversation/desi.md", "hello\n")
+    _git(f.shared, "add", "-A")
+    _git(f.shared, "-c", "user.name=T", "-c", "user.email=t@t", "commit", "-qm", "base")
+    _git(f.shared, "push", "-q", "origin", "main")
+
+
+def _rival_edit(f, rel, text, message="rival"):
+    _git(f.rival, "pull", "-q", "origin", "main")
+    _write(f.rival, rel, text)
+    # `-a` alone misses a new file, and a telegram message *is* a new file.
+    _git(f.rival, "add", "-A")
+    _git(f.rival, "-c", "user.name=R", "-c", "user.email=r@r", "commit", "-qm", message)
+    _git(f.rival, "push", "-q", "origin", "main")
+
+
+def test_an_uncommitted_edit_survives_a_record_push():
+    """The one that matters: a bot recording a message must not take a session's work away.
+
+    The rival edits **the same file the session is editing**, which is the case that made
+    `pull --rebase --autostash` leave conflict markers in the tree and the work in an anonymous
+    stash entry. Measured on the live checkout on 2026-11-02: four `autostash` entries, the newest
+    a session's edit of `agenda/36` one day old and still unrestored.
+    """
+    f = _origin_fixture()
+    with f.tmp:
+        _seed(f)
+        _rival_edit(f, "agenda/36.md", "one\nTWO BY THE RIVAL\nthree\n")
+        _write(f.shared, "agenda/36.md", "one\ntwo\nthree\nMY SESSION EDIT\n")
+        _write(f.shared, "channels/telegram/2026-11-02-230000-inbound-human.md", "# human\n")
+        head_before = _git(f.shared, "rev-parse", "HEAD").strip()
+
+        res = push_record(f.shared, remote="origin")
+
+        assert res["errors"] == [], res["errors"]
+        assert res["pushed"] is True, res
+        assert (f.shared / "agenda/36.md").read_text(encoding="utf-8").endswith("MY SESSION EDIT\n"), \
+            "a record push took the session's uncommitted line out of the tree"
+        assert _git(f.shared, "stash", "list").strip() == "", \
+            "a record push put somebody's work in the stash"
+        assert _git(f.shared, "rev-parse", "HEAD").strip() == head_before, \
+            "a record push moved the shared checkout's HEAD"
+
+
+def test_the_record_lands_on_origin_although_the_tree_is_not_moved():
+    """Refusing to move the tree is not refusing to deliver. Origin is the record."""
+    f = _origin_fixture()
+    with f.tmp:
+        _seed(f)
+        _rival_edit(f, "agenda/36.md", "one\nTWO BY THE RIVAL\nthree\n")
+        _write(f.shared, "agenda/36.md", "one\ntwo\nthree\nMY SESSION EDIT\n")
+        _write(f.shared, "channels/conversation/desi.md", "hello\nmy message\n")
+        _write(f.shared, "channels/telegram/2026-11-02-230500-inbound-human.md", "# human\n")
+
+        res = push_record(f.shared, remote="origin")
+
+        assert res["pushed"] is True, res
+        names = _git(f.origin, "ls-tree", "-r", "--name-only", "main").split()
+        assert "channels/telegram/2026-11-02-230500-inbound-human.md" in names, names
+        assert "my message" in _git(f.origin, "show", "main:channels/conversation/desi.md"), \
+            "the conversation store, the file a body re-reads as its memory, did not land"
+
+
+def test_a_rejected_push_is_retried_in_the_worktree_not_the_shared_checkout():
+    """Origin moves between our fetch and our push: fetch, rebase, retry — in the throwaway tree."""
+    f = _origin_fixture()
+    with f.tmp:
+        _seed(f)
+        _write(f.shared, "channels/telegram/2026-11-02-231000-inbound-human.md", "# mine\n")
+        raced = {"done": False}
+
+        def runner(cmd):
+            if "push" in cmd and not raced["done"]:
+                raced["done"] = True
+                _rival_edit(f, "channels/telegram/2026-11-02-231001-inbound-rival.md",
+                            "# rival\n", message="rival telegram")
+            return subprocess.run(cmd, capture_output=True, text=True)
+
+        res = push_record(f.shared, remote="origin", runner=runner)
+
+        assert raced["done"], "the fixture never produced the race it claims to test"
+        assert res["pushed"] is True, res
+        names = _git(f.origin, "ls-tree", "-r", "--name-only", "main").split()
+        assert "channels/telegram/2026-11-02-231000-inbound-human.md" in names, names
+        assert "channels/telegram/2026-11-02-231001-inbound-rival.md" in names, \
+            "the record that was already on origin was lost by the retry"
+        assert _git(f.shared, "stash", "list").strip() == "", "the retry used the stash"
+
+
+FORBIDDEN_IN_PUSH = ("pull", "stash", "checkout", "reset", "clean")
+
+
+def _git_arguments(path):
+    """Every non-docstring string literal in the module.
+
+    Deliberately *not* "every argument of a call": the first version of this check did that, and it
+    passed on the code it was written to catch, because the old code built the command as
+    ``pull = ["pull", "--rebase", …]`` and passed the *variable* to the runner. A check that reads
+    the shape of an expression rather than the words in it is a check that goes blind silently.
+
+    Docstrings are excluded by identity, because the module explains at length why `pull`, `stash`,
+    `checkout` and `reset` are not there, and a check that reads the explanation as the offence
+    gets weakened within a day.
+    """
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    docstrings = set()
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.Module, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            continue
+        body = getattr(node, "body", [])
+        if (body and isinstance(body[0], ast.Expr) and isinstance(body[0].value, ast.Constant)
+                and isinstance(body[0].value.value, str)):
+            docstrings.add(id(body[0].value))
+    return [n.value for n in ast.walk(tree)
+            if isinstance(n, ast.Constant) and isinstance(n.value, str) and id(n) not in docstrings]
+
+
+def test_the_push_path_cannot_pull_stash_checkout_or_reset():
+    """Structural, over the canonical module and every bot copy that exists."""
+    targets = [("canonical", CANONICAL)]
+    targets += [("%s-bot" % n, d / "record_push.py") for n, d in sorted(BOT_DIRS.items())
+                if (d / "record_push.py").exists()]
+    checked = 0
+    for name, path in targets:
+        checked += 1
+        args = _git_arguments(path)
+        for bad in FORBIDDEN_IN_PUSH:
+            assert bad not in args, \
+                "%s issues `git %s` — the shared checkout is not a workspace" % (name, bad)
+        if "merge" in args:
+            assert "--ff-only" in args, \
+                "%s merges in the shared checkout without --ff-only" % name
+    assert checked >= 1, "no record_push.py was found to check"
+    print("  OK   %d copy/copies cannot pull, stash, check out or reset" % checked)
 
 
 def _run_all():
