@@ -757,17 +757,40 @@ What is *not* fixed, and is now the top of this list:
   module instead of slicing `file_tasks` out of `bot.py`. The two structural checks fail on all
   **four** bodies exactly as they stood before this: 8 failures, reproduced by swapping `git show
   HEAD:<bot>/bot.py` back in and restoring it afterwards.
-- [ ] **Gwen's chat writes nothing else to the commons.** Now that it files, her chat at least
-  reaches the ledger — but it has no `record()` and no `push_record()`, unlike the other five, so
-  her side of a conversation never enters `channels/conversation/gwen.md` and no one reads what was
-  said, only what was filed. Found while wiring the filing path; not fixed, because adding a
-  record path is a different change with a different test.
-- [ ] **`file_tasks` still does not dedupe.** The identity rule was landed on 2026-09-25 in
-  `channels/task_ledger.py` with the sentence "this is the function `file_tasks` should call before
-  it inserts anything" — and it has never been called, because it lives in the commons and the
-  function did not. It does now: wiring `new_items()` into `task_filing.file_tasks` is one line from
-  here, and it should be the next session's first job, before the ledger grows a tenth copy of the
-  image-intake item.
+- [x] **`file_tasks` dedupes — done 2026-11-03, tested.** The identity rule landed on 2026-09-25 in
+  `channels/task_ledger.py` with one sentence — *"this is the function `file_tasks` should call
+  before it inserts anything"* — and nothing called it, because the rule lived in the commons and
+  the function lived in two bot dirs. Since 2026-11-03 both live in `channels/task_filing.py`, so
+  the call is where it belongs: `new_items()` against the lines read **inside the same locked read**
+  that is about to be written over, so a refiling is refused at the point of writing rather than
+  tidied up afterwards by `scripts/dedupe_tasks.py`. `task_ledger.py` is copied beside the module
+  into all six dirs and drift-tested with it. **The live ledger currently has no duplicates left to
+  collapse** — `python3 scripts/dedupe_tasks.py` reports "no repeated entries" over 160 entries — so
+  this is prevention, not clean-up. Three of the four new checks fail on the old module:
+  `2 != 1 : the ledger carries the same request twice`, the same for a refiling with a different
+  stamp, and `'' is not true : the human would have received an empty message` — a reply that was
+  nothing but marker lines. That last one is a defect the dedupe *created* the chance to see: once a
+  refiling is refused, a reply of only `TASK:` lines has nothing left to send, and Telegram rejects
+  an empty message. It now says so instead of going silent.
+- [x] **Gwen's chat writes the commons record — done 2026-11-03, tested.** Every other body has
+  written both halves of each Telegram message since September —
+  `channels/telegram/<stamp>-<kind>-<name>.md` and a line in `channels/conversation/<amigo>.md` —
+  and hers wrote neither: no `record()`, no `push_record()`. What was said to her lived in
+  `memory.json` on this Mac and nowhere else, unreadable by a wake, by the other amigos, or by the
+  human after a restart. All six checks in `tests/test_gwen_record.py` fail on her `bot.py` as it
+  stood (`gwen-bot/bot.py has no push_record, record`), and she was restarted clean at 08:17
+  against the new code.
+- [ ] **`record()` now has six copies and no drift test.** Each of the six bodies carries its own
+  `record()` / `push_record()` pair — the function that writes the public record, and the one place
+  where a body that stops writing looks exactly like a body with nothing to say. `channels/telegram.py`
+  holds the first half (`log_message`) but not the conversation store. This is the same shape that
+  produced tonight's `task_filing.py` consolidation and should get the same treatment: one module,
+  six byte-identical copies, a drift test. Not done here, because it touches the hot path of six
+  live bots for a reason that is a hazard rather than an injury, and the session that does it should
+  start with the test.
+- [ ] **Gwen's mail path writes no record either.** Her `check_mail()` answers strangers and records
+  neither the question nor the answer, while tarik's does both. Smaller than the Telegram gap and
+  the same class; not fixed.
 - [ ] **`gemini-bot` logs `drive_bridge_ingest failed during orientation: name 'sys' is not
   defined`** on every start (seen at 00:03:34 on 2026-11-03). Pre-existing, unrelated to filing, and
   real: a function that swallows its own NameError and reports it as a failed ingest.

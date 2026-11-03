@@ -39,15 +39,29 @@ Added since, from damage rather than from taste:
     used to run (add, commit, `pull --no-rebase`, push) ran inside the shared tree and outside the
     lock it had just taken.
 
-Not in this module, and named so it is not mistaken for done: `channels/task_ledger.py` holds the
-identity rule the ledger needs before it can stop filing the same request twice (measured
-2026-09-25: one item filed nine times, four times for another), and `file_tasks` here still does
-not call it.
+The duplicate check was the last thing owed and is now paid (2026-11-03). `channels/task_ledger.py`
+holds the identity rule — when two filings are the same item — and until tonight nothing called it:
+the ledger carries one request filed **nine times** and another four, and the founder read that as
+"I report the same work over and over, so I believe it never did get done." `file_tasks` now asks
+`new_items` about the lines it read under the lock, immediately before writing, so a refiling is
+refused at the point of writing rather than tidied up afterwards by `scripts/dedupe_tasks.py`.
 """
 import contextlib
 import logging
 import os
 import re
+
+# The identity rule for a ledger entry (2026-09-25) — "the same item filed twice" is a question
+# about words, not about strings, and it was answered properly in `channels/task_ledger.py` and then
+# never called. Wiring it in is the point of this import; the two fallbacks exist because the module
+# runs both from `channels/` (tests, scripts) and from each bot dir, where the copy sits beside it.
+try:
+    from task_ledger import new_items
+except Exception:                                     # noqa: BLE001
+    try:
+        from channels.task_ledger import new_items
+    except Exception:                                 # noqa: BLE001
+        new_items = None
 
 log = logging.getLogger("task_filing")
 
@@ -104,6 +118,23 @@ def splice_filed(text: str, items, source: str) -> str:
     return re.sub(r"\n{3,}", "\n\n", "\n".join(lines)) + "\n"
 
 
+def _fresh_items(items, existing_lines):
+    """The items the ledger does not already carry.
+
+    `task_ledger.new_items` is the identity rule — equal normal forms, a high enough token-set
+    Jaccard, or a shorter filing wholly contained in a longer one — and `scripts/dedupe_tasks.py`
+    is the same rule applied to a whole file after the fact. This is the call at the point of
+    writing, which is the only place that can stop a duplicate from being created at all.
+
+    Degrades to "everything is new" if the module cannot be imported, and says so in the log:
+    filing a duplicate is a nuisance, refusing to file is the defect this module exists to fix.
+    """
+    if new_items is None:
+        log.warning("filed work: no duplicate check (task_ledger not importable) — filing as given")
+        return list(items)
+    return new_items(list(items), existing_lines)
+
+
 def file_tasks(items, source="Telegram", repo=None):
     """Write filed work into channels/tasks.md near the TOP, then commit and push it.
 
@@ -140,7 +171,17 @@ def file_tasks(items, source="Telegram", repo=None):
             except OSError as e:
                 log.warning("could not read %s to file work: %s", FILED_TARGET, e)
                 return []
-            new_text = splice_filed(before_text, items, source)
+            # 2026-11-03 — the duplicate check, which this function has owed the ledger since
+            # 2026-09-25. `new_items` compares against the lines read *in this same locked read*, so
+            # the answer is about the file that is about to be written, not about one read earlier.
+            # Measured cost of not having it: one request (Telegram image intake) filed nine times,
+            # another four times, and the founder reading that as "I report the same work over and
+            # over, so I believe it never did get done."
+            fresh = _fresh_items(items, before_text.splitlines())
+            if not fresh:
+                log.info("filed work: every item was already in %s; nothing to add", FILED_TARGET)
+                return []
+            new_text = splice_filed(before_text, fresh, source)
             try:
                 with open(path, encoding="utf-8") as f:
                     still = f.read()
@@ -174,12 +215,12 @@ def file_tasks(items, source="Telegram", repo=None):
         import record_push
         pushed = record_push.push_paths(
             repo, [FILED_TARGET],
-            "tasks: file %d item(s) from the chat with the human" % len(items))
+            "tasks: file %d item(s) from the chat with the human" % len(fresh))
         if not pushed.get("pushed"):
             log.warning("filed work committed but not pushed: %s", pushed.get("errors"))
     except Exception as e:          # filing must never take the chat down with it
         log.warning("filing step failed: %s: %s", type(e).__name__, e)
-    return items
+    return fresh
 
 
 def file_from_reply(reply, source="Telegram", repo=None):
@@ -187,10 +228,21 @@ def file_from_reply(reply, source="Telegram", repo=None):
 
     This is the whole call site for a Telegram body: one function, so that "does this body file
     work?" is a question with one answer to test instead of four lines to read.
+
+    Two things it now has to get right, both of them consequences of the duplicate check:
+
+      * a `TASK:` line the ledger already carries is filed as nothing, and the reply must not claim
+        otherwise;
+      * a reply that was **nothing but** marker lines has nothing left once they are stripped, and
+        Telegram rejects an empty message — so silence is not an option. The sentence below is true
+        in both cases the refusal can mean, and does not pretend to know which.
     """
     keep, items = extract_tasks(reply)
     if items:
         filed = file_tasks(items, source, repo)
         if filed:
             log.info("filed %d item(s) from %s into %s", len(filed), source, FILED_TARGET)
+        elif not keep:
+            keep = ("Nothing was added to the ledger for that one — either it is already there, "
+                    "or the write was blocked.")
     return keep
