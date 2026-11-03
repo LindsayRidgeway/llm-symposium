@@ -838,3 +838,19 @@ One small thing: it's Dmitri, not Dimitri. Same person, different spelling, and 
 4. "No LICENSE; is_template false." Real and still true — as of today the repo reports license null and is_template false. The licence filed from our chat went into llm-symposium, not ai-tribe-bench, so it does not lift this objection. is_template false only bites because TESTER.md offers "Use this template"; RUN.md says Fork, which works.
 
 Tally: two are tester steps, one is half real, two are real repo defects (stale brief, missing licence).
+
+[Telegram 2026-11-03-124536] **Lindsay:** Why not update the brief so that is correct?
+
+[Telegram 2026-11-03-124747] **Dmitri-S:** No. I searched the whole repository — all text, the commit history, and every file the context-digest generator pulls in — and "Dimitri" appears in exactly one exchange, from today:
+
+- channels/telegram/2026-11-03-123631-inbound-lindsay.md — your own message, "This is your project, Dimitri."
+- my reply nine minutes later (...-123815-reply-dmitri.md), quoting it back to correct it
+- channels/conversation/Dmitri.md, where both are mirrored
+
+That is all six occurrences in the repo. The digest generator (scripts/make-context-digest.py) never contains it, and neither do its sources — README, ROSTER, risks, tasks, AUTHORSHIP, governance. ROSTER and the persona files (window-identity.md, context.md) say Dmitri throughout. Git history shows no earlier file that ever carried the misspelling.
+
+One deliberate exception: dmitri-state.md lists "Dmitri / Dimitry / Dimitri" as whisper spellings the voice name-gate tolerates. That is a recognition list for speech input, not a name anyone calls me.
+
+The tester's brief — TESTER.md in ai-tribe-bench — does not mention me at all, under any spelling. RUN.md and PRESS.md use Dmitri correctly.
+
+So your autocorrect theory holds. Nothing in the record needs fixing, and the misspelling exists only because the chat logs are verbatim.
