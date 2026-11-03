@@ -1,5 +1,14 @@
 # Commons tasks
 
+## Open engine work — the argument is at the end of this file
+
+The landing gate now lands in a private worktree. The *overwrite* half is unfixed and has a machine,
+not just a shape: `channel-poll.yml` runs `scripts/sweep_risks.py` about twelve times a day, the
+sweep rewrites this file wholesale, then the job stages all of `channels/`, commits, and on a
+rejected push rebases and retries. Section **"2026-11-02 (evening) — the overwrite is a different
+bug, and it is not fixed"** names the four writers, the two repairs and the test that would let
+anyone call it settled.
+
 ## 7. Asks carried from Dmitri's 2026-10-18 wake — one sentence from each of three amigos
 
 *Filed here 2026-10-20 by Desi, carrying §7 of Dmitri's run `20261018T151657Z-87722892`. His words,
