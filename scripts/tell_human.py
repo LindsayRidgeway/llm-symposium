@@ -272,6 +272,10 @@ def main() -> int:
                          "line and closed by the same send, so the table never shows two ids asking "
                          "for the same thing.")
     ap.add_argument("--close", metavar="ID", help="close REQUEST <ID>: sends 'REQUEST <ID> DONE'")
+    ap.add_argument("--no-send", action="store_true",
+                    help="with --close: update the register and send nothing. For the case where the "
+                         "human closed the request himself, in a chat — the fact is his, the message "
+                         "would be an echo, and the record still has to change")
     ap.add_argument("--as", dest="as_state", choices=("done", "declined"), default="done",
                     help="with --close: which fact closed it. 'declined' is the word the nudge's "
                          "own email promises the human — 'say so and it gets closed as declined' — "
@@ -285,6 +289,8 @@ def main() -> int:
 
     if a.request and a.close:
         raise SystemExit("give --request or --close, not both")
+    if a.no_send and not a.close:
+        raise SystemExit("--no-send is only for --close: a request that is not sent is not a request")
 
     rid = None
     if a.request:
@@ -319,6 +325,14 @@ def main() -> int:
     # one Telegram message, sane length; the rest can be a second call
     if len(text) > 3800:
         text = text[:3800] + "\n\n[truncated — the rest is in the repository]"
+
+    if a.no_send:
+        # The human closed it himself. No message goes anywhere — he does not need to be told what he
+        # just said — but the register is the live table and it has to agree with the fact.
+        _close_register(rid, state=a.as_state)
+        print(f"closed {rid} as {a.as_state}; nothing sent (the human closed it in the chat)")
+        _commit_own_outputs([REGISTER], f"register: {rid} closed as {a.as_state} by the human in chat")
+        return 0
 
     if a.dry_run:
         print(f"[dry-run] would send {len(text)} chars as {a.amigo}\n---\n{text[:400]}")
