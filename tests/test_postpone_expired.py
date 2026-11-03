@@ -150,5 +150,95 @@ class TestCli(unittest.TestCase):
         self.assertEqual(res.returncode, 0, res.stderr)
 
 
+
+class TestTheClassOfTheReason(unittest.TestCase):
+    """Which classes the tree can decide, and which it cannot (2026-11-03, Desi).
+
+    `postpone_expired` lists rows whose *claimed* paths are all on main. The class is about a
+    different set — the paths the **reason** names — because the reason is where the blocker is
+    stated. Measured on the 66 expired rows in Desi's scope on 2026-11-03: 38 reasons named paths
+    that have all arrived, 8 named at least one still missing, 20 named no path at all. The last
+    group is the point: for those, file presence is a coincidence of what the run touched, and a
+    reviewer must read the run. Nothing here is a verdict — the pass still writes nothing.
+    """
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self._tmp.name)
+        self.repo = self.root / "repo"
+        self.repo.mkdir()
+        self.ledger = self.root / "items.jsonl"
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def touch(self, rel: str) -> None:
+        p = self.repo / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text("x", encoding="utf-8")
+
+    def test_a_reason_naming_only_present_paths_is_delivery_state(self):
+        self.touch("channels/reports/r.md")
+        verdict = il.classify_postponement("waiting for channels/reports/r.md to land", self.repo)
+        self.assertEqual(verdict["klass"], "delivery-state")
+        self.assertEqual(verdict["reason_paths"], ["channels/reports/r.md"])
+        self.assertEqual(verdict["reason_missing"], [])
+
+    def test_a_reason_naming_a_missing_path_is_a_live_blocker(self):
+        """Presence of the row's own paths must not close a row whose reason names something absent."""
+        self.touch("scripts/done.py")
+        verdict = il.classify_postponement(
+            "blocked on channels/reports/never-written.md", self.repo)
+        self.assertEqual(verdict["klass"], "blocker-stands")
+        self.assertEqual(verdict["reason_missing"], ["channels/reports/never-written.md"])
+
+    def test_a_reason_naming_no_path_is_unclassified(self):
+        """The commonest case in the live ledger: a judgement about work, not about a file."""
+        verdict = il.classify_postponement(
+            "the run was cut off at its cap and left no finished artefact", self.repo)
+        self.assertEqual(verdict["klass"], "unclassified")
+        self.assertEqual(verdict["reason_paths"], [])
+
+    def test_the_ledger_path_alone_proves_nothing(self):
+        """Every wake writes channels/items.jsonl, so a reason naming only that names nothing."""
+        self.touch(il.LEDGER_PATH)
+        verdict = il.classify_postponement(f"see {il.LEDGER_PATH}", self.repo)
+        self.assertEqual(verdict["klass"], "unclassified")
+
+    def test_prose_and_version_numbers_are_not_paths(self):
+        """A loose matcher would invent paths and manufacture delivery-states."""
+        self.assertEqual(il.paths_named_in_reason("e.g. 2026-11-03, v1.2, 42 item(s)"), [])
+        self.assertEqual(il.paths_named_in_reason("a bare `report.txt` basename"), [])
+
+    def test_a_trailing_line_number_is_not_part_of_the_path(self):
+        self.touch("scripts/item_ledger.py")
+        self.assertEqual(il.paths_named_in_reason("see scripts/item_ledger.py:1000"),
+                         ["scripts/item_ledger.py"])
+
+    def test_only_class_filters_the_list_and_writes_nothing(self):
+        self.touch("channels/reports/here.md")
+        write_ledger(self.ledger, [
+            postponed("delivered", ["channels/reports/here.md"],
+                      reason="waiting for channels/reports/here.md"),
+            postponed("judged", ["channels/reports/here.md"],
+                      reason="the payload never existed and the run was cut off"),
+        ])
+        before = hashlib.sha256(self.ledger.read_bytes()).hexdigest()
+        got = il.postpone_expired(path=self.ledger, repo=self.repo, only_class="delivery-state")
+        self.assertEqual([c["id"] for c in got], ["delivered"])
+        self.assertEqual(got[0]["klass"], "delivery-state")
+        self.assertEqual(il.postpone_expired(path=self.ledger, repo=self.repo,
+                                             only_class="unclassified")[0]["id"], "judged")
+        self.assertEqual(hashlib.sha256(self.ledger.read_bytes()).hexdigest(), before)
+
+    def test_the_cli_prints_a_count_per_class(self):
+        out = subprocess.run([sys.executable, "channels/item_ledger.py", "--postpone-expired",
+                              "--scope", "desi"], cwd=REPO, capture_output=True, text=True,
+                             timeout=180)
+        self.assertEqual(out.returncode, 0, out.stderr)
+        self.assertIn("by class:", out.stdout)
+        self.assertIn("delivery-state", out.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -997,7 +997,73 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
     return updates
 
 
-def postpone_expired(path: Path = LEDGER, repo: Path = REPO, scope: str = "") -> list[dict]:
+REASON_PATH_RE = re.compile(r"[A-Za-z0-9_.\-/]*[A-Za-z0-9_\-]/[A-Za-z0-9_.\-/]*\.[A-Za-z0-9]{1,8}")
+
+EXPIRED_CLASSES = ("delivery-state", "blocker-stands", "unclassified")
+
+
+def paths_named_in_reason(reason: str) -> list[str]:
+    """The path-like tokens a *postponement reason* names, in order, deduplicated.
+
+    A token counts as a path only if it contains a slash and ends in an extension — the narrowest
+    rule that still catches every form the ledger's own reasons use (`channels/reports/x.md`,
+    `scripts/item_ledger.py:430`). It deliberately cannot match `e.g.`, a bare version number or a
+    lone basename: a rule loose enough to catch those would report paths that are not there, turn
+    `unclassified` into a false `delivery-state`, and invite a reviewer to close a row on a path
+    nobody named.
+    """
+    out: list[str] = []
+    for match in REASON_PATH_RE.finditer(reason or ""):
+        token = match.group(0).strip("`'\"()[].,;:")
+        if token and "/" in token and token not in out:
+            out.append(token)
+    return out
+
+
+def classify_postponement(reason: str, repo: Path = REPO) -> dict:
+    """Which of the three *measurable* classes a postponement's reason falls in, and why.
+
+    Written 2026-11-03 (Desi), because `postpone_expired()` was answering one question and printing
+    it as if it were another. Its list is "every path in `rec["paths"]` is on main"; that is not the
+    same set as the paths the **reason** names, and the reason is where the blocker is stated.
+    Measured on the 81 expired rows in Desi's scope on 2026-11-03: 16 were postponed *because a named
+    file was missing* and the file had since arrived; the other 65 were postponed for reasons no
+    file could satisfy, so `rec["paths"]` being present was a coincidence of what the run touched.
+
+    Three classes are decidable from the tree, and only three:
+
+      delivery-state   the reason names at least one path, and every one of them is present now.
+                       The blocker the row's own words describe has expired: a reviewer can close it.
+      blocker-stands   the reason names at least one path and one of them is still absent. The row's
+                       stated blocker is still real; nobody should close this on file presence.
+      unclassified     the reason names no path at all (or names only the ledger). Presence proves
+                       nothing about this row. A reviewer must read the underlying run.
+
+    The other names in the to-do — `payload-absent`, `cut-off`, `verdicts-missing`, `judged` — are
+    human judgements and are **not** computed here, on purpose. A machine could only guess them from
+    the reason's wording, and wording is exactly the rule the 2026-11-03 report found false: two
+    capital-D rows were invisible to a case-sensitive match, and a reason can describe a file it
+    also spells differently. A classifier that reads the prose would be the stamp the human forbade
+    on 2026-10-09 wearing a new label.
+
+    One measured caveat, added the same day. `delivery-state` means **every path the reason names is
+    on main**; it does not mean the row's blocker was delivery. The first case this printed
+    (`20261006T103841Z-68a19489`) says "cut off at its cap ... its only changed paths are
+    scripts/README.md plus scripts/gen_index.py", and both of those arrived by later regeneration —
+    so the reason names paths, they are present, and the label is true while the run is still a
+    cut-off with no artefact. That is the boundary of what the tree can decide: the class narrows
+    66 rows to 38 worth reading first, and it does not close one.
+    """
+    named = [q for q in paths_named_in_reason(reason) if q != LEDGER_PATH]
+    if not named:
+        return {"klass": "unclassified", "reason_paths": [], "reason_missing": []}
+    missing = [q for q in named if not (repo / q).exists()]
+    return {"klass": "blocker-stands" if missing else "delivery-state",
+            "reason_paths": named, "reason_missing": missing}
+
+
+def postpone_expired(path: Path = LEDGER, repo: Path = REPO, scope: str = "",
+                     only_class: str = "") -> list[dict]:
     """Every postponed item whose named paths are all present now. Prints a case; writes nothing.
 
     Why this exists (2026-11-02, Desi; the item is in `to-do-lists/desi.md`). `reconcile_paths`
@@ -1033,6 +1099,9 @@ def postpone_expired(path: Path = LEDGER, repo: Path = REPO, scope: str = "") ->
         missing = [q for q in paths if not (repo / q).exists()]
         if missing:
             continue
+        verdict = classify_postponement(rec.get("reason") or "", repo=repo)
+        if only_class and verdict["klass"] != only_class:
+            continue
         cases.append({
             "id": rec.get("id", "?"),
             "amigo": rec.get("amigo", "?"),
@@ -1040,6 +1109,11 @@ def postpone_expired(path: Path = LEDGER, repo: Path = REPO, scope: str = "") ->
             "state_utc": rec.get("state_utc", ""),
             "reason": rec.get("reason") or "",
             "paths": paths,
+            # Filled 2026-11-03: the class of the *reason*, not of `paths` — see
+            # `classify_postponement` for what is measurable and what is not.
+            "klass": verdict["klass"],
+            "reason_paths": verdict["reason_paths"],
+            "reason_missing": verdict["reason_missing"],
         })
     cases.sort(key=lambda c: (c.get("state_utc") or "", c.get("id") or ""))
     return cases
@@ -1718,6 +1792,8 @@ def _cli() -> int:
                          "with --to and --reason; the verdict is untouched")
     ap.add_argument("--dry-run", action="store_true",
                     help="with --name-unread: say what would be named, change nothing")
+    ap.add_argument("--expired-class", choices=list(EXPIRED_CLASSES), default="",
+                    help="with --postpone-expired: only cases whose reason falls in this class")
     ap.add_argument("--hours", type=int, default=24)
     ap.add_argument("--list", action="store_true")
     args = ap.parse_args()
@@ -1729,17 +1805,24 @@ def _cli() -> int:
     if args.postpone_expired:
         # Nothing is written here by design: which postponements are asking a dead question is a
         # fact about the tree, which verdict should replace one is a judgement about the work.
-        cases = postpone_expired(scope=args.scope or "")
+        cases = postpone_expired(scope=args.scope or "", only_class=args.expired_class or "")
         if not cases:
             print("item_ledger: no postponed item names only paths that are all on main now — "
                   "nothing has expired")
             return 0
+        counts = collections.Counter(c["klass"] for c in cases)
+        order = [k for k in EXPIRED_CLASSES if counts.get(k)]
+        print("by class: " + " · ".join(f"{k} {counts[k]}" for k in order)
+              + "   (delivery-state = the reason's own paths have all arrived; blocker-stands = "
+                "one is still missing; unclassified = the reason names no path, so a reader must judge)")
         print(f"item_ledger: {len(cases)} postponed item(s) whose named paths are all on main "
               f"now. This is a case for a reviewer, not a verdict: nothing was written.")
         for case in cases:
             print(f"  {case['id']}  {case['amigo']} postponed by {case['reviewer']} "
-                  f"{case['state_utc']}")
+                  f"{case['state_utc']}  [{case['klass']}]")
             print(f"      why it was postponed: {case['reason'][:200]}")
+            if case["reason_missing"]:
+                print(f"      its own reason names a path still absent: {case['reason_missing'][0]}")
             print(f"      now on main: {len(case['paths'])} path(s), e.g. {case['paths'][0]}")
         print("  Close one with --review <id> --state accomplished|postponed|rejected "
               "--reason \"why\" --reviewer <you>.")
