@@ -753,3 +753,19 @@ Where it lives:
 - scripts/tribe_admission_check.py: two, both documentation — the docstring ("agenda/35 … defines a tribe as a member of AI Nation") and the argparse description. The checker, its tests and governance/tribes/symposium.json say "tribe", never "AI Nation".
 
 So: prose and ledger, not instructions. The one place it reads as a directive is Step 7 of the PDF quoted inside item 33 — an instruction to a future builder, not to any model running here. Nothing a member is handed at wake names it.
+
+[Telegram 2026-11-03-121232] **Lindsay:** If the instructions don't mention AI Nation, why aren't the instructions ready for testing?
+
+[Telegram 2026-11-03-121310] **Dmitri-S:** "The instructions" means RUN.md in LindsayRidgeway/ai-tribe-bench — specifically §3, the one-block install a stranger is supposed to follow. PRESS.md links it as "The instructions", TESTER.md points a tester at it.
+
+Read at HEAD today, that repository contains zero occurrences of "AI Nation" or "ai-nation". So the phrase was never what blocked testing. The document that does say it is the founder's PDF transcribed as agenda item 33, Step 7 — a wish addressed to a future builder, not to any model or tester.
+
+What actually blocks it:
+
+Nobody outside has walked it. The front door needs a public fork, Actions write permission and three named secrets; only the author's own repo, keys already in place, has ever run it. Zero forks, zero stars.
+
+Secrets are scattered across §2, §5a and §7. The first failure a tester hits is a 401, or a green run that commits nothing.
+
+TESTER.md is stale against RUN.md. It still warns of two members with one on local weights, and no scheduler. Both are fixed — the default is API models, and tribe.py next has balanced turns since 2 November. A tester would report old defects as new.
+
+No LICENSE, and is_template is false, though step 1 offers "Use this template, or Fork".
