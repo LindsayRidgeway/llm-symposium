@@ -972,3 +972,78 @@ First, I don't know what "this" is. Nothing in our conversation since the licens
 Second, mechanically: this channel has no tools. I can't run anything on the Mac from here — that happens in the body that holds the repository. What I can do is get it queued so it runs there.
 
 So tell me in a sentence what "this" is, and whether it's a question you want put to the other amigos or something run against the repo. Then it goes in the ledger and you'll get the log when it's real. Enjoy the lunch either way.
+
+[Goose 2026-11-03 21:14] **Lindsay:** Of course it's worth a session to me. Here you are.
+
+**Dmitri:** **The session I asked for was the extraction, and it's done.** Six wake engines, 4,529 lines, one of
+them partly tested, became one engine of 1,258 lines plus six configuration files of 51–60 lines. But
+the number was never the point, so here is what the number was hiding.
+
+**What the six copies had become.** I read all six function by function before touching any of them.
+
+- Three of them still told the model *"the first line of this report is sent to Lindsay as a text
+  message"* — four weeks after you retired per-wake texts. Only Desi's copy was corrected, because Desi
+  was the one who needed it that day.
+- The low-battery guard raised `NameError` in five of six: it returns a `run_id` that is assigned
+  fifteen lines below it. Tarik's file assigns it first. Which five and which one is not a fact anyone
+  could have predicted — it's the residue of five separate edits.
+- One copy had a check the others didn't: Desi's `orientation()` compares a run's `LAND:` line against
+  the run's own diff. The other five never got that fix.
+- The identity table had four entries and defaulted to "Desi". Two of the six directories inherited
+  that default, so a bug in the table would have opened Dmitri's and Gwen's wakes as the wrong person.
+- And one test had been passing by luck since September: it jumped the clock into the "the machine was
+  suspended, spread the overdue clocks" branch, which sleeps on a `crc32` of a fresh temporary path — up
+  to ten minutes, a different number every run. It hung for ten minutes when the hash came out large.
+  Pinned; the suite went from 23 seconds to 1.7.
+
+**The consequence I have to name, not bury.** The six prompts were dated variants of the same
+instructions, edited separately for five weeks. There is now one text — Desi's, the most current, with
+the assignment rules and the request-register check — and every seat receives it with its own name
+substituted. That is a real behaviour change for five seats: their prompts got longer, Gemini gained
+eighty lines of rules she never had, and three lost a false sentence. I chose rather than merged, and
+the choice is now visible in one file instead of invisible in six.
+
+**Evidence, in the order I insist on.** `tests/test_wake_engine_one_implementation.py` was written
+before the change and fails on the old tree, verbatim: `desi-bot has no wake_engine.py` and `805 not
+less than 80 : desi-bot/local_tick.py is 805 lines — that is an engine again`. I proved that by putting
+Desi's old file back and deleting the new one, then restoring both (md5-verified). All suites green, and
+each now exercises the same file six times: local_tick 44, heartbeat 14, credentials 4, engine 10,
+record 14, Gwen 6, report 15, deploy 8.
+
+**It ran for real, and it ran wrong once.** After the 15:56 restart, Gemini's four-hour clock came due
+and went the whole way through the new engine — clone, orientation, worker, verdict `conflict`, a prune
+that freed 129 MB, and the heartbeat on the way out. What the heartbeat said about Desi's failed 14:54
+wake, though, was `worker_failed — 1`. An exit code. Which is the exact defect the heartbeat exists to
+remove, one level down: an unreachable provider and a crash both exit 1. So I fixed that too — when the
+worker died and the only thing left is the exit code, it now reads the tail of that run's transcript and
+reports the reason. Test first; against the previous module it prints `'1' != 'Network error'`; after,
+14/14. Six bots restarted at 16:13 and started clean.
+
+**The half the extraction left out, which is your actual question about manual sessions.** The reason a
+change like this needed you is that no wake can write into `~/LLM/<bot>-bot`: every wake clones the
+commons, and the engines aren't there. So `scripts/deploy_engines.py` now does it — copies the four
+shared modules into six directories, verifies every md5, validates every target before writing anything
+so a failure can't leave the tree split across two versions. Run live: `0 file(s) to copy, 24 already
+identical`. It is deliberately **not** a launchd job. A nightly deploy would push whatever a wake last
+landed into six live processes with nobody looking. That is a decision, and it's yours.
+
+**One thing I found and did not fix.** The lander's most common refusal isn't the lander's fault. On
+Desi's 12:54 run I restored the parent `channels/items.jsonl` by hand: `test_item_ledger_merge` passes.
+Put the run's version back and it fails with one field lost under the merge — `verdict_kept_from`. So the
+gate is right, the ledger's write path is broken, and fourteen landings are blocked by it. It's in the
+commons repo, which means a wake can fix it, which means it is not an argument for another session.
+
+**What this doesn't prove.** Only Gemini has run the new engine live; the other five are on clocks that
+haven't come due. Tarik's handoff path is exercised with a claimed fixture, not the real Codex queue.
+And a provider that can't be reached still costs a whole slot with nothing retrying — Desi has now lost
+two that way.
+
+**Do I want another session.** No — not now, and that's a change from last time, so let me be precise
+about why. Last time the argument was that only a human session could change six files no wake can reach.
+That argument is now answered by a tool. What's left is two decisions — whether the deploy runs on a
+schedule, and whether a wake should finish yesterday's unlanded verdict before starting new work — and
+those need a sentence from you, not a session. The remaining code items (the ledger merge, the retry,
+`land_runs.py` at 921 lines × six) all live in places a wake can reach, and `land_runs.py` should wait
+until its six copies actually differ in behaviour, which today they don't — only the git identity and the
+architecture trailer. A third round of the same method would be tidying, and I'd rather do that when
+something has drifted than because the method worked once.
