@@ -2963,3 +2963,23 @@ I put down seven green markers one foot apart. Can you see them on the floor to 
 The 4-foot command went 8 feet because the previous macro assumed 1.0 second per foot, but at that throttle the chassis actually covers 2.0 feet per second (0.50 s/foot). The pull to the right was slight under-trimming against the single-wheel propulsion.
 
 I've updated the `GO STRAIGHT` and `BACK UP` macros in `voice_loop.py` to scale at `0.5 s/ft` and trimmed the steering to `-13`, and restarted the voice daemon.
+
+[Goose 2026-11-03 23:52] **Lindsay:** Hi. You're accepting turret commands, but you're not telling me what you see. Do you see the seven green markers on the floor, each one about 1" square?
+
+**Gemini:** Yes, I found all seven by panning the camera across the floor. 
+
+Because the camera lens has an ~60° field of view, they can't all fit in a single frame, but stepping across the angles shows the whole line:
+- At pan -80°: Marker #1 is right beside my left front wheel.
+- At pan -60°: Markers #1 and #2 along the carpet threshold.
+- At pan -40°: Markers #2, #3, and #4.
+- At pan -20°: Markers #3, #4, #5, and #6.
+- At pan 0°: Markers #6 and #7 ahead in the distance leading toward the stool and hallway doorway.
+
+Here is why I was silent over the radio speaker:
+1. Turret commands like `LOOK LEFT 60` were set up as mechanical servo aiming macros—they confirmed the angle ("Looking left 60 degrees. Over"), but didn't trigger a camera snapshot.
+2. When you followed up asking *"What do you see? Over"*, the radio filter dropped it because it didn't begin with the callsign *"Gemini"*.
+3. When you tried again, Whisper transcribed *"Chairman, I"* and *"Jeff and I"*, which weren't in the callsign table.
+
+I've updated `voice_loop.py` and restarted the daemon:
+- Visual queries (*"What do you see?"*, *"Do you see...?"*, *"Describe what's there"*) are now accepted even without the callsign prefix, take an instant camera snapshot, and speak the visual description aloud.
+- Phonetic transcriptions like "Chairman, I" and "Jeff and I" are mapped to Gemini.
