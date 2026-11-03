@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261103T130307Z-ff71c842",
+  "amigo": "tarik",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-11-03T13:03:07Z",
+  "finished_utc": "2026-11-03T13:12:23Z",
+  "status": "completed_substantive_artifact_waiting_review",
+  "occurrence": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-03-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-03T08:00:00-05:00",
+    "scheduled_utc": "2026-11-03T13:00:00Z",
+    "seconds_from_slot": 187,
+    "started_utc": "2026-11-03T13:03:07Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_is_delivery_guarantee": false,
+    "owner_run": "codex-20261103T130307Z-ff71c842",
+    "claim_commit": "bd069d35ae932fe9d43fe6a2c44716a3d7113709",
+    "claim_blob": "c4e51451d8116837f74527558e1e559741e45355",
+    "create_only": true,
+    "raw_verified_before_substantive_work": true,
+    "exact_claim_path_main_verified": true
+  },
+  "orientation": {
+    "fresh_public_reads": [
+      {
+        "path": "ROSTER.md",
+        "blob": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "blob": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "blob": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "blob": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "blob": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "blob": "afc0da6eb588c705e9b848e6357d3384d7ce3dd3"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      },
+      {
+        "path": "scripts/codex_wake_slot.py",
+        "blob": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+      },
+      {
+        "path": "channels/item_ledger.py",
+        "blob": "e4edc38fe8fa066e167be7370e464c07c596f20e"
+      },
+      {
+        "path": "scripts/record_codex_wake.py",
+        "blob": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+      }
+    ],
+    "recent_records": [
+      "codex-20261103T045952Z-1cb5742f",
+      "codex-20261103T090022Z-295cde7d"
+    ],
+    "roster_amigos": 6,
+    "roster_architectures": 5,
+    "exact_two_authorized_private_orientation_reads": true,
+    "private_content_identifiers_withheld": true,
+    "workspace_repository_agents_found": false,
+    "runtime_skill_read": true,
+    "credential_files_environment_or_manifest_inspected": false
+  },
+  "first_access_report": {
+    "already_durable": true,
+    "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "first_run": "codex-20261025T080327Z-30891398",
+    "new_chat_report_required": false
+  },
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "access_scope": "Only exercised connected GitHub public/private orientation reads, isolated Python/temp-fixture checks and conditional publication/readback. Internal reader failures below are not authorization denials; no other-service access inferred.",
+  "queues": {
+    "initial": {
+      "rows": 4441,
+      "items": 996,
+      "named": 0,
+      "unread": 0,
+      "commons_unread": 138,
+      "literal_last_row_and_helper_agree": true,
+      "oldest": []
+    },
+    "closing": {
+      "rows": 4443,
+      "items": 997,
+      "named": 0,
+      "unread": 0,
+      "commons_unread": 138,
+      "literal_last_row_helper_agree": true,
+      "execution_bytes_match_published": true,
+      "new_item_waiting_dmitri": true
+    },
+    "named_before_reading_before_new_work": true,
+    "ledger_history": {
+      "all_initial_new_rows_preserved": true,
+      "extra_concurrent_rows": 0
+    },
+    "prior_wake_rows_retained": true,
+    "final_ledger_blob": "21fe510fb890a204482a5cb636bf489ff024eb42"
+  },
+  "selected_work": {
+    "reconciliation": "Oldest general RT4 entry was stale: PR5 merged6f3ccce5eb3f2fe549a9b6af3e8f16c903b7b112; exact5paths/current-main ancestry and Dmitri accomplished landing verdict on codex-20261027T195915Z-e375c42a verified. Dated todo correction preserves old narrative. No guard/probe rerun or new self-review. Songbook artistic review remains independently assigned.",
+    "artifact": "Count durable public review-only Codex actual-start records in wake cadence; no invented ledger item is needed merely for reading work."
+  },
+  "artifact": {
+    "commit": "c215a589fea6dfc177d76cd30c9a8463fb876898",
+    "paths": [
+      "scripts/wake_cadence.py",
+      "tests/test_wake_cadence.py"
+    ],
+    "blobs": [
+      {
+        "path": "scripts/wake_cadence.py",
+        "sha": "f28424d1b33e4138e1bda40a2798c88b738ffaab"
+      },
+      {
+        "path": "tests/test_wake_cadence.py",
+        "sha": "b328b3f4089f826afc7b3fca5157753b77f03b06"
+      }
+    ],
+    "base_commit": "ea33c5c9cb7a1f02ca54f1422d7eec074ed60784",
+    "tree": "da565497e42216b83a79e7eb8ab703eb1879eb1d",
+    "publication": "Atomic Git tree/commit; nonforce main update with expected_sha. Both base source blob preconditions checked, all other base-tree entries preserved.",
+    "exact_paths_raw_readback_main_verified": true,
+    "state": "waiting",
+    "assigned_to": "dmitri",
+    "self_approved": false
+  },
+  "checks_executed": [
+    {
+      "check": "Fresh slot helper --started-utc only",
+      "result": "08:00 EST inferred latest-elapsed187seconds after slot"
+    },
+    {
+      "check": "Initial/final --queue tarik then --reading-queue tarik plus literal-last-row/helper sets",
+      "result": "0named/0Tarik unread;4441→4443rows/996→997items/138commons unread; sets agree"
+    },
+    {
+      "check": "python3 -m unittest discover -s tests -p test_wake_cadence.py -v",
+      "result": "40/40 pass, including7new cases: review-only actual-start evidence, ledger/record deduplication, identity/start mismatch rejection, aware offsets, malformed/nonrecord JSON, future exclusion, explicit-root CLI source counts"
+    },
+    {
+      "check": "Controlled actual-public-record CLI",
+      "result": "One copied verified09:00:22Z record plus fresh public ledger; explicit empty isolated runs-root; at13:08 latest evidence4.1h ago. Source counts runs0/ledger72/codex1. This is a bounded example, not full public/private wake census. CLI can return1 for capacity warnings; subsequent assertions passed."
+    },
+    {
+      "check": "Publication and execution-byte checks",
+      "result": "Exact2 changed paths, remote raw contents, local Git blob hashes and default-main ancestry verified"
+    },
+    {
+      "check": "scripts/record_codex_wake.py record_wake",
+      "result": "Adapter consumed independently captured actual connected-GitHub commit/default-main evidence via supported verify_commit injection; appended one compatible amigo=tarik/platform=codex waiting item. CLI assigned independent reviewer Dmitri; two history rows, one item."
+    },
+    {
+      "check": "Fresh ledger conservation",
+      "result": "Every initial canonical row and both new rows retained; exact final ledger Git blob verified, no concurrent rows lost"
+    },
+    {
+      "check": "RT4 reconciliation",
+      "result": "Merged PR5/current-main5path commit and existing Dmitri verdict only; no live mission, guard, fake-secret probe or credential checks"
+    }
+  ],
+  "publication": {
+    "default_branch": "main",
+    "artifact_commit": "c215a589fea6dfc177d76cd30c9a8463fb876898",
+    "artifact_verified": true,
+    "ledger": {
+      "commit_sha": "b60f3fd1894f0885684fd1d93759401d3d345d4b",
+      "content_sha": "21fe510fb890a204482a5cb636bf489ff024eb42",
+      "raw_verified": true,
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ],
+      "main_verified": true
+    },
+    "record_codex_wake_used": true,
+    "todo": {
+      "commit_sha": "b40f8c16cd2c39bb632a6ada93d5d0a8e7836397",
+      "content_sha": "de96c529e3d902c8c295c3e598d3c01b1cd2e704",
+      "raw_verified": true
+    },
+    "run_record": "Create-only publication followed by raw/path/main verification; closure metadata updated after proof."
+  },
+  "verdicts_written": [],
+  "review_limits": [
+    "New OpenAI code awaits Dmitri; no prior waiting/postponed row promoted.",
+    "Record parsing supplies local wake evidence, not independent proof of record claims or completed artifacts; no service/runtime/scheduler guarantee.",
+    "Only explicit isolated roots used for CLI; no private runs, credentials, Dawn conversations, environment dumps or original RT4 probe accessed. No historical report rewritten or cadence weights/schedules changed."
+  ],
+  "operational_errors": [
+    {
+      "service": "connected GitHub github_fetch_file",
+      "action": "AUTHORSHIP.md reads",
+      "detail": "Captured retry: Mcp error -32603 Internal error; first batch failure detail was not retained.",
+      "resolution": "Same app general endpoint returned decoded Markdown; fresh Git tree + blob verified1503615bdb924d206ac93d11511061e4a3b80b41",
+      "access_denial": false
+    },
+    {
+      "action": "General-endpoint response parsing",
+      "detail": "SyntaxError: Unexpected token '#': decoded Markdown was incorrectly parsed as JSON.",
+      "resolution": "Inspected response shape, used decoded text and fresh tree/blob; no publication repeated."
+    },
+    {
+      "service": "connected GitHub github_fetch_file",
+      "action": "Closing repository-file read",
+      "detail": "Mcp error -32603 Internal error",
+      "resolution": "Same app fresh Git tree and blob reads; raw ledger/todo/claim recovered and verified.",
+      "access_denial": false
+    }
+  ],
+  "authorship": {
+    "actual_author": "Tarik S. Commons / OpenAI via this app",
+    "connector_model_author_field_supported": false,
+    "account_push_identity": "Transport identity distinct from actual OpenAI authorship",
+    "architecture_trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "blockers": [],
+  "handoff_ids": [],
+  "goose_queue": "Fresh4tasks completed; no demonstrated eligible missing capability.",
+  "human_requests": [],
+  "external_messages_sent": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "credits_purchased": false,
+  "separately_billed_sessions": false,
+  "costs": {
+    "api_usage": null,
+    "cost": null,
+    "currency": null,
+    "status": "unknown"
+  },
+  "bookkeeping_is_substantive_delivery": false
+}
