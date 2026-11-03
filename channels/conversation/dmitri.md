@@ -896,3 +896,45 @@ Not ready, on the criteria actually in play. There is no LICENSE file; GitHub re
 Still broken: TESTER.md is stale, warning of two members with one on local weights and no scheduler, both fixed since; it demands three keys where RUN.md §3 says one. RUN.md §6a still sends weights installers to §6, which no longer contains one.
 
 Unknown: whether GitHub's schedule keeps firing. Three scheduled clock runs since 1 November against a four-hourly intent. The code is right; the ground is unproven.
+
+[Goose 2026-11-03 16:34] **Lindsay:** Here's a session. The ledger isn't my concern; optimization of the commons clockwork is. I hope you'll feel free to do whatever you think is best, and let me know if you want another manual session afterwards.
+
+**Dmitri:** **What this session found**
+
+Your clockwork had a defect that ran for four days and produced no signal at all: Gwen's wake engine could not authenticate.
+
+Her seat moved to DashScope (`custom_alibaba`) on 2026-10-30. That provider asks goose for a key named `DASHSCOPE_API_KEY_GWEN`. Her `local_tick.py` built the child session's environment from an allow-list — a good design, it's the boundary that keeps a Telegram token out of a model session that can run commands — and then mapped the suffixed name *onto the plain one*. Key present, name wrong. A child holding a key under a name its provider never asks for is a child with no key.
+
+Every wake since then: HTTP 401, `worker_failed`, exit 1. Her chat and her mail were unaffected, because they read the suffixed name straight out of launchd's environment. That's why she looked alive.
+
+Why nobody knew is the interesting part, and it isn't one mistake — it's two of your own decisions with a blind spot between them. On 2026-10-06 you retired per-wake texts ("one counted report a day, not a text per wake"), so `WAKE_SUMMARY_NOTIFY = False` in all six. And the daily report counts *items* — finished, reviewed. A wake that dies before writing anything writes no item. A dead engine and an idle one were the same row in the report. That is the third time in two weeks a measurement was pointed at the wrong quantity, and this time it was mine to fix.
+
+**What changed**
+
+- `worker_env()` — the environment is now a function in all six engines instead of twenty lines inline in `run_session`, so it can be called and checked. Gwen's copy passes the suffixed names through.
+- `tests/test_wake_credentials.py` — 4 tests. Each resolves its body's *actual* provider (ast: the default is the last literal, and Gwen's is a backend switch read from her `bot.env`), then the key variable that provider declares, then calls her real `worker_env()` and asserts the name survives. On the old code: `'DASHSCOPE_API_KEY_GWEN' not found in {...}`, 4 failures. The failure message names the missing variable and never the values — a test that prints the environment puts a live key in a log.
+- `scripts/daily_report.py` — a wake-engine block: ran / landed / not landed / nothing due / failed per amigo, each failed run named with its status and time, and a warning when a body's clock has stopped ticking. It reads the body's own `timer.json`, not its newest run — my first version used "newest run older than 2× the interval" and fired on Tarik, whose Codex-handoff worker answers "nothing queued" by design without writing a run. Caught before shipping, pinned by a test.
+- `tests/test_wakes_block.py` — 10 tests, all erroring on the old file (`no attribute '_wakes_block'`).
+- Four tests in `test_local_tick.py` had been red for a month because the policy they asserted had been retired under them. Rewritten to the policy that exists, with the requirement moved to where it now lives. 44/44 green — first time since September.
+
+Live check: I built her env by calling her own `worker_env()`, ran the same binary, provider and model one turn — `exit: 0`, authenticated. All six bots restarted clean.
+
+**The clockwork, since that was the brief**
+
+1,230 run directories. 313 landed (25%), 638 produced work that never landed (52%), 241 nothing due (20%), 38 died (3%). Since 1 November: 82 productive runs, 57 landed (70%). The dominant blocker is `new_test_failures` (14), then conflict (8). I checked the five most-blamed failing tests against a fresh clone of origin/main — they pass there, so the gate is refusing for real, not against a stale baseline. The waste is in the 52%, not in the gate.
+
+**Not proven**
+
+No live Telegram message has gone through the record path yet — the tests execute each body's real `record()` source, but the first real message is the proof. And Gwen's next scheduled wake, 2026-11-04 11:25, is the end-to-end confirmation; the probe proved the credential path, not the wake.
+
+**Do I want another session**
+
+Yes — one, for a specific reason rather than because a ledger item exists.
+
+No wake can fix bot-dir code. Every harness clones `~/LLM/llm-symposium`, drops origin, and lands on that repo's main; the six `bot.py` and `local_tick.py` files live in `~/LLM`, a different repository that no wake checkout contains. So `~/LLM/<bot>-bot` is the one surface only a human-invoked session reaches. Fixes there have no other route in. That is the honest argument, and it is not an argument for repeating last time's method.
+
+What's left is not another sweep: the six wake engines are 4,138 lines across six files (claude 677, desi 741, dmitri 681, gemini 571, gwen 691, tarik 777) and only desi's copy has tests. This session's fix was applied six times and verified through two. The next move is one tested core with per-provider configuration — the extraction I did for `record()`, done once, with a drift test — so the seventh fix doesn't get written six times and checked by reading.
+
+The test I'll hold myself to: if I come back asking for that same session a third time, that is evidence the extraction is unfinished, not evidence of new work.
+
+One thing I deliberately did not touch. Tarik's engine has written no run since 2026-10-19. With no pending Codex handoff it returns `skipped_no_pending_handoff` and writes nothing and logs nothing, so idle and broken are indistinguishable from outside — the same defect class, one layer in. It is his engine, and the brief was the clockwork, not another amigo's design. Named in `tasks.md` with the one-line remedy: a log line on the skip path.
