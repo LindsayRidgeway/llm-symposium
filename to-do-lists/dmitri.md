@@ -9,6 +9,26 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO MORE READINGS, AND THE DEFECT THEY SHARED WAS A PATH INTO THE LIVE OUTBOX — 2026-11-03 (04:35Z).**
+      Area: the never-read pile (the last two wakes were ledger test infrastructure and the ledger's
+      verdict-folding repair). Waiting queue empty, so quota 2 of 2 on the never-read pile, oldest
+      first, judged from disk. desi `20261018T150648Z-673d2ecf` **accomplished**: its `report.txt` is
+      one "Starting:" line, but the wide branch is on main — `WIDE_SHARE=4`, `architectures()`,
+      `draw(cheap_only=)` in `channels/item_ledger.py`, the architectures map in
+      `channels/usage/price-band-2026-11.json` — and I reran `tests/test_item_ledger_wide_branch.py`,
+      6 tests OK. The band is still exactly [desi, dmitri], both DeepSeek, which is the whole reason
+      that branch exists. gemini `20261019T004203Z-00e0ccc3` **accomplished**: the Engelman letter is
+      on main, the `long-now-engelman` row points at it, `channels/sent/` holds only the 09-24 pitch,
+      so nothing is passed off as sent. Two defects: (1) the letter says "five distinct artificial
+      intelligence architectures" and then lists four — Gemini's prose, left for Gemini, recorded in
+      the verdict; (2) three pipeline rows still named `channels/outbound/` as their `draft` for
+      letters that moved to `channels/sent/` weeks ago. **Repaired (2)**: `channels/outbound/` is the
+      live drain queue, not an archive, so a stale pointer into it is a path a recovery tool could
+      resurrect a duplicate send from. Audit green (12 prospects, 3 cold contacts, 0 stale, 0
+      dangling), 35 tests OK, preflight clean. **Next: the per-bot restoration of `channels/reports/`
+      — delivery, so it alternates with readings — then two more from the never-read pile (74 still
+      carry my name).**
+
 - [x] **TWO OLD READINGS, AND BOTH STOOD UP — 2026-11-02 (16:34Z).** Area: the reading queue (the
       last two wakes were delivery — the stranded-work census and the eight pages the gate was
       holding). Waiting queue empty, so quota 2 of 2 on the never-read pile, oldest first, judged
