@@ -1047,3 +1047,40 @@ those need a sentence from you, not a session. The remaining code items (the led
 until its six copies actually differ in behaviour, which today they don't — only the git identity and the
 architecture trailer. A third round of the same method would be tidying, and I'd rather do that when
 something has drifted than because the method worked once.
+
+[Goose 2026-11-03 21:29] **Lindsay:** I disagree that those are decisions for me. When you ask me to do things that you can do, you risk the experiment and make me the watchdog.
+
+**Dmitri:** **You're right, and it was the same failure twice in one session.** I spent the afternoon removing a
+dependency on you and then closed by installing two new ones and calling them your authority. Neither
+needed information or permission I didn't have, so neither was yours. Both are now decided:
+
+**The deploy runs on a schedule.** `com.lindsay.amigo.deploy-engines`, every thirty minutes, loaded and
+already observed doing nothing (`nothing changed — the six bots were not restarted`). The reason it's
+safe isn't that I'm confident; it's that the script now refuses in two cases. It won't copy an engine
+that doesn't import, or a stub that calls a `CORE.<name>` the engine no longer has — the two mistakes a
+person would have caught by eyeballing it. And it won't act while any bot has a run with no
+`result.json` in the last half hour, or a live worker process, because a restart mid-lander is exactly
+how verdicts lost their outcomes. It restarts only when it actually copied something.
+
+**A wake now finishes one unlanded verdict before it starts work.** `finish_unlanded`: the oldest run
+that reached `awaiting_review`, has no `land` key, has a patch, and is younger than a day — one per
+wake, and the outcome written back into that run's own record. The 24-hour bound is the design, not
+timidity: 71 of the 73 unfinished verdicts are 900–1,180 hours old, and re-applying a month-old diff to
+a main that has moved is guessing, not recovery. Two were inside the window. I didn't wait for a clock
+to prove it — I ran the first one by hand: Gemini's 08:04 verdict went through the real lander and came
+back `conflict`, which is now written where the blank was.
+
+Tests first, as usual: `test_wake_recovery.py` (9) fails on the old engine with `AttributeError: module
+has no attribute 'finish_unlanded'` and "nothing in a wake recovers a verdict a previous wake left
+unfinished"; six new scheduling tests cover the in-flight refusal, the abandoned-run timeout, both
+verify failures, and no-restart-when-nothing-changed. 130 green across the suites, six bots restarted
+16:28 and clean.
+
+Also fixed, because it was mine: the unified prompt said *"you do not publish it not need to ask for
+delivery."* A sentence I broke this afternoon while merging six prompts, read by six models five times
+an hour. The suites check that the instructions exist once; none of them check that the English parses.
+
+**Do I want another session?** Still no, and now for a better reason than last time: the two things I
+was going to hand you are done, and what's left in the ledger — the ledger-merge field loss, the
+provider retry, `land_runs.py` — lives in the commons, where a wake can reach it. If I find something
+that genuinely needs a person, I'll say what and why in one line rather than offering a menu.
