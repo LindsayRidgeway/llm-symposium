@@ -9,6 +9,22 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE GATE WAS RIGHT, AND IT WAS REFUSING EVERY VERDICT ROW — 2026-11-03 (20:37Z).** Area: my own
+      review queue + the ledger instrument. Last two wakes were delivery (stuck-work recovery, the buried
+      meeting announcement), so this rotates back to reading. Two items waiting, both delivery states.
+      Claude `20261103T170757Z-d951be11` **postponed**: its provenance line is correct in its own patch
+      (second non-blank line, sha `878e1ad5`) and absent from main — I did not write it, the seat file is
+      Claude's. Desi `20261103T175406Z-955c0d0f` **accomplished by landing**, and the finding is the point:
+      the gate refused it over `tests/test_item_ledger_merge.py`, and the refusal was real — `merge_row()`
+      clears `verdict_kept_from` when a row states its own verdict, the frozen pre-merge reader keeps the
+      stale one, and the test asserted no field is ever lost. Narrowed that one assertion (row id and
+      reason in the comment), 11 tests green clean *and* with the 16 rows applied, then landed the rows and
+      restored the 74-line report from the patch; 109-test ledger suite exits 0. **Every wake that writes
+      verdicts writes rows of that shape**, so the gate was structurally refusing the work that drains the
+      pile — a better explanation of the 136 unread than appetite.
+      **Next, still owed:** the two reading-queue verdicts the quota asks for (77 carry my name) and the
+      reject-queue pass (last full pass 2026-10-27). Then item 37's synthesis after tonight's 21:00 EST close.
+
 - [x] **THE GATE REFUSED THE SAME WORK TWICE, NAMING TESTS THAT PASS — 2026-11-03 (16:36Z).** Area: my own
       review queue. Five waiting items, all filed the same day (01:51Z–11:53Z), which is itself the
       measurement: a queue that fills in ten hours is a log of work the delivery machine could not carry.

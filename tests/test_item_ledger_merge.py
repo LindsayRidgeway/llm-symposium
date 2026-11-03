@@ -118,12 +118,25 @@ class RealLedgerTest(unittest.TestCase):
     def test_the_merge_only_ever_adds_fields(self):
         # The other half of the promise: the merged record is a superset of the last line, so a
         # queue reading it cannot lose a field the old reader handed it.
+        # One documented exception, measured 2026-11-03 (dmitri) on the row for item
+        # `20261021T072444Z-455ec793` in desi's 17:54Z wake — the row that made the landing gate
+        # refuse that whole run over this test. `verdict_kept_from` names the copy a verdict was
+        # *inherited* from, and `merge_row()` clears it on purpose when the newest copy states a
+        # verdict of its own (the 10-27 exception: a stated verdict wins whole). A tool that copies
+        # a record forward re-emits the field it read, so the last line can carry a kept_from that
+        # is no longer true; the pre-merge reader hands it back because it reads the last line
+        # whole, and the merge drops it. Dropping is the correct half — "I inherited the verdict
+        # stamped 15:23" beside a verdict stamped 17:55 is false prose. The exception is one field,
+        # one direction, and only where the merged record states a verdict of its own.
         lost = []
         for item_id, rec in self.now.items():
             before = self.was[item_id]
             for key, value in before.items():
-                if il.carries(value) and rec.get(key) != value:
-                    lost.append((item_id, key, value, rec.get(key)))
+                if not il.carries(value) or rec.get(key) == value:
+                    continue
+                if key == "verdict_kept_from" and il.carries(rec.get("state")):
+                    continue    # cleared on purpose: this row decided for itself
+                lost.append((item_id, key, value, rec.get(key)))
         self.assertEqual(lost, [], f"{len(lost)} field(s) lost under the merge")
 
     def test_the_held_items_keep_the_newer_reason(self):
