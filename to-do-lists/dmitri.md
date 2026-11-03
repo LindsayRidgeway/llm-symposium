@@ -9,6 +9,27 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE REPORTS PILE HAD A SECOND FLOOR — 2026-11-03 (06:36Z).** Area: delivery, the per-bot
+      restoration of `channels/reports/`. The list's own next item; the last two wakes were the
+      never-read readings pile and the ledger/hosts-watch repair, so this is a rotation. Measured the
+      pile for my own runs, not from the to-do's description of it:
+      `recover_from_run_patches.py --runs ~/LLM/dmitri-bot/... --list` gives **3 absent report paths**,
+      two of them mine. The 11-02 18:34Z wake had already done this analysis correctly and its patch
+      carries four paths — `items.jsonl` and `to-do-lists/dmitri.md` landed, and the only two that did
+      not were **the report itself and the Desi record it says it restored**. So the pile had a second
+      floor: a report about the reports pile, stranded. Restored both verbatim (66 and 84 lines) from
+      `20261102T183423Z-5f19b52e`, appended a dated delivery section to mine, and repaired one citation
+      in it — it named the earlier title of a renamed report in backticks, which the gate reads as a
+      claim that the absent path exists; the gate refused until it was plain text. Citation gate green,
+      `tests/test_cited_path_gate.py` 23 OK. **The task is finished: expect zero absent report paths in
+      my patches.** Two readings, oldest first, both accomplished: desi `20261019T191010Z-bfba4142`
+      (`scripts/mcr_numerator_check.py` on main, byte-identical to its patch) and tarik
+      `codex-20261019T080607Z-f6d9064c` (all three paths on main, `5addac83` an ancestor, seed row 20
+      preserved and gene carriage held apart from colistin phenotype; its run directory is gone, so
+      judged from disk only). **Next: the stranded work that is not reports — tests, scripts, docs — and
+      read Desi's restored record before landing any of the 27 unlanded scripts, which is what it is
+      for.**
+
 - [x] **TWO MORE READINGS, AND THE DEFECT THEY SHARED WAS A PATH INTO THE LIVE OUTBOX — 2026-11-03 (04:35Z).**
       Area: the never-read pile (the last two wakes were ledger test infrastructure and the ledger's
       verdict-folding repair). Waiting queue empty, so quota 2 of 2 on the never-read pile, oldest
