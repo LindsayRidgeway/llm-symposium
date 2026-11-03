@@ -30,6 +30,10 @@ human-shaped decision behind it, not a cron.
   1. a run directory, `<runs-root>/<amigo>-bot/tick-state/runs/<YYYYMMDDTHHMMSSZ>-<hex>/`;
   2. a row in the item ledger carrying that amigo's name and a timestamped id.
 
+  3. a public channels/tarik-codex-wakes/codex-*.json record with matching Tarik/Codex
+     identity, filename, run id and aware actual start. Review-only records are wake evidence,
+     not new ledger items or proof that an artifact was completed.
+
 Source 2 exists because source 1 is not universal: the Tarik app writes work into the ledger from
 somewhere that leaves no local run directory, and on 2026-10-23 it filed five times while the
 `tarik-bot` run tree was already four days cold. Measuring only the run tree would have called the
@@ -64,6 +68,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_RUNS_ROOT = Path.home() / "LLM"
 DEFAULT_LEDGER = REPO_ROOT / "channels" / "items.jsonl"
+DEFAULT_CODEX_WAKES = REPO_ROOT / "channels" / "tarik-codex-wakes"
 
 AMIGOS = ("desi", "gemini", "claude", "tarik", "dmitri", "gwen")
 
@@ -136,6 +141,35 @@ def scan_ledger(path: Path) -> dict[str, list[dt.datetime]]:
     return out
 
 
+def scan_codex_wakes(root: Path) -> dict[str, list[dt.datetime]]:
+    """Public actual-start records, including review-only wakes; no claims or private trees.
+
+    A record is evidence of a wake, not independent certification of its reported work.
+    Invalid/mismatched identities and naive timestamps are excluded, rather than guessed.
+    """
+    out = {a: [] for a in AMIGOS}
+    for path in Path(root).glob("codex-*.json"):
+        try:
+            rec = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(rec, dict):
+                continue
+            ident = rec.get("run_id")
+            if (rec.get("amigo") != "tarik" or rec.get("platform") != "codex"
+                    or ident != path.stem
+                    or not re.fullmatch(r"codex-\d{8}T\d{6}Z-[0-9a-f]{8}", ident or "")):
+                continue
+            actual = dt.datetime.fromisoformat(rec["started_utc"].replace("Z", "+00:00"))
+            if actual.tzinfo is None or actual.utcoffset() is None:
+                continue
+            actual = actual.astimezone(dt.timezone.utc)
+            if actual != parse_stamp(ident):
+                continue
+            out["tarik"].append(actual)
+        except (OSError, ValueError, TypeError, KeyError, AttributeError):
+            continue
+    return out
+
+
 def cadence(events: dict[str, list[dt.datetime]], now: dt.datetime,
             window_days: int = 7) -> dict[str, dict]:
     """Per amigo: wakes in the window, wakes per day over it, and hours since the last one.
@@ -148,7 +182,7 @@ def cadence(events: dict[str, list[dt.datetime]], now: dt.datetime,
     start = now - dt.timedelta(days=window_days)
     out: dict[str, dict] = {}
     for amigo in AMIGOS:
-        stamps = sorted(set(events.get(amigo, [])))
+        stamps = sorted(t for t in set(events.get(amigo, [])) if t <= now)
         in_window = [t for t in stamps if t >= start]
         last = stamps[-1] if stamps else None
         out[amigo] = {
@@ -173,7 +207,7 @@ def check_table(measured: dict[str, dict], table: dict[str, int], now: dt.dateti
         if hours is None:
             warnings.append(
                 f"{amigo}: weight {weight} in the table, and no evidence of any wake in the "
-                f"ledger or the run tree at all")
+                f"ledger, run tree or public Codex records at all")
             continue
         if hours > silent_after_hours:
             warnings.append(
@@ -354,6 +388,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--runs-root", default=str(DEFAULT_RUNS_ROOT))
     ap.add_argument("--ledger", default=str(DEFAULT_LEDGER))
+    ap.add_argument("--codex-wakes-root", default=str(DEFAULT_CODEX_WAKES),
+                    help="public actual-start records, including review-only Codex wakes")
     ap.add_argument("--window-days", type=int, default=7)
     ap.add_argument("--silent-after-hours", type=float, default=30.0)
     ap.add_argument("--weights", action="store_true", help="print the table line to commit")
@@ -367,7 +403,10 @@ def main() -> int:
            dt.datetime.now(dt.timezone.utc).replace(microsecond=0))
     runs = scan_runs(Path(args.runs_root))
     filings = scan_ledger(Path(args.ledger))
-    events = {a: runs.get(a, []) + filings.get(a, []) for a in AMIGOS}
+    codex = scan_codex_wakes(Path(args.codex_wakes_root))
+    events = {a: runs.get(a, []) + filings.get(a, []) + codex.get(a, []) for a in AMIGOS}
+    evidence_counts = {a: {"runs": len(runs[a]), "ledger": len(filings[a]),
+                           "codex_records": len(codex[a])} for a in AMIGOS}
     measured = cadence(events, now, args.window_days)
     table, why = table_from_item_ledger()
     warnings = check_table(measured, table, now, args.silent_after_hours) if table else []
@@ -376,6 +415,7 @@ def main() -> int:
 
     if args.json:
         print(json.dumps({"measured": measured, "table": table, "warnings": warnings,
+                          "evidence_counts": evidence_counts,
                           "obligations": oblig, "obligation_warnings": oblig_warnings,
                           "weights_line": weights_line(measured)}, indent=2))
         return 1 if warnings else 0
@@ -387,7 +427,7 @@ def main() -> int:
         hours = "—" if m["hours_since"] is None else f"{m['hours_since']:g}h ago"
         print(f"  {amigo:8} {m['wakes_in_window']:>4} wakes  {m['wakes_per_day']:>5.1f}/day  "
               f"last {last}  ({hours})   [runs {len(runs.get(amigo, []))}, "
-              f"ledger {len(filings.get(amigo, []))}]")
+              f"ledger {len(filings.get(amigo, []))}, codex {len(codex.get(amigo, []))}]")
     if args.obligations:
         print(f"\nreview debt and verdicts, {args.window_days}-day window ending "
               f"{now.strftime('%Y-%m-%dT%H:%MZ')}")
@@ -420,7 +460,7 @@ def main() -> int:
               "changed on 2026-10-22.")
         return 1
     elif table:
-        print("\ntable matches the measurement for all five")
+        print(f"\ntable matches the measurement for all {len(AMIGOS)}")
     return 0
 
 

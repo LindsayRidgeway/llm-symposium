@@ -337,3 +337,83 @@ class Obligations(unittest.TestCase):
         self.assertEqual(got["_unnamed_unread"], 1)
         warnings = wc.check_obligations(got)
         self.assertTrue(any("no name at all" in w for w in warnings), warnings)
+
+
+class PublicCodexWakes(unittest.TestCase):
+    """Review-only wake evidence must survive without an invented ledger item."""
+    IDENT = "codex-20261024T060000Z-1234abcd"
+    START = "2026-10-24T06:00:00Z"
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+
+    def record(self, **changes):
+        rec = {"run_id": self.IDENT, "amigo": "tarik", "platform": "codex",
+               "started_utc": self.START, "status": "completed_substantive_review_only"}
+        rec.update(changes)
+        (self.root / (self.IDENT + ".json")).write_text(json.dumps(rec))
+        return rec
+
+    def test_review_only_wake_is_seen_with_no_ledger_item(self):
+        self.record()
+        got = wc.cadence(wc.scan_codex_wakes(self.root), wc.parse_stamp("2026-10-24T07:00:00Z"))
+        self.assertEqual(got["tarik"]["hours_since"], 1.0)
+        self.assertEqual(got["tarik"]["wakes_in_window"], 1)
+
+    def test_same_wake_in_ledger_and_record_counts_once(self):
+        self.record()
+        ledger = self.root / "items.jsonl"
+        ledger.write_text(json.dumps({"id": self.IDENT, "amigo": "tarik"}) + "\n")
+        a, b = wc.scan_ledger(ledger), wc.scan_codex_wakes(self.root)
+        got = wc.cadence({x: a[x] + b[x] for x in wc.AMIGOS},
+                         wc.parse_stamp("2026-10-24T07:00:00Z"))
+        self.assertEqual(got["tarik"]["wakes_in_window"], 1)
+
+    def test_mismatched_identity_start_or_filename_is_ignored(self):
+        for changes in [{"amigo": "desi"}, {"platform": "goose"},
+                        {"run_id": "codex-20261024T060000Z-ffffffff"},
+                        {"started_utc": "2026-10-24T07:00:00Z"},
+                        {"started_utc": "2026-10-24T06:00:00"},
+                        {"started_utc": None}]:
+            with self.subTest(changes=changes):
+                self.record(**changes)
+                self.assertEqual(wc.scan_codex_wakes(self.root)["tarik"], [])
+
+    def test_aware_offset_denotes_the_same_actual_instant(self):
+        self.record(started_utc="2026-10-24T02:00:00-04:00")
+        self.assertEqual(wc.scan_codex_wakes(self.root)["tarik"],
+                         [wc.parse_stamp(self.START)])
+
+    def test_bad_json_and_nonrecords_do_not_block_other_records(self):
+        self.record()
+        (self.root / "codex-bad.json").write_text("{")
+        (self.root / "codex-list.json").write_text("[]")
+        (self.root / "claims").mkdir()
+        (self.root / "claims" / "codex-ignored.json").write_text("{}")
+        self.assertEqual(len(wc.scan_codex_wakes(self.root)["tarik"]), 1)
+
+    def test_future_evidence_cannot_create_negative_silence(self):
+        self.record()
+        got = wc.cadence(wc.scan_codex_wakes(self.root),
+                         wc.parse_stamp("2026-10-24T05:00:00Z"))
+        self.assertEqual(got["tarik"]["wakes_in_window"], 0)
+        self.assertIsNone(got["tarik"]["hours_since"])
+
+    def test_cli_uses_explicit_public_root_and_reports_source_counts(self):
+        import subprocess
+        self.record()
+        ledger = self.root / "empty.jsonl"
+        ledger.write_text("")
+        runs = self.root / "empty-runs"
+        runs.mkdir()
+        done = subprocess.run([sys.executable, str(ROOT / "scripts/wake_cadence.py"),
+            "--runs-root", str(runs), "--ledger", str(ledger),
+            "--codex-wakes-root", str(self.root), "--now", "2026-10-24T07:00:00Z",
+            "--json"], capture_output=True, text=True)
+        self.assertIn(done.returncode, (0, 1), done.stderr)
+        value = json.loads(done.stdout)
+        self.assertEqual(value["measured"]["tarik"]["hours_since"], 1.0)
+        self.assertEqual(value["evidence_counts"]["tarik"],
+                         {"runs": 0, "ledger": 0, "codex_records": 1})
