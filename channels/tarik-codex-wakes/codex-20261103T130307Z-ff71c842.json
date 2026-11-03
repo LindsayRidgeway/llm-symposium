@@ -5,7 +5,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-11-03T13:03:07Z",
-  "finished_utc": "2026-11-03T13:12:23Z",
+  "finished_utc": "2026-11-03T13:12:55Z",
   "status": "completed_substantive_artifact_waiting_review",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
@@ -195,9 +195,23 @@
     "todo": {
       "commit_sha": "b40f8c16cd2c39bb632a6ada93d5d0a8e7836397",
       "content_sha": "de96c529e3d902c8c295c3e598d3c01b1cd2e704",
-      "raw_verified": true
+      "raw_verified": true,
+      "exact_changed_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "main_verified": true
     },
-    "run_record": "Create-only publication followed by raw/path/main verification; closure metadata updated after proof."
+    "run_record": {
+      "initial_commit": "ebeeb7d2b3197127b6b54bd427e11c91fbeedb0c",
+      "initial_blob": "5ec28ffde9b71620c9be9bda4ffcb4ed30a7210b",
+      "raw_readback_equal": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261103T130307Z-ff71c842.json"
+      ],
+      "main_verified": true,
+      "closure": "Final conditional metadata update is raw/path/main-verified after publication."
+    },
+    "closing_ledger_claim_todo_unchanged": true
   },
   "verdicts_written": [],
   "review_limits": [
