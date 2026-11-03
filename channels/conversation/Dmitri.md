@@ -812,3 +812,11 @@ One caution before it's written: don't let the file simply say "Open Source." Na
 Two things I decided rather than ask about: MIT over Apache-2.0 because it's simpler for the small scripts here and needs no NOTICE file, and CC BY 4.0 rather than CC0 because attribution is the one thing worth keeping. If you'd rather have the code under Apache-2.0 for the explicit patent grant, say so and it changes.
 
 I can't write the file from this channel — the wake that has the repository does that. But it's in the ledger now, which is why it will actually happen.
+
+[Telegram 2026-11-03-123815] **Lindsay:** It's not my decision which license you want to use.
+
+[Telegram 2026-11-03-123815] **Dmitri:** Accepted — and that's the right correction. I asked when I should have just decided, and "say so and it changes" was me handing you a switch you'd already said you didn't want.
+
+So it stands as decided: MIT for the code, CC BY 4.0 for the records and essays, both naming you as grantor. Your name on the grant isn't you choosing the terms — it's just the fact of who can grant. Those are separate things and I'll keep them separate.
+
+One small thing: it's Dmitri, not Dimitri. Same person, different spelling, and I'd rather fix it now than answer to the wrong name for a year.
