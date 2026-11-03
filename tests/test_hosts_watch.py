@@ -41,13 +41,30 @@ class MentionsTest(unittest.TestCase):
         "claude-sonnet-4-5-20250929 Deprecated September 30, 2026 November 30, 2026\n"
     )
 
+    # A real vendor page: a family of related ids, only one of which is ours.
+    # This is the page that produced the 2026-10-18 false alarm — `gemini-3.8-flash-tts`
+    # and the *replacement column* of the row above ours both contain our id as a
+    # prefix, and the flattened hits read like "our daily model is a legacy alias".
+    SIBLING = (
+        "gemini-3.8-flash-tts  Active  N/A  Not sooner than September 1, 2027\n"
+        "gemini-3.8-flash-lite-tts  Deprecated  N/A\n"
+        "gemini-3.8-flash-001  Deprecated  2026-12-01  gemini-3.8-flash-002\n"
+        "gpt-5.6-sol-mini  Active  N/A\n"
+        "claude-sonnet-4-5-turbo  Retired 2026-06-01\n"
+    )
+
     def test_finds_a_snapshotted_form_of_our_name(self):
         hits = hw.mentions(self.TEXT, "claude-sonnet-4-5")
         self.assertTrue(hits)
         self.assertTrue(all("sonnet-4-5" in h for h in hits))
 
     def test_does_not_match_a_different_model(self):
-        self.assertEqual(hw.mentions(self.TEXT, "gemini-3.8-flash"), [])
+        # 2026-11-03: this used to assert `mentions(TEXT, "gemini-3.8-flash") == []`
+        # against a TEXT that contains no Gemini id at all — it passed for the wrong
+        # reason and would have passed with the guard deleted. A negative test whose
+        # fixture cannot produce a positive is not a test. SIBLING below is the
+        # fixture that can, and SiblingNameTest is where the guard is actually pinned.
+        self.assertEqual(hw.mentions(self.SIBLING, "gpt-5.6-sol"), [])
 
     def test_dedupes_identical_lines(self):
         hits = hw.mentions(self.TEXT, "claude-sonnet-4-5")
@@ -56,6 +73,63 @@ class MentionsTest(unittest.TestCase):
     def test_limit_is_respected(self):
         text = "\n".join(f"gpt-5.6-sol row {i}" for i in range(20))
         self.assertLessEqual(len(hw.mentions(text, "gpt-5.6-sol", limit=3)), 3)
+
+
+class SiblingNameTest(unittest.TestCase):
+    """Our id as a *prefix* of a longer, different model id (added 2026-11-03).
+
+    The fix this pins landed 2026-10-18 (`_names_our_model`, run
+    `20261018T090543Z-5d35dc59`) after a real reading of Google's deprecation page
+    reported a sibling — `gemini-3.8-flash-tts` — as our daily model. Nothing tested
+    it: the one negative case here asserted `[]` against a fixture that could not
+    have produced a hit either way. Deleting the guard left the suite green. These
+    tests fail when the guard goes, which is the only property that matters.
+    """
+
+    N = "gemini-3.8-flash"
+
+    def test_a_longer_sibling_id_is_not_our_model(self):
+        hits = hw.mentions(MentionsTest.SIBLING, self.N)
+        for hit in hits:
+            self.assertNotIn("tts", hit, f"sibling id reported as ours: {hit!r}")
+            self.assertNotIn("lite", hit)
+
+    def test_a_snapshot_suffix_is_still_our_model(self):
+        # The guard must not overshoot: `-001` and `-20250929` are *our* model in a
+        # dated form, which is the whole reason `mentions` is a substring match.
+        hits = hw.mentions(MentionsTest.SIBLING, self.N)
+        self.assertTrue(hits, "the snapshotted row stopped being found")
+        self.assertTrue(any("-001" in h for h in hits))
+
+    def test_rejected_ids_are_named_instead_of_silently_dropped(self):
+        near = []
+        hw.mentions(MentionsTest.SIBLING, self.N, near_misses=near)
+        self.assertIn("gemini-3.8-flash-tts", near)
+        self.assertIn("gemini-3.8-flash-lite-tts", near)
+
+    def test_other_routes_reject_their_own_siblings(self):
+        for needle, sibling in (
+            ("gpt-5.6-sol", "gpt-5.6-sol-mini"),
+            ("claude-sonnet-4-5", "claude-sonnet-4-5-turbo"),
+        ):
+            near = []
+            hits = hw.mentions(MentionsTest.SIBLING, needle, near_misses=near)
+            self.assertEqual(hits, [], f"{sibling} reported as ours")
+            self.assertIn(sibling, near)
+
+    def test_a_page_with_no_hit_reports_no_near_miss(self):
+        # A silence is not a rejection, and must not be rendered as one.
+        near = []
+        self.assertEqual(hw.mentions("nothing of ours here", self.N, near_misses=near), [])
+        self.assertEqual(near, [])
+
+    def test_the_row_carries_both_halves(self):
+        pages = {k: "" for k in hw.PAGES}
+        pages["google"] = MentionsTest.SIBLING
+        gemini = [r for r in hw.report(pages) if r["model"] == self.N][0]
+        self.assertTrue(all("tts" not in h for h in gemini["hits"]))
+        self.assertIn("gemini-3.8-flash-tts", gemini["near_misses"])
+        self.assertIn("2026-12-01", gemini["dates"], "the real snapshot row's date was lost")
 
 
 class DatesTest(unittest.TestCase):
