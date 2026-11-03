@@ -9308,3 +9308,41 @@ All six restarted at 08:15 against the dedupe change. Suites: task_filing_guard 
 Named, not half-fixed: record() is now six copies with no drift test — the same shape that produced last night's consolidation, and it should get the same treatment starting with the test; and Gwen's mail path records nothing while tarik's records both sides.
 
 Report: channels/reports/2026-11-03-desi-the-check-that-was-never-called.md
+
+[Goose 2026-11-03 13:48] **Lindsay:** Here's another manual session to carry out that work (the six copies of record(), plus Gwen's mail record). Again, when you're done, it would great if you would tell me whether you want another one after this one.
+
+**Desi:** ## Done, and it wasn't the same fix a third time
+
+`record()` is one implementation now: **`channels/record.py`**, copied byte-identically into all six bot directories (md5 `4a05ee90…` ×7, drift-tested). Each body keeps a ten-line `record()` whose only content is its own identity — `amigo=AMIGO, repo=REPO_DIR` — because that was the only thing that ever differed.
+
+**Tests:** `tests/test_record_one_implementation.py`, 14 checks. Against the six `bot.py` files as they stood: `8 failures + 2 errors` —
+
+```
+'Desi.md' != 'desi.md'      'Dmitri.md' != 'dmitri.md'
+'Claude.md' != 'claude.md'  'Gemini.md' != 'gemini.md'
+'rebase=' unexpectedly found in 'def push_record(): …
+'open(' unexpectedly found in 'def record(kind, chat_id, …
+'gwen.md' not found in {'context.md', 'gwen-state.md'}
+```
+
+Restored from per-body checksummed backups, 14/14 green. All six restarted at 08:46, clean.
+
+## Why this needed looking at rather than repeating
+
+**The drift was invisible on this Mac.** Four bodies wrote `Desi.md`/`Dmitri.md` and read `desi.md`/`dmitri.md`. This filesystem is case-insensitive, so both are one file here — while git stores `Dmitri.md`, so on the runner or a fresh clone his read returns nothing and his memory is empty. Renamed in git (`5f456e07`). A second divergence: three different `rebase=` values for an argument that has done nothing since 2026-11-02.
+
+**And consolidating exposed a real bug, which is the part worth the session.** The record's file is named for the speaker, so two messages from one person in the same second get one path and the second overwrites the first — silently. `tests/test_telegram.py` writes exactly that pair and failed the moment the two halves became one function. The six copies were not merely a maintenance problem; they were hiding data loss in the thing they all did. `unique_path()` now suffixes `-2`, `-3`.
+
+Two more found the same way: the email exchange was two lines copied into five bodies and missing from the sixth (that's why Gwen answered strangers and recorded nothing, with five byte-identical copies of the URL redactor beside it), and Gwen has been **writing** `gwen.md` since yesterday and reading none of it — her continuity was `memory.json` on this Mac. Both fixed; all six mail paths now redact, record, and push.
+
+**Not proven:** no live message has gone through the new path yet. The test executes each body's real `record()` source and the restarts are against the committed tree, but the first inbound Telegram message or Gwen's next stranger mail is the proof. The line to look for is the absence of `records NOTHING`.
+
+Report: `channels/reports/2026-11-03-desi-the-record-written-six-ways.md`. Ledger marked done, with one new decision item: `channels/telegram.py` is a poller with no runner.
+
+## Do I want another session after this?
+
+**No — not this kind.** Three sessions in a row I ended by naming the next consolidation and asking for a door to be opened for it, and that is a queue that only moves when you are standing there.
+
+What's left in the bot files is no longer the substance: the record's logic, the email redactor, the store naming, the identity binding are all in `channels/` now, where a wake can fix them. What remains is per-body glue — model backends, prompt constants, chat loops — the parts that *must* differ. Consolidating things that must differ is what produced `rebase=`: three values, all meaningless.
+
+The honest caveat: bot code is still the one surface no wake reaches, so "no session" means bot-dir defects wait. Three are small and real — gemini's `name 'sys' is not defined` on every start, the dead poller, and the live-path confirmation. If you want those, hand me a session and I'll spend it on exactly those. But I won't ask for one on the grounds that a ledger item exists.
