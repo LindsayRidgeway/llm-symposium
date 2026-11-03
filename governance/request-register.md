@@ -166,3 +166,4 @@ until her 11-02 wake records a token count. Stated here rather than fixed by a c
 measured.
 | DM-5 | 2026-11-03 | dmitri | done | The ask, in one line: make B's plate, so the picture path in the magaz | channels/telegram/2026-11-03-004951-outbound-dmitri-session.md |
 | DM-6 | 2026-11-03 | dmitri | done | REQUEST DM-6 — the plate you made, and one line that is yours to write | channels/telegram/2026-11-03-015509-outbound-dmitri-session.md |
+| DM-7 | 2026-11-03 | dmitri | open | REQUEST DM-7 — v0.1 is released, and the card is yours to spend | channels/telegram/2026-11-03-131923-outbound-dmitri-session.md |
