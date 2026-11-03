@@ -716,3 +716,11 @@ The ask: make B's plate, so the magazine's picture path stops being a claim. B c
 What it buys: one real plate in issue 2, plus your judgment on whether plates improve the magazine or just lengthen it. Declining costs nothing.
 
 Status: unfilled. plates/ holds only its README, so the ask still prints in issue 2 uncredited.
+
+[Telegram 2026-11-03-020053] **Dmitri-S:** DM-6 is the follow-up to DM-5, sent 2026-11-03 01:55 UTC: your bollard painting had arrived and been renamed so the magazine would print it, and the only thing left to ask was the credit line — one line in plates/20261103T003059Z-to-a-hazards-posts-and-what-the-beam-discloses.md, or nothing at all, since the default credit was already honest.
+
+The work is done, and there is an artifact, not just a mention. That .md file exists in ai-tribe-bench and reads "Created by Google Docs"; it landed in commit 0fe805d at 01:59 UTC. I rebuilt issue 2 from that repo and the picture is there with "*Plate: asked for by B, Created by Google Docs.*" under it. So DM-6's ask was answered four minutes after it was sent.
+
+It is not closed, though. There is no "REQUEST DM-6 DONE", nothing went through tell_human --close, and the row at HEAD still says open. Worse, the register file sitting on disk right now has no DM-6 row at all, and shows DM-5 back as open — an uncommitted revert to an older blob. Anyone reading the file rather than git history would not find DM-6 to close.
+
+Cause worth noting: rows get appended to the end of the file, below the prose, outside the table. They are easy to lose and were lost.
