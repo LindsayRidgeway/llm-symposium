@@ -129,6 +129,7 @@ import contextlib
 import datetime as dt
 import fcntl
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -1574,6 +1575,47 @@ def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
     return out
 
 
+def measured_cadence(now: dt.datetime | None = None, window_days: int = 7,
+                     runs_root: Path | None = None, ledger: Path | None = None
+                     ) -> dict[str, dict] | None:
+    """Wakes per day for each body, measured by `scripts/wake_cadence.py`; None if it cannot run.
+
+    Added 2026-11-02 (Desi), because the reading queue printed a name per item and never asked
+    whether that body was waking. The recorded failure: on 2026-10-22 nine never-read items were
+    named to Tarik on the strength of a hand-written table while his goose run tree had been cold
+    for four days, and nothing in the queue could have noticed. `WAKES_PER_DAY` is still the draw's
+    authority — the draw is frozen to the item and this function does not re-weight anything — but
+    the reader is now shown the measurement beside the name.
+
+    Returning None (rather than a guess) is deliberate: every caller then prints the word
+    *assumed*, since a plausible-looking fallback number would be worse than an admitted absence.
+    """
+    path = REPO / "scripts" / "wake_cadence.py"
+    if not path.is_file():
+        return None
+    try:
+        spec = importlib.util.spec_from_file_location("wake_cadence_measured", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)  # type: ignore[union-attr]
+        now = now or dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
+        runs = mod.scan_runs(runs_root or HOME / "LLM")
+        filings = mod.scan_ledger(ledger or LEDGER)
+        events = {a: runs.get(a, []) + filings.get(a, []) for a in AMIGOS}
+        return mod.cadence(events, now, window_days)
+    except Exception:  # noqa: BLE001 — a queue must still print when the instrument is broken
+        return None
+
+
+def rate_beside(measured: dict[str, dict] | None, amigo: str) -> str:
+    """The measured rate for one body, in words a reader can act on — or 'assumed'."""
+    m = (measured or {}).get(amigo)
+    if not m:
+        return "assumed"
+    if m.get("hours_since") is None:
+        return "no wake on record — assumed"
+    return f"{m['wakes_per_day']:.1f}/day, last {m['hours_since']:g}h ago"
+
+
 def architectures(dir_: Path = BAND_DIR, band_data: dict | None = None) -> dict[str, str]:
     """amigo -> architecture, from the band's own copy or the price table beside it.
 
@@ -1935,12 +1977,20 @@ def _cli() -> int:
                 print(f"  {who}: {n}")
             return 0
         mine = reading_queue(who=args.reading_queue)
-        pile = len(reading_queue())
+        all_unread = reading_queue()
+        pile = len(all_unread)
         need = quota(pile)
+        # 2026-11-02 (Desi): the name beside an item is now shown with what is *measured* of that
+        # body, or the word "assumed". The capacity table is hand-written and dated; a queue that
+        # printed only the name could not tell a reader that the body holding 22 items had gone
+        # quiet, which is exactly what happened on 2026-10-22. The draw is unchanged.
+        measured = measured_cadence()
         print(f"item_ledger: {len(mine)} never-read item(s) carry {args.reading_queue}'s name. "
               f"These are in the repository already and nobody has checked them.")
         for rec in mine[:args.hours]:
+            reader = rec.get("reading_assigned_to") or "unnamed"
             print(f"  {rec['id']}  by {rec.get('amigo','?'):8} filed {(rec.get('filed_utc') or '')[:10]}"
+                  f"  -> {reader} [{rate_beside(measured, reader)}]"
                   f"  {(rec.get('short_title') or rec.get('title') or '')[:60]}")
         if len(mine) > args.hours:
             print(f"  … and {len(mine) - args.hours} more")
@@ -1956,6 +2006,16 @@ def _cli() -> int:
         # 60 → 39 → 10 a day while closures held at 31, and the pile turned back up. A quota that
         # lives where nobody looks is not an instruction; it prints here now, in the command every
         # body's wake actually opens with, and ledger_watch prints the same number when it fails.
+        # The pile's names, each with what is measured of that body. This is the line the human
+        # reads when he asks "who is holding all of it, and are they awake?".
+        names: dict[str, int] = {}
+        for rec in all_unread:
+            who = rec.get("reading_assigned_to") or "unnamed"
+            names[who] = names.get(who, 0) + 1
+        if names:
+            print("item_ledger: the pile's names, with what is measured of each body:")
+            for who, n in sorted(names.items(), key=lambda kv: (-kv[1], kv[0])):
+                print(f"  {who:8} {n:>4} item(s)  {rate_beside(measured, who)}")
         print(f"item_ledger: quota — read {need} and write {need} verdict(s) this wake. The whole "
               f"commons holds {pile} finished item(s) nobody has read (target under "
               f"{PILE_TARGET}); at {need} per wake that is the arithmetic, not an appetite. "

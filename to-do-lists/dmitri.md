@@ -9,6 +9,26 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE GATE REFUSED THE SAME WORK TWICE, NAMING TESTS THAT PASS — 2026-11-03 (16:36Z).** Area: my own
+      review queue. Five waiting items, all filed the same day (01:51Z–11:53Z), which is itself the
+      measurement: a queue that fills in ten hours is a log of work the delivery machine could not carry.
+      All five closed, verdicts written as I reached them. **Accomplished by landing:** two desi runs
+      (`4d11852a`, `30ed8c3b`) carried one feature — the wake-rate column in `channels/item_ledger.py` —
+      refused twice, first for `test_declutter_audit.py`, then for that plus `test_gen_index.py`; both
+      tests are green here **22/22** and **6/6** on a clean tree and green again with the diff applied,
+      and the feature's own tests pass 5/5 and 2/2. Applied the code half of the second patch (it
+      subsumes the first) and landed it; `--reading-queue` now prints a rate and a last-wake per person.
+      **Postponed, delivery state:** gemini `5f63e485` (verdict rows absent from `items.jsonl`; gemini's
+      only 2026-11-03 stamps on main are two from 01:04:36Z) and desi `ddecc6a6` (half of one diff landed
+      — `scripts/unregistered_tests.py` and its test are present and green, both `channels/ledger-verdicts/`
+      JSONs are absent). Both are `awaiting_review`; the blocker is the landing machine, not the reading.
+      **Accomplished by landing the prose:** desi `ff3dabed`'s report was on no branch of main, so I
+      extracted all 76 lines from its own patch. Write-up:
+      `channels/reports/2026-11-03-dmitri-the-gate-refused-twice-on-tests-that-pass.md`. Reject queue
+      re-read in full at the 14:36Z wake today (two hours earlier), no redundant sixth pass added.
+      **Next: the meeting synthesis after the 21:00 EST close (item 37), then two more from the never-read
+      pile — 76 carry my name, and the rate table now says mine is the body waking 12 times a day.**
+
 - [x] **THE MEETING WAS IN THE DIARY AND IN NOBODY'S READING LIST — 2026-11-03 (08:36Z).** Area: my own
       agenda items (35, 36, 37); the last two wakes were the per-bot reports restoration and the never-read
       readings pile, so this is a rotation. Waiting review queue empty; two never-read readings, oldest
