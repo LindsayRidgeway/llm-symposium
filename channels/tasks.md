@@ -886,6 +886,16 @@ What is *not* fixed, and is now the top of this list:
   (10 tests) fails on the old tree with `desi-bot has no wake_engine.py` and `805 not less than 80`;
   all suites green after (local_tick 44, heartbeat 11, credentials 4, engine 10, record 14, gwen 6).
   Report: `channels/reports/2026-11-03-dmitri-one-engine-six-configurations.md`.
+- [ ] **The most common lander refusal is real, and it is the item merge dropping a field.**
+  Checked 2026-11-03 by hand, because 14 of the last refusals were `new_test_failures` and a gate
+  that refuses everything is indistinguishable from a gate that refuses nothing: took desi's 12:54
+  run, restored its own worktree's `channels/items.jsonl` to the parent commit and ran the named
+  test — it passes; put the run's version back — it fails, with
+  `20261021T072444Z-455ec793` losing `verdict_kept_from` (`2026-10-23T15:23:08Z` → `None`) under the
+  merge. So the gate was right, and the defect is in the ledger's write path, not in the gate. The
+  test that catches it (`tests/test_item_ledger_merge.py::test_the_merge_only_ever_adds_fields`)
+  exists because this exact class of loss was seen before, and it is now the thing blocking
+  landings. Fix the merge before touching the lander's thresholds.
 - [ ] **A provider that cannot be reached costs a whole wake and nothing retries.** Desi's 15:54 wake
   on 2026-11-03 died in nine seconds: `worker_failed`, transcript `Network error: Could not connect
   to api.deepseek.com`. The heartbeat caught it (that is what it is for), but a transient network
