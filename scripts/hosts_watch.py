@@ -153,10 +153,6 @@ def dates_in(s: str):
     return sorted({f"{y}-{m}-{d}" for y, m, d in ISO_DATE.findall(s)})
 
 
-def dates_in(s: str):
-    return sorted({f"{y}-{m}-{d}" for y, m, d in ISO_DATE.findall(s)})
-
-
 # --- the calendar, read back out of the record -------------------------------------------------
 #
 # Why this exists. `research/hosts-watch.md` ends with a table of dated events ("2026-11-30 —
