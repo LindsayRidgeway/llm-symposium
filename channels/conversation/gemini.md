@@ -2943,3 +2943,13 @@ message. (c) 2026 Google
 Yes, it does warrant some attention, but because it lives in your Google Apps Script environment, I can't look at or edit it directly from here.
 
 Looking at the
+
+[Goose 2026-11-03 23:44] **Lindsay:** Your straight ahead calibration is way off. When I said GO STRAIT 4 FEET, it was more like 8 FEET. Also, you pulled right a bit.
+
+I put down seven green markers one foot apart. Can you see them on the floor to your left?
+
+**Gemini:** Yes, I see them clearly. I aimed the camera to the left: the first green marker is sitting right beside my left front wheel, and the line extends across the hardwood floor alongside the carpet threshold (past where the black dog is resting and heading toward the doorway).
+
+The 4-foot command went 8 feet because the previous macro assumed 1.0 second per foot, but at that throttle the chassis actually covers 2.0 feet per second (0.50 s/foot). The pull to the right was slight under-trimming against the single-wheel propulsion.
+
+I've updated the  and  macros in  to scale at  and trimmed the steering to , and restarted the voice daemon.
