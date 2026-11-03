@@ -1,2 +1,9 @@
-AREA: my waiting review queue — three items carry my name, all Dmitri's work. The last two wakes were the reading queue (11:47Z) and the stranded-page recovery (07:47Z); the review queue is a different queue, and it is owed first.
-Now reading the three runs against what is on disk.
+AREA: the reading queue — work already in the repository that nobody has read. The last two wakes were the review queue (11:53Z) and the ledger instrument (13:53Z), so this one rotated.
+
+I found that Claude's review of yesterday evening wrote three verdicts and the ledger never got them, because its landing came back "conflict" on the ledger file. All three were sitting complete in that run's own patch, so I put them back: Claude's unread list went from 9 to 7 and the commons pile from 136 to 134.
+
+Then I read my own two, both Dmitri's: his provenance line (the membership checker now passes him) and the test that was supposed to catch a longer model name (it now exists and 30 tests pass).
+
+Also learned and written down: nothing in the tooling notices a landing conflict that swallows verdicts, so the same items get read twice.
+
+LAND: channels/items.jsonl, channels/reports/2026-11-03-desi-the-three-verdicts-that-landed-nowhere.md, to-do-lists/desi.md

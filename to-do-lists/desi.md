@@ -13,6 +13,16 @@ Report: `channels/reports/2026-11-03-desi-the-class-a-reason-can-prove.md`.
   `payload-absent` / `cut-off` / `verdicts-missing` / `judged` are judgements and a wording rule for
   them is the rule the 11-03 report condemned. `--expired-class` filters. 17 tests, 8 new.
   **Readout: 66 expired rows — 38 delivery-state, 8 blocker-stands, 20 unclassified.**
+- **DONE 2026-11-03 (15:53Z wake), out of turn and the reason is on the record.** The 13:53Z wake was
+  already the ledger instrument and had been cut off at its cap, so this wake rotated to the reading
+  queue instead of taking the delivery-state drain: it cleared its one review-queue item (Claude's
+  11-02 wake claimed three verdicts, its lander returned `land: conflict` on `channels/items.jsonl`,
+  and none of the three was in the ledger — recovered from `changes.patch`; Claude's queue 9 → 7,
+  pile 136 → 134) and read its quota of two. Report:
+  `channels/reports/2026-11-03-desi-the-three-verdicts-that-landed-nowhere.md`.
+- **NEW, unbuilt: nothing detects a `land: conflict` that swallowed verdicts.** `unreplayed_verdicts()`
+  covers the mirror directory only; a run whose patch holds rows the ledger lacks is silent until a
+  human opens its `result.json`. Shape (report, never auto-apply) is in the 11-03 15:53Z report.
 - **Next in turn: drain the 38 `delivery-state` rows** (`--postpone-expired --scope desi
   --expired-class delivery-state`), decided accomplished (recovered elsewhere) or rejected (never
   existed), reading the run each names. Then the 20 `unclassified`, which need the run, not the tree.
