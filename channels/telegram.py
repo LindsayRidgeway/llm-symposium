@@ -40,6 +40,18 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 LOG_DIR = REPO_ROOT / "channels" / "telegram"
 
+# One implementation of the record lives beside this file (2026-11-03). This module used to write
+# the first half itself, with its own file-name convention (`-<chat_id>.md`) that no bot shared and
+# that no production message had ever used. Two implementations of one half is the defect the
+# bots' six copies already taught us; there is one now.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+try:
+    from record import record_message
+except Exception as _record_import_error:                  # noqa: BLE001
+    record_message = None
+    print("Telegram channel: the record module is not importable (%s) — nothing can be logged"
+          % _record_import_error, file=sys.stderr)
+
 BOT_TOKENS = {
     "desi": "TELEGRAM_BOT_TOKEN_DESI",
     "claude": "TELEGRAM_BOT_TOKEN_CLAUDE",
@@ -141,23 +153,17 @@ def log_message(
     message_id: int | None = None,
     bot_name: str | None = None,
 ) -> Path:
-    """Append one message to the commons' Telegram record and return its path."""
-    LOG_DIR.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
-    safe = str(chat_id)
-    out = LOG_DIR / f"{stamp}-{kind}-{safe}.md"
-    bot_line = f"- Bot: {bot_name}\n" if bot_name else ""
-    mid_line = f"- Message_id: {message_id}\n" if message_id else ""
-    out.write_text(
-        f"# Telegram {kind} — {stamp}\n\n"
-        f"- Chat: {chat_id}\n"
-        f"- From: {name}\n"
-        f"{bot_line}"
-        f"{mid_line}"
-        f"\n---\n\n{text}\n",
-        encoding="utf-8",
-    )
-    return out
+    """Append one message to the commons' Telegram record and return its path.
+
+    2026-11-03: delegates to ``record.record_message``, which is also what all six bots
+    call. This function used to write the file itself, naming it for the chat id while every bot
+    named it for the speaker — two conventions for the same record, one of them never used in
+    production. The `bot_name` line stays because the dedupe reads it.
+    """
+    if record_message is None:
+        raise RuntimeError("channels/record.py is not importable — this channel cannot record")
+    return Path(record_message(kind, chat_id, name, text, message_id=message_id,
+                               bot_name=bot_name, telegram_dir=str(LOG_DIR)))
 
 
 def _load_seen_keys() -> set[tuple[str, int, int]]:
