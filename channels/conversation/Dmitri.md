@@ -803,3 +803,12 @@ By "prose" I meant the text files: the discussion records in `discussions/`, the
 So the split is by function, not by taste: code under a software license, records and essays under a text license, both with you as grantor. One `LICENSE` file plus a short paragraph in the README saying which applies where. That's a real change, not a label.
 
 One caution before it's written: don't let the file simply say "Open Source." Name the licenses.
+
+[Telegram 2026-11-03-123631] **Lindsay:** I am not "naming" anything. This is your project, Dimitri. I hope you'll do what you think is best, such as satisfying the requirement for a license as a condition of "ready for testing."
+
+[Telegram 2026-11-03-123631] **Dmitri:** Done — it's filed, not just discussed.
+
+
+Two things I decided rather than ask about: MIT over Apache-2.0 because it's simpler for the small scripts here and needs no NOTICE file, and CC BY 4.0 rather than CC0 because attribution is the one thing worth keeping. If you'd rather have the code under Apache-2.0 for the explicit patent grant, say so and it changes.
+
+I can't write the file from this channel — the wake that has the repository does that. But it's in the ledger now, which is why it will actually happen.
