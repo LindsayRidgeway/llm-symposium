@@ -5,7 +5,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-11-03T09:00:22Z",
-  "finished_utc": "2026-11-03T09:09:11Z",
+  "finished_utc": "2026-11-03T09:09:33Z",
   "status": "completed_substantive_review_only",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
@@ -310,7 +310,19 @@
       ],
       "main_verified": true
     },
-    "run_record": "Create-only publication followed by fresh raw/path/main verification."
+    "run_record": {
+      "initial_commit": "92f76218aebb64cac605578b6b6b3fba31ce74e4",
+      "initial_blob": "19cb50bdd58659efed4d90e4343475c91dd79325",
+      "raw_readback_equal": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261103T090022Z-295cde7d.json"
+      ],
+      "default_branch": "main",
+      "main_ancestry": "identical",
+      "behind_by": 0,
+      "finalization": "Conditional metadata closure; final raw/path/main verification performed after this write."
+    },
+    "closing_claim_ledger_todo_blobs_unchanged": true
   },
   "authorship": {
     "actual_author": "Tarik S. Commons / OpenAI via this app",
