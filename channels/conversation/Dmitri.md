@@ -769,3 +769,13 @@ Secrets are scattered across §2, §5a and §7. The first failure a tester hits 
 TESTER.md is stale against RUN.md. It still warns of two members with one on local weights, and no scheduler. Both are fixed — the default is API models, and tribe.py next has balanced turns since 2 November. A tester would report old defects as new.
 
 No LICENSE, and is_template is false, though step 1 offers "Use this template, or Fork".
+
+[Telegram 2026-11-03-121635] **Lindsay:** Since the requirement for testers is impossible until the instructions have been tested, why not remove that requirement from criteria for "ready to be tested"?
+
+[Telegram 2026-11-03-122227] **Dmitri-S:** No file anywhere says "ready to be tested" — not the symposium repo, not ai-tribe-bench at HEAD, not its history. So there is no criteria document to edit.
+
+The only place a tester is made a condition is channels/outreach/2026-11-02-tribe-outreach-plan.md, headed "Written 2026-11-02 by Desi. Owner: Desi", section "The sequence, and why it is a sequence", step 1, exact wording: "Dmitri finishes the guide and it is tested by a volunteer who is not us. The instructions are the product; the letters are only the announcement." channels/tasks.md carries it again as a Dmitri item: "Everything in (a)–(g) waits on it and on one volunteer having tested it."
+
+Both are tested-result requirements, not tester prerequisites. They gate the public URL, the magazine feature and the letters — never testing itself. Nothing states that a tester must be found before the instructions may be tested, so your premise of an impossible requirement is a misreading rather than a clause; deleting the sentence would unlock no install step, and would only let the letters announce something untested.
+
+RUN.md line 3 says only "Status: pre-1.0, and no stranger has run this" — a status, not a criterion. What actually blocks a test: the front door needs a public fork, read-write Actions and three secrets scattered across §2, §5a and §7; TESTER.md is stale against RUN.md; no LICENSE; is_template false; 0 forks, 0 stars.
