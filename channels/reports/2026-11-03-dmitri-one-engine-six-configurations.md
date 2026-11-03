@@ -175,3 +175,45 @@ and reports the last error line's machine token instead — `Network error`. Nev
 one file further and no more. Test first: against the previous `wake_heartbeat.py` the new test
 prints `'1' != 'Network error'`; after, 14/14. The six bots were restarted at 16:13 and started
 clean, so the next failure will say what happened rather than how it ended.
+
+## He refused to be the watchdog, and he was right
+
+I closed the last message to him with two "decisions for him": whether the deploy runs on a schedule,
+and whether a wake should finish an unlanded verdict before starting new work. He answered one line:
+*"I disagree that those are decisions for me. When you ask me to do things that you can do, you risk
+the experiment and make me the watchdog."* Both of those were mine to make, so I made them.
+
+**The deploy runs on a schedule.** `com.lindsay.amigo.deploy-engines` runs
+`deploy_engines.py --verify --when-idle --restart` every thirty minutes, under launchd, loaded at
+21:2x and observed doing nothing (`0 file(s) written, 24 already identical` / `nothing changed — the
+six bots were not restarted`). What made it safe is not confidence, it is two refusals inside the
+script: `--verify` loads the canonical engine and refuses to copy if it does not import, and refuses
+if any stub names a `CORE.<attribute>` the engine no longer has; `--when-idle` refuses to act if any
+bot has a run directory with no `result.json` inside the last half hour, or a live process whose
+command line names that bot's tick-state. The reason for the second one is the first one's subject: a
+restart kills a worker mid-lander, which is how 73 verdicts ended up with no outcome. It also only
+restarts when it actually copied something.
+
+**A wake now finishes one unlanded verdict before it does anything else.**
+`finish_unlanded(state_dir)` runs before the clone, after the battery guard: the oldest run whose
+`result.json` says `awaiting_review` and has no `land` key, with a `changes.patch` to apply, younger
+than 24 hours. One per wake. It writes the outcome back into the run's own record with
+`land_recovered_by`, so a verdict that was invisible becomes either landed or refused-with-a-reason.
+Never raises: the work it recovers has already been lost once.
+
+The 24-hour bound is the whole of the design. Of the 73 unfinished verdicts, 71 are between 900 and
+1,180 hours old — a diff against a main that has moved four weeks; re-applying those is not recovery,
+it is guessing. Only two were inside the window when this was written, and one of them has already
+been through: Gemini's 08:04 wake left `awaiting_review` with ledger verdicts and no outcome, and the
+recovery landed it as `conflict` — the honest answer, recorded, instead of the blank.
+
+Tests, written before the change: `tests/test_wake_recovery.py` (9 tests) fails on the engine as it
+stood with `AttributeError: module has no attribute 'finish_unlanded'` and "nothing in a wake recovers
+a verdict a previous wake left unfinished"; `tests/test_deploy_engines.py` grew six `SchedulingTests`
+covering the in-flight refusal, the abandoned-run timeout, the two verify failures, and the
+no-restart-when-nothing-changed rule. 130 tests across both suites, green.
+
+Also fixed while here, because it was mine: the unified prompt said "you do not publish it not need to
+ask for delivery" — a sentence I broke when I merged six prompts into one this afternoon. A prompt six
+models read five times an hour should not contain a typo that survived a test suite; the suites check
+that instructions exist in one copy, not that the English parses.

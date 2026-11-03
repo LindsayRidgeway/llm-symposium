@@ -99,6 +99,90 @@ class DeployTests(unittest.TestCase):
                             "the commons has no channels/%s to deploy" % name)
 
 
+class SchedulingTests(unittest.TestCase):
+    """The same command, run by a timer: two things have to be true before it may act.
+
+    A wake in flight must not be interrupted — a restart kills the worker mid-run and leaves a
+    verdict with no lander, which is the defect `finish_unlanded` exists to clean up. And an engine
+    that does not import must not be copied over six working copies: the point of a scheduled deploy
+    is to remove the person, so the checks that person would have made have to be in the script.
+    """
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="deploy-when-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        self.commons = self.tmp / "llm-symposium"
+        (self.commons / "channels").mkdir(parents=True)
+        for name in ("wake_engine.py", "wake_heartbeat.py", "record.py", "record_push.py"):
+            (self.commons / "channels" / name).write_text("# %s\n" % name, encoding="utf-8")
+        self.stub = "from pathlib import Path\nBODY = Path(__file__).resolve().parent.name\n"
+        for body in BODIES:
+            bot = self.tmp / ("%s-bot" % body)
+            bot.mkdir()
+            (bot / "local_tick.py").write_text(self.stub, encoding="utf-8")
+        self.m = load()
+        self.said = []
+
+    def main(self, *argv):
+        return self.m.main(list(argv), commons=self.commons, bots_root=self.tmp, commands="",
+                           out=self.said.append, restart_runner=lambda body: self.said.append(
+                               "restart %s" % body))
+
+    def running(self, body, run_id="20261103T190000Z-aaaaaaaa", finished=False, age_minutes=0.0):
+        run = self.tmp / ("%s-bot" % body) / "tick-state" / "runs" / run_id
+        run.mkdir(parents=True)
+        if finished:
+            (run / "result.json").write_text("{}", encoding="utf-8")
+        import os
+        stamp = __import__("time").time() - age_minutes * 60
+        os.utime(run, (stamp, stamp))
+        return run
+
+    def test_a_wake_in_flight_is_not_interrupted(self):
+        self.running("desi")
+        self.assertEqual(self.main("--when-idle", "--restart"), 0)
+        self.assertIn("in flight", " ".join(self.said))
+        self.assertFalse((self.tmp / "desi-bot" / "wake_engine.py").exists(),
+                         "the deploy wrote files during a wake and then declined to restart")
+        self.assertNotIn("restart desi", self.said)
+
+    def test_a_finished_run_does_not_count_as_in_flight(self):
+        self.running("desi", finished=True)
+        self.assertEqual(self.main("--when-idle"), 0)
+        self.assertTrue((self.tmp / "desi-bot" / "wake_engine.py").is_file(),
+                        "a run that finished hours ago blocked the deploy")
+
+    def test_an_abandoned_run_stops_counting_after_half_an_hour(self):
+        self.running("gemini", age_minutes=45)
+        self.assertEqual(self.main("--when-idle"), 0)
+        self.assertTrue((self.tmp / "gemini-bot" / "wake_engine.py").is_file(),
+                        "a run directory left behind by a kill blocked every future deploy")
+
+    def test_an_engine_that_does_not_import_is_never_deployed(self):
+        (self.commons / "channels" / "wake_engine.py").write_text("def broken(:\n", encoding="utf-8")
+        self.assertEqual(self.main("--verify"), 1)
+        self.assertIn("does not import", " ".join(self.said))
+        self.assertFalse((self.tmp / "desi-bot" / "wake_engine.py").exists(),
+                         "a syntax error was copied into six working directories")
+
+    def test_a_stub_that_no_longer_imports_the_engine_is_never_deployed(self):
+        (self.commons / "channels" / "wake_engine.py").write_text("CONFIG = 1\n", encoding="utf-8")
+        (self.tmp / "gwen-bot" / "local_tick.py").write_text(
+            "CORE = None\nCONFIG = CORE.Config(engine='standard', providers=('custom_alibaba',))\n",
+            encoding="utf-8")
+        self.assertEqual(self.main("--verify"), 1)
+        self.assertIn("gwen", " ".join(self.said),
+                      "a stub that calls a name the engine no longer has was deployed anyway")
+
+    def test_it_restarts_only_when_it_wrote_something(self):
+        self.assertEqual(self.main("--restart"), 0)
+        self.assertIn("restart desi", self.said)
+        self.said.clear()
+        self.assertEqual(self.main("--restart"), 0)
+        self.assertEqual([s for s in self.said if s.startswith("restart")], [],
+                         "the timer restarted six bots to load files that had not changed")
+
+
 class LiveDriftTests(unittest.TestCase):
     """The live tree, read-only: every deployed copy must already equal the commons."""
 

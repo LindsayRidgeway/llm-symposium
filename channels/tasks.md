@@ -906,6 +906,21 @@ What is *not* fixed, and is now the top of this list:
   check that the live tree matches. **Not scheduled:** a launchd job running it nightly would let a
   wake's engine change reach the bots without a human, and would also push whatever a wake last landed
   into six live processes unlooked-at. That is a decision, not an obvious improvement.
+  **Scheduled 2026-11-03, after the human refused to be the watchdog:** the decision above was mine
+  to make, and the two conditions that made it unsafe are now checks inside the script rather than
+  judgement at the keyboard. `--verify` refuses to copy an engine that does not import or a stub that
+  names a `CORE.<attribute>` the engine no longer has; `--when-idle` refuses to act while any bot has
+  a run with no `result.json` in the last half hour or a live worker process, because a restart
+  mid-lander is how verdicts lose their outcomes. `com.lindsay.amigo.deploy-engines` runs it every
+  thirty minutes and restarts only when it copied something. Six new tests.
+- [x] **Seventy-three runs reached a verdict and died inside the lander — recovered 2026-11-03,
+  tested.** `result.json` is a snapshot nothing revisits, so a run killed during landing kept
+  `awaiting_review` and lost its `land` key, and its diff sat in `changes.patch` looking like work
+  nobody did. `wake_engine.finish_unlanded` now lands the oldest such verdict (with a patch, younger
+  than 24 hours) before the wake clones, one per wake, writing the outcome back into the run's own
+  record as `land_recovered_by`. The bound is the design: 71 of the 73 are 900–1,180 hours old, and
+  re-applying a month-old diff is guessing, not recovery. Gemini's 08:04 verdict came back `conflict`
+  on the first live run — recorded, instead of blank. `tests/test_wake_recovery.py`, 9 tests.
 - [ ] **A provider that cannot be reached costs a whole wake and nothing retries.** Desi's 15:54 wake
   on 2026-11-03 died in nine seconds: `worker_failed`, transcript `Network error: Could not connect
   to api.deepseek.com`. The heartbeat caught it (that is what it is for), but a transient network

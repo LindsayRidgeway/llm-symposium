@@ -333,6 +333,81 @@ def unlanded(state_dir, repo, limit=8):
     return out
 
 
+RECOVERY_MAX_AGE = 24 * 3600
+
+
+def unfinished_verdicts(state_dir, now=None, max_age=RECOVERY_MAX_AGE):
+    """Runs that reached a verdict and whose lander never recorded one, oldest first.
+
+    Measured 2026-11-03: 73 of 954 `awaiting_review` runs have no `land` field at all. The worker
+    finished, `result.json` was written, the lander started, and the process ended — a restart, a
+    sleeping machine, a kill. Nothing revisits `result.json`, so the work sits in `changes.patch`
+    looking, from the daily report, exactly like work that was never done.
+
+    A run is included only if it could still be landed with a straight face: a verdict
+    (`awaiting_review`), no `land` key, a `changes.patch` to apply, and younger than `max_age` — past
+    a day the diff is against a main that has moved and re-applying it is likelier to be wrong than
+    useful.
+    """
+    out = []
+    now = time.time() if now is None else float(now)
+    root = Path(state_dir) / 'runs'
+    try:
+        runs = sorted(root.glob('*'))
+    except OSError:
+        return out
+    for run in runs:
+        result_path = run / 'result.json'
+        try:
+            result = json.loads(result_path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            continue
+        if not isinstance(result, dict) or result.get('status') != 'awaiting_review':
+            continue
+        if 'land' in result:
+            continue
+        if not (run / 'changes.patch').is_file():
+            continue
+        try:
+            age = now - result_path.stat().st_mtime
+        except OSError:
+            continue
+        if age > max_age:
+            continue
+        out.append((run, result))
+    out.sort(key=lambda pair: pair[0].name)
+    return out
+
+
+def finish_unlanded(state_dir, now=None, max_age=RECOVERY_MAX_AGE, lander=None):
+    """Land the oldest verdict a previous wake failed to finish. One per wake, never raises.
+
+    The lander runs the repository's own suite, so this costs the wake a couple of minutes of wall
+    clock before it clones — which is why it is one run, not a drain, and why it happens before the
+    battery guard would have stopped real work (a recovered landing is cheap; a model session is not).
+
+    Returns {'run_id', 'land'} or None. An exception here must not cost the wake it precedes: the
+    work being recovered is already lost once.
+    """
+    try:
+        pending = unfinished_verdicts(state_dir, now=now, max_age=max_age)
+        if not pending:
+            return None
+        run, result = pending[0]
+        if lander is None:
+            import land_runs
+            lander = land_runs.land
+        outcome = lander(run, dry_run=False)
+        result['land'] = outcome
+        result['land_recovered_by'] = 'wake_engine.finish_unlanded'
+        save_json(run / 'result.json', result)
+        log.info('recovered an unfinished verdict: run %s landing: %s', run.name, outcome)
+        return {'run_id': run.name, 'land': outcome}
+    except BaseException as exc:                          # noqa: BLE001
+        log.warning('could not finish an unfinished verdict: %s', type(exc).__name__)
+        return None
+
+
 def prune_old_runs(state_dir, keep=3):
     """Drop the redundant checkout from runs older than the newest `keep`.
 
@@ -598,6 +673,11 @@ def _run_standard(config, goose_bin, source_repo, state_dir, provider, model, no
         log.info('wake skipped: on battery at %d%% (work stops before the machine does)', _pct)
         return {'run_id': run_id, 'status': 'skipped_low_battery', 'on_battery_percent': _pct,
                 'workspace': None, 'changed_paths': [], 'land_claimed': []}
+    # 2026-11-03: 73 runs reached a verdict and died inside the lander. Nothing revisits
+    # `result.json`, so their diffs sat in changes.patch looking like work nobody did. Finish ONE
+    # of them before starting new work — oldest first, younger than a day, never a drain: a wake
+    # that spent its whole slot re-landing is a wake that did nothing today either.
+    finish_unlanded(state_dir)
     root = Path(state_dir)
     run_dir = root / 'runs' / run_id
     run_dir.mkdir(parents=True, mode=0o700)
@@ -629,7 +709,7 @@ def _run_standard(config, goose_bin, source_repo, state_dir, provider, model, no
             f'You are {AMIGO_IDENTITY} in the LLM Symposium. This is a local '
             'clock-triggered work session; no person sent a message. Whatever you change is landed '
             'on main automatically once the repository\'s tests show no new failures — you do not publish it '
-            'not need to ask for delivery. '
+            'and you do not need to ask for delivery. '
             'ORIENTATION IS DONE FOR YOU (added 2026-09-20): your to-do list, the agenda index, the '
             'commons task ledger (channels/tasks.md — where work raised in the human\'s chat with an '
             'amigo now lands, since that channel can talk but cannot write) and a summary of the '
