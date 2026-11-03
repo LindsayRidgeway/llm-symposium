@@ -124,6 +124,20 @@ class TestTheSweepOwnsOneBlock(unittest.TestCase):
         self.assertLess(start, after.index("R-001"), "a risk row is outside the fence")
         self.assertLess(after.index("R-002"), end)
 
+    def test_the_markers_quoted_in_prose_do_not_confuse_the_fence(self):
+        """The record quotes the marker strings; a substring search would take the quotation."""
+        text = self.m.TASKS.read_text(encoding="utf-8")
+        self.m.TASKS.write_text(
+            text.replace("## A section below the block",
+                         "A note that mentions `<!-- sweep-risks:begin -->` and "
+                         "`<!-- sweep-risks:end -->` in prose.\n\n## A section below the block"),
+            encoding="utf-8")
+        self.m.main()
+        after = self.m.TASKS.read_text(encoding="utf-8")
+        self.assertIn("in prose.", after)
+        self.assertIn("the founder's volume rule", after)
+        self.assertIn("R-001", after)
+
     def test_two_runs_are_idempotent(self):
         self.m.main()
         once = self.m.TASKS.read_text(encoding="utf-8")

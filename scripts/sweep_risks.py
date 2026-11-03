@@ -71,12 +71,16 @@ def split_block(raw: str) -> tuple[str, str, str]:
     with their one-line note. The first line that is none of those ends the span — which is how a
     migration stops at the first task item somebody wrote underneath, instead of eating it.
     """
-    i, j = raw.find(BEGIN_MARK), raw.find(END_MARK)
-    if 0 <= i < j:
-        end = j + len(END_MARK)
+    # Anchored to the start of a line on purpose: the markers are quoted in prose all over the
+    # record (this report included), and a substring search would pick the quotation instead of the
+    # fence the first time somebody wrote the words above it.
+    b = re.search(r"^" + re.escape(BEGIN_MARK) + r"[ \t]*$", raw, re.MULTILINE)
+    e = re.search(r"^" + re.escape(END_MARK) + r"[ \t]*$", raw, re.MULTILINE) if b else None
+    if b and e and e.start() > b.start():
+        end = e.end()
         if raw[end:end + 1] == "\n":
             end += 1
-        return raw[:i], raw[i:end], raw[end:]
+        return raw[:b.start()], raw[b.start():end], raw[end:]
     m = HEADING.search(raw)
     if not m:
         return raw, "", ""
