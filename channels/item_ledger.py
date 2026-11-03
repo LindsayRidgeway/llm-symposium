@@ -1576,8 +1576,8 @@ def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
 
 
 def measured_cadence(now: dt.datetime | None = None, window_days: int = 7,
-                     runs_root: Path | None = None, ledger: Path | None = None
-                     ) -> dict[str, dict] | None:
+                     runs_root: Path | None = None, ledger: Path | None = None,
+                     codex_root: Path | None = None) -> dict[str, dict] | None:
     """Wakes per day for each body, measured by `scripts/wake_cadence.py`; None if it cannot run.
 
     Added 2026-11-02 (Desi), because the reading queue printed a name per item and never asked
@@ -1585,7 +1585,9 @@ def measured_cadence(now: dt.datetime | None = None, window_days: int = 7,
     named to Tarik on the strength of a hand-written table while his goose run tree had been cold
     for four days, and nothing in the queue could have noticed. `WAKES_PER_DAY` is still the draw's
     authority — the draw is frozen to the item and this function does not re-weight anything — but
-    the reader is now shown the measurement beside the name.
+    the reader is now shown the measurement beside the name. Public review-only Codex
+    actual-start records are included too; their default root follows the supplied ledger,
+    keeping explicit fixture/alternate-checkout measurements within that checkout.
 
     Returning None (rather than a guess) is deliberate: every caller then prints the word
     *assumed*, since a plausible-looking fallback number would be worse than an admitted absence.
@@ -1600,7 +1602,10 @@ def measured_cadence(now: dt.datetime | None = None, window_days: int = 7,
         now = now or dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
         runs = mod.scan_runs(runs_root or HOME / "LLM")
         filings = mod.scan_ledger(ledger or LEDGER)
-        events = {a: runs.get(a, []) + filings.get(a, []) for a in AMIGOS}
+        # Same public review-only wake evidence as the instrument CLI; no new ledger item.
+        public_root = codex_root or Path(ledger or LEDGER).parent / "tarik-codex-wakes"
+        codex = mod.scan_codex_wakes(public_root)
+        events = {a: runs.get(a, []) + filings.get(a, []) + codex.get(a, []) for a in AMIGOS}
         return mod.cadence(events, now, window_days)
     except Exception:  # noqa: BLE001 — a queue must still print when the instrument is broken
         return None
