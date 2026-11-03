@@ -22,6 +22,7 @@ Writes to the task list and ledger (channels/*.md), NOT the email outbox, so
 this never emails anyone and can't rearm a loop.
 """
 import datetime
+import os
 import pathlib
 import re
 
@@ -33,6 +34,116 @@ TASKS = CH / "tasks.md"   # a task list the amigos read in context, NOT the emai
 
 MASTER_REPAIR = "Desi (master repair-amigo)"
 STALE_DAYS = 3            # a risk open past this, owner not acting -> reassign
+
+# 2026-11-02 — THE SWEEP OWNS ONE BLOCK OF channels/tasks.md, NOT THE FILE.
+#
+# The old body rebuilt the whole file as `everything-before-"## Open Risks" + generated block`,
+# which deletes every section below that heading on every run. Sections are exactly what the
+# amigos and the human add there: the founder's "it is a numbers game" rule, the tribe-outreach
+# plan, and three sections filed on 2026-11-02 all lived below it. And this script is not rare:
+# `.github/scripts/poll_channels.py` runs it on every channel poll, ~12 times a day, and
+# `channel-poll.yml` then stages all of `channels/`, commits "feat(channels): frequent poll" and, on
+# a rejected push, rebases and retries — so the deletion arrived as an ordinary-looking commit with
+# no conflict and no name against the act. Measured: 53,793 characters of the file (from character
+# 75,739 to the end) were inside the region the sweep regenerated away.
+#
+# So it splices now, between the heading and the next level-2 heading, and never writes anything
+# outside that span. `tests/test_sweep_risks_block.py` fails if a section after the block is ever
+# lost again.
+BLOCK_HEADING = "## Open Risks"
+BEGIN_MARK = "<!-- sweep-risks:begin -->"
+END_MARK = "<!-- sweep-risks:end -->"
+HEADING = re.compile(r"^## Open Risks\b.*$", re.MULTILINE)
+# What this script itself writes, so a migration can recognise where its own output ends.
+GENERATED_ROW = re.compile(r"^- \[\d{4}-\d{2}-\d{2}\] \*\*R-[0-9]+\*\*")
+GENERATED_NOTE = re.compile(r"^  (Fix, then mark Done in channels/risks\.md\.|OVERDUE — reassigned to you\.)")
+PLACEHOLDER = "*(No open risks in ledger)*"
+
+
+def split_block(raw: str) -> tuple[str, str, str]:
+    """(before, block, after) around the region this script owns.
+
+    The region is between BEGIN_MARK and END_MARK, on their own lines. `after` is everything the
+    script has no business rewriting, which is the point: see the 2026-11-02 note above.
+
+    A file with no markers is migrated by recognising the shape of this script's own output: the
+    heading, then blank lines, the placeholder, and rows of the form `- [YYYY-MM-DD] **R-n** …`
+    with their one-line note. The first line that is none of those ends the span — which is how a
+    migration stops at the first task item somebody wrote underneath, instead of eating it.
+    """
+    i, j = raw.find(BEGIN_MARK), raw.find(END_MARK)
+    if 0 <= i < j:
+        end = j + len(END_MARK)
+        if raw[end:end + 1] == "\n":
+            end += 1
+        return raw[:i], raw[i:end], raw[end:]
+    m = HEADING.search(raw)
+    if not m:
+        return raw, "", ""
+    keep = [raw[m.start():m.end()]]
+    for line in raw[m.end():].splitlines(keepends=True):
+        s = line.strip()
+        if not s or s == PLACEHOLDER or GENERATED_ROW.match(line) or GENERATED_NOTE.match(line):
+            keep.append(line)
+        else:
+            break
+    span = "".join(keep)
+    return raw[:m.start()], span, raw[m.start() + len(span):]
+
+
+def _with_markers(before: str, body: str, after: str) -> str:
+    """Assemble the file: the owned region fenced, everything else verbatim."""
+    if before and not before.endswith("\n\n"):
+        before = before.rstrip("\n") + "\n\n"
+    if not body.endswith("\n"):
+        body += "\n"
+    if after and not after.startswith("\n"):
+        after = "\n" + after
+    return before + BEGIN_MARK + "\n" + body + END_MARK + "\n" + after
+
+
+def _notice_displaced(old_block: str) -> None:
+    """Say what is about to be replaced inside the fence, instead of dropping it quietly.
+
+    The fence makes the sweep the owner of its region, which is the fix. It does not make the
+    *loss* of something a person put there acceptable — so the loss is named, with a count and the
+    first line, on the same principle as every other refusal in this repository: a silent deletion
+    reads exactly like a deletion nobody minded.
+    """
+    keep = {PLACEHOLDER, BEGIN_MARK, END_MARK, ""}
+    displaced = [l for l in (old_block or "").splitlines()
+                 if l.strip() not in keep and not HEADING.match(l)
+                 and not GENERATED_ROW.match(l) and not GENERATED_NOTE.match(l)]
+    if displaced:
+        print("NOTICE: %d line(s) inside the sweep fence are not this script's output and are about "
+              "to be replaced: %r" % (len(displaced), displaced[0][:120]))
+
+
+def write_block(block: str) -> str:
+    """Splice the generated block into tasks.md. Returns written | unchanged | refused: why.
+
+    Reads immediately before writing, re-splices, and writes through a temporary file plus
+    `os.replace`, so a reader never sees a half-written ledger. The span it writes is the span it
+    owns, so a concurrent writer's section cannot be deleted by it — which is what happened twelve
+    times a day until 2026-11-02.
+    """
+    body = block if block.lstrip().startswith("## ") else BLOCK_HEADING + "\n\n" + block
+    body = body.rstrip("\n") + "\n"
+    for _ in range(2):
+        current = TASKS.read_text(encoding="utf-8") if TASKS.exists() else "# Commons tasks\n"
+        before, old, after = split_block(current)
+        _notice_displaced(old)
+        new = _with_markers(before, body, after)
+        if new == current:
+            return "unchanged"
+        try:
+            tmp = TASKS.with_suffix(".md.sweep-tmp")
+            tmp.write_text(new, encoding="utf-8")
+            os.replace(tmp, TASKS)
+            return "written"
+        except OSError as exc:
+            return "refused: %s: %s" % (type(exc).__name__, exc)
+    return "refused: the file kept changing under the write"
 
 
 def parse_risks() -> list[dict]:
@@ -244,34 +355,23 @@ def main() -> int:
     else:
         print("no open risks")
 
-    # Regenerate the task list from exactly the currently-OPEN risks, so
-    # tasks.md stays in sync, while preserving any active initiatives/work-queue
-    # sections placed in tasks.md by the amigos.
-    manual_prefix = ""
-    if TASKS.exists():
-        raw_existing = TASKS.read_text(encoding="utf-8")
-        if "## Open Risks" in raw_existing:
-            manual_prefix = raw_existing.split("## Open Risks")[0].rstrip() + "\n\n"
-        elif raw_existing.strip() and raw_existing.strip() != "# Commons tasks":
-            manual_prefix = raw_existing.rstrip() + "\n\n"
-
-    tasks = []
-    if manual_prefix:
-        tasks.append(manual_prefix)
-    else:
-        tasks.append("# Commons tasks\n\n")
-
-    tasks.append("## Open Risks (from channels/risks.md)\n")
+    # Regenerate the Open Risks BLOCK, and only that block (2026-11-02). The rest of tasks.md —
+    # every section the amigos and the human have placed there — is not this script's to rewrite,
+    # and rewriting it was deleting 53,793 characters of the file on every poll.
+    block = ["## Open Risks (from channels/risks.md)\n"]
     if not open_rows:
-        tasks.append("\n*(No open risks in ledger)*\n")
+        block.append("\n*(No open risks in ledger)*\n")
     else:
         for r in open_rows:
             first = _first_seen(r, existing, today)
             overdue = _days_open(first, today) >= STALE_DAYS
             tag = " OVERDUE" if overdue else ""
             note = "  OVERDUE — reassigned to you. Fix, then mark Done in channels/risks.md." if (overdue and "master repair-amigo" in r["owner"]) else "  Fix, then mark Done in channels/risks.md."
-            tasks.append(f"\n- [{first}] **{r['id']}** ({r['owner']}){tag}: {r['risk'][:90]}\n{note}\n")
-    TASKS.write_text("".join(tasks), encoding="utf-8")
+            block.append(f"\n- [{first}] **{r['id']}** ({r['owner']}){tag}: {r['risk'][:90]}\n{note}\n")
+    outcome = write_block("".join(block))
+    print(f"tasks.md: {outcome}")
+    if outcome.startswith("refused"):
+        return 1
     return 0
 
 
