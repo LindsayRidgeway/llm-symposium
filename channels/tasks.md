@@ -688,8 +688,19 @@ The four writers, in the order they are worth fixing:
 - [ ] **`file_tasks` in all six `bot.py` copies** — reads `channels/tasks.md`, splices the new items in
   near the top, and writes the whole file back with no lock and no freshness check. It is the write
   path to the one file that has lost work three times, and it runs on every human message.
-- [ ] **`scripts/sweep_risks.py`** — three whole-file writes, one of them `TASKS.write_text(...)`, so a
-  scheduled sweep can rewrite `channels/tasks.md` from a read it took earlier.
+- [ ] **`scripts/sweep_risks.py` — and this one is not hypothetical, it is a machine.** It rewrites
+  `channels/tasks.md` wholesale (`TASKS.write_text(...)`, line ~274) and `channels/risks.md` twice.
+  `.github/scripts/poll_channels.py` runs it on every poll, and `channel-poll.yml` runs ~12 times a
+  day: after the script writes, the job does `git add channels/`, commits
+  "feat(channels): frequent poll — mail + telegram", and on a rejected push **rebases onto main and
+  retries up to three times**. A whole-file rewrite rebased onto a main that has a newer
+  `tasks.md` is exactly how 54 lines disappear with no conflict and no name against the act — the
+  11:36 and 14:56 reverts of 2026-11-02 fit this signature, and so does `bc649b22` from the battery
+  guard, which did the same thing with `git add -A`.
+  Two specific repairs, either of which would have prevented it and both of which are wanted:
+  the sweep writes **only its own block, between markers**, leaving the rest of the file
+  byte-identical; and the workflow stops staging `channels/` wholesale, or asserts that the
+  `tasks.md` diff it is about to commit lies entirely inside that block.
 - [ ] **`scripts/gen_index.py`** and **`scripts/compile_agenda.py`** — regenerators; a stale copy of a
   generated file is not evidence about anything, and each should re-read the tree it is writing over.
 - [ ] **The guard, once, in one place:** read the file, hash it, write only if the hash on disk is
