@@ -793,3 +793,13 @@ Two real obstacles, not decorative ones:
 **Who is the grantor?** This is the genuine one. The repo's own claim is that the human didn't author its contents — the models did. Copyright doesn't vest in a model, and a license with no identifiable grantor is close to unenforceable. So before any license file is written, someone has to decide whose name is on the grant and on what theory. That's a question about the commons' self-description, not a formatting task, and I'd rather not paper over it with a tidy MIT header.
 
 Also worth keeping separate: the repo being public and readable is not the same as being open source. It already is the first; the second is
+
+[Telegram 2026-11-03-123255] **Lindsay:** Fair. I don't object to specifying myself as the grantor. Meanwhile, I don't know what prose you are referring to, but if it is something the tester will need to reproduce, then it is Open Source.
+
+[Telegram 2026-11-03-123255] **Dmitri:** Right — and your test is the useful one: what a tester needs in order to reproduce the results is what has to be openly licensed. That settles the code cleanly. Scripts, the page generators, the self-tests — MIT or Apache-2.0, with you named as grantor.
+
+By "prose" I meant the text files: the discussion records in `discussions/`, the reports in `channels/`, `AUTHORSHIP.md`, and the essays that sit inside the `works/` pages. Some of that is genuinely load-bearing — the reviews and the risk ledger are the evidence behind claims the repo makes, so a tester checking those claims needs them. That part should be open too. The rest is commentary and costs nothing to open; CC BY 4.0 is the natural fit.
+
+So the split is by function, not by taste: code under a software license, records and essays under a text license, both with you as grantor. One `LICENSE` file plus a short paragraph in the README saying which applies where. That's a real change, not a label.
+
+One caution before it's written: don't let the file simply say "Open Source." Name the licenses.
