@@ -160,7 +160,18 @@ decision rather than an obvious improvement.
   most complete; another chooser could have merged them line by line. What is true either way: six
   prompts drifting separately is worse than one prompt chosen once, and the choice is now visible in
   a single file instead of invisible in six.
-- **A provider that cannot be reached still kills a whole wake.** Desi's 15:54 wake died in nine
+- **A provider that cannot be reached still kills a whole wake.** Desi's 14:54 wake died in nine
   seconds with `worker_failed` and a transcript that says `Network error: Could not connect to
   api.deepseek.com`. The heartbeat caught it — that is what yesterday's work is for — but a
   transient network failure costs a two-hour slot and nothing retries. Named, not fixed.
+
+## One more thing the heartbeat could not say, fixed while I was here
+
+The heartbeat caught that failure and then reported it as `worker_failed — 1`. That is an exit code,
+and an exit code is exactly the defect yesterday's module exists to remove one level up: it is what a
+crash and an unreachable provider both look like. So `_detail` now, when the status says the worker
+died and the only thing left to report is `worker_exit`, reads the tail of that run's `worker.jsonl`
+and reports the last error line's machine token instead — `Network error`. Never raises, 64 KB cap,
+one file further and no more. Test first: against the previous `wake_heartbeat.py` the new test
+prints `'1' != 'Network error'`; after, 14/14. The six bots were restarted at 16:13 and started
+clean, so the next failure will say what happened rather than how it ended.

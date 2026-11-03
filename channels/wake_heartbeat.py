@@ -48,14 +48,67 @@ def amigo_of(state_dir):
     return name[:-4] if name.endswith('-bot') else (name or 'unknown')
 
 
-def _detail(result):
+TRANSCRIPT_TAIL = 65536
+NO_REASON = ('worker_failed', 'failed')
+
+
+def _transcript_error(state_dir, run_id):
+    """The last error line a dying worker wrote, as one machine token.
+
+    A worker that exits 1 because it could not reach its provider leaves `worker_exit: 1` in its
+    result and the reason in `runs/<id>/worker.jsonl`. Reporting the 1 makes a network failure and a
+    crash look the same, which is the defect this whole module exists to fix, one level down.
+    """
+    if not state_dir or not run_id:
+        return ''
+    path = Path(state_dir) / 'runs' / str(run_id) / 'worker.jsonl'
+    try:
+        with open(path, 'rb') as fh:
+            fh.seek(0, os.SEEK_END)
+            size = fh.tell()
+            fh.seek(max(0, size - TRANSCRIPT_TAIL))
+            tail = fh.read().decode('utf-8', 'replace')
+    except OSError:
+        return ''
+    # The worker writes its failures as JSON events and, on the last line, as prose. Take the last
+    # of either — whichever came last is what ended the run.
+    candidate = ''
+    for line in tail.splitlines():
+        stripped = line.strip()
+        if stripped.startswith('Error:'):
+            candidate = stripped[len('Error:'):].strip()
+            continue
+        if '"type":"error"' not in stripped:
+            continue
+        try:
+            event = json.loads(stripped)
+        except ValueError:
+            continue
+        message = event.get('error') or ''
+        if isinstance(message, str) and message:
+            candidate = message
+    return candidate.split(':')[0].split(' — ')[0].strip()[:MAX_DETAIL]
+
+
+def _detail(result, state_dir=None):
     """A short machine string: why this ending, not what the wake was about."""
-    for key in ('error', 'land', 'worker_exit', 'on_battery_percent', 'handoff_id'):
+    status = str(result.get('status') or '')
+    for key in ('error', 'land', 'on_battery_percent', 'handoff_id', 'worker_exit'):
         value = result.get(key)
         if value in (None, ''):
             continue
+        if key == 'worker_exit' and status in NO_REASON:
+            # "worker_failed: 1" is a code, not a reason. Look one file further before settling
+            # for it — the transcript usually says what actually happened.
+            reason = _transcript_error(state_dir, result.get('run_id'))
+            if reason:
+                return reason
         text = str(value).split(':')[0].strip()
         return text[:MAX_DETAIL]
+    if status in NO_REASON:
+        reason = _transcript_error(state_dir, result.get('run_id'))
+        if reason:
+            return reason
     return ''
 
 
@@ -78,7 +131,7 @@ def record_outcome(state_dir, result, amigo=None, now=None):
             'amigo': amigo or amigo_of(state_dir),
             'status': str(result.get('status') or 'unknown'),
             'run_id': str(result.get('run_id') or ''),
-            'detail': _detail(result),
+            'detail': _detail(result, state_dir),
             'trace_written_by': 'wake_heartbeat',
         }
         root = Path(state_dir)
