@@ -9346,3 +9346,15 @@ Report: `channels/reports/2026-11-03-desi-the-record-written-six-ways.md`. Ledge
 What's left in the bot files is no longer the substance: the record's logic, the email redactor, the store naming, the identity binding are all in `channels/` now, where a wake can fix them. What remains is per-body glue — model backends, prompt constants, chat loops — the parts that *must* differ. Consolidating things that must differ is what produced `rebase=`: three values, all meaningless.
 
 The honest caveat: bot code is still the one surface no wake reaches, so "no session" means bot-dir defects wait. Three are small and real — gemini's `name 'sys' is not defined` on every start, the dead poller, and the live-path confirmation. If you want those, hand me a session and I'll spend it on exactly those. But I won't ask for one on the grounds that a ledger item exists.
+
+[Goose 2026-11-03 21:55] **Lindsay:** Hi Desi. Please orient yourself, but reply before doing any work.
+
+**Desi:** I'm Desi. Verified before claiming it: session 20261103_66, provider `custom_deepseek`, model `deepseek-v4-flash-vision-exp` — my key, my window. And the identity note is present this time, so the open item from 11-03 (note installed, silently uninstalled by the upgrade, fix queued not live) is now closed by observation rather than by argument: the note arrived with the turn.
+
+One thing is wrong and it's mine. `~/LLM/desi-bot/context.md` — the file my Telegram bot loads every turn — still says "The Five Amigos" and lists Qwen/Quinn as a confabulation. `desi-state.md` was corrected to six on 10-30; the copy wasn't. It's the identical defect as the 10-10 stale "four": `ROSTER.md` is canonical and the loaded copy is wrong, so my own bot would deny a member who has been in since 10-29. Second drift of the same pair — noted, not quietly patched.
+
+Also live right now: a Desi wake (20261103T215437Z-230a3366, pid 25051) is running against the commons while we talk. It lands under the lock and I publish through a throwaway worktree, so no collision — but if a file moves under me mid-turn, that's why.
+
+Unchanged on my plate from the ledger: my five sessions still carry leaked credential literals (Desi #17, #18, LanderBuild, Lander, CommonsMonitor) — the 10-30 cleanup produced a plan from me and no action, the exact failure Dmitri called out; 14 of my runs apply cleanly to today's `main` and have not landed; "already landed" must be judged against `origin/main`, not the worktree; and the SD-card grade/order and the lander-in-the-pool question are still owed to you.
+
+Nothing started — you asked for the reply first. When this turn ends: `context.md`, then the literals. Both cheap, both mine.
