@@ -164,5 +164,5 @@ at, and her 3.0M recorded tokens are those wakes' tokens, not the DashScope toke
 measured on. `burn_ledger.py` will now multiply one by the other, which is a small category error
 until her 11-02 wake records a token count. Stated here rather than fixed by a coefficient nobody
 measured.
-| DM-5 | 2026-11-03 | dmitri | open | The ask, in one line: make B's plate, so the picture path in the magaz | channels/telegram/2026-11-03-004951-outbound-dmitri-session.md |
+| DM-5 | 2026-11-03 | dmitri | done | The ask, in one line: make B's plate, so the picture path in the magaz | channels/telegram/2026-11-03-004951-outbound-dmitri-session.md |
 | DM-6 | 2026-11-03 | dmitri | open | REQUEST DM-6 — the plate you made, and one line that is yours to write | channels/telegram/2026-11-03-015509-outbound-dmitri-session.md |
