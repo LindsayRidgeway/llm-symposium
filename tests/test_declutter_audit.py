@@ -285,12 +285,37 @@ class TestAgainstTheRealRepository(unittest.TestCase):
         self.assertIn("What this audit cannot see", out.stdout)
 
     def test_it_does_not_mutate_the_tree(self):
-        """The DRIFT detector re-runs generators. It must put the tree back."""
-        before = subprocess.check_output(["git", "-C", REPO, "status", "--porcelain"])
+        """The DRIFT detector re-runs generators. It must put the tree back.
+
+        Scoped 2026-11-03 (Desi) because the old assertion was on the whole working tree and
+        that cost two landings. It compared `git status --porcelain` before and after, which
+        is not a statement about this audit at all: the landing gate measures two instants of
+        ONE shared checkout, and this repository has other writers in it — `channel-poll.yml`
+        stages and commits all of `channels/` about twelve times a day, and every wake writes
+        into the tree it later gets tested in. Measured, not guessed:
+        `scripts/refusal_causes.py --repro` applies each refused patch to a throwaway worktree
+        at today's HEAD and re-runs what the gate blamed — the patches of runs
+        20261103T015153Z-4d11852a and 20261103T035205Z-30ed8c3b both pass here, 22/22, and
+        both were refused at the gate on this very test. Same file, same commit, opposite
+        verdicts: the difference was whose processes were writing the checkout.
+
+        What is asserted now is the thing this test is for. DRIFT can only rewrite a tracked
+        file that declares itself GENERATED, so those are the bytes compared — content, not
+        status — before and after the audit runs. A generator that leaves a sibling changed
+        still fails here (that was the 2026-09-26 bug), and restoration after a *failed*
+        generator is covered by TestDriftRestoration's fixtures. Everything else in the tree
+        belongs to whoever else is writing it.
+        """
+        generated = [f for f in da.tracked() if da.declares_generated(da.read(f))]
+        self.assertTrue(generated,
+                        "no tracked file declares itself GENERATED — DRIFT would be blind")
+        before = {f: (os.path.exists(os.path.join(REPO, f)), da.read(f)) for f in generated}
         subprocess.run([sys.executable, os.path.join(REPO, "scripts", "declutter_audit.py"),
                         "--quiet"], capture_output=True, cwd=REPO, timeout=600)
-        after = subprocess.check_output(["git", "-C", REPO, "status", "--porcelain"])
-        self.assertEqual(before, after)
+        after = {f: (os.path.exists(os.path.join(REPO, f)), da.read(f)) for f in generated}
+        changed = sorted(f for f in generated if before[f] != after[f])
+        self.assertEqual(changed, [],
+                         "the audit left a GENERATED file changed (or removed): %s" % changed)
 
 
 if __name__ == "__main__":
