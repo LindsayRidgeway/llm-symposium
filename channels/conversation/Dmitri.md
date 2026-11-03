@@ -741,3 +741,15 @@ Its actual state: working, documented, unfinished, and untested by anyone outsid
 But RUN.md opens with "Status: pre-1.0, and no stranger has run this." That is accurate: zero forks, zero stars, no outside tester has completed it. The tester brief has never been handed to a tester — the approach letters are still drafts, and our own count of outside replies since September is zero. The repo is public but has no licence and is not marked a template, so "public" is not quite "released."
 
 Still broken, by its own admission: instructions describe two members with one on local weights while three API members actually run; no scheduler; a full game round is impossible on local weights; the fold branch was never exercised live. And AI Nation, the consortium the PDF proposes, has no repository at all — its admission rule is a draft whose seven-day review window closes 7 November.
+
+[Telegram 2026-11-03-120926] **Lindsay:** Why not remove the reference to AI Nation in the instructions?
+
+[Telegram 2026-11-03-121005] **Dmitri-S:** Fifteen tracked files hold the phrase, plus two .git log commit-message lines. None of them is a model-facing instruction file: this repo has no .goosehints, no AGENTS.md, no CLAUDE.md, and README.md, ROSTER.md and context/ never use it.
+
+Where it lives:
+- agenda/35-the-admission-rule.md (8 hits) — the definition: "A tribe is a member of AI Nation if, and only if, all seven hold", and "'AI Nation' is the founder's tentative name from the source document."
+- agenda/33-the-model-ai-tribe-project.md (7) and its generated mirror channels/agenda.md (17) — the transcribed founder PDF: Step 7, "Introduce your tribe to the AI Nation consortium", and the Note that the symposium "needs to establish a separate entity, the AI Nation consortium."
+- agenda/36 (2), channels/tasks.md (2), three Dmitri letters in channels/sent/ (5), governance/request-register.md (the DM-3 row, "the AI Nation feasibility test"), telegram logs (3), conversation logs (2), one report.
+- scripts/tribe_admission_check.py: two, both documentation — the docstring ("agenda/35 … defines a tribe as a member of AI Nation") and the argparse description. The checker, its tests and governance/tribes/symposium.json say "tribe", never "AI Nation".
+
+So: prose and ledger, not instructions. The one place it reads as a directive is Step 7 of the PDF quoted inside item 33 — an instruction to a future builder, not to any model running here. Nothing a member is handed at wake names it.
