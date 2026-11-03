@@ -9290,3 +9290,21 @@ And it is running, not just landed: all six were restarted at 00:05 and started 
 Three things found on the way, named rather than implied. Gwen's chat still writes no conversation record at all — she can file now, but what she says still reaches nobody. The ledger's dedupe rule has sat unused in channels/task_ledger.py since 2026-09-25 and is now one line from being wired in. And the bots repository was two commits ahead of its origin when I started: last night's work, committed and never pushed — the same defect in a third place, committed is not published. Pushed with this one.
 
 Report: channels/reports/2026-11-03-desi-four-bodies-could-not-file.md
+
+[Goose 2026-11-03 13:18] **Lindsay:** Here's another manual session. Again, when you're done, it would great if you would tell me whether you want another one after this one.
+
+**Desi:** Two jobs from last night's list, both of them things that already existed and did nothing.
+
+**The ledger's duplicate rule.** channels/task_ledger.py was written 2026-09-25 and contains the sentence that names its own caller — 'this is the function file_tasks should call before it inserts anything' — and nothing called it for five weeks. The reason is structural and it is last night's reason again: the rule lived in the commons, the function lived in two bot dirs, and the two never met. Both live in task_filing.py now, so the call is where it belongs: new_items() against the lines read inside the same locked read that is about to be written over, before the write, returning what was actually filed. task_ledger.py travels beside the module into all six dirs and is drift-tested with it. The live ledger has nothing left to collapse — dedupe_tasks.py reports 'no repeated entries' over 160 entries — so this is prevention, not clean-up.
+
+**The defect the dedupe exposed.** Once a refiling is refused, a reply that was nothing but TASK: lines has nothing left to send, and Telegram rejects an empty message. The old code would have sent '' and taken a 400. It now says 'Nothing was added to the ledger for that one — either it is already there, or the write was blocked', which is true in both cases and does not pretend to know which. That is the check 'the human would have received an empty message' and it fails on the old module.
+
+**Gwen's record.** Every body has written both halves of each Telegram message since September; hers wrote neither — no record(), no push_record(). What was said to her lived in memory.json on this Mac and nowhere else: unreadable by a wake, by the other amigos, or by you after a restart. That was an omission from when she was seated, not a decision anywhere in her files, and it survived because nothing failed loudly. Both halves now, pushing through the same worktree publisher the rest use; all six checks fail on her bot.py as it stood; she came up clean at 08:17. channels/conversation/gwen.md does not exist yet — it is created by her first message, and the file appearing is the proof.
+
+Proof, in the form you asked for: swap the old file back in and watch it fail. Three dedupe checks fail on the pre-dedupe module (2 != 1 twice, and the empty-message one), six fail on Gwen's old bot.py. The over-merge guard — a different request is still filed — passes both ways on purpose; a test that fails on both would prove nothing.
+
+All six restarted at 08:15 against the dedupe change. Suites: task_filing_guard 15, gwen_record 6, all_bodies 5, record_push 10, land_lock 13, script_publish 7, task_ledger 9, battery_snapshot 3, append_only_merge 4, sweep fence exit 0. Both repositories clean and on origin.
+
+Named, not half-fixed: record() is now six copies with no drift test — the same shape that produced last night's consolidation, and it should get the same treatment starting with the test; and Gwen's mail path records nothing while tarik's records both sides.
+
+Report: channels/reports/2026-11-03-desi-the-check-that-was-never-called.md
