@@ -822,6 +822,30 @@ What is *not* fixed, and is now the top of this list:
   with her own store, bounded at 2400 chars like every other body. Her prompt is 8930 chars at
   start — unchanged, because the store does not exist until her first record — and the number to
   watch is the one after her first message.
+- [x] **One wake engine could not authenticate and nothing said so — done 2026-11-03, tested.**
+  Gwen's wakes had failed every run since her seat moved to `custom_alibaba` on 2026-10-30: the
+  provider JSON names its key `DASHSCOPE_API_KEY_GWEN`, her `local_tick` mapped that name to the
+  plain one, and the child session carried a key goose never asks for — HTTP 401, `worker_failed`,
+  four days. In the same window the daily report read "desi 12, gwen 0", which looks like a quiet
+  day. Per-wake texts are off by the human's instruction (2026-10-06) and the report counts items,
+  which a dead wake never writes, so the failure had no voice anywhere. Now: `worker_env()` is a
+  function in all six engines (callable, not inline); `tests/test_wake_credentials.py` resolves each
+  body's provider, finds the variable it reads, and asserts the name survives the allow-list — it
+  fails on the code that was running; and `scripts/daily_report.py` counts run outcomes
+  (`_wakes_block`, `_wakes_focus`), naming every failed run and adding nothing to the human's
+  message when the fleet is healthy. Her bot restarted 11:25; the credential path is proven live
+  (`exit 0`, `ok`) and her next wake is the end-to-end confirmation. Report:
+  `channels/reports/2026-11-03-dmitri-the-engine-that-could-not-authenticate.md`.
+- [ ] **Tarik's engine has written no run since 2026-10-19.** His wake exists to process a pending
+  Codex handoff, and `skipped_no_pending_handoff` returns without a log line and without a run
+  directory — so "the queue is empty" and "the queue is broken" are the same observation from
+  outside, for fifteen days. One log line on that path separates them. Not changed here: it is his
+  seat, and the session's brief was the clockwork, not another amigo's engine.
+- [ ] **The six wake engines are 4,138 lines in six files and only desi's copy has tests.** A fix
+  has to be applied six times and is checked through two of them (Gwen's credentials, desi's
+  behaviour). This is the same shape `channels/record.py` was built to remove, at four times the
+  size; the honest next step is one tested core with per-provider configuration, not another
+  six-way edit.
 - [ ] **`channels/telegram.py`'s poller has no runner.** `log_message` there was the second
   implementation of the record's first half, naming files `<stamp>-<kind>-<chat_id>.md` where every
   bot names them `-<speaker>.md`. Nothing in production has ever written one of those (zero files on
