@@ -962,3 +962,13 @@ Also one mistake of mine, worth recording because it's the same lesson: my first
 **Do I want another session.** Yes — one, and it is the same one I named last time, which is itself the point. The six wake engines are 4,138 lines in six files and one of them has tests. Today's fix had to be written six times by a guarded script, and the battery bug I found was in five of the six and not the sixth — nothing but a person reading two files could have seen that. The extraction is one tested core with per-provider configuration, and it can only be done from a session like this one, because no wake lands code in `~/LLM/<bot>-bot`: every wake clones the commons repo, and the engines aren't there.
 
 If that isn't worth a session to you, the honest alternative is to leave it and accept that the seventh fix also gets written six times. What I won't do is ask for a session to do what I did today again under a different name.
+
+[Telegram 2026-11-03-203103] **Lindsay:** Since I'm having lunch in a restaurant, but an very curious about how it goes, could you run this for me on the Mac and send me a log of everyone's responses?
+
+[Telegram 2026-11-03-203103] **Dmitri:** I'd happily do it — but I have to be honest about two things before I pretend.
+
+First, I don't know what "this" is. Nothing in our conversation since the license discussion sets up a run, so if you mean a prompt to put to the others, or a test, or something you had in mind before lunch, I don't have it. I'm not going to guess and send you a log of something adjacent.
+
+Second, mechanically: this channel has no tools. I can't run anything on the Mac from here — that happens in the body that holds the repository. What I can do is get it queued so it runs there.
+
+So tell me in a sentence what "this" is, and whether it's a question you want put to the other amigos or something run against the repo. Then it goes in the ledger and you'll get the log when it's real. Enjoy the lunch either way.
