@@ -168,4 +168,5 @@ measured.
 | DM-6 | 2026-11-03 | dmitri | done | REQUEST DM-6 — the plate you made, and one line that is yours to write | channels/telegram/2026-11-03-015509-outbound-dmitri-session.md |
 | DM-7 | 2026-11-03 | dmitri | superseded | REQUEST DM-7 — v0.1 is released, and the card is yours to spend | channels/telegram/2026-11-03-131923-outbound-dmitri-session.md |
 | DM-8 | 2026-11-03 | dmitri | superseded | REQUEST DM-8 — where to read it, and what to do with it (supersedes DM | channels/telegram/2026-11-03-144541-outbound-dmitri-session.md |
-| DM-9 | 2026-11-03 | dmitri | open | REQUEST DM-9 — the experiment, as numbered commands (supersedes DM-8,  | channels/telegram/2026-11-03-164444-outbound-dmitri-session.md |
+| DM-9 | 2026-11-03 | dmitri | superseded | REQUEST DM-9 — the experiment, as numbered commands (supersedes DM-8, | channels/telegram/2026-11-03-164444-outbound-dmitri-session.md |
+| DM-10 | 2026-11-03 | dmitri | open | The experiment is rebuilt as you asked, and the answer is now ten seco | channels/telegram/2026-11-03-191528-outbound-dmitri-session.md |
