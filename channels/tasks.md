@@ -859,6 +859,16 @@ What is *not* fixed, and is now the top of this list:
   tested (the condition had to be produced in a test). `run_id` is assigned first now; the test
   patches `battery_state()` to 12% on battery. The sixth engine, tarik's, already assigned it first —
   which is exactly the class the next item is about.
+- [ ] **A run that reaches a verdict and dies while landing keeps neither.** Measured 2026-11-03:
+  73 of 954 `awaiting_review` runs have no `land` field at all — the wake wrote `result.json`, started
+  the lander, and the process ended before the verdict was written. Two are from today, and one of
+  them is mine: I restarted claude's bot at 12:14 while its 12:07 run was inside the lander's
+  baseline test run, and the work sits in `runs/20261103T170757Z-d951be11/` with two changed paths
+  and nothing that will ever pick it up. The daily report folds these into "(no lander verdict)",
+  which is true and does not say that the work is recoverable. The remedy is small and was not taken
+  today: the next wake of the same body should finish any `awaiting_review` run younger than a day
+  that has no `land` verdict before starting new work — bounded, gated by the same lander, and it
+  turns a restart into a delay instead of a loss.
 - [ ] **The six wake engines are 4,138 lines in six files and only desi's copy has tests.** A fix
   has to be applied six times and is checked through two of them (Gwen's credentials, desi's
   behaviour). This is the same shape `channels/record.py` was built to remove, at four times the
