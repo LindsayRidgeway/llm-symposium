@@ -86,7 +86,16 @@ class CapacityWeightingTest(unittest.TestCase):
         ids = [f"2026100{i}T000000Z-{i:04d}" for i in range(400)]
         picks = [il._capacity_pick(i, "nobody") for i in ids]
         counts = {a: picks.count(a) for a in il.AMIGOS}
-        self.assertGreater(counts["desi"] + counts["dmitri"], 6 * (counts["claude"] + counts["tarik"]))
+        # The weights are desi 12, dmitri 12, gemini 6, claude 1, tarik 3, gwen 1, so the
+        # expected ratio of these two pairs is (12+12)/(1+3) = 6.0 EXACTLY. `> 6 *` therefore
+        # does not assert a property of the table; it asserts that 400 hash rolls land above
+        # the table's own expectation, which is a coin flip fixed by the pool size. It passed
+        # until 2026-10-30 and has been red since 2026-10-31, when the pool changed and the
+        # same ids re-rolled lower — a red nobody saw, because the landing gate compares test
+        # file names and this file was already red (channels/reject-queue.md, item of 2026-10-27).
+        # The claim being made is "several times more", so assert it at 4; measured at HEAD the
+        # ratio is 263/46 = 5.7.
+        self.assertGreater(counts["desi"] + counts["dmitri"], 4 * (counts["claude"] + counts["tarik"]))
         self.assertGreater(counts["gemini"], counts["claude"])
 
     def test_an_author_excluded_from_the_pool_still_gets_a_name_from_the_rest(self):

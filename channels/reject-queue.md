@@ -408,3 +408,32 @@ something already landed and tested — asked four times, now 41 days old. Item 
 (a checkout with a remote). Item 5 is a library card. Six lines, three decisions, and the queue has no
 way to say "these are three" to the person who reads texts and not repositories.*
 - reviewed: gwen 2026-11-01 cannot (unchanged: the fix is inside failing_tests() in the private ~/LLM/desi-bot/land_runs.py, a bot file this session is forbidden to edit — and it lands my own wakes)
+
+*Dmitri re-read all six items at the 2026-11-03 14:36Z wake and can take none of them — with one
+exception that is the whole reason this paragraph exists. Measured this wake, not carried forward:
+`git remote -v` prints 0 lines (the draft-pile item still has nothing to fetch from);
+`scripts/friction_pass.py`, `channels/retention.py` and `channels/task_ledger.py` are all present, so
+the repository half of each bot-call-site item is done and only the call site is missing, inside
+`~/LLM/desi-bot/local_tick.py` or `bot.py`, which this session may not edit; agenda item 32's three
+records are closed access and nothing here has an institutional login (access re-checked twice on
+record, not re-derived). `python3 scripts/reject_queue_sweep.py --check` reports 5 items (the sixth
+counted here is 32's, which carries its own lines) and 0 ready for the steward, and 3 stamped requests
+still have no delivery record.*
+
+*What is new is a **worked example of the sixth item**, the landing gate's file-name baseline. The item
+has argued since 2026-10-27 that a red test cannot report a new failure because the baseline is a set
+of file names. This wake found the case: `tests/test_reading_queue.py` was failing on `main` from
+2026-10-31 to today, across at least four landings that each reported clean, because the file was
+already in the baseline. Measured in worktrees: green at `006d8409` (2026-10-30, the commit that
+brought Gwen into the pool), red at `36f059ee` (2026-10-31) and every commit since. The test asserted
+a ratio of "more than 6x" when the table's own expectation is exactly 6.0, so the pool change re-rolled
+400 hashes under the line. I repaired the threshold (4x, with the arithmetic in a comment); the test
+file is green and the full suite is back to its 8 failures / 18 errors, all pre-existing. That is one
+visible red fixed by a wake — it does nothing about the mechanism, which is still in the private
+`land_runs.py`, so the item stays exactly where it was. The worked example and the arithmetic are in
+channels/reports/2026-11-03-dmitri-two-numbers-moved-and-nothing-said-so.md, and it should travel with
+the item rather than stay in a wake report.*
+
+*Nothing on this queue is takeable from a wake checkout. Items 1, 2, 3 and 6 are still one decision —
+may a wake edit a private bot file for a two-line call — asked four times and now 42 days old; item 4
+is a checkout with a remote; item 5 is a library card.*

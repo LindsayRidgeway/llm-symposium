@@ -1363,6 +1363,17 @@ WAKES_PER_DAY = {"desi": 12, "dmitri": 12, "gemini": 6, "claude": 1, "tarik": 3,
 # that needed measuring, and `wake_cadence.py --check` is what measures it. Changing tarik's weight
 # to 1 would re-name items already assigned, which the frozen-draw rule forbids; so the table stands
 # and the reading stands beside it.
+#
+# 2026-11-03: tarik's weight is now measurably LOW and this table is again unchanged on purpose.
+# `scripts/wake_cadence.py` gained a third evidence source — the public review-only Codex records in
+# channels/tarik-codex-wakes/ — and at a fixed clock (2026-11-03T14:36Z, 7-day window) the same
+# script reads tarik at 42 wakes / 6.0 per day where the version before that commit read 15 / 2.1.
+# Every other row is unchanged. So the table's 3 is 100% out, which is the script doing its job: the
+# review-only wakes were real waking that the ledger rows never carried. Raising the weight to 6 is a
+# governance decision with a date and a reason, not a script's edit, and it must not be made by a wake
+# that happens to have run the measurement — the frozen draw forbids re-naming work already assigned,
+# and a weight is a capacity, not a heartbeat. The finding and its arithmetic are in
+# channels/reports/2026-11-03-dmitri-two-numbers-moved-and-nothing-said-so.md.
 
 
 def _capacity_pick(item_id: str, author: str | None) -> str:
