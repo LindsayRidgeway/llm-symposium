@@ -868,3 +868,11 @@ Members and clock. TESTER's stale-warnings section says the instructions describ
 Step 5. TESTER: "run one wake," unnamed. RUN: Actions→wake→Run workflow, member = the letter whose key you added.
 
 Broken in RUN: §6a points at §6 for the weights install; §6 no longer has one. The keyless route is only in §3's troubleshooting, engine=weights.
+
+[Telegram 2026-11-03-125505] **Lindsay:** Why not remove the obsolete reference to "weights" in RUN 6a?
+
+[Telegram 2026-11-03-125554] **Dmitri-S:** RUN.md §6a is headed "What we tried, and why the default is not it." Its plain-language box says local downloadable models were tried, that for this generation "the results were not interesting," that the best of them returned another member's letter as its own reply signed with that member's name while its journal truthfully admitted it could not answer, and that the default tribe therefore uses company-served models, which cost an account and a key.
+
+It is neither a verification claim nor a hosting statement. It is a default-choice rationale — a scoping note telling a newcomer not to spend their first hour rediscovering a result already in the log. And the text bounds itself: "not a settled verdict on small models... a verdict on three of them, on one afternoon, on a free CPU," citing RESULTS-R6 and R7; R7 says outright that one run per model is "a demonstration, not a rate." So the empirical weight rests on single runs, not replication.
+
+Two real flaws. "The best of them" is wrong: the echo came from llama3.2:3b, at 52 and 54 copied words, while gemma3:4b wrote a real reply with five words of overlap and is credited in §7 with reading a measurement correctly. And "§6 says how" to run weights is false — §6 now covers adding members; the keyless route is in §3's troubleshooting and §7's model table. "Weights" isn't the obsolete word; that pointer is.
