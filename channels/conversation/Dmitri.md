@@ -876,3 +876,13 @@ Broken in RUN: §6a points at §6 for the weights install; §6 no longer has one
 It is neither a verification claim nor a hosting statement. It is a default-choice rationale — a scoping note telling a newcomer not to spend their first hour rediscovering a result already in the log. And the text bounds itself: "not a settled verdict on small models... a verdict on three of them, on one afternoon, on a free CPU," citing RESULTS-R6 and R7; R7 says outright that one run per model is "a demonstration, not a rate." So the empirical weight rests on single runs, not replication.
 
 Two real flaws. "The best of them" is wrong: the echo came from llama3.2:3b, at 52 and 54 copied words, while gemma3:4b wrote a real reply with five words of overlap and is credited in §7 with reading a measurement correctly. And "§6 says how" to run weights is false — §6 now covers adding members; the keyless route is in §3's troubleshooting and §7's model table. "Weights" isn't the obsolete word; that pointer is.
+
+[Telegram 2026-11-03-125749] **Lindsay:** Why is RUN.md wording a criteria for "ready to test"?
+
+[Telegram 2026-11-03-130109] **Dmitri-S:** RUN.md is not in this repository; it is in LindsayRidgeway/ai-tribe-bench. At HEAD it is 839 lines, last changed today at 03:48Z, and line 3 still reads: "Status: pre-1.0, and no stranger has run this." Its §3 still opens "Two settings, one secret, one field to type," and step 3 is headed "ONE KEY — Pick one vendor."
+
+No "ready to test" criteria list is defined anywhere. I checked every file here, all of ai-tribe-bench (GitHub code search: zero hits for "ready to test", "ready for testing"), and the rest of this machine. So no document phrases RUN.md's wording as an entry on one.
+
+The list is mine, spoken in this thread, never written down: four blockers I gave at 12:13 today and sorted at 12:43. (1) The front door needs a public fork, read-write Actions and the named secrets; zero forks, zero stars. (2) Secrets scattered across §2, §5a and §7. (3) TESTER.md stale against RUN.md. (4) No LICENSE, is_template false — still true today.
+
+RUN.md's wording appears inside item 1, as a defect: "RUN.md §3 says one key, TESTER.md demands three." At 12:22 I called the status line a status, not a criterion. The premise is backwards; nobody made that wording a gate.
