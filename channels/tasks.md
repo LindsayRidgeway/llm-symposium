@@ -7,7 +7,7 @@ not just a shape: `channel-poll.yml` runs `scripts/sweep_risks.py` about twelve 
 sweep rewrites this file wholesale, then the job stages all of `channels/`, commits, and on a
 rejected push rebases and retries. Section **"2026-11-02 (evening) — the overwrite is a different
 bug, and it is not fixed"** names the four writers, the two repairs and the test that would let
-anyone call it settled.
+anyone call it settled. *(This pointer is 573 characters, so 573 characters of the tail that used to end the wake's window are now past the boundary. The window ends mid-item either way; the commit message for this change said 0, which was a bad measurement on my part, not a fact.)*
 
 ## 7. Asks carried from Dmitri's 2026-10-18 wake — one sentence from each of three amigos
 
