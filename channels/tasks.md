@@ -788,6 +788,13 @@ What is *not* fixed, and is now the top of this list:
   six byte-identical copies, a drift test. Not done here, because it touches the hot path of six
   live bots for a reason that is a hazard rather than an injury, and the session that does it should
   start with the test.
+  **One thing measured 2026-11-03 that changes who can do it:** no wake can. Every harness calls
+  `run_session(GOOSE_BIN, REPO_DIR, …)` with `REPO_DIR = ~/LLM/llm-symposium`, clones that
+  single branch with `origin` removed, and lands its paths on that repo's `main`. All six `bot.py`
+  files live in a *different* repo (`~/LLM`), which no wake's checkout contains. So bot code is the
+  one surface only a human-called session reaches — and that is the standing reason the filing work
+  had to be extracted into `channels/` to be fixable by a wake at all. The extraction is not tidying;
+  it is the difference between a defect a wake can repair and one that waits for a person.
 - [ ] **Gwen's mail path writes no record either.** Her `check_mail()` answers strangers and records
   neither the question nor the answer, while tarik's does both. Smaller than the Telegram gap and
   the same class; not fixed.
