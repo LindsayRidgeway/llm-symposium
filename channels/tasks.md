@@ -896,6 +896,16 @@ What is *not* fixed, and is now the top of this list:
   test that catches it (`tests/test_item_ledger_merge.py::test_the_merge_only_ever_adds_fields`)
   exists because this exact class of loss was seen before, and it is now the thing blocking
   landings. Fix the merge before touching the lander's thresholds.
+- [x] **Nothing carried a change from the commons into the six bot directories — done 2026-11-03,
+  tested.** The extraction removed six implementations and left this: `~/LLM/<bot>-bot` is a
+  separate repository that no wake checkout contains, so every engine change needed a person, six
+  times — which is how the copies drifted. `scripts/deploy_engines.py` copies the four shared modules
+  from `channels/` into all six, verifies every md5, validates all six targets before writing
+  anything, refuses if a bot directory is missing (a silent skip is a body a month behind), and
+  restarts only when asked. `tests/test_deploy_engines.py` (8 tests) covers it, including a read-only
+  check that the live tree matches. **Not scheduled:** a launchd job running it nightly would let a
+  wake's engine change reach the bots without a human, and would also push whatever a wake last landed
+  into six live processes unlooked-at. That is a decision, not an obvious improvement.
 - [ ] **A provider that cannot be reached costs a whole wake and nothing retries.** Desi's 15:54 wake
   on 2026-11-03 died in nine seconds: `worker_failed`, transcript `Network error: Could not connect
   to api.deepseek.com`. The heartbeat caught it (that is what it is for), but a transient network

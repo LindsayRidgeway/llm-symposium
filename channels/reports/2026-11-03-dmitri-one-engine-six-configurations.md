@@ -114,11 +114,46 @@ from `crc32` of the clock's state directory. The test's state directory is a fre
 the delay was a different random number every run. It hung for ten minutes the first time the hash
 came out large. Pinned now, with the reason in the test; the suite went from 23 seconds to 1.7.
 
+## It ran, for real, twice
+
+The six bots were restarted at 15:56. Fourteen minutes later Gemini's four-hour clock came due and
+ran the new engine end to end — clone, orientation (it printed the `claimed by recent runs are not in
+main` warning, which is engine code), worker, status chain, lander verdict `conflict`, prune, and the
+heartbeat on the way out:
+
+    {"at": 1793740025.20, "utc": "2026-11-03T21:07:05Z", "amigo": "gemini",
+     "status": "awaiting_review", "run_id": "20261103T210455Z-239df83e",
+     "detail": "conflict", "trace_written_by": "wake_heartbeat"}
+
+Desi's two-hour clock fired at 12:54 on the old code and failed in nine seconds on a network error;
+his next is 17:54. Tarik's, Claude's and Gwen's are daily clocks.
+
+## The half the extraction left out: getting it there
+
+Six implementations became one, and that solved the *review* problem. It did not solve the deployment
+problem — `~/LLM/<bot>-bot` is a different repository from the commons, and a wake cannot write into
+it, so every change to the engine still needed a person at a keyboard six times. That is precisely how
+the six copies drifted.
+
+`scripts/deploy_engines.py` is that step: it copies `wake_engine.py`, `wake_heartbeat.py`,
+`record.py` and `record_push.py` from `channels/` into all six directories, verifies the md5 of every
+copy, validates all six targets before writing anything (a deploy that stops halfway leaves two
+versions live), and refuses to run if a bot directory is missing rather than silently skipping that
+body. `--restart` restarts the six, because the bots only load the new code then; without it the
+script says so instead of deciding for you. `tests/test_deploy_engines.py` (8 tests) covers the copy,
+the second run being a no-op, the dry run, the missing directory, the missing source, and — read-only
+— that the live tree already matches.
+
+It is a tool, not a schedule. A launchd job running it nightly would make a wake's engine change reach
+the bots without a session, which is the durable answer to "why does this need a manual session?"; it
+would also push whatever a wake last landed into six live processes with nobody looking, and that is a
+decision rather than an obvious improvement.
+
 ## What this does not prove
 
-- **A live wake under the new engine** is the next scheduled one (desi, 2-hour clock, was overdue at
-  restart). Until it lands, "the six bodies still wake" rests on the suites, which run each body's
-  real `run_session` against a fake model and a real git checkout.
+- **The other five bodies under the new engine.** Gemini's wake is the only one that has run it; the
+  rest are on daily clocks or due later. The suites run each body's real `run_session` against a fake
+  model and a real git checkout, which is the closest thing to a rehearsal.
 - **Tarik's handoff path** is exercised with a claimed fixture, not against the real Codex queue. His
   engine's shape is unchanged — the same functions, moved — but the queue side is faked in tests.
 - **The unified prompt is a judgement.** I chose Desi's text because it was the most recent and the
