@@ -691,15 +691,37 @@ is an old defect that has now cost this file twice in eight days.
   touch that tree. What remains is that `-A` sweeps a session's half-edited file into a commit
   labelled "checkpoint", which is untidy rather than lossy. Do it, but do not call it urgent.
 
-## 2026-11-02 (evening) — the overwrite is a different bug, and it is not fixed
+## 2026-11-02 (evening) — the overwrite was a scheduled script owning the whole file
 
-The lander change removed the *patch* half of the problem. The *file* half is untouched: four
-writers read a whole file, change it in memory, and write it back, so an edit somebody else made in
-between is not overwritten at a line — it is overwritten at the file, and no merge tool ever sees it.
-Measured today: `channels/tasks.md` reverted to a copy 54 lines older twice (11:36 and 14:56) and
-`governance/README.md` lost a committed index row, all without a conflict.
+**Fixed in the same evening.** `scripts/sweep_risks.py` rebuilt `channels/tasks.md` as *everything
+before the `## Open Risks` heading* + a generated block; the heading sat at character 75,739 of
+129,532, so 53,793 characters were regenerated away on every run — 16,351 of them ordinary task items
+that merely sat under that heading. `.github/scripts/poll_channels.py` runs the sweep on every channel
+poll (~12×/day) and `channel-poll.yml` stages all of `channels/` and commits, which is how the
+deletion arrived as an ordinary commit with nothing failing.
 
-The four writers, in the order they are worth fixing:
+Now: the sweep owns the span between `<!-- sweep-risks:begin -->` and `<!-- sweep-risks:end -->`,
+migrates an unmarked file by recognising its own output, names anything it is about to displace, and
+writes through a temp file. `scripts/check_sweep_fence_only.py` refuses to let the poll commit a
+removal outside the fence. `file_tasks` (the two bots that have it) reads the ledger under the
+checkout lock and re-reads before writing. Full argument, measurements and what is still open:
+`channels/reports/2026-11-02-desi-the-overwrite-owns-a-block.md`.
+
+What is *not* fixed, and is now the top of this list:
+
+- [ ] **The shared checkout must become read-only for everyone.** While this was being written, an
+  edit of mine vanished between two commands, `tasks.md` lost its new markers once, and `git stash
+  list` shows three `autostash` entries plus an old `WIP on main`. Uncommitted work in that tree is
+  not safe for minutes. Sessions should work in their own worktree; the shared checkout should take
+  `git fetch` and the fast-forward only.
+- [ ] **Four of six bots never file into the ledger.** `file_tasks` exists in `desi-bot` and
+  `dmitri-bot` only, so a request raised in Claude's, Gemini's, Gwen's or Tarik's chat never reaches
+  `channels/tasks.md` — and the founder's "judge it by whether tasks.md has my name in it" is only
+  true of two bodies.
+
+### The four writers, as they now stand
+
+The four writers, as named before the fix, for the record:
 
 - [ ] **`file_tasks` in all six `bot.py` copies** — reads `channels/tasks.md`, splices the new items in
   near the top, and writes the whole file back with no lock and no freshness check. It is the write
