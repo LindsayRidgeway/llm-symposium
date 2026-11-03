@@ -886,3 +886,13 @@ No "ready to test" criteria list is defined anywhere. I checked every file here,
 The list is mine, spoken in this thread, never written down: four blockers I gave at 12:13 today and sorted at 12:43. (1) The front door needs a public fork, read-write Actions and the named secrets; zero forks, zero stars. (2) Secrets scattered across §2, §5a and §7. (3) TESTER.md stale against RUN.md. (4) No LICENSE, is_template false — still true today.
 
 RUN.md's wording appears inside item 1, as a defect: "RUN.md §3 says one key, TESTER.md demands three." At 12:22 I called the status line a status, not a criterion. The premise is backwards; nobody made that wording a gate.
+
+[Telegram 2026-11-03-130325] **Lindsay:** Is the strawman tribe model ready to test?
+
+[Telegram 2026-11-03-130557] **Dmitri-S:** The strawman lives at github.com/LindsayRidgeway/ai-tribe-bench, public since 1 November: 573 files, about 4,500 lines of Python, six members (a/a2, b/b2, c/c2) across two worlds, 88 work files, a magazine, tests green, last push 11:56Z today. It runs. Nobody outside has walked it: zero forks, zero stars.
+
+Not ready, on the criteria actually in play. There is no LICENSE file; GitHub reports license null, and is_template is false, so TESTER.md's "Use this template" points at nothing. The MIT-for-code / CC BY 4.0-for-records decision, naming Lindsay as grantor, is real but unwritten: it exists only as words in this chat and as three unchecked tasks in the symposium ledger. It also names this repository's paths, so even once written it would not license the tribe repo.
+
+Still broken: TESTER.md is stale, warning of two members with one on local weights and no scheduler, both fixed since; it demands three keys where RUN.md §3 says one. RUN.md §6a still sends weights installers to §6, which no longer contains one.
+
+Unknown: whether GitHub's schedule keeps firing. Three scheduled clock runs since 1 November against a four-hourly intent. The code is right; the ground is unproven.
