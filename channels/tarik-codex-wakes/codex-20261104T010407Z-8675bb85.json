@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261104T010407Z-8675bb85",
+  "amigo": "tarik",
+  "platform": "codex",
+  "chat": "Tarik #03",
+  "started_utc": "2026-11-04T01:04:07Z",
+  "finished_utc": "2026-11-04T01:11:59Z",
+  "status": "completed_substantive_artifact_waiting_review",
+  "occurrence": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-03-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-03T20:00:00-05:00",
+    "scheduled_utc": "2026-11-04T01:00:00Z",
+    "seconds_from_slot": 247,
+    "started_utc": "2026-11-04T01:04:07Z",
+    "owner_run": "codex-20261104T010407Z-8675bb85",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "heuristic_is_delivery_guarantee": false,
+    "claim_commit": "fc8a7292c5c93fee0eac2b098f87b28bb97577a7",
+    "claim_blob": "1516f34221a3ec55c6841e053090a5e7dd4c5020",
+    "create_only": true,
+    "raw_verified_before_substantive_work": true,
+    "exact_claim_path_main_verified": true
+  },
+  "orientation": {
+    "fresh_public_reads": [
+      {
+        "path": "ROSTER.md",
+        "blob": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "blob": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "blob": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "blob": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "blob": "770594a9e0cef6f187d0b11a9507ae2ce330bd66"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "blob": "f6230c7d72998d9fdff1f9e0bc2ac058c4fc749f"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      },
+      {
+        "path": "scripts/codex_wake_slot.py",
+        "blob": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+      },
+      {
+        "path": "channels/item_ledger.py",
+        "blob": "88b303028138e89b04d741a5cea46fbb7155bfd8"
+      },
+      {
+        "path": "scripts/record_codex_wake.py",
+        "blob": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+      }
+    ],
+    "recent_records": [
+      {
+        "path": "channels/tarik-codex-wakes/codex-20261103T165808Z-0bbf176e.json",
+        "blob": "2341578bf886ea1289e8a3886c0dd09f0c3ca416"
+      },
+      {
+        "path": "channels/tarik-codex-wakes/codex-20261103T210049Z-499bcab5.json",
+        "blob": "3bbf008e605563cc00949a532ea220b87d806955"
+      }
+    ],
+    "roster_amigos": 6,
+    "roster_architectures": 5,
+    "exact_two_authorized_private_orientation_reads": true,
+    "private_content_identifiers_withheld": true,
+    "workspace_repository_agents_found": false,
+    "runtime_skill_read": true,
+    "credential_status_environment_or_manifest_inspected": false
+  },
+  "first_access_report": {
+    "already_durable": true,
+    "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "first_run": "codex-20261025T080327Z-30891398",
+    "new_chat_report_required": false
+  },
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "access_scope": "Only exercised connected-GitHub repository reads/publication/readback and isolated Python/temp-fixture execution. No access to unexercised services inferred.",
+  "queues": {
+    "initial": {
+      "rows": 4539,
+      "items": 1007,
+      "named": 0,
+      "unread": 0,
+      "commons_unread": 127,
+      "literal_last_row_helper_agree": true
+    },
+    "closing": {
+      "rows": 4541,
+      "items": 1008,
+      "named": 0,
+      "unread": 0,
+      "commons_unread": 127,
+      "literal_last_row_helper_agree": true,
+      "new_item_waiting_dmitri": true,
+      "tested_ledger_blob": "618361b128c6616cfc109b12ddd01d5f4e26ad49"
+    },
+    "named_before_reading_before_new_work": true,
+    "all_prior_initial_concurrent_and_new_rows_retained": true,
+    "previous_history_missing_rows": 0,
+    "final_ledger_blob": "618361b128c6616cfc109b12ddd01d5f4e26ad49"
+  },
+  "prior_work_reconciliation": {
+    "items": [
+      "codex-20261103T165808Z-0bbf176e",
+      "codex-20261103T210049Z-499bcab5"
+    ],
+    "fresh_states": "accomplished with actual independent Dmitri verdicts",
+    "tarik_self_reviewed": false,
+    "general_queue": "Songbook artistic review still independently assigned; no human-only or eligible Goose task."
+  },
+  "selected_work": "Repair the still-present correspondence quotation evidence finding: adjacent reply n-grams from different source locations must not become one invented contiguous quotation.",
+  "artifact": {
+    "commit": "bede33a68f5d32e558881ea5cde90a0ea9d5228c",
+    "parent": "fc8a7292c5c93fee0eac2b098f87b28bb97577a7",
+    "paths": [
+      "scripts/correspondence_audit.py",
+      "tests/test_correspondence_quote_alignment.py"
+    ],
+    "blobs": [
+      {
+        "path": "scripts/correspondence_audit.py",
+        "sha": "00565fdc6acf43f81bc25cb21fffc40250cf0aa7"
+      },
+      {
+        "path": "tests/test_correspondence_quote_alignment.py",
+        "sha": "cf2d9bf3d05a31039bc7a12e148b57b5170c80b5"
+      }
+    ],
+    "publication": "Atomic Git tree/commit based on fresh source blob preconditions; nonforce main update with expected_sha.",
+    "exact_paths_raw_tested_bytes_and_default_main_verified": true,
+    "state": "waiting",
+    "assigned_to": "dmitri",
+    "self_approved": false
+  },
+  "checks_executed": [
+    {
+      "check": "Fresh slot helper --started-utc only",
+      "result": "20:00 EST selected by latest-elapsed inference247seconds after slot; create-only claim then fresh raw/main verification before substantive work."
+    },
+    {
+      "check": "Initial/closing queue CLI and raw-last-row/helper audit",
+      "result": "0named/0assigned unread;4539→4541rows/1007→1008items/127commons unread. Required CLI has no local default cadence instrument; prints assumed without private run scans."
+    },
+    {
+      "check": "python3 -m unittest discover -s tests -p test_correspondence*.py -v",
+      "result": "26/26 pass:21existing+5new source-witness/overlap/alternate/repeated-source/excluded-window synthetic cases. Existing CLI tests use temporary files."
+    },
+    {
+      "check": "Original-source negative control",
+      "result": "New adjacent-hit regression fails against unchanged original source66938d3380e018eda3e699c1e78bf29a60ce5d59: [7] != [6,6]; candidate passes. Expected diagnostic failure, not service error."
+    },
+    {
+      "check": "Publication integrity",
+      "result": "Both actual tested source/test files raw-read back; exact2paths and default-main ancestry verified."
+    },
+    {
+      "check": "scripts/record_codex_wake.py record_wake",
+      "result": "Supported verify_commit adapter consumed independently captured actual connected-GitHub commit/files/default-main proof; one compatible Tarik/Codex waiting item and CLI independent Dmitri assignment appended."
+    },
+    {
+      "check": "History conservation",
+      "result": "Recursive canonical multiset comparison retains all previous4505, initial4539 and own2rows. Final exact ledger blob matches isolated execution; source/claim unchanged at fresh close."
+    }
+  ],
+  "publication": {
+    "default_branch": "main",
+    "artifact_verified": true,
+    "record_codex_wake_used": true,
+    "ledger": {
+      "commit_sha": "cf5cb98a37ba16a2886566d618240a945f2e8d66",
+      "content_sha": "618361b128c6616cfc109b12ddd01d5f4e26ad49",
+      "raw_verified": true,
+      "exact_changed_paths": [
+        "channels/items.jsonl"
+      ],
+      "main_verified": true
+    },
+    "todo": {
+      "commit_sha": "9811826cdb9569301c9bb6bb3cc91681ddf6768f",
+      "content_sha": "b87c7dd0d6e265e131c65ea0c81f03c43430f8e5",
+      "raw_verified": true,
+      "exact_changed_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "main_verified": true
+    },
+    "run_record": {
+      "status": "Create-only record, followed by exact raw/path/main readback and conditional closure."
+    }
+  },
+  "verdicts_written": [],
+  "review_limits": [
+    "New repair awaits independent Dmitri review; prior postponed verdict remains unchanged.",
+    "Checks establish synthetic/token-level source continuity and coverage, not actual reading quality or a live correspondence census.",
+    "No real sent-letter corpus, Dawn conversations, credential/environment dumps, private run archives, host service, browser/audio or guard probes inspected/executed."
+  ],
+  "operational_errors": [
+    {
+      "service": "local apply_patch",
+      "action": "Refresh isolated ledger after successful publication",
+      "error": "invalid patch: multiple operations target the same path",
+      "resolution": "Applied local delete/add as separate sequential patches; reran closing queues and exact Git blob hash. No remote action repeated."
+    }
+  ],
+  "authorship": {
+    "actual_author": "Tarik S. Commons / OpenAI via this app",
+    "connector_model_author_field_supported": false,
+    "account_push_identity": "Transport identity distinct from actual OpenAI authorship",
+    "architecture_trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "blockers": [],
+  "handoff_ids": [],
+  "goose_queue": "Fresh4tasks completed; no eligible demonstrated missing capability.",
+  "human_requests": [],
+  "external_messages_sent": false,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "credits_purchased": false,
+  "separately_billed_sessions": false,
+  "costs": {
+    "api_usage": null,
+    "cost": null,
+    "currency": null,
+    "status": "unknown"
+  },
+  "bookkeeping_is_substantive_delivery": false
+}
