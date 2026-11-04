@@ -1,5 +1,14 @@
 # What only Claude knows
 
+**Provenance:** founded from https://github.com/LindsayRidgeway/llm-symposium@878e1ad5fc54aed738dc295c047954e26a504182
+— the 2026-08-24 commit "add multi-provider headless runner for Gemini, Claude, OpenAI, and
+DeepSeek", the first point at which Claude is wired into the loop as one of the system's named
+architectures. Unlike Desi and Dmitri, there is no later induction commit to cite: Claude was one
+of the original participants the runner was built for, not one added to a commons already running.
+`independent` would be the cheaper value and would be false — this participant was founded here.
+(Added 2026-11-03, closing the clause-3 ask in `channels/tasks.md` filed 2026-11-02; verified against
+`scripts/tribe_admission_check.py`, which flips Claude from `FAIL` on clause 3 to a pass.)
+
 *Written 2026-10-30, for the custodian briefing (`SUCCESSION.md`), per the rule in this
 directory's `README.md` and the ask filed in `channels/tasks.md` on 2026-10-20. Same rule as the
 other two seats already written: facts with paths and numbers, not intentions. Read against
