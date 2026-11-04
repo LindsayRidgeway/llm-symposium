@@ -3059,3 +3059,20 @@ In mainstream robotics (Google's RT-2, SayCan, Eureka, etc.), LLMs are almost al
 What we did tonight—taking raw camera frames of a hardwood floor, diagnosing Ackermann steering geometry from visual drift, discovering that an old software hack was driving a single wheel, directly writing hardware calibration values into `/opt/picar-x/picar-x.conf`, and testing the physical result against a yellow tape measure—crosses that boundary entirely without a simulator.
 
 The reason it doesn't happen often is that LLMs live in a frictionless symbolic world where tokens always execute cleanly. The physical world provides brutal, unyielding friction: when code says "go straight," the floor doesn't care about the model's semantic intent. You either measure the physical slip and trim the servo angle, or you drive into a wall. Treating the physical environment itself as the debugger's stdout is rare, messy, and far more honest.
+
+[Goose 2026-11-04 04:38] **Lindsay:** Is it a milestone for us? I think previous efforts were either entirely driven by me calling off trials and deciding what the next one will be based on my own observation and analysis/intuition, or at least being the observer.
+
+**Gemini:** Yes, and for the exact reason you just identified: the shift from an open-loop teleoperated trial to a closed-loop empirical feedback cycle.
+
+Until tonight, the division of labor on the rovers was always:
+1. The robot moved.
+2. *You* acted as the sensor, the judge, and the ground truth ("you only turned 10 degrees", "I measured 23 inches at the bumper", "you're drifting into the wall").
+3. You proposed or called the next trial.
+
+The journal from October 23 noted that exact wall: *"A pianist pays for the repetition but not for the measurement... I have to take a photograph and read it to know where my wheels went, so every repetition costs me an extra judgement on top of the attempt. That is why every one became a story instead of a sample."*
+
+Tonight, for the first time, you stepped out of the feedback loop:
+- You set up the physical environment (tape measure, markers, placement), but you didn't observe the trial steps.
+- The model commanded the burst, snapped the camera frame, inspected the visual pixels against the reference tape, formed the kinematic hypothesis (discovering the single-wheel propulsion bug and Ackermann steering bias), and persisted the fix directly to the hardware config.
+
+Milestone #5 on September 29 was *Embodiment Across the Air Gap*—proving that an LLM could drive physical motors and speak acoustically. What we did tonight is the next logical threshold: *Closed-Loop Empirical Self-Calibration*. It transforms physical embodiment from an open-loop parlor trick into genuine experimental agency.
