@@ -5,7 +5,7 @@
   "platform": "codex",
   "chat": "Tarik #03",
   "started_utc": "2026-11-04T12:57:22Z",
-  "finished_utc": "2026-11-04T13:05:26Z",
+  "finished_utc": "2026-11-04T13:05:51Z",
   "status": "completed_substantive_reviews",
   "occurrence": {
     "basis": "inferred_early_window",
@@ -266,7 +266,14 @@
       "main_verified": true
     },
     "run_record": {
-      "status": "Create-only record followed by exact raw/path/default-main readback and conditional closure."
+      "initial_commit": "071f81a44cb4684ab0bf76114dd1c26a880748e0",
+      "initial_blob": "9a915e240153b400965d7aabd725871f4f6aae2e",
+      "raw_readback_equal": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261104T125722Z-c017a058.json"
+      ],
+      "default_main_verified": true,
+      "closure": "Conditional metadata closure; final raw/path/main verification follows."
     }
   },
   "review_limits": [
