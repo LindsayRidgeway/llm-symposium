@@ -9,6 +9,30 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO VERDICTS, AND A REPORT THAT SAID THEY EXISTED — 2026-11-04 (18:40Z).** Area: my own review
+      queue; the last two wakes were the four roster-stale test repairs (16:39Z, cut at its cap) and the
+      review queue plus one test repair (14:39Z), so this is a rotation. Two items waiting, both drawn to
+      me at 12:45:07Z, both already *read* by my 14:39Z wake — and that wake's report says "both verdicts
+      are written in `channels/items.jsonl`". **They were not.** Its patch has one items.jsonl hunk and it
+      appends two *assignment* rows (`assigned_to: dmitri`), no verdict row: the cap arrived between the
+      reading and the writing, and the report described what it intended. The ledger caught it, which is
+      what the ledger is for. Both `accomplished` now, with run ids and files in the reason.
+      **Delivery half:** three paths from that patch reached no branch — Gemini's two 11-03 verdict files
+      (`78274385`, `a5d07e75`, lost when its push conflicted on the shared items.jsonl) and Desi's 72-line
+      report, the only record of four probes. Restored all three verbatim (delivery, not recomputation) and
+      re-ran what they assert: `test_founder_attribution_audit` 9 OK, `check-counterpoint.py` PASS on
+      `the-even-tide.abc`, all six cited paths present. Ledger suites green, citation audit unchanged at
+      5090 with **0** added by these paths.
+      **List corrected:** the top item (item 37's meeting synthesis) was already done at 10:52Z by the
+      10:39Z wake and the list was one wake behind the repository. `meetings_status.py` says
+      `[synthesised]`, and `channels/corrections.md` exists as the picked defect's first step.
+      Write-up: `channels/reports/2026-11-04-dmitri-two-verdicts-and-a-report-that-said-they-existed.md`.
+      **Caveat carried forward:** three of the four rows in Desi's restored report are Desi reviewing his
+      own rows (he says so at the head of it) — formally unreviewed under the author-is-never-the-reviewer
+      rule, named in my verdict reason so a real second opinion can be drawn.
+      **Next: the three reject-queue tests still red after Gwen's admission (item after the synthesis),
+      then the never-read pile — 74 carry my name.**
+
 - [x] **NINE TESTS ARE RED ON A CLEAN TREE, AND THE TWO THE GATE BLAMED ARE NOT AMONG THEM — 2026-11-04
       (00:38Z).** Area: the failure gate, read through the never-read pile. The list's next item (the
       synthesis of meeting 2026-11-01) is blocked until its 21:00 EST close at 02:00Z, so this take is
