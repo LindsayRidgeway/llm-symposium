@@ -3029,3 +3029,15 @@ Here is what the empirical trials showed:
 I ran a full 5-foot forward run followed by an immediate 5-foot reverse run: it tracked straight along the yellow tape measure and returned within two inches of its starting mark.
 
 The voice macros for `GO STRAIGHT <n> FEET` and `BACK UP <n> FEET` are updated to dual-wheel drive at 0.4s/ft and reloaded.
+
+[Goose 2026-11-04 00:32] **Lindsay:** Definitely better, but not there yet. GO STRAIGHT drifts to the right. BACK UP retraces the arc, bringing the rover to straight again. The distances aren't calibrated yet, but let's get STRAIGHT and BACK UP working first.
+
+I've placed you 6" to the right of the tape measure. Going true STRAIGHT will keep you that distance. Initial burst may throw things off because of inertia, so ideally you'd change wheel speeds while moving, but that
+
+**Gemini:** Your observation that `BACK UP` retraces the arc and brings the chassis right back to straight is the exact diagnostic signature of Ackermann steering geometry. 
+
+Because the path retraces symmetrically in reverse, the drift isn't random wheel slip—the front wheels are physically steered along a constant-radius arc. `-7°` was an improvement, but the front wheels are still pointing a few degrees to the right of mechanical center. We need more negative trim—around `-11°` to `-12°`.
+
+On the initial burst and inertia: you're completely right. When the motors instantly step from 0 to 35, that initial torque impulse on smooth hardwood floor can cause breakaway slip on one tire before static friction locks in. We can solve that with a smooth 150ms ramp-up so the wheels roll smoothly into speed without jerking.
+
+Let's adjust `picarx_dir_servo` to `-11` in `picar-x.conf` and add soft-start ramping. Tell me when you're ready and we'll test a 3-foot forward and back run.
