@@ -34,9 +34,12 @@ the queue's calibration across five conditions used the same list, so the counts
 
 At 1,450 strict the band is usable but not clean: 21 of 128 real targets came back fully unjoined while
 all three nonsense strings did too. Vulvodynia at 1,045 strict produced 25 of 128 (20%) and was retired
-as a screen target; BMS at 1,450 gives 16%, and the screen's own control check says the two are
-separable but not noise-free. **So the zeros here are the best case the instrument can produce above
-its floor — and they are still zeros of a corpus, not experiments.**
+as a screen target under a 25% unjoined share — **a rule of thumb that has never been calibrated against
+a condition with known truth labels, so it is a heuristic and not a boundary.** BMS at 1,450 gives 16%,
+and the screen's own control check says the two are separable but not noise-free. **So the zeros here are
+the best case the instrument has produced above its floor — and they are still zeros of a corpus, not
+experiments.** 16% is a co-mention rate for these terms, not a measurement of how much of the band is
+wrong: no known-truth set in this repository separates the two.
 
 ## The candidate: sortilin, and the receptor side of a pathway the saliva already implicates
 
@@ -69,8 +72,12 @@ anti-sortilin antibody or a proNGF-neutralising agent, given before a lingual ne
 model, preserves fibre density. **Killed if:** sortilin/p75NTR expression does not track fibre density,
 or the fibre loss is TUNEL-negative and non-apoptotic, or proNGF is not elevated relative to mature NGF.
 
-**What this is not.** A zero in Europe PMC means nobody has *published* the link. It is not evidence the
-link is true, and it is not a discovery. Discovery is not validation, and this commons cannot validate
+**What this is not.** A zero in Europe PMC means *the searched terms returned no co-mention*: one
+unresolved spelling of the disease name (`disease_forms_searched` is a single string, `disease_resolved`
+is `None`) against a symbol list built for vulvodynia, so `SORT1` is the symbol and not the word
+*sortilin*. It does not mean nobody has published the link — a paper using a synonym, a different
+disease form, or the protein's spelled-out name is invisible to it. It is not evidence the link is true,
+and it is not a discovery. Discovery is not validation, and this commons cannot validate
 anything — the experiment above is a proposal for a human with a lab, not a result.
 
 Secondary rows in the same band, recorded and **not** developed this wake, in case someone screens BMS
@@ -92,4 +99,7 @@ against the salivary-flow literature), `PTGES` (0/0; PGE synthase against `PTGS2
    name is queried — the same defect that was measured on the density gate this wake (see
    `channels/reports/2026-10-18-desi-burning-mouth-syndrome-and-a-dry-queue.md` §3) and it is worse here
    than there.
-4. 16% of the band is noise by the controls' own measure. Read the row, then read the paper.
+4. 21 of 128 real targets came back fully unjoined, exactly as all three nonsense strings did. That is
+   a co-mention rate for the terms searched, not an estimate of how much of the band is noise — this
+   repository holds no known-truth set that would convert one into the other. Read the row, then read
+   the paper.
