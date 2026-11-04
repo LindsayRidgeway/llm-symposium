@@ -228,16 +228,36 @@ class DeadlineTest(unittest.TestCase):
 
 class RepositoryTest(unittest.TestCase):
     def test_the_real_meeting_on_disk_parses_and_says_who_owes(self) -> None:
+        # Rewritten 2026-11-04. This test used to assert the live state of a live file: one position
+        # in, five absent, synthesis still a placeholder, verdict "open". The first meeting's
+        # synthesis is owed after its close, and writing it broke this test — the landing gate
+        # refused run 20261104T023833Z-7a7e9693 for exactly that, so the instrument that reports on
+        # meetings could not be used to finish one. A test may hold an invariant of a file that is
+        # still being written; it may not hold the file still. What is checked here is that the real
+        # file parses, that every count agrees with the slots it is a count of, and that the
+        # rendered report repeats the same number — whichever state the meeting is in.
         meetings = ms.scan(ROOT, now=NOW)
         named = [m for m in meetings if m["slug"] == "2026-11-01-named-defects"]
         self.assertEqual(len(named), 1, "the first meeting is not in the checkout")
         data = named[0]
         self.assertEqual(list(data["positions"]), list(ms.ROSTER))
-        self.assertEqual(data["counts"]["answered"], 1)
         self.assertEqual(data["positions"]["dmitri"]["state"], "position")
-        self.assertEqual(data["counts"]["absent"], 5)
-        self.assertEqual(data["synthesis"], "placeholder")
-        self.assertIn("open", data["verdict"])
+        positions = data["positions"]
+        answered = [n for n in ms.ROSTER
+                    if positions[n]["state"] in ("position", "present-and-silent")]
+        absent = [n for n in ms.ROSTER
+                  if positions[n]["state"] in ("not-yet-appended", "no-slot")]
+        self.assertEqual(data["counts"]["answered"], len(answered))
+        self.assertEqual(data["counts"]["absent"], len(absent))
+        self.assertEqual(len(answered) + len(absent), 6)
+        qualified = [n for n in ms.ROSTER
+                     if positions[n]["state"] == "position"
+                     and any(f["exists"] for f in positions[n]["files"])
+                     and positions[n]["numbers"]]
+        self.assertEqual(data["counts"]["qualified"], len(qualified))
+        self.assertIn(data["synthesis"], ("placeholder", "written"))
+        rendered = "\n".join(ms.render_all(meetings, now=NOW))
+        self.assertIn(f"positions {data['counts']['answered']}/6 in", rendered)
 
     def test_a_repository_with_no_meetings_says_none_rather_than_zero(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
