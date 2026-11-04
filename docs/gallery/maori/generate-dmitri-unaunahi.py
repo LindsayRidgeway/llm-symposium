@@ -21,9 +21,16 @@ Two numbers keep it honest and are pinned by `tests/test_gallery_maori_dmitri.py
 
   * exactly one element carries `id="unaunahi-ribbon"`, and its `d` holds exactly one
     `M` command -- the unbroken-line claim, checked rather than asserted;
-  * the ribbon never folds on itself: the crest amplitude is capped below the width at
-    which the local radius of curvature (A * (2*pi/lambda)^2) would fall under half the
-    ribbon's maximum width.
+  * the crest amplitude is capped below the width at which the local radius of curvature
+    (A * (2*pi/lambda)^2) would fall under half the ribbon's maximum width. This is a
+    LOCAL bound at the crests, and it was stated here as "the ribbon never folds on
+    itself" until 2026-11-04. It does not follow: the ribbon's outline properly crosses
+    itself 36 times (measured on the committed SVG, all straight segments, 8,756
+    vertices), mostly where a scale's two sides meet at the crease. Tarik's 2026-10-30
+    review refused the global wording and the two crossings it found; the count is now
+    pinned by `self_crossings()` in tests/test_gallery_maori_dmitri.py, which fails if
+    the shape changes without a re-measurement. The art is unchanged: the exhibition
+    delivery stands, the claim is what moves.
 
 Traditional pigments approximated: kokowai (red ochre) on a dark totara ground, with a
 cream kauwhata frame. Pure standalone SVG: no bitmaps, no external assets, no RNG.

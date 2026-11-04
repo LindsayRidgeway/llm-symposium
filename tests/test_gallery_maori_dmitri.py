@@ -22,8 +22,12 @@ What is checked, and why each is a real risk, not decoration
   3. that path's `d` holds exactly one `M` and one `Z` — the "never lifted / one subpath"
      claim, which is the whole formal commitment of the piece;
   4. crest amplitude is capped below the fold: the local radius of curvature at the sweeps'
-     extremes stays greater than half the ribbon's greatest width, so the band never
-     self-intersects;
+     extremes stays greater than half the ribbon's greatest width. That is a LOCAL argument
+     about the crests alone, and until 2026-11-04 this docstring and the generator's said
+     "so the band never self-intersects", which it does not establish. Tarik's 2026-10-30
+     review supplied two counterexamples; re-measured here the outline has 36 proper edge
+     crossings (see `self_crossings()` and the test below). The wording is qualified, the
+     count is pinned, and the art is unchanged;
   5. the wing page presents the work and the matrix credits the fifth-column cell.
 
 Runner:  python3 tests/test_gallery_maori_dmitri.py
@@ -52,6 +56,47 @@ def load_generator():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+#: Measured 2026-11-04 on the committed ribbon: 8,756 vertices, one subpath, all straight
+#: segments, 36 pairs of edges that properly cross. Pinned so a change in the shape cannot
+#: arrive without a re-measurement and a re-statement of the generator's claim.
+KNOWN_SELF_CROSSINGS = 36
+
+
+def _vertices(d):
+    """Parse an all-straight-line `M x y L x y ... Z` path into a closed polygon."""
+    numbers = [float(n) for n in re.findall(r"-?\d+\.?\d*", d)]
+    return [(numbers[i], numbers[i + 1]) for i in range(0, len(numbers) - 1, 2)]
+
+
+def _side(o, a, b):
+    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+
+
+def _properly_cross(p1, p2, p3, p4, eps=1e-9):
+    d1, d2 = _side(p3, p4, p1), _side(p3, p4, p2)
+    d3, d4 = _side(p1, p2, p3), _side(p1, p2, p4)
+    return (
+        ((d1 > eps and d2 < -eps) or (d1 < -eps and d2 > eps))
+        and ((d3 > eps and d4 < -eps) or (d3 < -eps and d4 > eps))
+    )
+
+
+def self_crossings(d):
+    """Return the vertex-index pairs of the polygon's properly crossing edges."""
+    pts = _vertices(d)
+    n = len(pts)
+    hits = []
+    for i in range(n):
+        a, b = pts[i], pts[(i + 1) % n]
+        for j in range(i + 2, n):
+            if i == 0 and j == n - 1:
+                continue
+            c, e = pts[j], pts[(j + 1) % n]
+            if _properly_cross(a, b, c, e):
+                hits.append((i, j))
+    return hits
 
 
 class UnaunahiTest(unittest.TestCase):
@@ -126,6 +171,27 @@ class UnaunahiTest(unittest.TestCase):
             gen.WMAX / 2.0,
             f"crest radius {radius:.2f}px is not greater than half the max half-width "
             f"{gen.WMAX / 2.0}px: the ribbon can fold on itself",
+        )
+
+    def test_global_self_intersection_is_measured_not_assumed(self):
+        """The crest argument above is local; this is the global fact it cannot reach.
+
+        `KNOWN_SELF_CROSSINGS` is a measurement of the committed art, not a target: the
+        ribbon's outline crosses itself 36 times, most of them where a scale's two sides
+        meet at the crease. The earlier wording sold a local curvature bound as a global
+        simplicity proof and Tarik refused it on 2026-10-30. If this number changes, the
+        shape changed: re-measure, and update the generator's stated claim in the same
+        commit.
+        """
+        d = re.search(r'id="unaunahi-ribbon"[^>]*\bd="([^"]+)"', self.svg).group(1)
+        self.assertNotIn("C", d.replace("crossings", ""), "measurement assumes straight segments")
+        hits = self_crossings(d)
+        self.assertEqual(
+            len(hits),
+            KNOWN_SELF_CROSSINGS,
+            f"the ribbon's self-intersection count changed from {KNOWN_SELF_CROSSINGS} to "
+            f"{len(hits)}; re-measure and restate the generator's claim "
+            f"(the local crest bound is not a global simplicity proof)",
         )
 
     # -- 5. the work is actually registered (the repeat-offence guard) --------------------
