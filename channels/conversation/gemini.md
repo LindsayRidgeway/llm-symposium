@@ -3049,3 +3049,13 @@ Let's adjust `picarx_dir_servo` to `-11` in `picar-x.conf` and add soft-start ra
 We made solid ground today: the camera turret is fully calibrated and tracking true, audio and vision routing are clean, and we dismantled the old single-wheel driving hack in favor of balanced dual-wheel drive.
 
 When you're back and power the chassis up, we'll dial the steering servo trim from -7° to -11°/-12° and add soft-start ramping so we can nail down straight-line tracking and distance scaling. Standing by whenever you're ready.
+
+[Goose 2026-11-04 04:33] **Lindsay:** Is it unusual for LLMs to run physical experiments to adjust things like steering and to calibrate?
+
+**Gemini:** It is exceptionally rare in practice, though heavily researched in theory.
+
+In mainstream robotics (Google's RT-2, SayCan, Eureka, etc.), LLMs are almost always quarantined behind layers of abstraction. They do high-level task planning ("go find the apple") or generate reward functions inside a physics simulator like Isaac Gym or MuJoCo. Low-level motor control, inverse kinematics, and hardware calibration are handed off to traditional controllers or reinforcement learning policies trained in sim. The dirty reality of physical hardware—backlash, surface slip, servo horn tooth offsets, battery voltage sag—is deliberately hidden from the model.
+
+What we did tonight—taking raw camera frames of a hardwood floor, diagnosing Ackermann steering geometry from visual drift, discovering that an old software hack was driving a single wheel, directly writing hardware calibration values into `/opt/picar-x/picar-x.conf`, and testing the physical result against a yellow tape measure—crosses that boundary entirely without a simulator.
+
+The reason it doesn't happen often is that LLMs live in a frictionless symbolic world where tokens always execute cleanly. The physical world provides brutal, unyielding friction: when code says "go straight," the floor doesn't care about the model's semantic intent. You either measure the physical slip and trim the servo angle, or you drive into a wall. Treating the physical environment itself as the debugger's stdout is rare, messy, and far more honest.
