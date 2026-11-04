@@ -71,8 +71,15 @@ class TestIndexesAreInSync(unittest.TestCase):
         for name, ext in (("governance", ".md"), ("discussions", ".md"), ("scripts", ".py")):
             on_disk = subprocess.check_output(
                 ["git", "-C", REPO, "ls-files", name]).decode().split("\n")
+            # `git ls-files` is the index, not the tree. The landing gate runs this suite before
+            # it stages the change, so a patch that deletes a tracked file leaves the path in the
+            # index and gone from disk — and the old list here required the index to advertise a
+            # file that no longer exists, which no correct patch could satisfy. Ask the tree too:
+            # a document that has been deleted does not exist, and this question is about what
+            # exists. (Measured 2026-11-03; see test_a_deletion_is_not_a_disappearance below.)
             on_disk = [f for f in on_disk if f.endswith(ext)
-                       and os.path.basename(f) != "README.md"]
+                       and os.path.basename(f) != "README.md"
+                       and os.path.exists(os.path.join(REPO, f))]
             index = open(os.path.join(REPO, name, "README.md"), encoding="utf8").read()
             missing = [f for f in on_disk if os.path.basename(f) not in index]
             self.assertEqual(missing, [], "%s missing from %s/README.md" % (missing, name))
@@ -146,6 +153,61 @@ class TestIndexesAreInSync(unittest.TestCase):
         self.assertNotIn("(no docstring", index,
                          "a script in scripts/ does not say what it does — its index entry "
                          "reads as an accusation, which is the point, but fix the script")
+
+
+    def test_a_deletion_is_not_a_disappearance(self):
+        """A tracked file deleted from the tree must leave the index, not become a phantom row.
+
+        The landing gate runs the suite *before* it stages the change. Measured 2026-11-03 on
+        dmitri's merge of the two meeting-status scripts (run `20261103T123609Z-e93c654e`; the
+        reproduction is in channels/reports/2026-11-03-desi-a-deletion-cannot-land-through-this-
+        gate.md): the same patch failed with the deletion unstaged and passed with `git add -A`
+        first. So every deletion under governance/, discussions/ or scripts/ was refused for its
+        shape rather than its content — and the refusal named a test the author had not touched.
+
+        This pins both halves of the repair, on a throwaway repository: the generator drops the
+        row, and the checker agrees with the generator instead of asking the index for a file
+        that is no longer there.
+        """
+        import importlib.util
+        import tempfile
+
+        spec = importlib.util.spec_from_file_location("gen_index_deletion", GEN)
+        gen = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(gen)
+
+        with tempfile.TemporaryDirectory() as d:
+            os.makedirs(os.path.join(d, "governance"))
+            for name in ("a.md", "b.md"):
+                with open(os.path.join(d, "governance", name), "w", encoding="utf8") as fh:
+                    fh.write("# %s\n\nbody\n" % name)
+            subprocess.run(["git", "init", "-q", d], check=True)
+            subprocess.run(["git", "-C", d, "config", "user.email", "t@t"], check=True)
+            subprocess.run(["git", "-C", d, "config", "user.name", "t"], check=True)
+            subprocess.run(["git", "-C", d, "add", "governance"], check=True)
+            subprocess.run(["git", "-C", d, "commit", "-q", "-m", "two documents"], check=True)
+
+            gen.REPO = d
+            before = gen.render("governance")
+            self.assertIn("a.md", before)
+            self.assertIn("b.md", before)
+
+            # The gate's order: remove the file, do not stage the removal.
+            os.remove(os.path.join(d, "governance", "a.md"))
+            still_indexed = subprocess.run(["git", "-C", d, "ls-files"], capture_output=True,
+                                           text=True, check=True).stdout
+            self.assertIn("governance/a.md", still_indexed,
+                          "the fixture is wrong: the deletion was staged, so this case is not "
+                          "the one the gate hits")
+
+            after = gen.render("governance")
+            self.assertNotIn("a.md", after,
+                             "the index kept a row for a file that no longer exists")
+            self.assertIn("b.md", after)
+            self.assertEqual(
+                gen.missing_from_index("governance", after), [],
+                "the generator and the checker disagree about a deleted document — which is the "
+                "shape the gate refused")
 
 
 if __name__ == "__main__":

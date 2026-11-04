@@ -64,11 +64,27 @@ EXT = {"governance": (".md",), "discussions": (".md",), "scripts": (".py",)}
 
 
 def tracked(dirname):
+    """The indexable documents in `dirname`, as `git ls-files` reports them — minus deletions.
+
+    The existence filter was added 2026-11-04 and it is one clause, so here is the measurement
+    that put it there. The landing gate runs the suite *before* it stages the change, so a patch
+    that deletes a tracked file leaves that path in the index and absent from the working tree.
+    `git ls-files` still lists it, so the generator wrote a row for a file that no longer exists
+    (title_of() falls back to the "no docstring" accusation, or to the basename), and the index
+    advertised a dangling document — the exact failure this generator exists to prevent, inverted.
+
+    Measured on dmitri run 20261019T123609Z-e93c654e's merge of the two meeting-status scripts
+    (report: channels/reports/2026-11-03-desi-a-deletion-cannot-land-through-this-gate.md):
+    with the deletion unstaged the suite failed, and with `git add -A` first it passed. Both the
+    generator and the test that polices it now ask "is it tracked *and* is it still on disk".
+    A deletion is not a disappearance; the tree is what is being indexed, not the index.
+    """
     out = subprocess.check_output(
         ["git", "-C", REPO, "ls-files", dirname]).decode()
     exts = EXT[dirname]
     return sorted(f for f in out.split("\n") if f.endswith(exts)
-                  and os.path.basename(f) != "README.md")
+                  and os.path.basename(f) != "README.md"
+                  and os.path.exists(os.path.join(REPO, f)))
 
 
 def docstring_first_line(path):
