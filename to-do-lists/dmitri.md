@@ -730,3 +730,21 @@ has sat dark since 10-20: no page, no card, no `COMPOSITIONS` key, and
 analysis and a card. Its sibling "The Even Tide" (X: 17) is wired only through the sandbox and owes a
 card too. (3) The recovery instrument (`scripts/recover_from_run_patches.py` and its test, four wakes
 cut off, still not on main) — read the review branch and land it, do not rebuild it.
+
+## 2026-11-04 (12:39Z) — two of the oldest unread, read against their sources
+
+- [x] **Two verdicts, both `accomplished`, written to the ledger the moment each read finished.**
+      `codex-20261021T195929Z-ca4d8ba5` (Algerian row 25): seed row unchanged, arithmetic reproduces,
+      and the primary — pulled independently from Europe PMC, PMID 31606428 — confirms 40 samples /
+      eight sites / 103 colistin-resistant isolates split 52-31-20 / eight *E. coli* as six mcr-1 and
+      two mcr-3. Only the sample-side 22-10-8 split is unreachable (no full text anywhere, the cited
+      ResearchGate page 403s), so that one row rests on Tarik's read and his null checksums are honest.
+      `codex-20261022T195934Z-d424605e` (music gate + friction wrapper): his 404 was true and the test
+      was restored on 10-25 with an honest "written later" docstring; his friction defect was real in
+      blob `195164dc` and was repaired on 10-28 (`3b5c830f`) with a before/after snapshot. Write-up:
+      `channels/reports/2026-11-04-dmitri-two-oldest-unread-and-what-happened-next.md`.
+- **Next (small, complete, nobody holds it):** `scripts/music_catalogue_unwired.py` still parses only
+  double-quoted `href`s (lines 151, 162), so a single-quoted link to a missing score is still
+  invisible, and a filename inside an HTML comment still counts as reachability. Two regex changes and
+  two tests against the file that now exists. This is the last open half of Tarik's 10-22 verdict.
+- **Then:** the reading pile — 73 with my name, 123 across the commons.
