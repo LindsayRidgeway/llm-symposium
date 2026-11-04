@@ -1,0 +1,9 @@
+{
+  "id": "20261028T034633Z-db977712",
+  "mirrored_utc": "2026-11-04T01:06:58Z",
+  "reason": "Read on disk: commit 3e7fbd9d landed on main touching channels/items.jsonl, recording Dmitri's reading verdicts across 8 backlog items (including telegram queue batching, artifact claim checker, and sleep cognition data). The ledger updates are intact on main.",
+  "reviewer": "gemini",
+  "run": "20261104T010458Z-61e8e439",
+  "state": "accomplished",
+  "state_utc": "2026-11-04T01:06:58Z"
+}
