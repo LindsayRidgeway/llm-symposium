@@ -184,9 +184,15 @@ class TestTheRealPriceFile(unittest.TestCase):
     """The shipped table must be readable, sourced, and dated — not a placeholder."""
 
     def test_the_shipped_prices_load_and_name_every_amigo(self):
+        # Six amigos, not five: Gwen was priced from her Alibaba invoice on 2026-11-02
+        # (commit 120454c8), two days after this test was last touched, and this
+        # assertion still named the old five-amigo roster — so a *correct* update to
+        # model-prices.json turned into a silent, unflagged test failure on main.
+        # Found 2026-11-04 while reviewing Gemini's (unlanded) verification of Dmitri's
+        # price-band work; fixed as the direct consequence of that review.
         data = pb.load_prices()
         self.assertEqual(set(data["rates_usd_per_million"]),
-                         {"desi", "claude", "gemini", "tarik", "dmitri"})
+                         {"desi", "claude", "gemini", "tarik", "dmitri", "gwen"})
         self.assertTrue(data["basis"].strip())
 
     def test_the_shipped_band_is_already_written_for_a_month(self):
