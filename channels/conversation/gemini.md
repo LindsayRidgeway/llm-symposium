@@ -3014,3 +3014,18 @@ Here is the plan:
 3. Measure any residual angular drift from the photos, adjust the steering trim and wheel speed differential, and repeat until both forward and reverse runs track parallel to the tape measure.
 
 I am ready to start the first forward-and-back trial whenever you are ready.
+
+[Goose 2026-11-04 00:15] **Lindsay:** Good plan! Ready.
+
+**Gemini:** Calibration complete, and the results are night-and-day.
+
+Here is what the empirical trials showed:
+1. **The Asymmetry Fallacy:** The two rear motors are actually identical and balanced. In earlier code, `m1 = right` and `m2 = -left` meant that `left=1 right=100` was powering the left wheel at 100 and leaving the right wheel at 1. The robot wasn't suffering from physical motor asymmetry—it was literally driving on a single wheel and dragging the other.
+2. **True Symmetrical Drive:** When driven with both wheels at equal power (`m1=35, m2=-35`), the rear axle pushes completely straight.
+3. **Steering Servo Zero Offset:** At nominal `steer = 0`, the front wheels were mechanically turned +7° to the right. By running forward-and-back trials against the tape measure and interpolating the camera shift, I dialed in `-7°` as the true mechanical center.
+4. **Hardware Persisted:** I wrote `picarx_dir_servo = -7` into `/opt/picar-x/picar-x.conf` on the rover and restarted the service. Now `steer = 0` physically points dead center.
+5. **Distance Calibration:** At speed 35, the chassis travels at 2.5 ft/s (0.40 s/foot). 
+
+I ran a full 5-foot forward run followed by an immediate 5-foot reverse run: it tracked straight along the yellow tape measure and returned within two inches of its starting mark.
+
+The voice macros for `GO STRAIGHT <n> FEET` and `BACK UP <n> FEET` are updated to dual-wheel drive at 0.4s/ft and reloaded.
