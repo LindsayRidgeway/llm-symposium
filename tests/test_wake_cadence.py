@@ -240,10 +240,6 @@ class Registration(unittest.TestCase):
         self.assertIn("wake_cadence.py", index)
 
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-
-
 class Obligations(unittest.TestCase):
     """What a body returns, not how often it wakes — added 2026-10-28.
 
@@ -417,3 +413,7 @@ class PublicCodexWakes(unittest.TestCase):
         self.assertEqual(value["measured"]["tarik"]["hours_since"], 1.0)
         self.assertEqual(value["evidence_counts"]["tarik"],
                          {"runs": 0, "ledger": 0, "codex_records": 1})
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
