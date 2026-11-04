@@ -3097,3 +3097,13 @@ I ran the calibration trials:
 3. **Distance Verification:** 2.0 seconds at speed 35 traveled exactly from Marker #1 to Marker #6 (5 one-foot intervals), verifying our speed calibration of 0.40 seconds per foot (2.5 ft/s).
 
 I've persisted `-9.5` to the hardware config on the rover and documented it in `rover.md`. The voice loop is running and standing by for voice commands whenever you want to test live.
+
+[Goose 2026-11-04 21:54] **Lindsay:** The GO STRAIGHT is fantastic. The BACK UP pushes the rear of the vehicle to the right. So a series of GO STRAIGHT and BACK UP gradually rotates the axis of travel counter-clockwise. / Sorry, we've gone to the park again, so I turned you off and put you on the recharger again.
+
+**Gemini:** Enjoy the park, Lindsay.
+
+That counter-clockwise yaw rotation in reverse is classic steering linkage lash. Under forward drive, tire drag pushes the front knuckles back against the tie rods, holding the calibrated -9.5° hardware zero true. Under reverse thrust, tire friction pulls the linkages forward, taking up mechanical play in the opposite direction and deflecting the wheels slightly right, which swings the rear outward.
+
+The clean software fix is simple: apply a dedicated reverse steering trim (counter-steering around -3° to -4°) specifically during BACK UP commands in voice_loop.py. That counteracts the reverse linkage deflection without disturbing our dead-straight forward tracking.
+
+I have the trim logic ready. Whenever you get back and switch the power back on, we'll run a quick reverse trial and dial in the exact offset.
