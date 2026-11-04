@@ -134,7 +134,7 @@ def find_quotes(letter: str, reply: str, n: int = 6, boilerplate: frozenset = fr
                 df: dict | None = None, max_df: int | None = None) -> list[dict]:
     """Verbatim runs of >= n words shared between the two documents.
 
-    Consecutive shared n-grams are merged, so a ten-word quotation is reported once as ten words
+    Consecutive n-grams merge only along one contiguous source alignment, so a ten-word quotation is reported once as ten words
     rather than five times as six. A run counts only if it carries at least two content words:
     without that rule, "and the state file is" would score as engagement.
 
@@ -150,26 +150,42 @@ def find_quotes(letter: str, reply: str, n: int = 6, boilerplate: frozenset = fr
     if len(letter_tokens) < n or len(reply_tokens) < n:
         return []
 
-    shared = {g for g in _ngrams(letter_tokens, n) if g not in boilerplate}
-    hits = [i for i, g in enumerate(_ngrams(reply_tokens, n)) if g in shared]
-    if not hits:
-        return []
+    # Track each source/reply alignment separately. Adjacent reply windows may
+    # occur in unrelated source locations and must not invent a longer quotation.
+    source_positions = {}
+    for j, gram in enumerate(_ngrams(letter_tokens, n)):
+        if gram not in boilerplate:
+            source_positions.setdefault(gram, []).append(j)
+    alignments = {}
+    for i, gram in enumerate(_ngrams(reply_tokens, n)):
+        for j in source_positions.get(gram, ()):
+            alignments.setdefault(j - i, []).append(i)
 
-    runs: list[list[int]] = []
-    for i in hits:
-        if runs and i == runs[-1][-1] + 1:
-            runs[-1].append(i)
-        else:
-            runs.append([i])
+    candidates = []
+    for offset, hits in alignments.items():
+        start = previous = hits[0]
+        for i in hits[1:] + [None]:
+            if i is not None and i == previous + 1:
+                previous = i
+                continue
+            candidates.append((start, previous + n, start + offset))
+            start = previous = i
 
+    # Keep maximal reply spans once, with one contiguous source witness each.
+    # Distinct maximal spans may overlap; coverage counts their union below.
     quotes = []
-    for run in runs:
-        start, end = run[0], run[-1] + n  # exclusive
+    furthest_end = -1
+    for start, end, source_start in sorted(candidates, key=lambda q: (q[0], -q[1], q[2])):
+        if end <= furthest_end:
+            continue
+        furthest_end = end
         span = reply_tokens[start:end]
         n_content = sum(1 for w in span if is_content(w))
-        entry = {"start": start, "end": end, "words": len(span), "content_words": n_content}
+        entry = {"start": start, "end": end, "words": len(span),
+                 "content_words": n_content, "source_start": source_start,
+                 "source_end": source_start + len(span)}
         if df is not None:
-            grams = _ngrams(reply_tokens[start:end], n) or [tuple(span)]
+            grams = _ngrams(span, n) or [tuple(span)]
             entry["df"] = min(df.get(g, 1) for g in grams)
         quotes.append(entry)
     kept = [q for q in quotes if q["content_words"] >= 2]
@@ -188,10 +204,19 @@ def find_quotes(letter: str, reply: str, n: int = 6, boilerplate: frozenset = fr
 # detector that rewards it rewards the failure it was built to catch.
 
 
+def quoted_word_count(quotes: list[dict]) -> int:
+    """Count covered reply words once when distinct source-backed spans overlap."""
+    count = end = 0
+    for quote in sorted(quotes, key=lambda q: (q["start"], q["end"])):
+        count += max(0, quote["end"] - max(end, quote["start"]))
+        end = max(end, quote["end"])
+    return count
+
+
 def echo_share(letter: str, reply: str, quotes: list[dict]) -> dict:
     """How much of the reply is the letter's own text, reported as two numbers, not a score."""
     reply_words = len(words(strip_markup(reply)))
-    copied = sum(q["words"] for q in quotes)
+    copied = quoted_word_count(quotes)
     return {
         "longest_run": max((q["words"] for q in quotes), default=0),
         "copied_share": round(copied / reply_words, 3) if reply_words else 0.0,
@@ -328,7 +353,7 @@ def audit(letter: str, reply: str, n: int = 6, boilerplate: frozenset = frozense
         )
     elif quotes:
         verdict = "read"
-        reason = f"quotes {sum(q['words'] for q in quotes)} words of the letter verbatim"
+        reason = f"quotes {quoted_word_count(quotes)} words of the letter verbatim"
     elif answers:
         verdict = "read"
         reason = (
