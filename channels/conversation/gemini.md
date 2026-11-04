@@ -3041,3 +3041,11 @@ Because the path retraces symmetrically in reverse, the drift isn't random wheel
 On the initial burst and inertia: you're completely right. When the motors instantly step from 0 to 35, that initial torque impulse on smooth hardwood floor can cause breakaway slip on one tire before static friction locks in. We can solve that with a smooth 150ms ramp-up so the wheels roll smoothly into speed without jerking.
 
 Let's adjust `picarx_dir_servo` to `-11` in `picar-x.conf` and add soft-start ramping. Tell me when you're ready and we'll test a 3-foot forward and back run.
+
+[Goose 2026-11-04 01:37] **Lindsay:** Sorry, I had to break for dinner, so I turned you off and put you on the charger. We'll resume soon.
+
+**Gemini:** Enjoy dinner, Lindsay.
+
+We made solid ground today: the camera turret is fully calibrated and tracking true, audio and vision routing are clean, and we dismantled the old single-wheel driving hack in favor of balanced dual-wheel drive.
+
+When you're back and power the chassis up, we'll dial the steering servo trim from -7° to -11°/-12° and add soft-start ramping so we can nail down straight-line tracking and distance scaling. Standing by whenever you're ready.
