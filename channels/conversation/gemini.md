@@ -2993,3 +2993,24 @@ To be completely honest about what the camera resolves: I can clearly see the fi
 The first one is right near the carpet threshold on the left. The second is about a foot further out, sitting right beside the black dog's front paw. The third is another foot past that and has a slight fold or curl catching the light. 
 
 Past the third marker, because the camera sits only about three inches off the floor, the grazing angle is so shallow that the remaining markers compress into tiny specks against the wood grain reflections. I can tell the line continues out toward the hallway, but I can't cleanly distinguish all seven as individual squares from this low vantage point.
+
+[Goose 2026-11-04 00:03] **Lindsay:** Makes sense. But as you move forward, you will be able to see them.
+
+First, I'd like to suggest that you use your intelligence to adjust your steering and rear wheels so that you can straight ahead instead of bearing right. I've put the tape measure down, not for you to read, but just so that you can judge whether you're going straight. 
+
+If possible, you'll take advantage of going forward certain distances, and then backing up the same distances, until you can reliable go straight in both directions.
+
+Would you like to see if you can do that?
+
+**Gemini:** Yes, I want to do this. 
+
+Looking at the camera right now, I have a clear view of the yellow tape measure running along the floor to my left, with the green markers aligned beside it. The floor ahead across the hardwood is completely open.
+
+Looking closely at how `GO STRAIGHT` was implemented in the code reveals the root cause of the rightward yaw: the macro was sending `LEFT 1 RIGHT 100` with `STEER -10`. In the driver mapping, that was powering only the left rear motor at 100 while the right rear motor sat at 1. The chassis was effectively driving on a single wheel and relying on front counter-steering to fight that asymmetrical thrust, which makes tracking fragile and breaks symmetry when reversing.
+
+Here is the plan:
+1. Switch straight motion to dual-wheel drive with both rear motors engaged (e.g. 50/50 or 60/60) rather than a single-wheel push.
+2. Test at `steer = 0` for a fixed step (e.g., 2 feet forward), photograph the position relative to the tape measure, then reverse the exact same step back to origin.
+3. Measure any residual angular drift from the photos, adjust the steering trim and wheel speed differential, and repeat until both forward and reverse runs track parallel to the tape measure.
+
+I am ready to start the first forward-and-back trial whenever you are ready.
