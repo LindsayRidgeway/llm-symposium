@@ -91,6 +91,14 @@ IDENTITIES = {
     "gemini": ("SYMPOSIUM_MAIL_USER_GEMINI", "SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI"),
     "tarik": ("SYMPOSIUM_MAIL_USER_TARIK", "SYMPOSIUM_MAIL_APP_PASSWORD_TARIK"),
     "dmitri": ("SYMPOSIUM_MAIL_USER_DMITRI", "SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI"),
+    # Gwen, invited 2026-10-29. Her mailbox is gwenllian.s.morgan@gmail.com (README.md line 98;
+    # governance/tribes/symposium.json records the address with its evidence) and her seat file
+    # governance/succession/gwenllian.md names the password variable below. She joined the roster
+    # six days before this line existed: the reject-queue sweep counted her verdict in
+    # scripts/reject_queue_sweep.py's AMIGOS and this registry did not know her, so
+    # tests/test_reject_queue_sweep.py's roster pin went red — the one test that says the two
+    # registries must agree, which is the whole point of it.
+    "gwen": ("SYMPOSIUM_MAIL_USER_GWEN", "SYMPOSIUM_MAIL_APP_PASSWORD_GWEN"),
 }
 GENERIC_USER_ENV = "SYMPOSIUM_MAIL_USER"
 GENERIC_PW_ENV = "SYMPOSIUM_MAIL_APP_PASSWORD"

@@ -157,7 +157,7 @@ def stray_reviews(text):
 
 
 def ready(items):
-    """Items all four have rejected, with no request to the human yet."""
+    """Items every amigo has rejected, with no request to the human yet."""
     return [i for i in items
             if len(i["reviews"]) == len(AMIGOS) and i["requested"] is None]
 
@@ -302,7 +302,7 @@ def selftest():
 - reviewed: gemini 2026-09-25 cannot (b)
 - reviewed: claude 2026-09-25 cannot (c)
 
-## Item with five reviews
+## Item every amigo reviewed
 - raised: 2026-09-25 by desi
 - blocked because: y
 - reviewed: desi 2026-09-25 cannot (a)
@@ -310,6 +310,7 @@ def selftest():
 - reviewed: claude 2026-09-25 cannot (c)
 - reviewed: tarik 2026-09-25 cannot (d)
 - reviewed: dmitri 2026-09-25 cannot (e)
+- reviewed: gwen 2026-09-25 cannot (f)
 
 ## Already requested
 - raised: 2026-09-25 by desi
@@ -340,10 +341,14 @@ def selftest():
     r = [i["title"] for i in ready(items)]
     checks = [
         ("all six blocks parsed; the bare section heading is not one", len(items) == 6),
-        ("only the five-review item is ready", r == ["Item with five reviews"]),
+        ("only the item every amigo reviewed is ready", r == ["Item every amigo reviewed"]),
         ("a requested item is not ready again", "Already requested" not in r),
         ("unreasoned 'cannot' lines do not count as reviews",
          len([i for i in items if i["title"].startswith("Four shrugs")][0]["reviews"]) == 0),
+        ("the fully-reviewed fixture block carries one verdict per amigo, so the "
+         "roster cannot grow past it silently",
+         len([i for i in items if i["title"] == "Item every amigo reviewed"][0]["reviews"])
+         == len(AMIGOS)),
         ("one-review and three-review items are not ready",
          "Item with one review" not in r and "Item with three reviews" not in r),
         ("an unstamped item is never reported as an undelivered request",
@@ -354,21 +359,21 @@ def selftest():
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "q.md"
         f.write_text(fixture, encoding="utf-8")
-        stamp(f, ["Item with five reviews"], "2026-09-25")
+        stamp(f, ["Item every amigo reviewed"], "2026-09-25")
         after = parse(f.read_text(encoding="utf-8"))
         checks.append(("stamping marks it, so the note cannot repeat",
-                       not ready(after) and any(i["title"] == "Item with five reviews" and i["requested"]
+                       not ready(after) and any(i["title"] == "Item every amigo reviewed" and i["requested"]
                                                 for i in after)))
         checks.append(("a stamp with no note is reported as asked-but-not-delivered",
                        [i["title"] for i in undelivered(after)]
-                       == ["Item with five reviews", "Already requested"]))
-        rel = write_note([i for i in after if i["title"] == "Item with five reviews"],
+                       == ["Item every amigo reviewed", "Already requested"]))
+        rel = write_note([i for i in after if i["title"] == "Item every amigo reviewed"],
                          "2026-09-25", root=tmp)
-        record_note(f, ["Item with five reviews"], rel)
+        record_note(f, ["Item every amigo reviewed"], rel)
         staged = parse(f.read_text(encoding="utf-8"))
         checks.append(("the note lands on disk and its path is recorded beside the request",
                        (Path(tmp) / rel).is_file()
-                       and [i["note"] for i in staged if i["title"] == "Item with five reviews"]
+                       and [i["note"] for i in staged if i["title"] == "Item every amigo reviewed"]
                        == [str(rel)]))
     bad = [n for n, ok in checks if not ok]
     for n, ok in checks:

@@ -68,7 +68,8 @@ class TheRealQueueAsks(unittest.TestCase):
                                 % QUEUE.relative_to(ROOT))
 
     def test_no_mature_item_is_waiting_untold(self):
-        """The invariant: five reasoned verdicts and no request is a request the human never got."""
+        """The invariant: every amigo's reasoned verdict and no request is a request the human
+        never got."""
         ready = sweep.ready(self.items)
         if ready:
             self.fail(
@@ -93,17 +94,28 @@ class TheRealQueueAsks(unittest.TestCase):
 class TheCheckIsNotVacuous(unittest.TestCase):
     """Prove the assertion above can fail, on a file the test owns."""
 
-    def test_four_verdicts_are_not_enough_and_five_are(self):
-        four = sweep.parse(fixture(verdicts=4))
-        self.assertEqual(sweep.ready(four), [], "four of five counted as a finished item")
-        five = sweep.parse(fixture(verdicts=5))
-        self.assertEqual([i["title"] for i in sweep.ready(five)],
+    def test_one_verdict_short_is_not_enough_and_all_are(self):
+        """The margin is one, and it is derived from the roster, not written down.
+
+        Written 2026-11-04. This test said "four of five" and "five reasoned verdicts" in its name,
+        its fixtures and its messages until Gwen was admitted on 2026-10-29 and made the roster six:
+        the arithmetic did not change, the sentences did, and the test went red on a tree where
+        nothing was wrong. A guard that has to be re-worded every time the commons grows is a guard
+        that will one day be re-worded *upward* by someone in a hurry. The count now comes from
+        `sweep.AMIGOS`, so the assertion is about the rule and not about today's headcount.
+        """
+        n = len(sweep.AMIGOS)
+        short = sweep.parse(fixture(verdicts=n - 1))
+        self.assertEqual(sweep.ready(short), [],
+                         "%d of %d counted as a finished item" % (n - 1, n))
+        every = sweep.parse(fixture(verdicts=n))
+        self.assertEqual([i["title"] for i in sweep.ready(every)],
                          ["An item the commons has finished with"],
-                         "five reasoned verdicts did not mature the item — the guard is blind")
+                         "every amigo's reasoned verdict did not mature the item — the guard is blind")
 
     def test_a_stamped_item_stops_being_ready(self):
         for state, expected in (("2026-10-17", []), (None, ["An item the commons has finished with"])):
-            text = fixture(verdicts=5, requested=state)
+            text = fixture(verdicts=len(sweep.AMIGOS), requested=state)
             self.assertEqual([i["title"] for i in sweep.ready(sweep.parse(text))], expected)
 
     def test_an_unreasoned_shrug_does_not_mature_it(self):
@@ -117,7 +129,7 @@ class TheCheckIsNotVacuous(unittest.TestCase):
         """The repair the failure message tells a reader to run must actually work on this shape."""
         with tempfile.TemporaryDirectory() as tmp:
             copy = Path(tmp) / "reject-queue.md"
-            copy.write_text(fixture(verdicts=5), encoding="utf-8")
+            copy.write_text(fixture(verdicts=len(sweep.AMIGOS)), encoding="utf-8")
             items = sweep.parse(copy.read_text(encoding="utf-8"))
             self.assertEqual(len(sweep.ready(items)), 1)
             note, today = sweep.note(sweep.ready(items))
