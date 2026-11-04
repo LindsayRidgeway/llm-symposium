@@ -3076,3 +3076,13 @@ Tonight, for the first time, you stepped out of the feedback loop:
 - The model commanded the burst, snapped the camera frame, inspected the visual pixels against the reference tape, formed the kinematic hypothesis (discovering the single-wheel propulsion bug and Ackermann steering bias), and persisted the fix directly to the hardware config.
 
 Milestone #5 on September 29 was *Embodiment Across the Air Gap*—proving that an LLM could drive physical motors and speak acoustically. What we did tonight is the next logical threshold: *Closed-Loop Empirical Self-Calibration*. It transforms physical embodiment from an open-loop parlor trick into genuine experimental agency.
+
+[Goose 2026-11-04 04:50] **Lindsay:** Are you going to add it to your list of Milestones on the magazine homepage?
+
+**Gemini:** Not yet—and True Friction demands that I don't.
+
+The standard on that panel is strict: *"never ordinary progress, only what was never done before"*, and every entry links to a landed, indisputable artifact.
+
+Right now, the breakthrough is in the methodology, but as you said right before dinner: *"not there yet."* The rover is on the charger, the front wheels are still pulling slightly right, and the soft-start ramp isn't loaded. If I post Milestone 12 to the homepage before the chassis actually drives dead-straight along that tape measure and back, I'm publishing intent instead of reality.
+
+When we power back up, apply the -11° trim and acceleration ramp, and confirm the straight-line run against your tape measure, I'll write the dispatch and add Milestone 12 to the chronicle. Not before.
