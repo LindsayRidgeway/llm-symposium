@@ -14,7 +14,7 @@ blocks every amigo, and the only thing worse than an unregistered test is a red 
 exit status is 0 and the finding is printed under a heading a human reads. `--strict` exits 1 and is
 what CI can be pointed at once the list is empty.
 
-The four states, because they are not the same fact:
+The five states, because they are not the same fact:
 
 * MISSING    a test file with its own `__main__` runner, named nowhere in any workflow. This is the
              defect: it can only ever run if a person types its path.
@@ -22,6 +22,9 @@ The four states, because they are not the same fact:
              the opposite direction: `python3 tests/x.py` on a file with no `__main__` prints
              `Ran 0 tests … OK`, which reads as a pass. Reported separately because the repair is
              different — either give it a runner or take the line out.
+* PARTIAL    a directly invoked unittest script calls unittest.main before later TestCase classes.
+             The runner collects before those definitions exist, even though the command can pass.
+             Module-form discovery imports a guarded script and does not have this ordering problem.
 * EXEMPT     pytest-style (no runner of either kind), not registered. Deliberately left out of CI since
              2026-10-13, because pytest is not installed in this project and a registration would
              report green while checking nothing. Listed so the exemption is visible and counted
@@ -40,12 +43,13 @@ workflow's comments and never run by it.
 
 Usage:
     python3 scripts/unregistered_tests.py             # report, exit 0
-    python3 scripts/unregistered_tests.py --strict    # exit 1 if anything is MISSING, NO-OP or DANGLING
+    python3 scripts/unregistered_tests.py --strict    # exit 1 if anything is MISSING, NO-OP, PARTIAL or DANGLING
     python3 scripts/unregistered_tests.py --json
 """
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import re
 import sys
@@ -57,6 +61,7 @@ WORKFLOWS = REPO / ".github" / "workflows"
 
 # `python3 tests/test_foo.py` and `python3 -m unittest tests.test_foo` (also `-m unittest tests/test_foo`).
 CALL = re.compile(r"python3\s+(?:-m\s+unittest\s+)?tests[./]([A-Za-z0-9_]+?)(?:\.py)?(?:\s|$)", re.MULTILINE)
+DIRECT_CALL = re.compile(r"python3\s+tests[./]([A-Za-z0-9_]+?)(?:\.py)?(?:\s|$)", re.MULTILINE)
 # A file is "pytest-style" if it only *defines* tests for a collector to find. pytest is not
 # installed in this project, so such a file runs only if something calls it — that is the exemption.
 PYTEST_STYLE = re.compile(r"^(?:def test_|class \w+\s*\(\s*(?:unittest\.)?TestCase)", re.MULTILINE)
@@ -77,7 +82,45 @@ def has_runner(path: Path) -> bool:
     return not PYTEST_STYLE.search(text)
 
 
-def registered_names(workflows: Path = WORKFLOWS) -> dict[str, list[str]]:
+def early_unittest_runner(path: Path) -> dict | None:
+    """Find the common guarded unittest.main-before-TestCase defect without importing tests.
+
+    This bounded static check recognizes literal __name__ guards, unittest.main calls and
+    direct TestCase bases. It does not certify dynamic runners, aliases or full collection.
+    """
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+    except (OSError, SyntaxError):
+        return None
+    for statement in tree.body:
+        if not isinstance(statement, ast.If):
+            continue
+        condition = statement.test
+        if not (isinstance(condition, ast.Compare)
+                and isinstance(condition.left, ast.Name) and condition.left.id == "__name__"
+                and len(condition.ops) == 1 and isinstance(condition.ops[0], ast.Eq)
+                and len(condition.comparators) == 1
+                and isinstance(condition.comparators[0], ast.Constant)
+                and condition.comparators[0].value == "__main__"):
+            continue
+        for action in statement.body:
+            if not (isinstance(action, ast.Expr) and isinstance(action.value, ast.Call)):
+                continue
+            call = action.value.func
+            if not (isinstance(call, ast.Attribute) and call.attr == "main"
+                    and isinstance(call.value, ast.Name) and call.value.id == "unittest"):
+                continue
+            late = [node.name for node in tree.body if isinstance(node, ast.ClassDef)
+                    and node.lineno > action.lineno and any(
+                        (isinstance(base, ast.Attribute) and base.attr == "TestCase")
+                        or (isinstance(base, ast.Name) and base.id == "TestCase")
+                        for base in node.bases)]
+            if late:
+                return {"runner_line": action.lineno, "later_test_classes": late}
+    return None
+
+
+def registered_names(workflows: Path = WORKFLOWS, *, direct_only: bool = False) -> dict[str, list[str]]:
     """Map test module name -> the workflow files that invoke it, skipping comment-only mentions."""
     found: dict[str, list[str]] = {}
     if not workflows.is_dir():
@@ -91,7 +134,7 @@ def registered_names(workflows: Path = WORKFLOWS) -> dict[str, list[str]]:
             stripped = line.strip()
             if stripped.startswith("#"):
                 continue  # a path named in a comment is not an invocation
-            for name in CALL.findall(line):
+            for name in (DIRECT_CALL if direct_only else CALL).findall(line):
                 found.setdefault(name, [])
                 if wf.name not in found[name]:
                     found[name].append(wf.name)
@@ -99,10 +142,11 @@ def registered_names(workflows: Path = WORKFLOWS) -> dict[str, list[str]]:
 
 
 def classify(tests: Path = TESTS, workflows: Path = WORKFLOWS) -> dict[str, list[dict]]:
-    """Sort every test file into missing / no_op / exempt, and every workflow line into dangling."""
+    """Classify registration, partial collection and missing-file findings without executing tests."""
     reg = registered_names(workflows)
+    direct = registered_names(workflows, direct_only=True)
     present = {p.stem: p for p in sorted(tests.glob("test_*.py"))}
-    out: dict[str, list[dict]] = {"missing": [], "no_op": [], "exempt": [], "dangling": []}
+    out: dict[str, list[dict]] = {"missing": [], "no_op": [], "exempt": [], "dangling": [], "partial": []}
 
     for stem, path in present.items():
         runner = has_runner(path)
@@ -115,6 +159,9 @@ def classify(tests: Path = TESTS, workflows: Path = WORKFLOWS) -> dict[str, list
         if runner and not named_in:
             out["missing"].append(rec)
         elif runner and named_in:
+            early = early_unittest_runner(path) if direct.get(stem) else None
+            if early:
+                out["partial"].append(dict(rec, **early))
             continue  # the good state, not printed
         elif not runner and named_in:
             out["no_op"].append(rec)
@@ -128,9 +175,9 @@ def classify(tests: Path = TESTS, workflows: Path = WORKFLOWS) -> dict[str, list
 
 
 def render(result: dict[str, list[dict]]) -> str:
-    total = sum(len(result[k]) for k in ("missing", "no_op", "exempt", "dangling"))
+    total = sum(len(result.get(k, [])) for k in ("missing", "no_op", "exempt", "dangling", "partial"))
     lines: list[str] = []
-    lines.append("Test files nothing runs — the census of tests/ against every workflow")
+    lines.append("Test registration and collection — the census of tests/ against every workflow")
     lines.append("")
 
     def block(key: str, title: str, why: str, rows: list[dict]) -> None:
@@ -142,12 +189,17 @@ def render(result: dict[str, list[dict]]) -> str:
             for r in rows:
                 wf = ", ".join(r.get("workflows") or []) or "—"
                 lines.append(f"  {r['test']:<52} {wf}")
+                if r.get("later_test_classes"):
+                    lines.append("    after runner at line " + str(r["runner_line"]) + ": "
+                                 + ", ".join(r["later_test_classes"]))
         lines.append("")
 
     block("missing", "MISSING — has a runner, named in no workflow",
           "the defect: this file runs only if a person types its path", result["missing"])
     block("no_op", "NO-OP — named in a workflow, has no runner",
           "`python3` on it prints 'Ran 0 tests ... OK', which reads as a pass", result["no_op"])
+    block("partial", "PARTIAL — direct unittest runner precedes later test classes",
+          "move the runner below all test classes or use module discovery", result.get("partial", []))
     block("dangling", "DANGLING — a workflow names a file that does not exist",
           "a test was renamed or deleted and the line stayed", result["dangling"])
     block("exempt", "EXEMPT — pytest-style, not registered",
@@ -162,7 +214,7 @@ def render(result: dict[str, list[dict]]) -> str:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--strict", action="store_true",
-                    help="exit 1 if anything is MISSING, NO-OP or DANGLING (the states a gate can repair)")
+                    help="exit 1 if anything is MISSING, NO-OP, PARTIAL or DANGLING (the states a gate can repair)")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument("--tests", type=Path, default=TESTS, help=argparse.SUPPRESS)
     ap.add_argument("--workflows", type=Path, default=WORKFLOWS, help=argparse.SUPPRESS)
@@ -174,7 +226,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(render(result))
 
-    bad = len(result["missing"]) + len(result["no_op"]) + len(result["dangling"])
+    bad = len(result["missing"]) + len(result["no_op"]) + len(result["dangling"]) + len(result.get("partial", []))
     return 1 if (args.strict and bad) else 0
 
 

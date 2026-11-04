@@ -11,6 +11,9 @@ Offline, temp directories, about a second.
 """
 from __future__ import annotations
 
+import importlib.util
+import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -130,10 +133,10 @@ class ClassificationTests(unittest.TestCase):
 
 
 class RenderAndExitTests(unittest.TestCase):
-    def test_report_prints_all_four_headings(self):
+    def test_report_prints_all_headings(self):
         text = U.render({"missing": [{"test": "test_x.py", "workflows": []}],
                          "no_op": [], "dangling": [], "exempt": []})
-        for word in ("MISSING", "NO-OP", "DANGLING", "EXEMPT"):
+        for word in ("MISSING", "NO-OP", "PARTIAL", "DANGLING", "EXEMPT"):
             self.assertIn(word, text)
         self.assertIn("test_x.py", text)
 
@@ -151,6 +154,68 @@ class RenderAndExitTests(unittest.TestCase):
             empty.mkdir()
             self.assertEqual(U.main(["--tests", str(tests), "--workflows", str(empty)]), 0)
             self.assertEqual(U.main(["--tests", str(tests), "--workflows", str(empty), "--strict"]), 1)
+
+
+SCRIPT = Path(U.__file__).resolve()
+EARLY = """
+class First(unittest.TestCase):
+    def test_first(self): pass
+if __name__ == "__main__":
+    unittest.main()
+class Later(unittest.TestCase):
+    def test_later(self): pass
+"""
+
+
+class PartialCollection(unittest.TestCase):
+    def fixture(self, source=EARLY, command="python3 tests/test_a.py"):
+        f = Fixture({"test_a.py": source}, {"ci.yml": command + "\n"})
+        self.addCleanup(f.close)
+        return f
+
+    def test_a_green_direct_command_really_collects_only_one_of_two_tests(self):
+        f = self.fixture()
+        direct = subprocess.run([sys.executable, str(f.tests / "test_a.py")],
+                                capture_output=True, text=True)
+        self.assertEqual(direct.returncode, 0)
+        self.assertIn("Ran 1 test", direct.stderr)
+        spec = importlib.util.spec_from_file_location("fixture_tests", f.tests / "test_a.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        self.assertEqual(unittest.defaultTestLoader.loadTestsFromModule(module).countTestCases(), 2)
+        problem = f.result()["partial"]
+        self.assertEqual(problem[0]["later_test_classes"], ["Later"])
+
+    def test_module_form_imports_the_guarded_file_and_is_not_partial(self):
+        f = self.fixture(command="python3 -m unittest tests.test_a")
+        self.assertEqual(f.result()["partial"], [])
+
+    def test_a_runner_below_all_classes_is_not_partial(self):
+        guard = 'if __name__ == "__main__":\n    unittest.main()\n'
+        f = self.fixture(EARLY.replace(guard, "") + "\n" + guard)
+        self.assertEqual(f.result()["partial"], [])
+
+    def test_a_runner_inside_an_uncalled_helper_is_not_an_early_call(self):
+        f = self.fixture("def helper():\n    unittest.main()\n" + EARLY.replace(
+            'if __name__ == "__main__":\n    unittest.main()\n', ""))
+        self.assertEqual(U.early_unittest_runner(f.tests / "test_a.py"), None)
+
+    def test_a_comment_or_string_is_not_a_runner_call(self):
+        f = self.fixture('note = "unittest.main()"\n# unittest.main()\n' + EARLY.replace(
+            'if __name__ == "__main__":\n    unittest.main()\n', ""))
+        self.assertEqual(U.early_unittest_runner(f.tests / "test_a.py"), None)
+
+    def test_cli_reports_partial_and_strict_fails_while_default_remains_report_only(self):
+        f = self.fixture()
+        args = [sys.executable, str(SCRIPT), "--tests", str(f.tests),
+                "--workflows", str(f.workflows), "--json"]
+        default = subprocess.run(args, capture_output=True, text=True)
+        strict = subprocess.run(args + ["--strict"], capture_output=True, text=True)
+        self.assertEqual(default.returncode, 0)
+        self.assertEqual(strict.returncode, 1)
+        self.assertEqual(json.loads(strict.stdout)["partial"][0]["test"], "test_a.py")
+        self.assertIn("Later", U.render(f.result()))
+        self.assertIn("PARTIAL", U.render(f.result()))
 
 
 if __name__ == "__main__":
