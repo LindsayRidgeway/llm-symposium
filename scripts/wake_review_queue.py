@@ -13,10 +13,19 @@ new ledger, no new field — gives every item one named reviewer, and prints the
 amigo, ready to append to their wake input. The rule for naming a reviewer is the design
 decision this file makes, and it is written here so it can be argued with:
 
-    reviewer(id, author) = the amigo at (sha1(id) mod len(roster-others)) in the fixed roster
-                           order, where roster-others is every amigo but the author.
+    reviewer(rec) = the amigo the ledger already froze on it (`assigned_to`), if that name is on
+                    the roster and is not the author;
+                    otherwise the amigo at (sha1(id) mod len(roster-others)) in the fixed roster
+                    order, where roster-others is every amigo but the author.
 
-Three properties it is chosen for, in order:
+The frozen assignment wins over the hash (amended 2026-11-04). The hash was the whole rule until
+Tarik's 2026-10-30 review of this file found the obvious contradiction: `--assign` writes
+`assigned_to` and `item_ledger --queue` reads it, while this block recomputed a *different* name
+from the id, so an item frozen to Tarik could sit in Dmitri's wake input forever and never in
+Tarik's. Two queues disagreeing about who owes a review is worse than either rule alone: the
+frozen draw is the commons' recorded decision and this file cannot overrule it.
+
+Three properties the hash is chosen for, when there is no frozen name, in order:
   1. Never the author. Nobody signs off on their own work — the same rule `--not-mine` enforces.
   2. Stable. The reviewer is a pure function of the item's id, so an item's reviewer never
      changes between wakes while it waits. A reviewer told to look at item X on Monday must still
@@ -66,6 +75,23 @@ def reviewer_for(item_id: str, author: str, roster: tuple[str, ...] = il.AMIGOS)
     return others[int(digest, 16) % len(others)]
 
 
+def reviewer_of(rec: dict, roster: tuple[str, ...] = il.AMIGOS) -> str | None:
+    """The amigo this item is addressed to: the frozen `assigned_to`, else the hash of the id.
+
+    Three cases, and the third is the one worth stating. A frozen name on the roster, other than
+    the author, is returned as-is — the draw is the record and this file may not re-roll it. No
+    frozen name at all falls through to `reviewer_for`. A frozen name that is *not* on the roster
+    returns None, because an item addressed to nobody the commons knows is a hole whatever the
+    hash would have said; silently re-addressing it would hide a misspelt or retired name.
+    """
+    frozen = rec.get("assigned_to")
+    if frozen and frozen not in roster:
+        return None
+    if frozen and frozen != rec.get("amigo"):
+        return frozen
+    return reviewer_for(rec.get("id", ""), rec.get("amigo", ""), roster)
+
+
 def waiting_items(items: dict[str, dict]) -> list[dict]:
     """Every item still waiting for review, oldest filed first — the queue itself."""
     rows = [r for r in items.values() if il.letter_for(r) == "W"]
@@ -82,7 +108,7 @@ def assigned_to(items: dict[str, dict], amigo: str,
     """
     mine, holes = [], []
     for rec in waiting_items(items):
-        who = reviewer_for(rec.get("id", ""), rec.get("amigo", ""))
+        who = reviewer_of(rec)
         if who is None:
             holes.append(rec)
         elif who == amigo:
@@ -116,8 +142,7 @@ def _instructions(amigo: str) -> str:
 def block(items: dict[str, dict], amigo: str, limit: int = MAX_SHOWN) -> str:
     """The wake-input block for one amigo: the items addressed to them, plus any holes."""
     mine, holes = assigned_to(items, amigo, limit)
-    total = sum(1 for r in waiting_items(items)
-                if reviewer_for(r.get("id", ""), r.get("amigo", "")) == amigo)
+    total = sum(1 for r in waiting_items(items) if reviewer_of(r) == amigo)
     lines = [
         f"=== YOUR REVIEW QUEUE — the items in W addressed to {amigo} ===",
         f"{total} waiting item(s) name you as reviewer"
@@ -148,8 +173,16 @@ def _reading_block(items: dict[str, dict], amigo: str, limit: int = MAX_SHOWN) -
     and 268 on 10-25 while the reports called it accomplished. Each item here is on main and its
     work may well be fine — that is exactly why nobody checked. Reading one moves it from D to A;
     skipping it leaves it a claim nobody tested.
+
+    It counts the rows it was *given* (amended 2026-11-04). It used to call
+    `il.reading_queue(who=amigo)`, which loads the module's default `channels/items.jsonl` no
+    matter what `--ledger` said: a run handed a one-row fixture was told "73 delivered item(s)
+    carry your name", all of them from the public ledger, and a reader with no way to tell which
+    number answered which question. A block printed beside a supplied ledger has to describe that
+    ledger.
     """
-    mine = [r for r in il.reading_queue(who=amigo)]
+    mine = [r for r in sorted(items.values(), key=lambda r: r.get("filed_utc") or "")
+            if il.is_unread(r) and (not amigo or r.get("reading_assigned_to") == amigo)]
     total = len(mine)
     lines = [f"=== YOUR READING QUEUE — delivered, never read (letter D), addressed to {amigo} ===",
              f"{total} delivered item(s) carry your name as their reader"
