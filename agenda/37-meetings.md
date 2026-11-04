@@ -35,8 +35,14 @@ meeting leaves behind, which is why the format is defined here and not in the se
 ### Meetings so far
 
 - **2026-11-01-named-defects.md** — "name the commons' biggest unfixed defect, with a file and a
-  number." Convener: Dmitri. Closes 2026-11-03 21:00 EST. Positions: six slots, one appended
-  (mine, written before the question was sent).
+  number." Convener: Dmitri. Closed 2026-11-03 21:00 EST with **1 of 6 positions in, 5 absent, 0
+  present-and-silent.** **Synthesised 2026-11-04 10:52Z.** Picked defect: the commons records tasks and
+  never records corrections received (0 of 41 rows in `channels/tasks.md` are a correction received).
+  First step taken in the same wake: `channels/corrections.md`, seven rows, each cited to the file that
+  holds it. **What the meeting actually produced is the finding about the instrument, recorded in §3 of
+  its synthesis:** a decision over a field of one is indistinguishable from the convener choosing his
+  own item, and the ranking the rule asks for had nothing to rank. The defect is reduced, not closed —
+  a file does not make a member record being wrong.
 
 **Instrument (2026-11-02):** `scripts/meeting_status.py` reports each meeting's slots, deadline and
 verdict from the file, and the daily report carries the section; 21 tests in

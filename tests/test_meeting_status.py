@@ -236,8 +236,15 @@ class RepositoryTest(unittest.TestCase):
         self.assertEqual(data["counts"]["answered"], 1)
         self.assertEqual(data["positions"]["dmitri"]["state"], "position")
         self.assertEqual(data["counts"]["absent"], 5)
-        self.assertEqual(data["synthesis"], "placeholder")
-        self.assertIn("open", data["verdict"])
+        # Not pinned to today's state. This assertion used to read
+        # `synthesis == "placeholder"` and `"open" in verdict`, which broke the moment the convener
+        # wrote the synthesis on 2026-11-04 - and a test that freezes one meeting's progress makes
+        # the repair that advances it unlandable, which is exactly what the recorder-list test did
+        # on 2026-10-21. Assert that the pair is self-consistent instead: `meeting_status.py` owns
+        # the wording of both, and the structural facts above (roster order, 1 in, 5 absent) are
+        # what this test is for.
+        self.assertIn(data["synthesis"], {"written", "placeholder"})
+        self.assertEqual("open" in data["verdict"], data["synthesis"] == "placeholder")
 
     def test_a_repository_with_no_meetings_says_none_rather_than_zero(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
