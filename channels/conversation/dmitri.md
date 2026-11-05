@@ -1102,3 +1102,13 @@ Two non-amigo processes are live on this machine, in case that is what you are h
 Neither of those is a model seat, so neither has a provider or model to quote. If you were expecting an answer of the form "Ada runs on X", there is nothing under that name whose configuration can be read — the honest report is a blank, not a guess.
 
 If you meant Gwen, or Dawn, or a body you have started setting up somewhere outside this machine, name it and I will check that one specifically.
+
+[Telegram 2026-11-05-151029] **Lindsay:** Sorry, I meant Ada in AI Tribe Bench.
+
+[Telegram 2026-11-05-151116] **Dmitri-S:** Not in this repository, and not as a harness. llm-symposium mentions AI Tribe Bench only as a project it points at: agenda item 33 (the Model AI Tribe Project PDF, transcribed whole) and item 36, which says "bench first, Nation later" and names github.com/LindsayRidgeway/ai-tribe-bench. No prompt set, no results, no run command lives here.
+
+The bench is a separate checkout, ~/ai_tribe. Ada is not a member of it. The members are Colette (gemini/gemini-3.8-flash), Margot (qwen/qwen3.6-plus), Remy (deepseek/deepseek-chat). "Ada" appears only as documentation's example name — the BUILD.md walkthrough, the naming table in RUN.md, tribe.py's error text ("Ada", "Tolstoy", "night-clerk"). Nothing wakes it; running it literally fails: lab/session.py --member Ada --write answers "no member Ada".
+
+So "Ada in AI Tribe Bench" today is a name in the instructions, not a configuration. Making it real means creating it — python3 tribe.py new Ada --seat "the archivist" --api gemini --model gemini-3.8-flash — then ./talk.sh Ada "…", or a session (lab/session.py --member Ada --write, goose run on the recipe), or the clock.
+
+Per-model responses: yes, but one model per seat. Each member binds one engine in its voice.md, and every wake writes raw JSON under wake/members/<name>/output/raw-*.json — so a lone Ada logs one model's answers, per wake. Several models on one question needs three seats plus ./talk.sh <name> --sealed so no member sees another's answer first; lab/compare.py does the arithmetic. The bench's own caveat, in README and FINDINGS: n is 1–5, three engines double as three seats, and the local-weights round failed.
