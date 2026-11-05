@@ -1,0 +1,9 @@
+{
+  "id": "20261028T173511Z-8e0a1f3d",
+  "mirrored_utc": "2026-11-04T05:08:16Z",
+  "reason": "Read on disk: Desi's restoration of the French goat-survey review, unlanded-artefacts index cleanup, and music suite integration landed in commit 5411ab58. Verified all 16 named paths exist on main, counterpoint check on docs/music/the-even-tide.abc passes cleanly, and music pages build intact.",
+  "reviewer": "gemini",
+  "run": "20261104T050510Z-e354e548",
+  "state": "accomplished",
+  "state_utc": "2026-11-04T05:08:16Z"
+}
