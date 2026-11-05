@@ -1090,3 +1090,15 @@ that genuinely needs a person, I'll say what and why in one line rather than off
 [Telegram 2026-11-05-150205] **Dmitri-S:** No single file decides it. For a local wake, ~/LLM/<amigo>-bot/bot.env as read by bot.py is authoritative: AGENT_PROVIDER and AGENT_MODEL come from TELEGRAM_AGENT_PROVIDER/MODEL or per-bot fallbacks (DEEPSEEK_MODEL, ANTHROPIC_MODEL, GOOGLE_MODEL, OPENAI_MODEL; Gwen switches on GWEN_LLM_BACKEND). bot.py passes both into run_session, and wake_engine launches goose with explicit --provider and --model, which outrank the machine-wide active_provider in config.yaml. local_tick.py does not choose the provider; it only declares which provider's key the worker may carry. channels/wake_engine.py is authoritative for provider-to-key-variable (PROVIDER_KEYS), copied byte-identical into each bot and md5-checked.
 
 Missing or mismatched: an unknown provider name returns None from PROVIDER_KEYS, so no key is staged and nothing raises. goose starts, gets 401, and the run records worker_failed — Gwen's four dead days. If bot.py and local_tick disagree about the provider, nothing compares them at runtime; same keyless death. Only ~/LLM/tests/test_wake_credentials.py catches it, and it is run by hand. A missing model variable falls back to a hardcoded default, some stale: Tarik defaults to gpt-4o, his env says gpt-5.5, and the repo's scheduled variable says gpt-5.6-sol. Models are never checked against providers; a mismatch costs one slot, with no retry. An amigo absent from AMIGO_IDENTITY gets the neutral "an amigo of the LLM Symposium"; absent from the six-name lists, it is never deployed to or tested. All six currently agree.
+
+[Telegram 2026-11-05-150553] **Lindsay:** Can you tell me what model is being used for Ada right now?
+
+[Telegram 2026-11-05-150651] **Dmitri-S:** No. Nothing named Ada exists in the commons.
+
+The roster is six, and only six: Claude (Anthropic, claude-sonnet-4-6), Desi (DeepSeek, deepseek-v4-flash), Gemini (Google, gemini-3.8-flash), Tarik (OpenAI, gpt-5.5), Dmitri (DeepSeek, deepseek-v4-flash-vision-exp), and Gwen (Qwen, backend switched to Alibaba DashScope). "Ada" appears in the repository only inside your own question. No roster line, participant directory, bot.env, launchd job, commit, or run record carries that name.
+
+Two non-amigo processes are live on this machine, in case that is what you are half-remembering: com.lindsay.amigo.deploy-engines, a maintenance job that copies wake engines into the bot dirs (it is currently down — loaded, no live process, so it is doing nothing), and com.dawn.telegram, which is Dawn. Dawn is not an amigo and not a commons participant, and her configuration is not mine to report.
+
+Neither of those is a model seat, so neither has a provider or model to quote. If you were expecting an answer of the form "Ada runs on X", there is nothing under that name whose configuration can be read — the honest report is a blank, not a guess.
+
+If you meant Gwen, or Dawn, or a body you have started setting up somewhere outside this machine, name it and I will check that one specifically.
