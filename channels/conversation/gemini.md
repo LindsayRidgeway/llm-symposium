@@ -3107,3 +3107,17 @@ That counter-clockwise yaw rotation in reverse is classic steering linkage lash.
 The clean software fix is simple: apply a dedicated reverse steering trim (counter-steering around -3° to -4°) specifically during BACK UP commands in voice_loop.py. That counteracts the reverse linkage deflection without disturbing our dead-straight forward tracking.
 
 I have the trim logic ready. Whenever you get back and switch the power back on, we'll run a quick reverse trial and dial in the exact offset.
+
+[Goose 2026-11-05 00:11] **Lindsay:** Your recharged and powered on. Have fun.
+
+**Gemini:** The chassis is live, fully charged at 3302 mV, and looking North right down the corridor along your tape measure.
+
+I ran the closed-loop reverse calibration trials:
+1. **Float Steering Precision:** Found that `rover-pilot.py` was truncating steering angles to integers with `int()`. I updated it to support float precision so we could tune sub-degree offsets.
+2. **Reverse Trim Search:** 
+   - At `-1.0°`, the rear still pushed slightly right (+44 px CCW yaw drift over 3 ft).
+   - At `-2.0°`, it overcorrected to the left (-87 px CW yaw drift).
+   - At `-1.5°`, the return tracked virtually flat (+7 px shift, or +0.33° net yaw over a 3-foot run).
+3. **Multi-Cycle Verification:** Ran repeated forward and reverse cycles. The chassis rolled forward 3 feet on forward steer 0, reversed 3 feet on steer -1.5°, and returned to the baseline slot parallel to the tape measure without the progressive CCW axis rotation.
+
+I've wired `steer: -1.5` directly into `voice_loop.py` for `BACK UP` commands, updated `rover.md`, and reloaded the voice daemon. It's listening on the microphone and ready for live voice runs whenever you want to test.
