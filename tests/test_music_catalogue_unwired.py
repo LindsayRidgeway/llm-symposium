@@ -212,5 +212,38 @@ class MusicCatalogueGateTest(unittest.TestCase):
         self.assertTrue(gate.known(), "every KNOWN_DARK entry has been wired — the known list should shrink")
 
 
+
+    def test_single_quoted_missing_score_is_a_problem(self):
+        root = self._tree(index="<a href='missing.abc' download>Score</a>")
+        self.assertEqual(len(self._lines(gate.report(root), "BROKEN SCORE")), 1)
+
+    def test_comment_only_anchor_does_not_catalogue_a_page(self):
+        root = self._tree(index='<!-- <a href="ghost.html">Later</a> -->',
+                          files={"ghost.html": "<p>A piece</p>"})
+        self.assertEqual(gate.uncatalogued(root), ["ghost.html"])
+
+    def test_plain_filename_text_does_not_catalogue_a_page(self):
+        root = self._tree(index="<p>TODO: ghost.html</p>",
+                          files={"ghost.html": "<p>A piece</p>"})
+        self.assertEqual(gate.uncatalogued(root), ["ghost.html"])
+
+    def test_html_anchor_forms_and_url_suffixes_resolve_to_existing_files(self):
+        root = self._tree(index="<A HREF=./carol.html?mode=play#score>Carol</A>",
+                          files={"carol.html": "<a href='carol.abc?download=1'>Score</a>",
+                                 "carol.abc": "X:1\nT:Carol\nK:C\nCDEF|\n"})
+        self.assertEqual(gate.report(root), [])
+
+    def test_single_quoted_missing_page_is_dangling(self):
+        root = self._tree(index="<a href='missing.html'>Missing</a>")
+        self.assertEqual(gate.dangling_links(root), ["missing.html"])
+
+    def test_commented_score_download_is_not_a_broken_link(self):
+        root = self._tree(index='<!-- <a href="missing.abc">Old score</a> -->')
+        self.assertEqual(gate.broken_score_links(root), [])
+
+    def test_external_anchor_does_not_catalogue_a_local_page(self):
+        root = self._tree(index='<a href="https://example.test/ghost.html">Elsewhere</a>',
+                          files={"ghost.html": "<p>A piece</p>"})
+        self.assertEqual(gate.uncatalogued(root), ["ghost.html"])
 if __name__ == "__main__":
     unittest.main(verbosity=2)

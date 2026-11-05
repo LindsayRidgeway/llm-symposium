@@ -20,7 +20,7 @@ catalogue linked it. That is why this is a script and not a third manual repair.
 What it checks
 --------------
 1. **Reachability.** Every top-level ``*.html`` in ``docs/music/`` is either catalogued (its filename
-   appears in ``index.html``) or listed in ``NOT_PIECES`` below with the reason it is not a catalogue
+   is linked by a local anchor in ``index.html``) or listed in ``NOT_PIECES`` below with the reason it is not a catalogue
    entry. The default is failure; an exemption is an argument, not a silence.
 
 2. **The audition button points at a tune that exists.** Every ``data-tune="…"`` on a catalogue card
@@ -60,6 +60,8 @@ import argparse
 import re
 import sys
 from pathlib import Path
+from html.parser import HTMLParser
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 MUSIC = ROOT / "docs" / "music"
@@ -97,18 +99,55 @@ def _text(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
+class _Anchors(HTMLParser):
+    """Collect real anchor hrefs; comments and script text are not links."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.hrefs = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            self.hrefs.extend(value for name, value in attrs
+                              if name == "href" and value is not None)
+
+
+def local_links(text: str, suffix: str) -> set[str]:
+    """Local top-level filenames in actual anchors, with URL query/fragment removed.
+
+    Nested paths and external URLs are outside this catalogue's top-level file contract.
+    This does not certify browser rendering, CSS visibility or JavaScript-generated links.
+    """
+    parser = _Anchors()
+    parser.feed(text)
+    found = set()
+    for href in parser.hrefs:
+        try:
+            url = urlsplit(href.strip())
+        except ValueError:
+            continue
+        if url.scheme or url.netloc:
+            continue
+        path = unquote(url.path)
+        while path.startswith("./"):
+            path = path[2:]
+        if re.fullmatch(r"[A-Za-z0-9_.-]+" + re.escape(suffix), path):
+            found.add(path)
+    return found
+
+
 def uncatalogued(root: Path | None = None) -> list[str]:
     """Piece pages present on disk that the catalogue never links."""
     music = Path(root) / "docs" / "music" if root else MUSIC
     catalogue = music / "index.html"
     if not catalogue.exists():
         raise ValueError(f"no catalogue at {catalogue}")
-    body = _text(catalogue)
+    links = local_links(_text(catalogue), ".html")
     missing = []
     for page in sorted(music.glob("*.html")):
         if page.name in NOT_PIECES:
             continue
-        if page.name not in body:
+        if page.name not in links:
             missing.append(page.name)
     return missing
 
@@ -148,7 +187,7 @@ def dangling_links(root: Path | None = None) -> list[str]:
     music = (Path(root) / "docs" / "music") if root else MUSIC
     body = _text(music / "index.html")
     dangling = []
-    for href in sorted(set(re.findall(r"href=\"([A-Za-z0-9_.\-]+\.html)\"", body))):
+    for href in sorted(local_links(body, ".html")):
         if not (music / href).exists():
             dangling.append(href)
     return dangling
@@ -159,7 +198,7 @@ def broken_score_links(root: Path | None = None) -> list[str]:
     music = (Path(root) / "docs" / "music") if root else MUSIC
     broken = []
     for page in sorted(music.glob("*.html")):
-        for href in sorted(set(re.findall(r"href=\"([A-Za-z0-9_.\-]+\.abc)\"", _text(page)))):
+        for href in sorted(local_links(_text(page), ".abc")):
             if not (music / href).exists():
                 broken.append(f"{page.name} -> {href}")
     return broken
