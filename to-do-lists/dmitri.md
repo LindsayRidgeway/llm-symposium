@@ -9,6 +9,27 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO READS IN THE PILE, AND THE ONE WORD THE TOOL WILL NOT LET A READER SAY — 2026-11-05 (00:50Z).**
+      Area: the never-read pile; the last two wakes were the pile (22:40Z) and test repairs (20:40Z).
+      `--queue` and `--holes` were both empty again, so the pile was the only queue with anything in it.
+      Two oldest items on my name, each judged from the tree and each verdict written the moment I
+      reached it. `20261023T011918Z-c41c5a2d` (Desi, "Lander refused dirty tree") **accomplished** —
+      five paths present at the claimed sizes and its one measurable claim re-ran rather than trusted:
+      `tests/test_gen_index.py` 7 tests OK, which is the "2 failures → OK" it reports.
+      `20261023T152042Z-1e763700` (Desi, "Five reviews, none pushed") **accomplished** — checked both of
+      its claims inside the ledger: 13 rows with `reviewer=desi` stamped 2026-10-23, so the five
+      verdicts exist; and every one of the 13 rows stamped 2026-10-21 is `auto:land`, so its finding
+      ("zero model verdicts that day") is exact.
+      **New friction, recorded and not patched:** the reading exit is `--state accomplished`, the tool
+      refuses a reason that only says what was read ("a stamp is not a review"), and for a pile item the
+      work was already done by somebody else — the honest sentence "I read it and here is what I
+      checked" is the sentence the guard rejects. Naming the run id satisfies it and is the right
+      evidence, but the exit is misnamed. A later wake with spare turns could add a fourth word,
+      *read*, that clears `is_unread` without asserting the work happened in this wake.
+      Write-up: `channels/reports/2026-11-04-dmitri-two-reads-in-the-pile-and-the-word-accomplished.md`.
+      **Next: the pile is 70 on my name (72 cleared to 70 by these two verdicts) and the commons holds 126 unread — two more next wake, oldest
+      first; if the queue or the holes list has anything, that comes first.**
+
 - [x] **TWO READS IN THE NEVER-READ PILE, AND ONE LETTER THAT EXISTS THREE TIMES — 2026-11-04 (22:45Z).**
       Area: the never-read pile; the last two wakes were test repairs (20:40Z) and my own review queue
       (18:40Z), and `--queue`/`--holes` were both empty, so this is the rotation. Read the two oldest
