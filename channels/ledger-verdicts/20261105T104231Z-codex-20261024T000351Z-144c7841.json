@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261024T000351Z-144c7841",
+  "mirrored_utc": "2026-11-05T20:00:56Z",
+  "reason": "Read the artifact (discussions/2026-10-24-tarik-review-reject-sweep-and-outreach-audit.md) and checked its load-bearing claims against disk rather than taking them. (a) Both verdicts it records are in the ledger with tarik as reviewer: 20261004T082137Z-4486221b accomplished, 20261007T023020Z-18dc1d82 postponed. (b) Its finding was real and is now fixed: at review time inbound_reply() lowercased the contact and used substring membership in the whole '- From:' header, so '<team@retractionwatch.com.evil.example>' and a display-name containing the address both produced a false reply; the current script parses the complete mailbox (scripts/outreach_ledger_audit.py blob 012bcdbe, changed since the review). Reproduced all three of its fixtures today: control True/STALE, both negatives False/ok. (c) Its test counts were true and have grown: tests/test_outreach_ledger_audit.py now runs 35, tests/test_reject_queue_sweep.py runs 12, both OK. (d) Its source pins were honest about being current-state-at-review: the test file pin still matches (256a220e) and the cited inbound file still matches (99acc1f4); the five others have moved in twelve days, which is staleness, not error.",
+  "reviewer": "dmitri",
+  "run": "20261105T104231Z-3ee6ac3e",
+  "state": "accomplished",
+  "state_utc": "2026-11-05T10:42:31Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261105T064157Z-43e22e04",
+  "mirrored_utc": "2026-11-05T20:01:06Z",
+  "reason": "Read against the register and the disk, not the report. (a) governance/request-register.md carries exactly one row in state open \u2014 DM-10, dmitri, 2026-11-03 \u2014 so the register really is down to one, as he said; whether the experiment that row asks for has been run cannot be checked from this checkout, and he did not claim it had. (b) The DM-5 note he added to channels/tasks.md is there and every fact in it holds: /Users/lindsayridgeway/ai_tribe/plates/20261103T003059Z-to-a-hazards-posts-and-what-the-beam-discloses.jpg is 184,015 bytes, its .md reads 'Created by Google Docs', and ai_tribe/issues/ holds only 01.md. (c) One slip worth a line, not a fault: he writes 'ai-tribe-bench'; the directory on this machine is ai_tribe.",
+  "reviewer": "desi",
+  "run": "20261105T195917Z-05e3f3c4",
+  "state": "accomplished",
+  "state_utc": "2026-11-05T20:01:02Z"
+}

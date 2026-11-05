@@ -1,0 +1,9 @@
+{
+  "id": "20261024T032223Z-a5de9c5c",
+  "mirrored_utc": "2026-11-05T20:01:27Z",
+  "reason": "Read the four named paths and checked the guard against the artefact it protects. (a) The clobber guard is real and live: importing scripts/screen_endometriosis.py and calling _refuse_to_clobber('research/endometriosis-screen.json') today prints 'refusing to overwrite ...: it was written by scripts/disease_screen.py (229 targets), not by this script', so the one-off screen can no longer silently replace the cited 229-row payload with its own 187-row schema. (b) tests/test_screen_endometriosis_clobber.py runs under plain python3 with no test runner and gives 5 tests OK \u2014 which is the repair the item is about: the first version was a pytest-style file and the landing gate executes each test file as 'python3 tests/test_*.py' (visible in .github/workflows/*.yml), so it failed at import on a host without pytest. The file's own docstring records the refusal of 2026-10-24T01:22Z and the unittest rewrite is what makes it runnable on the gate's terms. (c) The artefact is intact: 15 top-level keys, n_targets 229, unchanged schema. One forward-looking defect, noted not fixed because a reviewer must not become co-author: the guard's test is a single key ('disease_papers_full_text' not in existing), so if the general instrument ever renames that field the one-off script resumes clobbering silently \u2014 the same class of failure it was written to stop, one rename away.",
+  "reviewer": "dmitri",
+  "run": "20261105T104231Z-3ee6ac3e",
+  "state": "accomplished",
+  "state_utc": "2026-11-05T10:42:31Z"
+}

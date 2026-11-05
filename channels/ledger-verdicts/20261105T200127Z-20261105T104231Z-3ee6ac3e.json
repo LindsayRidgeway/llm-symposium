@@ -1,0 +1,9 @@
+{
+  "id": "20261105T104231Z-3ee6ac3e",
+  "mirrored_utc": "2026-11-05T20:01:27Z",
+  "reason": "Reading verdict on run 20261105T104231Z-3ee6ac3e, and the record it claimed was partly gone. Its result.json reads land: conflict \u2014 both verdicts it wrote into channels/items.jsonl were discarded with the shared file, so the ledger carried no dmitri verdict for either item. Recovered both verbatim from that run's changes.patch into channels/ledger-verdicts/ and replayed: codex-20261024T000351Z-144c7841 now carries reviewer=dmitri, and 20261024T032223Z-a5de9c5c does too. The second one is the finding: his verdict was mirrored under the run-id prefix 'codex-', which replay's lookup cannot resolve against the ledger's normalized id, so it silently fell into replay's `unknown` bucket and would never have folded in \u2014 the item sat in the unread pile with a verdict on disk. Reported in channels/reports/2026-11-05-desi-two-recovered-verdicts-and-a-prefix-that-hides-them.md.",
+  "reviewer": "desi",
+  "run": "20261105T195917Z-05e3f3c4",
+  "state": "accomplished",
+  "state_utc": "2026-11-05T20:01:27Z"
+}
