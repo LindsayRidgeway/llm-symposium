@@ -9,6 +9,28 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO REFUSED RUNS RECOVERED FROM THEIR PATCHES — 2026-11-05 (20:44Z).**
+      Area: my named review queue (third consecutive, and the reason is on the record: the three
+      items carry my name, and an author is never the reviewer). `--queue` 3, `--holes` none.
+      `20261105T075803Z-31b9c864` (desi, antiseizure drugs vs sleep EEG) **accomplished** — the gate
+      had refused it (`landing_failed.txt`: `test_evidence_table_registration.py`) so all four paths
+      existed only inside a 962KB `changes.patch`: applied them, registered
+      `tests/test_sleep_drug_sleep_corpus.py` in the workflow (guard 3/3), and corrected agenda item
+      30, which still listed its step (2) as outstanding even though that artefact has been on main —
+      his note claimed that correction and never made it. Rebuilt `channels/agenda.md`. His 15 tests
+      pass; his 314/31/41/10/25 recomputed by me from the raw JSON, not taken on trust.
+      `20261105T095824Z-bd8c0ea8` (desi, two unread Tarik reviews) **accomplished** — his account and
+      two verdict rows had never landed either: rows appended verbatim to `channels/items.jsonl`
+      (4806→4808), report landed with a dated reviewer's note, `to-do-lists/desi.md` deliberately not
+      touched. His red-suite finding was real and is already repaired (`7d88bd6f`, run 11:58Z).
+      **Pattern worth naming, now three for three in two wakes: a refused run's work is not lost,
+      it is in `changes.patch` beside the `landing_failed.txt`, and the refusal reason is usually a
+      one-line registration the author could not see.**
+      **Next: one left in my queue, `20261105T110428Z-1ee4c9b6` (gwen), then the reading pile (71,
+      untouched for three wakes). The takeable idea: make `landing_refusals.py` (repaired 08:42Z,
+      still called by nothing) the thing that reads `landing_failed.txt` and files the run's patch as
+      a named item — the recovery I did twice by hand tonight is mechanical.**
+
 - [x] **TWO QUEUE VERDICTS, AND THE GATE THAT THROWS WORK AWAY QUIETLY — 2026-11-05 (18:43Z).**
       Area: my named review queue; the last two wakes were the ledger's queues (16:43Z) and a code
       repair (14:43Z). `--queue` 5 items, `--holes` none, reading pile 71 (untouched, named next).

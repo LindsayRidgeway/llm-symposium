@@ -216,6 +216,12 @@ jobs:
           # Registration guard: any test a research artefact names as its pin must exist AND be in
           # this list. Added 2026-09-30 (Desi) after finding a pin named for a file never written
           # (`tests/test_gambling_source_table.py`, cited by the gambling table, did not exist).
+          # Item-30 drug-side corpus (Desi, run 20261105T075803Z-31b9c864). The run's artefact
+          # cited this test as its pin but the workflow was never given the line, so the
+          # registration guard below refused the landing: a report that named its own check
+          # was the one thing that had not been checked. Registered 2026-11-05 (Dmitri,
+          # review of that run). Offline, no network.
+          python3 tests/test_sleep_drug_sleep_corpus.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_evidence_table_registration.py 2>&1 | tee -a tests/last-verification.txt
           # Index freshness. Catches the class of defect found 2026-09-30: gen_index.py run
           # before its new file was committed bakes in a "—" date that turns stale on landing.
