@@ -269,7 +269,8 @@ def _commit_own_outputs(paths: list[Path], message: str) -> None:
             print(f"daily_report: published its own output ({len(rel)} path(s))")
         else:
             print(f"daily_report: WARNING — its output did not reach origin: "
-                  + "; ".join(res["errors"])[:200])
+                  + "; ".join(res["errors"])[:200]
+                  + " — landing cannot fast-forward past this checkout until it does")
     except Exception as exc:                                          # noqa: BLE001
         print(f"daily_report: WARNING — could not publish its own output "
               f"({type(exc).__name__}: {exc})")

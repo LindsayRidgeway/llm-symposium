@@ -43,49 +43,77 @@ class TestHold(unittest.TestCase):
 
 
 class TestTheRecordIsCommitted(unittest.TestCase):
-    """An uncommitted record blocks every amigo's delivery: the lander refuses a dirty checkout, so
-    a file this relay writes and does not commit turns into a silent stall. That happened for two
-    days (2026-10-06 to 08) with the daily report's own output, which is why the same guard is
-    pinned here."""
+    """The record a relay writes is handed to the one publisher, and only that record.
+
+    The old docstring here said an uncommitted record "blocks every amigo's delivery: the lander
+    refuses a dirty checkout". That stopped being true on 2026-11-02, when the lander moved into its
+    own worktree; what a dirty or ahead checkout still costs is the lander's final fast-forward.
+    The same commit that noticed this (c349e96d) moved ``tell_human`` and ``daily_report`` onto
+    ``channels.record_push.commit_and_publish``, which commits and pushes in a throwaway worktree —
+    and left these two tests replacing ``subprocess.run`` to watch for git calls that are no longer
+    made here. They went red on main and stayed red for three days, invisibly: the lander compares a
+    run's diff to a baseline that was already failing.
+
+    So the seam is the function the relay actually calls. What is pinned here is what it hands over
+    and what it says when the hand-over fails; the git mechanics are pinned for real against
+    throwaway repositories in ``tests/test_record_push.py`` and ``tests/test_script_publish.py``.
+    """
 
     def setUp(self):
         import tempfile
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
-        self.rec = Path(self.tmp.name) / "2026-10-08-outbound-desi-session.md"
+        self.root = Path(self.tmp.name).resolve()
+        (self.root / "channels" / "telegram").mkdir(parents=True)
+        self.rec = self.root / "channels" / "telegram" / "2026-10-08-outbound-desi-session.md"
         self.rec.write_text("a message\n", encoding="utf-8")
-        self.calls = []
 
-    def _commit(self, run, *paths):
+    def _commit(self, paths, result=None, raiser=None):
+        import contextlib
+        import io
+        from unittest import mock
         import scripts.tell_human as th
-        real = th.subprocess.run
-        th.subprocess.run = run
-        try:
-            import contextlib
-            import io
+        from channels import record_push
+        seen = {"called": False}
+
+        def fake(root, rel, msg, **kw):
+            seen.update(called=True, root=root, paths=list(rel), message=msg)
+            if raiser is not None:
+                raise raiser
+            return dict(result if result is not None
+                        else {"ok": True, "errors": [], "pushed": True})
+
+        with mock.patch.object(th, "REPO", self.root), \
+                mock.patch.object(record_push, "commit_and_publish", fake):
             with contextlib.redirect_stdout(io.StringIO()) as buf:
                 th._commit_own_outputs(list(paths), "record(telegram): desi")
-            return buf.getvalue()
-        finally:
-            th.subprocess.run = real
+        return buf.getvalue(), seen
 
-    def test_the_record_is_staged_then_committed(self):
-        from types import SimpleNamespace
+    def test_the_record_is_handed_to_the_publisher_and_nothing_else(self):
+        out, seen = self._commit([self.rec])
+        self.assertTrue(seen["called"])
+        self.assertEqual(seen["paths"], ["channels/telegram/2026-10-08-outbound-desi-session.md"])
+        self.assertEqual(seen["root"], str(self.root))
 
-        def run(argv, **kw):
-            self.calls.append(argv)
-            return SimpleNamespace(returncode=0, stdout="", stderr="")
-        self._commit(run, self.rec)
-        self.assertIn(str(self.rec), self.calls[0])
-        self.assertEqual(self.calls[1][:4], ["git", "-C", str(REPO), "commit"])
+    def test_a_missing_record_is_not_handed_over(self):
+        # The message has already gone; a relay that invents a path to commit is worse than one
+        # that writes nothing at all.
+        out, seen = self._commit([self.root / "channels" / "telegram" / "never-written.md"])
+        self.assertFalse(seen["called"])
+        self.assertNotIn("WARNING", out)
 
-    def test_a_git_failure_names_the_consequence_and_is_survived(self):
-        import subprocess as sp
+    def test_a_failed_publish_names_the_consequence_and_is_survived(self):
+        out, seen = self._commit(
+            [self.rec],
+            result={"ok": False, "errors": ["push: [rejected] (fetch first)"], "pushed": False})
+        self.assertIn("WARNING", out)
+        self.assertIn("push: [rejected]", out)
+        self.assertIn("fast-forward", out)
 
-        def run(argv, **kw):
-            raise sp.CalledProcessError(1, argv)
-        out = self._commit(run, self.rec)
-        self.assertIn("landing is blocked", out)
+    def test_a_publisher_that_raises_does_not_take_the_relay_down(self):
+        out, seen = self._commit([self.rec], raiser=OSError("no git here"))
+        self.assertIn("WARNING", out)
+        self.assertIn("no git here", out)
 
 
 if __name__ == "__main__":

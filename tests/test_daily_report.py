@@ -387,69 +387,105 @@ class TestTheInvitationsBlock(unittest.TestCase):
 
 
 class TestTheReportCommitsItsOwnOutput(unittest.TestCase):
-    """The lander refuses a dirty shared checkout, so output left uncommitted here is an outage,
-    not untidiness: nothing landed between 2026-10-06 and 2026-10-08 for exactly this reason, and
-    for 1.5 days before that. Pin that the report commits its own paths — only its own — and that
-    a git failure is reported and survived."""
+    """What the report hands the publisher: the paths it wrote, and nothing else.
+
+    History, because it explains why this class changed shape on 2026-11-05. Until 2026-11-02 it
+    pinned the git calls themselves — ``git add -- <path>`` then ``git commit`` — by replacing
+    ``subprocess.run``. Commit c349e96d then moved the report onto
+    ``channels.record_push.commit_and_publish``: a commit and a push made in a *throwaway worktree*,
+    because a commit made in this checkout and never pushed leaves it ahead of origin, which is the
+    state that makes every later fast-forward refuse. The tests kept asserting the old calls, so they
+    went red on main and stayed red for three days — 53 tests, one failure, one error — and the
+    lander could not see it, because it compares a run's diff to a baseline that was already red.
+
+    So the seam is now the function the report actually calls, and the property is what the old
+    class docstring said it was: publish the report's own output, only its own output, and survive a
+    git failure with the consequence named. The git mechanics behind that function — path-scoped
+    staging, an empty stage that is not a commit, a push that cannot move the shared checkout — are
+    pinned for real, against a throwaway repository, in ``tests/test_record_push.py``. Duplicating
+    them here would be a second copy of the mechanism, which is exactly what rotted.
+    """
 
     def setUp(self):
         self.dir = tempfile.TemporaryDirectory()
         self.addCleanup(self.dir.cleanup)
-        from scripts.daily_report import REPO
-        self.repo = REPO
-        self.ledger = Path(self.dir.name) / "items.jsonl"
+        self.root = Path(self.dir.name).resolve()
+        (self.root / "channels").mkdir()
+        self.ledger = self.root / "channels" / "items.jsonl"
         self.ledger.write_text("{}\n", encoding="utf-8")
-        self.calls = []
 
-    def _commit(self, run, *paths, message="report(daily): the day's counts, sent"):
-        from scripts.daily_report import _commit_own_outputs
-        real = dr_mod.subprocess.run
-        dr_mod.subprocess.run = run
-        try:
+    def _commit(self, paths, result=None, raiser=None,
+                message="report(daily): the day's counts, sent"):
+        """Run the report's publisher with the publishing replaced by a recorder.
+
+        ``commit_and_publish`` is imported *inside* the function, so patching it on
+        ``channels.record_push`` is the seam — and ``REPO`` is patched to a temporary root so the
+        paths under test are this test's own files, never the real checkout.
+        """
+        from unittest import mock
+        from channels import record_push
+        seen = {"called": False}
+
+        def fake(root, rel, msg, **kw):
+            seen.update(called=True, root=root, paths=list(rel), message=msg)
+            if raiser is not None:
+                raise raiser
+            return dict(result if result is not None
+                        else {"ok": True, "errors": [], "pushed": True})
+
+        with mock.patch.object(dr_mod, "REPO", self.root), \
+                mock.patch.object(record_push, "commit_and_publish", fake):
             with contextlib.redirect_stdout(io.StringIO()) as buf:
-                _commit_own_outputs(list(paths), message)
-            return buf.getvalue()
-        finally:
-            dr_mod.subprocess.run = real
+                dr_mod._commit_own_outputs(list(paths), message)
+        return buf.getvalue(), seen
 
-    def test_it_stages_and_commits_the_paths_it_is_given(self):
-        def run(argv, **kw):
-            self.calls.append(argv)
-            return SimpleNamespace(returncode=0, stdout="", stderr="")
-        self._commit(run, self.ledger)
-        self.assertEqual(self.calls[0], ["git", "add", "--", str(self.ledger)])
-        self.assertEqual(self.calls[1][:4], ["git", "commit", "-q", "-m"])
+    def test_it_hands_the_publisher_the_paths_it_was_given(self):
+        out, seen = self._commit([self.ledger])
+        self.assertTrue(seen["called"])
+        self.assertEqual(seen["paths"], ["channels/items.jsonl"])
+        self.assertEqual(seen["root"], str(self.root))
+        self.assertIn("published its own output", out)
 
-    def test_it_never_stages_a_path_it_was_not_given(self):
-        # A session's uncommitted writing must never be swept into the report's commit.
-        def run(argv, **kw):
-            self.calls.append(argv)
-            return SimpleNamespace(returncode=0, stdout="", stderr="")
-        self._commit(run, self.ledger)
-        for argv in self.calls:
-            if argv[1] == "add":
-                self.assertEqual(argv[3:], [str(self.ledger)])
+    def test_it_never_hands_over_a_path_it_was_not_given(self):
+        # A session's uncommitted writing must never be swept into the report's commit, even when
+        # it sits in the same directory tree and is equally dirty.
+        sibling = self.root / "channels" / "reports" / "daily.md"
+        sibling.parent.mkdir()
+        sibling.write_text("a session's work in progress\n", encoding="utf-8")
+        out, seen = self._commit([self.ledger])
+        self.assertEqual(seen["paths"], ["channels/items.jsonl"])
 
-    def test_a_path_that_does_not_exist_is_not_staged(self):
-        def run(argv, **kw):
-            self.calls.append(argv)
-            return SimpleNamespace(returncode=0, stdout="", stderr="")
-        self._commit(run, Path(self.dir.name) / "not-written.md")
-        self.assertEqual(self.calls, [])
-
-    def test_a_git_failure_is_reported_and_survived(self):
-        def run(argv, **kw):
-            raise subprocess.CalledProcessError(1, argv, stderr="index.lock exists")
-        out = self._commit(run, self.ledger)
-        self.assertIn("WARNING", out)
-        self.assertIn("landing is blocked", out)
-
-    def test_nothing_to_commit_is_not_a_warning(self):
-        def run(argv, **kw):
-            return SimpleNamespace(returncode=1, stdout="nothing to commit, working tree clean",
-                                   stderr="")
-        out = self._commit(run, self.ledger)
+    def test_a_path_that_does_not_exist_is_not_handed_over(self):
+        out, seen = self._commit([self.root / "channels" / "not-written.md"])
+        self.assertFalse(seen["called"])
         self.assertNotIn("WARNING", out)
+
+    def test_a_path_outside_the_repository_is_not_published(self):
+        outside = self.root.parent / (self.root.name + "-outside.md")
+        outside.write_text("not ours to publish\n", encoding="utf-8")
+        self.addCleanup(outside.unlink)
+        out, seen = self._commit([outside])
+        self.assertFalse(seen["called"])
+
+    def test_a_failed_publish_is_a_warning_that_names_the_consequence(self):
+        out, seen = self._commit(
+            [self.ledger],
+            result={"ok": False, "errors": ["push: [rejected] (fetch first)"], "pushed": False})
+        self.assertIn("WARNING", out)
+        self.assertIn("push: [rejected]", out)
+        self.assertIn("fast-forward", out)      # the consequence, not just the state
+
+    def test_nothing_to_publish_is_not_a_warning(self):
+        out, seen = self._commit([self.ledger],
+                                 result={"ok": True, "errors": [], "pushed": False})
+        self.assertNotIn("WARNING", out)
+
+    def test_a_publisher_that_raises_is_a_warning_and_the_report_survives(self):
+        # The report and the message have already been sent by the time this runs; a git failure
+        # that took the process down would lose the day's record entirely.
+        out, seen = self._commit([self.ledger], raiser=OSError("no git here"))
+        self.assertIn("WARNING", out)
+        self.assertIn("no git here", out)
 
 
 class TestReportHold(unittest.TestCase):
