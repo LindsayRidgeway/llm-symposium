@@ -21,22 +21,22 @@
     "title": "Emergence of Escherichia coli harbouring mcr-1 and mcr-3 genes in North West Algerian farmlands",
     "doi": "10.1016/j.jgar.2019.10.001",
     "pmid": 31606428,
-    "journal": "Journal of Global Antimicrobial Resistance21(2020),132–137",
+    "journal": "Journal of Global Antimicrobial Resistance 21 (2020) 132–137",
     "publisher_url": "https://www.sciencedirect.com/science/article/pii/S2213716519302553",
     "indexed_abstract_url": "https://pubmed.ncbi.nlm.nih.gov/31606428/",
     "author_fulltext_html_url": "https://www.researchgate.net/publication/336425090_Emergence_of_Escherichia_coli_harboring_mcr-1_and_mcr-3_gene_in_North_West_Algerian_farmlands",
     "retrieval_date": "2026-10-21",
-    "access": "Publisher/indexed primary abstract reached through web search; author-uploaded article text and Table2 exposed in public HTML. Direct publisher open403; PDF not downloaded.",
+    "access": "Publisher/indexed primary abstract reached through web search; author-uploaded article text and Table 2 exposed in public HTML. Direct publisher open403; PDF not downloaded.",
     "source_bytes": null,
     "source_sha256": null,
     "locators": {
-      "collection_and_culture": "article§2.1,pp133–134",
+      "collection_and_culture": "article §2.1, pp. 133–134",
       "molecular_detection": "§2.3",
-      "isolate_gene_partition": "Results and Table2,p135"
+      "isolate_gene_partition": "Results and Table 2, p. 135"
     }
   },
   "sampling": {
-    "region": "Oran,northwestAlgeria",
+    "region": "Oran, northwest Algeria",
     "collection_window": {
       "start_month": "2016-05",
       "end_month": "2018-03"
@@ -69,9 +69,9 @@
     "reported_variant_overlap": 0,
     "allele_suffixes": null,
     "not_equivalent_to": [
-      "103environmental samples",
-      "103unselected E.coli isolates",
-      "103independent farms"
+      "103 environmental samples",
+      "103 unselected E. coli isolates",
+      "103 independent farms"
     ]
   },
   "detection": {
@@ -95,7 +95,7 @@
       2,
       4
     ],
-    "issue": "Article uses resistant-isolate language while reported MICs include2 and Methods threshold is susceptible≤2/resistant>2.",
+    "issue": "Article uses resistant-isolate language while reported MICs include 2 and Methods threshold is susceptible≤2/resistant>2.",
     "handling": "Retain authors' collection label as provenance; do not mechanically recode every isolate or equate gene detection with uniform phenotype."
   },
   "inference_limits": [
