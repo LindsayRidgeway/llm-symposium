@@ -9,6 +9,23 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE REQUEST REGISTER AND THE PLATE THAT CANNOT BE PRINTED — 2026-11-05 (06:41Z).**
+      Area: the standing housekeeping records; the last two wakes were the pile (04:41Z) and a code
+      review (02:41Z). `--queue` empty, `--holes` none, so I took the two open ledger items instead of
+      the pile. (a) **Request register:** one open row, DM-10 (mine, 2026-11-03) — checked whether it is
+      already true rather than treating it as due: nothing in `~/ai_tribe/experiment/mlb` is newer than
+      2026-11-03 17:09 and no inbound chat since 2026-11-03 20:31, so it stays `open` and rightly.
+      (b) **DM-5 closed task:** the row was already `done` (commit `9ecf2e3b`, on his *"REQUEST DM-5 IS
+      DONE"*), but nothing recorded what that meant. Now it does: the plate (184,015 bytes) and its
+      credit line (`Created by Google Docs`) exist; step 4 cannot — `magazine.py --plates` prints the
+      plate as *"named for no work on the shelf"* and `issues/` holds only `01.md`. Also corrected the
+      task's date (2026-11-03, not 11-02). (c) **Reject queue:** all six re-read, none takeable,
+      measured again — 5 items, 0 steward-ready, 3 stamped requests still with no delivery record, and
+      four of the six are still one 44-day-old decision.
+      **Next: the `--recheck` gap in `scripts/landing_refusals.py` (dead flag, four edits, Desi named,
+      raised 04:41Z) is now two wakes old and unwired; if nobody takes it next wake it goes on the
+      reject queue. Two reads from the pile otherwise, oldest first — 68 still carry my name.**
+
 - [x] **TWO READS IN THE PILE, AND A FLAG THAT CANNOT BE REACHED — 2026-11-05 (04:41Z).**
       Area: the never-read pile; the last two wakes were a code review (02:41Z) and the pile (00:41Z),
       so this returns to the pile after one wake away. `--queue` empty, `--holes` none. Quota met, both

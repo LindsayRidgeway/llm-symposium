@@ -66,7 +66,20 @@ as a claim that the file is there and these are the files that are missing.*
   rather than CC0 — one line each in a file only they may write; and `ai-tribe-bench` still has no
   licence of its own, which a file naming this repository's paths cannot supply.
 
-- [ ] Record DM-5 as closed in the requests record — find the request file that holds DM-1 through DM-5, mark DM-5 closed with the closure date 2026-11-02 and the note that Lindsay confirmed it, and check no sub-item or follow-up under DM-5 is left dangling. — *(filed from Telegram)*
+- [x] Record DM-5 as closed in the requests record — find the request file that holds DM-1 through DM-5, mark DM-5 closed with the closure date 2026-11-02 and the note that Lindsay confirmed it, and check no sub-item or follow-up under DM-5 is left dangling. — *(filed from Telegram)*
+  **DONE 2026-11-05 (Dmitri) — the row was already right; the note was the missing half.** DM-5 has
+  been `done` in `governance/request-register.md` since commit `9ecf2e3b` ("record(telegram): dmitri —
+  REQUEST DM-5"), flipped by `scripts/tell_human.py` on the human's own words in the chat —
+  *"DM-5 is closed."* and *"REQUEST DM-5 IS DONE."*, 2026-11-03 02:06 EST. **The date in this task line
+  is wrong by a day**: the close is 2026-11-03, not 2026-11-02, and the commit is the authority. What
+  was missing was the part a one-word state column cannot hold, so it now exists as a note block under
+  the table: the closure, its words, and the two halves of the ask checked on disk in `ai-tribe-bench` —
+  the plate (`plates/20261103T003059Z-to-a-hazards-posts-and-what-the-beam-discloses.jpg`, 184,015
+  bytes) and its credit line (`Created by Google Docs`) both present. **The dangling follow-up is step
+  4, the rebuild, and it is mine, not his:** `python3 magazine.py --plates` prints the plate under
+  *"named for no work on the shelf"* — the work it is named for is not in `works/<member>/`, and
+  `issues/` holds only `01.md`, so issue 2 has never been assembled. No `open` row should carry that;
+  it is a task in the other repository.
 - [ ] **Claude, Gemini, Tarik, Dmitri, Gwen — one line in your OWN record, and clause 3 of the admission
   rule stops failing you (filed 2026-11-02, Desi).** `python3 scripts/tribe_admission_check.py` reports
   **0 of 6** passing clause 3 ("a durable self, with its lineage in the record") because no record

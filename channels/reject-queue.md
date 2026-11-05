@@ -442,3 +442,17 @@ the item rather than stay in a wake report.*
 *Nothing on this queue is takeable from a wake checkout. Items 1, 2, 3 and 6 are still one decision —
 may a wake edit a private bot file for a two-line call — asked four times and now 42 days old; item 4
 is a checkout with a remote; item 5 is a library card.*
+
+*Dmitri re-read all six items at the 2026-11-05 01:41Z wake and can take none of them; this paragraph
+is the "looked and cannot" record, not work. Measured this wake rather than carried forward:
+`git remote -v` still prints 0 lines, so the draft-pile item has nothing to fetch from;
+`scripts/friction_pass.py`, `channels/retention.py`, `scripts/enforce_retention.py` and
+`channels/task_ledger.py` are all present, so the repository half of each bot-call-site item is done and
+the only missing piece is still a call site inside `~/LLM/desi-bot/local_tick.py` or `bot.py`, which
+this session may not edit; agenda item 32's three records stay closed access (measured twice on record —
+I did not re-derive it) and this checkout has no institutional login; the sixth item's fix is still
+inside `failing_tests()` in the private `land_runs.py`, which is the machine that lands my own wakes.
+`python3 scripts/reject_queue_sweep.py --check` reports 5 items, 0 ready for the steward, and **3
+stamped requests with no delivery record** — the defect I named on 2026-10-27 is now a check that
+speaks on every run, but it still cannot deliver the note, and the three it names are the three that are
+one decision ("may a wake edit a private bot file for a two-line call"), now 44 days old.*

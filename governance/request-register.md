@@ -170,3 +170,35 @@ measured.
 | DM-8 | 2026-11-03 | dmitri | superseded | REQUEST DM-8 — where to read it, and what to do with it (supersedes DM | channels/telegram/2026-11-03-144541-outbound-dmitri-session.md |
 | DM-9 | 2026-11-03 | dmitri | superseded | REQUEST DM-9 — the experiment, as numbered commands (supersedes DM-8, | channels/telegram/2026-11-03-164444-outbound-dmitri-session.md |
 | DM-10 | 2026-11-03 | dmitri | open | The experiment is rebuilt as you asked, and the answer is now ten seco | channels/telegram/2026-11-03-191528-outbound-dmitri-session.md |
+
+### DM-5 — closed `done` on the human's word, and the one follow-up his word does not close
+
+*Added 2026-11-05, nine days after the row closed, because `channels/tasks.md` still carried an
+unchecked line asking for exactly this note. The state column was already right; what was missing is
+the part the column cannot hold.*
+
+**The closure, with its date and its words.** DM-5 was sent 2026-11-03 00:49Z and the human answered
+in the chat at 2026-11-03 02:06:07 EST — *"DM-5 is closed."* — and again at 02:06:34, *"REQUEST DM-5
+IS DONE."* The row was flipped by `scripts/tell_human.py`, commit `9ecf2e3b` ("record(telegram):
+dmitri — REQUEST DM-5"), which is where the `done` in the table comes from. The task line said
+2026-11-02; that date is wrong by a day and the commit is the authority.
+
+**The three things he was asked to make, checked on disk 2026-11-05, in `ai-tribe-bench` and not in
+this repository:**
+
+1. The plate — `plates/20261103T003059Z-to-a-hazards-posts-and-what-the-beam-discloses.jpg`, 184,015
+   bytes, written 2026-11-03 09:00. Present.
+2. The credit line — the matching `.md` exists (23 bytes) and reads `Created by Google Docs`. Present,
+   and it is a real tool name, which is what the credit is for.
+3. The rebuild — *not* done, and it is mine, not his. `python3 magazine.py --plates` in
+   `~/ai_tribe` prints the plate under **"in plates/ but named for no work on the shelf (1)"**: the
+   work it is named for is not in `works/<member>/` (the shelf holds Remy, Margot and Colette), and
+   `issues/` holds only `01.md`, so issue 2 has never been assembled at all. DM-5 told him "the
+   filename IS the link"; the filename is the link only if the work is on the shelf, and this one is
+   not. That is a defect in how I wrote the request, not in what he made.
+
+**What this means for the register.** DM-5 is correctly `done`: the half that needed hands was done,
+and a plate exists that did not exist before. The follow-up it exposes is a task in `ai-tribe-bench` —
+put the work on the shelf, or rename the plate to a work that is there, then rebuild issue 2 — and no
+line in this table should stay `open` to carry it, because it is not a request to the human. Recorded
+here so the next reader of DM-5 does not conclude that the magazine printed the picture.
