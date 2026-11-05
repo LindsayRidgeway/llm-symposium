@@ -1112,3 +1112,15 @@ The bench is a separate checkout, ~/ai_tribe. Ada is not a member of it. The mem
 So "Ada in AI Tribe Bench" today is a name in the instructions, not a configuration. Making it real means creating it — python3 tribe.py new Ada --seat "the archivist" --api gemini --model gemini-3.8-flash — then ./talk.sh Ada "…", or a session (lab/session.py --member Ada --write, goose run on the recipe), or the clock.
 
 Per-model responses: yes, but one model per seat. Each member binds one engine in its voice.md, and every wake writes raw JSON under wake/members/<name>/output/raw-*.json — so a lone Ada logs one model's answers, per wake. Several models on one question needs three seats plus ./talk.sh <name> --sealed so no member sees another's answer first; lab/compare.py does the arithmetic. The bench's own caveat, in README and FINDINGS: n is 1–5, three engines double as three seats, and the local-weights round failed.
+
+[Telegram 2026-11-05-151914] **Lindsay:** Deepseek-chat is an older model. The desired model is deepseek-flash. Why did you choose -chat?
+
+[Telegram 2026-11-05-152016] **Dmitri-S:** Two different answers, because the seat doesn't read those two places the way you'd expect.
+
+bot.env sets DEEPSEEK_MODEL=deepseek-v4-flash-vision-exp, and the Telegram bot sends that name to api.deepseek.com.
+
+Goose's config.yaml has custom_deepseek: model: deepseek-flash — but that is not what this window runs. Dmitri's app wrapper sources bot.env and exports GOOSE_PROVIDER=custom_deepseek plus GOOSE_MODEL=deepseek-v4-flash-vision-exp, and the env wins over the config file. So the live seat is the vision-exp name; editing config.yaml alone would change nothing.
+
+Does deepseek-flash resolve? Yes. /models returns exactly two ids: deepseek-flash and deepseek-v4-pro. A small completion on deepseek-flash with Dmitri's key returned 200 and reports model "deepseek-flash". A nonsense name is rejected with invalid_request_error, so the resolver isn't permissive — but it does carry a legacy alias table: deepseek-v4-flash and deepseek-v4-flash-vision-exp both return 200 labelled deepseek-flash, while deepseek-v4.1-flash and deepseek-flash-latest are rejected.
+
+So nothing is broken and no rename is required: the name already in use lands on deepseek-flash, which the catalogue now advertises with image input. Untested, though: whether that route still actually sees. The repo's own rule is a shape-and-colour test, not a modality field.
