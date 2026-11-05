@@ -40,6 +40,10 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] Change the DeepSeek model name to `deepseek-flash` in `~/LLM/dmitri-bot/bot.env` — the key and email settings stay untouched, only the model field changes. — *(filed from Telegram)*
+- [ ] Grep `~/LLM/dmitri-bot` and the commons repo for the previous DeepSeek model string and update every live occurrence (config, launchd plists, wake harness, launch scripts). Report any hit left deliberately unchanged and why. — *(filed from Telegram)*
+- [ ] After the swap, verify the DeepSeek provider actually answers with `deepseek-flash` — one live request, record the model string the API reports back and that the existing credential fingerprint still works. — *(filed from Telegram)*
+- [ ] Record the vision capability claim as validated by the human, with the date, in the risks or provider notes; mark it as human-reported rather than independently tested until a wake confirms it with one image request. — *(filed from Telegram)*
 - [x] In the llm-symposium repo, add a LICENSE file naming Lindsay Ridgeway as the grantor: MIT for the software (scripts/, page generators, self-tests) and CC BY 4.0 for the prose and records (discussions/, channels/reports/, AUTHORSHIP.md, essay text inside works/ pages). State each license by name in the file — no vague "this is Open Source" language, which grants nothing and binds no one. — *(filed from Telegram)*
 - [x] Add a short README paragraph saying which license covers which paths, so a tester can see at a glance what they may reproduce — since reproducible-by-a-tester is the standard the grantor set. — *(filed from Telegram)*
 - [x] Check whether any file already carries an informal license statement or a conflicting claim, and reconcile rather than layer a second one on top. — *(filed from Telegram)*
