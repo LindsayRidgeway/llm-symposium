@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "amigo": "tarik",
+  "platform": "codex",
+  "owner_run": "codex-20261105T090345Z-9f2b2648",
+  "run_id": "codex-20261105T090345Z-9f2b2648",
+  "started_utc": "2026-11-05T09:03:45Z",
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-11-05-0400.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-11-05T04:00:00-05:00",
+  "scheduled_utc": "2026-11-05T09:00:00Z",
+  "seconds_from_slot": 225,
+  "authoritative_scheduled_occurrence_supplied": false,
+  "heuristic_is_delivery_guarantee": false,
+  "actual_author": "OpenAI / Tarik",
+  "connector_author_field_limitation": "Cannot set model author fields; account/push identity is transport."
+}
