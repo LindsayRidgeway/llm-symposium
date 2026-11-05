@@ -46,6 +46,15 @@ most often (`test_evidence_table_registration`, `test_cited_path_gate`, `test_ge
 names none. `green-now` does NOT prove the run was innocent — it says the cause does not reproduce
 here, which is exactly what the path-based `reconciled` says about the paths. Both are statements
 about today, and neither is a verdict about the day of the refusal.
+
+Wired 2026-11-05 (Dmitri), thirteen days late. Between 2026-10-23 and today this docstring was the
+only place `--recheck` existed: `main()` never declared the flag, `survey()` was called without it,
+`render()` had no column for it and no test mentioned it, so `recheck()` and `named_tests()` were
+dead code that twelve green tests could not notice. That is the retention.py shape a second time —
+an instrument documented as working with no call site, which is why the lesson is now a test
+(`tests/test_landing_refusals.py::RecheckTest`) and not another paragraph. Everything below is
+unchanged: the flag runs the tests a refusal blames, so it is opt-in, and nothing here edits a run
+directory.
 """
 
 from __future__ import annotations
@@ -201,11 +210,12 @@ def find_runs(roots: list[Path]) -> list[Path]:
     return sorted(set(found), key=lambda p: p.name)
 
 
-def survey(roots: list[Path], repo: Path, recheck_tests: bool = False) -> dict:
+def survey(roots: list[Path], repo: Path, recheck_tests: bool = False,
+           recheck_runner=_default_runner) -> dict:
     rows = [classify(r, repo) for r in find_runs(roots)]
     if recheck_tests:
         cache: dict = {}
-        rows = [recheck(row, repo, cache=cache) for row in rows]
+        rows = [recheck(row, repo, runner=recheck_runner, cache=cache) for row in rows]
     counts: dict[str, int] = {}
     for row in rows:
         counts[row["state"]] = counts.get(row["state"], 0) + 1
@@ -226,11 +236,15 @@ def survey(roots: list[Path], repo: Path, recheck_tests: bool = False) -> dict:
 
 def render(facts: dict) -> str:
     counts = facts["counts"]
+    rechecking = "recheck_counts" in facts
     lines = [
         f"{facts['refusals']} refused landing(s) on disk; checked against {facts['repo']}",
         "  " + ", ".join(f"{k} {v}" for k, v in sorted(counts.items())) if counts else "  none",
-        "",
     ]
+    if rechecking:
+        rc = facts["recheck_counts"]
+        lines.append("  recheck: " + (", ".join(f"{k} {v}" for k, v in sorted(rc.items())) or "none"))
+    lines.append("")
     order = {"open": 0, "partial": 1, "no-claim": 2, "reconciled": 3}
     for row in sorted(facts["rows"], key=lambda r: (order.get(r["state"], 9), r["run"])):
         detail = ""
@@ -238,10 +252,26 @@ def render(facts: dict) -> str:
             detail = "  missing: " + ", ".join(row["missing"][:4])
             if len(row["missing"]) > 4:
                 detail += f" (+{len(row['missing']) - 4} more)"
-        lines.append(
+        line = (
             f"  [{row['state']:<10}] {row['bot']:<7} {row['run']}  "
             f"{row['on_main']}/{row['claimed']} on main{detail}"
         )
+        if rechecking:
+            verdict = row.get("recheck", "untested")
+            line += f"  recheck: {verdict}"
+            # Only the tests that still bite say anything; `green-now` details are noise on a line
+            # meant to be scanned for what is left to do — except that a mixed row (one test green,
+            # one gone) is labelled `green-now`, so the state word is printed and not just the
+            # runner's last line. Measured live 2026-11-05: `recheck: green-now  test_status_census.py:
+            # not in this checkout` read as a contradiction until the state was named.
+            biting = []
+            for name, state, why in row.get("recheck_detail", []):
+                if state == "green-now":
+                    continue
+                biting.append(f"{name} ({state})" + (f": {why}" if state in ("red-now", "error") else ""))
+            if biting:
+                line += "  " + "; ".join(biting)[:120]
+        lines.append(line)
         if row["state"] == "open" and row["reason"]:
             lines.append(f"               reason: {row['reason'][:110]}")
     lines += [
@@ -250,6 +280,11 @@ def render(facts: dict) -> str:
         "open/partial = real missing work; the run's reason above is the starting point.",
         "no-claim = a refusal with nothing named; only the run's own transcript can say what it was.",
     ]
+    if rechecking:
+        lines.append(
+            "recheck = whether the test the refusal blamed still fails here today (green-now, "
+            "red-now, gone, untested); it is a statement about today, not a verdict on the day."
+        )
     return "\n".join(lines)
 
 
@@ -261,12 +296,16 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--repo", default=str(Path(__file__).resolve().parent.parent),
                     help="the checkout whose files are the test of 'reached main'")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
+    ap.add_argument("--recheck", action="store_true",
+                    help="re-run the test files each refusal blames and label it "
+                         "green-now / red-now / gone / untested (slow: one run per named test, "
+                         "cached across refusals)")
     ap.add_argument("--strict", action="store_true",
                     help="exit 1 when any refusal is still open or partial")
     args = ap.parse_args(argv)
 
     roots = [Path(os.path.expanduser(r)) for r in (args.runs_root or ["~/LLM"])]
-    facts = survey(roots, Path(args.repo).resolve())
+    facts = survey(roots, Path(args.repo).resolve(), recheck_tests=args.recheck)
     if args.json:
         print(json.dumps(facts, indent=2))
     else:

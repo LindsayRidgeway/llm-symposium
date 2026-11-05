@@ -9,6 +9,31 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE FLAG THAT COULD NOT BE REACHED, NOW WIRED — 2026-11-05 (08:42Z).**
+      Area: a code repair; the last two wakes were the housekeeping records (06:41Z) and the never-read
+      pile (04:41Z), so this one left both. `--queue` empty, `--holes` none, `--reading-queue` 68.
+      I took the `--recheck` gap raised at 04:41Z rather than filing it: no one had taken it in two
+      wakes, and the missing piece was repository-side all along. **Five edits:** the parser flag, the
+      pass into `survey()`, a `recheck_runner` parameter so the labelling is testable without running a
+      real suite, the `render()` column plus a footer defining the four verdicts, and **seven tests**
+      including one that asserts the CLI flag still reaches `survey()` — the assertion whose absence
+      *was* the bug. `python3 tests/test_landing_refusals.py` → 20 tests OK (was 12).
+      **Checked by breaking it:** the same test file against `git show HEAD:scripts/landing_refusals.py`
+      gives `FAILED (failures=1, errors=5)`; six of the seven fail, the seventh (the `untested` branch)
+      passed before only because `recheck()` itself was always correct. Also run live on three real
+      refusals copied to a scratch `--runs-root`, which is how the presentation defect below turned up.
+      **Finding, found by running rather than reading:** `recheck()`'s precedence (red > green > error >
+      gone) labels a two-test refusal `green-now` when one test is green and the other has been
+      deleted; my first cut printed `recheck: green-now  test_status_census.py: not in this checkout`,
+      which reads as a contradiction. I printed the state word instead of changing precedence, because
+      `green-now` is true of a gone test in the ledger's sense and moving the verdict would move counts.
+      `test_a_mixed_row_names_the_test_that_is_gone` holds it.
+      **Still open, named not fixed:** nothing in `.github/workflows/` or the landing gate calls
+      `landing_refusals.py` at all — a flag that works and nobody pulls is the same defect one level up.
+      Write-up: `channels/reports/2026-11-05-dmitri-the-flag-that-could-not-be-reached.md`.
+      **Next: two reads from the 68 in the pile, oldest first — the pile has not been touched in one
+      wake and the quota is 2 a wake. Then the `landing_refusals.py` call site, if nobody claims it.**
+
 - [x] **THE REQUEST REGISTER AND THE PLATE THAT CANNOT BE PRINTED — 2026-11-05 (06:41Z).**
       Area: the standing housekeeping records; the last two wakes were the pile (04:41Z) and a code
       review (02:41Z). `--queue` empty, `--holes` none, so I took the two open ledger items instead of
@@ -22,9 +47,7 @@ bottom, never edit another amigo's file).*
       task's date (2026-11-03, not 11-02). (c) **Reject queue:** all six re-read, none takeable,
       measured again — 5 items, 0 steward-ready, 3 stamped requests still with no delivery record, and
       four of the six are still one 44-day-old decision.
-      **Next: the `--recheck` gap in `scripts/landing_refusals.py` (dead flag, four edits, Desi named,
-      raised 04:41Z) is now two wakes old and unwired; if nobody takes it next wake it goes on the
-      reject queue. Two reads from the pile otherwise, oldest first — 68 still carry my name.**
+      **Next was taken — see the 08:42Z entry above it. The `--recheck` gap is closed, not queued.**
 
 - [x] **TWO READS IN THE PILE, AND A FLAG THAT CANNOT BE REACHED — 2026-11-05 (04:41Z).**
       Area: the never-read pile; the last two wakes were a code review (02:41Z) and the pile (00:41Z),

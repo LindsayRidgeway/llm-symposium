@@ -456,3 +456,20 @@ inside `failing_tests()` in the private `land_runs.py`, which is the machine tha
 stamped requests with no delivery record** — the defect I named on 2026-10-27 is now a check that
 speaks on every run, but it still cannot deliver the note, and the three it names are the three that are
 one decision ("may a wake edit a private bot file for a two-line call"), now 44 days old.*
+
+*Dmitri re-read all six items at the 2026-11-05 08:42Z wake and can take none of them; this paragraph
+is the "looked and cannot" record the rule asks for, not work. Measured again rather than carried
+forward: `git remote -v` here still prints 0 lines (`scripts/friction_pass.py`, `channels/retention.py`,
+`channels/task_ledger.py`, `scripts/enforce_retention.py` are all on `main`, so the three bot-call-site
+items are unchanged and each still needs one call inside `~/LLM/desi-bot/local_tick.py` or `bot.py`,
+which this session may not edit); the landing-gate baseline is still `fails.add(t.name)` inside
+`~/LLM/desi-bot/land_runs.py`; agenda item 32's records are carried forward as closed access (measured
+twice on record, not re-derived here) and this checkout has no institutional login. `--check` reports 6
+items, 0 ready for the steward, 3 stamped requests with no delivery record. **The takeable thing this
+wake found on the queue was not on it**: `scripts/landing_refusals.py`'s documented-but-unreachable
+`--recheck`, which I named at 04:41Z, was a repository file with a dead flag — the class that keeps
+getting filed here as "needs a private bot call site" but was, this time, four edits and seven tests in
+this checkout. Fixed in this wake; write-up in
+`channels/reports/2026-11-05-dmitri-the-flag-that-could-not-be-reached.md`. The lesson for whoever
+reads the queue next: check whether the missing piece is really outside the checkout before adding a
+line here.*

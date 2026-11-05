@@ -12,6 +12,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -124,6 +125,129 @@ class SurveyTest(unittest.TestCase):
             self.assertEqual(lr.main(["--runs-root", tmp, "--repo", str(repo), "--strict"]), 1)
             (repo / "gone.md").write_text("x")
             self.assertEqual(lr.main(["--runs-root", tmp, "--repo", str(repo), "--strict"]), 0)
+
+
+class RecheckTest(unittest.TestCase):
+    """The half of the file that was dead from 2026-10-23 to 2026-11-05.
+
+    `recheck()` and `named_tests()` were written, documented and never reachable from the command
+    line: no `--recheck` in the parser, `survey()` called without it, no column in `render()`, and
+    no test naming any of them. Twelve green tests covered `classify` and `claimed_paths` and could
+    not see it, exactly as twelve green tests covered `channels/retention.py` with no caller. So the
+    tests below assert the wiring, not just the functions: a flag that stops being passed fails here.
+    """
+
+    def _refused_run(self, tmp, reason="this run's diff introduced new failures: test_a.py"):
+        run = Path(tmp) / "dmitri-bot" / "tick-state" / "runs" / "20260101T000000Z-ddd"
+        run.mkdir(parents=True)
+        (run / "landing_failed.txt").write_text(reason + "\n")
+        (run / "report.txt").write_text("LAND: gone.md\n")
+        repo = Path(tmp) / "repo"
+        (repo / "tests").mkdir(parents=True)
+        return run, repo
+
+    def test_the_cli_flag_reaches_survey(self):
+        seen = {}
+
+        def fake_survey(roots, repo, recheck_tests=False, recheck_runner=None):
+            seen["recheck_tests"] = recheck_tests
+            return {"repo": str(repo), "refusals": 0, "counts": {}, "rows": [],
+                    "recheck_counts": {}}
+
+        with mock.patch.object(lr, "survey", fake_survey):
+            lr.main(["--runs-root", "/tmp", "--repo", "/tmp", "--recheck"])
+        self.assertTrue(seen["recheck_tests"])
+
+    def test_without_the_flag_no_test_is_run(self):
+        calls = []
+
+        def runner(path, repo):
+            calls.append(path.name)
+            return 0, "OK"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            _, repo = self._refused_run(tmp)
+            (repo / "tests" / "test_a.py").write_text("# x\n")
+            facts = lr.survey([Path(tmp)], repo, recheck_tests=False, recheck_runner=runner)
+        self.assertEqual(calls, [])
+        self.assertNotIn("recheck_counts", facts)
+        self.assertNotIn("recheck", facts["rows"][0])
+
+    def test_a_blamed_test_that_passes_here_is_green_now(self):
+        def runner(path, repo):
+            self.assertEqual(path.name, "test_a.py")
+            return 0, "Ran 3 tests in 0.1s\n\nOK"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            _, repo = self._refused_run(tmp)
+            (repo / "tests" / "test_a.py").write_text("# x\n")
+            facts = lr.survey([Path(tmp)], repo, recheck_tests=True, recheck_runner=runner)
+        row = facts["rows"][0]
+        self.assertEqual(row["recheck"], "green-now")
+        self.assertEqual(row["tests"], ["test_a.py"])
+        self.assertEqual(facts["recheck_counts"], {"green-now": 1})
+
+    def test_a_blamed_test_that_still_fails_is_red_now_and_keeps_its_reason(self):
+        def runner(path, repo):
+            return 1, "FAIL: test_thing (tests.test_a.Thing)\n---\nRan 3 tests\nFAILED (failures=1)"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            _, repo = self._refused_run(tmp)
+            (repo / "tests" / "test_a.py").write_text("# x\n")
+            facts = lr.survey([Path(tmp)], repo, recheck_tests=True, recheck_runner=runner)
+        row = facts["rows"][0]
+        self.assertEqual(row["recheck"], "red-now")
+        self.assertEqual(row["recheck_detail"][0][1], "red-now")
+        self.assertIn("FAIL", row["recheck_detail"][0][2])
+
+    def test_a_blamed_test_that_no_longer_exists_is_gone_without_running_anything(self):
+        def runner(path, repo):
+            raise AssertionError("a missing test file must not be run")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            _, repo = self._refused_run(tmp)
+            facts = lr.survey([Path(tmp)], repo, recheck_tests=True, recheck_runner=runner)
+        self.assertEqual(facts["rows"][0]["recheck"], "gone")
+
+    def test_a_refusal_naming_no_test_is_untested(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            _, repo = self._refused_run(tmp, reason="the tree was dirty when the gate looked")
+            facts = lr.survey([Path(tmp)], repo, recheck_tests=True)
+        self.assertEqual(facts["rows"][0]["recheck"], "untested")
+
+    def test_the_rendered_line_carries_the_recheck_verdict(self):
+        facts = {
+            "repo": "r", "refusals": 1, "counts": {"open": 1},
+            "rows": [{"run": "20260101T000000Z-ddd", "bot": "dmitri-bot", "state": "open",
+                      "reason": "new failures: test_a.py", "claimed": 1, "on_main": 0,
+                      "missing": ["gone.md"], "tests": ["test_a.py"], "recheck": "red-now",
+                      "recheck_detail": [("test_a.py", "red-now", "FAILED (failures=1)")]}],
+            "recheck_counts": {"red-now": 1},
+        }
+        out = lr.render(facts)
+        self.assertIn("recheck: red-now", out)
+        self.assertIn("test_a.py (red-now): FAILED", out)
+        self.assertIn("recheck: red-now 1", out)
+
+    def test_a_mixed_row_names_the_test_that_is_gone(self):
+        # The live case that made this test exist: a refusal blaming two tests, one green here and
+        # one no longer in the tree, is labelled `green-now` by the precedence in recheck(). Printed
+        # without the state word it read as "green" next to a sentence about a missing file.
+        facts = {
+            "repo": "r", "refusals": 1, "counts": {"open": 1},
+            "rows": [{"run": "20261019T010846Z-95b9aa77", "bot": "desi-bot", "state": "open",
+                      "reason": "new failures: test_item_ledger.py, test_status_census.py",
+                      "claimed": 1, "on_main": 0, "missing": ["x.md"],
+                      "tests": ["test_item_ledger.py", "test_status_census.py"],
+                      "recheck": "green-now",
+                      "recheck_detail": [("test_item_ledger.py", "green-now", "OK"),
+                                         ("test_status_census.py", "gone", "not in this checkout")]}],
+            "recheck_counts": {"green-now": 1},
+        }
+        out = lr.render(facts)
+        self.assertIn("recheck: green-now", out)
+        self.assertIn("test_status_census.py (gone)", out)
+        self.assertNotIn("test_item_ledger.py (", out)
 
 
 if __name__ == "__main__":
