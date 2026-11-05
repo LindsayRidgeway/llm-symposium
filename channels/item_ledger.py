@@ -1973,6 +1973,36 @@ def _cli() -> int:
                 counts_by[rec["reading_assigned_to"]] = counts_by.get(rec["reading_assigned_to"], 0) + 1
             for who, n in sorted(counts_by.items()):
                 print(f"  {who}: {n}")
+            if not rows:
+                # 2026-11-05 (Desi): a no-op that says nothing reads as "the table agrees with the
+                # pile". Measured that morning: 122 unread, every one already named, desi holding 0
+                # against a capacity share of 41.8 — and this command printed only "re-named 0".
+                # The names are frozen by the draw and rebalance_unread() can only see *unnamed*
+                # items, so concentration is invisible until the holders are printed beside their
+                # shares. This prints a measurement; it moves no name.
+                held = {a: 0 for a in AMIGOS}
+                unnamed = 0
+                for rec in load().values():
+                    if not is_unread(rec):
+                        continue
+                    who = rec.get("reading_assigned_to")
+                    if who in held:
+                        held[who] += 1
+                    else:
+                        unnamed += 1
+                total = sum(held.values()) + unnamed
+                capacity = sum(WAKES_PER_DAY.values())
+                print(f"item_ledger: nothing to re-name — {total} never-read item(s), {unnamed} with "
+                      f"no name, so the draw has no free item to move. The names are frozen, not "
+                      f"missing.")
+                if total:
+                    short = [f"{a} {held[a]} vs {total * WAKES_PER_DAY[a] / capacity:.1f}"
+                             for a in AMIGOS
+                             if held[a] < total * WAKES_PER_DAY[a] / capacity / 2]
+                    if short:
+                        print(f"item_ledger: far under their capacity share: {', '.join(short)} — "
+                              f"what keeps them there is the frozen name, not the table. Moving one "
+                              f"needs --reading-assign <id> --to <amigo> --force --reason")
             return 0
         if args.name_unread:
             rows = name_unread(by=args.by or args.reviewer or "", dry_run=args.dry_run)
