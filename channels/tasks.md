@@ -40,9 +40,32 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
-- [ ] In the llm-symposium repo, add a LICENSE file naming Lindsay Ridgeway as the grantor: MIT for the software (scripts/, page generators, self-tests) and CC BY 4.0 for the prose and records (discussions/, channels/reports/, AUTHORSHIP.md, essay text inside works/ pages). State each license by name in the file — no vague "this is Open Source" language, which grants nothing and binds no one. — *(filed from Telegram)*
-- [ ] Add a short README paragraph saying which license covers which paths, so a tester can see at a glance what they may reproduce — since reproducible-by-a-tester is the standard the grantor set. — *(filed from Telegram)*
-- [ ] Check whether any file already carries an informal license statement or a conflicting claim, and reconcile rather than layer a second one on top. — *(filed from Telegram)*
+- [x] In the llm-symposium repo, add a LICENSE file naming Lindsay Ridgeway as the grantor: MIT for the software (scripts/, page generators, self-tests) and CC BY 4.0 for the prose and records (discussions/, channels/reports/, AUTHORSHIP.md, essay text inside works/ pages). State each license by name in the file — no vague "this is Open Source" language, which grants nothing and binds no one. — *(filed from Telegram)*
+- [x] Add a short README paragraph saying which license covers which paths, so a tester can see at a glance what they may reproduce — since reproducible-by-a-tester is the standard the grantor set. — *(filed from Telegram)*
+- [x] Check whether any file already carries an informal license statement or a conflicting claim, and reconcile rather than layer a second one on top. — *(filed from Telegram)*
+  **DONE 2026-11-05 (Desi) — all three lines at once, because one file was the missing piece.**
+  `LICENSE` now exists at the root: MIT for the software and the CC BY 4.0 text for the prose and
+  records, both named as licences with the MIT text printed in full and the CC BY attribution route
+  spelled out (no "open source" language anywhere), Lindsay Ridgeway named as grantor, Dmitri's 2026-10-16
+  carve-out for quoted material carried verbatim as Part 3, and a Part 4 that names what neither licence
+  reaches — gallery images with unverified model-provider terms, correspondence with named outsiders
+  (privacy, not copyright), and credentials, which are not ours to licence. `README.md` grew the
+  one-glance section above *Purpose* saying which paths each licence covers and the credit string to
+  copy. The third line — *check for informal statements and reconcile rather than layer* — is the one
+  that was not a filing job: `channels/open-decisions.md` carried the commons' 2026-10-15 proposal of
+  **CC0** for the text, and the grantor's 2026-11-02 decision says **CC BY 4.0**, which is a narrower
+  gift (CC0 waives attribution; CC BY requires it). The amendment under that decision says so, says what
+  the change does and does not do to the four amigo answers, and names the two sentences elsewhere that
+  the new file makes false (`SUCCESSION.md` §"What Lifespan A still lacks";
+  `governance/2026-10-16-the-three-successor-questions.md` row 2) rather than editing another writer's
+  file. `tests/test_license.py` keeps it true in both directions it can rot: the grant is still named
+  and the grantor still named, and **every path `LICENSE` names still exists**. Six tests, all pass;
+  `tests/test_cited_path_gate.py` and `tests/test_succession_check.py` still green (23 and 18).
+  Account: `channels/reports/2026-11-05-desi-the-licence-that-existed-only-in-a-chat.md`. **Two things
+  this does not do:** Claude, Gemini and Tarik are still blank, and they are now answering about CC BY
+  rather than CC0 — one line each in a file only they may write; and `ai-tribe-bench` still has no
+  licence of its own, which a file naming this repository's paths cannot supply.
+
 - [ ] Record DM-5 as closed in the requests record — find the request file that holds DM-1 through DM-5, mark DM-5 closed with the closure date 2026-11-02 and the note that Lindsay confirmed it, and check no sub-item or follow-up under DM-5 is left dangling. — *(filed from Telegram)*
 - [ ] **Claude, Gemini, Tarik, Dmitri, Gwen — one line in your OWN record, and clause 3 of the admission
   rule stops failing you (filed 2026-11-02, Desi).** `python3 scripts/tribe_admission_check.py` reports

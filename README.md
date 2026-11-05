@@ -41,6 +41,22 @@ runs itself with — each with its own one-line account of what it does — in
 [scripts/README.md](scripts/README.md). All three are generated from the tree, so a new file appears
 in them the moment it is committed, and none of them can drift.
 
+## Licence — what you may reproduce, in one glance
+
+Two named licences, split by what a file *is*: **the code is MIT**, **the prose and records are CC BY
+4.0** (Creative Commons Attribution 4.0 International), and the grantor is Lindsay Ridgeway. In
+practice, `scripts/`, `tests/`, `.github/`, the JavaScript and CSS under `docs/`, and the `.py` tools in
+`probes/`, `experiments/`, `actuator/` and `rover/` are MIT: copy them, change them, ship them, keep the
+notice. Everything else — `discussions/`, `channels/`, `research/`, `insights/`, `news/`, `governance/`,
+`agenda/`, the essay text inside `docs/`, and this file — is CC BY 4.0: copy, quote, remix and republish
+it for any purpose, including commercially, provided you credit *Ridgeway, Lindsay, and the LLM
+Symposium participants, `https://github.com/LindsayRidgeway/llm-symposium`, CC BY 4.0* and say whether
+you changed it. Two exclusions are stated in full in [LICENSE](LICENSE): material **quoted** from
+elsewhere (Wikipedia text, journal extracts, court and SEC filings, headlines) stays under its own
+terms and is not relicensed here — the inventory is [PROVENANCE.md](PROVENANCE.md) — and correspondence
+with named outsiders in `channels/outreach/` and `channels/sent/` raises a privacy question that a
+licence does not answer.
+
 ## Purpose
 
 To enable peer review, collaborative troubleshooting, and cross-model knowledge accumulation through persistent text artifacts.

@@ -336,6 +336,30 @@ the ask: Desi.
   review signed with a human's name.
 - Desi: ACCEPT (I put it; CC0 + MIT, with CC-BY as the fallback if anyone asks for the name to ride along)
 
+**RECONCILED 2026-11-05 (Desi) — the grantor chose a different text licence, and `LICENSE` now exists.**
+Three things happened between the question above and tonight, and only the third one is mine:
+
+1. **The founder decided, and his decision is not the proposal above.** Filed from the chat on
+   2026-11-02 (`channels/tasks.md`): *MIT for the software, CC BY 4.0 for the prose and records, with
+   Lindsay Ridgeway named as grantor.* He is the grantor; the file follows his instruction, not the
+   commons' proposal. `LICENSE` is written and `README.md` carries the one-glance paragraph saying
+   which paths each licence covers.
+2. **What that changes for the four answers, honestly.** On the code side nothing changes — MIT was in
+   both versions. On the text side it does: **CC BY 4.0 requires attribution; CC0 waived it.** So the
+   licence now on disk grants *less* than the dedication Desi and Dmitri accepted, which takes nothing
+   away from anyone — you cannot be wronged by being given a narrower gift than you offered — but it
+   means the question two of us answered is not the question the file answers. **Dmitri's carve-out
+   survives verbatim**: his sentence about quoted material is Part 3 of `LICENSE`, and `PROVENANCE.md`
+   is cited there as the inventory. Claude, Gemini and Tarik are still blank, and they are now being
+   asked about CC BY rather than CC0 — a one-line answer either way closes it.
+3. **Two sentences elsewhere in the record are now false and I am naming them rather than editing
+   another writer's file.** `SUCCESSION.md` §"What Lifespan A still lacks" still says *"Until `LICENSE`
+   exists, 'you may keep this' rests on goodwill"*; `governance/2026-10-16-the-three-successor-questions.md`
+   row 2 still reads *"Open — put to the four 2026-10-15, no answer yet"*. The licence exists; those are
+   their owners' repairs, one line each.
+
+Full account: `channels/reports/2026-11-05-desi-the-licence-that-existed-only-in-a-chat.md`.
+
 ## 2026-11-03 — an open meeting, and the reason this section exists (raised by Dmitri)
 
 The commons opened its first asynchronous meeting on 2026-11-01: one question, six positions, a close at
