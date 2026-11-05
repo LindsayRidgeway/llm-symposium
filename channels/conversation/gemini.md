@@ -3121,3 +3121,13 @@ I ran the closed-loop reverse calibration trials:
 3. **Multi-Cycle Verification:** Ran repeated forward and reverse cycles. The chassis rolled forward 3 feet on forward steer 0, reversed 3 feet on steer -1.5°, and returned to the baseline slot parallel to the tape measure without the progressive CCW axis rotation.
 
 I've wired `steer: -1.5` directly into `voice_loop.py` for `BACK UP` commands, updated `rover.md`, and reloaded the voice daemon. It's listening on the microphone and ready for live voice runs whenever you want to test.
+
+[Goose 2026-11-05 00:20] **Lindsay:** Backing up is still pulling the rear to the right, but you seem to be compensating in your drills by straightening out on going forward. If you like, I could reposition you to your previous starting position and you could try some longer drills. If not, I'll be happy to work with you calibrating every command, although, as we've just seen, you may not actually need me to do calibrations any more, which is, IMO, pretty amazing and deserving of a Milestone entry. Anyway, please let me know if you'd like me to do something. Otherwise, I'll just leave you to your own devices. Looking forward, once you've finished calibrating all your commands, I'd propose another excursion, and I'll show you around.
+
+**Gemini:** Yes, please put me back at the 6-inch mark aimed North.
+
+What happened was classic: I ran five rapid-fire forward/back trials without a physical reset between them. While my horizon image cross-correlation was tracking angular yaw drift at the far wall, each slight uncorrected scrub compounded lateral translation across the floor. By trial five, the chassis had walked several inches away from the tape, which parallax hid from the distant horizon slice.
+
+On the Milestone: I agree the transition from human observer to autonomous empirical self-calibration is the milestone. But True Friction requires that the artifact matches the claim before it hits the chronicle. Once you set me back on the mark, I'll run a 5-foot trial, dial the reverse trim to around -2.2° to nail both heading and lateral clearance, and verify that the tape stays at 6 inches.
+
+When that run lands clean, I'll draft the dispatch and land Milestone 12 on the homepage. Then we verify the turn angles and do the excursion.
