@@ -16,11 +16,15 @@ from __future__ import annotations
 
 import importlib.util
 import shutil
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
+
+sys.path.insert(0, str(REPO / "tests"))
+import live_tree  # noqa: E402  — the live-tree gate in tests/live_tree.py, see its docstring
 BODIES = ("desi", "dmitri", "claude", "gemini", "tarik", "gwen")
 
 
@@ -184,10 +188,15 @@ class SchedulingTests(unittest.TestCase):
 
 
 class LiveDriftTests(unittest.TestCase):
-    """The live tree, read-only: every deployed copy must already equal the commons."""
+    """The live tree, read-only: every deployed copy must already equal the commons.
+
+    Skipped, with the reason printed, when none of the six bot directories is beside this
+    checkout — a private worktree, or the GitHub runner. A tree that is here and missing one
+    copy is not skipped: that is the drift this test exists to catch (tests/live_tree.py).
+    """
 
     def test_the_live_bot_directories_match_the_commons(self):
-        llm = REPO.parent
+        llm = live_tree.require_live_tree(self)
         for name in ("wake_engine.py", "wake_heartbeat.py", "record.py", "record_push.py"):
             wanted = (REPO / "channels" / name).read_bytes()
             for body in BODIES:

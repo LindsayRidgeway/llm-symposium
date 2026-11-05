@@ -24,11 +24,15 @@ import datetime as dt
 import importlib.util
 import json
 import shutil
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
+
+sys.path.insert(0, str(REPO / "tests"))
+import live_tree  # noqa: E402  — the live-tree gate in tests/live_tree.py, see its docstring
 NOW = dt.datetime(2026, 11, 3, 12, 0, tzinfo=dt.timezone.utc)
 BODIES = ("desi", "claude", "gemini", "tarik", "dmitri", "gwen")
 
@@ -213,7 +217,16 @@ class TestOffThisMachine(Fixture):
 
 
 class TestTheRealMachinesNumbers(Fixture):
-    """One guard on the live data: the block must be able to read this Mac's runs at all."""
+    """One guard on the live data: the block must be able to read this Mac's runs at all.
+
+    Skipped where there is no live tree to read (a private worktree, the GitHub runner): the
+    behaviour it guards is already covered offline by the fixtures above and by
+    TestOffThisMachine, which is the case that says the block must be *absent*, not zero.
+    """
+
+    def setUp(self):
+        super().setUp()
+        live_tree.require_live_tree(self)
 
     def test_the_live_tick_state_is_readable(self):
         outcomes = self.m.wake_outcomes(dt.datetime.now(dt.timezone.utc), 24)

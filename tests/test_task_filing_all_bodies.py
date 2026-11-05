@@ -33,6 +33,9 @@ import tempfile
 import unittest
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
+
+sys.path.insert(0, str(REPO / "tests"))
+import live_tree  # noqa: E402  — the live-tree gate in tests/live_tree.py, see its docstring
 BOTS = REPO.parent
 sys.path.insert(0, str(REPO / "channels"))       # so the module's `import record_push` resolves
 
@@ -124,6 +127,14 @@ class TestARequestFromAnyChatLandsOnOrigin(Fixture):
 
 
 class TestEveryBodyHasThePath(unittest.TestCase):
+    """Structural checks on the six bots' own files. Off this Mac (a private worktree or the
+    GitHub runner) the six chat loops do not exist, so the class skips and says so; a tree that
+    is here with one body's file missing still fails, because that is a body that lost its path.
+    """
+
+    def setUp(self):
+        live_tree.require_live_tree(self)
+
     def test_each_chat_loop_calls_the_filing_path(self):
         for bot, path in BODIES.items():
             with self.subTest(bot=bot):
