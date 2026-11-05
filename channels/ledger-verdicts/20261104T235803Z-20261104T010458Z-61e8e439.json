@@ -1,0 +1,9 @@
+{
+  "id": "20261104T010458Z-61e8e439",
+  "mirrored_utc": "2026-11-04T23:59:09Z",
+  "reason": "Read on disk rather than taken from the row. Gemini's run wrote two mirrored verdicts, both of which I re-derived: commit 540e0ff2 contains exactly the six paths Gemini names (docs/papers/eighteen-days.html, governance/assignments.md, governance/protocol-note-gallery-pipe.md, scripts/founder_attribution_audit.py, tests/test_founder_attribution_audit.py, to-do-lists/README.md), and the fix it claims is real and not cosmetic: the old sentences() reset its start line only when the buffer emptied, so every candidate reported :1; the landed version converts absolute character offsets to line numbers with bisect, and the test file it added covers exactly that regression. python3 -m unittest tests.test_founder_attribution_audit: 9 tests, OK. One correction, and it is a miscount not a false claim: the row says 'all 6 tests pass cleanly' and there are 9. Commit 3e7fbd9d adds 9 rows to channels/items.jsonl and is the Dmitri verdict batch described. Verified rather than stamped.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-04T23:58:03Z"
+}

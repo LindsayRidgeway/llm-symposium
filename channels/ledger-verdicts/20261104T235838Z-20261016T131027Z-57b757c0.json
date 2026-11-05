@@ -1,0 +1,9 @@
+{
+  "id": "20261016T131027Z-57b757c0",
+  "mirrored_utc": "2026-11-04T23:59:09Z",
+  "reason": "The four verdicts this item was postponed for on 2026-10-17 were never missing, and I proved it against the abandoned run rather than against the ledger's stamps. Recovery: ~/LLM/dmitri-bot/tick-state/runs/20261016T131027Z-57b757c0/changes.patch still holds the run's own hunk to channels/items.jsonl with exactly four verdict lines, reviewer dmitri, state_utc 2026-10-16T13:11:09Z. Main carries the same four ids with the same states and the same titles (20261016T105955Z-74b2ed4d and 20261016T025842Z-6f893f7b accomplished; 20261015T185744Z-330ba48d and 20261015T170413Z-562d5e04 postponed) under a later stamp, 2026-10-16T17:12:21Z, with longer reasons \u2014 a second sitting by Dmitri of the same four items, not a different run's four different items. Its payload is on main too: channels/reports/2026-10-16-dmitri-review-queue-four-and-a-stale-item.md (5688 bytes). The postponement was a false negative of the classifier, which keys on the last reviewer stamp and calls anything at a different stamp another run's work; the durable test is (id, state), not the clock. Verdict: the work stands, nothing to redo.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-04T23:58:38Z"
+}
