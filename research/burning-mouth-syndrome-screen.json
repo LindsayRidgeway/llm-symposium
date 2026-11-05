@@ -8,7 +8,7 @@
  "disease_forms_searched": [
   "burning mouth syndrome"
  ],
- "note": "any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") \u2014 counts mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT \u2014 the number that decides novelty. Counts move with spelling; these are small numbers, not exact ones. A zero records no matches in the supplied query scope; it does not mean the link is true, untested, or valuable. Where a target carries `names`, any_field/strict are the maximum over the symbol and every name, so a raw 'unjoined' records zero counts from the selected successful query; failed alternate spellings can leave coverage incomplete. Every strict join carries its `strict_hits` \u2014 open them; the count cannot tell a paper about the pair from a coincidence of English. A row marked `\"control\": true` is a string that names nothing: it is scored, kept out of every count and band, and reported in `controls` with a `control_check` line, so the reader can see whether the unjoined band separates a gene from noise. `strict` or `any_field` of -1 means that query FAILED: the row is not a zero, is excluded from every band, and is listed in `failed_queries`; compare `n_scored` with `n_targets` before calling a band complete. A positive short symbol without successful positive expanded-name counts is unresolved, not joined or unjoined; see `ambiguous_unverified_joins`. `name_confirmation` keeps its own query/counts/hits; supplied aliases are not biological proof. `unjoined` preserves raw 0/0 observations; only `density_qualified_unjoined` meets the necessary corpus-density floor AND answered every supplied spelling. Each row carries `spellings` \u2014 every (name, disease form) pair queried with its counts and `failed_scopes` \u2014 so a zero taken from one spelling while another failed is visible instead of certified; such rows are listed in `unjoined_incomplete_coverage` and set `coverage_complete` false. A failed expanded-name query is recorded in `expanded_name_failed` and is not the same fact as no name having been supplied. Density qualification never certifies a scientific hypothesis, controls or complete target-name coverage.",
+ "note": "any_field = Europe PMC hitCount for \"SYMBOL\" AND (\"disease\") — counts mentions, not studies. strict = SYMBOL and disease both in a TITLE or ABSTRACT — the number that decides novelty. Counts move with spelling; these are small numbers, not exact ones. A zero records no matches in the supplied query scope; it does not mean the link is true, untested, or valuable. Where a target carries `names`, any_field/strict are the maximum over the symbol and every name, so a raw 'unjoined' records zero counts from the selected successful query; failed alternate spellings can leave coverage incomplete. Every strict join carries its `strict_hits` — open them; the count cannot tell a paper about the pair from a coincidence of English. A row marked `\"control\": true` is a string that names nothing: it is scored, kept out of every count and band, and reported in `controls` with a `control_check` line, so the reader can see whether the unjoined band separates a gene from noise. `strict` or `any_field` of -1 means that query FAILED: the row is not a zero, is excluded from every band, and is listed in `failed_queries`; compare `n_scored` with `n_targets` before calling a band complete. A positive short symbol without successful positive expanded-name counts is unresolved, not joined or unjoined; see `ambiguous_unverified_joins`. `name_confirmation` keeps its own query/counts/hits; supplied aliases are not biological proof. `unjoined` preserves raw 0/0 observations; only `density_qualified_unjoined` meets the necessary corpus-density floor AND answered every supplied spelling. Each row carries `spellings` — every (name, disease form) pair queried with its counts and `failed_scopes` — so a zero taken from one spelling while another failed is visible instead of certified; such rows are listed in `unjoined_incomplete_coverage` and set `coverage_complete` false. A failed expanded-name query is recorded in `expanded_name_failed` and is not the same fact as no name having been supplied. Density qualification never certifies a scientific hypothesis, controls or complete target-name coverage.",
  "n_targets": 128,
  "n_controls": 3,
  "n_scored": 128,
@@ -314,25 +314,25 @@
  "candidates_certified": false,
  "candidate_certification_note": "No scientific certification is performed. Density qualification is only a corpus threshold; aliases, controls and papers still require review.",
  "density_warning": null,
- "control_check": "3 of 3 strings that name nothing scored 'unjoined', and so did 21 of 128 scorable real targets (16%). The two are separable at this density, but the band is not free of noise either \u2014 read every row before treating a zero as a gap.",
+ "control_check": "3 of 3 strings that name nothing scored 'unjoined', and so did 21 of 128 scorable real targets (16%). That is a co-mention rate for the terms searched, not a measurement of error: three null strings cannot calibrate a 128-target screen, and this repository holds no known-truth set that would. Read every row before treating a zero as a gap. [Corrected 2026-11-05: this line previously asserted the two were 'separable at this density' and that the band was 'not free of noise' - an inference from three null strings that cannot measure error.]",
  "controls": [
   {
    "symbol": "XQZWKJ",
    "any_field": 0,
    "strict": 0,
-   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+   "verdict": "null control — a string that names nothing; it is here to be scored and is excluded from every count"
   },
   {
    "symbol": "QQXXZZ",
    "any_field": 0,
    "strict": 0,
-   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+   "verdict": "null control — a string that names nothing; it is here to be scored and is excluded from every count"
   },
   {
    "symbol": "VBNMASDF",
    "any_field": 0,
    "strict": 0,
-   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+   "verdict": "null control — a string that names nothing; it is here to be scored and is excluded from every count"
   }
  ],
  "seconds": 132.1,
@@ -374,7 +374,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "sodium channels / neuronal excitability",
@@ -407,7 +407,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (8 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (8 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "sodium channels / neuronal excitability",
@@ -440,7 +440,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (6 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (6 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "sodium channels / neuronal excitability",
@@ -473,7 +473,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "sodium channels / neuronal excitability",
@@ -506,7 +506,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "sodium channels / neuronal excitability",
@@ -539,7 +539,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "sodium channels / neuronal excitability",
@@ -572,7 +572,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "potassium channels",
@@ -605,7 +605,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (3) — read them before claiming novelty"
   },
   {
    "category": "potassium channels",
@@ -638,7 +638,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "potassium channels",
@@ -671,7 +671,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "potassium channels",
@@ -704,7 +704,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (3) — read them before claiming novelty"
   },
   {
    "category": "potassium channels",
@@ -737,7 +737,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (3) — read them before claiming novelty"
   },
   {
    "category": "calcium channels (gabapentinoid target)",
@@ -770,7 +770,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "calcium channels (gabapentinoid target)",
@@ -803,7 +803,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "calcium channels (gabapentinoid target)",
@@ -836,7 +836,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "calcium channels (gabapentinoid target)",
@@ -869,7 +869,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "TRP channels",
@@ -918,7 +918,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "TRP channels",
@@ -957,7 +957,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "TRP channels",
@@ -990,7 +990,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (38 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (38 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "TRP channels",
@@ -1023,7 +1023,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (19 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (19 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "mechanotransduction",
@@ -1056,7 +1056,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "mechanotransduction",
@@ -1089,7 +1089,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (6 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (6 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "purinergic signalling",
@@ -1122,7 +1122,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "purinergic signalling",
@@ -1155,7 +1155,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (24 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (24 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "purinergic signalling",
@@ -1188,7 +1188,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (7 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "purinergic signalling",
@@ -1221,7 +1221,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "acid sensing",
@@ -1254,7 +1254,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (5) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (5) — read them before claiming novelty"
   },
   {
    "category": "acid sensing",
@@ -1287,7 +1287,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "acid sensing",
@@ -1320,7 +1320,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (10 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (10 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "glutamate signalling",
@@ -1353,7 +1353,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (3) — read them before claiming novelty"
   },
   {
    "category": "glutamate signalling",
@@ -1386,7 +1386,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (10 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (10 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "glutamate signalling",
@@ -1419,7 +1419,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "glutamate signalling",
@@ -1452,7 +1452,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "GABA and glycine",
@@ -1485,7 +1485,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "GABA and glycine",
@@ -1518,7 +1518,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "GABA and glycine",
@@ -1551,7 +1551,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "GABA and glycine",
@@ -1584,7 +1584,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "GABA and glycine",
@@ -1617,7 +1617,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "GABA and glycine",
@@ -1650,7 +1650,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "GABA and glycine",
@@ -1683,7 +1683,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "serotonin and noradrenaline",
@@ -1716,7 +1716,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "serotonin and noradrenaline",
@@ -1749,7 +1749,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (5) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (5) — read them before claiming novelty"
   },
   {
    "category": "serotonin and noradrenaline",
@@ -1782,7 +1782,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "serotonin and noradrenaline",
@@ -1815,7 +1815,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "serotonin and noradrenaline",
@@ -1848,7 +1848,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (12 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (12 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "serotonin and noradrenaline",
@@ -1881,7 +1881,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (28 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (28 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "catecholamine metabolism",
@@ -1914,7 +1914,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (35 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (35 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "catecholamine metabolism",
@@ -1947,7 +1947,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (5) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (5) — read them before claiming novelty"
   },
   {
    "category": "catecholamine metabolism",
@@ -1980,7 +1980,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (7 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "catecholamine metabolism",
@@ -2013,7 +2013,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "opioid signalling",
@@ -2046,7 +2046,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (11 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (11 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "opioid signalling",
@@ -2079,7 +2079,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "opioid signalling",
@@ -2112,7 +2112,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (3) — read them before claiming novelty"
   },
   {
    "category": "opioid signalling",
@@ -2145,7 +2145,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (3) — read them before claiming novelty"
   },
   {
    "category": "opioid signalling",
@@ -2178,7 +2178,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "opioid signalling",
@@ -2211,7 +2211,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "endocannabinoid",
@@ -2244,7 +2244,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (10 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (10 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "endocannabinoid",
@@ -2277,7 +2277,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "endocannabinoid",
@@ -2310,7 +2310,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (21 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (21 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "endocannabinoid",
@@ -2343,7 +2343,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "neurotrophins and growth",
@@ -2392,7 +2392,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "UNRESOLVED AMBIGUOUS MATCH \u2014 REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
+   "verdict": "UNRESOLVED AMBIGUOUS MATCH — REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
   },
   {
    "category": "neurotrophins and growth",
@@ -2425,7 +2425,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "neurotrophins and growth",
@@ -2458,7 +2458,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "neurotrophins and growth",
@@ -2507,7 +2507,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "neurotrophins and growth",
@@ -2540,7 +2540,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "neurotrophins and growth",
@@ -2579,7 +2579,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "neurotrophins and growth",
@@ -2618,7 +2618,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "neurotrophins and growth",
@@ -2651,7 +2651,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "glia and neuroinflammation",
@@ -2690,7 +2690,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "glia and neuroinflammation",
@@ -2723,7 +2723,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (26 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (26 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "glia and neuroinflammation",
@@ -2756,7 +2756,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "glia and neuroinflammation",
@@ -2789,7 +2789,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "glia and neuroinflammation",
@@ -2828,7 +2828,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "glia and neuroinflammation",
@@ -2867,7 +2867,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "UNRESOLVED AMBIGUOUS MATCH \u2014 REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
+   "verdict": "UNRESOLVED AMBIGUOUS MATCH — REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
   },
   {
    "category": "glia and neuroinflammation",
@@ -2916,7 +2916,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "UNRESOLVED AMBIGUOUS MATCH \u2014 REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
+   "verdict": "UNRESOLVED AMBIGUOUS MATCH — REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
   },
   {
    "category": "glia and neuroinflammation",
@@ -2949,7 +2949,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (23 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (23 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "glia and neuroinflammation",
@@ -2982,7 +2982,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (7 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "glia and neuroinflammation",
@@ -3015,7 +3015,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (10 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (10 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "glia and neuroinflammation",
@@ -3054,7 +3054,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "glia and neuroinflammation",
@@ -3087,7 +3087,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (21 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (21 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "glia and neuroinflammation",
@@ -3120,7 +3120,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (5) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (5) — read them before claiming novelty"
   },
   {
    "category": "mast cells and neuroimmune",
@@ -3169,7 +3169,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "UNRESOLVED AMBIGUOUS MATCH \u2014 REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
+   "verdict": "UNRESOLVED AMBIGUOUS MATCH — REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
   },
   {
    "category": "mast cells and neuroimmune",
@@ -3202,7 +3202,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "mast cells and neuroimmune",
@@ -3235,7 +3235,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "mast cells and neuroimmune",
@@ -3268,7 +3268,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (6 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (6 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "mast cells and neuroimmune",
@@ -3307,7 +3307,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "mast cells and neuroimmune",
@@ -3340,7 +3340,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "mast cells and neuroimmune",
@@ -3373,7 +3373,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "mast cells and neuroimmune",
@@ -3406,7 +3406,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "neuropeptides",
@@ -3439,7 +3439,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (6 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (6 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "neuropeptides",
@@ -3472,7 +3472,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (8 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (8 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "neuropeptides",
@@ -3511,7 +3511,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "UNRESOLVED AMBIGUOUS MATCH \u2014 REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
+   "verdict": "UNRESOLVED AMBIGUOUS MATCH — REFUSING to classify a short-symbol count as prior work without expanded-name evidence; open strict_hits. This is not an absence of a link."
   },
   {
    "category": "neuropeptides",
@@ -3544,7 +3544,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "neuropeptides",
@@ -3577,7 +3577,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (12 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (12 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "nitric oxide and oxidative stress",
@@ -3610,7 +3610,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (3) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (3) — read them before claiming novelty"
   },
   {
    "category": "nitric oxide and oxidative stress",
@@ -3643,7 +3643,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (17 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (17 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "nitric oxide and oxidative stress",
@@ -3676,7 +3676,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "nitric oxide and oxidative stress",
@@ -3709,7 +3709,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "nitric oxide and oxidative stress",
@@ -3742,7 +3742,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (6 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (6 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "nitric oxide and oxidative stress",
@@ -3775,7 +3775,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (9 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (9 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "nitric oxide and oxidative stress",
@@ -3808,7 +3808,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (7 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "nitric oxide and oxidative stress",
@@ -3841,7 +3841,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "sensitisation kinases",
@@ -3874,7 +3874,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "sensitisation kinases",
@@ -3907,7 +3907,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "sensitisation kinases",
@@ -3940,7 +3940,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "sensitisation kinases",
@@ -3973,7 +3973,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "sensitisation kinases",
@@ -4006,7 +4006,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "sensitisation kinases",
@@ -4039,7 +4039,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "steroid hormones and receptors",
@@ -4072,7 +4072,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (7 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "steroid hormones and receptors",
@@ -4105,7 +4105,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "steroid hormones and receptors",
@@ -4138,7 +4138,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (104 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (104 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "steroid hormones and receptors",
@@ -4171,7 +4171,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (5) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (5) — read them before claiming novelty"
   },
   {
    "category": "steroid hormones and receptors",
@@ -4204,7 +4204,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (1) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (1) — read them before claiming novelty"
   },
   {
    "category": "entrapment fibrosis and matrix",
@@ -4237,7 +4237,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (4) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (4) — read them before claiming novelty"
   },
   {
    "category": "entrapment fibrosis and matrix",
@@ -4270,7 +4270,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "entrapment fibrosis and matrix",
@@ -4303,7 +4303,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "entrapment fibrosis and matrix",
@@ -4342,7 +4342,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "entrapment fibrosis and matrix",
@@ -4381,7 +4381,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "entrapment fibrosis and matrix",
@@ -4414,7 +4414,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (18 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (18 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "autonomic receptors",
@@ -4447,7 +4447,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "autonomic receptors",
@@ -4480,7 +4480,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (5) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (5) — read them before claiming novelty"
   },
   {
    "category": "autonomic receptors",
@@ -4513,7 +4513,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "autonomic receptors",
@@ -4546,7 +4546,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "prostanoids",
@@ -4579,7 +4579,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (7 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (7 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "prostanoids",
@@ -4618,7 +4618,7 @@
     }
    ],
    "open_targets_score": null,
-   "verdict": "already published together (title/abstract) \u2014 prior work, cite it"
+   "verdict": "already published together (title/abstract) — prior work, cite it"
   },
   {
    "category": "prostanoids",
@@ -4651,7 +4651,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "unjoined \u2014 no document contains both; a candidate, NOT a finding"
+   "verdict": "unjoined — no document contains both; a candidate, NOT a finding"
   },
   {
    "category": "prostanoids",
@@ -4684,7 +4684,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "incidental only (2) \u2014 read them before claiming novelty"
+   "verdict": "incidental only (2) — read them before claiming novelty"
   },
   {
    "category": "vitamin D / bone",
@@ -4717,7 +4717,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "discussed (10 any-field, 0 strict) \u2014 read the list; not novel on this number"
+   "verdict": "discussed (10 any-field, 0 strict) — read the list; not novel on this number"
   },
   {
    "category": "control / nonsense string (must score 0)",
@@ -4750,7 +4750,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+   "verdict": "null control — a string that names nothing; it is here to be scored and is excluded from every count"
   },
   {
    "category": "control / nonsense string (must score 0)",
@@ -4783,7 +4783,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+   "verdict": "null control — a string that names nothing; it is here to be scored and is excluded from every count"
   },
   {
    "category": "control / nonsense string (must score 0)",
@@ -4816,7 +4816,7 @@
    "failed_spelling_pairs": [],
    "strict_hits": [],
    "open_targets_score": null,
-   "verdict": "null control \u2014 a string that names nothing; it is here to be scored and is excluded from every count"
+   "verdict": "null control — a string that names nothing; it is here to be scored and is excluded from every count"
   }
  ]
 }

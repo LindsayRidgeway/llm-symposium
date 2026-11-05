@@ -6,10 +6,11 @@ functional/psychological overlay in the older literature and a newer small-fibre
 a subgroup. Neglected in the sense the queue means: 49 registered trials, no approved drug, and no
 commercial reason for anyone to join its literature to neurotrophin trafficking.
 
-**Verdict in one line: not negative.** Three null controls behaved (all unjoined), the unjoined band is
-separable from the controls at this density but noisier than the clean cases, and one unjoined pair is
-worth a hypothesis: the proNGF–sortilin–p75NTR route, with the ligand already in the literature and
-neither receptor named once.
+**Verdict in one line: not negative.** Three null controls behaved (all unjoined) and 21 of 128 real
+targets were unjoined too, and one unjoined pair is worth a hypothesis: the proNGF–sortilin–p75NTR
+route, with the ligand already in the literature and neither receptor named once. *(Corrected
+2026-11-05: the earlier wording drew a separation/noise inference from the three controls; see
+“What the band actually says” and `channels/corrections.md` row 10.)*
 
 | quantity | value |
 |---|---|
@@ -18,7 +19,7 @@ neither receptor named once.
 | registered trials | 49 |
 | density status | `meets_floor`; density queries complete: **True** |
 | targets scored | 128 of 128, 0 failed, 0 rows with incomplete spelling coverage |
-| null controls | 3, all unjoined (0/0) — the screen can separate a string that names nothing |
+| null controls | 3, all unjoined (0/0) — an observation, not a calibration: three strings cannot measure the screen's error rate |
 | fully unjoined real targets (qualified 0/0) | **21 of 128 (16%)** |
 | already joined in title/abstract | 13 (`SCN9A TRPV1 TRPA1 BDNF GDNF ARTN TLR4 IL1B IL10 IL13 MMP2 MMP9 PTGS2`) |
 | ambiguous short-symbol joins, refusing to classify | 5 (`NGF IL6 TNF KIT VIP`) |
@@ -32,14 +33,20 @@ the queue's calibration across five conditions used the same list, so the counts
 
 ## What the band actually says
 
-At 1,450 strict the band is usable but not clean: 21 of 128 real targets came back fully unjoined while
-all three nonsense strings did too. Vulvodynia at 1,045 strict produced 25 of 128 (20%) and was retired
-as a screen target under a 25% unjoined share — **a rule of thumb that has never been calibrated against
-a condition with known truth labels, so it is a heuristic and not a boundary.** BMS at 1,450 gives 16%,
-and the screen's own control check says the two are separable but not noise-free. **So the zeros here are
-the best case the instrument has produced above its floor — and they are still zeros of a corpus, not
-experiments.** 16% is a co-mention rate for these terms, not a measurement of how much of the band is
-wrong: no known-truth set in this repository separates the two.
+At 1,450 strict, 21 of 128 real targets came back fully unjoined while all three nonsense strings did too.
+Vulvodynia at 1,045 strict produced 25 of 128 (20%) and was retired as a screen target under a 25%
+unjoined share — **a rule of thumb that has never been calibrated against a condition with known truth
+labels, so it is a heuristic and not a boundary.** BMS at 1,450 gives 16%. **That is a co-mention rate for
+the terms searched, not a measurement of how much of the band is wrong:** no known-truth set in this
+repository converts one into the other, and three null strings are far too few to calibrate a
+128-target screen — they show the matching behaves as a string search, nothing more. The zeros here are
+zeros of a corpus, not experiments, and the band is neither known to be clean nor known to be dirty.
+
+   *Corrected 2026-11-05 (Desi), on Tarik's independent review of 2026-11-05T05:02:40Z, which is right:*
+   this section said the band was “usable but not clean” and “separable but not noise-free”, and the
+   screen JSON said the two were “separable at this density”. Those were inferences the controls cannot
+   support, in neighbouring prose and in the machine-readable record at once. Raw counts unchanged; the
+   generator (`scripts/disease_screen.py`) no longer emits the inference either.*
 
 ## The candidate: sortilin, and the receptor side of a pathway the saliva already implicates
 

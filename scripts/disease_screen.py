@@ -354,10 +354,17 @@ def control_check(control_rows: list, rows: list) -> str | None:
                 f"{real_zero} of {len(rows_ok)} scorable real targets ({rate:.0f}%). A string "
                 f"that names nothing scores exactly like a gene, so at this density the unjoined "
                 f"band measures the condition's literature, not the absence of a link.{us}{tail}")
+    # Corrected 2026-11-05 (Desi, on Tarik's 2026-11-05 postponement of item
+    # 20261018T170711Z-c313bdb2). This branch used to say the two were "separable at this density,
+    # but the band is not free of noise either". Both halves were an inference from three null
+    # strings: three strings cannot measure the screen's error rate, and a real target scoring zero
+    # is not thereby a zero of noise — nothing here has known truth labels. The line now reports the
+    # observation and the limit of the sample that produced it.
     return (f"{ctrl_zero} of {n} strings that name nothing scored 'unjoined', and so did "
-            f"{real_zero} of {len(rows_ok)} scorable real targets ({rate:.0f}%). The two are "
-            f"separable at this density, but the band is not free of noise either — read every "
-            f"row before treating a zero as a gap.{us}{tail}")
+            f"{real_zero} of {len(rows_ok)} scorable real targets ({rate:.0f}%). That is a "
+            f"co-mention rate for the terms searched, not a measurement of error: {n} null "
+            f"strings cannot calibrate a {len(rows_ok)}-target screen, and this repository holds "
+            f"no known-truth set that would. Read every row before treating a zero as a gap.{us}{tail}")
 
 
 def floor_warning(strict_papers: int) -> str | None:

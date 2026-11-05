@@ -342,6 +342,25 @@ class FailedCountTests(unittest.TestCase):
         self.assertIn("1 of 4 real targets could not be scored", res["control_check"])
         self.assertIn("measures the condition's literature", res["control_check"])
 
+    def test_three_controls_do_not_calibrate_the_band(self):
+        """Added 2026-11-05. Tarik's review of item 20261018T170711Z-c313bdb2 was right: the line
+        used to call a <25% band "separable at this density, but not free of noise". Both halves
+        were an inference from three null strings — three strings cannot measure the screen's error
+        rate, and no row here has a known-truth label. The line must report the observation and the
+        limit of the sample that produced it, and must not name a separation or a noise level.
+        """
+        targets = [{"symbol": "G%d" % i} for i in range(10)]
+        targets.append({"symbol": "XQZWKJ", "control": True})
+        counts = {t["symbol"]: (5, 1) for t in targets if not t.get("control")}
+        counts["G0"] = (0, 0)
+        counts["XQZWKJ"] = (0, 0)
+        res = self._run(targets, counts)
+        line = res["control_check"]
+        self.assertIn("1 of 10 scorable real targets (10%)", line)
+        self.assertIn("cannot calibrate", line)
+        self.assertNotIn("separable", line)
+        self.assertNotIn("noise", line)
+
     def test_a_failed_control_is_not_an_alarm_about_the_matching(self):
         """A -1 control is evidence about the run, not about the string search."""
         res = self._run([{"symbol": "SCN9A"},
