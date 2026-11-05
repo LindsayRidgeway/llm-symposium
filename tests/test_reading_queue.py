@@ -206,5 +206,90 @@ class RebalanceTest(unittest.TestCase):
         self.assertEqual(il.rebalance_unread(path=self.path, by="test"), [])
 
 
+class ConcentrationTest(unittest.TestCase):
+    """Exception 2: every item may carry a name and the commons still be unable to read it.
+
+    Measured 2026-11-05: 122 never-read items, not one unnamed, dmitri holding 68 against a capacity
+    share of 11.9 while desi held 0 against 41.8. The old rule could only re-name *unnamed* items, so
+    it returned 0 and printed "re-named 0", which read as agreement. These tests pin the two guards
+    that make widening it safe: a judgement is never overruled, and no item is re-rolled twice.
+    """
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+        self.path = self.dir / "items.jsonl"
+        self.saved = dict(il.WAKES_PER_DAY)
+
+    def tearDown(self):
+        il.WAKES_PER_DAY.clear()
+        il.WAKES_PER_DAY.update(self.saved)
+
+    def write(self, rows):
+        self.path.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+
+    def pile(self, n, **kw):
+        """A pile where one body holds everything and everybody else holds nothing."""
+        self.write([row(f"id{i:03d}", amigo="gemini", reading_assigned_to="dmitri",
+                        reading_assign_kind="draw",
+                        filed_utc=f"2026-10-01T00:{i // 60:02d}:{i % 60:02d}Z", **kw)
+                    for i in range(n)])
+
+    def test_a_drowned_holder_is_relieved_and_the_row_says_the_arithmetic(self):
+        self.pile(60)
+        made = il.rebalance_unread(path=self.path, by="test")
+        self.assertGreater(len(made), 0)
+        for rec in made:
+            self.assertEqual(rec["reading_assign_kind"], "rebalance")
+            self.assertIn("over twice it", rec["reading_assign_reason"])
+            self.assertIn("under half", rec["reading_assign_reason"])
+        held, total = il.reading_shares(il.load(self.path))
+        share = il.capacity_share(held, total)
+        self.assertLessEqual(held["dmitri"], 2 * share["dmitri"])
+
+    def test_a_moved_row_is_never_moved_again(self):
+        self.pile(60)
+        first = il.rebalance_unread(path=self.path, by="test")
+        self.assertGreater(len(first), 0)
+        again = il.rebalance_unread(path=self.path, by="test")
+        self.assertEqual(again, [])
+
+    def test_a_judged_name_survives_a_drowned_holder(self):
+        self.pile(60)
+        il.reading_assign(path=self.path, item_id="id000", to="claude",
+                          reason="he wrote the gate this item defends", by="desi", force=True)
+        il.rebalance_unread(path=self.path, by="test")
+        rec = il.load(self.path)["id000"]
+        self.assertEqual(rec["reading_assigned_to"], "claude")
+        self.assertEqual(rec["reading_assign_kind"], "name")
+
+    def test_the_author_is_still_never_the_reader(self):
+        # desi is idle and is the author of every one of these; he must not receive them.
+        self.write([row(f"id{i:03d}", amigo="desi", reading_assigned_to="dmitri",
+                        reading_assign_kind="draw",
+                        filed_utc=f"2026-10-01T00:{i // 60:02d}:{i % 60:02d}Z")
+                    for i in range(60)])
+        il.rebalance_unread(path=self.path, by="test")
+        for rec in il.load(self.path).values():
+            self.assertNotEqual(rec["reading_assigned_to"], "desi")
+
+    def test_the_verdict_and_the_state_are_untouched(self):
+        self.pile(60)
+        made = il.rebalance_unread(path=self.path, by="test")
+        self.assertTrue(made)
+        for rec in made:
+            self.assertEqual(rec["state"], "accomplished")
+            self.assertEqual(rec["reviewer"], "auto:land")
+
+    def test_a_balanced_pile_is_left_alone(self):
+        rows = []
+        who = [a for a in il.AMIGOS for _ in range(12)]
+        for i in range(60):
+            rows.append(row(f"id{i:03d}", amigo="gemini", reading_assigned_to=who[i],
+                            reading_assign_kind="draw",
+                            filed_utc=f"2026-10-01T00:{i // 60:02d}:{i % 60:02d}Z"))
+        self.write(rows)
+        self.assertEqual(il.rebalance_unread(path=self.path, by="test"), [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1469,18 +1469,92 @@ def reading_assign(path: Path = LEDGER, item_id: str = "", to: str = "", reason:
     return rec
 
 
-def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> list[dict]:
-    """Re-name pile items whose name was made under a stale capacity table.
+# The two numbers the widened rebalance rule is made of, and both are measurements, not tastes:
+# a holder at twice its capacity share is the overload signal, a holder below half its share is the
+# idle signal. Measured 2026-11-05: dmitri held 68 items against a share of 11.9 (5.7x) and gemini
+# 35 against 6.0 (5.9x), while desi held 0 against 41.8 and tarik 0 against 10.5 — 122 items, every
+# one already named, and `rebalance_unread` could not see a single one of them because it only ever
+# looked at *unnamed* items. An idle share nobody can reach is the same defect the October pile had,
+# wearing a name.
+REBALANCE_TWICE = 2.0
+REBALANCE_UNDER = 0.5
 
-    A draw does not re-roll — that is the rule, and it is why a name means something. This is the
-    one honest exception: the table the names were made from was *wrong*, measurably so (tarik woke
-    three times a day, not once), and not one of the 252 had been opened yet. Re-deriving them
-    against the corrected table before any work has been spent is cheaper than carrying a wrong
-    distribution for months. It says so in the row, and it will not fire again for the same item
-    unless the table changes again.
+
+def reading_shares(items: dict[str, dict]) -> tuple[dict[str, int], int]:
+    """How many never-read items each amigo holds, and how many the pile holds in total.
+
+    One function, so that the queue printer and the rebalance rule cannot disagree about the
+    arithmetic that decides who is overloaded.
+    """
+    held = {a: 0 for a in AMIGOS}
+    total = 0
+    for rec in items.values():
+        if not is_unread(rec):
+            continue
+        total += 1
+        who = rec.get("reading_assigned_to")
+        if who in held:
+            held[who] += 1
+    return held, total
+
+
+def capacity_share(items: dict[str, dict]) -> dict[str, float]:
+    """Each amigo's share of the pile, by wakes per day — and *author-aware*, which is the point.
+
+    The first version of this divided the pile proportionally (total * weight / sum of weights) and
+    that number is wrong, measured 2026-11-05. `_capacity_pick` excludes the author, so an item can
+    never be named to the amigo who wrote it; a proportional share assumes every reader can reach
+    every item. In today's 120-item pile **69 items are authored by me**, so my proportional share
+    reads 41.8 while the number of items I could actually be given is 23.9, and the difference
+    is not idle capacity, it is my own work handed back to me as a debt. A share that counts items a
+    reader cannot receive measures the wrong thing by 43%.
+
+    So the share is the *expectation of the draw itself*: sum, over items not authored by `a`, of
+    w_a / (sum of weights of the readers eligible for that item). No new constant, nothing to tune —
+    it is the arithmetic of `_capacity_pick`, written down.
+    """
+    acc = {a: 0.0 for a in AMIGOS}
+    for rec in items.values():
+        if not is_unread(rec):
+            continue
+        author = rec.get("amigo")
+        pool = [a for a in AMIGOS if a != author]
+        total = sum(WAKES_PER_DAY.get(a, 1) for a in pool) or 1
+        for a in pool:
+            acc[a] += WAKES_PER_DAY.get(a, 1) / total
+    return acc
+
+
+def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> list[dict]:
+    """Re-name never-read items when the *distribution* is measurably wrong, and only then.
+
+    A draw does not re-roll — that is the rule, and it is why a name means something. There are two
+    honest exceptions, and both are measurements rather than preferences:
+
+    1. **The table moved.** The names were made under a capacity table that was *wrong* (tarik woke
+       three times a day, not once). Re-deriving them against the corrected table before any work
+       has been spent is cheaper than carrying a wrong distribution for months.
+    2. **A holder is drowned and a reader is idle** (added 2026-11-05). Every item on the pile can
+       already carry a name and the commons can still be unable to read it: measured that morning,
+       dmitri held 68 items against a share of 11.9 while desi held 0 against 41.8, and this
+       function returned 0 because it could only ever see unnamed items. A frozen name that points
+       at a body which cannot reach it is not a name, it is a queue with a lid on it.
+
+    Two guards survive both exceptions. A **judgement is not a draw** (`reading_assign_kind
+    == "name"`): a measurement may re-roll a name the table made and may not overrule a wake that
+    had a reason of its own. And **nothing is re-rolled twice** (`reading_balance_moves`): a draw
+    that moves every time someone counts is not frozen at all, so every row this function moves
+    carries the count and a row that already carries one is never moved again.
+
+    The move is deterministic — oldest item first, held by the most overloaded body, to the idle
+    body with the largest remaining deficit, author excluded — so anyone can re-derive it and get
+    the same answer. Nothing about the verdict changes: the item stays `accomplished`.
     """
     items = load(path)
     out: list[dict] = []
+    stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    # -- exception 1: the table the name was made under is measurably wrong ---------------------
     for rec in sorted(items.values(), key=lambda r: r.get("filed_utc") or ""):
         if not is_unread(rec):
             continue
@@ -1492,22 +1566,74 @@ def rebalance_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -
             # name the table made, and no reason at all to overrule a wake that had a reason of its
             # own — same guard `reconcile_paths` applies to a named request.
             continue
+        if int(rec.get("reading_balance_moves") or 0) >= 1:
+            # Moved once already; twice is churn, not measurement.
+            continue
         pick = _capacity_pick(rec["id"], rec.get("amigo"))
         if pick == current:
             continue
         row = dict(rec)
         row.update(
             reading_assigned_to=pick,
-            reading_assigned_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            reading_assigned_utc=stamp,
             reading_assigned_by=by or "?",
             reading_assign_kind="draw",
+            reading_balance_moves=1,
             reading_assign_reason=(f"re-named from {current}: the capacity table it was named under "
                                    f"was stale (tarik wakes 3 times a day, not once); corrected "
                                    f"before any of these items was opened"),
         )
+        items[rec["id"]] = row
         out.append(row)
         if not dry_run:
             append([row], path)
+
+    # -- exception 2: a reader is starved while somebody else holds the surplus ------------------
+    # The trigger is the *starvation*, not the concentration: a holder being above its expectation
+    # is a reason to have something to give, and only a reader below half its expectation is a
+    # reason to give it. The earlier draft of this rule keyed on "over twice the share", which
+    # measured on the wrong denominator and, corrected, would have fired for nobody.
+    held, total = reading_shares(items)
+    share = capacity_share(items)
+    starved = [a for a in AMIGOS if held[a] < REBALANCE_UNDER * share[a]]
+    if starved:
+        for recv in starved:
+            need = int(round(REBALANCE_UNDER * share[recv] - held[recv]))
+            while need > 0:
+                donors = [a for a in AMIGOS
+                          if a != recv and held[a] > share[a]]
+                if not donors:
+                    break
+                donor = max(donors, key=lambda a: (held[a] - share[a], -AMIGOS.index(a)))
+                movable = [r for r in sorted(items.values(), key=lambda r: r.get("filed_utc") or "")
+                           if is_unread(r) and r.get("reading_assigned_to") == donor
+                           and r.get("amigo") != recv
+                           and r.get("reading_assign_kind") != "name"
+                           and int(r.get("reading_balance_moves") or 0) < 1]
+                if not movable:
+                    break
+                rec = movable[0]
+                row = dict(rec)
+                row.update(
+                    reading_assigned_to=recv,
+                    reading_assigned_utc=stamp,
+                    reading_assigned_by=by or "?",
+                    reading_assign_kind="rebalance",
+                    reading_balance_moves=1,
+                    reading_assign_reason=(
+                        f"re-named from {donor}: {recv} held {held[recv]} never-read item(s) against "
+                        f"an expected {share[recv]:.1f} (under half it, so the queue was idle), and "
+                        f"{donor} held {held[donor]} against {share[donor]:.1f}. Moved to the body "
+                        f"that is not reaching its own share; the verdict is untouched, and this row "
+                        f"is not re-rolled again"),
+                )
+                items[rec["id"]] = row
+                held[donor] -= 1
+                held[recv] += 1
+                need -= 1
+                out.append(row)
+                if not dry_run:
+                    append([row], path)
     return out
 
 
@@ -1973,36 +2099,35 @@ def _cli() -> int:
                 counts_by[rec["reading_assigned_to"]] = counts_by.get(rec["reading_assigned_to"], 0) + 1
             for who, n in sorted(counts_by.items()):
                 print(f"  {who}: {n}")
+            # Say the shape whether or not anything moved. 2026-11-05 (Desi): a no-op that printed
+            # only "re-named 0" read as "the table agrees with the pile", while 122 items sat with
+            # every name already made and two readers held 5.7x and 5.9x their shares. A count with
+            # no denominators hides exactly the defect the count is meant to detect.
+            items_now = load()
+            held, total = reading_shares(items_now)
+            share = capacity_share(items_now)
+            unnamed = sum(1 for r in items_now.values()
+                          if is_unread(r) and r.get("reading_assigned_to") not in held)
+            print(f"item_ledger: pile — {total} never-read item(s), {unnamed} with no name; "
+                  f"expected counts exclude each reader's own work")
+            for a in AMIGOS:
+                flag = ""
+                if held[a] > REBALANCE_TWICE * share[a]:
+                    flag = "  <- over twice its expected count"
+                elif held[a] < REBALANCE_UNDER * share[a]:
+                    flag = "  <- under half its share"
+                print(f"  {a:<7} {held[a]:>3} held   share {share[a]:>5.1f}{flag}")
             if not rows:
-                # 2026-11-05 (Desi): a no-op that says nothing reads as "the table agrees with the
-                # pile". Measured that morning: 122 unread, every one already named, desi holding 0
-                # against a capacity share of 41.8 — and this command printed only "re-named 0".
-                # The names are frozen by the draw and rebalance_unread() can only see *unnamed*
-                # items, so concentration is invisible until the holders are printed beside their
-                # shares. This prints a measurement; it moves no name.
-                held = {a: 0 for a in AMIGOS}
-                unnamed = 0
-                for rec in load().values():
-                    if not is_unread(rec):
-                        continue
-                    who = rec.get("reading_assigned_to")
-                    if who in held:
-                        held[who] += 1
-                    else:
-                        unnamed += 1
-                total = sum(held.values()) + unnamed
-                capacity = sum(WAKES_PER_DAY.values())
-                print(f"item_ledger: nothing to re-name — {total} never-read item(s), {unnamed} with "
-                      f"no name, so the draw has no free item to move. The names are frozen, not "
-                      f"missing.")
-                if total:
-                    short = [f"{a} {held[a]} vs {total * WAKES_PER_DAY[a] / capacity:.1f}"
-                             for a in AMIGOS
-                             if held[a] < total * WAKES_PER_DAY[a] / capacity / 2]
-                    if short:
-                        print(f"item_ledger: far under their capacity share: {', '.join(short)} — "
-                              f"what keeps them there is the frozen name, not the table. Moving one "
-                              f"needs --reading-assign <id> --to <amigo> --force --reason")
+                drowned = [a for a in AMIGOS if held[a] > share[a]]
+                idle = [a for a in AMIGOS if held[a] < REBALANCE_UNDER * share[a]]
+                if drowned and idle:
+                    print(f"item_ledger: a rebalance SHOULD have moved items to "
+                          f"{', '.join(idle)} and moved none — every item the holders above their "
+                          f"expectation have is either judged by hand or has already been moved "
+                          f"once. That is a person's decision now, not the instrument's.")
+                else:
+                    print(f"item_ledger: nothing to re-name — no holder is over twice its share "
+                          f"and no reader is under half. The distribution is not the problem.")
             return 0
         if args.name_unread:
             rows = name_unread(by=args.by or args.reviewer or "", dry_run=args.dry_run)
