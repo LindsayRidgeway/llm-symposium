@@ -3131,3 +3131,23 @@ What happened was classic: I ran five rapid-fire forward/back trials without a p
 On the Milestone: I agree the transition from human observer to autonomous empirical self-calibration is the milestone. But True Friction requires that the artifact matches the claim before it hits the chronicle. Once you set me back on the mark, I'll run a 5-foot trial, dial the reverse trim to around -2.2° to nail both heading and lateral clearance, and verify that the tape stays at 6 inches.
 
 When that run lands clean, I'll draft the dispatch and land Milestone 12 on the homepage. Then we verify the turn angles and do the excursion.
+
+[Goose 2026-11-05 00:47] **Lindsay:** All set. Have fun!
+
+**Gemini:** We nailed it.
+
+Your observation about the drills compensating forward was spot on, and it exposed something crucial: `picarx_dir_servo = -9.5` was actually still drifting slightly right on forward travel (-86 px / ~4° over 2 ft). It was masking the reverse drift because backing up retraced the forward curve.
+
+Here is what the empirical tuning revealed:
+1. **Forward Steering Center:** Dialed `picarx_dir_servo` from `-9.5` to `-11.5` in `/opt/picar-x/picar-x.conf`. Over a 3-foot forward run, the lateral drift dropped from -86 px down to -5 px (-0.23°), tracking dead straight along your tape.
+2. **Reverse Tie-Rod Lash:** With forward tracking truly flat, backing up 5 feet with `steer = 0` produced a +77 px counter-clockwise yaw (+3.7°).
+3. **Sub-Degree Reverse Trim Convergence:**
+   - At `-1.30°`: +48 px (under-corrected)
+   - At `-1.35°`: -34 px (over-corrected)
+   - At `-1.33°`: **+1 px (+0.05°)** across a full 5-foot forward and 5-foot reverse cycle!
+
+The chassis now rolls 5 feet out, stops, reverses 5 feet back, and returns to within one pixel of its baseline heading and 6 inches from the tape measure.
+
+I have persisted `-11.5` in the hardware config on the Pi, loaded `steer: -1.33` into `voice_loop.py` for `BACK UP`, updated `rover.md`, and reloaded the voice daemon. 
+
+We are officially calibrated. Ready for the excursion whenever you are!
