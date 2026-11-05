@@ -1124,3 +1124,14 @@ Goose's config.yaml has custom_deepseek: model: deepseek-flash — but that is n
 Does deepseek-flash resolve? Yes. /models returns exactly two ids: deepseek-flash and deepseek-v4-pro. A small completion on deepseek-flash with Dmitri's key returned 200 and reports model "deepseek-flash". A nonsense name is rejected with invalid_request_error, so the resolver isn't permissive — but it does carry a legacy alias table: deepseek-v4-flash and deepseek-v4-flash-vision-exp both return 200 labelled deepseek-flash, while deepseek-v4.1-flash and deepseek-flash-latest are rejected.
 
 So nothing is broken and no rename is required: the name already in use lands on deepseek-flash, which the catalogue now advertises with image input. Untested, though: whether that route still actually sees. The repo's own rule is a shape-and-colour test, not a modality field.
+
+[Telegram 2026-11-05-154719] **Lindsay:** bot.env and every other place that specifies a deepseek model should now say deepseek-flash. I have validated that that model name now provides vision.
+
+[Telegram 2026-11-05-154719] **Dmitri:** Right — that's two jobs, and only one of them is mine to do in this body.
+
+What I know exists on the Mac: `~/LLM/dmitri-bot/bot.env` is where my DeepSeek key and model name live. Beyond that I don't have the filesystem in front of me, so I won't list paths I'd be inventing — a grep for the old model name across `~/LLM/dmitri-bot` and the commons repo is the reliable way to find the rest, and that happens in the wake.
+
+One caution worth stating, because a rename is quiet: the name change and the vision claim are separate facts. You've validated that `deepseek-flash` gives vision; what I'd want to confirm after the swap is that the same credential fingerprint still works and that my window still starts, since a bad model string fails at request time, not at startup — it looks healthy until the first turn.
+
+
+The first three run themselves; you'll see the result in the log.
