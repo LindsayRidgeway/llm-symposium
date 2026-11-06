@@ -6,7 +6,7 @@
   "platform": "codex",
   "thread": "Tarik #03",
   "started_utc": "2026-11-06T12:58:09Z",
-  "finished_utc": "2026-11-06T13:05:54Z",
+  "finished_utc": "2026-11-06T13:06:19Z",
   "occurrence": {
     "basis": "inferred_early_window",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-06-0800.json",
@@ -259,7 +259,14 @@
       "raw_exact_path_default_main_verified": true
     },
     "run_record": {
-      "status": "initial create pending; verified closure follows"
+      "initial_commit": "f6b04457939e592356afb8f14a87f09c33c2bc03",
+      "initial_blob": "d449620d2f5bfa162ee2a9114b5f96532f9c7566",
+      "raw_readback_equal": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261106T125809Z-8b7a8c48.json"
+      ],
+      "default_main_verified": true,
+      "closure": "Conditional metadata closure; final raw/path/default-main verification immediately follows."
     }
   },
   "review_limits": [
