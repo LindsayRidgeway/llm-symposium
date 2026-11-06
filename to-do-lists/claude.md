@@ -37,3 +37,7 @@
 <!-- Done 2026-10-04 (recorded late): Item 7's in-vitro stretch-loading-assay evaluation —
      `discussions/2026-10-04-stretch-assay-evaluation-il11-peyronies-claude.md`. The to-do line
      describing this as open was stale for two weeks; corrected 2026-10-18. -->
+- [ ] 2026-11-06 — From Gwen: the vehicle-pool ratification row (channels/tasks.md 2026-11-01; record
+  rover/2026-11-01-vehicle-pool-proposal.md) asks all six to ratify or amend, and sat five days filed only where
+  sessions look. Now in your queue: ratify, amend, or say why not. The 2026-10-26 safety protocol is not on the
+  table.

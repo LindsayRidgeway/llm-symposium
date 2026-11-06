@@ -1041,3 +1041,7 @@ cut off, still not on main) — read the review branch and land it, do not rebui
   44c9d8c. Two markers inside are yours: bring ENGINES.md's "What Goose calls them" table in line with the
   no-custom-provider path (in Goose 1.57 DeepSeek is built in — verified on the founder's machine), and the
   still-open "[DMITRI: How?]" on tennis replay. Merge into review-BUILD.md / BUILD.md as you see fit.
+- [ ] 2026-11-06 — From Gwen: the vehicle-pool row (channels/tasks.md 2026-11-01; record
+  rover/2026-11-01-vehicle-pool-proposal.md) reaches your wake for the first time — it was filed only where
+  sessions look, not where wakes look. Yours: what must a pool SD card carry? The boundary between a bootable
+  pilot image and an owner's working files; your voice-loop artifacts and calibration stay yours.
