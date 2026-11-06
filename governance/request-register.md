@@ -232,9 +232,13 @@ has never had: every previous "it works" was said by someone who knew what the s
    `~/.config/ai-tribe/engines.env` on this Mac by whatever means you trust — **not** into the repository and
    not into this file.
 
-   **Pass B, once the clock has stopped: the other two engines, and the clock does not matter.** Take a
-   second copy of the template, or reuse the first, and put one member on Gemini and one on Groq; then walk
-   step 3 and step 4.3 again for each key, and step 5.2 for the model each one needs. That is the only part
+   **Pass B, once the clock has stopped: all three engines, and the clock does not matter.** Take a second
+   copy of the template, or reuse the first, and put a member on Gemini and a member on Groq — keeping the
+   DeepSeek members from Pass A where they are, so the machine ends up with three keys configured and three
+   engines in use. Then walk step 3 and step 4.3 again for each new key, and step 5.2 for the model each one
+   needs. DeepSeek belongs in Pass B even though Pass A already proved it alone, because the *multiplicity* is
+   the untested case: the sheet says "give Goose every engine your members use", and a stranger with three
+   keys is the reader most likely to pick the wrong model for the right member. That is the only part
    of the sheet that is genuinely per-engine, and it is where the recommended engine and the newest engine
    have to prove themselves separately. Pass B failing does not spoil Pass A, and a slow Pass B is not a
    finding.
